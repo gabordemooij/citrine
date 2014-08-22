@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 	if (debug == 1) printf("Debugger is ON.\n");
 	prg = readf(argv[1]);
 	tnode* program = dparse_parse(prg);
-	dnk_initialize_world();
-	dwlk_run(program);
+	ctr_initialize_world();
+	cwlk_run(program);
 	exit(0);
 }

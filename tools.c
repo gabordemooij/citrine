@@ -24,7 +24,7 @@
 obj* World = NULL;
 obj* contexts[100];
 int cid = 0;
-obj* dnk_build_number(char* number);
+obj* ctr_build_number(char* number);
 obj* Object;
 obj* Number;
 obj* BoolX;
@@ -89,7 +89,7 @@ void tree(tnode* ti, int indent) {
 	}
 }
 
-void dnk_open_context() {
+void ctr_open_context() {
 	cid++;
 	obj* context = NULL;
 	context = malloc(sizeof(obj*));
@@ -98,12 +98,12 @@ void dnk_open_context() {
 	contexts[cid] = context;
 }
 
-void dnk_close_context() {
+void ctr_close_context() {
 	if (cid == 0) return;
 	cid--;
 }
 
-obj* dnk_find(char* key) {
+obj* ctr_find(char* key) {
 	int i = cid;
 	obj* foundObject = NULL;
 	foundObject = calloc(sizeof(obj*), 1);
@@ -119,21 +119,21 @@ obj* dnk_find(char* key) {
 	return foundObject;
 }
 
-obj* dnk_find_in_my(char* key) {
+obj* ctr_find_in_my(char* key) {
 	obj* foundObject = O();
-	obj* context = dnk_find("me");
+	obj* context = ctr_find("me");
 	HASH_FIND_STR(context->link->properties, key, foundObject);
 	if (foundObject == NULL) { printf("Error, property not found: %s.\n", key); exit(1); }
 	return foundObject;
 }
 
 
-void dnk_set(obj* object) {
+void ctr_set(obj* object) {
 	obj* context = contexts[cid];
 	HASH_ADD_KEYPTR(hh, context->properties, object->name, strlen(object->name), object);
 }
 
-obj* dnk_build_bool(int truth) {
+obj* ctr_build_bool(int truth) {
 	obj* boolObject = O();
 	boolObject->name = "Bool";
 	if (truth) boolObject->value = "1"; else boolObject->value = "0";
@@ -143,13 +143,13 @@ obj* dnk_build_bool(int truth) {
 }
 
 
-obj* dnk_pencil_write(obj* myself, args* argumentList) {
+obj* ctr_pencil_write(obj* myself, args* argumentList) {
 	obj* argument1 = argumentList->object;
 	printf("----------------> OUTPUT: %s\n", argument1->value);
 	return myself;
 }
 
-obj* dnk_block_run(obj* myself, args* argList, obj* my) {
+obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 	obj* selfRef = O();
 	selfRef->name = "me";
 	selfRef->type = OTOBJECT;
@@ -170,7 +170,7 @@ obj* dnk_block_run(obj* myself, args* argList, obj* my) {
 			if (parameter && argList->object) {
 				a = argList->object;
 				a->name = parameter->value;
-				dnk_set(a);
+				ctr_set(a);
 			}
 			if (!argList->next) break;
 			argList = argList->next;
@@ -180,14 +180,14 @@ obj* dnk_block_run(obj* myself, args* argList, obj* my) {
 		}
 	}
 	
-	dnk_open_context();
-	dnk_set(selfRef);
-	result = dwlk_run(codeBlockPart2);
-	dnk_close_context();
+	ctr_open_context();
+	ctr_set(selfRef);
+	result = cwlk_run(codeBlockPart2);
+	ctr_close_context();
 	return result;
 }
 
-obj* dnk_build_block(tnode* node) {
+obj* ctr_build_block(tnode* node) {
 	obj* codeBlockObject = O();
 	codeBlockObject->type = OTBLOCK;
 	codeBlockObject->block = node;
@@ -195,36 +195,36 @@ obj* dnk_build_block(tnode* node) {
 	return codeBlockObject;
 }
 
-obj* dnk_bool_iftrue(obj* myself, args* argumentList) {
+obj* ctr_bool_iftrue(obj* myself, args* argumentList) {
 	if (strncmp(myself->value,"1",1)==0) {
 		obj* codeBlock = argumentList->object;
 		args* arguments = A();
 		arguments->object = myself;
-		return dnk_block_run(codeBlock, arguments, myself);
+		return ctr_block_run(codeBlock, arguments, myself);
 	}
 	return myself;
 }
 
-obj* dnk_bool_ifFalse(obj* myself, args* argumentList) {
+obj* ctr_bool_ifFalse(obj* myself, args* argumentList) {
 	if (strncmp(myself->value,"0",1)==0) {
 		obj* codeBlock = argumentList->object;
 		args* arguments = A();
 		arguments->object = myself;
-		return dnk_block_run(codeBlock, arguments, myself);
+		return ctr_block_run(codeBlock, arguments, myself);
 	}
 	return myself;
 }
 
-obj* dnk_number_higherThan(obj* myself, args* argumentList) {
+obj* ctr_number_higherThan(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = atof(myself->value);
 	float b = atof(otherNum->value);
-	obj* truth = dnk_build_bool((a > b));
+	obj* truth = ctr_build_bool((a > b));
 	return truth;
 }
 
-obj* dnk_number_add(obj* myself, args* argumentList) {
+obj* ctr_number_add(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = atof(myself->value);
@@ -235,7 +235,7 @@ obj* dnk_number_add(obj* myself, args* argumentList) {
 	return myself;
 }
 
-obj* dnk_number_minus(obj* myself, args* argumentList) {
+obj* ctr_number_minus(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = atof(myself->value);
@@ -246,7 +246,7 @@ obj* dnk_number_minus(obj* myself, args* argumentList) {
 	return myself;
 }
 
-obj* dnk_number_factorial(obj* myself, args* argumentList) {
+obj* ctr_number_factorial(obj* myself, args* argumentList) {
 	float t = floor(atof(myself->value));
 	int i;
 	float a = 1;
@@ -259,7 +259,7 @@ obj* dnk_number_factorial(obj* myself, args* argumentList) {
 	return myself;
 }
 
-obj* dnk_number_times(obj* myself, args* argumentList) {
+obj* ctr_number_times(obj* myself, args* argumentList) {
 	obj* block = argumentList->object;
 	if (block->type != OTBLOCK) { printf("Expected code block."); exit(1); }
 	int t = atoi(myself->value);
@@ -267,15 +267,15 @@ obj* dnk_number_times(obj* myself, args* argumentList) {
 	for(i=0; i<t; i++) {
 		char* nstr = (char*) calloc(20, sizeof(char));
 		snprintf(nstr, 20, "%d", i);
-		obj* indexNumber = dnk_build_number(nstr);
+		obj* indexNumber = ctr_build_number(nstr);
 		args* arguments = A();
 		arguments->object = indexNumber;
-		dnk_block_run(block, arguments, myself);
+		ctr_block_run(block, arguments, myself);
 	}
 	return myself;
 }
 
-obj* dnk_build_number(char* n) {
+obj* ctr_build_number(char* n) {
 	obj* numberObject = O();
 	numberObject->name = "Number";
 	numberObject->value = malloc(sizeof(char)*strlen(n));
@@ -285,7 +285,7 @@ obj* dnk_build_number(char* n) {
 	return numberObject;
 }
 
-obj* dnk_object_make() {
+obj* ctr_object_make() {
 	obj* objectInstance = NULL;
 	objectInstance = O();
 	objectInstance->type = OTOBJECT;
@@ -294,7 +294,7 @@ obj* dnk_object_make() {
 	return objectInstance;
 }
 
-obj* dnk_object_method_does(obj* myself, args* argumentList) {
+obj* ctr_object_method_does(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
@@ -322,7 +322,7 @@ obj* dnk_object_method_does(obj* myself, args* argumentList) {
 }
 
 
-obj* dnk_object_override_does(obj* myself, args* argumentList) {
+obj* ctr_object_override_does(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
@@ -359,7 +359,7 @@ obj* dnk_object_override_does(obj* myself, args* argumentList) {
 }
 
 
-obj* dnk_object_blueprint(obj* myself, args* argumentList) {
+obj* ctr_object_blueprint(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
@@ -372,7 +372,7 @@ obj* dnk_object_blueprint(obj* myself, args* argumentList) {
 	return myself;
 }
 
-obj* dnk_build_string(char* stringValue) {
+obj* ctr_build_string(char* stringValue) {
 	obj* stringObject = O();
 	stringObject->type = OTSTRING;
 	stringObject->value = calloc(sizeof(char), strlen(stringValue));
@@ -380,21 +380,21 @@ obj* dnk_build_string(char* stringValue) {
 	return stringObject;
 }
 
-obj* dnk_build_nil() {	
+obj* ctr_build_nil() {	
 	return Nil;
 }
 
-obj* dnk_nil_isnil(obj* myself, args* argumentList) {
+obj* ctr_nil_isnil(obj* myself, args* argumentList) {
 	obj* truth;
 	if ((myself->type == OTNIL)) {
-		truth = dnk_build_bool(1);
+		truth = ctr_build_bool(1);
 	} else {
-		truth = dnk_build_bool(0);
+		truth = ctr_build_bool(0);
 	}
 	return truth;
 }
 
-void dnk_initialize_world() {
+void ctr_initialize_world() {
 	obj* Pencil = NULL;
 	obj* PencilWrite = NULL;
 	World = (obj*) malloc(sizeof(obj));
@@ -405,7 +405,7 @@ void dnk_initialize_world() {
 	Pencil->name = "Pencil";
 	PencilWrite->name = "write:";
 	PencilWrite->type = OTNATFUNC;
-	PencilWrite->value = (void*) &dnk_pencil_write;
+	PencilWrite->value = (void*) &ctr_pencil_write;
 	HASH_ADD_KEYPTR(hh, World->properties, Pencil->name, strlen(Pencil->name), Pencil);
 	HASH_ADD_KEYPTR(hh, Pencil->methods, PencilWrite->name, strlen(PencilWrite->name), PencilWrite);
 	
@@ -417,31 +417,31 @@ void dnk_initialize_world() {
 	Object->value = "[object]";
 	ObjectMake->name = "new";
 	ObjectMake->type = OTNATFUNC;
-	ObjectMake->value = (void*) &dnk_object_make;
+	ObjectMake->value = (void*) &ctr_object_make;
 	HASH_ADD_KEYPTR(hh, World->properties, Object->name, strlen(Object->name), Object);
 	HASH_ADD_KEYPTR(hh, Object->methods, ObjectMake->name, strlen(ObjectMake->name), ObjectMake);
 	
 	ObjectMethodDoes->name = "method:does:";
 	ObjectMethodDoes->type = OTNATFUNC;
-	ObjectMethodDoes->value = (void*) &dnk_object_method_does;
+	ObjectMethodDoes->value = (void*) &ctr_object_method_does;
 	HASH_ADD_KEYPTR(hh, Object->methods, ObjectMethodDoes->name, strlen(ObjectMethodDoes->name), ObjectMethodDoes);
 	
 	obj* ObjectOverrideDoes = O();
 	ObjectOverrideDoes->name = "override:does:";
 	ObjectOverrideDoes->type = OTNATFUNC;
-	ObjectOverrideDoes->value = (void*) &dnk_object_override_does;
+	ObjectOverrideDoes->value = (void*) &ctr_object_override_does;
 	HASH_ADD_KEYPTR(hh, Object->methods, ObjectOverrideDoes->name, strlen(ObjectOverrideDoes->name), ObjectOverrideDoes);
 	
 	obj* ObjectBlueprint = O();
 	ObjectBlueprint->name = "blueprint:";
 	ObjectBlueprint->type = OTNATFUNC;
-	ObjectBlueprint->value = (void*) &dnk_object_blueprint;
+	ObjectBlueprint->value = (void*) &ctr_object_blueprint;
 	HASH_ADD_KEYPTR(hh, Object->methods, ObjectBlueprint->name, strlen(ObjectBlueprint->name), ObjectBlueprint);
 	
 	obj* numberTimesObject = O();
 	numberTimesObject->name = "times:";
 	numberTimesObject->type = OTNATFUNC;
-	numberTimesObject->value = (void*) &dnk_number_times;
+	numberTimesObject->value = (void*) &ctr_number_times;
 	Number = O();
 	Number->name = "Number";
 	Number->value = "0";
@@ -452,25 +452,25 @@ void dnk_initialize_world() {
 	obj* numberAdd = O();
 	numberAdd->name = "+";
 	numberAdd->type = OTNATFUNC;
-	numberAdd->value = (void*) &dnk_number_add;
+	numberAdd->value = (void*) &ctr_number_add;
 	HASH_ADD_KEYPTR(hh, Number->methods, numberAdd->name, strlen(numberAdd->name), numberAdd);
 	
 	obj* numberMin = O();
 	numberMin->name = "-";
 	numberMin->type = OTNATFUNC;
-	numberMin->value = (void*) &dnk_number_minus;
+	numberMin->value = (void*) &ctr_number_minus;
 	HASH_ADD_KEYPTR(hh, Number->methods, numberMin->name, strlen(numberMin->name), numberMin);
 	
 	obj* numberHiThan = O();
 	numberHiThan->name = ">";
 	numberHiThan->type = OTNATFUNC;
-	numberHiThan->value = (void*) &dnk_number_higherThan;
+	numberHiThan->value = (void*) &ctr_number_higherThan;
 	HASH_ADD_KEYPTR(hh, Number->methods, numberHiThan->name, strlen(numberHiThan->name), numberHiThan);
 	
 	obj* numberFactorial = O();
 	numberFactorial->name = "factorial";
 	numberFactorial->type = OTNATFUNC;
-	numberFactorial->value = (void*) &dnk_number_factorial;
+	numberFactorial->value = (void*) &ctr_number_factorial;
 	HASH_ADD_KEYPTR(hh, Number->methods, numberFactorial->name, strlen(numberFactorial->name), numberFactorial);
 	
 	BoolX = O();
@@ -482,13 +482,13 @@ void dnk_initialize_world() {
 	obj* ifTrue = O();
 	ifTrue->name = "ifTrue:";
 	ifTrue->type = OTNATFUNC;
-	ifTrue->value = (void*) &dnk_bool_iftrue;
+	ifTrue->value = (void*) &ctr_bool_iftrue;
 	HASH_ADD_KEYPTR(hh, BoolX->methods, ifTrue->name, strlen(ifTrue->name), ifTrue);
 	
 	obj* ifFalse = O();
 	ifFalse->name = "ifFalse:";
 	ifFalse->type = OTNATFUNC;
-	ifFalse->value = (void*) &dnk_bool_ifFalse;
+	ifFalse->value = (void*) &ctr_bool_ifFalse;
 	HASH_ADD_KEYPTR(hh, BoolX->methods, ifFalse->name, strlen(ifFalse->name), ifFalse);
 	
 	Nil = O();
@@ -500,13 +500,13 @@ void dnk_initialize_world() {
 	obj* isNil = O();
 	isNil->name = "isNil";
 	isNil->type = OTNATFUNC;
-	isNil->value = (void*) &dnk_nil_isnil;
+	isNil->value = (void*) &ctr_nil_isnil;
 	HASH_ADD_KEYPTR(hh, Nil->methods, isNil->name, strlen(isNil->name), isNil);
 	
 	
 }
 
-obj* dnk_send_message(obj* receiverObject, char* message, args* argumentList) {
+obj* ctr_send_message(obj* receiverObject, char* message, args* argumentList) {
 	obj* methodObject = NULL;
 	int antiCrash = 0;
 	obj* searchObject = receiverObject;
@@ -535,22 +535,22 @@ obj* dnk_send_message(obj* receiverObject, char* message, args* argumentList) {
 		if (strcmp(receiverObject->name,"me")==0) {
 			receiverObject = receiverObject->link;
 		}
-		result = dnk_block_run(methodObject, argumentList, receiverObject);
+		result = ctr_block_run(methodObject, argumentList, receiverObject);
 	}
 	
 	return result;
 }
 
-obj* dnk_assign_value(char* name, obj* o) {
+obj* ctr_assign_value(char* name, obj* o) {
 	obj* object = O();
 	object = o;
 	object->name = name;
-	dnk_set(object);
+	ctr_set(object);
 	return object;
 }
 
-obj* dnk_assign_value_to_my(char* name, obj* o) {
-	obj* my = dnk_find("me");
+obj* ctr_assign_value_to_my(char* name, obj* o) {
+	obj* my = ctr_find("me");
 	HASH_ADD_KEYPTR(hh, my->link->properties, name, strlen(name), o);
 	return o;
 }

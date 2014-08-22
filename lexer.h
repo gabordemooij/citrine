@@ -21,8 +21,8 @@
 #define UTF8_BYTE2 224
 #define UTF8_BYTE3 240
 
-void 	dlex_load(char* prg);
-int 	dlex_tok();
-char* 	dlex_tok_value();
-void 	dlex_putback();
-char*	dlex_readstr();
+void 	clex_load(char* prg);
+int 	clex_tok();
+char* 	clex_tok_value();
+void 	clex_putback();
+char*	clex_readstr();

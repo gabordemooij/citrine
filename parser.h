@@ -46,5 +46,5 @@ tnode* dparse_parse(char* prg);
 
 #define	N() (tnode*) calloc(1,sizeof(tnode*))
 			
-#define TVAL(x) x->value = calloc(strlen(dlex_tok_value()), sizeof(char)); strcpy(paramItem->value, dlex_tok_value());
+#define TVAL(x) x->value = calloc(strlen(clex_tok_value()), sizeof(char)); strcpy(paramItem->value, clex_tok_value());
 			

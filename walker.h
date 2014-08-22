@@ -1,4 +1,4 @@
 
 
 
-obj* dwlk_run(tnode* program);
+obj* cwlk_run(tnode* program);

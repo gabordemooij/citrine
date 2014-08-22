@@ -13,9 +13,9 @@
 
 int debug;
 
-obj* dwlk_expr(tnode* node);
+obj* cwlk_expr(tnode* node);
 
-obj* dwlk_return(tnode* node) {
+obj* cwlk_return(tnode* node) {
 	if (!node->nodes) {
 		printf("Invalid return expression.\n");
 		exit(1);
@@ -26,11 +26,11 @@ obj* dwlk_return(tnode* node) {
 		exit(1);
 	} 
 	obj* e = O();
-	e =  dwlk_expr(li->node);
+	e =  cwlk_expr(li->node);
 	return e;
 }
 
-obj* dwlk_message(tnode* paramNode) {
+obj* cwlk_message(tnode* paramNode) {
 	obj* result;
 	int antiCrash = 0;
 	tlistitem* eitem = paramNode->nodes;
@@ -41,23 +41,23 @@ obj* dwlk_message(tnode* paramNode) {
 	tlistitem* argumentList;
 	obj* r;
 	if (receiverNode->type == REFERENCE) {
-		r = dnk_find(receiverNode->value);
+		r = ctr_find(receiverNode->value);
 		if (!r) {
 			printf("Object not found: %s \n", receiverNode->value);
 			exit(1);
 		}
 	} else if (receiverNode->type == LTRNIL ) {
-		r = dnk_build_nil();
+		r = ctr_build_nil();
 	} else if (receiverNode->type == LTRBOOLTRUE ) {
-		r = dnk_build_bool(1);
+		r = ctr_build_bool(1);
 	} else if (receiverNode->type == LTRBOOLFALSE ) {
-		r = dnk_build_bool(0);
+		r = ctr_build_bool(0);
 	} else if (receiverNode->type == LTRSTRING ) {
-		r = dnk_build_string(receiverNode->value);
+		r = ctr_build_string(receiverNode->value);
 	} else if (receiverNode->type == LTRNUM) {
-		r = dnk_build_number(receiverNode->value);
+		r = ctr_build_number(receiverNode->value);
 	} else if (receiverNode->type == NESTED) {
-		r = dwlk_expr(receiverNode);
+		r = cwlk_expr(receiverNode);
 	} else {
 		printf("Cannot send message to receiver of type: %d \n", receiverNode->type);
 	}
@@ -72,7 +72,7 @@ obj* dwlk_message(tnode* paramNode) {
 			tnode* node = argumentList->node;
 			antiCrash=0;
 			while((antiCrash++)<100) {
-				obj* o = dwlk_expr(node);
+				obj* o = cwlk_expr(node);
 				aItem->object = o;
 				aItem->next = A();
 				aItem = aItem->next;
@@ -81,56 +81,56 @@ obj* dwlk_message(tnode* paramNode) {
 				node = argumentList->node;
 			}
 		}
-		result = dnk_send_message(r, message, a);
+		result = ctr_send_message(r, message, a);
 		r = result;
 	}
 	return result;
 }	
 
-obj* dwlk_assignment(tnode* node) {
+obj* cwlk_assignment(tnode* node) {
 	tlistitem* assignmentItems = node->nodes;
 	tnode* assignee = assignmentItems->node;
 	tlistitem* valueListItem = assignmentItems->next;
 	tnode* value = valueListItem->node;
 	obj* x = O();
-	x = dwlk_expr(value);
+	x = cwlk_expr(value);
 	obj* result;
 	if (assignee->modifier == 1) {
-		result = dnk_assign_value_to_my(assignee->value, x);
+		result = ctr_assign_value_to_my(assignee->value, x);
 	} else {
-		result = dnk_assign_value(assignee->value, x);
+		result = ctr_assign_value(assignee->value, x);
 	}
 	return result;
 }		
 
-obj* dwlk_expr(tnode* node) {
+obj* cwlk_expr(tnode* node) {
 	obj* result;
 	if (node->type == LTRSTRING) {
-		result = dnk_build_string(node->value);
+		result = ctr_build_string(node->value);
 	} else if (node->type == LTRBOOLTRUE) {
-		result = dnk_build_bool(1);
+		result = ctr_build_bool(1);
 	} else if (node->type == LTRBOOLFALSE) {
-		result = dnk_build_bool(0);
+		result = ctr_build_bool(0);
 	} else if (node->type == LTRNIL) {
-		result = dnk_build_nil();
+		result = ctr_build_nil();
 	} else if (node->type == LTRNUM) {
-		result = dnk_build_number(node->value);
+		result = ctr_build_number(node->value);
 	} else if (node->type == CODEBLOCK) {
-		result = dnk_build_block(node);
+		result = ctr_build_block(node);
 	} else if (node->type == REFERENCE) {
 		if (node->modifier == 1) {
-			result = dnk_find_in_my(node->value);
+			result = ctr_find_in_my(node->value);
 		} else {
-			result = dnk_find(node->value);
+			result = ctr_find(node->value);
 		}
 	} else if (node->type == EXPRMESSAGE) {
-		result = dwlk_message(node);
+		result = cwlk_message(node);
 	} else if (node->type == EXPRASSIGNMENT) {
-		result = dwlk_assignment(node);
+		result = cwlk_assignment(node);
 	} else if (node->type == RETURNFROMBLOCK) {
-		result = dwlk_return(node);
+		result = cwlk_return(node);
 	} else if (node->type == NESTED) {
-		result = dwlk_expr(node->nodes->node);
+		result = cwlk_expr(node->nodes->node);
 	} else if (node->type == ENDOFPROGRAM) {
 		printf("FIN.\n");
 		exit(0);
@@ -141,7 +141,7 @@ obj* dwlk_expr(tnode* node) {
 	return result;
 }
 
-obj* dwlk_run(tnode* program) {
+obj* cwlk_run(tnode* program) {
 	obj* result = NULL;
 	if (debug) tree(program, 0);
 	int antiCrash = 0;
@@ -152,7 +152,7 @@ obj* dwlk_run(tnode* program) {
 			printf("Missing parse node\n");
 			exit(1);
 		}
-		result = dwlk_expr(node);
+		result = cwlk_expr(node);
 		if (!li->next) break;
 		li = li->next;
 	}

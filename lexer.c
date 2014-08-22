@@ -22,22 +22,22 @@ char* code;
 char* eofcode;
 char* oldptr;
 
-void dlex_load(char* prg) {
+void clex_load(char* prg) {
 	code = prg;
 	buffer = malloc(bflmt);
 	buffer[0] = '\0';
 	eofcode = (code + strlen(code));
 }
 
-char* dlex_tok_value() {
+char* clex_tok_value() {
 	return buffer;
 }
 
-void dlex_putback() {
+void clex_putback() {
 	code = oldptr;
 }
 
-int dlex_tok() {
+int clex_tok() {
 	oldptr = code;
 	char c;
 	int anticrash = 0;
@@ -132,7 +132,7 @@ int dlex_tok() {
 	return REF;
 }
 
-char* dlex_readstr() {
+char* clex_readstr() {
 	char* strbuff = malloc(100);
 	int antiCrash = 0;
 	char c = *code;
