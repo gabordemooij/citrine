@@ -1,0 +1,30 @@
+Greeter = Object new.
+Greeter method: "make" does: {\
+	gr = Object new.
+	gr method: "setName:" does: { aname |
+		my name = aname.
+	}.
+	gr method: "greet" does: {\
+		Pencil write: my name.
+	}.
+	^gr.
+}.
+
+a = Greeter make.
+b = Greeter make.
+
+a setName: "ONE".
+b setName: "TWO".
+a greet.
+b greet.
+
+c = Object new.
+c blueprint: a.
+c setName: "THREE".
+c greet.
+
+d = Object new.
+d blueprint: a.
+d setName: "FOUR".
+d greet.
+c greet.

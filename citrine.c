@@ -1,0 +1,35 @@
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdarg.h>
+#include <math.h>
+
+#include "parser.h"
+#include "uthash.h"
+#include "object.h"
+#include "tools.h"
+#include "walker.h"
+
+
+int debug = 0;
+
+int main(int argc, char *argv[]) {
+	char* prg;
+	if (argc < 2) {
+		printf("\nWelcome to Citrine v0.1\n");
+		printf("Written by Gabor de Mooij (c) copyright 2014\n");
+		printf("The Citrine Programming Language BSD license.\n------------------------\n\n");
+		printf("Usage: ctr mycode.ctr \n");
+		printf("Debugger: ctr mycode.ctr --debug\n\n");
+		exit(1);
+	}
+	if (argc == 3) if (strcmp(argv[2],"--debug")==0) debug = 1;
+	if (debug == 1) printf("Debugger is ON.\n");
+	prg = readf(argv[1]);
+	tnode* program = dparse_parse(prg);
+	dnk_initialize_world();
+	dwlk_run(program);
+	exit(0);
+}

@@ -1,0 +1,29 @@
+Animal = Object new.
+Animal method: "make" does: {\
+	
+	animal = Object new.
+	
+	animal method: "makeSound" does: {\
+		Pencil write: "?".
+	}.
+
+	^animal.
+}.
+
+Cat = Object new.
+Cat method: "make" does: {\
+	cat = Animal make.
+	
+	cat override: "makeSound" does: {\
+		Pencil write: "meow!!".
+		me overridden-makeSound.
+	}.
+	
+	^cat.
+}.
+
+CatObject = Cat make.
+tom = Object new.
+tom blueprint: CatObject.
+tom makeSound.
+

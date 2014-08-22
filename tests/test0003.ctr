@@ -1,0 +1,2 @@
+greeter = "Hello World".
+Pencil write: greeter.

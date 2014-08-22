@@ -1,0 +1,26 @@
+Animal = Object new.
+Animal method: "make" does: {\
+	
+	animal = Object new.
+	
+	animal method: "makeSound" does: {\
+		Pencil write: my sound.
+	}.
+
+	^animal.
+}.
+
+Cat = Object new.
+Cat method: "make" does: {\
+	cat = Animal make.
+	
+	cat method: "init" does: {\
+		my sound = "meow!".
+	}.
+	
+	cat init.
+	^cat.
+}.
+
+tom = Cat make.
+tom makeSound.
