@@ -1,8 +1,8 @@
 Cat = Object new.
-Cat method: "make" does: {\
+Cat method: 'make' does: {\
 	cat = Object new.
-	cat method: "meow" does: {\
-		Pencil write: "meow!".
+	cat method: 'meow' does: {\
+		Pencil write: 'meow!'.
 	}.
 	^cat.
 }.

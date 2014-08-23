@@ -1,8 +1,8 @@
 Animal = Object new.
-Animal method: "sound:" does: { s | my sound = s. }.
-Animal method: "makeSound" does: {\ Pencil write: my sound. }.
+Animal method: 'sound:' does: { s | my sound = s. }.
+Animal method: 'makeSound' does: {\ Pencil write: my sound. }.
 Cat = Object new blueprint: Animal.
-Cat method: "init" does: {\ my sound = "MEOW!".}.
-Cat method: "meow" does: {\ me makeSound. }.
+Cat method: 'init' does: {\ my sound = 'MEOW!'.}.
+Cat method: 'meow' does: {\ me makeSound. }.
 Cat init.
 Cat meow.

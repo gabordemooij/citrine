@@ -72,7 +72,7 @@ int clex_tok() {
 	if (c == ':') { code++; return COLON; }
 	if (c == '=') { code++; return ASSIGNMENT; }
 	if (c == '^') { code++; return RET; }
-	if (c == '"') { code++; return QUOTE; }
+	if (c == '\'') { code++; return QUOTE; }
 	if (c == '+' || c == '-' || isdigit(c)) {
 		buffer[i] = c;
 		i++;
@@ -138,7 +138,7 @@ char* clex_readstr() {
 	char c = *code;
 	int escape = 0;
 	char* beginbuff = strbuff;
-	while((antiCrash++)<100 && (c != '"' || escape == 1)) {
+	while((antiCrash++)<100 && (c != '\'' || escape == 1)) {
 		if (c == '\\' && escape == 0) {
 			escape = 1;
 			code++;

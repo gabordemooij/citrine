@@ -1,3 +1,3 @@
 Greeter = Object new.
-Greeter method: "greet" does: {\ Pencil write: "Hello World!".}.
+Greeter method: 'greet' does: {\ Pencil write: 'Hello World!'.}.
 Greeter greet.

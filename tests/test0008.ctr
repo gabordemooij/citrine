@@ -1,20 +1,19 @@
 Greeter = Object new.
-Greeter method: "make" does: {\
+Greeter method: 'make' does: {\
 	greeter = Object new.
 	
-	
-	greeter method: "name:" does: { name |
-		Pencil write: "setting a name".
+	greeter method: 'name:' does: { name |
+		Pencil write: 'setting a name'.
 		my myName = name.
 	}.
 	
-	greeter method: "greet" does: {\
-		Pencil write: "Hello".
+	greeter method: 'greet' does: {\
+		Pencil write: 'Hello'.
 		Pencil write: my myName.
 	}.
 	
 	^greeter.
 }.
 greeter = Greeter make.
-greeter name: "sunshine!".
+greeter name: 'sunshine!'.
 greeter greet.
