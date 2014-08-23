@@ -8,6 +8,8 @@
 
 #include "lexer.h"
 
+//i.e. what can end a ref?
+#define IS_DELIM(X) (X == '(' || X == ')' || X == '=' || X == ';' || X == '.' || X == '|' || X == ':')
 
 typedef struct {
 	int tid;
@@ -18,6 +20,7 @@ typedef struct {
 int bflmt = 100;
 char* buffer;
 char* code;
+char* codePoint;
 char* eofcode;
 char* oldptr;
 int flag_operator = 0;
@@ -96,8 +99,10 @@ int clex_tok() {
 	}
 	//@todo what about Truex or TrueBla?
 	if (strncmp(code, "True", 4)==0){
-		code += 4;
-		return BOOLEANYES;
+		if (IS_DELIM(*(code + 4))) { 
+			code += 4;
+			return BOOLEANYES;
+		}
 	}
 	if (strncmp(code, "False", 5)==0){
 		code += 5;

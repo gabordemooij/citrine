@@ -2,3 +2,5 @@
 (9 < 2) ifTrue: {\ Pencil write: 'My logic fails'. }.
 Pencil write: (-2 + 6).
 Pencil write: (-3 - -3).
+TrueIsNice = 3.
+Pencil write: TrueIsNice.
