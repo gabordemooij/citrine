@@ -8,7 +8,6 @@
 
 #include "lexer.h"
 
-#define isOper(x) (x=='+' || x=='-' || x=='/' || x=='*' || x=='%' || x=='>' || x=='<')
 
 typedef struct {
 	int tid;
@@ -21,6 +20,7 @@ char* buffer;
 char* code;
 char* eofcode;
 char* oldptr;
+int flag_operator = 0;
 
 void clex_load(char* prg) {
 	code = prg;
@@ -51,16 +51,7 @@ int clex_tok() {
 		code ++;
 		c = *code;
 	}
-	char l;
-	if (isOper(c) && (code + 1)!=eofcode) {
-		l = *(code + 1);
-		if (!isdigit(l) || (c!='+' && c!='-')) {
-			code++;
-			buffer[0] = c;
-			buffer[1] = '\0';
-			return REF;
-		}
-	}
+
 	if (code == eofcode) return FIN;
 	if (c == '(') { code++; return PAROPEN; }
 	if (c == ')') { code++; return PARCLOSE; }
@@ -73,7 +64,7 @@ int clex_tok() {
 	if (c == '=') { code++; return ASSIGNMENT; }
 	if (c == '^') { code++; return RET; }
 	if (c == '\'') { code++; return QUOTE; }
-	if (c == '+' || c == '-' || isdigit(c)) {
+	if ((c == '-' && (code+1)<eofcode && isdigit(*(code+1))) || isdigit(c)) {
 		buffer[i] = c;
 		i++;
 		code++;
@@ -116,9 +107,10 @@ int clex_tok() {
 		code += 3;
 		return NIL;
 	}
+
 	while((anticrash++) < 100 && !isspace(c) && c!='#' && c!='(' && c!=')' && 
 	c!='{' && c!='}' && c!='|' && c!='\\' && c!='.' &&
-	c!=';' && c!='=' && c!='^'  && c!= ':' && code!=eofcode) {
+	c!=';' && c!='=' && c!='^'  && c!= ':' && c!= '\'' && code!=eofcode) {
 		buffer[i] = c;
 		i++;
 		if (i > bflmt) {
@@ -128,6 +120,7 @@ int clex_tok() {
 		code++;
 		c = *code;
 	}
+
 	buffer[i] = '\0';
 	return REF;
 }

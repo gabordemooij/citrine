@@ -1,2 +1,4 @@
 (2 < 9) ifTrue: {\ Pencil write: 'Yes, nine is less than ten.'. }.
 (9 < 2) ifTrue: {\ Pencil write: 'My logic fails'. }.
+Pencil write: (-2 + 6).
+Pencil write: (-3 - -3).
