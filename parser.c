@@ -17,7 +17,7 @@ tnode* dparse_message() {
 	tnode* m = N();
 	char* v = clex_tok_value();
 	strcat(msg,v);
-	if (*v == '+' || *v == '-' || *v == '*' || *v =='/' || *v == '%' || *v == '>') {
+	if (*v == '+' || *v == '-' || *v == '*' || *v =='/' || *v == '%' || *v == '>' || *v == '<') {
 		m->type = BINMESSAGE;
 		m->value = msg;
 		tlistitem* li = LI();

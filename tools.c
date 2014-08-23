@@ -224,6 +224,16 @@ obj* ctr_number_higherThan(obj* myself, args* argumentList) {
 	return truth;
 }
 
+obj* ctr_number_lowerThan(obj* myself, args* argumentList) {
+	obj* otherNum = argumentList->object;
+	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
+	float a = atof(myself->value);
+	float b = atof(otherNum->value);
+	obj* truth = ctr_build_bool((a < b));
+	return truth;
+}
+
+
 obj* ctr_number_add(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
@@ -466,6 +476,12 @@ void ctr_initialize_world() {
 	numberHiThan->type = OTNATFUNC;
 	numberHiThan->value = (void*) &ctr_number_higherThan;
 	HASH_ADD_KEYPTR(hh, Number->methods, numberHiThan->name, strlen(numberHiThan->name), numberHiThan);
+	
+	obj* numberLoThan = O();
+	numberLoThan->name = "<";
+	numberLoThan->type = OTNATFUNC;
+	numberLoThan->value = (void*) &ctr_number_lowerThan;
+	HASH_ADD_KEYPTR(hh, Number->methods, numberLoThan->name, strlen(numberLoThan->name), numberLoThan);
 	
 	obj* numberFactorial = O();
 	numberFactorial->name = "factorial";
