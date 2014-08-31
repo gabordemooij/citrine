@@ -9,7 +9,7 @@
 #include "lexer.h"
 
 //i.e. what can end a ref?
-#define IS_DELIM(X) (X == '(' || X == ')' || X == '=' || X == ';' || X == '.' || X == '|' || X == ':')
+#define IS_DELIM(X) (X == '(' || X == ')' || X == '=' || X == ';' || X == '.' || X == '|' || X == ':' || X == ' ')
 
 typedef struct {
 	int tid;

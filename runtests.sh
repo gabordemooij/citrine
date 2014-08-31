@@ -5,8 +5,9 @@ for i in $(find tests -name '*.ctr'); do
 	fexpect="${i: 0:-4}.exp"
 	result=`./ctr ${fitem}`
 	expected=`cat $fexpect`
+	echo -n $fitem;
 	if [ "$result" == "$expected" ]; then
-		echo -n "[$j]"
+		echo "[$j]"
 		j=$((j+1))
 	else
 		echo "FAIL."
