@@ -4,3 +4,7 @@ Pencil write: (-2 + 6).
 Pencil write: (-3 - -3).
 TrueIsNice = 3.
 Pencil write: TrueIsNice.
+FalseIsBad = 'Not true!'.
+Pencil write: FalseIsBad.
+NilIsEmpty = 'Yep'.
+Pencil write: NilIsEmpty.

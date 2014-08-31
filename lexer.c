@@ -97,20 +97,25 @@ int clex_tok() {
 		buffer[i] = '\0';
 		return NUMBER;
 	}
-	//@todo what about Truex or TrueBla?
 	if (strncmp(code, "True", 4)==0){
 		if (IS_DELIM(*(code + 4))) { 
 			code += 4;
 			return BOOLEANYES;
 		}
 	}
+	
 	if (strncmp(code, "False", 5)==0){
-		code += 5;
-		return BOOLEANNO;
+		if (IS_DELIM(*(code + 5))) { 
+			code += 5;
+			return BOOLEANNO;
+		}
 	}
+		
 	if (strncmp(code, "Nil", 3)==0){
-		code += 3;
-		return NIL;
+		if (IS_DELIM(*(code + 3))) { 
+			code += 3;
+			return NIL;
+		}
 	}
 
 	while((anticrash++) < 100 && !isspace(c) && c!='#' && c!='(' && c!=')' && 

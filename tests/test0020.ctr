@@ -4,3 +4,5 @@
 (2 > 3) ifFalse: {\ Pencil write: 'Nonono..'.}.
 True ifTrue: {\ Pencil write: 'TRUE is TRUE!'. }.
 (True) ifTrue: {\ Pencil write: 'TRUE is TRUE!'. }.
+False ifFalse: {\ Pencil write: 'FALSE is FALSE!'. }.
+(False) ifFalse: {\ Pencil write: 'FALSE is FALSE!'. }.
