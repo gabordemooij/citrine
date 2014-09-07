@@ -17,9 +17,6 @@
 #define LTRBOOLFALSE 82
 #define LTRNIL 83
 
-
-
-
 struct tnode {
 	int type;
 	int modifier;
@@ -42,9 +39,9 @@ typedef struct tnode tnode;
 tnode* dparse_parse(char* prg);
 
 
-#define LI() (tlistitem*) calloc(1, sizeof(tlistitem*))
+#define CTR_PARSER_CREATE_LISTITEM() (tlistitem*) calloc(1, sizeof(tlistitem*))
 
-#define	N() (tnode*) calloc(1,sizeof(tnode*))
+#define	CTR_PARSER_CREATE_NODE() (tnode*) calloc(1,sizeof(tnode*))
 			
-#define TVAL(x) x->value = calloc(strlen(clex_tok_value()), sizeof(char)); strcpy(paramItem->value, clex_tok_value());
+#define CTR_PARSER_GET_TOKVAL(x) x->value = calloc(strlen(clex_tok_value()), sizeof(char)); strcpy(paramItem->value, clex_tok_value());
 			

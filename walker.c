@@ -25,7 +25,7 @@ obj* cwlk_return(tnode* node) {
 		printf("Invalid return expression 2.\n");
 		exit(1);
 	} 
-	obj* e = O();
+	obj* e = CTR_CREATE_OBJECT();
 	e =  cwlk_expr(li->node);
 	return e;
 }
@@ -66,7 +66,7 @@ obj* cwlk_message(tnode* paramNode) {
 		msgnode = li->node;
 		message = msgnode->value;
 		argumentList = msgnode->nodes;
-		args* a = A();
+		args* a = CTR_CREATE_ARGUMENT();
 		args* aItem = a;
 		if (argumentList) {
 			tnode* node = argumentList->node;
@@ -74,7 +74,7 @@ obj* cwlk_message(tnode* paramNode) {
 			while((antiCrash++)<100) {
 				obj* o = cwlk_expr(node);
 				aItem->object = o;
-				aItem->next = A();
+				aItem->next = CTR_CREATE_ARGUMENT();
 				aItem = aItem->next;
 				if (!argumentList->next) break;
 				argumentList = argumentList->next;
@@ -92,7 +92,7 @@ obj* cwlk_assignment(tnode* node) {
 	tnode* assignee = assignmentItems->node;
 	tlistitem* valueListItem = assignmentItems->next;
 	tnode* value = valueListItem->node;
-	obj* x = O();
+	obj* x = CTR_CREATE_OBJECT();
 	x = cwlk_expr(value);
 	obj* result;
 	if (assignee->modifier == 1) {

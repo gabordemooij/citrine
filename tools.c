@@ -28,6 +28,7 @@ obj* ctr_build_number(char* number);
 obj* Object;
 obj* Number;
 obj* BoolX;
+obj* Pencil;
 obj* Nil;
 int debug;
 
@@ -120,7 +121,7 @@ obj* ctr_find(char* key) {
 }
 
 obj* ctr_find_in_my(char* key) {
-	obj* foundObject = O();
+	obj* foundObject = CTR_CREATE_OBJECT();
 	obj* context = ctr_find("me");
 	HASH_FIND_STR(context->link->properties, key, foundObject);
 	if (foundObject == NULL) { printf("Error, property not found: %s.\n", key); exit(1); }
@@ -134,7 +135,7 @@ void ctr_set(obj* object) {
 }
 
 obj* ctr_build_bool(int truth) {
-	obj* boolObject = O();
+	obj* boolObject = CTR_CREATE_OBJECT();
 	boolObject->name = "Bool";
 	if (truth) boolObject->value = "1"; else boolObject->value = "0";
 	boolObject->type = OTBOOL;
@@ -150,7 +151,7 @@ obj* ctr_pencil_write(obj* myself, args* argumentList) {
 }
 
 obj* ctr_block_run(obj* myself, args* argList, obj* my) {
-	obj* selfRef = O();
+	obj* selfRef = CTR_CREATE_OBJECT();
 	selfRef->name = "me";
 	selfRef->type = OTOBJECT;
 	selfRef->value = "[self]";
@@ -188,7 +189,7 @@ obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 }
 
 obj* ctr_build_block(tnode* node) {
-	obj* codeBlockObject = O();
+	obj* codeBlockObject = CTR_CREATE_OBJECT();
 	codeBlockObject->type = OTBLOCK;
 	codeBlockObject->block = node;
 	codeBlockObject->value = "[block]";
@@ -198,7 +199,7 @@ obj* ctr_build_block(tnode* node) {
 obj* ctr_bool_iftrue(obj* myself, args* argumentList) {
 	if (strncmp(myself->value,"1",1)==0) {
 		obj* codeBlock = argumentList->object;
-		args* arguments = A();
+		args* arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = myself;
 		return ctr_block_run(codeBlock, arguments, myself);
 	}
@@ -208,7 +209,7 @@ obj* ctr_bool_iftrue(obj* myself, args* argumentList) {
 obj* ctr_bool_ifFalse(obj* myself, args* argumentList) {
 	if (strncmp(myself->value,"0",1)==0) {
 		obj* codeBlock = argumentList->object;
-		args* arguments = A();
+		args* arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = myself;
 		return ctr_block_run(codeBlock, arguments, myself);
 	}
@@ -304,7 +305,7 @@ obj* ctr_number_times(obj* myself, args* argumentList) {
 		char* nstr = (char*) calloc(20, sizeof(char));
 		snprintf(nstr, 20, "%d", i);
 		obj* indexNumber = ctr_build_number(nstr);
-		args* arguments = A();
+		args* arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = indexNumber;
 		ctr_block_run(block, arguments, myself);
 	}
@@ -312,7 +313,7 @@ obj* ctr_number_times(obj* myself, args* argumentList) {
 }
 
 obj* ctr_build_number(char* n) {
-	obj* numberObject = O();
+	obj* numberObject = CTR_CREATE_OBJECT();
 	numberObject->name = "Number";
 	numberObject->value = malloc(sizeof(char)*strlen(n));
 	strcpy(numberObject->value, n);
@@ -323,7 +324,7 @@ obj* ctr_build_number(char* n) {
 
 obj* ctr_object_make() {
 	obj* objectInstance = NULL;
-	objectInstance = O();
+	objectInstance = CTR_CREATE_OBJECT();
 	objectInstance->type = OTOBJECT;
 	objectInstance->value = "[object]";
 	objectInstance->link = Object;
@@ -381,7 +382,7 @@ obj* ctr_object_override_does(obj* myself, args* argumentList) {
 	}
 	methodBlock->name = methodName->value;
 	if (debug) printf("Adding method block: %s %s to %s.\n", methodBlock->value, methodBlock->name, myself->name);
-	obj* oldBlock = O();
+	obj* oldBlock = CTR_CREATE_OBJECT();
 	HASH_FIND_STR(myself->methods, methodBlock->name, oldBlock);
 	if (!oldBlock) printf("Cannot override: %s no such method.", oldBlock->name);
 	char* str = (char*) calloc(sizeof(char),255);
@@ -409,7 +410,7 @@ obj* ctr_object_blueprint(obj* myself, args* argumentList) {
 }
 
 obj* ctr_build_string(char* stringValue) {
-	obj* stringObject = O();
+	obj* stringObject = CTR_CREATE_OBJECT();
 	stringObject->type = OTSTRING;
 	stringObject->value = calloc(sizeof(char), strlen(stringValue));
 	strcpy(stringObject->value, stringValue);
@@ -431,139 +432,36 @@ obj* ctr_nil_isnil(obj* myself, args* argumentList) {
 }
 
 void ctr_initialize_world() {
-	obj* Pencil = NULL;
-	obj* PencilWrite = NULL;
-	World = (obj*) malloc(sizeof(obj));
+	
+	CTR_CREATE_OBJECT_TYPE(World, "World", "[world]", OTOBJECT);
 	contexts[0] = World;
-	Pencil = (obj*) malloc(sizeof(obj));
-	PencilWrite = (obj*) malloc(sizeof(obj));
-	World->name = "World";
-	Pencil->name = "Pencil";
-	PencilWrite->name = "write:";
-	PencilWrite->type = OTNATFUNC;
-	PencilWrite->value = (void*) &ctr_pencil_write;
-	HASH_ADD_KEYPTR(hh, World->properties, Pencil->name, strlen(Pencil->name), Pencil);
-	HASH_ADD_KEYPTR(hh, Pencil->methods, PencilWrite->name, strlen(PencilWrite->name), PencilWrite);
 	
-	Object = O();
-	obj* ObjectMake = O();
-	obj* ObjectMethodDoes = O();
-	Object->name = "Object";
-	Object->type = OTOBJECT;
-	Object->value = "[object]";
-	ObjectMake->name = "new";
-	ObjectMake->type = OTNATFUNC;
-	ObjectMake->value = (void*) &ctr_object_make;
-	HASH_ADD_KEYPTR(hh, World->properties, Object->name, strlen(Object->name), Object);
-	HASH_ADD_KEYPTR(hh, Object->methods, ObjectMake->name, strlen(ObjectMake->name), ObjectMake);
+	CTR_CREATE_OBJECT_TYPE(Pencil, "Pencil", "[pencil]", OTOBJECT)
+	CTR_CREATE_FUNC(PencilWrite, &ctr_pencil_write, "write:", Pencil);
 	
-	ObjectMethodDoes->name = "method:does:";
-	ObjectMethodDoes->type = OTNATFUNC;
-	ObjectMethodDoes->value = (void*) &ctr_object_method_does;
-	HASH_ADD_KEYPTR(hh, Object->methods, ObjectMethodDoes->name, strlen(ObjectMethodDoes->name), ObjectMethodDoes);
+	CTR_CREATE_OBJECT_TYPE(Object, "Object", "[object]", OTOBJECT);
+	CTR_CREATE_FUNC(ObjectMake, &ctr_object_make, "new", Object);
+	CTR_CREATE_FUNC(ObjectMethodDoes, &ctr_object_method_does, "method:does:", Object);
+	CTR_CREATE_FUNC(ObjectOverrideDoes, &ctr_object_override_does, "override:does:", Object);
+	CTR_CREATE_FUNC(ObjectBlueprint, &ctr_object_blueprint, "blueprint:", Object);
 	
-	obj* ObjectOverrideDoes = O();
-	ObjectOverrideDoes->name = "override:does:";
-	ObjectOverrideDoes->type = OTNATFUNC;
-	ObjectOverrideDoes->value = (void*) &ctr_object_override_does;
-	HASH_ADD_KEYPTR(hh, Object->methods, ObjectOverrideDoes->name, strlen(ObjectOverrideDoes->name), ObjectOverrideDoes);
+	CTR_CREATE_OBJECT_TYPE(Number, "Number", "0", OTNUMBER);
+	CTR_CREATE_FUNC(numberTimesObject, &ctr_number_times, "times:", Number);
+	CTR_CREATE_FUNC(numberAdd, &ctr_number_add, "+", Number);
+	CTR_CREATE_FUNC(numberMin, &ctr_number_minus, "-", Number);
+	CTR_CREATE_FUNC(numberHiThan, &ctr_number_higherThan, ">", Number);
+	CTR_CREATE_FUNC(numberHiEqThan, &ctr_number_higherEqThan, ">=", Number);
+	CTR_CREATE_FUNC(numberLoThan, &ctr_number_lowerThan, "<", Number);
+	CTR_CREATE_FUNC(numberLoEqThan, &ctr_number_lowerEqThan, "<=", Number);
+	CTR_CREATE_FUNC(numberEq, &ctr_number_eq, "==", Number);
+	CTR_CREATE_FUNC(numberFactorial, &ctr_number_factorial, "factorial", Number);
 	
-	obj* ObjectBlueprint = O();
-	ObjectBlueprint->name = "blueprint:";
-	ObjectBlueprint->type = OTNATFUNC;
-	ObjectBlueprint->value = (void*) &ctr_object_blueprint;
-	HASH_ADD_KEYPTR(hh, Object->methods, ObjectBlueprint->name, strlen(ObjectBlueprint->name), ObjectBlueprint);
+	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", "False", OTBOOL);
+	CTR_CREATE_FUNC(ifTrue, &ctr_bool_iftrue, "ifTrue:", BoolX);
+	CTR_CREATE_FUNC(ifFalse, &ctr_bool_ifFalse, "ifFalse:", BoolX);
 	
-	obj* numberTimesObject = O();
-	numberTimesObject->name = "times:";
-	numberTimesObject->type = OTNATFUNC;
-	numberTimesObject->value = (void*) &ctr_number_times;
-	Number = O();
-	Number->name = "Number";
-	Number->value = "0";
-	Number->type = OTNUMBER;
-	HASH_ADD_KEYPTR(hh, World->properties, Number->name, strlen(Number->name), Number);
-	HASH_ADD_KEYPTR(hh, Number->methods, numberTimesObject->name, strlen(numberTimesObject->name), numberTimesObject);
-	
-	obj* numberAdd = O();
-	numberAdd->name = "+";
-	numberAdd->type = OTNATFUNC;
-	numberAdd->value = (void*) &ctr_number_add;
-	HASH_ADD_KEYPTR(hh, Number->methods, numberAdd->name, strlen(numberAdd->name), numberAdd);
-	
-	obj* numberMin = O();
-	numberMin->name = "-";
-	numberMin->type = OTNATFUNC;
-	numberMin->value = (void*) &ctr_number_minus;
-	HASH_ADD_KEYPTR(hh, Number->methods, numberMin->name, strlen(numberMin->name), numberMin);
-	
-	obj* numberHiThan = O();
-	numberHiThan->name = ">";
-	numberHiThan->type = OTNATFUNC;
-	numberHiThan->value = (void*) &ctr_number_higherThan;
-	HASH_ADD_KEYPTR(hh, Number->methods, numberHiThan->name, strlen(numberHiThan->name), numberHiThan);
-	
-	obj* numberHiEqThan = O();
-	numberHiEqThan->name = ">=";
-	numberHiEqThan->type = OTNATFUNC;
-	numberHiEqThan->value = (void*) &ctr_number_higherEqThan;
-	HASH_ADD_KEYPTR(hh, Number->methods, numberHiEqThan->name, strlen(numberHiEqThan->name), numberHiEqThan);
-	
-	obj* numberLoThan = O();
-	numberLoThan->name = "<";
-	numberLoThan->type = OTNATFUNC;
-	numberLoThan->value = (void*) &ctr_number_lowerThan;
-	HASH_ADD_KEYPTR(hh, Number->methods, numberLoThan->name, strlen(numberLoThan->name), numberLoThan);
-	
-	obj* numberLoEqThan = O();
-	numberLoEqThan->name = "<=";
-	numberLoEqThan->type = OTNATFUNC;
-	numberLoEqThan->value = (void*) &ctr_number_lowerEqThan;
-	HASH_ADD_KEYPTR(hh, Number->methods, numberLoEqThan->name, strlen(numberLoEqThan->name), numberLoEqThan);
-	
-	obj* numberEq = O();
-	numberEq->name = "==";
-	numberEq->type = OTNATFUNC;
-	numberEq->value = (void*) &ctr_number_eq;
-	HASH_ADD_KEYPTR(hh, Number->methods, numberEq->name, strlen(numberEq->name), numberEq);
-	
-	obj* numberFactorial = O();
-	numberFactorial->name = "factorial";
-	numberFactorial->type = OTNATFUNC;
-	numberFactorial->value = (void*) &ctr_number_factorial;
-	HASH_ADD_KEYPTR(hh, Number->methods, numberFactorial->name, strlen(numberFactorial->name), numberFactorial);
-	
-	BoolX = O();
-	BoolX->name = "Boolean";
-	BoolX->type = OTBOOL;
-	BoolX->value = "Boolean";
-	HASH_ADD_KEYPTR(hh, World->properties, BoolX->name, strlen(BoolX->name), BoolX);
-		
-	obj* ifTrue = O();
-	ifTrue->name = "ifTrue:";
-	ifTrue->type = OTNATFUNC;
-	ifTrue->value = (void*) &ctr_bool_iftrue;
-	HASH_ADD_KEYPTR(hh, BoolX->methods, ifTrue->name, strlen(ifTrue->name), ifTrue);
-	
-	obj* ifFalse = O();
-	ifFalse->name = "ifFalse:";
-	ifFalse->type = OTNATFUNC;
-	ifFalse->value = (void*) &ctr_bool_ifFalse;
-	HASH_ADD_KEYPTR(hh, BoolX->methods, ifFalse->name, strlen(ifFalse->name), ifFalse);
-	
-	Nil = O();
-	Nil->name = "Nil";
-	Nil->type = OTNIL;
-	Nil->value = "Nil";
-	HASH_ADD_KEYPTR(hh, World->properties, Nil->name, strlen(Nil->name), Nil);
-		
-	obj* isNil = O();
-	isNil->name = "isNil";
-	isNil->type = OTNATFUNC;
-	isNil->value = (void*) &ctr_nil_isnil;
-	HASH_ADD_KEYPTR(hh, Nil->methods, isNil->name, strlen(isNil->name), isNil);
-	
-	
+	CTR_CREATE_OBJECT_TYPE(Nil, "Nil", "Nil", OTNIL);
+	CTR_CREATE_FUNC(isNil, &ctr_nil_isnil, "isNil", Nil);
 }
 
 obj* ctr_send_message(obj* receiverObject, char* message, args* argumentList) {
@@ -602,7 +500,7 @@ obj* ctr_send_message(obj* receiverObject, char* message, args* argumentList) {
 }
 
 obj* ctr_assign_value(char* name, obj* o) {
-	obj* object = O();
+	obj* object = CTR_CREATE_OBJECT();
 	object = o;
 	object->name = name;
 	ctr_set(object);

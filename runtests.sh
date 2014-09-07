@@ -1,4 +1,5 @@
 #!/bin/bash
+./mk.sh
 j=1
 for i in $(find tests -name '*.ctr'); do
 	fitem=$i

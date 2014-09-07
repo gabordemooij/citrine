@@ -26,3 +26,6 @@ int 	clex_tok();
 char* 	clex_tok_value();
 void 	clex_putback();
 char*	clex_readstr();
+
+#define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == '=' || X == ';' || X == '.' || X == '|' || X == ':' || X == ' ')
+#define CTR_IS_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=';' && X!='=' && X!='^'  && X!= ':' && X!= '\''

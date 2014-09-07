@@ -8,10 +8,6 @@
 
 #include "lexer.h"
 
-//i.e. what can end a ref?
-#define IS_DELIM(X) (X == '(' || X == ')' || X == '=' || X == ';' || X == '.' || X == '|' || X == ':' || X == ' ')
-#define IS_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=';' && X!='=' && X!='^'  && X!= ':' && X!= '\''
-
 typedef struct {
 	int tid;
 	char* value;
@@ -101,45 +97,45 @@ int clex_tok() {
 		return NUMBER;
 	}
 	if (strncmp(code, "True", 4)==0){
-		if (IS_DELIM(*(code + 4))) { 
+		if (CTR_IS_DELIM(*(code + 4))) { 
 			code += 4;
 			return BOOLEANYES;
 		}
 	}
 	if (strncmp(code, "False", 5)==0){
-		if (IS_DELIM(*(code + 5))) { 
+		if (CTR_IS_DELIM(*(code + 5))) { 
 			code += 5;
 			return BOOLEANNO;
 		}
 	}
 	if (strncmp(code, "Nil", 3)==0){
-		if (IS_DELIM(*(code + 3))) { 
+		if (CTR_IS_DELIM(*(code + 3))) { 
 			code += 3;
 			return NIL;
 		}
 	}
 	if (strncmp(code, ">=", 2)==0){
-		if (IS_TOK(*(code + 2))) { 
+		if (CTR_IS_TOK(*(code + 2))) { 
 			code += 2;
 			strcat(buffer, ">=\0");
 			return REF;
 		}
 	}
 	if (strncmp(code, "<=", 2)==0){
-		if (IS_TOK(*(code + 2))) { 
+		if (CTR_IS_TOK(*(code + 2))) { 
 			code += 2;
 			strcat(buffer, "<=\0");
 			return REF;
 		}
 	}
 	if (strncmp(code, "==", 2)==0){
-		if (IS_TOK(*(code + 2))) { 
+		if (CTR_IS_TOK(*(code + 2))) { 
 			code += 2;
 			strcat(buffer, "==\0");
 			return REF;
 		}
 	}
-	while((anticrash++) < 100 && !isspace(c) && IS_TOK(c) && code!=eofcode) {
+	while((anticrash++) < 100 && !isspace(c) && CTR_IS_TOK(c) && code!=eofcode) {
 		buffer[i] = c;
 		i++;
 		if (i > bflmt) {
