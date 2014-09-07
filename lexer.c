@@ -10,6 +10,7 @@
 
 //i.e. what can end a ref?
 #define IS_DELIM(X) (X == '(' || X == ')' || X == '=' || X == ';' || X == '.' || X == '|' || X == ':' || X == ' ')
+#define IS_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=';' && X!='=' && X!='^'  && X!= ':' && X!= '\''
 
 typedef struct {
 	int tid;
@@ -54,7 +55,6 @@ int clex_tok() {
 		code ++;
 		c = *code;
 	}
-
 	if (code == eofcode) return FIN;
 	if (c == '(') { code++; return PAROPEN; }
 	if (c == ')') { code++; return PARCLOSE; }
@@ -64,7 +64,10 @@ int clex_tok() {
 	if (c == '.') { code++; return DOT; }
 	if (c == ',') { code++; return CHAIN; }
 	if (c == ':') { code++; return COLON; }
-	if (c == '=') { code++; return ASSIGNMENT; }
+	if (c == '=' && (code+1)<eofcode && (*(code+1)!='=')) { 
+		code++;
+		return ASSIGNMENT; 
+	}
 	if (c == '^') { code++; return RET; }
 	if (c == '\'') { code++; return QUOTE; }
 	if ((c == '-' && (code+1)<eofcode && isdigit(*(code+1))) || isdigit(c)) {
@@ -78,7 +81,7 @@ int clex_tok() {
 			code++;
 			c = *code;
 		}
-		if (c=='.' && (code+1 < eofcode) && !isdigit(c+1)) {
+		if (c=='.' && (code+1 < eofcode) && !isdigit(*(code+1))) {
 			buffer[i] = '\0';
 			return NUMBER;
 		}
@@ -103,24 +106,40 @@ int clex_tok() {
 			return BOOLEANYES;
 		}
 	}
-	
 	if (strncmp(code, "False", 5)==0){
 		if (IS_DELIM(*(code + 5))) { 
 			code += 5;
 			return BOOLEANNO;
 		}
 	}
-		
 	if (strncmp(code, "Nil", 3)==0){
 		if (IS_DELIM(*(code + 3))) { 
 			code += 3;
 			return NIL;
 		}
 	}
-
-	while((anticrash++) < 100 && !isspace(c) && c!='#' && c!='(' && c!=')' && 
-	c!='{' && c!='}' && c!='|' && c!='\\' && c!='.' &&
-	c!=';' && c!='=' && c!='^'  && c!= ':' && c!= '\'' && code!=eofcode) {
+	if (strncmp(code, ">=", 2)==0){
+		if (IS_TOK(*(code + 2))) { 
+			code += 2;
+			strcat(buffer, ">=\0");
+			return REF;
+		}
+	}
+	if (strncmp(code, "<=", 2)==0){
+		if (IS_TOK(*(code + 2))) { 
+			code += 2;
+			strcat(buffer, "<=\0");
+			return REF;
+		}
+	}
+	if (strncmp(code, "==", 2)==0){
+		if (IS_TOK(*(code + 2))) { 
+			code += 2;
+			strcat(buffer, "==\0");
+			return REF;
+		}
+	}
+	while((anticrash++) < 100 && !isspace(c) && IS_TOK(c) && code!=eofcode) {
 		buffer[i] = c;
 		i++;
 		if (i > bflmt) {

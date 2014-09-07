@@ -15,9 +15,32 @@ tnode* dparse_message() {
 	int t;
 	char* msg = (char*) calloc(sizeof(char*), 255);
 	tnode* m = N();
-	char* v = clex_tok_value();
-	strcat(msg,v);
-	if (*v == '+' || *v == '-' || *v == '*' || *v =='/' || *v == '%' || *v == '>' || *v == '<') {
+	strcat(msg, clex_tok_value());
+	
+	
+	if (
+		
+		(
+			strlen(msg)==2 && (
+				strcmp("==",msg)==0 ||
+				strcmp(">=",msg)==0 ||
+				strcmp("<=",msg)==0
+			)
+		)
+		
+		||	
+		
+		(
+			strlen(msg)==1 && (
+				strcmp(">",msg)==0  ||
+				strcmp("<",msg)==0  ||
+				strcmp("*",msg)==0  ||
+				strcmp("/",msg)==0  ||
+				strcmp("+",msg)==0  ||
+				strcmp("-",msg)==0
+			)
+		)
+	) {
 		m->type = BINMESSAGE;
 		m->value = msg;
 		tlistitem* li = LI();

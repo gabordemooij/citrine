@@ -1,0 +1,8 @@
+(3>=3) ifTrue: {\ Pencil write: 'Yep'. }.
+(3<=3) ifTrue: {\ Pencil write: 'Yep'. }.
+(3>=  4) ifTrue: {\ Pencil write: 'Nope'. }.
+(4 <=   8) ifTrue: {\ Pencil write: 'Yep'. }.
+(3>=5 ) ifTrue: {\ Pencil write: 'No'. }.
+(  0 <= 3 ) ifTrue: {\ Pencil write: 'Yep'. }.
+(2==2) ifTrue: {\ Pencil write: 'Yep'. }.
+(2.9==2.9) ifTrue: {\ Pencil write: 'Yep'. }.

@@ -224,6 +224,15 @@ obj* ctr_number_higherThan(obj* myself, args* argumentList) {
 	return truth;
 }
 
+obj* ctr_number_higherEqThan(obj* myself, args* argumentList) {
+	obj* otherNum = argumentList->object;
+	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
+	float a = atof(myself->value);
+	float b = atof(otherNum->value);
+	obj* truth = ctr_build_bool((a >= b));
+	return truth;
+}
+
 obj* ctr_number_lowerThan(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
@@ -233,6 +242,23 @@ obj* ctr_number_lowerThan(obj* myself, args* argumentList) {
 	return truth;
 }
 
+obj* ctr_number_lowerEqThan(obj* myself, args* argumentList) {
+	obj* otherNum = argumentList->object;
+	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
+	float a = atof(myself->value);
+	float b = atof(otherNum->value);
+	obj* truth = ctr_build_bool((a <= b));
+	return truth;
+}
+
+obj* ctr_number_eq(obj* myself, args* argumentList) {
+	obj* otherNum = argumentList->object;
+	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
+	float a = atof(myself->value);
+	float b = atof(otherNum->value);
+	obj* truth = ctr_build_bool((a == b));
+	return truth;
+}
 
 obj* ctr_number_add(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
@@ -477,11 +503,29 @@ void ctr_initialize_world() {
 	numberHiThan->value = (void*) &ctr_number_higherThan;
 	HASH_ADD_KEYPTR(hh, Number->methods, numberHiThan->name, strlen(numberHiThan->name), numberHiThan);
 	
+	obj* numberHiEqThan = O();
+	numberHiEqThan->name = ">=";
+	numberHiEqThan->type = OTNATFUNC;
+	numberHiEqThan->value = (void*) &ctr_number_higherEqThan;
+	HASH_ADD_KEYPTR(hh, Number->methods, numberHiEqThan->name, strlen(numberHiEqThan->name), numberHiEqThan);
+	
 	obj* numberLoThan = O();
 	numberLoThan->name = "<";
 	numberLoThan->type = OTNATFUNC;
 	numberLoThan->value = (void*) &ctr_number_lowerThan;
 	HASH_ADD_KEYPTR(hh, Number->methods, numberLoThan->name, strlen(numberLoThan->name), numberLoThan);
+	
+	obj* numberLoEqThan = O();
+	numberLoEqThan->name = "<=";
+	numberLoEqThan->type = OTNATFUNC;
+	numberLoEqThan->value = (void*) &ctr_number_lowerEqThan;
+	HASH_ADD_KEYPTR(hh, Number->methods, numberLoEqThan->name, strlen(numberLoEqThan->name), numberLoEqThan);
+	
+	obj* numberEq = O();
+	numberEq->name = "==";
+	numberEq->type = OTNATFUNC;
+	numberEq->value = (void*) &ctr_number_eq;
+	HASH_ADD_KEYPTR(hh, Number->methods, numberEq->name, strlen(numberEq->name), numberEq);
 	
 	obj* numberFactorial = O();
 	numberFactorial->name = "factorial";
