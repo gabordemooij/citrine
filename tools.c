@@ -6,20 +6,7 @@
 #include <math.h>
 
 #include "uthash.h"
-#include "object.h"
-#include "parser.h"
-#include "walker.h"
-
-#define OTNIL 80
-#define OTBOOL 81
-#define OTNUMBER 82
-#define OTSTRING 83
-#define OTBLOCK 84
-#define OTOBJECT 85
-#define OTNATFUNC 86
-#define OTCUST 87
-#define OTMISC 88
-#define OTEX 89
+#include "citrine.h"
 
 obj* World = NULL;
 obj* contexts[100];

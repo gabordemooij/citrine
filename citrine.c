@@ -6,12 +6,8 @@
 #include <stdarg.h>
 #include <math.h>
 
-#include "parser.h"
 #include "uthash.h"
-#include "object.h"
-#include "tools.h"
-#include "walker.h"
-
+#include "citrine.h"
 
 int debug = 0;
 

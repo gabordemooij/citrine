@@ -5,8 +5,8 @@
 #include <stdarg.h>
 #include <math.h>
 
-#include "lexer.h"
-#include "parser.h"
+#include "uthash.h"
+#include "citrine.h"
 
 void tree(tnode* node, int indent);
 

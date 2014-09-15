@@ -6,7 +6,9 @@
 #include <stdarg.h>
 #include <math.h>
 
-#include "lexer.h"
+#include "uthash.h"
+#include "citrine.h"
+
 
 typedef struct {
 	int tid;

@@ -6,10 +6,7 @@
 #include <math.h>
 
 #include "uthash.h"
-#include "object.h"
-
-#include "parser.h"
-#include "tools.h"
+#include "citrine.h"
 
 int debug;
 
