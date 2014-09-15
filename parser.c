@@ -44,7 +44,7 @@ tnode* dparse_message() {
 		m->type = BINMESSAGE;
 		m->value = msg;
 		tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
-		li->node = dparse_expr(0);
+		li->node = dparse_expr(2);
 		m->nodes = li;
 		return m;
 	}
@@ -124,11 +124,52 @@ tlistitem* dparse_messages() {
 	return fli;
 }
 
+
+int isUnaryMessage() {
+	int t = clex_tok();
+	if (t != REF) {
+		clex_putback();
+		return 0;
+	}
+	char* msg = clex_tok_value();
+	if (
+		(
+			strlen(msg)==2 && (
+				strcmp("==",msg)==0 ||
+				strcmp(">=",msg)==0 ||
+				strcmp("<=",msg)==0
+			)
+		)
+		||
+		(
+			strlen(msg)==1 && (
+				strcmp(">",msg)==0  ||
+				strcmp("<",msg)==0  ||
+				strcmp("*",msg)==0  ||
+				strcmp("/",msg)==0  ||
+				strcmp("+",msg)==0  ||
+				strcmp("-",msg)==0
+			)
+		)
+	) {
+			clex_putback();
+			return 0;
+	}
+	int t2 = clex_tok();
+	if (t2 == COLON) {
+		clex_putback();
+		clex_putback();
+		return 0;
+	}
+	clex_putback();
+	clex_putback();
+	return 1;
+}
+
 tnode* dparse_expr(int argumentMode) {
 	tnode* e = CTR_PARSER_CREATE_NODE();
 	tnode* r = CTR_PARSER_CREATE_NODE();
 	int t = clex_tok();
-	
 	if (t == PAROPEN) {
 		r->type = NESTED;
 		tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
@@ -232,7 +273,7 @@ tnode* dparse_expr(int argumentMode) {
 	if (t == NIL) {
 		r->type = LTRNIL;
 		r->value = "Nil";
-		if (argumentMode == 2) {
+		if (argumentMode == 2 && !isUnaryMessage()) {
 			return r;
 		}
 		t = clex_tok();
@@ -261,7 +302,7 @@ tnode* dparse_expr(int argumentMode) {
 			str = "False";
 		}
 		r->value = str;
-		if (argumentMode == 2) {
+		if (argumentMode == 2 && !isUnaryMessage()) {
 			return r;
 		}
 		t = clex_tok();
@@ -284,9 +325,10 @@ tnode* dparse_expr(int argumentMode) {
 	if (t == NUMBER) {
 		r->type = LTRNUM;
 		char* tmp = clex_tok_value();
+
 		r->value = calloc(sizeof(char), strlen(tmp));
 		strcpy(r->value, tmp);
-		if (argumentMode == 2) {
+		if (argumentMode == 2 && !isUnaryMessage()) {
 			return r;
 		}
 		t = clex_tok();
@@ -294,6 +336,7 @@ tnode* dparse_expr(int argumentMode) {
 			clex_putback();//put back the dot, it's for the program
 			return r;
 		}
+
 		if (t == REF) {
 			e->type = EXPRMESSAGE;
 			clex_putback();
@@ -327,7 +370,7 @@ tnode* dparse_expr(int argumentMode) {
 		r->value = malloc(strlen(tmp));
 		strcpy(r->value, tmp);
 		t = clex_tok();
-		if (t == DOT || t == PARCLOSE || argumentMode) {
+		if (t == DOT || t == PARCLOSE || (argumentMode && !isUnaryMessage())) {
 			r->type = REFERENCE;
 			clex_putback();
 			return r;

@@ -20,6 +20,7 @@ char* code;
 char* codePoint;
 char* eofcode;
 char* oldptr;
+char* olderptr;
 int flag_operator = 0;
 
 void clex_load(char* prg) {
@@ -35,9 +36,11 @@ char* clex_tok_value() {
 
 void clex_putback() {
 	code = oldptr;
+	oldptr = olderptr;
 }
 
 int clex_tok() {
+	olderptr = oldptr;
 	oldptr = code;
 	char c;
 	int anticrash = 0;
@@ -109,33 +112,52 @@ int clex_tok() {
 		}
 	}
 	if (strncmp(code, "Nil", 3)==0){
-		if (CTR_IS_DELIM(*(code + 3))) { 
+		if (CTR_IS_DELIM(*(code + 3))) {
 			code += 3;
 			return NIL;
 		}
 	}
 	if (strncmp(code, ">=", 2)==0){
-		if (CTR_IS_TOK(*(code + 2))) { 
-			code += 2;
-			strcat(buffer, ">=\0");
-			return REF;
-		}
+		code += 2;
+		strcat(buffer, ">=\0");
+		return REF;
 	}
 	if (strncmp(code, "<=", 2)==0){
-		if (CTR_IS_TOK(*(code + 2))) { 
-			code += 2;
-			strcat(buffer, "<=\0");
-			return REF;
-		}
+		code += 2;
+		strcat(buffer, "<=\0");
+		return REF;
 	}
 	if (strncmp(code, "==", 2)==0){
-		if (CTR_IS_TOK(*(code + 2))) { 
-			code += 2;
-			strcat(buffer, "==\0");
-			return REF;
-		}
+		code += 2;
+		strcat(buffer, "==\0");
+		return REF;
 	}
-	while((anticrash++) < 100 && !isspace(c) && CTR_IS_TOK(c) && code!=eofcode) {
+
+	if (strncmp(code, "*", 1)==0){
+		code += 1;
+		strcat(buffer, "*\0");
+		return REF;
+	}
+
+	if (strncmp(code, "/", 1)==0){
+		code += 1;
+		strcat(buffer, "/\0");
+		return REF;
+	}
+
+	if (strncmp(code, "+", 1)==0){
+		code += 1;
+		strcat(buffer, "+\0");
+		return REF;
+	}
+
+	if (strncmp(code, "-", 1)==0){
+		code += 1;
+		strcat(buffer, "-\0");
+		return REF;
+	}
+
+	while((anticrash++) < 100 && !isspace(c) && CTR_IS_NO_TOK(c) && code!=eofcode) {
 		buffer[i] = c;
 		i++;
 		if (i > bflmt) {

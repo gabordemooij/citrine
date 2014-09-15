@@ -1,2 +1,2 @@
 make clean;
-./mk.sh ; ./ctr tests/test0022.ctr
+./mk.sh ; ./ctr tests/test0023.ctr --debug

@@ -283,6 +283,35 @@ obj* ctr_number_minus(obj* myself, args* argumentList) {
 	return myself;
 }
 
+obj* ctr_number_multiply(obj* myself, args* argumentList) {
+	obj* otherNum = argumentList->object;
+	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
+	float a = atof(myself->value);
+	float b = atof(otherNum->value);
+	char* str = calloc(sizeof(char), 40);
+	sprintf(str, "%f", (a*b));
+	myself->value = str;
+	return myself;
+}
+
+
+obj* ctr_number_divide(obj* myself, args* argumentList) {
+	obj* otherNum = argumentList->object;
+	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
+	float a = atof(myself->value);
+	float b = atof(otherNum->value);
+	if (b == 0) {
+		printf("Division by zero.");
+		exit(1);
+	}
+	char* str = calloc(sizeof(char), 40);
+	sprintf(str, "%f", (a/b));
+	myself->value = str;
+	return myself;
+}
+
+
+
 obj* ctr_number_factorial(obj* myself, args* argumentList) {
 	float t = floor(atof(myself->value));
 	int i;
@@ -449,6 +478,8 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(numberTimesObject, &ctr_number_times, "times:", Number);
 	CTR_CREATE_FUNC(numberAdd, &ctr_number_add, "+", Number);
 	CTR_CREATE_FUNC(numberMin, &ctr_number_minus, "-", Number);
+	CTR_CREATE_FUNC(numberMul, &ctr_number_multiply, "*", Number);
+	CTR_CREATE_FUNC(numberDiv, &ctr_number_divide, "/", Number);
 	CTR_CREATE_FUNC(numberHiThan, &ctr_number_higherThan, ">", Number);
 	CTR_CREATE_FUNC(numberHiEqThan, &ctr_number_higherEqThan, ">=", Number);
 	CTR_CREATE_FUNC(numberLoThan, &ctr_number_lowerThan, "<", Number);
