@@ -510,6 +510,19 @@ obj* ctr_string_printbytes(obj* myself, args* argumentList) {
 	return myself;
 }
 
+obj* ctr_string_concat(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("Missing argument 1\n"); exit(1);
+	}
+	long n1 = strlen(myself->value);
+	long n2 = strlen(argumentList->object->value);
+	char* dest = calloc(sizeof(char), n1 + n2);
+	strncpy(dest, myself->value, n1);
+	strncat(dest, argumentList->object->value, n2);
+	obj* newString = ctr_build_string(dest);
+	return newString;	
+}
+
 obj* ctr_string_fromto(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
@@ -577,6 +590,8 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(stringBytes, &ctr_string_bytes, "bytes", TextString);
 	CTR_CREATE_FUNC(stringLength, &ctr_string_length, "length", TextString);
 	CTR_CREATE_FUNC(stringFromTo, &ctr_string_fromto, "from:to:", TextString);
+	CTR_CREATE_FUNC(stringConcat, &ctr_string_concat, "+", TextString);
+	
 	
 	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", "False", OTBOOL);
 	CTR_CREATE_FUNC(ifTrue, &ctr_bool_iftrue, "ifTrue:", BoolX);
