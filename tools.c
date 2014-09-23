@@ -20,6 +20,26 @@ obj* Pencil;
 obj* Nil;
 int debug;
 
+//measures the size of character
+int utf8size(char c) {
+	if ((c & UTF8_BYTE3) == UTF8_BYTE3) return 4;
+	if ((c & UTF8_BYTE2) == UTF8_BYTE2) return 3;
+	if ((c & UTF8_BYTE1) == UTF8_BYTE1) return 2;
+	return 1;
+}
+//measures the length of an utf8 string in utf8 chars
+long getutf8len(char* strval, long max) {
+	long i;
+	long j = 0;
+	int s = 0;
+	if (max == -1) max = strlen(strval);
+	for(i = 0; i < max; i++) {
+		s = utf8size(strval[i]);
+		j += (s - 1);
+	}
+	return (i-j);
+}
+
 char* readf(char* file_name) {
    char* prg;
    char ch;
@@ -452,8 +472,15 @@ obj* ctr_build_string(char* stringValue) {
 
 obj* ctr_string_bytes(obj* myself, args* argumentList) {
 	char* str = calloc(sizeof(char), 100);
-	int l = strlen(myself->value);
-	sprintf(str, "%d", l);
+	long l = strlen(myself->value);
+	sprintf(str, "%lu", l);
+	return ctr_build_number(str);
+}
+
+obj* ctr_string_length(obj* myself, args* argumentList) {
+	long n = getutf8len(myself->value, -1);
+	char* str = calloc(sizeof(char), 100);
+	sprintf(str, "%lu", n);
 	return ctr_build_number(str);
 }
 
@@ -501,6 +528,7 @@ void ctr_initialize_world() {
 	
 	CTR_CREATE_OBJECT_TYPE(TextString, "String", "[String]", OTSTRING);
 	CTR_CREATE_FUNC(stringBytes, &ctr_string_bytes, "bytes", TextString);
+	CTR_CREATE_FUNC(stringLength, &ctr_string_length, "length", TextString);
 	
 	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", "False", OTBOOL);
 	CTR_CREATE_FUNC(ifTrue, &ctr_bool_iftrue, "ifTrue:", BoolX);
