@@ -8,50 +8,47 @@
 #include "uthash.h"
 #include "citrine.h"
 
-void tree(tnode* node, int indent);
 
-tnode* dparse_expr();
-tnode* dparse_message() {
-	int t;
-	char* msg = (char*) calloc(sizeof(char*), 255);
+tnode* cparse_expr(int mode);
+tnode* cparse_ret();
+
+//precedence mode 0: no argument (allows processing of unary message, binary message and keyword message)
+//precedence mode 1: as argument of keyword message (allows processing of unary message and binary message)
+//precedence mode 2: as argument of binary message (only allows processing of unary message)
+tnode* cparse_message(int mode) {
 	tnode* m = CTR_PARSER_CREATE_NODE();
-	strcat(msg, clex_tok_value());
-	
-	
-	if (
-		
-		(
-			strlen(msg)==2 && (
-				strcmp("==",msg)==0 ||
-				strcmp(">=",msg)==0 ||
-				strcmp("<=",msg)==0
-			)
-		)
-		
-		||	
-		
-		(
-			strlen(msg)==1 && (
-				strcmp(">",msg)==0  ||
-				strcmp("<",msg)==0  ||
-				strcmp("*",msg)==0  ||
-				strcmp("/",msg)==0  ||
-				strcmp("+",msg)==0  ||
-				strcmp("-",msg)==0
-			)
-		)
-	) {
+	m->type = -1;
+	int t = clex_tok();
+	char* s = clex_tok_value();
+	char* msg;
+	msg = calloc(sizeof(char), 255);
+	strcat(msg, s);
+	int isBin = (strlen(msg)==2 && (strcmp("==",msg)==0 || strcmp(">=",msg)==0 || strcmp("<=",msg)==0));
+	isBin = (isBin || (strlen(msg)==1 && (strcmp(">",msg)==0 || strcmp("<",msg)==0 || strcmp("*",msg)==0 || strcmp("/",msg)==0 || strcmp("+",msg)==0 || strcmp("-",msg)==0)));
+	if (mode == 2 && isBin) {
+		clex_putback();
+		return m;
+	}
+	if (isBin) {
+		if (debug) printf("Parsing binary message: '%s' (mode: %d)\n", msg, mode);
 		m->type = BINMESSAGE;
 		m->value = msg;
 		tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
-		li->node = dparse_expr(2);
+		if (debug) printf("Binary argument start..\n");
+		li->node = cparse_expr(2);
+		if (debug) printf("Binary argument end..\n");
 		m->nodes = li;
 		return m;
 	}
-	int lookAhead = clex_tok();
-	clex_putback();
+	int lookAhead = clex_tok(); clex_putback();
 	if (lookAhead == COLON) {
+		if (mode > 0) {
+			clex_putback();
+			if (debug) printf("> End of argument, next token: %s .\n", msg);
+			return m;
+		 }
 		strcat(msg,":");
+		if (debug) printf("Message so far: %s\n", msg);
 		m->type = KWMESSAGE;
 		t = clex_tok();
 		int antiCrash = 0;
@@ -60,7 +57,9 @@ tnode* dparse_message() {
 		tlistitem* curlistitem;
 		while((antiCrash++)<100) {
 			li = CTR_PARSER_CREATE_LISTITEM();
-			li->node = dparse_expr(1);
+			if (debug) printf("Next arg, message so far: %s \n", msg);
+			li->node = cparse_expr(1);
+			if (debug) printf("Argument of keyword message has been parsed.\n");
 			if (first) {
 				m->nodes = li;
 				curlistitem = m->nodes;
@@ -70,10 +69,11 @@ tnode* dparse_message() {
 				curlistitem = li;
 			}
 			t = clex_tok();
-			
+			if (debug) printf("Next token after argument = %d \n", t);
 			if (t == DOT) break;
 			if (t == FIN) break;
 			if (t == CHAIN) break;
+			if (t == PARCLOSE) break;
 			if (t == REF) {
 				//@todo memory management... overflow possible!
 				strcat(msg, clex_tok_value());
@@ -85,19 +85,23 @@ tnode* dparse_message() {
 				}
 			}
 		}
+		if (debug) printf("Putting back.\n");
 		clex_putback(); //not a colon so put back
-		strcat(msg, "\0");
+		if (debug) printf("Parsing keyword message: '%s' (mode: %d) \n", msg, mode);
+		//strcat(msg, "\0");
 		m->value = msg;
 	} else {
 		m->type = UNAMESSAGE;
 		m->value = msg;
+		if (debug) printf("Parsing unary message: '%s' (mode: %d) token = %d \n", msg, mode, lookAhead);
 	}
 	return m;
 }
 
-
-tlistitem* dparse_messages() {
+tlistitem* cparse_messages(tnode* r, int mode) {
+	if (debug) printf("Parsing messages.\n");
 	int t = clex_tok();
+	
 	int antiCrash = 0;
 	tlistitem* pli;
 	tlistitem* li;
@@ -106,10 +110,25 @@ tlistitem* dparse_messages() {
 	while ((antiCrash++<100) && (t == REF || t == CHAIN)) {
 		if (t == CHAIN) {
 			t = clex_tok();
-			if (t != REF) printf("Expected message.\n");
+			if (t != REF) {
+				printf("Expected message.\n");
+				exit(1);
+			}
 		}
 		li = CTR_PARSER_CREATE_LISTITEM();
-		li->node = dparse_message();
+		if (debug) printf("Next message...\n");
+		clex_putback();
+		tnode* node = cparse_message(mode);
+		if (node->type == -1) {
+			if (debug) printf("Ending message sequence.\n");
+			if (first) {
+				if (debug) printf("First so return NULL.\n");
+				return NULL;
+			}
+			clex_tok();
+			break;
+		}
+		li->node = node;
 		if (first) {
 			first = 0;
 			pli = li;
@@ -119,329 +138,296 @@ tlistitem* dparse_messages() {
 			pli = li;
 		}
 		t = clex_tok();
+		if (debug) printf("Next token in message line is: %d \n",t);
 	}
+	if (debug) printf("Putting back token... \n");
 	clex_putback();
 	return fli;
 }
 
-
-int isUnaryMessage() {
+tnode* cparse_popen() {
+	clex_tok();
+	if (debug) printf("Parsing paren open (.\n");
+	tnode* r = CTR_PARSER_CREATE_NODE();
+	r->type = NESTED;
+	tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
+	r->nodes = li;
+	li->node = cparse_expr(0);
 	int t = clex_tok();
-	if (t != REF) {
-		clex_putback();
-		return 0;
+	if (t != PARCLOSE) {
+		printf("Error, expected ). \n");
+		exit(1);
 	}
-	char* msg = clex_tok_value();
-	if (
-		(
-			strlen(msg)==2 && (
-				strcmp("==",msg)==0 ||
-				strcmp(">=",msg)==0 ||
-				strcmp("<=",msg)==0
-			)
-		)
-		||
-		(
-			strlen(msg)==1 && (
-				strcmp(">",msg)==0  ||
-				strcmp("<",msg)==0  ||
-				strcmp("*",msg)==0  ||
-				strcmp("/",msg)==0  ||
-				strcmp("+",msg)==0  ||
-				strcmp("-",msg)==0
-			)
-		)
-	) {
-			clex_putback();
-			return 0;
-	}
-	int t2 = clex_tok();
-	if (t2 == COLON) {
-		clex_putback();
-		clex_putback();
-		return 0;
-	}
-	clex_putback();
-	clex_putback();
-	return 1;
+	return r;
 }
 
-tnode* dparse_expr(int argumentMode) {
-	tnode* e = CTR_PARSER_CREATE_NODE();
+tnode* cparse_block() {
+	if (debug) printf("Parsing code block.\n");
+	clex_tok();
 	tnode* r = CTR_PARSER_CREATE_NODE();
+	r->type = CODEBLOCK;
+	tlistitem* codeBlockPart1 = CTR_PARSER_CREATE_LISTITEM();
+	r->nodes = codeBlockPart1;
+	tlistitem* codeBlockPart2 = CTR_PARSER_CREATE_LISTITEM();
+	r->nodes->next = codeBlockPart2;
+	tnode* paramList = CTR_PARSER_CREATE_NODE();
+	tnode* codeList  = CTR_PARSER_CREATE_NODE();
+	codeBlockPart1->node = paramList;
+	codeBlockPart2->node = codeList;
+	paramList->type = PARAMLIST;
+	codeList->type = INSTRLIST;
 	int t = clex_tok();
-	if (t == PAROPEN) {
-		r->type = NESTED;
-		tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
-		r->nodes = li;
-		li->node = dparse_expr(0);
-		t = clex_tok();
-		if (t != PARCLOSE) {
-			printf("Error, expected ).\n");
-			exit(1);
+	int antiCrash2 = 0;
+	int first = 1;
+	tlistitem* previousListItem;
+	while((antiCrash2++ < 10) && t == REF) {
+		tlistitem* paramListItem = CTR_PARSER_CREATE_LISTITEM();
+		tnode* paramItem = CTR_PARSER_CREATE_NODE();
+		CTR_PARSER_GET_TOKVAL(paramItem);
+		paramListItem->node = paramItem;
+		if (first) {
+			paramList->nodes = paramListItem;
+			previousListItem = paramListItem;
+			first = 0;
+		} else {
+			previousListItem->next = paramListItem;
+			previousListItem = paramListItem;
 		}
 		t = clex_tok();
+	}
+	if (t != BLOCKPIPE) {
+		printf("Error expected blockpipe.");
+		exit(1);
+	}
+	t = clex_tok();
+	int antiCrash = 0;
+	first = 1;
+	tlistitem* previousCodeListItem;
+	while((antiCrash++ < 100) && (first || t == DOT)) {
+		if (first) {
+			if (debug) printf("First, so put back\n");
+			clex_putback();
+		}
+		t = clex_tok();
+		if (t == BLOCKCLOSE) break;
+		clex_putback();
+		tlistitem* codeListItem = CTR_PARSER_CREATE_LISTITEM();
+		tnode* codeNode = CTR_PARSER_CREATE_NODE();
+		if (debug) printf("--------> %d %s \n", t, clex_tok_value());
+		if (t == RET) {
+			codeNode = cparse_ret();
+		} else {
+			codeNode = cparse_expr(0);
+		}
+		if (debug) printf("<-------- \n");
+		
+		codeListItem->node = codeNode;
+		if (first) {
+			codeList->nodes = codeListItem;
+			previousCodeListItem = codeListItem;
+			first = 0;
+		} else {
+			previousCodeListItem->next = codeListItem;
+			previousCodeListItem = codeListItem;
+		}
+		t = clex_tok();
+		if (t != DOT) {
+				printf("Expected . but got: %d.\n", t);
+		}
+	}
+	return r;
+}
+
+tnode* cparse_ref() {
+	clex_tok();
+	tnode* r = CTR_PARSER_CREATE_NODE();
+	r->type = REFERENCE;
+	char* tmp = clex_tok_value();
+	if (strcmp("my", tmp)==0) {
+		int t = clex_tok();
 		if (t != REF) {
-			clex_putback(); //dont eat the dot...
-			return r;
-		}
-		if (t == REF) {
-			e->type = EXPRMESSAGE;
-			clex_putback();
-			tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
-			li->node = r;
-			e->nodes = li;
-			tlistitem* fli = dparse_messages();
-			li->next = fli;
-		}
-		return e;
-	}
-	
-	if (t == RET) {
-		e->type = RETURNFROMBLOCK;
-		tlistitem* returnListItem = CTR_PARSER_CREATE_LISTITEM();
-		tnode* returnExpr = CTR_PARSER_CREATE_NODE();
-		returnExpr = dparse_expr(0);
-		returnListItem->node = returnExpr;
-		e->nodes = returnListItem;
-		return e;
-	}
-	
-	if (t == BLOCKOPEN) {
-		e->type = CODEBLOCK;
-		tlistitem* codeBlockPart1 = CTR_PARSER_CREATE_LISTITEM();
-		e->nodes = codeBlockPart1;
-		tlistitem* codeBlockPart2 = CTR_PARSER_CREATE_LISTITEM();
-		e->nodes->next = codeBlockPart2;
-		tnode* paramList = CTR_PARSER_CREATE_NODE();
-		tnode* codeList  = CTR_PARSER_CREATE_NODE();
-		codeBlockPart1->node = paramList;
-		codeBlockPart2->node = codeList;
-		paramList->type = PARAMLIST;
-		codeList->type = INSTRLIST;
-		t = clex_tok();
-		int antiCrash2 = 0;
-		int first = 1;
-		tlistitem* previousListItem;
-		while((antiCrash2++ < 10) && t == REF) {
-			tlistitem* paramListItem = CTR_PARSER_CREATE_LISTITEM();
-			tnode* paramItem = CTR_PARSER_CREATE_NODE();
-			CTR_PARSER_GET_TOKVAL(paramItem);
-			paramListItem->node = paramItem;
-			if (first) {
-				paramList->nodes = paramListItem;
-				previousListItem = paramListItem;
-				first = 0;
-			} else {
-				previousListItem->next = paramListItem;
-				previousListItem = paramListItem;
-			}
-			t = clex_tok();
-		}
-		if (t != BLOCKPIPE) {
-			printf("Error expected blockpipe.");
+			printf("'My' should always be followed by property name!\n");
 			exit(1);
 		}
-		t = clex_tok();
-		int antiCrash = 0;
-		first = 1;
-		tlistitem* previousCodeListItem;
-		while((antiCrash++ < 10) && (first || t == DOT)) {
-			if (first) clex_putback();
-			
-			t = clex_tok();
-			if (t == BLOCKCLOSE) break;
-			clex_putback();
-			
-			tlistitem* codeListItem = CTR_PARSER_CREATE_LISTITEM();
-			tnode* codeNode = CTR_PARSER_CREATE_NODE();
-			codeNode = dparse_expr(0);
-			codeListItem->node = codeNode;
-			if (first) {
-				codeList->nodes = codeListItem;
-				previousCodeListItem = codeListItem;
-				first = 0;
-			} else {
-				previousCodeListItem->next = codeListItem;
-				previousCodeListItem = codeListItem;
-			}
-			t = clex_tok();
-		}
-		return e;
+		tmp = clex_tok_value();
+		r->modifier = 1;
 	}
-	
-	if (t == NIL) {
-		r->type = LTRNIL;
-		r->value = "Nil";
-		if (argumentMode == 2 && !isUnaryMessage()) {
-			return r;
-		}
-		t = clex_tok();
-		if (t == PARCLOSE || t == DOT) {
-			clex_putback();//put back the dot, it's for the program
-			return r;
-		}
-		if (t == REF) {
-			e->type = EXPRMESSAGE;
-			clex_putback();
-			tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
-			li->node = r;
-			e->nodes = li;
-			tlistitem* fli = dparse_messages();
-			li->next = fli;
-		}
-	}
-	
-	if (t == BOOLEANYES || t == BOOLEANNO) {
-		char* str;
-		if (t == BOOLEANYES) {
-			r->type = LTRBOOLTRUE;
-			str = "True";
-		} else {
-			r->type = LTRBOOLFALSE;
-			str = "False";
-		}
-		r->value = str;
-		if (argumentMode == 2 && !isUnaryMessage()) {
-			return r;
-		}
-		t = clex_tok();
-		if (t == PARCLOSE || t == DOT) {
-			clex_putback();//put back the dot, it's for the program
-			return r;
-		}
-		if (t == REF) {
-			e->type = EXPRMESSAGE;
-			clex_putback();
-			tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
-			li->node = r;
-			e->nodes = li;
-			tlistitem* fli = dparse_messages();
-			li->next = fli;
-		}
-		return e;
-	}
-	
-	if (t == NUMBER) {
-		r->type = LTRNUM;
-		char* tmp = clex_tok_value();
+	r->value = malloc(strlen(tmp));
+	strcpy(r->value, tmp);
+	return r;
+}
 
-		r->value = calloc(sizeof(char), strlen(tmp));
-		strcpy(r->value, tmp);
-		if (argumentMode == 2 && !isUnaryMessage()) {
-			return r;
-		}
-		t = clex_tok();
-		if (t == PARCLOSE || t == DOT) {
-			clex_putback();//put back the dot, it's for the program
-			return r;
-		}
+tnode* cparse_string() {
+	if (debug) printf("Parsing STRING. \n");
+	clex_tok();
+	tnode* r = CTR_PARSER_CREATE_NODE();
+	r->type = LTRSTRING;
+	char* n = clex_readstr();
+	r->value = calloc(sizeof(char), strlen(n));
+	strcpy(r->value, n);
+	clex_tok(); //eat trailing quote.
+	return r;
+}
 
-		if (t == REF) {
-			e->type = EXPRMESSAGE;
+
+tnode* cparse_number() {
+	clex_tok();
+	tnode* r = CTR_PARSER_CREATE_NODE();
+	r->type = LTRNUM;
+	char* n = clex_tok_value();
+	r->value = calloc(sizeof(char), strlen(n));
+	strcpy(r->value, n);
+	if (debug) printf("Parsing number: %s.\n", r->value);
+	return r;
+}
+
+tnode* cparse_false() {
+	clex_tok();
+	tnode* r = CTR_PARSER_CREATE_NODE();
+	r->type = LTRBOOLFALSE;
+	r->value = "False";
+	return r;
+}
+
+tnode* cparse_true() {
+	clex_tok();
+	tnode* r = CTR_PARSER_CREATE_NODE();
+	r->type = LTRBOOLTRUE;
+	r->value = "True";
+	return r;
+}
+
+tnode* cparse_nil() {
+	clex_tok();
+	tnode* r = CTR_PARSER_CREATE_NODE();
+	r->type = LTRNIL;
+	r->value = "Nil";
+	return r;
+}
+
+tnode* cparse_receiver() {
+	if (debug) printf("Parsing receiver.\n");
+	int t = clex_tok();
+	clex_putback();
+	if (t == NIL) return cparse_nil();
+	if (t == BOOLEANYES) return cparse_true();
+	if (t == BOOLEANNO) return cparse_false();
+	if (t == NUMBER) return cparse_number();
+	if (t == QUOTE) return cparse_string();
+	if (t == REF) return cparse_ref();
+	if (t == BLOCKOPEN) return cparse_block();
+	if (t == PAROPEN) return cparse_popen();
+	printf("Error, unexpected token: %d.\n", t);
+	exit(1);
+}
+
+tnode* cparse_assignment(tnode* r) {
+	clex_tok();
+	tnode* a = CTR_PARSER_CREATE_NODE();
+	tnode* assignmentExpr = CTR_PARSER_CREATE_NODE();
+	tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
+	tlistitem* liAssignExpr = CTR_PARSER_CREATE_LISTITEM();
+	a->type = EXPRASSIGNMENT;
+	a->nodes = li;
+	li->node = r;
+	assignmentExpr = cparse_expr(0);
+	liAssignExpr->node = assignmentExpr;
+	li->next = liAssignExpr;
+	return a;
+}
+
+tnode* cparse_expr(int mode) {
+	if (debug) printf("Parsing expression (mode: %d).\n", mode);	
+	tnode* r = cparse_receiver();
+	tnode* e;
+	int t2 = clex_tok();
+	if (debug) printf("First token after receiver = %d \n", t2);
+	clex_putback();
+	if (r->type == REFERENCE && t2 == ASSIGNMENT) {
+		e = cparse_assignment(r);
+	} else if (t2 != DOT && t2 != PARCLOSE && t2 != CHAIN) {
+		e = CTR_PARSER_CREATE_NODE();
+		e->type = EXPRMESSAGE;
+		tlistitem* nodes = cparse_messages(r, mode);
+		if (nodes == NULL) {
+			int t = clex_tok();
 			clex_putback();
-			tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
-			li->node = r;
-			e->nodes = li;
-			tlistitem* fli = dparse_messages();
-			li->next = fli;
+			if (debug) printf("No messages, return. Next token: %d.\n", t);
+			return r; //no messages, then just return receiver (might be in case of argument).
 		}
-		return e;
-	}
-	
-	if (t == QUOTE) {
-		e->type = LTRSTRING;
-		e->value = clex_readstr();
-		clex_tok(); //get rid of closing quote!
-	}
-	
-	if (t == REF) {
-		r->type = REFERENCE;
-		char* tmp = clex_tok_value();
-		if (strcmp("my", tmp)==0) {
-			t = clex_tok();
-			if (t != REF) {
-				printf("'My' should always be followed by property name!\n");
-				exit(1);
-			}
-			tmp = clex_tok_value();
-			r->modifier = 1;
-		}
-		r->value = malloc(strlen(tmp));
-		strcpy(r->value, tmp);
-		t = clex_tok();
-		if (t == DOT || t == PARCLOSE || (argumentMode && !isUnaryMessage())) {
-			r->type = REFERENCE;
-			clex_putback();
-			return r;
-		}
-		tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
-		li->node = r;
-		e->nodes = li;
-		if (t == ASSIGNMENT) {
-			e->type = EXPRASSIGNMENT;
-			tnode* assignmentExpr = CTR_PARSER_CREATE_NODE();
-			assignmentExpr = dparse_expr(0);
-			tlistitem* liAssignExpr = CTR_PARSER_CREATE_LISTITEM();
-			liAssignExpr->node = assignmentExpr;
-			li->next = liAssignExpr;
-		} else if (t == REF)  {		
-			e->type = EXPRMESSAGE;
-			clex_putback();
-			tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
-			li->node = r;
-			e->nodes = li;
-			tlistitem* fli = dparse_messages();
-			li->next = fli;
-		} else {
-			printf("Error expected assignment or message \n");
-			exit(1);
-		}
+		tlistitem* rli = CTR_PARSER_CREATE_LISTITEM();
+		rli->node = r;
+		rli->next = nodes;
+		e->nodes = rli;
+		//e->nodes = nodes;
+		
+	} else {
+		if (debug) printf("Returning receiver. \n");
+		return r;
 	}
 	return e;
 }
 
-tnode* dparse_program() {
-	tnode* program = CTR_PARSER_CREATE_NODE();
+
+tnode* cparse_ret() {
+	clex_tok();
+	tnode* r = CTR_PARSER_CREATE_NODE();
+	r->type = RETURNFROMBLOCK;
+	tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
+	r->nodes = li;
+	li->node = cparse_expr(0);
+	return r;
+}
+
+tnode* cparse_fin() {
+	clex_tok();
+	tnode* f = CTR_PARSER_CREATE_NODE();
+	f->type = ENDOFPROGRAM;
+	return f;
+}
+
+tlistitem* cparse_statement() {
+	tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
 	int t = clex_tok();
+	if (debug) printf("Parsing next statement of program, token = %d (%s).\n", t, clex_tok_value());
+	clex_putback();
+	if (t == FIN) {
+		li->node = cparse_fin();
+		return li;
+	} else if (t == RET) {
+		li->node = cparse_ret();
+	} else {
+		li->node = cparse_expr(0);
+	}
+	t = clex_tok();
+	if (t != DOT) {
+		printf("Expected . but got: %d.\n", t);
+		exit(1);
+	}
+	return li;
+}
+
+tnode* cparse_program() {
+	tnode* program = CTR_PARSER_CREATE_NODE();
 	int antiCrash = 0;
-	tlistitem* li;
 	tlistitem* pli;
 	int first = 1;
-	while((antiCrash++)<100 && (first || t == DOT)) {
-		if (first) clex_putback(); //if first (not dot) put back token
-		tnode* e = CTR_PARSER_CREATE_NODE();
-		t = clex_tok();
-		if (t == FIN) break; //in case there is a trailing dot..
-		clex_putback();
-		e = dparse_expr(0);
-		li = CTR_PARSER_CREATE_LISTITEM();
-		li->node = e;
+	while((antiCrash++)<100) {
+		tlistitem* li = cparse_statement();
 		if (first) {
+			first = 0;
 			program->nodes = li;
-			pli = li;
-			first = 0;		
 		} else {
 			pli->next = li;
-			pli = li;
 		}
-		t = clex_tok();
-		if (t!=DOT && t!=FIN) {
-			printf("Expected . but got: %d \n", t);
-			exit(1);
-		}
+		if (li->node->type == ENDOFPROGRAM) break;
+		pli = li;
 	}
-	//the FIN node to end the program.
-	tlistitem* finli = CTR_PARSER_CREATE_LISTITEM();
-	li->next = finli;
-	tnode* fin = CTR_PARSER_CREATE_NODE();
-	fin->type = ENDOFPROGRAM;
-	finli->node = fin;
 	return program;
 }
 
 tnode*  dparse_parse(char* prg) {
 	clex_load(prg);
-	tnode* program = dparse_program();
+	tnode* program = cparse_program();
 	return program;
 }

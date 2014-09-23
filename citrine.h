@@ -114,6 +114,9 @@ char* readf(char* file_name);
 void tree(tnode* ti, int indent);
 
 obj* cwlk_run(tnode* program);
+obj* cwlk_expr(tnode* node);
+
+int debug;
 
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == '=' || X == ';' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=';' && X!='=' && X!='^'  && X!= ':' && X!= '\''

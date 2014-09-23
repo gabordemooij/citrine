@@ -248,6 +248,20 @@ obj* ctr_number_eq(obj* myself, args* argumentList) {
 	return truth;
 }
 
+obj* ctr_number_between(obj* myself, args* argumentList) {
+	obj* otherNum = argumentList->object;
+	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
+	float a = atof(myself->value);
+	float b = atof(otherNum->value);
+	if (!argumentList->next) { printf("Expected second number."); exit(1); }
+	args* nextArgumentItem = argumentList->next;
+	obj* nextArgument = nextArgumentItem->object;
+	if (nextArgument->type != OTNUMBER) { printf("Expected second argument to be number."); exit(1); }
+	float c = atof(nextArgument->value);
+	obj* truth = ctr_build_bool((a >= b) && (a <= c));
+	return truth;
+}
+
 obj* ctr_number_add(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
@@ -473,6 +487,7 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(numberLoEqThan, &ctr_number_lowerEqThan, "<=", Number);
 	CTR_CREATE_FUNC(numberEq, &ctr_number_eq, "==", Number);
 	CTR_CREATE_FUNC(numberFactorial, &ctr_number_factorial, "factorial", Number);
+	CTR_CREATE_FUNC(numberBetween, &ctr_number_between, "between:and:", Number);
 	
 	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", "False", OTBOOL);
 	CTR_CREATE_FUNC(ifTrue, &ctr_bool_iftrue, "ifTrue:", BoolX);

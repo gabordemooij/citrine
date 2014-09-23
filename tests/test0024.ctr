@@ -1,0 +1,2 @@
+(3 between: 1 and: 20 ) ifTrue: {\ Pencil write: 'Yes.'. }.
+(3 between: 19 and: 20 ) ifTrue: {\ Pencil write: 'Yes.'. }.

@@ -8,9 +8,7 @@
 #include "uthash.h"
 #include "citrine.h"
 
-int debug;
 
-obj* cwlk_expr(tnode* node);
 
 obj* cwlk_return(tnode* node) {
 	if (!node->nodes) {
