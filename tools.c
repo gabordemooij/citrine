@@ -40,6 +40,23 @@ long getutf8len(char* strval, long max) {
 	return (i-j);
 }
 
+long getBytesUtf8(char* strval, long startByte, long lenUChar) {
+	long i = 0;
+	long bytes = 0;
+	int s = 0;
+	int x = 0;
+	long index = 0;
+	while(x < lenUChar) {
+		index = startByte + i;
+		char c = strval[index];
+		s = utf8size(c);
+		bytes = bytes + s;
+		i = i + s;
+		x ++;
+	}
+	return bytes;
+}
+
 char* readf(char* file_name) {
    char* prg;
    char ch;
@@ -484,6 +501,35 @@ obj* ctr_string_length(obj* myself, args* argumentList) {
 	return ctr_build_number(str);
 }
 
+obj* ctr_string_printbytes(obj* myself, args* argumentList) {
+	char* str = myself->value;
+	long n = strlen(str);
+	long i = 0;
+	for(i = 0; i < n; i++) printf("%u ", (unsigned char) str[i]);
+	printf("\n");
+	return myself;
+}
+
+obj* ctr_string_fromto(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("Missing argument 1\n"); exit(1);
+	}
+	if (!argumentList->next) {
+		printf("Missing argument 2\n"); exit(1);
+	}
+	obj* fromPos = argumentList->object;
+	obj* toPos = argumentList->next->object;
+	
+	long a = atol(fromPos->value);
+	long b = atol(toPos->value); 
+	long ua = getBytesUtf8(myself->value, 0, a);
+	long ub = getBytesUtf8(myself->value, ua, ((b - a) + 1));
+	char* dest = calloc(sizeof(char), ub);
+	strncpy(dest, (myself->value) + ua, ub);
+	obj* newString = ctr_build_string(dest);
+	return newString;
+}
+
 obj* ctr_build_nil() {	
 	return Nil;
 }
@@ -527,8 +573,10 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(numberBetween, &ctr_number_between, "between:and:", Number);
 	
 	CTR_CREATE_OBJECT_TYPE(TextString, "String", "[String]", OTSTRING);
+	CTR_CREATE_FUNC(stringPrintBytes, &ctr_string_printbytes, "printBytes", TextString);
 	CTR_CREATE_FUNC(stringBytes, &ctr_string_bytes, "bytes", TextString);
 	CTR_CREATE_FUNC(stringLength, &ctr_string_length, "length", TextString);
+	CTR_CREATE_FUNC(stringFromTo, &ctr_string_fromto, "from:to:", TextString);
 	
 	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", "False", OTBOOL);
 	CTR_CREATE_FUNC(ifTrue, &ctr_bool_iftrue, "ifTrue:", BoolX);

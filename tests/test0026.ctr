@@ -1,0 +1,9 @@
+Pencil write: 'Hello' bytes.
+Pencil write: 'Great' bytes + 5.
+Pencil write: '象形' bytes - '象形' length.
+Pencil write: ('Hello!' from: 1 to: 3).
+Pencil write: ('Hello!' from: 2 to: 4).
+Pencil write: ('形声字形聲字' from: 2 to: 4).
+Pencil write: '形声字形聲字' length.
+Pencil write: '形声a' length.
+'形声字形聲字' printBytes.
