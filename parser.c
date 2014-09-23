@@ -23,7 +23,7 @@ tnode* cparse_message(int mode) {
 	char* msg;
 	msg = calloc(sizeof(char), 255);
 	strcat(msg, s);
-	int isBin = (strlen(msg)==2 && (strcmp("==",msg)==0 || strcmp(">=",msg)==0 || strcmp("<=",msg)==0));
+	int isBin = (strlen(msg)==2 && (strcmp("&&",msg)==0 || strcmp("||",msg)==0 || strcmp("==",msg)==0 || strcmp("!=",msg)==0 || strcmp(">=",msg)==0 || strcmp("<=",msg)==0));
 	isBin = (isBin || (strlen(msg)==1 && (strcmp(">",msg)==0 || strcmp("<",msg)==0 || strcmp("*",msg)==0 || strcmp("/",msg)==0 || strcmp("+",msg)==0 || strcmp("-",msg)==0)));
 	if (mode == 2 && isBin) {
 		clex_putback();

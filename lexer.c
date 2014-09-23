@@ -61,7 +61,7 @@ int clex_tok() {
 	if (c == ')') { code++; return PARCLOSE; }
 	if (c == '{') { code++; return BLOCKOPEN; }
 	if (c == '}') {  code++; return BLOCKCLOSE; }
-	if (c == '|' || c == '\\') { code++; return BLOCKPIPE; }
+	
 	if (c == '.') { code++; return DOT; }
 	if (c == ',') { code++; return CHAIN; }
 	if (c == ':') { code++; return COLON; }
@@ -129,9 +129,30 @@ int clex_tok() {
 		strcat(buffer, "<=\0");
 		return REF;
 	}
+	
 	if (strncmp(code, "==", 2)==0){
 		code += 2;
 		strcat(buffer, "==\0");
+		return REF;
+	}
+	
+	if (strncmp(code, "!=", 2)==0){
+		code += 2;
+		strcat(buffer, "!=\0");
+		return REF;
+	}
+	
+	if (strncmp(code, "||", 2)==0){
+		code += 2;
+		strcat(buffer, "||\0");
+		return REF;
+	}
+	
+	if (c == '|' || c == '\\') { code++; return BLOCKPIPE; }
+	
+	if (strncmp(code, "&&", 2)==0){
+		code += 2;
+		strcat(buffer, "&&\0");
 		return REF;
 	}
 

@@ -247,6 +247,31 @@ obj* ctr_bool_ifFalse(obj* myself, args* argumentList) {
 	return myself;
 }
 
+obj* ctr_bool_opposite(obj* myself, args* argumentList) {
+	if (strncmp(myself->value,"1",1)==0) myself->value = "0"; else myself->value = "1";
+	return myself;
+}
+
+obj* ctr_bool_and(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("Missing argument 1\n"); exit(1);
+	}
+	if (argumentList->object->type != OTBOOL) {
+		printf("Argument of binary message && must be a boolean.\n"); exit(1);
+	}
+	return ctr_build_bool(( (strncmp(myself->value,"1",1)==0) && (strncmp(argumentList->object->value,"1",1)==0)  ));
+}
+
+obj* ctr_bool_or(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("Missing argument 1\n"); exit(1);
+	}
+	if (argumentList->object->type != OTBOOL) {
+		printf("Argument of binary message || must be a boolean.\n"); exit(1);
+	}
+	return ctr_build_bool(( (strncmp(myself->value,"1",1)==0) || (strncmp(argumentList->object->value,"1",1)==0)  ));
+}
+
 obj* ctr_number_higherThan(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
@@ -289,6 +314,15 @@ obj* ctr_number_eq(obj* myself, args* argumentList) {
 	float a = atof(myself->value);
 	float b = atof(otherNum->value);
 	obj* truth = ctr_build_bool((a == b));
+	return truth;
+}
+
+obj* ctr_number_neq(obj* myself, args* argumentList) {
+	obj* otherNum = argumentList->object;
+	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
+	float a = atof(myself->value);
+	float b = atof(otherNum->value);
+	obj* truth = ctr_build_bool((a != b));
 	return truth;
 }
 
@@ -588,6 +622,7 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(numberLoThan, &ctr_number_lowerThan, "<", Number);
 	CTR_CREATE_FUNC(numberLoEqThan, &ctr_number_lowerEqThan, "<=", Number);
 	CTR_CREATE_FUNC(numberEq, &ctr_number_eq, "==", Number);
+	CTR_CREATE_FUNC(numberNeq, &ctr_number_neq, "!=", Number);
 	CTR_CREATE_FUNC(numberFactorial, &ctr_number_factorial, "factorial", Number);
 	CTR_CREATE_FUNC(numberBetween, &ctr_number_between, "between:and:", Number);
 	
@@ -606,6 +641,9 @@ void ctr_initialize_world() {
 	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", "False", OTBOOL);
 	CTR_CREATE_FUNC(ifTrue, &ctr_bool_iftrue, "ifTrue:", BoolX);
 	CTR_CREATE_FUNC(ifFalse, &ctr_bool_ifFalse, "ifFalse:", BoolX);
+	CTR_CREATE_FUNC(boolOpposite, &ctr_bool_opposite, "opposite", BoolX);
+	CTR_CREATE_FUNC(boolAND, &ctr_bool_and, "&&", BoolX);
+	CTR_CREATE_FUNC(boolOR, &ctr_bool_or, "||", BoolX);
 	
 	CTR_CREATE_OBJECT_TYPE(Nil, "Nil", "Nil", OTNIL);
 	CTR_CREATE_FUNC(isNil, &ctr_nil_isnil, "isNil", Nil);
