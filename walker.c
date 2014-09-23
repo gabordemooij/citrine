@@ -53,6 +53,8 @@ obj* cwlk_message(tnode* paramNode) {
 		r = ctr_build_number(receiverNode->value);
 	} else if (receiverNode->type == NESTED) {
 		r = cwlk_expr(receiverNode);
+	} else if (receiverNode->type == CODEBLOCK) {
+		r = ctr_build_block(receiverNode);
 	} else {
 		printf("Cannot send message to receiver of type: %d \n", receiverNode->type);
 	}

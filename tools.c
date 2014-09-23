@@ -13,6 +13,7 @@ obj* contexts[100];
 int cid = 0;
 obj* ctr_build_number(char* number);
 obj* Object;
+obj* CBlock;
 obj* TextString;
 obj* Number;
 obj* BoolX;
@@ -213,10 +214,15 @@ obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 	return result;
 }
 
+obj* ctr_block_runIt(obj* myself, args* argumentList) {
+	return ctr_block_run(myself, argumentList, myself);
+}
+
 obj* ctr_build_block(tnode* node) {
 	obj* codeBlockObject = CTR_CREATE_OBJECT();
 	codeBlockObject->type = OTBLOCK;
 	codeBlockObject->block = node;
+	codeBlockObject->link = CBlock;
 	codeBlockObject->value = "[block]";
 	return codeBlockObject;
 }
@@ -591,6 +597,10 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(stringLength, &ctr_string_length, "length", TextString);
 	CTR_CREATE_FUNC(stringFromTo, &ctr_string_fromto, "from:to:", TextString);
 	CTR_CREATE_FUNC(stringConcat, &ctr_string_concat, "+", TextString);
+	
+	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", "[Code]", OTBLOCK);
+	CTR_CREATE_FUNC(blockRun, &ctr_block_runIt, "run", CBlock);
+	
 	
 	
 	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", "False", OTBOOL);
