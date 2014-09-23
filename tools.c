@@ -13,6 +13,7 @@ obj* contexts[100];
 int cid = 0;
 obj* ctr_build_number(char* number);
 obj* Object;
+obj* TextString;
 obj* Number;
 obj* BoolX;
 obj* Pencil;
@@ -439,12 +440,21 @@ obj* ctr_object_blueprint(obj* myself, args* argumentList) {
 	return myself;
 }
 
-obj* ctr_build_string(char* stringValue) {
+obj* ctr_build_string(char* stringValue) {	
 	obj* stringObject = CTR_CREATE_OBJECT();
+	stringObject->name = "String";
 	stringObject->type = OTSTRING;
 	stringObject->value = calloc(sizeof(char), strlen(stringValue));
 	strcpy(stringObject->value, stringValue);
+	stringObject->link = TextString;
 	return stringObject;
+}
+
+obj* ctr_string_bytes(obj* myself, args* argumentList) {
+	char* str = calloc(sizeof(char), 100);
+	int l = strlen(myself->value);
+	sprintf(str, "%d", l);
+	return ctr_build_number(str);
 }
 
 obj* ctr_build_nil() {	
@@ -488,6 +498,9 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(numberEq, &ctr_number_eq, "==", Number);
 	CTR_CREATE_FUNC(numberFactorial, &ctr_number_factorial, "factorial", Number);
 	CTR_CREATE_FUNC(numberBetween, &ctr_number_between, "between:and:", Number);
+	
+	CTR_CREATE_OBJECT_TYPE(TextString, "String", "[String]", OTSTRING);
+	CTR_CREATE_FUNC(stringBytes, &ctr_string_bytes, "bytes", TextString);
 	
 	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", "False", OTBOOL);
 	CTR_CREATE_FUNC(ifTrue, &ctr_bool_iftrue, "ifTrue:", BoolX);
