@@ -88,7 +88,6 @@ tnode* cparse_message(int mode) {
 		if (debug) printf("Putting back.\n");
 		clex_putback(); //not a colon so put back
 		if (debug) printf("Parsing keyword message: '%s' (mode: %d) \n", msg, mode);
-		//strcat(msg, "\0");
 		m->value = msg;
 	} else {
 		m->type = UNAMESSAGE;
@@ -232,7 +231,8 @@ tnode* cparse_block() {
 		}
 		t = clex_tok();
 		if (t != DOT) {
-				printf("Expected . but got: %d.\n", t);
+			printf("Expected . but got: %d.\n", t);
+			exit(1);
 		}
 	}
 	return r;
@@ -359,8 +359,6 @@ tnode* cparse_expr(int mode) {
 		rli->node = r;
 		rli->next = nodes;
 		e->nodes = rli;
-		//e->nodes = nodes;
-		
 	} else {
 		if (debug) printf("Returning receiver. \n");
 		return r;
