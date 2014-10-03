@@ -373,7 +373,6 @@ obj* ctr_number_multiply(obj* myself, args* argumentList) {
 	return myself;
 }
 
-
 obj* ctr_number_divide(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
@@ -388,8 +387,6 @@ obj* ctr_number_divide(obj* myself, args* argumentList) {
 	myself->value = str;
 	return myself;
 }
-
-
 
 obj* ctr_number_factorial(obj* myself, args* argumentList) {
 	float t = floor(atof(myself->value));
@@ -534,6 +531,13 @@ obj* ctr_string_bytes(obj* myself, args* argumentList) {
 	return ctr_build_number(str);
 }
 
+obj* ctr_string_eq(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("Missing argument 1\n"); exit(1);
+	}
+	return ctr_build_bool((strcmp(argumentList->object->value, myself->value)==0));
+}
+
 obj* ctr_string_length(obj* myself, args* argumentList) {
 	long n = getutf8len(myself->value, -1);
 	char* str = calloc(sizeof(char), 100);
@@ -632,6 +636,7 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(stringLength, &ctr_string_length, "length", TextString);
 	CTR_CREATE_FUNC(stringFromTo, &ctr_string_fromto, "from:to:", TextString);
 	CTR_CREATE_FUNC(stringConcat, &ctr_string_concat, "+", TextString);
+	CTR_CREATE_FUNC(stringEq, &ctr_string_eq, "==", TextString);
 	
 	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", "[Code]", OTBLOCK);
 	CTR_CREATE_FUNC(blockRun, &ctr_block_runIt, "run", CBlock);
