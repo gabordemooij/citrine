@@ -129,7 +129,6 @@ obj* cwlk_expr(tnode* node) {
 	} else if (node->type == NESTED) {
 		result = cwlk_expr(node->nodes->node);
 	} else if (node->type == ENDOFPROGRAM) {
-		printf("FIN.\n");
 		exit(0);
 	} else {
 		printf("Runtime Error. Invalid parse node: %d %s \n", node->type,node->value);

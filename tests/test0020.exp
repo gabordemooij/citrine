@@ -1,8 +1,1 @@
-----------------> OUTPUT: Nil is Nil!
-----------------> OUTPUT: YES
-----------------> OUTPUT: Nonono..
-----------------> OUTPUT: TRUE is TRUE!
-----------------> OUTPUT: TRUE is TRUE!
-----------------> OUTPUT: FALSE is FALSE!
-----------------> OUTPUT: FALSE is FALSE!
-FIN.
+Nil is Nil!YESNonono..TRUE is TRUE!TRUE is TRUE!FALSE is FALSE!FALSE is FALSE!

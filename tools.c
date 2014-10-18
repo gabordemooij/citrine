@@ -107,7 +107,6 @@ void tree(tnode* ti, int indent) {
 		else if (t->type == LTRBOOLTRUE)	str = "BLTRUE\0";
 		else if (t->type == LTRNIL)	        str = "LTRNIL\0";
 		else 								str = "UNKNW?\0";
-		
 		printf("%d:%s %s\n", t->type, str, t->value);
 		if (t->nodes) tree(t, indent + 1);
 		if (!li->next) break; 
@@ -172,7 +171,7 @@ obj* ctr_build_bool(int truth) {
 
 obj* ctr_pencil_write(obj* myself, args* argumentList) {
 	obj* argument1 = argumentList->object;
-	printf("----------------> OUTPUT: %s\n", argument1->value);
+	printf("%s", argument1->value);
 	return myself;
 }
 
@@ -640,8 +639,6 @@ void ctr_initialize_world() {
 	
 	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", "[Code]", OTBLOCK);
 	CTR_CREATE_FUNC(blockRun, &ctr_block_runIt, "run", CBlock);
-	
-	
 	
 	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", "False", OTBOOL);
 	CTR_CREATE_FUNC(ifTrue, &ctr_bool_iftrue, "ifTrue:", BoolX);
