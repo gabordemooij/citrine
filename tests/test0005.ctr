@@ -1,1 +1,1 @@
-5 times: { i | Pencil write: i. }.
+5 times: { i | Console write: i. }.

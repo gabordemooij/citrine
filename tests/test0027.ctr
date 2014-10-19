@@ -1,6 +1,6 @@
-Pencil write: 'Length is:' + 'ABCD' length.
+Console write: 'Length is:' + 'ABCD' length.
 x = 'ABCDE'.
-Pencil write: 'Length is:' + x length.
-(('ABC' length + 1 == 4) && (2!=3)) opposite opposite ifTrue: {\ Pencil write: 'Yes'. }.
-((3 > 4) || (4 > 2)) ifTrue: {\ Pencil write: 'Yes'. }.
-{\ Pencil write: 'Running'. } run.
+Console write: 'Length is:' + x length.
+(('ABC' length + 1 == 4) && (2!=3)) opposite opposite ifTrue: {\ Console write: 'Yes'. }.
+((3 > 4) || (4 > 2)) ifTrue: {\ Console write: 'Yes'. }.
+{\ Console write: 'Running'. } run.

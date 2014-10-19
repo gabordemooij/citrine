@@ -5,7 +5,7 @@ Greeter method: 'make' does: {\
 		my name = aname.
 	}.
 	gr method: 'greet' does: {\
-		Pencil write: my name.
+		Console write: my name.
 	}.
 	^gr.
 }.

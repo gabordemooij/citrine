@@ -4,7 +4,7 @@ Animal method: 'make' does: {\
 	animal = Object new.
 	
 	animal method: 'makeSound' does: {\
-		Pencil write: '?'.
+		Console write: '?'.
 	}.
 
 	^animal.
@@ -15,7 +15,7 @@ Cat method: 'make' does: {\
 	cat = Animal make.
 	
 	cat override: 'makeSound' does: {\
-		Pencil write: 'meow!!'.
+		Console write: 'meow!!'.
 		me overridden-makeSound.
 	}.
 	

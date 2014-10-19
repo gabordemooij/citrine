@@ -2,7 +2,7 @@ Cat = Object new.
 Cat method: 'make' does: {\
 	cat = Object new.
 	cat method: 'meow' does: {\
-		Pencil write: 'meow!'.
+		Console write: 'meow!'.
 	}.
 	^cat.
 }.

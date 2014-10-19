@@ -1,9 +1,9 @@
 a = 3 + 2 + 10 + 1 - 3.
-Pencil write: a.
+Console write: a.
 b = 2 + 3 factorial.
-Pencil write: b.
+Console write: b.
 c = 3 factorial + 2.
-Pencil write: c.
+Console write: c.
 d = 2 + (3 factorial).
-Pencil write: d.
-Pencil write: 2 + 3 factorial + 1.
+Console write: d.
+Console write: 2 + 3 factorial + 1.

@@ -3,7 +3,7 @@ Animal method: 'make' does: {\
 	
 	animal = Object new.
 	animal method: 'makeSound' does: {\
-		Pencil write: my sound.
+		Console write: my sound.
 	}.
 
 	^animal.

@@ -1,1 +1,1 @@
-(3 between: 19 - 17 and: 20 ) ifTrue: {\ Pencil write: 'Yes.'. }.
+(3 between: 19 - 17 and: 20 ) ifTrue: {\ Console write: 'Yes.'. }.

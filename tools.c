@@ -17,7 +17,7 @@ obj* CBlock;
 obj* TextString;
 obj* Number;
 obj* BoolX;
-obj* Pencil;
+obj* Console;
 obj* Nil;
 int debug;
 
@@ -169,7 +169,7 @@ obj* ctr_build_bool(int truth) {
 }
 
 
-obj* ctr_pencil_write(obj* myself, args* argumentList) {
+obj* ctr_console_write(obj* myself, args* argumentList) {
 	obj* argument1 = argumentList->object;
 	printf("%s", argument1->value);
 	return myself;
@@ -605,8 +605,8 @@ void ctr_initialize_world() {
 	CTR_CREATE_OBJECT_TYPE(World, "World", "[world]", OTOBJECT);
 	contexts[0] = World;
 	
-	CTR_CREATE_OBJECT_TYPE(Pencil, "Pencil", "[pencil]", OTOBJECT)
-	CTR_CREATE_FUNC(PencilWrite, &ctr_pencil_write, "write:", Pencil);
+	CTR_CREATE_OBJECT_TYPE(Console, "Console", "[console]", OTOBJECT)
+	CTR_CREATE_FUNC(ConsoleWrite, &ctr_console_write, "write:", Console);
 	
 	CTR_CREATE_OBJECT_TYPE(Object, "Object", "[object]", OTOBJECT);
 	CTR_CREATE_FUNC(ObjectMake, &ctr_object_make, "new", Object);

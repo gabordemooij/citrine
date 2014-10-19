@@ -1,10 +1,10 @@
-(2 < 9) ifTrue: {\ Pencil write: 'Yes, nine is less than ten.'. }.
-(9 < 2) ifTrue: {\ Pencil write: 'My logic fails'. }.
-Pencil write: (-2 + 6).
-Pencil write: (-3 - -3).
+(2 < 9) ifTrue: {\ Console write: 'Yes, nine is less than ten.'. }.
+(9 < 2) ifTrue: {\ Console write: 'My logic fails'. }.
+Console write: (-2 + 6).
+Console write: (-3 - -3).
 TrueIsNice = 3.
-Pencil write: TrueIsNice.
+Console write: TrueIsNice.
 FalseIsBad = 'Not true!'.
-Pencil write: FalseIsBad.
+Console write: FalseIsBad.
 NilIsEmpty = 'Yep'.
-Pencil write: NilIsEmpty.
+Console write: NilIsEmpty.

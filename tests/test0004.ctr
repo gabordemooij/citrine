@@ -1,1 +1,1 @@
-5 times: {\ Pencil write: 'ho'. }.
+5 times: {\ Console write: 'ho'. }.

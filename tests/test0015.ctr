@@ -1,4 +1,4 @@
 t = Object new.
-t method: 'hi' does: {\ Pencil write: 'Hi!'. }.
+t method: 'hi' does: {\ Console write: 'Hi!'. }.
 t hi.
 t hi.
