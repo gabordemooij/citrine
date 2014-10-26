@@ -1,0 +1,16 @@
+#test assignment to my, same as 32 but with objects
+x = Object new.
+x method: 'set:' does: { v | my val = v. }.
+x method: 'get' does: {\ ^ my val. }.
+a = Object new.
+a method: 'init' does: {\
+	
+	y = Object new basedOn: x.
+	y set: 123.
+	q = Object new basedOn: x.
+	q set: 666.
+	
+	Console write: (y get) , write: (q get).
+	
+}.
+a init.
