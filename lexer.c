@@ -50,7 +50,7 @@ int clex_tok() {
 	int comment_mode = 0;
 	buffer[0] = '\0';
 	c = *code;
-	while((anticrash++) < 200 && code != eofcode && (isspace(c) || comment_mode)) {
+	while((anticrash++) < 200 && code != eofcode && (isspace(c) || c == '#' || comment_mode)) {
 		if (c == '\n') comment_mode = 0;
 		if (c == '#') comment_mode = 1;
 		code ++;
