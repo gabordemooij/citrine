@@ -1,0 +1,12 @@
+#test assignment to my... testtesttest
+a = Object new.
+a method: 'init' does: {\
+	v = 'test'.
+	my value = v.
+	my value2 = my value.
+	x = my value2.
+	Console write: x.
+	Console write: my value.
+	Console write: my value2.
+}.
+a init.

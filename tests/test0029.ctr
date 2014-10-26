@@ -1,1 +1,2 @@
+#test explicit message chaining using ,
 Console write: 'first', write: 'second'.

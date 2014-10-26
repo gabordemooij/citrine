@@ -688,14 +688,27 @@ obj* ctr_send_message(obj* receiverObject, char* message, args* argumentList) {
 
 obj* ctr_assign_value(char* name, obj* o) {
 	obj* object = CTR_CREATE_OBJECT();
-	object = o;
-	object->name = name;
+	object->properties = o->properties;
+    object->methods = o->methods;
+    object->type = o->type;
+    object->block = o->block;
+    object->link = o->link;
+    object->value = o->value;
+    object->name = name;
 	ctr_set(object);
 	return object;
 }
 
 obj* ctr_assign_value_to_my(char* name, obj* o) {
+	obj* object = CTR_CREATE_OBJECT();
+	object->properties = o->properties;
+    object->methods = o->methods;
+    object->type = o->type;
+    object->block = o->block;
+    object->link = o->link;
+    object->value = o->value;
+    object->name = name;
 	obj* my = ctr_find("me");
-	HASH_ADD_KEYPTR(hh, my->link->properties, name, strlen(name), o);
-	return o;
+	HASH_ADD_KEYPTR(hh, my->link->properties, name, strlen(name), object);
+	return object;
 }

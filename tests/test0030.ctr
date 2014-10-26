@@ -1,0 +1,8 @@
+#test assignment, strings etc copied by value: HelloHelloWorld
+a = 'Hello'.
+c = a.
+Console write: a.
+c = 'World'.
+Console write: a.
+a = '!'.
+Console write: c.
