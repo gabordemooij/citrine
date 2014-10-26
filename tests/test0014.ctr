@@ -19,12 +19,12 @@ a greet.
 b greet.
 
 c = Object new.
-c blueprint: a.
+c basedOn: a.
 c setName: 'THREE'.
 c greet.
 
 d = Object new.
-d blueprint: a.
+d basedOn: a.
 d setName: 'FOUR'.
 d greet.
 c greet.

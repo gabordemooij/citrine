@@ -24,6 +24,6 @@ Cat method: 'make' does: {\
 
 CatObject = Cat make.
 tom = Object new.
-tom blueprint: CatObject.
+tom basedOn: CatObject.
 tom makeSound.
 

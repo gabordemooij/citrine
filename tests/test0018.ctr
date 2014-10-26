@@ -1,7 +1,7 @@
 Animal = Object new.
 Animal method: 'sound:' does: { s | my sound = s. }.
 Animal method: 'makeSound' does: {\ Console write: my sound. }.
-Cat = Object new blueprint: Animal.
+Cat = Object new basedOn: Animal.
 Cat method: 'init' does: {\ my sound = 'MEOW!'.}.
 Cat method: 'meow' does: {\ me makeSound. }.
 Cat init.

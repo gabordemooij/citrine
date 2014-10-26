@@ -612,7 +612,7 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(ObjectMake, &ctr_object_make, "new", Object);
 	CTR_CREATE_FUNC(ObjectMethodDoes, &ctr_object_method_does, "method:does:", Object);
 	CTR_CREATE_FUNC(ObjectOverrideDoes, &ctr_object_override_does, "override:does:", Object);
-	CTR_CREATE_FUNC(ObjectBlueprint, &ctr_object_blueprint, "blueprint:", Object);
+	CTR_CREATE_FUNC(ObjectBlueprint, &ctr_object_blueprint, "basedOn:", Object);
 	
 	CTR_CREATE_OBJECT_TYPE(Number, "Number", "0", OTNUMBER);
 	CTR_CREATE_FUNC(numberTimesObject, &ctr_number_times, "times:", Number);
