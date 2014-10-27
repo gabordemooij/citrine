@@ -106,7 +106,9 @@ tlistitem* cparse_messages(tnode* r, int mode) {
 	tlistitem* li;
 	tlistitem* fli;
 	int first = 1;
-	while ((antiCrash++<100) && (t == REF || t == CHAIN)) {
+	tnode* node;
+	//explicit chaining (,) only allowed for keyword message: Console write: 3 factorial, write: 3 factorial is not possible otherwise. 
+	while ((antiCrash++<100) && (t == REF || (t == CHAIN && node && node->type == KWMESSAGE))) {
 		if (t == CHAIN) {
 			t = clex_tok();
 			if (t != REF) {
@@ -117,7 +119,7 @@ tlistitem* cparse_messages(tnode* r, int mode) {
 		li = CTR_PARSER_CREATE_LISTITEM();
 		if (debug) printf("Next message...\n");
 		clex_putback();
-		tnode* node = cparse_message(mode);
+		node = cparse_message(mode);
 		if (node->type == -1) {
 			if (debug) printf("Ending message sequence.\n");
 			if (first) {
