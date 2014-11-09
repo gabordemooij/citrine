@@ -57,6 +57,8 @@ struct obj {
     struct tnode* block;
     struct obj* link;
     char* value;
+    int mark;
+    struct obj* next;
     UT_hash_handle hh;
 };
 
@@ -115,6 +117,7 @@ void tree(tnode* ti, int indent);
 
 obj* cwlk_run(tnode* program);
 obj* cwlk_expr(tnode* node);
+obj* ctr_first_object;
 
 int debug;
 
@@ -122,6 +125,9 @@ int debug;
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='=' && X!='^'  && X!= ':' && X!= '\''
 
 #define CTR_CREATE_OBJECT() (obj*) calloc(sizeof(obj), 1)
+
+#define CTR_REGISTER_OBJECT(X) X->next = ctr_first_object; ctr_first_object = X;
+#define CTR_INIT_HEAD_OBJECT() ctr_first_object = NULL;
 
 #define CTR_CREATE_OBJECT_TYPE(O,C,V,OT) O = CTR_CREATE_OBJECT(); O->name = C; O->value = V; O->type = OT; HASH_ADD_KEYPTR(hh, World->properties, O->name, strlen(O->name), O);
 
@@ -137,5 +143,7 @@ HASH_ADD_KEYPTR(hh, Q->methods, X->name, strlen(X->name), X);
 #define	CTR_PARSER_CREATE_NODE() (tnode*) calloc(1,sizeof(tnode*))
 			
 #define CTR_PARSER_GET_TOKVAL(x) x->value = calloc(strlen(clex_tok_value()), sizeof(char)); strcpy(paramItem->value, clex_tok_value());
+
+
 
 

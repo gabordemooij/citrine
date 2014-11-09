@@ -58,7 +58,7 @@ obj* cwlk_message(tnode* paramNode) {
 	} else {
 		printf("Cannot send message to receiver of type: %d \n", receiverNode->type);
 	}
-	while((antiCrash++<100) && li->next) {
+	while((antiCrash++<10000) && li->next) {
 		li = li->next;
 		msgnode = li->node;
 		message = msgnode->value;
@@ -68,7 +68,7 @@ obj* cwlk_message(tnode* paramNode) {
 		if (argumentList) {
 			tnode* node = argumentList->node;
 			antiCrash=0;
-			while((antiCrash++)<100) {
+			while((antiCrash++)<10000) {
 				obj* o = cwlk_expr(node);
 				aItem->object = o;
 				aItem->next = CTR_CREATE_ARGUMENT();
@@ -142,7 +142,7 @@ obj* cwlk_run(tnode* program) {
 	if (debug) tree(program, 0);
 	int antiCrash = 0;
 	tlistitem* li = program->nodes;
-	while((antiCrash++)<100 && li) {
+	while((antiCrash++)<10000 && li) {
 		tnode* node = li->node;
 		if (!li->node) {
 			printf("Missing parse node\n");

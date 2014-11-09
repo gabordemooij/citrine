@@ -19,6 +19,7 @@ obj* Number;
 obj* BoolX;
 obj* Console;
 obj* Nil;
+obj* GC;
 int debug;
 
 //measures the size of character
@@ -118,7 +119,7 @@ void tree(tnode* ti, int indent) {
 void ctr_open_context() {
 	cid++;
 	obj* context = NULL;
-	context = malloc(sizeof(obj*));
+	context = calloc(1, sizeof(obj*));
 	context->name = "Context";
 	context->value = NULL;
 	contexts[cid] = context;
@@ -153,14 +154,19 @@ obj* ctr_find_in_my(char* key) {
 	return foundObject;
 }
 
-
 void ctr_set(obj* object) {
+	obj* foundObject;
 	obj* context = contexts[cid];
+	HASH_FIND_STR(context->properties, object->name, foundObject);
+	if (foundObject) {
+		HASH_DELETE(hh, context->properties, foundObject);
+	}
 	HASH_ADD_KEYPTR(hh, context->properties, object->name, strlen(object->name), object);
 }
 
 obj* ctr_build_bool(int truth) {
 	obj* boolObject = CTR_CREATE_OBJECT();
+	CTR_REGISTER_OBJECT(boolObject);
 	boolObject->name = "Bool";
 	if (truth) boolObject->value = "1"; else boolObject->value = "0";
 	boolObject->type = OTBOOL;
@@ -219,6 +225,7 @@ obj* ctr_block_runIt(obj* myself, args* argumentList) {
 
 obj* ctr_build_block(tnode* node) {
 	obj* codeBlockObject = CTR_CREATE_OBJECT();
+	CTR_REGISTER_OBJECT(codeBlockObject);
 	codeBlockObject->type = OTBLOCK;
 	codeBlockObject->block = node;
 	codeBlockObject->link = CBlock;
@@ -418,6 +425,7 @@ obj* ctr_number_times(obj* myself, args* argumentList) {
 
 obj* ctr_build_number(char* n) {
 	obj* numberObject = CTR_CREATE_OBJECT();
+	CTR_REGISTER_OBJECT(numberObject);
 	numberObject->name = "Number";
 	numberObject->value = malloc(sizeof(char)*strlen(n));
 	strcpy(numberObject->value, n);
@@ -429,6 +437,7 @@ obj* ctr_build_number(char* n) {
 obj* ctr_object_make() {
 	obj* objectInstance = NULL;
 	objectInstance = CTR_CREATE_OBJECT();
+	CTR_REGISTER_OBJECT(objectInstance);
 	objectInstance->type = OTOBJECT;
 	objectInstance->value = "[object]";
 	objectInstance->link = Object;
@@ -515,6 +524,7 @@ obj* ctr_object_blueprint(obj* myself, args* argumentList) {
 
 obj* ctr_build_string(char* stringValue) {	
 	obj* stringObject = CTR_CREATE_OBJECT();
+	CTR_REGISTER_OBJECT(stringObject);
 	stringObject->name = "String";
 	stringObject->type = OTSTRING;
 	stringObject->value = calloc(sizeof(char), strlen(stringValue));
@@ -600,19 +610,128 @@ obj* ctr_nil_isnil(obj* myself, args* argumentList) {
 	return truth;
 }
 
+void ctr_gc_mark(obj* object, int x) {
+	obj* item;
+	obj* tmp;
+	HASH_ITER(hh, object->properties, item, tmp) {
+		if (item->mark == 2) continue;
+		if (x > 120) exit(1);
+		x++;
+		printf("marking: %s %s \n", item->name, item->value	);
+		item->mark = 1;
+		ctr_gc_mark(item,x);
+	}
+	HASH_ITER(hh, object->methods, item, tmp) {
+		if (item->mark == 2) continue;
+		if (x > 120) exit(1);
+		x++;
+		printf("marking: %s %s \n", item->name, item->value	);
+		item->mark = 1;
+		ctr_gc_mark(item,x);
+	}
+}
+
+void ctr_gc_sweep() {
+	
+	
+	int x = 0;
+	obj** q = &ctr_first_object;
+	
+	while(x++ < 20 && *q) {
+		printf("check: %s %s %d \n", (*q)->name, (*q)->value, (*q)->mark);
+		if (!(*q)->mark) {
+			
+			obj* u = *q;
+			*q = u->next;
+			/*if (u->parent) {
+				
+				
+				printf("sweepy: %s %s %d \n", u->name, u->value, u->mark);
+				//obj* parent = u->parent;
+				//u->parent = NULL;
+				
+				obj* foundObject;
+				HASH_FIND_STR(u->parent, u->name, foundObject);
+				if (foundObject) {
+					printf("*** has parent, first del from hash. \n");
+					//foundObject->parent = NULL;
+					//HASH_DELETE(hh, parent, foundObject);
+				}
+				
+			}*/
+			
+			
+			int z;
+			for(z =0; z <= cid; z++) {
+				HASH_DELETE(hh, contexts[z], u);
+			}
+			
+			free(u);
+		} else {
+			(*q)->mark = 0;
+			q = &(*q)->next;
+		}
+	}
+	/*
+	while(x < 20 && q) {
+		x++;
+		q2 = q->next;
+		if (q->mark == 0) {
+			printf("sweepy: %s %s %d ", q->name, q->value, q->mark);
+			if (q->parent) {
+				printf(" - has parent, first del from hash.");
+				
+				HASH_DEL(q->parent, q);
+				
+			}
+			free(q);
+			
+			printf("\n");
+		} 
+		if (q->mark == 1) {
+			printf("unmark: %s %s %d \n", q->name, q->value, q->mark);
+			q->mark = 0;
+		}
+		oq = q;
+		q = q2;
+	}*/
+}
+
+void ctr_gc_collect (obj* myself, args* argumentList) {
+	obj* context = contexts[cid];
+	int oldcid = cid;
+	while(cid > -1) {
+		printf("context %d \n", cid);
+		ctr_gc_mark(context,0);
+		cid --;
+		context = contexts[cid];
+	}
+	ctr_gc_sweep();
+	cid = oldcid;
+}
+
 void ctr_initialize_world() {
 	
+	CTR_INIT_HEAD_OBJECT();
+	
 	CTR_CREATE_OBJECT_TYPE(World, "World", "[world]", OTOBJECT);
+	World->mark = 2;
 	contexts[0] = World;
 	
 	CTR_CREATE_OBJECT_TYPE(Console, "Console", "[console]", OTOBJECT)
 	CTR_CREATE_FUNC(ConsoleWrite, &ctr_console_write, "write:", Console);
+	Console->mark = 2;
+	
+	CTR_CREATE_OBJECT_TYPE(GC, "GC", "[GC]", OTOBJECT)
+	CTR_CREATE_FUNC(GCCollect, &ctr_gc_collect, "collect", GC);
+	GC->mark = 2;
 	
 	CTR_CREATE_OBJECT_TYPE(Object, "Object", "[object]", OTOBJECT);
 	CTR_CREATE_FUNC(ObjectMake, &ctr_object_make, "new", Object);
 	CTR_CREATE_FUNC(ObjectMethodDoes, &ctr_object_method_does, "method:does:", Object);
 	CTR_CREATE_FUNC(ObjectOverrideDoes, &ctr_object_override_does, "override:does:", Object);
 	CTR_CREATE_FUNC(ObjectBlueprint, &ctr_object_blueprint, "basedOn:", Object);
+	Object->mark = 2;
 	
 	CTR_CREATE_OBJECT_TYPE(Number, "Number", "0", OTNUMBER);
 	CTR_CREATE_FUNC(numberTimesObject, &ctr_number_times, "times:", Number);
@@ -628,6 +747,7 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(numberNeq, &ctr_number_neq, "!=", Number);
 	CTR_CREATE_FUNC(numberFactorial, &ctr_number_factorial, "factorial", Number);
 	CTR_CREATE_FUNC(numberBetween, &ctr_number_between, "between:and:", Number);
+	Number->mark = 2;
 	
 	CTR_CREATE_OBJECT_TYPE(TextString, "String", "[String]", OTSTRING);
 	CTR_CREATE_FUNC(stringPrintBytes, &ctr_string_printbytes, "printBytes", TextString);
@@ -636,9 +756,11 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(stringFromTo, &ctr_string_fromto, "from:to:", TextString);
 	CTR_CREATE_FUNC(stringConcat, &ctr_string_concat, "+", TextString);
 	CTR_CREATE_FUNC(stringEq, &ctr_string_eq, "==", TextString);
+	TextString->mark = 2;
 	
 	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", "[Code]", OTBLOCK);
 	CTR_CREATE_FUNC(blockRun, &ctr_block_runIt, "run", CBlock);
+	CBlock->mark = 2;
 	
 	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", "False", OTBOOL);
 	CTR_CREATE_FUNC(ifTrue, &ctr_bool_iftrue, "ifTrue:", BoolX);
@@ -646,9 +768,11 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(boolOpposite, &ctr_bool_opposite, "opposite", BoolX);
 	CTR_CREATE_FUNC(boolAND, &ctr_bool_and, "&&", BoolX);
 	CTR_CREATE_FUNC(boolOR, &ctr_bool_or, "||", BoolX);
+	BoolX->mark = 2;
 	
 	CTR_CREATE_OBJECT_TYPE(Nil, "Nil", "Nil", OTNIL);
 	CTR_CREATE_FUNC(isNil, &ctr_nil_isnil, "isNil", Nil);
+	Nil->mark = 2;
 }
 
 obj* ctr_send_message(obj* receiverObject, char* message, args* argumentList) {
@@ -688,6 +812,7 @@ obj* ctr_send_message(obj* receiverObject, char* message, args* argumentList) {
 
 obj* ctr_assign_value(char* name, obj* o) {
 	obj* object = CTR_CREATE_OBJECT();
+	CTR_REGISTER_OBJECT(object);
 	object->properties = o->properties;
     object->methods = o->methods;
     object->type = o->type;
@@ -701,6 +826,7 @@ obj* ctr_assign_value(char* name, obj* o) {
 
 obj* ctr_assign_value_to_my(char* name, obj* o) {
 	obj* object = CTR_CREATE_OBJECT();
+	CTR_REGISTER_OBJECT(object);
 	object->properties = o->properties;
     object->methods = o->methods;
     object->type = o->type;
@@ -708,7 +834,14 @@ obj* ctr_assign_value_to_my(char* name, obj* o) {
     object->link = o->link;
     object->value = o->value;
     object->name = name;
-	obj* my = ctr_find("me");
+    obj* my = ctr_find("me");
+    
+    obj* foundObject;
+	HASH_FIND_STR(my->link->properties, object->name, foundObject);
+	if (foundObject) {
+		HASH_DELETE(hh, my->link->properties, foundObject);
+	}
+	
 	HASH_ADD_KEYPTR(hh, my->link->properties, name, strlen(name), object);
 	return object;
 }
