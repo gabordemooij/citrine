@@ -155,7 +155,7 @@ obj* ctr_find_in_my(char* key) {
 }
 
 void ctr_set(obj* object) {
-	obj* foundObject;
+	obj* foundObject = CTR_CREATE_OBJECT();
 	obj* context = contexts[cid];
 	HASH_FIND_STR(context->properties, object->name, foundObject);
 	if (foundObject) {
@@ -189,6 +189,11 @@ obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 	selfRef->link = my;
 	obj* result;
 	tnode* node = myself->block;
+	obj* thisBlock = CTR_CREATE_OBJECT();
+	thisBlock->name = "__currentblock__";
+	thisBlock->type = OTBLOCK;
+	thisBlock->value = "[running block]";
+	thisBlock->link = myself;
 	tlistitem* codeBlockParts = node->nodes;
 	tnode* codeBlockPart1 = codeBlockParts->node;
 	tnode* codeBlockPart2 = codeBlockParts->next->node;
@@ -211,9 +216,9 @@ obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 			parameter = parameterList->node;
 		}
 	}
-	
 	ctr_open_context();
 	ctr_set(selfRef);
+	ctr_set(thisBlock); //otherwise running block may get gc'ed.
 	result = cwlk_run(codeBlockPart2);
 	ctr_close_context();
 	return result;
@@ -410,6 +415,7 @@ obj* ctr_number_factorial(obj* myself, args* argumentList) {
 obj* ctr_number_times(obj* myself, args* argumentList) {
 	obj* block = argumentList->object;
 	if (block->type != OTBLOCK) { printf("Expected code block."); exit(1); }
+	block->mark = 2; //mark as sticky
 	int t = atoi(myself->value);
 	int i;
 	for(i=0; i<t; i++) {
@@ -420,6 +426,7 @@ obj* ctr_number_times(obj* myself, args* argumentList) {
 		arguments->object = indexNumber;
 		ctr_block_run(block, arguments, myself);
 	}
+	block->mark = 0;
 	return myself;
 }
 
@@ -610,99 +617,44 @@ obj* ctr_nil_isnil(obj* myself, args* argumentList) {
 	return truth;
 }
 
-void ctr_gc_mark(obj* object, int x) {
+void ctr_gc_mark(obj* object) {
 	obj* item;
 	obj* tmp;
 	HASH_ITER(hh, object->properties, item, tmp) {
 		if (item->mark == 2) continue;
-		if (x > 120) exit(1);
-		x++;
-		printf("marking: %s %s \n", item->name, item->value	);
 		item->mark = 1;
-		ctr_gc_mark(item,x);
+		ctr_gc_mark(item);
 	}
 	HASH_ITER(hh, object->methods, item, tmp) {
 		if (item->mark == 2) continue;
-		if (x > 120) exit(1);
-		x++;
-		printf("marking: %s %s \n", item->name, item->value	);
 		item->mark = 1;
-		ctr_gc_mark(item,x);
+		ctr_gc_mark(item);
 	}
 }
 
 void ctr_gc_sweep() {
-	
-	
-	int x = 0;
 	obj** q = &ctr_first_object;
-	
-	while(x++ < 20 && *q) {
-		printf("check: %s %s %d \n", (*q)->name, (*q)->value, (*q)->mark);
-		if (!(*q)->mark) {
-			
+	while(*q) {
+		if ((*q)->mark==0){
 			obj* u = *q;
 			*q = u->next;
-			/*if (u->parent) {
-				
-				
-				printf("sweepy: %s %s %d \n", u->name, u->value, u->mark);
-				//obj* parent = u->parent;
-				//u->parent = NULL;
-				
-				obj* foundObject;
-				HASH_FIND_STR(u->parent, u->name, foundObject);
-				if (foundObject) {
-					printf("*** has parent, first del from hash. \n");
-					//foundObject->parent = NULL;
-					//HASH_DELETE(hh, parent, foundObject);
-				}
-				
-			}*/
-			
-			
 			int z;
 			for(z =0; z <= cid; z++) {
 				HASH_DELETE(hh, contexts[z], u);
 			}
-			
 			free(u);
 		} else {
-			(*q)->mark = 0;
+			if ((*q)->mark == 1) (*q)->mark = 0;
 			q = &(*q)->next;
 		}
 	}
-	/*
-	while(x < 20 && q) {
-		x++;
-		q2 = q->next;
-		if (q->mark == 0) {
-			printf("sweepy: %s %s %d ", q->name, q->value, q->mark);
-			if (q->parent) {
-				printf(" - has parent, first del from hash.");
-				
-				HASH_DEL(q->parent, q);
-				
-			}
-			free(q);
-			
-			printf("\n");
-		} 
-		if (q->mark == 1) {
-			printf("unmark: %s %s %d \n", q->name, q->value, q->mark);
-			q->mark = 0;
-		}
-		oq = q;
-		q = q2;
-	}*/
 }
 
 void ctr_gc_collect (obj* myself, args* argumentList) {
 	obj* context = contexts[cid];
 	int oldcid = cid;
 	while(cid > -1) {
-		printf("context %d \n", cid);
-		ctr_gc_mark(context,0);
+		ctr_gc_mark(context);
 		cid --;
 		context = contexts[cid];
 	}
@@ -836,7 +788,7 @@ obj* ctr_assign_value_to_my(char* name, obj* o) {
     object->name = name;
     obj* my = ctr_find("me");
     
-    obj* foundObject;
+    obj* foundObject = CTR_CREATE_OBJECT();
 	HASH_FIND_STR(my->link->properties, object->name, foundObject);
 	if (foundObject) {
 		HASH_DELETE(hh, my->link->properties, foundObject);
