@@ -1,0 +1,15 @@
+1000 times: {\
+	a = 'First'.
+	b = 'Second'.
+	a = b.
+	garbageMaker = Object new.
+	garbageMaker method: 'putGarbageOnScreen' does: {\
+		x = 1.
+		y = 2.
+		GC collect.
+	}.
+	garbageMaker putGarbageOnScreen.
+	Console write: a.
+	#dont remove your own code block.
+	GC collect.
+}.
