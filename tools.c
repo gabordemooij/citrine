@@ -358,11 +358,33 @@ obj* ctr_number_add(obj* myself, args* argumentList) {
 	float b = atof(otherNum->value);
 	char* str = calloc(sizeof(char), 40);
 	sprintf(str, "%f", (a+b));
+	obj* newNum = ctr_build_number(str);
+	return newNum;
+}
+
+obj* ctr_number_inc(obj* myself, args* argumentList) {
+	obj* otherNum = argumentList->object;
+	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
+	float a = atof(myself->value);
+	float b = atof(otherNum->value);
+	char* str = calloc(sizeof(char), 40);
+	sprintf(str, "%f", (a+b));
 	myself->value = str;
 	return myself;
 }
 
 obj* ctr_number_minus(obj* myself, args* argumentList) {
+	obj* otherNum = argumentList->object;
+	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
+	float a = atof(myself->value);
+	float b = atof(otherNum->value);
+	char* str = calloc(sizeof(char), 40);
+	sprintf(str, "%f", (a-b));
+	obj* newNum = ctr_build_number(str);
+	return newNum;
+}
+
+obj* ctr_number_dec(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = atof(myself->value);
@@ -380,11 +402,38 @@ obj* ctr_number_multiply(obj* myself, args* argumentList) {
 	float b = atof(otherNum->value);
 	char* str = calloc(sizeof(char), 40);
 	sprintf(str, "%f", (a*b));
+	obj* newNum = ctr_build_number(str);
+	return newNum;
+}
+
+obj* ctr_number_mul(obj* myself, args* argumentList) {
+	obj* otherNum = argumentList->object;
+	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
+	float a = atof(myself->value);
+	float b = atof(otherNum->value);
+	char* str = calloc(sizeof(char), 40);
+	sprintf(str, "%f", (a*b));
 	myself->value = str;
 	return myself;
 }
 
+
 obj* ctr_number_divide(obj* myself, args* argumentList) {
+	obj* otherNum = argumentList->object;
+	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
+	float a = atof(myself->value);
+	float b = atof(otherNum->value);
+	if (b == 0) {
+		printf("Division by zero.");
+		exit(1);
+	}
+	char* str = calloc(sizeof(char), 40);
+	sprintf(str, "%f", (a/b));
+	obj* newNum = ctr_build_number(str);
+	return newNum;
+}
+
+obj* ctr_number_div(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = atof(myself->value);
@@ -398,6 +447,7 @@ obj* ctr_number_divide(obj* myself, args* argumentList) {
 	myself->value = str;
 	return myself;
 }
+
 
 obj* ctr_number_factorial(obj* myself, args* argumentList) {
 	float t = floor(atof(myself->value));
@@ -688,9 +738,13 @@ void ctr_initialize_world() {
 	CTR_CREATE_OBJECT_TYPE(Number, "Number", "0", OTNUMBER);
 	CTR_CREATE_FUNC(numberTimesObject, &ctr_number_times, "times:", Number);
 	CTR_CREATE_FUNC(numberAdd, &ctr_number_add, "+", Number);
+	CTR_CREATE_FUNC(numberInc, &ctr_number_inc, "inc:", Number);
 	CTR_CREATE_FUNC(numberMin, &ctr_number_minus, "-", Number);
+	CTR_CREATE_FUNC(numberDec, &ctr_number_dec, "dec:", Number);
 	CTR_CREATE_FUNC(numberMul, &ctr_number_multiply, "*", Number);
+	CTR_CREATE_FUNC(numberMuls, &ctr_number_mul, "mul:", Number);
 	CTR_CREATE_FUNC(numberDiv, &ctr_number_divide, "/", Number);
+	CTR_CREATE_FUNC(numberDivi, &ctr_number_div, "div:", Number);
 	CTR_CREATE_FUNC(numberHiThan, &ctr_number_higherThan, ">", Number);
 	CTR_CREATE_FUNC(numberHiEqThan, &ctr_number_higherEqThan, ">=", Number);
 	CTR_CREATE_FUNC(numberLoThan, &ctr_number_lowerThan, "<", Number);
@@ -770,7 +824,8 @@ obj* ctr_assign_value(char* name, obj* o) {
     object->type = o->type;
     object->block = o->block;
     object->link = o->link;
-    object->value = o->value;
+    object->value = calloc(sizeof(char), strlen(o->value));
+	 strcpy(object->value, o->value); 
     object->name = name;
 	ctr_set(object);
 	return object;
