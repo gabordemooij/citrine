@@ -77,6 +77,7 @@ struct tnode {
 	int type;
 	int modifier;
 	char* value;
+	int vlen;
 	struct tlistitem* nodes;
 };
 
@@ -138,9 +139,9 @@ HASH_ADD_KEYPTR(hh, Q->methods, X->name, strlen(X->name), X);
 
 #define CTR_CREATE_ARGUMENT() (args*) calloc(sizeof(args), 1)
 
-#define CTR_PARSER_CREATE_LISTITEM() (tlistitem*) calloc(1, sizeof(tlistitem*))
+#define CTR_PARSER_CREATE_LISTITEM() (tlistitem*) calloc(1, sizeof(tlistitem))
 
-#define	CTR_PARSER_CREATE_NODE() (tnode*) calloc(1,sizeof(tnode*))
+#define	CTR_PARSER_CREATE_NODE() (tnode*) calloc(1,sizeof(tnode))
 			
 #define CTR_PARSER_GET_TOKVAL(x) x->value = calloc(strlen(clex_tok_value()), sizeof(char)); strcpy(paramItem->value, clex_tok_value());
 
