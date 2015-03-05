@@ -265,8 +265,10 @@ tnode* cparse_string() {
 	tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = LTRSTRING;
 	char* n = clex_readstr();
-	r->value = calloc(sizeof(char), strlen(n));
-	strcpy(r->value, n);
+	long vlen = clex_len;
+	r->value = calloc(sizeof(char), vlen);
+	strncpy(r->value, n, vlen);
+	r->vlen = vlen;
 	clex_tok(); //eat trailing quote.
 	return r;
 }
@@ -279,6 +281,7 @@ tnode* cparse_number() {
 	char* n = clex_tok_value();
 	r->value = calloc(sizeof(char), strlen(n));
 	strcpy(r->value, n);
+	r->vlen = strlen(n);
 	if (debug) printf("Parsing number: %s.\n", r->value);
 	return r;
 }
@@ -287,7 +290,8 @@ tnode* cparse_false() {
 	clex_tok();
 	tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = LTRBOOLFALSE;
-	r->value = "False";
+	ASSIGN_STRING(r, value, "False", 5);
+	r->vlen = 5;
 	return r;
 }
 
@@ -295,7 +299,8 @@ tnode* cparse_true() {
 	clex_tok();
 	tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = LTRBOOLTRUE;
-	r->value = "True";
+	ASSIGN_STRING(r, value,"True",4);
+	r->vlen = 4;
 	return r;
 }
 

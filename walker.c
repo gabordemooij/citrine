@@ -48,7 +48,7 @@ obj* cwlk_message(tnode* paramNode) {
 	} else if (receiverNode->type == LTRBOOLFALSE ) {
 		r = ctr_build_bool(0);
 	} else if (receiverNode->type == LTRSTRING ) {
-		r = ctr_build_string(receiverNode->value);
+		r = ctr_build_string(receiverNode->value, receiverNode->vlen);
 	} else if (receiverNode->type == LTRNUM) {
 		r = ctr_build_number(receiverNode->value);
 	} else if (receiverNode->type == NESTED) {
@@ -103,7 +103,7 @@ obj* cwlk_assignment(tnode* node) {
 obj* cwlk_expr(tnode* node) {
 	obj* result;
 	if (node->type == LTRSTRING) {
-		result = ctr_build_string(node->value);
+		result = ctr_build_string(node->value, node->vlen);
 	} else if (node->type == LTRBOOLTRUE) {
 		result = ctr_build_bool(1);
 	} else if (node->type == LTRBOOLFALSE) {

@@ -57,6 +57,7 @@ struct obj {
     struct tnode* block;
     struct obj* link;
     char* value;
+    long vlen;
     int mark;
     struct obj* next;
     UT_hash_handle hh;
@@ -77,7 +78,7 @@ struct tnode {
 	int type;
 	int modifier;
 	char* value;
-	int vlen;
+	long vlen;
 	struct tlistitem* nodes;
 };
 
@@ -95,6 +96,8 @@ typedef struct tnode tnode;
 
 tnode* dparse_parse(char* prg);
 
+long clex_len;
+
 void 	clex_load(char* prg);
 int 	clex_tok();
 char* 	clex_tok_value();
@@ -106,7 +109,7 @@ obj* ctr_find(char* key);
 obj* ctr_find_in_my(char* key);
 obj* ctr_assign_value(char* name, obj* object);
 obj* ctr_assign_value_to_my(char* name, obj* object);
-obj* ctr_build_string(char* object);
+obj* ctr_build_string(char* object, long vlen);
 obj* ctr_build_block(tnode* node);
 obj* ctr_build_number(char* object);
 obj* ctr_build_bool(int truth);
@@ -130,7 +133,7 @@ int debug;
 #define CTR_REGISTER_OBJECT(X) X->next = ctr_first_object; ctr_first_object = X;
 #define CTR_INIT_HEAD_OBJECT() ctr_first_object = NULL;
 
-#define CTR_CREATE_OBJECT_TYPE(O,C,V,OT) O = CTR_CREATE_OBJECT(); O->name = C; O->value = V; O->type = OT; HASH_ADD_KEYPTR(hh, World->properties, O->name, strlen(O->name), O);
+#define CTR_CREATE_OBJECT_TYPE(O,C,V,S,OT) O = CTR_CREATE_OBJECT(); O->name = C; O->value = V; O->vlen = S; O->type = OT; HASH_ADD_KEYPTR(hh, World->properties, O->name, strlen(O->name), O);
 
 #define CTR_CREATE_FUNC(X,Y,Z,Q) obj* X = CTR_CREATE_OBJECT();\
 X->name = Z; X->type = OTNATFUNC; \
@@ -145,6 +148,6 @@ HASH_ADD_KEYPTR(hh, Q->methods, X->name, strlen(X->name), X);
 			
 #define CTR_PARSER_GET_TOKVAL(x) x->value = calloc(strlen(clex_tok_value()), sizeof(char)); strcpy(paramItem->value, clex_tok_value());
 
-
+#define ASSIGN_STRING(o,p,v,s) o->p = calloc(s,sizeof(char)); strncpy( (char*) o->p,v,s);
 
 

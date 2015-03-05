@@ -195,7 +195,9 @@ int clex_tok() {
 	return REF;
 }
 
+
 char* clex_readstr() {
+	clex_len=0;
 	char* strbuff = malloc(100);
 	int antiCrash = 0;
 	char c = *code;
@@ -208,6 +210,7 @@ char* clex_readstr() {
 			c = *code;
 			continue;
 		}
+		clex_len ++;
 		escape = 0;
 		*strbuff = c;
 		strbuff++;

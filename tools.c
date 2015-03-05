@@ -34,7 +34,6 @@ long getutf8len(char* strval, long max) {
 	long i;
 	long j = 0;
 	int s = 0;
-	if (max == -1) max = strlen(strval);
 	for(i = 0; i < max; i++) {
 		s = utf8size(strval[i]);
 		j += (s - 1);
@@ -108,7 +107,7 @@ void tree(tnode* ti, int indent) {
 		else if (t->type == LTRBOOLTRUE)	str = "BLTRUE\0";
 		else if (t->type == LTRNIL)	        str = "LTRNIL\0";
 		else 								str = "UNKNW?\0";
-		printf("%d:%s %s\n", t->type, str, t->value);
+		printf("%d:%s %s (vlen: %lu) \n", t->type, str, t->value, t->vlen);
 		if (t->nodes) tree(t, indent + 1);
 		if (!li->next) break; 
 		li = li->next;
@@ -119,7 +118,7 @@ void tree(tnode* ti, int indent) {
 void ctr_open_context() {
 	cid++;
 	obj* context = NULL;
-	context = calloc(1, sizeof(obj*));
+	context = calloc(1, sizeof(obj));
 	context->name = "Context";
 	context->value = NULL;
 	contexts[cid] = context;
@@ -133,7 +132,7 @@ void ctr_close_context() {
 obj* ctr_find(char* key) {
 	int i = cid;
 	obj* foundObject = NULL;
-	foundObject = calloc(sizeof(obj*), 1);
+	foundObject = calloc(sizeof(obj), 1);
 	int antiCrash = 0;
 	int first = 1;
 	while(((antiCrash++ < 100) && i>-1 && foundObject == NULL) || first) {
@@ -167,8 +166,9 @@ void ctr_set(obj* object) {
 obj* ctr_build_bool(int truth) {
 	obj* boolObject = CTR_CREATE_OBJECT();
 	CTR_REGISTER_OBJECT(boolObject);
-	boolObject->name = "Bool";
+	ASSIGN_STRING(boolObject,name,"Bool",4);
 	if (truth) boolObject->value = "1"; else boolObject->value = "0";
+	boolObject->vlen = 1;
 	boolObject->type = OTBOOL;
 	boolObject->link = BoolX;
 	return boolObject;
@@ -185,14 +185,14 @@ obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 	obj* selfRef = CTR_CREATE_OBJECT();
 	selfRef->name = "me";
 	selfRef->type = OTOBJECT;
-	selfRef->value = "[self]";
+	ASSIGN_STRING(selfRef,value,"[self]",6);
 	selfRef->link = my;
 	obj* result;
 	tnode* node = myself->block;
 	obj* thisBlock = CTR_CREATE_OBJECT();
-	thisBlock->name = "__currentblock__";
+	ASSIGN_STRING(thisBlock,name,"__currentblock__",16);
 	thisBlock->type = OTBLOCK;
-	thisBlock->value = "[running block]";
+	ASSIGN_STRING(thisBlock,value,"[running block]",15);
 	thisBlock->link = myself;
 	tlistitem* codeBlockParts = node->nodes;
 	tnode* codeBlockPart1 = codeBlockParts->node;
@@ -234,7 +234,7 @@ obj* ctr_build_block(tnode* node) {
 	codeBlockObject->type = OTBLOCK;
 	codeBlockObject->block = node;
 	codeBlockObject->link = CBlock;
-	codeBlockObject->value = "[block]";
+	ASSIGN_STRING(codeBlockObject,value,"[block]",7);
 	return codeBlockObject;
 }
 
@@ -356,7 +356,7 @@ obj* ctr_number_add(obj* myself, args* argumentList) {
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = atof(myself->value);
 	float b = atof(otherNum->value);
-	char* str = calloc(sizeof(char), 40);
+	char* str = calloc(40, sizeof(char));
 	sprintf(str, "%f", (a+b));
 	obj* newNum = ctr_build_number(str);
 	return newNum;
@@ -367,9 +367,11 @@ obj* ctr_number_inc(obj* myself, args* argumentList) {
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = atof(myself->value);
 	float b = atof(otherNum->value);
-	char* str = calloc(sizeof(char), 40);
+	char* str = calloc(40, sizeof(char));
 	sprintf(str, "%f", (a+b));
-	myself->value = str;
+	long len = strlen(str);
+	ASSIGN_STRING(myself,value,str,len);
+	myself->vlen = len;
 	return myself;
 }
 
@@ -378,7 +380,7 @@ obj* ctr_number_minus(obj* myself, args* argumentList) {
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = atof(myself->value);
 	float b = atof(otherNum->value);
-	char* str = calloc(sizeof(char), 40);
+	char* str = calloc(40, sizeof(char));
 	sprintf(str, "%f", (a-b));
 	obj* newNum = ctr_build_number(str);
 	return newNum;
@@ -389,9 +391,11 @@ obj* ctr_number_dec(obj* myself, args* argumentList) {
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = atof(myself->value);
 	float b = atof(otherNum->value);
-	char* str = calloc(sizeof(char), 40);
+	char* str = calloc(40, sizeof(char));
 	sprintf(str, "%f", (a-b));
-	myself->value = str;
+	long len = strlen(str);
+	ASSIGN_STRING(myself,value,str,len);
+	myself->vlen = len;
 	return myself;
 }
 
@@ -400,7 +404,7 @@ obj* ctr_number_multiply(obj* myself, args* argumentList) {
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = atof(myself->value);
 	float b = atof(otherNum->value);
-	char* str = calloc(sizeof(char), 40);
+	char* str = calloc(40, sizeof(char));
 	sprintf(str, "%f", (a*b));
 	obj* newNum = ctr_build_number(str);
 	return newNum;
@@ -411,9 +415,11 @@ obj* ctr_number_mul(obj* myself, args* argumentList) {
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = atof(myself->value);
 	float b = atof(otherNum->value);
-	char* str = calloc(sizeof(char), 40);
+	char* str = calloc(40, sizeof(char));
 	sprintf(str, "%f", (a*b));
-	myself->value = str;
+	long len = strlen(str);
+	ASSIGN_STRING(myself,value,str,len);
+	myself->vlen = len;
 	return myself;
 }
 
@@ -427,7 +433,7 @@ obj* ctr_number_divide(obj* myself, args* argumentList) {
 		printf("Division by zero.");
 		exit(1);
 	}
-	char* str = calloc(sizeof(char), 40);
+	char* str = calloc(40, sizeof(char));
 	sprintf(str, "%f", (a/b));
 	obj* newNum = ctr_build_number(str);
 	return newNum;
@@ -444,7 +450,9 @@ obj* ctr_number_div(obj* myself, args* argumentList) {
 	}
 	char* str = calloc(sizeof(char), 40);
 	sprintf(str, "%f", (a/b));
-	myself->value = str;
+	long len = strlen(str);
+	ASSIGN_STRING(myself,value,str,len);
+	myself->vlen = len;
 	return myself;
 }
 
@@ -456,9 +464,9 @@ obj* ctr_number_factorial(obj* myself, args* argumentList) {
 	for(i = (int) t; i > 0; i--) {
 		a = a * i;
 	}
-	char* str = calloc(sizeof(char), 40);
+	char* str = calloc(40, sizeof(char));
 	sprintf(str, "%f", (a));
-	myself->value = str;
+	ASSIGN_STRING(myself,value,str,strlen(str));
 	return myself;
 }
 
@@ -480,12 +488,14 @@ obj* ctr_number_times(obj* myself, args* argumentList) {
 	return myself;
 }
 
+//create number from \0 terminated string
 obj* ctr_build_number(char* n) {
+	int s = strlen(n);
 	obj* numberObject = CTR_CREATE_OBJECT();
 	CTR_REGISTER_OBJECT(numberObject);
-	numberObject->name = "Number";
-	numberObject->value = malloc(sizeof(char)*strlen(n));
-	strcpy(numberObject->value, n);
+	ASSIGN_STRING(numberObject,name,"Number",6);
+	ASSIGN_STRING(numberObject,value,n,s);
+	numberObject->vlen = s;	
 	numberObject->type = OTNUMBER;
 	numberObject->link = Number;
 	return numberObject;
@@ -496,7 +506,7 @@ obj* ctr_object_make() {
 	objectInstance = CTR_CREATE_OBJECT();
 	CTR_REGISTER_OBJECT(objectInstance);
 	objectInstance->type = OTOBJECT;
-	objectInstance->value = "[object]";
+	ASSIGN_STRING(objectInstance,value,"[object]", 8);
 	objectInstance->link = Object;
 	return objectInstance;
 }
@@ -555,7 +565,7 @@ obj* ctr_object_override_does(obj* myself, args* argumentList) {
 	obj* oldBlock = CTR_CREATE_OBJECT();
 	HASH_FIND_STR(myself->methods, methodBlock->name, oldBlock);
 	if (!oldBlock) printf("Cannot override: %s no such method.", oldBlock->name);
-	char* str = (char*) calloc(sizeof(char),255);
+	char* str = (char*) calloc(255, sizeof(char));
 	strcat(str, "overridden-");
 	strcat(str, oldBlock->name);
 	oldBlock->name = str;
@@ -579,20 +589,20 @@ obj* ctr_object_blueprint(obj* myself, args* argumentList) {
 	return myself;
 }
 
-obj* ctr_build_string(char* stringValue) {	
+obj* ctr_build_string(char* stringValue, long size) {
 	obj* stringObject = CTR_CREATE_OBJECT();
 	CTR_REGISTER_OBJECT(stringObject);
-	stringObject->name = "String";
+	ASSIGN_STRING(stringObject,name,"String",6);
+	ASSIGN_STRING(stringObject,value,stringValue,size);
+	stringObject->vlen = size;
 	stringObject->type = OTSTRING;
-	stringObject->value = calloc(sizeof(char), strlen(stringValue));
-	strcpy(stringObject->value, stringValue);
 	stringObject->link = TextString;
 	return stringObject;
 }
 
 obj* ctr_string_bytes(obj* myself, args* argumentList) {
-	char* str = calloc(sizeof(char), 100);
-	long l = strlen(myself->value);
+	char* str = calloc(100, sizeof(char));
+	long l = (myself->vlen);
 	sprintf(str, "%lu", l);
 	return ctr_build_number(str);
 }
@@ -601,19 +611,22 @@ obj* ctr_string_eq(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
-	return ctr_build_bool((strcmp(argumentList->object->value, myself->value)==0));
+	if (argumentList->object->vlen != myself->vlen) {
+		return ctr_build_bool(0);
+	}
+	return ctr_build_bool((strncmp(argumentList->object->value, myself->value, myself->vlen)==0));
 }
 
 obj* ctr_string_length(obj* myself, args* argumentList) {
-	long n = getutf8len(myself->value, -1);
-	char* str = calloc(sizeof(char), 100);
+	long n = getutf8len(myself->value, myself->vlen);
+	char* str = calloc(100, sizeof(char));
 	sprintf(str, "%lu", n);
 	return ctr_build_number(str);
 }
 
 obj* ctr_string_printbytes(obj* myself, args* argumentList) {
 	char* str = myself->value;
-	long n = strlen(str);
+	long n = myself->vlen;
 	long i = 0;
 	for(i = 0; i < n; i++) printf("%u ", (unsigned char) str[i]);
 	printf("\n");
@@ -624,12 +637,12 @@ obj* ctr_string_concat(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
-	long n1 = strlen(myself->value);
-	long n2 = strlen(argumentList->object->value);
-	char* dest = calloc(sizeof(char), n1 + n2);
+	long n1 = myself->vlen;
+	long n2 = argumentList->object->vlen;
+	char* dest = calloc(sizeof(char), (n1 + n2));
 	strncpy(dest, myself->value, n1);
 	strncat(dest, argumentList->object->value, n2);
-	obj* newString = ctr_build_string(dest);
+	obj* newString = ctr_build_string(dest, (n1 + n2));
 	return newString;	
 }
 
@@ -647,9 +660,9 @@ obj* ctr_string_fromto(obj* myself, args* argumentList) {
 	long b = atol(toPos->value); 
 	long ua = getBytesUtf8(myself->value, 0, a);
 	long ub = getBytesUtf8(myself->value, ua, ((b - a) + 1));
-	char* dest = calloc(sizeof(char), ub);
+	char* dest = calloc(ub, sizeof(char));
 	strncpy(dest, (myself->value) + ua, ub);
-	obj* newString = ctr_build_string(dest);
+	obj* newString = ctr_build_string(dest,ub);
 	return newString;
 }
 
@@ -716,26 +729,26 @@ void ctr_initialize_world() {
 	
 	CTR_INIT_HEAD_OBJECT();
 	
-	CTR_CREATE_OBJECT_TYPE(World, "World", "[world]", OTOBJECT);
+	CTR_CREATE_OBJECT_TYPE(World, "World", "[world]", 7, OTOBJECT);
 	World->mark = 2;
 	contexts[0] = World;
 	
-	CTR_CREATE_OBJECT_TYPE(Console, "Console", "[console]", OTOBJECT)
+	CTR_CREATE_OBJECT_TYPE(Console, "Console", "[console]", 9, OTOBJECT)
 	CTR_CREATE_FUNC(ConsoleWrite, &ctr_console_write, "write:", Console);
 	Console->mark = 2;
 	
-	CTR_CREATE_OBJECT_TYPE(GC, "GC", "[GC]", OTOBJECT)
+	CTR_CREATE_OBJECT_TYPE(GC, "GC", "[GC]", 4, OTOBJECT)
 	CTR_CREATE_FUNC(GCCollect, &ctr_gc_collect, "collect", GC);
 	GC->mark = 2;
 	
-	CTR_CREATE_OBJECT_TYPE(Object, "Object", "[object]", OTOBJECT);
+	CTR_CREATE_OBJECT_TYPE(Object, "Object", "[object]",8, OTOBJECT);
 	CTR_CREATE_FUNC(ObjectMake, &ctr_object_make, "new", Object);
 	CTR_CREATE_FUNC(ObjectMethodDoes, &ctr_object_method_does, "method:does:", Object);
 	CTR_CREATE_FUNC(ObjectOverrideDoes, &ctr_object_override_does, "override:does:", Object);
 	CTR_CREATE_FUNC(ObjectBlueprint, &ctr_object_blueprint, "basedOn:", Object);
 	Object->mark = 2;
 	
-	CTR_CREATE_OBJECT_TYPE(Number, "Number", "0", OTNUMBER);
+	CTR_CREATE_OBJECT_TYPE(Number, "Number", "0", 1, OTNUMBER);
 	CTR_CREATE_FUNC(numberTimesObject, &ctr_number_times, "times:", Number);
 	CTR_CREATE_FUNC(numberAdd, &ctr_number_add, "+", Number);
 	CTR_CREATE_FUNC(numberInc, &ctr_number_inc, "inc:", Number);
@@ -755,7 +768,7 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(numberBetween, &ctr_number_between, "between:and:", Number);
 	Number->mark = 2;
 	
-	CTR_CREATE_OBJECT_TYPE(TextString, "String", "[String]", OTSTRING);
+	CTR_CREATE_OBJECT_TYPE(TextString, "String", "[String]", 8, OTSTRING);
 	CTR_CREATE_FUNC(stringPrintBytes, &ctr_string_printbytes, "printBytes", TextString);
 	CTR_CREATE_FUNC(stringBytes, &ctr_string_bytes, "bytes", TextString);
 	CTR_CREATE_FUNC(stringLength, &ctr_string_length, "length", TextString);
@@ -764,11 +777,11 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(stringEq, &ctr_string_eq, "==", TextString);
 	TextString->mark = 2;
 	
-	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", "[Code]", OTBLOCK);
+	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", "[Code]", 6, OTBLOCK);
 	CTR_CREATE_FUNC(blockRun, &ctr_block_runIt, "run", CBlock);
 	CBlock->mark = 2;
 	
-	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", "False", OTBOOL);
+	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", "False", 5, OTBOOL);
 	CTR_CREATE_FUNC(ifTrue, &ctr_bool_iftrue, "ifTrue:", BoolX);
 	CTR_CREATE_FUNC(ifFalse, &ctr_bool_ifFalse, "ifFalse:", BoolX);
 	CTR_CREATE_FUNC(boolOpposite, &ctr_bool_opposite, "opposite", BoolX);
@@ -776,7 +789,7 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(boolOR, &ctr_bool_or, "||", BoolX);
 	BoolX->mark = 2;
 	
-	CTR_CREATE_OBJECT_TYPE(Nil, "Nil", "Nil", OTNIL);
+	CTR_CREATE_OBJECT_TYPE(Nil, "Nil", "Nil", 3, OTNIL);
 	CTR_CREATE_FUNC(isNil, &ctr_nil_isnil, "isNil", Nil);
 	Nil->mark = 2;
 }
@@ -824,8 +837,9 @@ obj* ctr_assign_value(char* name, obj* o) {
     object->type = o->type;
     object->block = o->block;
     object->link = o->link;
-    object->value = calloc(sizeof(char), strlen(o->value));
-	 strcpy(object->value, o->value); 
+    object->value = calloc(o->vlen, sizeof(char));
+    object->vlen = o->vlen;
+	 strncpy(object->value, o->value, o->vlen);
     object->name = name;
 	ctr_set(object);
 	return object;
@@ -839,10 +853,11 @@ obj* ctr_assign_value_to_my(char* name, obj* o) {
     object->type = o->type;
     object->block = o->block;
     object->link = o->link;
-    object->value = o->value;
+    object->value = calloc(o->vlen, sizeof(char));
+    object->vlen = o->vlen;
+	 strncpy(object->value, o->value, o->vlen);
     object->name = name;
     obj* my = ctr_find("me");
-    
     obj* foundObject = CTR_CREATE_OBJECT();
 	HASH_FIND_STR(my->link->properties, object->name, foundObject);
 	if (foundObject) {
