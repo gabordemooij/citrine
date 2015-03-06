@@ -45,12 +45,11 @@ int clex_tok() {
 	olderptr = oldptr;
 	oldptr = code;
 	char c;
-	int anticrash = 0;
 	int i = 0;
 	int comment_mode = 0;
 	buffer[0] = '\0';
 	c = *code;
-	while((anticrash++) < 200 && code != eofcode && (isspace(c) || c == '#' || comment_mode)) {
+	while(code != eofcode && (isspace(c) || c == '#' || comment_mode)) {
 		if (c == '\n') comment_mode = 0;
 		if (c == '#') comment_mode = 1;
 		code ++;
@@ -76,7 +75,7 @@ int clex_tok() {
 		i++;
 		code++;
 		c = *code;
-		while((anticrash++)<100 && (isdigit(c))) {
+		while((isdigit(c))) {
 			buffer[i] = c;
 			i++;
 			code++;
@@ -92,7 +91,7 @@ int clex_tok() {
 			code++;
 			c = *code;
 		}
-		while((anticrash++)<100 && (isdigit(c))) {
+		while((isdigit(c))) {
 			buffer[i] = c;
 			i++;
 			code++;
@@ -180,7 +179,7 @@ int clex_tok() {
 		return REF;
 	}
 
-	while((anticrash++) < 100 && !isspace(c) && CTR_IS_NO_TOK(c) && code!=eofcode) {
+	while(!isspace(c) && CTR_IS_NO_TOK(c) && code!=eofcode) {
 		buffer[i] = c;
 		i++;
 		if (i > bflmt) {
@@ -199,11 +198,10 @@ int clex_tok() {
 char* clex_readstr() {
 	clex_len=0;
 	char* strbuff = malloc(100);
-	int antiCrash = 0;
 	char c = *code;
 	int escape = 0;
 	char* beginbuff = strbuff;
-	while((antiCrash++)<100 && (c != '\'' || escape == 1)) {
+	while((c != '\'' || escape == 1)) {
 		if (c == '\\' && escape == 0) {
 			escape = 1;
 			code++;

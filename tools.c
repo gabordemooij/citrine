@@ -81,11 +81,10 @@ char* readf(char* file_name) {
 }
 
 void tree(tnode* ti, int indent) {
-	int antiCrash = 0;
 	if (indent>20) exit(1); 
 	tlistitem* li = ti->nodes;
 	tnode* t = li->node;
-	while((antiCrash++<100)) {
+	while(1) {
 		int i = 0;
 		for (i=0; i<indent; i++) printf(" ");
 		char* str = calloc(40, sizeof(char));
@@ -133,9 +132,8 @@ obj* ctr_find(char* key) {
 	int i = cid;
 	obj* foundObject = NULL;
 	foundObject = calloc(sizeof(obj), 1);
-	int antiCrash = 0;
 	int first = 1;
-	while(((antiCrash++ < 100) && i>-1 && foundObject == NULL) || first) {
+	while((i>-1 && foundObject == NULL) || first) {
 		first = 0;
 		obj* context = contexts[i];
 		HASH_FIND_STR(context->properties, key, foundObject);
@@ -201,9 +199,8 @@ obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 	tnode* parameter;
 	if (parameterList && parameterList->node) {
 		parameter = parameterList->node;
-		int antiCrash = 0;
 		obj* a;
-		while((antiCrash++ < 100)) {
+		while(1) {
 			if (parameter && argList->object) {
 				a = argList->object;
 				a->name = parameter->value;
@@ -796,9 +793,8 @@ void ctr_initialize_world() {
 
 obj* ctr_send_message(obj* receiverObject, char* message, args* argumentList) {
 	obj* methodObject = NULL;
-	int antiCrash = 0;
 	obj* searchObject = receiverObject;
-	while(antiCrash++<100 && !methodObject) {
+	while(!methodObject) {
 		HASH_FIND_STR(searchObject->methods, message, methodObject);
 		if (methodObject) break;
 		if (!searchObject->link) {

@@ -51,11 +51,10 @@ tnode* cparse_message(int mode) {
 		if (debug) printf("Message so far: %s\n", msg);
 		m->type = KWMESSAGE;
 		t = clex_tok();
-		int antiCrash = 0;
 		int first = 1;
 		tlistitem* li;
 		tlistitem* curlistitem;
-		while((antiCrash++)<100) {
+		while(1) {
 			li = CTR_PARSER_CREATE_LISTITEM();
 			if (debug) printf("Next arg, message so far: %s \n", msg);
 			li->node = cparse_expr(1);
@@ -100,15 +99,13 @@ tnode* cparse_message(int mode) {
 tlistitem* cparse_messages(tnode* r, int mode) {
 	if (debug) printf("Parsing messages.\n");
 	int t = clex_tok();
-	
-	int antiCrash = 0;
 	tlistitem* pli;
 	tlistitem* li;
 	tlistitem* fli;
 	int first = 1;
 	tnode* node;
 	//explicit chaining (,) only allowed for keyword message: Console write: 3 factorial, write: 3 factorial is not possible otherwise. 
-	while ((antiCrash++<100) && (t == REF || (t == CHAIN && node && node->type == KWMESSAGE))) {
+	while ((t == REF || (t == CHAIN && node && node->type == KWMESSAGE))) {
 		if (t == CHAIN) {
 			t = clex_tok();
 			if (t != REF) {
@@ -178,10 +175,9 @@ tnode* cparse_block() {
 	paramList->type = PARAMLIST;
 	codeList->type = INSTRLIST;
 	int t = clex_tok();
-	int antiCrash2 = 0;
 	int first = 1;
 	tlistitem* previousListItem;
-	while((antiCrash2++ < 10) && t == REF) {
+	while(t == REF) {
 		tlistitem* paramListItem = CTR_PARSER_CREATE_LISTITEM();
 		tnode* paramItem = CTR_PARSER_CREATE_NODE();
 		CTR_PARSER_GET_TOKVAL(paramItem);
@@ -201,10 +197,9 @@ tnode* cparse_block() {
 		exit(1);
 	}
 	t = clex_tok();
-	int antiCrash = 0;
 	first = 1;
 	tlistitem* previousCodeListItem;
-	while((antiCrash++ < 100) && (first || t == DOT)) {
+	while((first || t == DOT)) {
 		if (first) {
 			if (debug) printf("First, so put back\n");
 			clex_putback();
@@ -414,10 +409,9 @@ tlistitem* cparse_statement() {
 
 tnode* cparse_program() {
 	tnode* program = CTR_PARSER_CREATE_NODE();
-	int antiCrash = 0;
 	tlistitem* pli;
 	int first = 1;
-	while((antiCrash++)<100) {
+	while(1) {
 		tlistitem* li = cparse_statement();
 		if (first) {
 			first = 0;
