@@ -68,7 +68,6 @@ struct obj {
 		unsigned int flaga: 1;
 		unsigned int flagb: 1;
 	 } info;
-    int type;
     struct obj* link;
     union uvalue { int bvalue; double nvalue; cstr* svalue; struct tnode* block; void *rvalue; } value;
 	 struct obj* next;
