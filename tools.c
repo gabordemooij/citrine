@@ -655,7 +655,6 @@ void ctr_gc_sweep() {
 			*q = u->next;
 			int z;
 			for(z =0; z <= cid; z++) {
-				printf("###\n");
 				HASH_DELETE(hh, contexts[z], u);
 			}
 			free(u);
