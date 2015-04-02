@@ -49,16 +49,21 @@
 #define OTMISC 88
 #define OTEX 89
 
+struct cstr {
+	char* value;
+	long vlen;
+};
+struct cstr;
+typedef struct cstr cstr;
+
 struct obj {
     const char* name;
     struct obj* properties;
     struct obj* methods;
     int type;
-    struct tnode* block;
     struct obj* link;
-    char* value;
-    long vlen;
-    int mark;
+    union uvalue { int bvalue; double nvalue; cstr* svalue; struct tnode* block; void *rvalue; } value;
+	 int mark;
     struct obj* next;
     UT_hash_handle hh;
 };
@@ -133,11 +138,23 @@ int debug;
 #define CTR_REGISTER_OBJECT(X) X->next = ctr_first_object; ctr_first_object = X;
 #define CTR_INIT_HEAD_OBJECT() ctr_first_object = NULL;
 
-#define CTR_CREATE_OBJECT_TYPE(O,C,V,S,OT) O = CTR_CREATE_OBJECT(); O->name = C; O->value = V; O->vlen = S; O->type = OT; HASH_ADD_KEYPTR(hh, World->properties, O->name, strlen(O->name), O);
+#define CTR_STRING(S,V,L) S = (cstr*) calloc(sizeof(cstr), 1);\
+S->value = (char*) calloc(sizeof(char), L);\
+strncpy(S->value, V, L);\
+S->vlen = L;
+
+#define CTR_CREATE_OBJECT_TYPE(O,NAME,OT) O = CTR_CREATE_OBJECT();\
+O->name = NAME;\
+if (OT==OTBOOL) O->value.bvalue = 0;\
+if (OT==OTNUMBER) O->value.nvalue = 0;\
+if (OT==OTSTRING) { CTR_STRING(O->value.svalue,"",0); }\
+O->type = OT;\
+HASH_ADD_KEYPTR(hh, World->properties, O->name, strlen(O->name), O);
 
 #define CTR_CREATE_FUNC(X,Y,Z,Q) obj* X = CTR_CREATE_OBJECT();\
-X->name = Z; X->type = OTNATFUNC; \
-X->value = (void*) Y; \
+X->name = Z;\
+X->type = OTNATFUNC;\
+X->value.rvalue = (void*) Y;\
 HASH_ADD_KEYPTR(hh, Q->methods, X->name, strlen(X->name), X);
 
 #define CTR_CREATE_ARGUMENT() (args*) calloc(sizeof(args), 1)
@@ -149,5 +166,37 @@ HASH_ADD_KEYPTR(hh, Q->methods, X->name, strlen(X->name), X);
 #define CTR_PARSER_GET_TOKVAL(x) x->value = calloc(strlen(clex_tok_value()), sizeof(char)); strcpy(paramItem->value, clex_tok_value());
 
 #define ASSIGN_STRING(o,p,v,s) o->p = calloc(s,sizeof(char)); strncpy( (char*) o->p,v,s);
+
+#define CTR_CAST_TO_BOOL(o) if (o->type == OTNIL) o->value.bvalue = 0;\
+if (o->type == OTNUMBER) if (o->value.nvalue > 0) o->value.bvalue = 1; else o->value->nvalue = 0;\
+if (o->type == OTSTRING) { if (o->value.svalue->vlen > 0) o->value.bvalue = 1; } else { o->value.bvalue = 0; }\
+if (o->type != OTBOOL) o->value.bvalue = 1; //rest (OTNATFUNC, OTOBJECT etc.. -> TRUE)
+
+
+#define CTR_CONVFP(s,x){\
+char *buf = malloc(100);\
+char *p;\
+sprintf(buf, "%.10f", x);\
+p = buf + strlen(buf) - 1;\
+while (*p == '0' && *p-- != '.');\
+*(p+1) = '\0';\
+if (*p == '.') *p = '\0';\
+strcpy(s, buf);\
+free (buf);\
+}
+
+
+#define CTR_CAST_TO_STRING(O) if (O->type == OTNIL) { CTR_STRING(O->value.svalue, "[Nil]", 5); }\
+else if (O->type == OTBOOL && O->value.bvalue == 1) { CTR_STRING(O->value.svalue, "[True]", 6); }\
+else if (O->type == OTBOOL && O->value.bvalue == 0) { CTR_STRING(O->value.svalue, "[False]", 7); }\
+else if (O->type == OTNUMBER) {\
+char* s = calloc(80, sizeof(char));\
+CTR_CONVFP(s,O->value.nvalue);\
+int slen = strlen(s);\
+CTR_STRING(O->value.svalue, s, slen);\
+}\
+else if (O->type == OTBLOCK) { CTR_STRING(O->value.svalue,"[Block]",7);}\
+else if (O->type == OTOBJECT) { CTR_STRING(O->value.svalue,"[Object]",8);}\
+	
 
 

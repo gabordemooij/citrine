@@ -116,10 +116,9 @@ void tree(tnode* ti, int indent) {
 
 void ctr_open_context() {
 	cid++;
-	obj* context = NULL;
+	obj* context = CTR_CREATE_OBJECT();
 	context = calloc(1, sizeof(obj));
 	context->name = "Context";
-	context->value = NULL;
 	contexts[cid] = context;
 }
 
@@ -165,8 +164,7 @@ obj* ctr_build_bool(int truth) {
 	obj* boolObject = CTR_CREATE_OBJECT();
 	CTR_REGISTER_OBJECT(boolObject);
 	ASSIGN_STRING(boolObject,name,"Bool",4);
-	if (truth) boolObject->value = "1"; else boolObject->value = "0";
-	boolObject->vlen = 1;
+	if (truth) boolObject->value.bvalue = 1; else boolObject->value.bvalue = 0;
 	boolObject->type = OTBOOL;
 	boolObject->link = BoolX;
 	return boolObject;
@@ -175,22 +173,24 @@ obj* ctr_build_bool(int truth) {
 
 obj* ctr_console_write(obj* myself, args* argumentList) {
 	obj* argument1 = argumentList->object;
-	printf("%s", argument1->value);
+	CTR_CAST_TO_STRING(argument1);
+	fwrite(argument1->value.svalue->value, sizeof(char), argument1->value.svalue->vlen, stdout);
 	return myself;
 }
 
 obj* ctr_block_run(obj* myself, args* argList, obj* my) {
+	
 	obj* selfRef = CTR_CREATE_OBJECT();
 	selfRef->name = "me";
 	selfRef->type = OTOBJECT;
-	ASSIGN_STRING(selfRef,value,"[self]",6);
+	CTR_STRING(selfRef->value.svalue,"[self]",6);
 	selfRef->link = my;
 	obj* result;
-	tnode* node = myself->block;
+	tnode* node = myself->value.block;
 	obj* thisBlock = CTR_CREATE_OBJECT();
 	ASSIGN_STRING(thisBlock,name,"__currentblock__",16);
 	thisBlock->type = OTBLOCK;
-	ASSIGN_STRING(thisBlock,value,"[running block]",15);
+	//ASSIGN_STRING(thisBlock,value,"[running block]",15);
 	thisBlock->link = myself;
 	tlistitem* codeBlockParts = node->nodes;
 	tnode* codeBlockPart1 = codeBlockParts->node;
@@ -229,14 +229,13 @@ obj* ctr_build_block(tnode* node) {
 	obj* codeBlockObject = CTR_CREATE_OBJECT();
 	CTR_REGISTER_OBJECT(codeBlockObject);
 	codeBlockObject->type = OTBLOCK;
-	codeBlockObject->block = node;
+	codeBlockObject->value.block = node;
 	codeBlockObject->link = CBlock;
-	ASSIGN_STRING(codeBlockObject,value,"[block]",7);
 	return codeBlockObject;
 }
 
 obj* ctr_bool_iftrue(obj* myself, args* argumentList) {
-	if (strncmp(myself->value,"1",1)==0) {
+	if (myself->value.bvalue) {
 		obj* codeBlock = argumentList->object;
 		args* arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = myself;
@@ -246,7 +245,7 @@ obj* ctr_bool_iftrue(obj* myself, args* argumentList) {
 }
 
 obj* ctr_bool_ifFalse(obj* myself, args* argumentList) {
-	if (strncmp(myself->value,"0",1)==0) {
+	if (!myself->value.bvalue) {
 		obj* codeBlock = argumentList->object;
 		args* arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = myself;
@@ -256,7 +255,7 @@ obj* ctr_bool_ifFalse(obj* myself, args* argumentList) {
 }
 
 obj* ctr_bool_opposite(obj* myself, args* argumentList) {
-	if (strncmp(myself->value,"1",1)==0) myself->value = "0"; else myself->value = "1";
+	if (myself->value.bvalue == 0) myself->value.bvalue = 1; else myself->value.bvalue = 0;
 	return myself;
 }
 
@@ -267,7 +266,7 @@ obj* ctr_bool_and(obj* myself, args* argumentList) {
 	if (argumentList->object->type != OTBOOL) {
 		printf("Argument of binary message && must be a boolean.\n"); exit(1);
 	}
-	return ctr_build_bool(( (strncmp(myself->value,"1",1)==0) && (strncmp(argumentList->object->value,"1",1)==0)  ));
+	return ctr_build_bool((myself->value.bvalue && argumentList->object->value.bvalue));
 }
 
 obj* ctr_bool_or(obj* myself, args* argumentList) {
@@ -277,82 +276,60 @@ obj* ctr_bool_or(obj* myself, args* argumentList) {
 	if (argumentList->object->type != OTBOOL) {
 		printf("Argument of binary message || must be a boolean.\n"); exit(1);
 	}
-	return ctr_build_bool(( (strncmp(myself->value,"1",1)==0) || (strncmp(argumentList->object->value,"1",1)==0)  ));
+	return ctr_build_bool((myself->value.bvalue || argumentList->object->value.bvalue));
 }
 
 obj* ctr_number_higherThan(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
-	float a = atof(myself->value);
-	float b = atof(otherNum->value);
-	obj* truth = ctr_build_bool((a > b));
-	return truth;
+	return ctr_build_bool((myself->value.nvalue > otherNum->value.nvalue));
 }
 
 obj* ctr_number_higherEqThan(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
-	float a = atof(myself->value);
-	float b = atof(otherNum->value);
-	obj* truth = ctr_build_bool((a >= b));
-	return truth;
+	return ctr_build_bool((myself->value.nvalue >= otherNum->value.nvalue));
 }
 
 obj* ctr_number_lowerThan(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
-	float a = atof(myself->value);
-	float b = atof(otherNum->value);
-	obj* truth = ctr_build_bool((a < b));
-	return truth;
+	return ctr_build_bool((myself->value.nvalue < otherNum->value.nvalue));
 }
 
 obj* ctr_number_lowerEqThan(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
-	float a = atof(myself->value);
-	float b = atof(otherNum->value);
-	obj* truth = ctr_build_bool((a <= b));
-	return truth;
+	return ctr_build_bool((myself->value.nvalue <= otherNum->value.nvalue));
 }
 
 obj* ctr_number_eq(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
-	float a = atof(myself->value);
-	float b = atof(otherNum->value);
-	obj* truth = ctr_build_bool((a == b));
-	return truth;
+	return ctr_build_bool(myself->value.nvalue == otherNum->value.nvalue);
 }
 
 obj* ctr_number_neq(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
-	float a = atof(myself->value);
-	float b = atof(otherNum->value);
-	obj* truth = ctr_build_bool((a != b));
-	return truth;
+	return ctr_build_bool(myself->value.nvalue != otherNum->value.nvalue);
 }
 
 obj* ctr_number_between(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
-	float a = atof(myself->value);
-	float b = atof(otherNum->value);
 	if (!argumentList->next) { printf("Expected second number."); exit(1); }
 	args* nextArgumentItem = argumentList->next;
 	obj* nextArgument = nextArgumentItem->object;
 	if (nextArgument->type != OTNUMBER) { printf("Expected second argument to be number."); exit(1); }
-	float c = atof(nextArgument->value);
-	obj* truth = ctr_build_bool((a >= b) && (a <= c));
-	return truth;
+	return ctr_build_bool((myself->value.nvalue >=  otherNum->value.nvalue) && (myself->value.nvalue <= nextArgument->value.nvalue));
 }
 
 obj* ctr_number_add(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
-	float a = atof(myself->value);
-	float b = atof(otherNum->value);
+	float a = myself->value.nvalue;
+	float b = otherNum->value.nvalue;
 	char* str = calloc(40, sizeof(char));
 	sprintf(str, "%f", (a+b));
 	obj* newNum = ctr_build_number(str);
@@ -362,21 +339,15 @@ obj* ctr_number_add(obj* myself, args* argumentList) {
 obj* ctr_number_inc(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
-	float a = atof(myself->value);
-	float b = atof(otherNum->value);
-	char* str = calloc(40, sizeof(char));
-	sprintf(str, "%f", (a+b));
-	long len = strlen(str);
-	ASSIGN_STRING(myself,value,str,len);
-	myself->vlen = len;
+	myself->value.nvalue += otherNum->value.nvalue;
 	return myself;
 }
 
 obj* ctr_number_minus(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
-	float a = atof(myself->value);
-	float b = atof(otherNum->value);
+	float a = myself->value.nvalue;
+	float b = otherNum->value.nvalue;
 	char* str = calloc(40, sizeof(char));
 	sprintf(str, "%f", (a-b));
 	obj* newNum = ctr_build_number(str);
@@ -386,21 +357,15 @@ obj* ctr_number_minus(obj* myself, args* argumentList) {
 obj* ctr_number_dec(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
-	float a = atof(myself->value);
-	float b = atof(otherNum->value);
-	char* str = calloc(40, sizeof(char));
-	sprintf(str, "%f", (a-b));
-	long len = strlen(str);
-	ASSIGN_STRING(myself,value,str,len);
-	myself->vlen = len;
+	myself->value.nvalue -= otherNum->value.nvalue;
 	return myself;
 }
 
 obj* ctr_number_multiply(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
-	float a = atof(myself->value);
-	float b = atof(otherNum->value);
+	float a = myself->value.nvalue;
+	float b = otherNum->value.nvalue;
 	char* str = calloc(40, sizeof(char));
 	sprintf(str, "%f", (a*b));
 	obj* newNum = ctr_build_number(str);
@@ -410,13 +375,7 @@ obj* ctr_number_multiply(obj* myself, args* argumentList) {
 obj* ctr_number_mul(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
-	float a = atof(myself->value);
-	float b = atof(otherNum->value);
-	char* str = calloc(40, sizeof(char));
-	sprintf(str, "%f", (a*b));
-	long len = strlen(str);
-	ASSIGN_STRING(myself,value,str,len);
-	myself->vlen = len;
+	myself->value.nvalue *= otherNum->value.nvalue;
 	return myself;
 }
 
@@ -424,8 +383,8 @@ obj* ctr_number_mul(obj* myself, args* argumentList) {
 obj* ctr_number_divide(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
-	float a = atof(myself->value);
-	float b = atof(otherNum->value);
+	float a = myself->value.nvalue;
+	float b = otherNum->value.nvalue;
 	if (b == 0) {
 		printf("Division by zero.");
 		exit(1);
@@ -439,39 +398,32 @@ obj* ctr_number_divide(obj* myself, args* argumentList) {
 obj* ctr_number_div(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->type != OTNUMBER) { printf("Expected number."); exit(1); }
-	float a = atof(myself->value);
-	float b = atof(otherNum->value);
-	if (b == 0) {
+	if (otherNum->value.nvalue == 0) {
 		printf("Division by zero.");
 		exit(1);
 	}
-	char* str = calloc(sizeof(char), 40);
-	sprintf(str, "%f", (a/b));
-	long len = strlen(str);
-	ASSIGN_STRING(myself,value,str,len);
-	myself->vlen = len;
+	myself->value.nvalue /= otherNum->value.nvalue;
 	return myself;
 }
 
 
 obj* ctr_number_factorial(obj* myself, args* argumentList) {
-	float t = floor(atof(myself->value));
+	float t = myself->value.nvalue;
 	int i;
 	float a = 1;
 	for(i = (int) t; i > 0; i--) {
 		a = a * i;
 	}
-	char* str = calloc(40, sizeof(char));
-	sprintf(str, "%f", (a));
-	ASSIGN_STRING(myself,value,str,strlen(str));
+	myself->value.nvalue = a;
 	return myself;
 }
 
 obj* ctr_number_times(obj* myself, args* argumentList) {
+	
 	obj* block = argumentList->object;
 	if (block->type != OTBLOCK) { printf("Expected code block."); exit(1); }
 	block->mark = 2; //mark as sticky
-	int t = atoi(myself->value);
+	int t = myself->value.nvalue;
 	int i;
 	for(i=0; i<t; i++) {
 		char* nstr = (char*) calloc(20, sizeof(char));
@@ -487,12 +439,10 @@ obj* ctr_number_times(obj* myself, args* argumentList) {
 
 //create number from \0 terminated string
 obj* ctr_build_number(char* n) {
-	int s = strlen(n);
 	obj* numberObject = CTR_CREATE_OBJECT();
 	CTR_REGISTER_OBJECT(numberObject);
 	ASSIGN_STRING(numberObject,name,"Number",6);
-	ASSIGN_STRING(numberObject,value,n,s);
-	numberObject->vlen = s;	
+	numberObject->value.nvalue = atof(n);
 	numberObject->type = OTNUMBER;
 	numberObject->link = Number;
 	return numberObject;
@@ -503,7 +453,6 @@ obj* ctr_object_make() {
 	objectInstance = CTR_CREATE_OBJECT();
 	CTR_REGISTER_OBJECT(objectInstance);
 	objectInstance->type = OTOBJECT;
-	ASSIGN_STRING(objectInstance,value,"[object]", 8);
 	objectInstance->link = Object;
 	return objectInstance;
 }
@@ -529,9 +478,9 @@ obj* ctr_object_method_does(obj* myself, args* argumentList) {
 		printf("Expected argument does: to be of type block.\n");
 		exit(1);
 	}
-	methodBlock->name = methodName->value;
-	if (debug) printf("Adding method block: %s %s to %s.\n", methodBlock->value, methodBlock->name, myself->name);
-	HASH_ADD_KEYPTR(hh, myself->methods, methodBlock->name, strlen(methodBlock->name), methodBlock);
+	ASSIGN_STRING(methodBlock, name, methodName->value.svalue->value, methodName->value.svalue->vlen);
+	//methodBlock->name = methodName->value.svalue->value;
+	HASH_ADD_KEYPTR(hh, myself->methods, methodBlock->name, methodName->value.svalue->vlen, methodBlock);
 	return myself;
 }
 
@@ -557,8 +506,9 @@ obj* ctr_object_override_does(obj* myself, args* argumentList) {
 		printf("Expected argument does: to be of type block.\n");
 		exit(1);
 	}
-	methodBlock->name = methodName->value;
-	if (debug) printf("Adding method block: %s %s to %s.\n", methodBlock->value, methodBlock->name, myself->name);
+	
+	ASSIGN_STRING(methodBlock, name, methodName->value.svalue->value, methodName->value.svalue->vlen);
+	//methodBlock->name = methodName->value;
 	obj* oldBlock = CTR_CREATE_OBJECT();
 	HASH_FIND_STR(myself->methods, methodBlock->name, oldBlock);
 	if (!oldBlock) printf("Cannot override: %s no such method.", oldBlock->name);
@@ -590,8 +540,9 @@ obj* ctr_build_string(char* stringValue, long size) {
 	obj* stringObject = CTR_CREATE_OBJECT();
 	CTR_REGISTER_OBJECT(stringObject);
 	ASSIGN_STRING(stringObject,name,"String",6);
-	ASSIGN_STRING(stringObject,value,stringValue,size);
-	stringObject->vlen = size;
+	CTR_STRING(stringObject->value.svalue, stringValue, size);
+	//ASSIGN_STRING(stringObject,value.svalue->value,stringValue,size);
+	//stringObject->value.svalue->vlen = size;
 	stringObject->type = OTSTRING;
 	stringObject->link = TextString;
 	return stringObject;
@@ -599,7 +550,7 @@ obj* ctr_build_string(char* stringValue, long size) {
 
 obj* ctr_string_bytes(obj* myself, args* argumentList) {
 	char* str = calloc(100, sizeof(char));
-	long l = (myself->vlen);
+	long l = (myself->value.svalue->vlen);
 	sprintf(str, "%lu", l);
 	return ctr_build_number(str);
 }
@@ -608,22 +559,22 @@ obj* ctr_string_eq(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
-	if (argumentList->object->vlen != myself->vlen) {
+	if (argumentList->object->value.svalue->vlen != myself->value.svalue->vlen) {
 		return ctr_build_bool(0);
 	}
-	return ctr_build_bool((strncmp(argumentList->object->value, myself->value, myself->vlen)==0));
+	return ctr_build_bool((strncmp(argumentList->object->value.svalue->value, myself->value.svalue->value, myself->value.svalue->vlen)==0));
 }
 
 obj* ctr_string_length(obj* myself, args* argumentList) {
-	long n = getutf8len(myself->value, myself->vlen);
+	long n = getutf8len(myself->value.svalue->value, myself->value.svalue->vlen);
 	char* str = calloc(100, sizeof(char));
 	sprintf(str, "%lu", n);
 	return ctr_build_number(str);
 }
 
 obj* ctr_string_printbytes(obj* myself, args* argumentList) {
-	char* str = myself->value;
-	long n = myself->vlen;
+	char* str = myself->value.svalue->value;
+	long n = myself->value.svalue->vlen;
 	long i = 0;
 	for(i = 0; i < n; i++) printf("%u ", (unsigned char) str[i]);
 	printf("\n");
@@ -634,11 +585,12 @@ obj* ctr_string_concat(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
-	long n1 = myself->vlen;
-	long n2 = argumentList->object->vlen;
+	CTR_CAST_TO_STRING(argumentList->object);
+	long n1 = myself->value.svalue->vlen;
+	long n2 = argumentList->object->value.svalue->vlen;
 	char* dest = calloc(sizeof(char), (n1 + n2));
-	strncpy(dest, myself->value, n1);
-	strncat(dest, argumentList->object->value, n2);
+	strncpy(dest, myself->value.svalue->value, n1);
+	strncat(dest, argumentList->object->value.svalue->value, n2);
 	obj* newString = ctr_build_string(dest, (n1 + n2));
 	return newString;	
 }
@@ -653,12 +605,12 @@ obj* ctr_string_fromto(obj* myself, args* argumentList) {
 	obj* fromPos = argumentList->object;
 	obj* toPos = argumentList->next->object;
 	
-	long a = atol(fromPos->value);
-	long b = atol(toPos->value); 
-	long ua = getBytesUtf8(myself->value, 0, a);
-	long ub = getBytesUtf8(myself->value, ua, ((b - a) + 1));
+	long a = (fromPos->value.nvalue);
+	long b = (toPos->value.nvalue); 
+	long ua = getBytesUtf8(myself->value.svalue->value, 0, a);
+	long ub = getBytesUtf8(myself->value.svalue->value, ua, ((b - a) + 1));
 	char* dest = calloc(ub, sizeof(char));
-	strncpy(dest, (myself->value) + ua, ub);
+	strncpy(dest, (myself->value.svalue->value) + ua, ub);
 	obj* newString = ctr_build_string(dest,ub);
 	return newString;
 }
@@ -725,27 +677,27 @@ void ctr_gc_collect (obj* myself, args* argumentList) {
 void ctr_initialize_world() {
 	
 	CTR_INIT_HEAD_OBJECT();
-	
-	CTR_CREATE_OBJECT_TYPE(World, "World", "[world]", 7, OTOBJECT);
+
+	CTR_CREATE_OBJECT_TYPE(World, "World", OTOBJECT);
 	World->mark = 2;
 	contexts[0] = World;
-	
-	CTR_CREATE_OBJECT_TYPE(Console, "Console", "[console]", 9, OTOBJECT)
+
+	CTR_CREATE_OBJECT_TYPE(Console, "Console", OTOBJECT)
 	CTR_CREATE_FUNC(ConsoleWrite, &ctr_console_write, "write:", Console);
 	Console->mark = 2;
 	
-	CTR_CREATE_OBJECT_TYPE(GC, "GC", "[GC]", 4, OTOBJECT)
+	CTR_CREATE_OBJECT_TYPE(GC, "GC", OTOBJECT)
 	CTR_CREATE_FUNC(GCCollect, &ctr_gc_collect, "collect", GC);
 	GC->mark = 2;
 	
-	CTR_CREATE_OBJECT_TYPE(Object, "Object", "[object]",8, OTOBJECT);
+	CTR_CREATE_OBJECT_TYPE(Object, "Object", OTOBJECT);
 	CTR_CREATE_FUNC(ObjectMake, &ctr_object_make, "new", Object);
 	CTR_CREATE_FUNC(ObjectMethodDoes, &ctr_object_method_does, "method:does:", Object);
 	CTR_CREATE_FUNC(ObjectOverrideDoes, &ctr_object_override_does, "override:does:", Object);
 	CTR_CREATE_FUNC(ObjectBlueprint, &ctr_object_blueprint, "basedOn:", Object);
 	Object->mark = 2;
 	
-	CTR_CREATE_OBJECT_TYPE(Number, "Number", "0", 1, OTNUMBER);
+	CTR_CREATE_OBJECT_TYPE(Number, "Number", OTNUMBER);
 	CTR_CREATE_FUNC(numberTimesObject, &ctr_number_times, "times:", Number);
 	CTR_CREATE_FUNC(numberAdd, &ctr_number_add, "+", Number);
 	CTR_CREATE_FUNC(numberInc, &ctr_number_inc, "inc:", Number);
@@ -765,7 +717,7 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(numberBetween, &ctr_number_between, "between:and:", Number);
 	Number->mark = 2;
 	
-	CTR_CREATE_OBJECT_TYPE(TextString, "String", "[String]", 8, OTSTRING);
+	CTR_CREATE_OBJECT_TYPE(TextString, "String", OTSTRING);
 	CTR_CREATE_FUNC(stringPrintBytes, &ctr_string_printbytes, "printBytes", TextString);
 	CTR_CREATE_FUNC(stringBytes, &ctr_string_bytes, "bytes", TextString);
 	CTR_CREATE_FUNC(stringLength, &ctr_string_length, "length", TextString);
@@ -774,11 +726,11 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(stringEq, &ctr_string_eq, "==", TextString);
 	TextString->mark = 2;
 	
-	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", "[Code]", 6, OTBLOCK);
+	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", OTBLOCK);
 	CTR_CREATE_FUNC(blockRun, &ctr_block_runIt, "run", CBlock);
 	CBlock->mark = 2;
 	
-	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", "False", 5, OTBOOL);
+	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", OTBOOL);
 	CTR_CREATE_FUNC(ifTrue, &ctr_bool_iftrue, "ifTrue:", BoolX);
 	CTR_CREATE_FUNC(ifFalse, &ctr_bool_ifFalse, "ifFalse:", BoolX);
 	CTR_CREATE_FUNC(boolOpposite, &ctr_bool_opposite, "opposite", BoolX);
@@ -786,12 +738,13 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(boolOR, &ctr_bool_or, "||", BoolX);
 	BoolX->mark = 2;
 	
-	CTR_CREATE_OBJECT_TYPE(Nil, "Nil", "Nil", 3, OTNIL);
+	CTR_CREATE_OBJECT_TYPE(Nil, "Nil", OTNIL);
 	CTR_CREATE_FUNC(isNil, &ctr_nil_isnil, "isNil", Nil);
 	Nil->mark = 2;
 }
 
 obj* ctr_send_message(obj* receiverObject, char* message, args* argumentList) {
+	
 	obj* methodObject = NULL;
 	obj* searchObject = receiverObject;
 	while(!methodObject) {
@@ -810,7 +763,7 @@ obj* ctr_send_message(obj* receiverObject, char* message, args* argumentList) {
 	obj* result;
 	if (methodObject->type == OTNATFUNC) {
 		obj* (*funct)(obj* receiverObject, args* argumentList);
-		funct = (void*) methodObject->value;
+		funct = (void*) methodObject->value.block;
 		result = (obj*) funct(receiverObject, argumentList);
 	}
 	
@@ -831,12 +784,20 @@ obj* ctr_assign_value(char* name, obj* o) {
 	object->properties = o->properties;
     object->methods = o->methods;
     object->type = o->type;
-    object->block = o->block;
     object->link = o->link;
-    object->value = calloc(o->vlen, sizeof(char));
-    object->vlen = o->vlen;
-	 strncpy(object->value, o->value, o->vlen);
-    object->name = name;
+
+     //depending on type, copy specific value
+    if (o->type == OTBOOL) {
+		object->value.bvalue = o->value.bvalue;
+	 } else if (o->type == OTNUMBER) {
+		object->value.nvalue = o->value.nvalue;
+	 } else if (o->type == OTSTRING) {
+		CTR_STRING(object->value.svalue, o->value.svalue->value, o->value.svalue->vlen);
+	 } else if (o->type == OTBLOCK) {
+		object->value.block = o->value.block;
+	 }
+
+   object->name = name;
 	ctr_set(object);
 	return object;
 }
@@ -847,11 +808,20 @@ obj* ctr_assign_value_to_my(char* name, obj* o) {
 	object->properties = o->properties;
     object->methods = o->methods;
     object->type = o->type;
-    object->block = o->block;
     object->link = o->link;
-    object->value = calloc(o->vlen, sizeof(char));
-    object->vlen = o->vlen;
-	 strncpy(object->value, o->value, o->vlen);
+    
+     //depending on type, copy specific value
+    if (o->type == OTBOOL) {
+		object->value.bvalue = o->value.bvalue;
+	 } else if (o->type == OTNUMBER) {
+		object->value.nvalue = o->value.nvalue;
+	 } else if (o->type == OTSTRING) {
+		CTR_STRING(object->value.svalue, o->value.svalue->value, o->value.svalue->vlen);
+	 } else if (o->type == OTBLOCK) {
+		object->value.block = o->value.block;
+	 }
+
+    
     object->name = name;
     obj* my = ctr_find("me");
     obj* foundObject = CTR_CREATE_OBJECT();

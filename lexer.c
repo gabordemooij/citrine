@@ -81,7 +81,7 @@ int clex_tok() {
 			code++;
 			c = *code;
 		}
-		if (c=='.' && (code+1 < eofcode) && !isdigit(*(code+1))) {
+		if (c=='.' && (code+1 <= eofcode) && !isdigit(*(code+1))) {
 			buffer[i] = '\0';
 			return NUMBER;
 		}
