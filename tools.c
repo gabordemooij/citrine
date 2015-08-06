@@ -20,6 +20,7 @@ obj* BoolX;
 obj* Console;
 obj* Nil;
 obj* GC;
+obj* CArray;
 int debug;
 
 //measures the size of character
@@ -523,6 +524,11 @@ obj* ctr_object_override_does(obj* myself, args* argumentList) {
 	return myself;
 }
 
+obj* ctr_object_respond(obj* myself, args* argumentList) {
+	printf("Object does not respond.");
+	exit(1);
+	return myself;
+}
 
 obj* ctr_object_blueprint(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
@@ -679,6 +685,43 @@ void ctr_gc_collect (obj* myself, args* argumentList) {
 	cid = oldcid;
 }
 
+obj* ctr_array_put(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("Missing argument 1\n"); exit(1);
+	}
+	if (!argumentList->next) {
+		printf("Missing argument 2\n"); exit(1);
+	}
+	obj* putValue = argumentList->object;
+	args* nextArgument = argumentList->next;
+	if (!nextArgument->object) {
+		printf("Missing argument 1\n"); exit(1);
+	}
+	obj* putKey = nextArgument->object;
+	if (putKey->info.type != OTSTRING) {
+		printf("Expected argument at: to be of type string.\n");
+		exit(1);
+	}
+	ASSIGN_STRING(putValue, name, putKey->value.svalue->value, putKey->value.svalue->vlen);
+	HASH_ADD_KEYPTR(hh, myself->properties, putValue->name, putKey->value.svalue->vlen, putValue);
+	return myself;
+}
+
+obj* ctr_array_get(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("Missing argument 1\n"); exit(1);
+	}
+	obj* searchKey = argumentList->object;
+	if (searchKey->info.type != OTSTRING) {
+		printf("Expected argument at: to be of type string.\n");
+		exit(1);
+	}
+	obj* foundObject = CTR_CREATE_OBJECT();
+	CTR_REGISTER_OBJECT(foundObject);
+	HASH_FIND(hh, myself->properties, searchKey->value.svalue->value, searchKey->value.svalue->vlen, foundObject);
+	return foundObject;
+}
+
 void ctr_initialize_world() {
 	
 	CTR_INIT_HEAD_OBJECT();
@@ -703,6 +746,7 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(ObjectMethodDoes, &ctr_object_method_does, "method:does:", Object);
 	CTR_CREATE_FUNC(ObjectOverrideDoes, &ctr_object_override_does, "override:does:", Object);
 	CTR_CREATE_FUNC(ObjectBlueprint, &ctr_object_blueprint, "basedOn:", Object);
+	CTR_CREATE_FUNC(ObjectRespond, &ctr_object_respond, "respondTo:", Object);
 	Object->info.mark = 0;
 	Object->info.sticky = 1;
 
@@ -734,8 +778,16 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(stringFromTo, &ctr_string_fromto, "from:to:", TextString);
 	CTR_CREATE_FUNC(stringConcat, &ctr_string_concat, "+", TextString);
 	CTR_CREATE_FUNC(stringEq, &ctr_string_eq, "==", TextString);
+	TextString->link = Object;
 	TextString->info.mark = 0;
 	TextString->info.sticky = 1;
+	
+	CTR_CREATE_OBJECT_TYPE(CArray, "Array", OTOBJECT);
+	CTR_CREATE_FUNC(arrayPut, &ctr_array_put, "put:at:", CArray);
+	CTR_CREATE_FUNC(arrayGet, &ctr_array_get, "at:", CArray);	
+	CArray->link = Object;
+	CArray->info.sticky = 1;
+	CArray->info.mark = 0;
 
 	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", OTBLOCK);
 	CTR_CREATE_FUNC(blockRun, &ctr_block_runIt, "run", CBlock);
@@ -771,8 +823,10 @@ obj* ctr_send_message(obj* receiverObject, char* message, args* argumentList) {
 	}
 	
 	if (!methodObject) {
-		printf("Object will not respond to: %s\n", message);
-		exit(1);
+		args* mesgArgument = CTR_CREATE_ARGUMENT();
+		mesgArgument->object = ctr_build_string(message, strlen(message));
+		mesgArgument->next = argumentList;
+		return ctr_send_message(receiverObject, "respondTo:\0", mesgArgument);
 	}
 	obj* result;
 	if (methodObject->info.type == OTNATFUNC) {
