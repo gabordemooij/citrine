@@ -128,7 +128,7 @@ void ctr_close_context() {
 	cid--;
 }
 
-obj* ctr_find(char* key) {
+obj* ctr_find(char* key, long n) {
 	int i = cid;
 	obj* foundObject = NULL;
 	foundObject = calloc(sizeof(obj), 1);
@@ -136,29 +136,29 @@ obj* ctr_find(char* key) {
 	while((i>-1 && foundObject == NULL) || first) {
 		first = 0;
 		obj* context = contexts[i];
-		HASH_FIND_STR(context->properties, key, foundObject);
+		HASH_FIND(hh, context->properties, key, n, foundObject);
 		i--;
 	}
-	if (foundObject == NULL) { printf("Error, key not found: %s.\n", key); exit(1); }
+	if (foundObject == NULL) { printf("Error, key not found: %s %lu.\n", key, n); exit(1); }
 	return foundObject;
 }
 
-obj* ctr_find_in_my(char* key) {
+obj* ctr_find_in_my(char* key, long n) {
 	obj* foundObject = CTR_CREATE_OBJECT();
-	obj* context = ctr_find("me");
-	HASH_FIND_STR(context->link->properties, key, foundObject);
+	obj* context = ctr_find("me", 2);
+	HASH_FIND(hh, context->link->properties, key, n, foundObject);
 	if (foundObject == NULL) { printf("Error, property not found: %s.\n", key); exit(1); }
 	return foundObject;
 }
 
-void ctr_set(obj* object) {
+void ctr_set(obj* object, long keylen) {
 	obj* foundObject = CTR_CREATE_OBJECT();
 	obj* context = contexts[cid];
-	HASH_FIND_STR(context->properties, object->name, foundObject);
+	HASH_FIND(hh, context->properties, object->name, keylen, foundObject);
 	if (foundObject) {
 		HASH_DELETE(hh, context->properties, foundObject);
 	}
-	HASH_ADD_KEYPTR(hh, context->properties, object->name, strlen(object->name), object);
+	HASH_ADD_KEYPTR(hh, context->properties, object->name, keylen, object);
 }
 
 obj* ctr_build_bool(int truth) {
@@ -180,7 +180,6 @@ obj* ctr_console_write(obj* myself, args* argumentList) {
 }
 
 obj* ctr_block_run(obj* myself, args* argList, obj* my) {
-	
 	obj* selfRef = CTR_CREATE_OBJECT();
 	selfRef->name = "me";
 	selfRef->info.type = OTOBJECT;
@@ -205,7 +204,7 @@ obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 			if (parameter && argList->object) {
 				a = argList->object;
 				a->name = parameter->value;
-				ctr_set(a);
+				ctr_set(a, parameter->vlen);
 			}
 			if (!argList->next) break;
 			argList = argList->next;
@@ -215,8 +214,8 @@ obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 		}
 	}
 	ctr_open_context();
-	ctr_set(selfRef);
-	ctr_set(thisBlock); //otherwise running block may get gc'ed.
+	ctr_set(selfRef, 2);
+	ctr_set(thisBlock, 16); //otherwise running block may get gc'ed.
 	result = cwlk_run(codeBlockPart2);
 	ctr_close_context();
 	return result;
@@ -512,15 +511,16 @@ obj* ctr_object_override_does(obj* myself, args* argumentList) {
 	ASSIGN_STRING(methodBlock, name, methodName->value.svalue->value, methodName->value.svalue->vlen);
 	//methodBlock->name = methodName->value;
 	obj* oldBlock = CTR_CREATE_OBJECT();
-	HASH_FIND_STR(myself->methods, methodBlock->name, oldBlock);
+	HASH_FIND(hh, myself->methods, methodBlock->name, methodName->value.svalue->vlen, oldBlock);
 	if (!oldBlock) printf("Cannot override: %s no such method.", oldBlock->name);
 	char* str = (char*) calloc(255, sizeof(char));
-	strcat(str, "overridden-");
-	strcat(str, oldBlock->name);
+	strncat(str, "overridden-",11);
+	//printf(">>> %s %lu \n", oldBlock->name, methodName->value.svalue->vlen);
+	strncat(str, oldBlock->name, methodName->value.svalue->vlen);
 	oldBlock->name = str;
 	HASH_DEL(myself->methods, oldBlock);
-	HASH_ADD_KEYPTR(hh, myself->methods, oldBlock->name, strlen(oldBlock->name), oldBlock);
-	HASH_ADD_KEYPTR(hh, myself->methods, methodBlock->name, strlen(methodBlock->name), methodBlock);
+	HASH_ADD_KEYPTR(hh, myself->methods, oldBlock->name, (methodName->value.svalue->vlen + 11), oldBlock);
+	HASH_ADD_KEYPTR(hh, myself->methods, methodBlock->name, methodName->value.svalue->vlen, methodBlock);
 	return myself;
 }
 
@@ -809,12 +809,16 @@ void ctr_initialize_world() {
 	Nil->info.sticky = 1;
 }
 
-obj* ctr_send_message(obj* receiverObject, char* message, args* argumentList) {
+obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argumentList) {
 	
 	obj* methodObject = NULL;
 	obj* searchObject = receiverObject;
 	while(!methodObject) {
-		HASH_FIND_STR(searchObject->methods, message, methodObject);
+		
+		//printf("Looking for %s with length: %lu \n", message, vlen);
+		//exit(1);
+		
+		HASH_FIND(hh, searchObject->methods, message, vlen, methodObject);
 		if (methodObject) break;
 		if (!searchObject->link) {
 			break;
@@ -826,7 +830,7 @@ obj* ctr_send_message(obj* receiverObject, char* message, args* argumentList) {
 		args* mesgArgument = CTR_CREATE_ARGUMENT();
 		mesgArgument->object = ctr_build_string(message, strlen(message));
 		mesgArgument->next = argumentList;
-		return ctr_send_message(receiverObject, "respondTo:\0", mesgArgument);
+		return ctr_send_message(receiverObject, "respondTo:", 10,  mesgArgument);
 	}
 	obj* result;
 	if (methodObject->info.type == OTNATFUNC) {
@@ -837,7 +841,7 @@ obj* ctr_send_message(obj* receiverObject, char* message, args* argumentList) {
 	
 	if (methodObject->info.type == OTBLOCK) {
 		//important! for messages to 'me', adjust the 'my' scope to the receiver itself.
-		if (strcmp(receiverObject->name,"me")==0) {
+		if (strncmp(receiverObject->name,"me",2)==0) {
 			receiverObject = receiverObject->link;
 		}
 		result = ctr_block_run(methodObject, argumentList, receiverObject);
@@ -846,14 +850,13 @@ obj* ctr_send_message(obj* receiverObject, char* message, args* argumentList) {
 	return result;
 }
 
-obj* ctr_assign_value(char* name, obj* o) {
+obj* ctr_assign_value(char* name, long keylen, obj* o) {
 	obj* object = CTR_CREATE_OBJECT();
 	CTR_REGISTER_OBJECT(object);
 	object->properties = o->properties;
     object->methods = o->methods;
     object->info.type = o->info.type;
     object->link = o->link;
-
      //depending on type, copy specific value
     if (o->info.type == OTBOOL) {
 		object->value.bvalue = o->value.bvalue;
@@ -866,11 +869,11 @@ obj* ctr_assign_value(char* name, obj* o) {
 	 }
 
    object->name = name;
-	ctr_set(object);
+	ctr_set(object, keylen);
 	return object;
 }
 
-obj* ctr_assign_value_to_my(char* name, obj* o) {
+obj* ctr_assign_value_to_my(char* name, long n, obj* o) {
 	obj* object = CTR_CREATE_OBJECT();
 	CTR_REGISTER_OBJECT(object);
 	object->properties = o->properties;
@@ -891,13 +894,13 @@ obj* ctr_assign_value_to_my(char* name, obj* o) {
 
     
     object->name = name;
-    obj* my = ctr_find("me");
+    obj* my = ctr_find("me", 2);
     obj* foundObject = CTR_CREATE_OBJECT();
-	HASH_FIND_STR(my->link->properties, object->name, foundObject);
+	HASH_FIND(hh, my->link->properties, object->name, n, foundObject);
 	if (foundObject) {
 		HASH_DELETE(hh, my->link->properties, foundObject);
 	}
 	
-	HASH_ADD_KEYPTR(hh, my->link->properties, name, strlen(name), object);
+	HASH_ADD_KEYPTR(hh, my->link->properties, name, n, object);
 	return object;
 }

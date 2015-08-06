@@ -17,6 +17,7 @@ typedef struct {
 
 
 int bflmt = 100;
+long tokvlen = 0; //length of the string value of a token
 char* buffer;
 char* code;
 char* codePoint;
@@ -36,18 +37,22 @@ char* clex_tok_value() {
 	return buffer;
 }
 
+long clex_tok_value_length() {
+	return tokvlen;
+}
+
 void clex_putback() {
 	code = oldptr;
 	oldptr = olderptr;
 }
 
 int clex_tok() {
+	tokvlen = 0;
 	olderptr = oldptr;
 	oldptr = code;
 	char c;
 	int i = 0;
 	int comment_mode = 0;
-	buffer[0] = '\0';
 	c = *code;
 	while(code != eofcode && (isspace(c) || c == '#' || comment_mode)) {
 		if (c == '\n') comment_mode = 0;
@@ -71,33 +76,31 @@ int clex_tok() {
 	if (c == '^') { code++; return RET; }
 	if (c == '\'') { code++; return QUOTE; }
 	if ((c == '-' && (code+1)<eofcode && isdigit(*(code+1))) || isdigit(c)) {
-		buffer[i] = c;
+		buffer[i] = c; tokvlen++;
 		i++;
 		code++;
 		c = *code;
 		while((isdigit(c))) {
-			buffer[i] = c;
+			buffer[i] = c; tokvlen++;
 			i++;
 			code++;
 			c = *code;
 		}
 		if (c=='.' && (code+1 <= eofcode) && !isdigit(*(code+1))) {
-			buffer[i] = '\0';
 			return NUMBER;
 		}
 		if (c=='.') {
-			buffer[i] = c;
+			buffer[i] = c; tokvlen++;
 			i++;
 			code++;
 			c = *code;
 		}
 		while((isdigit(c))) {
-			buffer[i] = c;
+			buffer[i] = c; tokvlen++;
 			i++;
 			code++;
 			c = *code;
 		}
-		buffer[i] = '\0';
 		return NUMBER;
 	}
 	if (strncmp(code, "True", 4)==0){
@@ -120,30 +123,30 @@ int clex_tok() {
 	}
 	if (strncmp(code, ">=", 2)==0){
 		code += 2;
-		strcat(buffer, ">=\0");
+		tokvlen = 2; strncpy(buffer, ">=", 2);
 		return REF;
 	}
 	if (strncmp(code, "<=", 2)==0){
 		code += 2;
-		strcat(buffer, "<=\0");
+		tokvlen = 2; strncpy(buffer, "<=", 2);
 		return REF;
 	}
 	
 	if (strncmp(code, "==", 2)==0){
 		code += 2;
-		strcat(buffer, "==\0");
+		tokvlen = 2; strncpy(buffer, "==", 2);
 		return REF;
 	}
 	
 	if (strncmp(code, "!=", 2)==0){
 		code += 2;
-		strcat(buffer, "!=\0");
+		tokvlen = 2; strncpy(buffer, "!=", 2);
 		return REF;
 	}
 	
 	if (strncmp(code, "||", 2)==0){
 		code += 2;
-		strcat(buffer, "||\0");
+		tokvlen = 2; strncpy(buffer, "||", 2);
 		return REF;
 	}
 	
@@ -151,36 +154,36 @@ int clex_tok() {
 	
 	if (strncmp(code, "&&", 2)==0){
 		code += 2;
-		strcat(buffer, "&&\0");
+		tokvlen = 2; strncpy(buffer, "&&", 2);
 		return REF;
 	}
 
 	if (strncmp(code, "*", 1)==0){
 		code += 1;
-		strcat(buffer, "*\0");
+		tokvlen = 1; strncpy(buffer, "*", 1);
 		return REF;
 	}
 
 	if (strncmp(code, "/", 1)==0){
 		code += 1;
-		strcat(buffer, "/\0");
+		tokvlen = 1; strncpy(buffer, "/", 1);
 		return REF;
 	}
 
 	if (strncmp(code, "+", 1)==0){
 		code += 1;
-		strcat(buffer, "+\0");
+		tokvlen = 1; strncpy(buffer, "+", 1);
 		return REF;
 	}
 
 	if (strncmp(code, "-", 1)==0){
 		code += 1;
-		strcat(buffer, "-\0");
+		tokvlen = 1; strncpy(buffer, "-", 1);
 		return REF;
 	}
 
 	while(!isspace(c) && CTR_IS_NO_TOK(c) && code!=eofcode) {
-		buffer[i] = c;
+		buffer[i] = c; tokvlen++;
 		i++;
 		if (i > bflmt) {
 			printf("[ERROR L001]: Token Buffer Exausted. Tokens may not exceed 100 bytes.");
@@ -190,7 +193,6 @@ int clex_tok() {
 		c = *code;
 	}
 
-	buffer[i] = '\0';
 	return REF;
 }
 

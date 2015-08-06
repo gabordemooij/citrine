@@ -35,7 +35,7 @@ obj* cwlk_message(tnode* paramNode) {
 	tlistitem* argumentList;
 	obj* r;
 	if (receiverNode->type == REFERENCE) {
-		r = ctr_find(receiverNode->value);
+		r = ctr_find(receiverNode->value, receiverNode->vlen);
 		if (!r) {
 			printf("Object not found: %s \n", receiverNode->value);
 			exit(1);
@@ -61,6 +61,7 @@ obj* cwlk_message(tnode* paramNode) {
 		li = li->next;
 		msgnode = li->node;
 		message = msgnode->value;
+		long l = msgnode->vlen;
 		argumentList = msgnode->nodes;
 		args* a = CTR_CREATE_ARGUMENT();
 		args* aItem = a;
@@ -76,7 +77,7 @@ obj* cwlk_message(tnode* paramNode) {
 				node = argumentList->node;
 			}
 		}
-		result = ctr_send_message(r, message, a);
+		result = ctr_send_message(r, message, l, a);
 		r = result;
 	}
 	return result;
@@ -91,9 +92,9 @@ obj* cwlk_assignment(tnode* node) {
 	x = cwlk_expr(value);
 	obj* result;
 	if (assignee->modifier == 1) {
-		result = ctr_assign_value_to_my(assignee->value, x);
+		result = ctr_assign_value_to_my(assignee->value, assignee->vlen, x);
 	} else {
-		result = ctr_assign_value(assignee->value, x);
+		result = ctr_assign_value(assignee->value, assignee->vlen, x);
 	}
 	return result;
 }		
@@ -114,9 +115,9 @@ obj* cwlk_expr(tnode* node) {
 		result = ctr_build_block(node);
 	} else if (node->type == REFERENCE) {
 		if (node->modifier == 1) {
-			result = ctr_find_in_my(node->value);
+			result = ctr_find_in_my(node->value, node->vlen);
 		} else {
-			result = ctr_find(node->value);
+			result = ctr_find(node->value, node->vlen);
 		}
 	} else if (node->type == EXPRMESSAGE) {
 		result = cwlk_message(node);

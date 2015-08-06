@@ -112,21 +112,22 @@ long clex_len;
 void 	clex_load(char* prg);
 int 	clex_tok();
 char* 	clex_tok_value();
+long    clex_tok_value_length();
 void 	clex_putback();
 char*	clex_readstr();
 
 void ctr_initialize_world();
-obj* ctr_find(char* key);
-obj* ctr_find_in_my(char* key);
-obj* ctr_assign_value(char* name, obj* object);
-obj* ctr_assign_value_to_my(char* name, obj* object);
+obj* ctr_find(char* key, long n);
+obj* ctr_find_in_my(char* key, long n);
+obj* ctr_assign_value(char* name, long n, obj* object);
+obj* ctr_assign_value_to_my(char* name, long n, obj* object);
 obj* ctr_build_string(char* object, long vlen);
 obj* ctr_build_block(tnode* node);
 obj* ctr_build_number(char* object);
 obj* ctr_build_bool(int truth);
 obj* ctr_build_nil();
 
-obj* ctr_send_message(obj* receiver, char* message, args* argumentList);
+obj* ctr_send_message(obj* receiver, char* message, long len, args* argumentList);
 char* readf(char* file_name);
 void tree(tnode* ti, int indent);
 
@@ -169,8 +170,6 @@ HASH_ADD_KEYPTR(hh, Q->methods, X->name, strlen(X->name), X);
 
 #define	CTR_PARSER_CREATE_NODE() (tnode*) calloc(1,sizeof(tnode))
 			
-#define CTR_PARSER_GET_TOKVAL(x) x->value = calloc(strlen(clex_tok_value()), sizeof(char)); strcpy(paramItem->value, clex_tok_value());
-
 #define ASSIGN_STRING(o,p,v,s) o->p = calloc(s,sizeof(char)); strncpy( (char*) o->p,v,s);
 
 #define CTR_CAST_TO_BOOL(o) if (o->info.type == OTNIL) o->value.bvalue = 0;\

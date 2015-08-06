@@ -16,15 +16,17 @@ tnode* cparse_ret();
 //precedence mode 1: as argument of keyword message (allows processing of unary message and binary message)
 //precedence mode 2: as argument of binary message (only allows processing of unary message)
 tnode* cparse_message(int mode) {
+	long msgpartlen; //length of part of message string
 	tnode* m = CTR_PARSER_CREATE_NODE();
 	m->type = -1;
 	int t = clex_tok();
+	msgpartlen = clex_tok_value_length();
 	char* s = clex_tok_value();
 	char* msg;
 	msg = calloc(sizeof(char), 255);
-	strcat(msg, s);
-	int isBin = (strlen(msg)==2 && (strcmp("&&",msg)==0 || strcmp("||",msg)==0 || strcmp("==",msg)==0 || strcmp("!=",msg)==0 || strcmp(">=",msg)==0 || strcmp("<=",msg)==0));
-	isBin = (isBin || (strlen(msg)==1 && (strcmp(">",msg)==0 || strcmp("<",msg)==0 || strcmp("*",msg)==0 || strcmp("/",msg)==0 || strcmp("+",msg)==0 || strcmp("-",msg)==0)));
+	strncat(msg, s, msgpartlen);
+	int isBin = (msgpartlen == 2 && (strncmp("&&",msg,2)==0 || strncmp("||",msg, 2)==0 || strncmp("==",msg,2)==0 || strncmp("!=",msg,2)==0 || strncmp(">=",msg,2)==0 || strncmp("<=",msg,2)==0));
+	isBin = (isBin || (msgpartlen==1 && (strncmp(">",msg,1)==0 || strncmp("<",msg,1)==0 || strncmp("*",msg,1)==0 || strncmp("/",msg,1)==0 || strncmp("+",msg,1)==0 || strncmp("-",msg,1)==0)));
 	if (mode == 2 && isBin) {
 		clex_putback();
 		return m;
@@ -33,6 +35,7 @@ tnode* cparse_message(int mode) {
 		if (debug) printf("Parsing binary message: '%s' (mode: %d)\n", msg, mode);
 		m->type = BINMESSAGE;
 		m->value = msg;
+		m->vlen = msgpartlen;
 		tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
 		if (debug) printf("Binary argument start..\n");
 		li->node = cparse_expr(2);
@@ -48,6 +51,7 @@ tnode* cparse_message(int mode) {
 			return m;
 		 }
 		strcat(msg,":");
+		msgpartlen += 1;
 		if (debug) printf("Message so far: %s\n", msg);
 		m->type = KWMESSAGE;
 		t = clex_tok();
@@ -74,9 +78,10 @@ tnode* cparse_message(int mode) {
 			if (t == CHAIN) break;
 			if (t == PARCLOSE) break;
 			if (t == REF) {
-				//@todo memory management... overflow possible!
-				strcat(msg, clex_tok_value());
-				strcat(msg, ":");
+				long l = clex_tok_value_length(); 
+				strncat(msg, clex_tok_value(), l);
+				msgpartlen = msgpartlen + l + 1;
+				strncat(msg, ":", 1);
 				t = clex_tok();
 				if (t != COLON) {
 					printf("Expected colon. %s \n",msg);
@@ -88,9 +93,11 @@ tnode* cparse_message(int mode) {
 		clex_putback(); //not a colon so put back
 		if (debug) printf("Parsing keyword message: '%s' (mode: %d) \n", msg, mode);
 		m->value = msg;
+		m->vlen = msgpartlen;
 	} else {
 		m->type = UNAMESSAGE;
 		m->value = msg;
+		m->vlen = msgpartlen;
 		if (debug) printf("Parsing unary message: '%s' (mode: %d) token = %d \n", msg, mode, lookAhead);
 	}
 	return m;
@@ -180,7 +187,16 @@ tnode* cparse_block() {
 	while(t == REF) {
 		tlistitem* paramListItem = CTR_PARSER_CREATE_LISTITEM();
 		tnode* paramItem = CTR_PARSER_CREATE_NODE();
-		CTR_PARSER_GET_TOKVAL(paramItem);
+		
+		long l = clex_tok_value_length();
+		paramItem->value = malloc(sizeof(char) * l);
+		strncpy(paramItem->value, clex_tok_value(), l);
+		paramItem->vlen = l;
+		
+		//paramItem->value = calloc(strlen(clex_tok_value()), sizeof(char)); strcpy(paramItem->value, clex_tok_value());
+
+		
+		
 		paramListItem->node = paramItem;
 		if (first) {
 			paramList->nodes = paramListItem;
@@ -239,8 +255,9 @@ tnode* cparse_ref() {
 	clex_tok();
 	tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = REFERENCE;
+	r->vlen = clex_tok_value_length();
 	char* tmp = clex_tok_value();
-	if (strcmp("my", tmp)==0) {
+	if (strncmp("my", tmp, 2)==0 && r->vlen == 2) {
 		int t = clex_tok();
 		if (t != REF) {
 			printf("'My' should always be followed by property name!\n");
@@ -248,9 +265,10 @@ tnode* cparse_ref() {
 		}
 		tmp = clex_tok_value();
 		r->modifier = 1;
+		r->vlen = clex_tok_value_length();
 	}
-	r->value = malloc(strlen(tmp));
-	strcpy(r->value, tmp);
+	r->value = malloc(r->vlen);
+	strncpy(r->value, tmp, r->vlen);
 	return r;
 }
 
@@ -274,9 +292,10 @@ tnode* cparse_number() {
 	tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = LTRNUM;
 	char* n = clex_tok_value();
-	r->value = calloc(sizeof(char), strlen(n));
-	strcpy(r->value, n);
-	r->vlen = strlen(n);
+	long l = clex_tok_value_length();
+	r->value = calloc(sizeof(char), l);
+	strncpy(r->value, n, l);
+	r->vlen = l;
 	if (debug) printf("Parsing number: %s.\n", r->value);
 	return r;
 }
@@ -294,7 +313,7 @@ tnode* cparse_true() {
 	clex_tok();
 	tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = LTRBOOLTRUE;
-	ASSIGN_STRING(r, value,"True",4);
+	ASSIGN_STRING(r, value,"True",4);	
 	r->vlen = 4;
 	return r;
 }
@@ -304,6 +323,7 @@ tnode* cparse_nil() {
 	tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = LTRNIL;
 	r->value = "Nil";
+	r->vlen = 3;
 	return r;
 }
 
