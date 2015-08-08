@@ -30,7 +30,7 @@ void clex_load(char* prg) {
 	code = prg;
 	buffer = malloc(bflmt);
 	buffer[0] = '\0';
-	eofcode = (code + strlen(code));
+	eofcode = (code + ctr_program_length - 1);
 }
 
 char* clex_tok_value() {

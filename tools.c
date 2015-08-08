@@ -74,9 +74,8 @@ char* readf(char* file_name) {
    int sz = ftell(fp);
    fseek(fp,prev,SEEK_SET);
    prg = malloc((sz+1)*sizeof(char));
-   int i=0;
-   while( ( ch = fgetc(fp) ) != EOF )
-     prg[i++]=ch;
+   ctr_program_length=0;
+   while( ( ch = fgetc(fp) ) != EOF ) prg[ctr_program_length++]=ch;
    fclose(fp);
    return prg;
 }
@@ -513,10 +512,9 @@ obj* ctr_object_override_does(obj* myself, args* argumentList) {
 	obj* oldBlock = CTR_CREATE_OBJECT();
 	HASH_FIND(hh, myself->methods, methodBlock->name, methodName->value.svalue->vlen, oldBlock);
 	if (!oldBlock) printf("Cannot override: %s no such method.", oldBlock->name);
-	char* str = (char*) calloc(255, sizeof(char));
-	strncat(str, "overridden-",11);
-	//printf(">>> %s %lu \n", oldBlock->name, methodName->value.svalue->vlen);
-	strncat(str, oldBlock->name, methodName->value.svalue->vlen);
+	char* str = (char*) malloc(255);
+	strncpy(str, "overridden-", 11);
+	strncpy(str+11, oldBlock->name, methodName->value.svalue->vlen);
 	oldBlock->name = str;
 	HASH_DEL(myself->methods, oldBlock);
 	HASH_ADD_KEYPTR(hh, myself->methods, oldBlock->name, (methodName->value.svalue->vlen + 11), oldBlock);
@@ -548,8 +546,6 @@ obj* ctr_build_string(char* stringValue, long size) {
 	CTR_REGISTER_OBJECT(stringObject);
 	ASSIGN_STRING(stringObject,name,"String",6);
 	CTR_STRING(stringObject->value.svalue, stringValue, size);
-	//ASSIGN_STRING(stringObject,value.svalue->value,stringValue,size);
-	//stringObject->value.svalue->vlen = size;
 	stringObject->info.type = OTSTRING;
 	stringObject->link = TextString;
 	return stringObject;
@@ -597,7 +593,7 @@ obj* ctr_string_concat(obj* myself, args* argumentList) {
 	long n2 = argumentList->object->value.svalue->vlen;
 	char* dest = calloc(sizeof(char), (n1 + n2));
 	strncpy(dest, myself->value.svalue->value, n1);
-	strncat(dest, argumentList->object->value.svalue->value, n2);
+	strncpy(dest+n1, argumentList->object->value.svalue->value, n2);
 	obj* newString = ctr_build_string(dest, (n1 + n2));
 	return newString;	
 }
@@ -814,10 +810,6 @@ obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argum
 	obj* methodObject = NULL;
 	obj* searchObject = receiverObject;
 	while(!methodObject) {
-		
-		//printf("Looking for %s with length: %lu \n", message, vlen);
-		//exit(1);
-		
 		HASH_FIND(hh, searchObject->methods, message, vlen, methodObject);
 		if (methodObject) break;
 		if (!searchObject->link) {
@@ -825,10 +817,9 @@ obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argum
 		}
 		searchObject = searchObject->link;
 	}
-	
 	if (!methodObject) {
 		args* mesgArgument = CTR_CREATE_ARGUMENT();
-		mesgArgument->object = ctr_build_string(message, strlen(message));
+		mesgArgument->object = ctr_build_string(message, vlen);
 		mesgArgument->next = argumentList;
 		return ctr_send_message(receiverObject, "respondTo:", 10,  mesgArgument);
 	}
@@ -838,7 +829,6 @@ obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argum
 		funct = (void*) methodObject->value.block;
 		result = (obj*) funct(receiverObject, argumentList);
 	}
-	
 	if (methodObject->info.type == OTBLOCK) {
 		//important! for messages to 'me', adjust the 'my' scope to the receiver itself.
 		if (strncmp(receiverObject->name,"me",2)==0) {

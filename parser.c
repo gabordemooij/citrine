@@ -23,8 +23,8 @@ tnode* cparse_message(int mode) {
 	msgpartlen = clex_tok_value_length();
 	char* s = clex_tok_value();
 	char* msg;
-	msg = calloc(sizeof(char), 255);
-	strncat(msg, s, msgpartlen);
+	msg = malloc(255);
+	strncpy(msg, s, msgpartlen);
 	int isBin = (msgpartlen == 2 && (strncmp("&&",msg,2)==0 || strncmp("||",msg, 2)==0 || strncmp("==",msg,2)==0 || strncmp("!=",msg,2)==0 || strncmp(">=",msg,2)==0 || strncmp("<=",msg,2)==0));
 	isBin = (isBin || (msgpartlen==1 && (strncmp(">",msg,1)==0 || strncmp("<",msg,1)==0 || strncmp("*",msg,1)==0 || strncmp("/",msg,1)==0 || strncmp("+",msg,1)==0 || strncmp("-",msg,1)==0)));
 	if (mode == 2 && isBin) {
@@ -50,7 +50,7 @@ tnode* cparse_message(int mode) {
 			if (debug) printf("> End of argument, next token: %s .\n", msg);
 			return m;
 		 }
-		strcat(msg,":");
+		*(msg + msgpartlen) = ':';
 		msgpartlen += 1;
 		if (debug) printf("Message so far: %s\n", msg);
 		m->type = KWMESSAGE;
@@ -79,9 +79,10 @@ tnode* cparse_message(int mode) {
 			if (t == PARCLOSE) break;
 			if (t == REF) {
 				long l = clex_tok_value_length(); 
-				strncat(msg, clex_tok_value(), l);
-				msgpartlen = msgpartlen + l + 1;
-				strncat(msg, ":", 1);
+				strncpy( (msg+msgpartlen), clex_tok_value(), l);
+				msgpartlen = msgpartlen + l;
+				*(msg + msgpartlen) = ':';
+				msgpartlen ++;
 				t = clex_tok();
 				if (t != COLON) {
 					printf("Expected colon. %s \n",msg);
@@ -187,16 +188,10 @@ tnode* cparse_block() {
 	while(t == REF) {
 		tlistitem* paramListItem = CTR_PARSER_CREATE_LISTITEM();
 		tnode* paramItem = CTR_PARSER_CREATE_NODE();
-		
 		long l = clex_tok_value_length();
 		paramItem->value = malloc(sizeof(char) * l);
 		strncpy(paramItem->value, clex_tok_value(), l);
 		paramItem->vlen = l;
-		
-		//paramItem->value = calloc(strlen(clex_tok_value()), sizeof(char)); strcpy(paramItem->value, clex_tok_value());
-
-		
-		
 		paramListItem->node = paramItem;
 		if (first) {
 			paramList->nodes = paramListItem;

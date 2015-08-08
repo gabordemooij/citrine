@@ -108,6 +108,7 @@ typedef struct tnode tnode;
 tnode* dparse_parse(char* prg);
 
 long clex_len;
+long ctr_program_length;
 
 void 	clex_load(char* prg);
 int 	clex_tok();
