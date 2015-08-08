@@ -278,7 +278,7 @@ tnode* cparse_string() {
 	tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = LTRSTRING;
 	char* n = clex_readstr();
-	long vlen = clex_len;
+	long vlen = clex_tok_value_length();
 	r->value = calloc(sizeof(char), vlen);
 	strncpy(r->value, n, vlen);
 	r->vlen = vlen;

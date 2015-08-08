@@ -198,8 +198,10 @@ int clex_tok() {
 
 
 char* clex_readstr() {
-	clex_len=0;
-	char* strbuff = malloc(100);
+	tokvlen=0;
+	long memblock = 40;
+	long page = 100; //100 byte pages
+	char* strbuff = (char*) malloc(memblock);
 	char c = *code;
 	int escape = 0;
 	char* beginbuff = strbuff;
@@ -210,13 +212,25 @@ char* clex_readstr() {
 			c = *code;
 			continue;
 		}
-		clex_len ++;
+		tokvlen ++;
+		
+		if (tokvlen > memblock) {
+			memblock += page;
+			beginbuff = (char*) realloc(beginbuff, memblock);
+			if (beginbuff == NULL) {
+				printf("Out of memory\n");
+				exit(1);
+			}
+			//reset pointer, memory location might have been changed
+			strbuff = beginbuff + (tokvlen -1);
+		}
+		
 		escape = 0;
 		*strbuff = c;
 		strbuff++;
 		code++;
 		c = *code;
 	}
-	*strbuff = '\0';
+	//*strbuff = '\0';
 	return beginbuff;
 }
