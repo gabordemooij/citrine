@@ -1,0 +1,14 @@
+#Developers can implement magic methods by adding respondTo-methods.
+repeater = Object new.
+repeater method: 'respondTo:' does: { what |
+	Console write: what + ' '.
+}.
+repeater method: 'respondTo:with:' does: { what say |
+	Console write: what, write: say + ' '.
+}.
+repeater method: 'respondTo:with:and:' does: { what say more |
+	Console write: what, write: say, write: more.
+}.
+repeater repeat.
+repeater everything: 'I say.'.
+repeater and: 'I ' everything: 'do.'.

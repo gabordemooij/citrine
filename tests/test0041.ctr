@@ -1,0 +1,6 @@
+#a non existing message should not trigger an error or produce any output.
+Console nonexistantmessage.
+Console nonexistantmessage: 'b'.
+Console nonexistantmessage: 'b' more: 123.
+Console nonexistantmessage: 'b' more: 123 andMore: (Console more).
+

@@ -523,8 +523,6 @@ obj* ctr_object_override_does(obj* myself, args* argumentList) {
 }
 
 obj* ctr_object_respond(obj* myself, args* argumentList) {
-	printf("Object does not respond.");
-	exit(1);
 	return myself;
 }
 
@@ -727,24 +725,29 @@ void ctr_initialize_world() {
 	World->info.sticky = 1;
 	contexts[0] = World;
 
-	CTR_CREATE_OBJECT_TYPE(Console, "Console", OTOBJECT)
-	CTR_CREATE_FUNC(ConsoleWrite, &ctr_console_write, "write:", Console);
-	Console->info.mark = 0;
-	Console->info.sticky = 1;
-	
-	CTR_CREATE_OBJECT_TYPE(GC, "GC", OTOBJECT)
-	CTR_CREATE_FUNC(GCCollect, &ctr_gc_collect, "collect", GC);
-	GC->info.mark = 0;
-	GC->info.sticky = 1;
-		
 	CTR_CREATE_OBJECT_TYPE(Object, "Object", OTOBJECT);
 	CTR_CREATE_FUNC(ObjectMake, &ctr_object_make, "new", Object);
 	CTR_CREATE_FUNC(ObjectMethodDoes, &ctr_object_method_does, "method:does:", Object);
 	CTR_CREATE_FUNC(ObjectOverrideDoes, &ctr_object_override_does, "override:does:", Object);
 	CTR_CREATE_FUNC(ObjectBlueprint, &ctr_object_blueprint, "basedOn:", Object);
 	CTR_CREATE_FUNC(ObjectRespond, &ctr_object_respond, "respondTo:", Object);
+	CTR_CREATE_FUNC(ObjectRespond2, &ctr_object_respond, "respondTo:with:", Object);
+	CTR_CREATE_FUNC(ObjectRespond3, &ctr_object_respond, "respondTo:with:and:", Object);
+	Object->link = NULL;
 	Object->info.mark = 0;
 	Object->info.sticky = 1;
+
+	CTR_CREATE_OBJECT_TYPE(Console, "Console", OTOBJECT)
+	CTR_CREATE_FUNC(ConsoleWrite, &ctr_console_write, "write:", Console);
+	Console->link = Object;
+	Console->info.mark = 0;
+	Console->info.sticky = 1;
+
+	CTR_CREATE_OBJECT_TYPE(GC, "GC", OTOBJECT)
+	CTR_CREATE_FUNC(GCCollect, &ctr_gc_collect, "collect", GC);
+	GC->link = Object;
+	GC->info.mark = 0;
+	GC->info.sticky = 1;
 
 	CTR_CREATE_OBJECT_TYPE(Number, "Number", OTNUMBER);
 	CTR_CREATE_FUNC(numberTimesObject, &ctr_number_times, "times:", Number);
@@ -764,6 +767,7 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(numberNeq, &ctr_number_neq, "!=", Number);
 	CTR_CREATE_FUNC(numberFactorial, &ctr_number_factorial, "factorial", Number);
 	CTR_CREATE_FUNC(numberBetween, &ctr_number_between, "between:and:", Number);
+	Number->link = Object;
 	Number->info.mark = 0;
 	Number->info.sticky = 1;
 	
@@ -787,6 +791,7 @@ void ctr_initialize_world() {
 
 	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", OTBLOCK);
 	CTR_CREATE_FUNC(blockRun, &ctr_block_runIt, "run", CBlock);
+	CBlock->link = Object;
 	CBlock->info.mark = 0;
 	CBlock->info.sticky = 1;
 	
@@ -796,17 +801,19 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(boolOpposite, &ctr_bool_opposite, "opposite", BoolX);
 	CTR_CREATE_FUNC(boolAND, &ctr_bool_and, "&&", BoolX);
 	CTR_CREATE_FUNC(boolOR, &ctr_bool_or, "||", BoolX);
+	BoolX->link = Object;
 	BoolX->info.mark = 0;
 	BoolX->info.sticky = 1;
 
 	CTR_CREATE_OBJECT_TYPE(Nil, "Nil", OTNIL);
 	CTR_CREATE_FUNC(isNil, &ctr_nil_isnil, "isNil", Nil);
+	Nil->link = Object;
 	Nil->info.mark = 0;
 	Nil->info.sticky = 1;
 }
 
 obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argumentList) {
-	
+	CTR_DEBUG_STR("Sending message >> |%s| \n", message, vlen);
 	obj* methodObject = NULL;
 	obj* searchObject = receiverObject;
 	while(!methodObject) {
@@ -818,10 +825,23 @@ obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argum
 		searchObject = searchObject->link;
 	}
 	if (!methodObject) {
+		
+		args* argCounter = argumentList;
+		int argCount = 0;
+		while(argCounter->next && argCount < 4) {
+			argCounter = argCounter->next;
+			argCount ++;
+		}
 		args* mesgArgument = CTR_CREATE_ARGUMENT();
 		mesgArgument->object = ctr_build_string(message, vlen);
 		mesgArgument->next = argumentList;
-		return ctr_send_message(receiverObject, "respondTo:", 10,  mesgArgument);
+		if (argCount == 0 || argCount > 2) {
+			return ctr_send_message(receiverObject, "respondTo:", 10,  mesgArgument);
+		} else if (argCount == 1) {
+			return ctr_send_message(receiverObject, "respondTo:with:", 15,  mesgArgument);
+		} else if (argCount == 2) {
+			return ctr_send_message(receiverObject, "respondTo:with:and:", 19,  mesgArgument);
+		}
 	}
 	obj* result;
 	if (methodObject->info.type == OTNATFUNC) {
@@ -835,8 +855,7 @@ obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argum
 			receiverObject = receiverObject->link;
 		}
 		result = ctr_block_run(methodObject, argumentList, receiverObject);
-	}
-	
+	}	
 	return result;
 }
 

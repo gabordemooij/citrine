@@ -77,6 +77,7 @@ obj* cwlk_message(tnode* paramNode) {
 				node = argumentList->node;
 			}
 		}
+		CTR_DEBUG_STR("Sending message: %s \n",message,l);
 		result = ctr_send_message(r, message, l, a);
 		r = result;
 	}

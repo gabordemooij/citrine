@@ -138,6 +138,12 @@ obj* ctr_first_object;
 
 int debug;
 
+#define CTR_DEBUG_STR(X,Y,L) if (debug) {\
+	char* b = calloc(sizeof(char),L);\
+	strncpy(b, Y, L);\
+	printf(X, b);\
+}\
+
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == '=' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='=' && X!='^'  && X!= ':' && X!= '\''
 
@@ -203,6 +209,5 @@ CTR_STRING(O->value.svalue, s, slen);\
 }\
 else if (O->info.type == OTBLOCK) { CTR_STRING(O->value.svalue,"[Block]",7);}\
 else if (O->info.type == OTOBJECT) { CTR_STRING(O->value.svalue,"[Object]",8);}\
-	
 
 

@@ -1,0 +1,4 @@
+#Arrays should be able to hold multiple items.
+items = Object new basedOn: Array.
+items put: 'black' at: 'coffee', put: 'earl grey' at: 'tea'.
+Console write: (items at: 'coffee'), write: (items at: 'tea').

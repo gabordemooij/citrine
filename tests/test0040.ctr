@@ -1,0 +1,3 @@
+x = 5.
+x times: {\ x inc: 1. }.
+Console write: x.
