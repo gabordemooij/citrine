@@ -448,6 +448,16 @@ obj* ctr_build_number(char* n) {
 	return numberObject;
 }
 
+obj* ctr_build_number_from_float(float f) {
+	obj* numberObject = CTR_CREATE_OBJECT();
+	CTR_REGISTER_OBJECT(numberObject);
+	ASSIGN_STRING(numberObject,name,"Number",6);
+	numberObject->value.nvalue = f;
+	numberObject->info.type = OTNUMBER;
+	numberObject->link = Number;
+	return numberObject;
+}
+
 obj* ctr_object_make() {
 	obj* objectInstance = NULL;
 	objectInstance = CTR_CREATE_OBJECT();
@@ -716,6 +726,10 @@ obj* ctr_array_get(obj* myself, args* argumentList) {
 	return foundObject;
 }
 
+obj* ctr_array_count(obj* myself) {
+	return ctr_build_number_from_float( HASH_COUNT(myself->properties) );
+}
+
 void ctr_initialize_world() {
 	
 	CTR_INIT_HEAD_OBJECT();
@@ -784,7 +798,8 @@ void ctr_initialize_world() {
 	
 	CTR_CREATE_OBJECT_TYPE(CArray, "Array", OTOBJECT);
 	CTR_CREATE_FUNC(arrayPut, &ctr_array_put, "put:at:", CArray);
-	CTR_CREATE_FUNC(arrayGet, &ctr_array_get, "at:", CArray);	
+	CTR_CREATE_FUNC(arrayGet, &ctr_array_get, "at:", CArray);
+	CTR_CREATE_FUNC(arrayCount, &ctr_array_count, "count", CArray);
 	CArray->link = Object;
 	CArray->info.sticky = 1;
 	CArray->info.mark = 0;

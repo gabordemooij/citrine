@@ -2,3 +2,4 @@
 items = Object new basedOn: Array.
 items put: 'black' at: 'coffee', put: 'earl grey' at: 'tea'.
 Console write: (items at: 'coffee'), write: (items at: 'tea').
+Console write: 'there are' + items count + ' items in the array.'.
