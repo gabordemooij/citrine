@@ -157,13 +157,13 @@ S->value = (char*) calloc(sizeof(char), L);\
 memcpy(S->value, V, L);\
 S->vlen = L;
 
-#define CTR_CREATE_OBJECT_TYPE(O,NAME,OT) O = CTR_CREATE_OBJECT();\
+#define CTR_CREATE_OBJECT_TYPE(O,NAME,OT, L) O = CTR_CREATE_OBJECT();\
 O->name = NAME;\
 if (OT==OTBOOL) O->value.bvalue = 0;\
 if (OT==OTNUMBER) O->value.nvalue = 0;\
 if (OT==OTSTRING) { CTR_STRING(O->value.svalue,"",0); }\
 O->info.type = OT;\
-HASH_ADD_KEYPTR(hh, World->properties, O->name, strlen(O->name), O);
+HASH_ADD_KEYPTR(hh, World->properties, O->name, L, O);
 
 #define CTR_CREATE_FUNC(X,Y,Z,Q) obj* X = CTR_CREATE_OBJECT();\
 X->name = Z;\

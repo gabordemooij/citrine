@@ -734,12 +734,12 @@ void ctr_initialize_world() {
 	
 	CTR_INIT_HEAD_OBJECT();
 
-	CTR_CREATE_OBJECT_TYPE(World, "World", OTOBJECT);
+	CTR_CREATE_OBJECT_TYPE(World, "World", OTOBJECT, 5);
 	World->info.mark = 0;
 	World->info.sticky = 1;
 	contexts[0] = World;
 
-	CTR_CREATE_OBJECT_TYPE(Object, "Object", OTOBJECT);
+	CTR_CREATE_OBJECT_TYPE(Object, "Object", OTOBJECT, 6);
 	CTR_CREATE_FUNC(ObjectMake, &ctr_object_make, "new", Object);
 	CTR_CREATE_FUNC(ObjectMethodDoes, &ctr_object_method_does, "method:does:", Object);
 	CTR_CREATE_FUNC(ObjectOverrideDoes, &ctr_object_override_does, "override:does:", Object);
@@ -751,19 +751,19 @@ void ctr_initialize_world() {
 	Object->info.mark = 0;
 	Object->info.sticky = 1;
 
-	CTR_CREATE_OBJECT_TYPE(Console, "Console", OTOBJECT)
+	CTR_CREATE_OBJECT_TYPE(Console, "Console", OTOBJECT, 7)
 	CTR_CREATE_FUNC(ConsoleWrite, &ctr_console_write, "write:", Console);
 	Console->link = Object;
 	Console->info.mark = 0;
 	Console->info.sticky = 1;
 
-	CTR_CREATE_OBJECT_TYPE(GC, "GC", OTOBJECT)
+	CTR_CREATE_OBJECT_TYPE(GC, "GC", OTOBJECT, 2)
 	CTR_CREATE_FUNC(GCCollect, &ctr_gc_collect, "collect", GC);
 	GC->link = Object;
 	GC->info.mark = 0;
 	GC->info.sticky = 1;
 
-	CTR_CREATE_OBJECT_TYPE(Number, "Number", OTNUMBER);
+	CTR_CREATE_OBJECT_TYPE(Number, "Number", OTNUMBER, 6);
 	CTR_CREATE_FUNC(numberTimesObject, &ctr_number_times, "times:", Number);
 	CTR_CREATE_FUNC(numberAdd, &ctr_number_add, "+", Number);
 	CTR_CREATE_FUNC(numberInc, &ctr_number_inc, "inc:", Number);
@@ -785,7 +785,7 @@ void ctr_initialize_world() {
 	Number->info.mark = 0;
 	Number->info.sticky = 1;
 	
-	CTR_CREATE_OBJECT_TYPE(TextString, "String", OTSTRING);
+	CTR_CREATE_OBJECT_TYPE(TextString, "String", OTSTRING, 6);
 	CTR_CREATE_FUNC(stringPrintBytes, &ctr_string_printbytes, "printBytes", TextString);
 	CTR_CREATE_FUNC(stringBytes, &ctr_string_bytes, "bytes", TextString);
 	CTR_CREATE_FUNC(stringLength, &ctr_string_length, "length", TextString);
@@ -796,7 +796,7 @@ void ctr_initialize_world() {
 	TextString->info.mark = 0;
 	TextString->info.sticky = 1;
 	
-	CTR_CREATE_OBJECT_TYPE(CArray, "Array", OTOBJECT);
+	CTR_CREATE_OBJECT_TYPE(CArray, "Array", OTOBJECT, 5);
 	CTR_CREATE_FUNC(arrayPut, &ctr_array_put, "put:at:", CArray);
 	CTR_CREATE_FUNC(arrayGet, &ctr_array_get, "at:", CArray);
 	CTR_CREATE_FUNC(arrayCount, &ctr_array_count, "count", CArray);
@@ -804,13 +804,13 @@ void ctr_initialize_world() {
 	CArray->info.sticky = 1;
 	CArray->info.mark = 0;
 
-	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", OTBLOCK);
+	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", OTBLOCK, 9);
 	CTR_CREATE_FUNC(blockRun, &ctr_block_runIt, "run", CBlock);
 	CBlock->link = Object;
 	CBlock->info.mark = 0;
 	CBlock->info.sticky = 1;
 	
-	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", OTBOOL);
+	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", OTBOOL, 7);
 	CTR_CREATE_FUNC(ifTrue, &ctr_bool_iftrue, "ifTrue:", BoolX);
 	CTR_CREATE_FUNC(ifFalse, &ctr_bool_ifFalse, "ifFalse:", BoolX);
 	CTR_CREATE_FUNC(boolOpposite, &ctr_bool_opposite, "opposite", BoolX);
@@ -820,7 +820,7 @@ void ctr_initialize_world() {
 	BoolX->info.mark = 0;
 	BoolX->info.sticky = 1;
 
-	CTR_CREATE_OBJECT_TYPE(Nil, "Nil", OTNIL);
+	CTR_CREATE_OBJECT_TYPE(Nil, "Nil", OTNIL, 3);
 	CTR_CREATE_FUNC(isNil, &ctr_nil_isnil, "isNil", Nil);
 	Nil->link = Object;
 	Nil->info.mark = 0;
