@@ -523,8 +523,8 @@ obj* ctr_object_override_does(obj* myself, args* argumentList) {
 	HASH_FIND(hh, myself->methods, methodBlock->name, methodName->value.svalue->vlen, oldBlock);
 	if (!oldBlock) printf("Cannot override: %s no such method.", oldBlock->name);
 	char* str = (char*) malloc(255);
-	strncpy(str, "overridden-", 11);
-	strncpy(str+11, oldBlock->name, methodName->value.svalue->vlen);
+	memcpy(str, "overridden-", 11);
+	memcpy(str+11, oldBlock->name, methodName->value.svalue->vlen);
 	oldBlock->name = str;
 	HASH_DEL(myself->methods, oldBlock);
 	HASH_ADD_KEYPTR(hh, myself->methods, oldBlock->name, (methodName->value.svalue->vlen + 11), oldBlock);
@@ -600,8 +600,8 @@ obj* ctr_string_concat(obj* myself, args* argumentList) {
 	long n1 = myself->value.svalue->vlen;
 	long n2 = argumentList->object->value.svalue->vlen;
 	char* dest = calloc(sizeof(char), (n1 + n2));
-	strncpy(dest, myself->value.svalue->value, n1);
-	strncpy(dest+n1, argumentList->object->value.svalue->value, n2);
+	memcpy(dest, myself->value.svalue->value, n1);
+	memcpy(dest+n1, argumentList->object->value.svalue->value, n2);
 	obj* newString = ctr_build_string(dest, (n1 + n2));
 	return newString;	
 }
@@ -621,7 +621,7 @@ obj* ctr_string_fromto(obj* myself, args* argumentList) {
 	long ua = getBytesUtf8(myself->value.svalue->value, 0, a);
 	long ub = getBytesUtf8(myself->value.svalue->value, ua, ((b - a) + 1));
 	char* dest = calloc(ub, sizeof(char));
-	strncpy(dest, (myself->value.svalue->value) + ua, ub);
+	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	obj* newString = ctr_build_string(dest,ub);
 	return newString;
 }

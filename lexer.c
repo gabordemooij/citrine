@@ -123,30 +123,30 @@ int clex_tok() {
 	}
 	if (strncmp(code, ">=", 2)==0){
 		code += 2;
-		tokvlen = 2; strncpy(buffer, ">=", 2);
+		tokvlen = 2; memcpy(buffer, ">=", 2);
 		return REF;
 	}
 	if (strncmp(code, "<=", 2)==0){
 		code += 2;
-		tokvlen = 2; strncpy(buffer, "<=", 2);
+		tokvlen = 2; memcpy(buffer, "<=", 2);
 		return REF;
 	}
 	
 	if (strncmp(code, "==", 2)==0){
 		code += 2;
-		tokvlen = 2; strncpy(buffer, "==", 2);
+		tokvlen = 2; memcpy(buffer, "==", 2);
 		return REF;
 	}
 	
 	if (strncmp(code, "!=", 2)==0){
 		code += 2;
-		tokvlen = 2; strncpy(buffer, "!=", 2);
+		tokvlen = 2; memcpy(buffer, "!=", 2);
 		return REF;
 	}
 	
 	if (strncmp(code, "||", 2)==0){
 		code += 2;
-		tokvlen = 2; strncpy(buffer, "||", 2);
+		tokvlen = 2; memcpy(buffer, "||", 2);
 		return REF;
 	}
 	
@@ -154,31 +154,31 @@ int clex_tok() {
 	
 	if (strncmp(code, "&&", 2)==0){
 		code += 2;
-		tokvlen = 2; strncpy(buffer, "&&", 2);
+		tokvlen = 2; memcpy(buffer, "&&", 2);
 		return REF;
 	}
 
 	if (strncmp(code, "*", 1)==0){
 		code += 1;
-		tokvlen = 1; strncpy(buffer, "*", 1);
+		tokvlen = 1; memcpy(buffer, "*", 1);
 		return REF;
 	}
 
 	if (strncmp(code, "/", 1)==0){
 		code += 1;
-		tokvlen = 1; strncpy(buffer, "/", 1);
+		tokvlen = 1; memcpy(buffer, "/", 1);
 		return REF;
 	}
 
 	if (strncmp(code, "+", 1)==0){
 		code += 1;
-		tokvlen = 1; strncpy(buffer, "+", 1);
+		tokvlen = 1; memcpy(buffer, "+", 1);
 		return REF;
 	}
 
 	if (strncmp(code, "-", 1)==0){
 		code += 1;
-		tokvlen = 1; strncpy(buffer, "-", 1);
+		tokvlen = 1; memcpy(buffer, "-", 1);
 		return REF;
 	}
 

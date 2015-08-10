@@ -24,7 +24,7 @@ tnode* cparse_message(int mode) {
 	char* s = clex_tok_value();
 	char* msg;
 	msg = malloc(255);
-	strncpy(msg, s, msgpartlen);
+	memcpy(msg, s, msgpartlen);
 	int isBin = (msgpartlen == 2 && (strncmp("&&",msg,2)==0 || strncmp("||",msg, 2)==0 || strncmp("==",msg,2)==0 || strncmp("!=",msg,2)==0 || strncmp(">=",msg,2)==0 || strncmp("<=",msg,2)==0));
 	isBin = (isBin || (msgpartlen==1 && (strncmp(">",msg,1)==0 || strncmp("<",msg,1)==0 || strncmp("*",msg,1)==0 || strncmp("/",msg,1)==0 || strncmp("+",msg,1)==0 || strncmp("-",msg,1)==0)));
 	if (mode == 2 && isBin) {
@@ -79,7 +79,7 @@ tnode* cparse_message(int mode) {
 			if (t == PARCLOSE) break;
 			if (t == REF) {
 				long l = clex_tok_value_length(); 
-				strncpy( (msg+msgpartlen), clex_tok_value(), l);
+				memcpy( (msg+msgpartlen), clex_tok_value(), l);
 				msgpartlen = msgpartlen + l;
 				*(msg + msgpartlen) = ':';
 				msgpartlen ++;
@@ -190,7 +190,7 @@ tnode* cparse_block() {
 		tnode* paramItem = CTR_PARSER_CREATE_NODE();
 		long l = clex_tok_value_length();
 		paramItem->value = malloc(sizeof(char) * l);
-		strncpy(paramItem->value, clex_tok_value(), l);
+		memcpy(paramItem->value, clex_tok_value(), l);
 		paramItem->vlen = l;
 		paramListItem->node = paramItem;
 		if (first) {
@@ -263,7 +263,7 @@ tnode* cparse_ref() {
 		r->vlen = clex_tok_value_length();
 	}
 	r->value = malloc(r->vlen);
-	strncpy(r->value, tmp, r->vlen);
+	memcpy(r->value, tmp, r->vlen);
 	return r;
 }
 
@@ -275,7 +275,7 @@ tnode* cparse_string() {
 	char* n = clex_readstr();
 	long vlen = clex_tok_value_length();
 	r->value = calloc(sizeof(char), vlen);
-	strncpy(r->value, n, vlen);
+	memcpy(r->value, n, vlen);
 	r->vlen = vlen;
 	clex_tok(); //eat trailing quote.
 	return r;
@@ -289,7 +289,7 @@ tnode* cparse_number() {
 	char* n = clex_tok_value();
 	long l = clex_tok_value_length();
 	r->value = calloc(sizeof(char), l);
-	strncpy(r->value, n, l);
+	memcpy(r->value, n, l);
 	r->vlen = l;
 	if (debug) printf("Parsing number: %s.\n", r->value);
 	return r;
