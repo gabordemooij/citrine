@@ -189,7 +189,6 @@ obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 	obj* thisBlock = CTR_CREATE_OBJECT();
 	ASSIGN_STRING(thisBlock,name,"__currentblock__",16);
 	thisBlock->info.type = OTBLOCK;
-	//ASSIGN_STRING(thisBlock,value,"[running block]",15);
 	thisBlock->link = myself;
 	tlistitem* codeBlockParts = node->nodes;
 	tnode* codeBlockPart1 = codeBlockParts->node;
@@ -489,7 +488,6 @@ obj* ctr_object_method_does(obj* myself, args* argumentList) {
 		exit(1);
 	}
 	ASSIGN_STRING(methodBlock, name, methodName->value.svalue->value, methodName->value.svalue->vlen);
-	//methodBlock->name = methodName->value.svalue->value;
 	HASH_ADD_KEYPTR(hh, myself->methods, methodBlock->name, methodName->value.svalue->vlen, methodBlock);
 	return myself;
 }
@@ -518,7 +516,6 @@ obj* ctr_object_override_does(obj* myself, args* argumentList) {
 	}
 	
 	ASSIGN_STRING(methodBlock, name, methodName->value.svalue->value, methodName->value.svalue->vlen);
-	//methodBlock->name = methodName->value;
 	obj* oldBlock = CTR_CREATE_OBJECT();
 	HASH_FIND(hh, myself->methods, methodBlock->name, methodName->value.svalue->vlen, oldBlock);
 	if (!oldBlock) printf("Cannot override: %s no such method.", oldBlock->name);

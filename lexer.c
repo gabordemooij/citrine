@@ -231,6 +231,5 @@ char* clex_readstr() {
 		code++;
 		c = *code;
 	}
-	//*strbuff = '\0';
 	return beginbuff;
 }
