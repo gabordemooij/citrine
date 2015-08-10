@@ -140,7 +140,7 @@ int debug;
 
 #define CTR_DEBUG_STR(X,Y,L) if (debug) {\
 	char* b = calloc(sizeof(char),L);\
-	strncpy(b, Y, L);\
+	memcpy(b, Y, L);\
 	printf(X, b);\
 }\
 
@@ -154,7 +154,7 @@ int debug;
 
 #define CTR_STRING(S,V,L) S = (cstr*) calloc(sizeof(cstr), 1);\
 S->value = (char*) calloc(sizeof(char), L);\
-strncpy(S->value, V, L);\
+memcpy(S->value, V, L);\
 S->vlen = L;
 
 #define CTR_CREATE_OBJECT_TYPE(O,NAME,OT) O = CTR_CREATE_OBJECT();\
@@ -177,7 +177,7 @@ HASH_ADD_KEYPTR(hh, Q->methods, X->name, strlen(X->name), X);
 
 #define	CTR_PARSER_CREATE_NODE() (tnode*) calloc(1,sizeof(tnode))
 			
-#define ASSIGN_STRING(o,p,v,s) o->p = calloc(s,sizeof(char)); strncpy( (char*) o->p,v,s);
+#define ASSIGN_STRING(o,p,v,s) o->p = calloc(s,sizeof(char)); memcpy( (char*) o->p,v,s);
 
 #define CTR_CAST_TO_BOOL(o) if (o->info.type == OTNIL) o->value.bvalue = 0;\
 if (o->info.type == OTNUMBER) if (o->value.nvalue > 0) o->value.bvalue = 1; else o->value->nvalue = 0;\

@@ -707,7 +707,7 @@ obj* ctr_array_put(obj* myself, args* argumentList) {
 		exit(1);
 	}
 	ASSIGN_STRING(putValue, name, putKey->value.svalue->value, putKey->value.svalue->vlen);
-	HASH_ADD_KEYPTR(hh, myself->properties, putValue->name, putKey->value.svalue->vlen, putValue);
+	HASH_ADD_KEYPTR(hh, myself->properties, putKey->value.svalue->value, putKey->value.svalue->vlen, putValue);
 	return myself;
 }
 
