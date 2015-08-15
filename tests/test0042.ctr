@@ -1,5 +1,12 @@
 #Arrays should be able to hold multiple items.
-items = Object new basedOn: Array.
+items = Object new basedOn: Map.
 items put: 'black' at: 'coffee', put: 'earl grey' at: 'tea'.
 Console write: (items at: 'coffee'), write: (items at: 'tea').
 Console write: 'there are' + items count + ' items in the array.'.
+#Can we overwrite key?
+items put: 'capuccino' at: 'coffee'.
+Console write: 'Now my coffee is.. ' + (items at: 'coffee').
+items put: 'aaa' at: '1'.
+items put: 'bbb' at: '2'.
+Console write: (items at: 'a'). #segf.
+

@@ -20,6 +20,7 @@ obj* BoolX;
 obj* Console;
 obj* Nil;
 obj* GC;
+obj* CMap;
 obj* CArray;
 int debug;
 
@@ -138,7 +139,7 @@ obj* ctr_find(char* key, long n) {
 		HASH_FIND(hh, context->properties, key, n, foundObject);
 		i--;
 	}
-	if (foundObject == NULL) { printf("Error, key not found: %s %lu.\n", key, n); exit(1); }
+	if (foundObject == NULL) { printf("Error, key not found: [%s] %lu.\n", key, n); exit(1); }
 	return foundObject;
 }
 
@@ -686,7 +687,7 @@ void ctr_gc_collect (obj* myself, args* argumentList) {
 	cid = oldcid;
 }
 
-obj* ctr_array_put(obj* myself, args* argumentList) {
+obj* ctr_map_put(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
@@ -699,16 +700,23 @@ obj* ctr_array_put(obj* myself, args* argumentList) {
 		printf("Missing argument 1\n"); exit(1);
 	}
 	obj* putKey = nextArgument->object;
-	if (putKey->info.type != OTSTRING) {
-		printf("Expected argument at: to be of type string.\n");
+	
+	char* key;
+	long keyLen;
+	
+	if (putKey->info.type == OTSTRING) {
+		key = calloc(putKey->value.svalue->vlen, sizeof(char));
+		keyLen = putKey->value.svalue->vlen;
+		memcpy(key, putKey->value.svalue->value, keyLen);
+	} else {
+		printf("Map key needs to be string.\n");
 		exit(1);
 	}
-	ASSIGN_STRING(putValue, name, putKey->value.svalue->value, putKey->value.svalue->vlen);
-	HASH_ADD_KEYPTR(hh, myself->properties, putKey->value.svalue->value, putKey->value.svalue->vlen, putValue);
-	return myself;
+	HASH_ADD_KEYPTR(hh, myself->properties, key, keyLen, putValue);
+    return myself;
 }
 
-obj* ctr_array_get(obj* myself, args* argumentList) {
+obj* ctr_map_get(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
@@ -720,10 +728,14 @@ obj* ctr_array_get(obj* myself, args* argumentList) {
 	obj* foundObject = CTR_CREATE_OBJECT();
 	CTR_REGISTER_OBJECT(foundObject);
 	HASH_FIND(hh, myself->properties, searchKey->value.svalue->value, searchKey->value.svalue->vlen, foundObject);
+	
+	if (foundObject == NULL) {
+		foundObject = ctr_build_nil();
+	}
 	return foundObject;
 }
 
-obj* ctr_array_count(obj* myself) {
+obj* ctr_map_count(obj* myself) {
 	return ctr_build_number_from_float( HASH_COUNT(myself->properties) );
 }
 
@@ -793,13 +805,13 @@ void ctr_initialize_world() {
 	TextString->info.mark = 0;
 	TextString->info.sticky = 1;
 	
-	CTR_CREATE_OBJECT_TYPE(CArray, "Array", OTOBJECT, 5);
-	CTR_CREATE_FUNC(arrayPut, &ctr_array_put, "put:at:", CArray);
-	CTR_CREATE_FUNC(arrayGet, &ctr_array_get, "at:", CArray);
-	CTR_CREATE_FUNC(arrayCount, &ctr_array_count, "count", CArray);
-	CArray->link = Object;
-	CArray->info.sticky = 1;
-	CArray->info.mark = 0;
+	CTR_CREATE_OBJECT_TYPE(CMap, "Map", OTOBJECT, 3);
+	CTR_CREATE_FUNC(mapPut, &ctr_map_put, "put:at:", CMap);
+	CTR_CREATE_FUNC(mapGet, &ctr_map_get, "at:", CMap);
+	CTR_CREATE_FUNC(mapCount, &ctr_map_count, "count", CMap);
+	CMap->link = Object;
+	CMap->info.sticky = 1;
+	CMap->info.mark = 0;
 
 	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", OTBLOCK, 9);
 	CTR_CREATE_FUNC(blockRun, &ctr_block_runIt, "run", CBlock);
