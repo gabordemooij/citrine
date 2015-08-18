@@ -739,6 +739,48 @@ obj* ctr_map_count(obj* myself) {
 	return ctr_build_number_from_float( HASH_COUNT(myself->properties) );
 }
 
+obj* ctr_array_new(obj* myclass) {
+	obj* s = ctr_object_make();
+	s->info.type = OTARRAY;
+	s->link = myclass;
+	s->value.avalue = (carray*) calloc(1,sizeof(carray));
+	s->value.avalue->length = 1;
+	s->value.avalue->elements = (obj**) malloc(sizeof(obj**)*1);
+	s->value.avalue->head = 0;
+	return s;
+}
+
+obj* ctr_array_push(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("Missing argument 1\n"); exit(1);
+	}
+	if (myself->value.avalue->length <= myself->value.avalue->head) {
+		myself->value.avalue->length *= 2;
+		myself->value.avalue->elements = realloc(myself->value.avalue->elements, (sizeof(obj**) * (myself->value.avalue->length)));
+	}
+	
+	obj* pushValue = argumentList->object;
+	*(myself->value.avalue->elements + (myself->value.avalue->head * sizeof(obj*))) = pushValue;
+	myself->value.avalue->head++;
+	return myself;
+}
+
+
+//@todo dont forget to gc arrays, they might hold refs to objects!
+obj* ctr_array_pop(obj* myself) {
+	if (myself->value.avalue->length < myself->value.avalue->head) {
+		return Nil;
+	}
+	myself->value.avalue->head--;
+	obj* foundObject = *(myself->value.avalue->elements + (myself->value.avalue->head * sizeof(obj*)));
+	return foundObject;
+}
+
+obj* ctr_array_count(obj* myself) {
+	return ctr_build_number_from_float( (double) myself->value.avalue->head );
+}
+
+
 void ctr_initialize_world() {
 	
 	CTR_INIT_HEAD_OBJECT();
@@ -812,6 +854,15 @@ void ctr_initialize_world() {
 	CMap->link = Object;
 	CMap->info.sticky = 1;
 	CMap->info.mark = 0;
+	
+	CTR_CREATE_OBJECT_TYPE(CArray, "Array", OTARRAY, 5);
+	CTR_CREATE_FUNC(arrayNew, &ctr_array_new, "make", CArray);
+	CTR_CREATE_FUNC(arrayPush, &ctr_array_push, "push:", CArray);
+	CTR_CREATE_FUNC(arrayCount, &ctr_array_count, "count", CArray);
+	CTR_CREATE_FUNC(arrayPop, &ctr_array_pop, "pop", CArray);
+	CArray->link = Object;
+	CArray->info.sticky = 1;
+	CArray->info.mark = 0;
 
 	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", OTBLOCK, 9);
 	CTR_CREATE_FUNC(blockRun, &ctr_block_runIt, "run", CBlock);
@@ -899,9 +950,11 @@ obj* ctr_assign_value(char* name, long keylen, obj* o) {
 		CTR_STRING(object->value.svalue, o->value.svalue->value, o->value.svalue->vlen);
 	 } else if (o->info.type == OTBLOCK) {
 		object->value.block = o->value.block;
+	 } else if (o->info.type == OTARRAY) {
+		object->value.avalue = o->value.avalue;
 	 }
 
-   object->name = name;
+	object->name = name;
 	ctr_set(object, keylen);
 	return object;
 }

@@ -45,7 +45,7 @@
 #define OTBLOCK 4
 #define OTOBJECT 5
 #define OTNATFUNC 6
-#define OTCUST 7
+#define OTARRAY 7
 #define OTMISC 8
 #define OTEX 9
 
@@ -69,13 +69,29 @@ struct obj {
 		unsigned int flagb: 1;
 	 } info;
     struct obj* link;
-    union uvalue { int bvalue; double nvalue; cstr* svalue; struct tnode* block; void *rvalue; } value;
-	 struct obj* next;
+    union uvalue {
+		int bvalue;
+		double nvalue;
+		cstr* svalue;
+		struct tnode* block;
+		struct carray* avalue;
+		void* rvalue;
+	} value;
+	struct obj* next;
     UT_hash_handle hh;
 };
 
 struct obj;
 typedef struct obj obj;
+
+
+struct carray {
+	long length;
+	long head;
+	obj** elements;
+};
+struct carray;
+typedef struct carray carray;
 
 struct args {
 	struct obj* object;
