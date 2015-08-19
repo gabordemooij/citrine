@@ -202,9 +202,9 @@ if (o->info.type != OTBOOL) o->value.bvalue = 1; //rest (OTNATFUNC, OTOBJECT etc
 
 
 #define CTR_CONVFP(s,x){\
-char *buf = malloc(100);\
+char *buf = calloc(100, sizeof(char));\
 char *p;\
-sprintf(buf, "%.10f", x);\
+snprintf(buf, 99, "%.10f", x);\
 p = buf + strlen(buf) - 1;\
 while (*p == '0' && *p-- != '.');\
 *(p+1) = '\0';\

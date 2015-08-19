@@ -131,7 +131,6 @@ void ctr_close_context() {
 obj* ctr_find(char* key, long n) {
 	int i = cid;
 	obj* foundObject = NULL;
-	foundObject = calloc(sizeof(obj), 1);
 	int first = 1;
 	while((i>-1 && foundObject == NULL) || first) {
 		first = 0;
@@ -140,6 +139,7 @@ obj* ctr_find(char* key, long n) {
 		i--;
 	}
 	if (foundObject == NULL) { printf("Error, key not found: [%s] %lu.\n", key, n); exit(1); }
+	if (foundObject->info.flaga) foundObject = foundObject->link;
 	return foundObject;
 }
 
@@ -148,6 +148,7 @@ obj* ctr_find_in_my(char* key, long n) {
 	obj* context = ctr_find("me", 2);
 	HASH_FIND(hh, context->link->properties, key, n, foundObject);
 	if (foundObject == NULL) { printf("Error, property not found: %s.\n", key); exit(1); }
+	if (foundObject->info.flaga) foundObject = foundObject->link;
 	return foundObject;
 }
 
@@ -278,6 +279,17 @@ obj* ctr_bool_or(obj* myself, args* argumentList) {
 	return ctr_build_bool((myself->value.bvalue || argumentList->object->value.bvalue));
 }
 
+
+obj* ctr_build_number_from_float(float f) {
+	obj* numberObject = CTR_CREATE_OBJECT();
+	CTR_REGISTER_OBJECT(numberObject);
+	ASSIGN_STRING(numberObject,name,"Number",6);
+	numberObject->value.nvalue = f;
+	numberObject->info.type = OTNUMBER;
+	numberObject->link = Number;
+	return numberObject;
+}
+
 obj* ctr_number_higherThan(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
@@ -329,10 +341,7 @@ obj* ctr_number_add(obj* myself, args* argumentList) {
 	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = myself->value.nvalue;
 	float b = otherNum->value.nvalue;
-	char* str = calloc(40, sizeof(char));
-	sprintf(str, "%f", (a+b));
-	obj* newNum = ctr_build_number(str);
-	return newNum;
+	return ctr_build_number_from_float((a+b));
 }
 
 obj* ctr_number_inc(obj* myself, args* argumentList) {
@@ -347,10 +356,7 @@ obj* ctr_number_minus(obj* myself, args* argumentList) {
 	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = myself->value.nvalue;
 	float b = otherNum->value.nvalue;
-	char* str = calloc(40, sizeof(char));
-	sprintf(str, "%f", (a-b));
-	obj* newNum = ctr_build_number(str);
-	return newNum;
+	return ctr_build_number_from_float((a-b));
 }
 
 obj* ctr_number_dec(obj* myself, args* argumentList) {
@@ -365,10 +371,7 @@ obj* ctr_number_multiply(obj* myself, args* argumentList) {
 	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = myself->value.nvalue;
 	float b = otherNum->value.nvalue;
-	char* str = calloc(40, sizeof(char));
-	sprintf(str, "%f", (a*b));
-	obj* newNum = ctr_build_number(str);
-	return newNum;
+	return ctr_build_number_from_float(a*b);
 }
 
 obj* ctr_number_mul(obj* myself, args* argumentList) {
@@ -388,10 +391,7 @@ obj* ctr_number_divide(obj* myself, args* argumentList) {
 		printf("Division by zero.");
 		exit(1);
 	}
-	char* str = calloc(40, sizeof(char));
-	sprintf(str, "%f", (a/b));
-	obj* newNum = ctr_build_number(str);
-	return newNum;
+	return ctr_build_number_from_float((a/b));
 }
 
 obj* ctr_number_div(obj* myself, args* argumentList) {
@@ -448,22 +448,13 @@ obj* ctr_build_number(char* n) {
 	return numberObject;
 }
 
-obj* ctr_build_number_from_float(float f) {
-	obj* numberObject = CTR_CREATE_OBJECT();
-	CTR_REGISTER_OBJECT(numberObject);
-	ASSIGN_STRING(numberObject,name,"Number",6);
-	numberObject->value.nvalue = f;
-	numberObject->info.type = OTNUMBER;
-	numberObject->link = Number;
-	return numberObject;
-}
-
 obj* ctr_object_make() {
 	obj* objectInstance = NULL;
 	objectInstance = CTR_CREATE_OBJECT();
 	CTR_REGISTER_OBJECT(objectInstance);
 	objectInstance->info.type = OTOBJECT;
 	objectInstance->link = Object;
+	objectInstance->info.flagb = 1;
 	return objectInstance;
 }
 
@@ -745,8 +736,9 @@ obj* ctr_array_new(obj* myclass) {
 	s->link = myclass;
 	s->value.avalue = (carray*) calloc(1,sizeof(carray));
 	s->value.avalue->length = 1;
-	s->value.avalue->elements = (obj**) malloc(sizeof(obj**)*1);
+	s->value.avalue->elements = (obj**) malloc(sizeof(obj*)*1);
 	s->value.avalue->head = 0;
+	s->info.flagb = 1;
 	return s;
 }
 
@@ -756,7 +748,7 @@ obj* ctr_array_push(obj* myself, args* argumentList) {
 	}
 	if (myself->value.avalue->length <= myself->value.avalue->head) {
 		myself->value.avalue->length *= 2;
-		myself->value.avalue->elements = realloc(myself->value.avalue->elements, (sizeof(obj**) * (myself->value.avalue->length)));
+		myself->value.avalue->elements = (obj**) realloc(myself->value.avalue->elements, (sizeof(obj*) * (myself->value.avalue->length + 100)));
 	}
 	
 	obj* pushValue = argumentList->object;
@@ -765,6 +757,41 @@ obj* ctr_array_push(obj* myself, args* argumentList) {
 	return myself;
 }
 
+obj* ctr_array_get(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("Missing argument 1\n"); exit(1);
+	}
+	obj* getIndex = argumentList->object;
+	if (getIndex->info.type != OTNUMBER) {
+		printf("Index must be number.\n"); exit(1);
+	}
+	int i = (int) getIndex->value.nvalue;
+	if (myself->value.avalue->head < i || i < 0) {
+		printf("Index out of bounds.\n"); exit(1);
+	}
+	return *(myself->value.avalue->elements + (i * sizeof(obj*)));
+}
+
+obj* ctr_array_put(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("Missing argument 1\n"); exit(1);
+	}
+	if (!argumentList->next) {
+		printf("Missing argument 2\n"); exit(1);
+	}
+	obj* putValue = argumentList->object;
+	obj* putIndex = argumentList->next->object;
+	if (putIndex->info.type != OTNUMBER) {
+		printf("Index must be number.\n"); exit(1);
+	}
+	int i = (int) putIndex->value.nvalue;
+	
+	if (myself->value.avalue->head < i || i < 0) {
+		printf("Index out of bounds.\n"); exit(1);
+	}
+	*(myself->value.avalue->elements + (i * sizeof(obj*))) = putValue;
+	return myself;
+}
 
 //@todo dont forget to gc arrays, they might hold refs to objects!
 obj* ctr_array_pop(obj* myself) {
@@ -777,7 +804,9 @@ obj* ctr_array_pop(obj* myself) {
 }
 
 obj* ctr_array_count(obj* myself) {
-	return ctr_build_number_from_float( (double) myself->value.avalue->head );
+	double d = 0;
+	d = (double) myself->value.avalue->head;
+	return ctr_build_number_from_float( d );
 }
 
 
@@ -835,6 +864,8 @@ void ctr_initialize_world() {
 	Number->link = Object;
 	Number->info.mark = 0;
 	Number->info.sticky = 1;
+	Number->info.flagb = 0;
+	
 	
 	CTR_CREATE_OBJECT_TYPE(TextString, "String", OTSTRING, 6);
 	CTR_CREATE_FUNC(stringPrintBytes, &ctr_string_printbytes, "printBytes", TextString);
@@ -860,6 +891,8 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(arrayPush, &ctr_array_push, "push:", CArray);
 	CTR_CREATE_FUNC(arrayCount, &ctr_array_count, "count", CArray);
 	CTR_CREATE_FUNC(arrayPop, &ctr_array_pop, "pop", CArray);
+	CTR_CREATE_FUNC(arrayGet, &ctr_array_get, "at:", CArray);
+	CTR_CREATE_FUNC(arrayPut, &ctr_array_put, "put:at:", CArray);
 	CArray->link = Object;
 	CArray->info.sticky = 1;
 	CArray->info.mark = 0;
@@ -937,10 +970,19 @@ obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argum
 obj* ctr_assign_value(char* name, long keylen, obj* o) {
 	obj* object = CTR_CREATE_OBJECT();
 	CTR_REGISTER_OBJECT(object);
-	object->properties = o->properties;
-    object->methods = o->methods;
-    object->info.type = o->info.type;
-    object->link = o->link;
+	
+	if (o->info.type == OTOBJECT && o->info.flagb != 1) {
+		object->info.flagb = 0;
+		object->info.flaga = 1;
+		object->link = o;
+	} else {
+		object->properties = o->properties;
+		object->methods = o->methods;
+		object->info.type = o->info.type;
+		object->info.flagb = 0;
+		object->link = o->link;
+	}
+	
      //depending on type, copy specific value
     if (o->info.type == OTBOOL) {
 		object->value.bvalue = o->value.bvalue;
@@ -962,10 +1004,18 @@ obj* ctr_assign_value(char* name, long keylen, obj* o) {
 obj* ctr_assign_value_to_my(char* name, long n, obj* o) {
 	obj* object = CTR_CREATE_OBJECT();
 	CTR_REGISTER_OBJECT(object);
-	object->properties = o->properties;
-    object->methods = o->methods;
-    object->info.type = o->info.type;
-    object->link = o->link;
+	
+	if (o->info.type == OTOBJECT && o->info.flagb != 1) {
+		object->info.flagb = 0;
+		object->info.flaga = 1;
+		object->link = o;
+	} else {
+		object->properties = o->properties;
+		object->methods = o->methods;
+		object->info.type = o->info.type;
+		object->info.flagb = 0;
+		object->link = o->link;
+	}
     
      //depending on type, copy specific value
     if (o->info.type == OTBOOL) {
