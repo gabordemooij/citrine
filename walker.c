@@ -8,7 +8,7 @@
 #include "uthash.h"
 #include "citrine.h"
 
-
+obj* error;
 
 obj* cwlk_return(tnode* node) {
 	if (!node->nodes) {
@@ -129,6 +129,10 @@ obj* cwlk_expr(tnode* node) {
 	} else if (node->type == NESTED) {
 		result = cwlk_expr(node->nodes->node);
 	} else if (node->type == ENDOFPROGRAM) {
+		if (error) {
+			printf("Uncatched error has occurred.\n");
+			exit(1);
+		}
 		exit(0);
 	} else {
 		printf("Runtime Error. Invalid parse node: %d %s \n", node->type,node->value);

@@ -22,6 +22,7 @@ obj* Nil;
 obj* GC;
 obj* CMap;
 obj* CArray;
+obj* error;
 int debug;
 
 //measures the size of character
@@ -189,7 +190,7 @@ obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 	obj* result;
 	tnode* node = myself->value.block;
 	obj* thisBlock = CTR_CREATE_OBJECT();
-	ASSIGN_STRING(thisBlock,name,"__currentblock__",16);
+	ASSIGN_STRING(thisBlock,name,"thisBlock",9);
 	thisBlock->info.type = OTBLOCK;
 	thisBlock->link = myself;
 	tlistitem* codeBlockParts = node->nodes;
@@ -215,14 +216,41 @@ obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 	}
 	ctr_open_context();
 	ctr_set(selfRef, 2);
-	ctr_set(thisBlock, 16); //otherwise running block may get gc'ed.
+	ctr_set(thisBlock, 9); //otherwise running block may get gc'ed.
 	result = cwlk_run(codeBlockPart2);
 	ctr_close_context();
+	if (error != NULL) {
+		obj* catchBlock = malloc(sizeof(obj));
+		HASH_FIND(hh, myself->properties, "catch", 5, catchBlock);
+		if (catchBlock != NULL) {
+			args* a = CTR_CREATE_ARGUMENT();
+			a->object = error;
+			error = NULL;
+			ctr_block_run(catchBlock, a, myself);
+			result = myself;
+		}
+	}
 	return result;
 }
 
 obj* ctr_block_runIt(obj* myself, args* argumentList) {
 	return ctr_block_run(myself, argumentList, myself);
+}
+
+obj* ctr_block_error(obj* myself, args* argumentList) {
+	error = argumentList->object;
+	return myself;
+}
+
+obj* ctr_block_catch(obj* myself, args* argumentList) {
+	obj* catchBlock = argumentList->object;
+	obj* foundObject = CTR_CREATE_OBJECT();
+	HASH_FIND(hh, myself->properties, "catch", 5, foundObject);
+	if (foundObject) {
+		HASH_DELETE(hh, myself->properties, foundObject);
+	}
+	HASH_ADD_KEYPTR(hh, myself->properties, "catch", 5, catchBlock);
+	return myself;
 }
 
 obj* ctr_build_block(tnode* node) {
@@ -899,6 +927,8 @@ void ctr_initialize_world() {
 
 	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", OTBLOCK, 9);
 	CTR_CREATE_FUNC(blockRun, &ctr_block_runIt, "run", CBlock);
+	CTR_CREATE_FUNC(blockError, &ctr_block_error, "error:", CBlock);
+	CTR_CREATE_FUNC(blockCatch, &ctr_block_catch, "catch:", CBlock);
 	CBlock->link = Object;
 	CBlock->info.mark = 0;
 	CBlock->info.sticky = 1;
@@ -921,6 +951,7 @@ void ctr_initialize_world() {
 }
 
 obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argumentList) {
+	if (error != NULL) return NULL; //Error mode, ignore subsequent messages until resolved.
 	CTR_DEBUG_STR("Sending message >> |%s| \n", message, vlen);
 	obj* methodObject = NULL;
 	obj* searchObject = receiverObject;

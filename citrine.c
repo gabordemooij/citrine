@@ -10,9 +10,11 @@
 #include "citrine.h"
 
 int debug = 0;
+obj* error;
 
 int main(int argc, char *argv[]) {
 	char* prg;
+	error = NULL;
 	if (argc < 2) {
 		printf("\nWelcome to Citrine v0.1\n");
 		printf("Written by Gabor de Mooij (c) copyright 2014\n");

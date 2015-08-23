@@ -1,0 +1,9 @@
+{\
+	Console write: 'hi there!'.
+	thisBlock error: 'oops'.
+	Console write: 'hi there!'.
+	{\ Console write: 'dont print this'. } run.
+} catch: { e | 
+	Console write: 'got ya!'. 
+	Console write: e.
+}, run.
