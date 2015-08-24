@@ -1,0 +1,3 @@
+f = File new: 'tests/test0001.ctr'.
+Console write: f path.
+Console write: f read.

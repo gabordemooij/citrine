@@ -75,7 +75,7 @@ struct obj {
 		cstr* svalue;
 		struct tnode* block;
 		struct carray* avalue;
-		void* rvalue;
+		struct cres* rvalue;
 	} value;
 	struct obj* next;
     UT_hash_handle hh;
@@ -84,6 +84,13 @@ struct obj {
 struct obj;
 typedef struct obj obj;
 
+
+struct cres {
+	int type;
+	void* ptr;
+};
+struct cres;
+typedef struct cres cres;
 
 struct carray {
 	long length;
@@ -225,5 +232,4 @@ CTR_STRING(O->value.svalue, s, slen);\
 }\
 else if (O->info.type == OTBLOCK) { CTR_STRING(O->value.svalue,"[Block]",7);}\
 else if (O->info.type == OTOBJECT) { CTR_STRING(O->value.svalue,"[Object]",8);}\
-
 

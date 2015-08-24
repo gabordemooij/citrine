@@ -22,6 +22,7 @@ obj* Nil;
 obj* GC;
 obj* CMap;
 obj* CArray;
+obj* CFile;
 obj* error;
 int debug;
 
@@ -837,6 +838,64 @@ obj* ctr_array_count(obj* myself) {
 	return ctr_build_number_from_float( d );
 }
 
+obj* ctr_file_new(obj* myself, args* argumentList) {
+	obj* s = ctr_object_make();
+	s->info.type = OTMISC;
+	s->link = myself;
+	s->info.flagb = 1;
+	if (!argumentList->object) {
+		printf("Missing argument\n");
+		exit(1);
+	}
+	s->value.rvalue = malloc(sizeof(cres));
+	s->value.rvalue->type = 1;
+	obj* pathObject = CTR_CREATE_OBJECT();
+	pathObject->name = "path";
+	pathObject->info.type = OTSTRING;
+	pathObject->value.svalue = (cstr*) malloc(sizeof(cstr));
+	pathObject->value.svalue->value = (char*) malloc(sizeof(char) * argumentList->object->value.svalue->vlen);
+	memcpy(pathObject->value.svalue->value, argumentList->object->value.svalue->value, argumentList->object->value.svalue->vlen);
+	pathObject->value.svalue->vlen = argumentList->object->value.svalue->vlen;
+	HASH_ADD_KEYPTR(hh, s->properties, "path", 4, pathObject);
+	return s;
+}
+
+obj* ctr_file_path(obj* myself) {
+	obj* path;
+	HASH_FIND(hh, myself->properties, "path", 4, path);
+	if (path == NULL) return Nil;
+	return path;
+}
+
+obj* ctr_file_read(obj* myself) {
+	obj* path;
+	HASH_FIND(hh, myself->properties, "path", 4, path);
+	if (path == NULL) return Nil;
+	long vlen = path->value.svalue->vlen;
+	char* pathString = malloc(vlen + 1);
+	memcpy(pathString, path->value.svalue->value, vlen);
+	strncat(pathString+vlen,"\0",1);
+	FILE* f = fopen(pathString, "rb");
+	if (!f) {
+		printf("Unable to open file!\n");
+		exit(1);
+	}
+	char *buffer;
+	unsigned long fileLen;
+	fseek(f, 0, SEEK_END);
+	fileLen=ftell(f);
+	fseek(f, 0, SEEK_SET);
+	buffer=(char *)malloc(fileLen+1);
+	if (!buffer){
+		printf("Out of memory\n");
+		fclose(f);exit(1);	
+	}
+	fread(buffer, fileLen, 1, f);
+	fclose(f);
+	obj* str = ctr_build_string(buffer, fileLen);
+	free(buffer);
+	return str;
+}
 
 void ctr_initialize_world() {
 	
@@ -924,6 +983,14 @@ void ctr_initialize_world() {
 	CArray->link = Object;
 	CArray->info.sticky = 1;
 	CArray->info.mark = 0;
+
+	CTR_CREATE_OBJECT_TYPE(CFile, "File", OTMISC, 4);
+	CTR_CREATE_FUNC(fileNew, &ctr_file_new, "new:", CFile);
+	CTR_CREATE_FUNC(filePath, &ctr_file_path, "path", CFile);
+	CTR_CREATE_FUNC(fileRead, &ctr_file_read, "read", CFile);
+	CFile->link = Object;
+	CFile->info.sticky = 1;
+	CFile->info.mark = 0;
 
 	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", OTBLOCK, 9);
 	CTR_CREATE_FUNC(blockRun, &ctr_block_runIt, "run", CBlock);
