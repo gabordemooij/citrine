@@ -1,3 +1,4 @@
-f = File new: 'tests/test0001.ctr'.
-Console write: f path.
-Console write: f read.
+f2 = File new: '/tmp/test.txt'.
+Console write: f2 path.
+f2 write: 'Hello!'.
+Console write: f2 read.

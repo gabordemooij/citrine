@@ -897,6 +897,33 @@ obj* ctr_file_read(obj* myself) {
 	return str;
 }
 
+obj* ctr_file_write(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("Missing string argument to write to file.\n");
+		exit(1);
+	}
+	obj* str = argumentList->object;
+	if (str->info.type != OTSTRING) {
+		printf("First argument must be string\n");
+		exit(1);
+	}
+	obj* path;
+	HASH_FIND(hh, myself->properties, "path", 4, path);
+	if (path == NULL) return Nil;
+	long vlen = path->value.svalue->vlen;
+	char* pathString = malloc(vlen + 1);
+	memcpy(pathString, path->value.svalue->value, vlen);
+	strncat(pathString+vlen,"\0",1);
+	FILE* f = fopen(pathString, "wb");
+	if (!f) {
+		printf("Unable to open file!\n");
+		exit(1);
+	}
+	fwrite(str->value.svalue->value, sizeof(char), str->value.svalue->vlen, f);
+	fclose(f);
+	return myself;
+}
+
 void ctr_initialize_world() {
 	
 	CTR_INIT_HEAD_OBJECT();
@@ -988,6 +1015,7 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(fileNew, &ctr_file_new, "new:", CFile);
 	CTR_CREATE_FUNC(filePath, &ctr_file_path, "path", CFile);
 	CTR_CREATE_FUNC(fileRead, &ctr_file_read, "read", CFile);
+	CTR_CREATE_FUNC(fileWrite, &ctr_file_write, "write:", CFile);
 	CFile->link = Object;
 	CFile->info.sticky = 1;
 	CFile->info.mark = 0;
