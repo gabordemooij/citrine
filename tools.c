@@ -914,7 +914,7 @@ obj* ctr_file_write(obj* myself, args* argumentList) {
 	char* pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
 	strncat(pathString+vlen,"\0",1);
-	FILE* f = fopen(pathString, "wb");
+	FILE* f = fopen(pathString, "wb+");
 	if (!f) {
 		printf("Unable to open file!\n");
 		exit(1);
@@ -923,6 +923,65 @@ obj* ctr_file_write(obj* myself, args* argumentList) {
 	fclose(f);
 	return myself;
 }
+
+obj* ctr_file_append(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("Missing string argument to write to file.\n");
+		exit(1);
+	}
+	obj* str = argumentList->object;
+	if (str->info.type != OTSTRING) {
+		printf("First argument must be string\n");
+		exit(1);
+	}
+	obj* path;
+	HASH_FIND(hh, myself->properties, "path", 4, path);
+	if (path == NULL) return Nil;
+	long vlen = path->value.svalue->vlen;
+	char* pathString = malloc(vlen + 1);
+	memcpy(pathString, path->value.svalue->value, vlen);
+	strncat(pathString+vlen,"\0",1);
+	FILE* f = fopen(pathString, "ab+");
+	if (!f) {
+		printf("Unable to open file!\n");
+		exit(1);
+	}
+	fwrite(str->value.svalue->value, sizeof(char), str->value.svalue->vlen, f);
+	fclose(f);
+	return myself;
+}
+
+obj* ctr_file_exists(obj* myself) {
+	obj* path;
+	HASH_FIND(hh, myself->properties, "path", 4, path);
+	if (path == NULL) return ctr_build_bool(0);
+	long vlen = path->value.svalue->vlen;
+	char* pathString = malloc(vlen + 1);
+	memcpy(pathString, path->value.svalue->value, vlen);
+	strncat(pathString+vlen,"\0",1);
+	FILE* f = fopen(pathString, "r");
+	int exists = (f != NULL );
+	if (f) fclose(f);
+	return ctr_build_bool(exists);
+}
+
+obj* ctr_file_size(obj* myself) {
+	obj* path;
+	HASH_FIND(hh, myself->properties, "path", 4, path);
+	if (path == NULL) return ctr_build_number_from_float(0);
+	long vlen = path->value.svalue->vlen;
+	char* pathString = malloc(vlen + 1);
+	memcpy(pathString, path->value.svalue->value, vlen);
+	strncat(pathString+vlen,"\0",1);
+	FILE* f = fopen(pathString, "r");
+	if (f == NULL) return ctr_build_number_from_float(0);
+	int prev = ftell(f);
+    fseek(f, 0L, SEEK_END);
+    int sz=ftell(f);
+    fseek(f,prev,SEEK_SET); //go back to where we were
+    return ctr_build_number_from_float( (double) sz );
+}
+
 
 void ctr_initialize_world() {
 	
@@ -1016,6 +1075,9 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(filePath, &ctr_file_path, "path", CFile);
 	CTR_CREATE_FUNC(fileRead, &ctr_file_read, "read", CFile);
 	CTR_CREATE_FUNC(fileWrite, &ctr_file_write, "write:", CFile);
+	CTR_CREATE_FUNC(fileAppend, &ctr_file_append, "append:", CFile);
+	CTR_CREATE_FUNC(fileExists, &ctr_file_exists, "exists", CFile);
+	CTR_CREATE_FUNC(fileSize, &ctr_file_size, "size", CFile);
 	CFile->link = Object;
 	CFile->info.sticky = 1;
 	CFile->info.mark = 0;

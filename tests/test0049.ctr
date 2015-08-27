@@ -1,4 +1,9 @@
+f1 = File new: 'notafile'.
 f2 = File new: '/tmp/test.txt'.
 Console write: f2 path.
 f2 write: 'Hello!'.
+f2 append: 'World!'.
 Console write: f2 read.
+(f2 exists) ifTrue: {\ Console write: '!'. }.
+(f1 exists) ifTrue: {\ Console write: '!'. }.
+Console write: f2 size, write: f1 size.
