@@ -24,6 +24,7 @@ obj* CMap;
 obj* CArray;
 obj* CFile;
 obj* error;
+obj* CSystem;
 int debug;
 
 //measures the size of character
@@ -874,7 +875,7 @@ obj* ctr_file_read(obj* myself) {
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
-	strncat(pathString+vlen,"\0",1);
+	memcpy(pathString+vlen,"\0",1);
 	FILE* f = fopen(pathString, "rb");
 	if (!f) {
 		printf("Unable to open file!\n");
@@ -913,7 +914,8 @@ obj* ctr_file_write(obj* myself, args* argumentList) {
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
-	strncat(pathString+vlen,"\0",1);
+	memcpy(pathString+vlen,"\0",1);
+	//printf("[%s]%lu\n",pathString,vlen);exit(0);
 	FILE* f = fopen(pathString, "wb+");
 	if (!f) {
 		printf("Unable to open file!\n");
@@ -940,7 +942,7 @@ obj* ctr_file_append(obj* myself, args* argumentList) {
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
-	strncat(pathString+vlen,"\0",1);
+	memcpy(pathString+vlen,"\0",1);
 	FILE* f = fopen(pathString, "ab+");
 	if (!f) {
 		printf("Unable to open file!\n");
@@ -958,7 +960,7 @@ obj* ctr_file_exists(obj* myself) {
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
-	strncat(pathString+vlen,"\0",1);
+	memcpy(pathString+vlen,"\0",1);
 	FILE* f = fopen(pathString, "r");
 	int exists = (f != NULL );
 	if (f) fclose(f);
@@ -972,13 +974,30 @@ obj* ctr_file_delete(obj* myself) {
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
-	strncat(pathString+vlen,"\0",1);
+	memcpy(pathString+vlen,"\0",1);
 	int r = remove(pathString);
 	if (r!=0) {
 		printf("Cant delete file.");
 		exit(1);
 	}
 	return myself;
+}
+
+obj* ctr_sys_call(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("No system argument.\n");
+		exit(1);
+	}
+	if (argumentList->object->info.type!=OTSTRING) {
+		printf("Argument of system call needs to be string\n");
+		exit(1);
+	}
+	long vlen = argumentList->object->value.svalue->vlen;
+	char* comString = malloc(vlen + 1);
+	memcpy(comString, argumentList->object->value.svalue->value, vlen);
+	memcpy(comString+vlen,"\0",1);
+	int r = system(comString);
+	return ctr_build_number_from_float( (float) r );
 }
 
 obj* ctr_file_size(obj* myself) {
@@ -988,7 +1007,7 @@ obj* ctr_file_size(obj* myself) {
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
-	strncat(pathString+vlen,"\0",1);
+	memcpy(pathString+vlen,"\0",1);
 	FILE* f = fopen(pathString, "r");
 	if (f == NULL) return ctr_build_number_from_float(0);
 	int prev = ftell(f);
@@ -1098,6 +1117,12 @@ void ctr_initialize_world() {
 	CFile->link = Object;
 	CFile->info.sticky = 1;
 	CFile->info.mark = 0;
+	
+	CTR_CREATE_OBJECT_TYPE(CSystem, "System", OTMISC, 6);
+	CTR_CREATE_FUNC(sysCall, &ctr_sys_call, "call:", CSystem);
+	CSystem->link = Object;
+	CSystem->info.sticky = 1;
+	CSystem->info.mark = 0;
 
 	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", OTBLOCK, 9);
 	CTR_CREATE_FUNC(blockRun, &ctr_block_runIt, "run", CBlock);
