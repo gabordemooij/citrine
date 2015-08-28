@@ -965,6 +965,22 @@ obj* ctr_file_exists(obj* myself) {
 	return ctr_build_bool(exists);
 }
 
+obj* ctr_file_delete(obj* myself) {
+	obj* path;
+	HASH_FIND(hh, myself->properties, "path", 4, path);
+	if (path == NULL) return ctr_build_bool(0);
+	long vlen = path->value.svalue->vlen;
+	char* pathString = malloc(vlen + 1);
+	memcpy(pathString, path->value.svalue->value, vlen);
+	strncat(pathString+vlen,"\0",1);
+	int r = remove(pathString);
+	if (r!=0) {
+		printf("Cant delete file.");
+		exit(1);
+	}
+	return myself;
+}
+
 obj* ctr_file_size(obj* myself) {
 	obj* path;
 	HASH_FIND(hh, myself->properties, "path", 4, path);
@@ -1078,6 +1094,7 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(fileAppend, &ctr_file_append, "append:", CFile);
 	CTR_CREATE_FUNC(fileExists, &ctr_file_exists, "exists", CFile);
 	CTR_CREATE_FUNC(fileSize, &ctr_file_size, "size", CFile);
+	CTR_CREATE_FUNC(fileDelete, &ctr_file_delete, "delete", CFile);
 	CFile->link = Object;
 	CFile->info.sticky = 1;
 	CFile->info.mark = 0;

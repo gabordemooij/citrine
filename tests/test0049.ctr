@@ -7,3 +7,5 @@ Console write: f2 read.
 (f2 exists) ifTrue: {\ Console write: '!'. }.
 (f1 exists) ifTrue: {\ Console write: '!'. }.
 Console write: f2 size, write: f1 size.
+f2 delete. Console write: f2 size.
+
