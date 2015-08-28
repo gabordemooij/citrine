@@ -915,7 +915,6 @@ obj* ctr_file_write(obj* myself, args* argumentList) {
 	char* pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
-	//printf("[%s]%lu\n",pathString,vlen);exit(0);
 	FILE* f = fopen(pathString, "wb+");
 	if (!f) {
 		printf("Unable to open file!\n");
