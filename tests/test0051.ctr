@@ -1,0 +1,10 @@
+x = Object new.
+x on: 'test' do: {\
+	my a = 2.
+	a = 1.
+	Console write: a.
+	Console write: my a.
+}.
+a = 3.
+x test.
+Console write: a.
