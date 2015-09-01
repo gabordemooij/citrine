@@ -178,8 +178,10 @@ obj* ctr_build_bool(int truth) {
 
 obj* ctr_console_write(obj* myself, args* argumentList) {
 	obj* argument1 = argumentList->object;
-	CTR_CAST_TO_STRING(argument1);
-	fwrite(argument1->value.svalue->value, sizeof(char), argument1->value.svalue->vlen, stdout);
+	obj* strObject = CTR_CREATE_OBJECT();
+	CTR_REGISTER_OBJECT(strObject);
+	CTR_CAST_TO_STRING(argument1, strObject);
+	fwrite(strObject->value.svalue->value, sizeof(char), strObject->value.svalue->vlen, stdout);
 	return myself;
 }
 
@@ -366,13 +368,23 @@ obj* ctr_number_between(obj* myself, args* argumentList) {
 	return ctr_build_bool((myself->value.nvalue >=  otherNum->value.nvalue) && (myself->value.nvalue <= nextArgument->value.nvalue));
 }
 
+obj* ctr_string_concat(obj* myself, args* argumentList);
 obj* ctr_number_add(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
-	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
+	if (otherNum->info.type == OTSTRING) {
+		obj* strObject = CTR_CREATE_OBJECT();
+		CTR_REGISTER_OBJECT(strObject);
+		CTR_CAST_TO_STRING(myself, strObject);
+		args* newArg = CTR_CREATE_ARGUMENT();
+		newArg->object = otherNum;
+		return ctr_string_concat(strObject, newArg);
+	}
+	else if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = myself->value.nvalue;
 	float b = otherNum->value.nvalue;
 	return ctr_build_number_from_float((a+b));
 }
+
 
 obj* ctr_number_inc(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
@@ -615,12 +627,14 @@ obj* ctr_string_concat(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
-	CTR_CAST_TO_STRING(argumentList->object);
+	obj* strObject = CTR_CREATE_OBJECT();
+	CTR_REGISTER_OBJECT(strObject);
+	CTR_CAST_TO_STRING(argumentList->object, strObject);
 	long n1 = myself->value.svalue->vlen;
-	long n2 = argumentList->object->value.svalue->vlen;
+	long n2 = strObject->value.svalue->vlen;
 	char* dest = calloc(sizeof(char), (n1 + n2));
 	memcpy(dest, myself->value.svalue->value, n1);
-	memcpy(dest+n1, argumentList->object->value.svalue->value, n2);
+	memcpy(dest+n1, strObject->value.svalue->value, n2);
 	obj* newString = ctr_build_string(dest, (n1 + n2));
 	return newString;	
 }
@@ -758,6 +772,25 @@ obj* ctr_map_get(obj* myself, args* argumentList) {
 
 obj* ctr_map_count(obj* myself) {
 	return ctr_build_number_from_float( HASH_COUNT(myself->properties) );
+}
+
+
+obj* ctr_map_each(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("Missing argument 1\n"); exit(1);
+	}
+	obj* block = argumentList->object;
+	if (block->info.type != OTBLOCK) { printf("Expected code block."); exit(1); }
+	block->info.sticky = 1; //mark as sticky
+	struct obj *el, *tmp;
+	HASH_ITER(hh, myself->properties, el, tmp) {
+		args* arguments = CTR_CREATE_ARGUMENT();
+		arguments->object = el;
+		ctr_block_run(block, arguments, myself);
+	}
+	block->info.mark = 0;
+	block->info.sticky = 0;
+	return myself;
 }
 
 obj* ctr_array_new(obj* myclass) {
@@ -1090,6 +1123,7 @@ void ctr_initialize_world() {
 	CTR_CREATE_FUNC(mapPut, &ctr_map_put, "put:at:", CMap);
 	CTR_CREATE_FUNC(mapGet, &ctr_map_get, "at:", CMap);
 	CTR_CREATE_FUNC(mapCount, &ctr_map_count, "count", CMap);
+	CTR_CREATE_FUNC(mapEach, &ctr_map_each, "each:", CMap);
 	CMap->link = Object;
 	CMap->info.sticky = 1;
 	CMap->info.mark = 0;

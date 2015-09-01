@@ -221,15 +221,17 @@ free (buf);\
 }
 
 
-#define CTR_CAST_TO_STRING(O) if (O->info.type == OTNIL) { CTR_STRING(O->value.svalue, "[Nil]", 5); }\
-else if (O->info.type == OTBOOL && O->value.bvalue == 1) { CTR_STRING(O->value.svalue, "[True]", 6); }\
-else if (O->info.type == OTBOOL && O->value.bvalue == 0) { CTR_STRING(O->value.svalue, "[False]", 7); }\
+#define CTR_CAST_TO_STRING(O,R)\
+if (O->info.type == OTSTRING) R = O;\
+else if (O->info.type == OTNIL) { R = ctr_build_string("[Nil]", 5); }\
+else if (O->info.type == OTBOOL && O->value.bvalue == 1) { R = ctr_build_string("[True]", 6); }\
+else if (O->info.type == OTBOOL && O->value.bvalue == 0) { R = ctr_build_string("[False]", 7); }\
 else if (O->info.type == OTNUMBER) {\
 char* s = calloc(80, sizeof(char));\
 CTR_CONVFP(s,O->value.nvalue);\
 int slen = strlen(s);\
-CTR_STRING(O->value.svalue, s, slen);\
+R = ctr_build_string(s, slen);\
 }\
-else if (O->info.type == OTBLOCK) { CTR_STRING(O->value.svalue,"[Block]",7);}\
-else if (O->info.type == OTOBJECT) { CTR_STRING(O->value.svalue,"[Object]",8);}\
+else if (O->info.type == OTBLOCK) { R = ctr_build_string("[Block]",7);}\
+else if (O->info.type == OTOBJECT) { R = ctr_build_string("[Object]",8);}\
 
