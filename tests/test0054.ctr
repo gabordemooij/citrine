@@ -1,0 +1,2 @@
+(Dog fetchArgCount) times: { i | Console write: 'Argument # ' + i + ':' + (Dog fetchArg: i). }.
+Console write: (Dog fetchArg: 999).
