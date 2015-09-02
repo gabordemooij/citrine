@@ -26,6 +26,7 @@ obj* CFile;
 obj* error;
 obj* CSystem;
 obj* CDice;
+obj* CDog;
 int debug;
 
 //measures the size of character
@@ -1066,6 +1067,24 @@ obj* ctr_dice_throw(obj* myself) {
 	return ctr_build_number_from_float(arc4random_uniform(6));
 }
 
+obj* ctr_dog_fetch_argument(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("No number of arg argument.\n");
+		exit(1);
+	}
+	if (argumentList->object->info.type!=OTNUMBER) {
+		printf("Argument argNo needs to be number\n");
+		exit(1);
+	}
+	int n = (int) argumentList->object->value.nvalue;
+	if (n >= __argc) return Nil;
+	return ctr_build_string(__argv[n], strlen(__argv[n]));
+}
+
+obj* ctr_dog_num_of_args(obj* myself) {
+	return ctr_build_number_from_float( __argc );
+}
+
 void ctr_initialize_world() {
 	
 	CTR_INIT_HEAD_OBJECT();
@@ -1126,7 +1145,19 @@ void ctr_initialize_world() {
 	CTR_CREATE_OBJECT_TYPE(CDice, "Dice", OTOBJECT, 4);
 	CTR_CREATE_FUNC(diceThrow, &ctr_dice_throw, "roll", CDice);
 	CTR_CREATE_FUNC(diceSidesSet, &ctr_dice_sides, "rollWithSides:", CDice);
-		
+	CDice->link = Object;
+	CDice->info.mark = 0;
+	CDice->info.sticky = 1;
+	CDice->info.flagb = 0;
+
+	CTR_CREATE_OBJECT_TYPE(CDog, "Dog", OTOBJECT, 3);
+	CTR_CREATE_FUNC(dogFetch, &ctr_dog_fetch_argument, "fetchArg:", CDog);
+	CTR_CREATE_FUNC(dogNumOfArgs, &ctr_dog_num_of_args, "fetchArgCount", CDog);
+	CDog->link = Object;
+	CDog->info.mark = 0;
+	CDog->info.sticky = 1;
+	CDog->info.flagb = 0;
+
 	CTR_CREATE_OBJECT_TYPE(TextString, "String", OTSTRING, 6);
 	CTR_CREATE_FUNC(stringPrintBytes, &ctr_string_printbytes, "printBytes", TextString);
 	CTR_CREATE_FUNC(stringBytes, &ctr_string_bytes, "bytes", TextString);

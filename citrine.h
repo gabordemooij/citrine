@@ -151,6 +151,10 @@ obj* ctr_build_number(char* object);
 obj* ctr_build_bool(int truth);
 obj* ctr_build_nil();
 
+int __argc;
+char** __argv;
+
+
 obj* ctr_send_message(obj* receiver, char* message, long len, args* argumentList);
 char* readf(char* file_name);
 void tree(tnode* ti, int indent);

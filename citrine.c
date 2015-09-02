@@ -11,8 +11,9 @@
 
 int debug = 0;
 obj* error;
-
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
+	__argc = argc;
+	__argv = argv;
 	char* prg;
 	error = NULL;
 	if (argc < 2) {
