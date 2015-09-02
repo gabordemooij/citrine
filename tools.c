@@ -25,6 +25,7 @@ obj* CArray;
 obj* CFile;
 obj* error;
 obj* CSystem;
+obj* CDice;
 int debug;
 
 //measures the size of character
@@ -1049,6 +1050,21 @@ obj* ctr_file_size(obj* myself) {
     return ctr_build_number_from_float( (double) sz );
 }
 
+obj* ctr_dice_sides(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("No number of sides argument.\n");
+		exit(1);
+	}
+	if (argumentList->object->info.type!=OTNUMBER) {
+		printf("Argument sides needs to be number\n");
+		exit(1);
+	}
+	return ctr_build_number_from_float(arc4random_uniform(argumentList->object->value.nvalue));
+}
+
+obj* ctr_dice_throw(obj* myself) {
+	return ctr_build_number_from_float(arc4random_uniform(6));
+}
 
 void ctr_initialize_world() {
 	
@@ -1107,7 +1123,10 @@ void ctr_initialize_world() {
 	Number->info.sticky = 1;
 	Number->info.flagb = 0;
 	
-	
+	CTR_CREATE_OBJECT_TYPE(CDice, "Dice", OTOBJECT, 4);
+	CTR_CREATE_FUNC(diceThrow, &ctr_dice_throw, "roll", CDice);
+	CTR_CREATE_FUNC(diceSidesSet, &ctr_dice_sides, "rollWithSides:", CDice);
+		
 	CTR_CREATE_OBJECT_TYPE(TextString, "String", OTSTRING, 6);
 	CTR_CREATE_FUNC(stringPrintBytes, &ctr_string_printbytes, "printBytes", TextString);
 	CTR_CREATE_FUNC(stringBytes, &ctr_string_bytes, "bytes", TextString);
