@@ -5,7 +5,7 @@ items put: 'red' at: 'color-3'.
 i = 1.
 s = ''.
 items each: { color |
-	Console write: 'color #' + i + ' is: ' + color + ' '.
+	Pen write: 'color #' + i + ' is: ' + color + ' '.
 	i inc: 1.
 }.
-Console write: i + ' colors!'.
+Pen write: i + ' colors!'.

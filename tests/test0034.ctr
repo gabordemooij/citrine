@@ -5,10 +5,10 @@ a method: 'test1' does: {\
 }.
 a test1.
 #x should still be 0.
-Console write: x.
+Pen write: x.
 b = Object new.
 b method: 'test2' does: {\
 	#x should be 0! not 123...
-	Console write: x.
+	Pen write: x.
 }.
 b test2.

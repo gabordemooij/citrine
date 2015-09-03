@@ -2,9 +2,9 @@ x = Object new.
 x on: 'a' do: {\
 	my a = 2.
 	a = 1.
-	Console write: a.
-	Console write: my a.
+	Pen write: a.
+	Pen write: my a.
 }.
 a = 3.
 x a.
-Console write: a.
+Pen write: a.

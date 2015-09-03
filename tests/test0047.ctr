@@ -1,6 +1,6 @@
 cat = Object new.
 cat method: 'work' does: {\
 	thisBlock error: 'Cats have personel for that!'.
-	Console write: 'dont print this!'.
+	Pen write: 'dont print this!'.
 }.
 {\ cat work. } run.

@@ -10,7 +10,7 @@ a method: 'init' does: {\
 	q = Object new basedOn: x.
 	q set: 666.
 	
-	Console write: (y get) , write: (q get).
+	Pen write: (y get) , write: (q get).
 	
 }.
 a init.

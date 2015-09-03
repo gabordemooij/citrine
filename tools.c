@@ -1107,7 +1107,7 @@ void ctr_initialize_world() {
 	Object->info.mark = 0;
 	Object->info.sticky = 1;
 
-	CTR_CREATE_OBJECT_TYPE(Console, "Console", OTOBJECT, 7)
+	CTR_CREATE_OBJECT_TYPE(Console, "Pen", OTOBJECT, 3)
 	CTR_CREATE_FUNC(ConsoleWrite, &ctr_console_write, "write:", Console);
 	Console->link = Object;
 	Console->info.mark = 0;

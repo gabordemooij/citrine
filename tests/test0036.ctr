@@ -9,7 +9,7 @@
 		GC collect.
 	}.
 	garbageMaker putGarbageOnScreen.
-	Console write: a.
+	Pen write: a.
 	#dont remove your own code block.
 	GC collect.
 }.

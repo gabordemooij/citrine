@@ -1,2 +1,2 @@
-(3 between: 1 and: 20 ) ifTrue: {\ Console write: 'Yes.'. }.
-(3 between: 19 and: 20 ) ifTrue: {\ Console write: 'Yes.'. }.
+(3 between: 1 and: 20 ) ifTrue: {\ Pen write: 'Yes.'. }.
+(3 between: 19 and: 20 ) ifTrue: {\ Pen write: 'Yes.'. }.

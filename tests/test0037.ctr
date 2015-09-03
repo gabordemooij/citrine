@@ -4,20 +4,20 @@
 a = 3.
 b = a.
 a dec: 1.
-Console write: ' a = ' + a.
-Console write: ' b = ' + b.
+Pen write: ' a = ' + a.
+Pen write: ' b = ' + b.
 
 a = 3.
 b = a + 4.
-Console write: ' a = ' + a.
-Console write: ' b = ' + b.
+Pen write: ' a = ' + a.
+Pen write: ' b = ' + b.
 
 x = 3.
 y = x.
 x inc: 10.
 y dec: 1.
-Console write: ' x = ' + x.
-Console write: ' y = ' + y.
+Pen write: ' x = ' + x.
+Pen write: ' y = ' + y.
 
 #strings
 
@@ -36,7 +36,7 @@ q method: 'getProperty' does: {\
 q setProperty: 9.
 p = q.
 q setProperty: 6.
-Console write: ' p = ' + (p getProperty).
+Pen write: ' p = ' + (p getProperty).
 
 
 

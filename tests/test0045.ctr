@@ -1,9 +1,9 @@
 {\
-	Console write: 'hi there!'.
+	Pen write: 'hi there!'.
 	thisBlock error: 'oops'.
-	Console write: 'hi there!'.
-	{\ Console write: 'dont print this'. } run.
+	Pen write: 'hi there!'.
+	{\ Pen write: 'dont print this'. } run.
 } catch: { e | 
-	Console write: 'got ya!'. 
-	Console write: e.
+	Pen write: 'got ya!'. 
+	Pen write: e.
 }, run.

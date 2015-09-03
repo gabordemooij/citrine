@@ -3,13 +3,13 @@ Greeter method: 'make' does: {\
 	greeter = Object new.
 	
 	greeter method: 'name:' does: { name |
-		Console write: 'setting a name'.
+		Pen write: 'setting a name'.
 		my myName = name.
 	}.
 	
 	greeter method: 'greet' does: {\
-		Console write: 'Hello'.
-		Console write: my myName.
+		Pen write: 'Hello'.
+		Pen write: my myName.
 	}.
 	
 	^greeter.

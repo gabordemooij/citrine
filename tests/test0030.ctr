@@ -1,8 +1,8 @@
 #test assignment, strings etc copied by value: HelloHelloWorld
 a = 'Hello'.
 c = a.
-Console write: a.
+Pen write: a.
 c = 'World'.
-Console write: a.
+Pen write: a.
 a = '!'.
-Console write: c.
+Pen write: c.

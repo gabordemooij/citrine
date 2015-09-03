@@ -1,4 +1,4 @@
-5 times: {\ Console write: 'ho'. }.
+5 times: {\ Pen write: 'ho'. }.
 
 a = Object new.
-Console write: a.
+Pen write: a.

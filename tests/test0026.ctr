@@ -1,13 +1,13 @@
-Console write: 'Hello' bytes.
-Console write: 'Great' bytes + 5.
-Console write: '象形' bytes - '象形' length.
-Console write: ('Hello!' from: 1 to: 3).
-Console write: ('Hello!' from: 2 to: 4).
+Pen write: 'Hello' bytes.
+Pen write: 'Great' bytes + 5.
+Pen write: '象形' bytes - '象形' length.
+Pen write: ('Hello!' from: 1 to: 3).
+Pen write: ('Hello!' from: 2 to: 4).
 a = 2.
 b = 4.
-Console write: ('Hello!' from: a to: b).
-Console write: ('形声字形聲字' from: 2 to: 4).
-Console write: '形声字形聲字' length.
-Console write: '形声a' length.
+Pen write: ('Hello!' from: a to: b).
+Pen write: ('形声字形聲字' from: 2 to: 4).
+Pen write: '形声字形聲字' length.
+Pen write: '形声a' length.
 '形声字形聲字' printBytes.
-Console write: 'Organ' + 'Works'.
+Pen write: 'Organ' + 'Works'.

@@ -1,6 +1,6 @@
 #test explicit message chaining using ,
-Console write: 'first', write: 'second'.
+Pen write: 'first', write: 'second'.
 #test chaining with unary message.
-Console write: 3 factorial, write: 3 factorial.
+Pen write: 3 factorial, write: 3 factorial.
 #and binary message
-Console write: 3 + 2, write: 7 / 2.
+Pen write: 3 + 2, write: 7 / 2.

@@ -1,7 +1,7 @@
-(('abcdef' from: 2 to: 5 - 1) == 'cde') ifTrue: {\ Console write: 'yes'.}.
-Console write: 'a' + 1.
-Console write: 'x' + 3.5.
-Console write: 'y' + True.
-Console write: 'z' + False + Nil + 2.
+(('abcdef' from: 2 to: 5 - 1) == 'cde') ifTrue: {\ Pen write: 'yes'.}.
+Pen write: 'a' + 1.
+Pen write: 'x' + 3.5.
+Pen write: 'y' + True.
+Pen write: 'z' + False + Nil + 2.
 
 

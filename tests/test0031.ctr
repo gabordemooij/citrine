@@ -3,8 +3,8 @@ a = Object new.
 a method: 'setVal:' does: { v | my value = v. }.
 a method: 'getVal' does: {\ ^ my value. }.
 a setVal: 'hi'.
-Console write: a getVal.
+Pen write: a getVal.
 b = a.
 b setVal: 'boo!'.
-Console write: a getVal.
-Console write: b getVal.
+Pen write: a getVal.
+Pen write: b getVal.

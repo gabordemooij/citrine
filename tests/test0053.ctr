@@ -1,9 +1,9 @@
 60 times: {\
 	x = Dice roll.
-	(x < 6) ifFalse: {\ Console write: 'FAIL'. }.
-	(x >= 0) ifFalse: {\ Console write: 'FAIL'. }.
+	(x < 6) ifFalse: {\ Pen write: 'FAIL'. }.
+	(x >= 0) ifFalse: {\ Pen write: 'FAIL'. }.
 	x = Dice rollWithSides: 3.
-	(x < 3) ifFalse: {\ Console write: 'FAIL'. }.
-	(x > -1) ifFalse: {\ Console write: 'FAIL'. }.
+	(x < 3) ifFalse: {\ Pen write: 'FAIL'. }.
+	(x > -1) ifFalse: {\ Pen write: 'FAIL'. }.
 }.
-Console write: 'DONE'.
+Pen write: 'DONE'.

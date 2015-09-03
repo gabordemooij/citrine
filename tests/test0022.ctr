@@ -1,8 +1,8 @@
-(3>=3) ifTrue: {\ Console write: 'Yep'. }.
-(3<=3) ifTrue: {\ Console write: 'Yep'. }.
-(3>=  4) ifTrue: {\ Console write: 'Nope'. }.
-(4 <=   8) ifTrue: {\ Console write: 'Yep'. }.
-(3>=5 ) ifTrue: {\ Console write: 'No'. }.
-(  0 <= 3 ) ifTrue: {\ Console write: 'Yep'. }.
-(2==2) ifTrue: {\ Console write: 'Yep'. }.
-(2.9==2.9) ifTrue: {\ Console write: 'Yep'. }.
+(3>=3) ifTrue: {\ Pen write: 'Yep'. }.
+(3<=3) ifTrue: {\ Pen write: 'Yep'. }.
+(3>=  4) ifTrue: {\ Pen write: 'Nope'. }.
+(4 <=   8) ifTrue: {\ Pen write: 'Yep'. }.
+(3>=5 ) ifTrue: {\ Pen write: 'No'. }.
+(  0 <= 3 ) ifTrue: {\ Pen write: 'Yep'. }.
+(2==2) ifTrue: {\ Pen write: 'Yep'. }.
+(2.9==2.9) ifTrue: {\ Pen write: 'Yep'. }.
