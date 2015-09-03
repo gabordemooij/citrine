@@ -1113,8 +1113,8 @@ void ctr_initialize_world() {
 	Console->info.mark = 0;
 	Console->info.sticky = 1;
 
-	CTR_CREATE_OBJECT_TYPE(GC, "GC", OTOBJECT, 2)
-	CTR_CREATE_FUNC(GCCollect, &ctr_gc_collect, "collect", GC);
+	CTR_CREATE_OBJECT_TYPE(GC, "Broom", OTOBJECT, 5)
+	CTR_CREATE_FUNC(GCCollect, &ctr_gc_collect, "sweep", GC);
 	GC->link = Object;
 	GC->info.mark = 0;
 	GC->info.sticky = 1;

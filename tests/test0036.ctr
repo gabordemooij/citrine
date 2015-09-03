@@ -6,10 +6,10 @@
 	garbageMaker method: 'putGarbageOnScreen' does: {\
 		x = 1.
 		y = 2.
-		GC collect.
+		Broom sweep.
 	}.
 	garbageMaker putGarbageOnScreen.
 	Pen write: a.
 	#dont remove your own code block.
-	GC collect.
+	Broom sweep.
 }.
