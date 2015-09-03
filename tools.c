@@ -27,6 +27,7 @@ obj* error;
 obj* CSystem;
 obj* CDice;
 obj* CDog;
+obj* CCoin;
 int debug;
 
 //measures the size of character
@@ -1064,7 +1065,11 @@ obj* ctr_dice_sides(obj* myself, args* argumentList) {
 }
 
 obj* ctr_dice_throw(obj* myself) {
-	return ctr_build_number_from_float(arc4random_uniform(6));
+	return ctr_build_number_from_float(arc4random_uniform(7));
+}
+
+obj* ctr_coin_flip(obj* myself) {
+	return ctr_build_bool(arc4random_uniform(2));
 }
 
 obj* ctr_dog_fetch_argument(obj* myself, args* argumentList) {
@@ -1149,6 +1154,13 @@ void ctr_initialize_world() {
 	CDice->info.mark = 0;
 	CDice->info.sticky = 1;
 	CDice->info.flagb = 0;
+
+	CTR_CREATE_OBJECT_TYPE(CCoin, "Coin", OTOBJECT, 4);
+	CTR_CREATE_FUNC(coinFlip, &ctr_coin_flip, "flip", CCoin);
+	CCoin->link = Object;
+	CCoin->info.mark = 0;
+	CCoin->info.sticky = 1;
+	CCoin->info.flagb = 0;
 
 	CTR_CREATE_OBJECT_TYPE(CDog, "Dog", OTOBJECT, 3);
 	CTR_CREATE_FUNC(dogFetch, &ctr_dog_fetch_argument, "fetchArg:", CDog);
