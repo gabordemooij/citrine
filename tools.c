@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include <stdarg.h>
 #include <math.h>
+#include <unistd.h>
 
 #include "uthash.h"
 #include "citrine.h"
@@ -28,6 +29,7 @@ obj* CSystem;
 obj* CDice;
 obj* CDog;
 obj* CCoin;
+obj* CCoffee;
 int debug;
 
 //measures the size of character
@@ -1090,6 +1092,20 @@ obj* ctr_dog_num_of_args(obj* myself) {
 	return ctr_build_number_from_float( __argc );
 }
 
+obj* ctr_coffee_brew(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("No brew argument.\n");
+		exit(1);
+	}
+	if (argumentList->object->info.type!=OTNUMBER) {
+		printf("Argument brew to be number\n");
+		exit(1);
+	}
+	int n = (int) argumentList->object->value.nvalue;
+	sleep(n);
+	return myself;
+}
+
 void ctr_initialize_world() {
 	
 	CTR_INIT_HEAD_OBJECT();
@@ -1161,6 +1177,13 @@ void ctr_initialize_world() {
 	CCoin->info.mark = 0;
 	CCoin->info.sticky = 1;
 	CCoin->info.flagb = 0;
+	
+	CTR_CREATE_OBJECT_TYPE(CCoffee, "CoffeePot", OTOBJECT, 9);
+	CTR_CREATE_FUNC(coffeeBrew, &ctr_coffee_brew, "brew:", CCoffee);
+	CCoffee->link = Object;
+	CCoffee->info.mark = 0;
+	CCoffee->info.sticky = 1;
+	CCoffee->info.flagb = 0;
 
 	CTR_CREATE_OBJECT_TYPE(CDog, "Dog", OTOBJECT, 3);
 	CTR_CREATE_FUNC(dogFetch, &ctr_dog_fetch_argument, "fetchArg:", CDog);
