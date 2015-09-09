@@ -1,4 +1,4 @@
-list = Array make.
+list = Array new.
 list push: 'hello'.
 Pen write: list count.
 list push: 'world'.

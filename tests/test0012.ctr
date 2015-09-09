@@ -14,11 +14,12 @@ Cat = Object new.
 Cat method: 'make' does: {\
 	cat = Animal make.
 	
+	cat on:'a' do: {\}.
 	cat override: 'makeSound' does: {\
 		Pen write: 'meow!!'.
 		me overridden-makeSound.
 	}.
-	
+
 	^cat.
 }.
 

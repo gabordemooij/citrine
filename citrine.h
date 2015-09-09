@@ -57,10 +57,32 @@ struct cstr;
 typedef struct cstr cstr;
 
 
+/**
+ * == Citrine Map ==
+ * Represents a collection of objects,
+ * can be extended to function like a hashmap.
+ */
+struct ctr_map {
+	struct cmapitem* head;
+	int size;
+};
+struct ctr_map;
+typedef struct ctr_map ctr_map;
+
+struct cmapitem {
+	struct obj* key;
+	struct obj* value;
+	struct cmapitem* prev;
+	struct cmapitem* next;
+};
+struct cmapitem;
+typedef struct cmapitem cmapitem;
+
+
 struct obj {
     const char* name;
-    struct obj* properties;
-    struct obj* methods;
+    ctr_map* properties;
+    ctr_map* methods;
 	 struct {
 		unsigned int type: 4;
 		unsigned int mark: 1;
@@ -77,10 +99,8 @@ struct obj {
 		struct carray* avalue;
 		struct cres* rvalue;
 	} value;
-	struct obj* next;
-    UT_hash_handle hh;
+	struct obj* gnext;
 };
-
 struct obj;
 typedef struct obj obj;
 
@@ -141,10 +161,11 @@ void 	clex_putback();
 char*	clex_readstr();
 
 void ctr_initialize_world();
-obj* ctr_find(char* key, long n);
-obj* ctr_find_in_my(char* key, long n);
-obj* ctr_assign_value(char* name, long n, obj* object);
-obj* ctr_assign_value_to_my(char* name, long n, obj* object);
+obj* ctr_internal_create_object(int type);
+obj* ctr_find(obj* key);
+obj* ctr_find_in_my(obj* key);
+obj* ctr_assign_value(obj* key, obj* val);
+obj* ctr_assign_value_to_my(obj* key, obj* val);
 obj* ctr_build_string(char* object, long vlen);
 obj* ctr_build_block(tnode* node);
 obj* ctr_build_number(char* object);
@@ -165,6 +186,9 @@ obj* ctr_first_object;
 
 int debug;
 
+#define CTR_DBG(MSG, O)...
+
+
 #define CTR_DEBUG_STR(X,Y,L) if (debug) {\
 	char* b = calloc(sizeof(char),L);\
 	memcpy(b, Y, L);\
@@ -173,44 +197,12 @@ int debug;
 
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == '=' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='=' && X!='^'  && X!= ':' && X!= '\''
-
-#define CTR_CREATE_OBJECT() (obj*) calloc(sizeof(obj), 1)
-
-#define CTR_REGISTER_OBJECT(X) X->next = ctr_first_object; ctr_first_object = X;
+#define CTR_REGISTER_OBJECT(X) X->gnext = ctr_first_object; ctr_first_object = X;
 #define CTR_INIT_HEAD_OBJECT() ctr_first_object = NULL;
-
-#define CTR_STRING(S,V,L) S = (cstr*) calloc(sizeof(cstr), 1);\
-S->value = (char*) calloc(sizeof(char), L);\
-memcpy(S->value, V, L);\
-S->vlen = L;
-
-#define CTR_CREATE_OBJECT_TYPE(O,NAME,OT, L) O = CTR_CREATE_OBJECT();\
-O->name = NAME;\
-if (OT==OTBOOL) O->value.bvalue = 0;\
-if (OT==OTNUMBER) O->value.nvalue = 0;\
-if (OT==OTSTRING) { CTR_STRING(O->value.svalue,"",0); }\
-O->info.type = OT;\
-HASH_ADD_KEYPTR(hh, World->properties, O->name, L, O);
-
-#define CTR_CREATE_FUNC(X,Y,Z,Q) obj* X = CTR_CREATE_OBJECT();\
-X->name = Z;\
-X->info.type = OTNATFUNC;\
-X->value.rvalue = (void*) Y;\
-HASH_ADD_KEYPTR(hh, Q->methods, X->name, strlen(X->name), X);
-
 #define CTR_CREATE_ARGUMENT() (args*) calloc(sizeof(args), 1)
-
 #define CTR_PARSER_CREATE_LISTITEM() (tlistitem*) calloc(1, sizeof(tlistitem))
-
 #define	CTR_PARSER_CREATE_NODE() (tnode*) calloc(1,sizeof(tnode))
-			
 #define ASSIGN_STRING(o,p,v,s) o->p = calloc(s,sizeof(char)); memcpy( (char*) o->p,v,s);
-
-#define CTR_CAST_TO_BOOL(o) if (o->info.type == OTNIL) o->value.bvalue = 0;\
-if (o->info.type == OTNUMBER) if (o->value.nvalue > 0) o->value.bvalue = 1; else o->value->nvalue = 0;\
-if (o->info.type == OTSTRING) { if (o->value.svalue->vlen > 0) o->value.bvalue = 1; } else { o->value.bvalue = 0; }\
-if (o->info.type != OTBOOL) o->value.bvalue = 1; //rest (OTNATFUNC, OTOBJECT etc.. -> TRUE)
-
 
 #define CTR_CONVFP(s,x){\
 char *buf = calloc(100, sizeof(char));\
@@ -223,19 +215,3 @@ if (*p == '.') *p = '\0';\
 strcpy(s, buf);\
 free (buf);\
 }
-
-
-#define CTR_CAST_TO_STRING(O,R)\
-if (O->info.type == OTSTRING) R = O;\
-else if (O->info.type == OTNIL) { R = ctr_build_string("[Nil]", 5); }\
-else if (O->info.type == OTBOOL && O->value.bvalue == 1) { R = ctr_build_string("[True]", 6); }\
-else if (O->info.type == OTBOOL && O->value.bvalue == 0) { R = ctr_build_string("[False]", 7); }\
-else if (O->info.type == OTNUMBER) {\
-char* s = calloc(80, sizeof(char));\
-CTR_CONVFP(s,O->value.nvalue);\
-int slen = strlen(s);\
-R = ctr_build_string(s, slen);\
-}\
-else if (O->info.type == OTBLOCK) { R = ctr_build_string("[Block]",7);}\
-else if (O->info.type == OTOBJECT) { R = ctr_build_string("[Object]",8);}\
-

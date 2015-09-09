@@ -11,6 +11,7 @@
 obj* error;
 
 obj* cwlk_return(tnode* node) {
+	
 	if (!node->nodes) {
 		printf("Invalid return expression.\n");
 		exit(1);
@@ -20,7 +21,7 @@ obj* cwlk_return(tnode* node) {
 		printf("Invalid return expression 2.\n");
 		exit(1);
 	} 
-	obj* e = CTR_CREATE_OBJECT();
+	obj* e = ctr_internal_create_object(OTOBJECT);
 	e =  cwlk_expr(li->node);
 	return e;
 }
@@ -35,9 +36,8 @@ obj* cwlk_message(tnode* paramNode) {
 	tlistitem* argumentList;
 	obj* r;
 	if (receiverNode->type == REFERENCE) {
-		r = ctr_find(receiverNode->value, receiverNode->vlen);
+		r = ctr_find(ctr_build_string(receiverNode->value, receiverNode->vlen));
 		if (!r) {
-			printf("Object not found: %s \n", receiverNode->value);
 			exit(1);
 		}
 	} else if (receiverNode->type == LTRNIL ) {
@@ -89,13 +89,13 @@ obj* cwlk_assignment(tnode* node) {
 	tnode* assignee = assignmentItems->node;
 	tlistitem* valueListItem = assignmentItems->next;
 	tnode* value = valueListItem->node;
-	obj* x = CTR_CREATE_OBJECT();
+	obj* x = ctr_internal_create_object(OTOBJECT);
 	x = cwlk_expr(value);
 	obj* result;
 	if (assignee->modifier == 1) {
-		result = ctr_assign_value_to_my(assignee->value, assignee->vlen, x);
+		result = ctr_assign_value_to_my(ctr_build_string(assignee->value, assignee->vlen), x);
 	} else {
-		result = ctr_assign_value(assignee->value, assignee->vlen, x);
+		result = ctr_assign_value(ctr_build_string(assignee->value, assignee->vlen), x);
 	}
 	return result;
 }		
@@ -116,9 +116,9 @@ obj* cwlk_expr(tnode* node) {
 		result = ctr_build_block(node);
 	} else if (node->type == REFERENCE) {
 		if (node->modifier == 1) {
-			result = ctr_find_in_my(node->value, node->vlen);
+			result = ctr_find_in_my(ctr_build_string(node->value, node->vlen));
 		} else {
-			result = ctr_find(node->value, node->vlen);
+			result = ctr_find(ctr_build_string(node->value, node->vlen));
 		}
 	} else if (node->type == EXPRMESSAGE) {
 		result = cwlk_message(node);

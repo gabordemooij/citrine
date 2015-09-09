@@ -123,11 +123,210 @@ void tree(tnode* ti, int indent) {
 	}
 }
 
+
+int ctr_internal_object_is_equal(obj* object1, obj* object2) {
+	
+	if (object1->info.type == OTSTRING && object2->info.type == OTSTRING) {
+		char* string1 = object1->value.svalue->value;
+		char* string2 = object2->value.svalue->value;
+		long len1 = object1->value.svalue->vlen;
+		long len2 = object2->value.svalue->vlen;
+		if (len1 != len2) return 0;
+		int d = memcmp(string1, string2, len1);
+		if (d==0) return 1;
+		return 0;
+	}
+	
+	if (object1->info.type == OTNUMBER && object2->info.type == OTNUMBER) {
+		double num1 = object1->value.nvalue;
+		double num2 = object2->value.nvalue;
+		if (num1 == num2) return 1;
+		return 0;
+	}
+	
+	if (object1->info.type == OTBOOL && object2->info.type == OTBOOL) {
+		int b1 = object1->value.bvalue;
+		int b2 = object2->value.bvalue;
+		if (b1 == b2) return 1;
+		return 0;
+	}
+	
+	if (object1 == object2) return 1;
+	return 0;
+		
+}
+
+obj* ctr_internal_object_find_property(obj* owner, obj* key, int is_method) {
+	
+//	printf("owner has %d props.\n", owner->properties->size);
+	cmapitem* head;
+	if (is_method) {
+		if (owner->methods->size == 0) {
+			return NULL;
+		}
+		head = owner->methods->head; 
+	} else {
+		if (owner->properties->size == 0) {
+			return NULL;
+		}
+		head = owner->properties->head; 
+	}
+	
+	while(head) {
+		if (ctr_internal_object_is_equal(head->key, key)) {
+			return head->value;
+		}
+		head = head->next;
+	}
+	return NULL;
+}
+
+
+void ctr_internal_object_delete_property(obj* owner, obj* key, int is_method) {
+	cmapitem* head;
+	if (is_method) {
+		if (owner->methods->size == 0) {
+			return;
+		}
+		head = owner->methods->head; 
+	} else {
+		if (owner->properties->size == 0) {
+			return;
+		}
+		head = owner->properties->head; 
+	}
+	
+	while(head) {
+		if (ctr_internal_object_is_equal(head->key, key)) {
+			if (head->next && head->prev) {
+				head->next->prev = head->prev;
+				head->prev->next = head->next;
+			} else {
+				if (head->next) {
+					head->next->prev = NULL;
+				}
+				if (head->prev) {
+					head->prev->next = NULL;
+				}
+			}
+			if (is_method) {
+				if (owner->methods->head == head) {
+					if (head->next) {
+						owner->methods->head = head->next;
+					} else {
+						owner->methods->head = NULL;
+					}
+				}
+				owner->methods->size --; 
+			} else {
+				if (owner->properties->head == head) {
+					if (head->next) {
+						owner->properties->head = head->next;
+					} else {
+						owner->properties->head = NULL;
+					}
+				}
+				owner->properties->size --;
+			}
+			return;
+		}
+		head = head->next;
+	}
+	return;
+}
+
+void ctr_internal_object_add_property(obj* owner, obj* key, obj* value, int m) {
+	cmapitem* new_item = malloc(sizeof(cmapitem));
+	cmapitem* current_head = NULL;
+	new_item->key = key;
+	new_item->value = value;
+	new_item->next = NULL;
+	new_item->prev = NULL;
+	if (m) {
+		if (owner->methods->size == 0) {
+			owner->methods->head = new_item;
+		} else {
+			current_head = owner->methods->head;
+			current_head->prev = new_item;
+			new_item->next = current_head;
+			owner->methods->head = new_item;
+		}
+		owner->methods->size ++;
+	} else {
+		if (owner->properties->size == 0) {
+			owner->properties->head = new_item;
+		} else {
+			current_head = owner->properties->head;
+			current_head->prev = new_item;
+			new_item->next = current_head;
+			owner->properties->head = new_item;
+		}
+		owner->properties->size ++;
+	}
+}
+
+void ctr_internal_object_set_property(obj* owner, obj* key, obj* value, int is_method) {
+	ctr_internal_object_delete_property(owner, key, is_method);
+	ctr_internal_object_add_property(owner, key, value, is_method);
+}
+
+obj* ctr_internal_create_object(int type) {
+	obj* o = malloc(sizeof(obj));
+	o->properties = malloc(sizeof(ctr_map));
+	o->methods = malloc(sizeof(ctr_map));
+	
+	o->properties->size = 0;
+	o->methods->size = 0;
+	o->properties->head = NULL;
+	o->methods->head = NULL;
+	o->info.type = type;
+	
+	if (type==OTBOOL) o->value.bvalue = 0;
+	if (type==OTNUMBER) o->value.nvalue = 0;
+	if (type==OTSTRING) {
+		o->value.svalue = malloc(sizeof(cstr));
+		o->value.svalue->value = "";
+		o->value.svalue->vlen = 0;
+	}
+	CTR_REGISTER_OBJECT(o);
+	return o;
+	
+}
+
+void ctr_internal_create_func(obj* o, obj* key, void* f ) {
+	obj* methodObject = ctr_internal_create_object(OTNATFUNC);
+	methodObject->value.rvalue = (void*) f;
+	ctr_internal_object_add_property(o, key, methodObject, 1);
+}
+
+obj* ctr_internal_cast2string( obj* o ) {
+	if (o->info.type == OTSTRING) return o;
+	else if (o->info.type == OTNIL) { return ctr_build_string("[Nil]", 5); }
+	else if (o->info.type == OTBOOL && o->value.bvalue == 1) { return ctr_build_string("[True]", 6); }
+	else if (o->info.type == OTBOOL && o->value.bvalue == 0) { return ctr_build_string("[False]", 7); }
+	else if (o->info.type == OTNUMBER) {
+		char* s = calloc(80, sizeof(char));
+		CTR_CONVFP(s,o->value.nvalue);
+		int slen = strlen(s);
+		return ctr_build_string(s, slen);
+	}
+	else if (o->info.type == OTBLOCK) { return ctr_build_string("[Block]",7);}
+	else if (o->info.type == OTOBJECT) { return ctr_build_string("[Object]",8);}
+	return ctr_build_string("[?]", 3);
+}
+
+obj* ctr_internal_cast2bool( obj* o ) {
+	if (o->info.type == OTBOOL) return o;
+	if (o->info.type == OTNIL
+		|| (o->info.type == OTNUMBER && o->value.nvalue == 0)
+		|| (o->info.type == OTSTRING && o->value.svalue->vlen == 0)) return ctr_build_bool(0);
+	return ctr_build_bool(1);
+}
+
+
 void ctr_open_context() {
 	cid++;
-	obj* context = CTR_CREATE_OBJECT();
-	context = calloc(1, sizeof(obj));
-	context->name = "Context";
+	obj* context = ctr_internal_create_object(OTOBJECT);
 	contexts[cid] = context;
 }
 
@@ -136,44 +335,32 @@ void ctr_close_context() {
 	cid--;
 }
 
-obj* ctr_find(char* key, long n) {
+obj* ctr_find(obj* key) {
 	int i = cid;
 	obj* foundObject = NULL;
-	int first = 1;
-	while((i>-1 && foundObject == NULL) || first) {
-		first = 0;
+	while((i>-1 && foundObject == NULL)) {
 		obj* context = contexts[i];
-		HASH_FIND(hh, context->properties, key, n, foundObject);
+		foundObject = ctr_internal_object_find_property(context, key, 0);
 		i--;
 	}
-	if (foundObject == NULL) { printf("Error, key not found: [%s] %lu.\n", key, n); exit(1); }
-	if (foundObject->info.flaga) foundObject = foundObject->link;
+	if (foundObject == NULL) { printf("Error, key not found: [%s].\n", key->value.svalue->value); exit(1); }
 	return foundObject;
 }
 
-obj* ctr_find_in_my(char* key, long n) {
-	obj* foundObject = CTR_CREATE_OBJECT();
-	obj* context = ctr_find("me", 2);
-	HASH_FIND(hh, context->link->properties, key, n, foundObject);
-	if (foundObject == NULL) { printf("Error, property not found: %s.\n", key); exit(1); }
-	if (foundObject->info.flaga) foundObject = foundObject->link;
+obj* ctr_find_in_my(obj* key) {
+	obj* context = ctr_find(ctr_build_string("me",2));
+	obj* foundObject = ctr_internal_object_find_property(context, key, 0);
+	if (foundObject == NULL) { printf("Error, property not found: %s.\n", key->value.svalue->value); exit(1); }
 	return foundObject;
 }
 
-void ctr_set(obj* object, long keylen) {
-	obj* foundObject = CTR_CREATE_OBJECT();
+void ctr_set(obj* key, obj* object) {
 	obj* context = contexts[cid];
-	HASH_FIND(hh, context->properties, object->name, keylen, foundObject);
-	if (foundObject) {
-		HASH_DELETE(hh, context->properties, foundObject);
-	}
-	HASH_ADD_KEYPTR(hh, context->properties, object->name, keylen, object);
+	ctr_internal_object_set_property(context, key, object, 0);
 }
 
 obj* ctr_build_bool(int truth) {
-	obj* boolObject = CTR_CREATE_OBJECT();
-	CTR_REGISTER_OBJECT(boolObject);
-	ASSIGN_STRING(boolObject,name,"Bool",4);
+	obj* boolObject = ctr_internal_create_object(OTBOOL);
 	if (truth) boolObject->value.bvalue = 1; else boolObject->value.bvalue = 0;
 	boolObject->info.type = OTBOOL;
 	boolObject->link = BoolX;
@@ -183,38 +370,38 @@ obj* ctr_build_bool(int truth) {
 
 obj* ctr_console_write(obj* myself, args* argumentList) {
 	obj* argument1 = argumentList->object;
-	obj* strObject = CTR_CREATE_OBJECT();
-	CTR_REGISTER_OBJECT(strObject);
-	CTR_CAST_TO_STRING(argument1, strObject);
+	obj* strObject = ctr_internal_cast2string(argument1);
 	fwrite(strObject->value.svalue->value, sizeof(char), strObject->value.svalue->vlen, stdout);
 	return myself;
 }
 
 obj* ctr_block_run(obj* myself, args* argList, obj* my) {
-	obj* selfRef = CTR_CREATE_OBJECT();
-	selfRef->name = "me";
-	selfRef->info.type = OTOBJECT;
-	CTR_STRING(selfRef->value.svalue,"[self]",6);
-	selfRef->link = my;
+	//obj* selfRef = ctr_internal_create_object(OTOBJECT);
+	//ASSIGN_STRING(selfRef->value.svalue, value, "[self]", 6);
+	//selfRef->link = my;
 	obj* result;
+	
 	tnode* node = myself->value.block;
-	obj* thisBlock = CTR_CREATE_OBJECT();
-	ASSIGN_STRING(thisBlock,name,"thisBlock",9);
-	thisBlock->info.type = OTBLOCK;
-	thisBlock->link = myself;
+	
+	//obj* thisBlock = ctr_internal_create_object(OTBLOCK);
+	
+	//ASSIGN_STRING(thisBlock,name,"thisBlock",9);
+	//thisBlock->link = myself;
 	tlistitem* codeBlockParts = node->nodes;
 	tnode* codeBlockPart1 = codeBlockParts->node;
 	tnode* codeBlockPart2 = codeBlockParts->next->node;
 	tlistitem* parameterList = codeBlockPart1->nodes;
 	tnode* parameter;
+	
+	
+	ctr_open_context();
 	if (parameterList && parameterList->node) {
 		parameter = parameterList->node;
 		obj* a;
 		while(1) {
 			if (parameter && argList->object) {
 				a = argList->object;
-				a->name = parameter->value;
-				ctr_set(a, parameter->vlen);
+				ctr_set(ctr_build_string(parameter->value, parameter->vlen), a);
 			}
 			if (!argList->next) break;
 			argList = argList->next;
@@ -223,19 +410,21 @@ obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 			parameter = parameterList->node;
 		}
 	}
-	ctr_open_context();
-	ctr_set(selfRef, 2);
-	ctr_set(thisBlock, 9); //otherwise running block may get gc'ed.
+	
+	ctr_set(ctr_build_string("me",2), my);
+	
+	ctr_set(ctr_build_string("thisBlock",9), myself); //otherwise running block may get gc'ed.
 	result = cwlk_run(codeBlockPart2);
 	ctr_close_context();
+	
 	if (error != NULL) {
 		obj* catchBlock = malloc(sizeof(obj));
-		HASH_FIND(hh, myself->properties, "catch", 5, catchBlock);
+		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string("catch",5), 0);
 		if (catchBlock != NULL) {
 			args* a = CTR_CREATE_ARGUMENT();
 			a->object = error;
 			error = NULL;
-			ctr_block_run(catchBlock, a, myself);
+			ctr_block_run(catchBlock, a, my);
 			result = myself;
 		}
 	}
@@ -251,21 +440,16 @@ obj* ctr_block_error(obj* myself, args* argumentList) {
 	return myself;
 }
 
+
 obj* ctr_block_catch(obj* myself, args* argumentList) {
 	obj* catchBlock = argumentList->object;
-	obj* foundObject = CTR_CREATE_OBJECT();
-	HASH_FIND(hh, myself->properties, "catch", 5, foundObject);
-	if (foundObject) {
-		HASH_DELETE(hh, myself->properties, foundObject);
-	}
-	HASH_ADD_KEYPTR(hh, myself->properties, "catch", 5, catchBlock);
+	ctr_internal_object_delete_property(myself, ctr_build_string("catch",5),0);
+	ctr_internal_object_add_property(myself, ctr_build_string("catch",5), catchBlock, 0);
 	return myself;
 }
 
 obj* ctr_build_block(tnode* node) {
-	obj* codeBlockObject = CTR_CREATE_OBJECT();
-	CTR_REGISTER_OBJECT(codeBlockObject);
-	codeBlockObject->info.type = OTBLOCK;
+	obj* codeBlockObject = ctr_internal_create_object(OTBLOCK);
 	codeBlockObject->value.block = node;
 	codeBlockObject->link = CBlock;
 	return codeBlockObject;
@@ -318,11 +502,8 @@ obj* ctr_bool_or(obj* myself, args* argumentList) {
 
 
 obj* ctr_build_number_from_float(float f) {
-	obj* numberObject = CTR_CREATE_OBJECT();
-	CTR_REGISTER_OBJECT(numberObject);
-	ASSIGN_STRING(numberObject,name,"Number",6);
+	obj* numberObject = ctr_internal_create_object(OTNUMBER);
 	numberObject->value.nvalue = f;
-	numberObject->info.type = OTNUMBER;
 	numberObject->link = Number;
 	return numberObject;
 }
@@ -377,9 +558,8 @@ obj* ctr_string_concat(obj* myself, args* argumentList);
 obj* ctr_number_add(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
 	if (otherNum->info.type == OTSTRING) {
-		obj* strObject = CTR_CREATE_OBJECT();
-		CTR_REGISTER_OBJECT(strObject);
-		CTR_CAST_TO_STRING(myself, strObject);
+		obj* strObject = ctr_internal_create_object(OTSTRING);
+		strObject = ctr_internal_cast2string(myself);
 		args* newArg = CTR_CREATE_ARGUMENT();
 		newArg->object = otherNum;
 		return ctr_string_concat(strObject, newArg);
@@ -486,22 +666,16 @@ obj* ctr_number_times(obj* myself, args* argumentList) {
 
 //create number from \0 terminated string
 obj* ctr_build_number(char* n) {
-	obj* numberObject = CTR_CREATE_OBJECT();
-	CTR_REGISTER_OBJECT(numberObject);
-	ASSIGN_STRING(numberObject,name,"Number",6);
+	obj* numberObject = ctr_internal_create_object(OTNUMBER);
 	numberObject->value.nvalue = atof(n);
-	numberObject->info.type = OTNUMBER;
 	numberObject->link = Number;
 	return numberObject;
 }
 
 obj* ctr_object_make() {
 	obj* objectInstance = NULL;
-	objectInstance = CTR_CREATE_OBJECT();
-	CTR_REGISTER_OBJECT(objectInstance);
-	objectInstance->info.type = OTOBJECT;
+	objectInstance = ctr_internal_create_object(OTOBJECT);
 	objectInstance->link = Object;
-	objectInstance->info.flagb = 1;
 	return objectInstance;
 }
 
@@ -526,8 +700,7 @@ obj* ctr_object_method_does(obj* myself, args* argumentList) {
 		printf("Expected argument does: to be of type block.\n");
 		exit(1);
 	}
-	ASSIGN_STRING(methodBlock, name, methodName->value.svalue->value, methodName->value.svalue->vlen);
-	HASH_ADD_KEYPTR(hh, myself->methods, methodBlock->name, methodName->value.svalue->vlen, methodBlock);
+	ctr_internal_object_add_property(myself, methodName, methodBlock, 1);
 	return myself;
 }
 
@@ -553,18 +726,18 @@ obj* ctr_object_override_does(obj* myself, args* argumentList) {
 		printf("Expected argument does: to be of type block.\n");
 		exit(1);
 	}
-	
-	ASSIGN_STRING(methodBlock, name, methodName->value.svalue->value, methodName->value.svalue->vlen);
-	obj* oldBlock = CTR_CREATE_OBJECT();
-	HASH_FIND(hh, myself->methods, methodBlock->name, methodName->value.svalue->vlen, oldBlock);
-	if (!oldBlock) printf("Cannot override: %s no such method.", oldBlock->name);
-	char* str = (char*) malloc(255);
-	memcpy(str, "overridden-", 11);
-	memcpy(str+11, oldBlock->name, methodName->value.svalue->vlen);
-	oldBlock->name = str;
-	HASH_DEL(myself->methods, oldBlock);
-	HASH_ADD_KEYPTR(hh, myself->methods, oldBlock->name, (methodName->value.svalue->vlen + 11), oldBlock);
-	HASH_ADD_KEYPTR(hh, myself->methods, methodBlock->name, methodName->value.svalue->vlen, methodBlock);
+	obj* overriddenMethod = ctr_internal_object_find_property(myself, methodName, 1);
+	if (overriddenMethod == NULL) {
+		printf("Cannot override. No such method.");
+		exit(1);
+	}
+	char* superMethodNameString = malloc(sizeof(char) * (methodName->value.svalue->vlen + 11));
+	memcpy(superMethodNameString, "overridden-", (sizeof(char) * 11));
+	memcpy(superMethodNameString + (sizeof(char)*11), methodName->value.svalue->value, methodName->value.svalue->vlen);
+	obj* superMethodKey = ctr_build_string(superMethodNameString, (methodName->value.svalue->vlen + 11));
+	ctr_internal_object_delete_property(myself, methodName, 1);
+	ctr_internal_object_add_property(myself, superMethodKey, overriddenMethod, 1);
+	ctr_internal_object_add_property(myself, methodName, methodBlock, 1);
 	return myself;
 }
 
@@ -586,11 +759,9 @@ obj* ctr_object_blueprint(obj* myself, args* argumentList) {
 }
 
 obj* ctr_build_string(char* stringValue, long size) {
-	obj* stringObject = CTR_CREATE_OBJECT();
-	CTR_REGISTER_OBJECT(stringObject);
-	ASSIGN_STRING(stringObject,name,"String",6);
-	CTR_STRING(stringObject->value.svalue, stringValue, size);
-	stringObject->info.type = OTSTRING;
+	obj* stringObject = ctr_internal_create_object(OTSTRING);
+	ASSIGN_STRING(stringObject->value.svalue, value, stringValue, size);
+	stringObject->value.svalue->vlen = size;
 	stringObject->link = TextString;
 	return stringObject;
 }
@@ -632,9 +803,8 @@ obj* ctr_string_concat(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
-	obj* strObject = CTR_CREATE_OBJECT();
-	CTR_REGISTER_OBJECT(strObject);
-	CTR_CAST_TO_STRING(argumentList->object, strObject);
+	obj* strObject = ctr_internal_create_object(OTSTRING);
+	strObject = ctr_internal_cast2string(argumentList->object);
 	long n1 = myself->value.svalue->vlen;
 	long n2 = strObject->value.svalue->vlen;
 	char* dest = calloc(sizeof(char), (n1 + n2));
@@ -679,7 +849,7 @@ obj* ctr_nil_isnil(obj* myself, args* argumentList) {
 }
 
 void ctr_gc_mark(obj* object) {
-	obj* item;
+	/*obj* item;
 	obj* tmp;
 	HASH_ITER(hh, object->properties, item, tmp) {
 		if (item->info.sticky) continue;
@@ -692,18 +862,19 @@ void ctr_gc_mark(obj* object) {
 		item->info.mark = 1;
 		item->info.sticky = 0;
 		ctr_gc_mark(item);
-	}
+	}*/
 }
 
 void ctr_gc_sweep() {
-	obj** q = &ctr_first_object;
+/*	obj** q = &ctr_first_object;
 	while(*q) {
 		if ((*q)->info.mark==0 && (*q)->info.sticky==0){
 			obj* u = *q;
 			*q = u->next;
 			int z;
 			for(z =0; z <= cid; z++) {
-				HASH_DELETE(hh, contexts[z], u);
+				ctr_internal_object_find_property_mapitem_by_value(contexts[z]->properties, u);
+				//ctr_internal_object_delete_property(contexts[z], u);
 			}
 			free(u);
 		} else {
@@ -712,11 +883,11 @@ void ctr_gc_sweep() {
 			}
 			q = &(*q)->next;
 		}
-	}
+	}*/
 }
 
 void ctr_gc_collect (obj* myself, args* argumentList) {
-	obj* context = contexts[cid];
+	/*obj* context = contexts[cid];
 	int oldcid = cid;
 	while(cid > -1) {
 		ctr_gc_mark(context);
@@ -724,8 +895,9 @@ void ctr_gc_collect (obj* myself, args* argumentList) {
 		context = contexts[cid];
 	}
 	ctr_gc_sweep();
-	cid = oldcid;
+	cid = oldcid;*/
 }
+
 
 obj* ctr_map_put(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
@@ -752,7 +924,9 @@ obj* ctr_map_put(obj* myself, args* argumentList) {
 		printf("Map key needs to be string.\n");
 		exit(1);
 	}
-	HASH_ADD_KEYPTR(hh, myself->properties, key, keyLen, putValue);
+	ctr_internal_object_delete_property(myself, ctr_build_string(key, keyLen), 0);
+	ctr_internal_object_add_property(myself, ctr_build_string(key, keyLen), putValue, 0);
+	
     return myself;
 }
 
@@ -765,18 +939,15 @@ obj* ctr_map_get(obj* myself, args* argumentList) {
 		printf("Expected argument at: to be of type string.\n");
 		exit(1);
 	}
-	obj* foundObject = CTR_CREATE_OBJECT();
-	CTR_REGISTER_OBJECT(foundObject);
-	HASH_FIND(hh, myself->properties, searchKey->value.svalue->value, searchKey->value.svalue->vlen, foundObject);
-	
-	if (foundObject == NULL) {
-		foundObject = ctr_build_nil();
-	}
+	obj* foundObject = ctr_internal_object_find_property(myself, searchKey, 0);
+	if (foundObject == NULL) foundObject = ctr_build_nil();
 	return foundObject;
 }
 
 obj* ctr_map_count(obj* myself) {
-	return ctr_build_number_from_float( HASH_COUNT(myself->properties) );
+
+	
+	return ctr_build_number_from_float( myself->properties->size );
 }
 
 
@@ -787,11 +958,12 @@ obj* ctr_map_each(obj* myself, args* argumentList) {
 	obj* block = argumentList->object;
 	if (block->info.type != OTBLOCK) { printf("Expected code block."); exit(1); }
 	block->info.sticky = 1; //mark as sticky
-	struct obj *el, *tmp;
-	HASH_ITER(hh, myself->properties, el, tmp) {
+	cmapitem* m = myself->properties->head;
+	while(m) {
 		args* arguments = CTR_CREATE_ARGUMENT();
-		arguments->object = el;
+		arguments->object = m->value;
 		ctr_block_run(block, arguments, myself);
+		m = m->next;
 	}
 	block->info.mark = 0;
 	block->info.sticky = 0;
@@ -799,14 +971,14 @@ obj* ctr_map_each(obj* myself, args* argumentList) {
 }
 
 obj* ctr_array_new(obj* myclass) {
-	obj* s = ctr_object_make();
-	s->info.type = OTARRAY;
-	s->link = myclass;
+	obj* s = ctr_internal_create_object(OTARRAY);
+	s->link = CArray;
 	s->value.avalue = (carray*) calloc(1,sizeof(carray));
 	s->value.avalue->length = 1;
 	s->value.avalue->elements = (obj**) malloc(sizeof(obj*)*1);
 	s->value.avalue->head = 0;
 	s->info.flagb = 1;
+	//printf("%d\n", s->value.avalue->length);
 	return s;
 }
 
@@ -814,11 +986,10 @@ obj* ctr_array_push(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
-	if (myself->value.avalue->length <= myself->value.avalue->head) {
+	if (myself->value.avalue->length <= (myself->value.avalue->head + 1)) {
 		myself->value.avalue->length *= 2;
-		myself->value.avalue->elements = (obj**) realloc(myself->value.avalue->elements, (sizeof(obj*) * (myself->value.avalue->length + 100)));
+		myself->value.avalue->elements = (obj**) realloc(myself->value.avalue->elements, (sizeof(obj*) * (myself->value.avalue->length)));
 	}
-	
 	obj* pushValue = argumentList->object;
 	*(myself->value.avalue->elements + (myself->value.avalue->head * sizeof(obj*))) = pushValue;
 	myself->value.avalue->head++;
@@ -877,6 +1048,7 @@ obj* ctr_array_count(obj* myself) {
 	return ctr_build_number_from_float( d );
 }
 
+
 obj* ctr_file_new(obj* myself, args* argumentList) {
 	obj* s = ctr_object_make();
 	s->info.type = OTMISC;
@@ -888,27 +1060,24 @@ obj* ctr_file_new(obj* myself, args* argumentList) {
 	}
 	s->value.rvalue = malloc(sizeof(cres));
 	s->value.rvalue->type = 1;
-	obj* pathObject = CTR_CREATE_OBJECT();
-	pathObject->name = "path";
+	obj* pathObject = ctr_internal_create_object(OTSTRING);
 	pathObject->info.type = OTSTRING;
 	pathObject->value.svalue = (cstr*) malloc(sizeof(cstr));
 	pathObject->value.svalue->value = (char*) malloc(sizeof(char) * argumentList->object->value.svalue->vlen);
 	memcpy(pathObject->value.svalue->value, argumentList->object->value.svalue->value, argumentList->object->value.svalue->vlen);
 	pathObject->value.svalue->vlen = argumentList->object->value.svalue->vlen;
-	HASH_ADD_KEYPTR(hh, s->properties, "path", 4, pathObject);
+	ctr_internal_object_add_property(s, ctr_build_string("path",4), pathObject, 0);
 	return s;
 }
 
 obj* ctr_file_path(obj* myself) {
-	obj* path;
-	HASH_FIND(hh, myself->properties, "path", 4, path);
+	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return Nil;
 	return path;
 }
 
 obj* ctr_file_read(obj* myself) {
-	obj* path;
-	HASH_FIND(hh, myself->properties, "path", 4, path);
+	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return Nil;
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
@@ -933,6 +1102,7 @@ obj* ctr_file_read(obj* myself) {
 	fclose(f);
 	obj* str = ctr_build_string(buffer, fileLen);
 	free(buffer);
+	//free(f);
 	return str;
 }
 
@@ -946,8 +1116,7 @@ obj* ctr_file_write(obj* myself, args* argumentList) {
 		printf("First argument must be string\n");
 		exit(1);
 	}
-	obj* path;
-	HASH_FIND(hh, myself->properties, "path", 4, path);
+	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return Nil;
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
@@ -960,6 +1129,7 @@ obj* ctr_file_write(obj* myself, args* argumentList) {
 	}
 	fwrite(str->value.svalue->value, sizeof(char), str->value.svalue->vlen, f);
 	fclose(f);
+	//free(f);
 	return myself;
 }
 
@@ -973,8 +1143,7 @@ obj* ctr_file_append(obj* myself, args* argumentList) {
 		printf("First argument must be string\n");
 		exit(1);
 	}
-	obj* path;
-	HASH_FIND(hh, myself->properties, "path", 4, path);
+	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return Nil;
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
@@ -991,8 +1160,7 @@ obj* ctr_file_append(obj* myself, args* argumentList) {
 }
 
 obj* ctr_file_exists(obj* myself) {
-	obj* path;
-	HASH_FIND(hh, myself->properties, "path", 4, path);
+	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return ctr_build_bool(0);
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
@@ -1000,13 +1168,15 @@ obj* ctr_file_exists(obj* myself) {
 	memcpy(pathString+vlen,"\0",1);
 	FILE* f = fopen(pathString, "r");
 	int exists = (f != NULL );
-	if (f) fclose(f);
+	if (f) {
+		fclose(f);
+		//free(f);
+	}
 	return ctr_build_bool(exists);
 }
 
 obj* ctr_file_delete(obj* myself) {
-	obj* path;
-	HASH_FIND(hh, myself->properties, "path", 4, path);
+	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return ctr_build_bool(0);
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
@@ -1038,8 +1208,7 @@ obj* ctr_sys_call(obj* myself, args* argumentList) {
 }
 
 obj* ctr_file_size(obj* myself) {
-	obj* path;
-	HASH_FIND(hh, myself->properties, "path", 4, path);
+	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return ctr_build_number_from_float(0);
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
@@ -1051,6 +1220,10 @@ obj* ctr_file_size(obj* myself) {
     fseek(f, 0L, SEEK_END);
     int sz=ftell(f);
     fseek(f,prev,SEEK_SET); //go back to where we were
+    if (f) {
+		fclose(f);
+		//free(f);
+	}
     return ctr_build_number_from_float( (double) sz );
 }
 
@@ -1108,181 +1281,194 @@ obj* ctr_coffee_brew(obj* myself, args* argumentList) {
 
 void ctr_initialize_world() {
 	
+	
 	CTR_INIT_HEAD_OBJECT();
 
-	CTR_CREATE_OBJECT_TYPE(World, "World", OTOBJECT, 5);
+	World = ctr_internal_create_object(OTOBJECT);
 	World->info.mark = 0;
 	World->info.sticky = 1;
 	contexts[0] = World;
-
-	CTR_CREATE_OBJECT_TYPE(Object, "Object", OTOBJECT, 6);
-	CTR_CREATE_FUNC(ObjectMake, &ctr_object_make, "new", Object);
-	CTR_CREATE_FUNC(ObjectMethodDoes, &ctr_object_method_does, "method:does:", Object);
-	CTR_CREATE_FUNC(ObjectMethodOnDo, &ctr_object_method_does, "on:do:", Object);
-	CTR_CREATE_FUNC(ObjectOverrideDoes, &ctr_object_override_does, "override:does:", Object);
-	CTR_CREATE_FUNC(ObjectBlueprint, &ctr_object_blueprint, "basedOn:", Object);
-	CTR_CREATE_FUNC(ObjectRespond, &ctr_object_respond, "respondTo:", Object);
-	CTR_CREATE_FUNC(ObjectRespond2, &ctr_object_respond, "respondTo:with:", Object);
-	CTR_CREATE_FUNC(ObjectRespond3, &ctr_object_respond, "respondTo:with:and:", Object);
+	
+	Object = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(Object, ctr_build_string("new", 3), &ctr_object_make);
+	ctr_internal_create_func(Object, ctr_build_string("method:does:", 12), &ctr_object_method_does);
+	ctr_internal_create_func(Object, ctr_build_string("on:do:", 6), &ctr_object_method_does);
+	ctr_internal_create_func(Object, ctr_build_string("override:does:", 14), &ctr_object_override_does);
+	ctr_internal_create_func(Object, ctr_build_string("basedOn:", 8), &ctr_object_blueprint);
+	ctr_internal_create_func(Object, ctr_build_string("respondTo:", 10), &ctr_object_respond);
+	ctr_internal_create_func(Object, ctr_build_string("respondTo:with:", 15), &ctr_object_respond);
+	ctr_internal_create_func(Object, ctr_build_string("respondTo:with:and:", 19), &ctr_object_respond);
+	ctr_internal_create_func(Object, ctr_build_string("new", 3), &ctr_object_make);
 	Object->link = NULL;
 	Object->info.mark = 0;
 	Object->info.sticky = 1;
+	ctr_internal_object_add_property(World, ctr_build_string("Object", 6), Object, 0);
 
-	CTR_CREATE_OBJECT_TYPE(Console, "Pen", OTOBJECT, 3)
-	CTR_CREATE_FUNC(ConsoleWrite, &ctr_console_write, "write:", Console);
+	Console = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(Console, ctr_build_string("write:", 6), &ctr_console_write);
+	ctr_internal_object_add_property(World, ctr_build_string("Pen", 3), Console, 0);
 	Console->link = Object;
 	Console->info.mark = 0;
 	Console->info.sticky = 1;
-
-	CTR_CREATE_OBJECT_TYPE(GC, "Broom", OTOBJECT, 5)
-	CTR_CREATE_FUNC(GCCollect, &ctr_gc_collect, "sweep", GC);
-	GC->link = Object;
-	GC->info.mark = 0;
-	GC->info.sticky = 1;
-
-	CTR_CREATE_OBJECT_TYPE(Number, "Number", OTNUMBER, 6);
-	CTR_CREATE_FUNC(numberTimesObject, &ctr_number_times, "times:", Number);
-	CTR_CREATE_FUNC(numberAdd, &ctr_number_add, "+", Number);
-	CTR_CREATE_FUNC(numberInc, &ctr_number_inc, "inc:", Number);
-	CTR_CREATE_FUNC(numberMin, &ctr_number_minus, "-", Number);
-	CTR_CREATE_FUNC(numberDec, &ctr_number_dec, "dec:", Number);
-	CTR_CREATE_FUNC(numberMul, &ctr_number_multiply, "*", Number);
-	CTR_CREATE_FUNC(numberMuls, &ctr_number_mul, "mul:", Number);
-	CTR_CREATE_FUNC(numberDiv, &ctr_number_divide, "/", Number);
-	CTR_CREATE_FUNC(numberDivi, &ctr_number_div, "div:", Number);
-	CTR_CREATE_FUNC(numberHiThan, &ctr_number_higherThan, ">", Number);
-	CTR_CREATE_FUNC(numberHiEqThan, &ctr_number_higherEqThan, ">=", Number);
-	CTR_CREATE_FUNC(numberLoThan, &ctr_number_lowerThan, "<", Number);
-	CTR_CREATE_FUNC(numberLoEqThan, &ctr_number_lowerEqThan, "<=", Number);
-	CTR_CREATE_FUNC(numberEq, &ctr_number_eq, "==", Number);
-	CTR_CREATE_FUNC(numberNeq, &ctr_number_neq, "!=", Number);
-	CTR_CREATE_FUNC(numberFactorial, &ctr_number_factorial, "factorial", Number);
-	CTR_CREATE_FUNC(numberBetween, &ctr_number_between, "between:and:", Number);
+	Console->info.flagb = 1;
+	
+	
+	Number = ctr_internal_create_object(OTNUMBER);
+	ctr_internal_create_func(Number, ctr_build_string("+", 1), &ctr_number_add);
+	ctr_internal_create_func(Number, ctr_build_string("inc:",4), &ctr_number_inc);
+	ctr_internal_create_func(Number, ctr_build_string("-",1), &ctr_number_minus);
+	ctr_internal_create_func(Number, ctr_build_string("dec:",4), &ctr_number_dec);
+	ctr_internal_create_func(Number, ctr_build_string("*",1),&ctr_number_multiply);
+	ctr_internal_create_func(Number, ctr_build_string("mul:",4),&ctr_number_mul);
+	ctr_internal_create_func(Number, ctr_build_string("/",1), &ctr_number_divide);
+	ctr_internal_create_func(Number, ctr_build_string("div:",4),&ctr_number_div);
+	ctr_internal_create_func(Number, ctr_build_string(">",1),&ctr_number_higherThan);
+	ctr_internal_create_func(Number, ctr_build_string(">=",2),&ctr_number_higherEqThan);
+	ctr_internal_create_func(Number, ctr_build_string("<",1),&ctr_number_lowerThan);
+	ctr_internal_create_func(Number, ctr_build_string("<=",2),&ctr_number_lowerEqThan);
+	ctr_internal_create_func(Number, ctr_build_string("==",2),&ctr_number_eq);
+	ctr_internal_create_func(Number, ctr_build_string("!=",2),&ctr_number_neq);
+	ctr_internal_create_func(Number, ctr_build_string("times:",6),&ctr_number_times);
+	ctr_internal_create_func(Number, ctr_build_string("factorial",9),&ctr_number_factorial);
+	ctr_internal_create_func(Number, ctr_build_string("between:and:",12),&ctr_number_between);
+	ctr_internal_object_add_property(World, ctr_build_string("Number", 6), Number, 0);
 	Number->link = Object;
 	Number->info.mark = 0;
 	Number->info.sticky = 1;
-	Number->info.flagb = 0;
 	
-	CTR_CREATE_OBJECT_TYPE(CDice, "Dice", OTOBJECT, 4);
-	CTR_CREATE_FUNC(diceThrow, &ctr_dice_throw, "roll", CDice);
-	CTR_CREATE_FUNC(diceSidesSet, &ctr_dice_sides, "rollWithSides:", CDice);
+	
+	CDice = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CDice, ctr_build_string("roll", 4), &ctr_dice_throw);
+	ctr_internal_create_func(CDice, ctr_build_string("rollWithSides:", 14), &ctr_dice_sides);
+	ctr_internal_object_add_property(World, ctr_build_string("Dice", 4), CDice, 0);
 	CDice->link = Object;
 	CDice->info.mark = 0;
 	CDice->info.sticky = 1;
-	CDice->info.flagb = 0;
-
-	CTR_CREATE_OBJECT_TYPE(CCoin, "Coin", OTOBJECT, 4);
-	CTR_CREATE_FUNC(coinFlip, &ctr_coin_flip, "flip", CCoin);
+	
+	CCoin = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CCoin, ctr_build_string("flip", 4), &ctr_coin_flip);
+	ctr_internal_object_add_property(World, ctr_build_string("Coin", 4), CCoin, 0);
 	CCoin->link = Object;
 	CCoin->info.mark = 0;
 	CCoin->info.sticky = 1;
-	CCoin->info.flagb = 0;
 	
-	CTR_CREATE_OBJECT_TYPE(CCoffee, "CoffeePot", OTOBJECT, 9);
-	CTR_CREATE_FUNC(coffeeBrew, &ctr_coffee_brew, "brew:", CCoffee);
+	CCoffee = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CCoffee, ctr_build_string("brew:", 5), &ctr_coffee_brew);
+	ctr_internal_object_add_property(World, ctr_build_string("CoffeePot", 9), CCoffee, 0);
 	CCoffee->link = Object;
 	CCoffee->info.mark = 0;
 	CCoffee->info.sticky = 1;
-	CCoffee->info.flagb = 0;
-
-	CTR_CREATE_OBJECT_TYPE(CDog, "Dog", OTOBJECT, 3);
-	CTR_CREATE_FUNC(dogFetch, &ctr_dog_fetch_argument, "fetchArg:", CDog);
-	CTR_CREATE_FUNC(dogNumOfArgs, &ctr_dog_num_of_args, "fetchArgCount", CDog);
+	
+	
+	CDog = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CDog, ctr_build_string("fetchArg:", 9), &ctr_dog_fetch_argument);
+	ctr_internal_create_func(CDog, ctr_build_string("fetchArgCount:", 13), &ctr_dog_num_of_args);
+	ctr_internal_create_func(CDog, ctr_build_string("trick:", 6), &ctr_sys_call);
+	ctr_internal_object_add_property(World, ctr_build_string("Dog", 3), CDog, 0);
 	CDog->link = Object;
 	CDog->info.mark = 0;
 	CDog->info.sticky = 1;
-	CDog->info.flagb = 0;
-
-	CTR_CREATE_OBJECT_TYPE(TextString, "String", OTSTRING, 6);
-	CTR_CREATE_FUNC(stringPrintBytes, &ctr_string_printbytes, "printBytes", TextString);
-	CTR_CREATE_FUNC(stringBytes, &ctr_string_bytes, "bytes", TextString);
-	CTR_CREATE_FUNC(stringLength, &ctr_string_length, "length", TextString);
-	CTR_CREATE_FUNC(stringFromTo, &ctr_string_fromto, "from:to:", TextString);
-	CTR_CREATE_FUNC(stringConcat, &ctr_string_concat, "+", TextString);
-	CTR_CREATE_FUNC(stringEq, &ctr_string_eq, "==", TextString);
+	
+	TextString = ctr_internal_create_object(OTSTRING);
+	ctr_internal_create_func(TextString, ctr_build_string("printBytes", 10), &ctr_string_printbytes);
+	ctr_internal_create_func(TextString, ctr_build_string("bytes", 5), &ctr_string_bytes);
+	ctr_internal_create_func(TextString, ctr_build_string("length", 6), &ctr_string_length);
+	ctr_internal_create_func(TextString, ctr_build_string("from:to:", 8), &ctr_string_fromto);
+	ctr_internal_create_func(TextString, ctr_build_string("+", 1), &ctr_string_concat);
+	ctr_internal_create_func(TextString, ctr_build_string("==", 2), &ctr_string_eq);
+	ctr_internal_object_add_property(World, ctr_build_string("String", 6), TextString, 0);
 	TextString->link = Object;
 	TextString->info.mark = 0;
 	TextString->info.sticky = 1;
-	
-	CTR_CREATE_OBJECT_TYPE(CMap, "Map", OTOBJECT, 3);
-	CTR_CREATE_FUNC(mapPut, &ctr_map_put, "put:at:", CMap);
-	CTR_CREATE_FUNC(mapGet, &ctr_map_get, "at:", CMap);
-	CTR_CREATE_FUNC(mapCount, &ctr_map_count, "count", CMap);
-	CTR_CREATE_FUNC(mapEach, &ctr_map_each, "each:", CMap);
+		
+	CMap = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CMap, ctr_build_string("put:at:", 7), &ctr_map_put);
+	ctr_internal_create_func(CMap, ctr_build_string("at:", 3), &ctr_map_get);
+	ctr_internal_create_func(CMap, ctr_build_string("count", 5), &ctr_map_count);
+	ctr_internal_create_func(CMap, ctr_build_string("each:", 5), &ctr_map_each);
+	ctr_internal_object_add_property(World, ctr_build_string("Map", 3), CMap, 0);
 	CMap->link = Object;
-	CMap->info.sticky = 1;
 	CMap->info.mark = 0;
+	CMap->info.sticky = 1;
 	
-	CTR_CREATE_OBJECT_TYPE(CArray, "Array", OTARRAY, 5);
-	CTR_CREATE_FUNC(arrayNew, &ctr_array_new, "make", CArray);
-	CTR_CREATE_FUNC(arrayPush, &ctr_array_push, "push:", CArray);
-	CTR_CREATE_FUNC(arrayCount, &ctr_array_count, "count", CArray);
-	CTR_CREATE_FUNC(arrayPop, &ctr_array_pop, "pop", CArray);
-	CTR_CREATE_FUNC(arrayGet, &ctr_array_get, "at:", CArray);
-	CTR_CREATE_FUNC(arrayPut, &ctr_array_put, "put:at:", CArray);
+	
+	CArray = ctr_internal_create_object(OTARRAY);
+	ctr_internal_create_func(CArray, ctr_build_string("new", 3), &ctr_array_new);
+	ctr_internal_create_func(CArray, ctr_build_string("push:", 5), &ctr_array_push);
+	ctr_internal_create_func(CArray, ctr_build_string("count", 5), &ctr_array_count);
+	ctr_internal_create_func(CArray, ctr_build_string("pop", 3), &ctr_array_pop);
+	ctr_internal_create_func(CArray, ctr_build_string("at:", 3), &ctr_array_get);
+	ctr_internal_create_func(CArray, ctr_build_string("put:at:", 7), &ctr_array_put);
+	ctr_internal_object_add_property(World, ctr_build_string("Array", 5), CArray, 0);
 	CArray->link = Object;
-	CArray->info.sticky = 1;
 	CArray->info.mark = 0;
-
-	CTR_CREATE_OBJECT_TYPE(CFile, "File", OTMISC, 4);
-	CTR_CREATE_FUNC(fileNew, &ctr_file_new, "new:", CFile);
-	CTR_CREATE_FUNC(filePath, &ctr_file_path, "path", CFile);
-	CTR_CREATE_FUNC(fileRead, &ctr_file_read, "read", CFile);
-	CTR_CREATE_FUNC(fileWrite, &ctr_file_write, "write:", CFile);
-	CTR_CREATE_FUNC(fileAppend, &ctr_file_append, "append:", CFile);
-	CTR_CREATE_FUNC(fileExists, &ctr_file_exists, "exists", CFile);
-	CTR_CREATE_FUNC(fileSize, &ctr_file_size, "size", CFile);
-	CTR_CREATE_FUNC(fileDelete, &ctr_file_delete, "delete", CFile);
-	CFile->link = Object;
-	CFile->info.sticky = 1;
-	CFile->info.mark = 0;
+	CArray->info.sticky = 1;
 	
-	CTR_CREATE_OBJECT_TYPE(CSystem, "System", OTMISC, 6);
-	CTR_CREATE_FUNC(sysCall, &ctr_sys_call, "call:", CSystem);
-	CSystem->link = Object;
-	CSystem->info.sticky = 1;
-	CSystem->info.mark = 0;
-
-	CTR_CREATE_OBJECT_TYPE(CBlock, "CodeBlock", OTBLOCK, 9);
-	CTR_CREATE_FUNC(blockRun, &ctr_block_runIt, "run", CBlock);
-	CTR_CREATE_FUNC(blockError, &ctr_block_error, "error:", CBlock);
-	CTR_CREATE_FUNC(blockCatch, &ctr_block_catch, "catch:", CBlock);
+	CFile = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CFile, ctr_build_string("new:", 4), &ctr_file_new);
+	ctr_internal_create_func(CFile, ctr_build_string("path", 4), &ctr_file_path);
+	ctr_internal_create_func(CFile, ctr_build_string("read", 4), &ctr_file_read);
+	ctr_internal_create_func(CFile, ctr_build_string("write:", 6), &ctr_file_write);
+	ctr_internal_create_func(CFile, ctr_build_string("append:", 7), &ctr_file_append);
+	ctr_internal_create_func(CFile, ctr_build_string("exists", 6), &ctr_file_exists);
+	ctr_internal_create_func(CFile, ctr_build_string("size", 4), &ctr_file_size);
+	ctr_internal_create_func(CFile, ctr_build_string("delete", 6), &ctr_file_delete);
+	ctr_internal_object_add_property(World, ctr_build_string("File", 4), CFile, 0);
+	CFile->link = Object;
+	CFile->info.mark = 0;
+	CFile->info.sticky = 1;
+	
+	
+	CBlock = ctr_internal_create_object(OTBLOCK);
+	ctr_internal_create_func(CBlock, ctr_build_string("run", 3), &ctr_block_run);
+	ctr_internal_create_func(CBlock, ctr_build_string("error:", 6), &ctr_block_error);
+	ctr_internal_create_func(CBlock, ctr_build_string("catch:", 6), &ctr_block_catch);
+	ctr_internal_object_add_property(World, ctr_build_string("CodeBlock", 9), CBlock, 0);
 	CBlock->link = Object;
 	CBlock->info.mark = 0;
 	CBlock->info.sticky = 1;
 	
-	CTR_CREATE_OBJECT_TYPE(BoolX, "Boolean", OTBOOL, 7);
-	CTR_CREATE_FUNC(ifTrue, &ctr_bool_iftrue, "ifTrue:", BoolX);
-	CTR_CREATE_FUNC(ifFalse, &ctr_bool_ifFalse, "ifFalse:", BoolX);
-	CTR_CREATE_FUNC(boolOpposite, &ctr_bool_opposite, "opposite", BoolX);
-	CTR_CREATE_FUNC(boolAND, &ctr_bool_and, "&&", BoolX);
-	CTR_CREATE_FUNC(boolOR, &ctr_bool_or, "||", BoolX);
+	
+	BoolX = ctr_internal_create_object(OTBOOL);
+	ctr_internal_create_func(BoolX, ctr_build_string("ifTrue:", 7), &ctr_bool_iftrue);
+	ctr_internal_create_func(BoolX, ctr_build_string("ifFalse:", 8), &ctr_bool_ifFalse);
+	ctr_internal_create_func(BoolX, ctr_build_string("opposite", 8), &ctr_bool_opposite);
+	ctr_internal_create_func(BoolX, ctr_build_string("&&", 2), &ctr_bool_and);
+	ctr_internal_create_func(BoolX, ctr_build_string("||", 2), &ctr_bool_or);
+	ctr_internal_object_add_property(World, ctr_build_string("Boolean", 7), BoolX, 0);
 	BoolX->link = Object;
 	BoolX->info.mark = 0;
 	BoolX->info.sticky = 1;
-
-	CTR_CREATE_OBJECT_TYPE(Nil, "Nil", OTNIL, 3);
-	CTR_CREATE_FUNC(isNil, &ctr_nil_isnil, "isNil", Nil);
+	
+	
+	GC = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(GC, ctr_build_string("sweep", 5), &ctr_gc_collect);
+	ctr_internal_object_add_property(World, ctr_build_string("Broom", 5), GC, 0);
+	GC->link = Object;
+	GC->info.mark = 0;
+	GC->info.sticky = 1;
+	
+	Nil = ctr_internal_create_object(OTNIL);
+	ctr_internal_object_add_property(World, ctr_build_string("Nil", 3), Nil, 0);
+	ctr_internal_create_func(Nil, ctr_build_string("isNil", 5), &ctr_nil_isnil);
 	Nil->link = Object;
 	Nil->info.mark = 0;
 	Nil->info.sticky = 1;
 }
 
 obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argumentList) {
+	
 	if (error != NULL) return NULL; //Error mode, ignore subsequent messages until resolved.
-	CTR_DEBUG_STR("Sending message >> |%s| \n", message, vlen);
 	obj* methodObject = NULL;
 	obj* searchObject = receiverObject;
 	while(!methodObject) {
-		HASH_FIND(hh, searchObject->methods, message, vlen, methodObject);
+		methodObject = ctr_internal_object_find_property(searchObject, ctr_build_string(message, vlen), 1);
 		if (methodObject) break;
-		if (!searchObject->link) {
-			break;
-		}
+		if (!searchObject->link) break;
 		searchObject = searchObject->link;
 	}
+	
 	if (!methodObject) {
-		
 		args* argCounter = argumentList;
 		int argCount = 0;
 		while(argCounter->next && argCount < 4) {
@@ -1301,91 +1487,93 @@ obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argum
 		}
 	}
 	obj* result;
+	
+	
 	if (methodObject->info.type == OTNATFUNC) {
+		
 		obj* (*funct)(obj* receiverObject, args* argumentList);
 		funct = (void*) methodObject->value.block;
 		result = (obj*) funct(receiverObject, argumentList);
 	}
 	if (methodObject->info.type == OTBLOCK) {
-		//important! for messages to 'me', adjust the 'my' scope to the receiver itself.
-		if (strncmp(receiverObject->name,"me",2)==0) {
-			receiverObject = receiverObject->link;
-		}
 		result = ctr_block_run(methodObject, argumentList, receiverObject);
 	}	
 	return result;
 }
 
-obj* ctr_assign_value(char* name, long keylen, obj* o) {
-	obj* object = CTR_CREATE_OBJECT();
-	CTR_REGISTER_OBJECT(object);
-	
-	if (o->info.type == OTOBJECT && o->info.flagb != 1) {
-		object->info.flagb = 0;
-		object->info.flaga = 1;
-		object->link = o;
+obj* ctr_assign_value(obj* key, obj* o) {
+	obj* object;
+	if (o->info.type == OTOBJECT || o->info.type == OTMISC) {
+		ctr_set(key, o);
 	} else {
+		object = ctr_internal_create_object(o->info.type);
 		object->properties = o->properties;
 		object->methods = o->methods;
-		object->info.type = o->info.type;
-		object->info.flagb = 0;
 		object->link = o->link;
+		ctr_set(key, object);
 	}
-	
      //depending on type, copy specific value
     if (o->info.type == OTBOOL) {
 		object->value.bvalue = o->value.bvalue;
 	 } else if (o->info.type == OTNUMBER) {
 		object->value.nvalue = o->value.nvalue;
 	 } else if (o->info.type == OTSTRING) {
-		CTR_STRING(object->value.svalue, o->value.svalue->value, o->value.svalue->vlen);
+		object->value.svalue = malloc(sizeof(cstr));
+		object->value.svalue->value = malloc(sizeof(char)*o->value.svalue->vlen);
+		memcpy(object->value.svalue->value, o->value.svalue->value,o->value.svalue->vlen);
+		object->value.svalue->vlen = o->value.svalue->vlen;
 	 } else if (o->info.type == OTBLOCK) {
 		object->value.block = o->value.block;
 	 } else if (o->info.type == OTARRAY) {
-		object->value.avalue = o->value.avalue;
+		object->value.avalue = malloc(sizeof(carray));
+		object->value.avalue->elements = malloc(o->value.avalue->length*sizeof(obj*));
+		object->value.avalue->length = o->value.avalue->length;
+		int i;
+		for (i = 0; i < object->value.avalue->length; i++) {
+			object->value.avalue->elements = *(o->value.avalue->elements+(i*sizeof(obj*)));
+		}
+		object->value.avalue->head = o->value.avalue->head;
+		object->info.flagb = 1;
 	 }
-
-	object->name = name;
-	ctr_set(object, keylen);
 	return object;
 }
 
-obj* ctr_assign_value_to_my(char* name, long n, obj* o) {
-	obj* object = CTR_CREATE_OBJECT();
-	CTR_REGISTER_OBJECT(object);
-	
-	if (o->info.type == OTOBJECT && o->info.flagb != 1) {
-		object->info.flagb = 0;
-		object->info.flaga = 1;
-		object->link = o;
+obj* ctr_assign_value_to_my(obj* key, obj* o) {
+	obj* object;
+	obj* my = ctr_find(ctr_build_string("me", 2));
+	if (o->info.type == OTOBJECT || o->info.type == OTMISC) {
+		ctr_internal_object_add_property(my, key, o, 0);
 	} else {
+		object = ctr_internal_create_object(o->info.type);
 		object->properties = o->properties;
 		object->methods = o->methods;
-		object->info.type = o->info.type;
-		object->info.flagb = 0;
 		object->link = o->link;
+		ctr_internal_object_add_property(my, key, object, 0);
 	}
-    
      //depending on type, copy specific value
     if (o->info.type == OTBOOL) {
 		object->value.bvalue = o->value.bvalue;
 	 } else if (o->info.type == OTNUMBER) {
 		object->value.nvalue = o->value.nvalue;
 	 } else if (o->info.type == OTSTRING) {
-		CTR_STRING(object->value.svalue, o->value.svalue->value, o->value.svalue->vlen);
+		object->value.svalue = malloc(sizeof(cstr));
+		object->value.svalue->value = malloc(sizeof(char)*o->value.svalue->vlen);
+		memcpy(object->value.svalue->value, o->value.svalue->value,o->value.svalue->vlen);
+		object->value.svalue->vlen = o->value.svalue->vlen;
 	 } else if (o->info.type == OTBLOCK) {
 		object->value.block = o->value.block;
+	 } else if (o->info.type == OTARRAY) {
+		object->value.avalue = malloc(sizeof(carray));
+		object->value.avalue->elements = malloc(o->value.avalue->length*sizeof(obj*));
+		object->value.avalue->length = o->value.avalue->length;
+		int i;
+		for (i = 0; i < object->value.avalue->length; i++) {
+			object->value.avalue->elements = *(o->value.avalue->elements+(i*sizeof(obj*)));
+		}
+		object->value.avalue->head = o->value.avalue->head;
+		object->info.flagb = 1;
 	 }
 
-    
-    object->name = name;
-    obj* my = ctr_find("me", 2);
-    obj* foundObject = CTR_CREATE_OBJECT();
-	HASH_FIND(hh, my->link->properties, object->name, n, foundObject);
-	if (foundObject) {
-		HASH_DELETE(hh, my->link->properties, foundObject);
-	}
-	
-	HASH_ADD_KEYPTR(hh, my->link->properties, name, n, object);
 	return object;
 }
+
