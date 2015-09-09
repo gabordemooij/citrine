@@ -5,7 +5,7 @@ ctr:tools.o lexer.o parser.o walker.o citrine.o
 	gcc tools.o lexer.o parser.o walker.o citrine.o -lm -o ctr
 
 tools.o:
-	gcc -c tools.c -Wall -o tools.o
+	gcc -c -lbsd tools.c -Wall -o tools.o
 
 lexer.o:
 	gcc -c lexer.c -Wall -o lexer.o
