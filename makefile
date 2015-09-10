@@ -5,7 +5,7 @@ ctr:tools.o lexer.o parser.o walker.o citrine.o
 	gcc tools.o lexer.o parser.o walker.o citrine.o -lm -o ctr
 
 tools.o:
-	gcc -lbsd -o tools.o -c tools.c -Wall `pkg-config --libs libbsd`
+	gcc -c tools.c -Wall -o tools.o
 
 lexer.o:
 	gcc -c lexer.c -Wall -o lexer.o

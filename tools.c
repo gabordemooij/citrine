@@ -1236,15 +1236,17 @@ obj* ctr_dice_sides(obj* myself, args* argumentList) {
 		printf("Argument sides needs to be number\n");
 		exit(1);
 	}
-	return ctr_build_number_from_float(arc4random_uniform(argumentList->object->value.nvalue));
+	
+	
+	return ctr_build_number_from_float((rand() % ((int)argumentList->object->value.nvalue)));
 }
 
 obj* ctr_dice_throw(obj* myself) {
-	return ctr_build_number_from_float(arc4random_uniform(7));
+	return ctr_build_number_from_float((rand() % 6));
 }
 
 obj* ctr_coin_flip(obj* myself) {
-	return ctr_build_bool(arc4random_uniform(2));
+	return ctr_build_bool((rand() % 2));
 }
 
 obj* ctr_dog_fetch_argument(obj* myself, args* argumentList) {
@@ -1281,7 +1283,7 @@ obj* ctr_coffee_brew(obj* myself, args* argumentList) {
 
 void ctr_initialize_world() {
 	
-	
+	srand((unsigned)time(NULL));
 	CTR_INIT_HEAD_OBJECT();
 
 	World = ctr_internal_create_object(OTOBJECT);

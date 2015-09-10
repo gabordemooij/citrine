@@ -1,5 +1,3 @@
 language: c
 
-install: sudo apt-get install -y libbsd-dev
-
 script: ./runtests.sh
