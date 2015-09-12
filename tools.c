@@ -6,7 +6,6 @@
 #include <math.h>
 #include <unistd.h>
 
-#include "uthash.h"
 #include "citrine.h"
 
 obj* World = NULL;

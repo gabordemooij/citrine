@@ -5,7 +5,6 @@
 #include <stdarg.h>
 #include <math.h>
 
-#include "uthash.h"
 #include "citrine.h"
 
 
