@@ -973,7 +973,7 @@ obj* ctr_map_each(obj* myself, args* argumentList) {
 obj* ctr_array_new(obj* myclass) {
 	obj* s = ctr_internal_create_object(OTARRAY);
 	s->link = CArray;
-	s->value.avalue = (carray*) calloc(1,sizeof(carray));
+	s->value.avalue = (carray*) malloc(sizeof(carray));
 	s->value.avalue->length = 1;
 	s->value.avalue->elements = (obj**) malloc(sizeof(obj*)*1);
 	s->value.avalue->head = 0;
@@ -987,11 +987,15 @@ obj* ctr_array_push(obj* myself, args* argumentList) {
 		printf("Missing argument 1\n"); exit(1);
 	}
 	if (myself->value.avalue->length <= (myself->value.avalue->head + 1)) {
-		myself->value.avalue->length *= 2;
+		myself->value.avalue->length = myself->value.avalue->length * 3;
 		myself->value.avalue->elements = (obj**) realloc(myself->value.avalue->elements, (sizeof(obj*) * (myself->value.avalue->length)));
 	}
 	obj* pushValue = argumentList->object;
-	*(myself->value.avalue->elements + (myself->value.avalue->head * sizeof(obj*))) = pushValue;
+	int size = sizeof(obj*);
+	int offset = (myself->value.avalue->head * size);
+	long nbase = myself->value.avalue->elements;
+	long locationa = nbase + offset;
+	*((obj**)locationa) = pushValue;
 	myself->value.avalue->head++;
 	return myself;
 }
@@ -1008,7 +1012,7 @@ obj* ctr_array_get(obj* myself, args* argumentList) {
 	if (myself->value.avalue->head < i || i < 0) {
 		printf("Index out of bounds.\n"); exit(1);
 	}
-	return *(myself->value.avalue->elements + (i * sizeof(obj*)));
+	return *( (obj**) ((long)myself->value.avalue->elements + (i * sizeof(obj*))) );
 }
 
 obj* ctr_array_put(obj* myself, args* argumentList) {
@@ -1024,11 +1028,10 @@ obj* ctr_array_put(obj* myself, args* argumentList) {
 		printf("Index must be number.\n"); exit(1);
 	}
 	int i = (int) putIndex->value.nvalue;
-	
 	if (myself->value.avalue->head < i || i < 0) {
 		printf("Index out of bounds.\n"); exit(1);
 	}
-	*(myself->value.avalue->elements + (i * sizeof(obj*))) = putValue;
+	*( (obj**) ((long)myself->value.avalue->elements + (i * sizeof(obj*))) ) = putValue;
 	return myself;
 }
 
@@ -1038,8 +1041,7 @@ obj* ctr_array_pop(obj* myself) {
 		return Nil;
 	}
 	myself->value.avalue->head--;
-	obj* foundObject = *(myself->value.avalue->elements + (myself->value.avalue->head * sizeof(obj*)));
-	return foundObject;
+	return (obj*) *((obj**)( (long) myself->value.avalue->elements + (myself->value.avalue->head * sizeof(obj*))  ));
 }
 
 obj* ctr_array_count(obj* myself) {
@@ -1505,7 +1507,7 @@ obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argum
 
 obj* ctr_assign_value(obj* key, obj* o) {
 	obj* object;
-	if (o->info.type == OTOBJECT || o->info.type == OTMISC) {
+	if (o->info.type == OTOBJECT || o->info.type == OTMISC || o->info.type == OTARRAY) {
 		ctr_set(key, o);
 	} else {
 		object = ctr_internal_create_object(o->info.type);
@@ -1527,15 +1529,14 @@ obj* ctr_assign_value(obj* key, obj* o) {
 	 } else if (o->info.type == OTBLOCK) {
 		object->value.block = o->value.block;
 	 } else if (o->info.type == OTARRAY) {
-		object->value.avalue = malloc(sizeof(carray));
+		/*object->value.avalue = malloc(sizeof(carray));
 		object->value.avalue->elements = malloc(o->value.avalue->length*sizeof(obj*));
 		object->value.avalue->length = o->value.avalue->length;
 		int i;
-		for (i = 0; i < object->value.avalue->length; i++) {
-			object->value.avalue->elements = *(o->value.avalue->elements+(i*sizeof(obj*)));
+		for (i = 0; i < object->value.avalue->head; i++) {
+			*(object->value.avalue->elements+(i*sizeof(obj*))) = *(o->value.avalue->elements+(i*sizeof(obj*)));
 		}
-		object->value.avalue->head = o->value.avalue->head;
-		object->info.flagb = 1;
+		object->value.avalue->head = o->value.avalue->head;*/
 	 }
 	return object;
 }
