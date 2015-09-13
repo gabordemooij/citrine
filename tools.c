@@ -897,6 +897,11 @@ void ctr_gc_collect (obj* myself, args* argumentList) {
 	cid = oldcid;*/
 }
 
+obj* ctr_map_new(obj* myclass) {
+	obj* s = ctr_internal_create_object(OTOBJECT);
+	s->link = CMap;
+	return s;
+}
 
 obj* ctr_map_put(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
@@ -1385,6 +1390,7 @@ void ctr_initialize_world() {
 	TextString->info.sticky = 1;
 		
 	CMap = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CMap, ctr_build_string("new", 3), &ctr_map_new);
 	ctr_internal_create_func(CMap, ctr_build_string("put:at:", 7), &ctr_map_put);
 	ctr_internal_create_func(CMap, ctr_build_string("at:", 3), &ctr_map_get);
 	ctr_internal_create_func(CMap, ctr_build_string("count", 5), &ctr_map_count);
