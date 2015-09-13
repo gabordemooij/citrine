@@ -1506,7 +1506,7 @@ obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argum
 
 obj* ctr_assign_value(obj* key, obj* o) {
 	obj* object;
-	if (o->info.type == OTOBJECT || o->info.type == OTMISC || o->info.type == OTARRAY) {
+	if (o->info.type == OTOBJECT || o->info.type == OTMISC) {
 		ctr_set(key, o);
 	} else {
 		object = ctr_internal_create_object(o->info.type);
@@ -1528,14 +1528,16 @@ obj* ctr_assign_value(obj* key, obj* o) {
 	 } else if (o->info.type == OTBLOCK) {
 		object->value.block = o->value.block;
 	 } else if (o->info.type == OTARRAY) {
-		/*object->value.avalue = malloc(sizeof(carray));
+		object->value.avalue = malloc(sizeof(carray));
 		object->value.avalue->elements = malloc(o->value.avalue->length*sizeof(obj*));
 		object->value.avalue->length = o->value.avalue->length;
 		int i;
-		for (i = 0; i < object->value.avalue->head; i++) {
-			*(object->value.avalue->elements+(i*sizeof(obj*))) = *(o->value.avalue->elements+(i*sizeof(obj*)));
+		obj* putValue;
+		for (i = 0; i < o->value.avalue->head; i++) {
+			putValue = *( (obj**) ((long)o->value.avalue->elements + (i * sizeof(obj*))) );
+			*( (obj**) ((long)object->value.avalue->elements + (i * sizeof(obj*))) ) = putValue;
 		}
-		object->value.avalue->head = o->value.avalue->head;*/
+		object->value.avalue->head = o->value.avalue->head;
 	 }
 	return object;
 }
@@ -1569,11 +1571,12 @@ obj* ctr_assign_value_to_my(obj* key, obj* o) {
 		object->value.avalue->elements = malloc(o->value.avalue->length*sizeof(obj*));
 		object->value.avalue->length = o->value.avalue->length;
 		int i;
-		for (i = 0; i < object->value.avalue->length; i++) {
-			object->value.avalue->elements = *(o->value.avalue->elements+(i*sizeof(obj*)));
+		obj* putValue;
+		for (i = 0; i < o->value.avalue->head; i++) {
+			putValue = *( (obj**) ((long)o->value.avalue->elements + (i * sizeof(obj*))) );
+			*( (obj**) ((long)object->value.avalue->elements + (i * sizeof(obj*))) ) = putValue;
 		}
 		object->value.avalue->head = o->value.avalue->head;
-		object->info.flagb = 1;
 	 }
 
 	return object;
