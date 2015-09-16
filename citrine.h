@@ -197,8 +197,6 @@ int debug;
 
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == '=' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='=' && X!='^'  && X!= ':' && X!= '\''
-#define CTR_REGISTER_OBJECT(X) X->gnext = ctr_first_object; ctr_first_object = X;
-#define CTR_INIT_HEAD_OBJECT() ctr_first_object = NULL;
 #define CTR_CREATE_ARGUMENT() (args*) calloc(sizeof(args), 1)
 #define CTR_PARSER_CREATE_LISTITEM() (tlistitem*) calloc(1, sizeof(tlistitem))
 #define	CTR_PARSER_CREATE_NODE() (tnode*) calloc(1,sizeof(tnode))

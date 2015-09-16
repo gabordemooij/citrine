@@ -29,6 +29,9 @@ obj* CDice;
 obj* CDog;
 obj* CCoin;
 obj* CCoffee;
+
+int gc_dust = 0;
+int gc_object_count = 0;
 int debug;
 
 //measures the size of character
@@ -273,13 +276,13 @@ obj* ctr_internal_create_object(int type) {
 	obj* o = malloc(sizeof(obj));
 	o->properties = malloc(sizeof(ctr_map));
 	o->methods = malloc(sizeof(ctr_map));
-	
 	o->properties->size = 0;
 	o->methods->size = 0;
 	o->properties->head = NULL;
 	o->methods->head = NULL;
 	o->info.type = type;
-	
+	o->info.sticky = 1;
+	o->info.mark = 0;
 	if (type==OTBOOL) o->value.bvalue = 0;
 	if (type==OTNUMBER) o->value.nvalue = 0;
 	if (type==OTSTRING) {
@@ -287,7 +290,13 @@ obj* ctr_internal_create_object(int type) {
 		o->value.svalue->value = "";
 		o->value.svalue->vlen = 0;
 	}
-	CTR_REGISTER_OBJECT(o);
+	o->gnext = NULL;
+	if (ctr_first_object == NULL) {
+		ctr_first_object = o;
+	} else {
+		o->gnext = ctr_first_object;
+		ctr_first_object = o;
+	}
 	return o;
 	
 }
@@ -644,7 +653,6 @@ obj* ctr_number_factorial(obj* myself, args* argumentList) {
 }
 
 obj* ctr_number_times(obj* myself, args* argumentList) {
-	
 	obj* block = argumentList->object;
 	if (block->info.type != OTBLOCK) { printf("Expected code block."); exit(1); }
 	block->info.sticky = 1; //mark as sticky
@@ -848,45 +856,54 @@ obj* ctr_nil_isnil(obj* myself, args* argumentList) {
 }
 
 void ctr_gc_mark(obj* object) {
-	/*obj* item;
-	obj* tmp;
-	HASH_ITER(hh, object->properties, item, tmp) {
-		if (item->info.sticky) continue;
-		item->info.mark = 1;
-		item->info.sticky = 0;
-		ctr_gc_mark(item);
-	}
-	HASH_ITER(hh, object->methods, item, tmp) {
-		if (item->info.sticky) continue;
-		item->info.mark = 1;
-		item->info.sticky = 0;
-		ctr_gc_mark(item);
-	}*/
+	cmapitem* item = object->properties->head;
+	while(item) {
+		obj* k = item->key;
+		obj* o = item->value;
+		o->name = k->value.svalue->value;
+		o->info.mark = 1;
+		k->info.mark = 1;
+		ctr_gc_mark(o);
+		item = item->next;
+	} 
+	item = object->methods->head;
+	while(item) {
+		obj* o = item->value;
+		obj* k = item->key;
+		o->name = k->value.svalue->value;
+		o->info.mark = 1;
+		k->info.mark = 1;
+		ctr_gc_mark(o);
+		item = item->next;
+	} 
 }
 
 void ctr_gc_sweep() {
-/*	obj** q = &ctr_first_object;
-	while(*q) {
-		if ((*q)->info.mark==0 && (*q)->info.sticky==0){
-			obj* u = *q;
-			*q = u->next;
-			int z;
-			for(z =0; z <= cid; z++) {
-				ctr_internal_object_find_property_mapitem_by_value(contexts[z]->properties, u);
-				//ctr_internal_object_delete_property(contexts[z], u);
+	obj* previousObject = NULL;
+	obj* currentObject = ctr_first_object;
+	while(currentObject) {
+		gc_object_count ++;
+		if (currentObject->info.mark==0 && currentObject->info.sticky==0){
+			gc_dust ++;
+			if (previousObject) {
+				previousObject->gnext = currentObject->gnext;
 			}
-			free(u);
+			free(currentObject);
+			currentObject = previousObject->gnext;
 		} else {
-			if ((*q)->info.mark == 1) {
-				(*q)->info.mark = 0;
+			if (currentObject->info.mark == 1) {
+				currentObject->info.mark = 0;
 			}
-			q = &(*q)->next;
+			previousObject = currentObject;
+			currentObject = currentObject->gnext;
 		}
-	}*/
+	}
 }
 
 void ctr_gc_collect (obj* myself, args* argumentList) {
-	/*obj* context = contexts[cid];
+	gc_dust = 0;
+	gc_object_count = 0;
+	obj* context = contexts[cid];
 	int oldcid = cid;
 	while(cid > -1) {
 		ctr_gc_mark(context);
@@ -894,7 +911,16 @@ void ctr_gc_collect (obj* myself, args* argumentList) {
 		context = contexts[cid];
 	}
 	ctr_gc_sweep();
-	cid = oldcid;*/
+	cid = oldcid;
+}
+
+
+obj* ctr_gc_dust(obj* myself, args* argumentList) {
+	return ctr_build_number_from_float((float) gc_dust);
+}
+
+obj* ctr_gc_object_count(obj* myself, args* argumentList) {
+	return ctr_build_number_from_float((float) gc_object_count);
 }
 
 obj* ctr_map_new(obj* myclass) {
@@ -902,6 +928,8 @@ obj* ctr_map_new(obj* myclass) {
 	s->link = CMap;
 	return s;
 }
+
+
 
 obj* ctr_map_put(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
@@ -1288,15 +1316,12 @@ obj* ctr_coffee_brew(obj* myself, args* argumentList) {
 }
 
 void ctr_initialize_world() {
-	
 	srand((unsigned)time(NULL));
-	CTR_INIT_HEAD_OBJECT();
-
-	World = ctr_internal_create_object(OTOBJECT);
-	World->info.mark = 0;
-	World->info.sticky = 1;
-	contexts[0] = World;
 	
+	ctr_first_object = NULL;
+	
+	World = ctr_internal_create_object(OTOBJECT);
+	contexts[0] = World;
 	Object = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(Object, ctr_build_string("new", 3), &ctr_object_make);
 	ctr_internal_create_func(Object, ctr_build_string("method:does:", 12), &ctr_object_method_does);
@@ -1308,19 +1333,12 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(Object, ctr_build_string("respondTo:with:and:", 19), &ctr_object_respond);
 	ctr_internal_create_func(Object, ctr_build_string("new", 3), &ctr_object_make);
 	Object->link = NULL;
-	Object->info.mark = 0;
-	Object->info.sticky = 1;
 	ctr_internal_object_add_property(World, ctr_build_string("Object", 6), Object, 0);
-
 	Console = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(Console, ctr_build_string("write:", 6), &ctr_console_write);
 	ctr_internal_object_add_property(World, ctr_build_string("Pen", 3), Console, 0);
 	Console->link = Object;
-	Console->info.mark = 0;
-	Console->info.sticky = 1;
 	Console->info.flagb = 1;
-	
-	
 	Number = ctr_internal_create_object(OTNUMBER);
 	ctr_internal_create_func(Number, ctr_build_string("+", 1), &ctr_number_add);
 	ctr_internal_create_func(Number, ctr_build_string("inc:",4), &ctr_number_inc);
@@ -1341,42 +1359,25 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(Number, ctr_build_string("between:and:",12),&ctr_number_between);
 	ctr_internal_object_add_property(World, ctr_build_string("Number", 6), Number, 0);
 	Number->link = Object;
-	Number->info.mark = 0;
-	Number->info.sticky = 1;
-	
-	
 	CDice = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(CDice, ctr_build_string("roll", 4), &ctr_dice_throw);
 	ctr_internal_create_func(CDice, ctr_build_string("rollWithSides:", 14), &ctr_dice_sides);
 	ctr_internal_object_add_property(World, ctr_build_string("Dice", 4), CDice, 0);
 	CDice->link = Object;
-	CDice->info.mark = 0;
-	CDice->info.sticky = 1;
-	
 	CCoin = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(CCoin, ctr_build_string("flip", 4), &ctr_coin_flip);
 	ctr_internal_object_add_property(World, ctr_build_string("Coin", 4), CCoin, 0);
 	CCoin->link = Object;
-	CCoin->info.mark = 0;
-	CCoin->info.sticky = 1;
-	
 	CCoffee = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(CCoffee, ctr_build_string("brew:", 5), &ctr_coffee_brew);
 	ctr_internal_object_add_property(World, ctr_build_string("CoffeePot", 9), CCoffee, 0);
 	CCoffee->link = Object;
-	CCoffee->info.mark = 0;
-	CCoffee->info.sticky = 1;
-	
-	
 	CDog = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(CDog, ctr_build_string("fetchArg:", 9), &ctr_dog_fetch_argument);
 	ctr_internal_create_func(CDog, ctr_build_string("fetchArgCount:", 13), &ctr_dog_num_of_args);
 	ctr_internal_create_func(CDog, ctr_build_string("trick:", 6), &ctr_sys_call);
 	ctr_internal_object_add_property(World, ctr_build_string("Dog", 3), CDog, 0);
 	CDog->link = Object;
-	CDog->info.mark = 0;
-	CDog->info.sticky = 1;
-	
 	TextString = ctr_internal_create_object(OTSTRING);
 	ctr_internal_create_func(TextString, ctr_build_string("printBytes", 10), &ctr_string_printbytes);
 	ctr_internal_create_func(TextString, ctr_build_string("bytes", 5), &ctr_string_bytes);
@@ -1386,9 +1387,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(TextString, ctr_build_string("==", 2), &ctr_string_eq);
 	ctr_internal_object_add_property(World, ctr_build_string("String", 6), TextString, 0);
 	TextString->link = Object;
-	TextString->info.mark = 0;
-	TextString->info.sticky = 1;
-		
 	CMap = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(CMap, ctr_build_string("new", 3), &ctr_map_new);
 	ctr_internal_create_func(CMap, ctr_build_string("put:at:", 7), &ctr_map_put);
@@ -1397,10 +1395,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CMap, ctr_build_string("each:", 5), &ctr_map_each);
 	ctr_internal_object_add_property(World, ctr_build_string("Map", 3), CMap, 0);
 	CMap->link = Object;
-	CMap->info.mark = 0;
-	CMap->info.sticky = 1;
-	
-	
 	CArray = ctr_internal_create_object(OTARRAY);
 	ctr_internal_create_func(CArray, ctr_build_string("new", 3), &ctr_array_new);
 	ctr_internal_create_func(CArray, ctr_build_string("push:", 5), &ctr_array_push);
@@ -1410,9 +1404,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CArray, ctr_build_string("put:at:", 7), &ctr_array_put);
 	ctr_internal_object_add_property(World, ctr_build_string("Array", 5), CArray, 0);
 	CArray->link = Object;
-	CArray->info.mark = 0;
-	CArray->info.sticky = 1;
-	
 	CFile = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(CFile, ctr_build_string("new:", 4), &ctr_file_new);
 	ctr_internal_create_func(CFile, ctr_build_string("path", 4), &ctr_file_path);
@@ -1424,20 +1415,12 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CFile, ctr_build_string("delete", 6), &ctr_file_delete);
 	ctr_internal_object_add_property(World, ctr_build_string("File", 4), CFile, 0);
 	CFile->link = Object;
-	CFile->info.mark = 0;
-	CFile->info.sticky = 1;
-	
-	
 	CBlock = ctr_internal_create_object(OTBLOCK);
 	ctr_internal_create_func(CBlock, ctr_build_string("run", 3), &ctr_block_run);
 	ctr_internal_create_func(CBlock, ctr_build_string("error:", 6), &ctr_block_error);
 	ctr_internal_create_func(CBlock, ctr_build_string("catch:", 6), &ctr_block_catch);
 	ctr_internal_object_add_property(World, ctr_build_string("CodeBlock", 9), CBlock, 0);
 	CBlock->link = Object;
-	CBlock->info.mark = 0;
-	CBlock->info.sticky = 1;
-	
-	
 	BoolX = ctr_internal_create_object(OTBOOL);
 	ctr_internal_create_func(BoolX, ctr_build_string("ifTrue:", 7), &ctr_bool_iftrue);
 	ctr_internal_create_func(BoolX, ctr_build_string("ifFalse:", 8), &ctr_bool_ifFalse);
@@ -1446,23 +1429,16 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(BoolX, ctr_build_string("||", 2), &ctr_bool_or);
 	ctr_internal_object_add_property(World, ctr_build_string("Boolean", 7), BoolX, 0);
 	BoolX->link = Object;
-	BoolX->info.mark = 0;
-	BoolX->info.sticky = 1;
-	
-	
 	GC = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(GC, ctr_build_string("sweep", 5), &ctr_gc_collect);
+	ctr_internal_create_func(GC, ctr_build_string("dust", 4), &ctr_gc_dust);
+	ctr_internal_create_func(GC, ctr_build_string("objectCount", 11), &ctr_gc_object_count);
 	ctr_internal_object_add_property(World, ctr_build_string("Broom", 5), GC, 0);
 	GC->link = Object;
-	GC->info.mark = 0;
-	GC->info.sticky = 1;
-	
 	Nil = ctr_internal_create_object(OTNIL);
 	ctr_internal_object_add_property(World, ctr_build_string("Nil", 3), Nil, 0);
 	ctr_internal_create_func(Nil, ctr_build_string("isNil", 5), &ctr_nil_isnil);
 	Nil->link = Object;
-	Nil->info.mark = 0;
-	Nil->info.sticky = 1;
 }
 
 obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argumentList) {
@@ -1512,6 +1488,7 @@ obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argum
 
 obj* ctr_assign_value(obj* key, obj* o) {
 	obj* object;
+	key->info.sticky = 0;
 	if (o->info.type == OTOBJECT || o->info.type == OTMISC) {
 		ctr_set(key, o);
 	} else {
@@ -1519,6 +1496,7 @@ obj* ctr_assign_value(obj* key, obj* o) {
 		object->properties = o->properties;
 		object->methods = o->methods;
 		object->link = o->link;
+		object->info.sticky = 0;
 		ctr_set(key, object);
 	}
      //depending on type, copy specific value
@@ -1545,12 +1523,14 @@ obj* ctr_assign_value(obj* key, obj* o) {
 		}
 		object->value.avalue->head = o->value.avalue->head;
 	 }
+	 
 	return object;
 }
 
 obj* ctr_assign_value_to_my(obj* key, obj* o) {
 	obj* object;
 	obj* my = ctr_find(ctr_build_string("me", 2));
+	key->info.sticky = 0;
 	if (o->info.type == OTOBJECT || o->info.type == OTMISC) {
 		ctr_internal_object_add_property(my, key, o, 0);
 	} else {
@@ -1558,6 +1538,7 @@ obj* ctr_assign_value_to_my(obj* key, obj* o) {
 		object->properties = o->properties;
 		object->methods = o->methods;
 		object->link = o->link;
+		object->info.sticky = 0;
 		ctr_internal_object_add_property(my, key, object, 0);
 	}
      //depending on type, copy specific value
@@ -1584,6 +1565,8 @@ obj* ctr_assign_value_to_my(obj* key, obj* o) {
 		}
 		object->value.avalue->head = o->value.avalue->head;
 	 }
+	 
+	
 
 	return object;
 }
