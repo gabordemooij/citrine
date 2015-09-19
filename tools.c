@@ -856,6 +856,15 @@ obj* ctr_nil_isnil(obj* myself, args* argumentList) {
 }
 
 void ctr_gc_mark(obj* object) {
+	obj* el;
+	long i;
+	if (object->info.type == OTARRAY) {
+		for (i = 0; i < object->value.avalue->head; i++) {
+			el = *((obj**) (long)object->value.avalue->elements+(i*sizeof(obj*)) );
+			el->info.mark = 1;
+			ctr_gc_mark(el);
+		}
+	}
 	cmapitem* item = object->properties->head;
 	while(item) {
 		obj* k = item->key;
@@ -1004,7 +1013,7 @@ obj* ctr_map_each(obj* myself, args* argumentList) {
 
 obj* ctr_array_new(obj* myclass) {
 	obj* s = ctr_internal_create_object(OTARRAY);
-	s->link = CArray;
+	s->link = myclass;
 	s->value.avalue = (carray*) malloc(sizeof(carray));
 	s->value.avalue->length = 1;
 	s->value.avalue->elements = (obj**) malloc(sizeof(obj*)*1);
@@ -1395,7 +1404,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CMap, ctr_build_string("each:", 5), &ctr_map_each);
 	ctr_internal_object_add_property(World, ctr_build_string("Map", 3), CMap, 0);
 	CMap->link = Object;
-	CArray = ctr_internal_create_object(OTARRAY);
+	CArray = ctr_array_new(Object);
 	ctr_internal_create_func(CArray, ctr_build_string("new", 3), &ctr_array_new);
 	ctr_internal_create_func(CArray, ctr_build_string("push:", 5), &ctr_array_push);
 	ctr_internal_create_func(CArray, ctr_build_string("count", 5), &ctr_array_count);
