@@ -1,0 +1,7 @@
+#Test shift and unshift messages to array
+a = Array new.
+a unshift: 'Hello'.
+a unshift: 'World'.
+Pen write: (a at: 1), write: (a at: 0).
+Pen write: (a shift), write: (a shift), write: a shift.
+
