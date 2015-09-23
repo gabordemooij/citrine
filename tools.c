@@ -1041,6 +1041,24 @@ obj* ctr_array_push(obj* myself, args* argumentList) {
 	return myself;
 }
 
+obj* ctr_array_unshift(obj* myself, args* argumentList) {
+	if (!argumentList->object) {
+		printf("Missing argument 1\n"); exit(1);
+	}
+	if (myself->value.avalue->length <= (myself->value.avalue->head + 1)) {
+		myself->value.avalue->length = myself->value.avalue->length * 3;
+		myself->value.avalue->elements = (obj**) realloc(myself->value.avalue->elements, (sizeof(obj*) * (myself->value.avalue->length)));
+	}
+	obj* pushValue = argumentList->object;
+	myself->value.avalue->head++;
+	
+	memmove((obj**)((long)myself->value.avalue->elements+(sizeof(obj*))), myself->value.avalue->elements,myself->value.avalue->head*sizeof(obj*));
+	*(myself->value.avalue->elements) = pushValue;
+	return myself;
+}
+
+
+
 obj* ctr_array_get(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
@@ -1078,11 +1096,22 @@ obj* ctr_array_put(obj* myself, args* argumentList) {
 
 //@todo dont forget to gc arrays, they might hold refs to objects!
 obj* ctr_array_pop(obj* myself) {
-	if (myself->value.avalue->length < myself->value.avalue->head) {
+	if (myself->value.avalue->head == 0) {
 		return Nil;
 	}
 	myself->value.avalue->head--;
 	return (obj*) *((obj**)( (long) myself->value.avalue->elements + (myself->value.avalue->head * sizeof(obj*))  ));
+}
+
+
+obj* ctr_array_shift(obj* myself) {
+	if (myself->value.avalue->head == 0) {
+		return Nil;
+	}
+	obj* shiftedOff = *(myself->value.avalue->elements);
+	myself->value.avalue->head--;
+	memmove(myself->value.avalue->elements,(obj**)((long)myself->value.avalue->elements+(sizeof(obj*))),myself->value.avalue->head*sizeof(obj*));
+	return shiftedOff;
 }
 
 obj* ctr_array_count(obj* myself) {
@@ -1407,6 +1436,8 @@ void ctr_initialize_world() {
 	CArray = ctr_array_new(Object);
 	ctr_internal_create_func(CArray, ctr_build_string("new", 3), &ctr_array_new);
 	ctr_internal_create_func(CArray, ctr_build_string("push:", 5), &ctr_array_push);
+	ctr_internal_create_func(CArray, ctr_build_string("unshift:", 8), &ctr_array_unshift);
+	ctr_internal_create_func(CArray, ctr_build_string("shift", 5), &ctr_array_shift);
 	ctr_internal_create_func(CArray, ctr_build_string("count", 5), &ctr_array_count);
 	ctr_internal_create_func(CArray, ctr_build_string("pop", 3), &ctr_array_pop);
 	ctr_internal_create_func(CArray, ctr_build_string("at:", 3), &ctr_array_get);
