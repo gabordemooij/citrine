@@ -1,11 +1,11 @@
 
 all:ctr
 
-ctr:tools.o lexer.o parser.o walker.o citrine.o
-	gcc tools.o lexer.o parser.o walker.o citrine.o -lm -o ctr
+ctr:world.o lexer.o parser.o walker.o citrine.o
+	gcc world.o lexer.o parser.o walker.o citrine.o -lm -o ctr
 
-tools.o:
-	gcc -c tools.c -Wall -o tools.o
+world.o:
+	gcc -c world.c -Wall -o world.o
 
 lexer.o:
 	gcc -c lexer.c -Wall -o lexer.o
