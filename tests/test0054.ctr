@@ -1,2 +1,2 @@
-(Dog fetchArgCount) times: { i | Pen write: 'Argument # ' + i + ':' + (Dog fetchArg: i). }.
-Pen write: (Dog fetchArg: 999).
+(Command argCount) times: { i | Pen write: 'Argument # ' + i + ':' + (Command argument: i). }.
+Pen write: (Command argument: 999).

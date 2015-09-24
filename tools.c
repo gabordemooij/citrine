@@ -26,7 +26,8 @@ obj* CFile;
 obj* error;
 obj* CSystem;
 obj* CDice;
-obj* CDog;
+obj* CCommand;
+obj* CShell;
 obj* CCoin;
 obj* CCoffee;
 
@@ -1262,7 +1263,7 @@ obj* ctr_file_delete(obj* myself) {
 	return myself;
 }
 
-obj* ctr_sys_call(obj* myself, args* argumentList) {
+obj* ctr_shell_call(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("No system argument.\n");
 		exit(1);
@@ -1321,7 +1322,7 @@ obj* ctr_coin_flip(obj* myself) {
 	return ctr_build_bool((rand() % 2));
 }
 
-obj* ctr_dog_fetch_argument(obj* myself, args* argumentList) {
+obj* ctr_command_argument(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("No number of arg argument.\n");
 		exit(1);
@@ -1335,7 +1336,7 @@ obj* ctr_dog_fetch_argument(obj* myself, args* argumentList) {
 	return ctr_build_string(__argv[n], strlen(__argv[n]));
 }
 
-obj* ctr_dog_num_of_args(obj* myself) {
+obj* ctr_command_num_of_args(obj* myself) {
 	return ctr_build_number_from_float( __argc );
 }
 
@@ -1410,12 +1411,14 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CCoffee, ctr_build_string("brew:", 5), &ctr_coffee_brew);
 	ctr_internal_object_add_property(World, ctr_build_string("CoffeePot", 9), CCoffee, 0);
 	CCoffee->link = Object;
-	CDog = ctr_internal_create_object(OTOBJECT);
-	ctr_internal_create_func(CDog, ctr_build_string("fetchArg:", 9), &ctr_dog_fetch_argument);
-	ctr_internal_create_func(CDog, ctr_build_string("fetchArgCount:", 13), &ctr_dog_num_of_args);
-	ctr_internal_create_func(CDog, ctr_build_string("trick:", 6), &ctr_sys_call);
-	ctr_internal_object_add_property(World, ctr_build_string("Dog", 3), CDog, 0);
-	CDog->link = Object;
+	CCommand = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CCommand, ctr_build_string("argument:", 9), &ctr_command_argument);
+	ctr_internal_create_func(CCommand, ctr_build_string("argCount", 8), &ctr_command_num_of_args);
+	ctr_internal_object_add_property(World, ctr_build_string("Command", 7), CCommand, 0);
+	CCommand->link = Object;
+	CShell = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CShell, ctr_build_string("call:", 5), &ctr_shell_call);
+	ctr_internal_object_add_property(World, ctr_build_string("Shell", 5), CShell, 0);
 	TextString = ctr_internal_create_object(OTSTRING);
 	ctr_internal_create_func(TextString, ctr_build_string("printBytes", 10), &ctr_string_printbytes);
 	ctr_internal_create_func(TextString, ctr_build_string("bytes", 5), &ctr_string_bytes);
