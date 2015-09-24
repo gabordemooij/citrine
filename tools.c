@@ -29,7 +29,7 @@ obj* CDice;
 obj* CCommand;
 obj* CShell;
 obj* CCoin;
-obj* CCoffee;
+obj* CClock;
 
 int gc_dust = 0;
 int gc_object_count = 0;
@@ -1340,7 +1340,7 @@ obj* ctr_command_num_of_args(obj* myself) {
 	return ctr_build_number_from_float( __argc );
 }
 
-obj* ctr_coffee_brew(obj* myself, args* argumentList) {
+obj* ctr_clock_wait(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("No brew argument.\n");
 		exit(1);
@@ -1407,10 +1407,10 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CCoin, ctr_build_string("flip", 4), &ctr_coin_flip);
 	ctr_internal_object_add_property(World, ctr_build_string("Coin", 4), CCoin, 0);
 	CCoin->link = Object;
-	CCoffee = ctr_internal_create_object(OTOBJECT);
-	ctr_internal_create_func(CCoffee, ctr_build_string("brew:", 5), &ctr_coffee_brew);
-	ctr_internal_object_add_property(World, ctr_build_string("CoffeePot", 9), CCoffee, 0);
-	CCoffee->link = Object;
+	CClock = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CClock, ctr_build_string("wait:", 5), &ctr_clock_wait);
+	ctr_internal_object_add_property(World, ctr_build_string("Clock", 5), CClock, 0);
+	CClock->link = Object;
 	CCommand = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(CCommand, ctr_build_string("argument:", 9), &ctr_command_argument);
 	ctr_internal_create_func(CCommand, ctr_build_string("argCount", 8), &ctr_command_num_of_args);
