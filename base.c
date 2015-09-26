@@ -18,13 +18,37 @@ obj* ctr_nil_isnil(obj* myself, args* argumentList) {
 
 
 
+/**
+ * Root Object
+ * This is the base object, the parent of all other objects.
+ * It contains essential object oriented programming features.
+ */
 
+/**
+ * Creates a new instance of the Root Object.
+ */ 
 obj* ctr_object_make() {
 	obj* objectInstance = NULL;
 	objectInstance = ctr_internal_create_object(OTOBJECT);
 	objectInstance->link = Object;
 	return objectInstance;
 }
+
+/**
+ * Equals
+ *
+ * Tests whether the current instance is the same as
+ * the argument.
+ * 
+ * Usage:
+ * object equals: other
+ */
+obj* ctr_object_equals(obj* myself, args* argumentList) {
+	obj* otherObject = argumentList->object;
+	if (otherObject == myself) return ctr_build_bool(1);
+	return ctr_build_bool(0);
+}
+
 
 obj* ctr_object_method_does(obj* myself, args* argumentList) {
 	if (!argumentList->object) {

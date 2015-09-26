@@ -386,6 +386,7 @@ void ctr_initialize_world() {
 	contexts[0] = World;
 	Object = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(Object, ctr_build_string("new", 3), &ctr_object_make);
+	ctr_internal_create_func(Object, ctr_build_string("equals:", 7), &ctr_object_equals);
 	ctr_internal_create_func(Object, ctr_build_string("method:does:", 12), &ctr_object_method_does);
 	ctr_internal_create_func(Object, ctr_build_string("on:do:", 6), &ctr_object_method_does);
 	ctr_internal_create_func(Object, ctr_build_string("override:does:", 14), &ctr_object_override_does);
