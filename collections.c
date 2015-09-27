@@ -22,7 +22,7 @@ obj* ctr_array_push(obj* myself, args* argumentList) {
 	obj* pushValue = argumentList->object;
 	int size = sizeof(obj*);
 	int offset = (myself->value.avalue->head * size);
-	long nbase = myself->value.avalue->elements;
+	long nbase = (long) myself->value.avalue->elements;
 	long locationa = nbase + offset;
 	*((obj**)locationa) = pushValue;
 	myself->value.avalue->head++;
