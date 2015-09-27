@@ -73,32 +73,35 @@ obj* ctr_object_on_do(obj* myself, args* argumentList) {
 	return myself;
 }
 
-
+/**
+ * OverrideDo
+ *
+ * Overrides the response of an object, replacing the
+ * code block with the one specified in the second parameter.
+ *
+ * You can still invoke the old response by sending the message:
+ * overridden-x where x is the original message.
+ *
+ * Usage:
+ * object override: 'test' do: {\ ... }.
+ * 
+ */
 obj* ctr_object_override_does(obj* myself, args* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
-	if (!argumentList->next) {
-		printf("Missing argument 2\n"); exit(1);
-	}
 	obj* methodName = argumentList->object;
 	if (methodName->info.type != OTSTRING) {
-		printf("Expected argument method: to be of type string.\n");
-		exit(1);
+		error = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
+		return myself;
 	}
 	args* nextArgument = argumentList->next;
-	if (!nextArgument->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
 	obj* methodBlock = nextArgument->object;
 	if (methodBlock->info.type != OTBLOCK) {
-		printf("Expected argument does: to be of type block.\n");
-		exit(1);
+		error = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
+		return myself;
 	}
 	obj* overriddenMethod = ctr_internal_object_find_property(myself, methodName, 1);
 	if (overriddenMethod == NULL) {
-		printf("Cannot override. No such method.");
-		exit(1);
+		error = ctr_build_string_from_cstring("Cannot override, original response not found.");
+		return myself;
 	}
 	char* superMethodNameString = malloc(sizeof(char) * (methodName->value.svalue->vlen + 11));
 	memcpy(superMethodNameString, "overridden-", (sizeof(char) * 11));

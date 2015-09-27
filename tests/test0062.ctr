@@ -2,4 +2,4 @@
 o = Object new.
 {\ o on: 2 do: 3.} catch: { e | Pen write: e. }, run.
 {\ o on: 'test' do: 3.} catch: { e | Pen write: e. }, run.
-
+{\ o overridden: 'test' does: 3.} catch: { e | Pen write: e. }, run.

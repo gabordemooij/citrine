@@ -9,7 +9,7 @@ Animal on: 'make' do: {\
 Cat = Object new.
 Cat on: 'make' do: {\
 	cat = Animal make.
-	cat override: 'makeSound' does: {\
+	cat override: 'makeSound' do: {\
 		Pen write: 'meow!!'.
 		me overridden-makeSound.
 	}.
