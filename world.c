@@ -398,6 +398,7 @@ void ctr_initialize_world() {
 	ctr_internal_object_add_property(World, ctr_build_string("Object", 6), Object, 0);
 	Console = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(Console, ctr_build_string("write:", 6), &ctr_console_write);
+	ctr_internal_create_func(Console, ctr_build_string("brk", 3), &ctr_console_brk);
 	ctr_internal_object_add_property(World, ctr_build_string("Pen", 3), Console, 0);
 	Console->link = Object;
 	Console->info.flagb = 1;

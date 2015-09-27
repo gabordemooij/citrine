@@ -158,3 +158,9 @@ obj* ctr_console_write(obj* myself, args* argumentList) {
 	fwrite(strObject->value.svalue->value, sizeof(char), strObject->value.svalue->vlen, stdout);
 	return myself;
 }
+
+
+obj* ctr_console_brk(obj* myself, args* argumentList) {
+	fwrite("\n", sizeof(char), 1, stdout);
+	return myself;
+}
