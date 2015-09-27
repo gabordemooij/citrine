@@ -389,7 +389,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(Object, ctr_build_string("equals:", 7), &ctr_object_equals);
 	ctr_internal_create_func(Object, ctr_build_string("on:do:", 6), &ctr_object_on_do);
 	ctr_internal_create_func(Object, ctr_build_string("override:do:", 12), &ctr_object_override_does);
-	ctr_internal_create_func(Object, ctr_build_string("basedOn:", 8), &ctr_object_blueprint);
+	ctr_internal_create_func(Object, ctr_build_string("basedOn:", 8), &ctr_object_basedOn);
 	ctr_internal_create_func(Object, ctr_build_string("respondTo:", 10), &ctr_object_respond);
 	ctr_internal_create_func(Object, ctr_build_string("respondTo:with:", 15), &ctr_object_respond);
 	ctr_internal_create_func(Object, ctr_build_string("respondTo:with:and:", 19), &ctr_object_respond);

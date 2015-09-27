@@ -113,18 +113,29 @@ obj* ctr_object_override_does(obj* myself, args* argumentList) {
 	return myself;
 }
 
+
+/**
+ * Default respond-to implemention, does nothing.
+ */
 obj* ctr_object_respond(obj* myself, args* argumentList) {
 	return myself;
 }
 
-obj* ctr_object_blueprint(obj* myself, args* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
+/**
+ * Uses the specified object as blueprint or prototype.
+ * If a message can't be answered by an object it will send the message
+ * to its prototype (and so on) before passing the message to the
+ * generic respond message handler.
+ * 
+ * Usage:
+ * 
+ * object new basedOn: parentObject.
+ */
+obj* ctr_object_basedOn(obj* myself, args* argumentList) {
 	obj* other = argumentList->object;
-	if (other->info.type != OTOBJECT) {
-		printf("Expected argument method: to be of type object.\n");
-		exit(1);
+	if (other == myself) {
+		error = ctr_build_string_from_cstring("Circular prototype.");
+		return myself;
 	}
 	myself->link = other;
 	return myself;

@@ -3,3 +3,4 @@ Expected argument do: to be of type block.
 Expected on: argument to be of type string.
 Expected argument do: to be of type block.
 Cannot override, original response not found.
+Circular prototype.
