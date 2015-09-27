@@ -130,6 +130,10 @@ obj* cwlk_expr(tnode* node) {
 	} else if (node->type == ENDOFPROGRAM) {
 		if (error) {
 			printf("Uncatched error has occurred.\n");
+			if (error->info.type == OTSTRING) {
+				fwrite(error->value.svalue->value, sizeof(char), error->value.svalue->vlen, stdout);
+				printf("\n");
+			}
 			exit(1);
 		}
 		exit(0);

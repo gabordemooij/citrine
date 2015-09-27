@@ -60,17 +60,14 @@ obj* ctr_object_equals(obj* myself, args* argumentList) {
 obj* ctr_object_on_do(obj* myself, args* argumentList) {
 	obj* methodName = argumentList->object;
 	if (methodName->info.type != OTSTRING) {
-		printf("Expected argument method: to be of type string.\n");
-		exit(1);
+		error = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
+		return myself;
 	}
 	args* nextArgument = argumentList->next;
-	if (!nextArgument->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
 	obj* methodBlock = nextArgument->object;
 	if (methodBlock->info.type != OTBLOCK) {
-		printf("Expected argument does: to be of type block.\n");
-		exit(1);
+		error = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
+		return myself;
 	}
 	ctr_internal_object_add_property(myself, methodName, methodBlock, 1);
 	return myself;
@@ -373,6 +370,10 @@ obj* ctr_build_string(char* stringValue, long size) {
 	stringObject->value.svalue->vlen = size;
 	stringObject->link = TextString;
 	return stringObject;
+}
+
+obj* ctr_build_string_from_cstring(char* cstring) {
+	return ctr_build_string(cstring, strlen(cstring));
 }
 
 obj* ctr_string_bytes(obj* myself, args* argumentList) {

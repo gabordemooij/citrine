@@ -171,6 +171,7 @@ obj* ctr_build_block(tnode* node);
 obj* ctr_build_number(char* object);
 obj* ctr_build_bool(int truth);
 obj* ctr_build_nil();
+obj* ctr_build_string_from_cstring( char* str );
 
 int __argc;
 char** __argv;
