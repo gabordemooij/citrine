@@ -504,7 +504,6 @@ void ctr_initialize_world() {
 	GC->link = Object;
 	Nil = ctr_internal_create_object(OTNIL);
 	ctr_internal_object_add_property(World, ctr_build_string("Nil", 3), Nil, 0);
-	ctr_internal_create_func(Nil, ctr_build_string("isNil", 5), &ctr_nil_isnil);
 	Nil->link = Object;
 }
 

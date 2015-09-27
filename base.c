@@ -5,17 +5,6 @@ obj* ctr_build_nil() {
 	return Nil;
 }
 
-obj* ctr_nil_isnil(obj* myself, args* argumentList) {
-	obj* truth;
-	if ((myself->info.type == OTNIL)) {
-		truth = ctr_build_bool(1);
-	} else {
-		truth = ctr_build_bool(0);
-	}
-	return truth;
-}
-
-
 
 
 /**
