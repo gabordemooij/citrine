@@ -1,7 +1,7 @@
 #test assignment objects, assignment by reference: hiboo!boo!
 a = Object new.
-a method: 'setVal:' does: { v | my value = v. }.
-a method: 'getVal' does: {\ ^ my value. }.
+a on: 'setVal:' do: { v | my value = v. }.
+a on: 'getVal' do: {\ ^ my value. }.
 a setVal: 'hi'.
 Pen write: a getVal.
 b = a.

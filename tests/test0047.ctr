@@ -1,5 +1,5 @@
 cat = Object new.
-cat method: 'work' does: {\
+cat on: 'work' do: {\
 	thisBlock error: 'Cats have personel for that!'.
 	Pen write: 'dont print this!'.
 }.

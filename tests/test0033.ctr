@@ -1,16 +1,13 @@
 #test assignment to my, same as 32 but with objects
 x = Object new.
-x method: 'set:' does: { v | my val = v. }.
-x method: 'get' does: {\ ^ my val. }.
+x on: 'set:' do: { v | my val = v. }.
+x on: 'get' do: {\ ^ my val. }.
 a = Object new.
-a method: 'init' does: {\
-	
+a on: 'init' do: {\
 	y = Object new basedOn: x.
 	y set: 123.
 	q = Object new basedOn: x.
 	q set: 666.
-	
 	Pen write: (y get) , write: (q get).
-	
 }.
 a init.

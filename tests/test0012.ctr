@@ -1,9 +1,9 @@
 Animal = Object new.
-Animal method: 'make' does: {\
+Animal on: 'make' do: {\
 	
 	animal = Object new.
 	
-	animal method: 'makeSound' does: {\
+	animal on: 'makeSound' do: {\
 		Pen write: '?'.
 	}.
 
@@ -11,7 +11,7 @@ Animal method: 'make' does: {\
 }.
 
 Cat = Object new.
-Cat method: 'make' does: {\
+Cat on: 'make' do: {\
 	cat = Animal make.
 	
 	cat on:'a' do: {\}.

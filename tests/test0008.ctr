@@ -1,17 +1,14 @@
 Greeter = Object new.
-Greeter method: 'make' does: {\
+Greeter on: 'make' do: {\
 	greeter = Object new.
-	
-	greeter method: 'name:' does: { name |
+	greeter on: 'name:' do: { name |
 		Pen write: 'setting a name'.
 		my myName = name.
 	}.
-	
-	greeter method: 'greet' does: {\
+	greeter on: 'greet' do: {\
 		Pen write: 'Hello'.
 		Pen write: my myName.
 	}.
-	
 	^greeter.
 }.
 greeter = Greeter make.

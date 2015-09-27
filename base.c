@@ -49,14 +49,15 @@ obj* ctr_object_equals(obj* myself, args* argumentList) {
 	return ctr_build_bool(0);
 }
 
-
-obj* ctr_object_method_does(obj* myself, args* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
-	if (!argumentList->next) {
-		printf("Missing argument 2\n"); exit(1);
-	}
+/**
+ * OnMessageDoAction
+ *
+ * Makes the object respond to a new kind of message.
+ *
+ * Usage:
+ * object on: 'greet' do {\ ... }.
+ */
+obj* ctr_object_on_do(obj* myself, args* argumentList) {
 	obj* methodName = argumentList->object;
 	if (methodName->info.type != OTSTRING) {
 		printf("Expected argument method: to be of type string.\n");
