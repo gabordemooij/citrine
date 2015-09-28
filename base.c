@@ -194,8 +194,7 @@ obj* ctr_bool_ifFalse(obj* myself, args* argumentList) {
  *
  */
 obj* ctr_bool_opposite(obj* myself, args* argumentList) {
-	if (myself->value.bvalue == 0) myself->value.bvalue = 1; else myself->value.bvalue = 0;
-	return myself;
+	return ctr_build_bool(!myself->value.bvalue);
 }
 
 /**
