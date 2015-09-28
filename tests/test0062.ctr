@@ -9,3 +9,5 @@ o on: 'hello' do: {\}.
 {\ o override: 'test' do: {\}.} catch: { e | Pen write: e, brk. }, run.
 {\ o basedOn: o. } catch: { e | Pen write: e, brk. }, run.
 {\ o basedOn: Nil. } catch: { e | Pen write: e, brk. }, run. #allowed
+{\ (True && Nil) ifTrue: {\ Pen write: 'X'.}. } catch: { e | Pen write: e, brk. }, run. #allowed
+{\ ('' || 0) ifTrue: {\ Pen write: 'X'.}. } catch: { e | Pen write: e, brk. }, run. #allowed

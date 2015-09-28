@@ -1,11 +1,12 @@
 
-
-
+/**
+ * Builds a Nil object.
+ *
+ * Literal form: Nil
+ */
 obj* ctr_build_nil() {	
 	return Nil;
 }
-
-
 
 /**
  * Root Object
@@ -130,11 +131,11 @@ obj* ctr_object_basedOn(obj* myself, args* argumentList) {
 	return myself;
 }
 
-
-
-
-
-
+/**
+ * Booleans.
+ * 
+ * Literal form: True False
+ */
 obj* ctr_build_bool(int truth) {
 	obj* boolObject = ctr_internal_create_object(OTBOOL);
 	if (truth) boolObject->value.bvalue = 1; else boolObject->value.bvalue = 0;
@@ -143,7 +144,16 @@ obj* ctr_build_bool(int truth) {
 	return boolObject;
 }
 
-obj* ctr_block_run(obj* myself, args* argList, obj* my);
+/**
+ * ifTrue
+ *
+ * Executes a block of code if the value of the boolean
+ * object is True.
+ *
+ * Usage:
+ * (some expression) ifTrue: {\ ... }.
+ *
+ */
 obj* ctr_bool_iftrue(obj* myself, args* argumentList) {
 	if (myself->value.bvalue) {
 		obj* codeBlock = argumentList->object;
@@ -154,6 +164,16 @@ obj* ctr_bool_iftrue(obj* myself, args* argumentList) {
 	return myself;
 }
 
+/**
+ * ifFalse
+ *
+ * Executes a block of code if the value of the boolean
+ * object is True.
+ *
+ * Usage:
+ * (some expression) ifFalse: {\ ... }.
+ *
+ */
 obj* ctr_bool_ifFalse(obj* myself, args* argumentList) {
 	if (!myself->value.bvalue) {
 		obj* codeBlock = argumentList->object;
@@ -164,35 +184,65 @@ obj* ctr_bool_ifFalse(obj* myself, args* argumentList) {
 	return myself;
 }
 
+/**
+ * Opposite
+ *
+ * Returns the opposite of the current value.
+ *
+ * Usage:
+ * Yes = No opposite.
+ *
+ */
 obj* ctr_bool_opposite(obj* myself, args* argumentList) {
 	if (myself->value.bvalue == 0) myself->value.bvalue = 1; else myself->value.bvalue = 0;
 	return myself;
 }
 
+/**
+ * BooleanAnd
+ *
+ * Returns True if both the object value is True and the
+ * argument is True as well.
+ *
+ * Usage:
+ *
+ * a && b
+ *
+ */
 obj* ctr_bool_and(obj* myself, args* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
-	if (argumentList->object->info.type != OTBOOL) {
-		printf("Argument of binary message && must be a boolean.\n"); exit(1);
-	}
-	return ctr_build_bool((myself->value.bvalue && argumentList->object->value.bvalue));
+	obj* other = ctr_internal_cast2bool(argumentList->object);
+	return ctr_build_bool((myself->value.bvalue && other->value.bvalue));
 }
 
+/**
+ * BooleanOr
+ *
+ * Returns True if either the object value is True or the
+ * argument is True or both are True.
+ *
+ * Usage:
+ *
+ * a || b
+ */
 obj* ctr_bool_or(obj* myself, args* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
-	if (argumentList->object->info.type != OTBOOL) {
-		printf("Argument of binary message || must be a boolean.\n"); exit(1);
-	}
-	return ctr_build_bool((myself->value.bvalue || argumentList->object->value.bvalue));
+	obj* other = ctr_internal_cast2bool(argumentList->object);	
+	return ctr_build_bool((myself->value.bvalue || other->value.bvalue));
 }
 
-
-
-
-
+/**
+ * BooleanXOR
+ *
+ * Returns True if either the object value is True or the
+ * argument is True but not both.
+ *
+ * Usage:
+ *
+ * a xor: b
+ */
+obj* ctr_bool_xor(obj* myself, args* argumentList) {
+	obj* other = ctr_internal_cast2bool(argumentList->object);	
+	return ctr_build_bool((myself->value.bvalue ^ other->value.bvalue));
+}
 
 //create number from \0 terminated string
 obj* ctr_build_number(char* n) {

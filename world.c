@@ -494,6 +494,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(BoolX, ctr_build_string("opposite", 8), &ctr_bool_opposite);
 	ctr_internal_create_func(BoolX, ctr_build_string("&&", 2), &ctr_bool_and);
 	ctr_internal_create_func(BoolX, ctr_build_string("||", 2), &ctr_bool_or);
+	ctr_internal_create_func(BoolX, ctr_build_string("xor:", 4), &ctr_bool_xor);
 	ctr_internal_object_add_property(World, ctr_build_string("Boolean", 7), BoolX, 0);
 	BoolX->link = Object;
 	GC = ctr_internal_create_object(OTOBJECT);

@@ -172,6 +172,7 @@ obj* ctr_build_number(char* object);
 obj* ctr_build_bool(int truth);
 obj* ctr_build_nil();
 obj* ctr_build_string_from_cstring( char* str );
+obj* ctr_block_run(obj* myself, args* argList, obj* my);
 
 int __argc;
 char** __argv;
