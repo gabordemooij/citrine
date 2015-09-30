@@ -243,7 +243,13 @@ obj* ctr_bool_xor(obj* myself, args* argumentList) {
 	return ctr_build_bool((myself->value.bvalue ^ other->value.bvalue));
 }
 
-//create number from \0 terminated string
+
+/**
+ * BuildNumber
+ *
+ * Creates a number from a C string (0 terminated).
+ * Internal use only.
+ */
 obj* ctr_build_number(char* n) {
 	obj* numberObject = ctr_internal_create_object(OTNUMBER);
 	numberObject->value.nvalue = atof(n);
@@ -251,6 +257,12 @@ obj* ctr_build_number(char* n) {
 	return numberObject;
 }
 
+/**
+ * BuildNumberFromFloat
+ *
+ * Creates a number object from a float.
+ * Internal use only.
+ */
 obj* ctr_build_number_from_float(float f) {
 	obj* numberObject = ctr_internal_create_object(OTNUMBER);
 	numberObject->value.nvalue = f;
@@ -258,52 +270,65 @@ obj* ctr_build_number_from_float(float f) {
 	return numberObject;
 }
 
+/**
+ * Number Comparison Operators
+ *
+ * Implementation of >, <, >=, <=, == and !=
+ */
 obj* ctr_number_higherThan(obj* myself, args* argumentList) {
-	obj* otherNum = argumentList->object;
-	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue > otherNum->value.nvalue));
 }
 
 obj* ctr_number_higherEqThan(obj* myself, args* argumentList) {
-	obj* otherNum = argumentList->object;
-	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue >= otherNum->value.nvalue));
 }
 
 obj* ctr_number_lowerThan(obj* myself, args* argumentList) {
-	obj* otherNum = argumentList->object;
-	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue < otherNum->value.nvalue));
 }
 
 obj* ctr_number_lowerEqThan(obj* myself, args* argumentList) {
-	obj* otherNum = argumentList->object;
-	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue <= otherNum->value.nvalue));
 }
 
 obj* ctr_number_eq(obj* myself, args* argumentList) {
-	obj* otherNum = argumentList->object;
-	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool(myself->value.nvalue == otherNum->value.nvalue);
 }
 
 obj* ctr_number_neq(obj* myself, args* argumentList) {
-	obj* otherNum = argumentList->object;
-	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool(myself->value.nvalue != otherNum->value.nvalue);
 }
 
+/**
+ * BetweenAnd
+ *
+ * Returns True if the number instance has a value between the two
+ * specified values.
+ *
+ * Usage:
+ * q between: x and: y
+ */
 obj* ctr_number_between(obj* myself, args* argumentList) {
-	obj* otherNum = argumentList->object;
-	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
-	if (!argumentList->next) { printf("Expected second number."); exit(1); }
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
 	args* nextArgumentItem = argumentList->next;
-	obj* nextArgument = nextArgumentItem->object;
-	if (nextArgument->info.type != OTNUMBER) { printf("Expected second argument to be number."); exit(1); }
+	obj* nextArgument = ctr_internal_cast2number(nextArgumentItem->object);
 	return ctr_build_bool((myself->value.nvalue >=  otherNum->value.nvalue) && (myself->value.nvalue <= nextArgument->value.nvalue));
 }
 
+
+/**
+ * Arithmetic
+ * 
+ * The following functions implement basic arithmetic operations:
+ * 
+ * + - / * inc dec mul div
+ */
 obj* ctr_string_concat(obj* myself, args* argumentList);
 obj* ctr_number_add(obj* myself, args* argumentList) {
 	obj* otherNum = argumentList->object;
@@ -314,7 +339,6 @@ obj* ctr_number_add(obj* myself, args* argumentList) {
 		newArg->object = otherNum;
 		return ctr_string_concat(strObject, newArg);
 	}
-	else if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
 	float a = myself->value.nvalue;
 	float b = otherNum->value.nvalue;
 	return ctr_build_number_from_float((a+b));
@@ -322,61 +346,53 @@ obj* ctr_number_add(obj* myself, args* argumentList) {
 
 
 obj* ctr_number_inc(obj* myself, args* argumentList) {
-	obj* otherNum = argumentList->object;
-	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
 	myself->value.nvalue += otherNum->value.nvalue;
 	return myself;
 }
 
 obj* ctr_number_minus(obj* myself, args* argumentList) {
-	obj* otherNum = argumentList->object;
-	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
 	float a = myself->value.nvalue;
 	float b = otherNum->value.nvalue;
 	return ctr_build_number_from_float((a-b));
 }
 
 obj* ctr_number_dec(obj* myself, args* argumentList) {
-	obj* otherNum = argumentList->object;
-	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
 	myself->value.nvalue -= otherNum->value.nvalue;
 	return myself;
 }
 
 obj* ctr_number_multiply(obj* myself, args* argumentList) {
-	obj* otherNum = argumentList->object;
-	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
 	float a = myself->value.nvalue;
 	float b = otherNum->value.nvalue;
 	return ctr_build_number_from_float(a*b);
 }
 
 obj* ctr_number_mul(obj* myself, args* argumentList) {
-	obj* otherNum = argumentList->object;
-	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
 	myself->value.nvalue *= otherNum->value.nvalue;
 	return myself;
 }
 
-
 obj* ctr_number_divide(obj* myself, args* argumentList) {
-	obj* otherNum = argumentList->object;
-	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
 	float a = myself->value.nvalue;
 	float b = otherNum->value.nvalue;
 	if (b == 0) {
-		printf("Division by zero.");
-		exit(1);
+		error = ctr_build_string_from_cstring("Division by zero.");
+		return myself;
 	}
 	return ctr_build_number_from_float((a/b));
 }
 
 obj* ctr_number_div(obj* myself, args* argumentList) {
-	obj* otherNum = argumentList->object;
-	if (otherNum->info.type != OTNUMBER) { printf("Expected number."); exit(1); }
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
 	if (otherNum->value.nvalue == 0) {
-		printf("Division by zero.");
-		exit(1);
+		error = ctr_build_string_from_cstring("Division by zero.");
+		return myself;
 	}
 	myself->value.nvalue /= otherNum->value.nvalue;
 	return myself;

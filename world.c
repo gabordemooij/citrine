@@ -308,6 +308,17 @@ void ctr_internal_create_func(obj* o, obj* key, void* f ) {
 	ctr_internal_object_add_property(o, key, methodObject, 1);
 }
 
+obj* ctr_internal_cast2number(obj* o) {
+	if (o->info.type == OTNUMBER) return o;
+	if (o->info.type == OTSTRING) {
+		char* cstring = malloc((o->value.svalue->vlen+1)*sizeof(char));
+		memcpy(cstring, o->value.svalue->value, o->value.svalue->vlen);
+		memcpy((char*)((long)cstring+(o->value.svalue->vlen*sizeof(char))),"\0", sizeof(char));
+		return ctr_build_number(cstring);
+	}
+	return ctr_build_number("0");
+}
+
 obj* ctr_internal_cast2string( obj* o ) {
 	if (o->info.type == OTSTRING) return o;
 	else if (o->info.type == OTNIL) { return ctr_build_string("[Nil]", 5); }
