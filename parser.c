@@ -28,10 +28,6 @@ tnode* cparse_message(int mode) {
 	int ulen = getutf8len(msg, msgpartlen);
 	int isBin = (ulen == 1);
 	
-	//printf("---> %s is bin : %d  %d %d  \n", msg, ulen, isBin, msgpartlen);
-	
-	//int isBin = (msgpartlen == 2 && (strncmp("&&",msg,2)==0 || strncmp("||",msg, 2)==0 || strncmp("==",msg,2)==0 || strncmp("!=",msg,2)==0 || strncmp(">=",msg,2)==0 || strncmp("<=",msg,2)==0));
-	//isBin = (isBin || (msgpartlen==1 && (strncmp(">",msg,1)==0 || strncmp("<",msg,1)==0 || strncmp("*",msg,1)==0 || strncmp("/",msg,1)==0 || strncmp("+",msg,1)==0 || strncmp("-",msg,1)==0)));
 	if (mode == 2 && isBin) {
 		clex_putback();
 		return m;

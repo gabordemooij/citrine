@@ -161,7 +161,6 @@ int ctr_internal_object_is_equal(obj* object1, obj* object2) {
 
 obj* ctr_internal_object_find_property(obj* owner, obj* key, int is_method) {
 	
-//	printf("owner has %d props.\n", owner->properties->size);
 	cmapitem* head;
 	if (is_method) {
 		if (owner->methods->size == 0) {
