@@ -1,4 +1,4 @@
-(('abcdef' from: 2 to: 5 - 1) == 'cde') ifTrue: {\ Pen write: 'yes'.}.
+(('abcdef' from: 2 to: 5 - 1) = 'cde') ifTrue: {\ Pen write: 'yes'.}.
 Pen write: 'a' + 1.
 Pen write: 'x' + 3.5.
 Pen write: 'y' + True.

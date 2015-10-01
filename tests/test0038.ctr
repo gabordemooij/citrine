@@ -1,6 +1,6 @@
-x = Object new.
+x := Object new.
 x basedOn: Map.
 x put: 'hello' at: 'world'.
-d = x at: 'world'.
+d := x at: 'world'.
 Pen write: d.
 

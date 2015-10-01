@@ -1,2 +1,2 @@
-greeter = 'Hello World'.
+greeter := 'Hello World'.
 Pen write: greeter.

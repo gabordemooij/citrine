@@ -1,12 +1,12 @@
-a = Object new.
-x = 0.
+a := Object new.
+x := 0.
 a on: 'test1' do: {\
-	x = 123.
+	x := 123.
 }.
 a test1.
 #x should still be 0.
 Pen write: x.
-b = Object new.
+b := Object new.
 b on: 'test2' do: {\
 	#x should be 0! not 123...
 	Pen write: x.

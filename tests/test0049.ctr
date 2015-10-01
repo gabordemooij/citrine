@@ -1,5 +1,5 @@
-f1 = File new: 'notafile'.
-f2 = File new: '/tmp/test.txt'.
+f1 := File new: 'notafile'.
+f2 := File new: '/tmp/test.txt'.
 (f2 exists) ifTrue: {\ f2 delete.}.
 Pen write: f2 path.
 f2 write: 'Hello!'.

@@ -1,10 +1,10 @@
-x = Object new.
-x on: 'a' do: {\
-	my a = 2.
-	a = 1.
+x := Object new.
+x on: 'getA' do: {\
+	my a := 2.
+	a := 1.
 	Pen write: a.
 	Pen write: my a.
 }.
-a = 3.
-x a.
+a := 3.
+x getA.
 Pen write: a.

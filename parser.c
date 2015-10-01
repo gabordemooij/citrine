@@ -22,10 +22,16 @@ tnode* cparse_message(int mode) {
 	msgpartlen = clex_tok_value_length();
 	char* s = clex_tok_value();
 	char* msg;
-	msg = malloc(255);
+	msg = malloc(msgpartlen * sizeof(char));
 	memcpy(msg, s, msgpartlen);
-	int isBin = (msgpartlen == 2 && (strncmp("&&",msg,2)==0 || strncmp("||",msg, 2)==0 || strncmp("==",msg,2)==0 || strncmp("!=",msg,2)==0 || strncmp(">=",msg,2)==0 || strncmp("<=",msg,2)==0));
-	isBin = (isBin || (msgpartlen==1 && (strncmp(">",msg,1)==0 || strncmp("<",msg,1)==0 || strncmp("*",msg,1)==0 || strncmp("/",msg,1)==0 || strncmp("+",msg,1)==0 || strncmp("-",msg,1)==0)));
+	
+	int ulen = getutf8len(msg, msgpartlen);
+	int isBin = (ulen == 1);
+	
+	//printf("---> %s is bin : %d  %d %d  \n", msg, ulen, isBin, msgpartlen);
+	
+	//int isBin = (msgpartlen == 2 && (strncmp("&&",msg,2)==0 || strncmp("||",msg, 2)==0 || strncmp("==",msg,2)==0 || strncmp("!=",msg,2)==0 || strncmp(">=",msg,2)==0 || strncmp("<=",msg,2)==0));
+	//isBin = (isBin || (msgpartlen==1 && (strncmp(">",msg,1)==0 || strncmp("<",msg,1)==0 || strncmp("*",msg,1)==0 || strncmp("/",msg,1)==0 || strncmp("+",msg,1)==0 || strncmp("-",msg,1)==0)));
 	if (mode == 2 && isBin) {
 		clex_putback();
 		return m;

@@ -1,9 +1,9 @@
-a = 3 + 2 + 10 + 1 - 3.
+a := 3 + 2 + 10 + 1 - 3.
 Pen write: a.
-b = 2 + 3 factorial.
+b := 2 + 3 factorial.
 Pen write: b.
-c = 3 factorial + 2.
+c := 3 factorial + 2.
 Pen write: c.
-d = 2 + (3 factorial).
+d := 2 + (3 factorial).
 Pen write: d.
 Pen write: 2 + 3 factorial + 1.

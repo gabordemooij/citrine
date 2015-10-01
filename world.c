@@ -423,11 +423,11 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(Number, ctr_build_string("/",1), &ctr_number_divide);
 	ctr_internal_create_func(Number, ctr_build_string("div:",4),&ctr_number_div);
 	ctr_internal_create_func(Number, ctr_build_string(">",1),&ctr_number_higherThan);
-	ctr_internal_create_func(Number, ctr_build_string(">=",2),&ctr_number_higherEqThan);
+	ctr_internal_create_func(Number, ctr_build_string("≥",3),&ctr_number_higherEqThan);
 	ctr_internal_create_func(Number, ctr_build_string("<",1),&ctr_number_lowerThan);
-	ctr_internal_create_func(Number, ctr_build_string("<=",2),&ctr_number_lowerEqThan);
-	ctr_internal_create_func(Number, ctr_build_string("==",2),&ctr_number_eq);
-	ctr_internal_create_func(Number, ctr_build_string("!=",2),&ctr_number_neq);
+	ctr_internal_create_func(Number, ctr_build_string("≤",3),&ctr_number_lowerEqThan);
+	ctr_internal_create_func(Number, ctr_build_string("=",1),&ctr_number_eq);
+	ctr_internal_create_func(Number, ctr_build_string("≠",3),&ctr_number_neq);
 	ctr_internal_create_func(Number, ctr_build_string("times:",6),&ctr_number_times);
 	ctr_internal_create_func(Number, ctr_build_string("factorial",9),&ctr_number_factorial);
 	ctr_internal_create_func(Number, ctr_build_string("between:and:",12),&ctr_number_between);
@@ -460,7 +460,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(TextString, ctr_build_string("length", 6), &ctr_string_length);
 	ctr_internal_create_func(TextString, ctr_build_string("from:to:", 8), &ctr_string_fromto);
 	ctr_internal_create_func(TextString, ctr_build_string("+", 1), &ctr_string_concat);
-	ctr_internal_create_func(TextString, ctr_build_string("==", 2), &ctr_string_eq);
+	ctr_internal_create_func(TextString, ctr_build_string("=", 1), &ctr_string_eq);
 	ctr_internal_object_add_property(World, ctr_build_string("String", 6), TextString, 0);
 	TextString->link = Object;
 	CMap = ctr_internal_create_object(OTOBJECT);
@@ -503,8 +503,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(BoolX, ctr_build_string("ifTrue:", 7), &ctr_bool_iftrue);
 	ctr_internal_create_func(BoolX, ctr_build_string("ifFalse:", 8), &ctr_bool_ifFalse);
 	ctr_internal_create_func(BoolX, ctr_build_string("opposite", 8), &ctr_bool_opposite);
-	ctr_internal_create_func(BoolX, ctr_build_string("&&", 2), &ctr_bool_and);
-	ctr_internal_create_func(BoolX, ctr_build_string("||", 2), &ctr_bool_or);
+	ctr_internal_create_func(BoolX, ctr_build_string("∧", 3), &ctr_bool_and);
+	ctr_internal_create_func(BoolX, ctr_build_string("∨", 3), &ctr_bool_or);
 	ctr_internal_create_func(BoolX, ctr_build_string("xor:", 4), &ctr_bool_xor);
 	ctr_internal_object_add_property(World, ctr_build_string("Boolean", 7), BoolX, 0);
 	BoolX->link = Object;

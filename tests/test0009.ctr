@@ -1,9 +1,9 @@
-Greeter = Object new.
+Greeter := Object new.
 Greeter on: 'make' do: {\
-	greeter = Object new.
+	greeter := Object new.
 	greeter on: 'name:' do: { name |
 		Pen write: 'setting a name'.
-		my myName = name.
+		my myName := name.
 	}.
 	greeter on: 'performGreeting' do: {\
 		Pen write: 'Hello'.
@@ -14,6 +14,6 @@ Greeter on: 'make' do: {\
 	}.
 	^greeter.
 }.
-greeter = Greeter make.
+greeter := Greeter make.
 greeter name: 'sunshine!'.
 greeter greet.

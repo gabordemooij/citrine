@@ -1,13 +1,13 @@
 Pen write: 'hi!'.
-a = 2.
-x = 2.
-{\ c = 3. Pen write: 'x'. t = 1. } run.
+a := 2.
+x := 2.
+{\ c := 3. Pen write: 'x'. t := 1. } run.
 Broom sweep.
 Pen write: 'dust = ' + Broom dust.
 #Pen write: 'objects = ' + Broom objectCount.
-q = 2.
-a = 22.
-t = {\ d = 3. z = 'hello'. Pen write: z.}.
+q := 2.
+a := 22.
+t := {\ d := 3. z := 'hello'. Pen write: z.}.
 t run.
 Broom sweep.
 Pen write: 'dust = ' + Broom dust.

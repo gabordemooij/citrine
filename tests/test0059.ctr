@@ -1,8 +1,8 @@
 #Objects in arrays need to be preserved as well
 #if their containing array is still in scope
-z = Array new.
+z := Array new.
 {\
-	x = 'hello'.
+	x := 'hello'.
 	z push: x.
 } run.
 Pen write: (z at: 0).

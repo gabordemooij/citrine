@@ -1,8 +1,8 @@
 #test assignment, strings etc copied by value: HelloHelloWorld
-a = 'Hello'.
-c = a.
+a := 'Hello'.
+c := a.
 Pen write: a.
-c = 'World'.
+c := 'World'.
 Pen write: a.
-a = '!'.
+a := '!'.
 Pen write: c.

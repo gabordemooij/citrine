@@ -1,10 +1,10 @@
 #object equals test
-a = 'hello'.
-b = 'hello'.
-z = a.
-c = Nil.
-q = Object new.
-p = q.
+a := 'hello'.
+b := 'hello'.
+z := a.
+c := Nil.
+q := Object new.
+p := q.
 (a equals: a) ifTrue: {\ Pen write: 'Y1'. }. #equal, same var
 (a equals: b) ifTrue: {\ Pen write: 'Y2'. }. #not equal, different var
 (a equals: c) ifTrue: {\ Pen write: 'Y3'. }. #not equal, c is Nil

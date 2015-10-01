@@ -1,4 +1,4 @@
 5 times: {\ Pen write: 'ho'. }.
 
-a = Object new.
+a := Object new.
 Pen write: a.

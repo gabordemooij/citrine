@@ -1,7 +1,7 @@
-Animal = Object new.
+Animal := Object new.
 Animal on: 'make' do: {\
 	
-	animal = Object new.
+	animal := Object new.
 	
 	animal on: 'makeSound' do: {\
 		Pen write: '?'.
@@ -10,9 +10,9 @@ Animal on: 'make' do: {\
 	^animal.
 }.
 
-Cat = Object new.
+Cat := Object new.
 Cat on: 'make' do: {\
-	cat = Animal make.
+	cat := Animal make.
 	
 	cat on:'a' do: {\}.
 	cat override: 'makeSound' do: {\
@@ -23,8 +23,8 @@ Cat on: 'make' do: {\
 	^cat.
 }.
 
-CatObject = Cat make.
-tom = Object new.
+CatObject := Cat make.
+tom := Object new.
 tom basedOn: CatObject.
 tom makeSound.
 

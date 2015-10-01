@@ -1,11 +1,11 @@
 1000 times: {\
-	a = 'First'.
-	b = 'Second'.
-	a = b.
-	garbageMaker = Object new.
+	a := 'First'.
+	b := 'Second'.
+	a := b.
+	garbageMaker := Object new.
 	garbageMaker method: 'putGarbageOnScreen' does: {\
-		x = 1.
-		y = 2.
+		x := 1.
+		y := 2.
 		Broom sweep.
 	}.
 	garbageMaker putGarbageOnScreen.

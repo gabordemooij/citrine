@@ -1,29 +1,29 @@
 #numbers, pass by value
-a = 3.
-b = a.
+a := 3.
+b := a.
 a dec: 1.
 Pen write: ' a = ' + a.
 Pen write: ' b = ' + b.
-a = 3.
-b = a + 4.
+a := 3.
+b := a + 4.
 Pen write: ' a = ' + a.
 Pen write: ' b = ' + b.
-x = 3.
-y = x.
+x := 3.
+y := x.
 x inc: 10.
 y dec: 1.
 Pen write: ' x = ' + x.
 Pen write: ' y = ' + y.
 #strings
 #objects
-q = Object new.
+q := Object new.
 q on: 'setProperty:' do: { x |
-	my prop = x.
+	my prop := x.
 }.
 q on: 'getProperty' do: {\
 	^ my prop.
 }.
 q setProperty: 9.
-p = q.
+p := q.
 q setProperty: 6.
 Pen write: ' p = ' + (p getProperty).

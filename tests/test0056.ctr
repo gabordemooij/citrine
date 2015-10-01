@@ -1,14 +1,14 @@
-z = Object new.
+z := Object new.
 z on: 'value:' do: { v |
-	my value = v.
+	my value := v.
 	^ me.
 }.
 z on: 'value' do: {\ ^ my value. }.
 (z setValue: 1) value: 2.
 Pen write: z value.
-x = z.
+x := z.
 Pen write: x value.
-z = Nil.
+z := Nil.
 Pen write: z value. #should print [Nil]
 Pen write: x value. #x should still have a reference to the object z had
 Pen write: 'hello'.

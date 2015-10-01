@@ -66,11 +66,12 @@ int clex_tok() {
 	
 	if (c == '.') { code++; return DOT; }
 	if (c == ',') { code++; return CHAIN; }
-	if (c == ':') { code++; return COLON; }
-	if (c == '=' && (code+1)<eofcode && (*(code+1)!='=')) { 
-		code++;
+	if (c == ':' && (code+1)<eofcode && (*(code+1)=='=')) {
+		code += 2;
 		return ASSIGNMENT; 
 	}
+	if (c == ':') { code++; return COLON; }
+	
 	if (c == '^') { code++; return RET; }
 	if (c == '\'') { code++; return QUOTE; }
 	if ((c == '-' && (code+1)<eofcode && isdigit(*(code+1))) || isdigit(c)) {
@@ -119,68 +120,48 @@ int clex_tok() {
 			return NIL;
 		}
 	}
-	if (strncmp(code, ">=", 2)==0){
-		code += 2;
-		tokvlen = 2; memcpy(buffer, ">=", 2);
-		return REF;
+	
+	//these symbols are special because we often like to use
+	//them without spacing: 1+2 instead of 1 + 2.
+	if (c=='+' || c=='-' || c=='/' || c=='*') {
+		code++; tokvlen = 1; buffer[i] = c; return REF;
 	}
-	if (strncmp(code, "<=", 2)==0){
-		code += 2;
-		tokvlen = 2; memcpy(buffer, "<=", 2);
-		return REF;
+	//these are also special, they are easy notations for unicode symbols.
+	//we also return directly because we would like to use them without spaces as well: 1>=2...
+	if ((code+1)<eofcode) {
+		if (((char)*(code) == '>') && ((char)*(code+1)=='=')){
+			code +=2; tokvlen = 3; memcpy(buffer, "≥", 3); return REF;
+		}
+		if (((char)*(code) == '<') && ((char)*(code+1)=='=')){
+			code +=2; tokvlen = 3; memcpy(buffer, "≤ ", 3); return REF;
+		}
+		if (((char)*(code) == '!') && ((char)*(code+1)=='=')){
+			code +=2; tokvlen = 3; memcpy(buffer, "≠", 3); return REF;
+		}
+		if (((char)*(code) == '|') && ((char)*(code+1)=='|')){
+			code +=2; tokvlen = 3; memcpy(buffer, "∨", 3); return REF;
+		}
+		if (((char)*(code) == '&') && ((char)*(code+1)=='&')){
+			code +=2; tokvlen = 3; memcpy(buffer, "∧", 3); return REF;
+		}
+		//be very nice, accidental == will be converted to =
+		if (((char)*(code) == '=') && ((char)*(code+1)=='=')){
+			code +=2; tokvlen = 1; memcpy(buffer, "=", 1); return REF;
+		}
+	}
+	//later because we tolerate == as well.
+	if (c=='=' || c=='>' || c =='<') {
+		code++; tokvlen = 1; buffer[i] = c; return REF;
 	}
 	
-	if (strncmp(code, "==", 2)==0){
-		code += 2;
-		tokvlen = 2; memcpy(buffer, "==", 2);
-		return REF;
-	}
 	
-	if (strncmp(code, "!=", 2)==0){
-		code += 2;
-		tokvlen = 2; memcpy(buffer, "!=", 2);
-		return REF;
-	}
 	
-	if (strncmp(code, "||", 2)==0){
-		code += 2;
-		tokvlen = 2; memcpy(buffer, "||", 2);
-		return REF;
-	}
 	
 	if (c == '|' || c == '\\') { code++; return BLOCKPIPE; }
 	
-	if (strncmp(code, "&&", 2)==0){
-		code += 2;
-		tokvlen = 2; memcpy(buffer, "&&", 2);
-		return REF;
-	}
-
-	if (strncmp(code, "*", 1)==0){
-		code += 1;
-		tokvlen = 1; memcpy(buffer, "*", 1);
-		return REF;
-	}
-
-	if (strncmp(code, "/", 1)==0){
-		code += 1;
-		tokvlen = 1; memcpy(buffer, "/", 1);
-		return REF;
-	}
-
-	if (strncmp(code, "+", 1)==0){
-		code += 1;
-		tokvlen = 1; memcpy(buffer, "+", 1);
-		return REF;
-	}
-
-	if (strncmp(code, "-", 1)==0){
-		code += 1;
-		tokvlen = 1; memcpy(buffer, "-", 1);
-		return REF;
-	}
-
-	while(!isspace(c) && CTR_IS_NO_TOK(c) && code!=eofcode) {
+	while(!isspace(c) && CTR_IS_NO_TOK(c) && code!=eofcode
+	&& c != '+' && c!='*' && c!='/' && c!='=' && c!='>' && c!='<' && c!='&' //and c is not one of the special symbols
+	) {
 		buffer[i] = c; tokvlen++;
 		i++;
 		if (i > bflmt) {
