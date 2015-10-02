@@ -461,6 +461,14 @@ obj* ctr_string_eq(obj* myself, args* argumentList) {
 	return ctr_build_bool((strncmp(argumentList->object->value.svalue->value, myself->value.svalue->value, myself->value.svalue->vlen)==0));
 }
 
+obj* ctr_string_neq(obj* myself, args* argumentList) {
+	if (argumentList->object->value.svalue->vlen != myself->value.svalue->vlen) {
+		return ctr_build_bool(1);
+	}
+	return ctr_build_bool(!(strncmp(argumentList->object->value.svalue->value, myself->value.svalue->value, myself->value.svalue->vlen)==0));
+}
+
+
 obj* ctr_string_length(obj* myself, args* argumentList) {
 	long n = getutf8len(myself->value.svalue->value, myself->value.svalue->vlen);
 	char* str = calloc(100, sizeof(char));

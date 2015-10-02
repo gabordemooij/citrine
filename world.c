@@ -460,6 +460,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(TextString, ctr_build_string("from:to:", 8), &ctr_string_fromto);
 	ctr_internal_create_func(TextString, ctr_build_string("+", 1), &ctr_string_concat);
 	ctr_internal_create_func(TextString, ctr_build_string("=", 1), &ctr_string_eq);
+	ctr_internal_create_func(TextString, ctr_build_string("≠", 3), &ctr_string_neq);
 	ctr_internal_object_add_property(World, ctr_build_string("String", 6), TextString, 0);
 	TextString->link = Object;
 	CMap = ctr_internal_create_object(OTOBJECT);
