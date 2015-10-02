@@ -398,7 +398,11 @@ obj* ctr_number_div(obj* myself, args* argumentList) {
 	return myself;
 }
 
-
+/**
+ * Factorial
+ *
+ * Calculates the factorial of a number.
+ */
 obj* ctr_number_factorial(obj* myself, args* argumentList) {
 	float t = myself->value.nvalue;
 	int i;
@@ -410,6 +414,14 @@ obj* ctr_number_factorial(obj* myself, args* argumentList) {
 	return myself;
 }
 
+/**
+ * Times
+ *
+ * Runs the specified code block N times.
+ *
+ * Usage:
+ * 7 times: { ... }.
+ */
 obj* ctr_number_times(obj* myself, args* argumentList) {
 	obj* block = argumentList->object;
 	if (block->info.type != OTBLOCK) { printf("Expected code block."); exit(1); }
@@ -429,9 +441,11 @@ obj* ctr_number_times(obj* myself, args* argumentList) {
 	return myself;
 }
 
-
-
-
+/**
+ * BuildString
+ *
+ * Creates a Citrine String object.
+ */
 obj* ctr_build_string(char* stringValue, long size) {
 	obj* stringObject = ctr_internal_create_object(OTSTRING);
 	ASSIGN_STRING(stringObject->value.svalue, value, stringValue, size);
@@ -440,10 +454,20 @@ obj* ctr_build_string(char* stringValue, long size) {
 	return stringObject;
 }
 
+/**
+ * BuildStringFromCString
+ *
+ * Creates a Citrine String from a 0 terminated C String.
+ */
 obj* ctr_build_string_from_cstring(char* cstring) {
 	return ctr_build_string(cstring, strlen(cstring));
 }
 
+/**
+ * StringBytes
+ *
+ * Returns the number of bytes in a string.
+ */
 obj* ctr_string_bytes(obj* myself, args* argumentList) {
 	char* str = calloc(100, sizeof(char));
 	long l = (myself->value.svalue->vlen);
@@ -451,16 +475,23 @@ obj* ctr_string_bytes(obj* myself, args* argumentList) {
 	return ctr_build_number(str);
 }
 
+/**
+ * StringEquality
+ *
+ * Returns True if the other string is the same (in bytes).
+ */
 obj* ctr_string_eq(obj* myself, args* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
 	if (argumentList->object->value.svalue->vlen != myself->value.svalue->vlen) {
 		return ctr_build_bool(0);
 	}
 	return ctr_build_bool((strncmp(argumentList->object->value.svalue->value, myself->value.svalue->value, myself->value.svalue->vlen)==0));
 }
 
+/**
+ * StringNonEquality
+ *
+ * Returns True if the other string is not the same (in bytes).
+ */
 obj* ctr_string_neq(obj* myself, args* argumentList) {
 	if (argumentList->object->value.svalue->vlen != myself->value.svalue->vlen) {
 		return ctr_build_bool(1);
@@ -468,7 +499,12 @@ obj* ctr_string_neq(obj* myself, args* argumentList) {
 	return ctr_build_bool(!(strncmp(argumentList->object->value.svalue->value, myself->value.svalue->value, myself->value.svalue->vlen)==0));
 }
 
-
+/**
+ * StringLength
+ *
+ * Returns the length of the string in symbols.
+ * This message is UTF-8 unicode aware. A 4 byte character will be counted as ONE.
+ */
 obj* ctr_string_length(obj* myself, args* argumentList) {
 	long n = getutf8len(myself->value.svalue->value, myself->value.svalue->vlen);
 	char* str = calloc(100, sizeof(char));
@@ -476,6 +512,11 @@ obj* ctr_string_length(obj* myself, args* argumentList) {
 	return ctr_build_number(str);
 }
 
+/**
+ * StringBytes
+ *
+ * Returns the number of bytes in a string.
+ */
 obj* ctr_string_printbytes(obj* myself, args* argumentList) {
 	char* str = myself->value.svalue->value;
 	long n = myself->value.svalue->vlen;
@@ -485,6 +526,12 @@ obj* ctr_string_printbytes(obj* myself, args* argumentList) {
 	return myself;
 }
 
+/**
+ * StringConcat
+ *
+ * Appends other string to self and returns the resulting
+ * string as a new object.
+ */
 obj* ctr_string_concat(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
@@ -500,6 +547,15 @@ obj* ctr_string_concat(obj* myself, args* argumentList) {
 	return newString;	
 }
 
+/**
+ * StringFromTo
+ *
+ * Returns a portion of a string defined by from-to values.
+ * This message is UTF-8 unicode aware.
+ *
+ * Usage:
+ * 'hello' from: 1 to: 3.
+ */
 obj* ctr_string_fromto(obj* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
