@@ -398,6 +398,39 @@ obj* ctr_number_div(obj* myself, args* argumentList) {
 	return myself;
 }
 
+obj* ctr_number_modulo(obj* myself, args* argumentList) {
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
+	float a = myself->value.nvalue;
+	float b = otherNum->value.nvalue;
+	if (b == 0) {
+		error = ctr_build_string_from_cstring("Division by zero.");
+		return myself;
+	}
+	return ctr_build_number_from_float(fmod(a,b));
+}
+
+obj* ctr_number_pow(obj* myself, args* argumentList) {
+	printf("+++\n");
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
+	float a = myself->value.nvalue;
+	float b = otherNum->value.nvalue;
+	return ctr_build_number_from_float(pow(a,b));
+}
+
+obj* ctr_number_max(obj* myself, args* argumentList) {
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
+	float a = myself->value.nvalue;
+	float b = otherNum->value.nvalue;
+	return ctr_build_number_from_float((a >= b) ? a : b);
+}
+
+obj* ctr_number_min(obj* myself, args* argumentList) {
+	obj* otherNum = ctr_internal_cast2number(argumentList->object);
+	float a = myself->value.nvalue;
+	float b = otherNum->value.nvalue;
+	return ctr_build_number_from_float((a <= b) ? a : b);
+}
+
 /**
  * Factorial
  *
@@ -410,9 +443,57 @@ obj* ctr_number_factorial(obj* myself, args* argumentList) {
 	for(i = (int) t; i > 0; i--) {
 		a = a * i;
 	}
-	myself->value.nvalue = a;
-	return myself;
+	return ctr_build_number_from_float(a);
 }
+
+/**
+ * Some basic math functions: floor, ceil, round, abs, sqrt, pow, sin, cos
+ * tan, atan and log.
+ */
+obj* ctr_number_floor(obj* myself, args* argumentList) {
+	return ctr_build_number_from_float(floor(myself->value.nvalue));
+}
+
+obj* ctr_number_ceil(obj* myself, args* argumentList) {
+	return ctr_build_number_from_float(ceil(myself->value.nvalue));
+}
+
+obj* ctr_number_round(obj* myself, args* argumentList) {
+	return ctr_build_number_from_float(round(myself->value.nvalue));
+}
+
+obj* ctr_number_abs(obj* myself, args* argumentList) {
+	return ctr_build_number_from_float(fabs(myself->value.nvalue));
+}
+
+obj* ctr_number_sqrt(obj* myself, args* argumentList) {
+	return ctr_build_number_from_float(sqrt(myself->value.nvalue));
+}
+
+obj* ctr_number_exp(obj* myself, args* argumentList) {
+	return ctr_build_number_from_float(exp(myself->value.nvalue));
+}
+
+obj* ctr_number_sin(obj* myself, args* argumentList) {
+	return ctr_build_number_from_float(sin(myself->value.nvalue));
+}
+
+obj* ctr_number_cos(obj* myself, args* argumentList) {
+	return ctr_build_number_from_float(cos(myself->value.nvalue));
+}
+
+obj* ctr_number_tan(obj* myself, args* argumentList) {
+	return ctr_build_number_from_float(tan(myself->value.nvalue));
+}
+
+obj* ctr_number_atan(obj* myself, args* argumentList) {
+	return ctr_build_number_from_float(atan(myself->value.nvalue));
+}
+
+obj* ctr_number_log(obj* myself, args* argumentList) {
+	return ctr_build_number_from_float(log(myself->value.nvalue));
+}
+
 
 /**
  * Times
