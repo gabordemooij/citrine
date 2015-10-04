@@ -637,15 +637,8 @@ obj* ctr_string_concat(obj* myself, args* argumentList) {
  * 'hello' from: 1 to: 3.
  */
 obj* ctr_string_fromto(obj* myself, args* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
-	if (!argumentList->next) {
-		printf("Missing argument 2\n"); exit(1);
-	}
-	obj* fromPos = argumentList->object;
-	obj* toPos = argumentList->next->object;
-	
+	obj* fromPos = ctr_internal_cast2number(argumentList->object);
+	obj* toPos = ctr_internal_cast2number(argumentList->next->object);
 	long a = (fromPos->value.nvalue);
 	long b = (toPos->value.nvalue); 
 	long ua = getBytesUtf8(myself->value.svalue->value, 0, a);

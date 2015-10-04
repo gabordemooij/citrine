@@ -15,4 +15,4 @@ o on: 'hello' do: {\}.
 {\ (1 < '2') ifTrue: {\ Pen write: 'OK'. }. } catch: { e | Pen write: e, brk. }, run. #allowed, cast
 {\ (1 < '2.0') ifTrue: {\ Pen write: 'OK'. }. } catch: { e | Pen write: e, brk. }, run. #allowed, cast
 {\ (1 < 'x2.0') ifTrue: {\ Pen write: 'NO!'. }. } catch: { e | Pen write: e, brk. }, run. #allowed, cast
-
+{\ Pen write: ('hello OK there' from: '6' to: '7'). } run. #allowed, cast
