@@ -634,7 +634,7 @@ obj* ctr_string_concat(obj* myself, args* argumentList) {
  * This message is UTF-8 unicode aware.
  *
  * Usage:
- * 'hello' from: 1 to: 3.
+ * 'hello' from: 2 to: 3. #ll
  */
 obj* ctr_string_fromto(obj* myself, args* argumentList) {
 	obj* fromPos = ctr_internal_cast2number(argumentList->object);
@@ -643,16 +643,51 @@ obj* ctr_string_fromto(obj* myself, args* argumentList) {
 	long b = (toPos->value.nvalue); 
 	long ua = getBytesUtf8(myself->value.svalue->value, 0, a);
 	long ub = getBytesUtf8(myself->value.svalue->value, ua, ((b - a) + 1));
-	char* dest = calloc(ub, sizeof(char));
+	char* dest = malloc(ub * sizeof(char));
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	obj* newString = ctr_build_string(dest,ub);
 	return newString;
 }
 
+/**
+ * StringCharacterAt
+ *
+ * Returns the character at the specified position (UTF8 aware).
+ *
+ * Usage:
+ * ('hello' at: 2). #l
+ */
+obj* ctr_string_at(obj* myself, args* argumentList) {
+	obj* fromPos = ctr_internal_cast2number(argumentList->object);
+	long a = (fromPos->value.nvalue);
+	long ua = getBytesUtf8(myself->value.svalue->value, 0, a);
+	long ub = getBytesUtf8(myself->value.svalue->value, ua, 1);
+	char* dest = malloc(ub * sizeof(char));
+	memcpy(dest, (myself->value.svalue->value) + ua, ub);
+	obj* newString = ctr_build_string(dest,ub);
+	return newString;
+}
 
-
-
-
+/**
+ * StringIndexOf
+ *
+ * Returns the index (character number, not the byte!) of the
+ * needle in the haystack.
+ * 
+ * Usage:
+ * 'find the needle' indexOf: 'needle'. #9
+ *
+ */
+obj* ctr_string_index_of(obj* myself, args* argumentList) {
+	obj* sub = ctr_internal_cast2string(argumentList->object);
+	long hlen = myself->value.svalue->vlen;
+	long nlen = sub->value.svalue->vlen;
+	long p = memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen);
+	if (p == NULL) return ctr_build_number_from_float((float)-1);
+	long byte_index = p - ((long) myself->value.svalue->value);
+	long uchar_index = getutf8len(myself->value.svalue->value, byte_index);
+	return ctr_build_number_from_float((float) uchar_index);
+}
 
 
 obj* ctr_block_run(obj* myself, args* argList, obj* my) {
