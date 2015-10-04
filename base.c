@@ -410,7 +410,6 @@ obj* ctr_number_modulo(obj* myself, args* argumentList) {
 }
 
 obj* ctr_number_pow(obj* myself, args* argumentList) {
-	printf("+++\n");
 	obj* otherNum = ctr_internal_cast2number(argumentList->object);
 	float a = myself->value.nvalue;
 	float b = otherNum->value.nvalue;
