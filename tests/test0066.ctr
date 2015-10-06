@@ -4,3 +4,9 @@ Pen write: ('hello' at: 2). #l
 Pen write: ('🎄🎄🎄' length). #3
 Pen write: ('' bytes) + ('' length). #0
 Pen write: ('papyrus' at: ( ('🎃halloween' indexOf: 'hallo') + ('no' indexOf: 'y') ) ). #p (1 + -1)
+a := ('--a..nom..t..nom..r..nom..' replace: '..nom..' with: '=x=XX=x=').
+a := a replace: '.' with: '++'. #does not occur
+a := a replace: '' with: '++'. #should not hang
+Pen write: ('' replace: 'x' with: 'y'). #no effect, should not hang
+a := ((a replace: '=x=XX=x=' with: '') replace: '--' with: '').
+Pen write: a.

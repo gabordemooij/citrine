@@ -528,7 +528,10 @@ obj* ctr_number_times(obj* myself, args* argumentList) {
  */
 obj* ctr_build_string(char* stringValue, long size) {
 	obj* stringObject = ctr_internal_create_object(OTSTRING);
-	ASSIGN_STRING(stringObject->value.svalue, value, stringValue, size);
+	if (size != 0) {
+		stringObject->value.svalue->value = malloc(size*sizeof(char));
+		memcpy(stringObject->value.svalue->value, stringValue, size);
+	}
 	stringObject->value.svalue->vlen = size;
 	stringObject->link = TextString;
 	return stringObject;
@@ -689,6 +692,59 @@ obj* ctr_string_index_of(obj* myself, args* argumentList) {
 	return ctr_build_number_from_float((float) uchar_index);
 }
 
+/**
+ * StringReplaceWith
+ *
+ * Replaces needle with replacement in original string and returns
+ * the result as a new string object.
+ *
+ * Usage:
+ *
+ * 'LiLo BootLoader' replace: 'L' with: 'l'. #lilo Bootloader
+ */
+obj* ctr_string_replace_with(obj* myself, args* argumentList) {
+	obj* needle = ctr_internal_cast2string(argumentList->object);
+	obj* replacement = ctr_internal_cast2string(argumentList->next->object);
+	char* dest;
+	char* odest;
+	char* src = myself->value.svalue->value;
+	char* ndl = needle->value.svalue->value;
+	char* rpl = replacement->value.svalue->value;
+	long hlen = myself->value.svalue->vlen;
+	long nlen = needle->value.svalue->vlen;
+	long rlen = replacement->value.svalue->vlen;
+	long dlen = hlen;
+	char* p;
+	long i = 0;
+	long offset = 0;
+	dest = (char*) malloc(dlen*sizeof(char));
+	odest = dest;
+	if (nlen == 0 || hlen == 0) {
+		return ctr_build_string(src, hlen);
+	}
+	while(1) {
+		p = memmem(src, hlen, ndl, nlen);
+		if (p == NULL) break;
+		long d = (long)dest - (long)odest;
+		if ((dlen - nlen + rlen)>dlen) {
+			dlen = (dlen - nlen + rlen);
+			odest = (char*) realloc(odest, dlen * sizeof(char));
+			dest = (char*) (odest + d);
+		} else {
+			dlen = (dlen - nlen + rlen);
+		}
+		offset = (long) (p - src);
+		memcpy(dest, src, offset);
+		dest = (char*)((long)dest + offset);
+		memcpy(dest, rpl, rlen);
+		dest = (char*)((long)dest + rlen);
+		hlen = hlen - (offset + nlen);
+		src  = (char*)((long)src + (offset + nlen));
+		i++;
+	}
+	memcpy(dest, src, hlen);
+	return ctr_build_string(odest, dlen);
+}
 
 obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 	obj* result;
@@ -718,7 +774,6 @@ obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 	ctr_set(ctr_build_string("thisBlock",9), myself); //otherwise running block may get gc'ed.
 	result = cwlk_run(codeBlockPart2);
 	ctr_close_context();
-	
 	if (error != NULL) {
 		obj* catchBlock = malloc(sizeof(obj));
 		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string("catch",5), 0);

@@ -6,6 +6,7 @@
 #include <stdarg.h>
 #include <math.h>
 #include <unistd.h>
+#include <stdint.h>
 
 #include "citrine.h"
 
@@ -482,6 +483,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(TextString, ctr_build_string("≠", 3), &ctr_string_neq);
 	ctr_internal_create_func(TextString, ctr_build_string("at:", 3), &ctr_string_at);
 	ctr_internal_create_func(TextString, ctr_build_string("indexOf:", 8), &ctr_string_index_of);
+	ctr_internal_create_func(TextString, ctr_build_string("replace:with:", 13), &ctr_string_replace_with);
 	ctr_internal_object_add_property(World, ctr_build_string("String", 6), TextString, 0);
 	TextString->link = Object;
 	CMap = ctr_internal_create_object(OTOBJECT);
@@ -542,7 +544,6 @@ void ctr_initialize_world() {
 
 
 obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argumentList) {
-	
 	if (error != NULL) return NULL; //Error mode, ignore subsequent messages until resolved.
 	obj* methodObject = NULL;
 	obj* searchObject = receiverObject;
@@ -552,7 +553,6 @@ obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argum
 		if (!searchObject->link) break;
 		searchObject = searchObject->link;
 	}
-	
 	if (!methodObject) {
 		args* argCounter = argumentList;
 		int argCount = 0;
@@ -572,10 +572,7 @@ obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argum
 		}
 	}
 	obj* result;
-	
-	
 	if (methodObject->info.type == OTNATFUNC) {
-		
 		obj* (*funct)(obj* receiverObject, args* argumentList);
 		funct = (void*) methodObject->value.block;
 		result = (obj*) funct(receiverObject, argumentList);
