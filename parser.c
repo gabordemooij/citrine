@@ -20,6 +20,10 @@ tnode* cparse_message(int mode) {
 	m->type = -1;
 	int t = clex_tok();
 	msgpartlen = clex_tok_value_length();
+	if ((msgpartlen) > 255) {
+		printf("Message too long\n");
+		exit(1);
+	}
 	char* s = clex_tok_value();
 	char* msg;
 	msg = malloc(255*sizeof(char));
@@ -53,6 +57,10 @@ tnode* cparse_message(int mode) {
 		 }
 		*(msg + msgpartlen) = ':';
 		msgpartlen += 1;
+		if ((msgpartlen) > 255) {
+			printf("Message too long\n");
+			exit(1);
+		}
 		if (debug) printf("Message so far: %s\n", msg);
 		m->type = KWMESSAGE;
 		t = clex_tok();
@@ -80,6 +88,10 @@ tnode* cparse_message(int mode) {
 			if (t == PARCLOSE) break;
 			if (t == REF) {
 				long l = clex_tok_value_length(); 
+				if ((msgpartlen + l) > 255) {
+					printf("Message too long\n");
+					exit(1);
+				}
 				memcpy( (msg+msgpartlen), clex_tok_value(), l);
 				msgpartlen = msgpartlen + l;
 				*(msg + msgpartlen) = ':';
