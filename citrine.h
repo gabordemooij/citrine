@@ -173,6 +173,7 @@ obj* ctr_build_bool(int truth);
 obj* ctr_build_nil();
 obj* ctr_build_string_from_cstring( char* str );
 obj* ctr_block_run(obj* myself, args* argList, obj* my);
+long getutf8len(char* strval, long max);
 
 int __argc;
 char** __argv;
@@ -212,6 +213,6 @@ p = buf + strlen(buf) - 1;\
 while (*p == '0' && *p-- != '.');\
 *(p+1) = '\0';\
 if (*p == '.') *p = '\0';\
-strcpy(s, buf);\
+strncpy(s, buf,99);\
 free (buf);\
 }

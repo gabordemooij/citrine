@@ -552,7 +552,6 @@ obj* ctr_build_string_from_cstring(char* cstring) {
  * Returns the number of bytes in a string.
  */
 obj* ctr_string_bytes(obj* myself, args* argumentList) {
-	char* str = calloc(100, sizeof(char));
 	return ctr_build_number_from_float((float)myself->value.svalue->vlen);
 }
 
@@ -589,7 +588,7 @@ obj* ctr_string_neq(obj* myself, args* argumentList) {
 obj* ctr_string_length(obj* myself, args* argumentList) {
 	long n = getutf8len(myself->value.svalue->value, myself->value.svalue->vlen);
 	char* str = calloc(100, sizeof(char));
-	sprintf(str, "%lu", n);
+	snprintf(str, 100, "%lu", n);
 	return ctr_build_number(str);
 }
 
@@ -666,9 +665,9 @@ obj* ctr_string_index_of(obj* myself, args* argumentList) {
 	obj* sub = ctr_internal_cast2string(argumentList->object);
 	long hlen = myself->value.svalue->vlen;
 	long nlen = sub->value.svalue->vlen;
-	long p = memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen);
+	char* p = memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen);
 	if (p == NULL) return ctr_build_number_from_float((float)-1);
-	long byte_index = p - ((long) myself->value.svalue->value);
+	long byte_index = p - myself->value.svalue->value;
 	long uchar_index = getutf8len(myself->value.svalue->value, byte_index);
 	return ctr_build_number_from_float((float) uchar_index);
 }
