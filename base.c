@@ -600,9 +600,6 @@ obj* ctr_string_length(obj* myself, args* argumentList) {
  * string as a new object.
  */
 obj* ctr_string_concat(obj* myself, args* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
 	obj* strObject = ctr_internal_create_object(OTSTRING);
 	strObject = ctr_internal_cast2string(argumentList->object);
 	long n1 = myself->value.svalue->vlen;
