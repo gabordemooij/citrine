@@ -705,21 +705,21 @@ obj* ctr_string_replace_with(obj* myself, args* argumentList) {
 	while(1) {
 		p = memmem(src, hlen, ndl, nlen);
 		if (p == NULL) break;
-		long d = (long)dest - (long)odest;
+		long d = (dest - odest);
 		if ((dlen - nlen + rlen)>dlen) {
 			dlen = (dlen - nlen + rlen);
 			odest = (char*) realloc(odest, dlen * sizeof(char));
-			dest = (char*) (odest + d);
+			dest = (odest + d);
 		} else {
 			dlen = (dlen - nlen + rlen);
 		}
-		offset = (long) (p - src);
+		offset = (p - src);
 		memcpy(dest, src, offset);
-		dest = (char*)((long)dest + offset);
+		dest = dest + offset;
 		memcpy(dest, rpl, rlen);
-		dest = (char*)((long)dest + rlen);
+		dest = dest + rlen;
 		hlen = hlen - (offset + nlen);
-		src  = (char*)((long)src + (offset + nlen));
+		src  = src + (offset + nlen);
 		i++;
 	}
 	memcpy(dest, src, hlen);
