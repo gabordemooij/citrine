@@ -553,9 +553,7 @@ obj* ctr_build_string_from_cstring(char* cstring) {
  */
 obj* ctr_string_bytes(obj* myself, args* argumentList) {
 	char* str = calloc(100, sizeof(char));
-	long l = (myself->value.svalue->vlen);
-	sprintf(str, "%lu", l);
-	return ctr_build_number(str);
+	return ctr_build_number_from_float((float)myself->value.svalue->vlen);
 }
 
 /**
