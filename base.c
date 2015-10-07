@@ -552,7 +552,6 @@ obj* ctr_build_string_from_cstring(char* cstring) {
  * Returns the number of bytes in a string.
  */
 obj* ctr_string_bytes(obj* myself, args* argumentList) {
-	char* str = calloc(100, sizeof(char));
 	return ctr_build_number_from_float((float)myself->value.svalue->vlen);
 }
 
