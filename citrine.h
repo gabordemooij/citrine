@@ -212,6 +212,6 @@ p = buf + strlen(buf) - 1;\
 while (*p == '0' && *p-- != '.');\
 *(p+1) = '\0';\
 if (*p == '.') *p = '\0';\
-strcpy(s, buf);\
+strncpy(s, buf, strlen(buf));\
 free (buf);\
 }
