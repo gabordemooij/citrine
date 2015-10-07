@@ -22,7 +22,7 @@ tnode* cparse_message(int mode) {
 	msgpartlen = clex_tok_value_length();
 	char* s = clex_tok_value();
 	char* msg;
-	msg = malloc(msgpartlen * sizeof(char));
+	msg = malloc(255*sizeof(char));
 	memcpy(msg, s, msgpartlen);
 	
 	int ulen = getutf8len(msg, msgpartlen);
