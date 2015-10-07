@@ -10,3 +10,5 @@ a := a replace: '' with: '++'. #should not hang
 Pen write: ('' replace: 'x' with: 'y'). #no effect, should not hang
 a := ((a replace: '=x=XX=x=' with: '') replace: '--' with: '').
 Pen write: a.
+a := '  a	 ' trim + '' trim + ' ' trim.
+Pen write: a.

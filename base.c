@@ -727,6 +727,32 @@ obj* ctr_string_replace_with(obj* myself, args* argumentList) {
 	return ctr_build_string(odest, dlen);
 }
 
+/**
+ * StringTrim
+ *
+ * Trims a string. Removes surrounding white space characters
+ * from string and returns the result as a new string object.
+ *
+ * Usage:
+ * ' hello ' trim. #hello
+ *
+ */
+obj* ctr_string_trim(obj* myself, args* argumentList) {
+	char* str = myself->value.svalue->value;
+	long  len = myself->value.svalue->vlen;
+	if (len == 0) return ctr_build_string("", 0);
+	long i = 0;
+	while(i < len && isspace(*(str+i))) i++;
+	long begin = i;
+	i = len - 1;
+	while(i > begin && isspace(*(str+i))) i--;
+	long end = i + 1;
+	long tlen = (end - begin);
+	char* tstr = malloc(tlen * sizeof(char));
+	memcpy(tstr, str+begin, tlen);
+	return ctr_build_string(tstr, tlen);
+}
+
 obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 	obj* result;
 	tnode* node = myself->value.block;
