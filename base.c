@@ -588,7 +588,7 @@ obj* ctr_string_neq(obj* myself, args* argumentList) {
 obj* ctr_string_length(obj* myself, args* argumentList) {
 	long n = getutf8len(myself->value.svalue->value, myself->value.svalue->vlen);
 	char* str = calloc(100, sizeof(char));
-	sprintf(str, "%lu", n);
+	snprintf(str, 100, "%lu", n);
 	return ctr_build_number(str);
 }
 
@@ -665,10 +665,10 @@ obj* ctr_string_index_of(obj* myself, args* argumentList) {
 	obj* sub = ctr_internal_cast2string(argumentList->object);
 	long hlen = myself->value.svalue->vlen;
 	long nlen = sub->value.svalue->vlen;
-	long p = memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen);
+	char* p = (char*) memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen);
 	if (p == NULL) return ctr_build_number_from_float((float)-1);
-	long byte_index = p - ((long) myself->value.svalue->value);
-	long uchar_index = getutf8len(myself->value.svalue->value, byte_index);
+	uintptr_t byte_index = (uintptr_t) p - (uintptr_t) (myself->value.svalue->value);
+	uintptr_t uchar_index = getutf8len(myself->value.svalue->value, byte_index);
 	return ctr_build_number_from_float((float) uchar_index);
 }
 
@@ -705,21 +705,21 @@ obj* ctr_string_replace_with(obj* myself, args* argumentList) {
 	while(1) {
 		p = memmem(src, hlen, ndl, nlen);
 		if (p == NULL) break;
-		long d = (long)dest - (long)odest;
+		long d = (dest - odest);
 		if ((dlen - nlen + rlen)>dlen) {
 			dlen = (dlen - nlen + rlen);
 			odest = (char*) realloc(odest, dlen * sizeof(char));
-			dest = (char*) (odest + d);
+			dest = (odest + d);
 		} else {
 			dlen = (dlen - nlen + rlen);
 		}
-		offset = (long) (p - src);
+		offset = (p - src);
 		memcpy(dest, src, offset);
-		dest = (char*)((long)dest + offset);
+		dest = dest + offset;
 		memcpy(dest, rpl, rlen);
-		dest = (char*)((long)dest + rlen);
+		dest = dest + rlen;
 		hlen = hlen - (offset + nlen);
-		src  = (char*)((long)src + (offset + nlen));
+		src  = src + (offset + nlen);
 		i++;
 	}
 	memcpy(dest, src, hlen);
