@@ -594,20 +594,6 @@ obj* ctr_string_length(obj* myself, args* argumentList) {
 }
 
 /**
- * StringBytes
- *
- * Returns the number of bytes in a string.
- */
-obj* ctr_string_printbytes(obj* myself, args* argumentList) {
-	char* str = myself->value.svalue->value;
-	long n = myself->value.svalue->vlen;
-	long i = 0;
-	for(i = 0; i < n; i++) printf("%u ", (unsigned char) str[i]);
-	printf("\n");
-	return myself;
-}
-
-/**
  * StringConcat
  *
  * Appends other string to self and returns the resulting
