@@ -665,7 +665,7 @@ obj* ctr_string_index_of(obj* myself, args* argumentList) {
 	obj* sub = ctr_internal_cast2string(argumentList->object);
 	long hlen = myself->value.svalue->vlen;
 	long nlen = sub->value.svalue->vlen;
-	char* p = memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen);
+	char* p = (char*) memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen);
 	if (p == NULL) return ctr_build_number_from_float((float)-1);
 	long byte_index = p - myself->value.svalue->value;
 	long uchar_index = getutf8len(myself->value.svalue->value, byte_index);
