@@ -665,7 +665,27 @@ obj* ctr_string_index_of(obj* myself, args* argumentList) {
 	obj* sub = ctr_internal_cast2string(argumentList->object);
 	long hlen = myself->value.svalue->vlen;
 	long nlen = sub->value.svalue->vlen;
-	char* p = (char*) memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen);
+	char* p = ctr_internal_memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen, 0);
+	if (p == NULL) return ctr_build_number_from_float((float)-1);
+	uintptr_t byte_index = (uintptr_t) p - (uintptr_t) (myself->value.svalue->value);
+	uintptr_t uchar_index = getutf8len(myself->value.svalue->value, byte_index);
+	return ctr_build_number_from_float((float) uchar_index);
+}
+
+/**
+ * StringLastIndexOf
+ *
+ * Returns the index (character number, not the byte!) of the
+ * needle in the haystack.
+ * 
+ * Usage:
+ * 'find the needle' lastIndexOf: 'needle'. #9
+ */
+obj* ctr_string_last_index_of(obj* myself, args* argumentList) {
+	obj* sub = ctr_internal_cast2string(argumentList->object);
+	long hlen = myself->value.svalue->vlen;
+	long nlen = sub->value.svalue->vlen;
+	char* p = ctr_internal_memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen, 1);
 	if (p == NULL) return ctr_build_number_from_float((float)-1);
 	uintptr_t byte_index = (uintptr_t) p - (uintptr_t) (myself->value.svalue->value);
 	uintptr_t uchar_index = getutf8len(myself->value.svalue->value, byte_index);

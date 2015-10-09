@@ -273,6 +273,28 @@ void ctr_internal_object_set_property(obj* owner, obj* key, obj* value, int is_m
 	ctr_internal_object_add_property(owner, key, value, is_method);
 }
 
+
+char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, int reverse ) {
+	char* cur;
+	char* last;
+	char* begin;
+	int step = (1 - reverse * 2); //1 if reverse = 0, -1 if reverse = 1
+	if (nlen == 0) return NULL;
+	if (hlen == 0) return NULL;
+	if (hlen < nlen) return NULL;
+	if (!reverse) {
+		begin = haystack;
+		last = haystack + hlen - nlen + 1;
+	} else {
+		begin = haystack + hlen;
+		last = haystack + nlen - 2;
+	}
+	for(cur = begin; cur!=last; cur += step) {
+		if (memcmp(cur,needle,nlen) == 0) return cur;
+	}
+	return NULL;
+}
+
 obj* ctr_internal_create_object(int type) {
 	obj* o = malloc(sizeof(obj));
 	o->properties = malloc(sizeof(ctr_map));
@@ -483,6 +505,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(TextString, ctr_build_string("trim", 4), &ctr_string_trim);
 	ctr_internal_create_func(TextString, ctr_build_string("at:", 3), &ctr_string_at);
 	ctr_internal_create_func(TextString, ctr_build_string("indexOf:", 8), &ctr_string_index_of);
+	ctr_internal_create_func(TextString, ctr_build_string("lastIndexOf:", 12), &ctr_string_last_index_of);
 	ctr_internal_create_func(TextString, ctr_build_string("replace:with:", 13), &ctr_string_replace_with);
 	ctr_internal_object_add_property(World, ctr_build_string("String", 6), TextString, 0);
 	TextString->link = Object;
