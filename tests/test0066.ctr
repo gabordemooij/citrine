@@ -1,5 +1,5 @@
 #Test String Object
-Pen write: ('Santa Clause' from: 6 to: 6). #C
+Pen write: ('Santa Clause' from: 6 to: 7). #C
 Pen write: ('hello' at: 2). #l
 Pen write: ('🎄🎄🎄' length). #3
 Pen write: ('' bytes) + ('' length). #0

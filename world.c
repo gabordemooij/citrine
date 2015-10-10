@@ -456,7 +456,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(Number, ctr_build_string("floor",5),&ctr_number_floor);
 	ctr_internal_create_func(Number, ctr_build_string("ceil",4),&ctr_number_ceil);
 	ctr_internal_create_func(Number, ctr_build_string("round",5),&ctr_number_round);
-	
 	ctr_internal_create_func(Number, ctr_build_string("abs",3),&ctr_number_abs);
 	ctr_internal_create_func(Number, ctr_build_string("sin",3),&ctr_number_sin);
 	ctr_internal_create_func(Number, ctr_build_string("cos",3),&ctr_number_cos);
@@ -465,12 +464,9 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(Number, ctr_build_string("tan",3),&ctr_number_tan);
 	ctr_internal_create_func(Number, ctr_build_string("atan",4),&ctr_number_atan);
 	ctr_internal_create_func(Number, ctr_build_string("log",3),&ctr_number_log);
-	
 	ctr_internal_create_func(Number, ctr_build_string("pow:",4),&ctr_number_pow);
 	ctr_internal_create_func(Number, ctr_build_string("min:",4),&ctr_number_min);
 	ctr_internal_create_func(Number, ctr_build_string("max:",4),&ctr_number_max);
-	
-	
 	ctr_internal_create_func(Number, ctr_build_string("between:and:",12),&ctr_number_between);
 	ctr_internal_object_add_property(World, ctr_build_string("Number", 6), Number, 0);
 	Number->link = Object;
@@ -499,6 +495,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(TextString, ctr_build_string("bytes", 5), &ctr_string_bytes);
 	ctr_internal_create_func(TextString, ctr_build_string("length", 6), &ctr_string_length);
 	ctr_internal_create_func(TextString, ctr_build_string("from:to:", 8), &ctr_string_fromto);
+	ctr_internal_create_func(TextString, ctr_build_string("from:length:", 12), &ctr_string_from_length);
 	ctr_internal_create_func(TextString, ctr_build_string("+", 1), &ctr_string_concat);
 	ctr_internal_create_func(TextString, ctr_build_string("=", 1), &ctr_string_eq);
 	ctr_internal_create_func(TextString, ctr_build_string("≠", 3), &ctr_string_neq);

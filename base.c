@@ -622,10 +622,54 @@ obj* ctr_string_concat(obj* myself, args* argumentList) {
 obj* ctr_string_fromto(obj* myself, args* argumentList) {
 	obj* fromPos = ctr_internal_cast2number(argumentList->object);
 	obj* toPos = ctr_internal_cast2number(argumentList->next->object);
+	long len = myself->value.svalue->vlen;
 	long a = (fromPos->value.nvalue);
 	long b = (toPos->value.nvalue); 
+	long t;
+	if (b == a) return ctr_build_string("",0);
+	if (a > b) {
+		t = a; a = b; b = t;
+	}
+	if (a > len) return ctr_build_string("", 0);
+	if (b > len) b = len;
+	if (a < 0) a = 0;
+	if (b < 0) return ctr_build_string("", 0);
 	long ua = getBytesUtf8(myself->value.svalue->value, 0, a);
-	long ub = getBytesUtf8(myself->value.svalue->value, ua, ((b - a) + 1));
+	long ub = getBytesUtf8(myself->value.svalue->value, ua, ((b - a)));
+	char* dest = malloc(ub * sizeof(char));
+	memcpy(dest, (myself->value.svalue->value) + ua, ub);
+	obj* newString = ctr_build_string(dest,ub);
+	return newString;
+}
+
+
+/**
+ * StringFromLength
+ *
+ * Returns a portion of a string defined by from 
+ * and length values.
+ * This message is UTF-8 unicode aware.
+ *
+ * Usage:
+ * 'hello' from: 2 length: 3. #llo
+ */
+obj* ctr_string_from_length(obj* myself, args* argumentList) {
+	obj* fromPos = ctr_internal_cast2number(argumentList->object);
+	obj* length = ctr_internal_cast2number(argumentList->next->object);
+	long len = myself->value.svalue->vlen;
+	long a = (fromPos->value.nvalue);
+	long b = (length->value.nvalue);
+	if (b == 0) return ctr_build_string("",0);
+	if (b < 0) {
+		a = a + b;
+		b = abs(b);
+	}
+	if (a < 0) a = 0;
+	if (a > len) a = len;
+	if ((a + b)>len) b = len - a;
+	if ((a + b)<0) b = b - a;
+	long ua = getBytesUtf8(myself->value.svalue->value, 0, a);
+	long ub = getBytesUtf8(myself->value.svalue->value, ua, b);
 	char* dest = malloc(ub * sizeof(char));
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	obj* newString = ctr_build_string(dest,ub);
