@@ -1,0 +1,9 @@
+#More String Tests
+#9897[Nil][Nil]
+Pen write: ('abc' byteAt: 1).
+Pen write: ('a' byteAt: 0).
+Pen write: ('zzz' byteAt: 10).
+Pen write: ('zzz' byteAt: -10).
+Pen brk.
+Pen write: (' left trimmed ' ltrim) + ( 'and right trimmed   ' rtrim) + '!', brk.
+Pen write: 'uPpErCase' toUpperCase + 'LowERcASE' toLowerCase.

@@ -642,7 +642,6 @@ obj* ctr_string_fromto(obj* myself, args* argumentList) {
 	return newString;
 }
 
-
 /**
  * StringFromLength
  *
@@ -693,6 +692,24 @@ obj* ctr_string_at(obj* myself, args* argumentList) {
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	obj* newString = ctr_build_string(dest,ub);
 	return newString;
+}
+
+/**
+ * StringByteAt
+ *
+ * Returns the byte at the specified position (in bytes).
+ *
+ * Usage:
+ * ('abc' byteAt: 1). #98
+ */
+obj* ctr_string_byte_at(obj* myself, args* argumentList) {
+	obj* fromPos = ctr_internal_cast2number(argumentList->object);
+	long a = (fromPos->value.nvalue);
+	long len = myself->value.svalue->vlen;
+	if (a > len) return Nil;
+	if (a < 0) return Nil;
+	char x = *(myself->value.svalue->value + a);
+	return ctr_build_number_from_float((float)x);
 }
 
 /**
@@ -814,6 +831,63 @@ obj* ctr_string_trim(obj* myself, args* argumentList) {
 	char* tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str+begin, tlen);
 	return ctr_build_string(tstr, tlen);
+}
+
+
+/**
+ * StringLeftTrim
+ */
+obj* ctr_string_ltrim(obj* myself, args* argumentList) {
+	char* str = myself->value.svalue->value;
+	long  len = myself->value.svalue->vlen;
+	if (len == 0) return ctr_build_string("", 0);
+	long i = 0;
+	while(i < len && isspace(*(str+i))) i++;
+	long begin = i;
+	i = len - 1;
+	long tlen = (len - begin);
+	char* tstr = malloc(tlen * sizeof(char));
+	memcpy(tstr, str+begin, tlen);
+	return ctr_build_string(tstr, tlen);
+}
+
+/**
+ * StringRightTrim
+ */
+obj* ctr_string_rtrim(obj* myself, args* argumentList) {
+	char* str = myself->value.svalue->value;
+	long  len = myself->value.svalue->vlen;
+	if (len == 0) return ctr_build_string("", 0);
+	long i = 0;
+	i = len - 1;
+	while(i > 0 && isspace(*(str+i))) i--;
+	long end = i + 1;
+	long tlen = end;
+	char* tstr = malloc(tlen * sizeof(char));
+	memcpy(tstr, str, tlen);
+	return ctr_build_string(tstr, tlen);
+}
+
+obj* ctr_string_to_upper(obj* myself, args* argumentList) {
+	char* str = myself->value.svalue->value;
+	long  len = myself->value.svalue->vlen;
+	char* tstr = malloc(len * sizeof(char));
+	int i=0;
+	for(i =0; i < len; i++) {
+		tstr[i] = toupper(str[i]);
+	}
+	return ctr_build_string(tstr, len);
+}
+
+obj* ctr_string_to_lower(obj* myself, args* argumentList) {
+	char* str = myself->value.svalue->value;
+	long  len = myself->value.svalue->vlen;
+	char* tstr = malloc(len * sizeof(char));
+	int i=0;
+	for(i =0; i < len; i++) {
+		tstr[i] = tolower(str[i]);
+	}
+	return ctr_build_string(tstr, len);
 }
 
 obj* ctr_block_run(obj* myself, args* argList, obj* my) {
