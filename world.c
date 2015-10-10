@@ -504,6 +504,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(TextString, ctr_build_string("rtrim", 5), &ctr_string_rtrim);
 	ctr_internal_create_func(TextString, ctr_build_string("toUpperCase", 11), &ctr_string_to_upper);
 	ctr_internal_create_func(TextString, ctr_build_string("toLowerCase", 11), &ctr_string_to_lower);
+	ctr_internal_create_func(TextString, ctr_build_string("esc", 3), &ctr_string_html_escape);
 	ctr_internal_create_func(TextString, ctr_build_string("at:", 3), &ctr_string_at);
 	ctr_internal_create_func(TextString, ctr_build_string("byteAt:", 7), &ctr_string_byte_at);
 	ctr_internal_create_func(TextString, ctr_build_string("indexOf:", 8), &ctr_string_index_of);

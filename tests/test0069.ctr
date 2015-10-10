@@ -7,3 +7,4 @@ Pen write: ('zzz' byteAt: -10).
 Pen brk.
 Pen write: (' left trimmed ' ltrim) + ( 'and right trimmed   ' rtrim) + '!', brk.
 Pen write: 'uPpErCase' toUpperCase + 'LowERcASE' toLowerCase.
+Pen write: '<html>"html & entities"</html>' esc.

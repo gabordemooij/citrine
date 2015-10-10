@@ -868,6 +868,9 @@ obj* ctr_string_rtrim(obj* myself, args* argumentList) {
 	return ctr_build_string(tstr, tlen);
 }
 
+/**
+ * StringToUpperCase
+ */
 obj* ctr_string_to_upper(obj* myself, args* argumentList) {
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
@@ -879,6 +882,9 @@ obj* ctr_string_to_upper(obj* myself, args* argumentList) {
 	return ctr_build_string(tstr, len);
 }
 
+/**
+ * StringToLowerCase 
+ */
 obj* ctr_string_to_lower(obj* myself, args* argumentList) {
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
@@ -889,6 +895,61 @@ obj* ctr_string_to_lower(obj* myself, args* argumentList) {
 	}
 	return ctr_build_string(tstr, len);
 }
+
+/**
+ * StringHTMLEscape
+ *
+ * Escapes HTML chars.
+ */
+obj* ctr_string_html_escape(obj* myself, obj* argumentList) {
+	char* str = myself->value.svalue->value;
+	long  len = myself->value.svalue->vlen;
+	char* tstr = malloc(len * sizeof(char));
+	long i=0;
+	long j=0;
+	long k=0;
+	long rlen;
+	long tlen = len;
+	char* replacement;
+	for(i =0; i < len; i++) {
+		char* c = str[i];
+		if (c == '<') {
+			replacement = "&lt;";
+			rlen = 4;
+			tlen += rlen;
+			tstr = realloc(tstr, (tlen) * sizeof(char));
+			for(j=0; j<rlen; j++) tstr[k+j]=replacement[j];
+			k += rlen;
+		} else if (c == '>') {
+			replacement = "&gt;";
+			rlen = 4;
+			tlen += rlen;
+			tstr = realloc(tstr, (tlen) * sizeof(char));
+			for(j=0; j<rlen; j++) tstr[k+j]=replacement[j];
+			k += rlen;
+		} else if (c == '&') {
+			replacement = "&amp;";
+			rlen = 5;
+			tlen += rlen;
+			tstr = realloc(tstr, (tlen) * sizeof(char));
+			for(j=0; j<rlen; j++) tstr[k+j]=replacement[j];
+			k += rlen;
+		} else if (c == '"') {
+			replacement = "&quot;";
+			rlen = 6;
+			tlen += rlen;
+			tstr = realloc(tstr, (tlen) * sizeof(char));
+			for(j=0; j<rlen; j++) tstr[k+j]=replacement[j];
+			k += rlen;
+		}
+		else { 
+			tstr[k++] = str[i];
+		}
+	}
+	return ctr_build_string(tstr, tlen);
+}
+
+
 
 obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 	obj* result;
