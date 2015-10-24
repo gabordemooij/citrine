@@ -7,7 +7,6 @@ obj* ctr_array_new(obj* myclass) {
 	s->value.avalue->elements = (obj**) malloc(sizeof(obj*)*1);
 	s->value.avalue->head = 0;
 	s->info.flagb = 1;
-	//printf("%d\n", s->value.avalue->length);
 	return s;
 }
 
@@ -108,6 +107,50 @@ obj* ctr_array_count(obj* myself) {
 	return ctr_build_number_from_float( d );
 }
 
+/**
+ * StringSplit
+ *
+ * Converts a string to an array by splitting the string using
+ * the specified delimiter (also a string).
+ */
+obj* ctr_string_split(obj* myself, args* argumentList) {
+	char* str = myself->value.svalue->value;
+	long len = myself->value.svalue->vlen;
+	obj* delimObject  = ctr_internal_cast2string(argumentList->object);
+	char* dstr = delimObject->value.svalue->value;
+	long dlen = delimObject->value.svalue->vlen;
+	obj* arr = ctr_array_new(CArray);
+	long i;
+	long j = 0;
+	char* buffer = malloc(sizeof(char)*len);
+	for(i=0; i<len; i++) {
+		buffer[j] = str[i];
+		j++;
+		//found a delimiter
+		if (memmem(buffer, j, dstr, dlen)!=NULL) {
+			//take part before delim
+			char* elem = malloc(sizeof(char)*(j-dlen));
+			memcpy(elem,buffer,j-dlen);
+			//put it in array
+			args* arg = malloc(sizeof(args));
+			arg->object = ctr_build_string(elem, j-dlen);
+			ctr_array_push(arr, arg);
+			j=0;
+		}
+	}
+	if (j>0) {
+		//put remainder in array
+		char* elem = malloc(sizeof(char)*j);
+		memcpy(elem,buffer,j);
+		//put it in array
+		args* arg = malloc(sizeof(args));
+		arg->object = ctr_build_string(elem, j);
+		ctr_array_push(arr, arg);
+	}
+	return arr;
+}
+
+
 
 obj* ctr_map_new(obj* myclass) {
 	obj* s = ctr_internal_create_object(OTOBJECT);
@@ -187,3 +230,4 @@ obj* ctr_map_each(obj* myself, args* argumentList) {
 	block->info.sticky = 0;
 	return myself;
 }
+

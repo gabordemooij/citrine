@@ -510,6 +510,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(TextString, ctr_build_string("indexOf:", 8), &ctr_string_index_of);
 	ctr_internal_create_func(TextString, ctr_build_string("lastIndexOf:", 12), &ctr_string_last_index_of);
 	ctr_internal_create_func(TextString, ctr_build_string("replace:with:", 13), &ctr_string_replace_with);
+	ctr_internal_create_func(TextString, ctr_build_string("split:", 6), &ctr_string_split);
 	ctr_internal_object_add_property(World, ctr_build_string("String", 6), TextString, 0);
 	TextString->link = Object;
 	CMap = ctr_internal_create_object(OTOBJECT);
