@@ -135,6 +135,7 @@ obj* ctr_string_split(obj* myself, args* argumentList) {
 			args* arg = malloc(sizeof(args));
 			arg->object = ctr_build_string(elem, j-dlen);
 			ctr_array_push(arr, arg);
+			free(arg);
 			j=0;
 		}
 	}
@@ -146,7 +147,9 @@ obj* ctr_string_split(obj* myself, args* argumentList) {
 		args* arg = malloc(sizeof(args));
 		arg->object = ctr_build_string(elem, j);
 		ctr_array_push(arr, arg);
+		free(arg);
 	}
+	free(buffer);
 	return arr;
 }
 
