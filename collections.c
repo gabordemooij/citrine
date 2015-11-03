@@ -78,7 +78,9 @@ obj* ctr_array_join(obj* myself, args* argumentList) {
 		}
 		memcpy(result+pos, str->value.svalue->value, str->value.svalue->vlen);
 	}
-	return ctr_build_string(result, len);
+	obj* resultStr = ctr_build_string(result, len);
+	free(result);
+	return resultStr;
 }
 
 
