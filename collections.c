@@ -44,6 +44,42 @@ obj* ctr_array_unshift(obj* myself, args* argumentList) {
 	return myself;
 }
 
+/**
+ * ArrayJoin
+ *
+ * Joins the elements of an array together in a string
+ * separated by a specified glue string.
+ *
+ * Usage:
+ *
+ * collection := Array new.
+ * collection push: 1, push: 2, push 3.
+ * collection join: ','. --> 1,2,3
+ */
+obj* ctr_array_join(obj* myself, args* argumentList) {
+	int i;
+	char* result;
+	long len = 0;
+	long pos;
+	obj* glue = ctr_internal_cast2string(argumentList->object);
+	long glen = glue->value.svalue->vlen;
+	for(i=0; i<myself->value.avalue->head; i++) {
+		obj* o = *( myself->value.avalue->elements + i );
+		obj* str = ctr_internal_cast2string(o);
+		pos = len;
+		if (len == 0) {
+			len = str->value.svalue->vlen;
+			result = malloc(sizeof(char)*len);
+		} else {
+			len += str->value.svalue->vlen + glen;
+			result = realloc(result, sizeof(char)*len);
+			memcpy(result+pos, glue->value.svalue->value, glen);
+			pos += glen;
+		}
+		memcpy(result+pos, str->value.svalue->value, str->value.svalue->vlen);
+	}
+	return ctr_build_string(result, len);
+}
 
 
 obj* ctr_array_get(obj* myself, args* argumentList) {

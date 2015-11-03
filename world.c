@@ -527,6 +527,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CArray, ctr_build_string("unshift:", 8), &ctr_array_unshift);
 	ctr_internal_create_func(CArray, ctr_build_string("shift", 5), &ctr_array_shift);
 	ctr_internal_create_func(CArray, ctr_build_string("count", 5), &ctr_array_count);
+	ctr_internal_create_func(CArray, ctr_build_string("join:", 5), &ctr_array_join);
 	ctr_internal_create_func(CArray, ctr_build_string("pop", 3), &ctr_array_pop);
 	ctr_internal_create_func(CArray, ctr_build_string("at:", 3), &ctr_array_get);
 	ctr_internal_create_func(CArray, ctr_build_string("put:at:", 7), &ctr_array_put);
