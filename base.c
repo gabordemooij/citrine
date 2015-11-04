@@ -916,28 +916,28 @@ obj* ctr_string_html_escape(obj* myself, obj* argumentList) {
 		if (c == '<') {
 			replacement = "&lt;";
 			rlen = 4;
-			tlen += rlen;
+			tlen += (rlen - 1);
 			tstr = realloc(tstr, (tlen) * sizeof(char));
 			for(j=0; j<rlen; j++) tstr[k+j]=replacement[j];
 			k += rlen;
 		} else if (c == '>') {
 			replacement = "&gt;";
 			rlen = 4;
-			tlen += rlen;
+			tlen += (rlen - 1);
 			tstr = realloc(tstr, (tlen) * sizeof(char));
 			for(j=0; j<rlen; j++) tstr[k+j]=replacement[j];
 			k += rlen;
 		} else if (c == '&') {
 			replacement = "&amp;";
 			rlen = 5;
-			tlen += rlen;
+			tlen += (rlen - 1);
 			tstr = realloc(tstr, (tlen) * sizeof(char));
 			for(j=0; j<rlen; j++) tstr[k+j]=replacement[j];
 			k += rlen;
 		} else if (c == '"') {
 			replacement = "&quot;";
 			rlen = 6;
-			tlen += rlen;
+			tlen += (rlen - 1);
 			tstr = realloc(tstr, (tlen) * sizeof(char));
 			for(j=0; j<rlen; j++) tstr[k+j]=replacement[j];
 			k += rlen;

@@ -11,11 +11,11 @@ for i in $(find tests -name '*.ctr'); do
 		echo "[$j]"
 		j=$((j+1))
 	else
-		echo "FAIL.\n"
-		echo "EXPECTED:\n"
+		echo "FAIL."
+		echo "EXPECTED:"
 		echo $expected
-		echo "\n\n\n"
-		echo "BUT GOT:\n"
+		echo ""
+		echo "BUT GOT:"
 		echo $result
 		exit 1
 	fi
