@@ -523,7 +523,9 @@ void ctr_initialize_world() {
 	CMap->link = Object;
 	CArray = ctr_array_new(Object);
 	ctr_internal_create_func(CArray, ctr_build_string("new", 3), &ctr_array_new);
+	ctr_internal_create_func(CArray, ctr_build_string("←", 3), &ctr_array_new_and_push);
 	ctr_internal_create_func(CArray, ctr_build_string("push:", 5), &ctr_array_push);
+	ctr_internal_create_func(CArray, ctr_build_string(";", 1), &ctr_array_push);
 	ctr_internal_create_func(CArray, ctr_build_string("unshift:", 8), &ctr_array_unshift);
 	ctr_internal_create_func(CArray, ctr_build_string("shift", 5), &ctr_array_shift);
 	ctr_internal_create_func(CArray, ctr_build_string("count", 5), &ctr_array_count);

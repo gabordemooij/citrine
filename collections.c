@@ -11,9 +11,6 @@ obj* ctr_array_new(obj* myclass) {
 }
 
 obj* ctr_array_push(obj* myself, args* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
 	if (myself->value.avalue->length <= (myself->value.avalue->head + 1)) {
 		myself->value.avalue->length = myself->value.avalue->length * 3;
 		myself->value.avalue->elements = (obj**) realloc(myself->value.avalue->elements, (sizeof(obj*) * (myself->value.avalue->length)));
@@ -26,6 +23,11 @@ obj* ctr_array_push(obj* myself, args* argumentList) {
 	*((obj**)locationa) = pushValue;
 	myself->value.avalue->head++;
 	return myself;
+}
+
+obj* ctr_array_new_and_push(obj* myclass, args* argumentList) {
+	obj* s = ctr_array_new(myclass);
+	return ctr_array_push(s, argumentList);
 }
 
 obj* ctr_array_unshift(obj* myself, args* argumentList) {

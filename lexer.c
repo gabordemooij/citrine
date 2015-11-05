@@ -144,6 +144,9 @@ int clex_tok() {
 		if (((char)*(code) == '&') && ((char)*(code+1)=='&')){
 			code +=2; tokvlen = 3; memcpy(buffer, "∧", 3); return REF;
 		}
+		if (((char)*(code) == '<') && ((char)*(code+1)=='-')){
+			code +=2; tokvlen = 3; memcpy(buffer, "←", 3); return REF;
+		}
 		//be very nice, accidental == will be converted to =
 		if (((char)*(code) == '=') && ((char)*(code+1)=='=')){
 			code +=2; tokvlen = 1; memcpy(buffer, "=", 1); return REF;
