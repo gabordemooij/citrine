@@ -115,6 +115,7 @@ typedef struct cres cres;
 struct carray {
 	long length;
 	long head;
+	long tail;
 	obj** elements;
 };
 struct carray;

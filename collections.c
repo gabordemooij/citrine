@@ -1,4 +1,13 @@
 
+/**
+ * ArrayNew
+ *
+ * Creates a new instance of an Array.
+ *
+ * Usage:
+ *
+ * a := Array new.
+ */
 obj* ctr_array_new(obj* myclass) {
 	obj* s = ctr_internal_create_object(OTARRAY);
 	s->link = myclass;
@@ -6,10 +15,21 @@ obj* ctr_array_new(obj* myclass) {
 	s->value.avalue->length = 1;
 	s->value.avalue->elements = (obj**) malloc(sizeof(obj*)*1);
 	s->value.avalue->head = 0;
+	s->value.avalue->tail = 0;
 	s->info.flagb = 1;
 	return s;
 }
 
+/**
+ * ArrayPush
+ *
+ * Pushes an element on top of the array.
+ *
+ * Usage:
+ *
+ * numbers := Array new.
+ * numbers push: 3.
+ */
 obj* ctr_array_push(obj* myself, args* argumentList) {
 	if (myself->value.avalue->length <= (myself->value.avalue->head + 1)) {
 		myself->value.avalue->length = myself->value.avalue->length * 3;
@@ -25,24 +45,37 @@ obj* ctr_array_push(obj* myself, args* argumentList) {
 	return myself;
 }
 
+/**
+ * ArrayNewAndPush
+ *
+ * Creates a new instance of an array and initializes this
+ * array with a first element, useful for literal-like Array
+ * notations.
+ *
+ * Usage:
+ *
+ * a := Array <- 1 ; 2 ; 3.
+ *
+ * Note that the ; symbol here is an alias for 'push:'.
+ */
 obj* ctr_array_new_and_push(obj* myclass, args* argumentList) {
 	obj* s = ctr_array_new(myclass);
 	return ctr_array_push(s, argumentList);
 }
 
 obj* ctr_array_unshift(obj* myself, args* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
-	if (myself->value.avalue->length <= (myself->value.avalue->head + 1)) {
-		myself->value.avalue->length = myself->value.avalue->length * 3;
-		myself->value.avalue->elements = (obj**) realloc(myself->value.avalue->elements, (sizeof(obj*) * (myself->value.avalue->length)));
-	}
 	obj* pushValue = argumentList->object;
-	myself->value.avalue->head++;
-	
-	memmove((obj**)((long)myself->value.avalue->elements+(sizeof(obj*))), myself->value.avalue->elements,myself->value.avalue->head*sizeof(obj*));
-	*(myself->value.avalue->elements) = pushValue;
+	if (myself->value.avalue->tail > 0) {
+		myself->value.avalue->tail--;
+	} else {
+		if (myself->value.avalue->length <= (myself->value.avalue->head + 1)) {
+			myself->value.avalue->length = myself->value.avalue->length * 3;
+			myself->value.avalue->elements = (obj**) realloc(myself->value.avalue->elements, (sizeof(obj*) * (myself->value.avalue->length)));
+		}
+		myself->value.avalue->head++;
+		memmove(myself->value.avalue->elements+1, myself->value.avalue->elements,myself->value.avalue->head*sizeof(obj*));
+	}
+	*(myself->value.avalue->elements + myself->value.avalue->tail) = pushValue;
 	return myself;
 }
 
@@ -87,9 +120,6 @@ obj* ctr_array_join(obj* myself, args* argumentList) {
 
 
 obj* ctr_array_get(obj* myself, args* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
 	obj* getIndex = argumentList->object;
 	if (getIndex->info.type != OTNUMBER) {
 		printf("Index must be number.\n"); exit(1);
@@ -98,16 +128,10 @@ obj* ctr_array_get(obj* myself, args* argumentList) {
 	if (myself->value.avalue->head < i || i < 0) {
 		printf("Index out of bounds.\n"); exit(1);
 	}
-	return *( (obj**) ((long)myself->value.avalue->elements + (i * sizeof(obj*))) );
+	return *(myself->value.avalue->elements + i);
 }
 
 obj* ctr_array_put(obj* myself, args* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
-	if (!argumentList->next) {
-		printf("Missing argument 2\n"); exit(1);
-	}
 	obj* putValue = argumentList->object;
 	obj* putIndex = argumentList->next->object;
 	if (putIndex->info.type != OTNUMBER) {
@@ -117,33 +141,32 @@ obj* ctr_array_put(obj* myself, args* argumentList) {
 	if (myself->value.avalue->head < i || i < 0) {
 		printf("Index out of bounds.\n"); exit(1);
 	}
-	*( (obj**) ((long)myself->value.avalue->elements + (i * sizeof(obj*))) ) = putValue;
+	*(myself->value.avalue->elements + i) = putValue;
 	return myself;
 }
 
 //@todo dont forget to gc arrays, they might hold refs to objects!
 obj* ctr_array_pop(obj* myself) {
-	if (myself->value.avalue->head == 0) {
+	if (myself->value.avalue->tail >= myself->value.avalue->head) {
 		return Nil;
 	}
 	myself->value.avalue->head--;
-	return (obj*) *((obj**)( (long) myself->value.avalue->elements + (myself->value.avalue->head * sizeof(obj*))  ));
+	return *(myself->value.avalue->elements + myself->value.avalue->head);
 }
 
 
 obj* ctr_array_shift(obj* myself) {
-	if (myself->value.avalue->head == 0) {
+	if (myself->value.avalue->tail >= myself->value.avalue->head) {
 		return Nil;
-	}
-	obj* shiftedOff = *(myself->value.avalue->elements);
-	myself->value.avalue->head--;
-	memmove(myself->value.avalue->elements,(obj**)((long)myself->value.avalue->elements+(sizeof(obj*))),myself->value.avalue->head*sizeof(obj*));
+	}	
+	obj* shiftedOff = *(myself->value.avalue->elements + myself->value.avalue->tail);
+	myself->value.avalue->tail++;
 	return shiftedOff;
 }
 
 obj* ctr_array_count(obj* myself) {
 	double d = 0;
-	d = (double) myself->value.avalue->head;
+	d = (double) myself->value.avalue->head - myself->value.avalue->tail;
 	return ctr_build_number_from_float( d );
 }
 
