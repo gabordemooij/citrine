@@ -644,11 +644,12 @@ obj* ctr_assign_value(obj* key, obj* o) {
 		object->value.avalue->length = o->value.avalue->length;
 		int i;
 		obj* putValue;
-		for (i = 0; i < o->value.avalue->head; i++) {
+		for (i = o->value.avalue->tail; i < o->value.avalue->head; i++) {
 			putValue = *( (obj**) ((long)o->value.avalue->elements + (i * sizeof(obj*))) );
 			*( (obj**) ((long)object->value.avalue->elements + (i * sizeof(obj*))) ) = putValue;
 		}
 		object->value.avalue->head = o->value.avalue->head;
+		object->value.avalue->tail = o->value.avalue->tail;
 	 }
 	 
 	return object;
