@@ -133,7 +133,7 @@ int clex_tok() {
 			code +=2; tokvlen = 3; memcpy(buffer, "≥", 3); return REF;
 		}
 		if (((char)*(code) == '<') && ((char)*(code+1)=='=')){
-			code +=2; tokvlen = 3; memcpy(buffer, "≤ ", 3); return REF;
+			code +=2; tokvlen = 3; memcpy(buffer, "≤", 3); return REF;
 		}
 		if (((char)*(code) == '!') && ((char)*(code+1)=='=')){
 			code +=2; tokvlen = 3; memcpy(buffer, "≠", 3); return REF;
