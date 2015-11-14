@@ -567,6 +567,14 @@ obj* ctr_string_eq(obj* myself, args* argumentList) {
 	return ctr_build_bool((strncmp(argumentList->object->value.svalue->value, myself->value.svalue->value, myself->value.svalue->vlen)==0));
 }
 
+obj* ctr_string_nfc(obj* myself, args* argumentList) {
+	char* tempBuffer = malloc(sizeof(char) * (myself->value.svalue->vlen + 1));
+	memcpy(tempBuffer,myself->value.svalue->value,myself->value.svalue->vlen);
+	tempBuffer[(myself->value.svalue->vlen)] = '\0';
+	char* dest = utf8proc_NFC(tempBuffer);
+	return ctr_build_string_from_cstring(dest);
+}
+
 /**
  * StringNonEquality
  *

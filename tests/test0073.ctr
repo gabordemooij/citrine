@@ -1,0 +1,6 @@
+Pen write: 'UTF8 normalization test', brk.
+Pen write: 'Unnormalized string length is:', brk.
+Pen write: 'Jalapeño' length, brk.
+Pen write: 'NFC string length is:', brk.
+Pen write: 'Jalapeño' nfc length, brk.
+

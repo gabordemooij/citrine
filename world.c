@@ -9,6 +9,7 @@
 #include <stdint.h>
 
 #include "citrine.h"
+#include "lib/utf8proc-1.3.1/utf8proc.h"
 
 obj* World = NULL;
 obj* contexts[100];
@@ -504,6 +505,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(TextString, ctr_build_string("rtrim", 5), &ctr_string_rtrim);
 	ctr_internal_create_func(TextString, ctr_build_string("toUpperCase", 11), &ctr_string_to_upper);
 	ctr_internal_create_func(TextString, ctr_build_string("toLowerCase", 11), &ctr_string_to_lower);
+	ctr_internal_create_func(TextString, ctr_build_string("nfc", 3), &ctr_string_nfc);
 	ctr_internal_create_func(TextString, ctr_build_string("esc", 3), &ctr_string_html_escape);
 	ctr_internal_create_func(TextString, ctr_build_string("at:", 3), &ctr_string_at);
 	ctr_internal_create_func(TextString, ctr_build_string("byteAt:", 7), &ctr_string_byte_at);

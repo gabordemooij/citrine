@@ -1,0 +1,5 @@
+UTF8 normalization test
+Unnormalized string length is:
+9
+NFC string length is:
+8

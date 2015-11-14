@@ -2,7 +2,7 @@
 all:ctr
 
 ctr:world.o lexer.o parser.o walker.o citrine.o
-	gcc world.o lexer.o parser.o walker.o citrine.o -lm -o ctr
+	gcc lib/utf8proc-1.3.1/utf8proc.o world.o lexer.o parser.o walker.o citrine.o -lm -o ctr
 
 world.o:
 	gcc -c world.c -Wall -o world.o
