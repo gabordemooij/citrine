@@ -567,12 +567,20 @@ obj* ctr_string_eq(obj* myself, args* argumentList) {
 	return ctr_build_bool((strncmp(argumentList->object->value.svalue->value, myself->value.svalue->value, myself->value.svalue->vlen)==0));
 }
 
+/**
+ * StringNFC
+ *
+ * Applies type C normalization to a UTF-8 string.
+ */
 obj* ctr_string_nfc(obj* myself, args* argumentList) {
-	char* tempBuffer = malloc(sizeof(char) * (myself->value.svalue->vlen + 1));
-	memcpy(tempBuffer,myself->value.svalue->value,myself->value.svalue->vlen);
-	tempBuffer[(myself->value.svalue->vlen)] = '\0';
-	char* dest = utf8proc_NFC(tempBuffer);
-	return ctr_build_string_from_cstring(dest);
+	utf8proc_uint8_t *retval;
+	utf8proc_map(
+		myself->value.svalue->value,
+		myself->value.svalue->vlen,
+		&retval,
+		UTF8PROC_STABLE | UTF8PROC_COMPOSE
+	);
+	return ctr_build_string_from_cstring(retval);
 }
 
 /**
