@@ -584,6 +584,22 @@ obj* ctr_string_nfc(obj* myself, args* argumentList) {
 }
 
 /**
+ * StringNFK
+ *
+ * Applies type C normalization to a UTF-8 string.
+ */
+obj* ctr_string_nfk(obj* myself, args* argumentList) {
+	utf8proc_uint8_t *retval;
+	utf8proc_map(
+		myself->value.svalue->value,
+		myself->value.svalue->vlen,
+		&retval,
+		UTF8PROC_STABLE | UTF8PROC_DECOMPOSE
+	);
+	return ctr_build_string_from_cstring(retval);
+}
+
+/**
  * StringNonEquality
  *
  * Returns True if the other string is not the same (in bytes).
