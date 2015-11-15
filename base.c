@@ -906,12 +906,21 @@ obj* ctr_string_rtrim(obj* myself, args* argumentList) {
 obj* ctr_string_to_upper(obj* myself, args* argumentList) {
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
-	char* tstr = malloc(len * sizeof(char));
-	int i=0;
-	for(i =0; i < len; i++) {
-		tstr[i] = toupper(str[i]);
+	char* tstr = malloc(len*sizeof(char));
+	utf8proc_uint8_t* str2 = (utf8proc_uint8_t*) str;
+	utf8proc_uint8_t* tstr2 = (utf8proc_uint8_t*) tstr;
+	utf8proc_uint32_t uc;
+	utf8proc_uint32_t uc2;
+	int pos = 0;
+	int post = 0;
+	utf8proc_ssize_t l = (utf8proc_ssize_t) len;
+	while(1) {
+		pos += utf8proc_iterate(str2 + pos, l - pos, &uc);
+		uc2 = utf8proc_toupper(uc);
+		post += utf8proc_encode_char(uc2, tstr2 + post);
+		if ((l - pos) < 1) break;
 	}
-	return ctr_build_string(tstr, len);
+	return ctr_build_string(tstr2, len);
 }
 
 /**
@@ -920,12 +929,21 @@ obj* ctr_string_to_upper(obj* myself, args* argumentList) {
 obj* ctr_string_to_lower(obj* myself, args* argumentList) {
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
-	char* tstr = malloc(len * sizeof(char));
-	int i=0;
-	for(i =0; i < len; i++) {
-		tstr[i] = tolower(str[i]);
+	char* tstr = malloc(len*sizeof(char));
+	utf8proc_uint8_t* str2 = (utf8proc_uint8_t*) str;
+	utf8proc_uint8_t* tstr2 = (utf8proc_uint8_t*) tstr;
+	utf8proc_uint32_t uc;
+	utf8proc_uint32_t uc2;
+	int pos = 0;
+	int post = 0;
+	utf8proc_ssize_t l = (utf8proc_ssize_t) len;
+	while(1) {
+		pos += utf8proc_iterate(str2 + pos, l - pos, &uc);
+		uc2 = utf8proc_tolower(uc);
+		post += utf8proc_encode_char(uc2, tstr2 + post);
+		if ((l - pos) < 1) break;
 	}
-	return ctr_build_string(tstr, len);
+	return ctr_build_string(tstr2, len);
 }
 
 /**
