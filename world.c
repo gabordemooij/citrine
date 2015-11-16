@@ -493,7 +493,7 @@ void ctr_initialize_world() {
 	ctr_internal_object_add_property(World, ctr_build_string("Shell", 5), CShell, 0);
 	TextString = ctr_internal_create_object(OTSTRING);
 	ctr_internal_create_func(TextString, ctr_build_string("bytes", 5), &ctr_string_bytes);
-	ctr_internal_create_func(TextString, ctr_build_string("length", 6), &ctr_string_length);
+	ctr_internal_create_func(TextString, ctr_build_string("codePoints", 10), &ctr_string_length);
 	ctr_internal_create_func(TextString, ctr_build_string("from:to:", 8), &ctr_string_fromto);
 	ctr_internal_create_func(TextString, ctr_build_string("from:length:", 12), &ctr_string_from_length);
 	ctr_internal_create_func(TextString, ctr_build_string("+", 1), &ctr_string_concat);

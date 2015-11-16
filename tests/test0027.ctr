@@ -1,6 +1,6 @@
-Pen write: 'Length is:' + 'ABCD' length.
+Pen write: 'Length is:' + 'ABCD' codePoints.
 x := 'ABCDE'.
-Pen write: 'Length is:' + x length.
-(('ABC' length + 1 = 4) && (2!=3)) opposite opposite ifTrue: {\ Pen write: 'Yes'. }.
+Pen write: 'Length is:' + x codePoints.
+(('ABC' codePoints + 1 = 4) && (2!=3)) opposite opposite ifTrue: {\ Pen write: 'Yes'. }.
 (((3 > 4) || (4 > 2)) && (True xor: False) && (True xor: True) opposite) ifTrue: {\ Pen write: 'Yes'. }.
 {\ Pen write: 'Running'. } run.
