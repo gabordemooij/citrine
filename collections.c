@@ -114,7 +114,11 @@ obj* ctr_array_join(obj* myself, args* argumentList) {
 	return resultStr;
 }
 
-
+/**
+ * ArrayGet
+ *
+ * Returns the element in the array at the specified index.
+ */
 obj* ctr_array_get(obj* myself, args* argumentList) {
 	obj* getIndex = argumentList->object;
 	if (getIndex->info.type != OTNUMBER) {
@@ -127,6 +131,11 @@ obj* ctr_array_get(obj* myself, args* argumentList) {
 	return *(myself->value.avalue->elements + i);
 }
 
+/**
+ * ArrayPut
+ *
+ * Puts a value in the array at the specified index.
+ */
 obj* ctr_array_put(obj* myself, args* argumentList) {
 	obj* putValue = argumentList->object;
 	obj* putIndex = argumentList->next->object;
@@ -141,6 +150,11 @@ obj* ctr_array_put(obj* myself, args* argumentList) {
 	return myself;
 }
 
+/**
+ * ArrayPop
+ *
+ * Pops off the last element of the array.
+ */
 //@todo dont forget to gc arrays, they might hold refs to objects!
 obj* ctr_array_pop(obj* myself) {
 	if (myself->value.avalue->tail >= myself->value.avalue->head) {
@@ -150,7 +164,11 @@ obj* ctr_array_pop(obj* myself) {
 	return *(myself->value.avalue->elements + myself->value.avalue->head);
 }
 
-
+/**
+ * ArrayShift
+ *
+ * Shifts off the first element of the array.
+ */
 obj* ctr_array_shift(obj* myself) {
 	if (myself->value.avalue->tail >= myself->value.avalue->head) {
 		return Nil;
@@ -160,6 +178,11 @@ obj* ctr_array_shift(obj* myself) {
 	return shiftedOff;
 }
 
+/**
+ * ArrayCount
+ *
+ * Returns the number of elements in the array.
+ */
 obj* ctr_array_count(obj* myself) {
 	double d = 0;
 	d = (double) myself->value.avalue->head - myself->value.avalue->tail;
@@ -186,6 +209,37 @@ obj* ctr_array_from_to(obj* myself, args* argumentList) {
 		elnumArg->object = elnum;
 		pushArg->object = ctr_array_get(myself, elnumArg);
 		ctr_array_push(newArray, pushArg);
+	}
+	return newArray;
+}
+
+/**
+ * ArrayAdd (+)
+ *
+ * Returns a new array, containing elements of itself and the other
+ * array.
+ */
+obj* ctr_array_add(obj* myself, args* argumentList) {
+	obj* otherArray = argumentList->object;
+	obj* newArray = ctr_array_new(CArray);
+	int i;
+	for(i = myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
+		args* pushArg = CTR_CREATE_ARGUMENT();
+		args* elnumArg = CTR_CREATE_ARGUMENT();
+		obj* elnum = ctr_build_number_from_float((float) i);
+		elnumArg->object = elnum;
+		pushArg->object = ctr_array_get(myself, elnumArg);
+		ctr_array_push(newArray, pushArg);
+	}
+	if (otherArray->info.type == OTARRAY) {
+		for(i = otherArray->value.avalue->tail; i<otherArray->value.avalue->head; i++) {
+			args* pushArg = CTR_CREATE_ARGUMENT();
+			args* elnumArg = CTR_CREATE_ARGUMENT();
+			obj* elnum = ctr_build_number_from_float((float) i);
+			elnumArg->object = elnum;
+			pushArg->object = ctr_array_get(otherArray, elnumArg);
+			ctr_array_push(newArray, pushArg);
+		}
 	}
 	return newArray;
 }

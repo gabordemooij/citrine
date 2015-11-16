@@ -532,6 +532,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CArray, ctr_build_string("at:", 3), &ctr_array_get);
 	ctr_internal_create_func(CArray, ctr_build_string("put:at:", 7), &ctr_array_put);
 	ctr_internal_create_func(CArray, ctr_build_string("from:length:", 12), &ctr_array_from_to);
+	ctr_internal_create_func(CArray, ctr_build_string("+", 1), &ctr_array_add);
 	ctr_internal_object_add_property(World, ctr_build_string("Array", 5), CArray, 0);
 	CArray->link = Object;
 	CFile = ctr_internal_create_object(OTOBJECT);
