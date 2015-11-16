@@ -922,8 +922,11 @@ obj* ctr_string_html_escape(obj* myself, obj* argumentList) {
 	return ctr_build_string(tstr, tlen);
 }
 
-
-
+/**
+ * BlockRun
+ *
+ * Runs a block of code.
+ */
 obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 	obj* result;
 	tnode* node = myself->value.block;
@@ -966,6 +969,12 @@ obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 	return result;
 }
 
+/**
+ * BlockWhileTrue
+ *
+ * Runs a block of code, depending on the outcome runs the other block
+ * as long as the result of the first one equals boolean True.
+ */
 obj* ctr_block_while_true(obj* myself, args* argumentList) {
 	while (1) {
 		obj* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, myself));
@@ -975,6 +984,12 @@ obj* ctr_block_while_true(obj* myself, args* argumentList) {
 	return myself;
 }
 
+/**
+ * BlockWhileFalse
+ *
+ * Runs a block of code, depending on the outcome runs the other block
+ * as long as the result of the first one equals boolean False.
+ */
 obj* ctr_block_while_false(obj* myself, args* argumentList) {
 	while (1) {
 		obj* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, myself));
@@ -984,15 +999,30 @@ obj* ctr_block_while_false(obj* myself, args* argumentList) {
 	return myself;
 }
 
+/**
+ * Alias for BlockRun.
+ */
 obj* ctr_block_runIt(obj* myself, args* argumentList) {
 	return ctr_block_run(myself, argumentList, myself);
 }
 
+/**
+ * BlockError
+ *
+ * Sets error flag on a block of code.
+ */
 obj* ctr_block_error(obj* myself, args* argumentList) {
 	error = argumentList->object;
 	return myself;
 }
 
+/**
+ * BlockCatch
+ *
+ * Associates an error clause to a block.
+ * If an error (exception) occurs within the block this block will be
+ * executed.
+ */
 obj* ctr_block_catch(obj* myself, args* argumentList) {
 	obj* catchBlock = argumentList->object;
 	ctr_internal_object_delete_property(myself, ctr_build_string("catch",5),0);
@@ -1000,11 +1030,12 @@ obj* ctr_block_catch(obj* myself, args* argumentList) {
 	return myself;
 }
 
+/**
+ * Builds a block object from a literal block of code.
+ */
 obj* ctr_build_block(tnode* node) {
 	obj* codeBlockObject = ctr_internal_create_object(OTBLOCK);
 	codeBlockObject->value.block = node;
 	codeBlockObject->link = CBlock;
 	return codeBlockObject;
 }
-
-
