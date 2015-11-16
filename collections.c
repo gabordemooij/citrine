@@ -167,6 +167,30 @@ obj* ctr_array_count(obj* myself) {
 }
 
 /**
+ * ArrayFromTo (Slice)
+ *
+ * Copies part of an array indicated by from and to and
+ * returns a new array consisting of a copy of this region.
+ */
+obj* ctr_array_from_to(obj* myself, args* argumentList) {
+	obj* startElement = ctr_internal_cast2number(argumentList->object);
+	obj* count = ctr_internal_cast2number(argumentList->next->object);
+	int start = (int) startElement->value.nvalue;
+	int len = (int) count->value.nvalue;
+	int i = 0;
+	obj* newArray = ctr_array_new(CArray);
+	for(i = start; i < start + len; i++) {
+		args* pushArg = CTR_CREATE_ARGUMENT();
+		args* elnumArg = CTR_CREATE_ARGUMENT();
+		obj* elnum = ctr_build_number_from_float((float) i);
+		elnumArg->object = elnum;
+		pushArg->object = ctr_array_get(myself, elnumArg);
+		ctr_array_push(newArray, pushArg);
+	}
+	return newArray;
+}
+
+/**
  * StringSplit
  *
  * Converts a string to an array by splitting the string using
