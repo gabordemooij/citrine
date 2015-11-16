@@ -966,6 +966,24 @@ obj* ctr_block_run(obj* myself, args* argList, obj* my) {
 	return result;
 }
 
+obj* ctr_block_while_true(obj* myself, args* argumentList) {
+	while (1) {
+		obj* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, myself));
+		if (result->value.bvalue == 0) break;
+		ctr_block_run(argumentList->object, argumentList, argumentList->object);
+	}
+	return myself;
+}
+
+obj* ctr_block_while_false(obj* myself, args* argumentList) {
+	while (1) {
+		obj* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, myself));
+		if (result->value.bvalue == 1) break;
+		ctr_block_run(argumentList->object, argumentList, argumentList->object);
+	}
+	return myself;
+}
+
 obj* ctr_block_runIt(obj* myself, args* argumentList) {
 	return ctr_block_run(myself, argumentList, myself);
 }

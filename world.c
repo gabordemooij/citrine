@@ -550,6 +550,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CBlock, ctr_build_string("run", 3), &ctr_block_run);
 	ctr_internal_create_func(CBlock, ctr_build_string("error:", 6), &ctr_block_error);
 	ctr_internal_create_func(CBlock, ctr_build_string("catch:", 6), &ctr_block_catch);
+	ctr_internal_create_func(CBlock, ctr_build_string("whileTrue:", 10), &ctr_block_while_true);
+	ctr_internal_create_func(CBlock, ctr_build_string("whileFalse:", 11), &ctr_block_while_false);
 	ctr_internal_object_add_property(World, ctr_build_string("CodeBlock", 9), CBlock, 0);
 	CBlock->link = Object;
 	BoolX = ctr_internal_create_object(OTBOOL);
