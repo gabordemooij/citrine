@@ -568,38 +568,6 @@ obj* ctr_string_eq(obj* myself, args* argumentList) {
 }
 
 /**
- * StringNFC
- *
- * Applies type C normalization to a UTF-8 string.
- */
-obj* ctr_string_nfc(obj* myself, args* argumentList) {
-	utf8proc_uint8_t *retval;
-	utf8proc_map(
-		myself->value.svalue->value,
-		myself->value.svalue->vlen,
-		&retval,
-		UTF8PROC_STABLE | UTF8PROC_COMPOSE
-	);
-	return ctr_build_string_from_cstring(retval);
-}
-
-/**
- * StringNFK
- *
- * Applies type C normalization to a UTF-8 string.
- */
-obj* ctr_string_nfk(obj* myself, args* argumentList) {
-	utf8proc_uint8_t *retval;
-	utf8proc_map(
-		myself->value.svalue->value,
-		myself->value.svalue->vlen,
-		&retval,
-		UTF8PROC_STABLE | UTF8PROC_DECOMPOSE
-	);
-	return ctr_build_string_from_cstring(retval);
-}
-
-/**
  * StringNonEquality
  *
  * Returns True if the other string is not the same (in bytes).
@@ -900,51 +868,6 @@ obj* ctr_string_rtrim(obj* myself, args* argumentList) {
 	return ctr_build_string(tstr, tlen);
 }
 
-/**
- * StringToUpperCase
- */
-obj* ctr_string_to_upper(obj* myself, args* argumentList) {
-	char* str = myself->value.svalue->value;
-	long  len = myself->value.svalue->vlen;
-	char* tstr = malloc(len*sizeof(char));
-	utf8proc_uint8_t* str2 = (utf8proc_uint8_t*) str;
-	utf8proc_uint8_t* tstr2 = (utf8proc_uint8_t*) tstr;
-	utf8proc_uint32_t uc;
-	utf8proc_uint32_t uc2;
-	int pos = 0;
-	int post = 0;
-	utf8proc_ssize_t l = (utf8proc_ssize_t) len;
-	while(1) {
-		pos += utf8proc_iterate(str2 + pos, l - pos, &uc);
-		uc2 = utf8proc_toupper(uc);
-		post += utf8proc_encode_char(uc2, tstr2 + post);
-		if ((l - pos) < 1) break;
-	}
-	return ctr_build_string(tstr2, len);
-}
-
-/**
- * StringToLowerCase 
- */
-obj* ctr_string_to_lower(obj* myself, args* argumentList) {
-	char* str = myself->value.svalue->value;
-	long  len = myself->value.svalue->vlen;
-	char* tstr = malloc(len*sizeof(char));
-	utf8proc_uint8_t* str2 = (utf8proc_uint8_t*) str;
-	utf8proc_uint8_t* tstr2 = (utf8proc_uint8_t*) tstr;
-	utf8proc_uint32_t uc;
-	utf8proc_uint32_t uc2;
-	int pos = 0;
-	int post = 0;
-	utf8proc_ssize_t l = (utf8proc_ssize_t) len;
-	while(1) {
-		pos += utf8proc_iterate(str2 + pos, l - pos, &uc);
-		uc2 = utf8proc_tolower(uc);
-		post += utf8proc_encode_char(uc2, tstr2 + post);
-		if ((l - pos) < 1) break;
-	}
-	return ctr_build_string(tstr2, len);
-}
 
 /**
  * StringHTMLEscape
