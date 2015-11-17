@@ -290,7 +290,38 @@ obj* ctr_string_split(obj* myself, args* argumentList) {
 	return arr;
 }
 
+/**
+ * Internal sort function, for use with ArraySort.
+ * Interfaces with qsort-compatible function.
+ */
+obj* temp_sorter;
+int ctr_sort_cmp(const void * a, const void * b) {
+	args* arg1 = CTR_CREATE_ARGUMENT();
+	args* arg2 = CTR_CREATE_ARGUMENT();
+	arg1->next = arg2;
+	arg1->object = *((obj**) a);
+	arg2->object = *((obj**) b);
+	obj* result = ctr_block_run(temp_sorter, arg1, temp_sorter);
+	obj* numResult = ctr_internal_cast2number(result);
+	return (int) numResult->value.nvalue;
+}
 
+/**
+ * ArraySort
+ *
+ * Sorts the contents of an array using a sort block.
+ * Uses qsort.
+ */
+obj* ctr_array_sort(obj* myself, args* argumentList) {
+	obj* sorter = argumentList->object;
+	if (sorter->info.type != OTBLOCK) {
+		error = ctr_build_string_from_cstring("Expected block.\0");
+		return myself;
+	}
+	temp_sorter = sorter;
+	qsort(myself->value.avalue->elements, myself->value.avalue->head, sizeof(obj*), ctr_sort_cmp);
+	return myself;
+}
 
 obj* ctr_map_new(obj* myclass) {
 	obj* s = ctr_internal_create_object(OTOBJECT);

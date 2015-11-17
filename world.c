@@ -530,6 +530,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CArray, ctr_build_string("join:", 5), &ctr_array_join);
 	ctr_internal_create_func(CArray, ctr_build_string("pop", 3), &ctr_array_pop);
 	ctr_internal_create_func(CArray, ctr_build_string("at:", 3), &ctr_array_get);
+	ctr_internal_create_func(CArray, ctr_build_string("sort:", 5), &ctr_array_sort);
 	ctr_internal_create_func(CArray, ctr_build_string("put:at:", 7), &ctr_array_put);
 	ctr_internal_create_func(CArray, ctr_build_string("from:length:", 12), &ctr_array_from_to);
 	ctr_internal_create_func(CArray, ctr_build_string("+", 1), &ctr_array_add);
