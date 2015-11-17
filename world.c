@@ -402,14 +402,14 @@ void ctr_set(obj* key, obj* object) {
 }
 
 
-
-
 #include "base.c"
 #include "system.c"
 #include "collections.c"
 #include "file.c"
 
-
+/**
+ * Populate the World of Citrine.
+ */
 void ctr_initialize_world() {
 	srand((unsigned)time(NULL));
 	
@@ -417,6 +417,8 @@ void ctr_initialize_world() {
 	
 	World = ctr_internal_create_object(OTOBJECT);
 	contexts[0] = World;
+
+	//Object
 	Object = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(Object, ctr_build_string("new", 3), &ctr_object_make);
 	ctr_internal_create_func(Object, ctr_build_string("equals:", 7), &ctr_object_equals);
@@ -427,14 +429,26 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(Object, ctr_build_string("respondTo:with:", 15), &ctr_object_respond);
 	ctr_internal_create_func(Object, ctr_build_string("respondTo:with:and:", 19), &ctr_object_respond);
 	ctr_internal_create_func(Object, ctr_build_string("new", 3), &ctr_object_make);
-	Object->link = NULL;
 	ctr_internal_object_add_property(World, ctr_build_string("Object", 6), Object, 0);
-	Console = ctr_internal_create_object(OTOBJECT);
-	ctr_internal_create_func(Console, ctr_build_string("write:", 6), &ctr_console_write);
-	ctr_internal_create_func(Console, ctr_build_string("brk", 3), &ctr_console_brk);
-	ctr_internal_object_add_property(World, ctr_build_string("Pen", 3), Console, 0);
-	Console->link = Object;
-	Console->info.flagb = 1;
+	Object->link = NULL;
+
+	//Nil
+	Nil = ctr_internal_create_object(OTNIL);
+	ctr_internal_object_add_property(World, ctr_build_string("Nil", 3), Nil, 0);
+	Nil->link = Object;
+
+	//Boolean
+	BoolX = ctr_internal_create_object(OTBOOL);
+	ctr_internal_create_func(BoolX, ctr_build_string("ifTrue:", 7), &ctr_bool_iftrue);
+	ctr_internal_create_func(BoolX, ctr_build_string("ifFalse:", 8), &ctr_bool_ifFalse);
+	ctr_internal_create_func(BoolX, ctr_build_string("opposite", 8), &ctr_bool_opposite);
+	ctr_internal_create_func(BoolX, ctr_build_string("∧", 3), &ctr_bool_and);
+	ctr_internal_create_func(BoolX, ctr_build_string("∨", 3), &ctr_bool_or);
+	ctr_internal_create_func(BoolX, ctr_build_string("xor:", 4), &ctr_bool_xor);
+	ctr_internal_object_add_property(World, ctr_build_string("Boolean", 7), BoolX, 0);
+	BoolX->link = Object;
+
+	//Number
 	Number = ctr_internal_create_object(OTNUMBER);
 	ctr_internal_create_func(Number, ctr_build_string("+", 1), &ctr_number_add);
 	ctr_internal_create_func(Number, ctr_build_string("inc:",4), &ctr_number_inc);
@@ -470,27 +484,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(Number, ctr_build_string("between:and:",12),&ctr_number_between);
 	ctr_internal_object_add_property(World, ctr_build_string("Number", 6), Number, 0);
 	Number->link = Object;
-	CDice = ctr_internal_create_object(OTOBJECT);
-	ctr_internal_create_func(CDice, ctr_build_string("roll", 4), &ctr_dice_throw);
-	ctr_internal_create_func(CDice, ctr_build_string("rollWithSides:", 14), &ctr_dice_sides);
-	ctr_internal_object_add_property(World, ctr_build_string("Dice", 4), CDice, 0);
-	CDice->link = Object;
-	CCoin = ctr_internal_create_object(OTOBJECT);
-	ctr_internal_create_func(CCoin, ctr_build_string("flip", 4), &ctr_coin_flip);
-	ctr_internal_object_add_property(World, ctr_build_string("Coin", 4), CCoin, 0);
-	CCoin->link = Object;
-	CClock = ctr_internal_create_object(OTOBJECT);
-	ctr_internal_create_func(CClock, ctr_build_string("wait:", 5), &ctr_clock_wait);
-	ctr_internal_object_add_property(World, ctr_build_string("Clock", 5), CClock, 0);
-	CClock->link = Object;
-	CCommand = ctr_internal_create_object(OTOBJECT);
-	ctr_internal_create_func(CCommand, ctr_build_string("argument:", 9), &ctr_command_argument);
-	ctr_internal_create_func(CCommand, ctr_build_string("argCount", 8), &ctr_command_num_of_args);
-	ctr_internal_object_add_property(World, ctr_build_string("Command", 7), CCommand, 0);
-	CCommand->link = Object;
-	CShell = ctr_internal_create_object(OTOBJECT);
-	ctr_internal_create_func(CShell, ctr_build_string("call:", 5), &ctr_shell_call);
-	ctr_internal_object_add_property(World, ctr_build_string("Shell", 5), CShell, 0);
+
+	//String
 	TextString = ctr_internal_create_object(OTSTRING);
 	ctr_internal_create_func(TextString, ctr_build_string("bytes", 5), &ctr_string_bytes);
 	ctr_internal_create_func(TextString, ctr_build_string("codePoints", 10), &ctr_string_length);
@@ -511,14 +506,18 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(TextString, ctr_build_string("split:", 6), &ctr_string_split);
 	ctr_internal_object_add_property(World, ctr_build_string("String", 6), TextString, 0);
 	TextString->link = Object;
-	CMap = ctr_internal_create_object(OTOBJECT);
-	ctr_internal_create_func(CMap, ctr_build_string("new", 3), &ctr_map_new);
-	ctr_internal_create_func(CMap, ctr_build_string("put:at:", 7), &ctr_map_put);
-	ctr_internal_create_func(CMap, ctr_build_string("at:", 3), &ctr_map_get);
-	ctr_internal_create_func(CMap, ctr_build_string("count", 5), &ctr_map_count);
-	ctr_internal_create_func(CMap, ctr_build_string("each:", 5), &ctr_map_each);
-	ctr_internal_object_add_property(World, ctr_build_string("Map", 3), CMap, 0);
-	CMap->link = Object;
+
+	//Block
+	CBlock = ctr_internal_create_object(OTBLOCK);
+	ctr_internal_create_func(CBlock, ctr_build_string("run", 3), &ctr_block_run);
+	ctr_internal_create_func(CBlock, ctr_build_string("error:", 6), &ctr_block_error);
+	ctr_internal_create_func(CBlock, ctr_build_string("catch:", 6), &ctr_block_catch);
+	ctr_internal_create_func(CBlock, ctr_build_string("whileTrue:", 10), &ctr_block_while_true);
+	ctr_internal_create_func(CBlock, ctr_build_string("whileFalse:", 11), &ctr_block_while_false);
+	ctr_internal_object_add_property(World, ctr_build_string("CodeBlock", 9), CBlock, 0);
+	CBlock->link = Object;
+
+	//Array
 	CArray = ctr_array_new(Object);
 	ctr_internal_create_func(CArray, ctr_build_string("new", 3), &ctr_array_new);
 	ctr_internal_create_func(CArray, ctr_build_string("←", 3), &ctr_array_new_and_push);
@@ -535,6 +534,26 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CArray, ctr_build_string("+", 1), &ctr_array_add);
 	ctr_internal_object_add_property(World, ctr_build_string("Array", 5), CArray, 0);
 	CArray->link = Object;
+
+	//Map
+	CMap = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CMap, ctr_build_string("new", 3), &ctr_map_new);
+	ctr_internal_create_func(CMap, ctr_build_string("put:at:", 7), &ctr_map_put);
+	ctr_internal_create_func(CMap, ctr_build_string("at:", 3), &ctr_map_get);
+	ctr_internal_create_func(CMap, ctr_build_string("count", 5), &ctr_map_count);
+	ctr_internal_create_func(CMap, ctr_build_string("each:", 5), &ctr_map_each);
+	ctr_internal_object_add_property(World, ctr_build_string("Map", 3), CMap, 0);
+	CMap->link = Object;
+
+	//Console
+	Console = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(Console, ctr_build_string("write:", 6), &ctr_console_write);
+	ctr_internal_create_func(Console, ctr_build_string("brk", 3), &ctr_console_brk);
+	ctr_internal_object_add_property(World, ctr_build_string("Pen", 3), Console, 0);
+	Console->link = Object;
+	Console->info.flagb = 1;
+
+	//File
 	CFile = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(CFile, ctr_build_string("new:", 4), &ctr_file_new);
 	ctr_internal_create_func(CFile, ctr_build_string("path", 4), &ctr_file_path);
@@ -546,32 +565,45 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CFile, ctr_build_string("delete", 6), &ctr_file_delete);
 	ctr_internal_object_add_property(World, ctr_build_string("File", 4), CFile, 0);
 	CFile->link = Object;
-	CBlock = ctr_internal_create_object(OTBLOCK);
-	ctr_internal_create_func(CBlock, ctr_build_string("run", 3), &ctr_block_run);
-	ctr_internal_create_func(CBlock, ctr_build_string("error:", 6), &ctr_block_error);
-	ctr_internal_create_func(CBlock, ctr_build_string("catch:", 6), &ctr_block_catch);
-	ctr_internal_create_func(CBlock, ctr_build_string("whileTrue:", 10), &ctr_block_while_true);
-	ctr_internal_create_func(CBlock, ctr_build_string("whileFalse:", 11), &ctr_block_while_false);
-	ctr_internal_object_add_property(World, ctr_build_string("CodeBlock", 9), CBlock, 0);
-	CBlock->link = Object;
-	BoolX = ctr_internal_create_object(OTBOOL);
-	ctr_internal_create_func(BoolX, ctr_build_string("ifTrue:", 7), &ctr_bool_iftrue);
-	ctr_internal_create_func(BoolX, ctr_build_string("ifFalse:", 8), &ctr_bool_ifFalse);
-	ctr_internal_create_func(BoolX, ctr_build_string("opposite", 8), &ctr_bool_opposite);
-	ctr_internal_create_func(BoolX, ctr_build_string("∧", 3), &ctr_bool_and);
-	ctr_internal_create_func(BoolX, ctr_build_string("∨", 3), &ctr_bool_or);
-	ctr_internal_create_func(BoolX, ctr_build_string("xor:", 4), &ctr_bool_xor);
-	ctr_internal_object_add_property(World, ctr_build_string("Boolean", 7), BoolX, 0);
-	BoolX->link = Object;
+
+	//Command
+	CCommand = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CCommand, ctr_build_string("argument:", 9), &ctr_command_argument);
+	ctr_internal_create_func(CCommand, ctr_build_string("argCount", 8), &ctr_command_num_of_args);
+	ctr_internal_object_add_property(World, ctr_build_string("Command", 7), CCommand, 0);
+	CCommand->link = Object;
+
+	//Clock
+	CClock = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CClock, ctr_build_string("wait:", 5), &ctr_clock_wait);
+	ctr_internal_object_add_property(World, ctr_build_string("Clock", 5), CClock, 0);
+	CClock->link = Object;
+
+	//Dice
+	CDice = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CDice, ctr_build_string("roll", 4), &ctr_dice_throw);
+	ctr_internal_create_func(CDice, ctr_build_string("rollWithSides:", 14), &ctr_dice_sides);
+	ctr_internal_object_add_property(World, ctr_build_string("Dice", 4), CDice, 0);
+	CDice->link = Object;
+
+	//Coin
+	CCoin = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CCoin, ctr_build_string("flip", 4), &ctr_coin_flip);
+	ctr_internal_object_add_property(World, ctr_build_string("Coin", 4), CCoin, 0);
+	CCoin->link = Object;
+
+	//Shell
+	CShell = ctr_internal_create_object(OTOBJECT);
+	ctr_internal_create_func(CShell, ctr_build_string("call:", 5), &ctr_shell_call);
+	ctr_internal_object_add_property(World, ctr_build_string("Shell", 5), CShell, 0);
+
+	//Broom
 	GC = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(GC, ctr_build_string("sweep", 5), &ctr_gc_collect);
 	ctr_internal_create_func(GC, ctr_build_string("dust", 4), &ctr_gc_dust);
 	ctr_internal_create_func(GC, ctr_build_string("objectCount", 11), &ctr_gc_object_count);
 	ctr_internal_object_add_property(World, ctr_build_string("Broom", 5), GC, 0);
 	GC->link = Object;
-	Nil = ctr_internal_create_object(OTNIL);
-	ctr_internal_object_add_property(World, ctr_build_string("Nil", 3), Nil, 0);
-	Nil->link = Object;
 }
 
 
