@@ -136,7 +136,7 @@ obj* cwlk_expr(tnode* node) {
 			}
 			exit(1);
 		}
-		exit(0);
+		result = ctr_build_nil();
 	} else {
 		printf("Runtime Error. Invalid parse node: %d %s \n", node->type,node->value);
 		exit(1);

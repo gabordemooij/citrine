@@ -1,0 +1,9 @@
+Start include test
+String,Number
+String,Boolean
+Number,String
+Number,Boolean
+
+End include test
+Are my variables still intact?
+123

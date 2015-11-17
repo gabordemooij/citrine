@@ -126,6 +126,18 @@ obj* ctr_file_exists(obj* myself) {
 	return ctr_build_bool(exists);
 }
 
+obj* ctr_file_include(obj* myself) {
+	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+	if (path == NULL) return ctr_build_bool(0);
+	long vlen = path->value.svalue->vlen;
+	char* pathString = malloc(vlen + 1);
+	memcpy(pathString, path->value.svalue->value, vlen);
+	memcpy(pathString+vlen,"\0",1);
+	char* prg = readf(pathString);
+	tnode* parsedCode = dparse_parse(prg);
+	cwlk_run(parsedCode);
+}
+
 obj* ctr_file_delete(obj* myself) {
 	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return ctr_build_bool(0);

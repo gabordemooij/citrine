@@ -570,6 +570,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CFile, ctr_build_string("exists", 6), &ctr_file_exists);
 	ctr_internal_create_func(CFile, ctr_build_string("size", 4), &ctr_file_size);
 	ctr_internal_create_func(CFile, ctr_build_string("delete", 6), &ctr_file_delete);
+	ctr_internal_create_func(CFile, ctr_build_string("include", 7), &ctr_file_include);
 	ctr_internal_object_add_property(World, ctr_build_string("File", 4), CFile, 0);
 	CFile->link = Object;
 
