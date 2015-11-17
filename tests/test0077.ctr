@@ -1,0 +1,4 @@
+Pen write: '12' type + ',' + ('12' toNumber) type, brk.
+Pen write: 'False' type + ',' + ('False' toBoolean) type, brk.
+Pen write: 12 type + ',' + (12 toString) type, brk.
+Pen write: 12 type + ',' + (12 toBoolean) type, brk.

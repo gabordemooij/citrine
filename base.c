@@ -25,6 +25,27 @@ obj* ctr_object_make() {
 }
 
 /**
+ * ObjectType
+ *
+ * Returns a string representation of the type of object.
+ */
+obj* ctr_object_type(obj* myself, args* argumentList) {
+	int type = myself->info.type;
+	if (type == OTNIL) {
+		return ctr_build_string_from_cstring("Nil\0");
+	} else if (type == OTBOOL) {
+		return ctr_build_string_from_cstring("Boolean\0");
+	} else if (type == OTNUMBER) {
+		return ctr_build_string_from_cstring("Number\0");
+	} else if (type == OTSTRING) {
+		return ctr_build_string_from_cstring("String\0");
+	} else if (type == OTBLOCK || type == OTNATFUNC) {
+		return ctr_build_string_from_cstring("Block\0");
+	}
+	return ctr_build_string_from_cstring("Object\0");
+}
+
+/**
  * Equals
  *
  * Tests whether the current instance is the same as
@@ -493,6 +514,23 @@ obj* ctr_number_log(obj* myself, args* argumentList) {
 	return ctr_build_number_from_float(log(myself->value.nvalue));
 }
 
+/**
+ * NumberToString
+ *
+ * Wrapper for cast function.
+ */
+obj* ctr_number_to_string(obj* myself, args* argumentList) {
+	return ctr_internal_cast2string(myself);
+}
+
+/**
+ * NumberToBoolean
+ *
+ * Wrapper for cast function.
+ */
+obj* ctr_number_to_boolean(obj* myself, args* argumentList) {
+	return ctr_internal_cast2bool(myself);
+}
 
 /**
  * Times
@@ -868,6 +906,23 @@ obj* ctr_string_rtrim(obj* myself, args* argumentList) {
 	return ctr_build_string(tstr, tlen);
 }
 
+/**
+ * StringToNumber
+ *
+ * Wrapper for cast function.
+ */
+obj* ctr_string_to_number(obj* myself, args* argumentList) {
+	return ctr_internal_cast2number(myself);
+}
+
+/**
+ * StringToBooleam
+ *
+ * Wrapper for cast function.
+ */
+obj* ctr_string_to_boolean(obj* myself, args* argumentList) {
+	return ctr_internal_cast2bool(myself);
+}
 
 /**
  * StringHTMLEscape

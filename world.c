@@ -428,6 +428,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(Object, ctr_build_string("respondTo:", 10), &ctr_object_respond);
 	ctr_internal_create_func(Object, ctr_build_string("respondTo:with:", 15), &ctr_object_respond);
 	ctr_internal_create_func(Object, ctr_build_string("respondTo:with:and:", 19), &ctr_object_respond);
+	ctr_internal_create_func(Object, ctr_build_string("type", 4), &ctr_object_type);
 	ctr_internal_create_func(Object, ctr_build_string("new", 3), &ctr_object_make);
 	ctr_internal_object_add_property(World, ctr_build_string("Object", 6), Object, 0);
 	Object->link = NULL;
@@ -482,6 +483,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(Number, ctr_build_string("pow:",4),&ctr_number_pow);
 	ctr_internal_create_func(Number, ctr_build_string("min:",4),&ctr_number_min);
 	ctr_internal_create_func(Number, ctr_build_string("max:",4),&ctr_number_max);
+	ctr_internal_create_func(Number, ctr_build_string("toString", 8), &ctr_number_to_string);
+	ctr_internal_create_func(Number, ctr_build_string("toBoolean", 9), &ctr_number_to_boolean);
 	ctr_internal_create_func(Number, ctr_build_string("between:and:",12),&ctr_number_between);
 	ctr_internal_object_add_property(World, ctr_build_string("Number", 6), Number, 0);
 	Number->link = Object;
@@ -505,6 +508,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(TextString, ctr_build_string("lastIndexOf:", 12), &ctr_string_last_index_of);
 	ctr_internal_create_func(TextString, ctr_build_string("replace:with:", 13), &ctr_string_replace_with);
 	ctr_internal_create_func(TextString, ctr_build_string("split:", 6), &ctr_string_split);
+	ctr_internal_create_func(TextString, ctr_build_string("toNumber", 8), &ctr_string_to_number);
+	ctr_internal_create_func(TextString, ctr_build_string("toBoolean", 9), &ctr_string_to_boolean);
 	ctr_internal_object_add_property(World, ctr_build_string("String", 6), TextString, 0);
 	TextString->link = Object;
 
