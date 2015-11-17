@@ -441,6 +441,7 @@ void ctr_initialize_world() {
 	BoolX = ctr_internal_create_object(OTBOOL);
 	ctr_internal_create_func(BoolX, ctr_build_string("ifTrue:", 7), &ctr_bool_iftrue);
 	ctr_internal_create_func(BoolX, ctr_build_string("ifFalse:", 8), &ctr_bool_ifFalse);
+	ctr_internal_create_func(BoolX, ctr_build_string("else:", 5), &ctr_bool_ifFalse);
 	ctr_internal_create_func(BoolX, ctr_build_string("opposite", 8), &ctr_bool_opposite);
 	ctr_internal_create_func(BoolX, ctr_build_string("∧", 3), &ctr_bool_and);
 	ctr_internal_create_func(BoolX, ctr_build_string("∨", 3), &ctr_bool_or);
