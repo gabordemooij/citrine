@@ -447,6 +447,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(BoolX, ctr_build_string("∧", 3), &ctr_bool_and);
 	ctr_internal_create_func(BoolX, ctr_build_string("∨", 3), &ctr_bool_or);
 	ctr_internal_create_func(BoolX, ctr_build_string("xor:", 4), &ctr_bool_xor);
+	ctr_internal_create_func(BoolX, ctr_build_string("toNumber", 8), &ctr_bool_to_number);
+	ctr_internal_create_func(BoolX, ctr_build_string("toString", 8), &ctr_bool_to_string);
 	ctr_internal_object_add_property(World, ctr_build_string("Boolean", 7), BoolX, 0);
 	BoolX->link = Object;
 

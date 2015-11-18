@@ -533,6 +533,16 @@ obj* ctr_number_to_boolean(obj* myself, args* argumentList) {
 }
 
 /**
+ * BooleanToNumber
+ *
+ * Wrapper for cast function.
+ * Returns 0 if boolean is False and 1 otherwise.
+ */
+obj* ctr_bool_to_number(obj* myself, args* argumentList) {
+	return ctr_build_number_from_float( (float) myself->value.bvalue );
+}
+
+/**
  * Times
  *
  * Runs the specified code block N times.
@@ -922,6 +932,15 @@ obj* ctr_string_to_number(obj* myself, args* argumentList) {
  */
 obj* ctr_string_to_boolean(obj* myself, args* argumentList) {
 	return ctr_internal_cast2bool(myself);
+}
+
+/**
+ * BooleanToString
+ *
+ * Simple cast function.
+ */
+obj* ctr_bool_to_string(obj* myself, args* argumentList) {
+	return ctr_internal_cast2string(myself);
 }
 
 /**

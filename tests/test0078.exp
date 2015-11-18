@@ -3,6 +3,14 @@ String,Number
 String,Boolean
 Number,String
 Number,Boolean
+Boolean,Number
+Boolean,Number
+Boolean,String
+Boolean,String
+=== String test ===
+123
+[False]
+[True]
 
 End include test
 Are my variables still intact?
