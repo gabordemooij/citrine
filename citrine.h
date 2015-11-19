@@ -92,8 +92,6 @@ struct ctr_object {
 		unsigned int type: 4;
 		unsigned int mark: 1;
 		unsigned int sticky: 1;
-		unsigned int flaga: 1;
-		unsigned int flagb: 1;
 	 } info;
     struct ctr_object* link;
     union uvalue {

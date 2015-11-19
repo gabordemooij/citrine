@@ -7,7 +7,6 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* s = ctr_object_make();
 	s->info.type = CTR_OBJECT_TYPE_OTMISC;
 	s->link = myself;
-	s->info.flagb = 1;
 	s->value.rvalue = malloc(sizeof(ctr_resource));
 	s->value.rvalue->type = 1;
 	ctr_object* pathObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
