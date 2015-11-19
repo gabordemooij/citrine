@@ -29,7 +29,7 @@ ctr_tnode* cparse_message(int mode) {
 	msg = malloc(255*sizeof(char));
 	memcpy(msg, s, msgpartlen);
 	
-	int ulen = getutf8len(msg, msgpartlen);
+	size_t ulen = ctr_getutf8len(msg, msgpartlen);
 	int isBin = (ulen == 1);
 	
 	if (mode == 2 && isBin) {

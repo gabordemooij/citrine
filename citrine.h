@@ -179,7 +179,7 @@ ctr_object* ctr_build_bool(int truth);
 ctr_object* ctr_build_nil();
 ctr_object* ctr_build_string_from_cstring( char* str );
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my);
-long getutf8len(char* strval, long max);
+size_t ctr_getutf8len(char* strval, size_t max);
 
 int __argc;
 char** __argv;

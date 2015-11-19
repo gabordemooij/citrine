@@ -634,7 +634,7 @@ ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
  * This message is UTF-8 unicode aware. A 4 byte character will be counted as ONE.
  */
 ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
-	long n = getutf8len(myself->value.svalue->value, myself->value.svalue->vlen);
+	size_t n = ctr_getutf8len(myself->value.svalue->value, (size_t) myself->value.svalue->vlen);
 	char* str = calloc(100, sizeof(char));
 	snprintf(str, 100, "%lu", n);
 	return ctr_build_number(str);
@@ -777,8 +777,8 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
 	char* p = ctr_internal_memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen, 0);
 	if (p == NULL) return ctr_build_number_from_float((float)-1);
 	uintptr_t byte_index = (uintptr_t) p - (uintptr_t) (myself->value.svalue->value);
-	uintptr_t uchar_index = getutf8len(myself->value.svalue->value, byte_index);
-	return ctr_build_number_from_float((float) uchar_index);
+	size_t uchar_index = ctr_getutf8len(myself->value.svalue->value, byte_index);
+	return ctr_build_number_from_float((ctr_number) uchar_index);
 }
 
 /**
@@ -796,8 +796,8 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentL
 	long nlen = sub->value.svalue->vlen;
 	char* p = ctr_internal_memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen, 1);
 	if (p == NULL) return ctr_build_number_from_float((float)-1);
-	uintptr_t byte_index = (uintptr_t) p - (uintptr_t) (myself->value.svalue->value);
-	uintptr_t uchar_index = getutf8len(myself->value.svalue->value, byte_index);
+	size_t byte_index = (size_t) ( (uintptr_t) p - (uintptr_t) (myself->value.svalue->value) );
+	size_t uchar_index = ctr_getutf8len(myself->value.svalue->value, byte_index);
 	return ctr_build_number_from_float((float) uchar_index);
 }
 

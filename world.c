@@ -38,25 +38,25 @@ int gc_object_count = 0;
 int debug;
 
 //measures the size of character
-int utf8size(char c) {
+int ctr_utf8size(char c) {
 	if ((c & CTR_UTF8_BYTE3) == CTR_UTF8_BYTE3) return 4;
 	if ((c & CTR_UTF8_BYTE2) == CTR_UTF8_BYTE2) return 3;
 	if ((c & CTR_UTF8_BYTE1) == CTR_UTF8_BYTE1) return 2;
 	return 1;
 }
 //measures the length of an utf8 string in utf8 chars
-long getutf8len(char* strval, long max) {
-	long i;
-	long j = 0;
-	int s = 0;
+size_t ctr_getutf8len(char* strval, size_t max) {
+	size_t i;
+	size_t j = 0;
+	size_t s = 0;
 	for(i = 0; i < max; i++) {
-		s = utf8size(strval[i]);
+		s = ctr_utf8size(strval[i]);
 		j += (s - 1);
 	}
 	return (i-j);
 }
 
-long getBytesUtf8(char* strval, long startByte, long lenUChar) {
+size_t getBytesUtf8(char* strval, long startByte, size_t lenUChar) {
 	long i = 0;
 	long bytes = 0;
 	int s = 0;
@@ -65,7 +65,7 @@ long getBytesUtf8(char* strval, long startByte, long lenUChar) {
 	while(x < lenUChar) {
 		index = startByte + i;
 		char c = strval[index];
-		s = utf8size(c);
+		s = ctr_utf8size(c);
 		bytes = bytes + s;
 		i = i + s;
 		x ++;
