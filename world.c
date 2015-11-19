@@ -7,6 +7,7 @@
 #include <math.h>
 #include <unistd.h>
 #include <stdint.h>
+#include <time.h>
 
 #include "citrine.h"
 
@@ -142,8 +143,8 @@ int ctr_internal_object_is_equal(obj* object1, obj* object2) {
 	}
 	
 	if (object1->info.type == OTNUMBER && object2->info.type == OTNUMBER) {
-		double num1 = object1->value.nvalue;
-		double num2 = object2->value.nvalue;
+		ctr_number num1 = object1->value.nvalue;
+		ctr_number num2 = object2->value.nvalue;
 		if (num1 == num2) return 1;
 		return 0;
 	}
@@ -503,7 +504,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(TextString, ctr_build_string("trim", 4), &ctr_string_trim);
 	ctr_internal_create_func(TextString, ctr_build_string("ltrim", 5), &ctr_string_ltrim);
 	ctr_internal_create_func(TextString, ctr_build_string("rtrim", 5), &ctr_string_rtrim);
-	ctr_internal_create_func(TextString, ctr_build_string("esc", 3), &ctr_string_html_escape);
+	ctr_internal_create_func(TextString, ctr_build_string("htmlEscape", 10), &ctr_string_html_escape);
 	ctr_internal_create_func(TextString, ctr_build_string("at:", 3), &ctr_string_at);
 	ctr_internal_create_func(TextString, ctr_build_string("byteAt:", 7), &ctr_string_byte_at);
 	ctr_internal_create_func(TextString, ctr_build_string("indexOf:", 8), &ctr_string_index_of);
@@ -586,6 +587,7 @@ void ctr_initialize_world() {
 	//Clock
 	CClock = ctr_internal_create_object(OTOBJECT);
 	ctr_internal_create_func(CClock, ctr_build_string("wait:", 5), &ctr_clock_wait);
+	ctr_internal_create_func(CClock, ctr_build_string("time", 4), &ctr_clock_time);
 	ctr_internal_object_add_property(World, ctr_build_string("Clock", 5), CClock, 0);
 	CClock->link = Object;
 

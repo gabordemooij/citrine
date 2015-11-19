@@ -171,5 +171,5 @@ obj* ctr_file_size(obj* myself) {
 		fclose(f);
 		//free(f);
 	}
-    return ctr_build_number_from_float( (double) sz );
+    return ctr_build_number_from_float( (ctr_number) sz );
 }

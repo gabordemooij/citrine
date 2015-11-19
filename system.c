@@ -69,11 +69,11 @@ void ctr_gc_collect (obj* myself, args* argumentList) {
 
 
 obj* ctr_gc_dust(obj* myself, args* argumentList) {
-	return ctr_build_number_from_float((float) gc_dust);
+	return ctr_build_number_from_float((ctr_number) gc_dust);
 }
 
 obj* ctr_gc_object_count(obj* myself, args* argumentList) {
-	return ctr_build_number_from_float((float) gc_object_count);
+	return ctr_build_number_from_float((ctr_number) gc_object_count);
 }
 
 
@@ -91,7 +91,7 @@ obj* ctr_shell_call(obj* myself, args* argumentList) {
 	memcpy(comString, argumentList->object->value.svalue->value, vlen);
 	memcpy(comString+vlen,"\0",1);
 	int r = system(comString);
-	return ctr_build_number_from_float( (float) r );
+	return ctr_build_number_from_float( (ctr_number) r );
 }
 
 
@@ -110,7 +110,7 @@ obj* ctr_command_argument(obj* myself, args* argumentList) {
 }
 
 obj* ctr_command_num_of_args(obj* myself) {
-	return ctr_build_number_from_float( __argc );
+	return ctr_build_number_from_float( (ctr_number) __argc );
 }
 
 
@@ -126,11 +126,11 @@ obj* ctr_dice_sides(obj* myself, args* argumentList) {
 	}
 	
 	
-	return ctr_build_number_from_float((rand() % ((int)argumentList->object->value.nvalue)));
+	return ctr_build_number_from_float( (ctr_number) (rand() % ((int)argumentList->object->value.nvalue)));
 }
 
 obj* ctr_dice_throw(obj* myself) {
-	return ctr_build_number_from_float((rand() % 6));
+	return ctr_build_number_from_float( (ctr_number) (rand() % 6));
 }
 
 obj* ctr_coin_flip(obj* myself) {
@@ -149,6 +149,11 @@ obj* ctr_clock_wait(obj* myself, args* argumentList) {
 	int n = (int) argumentList->object->value.nvalue;
 	sleep(n);
 	return myself;
+}
+
+obj* ctr_clock_time(obj* myself, args* argumentList) {
+	time_t seconds = time(NULL);
+	return ctr_build_number_from_float((ctr_number)seconds);
 }
 
 

@@ -184,9 +184,9 @@ obj* ctr_array_shift(obj* myself) {
  * Returns the number of elements in the array.
  */
 obj* ctr_array_count(obj* myself) {
-	double d = 0;
-	d = (double) myself->value.avalue->head - myself->value.avalue->tail;
-	return ctr_build_number_from_float( d );
+	ctr_number d = 0;
+	d = (ctr_number) myself->value.avalue->head - myself->value.avalue->tail;
+	return ctr_build_number_from_float( (ctr_number) d );
 }
 
 /**
@@ -205,7 +205,7 @@ obj* ctr_array_from_to(obj* myself, args* argumentList) {
 	for(i = start; i < start + len; i++) {
 		args* pushArg = CTR_CREATE_ARGUMENT();
 		args* elnumArg = CTR_CREATE_ARGUMENT();
-		obj* elnum = ctr_build_number_from_float((float) i);
+		obj* elnum = ctr_build_number_from_float((ctr_number) i);
 		elnumArg->object = elnum;
 		pushArg->object = ctr_array_get(myself, elnumArg);
 		ctr_array_push(newArray, pushArg);
@@ -226,7 +226,7 @@ obj* ctr_array_add(obj* myself, args* argumentList) {
 	for(i = myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
 		args* pushArg = CTR_CREATE_ARGUMENT();
 		args* elnumArg = CTR_CREATE_ARGUMENT();
-		obj* elnum = ctr_build_number_from_float((float) i);
+		obj* elnum = ctr_build_number_from_float((ctr_number) i);
 		elnumArg->object = elnum;
 		pushArg->object = ctr_array_get(myself, elnumArg);
 		ctr_array_push(newArray, pushArg);
@@ -235,7 +235,7 @@ obj* ctr_array_add(obj* myself, args* argumentList) {
 		for(i = otherArray->value.avalue->tail; i<otherArray->value.avalue->head; i++) {
 			args* pushArg = CTR_CREATE_ARGUMENT();
 			args* elnumArg = CTR_CREATE_ARGUMENT();
-			obj* elnum = ctr_build_number_from_float((float) i);
+			obj* elnum = ctr_build_number_from_float((ctr_number) i);
 			elnumArg->object = elnum;
 			pushArg->object = ctr_array_get(otherArray, elnumArg);
 			ctr_array_push(newArray, pushArg);
@@ -379,7 +379,7 @@ obj* ctr_map_get(obj* myself, args* argumentList) {
 obj* ctr_map_count(obj* myself) {
 
 	
-	return ctr_build_number_from_float( myself->properties->size );
+	return ctr_build_number_from_float( (ctr_number) myself->properties->size );
 }
 
 

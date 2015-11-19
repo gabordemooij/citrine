@@ -49,6 +49,11 @@
 #define OTMISC 8
 #define OTEX 9
 
+typedef  unsigned int ctr_bool;
+typedef  long double ctr_number;
+typedef  char* ctr_raw_string;
+typedef  size_t ctr_size;
+
 struct cstr {
 	char* value;
 	long vlen;

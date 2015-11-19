@@ -284,7 +284,7 @@ obj* ctr_build_number(char* n) {
  * Creates a number object from a float.
  * Internal use only.
  */
-obj* ctr_build_number_from_float(float f) {
+obj* ctr_build_number_from_float(double f) {
 	obj* numberObject = ctr_internal_create_object(OTNUMBER);
 	numberObject->value.nvalue = f;
 	numberObject->link = Number;
@@ -360,8 +360,8 @@ obj* ctr_number_add(obj* myself, args* argumentList) {
 		newArg->object = otherNum;
 		return ctr_string_concat(strObject, newArg);
 	}
-	float a = myself->value.nvalue;
-	float b = otherNum->value.nvalue;
+ctr_number a = myself->value.nvalue;
+ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float((a+b));
 }
 
@@ -374,8 +374,8 @@ obj* ctr_number_inc(obj* myself, args* argumentList) {
 
 obj* ctr_number_minus(obj* myself, args* argumentList) {
 	obj* otherNum = ctr_internal_cast2number(argumentList->object);
-	float a = myself->value.nvalue;
-	float b = otherNum->value.nvalue;
+ctr_number a = myself->value.nvalue;
+ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float((a-b));
 }
 
@@ -387,8 +387,8 @@ obj* ctr_number_dec(obj* myself, args* argumentList) {
 
 obj* ctr_number_multiply(obj* myself, args* argumentList) {
 	obj* otherNum = ctr_internal_cast2number(argumentList->object);
-	float a = myself->value.nvalue;
-	float b = otherNum->value.nvalue;
+ctr_number a = myself->value.nvalue;
+ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float(a*b);
 }
 
@@ -400,8 +400,8 @@ obj* ctr_number_mul(obj* myself, args* argumentList) {
 
 obj* ctr_number_divide(obj* myself, args* argumentList) {
 	obj* otherNum = ctr_internal_cast2number(argumentList->object);
-	float a = myself->value.nvalue;
-	float b = otherNum->value.nvalue;
+ctr_number a = myself->value.nvalue;
+ctr_number b = otherNum->value.nvalue;
 	if (b == 0) {
 		error = ctr_build_string_from_cstring("Division by zero.");
 		return myself;
@@ -421,8 +421,8 @@ obj* ctr_number_div(obj* myself, args* argumentList) {
 
 obj* ctr_number_modulo(obj* myself, args* argumentList) {
 	obj* otherNum = ctr_internal_cast2number(argumentList->object);
-	float a = myself->value.nvalue;
-	float b = otherNum->value.nvalue;
+ctr_number a = myself->value.nvalue;
+ctr_number b = otherNum->value.nvalue;
 	if (b == 0) {
 		error = ctr_build_string_from_cstring("Division by zero.");
 		return myself;
@@ -432,22 +432,22 @@ obj* ctr_number_modulo(obj* myself, args* argumentList) {
 
 obj* ctr_number_pow(obj* myself, args* argumentList) {
 	obj* otherNum = ctr_internal_cast2number(argumentList->object);
-	float a = myself->value.nvalue;
-	float b = otherNum->value.nvalue;
+ctr_number a = myself->value.nvalue;
+ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float(pow(a,b));
 }
 
 obj* ctr_number_max(obj* myself, args* argumentList) {
 	obj* otherNum = ctr_internal_cast2number(argumentList->object);
-	float a = myself->value.nvalue;
-	float b = otherNum->value.nvalue;
+ctr_number a = myself->value.nvalue;
+ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float((a >= b) ? a : b);
 }
 
 obj* ctr_number_min(obj* myself, args* argumentList) {
 	obj* otherNum = ctr_internal_cast2number(argumentList->object);
-	float a = myself->value.nvalue;
-	float b = otherNum->value.nvalue;
+ctr_number a = myself->value.nvalue;
+ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float((a <= b) ? a : b);
 }
 
@@ -457,9 +457,9 @@ obj* ctr_number_min(obj* myself, args* argumentList) {
  * Calculates the factorial of a number.
  */
 obj* ctr_number_factorial(obj* myself, args* argumentList) {
-	float t = myself->value.nvalue;
+	ctr_number t = myself->value.nvalue;
 	int i;
-	float a = 1;
+	ctr_number a = 1;
 	for(i = (int) t; i > 0; i--) {
 		a = a * i;
 	}
