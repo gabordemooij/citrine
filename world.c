@@ -12,7 +12,7 @@
 
 ctr_object* CtrStdWorld = NULL;
 ctr_object* contexts[100];
-int cid = 0;
+int ctr_context_id = 0;
 ctr_object* CtrStdObject;
 ctr_object* CtrStdBlock;
 ctr_object* CtrStdString;
@@ -438,9 +438,9 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
  * Opens a new context to keep track of variables.
  */
 void ctr_open_context() {
-	cid++;
+	ctr_context_id++;
 	ctr_object* context = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
-	contexts[cid] = context;
+	contexts[ctr_context_id] = context;
 }
 
 /**
@@ -449,8 +449,8 @@ void ctr_open_context() {
  * Closes a context.
  */
 void ctr_close_context() {
-	if (cid == 0) return;
-	cid--;
+	if (ctr_context_id == 0) return;
+	ctr_context_id--;
 }
 
 /**
@@ -460,7 +460,7 @@ void ctr_close_context() {
  * of the contexts beneath.
  */
 ctr_object* ctr_find(ctr_object* key) {
-	int i = cid;
+	int i = ctr_context_id;
 	ctr_object* foundObject = NULL;
 	while((i>-1 && foundObject == NULL)) {
 		ctr_object* context = contexts[i];
@@ -489,7 +489,7 @@ ctr_object* ctr_find_in_my(ctr_object* key) {
  * Sets a proeprty in an object (context).
  */
 void ctr_set(ctr_object* key, ctr_object* object) {
-	ctr_object* context = contexts[cid];
+	ctr_object* context = contexts[ctr_context_id];
 	ctr_internal_object_set_property(context, key, object, 0);
 }
 

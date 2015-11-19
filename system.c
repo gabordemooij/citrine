@@ -65,15 +65,15 @@ void ctr_gc_sweep() {
 void ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 	gc_dust = 0;
 	gc_object_count = 0;
-	ctr_object* context = contexts[cid];
-	int oldcid = cid;
-	while(cid > -1) {
+	ctr_object* context = contexts[ctr_context_id];
+	int oldcid = ctr_context_id;
+	while(ctr_context_id > -1) {
 		ctr_gc_mark(context);
-		cid --;
-		context = contexts[cid];
+		ctr_context_id--;
+		context = contexts[ctr_context_id];
 	}
 	ctr_gc_sweep();
-	cid = oldcid;
+	ctr_context_id = oldcid;
 }
 
 /**
