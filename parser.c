@@ -49,7 +49,7 @@ ctr_tnode* cparse_message(int mode) {
 		return m;
 	}
 	int lookAhead = clex_tok(); clex_putback();
-	if (lookAhead == COLON) {
+	if (lookAhead == CTR_TOKEN_COLON) {
 		if (mode > 0) {
 			clex_putback();
 			if (debug) printf("> End of argument, next token: %s .\n", msg);
@@ -82,11 +82,11 @@ ctr_tnode* cparse_message(int mode) {
 			}
 			t = clex_tok();
 			if (debug) printf("Next token after argument = %d \n", t);
-			if (t == DOT) break;
-			if (t == FIN) break;
-			if (t == CHAIN) break;
-			if (t == PARCLOSE) break;
-			if (t == REF) {
+			if (t == CTR_TOKEN_DOT) break;
+			if (t == CTR_TOKEN_FIN) break;
+			if (t == CTR_TOKEN_CHAIN) break;
+			if (t == CTR_TOKEN_PARCLOSE) break;
+			if (t == CTR_TOKEN_REF) {
 				long l = clex_tok_value_length(); 
 				if ((msgpartlen + l) > 255) {
 					printf("Message too long\n");
@@ -97,7 +97,7 @@ ctr_tnode* cparse_message(int mode) {
 				*(msg + msgpartlen) = ':';
 				msgpartlen ++;
 				t = clex_tok();
-				if (t != COLON) {
+				if (t != CTR_TOKEN_COLON) {
 					printf("Expected colon. %s \n",msg);
 					exit(1);
 				}
@@ -126,10 +126,10 @@ ctr_tlistitem* cparse_messages(ctr_tnode* r, int mode) {
 	int first = 1;
 	ctr_tnode* node;
 	//explicit chaining (,) only allowed for keyword message: Console write: 3 factorial, write: 3 factorial is not possible otherwise. 
-	while ((t == REF || (t == CHAIN && node && node->type == KWMESSAGE))) {
-		if (t == CHAIN) {
+	while ((t == CTR_TOKEN_REF || (t == CTR_TOKEN_CHAIN && node && node->type == KWMESSAGE))) {
+		if (t == CTR_TOKEN_CHAIN) {
 			t = clex_tok();
-			if (t != REF) {
+			if (t != CTR_TOKEN_REF) {
 				printf("Expected message.\n");
 				exit(1);
 			}
@@ -173,7 +173,7 @@ ctr_tnode* cparse_popen() {
 	r->nodes = li;
 	li->node = cparse_expr(0);
 	int t = clex_tok();
-	if (t != PARCLOSE) {
+	if (t != CTR_TOKEN_PARCLOSE) {
 		printf("Error, expected ). \n");
 		exit(1);
 	}
@@ -198,7 +198,7 @@ ctr_tnode* cparse_block() {
 	int t = clex_tok();
 	int first = 1;
 	ctr_tlistitem* previousListItem;
-	while(t == REF) {
+	while(t == CTR_TOKEN_REF) {
 		ctr_tlistitem* paramListItem = CTR_PARSER_CREATE_LISTITEM();
 		ctr_tnode* paramItem = CTR_PARSER_CREATE_NODE();
 		long l = clex_tok_value_length();
@@ -216,25 +216,25 @@ ctr_tnode* cparse_block() {
 		}
 		t = clex_tok();
 	}
-	if (t != BLOCKPIPE) {
+	if (t != CTR_TOKEN_BLOCKPIPE) {
 		printf("Error expected blockpipe.");
 		exit(1);
 	}
 	t = clex_tok();
 	first = 1;
 	ctr_tlistitem* previousCodeListItem;
-	while((first || t == DOT)) {
+	while((first || t == CTR_TOKEN_DOT)) {
 		if (first) {
 			if (debug) printf("First, so put back\n");
 			clex_putback();
 		}
 		t = clex_tok();
-		if (t == BLOCKCLOSE) break;
+		if (t == CTR_TOKEN_BLOCKCLOSE) break;
 		clex_putback();
 		ctr_tlistitem* codeListItem = CTR_PARSER_CREATE_LISTITEM();
 		ctr_tnode* codeNode = CTR_PARSER_CREATE_NODE();
 		if (debug) printf("--------> %d %s \n", t, clex_tok_value());
-		if (t == RET) {
+		if (t == CTR_TOKEN_RET) {
 			codeNode = cparse_ret();
 		} else {
 			codeNode = cparse_expr(0);
@@ -251,7 +251,7 @@ ctr_tnode* cparse_block() {
 			previousCodeListItem = codeListItem;
 		}
 		t = clex_tok();
-		if (t != DOT) {
+		if (t != CTR_TOKEN_DOT) {
 			printf("Expected . but got: %d.\n", t);
 			exit(1);
 		}
@@ -267,7 +267,7 @@ ctr_tnode* cparse_ref() {
 	char* tmp = clex_tok_value();
 	if (strncmp("my", tmp, 2)==0 && r->vlen == 2) {
 		int t = clex_tok();
-		if (t != REF) {
+		if (t != CTR_TOKEN_REF) {
 			printf("'My' should always be followed by property name!\n");
 			exit(1);
 		}
@@ -339,14 +339,14 @@ ctr_tnode* cparse_receiver() {
 	if (debug) printf("Parsing receiver.\n");
 	int t = clex_tok();
 	clex_putback();
-	if (t == NIL) return cparse_nil();
-	if (t == BOOLEANYES) return cparse_true();
-	if (t == BOOLEANNO) return cparse_false();
-	if (t == NUMBER) return cparse_number();
-	if (t == QUOTE) return cparse_string();
-	if (t == REF) return cparse_ref();
-	if (t == BLOCKOPEN) return cparse_block();
-	if (t == PAROPEN) return cparse_popen();
+	if (t == CTR_TOKEN_NIL) return cparse_nil();
+	if (t == CTR_TOKEN_BOOLEANYES) return cparse_true();
+	if (t == CTR_TOKEN_BOOLEANNO) return cparse_false();
+	if (t == CTR_TOKEN_NUMBER) return cparse_number();
+	if (t == CTR_TOKEN_QUOTE) return cparse_string();
+	if (t == CTR_TOKEN_REF) return cparse_ref();
+	if (t == CTR_TOKEN_BLOCKOPEN) return cparse_block();
+	if (t == CTR_TOKEN_PAROPEN) return cparse_popen();
 	printf("Error, unexpected token: %d.\n", t);
 	exit(1);
 }
@@ -373,9 +373,9 @@ ctr_tnode* cparse_expr(int mode) {
 	int t2 = clex_tok();
 	if (debug) printf("First token after receiver = %d \n", t2);
 	clex_putback();
-	if (r->type == REFERENCE && t2 == ASSIGNMENT) {
+	if (r->type == REFERENCE && t2 == CTR_TOKEN_ASSIGNMENT) {
 		e = cparse_assignment(r);
-	} else if (t2 != DOT && t2 != PARCLOSE && t2 != CHAIN) {
+	} else if (t2 != CTR_TOKEN_DOT && t2 != CTR_TOKEN_PARCLOSE && t2 != CTR_TOKEN_CHAIN) {
 		e = CTR_PARSER_CREATE_NODE();
 		e->type = EXPRMESSAGE;
 		ctr_tlistitem* nodes = cparse_messages(r, mode);
@@ -419,16 +419,16 @@ ctr_tlistitem* cparse_statement() {
 	int t = clex_tok();
 	if (debug) printf("Parsing next statement of program, token = %d (%s).\n", t, clex_tok_value());
 	clex_putback();
-	if (t == FIN) {
+	if (t == CTR_TOKEN_FIN) {
 		li->node = cparse_fin();
 		return li;
-	} else if (t == RET) {
+	} else if (t == CTR_TOKEN_RET) {
 		li->node = cparse_ret();
 	} else {
 		li->node = cparse_expr(0);
 	}
 	t = clex_tok();
-	if (t != DOT) {
+	if (t != CTR_TOKEN_DOT) {
 		printf("Expected . but got: %d.\n", t);
 		exit(1);
 	}

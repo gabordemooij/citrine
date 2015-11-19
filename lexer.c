@@ -58,22 +58,22 @@ int clex_tok() {
 		code ++;
 		c = *code;
 	}
-	if (code == eofcode) return FIN;
-	if (c == '(') { code++; return PAROPEN; }
-	if (c == ')') { code++; return PARCLOSE; }
-	if (c == '{') { code++; return BLOCKOPEN; }
-	if (c == '}') {  code++; return BLOCKCLOSE; }
+	if (code == eofcode) return CTR_TOKEN_FIN;
+	if (c == '(') { code++; return CTR_TOKEN_PAROPEN; }
+	if (c == ')') { code++; return CTR_TOKEN_PARCLOSE; }
+	if (c == '{') { code++; return CTR_TOKEN_BLOCKOPEN; }
+	if (c == '}') {  code++; return CTR_TOKEN_BLOCKCLOSE; }
 	
-	if (c == '.') { code++; return DOT; }
-	if (c == ',') { code++; return CHAIN; }
+	if (c == '.') { code++; return CTR_TOKEN_DOT; }
+	if (c == ',') { code++; return CTR_TOKEN_CHAIN; }
 	if (c == ':' && (code+1)<eofcode && (*(code+1)=='=')) {
 		code += 2;
-		return ASSIGNMENT; 
+		return CTR_TOKEN_ASSIGNMENT; 
 	}
-	if (c == ':') { code++; return COLON; }
+	if (c == ':') { code++; return CTR_TOKEN_COLON; }
 	
-	if (c == '^') { code++; return RET; }
-	if (c == '\'') { code++; return QUOTE; }
+	if (c == '^') { code++; return CTR_TOKEN_RET; }
+	if (c == '\'') { code++; return CTR_TOKEN_QUOTE; }
 	if ((c == '-' && (code+1)<eofcode && isdigit(*(code+1))) || isdigit(c)) {
 		buffer[i] = c; tokvlen++;
 		i++;
@@ -86,7 +86,7 @@ int clex_tok() {
 			c = *code;
 		}
 		if (c=='.' && (code+1 <= eofcode) && !isdigit(*(code+1))) {
-			return NUMBER;
+			return CTR_TOKEN_NUMBER;
 		}
 		if (c=='.') {
 			buffer[i] = c; tokvlen++;
@@ -100,67 +100,67 @@ int clex_tok() {
 			code++;
 			c = *code;
 		}
-		return NUMBER;
+		return CTR_TOKEN_NUMBER;
 	}
 	if (strncmp(code, "True", 4)==0){
 		if (CTR_IS_DELIM(*(code + 4))) { 
 			code += 4;
-			return BOOLEANYES;
+			return CTR_TOKEN_BOOLEANYES;
 		}
 	}
 	if (strncmp(code, "False", 5)==0){
 		if (CTR_IS_DELIM(*(code + 5))) { 
 			code += 5;
-			return BOOLEANNO;
+			return CTR_TOKEN_BOOLEANNO;
 		}
 	}
 	if (strncmp(code, "Nil", 3)==0){
 		if (CTR_IS_DELIM(*(code + 3))) {
 			code += 3;
-			return NIL;
+			return CTR_TOKEN_NIL;
 		}
 	}
 	
 	//these symbols are special because we often like to use
 	//them without spacing: 1+2 instead of 1 + 2.
 	if (c=='+' || c=='-' || c=='/' || c=='*') {
-		code++; tokvlen = 1; buffer[i] = c; return REF;
+		code++; tokvlen = 1; buffer[i] = c; return CTR_TOKEN_REF;
 	}
 	//these are also special, they are easy notations for unicode symbols.
 	//we also return directly because we would like to use them without spaces as well: 1>=2...
 	if ((code+1)<eofcode) {
 		if (((char)*(code) == '>') && ((char)*(code+1)=='=')){
-			code +=2; tokvlen = 3; memcpy(buffer, "≥", 3); return REF;
+			code +=2; tokvlen = 3; memcpy(buffer, "≥", 3); return CTR_TOKEN_REF;
 		}
 		if (((char)*(code) == '<') && ((char)*(code+1)=='=')){
-			code +=2; tokvlen = 3; memcpy(buffer, "≤", 3); return REF;
+			code +=2; tokvlen = 3; memcpy(buffer, "≤", 3); return CTR_TOKEN_REF;
 		}
 		if (((char)*(code) == '!') && ((char)*(code+1)=='=')){
-			code +=2; tokvlen = 3; memcpy(buffer, "≠", 3); return REF;
+			code +=2; tokvlen = 3; memcpy(buffer, "≠", 3); return CTR_TOKEN_REF;
 		}
 		if (((char)*(code) == '|') && ((char)*(code+1)=='|')){
-			code +=2; tokvlen = 3; memcpy(buffer, "∨", 3); return REF;
+			code +=2; tokvlen = 3; memcpy(buffer, "∨", 3); return CTR_TOKEN_REF;
 		}
 		if (((char)*(code) == '&') && ((char)*(code+1)=='&')){
-			code +=2; tokvlen = 3; memcpy(buffer, "∧", 3); return REF;
+			code +=2; tokvlen = 3; memcpy(buffer, "∧", 3); return CTR_TOKEN_REF;
 		}
 		if (((char)*(code) == '<') && ((char)*(code+1)=='-')){
-			code +=2; tokvlen = 3; memcpy(buffer, "←", 3); return REF;
+			code +=2; tokvlen = 3; memcpy(buffer, "←", 3); return CTR_TOKEN_REF;
 		}
 		//be very nice, accidental == will be converted to =
 		if (((char)*(code) == '=') && ((char)*(code+1)=='=')){
-			code +=2; tokvlen = 1; memcpy(buffer, "=", 1); return REF;
+			code +=2; tokvlen = 1; memcpy(buffer, "=", 1); return CTR_TOKEN_REF;
 		}
 	}
 	//later because we tolerate == as well.
 	if (c=='=' || c=='>' || c =='<') {
-		code++; tokvlen = 1; buffer[i] = c; return REF;
+		code++; tokvlen = 1; buffer[i] = c; return CTR_TOKEN_REF;
 	}
 	
 	
 	
 	
-	if (c == '|' || c == '\\') { code++; return BLOCKPIPE; }
+	if (c == '|' || c == '\\') { code++; return CTR_TOKEN_BLOCKPIPE; }
 	
 	while(!isspace(c) && CTR_IS_NO_TOK(c) && code!=eofcode
 	&& c != '+' && c!='*' && c!='/' && c!='=' && c!='>' && c!='<' && c!='&' //and c is not one of the special symbols
@@ -175,7 +175,7 @@ int clex_tok() {
 		c = *code;
 	}
 
-	return REF;
+	return CTR_TOKEN_REF;
 }
 
 
