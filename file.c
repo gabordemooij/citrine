@@ -9,7 +9,7 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 		printf("Missing argument\n");
 		exit(1);
 	}
-	s->value.rvalue = malloc(sizeof(cres));
+	s->value.rvalue = malloc(sizeof(ctr_resource));
 	s->value.rvalue->type = 1;
 	ctr_object* pathObject = ctr_internal_create_object(OTSTRING);
 	pathObject->info.type = OTSTRING;

@@ -11,7 +11,7 @@
 ctr_object* ctr_array_new(ctr_object* myclass) {
 	ctr_object* s = ctr_internal_create_object(OTARRAY);
 	s->link = myclass;
-	s->value.avalue = (carray*) malloc(sizeof(carray));
+	s->value.avalue = (ctr_collection*) malloc(sizeof(ctr_collection));
 	s->value.avalue->length = 1;
 	s->value.avalue->elements = (ctr_object**) malloc(sizeof(ctr_object*)*1);
 	s->value.avalue->head = 0;

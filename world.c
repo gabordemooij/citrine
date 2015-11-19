@@ -685,7 +685,7 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 	 } else if (o->info.type == OTBLOCK) {
 		object->value.block = o->value.block;
 	 } else if (o->info.type == OTARRAY) {
-		object->value.avalue = malloc(sizeof(carray));
+		object->value.avalue = malloc(sizeof(ctr_collection));
 		object->value.avalue->elements = malloc(o->value.avalue->length*sizeof(ctr_object*));
 		object->value.avalue->length = o->value.avalue->length;
 		int i;
@@ -728,7 +728,7 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 	 } else if (o->info.type == OTBLOCK) {
 		object->value.block = o->value.block;
 	 } else if (o->info.type == OTARRAY) {
-		object->value.avalue = malloc(sizeof(carray));
+		object->value.avalue = malloc(sizeof(ctr_collection));
 		object->value.avalue->elements = malloc(o->value.avalue->length*sizeof(ctr_object*));
 		object->value.avalue->length = o->value.avalue->length;
 		int i;

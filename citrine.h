@@ -101,8 +101,8 @@ struct ctr_object {
 		double nvalue;
 		ctr_string* svalue;
 		struct tnode* block;
-		struct carray* avalue;
-		struct cres* rvalue;
+		struct ctr_collection* avalue;
+		struct ctr_resource* rvalue;
 	} value;
 	struct ctr_object* gnext;
 };
@@ -110,21 +110,21 @@ struct ctr_object;
 typedef struct ctr_object ctr_object;
 
 
-struct cres {
+struct ctr_resource {
 	int type;
 	void* ptr;
 };
-struct cres;
-typedef struct cres cres;
+struct ctr_resource;
+typedef struct ctr_resource ctr_resource;
 
-struct carray {
+struct ctr_collection {
 	long length;
 	long head;
 	long tail;
 	ctr_object** elements;
 };
-struct carray;
-typedef struct carray carray;
+struct ctr_collection;
+typedef struct ctr_collection ctr_collection;
 
 struct ctr_argument {
 	struct ctr_object* object;
