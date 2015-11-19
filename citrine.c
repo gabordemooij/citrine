@@ -9,7 +9,7 @@
 #include "citrine.h"
 
 int debug = 0;
-obj* error;
+ctr_object* error;
 int main(int argc, char* argv[]) {
 	__argc = argc;
 	__argv = argv;

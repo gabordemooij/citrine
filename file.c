@@ -1,7 +1,7 @@
 
 
-obj* ctr_file_new(obj* myself, args* argumentList) {
-	obj* s = ctr_object_make();
+ctr_object* ctr_file_new(ctr_object* myself, args* argumentList) {
+	ctr_object* s = ctr_object_make();
 	s->info.type = OTMISC;
 	s->link = myself;
 	s->info.flagb = 1;
@@ -11,7 +11,7 @@ obj* ctr_file_new(obj* myself, args* argumentList) {
 	}
 	s->value.rvalue = malloc(sizeof(cres));
 	s->value.rvalue->type = 1;
-	obj* pathObject = ctr_internal_create_object(OTSTRING);
+	ctr_object* pathObject = ctr_internal_create_object(OTSTRING);
 	pathObject->info.type = OTSTRING;
 	pathObject->value.svalue = (ctr_string*) malloc(sizeof(ctr_string));
 	pathObject->value.svalue->value = (char*) malloc(sizeof(char) * argumentList->object->value.svalue->vlen);
@@ -21,14 +21,14 @@ obj* ctr_file_new(obj* myself, args* argumentList) {
 	return s;
 }
 
-obj* ctr_file_path(obj* myself) {
-	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+ctr_object* ctr_file_path(ctr_object* myself) {
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return Nil;
 	return path;
 }
 
-obj* ctr_file_read(obj* myself) {
-	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+ctr_object* ctr_file_read(ctr_object* myself) {
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return Nil;
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
@@ -51,23 +51,23 @@ obj* ctr_file_read(obj* myself) {
 	}
 	fread(buffer, fileLen, 1, f);
 	fclose(f);
-	obj* str = ctr_build_string(buffer, fileLen);
+	ctr_object* str = ctr_build_string(buffer, fileLen);
 	free(buffer);
 	//free(f);
 	return str;
 }
 
-obj* ctr_file_write(obj* myself, args* argumentList) {
+ctr_object* ctr_file_write(ctr_object* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing string argument to write to file.\n");
 		exit(1);
 	}
-	obj* str = argumentList->object;
+	ctr_object* str = argumentList->object;
 	if (str->info.type != OTSTRING) {
 		printf("First argument must be string\n");
 		exit(1);
 	}
-	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return Nil;
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
@@ -84,17 +84,17 @@ obj* ctr_file_write(obj* myself, args* argumentList) {
 	return myself;
 }
 
-obj* ctr_file_append(obj* myself, args* argumentList) {
+ctr_object* ctr_file_append(ctr_object* myself, args* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing string argument to write to file.\n");
 		exit(1);
 	}
-	obj* str = argumentList->object;
+	ctr_object* str = argumentList->object;
 	if (str->info.type != OTSTRING) {
 		printf("First argument must be string\n");
 		exit(1);
 	}
-	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return Nil;
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
@@ -110,8 +110,8 @@ obj* ctr_file_append(obj* myself, args* argumentList) {
 	return myself;
 }
 
-obj* ctr_file_exists(obj* myself) {
-	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+ctr_object* ctr_file_exists(ctr_object* myself) {
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return ctr_build_bool(0);
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
@@ -126,8 +126,8 @@ obj* ctr_file_exists(obj* myself) {
 	return ctr_build_bool(exists);
 }
 
-obj* ctr_file_include(obj* myself) {
-	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+ctr_object* ctr_file_include(ctr_object* myself) {
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return ctr_build_bool(0);
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
@@ -138,8 +138,8 @@ obj* ctr_file_include(obj* myself) {
 	cwlk_run(parsedCode);
 }
 
-obj* ctr_file_delete(obj* myself) {
-	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+ctr_object* ctr_file_delete(ctr_object* myself) {
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return ctr_build_bool(0);
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
@@ -154,8 +154,8 @@ obj* ctr_file_delete(obj* myself) {
 }
 
 
-obj* ctr_file_size(obj* myself) {
-	obj* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+ctr_object* ctr_file_size(ctr_object* myself) {
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return ctr_build_number_from_float(0);
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);

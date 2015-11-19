@@ -7,9 +7,9 @@
 
 #include "citrine.h"
 
-obj* error;
+ctr_object* error;
 
-obj* cwlk_return(tnode* node) {
+ctr_object* cwlk_return(tnode* node) {
 	
 	if (!node->nodes) {
 		printf("Invalid return expression.\n");
@@ -20,20 +20,20 @@ obj* cwlk_return(tnode* node) {
 		printf("Invalid return expression 2.\n");
 		exit(1);
 	} 
-	obj* e = ctr_internal_create_object(OTOBJECT);
+	ctr_object* e = ctr_internal_create_object(OTOBJECT);
 	e =  cwlk_expr(li->node);
 	return e;
 }
 
-obj* cwlk_message(tnode* paramNode) {
-	obj* result;
+ctr_object* cwlk_message(tnode* paramNode) {
+	ctr_object* result;
 	tlistitem* eitem = paramNode->nodes;
 	tnode* receiverNode = eitem->node;
 	tnode* msgnode;
 	tlistitem* li = eitem;
 	char* message;
 	tlistitem* argumentList;
-	obj* r;
+	ctr_object* r;
 	if (receiverNode->type == REFERENCE) {
 		r = ctr_find(ctr_build_string(receiverNode->value, receiverNode->vlen));
 		if (!r) {
@@ -67,7 +67,7 @@ obj* cwlk_message(tnode* paramNode) {
 		if (argumentList) {
 			tnode* node = argumentList->node;
 			while(1) {
-				obj* o = cwlk_expr(node);
+				ctr_object* o = cwlk_expr(node);
 				aItem->object = o;
 				aItem->next = CTR_CREATE_ARGUMENT();
 				aItem = aItem->next;
@@ -83,14 +83,14 @@ obj* cwlk_message(tnode* paramNode) {
 	return result;
 }	
 
-obj* cwlk_assignment(tnode* node) {
+ctr_object* cwlk_assignment(tnode* node) {
 	tlistitem* assignmentItems = node->nodes;
 	tnode* assignee = assignmentItems->node;
 	tlistitem* valueListItem = assignmentItems->next;
 	tnode* value = valueListItem->node;
-	obj* x = ctr_internal_create_object(OTOBJECT);
+	ctr_object* x = ctr_internal_create_object(OTOBJECT);
 	x = cwlk_expr(value);
-	obj* result;
+	ctr_object* result;
 	if (assignee->modifier == 1) {
 		result = ctr_assign_value_to_my(ctr_build_string(assignee->value, assignee->vlen), x);
 	} else {
@@ -99,8 +99,8 @@ obj* cwlk_assignment(tnode* node) {
 	return result;
 }		
 
-obj* cwlk_expr(tnode* node) {
-	obj* result;
+ctr_object* cwlk_expr(tnode* node) {
+	ctr_object* result;
 	if (node->type == LTRSTRING) {
 		result = ctr_build_string(node->value, node->vlen);
 	} else if (node->type == LTRBOOLTRUE) {
@@ -144,8 +144,8 @@ obj* cwlk_expr(tnode* node) {
 	return result;
 }
 
-obj* cwlk_run(tnode* program) {
-	obj* result = NULL;
+ctr_object* cwlk_run(tnode* program) {
+	ctr_object* result = NULL;
 	if (debug) tree(program, 0);
 	tlistitem* li = program->nodes;
 	while(li) {

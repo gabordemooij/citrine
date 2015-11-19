@@ -75,8 +75,8 @@ struct ctr_map;
 typedef struct ctr_map ctr_map;
 
 struct ctr_mapitem {
-	struct obj* key;
-	struct obj* value;
+	struct ctr_object* key;
+	struct ctr_object* value;
 	struct ctr_mapitem* prev;
 	struct ctr_mapitem* next;
 };
@@ -84,7 +84,7 @@ struct ctr_mapitem;
 typedef struct ctr_mapitem ctr_mapitem;
 
 
-struct obj {
+struct ctr_object {
     const char* name;
     ctr_map* properties;
     ctr_map* methods;
@@ -95,7 +95,7 @@ struct obj {
 		unsigned int flaga: 1;
 		unsigned int flagb: 1;
 	 } info;
-    struct obj* link;
+    struct ctr_object* link;
     union uvalue {
 		int bvalue;
 		double nvalue;
@@ -104,10 +104,10 @@ struct obj {
 		struct carray* avalue;
 		struct cres* rvalue;
 	} value;
-	struct obj* gnext;
+	struct ctr_object* gnext;
 };
-struct obj;
-typedef struct obj obj;
+struct ctr_object;
+typedef struct ctr_object ctr_object;
 
 
 struct cres {
@@ -121,13 +121,13 @@ struct carray {
 	long length;
 	long head;
 	long tail;
-	obj** elements;
+	ctr_object** elements;
 };
 struct carray;
 typedef struct carray carray;
 
 struct args {
-	struct obj* object;
+	struct ctr_object* object;
 	struct args* next;
 };
 
@@ -167,31 +167,31 @@ void 	clex_putback();
 char*	clex_readstr();
 
 void ctr_initialize_world();
-obj* ctr_internal_create_object(int type);
-obj* ctr_find(obj* key);
-obj* ctr_find_in_my(obj* key);
-obj* ctr_assign_value(obj* key, obj* val);
-obj* ctr_assign_value_to_my(obj* key, obj* val);
-obj* ctr_build_string(char* object, long vlen);
-obj* ctr_build_block(tnode* node);
-obj* ctr_build_number(char* object);
-obj* ctr_build_bool(int truth);
-obj* ctr_build_nil();
-obj* ctr_build_string_from_cstring( char* str );
-obj* ctr_block_run(obj* myself, args* argList, obj* my);
+ctr_object* ctr_internal_create_object(int type);
+ctr_object* ctr_find(ctr_object* key);
+ctr_object* ctr_find_in_my(ctr_object* key);
+ctr_object* ctr_assign_value(ctr_object* key, ctr_object* val);
+ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* val);
+ctr_object* ctr_build_string(char* object, long vlen);
+ctr_object* ctr_build_block(tnode* node);
+ctr_object* ctr_build_number(char* object);
+ctr_object* ctr_build_bool(int truth);
+ctr_object* ctr_build_nil();
+ctr_object* ctr_build_string_from_cstring( char* str );
+ctr_object* ctr_block_run(ctr_object* myself, args* argList, ctr_object* my);
 long getutf8len(char* strval, long max);
 
 int __argc;
 char** __argv;
 
 
-obj* ctr_send_message(obj* receiver, char* message, long len, args* argumentList);
+ctr_object* ctr_send_message(ctr_object* receiver, char* message, long len, args* argumentList);
 char* readf(char* file_name);
 void tree(tnode* ti, int indent);
 
-obj* cwlk_run(tnode* program);
-obj* cwlk_expr(tnode* node);
-obj* ctr_first_object;
+ctr_object* cwlk_run(tnode* program);
+ctr_object* cwlk_expr(tnode* node);
+ctr_object* ctr_first_object;
 
 int debug;
 

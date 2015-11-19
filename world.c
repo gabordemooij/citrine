@@ -11,27 +11,27 @@
 
 #include "citrine.h"
 
-obj* World = NULL;
-obj* contexts[100];
+ctr_object* World = NULL;
+ctr_object* contexts[100];
 int cid = 0;
-obj* Object;
-obj* CBlock;
-obj* TextString;
-obj* Number;
-obj* BoolX;
-obj* Console;
-obj* Nil;
-obj* GC;
-obj* CMap;
-obj* CArray;
-obj* CFile;
-obj* error;
-obj* CSystem;
-obj* CDice;
-obj* CCommand;
-obj* CShell;
-obj* CCoin;
-obj* CClock;
+ctr_object* Object;
+ctr_object* CBlock;
+ctr_object* TextString;
+ctr_object* Number;
+ctr_object* BoolX;
+ctr_object* Console;
+ctr_object* Nil;
+ctr_object* GC;
+ctr_object* CMap;
+ctr_object* CArray;
+ctr_object* CFile;
+ctr_object* error;
+ctr_object* CSystem;
+ctr_object* CDice;
+ctr_object* CCommand;
+ctr_object* CShell;
+ctr_object* CCoin;
+ctr_object* CClock;
 
 int gc_dust = 0;
 int gc_object_count = 0;
@@ -129,7 +129,7 @@ void tree(tnode* ti, int indent) {
 }
 
 
-int ctr_internal_object_is_equal(obj* object1, obj* object2) {
+int ctr_internal_object_is_equal(ctr_object* object1, ctr_object* object2) {
 	
 	if (object1->info.type == OTSTRING && object2->info.type == OTSTRING) {
 		char* string1 = object1->value.svalue->value;
@@ -161,7 +161,7 @@ int ctr_internal_object_is_equal(obj* object1, obj* object2) {
 		
 }
 
-obj* ctr_internal_object_find_property(obj* owner, obj* key, int is_method) {
+ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key, int is_method) {
 	
 	ctr_mapitem* head;
 	if (is_method) {
@@ -186,7 +186,7 @@ obj* ctr_internal_object_find_property(obj* owner, obj* key, int is_method) {
 }
 
 
-void ctr_internal_object_delete_property(obj* owner, obj* key, int is_method) {
+void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int is_method) {
 	ctr_mapitem* head;
 	if (is_method) {
 		if (owner->methods->size == 0) {
@@ -239,7 +239,7 @@ void ctr_internal_object_delete_property(obj* owner, obj* key, int is_method) {
 	return;
 }
 
-void ctr_internal_object_add_property(obj* owner, obj* key, obj* value, int m) {
+void ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_object* value, int m) {
 	ctr_mapitem* new_item = malloc(sizeof(ctr_mapitem));
 	ctr_mapitem* current_head = NULL;
 	new_item->key = key;
@@ -269,7 +269,7 @@ void ctr_internal_object_add_property(obj* owner, obj* key, obj* value, int m) {
 	}
 }
 
-void ctr_internal_object_set_property(obj* owner, obj* key, obj* value, int is_method) {
+void ctr_internal_object_set_property(ctr_object* owner, ctr_object* key, ctr_object* value, int is_method) {
 	ctr_internal_object_delete_property(owner, key, is_method);
 	ctr_internal_object_add_property(owner, key, value, is_method);
 }
@@ -296,8 +296,8 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
 	return NULL;
 }
 
-obj* ctr_internal_create_object(int type) {
-	obj* o = malloc(sizeof(obj));
+ctr_object* ctr_internal_create_object(int type) {
+	ctr_object* o = malloc(sizeof(ctr_object));
 	o->properties = malloc(sizeof(ctr_map));
 	o->methods = malloc(sizeof(ctr_map));
 	o->properties->size = 0;
@@ -325,13 +325,13 @@ obj* ctr_internal_create_object(int type) {
 	
 }
 
-void ctr_internal_create_func(obj* o, obj* key, void* f ) {
-	obj* methodObject = ctr_internal_create_object(OTNATFUNC);
+void ctr_internal_create_func(ctr_object* o, ctr_object* key, void* f ) {
+	ctr_object* methodObject = ctr_internal_create_object(OTNATFUNC);
 	methodObject->value.rvalue = (void*) f;
 	ctr_internal_object_add_property(o, key, methodObject, 1);
 }
 
-obj* ctr_internal_cast2number(obj* o) {
+ctr_object* ctr_internal_cast2number(ctr_object* o) {
 	if (o->info.type == OTNUMBER) return o;
 	if (o->info.type == OTSTRING) {
 		char* cstring = malloc((o->value.svalue->vlen+1)*sizeof(char));
@@ -342,7 +342,7 @@ obj* ctr_internal_cast2number(obj* o) {
 	return ctr_build_number("0");
 }
 
-obj* ctr_internal_cast2string( obj* o ) {
+ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 	if (o->info.type == OTSTRING) return o;
 	else if (o->info.type == OTNIL) { return ctr_build_string("[Nil]", 5); }
 	else if (o->info.type == OTBOOL && o->value.bvalue == 1) { return ctr_build_string("[True]", 6); }
@@ -358,7 +358,7 @@ obj* ctr_internal_cast2string( obj* o ) {
 	return ctr_build_string("[?]", 3);
 }
 
-obj* ctr_internal_cast2bool( obj* o ) {
+ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
 	if (o->info.type == OTBOOL) return o;
 	if (o->info.type == OTNIL
 		|| (o->info.type == OTNUMBER && o->value.nvalue == 0)
@@ -369,7 +369,7 @@ obj* ctr_internal_cast2bool( obj* o ) {
 
 void ctr_open_context() {
 	cid++;
-	obj* context = ctr_internal_create_object(OTOBJECT);
+	ctr_object* context = ctr_internal_create_object(OTOBJECT);
 	contexts[cid] = context;
 }
 
@@ -378,11 +378,11 @@ void ctr_close_context() {
 	cid--;
 }
 
-obj* ctr_find(obj* key) {
+ctr_object* ctr_find(ctr_object* key) {
 	int i = cid;
-	obj* foundObject = NULL;
+	ctr_object* foundObject = NULL;
 	while((i>-1 && foundObject == NULL)) {
-		obj* context = contexts[i];
+		ctr_object* context = contexts[i];
 		foundObject = ctr_internal_object_find_property(context, key, 0);
 		i--;
 	}
@@ -390,15 +390,15 @@ obj* ctr_find(obj* key) {
 	return foundObject;
 }
 
-obj* ctr_find_in_my(obj* key) {
-	obj* context = ctr_find(ctr_build_string("me",2));
-	obj* foundObject = ctr_internal_object_find_property(context, key, 0);
+ctr_object* ctr_find_in_my(ctr_object* key) {
+	ctr_object* context = ctr_find(ctr_build_string("me",2));
+	ctr_object* foundObject = ctr_internal_object_find_property(context, key, 0);
 	if (foundObject == NULL) { printf("Error, property not found: %s.\n", key->value.svalue->value); exit(1); }
 	return foundObject;
 }
 
-void ctr_set(obj* key, obj* object) {
-	obj* context = contexts[cid];
+void ctr_set(ctr_object* key, ctr_object* object) {
+	ctr_object* context = contexts[cid];
 	ctr_internal_object_set_property(context, key, object, 0);
 }
 
@@ -619,10 +619,10 @@ void ctr_initialize_world() {
 }
 
 
-obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argumentList) {
+ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vlen, args* argumentList) {
 	if (error != NULL) return NULL; //Error mode, ignore subsequent messages until resolved.
-	obj* methodObject = NULL;
-	obj* searchObject = receiverObject;
+	ctr_object* methodObject = NULL;
+	ctr_object* searchObject = receiverObject;
 	while(!methodObject) {
 		methodObject = ctr_internal_object_find_property(searchObject, ctr_build_string(message, vlen), 1);
 		if (methodObject) break;
@@ -647,11 +647,11 @@ obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argum
 			return ctr_send_message(receiverObject, "respondTo:with:and:", 19,  mesgArgument);
 		}
 	}
-	obj* result;
+	ctr_object* result;
 	if (methodObject->info.type == OTNATFUNC) {
-		obj* (*funct)(obj* receiverObject, args* argumentList);
+		ctr_object* (*funct)(ctr_object* receiverObject, args* argumentList);
 		funct = (void*) methodObject->value.block;
-		result = (obj*) funct(receiverObject, argumentList);
+		result = (ctr_object*) funct(receiverObject, argumentList);
 	}
 	if (methodObject->info.type == OTBLOCK) {
 		result = ctr_block_run(methodObject, argumentList, receiverObject);
@@ -659,8 +659,8 @@ obj* ctr_send_message(obj* receiverObject, char* message, long vlen, args* argum
 	return result;
 }
 
-obj* ctr_assign_value(obj* key, obj* o) {
-	obj* object;
+ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
+	ctr_object* object;
 	key->info.sticky = 0;
 	if (o->info.type == OTOBJECT || o->info.type == OTMISC) {
 		ctr_set(key, o);
@@ -686,13 +686,13 @@ obj* ctr_assign_value(obj* key, obj* o) {
 		object->value.block = o->value.block;
 	 } else if (o->info.type == OTARRAY) {
 		object->value.avalue = malloc(sizeof(carray));
-		object->value.avalue->elements = malloc(o->value.avalue->length*sizeof(obj*));
+		object->value.avalue->elements = malloc(o->value.avalue->length*sizeof(ctr_object*));
 		object->value.avalue->length = o->value.avalue->length;
 		int i;
-		obj* putValue;
+		ctr_object* putValue;
 		for (i = o->value.avalue->tail; i < o->value.avalue->head; i++) {
-			putValue = *( (obj**) ((long)o->value.avalue->elements + (i * sizeof(obj*))) );
-			*( (obj**) ((long)object->value.avalue->elements + (i * sizeof(obj*))) ) = putValue;
+			putValue = *( (ctr_object**) ((long)o->value.avalue->elements + (i * sizeof(ctr_object*))) );
+			*( (ctr_object**) ((long)object->value.avalue->elements + (i * sizeof(ctr_object*))) ) = putValue;
 		}
 		object->value.avalue->head = o->value.avalue->head;
 		object->value.avalue->tail = o->value.avalue->tail;
@@ -701,9 +701,9 @@ obj* ctr_assign_value(obj* key, obj* o) {
 	return object;
 }
 
-obj* ctr_assign_value_to_my(obj* key, obj* o) {
-	obj* object;
-	obj* my = ctr_find(ctr_build_string("me", 2));
+ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
+	ctr_object* object;
+	ctr_object* my = ctr_find(ctr_build_string("me", 2));
 	key->info.sticky = 0;
 	if (o->info.type == OTOBJECT || o->info.type == OTMISC) {
 		ctr_internal_object_add_property(my, key, o, 0);
@@ -729,13 +729,13 @@ obj* ctr_assign_value_to_my(obj* key, obj* o) {
 		object->value.block = o->value.block;
 	 } else if (o->info.type == OTARRAY) {
 		object->value.avalue = malloc(sizeof(carray));
-		object->value.avalue->elements = malloc(o->value.avalue->length*sizeof(obj*));
+		object->value.avalue->elements = malloc(o->value.avalue->length*sizeof(ctr_object*));
 		object->value.avalue->length = o->value.avalue->length;
 		int i;
-		obj* putValue;
+		ctr_object* putValue;
 		for (i = 0; i < o->value.avalue->head; i++) {
-			putValue = *( (obj**) ((long)o->value.avalue->elements + (i * sizeof(obj*))) );
-			*( (obj**) ((long)object->value.avalue->elements + (i * sizeof(obj*))) ) = putValue;
+			putValue = *( (ctr_object**) ((long)o->value.avalue->elements + (i * sizeof(ctr_object*))) );
+			*( (ctr_object**) ((long)object->value.avalue->elements + (i * sizeof(ctr_object*))) ) = putValue;
 		}
 		object->value.avalue->head = o->value.avalue->head;
 	 }
