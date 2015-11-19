@@ -390,7 +390,7 @@ obj* ctr_map_each(obj* myself, args* argumentList) {
 	obj* block = argumentList->object;
 	if (block->info.type != OTBLOCK) { printf("Expected code block."); exit(1); }
 	block->info.sticky = 1; //mark as sticky
-	cmapitem* m = myself->properties->head;
+	ctr_mapitem* m = myself->properties->head;
 	while(m) {
 		args* arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = m->value;

@@ -74,14 +74,14 @@ struct ctr_map {
 struct ctr_map;
 typedef struct ctr_map ctr_map;
 
-struct cmapitem {
+struct ctr_mapitem {
 	struct obj* key;
 	struct obj* value;
-	struct cmapitem* prev;
-	struct cmapitem* next;
+	struct ctr_mapitem* prev;
+	struct ctr_mapitem* next;
 };
-struct cmapitem;
-typedef struct cmapitem cmapitem;
+struct ctr_mapitem;
+typedef struct ctr_mapitem ctr_mapitem;
 
 
 struct obj {

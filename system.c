@@ -9,7 +9,7 @@ void ctr_gc_mark(obj* object) {
 			ctr_gc_mark(el);
 		}
 	}
-	cmapitem* item = object->properties->head;
+	ctr_mapitem* item = object->properties->head;
 	while(item) {
 		obj* k = item->key;
 		obj* o = item->value;

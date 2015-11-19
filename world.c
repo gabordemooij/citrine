@@ -163,7 +163,7 @@ int ctr_internal_object_is_equal(obj* object1, obj* object2) {
 
 obj* ctr_internal_object_find_property(obj* owner, obj* key, int is_method) {
 	
-	cmapitem* head;
+	ctr_mapitem* head;
 	if (is_method) {
 		if (owner->methods->size == 0) {
 			return NULL;
@@ -187,7 +187,7 @@ obj* ctr_internal_object_find_property(obj* owner, obj* key, int is_method) {
 
 
 void ctr_internal_object_delete_property(obj* owner, obj* key, int is_method) {
-	cmapitem* head;
+	ctr_mapitem* head;
 	if (is_method) {
 		if (owner->methods->size == 0) {
 			return;
@@ -240,8 +240,8 @@ void ctr_internal_object_delete_property(obj* owner, obj* key, int is_method) {
 }
 
 void ctr_internal_object_add_property(obj* owner, obj* key, obj* value, int m) {
-	cmapitem* new_item = malloc(sizeof(cmapitem));
-	cmapitem* current_head = NULL;
+	ctr_mapitem* new_item = malloc(sizeof(ctr_mapitem));
+	ctr_mapitem* current_head = NULL;
 	new_item->key = key;
 	new_item->value = value;
 	new_item->next = NULL;
