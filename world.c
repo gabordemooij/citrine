@@ -73,7 +73,7 @@ long getBytesUtf8(char* strval, long startByte, long lenUChar) {
 	return bytes;
 }
 
-char* readf(char* file_name) {
+char* ctr_internal_readf(char* file_name) {
    char* prg;
    char ch;
    FILE* fp;
@@ -94,7 +94,7 @@ char* readf(char* file_name) {
    return prg;
 }
 
-void tree(ctr_tnode* ti, int indent) {
+void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
 	if (indent>20) exit(1); 
 	ctr_tlistitem* li = ti->nodes;
 	ctr_tnode* t = li->node;
@@ -121,7 +121,7 @@ void tree(ctr_tnode* ti, int indent) {
 		else if (t->type == CTR_AST_NODE_LTRNIL)	        str = "LTRNIL\0";
 		else 								str = "UNKNW?\0";
 		printf("%d:%s %s (vlen: %lu) \n", t->type, str, t->value, t->vlen);
-		if (t->nodes) tree(t, indent + 1);
+		if (t->nodes) ctr_internal_debug_tree(t, indent + 1);
 		if (!li->next) break; 
 		li = li->next;
 		t = li->node;

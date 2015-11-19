@@ -156,15 +156,15 @@ typedef struct ctr_tnode ctr_tnode;
 
 ctr_tnode* dparse_parse(char* prg);
 
-long clex_len;
+ctr_size ctr_clex_len;
 long ctr_program_length;
 
-void 	clex_load(char* prg);
-int 	clex_tok();
-char* 	clex_tok_value();
-long    clex_tok_value_length();
-void 	clex_putback();
-char*	clex_readstr();
+void 	ctr_clex_load(char* prg);
+int 	ctr_clex_tok();
+char* 	ctr_clex_tok_value();
+long    ctr_clex_tok_value_length();
+void 	ctr_clex_putback();
+char*	ctr_clex_readstr();
 
 void ctr_initialize_world();
 ctr_object* ctr_internal_create_object(int type);
@@ -186,11 +186,11 @@ char** __argv;
 
 
 ctr_object* ctr_send_message(ctr_object* receiver, char* message, long len, ctr_argument* argumentList);
-char* readf(char* file_name);
-void tree(ctr_tnode* ti, int indent);
+char* ctr_internal_readf(char* file_name);
+void ctr_internal_debug_tree(ctr_tnode* ti, int indent);
 
-ctr_object* cwlk_run(ctr_tnode* program);
-ctr_object* cwlk_expr(ctr_tnode* node);
+ctr_object* ctr_cwlk_run(ctr_tnode* program);
+ctr_object* ctr_cwlk_expr(ctr_tnode* node);
 ctr_object* ctr_first_object;
 
 int debug;

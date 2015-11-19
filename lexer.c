@@ -24,27 +24,27 @@ char* oldptr;
 char* olderptr;
 int flag_operator = 0;
 
-void clex_load(char* prg) {
+void ctr_clex_load(char* prg) {
 	code = prg;
 	buffer = malloc(bflmt);
 	buffer[0] = '\0';
 	eofcode = (code + ctr_program_length - 1);
 }
 
-char* clex_tok_value() {
+char* ctr_clex_tok_value() {
 	return buffer;
 }
 
-long clex_tok_value_length() {
+long ctr_clex_tok_value_length() {
 	return tokvlen;
 }
 
-void clex_putback() {
+void ctr_clex_putback() {
 	code = oldptr;
 	oldptr = olderptr;
 }
 
-int clex_tok() {
+int ctr_clex_tok() {
 	tokvlen = 0;
 	olderptr = oldptr;
 	oldptr = code;
@@ -179,7 +179,7 @@ int clex_tok() {
 }
 
 
-char* clex_readstr() {
+char* ctr_clex_readstr() {
 	tokvlen=0;
 	long memblock = 40;
 	long page = 100; //100 byte pages

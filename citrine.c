@@ -25,9 +25,9 @@ int main(int argc, char* argv[]) {
 	}
 	if (argc == 3) if (strcmp(argv[2],"--debug")==0) debug = 1;
 	if (debug == 1) printf("Debugger is ON.\n");
-	prg = readf(argv[1]);
+	prg = ctr_internal_readf(argv[1]);
 	ctr_tnode* program = dparse_parse(prg);
 	ctr_initialize_world();
-	cwlk_run(program);
+	ctr_cwlk_run(program);
 	exit(0);
 }

@@ -133,9 +133,9 @@ ctr_object* ctr_file_include(ctr_object* myself) {
 	char* pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
-	char* prg = readf(pathString);
+	char* prg = ctr_internal_readf(pathString);
 	ctr_tnode* parsedCode = dparse_parse(prg);
-	cwlk_run(parsedCode);
+	ctr_cwlk_run(parsedCode);
 	return myself;
 }
 

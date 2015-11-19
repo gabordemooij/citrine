@@ -1027,7 +1027,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	}
 	ctr_set(ctr_build_string("me",2), my);
 	ctr_set(ctr_build_string("thisBlock",9), myself); //otherwise running block may get gc'ed.
-	result = cwlk_run(codeBlockPart2);
+	result = ctr_cwlk_run(codeBlockPart2);
 	ctr_close_context();
 	if (error != NULL) {
 		ctr_object* catchBlock = malloc(sizeof(ctr_object));
