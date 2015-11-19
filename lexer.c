@@ -14,9 +14,9 @@ char* ctr_clex_buffer;
 char* code;
 char* codePoint;
 char* eofcode;
-char* oldptr;
-char* olderptr;
-int flag_operator = 0;
+char* ctr_clex_oldptr;
+char* ctr_clex_olderptr;
+
 
 /**
  * CTRLexerLoad
@@ -55,8 +55,8 @@ long ctr_clex_tok_value_length() {
  * Puts back a token and resets the pointer to the previous one.
  */
 void ctr_clex_putback() {
-	code = oldptr;
-	oldptr = olderptr;
+	code = ctr_clex_oldptr;
+	ctr_clex_oldptr = ctr_clex_olderptr;
 }
 
 /**
@@ -67,8 +67,8 @@ void ctr_clex_putback() {
  */
 int ctr_clex_tok() {
 	ctr_clex_tokvlen = 0;
-	olderptr = oldptr;
-	oldptr = code;
+	ctr_clex_olderptr = ctr_clex_oldptr;
+	ctr_clex_oldptr = code;
 	char c;
 	int i = 0;
 	int comment_mode = 0;
