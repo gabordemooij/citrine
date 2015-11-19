@@ -9,13 +9,13 @@
 
 ctr_object* error;
 
-ctr_object* cwlk_return(tnode* node) {
+ctr_object* cwlk_return(ctr_tnode* node) {
 	
 	if (!node->nodes) {
 		printf("Invalid return expression.\n");
 		exit(1);
 	}
-	tlistitem* li = node->nodes;
+	ctr_tlistitem* li = node->nodes;
 	if (!li->node) {
 		printf("Invalid return expression 2.\n");
 		exit(1);
@@ -25,14 +25,14 @@ ctr_object* cwlk_return(tnode* node) {
 	return e;
 }
 
-ctr_object* cwlk_message(tnode* paramNode) {
+ctr_object* cwlk_message(ctr_tnode* paramNode) {
 	ctr_object* result;
-	tlistitem* eitem = paramNode->nodes;
-	tnode* receiverNode = eitem->node;
-	tnode* msgnode;
-	tlistitem* li = eitem;
+	ctr_tlistitem* eitem = paramNode->nodes;
+	ctr_tnode* receiverNode = eitem->node;
+	ctr_tnode* msgnode;
+	ctr_tlistitem* li = eitem;
 	char* message;
-	tlistitem* argumentList;
+	ctr_tlistitem* argumentList;
 	ctr_object* r;
 	if (receiverNode->type == REFERENCE) {
 		r = ctr_find(ctr_build_string(receiverNode->value, receiverNode->vlen));
@@ -65,7 +65,7 @@ ctr_object* cwlk_message(tnode* paramNode) {
 		ctr_argument* a = CTR_CREATE_ARGUMENT();
 		ctr_argument* aItem = a;
 		if (argumentList) {
-			tnode* node = argumentList->node;
+			ctr_tnode* node = argumentList->node;
 			while(1) {
 				ctr_object* o = cwlk_expr(node);
 				aItem->object = o;
@@ -83,11 +83,11 @@ ctr_object* cwlk_message(tnode* paramNode) {
 	return result;
 }	
 
-ctr_object* cwlk_assignment(tnode* node) {
-	tlistitem* assignmentItems = node->nodes;
-	tnode* assignee = assignmentItems->node;
-	tlistitem* valueListItem = assignmentItems->next;
-	tnode* value = valueListItem->node;
+ctr_object* cwlk_assignment(ctr_tnode* node) {
+	ctr_tlistitem* assignmentItems = node->nodes;
+	ctr_tnode* assignee = assignmentItems->node;
+	ctr_tlistitem* valueListItem = assignmentItems->next;
+	ctr_tnode* value = valueListItem->node;
 	ctr_object* x = ctr_internal_create_object(OTOBJECT);
 	x = cwlk_expr(value);
 	ctr_object* result;
@@ -99,7 +99,7 @@ ctr_object* cwlk_assignment(tnode* node) {
 	return result;
 }		
 
-ctr_object* cwlk_expr(tnode* node) {
+ctr_object* cwlk_expr(ctr_tnode* node) {
 	ctr_object* result;
 	if (node->type == LTRSTRING) {
 		result = ctr_build_string(node->value, node->vlen);
@@ -144,12 +144,12 @@ ctr_object* cwlk_expr(tnode* node) {
 	return result;
 }
 
-ctr_object* cwlk_run(tnode* program) {
+ctr_object* cwlk_run(ctr_tnode* program) {
 	ctr_object* result = NULL;
 	if (debug) tree(program, 0);
-	tlistitem* li = program->nodes;
+	ctr_tlistitem* li = program->nodes;
 	while(li) {
-		tnode* node = li->node;
+		ctr_tnode* node = li->node;
 		if (!li->node) {
 			printf("Missing parse node\n");
 			exit(1);

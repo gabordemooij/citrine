@@ -1003,12 +1003,12 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
  */
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my) {
 	ctr_object* result;
-	tnode* node = myself->value.block;
-	tlistitem* codeBlockParts = node->nodes;
-	tnode* codeBlockPart1 = codeBlockParts->node;
-	tnode* codeBlockPart2 = codeBlockParts->next->node;
-	tlistitem* parameterList = codeBlockPart1->nodes;
-	tnode* parameter;
+	ctr_tnode* node = myself->value.block;
+	ctr_tlistitem* codeBlockParts = node->nodes;
+	ctr_tnode* codeBlockPart1 = codeBlockParts->node;
+	ctr_tnode* codeBlockPart2 = codeBlockParts->next->node;
+	ctr_tlistitem* parameterList = codeBlockPart1->nodes;
+	ctr_tnode* parameter;
 	ctr_open_context();
 	if (parameterList && parameterList->node) {
 		parameter = parameterList->node;
@@ -1107,7 +1107,7 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * Builds a block object from a literal block of code.
  */
-ctr_object* ctr_build_block(tnode* node) {
+ctr_object* ctr_build_block(ctr_tnode* node) {
 	ctr_object* codeBlockObject = ctr_internal_create_object(OTBLOCK);
 	codeBlockObject->value.block = node;
 	codeBlockObject->link = CBlock;

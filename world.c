@@ -94,10 +94,10 @@ char* readf(char* file_name) {
    return prg;
 }
 
-void tree(tnode* ti, int indent) {
+void tree(ctr_tnode* ti, int indent) {
 	if (indent>20) exit(1); 
-	tlistitem* li = ti->nodes;
-	tnode* t = li->node;
+	ctr_tlistitem* li = ti->nodes;
+	ctr_tnode* t = li->node;
 	while(1) {
 		int i = 0;
 		for (i=0; i<indent; i++) printf(" ");

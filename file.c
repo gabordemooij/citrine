@@ -134,7 +134,7 @@ ctr_object* ctr_file_include(ctr_object* myself) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	char* prg = readf(pathString);
-	tnode* parsedCode = dparse_parse(prg);
+	ctr_tnode* parsedCode = dparse_parse(prg);
 	cwlk_run(parsedCode);
 }
 

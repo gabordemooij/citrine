@@ -8,15 +8,15 @@
 #include "citrine.h"
 
 
-tnode* cparse_expr(int mode);
-tnode* cparse_ret();
+ctr_tnode* cparse_expr(int mode);
+ctr_tnode* cparse_ret();
 
 //precedence mode 0: no argument (allows processing of unary message, binary message and keyword message)
 //precedence mode 1: as argument of keyword message (allows processing of unary message and binary message)
 //precedence mode 2: as argument of binary message (only allows processing of unary message)
-tnode* cparse_message(int mode) {
+ctr_tnode* cparse_message(int mode) {
 	long msgpartlen; //length of part of message string
-	tnode* m = CTR_PARSER_CREATE_NODE();
+	ctr_tnode* m = CTR_PARSER_CREATE_NODE();
 	m->type = -1;
 	int t = clex_tok();
 	msgpartlen = clex_tok_value_length();
@@ -41,7 +41,7 @@ tnode* cparse_message(int mode) {
 		m->type = BINMESSAGE;
 		m->value = msg;
 		m->vlen = msgpartlen;
-		tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
+		ctr_tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
 		if (debug) printf("Binary argument start..\n");
 		li->node = cparse_expr(2);
 		if (debug) printf("Binary argument end..\n");
@@ -65,8 +65,8 @@ tnode* cparse_message(int mode) {
 		m->type = KWMESSAGE;
 		t = clex_tok();
 		int first = 1;
-		tlistitem* li;
-		tlistitem* curlistitem;
+		ctr_tlistitem* li;
+		ctr_tlistitem* curlistitem;
 		while(1) {
 			li = CTR_PARSER_CREATE_LISTITEM();
 			if (debug) printf("Next arg, message so far: %s \n", msg);
@@ -117,14 +117,14 @@ tnode* cparse_message(int mode) {
 	return m;
 }
 
-tlistitem* cparse_messages(tnode* r, int mode) {
+ctr_tlistitem* cparse_messages(ctr_tnode* r, int mode) {
 	if (debug) printf("Parsing messages.\n");
 	int t = clex_tok();
-	tlistitem* pli;
-	tlistitem* li;
-	tlistitem* fli;
+	ctr_tlistitem* pli;
+	ctr_tlistitem* li;
+	ctr_tlistitem* fli;
 	int first = 1;
-	tnode* node;
+	ctr_tnode* node;
 	//explicit chaining (,) only allowed for keyword message: Console write: 3 factorial, write: 3 factorial is not possible otherwise. 
 	while ((t == REF || (t == CHAIN && node && node->type == KWMESSAGE))) {
 		if (t == CHAIN) {
@@ -164,12 +164,12 @@ tlistitem* cparse_messages(tnode* r, int mode) {
 	return fli;
 }
 
-tnode* cparse_popen() {
+ctr_tnode* cparse_popen() {
 	clex_tok();
 	if (debug) printf("Parsing paren open (.\n");
-	tnode* r = CTR_PARSER_CREATE_NODE();
+	ctr_tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = NESTED;
-	tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
+	ctr_tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
 	r->nodes = li;
 	li->node = cparse_expr(0);
 	int t = clex_tok();
@@ -180,27 +180,27 @@ tnode* cparse_popen() {
 	return r;
 }
 
-tnode* cparse_block() {
+ctr_tnode* cparse_block() {
 	if (debug) printf("Parsing code block.\n");
 	clex_tok();
-	tnode* r = CTR_PARSER_CREATE_NODE();
+	ctr_tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = CODEBLOCK;
-	tlistitem* codeBlockPart1 = CTR_PARSER_CREATE_LISTITEM();
+	ctr_tlistitem* codeBlockPart1 = CTR_PARSER_CREATE_LISTITEM();
 	r->nodes = codeBlockPart1;
-	tlistitem* codeBlockPart2 = CTR_PARSER_CREATE_LISTITEM();
+	ctr_tlistitem* codeBlockPart2 = CTR_PARSER_CREATE_LISTITEM();
 	r->nodes->next = codeBlockPart2;
-	tnode* paramList = CTR_PARSER_CREATE_NODE();
-	tnode* codeList  = CTR_PARSER_CREATE_NODE();
+	ctr_tnode* paramList = CTR_PARSER_CREATE_NODE();
+	ctr_tnode* codeList  = CTR_PARSER_CREATE_NODE();
 	codeBlockPart1->node = paramList;
 	codeBlockPart2->node = codeList;
 	paramList->type = PARAMLIST;
 	codeList->type = INSTRLIST;
 	int t = clex_tok();
 	int first = 1;
-	tlistitem* previousListItem;
+	ctr_tlistitem* previousListItem;
 	while(t == REF) {
-		tlistitem* paramListItem = CTR_PARSER_CREATE_LISTITEM();
-		tnode* paramItem = CTR_PARSER_CREATE_NODE();
+		ctr_tlistitem* paramListItem = CTR_PARSER_CREATE_LISTITEM();
+		ctr_tnode* paramItem = CTR_PARSER_CREATE_NODE();
 		long l = clex_tok_value_length();
 		paramItem->value = malloc(sizeof(char) * l);
 		memcpy(paramItem->value, clex_tok_value(), l);
@@ -222,7 +222,7 @@ tnode* cparse_block() {
 	}
 	t = clex_tok();
 	first = 1;
-	tlistitem* previousCodeListItem;
+	ctr_tlistitem* previousCodeListItem;
 	while((first || t == DOT)) {
 		if (first) {
 			if (debug) printf("First, so put back\n");
@@ -231,8 +231,8 @@ tnode* cparse_block() {
 		t = clex_tok();
 		if (t == BLOCKCLOSE) break;
 		clex_putback();
-		tlistitem* codeListItem = CTR_PARSER_CREATE_LISTITEM();
-		tnode* codeNode = CTR_PARSER_CREATE_NODE();
+		ctr_tlistitem* codeListItem = CTR_PARSER_CREATE_LISTITEM();
+		ctr_tnode* codeNode = CTR_PARSER_CREATE_NODE();
 		if (debug) printf("--------> %d %s \n", t, clex_tok_value());
 		if (t == RET) {
 			codeNode = cparse_ret();
@@ -259,9 +259,9 @@ tnode* cparse_block() {
 	return r;
 }
 
-tnode* cparse_ref() {
+ctr_tnode* cparse_ref() {
 	clex_tok();
-	tnode* r = CTR_PARSER_CREATE_NODE();
+	ctr_tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = REFERENCE;
 	r->vlen = clex_tok_value_length();
 	char* tmp = clex_tok_value();
@@ -280,10 +280,10 @@ tnode* cparse_ref() {
 	return r;
 }
 
-tnode* cparse_string() {
+ctr_tnode* cparse_string() {
 	if (debug) printf("Parsing STRING. \n");
 	clex_tok();
-	tnode* r = CTR_PARSER_CREATE_NODE();
+	ctr_tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = LTRSTRING;
 	char* n = clex_readstr();
 	long vlen = clex_tok_value_length();
@@ -295,9 +295,9 @@ tnode* cparse_string() {
 }
 
 
-tnode* cparse_number() {
+ctr_tnode* cparse_number() {
 	clex_tok();
-	tnode* r = CTR_PARSER_CREATE_NODE();
+	ctr_tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = LTRNUM;
 	char* n = clex_tok_value();
 	long l = clex_tok_value_length();
@@ -308,34 +308,34 @@ tnode* cparse_number() {
 	return r;
 }
 
-tnode* cparse_false() {
+ctr_tnode* cparse_false() {
 	clex_tok();
-	tnode* r = CTR_PARSER_CREATE_NODE();
+	ctr_tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = LTRBOOLFALSE;
 	ASSIGN_STRING(r, value, "False", 5);
 	r->vlen = 5;
 	return r;
 }
 
-tnode* cparse_true() {
+ctr_tnode* cparse_true() {
 	clex_tok();
-	tnode* r = CTR_PARSER_CREATE_NODE();
+	ctr_tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = LTRBOOLTRUE;
 	ASSIGN_STRING(r, value,"True",4);	
 	r->vlen = 4;
 	return r;
 }
 
-tnode* cparse_nil() {
+ctr_tnode* cparse_nil() {
 	clex_tok();
-	tnode* r = CTR_PARSER_CREATE_NODE();
+	ctr_tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = LTRNIL;
 	r->value = "Nil";
 	r->vlen = 3;
 	return r;
 }
 
-tnode* cparse_receiver() {
+ctr_tnode* cparse_receiver() {
 	if (debug) printf("Parsing receiver.\n");
 	int t = clex_tok();
 	clex_putback();
@@ -351,12 +351,12 @@ tnode* cparse_receiver() {
 	exit(1);
 }
 
-tnode* cparse_assignment(tnode* r) {
+ctr_tnode* cparse_assignment(ctr_tnode* r) {
 	clex_tok();
-	tnode* a = CTR_PARSER_CREATE_NODE();
-	tnode* assignmentExpr = CTR_PARSER_CREATE_NODE();
-	tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
-	tlistitem* liAssignExpr = CTR_PARSER_CREATE_LISTITEM();
+	ctr_tnode* a = CTR_PARSER_CREATE_NODE();
+	ctr_tnode* assignmentExpr = CTR_PARSER_CREATE_NODE();
+	ctr_tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
+	ctr_tlistitem* liAssignExpr = CTR_PARSER_CREATE_LISTITEM();
 	a->type = EXPRASSIGNMENT;
 	a->nodes = li;
 	li->node = r;
@@ -366,10 +366,10 @@ tnode* cparse_assignment(tnode* r) {
 	return a;
 }
 
-tnode* cparse_expr(int mode) {
+ctr_tnode* cparse_expr(int mode) {
 	if (debug) printf("Parsing expression (mode: %d).\n", mode);	
-	tnode* r = cparse_receiver();
-	tnode* e;
+	ctr_tnode* r = cparse_receiver();
+	ctr_tnode* e;
 	int t2 = clex_tok();
 	if (debug) printf("First token after receiver = %d \n", t2);
 	clex_putback();
@@ -378,14 +378,14 @@ tnode* cparse_expr(int mode) {
 	} else if (t2 != DOT && t2 != PARCLOSE && t2 != CHAIN) {
 		e = CTR_PARSER_CREATE_NODE();
 		e->type = EXPRMESSAGE;
-		tlistitem* nodes = cparse_messages(r, mode);
+		ctr_tlistitem* nodes = cparse_messages(r, mode);
 		if (nodes == NULL) {
 			int t = clex_tok();
 			clex_putback();
 			if (debug) printf("No messages, return. Next token: %d.\n", t);
 			return r; //no messages, then just return receiver (might be in case of argument).
 		}
-		tlistitem* rli = CTR_PARSER_CREATE_LISTITEM();
+		ctr_tlistitem* rli = CTR_PARSER_CREATE_LISTITEM();
 		rli->node = r;
 		rli->next = nodes;
 		e->nodes = rli;
@@ -397,25 +397,25 @@ tnode* cparse_expr(int mode) {
 }
 
 
-tnode* cparse_ret() {
+ctr_tnode* cparse_ret() {
 	clex_tok();
-	tnode* r = CTR_PARSER_CREATE_NODE();
+	ctr_tnode* r = CTR_PARSER_CREATE_NODE();
 	r->type = RETURNFROMBLOCK;
-	tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
+	ctr_tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
 	r->nodes = li;
 	li->node = cparse_expr(0);
 	return r;
 }
 
-tnode* cparse_fin() {
+ctr_tnode* cparse_fin() {
 	clex_tok();
-	tnode* f = CTR_PARSER_CREATE_NODE();
+	ctr_tnode* f = CTR_PARSER_CREATE_NODE();
 	f->type = ENDOFPROGRAM;
 	return f;
 }
 
-tlistitem* cparse_statement() {
-	tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
+ctr_tlistitem* cparse_statement() {
+	ctr_tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
 	int t = clex_tok();
 	if (debug) printf("Parsing next statement of program, token = %d (%s).\n", t, clex_tok_value());
 	clex_putback();
@@ -435,12 +435,12 @@ tlistitem* cparse_statement() {
 	return li;
 }
 
-tnode* cparse_program() {
-	tnode* program = CTR_PARSER_CREATE_NODE();
-	tlistitem* pli;
+ctr_tnode* cparse_program() {
+	ctr_tnode* program = CTR_PARSER_CREATE_NODE();
+	ctr_tlistitem* pli;
 	int first = 1;
 	while(1) {
-		tlistitem* li = cparse_statement();
+		ctr_tlistitem* li = cparse_statement();
 		if (first) {
 			first = 0;
 			program->nodes = li;
@@ -453,8 +453,8 @@ tnode* cparse_program() {
 	return program;
 }
 
-tnode*  dparse_parse(char* prg) {
+ctr_tnode*  dparse_parse(char* prg) {
 	clex_load(prg);
-	tnode* program = cparse_program();
+	ctr_tnode* program = cparse_program();
 	return program;
 }

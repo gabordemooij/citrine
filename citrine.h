@@ -134,27 +134,27 @@ struct ctr_argument {
 struct ctr_argument;
 typedef struct ctr_argument ctr_argument;
 
-struct tnode {
+struct ctr_tnode {
 	int type;
 	int modifier;
 	char* value;
 	long vlen;
-	struct tlistitem* nodes;
+	struct ctr_tlistitem* nodes;
 };
 
 
-struct tlistitem {
-	struct tnode* node;	
-	struct tlistitem* next;
+struct ctr_tlistitem {
+	struct ctr_tnode* node;	
+	struct ctr_tlistitem* next;
 };
 
-struct tlistitem;
-typedef struct tlistitem tlistitem;
+struct ctr_tlistitem;
+typedef struct ctr_tlistitem ctr_tlistitem;
 
-struct tnode;
-typedef struct tnode tnode;
+struct ctr_tnode;
+typedef struct ctr_tnode ctr_tnode;
 
-tnode* dparse_parse(char* prg);
+ctr_tnode* dparse_parse(char* prg);
 
 long clex_len;
 long ctr_program_length;
@@ -173,7 +173,7 @@ ctr_object* ctr_find_in_my(ctr_object* key);
 ctr_object* ctr_assign_value(ctr_object* key, ctr_object* val);
 ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* val);
 ctr_object* ctr_build_string(char* object, long vlen);
-ctr_object* ctr_build_block(tnode* node);
+ctr_object* ctr_build_block(ctr_tnode* node);
 ctr_object* ctr_build_number(char* object);
 ctr_object* ctr_build_bool(int truth);
 ctr_object* ctr_build_nil();
@@ -187,15 +187,13 @@ char** __argv;
 
 ctr_object* ctr_send_message(ctr_object* receiver, char* message, long len, ctr_argument* argumentList);
 char* readf(char* file_name);
-void tree(tnode* ti, int indent);
+void tree(ctr_tnode* ti, int indent);
 
-ctr_object* cwlk_run(tnode* program);
-ctr_object* cwlk_expr(tnode* node);
+ctr_object* cwlk_run(ctr_tnode* program);
+ctr_object* cwlk_expr(ctr_tnode* node);
 ctr_object* ctr_first_object;
 
 int debug;
-
-#define CTR_DBG(MSG, O)...
 
 
 #define CTR_DEBUG_STR(X,Y,L) if (debug) {\
@@ -207,8 +205,8 @@ int debug;
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='^'  && X!= ':' && X!= '\''
 #define CTR_CREATE_ARGUMENT() (ctr_argument*) calloc(sizeof(ctr_argument), 1)
-#define CTR_PARSER_CREATE_LISTITEM() (tlistitem*) calloc(1, sizeof(tlistitem))
-#define	CTR_PARSER_CREATE_NODE() (tnode*) calloc(1,sizeof(tnode))
+#define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) calloc(1, sizeof(ctr_tlistitem))
+#define	CTR_PARSER_CREATE_NODE() (ctr_tnode*) calloc(1,sizeof(ctr_tnode))
 #define ASSIGN_STRING(o,p,v,s) o->p = calloc(s,sizeof(char)); memcpy( (char*) o->p,v,s);
 
 #define CTR_CONVFP(s,x){\
