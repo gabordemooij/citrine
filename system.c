@@ -2,7 +2,7 @@
 void ctr_gc_mark(ctr_object* object) {
 	ctr_object* el;
 	long i;
-	if (object->info.type == OTARRAY) {
+	if (object->info.type == CTR_OBJECT_TYPE_OTARRAY) {
 		for (i = 0; i < object->value.avalue->head; i++) {
 			el = *((ctr_object**) (long)object->value.avalue->elements+(i*sizeof(ctr_object*)) );
 			el->info.mark = 1;
@@ -82,7 +82,7 @@ ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
 		printf("No system argument.\n");
 		exit(1);
 	}
-	if (argumentList->object->info.type!=OTSTRING) {
+	if (argumentList->object->info.type!=CTR_OBJECT_TYPE_OTSTRING) {
 		printf("Argument of system call needs to be string\n");
 		exit(1);
 	}
@@ -100,7 +100,7 @@ ctr_object* ctr_command_argument(ctr_object* myself, ctr_argument* argumentList)
 		printf("No number of arg argument.\n");
 		exit(1);
 	}
-	if (argumentList->object->info.type!=OTNUMBER) {
+	if (argumentList->object->info.type!=CTR_OBJECT_TYPE_OTNUMBER) {
 		printf("Argument argNo needs to be number\n");
 		exit(1);
 	}
@@ -120,7 +120,7 @@ ctr_object* ctr_dice_sides(ctr_object* myself, ctr_argument* argumentList) {
 		printf("No number of sides argument.\n");
 		exit(1);
 	}
-	if (argumentList->object->info.type!=OTNUMBER) {
+	if (argumentList->object->info.type!=CTR_OBJECT_TYPE_OTNUMBER) {
 		printf("Argument sides needs to be number\n");
 		exit(1);
 	}
@@ -142,7 +142,7 @@ ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
 		printf("No brew argument.\n");
 		exit(1);
 	}
-	if (argumentList->object->info.type!=OTNUMBER) {
+	if (argumentList->object->info.type!=CTR_OBJECT_TYPE_OTNUMBER) {
 		printf("Argument brew to be number\n");
 		exit(1);
 	}

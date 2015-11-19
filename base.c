@@ -19,7 +19,7 @@ ctr_object* ctr_build_nil() {
  */ 
 ctr_object* ctr_object_make() {
 	ctr_object* objectInstance = NULL;
-	objectInstance = ctr_internal_create_object(OTOBJECT);
+	objectInstance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	objectInstance->link = Object;
 	return objectInstance;
 }
@@ -31,15 +31,15 @@ ctr_object* ctr_object_make() {
  */
 ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 	int type = myself->info.type;
-	if (type == OTNIL) {
+	if (type == CTR_OBJECT_TYPE_OTNIL) {
 		return ctr_build_string_from_cstring("Nil\0");
-	} else if (type == OTBOOL) {
+	} else if (type == CTR_OBJECT_TYPE_OTBOOL) {
 		return ctr_build_string_from_cstring("Boolean\0");
-	} else if (type == OTNUMBER) {
+	} else if (type == CTR_OBJECT_TYPE_OTNUMBER) {
 		return ctr_build_string_from_cstring("Number\0");
-	} else if (type == OTSTRING) {
+	} else if (type == CTR_OBJECT_TYPE_OTSTRING) {
 		return ctr_build_string_from_cstring("String\0");
-	} else if (type == OTBLOCK || type == OTNATFUNC) {
+	} else if (type == CTR_OBJECT_TYPE_OTBLOCK || type == CTR_OBJECT_TYPE_OTNATFUNC) {
 		return ctr_build_string_from_cstring("Block\0");
 	}
 	return ctr_build_string_from_cstring("Object\0");
@@ -70,13 +70,13 @@ ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* methodName = argumentList->object;
-	if (methodName->info.type != OTSTRING) {
+	if (methodName->info.type != CTR_OBJECT_TYPE_OTSTRING) {
 		error = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
 		return myself;
 	}
 	ctr_argument* nextArgument = argumentList->next;
 	ctr_object* methodBlock = nextArgument->object;
-	if (methodBlock->info.type != OTBLOCK) {
+	if (methodBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
 		error = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
 		return myself;
 	}
@@ -99,13 +99,13 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_object_override_does(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* methodName = argumentList->object;
-	if (methodName->info.type != OTSTRING) {
+	if (methodName->info.type != CTR_OBJECT_TYPE_OTSTRING) {
 		error = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
 		return myself;
 	}
 	ctr_argument* nextArgument = argumentList->next;
 	ctr_object* methodBlock = nextArgument->object;
-	if (methodBlock->info.type != OTBLOCK) {
+	if (methodBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
 		error = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
 		return myself;
 	}
@@ -158,9 +158,9 @@ ctr_object* ctr_object_basedOn(ctr_object* myself, ctr_argument* argumentList) {
  * Literal form: True False
  */
 ctr_object* ctr_build_bool(int truth) {
-	ctr_object* boolObject = ctr_internal_create_object(OTBOOL);
+	ctr_object* boolObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
 	if (truth) boolObject->value.bvalue = 1; else boolObject->value.bvalue = 0;
-	boolObject->info.type = OTBOOL;
+	boolObject->info.type = CTR_OBJECT_TYPE_OTBOOL;
 	boolObject->link = BoolX;
 	return boolObject;
 }
@@ -272,7 +272,7 @@ ctr_object* ctr_bool_xor(ctr_object* myself, ctr_argument* argumentList) {
  * Internal use only.
  */
 ctr_object* ctr_build_number(char* n) {
-	ctr_object* numberObject = ctr_internal_create_object(OTNUMBER);
+	ctr_object* numberObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	numberObject->value.nvalue = atof(n);
 	numberObject->link = Number;
 	return numberObject;
@@ -285,7 +285,7 @@ ctr_object* ctr_build_number(char* n) {
  * Internal use only.
  */
 ctr_object* ctr_build_number_from_float(double f) {
-	ctr_object* numberObject = ctr_internal_create_object(OTNUMBER);
+	ctr_object* numberObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	numberObject->value.nvalue = f;
 	numberObject->link = Number;
 	return numberObject;
@@ -353,8 +353,8 @@ ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = argumentList->object;
-	if (otherNum->info.type == OTSTRING) {
-		ctr_object* strObject = ctr_internal_create_object(OTSTRING);
+	if (otherNum->info.type == CTR_OBJECT_TYPE_OTSTRING) {
+		ctr_object* strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 		strObject = ctr_internal_cast2string(myself);
 		ctr_argument* newArg = CTR_CREATE_ARGUMENT();
 		newArg->object = otherNum;
@@ -552,7 +552,7 @@ ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
-	if (block->info.type != OTBLOCK) { printf("Expected code block."); exit(1); }
+	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) { printf("Expected code block."); exit(1); }
 	block->info.sticky = 1; //mark as sticky
 	int t = myself->value.nvalue;
 	int i;
@@ -575,7 +575,7 @@ ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
  * Creates a Citrine String object.
  */
 ctr_object* ctr_build_string(char* stringValue, long size) {
-	ctr_object* stringObject = ctr_internal_create_object(OTSTRING);
+	ctr_object* stringObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 	if (size != 0) {
 		stringObject->value.svalue->value = malloc(size*sizeof(char));
 		memcpy(stringObject->value.svalue->value, stringValue, size);
@@ -647,7 +647,7 @@ ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
  * string as a new object.
  */
 ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* strObject = ctr_internal_create_object(OTSTRING);
+	ctr_object* strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 	strObject = ctr_internal_cast2string(argumentList->object);
 	long n1 = myself->value.svalue->vlen;
 	long n2 = strObject->value.svalue->vlen;
@@ -1108,7 +1108,7 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
  * Builds a block object from a literal block of code.
  */
 ctr_object* ctr_build_block(ctr_tnode* node) {
-	ctr_object* codeBlockObject = ctr_internal_create_object(OTBLOCK);
+	ctr_object* codeBlockObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBLOCK);
 	codeBlockObject->value.block = node;
 	codeBlockObject->link = CBlock;
 	return codeBlockObject;

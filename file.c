@@ -2,7 +2,7 @@
 
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* s = ctr_object_make();
-	s->info.type = OTMISC;
+	s->info.type = CTR_OBJECT_TYPE_OTMISC;
 	s->link = myself;
 	s->info.flagb = 1;
 	if (!argumentList->object) {
@@ -11,8 +11,8 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	s->value.rvalue = malloc(sizeof(ctr_resource));
 	s->value.rvalue->type = 1;
-	ctr_object* pathObject = ctr_internal_create_object(OTSTRING);
-	pathObject->info.type = OTSTRING;
+	ctr_object* pathObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
+	pathObject->info.type = CTR_OBJECT_TYPE_OTSTRING;
 	pathObject->value.svalue = (ctr_string*) malloc(sizeof(ctr_string));
 	pathObject->value.svalue->value = (char*) malloc(sizeof(char) * argumentList->object->value.svalue->vlen);
 	memcpy(pathObject->value.svalue->value, argumentList->object->value.svalue->value, argumentList->object->value.svalue->vlen);
@@ -63,7 +63,7 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 		exit(1);
 	}
 	ctr_object* str = argumentList->object;
-	if (str->info.type != OTSTRING) {
+	if (str->info.type != CTR_OBJECT_TYPE_OTSTRING) {
 		printf("First argument must be string\n");
 		exit(1);
 	}
@@ -90,7 +90,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 		exit(1);
 	}
 	ctr_object* str = argumentList->object;
-	if (str->info.type != OTSTRING) {
+	if (str->info.type != CTR_OBJECT_TYPE_OTSTRING) {
 		printf("First argument must be string\n");
 		exit(1);
 	}
@@ -136,6 +136,7 @@ ctr_object* ctr_file_include(ctr_object* myself) {
 	char* prg = readf(pathString);
 	ctr_tnode* parsedCode = dparse_parse(prg);
 	cwlk_run(parsedCode);
+	return myself;
 }
 
 ctr_object* ctr_file_delete(ctr_object* myself) {

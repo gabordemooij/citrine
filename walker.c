@@ -20,7 +20,7 @@ ctr_object* cwlk_return(ctr_tnode* node) {
 		printf("Invalid return expression 2.\n");
 		exit(1);
 	} 
-	ctr_object* e = ctr_internal_create_object(OTOBJECT);
+	ctr_object* e = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	e =  cwlk_expr(li->node);
 	return e;
 }
@@ -88,7 +88,7 @@ ctr_object* cwlk_assignment(ctr_tnode* node) {
 	ctr_tnode* assignee = assignmentItems->node;
 	ctr_tlistitem* valueListItem = assignmentItems->next;
 	ctr_tnode* value = valueListItem->node;
-	ctr_object* x = ctr_internal_create_object(OTOBJECT);
+	ctr_object* x = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	x = cwlk_expr(value);
 	ctr_object* result;
 	if (assignee->modifier == 1) {
@@ -130,7 +130,7 @@ ctr_object* cwlk_expr(ctr_tnode* node) {
 	} else if (node->type == CTR_AST_NODE_ENDOFPROGRAM) {
 		if (error) {
 			printf("Uncatched error has occurred.\n");
-			if (error->info.type == OTSTRING) {
+			if (error->info.type == CTR_OBJECT_TYPE_OTSTRING) {
 				fwrite(error->value.svalue->value, sizeof(char), error->value.svalue->vlen, stdout);
 				printf("\n");
 			}

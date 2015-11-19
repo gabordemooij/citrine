@@ -9,7 +9,7 @@
  * a := Array new.
  */
 ctr_object* ctr_array_new(ctr_object* myclass) {
-	ctr_object* s = ctr_internal_create_object(OTARRAY);
+	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTARRAY);
 	s->link = myclass;
 	s->value.avalue = (ctr_collection*) malloc(sizeof(ctr_collection));
 	s->value.avalue->length = 1;
@@ -121,7 +121,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* getIndex = argumentList->object;
-	if (getIndex->info.type != OTNUMBER) {
+	if (getIndex->info.type != CTR_OBJECT_TYPE_OTNUMBER) {
 		printf("Index must be number.\n"); exit(1);
 	}
 	int i = (int) getIndex->value.nvalue;
@@ -139,7 +139,7 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* putValue = argumentList->object;
 	ctr_object* putIndex = argumentList->next->object;
-	if (putIndex->info.type != OTNUMBER) {
+	if (putIndex->info.type != CTR_OBJECT_TYPE_OTNUMBER) {
 		printf("Index must be number.\n"); exit(1);
 	}
 	int i = (int) putIndex->value.nvalue;
@@ -231,7 +231,7 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 		pushArg->object = ctr_array_get(myself, elnumArg);
 		ctr_array_push(newArray, pushArg);
 	}
-	if (otherArray->info.type == OTARRAY) {
+	if (otherArray->info.type == CTR_OBJECT_TYPE_OTARRAY) {
 		for(i = otherArray->value.avalue->tail; i<otherArray->value.avalue->head; i++) {
 			ctr_argument* pushArg = CTR_CREATE_ARGUMENT();
 			ctr_argument* elnumArg = CTR_CREATE_ARGUMENT();
@@ -314,7 +314,7 @@ int ctr_sort_cmp(const void * a, const void * b) {
  */
 ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sorter = argumentList->object;
-	if (sorter->info.type != OTBLOCK) {
+	if (sorter->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
 		error = ctr_build_string_from_cstring("Expected block.\0");
 		return myself;
 	}
@@ -324,7 +324,7 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 ctr_object* ctr_map_new(ctr_object* myclass) {
-	ctr_object* s = ctr_internal_create_object(OTOBJECT);
+	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	s->link = CMap;
 	return s;
 }
@@ -348,7 +348,7 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 	char* key;
 	long keyLen;
 	
-	if (putKey->info.type == OTSTRING) {
+	if (putKey->info.type == CTR_OBJECT_TYPE_OTSTRING) {
 		key = calloc(putKey->value.svalue->vlen, sizeof(char));
 		keyLen = putKey->value.svalue->vlen;
 		memcpy(key, putKey->value.svalue->value, keyLen);
@@ -367,7 +367,7 @@ ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
 		printf("Missing argument 1\n"); exit(1);
 	}
 	ctr_object* searchKey = argumentList->object;
-	if (searchKey->info.type != OTSTRING) {
+	if (searchKey->info.type != CTR_OBJECT_TYPE_OTSTRING) {
 		printf("Expected argument at: to be of type string.\n");
 		exit(1);
 	}
@@ -388,7 +388,7 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 		printf("Missing argument 1\n"); exit(1);
 	}
 	ctr_object* block = argumentList->object;
-	if (block->info.type != OTBLOCK) { printf("Expected code block."); exit(1); }
+	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) { printf("Expected code block."); exit(1); }
 	block->info.sticky = 1; //mark as sticky
 	ctr_mapitem* m = myself->properties->head;
 	while(m) {

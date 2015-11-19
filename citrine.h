@@ -38,16 +38,16 @@
 #define CTR_AST_NODE_LTRBOOLFALSE 82
 #define CTR_AST_NODE_LTRNIL 83
 
-#define OTNIL 0
-#define OTBOOL 1
-#define OTNUMBER 2
-#define OTSTRING 3
-#define OTBLOCK 4
-#define OTOBJECT 5
-#define OTNATFUNC 6
-#define OTARRAY 7
-#define OTMISC 8
-#define OTEX 9
+#define CTR_OBJECT_TYPE_OTNIL 0
+#define CTR_OBJECT_TYPE_OTBOOL 1
+#define CTR_OBJECT_TYPE_OTNUMBER 2
+#define CTR_OBJECT_TYPE_OTSTRING 3
+#define CTR_OBJECT_TYPE_OTBLOCK 4
+#define CTR_OBJECT_TYPE_OTOBJECT 5
+#define CTR_OBJECT_TYPE_OTNATFUNC 6
+#define CTR_OBJECT_TYPE_OTARRAY 7
+#define CTR_OBJECT_TYPE_OTMISC 8
+#define CTR_OBJECT_TYPE_OTEX 9
 
 typedef  unsigned int ctr_bool;
 typedef  long double ctr_number;
@@ -97,10 +97,10 @@ struct ctr_object {
 	 } info;
     struct ctr_object* link;
     union uvalue {
-		int bvalue;
-		double nvalue;
+		ctr_bool bvalue;
+		ctr_number nvalue;
 		ctr_string* svalue;
-		struct tnode* block;
+		struct ctr_tnode* block;
 		struct ctr_collection* avalue;
 		struct ctr_resource* rvalue;
 	} value;
@@ -212,7 +212,7 @@ int debug;
 #define CTR_CONVFP(s,x){\
 char *buf = calloc(100, sizeof(char));\
 char *p;\
-snprintf(buf, 99, "%.10f", x);\
+snprintf(buf, 99, "%.10Lf", x);\
 p = buf + strlen(buf) - 1;\
 while (*p == '0' && *p-- != '.');\
 *(p+1) = '\0';\
