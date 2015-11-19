@@ -39,9 +39,9 @@ int debug;
 
 //measures the size of character
 int utf8size(char c) {
-	if ((c & UTF8_BYTE3) == UTF8_BYTE3) return 4;
-	if ((c & UTF8_BYTE2) == UTF8_BYTE2) return 3;
-	if ((c & UTF8_BYTE1) == UTF8_BYTE1) return 2;
+	if ((c & CTR_UTF8_BYTE3) == CTR_UTF8_BYTE3) return 4;
+	if ((c & CTR_UTF8_BYTE2) == CTR_UTF8_BYTE2) return 3;
+	if ((c & CTR_UTF8_BYTE1) == CTR_UTF8_BYTE1) return 2;
 	return 1;
 }
 //measures the length of an utf8 string in utf8 chars
