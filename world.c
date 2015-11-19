@@ -531,7 +531,7 @@ void ctr_initialize_world() {
 	CtrStdNil = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNIL);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Nil", 3), CtrStdNil, 0);
 	CtrStdNil->link = CtrStdObject;
-
+	
 	//Boolean
 	CtrStdBool = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("ifTrue:", 7), &ctr_bool_iftrue);

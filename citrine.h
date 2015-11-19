@@ -1,3 +1,7 @@
+
+/**
+ * Define the Citrine tokens 
+ */
 #define CTR_TOKEN_REF 1
 #define CTR_TOKEN_QUOTE 2
 #define CTR_TOKEN_NUMBER 3
@@ -16,10 +20,17 @@
 #define CTR_TOKEN_RET 16
 #define CTR_TOKEN_FIN 99
 
+/**
+ * Define the UTF8 byte patterns
+ */
 #define CTR_UTF8_BYTE1 192
 #define CTR_UTF8_BYTE2 224
 #define CTR_UTF8_BYTE3 240
 
+/**
+ * Define the Citrine node types for the
+ * Abstract Syntax Tree (AST).
+ */
 #define CTR_AST_NODE_EXPRASSIGNMENT 51
 #define CTR_AST_NODE_EXPRMESSAGE 52
 #define CTR_AST_NODE_UNAMESSAGE 53
@@ -38,6 +49,12 @@
 #define CTR_AST_NODE_LTRBOOLFALSE 82
 #define CTR_AST_NODE_LTRNIL 83
 
+/**
+ * Define the basic object types.
+ * All objects in Citrine are 'normal' objects, however some
+ * native objects (and external objects) have special memory requirements,
+ * these are specified using the object types.
+ */
 #define CTR_OBJECT_TYPE_OTNIL 0
 #define CTR_OBJECT_TYPE_OTBOOL 1
 #define CTR_OBJECT_TYPE_OTNUMBER 2
@@ -49,38 +66,43 @@
 #define CTR_OBJECT_TYPE_OTMISC 8
 #define CTR_OBJECT_TYPE_OTEX 9
 
+/**
+ * Define basic types for Citrine
+ */
 typedef  unsigned int ctr_bool;
-typedef  long double ctr_number;
-typedef  char* ctr_raw_string;
+typedef  double       ctr_number;
+typedef  char*        ctr_raw_string;
+
 typedef  size_t ctr_size;
 
+/**
+ * Internal Citrine String
+ */
 struct ctr_string {
 	char* value;
-	long vlen;
+	size_t vlen;
 };
-struct ctr_string;
 typedef struct ctr_string ctr_string;
 
 
 /**
- * == Citrine Map ==
- * Represents a collection of objects,
- * can be extended to function like a hashmap.
+ * Map 
  */
 struct ctr_map {
 	struct ctr_mapitem* head;
 	int size;
 };
-struct ctr_map;
 typedef struct ctr_map ctr_map;
 
+/**
+ * Map item
+ */
 struct ctr_mapitem {
 	struct ctr_object* key;
 	struct ctr_object* value;
 	struct ctr_mapitem* prev;
 	struct ctr_mapitem* next;
 };
-struct ctr_mapitem;
 typedef struct ctr_mapitem ctr_mapitem;
 
 
@@ -88,10 +110,10 @@ struct ctr_object {
     const char* name;
     ctr_map* properties;
     ctr_map* methods;
-	 struct {
-		unsigned int type: 4;
-		unsigned int mark: 1;
-		unsigned int sticky: 1;
+	struct {
+		unsigned char type: 4;
+		unsigned char mark: 1;
+		unsigned char sticky: 1;
 	 } info;
     struct ctr_object* link;
     union uvalue {
@@ -210,7 +232,7 @@ int ctr_mode_debug;
 #define CTR_CONVFP(s,x){\
 char *buf = calloc(100, sizeof(char));\
 char *p;\
-snprintf(buf, 99, "%.10Lf", x);\
+snprintf(buf, 99, "%.10f", x);\
 p = buf + strlen(buf) - 1;\
 while (*p == '0' && *p-- != '.');\
 *(p+1) = '\0';\
