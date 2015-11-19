@@ -41,9 +41,9 @@ void ctr_gc_sweep() {
 	ctr_object* previousObject = NULL;
 	ctr_object* currentObject = ctr_first_object;
 	while(currentObject) {
-		gc_object_count ++;
+		ctr_gc_object_counter ++;
 		if (currentObject->info.mark==0 && currentObject->info.sticky==0){
-			gc_dust ++;
+			ctr_gc_dust_counter ++;
 			if (previousObject) {
 				previousObject->gnext = currentObject->gnext;
 			}
@@ -63,8 +63,8 @@ void ctr_gc_sweep() {
  * GarbageCollector
  */
 void ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
-	gc_dust = 0;
-	gc_object_count = 0;
+	ctr_gc_dust_counter = 0;
+	ctr_gc_object_counter = 0;
 	ctr_object* context = ctr_contexts[ctr_context_id];
 	int oldcid = ctr_context_id;
 	while(ctr_context_id > -1) {
@@ -82,7 +82,7 @@ void ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
  * Returns the number of objects collected.
  */
 ctr_object* ctr_gc_dust(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float((ctr_number) gc_dust);
+	return ctr_build_number_from_float((ctr_number) ctr_gc_dust_counter);
 }
 
 /**
@@ -91,7 +91,7 @@ ctr_object* ctr_gc_dust(ctr_object* myself, ctr_argument* argumentList) {
  * Returns the number of objects marked.
  */
 ctr_object* ctr_gc_object_count(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float((ctr_number) gc_object_count);
+	return ctr_build_number_from_float((ctr_number) ctr_gc_object_counter);
 }
 
 /**

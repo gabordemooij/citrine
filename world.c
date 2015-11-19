@@ -32,8 +32,8 @@ ctr_object* CtrStdShell;
 ctr_object* CtrStdCoin;
 ctr_object* CtrStdClock;
 
-int gc_dust = 0;
-int gc_object_count = 0;
+int ctr_gc_dust_counter = 0;
+int ctr_gc_object_counter = 0;
 int ctr_mode_debug;
 
 /**
