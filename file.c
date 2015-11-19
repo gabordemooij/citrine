@@ -1,14 +1,13 @@
-
-
+/**
+ * FileNew
+ *
+ * Creates a new file object based on the specified path.
+ */
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* s = ctr_object_make();
 	s->info.type = CTR_OBJECT_TYPE_OTMISC;
 	s->link = myself;
 	s->info.flagb = 1;
-	if (!argumentList->object) {
-		printf("Missing argument\n");
-		exit(1);
-	}
 	s->value.rvalue = malloc(sizeof(ctr_resource));
 	s->value.rvalue->type = 1;
 	ctr_object* pathObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
@@ -21,12 +20,22 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	return s;
 }
 
+/**
+ * FilePath
+ *
+ * Returns the path of a file.
+ */
 ctr_object* ctr_file_path(ctr_object* myself) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return CtrStdNil;
 	return path;
 }
 
+/**
+ * FileRead
+ *
+ * Reads contents of a file.
+ */
 ctr_object* ctr_file_read(ctr_object* myself) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return CtrStdNil;
@@ -36,8 +45,8 @@ ctr_object* ctr_file_read(ctr_object* myself) {
 	memcpy(pathString+vlen,"\0",1);
 	FILE* f = fopen(pathString, "rb");
 	if (!f) {
-		printf("Unable to open file!\n");
-		exit(1);
+		CtrStdError = ctr_build_string_from_cstring("Unable to open file.\0");
+		return CtrStdNil;
 	}
 	char *buffer;
 	unsigned long fileLen;
@@ -53,20 +62,16 @@ ctr_object* ctr_file_read(ctr_object* myself) {
 	fclose(f);
 	ctr_object* str = ctr_build_string(buffer, fileLen);
 	free(buffer);
-	//free(f);
 	return str;
 }
 
+/**
+ * FileWrite
+ *
+ * Writes content to a file.
+ */
 ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing string argument to write to file.\n");
-		exit(1);
-	}
-	ctr_object* str = argumentList->object;
-	if (str->info.type != CTR_OBJECT_TYPE_OTSTRING) {
-		printf("First argument must be string\n");
-		exit(1);
-	}
+	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return CtrStdNil;
 	long vlen = path->value.svalue->vlen;
@@ -75,25 +80,21 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString+vlen,"\0",1);
 	FILE* f = fopen(pathString, "wb+");
 	if (!f) {
-		printf("Unable to open file!\n");
-		exit(1);
+		CtrStdError = ctr_build_string_from_cstring("Unable to open file.\0");
+		return CtrStdNil;
 	}
 	fwrite(str->value.svalue->value, sizeof(char), str->value.svalue->vlen, f);
 	fclose(f);
-	//free(f);
 	return myself;
 }
 
+/**
+ * FileAppend
+ *
+ * Appends content to a file.
+ */
 ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing string argument to write to file.\n");
-		exit(1);
-	}
-	ctr_object* str = argumentList->object;
-	if (str->info.type != CTR_OBJECT_TYPE_OTSTRING) {
-		printf("First argument must be string\n");
-		exit(1);
-	}
+	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return CtrStdNil;
 	long vlen = path->value.svalue->vlen;
@@ -102,14 +103,19 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString+vlen,"\0",1);
 	FILE* f = fopen(pathString, "ab+");
 	if (!f) {
-		printf("Unable to open file!\n");
-		exit(1);
+		CtrStdError = ctr_build_string_from_cstring("Unable to open file.\0");
+		return CtrStdNil;
 	}
 	fwrite(str->value.svalue->value, sizeof(char), str->value.svalue->vlen, f);
 	fclose(f);
 	return myself;
 }
 
+/**
+ * FileExists
+ *
+ * Returns True if the file exists and False otherwise.
+ */
 ctr_object* ctr_file_exists(ctr_object* myself) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return ctr_build_bool(0);
@@ -121,11 +127,15 @@ ctr_object* ctr_file_exists(ctr_object* myself) {
 	int exists = (f != NULL );
 	if (f) {
 		fclose(f);
-		//free(f);
 	}
 	return ctr_build_bool(exists);
 }
 
+/**
+ * FileInclude
+ *
+ * Includes the file as a piece of executable code.
+ */
 ctr_object* ctr_file_include(ctr_object* myself) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return ctr_build_bool(0);
@@ -139,6 +149,11 @@ ctr_object* ctr_file_include(ctr_object* myself) {
 	return myself;
 }
 
+/**
+ * FileDelete
+ *
+ * Deletes the file.
+ */
 ctr_object* ctr_file_delete(ctr_object* myself) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return ctr_build_bool(0);
@@ -148,13 +163,17 @@ ctr_object* ctr_file_delete(ctr_object* myself) {
 	memcpy(pathString+vlen,"\0",1);
 	int r = remove(pathString);
 	if (r!=0) {
-		printf("Cant delete file.");
-		exit(1);
+		CtrStdError = ctr_build_string_from_cstring("Unable to delete file.\0");
+		return CtrStdNil;
 	}
 	return myself;
 }
 
-
+/**
+ * FileSize
+ *
+ * Returns the size of the file.
+ */
 ctr_object* ctr_file_size(ctr_object* myself) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	if (path == NULL) return ctr_build_number_from_float(0);
@@ -170,7 +189,6 @@ ctr_object* ctr_file_size(ctr_object* myself) {
     fseek(f,prev,SEEK_SET); //go back to where we were
     if (f) {
 		fclose(f);
-		//free(f);
 	}
     return ctr_build_number_from_float( (ctr_number) sz );
 }

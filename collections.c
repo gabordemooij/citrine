@@ -322,72 +322,71 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * Map
+ *
+ * Creates a Map object
+ */
 ctr_object* ctr_map_new(ctr_object* myclass) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	s->link = CtrStdMap;
 	return s;
 }
 
-
-
+/**
+ * MapPut
+ *
+ * Puts a key-value pair in a map.
+ *
+ * Usage:
+ * map put: 'hello' at: 'world'.
+ *
+ */
 ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
-	if (!argumentList->next) {
-		printf("Missing argument 2\n"); exit(1);
-	}
 	ctr_object* putValue = argumentList->object;
 	ctr_argument* nextArgument = argumentList->next;
-	if (!nextArgument->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
-	ctr_object* putKey = nextArgument->object;
-	
+	ctr_object* putKey = ctr_internal_cast2string(nextArgument->object);
 	char* key;
 	long keyLen;
-	
-	if (putKey->info.type == CTR_OBJECT_TYPE_OTSTRING) {
-		key = calloc(putKey->value.svalue->vlen, sizeof(char));
-		keyLen = putKey->value.svalue->vlen;
-		memcpy(key, putKey->value.svalue->value, keyLen);
-	} else {
-		printf("Map key needs to be string.\n");
-		exit(1);
-	}
+	key = calloc(putKey->value.svalue->vlen, sizeof(char));
+	keyLen = putKey->value.svalue->vlen;
+	memcpy(key, putKey->value.svalue->value, keyLen);
 	ctr_internal_object_delete_property(myself, ctr_build_string(key, keyLen), 0);
 	ctr_internal_object_add_property(myself, ctr_build_string(key, keyLen), putValue, 0);
-	
-    return myself;
+	return myself;
 }
 
+/**
+ * MapGet
+ *
+ * Retrieves the value specified by the key from the map.
+ */
 ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
-	ctr_object* searchKey = argumentList->object;
-	if (searchKey->info.type != CTR_OBJECT_TYPE_OTSTRING) {
-		printf("Expected argument at: to be of type string.\n");
-		exit(1);
-	}
+	ctr_object* searchKey = ctr_internal_cast2string(argumentList->object);
 	ctr_object* foundObject = ctr_internal_object_find_property(myself, searchKey, 0);
 	if (foundObject == NULL) foundObject = ctr_build_nil();
 	return foundObject;
 }
 
+/**
+ * MapCount
+ *
+ * Returns the number of elements in the map.
+ */
 ctr_object* ctr_map_count(ctr_object* myself) {
-
-	
 	return ctr_build_number_from_float( (ctr_number) myself->properties->size );
 }
 
-
+/**
+ * MapEach
+ *
+ * Iterates over the map.
+ */
 ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
-	if (!argumentList->object) {
-		printf("Missing argument 1\n"); exit(1);
-	}
 	ctr_object* block = argumentList->object;
-	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) { printf("Expected code block."); exit(1); }
+	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
+		CtrStdError = ctr_build_string_from_cstring("Expected Block.\0");
+	}
 	block->info.sticky = 1; //mark as sticky
 	ctr_mapitem* m = myself->properties->head;
 	while(m) {
@@ -400,4 +399,3 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	block->info.sticky = 0;
 	return myself;
 }
-

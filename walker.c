@@ -9,8 +9,12 @@
 
 ctr_object* CtrStdError;
 
+/**
+ * CTRWalkerReturn
+ *
+ * Returns from a block of code.
+ */
 ctr_object* ctr_cwlk_return(ctr_tnode* node) {
-	
 	if (!node->nodes) {
 		printf("Invalid return expression.\n");
 		exit(1);
@@ -25,6 +29,11 @@ ctr_object* ctr_cwlk_return(ctr_tnode* node) {
 	return e;
 }
 
+/**
+ * CTRWalkerMessage
+ *
+ * Processes a message sending operation.
+ */
 ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 	ctr_object* result;
 	ctr_tlistitem* eitem = paramNode->nodes;
@@ -83,6 +92,11 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 	return result;
 }	
 
+/**
+ * CTRWalkerAssignment
+ *
+ * Processes an assignment operation.
+ */
 ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
 	ctr_tlistitem* assignmentItems = node->nodes;
 	ctr_tnode* assignee = assignmentItems->node;
@@ -99,6 +113,11 @@ ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
 	return result;
 }		
 
+/**
+ * CTRWalkerExpression
+ *
+ * Processes an expression.
+ */
 ctr_object* ctr_cwlk_expr(ctr_tnode* node) {
 	ctr_object* result;
 	if (node->type == CTR_AST_NODE_LTRSTRING) {
@@ -144,6 +163,11 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node) {
 	return result;
 }
 
+/**
+ * CTRWalkerRunBlock
+ *
+ * Processes the execution of a block of code.
+ */
 ctr_object* ctr_cwlk_run(ctr_tnode* program) {
 	ctr_object* result = NULL;
 	if (ctr_mode_debug) ctr_internal_debug_tree(program, 0);

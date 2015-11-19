@@ -8,12 +8,6 @@
 #include "citrine.h"
 
 
-typedef struct {
-	int tid;
-	char* value;
-} tk;
-
-
 int bflmt = 100;
 long tokvlen = 0; //length of the string value of a token
 char* buffer;
@@ -24,6 +18,11 @@ char* oldptr;
 char* olderptr;
 int flag_operator = 0;
 
+/**
+ * CTRLexerLoad
+ *
+ * Loads program into memory.
+ */
 void ctr_clex_load(char* prg) {
 	code = prg;
 	buffer = malloc(bflmt);
@@ -31,19 +30,41 @@ void ctr_clex_load(char* prg) {
 	eofcode = (code + ctr_program_length - 1);
 }
 
+/**
+ * CTRLexerTokenValue
+ *
+ * Returns the string of characters representing the value
+ * of the currently selected token.
+ */
 char* ctr_clex_tok_value() {
 	return buffer;
 }
 
+/**
+ * CTRLexerTokenValueLength
+ *
+ * Returns the length of the value of the currently selected token.
+ */
 long ctr_clex_tok_value_length() {
 	return tokvlen;
 }
 
+/**
+ * CTRLexerPutBackToken
+ *
+ * Puts back a token and resets the pointer to the previous one.
+ */
 void ctr_clex_putback() {
 	code = oldptr;
 	oldptr = olderptr;
 }
 
+/**
+ * CTRLexerReadToken
+ *
+ * Reads the next token from the program buffer and selects this
+ * token.
+ */
 int ctr_clex_tok() {
 	tokvlen = 0;
 	olderptr = oldptr;
@@ -63,7 +84,6 @@ int ctr_clex_tok() {
 	if (c == ')') { code++; return CTR_TOKEN_PARCLOSE; }
 	if (c == '{') { code++; return CTR_TOKEN_BLOCKOPEN; }
 	if (c == '}') {  code++; return CTR_TOKEN_BLOCKCLOSE; }
-	
 	if (c == '.') { code++; return CTR_TOKEN_DOT; }
 	if (c == ',') { code++; return CTR_TOKEN_CHAIN; }
 	if (c == ':' && (code+1)<eofcode && (*(code+1)=='=')) {
@@ -71,7 +91,6 @@ int ctr_clex_tok() {
 		return CTR_TOKEN_ASSIGNMENT; 
 	}
 	if (c == ':') { code++; return CTR_TOKEN_COLON; }
-	
 	if (c == '^') { code++; return CTR_TOKEN_RET; }
 	if (c == '\'') { code++; return CTR_TOKEN_QUOTE; }
 	if ((c == '-' && (code+1)<eofcode && isdigit(*(code+1))) || isdigit(c)) {
@@ -120,12 +139,13 @@ int ctr_clex_tok() {
 			return CTR_TOKEN_NIL;
 		}
 	}
-	
+
 	//these symbols are special because we often like to use
 	//them without spacing: 1+2 instead of 1 + 2.
 	if (c=='+' || c=='-' || c=='/' || c=='*') {
 		code++; tokvlen = 1; buffer[i] = c; return CTR_TOKEN_REF;
 	}
+
 	//these are also special, they are easy notations for unicode symbols.
 	//we also return directly because we would like to use them without spaces as well: 1>=2...
 	if ((code+1)<eofcode) {
@@ -152,16 +172,14 @@ int ctr_clex_tok() {
 			code +=2; tokvlen = 1; memcpy(buffer, "=", 1); return CTR_TOKEN_REF;
 		}
 	}
+
 	//later because we tolerate == as well.
 	if (c=='=' || c=='>' || c =='<') {
 		code++; tokvlen = 1; buffer[i] = c; return CTR_TOKEN_REF;
 	}
-	
-	
-	
-	
+
 	if (c == '|' || c == '\\') { code++; return CTR_TOKEN_BLOCKPIPE; }
-	
+
 	while(!isspace(c) && CTR_IS_NO_TOK(c) && code!=eofcode
 	&& c != '+' && c!='*' && c!='/' && c!='=' && c!='>' && c!='<' && c!='&' //and c is not one of the special symbols
 	) {
@@ -179,6 +197,11 @@ int ctr_clex_tok() {
 }
 
 
+/**
+ * CTRLexerStringReader
+ *
+ * Reads an entire string between a pair of quotes.
+ */
 char* ctr_clex_readstr() {
 	tokvlen=0;
 	long memblock = 40;
@@ -195,7 +218,6 @@ char* ctr_clex_readstr() {
 			continue;
 		}
 		tokvlen ++;
-		
 		if (tokvlen > memblock) {
 			memblock += page;
 			beginbuff = (char*) realloc(beginbuff, memblock);
@@ -206,7 +228,6 @@ char* ctr_clex_readstr() {
 			//reset pointer, memory location might have been changed
 			strbuff = beginbuff + (tokvlen -1);
 		}
-		
 		escape = 0;
 		*strbuff = c;
 		strbuff++;

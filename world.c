@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -35,16 +34,25 @@ ctr_object* CtrStdClock;
 
 int gc_dust = 0;
 int gc_object_count = 0;
-int debug;
+int ctr_mode_debug;
 
-//measures the size of character
+/**
+ * UTF8Size
+ *
+ * measures the size of character
+ */
 int ctr_utf8size(char c) {
 	if ((c & CTR_UTF8_BYTE3) == CTR_UTF8_BYTE3) return 4;
 	if ((c & CTR_UTF8_BYTE2) == CTR_UTF8_BYTE2) return 3;
 	if ((c & CTR_UTF8_BYTE1) == CTR_UTF8_BYTE1) return 2;
 	return 1;
 }
-//measures the length of an utf8 string in utf8 chars
+
+/**
+ * GetUTF8Length
+ *
+ * measures the length of an utf8 string in utf8 chars
+ */
 size_t ctr_getutf8len(char* strval, size_t max) {
 	size_t i;
 	size_t j = 0;
@@ -56,6 +64,9 @@ size_t ctr_getutf8len(char* strval, size_t max) {
 	return (i-j);
 }
 
+/**
+ * GetBytesForUTF8String
+ */
 size_t getBytesUtf8(char* strval, long startByte, size_t lenUChar) {
 	long i = 0;
 	long bytes = 0;
@@ -73,6 +84,11 @@ size_t getBytesUtf8(char* strval, long startByte, size_t lenUChar) {
 	return bytes;
 }
 
+/**
+ * ReadFile
+ *
+ * Reads in an entire file.
+ */
 char* ctr_internal_readf(char* file_name) {
    char* prg;
    char ch;
@@ -94,6 +110,11 @@ char* ctr_internal_readf(char* file_name) {
    return prg;
 }
 
+/**
+ * DebugTree
+ *
+ * For debugging purposes, prints the internal AST.
+ */
 void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
 	if (indent>20) exit(1); 
 	ctr_tlistitem* li = ti->nodes;
@@ -128,9 +149,12 @@ void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
 	}
 }
 
-
+/**
+ * InternalObjectIsEqual
+ *
+ * Detemines whether two objects are identical.
+ */
 int ctr_internal_object_is_equal(ctr_object* object1, ctr_object* object2) {
-	
 	if (object1->info.type == CTR_OBJECT_TYPE_OTSTRING && object2->info.type == CTR_OBJECT_TYPE_OTSTRING) {
 		char* string1 = object1->value.svalue->value;
 		char* string2 = object2->value.svalue->value;
@@ -141,26 +165,27 @@ int ctr_internal_object_is_equal(ctr_object* object1, ctr_object* object2) {
 		if (d==0) return 1;
 		return 0;
 	}
-	
 	if (object1->info.type == CTR_OBJECT_TYPE_OTNUMBER && object2->info.type == CTR_OBJECT_TYPE_OTNUMBER) {
 		ctr_number num1 = object1->value.nvalue;
 		ctr_number num2 = object2->value.nvalue;
 		if (num1 == num2) return 1;
 		return 0;
 	}
-	
 	if (object1->info.type == CTR_OBJECT_TYPE_OTBOOL && object2->info.type == CTR_OBJECT_TYPE_OTBOOL) {
 		int b1 = object1->value.bvalue;
 		int b2 = object2->value.bvalue;
 		if (b1 == b2) return 1;
 		return 0;
 	}
-	
 	if (object1 == object2) return 1;
-	return 0;
-		
+	return 0;		
 }
 
+/**
+ * InternalObjectFindProperty
+ *
+ * Finds property in object.
+ */
 ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key, int is_method) {
 	
 	ctr_mapitem* head;
@@ -175,7 +200,6 @@ ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key
 		}
 		head = owner->properties->head; 
 	}
-	
 	while(head) {
 		if (ctr_internal_object_is_equal(head->key, key)) {
 			return head->value;
@@ -186,6 +210,11 @@ ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key
 }
 
 
+/**
+ * InternalObjectDeleteProperty
+ *
+ * Deletes the specified property from the object.
+ */
 void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int is_method) {
 	ctr_mapitem* head;
 	if (is_method) {
@@ -199,7 +228,6 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
 		}
 		head = owner->properties->head; 
 	}
-	
 	while(head) {
 		if (ctr_internal_object_is_equal(head->key, key)) {
 			if (head->next && head->prev) {
@@ -239,6 +267,11 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
 	return;
 }
 
+/**
+ * InternalObjectAddProperty
+ *
+ * Adds a property to an object.
+ */
 void ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_object* value, int m) {
 	ctr_mapitem* new_item = malloc(sizeof(ctr_mapitem));
 	ctr_mapitem* current_head = NULL;
@@ -269,12 +302,21 @@ void ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_ob
 	}
 }
 
+/**
+ * InternalObjectSetProperty
+ *
+ * Sets a property on an object.
+ */ 
 void ctr_internal_object_set_property(ctr_object* owner, ctr_object* key, ctr_object* value, int is_method) {
 	ctr_internal_object_delete_property(owner, key, is_method);
 	ctr_internal_object_add_property(owner, key, value, is_method);
 }
 
-
+/**
+ * InternalMemMem
+ *
+ * memmem implementation
+ */
 char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, int reverse ) {
 	char* cur;
 	char* last;
@@ -296,6 +338,11 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
 	return NULL;
 }
 
+/**
+ * InternalObjectCreate
+ *
+ * Creates an object.
+ */
 ctr_object* ctr_internal_create_object(int type) {
 	ctr_object* o = malloc(sizeof(ctr_object));
 	o->properties = malloc(sizeof(ctr_map));
@@ -322,15 +369,24 @@ ctr_object* ctr_internal_create_object(int type) {
 		ctr_first_object = o;
 	}
 	return o;
-	
 }
 
+/**
+ * InternalFunctionCreate
+ *
+ * Create a function and add this to the object as a method.
+ */
 void ctr_internal_create_func(ctr_object* o, ctr_object* key, void* f ) {
 	ctr_object* methodObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNATFUNC);
 	methodObject->value.rvalue = (void*) f;
 	ctr_internal_object_add_property(o, key, methodObject, 1);
 }
 
+/**
+ * InternalNumberCast
+ *
+ * Casts an object to a number object.
+ */
 ctr_object* ctr_internal_cast2number(ctr_object* o) {
 	if (o->info.type == CTR_OBJECT_TYPE_OTNUMBER) return o;
 	if (o->info.type == CTR_OBJECT_TYPE_OTSTRING) {
@@ -342,6 +398,11 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
 	return ctr_build_number("0");
 }
 
+/**
+ * InternalStringCast
+ *
+ * Casts an object to a string object.
+ */
 ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 	if (o->info.type == CTR_OBJECT_TYPE_OTSTRING) return o;
 	else if (o->info.type == CTR_OBJECT_TYPE_OTNIL) { return ctr_build_string("[Nil]", 5); }
@@ -358,6 +419,11 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 	return ctr_build_string("[?]", 3);
 }
 
+/**
+ * InternalBooleanCast
+ *
+ * Casts an object to a boolean.
+ */
 ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
 	if (o->info.type == CTR_OBJECT_TYPE_OTBOOL) return o;
 	if (o->info.type == CTR_OBJECT_TYPE_OTNIL
@@ -366,18 +432,33 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
 	return ctr_build_bool(1);
 }
 
-
+/**
+ * ContextOpen
+ *
+ * Opens a new context to keep track of variables.
+ */
 void ctr_open_context() {
 	cid++;
 	ctr_object* context = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	contexts[cid] = context;
 }
 
+/**
+ * ContextClose
+ *
+ * Closes a context.
+ */
 void ctr_close_context() {
 	if (cid == 0) return;
 	cid--;
 }
 
+/**
+ * CTRFind
+ *
+ * Tries to locate a variable in the current context or one
+ * of the contexts beneath.
+ */
 ctr_object* ctr_find(ctr_object* key) {
 	int i = cid;
 	ctr_object* foundObject = NULL;
@@ -390,6 +471,11 @@ ctr_object* ctr_find(ctr_object* key) {
 	return foundObject;
 }
 
+/**
+ * CTRFindInMy
+ *
+ * Tries to locate a property of an object.
+ */
 ctr_object* ctr_find_in_my(ctr_object* key) {
 	ctr_object* context = ctr_find(ctr_build_string("me",2));
 	ctr_object* foundObject = ctr_internal_object_find_property(context, key, 0);
@@ -397,6 +483,11 @@ ctr_object* ctr_find_in_my(ctr_object* key) {
 	return foundObject;
 }
 
+/**
+ * CTRSetBasic
+ *
+ * Sets a proeprty in an object (context).
+ */
 void ctr_set(ctr_object* key, ctr_object* object) {
 	ctr_object* context = contexts[cid];
 	ctr_internal_object_set_property(context, key, object, 0);
@@ -409,6 +500,8 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 #include "file.c"
 
 /**
+ * WorldInitialize
+ *
  * Populate the World of Citrine.
  */
 void ctr_initialize_world() {
@@ -618,7 +711,11 @@ void ctr_initialize_world() {
 	CtrStdGC->link = CtrStdObject;
 }
 
-
+/**
+ * CTRMessageSend
+ *
+ * Sends a message to a receiver object.
+ */
 ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vlen, ctr_argument* argumentList) {
 	if (CtrStdError != NULL) return NULL; //Error mode, ignore subsequent messages until resolved.
 	ctr_object* methodObject = NULL;
@@ -659,6 +756,12 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	return result;
 }
 
+
+/**
+ * CTRValueAssignment
+ *
+ * Assigns a value to a variable in the current context.
+ */
 ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 	ctr_object* object;
 	key->info.sticky = 0;
@@ -697,10 +800,15 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 		object->value.avalue->head = o->value.avalue->head;
 		object->value.avalue->tail = o->value.avalue->tail;
 	 }
-	 
 	return object;
 }
 
+
+/**
+ * CTRAssignValueObject
+ *
+ * Assigns a value to a property of an object. 
+ */
 ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 	ctr_object* object;
 	ctr_object* my = ctr_find(ctr_build_string("me", 2));
@@ -739,9 +847,6 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 		}
 		object->value.avalue->head = o->value.avalue->head;
 	 }
-	 
-	
-
 	return object;
 }
 
