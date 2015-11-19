@@ -13,7 +13,7 @@ obj* ctr_file_new(obj* myself, args* argumentList) {
 	s->value.rvalue->type = 1;
 	obj* pathObject = ctr_internal_create_object(OTSTRING);
 	pathObject->info.type = OTSTRING;
-	pathObject->value.svalue = (cstr*) malloc(sizeof(cstr));
+	pathObject->value.svalue = (ctr_string*) malloc(sizeof(ctr_string));
 	pathObject->value.svalue->value = (char*) malloc(sizeof(char) * argumentList->object->value.svalue->vlen);
 	memcpy(pathObject->value.svalue->value, argumentList->object->value.svalue->value, argumentList->object->value.svalue->vlen);
 	pathObject->value.svalue->vlen = argumentList->object->value.svalue->vlen;

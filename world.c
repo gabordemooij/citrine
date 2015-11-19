@@ -310,7 +310,7 @@ obj* ctr_internal_create_object(int type) {
 	if (type==OTBOOL) o->value.bvalue = 0;
 	if (type==OTNUMBER) o->value.nvalue = 0;
 	if (type==OTSTRING) {
-		o->value.svalue = malloc(sizeof(cstr));
+		o->value.svalue = malloc(sizeof(ctr_string));
 		o->value.svalue->value = "";
 		o->value.svalue->vlen = 0;
 	}
@@ -678,7 +678,7 @@ obj* ctr_assign_value(obj* key, obj* o) {
 	 } else if (o->info.type == OTNUMBER) {
 		object->value.nvalue = o->value.nvalue;
 	 } else if (o->info.type == OTSTRING) {
-		object->value.svalue = malloc(sizeof(cstr));
+		object->value.svalue = malloc(sizeof(ctr_string));
 		object->value.svalue->value = malloc(sizeof(char)*o->value.svalue->vlen);
 		memcpy(object->value.svalue->value, o->value.svalue->value,o->value.svalue->vlen);
 		object->value.svalue->vlen = o->value.svalue->vlen;
@@ -721,7 +721,7 @@ obj* ctr_assign_value_to_my(obj* key, obj* o) {
 	 } else if (o->info.type == OTNUMBER) {
 		object->value.nvalue = o->value.nvalue;
 	 } else if (o->info.type == OTSTRING) {
-		object->value.svalue = malloc(sizeof(cstr));
+		object->value.svalue = malloc(sizeof(ctr_string));
 		object->value.svalue->value = malloc(sizeof(char)*o->value.svalue->vlen);
 		memcpy(object->value.svalue->value, o->value.svalue->value,o->value.svalue->vlen);
 		object->value.svalue->vlen = o->value.svalue->vlen;

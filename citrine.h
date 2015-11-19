@@ -54,12 +54,12 @@ typedef  long double ctr_number;
 typedef  char* ctr_raw_string;
 typedef  size_t ctr_size;
 
-struct cstr {
+struct ctr_string {
 	char* value;
 	long vlen;
 };
-struct cstr;
-typedef struct cstr cstr;
+struct ctr_string;
+typedef struct ctr_string ctr_string;
 
 
 /**
@@ -99,7 +99,7 @@ struct obj {
     union uvalue {
 		int bvalue;
 		double nvalue;
-		cstr* svalue;
+		ctr_string* svalue;
 		struct tnode* block;
 		struct carray* avalue;
 		struct cres* rvalue;
