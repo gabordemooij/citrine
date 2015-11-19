@@ -11,7 +11,7 @@
 #include "citrine.h"
 
 ctr_object* CtrStdWorld = NULL;
-ctr_object* contexts[100];
+ctr_object* ctr_contexts[100];
 int ctr_context_id = 0;
 ctr_object* CtrStdObject;
 ctr_object* CtrStdBlock;
@@ -440,7 +440,7 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
 void ctr_open_context() {
 	ctr_context_id++;
 	ctr_object* context = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
-	contexts[ctr_context_id] = context;
+	ctr_contexts[ctr_context_id] = context;
 }
 
 /**
@@ -463,7 +463,7 @@ ctr_object* ctr_find(ctr_object* key) {
 	int i = ctr_context_id;
 	ctr_object* foundObject = NULL;
 	while((i>-1 && foundObject == NULL)) {
-		ctr_object* context = contexts[i];
+		ctr_object* context = ctr_contexts[i];
 		foundObject = ctr_internal_object_find_property(context, key, 0);
 		i--;
 	}
@@ -489,7 +489,7 @@ ctr_object* ctr_find_in_my(ctr_object* key) {
  * Sets a proeprty in an object (context).
  */
 void ctr_set(ctr_object* key, ctr_object* object) {
-	ctr_object* context = contexts[ctr_context_id];
+	ctr_object* context = ctr_contexts[ctr_context_id];
 	ctr_internal_object_set_property(context, key, object, 0);
 }
 
@@ -510,7 +510,7 @@ void ctr_initialize_world() {
 	ctr_first_object = NULL;
 	
 	CtrStdWorld = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
-	contexts[0] = CtrStdWorld;
+	ctr_contexts[0] = CtrStdWorld;
 
 	//Object
 	CtrStdObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
