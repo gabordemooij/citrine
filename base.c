@@ -5,7 +5,7 @@
  * Literal form: Nil
  */
 ctr_object* ctr_build_nil() {	
-	return Nil;
+	return CtrStdNil;
 }
 
 /**
@@ -20,7 +20,7 @@ ctr_object* ctr_build_nil() {
 ctr_object* ctr_object_make() {
 	ctr_object* objectInstance = NULL;
 	objectInstance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
-	objectInstance->link = Object;
+	objectInstance->link = CtrStdObject;
 	return objectInstance;
 }
 
@@ -71,13 +71,13 @@ ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* methodName = argumentList->object;
 	if (methodName->info.type != CTR_OBJECT_TYPE_OTSTRING) {
-		error = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
+		CtrStdError = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
 		return myself;
 	}
 	ctr_argument* nextArgument = argumentList->next;
 	ctr_object* methodBlock = nextArgument->object;
 	if (methodBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		error = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
+		CtrStdError = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
 		return myself;
 	}
 	ctr_internal_object_add_property(myself, methodName, methodBlock, 1);
@@ -100,18 +100,18 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_object_override_does(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* methodName = argumentList->object;
 	if (methodName->info.type != CTR_OBJECT_TYPE_OTSTRING) {
-		error = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
+		CtrStdError = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
 		return myself;
 	}
 	ctr_argument* nextArgument = argumentList->next;
 	ctr_object* methodBlock = nextArgument->object;
 	if (methodBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		error = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
+		CtrStdError = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
 		return myself;
 	}
 	ctr_object* overriddenMethod = ctr_internal_object_find_property(myself, methodName, 1);
 	if (overriddenMethod == NULL) {
-		error = ctr_build_string_from_cstring("Cannot override, original response not found.");
+		CtrStdError = ctr_build_string_from_cstring("Cannot override, original response not found.");
 		return myself;
 	}
 	char* superMethodNameString = malloc(sizeof(char) * (methodName->value.svalue->vlen + 11));
@@ -145,7 +145,7 @@ ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_object_basedOn(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = argumentList->object;
 	if (other == myself) {
-		error = ctr_build_string_from_cstring("Circular prototype.");
+		CtrStdError = ctr_build_string_from_cstring("Circular prototype.");
 		return myself;
 	}
 	myself->link = other;
@@ -161,7 +161,7 @@ ctr_object* ctr_build_bool(int truth) {
 	ctr_object* boolObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
 	if (truth) boolObject->value.bvalue = 1; else boolObject->value.bvalue = 0;
 	boolObject->info.type = CTR_OBJECT_TYPE_OTBOOL;
-	boolObject->link = BoolX;
+	boolObject->link = CtrStdBool;
 	return boolObject;
 }
 
@@ -274,7 +274,7 @@ ctr_object* ctr_bool_xor(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_build_number(char* n) {
 	ctr_object* numberObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	numberObject->value.nvalue = atof(n);
-	numberObject->link = Number;
+	numberObject->link = CtrStdNumber;
 	return numberObject;
 }
 
@@ -287,7 +287,7 @@ ctr_object* ctr_build_number(char* n) {
 ctr_object* ctr_build_number_from_float(double f) {
 	ctr_object* numberObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	numberObject->value.nvalue = f;
-	numberObject->link = Number;
+	numberObject->link = CtrStdNumber;
 	return numberObject;
 }
 
@@ -403,7 +403,7 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 ctr_number a = myself->value.nvalue;
 ctr_number b = otherNum->value.nvalue;
 	if (b == 0) {
-		error = ctr_build_string_from_cstring("Division by zero.");
+		CtrStdError = ctr_build_string_from_cstring("Division by zero.");
 		return myself;
 	}
 	return ctr_build_number_from_float((a/b));
@@ -412,7 +412,7 @@ ctr_number b = otherNum->value.nvalue;
 ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	if (otherNum->value.nvalue == 0) {
-		error = ctr_build_string_from_cstring("Division by zero.");
+		CtrStdError = ctr_build_string_from_cstring("Division by zero.");
 		return myself;
 	}
 	myself->value.nvalue /= otherNum->value.nvalue;
@@ -424,7 +424,7 @@ ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
 ctr_number a = myself->value.nvalue;
 ctr_number b = otherNum->value.nvalue;
 	if (b == 0) {
-		error = ctr_build_string_from_cstring("Division by zero.");
+		CtrStdError = ctr_build_string_from_cstring("Division by zero.");
 		return myself;
 	}
 	return ctr_build_number_from_float(fmod(a,b));
@@ -581,7 +581,7 @@ ctr_object* ctr_build_string(char* stringValue, long size) {
 		memcpy(stringObject->value.svalue->value, stringValue, size);
 	}
 	stringObject->value.svalue->vlen = size;
-	stringObject->link = TextString;
+	stringObject->link = CtrStdString;
 	return stringObject;
 }
 
@@ -754,8 +754,8 @@ ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
 	long a = (fromPos->value.nvalue);
 	long len = myself->value.svalue->vlen;
-	if (a > len) return Nil;
-	if (a < 0) return Nil;
+	if (a > len) return CtrStdNil;
+	if (a < 0) return CtrStdNil;
 	char x = *(myself->value.svalue->value + a);
 	return ctr_build_number_from_float((float)x);
 }
@@ -1029,13 +1029,13 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	ctr_set(ctr_build_string("thisBlock",9), myself); //otherwise running block may get gc'ed.
 	result = ctr_cwlk_run(codeBlockPart2);
 	ctr_close_context();
-	if (error != NULL) {
+	if (CtrStdError != NULL) {
 		ctr_object* catchBlock = malloc(sizeof(ctr_object));
 		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string("catch",5), 0);
 		if (catchBlock != NULL) {
 			ctr_argument* a = CTR_CREATE_ARGUMENT();
-			a->object = error;
-			error = NULL;
+			a->object = CtrStdError;
+			CtrStdError = NULL;
 			ctr_block_run(catchBlock, a, my);
 			result = myself;
 		}
@@ -1086,7 +1086,7 @@ ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
  * Sets error flag on a block of code.
  */
 ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
-	error = argumentList->object;
+	CtrStdError = argumentList->object;
 	return myself;
 }
 
@@ -1110,6 +1110,6 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_build_block(ctr_tnode* node) {
 	ctr_object* codeBlockObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBLOCK);
 	codeBlockObject->value.block = node;
-	codeBlockObject->link = CBlock;
+	codeBlockObject->link = CtrStdBlock;
 	return codeBlockObject;
 }

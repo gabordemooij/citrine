@@ -23,13 +23,13 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 
 ctr_object* ctr_file_path(ctr_object* myself) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
-	if (path == NULL) return Nil;
+	if (path == NULL) return CtrStdNil;
 	return path;
 }
 
 ctr_object* ctr_file_read(ctr_object* myself) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
-	if (path == NULL) return Nil;
+	if (path == NULL) return CtrStdNil;
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
@@ -68,7 +68,7 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 		exit(1);
 	}
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
-	if (path == NULL) return Nil;
+	if (path == NULL) return CtrStdNil;
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
@@ -95,7 +95,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 		exit(1);
 	}
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
-	if (path == NULL) return Nil;
+	if (path == NULL) return CtrStdNil;
 	long vlen = path->value.svalue->vlen;
 	char* pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);

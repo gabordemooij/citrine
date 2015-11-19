@@ -16,7 +16,6 @@ ctr_object* ctr_array_new(ctr_object* myclass) {
 	s->value.avalue->elements = (ctr_object**) malloc(sizeof(ctr_object*)*1);
 	s->value.avalue->head = 0;
 	s->value.avalue->tail = 0;
-	s->info.flagb = 1;
 	return s;
 }
 
@@ -158,7 +157,7 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 //@todo dont forget to gc arrays, they might hold refs to objects!
 ctr_object* ctr_array_pop(ctr_object* myself) {
 	if (myself->value.avalue->tail >= myself->value.avalue->head) {
-		return Nil;
+		return CtrStdNil;
 	}
 	myself->value.avalue->head--;
 	return *(myself->value.avalue->elements + myself->value.avalue->head);
@@ -171,7 +170,7 @@ ctr_object* ctr_array_pop(ctr_object* myself) {
  */
 ctr_object* ctr_array_shift(ctr_object* myself) {
 	if (myself->value.avalue->tail >= myself->value.avalue->head) {
-		return Nil;
+		return CtrStdNil;
 	}	
 	ctr_object* shiftedOff = *(myself->value.avalue->elements + myself->value.avalue->tail);
 	myself->value.avalue->tail++;
@@ -201,7 +200,7 @@ ctr_object* ctr_array_from_to(ctr_object* myself, ctr_argument* argumentList) {
 	int start = (int) startElement->value.nvalue;
 	int len = (int) count->value.nvalue;
 	int i = 0;
-	ctr_object* newArray = ctr_array_new(CArray);
+	ctr_object* newArray = ctr_array_new(CtrStdArray);
 	for(i = start; i < start + len; i++) {
 		ctr_argument* pushArg = CTR_CREATE_ARGUMENT();
 		ctr_argument* elnumArg = CTR_CREATE_ARGUMENT();
@@ -221,7 +220,7 @@ ctr_object* ctr_array_from_to(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherArray = argumentList->object;
-	ctr_object* newArray = ctr_array_new(CArray);
+	ctr_object* newArray = ctr_array_new(CtrStdArray);
 	int i;
 	for(i = myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
 		ctr_argument* pushArg = CTR_CREATE_ARGUMENT();
@@ -256,7 +255,7 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* delimObject  = ctr_internal_cast2string(argumentList->object);
 	char* dstr = delimObject->value.svalue->value;
 	long dlen = delimObject->value.svalue->vlen;
-	ctr_object* arr = ctr_array_new(CArray);
+	ctr_object* arr = ctr_array_new(CtrStdArray);
 	long i;
 	long j = 0;
 	char* buffer = malloc(sizeof(char)*len);
@@ -315,7 +314,7 @@ int ctr_sort_cmp(const void * a, const void * b) {
 ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sorter = argumentList->object;
 	if (sorter->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		error = ctr_build_string_from_cstring("Expected block.\0");
+		CtrStdError = ctr_build_string_from_cstring("Expected block.\0");
 		return myself;
 	}
 	temp_sorter = sorter;
@@ -325,7 +324,7 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 
 ctr_object* ctr_map_new(ctr_object* myclass) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
-	s->link = CMap;
+	s->link = CtrStdMap;
 	return s;
 }
 

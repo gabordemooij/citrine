@@ -7,7 +7,7 @@
 
 #include "citrine.h"
 
-ctr_object* error;
+ctr_object* CtrStdError;
 
 ctr_object* ctr_cwlk_return(ctr_tnode* node) {
 	
@@ -128,10 +128,10 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node) {
 	} else if (node->type == CTR_AST_NODE_NESTED) {
 		result = ctr_cwlk_expr(node->nodes->node);
 	} else if (node->type == CTR_AST_NODE_ENDOFPROGRAM) {
-		if (error) {
+		if (CtrStdError) {
 			printf("Uncatched error has occurred.\n");
-			if (error->info.type == CTR_OBJECT_TYPE_OTSTRING) {
-				fwrite(error->value.svalue->value, sizeof(char), error->value.svalue->vlen, stdout);
+			if (CtrStdError->info.type == CTR_OBJECT_TYPE_OTSTRING) {
+				fwrite(CtrStdError->value.svalue->value, sizeof(char), CtrStdError->value.svalue->vlen, stdout);
 				printf("\n");
 			}
 			exit(1);

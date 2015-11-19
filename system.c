@@ -96,16 +96,9 @@ ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
 
 
 ctr_object* ctr_command_argument(ctr_object* myself, ctr_argument* argumentList) {
-	if (!argumentList->object) {
-		printf("No number of arg argument.\n");
-		exit(1);
-	}
-	if (argumentList->object->info.type!=CTR_OBJECT_TYPE_OTNUMBER) {
-		printf("Argument argNo needs to be number\n");
-		exit(1);
-	}
-	int n = (int) argumentList->object->value.nvalue;
-	if (n >= __argc) return Nil;
+	ctr_object* numberObject = ctr_internal_cast2number(argumentList->object);
+	int n = (int) numberObject->value.nvalue;
+	if (n >= __argc) return CtrStdNil;
 	return ctr_build_string(__argv[n], strlen(__argv[n]));
 }
 
