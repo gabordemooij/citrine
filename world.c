@@ -619,7 +619,7 @@ void ctr_initialize_world() {
 }
 
 
-ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vlen, args* argumentList) {
+ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vlen, ctr_argument* argumentList) {
 	if (error != NULL) return NULL; //Error mode, ignore subsequent messages until resolved.
 	ctr_object* methodObject = NULL;
 	ctr_object* searchObject = receiverObject;
@@ -630,13 +630,13 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 		searchObject = searchObject->link;
 	}
 	if (!methodObject) {
-		args* argCounter = argumentList;
+		ctr_argument* argCounter = argumentList;
 		int argCount = 0;
 		while(argCounter->next && argCount < 4) {
 			argCounter = argCounter->next;
 			argCount ++;
 		}
-		args* mesgArgument = CTR_CREATE_ARGUMENT();
+		ctr_argument* mesgArgument = CTR_CREATE_ARGUMENT();
 		mesgArgument->object = ctr_build_string(message, vlen);
 		mesgArgument->next = argumentList;
 		if (argCount == 0 || argCount > 2) {
@@ -649,7 +649,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	}
 	ctr_object* result;
 	if (methodObject->info.type == OTNATFUNC) {
-		ctr_object* (*funct)(ctr_object* receiverObject, args* argumentList);
+		ctr_object* (*funct)(ctr_object* receiverObject, ctr_argument* argumentList);
 		funct = (void*) methodObject->value.block;
 		result = (ctr_object*) funct(receiverObject, argumentList);
 	}

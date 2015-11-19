@@ -53,7 +53,7 @@ void ctr_gc_sweep() {
 	}
 }
 
-void ctr_gc_collect (ctr_object* myself, args* argumentList) {
+void ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 	gc_dust = 0;
 	gc_object_count = 0;
 	ctr_object* context = contexts[cid];
@@ -68,16 +68,16 @@ void ctr_gc_collect (ctr_object* myself, args* argumentList) {
 }
 
 
-ctr_object* ctr_gc_dust(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_gc_dust(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float((ctr_number) gc_dust);
 }
 
-ctr_object* ctr_gc_object_count(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_gc_object_count(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float((ctr_number) gc_object_count);
 }
 
 
-ctr_object* ctr_shell_call(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
 	if (!argumentList->object) {
 		printf("No system argument.\n");
 		exit(1);
@@ -95,7 +95,7 @@ ctr_object* ctr_shell_call(ctr_object* myself, args* argumentList) {
 }
 
 
-ctr_object* ctr_command_argument(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_command_argument(ctr_object* myself, ctr_argument* argumentList) {
 	if (!argumentList->object) {
 		printf("No number of arg argument.\n");
 		exit(1);
@@ -115,7 +115,7 @@ ctr_object* ctr_command_num_of_args(ctr_object* myself) {
 
 
 
-ctr_object* ctr_dice_sides(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_dice_sides(ctr_object* myself, ctr_argument* argumentList) {
 	if (!argumentList->object) {
 		printf("No number of sides argument.\n");
 		exit(1);
@@ -137,7 +137,7 @@ ctr_object* ctr_coin_flip(ctr_object* myself) {
 	return ctr_build_bool((rand() % 2));
 }
 
-ctr_object* ctr_clock_wait(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
 	if (!argumentList->object) {
 		printf("No brew argument.\n");
 		exit(1);
@@ -151,13 +151,13 @@ ctr_object* ctr_clock_wait(ctr_object* myself, args* argumentList) {
 	return myself;
 }
 
-ctr_object* ctr_clock_time(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_clock_time(ctr_object* myself, ctr_argument* argumentList) {
 	time_t seconds = time(NULL);
 	return ctr_build_number_from_float((ctr_number)seconds);
 }
 
 
-ctr_object* ctr_console_write(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_console_write(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* argument1 = argumentList->object;
 	ctr_object* strObject = ctr_internal_cast2string(argument1);
 	fwrite(strObject->value.svalue->value, sizeof(char), strObject->value.svalue->vlen, stdout);
@@ -165,7 +165,7 @@ ctr_object* ctr_console_write(ctr_object* myself, args* argumentList) {
 }
 
 
-ctr_object* ctr_console_brk(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_console_brk(ctr_object* myself, ctr_argument* argumentList) {
 	fwrite("\n", sizeof(char), 1, stdout);
 	return myself;
 }

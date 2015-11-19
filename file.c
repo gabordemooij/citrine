@@ -1,6 +1,6 @@
 
 
-ctr_object* ctr_file_new(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* s = ctr_object_make();
 	s->info.type = OTMISC;
 	s->link = myself;
@@ -57,7 +57,7 @@ ctr_object* ctr_file_read(ctr_object* myself) {
 	return str;
 }
 
-ctr_object* ctr_file_write(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing string argument to write to file.\n");
 		exit(1);
@@ -84,7 +84,7 @@ ctr_object* ctr_file_write(ctr_object* myself, args* argumentList) {
 	return myself;
 }
 
-ctr_object* ctr_file_append(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing string argument to write to file.\n");
 		exit(1);

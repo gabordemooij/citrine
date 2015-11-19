@@ -68,7 +68,7 @@ typedef struct ctr_string ctr_string;
  * can be extended to function like a hashmap.
  */
 struct ctr_map {
-	struct cmapitem* head;
+	struct ctr_mapitem* head;
 	int size;
 };
 struct ctr_map;
@@ -126,13 +126,13 @@ struct carray {
 struct carray;
 typedef struct carray carray;
 
-struct args {
+struct ctr_argument {
 	struct ctr_object* object;
-	struct args* next;
+	struct ctr_argument* next;
 };
 
-struct args;
-typedef struct args args;
+struct ctr_argument;
+typedef struct ctr_argument ctr_argument;
 
 struct tnode {
 	int type;
@@ -178,14 +178,14 @@ ctr_object* ctr_build_number(char* object);
 ctr_object* ctr_build_bool(int truth);
 ctr_object* ctr_build_nil();
 ctr_object* ctr_build_string_from_cstring( char* str );
-ctr_object* ctr_block_run(ctr_object* myself, args* argList, ctr_object* my);
+ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my);
 long getutf8len(char* strval, long max);
 
 int __argc;
 char** __argv;
 
 
-ctr_object* ctr_send_message(ctr_object* receiver, char* message, long len, args* argumentList);
+ctr_object* ctr_send_message(ctr_object* receiver, char* message, long len, ctr_argument* argumentList);
 char* readf(char* file_name);
 void tree(tnode* ti, int indent);
 
@@ -206,7 +206,7 @@ int debug;
 
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='^'  && X!= ':' && X!= '\''
-#define CTR_CREATE_ARGUMENT() (args*) calloc(sizeof(args), 1)
+#define CTR_CREATE_ARGUMENT() (ctr_argument*) calloc(sizeof(ctr_argument), 1)
 #define CTR_PARSER_CREATE_LISTITEM() (tlistitem*) calloc(1, sizeof(tlistitem))
 #define	CTR_PARSER_CREATE_NODE() (tnode*) calloc(1,sizeof(tnode))
 #define ASSIGN_STRING(o,p,v,s) o->p = calloc(s,sizeof(char)); memcpy( (char*) o->p,v,s);

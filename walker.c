@@ -62,8 +62,8 @@ ctr_object* cwlk_message(tnode* paramNode) {
 		message = msgnode->value;
 		long l = msgnode->vlen;
 		argumentList = msgnode->nodes;
-		args* a = CTR_CREATE_ARGUMENT();
-		args* aItem = a;
+		ctr_argument* a = CTR_CREATE_ARGUMENT();
+		ctr_argument* aItem = a;
 		if (argumentList) {
 			tnode* node = argumentList->node;
 			while(1) {

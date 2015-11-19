@@ -30,7 +30,7 @@ ctr_object* ctr_array_new(ctr_object* myclass) {
  * numbers := Array new.
  * numbers push: 3.
  */
-ctr_object* ctr_array_push(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.avalue->length <= (myself->value.avalue->head + 1)) {
 		myself->value.avalue->length = myself->value.avalue->length * 3;
 		myself->value.avalue->elements = (ctr_object**) realloc(myself->value.avalue->elements, (sizeof(ctr_object*) * (myself->value.avalue->length)));
@@ -54,12 +54,12 @@ ctr_object* ctr_array_push(ctr_object* myself, args* argumentList) {
  *
  * Note that the ; symbol here is an alias for 'push:'.
  */
-ctr_object* ctr_array_new_and_push(ctr_object* myclass, args* argumentList) {
+ctr_object* ctr_array_new_and_push(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_array_new(myclass);
 	return ctr_array_push(s, argumentList);
 }
 
-ctr_object* ctr_array_unshift(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pushValue = argumentList->object;
 	if (myself->value.avalue->tail > 0) {
 		myself->value.avalue->tail--;
@@ -87,7 +87,7 @@ ctr_object* ctr_array_unshift(ctr_object* myself, args* argumentList) {
  * collection push: 1, push: 2, push 3.
  * collection join: ','. --> 1,2,3
  */
-ctr_object* ctr_array_join(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 	int i;
 	char* result;
 	long len = 0;
@@ -119,7 +119,7 @@ ctr_object* ctr_array_join(ctr_object* myself, args* argumentList) {
  *
  * Returns the element in the array at the specified index.
  */
-ctr_object* ctr_array_get(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* getIndex = argumentList->object;
 	if (getIndex->info.type != OTNUMBER) {
 		printf("Index must be number.\n"); exit(1);
@@ -136,7 +136,7 @@ ctr_object* ctr_array_get(ctr_object* myself, args* argumentList) {
  *
  * Puts a value in the array at the specified index.
  */
-ctr_object* ctr_array_put(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* putValue = argumentList->object;
 	ctr_object* putIndex = argumentList->next->object;
 	if (putIndex->info.type != OTNUMBER) {
@@ -195,7 +195,7 @@ ctr_object* ctr_array_count(ctr_object* myself) {
  * Copies part of an array indicated by from and to and
  * returns a new array consisting of a copy of this region.
  */
-ctr_object* ctr_array_from_to(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_array_from_to(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* startElement = ctr_internal_cast2number(argumentList->object);
 	ctr_object* count = ctr_internal_cast2number(argumentList->next->object);
 	int start = (int) startElement->value.nvalue;
@@ -203,8 +203,8 @@ ctr_object* ctr_array_from_to(ctr_object* myself, args* argumentList) {
 	int i = 0;
 	ctr_object* newArray = ctr_array_new(CArray);
 	for(i = start; i < start + len; i++) {
-		args* pushArg = CTR_CREATE_ARGUMENT();
-		args* elnumArg = CTR_CREATE_ARGUMENT();
+		ctr_argument* pushArg = CTR_CREATE_ARGUMENT();
+		ctr_argument* elnumArg = CTR_CREATE_ARGUMENT();
 		ctr_object* elnum = ctr_build_number_from_float((ctr_number) i);
 		elnumArg->object = elnum;
 		pushArg->object = ctr_array_get(myself, elnumArg);
@@ -219,13 +219,13 @@ ctr_object* ctr_array_from_to(ctr_object* myself, args* argumentList) {
  * Returns a new array, containing elements of itself and the other
  * array.
  */
-ctr_object* ctr_array_add(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherArray = argumentList->object;
 	ctr_object* newArray = ctr_array_new(CArray);
 	int i;
 	for(i = myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
-		args* pushArg = CTR_CREATE_ARGUMENT();
-		args* elnumArg = CTR_CREATE_ARGUMENT();
+		ctr_argument* pushArg = CTR_CREATE_ARGUMENT();
+		ctr_argument* elnumArg = CTR_CREATE_ARGUMENT();
 		ctr_object* elnum = ctr_build_number_from_float((ctr_number) i);
 		elnumArg->object = elnum;
 		pushArg->object = ctr_array_get(myself, elnumArg);
@@ -233,8 +233,8 @@ ctr_object* ctr_array_add(ctr_object* myself, args* argumentList) {
 	}
 	if (otherArray->info.type == OTARRAY) {
 		for(i = otherArray->value.avalue->tail; i<otherArray->value.avalue->head; i++) {
-			args* pushArg = CTR_CREATE_ARGUMENT();
-			args* elnumArg = CTR_CREATE_ARGUMENT();
+			ctr_argument* pushArg = CTR_CREATE_ARGUMENT();
+			ctr_argument* elnumArg = CTR_CREATE_ARGUMENT();
 			ctr_object* elnum = ctr_build_number_from_float((ctr_number) i);
 			elnumArg->object = elnum;
 			pushArg->object = ctr_array_get(otherArray, elnumArg);
@@ -250,7 +250,7 @@ ctr_object* ctr_array_add(ctr_object* myself, args* argumentList) {
  * Converts a string to an array by splitting the string using
  * the specified delimiter (also a string).
  */
-ctr_object* ctr_string_split(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
 	long len = myself->value.svalue->vlen;
 	ctr_object* delimObject  = ctr_internal_cast2string(argumentList->object);
@@ -269,7 +269,7 @@ ctr_object* ctr_string_split(ctr_object* myself, args* argumentList) {
 			char* elem = malloc(sizeof(char)*(j-dlen));
 			memcpy(elem,buffer,j-dlen);
 			//put it in array
-			args* arg = malloc(sizeof(args));
+			ctr_argument* arg = malloc(sizeof(ctr_argument));
 			arg->object = ctr_build_string(elem, j-dlen);
 			ctr_array_push(arr, arg);
 			free(arg);
@@ -281,7 +281,7 @@ ctr_object* ctr_string_split(ctr_object* myself, args* argumentList) {
 		char* elem = malloc(sizeof(char)*j);
 		memcpy(elem,buffer,j);
 		//put it in array
-		args* arg = malloc(sizeof(args));
+		ctr_argument* arg = malloc(sizeof(ctr_argument));
 		arg->object = ctr_build_string(elem, j);
 		ctr_array_push(arr, arg);
 		free(arg);
@@ -296,8 +296,8 @@ ctr_object* ctr_string_split(ctr_object* myself, args* argumentList) {
  */
 ctr_object* temp_sorter;
 int ctr_sort_cmp(const void * a, const void * b) {
-	args* arg1 = CTR_CREATE_ARGUMENT();
-	args* arg2 = CTR_CREATE_ARGUMENT();
+	ctr_argument* arg1 = CTR_CREATE_ARGUMENT();
+	ctr_argument* arg2 = CTR_CREATE_ARGUMENT();
 	arg1->next = arg2;
 	arg1->object = *((ctr_object**) a);
 	arg2->object = *((ctr_object**) b);
@@ -312,7 +312,7 @@ int ctr_sort_cmp(const void * a, const void * b) {
  * Sorts the contents of an array using a sort block.
  * Uses qsort.
  */
-ctr_object* ctr_array_sort(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sorter = argumentList->object;
 	if (sorter->info.type != OTBLOCK) {
 		error = ctr_build_string_from_cstring("Expected block.\0");
@@ -331,7 +331,7 @@ ctr_object* ctr_map_new(ctr_object* myclass) {
 
 
 
-ctr_object* ctr_map_put(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
@@ -339,7 +339,7 @@ ctr_object* ctr_map_put(ctr_object* myself, args* argumentList) {
 		printf("Missing argument 2\n"); exit(1);
 	}
 	ctr_object* putValue = argumentList->object;
-	args* nextArgument = argumentList->next;
+	ctr_argument* nextArgument = argumentList->next;
 	if (!nextArgument->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
@@ -362,7 +362,7 @@ ctr_object* ctr_map_put(ctr_object* myself, args* argumentList) {
     return myself;
 }
 
-ctr_object* ctr_map_get(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
@@ -383,7 +383,7 @@ ctr_object* ctr_map_count(ctr_object* myself) {
 }
 
 
-ctr_object* ctr_map_each(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	if (!argumentList->object) {
 		printf("Missing argument 1\n"); exit(1);
 	}
@@ -392,7 +392,7 @@ ctr_object* ctr_map_each(ctr_object* myself, args* argumentList) {
 	block->info.sticky = 1; //mark as sticky
 	ctr_mapitem* m = myself->properties->head;
 	while(m) {
-		args* arguments = CTR_CREATE_ARGUMENT();
+		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = m->value;
 		ctr_block_run(block, arguments, myself);
 		m = m->next;

@@ -29,7 +29,7 @@ ctr_object* ctr_object_make() {
  *
  * Returns a string representation of the type of object.
  */
-ctr_object* ctr_object_type(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 	int type = myself->info.type;
 	if (type == OTNIL) {
 		return ctr_build_string_from_cstring("Nil\0");
@@ -54,7 +54,7 @@ ctr_object* ctr_object_type(ctr_object* myself, args* argumentList) {
  * Usage:
  * object equals: other
  */
-ctr_object* ctr_object_equals(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherObject = argumentList->object;
 	if (otherObject == myself) return ctr_build_bool(1);
 	return ctr_build_bool(0);
@@ -68,13 +68,13 @@ ctr_object* ctr_object_equals(ctr_object* myself, args* argumentList) {
  * Usage:
  * object on: 'greet' do {\ ... }.
  */
-ctr_object* ctr_object_on_do(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* methodName = argumentList->object;
 	if (methodName->info.type != OTSTRING) {
 		error = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
 		return myself;
 	}
-	args* nextArgument = argumentList->next;
+	ctr_argument* nextArgument = argumentList->next;
 	ctr_object* methodBlock = nextArgument->object;
 	if (methodBlock->info.type != OTBLOCK) {
 		error = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
@@ -97,13 +97,13 @@ ctr_object* ctr_object_on_do(ctr_object* myself, args* argumentList) {
  * object override: 'test' do: {\ ... }.
  * 
  */
-ctr_object* ctr_object_override_does(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_object_override_does(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* methodName = argumentList->object;
 	if (methodName->info.type != OTSTRING) {
 		error = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
 		return myself;
 	}
-	args* nextArgument = argumentList->next;
+	ctr_argument* nextArgument = argumentList->next;
 	ctr_object* methodBlock = nextArgument->object;
 	if (methodBlock->info.type != OTBLOCK) {
 		error = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
@@ -128,7 +128,7 @@ ctr_object* ctr_object_override_does(ctr_object* myself, args* argumentList) {
 /**
  * Default respond-to implemention, does nothing.
  */
-ctr_object* ctr_object_respond(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
@@ -142,7 +142,7 @@ ctr_object* ctr_object_respond(ctr_object* myself, args* argumentList) {
  * 
  * object new basedOn: parentObject.
  */
-ctr_object* ctr_object_basedOn(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_object_basedOn(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = argumentList->object;
 	if (other == myself) {
 		error = ctr_build_string_from_cstring("Circular prototype.");
@@ -175,10 +175,10 @@ ctr_object* ctr_build_bool(int truth) {
  * (some expression) ifTrue: {\ ... }.
  *
  */
-ctr_object* ctr_bool_iftrue(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
-		args* arguments = CTR_CREATE_ARGUMENT();
+		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = myself;
 		return ctr_block_run(codeBlock, arguments, myself);
 	}
@@ -195,10 +195,10 @@ ctr_object* ctr_bool_iftrue(ctr_object* myself, args* argumentList) {
  * (some expression) ifFalse: {\ ... }.
  *
  */
-ctr_object* ctr_bool_ifFalse(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
 	if (!myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
-		args* arguments = CTR_CREATE_ARGUMENT();
+		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = myself;
 		return ctr_block_run(codeBlock, arguments, myself);
 	}
@@ -214,7 +214,7 @@ ctr_object* ctr_bool_ifFalse(ctr_object* myself, args* argumentList) {
  * Yes = No opposite.
  *
  */
-ctr_object* ctr_bool_opposite(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_bool_opposite(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(!myself->value.bvalue);
 }
 
@@ -229,7 +229,7 @@ ctr_object* ctr_bool_opposite(ctr_object* myself, args* argumentList) {
  * a && b
  *
  */
-ctr_object* ctr_bool_and(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
 	return ctr_build_bool((myself->value.bvalue && other->value.bvalue));
 }
@@ -244,7 +244,7 @@ ctr_object* ctr_bool_and(ctr_object* myself, args* argumentList) {
  *
  * a || b
  */
-ctr_object* ctr_bool_or(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);	
 	return ctr_build_bool((myself->value.bvalue || other->value.bvalue));
 }
@@ -259,7 +259,7 @@ ctr_object* ctr_bool_or(ctr_object* myself, args* argumentList) {
  *
  * a xor: b
  */
-ctr_object* ctr_bool_xor(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_bool_xor(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);	
 	return ctr_build_bool((myself->value.bvalue ^ other->value.bvalue));
 }
@@ -296,32 +296,32 @@ ctr_object* ctr_build_number_from_float(double f) {
  *
  * Implementation of >, <, >=, <=, == and !=
  */
-ctr_object* ctr_number_higherThan(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_higherThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue > otherNum->value.nvalue));
 }
 
-ctr_object* ctr_number_higherEqThan(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_higherEqThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue >= otherNum->value.nvalue));
 }
 
-ctr_object* ctr_number_lowerThan(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue < otherNum->value.nvalue));
 }
 
-ctr_object* ctr_number_lowerEqThan(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_lowerEqThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue <= otherNum->value.nvalue));
 }
 
-ctr_object* ctr_number_eq(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool(myself->value.nvalue == otherNum->value.nvalue);
 }
 
-ctr_object* ctr_number_neq(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_neq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool(myself->value.nvalue != otherNum->value.nvalue);
 }
@@ -335,9 +335,9 @@ ctr_object* ctr_number_neq(ctr_object* myself, args* argumentList) {
  * Usage:
  * q between: x and: y
  */
-ctr_object* ctr_number_between(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
-	args* nextArgumentItem = argumentList->next;
+	ctr_argument* nextArgumentItem = argumentList->next;
 	ctr_object* nextArgument = ctr_internal_cast2number(nextArgumentItem->object);
 	return ctr_build_bool((myself->value.nvalue >=  otherNum->value.nvalue) && (myself->value.nvalue <= nextArgument->value.nvalue));
 }
@@ -350,13 +350,13 @@ ctr_object* ctr_number_between(ctr_object* myself, args* argumentList) {
  * 
  * + - / * inc dec mul div
  */
-ctr_object* ctr_string_concat(ctr_object* myself, args* argumentList);
-ctr_object* ctr_number_add(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = argumentList->object;
 	if (otherNum->info.type == OTSTRING) {
 		ctr_object* strObject = ctr_internal_create_object(OTSTRING);
 		strObject = ctr_internal_cast2string(myself);
-		args* newArg = CTR_CREATE_ARGUMENT();
+		ctr_argument* newArg = CTR_CREATE_ARGUMENT();
 		newArg->object = otherNum;
 		return ctr_string_concat(strObject, newArg);
 	}
@@ -366,39 +366,39 @@ ctr_number b = otherNum->value.nvalue;
 }
 
 
-ctr_object* ctr_number_inc(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_inc(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	myself->value.nvalue += otherNum->value.nvalue;
 	return myself;
 }
 
-ctr_object* ctr_number_minus(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 ctr_number a = myself->value.nvalue;
 ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float((a-b));
 }
 
-ctr_object* ctr_number_dec(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_dec(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	myself->value.nvalue -= otherNum->value.nvalue;
 	return myself;
 }
 
-ctr_object* ctr_number_multiply(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 ctr_number a = myself->value.nvalue;
 ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float(a*b);
 }
 
-ctr_object* ctr_number_mul(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_mul(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	myself->value.nvalue *= otherNum->value.nvalue;
 	return myself;
 }
 
-ctr_object* ctr_number_divide(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 ctr_number a = myself->value.nvalue;
 ctr_number b = otherNum->value.nvalue;
@@ -409,7 +409,7 @@ ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float((a/b));
 }
 
-ctr_object* ctr_number_div(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	if (otherNum->value.nvalue == 0) {
 		error = ctr_build_string_from_cstring("Division by zero.");
@@ -419,7 +419,7 @@ ctr_object* ctr_number_div(ctr_object* myself, args* argumentList) {
 	return myself;
 }
 
-ctr_object* ctr_number_modulo(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 ctr_number a = myself->value.nvalue;
 ctr_number b = otherNum->value.nvalue;
@@ -430,21 +430,21 @@ ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float(fmod(a,b));
 }
 
-ctr_object* ctr_number_pow(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 ctr_number a = myself->value.nvalue;
 ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float(pow(a,b));
 }
 
-ctr_object* ctr_number_max(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_max(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 ctr_number a = myself->value.nvalue;
 ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float((a >= b) ? a : b);
 }
 
-ctr_object* ctr_number_min(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_min(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 ctr_number a = myself->value.nvalue;
 ctr_number b = otherNum->value.nvalue;
@@ -456,7 +456,7 @@ ctr_number b = otherNum->value.nvalue;
  *
  * Calculates the factorial of a number.
  */
-ctr_object* ctr_number_factorial(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_factorial(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number t = myself->value.nvalue;
 	int i;
 	ctr_number a = 1;
@@ -470,47 +470,47 @@ ctr_object* ctr_number_factorial(ctr_object* myself, args* argumentList) {
  * Some basic math functions: floor, ceil, round, abs, sqrt, pow, sin, cos
  * tan, atan and log.
  */
-ctr_object* ctr_number_floor(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(floor(myself->value.nvalue));
 }
 
-ctr_object* ctr_number_ceil(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_ceil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(ceil(myself->value.nvalue));
 }
 
-ctr_object* ctr_number_round(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_round(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(round(myself->value.nvalue));
 }
 
-ctr_object* ctr_number_abs(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(fabs(myself->value.nvalue));
 }
 
-ctr_object* ctr_number_sqrt(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(sqrt(myself->value.nvalue));
 }
 
-ctr_object* ctr_number_exp(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_exp(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(exp(myself->value.nvalue));
 }
 
-ctr_object* ctr_number_sin(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_sin(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(sin(myself->value.nvalue));
 }
 
-ctr_object* ctr_number_cos(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_cos(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(cos(myself->value.nvalue));
 }
 
-ctr_object* ctr_number_tan(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_tan(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(tan(myself->value.nvalue));
 }
 
-ctr_object* ctr_number_atan(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_atan(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(atan(myself->value.nvalue));
 }
 
-ctr_object* ctr_number_log(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_log(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(log(myself->value.nvalue));
 }
 
@@ -519,7 +519,7 @@ ctr_object* ctr_number_log(ctr_object* myself, args* argumentList) {
  *
  * Wrapper for cast function.
  */
-ctr_object* ctr_number_to_string(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_cast2string(myself);
 }
 
@@ -528,7 +528,7 @@ ctr_object* ctr_number_to_string(ctr_object* myself, args* argumentList) {
  *
  * Wrapper for cast function.
  */
-ctr_object* ctr_number_to_boolean(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_cast2bool(myself);
 }
 
@@ -538,7 +538,7 @@ ctr_object* ctr_number_to_boolean(ctr_object* myself, args* argumentList) {
  * Wrapper for cast function.
  * Returns 0 if boolean is False and 1 otherwise.
  */
-ctr_object* ctr_bool_to_number(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (float) myself->value.bvalue );
 }
 
@@ -550,7 +550,7 @@ ctr_object* ctr_bool_to_number(ctr_object* myself, args* argumentList) {
  * Usage:
  * 7 times: { ... }.
  */
-ctr_object* ctr_number_times(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
 	if (block->info.type != OTBLOCK) { printf("Expected code block."); exit(1); }
 	block->info.sticky = 1; //mark as sticky
@@ -560,7 +560,7 @@ ctr_object* ctr_number_times(ctr_object* myself, args* argumentList) {
 		char* nstr = (char*) calloc(20, sizeof(char));
 		snprintf(nstr, 20, "%d", i);
 		ctr_object* indexNumber = ctr_build_number(nstr);
-		args* arguments = CTR_CREATE_ARGUMENT();
+		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = indexNumber;
 		ctr_block_run(block, arguments, myself);
 	}
@@ -599,7 +599,7 @@ ctr_object* ctr_build_string_from_cstring(char* cstring) {
  *
  * Returns the number of bytes in a string.
  */
-ctr_object* ctr_string_bytes(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_bytes(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float((float)myself->value.svalue->vlen);
 }
 
@@ -608,7 +608,7 @@ ctr_object* ctr_string_bytes(ctr_object* myself, args* argumentList) {
  *
  * Returns True if the other string is the same (in bytes).
  */
-ctr_object* ctr_string_eq(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
 	if (argumentList->object->value.svalue->vlen != myself->value.svalue->vlen) {
 		return ctr_build_bool(0);
 	}
@@ -620,7 +620,7 @@ ctr_object* ctr_string_eq(ctr_object* myself, args* argumentList) {
  *
  * Returns True if the other string is not the same (in bytes).
  */
-ctr_object* ctr_string_neq(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
 	if (argumentList->object->value.svalue->vlen != myself->value.svalue->vlen) {
 		return ctr_build_bool(1);
 	}
@@ -633,7 +633,7 @@ ctr_object* ctr_string_neq(ctr_object* myself, args* argumentList) {
  * Returns the length of the string in symbols.
  * This message is UTF-8 unicode aware. A 4 byte character will be counted as ONE.
  */
-ctr_object* ctr_string_length(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
 	long n = getutf8len(myself->value.svalue->value, myself->value.svalue->vlen);
 	char* str = calloc(100, sizeof(char));
 	snprintf(str, 100, "%lu", n);
@@ -646,7 +646,7 @@ ctr_object* ctr_string_length(ctr_object* myself, args* argumentList) {
  * Appends other string to self and returns the resulting
  * string as a new object.
  */
-ctr_object* ctr_string_concat(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* strObject = ctr_internal_create_object(OTSTRING);
 	strObject = ctr_internal_cast2string(argumentList->object);
 	long n1 = myself->value.svalue->vlen;
@@ -667,7 +667,7 @@ ctr_object* ctr_string_concat(ctr_object* myself, args* argumentList) {
  * Usage:
  * 'hello' from: 2 to: 3. #ll
  */
-ctr_object* ctr_string_fromto(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_fromto(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
 	ctr_object* toPos = ctr_internal_cast2number(argumentList->next->object);
 	long len = myself->value.svalue->vlen;
@@ -700,7 +700,7 @@ ctr_object* ctr_string_fromto(ctr_object* myself, args* argumentList) {
  * Usage:
  * 'hello' from: 2 length: 3. #llo
  */
-ctr_object* ctr_string_from_length(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
 	ctr_object* length = ctr_internal_cast2number(argumentList->next->object);
 	long len = myself->value.svalue->vlen;
@@ -731,7 +731,7 @@ ctr_object* ctr_string_from_length(ctr_object* myself, args* argumentList) {
  * Usage:
  * ('hello' at: 2). #l
  */
-ctr_object* ctr_string_at(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
 	long a = (fromPos->value.nvalue);
 	long ua = getBytesUtf8(myself->value.svalue->value, 0, a);
@@ -750,7 +750,7 @@ ctr_object* ctr_string_at(ctr_object* myself, args* argumentList) {
  * Usage:
  * ('abc' byteAt: 1). #98
  */
-ctr_object* ctr_string_byte_at(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
 	long a = (fromPos->value.nvalue);
 	long len = myself->value.svalue->vlen;
@@ -770,7 +770,7 @@ ctr_object* ctr_string_byte_at(ctr_object* myself, args* argumentList) {
  * 'find the needle' indexOf: 'needle'. #9
  *
  */
-ctr_object* ctr_string_index_of(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sub = ctr_internal_cast2string(argumentList->object);
 	long hlen = myself->value.svalue->vlen;
 	long nlen = sub->value.svalue->vlen;
@@ -790,7 +790,7 @@ ctr_object* ctr_string_index_of(ctr_object* myself, args* argumentList) {
  * Usage:
  * 'find the needle' lastIndexOf: 'needle'. #9
  */
-ctr_object* ctr_string_last_index_of(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sub = ctr_internal_cast2string(argumentList->object);
 	long hlen = myself->value.svalue->vlen;
 	long nlen = sub->value.svalue->vlen;
@@ -811,7 +811,7 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, args* argumentList) {
  *
  * 'LiLo BootLoader' replace: 'L' with: 'l'. #lilo Bootloader
  */
-ctr_object* ctr_string_replace_with(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
 	ctr_object* replacement = ctr_internal_cast2string(argumentList->next->object);
 	char* dest;
@@ -865,7 +865,7 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, args* argumentList) {
  * ' hello ' trim. #hello
  *
  */
-ctr_object* ctr_string_trim(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	if (len == 0) return ctr_build_string("", 0);
@@ -885,7 +885,7 @@ ctr_object* ctr_string_trim(ctr_object* myself, args* argumentList) {
 /**
  * StringLeftTrim
  */
-ctr_object* ctr_string_ltrim(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	if (len == 0) return ctr_build_string("", 0);
@@ -902,7 +902,7 @@ ctr_object* ctr_string_ltrim(ctr_object* myself, args* argumentList) {
 /**
  * StringRightTrim
  */
-ctr_object* ctr_string_rtrim(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	if (len == 0) return ctr_build_string("", 0);
@@ -921,7 +921,7 @@ ctr_object* ctr_string_rtrim(ctr_object* myself, args* argumentList) {
  *
  * Wrapper for cast function.
  */
-ctr_object* ctr_string_to_number(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_to_number(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_cast2number(myself);
 }
 
@@ -930,7 +930,7 @@ ctr_object* ctr_string_to_number(ctr_object* myself, args* argumentList) {
  *
  * Wrapper for cast function.
  */
-ctr_object* ctr_string_to_boolean(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_cast2bool(myself);
 }
 
@@ -939,7 +939,7 @@ ctr_object* ctr_string_to_boolean(ctr_object* myself, args* argumentList) {
  *
  * Simple cast function.
  */
-ctr_object* ctr_bool_to_string(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_cast2string(myself);
 }
 
@@ -948,7 +948,7 @@ ctr_object* ctr_bool_to_string(ctr_object* myself, args* argumentList) {
  *
  * Escapes HTML chars.
  */
-ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_object* argumentList) {
+ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	char* tstr = malloc(len * sizeof(char));
@@ -959,7 +959,7 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_object* argumentList)
 	long tlen = len;
 	char* replacement;
 	for(i =0; i < len; i++) {
-		char* c = str[i];
+		char c = str[i];
 		if (c == '<') {
 			replacement = "&lt;";
 			rlen = 4;
@@ -1001,7 +1001,7 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_object* argumentList)
  *
  * Runs a block of code.
  */
-ctr_object* ctr_block_run(ctr_object* myself, args* argList, ctr_object* my) {
+ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my) {
 	ctr_object* result;
 	tnode* node = myself->value.block;
 	tlistitem* codeBlockParts = node->nodes;
@@ -1033,7 +1033,7 @@ ctr_object* ctr_block_run(ctr_object* myself, args* argList, ctr_object* my) {
 		ctr_object* catchBlock = malloc(sizeof(ctr_object));
 		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string("catch",5), 0);
 		if (catchBlock != NULL) {
-			args* a = CTR_CREATE_ARGUMENT();
+			ctr_argument* a = CTR_CREATE_ARGUMENT();
 			a->object = error;
 			error = NULL;
 			ctr_block_run(catchBlock, a, my);
@@ -1049,7 +1049,7 @@ ctr_object* ctr_block_run(ctr_object* myself, args* argList, ctr_object* my) {
  * Runs a block of code, depending on the outcome runs the other block
  * as long as the result of the first one equals boolean True.
  */
-ctr_object* ctr_block_while_true(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList) {
 	while (1) {
 		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, myself));
 		if (result->value.bvalue == 0) break;
@@ -1064,7 +1064,7 @@ ctr_object* ctr_block_while_true(ctr_object* myself, args* argumentList) {
  * Runs a block of code, depending on the outcome runs the other block
  * as long as the result of the first one equals boolean False.
  */
-ctr_object* ctr_block_while_false(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList) {
 	while (1) {
 		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, myself));
 		if (result->value.bvalue == 1) break;
@@ -1076,7 +1076,7 @@ ctr_object* ctr_block_while_false(ctr_object* myself, args* argumentList) {
 /**
  * Alias for BlockRun.
  */
-ctr_object* ctr_block_runIt(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_block_run(myself, argumentList, myself);
 }
 
@@ -1085,7 +1085,7 @@ ctr_object* ctr_block_runIt(ctr_object* myself, args* argumentList) {
  *
  * Sets error flag on a block of code.
  */
-ctr_object* ctr_block_error(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
 	error = argumentList->object;
 	return myself;
 }
@@ -1097,7 +1097,7 @@ ctr_object* ctr_block_error(ctr_object* myself, args* argumentList) {
  * If an error (exception) occurs within the block this block will be
  * executed.
  */
-ctr_object* ctr_block_catch(ctr_object* myself, args* argumentList) {
+ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* catchBlock = argumentList->object;
 	ctr_internal_object_delete_property(myself, ctr_build_string("catch",5),0);
 	ctr_internal_object_add_property(myself, ctr_build_string("catch",5), catchBlock, 0);
