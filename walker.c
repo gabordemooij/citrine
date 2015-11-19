@@ -34,24 +34,24 @@ ctr_object* cwlk_message(ctr_tnode* paramNode) {
 	char* message;
 	ctr_tlistitem* argumentList;
 	ctr_object* r;
-	if (receiverNode->type == REFERENCE) {
+	if (receiverNode->type == CTR_AST_NODE_REFERENCE) {
 		r = ctr_find(ctr_build_string(receiverNode->value, receiverNode->vlen));
 		if (!r) {
 			exit(1);
 		}
-	} else if (receiverNode->type == LTRNIL ) {
+	} else if (receiverNode->type == CTR_AST_NODE_LTRNIL ) {
 		r = ctr_build_nil();
-	} else if (receiverNode->type == LTRBOOLTRUE ) {
+	} else if (receiverNode->type == CTR_AST_NODE_LTRBOOLTRUE ) {
 		r = ctr_build_bool(1);
-	} else if (receiverNode->type == LTRBOOLFALSE ) {
+	} else if (receiverNode->type == CTR_AST_NODE_LTRBOOLFALSE ) {
 		r = ctr_build_bool(0);
-	} else if (receiverNode->type == LTRSTRING ) {
+	} else if (receiverNode->type == CTR_AST_NODE_LTRSTRING ) {
 		r = ctr_build_string(receiverNode->value, receiverNode->vlen);
-	} else if (receiverNode->type == LTRNUM) {
+	} else if (receiverNode->type == CTR_AST_NODE_LTRNUM) {
 		r = ctr_build_number(receiverNode->value);
-	} else if (receiverNode->type == NESTED) {
+	} else if (receiverNode->type == CTR_AST_NODE_NESTED) {
 		r = cwlk_expr(receiverNode);
-	} else if (receiverNode->type == CODEBLOCK) {
+	} else if (receiverNode->type == CTR_AST_NODE_CODEBLOCK) {
 		r = ctr_build_block(receiverNode);
 	} else {
 		printf("Cannot send message to receiver of type: %d \n", receiverNode->type);
@@ -101,33 +101,33 @@ ctr_object* cwlk_assignment(ctr_tnode* node) {
 
 ctr_object* cwlk_expr(ctr_tnode* node) {
 	ctr_object* result;
-	if (node->type == LTRSTRING) {
+	if (node->type == CTR_AST_NODE_LTRSTRING) {
 		result = ctr_build_string(node->value, node->vlen);
-	} else if (node->type == LTRBOOLTRUE) {
+	} else if (node->type == CTR_AST_NODE_LTRBOOLTRUE) {
 		result = ctr_build_bool(1);
-	} else if (node->type == LTRBOOLFALSE) {
+	} else if (node->type == CTR_AST_NODE_LTRBOOLFALSE) {
 		result = ctr_build_bool(0);
-	} else if (node->type == LTRNIL) {
+	} else if (node->type == CTR_AST_NODE_LTRNIL) {
 		result = ctr_build_nil();
-	} else if (node->type == LTRNUM) {
+	} else if (node->type == CTR_AST_NODE_LTRNUM) {
 		result = ctr_build_number(node->value);
-	} else if (node->type == CODEBLOCK) {
+	} else if (node->type == CTR_AST_NODE_CODEBLOCK) {
 		result = ctr_build_block(node);
-	} else if (node->type == REFERENCE) {
+	} else if (node->type == CTR_AST_NODE_REFERENCE) {
 		if (node->modifier == 1) {
 			result = ctr_find_in_my(ctr_build_string(node->value, node->vlen));
 		} else {
 			result = ctr_find(ctr_build_string(node->value, node->vlen));
 		}
-	} else if (node->type == EXPRMESSAGE) {
+	} else if (node->type == CTR_AST_NODE_EXPRMESSAGE) {
 		result = cwlk_message(node);
-	} else if (node->type == EXPRASSIGNMENT) {
+	} else if (node->type == CTR_AST_NODE_EXPRASSIGNMENT) {
 		result = cwlk_assignment(node);
-	} else if (node->type == RETURNFROMBLOCK) {
+	} else if (node->type == CTR_AST_NODE_RETURNFROMBLOCK) {
 		result = cwlk_return(node);
-	} else if (node->type == NESTED) {
+	} else if (node->type == CTR_AST_NODE_NESTED) {
 		result = cwlk_expr(node->nodes->node);
-	} else if (node->type == ENDOFPROGRAM) {
+	} else if (node->type == CTR_AST_NODE_ENDOFPROGRAM) {
 		if (error) {
 			printf("Uncatched error has occurred.\n");
 			if (error->info.type == OTSTRING) {
