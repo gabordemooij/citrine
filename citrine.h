@@ -181,8 +181,8 @@ ctr_object* ctr_build_string_from_cstring( char* str );
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my);
 size_t ctr_getutf8len(char* strval, size_t max);
 
-int __argc;
-char** __argv;
+int ctr_argc;
+char** ctr_argv;
 
 
 ctr_object* ctr_send_message(ctr_object* receiver, char* message, long len, ctr_argument* argumentList);
@@ -193,10 +193,10 @@ ctr_object* ctr_cwlk_run(ctr_tnode* program);
 ctr_object* ctr_cwlk_expr(ctr_tnode* node);
 ctr_object* ctr_first_object;
 
-int debug;
+int ctr_mode_debug;
 
 
-#define CTR_DEBUG_STR(X,Y,L) if (debug) {\
+#define CTR_DEBUG_STR(X,Y,L) if (ctr_mode_debug) {\
 	char* b = calloc(sizeof(char),L);\
 	memcpy(b, Y, L);\
 	printf(X, b);\

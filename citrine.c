@@ -8,11 +8,11 @@
 
 #include "citrine.h"
 
-int debug = 0;
+int ctr_mode_debug = 0;
 ctr_object* error;
 int main(int argc, char* argv[]) {
-	__argc = argc;
-	__argv = argv;
+	ctr_argc = argc;
+	ctr_argv = argv;
 	char* prg;
 	error = NULL;
 	if (argc < 2) {
@@ -23,8 +23,8 @@ int main(int argc, char* argv[]) {
 		printf("Debugger: ctr mycode.ctr --debug\n\n");
 		exit(1);
 	}
-	if (argc == 3) if (strcmp(argv[2],"--debug")==0) debug = 1;
-	if (debug == 1) printf("Debugger is ON.\n");
+	if (argc == 3) if (strcmp(argv[2],"--debug")==0) ctr_mode_debug = 1;
+	if (ctr_mode_debug == 1) printf("Debugger is ON.\n");
 	prg = ctr_internal_readf(argv[1]);
 	ctr_tnode* program = dparse_parse(prg);
 	ctr_initialize_world();

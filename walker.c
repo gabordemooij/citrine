@@ -146,7 +146,7 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node) {
 
 ctr_object* ctr_cwlk_run(ctr_tnode* program) {
 	ctr_object* result = NULL;
-	if (debug) ctr_internal_debug_tree(program, 0);
+	if (ctr_mode_debug) ctr_internal_debug_tree(program, 0);
 	ctr_tlistitem* li = program->nodes;
 	while(li) {
 		ctr_tnode* node = li->node;
