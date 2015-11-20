@@ -274,7 +274,7 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 	for(i=0; i<len; i++) {
 		buffer[j] = str[i];
 		j++;
-		if (memmem(buffer, j, dstr, dlen)!=NULL) {
+		if (ctr_internal_memmem(buffer, j, dstr, dlen, 0)!=NULL) {
 			elem = malloc(sizeof(char)*(j-dlen));
 			memcpy(elem,buffer,j-dlen);
 			arg = malloc(sizeof(ctr_argument));

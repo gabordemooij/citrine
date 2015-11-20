@@ -864,7 +864,7 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 		return ctr_build_string(src, hlen);
 	}
 	while(1) {
-		p = memmem(src, hlen, ndl, nlen);
+		p = ctr_internal_memmem(src, hlen, ndl, nlen, 0);
 		if (p == NULL) break;
 		d = (dest - odest);
 		if ((dlen - nlen + rlen)>dlen) {
