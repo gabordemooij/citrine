@@ -9,7 +9,7 @@
 
 
 int ctr_clex_bflmt = 100;
-long ctr_clex_tokvlen = 0; //length of the string value of a token
+long ctr_clex_tokvlen = 0; /* length of the string value of a token */
 char* ctr_clex_buffer;
 char* code;
 char* codePoint;
@@ -66,12 +66,13 @@ void ctr_clex_putback() {
  * token.
  */
 int ctr_clex_tok() {
+	char c;
+	int i, comment_mode;
 	ctr_clex_tokvlen = 0;
 	ctr_clex_olderptr = ctr_clex_oldptr;
 	ctr_clex_oldptr = code;
-	char c;
-	int i = 0;
-	int comment_mode = 0;
+	i = 0;
+	comment_mode = 0;
 	c = *code;
 	while(code != eofcode && (isspace(c) || c == '#' || comment_mode)) {
 		if (c == '\n') comment_mode = 0;
@@ -140,14 +141,18 @@ int ctr_clex_tok() {
 		}
 	}
 
-	//these symbols are special because we often like to use
-	//them without spacing: 1+2 instead of 1 + 2.
+	/*
+	 * these symbols are special because we often like to use
+	 * them without spacing: 1+2 instead of 1 + 2.
+	 */
 	if (c=='+' || c=='-' || c=='/' || c=='*') {
 		code++; ctr_clex_tokvlen = 1; ctr_clex_buffer[i] = c; return CTR_TOKEN_REF;
 	}
 
-	//these are also special, they are easy notations for unicode symbols.
-	//we also return directly because we would like to use them without spaces as well: 1>=2...
+	/*
+	 * these are also special, they are easy notations for unicode symbols.
+	 * we also return directly because we would like to use them without spaces as well: 1>=2...
+	 */
 	if ((code+1)<eofcode) {
 		if (((char)*(code) == '>') && ((char)*(code+1)=='=')){
 			code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "≥", 3); return CTR_TOKEN_REF;
@@ -167,13 +172,13 @@ int ctr_clex_tok() {
 		if (((char)*(code) == '<') && ((char)*(code+1)=='-')){
 			code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "←", 3); return CTR_TOKEN_REF;
 		}
-		//be very nice, accidental == will be converted to =
+		/* be very nice, accidental == will be converted to = */
 		if (((char)*(code) == '=') && ((char)*(code+1)=='=')){
 			code +=2; ctr_clex_tokvlen = 1; memcpy(ctr_clex_buffer, "=", 1); return CTR_TOKEN_REF;
 		}
 	}
 
-	//later because we tolerate == as well.
+	/* later because we tolerate == as well. */
 	if (c=='=' || c=='>' || c =='<') {
 		code++; ctr_clex_tokvlen = 1; ctr_clex_buffer[i] = c; return CTR_TOKEN_REF;
 	}
@@ -181,7 +186,7 @@ int ctr_clex_tok() {
 	if (c == '|' || c == '\\') { code++; return CTR_TOKEN_BLOCKPIPE; }
 
 	while(!isspace(c) && CTR_IS_NO_TOK(c) && code!=eofcode
-	&& c != '+' && c!='*' && c!='/' && c!='=' && c!='>' && c!='<' && c!='&' //and c is not one of the special symbols
+	&& c != '+' && c!='*' && c!='/' && c!='=' && c!='>' && c!='<' && c!='&' /* and c is not one of the special symbols */
 	) {
 		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
 		i++;
@@ -203,13 +208,17 @@ int ctr_clex_tok() {
  * Reads an entire string between a pair of quotes.
  */
 char* ctr_clex_readstr() {
-	ctr_clex_tokvlen=0;
+	char* strbuff;
+	char c;
 	long memblock = 40;
-	long page = 100; //100 byte pages
-	char* strbuff = (char*) malloc(memblock);
-	char c = *code;
-	int escape = 0;
-	char* beginbuff = strbuff;
+	int escape;
+	char* beginbuff;
+	long page = 100; /* 100 byte pages */
+	ctr_clex_tokvlen=0;
+	strbuff = (char*) malloc(memblock);
+	c = *code;
+	escape = 0;
+	beginbuff = strbuff;
 	while((c != '\'' || escape == 1)) {
 		if (c == '\\' && escape == 0) {
 			escape = 1;
@@ -225,7 +234,7 @@ char* ctr_clex_readstr() {
 				printf("Out of memory\n");
 				exit(1);
 			}
-			//reset pointer, memory location might have been changed
+			/* reset pointer, memory location might have been changed */
 			strbuff = beginbuff + (ctr_clex_tokvlen -1);
 		}
 		escape = 0;

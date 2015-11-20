@@ -105,16 +105,27 @@ struct ctr_mapitem {
 };
 typedef struct ctr_mapitem ctr_mapitem;
 
+/**
+ * Citrine Argument (internal, not accsible to users).
+ */
+struct ctr_argument {
+	struct ctr_object* object;
+	struct ctr_argument* next;
+};
+typedef struct ctr_argument ctr_argument;
 
+/**
+ * THE CITRINE OBJECT.
+ */
 struct ctr_object {
     const char* name;
     ctr_map* properties;
     ctr_map* methods;
 	struct {
-		unsigned char type: 4;
-		unsigned char mark: 1;
-		unsigned char sticky: 1;
-	 } info;
+		unsigned int type: 4;
+		unsigned int mark: 1;
+		unsigned int sticky: 1;
+	} info;
     struct ctr_object* link;
     union uvalue {
 		ctr_bool bvalue;
@@ -123,58 +134,57 @@ struct ctr_object {
 		struct ctr_tnode* block;
 		struct ctr_collection* avalue;
 		struct ctr_resource* rvalue;
+		/*int (*c9) (node3_t *a, node3_t *b);*/
+		struct ctr_object* (*fvalue) (struct ctr_object* myself, struct ctr_argument* argumentList);
 	} value;
 	struct ctr_object* gnext;
 };
-struct ctr_object;
 typedef struct ctr_object ctr_object;
 
-
+/**
+ * Citrine Resource
+ */
 struct ctr_resource {
-	int type;
+	unsigned int type;
 	void* ptr;
 };
-struct ctr_resource;
 typedef struct ctr_resource ctr_resource;
 
+/**
+ * Citrine Array
+ */
 struct ctr_collection {
-	long length;
-	long head;
-	long tail;
+	size_t length;
+	size_t head;
+	size_t tail;
 	ctr_object** elements;
 };
-struct ctr_collection;
 typedef struct ctr_collection ctr_collection;
 
-struct ctr_argument {
-	struct ctr_object* object;
-	struct ctr_argument* next;
-};
 
-struct ctr_argument;
-typedef struct ctr_argument ctr_argument;
-
+/**
+ * AST Node
+ */
 struct ctr_tnode {
-	int type;
-	int modifier;
+	unsigned int type;
+	unsigned int modifier;
 	char* value;
-	long vlen;
+	size_t vlen;
 	struct ctr_tlistitem* nodes;
 };
-
-
-struct ctr_tlistitem {
-	struct ctr_tnode* node;	
-	struct ctr_tlistitem* next;
-};
-
-struct ctr_tlistitem;
-typedef struct ctr_tlistitem ctr_tlistitem;
-
-struct ctr_tnode;
 typedef struct ctr_tnode ctr_tnode;
 
-ctr_tnode* dparse_parse(char* prg);
+/**
+ * AST Node List
+ */
+struct ctr_tlistitem {
+	ctr_tnode* node;	
+	struct ctr_tlistitem* next;
+};
+typedef struct ctr_tlistitem ctr_tlistitem;
+
+
+ctr_tnode* ctr_dparse_parse(char* prg);
 
 ctr_size ctr_clex_len;
 long ctr_program_length;

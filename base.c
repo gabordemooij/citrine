@@ -69,13 +69,15 @@ ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
  * object on: 'greet' do {\ ... }.
  */
 ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_argument* nextArgument;
+	ctr_object* methodBlock;
 	ctr_object* methodName = argumentList->object;
 	if (methodName->info.type != CTR_OBJECT_TYPE_OTSTRING) {
 		CtrStdError = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
 		return myself;
 	}
-	ctr_argument* nextArgument = argumentList->next;
-	ctr_object* methodBlock = nextArgument->object;
+	nextArgument = argumentList->next;
+	methodBlock = nextArgument->object;
 	if (methodBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
 		CtrStdError = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
 		return myself;
@@ -98,26 +100,31 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
  * 
  */
 ctr_object* ctr_object_override_does(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* methodBlock;
+	ctr_argument* nextArgument;
 	ctr_object* methodName = argumentList->object;
+	ctr_object* overriddenMethod;
+	char* superMethodNameString;
+	ctr_object* superMethodKey;
 	if (methodName->info.type != CTR_OBJECT_TYPE_OTSTRING) {
 		CtrStdError = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
 		return myself;
 	}
-	ctr_argument* nextArgument = argumentList->next;
-	ctr_object* methodBlock = nextArgument->object;
+	nextArgument = argumentList->next;
+	methodBlock = nextArgument->object;
 	if (methodBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
 		CtrStdError = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
 		return myself;
 	}
-	ctr_object* overriddenMethod = ctr_internal_object_find_property(myself, methodName, 1);
+	overriddenMethod = ctr_internal_object_find_property(myself, methodName, 1);
 	if (overriddenMethod == NULL) {
 		CtrStdError = ctr_build_string_from_cstring("Cannot override, original response not found.");
 		return myself;
 	}
-	char* superMethodNameString = malloc(sizeof(char) * (methodName->value.svalue->vlen + 11));
+	superMethodNameString = malloc(sizeof(char) * (methodName->value.svalue->vlen + 11));
 	memcpy(superMethodNameString, "overridden-", (sizeof(char) * 11));
 	memcpy(superMethodNameString + (sizeof(char)*11), methodName->value.svalue->value, methodName->value.svalue->vlen);
-	ctr_object* superMethodKey = ctr_build_string(superMethodNameString, (methodName->value.svalue->vlen + 11));
+	superMethodKey = ctr_build_string(superMethodNameString, (methodName->value.svalue->vlen + 11));
 	ctr_internal_object_delete_property(myself, methodName, 1);
 	ctr_internal_object_add_property(myself, superMethodKey, overriddenMethod, 1);
 	ctr_internal_object_add_property(myself, methodName, methodBlock, 1);
@@ -352,16 +359,20 @@ ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_argument* newArg;
 	ctr_object* otherNum = argumentList->object;
+	ctr_number a;
+	ctr_number b;
+	ctr_object* strObject;
 	if (otherNum->info.type == CTR_OBJECT_TYPE_OTSTRING) {
-		ctr_object* strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
+		strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 		strObject = ctr_internal_cast2string(myself);
-		ctr_argument* newArg = CTR_CREATE_ARGUMENT();
+		newArg = CTR_CREATE_ARGUMENT();
 		newArg->object = otherNum;
 		return ctr_string_concat(strObject, newArg);
 	}
-ctr_number a = myself->value.nvalue;
-ctr_number b = otherNum->value.nvalue;
+	a = myself->value.nvalue;
+	b = otherNum->value.nvalue;
 	return ctr_build_number_from_float((a+b));
 }
 
@@ -551,16 +562,20 @@ ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList) {
  * 7 times: { ... }.
  */
 ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* indexNumber;
 	ctr_object* block = argumentList->object;
-	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) { printf("Expected code block."); exit(1); }
-	block->info.sticky = 1; //mark as sticky
-	int t = myself->value.nvalue;
+	ctr_argument* arguments;
+	int t;
 	int i;
+	char* nstr;
+	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) { printf("Expected code block."); exit(1); }
+	block->info.sticky = 1;
+	t = myself->value.nvalue;
 	for(i=0; i<t; i++) {
-		char* nstr = (char*) calloc(20, sizeof(char));
+		nstr = (char*) calloc(20, sizeof(char));
 		snprintf(nstr, 20, "%d", i);
-		ctr_object* indexNumber = ctr_build_number(nstr);
-		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
+		indexNumber = ctr_build_number(nstr);
+		arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = indexNumber;
 		ctr_block_run(block, arguments, myself);
 	}
@@ -648,13 +663,17 @@ ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
+	size_t n1;
+	size_t n2;
+	char* dest;
+	ctr_object* newString;
 	strObject = ctr_internal_cast2string(argumentList->object);
-	long n1 = myself->value.svalue->vlen;
-	long n2 = strObject->value.svalue->vlen;
-	char* dest = calloc(sizeof(char), (n1 + n2));
+	n1 = myself->value.svalue->vlen;
+	n2 = strObject->value.svalue->vlen;
+	dest = calloc(sizeof(char), (n1 + n2));
 	memcpy(dest, myself->value.svalue->value, n1);
 	memcpy(dest+n1, strObject->value.svalue->value, n2);
-	ctr_object* newString = ctr_build_string(dest, (n1 + n2));
+	newString = ctr_build_string(dest, (n1 + n2));
 	return newString;	
 }
 
@@ -674,6 +693,9 @@ ctr_object* ctr_string_fromto(ctr_object* myself, ctr_argument* argumentList) {
 	long a = (fromPos->value.nvalue);
 	long b = (toPos->value.nvalue); 
 	long t;
+	long ua, ub;
+	char* dest;
+	ctr_object* newString;
 	if (b == a) return ctr_build_string("",0);
 	if (a > b) {
 		t = a; a = b; b = t;
@@ -682,11 +704,11 @@ ctr_object* ctr_string_fromto(ctr_object* myself, ctr_argument* argumentList) {
 	if (b > len) b = len;
 	if (a < 0) a = 0;
 	if (b < 0) return ctr_build_string("", 0);
-	long ua = getBytesUtf8(myself->value.svalue->value, 0, a);
-	long ub = getBytesUtf8(myself->value.svalue->value, ua, ((b - a)));
-	char* dest = malloc(ub * sizeof(char));
+	ua = getBytesUtf8(myself->value.svalue->value, 0, a);
+	ub = getBytesUtf8(myself->value.svalue->value, ua, ((b - a)));
+	dest = malloc(ub * sizeof(char));
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
-	ctr_object* newString = ctr_build_string(dest,ub);
+	newString = ctr_build_string(dest,ub);
 	return newString;
 }
 
@@ -706,6 +728,9 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	long len = myself->value.svalue->vlen;
 	long a = (fromPos->value.nvalue);
 	long b = (length->value.nvalue);
+	long ua, ub;
+	char* dest;
+	ctr_object* newString;
 	if (b == 0) return ctr_build_string("",0);
 	if (b < 0) {
 		a = a + b;
@@ -715,11 +740,11 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	if (a > len) a = len;
 	if ((a + b)>len) b = len - a;
 	if ((a + b)<0) b = b - a;
-	long ua = getBytesUtf8(myself->value.svalue->value, 0, a);
-	long ub = getBytesUtf8(myself->value.svalue->value, ua, b);
-	char* dest = malloc(ub * sizeof(char));
+	ua = getBytesUtf8(myself->value.svalue->value, 0, a);
+	ub = getBytesUtf8(myself->value.svalue->value, ua, b);
+	dest = malloc(ub * sizeof(char));
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
-	ctr_object* newString = ctr_build_string(dest,ub);
+	newString = ctr_build_string(dest,ub);
 	return newString;
 }
 
@@ -736,9 +761,10 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 	long a = (fromPos->value.nvalue);
 	long ua = getBytesUtf8(myself->value.svalue->value, 0, a);
 	long ub = getBytesUtf8(myself->value.svalue->value, ua, 1);
+	ctr_object* newString;
 	char* dest = malloc(ub * sizeof(char));
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
-	ctr_object* newString = ctr_build_string(dest,ub);
+	newString = ctr_build_string(dest,ub);
 	return newString;
 }
 
@@ -751,13 +777,14 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
  * ('abc' byteAt: 1). #98
  */
 ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList) {
+	char x;
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
 	long a = (fromPos->value.nvalue);
 	long len = myself->value.svalue->vlen;
 	if (a > len) return CtrStdNil;
 	if (a < 0) return CtrStdNil;
-	char x = *(myself->value.svalue->value + a);
-	return ctr_build_number_from_float((float)x);
+	x = (char) *(myself->value.svalue->value + a);
+	return ctr_build_number_from_float((double)x);
 }
 
 /**
@@ -774,10 +801,12 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_object* sub = ctr_internal_cast2string(argumentList->object);
 	long hlen = myself->value.svalue->vlen;
 	long nlen = sub->value.svalue->vlen;
+	uintptr_t byte_index;
+	size_t uchar_index;
 	char* p = ctr_internal_memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen, 0);
 	if (p == NULL) return ctr_build_number_from_float((float)-1);
-	uintptr_t byte_index = (uintptr_t) p - (uintptr_t) (myself->value.svalue->value);
-	size_t uchar_index = ctr_getutf8len(myself->value.svalue->value, byte_index);
+	byte_index = (uintptr_t) p - (uintptr_t) (myself->value.svalue->value);
+	uchar_index = ctr_getutf8len(myself->value.svalue->value, byte_index);
 	return ctr_build_number_from_float((ctr_number) uchar_index);
 }
 
@@ -794,10 +823,12 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentL
 	ctr_object* sub = ctr_internal_cast2string(argumentList->object);
 	long hlen = myself->value.svalue->vlen;
 	long nlen = sub->value.svalue->vlen;
+	size_t uchar_index;
+	size_t byte_index;
 	char* p = ctr_internal_memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen, 1);
 	if (p == NULL) return ctr_build_number_from_float((float)-1);
-	size_t byte_index = (size_t) ( (uintptr_t) p - (uintptr_t) (myself->value.svalue->value) );
-	size_t uchar_index = ctr_getutf8len(myself->value.svalue->value, byte_index);
+	byte_index = (size_t) ( (uintptr_t) p - (uintptr_t) (myself->value.svalue->value) );
+	uchar_index = ctr_getutf8len(myself->value.svalue->value, byte_index);
 	return ctr_build_number_from_float((float) uchar_index);
 }
 
@@ -826,6 +857,7 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 	char* p;
 	long i = 0;
 	long offset = 0;
+	long d;
 	dest = (char*) malloc(dlen*sizeof(char));
 	odest = dest;
 	if (nlen == 0 || hlen == 0) {
@@ -834,7 +866,7 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 	while(1) {
 		p = memmem(src, hlen, ndl, nlen);
 		if (p == NULL) break;
-		long d = (dest - odest);
+		d = (dest - odest);
 		if ((dlen - nlen + rlen)>dlen) {
 			dlen = (dlen - nlen + rlen);
 			odest = (char*) realloc(odest, dlen * sizeof(char));
@@ -868,15 +900,17 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
+	long i, begin, end, tlen;
+	char* tstr;
 	if (len == 0) return ctr_build_string("", 0);
-	long i = 0;
+	i = 0;
 	while(i < len && isspace(*(str+i))) i++;
-	long begin = i;
+	begin = i;
 	i = len - 1;
 	while(i > begin && isspace(*(str+i))) i--;
-	long end = i + 1;
-	long tlen = (end - begin);
-	char* tstr = malloc(tlen * sizeof(char));
+	end = i + 1;
+	tlen = (end - begin);
+	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str+begin, tlen);
 	return ctr_build_string(tstr, tlen);
 }
@@ -888,13 +922,15 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
+	long i = 0, begin;
+	long tlen;
+	char* tstr;
 	if (len == 0) return ctr_build_string("", 0);
-	long i = 0;
 	while(i < len && isspace(*(str+i))) i++;
-	long begin = i;
+	begin = i;
 	i = len - 1;
-	long tlen = (len - begin);
-	char* tstr = malloc(tlen * sizeof(char));
+	tlen = (len - begin);
+	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str+begin, tlen);
 	return ctr_build_string(tstr, tlen);
 }
@@ -905,13 +941,14 @@ ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
+	long i = 0, end, tlen;
+	char* tstr;
 	if (len == 0) return ctr_build_string("", 0);
-	long i = 0;
 	i = len - 1;
 	while(i > 0 && isspace(*(str+i))) i--;
-	long end = i + 1;
-	long tlen = end;
-	char* tstr = malloc(tlen * sizeof(char));
+	end = i + 1;
+	tlen = end;
+	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str, tlen);
 	return ctr_build_string(tstr, tlen);
 }
@@ -1009,10 +1046,10 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	ctr_tnode* codeBlockPart2 = codeBlockParts->next->node;
 	ctr_tlistitem* parameterList = codeBlockPart1->nodes;
 	ctr_tnode* parameter;
+	ctr_object* a;
 	ctr_open_context();
 	if (parameterList && parameterList->node) {
 		parameter = parameterList->node;
-		ctr_object* a;
 		while(1) {
 			if (parameter && argList->object) {
 				a = argList->object;
@@ -1026,7 +1063,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 		}
 	}
 	ctr_set(ctr_build_string("me",2), my);
-	ctr_set(ctr_build_string("thisBlock",9), myself); //otherwise running block may get gc'ed.
+	ctr_set(ctr_build_string("thisBlock",9), myself); /* otherwise running block may get gc'ed. */
 	result = ctr_cwlk_run(codeBlockPart2);
 	ctr_close_context();
 	if (CtrStdError != NULL) {

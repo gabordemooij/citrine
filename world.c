@@ -73,9 +73,10 @@ size_t getBytesUtf8(char* strval, long startByte, size_t lenUChar) {
 	int s = 0;
 	int x = 0;
 	long index = 0;
+	char c;
 	while(x < lenUChar) {
 		index = startByte + i;
-		char c = strval[index];
+		c = strval[index];
 		s = ctr_utf8size(c);
 		bytes = bytes + s;
 		i = i + s;
@@ -92,6 +93,8 @@ size_t getBytesUtf8(char* strval, long startByte, size_t lenUChar) {
 char* ctr_internal_readf(char* file_name) {
    char* prg;
    char ch;
+   int prev;
+   int sz;
    FILE* fp;
    fp = fopen(file_name,"r");
    if( fp == NULL )
@@ -99,9 +102,9 @@ char* ctr_internal_readf(char* file_name) {
       printf("Error while opening the file.\n");
       exit(1);
    }
-   int prev = ftell(fp);
+   prev = ftell(fp);
    fseek(fp,0L,SEEK_END);
-   int sz = ftell(fp);
+   sz = ftell(fp);
    fseek(fp,prev,SEEK_SET);
    prg = malloc((sz+1)*sizeof(char));
    ctr_program_length=0;
@@ -116,13 +119,16 @@ char* ctr_internal_readf(char* file_name) {
  * For debugging purposes, prints the internal AST.
  */
 void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
+	char* str;
+	ctr_tlistitem* li;
+	ctr_tnode* t;
 	if (indent>20) exit(1); 
-	ctr_tlistitem* li = ti->nodes;
-	ctr_tnode* t = li->node;
+	li = ti->nodes;
+	t = li->node;
 	while(1) {
 		int i = 0;
 		for (i=0; i<indent; i++) printf(" ");
-		char* str = calloc(40, sizeof(char));
+		str = calloc(40, sizeof(char));
 		if (t->type == CTR_AST_NODE_EXPRASSIGNMENT) 		str = "ASSIGN\0";
 		else if (t->type == CTR_AST_NODE_EXPRMESSAGE) 	str = "MESSAG\0";
 		else if (t->type == CTR_AST_NODE_UNAMESSAGE) 	str = "UMSSAG\0";
@@ -155,13 +161,18 @@ void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
  * Detemines whether two objects are identical.
  */
 int ctr_internal_object_is_equal(ctr_object* object1, ctr_object* object2) {
+	char* string1;
+	char* string2;
+	size_t len1;
+	size_t len2;
+	size_t d;
 	if (object1->info.type == CTR_OBJECT_TYPE_OTSTRING && object2->info.type == CTR_OBJECT_TYPE_OTSTRING) {
-		char* string1 = object1->value.svalue->value;
-		char* string2 = object2->value.svalue->value;
-		long len1 = object1->value.svalue->vlen;
-		long len2 = object2->value.svalue->vlen;
+		string1 = object1->value.svalue->value;
+		string2 = object2->value.svalue->value;
+		len1 = object1->value.svalue->vlen;
+		len2 = object2->value.svalue->vlen;
 		if (len1 != len2) return 0;
-		int d = memcmp(string1, string2, len1);
+		d = memcmp(string1, string2, len1);
 		if (d==0) return 1;
 		return 0;
 	}
@@ -321,7 +332,7 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
 	char* cur;
 	char* last;
 	char* begin;
-	int step = (1 - reverse * 2); //1 if reverse = 0, -1 if reverse = 1
+	int step = (1 - reverse * 2); /* 1 if reverse = 0, -1 if reverse = 1 */
 	if (nlen == 0) return NULL;
 	if (hlen == 0) return NULL;
 	if (hlen < nlen) return NULL;
@@ -376,9 +387,9 @@ ctr_object* ctr_internal_create_object(int type) {
  *
  * Create a function and add this to the object as a method.
  */
-void ctr_internal_create_func(ctr_object* o, ctr_object* key, void* f ) {
+void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func)( ctr_object*, ctr_argument* ) ) {
 	ctr_object* methodObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNATFUNC);
-	methodObject->value.rvalue = (void*) f;
+	methodObject->value.fvalue = func;
 	ctr_internal_object_add_property(o, key, methodObject, 1);
 }
 
@@ -404,14 +415,16 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
  * Casts an object to a string object.
  */
 ctr_object* ctr_internal_cast2string( ctr_object* o ) {
+	int slen;
+	char* s;
 	if (o->info.type == CTR_OBJECT_TYPE_OTSTRING) return o;
 	else if (o->info.type == CTR_OBJECT_TYPE_OTNIL) { return ctr_build_string("[Nil]", 5); }
 	else if (o->info.type == CTR_OBJECT_TYPE_OTBOOL && o->value.bvalue == 1) { return ctr_build_string("[True]", 6); }
 	else if (o->info.type == CTR_OBJECT_TYPE_OTBOOL && o->value.bvalue == 0) { return ctr_build_string("[False]", 7); }
 	else if (o->info.type == CTR_OBJECT_TYPE_OTNUMBER) {
-		char* s = calloc(80, sizeof(char));
+		s = calloc(80, sizeof(char));
 		CTR_CONVFP(s,o->value.nvalue);
-		int slen = strlen(s);
+		slen = strlen(s);
 		return ctr_build_string(s, slen);
 	}
 	else if (o->info.type == CTR_OBJECT_TYPE_OTBLOCK) { return ctr_build_string("[Block]",7);}
@@ -438,8 +451,9 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
  * Opens a new context to keep track of variables.
  */
 void ctr_open_context() {
+	ctr_object* context;
 	ctr_context_id++;
-	ctr_object* context = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	context = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_contexts[ctr_context_id] = context;
 }
 
@@ -512,7 +526,7 @@ void ctr_initialize_world() {
 	CtrStdWorld = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_contexts[0] = CtrStdWorld;
 
-	//Object
+	/* Object */
 	CtrStdObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("new", 3), &ctr_object_make);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("equals:", 7), &ctr_object_equals);
@@ -527,12 +541,12 @@ void ctr_initialize_world() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Object", 6), CtrStdObject, 0);
 	CtrStdObject->link = NULL;
 
-	//Nil
+	/* Nil */
 	CtrStdNil = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNIL);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Nil", 3), CtrStdNil, 0);
 	CtrStdNil->link = CtrStdObject;
 	
-	//Boolean
+	/* Boolean */
 	CtrStdBool = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("ifTrue:", 7), &ctr_bool_iftrue);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("ifFalse:", 8), &ctr_bool_ifFalse);
@@ -546,7 +560,7 @@ void ctr_initialize_world() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Boolean", 7), CtrStdBool, 0);
 	CtrStdBool->link = CtrStdObject;
 
-	//Number
+	/* Number */
 	CtrStdNumber = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("+", 1), &ctr_number_add);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("inc:",4), &ctr_number_inc);
@@ -585,7 +599,7 @@ void ctr_initialize_world() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Number", 6), CtrStdNumber, 0);
 	CtrStdNumber->link = CtrStdObject;
 
-	//String
+	/* String */
 	CtrStdString = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("bytes", 5), &ctr_string_bytes);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("codePoints", 10), &ctr_string_length);
@@ -609,9 +623,9 @@ void ctr_initialize_world() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("String", 6), CtrStdString, 0);
 	CtrStdString->link = CtrStdObject;
 
-	//Block
+	/* Block */
 	CtrStdBlock = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBLOCK);
-	ctr_internal_create_func(CtrStdBlock, ctr_build_string("run", 3), &ctr_block_run);
+	ctr_internal_create_func(CtrStdBlock, ctr_build_string("run", 3), &ctr_block_runIt);
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string("error:", 6), &ctr_block_error);
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string("catch:", 6), &ctr_block_catch);
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string("whileTrue:", 10), &ctr_block_while_true);
@@ -619,8 +633,8 @@ void ctr_initialize_world() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("CodeBlock", 9), CtrStdBlock, 0);
 	CtrStdBlock->link = CtrStdObject;
 
-	//Array
-	CtrStdArray = ctr_array_new(CtrStdObject);
+	/* Array */
+	CtrStdArray = ctr_array_new(CtrStdObject, NULL);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("new", 3), &ctr_array_new);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("←", 3), &ctr_array_new_and_push);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("push:", 5), &ctr_array_push);
@@ -638,7 +652,7 @@ void ctr_initialize_world() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Array", 5), CtrStdArray, 0);
 	CtrStdArray->link = CtrStdObject;
 
-	//Map
+	/* Map */
 	CtrStdMap = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdMap, ctr_build_string("new", 3), &ctr_map_new);
 	ctr_internal_create_func(CtrStdMap, ctr_build_string("put:at:", 7), &ctr_map_put);
@@ -648,14 +662,14 @@ void ctr_initialize_world() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Map", 3), CtrStdMap, 0);
 	CtrStdMap->link = CtrStdObject;
 
-	//Console
+	/* Console */
 	CtrStdConsole = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string("write:", 6), &ctr_console_write);
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string("brk", 3), &ctr_console_brk);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Pen", 3), CtrStdConsole, 0);
 	CtrStdConsole->link = CtrStdObject;
 	
-	//File
+	/* File */
 	CtrStdFile = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("new:", 4), &ctr_file_new);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("path", 4), &ctr_file_path);
@@ -669,40 +683,40 @@ void ctr_initialize_world() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("File", 4), CtrStdFile, 0);
 	CtrStdFile->link = CtrStdObject;
 
-	//Command
+	/* Command */
 	CtrStdCommand = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string("argument:", 9), &ctr_command_argument);
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string("argCount", 8), &ctr_command_num_of_args);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Command", 7), CtrStdCommand, 0);
 	CtrStdCommand->link = CtrStdObject;
 
-	//Clock
+	/* Clock */
 	CtrStdClock = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdClock, ctr_build_string("wait:", 5), &ctr_clock_wait);
 	ctr_internal_create_func(CtrStdClock, ctr_build_string("time", 4), &ctr_clock_time);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Clock", 5), CtrStdClock, 0);
 	CtrStdClock->link = CtrStdObject;
 
-	//Dice
+	/* Dice */
 	CtrStdDice = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdDice, ctr_build_string("roll", 4), &ctr_dice_throw);
 	ctr_internal_create_func(CtrStdDice, ctr_build_string("rollWithSides:", 14), &ctr_dice_sides);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Dice", 4), CtrStdDice, 0);
 	CtrStdDice->link = CtrStdObject;
 
-	//Coin
+	/* Coin */
 	CtrStdCoin = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdCoin, ctr_build_string("flip", 4), &ctr_coin_flip);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Coin", 4), CtrStdCoin, 0);
 	CtrStdCoin->link = CtrStdObject;
 
-	//Shell
+	/* Shell */
 	CtrStdShell = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdShell, ctr_build_string("call:", 5), &ctr_shell_call);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Shell", 5), CtrStdShell, 0);
 	CtrStdShell->link = CtrStdObject;
 
-	//Broom
+	/* Broom */
 	CtrStdGC = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("sweep", 5), &ctr_gc_collect);
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("dust", 4), &ctr_gc_dust);
@@ -717,9 +731,16 @@ void ctr_initialize_world() {
  * Sends a message to a receiver object.
  */
 ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vlen, ctr_argument* argumentList) {
-	if (CtrStdError != NULL) return NULL; //Error mode, ignore subsequent messages until resolved.
-	ctr_object* methodObject = NULL;
-	ctr_object* searchObject = receiverObject;
+	ctr_object* methodObject;
+	ctr_object* searchObject;
+	ctr_argument* argCounter;
+	ctr_argument* mesgArgument;
+	ctr_object* result;
+	ctr_object* (*funct)(ctr_object* receiverObject, ctr_argument* argumentList);
+	int argCount;
+	if (CtrStdError != NULL) return NULL; /* Error mode, ignore subsequent messages until resolved. */
+	methodObject = NULL;
+	searchObject = receiverObject;
 	while(!methodObject) {
 		methodObject = ctr_internal_object_find_property(searchObject, ctr_build_string(message, vlen), 1);
 		if (methodObject) break;
@@ -727,13 +748,13 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 		searchObject = searchObject->link;
 	}
 	if (!methodObject) {
-		ctr_argument* argCounter = argumentList;
-		int argCount = 0;
+		argCounter = argumentList;
+		argCount = 0;
 		while(argCounter->next && argCount < 4) {
 			argCounter = argCounter->next;
 			argCount ++;
 		}
-		ctr_argument* mesgArgument = CTR_CREATE_ARGUMENT();
+		mesgArgument = CTR_CREATE_ARGUMENT();
 		mesgArgument->object = ctr_build_string(message, vlen);
 		mesgArgument->next = argumentList;
 		if (argCount == 0 || argCount > 2) {
@@ -744,11 +765,9 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 			return ctr_send_message(receiverObject, "respondTo:with:and:", 19,  mesgArgument);
 		}
 	}
-	ctr_object* result;
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTNATFUNC) {
-		ctr_object* (*funct)(ctr_object* receiverObject, ctr_argument* argumentList);
-		funct = (void*) methodObject->value.block;
-		result = (ctr_object*) funct(receiverObject, argumentList);
+		funct = methodObject->value.fvalue;
+		result = funct(receiverObject, argumentList);
 	}
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTBLOCK) {
 		result = ctr_block_run(methodObject, argumentList, receiverObject);
@@ -764,6 +783,8 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
  */
 ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 	ctr_object* object;
+	ctr_object* putValue;
+	int i;
 	key->info.sticky = 0;
 	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC) {
 		ctr_set(key, o);
@@ -775,7 +796,7 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 		object->info.sticky = 0;
 		ctr_set(key, object);
 	}
-     //depending on type, copy specific value
+    /* depending on type, copy specific value */
     if (o->info.type == CTR_OBJECT_TYPE_OTBOOL) {
 		object->value.bvalue = o->value.bvalue;
 	 } else if (o->info.type == CTR_OBJECT_TYPE_OTNUMBER) {
@@ -791,8 +812,6 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 		object->value.avalue = malloc(sizeof(ctr_collection));
 		object->value.avalue->elements = malloc(o->value.avalue->length*sizeof(ctr_object*));
 		object->value.avalue->length = o->value.avalue->length;
-		int i;
-		ctr_object* putValue;
 		for (i = o->value.avalue->tail; i < o->value.avalue->head; i++) {
 			putValue = *( (ctr_object**) ((long)o->value.avalue->elements + (i * sizeof(ctr_object*))) );
 			*( (ctr_object**) ((long)object->value.avalue->elements + (i * sizeof(ctr_object*))) ) = putValue;
@@ -811,6 +830,8 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
  */
 ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 	ctr_object* object;
+	ctr_object* putValue;
+	int i;
 	ctr_object* my = ctr_find(ctr_build_string("me", 2));
 	key->info.sticky = 0;
 	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC) {
@@ -823,7 +844,7 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 		object->info.sticky = 0;
 		ctr_internal_object_add_property(my, key, object, 0);
 	}
-     //depending on type, copy specific value
+     /* depending on type, copy specific value */
     if (o->info.type == CTR_OBJECT_TYPE_OTBOOL) {
 		object->value.bvalue = o->value.bvalue;
 	 } else if (o->info.type == CTR_OBJECT_TYPE_OTNUMBER) {
@@ -839,8 +860,6 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 		object->value.avalue = malloc(sizeof(ctr_collection));
 		object->value.avalue->elements = malloc(o->value.avalue->length*sizeof(ctr_object*));
 		object->value.avalue->length = o->value.avalue->length;
-		int i;
-		ctr_object* putValue;
 		for (i = 0; i < o->value.avalue->head; i++) {
 			putValue = *( (ctr_object**) ((long)o->value.avalue->elements + (i * sizeof(ctr_object*))) );
 			*( (ctr_object**) ((long)object->value.avalue->elements + (i * sizeof(ctr_object*))) ) = putValue;

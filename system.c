@@ -4,15 +4,18 @@
  */
 void ctr_gc_mark(ctr_object* object) {
 	ctr_object* el;
+	ctr_mapitem* item;
+	ctr_object* o;
+	ctr_object* k;
 	long i;
 	if (object->info.type == CTR_OBJECT_TYPE_OTARRAY) {
 		for (i = 0; i < object->value.avalue->head; i++) {
-			el = *((ctr_object**) (long)object->value.avalue->elements+(i*sizeof(ctr_object*)) );
+			el = *(object->value.avalue->elements+i);
 			el->info.mark = 1;
 			ctr_gc_mark(el);
 		}
 	}
-	ctr_mapitem* item = object->properties->head;
+	item = object->properties->head;
 	while(item) {
 		ctr_object* k = item->key;
 		ctr_object* o = item->value;
@@ -24,8 +27,8 @@ void ctr_gc_mark(ctr_object* object) {
 	} 
 	item = object->methods->head;
 	while(item) {
-		ctr_object* o = item->value;
-		ctr_object* k = item->key;
+		o = item->value;
+		k = item->key;
 		o->name = k->value.svalue->value;
 		o->info.mark = 1;
 		k->info.mark = 1;
@@ -62,11 +65,13 @@ void ctr_gc_sweep() {
 /**
  * GarbageCollector
  */
-void ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* context;
+	int oldcid;
 	ctr_gc_dust_counter = 0;
 	ctr_gc_object_counter = 0;
-	ctr_object* context = ctr_contexts[ctr_context_id];
-	int oldcid = ctr_context_id;
+	context = ctr_contexts[ctr_context_id];
+	oldcid = ctr_context_id;
 	while(ctr_context_id > -1) {
 		ctr_gc_mark(context);
 		ctr_context_id--;
@@ -74,6 +79,7 @@ void ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 	}
 	ctr_gc_sweep();
 	ctr_context_id = oldcid;
+	return myself;
 }
 
 /**
@@ -103,9 +109,10 @@ ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* arg = ctr_internal_cast2string(argumentList->object);
 	long vlen = arg->value.svalue->vlen;
 	char* comString = malloc(vlen + 1);
+	int r;
 	memcpy(comString, arg->value.svalue->value, vlen);
 	memcpy(comString+vlen,"\0",1);
-	int r = system(comString);
+	r = system(comString);
 	return ctr_build_number_from_float( (ctr_number) r );
 }
 
@@ -126,7 +133,7 @@ ctr_object* ctr_command_argument(ctr_object* myself, ctr_argument* argumentList)
  *
  * Returns the number of CLI arguments passed to the script.
  */
-ctr_object* ctr_command_num_of_args(ctr_object* myself) {
+ctr_object* ctr_command_num_of_args(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (ctr_number) ctr_argc );
 }
 
@@ -145,7 +152,7 @@ ctr_object* ctr_dice_sides(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Rolls a standard dice with 6 sides.
  */
-ctr_object* ctr_dice_throw(ctr_object* myself) {
+ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (ctr_number) (rand() % 6));
 }
 
@@ -154,7 +161,7 @@ ctr_object* ctr_dice_throw(ctr_object* myself) {
  *
  * Flips a coin, returns a number between 0 and 1.
  */
-ctr_object* ctr_coin_flip(ctr_object* myself) {
+ctr_object* ctr_coin_flip(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool((rand() % 2));
 }
 

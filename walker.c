@@ -15,17 +15,19 @@ ctr_object* CtrStdError;
  * Returns from a block of code.
  */
 ctr_object* ctr_cwlk_return(ctr_tnode* node) {
+	ctr_tlistitem* li;
+	ctr_object* e;
 	if (!node->nodes) {
 		printf("Invalid return expression.\n");
 		exit(1);
 	}
-	ctr_tlistitem* li = node->nodes;
+	li = node->nodes;
 	if (!li->node) {
 		printf("Invalid return expression 2.\n");
 		exit(1);
 	} 
-	ctr_object* e = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
-	e =  ctr_cwlk_expr(li->node);
+	/* e = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT); */
+	e = ctr_cwlk_expr(li->node);
 	return e;
 }
 
@@ -66,13 +68,16 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		printf("Cannot send message to receiver of type: %d \n", receiverNode->type);
 	}
 	while(li->next) {
+		ctr_argument* a;
+		ctr_argument* aItem;
+		size_t l;
 		li = li->next;
 		msgnode = li->node;
 		message = msgnode->value;
-		long l = msgnode->vlen;
+		l = msgnode->vlen;
 		argumentList = msgnode->nodes;
-		ctr_argument* a = CTR_CREATE_ARGUMENT();
-		ctr_argument* aItem = a;
+		a = CTR_CREATE_ARGUMENT();
+		aItem = a;
 		if (argumentList) {
 			ctr_tnode* node = argumentList->node;
 			while(1) {
@@ -103,8 +108,8 @@ ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
 	ctr_tlistitem* valueListItem = assignmentItems->next;
 	ctr_tnode* value = valueListItem->node;
 	ctr_object* x = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
-	x = ctr_cwlk_expr(value);
 	ctr_object* result;
+	x = ctr_cwlk_expr(value);
 	if (assignee->modifier == 1) {
 		result = ctr_assign_value_to_my(ctr_build_string(assignee->value, assignee->vlen), x);
 	} else {
@@ -170,8 +175,9 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node) {
  */
 ctr_object* ctr_cwlk_run(ctr_tnode* program) {
 	ctr_object* result = NULL;
+	ctr_tlistitem* li;
 	if (ctr_mode_debug) ctr_internal_debug_tree(program, 0);
-	ctr_tlistitem* li = program->nodes;
+	li = program->nodes;
 	while(li) {
 		ctr_tnode* node = li->node;
 		if (!li->node) {

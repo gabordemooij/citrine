@@ -11,9 +11,10 @@
 int ctr_mode_debug = 0;
 ctr_object* error;
 int main(int argc, char* argv[]) {
+	char* prg;
+	ctr_tnode* program;
 	ctr_argc = argc;
 	ctr_argv = argv;
-	char* prg;
 	error = NULL;
 	if (argc < 2) {
 		printf("\nWelcome to Citrine v0.1\n");
@@ -26,7 +27,7 @@ int main(int argc, char* argv[]) {
 	if (argc == 3) if (strcmp(argv[2],"--debug")==0) ctr_mode_debug = 1;
 	if (ctr_mode_debug == 1) printf("Debugger is ON.\n");
 	prg = ctr_internal_readf(argv[1]);
-	ctr_tnode* program = dparse_parse(prg);
+	program = ctr_dparse_parse(prg);
 	ctr_initialize_world();
 	ctr_cwlk_run(program);
 	exit(0);
