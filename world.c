@@ -687,6 +687,7 @@ void ctr_initialize_world() {
 	CtrStdCommand = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string("argument:", 9), &ctr_command_argument);
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string("argCount", 8), &ctr_command_num_of_args);
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string("??", 2), &ctr_command_question);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Command", 7), CtrStdCommand, 0);
 	CtrStdCommand->link = CtrStdObject;
 

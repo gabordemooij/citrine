@@ -138,6 +138,36 @@ ctr_object* ctr_command_num_of_args(ctr_object* myself, ctr_argument* argumentLi
 }
 
 /**
+ * CommandQuestion
+ *
+ * Asks user for interactive input in CLI script.
+ * Only reads up to 100 characters.
+ *
+ * Usage:
+ *
+ * answer := Command ??.
+ */
+ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList) {
+	int c;
+	size_t bytes = 0;
+	char* buff;
+	size_t page = 10;
+	buff = malloc(page * sizeof(char));
+	while ((c = getchar()) != '\n') {
+		buff[bytes] = c;
+		bytes++;
+		if (bytes > page) {
+			page *= 2;
+			buff = (char*) realloc(buff, page * sizeof(char));
+			if (buff == NULL) {
+				CtrStdError = ctr_build_string_from_cstring("Out of memory\0");
+			}
+		}
+	}
+	return ctr_build_string(buff, bytes);
+}
+
+/**
  * DiceRollWithSides
  *
  * Rolls the dice, generates a pseudo random number.
