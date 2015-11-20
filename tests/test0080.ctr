@@ -1,0 +1,17 @@
+a := Array new.
+a push: 1.
+a push: 2.
+Pen write: (a join: ','), brk.
+a put: 3 at: 2.
+Pen write: (a join: ','), brk.
+a put: 4 at: 10.
+Pen write: (a join: ','), brk.
+a shift.
+a shift.
+a shift.
+Pen write: (a join: ','), brk.
+a put: 9 at: 0.
+Pen write: (a join: ','), brk.
+a put: 6 at: -1.
+
+

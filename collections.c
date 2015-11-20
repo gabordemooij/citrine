@@ -59,6 +59,11 @@ ctr_object* ctr_array_new_and_push(ctr_object* myclass, ctr_argument* argumentLi
 	return ctr_array_push(s, argumentList);
 }
 
+/**
+ * ArrayUnshift
+ *
+ * Unshift operation for array.
+ */
 ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pushValue = argumentList->object;
 	if (myself->value.avalue->tail > 0) {
@@ -97,7 +102,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* resultStr;
 	ctr_object* glue = ctr_internal_cast2string(argumentList->object);
 	long glen = glue->value.svalue->vlen;
-	for(i=0; i<myself->value.avalue->head; i++) {
+	for(i=myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
 		o = *( myself->value.avalue->elements + i );
 		str = ctr_internal_cast2string(o);
 		pos = len;
@@ -141,17 +146,39 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
  * Puts a value in the array at the specified index.
  */
 ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
+	
 	ctr_object* putValue = argumentList->object;
-	ctr_object* putIndex = argumentList->next->object;
-	int i;
-	if (putIndex->info.type != CTR_OBJECT_TYPE_OTNUMBER) {
-		printf("Index must be number.\n"); exit(1);
+	ctr_object* putIndex = ctr_internal_cast2number(argumentList->next->object);
+	size_t putIndexNumber;
+	size_t head;
+	size_t tail;
+	
+	if (putIndex->value.nvalue < 0) {
+		CtrStdError = ctr_build_string_from_cstring("Index out of bounds.\0");
+		return myself;
 	}
-	i = (int) putIndex->value.nvalue;
-	if (myself->value.avalue->head < i || i < 0) {
-		printf("Index out of bounds.\n"); exit(1);
+	
+	head = (size_t) myself->value.avalue->head;
+	tail = (size_t) myself->value.avalue->tail;
+	putIndexNumber = (size_t) putIndex->value.nvalue;
+	if (head <= putIndexNumber) {
+		size_t j;
+		for(j = head; j <= putIndexNumber; j++) {
+			ctr_argument* argument;
+			argument = CTR_CREATE_ARGUMENT();
+			argument->object = CtrStdNil;
+			ctr_array_push(myself, argument);
+		}
+		myself->value.avalue->head = putIndexNumber + 1;
 	}
-	*(myself->value.avalue->elements + i) = putValue;
+	if (putIndexNumber < tail) {
+		size_t j;
+		for(j = tail; j > putIndexNumber; j--) {
+			*(myself->value.avalue->elements + j) = CtrStdNil;
+		}
+		myself->value.avalue->tail = putIndexNumber;
+	}
+	*(myself->value.avalue->elements + putIndexNumber) = putValue;
 	return myself;
 }
 
