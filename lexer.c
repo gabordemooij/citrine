@@ -12,8 +12,7 @@ int ctr_clex_bflmt = 100;
 size_t ctr_clex_tokvlen = 0; /* length of the string value of a token */
 char* ctr_clex_buffer;
 char* ctr_code;
-char* codePoint;
-char* eofcode;
+char* ctr_eofcode;
 char* ctr_clex_oldptr;
 char* ctr_clex_olderptr;
 
@@ -27,7 +26,7 @@ void ctr_clex_load(char* prg) {
 	ctr_code = prg;
 	ctr_clex_buffer = malloc(ctr_clex_bflmt);
 	ctr_clex_buffer[0] = '\0';
-	eofcode = (ctr_code + ctr_program_length - 1);
+	ctr_eofcode = (ctr_code + ctr_program_length - 1);
 }
 
 /**
@@ -74,27 +73,27 @@ int ctr_clex_tok() {
 	i = 0;
 	comment_mode = 0;
 	c = *ctr_code;
-	while(ctr_code != eofcode && (isspace(c) || c == '#' || comment_mode)) {
+	while(ctr_code != ctr_eofcode && (isspace(c) || c == '#' || comment_mode)) {
 		if (c == '\n') comment_mode = 0;
 		if (c == '#') comment_mode = 1;
 		ctr_code ++;
 		c = *ctr_code;
 	}
-	if (ctr_code == eofcode) return CTR_TOKEN_FIN;
+	if (ctr_code == ctr_eofcode) return CTR_TOKEN_FIN;
 	if (c == '(') { ctr_code++; return CTR_TOKEN_PAROPEN; }
 	if (c == ')') { ctr_code++; return CTR_TOKEN_PARCLOSE; }
 	if (c == '{') { ctr_code++; return CTR_TOKEN_BLOCKOPEN; }
 	if (c == '}') { ctr_code++; return CTR_TOKEN_BLOCKCLOSE; }
 	if (c == '.') { ctr_code++; return CTR_TOKEN_DOT; }
 	if (c == ',') { ctr_code++; return CTR_TOKEN_CHAIN; }
-	if (c == ':' && (ctr_code+1)<eofcode && (*(ctr_code+1)=='=')) {
+	if (c == ':' && (ctr_code+1)<ctr_eofcode && (*(ctr_code+1)=='=')) {
 		ctr_code += 2;
 		return CTR_TOKEN_ASSIGNMENT; 
 	}
 	if (c == ':') { ctr_code++; return CTR_TOKEN_COLON; }
 	if (c == '^') { ctr_code++; return CTR_TOKEN_RET; }
 	if (c == '\'') { ctr_code++; return CTR_TOKEN_QUOTE; }
-	if ((c == '-' && (ctr_code+1)<eofcode && isdigit(*(ctr_code+1))) || isdigit(c)) {
+	if ((c == '-' && (ctr_code+1)<ctr_eofcode && isdigit(*(ctr_code+1))) || isdigit(c)) {
 		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
 		i++;
 		ctr_code++;
@@ -105,7 +104,7 @@ int ctr_clex_tok() {
 			ctr_code++;
 			c = *ctr_code;
 		}
-		if (c=='.' && (ctr_code+1 <= eofcode) && !isdigit(*(ctr_code+1))) {
+		if (c=='.' && (ctr_code+1 <= ctr_eofcode) && !isdigit(*(ctr_code+1))) {
 			return CTR_TOKEN_NUMBER;
 		}
 		if (c=='.') {
@@ -153,7 +152,7 @@ int ctr_clex_tok() {
 	 * these are also special, they are easy notations for unicode symbols.
 	 * we also return directly because we would like to use them without spaces as well: 1>=2...
 	 */
-	if ((ctr_code+1)<eofcode) {
+	if ((ctr_code+1)<ctr_eofcode) {
 		if (((char)*(ctr_code) == '>') && ((char)*(ctr_code+1)=='=')){
 			ctr_code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "≥", 3); return CTR_TOKEN_REF;
 		}
@@ -185,7 +184,7 @@ int ctr_clex_tok() {
 
 	if (c == '|' || c == '\\') { ctr_code++; return CTR_TOKEN_BLOCKPIPE; }
 
-	while(!isspace(c) && CTR_IS_NO_TOK(c) && ctr_code!=eofcode
+	while(!isspace(c) && CTR_IS_NO_TOK(c) && ctr_code!=ctr_eofcode
 	&& c != '+' && c!='*' && c!='/' && c!='=' && c!='>' && c!='<' && c!='&' /* and c is not one of the special symbols */
 	) {
 		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
