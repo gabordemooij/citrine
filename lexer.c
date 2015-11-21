@@ -9,7 +9,7 @@
 
 
 int ctr_clex_bflmt = 100;
-long ctr_clex_tokvlen = 0; /* length of the string value of a token */
+size_t ctr_clex_tokvlen = 0; /* length of the string value of a token */
 char* ctr_clex_buffer;
 char* ctr_code;
 char* codePoint;
