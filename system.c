@@ -149,9 +149,9 @@ ctr_object* ctr_command_num_of_args(ctr_object* myself, ctr_argument* argumentLi
  */
 ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList) {
 	int c;
-	size_t bytes = 0;
+	ctr_size bytes = 0;
 	char* buff;
-	size_t page = 10;
+	ctr_size page = 10;
 	buff = malloc(page * sizeof(char));
 	while ((c = getchar()) != '\n') {
 		buff[bytes] = c;

@@ -70,7 +70,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 	while(li->next) {
 		ctr_argument* a;
 		ctr_argument* aItem;
-		size_t l;
+		ctr_size l;
 		li = li->next;
 		msgnode = li->node;
 		message = msgnode->value;

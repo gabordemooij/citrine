@@ -649,7 +649,7 @@ ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
  * This message is UTF-8 unicode aware. A 4 byte character will be counted as ONE.
  */
 ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
-	size_t n = ctr_getutf8len(myself->value.svalue->value, (size_t) myself->value.svalue->vlen);
+	ctr_size n = ctr_getutf8len(myself->value.svalue->value, (ctr_size) myself->value.svalue->vlen);
 	char* str = calloc(100, sizeof(char));
 	snprintf(str, 100, "%lu", n);
 	return ctr_build_number(str);
@@ -663,8 +663,8 @@ ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
-	size_t n1;
-	size_t n2;
+	ctr_size n1;
+	ctr_size n2;
 	char* dest;
 	ctr_object* newString;
 	strObject = ctr_internal_cast2string(argumentList->object);
@@ -802,7 +802,7 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
 	long hlen = myself->value.svalue->vlen;
 	long nlen = sub->value.svalue->vlen;
 	uintptr_t byte_index;
-	size_t uchar_index;
+	ctr_size uchar_index;
 	char* p = ctr_internal_memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen, 0);
 	if (p == NULL) return ctr_build_number_from_float((float)-1);
 	byte_index = (uintptr_t) p - (uintptr_t) (myself->value.svalue->value);
@@ -823,11 +823,11 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentL
 	ctr_object* sub = ctr_internal_cast2string(argumentList->object);
 	long hlen = myself->value.svalue->vlen;
 	long nlen = sub->value.svalue->vlen;
-	size_t uchar_index;
-	size_t byte_index;
+	ctr_size uchar_index;
+	ctr_size byte_index;
 	char* p = ctr_internal_memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen, 1);
 	if (p == NULL) return ctr_build_number_from_float((float)-1);
-	byte_index = (size_t) ( (uintptr_t) p - (uintptr_t) (myself->value.svalue->value) );
+	byte_index = (ctr_size) ( (uintptr_t) p - (uintptr_t) (myself->value.svalue->value) );
 	uchar_index = ctr_getutf8len(myself->value.svalue->value, byte_index);
 	return ctr_build_number_from_float((float) uchar_index);
 }

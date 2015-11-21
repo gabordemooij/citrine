@@ -53,10 +53,10 @@ int ctr_utf8size(char c) {
  *
  * measures the length of an utf8 string in utf8 chars
  */
-size_t ctr_getutf8len(char* strval, size_t max) {
-	size_t i;
-	size_t j = 0;
-	size_t s = 0;
+ctr_size ctr_getutf8len(char* strval, ctr_size max) {
+	ctr_size i;
+	ctr_size j = 0;
+	ctr_size s = 0;
 	for(i = 0; i < max; i++) {
 		s = ctr_utf8size(strval[i]);
 		j += (s - 1);
@@ -67,7 +67,7 @@ size_t ctr_getutf8len(char* strval, size_t max) {
 /**
  * GetBytesForUTF8String
  */
-size_t getBytesUtf8(char* strval, long startByte, size_t lenUChar) {
+ctr_size getBytesUtf8(char* strval, long startByte, ctr_size lenUChar) {
 	long i = 0;
 	long bytes = 0;
 	int s = 0;
@@ -163,9 +163,9 @@ void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
 int ctr_internal_object_is_equal(ctr_object* object1, ctr_object* object2) {
 	char* string1;
 	char* string2;
-	size_t len1;
-	size_t len2;
-	size_t d;
+	ctr_size len1;
+	ctr_size len2;
+	ctr_size d;
 	if (object1->info.type == CTR_OBJECT_TYPE_OTSTRING && object2->info.type == CTR_OBJECT_TYPE_OTSTRING) {
 		string1 = object1->value.svalue->value;
 		string2 = object2->value.svalue->value;

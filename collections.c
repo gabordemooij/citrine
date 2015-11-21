@@ -149,20 +149,20 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 	
 	ctr_object* putValue = argumentList->object;
 	ctr_object* putIndex = ctr_internal_cast2number(argumentList->next->object);
-	size_t putIndexNumber;
-	size_t head;
-	size_t tail;
+	ctr_size putIndexNumber;
+	ctr_size head;
+	ctr_size tail;
 	
 	if (putIndex->value.nvalue < 0) {
 		CtrStdError = ctr_build_string_from_cstring("Index out of bounds.\0");
 		return myself;
 	}
 	
-	head = (size_t) myself->value.avalue->head;
-	tail = (size_t) myself->value.avalue->tail;
-	putIndexNumber = (size_t) putIndex->value.nvalue;
+	head = (ctr_size) myself->value.avalue->head;
+	tail = (ctr_size) myself->value.avalue->tail;
+	putIndexNumber = (ctr_size) putIndex->value.nvalue;
 	if (head <= putIndexNumber) {
-		size_t j;
+		ctr_size j;
 		for(j = head; j <= putIndexNumber; j++) {
 			ctr_argument* argument;
 			argument = CTR_CREATE_ARGUMENT();
@@ -172,7 +172,7 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 		myself->value.avalue->head = putIndexNumber + 1;
 	}
 	if (putIndexNumber < tail) {
-		size_t j;
+		ctr_size j;
 		for(j = tail; j > putIndexNumber; j--) {
 			*(myself->value.avalue->elements + j) = CtrStdNil;
 		}

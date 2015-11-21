@@ -31,7 +31,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 	int lookAhead;
 	int isBin;
 	int first;
-	size_t ulen;
+	ctr_size ulen;
 	m = CTR_PARSER_CREATE_NODE();
 	m->type = -1;
 	t = ctr_clex_tok();
@@ -335,7 +335,7 @@ ctr_tnode* ctr_cparse_ref() {
 ctr_tnode* ctr_cparse_string() {
 	ctr_tnode* r;
 	char* n;
-	size_t vlen;
+	ctr_size vlen;
 	if (ctr_mode_debug) printf("Parsing STRING. \n");
 	ctr_clex_tok();
 	r = CTR_PARSER_CREATE_NODE();

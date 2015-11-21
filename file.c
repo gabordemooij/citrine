@@ -39,7 +39,7 @@ ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	ctr_object* str;
-	size_t vlen, fileLen;
+	ctr_size vlen, fileLen;
 	char* pathString;
 	char *buffer;
 	FILE* f;
@@ -77,7 +77,7 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	FILE* f;
-	size_t vlen;
+	ctr_size vlen;
 	char* pathString;
 	if (path == NULL) return CtrStdNil;
 	vlen = path->value.svalue->vlen;
@@ -102,7 +102,7 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
-	size_t vlen;
+	ctr_size vlen;
 	char* pathString;
 	FILE* f;
 	if (path == NULL) return CtrStdNil;
@@ -127,7 +127,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
-	size_t vlen;
+	ctr_size vlen;
 	char* pathString;
 	FILE* f;
 	int exists;
@@ -152,7 +152,7 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	ctr_tnode* parsedCode;
-	size_t vlen;
+	ctr_size vlen;
 	char* pathString;
 	char* prg;
 	if (path == NULL) return ctr_build_bool(0);
@@ -173,7 +173,7 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
-	size_t vlen;
+	ctr_size vlen;
 	char* pathString;
 	int r;
 	if (path == NULL) return ctr_build_bool(0);
@@ -196,7 +196,7 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
-	size_t vlen;
+	ctr_size vlen;
 	char* pathString;
 	FILE* f;
 	int prev, sz;

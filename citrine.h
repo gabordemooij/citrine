@@ -80,7 +80,7 @@ typedef  size_t ctr_size;
  */
 struct ctr_string {
 	char* value;
-	size_t vlen;
+	ctr_size vlen;
 };
 typedef struct ctr_string ctr_string;
 
@@ -154,9 +154,9 @@ typedef struct ctr_resource ctr_resource;
  * Citrine Array
  */
 struct ctr_collection {
-	size_t length;
-	size_t head;
-	size_t tail;
+	ctr_size length;
+	ctr_size head;
+	ctr_size tail;
 	ctr_object** elements;
 };
 typedef struct ctr_collection ctr_collection;
@@ -169,7 +169,7 @@ struct ctr_tnode {
 	unsigned int type;
 	unsigned int modifier;
 	char* value;
-	size_t vlen;
+	ctr_size vlen;
 	struct ctr_tlistitem* nodes;
 };
 typedef struct ctr_tnode ctr_tnode;
@@ -183,19 +183,26 @@ struct ctr_tlistitem {
 };
 typedef struct ctr_tlistitem ctr_tlistitem;
 
-
-ctr_tnode* ctr_dparse_parse(char* prg);
-
+/**
+ * Generic Citrine variables
+ */
 ctr_size ctr_clex_len;
-long ctr_program_length;
+ctr_size ctr_program_length;
+int ctr_argc;
+char** ctr_argv;
+int ctr_mode_debug;
 
+
+/**
+ * Generic Citrine Functions
+ */
+ctr_tnode* ctr_dparse_parse(char* prg);
 void 	ctr_clex_load(char* prg);
 int 	ctr_clex_tok();
 char* 	ctr_clex_tok_value();
 long    ctr_clex_tok_value_length();
 void 	ctr_clex_putback();
 char*	ctr_clex_readstr();
-
 void ctr_initialize_world();
 ctr_object* ctr_internal_create_object(int type);
 ctr_object* ctr_find(ctr_object* key);
@@ -209,23 +216,17 @@ ctr_object* ctr_build_bool(int truth);
 ctr_object* ctr_build_nil();
 ctr_object* ctr_build_string_from_cstring( char* str );
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my);
-size_t ctr_getutf8len(char* strval, size_t max);
-
-int ctr_argc;
-char** ctr_argv;
-
-
+ctr_size ctr_getutf8len(char* strval, ctr_size max);
 ctr_object* ctr_send_message(ctr_object* receiver, char* message, long len, ctr_argument* argumentList);
 char* ctr_internal_readf(char* file_name);
 void ctr_internal_debug_tree(ctr_tnode* ti, int indent);
-
 ctr_object* ctr_cwlk_run(ctr_tnode* program);
 ctr_object* ctr_cwlk_expr(ctr_tnode* node);
 ctr_object* ctr_first_object;
 
-int ctr_mode_debug;
-
-
+/**
+ * Citrine Macros (temporary)
+ */
 #define CTR_DEBUG_STR(X,Y,L) if (ctr_mode_debug) {\
 	char* b = calloc(sizeof(char),L);\
 	memcpy(b, Y, L);\
