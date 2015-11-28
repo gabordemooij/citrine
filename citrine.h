@@ -98,6 +98,7 @@ typedef struct ctr_map ctr_map;
  * Map item
  */
 struct ctr_mapitem {
+	uint64_t hashKey;
 	struct ctr_object* key;
 	struct ctr_object* value;
 	struct ctr_mapitem* prev;
@@ -114,6 +115,7 @@ struct ctr_argument {
 };
 typedef struct ctr_argument ctr_argument;
 
+
 /**
  * THE CITRINE OBJECT.
  */
@@ -121,7 +123,7 @@ struct ctr_object {
     const char* name;
     ctr_map* properties;
     ctr_map* methods;
-	struct {
+    struct {
 		unsigned int type: 4;
 		unsigned int mark: 1;
 		unsigned int sticky: 1;
@@ -134,7 +136,6 @@ struct ctr_object {
 		struct ctr_tnode* block;
 		struct ctr_collection* avalue;
 		struct ctr_resource* rvalue;
-		/*int (*c9) (node3_t *a, node3_t *b);*/
 		struct ctr_object* (*fvalue) (struct ctr_object* myself, struct ctr_argument* argumentList);
 	} value;
 	struct ctr_object* gnext;
@@ -205,6 +206,7 @@ void 	ctr_clex_putback();
 char*	ctr_clex_readstr();
 void ctr_initialize_world();
 ctr_object* ctr_internal_create_object(int type);
+ctr_object* ctr_internal_cast2string( ctr_object* o );
 ctr_object* ctr_find(ctr_object* key);
 ctr_object* ctr_find_in_my(ctr_object* key);
 ctr_object* ctr_assign_value(ctr_object* key, ctr_object* val);

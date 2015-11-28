@@ -9,6 +9,7 @@
 #include <time.h>
 
 #include "citrine.h"
+#include "siphash.h"
 
 ctr_object* CtrStdWorld = NULL;
 ctr_object* ctr_contexts[100];
@@ -31,6 +32,8 @@ ctr_object* CtrStdCommand;
 ctr_object* CtrStdShell;
 ctr_object* CtrStdCoin;
 ctr_object* CtrStdClock;
+
+char CtrHashKey[16];
 
 int ctr_gc_dust_counter = 0;
 int ctr_gc_object_counter = 0;
@@ -193,13 +196,26 @@ int ctr_internal_object_is_equal(ctr_object* object1, ctr_object* object2) {
 }
 
 /**
+ * InternalObjectIndexHash
+ *
+ * Given an object, this function will calculate a hash to speed-up
+ * lookup.
+ */
+uint64_t ctr_internal_index_hash(ctr_object* key) {
+	ctr_object* stringKey = ctr_internal_cast2string(key);
+	return siphash24(stringKey->value.svalue->value, stringKey->value.svalue->vlen, CtrHashKey);
+}
+
+/**
  * InternalObjectFindProperty
  *
  * Finds property in object.
  */
 ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key, int is_method) {
-	
+
 	ctr_mapitem* head;
+	uint64_t hashKey = ctr_internal_index_hash(key);
+
 	if (is_method) {
 		if (owner->methods->size == 0) {
 			return NULL;
@@ -212,7 +228,7 @@ ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key
 		head = owner->properties->head; 
 	}
 	while(head) {
-		if (ctr_internal_object_is_equal(head->key, key)) {
+		if ((hashKey == head->hashKey) && ctr_internal_object_is_equal(head->key, key)) {
 			return head->value;
 		}
 		head = head->next;
@@ -227,6 +243,7 @@ ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key
  * Deletes the specified property from the object.
  */
 void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int is_method) {
+	uint64_t hashKey = ctr_internal_index_hash(key);
 	ctr_mapitem* head;
 	if (is_method) {
 		if (owner->methods->size == 0) {
@@ -240,7 +257,7 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
 		head = owner->properties->head; 
 	}
 	while(head) {
-		if (ctr_internal_object_is_equal(head->key, key)) {
+		if ((hashKey == head->hashKey) && ctr_internal_object_is_equal(head->key, key)) {
 			if (head->next && head->prev) {
 				head->next->prev = head->prev;
 				head->prev->next = head->next;
@@ -284,9 +301,11 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
  * Adds a property to an object.
  */
 void ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_object* value, int m) {
+
 	ctr_mapitem* new_item = malloc(sizeof(ctr_mapitem));
 	ctr_mapitem* current_head = NULL;
 	new_item->key = key;
+	new_item->hashKey = ctr_internal_index_hash(key);
 	new_item->value = value;
 	new_item->next = NULL;
 	new_item->prev = NULL;
@@ -519,10 +538,14 @@ void ctr_set(ctr_object* key, ctr_object* object) {
  * Populate the World of Citrine.
  */
 void ctr_initialize_world() {
+	int i;
 	srand((unsigned)time(NULL));
-	
+	for(i=0; i<16; i++) {
+		CtrHashKey[i] = (rand() % 255);
+	}
+
 	ctr_first_object = NULL;
-	
+
 	CtrStdWorld = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_contexts[0] = CtrStdWorld;
 
@@ -836,14 +859,14 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 	ctr_object* my = ctr_find(ctr_build_string("me", 2));
 	key->info.sticky = 0;
 	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC) {
-		ctr_internal_object_add_property(my, key, o, 0);
+		ctr_internal_object_set_property(my, key, o, 0);
 	} else {
 		object = ctr_internal_create_object(o->info.type);
 		object->properties = o->properties;
 		object->methods = o->methods;
 		object->link = o->link;
 		object->info.sticky = 0;
-		ctr_internal_object_add_property(my, key, object, 0);
+		ctr_internal_object_set_property(my, key, object, 0);
 	}
      /* depending on type, copy specific value */
     if (o->info.type == CTR_OBJECT_TYPE_OTBOOL) {

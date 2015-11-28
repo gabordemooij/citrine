@@ -1,8 +1,11 @@
 
 all:ctr
 
-ctr:world.o lexer.o parser.o walker.o citrine.o
-	gcc world.o lexer.o parser.o walker.o citrine.o -lm -o ctr
+ctr: siphash.o world.o lexer.o parser.o walker.o citrine.o
+	gcc siphash.o world.o lexer.o parser.o walker.o citrine.o -lm -o ctr
+
+siphash.o:
+	gcc -c -mtune=native siphash.c -Wall -o siphash.o
 
 world.o:
 	gcc -c -pedantic-errors -mtune=native world.c -Wall -o world.o
