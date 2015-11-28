@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <stdarg.h>
 #include <math.h>
+#include <stdint.h>
 
 #include "citrine.h"
 
