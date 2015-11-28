@@ -17,10 +17,10 @@ ctr_object* ctr_build_nil() {
 /**
  * Creates a new instance of the Root Object.
  */ 
-ctr_object* ctr_object_make() {
+ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* objectInstance = NULL;
 	objectInstance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
-	objectInstance->link = CtrStdObject;
+	objectInstance->link = myself;
 	return objectInstance;
 }
 
