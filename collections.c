@@ -10,7 +10,7 @@
  */
 ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTARRAY);
-	s->link = myclass;
+	s->link = myclass; /* Hm, interesting do we allow to do inheritance by 'new', maybe we dont even need basedOn at all... */
 	s->value.avalue = (ctr_collection*) malloc(sizeof(ctr_collection));
 	s->value.avalue->length = 1;
 	s->value.avalue->elements = (ctr_object**) malloc(sizeof(ctr_object*)*1);
@@ -379,11 +379,22 @@ ctr_object* ctr_map_new(ctr_object* myclass, ctr_argument* argumentList) {
  *
  */
 ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* putValue = argumentList->object;
-	ctr_argument* nextArgument = argumentList->next;
-	ctr_object* putKey = ctr_internal_cast2string(nextArgument->object);
 	char* key;
 	long keyLen;
+	ctr_object* putKey;
+	ctr_object* putValue = argumentList->object;
+	ctr_argument* nextArgument = argumentList->next;
+	ctr_argument* emptyArgumentList = malloc(sizeof(ctr_argument));
+	emptyArgumentList->next = NULL;
+	emptyArgumentList->object = NULL;
+
+	putKey = ctr_send_message(nextArgument->object, "toString", 8, emptyArgumentList);
+
+	/* If developer returns something other than string (ouch, toString), then cast anyway */
+	if (putKey->info.type != CTR_OBJECT_TYPE_OTSTRING) {
+		putKey = ctr_internal_cast2string(putKey);
+	}
+
 	key = calloc(putKey->value.svalue->vlen, sizeof(char));
 	keyLen = putKey->value.svalue->vlen;
 	memcpy(key, putKey->value.svalue->value, keyLen);
@@ -398,8 +409,26 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
  * Retrieves the value specified by the key from the map.
  */
 ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* searchKey = ctr_internal_cast2string(argumentList->object);
-	ctr_object* foundObject = ctr_internal_object_find_property(myself, searchKey, 0);
+
+	ctr_argument* emptyArgumentList;
+	ctr_object*   searchKey;
+	ctr_object*   foundObject;
+
+	emptyArgumentList = malloc(sizeof(ctr_argument));
+	emptyArgumentList->next = NULL;
+	emptyArgumentList->object = NULL;
+
+	searchKey = argumentList->object;
+
+	/* Give developer a chance to define a key for array */
+	searchKey = ctr_send_message(searchKey, "toString", 8, emptyArgumentList);
+
+	/* If developer returns something other than string (ouch, toString), then cast anyway */
+	if (searchKey->info.type != CTR_OBJECT_TYPE_OTSTRING) {
+		searchKey = ctr_internal_cast2string(searchKey);
+	}
+
+	foundObject = ctr_internal_object_find_property(myself, searchKey, 0);
 	if (foundObject == NULL) foundObject = ctr_build_nil();
 	return foundObject;
 }

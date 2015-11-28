@@ -1,0 +1,37 @@
+#tests whether we can use arrays as keys in maps
+map1 := Map new.
+key1 := Array new.
+key2 := Array new.
+
+key1 push: 1.
+
+#put keys in map
+
+map1
+	put: 'hello' at: key1,
+	put: 'world' at: key2.
+
+
+Pen
+	write: 'Map #1 contains: ' + (map1 at: key1),
+	write: ' and ' + (map1 at: key2), brk.
+
+#now with our toString override (we extend without using basedOn here):
+KeyeableArray := Array new.
+KeyeableArray on: 'toString' do: {\
+	^ (me count) toString.
+}.
+
+map2 := Map new.
+key1 := KeyeableArray new.
+key2 := KeyeableArray new.
+
+key1 push: 1.
+
+map2
+	put: 'hello' at: key1,
+	put: 'world' at: key2.
+
+Pen
+	write: 'Map #2 contains: ' + (map2 at: key1),
+	write: ' and ' + (map2 at: key2), brk.
