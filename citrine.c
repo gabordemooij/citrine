@@ -18,8 +18,8 @@ int main(int argc, char* argv[]) {
 	ctr_argv = argv;
 	error = NULL;
 	if (argc < 2) {
-		printf("\nWelcome to Citrine v0.1\n");
-		printf("Written by Gabor de Mooij (c) copyright 2014\n");
+		printf("\nWelcome to Citrine v0.2\n");
+		printf("Written by Gabor de Mooij (c) copyright 2015\n");
 		printf("The Citrine Programming Language BSD license.\n------------------------\n\n");
 		printf("Usage: ctr mycode.ctr \n");
 		printf("Debugger: ctr mycode.ctr --debug\n\n");
