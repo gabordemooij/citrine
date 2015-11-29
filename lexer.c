@@ -146,7 +146,7 @@ int ctr_clex_tok() {
 	 * them without spacing: 1+2 instead of 1 + 2.
 	 */
 	if (c=='+' || c=='-' || c=='/' || c=='*') {
-		ctr_code++; ctr_clex_tokvlen = 1; ctr_clex_buffer[i] = c; return CTR_TOKEN_REF;
+		ctr_code++; ctr_clex_tokvlen = 1; ctr_clex_buffer[0] = c; return CTR_TOKEN_REF;
 	}
 
 	/*
@@ -180,7 +180,7 @@ int ctr_clex_tok() {
 
 	/* later because we tolerate == as well. */
 	if (c=='=' || c=='>' || c =='<') {
-		ctr_code++; ctr_clex_tokvlen = 1; ctr_clex_buffer[i] = c; return CTR_TOKEN_REF;
+		ctr_code++; ctr_clex_tokvlen = 1; ctr_clex_buffer[0] = c; return CTR_TOKEN_REF;
 	}
 
 	if (c == '|' || c == '\\') { ctr_code++; return CTR_TOKEN_BLOCKPIPE; }
