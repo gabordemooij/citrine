@@ -3,7 +3,7 @@ Product := Object new.
 Product on: 'a' do: { price |
 	Pen write: 'cost '+ price.
 }.
-Apples := Object new basedOn: Product.
+Apples := Product new.
 Pen write: 'Apples cost: '.
 Apples a 60.
 Pen write: ' cent a piece.'.

@@ -4,12 +4,7 @@ o on: 'hello' do: {\}.
 {\ o on: 2 do: 3.} catch: { e | Pen write: e, brk. }, run.
 {\ o on: 'test' do: 3.} catch: { e | Pen write: e, brk. }, run.
 {\ o on: 'hello' do: {\}.} catch: { e | Pen write: e, brk. }, run. #allowed
-{\ o override: 2 do: 3.} catch: { e | Pen write: e, brk. }, run.
-{\ o override: 'test' do: 3.} catch: { e | Pen write: e, brk. }, run.
-{\ o override: 'test' do: {\}.} catch: { e | Pen write: e, brk. }, run.
-{\ o basedOn: o. } catch: { e | Pen write: e, brk. }, run.
 {\ z := 4 / 0. } catch: { e | Pen write: e, brk. }, run. 
-{\ o basedOn: Nil. } catch: { e | Pen write: e, brk. }, run. #allowed
 {\ (True && Nil) ifTrue: {\ Pen write: 'X'.}. } catch: { e | Pen write: e, brk. }, run. #allowed
 {\ ('' || 0) ifTrue: {\ Pen write: 'X'.}. } catch: { e | Pen write: e, brk. }, run. #allowed
 {\ (1 < '2') ifTrue: {\ Pen write: 'OK'. }. } catch: { e | Pen write: e, brk. }, run. #allowed, cast

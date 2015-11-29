@@ -556,8 +556,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("new", 3), &ctr_object_make);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("equals:", 7), &ctr_object_equals);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("on:do:", 6), &ctr_object_on_do);
-	ctr_internal_create_func(CtrStdObject, ctr_build_string("override:do:", 12), &ctr_object_override_does);
-	ctr_internal_create_func(CtrStdObject, ctr_build_string("basedOn:", 8), &ctr_object_basedOn);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("respondTo:", 10), &ctr_object_respond);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("respondTo:with:", 15), &ctr_object_respond);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("respondTo:with:and:", 19), &ctr_object_respond);
@@ -757,6 +755,7 @@ void ctr_initialize_world() {
  * Sends a message to a receiver object.
  */
 ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vlen, ctr_argument* argumentList) {
+	char toParent = 0;
 	ctr_object* methodObject;
 	ctr_object* searchObject;
 	ctr_argument* argCounter;
@@ -767,8 +766,14 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	if (CtrStdError != NULL) return NULL; /* Error mode, ignore subsequent messages until resolved. */
 	methodObject = NULL;
 	searchObject = receiverObject;
+	if (vlen > 1 && message[0] == '`') {
+		toParent = 1;
+		message = message + 1;
+		vlen--;
+	}
 	while(!methodObject) {
 		methodObject = ctr_internal_object_find_property(searchObject, ctr_build_string(message, vlen), 1);
+		if (methodObject && toParent) { toParent = 0; methodObject = NULL; }
 		if (methodObject) break;
 		if (!searchObject->link) break;
 		searchObject = searchObject->link;

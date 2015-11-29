@@ -1,5 +1,4 @@
-x := Object new.
-x basedOn: Map.
+x := Map new.
 x put: 'hello' at: 'world'.
 d := x at: 'world'.
 Pen write: d.

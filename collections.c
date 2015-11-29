@@ -10,7 +10,7 @@
  */
 ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTARRAY);
-	s->link = myclass; /* Hm, interesting do we allow to do inheritance by 'new', maybe we dont even need basedOn at all... */
+	s->link = myclass;
 	s->value.avalue = (ctr_collection*) malloc(sizeof(ctr_collection));
 	s->value.avalue->length = 1;
 	s->value.avalue->elements = (ctr_object**) malloc(sizeof(ctr_object*)*1);
@@ -365,7 +365,7 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_map_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
-	s->link = CtrStdMap;
+	s->link = myclass;
 	return s;
 }
 

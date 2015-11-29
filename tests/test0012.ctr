@@ -15,7 +15,7 @@ Cat on: 'make' do: {\
 	cat := Animal make.
 	
 	cat on:'a' do: {\}.
-	cat override: 'makeSound' do: {\
+	cat on: 'makeSound' do: {\
 		Pen write: 'meow!!'.
 		me overridden-makeSound.
 	}.

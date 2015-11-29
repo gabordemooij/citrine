@@ -86,50 +86,6 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-/**
- * OverrideDo
- *
- * Overrides the response of an object, replacing the
- * code block with the one specified in the second parameter.
- *
- * You can still invoke the old response by sending the message:
- * overridden-x where x is the original message.
- *
- * Usage:
- * object override: 'test' do: {\ ... }.
- * 
- */
-ctr_object* ctr_object_override_does(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* methodBlock;
-	ctr_argument* nextArgument;
-	ctr_object* methodName = argumentList->object;
-	ctr_object* overriddenMethod;
-	char* superMethodNameString;
-	ctr_object* superMethodKey;
-	if (methodName->info.type != CTR_OBJECT_TYPE_OTSTRING) {
-		CtrStdError = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
-		return myself;
-	}
-	nextArgument = argumentList->next;
-	methodBlock = nextArgument->object;
-	if (methodBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdError = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
-		return myself;
-	}
-	overriddenMethod = ctr_internal_object_find_property(myself, methodName, 1);
-	if (overriddenMethod == NULL) {
-		CtrStdError = ctr_build_string_from_cstring("Cannot override, original response not found.");
-		return myself;
-	}
-	superMethodNameString = malloc(sizeof(char) * (methodName->value.svalue->vlen + 11));
-	memcpy(superMethodNameString, "overridden-", (sizeof(char) * 11));
-	memcpy(superMethodNameString + (sizeof(char)*11), methodName->value.svalue->value, methodName->value.svalue->vlen);
-	superMethodKey = ctr_build_string(superMethodNameString, (methodName->value.svalue->vlen + 11));
-	ctr_internal_object_delete_property(myself, methodName, 1);
-	ctr_internal_object_add_property(myself, superMethodKey, overriddenMethod, 1);
-	ctr_internal_object_add_property(myself, methodName, methodBlock, 1);
-	return myself;
-}
 
 
 /**
@@ -139,25 +95,6 @@ ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-/**
- * Uses the specified object as blueprint or prototype.
- * If a message can't be answered by an object it will send the message
- * to its prototype (and so on) before passing the message to the
- * generic respond message handler.
- * 
- * Usage:
- * 
- * object new basedOn: parentObject.
- */
-ctr_object* ctr_object_basedOn(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* other = argumentList->object;
-	if (other == myself) {
-		CtrStdError = ctr_build_string_from_cstring("Circular prototype.");
-		return myself;
-	}
-	myself->link = other;
-	return myself;
-}
 
 /**
  * Booleans.

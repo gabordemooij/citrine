@@ -15,12 +15,10 @@ a setName: 'ONE'.
 b setName: 'TWO'.
 a greet.
 b greet.
-c := Object new.
-c basedOn: a.
+c := a new.
 c setName: 'THREE'.
 c greet.
-d := Object new.
-d basedOn: a.
+d := a new.
 d setName: 'FOUR'.
 d greet.
 c greet.
