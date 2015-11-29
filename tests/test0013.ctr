@@ -1,20 +1,12 @@
+#Test Simplified OOP - not allowed to send `message from the outside!
 Animal := Object new.
-Animal on: 'make' do: {\
-	animal := Object new.
-	animal on: 'makeSound' do: {\
-		Pen write: '?'.
-	}.
-	^animal.
+Animal on: 'makeSound' do: {\
+	Pen write: '?'.
 }.
-Cat := Object new.
-Cat on: 'make' do: {\
-	cat := Animal make.
-	cat override: 'makeSound' do: {\
-		Pen write: 'meow!!'.
-		me overridden-makeSound.
-	}.
-	^cat.
+Cat := Animal new.
+Cat on: 'makeSound' do: {\
+	Pen write: 'meow!'.
+	me `makeSound. #call makeSound on parent.
 }.
-CatObject := Cat make.
-tom := Object new basedOn: CatObject.
-tom makeSound.
+Tom := Cat new.
+Tom `makeSound.

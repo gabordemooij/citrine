@@ -629,6 +629,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string("from:to:", 8), &ctr_string_fromto);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("from:length:", 12), &ctr_string_from_length);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("+", 1), &ctr_string_concat);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("append:", 7), &ctr_string_append);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("=", 1), &ctr_string_eq);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("≠", 3), &ctr_string_neq);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("trim", 4), &ctr_string_trim);
@@ -756,6 +757,7 @@ void ctr_initialize_world() {
  */
 ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vlen, ctr_argument* argumentList) {
 	char toParent = 0;
+	ctr_object* me;
 	ctr_object* methodObject;
 	ctr_object* searchObject;
 	ctr_argument* argCounter;
@@ -767,9 +769,12 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	methodObject = NULL;
 	searchObject = receiverObject;
 	if (vlen > 1 && message[0] == '`') {
-		toParent = 1;
-		message = message + 1;
-		vlen--;
+		me = ctr_internal_object_find_property(ctr_contexts[ctr_context_id], ctr_build_string_from_cstring("me\0"), 0);
+		if (searchObject == me) {
+			toParent = 1;
+			message = message + 1;
+			vlen--;
+		}
 	}
 	while(!methodObject) {
 		methodObject = ctr_internal_object_find_property(searchObject, ctr_build_string(message, vlen), 1);

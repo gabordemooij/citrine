@@ -1,3 +1,4 @@
+#Test Crude OO (BlackScripty), basic
 Animal := Object new.
 Animal on: 'make' do: {\
 	animal := Object new.

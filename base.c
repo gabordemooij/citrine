@@ -615,6 +615,34 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * StringAppend
+ *
+ * Appends other string to self and returns self.
+ */
+ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
+	ctr_size n1;
+	ctr_size n2;
+	
+	char* dest;
+	ctr_object* newString;
+	strObject = ctr_internal_cast2string(argumentList->object);
+	n1 = myself->value.svalue->vlen;
+	n2 = strObject->value.svalue->vlen;
+	dest = malloc(sizeof(char) * (n1 + n2));
+	if (dest == NULL) {
+		CtrStdError = ctr_build_string_from_cstring("Out of memory\0");
+		return myself;
+	}
+	memcpy(dest, myself->value.svalue->value, n1);
+	memcpy(dest+n1, strObject->value.svalue->value, n2);
+	free(myself->value.svalue->value);
+	myself->value.svalue->value = dest;
+	myself->value.svalue->vlen = (n1 + n2);
+	return myself;	
+}
+
+/**
  * StringFromTo
  *
  * Returns a portion of a string defined by from-to values.

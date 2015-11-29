@@ -44,10 +44,8 @@ ctr_tnode* ctr_cparse_message(int mode) {
 	s = ctr_clex_tok_value();
 	msg = malloc(255*sizeof(char));
 	memcpy(msg, s, msgpartlen);
-	
 	ulen = ctr_getutf8len(msg, msgpartlen);
 	isBin = (ulen == 1);
-	
 	if (mode == 2 && isBin) {
 		ctr_clex_putback();
 		return m;

@@ -1,19 +1,11 @@
+#Test Simplified OOP - basic override
 Animal := Object new.
-Animal on: 'make' do: {\
-	animal := Object new.
-	animal on: 'makeSound' do: {\
-		Pen write: '?'.
-	}.
-	^animal.
+Animal on: 'makeSound' do: {\
+	Pen write: '?'.
 }.
-Cat := Object new.
-Cat on: 'make' do: {\
-	cat := Animal make.
-	cat on: 'makeSound' do: {\
-		Pen write: 'meow!!'.
-		me overridden-makeSound.
-	}.
-	^cat.
+Cat := Animal new.
+Cat on: 'makeSound' do: {\
+	Pen write: 'meow!'.
 }.
-tom := Cat make.
-tom makeSound.
+Tom := Cat new.
+Tom makeSound.
