@@ -223,7 +223,7 @@ ctr_object* ctr_send_message(ctr_object* receiver, char* message, long len, ctr_
 char* ctr_internal_readf(char* file_name);
 void ctr_internal_debug_tree(ctr_tnode* ti, int indent);
 ctr_object* ctr_cwlk_run(ctr_tnode* program);
-ctr_object* ctr_cwlk_expr(ctr_tnode* node);
+ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn);
 ctr_object* ctr_first_object;
 
 /**

@@ -16,6 +16,7 @@ ctr_object* CtrStdError;
  * Returns from a block of code.
  */
 ctr_object* ctr_cwlk_return(ctr_tnode* node) {
+	char wasReturn = 0;
 	ctr_tlistitem* li;
 	ctr_object* e;
 	if (!node->nodes) {
@@ -28,7 +29,7 @@ ctr_object* ctr_cwlk_return(ctr_tnode* node) {
 		exit(1);
 	} 
 	/* e = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT); */
-	e = ctr_cwlk_expr(li->node);
+	e = ctr_cwlk_expr(li->node, &wasReturn);
 	return e;
 }
 
@@ -38,6 +39,7 @@ ctr_object* ctr_cwlk_return(ctr_tnode* node) {
  * Processes a message sending operation.
  */
 ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
+	char wasReturn = 0;
 	ctr_object* result;
 	ctr_tlistitem* eitem = paramNode->nodes;
 	ctr_tnode* receiverNode = eitem->node;
@@ -62,7 +64,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 	} else if (receiverNode->type == CTR_AST_NODE_LTRNUM) {
 		r = ctr_build_number(receiverNode->value);
 	} else if (receiverNode->type == CTR_AST_NODE_NESTED) {
-		r = ctr_cwlk_expr(receiverNode);
+		r = ctr_cwlk_expr(receiverNode, &wasReturn);
 	} else if (receiverNode->type == CTR_AST_NODE_CODEBLOCK) {
 		r = ctr_build_block(receiverNode);
 	} else {
@@ -82,7 +84,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		if (argumentList) {
 			ctr_tnode* node = argumentList->node;
 			while(1) {
-				ctr_object* o = ctr_cwlk_expr(node);
+				ctr_object* o = ctr_cwlk_expr(node, &wasReturn);
 				aItem->object = o;
 				aItem->next = CTR_CREATE_ARGUMENT();
 				aItem = aItem->next;
@@ -104,13 +106,14 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
  * Processes an assignment operation.
  */
 ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
+	char wasReturn = 0;
 	ctr_tlistitem* assignmentItems = node->nodes;
 	ctr_tnode* assignee = assignmentItems->node;
 	ctr_tlistitem* valueListItem = assignmentItems->next;
 	ctr_tnode* value = valueListItem->node;
 	ctr_object* x = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_object* result;
-	x = ctr_cwlk_expr(value);
+	x = ctr_cwlk_expr(value, &wasReturn);
 	if (assignee->modifier == 1) {
 		result = ctr_assign_value_to_my(ctr_build_string(assignee->value, assignee->vlen), x);
 	} else {
@@ -124,7 +127,7 @@ ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
  *
  * Processes an expression.
  */
-ctr_object* ctr_cwlk_expr(ctr_tnode* node) {
+ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 	ctr_object* result;
 	if (node->type == CTR_AST_NODE_LTRSTRING) {
 		result = ctr_build_string(node->value, node->vlen);
@@ -150,8 +153,9 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node) {
 		result = ctr_cwlk_assignment(node);
 	} else if (node->type == CTR_AST_NODE_RETURNFROMBLOCK) {
 		result = ctr_cwlk_return(node);
+		*wasReturn = 1;
 	} else if (node->type == CTR_AST_NODE_NESTED) {
-		result = ctr_cwlk_expr(node->nodes->node);
+		result = ctr_cwlk_expr(node->nodes->node, wasReturn);
 	} else if (node->type == CTR_AST_NODE_ENDOFPROGRAM) {
 		if (CtrStdError) {
 			printf("Uncatched error has occurred.\n");
@@ -176,6 +180,7 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node) {
  */
 ctr_object* ctr_cwlk_run(ctr_tnode* program) {
 	ctr_object* result = NULL;
+	char wasReturn = 0;
 	ctr_tlistitem* li;
 	if (ctr_mode_debug) ctr_internal_debug_tree(program, 0);
 	li = program->nodes;
@@ -185,10 +190,12 @@ ctr_object* ctr_cwlk_run(ctr_tnode* program) {
 			printf("Missing parse node\n");
 			exit(1);
 		}
-		result = ctr_cwlk_expr(node);
+		wasReturn = 0;
+		result = ctr_cwlk_expr(node, &wasReturn);
 		if (!li->next) break;
 		li = li->next;
 	}
+	if (wasReturn == 0) result = NULL;
 	return result;
 }
 

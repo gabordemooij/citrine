@@ -1030,6 +1030,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	ctr_set(ctr_build_string("me",2), my);
 	ctr_set(ctr_build_string("thisBlock",9), myself); /* otherwise running block may get gc'ed. */
 	result = ctr_cwlk_run(codeBlockPart2);
+	if (result == NULL) result = my;
 	ctr_close_context();
 	if (CtrStdError != NULL) {
 		ctr_object* catchBlock = malloc(sizeof(ctr_object));
@@ -1080,6 +1081,13 @@ ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList
  */
 ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_block_run(myself, argumentList, myself);
+}
+
+ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* key = ctr_internal_cast2string(argumentList->object);
+	ctr_object* value = argumentList->next->object;
+	ctr_internal_object_set_property(myself, key, value, 0);
+	return myself; 
 }
 
 /**
