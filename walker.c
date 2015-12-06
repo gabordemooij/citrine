@@ -49,7 +49,11 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 	ctr_tlistitem* argumentList;
 	ctr_object* r;
 	if (receiverNode->type == CTR_AST_NODE_REFERENCE) {
-		r = ctr_find(ctr_build_string(receiverNode->value, receiverNode->vlen));
+		if (receiverNode->modifier == 1) {
+			r = ctr_find_in_my(ctr_build_string(receiverNode->value, receiverNode->vlen));
+		} else {
+			r = ctr_find(ctr_build_string(receiverNode->value, receiverNode->vlen));
+		}
 		if (!r) {
 			exit(1);
 		}

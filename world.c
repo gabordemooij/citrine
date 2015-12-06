@@ -150,7 +150,7 @@ void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
 		else if (t->type == CTR_AST_NODE_LTRBOOLTRUE)	str = "BLTRUE\0";
 		else if (t->type == CTR_AST_NODE_LTRNIL)	        str = "LTRNIL\0";
 		else 								str = "UNKNW?\0";
-		printf("%d:%s %s (vlen: %lu) \n", t->type, str, t->value, t->vlen);
+		printf("%d:%s %s (vlen: %lu) %d \n", t->type, str, t->value, t->vlen, t->modifier);
 		if (t->nodes) ctr_internal_debug_tree(t, indent + 1);
 		if (!li->next) break; 
 		li = li->next;
