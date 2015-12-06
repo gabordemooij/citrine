@@ -61,6 +61,29 @@ ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * Generic way to replace an existing object, even in parent scope.
+ * This is used in IF-blocks or TIMES-blocks, because you're not
+ * allowed to overwrite parents scope in Citrine!
+ *
+ * Although this message brings in all the drawbacks of
+ * Dynamic Scoping, at least you can SEE what happens!
+ *
+ * Usage:
+ *
+ * myObject := 1.
+ * {\ myObject <- 'String'. } run. #now myObject is a String
+ */
+ctr_object* ctr_object_replace_with(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* otherObject = argumentList->object;
+	myself->properties = otherObject->properties;
+	myself->methods = otherObject->methods;
+	myself->info = otherObject->info;
+	myself->link = otherObject->link;
+	myself->value = otherObject->value;
+	return myself;
+}
+
+/**
  * OnMessageDoAction
  *
  * Makes the object respond to a new kind of message.
@@ -160,6 +183,22 @@ ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_bool_opposite(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(!myself->value.bvalue);
+}
+
+/**
+ * Flips the value of a boolean.
+ * Use this to change a boolean without re-assigning it.
+ * This is used in IF-blocks or TIMES-blocks, because you're not
+ * allowed to overwrite parents scope in Citrine!
+ *
+ * Usage:
+ *
+ * Allowed := False.
+ * Allowed flip: True. #Now Allowed equals True
+ */
+ctr_object* ctr_bool_flip(ctr_object* myself, ctr_argument* argumentList) {
+	myself->value.bvalue = ctr_internal_cast2bool(argumentList->object)->value.bvalue;
+	return myself;
 }
 
 /**
@@ -364,6 +403,21 @@ ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 		return myself;
 	}
 	myself->value.nvalue /= otherNum->value.nvalue;
+	return myself;
+}
+
+/**
+ * Generic way to change a number in parent scope.
+ * This is used in IF-blocks or TIMES-blocks, because you're not
+ * allowed to overwrite parents scope in Citrine!
+ *
+ * Usage:
+ *
+ * luckyNumber := 7.
+ * {\ luckyNumber adjust: 9. } run.
+ */
+ctr_object* ctr_number_adjust(ctr_object* myself, ctr_argument* argumentList) {
+	myself->value.nvalue = ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	return myself;
 }
 
@@ -850,6 +904,22 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 	}
 	memcpy(dest, src, hlen);
 	return ctr_build_string(odest, dlen);
+}
+
+/**
+ * Changes the contents of the string without using
+ * an assignment.
+ * This is used in IF-blocks or TIMES-blocks, because you're not
+ * allowed to overwrite parents scope in Citrine!
+ * Most of the time you don't need this message because it's more
+ * convenient to just modify the string with append, or replaceWith
+ * or some other regular string message.
+ */
+ctr_object* ctr_string_replace(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* string = ctr_internal_cast2string(argumentList->object);
+	myself->value.svalue->value = string->value.svalue->value;
+	myself->value.svalue->vlen = string->value.svalue->vlen;
+	return myself;
 }
 
 /**
