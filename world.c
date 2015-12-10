@@ -560,7 +560,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("respondTo:with:", 15), &ctr_object_respond);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("respondTo:with:and:", 19), &ctr_object_respond);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("type", 4), &ctr_object_type);
-	ctr_internal_create_func(CtrStdObject, ctr_build_string("←", 3), &ctr_object_replace_with);
+	ctr_internal_create_func(CtrStdObject, ctr_build_string("swap:", 5), &ctr_object_becomes);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("new", 3), &ctr_object_make);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Object", 6), CtrStdObject, 0);
 	CtrStdObject->link = NULL;
@@ -576,7 +576,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("ifFalse:", 8), &ctr_bool_ifFalse);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("else:", 5), &ctr_bool_ifFalse);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("opposite", 8), &ctr_bool_opposite);
-	ctr_internal_create_func(CtrStdBool, ctr_build_string("flip:", 5), &ctr_bool_flip);
+	ctr_internal_create_func(CtrStdBool, ctr_build_string("flip", 4), &ctr_bool_flip);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("∧", 3), &ctr_bool_and);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("∨", 3), &ctr_bool_or);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("xor:", 4), &ctr_bool_xor);
@@ -587,7 +587,6 @@ void ctr_initialize_world() {
 
 	/* Number */
 	CtrStdNumber = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("adjust:", 7), &ctr_number_adjust);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("+", 1), &ctr_number_add);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("inc:",4), &ctr_number_inc);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("-",1), &ctr_number_minus);
