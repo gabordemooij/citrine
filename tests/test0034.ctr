@@ -8,7 +8,7 @@ a test1.
 Pen write: x.
 b := Object new.
 b on: 'test2' do: {\
-	#x should be 0! not 123...
+	#x should be 123... dyn scope
 	Pen write: x.
 }.
 b test2.

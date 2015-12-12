@@ -524,7 +524,18 @@ ctr_object* ctr_find_in_my(ctr_object* key) {
  * Sets a proeprty in an object (context).
  */
 void ctr_set(ctr_object* key, ctr_object* object) {
-	ctr_object* context = ctr_contexts[ctr_context_id];
+	int i = ctr_context_id;
+	ctr_object* context;
+	ctr_object* foundObject = NULL;
+	while((i>-1 && foundObject == NULL)) {
+		context = ctr_contexts[i];
+		foundObject = ctr_internal_object_find_property(context, key, 0);
+		if (foundObject) break;
+		i--;
+	}
+	if (!foundObject) {
+		context = ctr_contexts[ctr_context_id];
+	}
 	ctr_internal_object_set_property(context, key, object, 0);
 }
 
