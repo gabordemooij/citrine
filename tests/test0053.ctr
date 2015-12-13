@@ -1,5 +1,5 @@
 60 times: {\
-	x := Dice roll.
+	var x := Dice roll.
 	(x <= 6) ifFalse: {\ Pen write: 'FAIL'. }.
 	(x >=0) ifFalse: {\ Pen write: 'FAIL'. }.
 	x := Dice rollWithSides: 3.

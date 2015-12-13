@@ -527,6 +527,10 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 	int i = ctr_context_id;
 	ctr_object* context;
 	ctr_object* foundObject = NULL;
+	if (ctr_contexts[ctr_context_id] == CtrStdWorld) {
+		ctr_internal_object_set_property(ctr_contexts[ctr_context_id], key, object, 0);
+		return;
+	}
 	while((i>-1 && foundObject == NULL)) {
 		context = ctr_contexts[i];
 		foundObject = ctr_internal_object_find_property(context, key, 0);
@@ -534,7 +538,7 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 		i--;
 	}
 	if (!foundObject) {
-		context = ctr_contexts[ctr_context_id];
+		printf("Error, cannot assign, key not found: %s, forgot to use var ?\n", key->value.svalue->value); exit(1);
 	}
 	ctr_internal_object_set_property(context, key, object, 0);
 }
@@ -571,7 +575,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("respondTo:with:", 15), &ctr_object_respond);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("respondTo:with:and:", 19), &ctr_object_respond);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("type", 4), &ctr_object_type);
-	ctr_internal_create_func(CtrStdObject, ctr_build_string("swap:", 5), &ctr_object_becomes);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("new", 3), &ctr_object_make);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Object", 6), CtrStdObject, 0);
 	CtrStdObject->link = NULL;
@@ -587,7 +590,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("ifFalse:", 8), &ctr_bool_ifFalse);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("else:", 5), &ctr_bool_ifFalse);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("opposite", 8), &ctr_bool_opposite);
-	ctr_internal_create_func(CtrStdBool, ctr_build_string("flip", 4), &ctr_bool_flip);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("∧", 3), &ctr_bool_and);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("∨", 3), &ctr_bool_or);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("xor:", 4), &ctr_bool_xor);
@@ -642,7 +644,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string("from:to:", 8), &ctr_string_fromto);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("from:length:", 12), &ctr_string_from_length);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("+", 1), &ctr_string_concat);
-	ctr_internal_create_func(CtrStdString, ctr_build_string("append:", 7), &ctr_string_append);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("=", 1), &ctr_string_eq);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("≠", 3), &ctr_string_neq);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("trim", 4), &ctr_string_trim);
@@ -653,7 +654,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string("byteAt:", 7), &ctr_string_byte_at);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("indexOf:", 8), &ctr_string_index_of);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("lastIndexOf:", 12), &ctr_string_last_index_of);
-	ctr_internal_create_func(CtrStdString, ctr_build_string("replace:", 8), &ctr_string_replace);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("replace:with:", 13), &ctr_string_replace_with);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("split:", 6), &ctr_string_split);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("toNumber", 8), &ctr_string_to_number);
@@ -839,7 +839,7 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 	ctr_object* putValue;
 	int i;
 	key->info.sticky = 0;
-	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC) {
+	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC || o->info.type == CTR_OBJECT_TYPE_OTARRAY) {
 		ctr_set(key, o);
 	} else {
 		object = ctr_internal_create_object(o->info.type);
@@ -861,16 +861,6 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 		object->value.svalue->vlen = o->value.svalue->vlen;
 	 } else if (o->info.type == CTR_OBJECT_TYPE_OTBLOCK) {
 		object->value.block = o->value.block;
-	 } else if (o->info.type == CTR_OBJECT_TYPE_OTARRAY) {
-		object->value.avalue = malloc(sizeof(ctr_collection));
-		object->value.avalue->elements = malloc(o->value.avalue->length*sizeof(ctr_object*));
-		object->value.avalue->length = o->value.avalue->length;
-		for (i = o->value.avalue->tail; i < o->value.avalue->head; i++) {
-			putValue = *( (ctr_object**) ((long)o->value.avalue->elements + (i * sizeof(ctr_object*))) );
-			*( (ctr_object**) ((long)object->value.avalue->elements + (i * sizeof(ctr_object*))) ) = putValue;
-		}
-		object->value.avalue->head = o->value.avalue->head;
-		object->value.avalue->tail = o->value.avalue->tail;
 	 }
 	return object;
 }
@@ -887,7 +877,7 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 	int i;
 	ctr_object* my = ctr_find(ctr_build_string("me", 2));
 	key->info.sticky = 0;
-	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC) {
+	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC || o->info.type == CTR_OBJECT_TYPE_OTARRAY) {
 		ctr_internal_object_set_property(my, key, o, 0);
 	} else {
 		object = ctr_internal_create_object(o->info.type);
@@ -909,16 +899,44 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 		object->value.svalue->vlen = o->value.svalue->vlen;
 	 } else if (o->info.type == CTR_OBJECT_TYPE_OTBLOCK) {
 		object->value.block = o->value.block;
-	 } else if (o->info.type == CTR_OBJECT_TYPE_OTARRAY) {
-		object->value.avalue = malloc(sizeof(ctr_collection));
-		object->value.avalue->elements = malloc(o->value.avalue->length*sizeof(ctr_object*));
-		object->value.avalue->length = o->value.avalue->length;
-		for (i = 0; i < o->value.avalue->head; i++) {
-			putValue = *( (ctr_object**) ((long)o->value.avalue->elements + (i * sizeof(ctr_object*))) );
-			*( (ctr_object**) ((long)object->value.avalue->elements + (i * sizeof(ctr_object*))) ) = putValue;
-		}
-		object->value.avalue->head = o->value.avalue->head;
 	 }
 	return object;
 }
 
+/**
+ * CTRAssignValueObjectLocal
+ *
+ * Assigns a value to a local of an object. 
+ */
+ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* o) {
+	ctr_object* object;
+	ctr_object* putValue;
+	ctr_object* context;
+	int i;
+	context = ctr_contexts[ctr_context_id];
+	key->info.sticky = 0;
+	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC || o->info.type == CTR_OBJECT_TYPE_OTARRAY) {
+		ctr_internal_object_set_property(context, key, o, 0);
+	} else {
+		object = ctr_internal_create_object(o->info.type);
+		object->properties = o->properties;
+		object->methods = o->methods;
+		object->link = o->link;
+		object->info.sticky = 0;
+		ctr_internal_object_set_property(context, key, object, 0);
+	}
+     /* depending on type, copy specific value */
+    if (o->info.type == CTR_OBJECT_TYPE_OTBOOL) {
+		object->value.bvalue = o->value.bvalue;
+	 } else if (o->info.type == CTR_OBJECT_TYPE_OTNUMBER) {
+		object->value.nvalue = o->value.nvalue;
+	 } else if (o->info.type == CTR_OBJECT_TYPE_OTSTRING) {
+		object->value.svalue = malloc(sizeof(ctr_string));
+		object->value.svalue->value = malloc(sizeof(char)*o->value.svalue->vlen);
+		memcpy(object->value.svalue->value, o->value.svalue->value,o->value.svalue->vlen);
+		object->value.svalue->vlen = o->value.svalue->vlen;
+	 } else if (o->info.type == CTR_OBJECT_TYPE_OTBLOCK) {
+		object->value.block = o->value.block;
+	 }
+	return object;
+}

@@ -321,6 +321,16 @@ ctr_tnode* ctr_cparse_ref() {
 		r->modifier = 1;
 		r->vlen = ctr_clex_tok_value_length();
 	}
+	if (strncmp("var", tmp, 3)==0 && r->vlen == 3) {
+		int t = ctr_clex_tok();
+		if (t != CTR_TOKEN_REF) {
+			printf("'var' should always be followed by property name!\n");
+			exit(1);
+		}
+		tmp = ctr_clex_tok_value();
+		r->modifier = 2;
+		r->vlen = ctr_clex_tok_value_length();
+	}
 	r->value = malloc(r->vlen);
 	memcpy(r->value, tmp, r->vlen);
 	return r;

@@ -1,6 +1,6 @@
 Cat := Object new.
 Cat on: 'make' do: {\
-	cat := Object new.
+	var cat := Object new.
 	cat on: 'meow' do: {\
 		Pen write: 'meow!'.
 	}.

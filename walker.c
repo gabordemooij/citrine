@@ -28,7 +28,6 @@ ctr_object* ctr_cwlk_return(ctr_tnode* node) {
 		printf("Invalid return expression 2.\n");
 		exit(1);
 	} 
-	/* e = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT); */
 	e = ctr_cwlk_expr(li->node, &wasReturn);
 	return e;
 }
@@ -120,11 +119,13 @@ ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
 	x = ctr_cwlk_expr(value, &wasReturn);
 	if (assignee->modifier == 1) {
 		result = ctr_assign_value_to_my(ctr_build_string(assignee->value, assignee->vlen), x);
+	} else if (assignee->modifier == 2) {
+		result = ctr_assign_value_to_local(ctr_build_string(assignee->value, assignee->vlen), x);
 	} else {
 		result = ctr_assign_value(ctr_build_string(assignee->value, assignee->vlen), x);
 	}
 	return result;
-}		
+}	
 
 /**
  * CTRWalkerExpression

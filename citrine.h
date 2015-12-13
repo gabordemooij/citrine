@@ -211,6 +211,7 @@ ctr_object* ctr_find(ctr_object* key);
 ctr_object* ctr_find_in_my(ctr_object* key);
 ctr_object* ctr_assign_value(ctr_object* key, ctr_object* val);
 ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* val);
+ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* val);
 ctr_object* ctr_build_string(char* object, long vlen);
 ctr_object* ctr_build_block(ctr_tnode* node);
 ctr_object* ctr_build_number(char* object);

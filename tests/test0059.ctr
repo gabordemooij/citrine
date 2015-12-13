@@ -2,7 +2,7 @@
 #if their containing array is still in scope
 z := Array new.
 {\
-	x := 'hello'.
+	var x := 'hello'.
 	z push: x.
 } run.
 Pen write: (z at: 0).

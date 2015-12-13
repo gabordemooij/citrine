@@ -61,29 +61,6 @@ ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * Generic way to replace an existing object, even in parent scope.
- * This is used in IF-blocks or TIMES-blocks, because you're not
- * allowed to overwrite parents scope in Citrine!
- *
- * Although this message brings in all the drawbacks of
- * Dynamic Scoping, at least you can SEE what happens!
- *
- * Usage:
- *
- * myObject := 1.
- * {\ myObject becomes: 'String'. } run. #now myObject is a String
- */
-ctr_object* ctr_object_becomes(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object  swap;
-	ctr_object* otherObject;
-	otherObject = argumentList->object;
-	swap = *(myself);
-	*(myself) = *(otherObject);
-	*(otherObject) = swap;
-	return myself;
-}
-
-/**
  * OnMessageDoAction
  *
  * Makes the object respond to a new kind of message.
@@ -147,7 +124,7 @@ ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_object* codeBlock = argumentList->object;
 		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = myself;
-		return ctr_block_run(codeBlock, arguments, myself);
+		return ctr_block_run(codeBlock, arguments, codeBlock);
 	}
 	return myself;
 }
@@ -167,7 +144,7 @@ ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_object* codeBlock = argumentList->object;
 		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = myself;
-		return ctr_block_run(codeBlock, arguments, myself);
+		return ctr_block_run(codeBlock, arguments, codeBlock);
 	}
 	return myself;
 }
@@ -183,22 +160,6 @@ ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_bool_opposite(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(!myself->value.bvalue);
-}
-
-/**
- * Flips the value of a boolean.
- * Use this to change a boolean without re-assigning it.
- * This is used in IF-blocks or TIMES-blocks, because you're not
- * allowed to overwrite parents scope in Citrine!
- *
- * Usage:
- *
- * Allowed := False.
- * Allowed flip: True. #Now Allowed equals True
- */
-ctr_object* ctr_bool_flip(ctr_object* myself, ctr_argument* argumentList) {
-	myself->value.bvalue = (ctr_internal_cast2bool(myself)->value.bvalue == 1) ? 0 : 1;
-	return myself;
 }
 
 /**
@@ -554,7 +515,7 @@ ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
 		indexNumber = ctr_build_number(nstr);
 		arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = indexNumber;
-		ctr_block_run(block, arguments, myself);
+		ctr_block_run(block, arguments, block);
 	}
 	block->info.mark = 0;
 	block->info.sticky = 0;
@@ -652,34 +613,6 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(dest+n1, strObject->value.svalue->value, n2);
 	newString = ctr_build_string(dest, (n1 + n2));
 	return newString;	
-}
-
-/**
- * StringAppend
- *
- * Appends other string to self and returns self.
- */
-ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
-	ctr_size n1;
-	ctr_size n2;
-	
-	char* dest;
-	ctr_object* newString;
-	strObject = ctr_internal_cast2string(argumentList->object);
-	n1 = myself->value.svalue->vlen;
-	n2 = strObject->value.svalue->vlen;
-	dest = malloc(sizeof(char) * (n1 + n2));
-	if (dest == NULL) {
-		CtrStdError = ctr_build_string_from_cstring("Out of memory\0");
-		return myself;
-	}
-	memcpy(dest, myself->value.svalue->value, n1);
-	memcpy(dest+n1, strObject->value.svalue->value, n2);
-	free(myself->value.svalue->value);
-	myself->value.svalue->value = dest;
-	myself->value.svalue->vlen = (n1 + n2);
-	return myself;	
 }
 
 /**
@@ -835,22 +768,6 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentL
 	byte_index = (ctr_size) ( (uintptr_t) p - (uintptr_t) (myself->value.svalue->value) );
 	uchar_index = ctr_getutf8len(myself->value.svalue->value, byte_index);
 	return ctr_build_number_from_float((float) uchar_index);
-}
-
-/**
- * Changes the contents of the string without using
- * an assignment.
- * This is used in IF-blocks or TIMES-blocks, because you're not
- * allowed to overwrite parents scope in Citrine!
- * Most of the time you don't need this message because it's more
- * convenient to just modify the string with append, or replaceWith
- * or some other regular string message.
- */
-ctr_object* ctr_string_replace(ctr_object* myself, ctr_argument* argumentList) {
-       ctr_object* string = ctr_internal_cast2string(argumentList->object);
-       myself->value.svalue->value = string->value.svalue->value;
-       myself->value.svalue->vlen = string->value.svalue->vlen;
-       return myself;
 }
 
 /**
@@ -1074,7 +991,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 		while(1) {
 			if (parameter && argList->object) {
 				a = argList->object;
-				ctr_set(ctr_build_string(parameter->value, parameter->vlen), a);
+				ctr_assign_value_to_local(ctr_build_string(parameter->value, parameter->vlen), a);
 			}
 			if (!argList->next) break;
 			argList = argList->next;
@@ -1083,8 +1000,8 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 			parameter = parameterList->node;
 		}
 	}
-	ctr_set(ctr_build_string("me",2), my);
-	ctr_set(ctr_build_string("thisBlock",9), myself); /* otherwise running block may get gc'ed. */
+	ctr_assign_value_to_local(ctr_build_string("me",2), my);
+	ctr_assign_value_to_local(ctr_build_string("thisBlock",9), myself); /* otherwise running block may get gc'ed. */
 	result = ctr_cwlk_run(codeBlockPart2);
 	if (result == NULL) result = my;
 	ctr_close_context();

@@ -1,6 +1,6 @@
 Greeter := Object new.
 Greeter on: 'make' do: {\
-	greeter := Object new.
+	var greeter := Object new.
 	greeter on: 'name:' do: { name |
 		Pen write: 'setting a name'.
 		my myName := name.
