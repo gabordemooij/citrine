@@ -1,0 +1,19 @@
+#Test the Citrine equivalent of 'closures'
+
+makeAdder := { x |
+	var f := { y | ^ (my x + y). } set: 'x' value: x. 
+	^ f.
+}.
+
+mapper := { array func |
+	var mapping := { i | my q put: (my f applyTo: (my q at: i)) at: i. } 
+	set: 'q' value: array,
+	set: 'f' value: func.
+	(array count) times: mapping.	
+}.
+
+a := Array <- 1; 2; 3.
+mapper applyTo: a and: (makeAdder applyTo: 100).
+Pen write: (a at: 0), brk.
+Pen write: (a at: 1), brk.
+Pen write: (a at: 2), brk.

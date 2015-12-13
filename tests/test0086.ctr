@@ -1,0 +1,7 @@
+#Scope tests
+{\ var q := 1. {\ Pen write: q. } run. } run. #prints 1.
+Pen brk.
+{\ var q := 1. {\ q := 2. Pen write: q. } run. } run. #prints 2.
+Pen brk.
+{\ var q := 1. {\ x := 2. Pen write: x. } run. } run. #Not allowed x is not defined
+Pen brk.

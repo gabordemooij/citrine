@@ -1,0 +1,13 @@
+#Scope tests
+var g := 'global'.
+{\ var g := 'local'. Pen write: g, brk. } run. #local
+Pen write: g, brk. #global
+message := 'Bye'.
+var Secret := Object new.
+Secret on: 'test' do: {\
+	var message := 'Hello'.
+	my message := 'World'.
+	Pen write: message + ' ' + my message, brk.
+}.
+Secret test.
+Pen write: message.

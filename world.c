@@ -666,6 +666,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string("run", 3), &ctr_block_runIt);
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string("applyTo:", 8), &ctr_block_runIt);
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string("applyTo:and:", 12), &ctr_block_runIt);
+	ctr_internal_create_func(CtrStdBlock, ctr_build_string("applyTo:and:and:", 16), &ctr_block_runIt);
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string("set:value:", 10), &ctr_block_set);
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string("error:", 6), &ctr_block_error);
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string("catch:", 6), &ctr_block_catch);

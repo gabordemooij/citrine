@@ -1,0 +1,11 @@
+#Test recursion
+f := { x |
+	var result := 0.
+	(x = 1) ifTrue: {\
+		result := 1.
+	}, else: {\
+		result := x * (f applyTo: (x - 1)).
+	}.
+	^ result.
+}.
+Pen write: (f applyTo: 4). #24.
