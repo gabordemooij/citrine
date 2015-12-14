@@ -6,7 +6,7 @@ makeAdder := { x |
 }.
 
 mapper := { array func |
-	var mapping := { i | my q put: (my f applyTo: (my q at: i)) at: i. } 
+	var mapping := { i | my q put: (my f applyTo: (my q @ i)) at: i. } 
 	set: 'q' value: array,
 	set: 'f' value: func.
 	(array count) times: mapping.	

@@ -687,6 +687,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("join:", 5), &ctr_array_join);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("pop", 3), &ctr_array_pop);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("at:", 3), &ctr_array_get);
+	ctr_internal_create_func(CtrStdArray, ctr_build_string("@", 1), &ctr_array_get);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("sort:", 5), &ctr_array_sort);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("put:at:", 7), &ctr_array_put);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("from:length:", 12), &ctr_array_from_to);
@@ -699,6 +700,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdMap, ctr_build_string("new", 3), &ctr_map_new);
 	ctr_internal_create_func(CtrStdMap, ctr_build_string("put:at:", 7), &ctr_map_put);
 	ctr_internal_create_func(CtrStdMap, ctr_build_string("at:", 3), &ctr_map_get);
+	ctr_internal_create_func(CtrStdMap, ctr_build_string("@", 1), &ctr_map_get);
 	ctr_internal_create_func(CtrStdMap, ctr_build_string("count", 5), &ctr_map_count);
 	ctr_internal_create_func(CtrStdMap, ctr_build_string("each:", 5), &ctr_map_each);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Map", 3), CtrStdMap, 0);
