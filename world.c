@@ -227,9 +227,7 @@ ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key
 		}
 		head = owner->properties->head; 
 	}
-	/*printf("Looking for: %s \n",key->value.svalue->value);*/
 	while(head) {
-		/*printf("Hash: %lu - %lu %s \n",hashKey, head->hashKey, head->key->value.svalue->value);*/
 		if ((hashKey == head->hashKey) && ctr_internal_object_is_equal(head->key, key)) {
 			return head->value;
 		}
