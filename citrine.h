@@ -239,9 +239,13 @@ ctr_object* ctr_first_object;
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='^'  && X!= ':' && X!= '\''
 #define CTR_CREATE_ARGUMENT() (ctr_argument*) calloc(sizeof(ctr_argument), 1)
-#define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) calloc(1, sizeof(ctr_tlistitem))
-#define	CTR_PARSER_CREATE_NODE() (ctr_tnode*) calloc(1,sizeof(ctr_tnode))
-#define ASSIGN_STRING(o,p,v,s) o->p = calloc(s,sizeof(char)); memcpy( (char*) o->p,v,s);
+
+char* xalloc(uintptr_t size, int what);
+#define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) xalloc(sizeof(ctr_tlistitem), 2)
+#define	CTR_PARSER_CREATE_NODE() (ctr_tnode*) xalloc(sizeof(ctr_tnode), 1)
+
+
+#define ASSIGN_STRING(o,p,v,s) o->p = xalloc(s * sizeof(char), 0); memcpy( (char*) o->p,v,s);
 
 #define CTR_CONVFP(s,x){\
 char *buf = calloc(100, sizeof(char));\
@@ -254,3 +258,7 @@ if (*p == '.') *p = '\0';\
 strncpy(s, buf, strlen(buf));\
 free (buf);\
 }
+
+char* chunk;
+uintptr_t chunk_ptr;
+uintptr_t* abook;
