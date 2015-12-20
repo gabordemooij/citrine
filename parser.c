@@ -13,6 +13,68 @@ ctr_tnode* ctr_cparse_expr(int mode);
 ctr_tnode* ctr_cparse_ret();
 
 /**
+struct ctr_tnode {
+	unsigned int type;
+	unsigned int modifier;
+	char* value;
+	ctr_size vlen;
+	struct ctr_tlistitem* nodes;
+};
+struct ctr_tlistitem {
+	ctr_tnode* node;	
+	struct ctr_tlistitem* next;
+};
+*/
+int xcnt = 0;
+char* xalloc(uintptr_t size, int what) {
+	uintptr_t address;
+	char* beginBlock;
+	char* xptr;
+	int i= 0;
+	int rel = 0;
+	if (!chunk) {
+		chunk = (char*) malloc(8000 * sizeof(char));
+		if (!chunk) exit(1);
+		abook = (uintptr_t*) chunk;
+		chunk_ptr = 2000;
+		for (i = 0; i<8000; i++) {
+			*(chunk + i) = 'z';
+		}
+		for (i = 0; i<2000; i++) {
+			*(chunk + i) = 'x';
+		}
+		printf("Chnk ABP = %p BGBLK = %p \n", abook, (chunk + chunk_ptr));
+		*(abook) = (uint64_t) 0;
+		abook += sizeof(uint64_t);
+		*(abook) = (uintptr_t) chunk + chunk_ptr;
+		abook += sizeof(uintptr_t);
+	}
+	beginBlock = chunk + chunk_ptr;
+	
+	printf("Alc: %p = (%p + %d + %lu (%d))", beginBlock, chunk, chunk_ptr, size, what);
+	
+	chunk_ptr += size;
+	xptr = beginBlock;
+	for(i=0; i<size; i++) { xptr[i] = 0; }
+	if (what == 1 || what == 2) {
+		if (what == 1) rel = (2 * (sizeof(unsigned int))) + sizeof(char*) + sizeof(ctr_size);
+		if (what == 2) rel = (sizeof(ctr_tnode));
+		address = (uintptr_t) ( xptr + rel );
+		*(abook) = address;
+		printf(" | entry %p (%p + %d) @ %p", (void*) *(abook), xptr, rel, (void*) abook);
+		abook += sizeof(uintptr_t);
+		*(chunk) = (uint64_t) *(chunk) + 1;
+	}
+	printf("\n");
+	
+	return xptr;
+}
+
+void* rxalloc(void* oldptr, uintptr_t size, int what) {
+	return xalloc(size, what);
+}
+
+/**
  * CTRParserMessage
  *
  * Creates the AST nodes for sending a message.
@@ -42,7 +104,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 		exit(1);
 	}
 	s = ctr_clex_tok_value();
-	msg = malloc(255*sizeof(char));
+	msg = xalloc(255*sizeof(char), 0);
 	memcpy(msg, s, msgpartlen);
 	ulen = ctr_getutf8len(msg, msgpartlen);
 	isBin = (ulen == 1);
@@ -242,7 +304,7 @@ ctr_tnode* ctr_cparse_block() {
 		ctr_tlistitem* paramListItem = CTR_PARSER_CREATE_LISTITEM();
 		ctr_tnode* paramItem = CTR_PARSER_CREATE_NODE();
 		long l = ctr_clex_tok_value_length();
-		paramItem->value = malloc(sizeof(char) * l);
+		paramItem->value = xalloc(sizeof(char) * l, 0);
 		memcpy(paramItem->value, ctr_clex_tok_value(), l);
 		paramItem->vlen = l;
 		paramListItem->node = paramItem;
@@ -331,7 +393,7 @@ ctr_tnode* ctr_cparse_ref() {
 		r->modifier = 2;
 		r->vlen = ctr_clex_tok_value_length();
 	}
-	r->value = malloc(r->vlen);
+	r->value = xalloc(r->vlen, 0);
 	memcpy(r->value, tmp, r->vlen);
 	return r;
 }
@@ -351,7 +413,7 @@ ctr_tnode* ctr_cparse_string() {
 	r->type = CTR_AST_NODE_LTRSTRING;
 	n = ctr_clex_readstr();
 	vlen = ctr_clex_tok_value_length();
-	r->value = calloc(sizeof(char), vlen);
+	r->value = xalloc(sizeof(char) * vlen, 0);
 	memcpy(r->value, n, vlen);
 	r->vlen = vlen;
 	ctr_clex_tok(); /* eat trailing quote. */
@@ -372,7 +434,7 @@ ctr_tnode* ctr_cparse_number() {
 	r->type = CTR_AST_NODE_LTRNUM;
 	n = ctr_clex_tok_value();
 	l = ctr_clex_tok_value_length();
-	r->value = calloc(sizeof(char), l);
+	r->value = xalloc(sizeof(char) * l, 0);
 	memcpy(r->value, n, l);
 	r->vlen = l;
 	if (ctr_mode_debug) printf("Parsing number: %s.\n", r->value);
@@ -498,10 +560,15 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 			if (ctr_mode_debug) printf("No messages, return. Next token: %d.\n", t);
 			return r; /* no messages, then just return receiver (might be in case of argument). */
 		}
+		printf("====\n");
+		
 		rli = CTR_PARSER_CREATE_LISTITEM();
+		
+		
 		rli->node = r;
 		rli->next = nodes;
 		e->nodes = rli;
+		printf("====\n");
 	} else {
 		if (ctr_mode_debug) printf("Returning receiver. \n");
 		return r;
@@ -520,6 +587,8 @@ ctr_tnode* ctr_cparse_ret() {
 	ctr_clex_tok();
 	r = CTR_PARSER_CREATE_NODE();
 	r->type = CTR_AST_NODE_RETURNFROMBLOCK;
+	printf("----\n");
+		
 	li = CTR_PARSER_CREATE_LISTITEM();
 	r->nodes = li;
 	li->node = ctr_cparse_expr(0);
