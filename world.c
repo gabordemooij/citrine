@@ -420,12 +420,9 @@ void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func
 ctr_object* ctr_internal_cast2number(ctr_object* o) {
 	if (o->info.type == CTR_OBJECT_TYPE_OTNUMBER) return o;
 	if (o->info.type == CTR_OBJECT_TYPE_OTSTRING) {
-		char* cstring = malloc((o->value.svalue->vlen+1)*sizeof(char));
-		memcpy(cstring, o->value.svalue->value, o->value.svalue->vlen);
-		memcpy((char*)((long)cstring+(o->value.svalue->vlen*sizeof(char))),"\0", sizeof(char));
-		return ctr_build_number(cstring);
+		return ctr_build_number_from_string(o->value.svalue->value, o->value.svalue->vlen);
 	}
-	return ctr_build_number("0");
+	return ctr_build_number_from_float((ctr_number)0);
 }
 
 /**

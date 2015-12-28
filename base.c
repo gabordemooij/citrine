@@ -222,13 +222,24 @@ ctr_object* ctr_build_number(char* n) {
 	return numberObject;
 }
 
+ctr_object* ctr_build_number_from_string(char* str, ctr_size length) {
+	char*	 numCStr;
+	ctr_object* numberObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
+	/* turn string into a C-string before feeding it to atof */
+	numCStr = (char*) calloc(40, sizeof(char));
+	memcpy(numCStr, str, length);
+	numberObject->value.nvalue = atof(numCStr);
+	numberObject->link = CtrStdNumber;
+	return numberObject;
+}
+
 /**
  * BuildNumberFromFloat
  *
  * Creates a number object from a float.
  * Internal use only.
  */
-ctr_object* ctr_build_number_from_float(double f) {
+ctr_object* ctr_build_number_from_float(ctr_number f) {
 	ctr_object* numberObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	numberObject->value.nvalue = f;
 	numberObject->link = CtrStdNumber;
@@ -488,7 +499,7 @@ ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList
  * Returns 0 if boolean is False and 1 otherwise.
  */
 ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float( (float) myself->value.bvalue );
+	return ctr_build_number_from_float( (ctr_number) myself->value.bvalue );
 }
 
 /**
@@ -510,9 +521,7 @@ ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
 	block->info.sticky = 1;
 	t = myself->value.nvalue;
 	for(i=0; i<t; i++) {
-		nstr = (char*) calloc(20, sizeof(char));
-		snprintf(nstr, 20, "%d", i);
-		indexNumber = ctr_build_number(nstr);
+		indexNumber = ctr_build_number_from_float((ctr_number) i);
 		arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = indexNumber;
 		ctr_block_run(block, arguments, block);
@@ -588,9 +597,7 @@ ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size n = ctr_getutf8len(myself->value.svalue->value, (ctr_size) myself->value.svalue->vlen);
-	char* str = calloc(100, sizeof(char));
-	snprintf(str, 100, "%lu", n);
-	return ctr_build_number(str);
+	return ctr_build_number_from_float((ctr_number) n);
 }
 
 /**
@@ -742,7 +749,7 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
 	uintptr_t byte_index;
 	ctr_size uchar_index;
 	char* p = ctr_internal_memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen, 0);
-	if (p == NULL) return ctr_build_number_from_float((float)-1);
+	if (p == NULL) return ctr_build_number_from_float((ctr_number)-1);
 	byte_index = (uintptr_t) p - (uintptr_t) (myself->value.svalue->value);
 	uchar_index = ctr_getutf8len(myself->value.svalue->value, byte_index);
 	return ctr_build_number_from_float((ctr_number) uchar_index);

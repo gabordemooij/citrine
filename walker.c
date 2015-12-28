@@ -65,7 +65,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 	} else if (receiverNode->type == CTR_AST_NODE_LTRSTRING ) {
 		r = ctr_build_string(receiverNode->value, receiverNode->vlen);
 	} else if (receiverNode->type == CTR_AST_NODE_LTRNUM) {
-		r = ctr_build_number(receiverNode->value);
+		r = ctr_build_number_from_string(receiverNode->value, receiverNode->vlen);
 	} else if (receiverNode->type == CTR_AST_NODE_NESTED) {
 		r = ctr_cwlk_expr(receiverNode, &wasReturn);
 	} else if (receiverNode->type == CTR_AST_NODE_CODEBLOCK) {
@@ -77,6 +77,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		ctr_argument* a;
 		ctr_argument* aItem;
 		ctr_size l;
+		int k;
 		li = li->next;
 		msgnode = li->node;
 		message = msgnode->value;
@@ -85,7 +86,8 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		a = CTR_CREATE_ARGUMENT();
 		aItem = a;
 		if (argumentList) {
-			ctr_tnode* node = argumentList->node;
+			ctr_tnode* node;
+			node = argumentList->node;
 			while(1) {
 				ctr_object* o = ctr_cwlk_expr(node, &wasReturn);
 				aItem->object = o;
@@ -143,7 +145,7 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 	} else if (node->type == CTR_AST_NODE_LTRNIL) {
 		result = ctr_build_nil();
 	} else if (node->type == CTR_AST_NODE_LTRNUM) {
-		result = ctr_build_number(node->value);
+		result = ctr_build_number_from_string(node->value, node->vlen);
 	} else if (node->type == CTR_AST_NODE_CODEBLOCK) {
 		result = ctr_build_block(node);
 	} else if (node->type == CTR_AST_NODE_REFERENCE) {

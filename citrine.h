@@ -167,8 +167,8 @@ typedef struct ctr_collection ctr_collection;
  * AST Node
  */
 struct ctr_tnode {
-	unsigned int type;
-	unsigned int modifier;
+	char type;
+	char modifier;
 	char* value;
 	ctr_size vlen;
 	struct ctr_tlistitem* nodes;
@@ -215,6 +215,8 @@ ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* val);
 ctr_object* ctr_build_string(char* object, long vlen);
 ctr_object* ctr_build_block(ctr_tnode* node);
 ctr_object* ctr_build_number(char* object);
+ctr_object* ctr_build_number_from_string(char* fixedStr, ctr_size strLength);
+ctr_object* ctr_build_number_from_float(ctr_number floatNumber);
 ctr_object* ctr_build_bool(int truth);
 ctr_object* ctr_build_nil();
 ctr_object* ctr_build_string_from_cstring( char* str );
@@ -241,8 +243,10 @@ ctr_object* ctr_first_object;
 #define CTR_CREATE_ARGUMENT() (ctr_argument*) calloc(sizeof(ctr_argument), 1)
 
 char* xalloc(uintptr_t size, int what);
+void* rxalloc(void* oldptr, uintptr_t size, uintptr_t old_size, int what);
 #define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) xalloc(sizeof(ctr_tlistitem), 2)
 #define	CTR_PARSER_CREATE_NODE() (ctr_tnode*) xalloc(sizeof(ctr_tnode), 1)
+#define	CTR_PARSER_CREATE_PROGRAM_NODE() (ctr_tnode*) xalloc(sizeof(ctr_tnode), 3)
 
 
 #define ASSIGN_STRING(o,p,v,s) o->p = xalloc(s * sizeof(char), 0); memcpy( (char*) o->p,v,s);
@@ -262,3 +266,11 @@ free (buf);\
 char* chunk;
 uintptr_t chunk_ptr;
 uintptr_t* abook;
+uintptr_t* program_entry;
+int xallocmode;
+uint64_t measure;
+uint64_t measure_code;
+
+char ctr_mode_compile;
+char ctr_mode_load;
+char ctr_mode_roundtrip;

@@ -8,23 +8,9 @@
 
 #include "citrine.h"
 
-
 ctr_tnode* ctr_cparse_expr(int mode);
 ctr_tnode* ctr_cparse_ret();
 
-/**
-struct ctr_tnode {
-	unsigned int type;
-	unsigned int modifier;
-	char* value;
-	ctr_size vlen;
-	struct ctr_tlistitem* nodes;
-};
-struct ctr_tlistitem {
-	ctr_tnode* node;	
-	struct ctr_tlistitem* next;
-};
-*/
 int xcnt = 0;
 char* xalloc(uintptr_t size, int what) {
 	uintptr_t address;
@@ -32,46 +18,65 @@ char* xalloc(uintptr_t size, int what) {
 	char* xptr;
 	int i= 0;
 	int rel = 0;
+	if (xallocmode == 0) {
+		measure += (sizeof(uintptr_t) * 2);
+		measure_code += size;
+		return (char*) calloc(size,sizeof(char));
+	}
 	if (!chunk) {
-		chunk = (char*) malloc(8000 * sizeof(char));
+		chunk = (char*) calloc(measure_code+measure,sizeof(char));
 		if (!chunk) exit(1);
 		abook = (uintptr_t*) chunk;
-		chunk_ptr = 2000;
-		for (i = 0; i<8000; i++) {
-			*(chunk + i) = 'z';
-		}
-		for (i = 0; i<2000; i++) {
-			*(chunk + i) = 'x';
-		}
-		printf("Chnk ABP = %p BGBLK = %p \n", abook, (chunk + chunk_ptr));
-		*(abook) = (uint64_t) 0;
-		abook += sizeof(uint64_t);
-		*(abook) = (uintptr_t) chunk + chunk_ptr;
-		abook += sizeof(uintptr_t);
+		chunk_ptr = measure;
+		*(abook) = (uint64_t) 0; /* number of swizzles */
+		abook += 1; /*sizeof(uint64_t);*/
+		*(abook) = (uint64_t) chunk_ptr; /* size of address book, measured */
+		/*printf("Add measurement to addressbook as size: %lu \n", chunk_ptr);*/
+		abook += 1; /*sizeof(uint64_t);*/
+		*(abook) = (uintptr_t) chunk; /* start of memory block */
+		/*printf("Old base starts at: %p \n", chunk);*/
+		abook += 1;/*sizeof(uintptr_t);*/
+		*(abook) = (uint64_t) 0; /* program entry (chunk address + offset addressbook size) */
+		program_entry = abook;
+		abook += 1;
 	}
 	beginBlock = chunk + chunk_ptr;
-	
-	printf("Alc: %p = (%p + %d + %lu (%d))", beginBlock, chunk, chunk_ptr, size, what);
-	
 	chunk_ptr += size;
 	xptr = beginBlock;
 	for(i=0; i<size; i++) { xptr[i] = 0; }
-	if (what == 1 || what == 2) {
-		if (what == 1) rel = (2 * (sizeof(unsigned int))) + sizeof(char*) + sizeof(ctr_size);
-		if (what == 2) rel = (sizeof(ctr_tnode));
-		address = (uintptr_t) ( xptr + rel );
-		*(abook) = address;
-		printf(" | entry %p (%p + %d) @ %p", (void*) *(abook), xptr, rel, (void*) abook);
-		abook += sizeof(uintptr_t);
-		*(chunk) = (uint64_t) *(chunk) + 1;
+	if (what == 1 || what == 2 || what == 3) {
+		if (what == 1 || what == 3) {
+			ctr_tnode tmp0;
+			ctr_tnode tmp;
+			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp0.value) - (uintptr_t) &tmp0);
+			*(chunk) = (uint64_t) *(chunk) + 1;
+			abook += 1;
+			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp.nodes) - (uintptr_t) &tmp);
+			*(chunk) = (uint64_t) *(chunk) + 1;
+			abook += 1;
+		}
+		if (what == 2) {
+			ctr_tlistitem tmp2;
+			ctr_tlistitem tmp3;
+			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp2.node) - (uintptr_t) &tmp2);
+			abook += 1;
+			*(chunk) = (uint64_t) *(chunk) + 1;
+			*(abook) = (uintptr_t) 	xptr + (uintptr_t) ((uintptr_t) &(tmp3.next) - (uintptr_t) &tmp3);
+			abook += 1;
+			*(chunk) = (uint64_t) *(chunk) + 1;
+		}
+		if (what == 3) {
+			*(program_entry) = (uintptr_t) xptr;
+		}
 	}
-	printf("\n");
-	
 	return xptr;
 }
 
-void* rxalloc(void* oldptr, uintptr_t size, int what) {
-	return xalloc(size, what);
+void* rxalloc(void* oldptr, uintptr_t size, uintptr_t old_size, int what) {
+	char* nptr;
+	nptr = xalloc(size, what);
+	memcpy(nptr, oldptr, old_size);
+	return (void*) nptr;
 }
 
 /**
@@ -420,11 +425,13 @@ ctr_tnode* ctr_cparse_string() {
 	return r;
 }
 
+
 /**
  * CTRParserNumber
  *
  * Generates a node to represent a number.
  */
+void ctr_internal_debug_tree(ctr_tnode* ti, int indent);
 ctr_tnode* ctr_cparse_number() {
 	char* n;
 	ctr_tnode* r;
@@ -437,7 +444,6 @@ ctr_tnode* ctr_cparse_number() {
 	r->value = xalloc(sizeof(char) * l, 0);
 	memcpy(r->value, n, l);
 	r->vlen = l;
-	if (ctr_mode_debug) printf("Parsing number: %s.\n", r->value);
 	return r;
 }
 
@@ -538,6 +544,7 @@ ctr_tnode* ctr_cparse_assignment(ctr_tnode* r) {
  * Generates a set of nodes to represent an expression.
  */
 ctr_tnode* ctr_cparse_expr(int mode) {
+	int j;
 	ctr_tnode* r;
 	ctr_tnode* e;
 	int t2;
@@ -560,15 +567,10 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 			if (ctr_mode_debug) printf("No messages, return. Next token: %d.\n", t);
 			return r; /* no messages, then just return receiver (might be in case of argument). */
 		}
-		printf("====\n");
-		
 		rli = CTR_PARSER_CREATE_LISTITEM();
-		
-		
 		rli->node = r;
 		rli->next = nodes;
 		e->nodes = rli;
-		printf("====\n");
 	} else {
 		if (ctr_mode_debug) printf("Returning receiver. \n");
 		return r;
@@ -587,8 +589,6 @@ ctr_tnode* ctr_cparse_ret() {
 	ctr_clex_tok();
 	r = CTR_PARSER_CREATE_NODE();
 	r->type = CTR_AST_NODE_RETURNFROMBLOCK;
-	printf("----\n");
-		
 	li = CTR_PARSER_CREATE_LISTITEM();
 	r->nodes = li;
 	li->node = ctr_cparse_expr(0);
@@ -641,9 +641,10 @@ ctr_tlistitem* ctr_cparse_statement() {
  * as an Abstract Syntax Tree (AST).
  */
 ctr_tnode* ctr_cparse_program() {
-	ctr_tnode* program = CTR_PARSER_CREATE_NODE();
+	ctr_tnode* program = CTR_PARSER_CREATE_PROGRAM_NODE();
 	ctr_tlistitem* pli;
 	int first = 1;
+	program->type = 0xfa;
 	while(1) {
 		ctr_tlistitem* li = ctr_cparse_statement();
 		if (first) {

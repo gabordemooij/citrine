@@ -229,8 +229,7 @@ char* ctr_clex_readstr() {
 		ctr_clex_tokvlen ++;
 		if (ctr_clex_tokvlen > memblock) {
 			memblock += page;
-			printf("==== ---\n");
-			/*beginbuff = (char*) realloc(beginbuff, memblock);*/
+			beginbuff = (char*) rxalloc(beginbuff, memblock, (memblock-page), 0);
 			if (beginbuff == NULL) {
 				printf("Out of memory\n");
 				exit(1);
@@ -239,7 +238,7 @@ char* ctr_clex_readstr() {
 			strbuff = beginbuff + (ctr_clex_tokvlen -1);
 		}
 		escape = 0;
-		*strbuff = c;
+		*(strbuff) = c;
 		strbuff++;
 		ctr_code++;
 		c = *ctr_code;
