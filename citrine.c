@@ -157,7 +157,7 @@ void ctr_cli_read_args(int argc, char* argv[]) {
 	}
 	
 	ctr_mode_input_file = (char*) calloc(sizeof(char), 255);
-	strlcpy(ctr_mode_input_file, argv[optind], 254);
+	strncpy(ctr_mode_input_file, argv[optind], 254);
 }
 
 int main(int argc, char* argv[]) {
