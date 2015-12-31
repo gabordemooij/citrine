@@ -9,8 +9,7 @@
 #include <stdarg.h>
 #include <math.h>
 #include <stdint.h>
-
-
+#include <unistd.h>
 #include "citrine.h"
 
 char* raw;
@@ -33,7 +32,11 @@ int fsize(char* x) {
 
 void ctr_serializer_serialize(ctr_tnode* t) {
 	FILE *f;
-	f = fopen("dump.ast","wb");
+	if (ctr_mode_compile) {
+		f = fopen(ctr_mode_compile_save_as,"wb");
+	} else {
+		f = fopen("dump.ast","wb");
+	}
 	abook = (uintptr_t*) chunk;
 	if (!f) { printf("Unable to open file!"); exit(1); }
 	fwrite(chunk, sizeof(char), measure_code+measure, f);
@@ -44,7 +47,8 @@ ctr_tnode* ctr_serializer_unserialize() {
 	FILE *f;
 	int j=0;
 	void* ptr;
-	long s = fsize("dump.ast");
+	char* filename;
+	long s;
 	uintptr_t p; /* addressbook entry */
 	uintptr_t p2; /* corrected address entry */
 	uintptr_t ob; /* old base */
@@ -53,9 +57,16 @@ ctr_tnode* ctr_serializer_unserialize() {
 	uintptr_t otp; /* the old pointer (to be replaced) */
 	uintptr_t pe; /* pe */
 	uintptr_t sz;
+	filename = calloc(sizeof(char),255);
+	if (ctr_mode_load) {
+		filename = ctr_mode_input_file;
+	} else {
+		filename = "dump.ast";
+	}
+	s = fsize(filename);
 	np = calloc(sizeof(char),s);
 	if (!np) { printf("no memory.\n"); exit(1);}
-	f = fopen("dump.ast","rb");
+	f = fopen(filename,"rb");
 	fread(np, sizeof(char), s, f);
 	raw = np;
 	fclose(f);
@@ -85,6 +96,70 @@ ctr_tnode* ctr_serializer_unserialize() {
 int ctr_mode_debug = 0;
 ctr_object* error;
 
+
+/**
+ * CommandLine Display Welcome Message
+ * Displays a Welcome message, copyright information,
+ * version information and usage.
+ */
+void ctr_cli_welcome() {
+	printf("\n");
+	printf("Citrine Programming Language V 0.3.\n");
+	printf("\n");
+	printf("--------------------------------------------------\n");
+	printf("\n");
+	printf("Written by: Gabor de Mooij (c) copyright 2016, Licensed BSD.\n");
+	printf("Quick Usage Examples:\n");
+	printf("Run a CTR file (interpreter): ctr file \n");
+	printf("Compile to binary AST       : ctr -c outputfile file \n");
+	printf("Run an AST                  : ctr -r file \n");
+	printf("Roundtrip (for testing)     : ctr -j file \n");
+	printf("\n");
+	printf("--------------------------------------------------\n");
+	printf("\n");
+	printf("For more information enter  : man ctr \n");
+	printf("Or visit the website: http://citrine-lang.org.\n");
+	printf("\n");
+}
+
+
+
+/**
+ * CommandLine Read Arguments
+ * Parses command line arguments and sets global settings accordingly.
+ */
+void ctr_cli_read_args(int argc, char* argv[]) {
+	int bflag, option_symbol, fd; 
+	bflag = 0; 
+	while ((option_symbol = getopt(argc, argv, "c:rj")) != -1) { 
+		switch (option_symbol) { 
+			case 'c':
+				ctr_mode_compile = 1;
+				ctr_mode_compile_save_as = calloc(sizeof(char), 255);
+				strlcpy(ctr_mode_compile_save_as, optarg, 254);
+				break; 
+			case 'r':
+				ctr_mode_load = 1;
+				break;
+			case 'j':
+				ctr_mode_roundtrip = 1;
+				break;
+			default: 
+				ctr_cli_welcome();
+				exit(0);
+				break;
+		} 
+	}
+	
+	if (argc == 1) {
+		ctr_cli_welcome();
+		exit(0);
+	}
+	
+	ctr_mode_input_file = (char*) calloc(sizeof(char), 255);
+	strlcpy(ctr_mode_input_file, argv[optind], 254);
+}
+
 int main(int argc, char* argv[]) {
 	char* prg;
 	int k;
@@ -96,30 +171,36 @@ int main(int argc, char* argv[]) {
 	ctr_mode_compile = 0;
 	ctr_mode_roundtrip = 0;
 	ctr_mode_load = 0;
-	if (argc < 2) {
-		printf("\nWelcome to Citrine v0.2\n");
-		printf("Written by Gabor de Mooij (c) copyright 2015\n");
-		printf("The Citrine Programming Language BSD license.\n------------------------\n\n");
-		printf("Usage: ctr mycode.ctr \n");
-		printf("Debugger: ctr mycode.ctr --debug\n\n");
-		exit(1);
+	ctr_cli_read_args(argc, argv);
+	if (ctr_mode_compile) {
+		prg = ctr_internal_readf(ctr_mode_input_file);
+		xallocmode = 0;
+		measure = 0;
+		program = ctr_dparse_parse(prg);
+		program = NULL;
+		xallocmode = 1;
+		chunk_ptr = 0;
+		chunk = 0;
+		program = ctr_dparse_parse(prg);
+		ctr_serializer_serialize(program);
+		free(chunk);
+		free(prg);
+		exit(0);
 	}
-	if (argc == 3) if (strcmp(argv[2],"--debug")==0) ctr_mode_debug = 1;
-	if (ctr_mode_debug == 1) printf("Debugger is ON.\n");
-	if (argc == 3) if (strcmp(argv[2],"--compile")==0) {
-		ctr_mode_compile = 1;
-		ctr_argc--;
+	else if (ctr_mode_load) {
+		xallocmode = 0;
+		chunk_ptr = 0;
+		chunk = 0;
+		abook = 0;
+		program = NULL;
+		program = ctr_serializer_unserialize();
+		ctr_initialize_world();
+		ctr_cwlk_run(program);
+		free(program);
+		exit(0);
 	}
-	if (argc == 3) if (strcmp(argv[2],"--load")==0) {
-		ctr_mode_load = 1;
-		ctr_argc--;
-	}
-	if (argc == 3) if (strcmp(argv[2],"--roundtrip")==0) {
-		ctr_mode_roundtrip = 1;
-		ctr_argc--;
-	}
-	if (ctr_mode_roundtrip) {
-		prg = ctr_internal_readf(argv[1]);
+	else if (ctr_mode_roundtrip) {
+		prg = ctr_internal_readf(ctr_mode_input_file);
 		xallocmode = 0;
 		measure = 0;
 		program = ctr_dparse_parse(prg);
@@ -139,11 +220,13 @@ int main(int argc, char* argv[]) {
 		ctr_cwlk_run(program);
 		exit(0);
 	} else {
-		prg = ctr_internal_readf(argv[1]);
+		prg = ctr_internal_readf(ctr_mode_input_file);
 		xallocmode = 0;
 		program = ctr_dparse_parse(prg);
 		ctr_initialize_world();
 		ctr_cwlk_run(program);
+		free(program);
 		exit(0);
 	}
+	return 0;
 }
