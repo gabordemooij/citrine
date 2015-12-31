@@ -136,7 +136,7 @@ void ctr_cli_read_args(int argc, char* argv[]) {
 			case 'c':
 				ctr_mode_compile = 1;
 				ctr_mode_compile_save_as = calloc(sizeof(char), 255);
-				strlcpy(ctr_mode_compile_save_as, optarg, 254);
+				strncpy(ctr_mode_compile_save_as, optarg, 254);
 				break; 
 			case 'r':
 				ctr_mode_load = 1;
