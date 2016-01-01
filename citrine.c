@@ -38,6 +38,8 @@ void ctr_serializer_serialize(ctr_tnode* t) {
 		f = fopen("dump.ast","wb");
 	}
 	abook = (uintptr_t*) chunk;
+	memcpy( chunk, &teller, sizeof teller );
+	
 	if (!f) { printf("Unable to open file!"); exit(1); }
 	fwrite(chunk, sizeof(char), measure_code+measure, f);
 	fclose(f);
@@ -45,7 +47,7 @@ void ctr_serializer_serialize(ctr_tnode* t) {
 
 ctr_tnode* ctr_serializer_unserialize() {
 	FILE *f;
-	int j=0;
+	uint64_t j=0;
 	void* ptr;
 	char* filename;
 	long s;
@@ -57,6 +59,7 @@ ctr_tnode* ctr_serializer_unserialize() {
 	uintptr_t otp; /* the old pointer (to be replaced) */
 	uintptr_t pe; /* pe */
 	uintptr_t sz;
+	int t = 0;
 	filename = calloc(sizeof(char),255);
 	if (ctr_mode_load) {
 		filename = ctr_mode_input_file;
@@ -72,6 +75,8 @@ ctr_tnode* ctr_serializer_unserialize() {
 	fclose(f);
 	abook = (uintptr_t*) np; /* set new pointer to loaded image */
 	cnt = (uint64_t) *(abook); /* first entry in address book is a 64bit number indicating the number of swizzles */
+	
+	/*printf("base = %p \n",np);*/
 	abook += 1;/*sizeof(uint64_t);(*/
 	sz = (uintptr_t) *(abook);
 	abook += 1;/*sizeof(uint64_t); /* move to next entry in addressbook */
@@ -86,10 +91,13 @@ ctr_tnode* ctr_serializer_unserialize() {
 		p = (uintptr_t) *(abook); /* p is an old address */
 		p2 = p - (uintptr_t) ob + (uintptr_t) np; /* subtract the base from p and add the new base */
 		otp = *((uintptr_t* )p2); /* retrieve the old pointer from p2 */
-		if (otp == 0) { continue; }
-		tp = otp - (uintptr_t) ob + (uintptr_t) np; /* correct the pointer for the new base address */
-		*((uintptr_t* )p2) = tp; /* replace the old pointer with the new one */
+		if (otp != 0) {
+			tp = otp - (uintptr_t) ob + (uintptr_t) np; /* correct the pointer for the new base address */
+			*((uintptr_t* )p2) = tp; /* replace the old pointer with the new one */
+		}
+	
 	}
+/*	printf("done!\n");*/
 	return (ctr_tnode*) pe;
 }
 
@@ -195,8 +203,8 @@ int main(int argc, char* argv[]) {
 		program = NULL;
 		program = ctr_serializer_unserialize();
 		ctr_initialize_world();
+		/*ctr_internal_debug_tree(program,0);*/
 		ctr_cwlk_run(program);
-		free(program);
 		exit(0);
 	}
 	else if (ctr_mode_roundtrip) {

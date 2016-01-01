@@ -22,7 +22,7 @@ for i in $(find tests -name '*.ctr'); do
 	fitem=$i
 	echo -n "$fitem compiled";
 	fexpect="${i: 0:-4}.exp"
-	result=`./ctr -j ${fitem}`
+	result=`./ctr -c /tmp/dump.ast ${fitem} ; ./ctr -r /tmp/dump.ast`
 	expected=`cat $fexpect`
 	if [ "$result" == "$expected" ]; then
 		echo "[$j]"

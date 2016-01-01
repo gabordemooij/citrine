@@ -275,3 +275,4 @@ char ctr_mode_load;
 char ctr_mode_roundtrip;
 char* ctr_mode_compile_save_as;
 char* ctr_mode_input_file;
+uint64_t teller;

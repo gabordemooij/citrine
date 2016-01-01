@@ -1,6 +1,11 @@
 (Command argCount) times: { i | 
-	((Command argument: i) != '-j') ifTrue: {\
-		Pen write: 'Argument:' + (Command argument: i).
+	((Command argument: i) != '-r') ifTrue: {\
+		(((Command argument: i) indexOf: '.ast') > -1) ifTrue: {\
+			Pen write: 'Found argument file.'.
+		}.
+		(((Command argument: i) indexOf: '.ctr') > -1) ifTrue: {\
+			Pen write: 'Found argument file.'.
+		}.
 	}.
 }.
 Pen write: (Command argument: 999).

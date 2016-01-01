@@ -24,7 +24,9 @@ char* xalloc(uintptr_t size, int what) {
 		return (char*) calloc(size,sizeof(char));
 	}
 	if (!chunk) {
-		chunk = (char*) calloc(measure_code+measure,sizeof(char));
+		teller = 0;
+		chunk = (char*) malloc((measure_code+measure)*sizeof(char));
+		for (i = 0; i<(measure_code+measure); i++) *chunk = 0;
 		if (!chunk) exit(1);
 		abook = (uintptr_t*) chunk;
 		chunk_ptr = measure;
@@ -43,17 +45,21 @@ char* xalloc(uintptr_t size, int what) {
 	beginBlock = chunk + chunk_ptr;
 	chunk_ptr += size;
 	xptr = beginBlock;
-	for(i=0; i<size; i++) { xptr[i] = 0; }
 	if (what == 1 || what == 2 || what == 3) {
 		if (what == 1 || what == 3) {
 			ctr_tnode tmp0;
 			ctr_tnode tmp;
 			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp0.value) - (uintptr_t) &tmp0);
 			*(chunk) = (uint64_t) *(chunk) + 1;
+			/*printf("No. of Swizzles %lu \n", (long) teller);*/
+			teller++;
 			abook += 1;
 			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp.nodes) - (uintptr_t) &tmp);
 			*(chunk) = (uint64_t) *(chunk) + 1;
+			/*printf("No. of Swizzles %lu \n", (long) teller);*/
+			teller++;
 			abook += 1;
+			
 		}
 		if (what == 2) {
 			ctr_tlistitem tmp2;
@@ -61,14 +67,20 @@ char* xalloc(uintptr_t size, int what) {
 			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp2.node) - (uintptr_t) &tmp2);
 			abook += 1;
 			*(chunk) = (uint64_t) *(chunk) + 1;
+			/*printf("No. of Swizzles %lu \n", (long) teller);*/
+			teller++;
 			*(abook) = (uintptr_t) 	xptr + (uintptr_t) ((uintptr_t) &(tmp3.next) - (uintptr_t) &tmp3);
 			abook += 1;
+			
 			*(chunk) = (uint64_t) *(chunk) + 1;
+			/*printf("No. of Swizzles %lu \n", (long) teller);*/
+			teller++;
 		}
 		if (what == 3) {
 			*(program_entry) = (uintptr_t) xptr;
 		}
 	}
+	
 	return xptr;
 }
 
