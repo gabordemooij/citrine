@@ -17,7 +17,7 @@ char* np; /* new memory */
 int fsize(char* x) {
   int size;
   FILE* fh;
-  fh = fopen("dump.ast", "rb");
+  fh = fopen(ctr_mode_input_file, "rb");
   if(fh != NULL){
     if( fseek(fh, 0, SEEK_END) ){
       fclose(fh);
@@ -32,14 +32,9 @@ int fsize(char* x) {
 
 void ctr_serializer_serialize(ctr_tnode* t) {
 	FILE *f;
-	if (ctr_mode_compile) {
-		f = fopen(ctr_mode_compile_save_as,"wb");
-	} else {
-		f = fopen("dump.ast","wb");
-	}
+	f = fopen(ctr_mode_compile_save_as,"wb");
 	abook = (uintptr_t*) chunk;
 	memcpy( chunk, &teller, sizeof teller );
-	
 	if (!f) { printf("Unable to open file!"); exit(1); }
 	fwrite(chunk, sizeof(char), measure_code+measure, f);
 	fclose(f);
@@ -49,8 +44,7 @@ ctr_tnode* ctr_serializer_unserialize() {
 	FILE *f;
 	uint64_t j=0;
 	void* ptr;
-	char* filename;
-	long s;
+	size_t s = 0;
 	uintptr_t p; /* addressbook entry */
 	uintptr_t p2; /* corrected address entry */
 	uintptr_t ob; /* old base */
@@ -60,16 +54,11 @@ ctr_tnode* ctr_serializer_unserialize() {
 	uintptr_t pe; /* pe */
 	uintptr_t sz;
 	int t = 0;
-	filename = calloc(sizeof(char),255);
-	if (ctr_mode_load) {
-		filename = ctr_mode_input_file;
-	} else {
-		filename = "dump.ast";
-	}
-	s = fsize(filename);
+	s = fsize(ctr_mode_input_file);
+	/*printf("Size = %lu \n",s);*/
 	np = calloc(sizeof(char),s);
 	if (!np) { printf("no memory.\n"); exit(1);}
-	f = fopen(filename,"rb");
+	f = fopen(ctr_mode_input_file,"rb");
 	fread(np, sizeof(char), s, f);
 	raw = np;
 	fclose(f);
@@ -139,7 +128,7 @@ void ctr_cli_welcome() {
 void ctr_cli_read_args(int argc, char* argv[]) {
 	int bflag, option_symbol, fd; 
 	bflag = 0; 
-	while ((option_symbol = getopt(argc, argv, "c:rj")) != -1) { 
+	while ((option_symbol = getopt(argc, argv, "c:r")) != -1) { 
 		switch (option_symbol) { 
 			case 'c':
 				ctr_mode_compile = 1;
@@ -148,9 +137,6 @@ void ctr_cli_read_args(int argc, char* argv[]) {
 				break; 
 			case 'r':
 				ctr_mode_load = 1;
-				break;
-			case 'j':
-				ctr_mode_roundtrip = 1;
 				break;
 			default: 
 				ctr_cli_welcome();
@@ -207,27 +193,7 @@ int main(int argc, char* argv[]) {
 		ctr_cwlk_run(program);
 		exit(0);
 	}
-	else if (ctr_mode_roundtrip) {
-		prg = ctr_internal_readf(ctr_mode_input_file);
-		xallocmode = 0;
-		measure = 0;
-		program = ctr_dparse_parse(prg);
-		program = NULL;
-		xallocmode = 1;
-		chunk_ptr = 0;
-		chunk = 0;
-		program = ctr_dparse_parse(prg);
-		ctr_serializer_serialize(program);
-		free(chunk);
-		abook = 0;
-		chunk_ptr = 0;
-		program = NULL;
-		xallocmode = 0;
-		program = ctr_serializer_unserialize();
-		ctr_initialize_world();
-		ctr_cwlk_run(program);
-		exit(0);
-	} else {
+	else {
 		prg = ctr_internal_readf(ctr_mode_input_file);
 		xallocmode = 0;
 		program = ctr_dparse_parse(prg);
