@@ -1,0 +1,7 @@
+#Can we load AST modules dynamically?
+Pen write: 'Running'.
+Pen brk.
+f := (File new: '/tmp/dynamic_module.ast').
+externalVar := 'module'.
+f go.
+Pen write: 'Ok done', brk.

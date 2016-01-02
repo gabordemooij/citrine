@@ -725,6 +725,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("size", 4), &ctr_file_size);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("delete", 6), &ctr_file_delete);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("include", 7), &ctr_file_include);
+	ctr_internal_create_func(CtrStdFile, ctr_build_string("go", 2), &ctr_file_include_ast);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("File", 4), CtrStdFile, 0);
 	CtrStdFile->link = CtrStdObject;
 

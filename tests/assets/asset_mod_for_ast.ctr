@@ -1,0 +1,6 @@
+#To be loaded in test no95.
+Pen write: 'Hello World'.
+Pen brk.
+Pen write: 'Greetings from a'.
+Pen brk.
+Pen write: 'Dynamically ' + 'loaded ' + externalVar, brk.

@@ -1,7 +1,10 @@
 #!/bin/bash
 ./mk.sh
+
+./ctr -c /tmp/dynamic_module.ast tests/assets/asset_mod_for_ast.ctr
+
 j=1
-for i in $(find tests -name '*.ctr'); do
+for i in $(find tests -name 'test*.ctr'); do
 	fitem=$i
 	echo -n "$fitem interpret";
 	fexpect="${i: 0:-4}.exp"
@@ -39,4 +42,7 @@ for i in $(find tests -name '*.ctr'); do
 done
 echo ""
 echo "All tests passed."
+
+rm /tmp/dynamic_module.ast
+
 exit 0

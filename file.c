@@ -167,6 +167,28 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * FileIncludeAST
+ *
+ * Includes the file as a piece of executable code.
+ */
+ctr_object* ctr_file_include_ast(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+	ctr_tnode* parsedCode;
+	ctr_size vlen;
+	char* pathString;
+	char* prg;
+	if (path == NULL) return ctr_build_bool(0);
+	vlen = path->value.svalue->vlen;
+	pathString = malloc(vlen + 1);
+	memcpy(pathString, path->value.svalue->value, vlen);
+	memcpy(pathString+vlen,"\0",1);
+	ctr_mode_input_file = pathString; /* @todo fix this */
+	parsedCode = ctr_serializer_unserialize();
+	ctr_cwlk_run(parsedCode);
+	return myself;
+}
+
+/**
  * FileDelete
  *
  * Deletes the file.
