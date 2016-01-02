@@ -55,7 +55,6 @@ ctr_tnode* ctr_serializer_unserialize() {
 	uintptr_t sz;
 	int t = 0;
 	s = fsize(ctr_mode_input_file);
-	/*printf("Size = %lu \n",s);*/
 	np = calloc(sizeof(char),s);
 	if (!np) { printf("no memory.\n"); exit(1);}
 	f = fopen(ctr_mode_input_file,"rb");
@@ -64,8 +63,6 @@ ctr_tnode* ctr_serializer_unserialize() {
 	fclose(f);
 	abook = (uintptr_t*) np; /* set new pointer to loaded image */
 	cnt = (uint64_t) *(abook); /* first entry in address book is a 64bit number indicating the number of swizzles */
-	
-	/*printf("base = %p \n",np);*/
 	abook += 1;/*sizeof(uint64_t);(*/
 	sz = (uintptr_t) *(abook);
 	abook += 1;/*sizeof(uint64_t); /* move to next entry in addressbook */
@@ -86,7 +83,6 @@ ctr_tnode* ctr_serializer_unserialize() {
 		}
 	
 	}
-/*	printf("done!\n");*/
 	return (ctr_tnode*) pe;
 }
 
@@ -187,7 +183,6 @@ int main(int argc, char* argv[]) {
 		program = NULL;
 		program = ctr_serializer_unserialize();
 		ctr_initialize_world();
-		/*ctr_internal_debug_tree(program,0);*/
 		ctr_cwlk_run(program);
 		exit(0);
 	}

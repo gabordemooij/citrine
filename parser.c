@@ -33,10 +33,8 @@ char* xalloc(uintptr_t size, int what) {
 		*(abook) = (uint64_t) 0; /* number of swizzles */
 		abook += 1; /*sizeof(uint64_t);*/
 		*(abook) = (uint64_t) chunk_ptr; /* size of address book, measured */
-		/*printf("Add measurement to addressbook as size: %lu \n", chunk_ptr);*/
 		abook += 1; /*sizeof(uint64_t);*/
 		*(abook) = (uintptr_t) chunk; /* start of memory block */
-		/*printf("Old base starts at: %p \n", chunk);*/
 		abook += 1;/*sizeof(uintptr_t);*/
 		*(abook) = (uint64_t) 0; /* program entry (chunk address + offset addressbook size) */
 		program_entry = abook;
@@ -51,12 +49,10 @@ char* xalloc(uintptr_t size, int what) {
 			ctr_tnode tmp;
 			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp0.value) - (uintptr_t) &tmp0);
 			*(chunk) = (uint64_t) *(chunk) + 1;
-			/*printf("No. of Swizzles %lu \n", (long) teller);*/
 			teller++;
 			abook += 1;
 			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp.nodes) - (uintptr_t) &tmp);
 			*(chunk) = (uint64_t) *(chunk) + 1;
-			/*printf("No. of Swizzles %lu \n", (long) teller);*/
 			teller++;
 			abook += 1;
 			
@@ -67,13 +63,10 @@ char* xalloc(uintptr_t size, int what) {
 			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp2.node) - (uintptr_t) &tmp2);
 			abook += 1;
 			*(chunk) = (uint64_t) *(chunk) + 1;
-			/*printf("No. of Swizzles %lu \n", (long) teller);*/
 			teller++;
 			*(abook) = (uintptr_t) 	xptr + (uintptr_t) ((uintptr_t) &(tmp3.next) - (uintptr_t) &tmp3);
 			abook += 1;
-			
 			*(chunk) = (uint64_t) *(chunk) + 1;
-			/*printf("No. of Swizzles %lu \n", (long) teller);*/
 			teller++;
 		}
 		if (what == 3) {
