@@ -24,7 +24,7 @@ char* xalloc(uintptr_t size, int what) {
 		return (char*) calloc(size,sizeof(char));
 	}
 	if (!chunk) {
-		teller = 0;
+		ctr_num_of_pointer_swizzles = 0;
 		chunk = (char*) malloc((measure_code+measure)*sizeof(char));
 		for (i = 0; i<(measure_code+measure); i++) *chunk = 0;
 		if (!chunk) exit(1);
@@ -49,11 +49,11 @@ char* xalloc(uintptr_t size, int what) {
 			ctr_tnode tmp;
 			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp0.value) - (uintptr_t) &tmp0);
 			*(chunk) = (uint64_t) *(chunk) + 1;
-			teller++;
+			ctr_num_of_pointer_swizzles++;
 			abook += 1;
 			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp.nodes) - (uintptr_t) &tmp);
 			*(chunk) = (uint64_t) *(chunk) + 1;
-			teller++;
+			ctr_num_of_pointer_swizzles++;
 			abook += 1;
 			
 		}
@@ -63,11 +63,11 @@ char* xalloc(uintptr_t size, int what) {
 			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp2.node) - (uintptr_t) &tmp2);
 			abook += 1;
 			*(chunk) = (uint64_t) *(chunk) + 1;
-			teller++;
+			ctr_num_of_pointer_swizzles++;
 			*(abook) = (uintptr_t) 	xptr + (uintptr_t) ((uintptr_t) &(tmp3.next) - (uintptr_t) &tmp3);
 			abook += 1;
 			*(chunk) = (uint64_t) *(chunk) + 1;
-			teller++;
+			ctr_num_of_pointer_swizzles++;
 		}
 		if (what == 3) {
 			*(program_entry) = (uintptr_t) xptr;

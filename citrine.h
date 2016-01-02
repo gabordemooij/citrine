@@ -275,4 +275,4 @@ char ctr_mode_compile;
 char ctr_mode_load;
 char* ctr_mode_compile_save_as;
 char* ctr_mode_input_file;
-uint64_t teller;
+uint64_t ctr_num_of_pointer_swizzles;

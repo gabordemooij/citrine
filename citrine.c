@@ -34,7 +34,7 @@ void ctr_serializer_serialize(ctr_tnode* t) {
 	FILE *f;
 	f = fopen(ctr_mode_compile_save_as,"wb");
 	abook = (uintptr_t*) chunk;
-	memcpy( chunk, &teller, sizeof teller );
+	memcpy( chunk, &ctr_num_of_pointer_swizzles, sizeof ctr_num_of_pointer_swizzles );
 	if (!f) { printf("Unable to open file!"); exit(1); }
 	fwrite(chunk, sizeof(char), measure_code+measure, f);
 	fclose(f);
