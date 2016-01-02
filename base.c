@@ -516,7 +516,6 @@ ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* arguments;
 	int t;
 	int i;
-	char* nstr;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) { printf("Expected code block."); exit(1); }
 	block->info.sticky = 1;
 	t = myself->value.nvalue;

@@ -176,7 +176,6 @@ ctr_object* ctr_file_include_ast(ctr_object* myself, ctr_argument* argumentList)
 	ctr_tnode* parsedCode;
 	ctr_size vlen;
 	char* pathString;
-	char* prg;
 	if (path == NULL) return ctr_build_bool(0);
 	vlen = path->value.svalue->vlen;
 	pathString = malloc(vlen + 1);

@@ -77,7 +77,6 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		ctr_argument* a;
 		ctr_argument* aItem;
 		ctr_size l;
-		int k;
 		li = li->next;
 		msgnode = li->node;
 		message = msgnode->value;

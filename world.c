@@ -123,7 +123,6 @@ char* ctr_internal_readf(char* file_name) {
  */
 void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
 	char* str;
-	int i =0;
 	ctr_tlistitem* li;
 	ctr_tnode* t;
 	if (indent>20) exit(1); 
@@ -151,15 +150,9 @@ void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
 		else if (t->type == CTR_AST_NODE_LTRBOOLTRUE)	str = "BLTRUE\0";
 		else if (t->type == CTR_AST_NODE_LTRNIL)	        str = "LTRNIL\0";
 		else 								str = "UNKNW?\0";
-		printf("%d:%s (vlen: %lu) %d %p  \n", t->type, str,t->vlen, t->modifier, t);
 		if (t->nodes) ctr_internal_debug_tree(t, indent + 1);
 		if (!li->next) break; 
 		li = li->next;
-		for(i=0; i<10; i++) {
-			printf("%x ", *(((char*) t)+i));
-		}
-		printf("%p ", &li);
-		printf("%p \n", &li->next);
 		t = li->node;
 	}
 }
@@ -841,8 +834,6 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
  */
 ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 	ctr_object* object;
-	ctr_object* putValue;
-	int i;
 	key->info.sticky = 0;
 	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC || o->info.type == CTR_OBJECT_TYPE_OTARRAY) {
 		ctr_set(key, o);
@@ -878,8 +869,6 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
  */
 ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 	ctr_object* object;
-	ctr_object* putValue;
-	int i;
 	ctr_object* my = ctr_find(ctr_build_string("me", 2));
 	key->info.sticky = 0;
 	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC || o->info.type == CTR_OBJECT_TYPE_OTARRAY) {
@@ -915,9 +904,7 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
  */
 ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* o) {
 	ctr_object* object;
-	ctr_object* putValue;
 	ctr_object* context;
-	int i;
 	context = ctr_contexts[ctr_context_id];
 	key->info.sticky = 0;
 	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC || o->info.type == CTR_OBJECT_TYPE_OTARRAY) {

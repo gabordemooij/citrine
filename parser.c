@@ -11,13 +11,10 @@
 ctr_tnode* ctr_cparse_expr(int mode);
 ctr_tnode* ctr_cparse_ret();
 
-int xcnt = 0;
 char* xalloc(uintptr_t size, int what) {
-	uintptr_t address;
 	char* beginBlock;
 	char* xptr;
 	int i= 0;
-	int rel = 0;
 	if (xallocmode == 0) {
 		measure += (sizeof(uintptr_t) * 2);
 		measure_code += size;
@@ -549,7 +546,6 @@ ctr_tnode* ctr_cparse_assignment(ctr_tnode* r) {
  * Generates a set of nodes to represent an expression.
  */
 ctr_tnode* ctr_cparse_expr(int mode) {
-	int j;
 	ctr_tnode* r;
 	ctr_tnode* e;
 	int t2;
@@ -649,7 +645,6 @@ ctr_tnode* ctr_cparse_program() {
 	ctr_tnode* program = CTR_PARSER_CREATE_PROGRAM_NODE();
 	ctr_tlistitem* pli;
 	int first = 1;
-	program->type = 0xfa;
 	while(1) {
 		ctr_tlistitem* li = ctr_cparse_statement();
 		if (first) {

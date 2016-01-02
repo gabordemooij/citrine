@@ -43,7 +43,6 @@ void ctr_serializer_serialize(ctr_tnode* t) {
 ctr_tnode* ctr_serializer_unserialize() {
 	FILE *f;
 	uint64_t j=0;
-	void* ptr;
 	size_t s = 0;
 	uintptr_t p; /* addressbook entry */
 	uintptr_t p2; /* corrected address entry */
@@ -53,7 +52,6 @@ ctr_tnode* ctr_serializer_unserialize() {
 	uintptr_t otp; /* the old pointer (to be replaced) */
 	uintptr_t pe; /* pe */
 	uintptr_t sz;
-	int t = 0;
 	s = fsize(ctr_mode_input_file);
 	np = calloc(sizeof(char),s);
 	if (!np) { printf("no memory.\n"); exit(1);}
@@ -63,9 +61,9 @@ ctr_tnode* ctr_serializer_unserialize() {
 	fclose(f);
 	abook = (uintptr_t*) np; /* set new pointer to loaded image */
 	cnt = (uint64_t) *(abook); /* first entry in address book is a 64bit number indicating the number of swizzles */
-	abook += 1;/*sizeof(uint64_t);(*/
+	abook += 1;
 	sz = (uintptr_t) *(abook);
-	abook += 1;/*sizeof(uint64_t); /* move to next entry in addressbook */
+	abook += 1; /* move to next entry in addressbook */
 	ob = (uintptr_t) *(abook); /* second entry in address book is the old base address to use for swizzling */
 	abook += 1;
 	pe = (uintptr_t) *(abook); /* program entry point */
@@ -73,7 +71,7 @@ ctr_tnode* ctr_serializer_unserialize() {
 	pe = pe + (uintptr_t) np;
 	/* perform pointer swizzling to restore the tree from the image */
 	for(j = 0; j<cnt; j++) {
-		abook += 1; /*sizeof(uintptr_t); /* take an address from the book */
+		abook += 1; /* take an address from the book */
 		p = (uintptr_t) *(abook); /* p is an old address */
 		p2 = p - (uintptr_t) ob + (uintptr_t) np; /* subtract the base from p and add the new base */
 		otp = *((uintptr_t* )p2); /* retrieve the old pointer from p2 */
@@ -121,8 +119,7 @@ void ctr_cli_welcome() {
  * Parses command line arguments and sets global settings accordingly.
  */
 void ctr_cli_read_args(int argc, char* argv[]) {
-	int bflag, option_symbol, fd; 
-	bflag = 0; 
+	int option_symbol; 
 	while ((option_symbol = getopt(argc, argv, "c:r")) != -1) { 
 		switch (option_symbol) { 
 			case 'c':
@@ -151,7 +148,6 @@ void ctr_cli_read_args(int argc, char* argv[]) {
 
 int main(int argc, char* argv[]) {
 	char* prg;
-	int k;
 	ctr_tnode* program;
 	ctr_argc = argc;
 	ctr_argv = argv;
