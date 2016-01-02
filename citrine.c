@@ -162,7 +162,6 @@ int main(int argc, char* argv[]) {
 	error = NULL;
 	chunk_ptr = 0;
 	ctr_mode_compile = 0;
-	ctr_mode_roundtrip = 0;
 	ctr_mode_load = 0;
 	ctr_cli_read_args(argc, argv);
 	if (ctr_mode_compile) {
