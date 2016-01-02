@@ -110,7 +110,6 @@ void ctr_cli_welcome() {
 	printf("Run a CTR file (interpreter): ctr file \n");
 	printf("Compile to binary AST       : ctr -c outputfile file \n");
 	printf("Run an AST                  : ctr -r file \n");
-	printf("Roundtrip (for testing)     : ctr -j file \n");
 	printf("\n");
 	printf("--------------------------------------------------\n");
 	printf("\n");
