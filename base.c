@@ -1,3 +1,15 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdarg.h>
+#include <math.h>
+#include <unistd.h>
+#include <stdint.h>
+#include <time.h>
+
+#include "citrine.h"
+#include "siphash.h"
 
 /**
  * Builds a Nil object.
@@ -333,8 +345,8 @@ ctr_object* ctr_number_inc(ctr_object* myself, ctr_argument* argumentList) {
 
 ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
-ctr_number a = myself->value.nvalue;
-ctr_number b = otherNum->value.nvalue;
+	ctr_number a = myself->value.nvalue;
+	ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float((a-b));
 }
 

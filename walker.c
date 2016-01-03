@@ -8,8 +8,6 @@
 
 #include "citrine.h"
 
-ctr_object* CtrStdError;
-
 /**
  * CTRWalkerReturn
  *

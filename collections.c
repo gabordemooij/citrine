@@ -1,3 +1,15 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdarg.h>
+#include <math.h>
+#include <unistd.h>
+#include <stdint.h>
+#include <time.h>
+
+#include "citrine.h"
+#include "siphash.h"
 
 /**
  * ArrayNew

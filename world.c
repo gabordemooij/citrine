@@ -11,34 +11,6 @@
 #include "citrine.h"
 #include "siphash.h"
 
-ctr_object* CtrStdWorld = NULL;
-ctr_object* ctr_contexts[100];
-int ctr_context_id = 0;
-ctr_object* CtrStdObject;
-ctr_object* CtrStdBlock;
-ctr_object* CtrStdString;
-ctr_object* CtrStdNumber;
-ctr_object* CtrStdBool;
-ctr_object* CtrStdConsole;
-ctr_object* CtrStdNil;
-ctr_object* CtrStdGC;
-ctr_object* CtrStdMap;
-ctr_object* CtrStdArray;
-ctr_object* CtrStdFile;
-ctr_object* CtrStdError;
-ctr_object* CtrStdSystem;
-ctr_object* CtrStdDice;
-ctr_object* CtrStdCommand;
-ctr_object* CtrStdShell;
-ctr_object* CtrStdCoin;
-ctr_object* CtrStdClock;
-
-char CtrHashKey[16];
-
-int ctr_gc_dust_counter = 0;
-int ctr_gc_object_counter = 0;
-int ctr_mode_debug;
-
 /**
  * UTF8Size
  *
@@ -536,12 +508,6 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 	}
 	ctr_internal_object_set_property(context, key, object, 0);
 }
-
-
-#include "base.c"
-#include "system.c"
-#include "collections.c"
-#include "file.c"
 
 /**
  * WorldInitialize

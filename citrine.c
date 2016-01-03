@@ -84,8 +84,7 @@ ctr_tnode* ctr_serializer_unserialize() {
 	return (ctr_tnode*) pe;
 }
 
-int ctr_mode_debug = 0;
-ctr_object* error;
+
 
 
 /**
@@ -151,7 +150,6 @@ int main(int argc, char* argv[]) {
 	ctr_tnode* program;
 	ctr_argc = argc;
 	ctr_argv = argv;
-	error = NULL;
 	chunk_ptr = 0;
 	ctr_mode_compile = 0;
 	ctr_mode_load = 0;

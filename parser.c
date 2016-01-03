@@ -8,8 +8,7 @@
 
 #include "citrine.h"
 
-ctr_tnode* ctr_cparse_expr(int mode);
-ctr_tnode* ctr_cparse_ret();
+
 
 char* xalloc(uintptr_t size, int what) {
 	char* beginBlock;

@@ -1,4 +1,6 @@
 #!/bin/bash
+
+make clean;
 ./mk.sh
 
 ./ctr -c /tmp/dynamic_module.ast tests/assets/asset_mod_for_ast.ctr
