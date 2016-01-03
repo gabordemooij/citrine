@@ -230,6 +230,12 @@ char* ctr_mode_input_file;
 
 
 /**
+ * Memory Management functions
+ */
+char* xalloc(uintptr_t size, int what);
+void* rxalloc(void* oldptr, uintptr_t size, uintptr_t old_size, int what);
+
+/**
  * Memory Management variables
  */
 char*      chunk;
@@ -514,7 +520,7 @@ ctr_object* ctr_build_string_from_cstring( char* str );
 
 
 /**
- * Citrine Macros (temporary)
+ * Citrine Macros
  */
 #define CTR_DEBUG_STR(X,Y,L) if (ctr_mode_debug) {\
 	char* b = calloc(sizeof(char),L);\
@@ -525,9 +531,6 @@ ctr_object* ctr_build_string_from_cstring( char* str );
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='^'  && X!= ':' && X!= '\''
 #define CTR_CREATE_ARGUMENT() (ctr_argument*) calloc(sizeof(ctr_argument), 1)
-
-char* xalloc(uintptr_t size, int what);
-void* rxalloc(void* oldptr, uintptr_t size, uintptr_t old_size, int what);
 #define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) xalloc(sizeof(ctr_tlistitem), 2)
 #define	CTR_PARSER_CREATE_NODE() (ctr_tnode*) xalloc(sizeof(ctr_tnode), 1)
 #define	CTR_PARSER_CREATE_PROGRAM_NODE() (ctr_tnode*) xalloc(sizeof(ctr_tnode), 3)

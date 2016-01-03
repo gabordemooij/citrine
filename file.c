@@ -194,8 +194,7 @@ ctr_object* ctr_file_include_ast(ctr_object* myself, ctr_argument* argumentList)
 	pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
-	ctr_mode_input_file = pathString; /* @todo fix this */
-	parsedCode = ctr_serializer_unserialize();
+	parsedCode = ctr_serializer_unserialize(pathString);
 	ctr_cwlk_run(parsedCode);
 	return myself;
 }

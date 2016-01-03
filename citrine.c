@@ -12,12 +12,11 @@
 #include <unistd.h>
 #include "citrine.h"
 
-char* raw;
-char* np; /* new memory */
-int fsize(char* x) {
+char* np;
+int fsize(char* filename) {
   int size;
   FILE* fh;
-  fh = fopen(ctr_mode_input_file, "rb");
+  fh = fopen(filename, "rb");
   if(fh != NULL){
     if( fseek(fh, 0, SEEK_END) ){
       fclose(fh);
@@ -40,7 +39,7 @@ void ctr_serializer_serialize(ctr_tnode* t) {
 	fclose(f);
 }
 
-ctr_tnode* ctr_serializer_unserialize() {
+ctr_tnode* ctr_serializer_unserialize(char* filename) {
 	FILE *f;
 	uint64_t j=0;
 	size_t s = 0;
@@ -52,12 +51,11 @@ ctr_tnode* ctr_serializer_unserialize() {
 	uintptr_t otp; /* the old pointer (to be replaced) */
 	uintptr_t pe; /* pe */
 	uintptr_t sz;
-	s = fsize(ctr_mode_input_file);
+	s = fsize(filename);
 	np = calloc(sizeof(char),s);
 	if (!np) { printf("no memory.\n"); exit(1);}
-	f = fopen(ctr_mode_input_file,"rb");
+	f = fopen(filename,"rb");
 	fread(np, sizeof(char), s, f);
-	raw = np;
 	fclose(f);
 	abook = (uintptr_t*) np; /* set new pointer to loaded image */
 	cnt = (uint64_t) *(abook); /* first entry in address book is a 64bit number indicating the number of swizzles */
@@ -175,7 +173,7 @@ int main(int argc, char* argv[]) {
 		chunk = 0;
 		abook = 0;
 		program = NULL;
-		program = ctr_serializer_unserialize();
+		program = ctr_serializer_unserialize(ctr_mode_input_file);
 		ctr_initialize_world();
 		ctr_cwlk_run(program);
 		exit(0);
