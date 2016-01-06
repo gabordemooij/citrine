@@ -364,7 +364,6 @@ ctr_object* ctr_number_lowerEqThan(ctr_object* myself, ctr_argument* argumentLis
 ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_neq(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_factorial(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_ceil(ctr_object* myself, ctr_argument* argumentList);
@@ -417,6 +416,7 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my);
+ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList);
 
 
 /**
@@ -535,6 +535,26 @@ ctr_object* ctr_build_string_from_cstring( char* str );
 #define	CTR_PARSER_CREATE_NODE() (ctr_tnode*) xalloc(sizeof(ctr_tnode), 1)
 #define	CTR_PARSER_CREATE_PROGRAM_NODE() (ctr_tnode*) xalloc(sizeof(ctr_tnode), 3)
 #define ASSIGN_STRING(o,p,v,s) o->p = xalloc(s * sizeof(char), 0); memcpy( (char*) o->p,v,s);
+
+/**
+ * Creates a mirror call.
+ * A mirror call is a special macro for binary messages. For instance,
+ * blocks accept a * message for looping, however numbers accept the same message for
+ * multiplication with other numbers. When the user sends a * and a block to a number
+ * we want to be nice and reverse the call (hence mirror) instead of just casting the block
+ * to 0 and return 0 (pretty pointless).
+ * 
+ * @param T2     mirror type
+ * @param CNAME  name of the function
+ * @param TMPVAR name for temp. var
+ */
+#define CTR_MIRROR_CALL(T2, CNAME, TMPVAR) if (argumentList->object->info.type == T2) {\
+	ctr_argument* TMPVAR = CTR_CREATE_ARGUMENT();\
+	TMPVAR->object = myself;\
+	return CNAME(argumentList->object, TMPVAR);\
+}\
+
+
 #define CTR_CONVFP(s,x){\
 char *buf = calloc(100, sizeof(char));\
 char *p;\

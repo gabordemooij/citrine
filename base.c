@@ -357,9 +357,13 @@ ctr_object* ctr_number_dec(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
-ctr_number a = myself->value.nvalue;
-ctr_number b = otherNum->value.nvalue;
+	ctr_object* otherNum;
+	ctr_number a;
+	ctr_number b;
+	CTR_MIRROR_CALL(CTR_OBJECT_TYPE_OTBLOCK, ctr_block_times, mirror1);
+	otherNum = ctr_internal_cast2number(argumentList->object);
+	a = myself->value.nvalue;
+	b = otherNum->value.nvalue;
 	return ctr_build_number_from_float(a*b);
 }
 
@@ -512,34 +516,6 @@ ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList
  */
 ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (ctr_number) myself->value.bvalue );
-}
-
-/**
- * Times
- *
- * Runs the specified code block N times.
- *
- * Usage:
- * 7 times: { ... }.
- */
-ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* indexNumber;
-	ctr_object* block = argumentList->object;
-	ctr_argument* arguments;
-	int t;
-	int i;
-	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) { printf("Expected code block."); exit(1); }
-	block->info.sticky = 1;
-	t = myself->value.nvalue;
-	for(i=0; i<t; i++) {
-		indexNumber = ctr_build_number_from_float((ctr_number) i);
-		arguments = CTR_CREATE_ARGUMENT();
-		arguments->object = indexNumber;
-		ctr_block_run(block, arguments, block);
-	}
-	block->info.mark = 0;
-	block->info.sticky = 0;
-	return myself;
 }
 
 /**
@@ -1035,6 +1011,34 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 		}
 	}
 	return result;
+}
+
+/**
+ * BlockTimes
+ *
+ * Runs the specified code block N times.
+ *
+ * Usage:
+ * { ... } * 7.
+ */
+ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* indexNumber;
+	ctr_object* block = myself;
+	ctr_argument* arguments;
+	int t;
+	int i;
+	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) { printf("Expected code block."); exit(1); }
+	block->info.sticky = 1;
+	t = ctr_internal_cast2number(argumentList->object)->value.nvalue;
+	for(i=0; i<t; i++) {
+		indexNumber = ctr_build_number_from_float((ctr_number) i);
+		arguments = CTR_CREATE_ARGUMENT();
+		arguments->object = indexNumber;
+		ctr_block_run(block, arguments, block);
+	}
+	block->info.mark = 0;
+	block->info.sticky = 0;
+	return myself;
 }
 
 /**
