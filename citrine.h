@@ -118,7 +118,7 @@ typedef struct ctr_argument ctr_argument;
  * AST header
  */
 struct ctr_ast_header {
-	char      version[10]; /* version string */
+	char      version; /* version */
 	uint64_t  num_of_swizzles; /* number of pointer swizzles */
 	size_t    size_of_address_book; /* size of the addressbook for swizzl'n */
 	uintptr_t start_block; /* old pointer, start of the original memory block */

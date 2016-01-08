@@ -162,7 +162,7 @@ int main(int argc, char* argv[]) {
 	if (ctr_mode_compile) {
 		prg = ctr_internal_readf(ctr_mode_input_file);
 		xallocmode = 0;
-		measure = sizeof(ctr_ast_header);
+		measure = 0;/* sizeof(ctr_ast_header);/**/
 		program = ctr_dparse_parse(prg);
 		program = NULL;
 		xallocmode = 1;

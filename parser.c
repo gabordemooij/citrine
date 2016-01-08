@@ -20,10 +20,11 @@ char* xalloc(uintptr_t size, int what) {
 		return (char*) calloc(size,sizeof(char));
 	}
 	if (!chunk) {
-		ctr_default_header = malloc(sizeof(ctr_default_header));
-		strncpy(ctr_default_header->version, "CTR.00001", 10);
+		/*ctr_default_header = malloc(sizeof(ctr_default_header));*/
+		/*strncpy(ctr_default_header->version, "CTR.000001", 10);*/
+		/*ctr_default_header->version = 1;*/
 		ctr_num_of_pointer_swizzles = 0;
-		ctr_default_header->num_of_swizzles = 0;
+		/*ctr_default_header->num_of_swizzles = 0;*/
 		chunk = (char*) malloc((measure_code+measure)*sizeof(char));
 		for (i = 0; i<(measure_code+measure); i++) *chunk = 0;
 		if (!chunk) exit(1);
@@ -32,13 +33,13 @@ char* xalloc(uintptr_t size, int what) {
 		*(abook) = (uint64_t) 0; /* number of swizzles */
 		abook += 1; /*sizeof(uint64_t);*/
 		*(abook) = (uint64_t) chunk_ptr; /* size of address book, measured */
-		ctr_default_header->size_of_address_book = chunk_ptr;
+		/*ctr_default_header->size_of_address_book = chunk_ptr;*/
 		abook += 1; /*sizeof(uint64_t);*/
 		*(abook) = (uintptr_t) chunk; /* start of memory block */
-		ctr_default_header->start_block = (uintptr_t) chunk;
+		/*ctr_default_header->start_block = (uintptr_t) chunk;*/
 		abook += 1;/*sizeof(uintptr_t);*/
 		*(abook) = (uint64_t) 0; /* program entry (chunk address + offset addressbook size) */
-		ctr_default_header->program_entry_point = (uintptr_t) abook;
+		/*ctr_default_header->program_entry_point = (uintptr_t) abook;*/
 		program_entry = abook;
 		abook += 1;
 	}
@@ -52,12 +53,12 @@ char* xalloc(uintptr_t size, int what) {
 			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp0.value) - (uintptr_t) &tmp0);
 			*(chunk) = (uint64_t) *(chunk) + 1;
 			ctr_num_of_pointer_swizzles++;
-			ctr_default_header->num_of_swizzles++;
+			/*ctr_default_header->num_of_swizzles++;*/
 			abook += 1;
 			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp.nodes) - (uintptr_t) &tmp);
 			*(chunk) = (uint64_t) *(chunk) + 1;
 			ctr_num_of_pointer_swizzles++;
-			ctr_default_header->num_of_swizzles++;
+			/*ctr_default_header->num_of_swizzles++;*/
 			abook += 1;
 			
 		}
@@ -68,12 +69,12 @@ char* xalloc(uintptr_t size, int what) {
 			abook += 1;
 			*(chunk) = (uint64_t) *(chunk) + 1;
 			ctr_num_of_pointer_swizzles++;
-			ctr_default_header->num_of_swizzles++;
+			/*ctr_default_header->num_of_swizzles++;*/
 			*(abook) = (uintptr_t) 	xptr + (uintptr_t) ((uintptr_t) &(tmp3.next) - (uintptr_t) &tmp3);
 			abook += 1;
 			*(chunk) = (uint64_t) *(chunk) + 1;
 			ctr_num_of_pointer_swizzles++;
-			ctr_default_header->num_of_swizzles++;
+			/*ctr_default_header->num_of_swizzles++;*/
 		}
 		if (what == 3) {
 			*(program_entry) = (uintptr_t) xptr;
