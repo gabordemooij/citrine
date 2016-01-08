@@ -34,6 +34,10 @@ void ctr_serializer_serialize(ctr_tnode* t) {
 	f = fopen(ctr_mode_compile_save_as,"wb");
 	abook = (uintptr_t*) chunk;
 	memcpy( chunk, &ctr_num_of_pointer_swizzles, sizeof ctr_num_of_pointer_swizzles );
+	
+	
+	/*memcpy( chunk+measure, ctr_default_header, sizeof(ctr_ast_header));/**/
+	
 	if (!f) { printf("Unable to open file!"); exit(1); }
 	fwrite(chunk, sizeof(char), measure_code+measure, f);
 	fclose(f);
@@ -57,6 +61,9 @@ ctr_tnode* ctr_serializer_unserialize(char* filename) {
 	f = fopen(filename,"rb");
 	fread(np, sizeof(char), s, f);
 	fclose(f);
+	
+	
+	
 	abook = (uintptr_t*) np; /* set new pointer to loaded image */
 	cnt = (uint64_t) *(abook); /* first entry in address book is a 64bit number indicating the number of swizzles */
 	abook += 1;
@@ -155,7 +162,7 @@ int main(int argc, char* argv[]) {
 	if (ctr_mode_compile) {
 		prg = ctr_internal_readf(ctr_mode_input_file);
 		xallocmode = 0;
-		measure = 0;
+		measure = sizeof(ctr_ast_header);
 		program = ctr_dparse_parse(prg);
 		program = NULL;
 		xallocmode = 1;

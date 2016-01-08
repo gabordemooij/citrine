@@ -114,6 +114,18 @@ struct ctr_argument {
 };
 typedef struct ctr_argument ctr_argument;
 
+/**
+ * AST header
+ */
+struct ctr_ast_header {
+	char      version[10]; /* version string */
+	uint64_t  num_of_swizzles; /* number of pointer swizzles */
+	size_t    size_of_address_book; /* size of the addressbook for swizzl'n */
+	uintptr_t start_block; /* old pointer, start of the original memory block */
+	uintptr_t program_entry_point; /* original start address of program */
+};
+typedef struct ctr_ast_header* ctr_ast_header;
+
 
 /**
  * Root Object
@@ -246,6 +258,7 @@ int        xallocmode;
 uint64_t   measure;
 uint64_t   measure_code;
 uint64_t   ctr_num_of_pointer_swizzles;
+ctr_ast_header ctr_default_header;
 
 /**
  * Serializer functions
