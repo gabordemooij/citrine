@@ -5,88 +5,83 @@
 #include <stdarg.h>
 #include <math.h>
 #include <stdint.h>
-
 #include "citrine.h"
 
-
-
-char* xalloc(uintptr_t size, int what) {
+/**
+ * Memory Management Allocate
+ * Allocates a block of memory of a certain size
+ * for a specified purpose.
+ *
+ * List of purposes (what parameter):
+ *
+ * 0: binary block, just allocate
+ * 1: allocate memory for tree node for AST serialization, adds to addressbook
+ * 2: allocate memory for tree list for AST serialization, adds to addressbook
+ * 3: allocate memory for program entry point (PEP) for AST, adds to addressbook
+ */
+char* ctr_malloc(uintptr_t size, int what) {
 	char* beginBlock;
 	char* xptr;
-	int i= 0;
-	if (xallocmode == 0) {
-		measure += (sizeof(uintptr_t) * 2);
-		measure_code += size;
+	if (ctr_malloc_mode == 0) {
+		ctr_malloc_measured_size_addressbook += (sizeof(uintptr_t) * 2);
+		ctr_malloc_measured_size_code += size;
 		return (char*) calloc(size,sizeof(char));
 	}
-	if (!chunk) {
-		/*ctr_default_header = malloc(sizeof(ctr_default_header));*/
-		/*strncpy(ctr_default_header->version, "CTR.000001", 10);*/
-		/*ctr_default_header->version = 1;*/
-		ctr_num_of_pointer_swizzles = 0;
-		/*ctr_default_header->num_of_swizzles = 0;*/
-		chunk = (char*) malloc((measure_code+measure)*sizeof(char));
-		for (i = 0; i<(measure_code+measure); i++) *chunk = 0;
-		if (!chunk) exit(1);
-		abook = (uintptr_t*) chunk;
-		chunk_ptr = measure;
-		*(abook) = (uint64_t) 0; /* number of swizzles */
-		abook += 1; /*sizeof(uint64_t);*/
-		*(abook) = (uint64_t) chunk_ptr; /* size of address book, measured */
-		/*ctr_default_header->size_of_address_book = chunk_ptr;*/
-		abook += 1; /*sizeof(uint64_t);*/
-		*(abook) = (uintptr_t) chunk; /* start of memory block */
-		/*ctr_default_header->start_block = (uintptr_t) chunk;*/
-		abook += 1;/*sizeof(uintptr_t);*/
-		*(abook) = (uint64_t) 0; /* program entry (chunk address + offset addressbook size) */
-		/*ctr_default_header->program_entry_point = (uintptr_t) abook;*/
-		program_entry = abook;
-		abook += 1;
+	if (!ctr_malloc_chunk) {
+		ctr_default_header = malloc(sizeof(ctr_ast_header));
+		strncpy(ctr_default_header->version,"CITR000001",10);
+		ctr_default_header->num_of_swizzles = 0;
+		ctr_malloc_chunk = (char*) malloc((ctr_malloc_measured_size_code+ctr_malloc_measured_size_addressbook)*sizeof(char));
+		if (!ctr_malloc_chunk) exit(1);
+		ctr_malloc_chunk_pointer = ctr_malloc_measured_size_addressbook;
+		ctr_default_header->size_of_address_book = ctr_malloc_measured_size_addressbook;/*<----*/
+		ctr_malloc_swizzle_adressbook = ((uintptr_t*) (ctr_malloc_chunk + sizeof(ctr_ast_header)));
+		ctr_default_header->start_block = (uintptr_t) ctr_malloc_chunk;
+		ctr_default_header->program_entry_point = 0;
 	}
-	beginBlock = chunk + chunk_ptr;
-	chunk_ptr += size;
+	beginBlock = ctr_malloc_chunk + ctr_malloc_chunk_pointer;
+	ctr_malloc_chunk_pointer += size;
 	xptr = beginBlock;
 	if (what == 1 || what == 2 || what == 3) {
 		if (what == 1 || what == 3) {
 			ctr_tnode tmp0;
 			ctr_tnode tmp;
-			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp0.value) - (uintptr_t) &tmp0);
-			*(chunk) = (uint64_t) *(chunk) + 1;
-			ctr_num_of_pointer_swizzles++;
-			/*ctr_default_header->num_of_swizzles++;*/
-			abook += 1;
-			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp.nodes) - (uintptr_t) &tmp);
-			*(chunk) = (uint64_t) *(chunk) + 1;
-			ctr_num_of_pointer_swizzles++;
-			/*ctr_default_header->num_of_swizzles++;*/
-			abook += 1;
-			
+			*(ctr_malloc_swizzle_adressbook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp0.value) - (uintptr_t) &tmp0);
+			ctr_default_header->num_of_swizzles++;
+			ctr_malloc_swizzle_adressbook += 1;
+			*(ctr_malloc_swizzle_adressbook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp.nodes) - (uintptr_t) &tmp);
+			ctr_default_header->num_of_swizzles++;
+			ctr_malloc_swizzle_adressbook += 1;
 		}
 		if (what == 2) {
 			ctr_tlistitem tmp2;
 			ctr_tlistitem tmp3;
-			*(abook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp2.node) - (uintptr_t) &tmp2);
-			abook += 1;
-			*(chunk) = (uint64_t) *(chunk) + 1;
-			ctr_num_of_pointer_swizzles++;
-			/*ctr_default_header->num_of_swizzles++;*/
-			*(abook) = (uintptr_t) 	xptr + (uintptr_t) ((uintptr_t) &(tmp3.next) - (uintptr_t) &tmp3);
-			abook += 1;
-			*(chunk) = (uint64_t) *(chunk) + 1;
-			ctr_num_of_pointer_swizzles++;
-			/*ctr_default_header->num_of_swizzles++;*/
+			*(ctr_malloc_swizzle_adressbook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp2.node) - (uintptr_t) &tmp2);
+			ctr_malloc_swizzle_adressbook += 1;
+			ctr_default_header->num_of_swizzles++;
+			*(ctr_malloc_swizzle_adressbook) = (uintptr_t) 	xptr + (uintptr_t) ((uintptr_t) &(tmp3.next) - (uintptr_t) &tmp3);
+			ctr_malloc_swizzle_adressbook += 1;
+			ctr_default_header->num_of_swizzles++;
 		}
 		if (what == 3) {
-			*(program_entry) = (uintptr_t) xptr;
+			ctr_default_header->program_entry_point = (uintptr_t) xptr;
 		}
 	}
 	
 	return xptr;
 }
 
-void* rxalloc(void* oldptr, uintptr_t size, uintptr_t old_size, int what) {
+/**
+ * Memory Management Adjust Memory Block Size (re-allocation)
+ * Re-allocates Memory Block.
+ *
+ * Given the old pointer, the desired size, the original size and
+ * the purpose for allocation, this function will attempt to
+ * re-allocate the memory block.
+ */
+void* ctr_realloc(void* oldptr, uintptr_t size, uintptr_t old_size, int what) {
 	char* nptr;
-	nptr = xalloc(size, what);
+	nptr = ctr_malloc(size, what);
 	memcpy(nptr, oldptr, old_size);
 	return (void*) nptr;
 }
@@ -121,7 +116,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 		exit(1);
 	}
 	s = ctr_clex_tok_value();
-	msg = xalloc(255*sizeof(char), 0);
+	msg = ctr_malloc(255*sizeof(char), 0);
 	memcpy(msg, s, msgpartlen);
 	ulen = ctr_getutf8len(msg, msgpartlen);
 	isBin = (ulen == 1);
@@ -321,7 +316,7 @@ ctr_tnode* ctr_cparse_block() {
 		ctr_tlistitem* paramListItem = CTR_PARSER_CREATE_LISTITEM();
 		ctr_tnode* paramItem = CTR_PARSER_CREATE_NODE();
 		long l = ctr_clex_tok_value_length();
-		paramItem->value = xalloc(sizeof(char) * l, 0);
+		paramItem->value = ctr_malloc(sizeof(char) * l, 0);
 		memcpy(paramItem->value, ctr_clex_tok_value(), l);
 		paramItem->vlen = l;
 		paramListItem->node = paramItem;
@@ -410,7 +405,7 @@ ctr_tnode* ctr_cparse_ref() {
 		r->modifier = 2;
 		r->vlen = ctr_clex_tok_value_length();
 	}
-	r->value = xalloc(r->vlen, 0);
+	r->value = ctr_malloc(r->vlen, 0);
 	memcpy(r->value, tmp, r->vlen);
 	return r;
 }
@@ -430,7 +425,7 @@ ctr_tnode* ctr_cparse_string() {
 	r->type = CTR_AST_NODE_LTRSTRING;
 	n = ctr_clex_readstr();
 	vlen = ctr_clex_tok_value_length();
-	r->value = xalloc(sizeof(char) * vlen, 0);
+	r->value = ctr_malloc(sizeof(char) * vlen, 0);
 	memcpy(r->value, n, vlen);
 	r->vlen = vlen;
 	ctr_clex_tok(); /* eat trailing quote. */
@@ -453,7 +448,7 @@ ctr_tnode* ctr_cparse_number() {
 	r->type = CTR_AST_NODE_LTRNUM;
 	n = ctr_clex_tok_value();
 	l = ctr_clex_tok_value_length();
-	r->value = xalloc(sizeof(char) * l, 0);
+	r->value = ctr_malloc(sizeof(char) * l, 0);
 	memcpy(r->value, n, l);
 	r->vlen = l;
 	return r;

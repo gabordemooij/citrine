@@ -13,6 +13,10 @@
 #include "citrine.h"
 
 char* np;
+
+/**
+ * Determines the size of the specified file.
+ */
 int fsize(char* filename) {
   int size;
   FILE* fh;
@@ -29,20 +33,52 @@ int fsize(char* filename) {
   return -1;
 }
 
+/**
+ * Serializer Serialize
+ * Serializes an pre-aligned abstract syntax tree along with
+ * its addressbook.
+ */
 void ctr_serializer_serialize(ctr_tnode* t) {
 	FILE *f;
 	f = fopen(ctr_mode_compile_save_as,"wb");
-	abook = (uintptr_t*) chunk;
-	memcpy( chunk, &ctr_num_of_pointer_swizzles, sizeof ctr_num_of_pointer_swizzles );
-	
-	
-	/*memcpy( chunk+measure, ctr_default_header, sizeof(ctr_ast_header));/**/
-	
+	memcpy( ctr_malloc_chunk, ctr_default_header, sizeof(ctr_ast_header));/* append to addressbook, new header */
 	if (!f) { printf("Unable to open file!"); exit(1); }
-	fwrite(chunk, sizeof(char), measure_code+measure, f);
+	fwrite(ctr_malloc_chunk, sizeof(char), ctr_malloc_measured_size_code+ctr_malloc_measured_size_addressbook, f);
 	fclose(f);
 }
 
+/**
+ * Serializer Show Information
+ * Outputs information about the specified AST file.
+ */
+void ctr_serializer_info(char* filename) {
+	FILE *f;
+	char* str;
+	size_t s = 0;
+	s = fsize(filename);
+	np = calloc(sizeof(char),s);
+	if (!np) { printf("no memory.\n"); exit(1);}
+	f = fopen(filename,"rb");
+	fread(np, sizeof(char), s, f);
+	fclose(f);
+	ctr_default_header = (ctr_ast_header*) (np);
+	printf("Citrine AST-FILE INFO:\n");
+	str = (char*) malloc(sizeof(char) * 11);
+	*(str + 10) = '\0';
+	strncpy(str, ctr_default_header->version, 10);
+	printf("Version and Identification Code : %s \n", ctr_default_header->version);
+	printf("Number of Pointer Swizzles      : %lu \n", (long) ctr_default_header->num_of_swizzles);
+	printf("Size of Addressbook             : %lu \n", (long) ctr_default_header->size_of_address_book);
+	printf("Start Original Memory Block (OB): %p \n", (char*) ctr_default_header->start_block);
+	printf("Program Entry Point (PEP)       : %p \n", (char*) ctr_default_header->program_entry_point);
+}
+
+/**
+ * Serializer Unserialize
+ * Loads an AST file in memory and recalculates (unswizzles) the
+ * stale pointers in the tree, then returns the root AST node to
+ * start the program.
+ */
 ctr_tnode* ctr_serializer_unserialize(char* filename) {
 	FILE *f;
 	uint64_t j=0;
@@ -56,41 +92,32 @@ ctr_tnode* ctr_serializer_unserialize(char* filename) {
 	uintptr_t pe; /* pe */
 	uintptr_t sz;
 	s = fsize(filename);
-	np = calloc(sizeof(char),s);
+	np = malloc(sizeof(char)*s);
 	if (!np) { printf("no memory.\n"); exit(1);}
 	f = fopen(filename,"rb");
 	fread(np, sizeof(char), s, f);
 	fclose(f);
-	
-	
-	
-	abook = (uintptr_t*) np; /* set new pointer to loaded image */
-	cnt = (uint64_t) *(abook); /* first entry in address book is a 64bit number indicating the number of swizzles */
-	abook += 1;
-	sz = (uintptr_t) *(abook);
-	abook += 1; /* move to next entry in addressbook */
-	ob = (uintptr_t) *(abook); /* second entry in address book is the old base address to use for swizzling */
-	abook += 1;
-	pe = (uintptr_t) *(abook); /* program entry point */
+	ctr_default_header = (ctr_ast_header*) (np);
+	sz = ctr_default_header->size_of_address_book;
+	ob = ctr_default_header->start_block;
+	pe = ctr_default_header->program_entry_point;
+	cnt = ctr_default_header->num_of_swizzles;
+	ctr_malloc_swizzle_adressbook = (uintptr_t*) (np + sizeof(ctr_ast_header));
 	pe = pe - (uintptr_t) ob;
 	pe = pe + (uintptr_t) np;
 	/* perform pointer swizzling to restore the tree from the image */
 	for(j = 0; j<cnt; j++) {
-		abook += 1; /* take an address from the book */
-		p = (uintptr_t) *(abook); /* p is an old address */
+		p = (uintptr_t) *(ctr_malloc_swizzle_adressbook); /* p is an old address */
 		p2 = p - (uintptr_t) ob + (uintptr_t) np; /* subtract the base from p and add the new base */
 		otp = *((uintptr_t* )p2); /* retrieve the old pointer from p2 */
 		if (otp != 0) {
 			tp = otp - (uintptr_t) ob + (uintptr_t) np; /* correct the pointer for the new base address */
 			*((uintptr_t* )p2) = tp; /* replace the old pointer with the new one */
 		}
-	
+		ctr_malloc_swizzle_adressbook += 1; /* take an address from the book */
 	}
 	return (ctr_tnode*) pe;
 }
-
-
-
 
 /**
  * CommandLine Display Welcome Message
@@ -108,6 +135,7 @@ void ctr_cli_welcome() {
 	printf("Run a CTR file (interpreter): ctr file \n");
 	printf("Compile to binary AST       : ctr -c outputfile file \n");
 	printf("Run an AST                  : ctr -r file \n");
+	printf("Display info about AST      : ctr -i file \n");
 	printf("\n");
 	printf("--------------------------------------------------\n");
 	printf("\n");
@@ -124,7 +152,7 @@ void ctr_cli_welcome() {
  */
 void ctr_cli_read_args(int argc, char* argv[]) {
 	int option_symbol; 
-	while ((option_symbol = getopt(argc, argv, "c:r")) != -1) { 
+	while ((option_symbol = getopt(argc, argv, "c:ri")) != -1) {
 		switch (option_symbol) { 
 			case 'c':
 				ctr_mode_compile = 1;
@@ -133,6 +161,9 @@ void ctr_cli_read_args(int argc, char* argv[]) {
 				break; 
 			case 'r':
 				ctr_mode_load = 1;
+				break;
+			case 'i':
+				ctr_mode_info = 1;
 				break;
 			default: 
 				ctr_cli_welcome();
@@ -150,44 +181,56 @@ void ctr_cli_read_args(int argc, char* argv[]) {
 	strncpy(ctr_mode_input_file, argv[optind], 254);
 }
 
+/**
+ * Citrine Application Main Start
+ * Bootstraps the Citrine Application.
+ */
 int main(int argc, char* argv[]) {
 	char* prg;
 	ctr_tnode* program;
 	ctr_argc = argc;
 	ctr_argv = argv;
-	chunk_ptr = 0;
+	ctr_malloc_chunk_pointer = 0;
 	ctr_mode_compile = 0;
 	ctr_mode_load = 0;
 	ctr_cli_read_args(argc, argv);
 	if (ctr_mode_compile) {
 		prg = ctr_internal_readf(ctr_mode_input_file);
-		xallocmode = 0;
-		measure = 0;/* sizeof(ctr_ast_header);/**/
+		ctr_malloc_mode = 0;
+		ctr_malloc_measured_size_addressbook = sizeof(ctr_ast_header);/* adds up to normal addressbook size */
 		program = ctr_dparse_parse(prg);
 		program = NULL;
-		xallocmode = 1;
-		chunk_ptr = 0;
-		chunk = 0;
+		ctr_malloc_mode = 1;
+		ctr_malloc_chunk_pointer = 0;
+		ctr_malloc_chunk = 0;
 		program = ctr_dparse_parse(prg);
 		ctr_serializer_serialize(program);
-		free(chunk);
+		free(ctr_malloc_chunk);
 		free(prg);
 		exit(0);
 	}
 	else if (ctr_mode_load) {
-		xallocmode = 0;
-		chunk_ptr = 0;
-		chunk = 0;
-		abook = 0;
+		ctr_malloc_mode = 0;
+		ctr_malloc_chunk_pointer = 0;
+		ctr_malloc_chunk = 0;
+		ctr_malloc_swizzle_adressbook = 0;
 		program = NULL;
 		program = ctr_serializer_unserialize(ctr_mode_input_file);
 		ctr_initialize_world();
 		ctr_cwlk_run(program);
 		exit(0);
 	}
+	else if (ctr_mode_info) {
+		ctr_malloc_mode = 0;
+		ctr_malloc_chunk_pointer = 0;
+		ctr_malloc_chunk = 0;
+		ctr_malloc_swizzle_adressbook = 0;
+		ctr_serializer_info(ctr_mode_input_file);
+		exit(0);
+	}
 	else {
 		prg = ctr_internal_readf(ctr_mode_input_file);
-		xallocmode = 0;
+		ctr_malloc_mode = 0;
 		program = ctr_dparse_parse(prg);
 		ctr_initialize_world();
 		ctr_cwlk_run(program);

@@ -115,19 +115,6 @@ struct ctr_argument {
 typedef struct ctr_argument ctr_argument;
 
 /**
- * AST header
- */
-struct ctr_ast_header {
-	char      version; /* version */
-	uint64_t  num_of_swizzles; /* number of pointer swizzles */
-	size_t    size_of_address_book; /* size of the addressbook for swizzl'n */
-	uintptr_t start_block; /* old pointer, start of the original memory block */
-	uintptr_t program_entry_point; /* original start address of program */
-};
-typedef struct ctr_ast_header* ctr_ast_header;
-
-
-/**
  * Root Object
  */
 struct ctr_object {
@@ -237,6 +224,7 @@ char** ctr_argv;
 char  ctr_mode_compile;
 char  ctr_mode_debug;
 char  ctr_mode_load;
+char  ctr_mode_info;
 char* ctr_mode_compile_save_as;
 char* ctr_mode_input_file;
 
@@ -244,21 +232,32 @@ char* ctr_mode_input_file;
 /**
  * Memory Management functions
  */
-char* xalloc(uintptr_t size, int what);
-void* rxalloc(void* oldptr, uintptr_t size, uintptr_t old_size, int what);
+char* ctr_malloc(uintptr_t size, int what);
+void* ctr_realloc(void* oldptr, uintptr_t size, uintptr_t old_size, int what);
 
 /**
  * Memory Management variables
  */
-char*      chunk;
-uintptr_t  chunk_ptr;
-uintptr_t* abook;
-uintptr_t* program_entry;
-int        xallocmode;
-uint64_t   measure;
-uint64_t   measure_code;
-uint64_t   ctr_num_of_pointer_swizzles;
-ctr_ast_header ctr_default_header;
+char*      ctr_malloc_chunk;
+uintptr_t  ctr_malloc_chunk_pointer;
+uintptr_t* ctr_malloc_swizzle_adressbook;
+int        ctr_malloc_mode;
+uint64_t   ctr_malloc_measured_size_addressbook;
+uint64_t   ctr_malloc_measured_size_code;
+
+
+/**
+ * AST header
+ */
+struct ctr_ast_header {
+	char      version[10];          /* version */
+	uint64_t  num_of_swizzles;      /* number of pointer swizzles */
+	uint64_t  size_of_address_book; /* size of the addressbook for swizzl'n - should be size_t ? */
+	uintptr_t start_block;          /* old pointer, start of the original memory block */
+	uintptr_t program_entry_point;  /* original start address of program */
+};
+typedef struct ctr_ast_header ctr_ast_header;
+ctr_ast_header* ctr_default_header;
 
 /**
  * Serializer functions
@@ -544,10 +543,10 @@ ctr_object* ctr_build_string_from_cstring( char* str );
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='^'  && X!= ':' && X!= '\''
 #define CTR_CREATE_ARGUMENT() (ctr_argument*) calloc(sizeof(ctr_argument), 1)
-#define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) xalloc(sizeof(ctr_tlistitem), 2)
-#define	CTR_PARSER_CREATE_NODE() (ctr_tnode*) xalloc(sizeof(ctr_tnode), 1)
-#define	CTR_PARSER_CREATE_PROGRAM_NODE() (ctr_tnode*) xalloc(sizeof(ctr_tnode), 3)
-#define ASSIGN_STRING(o,p,v,s) o->p = xalloc(s * sizeof(char), 0); memcpy( (char*) o->p,v,s);
+#define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) ctr_malloc(sizeof(ctr_tlistitem), 2)
+#define	CTR_PARSER_CREATE_NODE() (ctr_tnode*) ctr_malloc(sizeof(ctr_tnode), 1)
+#define	CTR_PARSER_CREATE_PROGRAM_NODE() (ctr_tnode*) ctr_malloc(sizeof(ctr_tnode), 3)
+#define ASSIGN_STRING(o,p,v,s) o->p = ctr_malloc(s * sizeof(char), 0); memcpy( (char*) o->p,v,s);
 
 /**
  * Creates a mirror call.
