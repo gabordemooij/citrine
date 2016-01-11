@@ -16,7 +16,8 @@ char* ctr_code;
 char* ctr_eofcode;
 char* ctr_clex_oldptr;
 char* ctr_clex_olderptr;
-
+int       ctr_clex_verbatim_mode = 0;              /* flag: indicates whether lexer operates in verbatim mode or not (1 = ON, 0 = OFF) */
+uintptr_t ctr_clex_verbatim_mode_insert_quote = 0; /* pointer to 'overlay' the 'fake quote' for verbatim mode */
 
 /**
  * CTRLexerLoad
@@ -73,6 +74,12 @@ int ctr_clex_tok() {
 	ctr_clex_oldptr = ctr_code;
 	i = 0;
 	comment_mode = 0;
+
+	/* if verbatim mode is on and we passed the '>' verbatim write message, insert a 'fake quote' (?>') */
+	if (ctr_clex_verbatim_mode == 1 && ctr_clex_verbatim_mode_insert_quote == (uintptr_t) ctr_code) {
+		return CTR_TOKEN_QUOTE;
+	}
+
 	c = *ctr_code;
 	while(ctr_code != ctr_eofcode && (isspace(c) || c == '#' || comment_mode)) {
 		if (c == '\n') comment_mode = 0;
@@ -139,6 +146,16 @@ int ctr_clex_tok() {
 			ctr_code += 3;
 			return CTR_TOKEN_NIL;
 		}
+	}
+
+	/* if we encounter a '?>' sequence, switch to verbatim mode in lexer */
+	if (strncmp(ctr_code, "?>", 2)==0){
+		ctr_clex_verbatim_mode = 1;
+	}
+
+	/* if lexer is in verbatim mode and we pass the '>' symbol insert a fake quote as next token */
+	if (strncmp(ctr_code, ">", 1)==0 && ctr_clex_verbatim_mode == 1) {
+		ctr_clex_verbatim_mode_insert_quote = (uintptr_t) (ctr_code+1); /* this way because multiple invocations should return same result */
 	}
 
 	/*
@@ -219,8 +236,28 @@ char* ctr_clex_readstr() {
 	c = *ctr_code;
 	escape = 0;
 	beginbuff = strbuff;
-	while((c != '\'' || escape == 1)) {
-		if (c == '\\' && escape == 0) {
+	while(
+		(   /* reading string in non-verbatim mode, read until the first non-escaped quote */
+			ctr_clex_verbatim_mode == 0 &&
+			(
+				c != '\'' ||
+				escape == 1
+			)
+		)
+		||
+		(   /* reading string in verbatim mode, read until the '<?' sequence */
+			ctr_clex_verbatim_mode == 1
+			&&
+			!(
+				c == '<' &&
+				((ctr_code+1) < ctr_eofcode) &&
+				*(ctr_code+1) == '?'
+			)
+			&&
+			(ctr_code < ctr_eofcode)
+		)
+	) {
+		if (c == '\\' && escape == 0 && ctr_clex_verbatim_mode == 0) {
 			escape = 1;
 			ctr_code++;
 			c = *ctr_code;
@@ -243,5 +280,14 @@ char* ctr_clex_readstr() {
 		ctr_code++;
 		c = *ctr_code;
 	}
+	if (ctr_clex_verbatim_mode) {
+		if (ctr_code >= ctr_eofcode) { /* if we reached EOF in verbatim mode, append closing sequence '<?.' */
+			strncpy(ctr_code,"<?.", 3);
+			ctr_eofcode += 3;
+		}
+		ctr_code++; /* in verbatim mode, hop over the trailing ? as well */
+	}
+	ctr_clex_verbatim_mode = 0;               /* always turn verbatim mode off */
+	ctr_clex_verbatim_mode_insert_quote = 0;  /* erase verbatim mode pointer overlay for fake quote */
 	return beginbuff;
 }

@@ -1,0 +1,13 @@
+?>
+<html>
+<?. x := 'Verbatim Syntax'. 
+?><body>
+<p>Hello this is a <?. Pen write: 'test!'. ?></p>
+<p>The string '<? write: x. ?>' has: <?. Pen write: (x codePoints) + ' code points'. ?>...</p>
+<ul>
+<?. (x codePoints) * { i | 
+?><li><? write: '#' + (i+1) + ':' + (x at: i). ?></li>
+<?. }. 
+?></ul>
+</body> 
+</html>

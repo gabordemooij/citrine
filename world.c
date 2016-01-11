@@ -81,7 +81,7 @@ char* ctr_internal_readf(char* file_name) {
    fseek(fp,0L,SEEK_END);
    sz = ftell(fp);
    fseek(fp,prev,SEEK_SET);
-   prg = malloc((sz+1)*sizeof(char));
+   prg = malloc((sz+4)*sizeof(char)); /* add 4 bytes, 3 for optional closing sequence verbatim mode and one lucky byte! */
    ctr_program_length=0;
    while( ( ch = fgetc(fp) ) != EOF ) prg[ctr_program_length++]=ch;
    fclose(fp);
@@ -669,8 +669,10 @@ void ctr_initialize_world() {
 	/* Console */
 	CtrStdConsole = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string("write:", 6), &ctr_console_write);
+	ctr_internal_create_func(CtrStdConsole, ctr_build_string(">", 1), &ctr_console_write);
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string("brk", 3), &ctr_console_brk);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Pen", 3), CtrStdConsole, 0);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("?", 1), CtrStdConsole, 0);
 	CtrStdConsole->link = CtrStdObject;
 	
 	/* File */
