@@ -11,54 +11,6 @@
 #include "citrine.h"
 #include "siphash.h"
 
-/**
- * UTF8Size
- *
- * measures the size of character
- */
-int ctr_utf8size(char c) {
-	if ((c & CTR_UTF8_BYTE3) == CTR_UTF8_BYTE3) return 4;
-	if ((c & CTR_UTF8_BYTE2) == CTR_UTF8_BYTE2) return 3;
-	if ((c & CTR_UTF8_BYTE1) == CTR_UTF8_BYTE1) return 2;
-	return 1;
-}
-
-/**
- * GetUTF8Length
- *
- * measures the length of an utf8 string in utf8 chars
- */
-ctr_size ctr_getutf8len(char* strval, ctr_size max) {
-	ctr_size i;
-	ctr_size j = 0;
-	ctr_size s = 0;
-	for(i = 0; i < max; i++) {
-		s = ctr_utf8size(strval[i]);
-		j += (s - 1);
-	}
-	return (i-j);
-}
-
-/**
- * GetBytesForUTF8String
- */
-ctr_size getBytesUtf8(char* strval, long startByte, ctr_size lenUChar) {
-	long i = 0;
-	long bytes = 0;
-	int s = 0;
-	int x = 0;
-	long index = 0;
-	char c;
-	while(x < lenUChar) {
-		index = startByte + i;
-		c = strval[index];
-		s = ctr_utf8size(c);
-		bytes = bytes + s;
-		i = i + s;
-		x ++;
-	}
-	return bytes;
-}
 
 /**
  * ReadFile
@@ -86,47 +38,6 @@ char* ctr_internal_readf(char* file_name) {
    while( ( ch = fgetc(fp) ) != EOF ) prg[ctr_program_length++]=ch;
    fclose(fp);
    return prg;
-}
-
-/**
- * DebugTree
- *
- * For debugging purposes, prints the internal AST.
- */
-void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
-	char* str;
-	ctr_tlistitem* li;
-	ctr_tnode* t;
-	if (indent>20) exit(1); 
-	li = ti->nodes;
-	t = li->node;
-	while(1) {
-		int i;
-		for (i=0; i<indent; i++) printf(" ");
-		str = calloc(40, sizeof(char));
-		if (t->type == CTR_AST_NODE_EXPRASSIGNMENT) 		str = "ASSIGN\0";
-		else if (t->type == CTR_AST_NODE_EXPRMESSAGE) 	str = "MESSAG\0";
-		else if (t->type == CTR_AST_NODE_UNAMESSAGE) 	str = "UMSSAG\0";
-		else if (t->type == CTR_AST_NODE_KWMESSAGE) 		str = "KMSSAG\0";
-		else if (t->type == CTR_AST_NODE_BINMESSAGE) 	str = "BMSSAG\0";
-		else if (t->type == CTR_AST_NODE_LTRSTRING) 		str = "STRING\0";
-		else if (t->type == CTR_AST_NODE_REFERENCE) 		str = "REFRNC\0";
-		else if (t->type == CTR_AST_NODE_LTRNUM) 		str = "NUMBER\0";
-		else if (t->type == CTR_AST_NODE_CODEBLOCK) 		str = "CODEBL\0";
-		else if (t->type == CTR_AST_NODE_RETURNFROMBLOCK)str = "RETURN\0";
-		else if (t->type == CTR_AST_NODE_PARAMLIST)		str = "PARAMS\0";
-		else if (t->type == CTR_AST_NODE_INSTRLIST)		str = "INSTRS\0";
-		else if (t->type == CTR_AST_NODE_ENDOFPROGRAM)	str = "EOPROG\0";
-		else if (t->type == CTR_AST_NODE_NESTED)	        str = "NESTED\0";
-		else if (t->type == CTR_AST_NODE_LTRBOOLFALSE)	str = "BFALSE\0";
-		else if (t->type == CTR_AST_NODE_LTRBOOLTRUE)	str = "BLTRUE\0";
-		else if (t->type == CTR_AST_NODE_LTRNIL)	        str = "LTRNIL\0";
-		else 								str = "UNKNW?\0";
-		if (t->nodes) ctr_internal_debug_tree(t, indent + 1);
-		if (!li->next) break; 
-		li = li->next;
-		t = li->node;
-	}
 }
 
 /**

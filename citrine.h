@@ -263,6 +263,8 @@ ctr_ast_header* ctr_default_header;
  * Serializer functions
  */
 ctr_tnode* ctr_serializer_unserialize();
+void ctr_serializer_serialize(ctr_tnode* t);
+void ctr_serializer_info(char* filename);
 
 /**
  * Lexer functions
