@@ -150,6 +150,52 @@ ctr_object* ctr_command_num_of_args(ctr_object* myself, ctr_argument* argumentLi
 }
 
 /**
+ * CommandGetValueOfEnvironmentVariable
+ *
+ * Returns the value of an environment variable.
+ *
+ * Usage:
+ *
+ * x := Command env: 'MY_PATH_VAR'.
+ */
+ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* envVarNameObj;
+	char*       envVarNameStr;
+	char*       envVal;
+	envVarNameObj = ctr_internal_cast2string(argumentList->object);
+	envVarNameStr = malloc((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
+	strncpy(envVarNameStr, envVarNameObj->value.svalue->value, envVarNameObj->value.svalue->vlen);
+	*(envVarNameStr + (envVarNameObj->value.svalue->vlen)) = '\0';
+	envVal = getenv(envVarNameStr);
+	if (envVal == NULL) {
+		return CtrStdNil;
+	}
+	return ctr_build_string_from_cstring(envVal);
+}
+
+/**
+ * CommandSetValueOfEnvironmentVariable
+ *
+ * Sets the value of an environment variable.
+ */
+ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* envVarNameObj;
+	ctr_object* envValObj;
+	char*       envVarNameStr;
+	char*       envValStr;
+	envVarNameObj = ctr_internal_cast2string(argumentList->object);
+	envValObj = ctr_internal_cast2string(argumentList->next->object);
+	envVarNameStr = malloc((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
+	strncpy(envVarNameStr, envVarNameObj->value.svalue->value, envVarNameObj->value.svalue->vlen);
+	*(envVarNameStr + (envVarNameObj->value.svalue->vlen)) = '\0';
+	envValStr = malloc((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
+	strncpy(envValStr, envValObj->value.svalue->value, envValObj->value.svalue->vlen);
+	*(envValStr + (envValObj->value.svalue->vlen)) = '\0';
+	setenv(envVarNameStr, envValStr, 1);
+	return myself;
+}
+
+/**
  * CommandQuestion
  *
  * Asks user for interactive input in CLI script.

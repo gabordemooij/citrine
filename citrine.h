@@ -487,6 +487,8 @@ ctr_object* ctr_file_include_ast(ctr_object* myself, ctr_argument* argumentList)
 ctr_object* ctr_command_argument(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_num_of_args(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Clock Interface
