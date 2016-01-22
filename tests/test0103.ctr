@@ -1,0 +1,14 @@
+#Nil tests
+a := Array <- Object ; True ; False ; Boolean ; 1 ; Number ; 'Str' ; String ; {\}.
+Pen write: (a count), brk.
+(a count) * { i |
+	Pen write: 
+		'a ' + 
+		((a @ i) type) +
+		' \''+((a @ i))+'\' '+
+		' is ' +
+		(((a @ i) isNil) either: '' or: 'NOT') + 
+		' Nil.',
+		brk.
+}.
+Pen write: 'but.. Nil is.. ' + ((Nil isNil) either: 'certainly NIL!' or: 'not NIL??'), brk.

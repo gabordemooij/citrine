@@ -202,7 +202,6 @@ ctr_object* CtrStdSystem;
 ctr_object* CtrStdDice;
 ctr_object* CtrStdCommand;
 ctr_object* CtrStdShell;
-ctr_object* CtrStdCoin;
 ctr_object* CtrStdClock;
 ctr_object* CtrStdError;
 ctr_object* ctr_first_object;
@@ -338,6 +337,10 @@ void ctr_close_context();
 ctr_object* ctr_contexts[100];
 int ctr_context_id;
 
+/**
+ * Nil Interface
+ */
+ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Object Interface
@@ -347,6 +350,7 @@ ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Boolean Interface
@@ -354,11 +358,16 @@ ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_bool_xor(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_bool_opposite(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_bool_flip(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Number Interface
@@ -396,6 +405,7 @@ ctr_object* ctr_number_max(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_number_to_by_do(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * String Interface
@@ -419,6 +429,8 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_to_number(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Block Interface
@@ -449,6 +461,8 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_from_to(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList);
+
 
 
 /**
@@ -520,7 +534,6 @@ int ctr_gc_object_counter;
  */
 ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_dice_sides(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_coin_flip(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Literal Constructors (internal only)

@@ -1,8 +1,8 @@
 #Test String Object
 Pen write: ('Santa Clause' from: 6 to: 7). #C
 Pen write: ('hello' at: 2). #l
-Pen write: ('🎄🎄🎄' codePoints). #3
-Pen write: ('' bytes) + ('' codePoints). #0
+Pen write: ('🎄🎄🎄' length). #3
+Pen write: ('' bytes) + ('' length). #0
 Pen write: ('papyrus' at: ( ('🎃halloween' indexOf: 'hallo') + ('no' indexOf: 'y') ) ). #p (1 + -1)
 a := ('--a..nom..t..nom..r..nom..' replace: '..nom..' with: '=x=XX=x=').
 a := a replace: '.' with: '++'. #does not occur

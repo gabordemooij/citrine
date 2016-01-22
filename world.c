@@ -447,12 +447,14 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("respondTo:with:and:", 19), &ctr_object_respond);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("type", 4), &ctr_object_type);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("new", 3), &ctr_object_make);
+	ctr_internal_create_func(CtrStdObject, ctr_build_string("isNil", 5), &ctr_object_is_nil);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Object", 6), CtrStdObject, 0);
 	CtrStdObject->link = NULL;
 
 	/* Nil */
 	CtrStdNil = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNIL);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Nil", 3), CtrStdNil, 0);
+	ctr_internal_create_func(CtrStdNil, ctr_build_string("isNil", 5), &ctr_nil_is_nil);
 	CtrStdNil->link = CtrStdObject;
 	
 	/* Boolean */
@@ -460,17 +462,23 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("ifTrue:", 7), &ctr_bool_iftrue);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("ifFalse:", 8), &ctr_bool_ifFalse);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("else:", 5), &ctr_bool_ifFalse);
-	ctr_internal_create_func(CtrStdBool, ctr_build_string("opposite", 8), &ctr_bool_opposite);
+	ctr_internal_create_func(CtrStdBool, ctr_build_string("not", 3), &ctr_bool_not);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("∧", 3), &ctr_bool_and);
+	ctr_internal_create_func(CtrStdBool, ctr_build_string("nor:", 4), &ctr_bool_nor);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("∨", 3), &ctr_bool_or);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("xor:", 4), &ctr_bool_xor);
+	ctr_internal_create_func(CtrStdBool, ctr_build_string("=",1),&ctr_bool_eq);
+	ctr_internal_create_func(CtrStdBool, ctr_build_string("≠",3),&ctr_bool_neq);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("toNumber", 8), &ctr_bool_to_number);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("toString", 8), &ctr_bool_to_string);
+	ctr_internal_create_func(CtrStdBool, ctr_build_string("flip", 4), &ctr_bool_flip);
+	ctr_internal_create_func(CtrStdBool, ctr_build_string("either:or:", 10), &ctr_bool_either_or);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Boolean", 7), CtrStdBool, 0);
 	CtrStdBool->link = CtrStdObject;
 
 	/* Number */
 	CtrStdNumber = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("to:by:do:", 9), &ctr_number_to_by_do);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("+", 1), &ctr_number_add);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("inc:",4), &ctr_number_inc);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("-",1), &ctr_number_minus);
@@ -510,7 +518,7 @@ void ctr_initialize_world() {
 	/* String */
 	CtrStdString = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("bytes", 5), &ctr_string_bytes);
-	ctr_internal_create_func(CtrStdString, ctr_build_string("codePoints", 10), &ctr_string_length);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("length", 6), &ctr_string_length);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("from:to:", 8), &ctr_string_fromto);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("from:length:", 12), &ctr_string_from_length);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("+", 1), &ctr_string_concat);
@@ -526,6 +534,9 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string("lastIndexOf:", 12), &ctr_string_last_index_of);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("replace:with:", 13), &ctr_string_replace_with);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("split:", 6), &ctr_string_split);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("up", 2), &ctr_string_to_upper);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("low", 3), &ctr_string_to_lower);
+	
 	ctr_internal_create_func(CtrStdString, ctr_build_string("toNumber", 8), &ctr_string_to_number);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("toBoolean", 9), &ctr_string_to_boolean);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("String", 6), CtrStdString, 0);
@@ -563,6 +574,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("put:at:", 7), &ctr_array_put);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("from:length:", 12), &ctr_array_from_to);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("+", 1), &ctr_array_add);
+	ctr_internal_create_func(CtrStdArray, ctr_build_string("map:", 4), &ctr_array_map);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Array", 5), CtrStdArray, 0);
 	CtrStdArray->link = CtrStdObject;
 
@@ -624,12 +636,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdDice, ctr_build_string("rollWithSides:", 14), &ctr_dice_sides);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Dice", 4), CtrStdDice, 0);
 	CtrStdDice->link = CtrStdObject;
-
-	/* Coin */
-	CtrStdCoin = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
-	ctr_internal_create_func(CtrStdCoin, ctr_build_string("flip", 4), &ctr_coin_flip);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Coin", 4), CtrStdCoin, 0);
-	CtrStdCoin->link = CtrStdObject;
 
 	/* Shell */
 	CtrStdShell = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);

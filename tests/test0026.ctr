@@ -1,12 +1,12 @@
 Pen write: 'Hello' bytes.
 Pen write: 'Great' bytes + 5.
-Pen write: '象形' bytes - '象形' codePoints.
+Pen write: '象形' bytes - '象形' length.
 Pen write: ('Hello!' from: 1 to: 4).
 Pen write: ('Hello!' from: 2 to: 5).
 a := 2.
 b := 5.
 Pen write: ('Hello!' from: a to: b).
 Pen write: ('形声字形聲字' from: 2 to: 5).
-Pen write: '形声字形聲字' codePoints.
-Pen write: '形声a' codePoints.
+Pen write: '形声字形聲字' length.
+Pen write: '形声a' length.
 Pen write: 'Organ' + 'Works'.

@@ -21,6 +21,15 @@ ctr_object* ctr_build_nil() {
 }
 
 /**
+ * NilIsNil
+ *
+ * Nil always answers this message with a boolean object 'True'.
+ */
+ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool(1);
+}
+
+/**
  * Root Object
  * This is the base object, the parent of all other objects.
  * It contains essential object oriented programming features.
@@ -107,6 +116,16 @@ ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * ObjectIsNil
+ *
+ * Default isNil implementation.
+ *
+ * Always returns boolean object False.
+ */
+ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool(0);
+}
 
 /**
  * Booleans.
@@ -119,6 +138,34 @@ ctr_object* ctr_build_bool(int truth) {
 	boolObject->info.type = CTR_OBJECT_TYPE_OTBOOL;
 	boolObject->link = CtrStdBool;
 	return boolObject;
+}
+
+/**
+ * BooleanIsEqual
+ *
+ * Tests whether the other object (as a boolean) has the
+ * same value (boolean state True or False) as the current one.
+ *
+ * Usage:
+ *
+ * (True = False) ifFalse: {\ Pen write: 'This is not True!'. }.
+ */
+ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool(ctr_internal_cast2bool(argumentList->object)->value.bvalue == myself->value.bvalue);
+}
+
+/**
+ * BooleanIsNotEqual
+ *
+ * Tests whether the other object (as a boolean) has the
+ * same value (boolean state True or False) as the current one.
+ *
+ * Usage:
+ *
+ * (True != False) ifTrue: {\ Pen write: 'This is not True!'. }.
+ */
+ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool(ctr_internal_cast2bool(argumentList->object)->value.bvalue != myself->value.bvalue);
 }
 
 /**
@@ -162,16 +209,44 @@ ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * Opposite
+ * BooleanNot
  *
  * Returns the opposite of the current value.
  *
  * Usage:
- * Yes = No opposite.
+ * True := False not.
  *
  */
-ctr_object* ctr_bool_opposite(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(!myself->value.bvalue);
+}
+
+/**
+ * BooleanFlipaCoin
+ *
+ * 'Flips a coin'. Returns a random boolean value True or False.
+ *
+ * Usage:
+ * coinLandsOn := (Boolean flip).
+ */
+ctr_object* ctr_bool_flip(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool((rand() % 2));
+}
+
+/**
+ * BooleanEitherOr
+ *
+ * Returns argument #1 if boolean value is True and argument #2 otherwise.
+ *
+ * Usage:
+ * Pen write: 'the coin lands on: ' + (Boolean flip either: 'head' or: 'tail').
+ */
+ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
+	if (myself->value.bvalue) {
+		return argumentList->object;
+	} else {
+		return argumentList->next->object;
+	}
 }
 
 /**
@@ -188,6 +263,22 @@ ctr_object* ctr_bool_opposite(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
 	return ctr_build_bool((myself->value.bvalue && other->value.bvalue));
+}
+
+/**
+ * BooleanNor
+ *
+ * Returns True if the object value is False and the
+ * argument is False as well.
+ *
+ * Usage:
+ *
+ * a nor: b
+ *
+ */
+ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
+	return ctr_build_bool((!myself->value.bvalue && !other->value.bvalue));
 }
 
 /**
@@ -440,6 +531,28 @@ ctr_object* ctr_number_factorial(ctr_object* myself, ctr_argument* argumentList)
 		a = a * i;
 	}
 	return ctr_build_number_from_float(a);
+}
+
+ctr_object* ctr_number_to_by_do(ctr_object* myself, ctr_argument* argumentList) {
+	double startValue = myself->value.nvalue;
+	double endValue   = ctr_internal_cast2number(argumentList->object)->value.nvalue;
+	double incValue   = ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
+	double curValue   = startValue;
+	ctr_object* codeBlock = argumentList->next->next->object;
+	ctr_argument* arguments;
+	int forward = 0;
+	forward = (startValue < endValue);
+	if (codeBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
+		CtrStdError = ctr_build_string_from_cstring("Expected block.\0");
+		return myself;
+	}
+	while(((forward && curValue < endValue) || (!forward && curValue > endValue)) && !CtrStdError) {
+		arguments = CTR_CREATE_ARGUMENT();
+		arguments->object = ctr_build_number_from_float(curValue);
+		ctr_block_run(codeBlock, arguments, codeBlock);
+		curValue += incValue;
+	}
+	return myself;
 }
 
 /**
@@ -740,6 +853,28 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
 	byte_index = (uintptr_t) p - (uintptr_t) (myself->value.svalue->value);
 	uchar_index = ctr_getutf8len(myself->value.svalue->value, byte_index);
 	return ctr_build_number_from_float((ctr_number) uchar_index);
+}
+
+ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) {
+       char* str = myself->value.svalue->value;
+       size_t  len = myself->value.svalue->vlen;
+       char* tstr = malloc(len * sizeof(char));
+       int i=0;
+       for(i =0; i < len; i++) {
+               tstr[i] = toupper(str[i]);
+       }
+       return ctr_build_string(tstr, len);
+}
+
+ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) {
+       char* str = myself->value.svalue->value;
+       size_t len = myself->value.svalue->vlen;
+       char* tstr = malloc(len * sizeof(char));
+       int i=0;
+       for(i =0; i < len; i++) {
+               tstr[i] = tolower(str[i]);
+       }
+       return ctr_build_string(tstr, len);
 }
 
 /**

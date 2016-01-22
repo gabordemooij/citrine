@@ -245,15 +245,6 @@ ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * CoinFlip
- *
- * Flips a coin, returns a number between 0 and 1.
- */
-ctr_object* ctr_coin_flip(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_bool((rand() % 2));
-}
-
-/**
  * ClockWait
  *
  * Waits X seconds.

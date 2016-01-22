@@ -54,6 +54,28 @@ ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * ArrayMap
+ *
+ * Iterates over the array.
+ */
+ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* block = argumentList->object;
+	int i = 0;
+	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
+		CtrStdError = ctr_build_string_from_cstring("Expected Block.\0");
+	}
+	block->info.sticky = 1;
+	for(i = 0; i < myself->value.avalue->head; i++) {
+		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
+		arguments->object = ctr_build_number_from_float((double) i);
+		ctr_block_run(block, arguments, myself);
+	}
+	block->info.mark = 0;
+	block->info.sticky = 0;
+	return myself;
+}
+
+/**
  * ArrayNewAndPush
  *
  * Creates a new instance of an array and initializes this
