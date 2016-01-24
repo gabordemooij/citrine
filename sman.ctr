@@ -36,23 +36,23 @@ f := File new: 'base.c'.
 str := f read.
 commentBlocks := str split: '/**'.
 
-
 2 * {\
 	var comment := commentBlocks pop.
 	var lines   := comment split: '\n'.
-	lines count > 1 ifTrue: {\
-		
+	lines count > 3 ifTrue: {\
+	
 		#print the headline
 		var headline := lines @ 1.
+		
 		Pen write: '.BR', brk brk.
 		Pen write: '.B ' + (headline skip: 3), brk.
 		Pen write: '.BR', brk brk.
 		
 		#print the rest
-		Pen write: '.nf'.
+		Pen write: '.nf', brk.
 		var line := ''.
 		var n := 2.
-		{\ 
+		{\
 			line := lines at: n. 
 			^ ((line indexOf: '*/') = -1). 
 		}
@@ -61,7 +61,7 @@ commentBlocks := str split: '/**'.
 				Pen write: (line skip: 3), brk.
 				n inc: 1.
 		}.
-		Pen write: '.fi'.
+		Pen write: '.fi', brk.
 	}.
 }.
 

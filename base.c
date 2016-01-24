@@ -564,12 +564,13 @@ ctr_object* ctr_number_to_by_do(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_object* codeBlock = argumentList->next->next->object;
 	ctr_argument* arguments;
 	int forward = 0;
+	if (startValue == endValue) return myself;
 	forward = (startValue < endValue);
 	if (codeBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
 		CtrStdError = ctr_build_string_from_cstring("Expected block.\0");
 		return myself;
 	}
-	while(((forward && curValue < endValue) || (!forward && curValue > endValue)) && !CtrStdError) {
+	while(((forward && curValue <= endValue) || (!forward && curValue >= endValue)) && !CtrStdError) {
 		arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = ctr_build_number_from_float(curValue);
 		ctr_block_run(codeBlock, arguments, codeBlock);
@@ -1225,7 +1226,7 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList) {
 	while (1 && !CtrStdError) {
 		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, myself));
-		if (result->value.bvalue == 0) break;
+		if (result->value.bvalue == 0 || CtrStdError) break;
 		ctr_block_run(argumentList->object, argumentList, argumentList->object);
 	}
 	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
@@ -1241,7 +1242,7 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
 ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList) {
 	while (1 && !CtrStdError) {
 		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, myself));
-		if (result->value.bvalue == 1) break;
+		if (result->value.bvalue == 1 || CtrStdError) break;
 		ctr_block_run(argumentList->object, argumentList, argumentList->object);
 	}
 	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */

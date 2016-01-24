@@ -122,6 +122,7 @@ ctr_tnode* ctr_serializer_unserialize(char* filename) {
  */
 void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
 	char* str;
+	char* vbuf;
 	ctr_tlistitem* li;
 	ctr_tnode* t;
 	if (indent>20) exit(1); 
@@ -149,9 +150,13 @@ void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
 		else if (t->type == CTR_AST_NODE_LTRBOOLTRUE)	str = "BLTRUE\0";
 		else if (t->type == CTR_AST_NODE_LTRNIL)	        str = "LTRNIL\0";
 		else 								str = "UNKNW?\0";
+		vbuf = calloc(sizeof(char),t->vlen+1);
+		strncpy(vbuf, t->value, t->vlen);
+		printf("%s %s (%p)\n", str, vbuf, t);
 		if (t->nodes) ctr_internal_debug_tree(t, indent + 1);
 		if (!li->next) break; 
 		li = li->next;
 		t = li->node;
+		
 	}
 }

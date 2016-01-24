@@ -168,8 +168,9 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 		printf("Index must be number.\n"); exit(1);
 	}
 	i = (int) getIndex->value.nvalue;
-	if (myself->value.avalue->head < i || i < 0) {
-		printf("Index out of bounds.\n"); exit(1);
+	if (myself->value.avalue->head <= i || i < 0) {
+		CtrStdError = ctr_build_string_from_cstring("Index out of bounds.\0");
+		return CtrStdNil;
 	}
 	return *(myself->value.avalue->elements + i);
 }

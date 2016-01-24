@@ -125,6 +125,7 @@ int main(int argc, char* argv[]) {
 		prg = ctr_internal_readf(ctr_mode_input_file);
 		ctr_malloc_mode = 0;
 		program = ctr_dparse_parse(prg);
+		/*ctr_internal_debug_tree(program,1); -- for debugging */
 		ctr_initialize_world();
 		ctr_cwlk_run(program);
 		free(program);
