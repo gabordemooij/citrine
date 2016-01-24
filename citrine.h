@@ -351,6 +351,7 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Boolean Interface

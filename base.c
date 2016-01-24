@@ -81,6 +81,11 @@ ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(0);
 }
 
+ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
+	return myself;
+}
+
+
 /**
  * OnMessageDoAction
  *

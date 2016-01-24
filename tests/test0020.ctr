@@ -1,4 +1,4 @@
-(Nil equals: Nil) ifTrue: {\ Pen write: 'Nil is Nil!'.}.
+(Nil = Nil) ifTrue: {\ Pen write: 'Nil is Nil!'.}.
 (2 > 1) ifTrue: {\ Pen write: 'YES'. }.
 (2 > 3) ifTrue: {\ Pen write: 'NO'. }.
 (2 > 3) ifFalse: {\ Pen write: 'Nonono..'.}.

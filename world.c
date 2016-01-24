@@ -446,6 +446,7 @@ void ctr_initialize_world() {
 	CtrStdObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("new", 3), &ctr_object_make);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("equals:", 7), &ctr_object_equals);
+	ctr_internal_create_func(CtrStdObject, ctr_build_string("=",1), &ctr_object_equals);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("on:do:", 6), &ctr_object_on_do);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("respondTo:", 10), &ctr_object_respond);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("respondTo:with:", 15), &ctr_object_respond);
@@ -453,6 +454,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("type", 4), &ctr_object_type);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("new", 3), &ctr_object_make);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("isNil", 5), &ctr_object_is_nil);
+	ctr_internal_create_func(CtrStdObject, ctr_build_string("myself", 6), &ctr_object_myself);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Object", 6), CtrStdObject, 0);
 	CtrStdObject->link = NULL;
 
