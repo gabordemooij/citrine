@@ -16,7 +16,7 @@
  *
  * Literal form: Nil
  */
-ctr_object* ctr_build_nil() {	
+ctr_object* ctr_build_nil() {
 	return CtrStdNil;
 }
 
@@ -185,8 +185,17 @@ ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
 		arguments->object = myself;
 		return ctr_block_run(codeBlock, arguments, codeBlock);
 	}
+	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
 	return myself;
 }
+
+ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
+	if (myself->value.bvalue) {
+		CtrStdError = CtrStdNil; /* If error = Nil it's a break, if error = NULL, there is no error. */
+	}
+	return myself;
+}
+
 
 /**
  * ifFalse
@@ -205,6 +214,7 @@ ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
 		arguments->object = myself;
 		return ctr_block_run(codeBlock, arguments, codeBlock);
 	}
+	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
 	return myself;
 }
 
@@ -552,6 +562,7 @@ ctr_object* ctr_number_to_by_do(ctr_object* myself, ctr_argument* argumentList) 
 		ctr_block_run(codeBlock, arguments, codeBlock);
 		curValue += incValue;
 	}
+	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
 	return myself;
 }
 
@@ -1148,7 +1159,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	result = ctr_cwlk_run(codeBlockPart2);
 	if (result == NULL) result = my;
 	ctr_close_context();
-	if (CtrStdError != NULL) {
+	if (CtrStdError != NULL && CtrStdError != CtrStdNil) {
 		ctr_object* catchBlock = malloc(sizeof(ctr_object));
 		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string("catch",5), 0);
 		if (catchBlock != NULL) {
@@ -1184,7 +1195,9 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
 		arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = indexNumber;
 		ctr_block_run(block, arguments, block);
+		if (CtrStdError) break;
 	}
+	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
 	block->info.mark = 0;
 	block->info.sticky = 0;
 	return myself;
@@ -1197,11 +1210,12 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
  * as long as the result of the first one equals boolean True.
  */
 ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList) {
-	while (1) {
+	while (1 && !CtrStdError) {
 		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, myself));
 		if (result->value.bvalue == 0) break;
 		ctr_block_run(argumentList->object, argumentList, argumentList->object);
 	}
+	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
 	return myself;
 }
 
@@ -1212,11 +1226,12 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
  * as long as the result of the first one equals boolean False.
  */
 ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList) {
-	while (1) {
+	while (1 && !CtrStdError) {
 		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, myself));
 		if (result->value.bvalue == 1) break;
 		ctr_block_run(argumentList->object, argumentList, argumentList->object);
 	}
+	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
 	return myself;
 }
 
@@ -1224,7 +1239,10 @@ ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList
  * Alias for BlockRun.
  */
 ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_block_run(myself, argumentList, myself);
+	ctr_object* result;
+	result = ctr_block_run(myself, argumentList, myself);
+	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
+	return result;
 }
 
 ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
@@ -1246,9 +1264,20 @@ ctr_object* ctr_build_block(ctr_tnode* node) {
 }
 
 /**
- * BlockError
+ * error: [object].
  *
  * Sets error flag on a block of code.
+ * This will throw an error / exception.
+ * You can attach an object to the error, for instance
+ * an error message.
+ * 
+ * Example:
+ * 
+ * {\
+ *   thisBlock error: 'oops!'.
+ * } catch: { errorMessage |
+ *   Pen write: errorMessage.	
+ * }, run.
  */
 ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
 	CtrStdError = argumentList->object;

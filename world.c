@@ -466,6 +466,7 @@ void ctr_initialize_world() {
 	CtrStdBool = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("ifTrue:", 7), &ctr_bool_iftrue);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("ifFalse:", 8), &ctr_bool_ifFalse);
+	ctr_internal_create_func(CtrStdBool, ctr_build_string("break", 5), &ctr_bool_break);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("else:", 5), &ctr_bool_ifFalse);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("not", 3), &ctr_bool_not);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("∧", 3), &ctr_bool_and);

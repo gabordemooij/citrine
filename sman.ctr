@@ -5,6 +5,9 @@
 # generates man-style documentation
 # written by Gabor de Mooij
 
+# Start: ctr sman.ctr | mandoc -a 
+
+
 ?>
 .\" Manpage for ctr.
 .TH man 1 "01 February 2016" "1.0" "CTR man page"
@@ -32,35 +35,41 @@ runs a binary Citrine program.
 f := File new: 'base.c'.
 str := f read.
 commentBlocks := str split: '/**'.
-comment := commentBlocks pop.
-lines   := comment split: '\n'.
 
-lines count > 1 ifTrue: {\
-	
-	#print the headline
-	var headline := lines @ 1.
-	Pen write: '.BR', brk brk.
-	Pen write: '.B ' + (headline skip: 5), brk.
-	Pen write: '.BR', brk brk.
-	
-	#print the rest
-	Pen write: '.nf'.
-	var line := ''.
-	var n := 2.
-	{\ 
-		line := lines at: n. 
-		^ ((line indexOf: '*/') = -1). 
-	}
-	whileTrue: {\
-			line := line replace: '\\' with: '\\\\'.
-			Pen write: (line skip: 3), brk.
-			n inc: 1.
+
+2 * {\
+	var comment := commentBlocks pop.
+	var lines   := comment split: '\n'.
+	lines count > 1 ifTrue: {\
+		
+		#print the headline
+		var headline := lines @ 1.
+		Pen write: '.BR', brk brk.
+		Pen write: '.B ' + (headline skip: 3), brk.
+		Pen write: '.BR', brk brk.
+		
+		#print the rest
+		Pen write: '.nf'.
+		var line := ''.
+		var n := 2.
+		{\ 
+			line := lines at: n. 
+			^ ((line indexOf: '*/') = -1). 
+		}
+		whileTrue: {\
+				line := line replace: '\\' with: '\\\\'.
+				Pen write: (line skip: 3), brk.
+				n inc: 1.
+		}.
+		Pen write: '.fi'.
 	}.
-	Pen write: '.fi'.
 }.
+
 ?>
 .SH BUGS
-No known bugs.
+This is a preliminary version (< 1.0) of Citrine, there might still be very serious bugs.
+Please refrain from using this version in a production environment. This version of Citrine
+is still considered 'alpha' stage and cannot be expected to be reliable.
 
 .SH TODO
 Find a way to break out of loops.

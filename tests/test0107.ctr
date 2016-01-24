@@ -1,0 +1,42 @@
+#Test loop breaking
+
+#0-4
+0 to: 10 by: 1 do: { i |
+	Pen write: 'iteration #' + i, brk.
+	(i = 4) break.
+}.
+
+
+x := 0.
+xIsLessThan10 := {\ ^( x < 10 ). }.
+
+
+#0-4
+xIsLessThan10 whileTrue: {\
+	Pen write: 'iteration #' + x, brk.
+	x inc: 1.
+	((x < 5) not) break.
+}.
+
+#5,4
+{\ ^(x=0). } whileFalse: {\
+	Pen write: 'iteration #' + x, brk.
+	x dec: 1.
+	(x = 3) break.
+}.
+
+#1-4
+5 * { i |
+	Pen write: 'iteration #' + i, brk.
+	(i = 4) break.
+}.
+
+#nothing should happen, no error
+{\ True break. Pen write: 'dont write this!', brk. } run.
+
+#nothing should happen, no error
+{\ True break. Pen write: 'dont write this!', brk. } catch: {\ Pen write: 'Dont catch this!'. }, run.
+
+#Nil error is same as break, but dirty!
+{\ thisBlock error: Nil. Pen write: 'dont write this!', brk. } catch: {\ Pen write: 'Dont catch this!'. }, run.
+
