@@ -257,6 +257,9 @@ char* ctr_clex_readstr() {
 			(ctr_code < ctr_eofcode)
 		)
 	) {
+		if (c == 'n' && escape == 1) {
+			c = '\n';
+		}
 		if (c == '\\' && escape == 0 && ctr_clex_verbatim_mode == 0) {
 			escape = 1;
 			ctr_code++;

@@ -793,6 +793,20 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	return newString;
 }
 
+
+ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_argument* argument1;
+	ctr_argument* argument2;
+	if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_string("",0);
+	argument1 = CTR_CREATE_ARGUMENT();
+	argument2 = CTR_CREATE_ARGUMENT();
+	argument1->object = argumentList->object;
+	argument1->next = argument2;
+	argument2->object = ctr_build_number_from_float(myself->value.svalue->vlen - argumentList->object->value.nvalue);
+	return ctr_string_from_length(myself, argument1);
+}
+
+
 /**
  * StringCharacterAt
  *
@@ -1221,6 +1235,17 @@ ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * @description
+ * Builds a block object from a literal block of code.
+ */
+ctr_object* ctr_build_block(ctr_tnode* node) {
+	ctr_object* codeBlockObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBLOCK);
+	codeBlockObject->value.block = node;
+	codeBlockObject->link = CtrStdBlock;
+	return codeBlockObject;
+}
+
+/**
  * BlockError
  *
  * Sets error flag on a block of code.
@@ -1231,11 +1256,20 @@ ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * BlockCatch
- *
+ * catch: [otherBlock]
+ * 
  * Associates an error clause to a block.
  * If an error (exception) occurs within the block this block will be
  * executed.
+ * 
+ * Example:
+ * 
+ * #Raise error on division by zero.
+ * {\ 
+ *    var z := 4 / 0.
+ * } catch: { errorMessage | 
+ *    Pen write: e, brk.
+ * }, run.
  */
 ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* catchBlock = argumentList->object;
@@ -1244,12 +1278,4 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-/**
- * Builds a block object from a literal block of code.
- */
-ctr_object* ctr_build_block(ctr_tnode* node) {
-	ctr_object* codeBlockObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBLOCK);
-	codeBlockObject->value.block = node;
-	codeBlockObject->link = CtrStdBlock;
-	return codeBlockObject;
-}
+

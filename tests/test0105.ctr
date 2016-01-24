@@ -1,3 +1,4 @@
 #Test pipelines
-a := 'lololol' split: 'o', map: { i | me put: ((me @ i) up) at: i. }, join: 'x'.
+mapUp := { i | me put: ((me @ i) up) at: i. }.
+a := 'lololol' split: 'o', map: mapUp, join: 'x'.
 Pen write: a.

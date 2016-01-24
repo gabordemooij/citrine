@@ -379,7 +379,12 @@ ctr_object* ctr_find(ctr_object* key) {
 		foundObject = ctr_internal_object_find_property(context, key, 0);
 		i--;
 	}
-	if (foundObject == NULL) { printf("Error, key not found: [%s].\n", key->value.svalue->value); exit(1); }
+	if (foundObject == NULL) { 
+		char* cstr;
+		CTR_2CSTR(cstr, key);
+		printf("Error, key not found: [%s].\n", cstr);
+		exit(1);
+	}
 	return foundObject;
 }
 
@@ -536,6 +541,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string("split:", 6), &ctr_string_split);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("up", 2), &ctr_string_to_upper);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("low", 3), &ctr_string_to_lower);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("skip:", 5), &ctr_string_skip);
 	
 	ctr_internal_create_func(CtrStdString, ctr_build_string("toNumber", 8), &ctr_string_to_number);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("toBoolean", 9), &ctr_string_to_boolean);

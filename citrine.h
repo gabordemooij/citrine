@@ -431,6 +431,7 @@ ctr_object* ctr_string_to_number(ctr_object* myself, ctr_argument* argumentList)
 ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Block Interface
@@ -564,6 +565,7 @@ ctr_object* ctr_build_string_from_cstring( char* str );
 #define	CTR_PARSER_CREATE_NODE() (ctr_tnode*) ctr_malloc(sizeof(ctr_tnode), 1)
 #define	CTR_PARSER_CREATE_PROGRAM_NODE() (ctr_tnode*) ctr_malloc(sizeof(ctr_tnode), 3)
 #define ASSIGN_STRING(o,p,v,s) o->p = ctr_malloc(s * sizeof(char), 0); memcpy( (char*) o->p,v,s);
+#define CTR_2CSTR(cs, s) cs = ctr_malloc((s->value.svalue->vlen+1) * sizeof(char),0); strncpy(cs, s->value.svalue->value, s->value.svalue->vlen); cs[s->value.svalue->vlen] = '\0';
 
 /**
  * Creates a mirror call.

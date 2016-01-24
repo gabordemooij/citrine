@@ -1,0 +1,69 @@
+
+# Source Code Extracted API/Manual
+# --------------------------------
+# API documentation generation script
+# generates man-style documentation
+# written by Gabor de Mooij
+
+?>
+.\" Manpage for ctr.
+.TH man 1 "01 February 2016" "1.0" "CTR man page"
+.SH NAME
+ctr \- run a Citrine program
+.SH SYNOPSIS
+ctr [PROGRAM]
+.SH DESCRIPTION
+Citrine is general purpose programming language for UNIX-like operating systems.
+.SH OPTIONS
+
+.BR \-c " "[OUTNAME]
+lexes and parses the program and writes a binary representation to disk under
+the specified filename.
+
+.BR \-i
+displays information about a binary Citrine program
+
+.BR \-r
+runs a binary Citrine program.
+
+.SH REFERENCE MANUAL
+<?.
+
+f := File new: 'base.c'.
+str := f read.
+commentBlocks := str split: '/**'.
+comment := commentBlocks pop.
+lines   := comment split: '\n'.
+
+lines count > 1 ifTrue: {\
+	
+	#print the headline
+	var headline := lines @ 1.
+	Pen write: '.BR', brk brk.
+	Pen write: '.B ' + (headline skip: 5), brk.
+	Pen write: '.BR', brk brk.
+	
+	#print the rest
+	Pen write: '.nf'.
+	var line := ''.
+	var n := 2.
+	{\ 
+		line := lines at: n. 
+		^ ((line indexOf: '*/') = -1). 
+	}
+	whileTrue: {\
+			line := line replace: '\\' with: '\\\\'.
+			Pen write: (line skip: 3), brk.
+			n inc: 1.
+	}.
+	Pen write: '.fi'.
+}.
+?>
+.SH BUGS
+No known bugs.
+
+.SH TODO
+Find a way to break out of loops.
+
+.SH AUTHOR
+Gabor de Mooij
