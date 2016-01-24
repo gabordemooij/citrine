@@ -508,6 +508,7 @@ ctr_object* ctr_command_num_of_args(ctr_object* myself, ctr_argument* argumentLi
 ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_command_exit(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Clock Interface

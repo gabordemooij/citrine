@@ -1,0 +1,4 @@
+#Test exit statement
+Pen write: 'Test the exit message'.
+Command exit.
+Pen write: 'Dont write this'.

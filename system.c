@@ -149,6 +149,10 @@ ctr_object* ctr_command_num_of_args(ctr_object* myself, ctr_argument* argumentLi
 	return ctr_build_number_from_float( (ctr_number) ctr_argc );
 }
 
+ctr_object* ctr_command_exit(ctr_object* myself, ctr_argument* argumentList) {
+	exit(0);
+}
+
 /**
  * CommandGetValueOfEnvironmentVariable
  *
