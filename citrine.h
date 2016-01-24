@@ -403,6 +403,8 @@ ctr_object* ctr_number_log(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_min(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_max(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_number_odd(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_number_even(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList);

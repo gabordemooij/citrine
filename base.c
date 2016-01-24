@@ -444,6 +444,14 @@ ctr_object* ctr_number_inc(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+ctr_object* ctr_number_odd(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool((int)myself->value.nvalue % 2);
+}
+
+ctr_object* ctr_number_even(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool(!((int)myself->value.nvalue % 2));
+}
+
 ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	ctr_number a = myself->value.nvalue;

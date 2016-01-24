@@ -1,0 +1,5 @@
+#Test odd an even messages.
+(7 odd) ifTrue: {\ Pen write: '7 is an ODD NUMBER', brk. }, else: {\ Pen write: 'WRONG!'. }.
+(4 even) ifTrue: {\ Pen write: '4 is an EVEN NUMBER', brk. }, else: {\ Pen write: 'WRONG!'. }.
+(5 even) ifTrue: {\ Pen write: 'WRONG!'. }, else: {\ Pen write: '5 is NOT AN EVEN NUMBER', brk. }.
+(6 odd) ifTrue: {\ Pen write: 'WRONG!'. }, else: {\ Pen write: '6 is NOT AN ODD NUMBER', brk. }.
