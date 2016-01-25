@@ -12,16 +12,18 @@
 #include "siphash.h"
 
 /**
- * Builds a Nil object.
+ * Nil
  *
- * Literal form: Nil
+ * Literal: 
+ * 
+ * Nil
  */
 ctr_object* ctr_build_nil() {
 	return CtrStdNil;
 }
 
 /**
- * NilIsNil
+ * isNil
  *
  * Nil always answers this message with a boolean object 'True'.
  */
@@ -30,13 +32,10 @@ ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * Root Object
+ * Object
+ * 
  * This is the base object, the parent of all other objects.
  * It contains essential object oriented programming features.
- */
-
-/**
- * Creates a new instance of the Root Object.
  */ 
 ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* objectInstance = NULL;
@@ -46,7 +45,7 @@ ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * ObjectType
+ * type
  *
  * Returns a string representation of the type of object.
  */
@@ -67,10 +66,12 @@ ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * Equals
+ * equals: [other]
  *
  * Tests whether the current instance is the same as
  * the argument.
+ * 
+ * Alias: =
  * 
  * Usage:
  * object equals: other
@@ -81,18 +82,27 @@ ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(0);
 }
 
+/**
+ * myself
+ * 
+ * Returns the object itself.
+ */
 ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-
 /**
- * OnMessageDoAction
+ * on: [string] do: [block]
  *
  * Makes the object respond to a new kind of message.
+ * Use the semicolons to indicate the positions of the arguments to be
+ * passed.
  *
  * Usage:
- * object on: 'greet' do {\ ... }.
+ * 
+ * object on: 'greet' do: {\ ... }.
+ * object on: 'between:and:' do: {\ ... }.
+ * 
  */
 ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* nextArgument;
@@ -112,9 +122,11 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-
-
 /**
+ * respondTo: [string]
+ * respondTo: [string] and: [string]
+ * respondTo: [string] and: [string] and: [string]
+ * 
  * Default respond-to implemention, does nothing.
  */
 ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList) {
@@ -122,7 +134,7 @@ ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * ObjectIsNil
+ * isNil
  *
  * Default isNil implementation.
  *
@@ -133,9 +145,12 @@ ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * Booleans.
+ * Boolean
  * 
- * Literal form: True False
+ * Literal: 
+ * 
+ * True 
+ * False
  */
 ctr_object* ctr_build_bool(int truth) {
 	ctr_object* boolObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
@@ -146,7 +161,7 @@ ctr_object* ctr_build_bool(int truth) {
 }
 
 /**
- * BooleanIsEqual
+ * =
  *
  * Tests whether the other object (as a boolean) has the
  * same value (boolean state True or False) as the current one.
@@ -159,8 +174,9 @@ ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(ctr_internal_cast2bool(argumentList->object)->value.bvalue == myself->value.bvalue);
 }
 
+
 /**
- * BooleanIsNotEqual
+ * !=
  *
  * Tests whether the other object (as a boolean) has the
  * same value (boolean state True or False) as the current one.
@@ -174,7 +190,33 @@ ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * ifTrue
+ * toString
+ *
+ * Simple cast function.
+ */
+ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_internal_cast2string(myself);
+}
+
+/**
+ * break
+ * 
+ * Breaks out of the current block and bubbles up to the parent block if
+ * the value of the receiver equals boolean True.
+ * 
+ * Usage:
+ * 
+ * (iteration > 10) break. #breaks out of loop after 10 iterations
+ */
+ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
+	if (myself->value.bvalue) {
+		CtrStdError = CtrStdNil; /* If error = Nil it's a break, if error = NULL, there is no error. */
+	}
+	return myself;
+}
+
+/**
+ * ifTrue: [block]
  *
  * Executes a block of code if the value of the boolean
  * object is True.
@@ -194,16 +236,8 @@ ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
-	if (myself->value.bvalue) {
-		CtrStdError = CtrStdNil; /* If error = Nil it's a break, if error = NULL, there is no error. */
-	}
-	return myself;
-}
-
-
 /**
- * ifFalse
+ * ifFalse: [block]
  *
  * Executes a block of code if the value of the boolean
  * object is True.
@@ -224,7 +258,7 @@ ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * BooleanNot
+ * not
  *
  * Returns the opposite of the current value.
  *
@@ -237,7 +271,7 @@ ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * BooleanFlipaCoin
+ * flip
  *
  * 'Flips a coin'. Returns a random boolean value True or False.
  *
@@ -249,7 +283,7 @@ ctr_object* ctr_bool_flip(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * BooleanEitherOr
+ * either: [this] or: [that]
  *
  * Returns argument #1 if boolean value is True and argument #2 otherwise.
  *
@@ -265,7 +299,7 @@ ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * BooleanAnd
+ * and: [other]
  *
  * Returns True if both the object value is True and the
  * argument is True as well.
@@ -281,7 +315,7 @@ ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * BooleanNor
+ * nor: [other]
  *
  * Returns True if the object value is False and the
  * argument is False as well.
@@ -297,7 +331,7 @@ ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * BooleanOr
+ * or: [other]
  *
  * Returns True if either the object value is True or the
  * argument is True or both are True.
@@ -312,7 +346,7 @@ ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * BooleanXOR
+ * xor: [other]
  *
  * Returns True if either the object value is True or the
  * argument is True but not both.
@@ -326,12 +360,26 @@ ctr_object* ctr_bool_xor(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool((myself->value.bvalue ^ other->value.bvalue));
 }
 
+/**
+ * toNumber
+ *
+ * Returns 0 if boolean is False and 1 otherwise.
+ */
+ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float( (ctr_number) myself->value.bvalue );
+}
 
 /**
- * BuildNumber
+ * Number
  *
- * Creates a number from a C string (0 terminated).
- * Internal use only.
+ * Literal:
+ * 
+ * 0
+ * 1
+ * -8
+ * 2.5
+ * 
+ * Represents a number object in Citrine.
  */
 ctr_object* ctr_build_number(char* n) {
 	ctr_object* numberObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
@@ -340,8 +388,12 @@ ctr_object* ctr_build_number(char* n) {
 	return numberObject;
 }
 
+/**
+ * @internal
+ * BuildNumberFromString
+ */
 ctr_object* ctr_build_number_from_string(char* str, ctr_size length) {
-	char*	 numCStr;
+	char* numCStr;
 	ctr_object* numberObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	/* turn string into a C-string before feeding it to atof */
 	numCStr = (char*) calloc(40, sizeof(char));
@@ -352,6 +404,7 @@ ctr_object* ctr_build_number_from_string(char* str, ctr_size length) {
 }
 
 /**
+ * @internal
  * BuildNumberFromFloat
  *
  * Creates a number object from a float.
@@ -365,47 +418,73 @@ ctr_object* ctr_build_number_from_float(ctr_number f) {
 }
 
 /**
- * Number Comparison Operators
- *
- * Implementation of >, <, >=, <=, == and !=
+ * > [other]
+ * 
+ * Returns True if the number is higher than other number.
  */
 ctr_object* ctr_number_higherThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue > otherNum->value.nvalue));
 }
 
+/**
+ * >= [other]
+ * 
+ * Returns True if the number is higher than or equal to other number.
+ */
 ctr_object* ctr_number_higherEqThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue >= otherNum->value.nvalue));
 }
 
+/**
+ * < [other]
+ * 
+ * Returns True if the number is less than other number.
+ */
 ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue < otherNum->value.nvalue));
 }
 
+/**
+ * <= [other]
+ * 
+ * Returns True if the number is less than or equal to other number.
+ */
 ctr_object* ctr_number_lowerEqThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue <= otherNum->value.nvalue));
 }
 
+/**
+ * = [other]
+ * 
+ * Returns True if the number equals the other number.
+ */
 ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool(myself->value.nvalue == otherNum->value.nvalue);
 }
 
+/**
+ * != [other]
+ * 
+ * Returns True if the number does not equal the other number.
+ */
 ctr_object* ctr_number_neq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool(myself->value.nvalue != otherNum->value.nvalue);
 }
 
 /**
- * BetweenAnd
+ * between: [low] and: [high]
  *
  * Returns True if the number instance has a value between the two
  * specified values.
  *
  * Usage:
+ *
  * q between: x and: y
  */
 ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList) {
@@ -415,15 +494,30 @@ ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool((myself->value.nvalue >=  otherNum->value.nvalue) && (myself->value.nvalue <= nextArgument->value.nvalue));
 }
 
+/**
+ * odd
+ * 
+ * Returns True if the number is odd and False otherwise.
+ */
+ctr_object* ctr_number_odd(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool((int)myself->value.nvalue % 2);
+}
 
 /**
- * Arithmetic
+ * even
  * 
- * The following functions implement basic arithmetic operations:
- * 
- * + - / * inc dec mul div
+ * Returns True if the number is even and False otherwise.
  */
-ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_number_even(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool(!((int)myself->value.nvalue % 2));
+}
+
+/**
+ * + [number]
+ * 
+ * Adds the other number to the current one. Returns a new
+ * number object.
+ */
 ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* newArg;
 	ctr_object* otherNum = argumentList->object;
@@ -442,21 +536,24 @@ ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float((a+b));
 }
 
-
+/**
+ * inc: [number]
+ * 
+ * Increases the number ITSELF by the specified amount, this message will change the
+ * value of the number object itself instead of returning a new number.
+ */
 ctr_object* ctr_number_inc(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	myself->value.nvalue += otherNum->value.nvalue;
 	return myself;
 }
 
-ctr_object* ctr_number_odd(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_bool((int)myself->value.nvalue % 2);
-}
-
-ctr_object* ctr_number_even(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_bool(!((int)myself->value.nvalue % 2));
-}
-
+/**
+ * - [number]
+ * 
+ * Subtracts the other number from the current one. Returns a new
+ * number object.
+ */
 ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	ctr_number a = myself->value.nvalue;
@@ -464,12 +561,24 @@ ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float((a-b));
 }
 
+/**
+ * dec: [number]
+ * 
+ * Decreases the number ITSELF by the specified amount, this message will change the
+ * value of the number object itself instead of returning a new number.
+ */
 ctr_object* ctr_number_dec(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	myself->value.nvalue -= otherNum->value.nvalue;
 	return myself;
 }
 
+/**
+ * * [multiplier]
+ * 
+ * Multiplies the number by the specified divider. Returns a new
+ * number object.
+ */
 ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum;
 	ctr_number a;
@@ -481,16 +590,28 @@ ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) 
 	return ctr_build_number_from_float(a*b);
 }
 
+/**
+ * mul: [multiplier]
+ * 
+ * Multiplies the number ITSELF by multiplier, this message will change the
+ * value of the number object itself instead of returning a new number.
+ */
 ctr_object* ctr_number_mul(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	myself->value.nvalue *= otherNum->value.nvalue;
 	return myself;
 }
 
+/**
+ * / [divider]
+ * 
+ * Divides the number by the specified divider. Returns a new
+ * number object.
+ */
 ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
-ctr_number a = myself->value.nvalue;
-ctr_number b = otherNum->value.nvalue;
+	ctr_number a = myself->value.nvalue;
+	ctr_number b = otherNum->value.nvalue;
 	if (b == 0) {
 		CtrStdError = ctr_build_string_from_cstring("Division by zero.");
 		return myself;
@@ -498,6 +619,12 @@ ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float((a/b));
 }
 
+/**
+ * div: [divider]
+ * 
+ * Divides the number ITSELF by divider, this message will change the
+ * value of the number object itself instead of returning a new number.
+ */
 ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	if (otherNum->value.nvalue == 0) {
@@ -508,11 +635,15 @@ ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-
+/**
+ * modulo: [modulo]
+ *
+ * Returns the modulo of the number.
+ */
 ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
-ctr_number a = myself->value.nvalue;
-ctr_number b = otherNum->value.nvalue;
+	ctr_number a = myself->value.nvalue;
+	ctr_number b = otherNum->value.nvalue;
 	if (b == 0) {
 		CtrStdError = ctr_build_string_from_cstring("Division by zero.");
 		return myself;
@@ -520,29 +651,54 @@ ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float(fmod(a,b));
 }
 
+/**
+ * pow: [power]
+ *
+ * Returns the number to the specified power.
+ */
 ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
-ctr_number a = myself->value.nvalue;
-ctr_number b = otherNum->value.nvalue;
+	ctr_number a = myself->value.nvalue;
+	ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float(pow(a,b));
 }
 
+/**
+ * max: [other]
+ *
+ * Returns the biggest number of the two.
+ *
+ * Usage:
+ *
+ * x := 6 max: 4. #x is 6
+ * x := 6 max: 7. #x is 7
+ */
 ctr_object* ctr_number_max(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
-ctr_number a = myself->value.nvalue;
-ctr_number b = otherNum->value.nvalue;
+	ctr_number a = myself->value.nvalue;
+	ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float((a >= b) ? a : b);
 }
 
+/**
+ * min: [other]
+ *
+ * Returns a the smallest number.
+ *
+ * Usage:
+ *
+ * x := 6 min: 4. #x is 4
+ * x := 6 min: 7. #x is 7
+ */
 ctr_object* ctr_number_min(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
-ctr_number a = myself->value.nvalue;
-ctr_number b = otherNum->value.nvalue;
+	ctr_number a = myself->value.nvalue;
+	ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float((a <= b) ? a : b);
 }
 
 /**
- * Factorial
+ * factorial
  *
  * Calculates the factorial of a number.
  */
@@ -556,6 +712,17 @@ ctr_object* ctr_number_factorial(ctr_object* myself, ctr_argument* argumentList)
 	return ctr_build_number_from_float(a);
 }
 
+/**
+ * to: [number] by: [step] do: [block]
+ *
+ * Runs the specified block for each step it takes to go from
+ * the start value to the target value using the specified step size.
+ * This is basically how you write for-loops in Citrine.
+ * 
+ * Usage:
+ *
+ * 1 to: 5 by: 1 do: { step | Pen write: 'this is step #'+step. }.
+ */
 ctr_object* ctr_number_to_by_do(ctr_object* myself, ctr_argument* argumentList) {
 	double startValue = myself->value.nvalue;
 	double endValue   = ctr_internal_cast2number(argumentList->object)->value.nvalue;
@@ -581,49 +748,101 @@ ctr_object* ctr_number_to_by_do(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * Some basic math functions: floor, ceil, round, abs, sqrt, pow, sin, cos
- * tan, atan and log.
+ * floor
+ *
+ * Returns the next highest integer number by rounding down.
  */
 ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(floor(myself->value.nvalue));
 }
 
+/**
+ * ceil
+ *
+ * Returns the next highest integer number by rounding up.
+ */
 ctr_object* ctr_number_ceil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(ceil(myself->value.nvalue));
 }
 
+/**
+ * round
+ * 
+ * Returns the rounded number.
+ */
 ctr_object* ctr_number_round(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(round(myself->value.nvalue));
 }
 
+/**
+ * abs
+ * 
+ * Returns the absolute value of the number.
+ */
 ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(fabs(myself->value.nvalue));
 }
 
+/**
+ * sqrt
+ * 
+ * Returns the square root of the number.
+ */
 ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(sqrt(myself->value.nvalue));
 }
 
+/**
+ * exp
+ * 
+ * Returns the exponent of the number.
+ */
 ctr_object* ctr_number_exp(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(exp(myself->value.nvalue));
 }
+
+/**
+ * sin
+ * 
+ * Returns the sine of the number.
+ */
 
 ctr_object* ctr_number_sin(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(sin(myself->value.nvalue));
 }
 
+/**
+ * cos
+ * 
+ * Returns the cosine of the number.
+ */
 ctr_object* ctr_number_cos(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(cos(myself->value.nvalue));
 }
 
+/**
+ * tan
+ *
+ * Caculates the tangent of a number.
+ */
 ctr_object* ctr_number_tan(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(tan(myself->value.nvalue));
 }
 
+/**
+ * atan
+ * 
+ * Caculates the atan of a number.
+ */
 ctr_object* ctr_number_atan(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(atan(myself->value.nvalue));
 }
 
+/**
+ * log
+ *
+ * Calculates the logarithm of a number.
+ */
 ctr_object* ctr_number_log(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(log(myself->value.nvalue));
 }
@@ -638,28 +857,25 @@ ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * NumberToBoolean
+ * toBoolean
  *
- * Wrapper for cast function.
+ * Casts a number to a boolean object.
  */
 ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_cast2bool(myself);
 }
 
 /**
- * BooleanToNumber
+ * String
  *
- * Wrapper for cast function.
- * Returns 0 if boolean is False and 1 otherwise.
- */
-ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float( (ctr_number) myself->value.bvalue );
-}
-
-/**
- * BuildString
- *
- * Creates a Citrine String object.
+ * Literal:
+ * 
+ * 'Hello World, this is a String.'
+ * 
+ * A sequence of characters. In Citrine, strings are UTF-8 aware.
+ * You may only use single quotes. To escape a character use the
+ * backslash '\' character.
+ * 
  */
 ctr_object* ctr_build_string(char* stringValue, long size) {
 	ctr_object* stringObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
@@ -673,6 +889,7 @@ ctr_object* ctr_build_string(char* stringValue, long size) {
 }
 
 /**
+ * @internal
  * BuildStringFromCString
  *
  * Creates a Citrine String from a 0 terminated C String.
@@ -682,16 +899,17 @@ ctr_object* ctr_build_string_from_cstring(char* cstring) {
 }
 
 /**
- * StringBytes
+ * bytes
  *
- * Returns the number of bytes in a string.
+ * Returns the number of bytes in a string, as opposed to
+ * length which returns the number of UTF-8 code points (symbols or characters).
  */
 ctr_object* ctr_string_bytes(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float((float)myself->value.svalue->vlen);
 }
 
 /**
- * StringEquality
+ * = [other]
  *
  * Returns True if the other string is the same (in bytes).
  */
@@ -703,7 +921,7 @@ ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * StringNonEquality
+ * != [other]
  *
  * Returns True if the other string is not the same (in bytes).
  */
@@ -715,7 +933,7 @@ ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * StringLength
+ * length
  *
  * Returns the length of the string in symbols.
  * This message is UTF-8 unicode aware. A 4 byte character will be counted as ONE.
@@ -726,7 +944,7 @@ ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * StringConcat
+ * + [other]
  *
  * Appends other string to self and returns the resulting
  * string as a new object.
@@ -748,12 +966,13 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * StringFromTo
+ * from: [position] to: [destination]
  *
  * Returns a portion of a string defined by from-to values.
  * This message is UTF-8 unicode aware.
  *
  * Usage:
+ * 
  * 'hello' from: 2 to: 3. #ll
  */
 ctr_object* ctr_string_fromto(ctr_object* myself, ctr_argument* argumentList) {
@@ -783,13 +1002,14 @@ ctr_object* ctr_string_fromto(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * StringFromLength
+ * from: [start] length: [length]
  *
  * Returns a portion of a string defined by from 
  * and length values.
  * This message is UTF-8 unicode aware.
  *
  * Usage:
+ *
  * 'hello' from: 2 length: 3. #llo
  */
 ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentList) {
@@ -818,7 +1038,11 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	return newString;
 }
 
-
+/**
+ * skip: [number]
+ *
+ * Returns a string without the first X characters.
+ */
 ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* argument1;
 	ctr_argument* argument2;
@@ -833,11 +1057,12 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 
 
 /**
- * StringCharacterAt
+ * at: [position]
  *
  * Returns the character at the specified position (UTF8 aware).
  *
  * Usage:
+ * 
  * ('hello' at: 2). #l
  */
 ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
@@ -853,7 +1078,7 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * StringByteAt
+ * byteAt: [position]
  *
  * Returns the byte at the specified position (in bytes).
  *
@@ -872,12 +1097,13 @@ ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * StringIndexOf
+ * indexOf: [subject]
  *
  * Returns the index (character number, not the byte!) of the
  * needle in the haystack.
  * 
  * Usage:
+ *
  * 'find the needle' indexOf: 'needle'. #9
  *
  */
@@ -894,6 +1120,14 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
 	return ctr_build_number_from_float((ctr_number) uchar_index);
 }
 
+/**
+ * up
+ * 
+ * Returns a new uppercased version of the string.
+ * Note that this is just basic ASCII case functionality, this should only
+ * be used for internal keys and as a basic utility function. This function
+ * DOES NOT WORK WITH UTF8 characters !
+ */
 ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) {
        char* str = myself->value.svalue->value;
        size_t  len = myself->value.svalue->vlen;
@@ -905,6 +1139,15 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
        return ctr_build_string(tstr, len);
 }
 
+
+/**
+ * low
+ * 
+ * Returns a new lowercased version of the string.
+ * Note that this is just basic ASCII case functionality, this should only
+ * be used for internal keys and as a basic utility function. This function
+ * DOES NOT WORK WITH UTF8 characters !
+ */
 ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) {
        char* str = myself->value.svalue->value;
        size_t len = myself->value.svalue->vlen;
@@ -917,12 +1160,13 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * StringLastIndexOf
+ * lastIndexOf: [subject]
  *
  * Returns the index (character number, not the byte!) of the
  * needle in the haystack.
  * 
  * Usage:
+ * 
  * 'find the needle' lastIndexOf: 'needle'. #9
  */
 ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentList) {
@@ -939,7 +1183,7 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentL
 }
 
 /**
- * StringReplaceWith
+ * replace: [string] with: [other]
  *
  * Replaces needle with replacement in original string and returns
  * the result as a new string object.
@@ -994,12 +1238,13 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 }
 
 /**
- * StringTrim
+ * trim
  *
  * Trims a string. Removes surrounding white space characters
  * from string and returns the result as a new string object.
  *
  * Usage:
+ *
  * ' hello ' trim. #hello
  *
  */
@@ -1023,7 +1268,9 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 
 
 /**
- * StringLeftTrim
+ * ltrim
+ * 
+ * Removes all the whitespace at the left side of the string.
  */
 ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
@@ -1042,7 +1289,9 @@ ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * StringRightTrim
+ * rtrim
+ * 
+ * Removes all the whitespace at the right side of the string.
  */
 ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
@@ -1060,35 +1309,26 @@ ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * StringToNumber
+ * toNumber
  *
- * Wrapper for cast function.
+ * Converts string to a number.
  */
 ctr_object* ctr_string_to_number(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_cast2number(myself);
 }
 
 /**
- * StringToBooleam
+ * toBoolean
  *
- * Wrapper for cast function.
+ * Converts string to boolean
  */
 ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_cast2bool(myself);
 }
 
 /**
- * BooleanToString
- *
- * Simple cast function.
- */
-ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_cast2string(myself);
-}
-
-/**
- * StringHTMLEscape
- *
+ * htmlEscape
+ * 
  * Escapes HTML chars.
  */
 ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentList) {
@@ -1139,10 +1379,34 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 	return ctr_build_string(tstr, tlen);
 }
 
+
 /**
- * BlockRun
+ * Block
  *
- * Runs a block of code.
+ * Literal: 
+ *
+ * { parameters here... | code here... }
+ * {\ code without parameters... }
+ *
+ * Examples:
+ *
+ * {\ Pen write: 'a simple code block'. } run.
+ * { param | Pen write: param. } applyTo: 'write this!'.
+ * { a b | ^ a + b. } applyTo: 1 and: 2.
+ * { a b c | ^ a + b + c. } applyTo: 1 and: 2 and: 3.
+ * 
+ */
+ctr_object* ctr_build_block(ctr_tnode* node) {
+	ctr_object* codeBlockObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBLOCK);
+	codeBlockObject->value.block = node;
+	codeBlockObject->link = CtrStdBlock;
+	return codeBlockObject;
+}
+
+/**
+ * applyTo: [object]
+ *
+ * Runs a block of code using the specified object as a parameter.
  */
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my) {
 	ctr_object* result;
@@ -1188,7 +1452,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 }
 
 /**
- * BlockTimes
+ * times:
  *
  * Runs the specified code block N times.
  *
@@ -1218,7 +1482,7 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * BlockWhileTrue
+ * whileTrue: [block]
  *
  * Runs a block of code, depending on the outcome runs the other block
  * as long as the result of the first one equals boolean True.
@@ -1234,7 +1498,7 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * BlockWhileFalse
+ * whileFalse: [block]
  *
  * Runs a block of code, depending on the outcome runs the other block
  * as long as the result of the first one equals boolean False.
@@ -1250,7 +1514,9 @@ ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * Alias for BlockRun.
+ * run
+ *
+ * Runs a block
  */
 ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
@@ -1259,22 +1525,16 @@ ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
 	return result;
 }
 
+/**
+ * set: [name] value: [object]
+ *
+ * Sets a variable in a closure.
+ */
 ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* key = ctr_internal_cast2string(argumentList->object);
 	ctr_object* value = argumentList->next->object;
 	ctr_internal_object_set_property(myself, key, value, 0);
 	return myself; 
-}
-
-/**
- * @description
- * Builds a block object from a literal block of code.
- */
-ctr_object* ctr_build_block(ctr_tnode* node) {
-	ctr_object* codeBlockObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBLOCK);
-	codeBlockObject->value.block = node;
-	codeBlockObject->link = CtrStdBlock;
-	return codeBlockObject;
 }
 
 /**
