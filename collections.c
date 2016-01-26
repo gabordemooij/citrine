@@ -67,7 +67,10 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 	block->info.sticky = 1;
 	for(i = 0; i < myself->value.avalue->head; i++) {
 		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
+		ctr_argument* argument2 = CTR_CREATE_ARGUMENT();
 		arguments->object = ctr_build_number_from_float((double) i);
+		argument2->object = *(myself->value.avalue->elements + i);
+		arguments->next = argument2;
 		ctr_block_run(block, arguments, myself);
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL;
 		if (CtrStdError) break;
