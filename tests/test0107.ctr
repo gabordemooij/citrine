@@ -1,17 +1,16 @@
 #Test loop breaking
-
+Pen write: 'Break for-loop, 0-4.', brk.
 #0-4
 0 to: 10 by: 1 do: { i |
 	Pen write: 'iteration #' + i, brk.
 	(i = 4) break.
 }.
 
-
 x := 0.
 xIsLessThan10 := {\ ^( x < 10 ). }.
 
-
 #0-4
+Pen write: 'Break while-true loop, 0-4.', brk.
 xIsLessThan10 whileTrue: {\
 	Pen write: 'iteration #' + x, brk.
 	x inc: 1.
@@ -19,6 +18,7 @@ xIsLessThan10 whileTrue: {\
 }.
 
 #5,4
+Pen write: 'Break while-false loop, 5,4.', brk.
 {\ ^(x=0). } whileFalse: {\
 	Pen write: 'iteration #' + x, brk.
 	x dec: 1.
@@ -26,13 +26,32 @@ xIsLessThan10 whileTrue: {\
 }.
 
 #1-4
+Pen write: 'Break times loop, 1-4.', brk.
 5 * { i |
 	Pen write: 'iteration #' + i, brk.
 	(i = 4) break.
 }.
 
 #nothing should happen, no error
+Pen write: 'Break block, dont print line.', brk.
 {\ True break. Pen write: 'dont write this!', brk. } run.
 
 #nothing should happen, no error
+Pen write: 'Break block, dont fire catch...', brk.
 {\ True break. Pen write: 'dont write this!', brk. } catch: {\ Pen write: 'Dont catch this!'. }, run.
+
+#test each-loops
+Pen write: 'Test Array each-loop: 0,1', brk.
+(Array <- 1 ; 2 ; 3) map: { i |
+	Pen write: 'iteration #' + i, brk.
+	(i = 1) break.
+}.
+
+Pen write: 'Test Map each-loop: c only', brk.
+m := Map new.
+m put: 'first' at: 'a', put: 'second' at: 'b', put: 'third' at: 'c'.
+m each: { k v |
+	Pen write: 'iteration' + k + v, brk.
+	True break.
+}.
+
