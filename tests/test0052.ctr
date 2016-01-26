@@ -4,7 +4,7 @@ items put: 'orange' at: 'color-2'.
 items put: 'red' at: 'color-3'.
 i := 0.
 s := ''.
-items each: { color |
+items each: { key color |
 	Pen write: 'color #' + i + ' is: ' + color + ' '.
 	i inc: 1.
 }.

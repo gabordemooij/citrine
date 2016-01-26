@@ -499,8 +499,8 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	while(m && !CtrStdError) {
 		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
 		ctr_argument* argument2 = CTR_CREATE_ARGUMENT();
-		arguments->object = m->value;
-		argument2->object = m->key;
+		arguments->object = m->key;
+		argument2->object = m->value;
 		arguments->next = argument2;
 		ctr_block_run(block, arguments, myself);
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL;

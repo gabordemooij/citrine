@@ -51,7 +51,7 @@ Pen write: 'Test Map each-loop: c only', brk.
 m := Map new.
 m put: 'first' at: 'a', put: 'second' at: 'b', put: 'third' at: 'c'.
 m each: { k v |
-	Pen write: 'iteration' + k + v, brk.
+	Pen write: 'iteration' + v + k, brk.
 	True break.
 }.
 
