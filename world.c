@@ -733,6 +733,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
  */
 ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 	ctr_object* object;
+	if (CtrStdError) return CtrStdNil;
 	key->info.sticky = 0;
 	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC || o->info.type == CTR_OBJECT_TYPE_OTARRAY) {
 		ctr_set(key, o);
@@ -769,6 +770,7 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 	ctr_object* object;
 	ctr_object* my = ctr_find(ctr_build_string("me", 2));
+	if (CtrStdError) return CtrStdNil;
 	key->info.sticky = 0;
 	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC || o->info.type == CTR_OBJECT_TYPE_OTARRAY) {
 		ctr_internal_object_set_property(my, key, o, 0);
@@ -804,6 +806,7 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* o) {
 	ctr_object* object;
 	ctr_object* context;
+	if (CtrStdError) return CtrStdNil;
 	context = ctr_contexts[ctr_context_id];
 	key->info.sticky = 0;
 	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC || o->info.type == CTR_OBJECT_TYPE_OTARRAY) {
