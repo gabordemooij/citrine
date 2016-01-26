@@ -12,13 +12,18 @@
 #include "siphash.h"
 
 /**
- * ArrayNew
+ * [Array] new
  *
- * Creates a new instance of an Array.
+ * Creates a new Array.
  *
  * Usage:
  *
  * a := Array new.
+ * 
+ * or, the short form:
+ * 
+ * a := Array <- 1 ; 2 ; 3.
+ * 
  */
 ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTARRAY);
