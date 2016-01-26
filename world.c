@@ -587,6 +587,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("from:length:", 12), &ctr_array_from_to);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("+", 1), &ctr_array_add);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("map:", 4), &ctr_array_map);
+	ctr_internal_create_func(CtrStdArray, ctr_build_string("each:", 5), &ctr_array_map);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Array", 5), CtrStdArray, 0);
 	CtrStdArray->link = CtrStdObject;
 
@@ -598,6 +599,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdMap, ctr_build_string("@", 1), &ctr_map_get);
 	ctr_internal_create_func(CtrStdMap, ctr_build_string("count", 5), &ctr_map_count);
 	ctr_internal_create_func(CtrStdMap, ctr_build_string("each:", 5), &ctr_map_each);
+	ctr_internal_create_func(CtrStdMap, ctr_build_string("map:", 4), &ctr_map_each);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Map", 3), CtrStdMap, 0);
 	CtrStdMap->link = CtrStdObject;
 
