@@ -469,6 +469,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("ifTrue:", 7), &ctr_bool_iftrue);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("ifFalse:", 8), &ctr_bool_ifFalse);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("break", 5), &ctr_bool_break);
+	ctr_internal_create_func(CtrStdBool, ctr_build_string("continue", 8), &ctr_bool_continue);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("else:", 5), &ctr_bool_ifFalse);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("not", 3), &ctr_bool_not);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("∧", 3), &ctr_bool_and);
@@ -662,6 +663,10 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("objectCount", 11), &ctr_gc_object_count);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Broom", 5), CtrStdGC, 0);
 	CtrStdGC->link = CtrStdObject;
+	
+	/* Other objects */
+	CtrStdBreak = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	CtrStdContinue = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 }
 
 /**

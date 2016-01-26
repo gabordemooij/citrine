@@ -1,0 +1,39 @@
+#Test continue message
+1 to: 10 by: 1 do: { i |
+	Pen write: i, brk.
+	(i > 4) continue.
+	Pen write: '-'.
+}.
+
+
+x := 0.
+xIsLessThan10 := {\ ^( x < 10 ). }.
+#0-4
+xIsLessThan10 whileTrue: {\
+	Pen write: 'iteration #' + x, brk.
+	x inc: 1.
+	((x < 5) not) continue.
+	Pen write: '-->'.
+}.
+
+#5,4
+{\ ^(x=0). } whileFalse: {\
+	Pen write: 'iteration #' + x, brk.
+	x dec: 1.
+	(x = 3) continue.
+	Pen write: '-'.
+}.
+
+#1-4
+5 * { i |
+	Pen write: 'iteration #' + i, brk.
+	(i = 4) continue.
+	Pen write: '|||'.
+}.
+
+#nothing should happen, no error
+{\ True continue. Pen write: 'dont write this!', brk. } run.
+
+#nothing should happen, no error
+{\ True continue. Pen write: 'dont write this!', brk. } catch: {\ Pen write: 'Dont catch this!'. }, run.
+

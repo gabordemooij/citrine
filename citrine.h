@@ -204,6 +204,8 @@ ctr_object* CtrStdCommand;
 ctr_object* CtrStdShell;
 ctr_object* CtrStdClock;
 ctr_object* CtrStdError;
+ctr_object* CtrStdBreak;
+ctr_object* CtrStdContinue;
 ctr_object* ctr_first_object;
 
 /**
@@ -370,6 +372,7 @@ ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_bool_flip(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Number Interface

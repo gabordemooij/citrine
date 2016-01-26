@@ -216,6 +216,23 @@ ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * continue
+ * 
+ * Skips the remainder of the current block in a loop, continues to the next
+ * iteration.
+ * 
+ * Usage:
+ * 
+ * (iteration > 10) continue.
+ */
+ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
+	if (myself->value.bvalue) {
+		CtrStdError = CtrStdContinue; /* If error = Continue, then it breaks only one iteration (return). */
+	}
+	return myself;
+}
+
+/**
  * ifTrue: [block]
  *
  * Executes a block of code if the value of the boolean
@@ -741,6 +758,7 @@ ctr_object* ctr_number_to_by_do(ctr_object* myself, ctr_argument* argumentList) 
 		arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = ctr_build_number_from_float(curValue);
 		ctr_block_run(codeBlock, arguments, codeBlock);
+		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue and go on */
 		curValue += incValue;
 	}
 	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
@@ -1437,7 +1455,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	result = ctr_cwlk_run(codeBlockPart2);
 	if (result == NULL) result = my;
 	ctr_close_context();
-	if (CtrStdError != NULL && CtrStdError != CtrStdNil) {
+	if (CtrStdError != NULL && CtrStdError != CtrStdNil && CtrStdError != CtrStdContinue) {
 		ctr_object* catchBlock = malloc(sizeof(ctr_object));
 		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string("catch",5), 0);
 		if (catchBlock != NULL) {
@@ -1473,6 +1491,7 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
 		arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = indexNumber;
 		ctr_block_run(block, arguments, block);
+		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
 		if (CtrStdError) break;
 	}
 	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
@@ -1492,6 +1511,7 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
 		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, myself));
 		if (result->value.bvalue == 0 || CtrStdError) break;
 		ctr_block_run(argumentList->object, argumentList, argumentList->object);
+		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
 	}
 	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
 	return myself;
@@ -1508,6 +1528,7 @@ ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList
 		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, myself));
 		if (result->value.bvalue == 1 || CtrStdError) break;
 		ctr_block_run(argumentList->object, argumentList, argumentList->object);
+		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
 	}
 	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
 	return myself;
@@ -1521,7 +1542,7 @@ ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList
 ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
 	result = ctr_block_run(myself, argumentList, myself);
-	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
+	if (CtrStdError == CtrStdNil || CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume break */
 	return result;
 }
 
