@@ -36,7 +36,3 @@ xIsLessThan10 whileTrue: {\
 
 #nothing should happen, no error
 {\ True break. Pen write: 'dont write this!', brk. } catch: {\ Pen write: 'Dont catch this!'. }, run.
-
-#Nil error is same as break, but dirty!
-{\ thisBlock error: Nil. Pen write: 'dont write this!', brk. } catch: {\ Pen write: 'Dont catch this!'. }, run.
-

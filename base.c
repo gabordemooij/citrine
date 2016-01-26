@@ -210,7 +210,7 @@ ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
-		CtrStdError = CtrStdNil; /* If error = Nil it's a break, if error = NULL, there is no error. */
+		CtrStdError = CtrStdBreak; /* If error = Break it's a break, there is no real error. */
 	}
 	return myself;
 }
@@ -249,7 +249,7 @@ ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
 		arguments->object = myself;
 		return ctr_block_run(codeBlock, arguments, codeBlock);
 	}
-	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
+	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
 	return myself;
 }
 
@@ -270,7 +270,7 @@ ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
 		arguments->object = myself;
 		return ctr_block_run(codeBlock, arguments, codeBlock);
 	}
-	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
+	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
 	return myself;
 }
 
@@ -761,7 +761,7 @@ ctr_object* ctr_number_to_by_do(ctr_object* myself, ctr_argument* argumentList) 
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue and go on */
 		curValue += incValue;
 	}
-	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
+	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
 	return myself;
 }
 
@@ -1455,7 +1455,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	result = ctr_cwlk_run(codeBlockPart2);
 	if (result == NULL) result = my;
 	ctr_close_context();
-	if (CtrStdError != NULL && CtrStdError != CtrStdNil && CtrStdError != CtrStdContinue) {
+	if (CtrStdError != NULL && CtrStdError != CtrStdBreak && CtrStdError != CtrStdContinue) {
 		ctr_object* catchBlock = malloc(sizeof(ctr_object));
 		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string("catch",5), 0);
 		if (catchBlock != NULL) {
@@ -1494,7 +1494,7 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
 		if (CtrStdError) break;
 	}
-	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
+	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
 	block->info.mark = 0;
 	block->info.sticky = 0;
 	return myself;
@@ -1513,7 +1513,7 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
 		ctr_block_run(argumentList->object, argumentList, argumentList->object);
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
 	}
-	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
+	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
 	return myself;
 }
 
@@ -1530,7 +1530,7 @@ ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList
 		ctr_block_run(argumentList->object, argumentList, argumentList->object);
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
 	}
-	if (CtrStdError == CtrStdNil) CtrStdError = NULL; /* consume break */
+	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
 	return myself;
 }
 
@@ -1542,7 +1542,7 @@ ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList
 ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
 	result = ctr_block_run(myself, argumentList, myself);
-	if (CtrStdError == CtrStdNil || CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume break */
+	if (CtrStdError == CtrStdBreak || CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume break */
 	return result;
 }
 
