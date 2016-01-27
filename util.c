@@ -36,8 +36,8 @@ int fsize(char* filename) {
 void ctr_serializer_serialize(ctr_tnode* t) {
 	FILE *f;
 	f = fopen(ctr_mode_compile_save_as,"wb");
+    if (!f) { printf("Unable to open file!"); exit(1); }
 	memcpy( ctr_malloc_chunk, ctr_default_header, sizeof(ctr_ast_header));/* append to addressbook, new header */
-	if (!f) { printf("Unable to open file!"); exit(1); }
 	fwrite(ctr_malloc_chunk, sizeof(char), ctr_malloc_measured_size_code+ctr_malloc_measured_size_addressbook, f);
 	fclose(f);
 }
