@@ -382,6 +382,7 @@ ctr_object* ctr_number_inc(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_dec(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_mul(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList);

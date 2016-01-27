@@ -27,7 +27,7 @@ Pen write: 'Break while-false loop, 5,4.', brk.
 
 #1-4
 Pen write: 'Break times loop, 1-4.', brk.
-5 * { i |
+5 times: { i |
 	Pen write: 'iteration #' + i, brk.
 	(i = 4) break.
 }.
