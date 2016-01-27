@@ -1,6 +1,9 @@
 
 all:ctr
 
+install: ctr
+	cp ./ctr /usr/bin/ctr
+
 ctr: siphash.o utf8.o memory.o util.o base.o collections.o file.o system.o world.o lexer.o parser.o walker.o citrine.o
 	gcc siphash.o utf8.o memory.o util.o base.o collections.o file.o system.o world.o lexer.o parser.o walker.o citrine.o -lm -o ctr
 
