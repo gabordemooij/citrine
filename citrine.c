@@ -48,6 +48,12 @@ void ctr_cli_read_args(int argc, char* argv[]) {
 	while ((option_symbol = getopt(argc, argv, "c:ri")) != -1) {
 		switch (option_symbol) { 
 			case 'c':
+                /* Prevent segfaults with wrong number of arguments  */
+                if ( argc < 4 ) {
+                    printf("Too few arguments!\n");
+                    ctr_cli_welcome();
+                    exit(1);
+                }
 				ctr_mode_compile = 1;
 				ctr_mode_compile_save_as = calloc(sizeof(char), 255);
 				strncpy(ctr_mode_compile_save_as, optarg, 254);
