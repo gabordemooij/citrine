@@ -12,9 +12,14 @@
 #include "siphash.h"
 
 /**
- * FileNew
- *
+ * File
+ * 
+ * Represents a File object.
  * Creates a new file object based on the specified path.
+ * 
+ * Usage:
+ * 
+ * File new: '/example/path/to/file.txt'.
  */
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* s = ctr_object_make(myself, argumentList);
@@ -34,7 +39,7 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * FilePath
+ * [File] path
  *
  * Returns the path of a file.
  */
@@ -45,7 +50,7 @@ ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * FileRead
+ * [File] read
  *
  * Reads contents of a file.
  */
@@ -82,7 +87,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * FileWrite
+ * [File] write: [String]
  *
  * Writes content to a file.
  */
@@ -108,7 +113,7 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * FileAppend
+ * [File] append: [String]
  *
  * Appends content to a file.
  */
@@ -134,7 +139,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * FileExists
+ * [File] exists
  *
  * Returns True if the file exists and False otherwise.
  */
@@ -158,7 +163,7 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * FileInclude
+ * [File] include
  *
  * Includes the file as a piece of executable code.
  */
@@ -180,7 +185,7 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * FileIncludeAST
+ * [File] run
  *
  * Includes the file as a piece of executable code.
  */
@@ -200,7 +205,7 @@ ctr_object* ctr_file_include_ast(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * FileDelete
+ * [File] delete
  *
  * Deletes the file.
  */
@@ -223,7 +228,7 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * FileSize
+ * [File] size
  *
  * Returns the size of the file.
  */

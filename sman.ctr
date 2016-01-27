@@ -35,43 +35,54 @@ runs a binary Citrine program.
 .BR
 <?.
 
-f := File new: 'base.c'.
-str := f read.
-commentBlocks := str split: '/**'.
-commentBlocks shift.
+files := Array <- 
+			'base.c' ;
+			'collections.c' ;
+			'file.c' ;
+			'system.c'.
 
-(commentBlocks count) * {\
-	var comment := commentBlocks shift.
-	var lines   := comment split: '\n'.
-	lines count > 3 ifTrue: {\
+files each: { index file |
+
+	var f := File new: file.
+	var str := f read.
+	var commentBlocks := str split: '/**'.
+	commentBlocks shift.
 	
-		#print the headline
-		var headline := lines @ 1.
+	(commentBlocks count) * {\
+		var comment := commentBlocks shift.
+		var lines   := comment split: '\n'.
+		lines count > 3 ifTrue: {\
 		
-		Pen write: '.BR.BR.BR', brk brk.
-		
-		((headline indexOf: '@internal') = -1) ifTrue: {\
+			#print the headline
+			var headline := lines @ 1.
 			
-			Pen write: '.B ' + (headline skip: 3), brk.
+			Pen write: '.BR.BR.BR', brk brk.
 			
-			
-			#print the rest
-			Pen write: '.nf', brk.
-			var line := ''.
-			var n := 2.
-			{\
-				line := lines at: n. 
-				^ ((line indexOf: '*/') = -1). 
-			}
-			whileTrue: {\
-					line := line replace: '\\' with: '\\\\'.
-					Pen write: '    '+(line skip: 2), brk.
-					n inc: 1.
+			((headline indexOf: '@internal') = -1) ifTrue: {\
+				
+				Pen write: '.B ' + (headline skip: 3), brk.
+				
+				
+				#print the rest
+				Pen write: '.nf', brk.
+				var line := ''.
+				var n := 2.
+				{\
+					line := lines at: n. 
+					^ ((line indexOf: '*/') = -1). 
+				}
+				whileTrue: {\
+						line := line replace: '\\' with: '\\\\'.
+						Pen write: '    '+(line skip: 2), brk.
+						n inc: 1.
+				}.
+				Pen write: '.fi', brk.
 			}.
-			Pen write: '.fi', brk.
 		}.
 	}.
 }.
+
+
 
 ?>
 .SH BUGS

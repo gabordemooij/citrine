@@ -37,7 +37,7 @@ ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 }
 
 /**
- * ArrayPush
+ * [Array] push: [Element]
  *
  * Pushes an element on top of the array.
  *
@@ -59,9 +59,15 @@ ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * ArrayMap
+ * [Array] map: [Block].
  *
- * Iterates over the array.
+ * Iterates over the array. Passing each element as a key-value pair to the
+ * specified block.
+ * 
+ * Usage:
+ *
+ * files map: showName.
+ * files map: { key filename | Pen write: filename, brk. }.
  */
 ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
@@ -87,7 +93,13 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * ArrayNewAndPush
+ * [Array] each: [Block].
+ *
+ *  Alias for [Array] map: [Block].
+ */
+
+/**
+ * [Array] <- [Element1] ; [Element2] ; ...
  *
  * Creates a new instance of an array and initializes this
  * array with a first element, useful for literal-like Array
@@ -105,9 +117,16 @@ ctr_object* ctr_array_new_and_push(ctr_object* myclass, ctr_argument* argumentLi
 }
 
 /**
- * ArrayUnshift
+ * [Array] unshift: [Element].
  *
  * Unshift operation for array.
+ * Adds the specified element to the beginning of the array.
+ *
+ * Usage:
+ *
+ * a := Array new.
+ * a push: 1.
+ * a unshift: 3. #now contains: 3,1
  */
 ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pushValue = argumentList->object;
@@ -126,7 +145,7 @@ ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * ArrayJoin
+ * [Array] join: [Glue].
  *
  * Joins the elements of an array together in a string
  * separated by a specified glue string.
@@ -135,7 +154,7 @@ ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
  *
  * collection := Array new.
  * collection push: 1, push: 2, push 3.
- * collection join: ','. --> 1,2,3
+ * collection join: ','. # results in string: '1,2,3'
  */
 ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 	int i;
@@ -168,9 +187,15 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * ArrayGet
+ * [Array] at: [Index]
  *
  * Returns the element in the array at the specified index.
+ * Note that the fisrt index of the array is index 0.
+ *
+ * Usage:
+ * 
+ * fruits := Array <- 'apples' ; 'oranges' ; 'bananas'.
+ * fruits at: 1. #returns 'oranges'
  */
 ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* getIndex = argumentList->object;
@@ -187,9 +212,22 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * ArrayPut
+ * [Array] @ [Index]
+ * 
+ * Alias for [Array] at: [Index]
+ */
+
+/**
+ * [Array] put: [Element] at: [Index]
  *
  * Puts a value in the array at the specified index.
+ * Array will be automatically expanded if the index is higher than
+ * the maximum index of the array.
+ * 
+ * Usage:
+ * 
+ * fruits := Array new.
+ * fruits put: 'apples' at: 5.
  */
 ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 	
@@ -229,10 +267,9 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * ArrayPop
+ * [Array] pop
  *
  * Pops off the last element of the array.
- * @todo dont forget to gc arrays, they might hold refs to objects!
  */
 ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.avalue->tail >= myself->value.avalue->head) {
@@ -243,7 +280,7 @@ ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * ArrayShift
+ * [Array] shift
  *
  * Shifts off the first element of the array.
  */
@@ -258,7 +295,7 @@ ctr_object* ctr_array_shift(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * ArrayCount
+ * [Array] count
  *
  * Returns the number of elements in the array.
  */
@@ -269,7 +306,7 @@ ctr_object* ctr_array_count(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * ArrayFromTo (Slice)
+ * [Array] from: [Begin] to: [End]
  *
  * Copies part of an array indicated by from and to and
  * returns a new array consisting of a copy of this region.
@@ -296,7 +333,7 @@ ctr_object* ctr_array_from_to(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * ArrayAdd (+)
+ * [Array] + [Array]
  *
  * Returns a new array, containing elements of itself and the other
  * array.
@@ -327,49 +364,7 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * StringSplit
- *
- * Converts a string to an array by splitting the string using
- * the specified delimiter (also a string).
- */
-ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
-	char* str = myself->value.svalue->value;
-	long len = myself->value.svalue->vlen;
-	ctr_object* delimObject  = ctr_internal_cast2string(argumentList->object);
-	char* dstr = delimObject->value.svalue->value;
-	long dlen = delimObject->value.svalue->vlen;
-	ctr_argument* arg;
-	char* elem;
-	ctr_object* arr = ctr_array_new(CtrStdArray, NULL);
-	long i;
-	long j = 0;
-	char* buffer = malloc(sizeof(char)*len);
-	for(i=0; i<len; i++) {
-		buffer[j] = str[i];
-		j++;
-		if (ctr_internal_memmem(buffer, j, dstr, dlen, 0)!=NULL) {
-			elem = malloc(sizeof(char)*(j-dlen));
-			memcpy(elem,buffer,j-dlen);
-			arg = malloc(sizeof(ctr_argument));
-			arg->object = ctr_build_string(elem, j-dlen);
-			ctr_array_push(arr, arg);
-			free(arg);
-			j=0;
-		}
-	}
-	if (j>0) {
-		elem = malloc(sizeof(char)*j);
-		memcpy(elem,buffer,j);
-		arg = malloc(sizeof(ctr_argument));
-		arg->object = ctr_build_string(elem, j);
-		ctr_array_push(arr, arg);
-		free(arg);
-	}
-	free(buffer);
-	return arr;
-}
-
-/**
+ * @internal
  * Internal sort function, for use with ArraySort.
  * Interfaces with qsort-compatible function.
  */
@@ -388,7 +383,7 @@ int ctr_sort_cmp(const void * a, const void * b) {
 }
 
 /**
- * ArraySort
+ * [Array] sort: [Block]
  *
  * Sorts the contents of an array using a sort block.
  * Uses qsort.
@@ -407,7 +402,12 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * Map
  *
- * Creates a Map object
+ * Creates a Map object.
+ * 
+ * Usage:
+ * 
+ * files := Map new.
+ * files put: 'readme.txt' at: 'textfile'.
  */
 ctr_object* ctr_map_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -416,11 +416,12 @@ ctr_object* ctr_map_new(ctr_object* myclass, ctr_argument* argumentList) {
 }
 
 /**
- * MapPut
+ * [Map] put: [Element] at: [Key]
  *
  * Puts a key-value pair in a map.
  *
  * Usage:
+ *
  * map put: 'hello' at: 'world'.
  *
  */
@@ -450,7 +451,7 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * MapGet
+ * [Map] at: [Key]
  *
  * Retrieves the value specified by the key from the map.
  */
@@ -480,7 +481,14 @@ ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * MapCount
+ * [Map] @ [Key]
+ * 
+ * Alias for [Map] at: [Key].
+ * 
+ */
+
+/**
+ * [Map] count
  *
  * Returns the number of elements in the map.
  */
@@ -489,9 +497,9 @@ ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * MapEach
+ * [Map] each: [Block]
  *
- * Iterates over the map.
+ * Iterates over the map, passing key-value pairs to the specified block.
  */
 ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;

@@ -1362,6 +1362,49 @@ ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
+ * StringSplit
+ *
+ * Converts a string to an array by splitting the string using
+ * the specified delimiter (also a string).
+ */
+ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
+	char* str = myself->value.svalue->value;
+	long len = myself->value.svalue->vlen;
+	ctr_object* delimObject  = ctr_internal_cast2string(argumentList->object);
+	char* dstr = delimObject->value.svalue->value;
+	long dlen = delimObject->value.svalue->vlen;
+	ctr_argument* arg;
+	char* elem;
+	ctr_object* arr = ctr_array_new(CtrStdArray, NULL);
+	long i;
+	long j = 0;
+	char* buffer = malloc(sizeof(char)*len);
+	for(i=0; i<len; i++) {
+		buffer[j] = str[i];
+		j++;
+		if (ctr_internal_memmem(buffer, j, dstr, dlen, 0)!=NULL) {
+			elem = malloc(sizeof(char)*(j-dlen));
+			memcpy(elem,buffer,j-dlen);
+			arg = malloc(sizeof(ctr_argument));
+			arg->object = ctr_build_string(elem, j-dlen);
+			ctr_array_push(arr, arg);
+			free(arg);
+			j=0;
+		}
+	}
+	if (j>0) {
+		elem = malloc(sizeof(char)*j);
+		memcpy(elem,buffer,j);
+		arg = malloc(sizeof(ctr_argument));
+		arg->object = ctr_build_string(elem, j);
+		ctr_array_push(arr, arg);
+		free(arg);
+	}
+	free(buffer);
+	return arr;
+}
+
+/**
  * [String] htmlEscape
  * 
  * Escapes HTML chars.
