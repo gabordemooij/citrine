@@ -374,6 +374,7 @@ void ctr_close_context() {
 ctr_object* ctr_find(ctr_object* key) {
 	int i = ctr_context_id;
 	ctr_object* foundObject = NULL;
+	if (CtrStdError) return CtrStdNil;
 	while((i>-1 && foundObject == NULL)) {
 		ctr_object* context = ctr_contexts[i];
 		foundObject = ctr_internal_object_find_property(context, key, 0);
@@ -396,6 +397,7 @@ ctr_object* ctr_find(ctr_object* key) {
 ctr_object* ctr_find_in_my(ctr_object* key) {
 	ctr_object* context = ctr_find(ctr_build_string("me",2));
 	ctr_object* foundObject = ctr_internal_object_find_property(context, key, 0);
+	if (CtrStdError) return CtrStdNil;
 	if (foundObject == NULL) { printf("Error, property not found: %s.\n", key->value.svalue->value); exit(1); }
 	return foundObject;
 }
