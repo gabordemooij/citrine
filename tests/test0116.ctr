@@ -1,0 +1,7 @@
+#Command argument should segfault when out-of-bounds, issue#10
+wrong := Command argument: -10.
+(wrong = Nil) ifTrue: {\
+	Pen write: 'I can handle out-of-bound Command arguments.\n'.
+}, else: {\
+	Pen write: 'Fail\n'.
+}.
