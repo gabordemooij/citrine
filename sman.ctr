@@ -5,7 +5,7 @@
 # generates man-style documentation
 # written by Gabor de Mooij
 
-# Start: ctr sman.ctr > ctr.1 ;mandoc -Thtml ctr.1 > docs.html ;mandoc -a ctr.1
+# Start: ctr sman.ctr > ctr.1 ;mandoc -O style=ctrstyle.css -Thtml ctr.1 > misc/docs.html ;mandoc -a ctr.1
 
 
 ?>
@@ -16,7 +16,7 @@ ctr \- run a Citrine program
 .SH SYNOPSIS
 ctr [PROGRAM]
 .SH DESCRIPTION
-Citrine is general purpose programming language for UNIX-like operating systems.
+Citrine\*R is general purpose programming language for UNIX\*R-like operating systems.
 .SH OPTIONS
 
 .BR \-c " "[OUTNAME]
@@ -30,9 +30,23 @@ displays information about a binary Citrine program
 runs a binary Citrine program.
 
 .SH REFERENCE MANUAL
-.BR
-.BR
-.BR
+Citrine has 5 literals:
+.RS 4
+.br 
+- Nil
+.br
+- Booleans (True, False)
+.br
+- Numbers (1, -2, 3.5)
+.br
+- Strings 'All Strings are UTF8!'
+.br
+- Code Blocks { parameters | code }
+.br
+
+.RE
+The following messages are part of the Core API of the Citrine Programming Language:
+.br
 <?.
 
 files := Array <- 
