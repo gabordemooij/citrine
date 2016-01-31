@@ -1,3 +1,6 @@
+#include <inttypes.h>
+#include <stdlib.h>
+
 /**
  * Define the Citrine tokens 
  */
@@ -318,6 +321,7 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o );
 ctr_object* ctr_internal_cast2number(ctr_object* o);
 ctr_object* ctr_internal_create_object(int type);
 ctr_object* ctr_internal_cast2string( ctr_object* o );
+void        ctr_internal_plugin_find( ctr_object* key );
 ctr_object* ctr_find(ctr_object* key);
 ctr_object* ctr_find_in_my(ctr_object* key);
 ctr_object* ctr_assign_value(ctr_object* key, ctr_object* val);
@@ -326,6 +330,7 @@ ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* val);
 char*       ctr_internal_readf(char* file_name);
 void        ctr_internal_debug_tree(ctr_tnode* ti, int indent);
 ctr_object* ctr_send_message(ctr_object* receiver, char* message, long len, ctr_argument* argumentList);
+void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func)( ctr_object*, ctr_argument* ) );
 
 /**
  * Scoping functions

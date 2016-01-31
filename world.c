@@ -380,7 +380,11 @@ ctr_object* ctr_find(ctr_object* key) {
 		foundObject = ctr_internal_object_find_property(context, key, 0);
 		i--;
 	}
-	if (foundObject == NULL) { 
+	if (foundObject == NULL) {
+		ctr_internal_plugin_find(key);
+		foundObject = ctr_internal_object_find_property(CtrStdWorld, key, 0);
+	}
+	if (foundObject == NULL) {
 		char* cstr;
 		CTR_2CSTR(cstr, key);
 		printf("Error, key not found: [%s].\n", cstr);

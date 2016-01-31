@@ -6,6 +6,7 @@
 #include <math.h>
 #include <stdint.h>
 #include <unistd.h>
+#include <dlfcn.h>
 #include "citrine.h"
 
 char* np;
@@ -159,4 +160,48 @@ void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
 		t = li->node;
 		
 	}
+}
+
+/**
+ * @internal
+ * Internal plugin loader.
+ * Tries to locate a plugin by its name.
+ *
+ * In Citrine a plugin is loaded automatically as soon as a symbol
+ * has been enountered that cannot be found in global scope.
+ *
+ * Before raising an error Citrine will attempt to load a plugin
+ * to meet the dependency.
+ *
+ * To install a plugin, copy the plugin folder to the mods folder
+ * in the working directory of your script.
+ *
+ * So, for instance, to install the 'Coffee Percolator Plugin',
+ * we copy the libctrpercolator.so in folder mods/percolator/,
+ * the resulting path is: mods/percolator/libctrpercolator.so.
+ *
+ * General path format:
+ *
+ * mods/X/libctrX.so
+ *
+ * where X is the name of the object the plugin offers in lowercase.
+ *
+ * On loading, the plugin will get a chance to add its objects to the world
+ * through a constructor function.
+ */
+void ctr_internal_plugin_find(ctr_object* key) {
+	ctr_object* modNameObject = ctr_internal_cast2string(key);
+	void* handle;
+	char  pathName[1024];
+	char  pathNameMod[1024];
+	char* modName;
+	char* modNameLow;
+	CTR_2CSTR(modName, modNameObject);
+	modNameLow = modName;
+	for ( ; *modNameLow; ++modNameLow) *modNameLow = tolower(*modNameLow);
+	if (getcwd(pathName, sizeof(pathName)) == NULL) return;
+	snprintf(pathNameMod, 1024,"%s/mods/%s/libctr%s.so", pathName, modName, modName);
+	if (access(pathNameMod, F_OK) == -1) return;
+	handle =  dlopen(pathNameMod, RTLD_NOW);
+	return;
 }

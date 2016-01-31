@@ -1,5 +1,4 @@
 
-#define __STDC_FORMAT_MACROS
 #include <inttypes.h>
 
 #include <stdlib.h>
@@ -11,6 +10,7 @@
 #include <stdint.h>
 #include <unistd.h>
 #include "citrine.h"
+#include "siphash.h"
 
 /**
  * CommandLine Display Welcome Message

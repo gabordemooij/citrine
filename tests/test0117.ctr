@@ -1,0 +1,20 @@
+#Plugin test
+
+Pen write: 'Let\'s make a nice cup of coffee!', brk.
+
+perky := Percolator new.
+Pen write: perky brew, brk.
+
+Pen write: 'Ohno! Add some coffee (3) and water (2)!', brk.
+perky coffee: 3 water: 4.
+
+Pen write: 'Let\'s brew...', brk.
+Pen write: perky brew, brk.
+
+Pen write: 'Let\'s brew some more...', brk.
+Pen write: perky brew, brk.
+
+Pen write: 'Let\'s brew some more...', brk.
+Pen write: perky brew, brk.
+
+Pen write: 'Ah fine, that\'s enough coffee for today!', brk.
