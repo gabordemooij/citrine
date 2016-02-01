@@ -123,7 +123,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size vlen;
 	char* pathString;
 	FILE* f;
-	if (path == NULL) return CtrStdNil;
+	if (path == NULL) return myself;
 	vlen = path->value.svalue->vlen;
 	pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
@@ -173,7 +173,7 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size vlen;
 	char* pathString;
 	char* prg;
-	if (path == NULL) return ctr_build_bool(0);
+	if (path == NULL) return myself;
 	vlen = path->value.svalue->vlen;
 	pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
@@ -194,7 +194,7 @@ ctr_object* ctr_file_include_ast(ctr_object* myself, ctr_argument* argumentList)
 	ctr_tnode* parsedCode;
 	ctr_size vlen;
 	char* pathString;
-	if (path == NULL) return ctr_build_bool(0);
+	if (path == NULL) return myself;
 	vlen = path->value.svalue->vlen;
 	pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
@@ -214,7 +214,7 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size vlen;
 	char* pathString;
 	int r;
-	if (path == NULL) return ctr_build_bool(0);
+	if (path == NULL) return myself;
 	vlen = path->value.svalue->vlen;
 	pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);

@@ -153,9 +153,6 @@ ctr_object* ctr_percolator_new(ctr_object* myself, ctr_argument* argumentList) {
 		0
 	);
 	
-	ctr_internal_create_func(percolatorInstance, ctr_build_string("brew", 4), &ctr_percolator_brew);
-	ctr_internal_create_func(percolatorInstance, ctr_build_string("coffee:water:", 13), &ctr_percolator_add_coffee_water);
-	
 	return percolatorInstance;	
 }
 
@@ -169,14 +166,16 @@ ctr_object* ctr_percolator_new(ctr_object* myself, ctr_argument* argumentList) {
  * world.
  */
 void begin(){
-	/* Create the Coffee Percolator Object */
-	ctr_object* percolatorObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
-
+	/* Create the Coffee Percolator Object - Use new, because its a prototype, not a class !*/
+	ctr_object* percolatorObject = ctr_percolator_new(CtrStdObject, NULL);
+	
 	/* Set the prototype */
 	percolatorObject->link = CtrStdObject;
 
 	/* Add the method 'new' so people can create their percolators */
 	ctr_internal_create_func(percolatorObject, ctr_build_string("new", 3), &ctr_percolator_new);
+	ctr_internal_create_func(percolatorObject, ctr_build_string("brew", 4), &ctr_percolator_brew);
+	ctr_internal_create_func(percolatorObject, ctr_build_string("coffee:water:", 13), &ctr_percolator_add_coffee_water);
 
 	/* Make the Percolator accessible to the world */
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Percolator", 10), percolatorObject, 0);

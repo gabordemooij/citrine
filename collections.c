@@ -182,7 +182,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 		memcpy(result+pos, str->value.svalue->value, str->value.svalue->vlen);
 	}
 	resultStr = ctr_build_string(result, len);
-	free(result);
+	if (len > 0) free(result);
 	return resultStr;
 }
 
@@ -493,7 +493,7 @@ ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
  * Returns the number of elements in the map.
  */
 ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float( (ctr_number) myself->properties->size );
+	return ctr_build_number_from_float( myself->properties->size );
 }
 
 /**
