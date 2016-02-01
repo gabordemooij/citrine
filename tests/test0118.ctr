@@ -1,0 +1,48 @@
+#Test whether we can use the core prototypes (aka class-like objects) as is
+#not useful but should not be problematic.
+#Number
+Pen write: 'Number:'.
+a := Number + Number + 1.
+a := Number - 2.
+a := Number * 2.
+a := Number / 2.
+Pen write: a.
+Pen brk.
+#String
+Pen write: 'String:'.
+Pen write: String length.
+Pen brk.
+#File
+Pen write: 'File:'.
+Pen write: File read.
+Pen write: (File write: 'test').
+Pen write: (File append: 'test').
+Pen write: File delete.
+Pen write: File exists.
+Pen write: File include.
+Pen write: File run.
+Pen brk.
+#Block - no object, only literal.
+#Array
+Pen write: 'Array:'.
+Pen write: Array pop.
+Pen write: Array count.
+Pen write: (Array push: 999).
+Pen write: Array count.
+Pen write: Array shift.
+Pen write: (Array join: ',').
+f := Array new.
+Pen write: f count. #starts with 0 again...
+Pen brk.
+#Map
+Pen write: 'Map:'.
+Pen write: Map count.
+Pen write: (Map put: 'a' at: 'b')  count. #caused abort trap
+Pen brk.
+#Percolator extension
+Pen write: 'Percolator:'.
+Pen write: Percolator brew.
+Pen brk.
+
+
+
