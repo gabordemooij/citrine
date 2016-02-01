@@ -69,6 +69,13 @@
 #define CTR_OBJECT_TYPE_OTEX 9
 
 /**
+ * Define the two types of properties of
+ * objects.
+ */
+#define CTR_CATEGORY_PRIVATE_PROPERTY 0
+#define CTR_CATEGORY_PUBLIC_METHOD 1
+
+/**
  * Define basic types for Citrine
  */
 typedef  unsigned int ctr_bool;

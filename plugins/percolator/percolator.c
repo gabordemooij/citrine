@@ -43,7 +43,7 @@ ctr_object* ctr_percolator_brew(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_object* coffee = ctr_internal_object_find_property(
 		myself,                        /* owner object */
 		ctr_build_string("coffee", 6), /* key object */
-		0                              /* 0 means, it's a property */
+		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	
 	/**
@@ -52,7 +52,7 @@ ctr_object* ctr_percolator_brew(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_object* water = ctr_internal_object_find_property(
 		myself,
 		ctr_build_string("water", 5),
-		0
+		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	
 	/**
@@ -84,14 +84,14 @@ ctr_object* ctr_percolator_brew(ctr_object* myself, ctr_argument* argumentList) 
 		myself, 
 		ctr_build_string("coffee", 6),
 		coffee,
-		0
+		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	
 	ctr_internal_object_set_property(
 		myself, 
 		ctr_build_string("water", 5),
 		water,
-		0
+		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	
 	return ctr_build_string("Coffee!", 7);
@@ -112,14 +112,14 @@ ctr_object* ctr_percolator_add_coffee_water(ctr_object* myself, ctr_argument* ar
 		myself, 
 		ctr_build_string("coffee", 6),
 		ctr_internal_cast2number(argumentList->object),
-		0
+		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	
 	ctr_internal_object_set_property(
 		myself, 
 		ctr_build_string("water", 5),
 		ctr_internal_cast2number(argumentList->next->object),
-		0
+		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	
 	return myself;	
@@ -144,13 +144,13 @@ ctr_object* ctr_percolator_new(ctr_object* myself, ctr_argument* argumentList) {
 		percolatorInstance, 
 		ctr_build_string("coffee", 6),
 		ctr_build_number_from_float(0),
-		0
+		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	ctr_internal_object_set_property(
 		percolatorInstance, 
 		ctr_build_string("water", 5),
 		ctr_build_number_from_float(0),
-		0
+		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	
 	return percolatorInstance;	
@@ -178,5 +178,5 @@ void begin(){
 	ctr_internal_create_func(percolatorObject, ctr_build_string("coffee:water:", 13), &ctr_percolator_add_coffee_water);
 
 	/* Make the Percolator accessible to the world */
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Percolator", 10), percolatorObject, 0);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Percolator", 10), percolatorObject, CTR_CATEGORY_PRIVATE_PROPERTY);
 }
