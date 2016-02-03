@@ -618,9 +618,6 @@ ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) 
  * Runs the block N times, where N is the value of the Number.
  */
 ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* otherNum;
-	ctr_number a;
-	ctr_number b;
 	CTR_MIRROR_CALL(CTR_OBJECT_TYPE_OTBLOCK, ctr_block_times, mirror1);
 }
 
