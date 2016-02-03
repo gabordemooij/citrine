@@ -153,7 +153,7 @@ void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
 		else 								str = "UNKNW?\0";
 		vbuf = calloc(sizeof(char),t->vlen+1);
 		strncpy(vbuf, t->value, t->vlen);
-		printf("%s %s (%p)\n", str, vbuf, t);
+		printf("%s %s (%p)\n", str, vbuf, (void*) t);
 		if (t->nodes) ctr_internal_debug_tree(t, indent + 1);
 		if (!li->next) break; 
 		li = li->next;
