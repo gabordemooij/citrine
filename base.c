@@ -1476,8 +1476,7 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
          
         }
 
-       tstr[k] = '\0';
-         
+               
 
 	return ctr_build_string(tstr, tlen);
 }
