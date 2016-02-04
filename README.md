@@ -11,6 +11,17 @@ and emphasizes maintainability through readability.
 Simplicity is achieved by syntactical and conceptual minimalism.
 Citrine is fully open source and uses the BSD license. 
 
+## Install
+
+```bash
+git clone --depth=50 https://github.com/gabordemooij/citrine.git gabordemooij/citrine
+cd gabordemooij/citrine
+git fetch origin
+git checkout -qf FETCH_HEAD
+./mk.sh
+make install
+```
+
 For more information feel free to consult the official
 Citrine Programming Language homepage:
 
