@@ -201,11 +201,8 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
 	envValObj = ctr_internal_cast2string(argumentList->next->object);
 	envVarNameStr = malloc((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
-	strncpy(envVarNameStr, envVarNameObj->value.svalue->value, envVarNameObj->value.svalue->vlen);
-	*(envVarNameStr + (envVarNameObj->value.svalue->vlen)) = '\0';
-	envValStr = malloc((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
-	strncpy(envValStr, envValObj->value.svalue->value, envValObj->value.svalue->vlen);
-	*(envValStr + (envValObj->value.svalue->vlen)) = '\0';
+	CTR_2CSTR(envVarNameStr, envVarNameObj);
+	CTR_2CSTR(envValStr, envValObj);
 	setenv(envVarNameStr, envValStr, 1);
 	return myself;
 }
