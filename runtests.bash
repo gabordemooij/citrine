@@ -8,7 +8,7 @@ cd ..
 cp plugins/percolator/libctrpercolator.so mods/percolator/libctrpercolator.so
 
 make clean;
-./mk.sh
+./mk.bash
 
 ./ctr -c /tmp/dynamic_module.ast tests/assets/asset_mod_for_ast.ctr
 
