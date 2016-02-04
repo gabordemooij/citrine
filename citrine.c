@@ -44,9 +44,9 @@ void ctr_cli_welcome() {
  * Parses command line arguments and sets global settings accordingly.
  */
 void ctr_cli_read_args(int argc, char* argv[]) {
-	int option_symbol; 
+	int option_symbol;
 	while ((option_symbol = getopt(argc, argv, "c:ri")) != -1) {
-		switch (option_symbol) { 
+		switch (option_symbol) {
 			case 'c':
                 /* Prevent segfaults with wrong number of arguments  */
                 if ( argc < 4 ) {
@@ -57,25 +57,25 @@ void ctr_cli_read_args(int argc, char* argv[]) {
 				ctr_mode_compile = 1;
 				ctr_mode_compile_save_as = calloc(sizeof(char), 255);
 				strncpy(ctr_mode_compile_save_as, optarg, 254);
-				break; 
+				break;
 			case 'r':
 				ctr_mode_load = 1;
 				break;
 			case 'i':
 				ctr_mode_info = 1;
 				break;
-			default: 
+			default:
 				ctr_cli_welcome();
 				exit(0);
 				break;
-		} 
+		}
 	}
-	
+
 	if (argc == 1) {
 		ctr_cli_welcome();
 		exit(0);
 	}
-	
+
 	ctr_mode_input_file = (char*) calloc(sizeof(char), 255);
 	strncpy(ctr_mode_input_file, argv[optind], 254);
 }
