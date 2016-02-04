@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = '-mtune=native -Wall'
+CFLAGS = -mtune=native -Wall
 OBJS = siphash.o utf8.o memory.o util.o base.o collections.o file.o system.o \
        world.o lexer.o parser.o walker.o citrine.o
 
