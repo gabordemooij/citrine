@@ -18,7 +18,7 @@ git clone --depth=50 https://github.com/gabordemooij/citrine.git gabordemooij/ci
 cd gabordemooij/citrine
 git fetch origin
 git checkout -qf FETCH_HEAD
-./mk.sh
+./mk.bash
 make install
 ```
 
