@@ -619,6 +619,7 @@ ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) 
  */
 ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
 	CTR_MIRROR_CALL(CTR_OBJECT_TYPE_OTBLOCK, ctr_block_times, mirror1);
+	return myself;
 }
 
 /**
@@ -1056,7 +1057,7 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	if (b == 0) return ctr_build_string("",0);
 	if (b < 0) {
 		a = a + b;
-		b = abs(b);
+		b = labs(b);
 	}
 	if (a < 0) a = 0;
 	if (a > len) a = len;
