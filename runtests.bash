@@ -16,7 +16,7 @@ j=1
 for i in $(find tests -name 'test*.ctr'); do
 	fitem=$i
 	echo -n "$fitem interpret";
-	fexpect="${i: 0:-4}.exp"
+	fexpect="${i%%.ctr}.exp"
 	result=`./ctr ${fitem}`
 	expected=`cat $fexpect`
 	if [ "$result" == "$expected" ]; then
@@ -33,7 +33,7 @@ for i in $(find tests -name 'test*.ctr'); do
 	fi
 	fitem=$i
 	echo -n "$fitem compiled";
-	fexpect="${i: 0:-4}.exp"
+	fexpect="${i%%.ctr}.exp"
 	result=`./ctr -c /tmp/dump.ast ${fitem} ; ./ctr -r /tmp/dump.ast`
 	expected=`cat $fexpect`
 	if [ "$result" == "$expected" ]; then
