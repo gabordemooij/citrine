@@ -1,3 +1,9 @@
+*.so
 *.o
+*.php
+*.pl
+*.core
+*.project
+*.ignore
 /ctr
 
