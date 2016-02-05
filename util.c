@@ -189,7 +189,7 @@ void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
  * On loading, the plugin will get a chance to add its objects to the world
  * through a constructor function.
  */
-void ctr_internal_plugin_find(ctr_object* key) {
+void* ctr_internal_plugin_find(ctr_object* key) {
 	ctr_object* modNameObject = ctr_internal_cast2string(key);
 	void* handle;
 	char  pathName[1024];
@@ -199,9 +199,9 @@ void ctr_internal_plugin_find(ctr_object* key) {
 	CTR_2CSTR(modName, modNameObject);
 	modNameLow = modName;
 	for ( ; *modNameLow; ++modNameLow) *modNameLow = tolower(*modNameLow);
-	if (getcwd(pathName, sizeof(pathName)) == NULL) return;
+	if (getcwd(pathName, sizeof(pathName)) == NULL) return NULL;
 	snprintf(pathNameMod, 1024,"%s/mods/%s/libctr%s.so", pathName, modName, modName);
-	if (access(pathNameMod, F_OK) == -1) return;
+	if (access(pathNameMod, F_OK) == -1) return NULL;
 	handle =  dlopen(pathNameMod, RTLD_NOW);
-	return;
+	return handle;
 }
