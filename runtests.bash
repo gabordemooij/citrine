@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -x
+set -v
+
 #For plugin test, compile Percolator plugin
 cd plugins/percolator;
 gcc -c percolator.c -Wall -Werror -fpic -o percolator.o ; gcc -shared -o libctrpercolator.so percolator.o
