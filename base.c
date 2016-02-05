@@ -50,20 +50,25 @@ ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
  * Returns a string representation of the type of object.
  */
 ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
-	int type = myself->info.type;
-	if (type == CTR_OBJECT_TYPE_OTNIL) {
-		return ctr_build_string_from_cstring("Nil\0");
-	} else if (type == CTR_OBJECT_TYPE_OTBOOL) {
-		return ctr_build_string_from_cstring("Boolean\0");
-	} else if (type == CTR_OBJECT_TYPE_OTNUMBER) {
-		return ctr_build_string_from_cstring("Number\0");
-	} else if (type == CTR_OBJECT_TYPE_OTSTRING) {
-		return ctr_build_string_from_cstring("String\0");
-	} else if (type == CTR_OBJECT_TYPE_OTBLOCK || type == CTR_OBJECT_TYPE_OTNATFUNC) {
-		return ctr_build_string_from_cstring("Block\0");
-	}
-	return ctr_build_string_from_cstring("Object\0");
-}
+
+		switch (myself->info.type){
+	    case CTR_OBJECT_TYPE_OTNIL:
+	         return ctr_build_string_from_cstring("Nil");
+        case CTR_OBJECT_TYPE_OTBOOL:
+             return ctr_build_string_from_cstring("Boolean");
+        case CTR_OBJECT_TYPE_OTNUMBER:
+             return ctr_build_string_from_cstring("Number");
+        case CTR_OBJECT_TYPE_OTSTRING:
+             return ctr_build_string_from_cstring("String");
+        case CTR_OBJECT_TYPE_OTBLOCK:
+        case CTR_OBJECT_TYPE_OTNATFUNC:
+             return ctr_build_string_from_cstring("Block");
+        default:
+             return ctr_build_string_from_cstring("Object");
+
+    }
+
+ }
 
 /**
  * [Object] equals: [other]
@@ -984,7 +989,7 @@ ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
  * string as a new object.
  */
 ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
+	ctr_object* strObject; /* = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING); */
 	ctr_size n1;
 	ctr_size n2;
 	char* dest;
@@ -1082,7 +1087,7 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
  */
 ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* argument1;
-	ctr_argument* argument2;
+	/* ctr_argument* argument2; */
 	if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_string("",0);
 	argument1 = CTR_CREATE_ARGUMENT();
 	/*argument2 = CTR_CREATE_ARGUMENT(); */
