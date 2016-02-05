@@ -328,7 +328,7 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o );
 ctr_object* ctr_internal_cast2number(ctr_object* o);
 ctr_object* ctr_internal_create_object(int type);
 ctr_object* ctr_internal_cast2string( ctr_object* o );
-void        ctr_internal_plugin_find( ctr_object* key );
+void*       ctr_internal_plugin_find( ctr_object* key );
 ctr_object* ctr_find(ctr_object* key);
 ctr_object* ctr_find_in_my(ctr_object* key);
 ctr_object* ctr_assign_value(ctr_object* key, ctr_object* val);
