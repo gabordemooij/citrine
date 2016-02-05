@@ -418,8 +418,9 @@ ctr_object* ctr_build_number_from_string(char* str, ctr_size length) {
 	/* turn string into a C-string before feeding it to atof */
 	numCStr = (char*) calloc(40, sizeof(char));
 	memcpy(numCStr, str, length);
-	numberObject->value.nvalue = atof(numCStr);
+	numberObject->value.nvalue =  atof(numCStr);
 	numberObject->link = CtrStdNumber;
+	free(numCStr);
 	return numberObject;
 }
 
@@ -1084,10 +1085,11 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* argument2;
 	if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_string("",0);
 	argument1 = CTR_CREATE_ARGUMENT();
-	argument2 = CTR_CREATE_ARGUMENT();
+	/*argument2 = CTR_CREATE_ARGUMENT(); */
 	argument1->object = argumentList->object;
-	argument1->next = argument2;
-	argument2->object = ctr_build_number_from_float(myself->value.svalue->vlen - argumentList->object->value.nvalue);
+	/*argument1->next = argument2; */
+	/*argument2->object */
+	argument1->next->object = ctr_build_number_from_float(myself->value.svalue->vlen - argumentList->object->value.nvalue);
 	return ctr_string_from_length(myself, argument1);
 }
 
