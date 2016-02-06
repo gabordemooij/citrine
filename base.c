@@ -1002,9 +1002,13 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(dest+n1, strObject->value.svalue->value, n2);
 	newString = ctr_build_string(dest, (n1 + n2));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	free(dest);
 >>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
+=======
+	free(dest);
+>>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
 	return newString;
 }
 
@@ -1080,11 +1084,16 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	newString = ctr_build_string(dest,ub);
 <<<<<<< HEAD
+<<<<<<< HEAD
  	return newString;
 =======
     free(dest);
 	return newString;
 >>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
+=======
+    free(dest);
+	return newString;
+>>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
 }
 
 /**
@@ -1095,6 +1104,7 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* argument1;
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_string("",0);
 	argument1 = CTR_CREATE_ARGUMENT();
     argument1->object = argumentList->object;
@@ -1102,11 +1112,19 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	/* ctr_argument* argument2; */
 	if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_string("",0);
 	argument1 = CTR_CREATE_ARGUMENT();
+=======
+	/* ctr_argument* argument2; */
+	if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_string("",0);
+	argument1 = CTR_CREATE_ARGUMENT();
+>>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
 	/*argument2 = CTR_CREATE_ARGUMENT(); */
 	argument1->object = argumentList->object;
 	/*argument1->next = argument2; */
 	/*argument2->object */
+<<<<<<< HEAD
 >>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
+=======
+>>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
 	argument1->next->object = ctr_build_number_from_float(myself->value.svalue->vlen - argumentList->object->value.nvalue);
 	return ctr_string_from_length(myself, argument1);
 }
@@ -1218,6 +1236,7 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
                tstr[i] = tolower(str[i]);
        }
 <<<<<<< HEAD
+<<<<<<< HEAD
        return ctr_build_string(tstr, len);
 
 =======
@@ -1225,6 +1244,11 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
        free(tstr);
        return result;
 >>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
+=======
+       result = ctr_build_string(tstr, len);
+       free(tstr);
+       return result;
+>>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
 }
 
 /**
@@ -1336,6 +1360,7 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str+begin, tlen);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return ctr_build_string(tstr, tlen);
 
 =======
@@ -1343,6 +1368,11 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	free(tstr);
 	return result;
 >>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
+=======
+	result = ctr_build_string(tstr, tlen);
+	free(tstr);
+	return result;
+>>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
 }
 
 
@@ -1464,11 +1494,16 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 
 ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentList)  {
 <<<<<<< HEAD
+<<<<<<< HEAD
  	char* str = myself->value.svalue->value;
 =======
     ctr_object* result;
 	char* str = myself->value.svalue->value;
 >>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
+=======
+    ctr_object* result;
+	char* str = myself->value.svalue->value;
+>>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
 	long  len = myself->value.svalue->vlen;
         char* tstr;
 	long i=0;
@@ -1537,6 +1572,7 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	   return ctr_build_string(tstr, tlen);
 
 =======
@@ -1544,6 +1580,11 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 	   free(tstr);
 	   return result;
 >>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
+=======
+	   result = ctr_build_string(tstr, tlen);
+	   free(tstr);
+	   return result;
+>>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
 }
 
 
