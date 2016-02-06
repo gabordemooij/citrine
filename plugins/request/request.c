@@ -82,6 +82,7 @@ ctr_object* ctr_request_post_array(ctr_object* myself, ctr_argument* argumentLis
 
 void ctr_request_serve_callback() {
 	ctr_argument* argumentList;
+	argumentList = CTR_CREATE_ARGUMENT();
 	fputs("Content-type: text/html\r\n\r\n", stdout);
 	varlistGet = CGI_get_query(NULL);
 	varlistPost = CGI_get_post(NULL,0);
