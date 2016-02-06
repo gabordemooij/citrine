@@ -1001,6 +1001,10 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(dest, myself->value.svalue->value, n1);
 	memcpy(dest+n1, strObject->value.svalue->value, n2);
 	newString = ctr_build_string(dest, (n1 + n2));
+<<<<<<< HEAD
+=======
+	free(dest);
+>>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
 	return newString;
 }
 
@@ -1037,6 +1041,7 @@ ctr_object* ctr_string_fromto(ctr_object* myself, ctr_argument* argumentList) {
 	dest = malloc(ub * sizeof(char));
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	newString = ctr_build_string(dest,ub);
+	free(dest);
 	return newString;
 }
 
@@ -1074,7 +1079,12 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	dest = malloc(ub * sizeof(char));
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	newString = ctr_build_string(dest,ub);
+<<<<<<< HEAD
  	return newString;
+=======
+    free(dest);
+	return newString;
+>>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
 }
 
 /**
@@ -1084,9 +1094,19 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
  */
 ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* argument1;
+<<<<<<< HEAD
     if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_string("",0);
 	argument1 = CTR_CREATE_ARGUMENT();
     argument1->object = argumentList->object;
+=======
+	/* ctr_argument* argument2; */
+	if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_string("",0);
+	argument1 = CTR_CREATE_ARGUMENT();
+	/*argument2 = CTR_CREATE_ARGUMENT(); */
+	argument1->object = argumentList->object;
+	/*argument1->next = argument2; */
+	/*argument2->object */
+>>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
 	argument1->next->object = ctr_build_number_from_float(myself->value.svalue->vlen - argumentList->object->value.nvalue);
 	return ctr_string_from_length(myself, argument1);
 }
@@ -1110,6 +1130,7 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 	char* dest = malloc(ub * sizeof(char));
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	newString = ctr_build_string(dest,ub);
+	free(dest);
 	return newString;
 }
 
@@ -1165,6 +1186,7 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
  * DOES NOT WORK WITH UTF8 characters !
  */
 ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) {
+       ctr_object* result;
        char* str = myself->value.svalue->value;
        size_t  len = myself->value.svalue->vlen;
        char* tstr = malloc(len * sizeof(char));
@@ -1172,7 +1194,9 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
        for(i =0; i < len; i++) {
                tstr[i] = toupper(str[i]);
        }
-       return ctr_build_string(tstr, len);
+       result = ctr_build_string(tstr, len);
+       free(tstr);
+       return result;
 }
 
 
@@ -1185,6 +1209,7 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
  * DOES NOT WORK WITH UTF8 characters !
  */
 ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) {
+       ctr_object* result;
        char* str = myself->value.svalue->value;
        size_t len = myself->value.svalue->vlen;
        char* tstr = malloc(len * sizeof(char));
@@ -1192,8 +1217,14 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
        for(i =0; i < len; i++) {
                tstr[i] = tolower(str[i]);
        }
+<<<<<<< HEAD
        return ctr_build_string(tstr, len);
 
+=======
+       result = ctr_build_string(tstr, len);
+       free(tstr);
+       return result;
+>>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
 }
 
 /**
@@ -1230,6 +1261,7 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentL
  * 'LiLo BootLoader' replace: 'L' with: 'l'. #lilo Bootloader
  */
 ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentList) {
+    ctr_object* result;
 	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
 	ctr_object* replacement = ctr_internal_cast2string(argumentList->next->object);
 	char* dest;
@@ -1271,7 +1303,9 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 		i++;
 	}
 	memcpy(dest, src, hlen);
-	return ctr_build_string(odest, dlen);
+	result = ctr_build_string(odest, dlen);
+	free(odest);
+	return result;
 }
 
 /**
@@ -1286,6 +1320,7 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
  *
  */
 ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
+    ctr_object* result;
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	long i, begin, end, tlen;
@@ -1300,8 +1335,14 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	tlen = (end - begin);
 	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str+begin, tlen);
+<<<<<<< HEAD
 	return ctr_build_string(tstr, tlen);
 
+=======
+	result = ctr_build_string(tstr, tlen);
+	free(tstr);
+	return result;
+>>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
 }
 
 
@@ -1311,6 +1352,7 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
  * Removes all the whitespace at the left side of the string.
  */
 ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
+    ctr_object* result;
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	long i = 0, begin;
@@ -1323,7 +1365,9 @@ ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
 	tlen = (len - begin);
 	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str+begin, tlen);
-	return ctr_build_string(tstr, tlen);
+	result = ctr_build_string(tstr, tlen);
+	free(tstr);
+	return result;
 }
 
 /**
@@ -1332,6 +1376,7 @@ ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
  * Removes all the whitespace at the right side of the string.
  */
 ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
+    ctr_object* result;
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	long i = 0, end, tlen;
@@ -1343,7 +1388,9 @@ ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
 	tlen = end;
 	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str, tlen);
-	return ctr_build_string(tstr, tlen);
+	result = ctr_build_string(tstr, tlen);
+	free(tstr);
+	return result;
 }
 
 /**
@@ -1392,6 +1439,7 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 			arg->object = ctr_build_string(elem, j-dlen);
 			ctr_array_push(arr, arg);
 			free(arg);
+			free(elem);
 			j=0;
 		}
 	}
@@ -1402,6 +1450,7 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 		arg->object = ctr_build_string(elem, j);
 		ctr_array_push(arr, arg);
 		free(arg);
+		free(elem);
 	}
 	free(buffer);
 	return arr;
@@ -1414,7 +1463,12 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
  */
 
 ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentList)  {
+<<<<<<< HEAD
  	char* str = myself->value.svalue->value;
+=======
+    ctr_object* result;
+	char* str = myself->value.svalue->value;
+>>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
 	long  len = myself->value.svalue->vlen;
         char* tstr;
 	long i=0;
@@ -1482,8 +1536,14 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 
 
 
+<<<<<<< HEAD
 	   return ctr_build_string(tstr, tlen);
 
+=======
+	   result = ctr_build_string(tstr, tlen);
+	   free(tstr);
+	   return result;
+>>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
 }
 
 
