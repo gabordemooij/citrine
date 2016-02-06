@@ -50,19 +50,22 @@ ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
  * Returns a string representation of the type of object.
  */
 ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
-	int type = myself->info.type;
-	if (type == CTR_OBJECT_TYPE_OTNIL) {
-		return ctr_build_string_from_cstring("Nil\0");
-	} else if (type == CTR_OBJECT_TYPE_OTBOOL) {
-		return ctr_build_string_from_cstring("Boolean\0");
-	} else if (type == CTR_OBJECT_TYPE_OTNUMBER) {
-		return ctr_build_string_from_cstring("Number\0");
-	} else if (type == CTR_OBJECT_TYPE_OTSTRING) {
-		return ctr_build_string_from_cstring("String\0");
-	} else if (type == CTR_OBJECT_TYPE_OTBLOCK || type == CTR_OBJECT_TYPE_OTNATFUNC) {
-		return ctr_build_string_from_cstring("Block\0");
-	}
-	return ctr_build_string_from_cstring("Object\0");
+
+	 switch(myself->info.type){
+	       case CTR_OBJECT_TYPE_OTNIL:
+		        return ctr_build_string_from_cstring("Nil");
+	       case CTR_OBJECT_TYPE_OTBOOL:
+		        return ctr_build_string_from_cstring("Boolean");
+	       case CTR_OBJECT_TYPE_OTNUMBER:
+		        return ctr_build_string_from_cstring("Number");
+	       case CTR_OBJECT_TYPE_OTSTRING:
+		        return ctr_build_string_from_cstring("String");
+	       case CTR_OBJECT_TYPE_OTBLOCK:
+	       case CTR_OBJECT_TYPE_OTNATFUNC:
+		        return ctr_build_string_from_cstring("Block");
+           default:
+	            return ctr_build_string_from_cstring("Object");
+    }
 }
 
 /**
@@ -1107,6 +1110,7 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 	char* dest = malloc(ub * sizeof(char));
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	newString = ctr_build_string(dest,ub);
+	free(dest);
 	return newString;
 }
 
@@ -1387,6 +1391,7 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 			arg->object = ctr_build_string(elem, j-dlen);
 			ctr_array_push(arr, arg);
 			free(arg);
+			free(elem);
 			j=0;
 		}
 	}
@@ -1397,6 +1402,7 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 		arg->object = ctr_build_string(elem, j);
 		ctr_array_push(arr, arg);
 		free(arg);
+		free(elem);
 	}
 	free(buffer);
 	return arr;
