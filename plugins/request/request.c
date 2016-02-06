@@ -9,6 +9,7 @@
 #include <math.h>
 #include <stdint.h>
 #include <unistd.h>
+#include <syslog.h>
 #include "../../citrine.h"
 
 #include "ccgi-1.2/ccgi.h"
@@ -18,7 +19,7 @@
 
 CGI_varlist *varlistGet;
 CGI_varlist *varlistPost;
-
+ctr_object* CtrStdSCGICB;
 
 
     
@@ -79,6 +80,30 @@ ctr_object* ctr_request_post_array(ctr_object* myself, ctr_argument* argumentLis
 }
 
 
+void ctr_request_serve_callback() {
+	ctr_argument* argumentList;
+	fputs("Content-type: text/html\r\n\r\n", stdout);
+	varlistGet = CGI_get_query(NULL);
+	varlistPost = CGI_get_post(NULL,0);
+	ctr_block_run(CtrStdSCGICB, argumentList, CtrStdSCGICB);
+}
+
+ctr_object* ctr_request_serve(ctr_object* myself, ctr_argument* argumentList) {
+	char* host;
+	char* pid;
+	int   port;
+	openlog("stormserver", 0, LOG_DAEMON);
+	CTR_2CSTR(host, ctr_internal_cast2string(argumentList->object));
+	CTR_2CSTR(pid, ctr_internal_cast2string(argumentList->next->next->object));
+	port = (int) round(ctr_internal_cast2number(argumentList->next->object)->value.nvalue);
+	CtrStdSCGICB = argumentList->next->next->next->object;
+	CGI_prefork_server(host, port, pid,
+        /* maxproc */ 100,
+        /* minidle */ 8,
+        /* maxidle */ 8,
+        /* maxreq */ 1000, ctr_request_serve_callback);
+    return myself;
+}
 
 
 void begin(){
@@ -88,8 +113,8 @@ void begin(){
 	ctr_internal_create_func(requestObject, ctr_build_string("getArray:", 9), &ctr_request_get_array);
 	ctr_internal_create_func(requestObject, ctr_build_string("post:", 5), &ctr_request_post_string);
 	ctr_internal_create_func(requestObject, ctr_build_string("postArray:", 10), &ctr_request_post_array);
+	ctr_internal_create_func(requestObject, ctr_build_string("host:listen:pid:callback:", 25), &ctr_request_serve);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Request", 7), requestObject, 0);
 	varlistGet = CGI_get_query(NULL);
 	varlistPost = CGI_get_post(NULL,0);
 }
-
