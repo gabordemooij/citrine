@@ -1003,12 +1003,18 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 	newString = ctr_build_string(dest, (n1 + n2));
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	free(dest);
 >>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
 =======
 	free(dest);
 >>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
+=======
+=======
+	free(dest);
+>>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
+>>>>>>> b7b18eebd8bc93a4a0efad1a23329b6c43b942a0
 	return newString;
 }
 
@@ -1085,15 +1091,21 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	newString = ctr_build_string(dest,ub);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b7b18eebd8bc93a4a0efad1a23329b6c43b942a0
  	return newString;
 =======
     free(dest);
 	return newString;
 >>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
+<<<<<<< HEAD
 =======
     free(dest);
 	return newString;
 >>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
+=======
+>>>>>>> b7b18eebd8bc93a4a0efad1a23329b6c43b942a0
 }
 
 /**
@@ -1105,6 +1117,9 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* argument1;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b7b18eebd8bc93a4a0efad1a23329b6c43b942a0
     if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_string("",0);
 	argument1 = CTR_CREATE_ARGUMENT();
     argument1->object = argumentList->object;
@@ -1112,19 +1127,26 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	/* ctr_argument* argument2; */
 	if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_string("",0);
 	argument1 = CTR_CREATE_ARGUMENT();
+<<<<<<< HEAD
 =======
 	/* ctr_argument* argument2; */
 	if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_string("",0);
 	argument1 = CTR_CREATE_ARGUMENT();
 >>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
+=======
+>>>>>>> b7b18eebd8bc93a4a0efad1a23329b6c43b942a0
 	/*argument2 = CTR_CREATE_ARGUMENT(); */
 	argument1->object = argumentList->object;
 	/*argument1->next = argument2; */
 	/*argument2->object */
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
 =======
 >>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
+=======
+>>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
+>>>>>>> b7b18eebd8bc93a4a0efad1a23329b6c43b942a0
 	argument1->next->object = ctr_build_number_from_float(myself->value.svalue->vlen - argumentList->object->value.nvalue);
 	return ctr_string_from_length(myself, argument1);
 }
@@ -1237,6 +1259,9 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
        }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b7b18eebd8bc93a4a0efad1a23329b6c43b942a0
        return ctr_build_string(tstr, len);
 
 =======
@@ -1244,11 +1269,14 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
        free(tstr);
        return result;
 >>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
+<<<<<<< HEAD
 =======
        result = ctr_build_string(tstr, len);
        free(tstr);
        return result;
 >>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
+=======
+>>>>>>> b7b18eebd8bc93a4a0efad1a23329b6c43b942a0
 }
 
 /**
@@ -1361,6 +1389,9 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(tstr, str+begin, tlen);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b7b18eebd8bc93a4a0efad1a23329b6c43b942a0
 	return ctr_build_string(tstr, tlen);
 
 =======
@@ -1368,11 +1399,14 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	free(tstr);
 	return result;
 >>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
+<<<<<<< HEAD
 =======
 	result = ctr_build_string(tstr, tlen);
 	free(tstr);
 	return result;
 >>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
+=======
+>>>>>>> b7b18eebd8bc93a4a0efad1a23329b6c43b942a0
 }
 
 
@@ -1495,15 +1529,21 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentList)  {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b7b18eebd8bc93a4a0efad1a23329b6c43b942a0
  	char* str = myself->value.svalue->value;
 =======
     ctr_object* result;
 	char* str = myself->value.svalue->value;
 >>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
+<<<<<<< HEAD
 =======
     ctr_object* result;
 	char* str = myself->value.svalue->value;
 >>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
+=======
+>>>>>>> b7b18eebd8bc93a4a0efad1a23329b6c43b942a0
 	long  len = myself->value.svalue->vlen;
         char* tstr;
 	long i=0;
@@ -1573,6 +1613,9 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b7b18eebd8bc93a4a0efad1a23329b6c43b942a0
 	   return ctr_build_string(tstr, tlen);
 
 =======
@@ -1580,11 +1623,14 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 	   free(tstr);
 	   return result;
 >>>>>>> c841bc16be0d28c5f0e0e2bbce85a871d656fe86
+<<<<<<< HEAD
 =======
 	   result = ctr_build_string(tstr, tlen);
 	   free(tstr);
 	   return result;
 >>>>>>> parent of e6a6535... simplified  ctr_object_type and cleaned ctr_string_skip
+=======
+>>>>>>> b7b18eebd8bc93a4a0efad1a23329b6c43b942a0
 }
 
 
