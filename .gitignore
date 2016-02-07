@@ -1,3 +1,6 @@
+*.ksh
+*.html
+*.atxt
 *.so
 *.o
 *.php

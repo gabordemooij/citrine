@@ -1,0 +1,16 @@
+
+#Citrine Storm Server Demo
+
+#To kill this server
+#kill $(cat /var/run/storm.pid) 
+
+#To find CTR processes
+#ps -aux | grep "ctr" 
+
+Pen write: 'Start Citrine Storm Server v1', brk.
+Request host:'localhost' listen:4000 pid:'/var/run/storm.pid' callback: {\
+	var fname := Command env: 'DOCUMENT_URI'.
+	var script := File new: '/var/www/htdocs'+fname.
+	script include.
+}.
+Pen write: 'DONE', brk.
