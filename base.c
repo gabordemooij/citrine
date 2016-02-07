@@ -1441,18 +1441,9 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 			tag_len += 6;
 			tag_rlen += 1;
 		} else if ( c == '\'') {
-<<<<<<< HEAD
-                        tag_len += 6;
-                        tag_rlen += 1;
-
-                }
-
-
-=======
 			tag_len += 6;
 			tag_rlen += 1;
 		}
->>>>>>> Fix spacing in escapeHTML function.
 	}
 	tlen = len + tag_len - tag_rlen;
 	tstr = malloc(tlen * sizeof(char));
@@ -1478,22 +1469,10 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 			replacement = "&apos;";
 			rlen = 6;
 			for(j=0; j<rlen; j++) tstr[k++]=replacement[j];
-<<<<<<< HEAD
-		}
-		else {
-			tstr[k++] = str[i];
-		}
-
-        }
-
-
-
-=======
 		} else {
 			tstr[k++] = str[i];
 		}
 	}
->>>>>>> Fix spacing in escapeHTML function.
 	return ctr_build_string(tstr, tlen);
 }
 
