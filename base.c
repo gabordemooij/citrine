@@ -1417,43 +1417,38 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentList)  {
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
-        char* tstr;
+	char* tstr;
 	long i=0;
 	long j=0;
 	long k=0;
 	long rlen;
 	long tlen = 0;
-        long tag_len = 0;
-        long tag_rlen = 0;
+	long tag_len = 0;
+	long tag_rlen = 0;
 	char* replacement;
 	for(i =0; i < len; i++) {
 		char c = str[i];
 		if (c == '<') {
-                        tag_len += 4;
-                       tag_rlen += 1;
+			tag_len += 4;
+			tag_rlen += 1;
 		} else if (c == '>') {
 			tag_len += 4;
-                        tag_rlen += 1;
+			tag_rlen += 1;
 		} else if (c == '&') {
-                        tag_len += 5;
-                        tag_rlen += 1;
-
+			tag_len += 5;
+			tag_rlen += 1;
 		} else if (c == '"') {
-                        tag_len += 6;
-                        tag_rlen += 1;
-
+			tag_len += 6;
+			tag_rlen += 1;
 		} else if ( c == '\'') {
-                        tag_len += 6;
-                        tag_rlen += 1;
-             
-                }
-      
-
+			tag_len += 6;
+			tag_rlen += 1;
+		}
 	}
-        tlen = len + tag_len - tag_rlen;
-        tstr = malloc(tlen * sizeof(char));
-        for(i = 0; i < len; i++) {
-                     char c = str[i];
+	tlen = len + tag_len - tag_rlen;
+	tstr = malloc(tlen * sizeof(char));
+	for(i = 0; i < len; i++) {
+		char c = str[i];
 		if (c == '<') {
 			replacement = "&lt;";
 			rlen = 4;
@@ -1474,20 +1469,12 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 			replacement = "&apos;";
 			rlen = 6;
 			for(j=0; j<rlen; j++) tstr[k++]=replacement[j];
-		}
-		else { 
+		} else {
 			tstr[k++] = str[i];
 		}
-         
-        }
-
-               
-
+	}
 	return ctr_build_string(tstr, tlen);
 }
-
-
-
 
 /**
  * Block
