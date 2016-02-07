@@ -73,6 +73,7 @@
  * objects.
  */
 #define CTR_CATEGORY_PRIVATE_PROPERTY 0
+#define CTR_CATEGORY_PUBLIC_PROPERTY 0 /* same, all properties are PRIVATE, except those in CtrStdWorld, this is just to avoid confusion */
 #define CTR_CATEGORY_PUBLIC_METHOD 1
 
 /**
