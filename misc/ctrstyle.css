@@ -1,0 +1,10 @@
+:root { background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAFElEQVQImWNgYGCQQsMMDJQLYgAAZ5kBoVnq3PYAAAAASUVORK5CYII=);}
+	body { background-color:#FFF;margin:0;margin-left:40px;color: #111;font-family:georgia,serif;padding:30px;}
+	p,li { max-width: 800px; line-height:22px; font-size:20px;}
+	h1,h2,h3 { color:#d00; margin-top:40px; }
+	h1:before,h2:before,h3:before { content: '////'; letter-spacing:-3px;margin-right:10px; }
+	pre { background-color:#DDDDDD; padding:20px; max-width:750px; overflow:auto; font-family:monospace; font-size:14px;}
+	output { background-color:#000; color:#0f0; padding:20px; display:block; max-width:750px; overflow:auto; font-family:monospace; font-size:14px;}
+	#logo{ background-color: #E4D00A; background:linear-gradient(to 
+right, #E4D00A, #FFF); display:block; padding: 15px calc(100% - 631px) 
+15px 0; max-width:100%; }
