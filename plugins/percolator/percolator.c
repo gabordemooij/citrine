@@ -178,5 +178,5 @@ void begin(){
 	ctr_internal_create_func(percolatorObject, ctr_build_string("coffee:water:", 13), &ctr_percolator_add_coffee_water);
 
 	/* Make the Percolator accessible to the world */
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Percolator", 10), percolatorObject, CTR_CATEGORY_PRIVATE_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Percolator", 10), percolatorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 }
