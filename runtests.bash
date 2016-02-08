@@ -21,10 +21,10 @@ cp plugins/percolator/libctrpercolator.so mods/percolator/libctrpercolator.so
 
 #request test
 cd plugins/request/ccgi-1.2;
-gcc -c ccgi.c -Wall	-Werror -fpic -o ccgi.o
-gcc -c prefork.c -Wall -Werror -fpic -o prefork.o
+gcc -c ccgi.c -Wall	-Werror -fPIC -o ccgi.o
+gcc -c prefork.c -Wall -Werror -fPIC -o prefork.o
 cd ..
-gcc -c request.c -Wall -Werror -fpic -o request.o
+gcc -c request.c -Wall -Werror -fPIC -o request.o
 gcc ${LDFLAGS} -o libctrrequest.so request.o ccgi-1.2/ccgi.o ccgi-1.2/prefork.o
 cd ..
 cd ..
