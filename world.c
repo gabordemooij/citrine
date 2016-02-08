@@ -872,17 +872,24 @@ ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* o) {
 	}
 
 	/* depending on type, copy specific value */
-	if (o->info.type == CTR_OBJECT_TYPE_OTBOOL) {
-		object->value.bvalue = o->value.bvalue;
-	} else if (o->info.type == CTR_OBJECT_TYPE_OTNUMBER) {
-		object->value.nvalue = o->value.nvalue;
-	} else if (o->info.type == CTR_OBJECT_TYPE_OTSTRING) {
-		object->value.svalue = malloc(sizeof(ctr_string));
-		object->value.svalue->value = malloc(sizeof(char)*o->value.svalue->vlen);
-		memcpy(object->value.svalue->value, o->value.svalue->value,o->value.svalue->vlen);
-		object->value.svalue->vlen = o->value.svalue->vlen;
-	} else if (o->info.type == CTR_OBJECT_TYPE_OTBLOCK) {
-		object->value.block = o->value.block;
+	switch (o->info.type) {
+		case CTR_OBJECT_TYPE_OTBOOL:
+			object->value.bvalue = o->value.bvalue;
+			break;
+		case CTR_OBJECT_TYPE_OTNUMBER:
+			object->value.nvalue = o->value.nvalue;
+			break;
+		case CTR_OBJECT_TYPE_OTSTRING:
+			object->value.svalue = malloc(sizeof(ctr_string));
+			object->value.svalue->value = malloc(sizeof(char)*o->value.svalue->vlen);
+			memcpy(object->value.svalue->value, o->value.svalue->value,o->value.svalue->vlen);
+			object->value.svalue->vlen = o->value.svalue->vlen;
+			break;
+		case CTR_OBJECT_TYPE_OTBLOCK:
+			object->value.block = o->value.block;
+			break;
+		default:
+			break;
 	}
 	return object;
 }
