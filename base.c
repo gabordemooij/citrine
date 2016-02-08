@@ -1457,28 +1457,35 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 	tstr = malloc(tlen * sizeof(char));
 	for(i = 0; i < len; i++) {
 		char c = str[i];
-		if (c == '<') {
-			replacement = "&lt;";
-			rlen = 4;
-			for(j=0; j<rlen; j++) tstr[k++]=replacement[j];
-		} else if (c == '>') {
-			replacement = "&gt;";
-			rlen = 4;
-			for(j=0; j<rlen; j++) tstr[k++]=replacement[j];
-		} else if (c == '&') {
-			replacement = "&amp;";
-			rlen = 5;
-			for(j=0; j<rlen; j++) tstr[k++]=replacement[j];
-		} else if (c == '"') {
-			replacement = "&quot;";
-			rlen = 6;
-			for(j=0; j<rlen; j++) tstr[k++]=replacement[j];
-		} else if (c == '\'') {
-			replacement = "&apos;";
-			rlen = 6;
-			for(j=0; j<rlen; j++) tstr[k++]=replacement[j];
-		} else {
-			tstr[k++] = str[i];
+		switch (c) {
+			case '<':
+				replacement = "&lt;";
+				rlen = 4;
+				for(j=0; j<rlen; j++) tstr[k++]=replacement[j];
+				break;
+			case '>':
+				replacement = "&gt;";
+				rlen = 4;
+				for(j=0; j<rlen; j++) tstr[k++]=replacement[j];
+				break;
+			case '&':
+				replacement = "&amp;";
+				rlen = 5;
+				for(j=0; j<rlen; j++) tstr[k++]=replacement[j];
+				break;
+			case '"':
+				replacement = "&quot;";
+				rlen = 6;
+				for(j=0; j<rlen; j++) tstr[k++]=replacement[j];
+				break;
+			case '\'':
+				replacement = "&apos;";
+				rlen = 6;
+				for(j=0; j<rlen; j++) tstr[k++]=replacement[j];
+				break;
+			default:
+				tstr[k++] = str[i];
+				break;
 		}
 	}
 	return ctr_build_string(tstr, tlen);
