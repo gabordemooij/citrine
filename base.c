@@ -1428,21 +1428,29 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 	char* replacement;
 	for(i =0; i < len; i++) {
 		char c = str[i];
-		if (c == '<') {
-			tag_len += 4;
-			tag_rlen += 1;
-		} else if (c == '>') {
-			tag_len += 4;
-			tag_rlen += 1;
-		} else if (c == '&') {
-			tag_len += 5;
-			tag_rlen += 1;
-		} else if (c == '"') {
-			tag_len += 6;
-			tag_rlen += 1;
-		} else if ( c == '\'') {
-			tag_len += 6;
-			tag_rlen += 1;
+		switch(c) {
+			case '<':
+				tag_len += 4;
+				tag_rlen += 1;
+				break;
+			case '>':
+				tag_len += 4;
+				tag_rlen += 1;
+				break;
+			case '&':
+				tag_len += 5;
+				tag_rlen += 1;
+				break;
+			case '"':
+				tag_len += 6;
+				tag_rlen += 1;
+				break;
+			case '\'':
+				tag_len += 6;
+				tag_rlen += 1;
+				break;
+			default:
+				break;
 		}
 	}
 	tlen = len + tag_len - tag_rlen;
