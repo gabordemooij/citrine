@@ -3,22 +3,29 @@
 set -x
 set -v
 
+OS=`uname -s`
+LDFLAGS='-shared'
+if [ $OS = "Darwin" ]; then
+  LDFLAGS='-shared -undefined dynamic_lookup'
+fi
 #Remove .so
 find . -name *.so | xargs rm
 
 #For plugin test, compile Percolator plugin
 cd plugins/percolator;
-gcc -c percolator.c -Wall -Werror -fpic -o percolator.o ; gcc -shared -o libctrpercolator.so percolator.o
+gcc -c percolator.c -Wall -Werror -fPIC -o percolator.o
+gcc ${LDFLAGS} -o libctrpercolator.so percolator.o
 cd ..
 cd ..
 cp plugins/percolator/libctrpercolator.so mods/percolator/libctrpercolator.so
 
 #request test
 cd plugins/request/ccgi-1.2;
-gcc -c ccgi.c -Wall	-Werror -fpic -o ccgi.o
-gcc -c prefork.c -Wall -Werror -fpic -o prefork.o
+gcc -c ccgi.c -Wall	-Werror -fPIC -o ccgi.o
+gcc -c prefork.c -Wall -Werror -fPIC -o prefork.o
 cd ..
-gcc -c request.c -Wall -Werror -fpic -o request.o ; gcc -shared -o libctrrequest.so request.o ccgi-1.2/ccgi.o ccgi-1.2/prefork.o
+gcc -c request.c -Wall -Werror -fPIC -o request.o
+gcc ${LDFLAGS} -o libctrrequest.so request.o ccgi-1.2/ccgi.o ccgi-1.2/prefork.o
 cd ..
 cd ..
 cp plugins/request/libctrrequest.so mods/request/libctrrequest.so
