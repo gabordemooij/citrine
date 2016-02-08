@@ -341,7 +341,7 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 			return ctr_build_string("[Block]",7);
 			break;
 		case CTR_OBJECT_TYPE_OTOBJECT:
-			ctr_build_string("[Object]",8);
+			return ctr_build_string("[Object]",8);
 			break;
 		default:
 			break;
