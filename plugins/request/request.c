@@ -109,6 +109,8 @@ void ctr_request_serve_callback() {
 	varlistGet = CGI_get_query(NULL);
 	varlistPost = CGI_get_post(NULL,"/tmp/_upXXXXXX");
 	ctr_block_run(CtrStdSCGICB, argumentList, CtrStdSCGICB);
+	CGI_free_varlist(varlistGet);
+	CGI_free_varlist(varlistPost);
 }
 
 ctr_object* ctr_request_serve(ctr_object* myself, ctr_argument* argumentList) {
