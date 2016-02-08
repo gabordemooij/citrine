@@ -4,16 +4,16 @@ set -x
 set -v
 
 OS=`uname -s`
+LDFLAGS='-shared'
+if [ $OS = "Darwin" ]; then
+  LDFLAGS='-shared -undefined dynamic_lookup'
+fi
 #Remove .so
 find . -name *.so | xargs rm
 
 #For plugin test, compile Percolator plugin
 cd plugins/percolator;
 gcc -c percolator.c -Wall -Werror -fPIC -o percolator.o
-LDFLAGS='-shared'
-if [ $OS = "Darwin" ]; then
-  LDFLAGS='-shared -undefined dynamic_lookup'
-fi
 gcc ${LDFLAGS} -o libctrpercolator.so percolator.o
 cd ..
 cd ..
