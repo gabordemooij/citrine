@@ -35,6 +35,7 @@ ctr_object* ctr_request_string(ctr_object* myself, ctr_argument* argumentList, C
 	cgiVarObject = ctr_internal_cast2string(argumentList->object);
 	CTR_2CSTR(cgiVar, cgiVarObject);
 	value = (char*) CGI_lookup(varlist, (const char*)cgiVar);
+	if (value == NULL) return CtrStdNil;
 	return ctr_build_string_from_cstring(value);
 }
 
@@ -79,13 +80,34 @@ ctr_object* ctr_request_post_array(ctr_object* myself, ctr_argument* argumentLis
 	return ctr_request_array(myself, argumentList, varlistPost);
 }
 
+ctr_object* ctr_request_file(ctr_object* myself, ctr_argument* argumentList) {
+	CGI_value* value;
+	ctr_object* list;
+	ctr_object* cgiVarObject;
+	char* cgiVar;
+	char* val;
+	ctr_argument* arg;
+	int i = 0;
+	cgiVarObject = ctr_internal_cast2string(argumentList->object);
+	CTR_2CSTR(cgiVar, cgiVarObject);
+	value = CGI_lookup_all(varlistPost, (const char*)cgiVar);
+    list = ctr_array_new(CtrStdArray, NULL);
+	if (value == 0 || value[1] == 0) return list;
+    for (i = 0; value[i] != 0; i++) {
+		arg = CTR_CREATE_ARGUMENT();
+		val = (char*) value[i];
+		arg->object = ctr_build_string_from_cstring(val);
+		ctr_array_push(list, arg);
+	}
+	return list;
+}
 
 void ctr_request_serve_callback() {
 	ctr_argument* argumentList;
 	argumentList = CTR_CREATE_ARGUMENT();
 	fputs("Content-type: text/html\r\n\r\n", stdout);
 	varlistGet = CGI_get_query(NULL);
-	varlistPost = CGI_get_post(NULL,0);
+	varlistPost = CGI_get_post(NULL,"/tmp/_upXXXXXX");
 	ctr_block_run(CtrStdSCGICB, argumentList, CtrStdSCGICB);
 }
 
@@ -113,6 +135,7 @@ void begin(){
 	ctr_internal_create_func(requestObject, ctr_build_string("get:", 4), &ctr_request_get_string);
 	ctr_internal_create_func(requestObject, ctr_build_string("getArray:", 9), &ctr_request_get_array);
 	ctr_internal_create_func(requestObject, ctr_build_string("post:", 5), &ctr_request_post_string);
+	ctr_internal_create_func(requestObject, ctr_build_string("file:", 5), &ctr_request_file);
 	ctr_internal_create_func(requestObject, ctr_build_string("postArray:", 10), &ctr_request_post_array);
 	ctr_internal_create_func(requestObject, ctr_build_string("host:listen:pid:callback:", 25), &ctr_request_serve);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Request", 7), requestObject, 0);
