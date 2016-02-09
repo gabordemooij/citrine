@@ -1,0 +1,8 @@
+
+Butler := Object new.
+Butler on: 'greet:' do: { name |
+	Pen write: 'Welcome ' + name.
+}.
+james := Butler new.
+james greet: 'visitor'.
+
