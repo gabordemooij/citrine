@@ -19,6 +19,7 @@
 
 CGI_varlist *varlistGet;
 CGI_varlist *varlistPost;
+CGI_varlist *varlistCookie;
 ctr_object* CtrStdSCGICB;
 
 
@@ -80,6 +81,22 @@ ctr_object* ctr_request_post_array(ctr_object* myself, ctr_argument* argumentLis
 	return ctr_request_array(myself, argumentList, varlistPost);
 }
 
+ctr_object* ctr_request_cookie_string(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_request_string(myself, argumentList, varlistCookie);
+}
+
+ctr_object* ctr_request_cookie_array(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_request_array(myself, argumentList, varlistCookie);
+}
+
+ctr_object* ctr_request_response_header(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* headStrObj = ctr_internal_cast2string(argumentList->object);
+	char* headerStr;
+	CTR_2CSTR(headerStr, headStrObj);
+	fputs(headerStr, stdout);
+	return myself;
+}
+
 ctr_object* ctr_request_file(ctr_object* myself, ctr_argument* argumentList) {
 	CGI_value* value;
 	ctr_object* list;
@@ -105,12 +122,13 @@ ctr_object* ctr_request_file(ctr_object* myself, ctr_argument* argumentList) {
 void ctr_request_serve_callback() {
 	ctr_argument* argumentList;
 	argumentList = CTR_CREATE_ARGUMENT();
-	fputs("Content-type: text/html\r\n\r\n", stdout);
 	varlistGet = CGI_get_query(NULL);
+	varlistCookie = CGI_get_cookie(NULL);
 	varlistPost = CGI_get_post(NULL,"/tmp/_upXXXXXX");
 	ctr_block_run(CtrStdSCGICB, argumentList, CtrStdSCGICB);
 	CGI_free_varlist(varlistGet);
 	CGI_free_varlist(varlistPost);
+	CGI_free_varlist(varlistCookie);
 }
 
 ctr_object* ctr_request_serve(ctr_object* myself, ctr_argument* argumentList) {
@@ -136,8 +154,11 @@ void begin(){
 	requestObject->link = CtrStdObject;
 	ctr_internal_create_func(requestObject, ctr_build_string("get:", 4), &ctr_request_get_string);
 	ctr_internal_create_func(requestObject, ctr_build_string("getArray:", 9), &ctr_request_get_array);
+	ctr_internal_create_func(requestObject, ctr_build_string("cookie:", 7), &ctr_request_cookie_string);
+	ctr_internal_create_func(requestObject, ctr_build_string("cookieArray:", 12), &ctr_request_cookie_array);
 	ctr_internal_create_func(requestObject, ctr_build_string("post:", 5), &ctr_request_post_string);
 	ctr_internal_create_func(requestObject, ctr_build_string("file:", 5), &ctr_request_file);
+	ctr_internal_create_func(requestObject, ctr_build_string("responseHeader:", 15), &ctr_request_response_header);
 	ctr_internal_create_func(requestObject, ctr_build_string("postArray:", 10), &ctr_request_post_array);
 	ctr_internal_create_func(requestObject, ctr_build_string("host:listen:pid:callback:", 25), &ctr_request_serve);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Request", 7), requestObject, 0);

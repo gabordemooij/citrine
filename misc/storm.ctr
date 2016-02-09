@@ -9,6 +9,7 @@
 
 Pen write: 'Start Citrine Storm Server v1', brk.
 Request host:'localhost' listen:4000 pid:'/var/run/storm.pid' callback: {\
+	Request responseHeader: 'Content-type: text/html\n\n'.
 	var fname := Command env: 'DOCUMENT_URI'.
 	var script := File new: '/var/www/htdocs'+fname.
 	script include.
