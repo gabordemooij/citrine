@@ -67,6 +67,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "rb");
+	free(pathString);
 	if (!f) {
 		CtrStdError = ctr_build_string_from_cstring("Unable to open file.\0");
 		return CtrStdNil;
@@ -103,6 +104,7 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "wb+");
+	free(pathString);
 	if (!f) {
 		CtrStdError = ctr_build_string_from_cstring("Unable to open file.\0");
 		return CtrStdNil;
@@ -129,6 +131,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "ab+");
+	free(pathString);
 	if (!f) {
 		CtrStdError = ctr_build_string_from_cstring("Unable to open file.\0");
 		return CtrStdNil;
@@ -155,6 +158,7 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "r");
+	free(pathString);
 	exists = (f != NULL );
 	if (f) {
 		fclose(f);
@@ -179,6 +183,7 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	prg = ctr_internal_readf(pathString);
+	free(pathString);
 	parsedCode = ctr_dparse_parse(prg);
 	ctr_cwlk_run(parsedCode);
 	return myself;
