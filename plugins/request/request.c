@@ -89,14 +89,6 @@ ctr_object* ctr_request_cookie_array(ctr_object* myself, ctr_argument* argumentL
 	return ctr_request_array(myself, argumentList, varlistCookie);
 }
 
-ctr_object* ctr_request_response_header(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* headStrObj = ctr_internal_cast2string(argumentList->object);
-	char* headerStr;
-	CTR_2CSTR(headerStr, headStrObj);
-	fputs(headerStr, stdout);
-	return myself;
-}
-
 ctr_object* ctr_request_file(ctr_object* myself, ctr_argument* argumentList) {
 	CGI_value* value;
 	ctr_object* list;
@@ -158,7 +150,6 @@ void begin(){
 	ctr_internal_create_func(requestObject, ctr_build_string("cookieArray:", 12), &ctr_request_cookie_array);
 	ctr_internal_create_func(requestObject, ctr_build_string("post:", 5), &ctr_request_post_string);
 	ctr_internal_create_func(requestObject, ctr_build_string("file:", 5), &ctr_request_file);
-	ctr_internal_create_func(requestObject, ctr_build_string("responseHeader:", 15), &ctr_request_response_header);
 	ctr_internal_create_func(requestObject, ctr_build_string("postArray:", 10), &ctr_request_post_array);
 	ctr_internal_create_func(requestObject, ctr_build_string("host:listen:pid:callback:", 25), &ctr_request_serve);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Request", 7), requestObject, 0);

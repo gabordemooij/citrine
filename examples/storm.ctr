@@ -8,8 +8,8 @@
 #ps -aux | grep "ctr" 
 
 Pen write: 'Start Citrine Storm Server v1', brk.
-Request host:'localhost' listen:4000 pid:'/var/run/storm.pid' callback: {\
-	Request responseHeader: 'Content-type: text/html\n\n'.
+Request host:'localhost' listen:4001 pid:'/var/run/storm.pid' callback: {\
+	Pen write: 'Content-type: text/html\n\n'.
 	var fname := Command env: 'DOCUMENT_URI'.
 	var script := File new: '/var/www/htdocs'+fname.
 	script include.

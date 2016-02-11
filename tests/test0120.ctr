@@ -1,0 +1,20 @@
+
+
+? := Object new.
+
+? on: 'init' do: {\
+	my buffer := ''.
+}.
+
+? on: '>' do: { str |
+	my buffer := my buffer + str.
+}.
+
+? on: 'buffer' do: {\ ^ my buffer. }.
+
+? init.
+
+?>world<?.
+
+b := (? buffer).
+Pen write: 'hello '+b.
