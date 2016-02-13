@@ -50,10 +50,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
 <?.
 
 files := Array <- 
-			'base.c' ;
-			'collections.c' ;
-			'file.c' ;
-			'system.c'.
+			'../base.c' ;
+			'../collections.c' ;
+			'../file.c' ;
+			'../system.c' ;
+			'../plugins/request/request.c'.
 
 files each: { index file |
 
