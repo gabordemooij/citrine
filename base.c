@@ -1598,6 +1598,15 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Runs a block of code, depending on the outcome runs the other block
  * as long as the result of the first one equals boolean True.
+ *
+ * Usage:
+ *
+ * x := 0.
+ * {\ ^(x < 6). } whileFalse: {\ x inc: 1. }. #increment x until it reaches 6.
+ *
+ * Here we increment variable x by one until it reaches 6.
+ * While the number x is lower than 6 we keep incrementing it.
+ * Don't forget to use the return ^ symbol in the first block.
  */
 ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList) {
 	while (1 && !CtrStdError) {
@@ -1614,7 +1623,16 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
  * [Block] whileFalse: [block]
  *
  * Runs a block of code, depending on the outcome runs the other block
- * as long as the result of the first one equals boolean False.
+ * as long as the result of the first one equals to False.
+ *
+ * Usage:
+ *
+ * x := 0.
+ * {\ ^(x > 5). } whileFalse: {\ x inc: 1. }. #increment x until it reaches 6.
+ *
+ * Here we increment variable x by one until it reaches 6.
+ * While the number x is not higher than 5 we keep incrementing it.
+ * Don't forget to use the return ^ symbol in the first block.
  */
 ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList) {
 	while (1 && !CtrStdError) {
