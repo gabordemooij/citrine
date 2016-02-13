@@ -123,20 +123,52 @@ void ctr_request_serve_callback() {
 	CGI_free_varlist(varlistCookie);
 }
 
+ctr_object* ctr_request_server_option(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_internal_object_set_property(
+		myself,
+		ctr_internal_cast2string(argumentList->object),
+		ctr_internal_cast2string(argumentList->next->object),
+		CTR_CATEGORY_PRIVATE_PROPERTY
+	);
+	return myself;
+}
+
+ctr_object* ctr_request_internal_option(ctr_object* myself, char* optName) {
+	ctr_object* key;
+	ctr_object* val;
+	key = ctr_build_string_from_cstring(optName);
+	val = ctr_internal_object_find_property(myself, key, CTR_CATEGORY_PRIVATE_PROPERTY);
+	return val;
+}
+
+
 ctr_object* ctr_request_serve(ctr_object* myself, ctr_argument* argumentList) {
 	char* host;
 	char* pid;
 	int   port;
+	int   minidle = 8;
+	int   maxidle = 8;
+	int   maxreq  = 1000;
+	int   maxproc = 100;
+	ctr_object* val;
 	openlog("stormserver", 0, LOG_DAEMON);
+	val = ctr_request_internal_option(myself, "minidle");
+	if (val!=NULL) minidle = (int) ctr_internal_cast2number(val)->value.nvalue;
+	val = ctr_request_internal_option(myself, "maxidle");
+	if (val!=NULL) maxidle = (int) ctr_internal_cast2number(val)->value.nvalue;
+	val = ctr_request_internal_option(myself, "maxproc");
+	if (val!=NULL) maxproc = (int) ctr_internal_cast2number(val)->value.nvalue;
+	val = ctr_request_internal_option(myself, "maxreq");
+	if (val!=NULL) maxreq = (int) ctr_internal_cast2number(val)->value.nvalue;
 	CTR_2CSTR(host, ctr_internal_cast2string(argumentList->object));
 	CTR_2CSTR(pid, ctr_internal_cast2string(argumentList->next->next->object));
 	port = (int) round(ctr_internal_cast2number(argumentList->next->object)->value.nvalue);
 	CtrStdSCGICB = argumentList->next->next->next->object;
 	CGI_prefork_server(host, port, pid,
-        /* maxproc */ 100,
-        /* minidle */ 8,
-        /* maxidle */ 8,
-        /* maxreq */ 1000, ctr_request_serve_callback);
+        /* maxproc */ maxproc,
+        /* minidle */ minidle,
+        /* maxidle */ maxidle,
+        /* maxreq */   maxreq, ctr_request_serve_callback);
     return myself;
 }
 
@@ -151,6 +183,7 @@ void begin(){
 	ctr_internal_create_func(requestObject, ctr_build_string("post:", 5), &ctr_request_post_string);
 	ctr_internal_create_func(requestObject, ctr_build_string("file:", 5), &ctr_request_file);
 	ctr_internal_create_func(requestObject, ctr_build_string("postArray:", 10), &ctr_request_post_array);
+	ctr_internal_create_func(requestObject, ctr_build_string("serverOption:is:", 16), &ctr_request_server_option);
 	ctr_internal_create_func(requestObject, ctr_build_string("host:listen:pid:callback:", 25), &ctr_request_serve);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Request", 7), requestObject, 0);
 	varlistGet = CGI_get_query(NULL);
