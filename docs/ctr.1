@@ -42,8 +42,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .B Nil
 .nf
     
-     Literal: 
-     
+     Literal:
+    
      Nil
 .fi
 .BR.BR.BR
@@ -57,7 +57,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B Object
 .nf
-     
+    
      This is the base object, the parent of all other objects.
      It contains essential object oriented programming features.
 .fi
@@ -75,9 +75,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Tests whether the current instance is the same as
      the argument.
-     
+    
      Alias: =
-     
+    
      Usage:
      object equals: other
 .fi
@@ -85,7 +85,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [Object] myself
 .nf
-     
+    
      Returns the object itself.
 .fi
 .BR.BR.BR
@@ -98,21 +98,21 @@ The following messages are part of the Core API of the Citrine Programming Langu
      passed.
     
      Usage:
-     
+    
      object on: 'greet' do: {\\ ... }.
      object on: 'between:and:' do: {\\ ... }.
-     
+    
 .fi
 .BR.BR.BR
 
 .B [Object] respondTo: [String]
 .nf
-     
+    
      Variations:
-     
+    
      [Object] respondTo: [String] and: [String]
      [Object] respondTo: [String] and: [String] and: [String]
-     
+    
      Default respond-to implemention, does nothing.
 .fi
 .BR.BR.BR
@@ -128,10 +128,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B Boolean
 .nf
-     
-     Literal: 
-     
-     True 
+    
+     Literal:
+    
+     True
      False
 .fi
 .BR.BR.BR
@@ -169,24 +169,24 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [Boolean] break
 .nf
-     
+    
      Breaks out of the current block and bubbles up to the parent block if
      the value of the receiver equals boolean True.
-     
+    
      Usage:
-     
+    
      (iteration > 10) break. #breaks out of loop after 10 iterations
 .fi
 .BR.BR.BR
 
 .B [Boolean] continue
 .nf
-     
+    
      Skips the remainder of the current block in a loop, continues to the next
      iteration.
-     
+    
      Usage:
-     
+    
      (iteration > 10) continue.
 .fi
 .BR.BR.BR
@@ -307,12 +307,12 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Literal:
-     
+    
      0
      1
      -8
      2.5
-     
+    
      Represents a number object in Citrine.
 .fi
 .BR.BR.BR
@@ -323,42 +323,42 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [Number] > [other]
 .nf
-     
+    
      Returns True if the number is higher than other number.
 .fi
 .BR.BR.BR
 
 .B [Number] >= [other]
 .nf
-     
+    
      Returns True if the number is higher than or equal to other number.
 .fi
 .BR.BR.BR
 
 .B [Number] < [other]
 .nf
-     
+    
      Returns True if the number is less than other number.
 .fi
 .BR.BR.BR
 
 .B [Number] <= [other]
 .nf
-     
+    
      Returns True if the number is less than or equal to other number.
 .fi
 .BR.BR.BR
 
 .B [Number] = [other]
 .nf
-     
+    
      Returns True if the number equals the other number.
 .fi
 .BR.BR.BR
 
 .B [Number] != [other]
 .nf
-     
+    
      Returns True if the number does not equal the other number.
 .fi
 .BR.BR.BR
@@ -377,21 +377,21 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [Number] odd
 .nf
-     
+    
      Returns True if the number is odd and False otherwise.
 .fi
 .BR.BR.BR
 
 .B [Number] even
 .nf
-     
+    
      Returns True if the number is even and False otherwise.
 .fi
 .BR.BR.BR
 
 .B [Number] + [Number]
 .nf
-     
+    
      Adds the other number to the current one. Returns a new
      number object.
 .fi
@@ -399,7 +399,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [Number] inc: [Number]
 .nf
-     
+    
      Increases the number ITSELF by the specified amount, this message will change the
      value of the number object itself instead of returning a new number.
 .fi
@@ -407,7 +407,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [Number] - [Number]
 .nf
-     
+    
      Subtracts the other number from the current one. Returns a new
      number object.
 .fi
@@ -415,7 +415,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [Number] dec: [number]
 .nf
-     
+    
      Decreases the number ITSELF by the specified amount, this message will change the
      value of the number object itself instead of returning a new number.
 .fi
@@ -440,7 +440,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [Number] mul: [Number]
 .nf
-     
+    
      Multiplies the number ITSELF by multiplier, this message will change the
      value of the number object itself instead of returning a new number.
 .fi
@@ -448,7 +448,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [Number] / [Number]
 .nf
-     
+    
      Divides the number by the specified divider. Returns a new
      number object.
 .fi
@@ -456,7 +456,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [Number] div: [Number]
 .nf
-     
+    
      Divides the number ITSELF by divider, this message will change the
      value of the number object itself instead of returning a new number.
 .fi
@@ -513,7 +513,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Runs the specified block for each step it takes to go from
      the start value to the target value using the specified step size.
      This is basically how you write for-loops in Citrine.
-     
+    
      Usage:
     
      1 to: 5 by: 1 do: { step | Pen write: 'this is step #'+step. }.
@@ -536,42 +536,42 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [Number] round
 .nf
-     
+    
      Returns the rounded number.
 .fi
 .BR.BR.BR
 
 .B [Number] abs
 .nf
-     
+    
      Returns the absolute value of the number.
 .fi
 .BR.BR.BR
 
 .B [Number] sqrt
 .nf
-     
+    
      Returns the square root of the number.
 .fi
 .BR.BR.BR
 
 .B [Number] exp
 .nf
-     
+    
      Returns the exponent of the number.
 .fi
 .BR.BR.BR
 
 .B [Number] sin
 .nf
-     
+    
      Returns the sine of the number.
 .fi
 .BR.BR.BR
 
 .B [Number] cos
 .nf
-     
+    
      Returns the cosine of the number.
 .fi
 .BR.BR.BR
@@ -585,7 +585,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [Number] atan
 .nf
-     
+    
      Caculates the atan of a number.
 .fi
 .BR.BR.BR
@@ -615,13 +615,13 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Literal:
-     
+    
      'Hello World, this is a String.'
-     
+    
      A sequence of characters. In Citrine, strings are UTF-8 aware.
      You may only use single quotes. To escape a character use the
      backslash '\\' character.
-     
+    
 .fi
 .BR.BR.BR
 
@@ -672,7 +672,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      This message is UTF-8 unicode aware.
     
      Usage:
-     
+    
      'hello' from: 2 to: 3. #ll
 .fi
 .BR.BR.BR
@@ -680,7 +680,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .B [String] from: [start] length: [length]
 .nf
     
-     Returns a portion of a string defined by from 
+     Returns a portion of a string defined by from
      and length values.
      This message is UTF-8 unicode aware.
     
@@ -703,7 +703,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Returns the character at the specified position (UTF8 aware).
     
      Usage:
-     
+    
      ('hello' at: 2). #l
 .fi
 .BR.BR.BR
@@ -723,7 +723,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Returns the index (character number, not the byte!) of the
      needle in the haystack.
-     
+    
      Usage:
     
      'find the needle' indexOf: 'needle'. #9
@@ -733,7 +733,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [String] up
 .nf
-     
+    
      Returns a new uppercased version of the string.
      Note that this is just basic ASCII case functionality, this should only
      be used for internal keys and as a basic utility function. This function
@@ -743,7 +743,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [String] low
 .nf
-     
+    
      Returns a new lowercased version of the string.
      Note that this is just basic ASCII case functionality, this should only
      be used for internal keys and as a basic utility function. This function
@@ -756,9 +756,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Returns the index (character number, not the byte!) of the
      needle in the haystack.
-     
+    
      Usage:
-     
+    
      'find the needle' lastIndexOf: 'needle'. #9
 .fi
 .BR.BR.BR
@@ -790,14 +790,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [String] ltrim
 .nf
-     
+    
      Removes all the whitespace at the left side of the string.
 .fi
 .BR.BR.BR
 
 .B [String] rtrim
 .nf
-     
+    
      Removes all the whitespace at the right side of the string.
 .fi
 .BR.BR.BR
@@ -826,7 +826,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [String] htmlEscape
 .nf
-     
+    
      Escapes HTML chars.
 .fi
 .BR.BR.BR
@@ -834,7 +834,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .B Block
 .nf
     
-     Literal: 
+     Literal:
     
      { parameters here... | code here... }
      {\\ code without parameters... }
@@ -845,7 +845,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      { param | Pen write: param. } applyTo: 'write this!'.
      { a b | ^ a + b. } applyTo: 1 and: 2.
      { a b c | ^ a + b + c. } applyTo: 1 and: 2 and: 3.
-     
+    
 .fi
 .BR.BR.BR
 
@@ -860,9 +860,16 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Runs the specified code block N times.
+     There are three flavours of this messages, use the one that bests fits
+     your style.
     
      Usage:
-     { ... } * 7.
+    
+     3 times: { i | Pen write: i. }. #using times: message
+     3 * { i | Pen write: i. }.      #using binary * message
+     { i | Pen write: i. } * 3.      #using mirrored notation
+     
+     All three forms accomplish exactly the same, it's just a matter of style.
 .fi
 .BR.BR.BR
 
@@ -871,6 +878,15 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Runs a block of code, depending on the outcome runs the other block
      as long as the result of the first one equals boolean True.
+    
+     Usage:
+    
+     x := 0.
+     {\\ ^(x < 6). } whileFalse: {\\ x inc: 1. }. #increment x until it reaches 6.
+    
+     Here we increment variable x by one until it reaches 6.
+     While the number x is lower than 6 we keep incrementing it.
+     Don't forget to use the return ^ symbol in the first block.
 .fi
 .BR.BR.BR
 
@@ -878,21 +894,58 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Runs a block of code, depending on the outcome runs the other block
-     as long as the result of the first one equals boolean False.
+     as long as the result of the first one equals to False.
+    
+     Usage:
+    
+     x := 0.
+     {\\ ^(x > 5). } whileFalse: {\\ x inc: 1. }. #increment x until it reaches 6.
+    
+     Here we increment variable x by one until it reaches 6.
+     While the number x is not higher than 5 we keep incrementing it.
+     Don't forget to use the return ^ symbol in the first block.
 .fi
 .BR.BR.BR
 
 .B [Block] run
 .nf
     
-     Runs a block
+     Sending the unary message 'run' to a block will cause it to execute.
+     The run message takes no arguments, if you want to use the block as a function
+     and send arguments, consider using the applyTo-family of messages instead.
+     This message just simply runs the block of code without any arguments.
+     
+     Usage:
+     
+     {\\ Pen write: 'Hello World'. } run. #prints 'Hello World'
+     
+     The example above will run the code inside the block and display
+     the greeting.
 .fi
 .BR.BR.BR
 
 .B [Block] set: [name] value: [object]
 .nf
     
-     Sets a variable in a closure.
+     Sets a variable in a block of code. This how you can get closure-like
+     functionality.
+    
+     Usage:
+    
+     shout := {\\ Pen write: (my message + '!!!'). }.
+     shout set: 'message' value: 'hello'.
+     shout run.
+    
+     Here we assign a block to a variable named 'shout'.
+     We assign the string 'hello' to the variable 'message' inside the block.
+     When we invoke the block 'shout' by sending the run message without any
+     arguments it will display the string: 'hello!!!'.
+    
+     Similarly, you could use this technique to create a block that returns a
+     block that applies a formula (for instance simple multiplication) and then set the
+     multiplier to use in the formula. This way, you could create a block
+     building 'formula blocks'. This is how you implement use closures
+     in Citrine.
 .fi
 .BR.BR.BR
 
@@ -903,30 +956,30 @@ The following messages are part of the Core API of the Citrine Programming Langu
      This will throw an error / exception.
      You can attach an object to the error, for instance
      an error message.
-     
+    
      Example:
-     
+    
      {\\
        thisBlock error: 'oops!'.
      } catch: { errorMessage |
-       Pen write: errorMessage.	
+       Pen write: errorMessage.
      }, run.
 .fi
 .BR.BR.BR
 
 .B [Block] catch: [otherBlock]
 .nf
-     
+    
      Associates an error clause to a block.
      If an error (exception) occurs within the block this block will be
      executed.
-     
+    
      Example:
-     
+    
      #Raise error on division by zero.
-     {\\ 
+     {\\
         var z := 4 / 0.
-     } catch: { errorMessage | 
+     } catch: { errorMessage |
         Pen write: e, brk.
      }, run.
 .fi
@@ -1357,6 +1410,139 @@ The following messages are part of the Core API of the Citrine Programming Langu
      
      Outputs a newline character.
 .fi
+.BR.BR.BR
+
+.BR.BR.BR
+
+.BR.BR.BR
+
+.BR.BR.BR
+
+.BR.BR.BR
+
+.B Request get: [string]
+.nf
+     
+     Returns the value of the specified GET parameter from the HTTP query string.
+     For example if the query string of an url is: ?search=glasses
+     then the value of:
+     
+     item := Request get: 'search'.
+     
+     would be 'glasses'.
+.fi
+.BR.BR.BR
+
+.B Request getArray: [string].
+.nf
+     
+     Returns an array of strings extracted from the query string.
+     For example if the query string contains: ?option=a&option=b
+     
+     Request getArray: 'option'.
+     
+     will contain two elements: 'a' and 'b'. Note that
+     this also works with array-like notation: ?option[]='a'&option[]=b:
+     
+     Request getArray: 'option[]'.
+     
+     will return the same array.
+.fi
+.BR.BR.BR
+
+.B Request post: [string].
+.nf
+     
+     Obtains a string from the HTTP POST payload. Just like 'get:' but for
+     POST variables. See 'Request get:' for details.
+.fi
+.BR.BR.BR
+
+.B Request postArray: [string].
+.nf
+     
+     Obtains an array from the HTTP POST payload. Just like 'getArray:' but for
+     POST variables. See 'Request getArray:' for details.
+.fi
+.BR.BR.BR
+
+.B Request cookie: [string].
+.nf
+     
+     Obtains a string from the HTTP COOKIE payload. Just like 'get:' but for
+     COOKIE variables. See 'Request get:' for details.
+.fi
+.BR.BR.BR
+
+.B Request cookieArray: [string].
+.nf
+     
+     Obtains an array from the HTTP COOKIE payload. Just like 'getArray:' but for
+     COOKIE variables. See 'Request getArray:' for details.
+.fi
+.BR.BR.BR
+
+.B Request file: [string].
+.nf
+     
+     Returns array containing the path to the uploaded temporay file (0) and
+     the desired name of the uploaded file (1).
+.fi
+.BR.BR.BR
+
+.B Request serverOption: [string] is: [string].
+.nf
+     
+     Sets a server option, available server option for SCGI server include:
+     
+     - minidle, minimum number of idle processes
+     - maxidle, maximum number of idle processes
+     - maxproc, maximum number of processes
+     - maxreq,  maximum number of concurrent requests to allow
+     
+     Usage:
+     
+     Request
+      serverOption: 'minidle' is: 8,
+      serverOption: 'maxreq'  is: 100.
+     
+     This sets the minimum number of idle processes to 8 and the
+     maximum number of concurrent requests to 100, you can chain
+     multiple options using a comma (,).
+.fi
+.BR.BR.BR
+
+.B Request host: [string] listen: [string] pid: [string] callback: [block].
+.nf
+    
+     Sets up Storm Server.
+     Storm Server is an SCGI server. Both the Request Object Plugin and Storm Server
+     are based on S. Losen's CCGI library (http://libccgi.sourceforge.net/doc.html)
+     licensed LGPL.
+    
+     To set up a Storm Server, specify host (i.e. 'localhost'),
+     a port to listen to (i.e. 9000) a pid file '/var/run/mypid.pid' and a
+     callback block.
+    
+     Usage:
+    
+     Request host:'localhost' listen:4000 pid:'/var/run/storm.pid' callback: {\\
+      Pen write: 'Content-type: text/html\\n\\n'.
+      var fname  := Command env: 'DOCUMENT_URI'.
+      var script := File new: '/var/www/webapp'+fname.
+      script include.
+     }.
+     
+     Here we set up a server listening to port 4000. The callback prints out
+     the content type header. Then, we extract the DOCUMENT URI, i.e. '/hello.ctr'
+     and map this to a path '/var/www/webapp/hello.ctr'
+     
+     By default there is no output buffering, either create another callback or
+     simply override the '<' or 'Pen' object to buffer instead of outputting
+     directly.
+.fi
+.BR.BR.BR
+
 
 .SH BUGS
 This is a preliminary version (< 1.0) of Citrine, there might still be very serious bugs.

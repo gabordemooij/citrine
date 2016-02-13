@@ -1566,9 +1566,16 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
  * [Block] times: [Number]
  *
  * Runs the specified code block N times.
+ * There are three flavours of this messages, use the one that bests fits
+ * your style.
  *
  * Usage:
- * { ... } * 7.
+ *
+ * 3 times: { i | Pen write: i. }. #using times: message
+ * 3 * { i | Pen write: i. }.      #using binary * message
+ * { i | Pen write: i. } * 3.      #using mirrored notation
+ * 
+ * All three forms accomplish exactly the same, it's just a matter of style.
  */
 ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* indexNumber;
@@ -1648,7 +1655,17 @@ ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList
 /**
  * [Block] run
  *
- * Runs a block
+ * Sending the unary message 'run' to a block will cause it to execute.
+ * The run message takes no arguments, if you want to use the block as a function
+ * and send arguments, consider using the applyTo-family of messages instead.
+ * This message just simply runs the block of code without any arguments.
+ * 
+ * Usage:
+ * 
+ * {\ Pen write: 'Hello World'. } run. #prints 'Hello World'
+ * 
+ * The example above will run the code inside the block and display
+ * the greeting.
  */
 ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
@@ -1660,7 +1677,25 @@ ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [Block] set: [name] value: [object]
  *
- * Sets a variable in a closure.
+ * Sets a variable in a block of code. This how you can get closure-like
+ * functionality.
+ *
+ * Usage:
+ *
+ * shout := {\ Pen write: (my message + '!!!'). }.
+ * shout set: 'message' value: 'hello'.
+ * shout run.
+ *
+ * Here we assign a block to a variable named 'shout'.
+ * We assign the string 'hello' to the variable 'message' inside the block.
+ * When we invoke the block 'shout' by sending the run message without any
+ * arguments it will display the string: 'hello!!!'.
+ *
+ * Similarly, you could use this technique to create a block that returns a
+ * block that applies a formula (for instance simple multiplication) and then set the
+ * multiplier to use in the formula. This way, you could create a block
+ * building 'formula blocks'. This is how you implement use closures
+ * in Citrine.
  */
 ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* key = ctr_internal_cast2string(argumentList->object);
