@@ -1,0 +1,4 @@
+#Test String append message
+x := 'Append this'.
+y := 'to a String'.
+Pen write: ('' append: x, append: ' ', append: y).

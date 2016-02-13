@@ -436,6 +436,7 @@ ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_fromto(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList);
@@ -466,7 +467,6 @@ ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my);
 ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList);
 
-
 /**
  * Array Interface
  */
@@ -485,8 +485,6 @@ ctr_object* ctr_array_from_to(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList);
 
-
-
 /**
  * HashMap Interface
  */
@@ -495,7 +493,6 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList);
-
 
 /**
  * Console Interface

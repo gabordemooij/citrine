@@ -575,7 +575,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string("up", 2), &ctr_string_to_upper);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("low", 3), &ctr_string_to_lower);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("skip:", 5), &ctr_string_skip);
-	
+	ctr_internal_create_func(CtrStdString, ctr_build_string("append:", 7), &ctr_string_append);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("toNumber", 8), &ctr_string_to_number);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("toBoolean", 9), &ctr_string_to_boolean);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("String", 6), CtrStdString, 0);

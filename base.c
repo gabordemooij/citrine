@@ -1002,6 +1002,37 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [String] append: [String].
+ *
+ * Appends the specified string to itself. This is different from the '+'
+ * message, the '+' message adds the specified string while creating a new string.
+ * Appends on the other hand modifies the original string.
+ *
+ * Usage:
+ *
+ * x := 'Hello '.
+ * x append: 'World'.
+ * Pen write: x. #Hello World
+ *
+ */
+ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
+	ctr_size n1;
+	ctr_size n2;
+	char* dest;
+	strObject = ctr_internal_cast2string(argumentList->object);
+	n1 = myself->value.svalue->vlen;
+	n2 = strObject->value.svalue->vlen;
+	dest = calloc(sizeof(char), (n1 + n2));
+	memcpy(dest, myself->value.svalue->value, n1);
+	memcpy(dest+n1, strObject->value.svalue->value, n2);
+	free(strObject->value.svalue->value);
+	myself->value.svalue->value = dest;
+	myself->value.svalue->vlen  = (n1 + n2);
+	return myself;
+}
+
+/**
  * [String] from: [position] to: [destination]
  *
  * Returns a portion of a string defined by from-to values.
