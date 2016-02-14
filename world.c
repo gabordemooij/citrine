@@ -542,7 +542,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("tan",3),&ctr_number_tan);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("atan",4),&ctr_number_atan);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("log",3),&ctr_number_log);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("pow:",4),&ctr_number_pow);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("toPowerOf:",10),&ctr_number_pow);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("min:",4),&ctr_number_min);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("max:",4),&ctr_number_max);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("odd",3),&ctr_number_odd);
