@@ -614,7 +614,15 @@ ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) 
 /**
  * [Number] times: [Block]
  *
- * Runs the block N times, where N is the value of the Number.
+ * Runs the block of code a 'Number' of times.
+ * This is the most basic form of a loop.
+ *
+ * Usage:
+ *
+ * 7 times: { i | Pen write: i. }.
+ *
+ * The example above runs the block 7 times. The current iteration
+ * number is passed to the block as a parameter (i in this example).
  */
 ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* indexNumber;
