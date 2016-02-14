@@ -426,23 +426,37 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Multiplies the number by the specified divider. Returns a new
      number object.
-    
-     If the argument is a block, this message is an alias for times:
 .fi
 .BR.BR.BR
 
 .B [Number] times: [Block]
 .nf
     
-     Runs the block N times, where N is the value of the Number.
+     Runs the block of code a 'Number' of times.
+     This is the most basic form of a loop.
+    
+     Usage:
+    
+     7 times: { i | Pen write: i. }.
+    
+     The example above runs the block 7 times. The current iteration
+     number is passed to the block as a parameter (i in this example).
 .fi
 .BR.BR.BR
 
-.B [Number] mul: [Number]
+.B [Number] multiplyBy: [Number]
 .nf
     
      Multiplies the number ITSELF by multiplier, this message will change the
      value of the number object itself instead of returning a new number.
+    
+     Usage:
+    
+     x := 5.
+     x multiplyBy: 2. #x is now 10.
+    
+     Use this message to apply the operation to the object itself instead
+     of creating and returning a new object.
 .fi
 .BR.BR.BR
 
@@ -454,25 +468,49 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] div: [Number]
+.B [Number] divideBy: [Number]
 .nf
     
      Divides the number ITSELF by divider, this message will change the
      value of the number object itself instead of returning a new number.
+    
+     Usage:
+    
+     x := 10.
+     x divideBy: 2. #x will now be 5.
+    
+     Use this message to apply the operation to the object itself instead
+     of generating a new object.
 .fi
 .BR.BR.BR
 
 .B [Number] modulo: [modulo]
 .nf
     
-     Returns the modulo of the number.
+     Returns the modulo of the number. This message will return a new
+     object representing the modulo of the recipient.
+    
+     Usage:
+    
+     x := 11 modulo: 3. #x will now be 2
+    
+     Use this message to apply the operation of division to the
+     object itself instead of generating a new one.
 .fi
 .BR.BR.BR
 
-.B [Number] pow: [power]
+.B [Number] toPowerOf: [power]
 .nf
     
-     Returns the number to the specified power.
+     Returns a new object representing the
+     number to the specified power.
+    
+     Usage:
+    
+     x := 2 toPowerOf: 8. #x will be 256
+    
+     The example above will raise 2 to the power of 8 resulting in
+     a new Number object: 256.
 .fi
 .BR.BR.BR
 
@@ -665,6 +703,22 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [String] append: [String].
+.nf
+    
+     Appends the specified string to itself. This is different from the '+'
+     message, the '+' message adds the specified string while creating a new string.
+     Appends on the other hand modifies the original string.
+    
+     Usage:
+    
+     x := 'Hello '.
+     x append: 'World'.
+     Pen write: x. #Hello World
+    
+.fi
+.BR.BR.BR
+
 .B [String] from: [position] to: [destination]
 .nf
     
@@ -853,23 +907,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Runs a block of code using the specified object as a parameter.
-.fi
-.BR.BR.BR
-
-.B [Block] times: [Number]
-.nf
-    
-     Runs the specified code block N times.
-     There are three flavours of this messages, use the one that bests fits
-     your style.
-    
-     Usage:
-    
-     3 times: { i | Pen write: i. }. #using times: message
-     3 * { i | Pen write: i. }.      #using binary * message
-     { i | Pen write: i. } * 3.      #using mirrored notation
-     
-     All three forms accomplish exactly the same, it's just a matter of style.
 .fi
 .BR.BR.BR
 
@@ -1358,15 +1395,21 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Command] ??
+.B Command askQuestion
 .nf
     
-     Asks user for interactive input in CLI script.
+     Ask a question on the command-line, resumes program
+     only after pressing the enter key.
      Only reads up to 100 characters.
     
      Usage:
     
-     answer := Command ??.
+     Pen write: 'What is your name ?'.
+     x := Command askQuestion.
+     Pen write: 'Hello ' + x + ' !', brk.
+    
+     The example above asks the user for his/her name and
+     then displays the input received.
 .fi
 .BR.BR.BR
 
