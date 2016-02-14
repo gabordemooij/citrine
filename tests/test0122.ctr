@@ -1,0 +1,8 @@
+#Test multiplyBy and divideBy
+x := 10.
+x divideBy: 2.
+Pen write: '10 / 2 = '.
+Pen write: x, brk.
+x multiplyBy: 2.
+Pen write: ' * 2 makes... '.
+Pen write: x, brk.

@@ -520,9 +520,9 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("dec:",4), &ctr_number_dec);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("*",1),&ctr_number_multiply);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("times:",6),&ctr_number_times);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("mul:",4),&ctr_number_mul);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("multiplyBy:",11),&ctr_number_mul);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("/",1), &ctr_number_divide);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("div:",4),&ctr_number_div);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("divideBy:",9),&ctr_number_div);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string(">",1),&ctr_number_higherThan);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("≥",3),&ctr_number_higherEqThan);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("<",1),&ctr_number_lowerThan);
