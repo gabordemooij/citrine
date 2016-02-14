@@ -50,22 +50,21 @@ ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
  * Returns a string representation of the type of object.
  */
 ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
-
-	 switch(myself->info.type){
-	       case CTR_OBJECT_TYPE_OTNIL:
-		        return ctr_build_string_from_cstring("Nil");
-	       case CTR_OBJECT_TYPE_OTBOOL:
-		        return ctr_build_string_from_cstring("Boolean");
-	       case CTR_OBJECT_TYPE_OTNUMBER:
-		        return ctr_build_string_from_cstring("Number");
-	       case CTR_OBJECT_TYPE_OTSTRING:
-		        return ctr_build_string_from_cstring("String");
-	       case CTR_OBJECT_TYPE_OTBLOCK:
-	       case CTR_OBJECT_TYPE_OTNATFUNC:
-		        return ctr_build_string_from_cstring("Block");
-           default:
-	            return ctr_build_string_from_cstring("Object");
-    }
+	switch(myself->info.type){
+		case CTR_OBJECT_TYPE_OTNIL:
+			return ctr_build_string_from_cstring("Nil");
+		case CTR_OBJECT_TYPE_OTBOOL:
+			return ctr_build_string_from_cstring("Boolean");
+		case CTR_OBJECT_TYPE_OTNUMBER:
+			return ctr_build_string_from_cstring("Number");
+		case CTR_OBJECT_TYPE_OTSTRING:
+			return ctr_build_string_from_cstring("String");
+		case CTR_OBJECT_TYPE_OTBLOCK:
+		case CTR_OBJECT_TYPE_OTNATFUNC:
+			return ctr_build_string_from_cstring("Block");
+		default:
+			return ctr_build_string_from_cstring("Object");
+	}
 }
 
 /**
