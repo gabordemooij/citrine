@@ -89,7 +89,7 @@ files each: { index file |
 				whileTrue: {\
 						line := line replace: '\\' with: '\\\\'.
 						Pen write: '    '+(line skip: 2), brk.
-						n inc: 1.
+						n add: 1.
 				}.
 				Pen write: '.fi', brk.
 			}.

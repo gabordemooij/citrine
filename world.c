@@ -515,9 +515,9 @@ void ctr_initialize_world() {
 	CtrStdNumber = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("to:by:do:", 9), &ctr_number_to_by_do);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("+", 1), &ctr_number_add);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("inc:",4), &ctr_number_inc);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("add:",4), &ctr_number_inc);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("-",1), &ctr_number_minus);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("dec:",4), &ctr_number_dec);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("subtract:",9), &ctr_number_dec);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("*",1),&ctr_number_multiply);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("times:",6),&ctr_number_times);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("multiplyBy:",11),&ctr_number_mul);

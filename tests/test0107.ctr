@@ -13,7 +13,7 @@ xIsLessThan10 := {\ ^( x < 10 ). }.
 Pen write: 'Break while-true loop, 0-4.', brk.
 xIsLessThan10 whileTrue: {\
 	Pen write: 'iteration #' + x, brk.
-	x inc: 1.
+	x add: 1.
 	((x < 5) not) break.
 }.
 
@@ -21,7 +21,7 @@ xIsLessThan10 whileTrue: {\
 Pen write: 'Break while-false loop, 5,4.', brk.
 {\ ^(x=0). } whileFalse: {\
 	Pen write: 'iteration #' + x, brk.
-	x dec: 1.
+	x subtract: 1.
 	(x = 3) break.
 }.
 

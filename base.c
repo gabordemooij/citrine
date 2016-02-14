@@ -559,7 +559,7 @@ ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] inc: [Number]
+ * [Number] add: [Number]
  *
  * Increases the number ITSELF by the specified amount, this message will change the
  * value of the number object itself instead of returning a new number.
@@ -584,7 +584,7 @@ ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] dec: [number]
+ * [Number] subtract: [number]
  *
  * Decreases the number ITSELF by the specified amount, this message will change the
  * value of the number object itself instead of returning a new number.
@@ -1656,7 +1656,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
  * Usage:
  *
  * x := 0.
- * {\ ^(x < 6). } whileFalse: {\ x inc: 1. }. #increment x until it reaches 6.
+ * {\ ^(x < 6). } whileFalse: {\ x add: 1. }. #increment x until it reaches 6.
  *
  * Here we increment variable x by one until it reaches 6.
  * While the number x is lower than 6 we keep incrementing it.
@@ -1682,7 +1682,7 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
  * Usage:
  *
  * x := 0.
- * {\ ^(x > 5). } whileFalse: {\ x inc: 1. }. #increment x until it reaches 6.
+ * {\ ^(x > 5). } whileFalse: {\ x add: 1. }. #increment x until it reaches 6.
  *
  * Here we increment variable x by one until it reaches 6.
  * While the number x is not higher than 5 we keep incrementing it.
