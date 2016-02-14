@@ -208,14 +208,20 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [Command] ??
+ * Command askQuestion
  *
- * Asks user for interactive input in CLI script.
+ * Ask a question on the command-line, resumes program
+ * only after pressing the enter key.
  * Only reads up to 100 characters.
  *
  * Usage:
  *
- * answer := Command ??.
+ * Pen write: 'What is your name ?'.
+ * x := Command askQuestion.
+ * Pen write: 'Hello ' + x + ' !', brk.
+ *
+ * The example above asks the user for his/her name and
+ * then displays the input received.
  */
 ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList) {
 	int c;
