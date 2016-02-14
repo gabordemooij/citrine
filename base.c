@@ -648,10 +648,18 @@ ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] mul: [Number]
+ * [Number] multiplyBy: [Number]
  *
  * Multiplies the number ITSELF by multiplier, this message will change the
  * value of the number object itself instead of returning a new number.
+ *
+ * Usage:
+ *
+ * x := 5.
+ * x multiplyBy: 2. #x is now 10.
+ *
+ * Use this message to apply the operation to the object itself instead
+ * of creating and returning a new object.
  */
 ctr_object* ctr_number_mul(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -677,10 +685,18 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] div: [Number]
+ * [Number] divideBy: [Number]
  *
  * Divides the number ITSELF by divider, this message will change the
  * value of the number object itself instead of returning a new number.
+ *
+ * Usage:
+ *
+ * x := 10.
+ * x divideBy: 2. #x will now be 5.
+ *
+ * Use this message to apply the operation to the object itself instead
+ * of generating a new object.
  */
 ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -695,7 +711,15 @@ ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [Number] modulo: [modulo]
  *
- * Returns the modulo of the number.
+ * Returns the modulo of the number. This message will return a new
+ * object representing the modulo of the recipient.
+ *
+ * Usage:
+ *
+ * x := 11 modulo: 3. #x will now be 2
+ *
+ * Use this message to apply the operation of division to the
+ * object itself instead of generating a new one.
  */
 ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
