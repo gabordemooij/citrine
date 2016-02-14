@@ -63,7 +63,7 @@ files each: { index file |
 	var commentBlocks := str split: '/**'.
 	commentBlocks shift.
 	
-	(commentBlocks count) * {\
+	(commentBlocks count) times: {\
 		var comment := commentBlocks shift.
 		var lines   := comment split: '\n'.
 		lines count > 3 ifTrue: {\
