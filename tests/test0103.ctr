@@ -1,7 +1,7 @@
 #Nil tests
 a := Array <- Object ; True ; False ; Boolean ; 1 ; Number ; 'Str' ; String ; {\}.
 Pen write: (a count), brk.
-(a count) * { i |
+(a count) times: { i |
 	Pen write: 
 		'a ' + 
 		((a @ i) type) +

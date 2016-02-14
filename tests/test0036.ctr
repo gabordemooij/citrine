@@ -1,4 +1,4 @@
-{\
+1000 times: {\
 	var a := 'First'.
 	var b := 'Second'.
 	a := b.
@@ -12,4 +12,4 @@
 	Pen write: a.
 	#dont remove your own code block.
 	Broom sweep.
-} * 1000.
+}.

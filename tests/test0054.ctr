@@ -1,4 +1,4 @@
-(Command argCount) * { i | 
+(Command argCount) times: { i |
 	((Command argument: i) != '-r') ifTrue: {\
 		(((Command argument: i) indexOf: '.ast') > -1) ifTrue: {\
 			Pen write: 'Found argument file.'.

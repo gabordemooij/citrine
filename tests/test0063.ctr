@@ -10,6 +10,6 @@ Pen write: ' cent a piece.'.
 #and now a funny unicode one... a very cool trick!
 #let's extend the number object with a unicode times equivalent!
 Number on: '×' do: { b |
-	me * b. 
+	me times: b.
 }.
 7 × { i | Pen write: i. }.

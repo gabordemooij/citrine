@@ -1,24 +1,24 @@
 echo := Object new.
-echo on: 'respondTo:' do: { 
+echo on: 'respondTo:' do: {
 	sound |
-	2 * {\ Pen write: sound. }. 
+	2 times: {\ Pen write: sound. }.
 }.
 echo ho!. #prints ho!ho!
 
 
 echo := Object new.
-echo on: 'respondTo:with:' do: { 
+echo on: 'respondTo:with:' do: {
 	sound x |
-	{\ Pen write: sound. } * x. 
+	x times: {\ Pen write: sound. }.
 }.
 echo o 5. #prints ooooo
 echo wooo: 3. #prints wooo:wooo:wooo
 
 
 echo := Object new.
-echo on: 'respondTo:with:and:' do: { 
+echo on: 'respondTo:with:and:' do: {
 	operation sound x |
-	x * {\	Pen write: sound. }. 
+	x times: {\	Pen write: sound. }.
 }.
 echo shout: 'la' times: 4. #prints lalalala
 

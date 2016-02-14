@@ -10,6 +10,6 @@ Pen write: (a pop), brk.
 a unshift: 'Hi', unshift: 'There'.
 Pen write: (a count) + ' left in array.', brk.
 Pen write: (a at: 1), write: (a at: 0), brk.
-{\ a shift. } * 4.
+4 times: {\ a shift. }.
 Pen write: (a count) + ' left in array.', brk.
 Pen write: a shift.

@@ -1,1 +1,1 @@
-5 * { i | Pen write: i. }.
+5 times: { i | Pen write: i. }.

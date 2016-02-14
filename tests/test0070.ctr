@@ -1,9 +1,9 @@
 numbers := '1,2,3' split: ','.
 Pen write: 'I got: ' + numbers length + ' numbers.' ,brk.
-{ i | Pen write: 'number #' + i + ':' + (numbers at: i), brk.} * 3.
+3 times: { i | Pen write: 'number #' + i + ':' + (numbers at: i), brk.}.
 beverages := 'Tea Or Coffee Or Milk Or Orange Juice Or Water'.
 beverages := beverages split: ' Or '.
 Pen write: 'We serve', brk.
-(beverages count) * { i | Pen write: '->' + (beverages at: i), brk. }.
+(beverages count) times: { i | Pen write: '->' + (beverages at: i), brk. }.
 Pen write: (beverages join: ','), brk.
 Pen write: (numbers join: '||').

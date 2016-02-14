@@ -1,4 +1,3 @@
-5 * {\ Pen write: 'ho'. }.
-
+5 times: {\ Pen write: 'ho'. }.
 a := Object new.
 Pen write: a.

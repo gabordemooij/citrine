@@ -31,7 +31,7 @@ Pen write: 'Continue while-false, No - before 3 only.', brk.
 #1-4
 Pen brk.
 Pen write: 'Continue times-loop, No ||| before 3.', brk.
-5 * { i |
+5 times: { i |
 	Pen write: 'iteration #' + i, brk.
 	(i = 2) continue.
 	Pen write: '|||'.

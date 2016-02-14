@@ -601,14 +601,11 @@ ctr_object* ctr_number_dec(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Multiplies the number by the specified divider. Returns a new
  * number object.
- *
- * If the argument is a block, this message is an alias for times:
  */
 ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum;
 	ctr_number a;
 	ctr_number b;
-	CTR_MIRROR_CALL(CTR_OBJECT_TYPE_OTBLOCK, ctr_block_times, mirror1);
 	otherNum = ctr_internal_cast2number(argumentList->object);
 	a = myself->value.nvalue;
 	b = otherNum->value.nvalue;
@@ -621,7 +618,25 @@ ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) 
  * Runs the block N times, where N is the value of the Number.
  */
 ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
-	CTR_MIRROR_CALL(CTR_OBJECT_TYPE_OTBLOCK, ctr_block_times, mirror1);
+	ctr_object* indexNumber;
+	ctr_object* block = argumentList->object;
+	ctr_argument* arguments;
+	int t;
+	int i;
+	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) { printf("Expected code block."); exit(1); }
+	block->info.sticky = 1;
+	t = myself->value.nvalue;
+	for(i=0; i<t; i++) {
+		indexNumber = ctr_build_number_from_float((ctr_number) i);
+		arguments = CTR_CREATE_ARGUMENT();
+		arguments->object = indexNumber;
+		ctr_block_run(block, arguments, block);
+		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
+		if (CtrStdError) break;
+	}
+	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
+	block->info.mark = 0;
+	block->info.sticky = 0;
 	return myself;
 }
 
@@ -1591,44 +1606,6 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 		}
 	}
 	return result;
-}
-
-/**
- * [Block] times: [Number]
- *
- * Runs the specified code block N times.
- * There are three flavours of this messages, use the one that bests fits
- * your style.
- *
- * Usage:
- *
- * 3 times: { i | Pen write: i. }. #using times: message
- * 3 * { i | Pen write: i. }.      #using binary * message
- * { i | Pen write: i. } * 3.      #using mirrored notation
- * 
- * All three forms accomplish exactly the same, it's just a matter of style.
- */
-ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* indexNumber;
-	ctr_object* block = myself;
-	ctr_argument* arguments;
-	int t;
-	int i;
-	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) { printf("Expected code block."); exit(1); }
-	block->info.sticky = 1;
-	t = ctr_internal_cast2number(argumentList->object)->value.nvalue;
-	for(i=0; i<t; i++) {
-		indexNumber = ctr_build_number_from_float((ctr_number) i);
-		arguments = CTR_CREATE_ARGUMENT();
-		arguments->object = indexNumber;
-		ctr_block_run(block, arguments, block);
-		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
-		if (CtrStdError) break;
-	}
-	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
-	block->info.mark = 0;
-	block->info.sticky = 0;
-	return myself;
 }
 
 /**

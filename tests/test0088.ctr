@@ -1,7 +1,7 @@
 #Test scope, common scenarios
 santaLaugh := 'ho'.
 laugh := ''.
-3 * {\ laugh := laugh + santaLaugh. }.
+3 times: {\ laugh := laugh + santaLaugh. }.
 Pen write: laugh, brk.
 
 locked := False.

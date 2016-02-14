@@ -584,7 +584,6 @@ void ctr_initialize_world() {
 	/* Block */
 	CtrStdBlock = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBLOCK);
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string("run", 3), &ctr_block_runIt);
-	ctr_internal_create_func(CtrStdBlock, ctr_build_string("*", 1), &ctr_block_times);
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string("applyTo:", 8), &ctr_block_runIt);
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string("applyTo:and:", 12), &ctr_block_runIt);
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string("applyTo:and:and:", 16), &ctr_block_runIt);

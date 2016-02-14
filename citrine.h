@@ -586,25 +586,6 @@ ctr_object* ctr_build_string_from_cstring( char* str );
 #define ASSIGN_STRING(o,p,v,s) o->p = ctr_malloc(s * sizeof(char), 0); memcpy( (char*) o->p,v,s);
 #define CTR_2CSTR(cs, s) cs = ctr_malloc((s->value.svalue->vlen+1) * sizeof(char),0); strncpy(cs, s->value.svalue->value, s->value.svalue->vlen); cs[s->value.svalue->vlen] = '\0';
 
-/**
- * Creates a mirror call.
- * A mirror call is a special macro for binary messages. For instance,
- * blocks accept a * message for looping, however numbers accept the same message for
- * multiplication with other numbers. When the user sends a * and a block to a number
- * we want to be nice and reverse the call (hence mirror) instead of just casting the block
- * to 0 and return 0 (pretty pointless).
- * 
- * @param T2     mirror type
- * @param CNAME  name of the function
- * @param TMPVAR name for temp. var
- */
-#define CTR_MIRROR_CALL(T2, CNAME, TMPVAR) if (argumentList->object->info.type == T2) {\
-	ctr_argument* TMPVAR = CTR_CREATE_ARGUMENT();\
-	TMPVAR->object = myself;\
-	return CNAME(argumentList->object, TMPVAR);\
-}\
-
-
 #define CTR_CONVFP(s,x){\
 char *buf = calloc(100, sizeof(char));\
 char *p;\

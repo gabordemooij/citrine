@@ -9,7 +9,7 @@ mapper := { array func |
 	var mapping := { i | my q put: (my f applyTo: (my q @ i)) at: i. } 
 	set: 'q' value: array,
 	set: 'f' value: func.
-	(array count) * mapping.	
+	(array count) times: mapping.
 }.
 
 a := Array <- 1; 2; 3.
