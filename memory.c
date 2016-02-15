@@ -42,32 +42,33 @@ char* ctr_malloc(uintptr_t size, int what) {
 	beginBlock = ctr_malloc_chunk + ctr_malloc_chunk_pointer;
 	ctr_malloc_chunk_pointer += size;
 	xptr = beginBlock;
-	if (what == 1 || what == 2 || what == 3) {
-		if (what == 1 || what == 3) {
-			ctr_tnode tmp0;
-			ctr_tnode tmp;
-			*(ctr_malloc_swizzle_adressbook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp0.value) - (uintptr_t) &tmp0);
-			ctr_default_header->num_of_swizzles++;
-			ctr_malloc_swizzle_adressbook += 1;
-			*(ctr_malloc_swizzle_adressbook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp.nodes) - (uintptr_t) &tmp);
-			ctr_default_header->num_of_swizzles++;
-			ctr_malloc_swizzle_adressbook += 1;
-		}
-		if (what == 2) {
-			ctr_tlistitem tmp2;
-			ctr_tlistitem tmp3;
-			*(ctr_malloc_swizzle_adressbook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp2.node) - (uintptr_t) &tmp2);
-			ctr_malloc_swizzle_adressbook += 1;
-			ctr_default_header->num_of_swizzles++;
-			*(ctr_malloc_swizzle_adressbook) = (uintptr_t) 	xptr + (uintptr_t) ((uintptr_t) &(tmp3.next) - (uintptr_t) &tmp3);
-			ctr_malloc_swizzle_adressbook += 1;
-			ctr_default_header->num_of_swizzles++;
-		}
-		if (what == 3) {
-			ctr_default_header->program_entry_point = (uintptr_t) xptr;
-		}
+	if (what != 1 && what != 2 && what != 3) {
+		return xptr;
 	}
-	
+	if (what == 1 || what == 3) {
+		ctr_tnode tmp0;
+		ctr_tnode tmp;
+		*(ctr_malloc_swizzle_adressbook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp0.value) - (uintptr_t) &tmp0);
+		ctr_default_header->num_of_swizzles++;
+		ctr_malloc_swizzle_adressbook += 1;
+		*(ctr_malloc_swizzle_adressbook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp.nodes) - (uintptr_t) &tmp);
+		ctr_default_header->num_of_swizzles++;
+		ctr_malloc_swizzle_adressbook += 1;
+	}
+	if (what == 2) {
+		ctr_tlistitem tmp2;
+		ctr_tlistitem tmp3;
+		*(ctr_malloc_swizzle_adressbook) = (uintptr_t) xptr + (uintptr_t) ((uintptr_t) &(tmp2.node) - (uintptr_t) &tmp2);
+		ctr_malloc_swizzle_adressbook += 1;
+		ctr_default_header->num_of_swizzles++;
+		*(ctr_malloc_swizzle_adressbook) = (uintptr_t) 	xptr + (uintptr_t) ((uintptr_t) &(tmp3.next) - (uintptr_t) &tmp3);
+		ctr_malloc_swizzle_adressbook += 1;
+		ctr_default_header->num_of_swizzles++;
+	}
+	if (what == 3) {
+		ctr_default_header->program_entry_point = (uintptr_t) xptr;
+	}
+
 	return xptr;
 }
 
