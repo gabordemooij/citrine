@@ -129,16 +129,16 @@ typedef struct ctr_argument ctr_argument;
  * Root Object
  */
 struct ctr_object {
-    const char* name;
-    ctr_map* properties;
-    ctr_map* methods;
-    struct {
+	const char* name;
+	ctr_map* properties;
+	ctr_map* methods;
+	struct {
 		unsigned int type: 4;
 		unsigned int mark: 1;
 		unsigned int sticky: 1;
 	} info;
-    struct ctr_object* link;
-    union uvalue {
+	struct ctr_object* link;
+	union uvalue {
 		ctr_bool bvalue;
 		ctr_number nvalue;
 		ctr_string* svalue;
