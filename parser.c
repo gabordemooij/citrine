@@ -430,16 +430,27 @@ ctr_tnode* ctr_cparse_receiver() {
 	if (ctr_mode_debug) printf("Parsing receiver.\n");
 	t = ctr_clex_tok();
 	ctr_clex_putback();
-	if (t == CTR_TOKEN_NIL) return ctr_cparse_nil();
-	if (t == CTR_TOKEN_BOOLEANYES) return ctr_cparse_true();
-	if (t == CTR_TOKEN_BOOLEANNO) return ctr_cparse_false();
-	if (t == CTR_TOKEN_NUMBER) return ctr_cparse_number();
-	if (t == CTR_TOKEN_QUOTE) return ctr_cparse_string();
-	if (t == CTR_TOKEN_REF) return ctr_cparse_ref();
-	if (t == CTR_TOKEN_BLOCKOPEN) return ctr_cparse_block();
-	if (t == CTR_TOKEN_PAROPEN) return ctr_cparse_popen();
-	printf("Error, unexpected token: %d.\n", t);
-	exit(1);
+	switch(t){
+		case CTR_TOKEN_NIL:
+			return ctr_cparse_nil();
+		case CTR_TOKEN_BOOLEANYES:
+			return ctr_cparse_true();
+		case CTR_TOKEN_BOOLEANNO:
+			return ctr_cparse_false();
+		case CTR_TOKEN_NUMBER:
+			return ctr_cparse_number();
+		case CTR_TOKEN_QUOTE:
+			return ctr_cparse_string();
+		case CTR_TOKEN_REF:
+			return ctr_cparse_ref();
+		case CTR_TOKEN_BLOCKOPEN:
+			return ctr_cparse_block();
+		case CTR_TOKEN_PAROPEN:
+			return ctr_cparse_popen();
+		default:
+			printf("Error, unexpected token: %d.\n", t);
+			exit(1);
+	}
 }
 
 /**
