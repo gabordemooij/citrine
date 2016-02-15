@@ -28,14 +28,14 @@ ctr_tnode* ctr_cparse_message(int mode) {
 	int isBin;
 	int first;
 	ctr_size ulen;
-	m = CTR_PARSER_CREATE_NODE();
-	m->type = -1;
 	t = ctr_clex_tok();
 	msgpartlen = ctr_clex_tok_value_length();
 	if ((msgpartlen) > 255) {
 		printf("Message too long\n");
 		exit(1);
 	}
+	m = CTR_PARSER_CREATE_NODE();
+	m->type = -1;
 	s = ctr_clex_tok_value();
 	msg = ctr_malloc(255*sizeof(char), 0);
 	memcpy(msg, s, msgpartlen);
