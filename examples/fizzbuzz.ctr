@@ -7,8 +7,7 @@
 	var s := i toString.
 	i % 15 = 0 ifTrue: {\
 		s := f + b.
-	}.
-	i % 15 = 0 ifFalse: {\
+	}, ifFalse: {\
 		i % 3 = 0 ifTrue: {\
 			s := f.
 		}.
@@ -18,3 +17,4 @@
 	}.
 	Pen write: s, write: '\n'.
 }.
+
