@@ -460,19 +460,16 @@ ctr_tnode* ctr_cparse_receiver() {
  */
 ctr_tnode* ctr_cparse_assignment(ctr_tnode* r) {
 	ctr_tnode* a;
-	ctr_tnode* assignmentExpr;
 	ctr_tlistitem* li;
 	ctr_tlistitem* liAssignExpr;
 	ctr_clex_tok();
 	a = CTR_PARSER_CREATE_NODE();
-	assignmentExpr = CTR_PARSER_CREATE_NODE();
 	li = CTR_PARSER_CREATE_LISTITEM();
 	liAssignExpr = CTR_PARSER_CREATE_LISTITEM();
 	a->type = CTR_AST_NODE_EXPRASSIGNMENT;
 	a->nodes = li;
 	li->node = r;
-	assignmentExpr = ctr_cparse_expr(0);
-	liAssignExpr->node = assignmentExpr;
+	liAssignExpr->node =   ctr_cparse_expr(0);  
 	li->next = liAssignExpr;
 	return a;
 }
