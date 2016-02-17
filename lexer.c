@@ -180,12 +180,6 @@ int ctr_clex_tok() {
 		if (((char)*(ctr_code) == '!') && ((char)*(ctr_code+1)=='=')){
 			ctr_code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "≠", 3); return CTR_TOKEN_REF;
 		}
-		if (((char)*(ctr_code) == '|') && ((char)*(ctr_code+1)=='|')){
-			ctr_code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "∨", 3); return CTR_TOKEN_REF;
-		}
-		if (((char)*(ctr_code) == '&') && ((char)*(ctr_code+1)=='&')){
-			ctr_code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "∧", 3); return CTR_TOKEN_REF;
-		}
 		if (((char)*(ctr_code) == '<') && ((char)*(ctr_code+1)=='-')){
 			ctr_code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "←", 3); return CTR_TOKEN_REF;
 		}

@@ -2,7 +2,7 @@
 motive := False.
 opportunity := False.
 Pen write: (motive nor: opportunity).
-Pen write: (motive not && opportunity not).
+Pen write: (motive not and: opportunity not).
 #Test boolean equality messages
 Pen write: (True == True).
 Pen write: (True != True).

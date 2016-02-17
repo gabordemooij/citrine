@@ -498,9 +498,9 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("continue", 8), &ctr_bool_continue);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("else:", 5), &ctr_bool_ifFalse);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("not", 3), &ctr_bool_not);
-	ctr_internal_create_func(CtrStdBool, ctr_build_string("∧", 3), &ctr_bool_and);
+	ctr_internal_create_func(CtrStdBool, ctr_build_string("and:", 4), &ctr_bool_and);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("nor:", 4), &ctr_bool_nor);
-	ctr_internal_create_func(CtrStdBool, ctr_build_string("∨", 3), &ctr_bool_or);
+	ctr_internal_create_func(CtrStdBool, ctr_build_string("or:", 3), &ctr_bool_or);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("xor:", 4), &ctr_bool_xor);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("=",1),&ctr_bool_eq);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("≠",3),&ctr_bool_neq);

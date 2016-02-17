@@ -5,8 +5,8 @@ o on: 'hello' do: {\}.
 {\ o on: 'test' do: 3.} catch: { e | Pen write: e, brk. }, run.
 {\ o on: 'hello' do: {\}.} catch: { e | Pen write: e, brk. }, run. #allowed
 {\ var z := 4 / 0. } catch: { e | Pen write: e, brk. }, run. 
-{\ (True && Nil) ifTrue: {\ Pen write: 'X'.}. } catch: { e | Pen write: e, brk. }, run. #allowed
-{\ ('' || 0) ifTrue: {\ Pen write: 'X'.}. } catch: { e | Pen write: e, brk. }, run. #allowed
+{\ (True and: Nil) ifTrue: {\ Pen write: 'X'.}. } catch: { e | Pen write: e, brk. }, run. #allowed
+{\ ('' or: 0) ifTrue: {\ Pen write: 'X'.}. } catch: { e | Pen write: e, brk. }, run. #allowed
 {\ (1 < '2') ifTrue: {\ Pen write: 'OK'. }. } catch: { e | Pen write: e, brk. }, run. #allowed, cast
 {\ (1 < '2.0') ifTrue: {\ Pen write: 'OK'. }. } catch: { e | Pen write: e, brk. }, run. #allowed, cast
 {\ (1 < 'x2.0') ifTrue: {\ Pen write: 'NO!'. }. } catch: { e | Pen write: e, brk. }, run. #allowed, cast
