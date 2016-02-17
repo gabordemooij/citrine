@@ -1,0 +1,15 @@
+# Smalltalkish Boolean
+
+Boolean on: 'ifTrue:ifFalse:' do: { trueBlock falseBlock |
+	me ifTrue: trueBlock.
+	me ifFalse: falseBlock.
+}.
+
+1 to: 10 by: 1 do: { i |
+	i % 2 = 0 ifTrue: {\
+		Pen write: i, write: ' is even number.\n'.
+	} ifFalse: {\
+		Pen write: i, write: ' is odds number.\n'.
+	}.
+}.
+

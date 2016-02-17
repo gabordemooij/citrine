@@ -1,0 +1,20 @@
+# Fizz Buzz
+
+1 to: 100 by: 1 do: { i |
+	var f := 'Fizz'.
+	var b := 'Buzz'.
+
+	var s := i toString.
+	i % 15 = 0 ifTrue: {\
+		s := f + b.
+	}, ifFalse: {\
+		i % 3 = 0 ifTrue: {\
+			s := f.
+		}.
+		i % 5 = 0 ifTrue: {\
+			s := b.
+		}.
+	}.
+	Pen write: s, write: '\n'.
+}.
+

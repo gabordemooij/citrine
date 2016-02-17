@@ -251,11 +251,11 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 	f = fopen(pathString, "r");
 	if (f == NULL) return ctr_build_number_from_float(0);
 	prev = ftell(f);
-    fseek(f, 0L, SEEK_END);
-    sz=ftell(f);
-    fseek(f,prev,SEEK_SET);
-    if (f) {
+	fseek(f, 0L, SEEK_END);
+	sz=ftell(f);
+	fseek(f,prev,SEEK_SET);
+	if (f) {
 		fclose(f);
 	}
-    return ctr_build_number_from_float( (ctr_number) sz );
+	return ctr_build_number_from_float( (ctr_number) sz );
 }
