@@ -30,8 +30,8 @@ void ctr_gc_mark(ctr_object* object) {
 	}
 	item = object->properties->head;
 	while(item) {
-		ctr_object* k = item->key;
-		ctr_object* o = item->value;
+		k = item->key;
+		o = item->value;
 		o->name = k->value.svalue->value;
 		o->info.mark = 1;
 		k->info.mark = 1;
