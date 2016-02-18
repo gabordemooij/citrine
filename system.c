@@ -263,6 +263,16 @@ ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Dice] rawRandomNumber
+ *
+ * Generates a random number, the traditional way (like rand()).
+ */
+ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float( (ctr_number) (rand()) );
+}
+
+
+/**
  * [Clock] wait
  *
  * Waits X seconds.

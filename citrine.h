@@ -554,6 +554,7 @@ int ctr_gc_object_counter;
  */
 ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_dice_sides(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Literal Constructors (internal only)

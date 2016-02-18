@@ -675,6 +675,7 @@ void ctr_initialize_world() {
 	CtrStdDice = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdDice, ctr_build_string("roll", 4), &ctr_dice_throw);
 	ctr_internal_create_func(CtrStdDice, ctr_build_string("rollWithSides:", 14), &ctr_dice_sides);
+	ctr_internal_create_func(CtrStdDice, ctr_build_string("rawRandomNumber", 15), &ctr_dice_rand);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Dice", 4), CtrStdDice, 0);
 	CtrStdDice->link = CtrStdObject;
 
