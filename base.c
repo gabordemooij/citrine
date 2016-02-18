@@ -1243,7 +1243,7 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [String] up
+ * [String] asciiUpperCase
  *
  * Returns a new uppercased version of the string.
  * Note that this is just basic ASCII case functionality, this should only
@@ -1263,7 +1263,7 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
 
 
 /**
- * [String] low
+ * [String] asciiLowerCase
  *
  * Returns a new lowercased version of the string.
  * Note that this is just basic ASCII case functionality, this should only
