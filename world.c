@@ -572,8 +572,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string("lastIndexOf:", 12), &ctr_string_last_index_of);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("replace:with:", 13), &ctr_string_replace_with);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("split:", 6), &ctr_string_split);
-	ctr_internal_create_func(CtrStdString, ctr_build_string("up", 2), &ctr_string_to_upper);
-	ctr_internal_create_func(CtrStdString, ctr_build_string("low", 3), &ctr_string_to_lower);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("asciiUpperCase", 14), &ctr_string_to_upper);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("asciiLowerCase", 14), &ctr_string_to_lower);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("skip:", 5), &ctr_string_skip);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("append:", 7), &ctr_string_append);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("toNumber", 8), &ctr_string_to_number);

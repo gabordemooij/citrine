@@ -1,4 +1,4 @@
 #Test pipelines
-mapUp := { i | me put: ((me @ i) up) at: i. }.
+mapUp := { i | me put: ((me @ i) asciiUpperCase) at: i. }.
 a := 'lololol' split: 'o', map: mapUp, join: 'x'.
 Pen write: a.
