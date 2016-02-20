@@ -5,5 +5,5 @@ Pen write: ('a' byteAt: 0).
 Pen write: ('zzz' byteAt: 10).
 Pen write: ('zzz' byteAt: -10).
 Pen brk.
-Pen write: (' left trimmed ' ltrim) + ( 'and right trimmed   ' rtrim) + '!', brk.
+Pen write: (' left trimmed ' leftTrim) + ( 'and right trimmed   ' rightTrim) + '!', brk.
 Pen write: '<html>"html & entities"</html>' htmlEscape.

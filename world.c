@@ -565,8 +565,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string("=", 1), &ctr_string_eq);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("≠", 3), &ctr_string_neq);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("trim", 4), &ctr_string_trim);
-	ctr_internal_create_func(CtrStdString, ctr_build_string("ltrim", 5), &ctr_string_ltrim);
-	ctr_internal_create_func(CtrStdString, ctr_build_string("rtrim", 5), &ctr_string_rtrim);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("leftTrim", 8), &ctr_string_ltrim);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("rightTrim", 9), &ctr_string_rtrim);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("htmlEscape", 10), &ctr_string_html_escape);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("at:", 3), &ctr_string_at);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("byteAt:", 7), &ctr_string_byte_at);

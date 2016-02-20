@@ -1440,6 +1440,9 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
  *
  * ' hello ' trim. #hello
  *
+ * The example above will strip all white space characters from the
+ * recipient on both sides of the text. Also see: leftTrim and rightTrim
+ * for variations of this message.
  */
 ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
@@ -1461,9 +1464,17 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 
 
 /**
- * [String] ltrim
+ * [String] leftTrim
  *
  * Removes all the whitespace at the left side of the string.
+ *
+ * Usage:
+ *
+ * message := ' hello world  '.
+ * message leftTrim.
+ *
+ * The example above will remove all the whitespace at the left of the
+ * string but leave the spaces at the right side intact.
  */
 ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
@@ -1482,9 +1493,17 @@ ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [String] rtrim
+ * [String] rightTrim
  *
  * Removes all the whitespace at the right side of the string.
+ *
+ * Usage:
+ *
+ * message := ' hello world  '.
+ * message rightTrim.
+ *
+ * The example above will remove all the whitespace at the right of the
+ * string but leave the spaces at the left side intact.
  */
 ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
