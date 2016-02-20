@@ -1,8 +1,0 @@
-
-Butler := Object new.
-Butler on: 'greet:' do: { name |
-	aaaPen write: 'Wh ' + name.
-}.
-james := Butler new.
-james greet: 'visitor'.
-
