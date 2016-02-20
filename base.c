@@ -878,16 +878,33 @@ ctr_object* ctr_number_to_by_do(ctr_object* myself, ctr_argument* argumentList) 
 /**
  * [Number] floor
  *
- * Returns the next highest integer number by rounding down.
+ * Gives the largest integer less than the recipient.
+ *
+ * Usage:
+ *
+ * x := 4.5
+ * y := x floor. #y will be 4
+ *
+ * The example above applies the floor function to the recipient (4.5)
+ * returning a new number object (4).
  */
 ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(floor(myself->value.nvalue));
 }
 
 /**
- * [Number] ceil
+ * [Number] ceiling
  *
- * Returns the next highest integer number by rounding up.
+ * Rounds up the recipient number and returns the next higher integer number
+ * as a result.
+ *
+ * Usage:
+ *
+ * x := 4.5.
+ * y = x ceiling. #y will be 5
+ *
+ * The example above applies the ceiling function to the recipient (4.5)
+ * returning a new number object (5).
  */
 ctr_object* ctr_number_ceil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(ceil(myself->value.nvalue));

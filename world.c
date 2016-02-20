@@ -532,7 +532,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("%",1),&ctr_number_modulo);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("factorial",9),&ctr_number_factorial);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("floor",5),&ctr_number_floor);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("ceil",4),&ctr_number_ceil);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("ceiling",7),&ctr_number_ceil);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("round",5),&ctr_number_round);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("absolute",8),&ctr_number_abs);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("sine",4),&ctr_number_sin);

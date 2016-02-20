@@ -7,7 +7,7 @@ a := 4.5. b := a floor.
 Printer print: a and: b.
 a := 4. b := a factorial.
 Printer print: a and: b.
-a := 4.5. b := a ceil.
+a := 4.5. b := a ceiling.
 Printer print: a and: b.
 a := 4.5. b := a floor.
 Printer print: a and: b.
