@@ -903,25 +903,41 @@ ctr_object* ctr_number_round(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] abs
+ * [Number] absolute
  *
- * Returns the absolute value of the number.
+ * Returns the absolute (unsigned, positive) value of the number.
+ *
+ * Usage:
+ *
+ * x := -7.
+ * y := x absolute. #y will be 7
+ *
+ * The example above strips the sign off the value -7 resulting
+ * in 7.
  */
 ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(fabs(myself->value.nvalue));
 }
 
 /**
- * [Number] sqrt
+ * [Number] squareRoot
  *
- * Returns the square root of the number.
+ * Returns the square root of the recipient.
+ *
+ * Usage:
+ *
+ * x := 49.
+ * y := x squareRoot. #y will be 7
+ *
+ * The example above takes the square root of 49, resulting in the
+ * number 7.
  */
 ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(sqrt(myself->value.nvalue));
 }
 
 /**
- * [Number] exp
+ * [Number] exponent
  *
  * Returns the exponent of the number.
  */
@@ -930,7 +946,7 @@ ctr_object* ctr_number_exp(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] sin
+ * [Number] sine
  *
  * Returns the sine of the number.
  */
@@ -940,7 +956,7 @@ ctr_object* ctr_number_sin(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] cos
+ * [Number] cosine
  *
  * Returns the cosine of the number.
  */
@@ -949,7 +965,7 @@ ctr_object* ctr_number_cos(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] tan
+ * [Number] tangent
  *
  * Caculates the tangent of a number.
  */
@@ -958,16 +974,16 @@ ctr_object* ctr_number_tan(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] atan
+ * [Number] arctangent
  *
- * Caculates the atan of a number.
+ * Caculates the arctangent of a number.
  */
 ctr_object* ctr_number_atan(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(atan(myself->value.nvalue));
 }
 
 /**
- * [Number] log
+ * [Number] logarithm
  *
  * Calculates the logarithm of a number.
  */
