@@ -1353,6 +1353,36 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
+ * [String] asciiLowerCase1st
+ *
+ * Converts the first character of the recipient to lowercase and
+ * returns the resulting string object.
+ */
+ctr_object* ctr_string_to_lower1st(ctr_object* myself, ctr_argument* argumentList) {
+       size_t len = myself->value.svalue->vlen;
+       if (len == 0) return ctr_build_string("", 0);
+       char* tstr = malloc(len * sizeof(char));
+       strncpy(tstr, myself->value.svalue->value, len);
+       tstr[0] = tolower(tstr[0]);
+       return ctr_build_string(tstr, len);
+}
+
+/**
+ * [String] asciiUpperCase1st
+ *
+ * Converts the first character of the recipient to uppercase and
+ * returns the resulting string object.
+ */
+ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentList) {
+       size_t len = myself->value.svalue->vlen;
+       if (len == 0) return ctr_build_string("", 0);
+       char* tstr = malloc(len * sizeof(char));
+       strncpy(tstr, myself->value.svalue->value, len);
+       tstr[0] = toupper(tstr[0]);
+       return ctr_build_string(tstr, len);
+}
+
+/**
  * [String] lastIndexOf: [subject]
  *
  * Returns the index (character number, not the byte!) of the

@@ -576,6 +576,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string("split:", 6), &ctr_string_split);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("asciiUpperCase", 14), &ctr_string_to_upper);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("asciiLowerCase", 14), &ctr_string_to_lower);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("asciiUpperCase1st", 17), &ctr_string_to_upper1st);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("asciiLowerCase1st", 17), &ctr_string_to_lower1st);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("skip:", 5), &ctr_string_skip);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("append:", 7), &ctr_string_append);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("toNumber", 8), &ctr_string_to_number);

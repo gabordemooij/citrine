@@ -456,6 +456,8 @@ ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList
 ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_string_to_lower1st(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Block Interface
