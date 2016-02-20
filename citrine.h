@@ -427,6 +427,8 @@ ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList)
 ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_to_by_do(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * String Interface

@@ -753,6 +753,44 @@ ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Number] positive
+ *
+ * Returns a boolean indicating wether the number is positive.
+ * This message will return a boolean object 'True' if the recipient is
+ * positive and 'False' otherwise.
+ *
+ * Usage:
+ *
+ * hope := 0.1.
+ * ( hope positive ) ifTrue: {\ Pen write: 'Still a little hope for humanity'. }.
+ *
+ * The example above will print the message because hope is higher than 0.
+ */
+ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool( ( myself->value.nvalue > 0) );
+}
+
+/**
+ * [Number] negative
+ *
+ * Returns a boolean indicating wether the number is negative.
+ * This message will return a boolean object 'True' if the recipient is
+ * negative and 'False' otherwise. It's the eaxct opposite of the 'positive'
+ * message.
+ *
+ * Usage:
+ *
+ * hope := -1.
+ * (hope negative) ifTrue: {\ Pen write: 'No hope left'. }.
+ *
+ * The example above will print the message because the value of the variable
+ * hope is less than 0.
+ */
+ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool( ( myself->value.nvalue < 0) );
+}
+
+/**
  * [Number] max: [other]
  *
  * Returns the biggest number of the two.

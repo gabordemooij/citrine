@@ -547,6 +547,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("max:",4),&ctr_number_max);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("odd",3),&ctr_number_odd);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("even",4),&ctr_number_even);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("positive",8),&ctr_number_positive);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("negative",8),&ctr_number_negative);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("toString", 8), &ctr_number_to_string);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("toBoolean", 9), &ctr_number_to_boolean);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("between:and:",12),&ctr_number_between);
