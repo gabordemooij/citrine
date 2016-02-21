@@ -517,6 +517,11 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_include_ast(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList);
+
 
 /**
  * Command Object Interface

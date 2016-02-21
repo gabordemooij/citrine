@@ -259,3 +259,111 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	return ctr_build_number_from_float( (ctr_number) sz );
 }
+
+/**
+ * [File] open: [string]
+ *
+ * Open a file with using the specified mode.
+ *
+ * Usage:
+ *
+ * f := File new: '/path/to/file'.
+ * f open: 'r+'. #opens file for reading and writing
+ *
+ * The example above opens the file in f for reading and writing.
+ */
+ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* pathObj = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+	char* mode;
+	FILE* handle;
+	ctr_resource* rs = malloc(sizeof(ctr_resource));
+	if (pathObj == NULL) return myself;
+	char* path;
+	CTR_2CSTR(path, pathObj);
+	CTR_2CSTR(mode, ctr_internal_cast2string(argumentList->object));
+	handle = fopen(path,mode);
+	rs->type = 1;
+	rs->ptr = handle;
+	myself->value.rvalue = rs;
+	return myself;
+}
+
+/**
+ * [File] close.
+ *
+ * Closes the file represented by the recipient.
+ *
+ * Usage:
+ *
+ * f := File new: '/path/to/file.txt'.
+ * f open: 'r+'.
+ * f close.
+ *
+ * The example above opens and closes a file.
+ */
+ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList) {
+	if (myself->value.rvalue == NULL) return myself;
+	if (myself->value.rvalue->type != 1) return myself;
+	fclose((FILE*)myself->value.rvalue->ptr);
+	myself->value.rvalue = NULL;
+	return myself;
+}
+
+/**
+ * [File] readBytes: [Number].
+ *
+ * Reads a number of bytes from the file.
+ *
+ * Usage:
+ *
+ * f := File new: '/path/to/file.txt'.
+ * f open: 'r+'.
+ * x := f readBytes: 10.
+ * f close.
+ *
+ * The example above reads 10 bytes from the file represented by f
+ * and puts them in buffer x.
+ */
+ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) {
+	int bytes;
+	char* buffer;
+	if (myself->value.rvalue == NULL) return myself;
+	if (myself->value.rvalue->type != 1) return myself;
+	bytes = ctr_internal_cast2number(argumentList->object)->value.nvalue;
+	if (bytes < 0) return ctr_build_string_from_cstring("");
+	buffer = (char*) malloc(bytes);
+	if (buffer == NULL) {
+		CtrStdError = ctr_build_string_from_cstring("Cannot allocate memory for file buffer.");
+		return ctr_build_string_from_cstring("");
+	}
+	fread(buffer, sizeof(char), (int)bytes, (FILE*)myself->value.rvalue->ptr);
+	return ctr_build_string_from_cstring(buffer);
+}
+
+/**
+ * [File] writeBytes: [String].
+ *
+ * Takes a string and writes the bytes in the string to the file
+ * object. Returns the number of bytes actually written.
+ *
+ * Usage:
+ *
+ * f := File new: '/path/to/file.txt'.
+ * f open: 'r+'.
+ * n := f writeBytes: 'Hello World'.
+ * f close.
+ *
+ * The example above writes 'Hello World' to the specified file as bytes.
+ * The number of bytes written is returned in variable n.
+ */
+ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList) {
+	int bytes, written;
+	char* buffer;
+	if (myself->value.rvalue == NULL) return myself;
+	if (myself->value.rvalue->type != 1) return myself;
+	ctr_object* string2write = ctr_internal_cast2string(argumentList->object);
+	CTR_2CSTR(buffer, string2write);
+	bytes = string2write->value.svalue->vlen;
+	written = fwrite(buffer, sizeof(char), (int)bytes, (FILE*)myself->value.rvalue->ptr);
+	return ctr_build_number_from_float((double_t) written);
+}

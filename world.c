@@ -654,6 +654,10 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("delete", 6), &ctr_file_delete);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("include", 7), &ctr_file_include);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("go", 2), &ctr_file_include_ast);
+	ctr_internal_create_func(CtrStdFile, ctr_build_string("open:", 5), &ctr_file_open);
+	ctr_internal_create_func(CtrStdFile, ctr_build_string("close", 5), &ctr_file_close);
+	ctr_internal_create_func(CtrStdFile, ctr_build_string("readBytes:", 10), &ctr_file_read_bytes);
+	ctr_internal_create_func(CtrStdFile, ctr_build_string("writeBytes:", 11), &ctr_file_write_bytes);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("File", 4), CtrStdFile, 0);
 	CtrStdFile->link = CtrStdObject;
 

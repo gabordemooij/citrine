@@ -1,0 +1,20 @@
+#Test file messages
+File close. #should do nothing
+File readBytes: 100. #does nothing
+File writeBytes: 'x'. #does nothing
+File open. #does nothing
+f := File new: '/tmp/from.txt'.
+f write: 'hello'.
+Pen write: 'file contains: '+(f read)+'\n'.
+f open: 'r+'.
+x := f readBytes: 2.
+Pen write: 'read 2 bytes: "'+x+'"\n'.
+x := f readBytes: 3.
+Pen write: 'read 3 more bytes: "'+x+'"\n'.
+w := f writeBytes: ' friend!'.
+f close.
+Pen write: 'Bytes written: '+w, brk.
+Pen write: 'Finally, file contains: '+(File new: '/tmp/from.txt', read) + '\n'.
+
+
+
