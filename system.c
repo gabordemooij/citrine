@@ -121,7 +121,20 @@ ctr_object* ctr_gc_object_count(ctr_object* myself, ctr_argument* argumentList) 
 /**
  * [Shell] call: [String]
  *
- * Performs a Shell operation.
+ * Performs a Shell operation. The Shell object uses a fluid API, so you can
+ * mix shell code with programming logic. For instance to list the contents
+ * of a directory use:
+ *
+ * Shell ls
+ *
+ * This will output the contents of the current working directly, you
+ * can also pass keyword messages like so:
+ *
+ * Shell echo: 'Hello from the Shell!'.
+ *
+ * The example above will output the specified message to the console.
+ * Every message you send will be turned into a string and dispatched to
+ * the 'call:' message.
  */
 ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* arg = ctr_internal_cast2string(argumentList->object);
