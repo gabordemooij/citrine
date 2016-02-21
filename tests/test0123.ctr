@@ -1,0 +1,7 @@
+#Test positive and negative messages.
+Pen write: 'If hope is 0.1...\n'.
+hope := 0.2.
+( hope positive ) ifTrue: {\ Pen write: 'Still a little hope for humanity\n'. }.
+Pen write: 'If hope is -1...\n'.
+hope := -1.
+(hope negative) ifTrue: {\ Pen write: 'No hope left\n'. }.
