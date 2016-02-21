@@ -134,6 +134,44 @@ ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (ctr_number) r );
 }
 
+
+/**
+ * @internal
+ *
+ * Shell Object uses a fluid API.
+ */
+ctr_object* ctr_shell_respond_to_with(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object*   commandObj;
+	ctr_object*   prefix;
+	ctr_object*   suffix;
+	ctr_argument* newArgumentList;
+	char* command;
+	int len;
+	prefix = ctr_internal_cast2string(argumentList->object);
+	suffix = ctr_internal_cast2string(argumentList->next->object);
+	len = prefix->value.svalue->vlen + suffix->value.svalue->vlen;
+	if (len == 0) return myself;
+	command = (char*) malloc(len); /* actually we need +1 for the space between commands, but we dont because we remove the colon : !*/
+	strncpy(command, prefix->value.svalue->value, prefix->value.svalue->vlen - 1); /* remove colon, gives room for space */
+	strncpy(command + (prefix->value.svalue->vlen - 1), " ", 1); /* space to separate commands */
+	strncpy(command + (prefix->value.svalue->vlen), suffix->value.svalue->value, suffix->value.svalue->vlen);
+	commandObj = ctr_build_string(command, len);
+	newArgumentList = CTR_CREATE_ARGUMENT();
+	newArgumentList->object = commandObj;
+	ctr_shell_call(myself, newArgumentList);
+	return myself;
+}
+
+/**
+ * @internal
+ *
+ * Shell Object uses a fluid API.
+ */
+ctr_object* ctr_shell_respond_to(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_shell_call(myself, argumentList);
+	return myself;
+}
+
 /**
  * [Command] argument: [Number]
  *

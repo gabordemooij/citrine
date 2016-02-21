@@ -689,6 +689,8 @@ void ctr_initialize_world() {
 
 	/* Shell */
 	CtrStdShell = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	ctr_internal_create_func(CtrStdShell, ctr_build_string("respondTo:", 10), &ctr_shell_respond_to);
+	ctr_internal_create_func(CtrStdShell, ctr_build_string("respondTo:with:", 15), &ctr_shell_respond_to_with);
 	ctr_internal_create_func(CtrStdShell, ctr_build_string("call:", 5), &ctr_shell_call);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Shell", 5), CtrStdShell, 0);
 	CtrStdShell->link = CtrStdObject;

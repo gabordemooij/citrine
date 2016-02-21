@@ -543,6 +543,8 @@ ctr_object* ctr_clock_time(ctr_object* myself, ctr_argument* argumentList);
  * Shell Interface
  */
 ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_shell_respond_to(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_shell_respond_to_with(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Garbage Collector Object Interface
