@@ -1322,14 +1322,14 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
  * DOES NOT WORK WITH UTF8 characters !
  */
 ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) {
-       char* str = myself->value.svalue->value;
-       size_t  len = myself->value.svalue->vlen;
-       char* tstr = malloc(len * sizeof(char));
-       int i=0;
-       for(i =0; i < len; i++) {
-               tstr[i] = toupper(str[i]);
-       }
-       return ctr_build_string(tstr, len);
+	char* str = myself->value.svalue->value;
+	size_t  len = myself->value.svalue->vlen;
+	char* tstr = malloc(len * sizeof(char));
+	int i=0;
+	for(i =0; i < len; i++) {
+		tstr[i] = toupper(str[i]);
+	}
+	return ctr_build_string(tstr, len);
 }
 
 
@@ -1342,14 +1342,14 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
  * DOES NOT WORK WITH UTF8 characters !
  */
 ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) {
-       char* str = myself->value.svalue->value;
-       size_t len = myself->value.svalue->vlen;
-       char* tstr = malloc(len * sizeof(char));
-       int i=0;
-       for(i =0; i < len; i++) {
-               tstr[i] = tolower(str[i]);
-       }
-       return ctr_build_string(tstr, len);
+	char* str = myself->value.svalue->value;
+	size_t len = myself->value.svalue->vlen;
+	char* tstr = malloc(len * sizeof(char));
+	int i=0;
+	for(i =0; i < len; i++) {
+		tstr[i] = tolower(str[i]);
+	}
+	return ctr_build_string(tstr, len);
 }
 
 /**
@@ -1359,12 +1359,12 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
  * returns the resulting string object.
  */
 ctr_object* ctr_string_to_lower1st(ctr_object* myself, ctr_argument* argumentList) {
-       size_t len = myself->value.svalue->vlen;
-       if (len == 0) return ctr_build_string("", 0);
-       char* tstr = malloc(len * sizeof(char));
-       strncpy(tstr, myself->value.svalue->value, len);
-       tstr[0] = tolower(tstr[0]);
-       return ctr_build_string(tstr, len);
+	size_t len = myself->value.svalue->vlen;
+	if (len == 0) return ctr_build_string("", 0);
+	char* tstr = malloc(len * sizeof(char));
+	strncpy(tstr, myself->value.svalue->value, len);
+	tstr[0] = tolower(tstr[0]);
+	return ctr_build_string(tstr, len);
 }
 
 /**
@@ -1374,12 +1374,12 @@ ctr_object* ctr_string_to_lower1st(ctr_object* myself, ctr_argument* argumentLis
  * returns the resulting string object.
  */
 ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentList) {
-       size_t len = myself->value.svalue->vlen;
-       if (len == 0) return ctr_build_string("", 0);
-       char* tstr = malloc(len * sizeof(char));
-       strncpy(tstr, myself->value.svalue->value, len);
-       tstr[0] = toupper(tstr[0]);
-       return ctr_build_string(tstr, len);
+	size_t len = myself->value.svalue->vlen;
+	if (len == 0) return ctr_build_string("", 0);
+	char* tstr = malloc(len * sizeof(char));
+	strncpy(tstr, myself->value.svalue->value, len);
+	tstr[0] = toupper(tstr[0]);
+	return ctr_build_string(tstr, len);
 }
 
 /**
