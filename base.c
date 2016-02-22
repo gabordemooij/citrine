@@ -1475,6 +1475,7 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
  * for variations of this message.
  */
 ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* newString = NULL;
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	long i, begin, end, tlen;
@@ -1489,7 +1490,9 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	tlen = (end - begin);
 	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str+begin, tlen);
-	return ctr_build_string(tstr, tlen);
+	newString = ctr_build_string(tstr, tlen);
+	free(tstr);
+	return newString;
 }
 
 
@@ -1507,6 +1510,7 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
  * string but leave the spaces at the right side intact.
  */
 ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* newString = NULL;
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	long i = 0, begin;
@@ -1519,7 +1523,9 @@ ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
 	tlen = (len - begin);
 	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str+begin, tlen);
-	return ctr_build_string(tstr, tlen);
+	newString = ctr_build_string(tstr, tlen);
+	free(tstr);
+	return newString;
 }
 
 /**
@@ -1536,6 +1542,7 @@ ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
  * string but leave the spaces at the left side intact.
  */
 ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* newString = NULL;
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	long i = 0, end, tlen;
@@ -1547,7 +1554,9 @@ ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
 	tlen = end;
 	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str, tlen);
-	return ctr_build_string(tstr, tlen);
+	newString = ctr_build_string(tstr, tlen);
+	free(tstr);
+	return newString;
 }
 
 /**
