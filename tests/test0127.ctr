@@ -1,0 +1,34 @@
+#File Seek test
+
+#delete files if necessary
+{\ File new: '/tmp/seek_test.txt', delete. } catch: {\}, run.
+
+#confirm base condition
+File new: '/tmp/seek_test.txt', exists ifFalse: {\
+	Pen write: 'Confirmed. Target file does not exist.\n'.
+}.
+
+#dont err.., does nothing.
+File seek: 9.
+
+#create the from file
+f := File new: '/tmp/seek_test.txt'.
+f write: 'hello world'.
+Pen write: f read, brk.
+
+f open. #not good
+q := f readBytes: 1. #but should not cause segfault
+
+#no open the right way, seek (lo)
+x := f open: 'r', seek: 3, readBytes: 2.
+Pen write: x, brk.
+
+#rewind (el)
+x := f rewind seek: 1, readBytes: 2.
+Pen write: x, brk.
+
+#to end (ld)
+x := f end seek: -2, readBytes: 2.
+Pen write: x, brk.
+
+f close.

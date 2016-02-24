@@ -24,10 +24,9 @@
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* s = ctr_object_make(myself, argumentList);
 	ctr_object* pathObject;
-	s->info.type = CTR_OBJECT_TYPE_OTMISC;
+	s->info.type = CTR_OBJECT_TYPE_OTOBJECT;
 	s->link = myself;
-	s->value.rvalue = malloc(sizeof(ctr_resource));
-	s->value.rvalue->type = 1;
+	s->value.rvalue = NULL;
 	pathObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 	pathObject->info.type = CTR_OBJECT_TYPE_OTSTRING;
 	pathObject->value.svalue = (ctr_string*) malloc(sizeof(ctr_string));
@@ -366,4 +365,81 @@ ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList)
 	bytes = string2write->value.svalue->vlen;
 	written = fwrite(buffer, sizeof(char), (int)bytes, (FILE*)myself->value.rvalue->ptr);
 	return ctr_build_number_from_float((double_t) written);
+}
+
+/**
+ * [File] seek: [Number].
+ *
+ * Moves the file pointer to the specified position in the file
+ * (relative to the current position).
+ *
+ * Usage:
+ *
+ * file open: 'r', seek: 10.
+ *
+ * The example above opens a file for reading and moves the
+ * pointer to position 10 (meaning 10 bytes from the beginning of the file).
+ * The seek value may be negative.
+ */
+ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
+	int offset;
+	int error;
+	if (myself->value.rvalue == NULL) return myself;
+	if (myself->value.rvalue->type != 1) return myself;
+	offset = (long int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
+	error = fseek((FILE*)myself->value.rvalue->ptr, offset, SEEK_CUR);
+	if (error) CtrStdError = ctr_build_string_from_cstring("Seek failed.");
+	return myself;
+}
+
+/**
+ * [File] rewind.
+ *
+ * Rewinds the file. Moves the file pointer to the beginning of the file.
+ *
+ * Usage:
+ *
+ * file open: 'r'.
+ * x := file readBytes: 10. #read 10 bytes
+ * file rewind.        #rewind, set pointer to begin again
+ * y := file readBytes: 10. #re-read same 10 bytes
+ *
+ * The example above reads the same sequence of 10 bytes twice, resulting
+ * in variable x and y being equal.
+ */
+ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList) {
+	int offset;
+	int error;
+	if (myself->value.rvalue == NULL) return myself;
+	if (myself->value.rvalue->type != 1) return myself;
+	error = fseek((FILE*)myself->value.rvalue->ptr, 0, SEEK_SET);
+	if (error) CtrStdError = ctr_build_string_from_cstring("Seek rewind failed.");
+	return myself;
+}
+
+/**
+ * [File] end.
+ *
+ * Moves the file pointer to the end of the file. Use this in combination with
+ * negative seek operations.
+ *
+ * Usage:
+ *
+ * file open: 'r'.
+ * file end.
+ * x := file seek: -10, readBytes: 10.
+ *
+ * The example above will read the last 10 bytes of the file. This is
+ * accomplished by first moving the file pointer to the end of the file,
+ * then putting it back 10 bytes (negative number), and then reading 10
+ * bytes.
+ */
+ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList) {
+	int offset;
+	int error;
+	if (myself->value.rvalue == NULL) return myself;
+	if (myself->value.rvalue->type != 1) return myself;
+	error = fseek((FILE*)myself->value.rvalue->ptr, 0, SEEK_END);
+	if (error) CtrStdError = ctr_build_string_from_cstring("Seek end failed.");
+	return myself;
 }

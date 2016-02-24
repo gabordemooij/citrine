@@ -644,6 +644,7 @@ void ctr_initialize_world() {
 	
 	/* File */
 	CtrStdFile = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	CtrStdFile->value.rvalue = NULL;
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("new:", 4), &ctr_file_new);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("path", 4), &ctr_file_path);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("read", 4), &ctr_file_read);
@@ -658,6 +659,9 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("close", 5), &ctr_file_close);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("readBytes:", 10), &ctr_file_read_bytes);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("writeBytes:", 11), &ctr_file_write_bytes);
+	ctr_internal_create_func(CtrStdFile, ctr_build_string("seek:", 5), &ctr_file_seek);
+	ctr_internal_create_func(CtrStdFile, ctr_build_string("rewind", 6), &ctr_file_seek_rewind);
+	ctr_internal_create_func(CtrStdFile, ctr_build_string("end", 3), &ctr_file_seek_end);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("File", 4), CtrStdFile, 0);
 	CtrStdFile->link = CtrStdObject;
 
