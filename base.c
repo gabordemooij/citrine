@@ -129,8 +129,8 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Variations:
  *
- * [Object] respondTo: [String] and: [String]
- * [Object] respondTo: [String] and: [String] and: [String]
+ * [Object] respondTo: [String] with: [String]
+ * [Object] respondTo: [String] with: [String] and: [String]
  *
  * Default respond-to implemention, does nothing.
  */
