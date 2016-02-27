@@ -408,7 +408,6 @@ ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
  * in variable x and y being equal.
  */
 ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList) {
-	int offset;
 	int error;
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
@@ -435,7 +434,6 @@ ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList)
  * bytes.
  */
 ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList) {
-	int offset;
 	int error;
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
