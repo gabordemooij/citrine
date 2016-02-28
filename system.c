@@ -7,7 +7,6 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <time.h>
-
 #include "citrine.h"
 #include "siphash.h"
 
@@ -292,6 +291,16 @@ ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList)
 		}
 	}
 	return ctr_build_string(buff, bytes);
+}
+
+/**
+ * [Command] flush.
+ *
+ * Flushes the STDOUT output buffer.
+ */
+ctr_object* ctr_command_flush(ctr_object* myself, ctr_argument* ctr_argumentList) {
+	 fflush(stdout);
+	 return myself;
 }
 
 /**
