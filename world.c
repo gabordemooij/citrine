@@ -244,8 +244,6 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
 		begin = haystack + hlen;
 		last = haystack + nlen - 2;
 	}
-	
-	printf("%d,%d,|%s|,|%s|>>",hlen,nlen,haystack,needle);
 	for(cur = begin; cur!=last; cur += step) {
 		if (memcmp(cur,needle,nlen) == 0) return cur;
 	}
