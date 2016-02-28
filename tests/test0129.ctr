@@ -1,0 +1,4 @@
+#test array product
+a := Array <- 1 ; 2 ; 3.
+Pen write: a product, brk.
+Pen write: (Array <- 2 ; 4 ; 8) product, brk.

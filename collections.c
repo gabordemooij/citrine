@@ -59,7 +59,7 @@ ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] sum.
+ * [Array] sum
  *
  * Takes the sum of an array. This message will calculate the
  * sum of the numerical elements in the array.
@@ -81,6 +81,33 @@ ctr_object* ctr_array_sum(ctr_object* myself, ctr_argument* argumentList) {
 		sum += ctr_internal_cast2number(el)->value.nvalue;
 	}
 	return ctr_build_number_from_float(sum);
+}
+
+/**
+ * [Array] product
+ *
+ * Takes the product of an array. On receiving this message, the
+ * Array recipient object will calculate the product of its
+ * numerical elements.
+ *
+ * Usage:
+ *
+ * a := Array <- 2 ; 4 ; 8.
+ * p := a product. #64
+ *
+ * In the example above, the product of the array will be calculated
+ * because the array receives the message 'product'. The product of the elements
+ * ( 2 * 4 * 8 = 64 ) will be stored in p.
+ */
+ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList) {
+	double product = 1;
+	ctr_object* el;
+	size_t i = 0;
+	for(i = 0; i < myself->value.avalue->head; i++) {
+		el = *(myself->value.avalue->elements + i);
+		product *= ctr_internal_cast2number(el)->value.nvalue;
+	}
+	return ctr_build_number_from_float(product);
 }
 
 /**
