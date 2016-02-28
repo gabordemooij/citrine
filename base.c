@@ -129,8 +129,8 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Variations:
  *
- * [Object] respondTo: [String] and: [String]
- * [Object] respondTo: [String] and: [String] and: [String]
+ * [Object] respondTo: [String] with: [String]
+ * [Object] respondTo: [String] with: [String] and: [String]
  *
  * Default respond-to implemention, does nothing.
  */
@@ -1641,6 +1641,7 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
  */
 
 ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentList)  {
+	ctr_object* newString = NULL;
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	char* tstr;
@@ -1714,7 +1715,9 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 				break;
 		}
 	}
-	return ctr_build_string(tstr, tlen);
+	newString = ctr_build_string(tstr, tlen);
+	free(tstr);
+	return newString;
 }
 
 /**
