@@ -1,6 +1,6 @@
 #Test basic GET/POST support
-Command env: 'QUERY_STRING' val: 'search=table&restaurant=pizzaria&menu=spaghetti&menu=macaroni&course[main]=canneloni&course[dessert]=tiramisu'.
-Pen write: (Command env: 'QUERY_STRING'), brk.
+Program env: 'QUERY_STRING' val: 'search=table&restaurant=pizzaria&menu=spaghetti&menu=macaroni&course[main]=canneloni&course[dessert]=tiramisu'.
+Pen write: (Program env: 'QUERY_STRING'), brk.
 s := Request get: 'search'.
 Pen write: 'I was looking for a free '+s.
 Pen write: ' in a '+(Request get: 'restaurant')+', ', brk.

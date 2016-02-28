@@ -671,10 +671,10 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string("argCount", 8), &ctr_command_num_of_args);
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string("env:", 4), &ctr_command_get_env);
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string("env:val:", 8), &ctr_command_set_env);
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string("askQuestion", 11), &ctr_command_question);
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string("waitForInput", 12), &ctr_command_question);
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string("exit", 4), &ctr_command_exit);
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string("flush", 5), &ctr_command_flush);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Command", 7), CtrStdCommand, 0);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Program", 7), CtrStdCommand, 0);
 	CtrStdCommand->link = CtrStdObject;
 
 	/* Clock */

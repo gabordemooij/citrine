@@ -1,2 +1,2 @@
-Command env: 'TSTVAR' val: 'Hello World!'.
-Pen write: 'value = ' + (Command env: 'TSTVAR').
+Program env: 'TSTVAR' val: 'Hello World!'.
+Pen write: 'value = ' + (Program env: 'TSTVAR').
