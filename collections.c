@@ -59,6 +59,31 @@ ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Array] sum.
+ *
+ * Takes the sum of an array. This message will calculate the
+ * sum of the numerical elements in the array.
+ *
+ * Usage:
+ *
+ * a := Array <- 1 ; 2 ; 3.
+ * s := a sum. #6
+ *
+ * In the example above, the sum of array will be stored in s and
+ * it's value will be 6. 
+ */
+ctr_object* ctr_array_sum(ctr_object* myself, ctr_argument* argumentList) {
+	double sum = 0;
+	ctr_object* el;
+	size_t i = 0;
+	for(i = 0; i < myself->value.avalue->head; i++) {
+		el = *(myself->value.avalue->elements + i);
+		sum += ctr_internal_cast2number(el)->value.nvalue;
+	}
+	return ctr_build_number_from_float(sum);
+}
+
+/**
  * [Array] map: [Block].
  *
  * Iterates over the array. Passing each element as a key-value pair to the

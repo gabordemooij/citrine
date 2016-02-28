@@ -244,6 +244,8 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
 		begin = haystack + hlen;
 		last = haystack + nlen - 2;
 	}
+	
+	printf("%d,%d,|%s|,|%s|>>",hlen,nlen,haystack,needle);
 	for(cur = begin; cur!=last; cur += step) {
 		if (memcmp(cur,needle,nlen) == 0) return cur;
 	}
@@ -618,6 +620,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("+", 1), &ctr_array_add);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("map:", 4), &ctr_array_map);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("each:", 5), &ctr_array_map);
+	ctr_internal_create_func(CtrStdArray, ctr_build_string("sum", 3), &ctr_array_sum);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Array", 5), CtrStdArray, 0);
 	CtrStdArray->link = CtrStdObject;
 
