@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Web Sockets</title>
+	</head>
+	<body>
+		<h1>Web socket test</h1>
+		<div id="container"></div>
+		<script>
+			var ws = new WebSocket('ws://localhost:8080/');
+			ws.onmessage = function(event) {
+			document.getElementById('container').innerHTML = event.data;
+			console.log(event.data);
+			};
+			document.body.addEventListener('click', function(e){
+				var dataID = e.target.getAttribute('data-id');
+				ws.send('clicked '+dataID);
+			}, false);
+		</script>
+	</body>
+</html>
