@@ -598,7 +598,7 @@ ctr_object* ctr_number_dec(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [Number] * [Number or Block]
  *
- * Multiplies the number by the specified divider. Returns a new
+ * Multiplies the number by the specified multiplier. Returns a new
  * number object.
  */
 ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) {
