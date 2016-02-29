@@ -40,7 +40,9 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [File] path
  *
- * Returns the path of a file.
+ * Returns the path of a file. The file object will respond to this
+ * message by returning a string object describing the full path to the
+ * recipient.
  */
 ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
@@ -51,7 +53,16 @@ ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [File] read
  *
- * Reads contents of a file.
+ * Reads contents of a file. Send this message to a file to read the entire contents in
+ * one go. For big files you might want to prefer a streaming approach to avoid
+ * memory exhaustion (see readBytes etc).
+ *
+ * Usage:
+ *
+ * data := File new: '/path/to/mydata.csv', read.
+ *
+ * In the example above we read the contents of the entire CSV file callled mydata.csv
+ * in the variable called data.
  */
 ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
@@ -89,7 +100,16 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [File] write: [String]
  *
- * Writes content to a file.
+ * Writes content to a file. Send this message to a file object to write the
+ * entire contents of the specified string to the file in one go. The file object
+ * responds to this message for convience reasons, however for big files it might
+ * be a better idea to use the streaming API if possible (see readBytes etc.).
+ *
+ * data := '<xml>hello</xml>'.
+ * File new: 'myxml.xml', write: data.
+ *
+ * In the example above we write the XML snippet in variable data to a file
+ * called myxml.xml in the current working directory.
  */
 ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
@@ -116,7 +136,9 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [File] append: [String]
  *
- * Appends content to a file.
+ * Appends content to a file. The file object responds to this message like it
+ * responds to the write-message, however in this case the contents of the string
+ * will be appended to the existing content inside the file.
  */
 ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
