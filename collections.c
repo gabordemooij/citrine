@@ -417,6 +417,7 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @internal
+ *
  * Internal sort function, for use with ArraySort.
  * Interfaces with qsort-compatible function.
  */

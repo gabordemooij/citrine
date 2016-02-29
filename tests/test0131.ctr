@@ -1,0 +1,11 @@
+#Test multi dimensional array/map
+a := Array <- (Array <- 100 ; 200 ; 300) ; (Array <- 9 ; 8 ; 7).
+Pen write: 'at 0,1 :'.
+Pen write: a @ 0 @ 1, brk. #200
+Pen write: 'at 1,2 :'.
+Pen write: a @ 1 @ 2, brk. #7
+menu := Map new.
+menu put: (Array <- 'pizza' ; 'spaghetti') at: 'Italian Cuisine'.
+menu put: (Array <- 'bifteki' ; 'suflaki') at: 'Greek Cuisine'.
+Pen write: 'I love ' + (menu @ 'Greek Cuisine' @ 0) + ' and ' + (menu @ 'Italian Cuisine' @ 1), brk. #I love bifteki and spaghetti
+Pen write: 'but not on the same plate.', brk.
