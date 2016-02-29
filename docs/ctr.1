@@ -110,8 +110,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Variations:
     
-     [Object] respondTo: [String] and: [String]
-     [Object] respondTo: [String] and: [String] and: [String]
+     [Object] respondTo: [String] with: [String]
+     [Object] respondTo: [String] with: [String] and: [String]
     
      Default respond-to implemention, does nothing.
 .fi
@@ -254,7 +254,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     a && b
+     a and: b
     
 .fi
 .BR.BR.BR
@@ -280,7 +280,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     a || b
+     a or: b
 .fi
 .BR.BR.BR
 
@@ -397,7 +397,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] inc: [Number]
+.B [Number] add: [Number]
 .nf
     
      Increases the number ITSELF by the specified amount, this message will change the
@@ -413,7 +413,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] dec: [number]
+.B [Number] subtract: [number]
 .nf
     
      Decreases the number ITSELF by the specified amount, this message will change the
@@ -424,7 +424,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .B [Number] * [Number or Block]
 .nf
     
-     Multiplies the number by the specified divider. Returns a new
+     Multiplies the number by the specified multiplier. Returns a new
      number object.
 .fi
 .BR.BR.BR
@@ -514,6 +514,40 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [Number] positive
+.nf
+    
+     Returns a boolean indicating wether the number is positive.
+     This message will return a boolean object 'True' if the recipient is
+     positive and 'False' otherwise.
+    
+     Usage:
+    
+     hope := 0.1.
+     ( hope positive ) ifTrue: {\\ Pen write: 'Still a little hope for humanity'. }.
+    
+     The example above will print the message because hope is higher than 0.
+.fi
+.BR.BR.BR
+
+.B [Number] negative
+.nf
+    
+     Returns a boolean indicating wether the number is negative.
+     This message will return a boolean object 'True' if the recipient is
+     negative and 'False' otherwise. It's the eaxct opposite of the 'positive'
+     message.
+    
+     Usage:
+    
+     hope := -1.
+     (hope negative) ifTrue: {\\ Pen write: 'No hope left'. }.
+    
+     The example above will print the message because the value of the variable
+     hope is less than 0.
+.fi
+.BR.BR.BR
+
 .B [Number] max: [other]
 .nf
     
@@ -561,14 +595,31 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .B [Number] floor
 .nf
     
-     Returns the next highest integer number by rounding down.
+     Gives the largest integer less than the recipient.
+    
+     Usage:
+    
+     x := 4.5
+     y := x floor. #y will be 4
+    
+     The example above applies the floor function to the recipient (4.5)
+     returning a new number object (4).
 .fi
 .BR.BR.BR
 
-.B [Number] ceil
+.B [Number] ceiling
 .nf
     
-     Returns the next highest integer number by rounding up.
+     Rounds up the recipient number and returns the next higher integer number
+     as a result.
+    
+     Usage:
+    
+     x := 4.5.
+     y = x ceiling. #y will be 5
+    
+     The example above applies the ceiling function to the recipient (4.5)
+     returning a new number object (5).
 .fi
 .BR.BR.BR
 
@@ -579,56 +630,72 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] abs
+.B [Number] absolute
 .nf
     
-     Returns the absolute value of the number.
+     Returns the absolute (unsigned, positive) value of the number.
+    
+     Usage:
+    
+     x := -7.
+     y := x absolute. #y will be 7
+    
+     The example above strips the sign off the value -7 resulting
+     in 7.
 .fi
 .BR.BR.BR
 
-.B [Number] sqrt
+.B [Number] squareRoot
 .nf
     
-     Returns the square root of the number.
+     Returns the square root of the recipient.
+    
+     Usage:
+    
+     x := 49.
+     y := x squareRoot. #y will be 7
+    
+     The example above takes the square root of 49, resulting in the
+     number 7.
 .fi
 .BR.BR.BR
 
-.B [Number] exp
+.B [Number] exponent
 .nf
     
      Returns the exponent of the number.
 .fi
 .BR.BR.BR
 
-.B [Number] sin
+.B [Number] sine
 .nf
     
      Returns the sine of the number.
 .fi
 .BR.BR.BR
 
-.B [Number] cos
+.B [Number] cosine
 .nf
     
      Returns the cosine of the number.
 .fi
 .BR.BR.BR
 
-.B [Number] tan
+.B [Number] tangent
 .nf
     
      Caculates the tangent of a number.
 .fi
 .BR.BR.BR
 
-.B [Number] atan
+.B [Number] arctangent
 .nf
     
-     Caculates the atan of a number.
+     Caculates the arctangent of a number.
 .fi
 .BR.BR.BR
 
-.B [Number] log
+.B [Number] logarithm
 .nf
     
      Calculates the logarithm of a number.
@@ -785,7 +852,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] up
+.B [String] asciiUpperCase
 .nf
     
      Returns a new uppercased version of the string.
@@ -795,13 +862,29 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] low
+.B [String] asciiLowerCase
 .nf
     
      Returns a new lowercased version of the string.
      Note that this is just basic ASCII case functionality, this should only
      be used for internal keys and as a basic utility function. This function
      DOES NOT WORK WITH UTF8 characters !
+.fi
+.BR.BR.BR
+
+.B [String] asciiLowerCase1st
+.nf
+    
+     Converts the first character of the recipient to lowercase and
+     returns the resulting string object.
+.fi
+.BR.BR.BR
+
+.B [String] asciiUpperCase1st
+.nf
+    
+     Converts the first character of the recipient to uppercase and
+     returns the resulting string object.
 .fi
 .BR.BR.BR
 
@@ -839,20 +922,39 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ' hello ' trim. #hello
     
+     The example above will strip all white space characters from the
+     recipient on both sides of the text. Also see: leftTrim and rightTrim
+     for variations of this message.
 .fi
 .BR.BR.BR
 
-.B [String] ltrim
+.B [String] leftTrim
 .nf
     
      Removes all the whitespace at the left side of the string.
+    
+     Usage:
+    
+     message := ' hello world  '.
+     message leftTrim.
+    
+     The example above will remove all the whitespace at the left of the
+     string but leave the spaces at the right side intact.
 .fi
 .BR.BR.BR
 
-.B [String] rtrim
+.B [String] rightTrim
 .nf
     
      Removes all the whitespace at the right side of the string.
+    
+     Usage:
+    
+     message := ' hello world  '.
+     message rightTrim.
+    
+     The example above will remove all the whitespace at the right of the
+     string but leave the spaces at the left side intact.
 .fi
 .BR.BR.BR
 
@@ -919,7 +1021,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := 0.
-     {\\ ^(x < 6). } whileFalse: {\\ x inc: 1. }. #increment x until it reaches 6.
+     {\\ ^(x < 6). } whileFalse: {\\ x add: 1. }. #increment x until it reaches 6.
     
      Here we increment variable x by one until it reaches 6.
      While the number x is lower than 6 we keep incrementing it.
@@ -936,7 +1038,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := 0.
-     {\\ ^(x > 5). } whileFalse: {\\ x inc: 1. }. #increment x until it reaches 6.
+     {\\ ^(x > 5). } whileFalse: {\\ x add: 1. }. #increment x until it reaches 6.
     
      Here we increment variable x by one until it reaches 6.
      While the number x is not higher than 5 we keep incrementing it.
@@ -1047,6 +1149,40 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      numbers := Array new.
      numbers push: 3.
+.fi
+.BR.BR.BR
+
+.B [Array] sum
+.nf
+    
+     Takes the sum of an array. This message will calculate the
+     sum of the numerical elements in the array.
+    
+     Usage:
+    
+     a := Array <- 1 ; 2 ; 3.
+     s := a sum. #6
+    
+     In the example above, the sum of array will be stored in s and
+     it's value will be 6. 
+.fi
+.BR.BR.BR
+
+.B [Array] product
+.nf
+    
+     Takes the product of an array. On receiving this message, the
+     Array recipient object will calculate the product of its
+     numerical elements.
+    
+     Usage:
+    
+     a := Array <- 2 ; 4 ; 8.
+     p := a product. #64
+    
+     In the example above, the product of the array will be calculated
+     because the array receives the message 'product'. The product of the elements
+     ( 2 * 4 * 8 = 64 ) will be stored in p.
 .fi
 .BR.BR.BR
 
@@ -1262,28 +1398,50 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .B [File] path
 .nf
     
-     Returns the path of a file.
+     Returns the path of a file. The file object will respond to this
+     message by returning a string object describing the full path to the
+     recipient.
 .fi
 .BR.BR.BR
 
 .B [File] read
 .nf
     
-     Reads contents of a file.
+     Reads contents of a file. Send this message to a file to read the entire contents in
+     one go. For big files you might want to prefer a streaming approach to avoid
+     memory exhaustion (see readBytes etc).
+    
+     Usage:
+    
+     data := File new: '/path/to/mydata.csv', read.
+    
+     In the example above we read the contents of the entire CSV file callled mydata.csv
+     in the variable called data.
 .fi
 .BR.BR.BR
 
 .B [File] write: [String]
 .nf
     
-     Writes content to a file.
+     Writes content to a file. Send this message to a file object to write the
+     entire contents of the specified string to the file in one go. The file object
+     responds to this message for convience reasons, however for big files it might
+     be a better idea to use the streaming API if possible (see readBytes etc.).
+    
+     data := '<xml>hello</xml>'.
+     File new: 'myxml.xml', write: data.
+    
+     In the example above we write the XML snippet in variable data to a file
+     called myxml.xml in the current working directory.
 .fi
 .BR.BR.BR
 
 .B [File] append: [String]
 .nf
     
-     Appends content to a file.
+     Appends content to a file. The file object responds to this message like it
+     responds to the write-message, however in this case the contents of the string
+     will be appended to the existing content inside the file.
 .fi
 .BR.BR.BR
 
@@ -1322,6 +1480,122 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [File] open: [string]
+.nf
+    
+     Open a file with using the specified mode.
+    
+     Usage:
+    
+     f := File new: '/path/to/file'.
+     f open: 'r+'. #opens file for reading and writing
+    
+     The example above opens the file in f for reading and writing.
+.fi
+.BR.BR.BR
+
+.B [File] close.
+.nf
+    
+     Closes the file represented by the recipient.
+    
+     Usage:
+    
+     f := File new: '/path/to/file.txt'.
+     f open: 'r+'.
+     f close.
+    
+     The example above opens and closes a file.
+.fi
+.BR.BR.BR
+
+.B [File] readBytes: [Number].
+.nf
+    
+     Reads a number of bytes from the file.
+    
+     Usage:
+    
+     f := File new: '/path/to/file.txt'.
+     f open: 'r+'.
+     x := f readBytes: 10.
+     f close.
+    
+     The example above reads 10 bytes from the file represented by f
+     and puts them in buffer x.
+.fi
+.BR.BR.BR
+
+.B [File] writeBytes: [String].
+.nf
+    
+     Takes a string and writes the bytes in the string to the file
+     object. Returns the number of bytes actually written.
+    
+     Usage:
+    
+     f := File new: '/path/to/file.txt'.
+     f open: 'r+'.
+     n := f writeBytes: 'Hello World'.
+     f close.
+    
+     The example above writes 'Hello World' to the specified file as bytes.
+     The number of bytes written is returned in variable n.
+.fi
+.BR.BR.BR
+
+.B [File] seek: [Number].
+.nf
+    
+     Moves the file pointer to the specified position in the file
+     (relative to the current position).
+    
+     Usage:
+    
+     file open: 'r', seek: 10.
+    
+     The example above opens a file for reading and moves the
+     pointer to position 10 (meaning 10 bytes from the beginning of the file).
+     The seek value may be negative.
+.fi
+.BR.BR.BR
+
+.B [File] rewind.
+.nf
+    
+     Rewinds the file. Moves the file pointer to the beginning of the file.
+    
+     Usage:
+    
+     file open: 'r'.
+     x := file readBytes: 10. #read 10 bytes
+     file rewind.        #rewind, set pointer to begin again
+     y := file readBytes: 10. #re-read same 10 bytes
+    
+     The example above reads the same sequence of 10 bytes twice, resulting
+     in variable x and y being equal.
+.fi
+.BR.BR.BR
+
+.B [File] end.
+.nf
+    
+     Moves the file pointer to the end of the file. Use this in combination with
+     negative seek operations.
+    
+     Usage:
+    
+     file open: 'r'.
+     file end.
+     x := file seek: -10, readBytes: 10.
+    
+     The example above will read the last 10 bytes of the file. This is
+     accomplished by first moving the file pointer to the end of the file,
+     then putting it back 10 bytes (negative number), and then reading 10
+     bytes.
+.fi
+.BR.BR.BR
+
 .BR.BR.BR
 
 .BR.BR.BR
@@ -1352,32 +1626,49 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .B [Shell] call: [String]
 .nf
     
-     Performs a Shell operation.
+     Performs a Shell operation. The Shell object uses a fluid API, so you can
+     mix shell code with programming logic. For instance to list the contents
+     of a directory use:
+    
+     Shell ls
+    
+     This will output the contents of the current working directly, you
+     can also pass keyword messages like so:
+    
+     Shell echo: 'Hello from the Shell!'.
+    
+     The example above will output the specified message to the console.
+     Every message you send will be turned into a string and dispatched to
+     the 'call:' message.
 .fi
 .BR.BR.BR
 
-.B [Command] argument: [Number]
+.BR.BR.BR
+
+.BR.BR.BR
+
+.B [Program] argument: [Number]
 .nf
     
      Obtains an argument from the CLI invocation.
 .fi
 .BR.BR.BR
 
-.B [Command] argCount
+.B [Program] argCount
 .nf
     
      Returns the number of CLI arguments passed to the script.
 .fi
 .BR.BR.BR
 
-.B [Command] exit
+.B [Program] exit
 .nf
      
      Exits program immediately.
 .fi
 .BR.BR.BR
 
-.B [Command] env: [String]
+.B [Program] env: [String]
 .nf
     
      Returns the value of an environment variable.
@@ -1388,14 +1679,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Command] env: [Key] val: [Value]
+.B [Program] env: [Key] val: [Value]
 .nf
     
      Sets the value of an environment variable.
 .fi
 .BR.BR.BR
 
-.B Command askQuestion
+.B [Program] waitForInput
 .nf
     
      Ask a question on the command-line, resumes program
@@ -1413,6 +1704,13 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [Program] flush.
+.nf
+    
+     Flushes the STDOUT output buffer.
+.fi
+.BR.BR.BR
+
 .B [Dice] rollWithSides: [Number]
 .nf
     
@@ -1424,6 +1722,13 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Rolls a standard dice with 6 sides.
+.fi
+.BR.BR.BR
+
+.B [Dice] rawRandomNumber
+.nf
+    
+     Generates a random number, the traditional way (like rand()).
 .fi
 .BR.BR.BR
 

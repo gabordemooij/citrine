@@ -185,7 +185,7 @@ ctr_object* ctr_shell_respond_to(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [Command] argument: [Number]
+ * [Program] argument: [Number]
  *
  * Obtains an argument from the CLI invocation.
  */
@@ -197,7 +197,7 @@ ctr_object* ctr_command_argument(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [Command] argCount
+ * [Program] argCount
  *
  * Returns the number of CLI arguments passed to the script.
  */
@@ -206,7 +206,7 @@ ctr_object* ctr_command_num_of_args(ctr_object* myself, ctr_argument* argumentLi
 }
 
 /**
- * [Command] exit
+ * [Program] exit
  * 
  * Exits program immediately.
  */
@@ -215,7 +215,7 @@ ctr_object* ctr_command_exit(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Command] env: [String]
+ * [Program] env: [String]
  *
  * Returns the value of an environment variable.
  *
@@ -239,7 +239,7 @@ ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [Command] env: [Key] val: [Value]
+ * [Program] env: [Key] val: [Value]
  *
  * Sets the value of an environment variable.
  */
@@ -258,7 +258,7 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * Command askQuestion
+ * [Program] waitForInput
  *
  * Ask a question on the command-line, resumes program
  * only after pressing the enter key.
@@ -294,7 +294,7 @@ ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [Command] flush.
+ * [Program] flush.
  *
  * Flushes the STDOUT output buffer.
  */
