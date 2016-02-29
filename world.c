@@ -13,6 +13,8 @@
 
 
 /**
+ * @internal
+ *
  * ReadFile
  *
  * Reads in an entire file.
@@ -41,6 +43,8 @@ char* ctr_internal_readf(char* file_name) {
 }
 
 /**
+ * @internal
+ *
  * InternalObjectIsEqual
  *
  * Detemines whether two objects are identical.
@@ -78,6 +82,8 @@ int ctr_internal_object_is_equal(ctr_object* object1, ctr_object* object2) {
 }
 
 /**
+ * @internal
+ *
  * InternalObjectIndexHash
  *
  * Given an object, this function will calculate a hash to speed-up
@@ -89,6 +95,8 @@ uint64_t ctr_internal_index_hash(ctr_object* key) {
 }
 
 /**
+ * @internal
+ *
  * InternalObjectFindProperty
  *
  * Finds property in object.
@@ -120,6 +128,8 @@ ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key
 
 
 /**
+ * @internal
+ *
  * InternalObjectDeleteProperty
  *
  * Deletes the specified property from the object.
@@ -178,12 +188,13 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
 }
 
 /**
+ * @internal
+ *
  * InternalObjectAddProperty
  *
  * Adds a property to an object.
  */
 void ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_object* value, int m) {
-
 	ctr_mapitem* new_item = malloc(sizeof(ctr_mapitem));
 	ctr_mapitem* current_head = NULL;
 	new_item->key = key;
@@ -215,6 +226,8 @@ void ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_ob
 }
 
 /**
+ * @internal
+ *
  * InternalObjectSetProperty
  *
  * Sets a property on an object.
@@ -225,9 +238,11 @@ void ctr_internal_object_set_property(ctr_object* owner, ctr_object* key, ctr_ob
 }
 
 /**
+ * @internal
+ *
  * InternalMemMem
  *
- * memmem implementation
+ * memmem implementation because this not available on every system.
  */
 char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, int reverse ) {
 	char* cur;
@@ -252,6 +267,8 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
 }
 
 /**
+ * @internal
+ *
  * InternalObjectCreate
  *
  * Creates an object.
@@ -285,6 +302,8 @@ ctr_object* ctr_internal_create_object(int type) {
 }
 
 /**
+ * @internal
+ *
  * InternalFunctionCreate
  *
  * Create a function and add this to the object as a method.
@@ -296,6 +315,8 @@ void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func
 }
 
 /**
+ * @internal
+ *
  * InternalNumberCast
  *
  * Casts an object to a number object.
@@ -309,6 +330,8 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
 }
 
 /**
+ * @internal
+ *
  * InternalStringCast
  *
  * Casts an object to a string object.
@@ -351,6 +374,8 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 }
 
 /**
+ * @internal
+ *
  * InternalBooleanCast
  *
  * Casts an object to a boolean.
@@ -364,6 +389,8 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
 }
 
 /**
+ * @internal
+ *
  * ContextOpen
  *
  * Opens a new context to keep track of variables.
@@ -376,6 +403,8 @@ void ctr_open_context() {
 }
 
 /**
+ * @internal
+ *
  * ContextClose
  *
  * Closes a context.
@@ -386,6 +415,8 @@ void ctr_close_context() {
 }
 
 /**
+ * @internal
+ *
  * CTRFind
  *
  * Tries to locate a variable in the current context or one
@@ -414,6 +445,8 @@ ctr_object* ctr_find(ctr_object* key) {
 }
 
 /**
+ * @internal
+ *
  * CTRFindInMy
  *
  * Tries to locate a property of an object.
@@ -427,6 +460,8 @@ ctr_object* ctr_find_in_my(ctr_object* key) {
 }
 
 /**
+ * @internal
+ *
  * CTRSetBasic
  *
  * Sets a proeprty in an object (context).
@@ -452,6 +487,8 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 }
 
 /**
+ * @internal
+ *
  * WorldInitialize
  *
  * Populate the World of Citrine.
@@ -462,9 +499,7 @@ void ctr_initialize_world() {
 	for(i=0; i<16; i++) {
 		CtrHashKey[i] = (rand() % 255);
 	}
-
 	ctr_first_object = NULL;
-
 	CtrStdWorld = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_contexts[0] = CtrStdWorld;
 
@@ -486,7 +521,6 @@ void ctr_initialize_world() {
 
 	/* Nil */
 	CtrStdNil = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNIL);
-
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Nil", 3), CtrStdNil, 0);
 	ctr_internal_create_func(CtrStdNil, ctr_build_string("isNil", 5), &ctr_nil_is_nil);
 	CtrStdNil->link = CtrStdObject;
@@ -717,6 +751,8 @@ void ctr_initialize_world() {
 }
 
 /**
+ * @internal
+ *
  * CTRMessageSend
  *
  * Sends a message to a receiver object.
@@ -779,6 +815,8 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 
 
 /**
+ * @internal
+ *
  * CTRValueAssignment
  *
  * Assigns a value to a variable in the current context.
@@ -797,7 +835,6 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 		object->info.sticky = 0;
 		ctr_set(key, object);
 	}
-
 	/* depending on type, copy specific value */
 	switch (o->info.type) {
 		case CTR_OBJECT_TYPE_OTBOOL:
@@ -823,6 +860,8 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 
 
 /**
+ * @internal
+ *
  * CTRAssignValueObject
  *
  * Assigns a value to a property of an object. 
@@ -842,7 +881,6 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 		object->info.sticky = 0;
 		ctr_internal_object_set_property(my, key, object, 0);
 	}
-
 	/* depending on type, copy specific value */
 	switch (o->info.type) {
 		case CTR_OBJECT_TYPE_OTBOOL:
@@ -868,6 +906,8 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 }
 
 /**
+ * @internal
+ *
  * CTRAssignValueObjectLocal
  *
  * Assigns a value to a local of an object. 
@@ -888,7 +928,6 @@ ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* o) {
 		object->info.sticky = 0;
 		ctr_internal_object_set_property(context, key, object, 0);
 	}
-
 	/* depending on type, copy specific value */
 	switch (o->info.type) {
 		case CTR_OBJECT_TYPE_OTBOOL:
