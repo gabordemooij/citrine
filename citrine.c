@@ -18,7 +18,7 @@
  */
 void ctr_cli_welcome() {
 	printf("\n");
-	printf("Citrine Programming Language V 0.3.\n");
+	printf("Citrine Programming Language V 0.4.\n");
 	printf("\n");
 	printf("--------------------------------------------------\n");
 	printf("\n");
