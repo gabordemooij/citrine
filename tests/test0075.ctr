@@ -1,5 +1,5 @@
 i := 0.
 Pen write: 'Can we count to 10 using a whileTrue loop ?', brk.
-{\ i inc: 1. ^ (i <= 10). } whileTrue: {\ Pen write: i, brk. }.
+{\ i add: 1. ^ (i <= 10). } whileTrue: {\ Pen write: i, brk. }.
 Pen write: 'Can we count back from 10 to 0 using a whileFalse loop ?', brk.
-{\ i dec: 1. ^ (i >= 0). } whileTrue: {\ Pen write: i, brk. }.
+{\ i subtract: 1. ^ (i >= 0). } whileTrue: {\ Pen write: i, brk. }.

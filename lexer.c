@@ -28,7 +28,7 @@ void ctr_clex_load(char* prg) {
 	ctr_code = prg;
 	ctr_clex_buffer = malloc(ctr_clex_bflmt);
 	ctr_clex_buffer[0] = '\0';
-	ctr_eofcode = (ctr_code + ctr_program_length - 1);
+	ctr_eofcode = (ctr_code + ctr_program_length);
 }
 
 /**
@@ -179,12 +179,6 @@ int ctr_clex_tok() {
 		}
 		if (((char)*(ctr_code) == '!') && ((char)*(ctr_code+1)=='=')){
 			ctr_code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "≠", 3); return CTR_TOKEN_REF;
-		}
-		if (((char)*(ctr_code) == '|') && ((char)*(ctr_code+1)=='|')){
-			ctr_code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "∨", 3); return CTR_TOKEN_REF;
-		}
-		if (((char)*(ctr_code) == '&') && ((char)*(ctr_code+1)=='&')){
-			ctr_code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "∧", 3); return CTR_TOKEN_REF;
 		}
 		if (((char)*(ctr_code) == '<') && ((char)*(ctr_code+1)=='-')){
 			ctr_code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "←", 3); return CTR_TOKEN_REF;

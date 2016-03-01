@@ -1,7 +1,7 @@
 #numbers, pass by value
 a := 3.
 b := a.
-a dec: 1.
+a subtract: 1.
 Pen write: ' a = ' + a.
 Pen write: ' b = ' + b.
 a := 3.
@@ -10,8 +10,8 @@ Pen write: ' a = ' + a.
 Pen write: ' b = ' + b.
 x := 3.
 y := x.
-x inc: 10.
-y dec: 1.
+x add: 10.
+y subtract: 1.
 Pen write: ' x = ' + x.
 Pen write: ' y = ' + y.
 #strings

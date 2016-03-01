@@ -13,6 +13,8 @@
 
 
 /**
+ * @internal
+ *
  * ReadFile
  *
  * Reads in an entire file.
@@ -41,6 +43,8 @@ char* ctr_internal_readf(char* file_name) {
 }
 
 /**
+ * @internal
+ *
  * InternalObjectIsEqual
  *
  * Detemines whether two objects are identical.
@@ -78,6 +82,8 @@ int ctr_internal_object_is_equal(ctr_object* object1, ctr_object* object2) {
 }
 
 /**
+ * @internal
+ *
  * InternalObjectIndexHash
  *
  * Given an object, this function will calculate a hash to speed-up
@@ -89,6 +95,8 @@ uint64_t ctr_internal_index_hash(ctr_object* key) {
 }
 
 /**
+ * @internal
+ *
  * InternalObjectFindProperty
  *
  * Finds property in object.
@@ -120,6 +128,8 @@ ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key
 
 
 /**
+ * @internal
+ *
  * InternalObjectDeleteProperty
  *
  * Deletes the specified property from the object.
@@ -178,12 +188,13 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
 }
 
 /**
+ * @internal
+ *
  * InternalObjectAddProperty
  *
  * Adds a property to an object.
  */
 void ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_object* value, int m) {
-
 	ctr_mapitem* new_item = malloc(sizeof(ctr_mapitem));
 	ctr_mapitem* current_head = NULL;
 	new_item->key = key;
@@ -215,6 +226,8 @@ void ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_ob
 }
 
 /**
+ * @internal
+ *
  * InternalObjectSetProperty
  *
  * Sets a property on an object.
@@ -225,9 +238,11 @@ void ctr_internal_object_set_property(ctr_object* owner, ctr_object* key, ctr_ob
 }
 
 /**
+ * @internal
+ *
  * InternalMemMem
  *
- * memmem implementation
+ * memmem implementation because this not available on every system.
  */
 char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, int reverse ) {
 	char* cur;
@@ -244,6 +259,7 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
 		begin = haystack + hlen;
 		last = haystack + nlen - 2;
 	}
+
 	for(cur = begin; cur!=last; cur += step) {
 		if (memcmp(cur,needle,nlen) == 0) return cur;
 	}
@@ -251,6 +267,8 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
 }
 
 /**
+ * @internal
+ *
  * InternalObjectCreate
  *
  * Creates an object.
@@ -284,6 +302,8 @@ ctr_object* ctr_internal_create_object(int type) {
 }
 
 /**
+ * @internal
+ *
  * InternalFunctionCreate
  *
  * Create a function and add this to the object as a method.
@@ -295,6 +315,8 @@ void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func
 }
 
 /**
+ * @internal
+ *
  * InternalNumberCast
  *
  * Casts an object to a number object.
@@ -308,6 +330,8 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
 }
 
 /**
+ * @internal
+ *
  * InternalStringCast
  *
  * Casts an object to a string object.
@@ -350,6 +374,8 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 }
 
 /**
+ * @internal
+ *
  * InternalBooleanCast
  *
  * Casts an object to a boolean.
@@ -363,6 +389,8 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
 }
 
 /**
+ * @internal
+ *
  * ContextOpen
  *
  * Opens a new context to keep track of variables.
@@ -375,6 +403,8 @@ void ctr_open_context() {
 }
 
 /**
+ * @internal
+ *
  * ContextClose
  *
  * Closes a context.
@@ -385,6 +415,8 @@ void ctr_close_context() {
 }
 
 /**
+ * @internal
+ *
  * CTRFind
  *
  * Tries to locate a variable in the current context or one
@@ -413,6 +445,8 @@ ctr_object* ctr_find(ctr_object* key) {
 }
 
 /**
+ * @internal
+ *
  * CTRFindInMy
  *
  * Tries to locate a property of an object.
@@ -426,6 +460,8 @@ ctr_object* ctr_find_in_my(ctr_object* key) {
 }
 
 /**
+ * @internal
+ *
  * CTRSetBasic
  *
  * Sets a proeprty in an object (context).
@@ -451,6 +487,8 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 }
 
 /**
+ * @internal
+ *
  * WorldInitialize
  *
  * Populate the World of Citrine.
@@ -461,9 +499,7 @@ void ctr_initialize_world() {
 	for(i=0; i<16; i++) {
 		CtrHashKey[i] = (rand() % 255);
 	}
-
 	ctr_first_object = NULL;
-
 	CtrStdWorld = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_contexts[0] = CtrStdWorld;
 
@@ -477,7 +513,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("respondTo:with:", 15), &ctr_object_respond);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("respondTo:with:and:", 19), &ctr_object_respond);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("type", 4), &ctr_object_type);
-	ctr_internal_create_func(CtrStdObject, ctr_build_string("new", 3), &ctr_object_make);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("isNil", 5), &ctr_object_is_nil);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("myself", 6), &ctr_object_myself);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Object", 6), CtrStdObject, 0);
@@ -485,7 +520,6 @@ void ctr_initialize_world() {
 
 	/* Nil */
 	CtrStdNil = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNIL);
-
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Nil", 3), CtrStdNil, 0);
 	ctr_internal_create_func(CtrStdNil, ctr_build_string("isNil", 5), &ctr_nil_is_nil);
 	CtrStdNil->link = CtrStdObject;
@@ -498,9 +532,9 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("continue", 8), &ctr_bool_continue);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("else:", 5), &ctr_bool_ifFalse);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("not", 3), &ctr_bool_not);
-	ctr_internal_create_func(CtrStdBool, ctr_build_string("∧", 3), &ctr_bool_and);
+	ctr_internal_create_func(CtrStdBool, ctr_build_string("and:", 4), &ctr_bool_and);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("nor:", 4), &ctr_bool_nor);
-	ctr_internal_create_func(CtrStdBool, ctr_build_string("∨", 3), &ctr_bool_or);
+	ctr_internal_create_func(CtrStdBool, ctr_build_string("or:", 3), &ctr_bool_or);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("xor:", 4), &ctr_bool_xor);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("=",1),&ctr_bool_eq);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("≠",3),&ctr_bool_neq);
@@ -515,9 +549,9 @@ void ctr_initialize_world() {
 	CtrStdNumber = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("to:by:do:", 9), &ctr_number_to_by_do);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("+", 1), &ctr_number_add);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("inc:",4), &ctr_number_inc);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("add:",4), &ctr_number_inc);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("-",1), &ctr_number_minus);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("dec:",4), &ctr_number_dec);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("subtract:",9), &ctr_number_dec);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("*",1),&ctr_number_multiply);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("times:",6),&ctr_number_times);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("multiplyBy:",11),&ctr_number_mul);
@@ -532,21 +566,23 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("%",1),&ctr_number_modulo);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("factorial",9),&ctr_number_factorial);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("floor",5),&ctr_number_floor);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("ceil",4),&ctr_number_ceil);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("ceiling",7),&ctr_number_ceil);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("round",5),&ctr_number_round);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("abs",3),&ctr_number_abs);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("sin",3),&ctr_number_sin);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("cos",3),&ctr_number_cos);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("exp",3),&ctr_number_exp);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("sqrt",4),&ctr_number_sqrt);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("tan",3),&ctr_number_tan);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("atan",4),&ctr_number_atan);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("log",3),&ctr_number_log);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("absolute",8),&ctr_number_abs);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("sine",4),&ctr_number_sin);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("cosine",6),&ctr_number_cos);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("exponent",8),&ctr_number_exp);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("squareRoot",10),&ctr_number_sqrt);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("tangent",7),&ctr_number_tan);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("arctangent",10),&ctr_number_atan);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("logarithm",9),&ctr_number_log);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("toPowerOf:",10),&ctr_number_pow);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("min:",4),&ctr_number_min);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("max:",4),&ctr_number_max);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("odd",3),&ctr_number_odd);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("even",4),&ctr_number_even);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("positive",8),&ctr_number_positive);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("negative",8),&ctr_number_negative);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("toString", 8), &ctr_number_to_string);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("toBoolean", 9), &ctr_number_to_boolean);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("between:and:",12),&ctr_number_between);
@@ -563,8 +599,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string("=", 1), &ctr_string_eq);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("≠", 3), &ctr_string_neq);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("trim", 4), &ctr_string_trim);
-	ctr_internal_create_func(CtrStdString, ctr_build_string("ltrim", 5), &ctr_string_ltrim);
-	ctr_internal_create_func(CtrStdString, ctr_build_string("rtrim", 5), &ctr_string_rtrim);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("leftTrim", 8), &ctr_string_ltrim);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("rightTrim", 9), &ctr_string_rtrim);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("htmlEscape", 10), &ctr_string_html_escape);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("at:", 3), &ctr_string_at);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("byteAt:", 7), &ctr_string_byte_at);
@@ -572,8 +608,10 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string("lastIndexOf:", 12), &ctr_string_last_index_of);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("replace:with:", 13), &ctr_string_replace_with);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("split:", 6), &ctr_string_split);
-	ctr_internal_create_func(CtrStdString, ctr_build_string("up", 2), &ctr_string_to_upper);
-	ctr_internal_create_func(CtrStdString, ctr_build_string("low", 3), &ctr_string_to_lower);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("asciiUpperCase", 14), &ctr_string_to_upper);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("asciiLowerCase", 14), &ctr_string_to_lower);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("asciiUpperCase1st", 17), &ctr_string_to_upper1st);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("asciiLowerCase1st", 17), &ctr_string_to_lower1st);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("skip:", 5), &ctr_string_skip);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("append:", 7), &ctr_string_append);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("toNumber", 8), &ctr_string_to_number);
@@ -614,6 +652,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("+", 1), &ctr_array_add);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("map:", 4), &ctr_array_map);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("each:", 5), &ctr_array_map);
+	ctr_internal_create_func(CtrStdArray, ctr_build_string("sum", 3), &ctr_array_sum);
+	ctr_internal_create_func(CtrStdArray, ctr_build_string("product", 7), &ctr_array_product);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Array", 5), CtrStdArray, 0);
 	CtrStdArray->link = CtrStdObject;
 
@@ -640,6 +680,7 @@ void ctr_initialize_world() {
 	
 	/* File */
 	CtrStdFile = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	CtrStdFile->value.rvalue = NULL;
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("new:", 4), &ctr_file_new);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("path", 4), &ctr_file_path);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("read", 4), &ctr_file_read);
@@ -650,6 +691,13 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("delete", 6), &ctr_file_delete);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("include", 7), &ctr_file_include);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("go", 2), &ctr_file_include_ast);
+	ctr_internal_create_func(CtrStdFile, ctr_build_string("open:", 5), &ctr_file_open);
+	ctr_internal_create_func(CtrStdFile, ctr_build_string("close", 5), &ctr_file_close);
+	ctr_internal_create_func(CtrStdFile, ctr_build_string("readBytes:", 10), &ctr_file_read_bytes);
+	ctr_internal_create_func(CtrStdFile, ctr_build_string("writeBytes:", 11), &ctr_file_write_bytes);
+	ctr_internal_create_func(CtrStdFile, ctr_build_string("seek:", 5), &ctr_file_seek);
+	ctr_internal_create_func(CtrStdFile, ctr_build_string("rewind", 6), &ctr_file_seek_rewind);
+	ctr_internal_create_func(CtrStdFile, ctr_build_string("end", 3), &ctr_file_seek_end);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("File", 4), CtrStdFile, 0);
 	CtrStdFile->link = CtrStdObject;
 
@@ -659,9 +707,10 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string("argCount", 8), &ctr_command_num_of_args);
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string("env:", 4), &ctr_command_get_env);
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string("env:val:", 8), &ctr_command_set_env);
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string("askQuestion", 11), &ctr_command_question);
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string("waitForInput", 12), &ctr_command_question);
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string("exit", 4), &ctr_command_exit);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Command", 7), CtrStdCommand, 0);
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string("flush", 5), &ctr_command_flush);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Program", 7), CtrStdCommand, 0);
 	CtrStdCommand->link = CtrStdObject;
 
 	/* Clock */
@@ -675,11 +724,14 @@ void ctr_initialize_world() {
 	CtrStdDice = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdDice, ctr_build_string("roll", 4), &ctr_dice_throw);
 	ctr_internal_create_func(CtrStdDice, ctr_build_string("rollWithSides:", 14), &ctr_dice_sides);
+	ctr_internal_create_func(CtrStdDice, ctr_build_string("rawRandomNumber", 15), &ctr_dice_rand);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Dice", 4), CtrStdDice, 0);
 	CtrStdDice->link = CtrStdObject;
 
 	/* Shell */
 	CtrStdShell = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	ctr_internal_create_func(CtrStdShell, ctr_build_string("respondTo:", 10), &ctr_shell_respond_to);
+	ctr_internal_create_func(CtrStdShell, ctr_build_string("respondTo:with:", 15), &ctr_shell_respond_to_with);
 	ctr_internal_create_func(CtrStdShell, ctr_build_string("call:", 5), &ctr_shell_call);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Shell", 5), CtrStdShell, 0);
 	CtrStdShell->link = CtrStdObject;
@@ -698,6 +750,8 @@ void ctr_initialize_world() {
 }
 
 /**
+ * @internal
+ *
  * CTRMessageSend
  *
  * Sends a message to a receiver object.
@@ -760,6 +814,8 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 
 
 /**
+ * @internal
+ *
  * CTRValueAssignment
  *
  * Assigns a value to a variable in the current context.
@@ -778,7 +834,6 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 		object->info.sticky = 0;
 		ctr_set(key, object);
 	}
-
 	/* depending on type, copy specific value */
 	switch (o->info.type) {
 		case CTR_OBJECT_TYPE_OTBOOL:
@@ -804,6 +859,8 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 
 
 /**
+ * @internal
+ *
  * CTRAssignValueObject
  *
  * Assigns a value to a property of an object. 
@@ -823,7 +880,6 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 		object->info.sticky = 0;
 		ctr_internal_object_set_property(my, key, object, 0);
 	}
-
 	/* depending on type, copy specific value */
 	switch (o->info.type) {
 		case CTR_OBJECT_TYPE_OTBOOL:
@@ -849,6 +905,8 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 }
 
 /**
+ * @internal
+ *
  * CTRAssignValueObjectLocal
  *
  * Assigns a value to a local of an object. 
@@ -869,7 +927,6 @@ ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* o) {
 		object->info.sticky = 0;
 		ctr_internal_object_set_property(context, key, object, 0);
 	}
-
 	/* depending on type, copy specific value */
 	switch (o->info.type) {
 		case CTR_OBJECT_TYPE_OTBOOL:

@@ -1,0 +1,30 @@
+#Test Shell fluid API
+
+#delete files if necessary
+{\ File new: '/tmp/from.txt', delete. } catch: {\}, run.
+{\ File new: '/tmp/to.txt', delete. } catch: {\}, run.
+
+#confirm base condition
+File new: '/tmp/to.txt', exists ifFalse: {\
+	Pen write: 'Confirmed. Target file does not exist.\n'.
+}.
+File new: '/tmp/from.txt', exists ifFalse: {\
+	Pen write: 'Confirmed. Source file does not exist.\n'.
+}.
+
+
+#create the from file
+Shell touch: '/tmp/from.txt', echo: '"hello world" > /tmp/from.txt'.
+
+#now use the fluid shell API to perform a copy action
+Shell cp: '/tmp/from.txt /tmp/to.txt'.
+
+File new: '/tmp/to.txt', exists ifTrue: {\
+	Pen write: 'Confirmed. Target file has been created by shell.\n'.
+}.
+
+#Test echo
+Shell echo: 'Hello I can write to console using fluid API!'.
+
+#Can we read contents?
+Pen write: 'Contents of file is:' + (File new: '/tmp/to.txt', read), brk.

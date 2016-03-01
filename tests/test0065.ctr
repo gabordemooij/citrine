@@ -7,7 +7,7 @@ a := 4.5. b := a floor.
 Printer print: a and: b.
 a := 4. b := a factorial.
 Printer print: a and: b.
-a := 4.5. b := a ceil.
+a := 4.5. b := a ceiling.
 Printer print: a and: b.
 a := 4.5. b := a floor.
 Printer print: a and: b.
@@ -17,10 +17,10 @@ a := 4.2. b := a round.
 Printer print: a and: b.
 
 Pen write: (9 % 5), brk.
-Pen write: -666 abs, brk.
-Pen write: 2 sin, brk write: 2 tan, brk write: 2 log, brk.
-Pen write: 2 exp, brk write: 2 atan, brk.
-Pen write: 49 sqrt, brk.
+Pen write: -666 absolute, brk.
+Pen write: 2 sine, brk write: 2 tangent, brk write: 2 logarithm, brk.
+Pen write: 2 exponent, brk write: 2 arctangent, brk.
+Pen write: 49 squareRoot, brk.
 Pen write: (2 toPowerOf: 3), brk.
 Pen write: ((9 max: 5) min: 6).
 

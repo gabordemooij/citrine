@@ -28,14 +28,14 @@ ctr_tnode* ctr_cparse_message(int mode) {
 	int isBin;
 	int first;
 	ctr_size ulen;
-	m = CTR_PARSER_CREATE_NODE();
-	m->type = -1;
 	t = ctr_clex_tok();
 	msgpartlen = ctr_clex_tok_value_length();
 	if ((msgpartlen) > 255) {
 		printf("Message too long\n");
 		exit(1);
 	}
+	m = CTR_PARSER_CREATE_NODE();
+	m->type = -1;
 	s = ctr_clex_tok_value();
 	msg = ctr_malloc(255*sizeof(char), 0);
 	memcpy(msg, s, msgpartlen);
@@ -430,16 +430,27 @@ ctr_tnode* ctr_cparse_receiver() {
 	if (ctr_mode_debug) printf("Parsing receiver.\n");
 	t = ctr_clex_tok();
 	ctr_clex_putback();
-	if (t == CTR_TOKEN_NIL) return ctr_cparse_nil();
-	if (t == CTR_TOKEN_BOOLEANYES) return ctr_cparse_true();
-	if (t == CTR_TOKEN_BOOLEANNO) return ctr_cparse_false();
-	if (t == CTR_TOKEN_NUMBER) return ctr_cparse_number();
-	if (t == CTR_TOKEN_QUOTE) return ctr_cparse_string();
-	if (t == CTR_TOKEN_REF) return ctr_cparse_ref();
-	if (t == CTR_TOKEN_BLOCKOPEN) return ctr_cparse_block();
-	if (t == CTR_TOKEN_PAROPEN) return ctr_cparse_popen();
-	printf("Error, unexpected token: %d.\n", t);
-	exit(1);
+	switch(t){
+		case CTR_TOKEN_NIL:
+			return ctr_cparse_nil();
+		case CTR_TOKEN_BOOLEANYES:
+			return ctr_cparse_true();
+		case CTR_TOKEN_BOOLEANNO:
+			return ctr_cparse_false();
+		case CTR_TOKEN_NUMBER:
+			return ctr_cparse_number();
+		case CTR_TOKEN_QUOTE:
+			return ctr_cparse_string();
+		case CTR_TOKEN_REF:
+			return ctr_cparse_ref();
+		case CTR_TOKEN_BLOCKOPEN:
+			return ctr_cparse_block();
+		case CTR_TOKEN_PAROPEN:
+			return ctr_cparse_popen();
+		default:
+			printf("Error, unexpected token: %d.\n", t);
+			exit(1);
+	}
 }
 
 /**
@@ -449,19 +460,16 @@ ctr_tnode* ctr_cparse_receiver() {
  */
 ctr_tnode* ctr_cparse_assignment(ctr_tnode* r) {
 	ctr_tnode* a;
-	ctr_tnode* assignmentExpr;
 	ctr_tlistitem* li;
 	ctr_tlistitem* liAssignExpr;
 	ctr_clex_tok();
 	a = CTR_PARSER_CREATE_NODE();
-	assignmentExpr = CTR_PARSER_CREATE_NODE();
 	li = CTR_PARSER_CREATE_LISTITEM();
 	liAssignExpr = CTR_PARSER_CREATE_LISTITEM();
 	a->type = CTR_AST_NODE_EXPRASSIGNMENT;
 	a->nodes = li;
 	li->node = r;
-	assignmentExpr = ctr_cparse_expr(0);
-	liAssignExpr->node = assignmentExpr;
+	liAssignExpr->node =   ctr_cparse_expr(0);  
 	li->next = liAssignExpr;
 	return a;
 }

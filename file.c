@@ -24,10 +24,9 @@
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* s = ctr_object_make(myself, argumentList);
 	ctr_object* pathObject;
-	s->info.type = CTR_OBJECT_TYPE_OTMISC;
+	s->info.type = CTR_OBJECT_TYPE_OTOBJECT;
 	s->link = myself;
-	s->value.rvalue = malloc(sizeof(ctr_resource));
-	s->value.rvalue->type = 1;
+	s->value.rvalue = NULL;
 	pathObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 	pathObject->info.type = CTR_OBJECT_TYPE_OTSTRING;
 	pathObject->value.svalue = (ctr_string*) malloc(sizeof(ctr_string));
@@ -41,7 +40,9 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [File] path
  *
- * Returns the path of a file.
+ * Returns the path of a file. The file object will respond to this
+ * message by returning a string object describing the full path to the
+ * recipient.
  */
 ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
@@ -52,7 +53,16 @@ ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [File] read
  *
- * Reads contents of a file.
+ * Reads contents of a file. Send this message to a file to read the entire contents in
+ * one go. For big files you might want to prefer a streaming approach to avoid
+ * memory exhaustion (see readBytes etc).
+ *
+ * Usage:
+ *
+ * data := File new: '/path/to/mydata.csv', read.
+ *
+ * In the example above we read the contents of the entire CSV file callled mydata.csv
+ * in the variable called data.
  */
 ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
@@ -90,7 +100,16 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [File] write: [String]
  *
- * Writes content to a file.
+ * Writes content to a file. Send this message to a file object to write the
+ * entire contents of the specified string to the file in one go. The file object
+ * responds to this message for convience reasons, however for big files it might
+ * be a better idea to use the streaming API if possible (see readBytes etc.).
+ *
+ * data := '<xml>hello</xml>'.
+ * File new: 'myxml.xml', write: data.
+ *
+ * In the example above we write the XML snippet in variable data to a file
+ * called myxml.xml in the current working directory.
  */
 ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
@@ -117,7 +136,9 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [File] append: [String]
  *
- * Appends content to a file.
+ * Appends content to a file. The file object responds to this message like it
+ * responds to the write-message, however in this case the contents of the string
+ * will be appended to the existing content inside the file.
  */
 ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
@@ -251,11 +272,194 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 	f = fopen(pathString, "r");
 	if (f == NULL) return ctr_build_number_from_float(0);
 	prev = ftell(f);
-    fseek(f, 0L, SEEK_END);
-    sz=ftell(f);
-    fseek(f,prev,SEEK_SET);
-    if (f) {
+	fseek(f, 0L, SEEK_END);
+	sz=ftell(f);
+	fseek(f,prev,SEEK_SET);
+	if (f) {
 		fclose(f);
 	}
-    return ctr_build_number_from_float( (ctr_number) sz );
+	return ctr_build_number_from_float( (ctr_number) sz );
+}
+
+/**
+ * [File] open: [string]
+ *
+ * Open a file with using the specified mode.
+ *
+ * Usage:
+ *
+ * f := File new: '/path/to/file'.
+ * f open: 'r+'. #opens file for reading and writing
+ *
+ * The example above opens the file in f for reading and writing.
+ */
+ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* pathObj = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+	char* mode;
+	FILE* handle;
+	ctr_resource* rs = malloc(sizeof(ctr_resource));
+	if (pathObj == NULL) return myself;
+	char* path;
+	CTR_2CSTR(path, pathObj);
+	CTR_2CSTR(mode, ctr_internal_cast2string(argumentList->object));
+	handle = fopen(path,mode);
+	rs->type = 1;
+	rs->ptr = handle;
+	myself->value.rvalue = rs;
+	return myself;
+}
+
+/**
+ * [File] close.
+ *
+ * Closes the file represented by the recipient.
+ *
+ * Usage:
+ *
+ * f := File new: '/path/to/file.txt'.
+ * f open: 'r+'.
+ * f close.
+ *
+ * The example above opens and closes a file.
+ */
+ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList) {
+	if (myself->value.rvalue == NULL) return myself;
+	if (myself->value.rvalue->type != 1) return myself;
+	fclose((FILE*)myself->value.rvalue->ptr);
+	myself->value.rvalue = NULL;
+	return myself;
+}
+
+/**
+ * [File] readBytes: [Number].
+ *
+ * Reads a number of bytes from the file.
+ *
+ * Usage:
+ *
+ * f := File new: '/path/to/file.txt'.
+ * f open: 'r+'.
+ * x := f readBytes: 10.
+ * f close.
+ *
+ * The example above reads 10 bytes from the file represented by f
+ * and puts them in buffer x.
+ */
+ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) {
+	int bytes;
+	char* buffer;
+	if (myself->value.rvalue == NULL) return myself;
+	if (myself->value.rvalue->type != 1) return myself;
+	bytes = ctr_internal_cast2number(argumentList->object)->value.nvalue;
+	if (bytes < 0) return ctr_build_string_from_cstring("");
+	buffer = (char*) malloc(bytes);
+	if (buffer == NULL) {
+		CtrStdError = ctr_build_string_from_cstring("Cannot allocate memory for file buffer.");
+		return ctr_build_string_from_cstring("");
+	}
+	fread(buffer, sizeof(char), (int)bytes, (FILE*)myself->value.rvalue->ptr);
+	return ctr_build_string_from_cstring(buffer);
+}
+
+/**
+ * [File] writeBytes: [String].
+ *
+ * Takes a string and writes the bytes in the string to the file
+ * object. Returns the number of bytes actually written.
+ *
+ * Usage:
+ *
+ * f := File new: '/path/to/file.txt'.
+ * f open: 'r+'.
+ * n := f writeBytes: 'Hello World'.
+ * f close.
+ *
+ * The example above writes 'Hello World' to the specified file as bytes.
+ * The number of bytes written is returned in variable n.
+ */
+ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList) {
+	int bytes, written;
+	char* buffer;
+	if (myself->value.rvalue == NULL) return myself;
+	if (myself->value.rvalue->type != 1) return myself;
+	ctr_object* string2write = ctr_internal_cast2string(argumentList->object);
+	CTR_2CSTR(buffer, string2write);
+	bytes = string2write->value.svalue->vlen;
+	written = fwrite(buffer, sizeof(char), (int)bytes, (FILE*)myself->value.rvalue->ptr);
+	return ctr_build_number_from_float((double_t) written);
+}
+
+/**
+ * [File] seek: [Number].
+ *
+ * Moves the file pointer to the specified position in the file
+ * (relative to the current position).
+ *
+ * Usage:
+ *
+ * file open: 'r', seek: 10.
+ *
+ * The example above opens a file for reading and moves the
+ * pointer to position 10 (meaning 10 bytes from the beginning of the file).
+ * The seek value may be negative.
+ */
+ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
+	int offset;
+	int error;
+	if (myself->value.rvalue == NULL) return myself;
+	if (myself->value.rvalue->type != 1) return myself;
+	offset = (long int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
+	error = fseek((FILE*)myself->value.rvalue->ptr, offset, SEEK_CUR);
+	if (error) CtrStdError = ctr_build_string_from_cstring("Seek failed.");
+	return myself;
+}
+
+/**
+ * [File] rewind.
+ *
+ * Rewinds the file. Moves the file pointer to the beginning of the file.
+ *
+ * Usage:
+ *
+ * file open: 'r'.
+ * x := file readBytes: 10. #read 10 bytes
+ * file rewind.        #rewind, set pointer to begin again
+ * y := file readBytes: 10. #re-read same 10 bytes
+ *
+ * The example above reads the same sequence of 10 bytes twice, resulting
+ * in variable x and y being equal.
+ */
+ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList) {
+	int error;
+	if (myself->value.rvalue == NULL) return myself;
+	if (myself->value.rvalue->type != 1) return myself;
+	error = fseek((FILE*)myself->value.rvalue->ptr, 0, SEEK_SET);
+	if (error) CtrStdError = ctr_build_string_from_cstring("Seek rewind failed.");
+	return myself;
+}
+
+/**
+ * [File] end.
+ *
+ * Moves the file pointer to the end of the file. Use this in combination with
+ * negative seek operations.
+ *
+ * Usage:
+ *
+ * file open: 'r'.
+ * file end.
+ * x := file seek: -10, readBytes: 10.
+ *
+ * The example above will read the last 10 bytes of the file. This is
+ * accomplished by first moving the file pointer to the end of the file,
+ * then putting it back 10 bytes (negative number), and then reading 10
+ * bytes.
+ */
+ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList) {
+	int error;
+	if (myself->value.rvalue == NULL) return myself;
+	if (myself->value.rvalue->type != 1) return myself;
+	error = fseek((FILE*)myself->value.rvalue->ptr, 0, SEEK_END);
+	if (error) CtrStdError = ctr_build_string_from_cstring("Seek end failed.");
+	return myself;
 }

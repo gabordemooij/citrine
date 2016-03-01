@@ -7,7 +7,6 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <time.h>
-
 #include "citrine.h"
 #include "siphash.h"
 
@@ -30,8 +29,8 @@ void ctr_gc_mark(ctr_object* object) {
 	}
 	item = object->properties->head;
 	while(item) {
-		ctr_object* k = item->key;
-		ctr_object* o = item->value;
+		k = item->key;
+		o = item->value;
 		o->name = k->value.svalue->value;
 		o->info.mark = 1;
 		k->info.mark = 1;
@@ -121,7 +120,20 @@ ctr_object* ctr_gc_object_count(ctr_object* myself, ctr_argument* argumentList) 
 /**
  * [Shell] call: [String]
  *
- * Performs a Shell operation.
+ * Performs a Shell operation. The Shell object uses a fluid API, so you can
+ * mix shell code with programming logic. For instance to list the contents
+ * of a directory use:
+ *
+ * Shell ls
+ *
+ * This will output the contents of the current working directly, you
+ * can also pass keyword messages like so:
+ *
+ * Shell echo: 'Hello from the Shell!'.
+ *
+ * The example above will output the specified message to the console.
+ * Every message you send will be turned into a string and dispatched to
+ * the 'call:' message.
  */
 ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* arg = ctr_internal_cast2string(argumentList->object);
@@ -134,8 +146,46 @@ ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (ctr_number) r );
 }
 
+
 /**
- * [Command] argument: [Number]
+ * @internal
+ *
+ * Shell Object uses a fluid API.
+ */
+ctr_object* ctr_shell_respond_to_with(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object*   commandObj;
+	ctr_object*   prefix;
+	ctr_object*   suffix;
+	ctr_argument* newArgumentList;
+	char* command;
+	int len;
+	prefix = ctr_internal_cast2string(argumentList->object);
+	suffix = ctr_internal_cast2string(argumentList->next->object);
+	len = prefix->value.svalue->vlen + suffix->value.svalue->vlen;
+	if (len == 0) return myself;
+	command = (char*) malloc(len); /* actually we need +1 for the space between commands, but we dont because we remove the colon : !*/
+	strncpy(command, prefix->value.svalue->value, prefix->value.svalue->vlen - 1); /* remove colon, gives room for space */
+	strncpy(command + (prefix->value.svalue->vlen - 1), " ", 1); /* space to separate commands */
+	strncpy(command + (prefix->value.svalue->vlen), suffix->value.svalue->value, suffix->value.svalue->vlen);
+	commandObj = ctr_build_string(command, len);
+	newArgumentList = CTR_CREATE_ARGUMENT();
+	newArgumentList->object = commandObj;
+	ctr_shell_call(myself, newArgumentList);
+	return myself;
+}
+
+/**
+ * @internal
+ *
+ * Shell Object uses a fluid API.
+ */
+ctr_object* ctr_shell_respond_to(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_shell_call(myself, argumentList);
+	return myself;
+}
+
+/**
+ * [Program] argument: [Number]
  *
  * Obtains an argument from the CLI invocation.
  */
@@ -147,7 +197,7 @@ ctr_object* ctr_command_argument(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [Command] argCount
+ * [Program] argCount
  *
  * Returns the number of CLI arguments passed to the script.
  */
@@ -156,7 +206,7 @@ ctr_object* ctr_command_num_of_args(ctr_object* myself, ctr_argument* argumentLi
 }
 
 /**
- * [Command] exit
+ * [Program] exit
  * 
  * Exits program immediately.
  */
@@ -165,7 +215,7 @@ ctr_object* ctr_command_exit(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Command] env: [String]
+ * [Program] env: [String]
  *
  * Returns the value of an environment variable.
  *
@@ -189,7 +239,7 @@ ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [Command] env: [Key] val: [Value]
+ * [Program] env: [Key] val: [Value]
  *
  * Sets the value of an environment variable.
  */
@@ -208,7 +258,7 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * Command askQuestion
+ * [Program] waitForInput
  *
  * Ask a question on the command-line, resumes program
  * only after pressing the enter key.
@@ -244,6 +294,16 @@ ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
+ * [Program] flush.
+ *
+ * Flushes the STDOUT output buffer.
+ */
+ctr_object* ctr_command_flush(ctr_object* myself, ctr_argument* ctr_argumentList) {
+	 fflush(stdout);
+	 return myself;
+}
+
+/**
  * [Dice] rollWithSides: [Number]
  *
  * Rolls the dice, generates a pseudo random number.
@@ -261,6 +321,16 @@ ctr_object* ctr_dice_sides(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (ctr_number) (rand() % 6));
 }
+
+/**
+ * [Dice] rawRandomNumber
+ *
+ * Generates a random number, the traditional way (like rand()).
+ */
+ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float( (ctr_number) (rand()) );
+}
+
 
 /**
  * [Clock] wait

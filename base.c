@@ -129,8 +129,8 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Variations:
  *
- * [Object] respondTo: [String] and: [String]
- * [Object] respondTo: [String] and: [String] and: [String]
+ * [Object] respondTo: [String] with: [String]
+ * [Object] respondTo: [String] with: [String] and: [String]
  *
  * Default respond-to implemention, does nothing.
  */
@@ -328,7 +328,7 @@ ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * a && b
+ * a and: b
  *
  */
 ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList) {
@@ -360,7 +360,7 @@ ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * a || b
+ * a or: b
  */
 ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
@@ -559,7 +559,7 @@ ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] inc: [Number]
+ * [Number] add: [Number]
  *
  * Increases the number ITSELF by the specified amount, this message will change the
  * value of the number object itself instead of returning a new number.
@@ -584,7 +584,7 @@ ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] dec: [number]
+ * [Number] subtract: [number]
  *
  * Decreases the number ITSELF by the specified amount, this message will change the
  * value of the number object itself instead of returning a new number.
@@ -598,7 +598,7 @@ ctr_object* ctr_number_dec(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [Number] * [Number or Block]
  *
- * Multiplies the number by the specified divider. Returns a new
+ * Multiplies the number by the specified multiplier. Returns a new
  * number object.
  */
 ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) {
@@ -753,6 +753,44 @@ ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Number] positive
+ *
+ * Returns a boolean indicating wether the number is positive.
+ * This message will return a boolean object 'True' if the recipient is
+ * positive and 'False' otherwise.
+ *
+ * Usage:
+ *
+ * hope := 0.1.
+ * ( hope positive ) ifTrue: {\ Pen write: 'Still a little hope for humanity'. }.
+ *
+ * The example above will print the message because hope is higher than 0.
+ */
+ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool( ( myself->value.nvalue > 0) );
+}
+
+/**
+ * [Number] negative
+ *
+ * Returns a boolean indicating wether the number is negative.
+ * This message will return a boolean object 'True' if the recipient is
+ * negative and 'False' otherwise. It's the eaxct opposite of the 'positive'
+ * message.
+ *
+ * Usage:
+ *
+ * hope := -1.
+ * (hope negative) ifTrue: {\ Pen write: 'No hope left'. }.
+ *
+ * The example above will print the message because the value of the variable
+ * hope is less than 0.
+ */
+ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool( ( myself->value.nvalue < 0) );
+}
+
+/**
  * [Number] max: [other]
  *
  * Returns the biggest number of the two.
@@ -840,16 +878,33 @@ ctr_object* ctr_number_to_by_do(ctr_object* myself, ctr_argument* argumentList) 
 /**
  * [Number] floor
  *
- * Returns the next highest integer number by rounding down.
+ * Gives the largest integer less than the recipient.
+ *
+ * Usage:
+ *
+ * x := 4.5
+ * y := x floor. #y will be 4
+ *
+ * The example above applies the floor function to the recipient (4.5)
+ * returning a new number object (4).
  */
 ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(floor(myself->value.nvalue));
 }
 
 /**
- * [Number] ceil
+ * [Number] ceiling
  *
- * Returns the next highest integer number by rounding up.
+ * Rounds up the recipient number and returns the next higher integer number
+ * as a result.
+ *
+ * Usage:
+ *
+ * x := 4.5.
+ * y = x ceiling. #y will be 5
+ *
+ * The example above applies the ceiling function to the recipient (4.5)
+ * returning a new number object (5).
  */
 ctr_object* ctr_number_ceil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(ceil(myself->value.nvalue));
@@ -865,25 +920,41 @@ ctr_object* ctr_number_round(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] abs
+ * [Number] absolute
  *
- * Returns the absolute value of the number.
+ * Returns the absolute (unsigned, positive) value of the number.
+ *
+ * Usage:
+ *
+ * x := -7.
+ * y := x absolute. #y will be 7
+ *
+ * The example above strips the sign off the value -7 resulting
+ * in 7.
  */
 ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(fabs(myself->value.nvalue));
 }
 
 /**
- * [Number] sqrt
+ * [Number] squareRoot
  *
- * Returns the square root of the number.
+ * Returns the square root of the recipient.
+ *
+ * Usage:
+ *
+ * x := 49.
+ * y := x squareRoot. #y will be 7
+ *
+ * The example above takes the square root of 49, resulting in the
+ * number 7.
  */
 ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(sqrt(myself->value.nvalue));
 }
 
 /**
- * [Number] exp
+ * [Number] exponent
  *
  * Returns the exponent of the number.
  */
@@ -892,7 +963,7 @@ ctr_object* ctr_number_exp(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] sin
+ * [Number] sine
  *
  * Returns the sine of the number.
  */
@@ -902,7 +973,7 @@ ctr_object* ctr_number_sin(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] cos
+ * [Number] cosine
  *
  * Returns the cosine of the number.
  */
@@ -911,7 +982,7 @@ ctr_object* ctr_number_cos(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] tan
+ * [Number] tangent
  *
  * Caculates the tangent of a number.
  */
@@ -920,16 +991,16 @@ ctr_object* ctr_number_tan(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] atan
+ * [Number] arctangent
  *
- * Caculates the atan of a number.
+ * Caculates the arctangent of a number.
  */
 ctr_object* ctr_number_atan(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(atan(myself->value.nvalue));
 }
 
 /**
- * [Number] log
+ * [Number] logarithm
  *
  * Calculates the logarithm of a number.
  */
@@ -1243,7 +1314,7 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [String] up
+ * [String] asciiUpperCase
  *
  * Returns a new uppercased version of the string.
  * Note that this is just basic ASCII case functionality, this should only
@@ -1251,19 +1322,22 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
  * DOES NOT WORK WITH UTF8 characters !
  */
 ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) {
-       char* str = myself->value.svalue->value;
-       size_t  len = myself->value.svalue->vlen;
-       char* tstr = malloc(len * sizeof(char));
-       int i=0;
-       for(i =0; i < len; i++) {
-               tstr[i] = toupper(str[i]);
-       }
-       return ctr_build_string(tstr, len);
+	ctr_object* newString = NULL;
+	char* str = myself->value.svalue->value;
+	size_t  len = myself->value.svalue->vlen;
+	char* tstr = malloc(len * sizeof(char));
+	int i=0;
+	for(i =0; i < len; i++) {
+		tstr[i] = toupper(str[i]);
+	}
+	newString = ctr_build_string(tstr, len);
+	free(tstr);
+	return newString;
 }
 
 
 /**
- * [String] low
+ * [String] asciiLowerCase
  *
  * Returns a new lowercased version of the string.
  * Note that this is just basic ASCII case functionality, this should only
@@ -1271,14 +1345,53 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
  * DOES NOT WORK WITH UTF8 characters !
  */
 ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) {
-       char* str = myself->value.svalue->value;
-       size_t len = myself->value.svalue->vlen;
-       char* tstr = malloc(len * sizeof(char));
-       int i=0;
-       for(i =0; i < len; i++) {
-               tstr[i] = tolower(str[i]);
-       }
-       return ctr_build_string(tstr, len);
+	ctr_object* newString = NULL;
+	char* str = myself->value.svalue->value;
+	size_t len = myself->value.svalue->vlen;
+	char* tstr = malloc(len * sizeof(char));
+	int i=0;
+	for(i =0; i < len; i++) {
+		tstr[i] = tolower(str[i]);
+	}
+	newString = ctr_build_string(tstr, len);
+	free(tstr);
+	return newString;
+}
+
+/**
+ * [String] asciiLowerCase1st
+ *
+ * Converts the first character of the recipient to lowercase and
+ * returns the resulting string object.
+ */
+ctr_object* ctr_string_to_lower1st(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* newString = NULL;
+	size_t len = myself->value.svalue->vlen;
+	if (len == 0) return ctr_build_string("", 0);
+	char* tstr = malloc(len * sizeof(char));
+	strncpy(tstr, myself->value.svalue->value, len);
+	tstr[0] = tolower(tstr[0]);
+	newString = ctr_build_string(tstr, len);
+	free(tstr);
+	return newString;
+}
+
+/**
+ * [String] asciiUpperCase1st
+ *
+ * Converts the first character of the recipient to uppercase and
+ * returns the resulting string object.
+ */
+ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* newString;
+	size_t len = myself->value.svalue->vlen;
+	if (len == 0) return ctr_build_string("", 0);
+	char* tstr = malloc(len * sizeof(char));
+	strncpy(tstr, myself->value.svalue->value, len);
+	tstr[0] = toupper(tstr[0]);
+	newString = ctr_build_string(tstr, len);
+	free(tstr);
+	return newString;
 }
 
 /**
@@ -1369,8 +1482,12 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
  *
  * ' hello ' trim. #hello
  *
+ * The example above will strip all white space characters from the
+ * recipient on both sides of the text. Also see: leftTrim and rightTrim
+ * for variations of this message.
  */
 ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* newString = NULL;
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	long i, begin, end, tlen;
@@ -1385,16 +1502,27 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	tlen = (end - begin);
 	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str+begin, tlen);
-	return ctr_build_string(tstr, tlen);
+	newString = ctr_build_string(tstr, tlen);
+	free(tstr);
+	return newString;
 }
 
 
 /**
- * [String] ltrim
+ * [String] leftTrim
  *
  * Removes all the whitespace at the left side of the string.
+ *
+ * Usage:
+ *
+ * message := ' hello world  '.
+ * message leftTrim.
+ *
+ * The example above will remove all the whitespace at the left of the
+ * string but leave the spaces at the right side intact.
  */
 ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* newString = NULL;
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	long i = 0, begin;
@@ -1407,15 +1535,26 @@ ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
 	tlen = (len - begin);
 	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str+begin, tlen);
-	return ctr_build_string(tstr, tlen);
+	newString = ctr_build_string(tstr, tlen);
+	free(tstr);
+	return newString;
 }
 
 /**
- * [String] rtrim
+ * [String] rightTrim
  *
  * Removes all the whitespace at the right side of the string.
+ *
+ * Usage:
+ *
+ * message := ' hello world  '.
+ * message rightTrim.
+ *
+ * The example above will remove all the whitespace at the right of the
+ * string but leave the spaces at the left side intact.
  */
 ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* newString = NULL;
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	long i = 0, end, tlen;
@@ -1427,7 +1566,9 @@ ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
 	tlen = end;
 	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str, tlen);
-	return ctr_build_string(tstr, tlen);
+	newString = ctr_build_string(tstr, tlen);
+	free(tstr);
+	return newString;
 }
 
 /**
@@ -1500,6 +1641,7 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
  */
 
 ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentList)  {
+	ctr_object* newString = NULL;
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	char* tstr;
@@ -1573,7 +1715,9 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 				break;
 		}
 	}
-	return ctr_build_string(tstr, tlen);
+	newString = ctr_build_string(tstr, tlen);
+	free(tstr);
+	return newString;
 }
 
 /**
@@ -1656,7 +1800,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
  * Usage:
  *
  * x := 0.
- * {\ ^(x < 6). } whileFalse: {\ x inc: 1. }. #increment x until it reaches 6.
+ * {\ ^(x < 6). } whileFalse: {\ x add: 1. }. #increment x until it reaches 6.
  *
  * Here we increment variable x by one until it reaches 6.
  * While the number x is lower than 6 we keep incrementing it.
@@ -1682,7 +1826,7 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
  * Usage:
  *
  * x := 0.
- * {\ ^(x > 5). } whileFalse: {\ x inc: 1. }. #increment x until it reaches 6.
+ * {\ ^(x > 5). } whileFalse: {\ x add: 1. }. #increment x until it reaches 6.
  *
  * Here we increment variable x by one until it reaches 6.
  * While the number x is not higher than 5 we keep incrementing it.

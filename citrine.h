@@ -129,16 +129,16 @@ typedef struct ctr_argument ctr_argument;
  * Root Object
  */
 struct ctr_object {
-    const char* name;
-    ctr_map* properties;
-    ctr_map* methods;
-    struct {
+	const char* name;
+	ctr_map* properties;
+	ctr_map* methods;
+	struct {
 		unsigned int type: 4;
 		unsigned int mark: 1;
 		unsigned int sticky: 1;
 	} info;
-    struct ctr_object* link;
-    union uvalue {
+	struct ctr_object* link;
+	union uvalue {
 		ctr_bool bvalue;
 		ctr_number nvalue;
 		ctr_string* svalue;
@@ -427,6 +427,8 @@ ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList)
 ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_to_by_do(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * String Interface
@@ -454,6 +456,8 @@ ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList
 ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_string_to_lower1st(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Block Interface
@@ -484,6 +488,8 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_from_to(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_array_sum(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * HashMap Interface
@@ -513,6 +519,14 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_include_ast(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList);
+
 
 /**
  * Command Object Interface
@@ -523,6 +537,7 @@ ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList)
 ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_exit(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_command_flush(ctr_object* myself, ctr_argument* ctr_argumentList);
 
 /**
  * Clock Interface
@@ -534,6 +549,8 @@ ctr_object* ctr_clock_time(ctr_object* myself, ctr_argument* argumentList);
  * Shell Interface
  */
 ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_shell_respond_to(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_shell_respond_to_with(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Garbage Collector Object Interface
@@ -554,6 +571,7 @@ int ctr_gc_object_counter;
  */
 ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_dice_sides(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Literal Constructors (internal only)

@@ -1,0 +1,34 @@
+#!/home/gabor/shed/citrine/ctr
+
+#
+# this test requires: websocketd http://websocketd.com/
+#
+#run this test like so:
+#
+#websocketd --port=8080 examples/sockets.ctr
+#and open test.html in your browser
+#you can now add click handlers with Citrine, you can make
+#an entire streaming webapp with CSS and HTML and no JavaScript.
+#JS is merely a protocol.
+
+?>
+<button data-id="knop">Click me</button><?. Pen brk. 
+
+Program flush.
+
+Application := Object new.
+Application on: 'run' do: {\
+	{\ ^True. } whileTrue: {\
+		var event := Program waitForInput.
+		listeners each: { key action |
+			(key = event) ifTrue: {\
+				action run.
+			}.
+		}.
+	}.
+}.
+
+listeners := Map new.
+listeners put: {\ Pen write: 'CLICKED!', brk. Program flush. } at: 'clicked knop'.
+
+Application run.

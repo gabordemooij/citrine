@@ -6,6 +6,6 @@ i := 0.
 s := ''.
 items each: { key color |
 	Pen write: 'color #' + i + ' is: ' + color + ' '.
-	i inc: 1.
+	i add: 1.
 }.
 Pen write: i + ' colors!'.
