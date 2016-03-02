@@ -1,6 +1,6 @@
 #Test continue message
 Pen write: 'Continue for-loop, No - before 6 and up.', brk.
-1 to: 10 by: 1 do: { i |
+1 to: 10 step: 1 do: { i |
 	Pen write: i, brk.
 	(i > 4) continue.
 	Pen write: '-'.

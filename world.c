@@ -547,7 +547,7 @@ void ctr_initialize_world() {
 
 	/* Number */
 	CtrStdNumber = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string("to:by:do:", 9), &ctr_number_to_by_do);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string("to:step:do:", 11), &ctr_number_to_step_do);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("+", 1), &ctr_number_add);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("add:",4), &ctr_number_inc);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("-",1), &ctr_number_minus);

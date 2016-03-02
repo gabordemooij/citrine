@@ -840,7 +840,7 @@ ctr_object* ctr_number_factorial(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [Number] to: [number] by: [step] do: [block]
+ * [Number] to: [number] step: [step] do: [block]
  *
  * Runs the specified block for each step it takes to go from
  * the start value to the target value using the specified step size.
@@ -848,9 +848,9 @@ ctr_object* ctr_number_factorial(ctr_object* myself, ctr_argument* argumentList)
  *
  * Usage:
  *
- * 1 to: 5 by: 1 do: { step | Pen write: 'this is step #'+step. }.
+ * 1 to: 5 step: 1 do: { step | Pen write: 'this is step #'+step. }.
  */
-ctr_object* ctr_number_to_by_do(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_number_to_step_do(ctr_object* myself, ctr_argument* argumentList) {
 	double startValue = myself->value.nvalue;
 	double endValue   = ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	double incValue   = ctr_internal_cast2number(argumentList->next->object)->value.nvalue;

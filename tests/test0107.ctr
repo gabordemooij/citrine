@@ -1,7 +1,7 @@
 #Test loop breaking
 Pen write: 'Break for-loop, 0-4.', brk.
 #0-4
-0 to: 10 by: 1 do: { i |
+0 to: 10 step: 1 do: { i |
 	Pen write: 'iteration #' + i, brk.
 	(i = 4) break.
 }.
