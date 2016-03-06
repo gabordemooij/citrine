@@ -8,4 +8,3 @@ z := Array new.
 Pen write: (z at: 0).
 Broom sweep.
 Pen write: (z at: 0).
-Pen write: (Broom dust).

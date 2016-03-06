@@ -31,7 +31,6 @@ void ctr_gc_mark(ctr_object* object) {
 	while(item) {
 		k = item->key;
 		o = item->value;
-		o->name = k->value.svalue->value;
 		o->info.mark = 1;
 		k->info.mark = 1;
 		ctr_gc_mark(o);
@@ -41,7 +40,6 @@ void ctr_gc_mark(ctr_object* object) {
 	while(item) {
 		o = item->value;
 		k = item->key;
-		o->name = k->value.svalue->value;
 		o->info.mark = 1;
 		k->info.mark = 1;
 		ctr_gc_mark(o);
@@ -56,16 +54,24 @@ void ctr_gc_mark(ctr_object* object) {
 void ctr_gc_sweep() {
 	ctr_object* previousObject = NULL;
 	ctr_object* currentObject = ctr_first_object;
+	ctr_object* nextObject = NULL;
 	while(currentObject) {
 		ctr_gc_object_counter ++;
 		if (currentObject->info.mark==0 && currentObject->info.sticky==0){
 			ctr_gc_dust_counter ++;
 			if (previousObject) {
-				previousObject->gnext = currentObject->gnext;
+				if (currentObject->gnext) {
+					previousObject->gnext = currentObject->gnext;
+				} else {
+					previousObject->gnext = NULL;
+				}
 			}
+			nextObject = currentObject->gnext;
 			free(currentObject);
-			currentObject = previousObject->gnext;
+			currentObject = nextObject;
 		} else {
+			ctr_gc_kept_counter ++;
+			if (currentObject->info.sticky==1) ctr_gc_sticky_counter++;
 			if (currentObject->info.mark == 1) {
 				currentObject->info.mark = 0;
 			}
@@ -87,6 +93,8 @@ ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 	int oldcid;
 	ctr_gc_dust_counter = 0;
 	ctr_gc_object_counter = 0;
+	ctr_gc_kept_counter = 0;
+	ctr_gc_sticky_counter = 0;
 	context = ctr_contexts[ctr_context_id];
 	oldcid = ctr_context_id;
 	while(ctr_context_id > -1) {
@@ -109,13 +117,35 @@ ctr_object* ctr_gc_dust(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * GCCount
+ * [Broom] objectCount
  *
- * Returns the number of objects marked.
+ * Returns the total number of objects considered in the latest collect
+ * cycle.
  */
 ctr_object* ctr_gc_object_count(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float((ctr_number) ctr_gc_object_counter);
 }
+
+/**
+ * [Broom] keptCount
+ *
+ * Returns the total number of objects that have been marked during the
+ * latest cycle and have therefore been allowed to stay in memory.
+ */
+ctr_object* ctr_gc_kept_count(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float((ctr_number) ctr_gc_kept_counter);
+}
+
+/**
+ * [Broom] stickyCount
+ *
+ * Returns the total number of objects that have a sticky flag.
+ * These objects will never be removed.
+ */
+ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float((ctr_number) ctr_gc_sticky_counter);
+}
+
 
 /**
  * [Shell] call: [String]

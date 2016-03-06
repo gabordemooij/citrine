@@ -282,7 +282,7 @@ ctr_object* ctr_internal_create_object(int type) {
 	o->properties->head = NULL;
 	o->methods->head = NULL;
 	o->info.type = type;
-	o->info.sticky = 1;
+	o->info.sticky = 0;
 	o->info.mark = 0;
 	if (type==CTR_OBJECT_TYPE_OTBOOL) o->value.bvalue = 0;
 	if (type==CTR_OBJECT_TYPE_OTNUMBER) o->value.nvalue = 0;
@@ -399,6 +399,7 @@ void ctr_open_context() {
 	ctr_object* context;
 	ctr_context_id++;
 	context = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	context->info.sticky = 1;
 	ctr_contexts[ctr_context_id] = context;
 }
 
@@ -410,6 +411,7 @@ void ctr_open_context() {
  * Closes a context.
  */
 void ctr_close_context() {
+	ctr_contexts[ctr_context_id]->info.sticky = 0;
 	if (ctr_context_id == 0) return;
 	ctr_context_id--;
 }
@@ -501,6 +503,7 @@ void ctr_initialize_world() {
 	}
 	ctr_first_object = NULL;
 	CtrStdWorld = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	CtrStdWorld->info.sticky = 1;
 	ctr_contexts[0] = CtrStdWorld;
 
 	/* Object */
@@ -517,12 +520,14 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("myself", 6), &ctr_object_myself);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Object", 6), CtrStdObject, 0);
 	CtrStdObject->link = NULL;
+	CtrStdObject->info.sticky = 1;
 
 	/* Nil */
 	CtrStdNil = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNIL);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Nil", 3), CtrStdNil, 0);
 	ctr_internal_create_func(CtrStdNil, ctr_build_string("isNil", 5), &ctr_nil_is_nil);
 	CtrStdNil->link = CtrStdObject;
+	CtrStdNil->info.sticky = 1;
 	
 	/* Boolean */
 	CtrStdBool = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
@@ -544,6 +549,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("either:or:", 10), &ctr_bool_either_or);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Boolean", 7), CtrStdBool, 0);
 	CtrStdBool->link = CtrStdObject;
+	CtrStdBool->info.sticky = 1;
 
 	/* Number */
 	CtrStdNumber = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
@@ -588,6 +594,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string("between:and:",12),&ctr_number_between);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Number", 6), CtrStdNumber, 0);
 	CtrStdNumber->link = CtrStdObject;
+	CtrStdNumber->info.sticky = 1;
 
 	/* String */
 	CtrStdString = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
@@ -618,6 +625,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string("toBoolean", 9), &ctr_string_to_boolean);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("String", 6), CtrStdString, 0);
 	CtrStdString->link = CtrStdObject;
+	CtrStdString->info.sticky = 1;
 
 	/* Block */
 	CtrStdBlock = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBLOCK);
@@ -632,6 +640,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string("whileFalse:", 11), &ctr_block_while_false);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("CodeBlock", 9), CtrStdBlock, 0);
 	CtrStdBlock->link = CtrStdObject;
+	CtrStdBlock->info.sticky = 1;
 
 	/* Array */
 	CtrStdArray = ctr_array_new(CtrStdObject, NULL);
@@ -656,6 +665,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("product", 7), &ctr_array_product);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Array", 5), CtrStdArray, 0);
 	CtrStdArray->link = CtrStdObject;
+	CtrStdArray->info.sticky = 1;
 
 	/* Map */
 	CtrStdMap = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -668,6 +678,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdMap, ctr_build_string("map:", 4), &ctr_map_each);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Map", 3), CtrStdMap, 0);
 	CtrStdMap->link = CtrStdObject;
+	CtrStdMap->info.sticky = 1;
 
 	/* Console */
 	CtrStdConsole = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -677,7 +688,8 @@ void ctr_initialize_world() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Pen", 3), CtrStdConsole, 0);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("?", 1), CtrStdConsole, 0);
 	CtrStdConsole->link = CtrStdObject;
-	
+	CtrStdConsole->info.sticky = 1;
+
 	/* File */
 	CtrStdFile = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	CtrStdFile->value.rvalue = NULL;
@@ -700,6 +712,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("end", 3), &ctr_file_seek_end);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("File", 4), CtrStdFile, 0);
 	CtrStdFile->link = CtrStdObject;
+	CtrStdFile->info.sticky = 1;
 
 	/* Command */
 	CtrStdCommand = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -712,6 +725,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string("flush", 5), &ctr_command_flush);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Program", 7), CtrStdCommand, 0);
 	CtrStdCommand->link = CtrStdObject;
+	CtrStdCommand->info.sticky = 1;
 
 	/* Clock */
 	CtrStdClock = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -719,6 +733,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdClock, ctr_build_string("time", 4), &ctr_clock_time);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Clock", 5), CtrStdClock, 0);
 	CtrStdClock->link = CtrStdObject;
+	CtrStdFile->info.sticky = 1;
 
 	/* Dice */
 	CtrStdDice = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -727,6 +742,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdDice, ctr_build_string("rawRandomNumber", 15), &ctr_dice_rand);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Dice", 4), CtrStdDice, 0);
 	CtrStdDice->link = CtrStdObject;
+	CtrStdDice->info.sticky = 1;
 
 	/* Shell */
 	CtrStdShell = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -735,18 +751,24 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdShell, ctr_build_string("call:", 5), &ctr_shell_call);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Shell", 5), CtrStdShell, 0);
 	CtrStdShell->link = CtrStdObject;
+	CtrStdShell->info.sticky = 1;
 
 	/* Broom */
 	CtrStdGC = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("sweep", 5), &ctr_gc_collect);
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("dust", 4), &ctr_gc_dust);
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("objectCount", 11), &ctr_gc_object_count);
+	ctr_internal_create_func(CtrStdGC, ctr_build_string("keptCount", 9), &ctr_gc_kept_count);
+	ctr_internal_create_func(CtrStdGC, ctr_build_string("stickyCount", 11), &ctr_gc_sticky_count);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Broom", 5), CtrStdGC, 0);
 	CtrStdGC->link = CtrStdObject;
-	
+	CtrStdGC->info.sticky = 1;
+
 	/* Other objects */
 	CtrStdBreak = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	CtrStdContinue = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	CtrStdBreak->info.sticky = 1;
+	CtrStdContinue->info.sticky = 1;
 }
 
 /**
@@ -765,20 +787,23 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	ctr_argument* mesgArgument;
 	ctr_object* result;
 	ctr_object* (*funct)(ctr_object* receiverObject, ctr_argument* argumentList);
+	ctr_object* msg = NULL;
 	int argCount;
 	if (CtrStdError != NULL) return NULL; /* Error mode, ignore subsequent messages until resolved. */
 	methodObject = NULL;
 	searchObject = receiverObject;
 	if (vlen > 1 && message[0] == '`') {
-		me = ctr_internal_object_find_property(ctr_contexts[ctr_context_id], ctr_build_string_from_cstring("me\0"), 0);
+		me = ctr_internal_object_find_property(ctr_contexts[ctr_context_id], ctr_build_string_from_cstring("me"), 0);
 		if (searchObject == me) {
 			toParent = 1;
 			message = message + 1;
 			vlen--;
 		}
 	}
+	msg = ctr_build_string(message, vlen);
+	msg->info.sticky = 1; /* prevent message from being swept, no need to free(), GC will do */
 	while(!methodObject) {
-		methodObject = ctr_internal_object_find_property(searchObject, ctr_build_string(message, vlen), 1);
+		methodObject = ctr_internal_object_find_property(searchObject, msg, 1);
 		if (methodObject && toParent) { toParent = 0; methodObject = NULL; }
 		if (methodObject) break;
 		if (!searchObject->link) break;
@@ -808,7 +833,8 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	}
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTBLOCK) {
 		result = ctr_block_run(methodObject, argumentList, receiverObject);
-	}	
+	}
+	if (msg) msg->info.sticky = 0;
 	return result;
 }
 

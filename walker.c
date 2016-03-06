@@ -45,12 +45,15 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 	char* message;
 	ctr_tlistitem* argumentList;
 	ctr_object* r;
+	ctr_object* recipientName = NULL;
 	switch (receiverNode->type) {
 		case CTR_AST_NODE_REFERENCE:
+			recipientName = ctr_build_string(receiverNode->value, receiverNode->vlen);
+			recipientName->info.sticky = 1;
 			if (receiverNode->modifier == 1) {
-				r = ctr_find_in_my(ctr_build_string(receiverNode->value, receiverNode->vlen));
+				r = ctr_find_in_my(recipientName);
 			} else {
-				r = ctr_find(ctr_build_string(receiverNode->value, receiverNode->vlen));
+				r = ctr_find(recipientName);
 			}
 			if (!r) {
 				exit(1);
@@ -109,6 +112,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		result = ctr_send_message(r, message, l, a);
 		r = result;
 	}
+	if (recipientName) recipientName->info.sticky = 0;
 	return result;
 }	
 

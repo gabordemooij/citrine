@@ -558,12 +558,18 @@ ctr_object* ctr_shell_respond_to_with(ctr_object* myself, ctr_argument* argument
 ctr_object* ctr_gc_collect(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_dust(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_object_count(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_gc_kept_count(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList);
+
 
 /**
  * Global Garbage Collector variables
  */
 int ctr_gc_dust_counter;
 int ctr_gc_object_counter;
+int ctr_gc_kept_counter;
+int ctr_gc_sticky_counter;
+int ctr_gc_recycled_counter;
 
 
 /**

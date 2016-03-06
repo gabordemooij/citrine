@@ -1,16 +1,13 @@
+#GC should not destroy blocks that have a reference
 Pen write: 'hi!'.
 a := 2.
 x := 2.
-{\ var c := 3. Pen write: 'x'. var t := 1. } run.
+{\ var c := 3. Pen write: 'x'. var t := 1.  Broom sweep. } run.
 Broom sweep.
-Pen write: 'dust = ' + Broom dust.
-#Pen write: 'objects = ' + Broom objectCount.
 q := 2.
 a := 22.
 t := {\ var d := 3. var z := 'hello'. Pen write: z.}.
 t run.
 Broom sweep.
-Pen write: 'dust = ' + Broom dust.
-#Pen write: 'objects = ' + Broom objectCount.
 Pen write: ' a = ' + a + ' and q = ' + q + ' and x = ' + x.
 t run.

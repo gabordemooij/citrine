@@ -1331,7 +1331,6 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
 		tstr[i] = toupper(str[i]);
 	}
 	newString = ctr_build_string(tstr, len);
-	free(tstr);
 	return newString;
 }
 
@@ -1354,7 +1353,6 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
 		tstr[i] = tolower(str[i]);
 	}
 	newString = ctr_build_string(tstr, len);
-	free(tstr);
 	return newString;
 }
 
@@ -1372,7 +1370,6 @@ ctr_object* ctr_string_to_lower1st(ctr_object* myself, ctr_argument* argumentLis
 	strncpy(tstr, myself->value.svalue->value, len);
 	tstr[0] = tolower(tstr[0]);
 	newString = ctr_build_string(tstr, len);
-	free(tstr);
 	return newString;
 }
 
@@ -1390,7 +1387,6 @@ ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentLis
 	strncpy(tstr, myself->value.svalue->value, len);
 	tstr[0] = toupper(tstr[0]);
 	newString = ctr_build_string(tstr, len);
-	free(tstr);
 	return newString;
 }
 
@@ -1503,7 +1499,6 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str+begin, tlen);
 	newString = ctr_build_string(tstr, tlen);
-	free(tstr);
 	return newString;
 }
 
@@ -1536,7 +1531,6 @@ ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
 	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str+begin, tlen);
 	newString = ctr_build_string(tstr, tlen);
-	free(tstr);
 	return newString;
 }
 
@@ -1567,7 +1561,6 @@ ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
 	tstr = malloc(tlen * sizeof(char));
 	memcpy(tstr, str, tlen);
 	newString = ctr_build_string(tstr, tlen);
-	free(tstr);
 	return newString;
 }
 
@@ -1716,7 +1709,6 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 		}
 	}
 	newString = ctr_build_string(tstr, tlen);
-	free(tstr);
 	return newString;
 }
 
