@@ -12,7 +12,7 @@ Number on: 'bottles' do: {\
 	^phrase.
 }.
 
-99 to: 0 by: -1 do: { i |
+99 to: 0 step: -1 do: { i |
 	Pen write: 
 		i bottles +
 		' on the wall, ' + i bottles + '.\n' +

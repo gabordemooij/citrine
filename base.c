@@ -252,7 +252,7 @@ ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_object* codeBlock = argumentList->object;
 		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = myself;
-		return ctr_block_run(codeBlock, arguments, codeBlock);
+		return ctr_block_run(codeBlock, arguments, NULL);
 	}
 	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
 	return myself;
@@ -273,7 +273,7 @@ ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_object* codeBlock = argumentList->object;
 		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = myself;
-		return ctr_block_run(codeBlock, arguments, codeBlock);
+		return ctr_block_run(codeBlock, arguments, NULL);
 	}
 	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
 	return myself;
@@ -637,7 +637,7 @@ ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
 		indexNumber = ctr_build_number_from_float((ctr_number) i);
 		arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = indexNumber;
-		ctr_block_run(block, arguments, block);
+		ctr_block_run(block, arguments, NULL);
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
 		if (CtrStdError) break;
 	}
@@ -867,7 +867,7 @@ ctr_object* ctr_number_to_step_do(ctr_object* myself, ctr_argument* argumentList
 	while(((forward && curValue <= endValue) || (!forward && curValue >= endValue)) && !CtrStdError) {
 		arguments = CTR_CREATE_ARGUMENT();
 		arguments->object = ctr_build_number_from_float(curValue);
-		ctr_block_run(codeBlock, arguments, codeBlock);
+		ctr_block_run(codeBlock, arguments, NULL);
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue and go on */
 		curValue += incValue;
 	}
@@ -1739,6 +1739,8 @@ ctr_object* ctr_build_block(ctr_tnode* node) {
  * [Block] applyTo: [object]
  *
  * Runs a block of code using the specified object as a parameter.
+ * If you run a block using the messages 'run' or 'applyTo:', me/my will
+ * refer to the block itself instead of the containing object.
  */
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my) {
 	ctr_object* result;
@@ -1764,10 +1766,12 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 			parameter = parameterList->node;
 		}
 	}
-	ctr_assign_value_to_local(ctr_build_string("me",2), my);
+	if (my) ctr_assign_value_to_local(ctr_build_string("me",2), my); /* me should always point to object, otherwise you have to store me in self and cant use in if */
 	ctr_assign_value_to_local(ctr_build_string("thisBlock",9), myself); /* otherwise running block may get gc'ed. */
 	result = ctr_cwlk_run(codeBlockPart2);
-	if (result == NULL) result = my;
+	if (result == NULL) {
+		if (my) result = my; else result = myself;
+	}
 	ctr_close_context();
 	if (CtrStdError != NULL && CtrStdError != CtrStdBreak && CtrStdError != CtrStdContinue) {
 		ctr_object* catchBlock = malloc(sizeof(ctr_object));
@@ -1800,9 +1804,9 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
  */
 ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList) {
 	while (1 && !CtrStdError) {
-		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, myself));
+		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, NULL));
 		if (result->value.bvalue == 0 || CtrStdError) break;
-		ctr_block_run(argumentList->object, argumentList, argumentList->object);
+		ctr_block_run(argumentList->object, argumentList, NULL);
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
 	}
 	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
@@ -1826,9 +1830,9 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
  */
 ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList) {
 	while (1 && !CtrStdError) {
-		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, myself));
+		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, NULL));
 		if (result->value.bvalue == 1 || CtrStdError) break;
-		ctr_block_run(argumentList->object, argumentList, argumentList->object);
+		ctr_block_run(argumentList->object, argumentList, NULL);
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
 	}
 	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
@@ -1852,7 +1856,7 @@ ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList
  */
 ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
-	result = ctr_block_run(myself, argumentList, myself);
+	result = ctr_block_run(myself, argumentList, myself); /* here me/my refers to block itself not object - this allows closures. */
 	if (CtrStdError == CtrStdBreak || CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume break */
 	return result;
 }

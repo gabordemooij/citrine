@@ -1,6 +1,6 @@
 # Fizz Buzz
 
-1 to: 100 by: 1 do: { i |
+1 to: 100 step: 1 do: { i |
 	var f := 'Fizz'.
 	var b := 'Buzz'.
 

@@ -115,6 +115,7 @@ ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Iterates over the array. Passing each element as a key-value pair to the
  * specified block.
+ * Note that within an each/map block, 'me' and 'my' refer to the collection.
  * 
  * Usage:
  *
@@ -430,7 +431,7 @@ int ctr_sort_cmp(const void * a, const void * b) {
 	arg1->next = arg2;
 	arg1->object = *((ctr_object**) a);
 	arg2->object = *((ctr_object**) b);
-	result = ctr_block_run(temp_sorter, arg1, temp_sorter);
+	result = ctr_block_run(temp_sorter, arg1, NULL);
 	numResult = ctr_internal_cast2number(result);
 	return (int) numResult->value.nvalue;
 }
@@ -553,6 +554,7 @@ ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList) {
  * [Map] each: [Block]
  *
  * Iterates over the map, passing key-value pairs to the specified block.
+ * Note that within an each/map block, 'me' and 'my' refer to the collection.
  */
 ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
