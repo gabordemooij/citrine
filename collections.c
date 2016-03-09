@@ -115,12 +115,14 @@ ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Iterates over the array. Passing each element as a key-value pair to the
  * specified block.
- * Note that within an each/map block, 'me' and 'my' refer to the collection.
+ * The map message will pass the following arguments to the block, the key,
+ * the value and a reference to the array itself. The last argument might seem
+ * redundant but allows for a more functional programming style.
  * 
  * Usage:
  *
  * files map: showName.
- * files map: { key filename | Pen write: filename, brk. }.
+ * files map: { key filename files | Pen write: filename, brk. }.
  */
 ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
@@ -132,10 +134,13 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 	for(i = 0; i < myself->value.avalue->head; i++) {
 		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
 		ctr_argument* argument2 = CTR_CREATE_ARGUMENT();
+		ctr_argument* argument3 = CTR_CREATE_ARGUMENT();
 		arguments->object = ctr_build_number_from_float((double) i);
 		argument2->object = *(myself->value.avalue->elements + i);
+		argument3->object = myself;
 		arguments->next = argument2;
-		ctr_block_run(block, arguments, myself);
+		argument2->next = argument3;
+		ctr_block_run(block, arguments, NULL);
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL;
 		if (CtrStdError) break;
 	}
@@ -567,10 +572,13 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	while(m && !CtrStdError) {
 		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
 		ctr_argument* argument2 = CTR_CREATE_ARGUMENT();
+		ctr_argument* argument3 = CTR_CREATE_ARGUMENT();
 		arguments->object = m->key;
 		argument2->object = m->value;
+		argument3->object = myself;
 		arguments->next = argument2;
-		ctr_block_run(block, arguments, myself);
+		argument2->next = argument3;
+		ctr_block_run(block, arguments, NULL);
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL;
 		m = m->next;
 	}
