@@ -59,6 +59,32 @@ ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Array] min
+ *
+ * Returns the minimum value from an array.
+ *
+ * Usage:
+ *
+ * a := Array <- 8 ; 4 ; 2 ; 16.
+ * m := a min. #2
+ *
+ */
+ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList) {
+	double min = 0;
+	double v = 0;
+	ctr_object* el;
+	size_t i = 0;
+	for(i = 0; i < myself->value.avalue->head; i++) {
+		el = *(myself->value.avalue->elements + i);
+		v = ctr_internal_cast2number(el)->value.nvalue;
+		if (i == 0 || v < min) {
+			min = v;
+		}
+	}
+	return ctr_build_number_from_float(min);
+}
+
+/**
  * [Array] sum
  *
  * Takes the sum of an array. This message will calculate the
