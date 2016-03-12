@@ -1,0 +1,39 @@
+#Test GC: a variable causes extra garbage - expected TRUE,0
+
+kept1   := Broom keptCount.
+sticky1 := Broom stickyCount.
+dust1   := Broom dust.
+
+kept2   := Broom keptCount.
+sticky2 := Broom stickyCount.
+dust2   := Broom dust.
+
+Broom sweep.
+
+#initialize
+
+kept1   := Broom keptCount.
+sticky1 := Broom stickyCount.
+dust1   := Broom dust.
+
+kept2   := Broom keptCount.
+sticky2 := Broom stickyCount.
+dust2   := Broom dust.
+
+#test case
+#this WILL cause a couple of objects of garbage
+
+a := 'dust'.
+
+#end of test case
+
+Broom sweep.
+
+#now nothing should remain...
+
+kept2   := Broom keptCount.
+sticky2 := Broom stickyCount.
+dust2   := Broom dust.
+
+Pen write: (kept2 > kept1), brk. #should be TRUE
+Pen write: (sticky2 - sticky1), brk. #should be 0, no difference
