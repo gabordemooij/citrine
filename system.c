@@ -55,6 +55,9 @@ void ctr_gc_sweep() {
 	ctr_object* previousObject = NULL;
 	ctr_object* currentObject = ctr_first_object;
 	ctr_object* nextObject = NULL;
+	ctr_map*     map = NULL;
+	ctr_mapitem* mapItem = NULL;
+	ctr_mapitem* tmp = NULL;
 	while(currentObject) {
 		ctr_gc_object_counter ++;
 		if (currentObject->info.mark==0 && currentObject->info.sticky==0){
@@ -67,6 +70,40 @@ void ctr_gc_sweep() {
 				}
 			}
 			nextObject = currentObject->gnext;
+			if (currentObject->methods->head) {
+				mapItem = currentObject->methods->head;
+				tmp = mapItem;
+				while(mapItem = mapItem->next) {
+					free(tmp);
+					tmp = mapItem;
+				}
+				free(mapItem);
+			}
+			if (currentObject->properties->head) {
+				mapItem = currentObject->properties->head;
+				tmp = mapItem;
+				while(mapItem = mapItem->next) {
+					free(tmp);
+					tmp = mapItem;
+				}
+				free(mapItem);
+			}
+			free(currentObject->methods);
+			free(currentObject->properties);
+			switch (currentObject->info.type) {
+				case CTR_OBJECT_TYPE_OTSTRING:
+					if (currentObject->value.svalue != NULL) {
+						if (currentObject->value.svalue->vlen > 0) free(currentObject->value.svalue->value);
+						free(currentObject->value.svalue);
+					}
+				break;
+				case CTR_OBJECT_TYPE_OTARRAY:
+					free(currentObject->value.avalue);
+				break;
+				case CTR_OBJECT_TYPE_OTEX:
+					if (currentObject->value.rvalue != NULL) free(currentObject->value.rvalue);
+				break;
+			}
 			free(currentObject);
 			currentObject = nextObject;
 		} else {

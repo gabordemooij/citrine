@@ -851,36 +851,27 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 	ctr_object* object = NULL;
 	if (CtrStdError) return CtrStdNil;
 	key->info.sticky = 0;
-	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC || o->info.type == CTR_OBJECT_TYPE_OTARRAY || o->info.type == CTR_OBJECT_TYPE_OTNIL) {
-		ctr_set(key, o);
-	} else {
-		object = ctr_internal_create_object(o->info.type);
-		object->properties = o->properties;
-		object->methods = o->methods;
-		object->link = o->link;
-		object->info.sticky = 0;
-		ctr_set(key, object);
-	}
-	/* depending on type, copy specific value */
-	switch (o->info.type) {
+	switch(o->info.type){
 		case CTR_OBJECT_TYPE_OTBOOL:
-			object->value.bvalue = o->value.bvalue;
+			object = ctr_build_bool(o->value.bvalue);
 			break;
 		case CTR_OBJECT_TYPE_OTNUMBER:
-			object->value.nvalue = o->value.nvalue;
+			object = ctr_build_number_from_float(o->value.nvalue);
 			break;
 		case CTR_OBJECT_TYPE_OTSTRING:
-			object->value.svalue = malloc(sizeof(ctr_string));
-			object->value.svalue->value = malloc(sizeof(char)*o->value.svalue->vlen);
-			memcpy(object->value.svalue->value, o->value.svalue->value,o->value.svalue->vlen);
-			object->value.svalue->vlen = o->value.svalue->vlen;
+			object = ctr_build_string(o->value.svalue->value, o->value.svalue->vlen);
 			break;
+		case CTR_OBJECT_TYPE_OTNIL:
+		case CTR_OBJECT_TYPE_OTNATFUNC:
+		case CTR_OBJECT_TYPE_OTOBJECT:
+		case CTR_OBJECT_TYPE_OTEX:
+		case CTR_OBJECT_TYPE_OTMISC:
+		case CTR_OBJECT_TYPE_OTARRAY:
 		case CTR_OBJECT_TYPE_OTBLOCK:
-			object->value.block = o->value.block;
-			break;
-		default:
+			object = o;
 			break;
 	}
+	ctr_set(key, object);
 	return object;
 }
 
@@ -897,37 +888,27 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 	ctr_object* my = ctr_find(ctr_build_string("me", 2));
 	if (CtrStdError) return CtrStdNil;
 	key->info.sticky = 0;
-	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC || o->info.type == CTR_OBJECT_TYPE_OTARRAY || o->info.type == CTR_OBJECT_TYPE_OTNIL) {
-		ctr_internal_object_set_property(my, key, o, 0);
-	} else {
-		object = ctr_internal_create_object(o->info.type);
-		object->properties = o->properties;
-		object->methods = o->methods;
-		object->link = o->link;
-		object->info.sticky = 0;
-		ctr_internal_object_set_property(my, key, object, 0);
-	}
-	/* depending on type, copy specific value */
-	switch (o->info.type) {
+	switch(o->info.type){
 		case CTR_OBJECT_TYPE_OTBOOL:
-			object->value.bvalue = o->value.bvalue;
+			object = ctr_build_bool(o->value.bvalue);
 			break;
 		case CTR_OBJECT_TYPE_OTNUMBER:
-			object->value.nvalue = o->value.nvalue;
+			object = ctr_build_number_from_float(o->value.nvalue);
 			break;
 		case CTR_OBJECT_TYPE_OTSTRING:
-			object->value.svalue = malloc(sizeof(ctr_string));
-			object->value.svalue->value = malloc(sizeof(char)*o->value.svalue->vlen);
-			memcpy(object->value.svalue->value, o->value.svalue->value,o->value.svalue->vlen);
-			object->value.svalue->vlen = o->value.svalue->vlen;
+			object = ctr_build_string(o->value.svalue->value, o->value.svalue->vlen);
 			break;
+		case CTR_OBJECT_TYPE_OTNIL:
+		case CTR_OBJECT_TYPE_OTNATFUNC:
+		case CTR_OBJECT_TYPE_OTOBJECT:
+		case CTR_OBJECT_TYPE_OTEX:
+		case CTR_OBJECT_TYPE_OTMISC:
+		case CTR_OBJECT_TYPE_OTARRAY:
 		case CTR_OBJECT_TYPE_OTBLOCK:
-			object->value.block = o->value.block;
+			object = o;
 			break;
-		default:
-			break;
-
 	}
+	ctr_internal_object_set_property(my, key, object, 0);
 	return object;
 }
 
@@ -944,35 +925,26 @@ ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* o) {
 	if (CtrStdError) return CtrStdNil;
 	context = ctr_contexts[ctr_context_id];
 	key->info.sticky = 0;
-	if (o->info.type == CTR_OBJECT_TYPE_OTOBJECT || o->info.type == CTR_OBJECT_TYPE_OTMISC || o->info.type == CTR_OBJECT_TYPE_OTARRAY || o->info.type == CTR_OBJECT_TYPE_OTNIL) {
-		ctr_internal_object_set_property(context, key, o, 0);
-	} else {
-		object = ctr_internal_create_object(o->info.type);
-		object->properties = o->properties;
-		object->methods = o->methods;
-		object->link = o->link;
-		object->info.sticky = 0;
-		ctr_internal_object_set_property(context, key, object, 0);
-	}
-	/* depending on type, copy specific value */
-	switch (o->info.type) {
+	switch(o->info.type){
 		case CTR_OBJECT_TYPE_OTBOOL:
-			object->value.bvalue = o->value.bvalue;
+			object = ctr_build_bool(o->value.bvalue);
 			break;
 		case CTR_OBJECT_TYPE_OTNUMBER:
-			object->value.nvalue = o->value.nvalue;
+			object = ctr_build_number_from_float(o->value.nvalue);
 			break;
 		case CTR_OBJECT_TYPE_OTSTRING:
-			object->value.svalue = malloc(sizeof(ctr_string));
-			object->value.svalue->value = malloc(sizeof(char)*o->value.svalue->vlen);
-			memcpy(object->value.svalue->value, o->value.svalue->value,o->value.svalue->vlen);
-			object->value.svalue->vlen = o->value.svalue->vlen;
+			object = ctr_build_string(o->value.svalue->value, o->value.svalue->vlen);
 			break;
+		case CTR_OBJECT_TYPE_OTNIL:
+		case CTR_OBJECT_TYPE_OTNATFUNC:
+		case CTR_OBJECT_TYPE_OTOBJECT:
+		case CTR_OBJECT_TYPE_OTEX:
+		case CTR_OBJECT_TYPE_OTMISC:
+		case CTR_OBJECT_TYPE_OTARRAY:
 		case CTR_OBJECT_TYPE_OTBLOCK:
-			object->value.block = o->value.block;
-			break;
-		default:
+			object = o;
 			break;
 	}
+	ctr_internal_object_set_property(context, key, object, 0);
 	return object;
 }
