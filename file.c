@@ -198,12 +198,13 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size vlen;
 	char* pathString;
 	char* prg;
+	uint64_t program_size = 0;
 	if (path == NULL) return myself;
 	vlen = path->value.svalue->vlen;
 	pathString = malloc(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
-	prg = ctr_internal_readf(pathString);
+	prg = ctr_internal_readf(pathString, &program_size);
 	free(pathString);
 	parsedCode = ctr_dparse_parse(prg);
 	ctr_cwlk_run(parsedCode);

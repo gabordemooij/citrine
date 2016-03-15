@@ -19,11 +19,12 @@
  *
  * Reads in an entire file.
  */
-char* ctr_internal_readf(char* file_name) {
+char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
    char* prg;
    char ch;
    int prev;
-   int sz;
+   uint64_t size;
+   uint64_t real_size;
    FILE* fp;
    fp = fopen(file_name,"r");
    if( fp == NULL )
@@ -33,12 +34,14 @@ char* ctr_internal_readf(char* file_name) {
    }
    prev = ftell(fp);
    fseek(fp,0L,SEEK_END);
-   sz = ftell(fp);
+   size = ftell(fp);
    fseek(fp,prev,SEEK_SET);
-   prg = malloc((sz+4)*sizeof(char)); /* add 4 bytes, 3 for optional closing sequence verbatim mode and one lucky byte! */
+   real_size = (size+4)*sizeof(char);
+   prg = CTR_STAT_MALLOC(real_size); /* add 4 bytes, 3 for optional closing sequence verbatim mode and one lucky byte! */
    ctr_program_length=0;
    while( ( ch = fgetc(fp) ) != EOF ) prg[ctr_program_length++]=ch;
    fclose(fp);
+   *total_size = (uint64_t) real_size;
    return prg;
 }
 

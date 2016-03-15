@@ -26,7 +26,7 @@ uintptr_t ctr_clex_verbatim_mode_insert_quote = 0; /* pointer to 'overlay' the '
  */
 void ctr_clex_load(char* prg) {
 	ctr_code = prg;
-	ctr_clex_buffer = malloc(ctr_clex_bflmt);
+	ctr_clex_buffer = CTR_STAT_MALLOC(ctr_clex_bflmt);
 	ctr_clex_buffer[0] = '\0';
 	ctr_eofcode = (ctr_code + ctr_program_length);
 }

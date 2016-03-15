@@ -335,7 +335,7 @@ ctr_object* ctr_find_in_my(ctr_object* key);
 ctr_object* ctr_assign_value(ctr_object* key, ctr_object* val);
 ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* val);
 ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* val);
-char*       ctr_internal_readf(char* file_name);
+char*       ctr_internal_readf(char* file_name, uint64_t* size_allocated);
 void        ctr_internal_debug_tree(ctr_tnode* ti, int indent);
 ctr_object* ctr_send_message(ctr_object* receiver, char* message, long len, ctr_argument* argumentList);
 void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func)( ctr_object*, ctr_argument* ) );
@@ -572,6 +572,7 @@ int ctr_gc_kept_counter;
 int ctr_gc_sticky_counter;
 int ctr_gc_recycled_counter;
 
+uint64_t ctr_gc_alloc;
 
 /**
  * Misc Interfaces
@@ -610,6 +611,13 @@ ctr_object* ctr_build_string_from_cstring( char* str );
 #define	CTR_PARSER_CREATE_PROGRAM_NODE() (ctr_tnode*) ctr_malloc(sizeof(ctr_tnode), 3)
 #define ASSIGN_STRING(o,p,v,s) o->p = ctr_malloc(s * sizeof(char), 0); memcpy( (char*) o->p,v,s);
 #define CTR_2CSTR(cs, s) cs = ctr_malloc((s->value.svalue->vlen+1) * sizeof(char),0); strncpy(cs, s->value.svalue->value, s->value.svalue->vlen); cs[s->value.svalue->vlen] = '\0';
+
+
+#define CTR_STAT_MALLOC(X) malloc( X ); ctr_gc_alloc += X;
+#define CTR_STAT_CALLOC(S,X) calloc( S, X ); ctr_gc_alloc += X; 
+#define CTR_STAT_REALLOC(O,F,T) realloc( O, T ); ctr_gc_alloc += (T - F);
+#define CTR_STAT_FREE(P,X) free(P); ctr_gc_alloc -= X;
+ 
 
 #define CTR_CONVFP(s,x){\
 char *buf = calloc(100, sizeof(char));\
