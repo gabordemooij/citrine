@@ -612,7 +612,11 @@ ctr_object* ctr_build_string_from_cstring( char* str );
 #define ASSIGN_STRING(o,p,v,s) o->p = ctr_malloc(s * sizeof(char), 0); memcpy( (char*) o->p,v,s);
 #define CTR_2CSTR(cs, s) cs = ctr_malloc((s->value.svalue->vlen+1) * sizeof(char),0); strncpy(cs, s->value.svalue->value, s->value.svalue->vlen); cs[s->value.svalue->vlen] = '\0';
 
-
+/**
+ * Memory tracking functions.
+ * Use these functions instead of malloc/free to keep track
+ * of memory and easily detect possible leaks.
+ */
 #define CTR_STAT_MALLOC(X) malloc( X ); ctr_gc_alloc += X;
 #define CTR_STAT_CALLOC(S,X) calloc( S, X ); ctr_gc_alloc += X; 
 #define CTR_STAT_REALLOC(O,F,T) realloc( O, T ); ctr_gc_alloc += (T - F);
