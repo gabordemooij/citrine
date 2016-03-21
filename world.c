@@ -105,7 +105,6 @@ uint64_t ctr_internal_index_hash(ctr_object* key) {
  * Finds property in object.
  */
 ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key, int is_method) {
-
 	ctr_mapitem* head;
 	uint64_t hashKey = ctr_internal_index_hash(key);
 
@@ -198,7 +197,7 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
  * Adds a property to an object.
  */
 void ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_object* value, int m) {
-	ctr_mapitem* new_item = malloc(sizeof(ctr_mapitem));
+	ctr_mapitem* new_item = CTR_STAT_MALLOC(sizeof(ctr_mapitem));
 	ctr_mapitem* current_head = NULL;
 	new_item->key = key;
 	new_item->hashKey = ctr_internal_index_hash(key);
@@ -277,9 +276,9 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
  * Creates an object.
  */
 ctr_object* ctr_internal_create_object(int type) {
-	ctr_object* o = malloc(sizeof(ctr_object));
-	o->properties = malloc(sizeof(ctr_map));
-	o->methods = malloc(sizeof(ctr_map));
+	ctr_object* o = CTR_STAT_MALLOC(sizeof(ctr_object));
+	o->properties = CTR_STAT_MALLOC(sizeof(ctr_map));
+	o->methods = CTR_STAT_MALLOC(sizeof(ctr_map));
 	o->properties->size = 0;
 	o->methods->size = 0;
 	o->properties->head = NULL;
@@ -290,7 +289,7 @@ ctr_object* ctr_internal_create_object(int type) {
 	if (type==CTR_OBJECT_TYPE_OTBOOL) o->value.bvalue = 0;
 	if (type==CTR_OBJECT_TYPE_OTNUMBER) o->value.nvalue = 0;
 	if (type==CTR_OBJECT_TYPE_OTSTRING) {
-		o->value.svalue = malloc(sizeof(ctr_string));
+		o->value.svalue = CTR_STAT_MALLOC(sizeof(ctr_string));
 		o->value.svalue->value = "";
 		o->value.svalue->vlen = 0;
 	}
@@ -342,6 +341,7 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
 ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 	int slen;
 	char* s;
+	ctr_object* stringObject;
 	switch (o->info.type) {
 		case CTR_OBJECT_TYPE_OTSTRING:
 			return o;
@@ -359,10 +359,12 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 			}
 			break;
 		case CTR_OBJECT_TYPE_OTNUMBER:
-			s = calloc(80, sizeof(char));
+			s = CTR_STAT_CALLOC(80, sizeof(char));
 			CTR_CONVFP(s,o->value.nvalue);
 			slen = strlen(s);
-			return ctr_build_string(s, slen);
+			stringObject = ctr_build_string(s, slen);
+			CTR_STAT_FREE(s, (sizeof(char)*80));
+			return stringObject;
 			break;
 		case CTR_OBJECT_TYPE_OTBLOCK:
 			return ctr_build_string("[Block]",7);
@@ -763,6 +765,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("dust", 4), &ctr_gc_dust);
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("objectCount", 11), &ctr_gc_object_count);
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("keptCount", 9), &ctr_gc_kept_count);
+	ctr_internal_create_func(CtrStdGC, ctr_build_string("keptAlloc", 9), &ctr_gc_kept_alloc);
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("stickyCount", 11), &ctr_gc_sticky_count);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Broom", 5), CtrStdGC, 0);
 	CtrStdGC->link = CtrStdObject;

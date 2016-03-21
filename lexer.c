@@ -226,7 +226,7 @@ char* ctr_clex_readstr() {
 	char* beginbuff;
 	long page = 100; /* 100 byte pages */
 	ctr_clex_tokvlen=0;
-	strbuff = (char*) malloc(memblock);
+	strbuff = (char*) CTR_STAT_MALLOC(memblock);
 	c = *ctr_code;
 	escape = 0;
 	beginbuff = strbuff;

@@ -54,7 +54,7 @@ void ctr_cli_read_args(int argc, char* argv[]) {
                     exit(1);
                 }
 				ctr_mode_compile = 1;
-				ctr_mode_compile_save_as = calloc(sizeof(char), 255);
+				ctr_mode_compile_save_as = CTR_STAT_CALLOC(sizeof(char), 255);
 				strncpy(ctr_mode_compile_save_as, optarg, 254);
 				break;
 			case 'r':
@@ -75,7 +75,7 @@ void ctr_cli_read_args(int argc, char* argv[]) {
 		exit(0);
 	}
 
-	ctr_mode_input_file = (char*) calloc(sizeof(char), 255);
+	ctr_mode_input_file = (char*) CTR_STAT_CALLOC(sizeof(char), 255);
 	strncpy(ctr_mode_input_file, argv[optind], 254);
 }
 

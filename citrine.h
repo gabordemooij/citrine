@@ -129,7 +129,6 @@ typedef struct ctr_argument ctr_argument;
  * Root Object
  */
 struct ctr_object {
-	const char* name;
 	ctr_map* properties;
 	ctr_map* methods;
 	struct {
@@ -560,6 +559,7 @@ ctr_object* ctr_gc_collect(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_dust(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_object_count(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_kept_count(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_gc_kept_alloc(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList);
 
 
@@ -605,7 +605,7 @@ ctr_object* ctr_build_string_from_cstring( char* str );
 
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='^'  && X!= ':' && X!= '\''
-#define CTR_CREATE_ARGUMENT() (ctr_argument*) calloc(sizeof(ctr_argument), 1)
+#define CTR_CREATE_ARGUMENT() (ctr_argument*) CTR_STAT_CALLOC(sizeof(ctr_argument), 1)
 #define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) ctr_malloc(sizeof(ctr_tlistitem), 2)
 #define	CTR_PARSER_CREATE_NODE() (ctr_tnode*) ctr_malloc(sizeof(ctr_tnode), 1)
 #define	CTR_PARSER_CREATE_PROGRAM_NODE() (ctr_tnode*) ctr_malloc(sizeof(ctr_tnode), 3)
@@ -617,10 +617,10 @@ ctr_object* ctr_build_string_from_cstring( char* str );
  * Use these functions instead of malloc/free to keep track
  * of memory and easily detect possible leaks.
  */
-#define CTR_STAT_MALLOC(X) malloc( X ); ctr_gc_alloc += X;
-#define CTR_STAT_CALLOC(S,X) calloc( S, X ); ctr_gc_alloc += X; 
-#define CTR_STAT_REALLOC(O,F,T) realloc( O, T ); ctr_gc_alloc += (T - F);
-#define CTR_STAT_FREE(P,X) free(P); ctr_gc_alloc -= X;
+#define CTR_STAT_MALLOC(X) malloc( X ); ctr_gc_alloc += X; //printf("m+ %d \n", X);
+#define CTR_STAT_CALLOC(S,X) calloc( S, X ); ctr_gc_alloc += (S*X); //printf("c+ %d \n", (S*X));
+#define CTR_STAT_REALLOC(O,F,T) realloc( O, T ); ctr_gc_alloc += (T - F); //printf("+- %d \n", (T-F));
+#define CTR_STAT_FREE(P,X) free(P); ctr_gc_alloc -= X; //printf("- %d \n", X);
  
 
 #define CTR_CONVFP(s,x){\

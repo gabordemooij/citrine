@@ -28,9 +28,9 @@
 ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTARRAY);
 	s->link = myclass;
-	s->value.avalue = (ctr_collection*) malloc(sizeof(ctr_collection));
+	s->value.avalue = (ctr_collection*) CTR_STAT_MALLOC(sizeof(ctr_collection));
 	s->value.avalue->length = 1;
-	s->value.avalue->elements = (ctr_object**) malloc(sizeof(ctr_object*)*1);
+	s->value.avalue->elements = (ctr_object**) CTR_STAT_MALLOC(sizeof(ctr_object*)*1);
 	s->value.avalue->head = 0;
 	s->value.avalue->tail = 0;
 	return s;
@@ -256,7 +256,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 		pos = len;
 		if (len == 0) {
 			len = str->value.svalue->vlen;
-			result = malloc(sizeof(char)*len);
+			result = CTR_STAT_MALLOC(sizeof(char)*len);
 		} else {
 			len += str->value.svalue->vlen + glen;
 			result = realloc(result, sizeof(char)*len);
@@ -266,7 +266,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 		memcpy(result+pos, str->value.svalue->value, str->value.svalue->vlen);
 	}
 	resultStr = ctr_build_string(result, len);
-	if (len > 0) free(result);
+	if (len > 0) CTR_STAT_FREE(result, sizeof(char)*len);
 	return resultStr;
 }
 
@@ -516,7 +516,7 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* putKey;
 	ctr_object* putValue = argumentList->object;
 	ctr_argument* nextArgument = argumentList->next;
-	ctr_argument* emptyArgumentList = malloc(sizeof(ctr_argument));
+	ctr_argument* emptyArgumentList = CTR_STAT_MALLOC(sizeof(ctr_argument));
 	emptyArgumentList->next = NULL;
 	emptyArgumentList->object = NULL;
 
@@ -527,7 +527,7 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 		putKey = ctr_internal_cast2string(putKey);
 	}
 
-	key = calloc(putKey->value.svalue->vlen, sizeof(char));
+	key = CTR_STAT_CALLOC(putKey->value.svalue->vlen, sizeof(char));
 	keyLen = putKey->value.svalue->vlen;
 	memcpy(key, putKey->value.svalue->value, keyLen);
 	ctr_internal_object_delete_property(myself, ctr_build_string(key, keyLen), 0);
@@ -546,7 +546,7 @@ ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object*   searchKey;
 	ctr_object*   foundObject;
 
-	emptyArgumentList = malloc(sizeof(ctr_argument));
+	emptyArgumentList = CTR_STAT_MALLOC(sizeof(ctr_argument));
 	emptyArgumentList->next = NULL;
 	emptyArgumentList->object = NULL;
 

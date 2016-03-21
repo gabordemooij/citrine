@@ -68,43 +68,49 @@ void ctr_gc_sweep() {
 				} else {
 					previousObject->gnext = NULL;
 				}
+			} else {
+				if (currentObject->gnext) {
+					ctr_first_object->gnext = currentObject->gnext;
+				} else {
+					ctr_first_object->gnext = NULL;
+				}
 			}
 			nextObject = currentObject->gnext;
 			if (currentObject->methods->head) {
 				mapItem = currentObject->methods->head;
-				tmp = mapItem;
-				while(mapItem = mapItem->next) {
-					free(tmp);
-					tmp = mapItem;
+				while(mapItem) {
+					tmp = mapItem->next;
+					CTR_STAT_FREE(mapItem, sizeof(ctr_mapitem));
+					mapItem = tmp;
 				}
-				free(mapItem);
 			}
 			if (currentObject->properties->head) {
 				mapItem = currentObject->properties->head;
-				tmp = mapItem;
-				while(mapItem = mapItem->next) {
-					free(tmp);
-					tmp = mapItem;
+				while(mapItem) {
+					tmp = mapItem->next;
+					CTR_STAT_FREE(mapItem, sizeof(ctr_mapitem));
+					mapItem = tmp;
 				}
-				free(mapItem);
 			}
-			free(currentObject->methods);
-			free(currentObject->properties);
+			CTR_STAT_FREE(currentObject->methods, sizeof(ctr_map));
+			CTR_STAT_FREE(currentObject->properties, sizeof(ctr_map));
 			switch (currentObject->info.type) {
 				case CTR_OBJECT_TYPE_OTSTRING:
 					if (currentObject->value.svalue != NULL) {
-						if (currentObject->value.svalue->vlen > 0) free(currentObject->value.svalue->value);
-						free(currentObject->value.svalue);
+						if (currentObject->value.svalue->vlen > 0) {
+							CTR_STAT_FREE(currentObject->value.svalue->value, (sizeof(char)*currentObject->value.svalue->vlen));
+						}
+						CTR_STAT_FREE(currentObject->value.svalue, sizeof(ctr_string));
 					}
 				break;
 				case CTR_OBJECT_TYPE_OTARRAY:
-					free(currentObject->value.avalue);
+					CTR_STAT_FREE(currentObject->value.avalue, sizeof(ctr_collection));
 				break;
 				case CTR_OBJECT_TYPE_OTEX:
-					if (currentObject->value.rvalue != NULL) free(currentObject->value.rvalue);
+					if (currentObject->value.rvalue != NULL) CTR_STAT_FREE(currentObject->value.rvalue, sizeof(ctr_resource));
 				break;
 			}
-			free(currentObject);
+			CTR_STAT_FREE(currentObject, sizeof(ctr_object));
 			currentObject = nextObject;
 		} else {
 			ctr_gc_kept_counter ++;
@@ -174,6 +180,15 @@ ctr_object* ctr_gc_kept_count(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Broom] keptAlloc
+ *
+ * Returns the amount of allocated memory.
+ */
+ctr_object* ctr_gc_kept_alloc(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float((ctr_number) ctr_gc_alloc);
+}
+
+/**
  * [Broom] stickyCount
  *
  * Returns the total number of objects that have a sticky flag.
@@ -205,7 +220,7 @@ ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList) 
 ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* arg = ctr_internal_cast2string(argumentList->object);
 	long vlen = arg->value.svalue->vlen;
-	char* comString = malloc(vlen + 1);
+	char* comString = CTR_STAT_MALLOC(vlen + 1);
 	int r;
 	memcpy(comString, arg->value.svalue->value, vlen);
 	memcpy(comString+vlen,"\0",1);
@@ -230,7 +245,7 @@ ctr_object* ctr_shell_respond_to_with(ctr_object* myself, ctr_argument* argument
 	suffix = ctr_internal_cast2string(argumentList->next->object);
 	len = prefix->value.svalue->vlen + suffix->value.svalue->vlen;
 	if (len == 0) return myself;
-	command = (char*) malloc(len); /* actually we need +1 for the space between commands, but we dont because we remove the colon : !*/
+	command = (char*) CTR_STAT_MALLOC(len); /* actually we need +1 for the space between commands, but we dont because we remove the colon : !*/
 	strncpy(command, prefix->value.svalue->value, prefix->value.svalue->vlen - 1); /* remove colon, gives room for space */
 	strncpy(command + (prefix->value.svalue->vlen - 1), " ", 1); /* space to separate commands */
 	strncpy(command + (prefix->value.svalue->vlen), suffix->value.svalue->value, suffix->value.svalue->vlen);
@@ -295,7 +310,7 @@ ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList) 
 	char*       envVarNameStr;
 	char*       envVal;
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
-	envVarNameStr = malloc((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
+	envVarNameStr = CTR_STAT_MALLOC((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
 	strncpy(envVarNameStr, envVarNameObj->value.svalue->value, envVarNameObj->value.svalue->vlen);
 	*(envVarNameStr + (envVarNameObj->value.svalue->vlen)) = '\0';
 	envVal = getenv(envVarNameStr);
@@ -317,7 +332,7 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
 	char*       envValStr;
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
 	envValObj = ctr_internal_cast2string(argumentList->next->object);
-	envVarNameStr = malloc((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
+	envVarNameStr = CTR_STAT_MALLOC((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
 	CTR_2CSTR(envVarNameStr, envVarNameObj);
 	CTR_2CSTR(envValStr, envValObj);
 	setenv(envVarNameStr, envValStr, 1);
@@ -345,7 +360,7 @@ ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList)
 	ctr_size bytes = 0;
 	char* buff;
 	ctr_size page = 10;
-	buff = malloc(page * sizeof(char));
+	buff = CTR_STAT_MALLOC(page * sizeof(char));
 	while ((c = getchar()) != '\n') {
 		buff[bytes] = c;
 		bytes++;

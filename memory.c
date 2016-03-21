@@ -25,13 +25,13 @@ char* ctr_malloc(uintptr_t size, int what) {
 	if (ctr_malloc_mode == 0) {
 		ctr_malloc_measured_size_addressbook += (sizeof(uintptr_t) * 2);
 		ctr_malloc_measured_size_code += size;
-		return (char*) calloc(size,sizeof(char));
+		return (char*) CTR_STAT_CALLOC(size,sizeof(char));
 	}
 	if (!ctr_malloc_chunk) {
-		ctr_default_header = malloc(sizeof(ctr_ast_header));
+		ctr_default_header = CTR_STAT_MALLOC(sizeof(ctr_ast_header));
 		strncpy(ctr_default_header->version,"CITR000001",10);
 		ctr_default_header->num_of_swizzles = 0;
-		ctr_malloc_chunk = (char*) malloc((ctr_malloc_measured_size_code+ctr_malloc_measured_size_addressbook)*sizeof(char));
+		ctr_malloc_chunk = (char*) CTR_STAT_MALLOC((ctr_malloc_measured_size_code+ctr_malloc_measured_size_addressbook)*sizeof(char));
 		if (!ctr_malloc_chunk) exit(1);
 		ctr_malloc_chunk_pointer = ctr_malloc_measured_size_addressbook;
 		ctr_default_header->size_of_address_book = ctr_malloc_measured_size_addressbook;/*<----*/

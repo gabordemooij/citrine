@@ -52,14 +52,14 @@ void ctr_serializer_info(char* filename) {
 	char* str;
 	size_t s = 0;
 	s = fsize(filename);
-	np = calloc(sizeof(char),s);
+	np = CTR_STAT_CALLOC(sizeof(char),s);
 	if (!np) { printf("no memory.\n"); exit(1);}
 	f = fopen(filename,"rb");
 	fread(np, sizeof(char), s, f);
 	fclose(f);
 	ctr_default_header = (ctr_ast_header*) (np);
 	printf("Citrine AST-FILE INFO:\n");
-	str = (char*) malloc(sizeof(char) * 11);
+	str = (char*) CTR_STAT_MALLOC(sizeof(char) * 11);
 	*(str + 10) = '\0';
 	strncpy(str, ctr_default_header->version, 10);
 	printf("Version and Identification Code : %s \n", ctr_default_header->version);
@@ -88,7 +88,7 @@ ctr_tnode* ctr_serializer_unserialize(char* filename) {
 	uintptr_t pe; /* pe */
 	uintptr_t sz;
 	s = fsize(filename);
-	np = malloc(sizeof(char)*s);
+	np = CTR_STAT_MALLOC(sizeof(char)*s);
 	if (!np) { printf("no memory.\n"); exit(1);}
 	f = fopen(filename,"rb");
 	fread(np, sizeof(char), s, f);
@@ -132,7 +132,7 @@ void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
 	while(1) {
 		int i;
 		for (i=0; i<indent; i++) printf(" ");
-		str = calloc(40, sizeof(char));
+		str = CTR_STAT_CALLOC(40, sizeof(char));
 		switch (t->type) {
 			case CTR_AST_NODE_EXPRASSIGNMENT:  str = "ASSIGN\0"; break;
 			case CTR_AST_NODE_EXPRMESSAGE:     str = "MESSAG\0"; break;
@@ -153,7 +153,7 @@ void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
 			case CTR_AST_NODE_LTRNIL:          str = "LTRNIL\0"; break;
 			default:                           str = "UNKNW?\0"; break;
 		}
-		vbuf = calloc(sizeof(char),t->vlen+1);
+		vbuf = CTR_STAT_CALLOC(sizeof(char),t->vlen+1);
 		strncpy(vbuf, t->value, t->vlen);
 		printf("%s %s (%p)\n", str, vbuf, (void*) t);
 		if (t->nodes) ctr_internal_debug_tree(t, indent + 1);
