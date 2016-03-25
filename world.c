@@ -667,6 +667,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("map:", 4), &ctr_array_map);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("each:", 5), &ctr_array_map);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("min", 3), &ctr_array_min);
+	ctr_internal_create_func(CtrStdArray, ctr_build_string("max", 3), &ctr_array_max);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("sum", 3), &ctr_array_sum);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string("product", 7), &ctr_array_product);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Array", 5), CtrStdArray, 0);
