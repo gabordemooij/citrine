@@ -55,7 +55,6 @@ void ctr_gc_sweep() {
 	ctr_object* previousObject = NULL;
 	ctr_object* currentObject = ctr_first_object;
 	ctr_object* nextObject = NULL;
-	ctr_map*     map = NULL;
 	ctr_mapitem* mapItem = NULL;
 	ctr_mapitem* tmp = NULL;
 	while(currentObject) {
