@@ -85,6 +85,32 @@ ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Array] max
+ *
+ * Returns the maximum value from an array.
+ *
+ * Usage:
+ *
+ * a := Array <- 8 ; 4 ; 2 ; 16.
+ * m := a max. #16
+ *
+ */
+ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
+	double max = 0;
+	double v = 0;
+	ctr_object* el;
+	size_t i = 0;
+	for(i = 0; i < myself->value.avalue->head; i++) {
+		el = *(myself->value.avalue->elements + i);
+		v = ctr_internal_cast2number(el)->value.nvalue;
+		if (i == 0 || max < v) {
+			max = v;
+		}
+	}
+	return ctr_build_number_from_float(max);
+}
+
+/**
  * [Array] sum
  *
  * Takes the sum of an array. This message will calculate the

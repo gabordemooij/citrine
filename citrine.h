@@ -488,6 +488,7 @@ ctr_object* ctr_array_from_to(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_sum(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList);
 
