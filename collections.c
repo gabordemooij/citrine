@@ -48,9 +48,11 @@ ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
  */
 ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pushValue;
+	size_t oldLength;
 	if (myself->value.avalue->length <= (myself->value.avalue->head + 1)) {
+		oldLength = myself->value.avalue->length;
 		myself->value.avalue->length = myself->value.avalue->length * 3;
-		myself->value.avalue->elements = (ctr_object**) realloc(myself->value.avalue->elements, (sizeof(ctr_object*) * (myself->value.avalue->length)));
+		myself->value.avalue->elements = (ctr_object**) CTR_STAT_REALLOC(myself->value.avalue->elements, oldLength, (sizeof(ctr_object*) * (myself->value.avalue->length)));
 	}
 	pushValue = argumentList->object;
 	*(myself->value.avalue->elements + myself->value.avalue->head) = pushValue;

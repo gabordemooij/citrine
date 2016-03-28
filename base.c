@@ -422,6 +422,7 @@ ctr_object* ctr_build_number_from_string(char* str, ctr_size length) {
 	memcpy(numCStr, str, length);
 	numberObject->value.nvalue = atof(numCStr);
 	numberObject->link = CtrStdNumber;
+	CTR_STAT_FREE(numCStr, 40);
 	return numberObject;
 }
 

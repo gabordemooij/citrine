@@ -103,6 +103,7 @@ void ctr_gc_sweep() {
 					}
 				break;
 				case CTR_OBJECT_TYPE_OTARRAY:
+					CTR_STAT_FREE(currentObject->value.avalue->elements, (sizeof(ctr_object*) * currentObject->value.avalue->length));
 					CTR_STAT_FREE(currentObject->value.avalue, sizeof(ctr_collection));
 				break;
 				case CTR_OBJECT_TYPE_OTEX:
