@@ -52,7 +52,10 @@ ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.avalue->length <= (myself->value.avalue->head + 1)) {
 		oldLength = myself->value.avalue->length;
 		myself->value.avalue->length = myself->value.avalue->length * 3;
-		myself->value.avalue->elements = (ctr_object**) CTR_STAT_REALLOC(myself->value.avalue->elements, oldLength, (sizeof(ctr_object*) * (myself->value.avalue->length)));
+		myself->value.avalue->elements = (ctr_object**) CTR_STAT_REALLOC(myself->value.avalue->elements,
+			((sizeof(ctr_object*)) * oldLength),
+			(sizeof(ctr_object*) * (myself->value.avalue->length))
+		);
 	}
 	pushValue = argumentList->object;
 	*(myself->value.avalue->elements + myself->value.avalue->head) = pushValue;
