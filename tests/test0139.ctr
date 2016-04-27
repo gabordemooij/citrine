@@ -1,0 +1,3 @@
+#Test whether we can set memory limit and create an out-of-memory error
+Broom memoryLimit: 10. #wat too low
+a := 1.
