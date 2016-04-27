@@ -562,7 +562,9 @@ ctr_object* ctr_gc_object_count(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_kept_count(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_kept_alloc(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList);
-
+ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_gc_recycle(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Global Garbage Collector variables
@@ -572,8 +574,10 @@ int ctr_gc_object_counter;
 int ctr_gc_kept_counter;
 int ctr_gc_sticky_counter;
 int ctr_gc_recycled_counter;
+int ctr_gc_mode;
 
 uint64_t ctr_gc_alloc;
+uint64_t ctr_gc_memlimit;
 
 /**
  * Misc Interfaces
@@ -618,9 +622,10 @@ ctr_object* ctr_build_string_from_cstring( char* str );
  * Use these functions instead of malloc/free to keep track
  * of memory and easily detect possible leaks.
  */
-#define CTR_STAT_MALLOC(X) malloc( X ); ctr_gc_alloc += X; //printf("m+ %d \n", X);
-#define CTR_STAT_CALLOC(S,X) calloc( S, X ); ctr_gc_alloc += (S*X); //printf("c+ %d \n", (S*X));
-#define CTR_STAT_REALLOC(O,F,T) realloc( O, T ); ctr_gc_alloc += (T - F); //printf("+- %d \n", (T-F));
+#define CTR_STAT_CHECK() if (ctr_gc_memlimit < ctr_gc_alloc) { printf( "Out of memory.\n" ); exit(1); }
+#define CTR_STAT_MALLOC(X) malloc( X ); ctr_gc_alloc += X; CTR_STAT_CHECK(); //printf("m+ %d \n", X);
+#define CTR_STAT_CALLOC(S,X) calloc( S, X ); ctr_gc_alloc += (S*X); CTR_STAT_CHECK(); //printf("c+ %d \n", (S*X));
+#define CTR_STAT_REALLOC(O,F,T) realloc( O, T ); ctr_gc_alloc += (T - F); CTR_STAT_CHECK(); //printf("+- %d \n", (T-F));
 #define CTR_STAT_FREE(P,X) free(P); ctr_gc_alloc -= X; //printf("- %d \n", X);
  
 

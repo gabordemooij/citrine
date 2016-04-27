@@ -773,6 +773,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("keptCount", 9), &ctr_gc_kept_count);
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("keptAlloc", 9), &ctr_gc_kept_alloc);
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("stickyCount", 11), &ctr_gc_sticky_count);
+	ctr_internal_create_func(CtrStdGC, ctr_build_string("memoryLimit", 11), &ctr_gc_setmemlimit);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Broom", 5), CtrStdGC, 0);
 	CtrStdGC->link = CtrStdObject;
 	CtrStdGC->info.sticky = 1;

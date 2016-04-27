@@ -93,6 +93,7 @@ int main(int argc, char* argv[]) {
 	ctr_malloc_chunk_pointer = 0;
 	ctr_mode_compile = 0;
 	ctr_mode_load = 0;
+	ctr_gc_memlimit = 8388608;
 	ctr_cli_read_args(argc, argv);
 	if (ctr_mode_compile) {
 		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);

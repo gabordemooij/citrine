@@ -198,6 +198,16 @@ ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList) 
 	return ctr_build_number_from_float((ctr_number) ctr_gc_sticky_counter);
 }
 
+/**
+ * [Broom] memoryLimit
+ *
+ * Sets the memory limit, if this limit gets exceeded the program will produce
+ * an out-of-memory error.
+ */
+ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_gc_memlimit = (uint64_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	return myself;
+}
 
 /**
  * [Shell] call: [String]
