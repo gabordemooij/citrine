@@ -88,7 +88,7 @@ int main(int argc, char* argv[]) {
 	char* prg;
 	ctr_tnode* program;
 	uint64_t program_text_size = 0;
-	ctr_gc_mode = 2; /* default GC mode: activate GC and recycle used objects */
+	ctr_gc_mode = 0; /* default GC mode: activate GC and recycle used objects */
 	ctr_gc_junk_counter = 0;
 	ctr_argc = argc;
 	ctr_argv = argv;
