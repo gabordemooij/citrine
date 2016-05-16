@@ -598,7 +598,7 @@ ctr_object* ctr_build_number_from_float(ctr_number floatNumber);
 ctr_object* ctr_build_bool(int truth);
 ctr_object* ctr_build_nil();
 ctr_object* ctr_build_string_from_cstring( char* str );
-
+void ctr_gc_internal_collect();
 
 /**
  * Citrine Macros
