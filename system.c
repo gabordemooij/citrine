@@ -61,6 +61,7 @@ void ctr_gc_sweep() {
 		ctr_gc_object_counter ++;
 		if (currentObject->info.mark==0 && currentObject->info.sticky==0){
 			ctr_gc_dust_counter ++;
+			/* remove from linked list */
 			if (previousObject) {
 				if (currentObject->gnext) {
 					previousObject->gnext = currentObject->gnext;
@@ -110,7 +111,12 @@ void ctr_gc_sweep() {
 					if (currentObject->value.rvalue != NULL) CTR_STAT_FREE(currentObject->value.rvalue, sizeof(ctr_resource));
 				break;
 			}
-			CTR_STAT_FREE(currentObject, sizeof(ctr_object));
+			if ((ctr_gc_mode & 2) && ctr_gc_junk_counter < 100) {
+				ctr_gc_junkyard[ctr_gc_junk_counter] = currentObject;
+				ctr_gc_junk_counter ++;
+			} else {
+				CTR_STAT_FREE(currentObject, sizeof(ctr_object));
+			}
 			currentObject = nextObject;
 		} else {
 			ctr_gc_kept_counter ++;
@@ -125,13 +131,10 @@ void ctr_gc_sweep() {
 }
 
 /**
- * Broom
- * 
- * GarbageCollector, to invoke use:
- * 
- * [Broom] sweep.
+ * @internal
+ * Garbage Collector sweep.
  */
-ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
+void  ctr_gc_internal_collect() {
 	ctr_object* context;
 	int oldcid;
 	ctr_gc_dust_counter = 0;
@@ -147,6 +150,17 @@ ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 	}
 	ctr_gc_sweep();
 	ctr_context_id = oldcid;
+}
+
+/**
+ * Broom
+ *
+ * GarbageCollector, to invoke use:
+ *
+ * [Broom] sweep.
+ */
+ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
+	ctr_gc_internal_collect(); /* calls internal because automatic GC has to use this function as well and requires low overhead. */
 	return myself;
 }
 
@@ -206,6 +220,21 @@ ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList) 
  */
 ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_gc_memlimit = (uint64_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	return myself;
+}
+
+/**
+ * [Broom] mode: [Number]
+ *
+ * Selects mode of operation for GC.
+ *
+ * Available Modes:
+ * 0 - No Garbage Collection
+ * 1 - Activate Garbage Collector
+ * 3 - Activate Garbage Collctor and Recycle used objects
+ */
+ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_gc_mode = (uint64_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
 	return myself;
 }
 

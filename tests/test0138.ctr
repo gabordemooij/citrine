@@ -1,4 +1,7 @@
 #Number of vars remains the same, so memory needs te remain same
+
+Broom mode: 1.
+
 x := 0.
 y := 'Hello'.
 q := {\}.

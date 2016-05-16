@@ -1,4 +1,8 @@
 #Number of vars remains the same, so memory needs te remain same
+
+#Deactivate automatic GC and recycling
+Broom mode: 0.
+
 x := 0.
 y := 'Hello'.
 q := {\}.

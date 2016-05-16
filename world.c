@@ -281,7 +281,16 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
  * Creates an object.
  */
 ctr_object* ctr_internal_create_object(int type) {
-	ctr_object* o = CTR_STAT_MALLOC(sizeof(ctr_object));
+	ctr_object* o;
+	/**
+	 * If there's a second hand object available at the junkyard,
+	 * prefer that. Saves a call to malloc.
+	 */
+	if (ctr_gc_junk_counter > 0) {
+		o = ctr_gc_junkyard[--ctr_gc_junk_counter];
+	} else {
+		o = CTR_STAT_MALLOC(sizeof(ctr_object));
+	}
 	o->properties = CTR_STAT_MALLOC(sizeof(ctr_map));
 	o->methods = CTR_STAT_MALLOC(sizeof(ctr_map));
 	o->properties->size = 0;
@@ -774,6 +783,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("keptAlloc", 9), &ctr_gc_kept_alloc);
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("stickyCount", 11), &ctr_gc_sticky_count);
 	ctr_internal_create_func(CtrStdGC, ctr_build_string("memoryLimit:", 12), &ctr_gc_setmemlimit);
+	ctr_internal_create_func(CtrStdGC, ctr_build_string("mode:", 5),  &ctr_gc_setmode);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Broom", 5), CtrStdGC, 0);
 	CtrStdGC->link = CtrStdObject;
 	CtrStdGC->info.sticky = 1;
