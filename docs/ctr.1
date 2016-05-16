@@ -579,7 +579,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] to: [number] by: [step] do: [block]
+.B [Number] to: [number] step: [step] do: [block]
 .nf
     
      Runs the specified block for each step it takes to go from
@@ -588,7 +588,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     1 to: 5 by: 1 do: { step | Pen write: 'this is step #'+step. }.
+     1 to: 5 step: 1 do: { step | Pen write: 'this is step #'+step. }.
 .fi
 .BR.BR.BR
 
@@ -1009,6 +1009,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Runs a block of code using the specified object as a parameter.
+     If you run a block using the messages 'run' or 'applyTo:', me/my will
+     refer to the block itself instead of the containing object.
 .fi
 .BR.BR.BR
 
@@ -1152,6 +1154,32 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [Array] min
+.nf
+    
+     Returns the minimum value from an array.
+    
+     Usage:
+    
+     a := Array <- 8 ; 4 ; 2 ; 16.
+     m := a min. #2
+    
+.fi
+.BR.BR.BR
+
+.B [Array] max
+.nf
+    
+     Returns the maximum value from an array.
+    
+     Usage:
+    
+     a := Array <- 8 ; 4 ; 2 ; 16.
+     m := a max. #16
+    
+.fi
+.BR.BR.BR
+
 .B [Array] sum
 .nf
     
@@ -1191,11 +1219,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Iterates over the array. Passing each element as a key-value pair to the
      specified block.
+     The map message will pass the following arguments to the block, the key,
+     the value and a reference to the array itself. The last argument might seem
+     redundant but allows for a more functional programming style.
      
      Usage:
     
      files map: showName.
-     files map: { key filename | Pen write: filename, brk. }.
+     files map: { key filename files | Pen write: filename, brk. }.
 .fi
 .BR.BR.BR
 
@@ -1380,6 +1411,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Iterates over the map, passing key-value pairs to the specified block.
+     Note that within an each/map block, 'me' and 'my' refer to the collection.
 .fi
 .BR.BR.BR
 
@@ -1600,11 +1632,13 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
+.BR.BR.BR
+
 .B Broom
 .nf
-     
+    
      GarbageCollector, to invoke use:
-     
+    
      [Broom] sweep.
 .fi
 .BR.BR.BR
@@ -1616,10 +1650,54 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B GCCount
+.B [Broom] objectCount
 .nf
     
-     Returns the number of objects marked.
+     Returns the total number of objects considered in the latest collect
+     cycle.
+.fi
+.BR.BR.BR
+
+.B [Broom] keptCount
+.nf
+    
+     Returns the total number of objects that have been marked during the
+     latest cycle and have therefore been allowed to stay in memory.
+.fi
+.BR.BR.BR
+
+.B [Broom] keptAlloc
+.nf
+    
+     Returns the amount of allocated memory.
+.fi
+.BR.BR.BR
+
+.B [Broom] stickyCount
+.nf
+    
+     Returns the total number of objects that have a sticky flag.
+     These objects will never be removed.
+.fi
+.BR.BR.BR
+
+.B [Broom] memoryLimit
+.nf
+    
+     Sets the memory limit, if this limit gets exceeded the program will produce
+     an out-of-memory error.
+.fi
+.BR.BR.BR
+
+.B [Broom] mode: [Number]
+.nf
+    
+     Selects mode of operation for GC.
+    
+     Available Modes:
+     0 - No Garbage Collection
+     1 - Activate Garbage Collector
+     3 - Activate Garbage Collctor and Recycle used objects
 .fi
 .BR.BR.BR
 
