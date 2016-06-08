@@ -1,0 +1,18 @@
+#NOAST
+#Test stack trace
+Pen write: 'Trigger an error'.
+#NonExistingObject doSomething.
+#
+#
+#
+{\ Pen write: 'aaa'. 
+	{\
+#	
+		thisBlock error: 'Hi!'.
+		} run.
+#		
+#	
+} run.
+
+#
+#

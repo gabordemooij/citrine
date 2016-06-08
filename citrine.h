@@ -50,6 +50,7 @@
 #define CTR_AST_NODE_LTRBOOLTRUE 81
 #define CTR_AST_NODE_LTRBOOLFALSE 82
 #define CTR_AST_NODE_LTRNIL 83
+#define CTR_AST_NODE_PROGRAM 84
 
 /**
  * Define the basic object types.
@@ -192,6 +193,24 @@ struct ctr_tlistitem {
 };
 typedef struct ctr_tlistitem ctr_tlistitem;
 
+struct ctr_source_map {
+	ctr_tnode* node;
+	uint32_t line;
+	char* file;
+	struct ctr_source_map* next;
+};
+typedef struct ctr_source_map ctr_source_map;
+
+struct ctr_source_file {
+	char* name;
+	struct ctr_source_file* next;
+};
+typedef struct ctr_source_file ctr_source_file;
+
+ctr_source_map* ctr_source_map_head;
+ctr_source_file* ctr_source_file_head;
+int ctr_source_mapping;
+
 /**
  * Core Objects
  */
@@ -292,6 +311,7 @@ char*	ctr_clex_readstr();
  */
 ctr_size ctr_clex_len;
 ctr_size ctr_program_length;
+int ctr_clex_line_number;
 
 /**
  * UTF-8 functions
@@ -303,7 +323,7 @@ int ctr_utf8size(char c);
 /**
  * Parser functions
  */
-ctr_tnode* ctr_dparse_parse(char* prg);
+ctr_tnode* ctr_dparse_parse(char* prg, char* pathString);
 ctr_tnode* ctr_cparse_expr(int mode);
 ctr_tnode* ctr_cparse_ret();
 
@@ -350,6 +370,8 @@ void ctr_close_context();
  */
 ctr_object* ctr_contexts[100];
 int ctr_context_id;
+ctr_tnode* ctr_callstack[100];
+uint8_t ctr_callstack_index;
 
 /**
  * Nil Interface
@@ -609,12 +631,14 @@ void ctr_gc_internal_collect();
 	printf(X, b);\
 }\
 
+ctr_tnode* ctr_create_node();
+
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='^'  && X!= ':' && X!= '\''
 #define CTR_CREATE_ARGUMENT() (ctr_argument*) CTR_STAT_CALLOC(sizeof(ctr_argument), 1)
 #define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) ctr_malloc(sizeof(ctr_tlistitem), 2)
-#define	CTR_PARSER_CREATE_NODE() (ctr_tnode*) ctr_malloc(sizeof(ctr_tnode), 1)
-#define	CTR_PARSER_CREATE_PROGRAM_NODE() (ctr_tnode*) ctr_malloc(sizeof(ctr_tnode), 3)
+#define	CTR_PARSER_CREATE_NODE() ctr_create_node(1);
+#define	CTR_PARSER_CREATE_PROGRAM_NODE() ctr_create_node(3);
 #define ASSIGN_STRING(o,p,v,s) o->p = ctr_malloc(s * sizeof(char), 0); memcpy( (char*) o->p,v,s);
 #define CTR_2CSTR(cs, s) cs = ctr_malloc((s->value.svalue->vlen+1) * sizeof(char),0); strncpy(cs, s->value.svalue->value, s->value.svalue->vlen); cs[s->value.svalue->vlen] = '\0';
 

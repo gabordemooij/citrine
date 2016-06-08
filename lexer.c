@@ -18,6 +18,19 @@ char* ctr_clex_oldptr;
 char* ctr_clex_olderptr;
 int       ctr_clex_verbatim_mode = 0;              /* flag: indicates whether lexer operates in verbatim mode or not (1 = ON, 0 = OFF) */
 uintptr_t ctr_clex_verbatim_mode_insert_quote = 0; /* pointer to 'overlay' the 'fake quote' for verbatim mode */
+int ctr_clex_old_line_number = 0;
+
+void ctr_clex_init_source_map(char* filename) {
+	ctr_source_file_head = malloc(sizeof(ctr_source_file));
+	ctr_source_file_head->name = filename; 
+}
+
+void ctr_clex_add_to_source_map(char* filename) {
+	ctr_source_file* f = malloc(sizeof(ctr_source_file));
+	f->name = filename;
+	f->next = ctr_source_file_head;
+	ctr_source_file_head = f;
+}
 
 /**
  * CTRLexerLoad
@@ -29,6 +42,7 @@ void ctr_clex_load(char* prg) {
 	ctr_clex_buffer = CTR_STAT_MALLOC(ctr_clex_bflmt);
 	ctr_clex_buffer[0] = '\0';
 	ctr_eofcode = (ctr_code + ctr_program_length);
+	ctr_clex_line_number = 0;
 }
 
 /**
@@ -58,6 +72,7 @@ long ctr_clex_tok_value_length() {
 void ctr_clex_putback() {
 	ctr_code = ctr_clex_oldptr;
 	ctr_clex_oldptr = ctr_clex_olderptr;
+	ctr_clex_line_number = ctr_clex_old_line_number;
 }
 
 /**
@@ -72,6 +87,7 @@ int ctr_clex_tok() {
 	ctr_clex_tokvlen = 0;
 	ctr_clex_olderptr = ctr_clex_oldptr;
 	ctr_clex_oldptr = ctr_code;
+	ctr_clex_old_line_number = ctr_clex_line_number;
 	i = 0;
 	comment_mode = 0;
 
@@ -82,7 +98,10 @@ int ctr_clex_tok() {
 
 	c = *ctr_code;
 	while(ctr_code != ctr_eofcode && (isspace(c) || c == '#' || comment_mode)) {
-		if (c == '\n') comment_mode = 0;
+		if (c == '\n') {
+			comment_mode = 0;
+			ctr_clex_line_number++;
+		}
 		if (c == '#') comment_mode = 1;
 		ctr_code ++;
 		c = *ctr_code;

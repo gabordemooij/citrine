@@ -1,6 +1,10 @@
-cat := Object new.
-cat on: 'work' do: {\
-	thisBlock error: 'Cats have personel for that!'.
-	Pen write: 'dont print this!'.
-}.
-cat work.
+{\
+	var cat := Object new.
+	cat on: 'work' do: {\
+		thisBlock error: 'Uncatched error has occurred.\nCats have personel for that!'.
+		Pen write: 'dont print this!'.
+	}.
+	cat work.
+} catch: { e |
+	Pen write: e.
+}, run.

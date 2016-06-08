@@ -7,6 +7,24 @@
 #include <stdint.h>
 #include "citrine.h"
 
+ctr_tnode* ctr_create_node( int type ){
+	ctr_tnode* node = (ctr_tnode*) ctr_malloc(sizeof(ctr_tnode), type);
+	if (ctr_source_mapping) {
+		ctr_source_map* m = (ctr_source_map*) ctr_malloc(sizeof(ctr_source_map), 0);
+		m->line = ctr_clex_line_number;
+		m->file = ctr_source_file_head->name;
+		m->node = node;
+		if (ctr_source_map_head) {
+			m->next = ctr_source_map_head;
+			ctr_source_map_head = m;
+		} else {
+			ctr_source_map_head = m;
+		}
+	}
+	return node;
+}
+
+
 /**
  * CTRParserMessage
  *
@@ -598,9 +616,14 @@ ctr_tnode* ctr_cparse_program() {
  *
  * Begins the parsing stage of a program.
  */
-ctr_tnode*  ctr_dparse_parse(char* prg) {
+ctr_tnode*  ctr_dparse_parse(char* prg, char* pathString) {
 	ctr_tnode* program;
 	ctr_clex_load(prg);
 	program = ctr_cparse_program();
+	if (pathString!="") {
+	program->value = pathString;
+	program->vlen = strlen(pathString);
+	program->type = CTR_AST_NODE_PROGRAM;
+	}
 	return program;
 }

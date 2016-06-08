@@ -55,6 +55,10 @@ for i in $(find tests -name 'test*.ctr'); do
 		echo $result
 		exit 1
 	fi
+	headline=$(head -n 1 $fitem)
+	if [ "$headline" == "#NOAST" ]; then
+	continue 
+	fi
 	fitem=$i
 	echo -n "$fitem compiled";
 	fexpect="${i%%.ctr}.exp"

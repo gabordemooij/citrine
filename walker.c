@@ -92,6 +92,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		msgnode = li->node;
 		message = msgnode->value;
 		l = msgnode->vlen;
+		ctr_callstack[ctr_callstack_index++] = msgnode;
 		argumentList = msgnode->nodes;
 		a = CTR_CREATE_ARGUMENT();
 		aItem = a;
@@ -111,6 +112,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		//CTR_DEBUG_STR("Sending message: %s \n",message,l);
 		result = ctr_send_message(r, message, l, a);
 		aItem = a;
+		if (!CtrStdError) ctr_callstack_index --;
 		while(aItem->next) {
 			a = aItem;
 			aItem = aItem->next;
@@ -154,6 +156,11 @@ ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
  */
 ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 	ctr_object* result;
+	uint8_t i;
+	int line;
+	char* currentProgram = "?";
+	ctr_tnode* stackNode;
+	ctr_source_map* mapItem;
 	switch (node->type) {
 		case CTR_AST_NODE_LTRSTRING:
 			result = ctr_build_string(node->value, node->vlen);
@@ -198,6 +205,25 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 				printf("Uncatched error has occurred.\n");
 				if (CtrStdError->info.type == CTR_OBJECT_TYPE_OTSTRING) {
 					fwrite(CtrStdError->value.svalue->value, sizeof(char), CtrStdError->value.svalue->vlen, stdout);
+					printf("\n");
+				}
+				for ( i = ctr_callstack_index; i > 0; i--) {
+					printf("#%d ", i);
+					stackNode = ctr_callstack[i-1];
+					fwrite(stackNode->value, sizeof(char), stackNode->vlen, stdout);
+					mapItem = ctr_source_map_head;
+					line = -1;
+					while(mapItem) {
+						if (line == -1 && mapItem->node == stackNode) {
+							line = mapItem->line;
+						}
+						if (line > -1 && mapItem->node->type == CTR_AST_NODE_PROGRAM) {
+							currentProgram = mapItem->node->value;
+							printf(" (%s: %d)", currentProgram, line);
+							break;
+						}
+						mapItem = mapItem->next;
+					}
 					printf("\n");
 				}
 				exit(1);

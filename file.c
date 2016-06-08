@@ -201,12 +201,12 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
 	uint64_t program_size = 0;
 	if (path == NULL) return myself;
 	vlen = path->value.svalue->vlen;
-	pathString = CTR_STAT_MALLOC(vlen + 1);
+	pathString = ctr_malloc(sizeof(char)*(vlen+1), 0); //CTR_STAT_MALLOC(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	prg = ctr_internal_readf(pathString, &program_size);
-	CTR_STAT_FREE(pathString, vlen+1);
-	parsedCode = ctr_dparse_parse(prg);
+	parsedCode = ctr_dparse_parse(prg, pathString);
+	//CTR_STAT_FREE(pathString, vlen+1);
 	ctr_cwlk_run(parsedCode);
 	return myself;
 }
