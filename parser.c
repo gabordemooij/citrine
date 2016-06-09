@@ -620,9 +620,9 @@ ctr_tnode*  ctr_cparse_parse(char* prg, char* pathString) {
 	ctr_clex_load(prg);
 	program = ctr_cparse_program();
 	if (pathString!="") {
-	program->value = pathString;
-	program->vlen = strlen(pathString);
-	program->type = CTR_AST_NODE_PROGRAM;
+		program->value = pathString;
+		program->vlen = strlen(pathString);
+		program->type = CTR_AST_NODE_PROGRAM;
 	}
 	return program;
 }
