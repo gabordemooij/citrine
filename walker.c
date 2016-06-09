@@ -219,7 +219,7 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 						}
 						if (line > -1 && mapItem->node->type == CTR_AST_NODE_PROGRAM) {
 							currentProgram = mapItem->node->value;
-							printf(" (%s: %d)", currentProgram, line);
+							printf(" (%s: %d)", currentProgram, line+1);
 							break;
 						}
 						mapItem = mapItem->next;
