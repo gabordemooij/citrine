@@ -315,7 +315,7 @@ int ctr_utf8size(char c);
 /**
  * Parser functions
  */
-ctr_tnode* ctr_dparse_parse(char* prg, char* pathString);
+ctr_tnode* ctr_cparse_parse(char* prg, char* pathString);
 ctr_tnode* ctr_cparse_expr(int mode);
 ctr_tnode* ctr_cparse_ret();
 

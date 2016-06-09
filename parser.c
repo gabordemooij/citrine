@@ -615,7 +615,7 @@ ctr_tnode* ctr_cparse_program() {
  *
  * Begins the parsing stage of a program.
  */
-ctr_tnode*  ctr_dparse_parse(char* prg, char* pathString) {
+ctr_tnode*  ctr_cparse_parse(char* prg, char* pathString) {
 	ctr_tnode* program;
 	ctr_clex_load(prg);
 	program = ctr_cparse_program();

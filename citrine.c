@@ -104,12 +104,12 @@ int main(int argc, char* argv[]) {
 		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
 		ctr_malloc_mode = 0;
 		ctr_malloc_measured_size_addressbook = sizeof(ctr_ast_header);/* adds up to normal addressbook size */
-		program = ctr_dparse_parse(prg, "");
+		program = ctr_cparse_parse(prg, "");
 		program = NULL;
 		ctr_malloc_mode = 1;
 		ctr_malloc_chunk_pointer = 0;
 		ctr_malloc_chunk = 0;
-		program = ctr_dparse_parse(prg, "");
+		program = ctr_cparse_parse(prg, "");
 		ctr_serializer_serialize(program);
 		free(ctr_malloc_chunk);
 		CTR_STAT_FREE(prg, program_text_size);
@@ -138,7 +138,7 @@ int main(int argc, char* argv[]) {
 		ctr_source_mapping = 1;
 		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
 		ctr_malloc_mode = 0;
-		program = ctr_dparse_parse(prg, ctr_mode_input_file);
+		program = ctr_cparse_parse(prg, ctr_mode_input_file);
 		/*ctr_internal_debug_tree(program,1); -- for debugging */
 		ctr_initialize_world();
 		ctr_cwlk_run(program);
