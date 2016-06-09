@@ -206,7 +206,6 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString+vlen,"\0",1);
 	prg = ctr_internal_readf(pathString, &program_size);
 	parsedCode = ctr_cparse_parse(prg, pathString);
-	//CTR_STAT_FREE(pathString, vlen+1);
 	ctr_cwlk_run(parsedCode);
 	return myself;
 }
