@@ -136,7 +136,6 @@ int main(int argc, char* argv[]) {
 	}
 	else {
 		ctr_source_mapping = 1;
-		ctr_clex_init_source_map(ctr_mode_input_file);
 		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
 		ctr_malloc_mode = 0;
 		program = ctr_dparse_parse(prg, ctr_mode_input_file);

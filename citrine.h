@@ -196,19 +196,11 @@ typedef struct ctr_tlistitem ctr_tlistitem;
 struct ctr_source_map {
 	ctr_tnode* node;
 	uint32_t line;
-	char* file;
 	struct ctr_source_map* next;
 };
 typedef struct ctr_source_map ctr_source_map;
 
-struct ctr_source_file {
-	char* name;
-	struct ctr_source_file* next;
-};
-typedef struct ctr_source_file ctr_source_file;
-
 ctr_source_map* ctr_source_map_head;
-ctr_source_file* ctr_source_file_head;
 int ctr_source_mapping;
 
 /**

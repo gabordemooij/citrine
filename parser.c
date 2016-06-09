@@ -12,7 +12,6 @@ ctr_tnode* ctr_create_node( int type ){
 	if (ctr_source_mapping) {
 		ctr_source_map* m = (ctr_source_map*) ctr_malloc(sizeof(ctr_source_map), 0);
 		m->line = ctr_clex_line_number;
-		m->file = ctr_source_file_head->name;
 		m->node = node;
 		if (ctr_source_map_head) {
 			m->next = ctr_source_map_head;

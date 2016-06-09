@@ -20,18 +20,6 @@ int       ctr_clex_verbatim_mode = 0;              /* flag: indicates whether le
 uintptr_t ctr_clex_verbatim_mode_insert_quote = 0; /* pointer to 'overlay' the 'fake quote' for verbatim mode */
 int ctr_clex_old_line_number = 0;
 
-void ctr_clex_init_source_map(char* filename) {
-	ctr_source_file_head = malloc(sizeof(ctr_source_file));
-	ctr_source_file_head->name = filename; 
-}
-
-void ctr_clex_add_to_source_map(char* filename) {
-	ctr_source_file* f = malloc(sizeof(ctr_source_file));
-	f->name = filename;
-	f->next = ctr_source_file_head;
-	ctr_source_file_head = f;
-}
-
 /**
  * CTRLexerLoad
  *
