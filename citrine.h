@@ -218,7 +218,6 @@ ctr_object* CtrStdGC;
 ctr_object* CtrStdMap;
 ctr_object* CtrStdArray;
 ctr_object* CtrStdFile;
-ctr_object* CtrStdError;
 ctr_object* CtrStdSystem;
 ctr_object* CtrStdDice;
 ctr_object* CtrStdCommand;

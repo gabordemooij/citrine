@@ -457,10 +457,18 @@ ctr_object* ctr_find(ctr_object* key) {
 		foundObject = ctr_internal_object_find_property(CtrStdWorld, key, 0);
 	}
 	if (foundObject == NULL) {
-		char* cstr;
-		CTR_2CSTR(cstr, key);
-		printf("Error, key not found: [%s].\n", cstr);
-		exit(1);
+		char* key_name;
+		char* message;
+		char* full_message;
+		int message_size;
+		message = "Key not found: ";
+		message_size = ((strlen(message))+key->value.svalue->vlen);
+		full_message = malloc(message_size*sizeof(char));
+		CTR_2CSTR(key_name, key);
+		memcpy(full_message, message, strlen(message));
+		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
+		CtrStdError = ctr_build_string(full_message, message_size);
+		return CtrStdNil;
 	}
 	return foundObject;
 }
@@ -476,7 +484,20 @@ ctr_object* ctr_find_in_my(ctr_object* key) {
 	ctr_object* context = ctr_find(ctr_build_string("me",2));
 	ctr_object* foundObject = ctr_internal_object_find_property(context, key, 0);
 	if (CtrStdError) return CtrStdNil;
-	if (foundObject == NULL) { printf("Error, property not found: %s.\n", key->value.svalue->value); exit(1); }
+	if (foundObject == NULL) {
+		char* key_name;
+		char* message;
+		char* full_message;
+		int message_size;
+		message = "Object property not found: ";
+		message_size = ((strlen(message))+key->value.svalue->vlen);
+		full_message = malloc(message_size*sizeof(char));
+		CTR_2CSTR(key_name, key);
+		memcpy(full_message, message, strlen(message));
+		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
+		CtrStdError = ctr_build_string(full_message, message_size);
+		return CtrStdNil;
+	}
 	return foundObject;
 }
 

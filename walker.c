@@ -50,10 +50,16 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		case CTR_AST_NODE_REFERENCE:
 			recipientName = ctr_build_string(receiverNode->value, receiverNode->vlen);
 			recipientName->info.sticky = 1;
+			if (CtrStdError == NULL) {
+				ctr_callstack[ctr_callstack_index++] = receiverNode;
+			}
 			if (receiverNode->modifier == 1) {
 				r = ctr_find_in_my(recipientName);
 			} else {
 				r = ctr_find(recipientName);
+			}
+			if (CtrStdError == NULL) {
+				ctr_callstack_index--;
 			}
 			if (!r) {
 				exit(1);
@@ -92,7 +98,9 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		msgnode = li->node;
 		message = msgnode->value;
 		l = msgnode->vlen;
-		ctr_callstack[ctr_callstack_index++] = msgnode;
+		if (CtrStdError == NULL) {
+			ctr_callstack[ctr_callstack_index++] = msgnode;
+		}
 		argumentList = msgnode->nodes;
 		a = CTR_CREATE_ARGUMENT();
 		aItem = a;
@@ -109,10 +117,11 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 				node = argumentList->node;
 			}
 		}
-		//CTR_DEBUG_STR("Sending message: %s \n",message,l);
 		result = ctr_send_message(r, message, l, a);
 		aItem = a;
-		if (!CtrStdError) ctr_callstack_index --;
+		if (CtrStdError == NULL) {
+			ctr_callstack_index --;
+		}
 		while(aItem->next) {
 			a = aItem;
 			aItem = aItem->next;

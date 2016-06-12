@@ -99,6 +99,7 @@ int main(int argc, char* argv[]) {
 	ctr_callstack_index = 0;
 	ctr_source_map_head = NULL;
 	ctr_source_mapping = 0;
+	CtrStdError = NULL;
 	ctr_cli_read_args(argc, argv);
 	if (ctr_mode_compile) {
 		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
