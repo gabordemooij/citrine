@@ -1,0 +1,7 @@
+#NOAST
+#If an object does not understand a message
+#it should NOT trigger error, but using a non-existing variable
+#should trigger an exception with a stack trace.
+x := Object new.
+x doesNotUnderstand this.
+y doYouExist: (3 * 6).

@@ -1,0 +1,27 @@
+#NOAST
+#Test stacktrace if we send a message to a non-existing
+#object property.
+
+CoffeeGrounds := Object new.
+CoffeeGrounds on: 'extract' do: {\ ^ 'coffee'. }.
+
+CoffeeMachine := Object new.
+CoffeeMachine on: 'init' do: {\ 
+	my coffeegrounds := CoffeeGrounds new.
+}.
+CoffeeMachine on: 'new' do: {\
+	^ CoffeeMachine `new init.
+}.
+
+CoffeeMachine on: 'makeTea' do: {\	^ (my tealeaves extract). }. #tealeaves is not defined!
+CoffeeMachine on: 'makeCoffee' do: {\ ^ (my coffeegrounds extract). }.
+
+coffeeDream := CoffeeMachine new.
+
+Pen write:
+	coffeeDream 
+	makeCoffee.
+
+Pen write:
+	coffeeDream 
+	makeTea.
