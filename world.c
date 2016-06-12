@@ -523,7 +523,18 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 		i--;
 	}
 	if (!foundObject) {
-		printf("Error, cannot assign, key not found: %s, forgot to use var ?\n", key->value.svalue->value); exit(1);
+		char* key_name;
+		char* message;
+		char* full_message;
+		int message_size;
+		message = "Cannot assign to undefined variable: ";
+		message_size = ((strlen(message))+key->value.svalue->vlen);
+		full_message = malloc(message_size*sizeof(char));
+		CTR_2CSTR(key_name, key);
+		memcpy(full_message, message, strlen(message));
+		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
+		CtrStdError = ctr_build_string(full_message, message_size);
+		return;
 	}
 	ctr_internal_object_set_property(context, key, object, 0);
 }

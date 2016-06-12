@@ -147,6 +147,9 @@ ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
 	ctr_tnode* value = valueListItem->node;
 	ctr_object* x = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_object* result;
+	if (CtrStdError == NULL) {
+		ctr_callstack[ctr_callstack_index++] = assignee;
+	}
 	x = ctr_cwlk_expr(value, &wasReturn);
 	if (assignee->modifier == 1) {
 		result = ctr_assign_value_to_my(ctr_build_string(assignee->value, assignee->vlen), x);
@@ -154,6 +157,9 @@ ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
 		result = ctr_assign_value_to_local(ctr_build_string(assignee->value, assignee->vlen), x);
 	} else {
 		result = ctr_assign_value(ctr_build_string(assignee->value, assignee->vlen), x);
+	}
+	if (CtrStdError == NULL) {
+		ctr_callstack_index--;
 	}
 	return result;
 }	

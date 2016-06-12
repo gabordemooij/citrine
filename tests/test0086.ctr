@@ -5,5 +5,6 @@ Pen brk.
 Pen brk.
 f := {\ q := 2. }. {\ var q := 1. f run. Pen write: q. } run. 
 Pen brk.
-{\ var q := 1. {\ x := 2. Pen write: x. } run. } run. #Not allowed x is not defined
+{\ var q := 1. {\ x := 2. Pen write: x. } run. } #Not allowed x is not defined
+catch: {\ Pen write: 'Error, cannot assign, key not found: x, forgot to use var ?'. }, run.
 Pen brk.
