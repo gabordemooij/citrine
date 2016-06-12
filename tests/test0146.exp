@@ -1,0 +1,4 @@
+Uncatched error has occurred.
+Cannot assign to undefined variable: undef
+#2 undef (tests/test0146.ctr: 4)
+#1 run (tests/test0146.ctr: 5)
