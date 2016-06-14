@@ -10,16 +10,16 @@
 char* ctr_cparse_current_program;
 
 
-void ctr_cparse_emit_error_unexpected( int t )
+void ctr_cparse_emit_error_unexpected( int t, char* hint )
 {
 	char* message;
 	printf( "Parse error, unexpected " );
 	message = ctr_clex_tok_describe( t );
 	printf( message );
 	printf( " ( %s: %d )\n", ctr_cparse_current_program, ctr_clex_line_number );
+	printf( hint );
 	exit(1);
 }
-
 
 ctr_tnode* ctr_create_node( int type ){
 	ctr_tnode* node = (ctr_tnode*) ctr_malloc(sizeof(ctr_tnode), type);
@@ -227,7 +227,7 @@ ctr_tnode* ctr_cparse_popen() {
 	li->node = ctr_cparse_expr(0);
 	t = ctr_clex_tok();
 	if (t != CTR_TOKEN_PARCLOSE) {
-		ctr_cparse_emit_error_unexpected( t );
+		ctr_cparse_emit_error_unexpected( t, "Expected ).\n" );
 	}
 	return r;
 }
@@ -282,7 +282,7 @@ ctr_tnode* ctr_cparse_block() {
 		t = ctr_clex_tok();
 	}
 	if (t != CTR_TOKEN_BLOCKPIPE) {
-		ctr_cparse_emit_error_unexpected( t );
+		ctr_cparse_emit_error_unexpected( t, "Expected |.\n" );
 	}
 	t = ctr_clex_tok();
 	first = 1;
@@ -315,7 +315,7 @@ ctr_tnode* ctr_cparse_block() {
 		}
 		t = ctr_clex_tok();
 		if (t != CTR_TOKEN_DOT) {
-			ctr_cparse_emit_error_unexpected( t );
+			ctr_cparse_emit_error_unexpected( t, "Expected a dot (.).\n" );
 		}
 	}
 	return r;
@@ -476,7 +476,7 @@ ctr_tnode* ctr_cparse_receiver() {
 		case CTR_TOKEN_PAROPEN:
 			return ctr_cparse_popen();
 		default:
-			ctr_cparse_emit_error_unexpected( t );
+			ctr_cparse_emit_error_unexpected( t, "Expected a message recipient.\n" );
 	}
 }
 
@@ -590,7 +590,7 @@ ctr_tlistitem* ctr_cparse_statement() {
 	}
 	t = ctr_clex_tok();
 	if (t != CTR_TOKEN_DOT) {
-		ctr_cparse_emit_error_unexpected( t );
+		ctr_cparse_emit_error_unexpected( t, "Expeted a dot (.).\n" );
 	}
 	return li;
 }
