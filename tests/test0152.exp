@@ -1,0 +1,2 @@
+Parse error, unexpected := ( tests/test0152.ctr: 3 )
+Keyword 'var' should always be followed by property name!

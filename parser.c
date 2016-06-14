@@ -16,7 +16,7 @@ void ctr_cparse_emit_error_unexpected( int t, char* hint )
 	printf( "Parse error, unexpected " );
 	message = ctr_clex_tok_describe( t );
 	printf( message );
-	printf( " ( %s: %d )\n", ctr_cparse_current_program, ctr_clex_line_number );
+	printf( " ( %s: %d )\n", ctr_cparse_current_program, ctr_clex_line_number+1 );
 	printf( hint );
 	exit(1);
 }
