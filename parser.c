@@ -9,7 +9,14 @@
 
 char* ctr_cparse_current_program;
 
-
+/**
+ * CTRParserEmitErrorUnexpected
+ *
+ * Emits a parser error and adds the file and
+ * position where the error has occurred.
+ * Optionally you can pass a hint to this method to
+ * add some details to the error message.
+ */
 void ctr_cparse_emit_error_unexpected( int t, char* hint )
 {
 	char* message;
