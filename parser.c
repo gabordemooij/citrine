@@ -7,6 +7,8 @@
 #include <stdint.h>
 #include "citrine.h"
 
+char* ctr_cparse_current_program;
+
 ctr_tnode* ctr_create_node( int type ){
 	ctr_tnode* node = (ctr_tnode*) ctr_malloc(sizeof(ctr_tnode), type);
 	if (ctr_source_mapping) {
@@ -465,7 +467,11 @@ ctr_tnode* ctr_cparse_receiver() {
 		case CTR_TOKEN_PAROPEN:
 			return ctr_cparse_popen();
 		default:
-			printf("Error, unexpected token: %d.\n", t);
+			printf( "Parse error, unexpected " );
+			char* message;
+			message = ctr_clex_tok_describe( t );
+			printf( message );
+			printf( " ( %s: %d )\n", ctr_cparse_current_program, ctr_clex_line_number );
 			exit(1);
 	}
 }
@@ -618,6 +624,7 @@ ctr_tnode* ctr_cparse_program() {
 ctr_tnode*  ctr_cparse_parse(char* prg, char* pathString) {
 	ctr_tnode* program;
 	ctr_clex_load(prg);
+	ctr_cparse_current_program = pathString;
 	program = ctr_cparse_program();
 	if (pathString!="") {
 		program->value = pathString;

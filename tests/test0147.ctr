@@ -1,0 +1,4 @@
+#NOAST
+Pen write: 'aaa', brk.
+{\ ^^. } run.
+Pen write: 'aaa', brk.

@@ -20,6 +20,26 @@ int       ctr_clex_verbatim_mode = 0;              /* flag: indicates whether le
 uintptr_t ctr_clex_verbatim_mode_insert_quote = 0; /* pointer to 'overlay' the 'fake quote' for verbatim mode */
 int ctr_clex_old_line_number = 0;
 
+char* ctr_clex_desc_tok_ref = "reference";
+char* ctr_clex_desc_tok_quote = "'";
+char* ctr_clex_desc_tok_number = "number";
+char* ctr_clex_desc_tok_paropen = "(";
+char* ctr_clex_desc_tok_parclose = ")";
+char* ctr_clex_desc_tok_blockopen = "{";
+char* ctr_clex_desc_tok_blockclose = "}";
+char* ctr_clex_desc_tok_colon = ":";
+char* ctr_clex_desc_tok_dot = ".";
+char* ctr_clex_desc_tok_chain = ",";
+char* ctr_clex_desc_tok_blockpipe = "|";
+char* ctr_clex_desc_tok_booleanyes = "True";
+char* ctr_clex_desc_tok_booleanno = "False";
+char* ctr_clex_desc_tok_nil = "Nil";
+char* ctr_clex_desc_tok_assignment = ":=";
+char* ctr_clex_desc_tok_ret = "^";
+char* ctr_clex_desc_tok_fin = "end of program";
+char* ctr_clex_desc_tok_unknown = "(unknown token)";
+
+
 /**
  * CTRLexerLoad
  *
@@ -42,6 +62,69 @@ void ctr_clex_load(char* prg) {
 char* ctr_clex_tok_value() {
 	return ctr_clex_buffer;
 }
+
+
+char* ctr_clex_tok_describe(int token)
+{
+	char* description;
+	switch(token) {
+		case CTR_TOKEN_RET:
+			description = ctr_clex_desc_tok_ret;
+			break;
+		case CTR_TOKEN_ASSIGNMENT:
+			description = ctr_clex_desc_tok_assignment;
+			break;
+		case CTR_TOKEN_BLOCKCLOSE:
+			description = ctr_clex_desc_tok_blockclose;
+			break;
+		case CTR_TOKEN_BLOCKOPEN:
+			description = ctr_clex_desc_tok_blockopen;
+			break;
+		case CTR_TOKEN_BLOCKPIPE:
+			description = ctr_clex_desc_tok_blockpipe;
+			break;
+		case CTR_TOKEN_BOOLEANNO:
+			description = ctr_clex_desc_tok_booleanno;
+			break;
+		case CTR_TOKEN_BOOLEANYES:
+			description = ctr_clex_desc_tok_booleanyes;
+			break;
+		case CTR_TOKEN_CHAIN:
+			description = ctr_clex_desc_tok_chain;
+			break;
+		case CTR_TOKEN_COLON:
+			description = ctr_clex_desc_tok_colon;
+			break;
+		case CTR_TOKEN_DOT:
+			description = ctr_clex_desc_tok_dot;
+			break;
+		case CTR_TOKEN_FIN:
+			description = ctr_clex_desc_tok_fin;
+			break;
+		case CTR_TOKEN_NIL:
+			description = ctr_clex_desc_tok_nil;
+			break;
+		case CTR_TOKEN_NUMBER:
+			description = ctr_clex_desc_tok_number;
+			break;
+		case CTR_TOKEN_PARCLOSE:
+			description = ctr_clex_desc_tok_parclose;
+			break;
+		case CTR_TOKEN_PAROPEN:
+			description = ctr_clex_desc_tok_paropen;
+			break;
+		case CTR_TOKEN_QUOTE:
+			description = ctr_clex_desc_tok_quote;
+			break;
+		case CTR_TOKEN_REF:
+			description = ctr_clex_desc_tok_ref;
+			break;
+		default:
+			description = ctr_clex_desc_tok_unknown;
+	}
+	return description;
+}
+
 
 /**
  * CTRLexerTokenValueLength
