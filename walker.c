@@ -262,7 +262,6 @@ ctr_object* ctr_cwlk_run(ctr_tnode* program) {
 	ctr_object* result = NULL;
 	char wasReturn = 0;
 	ctr_tlistitem* li;
-	if (ctr_mode_debug) ctr_internal_debug_tree(program, 0);
 	li = program->nodes;
 	while(li) {
 		ctr_tnode* node = li->node;
