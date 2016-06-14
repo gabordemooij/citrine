@@ -28,6 +28,11 @@ void ctr_cparse_emit_error_unexpected( int t, char* hint )
 	exit(1);
 }
 
+/**
+ * CTRParserCreateNode
+ *
+ * Creates a parser node and adds it to the source map. 
+ */
 ctr_tnode* ctr_create_node( int type ){
 	ctr_tnode* node = (ctr_tnode*) ctr_malloc(sizeof(ctr_tnode), type);
 	if (ctr_source_mapping) {
@@ -43,7 +48,6 @@ ctr_tnode* ctr_create_node( int type ){
 	}
 	return node;
 }
-
 
 /**
  * CTRParserMessage
