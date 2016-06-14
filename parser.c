@@ -346,8 +346,7 @@ ctr_tnode* ctr_cparse_ref() {
 	if (strncmp("var", tmp, 3)==0 && r->vlen == 3) {
 		int t = ctr_clex_tok();
 		if (t != CTR_TOKEN_REF) {
-			printf("'var' should always be followed by property name!\n");
-			exit(1);
+			ctr_cparse_emit_error_unexpected( t, "Keyword 'var' should always be followed by property name!\n");
 		}
 		tmp = ctr_clex_tok_value();
 		r->modifier = 2;
