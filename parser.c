@@ -9,6 +9,18 @@
 
 char* ctr_cparse_current_program;
 
+
+void ctr_cparse_emit_error_unexpected( int t )
+{
+	char* message;
+	printf( "Parse error, unexpected " );
+	message = ctr_clex_tok_describe( t );
+	printf( message );
+	printf( " ( %s: %d )\n", ctr_cparse_current_program, ctr_clex_line_number );
+	exit(1);
+}
+
+
 ctr_tnode* ctr_create_node( int type ){
 	ctr_tnode* node = (ctr_tnode*) ctr_malloc(sizeof(ctr_tnode), type);
 	if (ctr_source_mapping) {
@@ -305,8 +317,7 @@ ctr_tnode* ctr_cparse_block() {
 		}
 		t = ctr_clex_tok();
 		if (t != CTR_TOKEN_DOT) {
-			printf("Expected . but got: %d.\n", t);
-			exit(1);
+			ctr_cparse_emit_error_unexpected( t );
 		}
 	}
 	return r;
@@ -467,12 +478,7 @@ ctr_tnode* ctr_cparse_receiver() {
 		case CTR_TOKEN_PAROPEN:
 			return ctr_cparse_popen();
 		default:
-			printf( "Parse error, unexpected " );
-			char* message;
-			message = ctr_clex_tok_describe( t );
-			printf( message );
-			printf( " ( %s: %d )\n", ctr_cparse_current_program, ctr_clex_line_number );
-			exit(1);
+			ctr_cparse_emit_error_unexpected( t );
 	}
 }
 
@@ -586,8 +592,7 @@ ctr_tlistitem* ctr_cparse_statement() {
 	}
 	t = ctr_clex_tok();
 	if (t != CTR_TOKEN_DOT) {
-		printf("Expected . but got: %d.\n", t);
-		exit(1);
+		ctr_cparse_emit_error_unexpected( t );
 	}
 	return li;
 }
