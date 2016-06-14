@@ -39,6 +39,11 @@ char* ctr_clex_desc_tok_ret = "^";
 char* ctr_clex_desc_tok_fin = "end of program";
 char* ctr_clex_desc_tok_unknown = "(unknown token)";
 
+/**
+ * CTRLexerEmitError
+ *
+ * Displays an error message for the lexer.
+ */
 void ctr_clex_emit_error( char* message )
 {
 	printf( message );
