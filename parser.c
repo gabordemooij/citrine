@@ -337,8 +337,7 @@ ctr_tnode* ctr_cparse_ref() {
 	if (strncmp("my", tmp, 2)==0 && r->vlen == 2) {
 		int t = ctr_clex_tok();
 		if (t != CTR_TOKEN_REF) {
-			printf("'My' should always be followed by property name!\n");
-			exit(1);
+			ctr_cparse_emit_error_unexpected( t, "'My' should always be followed by a property name!\n");
 		}
 		tmp = ctr_clex_tok_value();
 		r->modifier = 1;
