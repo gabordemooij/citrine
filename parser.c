@@ -227,8 +227,7 @@ ctr_tnode* ctr_cparse_popen() {
 	li->node = ctr_cparse_expr(0);
 	t = ctr_clex_tok();
 	if (t != CTR_TOKEN_PARCLOSE) {
-		printf("Error, expected ). \n");
-		exit(1);
+		ctr_cparse_emit_error_unexpected( t );
 	}
 	return r;
 }
