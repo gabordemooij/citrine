@@ -282,8 +282,8 @@ ctr_tnode* ctr_cparse_block() {
 		t = ctr_clex_tok();
 	}
 	if (t != CTR_TOKEN_BLOCKPIPE) {
+		ctr_cparse_emit_error_unexpected( t );
 		printf("Error expected blockpipe.");
-		exit(1);
 	}
 	t = ctr_clex_tok();
 	first = 1;
