@@ -9,7 +9,7 @@
 #include "citrine.h"
 
 
-int ctr_clex_bflmt = 100;
+int ctr_clex_bflmt = 255;
 ctr_size ctr_clex_tokvlen = 0; /* length of the string value of a token */
 char* ctr_clex_buffer;
 char* ctr_code;
@@ -39,6 +39,11 @@ char* ctr_clex_desc_tok_ret = "^";
 char* ctr_clex_desc_tok_fin = "end of program";
 char* ctr_clex_desc_tok_unknown = "(unknown token)";
 
+void ctr_clex_emit_error( char* message )
+{
+	printf( message );
+	exit(1);
+}
 
 /**
  * CTRLexerLoad
@@ -292,8 +297,7 @@ int ctr_clex_tok() {
 		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
 		i++;
 		if (i > ctr_clex_bflmt) {
-			printf("[ERROR L001]: Token Buffer Exausted. Tokens may not exceed 100 bytes.");
-			exit(1);
+			ctr_clex_emit_error("Token Buffer Exausted. Tokens may not exceed 255 bytes.\n");
 		}
 		ctr_code++;
 		c = *ctr_code;
