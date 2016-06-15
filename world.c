@@ -140,8 +140,6 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
 	uint64_t hashKey = ctr_internal_index_hash(key);
 	ctr_mapitem* head;
 	ctr_mapitem* oldMapItem;
-	ctr_object*  oldKey;
-	ctr_object*  oldValue;
 	if (is_method) {
 		if (owner->methods->size == 0) {
 			return;
