@@ -1,0 +1,3 @@
+#NOAST
+#Test parser error, expected message after chain
+Pen write: 'Hello world', ^.

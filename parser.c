@@ -172,8 +172,7 @@ ctr_tlistitem* ctr_cparse_messages(ctr_tnode* r, int mode) {
 		if (t == CTR_TOKEN_CHAIN) {
 			t = ctr_clex_tok();
 			if (t != CTR_TOKEN_REF) {
-				printf("Expected message.\n");
-				exit(1);
+				ctr_cparse_emit_error_unexpected( t, "Expected message.\n" );
 			}
 		}
 		li = CTR_PARSER_CREATE_LISTITEM();
