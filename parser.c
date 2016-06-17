@@ -139,8 +139,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 				msgpartlen ++;
 				t = ctr_clex_tok();
 				if (t != CTR_TOKEN_COLON) {
-					printf("Expected colon. %s \n",msg);
-					exit(1);
+					ctr_cparse_emit_error_unexpected( t, "Expected colon.\n" );
 				}
 			}
 		}
