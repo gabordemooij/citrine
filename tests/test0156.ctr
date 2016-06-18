@@ -1,0 +1,14 @@
+#NOAST
+#Test too many contexts open
+
+j := 1.
+
+func := {\
+
+	Pen write: 'Nested call #' + j, brk.
+	j add: 1.
+
+	func run.
+}.
+
+func run.
