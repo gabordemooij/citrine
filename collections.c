@@ -189,9 +189,9 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	block->info.sticky = 1;
 	for(i = 0; i < myself->value.avalue->head; i++) {
-		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
-		ctr_argument* argument2 = CTR_CREATE_ARGUMENT();
-		ctr_argument* argument3 = CTR_CREATE_ARGUMENT();
+		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+		ctr_argument* argument2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+		ctr_argument* argument3 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = ctr_build_number_from_float((double) i);
 		argument2->object = *(myself->value.avalue->elements + i);
 		argument3->object = myself;
@@ -364,7 +364,7 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_size j;
 		for(j = head; j <= putIndexNumber; j++) {
 			ctr_argument* argument;
-			argument = CTR_CREATE_ARGUMENT();
+			argument = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 			argument->object = CtrStdNil;
 			ctr_array_push(myself, argument);
 		}
@@ -437,8 +437,8 @@ ctr_object* ctr_array_from_to(ctr_object* myself, ctr_argument* argumentList) {
 	int i = 0;
 	ctr_object* newArray = ctr_array_new(CtrStdArray, NULL);
 	for(i = start; i < start + len; i++) {
-		pushArg = CTR_CREATE_ARGUMENT();
-		elnumArg = CTR_CREATE_ARGUMENT();
+		pushArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+		elnumArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		elnum = ctr_build_number_from_float((ctr_number) i);
 		elnumArg->object = elnum;
 		pushArg->object = ctr_array_get(myself, elnumArg);
@@ -458,8 +458,8 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newArray = ctr_array_new(CtrStdArray, NULL);
 	int i;
 	for(i = myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
-		ctr_argument* pushArg = CTR_CREATE_ARGUMENT();
-		ctr_argument* elnumArg = CTR_CREATE_ARGUMENT();
+		ctr_argument* pushArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+		ctr_argument* elnumArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		ctr_object* elnum = ctr_build_number_from_float((ctr_number) i);
 		elnumArg->object = elnum;
 		pushArg->object = ctr_array_get(myself, elnumArg);
@@ -467,8 +467,8 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	if (otherArray->info.type == CTR_OBJECT_TYPE_OTARRAY) {
 		for(i = otherArray->value.avalue->tail; i<otherArray->value.avalue->head; i++) {
-			ctr_argument* pushArg = CTR_CREATE_ARGUMENT();
-			ctr_argument* elnumArg = CTR_CREATE_ARGUMENT();
+			ctr_argument* pushArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+			ctr_argument* elnumArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 			ctr_object* elnum = ctr_build_number_from_float((ctr_number) i);
 			elnumArg->object = elnum;
 			pushArg->object = ctr_array_get(otherArray, elnumArg);
@@ -486,8 +486,8 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* temp_sorter;
 int ctr_sort_cmp(const void * a, const void * b) {
-	ctr_argument* arg1 = CTR_CREATE_ARGUMENT();
-	ctr_argument* arg2 = CTR_CREATE_ARGUMENT();
+	ctr_argument* arg1 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+	ctr_argument* arg2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	ctr_object* result;
 	ctr_object* numResult;
 	arg1->next = arg2;
@@ -627,9 +627,9 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	block->info.sticky = 1;
 	m = myself->properties->head;
 	while(m && !CtrStdError) {
-		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
-		ctr_argument* argument2 = CTR_CREATE_ARGUMENT();
-		ctr_argument* argument3 = CTR_CREATE_ARGUMENT();
+		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+		ctr_argument* argument2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+		ctr_argument* argument3 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = m->key;
 		argument2->object = m->value;
 		argument3->object = myself;

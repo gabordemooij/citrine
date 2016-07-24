@@ -65,7 +65,7 @@ ctr_object* ctr_request_array(ctr_object* myself, ctr_argument* argumentList, CG
 		return list;
 	}
 	for (i = 0; value[i] != 0; i++) {
-		arg = CTR_CREATE_ARGUMENT();
+		arg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		val = (char*) value[i];
 		arg->object = ctr_build_string_from_cstring(val);
 		ctr_array_push(list, arg);  
@@ -93,7 +93,7 @@ ctr_object* ctr_request_internal_option(ctr_object* myself, char* optName) {
  */
 void ctr_request_serve_callback() {
 	ctr_argument* argumentList;
-	argumentList = CTR_CREATE_ARGUMENT();
+	argumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	varlistGet = CGI_get_query(NULL);
 	varlistCookie = CGI_get_cookie(NULL);
 	varlistPost = CGI_get_post(NULL,"/tmp/_upXXXXXX");
@@ -197,7 +197,7 @@ ctr_object* ctr_request_file(ctr_object* myself, ctr_argument* argumentList) {
     list = ctr_array_new(CtrStdArray, NULL);
 	if (value == 0 || value[1] == 0) return list;
     for (i = 0; value[i] != 0; i++) {
-		arg = CTR_CREATE_ARGUMENT();
+		arg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		val = (char*) value[i];
 		arg->object = ctr_build_string_from_cstring(val);
 		ctr_array_push(list, arg);

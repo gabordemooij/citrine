@@ -289,7 +289,7 @@ ctr_object* ctr_shell_respond_to_with(ctr_object* myself, ctr_argument* argument
 	strncpy(command + (prefix->value.svalue->vlen - 1), " ", 1); /* space to separate commands */
 	strncpy(command + (prefix->value.svalue->vlen), suffix->value.svalue->value, suffix->value.svalue->vlen);
 	commandObj = ctr_build_string(command, len);
-	newArgumentList = CTR_CREATE_ARGUMENT();
+	newArgumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	newArgumentList->object = commandObj;
 	ctr_shell_call(myself, newArgumentList);
 	return myself;

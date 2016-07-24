@@ -250,7 +250,7 @@ ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
-		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
+		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = myself;
 		return ctr_block_run(codeBlock, arguments, NULL);
 	}
@@ -271,7 +271,7 @@ ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
 	if (!myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
-		ctr_argument* arguments = CTR_CREATE_ARGUMENT();
+		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = myself;
 		return ctr_block_run(codeBlock, arguments, NULL);
 	}
@@ -550,7 +550,7 @@ ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 	if (otherNum->info.type == CTR_OBJECT_TYPE_OTSTRING) {
 		strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 		strObject = ctr_internal_cast2string(myself);
-		newArg = CTR_CREATE_ARGUMENT();
+		newArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		newArg->object = otherNum;
 		return ctr_string_concat(strObject, newArg);
 	}
@@ -636,7 +636,7 @@ ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
 	t = myself->value.nvalue;
 	for(i=0; i<t; i++) {
 		indexNumber = ctr_build_number_from_float((ctr_number) i);
-		arguments = CTR_CREATE_ARGUMENT();
+		arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = indexNumber;
 		ctr_block_run(block, arguments, NULL);
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
@@ -866,7 +866,7 @@ ctr_object* ctr_number_to_step_do(ctr_object* myself, ctr_argument* argumentList
 		return myself;
 	}
 	while(((forward && curValue <= endValue) || (!forward && curValue >= endValue)) && !CtrStdError) {
-		arguments = CTR_CREATE_ARGUMENT();
+		arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = ctr_build_number_from_float(curValue);
 		ctr_block_run(codeBlock, arguments, NULL);
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue and go on */
@@ -1240,8 +1240,8 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* argument1;
 	ctr_argument* argument2;
 	if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_string("",0);
-	argument1 = CTR_CREATE_ARGUMENT();
-	argument2 = CTR_CREATE_ARGUMENT();
+	argument1 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+	argument2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	argument1->object = argumentList->object;
 	argument1->next = argument2;
 	argument2->object = ctr_build_number_from_float(myself->value.svalue->vlen - argumentList->object->value.nvalue);
@@ -1786,7 +1786,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 		ctr_object* catchBlock = ctr_heap_allocate( sizeof( ctr_object ) );
 		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string("catch",5), 0);
 		if (catchBlock != NULL) {
-			ctr_argument* a = CTR_CREATE_ARGUMENT();
+			ctr_argument* a = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 			a->object = CtrStdError;
 			CtrStdError = NULL;
 			ctr_block_run(catchBlock, a, my);

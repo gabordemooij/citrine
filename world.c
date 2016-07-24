@@ -917,7 +917,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 			argCounter = argCounter->next;
 			argCount ++;
 		}
-		mesgArgument = CTR_CREATE_ARGUMENT();
+		mesgArgument = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		mesgArgument->object = ctr_build_string(message, vlen);
 		mesgArgument->next = argumentList;
 		if (argCount == 0 || argCount > 2) {

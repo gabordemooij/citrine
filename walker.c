@@ -102,7 +102,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 			ctr_callstack[ctr_callstack_index++] = msgnode;
 		}
 		argumentList = msgnode->nodes;
-		a = CTR_CREATE_ARGUMENT();
+		a = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		aItem = a;
 		if (argumentList) {
 			ctr_tnode* node;
@@ -110,7 +110,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 			while(1) {
 				ctr_object* o = ctr_cwlk_expr(node, &wasReturn);
 				aItem->object = o;
-				aItem->next = CTR_CREATE_ARGUMENT();
+				aItem->next = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 				aItem = aItem->next;
 				if (!argumentList->next) break;
 				argumentList = argumentList->next;
