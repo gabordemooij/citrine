@@ -586,7 +586,6 @@ void* ctr_heap_reallocate(void* oldptr, uintptr_t size, uintptr_t old_size );
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='^'  && X!= ':' && X!= '\''
 #define CTR_CREATE_ARGUMENT() (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) )
-#define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) )
 #define CTR_2CSTR(cs, s) cs = ctr_heap_allocate((s->value.svalue->vlen+1) * sizeof(char) ); strncpy(cs, s->value.svalue->value, s->value.svalue->vlen); cs[s->value.svalue->vlen] = '\0';
 
 

@@ -91,7 +91,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 		m->type = CTR_AST_NODE_BINMESSAGE;
 		m->value = msg;
 		m->vlen = msgpartlen;
-		li = CTR_PARSER_CREATE_LISTITEM();
+		li = (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) );
 		li->node = ctr_cparse_expr(2);
 		m->nodes = li;
 		return m;
@@ -112,7 +112,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 		t = ctr_clex_tok();
 		first = 1;
 		while(1) {
-			li = CTR_PARSER_CREATE_LISTITEM();
+			li = (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) );
 			li->node = ctr_cparse_expr(1);
 			if (first) {
 				m->nodes = li;
@@ -175,7 +175,7 @@ ctr_tlistitem* ctr_cparse_messages(ctr_tnode* r, int mode) {
 				ctr_cparse_emit_error_unexpected( t, "Expected message.\n" );
 			}
 		}
-		li = CTR_PARSER_CREATE_LISTITEM();
+		li = (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) );
 		ctr_clex_putback();
 		node = ctr_cparse_message(mode);
 		if (node->type == -1) {
@@ -213,7 +213,7 @@ ctr_tnode* ctr_cparse_popen() {
 	ctr_clex_tok();
 	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_NESTED;
-	li = CTR_PARSER_CREATE_LISTITEM();
+	li = (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) );
 	r->nodes = li;
 	li->node = ctr_cparse_expr(0);
 	t = ctr_clex_tok();
@@ -241,9 +241,9 @@ ctr_tnode* ctr_cparse_block() {
 	ctr_clex_tok();
 	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_CODEBLOCK;
-	codeBlockPart1 = CTR_PARSER_CREATE_LISTITEM();
+	codeBlockPart1 = (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) );
 	r->nodes = codeBlockPart1;
-	codeBlockPart2 = CTR_PARSER_CREATE_LISTITEM();
+	codeBlockPart2 = (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) );
 	r->nodes->next = codeBlockPart2;
 	paramList = ctr_cparse_create_node( CTR_AST_NODE );
 	codeList  = ctr_cparse_create_node( CTR_AST_NODE );
@@ -254,7 +254,7 @@ ctr_tnode* ctr_cparse_block() {
 	t = ctr_clex_tok();
 	first = 1;
 	while(t == CTR_TOKEN_REF) {
-		ctr_tlistitem* paramListItem = CTR_PARSER_CREATE_LISTITEM();
+		ctr_tlistitem* paramListItem = (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) );
 		ctr_tnode* paramItem = ctr_cparse_create_node( CTR_AST_NODE );
 		long l = ctr_clex_tok_value_length();
 		paramItem->value = ctr_heap_allocate( sizeof( char ) * l );
@@ -285,7 +285,7 @@ ctr_tnode* ctr_cparse_block() {
 		t = ctr_clex_tok();
 		if (t == CTR_TOKEN_BLOCKCLOSE) break;
 		ctr_clex_putback();
-		codeListItem = CTR_PARSER_CREATE_LISTITEM();
+		codeListItem = (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) );
 		codeNode = ctr_cparse_create_node( CTR_AST_NODE );
 		if (t == CTR_TOKEN_RET) {
 			codeNode = ctr_cparse_ret();
@@ -477,8 +477,8 @@ ctr_tnode* ctr_cparse_assignment(ctr_tnode* r) {
 	ctr_tlistitem* liAssignExpr;
 	ctr_clex_tok();
 	a = ctr_cparse_create_node( CTR_AST_NODE );
-	li = CTR_PARSER_CREATE_LISTITEM();
-	liAssignExpr = CTR_PARSER_CREATE_LISTITEM();
+	li = (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) );
+	liAssignExpr = (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) );
 	a->type = CTR_AST_NODE_EXPRASSIGNMENT;
 	a->nodes = li;
 	li->node = r;
@@ -512,7 +512,7 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 			ctr_clex_putback();
 			return r; /* no messages, then just return receiver (might be in case of argument). */
 		}
-		rli = CTR_PARSER_CREATE_LISTITEM();
+		rli = (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) );
 		rli->node = r;
 		rli->next = nodes;
 		e->nodes = rli;
@@ -533,7 +533,7 @@ ctr_tnode* ctr_cparse_ret() {
 	ctr_clex_tok();
 	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_RETURNFROMBLOCK;
-	li = CTR_PARSER_CREATE_LISTITEM();
+	li = (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) );
 	r->nodes = li;
 	li->node = ctr_cparse_expr(0);
 	return r;
@@ -558,7 +558,7 @@ ctr_tnode* ctr_cparse_fin() {
  * Generates a set of nodes representing a statement.
  */
 ctr_tlistitem* ctr_cparse_statement() {
-	ctr_tlistitem* li = CTR_PARSER_CREATE_LISTITEM();
+	ctr_tlistitem* li = (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) );
 	int t = ctr_clex_tok();
 	ctr_clex_putback();
 	if (t == CTR_TOKEN_FIN) {
