@@ -30,6 +30,13 @@
 #define CTR_UTF8_BYTE3 240
 
 /**
+ * Define AST node memory footprints,
+ * types of nodes in the AST.
+ */
+#define CTR_AST_NODE 1
+#define CTR_AST_PROGRAM 3
+
+/**
  * Define the Citrine node types for the
  * Abstract Syntax Tree (AST).
  */
@@ -583,8 +590,6 @@ void* ctr_heap_reallocate(void* oldptr, uintptr_t size, uintptr_t old_size );
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='^'  && X!= ':' && X!= '\''
 #define CTR_CREATE_ARGUMENT() (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) )
 #define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) )
-#define	CTR_PARSER_CREATE_NODE() ctr_create_node(1);
-#define	CTR_PARSER_CREATE_PROGRAM_NODE() ctr_create_node(3);
 #define CTR_2CSTR(cs, s) cs = ctr_heap_allocate((s->value.svalue->vlen+1) * sizeof(char) ); strncpy(cs, s->value.svalue->value, s->value.svalue->vlen); cs[s->value.svalue->vlen] = '\0';
 
 

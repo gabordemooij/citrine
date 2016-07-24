@@ -33,7 +33,7 @@ void ctr_cparse_emit_error_unexpected( int t, char* hint )
  *
  * Creates a parser node and adds it to the source map. 
  */
-ctr_tnode* ctr_create_node( int type ){
+ctr_tnode* ctr_cparse_create_node( int type ){
 	ctr_tnode* node = (ctr_tnode*) ctr_heap_allocate( sizeof( ctr_tnode ) );
 	if (ctr_source_mapping) {
 		ctr_source_map* m = (ctr_source_map*) ctr_heap_allocate( sizeof( ctr_source_map ) );
@@ -76,7 +76,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 		printf("Message too long\n");
 		exit(1);
 	}
-	m = CTR_PARSER_CREATE_NODE();
+	m = ctr_cparse_create_node( CTR_AST_NODE );
 	m->type = -1;
 	s = ctr_clex_tok_value();
 	msg = ctr_heap_allocate( 255 * sizeof( char ) );
@@ -211,7 +211,7 @@ ctr_tnode* ctr_cparse_popen() {
 	ctr_tlistitem* li;
 	int t;
 	ctr_clex_tok();
-	r = CTR_PARSER_CREATE_NODE();
+	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_NESTED;
 	li = CTR_PARSER_CREATE_LISTITEM();
 	r->nodes = li;
@@ -239,14 +239,14 @@ ctr_tnode* ctr_cparse_block() {
 	int t;
 	int first;
 	ctr_clex_tok();
-	r = CTR_PARSER_CREATE_NODE();
+	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_CODEBLOCK;
 	codeBlockPart1 = CTR_PARSER_CREATE_LISTITEM();
 	r->nodes = codeBlockPart1;
 	codeBlockPart2 = CTR_PARSER_CREATE_LISTITEM();
 	r->nodes->next = codeBlockPart2;
-	paramList = CTR_PARSER_CREATE_NODE();
-	codeList  = CTR_PARSER_CREATE_NODE();	
+	paramList = ctr_cparse_create_node( CTR_AST_NODE );
+	codeList  = ctr_cparse_create_node( CTR_AST_NODE );
 	codeBlockPart1->node = paramList;
 	codeBlockPart2->node = codeList;
 	paramList->type = CTR_AST_NODE_PARAMLIST;
@@ -255,7 +255,7 @@ ctr_tnode* ctr_cparse_block() {
 	first = 1;
 	while(t == CTR_TOKEN_REF) {
 		ctr_tlistitem* paramListItem = CTR_PARSER_CREATE_LISTITEM();
-		ctr_tnode* paramItem = CTR_PARSER_CREATE_NODE();
+		ctr_tnode* paramItem = ctr_cparse_create_node( CTR_AST_NODE );
 		long l = ctr_clex_tok_value_length();
 		paramItem->value = ctr_heap_allocate( sizeof( char ) * l );
 		memcpy(paramItem->value, ctr_clex_tok_value(), l);
@@ -286,7 +286,7 @@ ctr_tnode* ctr_cparse_block() {
 		if (t == CTR_TOKEN_BLOCKCLOSE) break;
 		ctr_clex_putback();
 		codeListItem = CTR_PARSER_CREATE_LISTITEM();
-		codeNode = CTR_PARSER_CREATE_NODE();
+		codeNode = ctr_cparse_create_node( CTR_AST_NODE );
 		if (t == CTR_TOKEN_RET) {
 			codeNode = ctr_cparse_ret();
 		} else {
@@ -318,7 +318,7 @@ ctr_tnode* ctr_cparse_ref() {
 	ctr_tnode* r;
 	char* tmp;
 	ctr_clex_tok();
-	r = CTR_PARSER_CREATE_NODE();
+	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_REFERENCE;
 	r->vlen = ctr_clex_tok_value_length();
 	tmp = ctr_clex_tok_value();
@@ -355,7 +355,7 @@ ctr_tnode* ctr_cparse_string() {
 	char* n;
 	ctr_size vlen;
 	ctr_clex_tok();
-	r = CTR_PARSER_CREATE_NODE();
+	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_LTRSTRING;
 	n = ctr_clex_readstr();
 	vlen = ctr_clex_tok_value_length();
@@ -378,7 +378,7 @@ ctr_tnode* ctr_cparse_number() {
 	ctr_tnode* r;
 	long l;
 	ctr_clex_tok();
-	r = CTR_PARSER_CREATE_NODE();
+	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_LTRNUM;
 	n = ctr_clex_tok_value();
 	l = ctr_clex_tok_value_length();
@@ -396,7 +396,7 @@ ctr_tnode* ctr_cparse_number() {
 ctr_tnode* ctr_cparse_false() {
 	ctr_tnode* r;
 	ctr_clex_tok();
-	r = CTR_PARSER_CREATE_NODE();
+	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_LTRBOOLFALSE;
 	r->value = ctr_heap_allocate( sizeof( char ) * 4 );
 	memcpy( r->value, "False", 5 );
@@ -412,7 +412,7 @@ ctr_tnode* ctr_cparse_false() {
 ctr_tnode* ctr_cparse_true() {
 	ctr_tnode* r;
 	ctr_clex_tok();
-	r = CTR_PARSER_CREATE_NODE();
+	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_LTRBOOLTRUE;
 	r->value = ctr_heap_allocate( sizeof( char ) * 4 );
 	memcpy( r->value, "True", 4 );
@@ -428,7 +428,7 @@ ctr_tnode* ctr_cparse_true() {
 ctr_tnode* ctr_cparse_nil() {
 	ctr_tnode* r;
 	ctr_clex_tok();
-	r = CTR_PARSER_CREATE_NODE();
+	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_LTRNIL;
 	r->value = "Nil";
 	r->vlen = 3;
@@ -476,7 +476,7 @@ ctr_tnode* ctr_cparse_assignment(ctr_tnode* r) {
 	ctr_tlistitem* li;
 	ctr_tlistitem* liAssignExpr;
 	ctr_clex_tok();
-	a = CTR_PARSER_CREATE_NODE();
+	a = ctr_cparse_create_node( CTR_AST_NODE );
 	li = CTR_PARSER_CREATE_LISTITEM();
 	liAssignExpr = CTR_PARSER_CREATE_LISTITEM();
 	a->type = CTR_AST_NODE_EXPRASSIGNMENT;
@@ -504,7 +504,7 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 	if (r->type == CTR_AST_NODE_REFERENCE && t2 == CTR_TOKEN_ASSIGNMENT) {
 		e = ctr_cparse_assignment(r);
 	} else if (t2 != CTR_TOKEN_DOT && t2 != CTR_TOKEN_PARCLOSE && t2 != CTR_TOKEN_CHAIN) {
-		e = CTR_PARSER_CREATE_NODE();
+		e = ctr_cparse_create_node( CTR_AST_NODE );
 		e->type = CTR_AST_NODE_EXPRMESSAGE;
 		nodes = ctr_cparse_messages(r, mode);
 		if (nodes == NULL) {
@@ -531,7 +531,7 @@ ctr_tnode* ctr_cparse_ret() {
 	ctr_tlistitem* li;
 	ctr_tnode* r;
 	ctr_clex_tok();
-	r = CTR_PARSER_CREATE_NODE();
+	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_RETURNFROMBLOCK;
 	li = CTR_PARSER_CREATE_LISTITEM();
 	r->nodes = li;
@@ -547,7 +547,7 @@ ctr_tnode* ctr_cparse_ret() {
 ctr_tnode* ctr_cparse_fin() {
 	ctr_tnode* f;
 	ctr_clex_tok();
-	f = CTR_PARSER_CREATE_NODE();
+	f = ctr_cparse_create_node( CTR_AST_NODE );
 	f->type = CTR_AST_NODE_ENDOFPROGRAM;
 	return f;
 }
@@ -583,7 +583,7 @@ ctr_tlistitem* ctr_cparse_statement() {
  * as an Abstract Syntax Tree (AST).
  */
 ctr_tnode* ctr_cparse_program() {
-	ctr_tnode* program = CTR_PARSER_CREATE_PROGRAM_NODE();
+	ctr_tnode* program = ctr_cparse_create_node( CTR_AST_PROGRAM );
 	ctr_tlistitem* pli;
 	int first = 1;
 	while(1) {
