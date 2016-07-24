@@ -77,7 +77,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "rb");
-	CTR_STAT_FREE(pathString, vlen+1);
+	ctr_heap_free( pathString, vlen + 1 );
 	if (!f) {
 		CtrStdError = ctr_build_string_from_cstring("Unable to open file.\0");
 		return CtrStdNil;
@@ -93,7 +93,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	fread(buffer, fileLen, 1, f);
 	fclose(f);
 	str = ctr_build_string(buffer, fileLen);
-	CTR_STAT_FREE(buffer, fileLen+1);
+	ctr_heap_free( buffer, fileLen + 1 );
 	return str;
 }
 
@@ -123,7 +123,7 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "wb+");
-	CTR_STAT_FREE(pathString, vlen+1);
+	ctr_heap_free( pathString, vlen + 1 );
 	if (!f) {
 		CtrStdError = ctr_build_string_from_cstring("Unable to open file.\0");
 		return CtrStdNil;
@@ -152,7 +152,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "ab+");
-	CTR_STAT_FREE(pathString, vlen+1);
+	ctr_heap_free( pathString, vlen + 1 );
 	if (!f) {
 		CtrStdError = ctr_build_string_from_cstring("Unable to open file.\0");
 		return CtrStdNil;
@@ -179,7 +179,7 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "r");
-	CTR_STAT_FREE(pathString, vlen+1);
+	ctr_heap_free( pathString, vlen + 1 );
 	exists = (f != NULL );
 	if (f) {
 		fclose(f);

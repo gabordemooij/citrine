@@ -422,7 +422,7 @@ ctr_object* ctr_build_number_from_string(char* str, ctr_size length) {
 	memcpy(numCStr, str, length);
 	numberObject->value.nvalue = atof(numCStr);
 	numberObject->link = CtrStdNumber;
-	CTR_STAT_FREE(numCStr, 40);
+	ctr_heap_free( numCStr, 40 );
 	return numberObject;
 }
 
@@ -1152,7 +1152,7 @@ ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 	dest = ctr_heap_allocate( sizeof( char ) * ( n1 + n2 ) );
 	memcpy(dest, myself->value.svalue->value, n1);
 	memcpy(dest+n1, strObject->value.svalue->value, n2);
-	CTR_STAT_FREE(strObject->value.svalue->value, (strObject->value.svalue->vlen*sizeof(char)));
+	ctr_heap_free( strObject->value.svalue->value, ( strObject->value.svalue->vlen * sizeof( char ) ) );
 	myself->value.svalue->value = dest;
 	myself->value.svalue->vlen  = (n1 + n2);
 	return myself;
@@ -1267,7 +1267,7 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 	char* dest = ctr_heap_allocate( ub * sizeof( char ) );
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	newString = ctr_build_string(dest,ub);
-	CTR_STAT_FREE(dest, ub * sizeof(char));
+	ctr_heap_free( dest, ub * sizeof( char ) );
 	return newString;
 }
 
@@ -1332,7 +1332,7 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
 		tstr[i] = toupper(str[i]);
 	}
 	newString = ctr_build_string(tstr, len);
-	CTR_STAT_FREE(tstr, len * sizeof(char));
+	ctr_heap_free( tstr, len * sizeof( char ) );
 	return newString;
 }
 
@@ -1355,7 +1355,7 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
 		tstr[i] = tolower(str[i]);
 	}
 	newString = ctr_build_string(tstr, len);
-	CTR_STAT_FREE(tstr, len * sizeof(char));
+	ctr_heap_free( tstr, len * sizeof( char ) );
 	return newString;
 }
 
@@ -1373,7 +1373,7 @@ ctr_object* ctr_string_to_lower1st(ctr_object* myself, ctr_argument* argumentLis
 	strncpy(tstr, myself->value.svalue->value, len);
 	tstr[0] = tolower(tstr[0]);
 	newString = ctr_build_string(tstr, len);
-	CTR_STAT_FREE(tstr, len * sizeof(char));
+	ctr_heap_free( tstr, len * sizeof( char ) );
 	return newString;
 }
 
@@ -1391,7 +1391,7 @@ ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentLis
 	strncpy(tstr, myself->value.svalue->value, len);
 	tstr[0] = toupper(tstr[0]);
 	newString = ctr_build_string(tstr, len);
-	CTR_STAT_FREE(tstr, len * sizeof(char));
+	ctr_heap_free( tstr, len * sizeof( char ) );
 	return newString;
 }
 
@@ -1504,7 +1504,7 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	tstr = ctr_heap_allocate( tlen * sizeof( char ) );
 	memcpy(tstr, str+begin, tlen);
 	newString = ctr_build_string(tstr, tlen);
-	CTR_STAT_FREE(tstr, tlen * sizeof(char));
+	ctr_heap_free( tstr, tlen * sizeof( char ) );
 	return newString;
 }
 
@@ -1537,7 +1537,7 @@ ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
 	tstr = ctr_heap_allocate( tlen * sizeof(char) );
 	memcpy(tstr, str+begin, tlen);
 	newString = ctr_build_string(tstr, tlen);
-	CTR_STAT_FREE(tstr, tlen * sizeof(char));
+	ctr_heap_free( tstr, tlen * sizeof( char ) );
 	return newString;
 }
 
@@ -1568,7 +1568,7 @@ ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
 	tstr = ctr_heap_allocate( tlen * sizeof(char) );
 	memcpy(tstr, str, tlen);
 	newString = ctr_build_string(tstr, tlen);
-	CTR_STAT_FREE(tstr, tlen * sizeof(char));
+	ctr_heap_free( tstr, tlen * sizeof( char ) );
 	return newString;
 }
 
@@ -1617,8 +1617,8 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 			arg = ctr_heap_allocate( sizeof( ctr_argument ) );
 			arg->object = ctr_build_string(elem, j-dlen);
 			ctr_array_push(arr, arg);
-			CTR_STAT_FREE(arg, sizeof(ctr_argument));
-			CTR_STAT_FREE(elem, sizeof(char)*(j-dlen));
+			ctr_heap_free( arg, sizeof( ctr_argument ) );
+			ctr_heap_free( elem, sizeof( char ) * ( j - dlen ) );
 			j=0;
 		}
 	}
@@ -1628,10 +1628,10 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 		arg = ctr_heap_allocate( sizeof( ctr_argument ) );
 		arg->object = ctr_build_string(elem, j);
 		ctr_array_push(arr, arg);
-		CTR_STAT_FREE(arg, sizeof(ctr_argument));
-		CTR_STAT_FREE(elem, sizeof(char)*j);
+		ctr_heap_free( arg, sizeof( ctr_argument ) );
+		ctr_heap_free( elem, sizeof( char ) * j );
 	}
-	CTR_STAT_FREE(buffer, sizeof(char)*len);
+	ctr_heap_free( buffer, sizeof( char ) * len );
 	return arr;
 }
 
@@ -1717,7 +1717,7 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 		}
 	}
 	newString = ctr_build_string(tstr, tlen);
-	CTR_STAT_FREE(tstr, tlen * sizeof(char));
+	ctr_heap_free( tstr, tlen * sizeof( char ) );
 	return newString;
 }
 

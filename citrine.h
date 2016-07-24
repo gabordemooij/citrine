@@ -640,7 +640,6 @@ void  ctr_heap_free( void* ptr, uintptr_t size );
 #define CTR_2CSTR(cs, s) cs = ctr_heap_allocate((s->value.svalue->vlen+1) * sizeof(char) ); strncpy(cs, s->value.svalue->value, s->value.svalue->vlen); cs[s->value.svalue->vlen] = '\0';
 
 #define CTR_STAT_REALLOC(O,F,T) (void*) ctr_realloc(O,T,F,0);
-#define CTR_STAT_FREE(P,X) ctr_heap_free( P, X);
 
 #define CTR_CONVFP(s,x){\
 char *buf = calloc(100, sizeof(char));\

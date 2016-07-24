@@ -184,7 +184,7 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
 				}
 				owner->properties->size --;
 			}
-			CTR_STAT_FREE(head, sizeof(ctr_mapitem));
+			ctr_heap_free( head, sizeof( ctr_mapitem ) );
 			return;
 		}
 		head = head->next;
@@ -375,7 +375,7 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 			CTR_CONVFP(s,o->value.nvalue);
 			slen = strlen(s);
 			stringObject = ctr_build_string(s, slen);
-			CTR_STAT_FREE(s, (sizeof(char)*80));
+			ctr_heap_free( s, ( sizeof( char ) * 80 ) );
 			return stringObject;
 			break;
 		case CTR_OBJECT_TYPE_OTBLOCK:

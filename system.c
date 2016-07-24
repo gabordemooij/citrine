@@ -80,7 +80,7 @@ void ctr_gc_sweep() {
 				mapItem = currentObject->methods->head;
 				while(mapItem) {
 					tmp = mapItem->next;
-					CTR_STAT_FREE(mapItem, sizeof(ctr_mapitem));
+					ctr_heap_free( mapItem, sizeof( ctr_mapitem ) );
 					mapItem = tmp;
 				}
 			}
@@ -88,34 +88,34 @@ void ctr_gc_sweep() {
 				mapItem = currentObject->properties->head;
 				while(mapItem) {
 					tmp = mapItem->next;
-					CTR_STAT_FREE(mapItem, sizeof(ctr_mapitem));
+					ctr_heap_free( mapItem, sizeof( ctr_mapitem ) );
 					mapItem = tmp;
 				}
 			}
-			CTR_STAT_FREE(currentObject->methods, sizeof(ctr_map));
-			CTR_STAT_FREE(currentObject->properties, sizeof(ctr_map));
+			ctr_heap_free( currentObject->methods, sizeof( ctr_map ) );
+			ctr_heap_free( currentObject->properties, sizeof( ctr_map ) );
 			switch (currentObject->info.type) {
 				case CTR_OBJECT_TYPE_OTSTRING:
 					if (currentObject->value.svalue != NULL) {
 						if (currentObject->value.svalue->vlen > 0) {
-							CTR_STAT_FREE(currentObject->value.svalue->value, (sizeof(char)*currentObject->value.svalue->vlen));
+							ctr_heap_free( currentObject->value.svalue->value, ( sizeof( char ) * currentObject->value.svalue->vlen ) );
 						}
-						CTR_STAT_FREE(currentObject->value.svalue, sizeof(ctr_string));
+						ctr_heap_free( currentObject->value.svalue, sizeof( ctr_string ) );
 					}
 				break;
 				case CTR_OBJECT_TYPE_OTARRAY:
-					CTR_STAT_FREE(currentObject->value.avalue->elements, (sizeof(ctr_object*) * currentObject->value.avalue->length));
-					CTR_STAT_FREE(currentObject->value.avalue, sizeof(ctr_collection));
+					ctr_heap_free( currentObject->value.avalue->elements, ( sizeof( ctr_object* ) * currentObject->value.avalue->length ) );
+					ctr_heap_free( currentObject->value.avalue, sizeof( ctr_collection ) );
 				break;
 				case CTR_OBJECT_TYPE_OTEX:
-					if (currentObject->value.rvalue != NULL) CTR_STAT_FREE(currentObject->value.rvalue, sizeof(ctr_resource));
+					if (currentObject->value.rvalue != NULL) ctr_heap_free( currentObject->value.rvalue, sizeof( ctr_resource ) );
 				break;
 			}
 			if ((ctr_gc_mode & 2) && ctr_gc_junk_counter < 100) {
 				ctr_gc_junkyard[ctr_gc_junk_counter] = currentObject;
 				ctr_gc_junk_counter ++;
 			} else {
-				CTR_STAT_FREE(currentObject, sizeof(ctr_object));
+				ctr_heap_free( currentObject, sizeof( ctr_object ) );
 			}
 			currentObject = nextObject;
 		} else {

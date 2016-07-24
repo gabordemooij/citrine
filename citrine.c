@@ -77,7 +77,7 @@ int main(int argc, char* argv[]) {
 	/*ctr_internal_debug_tree(program,1); -- for debugging */
 	ctr_initialize_world();
 	ctr_cwlk_run(program);
-	CTR_STAT_FREE(program, program_text_size);
+	ctr_heap_free( program, program_text_size );
 	exit(0);
 	return 0;
 }

@@ -297,7 +297,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 		memcpy(result+pos, str->value.svalue->value, str->value.svalue->vlen);
 	}
 	resultStr = ctr_build_string(result, len);
-	if (len > 0) CTR_STAT_FREE(result, sizeof(char)*len);
+	if (len > 0) ctr_heap_free( result, sizeof(char) * len );
 	return resultStr;
 }
 
