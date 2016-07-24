@@ -353,6 +353,9 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
 ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 	int slen;
 	char* s;
+	char* p;
+	char* buf;
+	int bufSize;
 	ctr_object* stringObject;
 	switch (o->info.type) {
 		case CTR_OBJECT_TYPE_OTSTRING:
@@ -372,7 +375,15 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 			break;
 		case CTR_OBJECT_TYPE_OTNUMBER:
 			s = ctr_heap_allocate( 80 * sizeof( char ) );
-			CTR_CONVFP(s,o->value.nvalue);
+			bufSize = 100 * sizeof( char );
+			buf = ctr_heap_allocate( bufSize );
+			snprintf( buf, 99, "%.10f", o->value.nvalue );
+			p = buf + strlen(buf) - 1;
+			while ( *p == '0' && *p-- != '.' );
+			*( p + 1 ) = '\0';
+			if ( *p == '.' ) *p = '\0';
+			strncpy( s, buf, strlen( buf ) );
+			ctr_heap_free( buf, bufSize );
 			slen = strlen(s);
 			stringObject = ctr_build_string(s, slen);
 			ctr_heap_free( s, ( sizeof( char ) * 80 ) );

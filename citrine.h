@@ -624,16 +624,4 @@ void* ctr_heap_reallocate(void* oldptr, uintptr_t size, uintptr_t old_size );
 #define ASSIGN_STRING(o,p,v,s) o->p = ctr_heap_allocate(s * sizeof(char) ); memcpy( (char*) o->p,v,s);
 #define CTR_2CSTR(cs, s) cs = ctr_heap_allocate((s->value.svalue->vlen+1) * sizeof(char) ); strncpy(cs, s->value.svalue->value, s->value.svalue->vlen); cs[s->value.svalue->vlen] = '\0';
 
-#define CTR_CONVFP(s,x){\
-char *buf = calloc(100, sizeof(char));\
-char *p;\
-snprintf(buf, 99, "%.10f", x);\
-p = buf + strlen(buf) - 1;\
-while (*p == '0' && *p-- != '.');\
-*(p+1) = '\0';\
-if (*p == '.') *p = '\0';\
-strncpy(s, buf, strlen(buf));\
-free (buf);\
-}
-
 
