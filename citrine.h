@@ -242,11 +242,6 @@ char** ctr_argv;
 /**
  * Mode of Operation
  */
-char  ctr_mode_compile;
-char  ctr_mode_debug;
-char  ctr_mode_load;
-char  ctr_mode_info;
-char* ctr_mode_compile_save_as;
 char* ctr_mode_input_file;
 
 

@@ -62,8 +62,6 @@ int main(int argc, char* argv[]) {
 	ctr_argc = argc;
 	ctr_argv = argv;
 	ctr_malloc_chunk_pointer = 0;
-	ctr_mode_compile = 0;
-	ctr_mode_load = 0;
 	ctr_gc_memlimit = 8388608;
 	ctr_callstack_index = 0;
 	ctr_source_map_head = NULL;
@@ -72,7 +70,6 @@ int main(int argc, char* argv[]) {
 	ctr_cli_read_args(argc, argv);
 	ctr_source_mapping = 1;
 	prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
-	ctr_malloc_mode = 0;
 	program = ctr_cparse_parse(prg, ctr_mode_input_file);
 	/*ctr_internal_debug_tree(program,1); -- for debugging */
 	ctr_initialize_world();
