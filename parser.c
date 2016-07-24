@@ -34,9 +34,9 @@ void ctr_cparse_emit_error_unexpected( int t, char* hint )
  * Creates a parser node and adds it to the source map. 
  */
 ctr_tnode* ctr_create_node( int type ){
-	ctr_tnode* node = (ctr_tnode*) ctr_malloc(sizeof(ctr_tnode), type);
+	ctr_tnode* node = (ctr_tnode*) ctr_heap_allocate( sizeof( ctr_tnode ) );
 	if (ctr_source_mapping) {
-		ctr_source_map* m = (ctr_source_map*) ctr_malloc(sizeof(ctr_source_map), 0);
+		ctr_source_map* m = (ctr_source_map*) ctr_heap_allocate( sizeof( ctr_source_map ) );
 		m->line = ctr_clex_line_number;
 		m->node = node;
 		if (ctr_source_map_head) {
@@ -79,7 +79,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 	m = CTR_PARSER_CREATE_NODE();
 	m->type = -1;
 	s = ctr_clex_tok_value();
-	msg = ctr_malloc(255*sizeof(char), 0);
+	msg = ctr_heap_allocate( 255 * sizeof( char ) );
 	memcpy(msg, s, msgpartlen);
 	ulen = ctr_getutf8len(msg, msgpartlen);
 	isBin = (ulen == 1);
@@ -257,7 +257,7 @@ ctr_tnode* ctr_cparse_block() {
 		ctr_tlistitem* paramListItem = CTR_PARSER_CREATE_LISTITEM();
 		ctr_tnode* paramItem = CTR_PARSER_CREATE_NODE();
 		long l = ctr_clex_tok_value_length();
-		paramItem->value = ctr_malloc(sizeof(char) * l, 0);
+		paramItem->value = ctr_heap_allocate( sizeof( char ) * l );
 		memcpy(paramItem->value, ctr_clex_tok_value(), l);
 		paramItem->vlen = l;
 		paramListItem->node = paramItem;
@@ -340,7 +340,7 @@ ctr_tnode* ctr_cparse_ref() {
 		r->modifier = 2;
 		r->vlen = ctr_clex_tok_value_length();
 	}
-	r->value = ctr_malloc(r->vlen, 0);
+	r->value = ctr_heap_allocate( r->vlen );
 	memcpy(r->value, tmp, r->vlen);
 	return r;
 }
@@ -359,7 +359,7 @@ ctr_tnode* ctr_cparse_string() {
 	r->type = CTR_AST_NODE_LTRSTRING;
 	n = ctr_clex_readstr();
 	vlen = ctr_clex_tok_value_length();
-	r->value = ctr_malloc(sizeof(char) * vlen, 0);
+	r->value = ctr_heap_allocate( sizeof( char ) * vlen );
 	memcpy(r->value, n, vlen);
 	r->vlen = vlen;
 	ctr_clex_tok(); /* eat trailing quote. */
@@ -382,7 +382,7 @@ ctr_tnode* ctr_cparse_number() {
 	r->type = CTR_AST_NODE_LTRNUM;
 	n = ctr_clex_tok_value();
 	l = ctr_clex_tok_value_length();
-	r->value = ctr_malloc(sizeof(char) * l, 0);
+	r->value = ctr_heap_allocate( sizeof( char ) * l );
 	memcpy(r->value, n, l);
 	r->vlen = l;
 	return r;

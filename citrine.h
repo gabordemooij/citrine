@@ -628,12 +628,11 @@ ctr_tnode* ctr_create_node();
 void* ctr_heap_allocate( uintptr_t size );
 void  ctr_heap_free( void* ptr, uintptr_t size );
 
-#define ctr_malloc(X,Y) ctr_heap_allocate(X);
 
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='^'  && X!= ':' && X!= '\''
 #define CTR_CREATE_ARGUMENT() (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) )
-#define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) ctr_malloc(sizeof(ctr_tlistitem), 2)
+#define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) )
 #define	CTR_PARSER_CREATE_NODE() ctr_create_node(1);
 #define	CTR_PARSER_CREATE_PROGRAM_NODE() ctr_create_node(3);
 #define ASSIGN_STRING(o,p,v,s) o->p = ctr_heap_allocate(s * sizeof(char) ); memcpy( (char*) o->p,v,s);
