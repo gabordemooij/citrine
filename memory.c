@@ -84,7 +84,7 @@ void ctr_heap_free( void* ptr, uintptr_t size ) {
  * the purpose for allocation, this function will attempt to
  * re-allocate the memory block.
  */
-void* ctr_realloc(void* oldptr, uintptr_t size, uintptr_t old_size, int what) {
+void* ctr_heap_reallocate(void* oldptr, uintptr_t size, uintptr_t old_size ) {
 	char* nptr;
 	ctr_gc_alloc -= old_size;
 	nptr = ctr_heap_allocate( size );

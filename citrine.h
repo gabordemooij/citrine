@@ -251,12 +251,6 @@ char* ctr_mode_input_file;
 
 
 /**
- * Memory Management functions
- */
-char* ctr_malloc(uintptr_t size, int what);
-void* ctr_realloc(void* oldptr, uintptr_t size, uintptr_t old_size, int what);
-
-/**
  * Memory Management variables
  */
 char*      ctr_malloc_chunk;
@@ -627,7 +621,7 @@ ctr_tnode* ctr_create_node();
 
 void* ctr_heap_allocate( uintptr_t size );
 void  ctr_heap_free( void* ptr, uintptr_t size );
-
+void* ctr_heap_reallocate(void* oldptr, uintptr_t size, uintptr_t old_size );
 
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='^'  && X!= ':' && X!= '\''
@@ -637,8 +631,6 @@ void  ctr_heap_free( void* ptr, uintptr_t size );
 #define	CTR_PARSER_CREATE_PROGRAM_NODE() ctr_create_node(3);
 #define ASSIGN_STRING(o,p,v,s) o->p = ctr_heap_allocate(s * sizeof(char) ); memcpy( (char*) o->p,v,s);
 #define CTR_2CSTR(cs, s) cs = ctr_heap_allocate((s->value.svalue->vlen+1) * sizeof(char) ); strncpy(cs, s->value.svalue->value, s->value.svalue->vlen); cs[s->value.svalue->vlen] = '\0';
-
-#define CTR_STAT_REALLOC(O,F,T) (void*) ctr_realloc(O,T,F,0);
 
 #define CTR_CONVFP(s,x){\
 char *buf = calloc(100, sizeof(char));\
