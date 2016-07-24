@@ -305,6 +305,7 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o );
 ctr_object* ctr_internal_cast2number(ctr_object* o);
 ctr_object* ctr_internal_create_object(int type);
 ctr_object* ctr_internal_cast2string( ctr_object* o );
+char*       ctr_internal_tocstring( ctr_object* o );
 void*       ctr_internal_plugin_find( ctr_object* key );
 ctr_object* ctr_find(ctr_object* key);
 ctr_object* ctr_find_in_my(ctr_object* key);
@@ -436,6 +437,7 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_to_lower1st(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentList);
+
 
 /**
  * Block Interface
@@ -586,6 +588,5 @@ void* ctr_heap_reallocate(void* oldptr, uintptr_t size, uintptr_t old_size );
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='^'  && X!= ':' && X!= '\''
 #define CTR_CREATE_ARGUMENT() (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) )
-#define CTR_2CSTR(cs, s) cs = ctr_heap_allocate((s->value.svalue->vlen+1) * sizeof(char) ); strncpy(cs, s->value.svalue->value, s->value.svalue->vlen); cs[s->value.svalue->vlen] = '\0';
 
 

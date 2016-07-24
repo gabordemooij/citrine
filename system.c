@@ -372,8 +372,8 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
 	envValObj = ctr_internal_cast2string(argumentList->next->object);
 	envVarNameStr = ctr_heap_allocate((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
-	CTR_2CSTR(envVarNameStr, envVarNameObj);
-	CTR_2CSTR(envValStr, envValObj);
+	envVarNameStr = ctr_internal_tocstring( envVarNameObj );
+	envValStr = ctr_internal_tocstring( envValObj );
 	setenv(envVarNameStr, envValStr, 1);
 	return myself;
 }

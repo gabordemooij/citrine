@@ -276,12 +276,12 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pathObj = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	char* mode;
+	char* path;
 	FILE* handle;
 	ctr_resource* rs = ctr_heap_allocate(sizeof(ctr_resource));
 	if (pathObj == NULL) return myself;
-	char* path;
-	CTR_2CSTR(path, pathObj);
-	CTR_2CSTR(mode, ctr_internal_cast2string(argumentList->object));
+	path = ctr_internal_tocstring( pathObj );
+	mode = ctr_internal_tocstring( ctr_internal_cast2string(argumentList->object) );
 	handle = fopen(path,mode);
 	rs->type = 1;
 	rs->ptr = handle;
@@ -359,11 +359,12 @@ ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) 
  */
 ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList) {
 	int bytes, written;
+	ctr_object* string2write;
 	char* buffer;
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
-	ctr_object* string2write = ctr_internal_cast2string(argumentList->object);
-	CTR_2CSTR(buffer, string2write);
+	string2write = ctr_internal_cast2string(argumentList->object);
+	buffer = ctr_internal_tocstring( string2write );
 	bytes = string2write->value.svalue->vlen;
 	written = fwrite(buffer, sizeof(char), (int)bytes, (FILE*)myself->value.rvalue->ptr);
 	return ctr_build_number_from_float((double_t) written);
