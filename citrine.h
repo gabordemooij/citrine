@@ -246,37 +246,6 @@ char* ctr_mode_input_file;
 
 
 /**
- * Memory Management variables
- */
-char*      ctr_malloc_chunk;
-uintptr_t  ctr_malloc_chunk_pointer;
-uintptr_t* ctr_malloc_swizzle_adressbook;
-int        ctr_malloc_mode;
-uint64_t   ctr_malloc_measured_size_addressbook;
-uint64_t   ctr_malloc_measured_size_code;
-
-
-/**
- * AST header
- */
-struct ctr_ast_header {
-	char      version[10];          /* version */
-	uint64_t  num_of_swizzles;      /* number of pointer swizzles */
-	uint64_t  size_of_address_book; /* size of the addressbook for swizzl'n - should be size_t ? */
-	uintptr_t start_block;          /* old pointer, start of the original memory block */
-	uintptr_t program_entry_point;  /* original start address of program */
-};
-typedef struct ctr_ast_header ctr_ast_header;
-ctr_ast_header* ctr_default_header;
-
-/**
- * Serializer functions
- */
-ctr_tnode* ctr_serializer_unserialize();
-void ctr_serializer_serialize(ctr_tnode* t);
-void ctr_serializer_info(char* filename);
-
-/**
  * Lexer functions
  */
 void 	ctr_clex_load(char* prg);

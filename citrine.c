@@ -61,7 +61,6 @@ int main(int argc, char* argv[]) {
 	ctr_gc_junk_counter = 0;
 	ctr_argc = argc;
 	ctr_argv = argv;
-	ctr_malloc_chunk_pointer = 0;
 	ctr_gc_memlimit = 8388608;
 	ctr_callstack_index = 0;
 	ctr_source_map_head = NULL;
