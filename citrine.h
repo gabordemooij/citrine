@@ -608,14 +608,6 @@ ctr_object* ctr_build_nil();
 ctr_object* ctr_build_string_from_cstring( char* str );
 void ctr_gc_internal_collect();
 
-/**
- * Citrine Macros
- */
-#define CTR_DEBUG_STR(X,Y,L) if (ctr_mode_debug) {\
-	char* b = calloc(sizeof(char),L);\
-	memcpy(b, Y, L);\
-	printf(X, b);\
-}\
 
 ctr_tnode* ctr_create_node();
 
