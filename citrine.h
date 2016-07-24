@@ -621,7 +621,6 @@ void* ctr_heap_reallocate(void* oldptr, uintptr_t size, uintptr_t old_size );
 #define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) ctr_heap_allocate( sizeof(ctr_tlistitem) )
 #define	CTR_PARSER_CREATE_NODE() ctr_create_node(1);
 #define	CTR_PARSER_CREATE_PROGRAM_NODE() ctr_create_node(3);
-#define ASSIGN_STRING(o,p,v,s) o->p = ctr_heap_allocate(s * sizeof(char) ); memcpy( (char*) o->p,v,s);
 #define CTR_2CSTR(cs, s) cs = ctr_heap_allocate((s->value.svalue->vlen+1) * sizeof(char) ); strncpy(cs, s->value.svalue->value, s->value.svalue->vlen); cs[s->value.svalue->vlen] = '\0';
 
 

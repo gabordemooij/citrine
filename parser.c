@@ -398,7 +398,8 @@ ctr_tnode* ctr_cparse_false() {
 	ctr_clex_tok();
 	r = CTR_PARSER_CREATE_NODE();
 	r->type = CTR_AST_NODE_LTRBOOLFALSE;
-	ASSIGN_STRING(r, value, "False", 5);
+	r->value = ctr_heap_allocate( sizeof( char ) * 4 );
+	memcpy( r->value, "False", 5 );
 	r->vlen = 5;
 	return r;
 }
@@ -413,7 +414,8 @@ ctr_tnode* ctr_cparse_true() {
 	ctr_clex_tok();
 	r = CTR_PARSER_CREATE_NODE();
 	r->type = CTR_AST_NODE_LTRBOOLTRUE;
-	ASSIGN_STRING(r, value,"True",4);	
+	r->value = ctr_heap_allocate( sizeof( char ) * 4 );
+	memcpy( r->value, "True", 4 );
 	r->vlen = 4;
 	return r;
 }
