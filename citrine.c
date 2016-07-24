@@ -24,10 +24,7 @@ void ctr_cli_welcome() {
 	printf("\n");
 	printf("Written by: Gabor de Mooij (c) copyright 2016, Licensed BSD.\n");
 	printf("Quick Usage Examples:\n");
-	printf("Run a CTR file (interpreter): ctr file \n");
-	printf("Compile to binary AST       : ctr -c outputfile file \n");
-	printf("Run an AST                  : ctr -r file \n");
-	printf("Display info about AST      : ctr -i file \n");
+	printf("Run a CTR file: ctr file \n");
 	printf("\n");
 	printf("--------------------------------------------------\n");
 	printf("\n");
@@ -101,50 +98,14 @@ int main(int argc, char* argv[]) {
 	ctr_source_mapping = 0;
 	CtrStdError = NULL;
 	ctr_cli_read_args(argc, argv);
-	if (ctr_mode_compile) {
-		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
-		ctr_malloc_mode = 0;
-		ctr_malloc_measured_size_addressbook = sizeof(ctr_ast_header);/* adds up to normal addressbook size */
-		program = ctr_cparse_parse(prg, "");
-		program = NULL;
-		ctr_malloc_mode = 1;
-		ctr_malloc_chunk_pointer = 0;
-		ctr_malloc_chunk = 0;
-		program = ctr_cparse_parse(prg, "");
-		ctr_serializer_serialize(program);
-		free(ctr_malloc_chunk);
-		CTR_STAT_FREE(prg, program_text_size);
-		exit(0);
-	}
-	else if (ctr_mode_load) {
-		ctr_malloc_mode = 0;
-		ctr_malloc_chunk_pointer = 0;
-		ctr_malloc_chunk = 0;
-		ctr_malloc_swizzle_adressbook = 0;
-		program = NULL;
-		program = ctr_serializer_unserialize(ctr_mode_input_file);
-		ctr_initialize_world();
-		ctr_cwlk_run(program);
-		exit(0);
-	}
-	else if (ctr_mode_info) {
-		ctr_malloc_mode = 0;
-		ctr_malloc_chunk_pointer = 0;
-		ctr_malloc_chunk = 0;
-		ctr_malloc_swizzle_adressbook = 0;
-		ctr_serializer_info(ctr_mode_input_file);
-		exit(0);
-	}
-	else {
-		ctr_source_mapping = 1;
-		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
-		ctr_malloc_mode = 0;
-		program = ctr_cparse_parse(prg, ctr_mode_input_file);
-		/*ctr_internal_debug_tree(program,1); -- for debugging */
-		ctr_initialize_world();
-		ctr_cwlk_run(program);
-		CTR_STAT_FREE(program, program_text_size);
-		exit(0);
-	}
+	ctr_source_mapping = 1;
+	prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
+	ctr_malloc_mode = 0;
+	program = ctr_cparse_parse(prg, ctr_mode_input_file);
+	/*ctr_internal_debug_tree(program,1); -- for debugging */
+	ctr_initialize_world();
+	ctr_cwlk_run(program);
+	CTR_STAT_FREE(program, program_text_size);
+	exit(0);
 	return 0;
 }

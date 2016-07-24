@@ -37,7 +37,7 @@ char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
    size = ftell(fp);
    fseek(fp,prev,SEEK_SET);
    real_size = (size+4)*sizeof(char);
-   prg = CTR_STAT_MALLOC(real_size); /* add 4 bytes, 3 for optional closing sequence verbatim mode and one lucky byte! */
+   prg = ctr_heap_allocate(real_size); /* add 4 bytes, 3 for optional closing sequence verbatim mode and one lucky byte! */
    ctr_program_length=0;
    while( ( ch = fgetc(fp) ) != EOF ) prg[ctr_program_length++]=ch;
    fclose(fp);
@@ -200,7 +200,7 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
  * Adds a property to an object.
  */
 void ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_object* value, int m) {
-	ctr_mapitem* new_item = CTR_STAT_MALLOC(sizeof(ctr_mapitem));
+	ctr_mapitem* new_item = ctr_heap_allocate(sizeof(ctr_mapitem));
 	ctr_mapitem* current_head = NULL;
 	new_item->key = key;
 	new_item->hashKey = ctr_internal_index_hash(key);
@@ -287,10 +287,10 @@ ctr_object* ctr_internal_create_object(int type) {
 	if (ctr_gc_junk_counter > 0) {
 		o = ctr_gc_junkyard[--ctr_gc_junk_counter];
 	} else {
-		o = CTR_STAT_MALLOC(sizeof(ctr_object));
+		o = ctr_heap_allocate(sizeof(ctr_object));
 	}
-	o->properties = CTR_STAT_MALLOC(sizeof(ctr_map));
-	o->methods = CTR_STAT_MALLOC(sizeof(ctr_map));
+	o->properties = ctr_heap_allocate(sizeof(ctr_map));
+	o->methods = ctr_heap_allocate(sizeof(ctr_map));
 	o->properties->size = 0;
 	o->methods->size = 0;
 	o->properties->head = NULL;
@@ -301,7 +301,7 @@ ctr_object* ctr_internal_create_object(int type) {
 	if (type==CTR_OBJECT_TYPE_OTBOOL) o->value.bvalue = 0;
 	if (type==CTR_OBJECT_TYPE_OTNUMBER) o->value.nvalue = 0;
 	if (type==CTR_OBJECT_TYPE_OTSTRING) {
-		o->value.svalue = CTR_STAT_MALLOC(sizeof(ctr_string));
+		o->value.svalue = ctr_heap_allocate(sizeof(ctr_string));
 		o->value.svalue->value = "";
 		o->value.svalue->vlen = 0;
 	}
@@ -760,7 +760,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("size", 4), &ctr_file_size);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("delete", 6), &ctr_file_delete);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("include", 7), &ctr_file_include);
-	ctr_internal_create_func(CtrStdFile, ctr_build_string("go", 2), &ctr_file_include_ast);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("open:", 5), &ctr_file_open);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("close", 5), &ctr_file_close);
 	ctr_internal_create_func(CtrStdFile, ctr_build_string("readBytes:", 10), &ctr_file_read_bytes);

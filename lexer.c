@@ -57,7 +57,7 @@ void ctr_clex_emit_error( char* message )
  */
 void ctr_clex_load(char* prg) {
 	ctr_code = prg;
-	ctr_clex_buffer = CTR_STAT_MALLOC(ctr_clex_bflmt);
+	ctr_clex_buffer = ctr_heap_allocate(ctr_clex_bflmt);
 	ctr_clex_buffer[0] = '\0';
 	ctr_eofcode = (ctr_code + ctr_program_length);
 	ctr_clex_line_number = 0;
@@ -325,7 +325,7 @@ char* ctr_clex_readstr() {
 	char* beginbuff;
 	long page = 100; /* 100 byte pages */
 	ctr_clex_tokvlen=0;
-	strbuff = (char*) CTR_STAT_MALLOC(memblock);
+	strbuff = (char*) ctr_heap_allocate(memblock);
 	c = *ctr_code;
 	escape = 0;
 	beginbuff = strbuff;

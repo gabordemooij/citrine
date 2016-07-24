@@ -1042,7 +1042,7 @@ ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList
 ctr_object* ctr_build_string(char* stringValue, long size) {
 	ctr_object* stringObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 	if (size != 0) {
-		stringObject->value.svalue->value = CTR_STAT_MALLOC(size*sizeof(char));
+		stringObject->value.svalue->value = ctr_heap_allocate( size*sizeof(char) );
 		memcpy(stringObject->value.svalue->value, stringValue, size);
 	}
 	stringObject->value.svalue->vlen = size;
@@ -1188,7 +1188,7 @@ ctr_object* ctr_string_fromto(ctr_object* myself, ctr_argument* argumentList) {
 	if (b < 0) return ctr_build_string("", 0);
 	ua = getBytesUtf8(myself->value.svalue->value, 0, a);
 	ub = getBytesUtf8(myself->value.svalue->value, ua, ((b - a)));
-	dest = CTR_STAT_MALLOC(ub * sizeof(char));
+	dest = ctr_heap_allocate( ub * sizeof(char) );
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	newString = ctr_build_string(dest,ub);
 	return newString;
@@ -1225,7 +1225,7 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	if ((a + b)<0) b = b - a;
 	ua = getBytesUtf8(myself->value.svalue->value, 0, a);
 	ub = getBytesUtf8(myself->value.svalue->value, ua, b);
-	dest = CTR_STAT_MALLOC(ub * sizeof(char));
+	dest = ctr_heap_allocate( ub * sizeof(char) );
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	newString = ctr_build_string(dest,ub);
 	return newString;
@@ -1264,7 +1264,7 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 	long ua = getBytesUtf8(myself->value.svalue->value, 0, a);
 	long ub = getBytesUtf8(myself->value.svalue->value, ua, 1);
 	ctr_object* newString;
-	char* dest = CTR_STAT_MALLOC(ub * sizeof(char));
+	char* dest = ctr_heap_allocate( ub * sizeof( char ) );
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	newString = ctr_build_string(dest,ub);
 	CTR_STAT_FREE(dest, ub * sizeof(char));
@@ -1326,7 +1326,7 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_object* newString = NULL;
 	char* str = myself->value.svalue->value;
 	size_t  len = myself->value.svalue->vlen;
-	char* tstr = CTR_STAT_MALLOC(len * sizeof(char));
+	char* tstr = ctr_heap_allocate( len * sizeof( char ) );
 	int i=0;
 	for(i =0; i < len; i++) {
 		tstr[i] = toupper(str[i]);
@@ -1349,7 +1349,7 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_object* newString = NULL;
 	char* str = myself->value.svalue->value;
 	size_t len = myself->value.svalue->vlen;
-	char* tstr = CTR_STAT_MALLOC(len * sizeof(char));
+	char* tstr = ctr_heap_allocate( len * sizeof( char ) );
 	int i=0;
 	for(i =0; i < len; i++) {
 		tstr[i] = tolower(str[i]);
@@ -1369,7 +1369,7 @@ ctr_object* ctr_string_to_lower1st(ctr_object* myself, ctr_argument* argumentLis
 	ctr_object* newString = NULL;
 	size_t len = myself->value.svalue->vlen;
 	if (len == 0) return ctr_build_string("", 0);
-	char* tstr = CTR_STAT_MALLOC(len * sizeof(char));
+	char* tstr = ctr_heap_allocate( len * sizeof( char ) );
 	strncpy(tstr, myself->value.svalue->value, len);
 	tstr[0] = tolower(tstr[0]);
 	newString = ctr_build_string(tstr, len);
@@ -1387,7 +1387,7 @@ ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentLis
 	ctr_object* newString;
 	size_t len = myself->value.svalue->vlen;
 	if (len == 0) return ctr_build_string("", 0);
-	char* tstr = CTR_STAT_MALLOC(len * sizeof(char));
+	char* tstr = ctr_heap_allocate( len * sizeof( char ) );
 	strncpy(tstr, myself->value.svalue->value, len);
 	tstr[0] = toupper(tstr[0]);
 	newString = ctr_build_string(tstr, len);
@@ -1444,7 +1444,7 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 	long i = 0;
 	long offset = 0;
 	long d;
-	dest = (char*) CTR_STAT_MALLOC(dlen*sizeof(char));
+	dest = (char*) ctr_heap_allocate( dlen * sizeof( char ) );
 	odest = dest;
 	if (nlen == 0 || hlen == 0) {
 		return ctr_build_string(src, hlen);
@@ -1501,7 +1501,7 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	while(i > begin && isspace(*(str+i))) i--;
 	end = i + 1;
 	tlen = (end - begin);
-	tstr = CTR_STAT_MALLOC(tlen * sizeof(char));
+	tstr = ctr_heap_allocate( tlen * sizeof( char ) );
 	memcpy(tstr, str+begin, tlen);
 	newString = ctr_build_string(tstr, tlen);
 	CTR_STAT_FREE(tstr, tlen * sizeof(char));
@@ -1534,7 +1534,7 @@ ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
 	begin = i;
 	i = len - 1;
 	tlen = (len - begin);
-	tstr = CTR_STAT_MALLOC(tlen * sizeof(char));
+	tstr = ctr_heap_allocate( tlen * sizeof(char) );
 	memcpy(tstr, str+begin, tlen);
 	newString = ctr_build_string(tstr, tlen);
 	CTR_STAT_FREE(tstr, tlen * sizeof(char));
@@ -1565,7 +1565,7 @@ ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
 	while(i > 0 && isspace(*(str+i))) i--;
 	end = i + 1;
 	tlen = end;
-	tstr = CTR_STAT_MALLOC(tlen * sizeof(char));
+	tstr = ctr_heap_allocate( tlen * sizeof(char) );
 	memcpy(tstr, str, tlen);
 	newString = ctr_build_string(tstr, tlen);
 	CTR_STAT_FREE(tstr, tlen * sizeof(char));
@@ -1607,14 +1607,14 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* arr = ctr_array_new(CtrStdArray, NULL);
 	long i;
 	long j = 0;
-	char* buffer = CTR_STAT_MALLOC(sizeof(char)*len);
+	char* buffer = ctr_heap_allocate( sizeof(char)*len );
 	for(i=0; i<len; i++) {
 		buffer[j] = str[i];
 		j++;
 		if (ctr_internal_memmem(buffer, j, dstr, dlen, 0)!=NULL) {
-			elem = CTR_STAT_MALLOC(sizeof(char)*(j-dlen));
+			elem = ctr_heap_allocate( sizeof( char ) * ( j - dlen ) );
 			memcpy(elem,buffer,j-dlen);
-			arg = CTR_STAT_MALLOC(sizeof(ctr_argument));
+			arg = ctr_heap_allocate( sizeof( ctr_argument ) );
 			arg->object = ctr_build_string(elem, j-dlen);
 			ctr_array_push(arr, arg);
 			CTR_STAT_FREE(arg, sizeof(ctr_argument));
@@ -1623,9 +1623,9 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 		}
 	}
 	if (j>0) {
-		elem = CTR_STAT_MALLOC(sizeof(char)*j);
+		elem = ctr_heap_allocate( sizeof( char ) * j );
 		memcpy(elem,buffer,j);
-		arg = CTR_STAT_MALLOC(sizeof(ctr_argument));
+		arg = ctr_heap_allocate( sizeof( ctr_argument ) );
 		arg->object = ctr_build_string(elem, j);
 		ctr_array_push(arr, arg);
 		CTR_STAT_FREE(arg, sizeof(ctr_argument));
@@ -1682,7 +1682,7 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 		}
 	}
 	tlen = len + tag_len - tag_rlen;
-	tstr = CTR_STAT_MALLOC(tlen * sizeof(char));
+	tstr = ctr_heap_allocate( tlen * sizeof( char ) );
 	for(i = 0; i < len; i++) {
 		char c = str[i];
 		switch (c) {
@@ -1783,7 +1783,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	}
 	ctr_close_context();
 	if (CtrStdError != NULL && CtrStdError != CtrStdBreak && CtrStdError != CtrStdContinue) {
-		ctr_object* catchBlock = CTR_STAT_MALLOC(sizeof(ctr_object));
+		ctr_object* catchBlock = ctr_heap_allocate( sizeof( ctr_object ) );
 		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string("catch",5), 0);
 		if (catchBlock != NULL) {
 			ctr_argument* a = CTR_CREATE_ARGUMENT();

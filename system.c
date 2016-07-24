@@ -259,7 +259,7 @@ ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* arg = ctr_internal_cast2string(argumentList->object);
 	long vlen = arg->value.svalue->vlen;
-	char* comString = CTR_STAT_MALLOC(vlen + 1);
+	char* comString = ctr_heap_allocate(vlen + 1);
 	int r;
 	memcpy(comString, arg->value.svalue->value, vlen);
 	memcpy(comString+vlen,"\0",1);
@@ -284,7 +284,7 @@ ctr_object* ctr_shell_respond_to_with(ctr_object* myself, ctr_argument* argument
 	suffix = ctr_internal_cast2string(argumentList->next->object);
 	len = prefix->value.svalue->vlen + suffix->value.svalue->vlen;
 	if (len == 0) return myself;
-	command = (char*) CTR_STAT_MALLOC(len); /* actually we need +1 for the space between commands, but we dont because we remove the colon : !*/
+	command = (char*) ctr_heap_allocate(len); /* actually we need +1 for the space between commands, but we dont because we remove the colon : !*/
 	strncpy(command, prefix->value.svalue->value, prefix->value.svalue->vlen - 1); /* remove colon, gives room for space */
 	strncpy(command + (prefix->value.svalue->vlen - 1), " ", 1); /* space to separate commands */
 	strncpy(command + (prefix->value.svalue->vlen), suffix->value.svalue->value, suffix->value.svalue->vlen);
@@ -349,7 +349,7 @@ ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList) 
 	char*       envVarNameStr;
 	char*       envVal;
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
-	envVarNameStr = CTR_STAT_MALLOC((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
+	envVarNameStr = ctr_heap_allocate((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
 	strncpy(envVarNameStr, envVarNameObj->value.svalue->value, envVarNameObj->value.svalue->vlen);
 	*(envVarNameStr + (envVarNameObj->value.svalue->vlen)) = '\0';
 	envVal = getenv(envVarNameStr);
@@ -371,7 +371,7 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
 	char*       envValStr;
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
 	envValObj = ctr_internal_cast2string(argumentList->next->object);
-	envVarNameStr = CTR_STAT_MALLOC((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
+	envVarNameStr = ctr_heap_allocate((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
 	CTR_2CSTR(envVarNameStr, envVarNameObj);
 	CTR_2CSTR(envValStr, envValObj);
 	setenv(envVarNameStr, envValStr, 1);
@@ -399,7 +399,7 @@ ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList)
 	ctr_size bytes = 0;
 	char* buff;
 	ctr_size page = 10;
-	buff = CTR_STAT_MALLOC(page * sizeof(char));
+	buff = ctr_heap_allocate(page * sizeof(char));
 	while ((c = getchar()) != '\n') {
 		buff[bytes] = c;
 		bytes++;

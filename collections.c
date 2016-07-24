@@ -28,9 +28,9 @@
 ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTARRAY);
 	s->link = myclass;
-	s->value.avalue = (ctr_collection*) CTR_STAT_MALLOC(sizeof(ctr_collection));
+	s->value.avalue = (ctr_collection*) ctr_heap_allocate(sizeof(ctr_collection));
 	s->value.avalue->length = 1;
-	s->value.avalue->elements = (ctr_object**) CTR_STAT_MALLOC(sizeof(ctr_object*)*1);
+	s->value.avalue->elements = (ctr_object**) ctr_heap_allocate(sizeof(ctr_object*)*1);
 	s->value.avalue->head = 0;
 	s->value.avalue->tail = 0;
 	return s;
@@ -287,7 +287,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 		pos = len;
 		if (len == 0) {
 			len = str->value.svalue->vlen;
-			result = CTR_STAT_MALLOC(sizeof(char)*len);
+			result = ctr_heap_allocate(sizeof(char)*len);
 		} else {
 			len += str->value.svalue->vlen + glen;
 			result = realloc(result, sizeof(char)*len);
@@ -547,7 +547,7 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* putKey;
 	ctr_object* putValue = argumentList->object;
 	ctr_argument* nextArgument = argumentList->next;
-	ctr_argument* emptyArgumentList = CTR_STAT_MALLOC(sizeof(ctr_argument));
+	ctr_argument* emptyArgumentList = ctr_heap_allocate(sizeof(ctr_argument));
 	emptyArgumentList->next = NULL;
 	emptyArgumentList->object = NULL;
 
@@ -577,7 +577,7 @@ ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object*   searchKey;
 	ctr_object*   foundObject;
 
-	emptyArgumentList = CTR_STAT_MALLOC(sizeof(ctr_argument));
+	emptyArgumentList = ctr_heap_allocate(sizeof(ctr_argument));
 	emptyArgumentList->next = NULL;
 	emptyArgumentList->object = NULL;
 

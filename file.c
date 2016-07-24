@@ -29,8 +29,8 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	s->value.rvalue = NULL;
 	pathObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 	pathObject->info.type = CTR_OBJECT_TYPE_OTSTRING;
-	pathObject->value.svalue = (ctr_string*) CTR_STAT_MALLOC(sizeof(ctr_string));
-	pathObject->value.svalue->value = (char*) CTR_STAT_MALLOC(sizeof(char) * argumentList->object->value.svalue->vlen);
+	pathObject->value.svalue = (ctr_string*) ctr_heap_allocate(sizeof(ctr_string));
+	pathObject->value.svalue->value = (char*) ctr_heap_allocate(sizeof(char) * argumentList->object->value.svalue->vlen);
 	memcpy(pathObject->value.svalue->value, argumentList->object->value.svalue->value, argumentList->object->value.svalue->vlen);
 	pathObject->value.svalue->vlen = argumentList->object->value.svalue->vlen;
 	ctr_internal_object_add_property(s, ctr_build_string("path",4), pathObject, 0);
@@ -73,7 +73,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	FILE* f;
 	if (path == NULL) return CtrStdNil;
 	vlen = path->value.svalue->vlen;
-	pathString = CTR_STAT_MALLOC(vlen + 1);
+	pathString = ctr_heap_allocate(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "rb");
@@ -85,7 +85,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	fseek(f, 0, SEEK_END);
 	fileLen=ftell(f);
 	fseek(f, 0, SEEK_SET);
-	buffer=(char *)CTR_STAT_MALLOC(fileLen+1);
+	buffer=(char *)ctr_heap_allocate(fileLen+1);
 	if (!buffer){
 		printf("Out of memory\n");
 		fclose(f);exit(1);	
@@ -119,7 +119,7 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	char* pathString;
 	if (path == NULL) return CtrStdNil;
 	vlen = path->value.svalue->vlen;
-	pathString = CTR_STAT_MALLOC(vlen + 1);
+	pathString = ctr_heap_allocate(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "wb+");
@@ -148,7 +148,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	FILE* f;
 	if (path == NULL) return myself;
 	vlen = path->value.svalue->vlen;
-	pathString = CTR_STAT_MALLOC(vlen + 1);
+	pathString = ctr_heap_allocate(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "ab+");
@@ -175,7 +175,7 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 	int exists;
 	if (path == NULL) return ctr_build_bool(0);
 	vlen = path->value.svalue->vlen;
-	pathString = CTR_STAT_MALLOC(vlen + 1);
+	pathString = ctr_heap_allocate(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "r");
@@ -201,31 +201,11 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
 	uint64_t program_size = 0;
 	if (path == NULL) return myself;
 	vlen = path->value.svalue->vlen;
-	pathString = ctr_malloc(sizeof(char)*(vlen+1), 0); //CTR_STAT_MALLOC(vlen + 1);
+	pathString = ctr_heap_allocate(sizeof(char)*(vlen+1)); //ctr_heap_allocate(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	prg = ctr_internal_readf(pathString, &program_size);
 	parsedCode = ctr_cparse_parse(prg, pathString);
-	ctr_cwlk_run(parsedCode);
-	return myself;
-}
-
-/**
- * [File] run
- *
- * Includes the file as a piece of executable code.
- */
-ctr_object* ctr_file_include_ast(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
-	ctr_tnode* parsedCode;
-	ctr_size vlen;
-	char* pathString;
-	if (path == NULL) return myself;
-	vlen = path->value.svalue->vlen;
-	pathString = CTR_STAT_MALLOC(vlen + 1);
-	memcpy(pathString, path->value.svalue->value, vlen);
-	memcpy(pathString+vlen,"\0",1);
-	parsedCode = ctr_serializer_unserialize(pathString);
 	ctr_cwlk_run(parsedCode);
 	return myself;
 }
@@ -242,7 +222,7 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
 	int r;
 	if (path == NULL) return myself;
 	vlen = path->value.svalue->vlen;
-	pathString = CTR_STAT_MALLOC(vlen + 1);
+	pathString = ctr_heap_allocate(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	r = remove(pathString);
@@ -266,7 +246,7 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 	int prev, sz;
 	if (path == NULL) return ctr_build_number_from_float(0);
 	vlen = path->value.svalue->vlen;
-	pathString = CTR_STAT_MALLOC(vlen + 1);
+	pathString = ctr_heap_allocate(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "r");
@@ -297,7 +277,7 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pathObj = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
 	char* mode;
 	FILE* handle;
-	ctr_resource* rs = CTR_STAT_MALLOC(sizeof(ctr_resource));
+	ctr_resource* rs = ctr_heap_allocate(sizeof(ctr_resource));
 	if (pathObj == NULL) return myself;
 	char* path;
 	CTR_2CSTR(path, pathObj);
@@ -352,7 +332,7 @@ ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) 
 	if (myself->value.rvalue->type != 1) return myself;
 	bytes = ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	if (bytes < 0) return ctr_build_string_from_cstring("");
-	buffer = (char*) CTR_STAT_MALLOC(bytes);
+	buffer = (char*) ctr_heap_allocate(bytes);
 	if (buffer == NULL) {
 		CtrStdError = ctr_build_string_from_cstring("Cannot allocate memory for file buffer.");
 		return ctr_build_string_from_cstring("");

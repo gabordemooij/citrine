@@ -625,12 +625,10 @@ void ctr_gc_internal_collect();
 
 ctr_tnode* ctr_create_node();
 
+void* ctr_heap_allocate( uintptr_t size );
+void  ctr_heap_free( void* ptr, uintptr_t size );
 
-char* ctr_heap_allocate( uintptr_t size, int type );
-void* ctr_heap_allocate_raw( uintptr_t size );
-void ctr_heap_free( void* ptr, uintptr_t size );
-
-#define ctr_malloc(X,Y) ctr_heap_allocate(X,Y);
+#define ctr_malloc(X,Y) ctr_heap_allocate(X);
 
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='^'  && X!= ':' && X!= '\''
@@ -638,25 +636,10 @@ void ctr_heap_free( void* ptr, uintptr_t size );
 #define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) ctr_malloc(sizeof(ctr_tlistitem), 2)
 #define	CTR_PARSER_CREATE_NODE() ctr_create_node(1);
 #define	CTR_PARSER_CREATE_PROGRAM_NODE() ctr_create_node(3);
-#define ASSIGN_STRING(o,p,v,s) o->p = ctr_heap_allocate(s * sizeof(char), 0); memcpy( (char*) o->p,v,s);
-#define CTR_2CSTR(cs, s) cs = ctr_heap_allocate((s->value.svalue->vlen+1) * sizeof(char),0); strncpy(cs, s->value.svalue->value, s->value.svalue->vlen); cs[s->value.svalue->vlen] = '\0';
+#define ASSIGN_STRING(o,p,v,s) o->p = ctr_heap_allocate(s * sizeof(char) ); memcpy( (char*) o->p,v,s);
+#define CTR_2CSTR(cs, s) cs = ctr_heap_allocate((s->value.svalue->vlen+1) * sizeof(char) ); strncpy(cs, s->value.svalue->value, s->value.svalue->vlen); cs[s->value.svalue->vlen] = '\0';
 
-
-
-
-/**
- * Memory tracking functions.
- * Use these functions instead of malloc/free to keep track
- * of memory and easily detect possible leaks.
-#define CTR_STAT_CLEAN() if ((ctr_gc_mode & 1) && ctr_gc_alloc > (ctr_gc_memlimit * 0.8)) ctr_gc_internal_collect();
-#define CTR_STAT_CHECK() if (ctr_gc_memlimit < ctr_gc_alloc) { printf( "Out of memory.\n" ); exit(1); }
-#define CTR_STAT_MALLOC(X) malloc( X ); CTR_STAT_CLEAN(); ctr_gc_alloc += X; CTR_STAT_CHECK(); //printf("m+ %d \n", X);
-#define CTR_STAT_CALLOC(S,X) calloc( S, X ); CTR_STAT_CLEAN(); ctr_gc_alloc += (S*X); CTR_STAT_CHECK(); //printf("c+ %d \n", (S*X));
-#define CTR_STAT_REALLOC(O,F,T) realloc( O, T ); CTR_STAT_CLEAN(); ctr_gc_alloc += (T - F); CTR_STAT_CHECK(); //printf("+- %d \n", (T-F));
-#define CTR_STAT_FREE(P,X) free(P); ctr_gc_alloc -= X; //printf("- %d \n", X);
-*/
-#define CTR_STAT_MALLOC(X) (void*) ctr_heap_allocate(X,0);
-#define CTR_STAT_CALLOC(X,S) (void*) ctr_heap_allocate((X*S),0);
+#define CTR_STAT_CALLOC(X,S) (void*) ctr_heap_allocate((X*S));
 #define CTR_STAT_REALLOC(O,F,T) (void*) ctr_realloc(O,T,F,0);
 #define CTR_STAT_FREE(P,X) ctr_heap_free( P, X);
 
