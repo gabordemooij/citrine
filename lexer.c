@@ -40,6 +40,27 @@ char* ctr_clex_desc_tok_fin = "end of program";
 char* ctr_clex_desc_tok_unknown = "(unknown token)";
 
 /**
+ * Lexer - is Symbol Delimiter ?
+ * Determines whether the specified symbol is a delimiter.
+ * Returns 1 if the symbol is a delimiter and 0 otherwise.
+ *
+ * @param char symbol symbol to be inspected
+ *
+ * @return uint8_t
+ */
+inline uint8_t ctr_clex_is_delimiter( char symbol ) {
+
+	return (
+	   symbol == '('
+	|| symbol == ')'
+	|| symbol == ','
+	|| symbol == '.'
+	|| symbol == '|'
+	|| symbol == ':'
+	|| symbol == ' ' );
+}
+
+/**
  * CTRLexerEmitError
  *
  * Displays an error message for the lexer.
@@ -230,19 +251,19 @@ int ctr_clex_tok() {
 		return CTR_TOKEN_NUMBER;
 	}
 	if (strncmp(ctr_code, "True", 4)==0){
-		if (CTR_IS_DELIM(*(ctr_code + 4))) { 
+		if ( ctr_clex_is_delimiter( *( ctr_code + 4 ) ) ) {
 			ctr_code += 4;
 			return CTR_TOKEN_BOOLEANYES;
 		}
 	}
 	if (strncmp(ctr_code, "False", 5)==0){
-		if (CTR_IS_DELIM(*(ctr_code + 5))) { 
+		if ( ctr_clex_is_delimiter( *( ctr_code + 5 ) ) ) {
 			ctr_code += 5;
 			return CTR_TOKEN_BOOLEANNO;
 		}
 	}
 	if (strncmp(ctr_code, "Nil", 3)==0){
-		if (CTR_IS_DELIM(*(ctr_code + 3))) {
+		if ( ctr_clex_is_delimiter( *( ctr_code + 3 ) ) ) {
 			ctr_code += 3;
 			return CTR_TOKEN_NIL;
 		}
