@@ -498,7 +498,6 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_include_ast(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList);
@@ -579,8 +578,6 @@ ctr_object* ctr_build_nil();
 ctr_object* ctr_build_string_from_cstring( char* str );
 void ctr_gc_internal_collect();
 
-
-ctr_tnode* ctr_create_node();
 
 void* ctr_heap_allocate( uintptr_t size );
 void  ctr_heap_free( void* ptr, uintptr_t size );
