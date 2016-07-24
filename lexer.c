@@ -317,8 +317,28 @@ int ctr_clex_tok() {
 
 	if (c == '|' || c == '\\') { ctr_code++; return CTR_TOKEN_BLOCKPIPE; }
 
-	while(!isspace(c) && CTR_IS_NO_TOK(c) && ctr_code!=ctr_eofcode
-	&& c != '+' && c!='*' && c!='/' && c!='=' && c!='>' && c!='<' && c!='&' /* and c is not one of the special symbols */
+	while(
+	!isspace(c) && (
+		c != '#' &&
+		c != '(' &&
+		c != ')' &&
+		c != '{' &&
+		c != '}' &&
+		c != '|' &&
+		c !='\\' &&
+		c !='.'  &&
+		c !=','  &&
+		c !='^'  &&
+		c != ':' &&
+		c != '\''&&
+		c != '+' &&
+		c != '*' &&
+		c != '/' &&
+		c !='='  &&
+		c !='>'  &&
+		c !='<'  &&
+		c !='&'
+	) && ctr_code!=ctr_eofcode
 	) {
 		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
 		i++;

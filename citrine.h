@@ -584,7 +584,3 @@ void ctr_gc_internal_collect();
 void* ctr_heap_allocate( uintptr_t size );
 void  ctr_heap_free( void* ptr, uintptr_t size );
 void* ctr_heap_reallocate(void* oldptr, uintptr_t size, uintptr_t old_size );
-
-#define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='^'  && X!= ':' && X!= '\'' 
-
-
