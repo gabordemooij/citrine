@@ -371,7 +371,7 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 			}
 			break;
 		case CTR_OBJECT_TYPE_OTNUMBER:
-			s = CTR_STAT_CALLOC(80, sizeof(char));
+			s = ctr_heap_allocate( 80 * sizeof( char ) );
 			CTR_CONVFP(s,o->value.nvalue);
 			slen = strlen(s);
 			stringObject = ctr_build_string(s, slen);

@@ -632,14 +632,13 @@ void  ctr_heap_free( void* ptr, uintptr_t size );
 
 #define CTR_IS_DELIM(X) (X == '(' || X == ')' || X == ',' || X == '.' || X == '|' || X == ':' || X == ' ')
 #define CTR_IS_NO_TOK(X)  X!='#' && X!='(' && X!=')' && X!='{' && X!='}' && X!='|' && X!='\\' && X!='.' && X!=',' && X!='^'  && X!= ':' && X!= '\''
-#define CTR_CREATE_ARGUMENT() (ctr_argument*) CTR_STAT_CALLOC(sizeof(ctr_argument), 1)
+#define CTR_CREATE_ARGUMENT() (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) )
 #define CTR_PARSER_CREATE_LISTITEM() (ctr_tlistitem*) ctr_malloc(sizeof(ctr_tlistitem), 2)
 #define	CTR_PARSER_CREATE_NODE() ctr_create_node(1);
 #define	CTR_PARSER_CREATE_PROGRAM_NODE() ctr_create_node(3);
 #define ASSIGN_STRING(o,p,v,s) o->p = ctr_heap_allocate(s * sizeof(char) ); memcpy( (char*) o->p,v,s);
 #define CTR_2CSTR(cs, s) cs = ctr_heap_allocate((s->value.svalue->vlen+1) * sizeof(char) ); strncpy(cs, s->value.svalue->value, s->value.svalue->vlen); cs[s->value.svalue->vlen] = '\0';
 
-#define CTR_STAT_CALLOC(X,S) (void*) ctr_heap_allocate((X*S));
 #define CTR_STAT_REALLOC(O,F,T) (void*) ctr_realloc(O,T,F,0);
 #define CTR_STAT_FREE(P,X) ctr_heap_free( P, X);
 

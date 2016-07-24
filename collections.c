@@ -558,7 +558,7 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 		putKey = ctr_internal_cast2string(putKey);
 	}
 
-	key = CTR_STAT_CALLOC(putKey->value.svalue->vlen, sizeof(char));
+	key = ctr_heap_allocate( putKey->value.svalue->vlen * sizeof( char ) );
 	keyLen = putKey->value.svalue->vlen;
 	memcpy(key, putKey->value.svalue->value, keyLen);
 	ctr_internal_object_delete_property(myself, ctr_build_string(key, keyLen), 0);

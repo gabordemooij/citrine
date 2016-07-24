@@ -46,7 +46,7 @@ void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
 	while(1) {
 		int i;
 		for (i=0; i<indent; i++) printf(" ");
-		str = CTR_STAT_CALLOC(40, sizeof(char));
+		str = ctr_heap_allocate( 40 * sizeof( char ) );
 		switch (t->type) {
 			case CTR_AST_NODE_EXPRASSIGNMENT:  str = "ASSIGN\0"; break;
 			case CTR_AST_NODE_EXPRMESSAGE:     str = "MESSAG\0"; break;
@@ -67,7 +67,7 @@ void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
 			case CTR_AST_NODE_LTRNIL:          str = "LTRNIL\0"; break;
 			default:                           str = "UNKNW?\0"; break;
 		}
-		vbuf = CTR_STAT_CALLOC(sizeof(char),t->vlen+1);
+		vbuf = ctr_heap_allocate( sizeof( char ) * ( t->vlen + 1 ) );
 		strncpy(vbuf, t->value, t->vlen);
 		printf("%s %s (%p)\n", str, vbuf, (void*) t);
 		if (t->nodes) ctr_internal_debug_tree(t, indent + 1);

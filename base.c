@@ -418,7 +418,7 @@ ctr_object* ctr_build_number_from_string(char* str, ctr_size length) {
 	char* numCStr;
 	ctr_object* numberObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	/* turn string into a C-string before feeding it to atof */
-	numCStr = (char*) CTR_STAT_CALLOC(40, sizeof(char));
+	numCStr = (char*) ctr_heap_allocate( 40 * sizeof( char ) );
 	memcpy(numCStr, str, length);
 	numberObject->value.nvalue = atof(numCStr);
 	numberObject->link = CtrStdNumber;
@@ -1120,7 +1120,7 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 	strObject = ctr_internal_cast2string(argumentList->object);
 	n1 = myself->value.svalue->vlen;
 	n2 = strObject->value.svalue->vlen;
-	dest = CTR_STAT_CALLOC(sizeof(char), (n1 + n2));
+	dest = ctr_heap_allocate( sizeof(char) * ( n1 + n2 ) );
 	memcpy(dest, myself->value.svalue->value, n1);
 	memcpy(dest+n1, strObject->value.svalue->value, n2);
 	newString = ctr_build_string(dest, (n1 + n2));
@@ -1149,7 +1149,7 @@ ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 	strObject = ctr_internal_cast2string(argumentList->object);
 	n1 = myself->value.svalue->vlen;
 	n2 = strObject->value.svalue->vlen;
-	dest = CTR_STAT_CALLOC(sizeof(char), (n1 + n2));
+	dest = ctr_heap_allocate( sizeof( char ) * ( n1 + n2 ) );
 	memcpy(dest, myself->value.svalue->value, n1);
 	memcpy(dest+n1, strObject->value.svalue->value, n2);
 	CTR_STAT_FREE(strObject->value.svalue->value, (strObject->value.svalue->vlen*sizeof(char)));
