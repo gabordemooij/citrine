@@ -635,8 +635,10 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("else:", 5), &ctr_bool_ifFalse);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("not", 3), &ctr_bool_not);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("and:", 4), &ctr_bool_and);
+	ctr_internal_create_func(CtrStdBool, ctr_build_string("&", 1), &ctr_bool_and);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("nor:", 4), &ctr_bool_nor);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("or:", 3), &ctr_bool_or);
+	ctr_internal_create_func(CtrStdBool, ctr_build_string("/", 1), &ctr_bool_or);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("xor:", 4), &ctr_bool_xor);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("=",1),&ctr_bool_eq);
 	ctr_internal_create_func(CtrStdBool, ctr_build_string("≠",3),&ctr_bool_neq);
@@ -884,6 +886,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	ctr_object* me;
 	ctr_object* methodObject;
 	ctr_object* searchObject;
+	ctr_object* returnValue;
 	ctr_argument* argCounter;
 	ctr_argument* mesgArgument;
 	ctr_object* result;
@@ -921,12 +924,15 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 		mesgArgument->object = ctr_build_string(message, vlen);
 		mesgArgument->next = argumentList;
 		if (argCount == 0 || argCount > 2) {
-			return ctr_send_message(receiverObject, "respondTo:", 10,  mesgArgument);
+			returnValue = ctr_send_message(receiverObject, "respondTo:", 10,  mesgArgument);
 		} else if (argCount == 1) {
-			return ctr_send_message(receiverObject, "respondTo:with:", 15,  mesgArgument);
+			returnValue = ctr_send_message(receiverObject, "respondTo:with:", 15,  mesgArgument);
 		} else if (argCount == 2) {
-			return ctr_send_message(receiverObject, "respondTo:with:and:", 19,  mesgArgument);
+			returnValue = ctr_send_message(receiverObject, "respondTo:with:and:", 19,  mesgArgument);
 		}
+		ctr_heap_free( mesgArgument, sizeof( ctr_argument ) );
+		msg->info.sticky = 0;
+		return returnValue;
 	}
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTNATFUNC) {
 		funct = methodObject->value.fvalue;
