@@ -336,8 +336,7 @@ int ctr_clex_tok() {
 		c != '/' &&
 		c !='='  &&
 		c !='>'  &&
-		c !='<'  &&
-		c !='&'
+		c !='<'
 	) && ctr_code!=ctr_eofcode
 	) {
 		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
