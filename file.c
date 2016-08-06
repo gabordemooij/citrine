@@ -279,10 +279,17 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 	char* path;
 	FILE* handle;
 	ctr_resource* rs = ctr_heap_allocate(sizeof(ctr_resource));
-	if (pathObj == NULL) return myself;
+        ctr_object* modeStrObj = ctr_internal_cast2string( argumentList->object );
+	if ( myself->value.rvalue != NULL ) {
+		CtrStdError = ctr_build_string_from_cstring( "File has already been opened." );
+		return myself;
+	}
+	if ( pathObj == NULL ) return myself;
 	path = ctr_internal_tocstring( pathObj );
-	mode = ctr_internal_tocstring( ctr_internal_cast2string(argumentList->object) );
+	mode = ctr_internal_tocstring( modeStrObj );
 	handle = fopen(path,mode);
+	ctr_heap_free( path, sizeof( char ) * ( pathObj->value.svalue->vlen + 1 ) );
+	ctr_heap_free( mode, sizeof( char ) * ( modeStrObj->value.svalue->vlen + 1 ) );
 	rs->type = 1;
 	rs->ptr = handle;
 	myself->value.rvalue = rs;
@@ -305,7 +312,10 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
-	fclose((FILE*)myself->value.rvalue->ptr);
+	if (myself->value.rvalue->ptr) {
+		fclose((FILE*)myself->value.rvalue->ptr);
+	}
+	ctr_heap_free( myself->value.rvalue, sizeof(ctr_resource) );
 	myself->value.rvalue = NULL;
 	return myself;
 }
