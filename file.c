@@ -27,13 +27,8 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	s->info.type = CTR_OBJECT_TYPE_OTEX; /* indicates resource for GC */
 	s->link = myself;
 	s->value.rvalue = NULL;
-	pathObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
-	pathObject->info.type = CTR_OBJECT_TYPE_OTSTRING;
-	pathObject->value.svalue = (ctr_string*) ctr_heap_allocate(sizeof(ctr_string));
-	pathObject->value.svalue->value = (char*) ctr_heap_allocate(sizeof(char) * argumentList->object->value.svalue->vlen);
-	memcpy(pathObject->value.svalue->value, argumentList->object->value.svalue->value, argumentList->object->value.svalue->vlen);
-	pathObject->value.svalue->vlen = argumentList->object->value.svalue->vlen;
-	ctr_internal_object_add_property(s, ctr_build_string("path",4), pathObject, 0);
+	pathObject = ctr_build_string( argumentList->object->value.svalue->value, argumentList->object->value.svalue->vlen );
+	ctr_internal_object_add_property( s, ctr_build_string( "path", 4 ), pathObject, 0 );
 	return s;
 }
 
