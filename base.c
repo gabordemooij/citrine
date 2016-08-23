@@ -1124,6 +1124,7 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(dest, myself->value.svalue->value, n1);
 	memcpy(dest+n1, strObject->value.svalue->value, n2);
 	newString = ctr_build_string(dest, (n1 + n2));
+	ctr_heap_free( dest, sizeof(char) * ( n1 + n2 ) );
 	return newString;
 }
 
@@ -1142,7 +1143,7 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
  *
  */
 ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
+	ctr_object* strObject;
 	ctr_size n1;
 	ctr_size n2;
 	char* dest;
@@ -1152,7 +1153,9 @@ ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 	dest = ctr_heap_allocate( sizeof( char ) * ( n1 + n2 ) );
 	memcpy(dest, myself->value.svalue->value, n1);
 	memcpy(dest+n1, strObject->value.svalue->value, n2);
-	ctr_heap_free( strObject->value.svalue->value, ( strObject->value.svalue->vlen * sizeof( char ) ) );
+	if ( myself->value.svalue->vlen > 0 ) {
+		ctr_heap_free( myself->value.svalue->value, ( n1 * sizeof( char ) ) );
+	}
 	myself->value.svalue->value = dest;
 	myself->value.svalue->vlen  = (n1 + n2);
 	return myself;
