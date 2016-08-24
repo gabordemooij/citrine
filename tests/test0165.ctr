@@ -7,11 +7,11 @@ usedMemory4 := 0.
 
 Broom mode: 0.
 
-f := File new: '/tmp/boe.txt'.
+f := File new: '/tmp/citrine_test_file.txt'.
 f exists: {\ f delete. }.
 f write: 'hello world'.
 
-f := File new: '/tmp/boe.txt'.
+f := File new: '/tmp/citrine_test_file.txt'.
 f open: 'r'.
 q := f end seek: -3, readBytes: 3.
 q := q + (f rewind readBytes: 2). 
@@ -19,20 +19,20 @@ q := q + (f rewind readBytes: 2).
 
 Pen write: q.
 
-f := File new: '/tmp/boe.txt'.
+f := File new: '/tmp/citrine_test_file.txt'.
 f append: 'hello'.
 
 Broom sweep.
 usedMemory1 := Broom keptAlloc.
 #Pen write: usedMemory1, brk.
 
-f := File new: '/tmp/boe.txt'.
+f := File new: '/tmp/citrine_test_file.txt'.
 f append: 'hello'.
 Broom sweep.
 usedMemory2 := Broom keptAlloc.
 #Pen write: usedMemory2, brk.
 
-f := File new: '/tmp/boe.txt'.
+f := File new: '/tmp/citrine_test_file.txt'.
 f append: 'hello'.
 Broom sweep.
 usedMemory3 := Broom keptAlloc.
