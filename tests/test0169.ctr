@@ -1,4 +1,4 @@
-#Sending generic messages should not leak memory.
+#File operations should not leak memory
 
 usedMemory1 := 0.
 usedMemory2 := 0.
