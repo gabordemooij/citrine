@@ -253,6 +253,7 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 	if (f) {
 		fclose(f);
 	}
+	ctr_heap_free( pathString, vlen + 1 );
 	return ctr_build_number_from_float( (ctr_number) sz );
 }
 
