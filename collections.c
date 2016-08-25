@@ -275,6 +275,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 	int i;
 	char* result;
 	long len = 0;
+	long oldLen = 0;
 	long pos;
 	ctr_object* o;
 	ctr_object* str;
@@ -290,10 +291,11 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 			result = ctr_heap_allocate(sizeof(char)*len);
 		} else {
 			len += str->value.svalue->vlen + glen;
-			result = realloc(result, sizeof(char)*len);
+			result = ctr_heap_reallocate(result, sizeof(char)*len, oldLen);
 			memcpy(result+pos, glue->value.svalue->value, glen);
 			pos += glen;
 		}
+		oldLen = len;
 		memcpy(result+pos, str->value.svalue->value, str->value.svalue->vlen);
 	}
 	resultStr = ctr_build_string(result, len);
