@@ -423,12 +423,12 @@ ctr_object* ctr_array_count(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] from: [Begin] to: [End]
+ * [Array] from: [Begin] length: [End]
  *
  * Copies part of an array indicated by from and to and
  * returns a new array consisting of a copy of this region.
  */
-ctr_object* ctr_array_from_to(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* pushArg;
 	ctr_argument* elnumArg;
 	ctr_object* elnum;
@@ -445,6 +445,8 @@ ctr_object* ctr_array_from_to(ctr_object* myself, ctr_argument* argumentList) {
 		elnumArg->object = elnum;
 		pushArg->object = ctr_array_get(myself, elnumArg);
 		ctr_array_push(newArray, pushArg);
+		ctr_heap_free( elnumArg, sizeof( ctr_argument ) );
+		ctr_heap_free( pushArg, sizeof( ctr_argument ) );
 	}
 	return newArray;
 }

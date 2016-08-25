@@ -468,7 +468,7 @@ ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_from_to(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList);
