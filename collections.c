@@ -274,14 +274,14 @@ ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 	int i;
 	char* result;
-	long len = 0;
-	long oldLen = 0;
-	long pos;
+	ctr_size len = 0;
+	ctr_size oldLen = 0;
+	ctr_size pos;
 	ctr_object* o;
 	ctr_object* str;
 	ctr_object* resultStr;
 	ctr_object* glue = ctr_internal_cast2string(argumentList->object);
-	long glen = glue->value.svalue->vlen;
+	ctr_size glen = glue->value.svalue->vlen;
 	for(i=myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
 		o = *( myself->value.avalue->elements + i );
 		str = ctr_internal_cast2string(o);
