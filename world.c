@@ -411,6 +411,11 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
  * the returned set of bytes with a \0 byte for use
  * in traditional C string functions.
  *
+ * Warning: this function 'leaks' memory.
+ * It will allocate the necessary resources to store the string.
+ * To free this memory you'll need to call ctr_heap_free
+ * passing the pointer and the number of bytes ( value.svalue->vlen ).
+ *
  * @param ctr_object* stringObject CtrString object instance to cast
  *
  * @return char*
