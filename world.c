@@ -416,19 +416,18 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
  * @return char*
  */
 char* ctr_internal_tocstring( ctr_object* stringObject ) {
+	char*    cstring;
+	char*    stringBytes;
+	ctr_size length;
 
- char*    cstring;
- char*    stringBytes;
- ctr_size length;
+	stringBytes = stringObject->value.svalue->value;
+	length      = stringObject->value.svalue->vlen;
+	cstring     = ctr_heap_allocate( ( length + 1 ) * sizeof( char ) );
 
- stringBytes = stringObject->value.svalue->value;
- length      = stringObject->value.svalue->vlen;
- cstring     = ctr_heap_allocate( ( length + 1 ) * sizeof( char ) );
+	strncpy( cstring, stringBytes, length );
+	cstring[stringObject->value.svalue->vlen] = '\0';
 
- strncpy( cstring, stringBytes, length );
- cstring[stringObject->value.svalue->vlen] = '\0';
-
- return cstring;
+	return cstring;
 }
 
 /**
