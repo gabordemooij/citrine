@@ -615,6 +615,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("type", 4), &ctr_object_type);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("isNil", 5), &ctr_object_is_nil);
 	ctr_internal_create_func(CtrStdObject, ctr_build_string("myself", 6), &ctr_object_myself);
+	ctr_internal_create_func(CtrStdObject, ctr_build_string("do", 2), &ctr_object_do);
+	ctr_internal_create_func(CtrStdObject, ctr_build_string("done", 4), &ctr_object_done);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Object", 6), CtrStdObject, 0);
 	CtrStdObject->link = NULL;
 	CtrStdObject->info.sticky = 1;
@@ -932,6 +934,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 		}
 		ctr_heap_free( mesgArgument, sizeof( ctr_argument ) );
 		msg->info.sticky = 0;
+		if (receiverObject->info.chainMode == 1) return receiverObject;
 		return returnValue;
 	}
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTNATFUNC) {
@@ -942,6 +945,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 		result = ctr_block_run(methodObject, argumentList, receiverObject);
 	}
 	if (msg) msg->info.sticky = 0;
+	if (receiverObject->info.chainMode == 1) return receiverObject;
 	return result;
 }
 

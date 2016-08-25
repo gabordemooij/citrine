@@ -94,6 +94,41 @@ ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Object] do
+ *
+ * Activates 'chain mode'. If chain mode is active, all messages will
+ * return the recipient object regardless of their return signature.
+ *
+ * Usage:
+ *
+ * a := Array <- 'hello' ; 'world' ; True ; Nil ; 666.
+ * a do pop shift unshift: 'hi', push: 999, done.
+ *
+ * Because of 'chain mode' you can do 'a do pop shift' etc, instead of
+ *
+ * a pop.
+ * a shift.
+ * etc..
+ *
+ * The 'do' message tells the object to always return itself and disgard
+ * the original return value until the message 'done' has been received.
+ */
+ctr_object* ctr_object_do( ctr_object* myself, ctr_argument* argumentList ) {
+	myself->info.chainMode = 1;
+	return myself;
+}
+
+/**
+ * [Object] done
+ *
+ * Deactivates 'chain mode'.
+ */
+ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
+	myself->info.chainMode = 0;
+	return myself;
+}
+
+/**
  * [Object] on: [String] do: [Block]
  *
  * Makes the object respond to a new kind of message.

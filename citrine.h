@@ -143,6 +143,7 @@ struct ctr_object {
 		unsigned int type: 4;
 		unsigned int mark: 1;
 		unsigned int sticky: 1;
+		unsigned int chainMode: 1;
 	} info;
 	struct ctr_object* link;
 	union uvalue {
@@ -346,6 +347,8 @@ ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_object_do(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_object_done(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Boolean Interface

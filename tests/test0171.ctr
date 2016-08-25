@@ -8,7 +8,7 @@ usedMemory4 := 0.
 Broom mode: 0.
 
 a := Array <- 'hello' ; 'world' ; True ; Nil ; 666.
-a pop. a shift. a unshift: 'hi', push: 999.
+a do pop shift unshift: 'hi', push: 999, done.
 Pen write: ( a join: ',' ), brk.
 
 Broom sweep.
@@ -25,7 +25,7 @@ usedMemory2 := Broom keptAlloc.
 #Pen write: usedMemory2, brk.
 
 a := Array <- 'hello' ; 'world' ; True ; Nil ; 666.
-a pop. a shift. a unshift: 'hi', push: 999.
+a do pop shift unshift: 'hi', push: 999, done.
 Pen write: ( a join: ',' ), brk.
 
 
