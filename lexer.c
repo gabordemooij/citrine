@@ -48,7 +48,7 @@ char* ctr_clex_desc_tok_unknown = "(unknown token)";
  *
  * @return uint8_t
  */
-inline uint8_t ctr_clex_is_delimiter( char symbol ) {
+uint8_t ctr_clex_is_delimiter( char symbol ) {
 
 	return (
 	   symbol == '('
