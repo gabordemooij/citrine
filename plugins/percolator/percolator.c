@@ -19,7 +19,7 @@
  * 
  * I like to call this function 'begin', but you can use any name you like.
  */
-void begin (void) __attribute__((constructor));
+
 
 /**
  * Also note the docblocks above the functions, this documentation format

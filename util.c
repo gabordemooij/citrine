@@ -105,12 +105,14 @@ void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
  * On loading, the plugin will get a chance to add its objects to the world
  * through a constructor function.
  */
+typedef void* (*plugin_init_func)();
 void* ctr_internal_plugin_find(ctr_object* key) {
 	ctr_object* modNameObject = ctr_internal_cast2string(key);
 	void* handle;
 	char  pathNameMod[1024];
 	char* modName;
 	char* modNameLow;
+	plugin_init_func init_plugin;
 	char* realPathModName = NULL;
 	modName = ctr_internal_tocstring( modNameObject );
 	modNameLow = modName;
@@ -119,5 +121,9 @@ void* ctr_internal_plugin_find(ctr_object* key) {
 	realPathModName = realpath(pathNameMod, NULL);
 	if (access(realPathModName, F_OK) == -1) return NULL;
 	handle =  dlopen(realPathModName, RTLD_NOW);
+	if ( !handle ) return NULL;
+	*(void**)(&init_plugin) = dlsym( handle, "begin" );
+	if ( !init_plugin ) return NULL;
+	(void) init_plugin();
 	return handle;
 }

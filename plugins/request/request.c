@@ -24,7 +24,7 @@ ctr_object* CtrStdSCGICB;
 
 
     
-void begin (void) __attribute__((constructor));
+
 
 
 
