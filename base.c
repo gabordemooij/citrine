@@ -1315,6 +1315,8 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
  * [String] byteAt: [position]
  *
  * Returns the byte at the specified position (in bytes).
+ * Note that you cannot use the '@' message here because that will
+ * return the unicode point at the specified position, not the byte.
  *
  * Usage:
  * ('abc' byteAt: 1). #98
