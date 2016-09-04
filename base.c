@@ -1828,6 +1828,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 			a->object = CtrStdError;
 			CtrStdError = NULL;
 			ctr_block_run(catchBlock, a, my);
+			ctr_heap_free( a, sizeof( ctr_argument ) );
 			result = myself;
 		}
 	}

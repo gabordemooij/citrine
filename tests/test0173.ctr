@@ -1,0 +1,59 @@
+#Array operations should not leak memory
+
+usedMemory1 := 0.
+usedMemory2 := 0.
+usedMemory3 := 0.
+usedMemory4 := 0.
+
+Broom mode: 0.
+
+a := Array <- 'hello' ; 'world' ; True ; Nil ; 666.
+a := a + ( Array <- 1 ).
+Pen write: ( 'sum: ' + ( a sum ) ), brk.
+Pen write: ( 'min: ' + ( a min ) ), brk.
+Pen write: ( 'max: ' + ( a max ) ), brk.
+Pen write: ( '3rd: ' + ( a @ 2 ) ), brk.
+Pen write: ( 'prd: ' + ( a product ) ), brk.
+a sort: { a b | ^ (b - a). }.
+a each: { i e | Pen write: ( i ), brk. }.
+
+Broom sweep.
+usedMemory1 := Broom keptAlloc.
+#Pen write: usedMemory1, brk.
+
+a := Array <- 'hello' ; 'world' ; True ; Nil ; 666.
+a := a + ( Array <- 1 ).
+Pen write: ( 'sum: ' + ( a sum ) ), brk.
+Pen write: ( 'min: ' + ( a min ) ), brk.
+Pen write: ( 'max: ' + ( a max ) ), brk.
+Pen write: ( '3rd: ' + ( a @ 2 ) ), brk.
+Pen write: ( 'prd: ' + ( a product ) ), brk.
+a sort: { a b | ^ (b - a). }.
+a each: { i e | Pen write: ( i ), brk. }.
+
+
+Broom sweep.
+usedMemory2 := Broom keptAlloc.
+#Pen write: usedMemory2, brk.
+
+a := Array <- 'hello' ; 'world' ; True ; Nil ; 666.
+a := a + ( Array <- 1 ).
+Pen write: ( 'sum: ' + ( a sum ) ), brk.
+Pen write: ( 'min: ' + ( a min ) ), brk.
+Pen write: ( 'max: ' + ( a max ) ), brk.
+Pen write: ( '3rd: ' + ( a @ 2 ) ), brk.
+Pen write: ( 'prd: ' + ( a product ) ), brk.
+a sort: { a b | ^ (b - a). }.
+a each: { i e | Pen write: ( i ), brk. }.
+
+
+Broom sweep.
+usedMemory3 := Broom keptAlloc.
+#Pen write: usedMemory3, brk.
+
+#memory counters need to be equal!
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {\
+	Pen write: 'No memory leaks here'.
+}, ifFalse: {\
+	Pen write: 'Leaking memory...'.
+}.

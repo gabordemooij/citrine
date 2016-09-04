@@ -198,6 +198,9 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 		arguments->next = argument2;
 		argument2->next = argument3;
 		ctr_block_run(block, arguments, NULL);
+		ctr_heap_free( arguments, sizeof( ctr_argument ) );
+		ctr_heap_free( argument2, sizeof( ctr_argument ) );
+		ctr_heap_free( argument3, sizeof( ctr_argument ) );
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL;
 		if (CtrStdError) break;
 	}
@@ -468,6 +471,8 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 		elnumArg->object = elnum;
 		pushArg->object = ctr_array_get(myself, elnumArg);
 		ctr_array_push(newArray, pushArg);
+		ctr_heap_free( elnumArg, sizeof( ctr_argument ) );
+		ctr_heap_free( pushArg, sizeof( ctr_argument ) );
 	}
 	if (otherArray->info.type == CTR_OBJECT_TYPE_OTARRAY) {
 		for(i = otherArray->value.avalue->tail; i<otherArray->value.avalue->head; i++) {
@@ -477,6 +482,8 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 			elnumArg->object = elnum;
 			pushArg->object = ctr_array_get(otherArray, elnumArg);
 			ctr_array_push(newArray, pushArg);
+			ctr_heap_free( elnumArg, sizeof( ctr_argument ) );
+			ctr_heap_free( pushArg, sizeof( ctr_argument ) );
 		}
 	}
 	return newArray;
@@ -499,6 +506,8 @@ int ctr_sort_cmp(const void * a, const void * b) {
 	arg2->object = *((ctr_object**) b);
 	result = ctr_block_run(temp_sorter, arg1, NULL);
 	numResult = ctr_internal_cast2number(result);
+	ctr_heap_free( arg1, sizeof( ctr_argument ) );
+	ctr_heap_free( arg2, sizeof( ctr_argument ) );
 	return (int) numResult->value.nvalue;
 }
 
