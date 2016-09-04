@@ -715,6 +715,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string("rightTrim", 9), &ctr_string_rtrim);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("htmlEscape", 10), &ctr_string_html_escape);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("at:", 3), &ctr_string_at);
+	ctr_internal_create_func(CtrStdString, ctr_build_string("@", 1), &ctr_string_at);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("byteAt:", 7), &ctr_string_byte_at);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("indexOf:", 8), &ctr_string_index_of);
 	ctr_internal_create_func(CtrStdString, ctr_build_string("lastIndexOf:", 12), &ctr_string_last_index_of);

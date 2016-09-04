@@ -1291,10 +1291,12 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
  * [String] at: [position]
  *
  * Returns the character at the specified position (UTF8 aware).
+ * You may also use the alias '@'.
  *
  * Usage:
  *
  * ('hello' at: 2). #l
+ * ('hello' @ 2). #l
  */
 ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
