@@ -1,0 +1,66 @@
+#Array operations should not leak memory
+
+usedMemory1 := 0.
+usedMemory2 := 0.
+usedMemory3 := 0.
+usedMemory4 := 0.
+
+Broom mode: 0.
+
+palette := Map new.
+palette 
+	put: '#F00' at: 'red',
+	put: '#0F0' at: 'green',
+	put: '#00F' at: 'blue'.
+Pen write: 'number of RGB codes in palette: ' + ( palette count ), brk.
+Pen write: 'RGB code of green is: ' + ( palette @ 'green' ), brk.
+colors := ''.
+( palette each: { name code |
+		colors := colors + ( name + ':' + code ).
+} ).
+Pen write: 'All colors in palette: ' + colors, brk.
+
+Broom sweep.
+usedMemory1 := Broom keptAlloc.
+#Pen write: usedMemory1, brk.
+
+palette := Map new.
+palette 
+	put: '#F00' at: 'red',
+	put: '#0F0' at: 'green',
+	put: '#00F' at: 'blue'.
+Pen write: 'number of RGB codes in palette: ' + ( palette count ), brk.
+Pen write: 'RGB code of green is: ' + ( palette @ 'green' ), brk.
+colors := ''.
+( palette each: { name code |
+		colors := colors + ( name + ':' + code ).
+} ).
+Pen write: 'All colors in palette: ' + colors, brk.
+
+Broom sweep.
+usedMemory2 := Broom keptAlloc.
+#Pen write: usedMemory2, brk.
+palette := Map new.
+palette 
+	put: '#F00' at: 'red',
+	put: '#0F0' at: 'green',
+	put: '#00F' at: 'blue'.
+Pen write: 'number of RGB codes in palette: ' + ( palette count ), brk.
+Pen write: 'RGB code of green is: ' + ( palette @ 'green' ), brk.
+colors := ''.
+( palette each: { name code |
+		colors := colors + ( name + ':' + code ).
+} ).
+Pen write: 'All colors in palette: ' + colors, brk.
+
+
+Broom sweep.
+usedMemory3 := Broom keptAlloc.
+#Pen write: usedMemory3, brk.
+
+#memory counters need to be equal!
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {\
+	Pen write: 'No memory leaks here'.
+}, ifFalse: {\
+	Pen write: 'Leaking memory...'.
+}.

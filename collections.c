@@ -576,6 +576,8 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(key, putKey->value.svalue->value, keyLen);
 	ctr_internal_object_delete_property(myself, ctr_build_string(key, keyLen), 0);
 	ctr_internal_object_add_property(myself, ctr_build_string(key, keyLen), putValue, 0);
+	ctr_heap_free( emptyArgumentList, sizeof( ctr_argument ) );
+	ctr_heap_free( key, sizeof( char ) * putKey->value.svalue->vlen );
 	return myself;
 }
 
@@ -598,6 +600,7 @@ ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
 
 	/* Give developer a chance to define a key for array */
 	searchKey = ctr_send_message(searchKey, "toString", 8, emptyArgumentList);
+	ctr_heap_free( emptyArgumentList, sizeof( ctr_argument ) );
 
 	/* If developer returns something other than string (ouch, toString), then cast anyway */
 	if (searchKey->info.type != CTR_OBJECT_TYPE_OTSTRING) {
@@ -651,6 +654,9 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_block_run(block, arguments, NULL);
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL;
 		m = m->next;
+		ctr_heap_free( arguments, sizeof( ctr_argument ) );
+		ctr_heap_free( argument2, sizeof( ctr_argument ) );
+		ctr_heap_free( argument3, sizeof( ctr_argument ) );
 	}
 	if (CtrStdError == CtrStdBreak) CtrStdError = NULL;
 	block->info.mark = 0;
