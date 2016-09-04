@@ -1,4 +1,4 @@
-#Array operations should not leak memory
+#Map operations should not leak memory
 
 usedMemory1 := 0.
 usedMemory2 := 0.
