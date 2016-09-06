@@ -1266,6 +1266,7 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	dest = ctr_heap_allocate( ub * sizeof(char) );
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	newString = ctr_build_string(dest,ub);
+	ctr_heap_free( dest, ub * sizeof(char) );
 	return newString;
 }
 
@@ -1277,13 +1278,17 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* argument1;
 	ctr_argument* argument2;
+	ctr_object* result;
 	if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_string("",0);
 	argument1 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	argument2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	argument1->object = argumentList->object;
 	argument1->next = argument2;
 	argument2->object = ctr_build_number_from_float(myself->value.svalue->vlen - argumentList->object->value.nvalue);
-	return ctr_string_from_length(myself, argument1);
+	result = ctr_string_from_length(myself, argument1);
+	ctr_heap_free( argument1, sizeof( ctr_argument ) );
+	ctr_heap_free( argument2, sizeof( ctr_argument ) );
+	return result;
 }
 
 
