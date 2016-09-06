@@ -1229,6 +1229,7 @@ ctr_object* ctr_string_fromto(ctr_object* myself, ctr_argument* argumentList) {
 	dest = ctr_heap_allocate( ub * sizeof(char) );
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	newString = ctr_build_string(dest,ub);
+	ctr_heap_free( dest, ub * sizeof(char) );
 	return newString;
 }
 
