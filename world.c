@@ -262,9 +262,8 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
 		last = haystack + hlen - nlen + 1;
 	} else {
 		begin = haystack + hlen;
-		last = haystack + nlen - 2;
+		last = haystack - 1;
 	}
-
 	for(cur = begin; cur!=last; cur += step) {
 		if (memcmp(cur,needle,nlen) == 0) return cur;
 	}

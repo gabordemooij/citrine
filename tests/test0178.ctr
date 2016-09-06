@@ -1,0 +1,61 @@
+#String operations should not leak memory
+
+usedMemory1 := 0.
+usedMemory2 := 0.
+usedMemory3 := 0.
+usedMemory4 := 0.
+
+Broom mode: 0.
+
+txt := 'Word Salad'.
+Pen write: 'last index of ord = ' + ( txt lastIndexOf: 'ord' ), brk.
+Pen write: 'index of ord = ' + ( txt indexOf: 'ord' ), brk.
+Pen write: 'index of ad = ' + ( txt indexOf: 'ad' ), brk.
+Pen write: 'last index of W = ' + ( txt lastIndexOf: 'W' ), brk.
+Pen write: 'last index of d = ' + ( txt lastIndexOf: 'd' ), brk.
+Pen write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), brk.
+Pen write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
+Pen write: 'txt does not equal Word Salad = ' + ( txt != 'Word Salad' ), brk.
+Pen write: 'txt does not equal Ceasar Salad = ' + ( txt != 'Ceasar Salad' ), brk.
+
+Broom sweep.
+
+usedMemory1 := Broom keptAlloc.
+#Pen write: usedMemory1, brk.
+
+txt := 'Word Salad'.
+Pen write: 'last index of ord = ' + ( txt lastIndexOf: 'ord' ), brk.
+Pen write: 'index of ord = ' + ( txt indexOf: 'ord' ), brk.
+Pen write: 'index of ad = ' + ( txt indexOf: 'ad' ), brk.
+Pen write: 'last index of W = ' + ( txt lastIndexOf: 'W' ), brk.
+Pen write: 'last index of d = ' + ( txt lastIndexOf: 'd' ), brk.
+Pen write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), brk.
+Pen write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
+Pen write: 'txt does not equal Word Salad = ' + ( txt != 'Word Salad' ), brk.
+Pen write: 'txt does not equal Ceasar Salad = ' + ( txt != 'Ceasar Salad' ), brk.
+
+Broom sweep.
+usedMemory2 := Broom keptAlloc.
+#Pen write: usedMemory2, brk.
+
+txt := 'Word Salad'.
+Pen write: 'last index of ord = ' + ( txt lastIndexOf: 'ord' ), brk.
+Pen write: 'index of ord = ' + ( txt indexOf: 'ord' ), brk.
+Pen write: 'index of ad = ' + ( txt indexOf: 'ad' ), brk.
+Pen write: 'last index of W = ' + ( txt lastIndexOf: 'W' ), brk.
+Pen write: 'last index of d = ' + ( txt lastIndexOf: 'd' ), brk.
+Pen write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), brk.
+Pen write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
+Pen write: 'txt does not equal Word Salad = ' + ( txt != 'Word Salad' ), brk.
+Pen write: 'txt does not equal Ceasar Salad = ' + ( txt != 'Ceasar Salad' ), brk.
+
+Broom sweep.
+usedMemory3 := Broom keptAlloc.
+#Pen write: usedMemory3, brk.
+
+#memory counters need to be equal!
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {\
+	Pen write: 'No memory leaks here'.
+}, ifFalse: {\
+	Pen write: 'Leaking memory...'.
+}.
