@@ -1473,6 +1473,7 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentL
 ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
 	ctr_object* replacement = ctr_internal_cast2string(argumentList->next->object);
+	ctr_object* str;
 	char* dest;
 	char* odest;
 	char* src = myself->value.svalue->value;
@@ -1482,6 +1483,7 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 	long nlen = needle->value.svalue->vlen;
 	long rlen = replacement->value.svalue->vlen;
 	long dlen = hlen;
+	long olen = dlen;
 	char* p;
 	long i = 0;
 	long offset = 0;
@@ -1496,8 +1498,9 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 		if (p == NULL) break;
 		d = (dest - odest);
 		if ((dlen - nlen + rlen)>dlen) {
+			olen = dlen;
 			dlen = (dlen - nlen + rlen);
-			odest = (char*) realloc(odest, dlen * sizeof(char));
+			odest = (char*) ctr_heap_reallocate(odest, dlen * sizeof(char), olen );
 			dest = (odest + d);
 		} else {
 			dlen = (dlen - nlen + rlen);
@@ -1512,7 +1515,9 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 		i++;
 	}
 	memcpy(dest, src, hlen);
-	return ctr_build_string(odest, dlen);
+	str = ctr_build_string(odest, dlen);
+	ctr_heap_free( odest, dlen * sizeof( char ) );
+	return str;
 }
 
 /**
