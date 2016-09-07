@@ -1,0 +1,55 @@
+#String casts should not leak memory
+
+usedMemory1 := 0.
+usedMemory2 := 0.
+usedMemory3 := 0.
+usedMemory4 := 0.
+
+Broom mode: 0.
+
+o  := Object new.
+o2 := Object new.
+Pen write: o isNil, brk.
+Pen write: o type, brk.
+Pen write: ( o equals: o ), brk.
+Pen write: ( o equals: o2 ), brk.
+Pen write: o myself, brk.
+Pen write: ( o do done ), brk.
+
+Broom sweep.
+
+usedMemory1 := Broom keptAlloc.
+#Pen write: usedMemory1, brk.
+
+o  := Object new.
+o2 := Object new.
+Pen write: o isNil, brk.
+Pen write: o type, brk.
+Pen write: ( o equals: o ), brk.
+Pen write: ( o equals: o2 ), brk.
+Pen write: o myself, brk.
+Pen write: ( o do done ), brk.
+
+Broom sweep.
+usedMemory2 := Broom keptAlloc.
+#Pen write: usedMemory2, brk.
+
+o  := Object new.
+o2 := Object new.
+Pen write: o isNil, brk.
+Pen write: o type, brk.
+Pen write: ( o equals: o ), brk.
+Pen write: ( o equals: o2 ), brk.
+Pen write: o myself, brk.
+Pen write: ( o do done ), brk.
+
+Broom sweep.
+usedMemory3 := Broom keptAlloc.
+#Pen write: usedMemory3, brk.
+
+#memory counters need to be equal!
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {\
+	Pen write: 'No memory leaks here'.
+}, ifFalse: {\
+	Pen write: 'Leaking memory...'.
+}.
