@@ -1,4 +1,4 @@
-#String casts should not leak memory
+#Object operations not leak memory
 
 usedMemory1 := 0.
 usedMemory2 := 0.
