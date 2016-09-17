@@ -283,11 +283,14 @@ ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
  *
  */
 ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* result;
 	if (myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
 		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = myself;
-		return ctr_block_run(codeBlock, arguments, NULL);
+		result = ctr_block_run(codeBlock, arguments, NULL);
+		ctr_heap_free( arguments, sizeof( ctr_argument ) );
+		return result;
 	}
 	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
 	return myself;
@@ -304,11 +307,14 @@ ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
  *
  */
 ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* result;
 	if (!myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
 		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = myself;
-		return ctr_block_run(codeBlock, arguments, NULL);
+		result = ctr_block_run(codeBlock, arguments, NULL);
+		ctr_heap_free( arguments, sizeof( ctr_argument ) );
+		return result;
 	}
 	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
 	return myself;
@@ -674,6 +680,7 @@ ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
 		arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = indexNumber;
 		ctr_block_run(block, arguments, NULL);
+		ctr_heap_free( arguments, sizeof( ctr_argument ) );
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
 		if (CtrStdError) break;
 	}
@@ -745,14 +752,14 @@ ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] modulo: [modulo]
+ * [Number] % [modulo]
  *
  * Returns the modulo of the number. This message will return a new
  * object representing the modulo of the recipient.
  *
  * Usage:
  *
- * x := 11 modulo: 3. #x will now be 2
+ * x := 11 % 3. #x will now be 2
  *
  * Use this message to apply the operation of division to the
  * object itself instead of generating a new one.
@@ -904,6 +911,7 @@ ctr_object* ctr_number_to_step_do(ctr_object* myself, ctr_argument* argumentList
 		arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = ctr_build_number_from_float(curValue);
 		ctr_block_run(codeBlock, arguments, NULL);
+		ctr_heap_free( arguments, sizeof( ctr_argument ) );
 		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue and go on */
 		curValue += incValue;
 	}

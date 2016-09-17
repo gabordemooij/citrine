@@ -1,0 +1,67 @@
+#Numeric comparisons should not leak memory
+
+usedMemory1 := 0.
+usedMemory2 := 0.
+usedMemory3 := 0.
+usedMemory4 := 0.
+
+Broom mode: 0.
+
+Pen write: (6 < 5), brk.
+Pen write: (2 > 1), brk.
+Pen write: (2 <= 1), brk.
+Pen write: (9 >= 1), brk.
+Pen write: (2 odd), brk.
+Pen write: (4 even), brk.
+Pen write: (-1 positive), brk.
+Pen write: (-2 negative), brk.
+Pen write: (3 between: 4 and: 5), brk.
+Pen write: (3 = 3), brk.
+Pen write: (3 != 3), brk.
+Pen write: 1 toBoolean, brk.
+
+Broom sweep.
+
+usedMemory1 := Broom keptAlloc.
+#Pen write: usedMemory1, brk.
+
+Pen write: (6 < 5), brk.
+Pen write: (2 > 1), brk.
+Pen write: (2 <= 1), brk.
+Pen write: (9 >= 1), brk.
+Pen write: (2 odd), brk.
+Pen write: (4 even), brk.
+Pen write: (-1 positive), brk.
+Pen write: (-2 negative), brk.
+Pen write: (3 between: 4 and: 5), brk.
+Pen write: (3 = 3), brk.
+Pen write: (3 != 3), brk.
+Pen write: 1 toBoolean, brk.
+
+Broom sweep.
+usedMemory2 := Broom keptAlloc.
+#Pen write: usedMemory2, brk.
+
+Pen write: (6 < 5), brk.
+Pen write: (2 > 1), brk.
+Pen write: (2 <= 1), brk.
+Pen write: (9 >= 1), brk.
+Pen write: (2 odd), brk.
+Pen write: (4 even), brk.
+Pen write: (-1 positive), brk.
+Pen write: (-2 negative), brk.
+Pen write: (3 between: 4 and: 5), brk.
+Pen write: (3 = 3), brk.
+Pen write: (3 != 3), brk.
+Pen write: 1 toBoolean, brk.
+
+Broom sweep.
+usedMemory3 := Broom keptAlloc.
+#Pen write: usedMemory3, brk.
+
+#memory counters need to be equal!
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {\
+	Pen write: 'No memory leaks here'.
+}, ifFalse: {\
+	Pen write: 'Leaking memory...'.
+}.
