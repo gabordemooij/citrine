@@ -26,7 +26,7 @@ Pen brk.
 Broom sweep.
 
 usedMemory1 := Broom keptAlloc.
-Pen write: usedMemory1, brk.
+#Pen write: usedMemory1, brk.
 
 4 times: { i | Pen write: i. }.
 Pen brk.
@@ -47,7 +47,7 @@ Pen brk.
 
 Broom sweep.
 usedMemory2 := Broom keptAlloc.
-Pen write: usedMemory2, brk.
+#Pen write: usedMemory2, brk.
 
 4 times: { i | Pen write: i. }.
 Pen brk.
@@ -66,7 +66,7 @@ Pen brk.
 
 Broom sweep.
 usedMemory3 := Broom keptAlloc.
-Pen write: usedMemory3, brk.
+#Pen write: usedMemory3, brk.
 
 #memory counters need to be equal!
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {\

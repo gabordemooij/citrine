@@ -259,11 +259,12 @@ ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* arg = ctr_internal_cast2string(argumentList->object);
 	long vlen = arg->value.svalue->vlen;
-	char* comString = ctr_heap_allocate(vlen + 1);
+	char* comString = ctr_heap_allocate( sizeof( char ) * ( vlen + 1 ) );
 	int r;
 	memcpy(comString, arg->value.svalue->value, vlen);
 	memcpy(comString+vlen,"\0",1);
 	r = system(comString);
+	ctr_heap_free( comString, sizeof( char ) * ( vlen + 1 ) );
 	return ctr_build_number_from_float( (ctr_number) r );
 }
 
@@ -284,7 +285,7 @@ ctr_object* ctr_shell_respond_to_with(ctr_object* myself, ctr_argument* argument
 	suffix = ctr_internal_cast2string(argumentList->next->object);
 	len = prefix->value.svalue->vlen + suffix->value.svalue->vlen;
 	if (len == 0) return myself;
-	command = (char*) ctr_heap_allocate(len); /* actually we need +1 for the space between commands, but we dont because we remove the colon : !*/
+	command = (char*) ctr_heap_allocate( ( sizeof( char ) * len ) ); /* actually we need +1 for the space between commands, but we dont because we remove the colon : !*/
 	strncpy(command, prefix->value.svalue->value, prefix->value.svalue->vlen - 1); /* remove colon, gives room for space */
 	strncpy(command + (prefix->value.svalue->vlen - 1), " ", 1); /* space to separate commands */
 	strncpy(command + (prefix->value.svalue->vlen), suffix->value.svalue->value, suffix->value.svalue->vlen);
@@ -292,6 +293,8 @@ ctr_object* ctr_shell_respond_to_with(ctr_object* myself, ctr_argument* argument
 	newArgumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	newArgumentList->object = commandObj;
 	ctr_shell_call(myself, newArgumentList);
+	ctr_heap_free( newArgumentList, sizeof( ctr_argument ) );
+	ctr_heap_free( command, ( sizeof( char ) * len ) );
 	return myself;
 }
 
