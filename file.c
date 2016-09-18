@@ -174,7 +174,7 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "r");
-	ctr_heap_free( pathString, vlen + 1 );
+	ctr_heap_free( pathString, sizeof( char ) * ( vlen + 1 ) );
 	exists = (f != NULL );
 	if (f) {
 		fclose(f);
@@ -222,11 +222,11 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	r = remove(pathString);
+	ctr_heap_free( pathString, sizeof( char ) * ( vlen + 1 ) );
 	if (r!=0) {
 		CtrStdError = ctr_build_string_from_cstring("Unable to delete file.\0");
 		return CtrStdNil;
 	}
-	ctr_heap_free( pathString, sizeof( char ) * ( vlen + 1 ) );
 	return myself;
 }
 
