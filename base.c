@@ -585,6 +585,7 @@ ctr_object* ctr_number_even(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* newArg;
 	ctr_object* otherNum = argumentList->object;
+	ctr_object* result;
 	ctr_number a;
 	ctr_number b;
 	ctr_object* strObject;
@@ -593,7 +594,9 @@ ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 		strObject = ctr_internal_cast2string(myself);
 		newArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		newArg->object = otherNum;
-		return ctr_string_concat(strObject, newArg);
+		result = ctr_string_concat(strObject, newArg);
+		ctr_heap_free( newArg, sizeof( ctr_argument ) );
+		return result;
 	}
 	a = myself->value.nvalue;
 	b = otherNum->value.nvalue;
@@ -1086,7 +1089,7 @@ ctr_object* ctr_build_string(char* stringValue, long size) {
 	ctr_object* stringObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 	if (size != 0) {
 		stringObject->value.svalue->value = ctr_heap_allocate( size*sizeof(char) );
-		memcpy(stringObject->value.svalue->value, stringValue, size);
+		memcpy(stringObject->value.svalue->value, stringValue, ( sizeof(char) * size ) );
 	}
 	stringObject->value.svalue->vlen = size;
 	stringObject->link = CtrStdString;
@@ -1502,11 +1505,13 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 	long i = 0;
 	long offset = 0;
 	long d;
-	dest = (char*) ctr_heap_allocate( dlen * sizeof( char ) );
-	odest = dest;
+	size_t maxlen;
+	maxlen = dlen;
 	if (nlen == 0 || hlen == 0) {
 		return ctr_build_string(src, hlen);
 	}
+	dest = (char*) ctr_heap_allocate( dlen * sizeof( char ) );
+	odest = dest;
 	while(1) {
 		p = ctr_internal_memmem(src, hlen, ndl, nlen, 0);
 		if (p == NULL) break;
@@ -1514,8 +1519,9 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 		if ((dlen - nlen + rlen)>dlen) {
 			olen = dlen;
 			dlen = (dlen - nlen + rlen);
-			odest = (char*) ctr_heap_reallocate(odest, dlen * sizeof(char), olen );
+			odest = (char*) ctr_heap_reallocate(odest, dlen * sizeof(char), olen * sizeof( char ) );
 			dest = (odest + d);
+			maxlen = dlen;
 		} else {
 			dlen = (dlen - nlen + rlen);
 		}
@@ -1530,7 +1536,7 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 	}
 	memcpy(dest, src, hlen);
 	str = ctr_build_string(odest, dlen);
-	ctr_heap_free( odest, dlen * sizeof( char ) );
+	ctr_heap_free( odest, maxlen * sizeof( char ) );
 	return str;
 }
 
@@ -1844,7 +1850,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	}
 	ctr_close_context();
 	if (CtrStdError != NULL && CtrStdError != CtrStdBreak && CtrStdError != CtrStdContinue) {
-		ctr_object* catchBlock = ctr_heap_allocate( sizeof( ctr_object ) );
+		ctr_object* catchBlock = ctr_internal_create_object( CTR_OBJECT_TYPE_OTBLOCK );
 		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string("catch",5), 0);
 		if (catchBlock != NULL) {
 			ctr_argument* a = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );

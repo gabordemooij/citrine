@@ -51,7 +51,7 @@ void ctr_gc_mark(ctr_object* object) {
  * @internal
  * GarbageCollector Sweeper
  */
-void ctr_gc_sweep() {
+void ctr_gc_sweep( int all ) {
 	ctr_object* previousObject = NULL;
 	ctr_object* currentObject = ctr_first_object;
 	ctr_object* nextObject = NULL;
@@ -59,7 +59,7 @@ void ctr_gc_sweep() {
 	ctr_mapitem* tmp = NULL;
 	while(currentObject) {
 		ctr_gc_object_counter ++;
-		if (currentObject->info.mark==0 && currentObject->info.sticky==0){
+		if ( ( currentObject->info.mark==0 && currentObject->info.sticky==0 ) || all){
 			ctr_gc_dust_counter ++;
 			/* remove from linked list */
 			if (previousObject) {
@@ -148,7 +148,7 @@ void  ctr_gc_internal_collect() {
 		ctr_context_id--;
 		context = ctr_contexts[ctr_context_id];
 	}
-	ctr_gc_sweep();
+	ctr_gc_sweep( 0 );
 	ctr_context_id = oldcid;
 }
 
@@ -359,6 +359,7 @@ ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList) 
 	if (envVal == NULL) {
 		return CtrStdNil;
 	}
+	ctr_heap_free(envVarNameStr, (envVarNameObj->value.svalue->vlen+1)*sizeof(char));
 	return ctr_build_string_from_cstring(envVal);
 }
 
@@ -374,10 +375,11 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
 	char*       envValStr;
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
 	envValObj = ctr_internal_cast2string(argumentList->next->object);
-	envVarNameStr = ctr_heap_allocate((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
 	envVarNameStr = ctr_internal_tocstring( envVarNameObj );
 	envValStr = ctr_internal_tocstring( envValObj );
 	setenv(envVarNameStr, envValStr, 1);
+	ctr_heap_free( envValStr, strlen( envValStr ) + 1 );
+	ctr_heap_free( envVarNameStr, strlen( envVarNameStr ) + 1 );
 	return myself;
 }
 

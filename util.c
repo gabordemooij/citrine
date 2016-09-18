@@ -125,5 +125,6 @@ void* ctr_internal_plugin_find(ctr_object* key) {
 	*(void**)(&init_plugin) = dlsym( handle, "begin" );
 	if ( !init_plugin ) return NULL;
 	(void) init_plugin();
+	ctr_heap_free( modName, strlen( modName ) + 1 );
 	return handle;
 }

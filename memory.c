@@ -11,6 +11,17 @@
  * Heap Object, represents dynamic memory.
  */
 
+struct memBlock {
+	size_t size;
+	void* space;
+};
+
+typedef struct memBlock memBlock;
+
+memBlock*  memBlocks = NULL;
+size_t     numberOfMemBlocks = 0;
+size_t     maxNumberOfMemBlocks = 0;
+
 /**
  * Heap allocate raw memory
  * Allocates a slice of memory having the specified size in bytes.
@@ -34,12 +45,13 @@
  *
  * @return void*
  */
-void* ctr_heap_allocate( uintptr_t size ) {
+void* ctr_heap_allocate( size_t size ) {
 
 	void* sliceOfMemory;
 
 	/* Check whether we can afford to allocate this much */
 	ctr_gc_alloc += size;
+
 	if (ctr_gc_memlimit < ctr_gc_alloc) {
 		printf( "Out of memory. Failed to allocate %lu bytes.\n", size );
 		exit(1);
@@ -60,6 +72,65 @@ void* ctr_heap_allocate( uintptr_t size ) {
 	return sliceOfMemory;
 }
 
+
+/**
+ * Allocates memory on heap and tracks it for clean-up when
+ * the program ends.
+ */
+void* ctr_heap_allocate_tracked( size_t size ) {
+	void* space;
+	size_t old_size;
+	space = ctr_heap_allocate( size );
+	if ( numberOfMemBlocks >= maxNumberOfMemBlocks ) {
+		if ( memBlocks == NULL ) {
+			memBlocks = ctr_heap_allocate( sizeof( memBlock ) );
+			maxNumberOfMemBlocks = 1;
+		} else {
+			old_size = maxNumberOfMemBlocks;
+			maxNumberOfMemBlocks += 10;
+			memBlocks = ctr_heap_reallocate( memBlocks, ( sizeof( memBlock ) * ( maxNumberOfMemBlocks ) ), ( sizeof( memBlock) * old_size ) );
+		}
+	}
+	memBlocks[ numberOfMemBlocks ].space = space;
+	memBlocks[ numberOfMemBlocks ].size  = size;
+	numberOfMemBlocks ++;
+	return space;
+}
+
+/**
+ * Reallocates tracked memory on heap.
+ * You need to provide a tracking ID.
+ */
+void* ctr_heap_reallocate_tracked( size_t tracking_id, size_t size, size_t old_size ) {
+	void* space;
+	size_t recorded_size;
+	space = memBlocks[ tracking_id ].space;
+	recorded_size = memBlocks[ tracking_id ].size;
+	space = ctr_heap_reallocate( space, size, old_size );
+	memBlocks[ tracking_id ].space = space;
+	memBlocks[ tracking_id ].size  = size;
+	return space;
+}
+
+/**
+ * Returns the latest tracking ID after tracking allocation.
+ */
+size_t ctr_heap_get_latest_tracking_id() {
+	return numberOfMemBlocks - 1;
+}
+
+/**
+ * Frees all tracked memory blocks.
+ */
+void ctr_heap_free_rest() {
+	size_t i;
+	for ( i = 0; i < numberOfMemBlocks; i ++) {
+		ctr_heap_free( memBlocks[i].space, memBlocks[i].size );
+	}
+	ctr_heap_free( memBlocks, ( maxNumberOfMemBlocks * sizeof( memBlock ) ) );
+}
+
+
 /**
  * Heap free memory
  *
@@ -71,7 +142,7 @@ void* ctr_heap_allocate( uintptr_t size ) {
  *
  * @return void
  */
-void ctr_heap_free( void* ptr, uintptr_t size ) {
+void ctr_heap_free( void* ptr, size_t size ) {
 	free( ptr );
 	ctr_gc_alloc -= size;
 }
@@ -84,10 +155,9 @@ void ctr_heap_free( void* ptr, uintptr_t size ) {
  * the purpose for allocation, this function will attempt to
  * re-allocate the memory block.
  */
-void* ctr_heap_reallocate(void* oldptr, uintptr_t size, uintptr_t old_size ) {
+void* ctr_heap_reallocate(void* oldptr, size_t size, size_t old_size ) {
 	char* nptr;
-	ctr_gc_alloc -= old_size;
-	nptr = ctr_heap_allocate( size );
-	memcpy(nptr, oldptr, old_size);
+	ctr_gc_alloc = ( ctr_gc_alloc - old_size ) + size;
+	nptr = realloc( oldptr, size );
 	return (void*) nptr;
 }

@@ -78,7 +78,7 @@ void ctr_clex_emit_error( char* message )
  */
 void ctr_clex_load(char* prg) {
 	ctr_code = prg;
-	ctr_clex_buffer = ctr_heap_allocate(ctr_clex_bflmt);
+	ctr_clex_buffer = ctr_heap_allocate_tracked(ctr_clex_bflmt);
 	ctr_clex_buffer[0] = '\0';
 	ctr_eofcode = (ctr_code + ctr_program_length);
 	ctr_clex_line_number = 0;
@@ -360,12 +360,14 @@ int ctr_clex_tok() {
 char* ctr_clex_readstr() {
 	char* strbuff;
 	char c;
-	long memblock = 40;
+	long memblock = 1;
 	int escape;
 	char* beginbuff;
 	long page = 100; /* 100 byte pages */
+	size_t tracking_id;
 	ctr_clex_tokvlen=0;
-	strbuff = (char*) ctr_heap_allocate(memblock);
+	strbuff = (char*) ctr_heap_allocate_tracked(memblock);
+	tracking_id = ctr_heap_get_latest_tracking_id();
 	c = *ctr_code;
 	escape = 0;
 	beginbuff = strbuff;
@@ -400,9 +402,9 @@ char* ctr_clex_readstr() {
 			continue;
 		}
 		ctr_clex_tokvlen ++;
-		if (ctr_clex_tokvlen > memblock) {
+		if (ctr_clex_tokvlen >= memblock) {
 			memblock += page;
-			beginbuff = (char*) ctr_heap_reallocate( beginbuff, memblock, ( memblock - page ) );
+			beginbuff = (char*) ctr_heap_reallocate_tracked( tracking_id, memblock, ( memblock - page ) );
 			if (beginbuff == NULL) {
 				printf("Out of memory\n");
 				exit(1);

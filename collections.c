@@ -247,13 +247,16 @@ ctr_object* ctr_array_new_and_push(ctr_object* myclass, ctr_argument* argumentLi
  * a unshift: 3. #now contains: 3,1
  */
 ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
+	size_t old_length;
 	ctr_object* pushValue = argumentList->object;
 	if (myself->value.avalue->tail > 0) {
 		myself->value.avalue->tail--;
 	} else {
 		if (myself->value.avalue->length <= (myself->value.avalue->head + 1)) {
+			old_length = myself->value.avalue->length;
 			myself->value.avalue->length = myself->value.avalue->length * 3;
-			myself->value.avalue->elements = (ctr_object**) realloc(myself->value.avalue->elements, (sizeof(ctr_object*) * (myself->value.avalue->length)));
+			myself->value.avalue->elements = (ctr_object**) ctr_heap_reallocate(myself->value.avalue->elements, (sizeof(ctr_object*) * (myself->value.avalue->length)),
+				( ( sizeof( ctr_object* ) ) * old_length ) );
 		}
 		myself->value.avalue->head++;
 		memmove(myself->value.avalue->elements+1, myself->value.avalue->elements,myself->value.avalue->head*sizeof(ctr_object*));
@@ -372,6 +375,7 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 			argument = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 			argument->object = CtrStdNil;
 			ctr_array_push(myself, argument);
+			ctr_heap_free( argument, sizeof( ctr_argument ) );
 		}
 		myself->value.avalue->head = putIndexNumber + 1;
 	}

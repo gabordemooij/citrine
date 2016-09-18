@@ -40,6 +40,7 @@ ctr_object* ctr_request_string(ctr_object* myself, ctr_argument* argumentList, C
 	cgiVarObject = ctr_internal_cast2string(argumentList->object);
 	cgiVar = ctr_internal_tocstring( cgiVarObject );
 	value = (char*) CGI_lookup(varlist, (const char*)cgiVar);
+	ctr_heap_free( cgiVar, sizeof( char ) * ( strlen( cgiVar ) + 1 ) );
 	if (value == NULL) return CtrStdNil;
 	return ctr_build_string_from_cstring(value);
 }
@@ -61,6 +62,7 @@ ctr_object* ctr_request_array(ctr_object* myself, ctr_argument* argumentList, CG
 	cgiVarObject = ctr_internal_cast2string(argumentList->object);
 	cgiVar = ctr_internal_tocstring( cgiVarObject );
 	value = CGI_lookup_all(varlist, (const char*)cgiVar);
+	ctr_heap_free( cgiVar, sizeof( char ) * ( strlen( cgiVar ) + 1 ) );
 	if (value == NULL) {
 		return list;
 	}
@@ -68,7 +70,8 @@ ctr_object* ctr_request_array(ctr_object* myself, ctr_argument* argumentList, CG
 		arg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		val = (char*) value[i];
 		arg->object = ctr_build_string_from_cstring(val);
-		ctr_array_push(list, arg);  
+		ctr_array_push(list, arg);
+		ctr_heap_free( arg, sizeof( ctr_argument ) );
 	}
 	return list;
 }
@@ -98,6 +101,7 @@ void ctr_request_serve_callback() {
 	varlistCookie = CGI_get_cookie(NULL);
 	varlistPost = CGI_get_post(NULL,"/tmp/_upXXXXXX");
 	ctr_block_run(CtrStdSCGICB, argumentList, CtrStdSCGICB);
+	ctr_heap_free( argumentList, sizeof( ctr_argument ) );
 	CGI_free_varlist(varlistGet);
 	CGI_free_varlist(varlistPost);
 	CGI_free_varlist(varlistCookie);
@@ -194,6 +198,7 @@ ctr_object* ctr_request_file(ctr_object* myself, ctr_argument* argumentList) {
 	cgiVarObject = ctr_internal_cast2string(argumentList->object);
 	cgiVar = ctr_internal_tocstring( cgiVarObject );
 	value = CGI_lookup_all(varlistPost, (const char*)cgiVar);
+	ctr_heap_free( cgiVar, sizeof( char ) * ( strlen( cgiVar ) + 1 ) );
     list = ctr_array_new(CtrStdArray, NULL);
 	if (value == 0 || value[1] == 0) return list;
     for (i = 0; value[i] != 0; i++) {
@@ -201,6 +206,7 @@ ctr_object* ctr_request_file(ctr_object* myself, ctr_argument* argumentList) {
 		val = (char*) value[i];
 		arg->object = ctr_build_string_from_cstring(val);
 		ctr_array_push(list, arg);
+		ctr_heap_free( arg, sizeof( ctr_argument ) );
 	}
 	return list;
 }
@@ -285,6 +291,8 @@ ctr_object* ctr_request_serve(ctr_object* myself, ctr_argument* argumentList) {
 	host = ctr_internal_tocstring( ctr_internal_cast2string( argumentList->object ) );
 	pid = ctr_internal_tocstring( ctr_internal_cast2string( argumentList->next->next->object ) );
 	port = (int) round(ctr_internal_cast2number(argumentList->next->object)->value.nvalue);
+	ctr_heap_free( host, sizeof( char ) * ( strlen( host ) + 1 ) );
+	ctr_heap_free( pid, sizeof( char ) * ( strlen( pid ) + 1 ) );
 	CtrStdSCGICB = argumentList->next->next->next->object;
 	CGI_prefork_server(host, port, pid,
         /* maxproc */ maxproc,

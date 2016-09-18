@@ -44,7 +44,7 @@ void ctr_cli_read_args(int argc, char* argv[]) {
 		ctr_cli_welcome();
 		exit(0);
 	}
-	ctr_mode_input_file = (char*) ctr_heap_allocate( sizeof( char ) * 255 );
+	ctr_mode_input_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
 	strncpy(ctr_mode_input_file, argv[1], 254);
 }
 
@@ -73,7 +73,14 @@ int main(int argc, char* argv[]) {
 	/*ctr_internal_debug_tree(program,1); -- for debugging */
 	ctr_initialize_world();
 	ctr_cwlk_run(program);
-	ctr_heap_free( program, program_text_size );
+	ctr_gc_sweep(1);
+	ctr_heap_free( prg, program_text_size );
+	ctr_heap_free_rest();
+	//For memory profiling
+	if ( ctr_gc_alloc != 0 ) {
+		printf( "[WARNING] Citrine has detected an internal memory leak of: %lu bytes.\n", ctr_gc_alloc );
+		exit(1);
+	}
 	exit(0);
 	return 0;
 }

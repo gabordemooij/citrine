@@ -584,6 +584,10 @@ ctr_object* ctr_build_string_from_cstring( char* str );
 void ctr_gc_internal_collect();
 
 
-void* ctr_heap_allocate( uintptr_t size );
-void  ctr_heap_free( void* ptr, uintptr_t size );
-void* ctr_heap_reallocate(void* oldptr, uintptr_t size, uintptr_t old_size );
+void* ctr_heap_allocate( size_t size );
+void* ctr_heap_allocate_tracked( size_t size );
+void  ctr_heap_free( void* ptr, size_t size );
+void  ctr_heap_free_rest();
+void* ctr_heap_reallocate(void* oldptr, size_t size, size_t old_size );
+size_t ctr_heap_get_latest_tracking_id();
+void* ctr_heap_reallocate_tracked(size_t tracking_id, size_t size, size_t old_size );

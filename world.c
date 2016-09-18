@@ -512,11 +512,12 @@ ctr_object* ctr_find(ctr_object* key) {
 		int message_size;
 		message = "Key not found: ";
 		message_size = ((strlen(message))+key->value.svalue->vlen);
-		full_message = malloc(message_size*sizeof(char));
+		full_message = ctr_heap_allocate( message_size * sizeof( char ) );
 		key_name = ctr_internal_tocstring( key );
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdError = ctr_build_string(full_message, message_size);
+		//ctr_heap_free( full_message, ( message_size * sizeof( char ) ) );
 		return CtrStdNil;
 	}
 	return foundObject;
@@ -578,11 +579,13 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 		int message_size;
 		message = "Cannot assign to undefined variable: ";
 		message_size = ((strlen(message))+key->value.svalue->vlen);
-		full_message = malloc(message_size*sizeof(char));
+		full_message = ctr_heap_allocate(message_size*sizeof(char));
 		key_name = ctr_internal_tocstring( key );
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdError = ctr_build_string(full_message, message_size);
+		ctr_heap_free( full_message, ( message_size * sizeof( char ) ) );
+		ctr_heap_free( key_name, ( ( strlen( key_name ) + 1 ) * sizeof( char ) ) );
 		return;
 	}
 	ctr_internal_object_set_property(context, key, object, 0);
