@@ -65,17 +65,20 @@ void ctr_gc_sweep( int all ) {
 			if (previousObject) {
 				if (currentObject->gnext) {
 					previousObject->gnext = currentObject->gnext;
+					nextObject = currentObject->gnext;
 				} else {
 					previousObject->gnext = NULL;
+					nextObject = NULL;
 				}
 			} else {
 				if (currentObject->gnext) {
-					ctr_first_object->gnext = currentObject->gnext;
+					ctr_first_object = currentObject->gnext;
+					nextObject = currentObject->gnext;
 				} else {
-					ctr_first_object->gnext = NULL;
+					ctr_first_object = NULL;
+					nextObject = NULL;
 				}
 			}
-			nextObject = currentObject->gnext;
 			if (currentObject->methods->head) {
 				mapItem = currentObject->methods->head;
 				while(mapItem) {
