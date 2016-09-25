@@ -216,7 +216,7 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 			result = ctr_cwlk_expr(node->nodes->node, wasReturn);
 			break;
 		case CTR_AST_NODE_ENDOFPROGRAM:
-			if (CtrStdError) {
+			if (CtrStdError && ctr_cwlk_subprogram == 0) {
 				printf("Uncatched error has occurred.\n");
 				if (CtrStdError->info.type == CTR_OBJECT_TYPE_OTSTRING) {
 					fwrite(CtrStdError->value.svalue->value, sizeof(char), CtrStdError->value.svalue->vlen, stdout);
@@ -241,7 +241,6 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 					}
 					printf("\n");
 				}
-				exit(1);
 			}
 			result = ctr_build_nil();
 			break;

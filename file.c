@@ -202,7 +202,9 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
 	prg = ctr_internal_readf(pathString, &program_size);
 	parsedCode = ctr_cparse_parse(prg, pathString);
 	ctr_heap_free( prg, sizeof( char ) * program_size );
+	ctr_cwlk_subprogram++;
 	ctr_cwlk_run(parsedCode);
+	ctr_cwlk_subprogram--;
 	return myself;
 }
 
@@ -277,8 +279,9 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 	char* path;
 	FILE* handle;
 	ctr_resource* rs = ctr_heap_allocate(sizeof(ctr_resource));
-        ctr_object* modeStrObj = ctr_internal_cast2string( argumentList->object );
+	ctr_object* modeStrObj = ctr_internal_cast2string( argumentList->object );
 	if ( myself->value.rvalue != NULL ) {
+		ctr_heap_free( rs, sizeof( ctr_resource ) );
 		CtrStdError = ctr_build_string_from_cstring( "File has already been opened." );
 		return myself;
 	}

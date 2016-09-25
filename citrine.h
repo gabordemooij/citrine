@@ -288,6 +288,7 @@ ctr_tnode* ctr_cparse_ret();
 /**
  * Abstract Tree Walker functions
  */
+uint64_t    ctr_cwlk_subprogram;
 ctr_object* ctr_cwlk_run(ctr_tnode* program);
 ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn);
 
