@@ -517,7 +517,8 @@ ctr_object* ctr_find(ctr_object* key) {
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdError = ctr_build_string(full_message, message_size);
-		//ctr_heap_free( full_message, ( message_size * sizeof( char ) ) );
+		ctr_heap_free( full_message, ( message_size * sizeof( char ) ) );
+		ctr_heap_free( key_name, ( ( key->value.svalue->vlen + 1 ) * sizeof( char ) ) );
 		return CtrStdNil;
 	}
 	return foundObject;
@@ -541,11 +542,13 @@ ctr_object* ctr_find_in_my(ctr_object* key) {
 		int message_size;
 		message = "Object property not found: ";
 		message_size = ((strlen(message))+key->value.svalue->vlen);
-		full_message = malloc(message_size*sizeof(char));
+		full_message = ctr_heap_allocate( message_size * sizeof( char ) );
 		key_name = ctr_internal_tocstring( key );
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdError = ctr_build_string(full_message, message_size);
+		ctr_heap_free( full_message, ( message_size * sizeof( char ) ) );
+		ctr_heap_free( key_name, ( ( key->value.svalue->vlen + 1 ) * sizeof( char ) ) );
 		return CtrStdNil;
 	}
 	return foundObject;
