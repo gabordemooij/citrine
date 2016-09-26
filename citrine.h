@@ -231,9 +231,10 @@ ctr_object* CtrStdDice;
 ctr_object* CtrStdCommand;
 ctr_object* CtrStdShell;
 ctr_object* CtrStdClock;
-ctr_object* CtrStdError;
+ctr_object* CtrStdFlow;
 ctr_object* CtrStdBreak;
 ctr_object* CtrStdContinue;
+ctr_object* CtrStdExit;
 ctr_object* ctr_first_object;
 
 /**

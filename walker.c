@@ -50,7 +50,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		case CTR_AST_NODE_REFERENCE:
 			recipientName = ctr_build_string(receiverNode->value, receiverNode->vlen);
 			recipientName->info.sticky = 1;
-			if (CtrStdError == NULL) {
+			if (CtrStdFlow == NULL) {
 				ctr_callstack[ctr_callstack_index++] = receiverNode;
 			}
 			if (receiverNode->modifier == 1) {
@@ -58,7 +58,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 			} else {
 				r = ctr_find(recipientName);
 			}
-			if (CtrStdError == NULL) {
+			if (CtrStdFlow == NULL) {
 				ctr_callstack_index--;
 			}
 			if (!r) {
@@ -98,7 +98,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		msgnode = li->node;
 		message = msgnode->value;
 		l = msgnode->vlen;
-		if (CtrStdError == NULL) {
+		if (CtrStdFlow == NULL) {
 			ctr_callstack[ctr_callstack_index++] = msgnode;
 		}
 		argumentList = msgnode->nodes;
@@ -119,7 +119,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		}
 		result = ctr_send_message(r, message, l, a);
 		aItem = a;
-		if (CtrStdError == NULL) {
+		if (CtrStdFlow == NULL) {
 			ctr_callstack_index --;
 		}
 		while(aItem->next) {
@@ -147,7 +147,7 @@ ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
 	ctr_tnode* value = valueListItem->node;
 	ctr_object* x = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_object* result;
-	if (CtrStdError == NULL) {
+	if (CtrStdFlow == NULL) {
 		ctr_callstack[ctr_callstack_index++] = assignee;
 	}
 	x = ctr_cwlk_expr(value, &wasReturn);
@@ -158,7 +158,7 @@ ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
 	} else {
 		result = ctr_assign_value(ctr_build_string(assignee->value, assignee->vlen), x);
 	}
-	if (CtrStdError == NULL) {
+	if (CtrStdFlow == NULL) {
 		ctr_callstack_index--;
 	}
 	return result;
@@ -216,10 +216,10 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 			result = ctr_cwlk_expr(node->nodes->node, wasReturn);
 			break;
 		case CTR_AST_NODE_ENDOFPROGRAM:
-			if (CtrStdError && ctr_cwlk_subprogram == 0) {
+			if (CtrStdFlow && CtrStdFlow != CtrStdExit && ctr_cwlk_subprogram == 0) {
 				printf("Uncatched error has occurred.\n");
-				if (CtrStdError->info.type == CTR_OBJECT_TYPE_OTSTRING) {
-					fwrite(CtrStdError->value.svalue->value, sizeof(char), CtrStdError->value.svalue->vlen, stdout);
+				if (CtrStdFlow->info.type == CTR_OBJECT_TYPE_OTSTRING) {
+					fwrite(CtrStdFlow->value.svalue->value, sizeof(char), CtrStdFlow->value.svalue->vlen, stdout);
 					printf("\n");
 				}
 				for ( i = ctr_callstack_index; i > 0; i--) {

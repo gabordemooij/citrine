@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 #MK Script
 #Written by Gabor de Mooij
 #Decides which makefile to use

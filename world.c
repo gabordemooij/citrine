@@ -460,7 +460,7 @@ void ctr_open_context() {
 	ctr_object* context;
 	ctr_context_id++;
 	if (ctr_context_id > 299) {
-		CtrStdError = ctr_build_string_from_cstring( "Too many nested calls." );
+		CtrStdFlow = ctr_build_string_from_cstring( "Too many nested calls." );
 	}
 	if (ctr_context_id > 300) {
 		printf("Too many nested calls.\n");
@@ -495,7 +495,7 @@ void ctr_close_context() {
 ctr_object* ctr_find(ctr_object* key) {
 	int i = ctr_context_id;
 	ctr_object* foundObject = NULL;
-	if (CtrStdError) return CtrStdNil;
+	if (CtrStdFlow) return CtrStdNil;
 	while((i>-1 && foundObject == NULL)) {
 		ctr_object* context = ctr_contexts[i];
 		foundObject = ctr_internal_object_find_property(context, key, 0);
@@ -516,7 +516,7 @@ ctr_object* ctr_find(ctr_object* key) {
 		key_name = ctr_internal_tocstring( key );
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
-		CtrStdError = ctr_build_string(full_message, message_size);
+		CtrStdFlow = ctr_build_string(full_message, message_size);
 		ctr_heap_free( full_message, ( message_size * sizeof( char ) ) );
 		ctr_heap_free( key_name, ( ( key->value.svalue->vlen + 1 ) * sizeof( char ) ) );
 		return CtrStdNil;
@@ -534,7 +534,7 @@ ctr_object* ctr_find(ctr_object* key) {
 ctr_object* ctr_find_in_my(ctr_object* key) {
 	ctr_object* context = ctr_find(ctr_build_string("me",2));
 	ctr_object* foundObject = ctr_internal_object_find_property(context, key, 0);
-	if (CtrStdError) return CtrStdNil;
+	if (CtrStdFlow) return CtrStdNil;
 	if (foundObject == NULL) {
 		char* key_name;
 		char* message;
@@ -546,7 +546,7 @@ ctr_object* ctr_find_in_my(ctr_object* key) {
 		key_name = ctr_internal_tocstring( key );
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
-		CtrStdError = ctr_build_string(full_message, message_size);
+		CtrStdFlow = ctr_build_string(full_message, message_size);
 		ctr_heap_free( full_message, ( message_size * sizeof( char ) ) );
 		ctr_heap_free( key_name, ( ( key->value.svalue->vlen + 1 ) * sizeof( char ) ) );
 		return CtrStdNil;
@@ -586,7 +586,7 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 		key_name = ctr_internal_tocstring( key );
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
-		CtrStdError = ctr_build_string(full_message, message_size);
+		CtrStdFlow = ctr_build_string(full_message, message_size);
 		ctr_heap_free( full_message, ( message_size * sizeof( char ) ) );
 		ctr_heap_free( key_name, ( ( strlen( key_name ) + 1 ) * sizeof( char ) ) );
 		return;
@@ -882,8 +882,10 @@ void ctr_initialize_world() {
 	/* Other objects */
 	CtrStdBreak = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	CtrStdContinue = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	CtrStdExit = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
 	CtrStdBreak->info.sticky = 1;
 	CtrStdContinue->info.sticky = 1;
+	CtrStdExit->info.sticky = 1;
 }
 
 /**
@@ -905,7 +907,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	ctr_object* (*funct)(ctr_object* receiverObject, ctr_argument* argumentList);
 	ctr_object* msg = NULL;
 	int argCount;
-	if (CtrStdError != NULL) return NULL; /* Error mode, ignore subsequent messages until resolved. */
+	if (CtrStdFlow != NULL) return NULL; /* Error mode, ignore subsequent messages until resolved. */
 	methodObject = NULL;
 	searchObject = receiverObject;
 	if (vlen > 1 && message[0] == '`') {
@@ -969,7 +971,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
  */
 ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 	ctr_object* object = NULL;
-	if (CtrStdError) return CtrStdNil;
+	if (CtrStdFlow) return CtrStdNil;
 	key->info.sticky = 0;
 	switch(o->info.type){
 		case CTR_OBJECT_TYPE_OTBOOL:
@@ -1006,7 +1008,7 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 	ctr_object* object = NULL;
 	ctr_object* my = ctr_find(ctr_build_string("me", 2));
-	if (CtrStdError) return CtrStdNil;
+	if (CtrStdFlow) return CtrStdNil;
 	key->info.sticky = 0;
 	switch(o->info.type){
 		case CTR_OBJECT_TYPE_OTBOOL:
@@ -1042,7 +1044,7 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* o) {
 	ctr_object* object = NULL;
 	ctr_object* context;
-	if (CtrStdError) return CtrStdNil;
+	if (CtrStdFlow) return CtrStdNil;
 	context = ctr_contexts[ctr_context_id];
 	key->info.sticky = 0;
 	switch(o->info.type){

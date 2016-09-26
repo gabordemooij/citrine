@@ -146,13 +146,13 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* methodBlock;
 	ctr_object* methodName = argumentList->object;
 	if (methodName->info.type != CTR_OBJECT_TYPE_OTSTRING) {
-		CtrStdError = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
+		CtrStdFlow = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
 		return myself;
 	}
 	nextArgument = argumentList->next;
 	methodBlock = nextArgument->object;
 	if (methodBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdError = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
+		CtrStdFlow = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
 		return myself;
 	}
 	ctr_internal_object_add_property(myself, methodName, methodBlock, 1);
@@ -250,7 +250,7 @@ ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
-		CtrStdError = CtrStdBreak; /* If error = Break it's a break, there is no real error. */
+		CtrStdFlow = CtrStdBreak; /* If error = Break it's a break, there is no real error. */
 	}
 	return myself;
 }
@@ -267,7 +267,7 @@ ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
-		CtrStdError = CtrStdContinue; /* If error = Continue, then it breaks only one iteration (return). */
+		CtrStdFlow = CtrStdContinue; /* If error = Continue, then it breaks only one iteration (return). */
 	}
 	return myself;
 }
@@ -292,7 +292,7 @@ ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_heap_free( arguments, sizeof( ctr_argument ) );
 		return result;
 	}
-	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
+	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
 	return myself;
 }
 
@@ -316,7 +316,7 @@ ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_heap_free( arguments, sizeof( ctr_argument ) );
 		return result;
 	}
-	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
+	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
 	return myself;
 }
 
@@ -684,10 +684,10 @@ ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
 		arguments->object = indexNumber;
 		ctr_block_run(block, arguments, NULL);
 		ctr_heap_free( arguments, sizeof( ctr_argument ) );
-		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
-		if (CtrStdError) break;
+		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL; /* consume continue */
+		if (CtrStdFlow) break;
 	}
-	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
+	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
 	block->info.mark = 0;
 	block->info.sticky = 0;
 	return myself;
@@ -724,7 +724,7 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number a = myself->value.nvalue;
 	ctr_number b = otherNum->value.nvalue;
 	if (b == 0) {
-		CtrStdError = ctr_build_string_from_cstring("Division by zero.");
+		CtrStdFlow = ctr_build_string_from_cstring("Division by zero.");
 		return myself;
 	}
 	return ctr_build_number_from_float((a/b));
@@ -747,7 +747,7 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	if (otherNum->value.nvalue == 0) {
-		CtrStdError = ctr_build_string_from_cstring("Division by zero.");
+		CtrStdFlow = ctr_build_string_from_cstring("Division by zero.");
 		return myself;
 	}
 	myself->value.nvalue /= otherNum->value.nvalue;
@@ -772,7 +772,7 @@ ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number a = myself->value.nvalue;
 	ctr_number b = otherNum->value.nvalue;
 	if (b == 0) {
-		CtrStdError = ctr_build_string_from_cstring("Division by zero.");
+		CtrStdFlow = ctr_build_string_from_cstring("Division by zero.");
 		return myself;
 	}
 	return ctr_build_number_from_float(fmod(a,b));
@@ -907,18 +907,18 @@ ctr_object* ctr_number_to_step_do(ctr_object* myself, ctr_argument* argumentList
 	if (startValue == endValue) return myself;
 	forward = (startValue < endValue);
 	if (codeBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdError = ctr_build_string_from_cstring("Expected block.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Expected block.\0");
 		return myself;
 	}
-	while(((forward && curValue <= endValue) || (!forward && curValue >= endValue)) && !CtrStdError) {
+	while(((forward && curValue <= endValue) || (!forward && curValue >= endValue)) && !CtrStdFlow) {
 		arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = ctr_build_number_from_float(curValue);
 		ctr_block_run(codeBlock, arguments, NULL);
 		ctr_heap_free( arguments, sizeof( ctr_argument ) );
-		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue and go on */
+		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL; /* consume continue and go on */
 		curValue += incValue;
 	}
-	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
+	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
 	return myself;
 }
 
@@ -1849,13 +1849,13 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 		if (my) result = my; else result = myself;
 	}
 	ctr_close_context();
-	if (CtrStdError != NULL && CtrStdError != CtrStdBreak && CtrStdError != CtrStdContinue) {
+	if (CtrStdFlow != NULL && CtrStdFlow != CtrStdBreak && CtrStdFlow != CtrStdContinue) {
 		ctr_object* catchBlock = ctr_internal_create_object( CTR_OBJECT_TYPE_OTBLOCK );
 		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string("catch",5), 0);
 		if (catchBlock != NULL) {
 			ctr_argument* a = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
-			a->object = CtrStdError;
-			CtrStdError = NULL;
+			a->object = CtrStdFlow;
+			CtrStdFlow = NULL;
 			ctr_block_run(catchBlock, a, my);
 			ctr_heap_free( a, sizeof( ctr_argument ) );
 			result = myself;
@@ -1880,13 +1880,13 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
  * Don't forget to use the return ^ symbol in the first block.
  */
 ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList) {
-	while (1 && !CtrStdError) {
+	while (1 && !CtrStdFlow) {
 		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, NULL));
-		if (result->value.bvalue == 0 || CtrStdError) break;
+		if (result->value.bvalue == 0 || CtrStdFlow) break;
 		ctr_block_run(argumentList->object, argumentList, NULL);
-		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
+		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL; /* consume continue */
 	}
-	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
+	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
 	return myself;
 }
 
@@ -1906,13 +1906,13 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
  * Don't forget to use the return ^ symbol in the first block.
  */
 ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList) {
-	while (1 && !CtrStdError) {
+	while (1 && !CtrStdFlow) {
 		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, NULL));
-		if (result->value.bvalue == 1 || CtrStdError) break;
+		if (result->value.bvalue == 1 || CtrStdFlow) break;
 		ctr_block_run(argumentList->object, argumentList, NULL);
-		if (CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume continue */
+		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL; /* consume continue */
 	}
-	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
+	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
 	return myself;
 }
 
@@ -1934,7 +1934,7 @@ ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList
 ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
 	result = ctr_block_run(myself, argumentList, myself); /* here me/my refers to block itself not object - this allows closures. */
-	if (CtrStdError == CtrStdBreak || CtrStdError == CtrStdContinue) CtrStdError = NULL; /* consume break */
+	if (CtrStdFlow == CtrStdBreak || CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL; /* consume break */
 	return result;
 }
 
@@ -1985,7 +1985,7 @@ ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
  * }, run.
  */
 ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
-	CtrStdError = argumentList->object;
+	CtrStdFlow = argumentList->object;
 	return myself;
 }
 

@@ -185,7 +185,7 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
 	int i = 0;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdError = ctr_build_string_from_cstring("Expected Block.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Expected Block.\0");
 	}
 	block->info.sticky = 1;
 	for(i = 0; i < myself->value.avalue->head; i++) {
@@ -201,10 +201,10 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_heap_free( arguments, sizeof( ctr_argument ) );
 		ctr_heap_free( argument2, sizeof( ctr_argument ) );
 		ctr_heap_free( argument3, sizeof( ctr_argument ) );
-		if (CtrStdError == CtrStdContinue) CtrStdError = NULL;
-		if (CtrStdError) break;
+		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL;
+		if (CtrStdFlow) break;
 	}
-	if (CtrStdError == CtrStdBreak) CtrStdError = NULL; /* consume break */
+	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
 	block->info.mark = 0;
 	block->info.sticky = 0;
 	return myself;
@@ -328,7 +328,7 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	i = (int) getIndex->value.nvalue;
 	if (myself->value.avalue->head <= i || i < 0) {
-		CtrStdError = ctr_build_string_from_cstring("Index out of bounds.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Index out of bounds.\0");
 		return CtrStdNil;
 	}
 	return *(myself->value.avalue->elements + i);
@@ -361,7 +361,7 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size tail;
 	
 	if (putIndex->value.nvalue < 0) {
-		CtrStdError = ctr_build_string_from_cstring("Index out of bounds.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Index out of bounds.\0");
 		return myself;
 	}
 	
@@ -524,7 +524,7 @@ int ctr_sort_cmp(const void * a, const void * b) {
 ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sorter = argumentList->object;
 	if (sorter->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdError = ctr_build_string_from_cstring("Expected block.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Expected block.\0");
 		return myself;
 	}
 	temp_sorter = sorter;
@@ -642,11 +642,11 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
 	ctr_mapitem* m;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdError = ctr_build_string_from_cstring("Expected Block.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Expected Block.\0");
 	}
 	block->info.sticky = 1;
 	m = myself->properties->head;
-	while(m && !CtrStdError) {
+	while(m && !CtrStdFlow) {
 		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		ctr_argument* argument2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		ctr_argument* argument3 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
@@ -656,13 +656,13 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 		arguments->next = argument2;
 		argument2->next = argument3;
 		ctr_block_run(block, arguments, NULL);
-		if (CtrStdError == CtrStdContinue) CtrStdError = NULL;
+		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL;
 		m = m->next;
 		ctr_heap_free( arguments, sizeof( ctr_argument ) );
 		ctr_heap_free( argument2, sizeof( ctr_argument ) );
 		ctr_heap_free( argument3, sizeof( ctr_argument ) );
 	}
-	if (CtrStdError == CtrStdBreak) CtrStdError = NULL;
+	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL;
 	block->info.mark = 0;
 	block->info.sticky = 0;
 	return myself;

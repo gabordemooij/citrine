@@ -338,7 +338,8 @@ ctr_object* ctr_command_num_of_args(ctr_object* myself, ctr_argument* argumentLi
  * Exits program immediately.
  */
 ctr_object* ctr_command_exit(ctr_object* myself, ctr_argument* argumentList) {
-	exit(0);
+	CtrStdFlow = CtrStdExit;
+	return CtrStdNil;
 }
 
 /**
@@ -415,7 +416,7 @@ ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList)
 			page *= 2;
 			buff = (char*) realloc(buff, page * sizeof(char));
 			if (buff == NULL) {
-				CtrStdError = ctr_build_string_from_cstring("Out of memory\0");
+				CtrStdFlow = ctr_build_string_from_cstring("Out of memory\0");
 			}
 		}
 	}
