@@ -47,7 +47,10 @@ size_t     maxNumberOfMemBlocks = 0;
  */
 void* ctr_heap_allocate( size_t size ) {
 
-	void* sliceOfMemory;
+	void* slice_of_memory;
+	size_t* block_width;
+	int q = sizeof( size_t );
+	size += q;
 
 	/* Check whether we can afford to allocate this much */
 	ctr_gc_alloc += size;
@@ -58,9 +61,9 @@ void* ctr_heap_allocate( size_t size ) {
 	}
 
 	/* Perform allocation and check result */
-	sliceOfMemory = calloc( size, 1 );
+	slice_of_memory = calloc( size, 1 );
 
-	if ( sliceOfMemory == NULL ) {
+	if ( slice_of_memory == NULL ) {
 		printf( "Out of memory. Failed to allocate %lu bytes (malloc failed). \n", size );
 	}
 
@@ -69,7 +72,13 @@ void* ctr_heap_allocate( size_t size ) {
 		ctr_gc_internal_collect();
 	}
 
-	return sliceOfMemory;
+	/* Store the width of the memory block in the slice itself so we can always find it */
+	block_width = (size_t*) slice_of_memory;
+	*(block_width) = size;
+	/* Now move the new memory pointer behind the blockwidth */
+	slice_of_memory = (void*) ((char*) slice_of_memory + q);
+
+	return slice_of_memory;
 }
 
 
@@ -143,6 +152,15 @@ void ctr_heap_free_rest() {
  * @return void
  */
 void ctr_heap_free( void* ptr, size_t size ) {
+
+	size_t* block_width;
+	int q = sizeof( size_t );
+
+	/* find the correct size of this memory block and move pointer back */
+	ptr = (void*) ((char*) ptr - q);
+	block_width = (size_t*) ptr;
+	size = *(block_width);
+
 	free( ptr );
 	ctr_gc_alloc -= size;
 }
@@ -156,8 +174,29 @@ void ctr_heap_free( void* ptr, size_t size ) {
  * re-allocate the memory block.
  */
 void* ctr_heap_reallocate(void* oldptr, size_t size, size_t old_size ) {
+
 	char* nptr;
+	size_t* block_width;
+
+	/* correct the required size new block to include block width */
+	int q = sizeof( size_t );
+	size += q;
+	/* move the pointer back to begin of block */
+	oldptr = (void*) ((char*) oldptr - q);
+	/* read memory size at beginning of old block */
+	block_width = (size_t*) oldptr;
+	old_size = *(block_width);
+
+	/* update the ledger */
 	ctr_gc_alloc = ( ctr_gc_alloc - old_size ) + size;
+	/* re-allocate memory */
 	nptr = realloc( oldptr, size );
+
+	/* store the size of the new block at the beginning */
+	block_width = (size_t*) nptr;
+	*(block_width) = size;
+	/* 'hop' the memory pointer over the block width part */
+	nptr = (void*) ((char*) nptr + q);
+
 	return (void*) nptr;
 }
