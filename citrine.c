@@ -12,6 +12,22 @@
 #include "siphash.h"
 
 /**
+ * @todo
+ *
+ * - remove magic numbers (lengths) from string builders because it's
+ *   ugly and maybe error prone in the future
+ * - remove magic numbers (bytes) from ctr_heap_free because
+ *   it's error prone and ugly and less comfortable
+ * - rename tocstring to something like allocate/leak so people
+ *   will know this functions allocates memory that has to be
+ *   freed later on
+ * - refine language, add space sensitivity to simplify
+ *   even though some people are going to cry
+ * - add the arrow unicode return symbol
+ * - remove redundant notations for or,and and xor
+ */
+
+/**
  * CommandLine Display Welcome Message
  * Displays a Welcome message, copyright information,
  * version information and usage.
