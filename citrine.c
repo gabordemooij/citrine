@@ -25,6 +25,7 @@
  *   even though some people are going to cry
  * - add the arrow unicode return symbol
  * - remove redundant notations for or,and and xor
+ * - create a new function called ctr_build_empty_string() for cleanliness
  */
 
 /**
