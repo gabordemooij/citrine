@@ -184,7 +184,7 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
 				}
 				owner->properties->size --;
 			}
-			ctr_heap_free( head, sizeof( ctr_mapitem ) );
+			ctr_heap_free( head );
 			return;
 		}
 		head = head->next;
@@ -382,10 +382,10 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 			*( p + 1 ) = '\0';
 			if ( *p == '.' ) *p = '\0';
 			strncpy( s, buf, strlen( buf ) );
-			ctr_heap_free( buf, bufSize );
+			ctr_heap_free( buf );
 			slen = strlen(s);
 			stringObject = ctr_build_string(s, slen);
-			ctr_heap_free( s, ( sizeof( char ) * 80 ) );
+			ctr_heap_free( s );
 			return stringObject;
 			break;
 		case CTR_OBJECT_TYPE_OTBLOCK:
@@ -517,8 +517,8 @@ ctr_object* ctr_find(ctr_object* key) {
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdFlow = ctr_build_string(full_message, message_size);
-		ctr_heap_free( full_message, ( message_size * sizeof( char ) ) );
-		ctr_heap_free( key_name, ( ( key->value.svalue->vlen + 1 ) * sizeof( char ) ) );
+		ctr_heap_free( full_message );
+		ctr_heap_free( key_name );
 		return CtrStdNil;
 	}
 	return foundObject;
@@ -547,8 +547,8 @@ ctr_object* ctr_find_in_my(ctr_object* key) {
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdFlow = ctr_build_string(full_message, message_size);
-		ctr_heap_free( full_message, ( message_size * sizeof( char ) ) );
-		ctr_heap_free( key_name, ( ( key->value.svalue->vlen + 1 ) * sizeof( char ) ) );
+		ctr_heap_free( full_message );
+		ctr_heap_free( key_name );
 		return CtrStdNil;
 	}
 	return foundObject;
@@ -587,8 +587,8 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdFlow = ctr_build_string(full_message, message_size);
-		ctr_heap_free( full_message, ( message_size * sizeof( char ) ) );
-		ctr_heap_free( key_name, ( ( strlen( key_name ) + 1 ) * sizeof( char ) ) );
+		ctr_heap_free( full_message );
+		ctr_heap_free( key_name );
 		return;
 	}
 	ctr_internal_object_set_property(context, key, object, 0);
@@ -944,7 +944,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 		} else if (argCount == 2) {
 			returnValue = ctr_send_message(receiverObject, "respondTo:with:and:", 19,  mesgArgument);
 		}
-		ctr_heap_free( mesgArgument, sizeof( ctr_argument ) );
+		ctr_heap_free( mesgArgument );
 		msg->info.sticky = 0;
 		if (receiverObject->info.chainMode == 1) return receiverObject;
 		return returnValue;

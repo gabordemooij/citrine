@@ -97,7 +97,7 @@ void* ctr_heap_allocate_tracked( size_t size ) {
 		} else {
 			old_size = maxNumberOfMemBlocks;
 			maxNumberOfMemBlocks += 10;
-			memBlocks = ctr_heap_reallocate( memBlocks, ( sizeof( memBlock ) * ( maxNumberOfMemBlocks ) ), ( sizeof( memBlock) * old_size ) );
+			memBlocks = ctr_heap_reallocate( memBlocks, ( sizeof( memBlock ) * ( maxNumberOfMemBlocks ) ) );
 		}
 	}
 	memBlocks[ numberOfMemBlocks ].space = space;
@@ -110,12 +110,12 @@ void* ctr_heap_allocate_tracked( size_t size ) {
  * Reallocates tracked memory on heap.
  * You need to provide a tracking ID.
  */
-void* ctr_heap_reallocate_tracked( size_t tracking_id, size_t size, size_t old_size ) {
+void* ctr_heap_reallocate_tracked( size_t tracking_id, size_t size ) {
 	void* space;
 	size_t recorded_size;
 	space = memBlocks[ tracking_id ].space;
 	recorded_size = memBlocks[ tracking_id ].size;
-	space = ctr_heap_reallocate( space, size, old_size );
+	space = ctr_heap_reallocate( space, size );
 	memBlocks[ tracking_id ].space = space;
 	memBlocks[ tracking_id ].size  = size;
 	return space;
@@ -134,9 +134,9 @@ size_t ctr_heap_get_latest_tracking_id() {
 void ctr_heap_free_rest() {
 	size_t i;
 	for ( i = 0; i < numberOfMemBlocks; i ++) {
-		ctr_heap_free( memBlocks[i].space, memBlocks[i].size );
+		ctr_heap_free( memBlocks[i].space );
 	}
-	ctr_heap_free( memBlocks, ( maxNumberOfMemBlocks * sizeof( memBlock ) ) );
+	ctr_heap_free( memBlocks );
 }
 
 
@@ -151,10 +151,11 @@ void ctr_heap_free_rest() {
  *
  * @return void
  */
-void ctr_heap_free( void* ptr, size_t size ) {
+void ctr_heap_free( void* ptr ) {
 
 	size_t* block_width;
 	int q = sizeof( size_t );
+	size_t size;
 
 	/* find the correct size of this memory block and move pointer back */
 	ptr = (void*) ((char*) ptr - q);
@@ -173,9 +174,10 @@ void ctr_heap_free( void* ptr, size_t size ) {
  * the purpose for allocation, this function will attempt to
  * re-allocate the memory block.
  */
-void* ctr_heap_reallocate(void* oldptr, size_t size, size_t old_size ) {
+void* ctr_heap_reallocate(void* oldptr, size_t size ) {
 
 	char* nptr;
+	size_t  old_size;
 	size_t* block_width;
 
 	/* correct the required size new block to include block width */

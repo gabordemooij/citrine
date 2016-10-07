@@ -118,7 +118,7 @@ void* ctr_internal_plugin_find(ctr_object* key) {
 	modNameLow = modName;
 	for ( ; *modNameLow; ++modNameLow) *modNameLow = tolower(*modNameLow);
 	snprintf(pathNameMod, 1024,"mods/%s/libctr%s.so", modName, modName);
-	ctr_heap_free( modName, ( strlen( modName ) + ( 1 * sizeof( char )) ) );
+	ctr_heap_free( modName );
 	realPathModName = realpath(pathNameMod, NULL);
 	if (access(realPathModName, F_OK) == -1) return NULL;
 	handle =  dlopen(realPathModName, RTLD_NOW);

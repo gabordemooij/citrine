@@ -404,7 +404,7 @@ char* ctr_clex_readstr() {
 		ctr_clex_tokvlen ++;
 		if (ctr_clex_tokvlen >= memblock) {
 			memblock += page;
-			beginbuff = (char*) ctr_heap_reallocate_tracked( tracking_id, memblock, ( memblock - page ) );
+			beginbuff = (char*) ctr_heap_reallocate_tracked( tracking_id, memblock );
 			if (beginbuff == NULL) {
 				printf("Out of memory\n");
 				exit(1);

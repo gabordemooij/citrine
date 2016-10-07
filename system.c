@@ -83,7 +83,7 @@ void ctr_gc_sweep( int all ) {
 				mapItem = currentObject->methods->head;
 				while(mapItem) {
 					tmp = mapItem->next;
-					ctr_heap_free( mapItem, sizeof( ctr_mapitem ) );
+					ctr_heap_free( mapItem );
 					mapItem = tmp;
 				}
 			}
@@ -91,34 +91,34 @@ void ctr_gc_sweep( int all ) {
 				mapItem = currentObject->properties->head;
 				while(mapItem) {
 					tmp = mapItem->next;
-					ctr_heap_free( mapItem, sizeof( ctr_mapitem ) );
+					ctr_heap_free( mapItem );
 					mapItem = tmp;
 				}
 			}
-			ctr_heap_free( currentObject->methods, sizeof( ctr_map ) );
-			ctr_heap_free( currentObject->properties, sizeof( ctr_map ) );
+			ctr_heap_free( currentObject->methods );
+			ctr_heap_free( currentObject->properties );
 			switch (currentObject->info.type) {
 				case CTR_OBJECT_TYPE_OTSTRING:
 					if (currentObject->value.svalue != NULL) {
 						if (currentObject->value.svalue->vlen > 0) {
-							ctr_heap_free( currentObject->value.svalue->value, ( sizeof( char ) * currentObject->value.svalue->vlen ) );
+							ctr_heap_free( currentObject->value.svalue->value );
 						}
-						ctr_heap_free( currentObject->value.svalue, sizeof( ctr_string ) );
+						ctr_heap_free( currentObject->value.svalue );
 					}
 				break;
 				case CTR_OBJECT_TYPE_OTARRAY:
-					ctr_heap_free( currentObject->value.avalue->elements, ( sizeof( ctr_object* ) * currentObject->value.avalue->length ) );
-					ctr_heap_free( currentObject->value.avalue, sizeof( ctr_collection ) );
+					ctr_heap_free( currentObject->value.avalue->elements );
+					ctr_heap_free( currentObject->value.avalue );
 				break;
 				case CTR_OBJECT_TYPE_OTEX:
-					if (currentObject->value.rvalue != NULL) ctr_heap_free( currentObject->value.rvalue, sizeof( ctr_resource ) );
+					if (currentObject->value.rvalue != NULL) ctr_heap_free( currentObject->value.rvalue );
 				break;
 			}
 			if ((ctr_gc_mode & 2) && ctr_gc_junk_counter < 100) {
 				ctr_gc_junkyard[ctr_gc_junk_counter] = currentObject;
 				ctr_gc_junk_counter ++;
 			} else {
-				ctr_heap_free( currentObject, sizeof( ctr_object ) );
+				ctr_heap_free( currentObject );
 			}
 			currentObject = nextObject;
 		} else {
@@ -267,7 +267,7 @@ ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(comString, arg->value.svalue->value, vlen);
 	memcpy(comString+vlen,"\0",1);
 	r = system(comString);
-	ctr_heap_free( comString, sizeof( char ) * ( vlen + 1 ) );
+	ctr_heap_free( comString );
 	return ctr_build_number_from_float( (ctr_number) r );
 }
 
@@ -296,8 +296,8 @@ ctr_object* ctr_shell_respond_to_with(ctr_object* myself, ctr_argument* argument
 	newArgumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	newArgumentList->object = commandObj;
 	ctr_shell_call(myself, newArgumentList);
-	ctr_heap_free( newArgumentList, sizeof( ctr_argument ) );
-	ctr_heap_free( command, ( sizeof( char ) * len ) );
+	ctr_heap_free( newArgumentList );
+	ctr_heap_free( command );
 	return myself;
 }
 
@@ -363,7 +363,7 @@ ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList) 
 	if (envVal == NULL) {
 		return CtrStdNil;
 	}
-	ctr_heap_free(envVarNameStr, (envVarNameObj->value.svalue->vlen+1)*sizeof(char));
+	ctr_heap_free(envVarNameStr );
 	return ctr_build_string_from_cstring(envVal);
 }
 
@@ -382,8 +382,8 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
 	envVarNameStr = ctr_internal_tocstring( envVarNameObj );
 	envValStr = ctr_internal_tocstring( envValObj );
 	setenv(envVarNameStr, envValStr, 1);
-	ctr_heap_free( envValStr, strlen( envValStr ) + 1 );
-	ctr_heap_free( envVarNameStr, strlen( envVarNameStr ) + 1 );
+	ctr_heap_free( envValStr );
+	ctr_heap_free( envVarNameStr );
 	return myself;
 }
 

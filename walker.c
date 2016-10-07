@@ -125,9 +125,9 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		while(aItem->next) {
 			a = aItem;
 			aItem = aItem->next;
-			ctr_heap_free( a, sizeof( ctr_argument ) );
+			ctr_heap_free( a );
 		}
-		ctr_heap_free( aItem, sizeof( ctr_argument ) );
+		ctr_heap_free( aItem );
 		r = result;
 	}
 	if (recipientName) recipientName->info.sticky = 0;

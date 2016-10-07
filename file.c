@@ -72,7 +72,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "rb");
-	ctr_heap_free( pathString, vlen + 1 );
+	ctr_heap_free( pathString );
 	if (!f) {
 		CtrStdFlow = ctr_build_string_from_cstring("Unable to open file.\0");
 		return CtrStdNil;
@@ -88,7 +88,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	fread(buffer, fileLen, 1, f);
 	fclose(f);
 	str = ctr_build_string(buffer, fileLen);
-	ctr_heap_free( buffer, fileLen + 1 );
+	ctr_heap_free( buffer );
 	return str;
 }
 
@@ -118,7 +118,7 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "wb+");
-	ctr_heap_free( pathString, vlen + 1 );
+	ctr_heap_free( pathString );
 	if (!f) {
 		CtrStdFlow = ctr_build_string_from_cstring("Unable to open file.\0");
 		return CtrStdNil;
@@ -147,7 +147,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "ab+");
-	ctr_heap_free( pathString, vlen + 1 );
+	ctr_heap_free( pathString );
 	if (!f) {
 		CtrStdFlow = ctr_build_string_from_cstring("Unable to open file.\0");
 		return CtrStdNil;
@@ -174,7 +174,7 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "r");
-	ctr_heap_free( pathString, sizeof( char ) * ( vlen + 1 ) );
+	ctr_heap_free( pathString );
 	exists = (f != NULL );
 	if (f) {
 		fclose(f);
@@ -201,7 +201,7 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString+vlen,"\0",1);
 	prg = ctr_internal_readf(pathString, &program_size);
 	parsedCode = ctr_cparse_parse(prg, pathString);
-	ctr_heap_free( prg, sizeof( char ) * program_size );
+	ctr_heap_free( prg );
 	ctr_cwlk_subprogram++;
 	ctr_cwlk_run(parsedCode);
 	ctr_cwlk_subprogram--;
@@ -224,7 +224,7 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	r = remove(pathString);
-	ctr_heap_free( pathString, sizeof( char ) * ( vlen + 1 ) );
+	ctr_heap_free( pathString );
 	if (r!=0) {
 		CtrStdFlow = ctr_build_string_from_cstring("Unable to delete file.\0");
 		return CtrStdNil;
@@ -249,7 +249,7 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, ( sizeof( char ) * vlen  ) );
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "r");
-	ctr_heap_free( pathString, sizeof( char ) * ( vlen + 1 ) );
+	ctr_heap_free( pathString );
 	if (f == NULL) return ctr_build_number_from_float(0);
 	prev = ftell(f);
 	fseek(f, 0L, SEEK_END);
@@ -281,7 +281,7 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_resource* rs = ctr_heap_allocate(sizeof(ctr_resource));
 	ctr_object* modeStrObj = ctr_internal_cast2string( argumentList->object );
 	if ( myself->value.rvalue != NULL ) {
-		ctr_heap_free( rs, sizeof( ctr_resource ) );
+		ctr_heap_free( rs );
 		CtrStdFlow = ctr_build_string_from_cstring( "File has already been opened." );
 		return myself;
 	}
@@ -289,8 +289,8 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 	path = ctr_internal_tocstring( pathObj );
 	mode = ctr_internal_tocstring( modeStrObj );
 	handle = fopen(path,mode);
-	ctr_heap_free( path, sizeof( char ) * ( pathObj->value.svalue->vlen + 1 ) );
-	ctr_heap_free( mode, sizeof( char ) * ( modeStrObj->value.svalue->vlen + 1 ) );
+	ctr_heap_free( path );
+	ctr_heap_free( mode );
 	rs->type = 1;
 	rs->ptr = handle;
 	myself->value.rvalue = rs;
@@ -316,7 +316,7 @@ ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.rvalue->ptr) {
 		fclose((FILE*)myself->value.rvalue->ptr);
 	}
-	ctr_heap_free( myself->value.rvalue, sizeof(ctr_resource) );
+	ctr_heap_free( myself->value.rvalue );
 	myself->value.rvalue = NULL;
 	return myself;
 }
@@ -351,7 +351,7 @@ ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) 
 	}
 	fread(buffer, sizeof(char), (int)bytes, (FILE*)myself->value.rvalue->ptr);
 	result = ctr_build_string(buffer, bytes);
-	ctr_heap_free( buffer, bytes );
+	ctr_heap_free( buffer );
 	return result;
 }
 
@@ -381,7 +381,7 @@ ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList)
 	buffer = ctr_internal_tocstring( string2write );
 	bytes = string2write->value.svalue->vlen;
 	written = fwrite(buffer, sizeof(char), (int)bytes, (FILE*)myself->value.rvalue->ptr);
-	ctr_heap_free( buffer, bytes + 1 );
+	ctr_heap_free( buffer );
 	return ctr_build_number_from_float((double_t) written);
 }
 

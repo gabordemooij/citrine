@@ -53,8 +53,7 @@ ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 		oldLength = myself->value.avalue->length;
 		myself->value.avalue->length = myself->value.avalue->length * 3;
 		myself->value.avalue->elements = (ctr_object**) ctr_heap_reallocate(myself->value.avalue->elements,
-			(sizeof(ctr_object*) * (myself->value.avalue->length)),
-			((sizeof(ctr_object*)) * oldLength)
+			(sizeof(ctr_object*) * (myself->value.avalue->length))
 		);
 	}
 	pushValue = argumentList->object;
@@ -198,9 +197,9 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 		arguments->next = argument2;
 		argument2->next = argument3;
 		ctr_block_run(block, arguments, NULL);
-		ctr_heap_free( arguments, sizeof( ctr_argument ) );
-		ctr_heap_free( argument2, sizeof( ctr_argument ) );
-		ctr_heap_free( argument3, sizeof( ctr_argument ) );
+		ctr_heap_free( arguments );
+		ctr_heap_free( argument2 );
+		ctr_heap_free( argument3 );
 		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL;
 		if (CtrStdFlow) break;
 	}
@@ -255,8 +254,7 @@ ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
 		if (myself->value.avalue->length <= (myself->value.avalue->head + 1)) {
 			old_length = myself->value.avalue->length;
 			myself->value.avalue->length = myself->value.avalue->length * 3;
-			myself->value.avalue->elements = (ctr_object**) ctr_heap_reallocate(myself->value.avalue->elements, (sizeof(ctr_object*) * (myself->value.avalue->length)),
-				( ( sizeof( ctr_object* ) ) * old_length ) );
+			myself->value.avalue->elements = (ctr_object**) ctr_heap_reallocate(myself->value.avalue->elements, (sizeof(ctr_object*) * (myself->value.avalue->length)));
 		}
 		myself->value.avalue->head++;
 		memmove(myself->value.avalue->elements+1, myself->value.avalue->elements,myself->value.avalue->head*sizeof(ctr_object*));
@@ -297,7 +295,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 			result = ctr_heap_allocate(sizeof(char)*len);
 		} else {
 			len += str->value.svalue->vlen + glen;
-			result = ctr_heap_reallocate(result, sizeof(char)*len, oldLen);
+			result = ctr_heap_reallocate(result, sizeof(char)*len );
 			memcpy(result+pos, glue->value.svalue->value, glen);
 			pos += glen;
 		}
@@ -305,7 +303,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 		memcpy(result+pos, str->value.svalue->value, str->value.svalue->vlen);
 	}
 	resultStr = ctr_build_string(result, len);
-	if (len > 0) ctr_heap_free( result, sizeof(char) * len );
+	if (len > 0) ctr_heap_free( result );
 	return resultStr;
 }
 
@@ -375,7 +373,7 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 			argument = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 			argument->object = CtrStdNil;
 			ctr_array_push(myself, argument);
-			ctr_heap_free( argument, sizeof( ctr_argument ) );
+			ctr_heap_free( argument );
 		}
 		myself->value.avalue->head = putIndexNumber + 1;
 	}
@@ -452,8 +450,8 @@ ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList
 		elnumArg->object = elnum;
 		pushArg->object = ctr_array_get(myself, elnumArg);
 		ctr_array_push(newArray, pushArg);
-		ctr_heap_free( elnumArg, sizeof( ctr_argument ) );
-		ctr_heap_free( pushArg, sizeof( ctr_argument ) );
+		ctr_heap_free( elnumArg );
+		ctr_heap_free( pushArg );
 	}
 	return newArray;
 }
@@ -475,8 +473,8 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 		elnumArg->object = elnum;
 		pushArg->object = ctr_array_get(myself, elnumArg);
 		ctr_array_push(newArray, pushArg);
-		ctr_heap_free( elnumArg, sizeof( ctr_argument ) );
-		ctr_heap_free( pushArg, sizeof( ctr_argument ) );
+		ctr_heap_free( elnumArg );
+		ctr_heap_free( pushArg );
 	}
 	if (otherArray->info.type == CTR_OBJECT_TYPE_OTARRAY) {
 		for(i = otherArray->value.avalue->tail; i<otherArray->value.avalue->head; i++) {
@@ -486,8 +484,8 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 			elnumArg->object = elnum;
 			pushArg->object = ctr_array_get(otherArray, elnumArg);
 			ctr_array_push(newArray, pushArg);
-			ctr_heap_free( elnumArg, sizeof( ctr_argument ) );
-			ctr_heap_free( pushArg, sizeof( ctr_argument ) );
+			ctr_heap_free( elnumArg );
+			ctr_heap_free( pushArg );
 		}
 	}
 	return newArray;
@@ -510,8 +508,8 @@ int ctr_sort_cmp(const void * a, const void * b) {
 	arg2->object = *((ctr_object**) b);
 	result = ctr_block_run(temp_sorter, arg1, NULL);
 	numResult = ctr_internal_cast2number(result);
-	ctr_heap_free( arg1, sizeof( ctr_argument ) );
-	ctr_heap_free( arg2, sizeof( ctr_argument ) );
+	ctr_heap_free( arg1 );
+	ctr_heap_free( arg2 );
 	return (int) numResult->value.nvalue;
 }
 
@@ -580,8 +578,8 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(key, putKey->value.svalue->value, keyLen);
 	ctr_internal_object_delete_property(myself, ctr_build_string(key, keyLen), 0);
 	ctr_internal_object_add_property(myself, ctr_build_string(key, keyLen), putValue, 0);
-	ctr_heap_free( emptyArgumentList, sizeof( ctr_argument ) );
-	ctr_heap_free( key, sizeof( char ) * putKey->value.svalue->vlen );
+	ctr_heap_free( emptyArgumentList );
+	ctr_heap_free( key );
 	return myself;
 }
 
@@ -604,7 +602,7 @@ ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
 
 	/* Give developer a chance to define a key for array */
 	searchKey = ctr_send_message(searchKey, "toString", 8, emptyArgumentList);
-	ctr_heap_free( emptyArgumentList, sizeof( ctr_argument ) );
+	ctr_heap_free( emptyArgumentList );
 
 	/* If developer returns something other than string (ouch, toString), then cast anyway */
 	if (searchKey->info.type != CTR_OBJECT_TYPE_OTSTRING) {
@@ -658,9 +656,9 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_block_run(block, arguments, NULL);
 		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL;
 		m = m->next;
-		ctr_heap_free( arguments, sizeof( ctr_argument ) );
-		ctr_heap_free( argument2, sizeof( ctr_argument ) );
-		ctr_heap_free( argument3, sizeof( ctr_argument ) );
+		ctr_heap_free( arguments );
+		ctr_heap_free( argument2 );
+		ctr_heap_free( argument3 );
 	}
 	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL;
 	block->info.mark = 0;

@@ -91,7 +91,7 @@ int main(int argc, char* argv[]) {
 	ctr_initialize_world();
 	ctr_cwlk_run(program);
 	ctr_gc_sweep(1);
-	ctr_heap_free( prg, program_text_size );
+	ctr_heap_free( prg );
 	ctr_heap_free_rest();
 	//For memory profiling
 	if ( ctr_gc_alloc != 0 ) {
