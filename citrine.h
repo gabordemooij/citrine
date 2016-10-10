@@ -575,6 +575,7 @@ ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList);
 /**
  * Literal Constructors (internal only)
  */
+ctr_object* ctr_build_empty_string();
 ctr_object* ctr_build_string(char* object, long vlen);
 ctr_object* ctr_build_block(ctr_tnode* node);
 ctr_object* ctr_build_number(char* object);

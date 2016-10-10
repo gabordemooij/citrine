@@ -1107,6 +1107,18 @@ ctr_object* ctr_build_string_from_cstring(char* cstring) {
 }
 
 /**
+ * @internal
+ * BuildEmptyString
+ *
+ * Creates an empty string object, use this to avoid using
+ * the 'magic' number 0 when building a string, it is more
+ * readable this way and your intention is clearer.
+ */
+ctr_object* ctr_build_empty_string() {
+	return ctr_build_string( "", 0 );
+}
+
+/**
  * [String] bytes
  *
  * Returns the number of bytes in a string, as opposed to
@@ -1227,14 +1239,14 @@ ctr_object* ctr_string_fromto(ctr_object* myself, ctr_argument* argumentList) {
 	long ua, ub;
 	char* dest;
 	ctr_object* newString;
-	if (b == a) return ctr_build_string("",0);
+	if (b == a) return ctr_build_empty_string();
 	if (a > b) {
 		t = a; a = b; b = t;
 	}
-	if (a > len) return ctr_build_string("", 0);
+	if (a > len) return ctr_build_empty_string();
 	if (b > len) b = len;
 	if (a < 0) a = 0;
-	if (b < 0) return ctr_build_string("", 0);
+	if (b < 0) return ctr_build_empty_string();
 	ua = getBytesUtf8(myself->value.svalue->value, 0, a);
 	ub = getBytesUtf8(myself->value.svalue->value, ua, ((b - a)));
 	dest = ctr_heap_allocate( ub * sizeof(char) );
@@ -1264,7 +1276,7 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	long ua, ub;
 	char* dest;
 	ctr_object* newString;
-	if (b == 0) return ctr_build_string("",0);
+	if (b == 0) return ctr_build_empty_string();
 	if (b < 0) {
 		a = a + b;
 		b = labs(b);
@@ -1291,7 +1303,7 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* argument1;
 	ctr_argument* argument2;
 	ctr_object* result;
-	if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_string("",0);
+	if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_empty_string();
 	argument1 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	argument2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	argument1->object = argumentList->object;
@@ -1427,7 +1439,7 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
 ctr_object* ctr_string_to_lower1st(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newString = NULL;
 	size_t len = myself->value.svalue->vlen;
-	if (len == 0) return ctr_build_string("", 0);
+	if (len == 0) return ctr_build_empty_string();
 	char* tstr = ctr_heap_allocate( len * sizeof( char ) );
 	strncpy(tstr, myself->value.svalue->value, len);
 	tstr[0] = tolower(tstr[0]);
@@ -1445,7 +1457,7 @@ ctr_object* ctr_string_to_lower1st(ctr_object* myself, ctr_argument* argumentLis
 ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newString;
 	size_t len = myself->value.svalue->vlen;
-	if (len == 0) return ctr_build_string("", 0);
+	if (len == 0) return ctr_build_empty_string();
 	char* tstr = ctr_heap_allocate( len * sizeof( char ) );
 	strncpy(tstr, myself->value.svalue->value, len);
 	tstr[0] = toupper(tstr[0]);
@@ -1560,7 +1572,7 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	long  len = myself->value.svalue->vlen;
 	long i, begin, end, tlen;
 	char* tstr;
-	if (len == 0) return ctr_build_string("", 0);
+	if (len == 0) return ctr_build_empty_string();
 	i = 0;
 	while(i < len && isspace(*(str+i))) i++;
 	begin = i;
@@ -1596,7 +1608,7 @@ ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
 	long i = 0, begin;
 	long tlen;
 	char* tstr;
-	if (len == 0) return ctr_build_string("", 0);
+	if (len == 0) return ctr_build_empty_string();
 	while(i < len && isspace(*(str+i))) i++;
 	begin = i;
 	i = len - 1;
@@ -1627,7 +1639,7 @@ ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
 	long  len = myself->value.svalue->vlen;
 	long i = 0, end, tlen;
 	char* tstr;
-	if (len == 0) return ctr_build_string("", 0);
+	if (len == 0) return ctr_build_empty_string();
 	i = len - 1;
 	while(i > 0 && isspace(*(str+i))) i--;
 	end = i + 1;
