@@ -27,8 +27,7 @@ char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
    uint64_t real_size;
    FILE* fp;
    fp = fopen(file_name,"r");
-   if( fp == NULL )
-   {
+   if( fp == NULL ) {
       printf("Error while opening the file.\n");
       exit(1);
    }
