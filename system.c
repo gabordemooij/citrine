@@ -379,8 +379,8 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
 	char*       envValStr;
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
 	envValObj = ctr_internal_cast2string(argumentList->next->object);
-	envVarNameStr = ctr_internal_tocstring( envVarNameObj );
-	envValStr = ctr_internal_tocstring( envValObj );
+	envVarNameStr = ctr_heap_allocate_cstring( envVarNameObj );
+	envValStr = ctr_heap_allocate_cstring( envValObj );
 	setenv(envVarNameStr, envValStr, 1);
 	ctr_heap_free( envValStr );
 	ctr_heap_free( envVarNameStr );

@@ -202,3 +202,37 @@ void* ctr_heap_reallocate(void* oldptr, size_t size ) {
 
 	return (void*) nptr;
 }
+
+/**
+ * @internal
+ *
+ * Casts a string object to a cstring.
+ * Given an object with a string value, this function
+ * will return a C-string representing the bytes contained
+ * in the String Object. This function will explicitly end
+ * the returned set of bytes with a \0 byte for use
+ * in traditional C string functions.
+ *
+ * Warning: this function 'leaks' memory.
+ * It will allocate the necessary resources to store the string.
+ * To free this memory you'll need to call ctr_heap_free
+ * passing the pointer and the number of bytes ( value.svalue->vlen ).
+ *
+ * @param ctr_object* stringObject CtrString object instance to cast
+ *
+ * @return char*
+ */
+char* ctr_heap_allocate_cstring( ctr_object* stringObject ) {
+	char*    cstring;
+	char*    stringBytes;
+	ctr_size length;
+
+	stringBytes = stringObject->value.svalue->value;
+	length      = stringObject->value.svalue->vlen;
+	cstring     = ctr_heap_allocate( ( length + 1 ) * sizeof( char ) );
+
+	strncpy( cstring, stringBytes, length );
+	cstring[stringObject->value.svalue->vlen] = '\0';
+
+	return cstring;
+}

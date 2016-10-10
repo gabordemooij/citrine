@@ -286,8 +286,8 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 		return myself;
 	}
 	if ( pathObj == NULL ) return myself;
-	path = ctr_internal_tocstring( pathObj );
-	mode = ctr_internal_tocstring( modeStrObj );
+	path = ctr_heap_allocate_cstring( pathObj );
+	mode = ctr_heap_allocate_cstring( modeStrObj );
 	handle = fopen(path,mode);
 	ctr_heap_free( path );
 	ctr_heap_free( mode );
@@ -378,7 +378,7 @@ ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList)
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
 	string2write = ctr_internal_cast2string(argumentList->object);
-	buffer = ctr_internal_tocstring( string2write );
+	buffer = ctr_heap_allocate_cstring( string2write );
 	bytes = string2write->value.svalue->vlen;
 	written = fwrite(buffer, sizeof(char), (int)bytes, (FILE*)myself->value.rvalue->ptr);
 	ctr_heap_free( buffer );

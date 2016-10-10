@@ -14,9 +14,6 @@
 /**
  * @todo
  *
- * - rename tocstring to something like allocate/leak so people
- *   will know this functions allocates memory that has to be
- *   freed later on
  * - refine language, add space sensitivity to simplify
  *   even though some people are going to cry
  * - add the arrow unicode return symbol

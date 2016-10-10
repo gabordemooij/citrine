@@ -38,7 +38,7 @@ ctr_object* ctr_request_string(ctr_object* myself, ctr_argument* argumentList, C
 	char* cgiVar;
 	char* value;
 	cgiVarObject = ctr_internal_cast2string(argumentList->object);
-	cgiVar = ctr_internal_tocstring( cgiVarObject );
+	cgiVar = ctr_heap_allocate_cstring( cgiVarObject );
 	value = (char*) CGI_lookup(varlist, (const char*)cgiVar);
 	ctr_heap_free( cgiVar );
 	if (value == NULL) return CtrStdNil;
@@ -60,7 +60,7 @@ ctr_object* ctr_request_array(ctr_object* myself, ctr_argument* argumentList, CG
 	int i = 0;
 	list = ctr_array_new(CtrStdArray, NULL);	
 	cgiVarObject = ctr_internal_cast2string(argumentList->object);
-	cgiVar = ctr_internal_tocstring( cgiVarObject );
+	cgiVar = ctr_heap_allocate_cstring( cgiVarObject );
 	value = CGI_lookup_all(varlist, (const char*)cgiVar);
 	ctr_heap_free( cgiVar );
 	if (value == NULL) {
@@ -196,7 +196,7 @@ ctr_object* ctr_request_file(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* arg;
 	int i = 0;
 	cgiVarObject = ctr_internal_cast2string(argumentList->object);
-	cgiVar = ctr_internal_tocstring( cgiVarObject );
+	cgiVar = ctr_heap_allocate_cstring( cgiVarObject );
 	value = CGI_lookup_all(varlistPost, (const char*)cgiVar);
 	ctr_heap_free( cgiVar );
     list = ctr_array_new(CtrStdArray, NULL);
@@ -288,8 +288,8 @@ ctr_object* ctr_request_serve(ctr_object* myself, ctr_argument* argumentList) {
 	if (val!=NULL) maxproc = (int) ctr_internal_cast2number(val)->value.nvalue;
 	val = ctr_request_internal_option(myself, "maxreq");
 	if (val!=NULL) maxreq = (int) ctr_internal_cast2number(val)->value.nvalue;
-	host = ctr_internal_tocstring( ctr_internal_cast2string( argumentList->object ) );
-	pid = ctr_internal_tocstring( ctr_internal_cast2string( argumentList->next->next->object ) );
+	host = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->object ) );
+	pid = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->next->next->object ) );
 	port = (int) round(ctr_internal_cast2number(argumentList->next->object)->value.nvalue);
 	ctr_heap_free( host );
 	ctr_heap_free( pid );

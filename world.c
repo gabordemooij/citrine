@@ -402,40 +402,6 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 /**
  * @internal
  *
- * Casts a string object to a cstring.
- * Given an object with a string value, this function
- * will return a C-string representing the bytes contained
- * in the String Object. This function will explicitly end
- * the returned set of bytes with a \0 byte for use
- * in traditional C string functions.
- *
- * Warning: this function 'leaks' memory.
- * It will allocate the necessary resources to store the string.
- * To free this memory you'll need to call ctr_heap_free
- * passing the pointer and the number of bytes ( value.svalue->vlen ).
- *
- * @param ctr_object* stringObject CtrString object instance to cast
- *
- * @return char*
- */
-char* ctr_internal_tocstring( ctr_object* stringObject ) {
-	char*    cstring;
-	char*    stringBytes;
-	ctr_size length;
-
-	stringBytes = stringObject->value.svalue->value;
-	length      = stringObject->value.svalue->vlen;
-	cstring     = ctr_heap_allocate( ( length + 1 ) * sizeof( char ) );
-
-	strncpy( cstring, stringBytes, length );
-	cstring[stringObject->value.svalue->vlen] = '\0';
-
-	return cstring;
-}
-
-/**
- * @internal
- *
  * InternalBooleanCast
  *
  * Casts an object to a boolean.
@@ -512,7 +478,7 @@ ctr_object* ctr_find(ctr_object* key) {
 		message = "Key not found: ";
 		message_size = ((strlen(message))+key->value.svalue->vlen);
 		full_message = ctr_heap_allocate( message_size * sizeof( char ) );
-		key_name = ctr_internal_tocstring( key );
+		key_name = ctr_heap_allocate_cstring( key );
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdFlow = ctr_build_string(full_message, message_size);
@@ -542,7 +508,7 @@ ctr_object* ctr_find_in_my(ctr_object* key) {
 		message = "Object property not found: ";
 		message_size = ((strlen(message))+key->value.svalue->vlen);
 		full_message = ctr_heap_allocate( message_size * sizeof( char ) );
-		key_name = ctr_internal_tocstring( key );
+		key_name = ctr_heap_allocate_cstring( key );
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdFlow = ctr_build_string(full_message, message_size);
@@ -582,7 +548,7 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 		message = "Cannot assign to undefined variable: ";
 		message_size = ((strlen(message))+key->value.svalue->vlen);
 		full_message = ctr_heap_allocate(message_size*sizeof(char));
-		key_name = ctr_internal_tocstring( key );
+		key_name = ctr_heap_allocate_cstring( key );
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdFlow = ctr_build_string(full_message, message_size);
