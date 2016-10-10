@@ -41,8 +41,8 @@ ctr_object* ctr_percolator_brew(ctr_object* myself, ctr_argument* argumentList) 
 	 * Fetch the coffee property, note that the key is a Citrine String object.
 	 */
 	ctr_object* coffee = ctr_internal_object_find_property(
-		myself,                        /* owner object */
-		ctr_build_string("coffee", 6), /* key object */
+		myself,                                    /* owner object */
+		ctr_build_string_from_cstring( "coffee" ), /* key object */
 		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	
@@ -51,7 +51,7 @@ ctr_object* ctr_percolator_brew(ctr_object* myself, ctr_argument* argumentList) 
 	 */
 	ctr_object* water = ctr_internal_object_find_property(
 		myself,
-		ctr_build_string("water", 5),
+		ctr_build_string_from_cstring( "water" ),
 		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	
@@ -66,11 +66,11 @@ ctr_object* ctr_percolator_brew(ctr_object* myself, ctr_argument* argumentList) 
 	 * - native functions      in value.fvalue
 	 */
 	if (coffee->value.nvalue < 1) {
-		return ctr_build_string("No more coffee.", 16);
+		return ctr_build_string_from_cstring( "No more coffee." );
 	}
 	
 	if (water->value.nvalue < 2) {
-		return ctr_build_string("No more water.", 14);
+		return ctr_build_string_from_cstring( "No more water." );
 	}
 	
 	coffee->value.nvalue -= 1;
@@ -82,19 +82,19 @@ ctr_object* ctr_percolator_brew(ctr_object* myself, ctr_argument* argumentList) 
 	 */
 	ctr_internal_object_set_property(
 		myself, 
-		ctr_build_string("coffee", 6),
+		ctr_build_string_from_cstring( "coffee" ),
 		coffee,
 		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	
 	ctr_internal_object_set_property(
 		myself, 
-		ctr_build_string("water", 5),
+		ctr_build_string_from_cstring( "water" ),
 		water,
 		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	
-	return ctr_build_string("Coffee!", 7);
+	return ctr_build_string_from_cstring( "Coffee!" );
 }
 
 /**
@@ -110,14 +110,14 @@ ctr_object* ctr_percolator_add_coffee_water(ctr_object* myself, ctr_argument* ar
 	
 	ctr_internal_object_set_property(
 		myself, 
-		ctr_build_string("coffee", 6),
+		ctr_build_string_from_cstring( "coffee" ),
 		ctr_internal_cast2number(argumentList->object),
 		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	
 	ctr_internal_object_set_property(
 		myself, 
-		ctr_build_string("water", 5),
+		ctr_build_string_from_cstring( "water" ),
 		ctr_internal_cast2number(argumentList->next->object),
 		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
@@ -142,13 +142,13 @@ ctr_object* ctr_percolator_new(ctr_object* myself, ctr_argument* argumentList) {
 	percolatorInstance->link = myself;
 	ctr_internal_object_set_property(
 		percolatorInstance, 
-		ctr_build_string("coffee", 6),
+		ctr_build_string_from_cstring( "coffee" ),
 		ctr_build_number_from_float(0),
 		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	ctr_internal_object_set_property(
 		percolatorInstance, 
-		ctr_build_string("water", 5),
+		ctr_build_string_from_cstring( "water" ),
 		ctr_build_number_from_float(0),
 		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
@@ -173,10 +173,10 @@ void begin(){
 	percolatorObject->link = CtrStdObject;
 
 	/* Add the method 'new' so people can create their percolators */
-	ctr_internal_create_func(percolatorObject, ctr_build_string("new", 3), &ctr_percolator_new);
-	ctr_internal_create_func(percolatorObject, ctr_build_string("brew", 4), &ctr_percolator_brew);
-	ctr_internal_create_func(percolatorObject, ctr_build_string("coffee:water:", 13), &ctr_percolator_add_coffee_water);
+	ctr_internal_create_func(percolatorObject, ctr_build_string_from_cstring( "new" ), &ctr_percolator_new );
+	ctr_internal_create_func(percolatorObject, ctr_build_string_from_cstring( "brew" ), &ctr_percolator_brew );
+	ctr_internal_create_func(percolatorObject, ctr_build_string_from_cstring( "coffee:water:" ), &ctr_percolator_add_coffee_water );
 
 	/* Make the Percolator accessible to the world */
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Percolator", 10), percolatorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Percolator" ), percolatorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 }

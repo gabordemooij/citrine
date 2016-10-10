@@ -310,16 +310,16 @@ ctr_object* ctr_request_serve(ctr_object* myself, ctr_argument* argumentList) {
 void begin(){
 	ctr_object* requestObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	requestObject->link = CtrStdObject;
-	ctr_internal_create_func(requestObject, ctr_build_string("get:", 4), &ctr_request_get_string);
-	ctr_internal_create_func(requestObject, ctr_build_string("getArray:", 9), &ctr_request_get_array);
-	ctr_internal_create_func(requestObject, ctr_build_string("cookie:", 7), &ctr_request_cookie_string);
-	ctr_internal_create_func(requestObject, ctr_build_string("cookieArray:", 12), &ctr_request_cookie_array);
-	ctr_internal_create_func(requestObject, ctr_build_string("post:", 5), &ctr_request_post_string);
-	ctr_internal_create_func(requestObject, ctr_build_string("file:", 5), &ctr_request_file);
-	ctr_internal_create_func(requestObject, ctr_build_string("postArray:", 10), &ctr_request_post_array);
-	ctr_internal_create_func(requestObject, ctr_build_string("serverOption:is:", 16), &ctr_request_server_option);
-	ctr_internal_create_func(requestObject, ctr_build_string("host:listen:pid:callback:", 25), &ctr_request_serve);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string("Request", 7), requestObject, 0);
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "get:" ), &ctr_request_get_string );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "getArray:" ), &ctr_request_get_array );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "cookie:" ), &ctr_request_cookie_string );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "cookieArray:" ), &ctr_request_cookie_array );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "post:" ), &ctr_request_post_string );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "file:" ), &ctr_request_file );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "postArray:" ), &ctr_request_post_array );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "serverOption:is:" ), &ctr_request_server_option );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "host:listen:pid:callback:" ), &ctr_request_serve );
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Request" ), requestObject, 0);
 	varlistGet = CGI_get_query(NULL);
 	varlistPost = CGI_get_post(NULL,0);
 	varlistCookie = CGI_get_cookie(NULL);

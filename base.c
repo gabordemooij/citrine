@@ -1842,8 +1842,8 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 			parameter = parameterList->node;
 		}
 	}
-	if (my) ctr_assign_value_to_local(ctr_build_string("me",2), my); /* me should always point to object, otherwise you have to store me in self and cant use in if */
-	ctr_assign_value_to_local(ctr_build_string("thisBlock",9), myself); /* otherwise running block may get gc'ed. */
+	if (my) ctr_assign_value_to_local(ctr_build_string_from_cstring( "me" ), my ); /* me should always point to object, otherwise you have to store me in self and cant use in if */
+	ctr_assign_value_to_local(ctr_build_string_from_cstring( "thisBlock" ), myself ); /* otherwise running block may get gc'ed. */
 	result = ctr_cwlk_run(codeBlockPart2);
 	if (result == NULL) {
 		if (my) result = my; else result = myself;
@@ -1851,7 +1851,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	ctr_close_context();
 	if (CtrStdFlow != NULL && CtrStdFlow != CtrStdBreak && CtrStdFlow != CtrStdContinue) {
 		ctr_object* catchBlock = ctr_internal_create_object( CTR_OBJECT_TYPE_OTBLOCK );
-		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string("catch",5), 0);
+		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "catch" ), 0);
 		if (catchBlock != NULL) {
 			ctr_argument* a = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 			a->object = CtrStdFlow;
@@ -2007,7 +2007,7 @@ ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* catchBlock = argumentList->object;
-	ctr_internal_object_delete_property(myself, ctr_build_string("catch",5),0);
-	ctr_internal_object_add_property(myself, ctr_build_string("catch",5), catchBlock, 0);
+	ctr_internal_object_delete_property(myself, ctr_build_string_from_cstring( "catch" ), 0 );
+	ctr_internal_object_add_property(myself, ctr_build_string_from_cstring( "catch" ), catchBlock, 0 );
 	return myself;
 }

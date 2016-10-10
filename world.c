@@ -361,15 +361,15 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 			return o;
 			break;
 		case CTR_OBJECT_TYPE_OTNIL:
-			return ctr_build_string("[Nil]", 5);
+			return ctr_build_string_from_cstring( "[Nil]" );
 			break;
 		case CTR_OBJECT_TYPE_OTBOOL:
 			if (o->value.bvalue == 1) {
-				return ctr_build_string("[True]", 6);
+				return ctr_build_string_from_cstring( "[True]" );
 			} else if (o->value.bvalue == 0) {
-				return ctr_build_string("[False]", 7);
+				return ctr_build_string_from_cstring( "[False]" );
 			} else {
-				return ctr_build_string("[?]", 3);
+				return ctr_build_string_from_cstring( "[?]" );
 			}
 			break;
 		case CTR_OBJECT_TYPE_OTNUMBER:
@@ -389,15 +389,15 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 			return stringObject;
 			break;
 		case CTR_OBJECT_TYPE_OTBLOCK:
-			return ctr_build_string("[Block]",7);
+			return ctr_build_string_from_cstring( "[Block]" );
 			break;
 		case CTR_OBJECT_TYPE_OTOBJECT:
-			return ctr_build_string("[Object]",8);
+			return ctr_build_string_from_cstring( "[Object]" );
 			break;
 		default:
 			break;
 	}
-	return ctr_build_string("[?]", 3);
+	return ctr_build_string_from_cstring( "[?]" );
 }
 
 /**
@@ -532,7 +532,7 @@ ctr_object* ctr_find(ctr_object* key) {
  * Tries to locate a property of an object.
  */
 ctr_object* ctr_find_in_my(ctr_object* key) {
-	ctr_object* context = ctr_find(ctr_build_string("me",2));
+	ctr_object* context = ctr_find(ctr_build_string_from_cstring( "me" ) );
 	ctr_object* foundObject = ctr_internal_object_find_property(context, key, 0);
 	if (CtrStdFlow) return CtrStdNil;
 	if (foundObject == NULL) {
@@ -1007,7 +1007,7 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
  */
 ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 	ctr_object* object = NULL;
-	ctr_object* my = ctr_find(ctr_build_string("me", 2));
+	ctr_object* my = ctr_find(ctr_build_string_from_cstring( "me" ) );
 	if (CtrStdFlow) return CtrStdNil;
 	key->info.sticky = 0;
 	switch(o->info.type){

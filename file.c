@@ -28,7 +28,7 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	s->link = myself;
 	s->value.rvalue = NULL;
 	pathObject = ctr_build_string( argumentList->object->value.svalue->value, argumentList->object->value.svalue->vlen );
-	ctr_internal_object_add_property( s, ctr_build_string( "path", 4 ), pathObject, 0 );
+	ctr_internal_object_add_property( s, ctr_build_string_from_cstring( "path" ), pathObject, 0 );
 	return s;
 }
 
@@ -40,7 +40,7 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
  * recipient.
  */
 ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	if (path == NULL) return CtrStdNil;
 	return path;
 }
@@ -60,7 +60,7 @@ ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
  * in the variable called data.
  */
 ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_object* str;
 	ctr_size vlen, fileLen;
 	char* pathString;
@@ -74,7 +74,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	f = fopen(pathString, "rb");
 	ctr_heap_free( pathString );
 	if (!f) {
-		CtrStdFlow = ctr_build_string_from_cstring("Unable to open file.\0");
+		CtrStdFlow = ctr_build_string_from_cstring( "Unable to open file." );
 		return CtrStdNil;
 	}
 	fseek(f, 0, SEEK_END);
@@ -108,7 +108,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
-	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0 );
 	FILE* f;
 	ctr_size vlen;
 	char* pathString;
@@ -120,7 +120,7 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	f = fopen(pathString, "wb+");
 	ctr_heap_free( pathString );
 	if (!f) {
-		CtrStdFlow = ctr_build_string_from_cstring("Unable to open file.\0");
+		CtrStdFlow = ctr_build_string_from_cstring( "Unable to open file." );
 		return CtrStdNil;
 	}
 	fwrite(str->value.svalue->value, sizeof(char), str->value.svalue->vlen, f);
@@ -137,7 +137,7 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
-	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_size vlen;
 	char* pathString;
 	FILE* f;
@@ -163,7 +163,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
  * Returns True if the file exists and False otherwise.
  */
 ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_size vlen;
 	char* pathString;
 	FILE* f;
@@ -188,7 +188,7 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
  * Includes the file as a piece of executable code.
  */
 ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_tnode* parsedCode;
 	ctr_size vlen;
 	char* pathString;
@@ -214,7 +214,7 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
  * Deletes the file.
  */
 ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_size vlen;
 	char* pathString;
 	int r;
@@ -226,7 +226,7 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
 	r = remove(pathString);
 	ctr_heap_free( pathString );
 	if (r!=0) {
-		CtrStdFlow = ctr_build_string_from_cstring("Unable to delete file.\0");
+		CtrStdFlow = ctr_build_string_from_cstring( "Unable to delete file." );
 		return CtrStdNil;
 	}
 	return myself;
@@ -238,7 +238,7 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
  * Returns the size of the file.
  */
 ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_size vlen;
 	char* pathString;
 	FILE* f;
@@ -274,7 +274,7 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
  * The example above opens the file in f for reading and writing.
  */
 ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* pathObj = ctr_internal_object_find_property(myself, ctr_build_string("path",4), 0);
+	ctr_object* pathObj = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	char* mode;
 	char* path;
 	FILE* handle;
