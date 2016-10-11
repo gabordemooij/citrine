@@ -11,4 +11,4 @@
 ? init.
 ?>world<?.
 b := (? buffer).
-Pen write: 'hello '+b.
+Pen write: 'hello '+ b.

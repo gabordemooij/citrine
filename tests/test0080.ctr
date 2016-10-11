@@ -15,7 +15,7 @@
 	Pen write: (a join: ','), brk.
 	a put: 6 at: -1.
 } catch: { e |
-	Pen write: 'Uncatched error has occurred.\n'+e, brk.
+	Pen write: 'Uncatched error has occurred.\n' + e, brk.
 }, run.
 
 

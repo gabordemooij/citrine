@@ -7,5 +7,5 @@ a := 0.
 	a := 1.
 } catch: {\
 	Pen write: 'Catch Block.\n'.
-	Pen write: 'a = '+a, brk. #a should be 0!
+	Pen write: 'a = ' + a, brk. #a should be 0!
 }, run.

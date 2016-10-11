@@ -6,7 +6,7 @@
 <p>The string '<? write: x. ?>' has: <?. Pen write: (x length) + ' code points'. ?>...</p>
 <ul>
 <?. (x length) times: { i |
-?><li><? write: '#' + (i+1) + ':' + (x at: i). ?></li>
+?><li><? write: '#' + (i + 1) + ':' + (x at: i). ?></li>
 <?. }. 
 ?></ul>
 </body> 

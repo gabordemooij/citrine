@@ -280,14 +280,6 @@ int ctr_clex_tok() {
 	}
 
 	/*
-	 * these symbols are special because we often like to use
-	 * them without spacing: 1+2 instead of 1 + 2.
-	 */
-	if (c=='+' || c=='-' || c=='/' || c=='*') {
-		ctr_code++; ctr_clex_tokvlen = 1; ctr_clex_buffer[0] = c; return CTR_TOKEN_REF;
-	}
-
-	/*
 	 * these are also special, they are easy notations for unicode symbols.
 	 * we also return directly because we would like to use them without spaces as well: 1>=2...
 	 */
@@ -331,9 +323,6 @@ int ctr_clex_tok() {
 		c !='^'  &&
 		c != ':' &&
 		c != '\''&&
-		c != '+' &&
-		c != '*' &&
-		c != '/' &&
 		c !='='  &&
 		c !='>'  &&
 		c !='<'
