@@ -615,7 +615,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "|" ), &ctr_bool_or );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "?" ), &ctr_bool_xor );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "=" ),&ctr_bool_eq );
-	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "≠" ), &ctr_bool_neq );
+	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "!=:" ), &ctr_bool_neq );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "toNumber" ), &ctr_bool_to_number );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "toString" ), &ctr_bool_to_string );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "flip" ), &ctr_bool_flip );
@@ -637,11 +637,11 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "/" ), &ctr_number_divide );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "/=:" ), &ctr_number_div );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( ">" ), &ctr_number_higherThan );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "≥" ), &ctr_number_higherEqThan );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( ">=:" ), &ctr_number_higherEqThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "<" ), &ctr_number_lowerThan );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "≤" ), &ctr_number_lowerEqThan );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "<=:" ), &ctr_number_lowerEqThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "=" ), &ctr_number_eq );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "≠" ), &ctr_number_neq );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "!=:" ), &ctr_number_neq );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "%" ), &ctr_number_modulo );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "factorial" ), &ctr_number_factorial );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "floor" ), &ctr_number_floor );
@@ -677,7 +677,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "from:length:" ), &ctr_string_from_length );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "+" ), &ctr_string_concat );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "=" ), &ctr_string_eq );
-	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "≠" ), &ctr_string_neq );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "!=:" ), &ctr_string_neq );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "trim" ), &ctr_string_trim );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "leftTrim" ), &ctr_string_ltrim );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "rightTrim" ), &ctr_string_rtrim );
@@ -719,7 +719,7 @@ void ctr_initialize_world() {
 	/* Array */
 	CtrStdArray = ctr_array_new(CtrStdObject, NULL);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( "new" ), &ctr_array_new );
-	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( "←" ), &ctr_array_new_and_push );
+	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( "<" ), &ctr_array_new_and_push );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( "push:" ), &ctr_array_push );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( ";" ), &ctr_array_push );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( "unshift:" ), &ctr_array_unshift );

@@ -15,8 +15,8 @@ Pen write: 'last index of W = ' + ( txt lastIndexOf: 'W' ), brk.
 Pen write: 'last index of d = ' + ( txt lastIndexOf: 'd' ), brk.
 Pen write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), brk.
 Pen write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
-Pen write: 'txt does not equal Word Salad = ' + ( txt != 'Word Salad' ), brk.
-Pen write: 'txt does not equal Ceasar Salad = ' + ( txt != 'Ceasar Salad' ), brk.
+Pen write: 'txt does not equal Word Salad = ' + ( txt !=: 'Word Salad' ), brk.
+Pen write: 'txt does not equal Ceasar Salad = ' + ( txt !=: 'Ceasar Salad' ), brk.
 
 Broom sweep.
 
@@ -31,8 +31,8 @@ Pen write: 'last index of W = ' + ( txt lastIndexOf: 'W' ), brk.
 Pen write: 'last index of d = ' + ( txt lastIndexOf: 'd' ), brk.
 Pen write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), brk.
 Pen write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
-Pen write: 'txt does not equal Word Salad = ' + ( txt != 'Word Salad' ), brk.
-Pen write: 'txt does not equal Ceasar Salad = ' + ( txt != 'Ceasar Salad' ), brk.
+Pen write: 'txt does not equal Word Salad = ' + ( txt !=: 'Word Salad' ), brk.
+Pen write: 'txt does not equal Ceasar Salad = ' + ( txt !=: 'Ceasar Salad' ), brk.
 
 Broom sweep.
 usedMemory2 := Broom keptAlloc.
@@ -46,8 +46,8 @@ Pen write: 'last index of W = ' + ( txt lastIndexOf: 'W' ), brk.
 Pen write: 'last index of d = ' + ( txt lastIndexOf: 'd' ), brk.
 Pen write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), brk.
 Pen write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
-Pen write: 'txt does not equal Word Salad = ' + ( txt != 'Word Salad' ), brk.
-Pen write: 'txt does not equal Ceasar Salad = ' + ( txt != 'Ceasar Salad' ), brk.
+Pen write: 'txt does not equal Word Salad = ' + ( txt !=: 'Word Salad' ), brk.
+Pen write: 'txt does not equal Ceasar Salad = ' + ( txt !=: 'Ceasar Salad' ), brk.
 
 Broom sweep.
 usedMemory3 := Broom keptAlloc.

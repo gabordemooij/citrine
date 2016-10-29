@@ -8,21 +8,21 @@ usedMemory4 := 0.
 Broom mode: 0.
 
 a := Array new.
-b := Array <- 1 ; 2.
+b := Array < 1 ; 2.
 
 Broom sweep.
 usedMemory1 := Broom keptAlloc.
 #Pen write: usedMemory1, brk.
 
 a := Array new.
-b := Array <- 1 ; 2.
+b := Array < 1 ; 2.
 
 Broom sweep.
 usedMemory2 := Broom keptAlloc.
 #Pen write: usedMemory2, brk.
 
 a := Array new.
-b := Array <- 1 ; 2.
+b := Array < 1 ; 2.
 
 Broom sweep.
 usedMemory3 := Broom keptAlloc.

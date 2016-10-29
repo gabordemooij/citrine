@@ -1,3 +1,3 @@
 ('b' = 'b') ifTrue: { Pen write: 'equal'.}.
-('a' != 'b') ifTrue: { Pen write: 'unequal'.}.
-('a' ≠ 'b') ifTrue: { Pen write: 'unequal'.}.
+('a' !=: 'b') ifTrue: { Pen write: 'unequal'.}.
+('a' !=: 'b') ifTrue: { Pen write: 'unequal'.}.

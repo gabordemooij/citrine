@@ -282,25 +282,6 @@ int ctr_clex_tok() {
 		return CTR_TOKEN_REF;
 	}
 
-	/*
-	 * these are also special, they are easy notations for unicode symbols.
-	 * we also return directly because we would like to use them without spaces as well: 1>=2...
-	 */
-	if ((ctr_code+1)<ctr_eofcode) {
-		if (((char)*(ctr_code) == '>') && ((char)*(ctr_code+1)=='=')){
-			ctr_code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "≥", 3); return CTR_TOKEN_REF;
-		}
-		if (((char)*(ctr_code) == '<') && ((char)*(ctr_code+1)=='=')){
-			ctr_code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "≤", 3); return CTR_TOKEN_REF;
-		}
-		if (((char)*(ctr_code) == '!') && ((char)*(ctr_code+1)=='=')){
-			ctr_code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "≠", 3); return CTR_TOKEN_REF;
-		}
-		if (((char)*(ctr_code) == '<') && ((char)*(ctr_code+1)=='-')){
-			ctr_code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "←", 3); return CTR_TOKEN_REF;
-		}
-	}
-
 	while(
 	!isspace(c) && (
 		c != '#' &&

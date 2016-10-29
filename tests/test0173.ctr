@@ -7,8 +7,8 @@ usedMemory4 := 0.
 
 Broom mode: 0.
 
-a := Array <- 'hello' ; 'world' ; True ; Nil ; 666.
-a := a + ( Array <- 1 ).
+a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
+a := a + ( Array < 1 ).
 Pen write: ( 'sum: ' + ( a sum ) ), brk.
 Pen write: ( 'min: ' + ( a min ) ), brk.
 Pen write: ( 'max: ' + ( a max ) ), brk.
@@ -21,8 +21,8 @@ Broom sweep.
 usedMemory1 := Broom keptAlloc.
 #Pen write: usedMemory1, brk.
 
-a := Array <- 'hello' ; 'world' ; True ; Nil ; 666.
-a := a + ( Array <- 1 ).
+a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
+a := a + ( Array < 1 ).
 Pen write: ( 'sum: ' + ( a sum ) ), brk.
 Pen write: ( 'min: ' + ( a min ) ), brk.
 Pen write: ( 'max: ' + ( a max ) ), brk.
@@ -36,8 +36,8 @@ Broom sweep.
 usedMemory2 := Broom keptAlloc.
 #Pen write: usedMemory2, brk.
 
-a := Array <- 'hello' ; 'world' ; True ; Nil ; 666.
-a := a + ( Array <- 1 ).
+a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
+a := a + ( Array < 1 ).
 Pen write: ( 'sum: ' + ( a sum ) ), brk.
 Pen write: ( 'min: ' + ( a min ) ), brk.
 Pen write: ( 'max: ' + ( a max ) ), brk.

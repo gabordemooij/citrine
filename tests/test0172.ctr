@@ -7,7 +7,7 @@ usedMemory4 := 0.
 
 Broom mode: 0.
 
-a := Array <- 'hello' ; 'world' ; True ; Nil ; 666.
+a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
 b := a from: 2 length: 2.
 Pen write: ( b join: '|' ), write: b count.
 
@@ -15,7 +15,7 @@ Broom sweep.
 usedMemory1 := Broom keptAlloc.
 #Pen write: usedMemory1, brk.
 
-a := Array <- 'hello' ; 'world' ; True ; Nil ; 666.
+a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
 b := a from: 2 length: 2.
 Pen write: ( b join: '|' ), write: b count.
 
@@ -24,7 +24,7 @@ Broom sweep.
 usedMemory2 := Broom keptAlloc.
 #Pen write: usedMemory2, brk.
 
-a := Array <- 'hello' ; 'world' ; True ; Nil ; 666.
+a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
 b := a from: 2 length: 2.
 Pen write: ( b join: '|' ), write: b count.
 

@@ -1,6 +1,6 @@
 #Test Array + operator
-a := Array <- 1 ; 2 ; 3.
-b := Array <- 4 ; 5 ; 6.
+a := Array < 1 ; 2 ; 3.
+b := Array < 4 ; 5 ; 6.
 c := a + b.
 Pen write: 'Array:' + (c join: ','), brk.
 Pen write: 'Array:' + ((b + a) join: ','), brk.

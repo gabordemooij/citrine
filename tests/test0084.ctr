@@ -12,7 +12,7 @@ mapper := { :array :func
 	(array count) times: { :i mapping applyTo: i. }.
 }.
 
-a := Array <- 1; 2; 3.
+a := Array < 1; 2; 3.
 mapper applyTo: a and: (makeAdder applyTo: 100).
 Pen write: (a at: 0), brk.
 Pen write: (a at: 1), brk.

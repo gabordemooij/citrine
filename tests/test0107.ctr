@@ -42,7 +42,7 @@ Pen write: 'Break block, dont fire catch...', brk.
 
 #test each-loops
 Pen write: 'Test Array each-loop: 0,1', brk.
-(Array <- 1 ; 2 ; 3) map: { :i
+(Array < 1 ; 2 ; 3) map: { :i
 	Pen write: 'iteration #' + i, brk.
 	(i = 1) break.
 }.

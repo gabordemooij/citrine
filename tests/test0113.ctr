@@ -47,7 +47,7 @@ Pen brk.
 
 #test each-loops
 Pen write: 'Test Array each-loop: 0, ... ,2', brk.
-(Array <- 1 ; 2 ; 3) map: { :i
+(Array < 1 ; 2 ; 3) map: { :i
 	(i = 1) continue.
 	Pen write: 'iteration #' + i, brk.
 }.
@@ -56,7 +56,7 @@ Pen write: 'Test Map each-loop: c only', brk.
 m := Map new.
 m put: 'first' at: 'a', put: 'second' at: 'b', put: 'third' at: 'c'.
 m each: { :k :v
-	(k != 'c') continue.
+	(k !=: 'c') continue.
 	Pen write: 'iteration' + k + v, brk.
 }.
 

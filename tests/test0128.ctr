@@ -1,8 +1,8 @@
 #test array sum
-a := Array <- 9 ; 8 ; 7.
+a := Array < 9 ; 8 ; 7.
 Pen write: (a sum), brk. #24
-a := Array <- 1 ; 9.
+a := Array < 1 ; 9.
 Pen write: (a sum), brk. #10
-a := Array <- 'o' ; 2.
+a := Array < 'o' ; 2.
 Pen write: (a sum), brk. #2
 Pen write: (Array new sum), brk. #0
