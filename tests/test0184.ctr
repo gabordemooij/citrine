@@ -7,6 +7,23 @@ usedMemory4 := 0.
 
 Broom mode: 0.
 
+Number on: 'add:' do: { x |
+	me +=: x.
+}.
+
+Number on: 'subtract:' do: { x |
+	me -=: x.
+}.
+
+Number on: 'multiplyBy:' do: { x |
+	me *=: x.
+}.
+
+Number on: 'divideBy:' do: { x |
+	me /=: x.
+}.
+
+
 a := 1.
 a := a + 1.       #2
 a add: 3.         #5

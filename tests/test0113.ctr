@@ -13,7 +13,7 @@ Pen brk.
 Pen write: 'Continue while-true, No --> before 5 and up.', brk.
 xIsLessThan10 whileTrue: {\
 	Pen write: 'iteration #' + x, brk.
-	x add: 1.
+	x +=: 1.
 	((x < 5) not) continue.
 	Pen write: '-->'.
 }.
@@ -21,9 +21,9 @@ xIsLessThan10 whileTrue: {\
 #5,4
 Pen brk.
 Pen write: 'Continue while-false, No - before 3 only.', brk.
-{\ ^(x=0). } whileFalse: {\
+{\ ^(x = 0). } whileFalse: {\
 	Pen write: 'iteration #' + x, brk.
-	x subtract: 1.
+	x -=: 1.
 	(x = 3) continue.
 	Pen write: '-'.
 }.

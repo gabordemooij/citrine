@@ -628,14 +628,14 @@ void ctr_initialize_world() {
 	CtrStdNumber = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "to:step:do:" ), &ctr_number_to_step_do );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "+" ), &ctr_number_add );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "add:" ), &ctr_number_inc );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "+=:" ), &ctr_number_inc );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "-" ), &ctr_number_minus );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "subtract:" ), &ctr_number_dec );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "-=:" ), &ctr_number_dec );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "*" ),&ctr_number_multiply );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "times:" ),&ctr_number_times );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "multiplyBy:" ),&ctr_number_mul );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "*=:" ),&ctr_number_mul );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "/" ), &ctr_number_divide );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "divideBy:" ), &ctr_number_div );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "/=:" ), &ctr_number_div );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( ">" ), &ctr_number_higherThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "≥" ), &ctr_number_higherEqThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "<" ), &ctr_number_lowerThan );
@@ -1030,6 +1030,25 @@ ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* o) {
 			object = o;
 			break;
 	}
+	ctr_internal_object_set_property(context, key, object, 0);
+	return object;
+}
+
+/**
+ * @internal
+ *
+ * CTRAssignValueObjectLocalByRef
+ *
+ * Assigns a value to a local of an object.
+ * Always assigns by reference.
+ */
+ctr_object* ctr_assign_value_to_local_by_ref(ctr_object* key, ctr_object* o) {
+	ctr_object* object = NULL;
+	ctr_object* context;
+	if (CtrStdFlow) return CtrStdNil;
+	context = ctr_contexts[ctr_context_id];
+	key->info.sticky = 0;
+	object = o;
 	ctr_internal_object_set_property(context, key, object, 0);
 	return object;
 }

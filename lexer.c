@@ -272,11 +272,19 @@ int ctr_clex_tok() {
 	/* if we encounter a '?>' sequence, switch to verbatim mode in lexer */
 	if (strncmp(ctr_code, "?>", 2)==0){
 		ctr_clex_verbatim_mode = 1;
+		ctr_code ++;
+		memcpy(ctr_clex_buffer, "?", 1);
+		ctr_clex_tokvlen = 1;
+		return CTR_TOKEN_REF;
 	}
 
 	/* if lexer is in verbatim mode and we pass the '>' symbol insert a fake quote as next token */
 	if (strncmp(ctr_code, ">", 1)==0 && ctr_clex_verbatim_mode == 1) {
 		ctr_clex_verbatim_mode_insert_quote = (uintptr_t) (ctr_code+1); /* this way because multiple invocations should return same result */
+		ctr_code ++;
+		memcpy(ctr_clex_buffer, ">", 1);
+		ctr_clex_tokvlen = 1;
+		return CTR_TOKEN_REF;
 	}
 
 	/*
@@ -296,16 +304,6 @@ int ctr_clex_tok() {
 		if (((char)*(ctr_code) == '<') && ((char)*(ctr_code+1)=='-')){
 			ctr_code +=2; ctr_clex_tokvlen = 3; memcpy(ctr_clex_buffer, "←", 3); return CTR_TOKEN_REF;
 		}
-
-		/* be very nice, accidental == will be converted to = */
-		if (((char)*(ctr_code) == '=') && ((char)*(ctr_code+1)=='=')){
-			ctr_code +=2; ctr_clex_tokvlen = 1; memcpy(ctr_clex_buffer, "=", 1); return CTR_TOKEN_REF;
-		}
-	}
-
-	/* later because we tolerate == as well. */
-	if (c=='=' || c=='>' || c =='<') {
-		ctr_code++; ctr_clex_tokvlen = 1; ctr_clex_buffer[0] = c; return CTR_TOKEN_REF;
 	}
 
 	if (c == '|' || c == '\\') { ctr_code++; return CTR_TOKEN_BLOCKPIPE; }
@@ -323,10 +321,7 @@ int ctr_clex_tok() {
 		c !=','  &&
 		c !='^'  &&
 		c != ':' &&
-		c != '\''&&
-		c !='='  &&
-		c !='>'  &&
-		c !='<'
+		c != '\''
 	) && ctr_code!=ctr_eofcode
 	) {
 		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;

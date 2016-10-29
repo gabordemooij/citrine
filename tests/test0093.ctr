@@ -2,13 +2,13 @@
 var q := 2.
 c := 0.
 f := {\
-	c add: 1.
+	c +=: 1.
 	var x := 1.
 	(c < 3) ifTrue: {\ 
 		var q := 0.
 		f run.
 	}.
-	x add: 2.
+	x +=: 2.
 	Pen write: x.
 }.
 f run.

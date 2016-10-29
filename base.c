@@ -604,7 +604,7 @@ ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] add: [Number]
+ * [Number] +=: [Number]
  *
  * Increases the number ITSELF by the specified amount, this message will change the
  * value of the number object itself instead of returning a new number.
@@ -629,7 +629,7 @@ ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] subtract: [number]
+ * [Number] -=: [number]
  *
  * Decreases the number ITSELF by the specified amount, this message will change the
  * value of the number object itself instead of returning a new number.
@@ -694,7 +694,7 @@ ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] multiplyBy: [Number]
+ * [Number] *=: [Number]
  *
  * Multiplies the number ITSELF by multiplier, this message will change the
  * value of the number object itself instead of returning a new number.
@@ -702,7 +702,7 @@ ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * x := 5.
- * x multiplyBy: 2. #x is now 10.
+ * x *=: 2. #x is now 10.
  *
  * Use this message to apply the operation to the object itself instead
  * of creating and returning a new object.
@@ -731,7 +731,7 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] divideBy: [Number]
+ * [Number] /=: [Number]
  *
  * Divides the number ITSELF by divider, this message will change the
  * value of the number object itself instead of returning a new number.
@@ -739,7 +739,7 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * x := 10.
- * x divideBy: 2. #x will now be 5.
+ * x /=: 2. #x will now be 5.
  *
  * Use this message to apply the operation to the object itself instead
  * of generating a new object.
@@ -1854,7 +1854,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 			parameter = parameterList->node;
 		}
 	}
-	if (my) ctr_assign_value_to_local(ctr_build_string_from_cstring( "me" ), my ); /* me should always point to object, otherwise you have to store me in self and cant use in if */
+	if (my) ctr_assign_value_to_local_by_ref(ctr_build_string_from_cstring( "me" ), my ); /* me should always point to object, otherwise you have to store me in self and cant use in if */
 	ctr_assign_value_to_local(ctr_build_string_from_cstring( "thisBlock" ), myself ); /* otherwise running block may get gc'ed. */
 	result = ctr_cwlk_run(codeBlockPart2);
 	if (result == NULL) {

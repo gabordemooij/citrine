@@ -12,13 +12,6 @@
 #include "siphash.h"
 
 /**
- * @todo
- *
- * - add the arrow unicode return symbol
- * - remove redundant notations for or,and and xor
- */
-
-/**
  * CommandLine Display Welcome Message
  * Displays a Welcome message, copyright information,
  * version information and usage.

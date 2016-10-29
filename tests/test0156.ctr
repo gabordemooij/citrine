@@ -6,7 +6,7 @@ j := 1.
 func := {\
 
 	Pen write: 'Nested call #' + j, brk.
-	j add: 1.
+	j +=: 1.
 
 	func run.
 }.
