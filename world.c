@@ -612,7 +612,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "not" ), &ctr_bool_not );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "&" ), &ctr_bool_and );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "N" ), &ctr_bool_nor );
-	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "?" ), &ctr_bool_or );
+	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "|" ), &ctr_bool_or );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "X" ), &ctr_bool_xor );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "=" ),&ctr_bool_eq );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "≠" ), &ctr_bool_neq );

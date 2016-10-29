@@ -394,14 +394,14 @@ ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] ? [other]
+ * [Boolean] | [other]
  *
  * Returns True if either the object value is True or the
  * argument is True or both are True.
  *
  * Usage:
  *
- * a ? b
+ * a | b
  */
 ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
