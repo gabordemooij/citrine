@@ -10,9 +10,9 @@ Broom mode: 0.
 money  := False.
 desire := True.
 canDo := (money & desire).
-depression := (money xor: desire).
-isHuman := (money / desire).
-isRobot := (money nor: desire).
+depression := (money X desire).
+isHuman := (money ? desire).
+isRobot := (money N desire).
 PoemAboutLife := 
 	'I am a ' + 
 	(isHuman either: 'human being' or: 'not a human being') +
@@ -38,9 +38,9 @@ usedMemory1 := Broom keptAlloc.
 money  := False.
 desire := True.
 canDo := (money & desire).
-depression := (money xor: desire).
-isHuman := (money / desire).
-isRobot := (money nor: desire).
+depression := (money X desire).
+isHuman := (money ? desire).
+isRobot := (money N desire).
 PoemAboutLife := 
 	'I am a ' + 
 	(isHuman either: 'human being' or: 'not a human being') +
@@ -67,9 +67,9 @@ usedMemory2 := Broom keptAlloc.
 money  := False.
 desire := True.
 canDo := (money & desire).
-depression := (money xor: desire).
-isHuman := (money / desire).
-isRobot := (money nor: desire).
+depression := (money X desire).
+isHuman := (money ? desire).
+isRobot := (money N desire).
 PoemAboutLife := 
 	'I am a ' + 
 	(isHuman either: 'human being' or: 'not a human being') +

@@ -14,8 +14,6 @@
 /**
  * @todo
  *
- * - refine language, add space sensitivity to simplify
- *   even though some people are going to cry
  * - add the arrow unicode return symbol
  * - remove redundant notations for or,and and xor
  */

@@ -362,14 +362,14 @@ ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] and: [other]
+ * [Boolean] & [other]
  *
  * Returns True if both the object value is True and the
  * argument is True as well.
  *
  * Usage:
  *
- * a and: b
+ * a & b
  *
  */
 ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList) {
@@ -378,14 +378,14 @@ ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] nor: [other]
+ * [Boolean] N [other]
  *
  * Returns True if the object value is False and the
  * argument is False as well.
  *
  * Usage:
  *
- * a nor: b
+ * a N b
  *
  */
 ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList) {
@@ -394,14 +394,14 @@ ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] or: [other]
+ * [Boolean] ? [other]
  *
  * Returns True if either the object value is True or the
  * argument is True or both are True.
  *
  * Usage:
  *
- * a or: b
+ * a ? b
  */
 ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
@@ -409,14 +409,14 @@ ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] xor: [other]
+ * [Boolean] X [other]
  *
  * Returns True if either the object value is True or the
  * argument is True but not both.
  *
  * Usage:
  *
- * a xor: b
+ * a X b
  */
 ctr_object* ctr_bool_xor(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
