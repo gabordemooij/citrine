@@ -378,14 +378,14 @@ ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] N [other]
+ * [Boolean] ! [other]
  *
  * Returns True if the object value is False and the
  * argument is False as well.
  *
  * Usage:
  *
- * a N b
+ * a ! b
  *
  */
 ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList) {
