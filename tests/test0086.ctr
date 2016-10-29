@@ -1,10 +1,10 @@
 #Scope tests
-{\ var q := 1. {\ Pen write: q. } run. } run. #prints 1.
+{ var q := 1. { Pen write: q. } run. } run. #prints 1.
 Pen brk.
-{\ var q := 1. {\ q := 2. Pen write: q. } run. } run. #prints 2.
+{ var q := 1. { q := 2. Pen write: q. } run. } run. #prints 2.
 Pen brk.
-f := {\ q := 2. }. {\ var q := 1. f run. Pen write: q. } run. 
+f := { q := 2. }. { var q := 1. f run. Pen write: q. } run. 
 Pen brk.
-{\ var q := 1. {\ x := 2. Pen write: x. } run. } #Not allowed x is not defined
-catch: {\ Pen write: 'Error, cannot assign, key not found: x, forgot to use var ?'. }, run.
+{ var q := 1. { x := 2. Pen write: x. } run. } #Not allowed x is not defined
+catch: { Pen write: 'Error, cannot assign, key not found: x, forgot to use var ?'. }, run.
 Pen brk.

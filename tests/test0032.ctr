@@ -1,6 +1,6 @@
 #test assignment to my... testtesttest
 a := Object new.
-a on: 'init' do: {\
+a on: 'init' do: {
 	var v := 'test'.
 	my value := v.
 	my value2 := my value.

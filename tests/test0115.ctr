@@ -1,46 +1,46 @@
 #test undef. var should not kill error
-{\
+{
 	thisBlock error: 'Dont fail.'.
 	unknown doSomething.
-} catch: {\
+} catch: {
 	Pen write: 'Caught!'.
 }, run.
 
 #'my' version
-{\
+{
 	thisBlock error: 'Dont fail.'.
 	my unknown doSomething.
-} catch: {\
+} catch: {
 	Pen write: 'Caught!'.
 }, run.
 
 #invalid assign version
-{\
+{
 	thisBlock error: 'Dont fail.'.
 	unknown := 122.
-} catch: {\
+} catch: {
 	Pen write: 'Caught!'.
 }, run.
 
 
 #error reset version
-{\
+{
 	thisBlock error: 'Dont fail.'.
 	True break.
 	Pen write: 'FAIL'.
-} catch: {\
+} catch: {
 	Pen write: 'Caught!'.
 }, run.
 
 #nested
-{\
-	{\
+{
+	{
 		thisBlock error: 'Dont fail.'.
 		True break.
 		Pen write: 'FAIL'.
-	} catch: { x |
-		(x = 'Dont fail.') ifTrue: {\ thisBlock error: 'Nested Caught!'. }.
+	} catch: { :x
+		(x = 'Dont fail.') ifTrue: { thisBlock error: 'Nested Caught!'. }.
 	}, run.
-} catch: { e |
+} catch: { :e
 	Pen write: e.
 }, run.

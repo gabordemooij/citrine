@@ -7,19 +7,19 @@ usedMemory4 := 0.
 
 Broom mode: 0.
 
-4 times: { i | Pen write: i. }.
+4 times: { :i Pen write: i. }.
 Pen brk.
-4 to: 1 step: -1 do: { i | Pen write: i. }.
+4 to: 1 step: -1 do: { :i Pen write: i. }.
 Pen brk.
-( 1 > 2 ) ifFalse: {\ Pen write: 'BLOCK 1', brk. }.
-( 2 > 1 ) ifTrue:  {\ Pen write: 'BLOCK 2', brk. }.
+( 1 > 2 ) ifFalse: { Pen write: 'BLOCK 1', brk. }.
+( 2 > 1 ) ifTrue:  { Pen write: 'BLOCK 2', brk. }.
 
 i := 0.
-{\ ^( i < 3). } whileTrue: {\ Pen write: i. i +=: 1. }.
+{ ^( i < 3). } whileTrue: { Pen write: i. i +=: 1. }.
 Pen brk.
 
 i := 3.
-{\ ^( i > 0). } whileTrue: {\ Pen write: i. i := i - 1. }.
+{ ^( i > 0). } whileTrue: { Pen write: i. i := i - 1. }.
 Pen brk.
 
 
@@ -28,19 +28,19 @@ Broom sweep.
 usedMemory1 := Broom keptAlloc.
 #Pen write: usedMemory1, brk.
 
-4 times: { i | Pen write: i. }.
+4 times: { :i Pen write: i. }.
 Pen brk.
-4 to: 1 step: -1 do: { i | Pen write: i. }.
+4 to: 1 step: -1 do: { :i Pen write: i. }.
 Pen brk.
-( 1 > 2 ) ifFalse: {\ Pen write: 'BLOCK 1', brk. }.
-( 2 > 1 ) ifTrue:  {\ Pen write: 'BLOCK 2', brk. }.
+( 1 > 2 ) ifFalse: { Pen write: 'BLOCK 1', brk. }.
+( 2 > 1 ) ifTrue:  { Pen write: 'BLOCK 2', brk. }.
 
 i := 0.
-{\ ^( i < 3). } whileTrue: {\ Pen write: i. i +=: 1. }.
+{ ^( i < 3). } whileTrue: { Pen write: i. i +=: 1. }.
 Pen brk.
 
 i := 3.
-{\ ^( i > 0). } whileTrue: {\ Pen write: i. i := i - 1. }.
+{ ^( i > 0). } whileTrue: { Pen write: i. i := i - 1. }.
 Pen brk.
 
 
@@ -49,19 +49,19 @@ Broom sweep.
 usedMemory2 := Broom keptAlloc.
 #Pen write: usedMemory2, brk.
 
-4 times: { i | Pen write: i. }.
+4 times: { :i Pen write: i. }.
 Pen brk.
-4 to: 1 step: -1 do: { i | Pen write: i. }.
+4 to: 1 step: -1 do: { :i Pen write: i. }.
 Pen brk.
-( 1 > 2 ) ifFalse: {\ Pen write: 'BLOCK 1', brk. }.
-( 2 > 1 ) ifTrue:  {\ Pen write: 'BLOCK 2', brk. }.
+( 1 > 2 ) ifFalse: { Pen write: 'BLOCK 1', brk. }.
+( 2 > 1 ) ifTrue:  { Pen write: 'BLOCK 2', brk. }.
 
 i := 0.
-{\ ^( i < 3). } whileTrue: {\ Pen write: i. i +=: 1. }.
+{ ^( i < 3). } whileTrue: { Pen write: i. i +=: 1. }.
 Pen brk.
 
 i := 3.
-{\ ^( i > 0). } whileTrue: {\ Pen write: i. i := i - 1. }.
+{ ^( i > 0). } whileTrue: { Pen write: i. i := i - 1. }.
 Pen brk.
 
 Broom sweep.
@@ -69,8 +69,8 @@ usedMemory3 := Broom keptAlloc.
 #Pen write: usedMemory3, brk.
 
 #memory counters need to be equal!
-( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {\
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {
 	Pen write: 'No memory leaks here'.
-}, ifFalse: {\
+}, ifFalse: {
 	Pen write: 'Leaking memory...'.
 }.

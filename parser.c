@@ -253,7 +253,9 @@ ctr_tnode* ctr_cparse_block() {
 	codeList->type = CTR_AST_NODE_INSTRLIST;
 	t = ctr_clex_tok();
 	first = 1;
-	while(t == CTR_TOKEN_REF) {
+	while(t == CTR_TOKEN_COLON) {
+		/* okay we have new parameter, load it */
+		t = ctr_clex_tok();
 		ctr_tlistitem* paramListItem = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
 		ctr_tnode* paramItem = ctr_cparse_create_node( CTR_AST_NODE );
 		long l = ctr_clex_tok_value_length();
@@ -271,10 +273,6 @@ ctr_tnode* ctr_cparse_block() {
 		}
 		t = ctr_clex_tok();
 	}
-	if (t != CTR_TOKEN_BLOCKPIPE) {
-		ctr_cparse_emit_error_unexpected( t, "Expected |.\n" );
-	}
-	t = ctr_clex_tok();
 	first = 1;
 	while((first || t == CTR_TOKEN_DOT)) {
 		ctr_tlistitem* codeListItem;

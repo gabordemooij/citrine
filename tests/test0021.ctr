@@ -1,5 +1,5 @@
-(2 < 9) ifTrue: {\ Pen write: 'Yes, nine is less than ten.'. }.
-(9 < 2) ifTrue: {\ Pen write: 'My logic fails'. }.
+(2 < 9) ifTrue: { Pen write: 'Yes, nine is less than ten.'. }.
+(9 < 2) ifTrue: { Pen write: 'My logic fails'. }.
 Pen write: (-2 + 6).
 Pen write: (-3 - -3).
 TrueIsNice := 3.

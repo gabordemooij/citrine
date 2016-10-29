@@ -1,14 +1,14 @@
 #Test Shell fluid API
 
 #delete files if necessary
-{\ File new: '/tmp/from.txt', delete. } catch: {\}, run.
-{\ File new: '/tmp/to.txt', delete. } catch: {\}, run.
+{ File new: '/tmp/from.txt', delete. } catch: {}, run.
+{ File new: '/tmp/to.txt', delete. } catch: {}, run.
 
 #confirm base condition
-File new: '/tmp/to.txt', exists ifFalse: {\
+File new: '/tmp/to.txt', exists ifFalse: {
 	Pen write: 'Confirmed. Target file does not exist.\n'.
 }.
-File new: '/tmp/from.txt', exists ifFalse: {\
+File new: '/tmp/from.txt', exists ifFalse: {
 	Pen write: 'Confirmed. Source file does not exist.\n'.
 }.
 
@@ -19,7 +19,7 @@ Shell touch: '/tmp/from.txt', echo: '"hello world" > /tmp/from.txt'.
 #now use the fluid shell API to perform a copy action
 Shell cp: '/tmp/from.txt /tmp/to.txt'.
 
-File new: '/tmp/to.txt', exists ifTrue: {\
+File new: '/tmp/to.txt', exists ifTrue: {
 	Pen write: 'Confirmed. Target file has been created by shell.\n'.
 }.
 

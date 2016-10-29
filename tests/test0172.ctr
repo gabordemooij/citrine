@@ -34,8 +34,8 @@ usedMemory3 := Broom keptAlloc.
 #Pen write: usedMemory3, brk.
 
 #memory counters need to be equal!
-( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {\
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {
 	Pen write: 'No memory leaks here'.
-}, ifFalse: {\
+}, ifFalse: {
 	Pen write: 'Leaking memory...'.
 }.

@@ -3,18 +3,18 @@
 #object property.
 
 CoffeeGrounds := Object new.
-CoffeeGrounds on: 'extract' do: {\ ^ 'coffee'. }.
+CoffeeGrounds on: 'extract' do: { ^ 'coffee'. }.
 
 CoffeeMachine := Object new.
-CoffeeMachine on: 'init' do: {\ 
+CoffeeMachine on: 'init' do: {
 	my coffeegrounds := CoffeeGrounds new.
 }.
-CoffeeMachine on: 'new' do: {\
+CoffeeMachine on: 'new' do: {
 	^ CoffeeMachine `new init.
 }.
 
-CoffeeMachine on: 'makeTea' do: {\	^ (my tealeaves extract). }. #tealeaves is not defined!
-CoffeeMachine on: 'makeCoffee' do: {\ ^ (my coffeegrounds extract). }.
+CoffeeMachine on: 'makeTea' do: {	^ (my tealeaves extract). }. #tealeaves is not defined!
+CoffeeMachine on: 'makeCoffee' do: { ^ (my coffeegrounds extract). }.
 
 coffeeDream := CoffeeMachine new.
 

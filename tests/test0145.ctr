@@ -1,6 +1,6 @@
 #NOAST
-3 times: {\
-	3 times: {\
+3 times: {
+	3 times: {
 		thisBlock error: 'Oops'.
 	}.
 }.

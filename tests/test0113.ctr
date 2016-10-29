@@ -1,17 +1,17 @@
 #Test continue message
 Pen write: 'Continue for-loop, No - before 6 and up.', brk.
-1 to: 10 step: 1 do: { i |
+1 to: 10 step: 1 do: { :i
 	Pen write: i, brk.
 	(i > 4) continue.
 	Pen write: '-'.
 }.
 
 x := 0.
-xIsLessThan10 := {\ ^( x < 10 ). }.
+xIsLessThan10 := { ^( x < 10 ). }.
 #0-4
 Pen brk.
 Pen write: 'Continue while-true, No --> before 5 and up.', brk.
-xIsLessThan10 whileTrue: {\
+xIsLessThan10 whileTrue: {
 	Pen write: 'iteration #' + x, brk.
 	x +=: 1.
 	((x < 5) not) continue.
@@ -21,7 +21,7 @@ xIsLessThan10 whileTrue: {\
 #5,4
 Pen brk.
 Pen write: 'Continue while-false, No - before 3 only.', brk.
-{\ ^(x = 0). } whileFalse: {\
+{ ^(x = 0). } whileFalse: {
 	Pen write: 'iteration #' + x, brk.
 	x -=: 1.
 	(x = 3) continue.
@@ -31,7 +31,7 @@ Pen write: 'Continue while-false, No - before 3 only.', brk.
 #1-4
 Pen brk.
 Pen write: 'Continue times-loop, No ||| before 3.', brk.
-5 times: { i |
+5 times: { :i
 	Pen write: 'iteration #' + i, brk.
 	(i = 2) continue.
 	Pen write: '|||'.
@@ -40,14 +40,14 @@ Pen write: 'Continue times-loop, No ||| before 3.', brk.
 Pen brk.
 
 #nothing should happen, no error
-{\ True continue. Pen write: 'dont write this!', brk. } run.
+{ True continue. Pen write: 'dont write this!', brk. } run.
 
 #nothing should happen, no error
-{\ True continue. Pen write: 'dont write this!', brk. } catch: {\ Pen write: 'Dont catch this!'. }, run.
+{ True continue. Pen write: 'dont write this!', brk. } catch: { Pen write: 'Dont catch this!'. }, run.
 
 #test each-loops
 Pen write: 'Test Array each-loop: 0, ... ,2', brk.
-(Array <- 1 ; 2 ; 3) map: { i |
+(Array <- 1 ; 2 ; 3) map: { :i
 	(i = 1) continue.
 	Pen write: 'iteration #' + i, brk.
 }.
@@ -55,7 +55,7 @@ Pen write: 'Test Array each-loop: 0, ... ,2', brk.
 Pen write: 'Test Map each-loop: c only', brk.
 m := Map new.
 m put: 'first' at: 'a', put: 'second' at: 'b', put: 'third' at: 'c'.
-m each: { k v |
+m each: { :k :v
 	(k != 'c') continue.
 	Pen write: 'iteration' + k + v, brk.
 }.

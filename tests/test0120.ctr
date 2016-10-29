@@ -1,13 +1,13 @@
 #Demonstrates/tests how to override the Pen object alias to implement
 #output buffering
 ? := Object new.
-? on: 'init' do: {\
+? on: 'init' do: {
 	my buffer := ''.
 }.
-? on: '>' do: { str |
+? on: '>' do: { :str
 	my buffer := my buffer + str.
 }.
-? on: 'buffer' do: {\ ^ my buffer. }.
+? on: 'buffer' do: { ^ my buffer. }.
 ? init.
 ?>world<?.
 b := (? buffer).

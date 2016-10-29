@@ -1,7 +1,7 @@
 Cat := Object new.
-Cat on: 'make' do: {\
+Cat on: 'make' do: {
 	var cat := Object new.
-	cat on: 'meow' do: {\
+	cat on: 'meow' do: {
 		Pen write: 'meow!'.
 	}.
 	^cat.

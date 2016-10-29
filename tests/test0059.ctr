@@ -1,7 +1,7 @@
 #Objects in arrays need to be preserved as well
 #if their containing array is still in scope
 z := Array new.
-{\
+{
 	var x := 'hello'.
 	z push: x.
 } run.

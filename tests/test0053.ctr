@@ -1,16 +1,16 @@
-60 * {\
+60 * {
 	var x := Dice roll.
-	(x <= 6) ifFalse: {\ Pen write: 'FAIL'. }.
-	(x >=0) ifFalse: {\ Pen write: 'FAIL'. }.
+	(x <= 6) ifFalse: { Pen write: 'FAIL'. }.
+	(x >=0) ifFalse: { Pen write: 'FAIL'. }.
 	x := Dice rollWithSides: 3.
-	(x < 3) ifFalse: {\ Pen write: 'FAIL'. }.
-	(x>-1) ifFalse: {\ Pen write: 'FAIL'. }.
+	(x < 3) ifFalse: { Pen write: 'FAIL'. }.
+	(x>-1) ifFalse: { Pen write: 'FAIL'. }.
 	x := ((Boolean flip) toNumber).
-	(x = 0 or: x = 1) ifFalse: {\ Pen write: 'FAIL'. }.
+	(x = 0 or: x = 1) ifFalse: { Pen write: 'FAIL'. }.
 	x := ((True flip) toNumber).
-	(x = 0 or: x = 1) ifFalse: {\ Pen write: 'FAIL'. }.
+	(x = 0 or: x = 1) ifFalse: { Pen write: 'FAIL'. }.
 	x := (Boolean flip either: 'HEAD' or: 'TAIL').
-	(x = 'HEAD' or: x = 'TAIL') ifFalse: {\ Pen write: 'FAIL'. }.
+	(x = 'HEAD' or: x = 'TAIL') ifFalse: { Pen write: 'FAIL'. }.
 }.
 Pen write: 'DONE'.
 

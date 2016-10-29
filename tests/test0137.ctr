@@ -5,7 +5,7 @@ Broom mode: 0.
 
 x := 0.
 y := 'Hello'.
-q := {\}.
+q := {}.
 p := True.
 a := Array <- 1 ; 2 ; 3 ; 4.
 
@@ -23,7 +23,7 @@ usedMemory1 := Broom keptAlloc.
 
 x := 1.
 y := 'Hello'.
-q := {\}.
+q := {}.
 p := True.
 a := Array <- 1 ; 2 ; 3 ; 5.
 
@@ -35,7 +35,7 @@ usedMemory2 := Broom keptAlloc.
 
 x := 2.
 y := 'Hello'.
-q := {\}.
+q := {}.
 p := True.
 a := Array <- 1 ; 2 ; 3 ; 4.
 
@@ -47,7 +47,7 @@ usedMemory3 := Broom keptAlloc.
 
 x := 3.
 y := 'Hello'.
-q := {\}.
+q := {}.
 p := True.
 a := Array <- 1 ; 2 ; 3 ; 5.
 
@@ -61,7 +61,7 @@ usedMemory4 := Broom keptAlloc.
 
 x := 4.
 y := 'Hello'.
-q := {\}.
+q := {}.
 p := True.
 a := Array <- 1 ; 2 ; 3 ; 4.
 
@@ -71,9 +71,9 @@ usedMemory5 := Broom keptAlloc.
 #Pen write: x, brk.
 #Pen write: usedMemory5, brk.
 
-(usedMemory1 = usedMemory2 = usedMemory3 = usedMemory4 = usedMemory5) ifTrue: {\ 
+(usedMemory1 = usedMemory2 = usedMemory3 = usedMemory4 = usedMemory5) ifTrue: {
 	Pen write: 'Memory usage remains stable.', brk.
-}, else: {\
+}, else: {
 	Pen write: 'Used memory not stable.', brk.
 	Pen write: usedMemory1, brk.
 	Pen write: usedMemory2, brk.

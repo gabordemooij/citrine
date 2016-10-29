@@ -1,10 +1,10 @@
 #Test Simplified OOP - override and call super
 Animal := Object new.
-Animal on: 'makeSound' do: {\
+Animal on: 'makeSound' do: {
 	Pen write: '?'.
 }.
 Cat := Animal new.
-Cat on: 'makeSound' do: {\
+Cat on: 'makeSound' do: {
 	Pen write: 'meow!'.
 	me `makeSound. #call makeSound on parent.
 }.

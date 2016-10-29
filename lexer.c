@@ -30,7 +30,6 @@ char* ctr_clex_desc_tok_blockclose = "}";
 char* ctr_clex_desc_tok_colon = ":";
 char* ctr_clex_desc_tok_dot = ".";
 char* ctr_clex_desc_tok_chain = ",";
-char* ctr_clex_desc_tok_blockpipe = "|";
 char* ctr_clex_desc_tok_booleanyes = "True";
 char* ctr_clex_desc_tok_booleanno = "False";
 char* ctr_clex_desc_tok_nil = "Nil";
@@ -55,7 +54,6 @@ uint8_t ctr_clex_is_delimiter( char symbol ) {
 	|| symbol == ')'
 	|| symbol == ','
 	|| symbol == '.'
-	|| symbol == '|'
 	|| symbol == ':'
 	|| symbol == ' ' );
 }
@@ -110,9 +108,6 @@ char* ctr_clex_tok_describe(int token)
 			break;
 		case CTR_TOKEN_BLOCKOPEN:
 			description = ctr_clex_desc_tok_blockopen;
-			break;
-		case CTR_TOKEN_BLOCKPIPE:
-			description = ctr_clex_desc_tok_blockpipe;
 			break;
 		case CTR_TOKEN_BOOLEANNO:
 			description = ctr_clex_desc_tok_booleanno;
@@ -306,8 +301,6 @@ int ctr_clex_tok() {
 		}
 	}
 
-	if (c == '|' || c == '\\') { ctr_code++; return CTR_TOKEN_BLOCKPIPE; }
-
 	while(
 	!isspace(c) && (
 		c != '#' &&
@@ -315,8 +308,6 @@ int ctr_clex_tok() {
 		c != ')' &&
 		c != '{' &&
 		c != '}' &&
-		c != '|' &&
-		c !='\\' &&
 		c !='.'  &&
 		c !=','  &&
 		c !='^'  &&

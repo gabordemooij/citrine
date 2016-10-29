@@ -3,7 +3,7 @@
 
 j := 1.
 
-func := {\
+func := {
 
 	Pen write: 'Nested call #' + j, brk.
 	j +=: 1.

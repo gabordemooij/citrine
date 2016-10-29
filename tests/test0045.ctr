@@ -1,9 +1,9 @@
-{\
+{
 	Pen write: 'hi there!'.
 	thisBlock error: 'oops'.
 	Pen write: 'hi there!'.
-	{\ Pen write: 'dont print this'. } run.
-} catch: { e | 
+	{ Pen write: 'dont print this'. } run.
+} catch: { :e 
 	Pen write: 'got ya!'. 
 	Pen write: e.
 }, run.

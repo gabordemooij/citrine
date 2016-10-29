@@ -1,5 +1,5 @@
 #test array key value iteration (added later)
 welcome := Array <- 'Hello' ; 'World' ; 'Welcome' ; 'To' ; 'Citrine'.
-welcome each: { key value |
+welcome each: { :key :value
 	Pen write: key + ':'+ value, brk.
 }.

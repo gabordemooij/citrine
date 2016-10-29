@@ -1,10 +1,10 @@
 #File Seek test
 
 #delete files if necessary
-{\ File new: '/tmp/seek_test.txt', delete. } catch: {\}, run.
+{ File new: '/tmp/seek_test.txt', delete. } catch: {}, run.
 
 #confirm base condition
-File new: '/tmp/seek_test.txt', exists ifFalse: {\
+File new: '/tmp/seek_test.txt', exists ifFalse: {
 	Pen write: 'Confirmed. Target file does not exist.\n'.
 }.
 

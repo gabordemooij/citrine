@@ -1,15 +1,15 @@
 #Test the Citrine equivalent of 'closures'
 
-makeAdder := { x |
-	var f := { y | ^ (my x + y). } set: 'x' value: x. 
+makeAdder := { :x
+	var f := { :y ^ (my x + y). } set: 'x' value: x. 
 	^ f.
 }.
 
-mapper := { array func |
-	var mapping := { i | my q put: (my f applyTo: (my q @ i)) at: i. } 
+mapper := { :array :func
+	var mapping := { :i my q put: (my f applyTo: (my q @ i)) at: i. } 
 	set: 'q' value: array,
 	set: 'f' value: func.
-	(array count) times: { i | mapping applyTo: i. }.
+	(array count) times: { :i mapping applyTo: i. }.
 }.
 
 a := Array <- 1; 2; 3.

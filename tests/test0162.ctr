@@ -8,7 +8,7 @@ usedMemory4 := 0.
 Broom mode: 0.
 
 f := File new: '/tmp/citrine_test_file.txt'.
-f exists: {\ f delete. }.
+f exists: { f delete. }.
 f write: 'hello world'.
 
 Broom sweep.
@@ -16,7 +16,7 @@ usedMemory1 := Broom keptAlloc.
 #Pen write: usedMemory1, brk.
 
 f := File new: '/tmp/citrine_test_file.txt'.
-f exists: {\ f delete. }.
+f exists: { f delete. }.
 f write: 'hello world'.
 
 Broom sweep.
@@ -24,7 +24,7 @@ usedMemory2 := Broom keptAlloc.
 #Pen write: usedMemory2, brk.
 
 f := File new: '/tmp/citrine_test_file.txt'.
-f exists: {\ f delete. }.
+f exists: { f delete. }.
 f write: 'hello world'.
 
 Broom sweep.
@@ -32,8 +32,8 @@ usedMemory3 := Broom keptAlloc.
 #Pen write: usedMemory3, brk.
 
 #memory counters need to be equal!
-( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {\
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {
 	Pen write: 'No memory leaks here'.
-}, ifFalse: {\
+}, ifFalse: {
 	Pen write: 'Leaking memory...'.
 }.

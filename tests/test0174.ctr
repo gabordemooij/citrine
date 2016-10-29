@@ -15,7 +15,7 @@ palette
 Pen write: 'number of RGB codes in palette: ' + ( palette count ), brk.
 Pen write: 'RGB code of green is: ' + ( palette @ 'green' ), brk.
 colors := ''.
-( palette each: { name code |
+( palette each: { :name :code
 		colors := colors + ( name + ':' + code ).
 } ).
 Pen write: 'All colors in palette: ' + colors, brk.
@@ -32,7 +32,7 @@ palette
 Pen write: 'number of RGB codes in palette: ' + ( palette count ), brk.
 Pen write: 'RGB code of green is: ' + ( palette @ 'green' ), brk.
 colors := ''.
-( palette each: { name code |
+( palette each: { :name :code
 		colors := colors + ( name + ':' + code ).
 } ).
 Pen write: 'All colors in palette: ' + colors, brk.
@@ -48,7 +48,7 @@ palette
 Pen write: 'number of RGB codes in palette: ' + ( palette count ), brk.
 Pen write: 'RGB code of green is: ' + ( palette @ 'green' ), brk.
 colors := ''.
-( palette each: { name code |
+( palette each: { :name :code
 		colors := colors + ( name + ':' + code ).
 } ).
 Pen write: 'All colors in palette: ' + colors, brk.
@@ -59,8 +59,8 @@ usedMemory3 := Broom keptAlloc.
 #Pen write: usedMemory3, brk.
 
 #memory counters need to be equal!
-( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {\
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {
 	Pen write: 'No memory leaks here'.
-}, ifFalse: {\
+}, ifFalse: {
 	Pen write: 'Leaking memory...'.
 }.

@@ -1,12 +1,12 @@
 f1 := File new: 'notafile'.
 f2 := File new: '/tmp/test.txt'.
-(f2 exists) ifTrue: {\ f2 delete.}.
+(f2 exists) ifTrue: { f2 delete.}.
 Pen write: f2 path.
 f2 write: 'Hello!'.
 f2 append: 'World!'.
 Pen write: f2 read.
-(f2 exists) ifTrue: {\ Pen write: '!'. }.
-(f1 exists) ifTrue: {\ Pen write: '!'. }.
+(f2 exists) ifTrue: { Pen write: '!'. }.
+(f1 exists) ifTrue: { Pen write: '!'. }.
 Pen write: f2 size, write: f1 size.
 f2 delete. Pen write: f2 size.
 

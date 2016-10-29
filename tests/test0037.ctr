@@ -17,10 +17,10 @@ Pen write: ' y = ' + y.
 #strings
 #objects
 q := Object new.
-q on: 'setProperty:' do: { x |
+q on: 'setProperty:' do: { :x
 	my prop := x.
 }.
-q on: 'getProperty' do: {\
+q on: 'getProperty' do: {
 	^ my prop.
 }.
 q setProperty: 9.

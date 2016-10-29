@@ -1,4 +1,4 @@
-{\
+{
 	var a := Array new.
 	a push: 1.
 	a push: 2.
@@ -14,7 +14,7 @@
 	a put: 9 at: 0.
 	Pen write: (a join: ','), brk.
 	a put: 6 at: -1.
-} catch: { e |
+} catch: { :e
 	Pen write: 'Uncatched error has occurred.\n' + e, brk.
 }, run.
 

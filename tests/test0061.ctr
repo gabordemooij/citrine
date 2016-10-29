@@ -5,12 +5,12 @@ z := a.
 c := Nil.
 q := Object new.
 p := q.
-(a equals: a) ifTrue: {\ Pen write: 'Y1'. }. #equal, same var
-(a equals: b) ifTrue: {\ Pen write: 'Y2'. }. #not equal, different var
-(a equals: c) ifTrue: {\ Pen write: 'Y3'. }. #not equal, c is Nil
-(a equals: z) ifTrue: {\ Pen write: 'Y4'. }. #not equal, copy by value
-(z equals: a) ifTrue: {\ Pen write: 'Y5'. }. #not equal, copy by value
-(q equals: q) ifTrue: {\ Pen write: 'Y6'. }. #equal, copy by reference
-(p equals: q) ifTrue: {\ Pen write: 'Y7'. }. #equal, copy by reference
-(p equals: a) ifTrue: {\ Pen write: 'Y8'. }. #not equal, different var
-(p equals: Nil) ifTrue: {\ Pen write: 'Y9'. }. #not equal
+(a equals: a) ifTrue: { Pen write: 'Y1'. }. #equal, same var
+(a equals: b) ifTrue: { Pen write: 'Y2'. }. #not equal, different var
+(a equals: c) ifTrue: { Pen write: 'Y3'. }. #not equal, c is Nil
+(a equals: z) ifTrue: { Pen write: 'Y4'. }. #not equal, copy by value
+(z equals: a) ifTrue: { Pen write: 'Y5'. }. #not equal, copy by value
+(q equals: q) ifTrue: { Pen write: 'Y6'. }. #equal, copy by reference
+(p equals: q) ifTrue: { Pen write: 'Y7'. }. #equal, copy by reference
+(p equals: a) ifTrue: { Pen write: 'Y8'. }. #not equal, different var
+(p equals: Nil) ifTrue: { Pen write: 'Y9'. }. #not equal

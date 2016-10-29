@@ -1,11 +1,11 @@
 
 Animal := Object new.
-Animal on: 'eat' do: {\
+Animal on: 'eat' do: {
 	Pen write: 'munch! munch!'.
 }.
 
 Cat := Animal new.
-Cat on: 'eat' do: {\
+Cat on: 'eat' do: {
 	Pen write: 'meow', brk.
 	me `eat.
 }.

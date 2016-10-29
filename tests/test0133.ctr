@@ -2,9 +2,9 @@
 
 #should point to object
 Deck := Array new.
-Deck on: 'print' do: {\
+Deck on: 'print' do: {
         var len := me count - 1.
-        1 to: len step: 1 do: { i |
+        1 to: len step: 1 do: { :i
                 var len2 := me count - 1.
                 Pen write: 'len: '.
                 Pen write: len, brk.

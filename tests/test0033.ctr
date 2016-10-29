@@ -1,9 +1,9 @@
 #test assignment to my, same as 32 but with objects
 x := Object new.
-x on: 'set:' do: { v | my val := v. }.
-x on: 'get' do: {\ ^ my val. }.
+x on: 'set:' do: { :v my val := v. }.
+x on: 'get' do: { ^ my val. }.
 a := Object new.
-a on: 'init' do: {\
+a on: 'init' do: {
 	var y := x new.
 	y set: 123.
 	var q := x new.

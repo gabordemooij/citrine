@@ -1,4 +1,3 @@
 #NOAST
-#Test Parser error
-
+#Test No Parser error
 {}.

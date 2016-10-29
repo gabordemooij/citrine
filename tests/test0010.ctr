@@ -1,16 +1,16 @@
 #Test Crude OO (BlackScripty), basic
 Animal := Object new.
-Animal on: 'make' do: {\
+Animal on: 'make' do: {
 	var animal := Object new.
-	animal on: 'makeSound' do: {\
+	animal on: 'makeSound' do: {
 		Pen write: my sound.
 	}.
 	^animal.
 }.
 Cat := Object new.
-Cat on: 'make' do: {\
+Cat on: 'make' do: {
 	var cat := Animal make.
-	cat on: 'init' do: {\
+	cat on: 'init' do: {
 		my sound := 'meow!'.
 	}.
 	cat init.

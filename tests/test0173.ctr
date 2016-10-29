@@ -14,8 +14,8 @@ Pen write: ( 'min: ' + ( a min ) ), brk.
 Pen write: ( 'max: ' + ( a max ) ), brk.
 Pen write: ( '3rd: ' + ( a @ 2 ) ), brk.
 Pen write: ( 'prd: ' + ( a product ) ), brk.
-a sort: { a b | ^ (b - a). }.
-a each: { i e | Pen write: ( i ), brk. }.
+a sort: { :a :b ^ (b - a). }.
+a each: { :i :e Pen write: ( i ), brk. }.
 
 Broom sweep.
 usedMemory1 := Broom keptAlloc.
@@ -28,8 +28,8 @@ Pen write: ( 'min: ' + ( a min ) ), brk.
 Pen write: ( 'max: ' + ( a max ) ), brk.
 Pen write: ( '3rd: ' + ( a @ 2 ) ), brk.
 Pen write: ( 'prd: ' + ( a product ) ), brk.
-a sort: { a b | ^ (b - a). }.
-a each: { i e | Pen write: ( i ), brk. }.
+a sort: { :a :b ^ (b - a). }.
+a each: { :i :e Pen write: ( i ), brk. }.
 
 
 Broom sweep.
@@ -43,8 +43,8 @@ Pen write: ( 'min: ' + ( a min ) ), brk.
 Pen write: ( 'max: ' + ( a max ) ), brk.
 Pen write: ( '3rd: ' + ( a @ 2 ) ), brk.
 Pen write: ( 'prd: ' + ( a product ) ), brk.
-a sort: { a b | ^ (b - a). }.
-a each: { i e | Pen write: ( i ), brk. }.
+a sort: { :a :b ^ (b - a). }.
+a each: { :i :e Pen write: ( i ), brk. }.
 
 
 Broom sweep.
@@ -52,8 +52,8 @@ usedMemory3 := Broom keptAlloc.
 #Pen write: usedMemory3, brk.
 
 #memory counters need to be equal!
-( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {\
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {
 	Pen write: 'No memory leaks here'.
-}, ifFalse: {\
+}, ifFalse: {
 	Pen write: 'Leaking memory...'.
 }.

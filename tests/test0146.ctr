@@ -1,5 +1,5 @@
 #NOAST
 #Trying to assign to an undefined variable should trigger error
-{\
+{
 	undef := 1.
 } run.

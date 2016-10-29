@@ -1,10 +1,10 @@
 Greeter := Object new.
-Greeter on: 'make' do: {\
+Greeter on: 'make' do: {
 	var gr := Object new.
-	gr on: 'setName:' do: { aname |
+	gr on: 'setName:' do: { :aname
 		my name := aname.
 	}.
-	gr on: 'greet' do: {\
+	gr on: 'greet' do: {
 		Pen write: my name.
 	}.
 	^gr.

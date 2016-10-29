@@ -5,8 +5,8 @@ Pen write: 'Trigger an error'.
 #
 #
 #
-{\ Pen write: 'aaa'. 
-	{\
+{ Pen write: 'aaa'. 
+	{
 #	
 		thisBlock error: 'Hi!'.
 		} run.

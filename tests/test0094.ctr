@@ -1,9 +1,9 @@
 #Test recursion
-f := { x |
+f := { :x
 	var result := 0.
-	(x = 1) ifTrue: {\
+	(x = 1) ifTrue: {
 		result := 1.
-	}, else: {\
+	}, else: {
 		result := x * (f applyTo: (x - 1)).
 	}.
 	^ result.

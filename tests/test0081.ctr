@@ -18,7 +18,7 @@ Pen
 
 #now with our toString override (we extend without using basedOn here):
 KeyeableArray := Array new.
-KeyeableArray on: 'toString' do: {\
+KeyeableArray on: 'toString' do: {
 	^ (me count) toString.
 }.
 

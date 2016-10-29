@@ -1,5 +1,5 @@
 x := Object new.
-x on: 'getA' do: {\
+x on: 'getA' do: {
 	my a := 2.
 	a := 1.
 	Pen write: a.
