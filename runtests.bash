@@ -34,8 +34,6 @@ cp plugins/request/libctrrequest.so mods/request/libctrrequest.so
 make clean;
 ./mk.bash
 
-./ctr -c /tmp/dynamic_module.ast tests/assets/asset_mod_for_ast.ctr
-
 j=1
 for i in $(find tests -name 'test*.ctr'); do
 	fitem=$i
