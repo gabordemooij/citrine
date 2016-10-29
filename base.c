@@ -1478,13 +1478,13 @@ ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentLis
  */
 ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sub = ctr_internal_cast2string(argumentList->object);
-	long hlen = myself->value.svalue->vlen;
-	long nlen = sub->value.svalue->vlen;
+	ctr_size hlen = myself->value.svalue->vlen;
+	ctr_size nlen = sub->value.svalue->vlen;
 	ctr_size uchar_index;
 	ctr_size byte_index;
-	char* p = ctr_internal_memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen, 1);
+	char* p = ctr_internal_memmem( myself->value.svalue->value, hlen, sub->value.svalue->value, nlen, 1 );
 	if (p == NULL) return ctr_build_number_from_float((float)-1);
-	byte_index = (ctr_size) ( (uintptr_t) p - (uintptr_t) (myself->value.svalue->value) );
+	byte_index = (ctr_size) ( p - (myself->value.svalue->value) );
 	uchar_index = ctr_getutf8len(myself->value.svalue->value, byte_index);
 	return ctr_build_number_from_float((float) uchar_index);
 }
