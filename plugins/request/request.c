@@ -255,7 +255,7 @@ ctr_object* ctr_request_server_option(ctr_object* myself, ctr_argument* argument
  *
  * Usage:
  *
- * Request host:'localhost' listen:4000 pid:'/var/run/storm.pid' callback: {\
+ * Request host:'localhost' listen:4000 pid:'/var/run/storm.pid' callback: {
  *  Pen write: 'Content-type: text/html\n\n'.
  *  var fname  := Command env: 'DOCUMENT_URI'.
  *  var script := File new: '/var/www/webapp'+fname.

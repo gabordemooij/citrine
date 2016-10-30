@@ -36,7 +36,7 @@ a := a - -1.      #31
 a multiplyBy: 0.5.#15.5
 a := a + (2 toPowerOf: 8).  #271.5
 a := a + (2 toPowerOf: -1). #272
-a := a + (49 squareRoot).   #279
+a := a + (49 sqrt).   #279
 a add: (0 max: 1).          #280
 a add: (2 min: 3).          #282
 Pen write: a.
@@ -58,7 +58,7 @@ a := a - -1.      #31
 a multiplyBy: 0.5.#15.5
 a := a + (2 toPowerOf: 8).  #271.5
 a := a + (2 toPowerOf: -1). #272
-a := a + (49 squareRoot).   #279
+a := a + (49 sqrt).   #279
 a add: (0 max: 1).          #280
 a add: (2 min: 3).          #282
 Pen write: a.
@@ -79,7 +79,7 @@ a := a - -1.      #31
 a multiplyBy: 0.5.#15.5
 a := a + (2 toPowerOf: 8).  #271.5
 a := a + (2 toPowerOf: -1). #272
-a := a + (49 squareRoot).   #279
+a := a + (49 sqrt).   #279
 a add: (0 max: 1).          #280
 a add: (2 min: 3).          #282
 Pen write: a.

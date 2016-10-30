@@ -178,7 +178,10 @@ ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * files map: showName.
- * files map: { key filename files | Pen write: filename, brk. }.
+ * files map: {
+ *   :key :filename :files
+ *   Pen write: filename, brk.
+ * }.
  */
 ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;

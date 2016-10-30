@@ -11,7 +11,7 @@ Broom mode: 0.
 2 exponent factorial.
 Pen write: (11 % 3), brk.
 Pen write: (3.4 round), brk.
-Pen write: (7.1 ceiling), brk.
+Pen write: (7.1 ceil), brk.
 Pen write: (7.9 floor), brk.
 
 Broom sweep.
@@ -22,7 +22,7 @@ usedMemory1 := Broom keptAlloc.
 2 exponent factorial.
 Pen write: (11 % 3), brk.
 Pen write: (3.4 round), brk.
-Pen write: (7.1 ceiling), brk.
+Pen write: (7.1 ceil), brk.
 Pen write: (7.9 floor), brk.
 
 Broom sweep.
@@ -32,7 +32,7 @@ usedMemory2 := Broom keptAlloc.
 2 exponent factorial.
 Pen write: (11 % 3), brk.
 Pen write: (3.4 round), brk.
-Pen write: (7.1 ceiling), brk.
+Pen write: (7.1 ceil), brk.
 Pen write: (7.9 floor), brk.
 
 Broom sweep.

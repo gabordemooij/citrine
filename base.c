@@ -137,8 +137,8 @@ ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
  *
  * Usage:
  *
- * object on: 'greet' do: {\ ... }.
- * object on: 'between:and:' do: {\ ... }.
+ * object on: 'greet' do: { ... }.
+ * object on: 'between:and:' do: { ... }.
  *
  */
 ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
@@ -208,7 +208,7 @@ ctr_object* ctr_build_bool(int truth) {
  *
  * Usage:
  *
- * (True = False) ifFalse: {\ Pen write: 'This is not True!'. }.
+ * (True = False) ifFalse: { Pen write: 'This is not True!'. }.
  */
 ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(ctr_internal_cast2bool(argumentList->object)->value.bvalue == myself->value.bvalue);
@@ -223,7 +223,7 @@ ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * (True != False) ifTrue: {\ Pen write: 'This is not True!'. }.
+ * (True != False) ifTrue: { Pen write: 'This is not True!'. }.
  */
 ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(ctr_internal_cast2bool(argumentList->object)->value.bvalue != myself->value.bvalue);
@@ -279,7 +279,7 @@ ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
  * object is True.
  *
  * Usage:
- * (some expression) ifTrue: {\ ... }.
+ * (some expression) ifTrue: { ... }.
  *
  */
 ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
@@ -303,7 +303,7 @@ ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
  * object is True.
  *
  * Usage:
- * (some expression) ifFalse: {\ ... }.
+ * (some expression) ifFalse: { ... }.
  *
  */
 ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
@@ -664,7 +664,7 @@ ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) 
  *
  * Usage:
  *
- * 7 times: { i | Pen write: i. }.
+ * 7 times: { :i Pen write: i. }.
  *
  * The example above runs the block 7 times. The current iteration
  * number is passed to the block as a parameter (i in this example).
@@ -799,7 +799,7 @@ ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] positive
+ * [Number] pos
  *
  * Returns a boolean indicating wether the number is positive.
  * This message will return a boolean object 'True' if the recipient is
@@ -808,7 +808,7 @@ ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * hope := 0.1.
- * ( hope positive ) ifTrue: {\ Pen write: 'Still a little hope for humanity'. }.
+ * ( hope pos ) ifTrue: { Pen write: 'Still a little hope for humanity'. }.
  *
  * The example above will print the message because hope is higher than 0.
  */
@@ -817,7 +817,7 @@ ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [Number] negative
+ * [Number] neg
  *
  * Returns a boolean indicating wether the number is negative.
  * This message will return a boolean object 'True' if the recipient is
@@ -827,7 +827,7 @@ ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList) 
  * Usage:
  *
  * hope := -1.
- * (hope negative) ifTrue: {\ Pen write: 'No hope left'. }.
+ * (hope neg) ifTrue: { Pen write: 'No hope left'. }.
  *
  * The example above will print the message because the value of the variable
  * hope is less than 0.
@@ -894,7 +894,7 @@ ctr_object* ctr_number_factorial(ctr_object* myself, ctr_argument* argumentList)
  *
  * Usage:
  *
- * 1 to: 5 step: 1 do: { step | Pen write: 'this is step #'+step. }.
+ * 1 to: 5 step: 1 do: { :step Pen write: 'this is step #'+step. }.
  */
 ctr_object* ctr_number_to_step_do(ctr_object* myself, ctr_argument* argumentList) {
 	double startValue = myself->value.nvalue;
@@ -940,7 +940,7 @@ ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] ceiling
+ * [Number] ceil
  *
  * Rounds up the recipient number and returns the next higher integer number
  * as a result.
@@ -948,7 +948,7 @@ ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * x := 4.5.
- * y = x ceiling. #y will be 5
+ * y = x ceil. #y will be 5
  *
  * The example above applies the ceiling function to the recipient (4.5)
  * returning a new number object (5).
@@ -967,14 +967,14 @@ ctr_object* ctr_number_round(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] absolute
+ * [Number] abs
  *
  * Returns the absolute (unsigned, positive) value of the number.
  *
  * Usage:
  *
  * x := -7.
- * y := x absolute. #y will be 7
+ * y := x abs. #y will be 7
  *
  * The example above strips the sign off the value -7 resulting
  * in 7.
@@ -984,14 +984,14 @@ ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] squareRoot
+ * [Number] sqrt
  *
  * Returns the square root of the recipient.
  *
  * Usage:
  *
  * x := 49.
- * y := x squareRoot. #y will be 7
+ * y := x sqrt. #y will be 7
  *
  * The example above takes the square root of 49, resulting in the
  * number 7.
@@ -1001,7 +1001,7 @@ ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] exponent
+ * [Number] exp
  *
  * Returns the exponent of the number.
  */
@@ -1010,7 +1010,7 @@ ctr_object* ctr_number_exp(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] sine
+ * [Number] sin
  *
  * Returns the sine of the number.
  */
@@ -1020,7 +1020,7 @@ ctr_object* ctr_number_sin(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] cosine
+ * [Number] cos
  *
  * Returns the cosine of the number.
  */
@@ -1029,7 +1029,7 @@ ctr_object* ctr_number_cos(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] tangent
+ * [Number] tan
  *
  * Caculates the tangent of a number.
  */
@@ -1038,7 +1038,7 @@ ctr_object* ctr_number_tan(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] arctangent
+ * [Number] atan
  *
  * Caculates the arctangent of a number.
  */
@@ -1047,7 +1047,7 @@ ctr_object* ctr_number_atan(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] logarithm
+ * [Number] log
  *
  * Calculates the logarithm of a number.
  */
@@ -1805,15 +1805,17 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
  *
  * Literal:
  *
- * { parameters here... | code here... }
- * {\ code without parameters... }
+ * { parameters (if any) here... code here... }
+ *
+ * each parameter has to be prefixed with
+ * a colon (:).
  *
  * Examples:
  *
- * {\ Pen write: 'a simple code block'. } run.
- * { param | Pen write: param. } applyTo: 'write this!'.
- * { a b | ^ a + b. } applyTo: 1 and: 2.
- * { a b c | ^ a + b + c. } applyTo: 1 and: 2 and: 3.
+ * { Pen write: 'a simple code block'. } run.
+ * { :param Pen write: param. } applyTo: 'write this!'.
+ * { :a :b ^ a + b. } applyTo: 1 and: 2.
+ * { :a :b :c ^ a + b + c. } applyTo: 1 and: 2 and: 3.
  *
  */
 ctr_object* ctr_build_block(ctr_tnode* node) {
@@ -1885,7 +1887,8 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
  * Usage:
  *
  * x := 0.
- * {\ ^(x < 6). } whileFalse: {\ x add: 1. }. #increment x until it reaches 6.
+ * { ^(x < 6). } whileFalse:
+ * { x add: 1. }. #increment x until it reaches 6.
  *
  * Here we increment variable x by one until it reaches 6.
  * While the number x is lower than 6 we keep incrementing it.
@@ -1911,7 +1914,8 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
  * Usage:
  *
  * x := 0.
- * {\ ^(x > 5). } whileFalse: {\ x add: 1. }. #increment x until it reaches 6.
+ * { ^(x > 5). }
+ * whileFalse: { x add: 1. }. #increment x until it reaches 6.
  *
  * Here we increment variable x by one until it reaches 6.
  * While the number x is not higher than 5 we keep incrementing it.
@@ -1938,7 +1942,7 @@ ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList
  * 
  * Usage:
  * 
- * {\ Pen write: 'Hello World'. } run. #prints 'Hello World'
+ * { Pen write: 'Hello World'. } run. #prints 'Hello World'
  * 
  * The example above will run the code inside the block and display
  * the greeting.
@@ -1958,7 +1962,7 @@ ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * shout := {\ Pen write: (my message + '!!!'). }.
+ * shout := { Pen write: (my message + '!!!'). }.
  * shout set: 'message' value: 'hello'.
  * shout run.
  *
@@ -1990,9 +1994,9 @@ ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Example:
  *
- * {\
+ * {
  *   thisBlock error: 'oops!'.
- * } catch: { errorMessage |
+ * } catch: { :errorMessage
  *   Pen write: errorMessage.
  * }, run.
  */
@@ -2011,9 +2015,9 @@ ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
  * Example:
  *
  * #Raise error on division by zero.
- * {\
+ * {
  *    var z := 4 / 0.
- * } catch: { errorMessage |
+ * } catch: { :errorMessage
  *    Pen write: e, brk.
  * }, run.
  */
