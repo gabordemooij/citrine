@@ -325,6 +325,7 @@ void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func
 	ctr_object* methodObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNATFUNC);
 	methodObject->value.fvalue = func;
 	ctr_internal_object_add_property(o, key, methodObject, 1);
+	methodObject->info.sticky = 1;
 }
 
 /**
