@@ -75,6 +75,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_heap_free( pathString );
 	if (!f) {
 		CtrStdFlow = ctr_build_string_from_cstring( "Unable to open file." );
+		CtrStdFlow->info.sticky = 1;
 		return CtrStdNil;
 	}
 	fseek(f, 0, SEEK_END);
@@ -121,6 +122,7 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_heap_free( pathString );
 	if (!f) {
 		CtrStdFlow = ctr_build_string_from_cstring( "Unable to open file." );
+		CtrStdFlow->info.sticky = 1;
 		return CtrStdNil;
 	}
 	fwrite(str->value.svalue->value, sizeof(char), str->value.svalue->vlen, f);
@@ -150,6 +152,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_heap_free( pathString );
 	if (!f) {
 		CtrStdFlow = ctr_build_string_from_cstring("Unable to open file.\0");
+		CtrStdFlow->info.sticky = 1;
 		return CtrStdNil;
 	}
 	fwrite(str->value.svalue->value, sizeof(char), str->value.svalue->vlen, f);
@@ -227,6 +230,7 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_heap_free( pathString );
 	if (r!=0) {
 		CtrStdFlow = ctr_build_string_from_cstring( "Unable to delete file." );
+		CtrStdFlow->info.sticky = 1;
 		return CtrStdNil;
 	}
 	return myself;
@@ -283,6 +287,7 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 	if ( myself->value.rvalue != NULL ) {
 		ctr_heap_free( rs );
 		CtrStdFlow = ctr_build_string_from_cstring( "File has already been opened." );
+		CtrStdFlow->info.sticky = 1;
 		return myself;
 	}
 	if ( pathObj == NULL ) return myself;
@@ -347,6 +352,7 @@ ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) 
 	buffer = (char*) ctr_heap_allocate(bytes);
 	if (buffer == NULL) {
 		CtrStdFlow = ctr_build_string_from_cstring("Cannot allocate memory for file buffer.");
+		CtrStdFlow->info.sticky = 1;
 		return ctr_build_string_from_cstring("");
 	}
 	fread(buffer, sizeof(char), (int)bytes, (FILE*)myself->value.rvalue->ptr);
@@ -406,7 +412,10 @@ ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.rvalue->type != 1) return myself;
 	offset = (long int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	error = fseek((FILE*)myself->value.rvalue->ptr, offset, SEEK_CUR);
-	if (error) CtrStdFlow = ctr_build_string_from_cstring("Seek failed.");
+	if (error) {
+		CtrStdFlow = ctr_build_string_from_cstring("Seek failed.");
+		CtrStdFlow->info.sticky = 1;
+	}
 	return myself;
 }
 
@@ -430,7 +439,10 @@ ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList)
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
 	error = fseek((FILE*)myself->value.rvalue->ptr, 0, SEEK_SET);
-	if (error) CtrStdFlow = ctr_build_string_from_cstring("Seek rewind failed.");
+	if (error) {
+		CtrStdFlow = ctr_build_string_from_cstring("Seek rewind failed.");
+		CtrStdFlow->info.sticky = 1;
+	}
 	return myself;
 }
 
@@ -456,6 +468,9 @@ ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
 	error = fseek((FILE*)myself->value.rvalue->ptr, 0, SEEK_END);
-	if (error) CtrStdFlow = ctr_build_string_from_cstring("Seek end failed.");
+	if (error) {
+		CtrStdFlow = ctr_build_string_from_cstring("Seek end failed.");
+		CtrStdFlow->info.sticky = 1;
+	}
 	return myself;
 }

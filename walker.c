@@ -36,6 +36,7 @@ ctr_object* ctr_cwlk_return(ctr_tnode* node) {
  * Processes a message sending operation.
  */
 ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
+	int sticky = 0;
 	char wasReturn = 0;
 	ctr_object* result;
 	ctr_tlistitem* eitem = paramNode->nodes;
@@ -117,7 +118,10 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 				node = argumentList->node;
 			}
 		}
+		sticky = r->info.sticky;
+		r->info.sticky = 1;
 		result = ctr_send_message(r, message, l, a);
+		r->info.sticky = sticky;
 		aItem = a;
 		if (CtrStdFlow == NULL) {
 			ctr_callstack_index --;
@@ -145,7 +149,7 @@ ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
 	ctr_tnode* assignee = assignmentItems->node;
 	ctr_tlistitem* valueListItem = assignmentItems->next;
 	ctr_tnode* value = valueListItem->node;
-	ctr_object* x = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	ctr_object* x;
 	ctr_object* result;
 	if (CtrStdFlow == NULL) {
 		ctr_callstack[ctr_callstack_index++] = assignee;
@@ -270,6 +274,12 @@ ctr_object* ctr_cwlk_run(ctr_tnode* program) {
 		}
 		wasReturn = 0;
 		result = ctr_cwlk_expr(node, &wasReturn);
+		if ( wasReturn == 0 ) {
+			/* Perform garbage collection cycle */
+			if ( ( ctr_gc_mode & 1 ) && ctr_gc_alloc > ( ctr_gc_memlimit * 0.8 ) ) {
+				ctr_gc_internal_collect();
+			}
+		}
 		if (!li->next) break;
 		li = li->next;
 	}

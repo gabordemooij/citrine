@@ -427,6 +427,7 @@ void ctr_open_context() {
 	ctr_context_id++;
 	if (ctr_context_id > 299) {
 		CtrStdFlow = ctr_build_string_from_cstring( "Too many nested calls." );
+		CtrStdFlow->info.sticky = 1;
 	}
 	if (ctr_context_id > 300) {
 		printf("Too many nested calls.\n");
@@ -483,6 +484,7 @@ ctr_object* ctr_find(ctr_object* key) {
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdFlow = ctr_build_string(full_message, message_size);
+		CtrStdFlow->info.sticky = 1;
 		ctr_heap_free( full_message );
 		ctr_heap_free( key_name );
 		return CtrStdNil;
@@ -513,6 +515,7 @@ ctr_object* ctr_find_in_my(ctr_object* key) {
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdFlow = ctr_build_string(full_message, message_size);
+		CtrStdFlow->info.sticky = 1;
 		ctr_heap_free( full_message );
 		ctr_heap_free( key_name );
 		return CtrStdNil;
@@ -553,6 +556,7 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdFlow = ctr_build_string(full_message, message_size);
+		CtrStdFlow->info.sticky = 1;
 		ctr_heap_free( full_message );
 		ctr_heap_free( key_name );
 		return;
@@ -871,7 +875,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	ctr_object* (*funct)(ctr_object* receiverObject, ctr_argument* argumentList);
 	ctr_object* msg = NULL;
 	int argCount;
-	if (CtrStdFlow != NULL) return NULL; /* Error mode, ignore subsequent messages until resolved. */
+	if (CtrStdFlow != NULL) return CtrStdNil; /* Error mode, ignore subsequent messages until resolved. */
 	methodObject = NULL;
 	searchObject = receiverObject;
 	if (vlen > 1 && message[0] == '`') {

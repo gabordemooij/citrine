@@ -188,6 +188,7 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 	int i = 0;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
 		CtrStdFlow = ctr_build_string_from_cstring("Expected Block.\0");
+		CtrStdFlow->info.sticky = 1;
 	}
 	block->info.sticky = 1;
 	for(i = 0; i < myself->value.avalue->head; i++) {
@@ -330,6 +331,7 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 	i = (int) getIndex->value.nvalue;
 	if (myself->value.avalue->head <= i || i < 0) {
 		CtrStdFlow = ctr_build_string_from_cstring("Index out of bounds.\0");
+		CtrStdFlow->info.sticky = 1;
 		return CtrStdNil;
 	}
 	return *(myself->value.avalue->elements + i);
@@ -363,6 +365,7 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 	
 	if (putIndex->value.nvalue < 0) {
 		CtrStdFlow = ctr_build_string_from_cstring("Index out of bounds.\0");
+		CtrStdFlow->info.sticky = 1;
 		return myself;
 	}
 	
@@ -526,6 +529,7 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sorter = argumentList->object;
 	if (sorter->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
 		CtrStdFlow = ctr_build_string_from_cstring("Expected block.\0");
+		CtrStdFlow->info.sticky = 1;
 		return myself;
 	}
 	temp_sorter = sorter;
@@ -644,6 +648,7 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_mapitem* m;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
 		CtrStdFlow = ctr_build_string_from_cstring("Expected Block.\0");
+		CtrStdFlow->info.sticky = 1;
 	}
 	block->info.sticky = 1;
 	m = myself->properties->head;

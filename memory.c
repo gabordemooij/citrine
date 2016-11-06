@@ -67,11 +67,6 @@ void* ctr_heap_allocate( size_t size ) {
 		printf( "Out of memory. Failed to allocate %lu bytes (malloc failed). \n", size );
 	}
 
-	/* Perform garbage collection cycle */
-	if ( ( ctr_gc_mode & 1 ) && ctr_gc_alloc > ( ctr_gc_memlimit * 0.8 ) ) {
-		ctr_gc_internal_collect();
-	}
-
 	/* Store the width of the memory block in the slice itself so we can always find it */
 	block_width = (size_t*) slice_of_memory;
 	*(block_width) = size;
