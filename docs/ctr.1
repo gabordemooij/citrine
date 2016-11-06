@@ -1,24 +1,12 @@
 
 .\" Manpage for ctr.
-.TH man 1 "01 February 2016" "1.0" "CTR man page"
+.TH man 1 "31 October 2016" "1.0" "CTR man page"
 .SH NAME
 ctr \- run a Citrine program
 .SH SYNOPSIS
 ctr [PROGRAM]
 .SH DESCRIPTION
 Citrine\*R is general purpose programming language for UNIX\*R-like operating systems.
-.SH OPTIONS
-
-.BR \-c " "[OUTNAME]
-lexes and parses the program and writes a binary representation to disk under
-the specified filename.
-
-.BR \-i
-displays information about a binary Citrine program
-
-.BR \-r
-runs a binary Citrine program.
-
 .SH REFERENCE MANUAL
 Citrine has 5 literals:
 .RS 4
@@ -31,7 +19,7 @@ Citrine has 5 literals:
 .br
 - Strings 'All Strings are UTF8!'
 .br
-- Code Blocks { parameters | code }
+- Code Blocks { parameters code }
 .br
 
 .RE
@@ -90,6 +78,35 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [Object] do
+.nf
+    
+     Activates 'chain mode'. If chain mode is active, all messages will
+     return the recipient object regardless of their return signature.
+    
+     Usage:
+    
+     a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
+     a do pop shift unshift: 'hi', push: 999, done.
+    
+     Because of 'chain mode' you can do 'a do pop shift' etc, instead of
+    
+     a pop.
+     a shift.
+     etc..
+    
+     The 'do' message tells the object to always return itself and disgard
+     the original return value until the message 'done' has been received.
+.fi
+.BR.BR.BR
+
+.B [Object] done
+.nf
+    
+     Deactivates 'chain mode'.
+.fi
+.BR.BR.BR
+
 .B [Object] on: [String] do: [Block]
 .nf
     
@@ -99,8 +116,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     object on: 'greet' do: {\\ ... }.
-     object on: 'between:and:' do: {\\ ... }.
+     object on: 'greet' do: { ... }.
+     object on: 'between:and:' do: { ... }.
     
 .fi
 .BR.BR.BR
@@ -144,7 +161,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     (True = False) ifFalse: {\\ Pen write: 'This is not True!'. }.
+     (True = False) ifFalse: { Pen write: 'This is not True!'. }.
 .fi
 .BR.BR.BR
 
@@ -156,7 +173,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     (True != False) ifTrue: {\\ Pen write: 'This is not True!'. }.
+     (True != False) ifTrue: { Pen write: 'This is not True!'. }.
 .fi
 .BR.BR.BR
 
@@ -198,7 +215,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      object is True.
     
      Usage:
-     (some expression) ifTrue: {\\ ... }.
+     (some expression) ifTrue: { ... }.
     
 .fi
 .BR.BR.BR
@@ -210,7 +227,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      object is True.
     
      Usage:
-     (some expression) ifFalse: {\\ ... }.
+     (some expression) ifFalse: { ... }.
     
 .fi
 .BR.BR.BR
@@ -246,7 +263,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Boolean] and: [other]
+.B [Boolean] & [other]
 .nf
     
      Returns True if both the object value is True and the
@@ -254,12 +271,12 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     a and: b
+     a & b
     
 .fi
 .BR.BR.BR
 
-.B [Boolean] nor: [other]
+.B [Boolean] ! [other]
 .nf
     
      Returns True if the object value is False and the
@@ -267,12 +284,12 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     a nor: b
+     a ! b
     
 .fi
 .BR.BR.BR
 
-.B [Boolean] or: [other]
+.B [Boolean] | [other]
 .nf
     
      Returns True if either the object value is True or the
@@ -280,11 +297,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     a or: b
+     a | b
 .fi
 .BR.BR.BR
 
-.B [Boolean] xor: [other]
+.B [Boolean] ? [other]
 .nf
     
      Returns True if either the object value is True or the
@@ -292,7 +309,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     a xor: b
+     a ? b
 .fi
 .BR.BR.BR
 
@@ -328,7 +345,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] >= [other]
+.B [Number] >=: [other]
 .nf
     
      Returns True if the number is higher than or equal to other number.
@@ -342,7 +359,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] <= [other]
+.B [Number] <=: [other]
 .nf
     
      Returns True if the number is less than or equal to other number.
@@ -356,7 +373,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] != [other]
+.B [Number] !=: [other]
 .nf
     
      Returns True if the number does not equal the other number.
@@ -397,7 +414,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] add: [Number]
+.B [Number] +=: [Number]
 .nf
     
      Increases the number ITSELF by the specified amount, this message will change the
@@ -413,7 +430,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] subtract: [number]
+.B [Number] -=: [number]
 .nf
     
      Decreases the number ITSELF by the specified amount, this message will change the
@@ -437,14 +454,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     7 times: { i | Pen write: i. }.
+     7 times: { :i Pen write: i. }.
     
      The example above runs the block 7 times. The current iteration
      number is passed to the block as a parameter (i in this example).
 .fi
 .BR.BR.BR
 
-.B [Number] multiplyBy: [Number]
+.B [Number] *=: [Number]
 .nf
     
      Multiplies the number ITSELF by multiplier, this message will change the
@@ -453,7 +470,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := 5.
-     x multiplyBy: 2. #x is now 10.
+     x *=: 2. #x is now 10.
     
      Use this message to apply the operation to the object itself instead
      of creating and returning a new object.
@@ -468,7 +485,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] divideBy: [Number]
+.B [Number] /=: [Number]
 .nf
     
      Divides the number ITSELF by divider, this message will change the
@@ -477,14 +494,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := 10.
-     x divideBy: 2. #x will now be 5.
+     x /=: 2. #x will now be 5.
     
      Use this message to apply the operation to the object itself instead
      of generating a new object.
 .fi
 .BR.BR.BR
 
-.B [Number] modulo: [modulo]
+.B [Number] % [modulo]
 .nf
     
      Returns the modulo of the number. This message will return a new
@@ -492,7 +509,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     x := 11 modulo: 3. #x will now be 2
+     x := 11 % 3. #x will now be 2
     
      Use this message to apply the operation of division to the
      object itself instead of generating a new one.
@@ -514,7 +531,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] positive
+.B [Number] pos
 .nf
     
      Returns a boolean indicating wether the number is positive.
@@ -524,13 +541,13 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      hope := 0.1.
-     ( hope positive ) ifTrue: {\\ Pen write: 'Still a little hope for humanity'. }.
+     ( hope pos ) ifTrue: { Pen write: 'Still a little hope for humanity'. }.
     
      The example above will print the message because hope is higher than 0.
 .fi
 .BR.BR.BR
 
-.B [Number] negative
+.B [Number] neg
 .nf
     
      Returns a boolean indicating wether the number is negative.
@@ -541,7 +558,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      hope := -1.
-     (hope negative) ifTrue: {\\ Pen write: 'No hope left'. }.
+     (hope neg) ifTrue: { Pen write: 'No hope left'. }.
     
      The example above will print the message because the value of the variable
      hope is less than 0.
@@ -588,7 +605,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     1 to: 5 step: 1 do: { step | Pen write: 'this is step #'+step. }.
+     1 to: 5 step: 1 do: { :step Pen write: 'this is step #'+step. }.
 .fi
 .BR.BR.BR
 
@@ -607,7 +624,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] ceiling
+.B [Number] ceil
 .nf
     
      Rounds up the recipient number and returns the next higher integer number
@@ -616,7 +633,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := 4.5.
-     y = x ceiling. #y will be 5
+     y = x ceil. #y will be 5
     
      The example above applies the ceiling function to the recipient (4.5)
      returning a new number object (5).
@@ -630,7 +647,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] absolute
+.B [Number] abs
 .nf
     
      Returns the absolute (unsigned, positive) value of the number.
@@ -638,14 +655,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := -7.
-     y := x absolute. #y will be 7
+     y := x abs. #y will be 7
     
      The example above strips the sign off the value -7 resulting
      in 7.
 .fi
 .BR.BR.BR
 
-.B [Number] squareRoot
+.B [Number] sqrt
 .nf
     
      Returns the square root of the recipient.
@@ -653,49 +670,49 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := 49.
-     y := x squareRoot. #y will be 7
+     y := x sqrt. #y will be 7
     
      The example above takes the square root of 49, resulting in the
      number 7.
 .fi
 .BR.BR.BR
 
-.B [Number] exponent
+.B [Number] exp
 .nf
     
      Returns the exponent of the number.
 .fi
 .BR.BR.BR
 
-.B [Number] sine
+.B [Number] sin
 .nf
     
      Returns the sine of the number.
 .fi
 .BR.BR.BR
 
-.B [Number] cosine
+.B [Number] cos
 .nf
     
      Returns the cosine of the number.
 .fi
 .BR.BR.BR
 
-.B [Number] tangent
+.B [Number] tan
 .nf
     
      Caculates the tangent of a number.
 .fi
 .BR.BR.BR
 
-.B [Number] arctangent
+.B [Number] atan
 .nf
     
      Caculates the arctangent of a number.
 .fi
 .BR.BR.BR
 
-.B [Number] logarithm
+.B [Number] log
 .nf
     
      Calculates the logarithm of a number.
@@ -728,6 +745,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
      backslash '\\' character.
     
 .fi
+.BR.BR.BR
+
 .BR.BR.BR
 
 .BR.BR.BR
@@ -822,10 +841,12 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns the character at the specified position (UTF8 aware).
+     You may also use the alias '@'.
     
      Usage:
     
      ('hello' at: 2). #l
+     ('hello' @ 2). #l
 .fi
 .BR.BR.BR
 
@@ -833,6 +854,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns the byte at the specified position (in bytes).
+     Note that you cannot use the '@' message here because that will
+     return the unicode point at the specified position, not the byte.
     
      Usage:
      ('abc' byteAt: 1). #98
@@ -992,15 +1015,17 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Literal:
     
-     { parameters here... | code here... }
-     {\\ code without parameters... }
+     { parameters (if any) here... code here... }
+    
+     each parameter has to be prefixed with
+     a colon (:).
     
      Examples:
     
-     {\\ Pen write: 'a simple code block'. } run.
-     { param | Pen write: param. } applyTo: 'write this!'.
-     { a b | ^ a + b. } applyTo: 1 and: 2.
-     { a b c | ^ a + b + c. } applyTo: 1 and: 2 and: 3.
+     { Pen write: 'a simple code block'. } run.
+     { :param Pen write: param. } applyTo: 'write this!'.
+     { :a :b ^ a + b. } applyTo: 1 and: 2.
+     { :a :b :c ^ a + b + c. } applyTo: 1 and: 2 and: 3.
     
 .fi
 .BR.BR.BR
@@ -1023,7 +1048,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := 0.
-     {\\ ^(x < 6). } whileFalse: {\\ x add: 1. }. #increment x until it reaches 6.
+     { ^(x < 6). } whileFalse:
+     { x add: 1. }. #increment x until it reaches 6.
     
      Here we increment variable x by one until it reaches 6.
      While the number x is lower than 6 we keep incrementing it.
@@ -1040,7 +1066,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := 0.
-     {\\ ^(x > 5). } whileFalse: {\\ x add: 1. }. #increment x until it reaches 6.
+     { ^(x > 5). }
+     whileFalse: { x add: 1. }. #increment x until it reaches 6.
     
      Here we increment variable x by one until it reaches 6.
      While the number x is not higher than 5 we keep incrementing it.
@@ -1058,7 +1085,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      
      Usage:
      
-     {\\ Pen write: 'Hello World'. } run. #prints 'Hello World'
+     { Pen write: 'Hello World'. } run. #prints 'Hello World'
      
      The example above will run the code inside the block and display
      the greeting.
@@ -1073,7 +1100,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     shout := {\\ Pen write: (my message + '!!!'). }.
+     shout := { Pen write: (my message + '!!!'). }.
      shout set: 'message' value: 'hello'.
      shout run.
     
@@ -1100,9 +1127,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Example:
     
-     {\\
+     {
        thisBlock error: 'oops!'.
-     } catch: { errorMessage |
+     } catch: { :errorMessage
        Pen write: errorMessage.
      }, run.
 .fi
@@ -1118,9 +1145,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Example:
     
      #Raise error on division by zero.
-     {\\
+     {
         var z := 4 / 0.
-     } catch: { errorMessage |
+     } catch: { :errorMessage
         Pen write: e, brk.
      }, run.
 .fi
@@ -1137,7 +1164,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      
      or, the short form:
      
-     a := Array <- 1 ; 2 ; 3.
+     a := Array < 1 ; 2 ; 3.
      
 .fi
 .BR.BR.BR
@@ -1161,7 +1188,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     a := Array <- 8 ; 4 ; 2 ; 16.
+     a := Array < 8 ; 4 ; 2 ; 16.
      m := a min. #2
     
 .fi
@@ -1174,7 +1201,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     a := Array <- 8 ; 4 ; 2 ; 16.
+     a := Array < 8 ; 4 ; 2 ; 16.
      m := a max. #16
     
 .fi
@@ -1188,7 +1215,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     a := Array <- 1 ; 2 ; 3.
+     a := Array < 1 ; 2 ; 3.
      s := a sum. #6
     
      In the example above, the sum of array will be stored in s and
@@ -1205,7 +1232,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     a := Array <- 2 ; 4 ; 8.
+     a := Array < 2 ; 4 ; 8.
      p := a product. #64
     
      In the example above, the product of the array will be calculated
@@ -1226,7 +1253,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      files map: showName.
-     files map: { key filename files | Pen write: filename, brk. }.
+     files map: {
+       :key :filename :files
+       Pen write: filename, brk.
+     }.
 .fi
 .BR.BR.BR
 
@@ -1237,7 +1267,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Array] <- [Element1] ; [Element2] ; ...
+.B [Array] < [Element1] ; [Element2] ; ...
 .nf
     
      Creates a new instance of an array and initializes this
@@ -1246,7 +1276,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     a := Array <- 1 ; 2 ; 3.
+     a := Array < 1 ; 2 ; 3.
     
      Note that the ; symbol here is an alias for 'push:'.
 .fi
@@ -1288,7 +1318,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
      
-     fruits := Array <- 'apples' ; 'oranges' ; 'bananas'.
+     fruits := Array < 'apples' ; 'oranges' ; 'bananas'.
      fruits at: 1. #returns 'oranges'
 .fi
 .BR.BR.BR
@@ -1335,7 +1365,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Array] from: [Begin] to: [End]
+.B [Array] from: [Begin] length: [End]
 .nf
     
      Copies part of an array indicated by from and to and
@@ -1485,13 +1515,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .BR.BR.BR
 
 .B [File] include
-.nf
-    
-     Includes the file as a piece of executable code.
-.fi
-.BR.BR.BR
-
-.B [File] run
 .nf
     
      Includes the file as a piece of executable code.
@@ -1952,7 +1975,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     Request host:'localhost' listen:4000 pid:'/var/run/storm.pid' callback: {\\
+     Request host:'localhost' listen:4000 pid:'/var/run/storm.pid' callback: {
       Pen write: 'Content-type: text/html\\n\\n'.
       var fname  := Command env: 'DOCUMENT_URI'.
       var script := File new: '/var/www/webapp'+fname.

@@ -19,18 +19,6 @@ ctr \- run a Citrine program
 ctr [PROGRAM]
 .SH DESCRIPTION
 Citrine\*R is general purpose programming language for UNIX\*R-like operating systems.
-.SH OPTIONS
-
-.BR \-c " "[OUTNAME]
-lexes and parses the program and writes a binary representation to disk under
-the specified filename.
-
-.BR \-i
-displays information about a binary Citrine program
-
-.BR \-r
-runs a binary Citrine program.
-
 .SH REFERENCE MANUAL
 Citrine has 5 literals:
 .RS 4
