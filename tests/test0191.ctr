@@ -1,0 +1,6 @@
+#after a return statement, no statements may be executed
+Pen write: ( {
+	Pen write: 'START', brk.
+	^ 'END'.
+	Pen write: 'DONT', brk.
+} run ), brk.
