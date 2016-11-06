@@ -274,11 +274,12 @@ ctr_object* ctr_cwlk_run(ctr_tnode* program) {
 		}
 		wasReturn = 0;
 		result = ctr_cwlk_expr(node, &wasReturn);
-		if ( wasReturn == 0 ) {
-			/* Perform garbage collection cycle */
-			if ( ( ctr_gc_mode & 1 ) && ctr_gc_alloc > ( ctr_gc_memlimit * 0.8 ) ) {
-				ctr_gc_internal_collect();
-			}
+		if ( wasReturn ) {
+			break;
+		}
+		/* Perform garbage collection cycle */
+		if ( ( ctr_gc_mode & 1 ) && ctr_gc_alloc > ( ctr_gc_memlimit * 0.8 ) ) {
+			ctr_gc_internal_collect();
 		}
 		if (!li->next) break;
 		li = li->next;
