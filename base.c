@@ -101,7 +101,7 @@ ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * a := Array <- 'hello' ; 'world' ; True ; Nil ; 666.
+ * a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
  * a do pop shift unshift: 'hi', push: 999, done.
  *
  * Because of 'chain mode' you can do 'a do pop shift' etc, instead of
