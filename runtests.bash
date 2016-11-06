@@ -41,7 +41,7 @@ for i in $(find tests -name 'test*.ctr'); do
 	fexpect="${i%%.ctr}.exp"
 	result=`./ctr ${fitem}`
 	expected=`cat $fexpect`
-	if [ "$result" == "$expected" ]; then
+	if [ "$result" = "$expected" ]; then
 		echo "[$j]"
 		j=$((j+1))
 	else
