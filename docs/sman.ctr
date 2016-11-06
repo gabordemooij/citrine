@@ -7,10 +7,12 @@
 
 # Start: ctr sman.ctr > ctr.1 ;mandoc -O style=ctrstyle.css -Thtml ctr.1 > docs.html ;mandoc -a ctr.1
 
+Broom memoryLimit: 400000.
+Broom mode: 1.
 
 ?>
 .\" Manpage for ctr.
-.TH man 1 "01 February 2016" "1.0" "CTR man page"
+.TH man 1 "31 October 2016" "1.0" "CTR man page"
 .SH NAME
 ctr \- run a Citrine program
 .SH SYNOPSIS
@@ -41,7 +43,7 @@ Citrine has 5 literals:
 .br
 - Strings 'All Strings are UTF8!'
 .br
-- Code Blocks { parameters | code }
+- Code Blocks { parameters code }
 .br
 
 .RE
@@ -49,31 +51,31 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .br
 <?.
 
-files := Array <- 
+files := Array <
 			'../base.c' ;
 			'../collections.c' ;
 			'../file.c' ;
 			'../system.c' ;
 			'../plugins/request/request.c'.
 
-files each: { index file |
 
+files each: { :index :file
 	var f := File new: file.
 	var str := f read.
 	var commentBlocks := str split: '/**'.
 	commentBlocks shift.
 	
-	(commentBlocks count) times: {\
+	(commentBlocks count) times: {
 		var comment := commentBlocks shift.
 		var lines   := comment split: '\n'.
-		lines count > 3 ifTrue: {\
+		lines count > 3 ifTrue: {
 		
 			#print the headline
 			var headline := lines @ 1.
 			
 			Pen write: '.BR.BR.BR', brk brk.
 			
-			((headline indexOf: '@internal') = -1) ifTrue: {\
+			((headline indexOf: '@internal') = -1) ifTrue: {
 				
 				Pen write: '.B ' + (headline skip: 3), brk.
 				
@@ -82,19 +84,20 @@ files each: { index file |
 				Pen write: '.nf', brk.
 				var line := ''.
 				var n := 2.
-				{\
+				{
 					line := lines at: n. 
 					^ ((line indexOf: '*/') = -1). 
 				}
-				whileTrue: {\
+				whileTrue: {
 						line := line replace: '\\' with: '\\\\'.
 						Pen write: '    '+(line skip: 2), brk.
-						n add: 1.
+						n +=: 1.
 				}.
 				Pen write: '.fi', brk.
 			}.
 		}.
 	}.
+	file close.
 }.
 
 
