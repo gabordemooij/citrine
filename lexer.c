@@ -65,7 +65,7 @@ uint8_t ctr_clex_is_delimiter( char symbol ) {
  */
 void ctr_clex_emit_error( char* message )
 {
-	printf( message );
+	printf( "%s", message );
 	exit(1);
 }
 
