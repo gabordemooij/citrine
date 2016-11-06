@@ -1,15 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 
 set -x
 set -v
 
 OS=`uname -s`
 LDFLAGS='-shared'
-if [ $OS = "Darwin" ]; then
+if [ "$OS" = "Darwin" ]; then
   LDFLAGS='-shared -undefined dynamic_lookup'
 fi
 #Remove .so
-find . -name *.so | xargs rm
+find . -name "*.so" -exec rm {} +
 
 #For plugin test, compile Percolator plugin
 cd plugins/percolator;
