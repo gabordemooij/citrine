@@ -494,7 +494,7 @@ ctr_object* ctr_number_higherThan(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [Number] >= [other]
+ * [Number] >=: [other]
  *
  * Returns True if the number is higher than or equal to other number.
  */
@@ -514,7 +514,7 @@ ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [Number] <= [other]
+ * [Number] <=: [other]
  *
  * Returns True if the number is less than or equal to other number.
  */
@@ -534,7 +534,7 @@ ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] != [other]
+ * [Number] !=: [other]
  *
  * Returns True if the number does not equal the other number.
  */
