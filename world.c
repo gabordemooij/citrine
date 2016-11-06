@@ -424,17 +424,13 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
  */
 void ctr_open_context() {
 	ctr_object* context;
-	ctr_context_id++;
-	if (ctr_context_id > 299) {
+	if (ctr_context_id >= 299) {
 		CtrStdFlow = ctr_build_string_from_cstring( "Too many nested calls." );
-	}
-	if (ctr_context_id > 300) {
-		printf("Too many nested calls.\n");
-		exit(1);
+		return;
 	}
 	context = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	context->info.sticky = 1;
-	ctr_contexts[ctr_context_id] = context;
+	ctr_contexts[++ctr_context_id] = context;
 }
 
 /**
