@@ -37,9 +37,6 @@ ctr_object* ctr_cwlk_return(ctr_tnode* node) {
  */
 ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 	char wasReturn = 0;
-	int oldStickyArgument[255];
-	int argumentIndexNumber;
-	int oldStickyRecipient;
 	ctr_object* result;
 	ctr_tlistitem* eitem = paramNode->nodes;
 	ctr_tnode* receiverNode = eitem->node;
@@ -64,7 +61,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 			if (CtrStdFlow == NULL) {
 				ctr_callstack_index--;
 			}
-			if ( r == NULL ) {
+			if (!r) {
 				exit(1);
 			}
 			break;
@@ -93,15 +90,10 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 			printf("Cannot send message to receiver of type: %d \n", receiverNode->type);
 			break;
 	}
-
 	while(li->next) {
 		ctr_argument* a;
 		ctr_argument* aItem;
 		ctr_size l;
-		if (r != NULL ) {
-			oldStickyRecipient = r->info.sticky;
-			r->info.sticky = 1; /* make sure receiver does not get gc'ed meanwhile (might be a literal!) */
-		}
 		li = li->next;
 		msgnode = li->node;
 		message = msgnode->value;
@@ -115,14 +107,8 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		if (argumentList) {
 			ctr_tnode* node;
 			node = argumentList->node;
-			argumentIndexNumber = 0;
 			while(1) {
 				ctr_object* o = ctr_cwlk_expr(node, &wasReturn);
-				if ( o != NULL ) {
-					oldStickyArgument[argumentIndexNumber] = o->info.sticky;
-					o->info.sticky = 1; /* arguments should not be gc'ed either... */
-					argumentIndexNumber++;
-				}
 				aItem->object = o;
 				aItem->next = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 				aItem = aItem->next;
@@ -136,21 +122,12 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		if (CtrStdFlow == NULL) {
 			ctr_callstack_index --;
 		}
-		argumentIndexNumber = 0;
 		while(aItem->next) {
 			a = aItem;
-			if ( a->object != NULL ) {
-				a->object->info.sticky = oldStickyArgument[argumentIndexNumber]; /* until after the call... */
-				argumentIndexNumber++;
-			}
 			aItem = aItem->next;
 			ctr_heap_free( a );
 		}
 		ctr_heap_free( aItem );
-		/*  reset sticky of recipient last (imagine r being same as argument...) */
-		if ( r != NULL ) {
-			r->info.sticky = oldStickyRecipient;
-		}
 		r = result;
 	}
 	if (recipientName) recipientName->info.sticky = 0;
