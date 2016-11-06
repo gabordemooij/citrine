@@ -907,7 +907,7 @@ ctr_object* ctr_number_to_step_do(ctr_object* myself, ctr_argument* argumentList
 	if (startValue == endValue) return myself;
 	forward = (startValue < endValue);
 	if (codeBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_build_string_from_cstring("Expected block.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Expected block.");
 		return myself;
 	}
 	while(((forward && curValue <= endValue) || (!forward && curValue >= endValue)) && !CtrStdFlow) {

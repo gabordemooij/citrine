@@ -187,7 +187,7 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
 	int i = 0;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_build_string_from_cstring("Expected Block.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Expected Block.");
 	}
 	block->info.sticky = 1;
 	for(i = 0; i < myself->value.avalue->head; i++) {
@@ -329,7 +329,7 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	i = (int) getIndex->value.nvalue;
 	if (myself->value.avalue->head <= i || i < 0) {
-		CtrStdFlow = ctr_build_string_from_cstring("Index out of bounds.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Index out of bounds.");
 		return CtrStdNil;
 	}
 	return *(myself->value.avalue->elements + i);
@@ -337,7 +337,7 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * [Array] @ [Index]
- * 
+ *
  * Alias for [Array] at: [Index]
  */
 
@@ -347,25 +347,25 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
  * Puts a value in the array at the specified index.
  * Array will be automatically expanded if the index is higher than
  * the maximum index of the array.
- * 
+ *
  * Usage:
- * 
+ *
  * fruits := Array new.
  * fruits put: 'apples' at: 5.
  */
 ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
-	
+
 	ctr_object* putValue = argumentList->object;
 	ctr_object* putIndex = ctr_internal_cast2number(argumentList->next->object);
 	ctr_size putIndexNumber;
 	ctr_size head;
 	ctr_size tail;
-	
+
 	if (putIndex->value.nvalue < 0) {
-		CtrStdFlow = ctr_build_string_from_cstring("Index out of bounds.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Index out of bounds.");
 		return myself;
 	}
-	
+
 	head = (ctr_size) myself->value.avalue->head;
 	tail = (ctr_size) myself->value.avalue->tail;
 	putIndexNumber = (ctr_size) putIndex->value.nvalue;
@@ -525,7 +525,7 @@ int ctr_sort_cmp(const void * a, const void * b) {
 ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sorter = argumentList->object;
 	if (sorter->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_build_string_from_cstring("Expected block.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Expected block.");
 		return myself;
 	}
 	temp_sorter = sorter;
@@ -643,7 +643,7 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
 	ctr_mapitem* m;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_build_string_from_cstring("Expected Block.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Expected Block.");
 	}
 	block->info.sticky = 1;
 	m = myself->properties->head;
