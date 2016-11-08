@@ -80,7 +80,7 @@ int ctr_internal_object_is_equal(ctr_object* object1, ctr_object* object2) {
 		return 0;
 	}
 	if (object1 == object2) return 1;
-	return 0;		
+	return 0;
 }
 
 /**
@@ -111,12 +111,12 @@ ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key
 		if (owner->methods->size == 0) {
 			return NULL;
 		}
-		head = owner->methods->head; 
+		head = owner->methods->head;
 	} else {
 		if (owner->properties->size == 0) {
 			return NULL;
 		}
-		head = owner->properties->head; 
+		head = owner->properties->head;
 	}
 	while(head) {
 		if ((hashKey == head->hashKey) && ctr_internal_object_is_equal(head->key, key)) {
@@ -143,12 +143,12 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
 		if (owner->methods->size == 0) {
 			return;
 		}
-		head = owner->methods->head; 
+		head = owner->methods->head;
 	} else {
 		if (owner->properties->size == 0) {
 			return;
 		}
-		head = owner->properties->head; 
+		head = owner->properties->head;
 	}
 	while(head) {
 		if ((hashKey == head->hashKey) && ctr_internal_object_is_equal(head->key, key)) {
@@ -172,7 +172,7 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
 						owner->methods->head = NULL;
 					}
 				}
-				owner->methods->size --; 
+				owner->methods->size --;
 			} else {
 				if (owner->properties->head == head) {
 					if (head->next) {
@@ -235,7 +235,7 @@ void ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_ob
  * InternalObjectSetProperty
  *
  * Sets a property on an object.
- */ 
+ */
 void ctr_internal_object_set_property(ctr_object* owner, ctr_object* key, ctr_object* value, int is_method) {
 	ctr_internal_object_delete_property(owner, key, is_method);
 	ctr_internal_object_add_property(owner, key, value, is_method);
@@ -324,7 +324,6 @@ void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func
 	ctr_object* methodObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNATFUNC);
 	methodObject->value.fvalue = func;
 	ctr_internal_object_add_property(o, key, methodObject, 1);
-	methodObject->info.sticky = 1;
 }
 
 /**
@@ -426,6 +425,7 @@ void ctr_open_context() {
 	ctr_object* context;
 	if (ctr_context_id >= 299) {
 		CtrStdFlow = ctr_build_string_from_cstring( "Too many nested calls." );
+		CtrStdFlow->info.sticky = 1;
 		return;
 	}
 	context = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -479,6 +479,7 @@ ctr_object* ctr_find(ctr_object* key) {
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdFlow = ctr_build_string(full_message, message_size);
+		CtrStdFlow->info.sticky = 1;
 		ctr_heap_free( full_message );
 		ctr_heap_free( key_name );
 		return CtrStdNil;
@@ -509,6 +510,7 @@ ctr_object* ctr_find_in_my(ctr_object* key) {
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdFlow = ctr_build_string(full_message, message_size);
+		CtrStdFlow->info.sticky = 1;
 		ctr_heap_free( full_message );
 		ctr_heap_free( key_name );
 		return CtrStdNil;
@@ -549,6 +551,7 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 		memcpy(full_message, message, strlen(message));
 		memcpy(full_message + strlen(message), key_name, key->value.svalue->vlen);
 		CtrStdFlow = ctr_build_string(full_message, message_size);
+		CtrStdFlow->info.sticky = 1;
 		ctr_heap_free( full_message );
 		ctr_heap_free( key_name );
 		return;
@@ -598,7 +601,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdNil, ctr_build_string_from_cstring( "isNil" ), &ctr_nil_is_nil );
 	CtrStdNil->link = CtrStdObject;
 	CtrStdNil->info.sticky = 1;
-	
+
 	/* Boolean */
 	CtrStdBool = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "ifTrue:" ), &ctr_bool_iftrue );
@@ -867,7 +870,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	ctr_object* (*funct)(ctr_object* receiverObject, ctr_argument* argumentList);
 	ctr_object* msg = NULL;
 	int argCount;
-	if (CtrStdFlow != NULL) return NULL; /* Error mode, ignore subsequent messages until resolved. */
+	if (CtrStdFlow != NULL) return CtrStdNil; /* Error mode, ignore subsequent messages until resolved. */
 	methodObject = NULL;
 	searchObject = receiverObject;
 	if (vlen > 1 && message[0] == '`') {
@@ -963,7 +966,7 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
  *
  * CTRAssignValueObject
  *
- * Assigns a value to a property of an object. 
+ * Assigns a value to a property of an object.
  */
 ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 	ctr_object* object = NULL;
@@ -999,7 +1002,7 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
  *
  * CTRAssignValueObjectLocal
  *
- * Assigns a value to a local of an object. 
+ * Assigns a value to a local of an object.
  */
 ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* o) {
 	ctr_object* object = NULL;

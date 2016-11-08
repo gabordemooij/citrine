@@ -7,7 +7,7 @@
 
 # Start: ctr sman.ctr > ctr.1 ;mandoc -O style=ctrstyle.css -Thtml ctr.1 > docs.html ;mandoc -a ctr.1
 
-Broom memoryLimit: 4600000.
+Broom memoryLimit: 400000.
 Broom mode: 1.
 
 ?>
@@ -19,18 +19,6 @@ ctr \- run a Citrine program
 ctr [PROGRAM]
 .SH DESCRIPTION
 Citrine\*R is general purpose programming language for UNIX\*R-like operating systems.
-.SH OPTIONS
-
-.BR \-c " "[OUTNAME]
-lexes and parses the program and writes a binary representation to disk under
-the specified filename.
-
-.BR \-i
-displays information about a binary Citrine program
-
-.BR \-r
-runs a binary Citrine program.
-
 .SH REFERENCE MANUAL
 Citrine has 5 literals:
 .RS 4
@@ -110,7 +98,3 @@ is still considered 'alpha' stage and cannot be expected to be reliable.
 
 .SH AUTHOR
 Gabor de Mooij and the Citrine Community
-
-<?.
-
-Pen write: (Broom dust).

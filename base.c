@@ -101,7 +101,7 @@ ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * a := Array <- 'hello' ; 'world' ; True ; Nil ; 666.
+ * a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
  * a do pop shift unshift: 'hi', push: 999, done.
  *
  * Because of 'chain mode' you can do 'a do pop shift' etc, instead of
@@ -147,12 +147,14 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* methodName = argumentList->object;
 	if (methodName->info.type != CTR_OBJECT_TYPE_OTSTRING) {
 		CtrStdFlow = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
+		CtrStdFlow->info.sticky = 1;
 		return myself;
 	}
 	nextArgument = argumentList->next;
 	methodBlock = nextArgument->object;
 	if (methodBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
 		CtrStdFlow = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
+		CtrStdFlow->info.sticky = 1;
 		return myself;
 	}
 	ctr_internal_object_add_property(myself, methodName, methodBlock, 1);
@@ -492,7 +494,7 @@ ctr_object* ctr_number_higherThan(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [Number] >= [other]
+ * [Number] >=: [other]
  *
  * Returns True if the number is higher than or equal to other number.
  */
@@ -512,7 +514,7 @@ ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [Number] <= [other]
+ * [Number] <=: [other]
  *
  * Returns True if the number is less than or equal to other number.
  */
@@ -532,7 +534,7 @@ ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] != [other]
+ * [Number] !=: [other]
  *
  * Returns True if the number does not equal the other number.
  */
@@ -725,6 +727,7 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number b = otherNum->value.nvalue;
 	if (b == 0) {
 		CtrStdFlow = ctr_build_string_from_cstring("Division by zero.");
+		CtrStdFlow->info.sticky = 1;
 		return myself;
 	}
 	return ctr_build_number_from_float((a/b));
@@ -1895,6 +1898,11 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
  * Don't forget to use the return ^ symbol in the first block.
  */
 ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList) {
+	int sticky1, sticky2;
+	sticky1 = myself->info.sticky;
+	sticky2 = argumentList->object->info.sticky;
+	myself->info.sticky = 1;
+	argumentList->object->info.sticky = 1;
 	while (1 && !CtrStdFlow) {
 		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, NULL));
 		if (result->value.bvalue == 0 || CtrStdFlow) break;
@@ -1902,6 +1910,8 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
 		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL; /* consume continue */
 	}
 	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
+	myself->info.sticky = sticky1;
+	argumentList->object->info.sticky = sticky2;
 	return myself;
 }
 
@@ -2002,6 +2012,7 @@ ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
 	CtrStdFlow = argumentList->object;
+	CtrStdFlow->info.sticky = 1;
 	return myself;
 }
 
