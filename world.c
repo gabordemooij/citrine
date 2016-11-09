@@ -263,7 +263,6 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
 		begin = haystack + hlen - nlen;
 		last = haystack - 1;
 	}
-	char* q = calloc( sizeof(char), nlen );
 	for(cur = begin; cur!=last; cur += step) {
 		if (memcmp(cur,needle,nlen) == 0) return cur;
 	}

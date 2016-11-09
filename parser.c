@@ -506,7 +506,7 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 		e->type = CTR_AST_NODE_EXPRMESSAGE;
 		nodes = ctr_cparse_messages(r, mode);
 		if (nodes == NULL) {
-			int t = ctr_clex_tok();
+			ctr_clex_tok();
 			ctr_clex_putback();
 			return r; /* no messages, then just return receiver (might be in case of argument). */
 		}
