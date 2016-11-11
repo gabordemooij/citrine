@@ -19,11 +19,11 @@
  * Usage:
  *
  * a := Array new.
- * 
+ *
  * or, the short form:
- * 
+ *
  * a := Array < 1 ; 2 ; 3.
- * 
+ *
  */
 ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTARRAY);
@@ -126,7 +126,7 @@ ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
  * s := a sum. #6
  *
  * In the example above, the sum of array will be stored in s and
- * it's value will be 6. 
+ * it's value will be 6.
  */
 ctr_object* ctr_array_sum(ctr_object* myself, ctr_argument* argumentList) {
 	double sum = 0;
@@ -174,7 +174,7 @@ ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList) {
  * The map message will pass the following arguments to the block, the key,
  * the value and a reference to the array itself. The last argument might seem
  * redundant but allows for a more functional programming style.
- * 
+ *
  * Usage:
  *
  * files map: showName.
@@ -187,7 +187,7 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
 	int i = 0;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_build_string_from_cstring("Expected Block.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Expected Block.");
 		CtrStdFlow->info.sticky = 1;
 	}
 	block->info.sticky = 1;
@@ -318,7 +318,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
  * Note that the fisrt index of the array is index 0.
  *
  * Usage:
- * 
+ *
  * fruits := Array < 'apples' ; 'oranges' ; 'bananas'.
  * fruits at: 1. #returns 'oranges'
  */
@@ -330,7 +330,7 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	i = (int) getIndex->value.nvalue;
 	if (myself->value.avalue->head <= i || i < 0) {
-		CtrStdFlow = ctr_build_string_from_cstring("Index out of bounds.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Index out of bounds.");
 		CtrStdFlow->info.sticky = 1;
 		return CtrStdNil;
 	}
@@ -339,7 +339,7 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * [Array] @ [Index]
- * 
+ *
  * Alias for [Array] at: [Index]
  */
 
@@ -349,26 +349,26 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
  * Puts a value in the array at the specified index.
  * Array will be automatically expanded if the index is higher than
  * the maximum index of the array.
- * 
+ *
  * Usage:
- * 
+ *
  * fruits := Array new.
  * fruits put: 'apples' at: 5.
  */
 ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
-	
+
 	ctr_object* putValue = argumentList->object;
 	ctr_object* putIndex = ctr_internal_cast2number(argumentList->next->object);
 	ctr_size putIndexNumber;
 	ctr_size head;
 	ctr_size tail;
-	
+
 	if (putIndex->value.nvalue < 0) {
-		CtrStdFlow = ctr_build_string_from_cstring("Index out of bounds.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Index out of bounds.");
 		CtrStdFlow->info.sticky = 1;
 		return myself;
 	}
-	
+
 	head = (ctr_size) myself->value.avalue->head;
 	tail = (ctr_size) myself->value.avalue->tail;
 	putIndexNumber = (ctr_size) putIndex->value.nvalue;
@@ -416,7 +416,7 @@ ctr_object* ctr_array_shift(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* shiftedOff;
 	if (myself->value.avalue->tail >= myself->value.avalue->head) {
 		return CtrStdNil;
-	}	
+	}
 	shiftedOff = *(myself->value.avalue->elements + myself->value.avalue->tail);
 	myself->value.avalue->tail++;
 	return shiftedOff;
@@ -528,7 +528,7 @@ int ctr_sort_cmp(const void * a, const void * b) {
 ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sorter = argumentList->object;
 	if (sorter->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_build_string_from_cstring("Expected block.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Expected block.");
 		CtrStdFlow->info.sticky = 1;
 		return myself;
 	}
@@ -541,9 +541,9 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
  * Map
  *
  * Creates a Map object.
- * 
+ *
  * Usage:
- * 
+ *
  * files := Map new.
  * files put: 'readme.txt' at: 'textfile'.
  */
@@ -623,9 +623,9 @@ ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * [Map] @ [Key]
- * 
+ *
  * Alias for [Map] at: [Key].
- * 
+ *
  */
 
 /**
@@ -647,7 +647,7 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
 	ctr_mapitem* m;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_build_string_from_cstring("Expected Block.\0");
+		CtrStdFlow = ctr_build_string_from_cstring("Expected Block.");
 		CtrStdFlow->info.sticky = 1;
 	}
 	block->info.sticky = 1;

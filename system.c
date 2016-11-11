@@ -416,7 +416,7 @@ ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList)
 			page *= 2;
 			buff = (char*) realloc(buff, page * sizeof(char));
 			if (buff == NULL) {
-				CtrStdFlow = ctr_build_string_from_cstring("Out of memory\0");
+				CtrStdFlow = ctr_build_string_from_cstring("Out of memory");
 			}
 		}
 	}

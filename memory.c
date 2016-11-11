@@ -65,6 +65,7 @@ void* ctr_heap_allocate( size_t size ) {
 
 	if ( slice_of_memory == NULL ) {
 		printf( "Out of memory. Failed to allocate %lu bytes (malloc failed). \n", size );
+		exit(1);
 	}
 
 	/* Store the width of the memory block in the slice itself so we can always find it */
@@ -142,7 +143,6 @@ void ctr_heap_free_rest() {
  * the specified size from the allocation bookkeepting variable.
  *
  * @param void*     ptr  pointer to memory to be freed
- * @param uintptr_t size number of bytes to deduct from usage counter
  *
  * @return void
  */

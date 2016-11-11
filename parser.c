@@ -19,19 +19,18 @@ char* ctr_cparse_current_program;
  */
 void ctr_cparse_emit_error_unexpected( int t, char* hint )
 {
-	char* message;
-	printf( "Parse error, unexpected " );
-	message = ctr_clex_tok_describe( t );
-	printf( message );
-	printf( " ( %s: %d )\n", ctr_cparse_current_program, ctr_clex_line_number+1 );
-	printf( hint );
+	char* message = ctr_clex_tok_describe( t );
+	printf( "Parse error, unexpected %s ( %s: %d )\n", message,  ctr_cparse_current_program, ctr_clex_line_number+1);
+	if (hint) {
+		printf( "%s", hint );
+	}
 	exit(1);
 }
 
 /**
  * CTRParserCreateNode
  *
- * Creates a parser node and adds it to the source map. 
+ * Creates a parser node and adds it to the source map.
  */
 ctr_tnode* ctr_cparse_create_node( int type ){
 	ctr_tnode* node = (ctr_tnode*) ctr_heap_allocate_tracked( sizeof( ctr_tnode ) );
@@ -460,7 +459,9 @@ ctr_tnode* ctr_cparse_receiver() {
 		case CTR_TOKEN_PAROPEN:
 			return ctr_cparse_popen();
 		default:
+			/* This function always exits, so return a dummy value. */
 			ctr_cparse_emit_error_unexpected( t, "Expected a message recipient.\n" );
+			return NULL;
 	}
 }
 
@@ -506,7 +507,7 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 		e->type = CTR_AST_NODE_EXPRMESSAGE;
 		nodes = ctr_cparse_messages(r, mode);
 		if (nodes == NULL) {
-			int t = ctr_clex_tok();
+			ctr_clex_tok();
 			ctr_clex_putback();
 			return r; /* no messages, then just return receiver (might be in case of argument). */
 		}

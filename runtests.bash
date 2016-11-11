@@ -1,31 +1,31 @@
-#!/bin/bash
+#!/bin/sh
 
 set -x
 set -v
 
 OS=`uname -s`
 LDFLAGS='-shared'
-if [ $OS = "Darwin" ]; then
+if [ "$OS" = "Darwin" ]; then
   LDFLAGS='-shared -undefined dynamic_lookup'
 fi
 #Remove .so
-find . -name *.so | xargs rm
+find . -name "*.so" -exec rm {} +
 
 #For plugin test, compile Percolator plugin
 cd plugins/percolator;
-gcc -c percolator.c -Wall -Werror -fPIC -o percolator.o
-gcc ${LDFLAGS} -o libctrpercolator.so percolator.o
+cc -c percolator.c -Wall -Werror -fPIC -o percolator.o
+cc ${LDFLAGS} -o libctrpercolator.so percolator.o
 cd ..
 cd ..
 cp plugins/percolator/libctrpercolator.so mods/percolator/libctrpercolator.so
 
 #request test
 cd plugins/request/ccgi-1.2;
-gcc -c ccgi.c -Wall	-Werror -fPIC -o ccgi.o
-gcc -c prefork.c -Wall -Werror -fPIC -o prefork.o
+cc -c ccgi.c -Wall	-Werror -fPIC -o ccgi.o
+cc -c prefork.c -Wall -Werror -fPIC -o prefork.o
 cd ..
-gcc -c request.c -Wall -Werror -fPIC -o request.o
-gcc ${LDFLAGS} -o libctrrequest.so request.o ccgi-1.2/ccgi.o ccgi-1.2/prefork.o
+cc -c request.c -Wall -Werror -fPIC -o request.o
+cc ${LDFLAGS} -o libctrrequest.so request.o ccgi-1.2/ccgi.o ccgi-1.2/prefork.o
 cd ..
 cd ..
 cp plugins/request/libctrrequest.so mods/request/libctrrequest.so
@@ -41,7 +41,7 @@ for i in $(find tests -name 'test*.ctr'); do
 	fexpect="${i%%.ctr}.exp"
 	result=`./ctr ${fitem}`
 	expected=`cat $fexpect`
-	if [ "$result" == "$expected" ]; then
+	if [ "$result" = "$expected" ]; then
 		echo "[$j]"
 		j=$((j+1))
 	else

@@ -80,7 +80,7 @@ int ctr_internal_object_is_equal(ctr_object* object1, ctr_object* object2) {
 		return 0;
 	}
 	if (object1 == object2) return 1;
-	return 0;		
+	return 0;
 }
 
 /**
@@ -111,12 +111,12 @@ ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key
 		if (owner->methods->size == 0) {
 			return NULL;
 		}
-		head = owner->methods->head; 
+		head = owner->methods->head;
 	} else {
 		if (owner->properties->size == 0) {
 			return NULL;
 		}
-		head = owner->properties->head; 
+		head = owner->properties->head;
 	}
 	while(head) {
 		if ((hashKey == head->hashKey) && ctr_internal_object_is_equal(head->key, key)) {
@@ -143,12 +143,12 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
 		if (owner->methods->size == 0) {
 			return;
 		}
-		head = owner->methods->head; 
+		head = owner->methods->head;
 	} else {
 		if (owner->properties->size == 0) {
 			return;
 		}
-		head = owner->properties->head; 
+		head = owner->properties->head;
 	}
 	while(head) {
 		if ((hashKey == head->hashKey) && ctr_internal_object_is_equal(head->key, key)) {
@@ -172,7 +172,7 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
 						owner->methods->head = NULL;
 					}
 				}
-				owner->methods->size --; 
+				owner->methods->size --;
 			} else {
 				if (owner->properties->head == head) {
 					if (head->next) {
@@ -235,7 +235,7 @@ void ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_ob
  * InternalObjectSetProperty
  *
  * Sets a property on an object.
- */ 
+ */
 void ctr_internal_object_set_property(ctr_object* owner, ctr_object* key, ctr_object* value, int is_method) {
 	ctr_internal_object_delete_property(owner, key, is_method);
 	ctr_internal_object_add_property(owner, key, value, is_method);
@@ -263,7 +263,6 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
 		begin = haystack + hlen - nlen;
 		last = haystack - 1;
 	}
-	char* q = calloc( sizeof(char), nlen );
 	for(cur = begin; cur!=last; cur += step) {
 		if (memcmp(cur,needle,nlen) == 0) return cur;
 	}
@@ -424,18 +423,14 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
  */
 void ctr_open_context() {
 	ctr_object* context;
-	ctr_context_id++;
-	if (ctr_context_id > 299) {
+	if (ctr_context_id >= 299) {
 		CtrStdFlow = ctr_build_string_from_cstring( "Too many nested calls." );
 		CtrStdFlow->info.sticky = 1;
-	}
-	if (ctr_context_id > 300) {
-		printf("Too many nested calls.\n");
-		exit(1);
+		return;
 	}
 	context = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	context->info.sticky = 1;
-	ctr_contexts[ctr_context_id] = context;
+	ctr_contexts[++ctr_context_id] = context;
 }
 
 /**
@@ -606,7 +601,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdNil, ctr_build_string_from_cstring( "isNil" ), &ctr_nil_is_nil );
 	CtrStdNil->link = CtrStdObject;
 	CtrStdNil->info.sticky = 1;
-	
+
 	/* Boolean */
 	CtrStdBool = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "ifTrue:" ), &ctr_bool_iftrue );
@@ -971,7 +966,7 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
  *
  * CTRAssignValueObject
  *
- * Assigns a value to a property of an object. 
+ * Assigns a value to a property of an object.
  */
 ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 	ctr_object* object = NULL;
@@ -1007,7 +1002,7 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
  *
  * CTRAssignValueObjectLocal
  *
- * Assigns a value to a local of an object. 
+ * Assigns a value to a local of an object.
  */
 ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* o) {
 	ctr_object* object = NULL;

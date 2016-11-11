@@ -548,6 +548,7 @@ ctr_object* ctr_gc_kept_alloc(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList);
+void ctr_gc_sweep( int all );
 
 /**
  * Global Garbage Collector variables

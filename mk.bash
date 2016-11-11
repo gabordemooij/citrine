@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 #MK Script
 #Written by Gabor de Mooij
 #Decides which makefile to use
 OS=$(uname -s)
-if [[ $OS = "OpenBSD" ]];then
-	echo "using OpenBSD Makefile."
-	make -f makefile.openbsd
+if [ "$OS" = "OpenBSD" -o "$OS" = "FreeBSD" ]; then
+	echo "using BSD Makefile."
+	make -f makefile.bsd
 else
 	echo "using Linux Makefile."
 	make -f makefile
