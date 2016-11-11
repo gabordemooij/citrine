@@ -235,6 +235,7 @@ ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
  * 0 - No Garbage Collection
  * 1 - Activate Garbage Collector
  * 3 - Activate Garbage Collctor and Recycle used objects
+ * 4 - Activate Garbage Collector for every single step (testing only)
  */
 ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_gc_mode = (int) ctr_internal_cast2number( argumentList->object )->value.nvalue;
