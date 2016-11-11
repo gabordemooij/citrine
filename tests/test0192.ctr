@@ -1,0 +1,9 @@
+#Like test 75 but with continous GC (mode 4) to test for GC regressions.
+
+Broom mode: 4.
+
+i := 0.
+Pen write: 'Can we count to 10 using a whileTrue loop ?', brk.
+{ i +=: 1. ^ (i <=: 10). } whileTrue: { Pen write: i, brk. }.
+Pen write: 'Can we count back from 10 to 0 using a whileFalse loop ?', brk.
+{ i -=: 1. ^ (i >=: 0). } whileTrue: { Pen write: i, brk. }.
