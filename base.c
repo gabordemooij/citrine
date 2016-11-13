@@ -461,8 +461,10 @@ ctr_object* ctr_build_number_from_string(char* str, ctr_size length) {
 	char* numCStr;
 	ctr_object* numberObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	/* turn string into a C-string before feeding it to atof */
-	numCStr = (char*) ctr_heap_allocate( 40 * sizeof( char ) );
-	memcpy(numCStr, str, length);
+	int stringNumberLength = ( length <= 40 ) ? length : 40;
+	/* max length is 40 (and that's probably even too long... ) */
+	numCStr = (char*) ctr_heap_allocate( 41 * sizeof( char ) );
+	memcpy( numCStr, str, stringNumberLength );
 	numberObject->value.nvalue = atof(numCStr);
 	numberObject->link = CtrStdNumber;
 	ctr_heap_free( numCStr );
