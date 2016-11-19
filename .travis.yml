@@ -3,4 +3,4 @@ language: c
 before_install:
   sudo ln -s /usr/bin/make /usr/bin/gmake
   
-script: ./runtests.bash
+script: ./runtests.sh
