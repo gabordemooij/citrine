@@ -32,7 +32,7 @@ cp plugins/request/libctrrequest.so mods/request/libctrrequest.so
 
 
 make clean;
-./mk.bash
+./mk.sh
 
 j=1
 for i in $(find tests -name 'test*.ctr'); do
