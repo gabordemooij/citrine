@@ -579,7 +579,7 @@ ctr_tlistitem* ctr_cparse_statement() {
 	}
 	t = ctr_clex_tok();
 	if (t != CTR_TOKEN_DOT) {
-		ctr_cparse_emit_error_unexpected( t, "Expeted a dot (.).\n" );
+		ctr_cparse_emit_error_unexpected( t, "Expected a dot (.).\n" );
 	}
 	return li;
 }
