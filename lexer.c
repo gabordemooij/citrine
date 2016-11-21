@@ -349,6 +349,8 @@ char* ctr_clex_readstr() {
 			(ctr_code < ctr_eofcode)
 		)
 	) {
+		if ( c == '\n' ) ctr_clex_line_number ++;
+
 		if (c == 'n' && escape == 1) {
 			c = '\n';
 		}
