@@ -14,6 +14,12 @@
 /**
  * Nil
  *
+ * Nil represents 'nothing' or NULL in other languages.
+ * Any object property that has not been assigned a value
+ * will contain Nil. Unlike some other programming languages
+ * Citrine has no concept of 'undefined' or isset, Nil is actually the
+ * same as 'undefined' or not set.
+ *
  * Literal:
  *
  * Nil
