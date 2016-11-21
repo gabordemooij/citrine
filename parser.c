@@ -502,7 +502,7 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 	ctr_clex_putback();
 	/* user tries to put colon directly after recipient */
 	if ( t2 == CTR_TOKEN_COLON ) {
-		printf("Parse error, unexpected colon after: %s.\n", r->value);
+		printf( "Parse error, unexpected colon.\n" );
 		exit(1);
 	}
 	if ( t2 == CTR_TOKEN_ASSIGNMENT ) {
