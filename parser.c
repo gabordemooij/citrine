@@ -505,7 +505,11 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 		printf("Parse error, unexpected colon after: %s.\n", r->value);
 		exit(1);
 	}
-	if (r->type == CTR_AST_NODE_REFERENCE && t2 == CTR_TOKEN_ASSIGNMENT) {
+	if ( t2 == CTR_TOKEN_ASSIGNMENT ) {
+		if ( r->type != CTR_AST_NODE_REFERENCE ) {
+			printf( "Parse error, not allowed to assign to literal.\n" );
+			exit(1);
+		}
 		e = ctr_cparse_assignment(r);
 	} else if (
 		t2 != CTR_TOKEN_DOT &&
