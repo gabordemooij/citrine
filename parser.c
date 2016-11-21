@@ -500,9 +500,18 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 	r = ctr_cparse_receiver();
 	t2 = ctr_clex_tok();
 	ctr_clex_putback();
+	/* user tries to put colon directly after recipient */
+	if ( t2 == CTR_TOKEN_COLON ) {
+		printf("Parse error, unexpected colon after: %s.\n", r->value);
+		exit(1);
+	}
 	if (r->type == CTR_AST_NODE_REFERENCE && t2 == CTR_TOKEN_ASSIGNMENT) {
 		e = ctr_cparse_assignment(r);
-	} else if (t2 != CTR_TOKEN_DOT && t2 != CTR_TOKEN_PARCLOSE && t2 != CTR_TOKEN_CHAIN) {
+	} else if (
+		t2 != CTR_TOKEN_DOT &&
+		t2 != CTR_TOKEN_PARCLOSE &&
+		t2 != CTR_TOKEN_CHAIN
+	) {
 		e = ctr_cparse_create_node( CTR_AST_NODE );
 		e->type = CTR_AST_NODE_EXPRMESSAGE;
 		nodes = ctr_cparse_messages(r, mode);
