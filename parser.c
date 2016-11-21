@@ -72,8 +72,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 	t = ctr_clex_tok();
 	msgpartlen = ctr_clex_tok_value_length();
 	if ((msgpartlen) > 255) {
-		printf("Message too long\n");
-		exit(1);
+		ctr_cparse_emit_error_unexpected( t, "Message too long\n" );
 	}
 	m = ctr_cparse_create_node( CTR_AST_NODE );
 	m->type = -1;
@@ -104,8 +103,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 		*(msg + msgpartlen) = ':';
 		msgpartlen += 1;
 		if ((msgpartlen) > 255) {
-			printf("Message too long\n");
-			exit(1);
+			ctr_cparse_emit_error_unexpected( t, "Message too long\n" );
 		}
 		m->type = CTR_AST_NODE_KWMESSAGE;
 		t = ctr_clex_tok();
@@ -129,8 +127,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 			if (t == CTR_TOKEN_REF) {
 				long l = ctr_clex_tok_value_length(); 
 				if ((msgpartlen + l) > 255) {
-					printf("Message too long\n");
-					exit(1);
+					ctr_cparse_emit_error_unexpected( t, "Message too long\n" );
 				}
 				memcpy( (msg+msgpartlen), ctr_clex_tok_value(), l);
 				msgpartlen = msgpartlen + l;
@@ -500,14 +497,15 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 	r = ctr_cparse_receiver();
 	t2 = ctr_clex_tok();
 	ctr_clex_putback();
+
 	/* user tries to put colon directly after recipient */
 	if ( t2 == CTR_TOKEN_COLON ) {
-		printf( "Parse error, unexpected colon.\n" );
-		exit(1);
+		ctr_cparse_emit_error_unexpected( t2, "Recipient cannot be followed by colon.\n" );
 	}
+
 	if ( t2 == CTR_TOKEN_ASSIGNMENT ) {
 		if ( r->type != CTR_AST_NODE_REFERENCE ) {
-			printf( "Parse error, not allowed to assign to literal.\n" );
+			ctr_cparse_emit_error_unexpected( t2, "Invalid left-hand assignment.\n" );
 			exit(1);
 		}
 		e = ctr_cparse_assignment(r);

@@ -1,1 +1,2 @@
-Parse error, not allowed to assign to literal.
+Parse error, unexpected := ( tests/test0194.ctr: 1 )
+Invalid left-hand assignment.
