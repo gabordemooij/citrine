@@ -1,0 +1,23 @@
+ animal := Object new. 
+ 
+ animal on: 'name:' do: { :n
+my name := n.
+}. 
+
+
+animal name: 'Diva'. 
+ 
+animal on: 'name' do: {
+^ name.
+}.
+
+cat := animal new.
+ 
+ cat name: 'Diva'. 
+ 
+ cat on: 'name' do: {
+^ 'your royal highness '
++ (me `name).
+}.
+
+Pen write: cat name.

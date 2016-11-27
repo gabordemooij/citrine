@@ -200,10 +200,16 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 			result = ctr_build_block(node);
 			break;
 		case CTR_AST_NODE_REFERENCE:
+			if (CtrStdFlow == NULL) {
+				ctr_callstack[ctr_callstack_index++] = node;
+			}
 			if (node->modifier == 1) {
 				result = ctr_find_in_my(ctr_build_string(node->value, node->vlen));
 			} else {
 				result = ctr_find(ctr_build_string(node->value, node->vlen));
+			}
+			if (CtrStdFlow == NULL) {
+				ctr_callstack_index--;
 			}
 			break;
 		case CTR_AST_NODE_EXPRMESSAGE:
