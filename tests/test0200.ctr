@@ -1,0 +1,13 @@
+#Like test 11 but with continous GC (mode 4) to test for GC regressions.
+Broom mode: 4.
+
+Animal := Object new.
+Animal on: 'makeSound' do: {
+	Pen write: '?'.
+}.
+Cat := Animal new.
+Cat on: 'makeSound' do: {
+	Pen write: 'meow!'.
+}.
+Tom := Cat new.
+Tom makeSound.

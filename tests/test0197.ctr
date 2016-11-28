@@ -1,0 +1,12 @@
+#Like test 45 but with continous GC (mode 4) to test for GC regressions.
+
+Broom mode: 4.
+{
+	Pen write: 'hi there!'.
+	thisBlock error: 'oops'.
+	Pen write: 'hi there!'.
+	{ Pen write: 'dont print this'. } run.
+} catch: { :e 
+	Pen write: 'got ya!'. 
+	Pen write: e.
+}, run.

@@ -1,0 +1,13 @@
+#Like test 47 but with continous GC (mode 4) to test for GC regressions.
+
+Broom mode: 4.
+{
+	var cat := Object new.
+	cat on: 'work' do: {
+		thisBlock error: 'Uncatched error has occurred.\nCats have personel for that!'.
+		Pen write: 'dont print this!'.
+	}.
+	{ cat work. } run.
+} catch: { :e
+	Pen write: e.
+}, run.
