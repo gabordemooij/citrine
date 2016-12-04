@@ -523,6 +523,7 @@ ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_exit(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_flush(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_command_post(ctr_object* myself, ctr_argument* ctr_argumentList);
 
 /**
  * Clock Interface
@@ -557,10 +558,7 @@ int ctr_gc_dust_counter;
 int ctr_gc_object_counter;
 int ctr_gc_kept_counter;
 int ctr_gc_sticky_counter;
-int ctr_gc_recycled_counter;
 int ctr_gc_mode;
-int ctr_gc_junk_counter;
-ctr_object* ctr_gc_junkyard[100];
 
 uint64_t ctr_gc_alloc;
 uint64_t ctr_gc_memlimit;

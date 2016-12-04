@@ -114,12 +114,7 @@ void ctr_gc_sweep( int all ) {
 					if (currentObject->value.rvalue != NULL) ctr_heap_free( currentObject->value.rvalue );
 				break;
 			}
-			if ((ctr_gc_mode & 2) && ctr_gc_junk_counter < 100) {
-				ctr_gc_junkyard[ctr_gc_junk_counter] = currentObject;
-				ctr_gc_junk_counter ++;
-			} else {
-				ctr_heap_free( currentObject );
-			}
+			ctr_heap_free( currentObject );
 			currentObject = nextObject;
 		} else {
 			ctr_gc_kept_counter ++;
@@ -234,7 +229,6 @@ ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
  * Available Modes:
  * 0 - No Garbage Collection
  * 1 - Activate Garbage Collector
- * 3 - Activate Garbage Collctor and Recycle used objects
  * 4 - Activate Garbage Collector for every single step (testing only)
  */
 ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
@@ -422,6 +416,16 @@ ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList)
 		}
 	}
 	return ctr_build_string(buff, bytes);
+}
+
+ctr_object* ctr_command_post( ctr_object* myself, ctr_argument* argumentList) {
+	char* len_ = getenv("CONTENT_LENGTH");
+	if ( len_ == NULL ) return CtrStdNil;
+	uint64_t len = strtol(len_, NULL, 10);
+	char* postdata = ctr_heap_allocate_tracked(len + 1);
+	if (!postdata) { return CtrStdNil; }
+	fgets(postdata, len + 1, stdin);
+	return ctr_build_string( postdata, len );
 }
 
 /**

@@ -278,15 +278,7 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
  */
 ctr_object* ctr_internal_create_object(int type) {
 	ctr_object* o;
-	/**
-	 * If there's a second hand object available at the junkyard,
-	 * prefer that. Saves a call to malloc.
-	 */
-	if (ctr_gc_junk_counter > 0) {
-		o = ctr_gc_junkyard[--ctr_gc_junk_counter];
-	} else {
-		o = ctr_heap_allocate(sizeof(ctr_object));
-	}
+	o = ctr_heap_allocate(sizeof(ctr_object));
 	o->properties = ctr_heap_allocate(sizeof(ctr_map));
 	o->methods = ctr_heap_allocate(sizeof(ctr_map));
 	o->properties->size = 0;
@@ -797,6 +789,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "waitForInput" ), &ctr_command_question );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "exit" ), &ctr_command_exit );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "flush" ), &ctr_command_flush );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "post" ), &ctr_command_post );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Program" ), CtrStdCommand, 0 );
 	CtrStdCommand->link = CtrStdObject;
 	CtrStdCommand->info.sticky = 1;
