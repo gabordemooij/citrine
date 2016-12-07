@@ -101,6 +101,9 @@ void ctr_request_serve_callback() {
 	varlistCookie = CGI_get_cookie(NULL);
 	varlistPost = CGI_get_post(NULL,"/tmp/_upXXXXXX");
 	ctr_block_run(CtrStdSCGICB, argumentList, CtrStdSCGICB);
+	if ( CtrStdFlow ) {
+		exit(1);
+	}
 	ctr_heap_free( argumentList );
 	CGI_free_varlist(varlistGet);
 	CGI_free_varlist(varlistPost);
@@ -291,15 +294,15 @@ ctr_object* ctr_request_serve(ctr_object* myself, ctr_argument* argumentList) {
 	host = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->object ) );
 	pid = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->next->next->object ) );
 	port = (int) round(ctr_internal_cast2number(argumentList->next->object)->value.nvalue);
-	ctr_heap_free( host );
-	ctr_heap_free( pid );
 	CtrStdSCGICB = argumentList->next->next->next->object;
 	CGI_prefork_server(host, port, pid,
         /* maxproc */ maxproc,
         /* minidle */ minidle,
         /* maxidle */ maxidle,
         /* maxreq */   maxreq, ctr_request_serve_callback);
-    return myself;
+    ctr_heap_free( host );
+	ctr_heap_free( pid );
+	return myself;
 }
 
 /**
