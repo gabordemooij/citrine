@@ -227,7 +227,7 @@ char* ctr_heap_allocate_cstring( ctr_object* stringObject ) {
 	cstring     = ctr_heap_allocate( ( length + 1 ) * sizeof( char ) );
 
 	strncpy( cstring, stringBytes, length );
-	cstring[stringObject->value.svalue->vlen] = '\0';
+	cstring[length] = '\0';
 
 	return cstring;
 }
