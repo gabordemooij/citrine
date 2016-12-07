@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <stddef.h>
+#include <inttypes.h>
 #include <ctype.h>
 #include <stdarg.h>
 #include <math.h>
