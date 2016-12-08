@@ -418,7 +418,6 @@ void ctr_open_context() {
 	if (ctr_context_id >= 299) {
 		CtrStdFlow = ctr_build_string_from_cstring( "Too many nested calls." );
 		CtrStdFlow->info.sticky = 1;
-		return;
 	}
 	context = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	context->info.sticky = 1;
