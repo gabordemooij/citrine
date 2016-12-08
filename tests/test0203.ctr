@@ -1,0 +1,16 @@
+#Test too many contexts open icw GC mode 4
+#to demonstrate why there should be no early return in open_context()
+#as proposed in GH80/84
+
+Broom mode: 4.
+j := 1.
+
+func := {
+
+	Pen write: 'Nested call #' + j, brk.
+	j +=: 1.
+
+	func run.
+}.
+
+func run.
