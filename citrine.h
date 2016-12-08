@@ -518,12 +518,11 @@ ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList);
  */
 ctr_object* ctr_command_argument(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_num_of_args(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_command_waitforinput(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_exit(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_flush(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_command_post(ctr_object* myself, ctr_argument* ctr_argumentList);
 
 /**
  * Clock Interface

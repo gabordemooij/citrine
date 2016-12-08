@@ -786,10 +786,10 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "argCount" ), &ctr_command_num_of_args );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "env:" ), &ctr_command_get_env );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "env:val:" ), &ctr_command_set_env );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "waitForInput" ), &ctr_command_question );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "waitForInput" ), &ctr_command_waitforinput );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "exit" ), &ctr_command_exit );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "flush" ), &ctr_command_flush );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "post" ), &ctr_command_post );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "inputBytes" ), &ctr_command_inputbytes );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Program" ), CtrStdCommand, 0 );
 	CtrStdCommand->link = CtrStdObject;
 	CtrStdCommand->info.sticky = 1;

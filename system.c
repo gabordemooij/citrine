@@ -392,13 +392,13 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
  * Usage:
  *
  * Pen write: 'What is your name ?'.
- * x := Command askQuestion.
+ * x := Command waitForInput.
  * Pen write: 'Hello ' + x + ' !', brk.
  *
  * The example above asks the user for his/her name and
  * then displays the input received.
  */
-ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_command_waitforinput(ctr_object* myself, ctr_argument* argumentList) {
 	int c;
 	ctr_size bytes = 0;
 	char* buff;
@@ -416,16 +416,6 @@ ctr_object* ctr_command_question(ctr_object* myself, ctr_argument* argumentList)
 		}
 	}
 	return ctr_build_string(buff, bytes);
-}
-
-ctr_object* ctr_command_post( ctr_object* myself, ctr_argument* argumentList) {
-	char* len_ = getenv("CONTENT_LENGTH");
-	if ( len_ == NULL ) return CtrStdNil;
-	uint64_t len = strtol(len_, NULL, 10);
-	char* postdata = ctr_heap_allocate_tracked(len + 1);
-	if (!postdata) { return CtrStdNil; }
-	fgets(postdata, len + 1, stdin);
-	return ctr_build_string( postdata, len );
 }
 
 /**
