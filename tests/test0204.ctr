@@ -1,0 +1,10 @@
+#Test whether we canNOT access elements below tail (that have been shift off)
+a := Array < 1 ; 2 ; 3.
+Pen write: a count, brk.
+Pen write: a @ 1, brk.
+a shift.
+Pen write: a count, brk.
+Pen write: a @ 1, brk.
+a shift.
+Pen write: a count, brk.
+Pen write: a @ 1, brk.

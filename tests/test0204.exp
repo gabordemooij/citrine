@@ -1,0 +1,9 @@
+3
+2
+2
+2
+1
+Uncatched error has occurred.
+Index out of bounds.
+#2 @ (tests/test0204.ctr: 15)
+#1 write: (tests/test0204.ctr: 15)

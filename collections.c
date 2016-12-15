@@ -329,7 +329,7 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 		printf("Index must be number.\n"); exit(1);
 	}
 	i = (int) getIndex->value.nvalue;
-	if (myself->value.avalue->head <= i || i < 0) {
+	if (myself->value.avalue->head <= i || i < myself->value.avalue->tail) {
 		CtrStdFlow = ctr_build_string_from_cstring("Index out of bounds.");
 		CtrStdFlow->info.sticky = 1;
 		return CtrStdNil;
