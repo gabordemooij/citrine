@@ -7,15 +7,27 @@
 #To find CTR processes
 #ps -aux | grep "ctr" 
 
+#Override the Pen object so it can deal with output buffering
+Pen := Pen new.
+Pen on: 'resetBuffer' do: { my buffer := ''.  my header := ''. }.
+Pen on: 'write:' do: { :bytes my buffer append: bytes. }.
+Pen on: 'brk' do: { my buffer append: '\n'. }.
+Pen on: '>' do: { :bytes my buffer append: bytes. }.
+Pen on: 'writeHeader:' do: { :bytes my header append: bytes. }.
+Pen on: 'flush' do: { me `write: my header, `write: '\n', `write: my buffer, resetBuffer. }.
+Pen resetBuffer.
 Pen write: 'Start Citrine Storm Server v1', brk.
+Pen flush.
+? := Pen.
 
 Request serverOption: 'minidle' is: 1, serverOption: 'maxidle' is: 2.
 
-
-Request host:'localhost' listen:4000 pid:'/var/run/storm.pid' callback: {
-	Pen write: 'Content-type: text/html\n\n'.
+Request host:'localhost' listen:4000 pid:'storm.pid' callback: {
+	Pen resetBuffer.
+	Pen writeHeader: 'Content-type: text/html\n'.
 	var fname := Program env: 'DOCUMENT_URI'.
 	var script := File new: '/var/www/htdocs' + fname.
 	script include.
+	Pen flush.
 }.
 Pen write: 'DONE', brk.
