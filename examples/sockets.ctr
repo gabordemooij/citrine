@@ -6,6 +6,7 @@
 #run this test like so:
 #
 #websocketd --port=8080 examples/sockets.ctr
+#websocketd --staticdir=examples --dir=examples
 #and open test.html in your browser
 #you can now add click handlers with Citrine, you can make
 #an entire streaming webapp with CSS and HTML and no JavaScript.

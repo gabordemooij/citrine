@@ -7,7 +7,7 @@
 		<h1>Web socket test</h1>
 		<div id="container"></div>
 		<script>
-			var ws = new WebSocket('ws://localhost:8080/');
+			var ws = new WebSocket('ws://localhost/sockets.ctr');
 			ws.onmessage = function(event) {
 			document.getElementById('container').innerHTML = event.data;
 			console.log(event.data);
