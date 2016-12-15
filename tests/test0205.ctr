@@ -1,0 +1,23 @@
+#test whether can fire custom messages to objects
+str := 'write:'.
+Pen message: 'write:' arguments: (Array < 'Hello World'), brk. #test on native object
+
+#now with multiple arguments...
+str := 'between:and:'.
+Pen write: (3 message: str arguments: (Array < 2 ; 8)), brk.
+Pen write: (3 message: str arguments: (Array < 1 ; 2)), brk.
+
+#now with user defined object and multiple arguments...
+CoffeeMachine := Object new.
+CoffeeMachine on: 'makeCoffeeWithSugar:milk:' do: { :sugar :milk
+	^ ( 'Here ya go... coffee with ' + 
+			sugar +
+			' spoons of sugar and ' +
+			milk +
+			' drops of milk.'
+	).
+}.
+
+var order := 'makeCoffeeWithSugar:milk:'.
+var coffeeConfiguration := Array < 4 ; 2. #that's a tad sweet...
+Pen write: ( CoffeeMachine message: order arguments: coffeeConfiguration ) , brk.

@@ -350,6 +350,7 @@ ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_do(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_done(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_object_message(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Boolean Interface

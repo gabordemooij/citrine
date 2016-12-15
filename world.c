@@ -582,6 +582,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( "myself" ), &ctr_object_myself );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( "do" ), &ctr_object_do );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( "done" ), &ctr_object_done );
+	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( "message:arguments:" ), &ctr_object_message );
 	ctr_internal_object_add_property( CtrStdWorld, ctr_build_string_from_cstring( "Object" ), CtrStdObject, 0 );
 	CtrStdObject->link = NULL;
 	CtrStdObject->info.sticky = 1;

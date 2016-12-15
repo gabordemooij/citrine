@@ -135,6 +135,56 @@ ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
+ * [Object] message: [String] arguments: [Array]
+ *
+ * Sends a custom or 'dynamic' message to an object. This takes a string containing
+ * the message to be send to the object and an array listing the arguments at the
+ * correct indexes. If the array fails to provide the correct indexes this will
+ * generate an out-of-bounds error coming from the Array object. If something other
+ * than an Array is provided an error will be thrown as well.
+ *
+ * Usage:
+ *
+ * var str := 'write:'.
+ * Pen message: 'write:' arguments: (Array < 'Hello World').
+ *
+ * This will print the string 'Hello world' on the screen using a dynamically
+ * crafted message.
+ */
+ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* message = ctr_internal_cast2string( argumentList->object );
+	ctr_object* arr     = argumentList->next->object;
+	if ( arr->info.type != CTR_OBJECT_TYPE_OTARRAY ) {
+		CtrStdFlow = ctr_build_string_from_cstring( "Dynamic message expects array." );
+		return CtrStdNil;
+	}
+	ctr_size length = (int) ctr_array_count( arr, argumentList )->value.nvalue;
+	int i = 0;
+	ctr_argument* args = ctr_heap_allocate( sizeof( ctr_argument ) );
+	ctr_argument* cur  = args;
+	for ( i = 0; i < length; i ++ ) {
+		ctr_argument* index = ctr_heap_allocate( sizeof( ctr_argument ) );
+		if ( i > 0 ) {
+			cur->next = ctr_heap_allocate( sizeof( ctr_argument ) );
+			cur = cur->next;
+		}
+		index->object = ctr_build_number_from_float( (double) i );
+		cur->object = ctr_array_get( arr, index );
+		ctr_heap_free( index );
+	}
+	char* flatMessage = ctr_heap_allocate_cstring( message );
+	ctr_object* answer = ctr_send_message( myself, flatMessage, message->value.svalue->vlen, args);
+	cur = args;
+	for ( i = 0; i < length; i ++ ) {
+		ctr_argument* a = cur;
+		if ( i < length - 1 ) cur = cur->next;
+		ctr_heap_free( a );
+	}
+	ctr_heap_free( flatMessage );
+	return answer;
+}
+
+/**
  * [Object] on: [String] do: [Block]
  *
  * Makes the object respond to a new kind of message.
