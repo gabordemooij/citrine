@@ -513,6 +513,24 @@ ctr_object* ctr_command_forbid_include( ctr_object* myself, ctr_argument* argume
 }
 
 /**
+ * [Program] remainingMessages: [Number]
+ *
+ * This method is part of the security profiles feature of Citrine.
+ * This will initiate a countdown for the program, you can specify the maximum quota of
+ * messages the program may process, once this quota has been exhausted the program will
+ * be killed entirely (no exception).
+ *
+ * Usage:
+ *
+ * Program remainingMessages: 100.
+ */
+ctr_object* ctr_command_countdown( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_command_security_profile |= CTR_SECPRO_COUNTDOWN;
+	ctr_command_maxtick = (uint8_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	return myself;
+}
+
+/**
  * [Program] flush.
  *
  * Flushes the STDOUT output buffer.
