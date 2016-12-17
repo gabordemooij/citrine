@@ -1,0 +1,4 @@
+#can we forbid a program to write to disk ?
+Program forbidFileWrite.
+File new: '/tmp/bla.txt'.
+File delete.

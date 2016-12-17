@@ -108,6 +108,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
  * called myxml.xml in the current working directory.
  */
 ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
+	if ( !ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE ) ) return CtrStdNil;
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0 );
 	FILE* f;
@@ -138,6 +139,7 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
  * will be appended to the existing content inside the file.
  */
 ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
+	if ( !ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE ) ) return CtrStdNil;
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_size vlen;
@@ -217,6 +219,7 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
  * Deletes the file.
  */
 ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
+	if ( !ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE ) ) return CtrStdNil;
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_size vlen;
 	char* pathString;
@@ -378,6 +381,7 @@ ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) 
  * The number of bytes written is returned in variable n.
  */
 ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList) {
+	if ( !ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE ) ) return CtrStdNil;
 	int bytes, written;
 	ctr_object* string2write;
 	char* buffer;

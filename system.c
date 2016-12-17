@@ -255,7 +255,7 @@ ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
  * the 'call:' message.
  */
 ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_check_permission( CTR_SECPRO_NO_SHELL );
+	if (!ctr_check_permission( CTR_SECPRO_NO_SHELL )) return CtrStdNil;
 	ctr_object* arg = ctr_internal_cast2string(argumentList->object);
 	long vlen = arg->value.svalue->vlen;
 	char* comString = ctr_heap_allocate( sizeof( char ) * ( vlen + 1 ) );
@@ -419,15 +419,25 @@ ctr_object* ctr_command_waitforinput(ctr_object* myself, ctr_argument* argumentL
 	return ctr_build_string(buff, bytes);
 }
 
-void ctr_check_permission( uint8_t operationID ) {
+/**
+ * @internal
+ *
+ * Checks whether the user is allowed to perform this kind of operation.
+ */
+int ctr_check_permission( uint8_t operationID ) {
 	char* reason;
 	if ( ( ctr_command_security_profile & operationID ) ) {
 		reason = "This program is not allowed to perform this operation.";
 		if ( operationID == CTR_SECPRO_NO_SHELL ) {
 			reason = "This program is not allowed to execute shell commands.";
 		}
+		if ( operationID == CTR_SECPRO_NO_FILE_WRITE ) {
+			reason = "This program is not allowed to modify or delete any files or folders.";
+		}
 		CtrStdFlow = ctr_build_string_from_cstring( reason );
+		return 0;
 	}
+	return 1;
 }
 
 /**
@@ -443,6 +453,21 @@ void ctr_check_permission( uint8_t operationID ) {
  */
 ctr_object* ctr_command_forbid_shell( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_command_security_profile |= 1;
+}
+
+/**
+ * [Program] forbidFileWrite
+ *
+ * This method is part of the security profiles feature of Citrine.
+ * This will forbid the program to modify, create or delete any files. All
+ * external libraries and plugins are assumed to respect this setting as well.
+ *
+ * Usage:
+ *
+ * Program forbidFileWrite.
+ */
+ctr_object* ctr_command_forbid_file_write( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_command_security_profile |= 2;
 }
 
 /**
