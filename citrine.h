@@ -526,10 +526,12 @@ ctr_object* ctr_command_exit(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_flush(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_command_forbid_shell(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_command_forbid_file_write(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_command_forbid_file_read(ctr_object* myself, ctr_argument* ctr_argumentList);
 int ctr_check_permission( uint8_t operationID );
 uint8_t ctr_command_security_profile;
 #define CTR_SECPRO_NO_SHELL 1
 #define CTR_SECPRO_NO_FILE_WRITE 2
+#define CTR_SECPRO_NO_FILE_READ 4
 
 /**
  * Clock Interface

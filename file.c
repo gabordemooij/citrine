@@ -22,6 +22,9 @@
  * File new: '/example/path/to/file.txt'.
  */
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
+	if ( ctr_check_permission( CTR_SECPRO_NO_FILE_READ ) ) {
+		return CtrStdNil;
+	}
 	ctr_object* s = ctr_object_make(myself, argumentList);
 	ctr_object* pathObject;
 	s->info.type = CTR_OBJECT_TYPE_OTEX; /* indicates resource for GC */

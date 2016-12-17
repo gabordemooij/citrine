@@ -434,6 +434,9 @@ int ctr_check_permission( uint8_t operationID ) {
 		if ( operationID == CTR_SECPRO_NO_FILE_WRITE ) {
 			reason = "This program is not allowed to modify or delete any files or folders.";
 		}
+		if ( operationID == CTR_SECPRO_NO_FILE_READ ) {
+			reason = "This program is not allowed to perform any file operations.";
+		}
 		CtrStdFlow = ctr_build_string_from_cstring( reason );
 		return 0;
 	}
@@ -453,6 +456,7 @@ int ctr_check_permission( uint8_t operationID ) {
  */
 ctr_object* ctr_command_forbid_shell( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_command_security_profile |= 1;
+	return myself;
 }
 
 /**
@@ -468,6 +472,23 @@ ctr_object* ctr_command_forbid_shell( ctr_object* myself, ctr_argument* argument
  */
 ctr_object* ctr_command_forbid_file_write( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_command_security_profile |= 2;
+	return myself;
+}
+
+/**
+ * [Program] forbidFileRead
+ *
+ * This method is part of the security profiles feature of Citrine.
+ * This will forbid the program to read any files. All
+ * external libraries and plugins are assumed to respect this setting as well.
+ *
+ * Usage:
+ *
+ * Program forbidFileRead.
+ */
+ctr_object* ctr_command_forbid_file_read( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_command_security_profile |= 4;
+	return myself;
 }
 
 /**
