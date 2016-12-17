@@ -790,6 +790,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "waitForInput" ), &ctr_command_waitforinput );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "exit" ), &ctr_command_exit );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "flush" ), &ctr_command_flush );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "forbidShell" ), &ctr_command_forbid_shell );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Program" ), CtrStdCommand, 0 );
 	CtrStdCommand->link = CtrStdObject;
 	CtrStdCommand->info.sticky = 1;

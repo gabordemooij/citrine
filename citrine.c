@@ -66,6 +66,7 @@ int main(int argc, char* argv[]) {
 	ctr_source_map_head = NULL;
 	ctr_source_mapping = 0;
 	CtrStdFlow = NULL;
+	ctr_command_security_profile = 0;
 	ctr_cli_read_args(argc, argv);
 	ctr_source_mapping = 1;
 	prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
