@@ -22,7 +22,7 @@
  * File new: '/example/path/to/file.txt'.
  */
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
-	if ( ctr_check_permission( CTR_SECPRO_NO_FILE_READ ) ) {
+	if ( !ctr_check_permission( CTR_SECPRO_NO_FILE_READ ) ) {
 		return CtrStdNil;
 	}
 	ctr_object* s = ctr_object_make(myself, argumentList);
