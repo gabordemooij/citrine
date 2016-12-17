@@ -1,0 +1,3 @@
+#test whether can fire custom messages to objects - error message test
+str := 'write:'.
+Pen message: 'write:' arguments: 0.
