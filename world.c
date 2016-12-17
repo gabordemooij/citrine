@@ -793,6 +793,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "forbidShell" ), &ctr_command_forbid_shell );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "forbidFileWrite" ), &ctr_command_forbid_file_write );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "forbidFileRead" ), &ctr_command_forbid_file_read );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "forbidInclude" ), &ctr_command_forbid_include );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Program" ), CtrStdCommand, 0 );
 	CtrStdCommand->link = CtrStdObject;
 	CtrStdCommand->info.sticky = 1;

@@ -196,6 +196,7 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
  * Includes the file as a piece of executable code.
  */
 ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
+	if ( !ctr_check_permission( CTR_SECPRO_NO_INCLUDE ) ) return CtrStdNil;
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_tnode* parsedCode;
 	ctr_size vlen;

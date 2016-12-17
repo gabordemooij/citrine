@@ -437,6 +437,9 @@ int ctr_check_permission( uint8_t operationID ) {
 		if ( operationID == CTR_SECPRO_NO_FILE_READ ) {
 			reason = "This program is not allowed to perform any file operations.";
 		}
+		if ( operationID == CTR_SECPRO_NO_INCLUDE ) {
+			reason = "This program is not allowed to include any other files for code execution.";
+		}
 		CtrStdFlow = ctr_build_string_from_cstring( reason );
 		return 0;
 	}
@@ -481,6 +484,8 @@ ctr_object* ctr_command_forbid_file_write( ctr_object* myself, ctr_argument* arg
  * This method is part of the security profiles feature of Citrine.
  * This will forbid the program to read any files. All
  * external libraries and plugins are assumed to respect this setting as well.
+ * Forbidding a program to read files also has the effect to forbid including other
+ * source files.
  *
  * Usage:
  *
@@ -488,6 +493,22 @@ ctr_object* ctr_command_forbid_file_write( ctr_object* myself, ctr_argument* arg
  */
 ctr_object* ctr_command_forbid_file_read( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_command_security_profile |= CTR_SECPRO_NO_FILE_READ;
+	return myself;
+}
+
+/**
+ * [Program] forbidInclude
+ *
+ * This method is part of the security profiles feature of Citrine.
+ * This will forbid the program to include any other files. All
+ * external libraries and plugins are assumed to respect this setting as well.
+ *
+ * Usage:
+ *
+ * Program forbidInclude.
+ */
+ctr_object* ctr_command_forbid_include( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_command_security_profile |= CTR_SECPRO_NO_INCLUDE;
 	return myself;
 }
 
