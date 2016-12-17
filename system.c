@@ -455,7 +455,7 @@ int ctr_check_permission( uint8_t operationID ) {
  * Program forbidShell.
  */
 ctr_object* ctr_command_forbid_shell( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_command_security_profile |= 1;
+	ctr_command_security_profile |= CTR_SECPRO_NO_SHELL;
 	return myself;
 }
 
@@ -471,7 +471,7 @@ ctr_object* ctr_command_forbid_shell( ctr_object* myself, ctr_argument* argument
  * Program forbidFileWrite.
  */
 ctr_object* ctr_command_forbid_file_write( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_command_security_profile |= 2;
+	ctr_command_security_profile |= CTR_SECPRO_NO_FILE_WRITE;
 	return myself;
 }
 
@@ -487,7 +487,7 @@ ctr_object* ctr_command_forbid_file_write( ctr_object* myself, ctr_argument* arg
  * Program forbidFileRead.
  */
 ctr_object* ctr_command_forbid_file_read( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_command_security_profile |= 4;
+	ctr_command_security_profile |= CTR_SECPRO_NO_FILE_READ;
 	return myself;
 }
 
