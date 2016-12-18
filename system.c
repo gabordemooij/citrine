@@ -400,6 +400,7 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
  * then displays the input received.
  */
 ctr_object* ctr_command_waitforinput(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	int c;
 	ctr_size bytes = 0;
 	char* buff;
@@ -439,6 +440,10 @@ int ctr_check_permission( uint8_t operationID ) {
 		}
 		if ( operationID == CTR_SECPRO_NO_INCLUDE ) {
 			reason = "This program is not allowed to include any other files for code execution.";
+		}
+		if ( operationID == CTR_SECPRO_COUNTDOWN ) {
+			printf( "%s\n", reason );
+			exit(1);
 		}
 		CtrStdFlow = ctr_build_string_from_cstring( reason );
 		return 0;

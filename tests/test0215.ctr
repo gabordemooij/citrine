@@ -1,0 +1,3 @@
+#blocking not allowed in countdown mode
+Program remainingMessages: 100.
+Program waitForInput.
