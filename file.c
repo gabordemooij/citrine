@@ -22,9 +22,7 @@
  * File new: '/example/path/to/file.txt'.
  */
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
-	if ( !ctr_check_permission( CTR_SECPRO_NO_FILE_READ ) ) {
-		return CtrStdNil;
-	}
+	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	ctr_object* s = ctr_object_make(myself, argumentList);
 	ctr_object* pathObject;
 	s->info.type = CTR_OBJECT_TYPE_OTEX; /* indicates resource for GC */
@@ -111,7 +109,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
  * called myxml.xml in the current working directory.
  */
 ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
-	if ( !ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE ) ) return CtrStdNil;
+	ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE );
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0 );
 	FILE* f;
@@ -142,7 +140,7 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
  * will be appended to the existing content inside the file.
  */
 ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
-	if ( !ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE ) ) return CtrStdNil;
+	ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE );
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_size vlen;
@@ -196,7 +194,7 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
  * Includes the file as a piece of executable code.
  */
 ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
-	if ( !ctr_check_permission( CTR_SECPRO_NO_INCLUDE ) ) return CtrStdNil;
+	ctr_check_permission( CTR_SECPRO_NO_INCLUDE );
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_tnode* parsedCode;
 	ctr_size vlen;
@@ -223,7 +221,7 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
  * Deletes the file.
  */
 ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
-	if ( !ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE ) ) return CtrStdNil;
+	ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE );
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_size vlen;
 	char* pathString;
@@ -385,7 +383,7 @@ ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) 
  * The number of bytes written is returned in variable n.
  */
 ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList) {
-	if ( !ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE ) ) return CtrStdNil;
+	ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE );
 	int bytes, written;
 	ctr_object* string2write;
 	char* buffer;

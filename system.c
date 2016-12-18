@@ -255,7 +255,7 @@ ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
  * the 'call:' message.
  */
 ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
-	if (!ctr_check_permission( CTR_SECPRO_NO_SHELL )) return CtrStdNil;
+	ctr_check_permission( CTR_SECPRO_NO_SHELL );
 	ctr_object* arg = ctr_internal_cast2string(argumentList->object);
 	long vlen = arg->value.svalue->vlen;
 	char* comString = ctr_heap_allocate( sizeof( char ) * ( vlen + 1 ) );
@@ -351,7 +351,7 @@ ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_object* envVarNameObj;
 	char*       envVarNameStr;
 	char*       envVal;
-	if ( !ctr_check_permission( CTR_SECPRO_NO_FILE_READ ) ) return CtrStdNil;
+	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
 	envVarNameStr = ctr_heap_allocate((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
 	strncpy(envVarNameStr, envVarNameObj->value.svalue->value, envVarNameObj->value.svalue->vlen);
@@ -374,7 +374,7 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_object* envValObj;
 	char*       envVarNameStr;
 	char*       envValStr;
-	if ( !ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE ) ) return CtrStdNil;
+	ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE );
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
 	envValObj = ctr_internal_cast2string(argumentList->next->object);
 	envVarNameStr = ctr_heap_allocate_cstring( envVarNameObj );
@@ -427,7 +427,7 @@ ctr_object* ctr_command_waitforinput(ctr_object* myself, ctr_argument* argumentL
  *
  * Checks whether the user is allowed to perform this kind of operation.
  */
-int ctr_check_permission( uint8_t operationID ) {
+void ctr_check_permission( uint8_t operationID ) {
 	char* reason;
 	if ( ( ctr_command_security_profile & operationID ) ) {
 		reason = "This program is not allowed to perform this operation.";
@@ -443,14 +443,9 @@ int ctr_check_permission( uint8_t operationID ) {
 		if ( operationID == CTR_SECPRO_NO_INCLUDE ) {
 			reason = "This program is not allowed to include any other files for code execution.";
 		}
-		if ( operationID == CTR_SECPRO_COUNTDOWN ) {
-			printf( "%s\n", reason );
-			exit(1);
-		}
-		CtrStdFlow = ctr_build_string_from_cstring( reason );
-		return 0;
+		printf( "%s\n", reason );
+		exit(1);
 	}
-	return 1;
 }
 
 /**
