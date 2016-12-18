@@ -584,6 +584,7 @@ ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList) {
  * Waits X seconds.
  */
 ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	ctr_object* arg = ctr_internal_cast2number(argumentList->object);
 	int n = (int) arg->value.nvalue;
 	sleep(n);

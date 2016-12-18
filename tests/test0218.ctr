@@ -1,0 +1,3 @@
+#countdown mode forbids sleep
+Program remainingMessages: 100.
+Clock wait: 10.
