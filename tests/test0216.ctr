@@ -1,0 +1,3 @@
+#forbid file read also forbids reading environment vars
+Program forbidFileRead.
+a := Program env: 'QUERY_STRING'.

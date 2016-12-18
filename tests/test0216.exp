@@ -1,0 +1,4 @@
+Uncatched error has occurred.
+This program is not allowed to perform any file operations.
+#2 env: (tests/test0216.ctr: 3)
+#1 a (tests/test0216.ctr: 3)

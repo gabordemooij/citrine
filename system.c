@@ -351,15 +351,16 @@ ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_object* envVarNameObj;
 	char*       envVarNameStr;
 	char*       envVal;
+	if ( ctr_check_permission( CTR_SECPRO_NO_FILE_READ ) ) return CtrStdNil;
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
 	envVarNameStr = ctr_heap_allocate((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
 	strncpy(envVarNameStr, envVarNameObj->value.svalue->value, envVarNameObj->value.svalue->vlen);
 	*(envVarNameStr + (envVarNameObj->value.svalue->vlen)) = '\0';
 	envVal = getenv(envVarNameStr);
+	ctr_heap_free(envVarNameStr );
 	if (envVal == NULL) {
 		return CtrStdNil;
 	}
-	ctr_heap_free(envVarNameStr );
 	return ctr_build_string_from_cstring(envVal);
 }
 
@@ -373,6 +374,7 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_object* envValObj;
 	char*       envVarNameStr;
 	char*       envValStr;
+	if ( ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE ) ) return CtrStdNil;
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
 	envValObj = ctr_internal_cast2string(argumentList->next->object);
 	envVarNameStr = ctr_heap_allocate_cstring( envVarNameObj );
@@ -487,8 +489,10 @@ ctr_object* ctr_command_forbid_file_write( ctr_object* myself, ctr_argument* arg
  * [Program] forbidFileRead
  *
  * This method is part of the security profiles feature of Citrine.
- * This will forbid the program to read any files. All
- * external libraries and plugins are assumed to respect this setting as well.
+ * This will forbid the program to read any files. In fact this will prevent you from
+ * creating the file object at all.
+ * This will also prevent you from reading environment variables.
+ * All external libraries and plugins are assumed to respect this setting as well.
  * Forbidding a program to read files also has the effect to forbid including other
  * source files.
  *
