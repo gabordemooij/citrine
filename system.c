@@ -351,7 +351,7 @@ ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_object* envVarNameObj;
 	char*       envVarNameStr;
 	char*       envVal;
-	if ( ctr_check_permission( CTR_SECPRO_NO_FILE_READ ) ) return CtrStdNil;
+	if ( !ctr_check_permission( CTR_SECPRO_NO_FILE_READ ) ) return CtrStdNil;
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
 	envVarNameStr = ctr_heap_allocate((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
 	strncpy(envVarNameStr, envVarNameObj->value.svalue->value, envVarNameObj->value.svalue->vlen);
@@ -374,7 +374,7 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_object* envValObj;
 	char*       envVarNameStr;
 	char*       envValStr;
-	if ( ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE ) ) return CtrStdNil;
+	if ( !ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE ) ) return CtrStdNil;
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
 	envValObj = ctr_internal_cast2string(argumentList->next->object);
 	envVarNameStr = ctr_heap_allocate_cstring( envVarNameObj );
