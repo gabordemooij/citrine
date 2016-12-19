@@ -416,10 +416,44 @@ ctr_object* ctr_command_waitforinput(ctr_object* myself, ctr_argument* argumentL
 			buff = (char*) realloc(buff, page * sizeof(char));
 			if (buff == NULL) {
 				CtrStdFlow = ctr_build_string_from_cstring("Out of memory");
+				return CtrStdNil;
 			}
 		}
 	}
 	return ctr_build_string(buff, bytes);
+}
+
+/**
+ * [Program] input.
+ *
+ * Reads all raw input from STDIN.
+ *
+ * Usage (for instance to read raw CGI post):
+ *
+ * post := Program input.
+ */
+ctr_object* ctr_command_input(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_size bytes = 0;
+	ctr_size page = 10;
+	char* buff = ctr_heap_allocate( page );
+	char* line = buff;
+	char* start = buff;
+	while ( !feof(stdin) && !ferror(stdin) ) {
+		line = fgets( buff, page, stdin );
+		if ( line == NULL ) break;
+		bytes += strlen( line );
+		if ( bytes > page ) {
+			page *= 2;
+			start = (char*) ctr_heap_reallocate( start, page * sizeof(char));
+			if (buff == NULL) {
+				CtrStdFlow = ctr_build_string_from_cstring("Out of memory");
+			}
+		}
+		buff = start + bytes;
+	}
+	ctr_object* str = ctr_build_string_from_cstring( start );
+	ctr_heap_free( start );
+	return str;
 }
 
 /**
