@@ -1,0 +1,2 @@
+a := Program input.
+Pen write: a, brk.
