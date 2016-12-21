@@ -433,26 +433,19 @@ ctr_object* ctr_command_waitforinput(ctr_object* myself, ctr_argument* argumentL
  * post := Program input.
  */
 ctr_object* ctr_command_input(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_size bytes = 0;
-	ctr_size page = 10;
-	char* buff = ctr_heap_allocate( page );
-	char* line = buff;
-	char* start = buff;
-	while ( !feof(stdin) && !ferror(stdin) ) {
-		line = fgets( buff, page, stdin );
-		if ( line == NULL ) break;
-		bytes += strlen( line );
-		if ( bytes > page ) {
-			page *= 2;
-			start = (char*) ctr_heap_reallocate( start, page * sizeof(char));
-			if (buff == NULL) {
-				CtrStdFlow = ctr_build_string_from_cstring("Out of memory");
-			}
-		}
-		buff = start + bytes;
+	int BUF_SIZE = 64;
+	char buffer[BUF_SIZE];
+	size_t contentSize = 1;
+	char *content = ctr_heap_allocate(sizeof(char) * BUF_SIZE);
+	content[0] = '\0';
+	while(fgets(buffer, BUF_SIZE, stdin)) {
+		char *old = content;
+		contentSize += strlen(buffer);
+		content = ctr_heap_reallocate(content, contentSize);
+		strcat(content, buffer);
 	}
-	ctr_object* str = ctr_build_string_from_cstring( start );
-	ctr_heap_free( start );
+	ctr_object* str = ctr_build_string_from_cstring( content );
+	ctr_heap_free( content );
 	return str;
 }
 
