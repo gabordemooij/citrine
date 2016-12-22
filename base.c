@@ -738,15 +738,15 @@ ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) { printf("Expected code block."); exit(1); }
 	block->info.sticky = 1;
 	t = myself->value.nvalue;
+	arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	for(i=0; i<t; i++) {
 		indexNumber = ctr_build_number_from_float((ctr_number) i);
-		arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = indexNumber;
 		ctr_block_run(block, arguments, NULL);
-		ctr_heap_free( arguments );
 		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL; /* consume continue */
 		if (CtrStdFlow) break;
 	}
+	ctr_heap_free( arguments );
 	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
 	block->info.mark = 0;
 	block->info.sticky = 0;
