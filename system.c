@@ -433,15 +433,14 @@ ctr_object* ctr_command_waitforinput(ctr_object* myself, ctr_argument* argumentL
  * post := Program input.
  */
 ctr_object* ctr_command_input(ctr_object* myself, ctr_argument* argumentList) {
-	int BUF_SIZE = 64;
-	char buffer[BUF_SIZE];
-	size_t contentSize = 1;
-	char *content = ctr_heap_allocate(sizeof(char) * BUF_SIZE);
-	content[0] = '\0';
-	while(fgets(buffer, BUF_SIZE, stdin)) {
+	ctr_size page = 64;
+	char buffer[page];
+	size_t content_size = 1;
+	char *content = ctr_heap_allocate(sizeof(char) * page);
+	while(fgets(buffer, page, stdin)) {
 		char *old = content;
-		contentSize += strlen(buffer);
-		content = ctr_heap_reallocate(content, contentSize);
+		content_size += strlen(buffer);
+		content = ctr_heap_reallocate(content, content_size);
 		strcat(content, buffer);
 	}
 	ctr_object* str = ctr_build_string_from_cstring( content );
