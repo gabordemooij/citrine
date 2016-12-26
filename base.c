@@ -1195,10 +1195,11 @@ ctr_object* ctr_string_bytes(ctr_object* myself, ctr_argument* argumentList) {
  * Returns True if the other string is the same (in bytes).
  */
 ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
-	if (argumentList->object->value.svalue->vlen != myself->value.svalue->vlen) {
+	ctr_object* other = ctr_internal_cast2string( argumentList->object );
+	if (other->value.svalue->vlen != myself->value.svalue->vlen) {
 		return ctr_build_bool(0);
 	}
-	return ctr_build_bool((strncmp(argumentList->object->value.svalue->value, myself->value.svalue->value, myself->value.svalue->vlen)==0));
+	return ctr_build_bool((strncmp(other->value.svalue->value, myself->value.svalue->value, myself->value.svalue->vlen)==0));
 }
 
 /**
@@ -1207,10 +1208,11 @@ ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
  * Returns True if the other string is not the same (in bytes).
  */
 ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
-	if (argumentList->object->value.svalue->vlen != myself->value.svalue->vlen) {
+	ctr_object* other = ctr_internal_cast2string( argumentList->object );
+	if (other->value.svalue->vlen != myself->value.svalue->vlen) {
 		return ctr_build_bool(1);
 	}
-	return ctr_build_bool(!(strncmp(argumentList->object->value.svalue->value, myself->value.svalue->value, myself->value.svalue->vlen)==0));
+	return ctr_build_bool(!(strncmp(other->value.svalue->value, myself->value.svalue->value, myself->value.svalue->vlen)==0));
 }
 
 /**
