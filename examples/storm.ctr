@@ -27,7 +27,12 @@ Request host:'localhost' listen:4000 pid:'storm.pid' callback: {
 	Pen writeHeader: 'Content-type: text/html\n'.
 	var fname := Program env: 'DOCUMENT_URI'.
 	var script := File new: '/var/www/htdocs' + fname.
-	script include.
+	{
+		1 times: {	script include.	}.
+	} catch: { :e
+		Pen write: 'An error has occurred.', brk.
+		Pen write: e, brk.
+	}, run.
 	Pen flush.
 }.
 Pen write: 'DONE', brk.
