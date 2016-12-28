@@ -19,22 +19,10 @@
  */
 void ctr_cli_welcome() {
 	printf("\n");
-	printf("Citrine Programming Language V 0.6.\n");
-	printf("\n");
-	printf("--------------------------------------------------\n");
-	printf("\n");
-	printf("Written by: Gabor de Mooij (c) copyright 2016, Licensed BSD.\n");
-	printf("Quick Usage Examples:\n");
-	printf("Run a CTR file: ctr file \n");
-	printf("\n");
-	printf("--------------------------------------------------\n");
-	printf("\n");
-	printf("For more information enter  : man ctr \n");
-	printf("Or visit the website: http://citrine-lang.org.\n");
+	printf("Citrine Programming Language V 0.6.5\n");
+	printf("Written by Gabor de Mooij (c) copyright 2016, Licensed BSD.\n");
 	printf("\n");
 }
-
-
 
 /**
  * CommandLine Read Arguments
