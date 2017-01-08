@@ -1,0 +1,10 @@
+
+'- -rood - -groen -blauw -' findPattern: '(-[^[:space:]]+)' do: { :arr
+	Pen write: (arr join: '|'), brk.
+}.
+
+#test with flags (only ! ignore flag now)
+'- -rood - -groen -blauw -' findPattern: '(-[^[:space:]]+)' do: { :arr
+	Pen write: (arr join: '|'), brk.
+} options: '!'.
+

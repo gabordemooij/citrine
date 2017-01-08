@@ -689,6 +689,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "append:" ), &ctr_string_append );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "toNumber" ), &ctr_string_to_number );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "toBoolean" ), &ctr_string_to_boolean );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "findPattern:do:" ), &ctr_string_find_pattern_do );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "findPattern:do:options:" ), &ctr_string_find_pattern_options_do );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "String" ), CtrStdString, 0 );
 	CtrStdString->link = CtrStdObject;
 	CtrStdString->info.sticky = 1;

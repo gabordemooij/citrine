@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <time.h>
+#include <regex.h>
 
 #include "citrine.h"
 #include "siphash.h"
@@ -1613,6 +1614,101 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 	str = ctr_build_string(odest, dlen);
 	ctr_heap_free( odest );
 	return str;
+}
+
+/**
+ * [String] findPattern: [String] do: [Block] options: [String].
+ *
+ * Matches the POSIX regular expression in the first argument against
+ * the string and executes the specified block on every match passing
+ * an array containing the matches.
+ *
+ * The options parameter can be used to pass specific flags to the
+ * regular expression engine. As of the moment of writing this functionality
+ * has not been implemented yet. The only flag you can set at this moment is
+ * the 'ignore' flag, just a test flag. This flag does not execute the block.
+ *
+ * Usage:
+ *
+ * 'hello world' findPattern: '([hl])' do: { :arr
+ *  Pen write: (arr join: '|'), brk.
+ * } options: ''.
+ *
+ * On every match the block gets executed and the matches are
+ * passed to the block as arguments.
+ */
+ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument* argumentList ) {
+	regex_t pattern;
+	int reti;
+	int regex_error = 0;
+	size_t n = 255;
+	size_t i = 0;
+	regmatch_t matches[255];
+	char* needle = ctr_heap_allocate_cstring( argumentList->object );
+	char* options = ctr_heap_allocate_cstring( argumentList->next->next->object );
+	uint8_t olen = strlen( options );
+	uint8_t p = 0;
+	uint8_t flagIgnore = 0;
+	for ( p = 0; p < olen; p ++ ) {
+		if ( options[p] == '!' ) {
+			flagIgnore = 1;
+		}
+	}
+	ctr_object* block = argumentList->next->object;
+	reti = regcomp(&pattern, needle, REG_EXTENDED);
+	if ( reti ) {
+		return myself;
+	}
+	char* haystack = ctr_heap_allocate_cstring(myself);
+	size_t offset = 0;
+	while( !regex_error && !flagIgnore ) {
+		regex_error = regexec(&pattern, haystack + offset , n, matches, REG_NOTBOL );
+		if ( regex_error ) break;
+		ctr_argument* blockArguments;
+		blockArguments = ctr_heap_allocate( sizeof( ctr_argument ) );
+		ctr_argument* arrayConstructorArgument;
+		arrayConstructorArgument = ctr_heap_allocate( sizeof( ctr_argument ) );
+		blockArguments->object = ctr_array_new( CtrStdArray, arrayConstructorArgument );
+		for( i = 0; i < n; i ++ ) {
+			if ( matches[i].rm_so == -1 ) break;
+			ctr_argument* group;
+			group = ctr_heap_allocate( sizeof( ctr_argument ) );
+			size_t len = (matches[i].rm_eo - matches[i].rm_so);
+			char* tmp = ctr_heap_allocate( len + 1 );
+			memcpy( tmp, haystack + offset + matches[i].rm_so, len );
+			group->object = ctr_build_string_from_cstring( tmp );
+			ctr_array_push( blockArguments->object, group );
+			ctr_heap_free( group );
+			ctr_heap_free( tmp );
+		}
+		if (matches[0].rm_eo != -1) {
+			offset += matches[0].rm_eo;
+		}
+		ctr_block_run( block, blockArguments, block );
+		ctr_heap_free(blockArguments);
+		ctr_heap_free(arrayConstructorArgument);
+	}
+	ctr_heap_free( needle );
+	ctr_heap_free( haystack );
+	ctr_heap_free( options );
+	regfree( &pattern );
+	return myself;
+}
+
+/**
+ * [String] findPattern: [String] do: [Block].
+ *
+ * Same as findPattern:do:options: but without the options, no flags will
+ * be send to the regex engine.
+ */
+ctr_object* ctr_string_find_pattern_do( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_argument* no_options = ctr_heap_allocate( sizeof( ctr_argument ) );
+	argumentList->next->next->object = ctr_build_empty_string();
+	ctr_object* answer;
+	answer = ctr_string_find_pattern_options_do( myself, argumentList );
+	answer = myself;
+	ctr_heap_free( no_options );
+	return answer;
 }
 
 /**
