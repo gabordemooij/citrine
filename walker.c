@@ -105,14 +105,18 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		argumentList = msgnode->nodes;
 		a = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		aItem = a;
+		aItem->object = CtrStdNil;
 		if (argumentList) {
 			ctr_tnode* node;
 			node = argumentList->node;
 			while(1) {
 				ctr_object* o = ctr_cwlk_expr(node, &wasReturn);
 				aItem->object = o;
+				/* we always send at least one argument, note that if you want to modify the argumentList, be sure to take this into account */
+				/* there is always an extra empty argument at the end */
 				aItem->next = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 				aItem = aItem->next;
+				aItem->object = CtrStdNil;
 				if (!argumentList->next) break;
 				argumentList = argumentList->next;
 				node = argumentList->node;
