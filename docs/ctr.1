@@ -30,6 +30,12 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .B Nil
 .nf
     
+     Nil represents 'nothing' or NULL in other languages.
+     Any object property that has not been assigned a value
+     will contain Nil. Unlike some other programming languages
+     Citrine has no concept of 'undefined' or isset, Nil is actually the
+     same as 'undefined' or not set.
+    
      Literal:
     
      Nil
@@ -104,6 +110,25 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Deactivates 'chain mode'.
+.fi
+.BR.BR.BR
+
+.B [Object] message: [String] arguments: [Array]
+.nf
+    
+     Sends a custom or 'dynamic' message to an object. This takes a string containing
+     the message to be send to the object and an array listing the arguments at the
+     correct indexes. If the array fails to provide the correct indexes this will
+     generate an out-of-bounds error coming from the Array object. If something other
+     than an Array is provided an error will be thrown as well.
+    
+     Usage:
+    
+     var str := 'write:'.
+     Pen message: 'write:' arguments: (Array < 'Hello World').
+    
+     This will print the string 'Hello world' on the screen using a dynamically
+     crafted message.
 .fi
 .BR.BR.BR
 
@@ -1161,11 +1186,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      a := Array new.
-     
+    
      or, the short form:
-     
+    
      a := Array < 1 ; 2 ; 3.
-     
+    
 .fi
 .BR.BR.BR
 
@@ -1219,7 +1244,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      s := a sum. #6
     
      In the example above, the sum of array will be stored in s and
-     it's value will be 6. 
+     it's value will be 6.
 .fi
 .BR.BR.BR
 
@@ -1249,7 +1274,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      The map message will pass the following arguments to the block, the key,
      the value and a reference to the array itself. The last argument might seem
      redundant but allows for a more functional programming style.
-     
+    
      Usage:
     
      files map: showName.
@@ -1317,7 +1342,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Note that the fisrt index of the array is index 0.
     
      Usage:
-     
+    
      fruits := Array < 'apples' ; 'oranges' ; 'bananas'.
      fruits at: 1. #returns 'oranges'
 .fi
@@ -1325,7 +1350,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [Array] @ [Index]
 .nf
-     
+    
      Alias for [Array] at: [Index]
 .fi
 .BR.BR.BR
@@ -1336,9 +1361,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Puts a value in the array at the specified index.
      Array will be automatically expanded if the index is higher than
      the maximum index of the array.
-     
+    
      Usage:
-     
+    
      fruits := Array new.
      fruits put: 'apples' at: 5.
 .fi
@@ -1395,9 +1420,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Creates a Map object.
-     
+    
      Usage:
-     
+    
      files := Map new.
      files put: 'readme.txt' at: 'textfile'.
 .fi
@@ -1424,9 +1449,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [Map] @ [Key]
 .nf
-     
+    
      Alias for [Map] at: [Key].
-     
+    
 .fi
 .BR.BR.BR
 
@@ -1720,7 +1745,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Available Modes:
      0 - No Garbage Collection
      1 - Activate Garbage Collector
-     3 - Activate Garbage Collctor and Recycle used objects
+     4 - Activate Garbage Collector for every single step (testing only)
 .fi
 .BR.BR.BR
 
@@ -1797,11 +1822,94 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      Pen write: 'What is your name ?'.
-     x := Command askQuestion.
+     x := Command waitForInput.
      Pen write: 'Hello ' + x + ' !', brk.
     
      The example above asks the user for his/her name and
      then displays the input received.
+.fi
+.BR.BR.BR
+
+.B [Program] input.
+.nf
+    
+     Reads all raw input from STDIN.
+    
+     Usage (for instance to read raw CGI post):
+    
+     post := Program input.
+.fi
+.BR.BR.BR
+
+.BR.BR.BR
+
+.B [Program] forbidShell
+.nf
+    
+     This method is part of the security profiles feature of Citrine.
+     This will forbid the program to execute any shell operations. All
+     external libraries and plugins are assumed to respect this setting as well.
+    
+     Usage:
+    
+     Program forbidShell.
+.fi
+.BR.BR.BR
+
+.B [Program] forbidFileWrite
+.nf
+    
+     This method is part of the security profiles feature of Citrine.
+     This will forbid the program to modify, create or delete any files. All
+     external libraries and plugins are assumed to respect this setting as well.
+    
+     Usage:
+    
+     Program forbidFileWrite.
+.fi
+.BR.BR.BR
+
+.B [Program] forbidFileRead
+.nf
+    
+     This method is part of the security profiles feature of Citrine.
+     This will forbid the program to read any files. In fact this will prevent you from
+     creating the file object at all.
+     This will also prevent you from reading environment variables.
+     All external libraries and plugins are assumed to respect this setting as well.
+     Forbidding a program to read files also has the effect to forbid including other
+     source files.
+    
+     Usage:
+    
+     Program forbidFileRead.
+.fi
+.BR.BR.BR
+
+.B [Program] forbidInclude
+.nf
+    
+     This method is part of the security profiles feature of Citrine.
+     This will forbid the program to include any other files. All
+     external libraries and plugins are assumed to respect this setting as well.
+    
+     Usage:
+    
+     Program forbidInclude.
+.fi
+.BR.BR.BR
+
+.B [Program] remainingMessages: [Number]
+.nf
+    
+     This method is part of the security profiles feature of Citrine.
+     This will initiate a countdown for the program, you can specify the maximum quota of
+     messages the program may process, once this quota has been exhausted the program will
+     be killed entirely (no exception).
+    
+     Usage:
+    
+     Program remainingMessages: 100.
 .fi
 .BR.BR.BR
 
