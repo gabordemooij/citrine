@@ -1,0 +1,5 @@
+#Replace the sequences ell and rl with a * --> h*o wo*d
+var newString := ('hello world' findPattern: '([eor])([l]+)' do: { :match
+	^ '*'.
+}).
+Pen write: newString,brk.

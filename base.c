@@ -1661,6 +1661,7 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 	}
 	char* haystack = ctr_heap_allocate_cstring(myself);
 	size_t offset = 0;
+	ctr_object* newString = ctr_build_empty_string();
 	while( !regex_error && !flagIgnore ) {
 		regex_error = regexec(&pattern, haystack + offset , n, matches, REG_NOTBOL );
 		if ( regex_error ) break;
@@ -1682,17 +1683,29 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 			ctr_heap_free( tmp );
 		}
 		if (matches[0].rm_eo != -1) {
+			ctr_argument* arg = ctr_heap_allocate( sizeof( ctr_argument ) );
+			arg->object = ctr_build_string( haystack + offset, matches[0].rm_so );
+			ctr_string_append( newString, arg );
 			offset += matches[0].rm_eo;
+			ctr_heap_free( arg );
 		}
-		ctr_block_run( block, blockArguments, block );
+		ctr_object* replacement = ctr_block_run( block, blockArguments, block );
+		ctr_argument* arg = ctr_heap_allocate( sizeof( ctr_argument ) );
+		arg->object = replacement;
+		ctr_string_append( newString, arg );
+		ctr_heap_free( arg );
 		ctr_heap_free(blockArguments);
 		ctr_heap_free(arrayConstructorArgument);
 	}
+	ctr_argument* arg = ctr_heap_allocate( sizeof( ctr_argument ) );
+	arg->object = ctr_build_string( haystack + offset, strlen( haystack + offset ) );
+	ctr_string_append( newString, arg );
+	ctr_heap_free( arg );
 	ctr_heap_free( needle );
 	ctr_heap_free( haystack );
 	ctr_heap_free( options );
 	regfree( &pattern );
-	return myself;
+	return newString;
 }
 
 /**
@@ -1706,7 +1719,6 @@ ctr_object* ctr_string_find_pattern_do( ctr_object* myself, ctr_argument* argume
 	argumentList->next->next->object = ctr_build_empty_string();
 	ctr_object* answer;
 	answer = ctr_string_find_pattern_options_do( myself, argumentList );
-	answer = myself;
 	ctr_heap_free( no_options );
 	return answer;
 }
