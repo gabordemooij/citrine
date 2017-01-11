@@ -1635,7 +1635,8 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
  * } options: ''.
  *
  * On every match the block gets executed and the matches are
- * passed to the block as arguments.
+ * passed to the block as arguments. You can also use this feature to replace
+ * parts of the string, simply return the replacement string in your block.
  */
 ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument* argumentList ) {
 	regex_t pattern;
@@ -1720,6 +1721,47 @@ ctr_object* ctr_string_find_pattern_do( ctr_object* myself, ctr_argument* argume
 	ctr_object* answer;
 	answer = ctr_string_find_pattern_options_do( myself, argumentList );
 	ctr_heap_free( no_options );
+	return answer;
+}
+
+/**
+ * [String] containsPattern: [String].
+ *
+ * Tests the pattern against the string and returns True if there is a match
+ * and False otherwise.
+ *
+ * Usage:
+ *
+ * var match := 'Hello World' containsPattern: '[:space:]'.
+ * #match will be True because there is a space in 'Hello World'
+ */
+ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argumentList ) {
+	regex_t pattern;
+	int regex_error = 0;
+	int result = 0;
+	char* error_message = ctr_heap_allocate( 255 );
+	char* needle = ctr_heap_allocate_cstring( argumentList->object );
+	char* haystack = ctr_heap_allocate_cstring(myself);
+	ctr_object* answer;
+	regex_error = regcomp(&pattern, needle, REG_EXTENDED);
+	if ( regex_error ) {
+		CtrStdFlow = ctr_build_string_from_cstring( "Could not compile regular expression." );
+		answer = CtrStdNil;
+	} else {
+		result = regexec(&pattern, haystack, 0, NULL, 0 );
+		if ( !result ) {
+			answer = ctr_build_bool( 1 );
+		} else if ( result == REG_NOMATCH ) {
+			answer = ctr_build_bool( 0 );
+		} else {
+			CtrStdFlow = ctr_build_string_from_cstring( error_message );
+			answer = CtrStdNil;
+		}
+	}
+	regfree( &pattern );
+	ctr_heap_free( error_message );
+	ctr_heap_free( needle );
+	ctr_heap_free( haystack );
 	return answer;
 }
 
