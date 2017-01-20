@@ -454,6 +454,7 @@ ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentLis
 ctr_object* ctr_string_find_pattern_do(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_find_pattern_options_do(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_contains_pattern(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_string_hash_with_key(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Block Interface

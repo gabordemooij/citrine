@@ -1,0 +1,4 @@
+#test hash function
+Pen write: ('hello' hashWithKey: '1234567890123456'), brk.
+Pen write: ('hello' hashWithKey: '1234567890123456'), brk.
+Pen write: ('hello' hashWithKey: '123'), brk.

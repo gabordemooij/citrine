@@ -2094,6 +2094,29 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
 }
 
 /**
+ * [String] hashWithKey: [String]
+ *
+ * Returns the hash of the recipient String using the specified key.
+ * The default hash in Citrine is the SipHash which is also used internally.
+ * SipHash can protect against hash flooding attacks.
+ */
+ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argumentList ) {
+	char* keyString = ctr_heap_allocate_cstring( argumentList->object );
+	if ( strlen( keyString ) < 16 ) {
+		ctr_heap_free( keyString );
+		CtrStdFlow = ctr_build_string_from_cstring( "Key must be exactly 16 bytes long." );
+		return CtrStdNil;
+	}
+	uint64_t t = siphash24( myself->value.svalue->value, myself->value.svalue->vlen, keyString);
+	char* dest = ctr_heap_allocate( 40 );
+	snprintf( dest, 40, "%" PRIu64, t );
+	ctr_object* hash = ctr_build_string_from_cstring( dest );
+	ctr_heap_free( dest );
+	ctr_heap_free( keyString );
+	return hash;
+}
+
+/**
  * Block
  *
  * Literal:

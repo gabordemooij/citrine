@@ -19,7 +19,7 @@
  */
 void ctr_cli_welcome() {
 	printf("\n");
-	printf("Citrine Programming Language V 0.6.5\n");
+	printf("Citrine Programming Language V 0.7.1\n");
 	printf("Written by Gabor de Mooij (c) copyright 2016, Licensed BSD.\n");
 	printf("\n");
 }
