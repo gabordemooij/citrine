@@ -84,6 +84,30 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [Object] learn: [String] means: [String].
+.nf
+    
+     Teaches any object to repsond to the first specified message just like
+     it would upon receiving the second. This allows you to map existing
+     responses to new messages. You can use this to translate messages into your native
+     language. After mapping, sending the alias message will be just as fast
+     as sending the original message. You can use this to create programs
+     in your native language without sacrficing performance. Of course the mapping itself
+     has a cost, but the mapped calls will be 'toll-free'.
+    
+     Usage:
+    
+     #in this example we'll map a message to a Dutch word:
+    
+     Boolean learn: 'alsWaar:'
+             means: 'ifTrue:'.
+    
+     (2 > 1) alsWaar: {
+       Pen write: 'alsWaar means ifTrue in Dutch'.
+     }
+.fi
+.BR.BR.BR
+
 .B [Object] do
 .nf
     
@@ -242,6 +266,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
      (some expression) ifTrue: { ... }.
     
+     You can also use ifFalse and ifTrue with other objects because the
+     Object instance also responds to these messages.
 .fi
 .BR.BR.BR
 
@@ -254,7 +280,13 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
      (some expression) ifFalse: { ... }.
     
+     You can also use ifFalse and ifTrue with other objects because the
+     Object instance also responds to these messages.
 .fi
+.BR.BR.BR
+
+.BR.BR.BR
+
 .BR.BR.BR
 
 .B [Boolean] not
@@ -957,6 +989,51 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      'LiLo BootLoader' replace: 'L' with: 'l'. #lilo Bootloader
+.fi
+.BR.BR.BR
+
+.B [String] findPattern: [String] do: [Block] options: [String].
+.nf
+    
+     Matches the POSIX regular expression in the first argument against
+     the string and executes the specified block on every match passing
+     an array containing the matches.
+    
+     The options parameter can be used to pass specific flags to the
+     regular expression engine. As of the moment of writing this functionality
+     has not been implemented yet. The only flag you can set at this moment is
+     the 'ignore' flag, just a test flag. This flag does not execute the block.
+    
+     Usage:
+    
+     'hello world' findPattern: '([hl])' do: { :arr
+      Pen write: (arr join: '|'), brk.
+     } options: ''.
+    
+     On every match the block gets executed and the matches are
+     passed to the block as arguments. You can also use this feature to replace
+     parts of the string, simply return the replacement string in your block.
+.fi
+.BR.BR.BR
+
+.B [String] findPattern: [String] do: [Block].
+.nf
+    
+     Same as findPattern:do:options: but without the options, no flags will
+     be send to the regex engine.
+.fi
+.BR.BR.BR
+
+.B [String] containsPattern: [String].
+.nf
+    
+     Tests the pattern against the string and returns True if there is a match
+     and False otherwise.
+    
+     Usage:
+    
+     var match := 'Hello World' containsPattern: '[:space:]'.
+     #match will be True because there is a space in 'Hello World'
 .fi
 .BR.BR.BR
 
