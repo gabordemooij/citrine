@@ -1,0 +1,7 @@
+x := 6.
+who := 'Devil'.
+?>{%the} <?.
+Pen write: '\{%number} of the {%who} is: {%x}{%x}{%x} !!!!', brk.
+
+
+

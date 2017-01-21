@@ -13,6 +13,7 @@ int ctr_clex_bflmt = 255;
 ctr_size ctr_clex_tokvlen = 0; /* length of the string value of a token */
 char* ctr_clex_buffer;
 char* ctr_code;
+char* ctr_code_eoi;
 char* ctr_eofcode;
 char* ctr_clex_oldptr;
 char* ctr_clex_olderptr;
@@ -37,6 +38,10 @@ char* ctr_clex_desc_tok_assignment = ":=";
 char* ctr_clex_desc_tok_ret = "^";
 char* ctr_clex_desc_tok_fin = "end of program";
 char* ctr_clex_desc_tok_unknown = "(unknown token)";
+
+int ctr_string_interpolation = 0;
+char* ivarname;
+int ivarlen;
 
 /**
  * Lexer - is Symbol Delimiter ?
@@ -167,6 +172,10 @@ long ctr_clex_tok_value_length() {
  * Puts back a token and resets the pointer to the previous one.
  */
 void ctr_clex_putback() {
+	if ( ctr_string_interpolation > 0 ) {
+		ctr_string_interpolation--;
+		return;
+	}
 	ctr_code = ctr_clex_oldptr;
 	ctr_clex_oldptr = ctr_clex_olderptr;
 	ctr_clex_line_number = ctr_clex_old_line_number;
@@ -180,13 +189,41 @@ void ctr_clex_putback() {
  */
 int ctr_clex_tok() {
 	char c;
-	int i, comment_mode;
+	int i, comment_mode, presetToken;
 	ctr_clex_tokvlen = 0;
 	ctr_clex_olderptr = ctr_clex_oldptr;
 	ctr_clex_oldptr = ctr_code;
 	ctr_clex_old_line_number = ctr_clex_line_number;
 	i = 0;
 	comment_mode = 0;
+
+	/* a little state machine to handle string interpolation, */
+	/* i.e. transforms ' {%x} ' into: '' + x + ''. */
+	switch( ctr_string_interpolation ) {
+		case 1:
+			presetToken = CTR_TOKEN_QUOTE;
+			break;
+		case 2:
+		case 4:
+			memcpy( ctr_clex_buffer, "+", 1 );
+			ctr_clex_tokvlen = 1;
+			presetToken = CTR_TOKEN_REF;
+			break;
+		case 3:
+			memcpy( ctr_clex_buffer, ivarname, ivarlen );
+			ctr_clex_tokvlen = ivarlen;
+			presetToken = CTR_TOKEN_REF;
+			break;
+		case 5:
+			ctr_code = ctr_code_eoi;
+			presetToken = CTR_TOKEN_QUOTE;
+			break;
+	}
+	/* return the preset token, and transition to next state */
+	if ( ctr_string_interpolation ) {
+		ctr_string_interpolation++;
+		return presetToken;
+	}
 
 	/* if verbatim mode is on and we passed the '>' verbatim write message, insert a 'fake quote' (?>') */
 	if (ctr_clex_verbatim_mode == 1 && ctr_clex_verbatim_mode_insert_quote == (uintptr_t) ctr_code) {
@@ -322,6 +359,12 @@ char* ctr_clex_readstr() {
 	char* beginbuff;
 	long page = 100; /* 100 byte pages */
 	size_t tracking_id;
+
+	if ( ctr_string_interpolation == 6 ) {
+		ctr_heap_free( ivarname );
+		ctr_string_interpolation = 0;
+	}
+
 	ctr_clex_tokvlen=0;
 	strbuff = (char*) ctr_heap_allocate_tracked(memblock);
 	tracking_id = ctr_heap_get_latest_tracking_id();
@@ -349,6 +392,25 @@ char* ctr_clex_readstr() {
 			(ctr_code < ctr_eofcode)
 		)
 	) {
+
+		/* enter interpolation mode ( {%x} ) */
+		if (
+			!ctr_clex_verbatim_mode &&
+			!escape &&
+			c == '{' &&
+			((ctr_code+1) < ctr_eofcode) &&
+			*(ctr_code+1) == '%'
+		) {
+			int q = 2;
+			while( ( ctr_code + q ) < ctr_eofcode && *(ctr_code + q) != '}'  && q < 255 ) q++;
+			ivarname = ctr_heap_allocate( q );
+			ivarlen  = q - 2;
+			memcpy( ivarname, ctr_code + 2, q - 2 );
+			ctr_string_interpolation = 1;
+			ctr_code_eoi = ctr_code + q + 1; // '}','{','%' and the name  ( name + 3 )
+			break;
+		}
+
 		if ( c == '\n' ) ctr_clex_line_number ++;
 
 		if (c == 'n' && escape == 1) {
