@@ -340,6 +340,8 @@ ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  * (some expression) ifTrue: { ... }.
  *
+ * You can also use ifFalse and ifTrue with other objects because the
+ * Object instance also responds to these messages.
  */
 ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
@@ -364,6 +366,8 @@ ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  * (some expression) ifFalse: { ... }.
  *
+ * You can also use ifFalse and ifTrue with other objects because the
+ * Object instance also responds to these messages.
  */
 ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
@@ -377,6 +381,20 @@ ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
 	return myself;
+}
+
+/**
+ * @internal
+ */
+ctr_object* ctr_object_if_false( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_bool_ifFalse( ctr_internal_cast2bool( myself ), argumentList );
+}
+
+/**
+ * @internal
+ */
+ctr_object* ctr_object_if_true( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_bool_iftrue( ctr_internal_cast2bool( myself ), argumentList );
 }
 
 /**
