@@ -48,9 +48,7 @@ ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
  */
 ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pushValue;
-	size_t oldLength;
 	if (myself->value.avalue->length <= (myself->value.avalue->head + 1)) {
-		oldLength = myself->value.avalue->length;
 		myself->value.avalue->length = myself->value.avalue->length * 3;
 		myself->value.avalue->elements = (ctr_object**) ctr_heap_reallocate(myself->value.avalue->elements,
 			(sizeof(ctr_object*) * (myself->value.avalue->length))
@@ -250,13 +248,11 @@ ctr_object* ctr_array_new_and_push(ctr_object* myclass, ctr_argument* argumentLi
  * a unshift: 3. #now contains: 3,1
  */
 ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
-	size_t old_length;
 	ctr_object* pushValue = argumentList->object;
 	if (myself->value.avalue->tail > 0) {
 		myself->value.avalue->tail--;
 	} else {
 		if (myself->value.avalue->length <= (myself->value.avalue->head + 1)) {
-			old_length = myself->value.avalue->length;
 			myself->value.avalue->length = myself->value.avalue->length * 3;
 			myself->value.avalue->elements = (ctr_object**) ctr_heap_reallocate(myself->value.avalue->elements, (sizeof(ctr_object*) * (myself->value.avalue->length)));
 		}
@@ -283,7 +279,6 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 	int i;
 	char* result;
 	ctr_size len = 0;
-	ctr_size oldLen = 0;
 	ctr_size pos;
 	ctr_object* o;
 	ctr_object* str;
@@ -303,7 +298,6 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 			memcpy(result+pos, glue->value.svalue->value, glen);
 			pos += glen;
 		}
-		oldLen = len;
 		memcpy(result+pos, str->value.svalue->value, str->value.svalue->vlen);
 	}
 	resultStr = ctr_build_string(result, len);

@@ -138,7 +138,6 @@ ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key
 void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int is_method) {
 	uint64_t hashKey = ctr_internal_index_hash(key);
 	ctr_mapitem* head;
-	ctr_mapitem* oldMapItem;
 	if (is_method) {
 		if (owner->methods->size == 0) {
 			return;
@@ -152,7 +151,6 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
 	}
 	while(head) {
 		if ((hashKey == head->hashKey) && ctr_internal_object_is_equal(head->key, key)) {
-			oldMapItem = head;
 			if (head->next && head->prev) {
 				head->next->prev = head->prev;
 				head->prev->next = head->next;

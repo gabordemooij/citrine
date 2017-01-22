@@ -84,14 +84,12 @@ void* ctr_heap_allocate( size_t size ) {
  */
 void* ctr_heap_allocate_tracked( size_t size ) {
 	void* space;
-	size_t old_size;
 	space = ctr_heap_allocate( size );
 	if ( numberOfMemBlocks >= maxNumberOfMemBlocks ) {
 		if ( memBlocks == NULL ) {
 			memBlocks = ctr_heap_allocate( sizeof( memBlock ) );
 			maxNumberOfMemBlocks = 1;
 		} else {
-			old_size = maxNumberOfMemBlocks;
 			maxNumberOfMemBlocks += 10;
 			memBlocks = ctr_heap_reallocate( memBlocks, ( sizeof( memBlock ) * ( maxNumberOfMemBlocks ) ) );
 		}
@@ -108,9 +106,7 @@ void* ctr_heap_allocate_tracked( size_t size ) {
  */
 void* ctr_heap_reallocate_tracked( size_t tracking_id, size_t size ) {
 	void* space;
-	size_t recorded_size;
 	space = memBlocks[ tracking_id ].space;
-	recorded_size = memBlocks[ tracking_id ].size;
 	space = ctr_heap_reallocate( space, size );
 	memBlocks[ tracking_id ].space = space;
 	memBlocks[ tracking_id ].size  = size;

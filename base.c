@@ -1594,13 +1594,10 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 	long nlen = needle->value.svalue->vlen;
 	long rlen = replacement->value.svalue->vlen;
 	long dlen = hlen;
-	long olen = dlen;
 	char* p;
 	long i = 0;
 	long offset = 0;
 	long d;
-	size_t maxlen;
-	maxlen = dlen;
 	if (nlen == 0 || hlen == 0) {
 		return ctr_build_string(src, hlen);
 	}
@@ -1611,11 +1608,9 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 		if (p == NULL) break;
 		d = (dest - odest);
 		if ((dlen - nlen + rlen)>dlen) {
-			olen = dlen;
 			dlen = (dlen - nlen + rlen);
 			odest = (char*) ctr_heap_reallocate(odest, dlen * sizeof(char) );
 			dest = (odest + d);
-			maxlen = dlen;
 		} else {
 			dlen = (dlen - nlen + rlen);
 		}

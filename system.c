@@ -438,7 +438,6 @@ ctr_object* ctr_command_input(ctr_object* myself, ctr_argument* argumentList) {
 	size_t content_size = 1;
 	char *content = ctr_heap_allocate(sizeof(char) * page);
 	while(fgets(buffer, page, stdin)) {
-		char *old = content;
 		content_size += strlen(buffer);
 		content = ctr_heap_reallocate(content, content_size);
 		strcat(content, buffer);
