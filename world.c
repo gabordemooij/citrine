@@ -598,11 +598,11 @@ void ctr_initialize_world() {
 
 	/* Boolean */
 	CtrStdBool = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
-	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "ifTrue:" ), &ctr_bool_iftrue );
-	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "ifFalse:" ), &ctr_bool_ifFalse );
+	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "ifTrue:" ), &ctr_bool_if_true );
+	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "ifFalse:" ), &ctr_bool_if_false );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "break" ), &ctr_bool_break );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "continue" ), &ctr_bool_continue );
-	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "else:" ), &ctr_bool_ifFalse );
+	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "else:" ), &ctr_bool_if_false );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "not" ), &ctr_bool_not );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "&" ), &ctr_bool_and );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "!" ), &ctr_bool_nor );

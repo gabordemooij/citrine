@@ -358,8 +358,8 @@ ctr_object* ctr_object_if_true(ctr_object* myself, ctr_argument* argumentList);
 /**
  * Boolean Interface
  */
-ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_bool_if_false(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList);

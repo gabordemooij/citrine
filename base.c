@@ -343,7 +343,7 @@ ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
  * You can also use ifFalse and ifTrue with other objects because the
  * Object instance also responds to these messages.
  */
-ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
 	if (myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
@@ -369,7 +369,7 @@ ctr_object* ctr_bool_iftrue(ctr_object* myself, ctr_argument* argumentList) {
  * You can also use ifFalse and ifTrue with other objects because the
  * Object instance also responds to these messages.
  */
-ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_bool_if_false(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
 	if (!myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
@@ -387,14 +387,14 @@ ctr_object* ctr_bool_ifFalse(ctr_object* myself, ctr_argument* argumentList) {
  * @internal
  */
 ctr_object* ctr_object_if_false( ctr_object* myself, ctr_argument* argumentList ) {
-	return ctr_bool_ifFalse( ctr_internal_cast2bool( myself ), argumentList );
+	return ctr_bool_if_false( ctr_internal_cast2bool( myself ), argumentList );
 }
 
 /**
  * @internal
  */
 ctr_object* ctr_object_if_true( ctr_object* myself, ctr_argument* argumentList ) {
-	return ctr_bool_iftrue( ctr_internal_cast2bool( myself ), argumentList );
+	return ctr_bool_if_true( ctr_internal_cast2bool( myself ), argumentList );
 }
 
 /**
