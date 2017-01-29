@@ -1,0 +1,18 @@
+#Can we translate messages?
+
+Boolean learn: 'alsWaar:'
+		means: 'ifTrue:'.
+
+Pen learn: 'schrijf:'
+	means: 'write:'.
+
+Pen learn: 'nieuweRegel' means: 'brk'.
+
+Potlood := Pen.
+
+#Dutch code here!
+( 2 > 1 ) alsWaar: {
+	var tekst := 'Het Nederlands is een mooie taal.'.
+	Potlood schrijf: tekst, nieuweRegel.
+}.
+
