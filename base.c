@@ -101,6 +101,57 @@ ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Object] learn: [String] means: [String].
+ *
+ * Teaches any object to repsond to the first specified message just like
+ * it would upon receiving the second. This allows you to map existing
+ * responses to new messages. You can use this to translate messages into your native
+ * language. After mapping, sending the alias message will be just as fast
+ * as sending the original message. You can use this to create programs
+ * in your native language without sacrficing performance. Of course the mapping itself
+ * has a cost, but the mapped calls will be 'toll-free'.
+ *
+ * Usage:
+ *
+ * #in this example we'll map a message to a Dutch word:
+ *
+ * Boolean learn: 'alsWaar:'
+ *         means: 'ifTrue:'.
+ *
+ * (2 > 1) alsWaar: {
+ *   Pen write: 'alsWaar means ifTrue in Dutch'.
+ * }
+ */
+ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argumentList) {
+	ctr_string*  current_method_name_str;
+	ctr_size     current_method_name_len;
+	ctr_size     i                      = 0;
+	ctr_size     len                    = 0;
+	ctr_mapitem* current_method         = myself->methods->head;
+	ctr_object*  target_method_name     = ctr_internal_cast2string( ctr_argumentList->next->object );
+	ctr_string*  target_method_name_str = target_method_name->value.svalue->value;
+	ctr_size     target_method_name_len = target_method_name->value.svalue->vlen;
+	ctr_object*  alias                  = ctr_internal_cast2string( ctr_argumentList->object );
+	while( i < myself->methods->size ) {
+		current_method_name_str = current_method->key->value.svalue->value;
+		current_method_name_len = current_method->key->value.svalue->vlen;
+		if (  current_method_name_len > target_method_name_len ) {
+			len = current_method_name_len;
+		} else {
+			len = target_method_name_len;
+		}
+		if ( strncmp( current_method_name_str, target_method_name_str, len ) == 0 ) {
+			ctr_internal_object_add_property( myself, alias, current_method->value, 1);
+			break;
+		}
+		current_method = current_method->next;
+		i ++;
+	}
+	return myself;
+}
+
+
+/**
  * [Object] do
  *
  * Activates 'chain mode'. If chain mode is active, all messages will

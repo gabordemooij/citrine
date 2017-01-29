@@ -353,7 +353,7 @@ ctr_object* ctr_object_done(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_message(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_if_false(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_if_true(ctr_object* myself, ctr_argument* argumentList);
-
+ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argumentList);
 
 /**
  * Boolean Interface

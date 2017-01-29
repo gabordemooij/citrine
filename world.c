@@ -583,6 +583,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( "ifFalse:" ), &ctr_object_if_false );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( "ifTrue:" ), &ctr_object_if_true );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( "message:arguments:" ), &ctr_object_message );
+	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( "learn:means:" ), &ctr_object_learn_meaning );
 	ctr_internal_object_add_property( CtrStdWorld, ctr_build_string_from_cstring( "Object" ), CtrStdObject, 0 );
 	CtrStdObject->link = NULL;
 	CtrStdObject->info.sticky = 1;
