@@ -316,7 +316,7 @@ ctr_tnode* ctr_cparse_ref() {
 	r->type = CTR_AST_NODE_REFERENCE;
 	r->vlen = ctr_clex_tok_value_length();
 	tmp = ctr_clex_tok_value();
-	if (strncmp("my", tmp, 2)==0 && r->vlen == 2) {
+	if (strncmp(ctr_clex_keyword_my, tmp, ctr_clex_keyword_my_len)==0 && r->vlen == ctr_clex_keyword_my_len) {
 		int t = ctr_clex_tok();
 		if (t != CTR_TOKEN_REF) {
 			ctr_cparse_emit_error_unexpected( t, "'My' should always be followed by a property name!\n");
@@ -325,7 +325,7 @@ ctr_tnode* ctr_cparse_ref() {
 		r->modifier = 1;
 		r->vlen = ctr_clex_tok_value_length();
 	}
-	if (strncmp("var", tmp, 3)==0 && r->vlen == 3) {
+	if (strncmp(ctr_clex_keyword_var, tmp, ctr_clex_keyword_var_len)==0 && r->vlen == ctr_clex_keyword_var_len) {
 		int t = ctr_clex_tok();
 		if (t != CTR_TOKEN_REF) {
 			ctr_cparse_emit_error_unexpected( t, "Keyword 'var' should always be followed by property name!\n");

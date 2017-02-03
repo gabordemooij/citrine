@@ -1,18 +1,27 @@
+Object learnKeywords: ' laat ik mijn '.
 #Can we translate messages?
-
 Boolean learn: 'alsWaar:'
 		means: 'ifTrue:'.
-
 Pen learn: 'schrijf:'
 	means: 'write:'.
-
 Pen learn: 'nieuweRegel' means: 'brk'.
-
 Potlood := Pen.
 
+Object learn: 'nieuw' means: 'new'.
+Object learn: 'antwoord:met:' means: 'on:do:'.
+
+
 #Dutch code here!
-( 2 > 1 ) alsWaar: {
-	var tekst := 'Het Nederlands is een mooie taal.'.
-	Potlood schrijf: tekst, nieuweRegel.
+Verteller := Object nieuw.
+Verteller antwoord: 'schrijf:' met: { :wat
+	laat x := 2.
+	( x > 1 ) alsWaar: {
+		Potlood schrijf: wat, nieuweRegel.
+	}.
+}.
+Verteller on: 'vertel' do: {
+	mijn taal := 'Nederlands'.
+	ik schrijf: 'Het ' + mijn taal + ' is een mooie taal.'.
 }.
 
+Verteller vertel.

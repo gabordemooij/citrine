@@ -263,6 +263,11 @@ long    ctr_clex_tok_value_length();
 void 	ctr_clex_putback();
 char*	ctr_clex_readstr();
 char*   ctr_clex_tok_describe( int token );
+char*   ctr_clex_keyword_var;
+char*   ctr_clex_keyword_me;
+char*   ctr_clex_keyword_my;
+ctr_size ctr_clex_keyword_my_len;
+ctr_size ctr_clex_keyword_var_len;
 
 /**
  * Lexer properties

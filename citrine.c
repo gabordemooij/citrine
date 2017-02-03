@@ -58,6 +58,9 @@ int main(int argc, char* argv[]) {
 	ctr_command_tick = 0;
 	ctr_cli_read_args(argc, argv);
 	ctr_source_mapping = 1;
+	ctr_clex_keyword_me = ctr_heap_allocate( 64 );
+	ctr_clex_keyword_my = ctr_heap_allocate( 64 );
+	ctr_clex_keyword_var = ctr_heap_allocate( 64 );
 	prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
 	program = ctr_cparse_parse(prg, ctr_mode_input_file);
 	/*ctr_internal_debug_tree(program,1); -- for debugging */
