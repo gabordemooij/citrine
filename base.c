@@ -123,13 +123,13 @@ ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
  * }
  */
 ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argumentList) {
-	ctr_string*  current_method_name_str;
+	char*  current_method_name_str;
 	ctr_size     current_method_name_len;
 	ctr_size     i                      = 0;
 	ctr_size     len                    = 0;
 	ctr_mapitem* current_method         = myself->methods->head;
 	ctr_object*  target_method_name     = ctr_internal_cast2string( ctr_argumentList->next->object );
-	ctr_string*  target_method_name_str = target_method_name->value.svalue->value;
+	char*        target_method_name_str = target_method_name->value.svalue->value;
 	ctr_size     target_method_name_len = target_method_name->value.svalue->vlen;
 	ctr_object*  alias                  = ctr_internal_cast2string( ctr_argumentList->object );
 	while( i < myself->methods->size ) {
