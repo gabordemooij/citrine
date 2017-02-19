@@ -7,7 +7,7 @@ echo ho!. #prints ho!ho!
 
 
 echo := Object new.
-echo on: 'respondTo:with:' do: {
+echo on: 'respondTo:and:' do: {
 	:sound :x
 	x times: { Pen write: sound. }.
 }.
@@ -16,7 +16,7 @@ echo wooo: 3. #prints wooo:wooo:wooo
 
 
 echo := Object new.
-echo on: 'respondTo:with:and:' do: {
+echo on: 'respondTo:and:and:' do: {
 	:operation :sound :x
 	x times: {	Pen write: sound. }.
 }.

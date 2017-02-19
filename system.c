@@ -273,7 +273,7 @@ ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Shell Object uses a fluid API.
  */
-ctr_object* ctr_shell_respond_to_with(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_shell_respond_to_and(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object*   commandObj;
 	ctr_object*   prefix;
 	ctr_object*   suffix;

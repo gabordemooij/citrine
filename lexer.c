@@ -75,37 +75,6 @@ void ctr_clex_emit_error( char* message )
 }
 
 /**
- * CTRLexerLoadTranslations
- *
- * Loads the translation of keywords for this file.
- *
- * Usage:
- *
- * Object learnVar: 'variabele' me: 'ik' my: 'mijn'.
- */
-void ctr_clex_load_translations() {
-	char* buffer;
-	char* start = ctr_code;
-	buffer = ctr_heap_allocate( 255 );
-	memcpy( buffer, ctr_code, 255 );
-	//printf( "%s\n", buffer );
-	
-	
-	//sscanf( buffer, "Object learnVar: %s", ctr_clex_keyword_var );
-	//printf("-> %s <- \n", ctr_clex_keyword_var  );
-	
-	sscanf( "var me my", "%s %s %s", ctr_clex_keyword_var, ctr_clex_keyword_me, ctr_clex_keyword_my );
-	sscanf( buffer, "Object learnKeywords: ' %s %s %s '.", ctr_clex_keyword_var, ctr_clex_keyword_me, ctr_clex_keyword_my );
-	ctr_clex_keyword_var_len = strlen(ctr_clex_keyword_var);
-	ctr_clex_keyword_my_len = strlen(ctr_clex_keyword_my);
-	
-	
-	printf("-> |%s|%s|%s| \n", ctr_clex_keyword_var, ctr_clex_keyword_me, ctr_clex_keyword_my );
-	ctr_heap_free( buffer );
-	ctr_code = start;
-}
-
-/**
  * CTRLexerLoad
  *
  * Loads program into memory.
@@ -113,7 +82,6 @@ void ctr_clex_load_translations() {
 void ctr_clex_load(char* prg) {
 	ctr_code = prg;
 	ctr_clex_buffer = ctr_heap_allocate_tracked(ctr_clex_bflmt);
-	ctr_clex_load_translations();
 	ctr_clex_buffer[0] = '\0';
 	ctr_eofcode = (ctr_code + ctr_program_length);
 	ctr_clex_line_number = 0;

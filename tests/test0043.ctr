@@ -3,10 +3,10 @@ repeater := Object new.
 repeater on: 'respondTo:' do: { :what
 	Pen write: what + ' '.
 }.
-repeater on: 'respondTo:with:' do: { :what :say
+repeater on: 'respondTo:and:' do: { :what :say
 	Pen write: what, write: say + ' '.
 }.
-repeater on: 'respondTo:with:and:' do: { :what :say :more
+repeater on: 'respondTo:and:and:' do: { :what :say :more
 	Pen write: what, write: say, write: more.
 }.
 repeater repeat.
