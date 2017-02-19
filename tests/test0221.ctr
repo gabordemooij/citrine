@@ -3,8 +3,39 @@
 	Pen write: (arr join: '|'), brk.
 }.
 
-#test with flags (only ! ignore flag now)
+#test with ignore flag
 '- -rood - -groen -blauw -' findPattern: '(-[^[:space:]]+)' do: { :arr
 	Pen write: (arr join: '|'), brk.
 } options: '!'.
 
+#test with newline flag
+'-
+    -rood
+    -groen
+    -blauw
+
+-' findPattern: '^[[:space:]]+(-[^[:space:]]+)$' do: { :arr
+	Pen write: (arr join: '|'), brk.
+} options: 'n'.
+
+
+#should not work without newline flag
+'-
+    -rood
+    -groen
+    -blauw
+
+-' findPattern: '^[[:space:]]+(-[^[:space:]]+)$' do: { :arr
+	Pen write: (arr join: '|'), brk.
+} options: ''.
+
+
+#test case insens. flag
+'-
+    -rooD
+    -groeN
+    -blauW
+
+-' findPattern: '^[[:space:]]+-(Rood|Groen|Blauw)$' do: { :arr
+	Pen write: (arr join: '|'), brk.
+} options: 'ni'.

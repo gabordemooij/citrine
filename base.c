@@ -1714,21 +1714,33 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 	uint8_t olen = strlen( options );
 	uint8_t p = 0;
 	uint8_t flagIgnore = 0;
+	uint8_t flagNewLine = 0;
+	uint8_t flagCI = 0;
 	for ( p = 0; p < olen; p ++ ) {
 		if ( options[p] == '!' ) {
 			flagIgnore = 1;
 		}
+		if ( options[p] == 'n' ) {
+			flagNewLine = 1;
+		}
+		if ( options[p] == 'i' ) {
+			flagCI = 1;
+		}
 	}
 	ctr_object* block = argumentList->next->object;
-	reti = regcomp(&pattern, needle, REG_EXTENDED);
+	int eflags = REG_EXTENDED;
+	if (flagNewLine) eflags |= REG_NEWLINE;
+	if (flagCI) eflags |= REG_ICASE;
+	reti = regcomp(&pattern, needle, eflags);
 	if ( reti ) {
-		return myself;
+		CtrStdFlow = ctr_build_string_from_cstring( "Could not compile regular expression." );
+		return CtrStdNil;
 	}
 	char* haystack = ctr_heap_allocate_cstring(myself);
 	size_t offset = 0;
 	ctr_object* newString = ctr_build_empty_string();
 	while( !regex_error && !flagIgnore ) {
-		regex_error = regexec(&pattern, haystack + offset , n, matches, REG_NOTBOL );
+		regex_error = regexec(&pattern, haystack + offset , n, matches, 0 );
 		if ( regex_error ) break;
 		ctr_argument* blockArguments;
 		blockArguments = ctr_heap_allocate( sizeof( ctr_argument ) );
