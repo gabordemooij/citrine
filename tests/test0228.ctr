@@ -1,0 +1,5 @@
+#Can we use +=: to append to strings?
+var str := 'Hello'.
+str +=: ' '.
+str +=: 'World'.
+Pen write: str, brk.

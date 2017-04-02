@@ -198,7 +198,7 @@ int ctr_clex_tok() {
 	comment_mode = 0;
 
 	/* a little state machine to handle string interpolation, */
-	/* i.e. transforms ' {%x} ' into: '' + x + ''. */
+	/* i.e. transforms ' $$x ' into: '' + x + ''. */
 	switch( ctr_string_interpolation ) {
 		case 1:
 			presetToken = CTR_TOKEN_QUOTE;
@@ -393,22 +393,24 @@ char* ctr_clex_readstr() {
 		)
 	) {
 
-		/* enter interpolation mode ( {%x} ) */
+		/* enter interpolation mode ( $x} ) */
 		if (
 			!ctr_clex_verbatim_mode &&
 			!escape &&
-			c == '{' &&
+			c == '$' &&
 			((ctr_code+1) < ctr_eofcode) &&
-			*(ctr_code+1) == '%'
+			*(ctr_code+1) == '$'
 		) {
 			int q = 2;
-			while( ( ctr_code + q ) < ctr_eofcode && *(ctr_code + q) != '}'  && q < 255 ) q++;
-			ivarname = ctr_heap_allocate( q );
-			ivarlen  = q - 2;
-			memcpy( ivarname, ctr_code + 2, q - 2 );
-			ctr_string_interpolation = 1;
-			ctr_code_eoi = ctr_code + q + 1; // '}','{','%' and the name  ( name + 3 )
-			break;
+			while( ( ctr_code + q ) < ctr_eofcode && !isspace(*(ctr_code + q)) && *(ctr_code + q) != '$'  && q < 255 ) q++;
+			if (isspace(*(ctr_code + q)) || *(ctr_code + q) == '$') {
+				ivarname = ctr_heap_allocate( q );
+				ivarlen  = q - 2;
+				memcpy( ivarname, ctr_code + 2, q - 2 );
+				ctr_string_interpolation = 1;
+				ctr_code_eoi = ctr_code + q + 0; /* '$','$' and the name  ( name + 3 ) */
+				break;
+			}
 		}
 
 		if ( c == '\n' ) ctr_clex_line_number ++;

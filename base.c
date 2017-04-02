@@ -1332,6 +1332,10 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
  * x append: 'World'.
  * Pen write: x. #Hello World
  *
+ * Instead of using the append message you may also use its short form,
+ * like this:
+ *
+ * x +=: 'World'.
  */
 ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* strObject;
