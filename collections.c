@@ -189,7 +189,7 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 		CtrStdFlow->info.sticky = 1;
 	}
 	block->info.sticky = 1;
-	for(i = 0; i < myself->value.avalue->head; i++) {
+	for(i = myself->value.avalue->tail; i < myself->value.avalue->head; i++) {
 		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		ctr_argument* argument2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		ctr_argument* argument3 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
