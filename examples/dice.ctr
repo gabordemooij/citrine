@@ -1,0 +1,7 @@
+Test := Object new.
+Test on: 'run:' do: { i |
+     i times: { | Pen write: Dice roll + 1, brk. }.
+}.
+main := Test new.
+main run: 6.
+
