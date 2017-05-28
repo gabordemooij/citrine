@@ -324,6 +324,6 @@ void begin(){
 	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "host:listen:pid:callback:" ), &ctr_request_serve );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Request" ), requestObject, 0);
 	varlistGet = CGI_get_query(NULL);
-	varlistPost = CGI_get_post(NULL,0);
+	varlistPost = CGI_get_post(NULL,"/tmp/_upXXXXXX");
 	varlistCookie = CGI_get_cookie(NULL);
 }
