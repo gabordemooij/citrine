@@ -9,4 +9,9 @@
 *.project
 *.ignore
 /ctr
+docs/ctr
+docs/pagemaker.ctr
+*.pid
+x.sh
+
 
