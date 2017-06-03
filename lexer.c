@@ -402,8 +402,8 @@ char* ctr_clex_readstr() {
 			*(ctr_code+1) == '$'
 		) {
 			int q = 2;
-			while( ( ctr_code + q ) < ctr_eofcode && !isspace(*(ctr_code + q)) && *(ctr_code + q) != '$'  && q < 255 ) q++;
-			if (isspace(*(ctr_code + q)) || *(ctr_code + q) == '$') {
+			while( ( ctr_code + q ) < ctr_eofcode && !isspace(*(ctr_code + q)) && *(ctr_code + q) != '$' && *(ctr_code + q) != '\''  && q < 255 ) q++;
+			if (isspace(*(ctr_code + q)) || *(ctr_code + q) == '$' || *(ctr_code + q) == '\'') {
 				ivarname = ctr_heap_allocate( q );
 				ivarlen  = q - 2;
 				memcpy( ivarname, ctr_code + 2, q - 2 );
