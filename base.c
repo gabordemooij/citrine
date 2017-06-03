@@ -1963,7 +1963,7 @@ ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * StringSplit
+ * [String] split: [String]
  *
  * Converts a string to an array by splitting the string using
  * the specified delimiter (also a string).
