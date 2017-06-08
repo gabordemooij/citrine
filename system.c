@@ -7,6 +7,11 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <time.h>
+
+#ifdef forLinux
+#include <bsd/stdlib.h>
+#endif
+
 #include "citrine.h"
 #include "siphash.h"
 
@@ -576,7 +581,7 @@ ctr_object* ctr_command_flush(ctr_object* myself, ctr_argument* ctr_argumentList
  */
 ctr_object* ctr_dice_sides(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* arg = ctr_internal_cast2number(argumentList->object);
-	return ctr_build_number_from_float( (ctr_number) (rand() % ((int)arg->value.nvalue)));
+	return ctr_build_number_from_float( (ctr_number) 1 + arc4random_uniform( (uint32_t) ( ceil( arg->value.nvalue ) ) ) );
 }
 
 /**
@@ -585,7 +590,7 @@ ctr_object* ctr_dice_sides(ctr_object* myself, ctr_argument* argumentList) {
  * Rolls a standard dice with 6 sides.
  */
 ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float( (ctr_number) (rand() % 6));
+	return ctr_build_number_from_float( (ctr_number) 1 + arc4random_uniform( (uint32_t) 6 ) );
 }
 
 /**
@@ -594,7 +599,7 @@ ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList) {
  * Generates a random number, the traditional way (like rand()).
  */
 ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float( (ctr_number) (rand()) );
+	return ctr_build_number_from_float( (ctr_number) (arc4random()) );
 }
 
 

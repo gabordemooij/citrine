@@ -1,6 +1,6 @@
 
 .\" Manpage for ctr.
-.TH man 1 "31 October 2016" "1.0" "CTR man page"
+.TH man 1 "1 June 2017" "1.0" "CTR man page"
 .SH NAME
 ctr \- run a Citrine program
 .SH SYNOPSIS
@@ -859,6 +859,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
      x append: 'World'.
      Pen write: x. #Hello World
     
+     Instead of using the append message you may also use its short form,
+     like this:
+    
+     x +=: 'World'.
 .fi
 .BR.BR.BR
 
@@ -1097,7 +1101,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B StringSplit
+.B [String] split: [String]
 .nf
     
      Converts a string to an array by splitting the string using
@@ -1109,6 +1113,15 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Escapes HTML chars.
+.fi
+.BR.BR.BR
+
+.B [String] hashWithKey: [String]
+.nf
+    
+     Returns the hash of the recipient String using the specified key.
+     The default hash in Citrine is the SipHash which is also used internally.
+     SipHash can protect against hash flooding attacks.
 .fi
 .BR.BR.BR
 
