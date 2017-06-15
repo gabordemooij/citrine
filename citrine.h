@@ -473,6 +473,7 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList);
  */
 ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList);
 ctr_object* ctr_array_new_and_push(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_shift(ctr_object* myself, ctr_argument* argumentList);
@@ -494,6 +495,7 @@ ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList);
  * HashMap Interface
  */
 ctr_object* ctr_map_new(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_map_type(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList);

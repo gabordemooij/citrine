@@ -37,6 +37,16 @@ ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 }
 
 /**
+ * [Array] type
+ *
+ * Returns the string 'Array'.
+ *
+ **/
+ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_string_from_cstring("Array");
+}
+
+/**
  * [Array] push: [Element]
  *
  * Pushes an element on top of the array.
@@ -545,6 +555,16 @@ ctr_object* ctr_map_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	s->link = myclass;
 	return s;
+}
+
+/**
+ * [Map] type
+ *
+ * Returns the string 'Map'.
+ *
+ **/
+ctr_object* ctr_map_type(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_string_from_cstring("Map");
 }
 
 /**
