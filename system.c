@@ -266,7 +266,6 @@ ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* newArgumentList;
 	ctr_object* appendString;
 	ctr_object* outputString;
-	
 	outputBuffer = ctr_heap_allocate( 512 );
 	ctr_object* arg = ctr_internal_cast2string(argumentList->object);
 	long vlen = arg->value.svalue->vlen;
@@ -329,7 +328,6 @@ ctr_object* ctr_shell_respond_to(ctr_object* myself, ctr_argument* argumentList)
 	return myself;
 }
 
-
 /**
  * @internal
  *
@@ -357,14 +355,17 @@ ctr_object* ctr_slurp_respond_to(ctr_object* myself, ctr_argument* argumentList)
 	return myself;
 }
 
+/**
+ * @internal
+ * 
+ * Slurp uses a fluid API
+ */
 ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str;
 	ctr_argument* newArgumentList;
 	newArgumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	str = ctr_internal_cast2string( argumentList->object );
-	char* ch =  str->value.svalue->value + (str->value.svalue->vlen - 1);
-	
-	if ( *ch == ':' ) {
+	if ( (str->value.svalue->vlen > 0) && *(str->value.svalue->value + (str->value.svalue->vlen - 1)) == ':' ) {
 		char* ncstr = ctr_heap_allocate( str->value.svalue->vlen - 1 );
 		memcpy( ncstr, str->value.svalue->value, str->value.svalue->vlen -1 );
 		newArgumentList->object = ctr_build_string_from_cstring( ncstr );
@@ -374,15 +375,43 @@ ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentL
 		newArgumentList->object = argumentList->object;
 		ctr_slurp_respond_to( myself, newArgumentList );
 	}
-	
 	newArgumentList->object = argumentList->next->object;
 	ctr_slurp_respond_to( myself, newArgumentList );
-	
 	ctr_heap_free( newArgumentList );
 	return myself;
 }
 
-
+/**
+ * [Slurp] obtain.
+ * 
+ * Obtains the string generated using the Slurp object.
+ * A Slurp object collects all messages send to it and flushes its buffer while
+ * returning the resulting string after an 'obtain' message has been received.
+ * 
+ * Usage:
+ * 
+ * Slurp hello world.
+ * Pen write: (Slurp obtain).
+ * 
+ * This will output: 'hello world'.
+ * Use the Slurp object to integrate verbose shell commands, other programming languages
+ * (like SQL) etc into your main program without overusing strings.
+ * 
+ * Example:
+ * 
+ * query select: '*', from users where: 'id = 2'.
+ *
+ * Note that we can't use the = and * unfortunately right now
+ * because = is also a method in the main object. While * can be used
+ * theoretically, it expects an identifier, and 'from' is not a real
+ * identifier, it's just another unary message, so instead of using a binary
+ * * we simply use a keyword message select: with argument '*' and then
+ * proceed our SQL query with a comma (,) to chain the rest.
+ * This is an artifact of the fact that the DSL has to be embedded within
+ * the language of Citrine. However even with these restrictions (some of which might be
+ * alleviated in future versions) it's quite comfortable and readable to interweave
+ * an external language in your Citrine script code.
+ */
 ctr_object* ctr_slurp_obtain( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* commandObj;
 	ctr_object* key;
