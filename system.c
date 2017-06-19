@@ -358,12 +358,26 @@ ctr_object* ctr_slurp_respond_to(ctr_object* myself, ctr_argument* argumentList)
 }
 
 ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* str;
 	ctr_argument* newArgumentList;
 	newArgumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
-	newArgumentList->object = argumentList->object;
-	ctr_slurp_respond_to( myself, newArgumentList );
+	str = ctr_internal_cast2string( argumentList->object );
+	char* ch =  str->value.svalue->value + (str->value.svalue->vlen - 1);
+	
+	if ( *ch == ':' ) {
+		char* ncstr = ctr_heap_allocate( str->value.svalue->vlen - 1 );
+		memcpy( ncstr, str->value.svalue->value, str->value.svalue->vlen -1 );
+		newArgumentList->object = ctr_build_string_from_cstring( ncstr );
+		ctr_slurp_respond_to( myself, newArgumentList );
+		ctr_heap_free( ncstr );
+	} else {
+		newArgumentList->object = argumentList->object;
+		ctr_slurp_respond_to( myself, newArgumentList );
+	}
+	
 	newArgumentList->object = argumentList->next->object;
 	ctr_slurp_respond_to( myself, newArgumentList );
+	
 	ctr_heap_free( newArgumentList );
 	return myself;
 }
