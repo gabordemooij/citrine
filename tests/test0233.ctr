@@ -1,0 +1,2 @@
+#Test Slurp in combination with Shell
+Pen write: ( Shell call: ( Slurp echo hello world obtain ) ).

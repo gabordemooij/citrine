@@ -160,6 +160,8 @@
 #define CTR_DICT_MODE            "mode:" 
 #define CTR_DICT_BROOM           "Broom"
 #define CTR_DICT_HASH_WITH_KEY   "hashWithKey:"
+#define CTR_DICT_OBTAIN          "obtain"
+#define CTR_DICT_SLURP           "Slurp"
 #define CTR_DICT_ASCII_UPPER_CASE                "asciiUpperCase" 
 #define CTR_DICT_ASCII_LOWER_CASE                "asciiLowerCase"
 #define CTR_DICT_ASCII_UPPER_CASE_1              "asciiUpperCase1st" 

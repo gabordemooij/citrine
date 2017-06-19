@@ -229,6 +229,7 @@ ctr_object* CtrStdFile;
 ctr_object* CtrStdSystem;
 ctr_object* CtrStdDice;
 ctr_object* CtrStdCommand;
+ctr_object* CtrStdSlurp;
 ctr_object* CtrStdShell;
 ctr_object* CtrStdClock;
 ctr_object* CtrStdFlow;
@@ -559,11 +560,19 @@ ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_clock_time(ctr_object* myself, ctr_argument* argumentList);
 
 /**
+ * Slurp Interface
+ */
+ctr_object* ctr_slurp_obtain(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_slurp_respond_to(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentList);
+
+/**
  * Shell Interface
  */
 ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_shell_respond_to(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_shell_respond_to_and(ctr_object* myself, ctr_argument* argumentList);
+
 
 /**
  * Garbage Collector Object Interface

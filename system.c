@@ -261,17 +261,33 @@ ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_check_permission( CTR_SECPRO_NO_SHELL );
+	FILE* stream;
+	char* outputBuffer;
+	ctr_argument* newArgumentList;
+	ctr_object* appendString;
+	ctr_object* outputString;
+	
+	outputBuffer = ctr_heap_allocate( 512 );
 	ctr_object* arg = ctr_internal_cast2string(argumentList->object);
 	long vlen = arg->value.svalue->vlen;
 	char* comString = ctr_heap_allocate( sizeof( char ) * ( vlen + 1 ) );
-	int r;
 	memcpy(comString, arg->value.svalue->value, vlen);
 	memcpy(comString+vlen,"\0",1);
-	r = system(comString);
+	newArgumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+	if ( !( stream = popen( comString, "r" ) ) ) {
+		CtrStdFlow = ctr_build_string_from_cstring( "Unable to execute command." );
+	}
+	outputString = ctr_build_empty_string();
+	while ( fgets( outputBuffer, 512, stream ) ) {
+		appendString = ctr_build_string_from_cstring( outputBuffer );
+		newArgumentList->object = appendString;
+		ctr_string_append( outputString, newArgumentList );
+	}
+	ctr_heap_free( outputBuffer );
+	ctr_heap_free( newArgumentList );
 	ctr_heap_free( comString );
-	return ctr_build_number_from_float( (ctr_number) r );
+	return outputString;
 }
-
 
 /**
  * @internal
@@ -283,6 +299,7 @@ ctr_object* ctr_shell_respond_to_and(ctr_object* myself, ctr_argument* argumentL
 	ctr_object*   prefix;
 	ctr_object*   suffix;
 	ctr_argument* newArgumentList;
+	ctr_object*   result;
 	char* command;
 	int len;
 	prefix = ctr_internal_cast2string(argumentList->object);
@@ -296,10 +313,10 @@ ctr_object* ctr_shell_respond_to_and(ctr_object* myself, ctr_argument* argumentL
 	commandObj = ctr_build_string(command, len);
 	newArgumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	newArgumentList->object = commandObj;
-	ctr_shell_call(myself, newArgumentList);
+	result = ctr_shell_call(myself, newArgumentList);
 	ctr_heap_free( newArgumentList );
 	ctr_heap_free( command );
-	return myself;
+	return result;
 }
 
 /**
@@ -311,6 +328,112 @@ ctr_object* ctr_shell_respond_to(ctr_object* myself, ctr_argument* argumentList)
 	ctr_shell_call(myself, argumentList);
 	return myself;
 }
+
+
+/**
+ * @internal
+ *
+ * Shell Object uses a fluid API.
+ */
+ctr_object* ctr_slurp_respond_to(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_argument* newArgumentList;
+	ctr_object*   newCommandObj;
+	ctr_object*   commandObj;
+	ctr_object*   key;
+	newCommandObj = argumentList->object;
+	key = ctr_build_string_from_cstring( "command" );
+	commandObj = ctr_internal_object_find_property( myself, key, CTR_CATEGORY_PRIVATE_PROPERTY );
+	newArgumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+	if ( commandObj == NULL ) {
+		commandObj = ctr_build_empty_string();
+		ctr_internal_object_set_property( myself, key, commandObj, CTR_CATEGORY_PRIVATE_PROPERTY );
+	} else {
+		newArgumentList->object = ctr_build_string_from_cstring( " " );
+		ctr_string_append( commandObj, newArgumentList );
+	}
+	newArgumentList->object = newCommandObj;
+	ctr_string_append( commandObj, newArgumentList );
+	ctr_heap_free( newArgumentList );
+	return myself;
+}
+
+ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_argument* newArgumentList;
+	newArgumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+	newArgumentList->object = argumentList->object;
+	ctr_slurp_respond_to( myself, newArgumentList );
+	newArgumentList->object = argumentList->next->object;
+	ctr_slurp_respond_to( myself, newArgumentList );
+	ctr_heap_free( newArgumentList );
+	return myself;
+}
+
+
+ctr_object* ctr_slurp_obtain( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* commandObj;
+	ctr_object* key;
+	key = ctr_build_string_from_cstring( "command" );
+	commandObj = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring( "command" ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	if ( commandObj == NULL ) {
+		commandObj = ctr_build_empty_string();
+	}
+	ctr_internal_object_delete_property( myself, key, CTR_CATEGORY_PRIVATE_PROPERTY );
+	return commandObj;
+}
+
+ctr_object* ctr_shell_obtain( ctr_object* myself, ctr_argument* argumentList ) {
+
+	FILE* stream;
+	char* outputBuffer;
+	ctr_argument* newArgumentList;
+	
+	
+
+	ctr_object* commandObj;
+	ctr_object* appendString;
+	ctr_object* outputString;
+	
+	outputBuffer = ctr_heap_allocate( 512 );
+	
+	/*commandObj = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring( "command" ), CTR_CATEGORY_PRIVATE_PROPERTY );*/
+	
+	
+	
+	
+	/*if ( commandObj == NULL ) {
+		commandObj = ctr_build_empty_string();
+	}*/
+	
+	newArgumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+	
+	commandObj = ctr_slurp_obtain( myself, newArgumentList );
+	
+	
+	char* commandString = ctr_heap_allocate_cstring( commandObj );
+	
+
+	if ( !( stream = popen( commandString, "r" ) ) ) {
+		CtrStdFlow = ctr_build_string_from_cstring( "Unable to execute command." );
+	}
+	
+	outputString = ctr_build_empty_string();
+	
+	
+	while ( fgets( outputBuffer, 512, stream ) ) {
+		appendString = ctr_build_string_from_cstring( outputBuffer );
+		newArgumentList->object = appendString;
+		ctr_string_append( outputString, newArgumentList );
+	}
+	
+	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( "command" ), ctr_build_empty_string(), CTR_CATEGORY_PRIVATE_PROPERTY );
+	
+	ctr_heap_free( outputBuffer );
+	ctr_heap_free( commandString );
+	ctr_heap_free( newArgumentList );
+	return outputString;
+}
+
+
 
 /**
  * [Program] argument: [Number]

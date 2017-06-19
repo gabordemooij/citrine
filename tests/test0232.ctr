@@ -1,0 +1,8 @@
+#Test Slurp Object
+x := Slurp new.
+x + 3.
+Pen write: (x obtain), brk.
+x echo: 'Hello world'.
+Pen write: (x obtain), brk.
+x tellme: 123 and: 987.
+Pen write: (x obtain), brk.

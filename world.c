@@ -823,6 +823,15 @@ void ctr_initialize_world() {
 	CtrStdDice->link = CtrStdObject;
 	CtrStdDice->info.sticky = 1;
 
+	/* Slurp */
+	CtrStdSlurp = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
+	ctr_internal_create_func(CtrStdSlurp, ctr_build_string_from_cstring( CTR_DICT_OBTAIN ), &ctr_slurp_obtain );
+	ctr_internal_create_func(CtrStdSlurp, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ), &ctr_slurp_respond_to );
+	ctr_internal_create_func( CtrStdSlurp, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND ), &ctr_slurp_respond_to_and );
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_SLURP ), CtrStdSlurp, 0 );
+	CtrStdSlurp->link = CtrStdObject;
+	CtrStdSlurp->info.sticky = 1;
+
 	/* Shell */
 	CtrStdShell = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdShell, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ), &ctr_shell_respond_to );

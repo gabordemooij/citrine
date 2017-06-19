@@ -1,5 +1,8 @@
 #Test Shell fluid API
 
+#Test echo
+Pen write: (Shell echo: 'Hello I can write to console using fluid API!').
+
 #delete files if necessary
 { File new: '/tmp/from.txt', delete. } catch: {}, run.
 { File new: '/tmp/to.txt', delete. } catch: {}, run.
@@ -14,7 +17,7 @@ File new: '/tmp/from.txt', exists ifFalse: {
 
 
 #create the from file
-Shell touch: '/tmp/from.txt', echo: '"hello world" > /tmp/from.txt'.
+Shell do touch: '/tmp/from.txt', echo: '"hello world" > /tmp/from.txt', done.
 
 #now use the fluid shell API to perform a copy action
 Shell cp: '/tmp/from.txt /tmp/to.txt'.
@@ -22,9 +25,6 @@ Shell cp: '/tmp/from.txt /tmp/to.txt'.
 File new: '/tmp/to.txt', exists ifTrue: {
 	Pen write: 'Confirmed. Target file has been created by shell.\n'.
 }.
-
-#Test echo
-Shell echo: 'Hello I can write to console using fluid API!'.
 
 #Can we read contents?
 Pen write: 'Contents of file is:' + (File new: '/tmp/to.txt', read), brk.
