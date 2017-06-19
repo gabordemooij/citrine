@@ -2,5 +2,6 @@ language: c
 
 before_install:
   sudo ln -s /usr/bin/make /usr/bin/gmake
+  sudo sudo apt-get install libbsd-dev
   
 script: ./runtests.sh
