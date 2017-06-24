@@ -456,6 +456,7 @@ ctr_object* ctr_string_find_pattern_do(ctr_object* myself, ctr_argument* argumen
 ctr_object* ctr_string_find_pattern_options_do(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_contains_pattern(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_hash_with_key(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_string_eval( ctr_object* myself, ctr_argument* argumentList );
 
 /**
  * Block Interface
@@ -491,6 +492,8 @@ ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_sum(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_array_serialize(ctr_object* myself, ctr_argument* argumentList);
+
 
 /**
  * HashMap Interface
@@ -501,6 +504,7 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_map_serialize(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Console Interface

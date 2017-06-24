@@ -9,8 +9,8 @@ Boolean,String
 Boolean,String
 === String test ===
 123
-[False]
-[True]
+False
+True
 
 End include test
 Are my variables still intact?

@@ -1,0 +1,13 @@
+#Test native serialization of Map and Array objects
+map :=
+	(Map new)
+	put: 'Hi There' at: 'two',
+	put: (Array < 'hello' ; 'world' ; (Array < 1 ; 2; 9) ; False) at: 'one',
+	put: ( (Map new) put: 'wrrld' at: 'misspelled' ) at: 'three',
+	put: (Array < ((Map new) put: 'treasure' at: 'hidden') ; 2) at: 'four'. 
+str := map serialize + '.'.
+map2 := str eval.
+Pen write: map2 @ 'one' @ 0.
+Pen write: map2 @ 'one' @ 1.
+Pen write: map2 @ 'four' @ 0 @ 'hidden'.
+Pen write: map2 @ 'one' @ 2 @ 2.

@@ -350,13 +350,13 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 			return o;
 			break;
 		case CTR_OBJECT_TYPE_OTNIL:
-			return ctr_build_string_from_cstring( "[Nil]" );
+			return ctr_build_string_from_cstring( "Nil" );
 			break;
 		case CTR_OBJECT_TYPE_OTBOOL:
 			if (o->value.bvalue == 1) {
-				return ctr_build_string_from_cstring( "[True]" );
+				return ctr_build_string_from_cstring( "True" );
 			} else if (o->value.bvalue == 0) {
-				return ctr_build_string_from_cstring( "[False]" );
+				return ctr_build_string_from_cstring( "False" );
 			} else {
 				return ctr_build_string_from_cstring( "[?]" );
 			}
@@ -695,6 +695,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_FIND_PATTERN_DO_OPTIONS ), &ctr_string_find_pattern_options_do );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_CONTAINS_PATTERN ), &ctr_string_contains_pattern );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_HASH_WITH_KEY ), &ctr_string_hash_with_key );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_EVAL ), &ctr_string_eval );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_STRING ), CtrStdString, 0 );
 	CtrStdString->link = CtrStdObject;
 	CtrStdString->info.sticky = 1;
@@ -752,6 +753,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_COUNT ), &ctr_map_count );
 	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_EACH ), &ctr_map_each );
 	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_MAP ), &ctr_map_each );
+	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_SERIALIZE ), &ctr_map_serialize );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MAP_OBJECT ), CtrStdMap, 0 );
 	CtrStdMap->link = CtrStdObject;
 	CtrStdMap->info.sticky = 1;

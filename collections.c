@@ -541,6 +541,97 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+ctr_object* ctr_array_serialize( ctr_object* myself, ctr_argument* argumentList ) {
+	
+	
+	
+	int i;
+	ctr_object* arrayElement;
+	ctr_argument* newArgumentList;
+	ctr_object* nest;
+	ctr_object* string = ctr_build_empty_string();
+	
+	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
+	newArgumentList->object = ctr_build_string_from_cstring(" Array < ");
+	string = ctr_string_append( string, newArgumentList );
+	
+	
+	for(i=myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
+		arrayElement = *( myself->value.avalue->elements + i );
+	
+		if ( arrayElement->info.type == CTR_OBJECT_TYPE_OTBOOL || arrayElement->info.type == CTR_OBJECT_TYPE_OTNUMBER ) {
+			newArgumentList->object = arrayElement;
+			string = ctr_string_append( string, newArgumentList );
+		}
+		
+		if ( arrayElement->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
+			newArgumentList->object = ctr_build_string_from_cstring("'");
+			string = ctr_string_append( string, newArgumentList );
+			newArgumentList->object = arrayElement;
+			string = ctr_string_append( string, newArgumentList );
+			newArgumentList->object = ctr_build_string_from_cstring("'");
+			string = ctr_string_append( string, newArgumentList );
+		}
+		
+		if ( arrayElement->info.type == CTR_OBJECT_TYPE_OTARRAY ) {
+			
+			newArgumentList->object = ctr_build_string_from_cstring("(");
+			ctr_string_append( string, newArgumentList );
+			
+			
+			newArgumentList->object = arrayElement;
+			nest = ctr_array_serialize( arrayElement, newArgumentList );
+			newArgumentList->object = nest;
+			string = ctr_string_append( string, newArgumentList );
+			
+			newArgumentList->object = ctr_build_string_from_cstring(")");
+			ctr_string_append( string, newArgumentList );
+			
+			
+		}
+		
+		if ( arrayElement->info.type == CTR_OBJECT_TYPE_OTOBJECT ) {
+			
+			ctr_object* link;
+			ctr_object* testObject = arrayElement;
+			int isMap = 0;
+			while( ( link = testObject->link ) ) {
+				if ( link == CtrStdMap ) {
+					isMap = 1;
+					break;
+				}
+			}
+			
+			if ( isMap ) {
+				
+				newArgumentList->object = ctr_build_string_from_cstring("(");
+				ctr_string_append( string, newArgumentList );
+			
+				
+				newArgumentList->object = arrayElement;
+				nest = ctr_map_serialize( arrayElement, newArgumentList );
+				newArgumentList->object = nest;
+				string = ctr_string_append( string, newArgumentList );
+				
+				newArgumentList->object = ctr_build_string_from_cstring(")");
+				ctr_string_append( string, newArgumentList );
+			
+			}
+		}
+		
+		
+		if (  (i + 1 )<myself->value.avalue->head ) {
+			newArgumentList->object = ctr_build_string_from_cstring(" ; ");
+			string = ctr_string_append( string, newArgumentList );
+		}
+		
+	}
+	
+	ctr_heap_free( newArgumentList );
+	return string;
+}
+
+
 /**
  * Map
  *
@@ -687,3 +778,107 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	block->info.sticky = 0;
 	return myself;
 }
+
+ctr_object* ctr_map_serialize( ctr_object* myself, ctr_argument* argumentList) {
+	
+	ctr_object*  string;
+	ctr_mapitem* mapItem;
+	ctr_argument* newArgumentList;
+	
+	string  = ctr_build_string_from_cstring( "(Map new) " );
+	mapItem = myself->properties->head;
+	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
+	
+	while( mapItem ) {
+		
+		if (
+			mapItem->value->info.type == CTR_OBJECT_TYPE_OTBOOL 
+			|| mapItem->value->info.type == CTR_OBJECT_TYPE_OTNUMBER 
+		) {
+			newArgumentList->object = ctr_build_string_from_cstring( "put:" );
+			ctr_string_append( string, newArgumentList );
+			newArgumentList->object = mapItem->value;
+			ctr_string_append( string, newArgumentList );
+			newArgumentList->object = ctr_build_string_from_cstring( " at: '" );
+			ctr_string_append( string, newArgumentList );
+			newArgumentList->object = mapItem->key;
+			ctr_string_append( string, newArgumentList );
+		}
+		
+		
+		if ( mapItem->value->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
+			newArgumentList->object = ctr_build_string_from_cstring( "put:'" );
+			ctr_string_append( string, newArgumentList );
+			newArgumentList->object = mapItem->value;
+			ctr_string_append( string, newArgumentList );
+			newArgumentList->object = ctr_build_string_from_cstring( "' at: '" );
+			ctr_string_append( string, newArgumentList );
+			newArgumentList->object = mapItem->key;
+			ctr_string_append( string, newArgumentList );
+			
+			
+			
+		}
+		
+		if ( mapItem->value->info.type == CTR_OBJECT_TYPE_OTARRAY ) {
+			newArgumentList->object = ctr_build_string_from_cstring( "put: (" );
+			ctr_string_append( string, newArgumentList );
+			newArgumentList->object = ctr_build_bool( 1 );
+			newArgumentList->object = ctr_array_serialize( mapItem->value, newArgumentList );
+			ctr_string_append( string, newArgumentList );
+			newArgumentList->object = ctr_build_string_from_cstring( ") at: '" );
+			ctr_string_append( string, newArgumentList );
+			newArgumentList->object = mapItem->key;
+			ctr_string_append( string, newArgumentList );
+		}
+		
+		
+		if ( mapItem->value->info.type == CTR_OBJECT_TYPE_OTOBJECT ) {
+			
+			ctr_object* link;
+			ctr_object* testObject = mapItem->value;
+			int isMap = 0;
+			while( ( link = testObject->link ) ) {
+				if ( link == CtrStdMap ) {
+					isMap = 1;
+					break;
+				}
+			}
+			
+			if ( isMap ) {
+				newArgumentList->object = ctr_build_string_from_cstring( "put: (" );
+				ctr_string_append( string, newArgumentList );
+				newArgumentList->object = ctr_map_serialize( mapItem->value, newArgumentList );
+				ctr_string_append( string, newArgumentList );
+				
+				
+				
+				newArgumentList->object = ctr_build_string_from_cstring( ") at: '" );
+				ctr_string_append( string, newArgumentList );
+				newArgumentList->object = mapItem->key;
+				ctr_string_append( string, newArgumentList );
+			}
+		}
+		
+		
+		
+		
+		
+		newArgumentList->object = ctr_build_string_from_cstring( "'" );
+		ctr_string_append( string, newArgumentList );
+		
+		mapItem = mapItem->next;
+		if ( mapItem ) {
+			newArgumentList->object = ctr_build_string_from_cstring( ", " );
+			ctr_string_append( string, newArgumentList );
+		}
+		
+		
+	}
+	
+	//ctr_string_append( string, newArgumentList );
+	ctr_heap_free( newArgumentList );
+	return string;
+	
+}
+

@@ -1,7 +1,7 @@
 sum: 667
 min: 0
 max: 666
-3rd: [True]
+3rd: True
 prd: 0
 0
 1
@@ -12,7 +12,7 @@ prd: 0
 sum: 667
 min: 0
 max: 666
-3rd: [True]
+3rd: True
 prd: 0
 0
 1
@@ -23,7 +23,7 @@ prd: 0
 sum: 667
 min: 0
 max: 666
-3rd: [True]
+3rd: True
 prd: 0
 0
 1

@@ -2116,6 +2116,38 @@ ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argument
 	return hash;
 }
 
+
+/**
+ * [String] eval
+ *
+ * Evaluates the contents of the string as code.
+ */
+ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_tnode* parsedCode;
+	char* pathString;
+	ctr_object* result;
+	pathString = ctr_heap_allocate_tracked(sizeof(char)*5);
+	memcpy(pathString, "eval", 4);
+	memcpy(pathString+4,"\0",1);
+	
+	/* add a return statement so we can catch result */
+	ctr_argument* newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
+	newArgumentList->object = myself;
+	ctr_object* code = ctr_string_append( ctr_build_string_from_cstring( "^ " ), newArgumentList );
+	
+	
+	
+	ctr_program_length = code->value.svalue->vlen;
+	parsedCode = ctr_cparse_parse(code->value.svalue->value, pathString);
+	ctr_cwlk_subprogram++;
+	result = ctr_cwlk_run(parsedCode);
+	ctr_cwlk_subprogram--;
+	if ( result == NULL ) result = CtrStdNil;
+	ctr_heap_free( newArgumentList );
+	return result;
+}
+
+
 /**
  * Block
  *

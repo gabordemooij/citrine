@@ -8,5 +8,5 @@ Boolean,String
 Boolean,String
 === String test ===
 123
-[False]
-[True]
+False
+True
