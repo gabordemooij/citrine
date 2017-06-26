@@ -339,54 +339,23 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
  * Casts an object to a string object.
  */
 ctr_object* ctr_internal_cast2string( ctr_object* o ) {
-	int slen;
-	char* s;
-	char* p;
-	char* buf;
-	int bufSize;
-	ctr_object* stringObject;
-	switch (o->info.type) {
-		case CTR_OBJECT_TYPE_OTSTRING:
-			return o;
-			break;
-		case CTR_OBJECT_TYPE_OTNIL:
-			return ctr_build_string_from_cstring( "Nil" );
-			break;
-		case CTR_OBJECT_TYPE_OTBOOL:
-			if (o->value.bvalue == 1) {
-				return ctr_build_string_from_cstring( "True" );
-			} else if (o->value.bvalue == 0) {
-				return ctr_build_string_from_cstring( "False" );
-			} else {
-				return ctr_build_string_from_cstring( "[?]" );
-			}
-			break;
-		case CTR_OBJECT_TYPE_OTNUMBER:
-			s = ctr_heap_allocate( 80 * sizeof( char ) );
-			bufSize = 100 * sizeof( char );
-			buf = ctr_heap_allocate( bufSize );
-			snprintf( buf, 99, "%.10f", o->value.nvalue );
-			p = buf + strlen(buf) - 1;
-			while ( *p == '0' && *p-- != '.' );
-			*( p + 1 ) = '\0';
-			if ( *p == '.' ) *p = '\0';
-			strncpy( s, buf, strlen( buf ) );
-			ctr_heap_free( buf );
-			slen = strlen(s);
-			stringObject = ctr_build_string(s, slen);
-			ctr_heap_free( s );
-			return stringObject;
-			break;
-		case CTR_OBJECT_TYPE_OTBLOCK:
-			return ctr_build_string_from_cstring( "[Block]" );
-			break;
-		case CTR_OBJECT_TYPE_OTOBJECT:
-			return ctr_build_string_from_cstring( "[Object]" );
-			break;
-		default:
-			break;
+	
+	if ( o->info.type == CTR_OBJECT_TYPE_OTSTRING ) return o;
+	
+	ctr_argument* a = ctr_heap_allocate( sizeof( ctr_argument ) );
+	a->object = CtrStdNil;
+	
+	ctr_object* stringObject = ctr_send_message( o, "toString", 8, a );
+	
+	ctr_heap_free(a);
+	
+	if ( stringObject->info.type != CTR_OBJECT_TYPE_OTSTRING ) {
+		CtrStdFlow = ctr_build_string_from_cstring( "toString must return a string." );
+		return CtrStdNil;
 	}
-	return ctr_build_string_from_cstring( "[?]" );
+	
+	return stringObject;
+	
 }
 
 /**
@@ -584,6 +553,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_IFTRUE ), &ctr_object_if_true );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_MESSAGEARGS), &ctr_object_message );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_LEARN ), &ctr_object_learn_meaning );
+	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_object_to_string );
 	ctr_internal_object_add_property( CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_OBJECT ), CtrStdObject, 0 );
 	CtrStdObject->link = NULL;
 	CtrStdObject->info.sticky = 1;
@@ -592,6 +562,7 @@ void ctr_initialize_world() {
 	CtrStdNil = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNIL);
 	ctr_internal_object_add_property( CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NIL ), CtrStdNil, 0 );
 	ctr_internal_create_func( CtrStdNil, ctr_build_string_from_cstring( CTR_DICT_ISNIL ), &ctr_nil_is_nil );
+	ctr_internal_create_func( CtrStdNil, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_nil_to_string );
 	CtrStdNil->link = CtrStdObject;
 	CtrStdNil->info.sticky = 1;
 
@@ -696,6 +667,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_CONTAINS_PATTERN ), &ctr_string_contains_pattern );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_HASH_WITH_KEY ), &ctr_string_hash_with_key );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_EVAL ), &ctr_string_eval );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TOSTRING), &ctr_string_to_string );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_STRING ), CtrStdString, 0 );
 	CtrStdString->link = CtrStdObject;
 	CtrStdString->info.sticky = 1;
@@ -711,6 +683,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_CATCH ), &ctr_block_catch );
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_WHILE_TRUE ), &ctr_block_while_true );
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_WHILE_FALSE ), &ctr_block_while_false );
+	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_block_to_string );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_CODE_BLOCK ), CtrStdBlock, 0 );
 	CtrStdBlock->link = CtrStdObject;
 	CtrStdBlock->info.sticky = 1;
@@ -739,6 +712,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_MAX ), &ctr_array_max );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_SUM ), &ctr_array_sum );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_PRODUCT ), &ctr_array_product );
+	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_array_to_string );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_ARRAY ), CtrStdArray, 0 );
 	CtrStdArray->link = CtrStdObject;
 	CtrStdArray->info.sticky = 1;
@@ -753,7 +727,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_COUNT ), &ctr_map_count );
 	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_EACH ), &ctr_map_each );
 	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_MAP ), &ctr_map_each );
-	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_SERIALIZE ), &ctr_map_serialize );
+	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_map_to_string );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MAP_OBJECT ), CtrStdMap, 0 );
 	CtrStdMap->link = CtrStdObject;
 	CtrStdMap->info.sticky = 1;

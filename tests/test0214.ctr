@@ -1,5 +1,5 @@
 #Can we kill a program with a limited number of ticks ?
-Program remainingMessages: 10.
+Program remainingMessages: 15.
 200 times: { :i
 	Pen write: i, brk.
 }.

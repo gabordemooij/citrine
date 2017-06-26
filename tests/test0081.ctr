@@ -3,7 +3,7 @@ map1 := Map new.
 key1 := Array new.
 key2 := Array new.
 
-key1 push: 1.
+#key1 push: 1.
 
 #put keys in map
 

@@ -344,6 +344,7 @@ uint8_t ctr_callstack_index;
  * Nil Interface
  */
 ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Object Interface
@@ -361,6 +362,7 @@ ctr_object* ctr_object_message(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_if_false(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_if_true(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_object_to_string(ctr_object* myself, ctr_argument* ctr_argumentList);
 
 /**
  * Boolean Interface
@@ -456,6 +458,7 @@ ctr_object* ctr_string_find_pattern_do(ctr_object* myself, ctr_argument* argumen
 ctr_object* ctr_string_find_pattern_options_do(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_contains_pattern(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_hash_with_key(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_string_to_string( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_string_eval( ctr_object* myself, ctr_argument* argumentList );
 
 /**
@@ -469,6 +472,7 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
 ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my);
 ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_block_to_string(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Array Interface
@@ -492,7 +496,7 @@ ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_sum(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_serialize(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_array_to_string(ctr_object* myself, ctr_argument* argumentList);
 
 
 /**
@@ -504,7 +508,7 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_map_serialize(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_map_to_string(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Console Interface

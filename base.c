@@ -38,6 +38,11 @@ ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(1);
 }
 
+
+ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_string_from_cstring( "Nil" );
+}
+
 /**
  * Object
  *
@@ -72,6 +77,18 @@ ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 		default:
 			return ctr_build_string_from_cstring("Object");
 	}
+}
+
+/**
+ * [Object] toString
+ *
+ * Returns a string representation of a generic object.
+ * This string representation will be:
+ *
+ * [Object]
+ */
+ctr_object* ctr_object_to_string( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_build_string_from_cstring( "[Object]" );
 }
 
 /**
@@ -345,7 +362,11 @@ ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
  * Simple cast function.
  */
 ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_cast2string(myself);
+	if (myself->value.bvalue == 1) {
+		return ctr_build_string_from_cstring( "True" );
+	} else {
+		return ctr_build_string_from_cstring( "False" );
+	}
 }
 
 /**
@@ -1192,7 +1213,27 @@ ctr_object* ctr_number_log(ctr_object* myself, ctr_argument* argumentList) {
  * Wrapper for cast function.
  */
 ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_cast2string(myself);
+	ctr_object* o = myself;
+	int slen;
+	char* s;
+	char* p;
+	char* buf;
+	int bufSize;
+	ctr_object* stringObject;
+	s = ctr_heap_allocate( 80 * sizeof( char ) );
+	bufSize = 100 * sizeof( char );
+	buf = ctr_heap_allocate( bufSize );
+	snprintf( buf, 99, "%.10f", o->value.nvalue );
+	p = buf + strlen(buf) - 1;
+	while ( *p == '0' && *p-- != '.' );
+	*( p + 1 ) = '\0';
+	if ( *p == '.' ) *p = '\0';
+	strncpy( s, buf, strlen( buf ) );
+	ctr_heap_free( buf );
+	slen = strlen(s);
+	stringObject = ctr_build_string(s, slen);
+	ctr_heap_free( s );
+	return stringObject;
 }
 
 /**
@@ -1601,6 +1642,10 @@ ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentLis
 	newString = ctr_build_string(tstr, len);
 	ctr_heap_free( tstr );
 	return newString;
+}
+
+ctr_object* ctr_string_to_string(ctr_object* myself, ctr_argument* argumentList) {
+	return myself;
 }
 
 /**
@@ -2126,6 +2171,7 @@ ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_tnode* parsedCode;
 	char* pathString;
 	ctr_object* result;
+	ctr_object* code;
 	pathString = ctr_heap_allocate_tracked(sizeof(char)*5);
 	memcpy(pathString, "eval", 4);
 	memcpy(pathString+4,"\0",1);
@@ -2133,8 +2179,9 @@ ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 	/* add a return statement so we can catch result */
 	ctr_argument* newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
 	newArgumentList->object = myself;
-	ctr_object* code = ctr_string_append( ctr_build_string_from_cstring( "^ " ), newArgumentList );
-	
+	code = ctr_string_append( ctr_build_string_from_cstring( "^ " ), newArgumentList );
+	newArgumentList->object = ctr_build_string_from_cstring( "." );
+	code = ctr_string_append( code, newArgumentList );
 	
 	
 	ctr_program_length = code->value.svalue->vlen;
@@ -2382,4 +2429,9 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_internal_object_delete_property(myself, ctr_build_string_from_cstring( "catch" ), 0 );
 	ctr_internal_object_add_property(myself, ctr_build_string_from_cstring( "catch" ), catchBlock, 0 );
 	return myself;
+}
+
+
+ctr_object* ctr_block_to_string(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_string_from_cstring( "[Block]" );
 }
