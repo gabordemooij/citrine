@@ -339,23 +339,16 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
  * Casts an object to a string object.
  */
 ctr_object* ctr_internal_cast2string( ctr_object* o ) {
-	
 	if ( o->info.type == CTR_OBJECT_TYPE_OTSTRING ) return o;
-	
 	ctr_argument* a = ctr_heap_allocate( sizeof( ctr_argument ) );
 	a->object = CtrStdNil;
-	
 	ctr_object* stringObject = ctr_send_message( o, "toString", 8, a );
-	
 	ctr_heap_free(a);
-	
 	if ( stringObject->info.type != CTR_OBJECT_TYPE_OTSTRING ) {
 		CtrStdFlow = ctr_build_string_from_cstring( "toString must return a string." );
-		return CtrStdNil;
+		return ctr_build_string_from_cstring( "?" );
 	}
-	
 	return stringObject;
-	
 }
 
 /**
