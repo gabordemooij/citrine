@@ -1,0 +1,158 @@
+#Can we override more representations?
+
+a := True.
+
+
+
+a on: 'toString' do: {
+	var answer := Nil.
+	( me = True ) ifTrue: {
+		answer := 'Yep'.
+	}, else: {
+		answer := 'Nope'.
+	}.
+	^ answer.
+}.
+
+a on: 'toNumber' do: {
+	var answer := Nil.
+	( me = True ) ifTrue: {
+		answer := 10.
+	}, else: {
+		answer := 20.
+	}.
+	^ answer.
+}.
+
+b := 666.
+
+b on: 'toString' do: {
+	^ 'Devil'.
+}.
+
+b on: 'toBoolean' do: {
+	^ False.
+}.
+
+
+Pen write: a, brk.  #Yep
+Pen write: (90 + a), brk. #100
+Pen write: b, brk. #Devil
+Pen write: (True & b), brk. #False
+
+a := Array < 'hello' ; 'world' ; True ; Nil ; 666. #Nil should be present as well.
+a := a + ( Array < 1 ).
+Pen write: a, brk.
+Pen write: ((Map new) put: Nil at: Nil), brk.
+Pen write: a sum, brk. #668 cause True == 1
+
+#returning something else than a string in toString should not cause segfault but Exception
+{
+	a on: 'toString' do: { ^ Nil. }.
+	a := '' + a. 
+} catch: { :error
+	Pen write: 'Error noted: ' + error, brk.
+}, run.
+
+
+#returning something else than a string in toString should not cause segfault but Exception
+{
+	a on: 'toNumber' do: { ^ Nil. }.
+	a := 3 * a. 
+} catch: { :error
+	Pen write: 'Error noted: ' + error, brk.
+}, run.
+
+#returning something else than a boolean in toBoolean should not cause segfault but Exception
+{
+	a on: 'toBoolean' do: { ^ Nil. }.
+	a := True & a. 
+} catch: { :error
+	Pen write: 'Error noted: ' + error, brk.
+}, run.
+
+
+
+
+#returning something else than a string in toString should not cause segfault but Exception
+{
+	a on: 'toString' do: { ^ False. }.
+	a := '' + a. 
+} catch: { :error
+	Pen write: 'Error noted: ' + error, brk.
+}, run.
+
+
+#returning something else than a string in toString should not cause segfault but Exception
+{
+	a on: 'toNumber' do: { ^ True. }.
+	a := 3 * a. 
+} catch: { :error
+	Pen write: 'Error noted: ' + error, brk.
+}, run.
+
+#returning something else than a boolean in toBoolean should not cause segfault but Exception
+{
+	a on: 'toBoolean' do: { ^ 1. }.
+	a := True & a. 
+} catch: { :error
+	Pen write: 'Error noted: ' + error, brk.
+}, run.
+
+
+
+
+#returning something else than a string in toString should not cause segfault but Exception
+{
+	a on: 'toString' do: { ^ 1. }.
+	a := '' + a. 
+} catch: { :error
+	Pen write: 'Error noted: ' + error, brk.
+}, run.
+
+
+#returning something else than a string in toString should not cause segfault but Exception
+{
+	a on: 'toNumber' do: { ^ ''. }.
+	a := 3 * a. 
+} catch: { :error
+	Pen write: 'Error noted: ' + error, brk.
+}, run.
+
+#returning something else than a boolean in toBoolean should not cause segfault but Exception
+{
+	a on: 'toBoolean' do: { ^ ''. }.
+	a := True & a. 
+} catch: { :error
+	Pen write: 'Error noted: ' + error, brk.
+}, run.
+
+
+
+
+
+#returning something else than a string in toString should not cause segfault but Exception
+{
+	a on: 'toString' do: { ^ (Map new). }.
+	a := '' + a. 
+} catch: { :error
+	Pen write: 'Error noted: ' + error, brk.
+}, run.
+
+
+#returning something else than a string in toString should not cause segfault but Exception
+{
+	a on: 'toNumber' do: { ^ (Object new). }.
+	a := 3 * a. 
+} catch: { :error
+	Pen write: 'Error noted: ' + error, brk.
+}, run.
+
+#returning something else than a boolean in toBoolean should not cause segfault but Exception
+{
+	a on: 'toBoolean' do: { ^ (Object new). }.
+	a := True & a. 
+} catch: { :error
+	Pen write: 'Error noted: ' + error, brk.
+}, run.
+

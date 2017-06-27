@@ -162,7 +162,6 @@
 #define CTR_DICT_HASH_WITH_KEY   "hashWithKey:"
 #define CTR_DICT_OBTAIN          "obtain"
 #define CTR_DICT_SLURP           "Slurp"
-#define CTR_DICT_SERIALIZE       "serialize"
 #define CTR_DICT_EVAL            "eval"
 #define CTR_DICT_ASCII_UPPER_CASE                "asciiUpperCase" 
 #define CTR_DICT_ASCII_LOWER_CASE                "asciiLowerCase"

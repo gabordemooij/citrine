@@ -562,7 +562,6 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 	int i;
 	ctr_object* arrayElement;
 	ctr_argument* newArgumentList;
-	ctr_object* nest;
 	ctr_object* string = ctr_build_empty_string();
 	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
 	if ( myself->value.avalue->tail == myself->value.avalue->head ) {
@@ -574,48 +573,24 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 	}
 	for(i=myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
 		arrayElement = *( myself->value.avalue->elements + i );
-		if ( arrayElement->info.type == CTR_OBJECT_TYPE_OTBOOL || arrayElement->info.type == CTR_OBJECT_TYPE_OTNUMBER ) {
+		if ( arrayElement->info.type == CTR_OBJECT_TYPE_OTBOOL || arrayElement->info.type == CTR_OBJECT_TYPE_OTNUMBER
+		|| arrayElement->info.type == CTR_OBJECT_TYPE_OTNIL ) {
 			newArgumentList->object = arrayElement;
 			string = ctr_string_append( string, newArgumentList );
-		}
-		if ( arrayElement->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
+		} else if ( arrayElement->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
 			newArgumentList->object = ctr_build_string_from_cstring("'");
 			string = ctr_string_append( string, newArgumentList );
 			newArgumentList->object = arrayElement;
 			string = ctr_string_append( string, newArgumentList );
 			newArgumentList->object = ctr_build_string_from_cstring("'");
 			string = ctr_string_append( string, newArgumentList );
-		}
-		if ( arrayElement->info.type == CTR_OBJECT_TYPE_OTARRAY ) {
+		} else {
 			newArgumentList->object = ctr_build_string_from_cstring("(");
 			ctr_string_append( string, newArgumentList );
 			newArgumentList->object = arrayElement;
-			nest = ctr_array_to_string( arrayElement, newArgumentList );
-			newArgumentList->object = nest;
 			string = ctr_string_append( string, newArgumentList );
 			newArgumentList->object = ctr_build_string_from_cstring(")");
 			ctr_string_append( string, newArgumentList );
-		}
-		if ( arrayElement->info.type == CTR_OBJECT_TYPE_OTOBJECT ) {
-			ctr_object* link;
-			ctr_object* testObject = arrayElement;
-			int isMap = 0;
-			while( ( link = testObject->link ) ) {
-				if ( link == CtrStdMap ) {
-					isMap = 1;
-					break;
-				}
-			}
-			if ( isMap ) {
-				newArgumentList->object = ctr_build_string_from_cstring("(");
-				ctr_string_append( string, newArgumentList );
-				newArgumentList->object = arrayElement;
-				nest = ctr_map_to_string( arrayElement, newArgumentList );
-				newArgumentList->object = nest;
-				string = ctr_string_append( string, newArgumentList );
-				newArgumentList->object = ctr_build_string_from_cstring(")");
-				ctr_string_append( string, newArgumentList );
-			}
 		}
 		if (  (i + 1 )<myself->value.avalue->head ) {
 			newArgumentList->object = ctr_build_string_from_cstring(" ; ");
@@ -806,7 +781,9 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 	while( mapItem ) {
 		newArgumentList->object = ctr_build_string_from_cstring( "put:" );
 		ctr_string_append( string, newArgumentList );
-		if ( mapItem->value->info.type == CTR_OBJECT_TYPE_OTBOOL || mapItem->value->info.type == CTR_OBJECT_TYPE_OTNUMBER ) {
+		if ( mapItem->value->info.type == CTR_OBJECT_TYPE_OTBOOL || mapItem->value->info.type == CTR_OBJECT_TYPE_OTNUMBER 
+		|| mapItem->value->info.type == CTR_OBJECT_TYPE_OTNIL
+		) {
 			newArgumentList->object = mapItem->value;
 			ctr_string_append( string, newArgumentList );
 		} else if ( mapItem->value->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
@@ -826,7 +803,8 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 		}
 		newArgumentList->object = ctr_build_string_from_cstring( " at:" );
 		ctr_string_append( string, newArgumentList );
-		if ( mapItem->key->info.type == CTR_OBJECT_TYPE_OTBOOL || mapItem->key->info.type == CTR_OBJECT_TYPE_OTNUMBER ) {
+		if ( mapItem->key->info.type == CTR_OBJECT_TYPE_OTBOOL || mapItem->key->info.type == CTR_OBJECT_TYPE_OTNUMBER
+		|| mapItem->value->info.type == CTR_OBJECT_TYPE_OTNIL ) {
 			newArgumentList->object = mapItem->key;
 			ctr_string_append( string, newArgumentList );
 		} else if ( mapItem->key->info.type == CTR_OBJECT_TYPE_OTSTRING ) {

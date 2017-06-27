@@ -1,0 +1,19 @@
+Yep
+100
+Devil
+False
+Array < 'hello' ; 'world' ; True ; Nil ; 666 ; 1
+(Map new) put:Nil at:Nil
+668
+Error noted: toString must return a string.
+Error noted: toNumber must return a number.
+Error noted: toBoolean must return a boolean.
+Error noted: toString must return a string.
+Error noted: toNumber must return a number.
+Error noted: toBoolean must return a boolean.
+Error noted: toString must return a string.
+Error noted: toNumber must return a number.
+Error noted: toBoolean must return a boolean.
+Error noted: toString must return a string.
+Error noted: toNumber must return a number.
+Error noted: toBoolean must return a boolean.

@@ -324,11 +324,16 @@ void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func
  * Casts an object to a number object.
  */
 ctr_object* ctr_internal_cast2number(ctr_object* o) {
-	if (o->info.type == CTR_OBJECT_TYPE_OTNUMBER) return o;
-	if (o->info.type == CTR_OBJECT_TYPE_OTSTRING) {
-		return ctr_build_number_from_string(o->value.svalue->value, o->value.svalue->vlen);
+	if ( o->info.type == CTR_OBJECT_TYPE_OTNUMBER ) return o;
+	ctr_argument* a = ctr_heap_allocate( sizeof( ctr_argument ) );
+	a->object = CtrStdNil;
+	ctr_object* numObject = ctr_send_message( o, "toNumber", 8, a );
+	ctr_heap_free(a);
+	if ( numObject->info.type != CTR_OBJECT_TYPE_OTNUMBER ) {
+		CtrStdFlow = ctr_build_string_from_cstring( "toNumber must return a number." );
+		return ctr_build_number_from_float((ctr_number)0);
 	}
-	return ctr_build_number_from_float((ctr_number)0);
+	return numObject;
 }
 
 /**
@@ -360,10 +365,15 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
  */
 ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
 	if (o->info.type == CTR_OBJECT_TYPE_OTBOOL) return o;
-	if (o->info.type == CTR_OBJECT_TYPE_OTNIL
-		|| (o->info.type == CTR_OBJECT_TYPE_OTNUMBER && o->value.nvalue == 0)
-		|| (o->info.type == CTR_OBJECT_TYPE_OTSTRING && o->value.svalue->vlen == 0)) return ctr_build_bool(0);
-	return ctr_build_bool(1);
+	ctr_argument* a = ctr_heap_allocate( sizeof( ctr_argument ) );
+	a->object = CtrStdNil;
+	ctr_object* boolObject = ctr_send_message( o, "toBoolean", 9, a );
+	ctr_heap_free(a);
+	if ( boolObject->info.type != CTR_OBJECT_TYPE_OTBOOL ) {
+		CtrStdFlow = ctr_build_string_from_cstring( "toBoolean must return a boolean." );
+		return ctr_build_bool(0);
+	}
+	return boolObject;
 }
 
 /**
@@ -547,6 +557,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_MESSAGEARGS), &ctr_object_message );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_LEARN ), &ctr_object_learn_meaning );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_object_to_string );
+	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_object_to_number );
+	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_TOBOOL ), &ctr_object_to_boolean );
 	ctr_internal_object_add_property( CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_OBJECT ), CtrStdObject, 0 );
 	CtrStdObject->link = NULL;
 	CtrStdObject->info.sticky = 1;
@@ -556,6 +568,8 @@ void ctr_initialize_world() {
 	ctr_internal_object_add_property( CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NIL ), CtrStdNil, 0 );
 	ctr_internal_create_func( CtrStdNil, ctr_build_string_from_cstring( CTR_DICT_ISNIL ), &ctr_nil_is_nil );
 	ctr_internal_create_func( CtrStdNil, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_nil_to_string );
+	ctr_internal_create_func( CtrStdNil, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_nil_to_number );
+	ctr_internal_create_func( CtrStdNil, ctr_build_string_from_cstring( CTR_DICT_TOBOOL ), &ctr_nil_to_boolean );
 	CtrStdNil->link = CtrStdObject;
 	CtrStdNil->info.sticky = 1;
 
@@ -621,6 +635,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_NEG ), &ctr_number_negative );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_number_to_string );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_TOBOOL ), &ctr_number_to_boolean );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_object_myself );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_BETWEEN ),&ctr_number_between );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NUMBER ), CtrStdNumber, 0);
 	CtrStdNumber->link = CtrStdObject;

@@ -345,6 +345,8 @@ uint8_t ctr_callstack_index;
  */
 ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Object Interface
@@ -363,6 +365,8 @@ ctr_object* ctr_object_if_false(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_if_true(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_object_to_string(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList);
 
 /**
  * Boolean Interface

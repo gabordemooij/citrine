@@ -43,6 +43,15 @@ ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( "Nil" );
 }
 
+ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* ctr_argumentList) {
+	return ctr_build_number_from_float(0);
+}
+
+ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList) {
+	return ctr_build_bool(0);
+}
+
+
 /**
  * Object
  *
@@ -89,6 +98,14 @@ ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_object_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_build_string_from_cstring( "[Object]" );
+}
+
+ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentList) {
+	return ctr_build_number_from_float(1);
+}
+
+ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList) {
+	return ctr_build_bool(1);
 }
 
 /**
@@ -741,13 +758,14 @@ ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number b;
 	ctr_object* strObject;
 	if (otherNum->info.type == CTR_OBJECT_TYPE_OTSTRING) {
-		strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 		strObject = ctr_internal_cast2string(myself);
 		newArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		newArg->object = otherNum;
 		result = ctr_string_concat(strObject, newArg);
 		ctr_heap_free( newArg );
 		return result;
+	} else {
+		otherNum = ctr_internal_cast2number( otherNum );
 	}
 	a = myself->value.nvalue;
 	b = otherNum->value.nvalue;
@@ -1242,7 +1260,7 @@ ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList)
  * Casts a number to a boolean object.
  */
 ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_cast2bool(myself);
+	return ctr_build_bool( myself->value.nvalue );
 }
 
 /**
@@ -1995,7 +2013,7 @@ ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
  * Converts string to a number.
  */
 ctr_object* ctr_string_to_number(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_cast2number(myself);
+	return ctr_build_number_from_string(myself->value.svalue->value, myself->value.svalue->vlen);
 }
 
 /**
@@ -2004,7 +2022,8 @@ ctr_object* ctr_string_to_number(ctr_object* myself, ctr_argument* argumentList)
  * Converts string to boolean
  */
 ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_cast2bool(myself);
+	if ( myself->value.svalue->vlen == 0 ) return ctr_build_bool(0);
+	return ctr_build_bool( 1 );
 }
 
 /**
