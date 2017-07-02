@@ -1,0 +1,14 @@
+#quotes should be escaped in strings!
+Q := (39 toByte).
+
+q := Array < ('Quotes ' + Q + ' are evil?') ; 1.
+x := q toString.
+Pen write: x, brk.
+y := x eval.
+Pen write: y @ 0, brk.
+
+q := Map put: Q at: (Q + 'quote' + Q).
+x := q toString.
+Pen write: x, brk.
+y := x eval.
+Pen write: y @ '\'quote\'', brk.

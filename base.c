@@ -1226,6 +1226,19 @@ ctr_object* ctr_number_log(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Number] toByte
+ *
+ * Converts a number to a single byte.
+ */
+ctr_object* ctr_number_to_byte(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* str = ctr_build_empty_string();
+	str->value.svalue->value = ctr_heap_allocate( 1 );
+	str->value.svalue->vlen = 1;
+	*(str->value.svalue->value) = (uint8_t) myself->value.nvalue;
+	return str;
+}
+
+/**
  * [Number] toString
  *
  * Wrapper for cast function.
@@ -2213,6 +2226,37 @@ ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 	return result;
 }
 
+/**
+ * [String] escapeQuotes.
+ *
+ * Escapes all single quotes in a string. Sending this message to a
+ * string will cause all single quotes (') to be replaced with (\').
+ */
+ctr_object* ctr_string_quotes_escape(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* answer;
+	char* str;
+	ctr_size len;
+	ctr_size i;
+	ctr_size j;
+	len = myself->value.svalue->vlen;
+	for( i = 0; i < myself->value.svalue->vlen; i++ ) {
+		if ( *(myself->value.svalue->value + i) == '\'' ) {
+			len++;
+		}
+	}
+	str = ctr_heap_allocate( len + 1 );
+	j = 0;
+	for( i = 0; i < myself->value.svalue->vlen; i++ ) {
+		if ( *(myself->value.svalue->value + i) == '\'' ) {
+			str[j+i] = '\\';
+			j++;
+		}
+		str[j+i] = *(myself->value.svalue->value + i);
+	}
+	answer = ctr_build_string_from_cstring( str );
+	ctr_heap_free( str );
+	return answer;
+}
 
 /**
  * Block

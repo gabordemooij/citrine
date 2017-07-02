@@ -163,6 +163,8 @@
 #define CTR_DICT_OBTAIN          "obtain"
 #define CTR_DICT_SLURP           "Slurp"
 #define CTR_DICT_EVAL            "eval"
+#define CTR_DICT_ESCAPE_QUOTES   "escapeQuotes"
+#define CTR_DICT_TO_BYTE         "toByte"
 #define CTR_DICT_ASCII_UPPER_CASE                "asciiUpperCase" 
 #define CTR_DICT_ASCII_LOWER_CASE                "asciiLowerCase"
 #define CTR_DICT_ASCII_UPPER_CASE_1              "asciiUpperCase1st" 

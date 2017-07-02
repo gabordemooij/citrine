@@ -1,0 +1,79 @@
+$ := Object new.
+
+$ on: 'respondTo:' do: { :x
+	
+	var operation := x @ 0.
+	var valuta    := x @ 1.
+	var money     := x skip: 2.
+	var amount    := 0.
+		
+	( operation = '+' ) ifTrue: {
+		( valuta = '£' ) ifTrue: { amount := 1.28 * money. }.
+	}.
+	
+	^ amount.
+}.
+
+
+
+x := $ +£20.
+
+Pen write: x, brk.
+
+
+Fruit := Object new.
+
+Fruit on: 'new' do: {
+	var f := me `new.
+	f apples: 0.
+	f oranges: 0.
+	^ f.
+}.
+
+Fruit on: 'apples:' do: { :a my apples := a. }.
+Fruit on: 'oranges:' do: { :p my oranges := p. }.
+Fruit on: 'apples' do: { ^ my apples. }.
+Fruit on: 'oranges' do: { ^ my oranges. }.
+
+Fruit on: '+' do: { :f
+	
+	var n := Fruit new.
+	
+	n apples: (f apples + my apples).
+	n oranges:  (f oranges  + my oranges).
+	^ n.
+}.
+
+Fruit on: 'toString' do: {
+	
+	^ ( my apples toString + ' apples and ' + my oranges + ' oranges' ).
+}.
+
+Number on: 'apples' do: {
+	^ ((Fruit new) apples: me).
+}.
+
+Number on: 'apple' do: {
+	^ ((Fruit new) apples: me).
+}.
+
+Number on: 'oranges' do: {
+	^ ((Fruit new) oranges: me).
+}.
+
+
+
+
+Pen write: (1 apple + 3 oranges + 4 apples), brk.
+
+
+String on: 'twice' do: {
+	^ ((me toString) + (me toString)).
+}.
+
+
+
+Pen write: '❤❤❤' twice.
+
+
+

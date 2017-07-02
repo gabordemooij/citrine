@@ -637,6 +637,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_TOBOOL ), &ctr_number_to_boolean );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_object_myself );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_BETWEEN ),&ctr_number_between );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_TO_BYTE ),&ctr_number_to_byte );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NUMBER ), CtrStdNumber, 0);
 	CtrStdNumber->link = CtrStdObject;
 	CtrStdNumber->info.sticky = 1;
@@ -676,6 +677,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_HASH_WITH_KEY ), &ctr_string_hash_with_key );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_EVAL ), &ctr_string_eval );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TOSTRING), &ctr_string_to_string );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_ESCAPE_QUOTES ),&ctr_string_quotes_escape );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_STRING ), CtrStdString, 0 );
 	CtrStdString->link = CtrStdObject;
 	CtrStdString->info.sticky = 1;

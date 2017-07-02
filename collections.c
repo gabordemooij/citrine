@@ -580,7 +580,7 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 		} else if ( arrayElement->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
 			newArgumentList->object = ctr_build_string_from_cstring("'");
 			string = ctr_string_append( string, newArgumentList );
-			newArgumentList->object = arrayElement;
+			newArgumentList->object = ctr_string_quotes_escape( arrayElement, newArgumentList );
 			string = ctr_string_append( string, newArgumentList );
 			newArgumentList->object = ctr_build_string_from_cstring("'");
 			string = ctr_string_append( string, newArgumentList );
@@ -773,11 +773,9 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object*  string;
 	ctr_mapitem* mapItem;
 	ctr_argument* newArgumentList;
-	
 	string  = ctr_build_string_from_cstring( "(Map new) " );
 	mapItem = myself->properties->head;
 	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
-	
 	while( mapItem ) {
 		newArgumentList->object = ctr_build_string_from_cstring( "put:" );
 		ctr_string_append( string, newArgumentList );
@@ -789,7 +787,7 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 		} else if ( mapItem->value->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
 			newArgumentList->object = ctr_build_string_from_cstring( "'" );
 			ctr_string_append( string, newArgumentList );
-			newArgumentList->object = mapItem->value;
+			newArgumentList->object = ctr_string_quotes_escape( mapItem->value, newArgumentList );
 			ctr_string_append( string, newArgumentList );
 			newArgumentList->object = ctr_build_string_from_cstring( "'" );
 			ctr_string_append( string, newArgumentList );
@@ -810,7 +808,7 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 		} else if ( mapItem->key->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
 			newArgumentList->object = ctr_build_string_from_cstring( "'" );
 			ctr_string_append( string, newArgumentList );
-			newArgumentList->object = mapItem->key;
+			newArgumentList->object = ctr_string_quotes_escape( mapItem->key, newArgumentList );
 			ctr_string_append( string, newArgumentList );
 			newArgumentList->object = ctr_build_string_from_cstring( "'" );
 			ctr_string_append( string, newArgumentList );
