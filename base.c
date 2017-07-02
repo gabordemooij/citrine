@@ -38,19 +38,32 @@ ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(1);
 }
 
-
+/**
+ * [Nil] toString
+ *
+ * Returns the string representation of Nil: 'Nil'.
+ */
 ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( "Nil" );
 }
 
+/**
+ * [Nil] toNumber
+ *
+ * Returns the numerical representation of Nil: 0.
+ */
 ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_number_from_float(0);
 }
 
+/**
+ * [Nil] toBoolean
+ *
+ * Returns the boolean representation of Nil: False.
+ */
 ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_bool(0);
 }
-
 
 /**
  * Object
@@ -100,10 +113,24 @@ ctr_object* ctr_object_to_string( ctr_object* myself, ctr_argument* argumentList
 	return ctr_build_string_from_cstring( "[Object]" );
 }
 
+/**
+ * [Object] toNumber
+ *
+ * Returns a numerical representation of the object. This basic behavior, part
+ * of any object will just return 1. Other objects typically override this
+ * behavior with more useful implementations.
+ */
 ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_number_from_float(1);
 }
 
+/**
+ * [Object] toBoolean
+ *
+ * Returns a boolean representation of the object. This basic behavior, part
+ * of any object will just return True. Other objects typically override this
+ * behavior with more useful implementations.
+ */
 ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_bool(1);
 }
@@ -2494,7 +2521,13 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-
+/**
+ * [Block] toString
+ *
+ * Returns a string representation of the Block. This basic behavior, part
+ * of any object will just return [Block]. Other objects typically override this
+ * behavior with more useful implementations.
+ */
 ctr_object* ctr_block_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( "[Block]" );
 }
