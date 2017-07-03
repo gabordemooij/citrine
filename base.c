@@ -2220,11 +2220,19 @@ ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argument
 	return hash;
 }
 
-
 /**
  * [String] eval
  *
  * Evaluates the contents of the string as code.
+ * In contrast to other languages, an eval statement can only
+ * execute a very limited set of messages. Typically only Array and
+ * Map building can be performed using eval. Using eval in Citrine can
+ * therefore be considered 'safe'.
+ *
+ * Usage:
+ *
+ * a := 'Array < 1 ; 2 ; 3' eval.
+ * x := a @ 2. #3
  */
 ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_tnode* parsedCode;
