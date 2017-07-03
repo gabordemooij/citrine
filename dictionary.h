@@ -186,3 +186,8 @@
 #define CTR_DICT_RAW_RANDOM_NUMBER               "rawRandomNumber" 
 #define CTR_DICT_RESPOND_TO_AND_AND              "respondTo:and:and:"
 #define CTR_DICT_GREATER_OR_EQUAL                ">=:"
+#define CTR_DICT_CODEGEN_MAP_NEW                 "(Map new) "
+#define CTR_DICT_CODEGEN_MAP_PUT                 "put:"
+#define CTR_DICT_CODEGEN_MAP_PUT_AT              " at:"
+#define CTR_DICT_CODEGEN_ARRAY_NEW               "Array new "
+#define CTR_DICT_CODEGEN_ARRAY_NEW_PUSH          "Array < "

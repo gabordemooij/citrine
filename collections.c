@@ -565,10 +565,10 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 	ctr_object* string = ctr_build_empty_string();
 	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
 	if ( myself->value.avalue->tail == myself->value.avalue->head ) {
-		newArgumentList->object = ctr_build_string_from_cstring("Array new ");
+		newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_CODEGEN_ARRAY_NEW );
 		string = ctr_string_append( string, newArgumentList );
 	} else {
-		newArgumentList->object = ctr_build_string_from_cstring("Array < ");
+		newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_CODEGEN_ARRAY_NEW_PUSH );
 		string = ctr_string_append( string, newArgumentList );
 	}
 	for(i=myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
@@ -773,11 +773,11 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object*  string;
 	ctr_mapitem* mapItem;
 	ctr_argument* newArgumentList;
-	string  = ctr_build_string_from_cstring( "(Map new) " );
+	string  = ctr_build_string_from_cstring( CTR_DICT_CODEGEN_MAP_NEW );
 	mapItem = myself->properties->head;
 	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
 	while( mapItem ) {
-		newArgumentList->object = ctr_build_string_from_cstring( "put:" );
+		newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_CODEGEN_MAP_PUT );
 		ctr_string_append( string, newArgumentList );
 		if ( mapItem->value->info.type == CTR_OBJECT_TYPE_OTBOOL || mapItem->value->info.type == CTR_OBJECT_TYPE_OTNUMBER 
 		|| mapItem->value->info.type == CTR_OBJECT_TYPE_OTNIL
@@ -799,7 +799,7 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 			newArgumentList->object = ctr_build_string_from_cstring( ")" );
 			ctr_string_append( string, newArgumentList );
 		}
-		newArgumentList->object = ctr_build_string_from_cstring( " at:" );
+		newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_CODEGEN_MAP_PUT_AT );
 		ctr_string_append( string, newArgumentList );
 		if ( mapItem->key->info.type == CTR_OBJECT_TYPE_OTBOOL || mapItem->key->info.type == CTR_OBJECT_TYPE_OTNUMBER
 		|| mapItem->value->info.type == CTR_OBJECT_TYPE_OTNIL ) {
