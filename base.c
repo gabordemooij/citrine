@@ -2231,18 +2231,17 @@ ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 	char* pathString;
 	ctr_object* result;
 	ctr_object* code;
+	/* activate white-list based security profile */
+	ctr_command_security_profile ^= CTR_SECPRO_EVAL;
 	pathString = ctr_heap_allocate_tracked(sizeof(char)*5);
 	memcpy(pathString, "eval", 4);
 	memcpy(pathString+4,"\0",1);
-	
 	/* add a return statement so we can catch result */
 	ctr_argument* newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
 	newArgumentList->object = myself;
 	code = ctr_string_append( ctr_build_string_from_cstring( "^ " ), newArgumentList );
 	newArgumentList->object = ctr_build_string_from_cstring( "." );
 	code = ctr_string_append( code, newArgumentList );
-	
-	
 	ctr_program_length = code->value.svalue->vlen;
 	parsedCode = ctr_cparse_parse(code->value.svalue->value, pathString);
 	ctr_cwlk_subprogram++;
@@ -2250,6 +2249,7 @@ ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_cwlk_subprogram--;
 	if ( result == NULL ) result = CtrStdNil;
 	ctr_heap_free( newArgumentList );
+	ctr_command_security_profile ^= CTR_SECPRO_EVAL;
 	return result;
 }
 

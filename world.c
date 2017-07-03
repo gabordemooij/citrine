@@ -922,9 +922,29 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	}
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTNATFUNC) {
 		funct = methodObject->value.fvalue;
+		if ( ctr_command_security_profile & CTR_SECPRO_EVAL ) {
+			if (
+				funct != ctr_array_push
+				&& funct != ctr_array_new_and_push
+				&& funct != ctr_map_new
+				&& funct != ctr_map_put
+				&& funct != ctr_array_new
+				&& funct != ctr_nil_to_string
+				&& funct != ctr_bool_to_string
+				&& funct != ctr_number_to_string
+				&& funct != ctr_string_to_string
+			) {
+			printf( "Native message not allowed in eval %s.\n", msg->value.svalue->value );
+			exit(1);
+			}
+		}
 		result = funct(receiverObject, argumentList);
 	}
-	if (methodObject->info.type == CTR_OBJECT_TYPE_OTBLOCK) {
+	if (methodObject->info.type == CTR_OBJECT_TYPE_OTBLOCK ) {
+		if ( ctr_command_security_profile & CTR_SECPRO_EVAL ) {
+			printf( "Custom message not allowed in eval.\n" );
+			exit(1);
+		}
 		result = ctr_block_run(methodObject, argumentList, receiverObject);
 	}
 	if (msg) msg->info.sticky = 0;

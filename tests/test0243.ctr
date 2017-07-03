@@ -1,0 +1,8 @@
+#Test eval whitelist custom message
+
+x := Object new.
+x on: 'test' do: { ^ True. }.
+
+(x test) ifTrue: {
+	'x test' eval.
+}.

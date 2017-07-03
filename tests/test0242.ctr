@@ -1,0 +1,4 @@
+#Test eval whitelist
+'Array new' eval. #okay
+'3 + 3' eval. #not okay
+

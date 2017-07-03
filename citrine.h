@@ -568,6 +568,7 @@ uint64_t ctr_command_maxtick;
 #define CTR_SECPRO_NO_FILE_READ 4
 #define CTR_SECPRO_NO_INCLUDE 8
 #define CTR_SECPRO_COUNTDOWN 16
+#define CTR_SECPRO_EVAL 32
 
 /**
  * Clock Interface
