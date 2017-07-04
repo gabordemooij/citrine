@@ -850,6 +850,17 @@ void ctr_initialize_world() {
 	CtrStdBreak->info.sticky = 1;
 	CtrStdContinue->info.sticky = 1;
 	CtrStdExit->info.sticky = 1;
+
+	/* Construct the whitelist for eval */
+	ctr_secpro_eval_whitelist[0] = ctr_array_push;
+	ctr_secpro_eval_whitelist[1] = ctr_map_new;
+	ctr_secpro_eval_whitelist[2] = ctr_map_put;
+	ctr_secpro_eval_whitelist[3] = ctr_array_new;
+	ctr_secpro_eval_whitelist[4] = ctr_nil_to_string;
+	ctr_secpro_eval_whitelist[5] = ctr_bool_to_string;
+	ctr_secpro_eval_whitelist[6] = ctr_number_to_string;
+	ctr_secpro_eval_whitelist[7] = ctr_string_to_string;
+	ctr_secpro_eval_whitelist[8] = ctr_array_new_and_push;
 }
 
 /**
@@ -861,6 +872,8 @@ void ctr_initialize_world() {
  */
 ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vlen, ctr_argument* argumentList) {
 	char toParent = 0;
+	int  i = 0;
+	char messageApproved = 0;
 	ctr_object* me;
 	ctr_object* methodObject;
 	ctr_object* searchObject;
@@ -923,19 +936,16 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTNATFUNC) {
 		funct = methodObject->value.fvalue;
 		if ( ctr_command_security_profile & CTR_SECPRO_EVAL ) {
-			if (
-				funct != ctr_array_push
-				&& funct != ctr_array_new_and_push
-				&& funct != ctr_map_new
-				&& funct != ctr_map_put
-				&& funct != ctr_array_new
-				&& funct != ctr_nil_to_string
-				&& funct != ctr_bool_to_string
-				&& funct != ctr_number_to_string
-				&& funct != ctr_string_to_string
-			) {
-			printf( "Native message not allowed in eval %s.\n", msg->value.svalue->value );
-			exit(1);
+			messageApproved = 0;
+			for ( i = 0; i < 9; i ++ ) {
+				if ( funct == ctr_secpro_eval_whitelist[i] ) {
+					messageApproved = 1;
+					break;
+				}
+			}
+			if ( !messageApproved ) {
+				printf( "Native message not allowed in eval %s.\n", msg->value.svalue->value );
+				exit(1);
 			}
 		}
 		result = funct(receiverObject, argumentList);

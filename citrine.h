@@ -563,6 +563,8 @@ void ctr_check_permission( uint8_t operationID );
 uint8_t ctr_command_security_profile;
 uint64_t ctr_command_tick;
 uint64_t ctr_command_maxtick;
+
+ctr_object* (*ctr_secpro_eval_whitelist[64])(ctr_object*, ctr_argument*);
 #define CTR_SECPRO_NO_SHELL 1
 #define CTR_SECPRO_NO_FILE_WRITE 2
 #define CTR_SECPRO_NO_FILE_READ 4
