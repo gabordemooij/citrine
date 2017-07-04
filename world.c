@@ -861,6 +861,14 @@ void ctr_initialize_world() {
 	ctr_secpro_eval_whitelist[6] = ctr_number_to_string;
 	ctr_secpro_eval_whitelist[7] = ctr_string_to_string;
 	ctr_secpro_eval_whitelist[8] = ctr_array_new_and_push;
+
+	/* relax eval a bit */
+	ctr_secpro_eval_whitelist[9] = ctr_number_add;
+	ctr_secpro_eval_whitelist[10] = ctr_number_minus;
+	ctr_secpro_eval_whitelist[11] = ctr_number_divide;
+	ctr_secpro_eval_whitelist[12] = ctr_number_multiply;
+	ctr_secpro_eval_whitelist[13] = ctr_number_sqrt;
+	ctr_secpro_eval_whitelist[14] = ctr_number_pow;
 }
 
 /**
@@ -937,7 +945,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 		funct = methodObject->value.fvalue;
 		if ( ctr_command_security_profile & CTR_SECPRO_EVAL ) {
 			messageApproved = 0;
-			for ( i = 0; i < 9; i ++ ) {
+			for ( i = 0; i < 15; i ++ ) {
 				if ( funct == ctr_secpro_eval_whitelist[i] ) {
 					messageApproved = 1;
 					break;
