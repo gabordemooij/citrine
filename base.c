@@ -2112,6 +2112,35 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [String] characters.
+ *
+ * Splits the string in UTF-8 characters and returns
+ * those as an array.
+ *
+ * Usage:
+ *
+ * a := 'abc' characters.
+ * a count. #3
+ */
+ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_size i;
+	int charSize;
+	ctr_object* arr;
+	ctr_argument* newArgumentList;
+	arr = ctr_array_new(CtrStdArray, NULL);
+	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
+	i = 0;
+	while( i < myself->value.svalue->vlen ) {
+		charSize = ctr_utf8size( *(myself->value.svalue->value + i) );
+		newArgumentList->object = ctr_build_string( myself->value.svalue->value + i, charSize );
+		ctr_array_push( arr, newArgumentList );
+		i += charSize;
+	}
+	ctr_heap_free( newArgumentList );
+	return arr;
+}
+
+/**
  * [String] htmlEscape
  *
  * Escapes HTML chars.

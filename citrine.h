@@ -476,6 +476,7 @@ ctr_object* ctr_string_hash_with_key(ctr_object* myself, ctr_argument* argumentL
 ctr_object* ctr_string_to_string( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_string_eval( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_string_quotes_escape( ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentList );
 
 /**
  * Block Interface
