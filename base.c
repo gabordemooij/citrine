@@ -2140,6 +2140,22 @@ ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentLis
 	return arr;
 }
 
+ctr_object* ctr_string_to_byte_array( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_size i;
+	ctr_object* arr;
+	ctr_argument* newArgumentList;
+	arr = ctr_array_new(CtrStdArray, NULL);
+	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
+	i = 0;
+	while( i < myself->value.svalue->vlen ) {
+		newArgumentList->object = ctr_build_number_from_float( (double) (uint8_t) *(myself->value.svalue->value + i) );
+		ctr_array_push( arr, newArgumentList );
+		i ++;
+	}
+	ctr_heap_free( newArgumentList );
+	return arr;
+}
+
 /**
  * [String] htmlEscape
  *

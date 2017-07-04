@@ -1,0 +1,11 @@
+#test whether we can split a string into bytes
+
+q := 'abc'.
+x := q toByteArray.
+Pen write: x, brk.
+Pen write: x count, brk.
+
+q := '기나 긴 여행'.
+x := q toByteArray.
+Pen write: x, brk.
+Pen write: (x count), brk.
