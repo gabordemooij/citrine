@@ -478,6 +478,7 @@ ctr_object* ctr_string_eval( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_string_quotes_escape( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_string_to_byte_array( ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_string_append_byte(ctr_object* myself, ctr_argument* argumentList );
 
 /**
  * Block Interface

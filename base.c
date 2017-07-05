@@ -2162,6 +2162,26 @@ ctr_object* ctr_string_to_byte_array( ctr_object* myself, ctr_argument* argument
 }
 
 /**
+ * [String] appendByte: [Number].
+ *
+ * Appends a raw byte to a string.
+ */
+ctr_object* ctr_string_append_byte( ctr_object* myself, ctr_argument* argumentList ) {
+	char* dest;
+	char byte;
+	byte = (uint8_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	dest = ctr_heap_allocate( myself->value.svalue->vlen + 1 );
+	memcpy( dest, myself->value.svalue->value, myself->value.svalue->vlen );
+	*( dest + myself->value.svalue->vlen ) = byte;
+	if ( myself->value.svalue->vlen > 0 ) {
+		ctr_heap_free( myself->value.svalue->value );
+	}
+	myself->value.svalue->value = dest;
+	myself->value.svalue->vlen++;
+	return myself;
+}
+
+/**
  * [String] htmlEscape
  *
  * Escapes HTML chars.

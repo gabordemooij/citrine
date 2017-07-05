@@ -1,0 +1,14 @@
+#test whether we can append a raw byte to a string.
+str := 'abc'.
+str appendByte: 96.
+Pen write: str, brk.
+
+q := Array < 234 ; 184 ; 176 ; 235 ; 130 ; 152 ; 32 ; 234 ; 184 ; 180 ; 32 ; 236 ; 151 ; 172 ; 237 ; 150 ; 137.
+
+a := ''.
+
+q each: { :i :b
+	a appendByte: b.
+}.
+
+Pen write: a, brk.
