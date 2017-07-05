@@ -2140,6 +2140,11 @@ ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentLis
 	return arr;
 }
 
+/**
+ * [String] toByteArray
+ *
+ * Returns an array of bytes representing the string.
+ */
 ctr_object* ctr_string_to_byte_array( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_size i;
 	ctr_object* arr;
