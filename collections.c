@@ -557,6 +557,8 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * toString messages are implicitly send by some objects, for instance when
  * attempting to write an Array using a Pen.
+ *
+ * You can also use the alias 'serialize'.
  */
 ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	int i;
@@ -601,6 +603,13 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 	return string;
 }
 
+/**
+ * [Array] serialize
+ *
+ * Alias for [Array] toString.
+ *
+ * See 'Map serialize' for the reason for this alias.
+ */
 
 /**
  * Map
@@ -767,9 +776,9 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Pen write: (Map new). #prints Map new.
  *
+ * You can also use the alias 'serialize'.
  */
 ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
-	
 	ctr_object*  string;
 	ctr_mapitem* mapItem;
 	ctr_argument* newArgumentList;
@@ -828,6 +837,18 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 	}
 	ctr_heap_free( newArgumentList );
 	return string;
-	
 }
 
+/**
+ * [Map] serialize
+ *
+ * Alias for [Map] toString.
+ * A toString message, sometimes implicitly send by other messages like
+ * 'Pen write:' will give you a serialized version of the Map or Array.
+ * This is far more useful than a 'dumb' textual description of the object like
+ * 'array' or 'object'. However, when working with very large Maps or Arrays
+ * accidentally dumping the entire contents can be annoying, in this case you can
+ * override the toString behaviour but you don't have to remap the original, you
+ * can just use this alias. Also, this alias can be used if you want to make
+ * the serialization more explicit.
+ */
