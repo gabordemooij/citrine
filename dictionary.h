@@ -167,6 +167,7 @@
 #define CTR_DICT_TO_BYTE         "toByte"
 #define CTR_DICT_CHARACTERS      "characters"
 #define CTR_DICT_TO_BYTE_ARRAY   "toByteArray"
+#define CTR_DICT_SERIALIZE       "serialize"
 #define CTR_DICT_ASCII_UPPER_CASE                "asciiUpperCase" 
 #define CTR_DICT_ASCII_LOWER_CASE                "asciiLowerCase"
 #define CTR_DICT_ASCII_UPPER_CASE_1              "asciiUpperCase1st" 

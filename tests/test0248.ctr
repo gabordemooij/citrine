@@ -1,0 +1,31 @@
+#everyday use case and can we use the alias 'serialize' ?
+
+a := (Array < (
+	(Map new)
+		put: 'domain' at: 'mywebsite.com',
+		put: (Array <
+			((Map new)
+				put: 'home' at: 'title',
+				put: '<html></html>' at: 'body',
+				put: '2017-01-01' at: 'created'
+			) ;
+			((Map new)
+				put: 'aboutus(c)' at: 'title',
+				put: '<credits>Author Inc.</credits>' at: 'body'
+			)
+		) at: 'pages'
+	)
+) serialize.
+
+Pen write: a type, brk.
+Pen write: a, brk.
+
+var b := a eval.
+Pen write: b @ 0 @ 'pages' @ 1 @ 'body', brk.
+
+var c := b @ 0.
+var d := c serialize.
+Pen write: d type, brk.
+
+var e := d eval.
+Pen write: e @ 'pages' @ 0, brk.
