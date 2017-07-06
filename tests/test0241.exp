@@ -1,4 +1,4 @@
-Array < 'Quotes \' are evil?' ; 1
+Array ← 'Quotes \' are evil?' ; 1
 Quotes ' are evil?
 (Map new) put:'\'' at:'\'quote\''
 '

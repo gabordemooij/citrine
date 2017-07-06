@@ -195,4 +195,4 @@
 #define CTR_DICT_CODEGEN_MAP_PUT                 "put:"
 #define CTR_DICT_CODEGEN_MAP_PUT_AT              " at:"
 #define CTR_DICT_CODEGEN_ARRAY_NEW               "Array new "
-#define CTR_DICT_CODEGEN_ARRAY_NEW_PUSH          "Array < "
+#define CTR_DICT_CODEGEN_ARRAY_NEW_PUSH          "Array ← "

@@ -2,7 +2,7 @@ Yep
 100
 Devil
 False
-Array < 'hello' ; 'world' ; True ; Nil ; 666 ; 1
+Array ← 'hello' ; 'world' ; True ; Nil ; 666 ; 1
 (Map new) put:Nil at:Nil
 668
 Error noted: toString must return a string.
