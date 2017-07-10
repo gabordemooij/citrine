@@ -36,6 +36,7 @@ char* ctr_clex_desc_tok_booleanno = "False";
 char* ctr_clex_desc_tok_nil = "Nil";
 char* ctr_clex_desc_tok_assignment = ":=";
 char* ctr_clex_desc_tok_ret = "^";
+char* ctr_clex_desc_tok_ret_unicode = "↑";
 char* ctr_clex_desc_tok_fin = "end of program";
 char* ctr_clex_desc_tok_unknown = "(unknown token)";
 
@@ -68,8 +69,7 @@ uint8_t ctr_clex_is_delimiter( char symbol ) {
  *
  * Displays an error message for the lexer.
  */
-void ctr_clex_emit_error( char* message )
-{
+void ctr_clex_emit_error( char* message ) {
 	printf( "%s on line: %d. \n", message, ctr_clex_line_number );
 	exit(1);
 }
@@ -253,6 +253,14 @@ int ctr_clex_tok() {
 	}
 	if (c == ':') { ctr_code++; return CTR_TOKEN_COLON; }
 	if (c == '^') { ctr_code++; return CTR_TOKEN_RET; }
+	//↑
+	if ( ( ctr_code + 2) < ctr_eofcode
+		&&   (uint8_t)            c == 226
+		&& ( (uint8_t) *(ctr_code+1)==134)
+		&& ( (uint8_t) *(ctr_code+2)==145)  ) {
+		ctr_code += 3;
+		return CTR_TOKEN_RET;
+	}
 	if (c == '\'') { ctr_code++; return CTR_TOKEN_QUOTE; }
 	if ((c == '-' && (ctr_code+1)<ctr_eofcode && isdigit(*(ctr_code+1))) || isdigit(c)) {
 		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
@@ -329,6 +337,11 @@ int ctr_clex_tok() {
 		c !='.'  &&
 		c !=','  &&
 		c !='^'  &&
+		( !(
+		( ctr_code + 2) < ctr_eofcode
+			&&   (uint8_t)            c == 226
+			&& ( (uint8_t) *(ctr_code+1)== 134)
+			&& ( (uint8_t) *(ctr_code+2)== 145) ) ) &&
 		c != ':' &&
 		c != '\''
 	) && ctr_code!=ctr_eofcode
@@ -341,7 +354,6 @@ int ctr_clex_tok() {
 		ctr_code++;
 		c = *ctr_code;
 	}
-
 	return CTR_TOKEN_REF;
 }
 

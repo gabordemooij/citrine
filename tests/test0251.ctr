@@ -1,0 +1,14 @@
+#Can we use the unicode return arrow instead of the ascii one?
+
+Number on: 'describe' do: {
+	var text := Nil.
+	( me = 0 ) ifTrue: {
+		text := 'zero'.
+	}.
+	( me = 1 ) ifTrue: {
+		text := 'one'.
+	}.
+	↑ text.
+}.
+
+Pen write: 0 describe + 1 describe, brk.
