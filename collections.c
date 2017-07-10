@@ -22,6 +22,10 @@
  *
  * or, the short form:
  *
+ * a := Array ← 1 ; 2 ; 3.
+ *
+ * or (if you prefer ASCII only symbols):
+ *
  * a := Array < 1 ; 2 ; 3.
  *
  */
@@ -77,7 +81,7 @@ ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * a := Array < 8 ; 4 ; 2 ; 16.
+ * a := Array ← 8 ; 4 ; 2 ; 16.
  * m := a min. #2
  *
  */
@@ -103,7 +107,7 @@ ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * a := Array < 8 ; 4 ; 2 ; 16.
+ * a := Array ← 8 ; 4 ; 2 ; 16.
  * m := a max. #16
  *
  */
@@ -130,7 +134,7 @@ ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * a := Array < 1 ; 2 ; 3.
+ * a := Array ← 1 ; 2 ; 3.
  * s := a sum. #6
  *
  * In the example above, the sum of array will be stored in s and
@@ -156,7 +160,7 @@ ctr_object* ctr_array_sum(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * a := Array < 2 ; 4 ; 8.
+ * a := Array ← 2 ; 4 ; 8.
  * p := a product. #64
  *
  * In the example above, the product of the array will be calculated
@@ -228,13 +232,17 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
  */
 
 /**
- * [Array] < [Element1] ; [Element2] ; ...
+ * [Array] ← [Element1] ; [Element2] ; ...
  *
  * Creates a new instance of an array and initializes this
  * array with a first element, useful for literal-like Array
  * notations.
  *
  * Usage:
+ *
+ * a := Array ← 1 ; 2 ; 3.
+ *
+ * or if you like ASCII-only:
  *
  * a := Array < 1 ; 2 ; 3.
  *
@@ -323,7 +331,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * fruits := Array < 'apples' ; 'oranges' ; 'bananas'.
+ * fruits := Array ← 'apples' ; 'oranges' ; 'bananas'.
  * fruits at: 1. #returns 'oranges'
  */
 ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
@@ -550,7 +558,7 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * Usage:
  * 
- * a := Array < 'hello' ; 'world'.
+ * a := Array ← 'hello' ; 'world'.
  * b := a toString.
  * c := b eval.
  * x := c @ 1. #world
