@@ -1,0 +1,27 @@
+
+#c := Clock new: 3600 * 55. #3
+#Pen write: c day, brk.
+
+clock := Clock new.
+
+
+#set a clock date and time
+clock year: 1981, month: 1, day: 5,
+      hour: 13, minute: 15, second: 13.
+
+Pen write: clock, brk.
+
+Pen write: (
+	(clock year) + '-' + (clock month) + '-' + (clock day) + ' ' +
+	(clock hour) + ':' + (clock minute) + ':' + (clock second) + ' ' +
+	'W' + (clock week) + ' t' + (clock time) + ' ' + (clock zone)
+), brk.
+
+
+clock zone: 'Europe/Amsterdam'.
+Pen write: (
+	(clock year) + '-' + (clock month) + '-' + (clock day) + ' ' +
+	(clock hour) + ':' + (clock minute) + ':' + (clock second) + ' ' +
+	'W' + (clock week) + ' t' + (clock time) + ' ' + (clock zone)
+), brk.
+

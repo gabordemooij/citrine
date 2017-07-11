@@ -804,7 +804,27 @@ void ctr_initialize_world() {
 	CtrStdClock = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( CTR_DICT_WAIT ), &ctr_clock_wait );
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( CTR_DICT_TIME ), &ctr_clock_time );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "new:" ), &ctr_clock_new_set );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "new" ), &ctr_clock_new );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "day" ), &ctr_clock_day );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "day:" ), &ctr_clock_set_day );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "month" ), &ctr_clock_month );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "month:" ), &ctr_clock_set_month );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "year" ), &ctr_clock_year );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "year:" ), &ctr_clock_set_year );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "hour" ), &ctr_clock_hour );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "hour:" ), &ctr_clock_set_hour );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "minute" ), &ctr_clock_minute );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "minute:" ), &ctr_clock_set_minute );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "second" ), &ctr_clock_second );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "second:" ), &ctr_clock_set_second );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "weekDay" ), &ctr_clock_weekday );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "yearDay" ), &ctr_clock_yearday );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "week" ), &ctr_clock_week );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "zone" ), &ctr_clock_get_zone );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "zone:" ), &ctr_clock_set_zone );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_CLOCK ), CtrStdClock, 0 );
+	ctr_clock_init( CtrStdClock );
 	CtrStdClock->link = CtrStdObject;
 	CtrStdFile->info.sticky = 1;
 

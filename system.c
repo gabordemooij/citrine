@@ -729,13 +729,318 @@ ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Clock] time
+ * [Clock] new: [Number].
  *
- * Returns UNIX epoch time in seconds.
+ * Creates a new clock instance from a UNIX time stamp.
  */
-ctr_object* ctr_clock_time(ctr_object* myself, ctr_argument* argumentList) {
-	time_t seconds = time(NULL);
-	return ctr_build_number_from_float((ctr_number)seconds);
+ctr_object* ctr_clock_new_set( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* clock;
+	clock = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
+	clock->link = myself;
+	ctr_internal_object_add_property( clock, ctr_build_string_from_cstring( "time" ), ctr_internal_cast2number(argumentList->object), CTR_CATEGORY_PRIVATE_PROPERTY );
+	return clock;
+}
+
+/**
+ * @internal
+ */
+ctr_object* ctr_clock_get_time( ctr_object* myself, ctr_argument* argumentList, char part ) {
+	struct tm* date;
+	time_t timeStamp;
+	ctr_object* answer;
+	char* zone;
+	timeStamp = (time_t) ctr_internal_cast2number(
+		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("time"), CTR_CATEGORY_PRIVATE_PROPERTY )
+	)->value.nvalue;
+	zone = ctr_heap_allocate_cstring(
+		ctr_internal_cast2string(
+			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("zone"), CTR_CATEGORY_PRIVATE_PROPERTY )
+		)
+	);
+	setenv( "TZ", zone, 1 );
+	date = localtime( &timeStamp );
+	setenv( "TZ", "UTC", 1 );
+	switch( part ) {
+		case 'Y':
+			answer = ctr_build_number_from_float( (ctr_number) date->tm_year + 1900 );
+			break;
+		case 'm':
+			answer = ctr_build_number_from_float( (ctr_number) date->tm_mon + 1 );
+			break;
+		case 'd':
+			answer = ctr_build_number_from_float( (ctr_number) date->tm_mday );
+			break;
+		case 'H':
+			answer = ctr_build_number_from_float( (ctr_number) date->tm_hour );
+			break;
+		case 'i':
+			answer = ctr_build_number_from_float( (ctr_number) date->tm_min );
+			break;
+		case 's':
+			answer = ctr_build_number_from_float( (ctr_number) date->tm_sec );
+			break;
+	}
+	ctr_heap_free( zone );
+	return answer;
+}
+
+/**
+ * @internal
+ */
+ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, char part ) {
+	struct tm* date;
+	time_t timeStamp;
+	ctr_object* key;
+	char* zone;
+	key = ctr_build_string_from_cstring( "time" );
+	timeStamp = (time_t) ctr_internal_cast2number(
+		ctr_internal_object_find_property( myself, key, 0 )
+	)->value.nvalue;
+	zone = ctr_heap_allocate_cstring(
+		ctr_internal_cast2string(
+			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("zone"), CTR_CATEGORY_PRIVATE_PROPERTY )
+		)
+	);
+	setenv( "TZ", zone, 1 );
+	date = localtime( &timeStamp );
+	setenv( "TZ", "UTC", 1 );
+	switch( part ) {
+		case 'Y':
+			date->tm_year = ctr_internal_cast2number(argumentList->object)->value.nvalue - 1900;
+			break;
+		case 'm':
+			date->tm_mon = ctr_internal_cast2number(argumentList->object)->value.nvalue - 1;
+			break;
+		case 'd':
+			date->tm_mday = ctr_internal_cast2number(argumentList->object)->value.nvalue;
+			break;
+		case 'H':
+			date->tm_hour = ctr_internal_cast2number(argumentList->object)->value.nvalue;
+			break;
+		case 'i':
+			date->tm_min = ctr_internal_cast2number(argumentList->object)->value.nvalue;
+			break;
+		case 's':
+			date->tm_sec = ctr_internal_cast2number(argumentList->object)->value.nvalue;
+			break;
+	}
+	ctr_heap_free( zone );
+	ctr_internal_object_set_property( myself, key, ctr_build_number_from_float( (double_t) mktime( date ) ), 0 );
+	return myself;
+}
+
+/**
+ * [Clock] zone: [String]
+ *
+ * Sets the time zone of the clock.
+ */
+ctr_object* ctr_clock_set_zone( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring("zone"), ctr_internal_cast2string( argumentList->object ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	return myself;
+}
+
+/**
+ * [Clock] zone
+ *
+ * Returns time zone of the clock.
+ */
+ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("zone"), CTR_CATEGORY_PRIVATE_PROPERTY );
+}
+
+/**
+ * [Clock] zone: [Number]
+ *
+ * Sets the year of the clock.
+ */
+ctr_object* ctr_clock_set_year( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_clock_set_time( myself, argumentList, 'Y' );
+}
+
+/**
+ * [Clock] zone: [Number]
+ *
+ * Sets the month of the clock.
+ */
+ctr_object* ctr_clock_set_month( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_clock_set_time( myself, argumentList, 'm' );
+}
+
+/**
+ * [Clock] zone: [Number]
+ *
+ * Sets the day of the clock.
+ */
+ctr_object* ctr_clock_set_day( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_clock_set_time( myself, argumentList, 'd' );
+}
+
+/**
+ * [Clock] zone: [Number]
+ *
+ * Sets the hour of the clock.
+ */
+ctr_object* ctr_clock_set_hour( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_clock_set_time( myself, argumentList, 'H' );
+}
+
+/**
+ * [Clock] zone: [Number]
+ *
+ * Sets the minute of the clock.
+ */
+ctr_object* ctr_clock_set_minute( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_clock_set_time( myself, argumentList, 'i' );
+}
+
+/**
+ * [Clock] zone: [Number]
+ *
+ * Sets the second of the clock.
+ */
+ctr_object* ctr_clock_set_second( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_clock_set_time( myself, argumentList, 's' );
+}
+
+/**
+ * [Clock] year
+ *
+ * Returns year of the clock.
+ */
+ctr_object* ctr_clock_year( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_clock_get_time( myself, argumentList, 'Y' );
+}
+
+/**
+ * [Clock] month
+ *
+ * Returns month of the clock.
+ */
+ctr_object* ctr_clock_month( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_clock_get_time( myself, argumentList, 'm' );
+}
+
+/**
+ * [Clock] day
+ *
+ * Returns day of the clock.
+ */
+ctr_object* ctr_clock_day( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_clock_get_time( myself, argumentList, 'd' );
+}
+
+/**
+ * [Clock] hour
+ *
+ * Returns hour of the clock.
+ */
+ctr_object* ctr_clock_hour( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_clock_get_time( myself, argumentList, 'H' );
+}
+
+/**
+ * [Clock] minute
+ *
+ * Returns minute of the clock.
+ */
+ctr_object* ctr_clock_minute( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_clock_get_time( myself, argumentList, 'i' );
+}
+
+/**
+ * [Clock] second
+ *
+ * Returns second of the clock.
+ */
+ctr_object* ctr_clock_second( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_clock_get_time( myself, argumentList, 's' );
+}
+
+/**
+ * [Clock] yearday
+ *
+ * Returns day number of the year.
+ */
+ctr_object* ctr_clock_yearday( ctr_object* myself, ctr_argument* argumentList ) {
+	struct tm* date;
+	time_t timeStamp;
+	timeStamp = (time_t) ctr_internal_cast2number(
+		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("time"), 0 )
+	)->value.nvalue;
+	date = localtime( &timeStamp );
+	return ctr_build_number_from_float( (double_t) date->tm_yday );
+}
+
+/**
+ * [Clock] weekday
+ *
+ * Returns the week day number of the clock.
+ */
+ctr_object* ctr_clock_weekday( ctr_object* myself, ctr_argument* argumentList ) {
+	struct tm* date;
+	time_t timeStamp;
+	timeStamp = (time_t) ctr_internal_cast2number(
+		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("time"), 0 )
+	)->value.nvalue;
+	date = localtime( &timeStamp );
+	return ctr_build_number_from_float( (double_t) date->tm_wday );
+}
+
+/**
+ * [Clock] time.
+ *
+ * Returns the UNIX time stamp representation of the time.
+ * Note: this is the time OF CREATION OF THE OBJECT. To get the actual time use:
+ *
+ * [Clock] new time.
+ */
+ctr_object* ctr_clock_time( ctr_object* myself, ctr_argument* argumentList ) {
+	time_t timeStamp;
+	timeStamp = (time_t) ctr_internal_cast2number(
+		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("time"), 0 )
+	)->value.nvalue;
+	return ctr_build_number_from_float( (double_t) timeStamp );
+}
+
+/**
+ * [Clock] week
+ *
+ * Returns the week number of the clock.
+ */
+ctr_object* ctr_clock_week( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* weekNumber;
+	char*  str;
+	time_t timeStamp;
+	timeStamp = (time_t) ctr_internal_cast2number(
+		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("time"), 0 )
+	)->value.nvalue;
+	str = ctr_heap_allocate( 4 );
+	strftime( str, 3, "%W", localtime( &timeStamp ) );
+	weekNumber = ctr_internal_cast2number( ctr_build_string_from_cstring( str ) );
+	ctr_heap_free( str );
+	return weekNumber;
+}
+
+/**
+ * @internal
+ */
+void ctr_clock_init( ctr_object* clock ) {
+	ctr_internal_object_add_property( clock, ctr_build_string_from_cstring( "time" ), ctr_build_number_from_float( (double_t) time( NULL ) ), 0 );
+	ctr_internal_object_add_property( clock, ctr_build_string_from_cstring( "zone" ), ctr_build_string_from_cstring( "UTC" ), 0 );
+}
+
+/**
+ * [Clock] new
+ *
+ * Creates a new clock, by default a clock will be set to
+ * the UTC timezone having the current time.
+ */
+ctr_object* ctr_clock_new( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* clock;
+	clock = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
+	clock->link = myself;
+	ctr_clock_init( clock );
+	return clock;
 }
 
 /**

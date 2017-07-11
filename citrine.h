@@ -583,6 +583,29 @@ ctr_object* (*ctr_secpro_eval_whitelist[64])(ctr_object*, ctr_argument*);
  */
 ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_clock_time(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_new(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_new_set(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_day(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_month(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_year(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_hour(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_minute(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_second(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_weekday(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_yearday(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_week(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_set_day(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_set_month(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_set_year(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_set_hour(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_set_minute(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_set_second(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_get_time( ctr_object* myself, ctr_argument* argumentList, char part );
+ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, char part );
+ctr_object* ctr_clock_set_zone( ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList );
+void ctr_clock_init( ctr_object* clock );
+
 
 /**
  * Slurp Interface

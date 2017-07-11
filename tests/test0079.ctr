@@ -1,4 +1,4 @@
-time := Clock time.
+time := Clock new time.
 Clock wait: 1.
-time2 := Clock time.
+time2 := Clock new time.
 (time2 > time) ifTrue: { Pen write: 'T1 < T2'. }.
