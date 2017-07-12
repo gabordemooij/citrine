@@ -803,7 +803,6 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
 	);
 	setenv( "TZ", zone, 1 );
 	date = localtime( &timeStamp );
-	setenv( "TZ", "UTC", 1 );
 	switch( part ) {
 		case 'Y':
 			date->tm_year = ctr_internal_cast2number(argumentList->object)->value.nvalue - 1900;
@@ -826,6 +825,7 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
 	}
 	ctr_heap_free( zone );
 	ctr_internal_object_set_property( myself, key, ctr_build_number_from_float( (double_t) mktime( date ) ), 0 );
+	setenv( "TZ", "UTC", 1 );
 	return myself;
 }
 
@@ -1019,6 +1019,54 @@ ctr_object* ctr_clock_week( ctr_object* myself, ctr_argument* argumentList ) {
 	weekNumber = ctr_internal_cast2number( ctr_build_string_from_cstring( str ) );
 	ctr_heap_free( str );
 	return weekNumber;
+}
+
+/**
+ * [Clock] format: [String]
+ *
+ * Returns a string describing the date and time represented by the clock object
+ * according to the specified format. See strftime for format syntax details.
+ */
+ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList ) {
+	char*       zone;
+	char*       description;
+	ctr_object* answer;
+	time_t      timeStamp;
+	char*       format;
+	format = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->object ) );
+	zone = ctr_heap_allocate_cstring(
+		ctr_internal_cast2string(
+			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("zone"), CTR_CATEGORY_PRIVATE_PROPERTY )
+		)
+	);
+	timeStamp = (time_t) ctr_internal_cast2number(
+		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("time"), 0 )
+	)->value.nvalue;
+	description = ctr_heap_allocate( 41 );
+	setenv( "TZ", zone, 1 );
+	strftime( description, 40, format, localtime( &timeStamp ) );
+	setenv( "TZ", "UTC", 1 );
+	answer = ctr_build_string_from_cstring( description );
+	ctr_heap_free( description );
+	ctr_heap_free( format );
+	ctr_heap_free( zone );
+	return answer;
+}
+
+/**
+ * [Clock] toString
+ *
+ * Returns a string describing the date and time 
+ * represented by the clock object.
+ */
+ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_argument* newArgumentList;
+	ctr_object*   answer;
+	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
+	newArgumentList->object = ctr_build_string_from_cstring( "%Y-%m-%d %H:%M:%S" );
+	answer = ctr_clock_format( myself, newArgumentList );
+	ctr_heap_free( newArgumentList );
+	return answer;
 }
 
 /**

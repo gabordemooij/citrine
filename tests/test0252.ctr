@@ -25,3 +25,13 @@ Pen write: (
 	'W' + (clock week) + ' t' + (clock time) + ' ' + (clock zone)
 ), brk.
 
+clock2 := clock new zone: 'Europe/Amsterdam', hour: 8.
+
+
+Pen write: (clock2 format: Nil), brk. #should not cause segfault - Nil
+Pen write: (clock format: 'Clock1 %H'), brk.
+Pen write: (clock2 format: 'Clock2 %H'), brk.
+
+clock2 zone: 'America/New York'.
+Pen write: (clock format: 'Clock1 %H'), brk.
+Pen write: (clock2 format: 'Clock2 %H'), brk.

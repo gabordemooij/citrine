@@ -604,6 +604,8 @@ ctr_object* ctr_clock_get_time( ctr_object* myself, ctr_argument* argumentList, 
 ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, char part );
 ctr_object* ctr_clock_set_zone( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList );
 void ctr_clock_init( ctr_object* clock );
 
 

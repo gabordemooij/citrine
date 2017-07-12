@@ -823,6 +823,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "week" ), &ctr_clock_week );
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "zone" ), &ctr_clock_get_zone );
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "zone:" ), &ctr_clock_set_zone );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "format:" ), &ctr_clock_format );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "toString" ), &ctr_clock_to_string );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_CLOCK ), CtrStdClock, 0 );
 	ctr_clock_init( CtrStdClock );
 	CtrStdClock->link = CtrStdObject;
