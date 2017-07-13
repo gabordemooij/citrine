@@ -35,3 +35,9 @@ Pen write: (clock2 format: 'Clock2 %H'), brk.
 clock2 zone: 'America/New York'.
 Pen write: (clock format: 'Clock1 %H'), brk.
 Pen write: (clock2 format: 'Clock2 %H'), brk.
+
+clock3 := Clock new like: (Clock new zone: 'UTC', hour: 13).
+clock3 := Clock new: clock3 time.
+Pen write: (clock3 format: 'Clock3 %H'), brk.
+
+#GTK greet.

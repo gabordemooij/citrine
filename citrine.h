@@ -585,6 +585,7 @@ ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_clock_time(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_clock_new(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_clock_new_set(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_clock_like(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_clock_day(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_clock_month(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_clock_year(ctr_object* myself, ctr_argument* argumentList);

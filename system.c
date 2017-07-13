@@ -735,8 +735,7 @@ ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_clock_new_set( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* clock;
-	clock = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
-	clock->link = myself;
+	clock = ctr_clock_new( myself, argumentList );
 	ctr_internal_object_add_property( clock, ctr_build_string_from_cstring( "time" ), ctr_internal_cast2number(argumentList->object), CTR_CATEGORY_PRIVATE_PROPERTY );
 	return clock;
 }
@@ -826,6 +825,37 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
 	ctr_heap_free( zone );
 	ctr_internal_object_set_property( myself, key, ctr_build_number_from_float( (double_t) mktime( date ) ), 0 );
 	setenv( "TZ", "UTC", 1 );
+	return myself;
+}
+
+/**
+ * [Clock] like: [Clock]
+ *
+ * Syncs a clock. Copies the time AND zone from the other clock.
+ *
+ * Usage:
+ * clock := Clock new: timeStamp.
+ * copyClock := Clock new like: clock.
+ */
+ctr_object* ctr_clock_like( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* otherClock;
+	ctr_object* time;
+	ctr_object* zone;
+	otherClock = argumentList->object;
+	time = ctr_internal_object_find_property( otherClock, ctr_build_string_from_cstring( "time" ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	if ( time == NULL ) {
+		time = ctr_build_number_from_float( 0 );
+	} else {
+		time = ctr_internal_cast2number( time );
+	}
+	zone = ctr_internal_object_find_property( otherClock, ctr_build_string_from_cstring( "zone" ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	if ( zone == NULL ) {
+		zone = ctr_build_string_from_cstring( "UTC" );
+	} else {
+		zone = ctr_internal_cast2string( zone );
+	}
+	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( "zone" ), zone, CTR_CATEGORY_PRIVATE_PROPERTY );
+	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( "time" ), time, CTR_CATEGORY_PRIVATE_PROPERTY );
 	return myself;
 }
 
