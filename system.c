@@ -736,7 +736,7 @@ ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_clock_new_set( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* clock;
 	clock = ctr_clock_new( myself, argumentList );
-	ctr_internal_object_add_property( clock, ctr_build_string_from_cstring( "time" ), ctr_internal_cast2number(argumentList->object), CTR_CATEGORY_PRIVATE_PROPERTY );
+	ctr_internal_object_add_property( clock, ctr_build_string_from_cstring( CTR_DICT_TIME ), ctr_internal_cast2number(argumentList->object), CTR_CATEGORY_PRIVATE_PROPERTY );
 	return clock;
 }
 
@@ -749,11 +749,11 @@ ctr_object* ctr_clock_get_time( ctr_object* myself, ctr_argument* argumentList, 
 	ctr_object* answer;
 	char* zone;
 	timeStamp = (time_t) ctr_internal_cast2number(
-		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("time"), CTR_CATEGORY_PRIVATE_PROPERTY )
+		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), CTR_CATEGORY_PRIVATE_PROPERTY )
 	)->value.nvalue;
 	zone = ctr_heap_allocate_cstring(
 		ctr_internal_cast2string(
-			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("zone"), CTR_CATEGORY_PRIVATE_PROPERTY )
+			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY )
 		)
 	);
 	setenv( "TZ", zone, 1 );
@@ -791,13 +791,13 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
 	time_t timeStamp;
 	ctr_object* key;
 	char* zone;
-	key = ctr_build_string_from_cstring( "time" );
+	key = ctr_build_string_from_cstring( CTR_DICT_TIME );
 	timeStamp = (time_t) ctr_internal_cast2number(
 		ctr_internal_object_find_property( myself, key, 0 )
 	)->value.nvalue;
 	zone = ctr_heap_allocate_cstring(
 		ctr_internal_cast2string(
-			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("zone"), CTR_CATEGORY_PRIVATE_PROPERTY )
+			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY )
 		)
 	);
 	setenv( "TZ", zone, 1 );
@@ -842,20 +842,20 @@ ctr_object* ctr_clock_like( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* time;
 	ctr_object* zone;
 	otherClock = argumentList->object;
-	time = ctr_internal_object_find_property( otherClock, ctr_build_string_from_cstring( "time" ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	time = ctr_internal_object_find_property( otherClock, ctr_build_string_from_cstring( CTR_DICT_TIME ), CTR_CATEGORY_PRIVATE_PROPERTY );
 	if ( time == NULL ) {
 		time = ctr_build_number_from_float( 0 );
 	} else {
 		time = ctr_internal_cast2number( time );
 	}
-	zone = ctr_internal_object_find_property( otherClock, ctr_build_string_from_cstring( "zone" ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	zone = ctr_internal_object_find_property( otherClock, ctr_build_string_from_cstring( CTR_DICT_ZONE ), CTR_CATEGORY_PRIVATE_PROPERTY );
 	if ( zone == NULL ) {
 		zone = ctr_build_string_from_cstring( "UTC" );
 	} else {
 		zone = ctr_internal_cast2string( zone );
 	}
-	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( "zone" ), zone, CTR_CATEGORY_PRIVATE_PROPERTY );
-	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( "time" ), time, CTR_CATEGORY_PRIVATE_PROPERTY );
+	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( CTR_DICT_ZONE ), zone, CTR_CATEGORY_PRIVATE_PROPERTY );
+	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( CTR_DICT_TIME ), time, CTR_CATEGORY_PRIVATE_PROPERTY );
 	return myself;
 }
 
@@ -865,7 +865,7 @@ ctr_object* ctr_clock_like( ctr_object* myself, ctr_argument* argumentList ) {
  * Sets the time zone of the clock.
  */
 ctr_object* ctr_clock_set_zone( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring("zone"), ctr_internal_cast2string( argumentList->object ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), ctr_internal_cast2string( argumentList->object ), CTR_CATEGORY_PRIVATE_PROPERTY );
 	return myself;
 }
 
@@ -875,7 +875,7 @@ ctr_object* ctr_clock_set_zone( ctr_object* myself, ctr_argument* argumentList )
  * Returns time zone of the clock.
  */
 ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList ) {
-	return ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("zone"), CTR_CATEGORY_PRIVATE_PROPERTY );
+	return ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY );
 }
 
 /**
@@ -995,7 +995,7 @@ ctr_object* ctr_clock_yearday( ctr_object* myself, ctr_argument* argumentList ) 
 	struct tm* date;
 	time_t timeStamp;
 	timeStamp = (time_t) ctr_internal_cast2number(
-		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("time"), 0 )
+		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), 0 )
 	)->value.nvalue;
 	date = localtime( &timeStamp );
 	return ctr_build_number_from_float( (double_t) date->tm_yday );
@@ -1010,7 +1010,7 @@ ctr_object* ctr_clock_weekday( ctr_object* myself, ctr_argument* argumentList ) 
 	struct tm* date;
 	time_t timeStamp;
 	timeStamp = (time_t) ctr_internal_cast2number(
-		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("time"), 0 )
+		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), 0 )
 	)->value.nvalue;
 	date = localtime( &timeStamp );
 	return ctr_build_number_from_float( (double_t) date->tm_wday );
@@ -1027,7 +1027,7 @@ ctr_object* ctr_clock_weekday( ctr_object* myself, ctr_argument* argumentList ) 
 ctr_object* ctr_clock_time( ctr_object* myself, ctr_argument* argumentList ) {
 	time_t timeStamp;
 	timeStamp = (time_t) ctr_internal_cast2number(
-		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("time"), 0 )
+		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), 0 )
 	)->value.nvalue;
 	return ctr_build_number_from_float( (double_t) timeStamp );
 }
@@ -1042,7 +1042,7 @@ ctr_object* ctr_clock_week( ctr_object* myself, ctr_argument* argumentList ) {
 	char*  str;
 	time_t timeStamp;
 	timeStamp = (time_t) ctr_internal_cast2number(
-		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("time"), 0 )
+		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), 0 )
 	)->value.nvalue;
 	str = ctr_heap_allocate( 4 );
 	strftime( str, 3, "%W", localtime( &timeStamp ) );
@@ -1066,11 +1066,11 @@ ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList ) {
 	format = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->object ) );
 	zone = ctr_heap_allocate_cstring(
 		ctr_internal_cast2string(
-			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("zone"), CTR_CATEGORY_PRIVATE_PROPERTY )
+			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY )
 		)
 	);
 	timeStamp = (time_t) ctr_internal_cast2number(
-		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("time"), 0 )
+		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), 0 )
 	)->value.nvalue;
 	description = ctr_heap_allocate( 41 );
 	setenv( "TZ", zone, 1 );
@@ -1103,8 +1103,8 @@ ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList 
  * @internal
  */
 void ctr_clock_init( ctr_object* clock ) {
-	ctr_internal_object_add_property( clock, ctr_build_string_from_cstring( "time" ), ctr_build_number_from_float( (double_t) time( NULL ) ), 0 );
-	ctr_internal_object_add_property( clock, ctr_build_string_from_cstring( "zone" ), ctr_build_string_from_cstring( "UTC" ), 0 );
+	ctr_internal_object_add_property( clock, ctr_build_string_from_cstring( CTR_DICT_TIME ), ctr_build_number_from_float( (double_t) time( NULL ) ), 0 );
+	ctr_internal_object_add_property( clock, ctr_build_string_from_cstring( CTR_DICT_ZONE ), ctr_build_string_from_cstring( "UTC" ), 0 );
 }
 
 ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
@@ -1119,41 +1119,41 @@ ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
 	struct tm* date;
 	numberObject = ctr_internal_cast2number( argumentList->object );
 	number = numberObject->value.nvalue;
-	qual = ctr_internal_object_find_property( argumentList->object, ctr_build_string_from_cstring("qualification"), CTR_CATEGORY_PRIVATE_PROPERTY );
+	qual = ctr_internal_object_find_property( argumentList->object, ctr_build_string_from_cstring(CTR_DICT_QUALIFICATION), CTR_CATEGORY_PRIVATE_PROPERTY );
 	if (qual == NULL) {
 		return myself;
 	}
 	qual = ctr_internal_cast2string( qual );
 	unit = qual->value.svalue->value;
 	l    = qual->value.svalue->vlen;
-	timeObject = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("time"), CTR_CATEGORY_PRIVATE_PROPERTY );
+	timeObject = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), CTR_CATEGORY_PRIVATE_PROPERTY );
 	if ( timeObject == NULL ) {
 		return myself;
 	}
 	time = (time_t) ctr_internal_cast2number( timeObject )->value.nvalue;
 	zone = ctr_heap_allocate_cstring(
 		ctr_internal_cast2string(
-			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("zone"), CTR_CATEGORY_PRIVATE_PROPERTY )
+			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY )
 		)
 	);
 	setenv( "TZ", zone, 1 );
 	date = localtime( &time );
-	if ( strncmp( unit, "hours", l ) == 0 || strncmp( unit, "hour", l ) == 0 || strncmp( unit, "hrs", l ) == 0  ) {
+	if ( strncmp( unit, CTR_DICT_HOURS, l ) == 0 || strncmp( unit, CTR_DICT_HOUR, l ) == 0 || strncmp( unit, CTR_DICT_HOURS_ABBR, l ) == 0  ) {
 		date->tm_hour += number;
-	} else if ( strncmp( unit, "minutes", l ) == 0 || strncmp( unit, "minute", l ) == 0 || strncmp( unit, "min", l ) == 0  ) {
+	} else if ( strncmp( unit, CTR_DICT_MINUTES, l ) == 0 || strncmp( unit, CTR_DICT_MINUTE, l ) == 0 || strncmp( unit, CTR_DICT_MINUTES_ABBR, l ) == 0  ) {
 		date->tm_min += number;
-	} else if ( strncmp( unit, "seconds", l ) == 0 || strncmp( unit, "second", l ) == 0 || strncmp( unit, "sec", l ) == 0 ) {
+	} else if ( strncmp( unit, CTR_DICT_SECONDS, l ) == 0 || strncmp( unit, CTR_DICT_SECOND, l ) == 0 || strncmp( unit, CTR_DICT_SECONDS_ABBR, l ) == 0 ) {
 		date->tm_sec += number;
-	} else if ( strncmp( unit, "days", l ) == 0 || strncmp( unit, "day", l ) == 0 ) {
+	} else if ( strncmp( unit, CTR_DICT_DAYS, l ) == 0 || strncmp( unit, CTR_DICT_DAY, l ) == 0 ) {
 		date->tm_mday += number;
-	} else if ( strncmp( unit, "months", l ) == 0 || strncmp( unit, "month", l ) == 0 ) {
+	} else if ( strncmp( unit, CTR_DICT_MONTHS, l ) == 0 || strncmp( unit, CTR_DICT_MONTH, l ) == 0 ) {
 		date->tm_mon += number;
-	} else if ( strncmp( unit, "years", l ) == 0 || strncmp( unit, "year", l ) == 0 ) {
+	} else if ( strncmp( unit, CTR_DICT_YEARS, l ) == 0 || strncmp( unit, CTR_DICT_YEAR, l ) == 0 ) {
 		date->tm_year += number;
-	} else if ( strncmp( unit, "weeks", l ) == 0 || strncmp( unit, "week", l ) == 0 ) {
+	} else if ( strncmp( unit, CTR_DICT_WEEKS, l ) == 0 || strncmp( unit, CTR_DICT_WEEK, l ) == 0 ) {
 		date->tm_mday += number * 7;
 	}
-	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring("time"), ctr_build_number_from_float( (ctr_number) mktime( date ) ), CTR_CATEGORY_PRIVATE_PROPERTY  );
+	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), ctr_build_number_from_float( (ctr_number) mktime( date ) ), CTR_CATEGORY_PRIVATE_PROPERTY  );
 	setenv( "TZ", "UTC", 1 );
 	ctr_heap_free( zone );
 	return myself;
