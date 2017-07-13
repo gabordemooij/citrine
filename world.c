@@ -829,6 +829,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( CTR_DICT_LIKE ), &ctr_clock_like );
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_clock_to_string );
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( CTR_DICT_ADD_SET ), &ctr_clock_add );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( CTR_DICT_SUBTRACT_SET ), &ctr_clock_subtract );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_CLOCK ), CtrStdClock, 0 );
 	ctr_clock_init( CtrStdClock );
 	CtrStdClock->link = CtrStdObject;

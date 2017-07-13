@@ -584,6 +584,7 @@ ctr_object* (*ctr_secpro_eval_whitelist[64])(ctr_object*, ctr_argument*);
 /**
  * Clock Interface
  */
+ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, uint8_t forward );
 ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_clock_time(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_clock_new(ctr_object* myself, ctr_argument* argumentList);
@@ -611,6 +612,7 @@ ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList )
 ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList );
 void ctr_clock_init( ctr_object* clock );
 
 

@@ -1,0 +1,8 @@
+#can we subtract time?
+
+x := Clock new hour: 10, minute: 0, second: 0, year:2017, day:10, month:7.
+Pen write: x, brk.
+x subtract: 1 hour.
+Pen write: x, brk.
+x subtract: -1 hour.
+Pen write: x, brk.

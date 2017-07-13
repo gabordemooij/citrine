@@ -201,6 +201,7 @@
 #define CTR_DICT_ZONE            "zone"
 #define CTR_DICT_ZONE_SET        "zone:"
 #define CTR_DICT_ADD_SET         "add:"
+#define CTR_DICT_SUBTRACT_SET    "subtract:"
 #define CTR_DICT_LIKE            "like:"
 #define CTR_DICT_FORMAT          "format:"
 #define CTR_DICT_NEW_ARRAY_AND_PUSH_SYMBOL       "←"

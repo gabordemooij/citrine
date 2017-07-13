@@ -1108,34 +1108,9 @@ void ctr_clock_init( ctr_object* clock ) {
 }
 
 /**
- * [Clock] add: [Number].
- *
- * Adds the number to the clock, updating its time accordingly.
- * Note that this is typically used with a qualifier.
- * If the qualifier is 'hours' the number is treated as hours and
- * the specified number of hours will be added to the time.
- *
- * The Clock object understands the following qualifiers
- * if the selected language is English:
- *
- * sec, second, seconds,
- * min, minute, minutes,
- * hrs, hour, hours,
- * day, days,
- * week, weeks,
- * month, months,
- * year, years
- *
- * Note that it does not matter which form you use, 2 hour means
- * the same as 2 hours (plural).
- *
- * Usage:
- *
- * clock add: 3 minutes. #adds 3 minutes
- * clock add: 1 hour.    #adds 1 hour
- * clock add: 2 second.  #adds 2 seconds
+ * @internal
  */
-ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
+ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, uint8_t forward ) {
 	ctr_number number;
 	ctr_object* numberObject;
 	ctr_object* qual;
@@ -1146,7 +1121,7 @@ ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
 	char* unit;
 	struct tm* date;
 	numberObject = ctr_internal_cast2number( argumentList->object );
-	number = numberObject->value.nvalue;
+	number = numberObject->value.nvalue * (forward ? 1 : -1);
 	qual = ctr_internal_object_find_property( argumentList->object, ctr_build_string_from_cstring(CTR_DICT_QUALIFICATION), CTR_CATEGORY_PRIVATE_PROPERTY );
 	if (qual == NULL) {
 		return myself;
@@ -1185,6 +1160,48 @@ ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
 	setenv( "TZ", "UTC", 1 );
 	ctr_heap_free( zone );
 	return myself;
+}
+
+/**
+ * [Clock] add: [Number].
+ *
+ * Adds the number to the clock, updating its time accordingly.
+ * Note that this is typically used with a qualifier.
+ * If the qualifier is 'hours' the number is treated as hours and
+ * the specified number of hours will be added to the time.
+ *
+ * The Clock object understands the following qualifiers
+ * if the selected language is English:
+ *
+ * sec, second, seconds,
+ * min, minute, minutes,
+ * hrs, hour, hours,
+ * day, days,
+ * week, weeks,
+ * month, months,
+ * year, years
+ *
+ * Note that it does not matter which form you use, 2 hour means
+ * the same as 2 hours (plural).
+ *
+ * Usage:
+ *
+ * clock add: 3 minutes. #adds 3 minutes
+ * clock add: 1 hour.    #adds 1 hour
+ * clock add: 2 second.  #adds 2 seconds
+ */
+ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_clock_change( myself, argumentList, 1 );
+}
+
+/**
+ * [Clock] subtract: [Number].
+ *
+ * Same as '[Clock] add:' but subtracts the number instead of adding it to
+ * the clock's time.
+ */
+ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_clock_change( myself, argumentList, 0 );
 }
 
 /**
