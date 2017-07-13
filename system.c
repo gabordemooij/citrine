@@ -1107,6 +1107,58 @@ void ctr_clock_init( ctr_object* clock ) {
 	ctr_internal_object_add_property( clock, ctr_build_string_from_cstring( "zone" ), ctr_build_string_from_cstring( "UTC" ), 0 );
 }
 
+ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_number number;
+	ctr_object* numberObject;
+	ctr_object* qual;
+	char* zone;
+	ctr_object* timeObject;
+	ctr_size l;
+	time_t time;
+	char* unit;
+	struct tm* date;
+	numberObject = ctr_internal_cast2number( argumentList->object );
+	number = numberObject->value.nvalue;
+	qual = ctr_internal_object_find_property( argumentList->object, ctr_build_string_from_cstring("qualification"), CTR_CATEGORY_PRIVATE_PROPERTY );
+	if (qual == NULL) {
+		return myself;
+	}
+	qual = ctr_internal_cast2string( qual );
+	unit = qual->value.svalue->value;
+	l    = qual->value.svalue->vlen;
+	timeObject = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("time"), CTR_CATEGORY_PRIVATE_PROPERTY );
+	if ( timeObject == NULL ) {
+		return myself;
+	}
+	time = (time_t) ctr_internal_cast2number( timeObject )->value.nvalue;
+	zone = ctr_heap_allocate_cstring(
+		ctr_internal_cast2string(
+			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("zone"), CTR_CATEGORY_PRIVATE_PROPERTY )
+		)
+	);
+	setenv( "TZ", zone, 1 );
+	date = localtime( &time );
+	if ( strncmp( unit, "hours", l ) == 0 || strncmp( unit, "hour", l ) == 0 || strncmp( unit, "hrs", l ) == 0  ) {
+		date->tm_hour += number;
+	} else if ( strncmp( unit, "minutes", l ) == 0 || strncmp( unit, "minute", l ) == 0 || strncmp( unit, "min", l ) == 0  ) {
+		date->tm_min += number;
+	} else if ( strncmp( unit, "seconds", l ) == 0 || strncmp( unit, "second", l ) == 0 || strncmp( unit, "sec", l ) == 0 ) {
+		date->tm_sec += number;
+	} else if ( strncmp( unit, "days", l ) == 0 || strncmp( unit, "day", l ) == 0 ) {
+		date->tm_mday += number;
+	} else if ( strncmp( unit, "months", l ) == 0 || strncmp( unit, "month", l ) == 0 ) {
+		date->tm_mon += number;
+	} else if ( strncmp( unit, "years", l ) == 0 || strncmp( unit, "year", l ) == 0 ) {
+		date->tm_year += number;
+	} else if ( strncmp( unit, "weeks", l ) == 0 || strncmp( unit, "week", l ) == 0 ) {
+		date->tm_mday += number * 7;
+	}
+	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring("time"), ctr_build_number_from_float( (ctr_number) mktime( date ) ), CTR_CATEGORY_PRIVATE_PROPERTY  );
+	setenv( "TZ", "UTC", 1 );
+	ctr_heap_free( zone );
+	return myself;
+}
+
 /**
  * [Clock] new
  *

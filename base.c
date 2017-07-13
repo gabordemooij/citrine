@@ -1136,6 +1136,15 @@ ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(floor(myself->value.nvalue));
 }
 
+ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( "qualification" ), ctr_internal_cast2string( argumentList->object ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	return myself;
+}
+
+ctr_object* ctr_number_respond_to(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_number_qualify( myself, argumentList );
+}
+
 /**
  * [Number] ceil
  *

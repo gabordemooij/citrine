@@ -1,0 +1,27 @@
+#Can we add hours to a clock using simple language?
+
+clock := Clock
+	new zone: 'Europe/Amsterdam',
+	year: 2017, month: 7, day: 13,
+	hour: 18, minute: 0, second: 0.
+
+clock on: 'tell' do: {
+	Pen write: me, brk.
+}.
+
+#add up to all 21!
+clock add: 2    hours, tell.
+clock add: 1     hour, tell.
+clock add: 19 minutes, tell.
+clock add: 1      min, tell.
+clock add: 1   minute, tell.
+clock add: 19 seconds, tell.
+clock add: 1      sec, tell.
+clock add: 1   second, tell.
+clock add: 2    years, tell.
+clock add: 1     year, tell.
+clock add: 5   months, tell.
+clock add: 1    month, tell.
+clock add: 19    days, tell.
+clock add: 1      hrs, tell.
+clock add: 120  yards, tell.

@@ -440,6 +440,9 @@ ctr_object* ctr_number_to_step_do(ctr_object* myself, ctr_argument* argumentList
 ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_to_byte(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_number_respond_to(ctr_object* myself, ctr_argument* argumentList);
+
 
 /**
  * String Interface
@@ -607,6 +610,7 @@ ctr_object* ctr_clock_set_zone( ctr_object* myself, ctr_argument* argumentList )
 ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList );
 void ctr_clock_init( ctr_object* clock );
 
 

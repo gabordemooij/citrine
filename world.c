@@ -638,6 +638,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_object_myself );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_BETWEEN ),&ctr_number_between );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_TO_BYTE ),&ctr_number_to_byte );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "qualify:" ),&ctr_number_qualify );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ),&ctr_number_qualify );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NUMBER ), CtrStdNumber, 0);
 	CtrStdNumber->link = CtrStdObject;
 	CtrStdNumber->info.sticky = 1;
@@ -826,6 +828,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "format:" ), &ctr_clock_format );
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "like:" ), &ctr_clock_like );
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "toString" ), &ctr_clock_to_string );
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( "add:" ), &ctr_clock_add );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_CLOCK ), CtrStdClock, 0 );
 	ctr_clock_init( CtrStdClock );
 	CtrStdClock->link = CtrStdObject;
