@@ -1107,6 +1107,34 @@ void ctr_clock_init( ctr_object* clock ) {
 	ctr_internal_object_add_property( clock, ctr_build_string_from_cstring( CTR_DICT_ZONE ), ctr_build_string_from_cstring( "UTC" ), 0 );
 }
 
+/**
+ * [Clock] add: [Number].
+ *
+ * Adds the number to the clock, updating its time accordingly.
+ * Note that this is typically used with a qualifier.
+ * If the qualifier is 'hours' the number is treated as hours and
+ * the specified number of hours will be added to the time.
+ *
+ * The Clock object understands the following qualifiers
+ * if the selected language is English:
+ *
+ * sec, second, seconds,
+ * min, minute, minutes,
+ * hrs, hour, hours,
+ * day, days,
+ * week, weeks,
+ * month, months,
+ * year, years
+ *
+ * Note that it does not matter which form you use, 2 hour means
+ * the same as 2 hours (plural).
+ *
+ * Usage:
+ *
+ * clock add: 3 minutes. #adds 3 minutes
+ * clock add: 1 hour.    #adds 1 hour
+ * clock add: 2 second.  #adds 2 seconds
+ */
 ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_number number;
 	ctr_object* numberObject;
