@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <time.h>
+#include <sys/wait.h>
 
 #ifdef forLinux
 #include <bsd/stdlib.h>
@@ -684,6 +685,40 @@ ctr_object* ctr_command_countdown( ctr_object* myself, ctr_argument* argumentLis
 ctr_object* ctr_command_flush(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	 fflush(stdout);
 	 return myself;
+}
+
+/**
+ * [Program] fork: [Block] and: [Block]
+ *
+ * Forks the program into two programs.
+ * After this message the program will end. The remainder of the program
+ * should be in the specified blocks. The first block is the parent block,
+ * the second block is the chid block. The parent will wait for the child
+ * process to end.
+ */
+ctr_object* ctr_command_fork(ctr_object* myself, ctr_argument* argumentList) {
+	int p;
+	ctr_argument* newArgumentList;
+	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
+	p = fork();
+	if ( p < 0 ) {
+		CtrStdFlow = ctr_build_string_from_cstring( "Unable to fork" );
+		ctr_heap_free( newArgumentList );
+		return CtrStdNil;
+	}
+	if ( p > 0 ) {
+		ctr_block_runIt( argumentList->object, newArgumentList );
+		waitpid( p,0, 0 );
+		ctr_heap_free( newArgumentList );
+		CtrStdFlow = CtrStdExit;
+		return CtrStdNil;
+	} else {
+		ctr_block_runIt( argumentList->next->object, newArgumentList );
+		ctr_heap_free( newArgumentList );
+		CtrStdFlow = CtrStdExit;
+		return CtrStdNil;
+	}
+	return myself;
 }
 
 /**

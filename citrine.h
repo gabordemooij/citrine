@@ -575,6 +575,7 @@ ctr_object* ctr_command_forbid_file_write(ctr_object* myself, ctr_argument* ctr_
 ctr_object* ctr_command_forbid_file_read(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_command_forbid_include(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_command_countdown(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_command_fork(ctr_object* myself, ctr_argument* ctr_argumentList);
 void ctr_check_permission( uint8_t operationID );
 uint8_t ctr_command_security_profile;
 uint64_t ctr_command_tick;

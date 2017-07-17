@@ -204,6 +204,7 @@
 #define CTR_DICT_SUBTRACT_SET    "subtract:"
 #define CTR_DICT_LIKE            "like:"
 #define CTR_DICT_FORMAT          "format:"
+#define CTR_DICT_FORK            "fork:and:"
 #define CTR_DICT_NEW_ARRAY_AND_PUSH_SYMBOL       "←"
 #define CTR_DICT_ASCII_UPPER_CASE                "asciiUpperCase" 
 #define CTR_DICT_ASCII_LOWER_CASE                "asciiLowerCase"

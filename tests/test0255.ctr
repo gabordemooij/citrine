@@ -1,0 +1,11 @@
+#Can we fork?
+x := 1.
+Program fork: {
+	Pen write: 'Parent ' + x, brk.
+	x := 2.
+} and: {
+	Clock wait: 1.
+	Pen write: 'Child ' + x, brk.
+	x := 3.
+}.
+Pen write: 'Both stopped', brk.
