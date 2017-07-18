@@ -698,6 +698,12 @@ ctr_object* ctr_command_flush(ctr_object* myself, ctr_argument* ctr_argumentList
  * obtain its version of the program instance as the return value of the
  * new: message.
  *
+ * Note that spawning a new program will leak memory.
+ * The file descriptors used to setup communication between parent and
+ * child will be removed when the main program ends but any newly created
+ * program will add a descriptor pair to the set. This is a limitation
+ * in the current implementation.
+ *
  * Usage:
  *
  * child := Program new: { :program
@@ -716,8 +722,8 @@ ctr_object* ctr_command_fork(ctr_object* myself, ctr_argument* argumentList) {
 	child = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
 	child->link = myself;
 	ps = ctr_heap_allocate( sizeof(int) * 4 );
-	pipes = ctr_heap_allocate( sizeof( FILE ) * 2 );
-	rs = ctr_heap_allocate( sizeof( ctr_resource ) );
+	pipes = ctr_heap_allocate_tracked( sizeof( FILE ) * 2 );
+	rs = ctr_heap_allocate_tracked( sizeof( ctr_resource ) );
 	rs->type = 2;
 	rs->ptr = (void*) pipes;
 	child->value.rvalue = rs;
@@ -740,13 +746,11 @@ ctr_object* ctr_command_fork(ctr_object* myself, ctr_argument* argumentList) {
 		setvbuf( *((FILE**)rs->ptr + 2), NULL, _IONBF, 0 );
 		rs->type = 3;
 		ctr_block_runIt( argumentList->object, newArgumentList );
-		ctr_heap_free( newArgumentList );
 		fclose(*((FILE**)rs->ptr + 1));
 		fclose(*((FILE**)rs->ptr + 2));
-		CtrStdFlow = CtrStdExit;
+		ctr_heap_free( newArgumentList );
 		ctr_heap_free( ps);
-		ctr_heap_free( pipes );
-		ctr_heap_free( rs );
+		CtrStdFlow = CtrStdExit;
 		return CtrStdNil;
 	} else {
 		ctr_internal_object_set_property(
@@ -832,8 +836,7 @@ ctr_object* ctr_command_listen(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Rejoins the program with the main program.
  * This message will cause the current program to stop and wait
- * for the child program to end, cleaning up all resources used
- * by that program.
+ * for the child program to end.
  */
 ctr_object* ctr_command_join(ctr_object* myself, ctr_argument* argumentList) {
 	int pid;
@@ -850,8 +853,6 @@ ctr_object* ctr_command_join(ctr_object* myself, ctr_argument* argumentList) {
 	fclose(*((FILE**)rs->ptr + 0));
 	fclose(*((FILE**)rs->ptr + 3));
 	waitpid(pid, 0, 0);
-	ctr_heap_free(rs->ptr);
-	ctr_heap_free(rs);
 	return CtrStdNil;
 }
 

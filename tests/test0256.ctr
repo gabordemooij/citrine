@@ -1,0 +1,16 @@
+#Can we fork multiple childs and send them messages?
+children := Array new.
+5 times: { :i
+	var q := Program new: { :pro
+		Clock wait: 1.
+		pro listen: { :message
+			Pen write: 'Child says: ' + message, brk.
+		}.
+		
+	}.
+	children push: q.
+}.
+children each: { :i :child
+	child message: 'hello'.
+	child join.
+}.
