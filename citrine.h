@@ -581,6 +581,10 @@ uint8_t ctr_command_security_profile;
 uint64_t ctr_command_tick;
 uint64_t ctr_command_maxtick;
 ctr_object* (*ctr_secpro_eval_whitelist[64])(ctr_object*, ctr_argument*);
+ctr_object* ctr_command_message(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_command_listen(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_command_join(ctr_object* myself, ctr_argument* argumentList);
+
 
 /**
  * Clock Interface

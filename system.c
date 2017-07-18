@@ -688,37 +688,171 @@ ctr_object* ctr_command_flush(ctr_object* myself, ctr_argument* ctr_argumentList
 }
 
 /**
- * [Program] fork: [Block] and: [Block]
+ * [Program] new: [Block].
  *
  * Forks the program into two programs.
- * After this message the program will end. The remainder of the program
- * should be in the specified blocks. The first block is the parent block,
- * the second block is the chid block. The parent will wait for the child
- * process to end.
+ * Creates another program that will run at the same time as the
+ * current program. Both the parent and the child will obtain a reference
+ * to the newly created program. The child will obtain a reference to
+ * itself passed as a parameter to the code block while the parent will
+ * obtain its version of the program instance as the return value of the
+ * new: message.
+ *
+ * Usage:
+ *
+ * child := Program new: { :program
+ * 	Pen write: 'Child', brk.
+ * }.
+ * Pen write: 'Parent'.
  */
 ctr_object* ctr_command_fork(ctr_object* myself, ctr_argument* argumentList) {
 	int p;
+	int* ps;
+	FILE* pipes;
+	ctr_object* child;
 	ctr_argument* newArgumentList;
+	ctr_resource* rs;
 	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
+	child = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
+	child->link = myself;
+	ps = ctr_heap_allocate( sizeof(int) * 4 );
+	pipes = ctr_heap_allocate( sizeof( FILE ) * 2 );
+	rs = ctr_heap_allocate( sizeof( ctr_resource ) );
+	rs->type = 2;
+	rs->ptr = (void*) pipes;
+	child->value.rvalue = rs;
+	newArgumentList->object = child;
+	pipe(ps);
+	pipe(ps + 2);
 	p = fork();
 	if ( p < 0 ) {
 		CtrStdFlow = ctr_build_string_from_cstring( "Unable to fork" );
 		ctr_heap_free( newArgumentList );
+		ctr_heap_free( rs );
 		return CtrStdNil;
 	}
-	if ( p > 0 ) {
+	if ( p == 0 ) {
+		close(*(ps + 0));
+		close(*(ps + 3));
+		*((FILE**)rs->ptr + 1) = fdopen( *(ps + 1), "wb" );
+		*((FILE**)rs->ptr + 2) = fdopen( *(ps + 2), "rb" );
+		setvbuf( *((FILE**)rs->ptr + 1), NULL, _IONBF, 0 );
+		setvbuf( *((FILE**)rs->ptr + 2), NULL, _IONBF, 0 );
+		rs->type = 3;
 		ctr_block_runIt( argumentList->object, newArgumentList );
-		waitpid( p,0, 0 );
 		ctr_heap_free( newArgumentList );
+		fclose(*((FILE**)rs->ptr + 1));
+		fclose(*((FILE**)rs->ptr + 2));
 		CtrStdFlow = CtrStdExit;
+		ctr_heap_free( ps);
+		ctr_heap_free( pipes );
+		ctr_heap_free( rs );
 		return CtrStdNil;
 	} else {
-		ctr_block_runIt( argumentList->next->object, newArgumentList );
+		ctr_internal_object_set_property(
+				child,
+				ctr_build_string_from_cstring( "pid" ),
+				ctr_build_number_from_float( (ctr_number) p ),
+				CTR_CATEGORY_PRIVATE_PROPERTY
+		);
+		close(*(ps+1));
+		close(*(ps+2));
+		*((FILE**)rs->ptr + 3) = fdopen( *(ps + 3), "wb" );
+		*((FILE**)rs->ptr + 0) = fdopen( *(ps + 0), "rb" );
+		setvbuf( *((FILE**)rs->ptr + 3), NULL, _IONBF, 0 );
+		setvbuf( *((FILE**)rs->ptr + 0), NULL, _IONBF, 0 );
 		ctr_heap_free( newArgumentList );
-		CtrStdFlow = CtrStdExit;
+		ctr_heap_free( ps );
+	}
+	return child;
+}
+
+/**
+ * [Command] message: [String].
+ *
+ * Sends a message to another program, i.e. a child or a parent that is
+ * running at the same time.
+ */
+ctr_object* ctr_command_message(ctr_object* myself, ctr_argument* argumentList) {
+	char* str;
+	ctr_size n;
+	ctr_object* string;
+	ctr_resource* rs;
+	int q;
+	FILE* fd;
+	string = ctr_internal_cast2string( argumentList->object );
+	str = ctr_heap_allocate_cstring( string );
+	n = argumentList->object->value.svalue->vlen;
+	q = 1;
+	rs = myself->value.rvalue;
+	if (rs->type == 2) q = 3;
+	fd = *((FILE**)rs->ptr + q);
+	fwrite( &n, sizeof(ctr_size), 1, fd);
+	fwrite( str, 1, n, fd);
+	ctr_heap_free(str);
+	return myself;
+}
+
+/**
+ * [Command] listen: [Block].
+ *
+ * Stops the current flow of the program and starts listening for
+ * messages from other programs that are running at the same time.
+ * Upon receiving a message, the specified block will be invocated
+ * and passed the message that has been received.
+ */
+ctr_object* ctr_command_listen(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* program;
+	ctr_object* answer;
+	ctr_resource* r;
+	ctr_argument* newArgumentList;
+	int q;
+	ctr_size sz;
+	FILE* fd;
+	char* blob;
+	program = myself;
+	q = 0;
+	r = program->value.rvalue;
+	if (r->type == 3) q = 2;
+	fd = *((FILE**)r->ptr + q);
+	sz = 0;
+	fread(&sz, sizeof(ctr_size), 1, fd);
+	blob = ctr_heap_allocate( sz );
+	fread( blob, 1, sz, fd );
+	newArgumentList = ctr_heap_allocate( sizeof(ctr_argument) );
+	newArgumentList->object = ctr_build_string( blob, sz );
+	answer = ctr_block_runIt( argumentList->object, newArgumentList );
+	ctr_heap_free( blob );
+	ctr_heap_free(newArgumentList);
+	return answer;
+}
+
+/**
+ * [Command] join
+ *
+ * Rejoins the program with the main program.
+ * This message will cause the current program to stop and wait
+ * for the child program to end, cleaning up all resources used
+ * by that program.
+ */
+ctr_object* ctr_command_join(ctr_object* myself, ctr_argument* argumentList) {
+	int pid;
+	ctr_resource* rs = myself->value.rvalue;
+	if (rs->type == 3) {
+		CtrStdFlow = ctr_build_string_from_cstring( "a child process can not join." );
 		return CtrStdNil;
 	}
-	return myself;
+	pid = (int) ctr_internal_object_find_property(
+		myself,
+		ctr_build_string_from_cstring("pid"),
+		CTR_CATEGORY_PRIVATE_PROPERTY
+	)->value.nvalue;
+	fclose(*((FILE**)rs->ptr + 0));
+	fclose(*((FILE**)rs->ptr + 3));
+	waitpid(pid, 0, 0);
+	ctr_heap_free(rs->ptr);
+	ctr_heap_free(rs);
+	return CtrStdNil;
 }
 
 /**

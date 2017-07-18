@@ -1,2 +1,16 @@
-Child 1
-Parent 1
+I am the Child process
+Child received: hello
+Child received: world
+Child received: stop
+Child sleeps 4 sec, wait for it...
+1
+1
+1
+1
+Child is Done
+I am Parent Process
+Parent received: thanks for hello
+Parent received: thanks for world
+Parent received: thanks for stop
+Joined processes
+Parent is Done
