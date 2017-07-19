@@ -779,6 +779,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_SEEK ), &ctr_file_seek );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_REWIND ), &ctr_file_seek_rewind );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_file_seek_end );
+	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( "lock" ), &ctr_file_lock );
+	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( "unlock" ), &ctr_file_unlock );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_FILE ), CtrStdFile, 0);
 	CtrStdFile->link = CtrStdObject;
 	CtrStdFile->info.sticky = 1;

@@ -841,6 +841,7 @@ ctr_object* ctr_command_listen(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_command_join(ctr_object* myself, ctr_argument* argumentList) {
 	int pid;
 	ctr_resource* rs = myself->value.rvalue;
+	if (rs == NULL) return CtrStdNil;
 	if (rs->type == 3) {
 		CtrStdFlow = ctr_build_string_from_cstring( "a child process can not join." );
 		return CtrStdNil;

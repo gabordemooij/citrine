@@ -1,0 +1,9 @@
+#Child may not join.
+x := Program new: { :child
+	Pen write: 'hello1\n'.
+	child join.
+	Pen write: 'hello2\n'.
+}.
+
+x join.
+Program join.

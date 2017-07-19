@@ -557,6 +557,10 @@ ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList)
 ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_descriptor(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList, int lock);
+ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_unlock(ctr_object* myself, ctr_argument* argumentList);
 
 
 /**

@@ -1,0 +1,40 @@
+myFile := File new: '/tmp/lock'.
+
+myFile exists ifTrue: {
+	myFile delete.
+}.
+
+myFile write: 'lock'.
+
+isLocked := myFile lock.
+Pen write: isLocked, brk.
+
+isLocked := myFile lock.
+Pen write: isLocked, brk.
+
+myFile2 := File new: '/tmp/lock2'.
+
+myFile2 exists ifTrue: {
+	myFile2 delete.
+}.
+
+myFile2 write: 'lock'.
+
+isLocked := myFile2 lock.
+Pen write: isLocked, brk.
+
+isLocked := myFile2 unlock.
+Pen write: isLocked, brk.
+
+
+Program new: {
+	var myFile := File new: '/tmp/lock'.
+	var myFile2 := File new: '/tmp/lock2'.
+	
+	Pen write: 'Other process', brk.
+	isLocked := myFile lock.
+	Pen write: isLocked, brk.
+	isLocked := myFile2 lock.
+	Pen write: isLocked, brk.
+	
+}.

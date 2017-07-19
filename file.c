@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <time.h>
+#include <sys/file.h>
 
 #include "citrine.h"
 #include "siphash.h"
@@ -479,4 +480,50 @@ ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList) {
 		CtrStdFlow->info.sticky = 1;
 	}
 	return myself;
+}
+
+
+ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList, int lock) {
+	int b;
+	int fd;
+	char* path;
+	ctr_object* pathObj;
+	ctr_object* answer;
+	ctr_object* fdObj;
+	ctr_object* fdObjKey;
+	pathObj = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
+	path = ctr_heap_allocate_cstring( pathObj );
+	fdObjKey = ctr_build_string_from_cstring("fileDescriptor");
+	fdObj = ctr_internal_object_find_property(
+		myself,
+		fdObjKey,
+		CTR_CATEGORY_PRIVATE_PROPERTY
+	);
+	if (fdObj == NULL) {
+		fd = open( path, O_CREAT );
+		fdObj = ctr_build_number_from_float( (ctr_size) fd );
+		ctr_internal_object_set_property(
+			myself, fdObjKey, fdObj, CTR_CATEGORY_PRIVATE_PROPERTY
+		);
+	} else {
+		fd = (int) fdObj->value.nvalue;
+	}
+	b = flock( fd, lock );
+	if (b != 0) {
+		close(fd);
+		answer = ctr_build_bool(0);
+		ctr_internal_object_delete_property( myself, fdObjKey, CTR_CATEGORY_PRIVATE_PROPERTY );
+	} else {
+		answer = ctr_build_bool(1);
+	}
+	ctr_heap_free( path );
+	return answer;
+}
+
+ctr_object* ctr_file_unlock(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_file_lock_generic( myself, argumentList, LOCK_UN | LOCK_NB );
+}
+
+ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_file_lock_generic( myself, argumentList, LOCK_EX | LOCK_NB );
 }
