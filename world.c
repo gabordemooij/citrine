@@ -808,6 +808,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "warning:" ), &ctr_command_warn );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "alert:" ), &ctr_command_crit );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "error:" ), &ctr_command_err );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "pid" ), &ctr_command_pid );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PROGRAM ), CtrStdCommand, 0 );
 	CtrStdCommand->link = CtrStdObject;
 	CtrStdCommand->info.sticky = 1;

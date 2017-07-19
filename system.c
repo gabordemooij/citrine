@@ -858,7 +858,16 @@ ctr_object* ctr_command_join(ctr_object* myself, ctr_argument* argumentList) {
 	return CtrStdNil;
 }
 
-
+ctr_object* ctr_command_pid(ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* pidObject;
+	pidObject = ctr_internal_object_find_property(
+		myself,
+		ctr_build_string_from_cstring("pid"),
+		CTR_CATEGORY_PRIVATE_PROPERTY
+	);
+	if (pidObject == NULL) return CtrStdNil;
+	return ctr_internal_cast2number( pidObject );
+}
 
 ctr_object* ctr_command_log_generic(ctr_object* myself, ctr_argument* argumentList, int level) {
 	char* message;

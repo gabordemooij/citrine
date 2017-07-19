@@ -1,0 +1,11 @@
+#Can we obtain the pid of a child?
+
+Pen write: Program pid, brk.
+
+q := Program new: { :x
+	Pen write: x pid, brk.
+}.
+
+Pen write: q pid, brk.
+q join.
+Pen write: q pid, brk.

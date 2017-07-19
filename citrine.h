@@ -580,11 +580,6 @@ ctr_object* ctr_command_forbid_file_read(ctr_object* myself, ctr_argument* ctr_a
 ctr_object* ctr_command_forbid_include(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_command_countdown(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_command_fork(ctr_object* myself, ctr_argument* ctr_argumentList);
-void ctr_check_permission( uint8_t operationID );
-uint8_t ctr_command_security_profile;
-uint64_t ctr_command_tick;
-uint64_t ctr_command_maxtick;
-ctr_object* (*ctr_secpro_eval_whitelist[64])(ctr_object*, ctr_argument*);
 ctr_object* ctr_command_message(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_listen(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_join(ctr_object* myself, ctr_argument* argumentList);
@@ -592,6 +587,12 @@ ctr_object* ctr_command_log(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_warn(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_command_err(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_command_crit(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_command_pid(ctr_object* myself, ctr_argument* argumentList );
+void ctr_check_permission( uint8_t operationID );
+uint8_t ctr_command_security_profile;
+uint64_t ctr_command_tick;
+uint64_t ctr_command_maxtick;
+ctr_object* (*ctr_secpro_eval_whitelist[64])(ctr_object*, ctr_argument*);
 
 /**
  * Clock Interface
