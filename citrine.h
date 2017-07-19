@@ -588,7 +588,10 @@ ctr_object* (*ctr_secpro_eval_whitelist[64])(ctr_object*, ctr_argument*);
 ctr_object* ctr_command_message(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_listen(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_command_join(ctr_object* myself, ctr_argument* argumentList);
-
+ctr_object* ctr_command_log(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_command_warn(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_command_err(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_command_crit(ctr_object* myself, ctr_argument* argumentList );
 
 /**
  * Clock Interface
@@ -623,7 +626,6 @@ ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList );
 void ctr_clock_init( ctr_object* clock );
-
 
 /**
  * Slurp Interface

@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <time.h>
 #include <sys/wait.h>
+#include <syslog.h>
 
 #ifdef forLinux
 #include <bsd/stdlib.h>
@@ -855,6 +856,36 @@ ctr_object* ctr_command_join(ctr_object* myself, ctr_argument* argumentList) {
 	fclose(*((FILE**)rs->ptr + 3));
 	waitpid(pid, 0, 0);
 	return CtrStdNil;
+}
+
+
+
+ctr_object* ctr_command_log_generic(ctr_object* myself, ctr_argument* argumentList, int level) {
+	char* message;
+	message = ctr_heap_allocate_cstring(
+		ctr_internal_cast2string(
+			argumentList->object
+		)
+	);
+	syslog( level, "%s", message );
+	ctr_heap_free( message );
+	return myself;
+}
+
+ctr_object* ctr_command_log(ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_command_log_generic( myself, argumentList, LOG_NOTICE );
+}
+
+ctr_object* ctr_command_warn(ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_command_log_generic( myself, argumentList, LOG_WARNING );
+}
+
+ctr_object* ctr_command_err(ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_command_log_generic( myself, argumentList, LOG_ERR );
+}
+
+ctr_object* ctr_command_crit(ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_command_log_generic( myself, argumentList, LOG_EMERG );
 }
 
 /**

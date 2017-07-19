@@ -804,6 +804,10 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MESSAGE ), &ctr_command_message );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_LISTEN ), &ctr_command_listen );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_JOIN_PROCESS ), &ctr_command_join );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "log:" ), &ctr_command_log );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "warning:" ), &ctr_command_warn );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "alert:" ), &ctr_command_crit );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "error:" ), &ctr_command_err );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PROGRAM ), CtrStdCommand, 0 );
 	CtrStdCommand->link = CtrStdObject;
 	CtrStdCommand->info.sticky = 1;

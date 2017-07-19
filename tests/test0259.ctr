@@ -1,0 +1,29 @@
+
+
+key := '--Citrine-->0'.
+Program log: key.
+str := (Shell tail: '/var/log/syslog').
+((str indexOf: key) > -1) ifTrue: {
+	Pen write: 'OK'.
+}.
+
+key := '--Citrine-->1'.
+Program warning: key.
+str := (Shell tail: '/var/log/syslog').
+((str indexOf: key) > -1) ifTrue: {
+	Pen write: 'OK'.
+}.
+
+key := '--Citrine-->2'.
+Program error: key.
+str := (Shell tail: '/var/log/syslog').
+((str indexOf: key) > -1) ifTrue: {
+	Pen write: 'OK'.
+}.
+
+key := '--Citrine-->3'.
+Program alert: key.
+str := (Shell tail: '/var/log/syslog').
+((str indexOf: key) > -1) ifTrue: {
+	Pen write: 'OK'.
+}.
