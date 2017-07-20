@@ -673,6 +673,10 @@ ctr_object* ctr_command_forbid_include( ctr_object* myself, ctr_argument* argume
  * Program remainingMessages: 100.
  */
 ctr_object* ctr_command_countdown( ctr_object* myself, ctr_argument* argumentList ) {
+	if ( ctr_command_security_profile & CTR_SECPRO_COUNTDOWN ) {
+		printf( "Message quota cannot change.\n" );
+		exit(1);
+	}
 	ctr_command_security_profile |= CTR_SECPRO_COUNTDOWN;
 	ctr_command_maxtick = (uint64_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
 	return myself;
