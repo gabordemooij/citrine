@@ -779,8 +779,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_SEEK ), &ctr_file_seek );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_REWIND ), &ctr_file_seek_rewind );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_file_seek_end );
-	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( "lock" ), &ctr_file_lock );
-	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( "unlock" ), &ctr_file_unlock );
+	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_LOCK ), &ctr_file_lock );
+	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_UNLOCK ), &ctr_file_unlock );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_FILE ), CtrStdFile, 0);
 	CtrStdFile->link = CtrStdObject;
 	CtrStdFile->info.sticky = 1;
@@ -804,11 +804,11 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MESSAGE ), &ctr_command_message );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_LISTEN ), &ctr_command_listen );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_JOIN_PROCESS ), &ctr_command_join );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "log:" ), &ctr_command_log );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "warning:" ), &ctr_command_warn );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "alert:" ), &ctr_command_crit );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "error:" ), &ctr_command_err );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "pid" ), &ctr_command_pid );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_LOG_SET ), &ctr_command_log );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_WARNING ), &ctr_command_warn );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ALERT ), &ctr_command_crit );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ERROR ), &ctr_command_err );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_PID ), &ctr_command_pid );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PROGRAM ), CtrStdCommand, 0 );
 	CtrStdCommand->link = CtrStdObject;
 	CtrStdCommand->info.sticky = 1;
