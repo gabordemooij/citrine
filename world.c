@@ -759,6 +759,16 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_WRITE ), &ctr_console_write );
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_WRITE_TEMPLATE_SYMBOL ), &ctr_console_write );
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_BRK ), &ctr_console_brk );
+	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_RED ), &ctr_console_red );
+	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_GREEN ), &ctr_console_green );
+	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_YELLOW ), &ctr_console_yellow );
+	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_BLUE ), &ctr_console_blue );
+	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_MAGENTA ), &ctr_console_magenta );
+	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_PURPLE ), &ctr_console_magenta );
+	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_CYAN ), &ctr_console_cyan );
+	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_RESET_COLOR ), &ctr_console_reset );
+	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_TAB ), &ctr_console_tab );
+	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_LINE ), &ctr_console_line );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PEN ), CtrStdConsole, 0 );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PEN_TEMPLATE_SYMBOL ), CtrStdConsole, 0 );
 	CtrStdConsole->link = CtrStdObject;

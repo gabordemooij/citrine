@@ -95,6 +95,14 @@
 #define CTR_SECPRO_EVAL 32
 #define CTR_SECPRO_FORK 64
 
+#define CTR_ANSI_COLOR_RED     "\x1b[31m"
+#define CTR_ANSI_COLOR_GREEN   "\x1b[32m"
+#define CTR_ANSI_COLOR_YELLOW  "\x1b[33m"
+#define CTR_ANSI_COLOR_BLUE    "\x1b[34m"
+#define CTR_ANSI_COLOR_MAGENTA "\x1b[35m"
+#define CTR_ANSI_COLOR_CYAN    "\x1b[36m"
+#define CTR_ANSI_COLOR_RESET   "\x1b[0m"
+
 /**
  * Define basic types for Citrine
  */
@@ -543,6 +551,15 @@ ctr_object* ctr_map_to_string(ctr_object* myself, ctr_argument* argumentList);
  */
 ctr_object* ctr_console_write(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_console_brk(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_console_red(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_console_green(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_console_yellow(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_console_blue(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_console_magenta(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_console_cyan(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_console_reset(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_console_tab(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_console_line(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * File Interface

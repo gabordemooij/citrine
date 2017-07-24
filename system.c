@@ -1583,3 +1583,49 @@ ctr_object* ctr_console_brk(ctr_object* myself, ctr_argument* argumentList) {
 	fwrite("\n", sizeof(char), 1, stdout);
 	return myself;
 }
+
+ctr_object* ctr_console_red(ctr_object* myself, ctr_argument* argumentList) {
+	fwrite( CTR_ANSI_COLOR_RED, sizeof(char), strlen(CTR_ANSI_COLOR_RED), stdout);
+	return myself;
+}
+
+ctr_object* ctr_console_green(ctr_object* myself, ctr_argument* argumentList) {
+	fwrite( CTR_ANSI_COLOR_GREEN, sizeof(char), strlen(CTR_ANSI_COLOR_GREEN), stdout);
+	return myself;
+}
+
+ctr_object* ctr_console_yellow(ctr_object* myself, ctr_argument* argumentList) {
+	fwrite( CTR_ANSI_COLOR_YELLOW, sizeof(char), strlen(CTR_ANSI_COLOR_YELLOW), stdout);
+	return myself;
+}
+
+ctr_object* ctr_console_blue(ctr_object* myself, ctr_argument* argumentList) {
+	fwrite( CTR_ANSI_COLOR_BLUE, sizeof(char), strlen(CTR_ANSI_COLOR_BLUE), stdout);
+	return myself;
+}
+
+ctr_object* ctr_console_magenta(ctr_object* myself, ctr_argument* argumentList) {
+	fwrite( CTR_ANSI_COLOR_MAGENTA, sizeof(char), strlen(CTR_ANSI_COLOR_MAGENTA), stdout);
+	return myself;
+}
+
+ctr_object* ctr_console_cyan(ctr_object* myself, ctr_argument* argumentList) {
+	fwrite( CTR_ANSI_COLOR_CYAN, sizeof(char), strlen(CTR_ANSI_COLOR_CYAN), stdout);
+	return myself;
+}
+
+ctr_object* ctr_console_reset(ctr_object* myself, ctr_argument* argumentList) {
+	fwrite( CTR_ANSI_COLOR_RESET, sizeof(char), strlen(CTR_ANSI_COLOR_RESET), stdout);
+	return myself;
+}
+
+ctr_object* ctr_console_tab(ctr_object* myself, ctr_argument* argumentList) {
+	fwrite( "\t", sizeof(char), strlen("\t"), stdout);
+	return myself;
+}
+
+ctr_object* ctr_console_line(ctr_object* myself, ctr_argument* argumentList) {
+	char* line = "---------------------------------------\n";
+	fwrite( line, sizeof(char), strlen(line), stdout);
+	return myself;
+}
