@@ -415,6 +415,7 @@ ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList)
 ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
 	int offset;
 	int error;
+	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
 	offset = (long int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
@@ -443,6 +444,7 @@ ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList) {
 	int error;
+	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
 	error = fseek((FILE*)myself->value.rvalue->ptr, 0, SEEK_SET);
@@ -472,6 +474,7 @@ ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList)
  */
 ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList) {
 	int error;
+	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
 	error = fseek((FILE*)myself->value.rvalue->ptr, 0, SEEK_END);
@@ -491,6 +494,7 @@ ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList
 	ctr_object* answer;
 	ctr_object* fdObj;
 	ctr_object* fdObjKey;
+	ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE );
 	pathObj = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	path = ctr_heap_allocate_cstring( pathObj );
 	fdObjKey = ctr_build_string_from_cstring("fileDescriptor");
@@ -537,6 +541,7 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path;
 	ctr_argument* putArgumentList;
 	ctr_argument* addArgumentList;
+	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	fileList = ctr_array_new(CtrStdArray, NULL);
 	pathValue = ctr_heap_allocate_cstring( path );
@@ -585,6 +590,7 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 		addArgumentList->object = fileListItem;
 		ctr_array_push(fileList, addArgumentList);
 	}
+	closedir(d);
 	ctr_heap_free(putArgumentList->next);
 	ctr_heap_free(putArgumentList);
 	ctr_heap_free(addArgumentList);
