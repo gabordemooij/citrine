@@ -542,7 +542,7 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* putArgumentList;
 	ctr_argument* addArgumentList;
 	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
-	path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
+	path = ctr_internal_cast2string( argumentList->object );
 	fileList = ctr_array_new(CtrStdArray, NULL);
 	pathValue = ctr_heap_allocate_cstring( path );
 	d = opendir( pathValue );

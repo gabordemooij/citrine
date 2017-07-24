@@ -10,7 +10,7 @@
 	Shell call: 'mkdir /tmp/testje/folder1'.	
 }.
 
-l := (File new: '/tmp/testje') list.
+l := File list: '/tmp/testje'.
 l each: { :k :v
 	((v @ 'file' = 'file1') & (v @ 'type' = 'file')) ifTrue: { Pen write: 'OK', brk. }.
 	((v @ 'file' = 'folder1') & (v @ 'type' = 'folder')) ifTrue: { Pen write: 'OK', brk. }.
