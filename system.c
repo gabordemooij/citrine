@@ -592,6 +592,9 @@ void ctr_check_permission( uint8_t operationID ) {
 		if ( operationID == CTR_SECPRO_NO_INCLUDE ) {
 			reason = "This program is not allowed to include any other files for code execution.";
 		}
+		if ( operationID == CTR_SECPRO_FORK ) {
+			reason = "This program is not allowed to spawn other processes or serve remote objects.";
+		}
 		printf( "%s\n", reason );
 		exit(1);
 	}
@@ -666,6 +669,14 @@ ctr_object* ctr_command_forbid_include( ctr_object* myself, ctr_argument* argume
 }
 
 /**
+ * [Program] forbidFork.
+ */
+ctr_object* ctr_command_forbid_fork( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_command_security_profile |= CTR_SECPRO_FORK;
+	return myself;
+}
+
+/**
  * [Program] remainingMessages: [Number]
  *
  * This method is part of the security profiles feature of Citrine.
@@ -728,6 +739,8 @@ ctr_object* ctr_command_fork(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* child;
 	ctr_argument* newArgumentList;
 	ctr_resource* rs;
+	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
+	ctr_check_permission( CTR_SECPRO_FORK );
 	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
 	child = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
 	child->link = myself;
@@ -880,6 +893,7 @@ ctr_object* ctr_command_pid(ctr_object* myself, ctr_argument* argumentList ) {
 
 ctr_object* ctr_command_log_generic(ctr_object* myself, ctr_argument* argumentList, int level) {
 	char* message;
+	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	message = ctr_heap_allocate_cstring(
 		ctr_internal_cast2string(
 			argumentList->object
@@ -914,6 +928,7 @@ ctr_object* ctr_command_crit(ctr_object* myself, ctr_argument* argumentList ) {
  * ip address.
  */
 ctr_object* ctr_command_remote(ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	ctr_object* remoteObj = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
 	remoteObj->link = CtrStdObject;
 	remoteObj->info.remote = 1;
@@ -971,6 +986,8 @@ ctr_object* ctr_command_accept(ctr_object* myself, ctr_argument* argumentList ) 
 	size_t lengthBuff;
 	struct sockaddr_in6 serv_addr;
 	uint8_t x;
+	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
+	ctr_check_permission( CTR_SECPRO_FORK );
 	responder = argumentList->object;
 	listenfd = socket(AF_INET6, SOCK_STREAM, 0);
 	bzero((char *) &serv_addr, sizeof(serv_addr));

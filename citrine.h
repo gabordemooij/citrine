@@ -93,6 +93,7 @@
 #define CTR_SECPRO_NO_INCLUDE 8
 #define CTR_SECPRO_COUNTDOWN 16
 #define CTR_SECPRO_EVAL 32
+#define CTR_SECPRO_FORK 64
 
 /**
  * Define basic types for Citrine
@@ -582,6 +583,7 @@ ctr_object* ctr_command_forbid_shell(ctr_object* myself, ctr_argument* ctr_argum
 ctr_object* ctr_command_forbid_file_write(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_command_forbid_file_read(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_command_forbid_include(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_command_forbid_fork(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_command_countdown(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_command_fork(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_command_message(ctr_object* myself, ctr_argument* argumentList);

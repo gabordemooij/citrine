@@ -226,6 +226,7 @@
 #define CTR_DICT_FORBID_SHELL                    "forbidShell"
 #define CTR_DICT_FORBID_FILE_WRITE               "forbidFileWrite"
 #define CTR_DICT_FORBID_FILE_READ                "forbidFileRead"
+#define CTR_DICT_FORBID_FORK                     "forbidFork"
 #define CTR_DICT_FORBID_INCLUDE                  "forbidInclude"
 #define CTR_DICT_SET_REMAINING_MESSAGES          "remainingMessages:"
 #define CTR_DICT_FIND_PATTERN_DO_OPTIONS         "findPattern:do:options:"
