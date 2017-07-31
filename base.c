@@ -2039,6 +2039,19 @@ ctr_object* ctr_string_find_pattern_do( ctr_object* myself, ctr_argument* argume
 }
 
 /**
+ * [String] contains: [String]
+ *
+ * Returns True if the other string is a substring.
+ */
+ctr_object* ctr_string_contains( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_build_bool(
+		ctr_internal_cast2number(
+			ctr_string_index_of( myself, argumentList )
+		)->value.nvalue > -1
+	);
+}
+
+/**
  * [String] containsPattern: [String].
  *
  * Tests the pattern against the string and returns True if there is a match
