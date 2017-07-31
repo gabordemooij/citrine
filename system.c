@@ -9,6 +9,11 @@
 #include <time.h>
 #include <sys/wait.h>
 #include <syslog.h>
+#include <signal.h>
+
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 #ifdef forLinux
 #include <bsd/stdlib.h>
@@ -899,6 +904,113 @@ ctr_object* ctr_command_err(ctr_object* myself, ctr_argument* argumentList ) {
 
 ctr_object* ctr_command_crit(ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_command_log_generic( myself, argumentList, LOG_EMERG );
+}
+
+
+/**
+ * Object fromComputer: [String]
+ *
+ * Creates a remote object from the server specified by the
+ * ip address.
+ */
+ctr_object* ctr_command_remote(ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* remoteObj = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
+	remoteObj->link = CtrStdObject;
+	remoteObj->info.remote = 1;
+	ctr_internal_object_set_property(
+		remoteObj,
+		ctr_build_string_from_cstring("@"),
+		ctr_internal_cast2string(
+				argumentList->object
+		),
+		CTR_CATEGORY_PRIVATE_PROPERTY
+	);
+	return remoteObj;
+}
+
+/**
+ * Program port: [Number].
+ *
+ * Sets the port to use for remote connections.
+ */
+ctr_object* ctr_command_default_port(ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_default_port = (uint16_t) ctr_internal_cast2number(
+		argumentList->object
+	)->value.nvalue;
+	return myself;
+}
+
+/**
+ * Program connectionLimit: [Number].
+ *
+ * Sets the maximum number of connections and requests that will be
+ * accepted by the current program.
+ */
+ctr_object* ctr_command_accept_number(ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_accept_n_connections = (uint8_t) ctr_internal_cast2number(
+		argumentList->object
+	)->value.nvalue;
+	return myself;
+}
+
+/**
+ * Program serve: [Object].
+ *
+ * Serves an object. Client programs can now communicate with this object
+ * and send messages to it.
+ */
+ctr_object* ctr_command_accept(ctr_object* myself, ctr_argument* argumentList ) {
+	int listenfd =0,connfd=0;
+	ctr_object* responder;
+	ctr_object* answerObj;
+	ctr_object* stringObj;
+	ctr_object* messageDescriptorArray;
+	ctr_object* messageSelector;
+	ctr_argument* callArgument;
+	char* dataBuff;
+	size_t lengthBuff;
+	struct sockaddr_in6 serv_addr;
+	uint8_t x;
+	responder = argumentList->object;
+	listenfd = socket(AF_INET6, SOCK_STREAM, 0);
+	bzero((char *) &serv_addr, sizeof(serv_addr));
+    serv_addr.sin6_flowinfo = 0;
+    serv_addr.sin6_family = AF_INET6;
+    serv_addr.sin6_addr = in6addr_any;
+    serv_addr.sin6_port = htons(ctr_default_port);//atoi?
+	bind(listenfd, (struct sockaddr*)&serv_addr,sizeof(serv_addr));
+	if(listen(listenfd, 10) == -1){
+		CtrStdFlow = ctr_build_string_from_cstring("Unable to listen to socket.");
+		return CtrStdNil;
+	}
+	x = 0;
+	while(1 && (ctr_accept_n_connections==0 || (x < ctr_accept_n_connections)))
+	{
+		x++;
+		connfd = accept(listenfd, (struct sockaddr*)NULL ,NULL); // accept awaiting request
+		read( connfd, &lengthBuff, sizeof(size_t));
+		dataBuff = ctr_heap_allocate( lengthBuff + 1 );
+		read(connfd, dataBuff, lengthBuff);
+		stringObj = ctr_build_string_from_cstring(dataBuff);
+		messageDescriptorArray = ctr_string_eval( stringObj, NULL );
+		messageSelector = ctr_array_shift( messageDescriptorArray, NULL );
+		callArgument = ctr_heap_allocate( sizeof(ctr_argument) );
+		callArgument->object = messageSelector;
+		callArgument->next = ctr_heap_allocate( sizeof(ctr_argument) );
+		callArgument->next->object = messageDescriptorArray;
+		answerObj = ctr_internal_cast2string(
+			ctr_object_message( responder, callArgument )
+		);
+		write( connfd, (size_t*) &answerObj->value.svalue->vlen, sizeof(size_t) );
+		write( connfd, answerObj->value.svalue->value, answerObj->value.svalue->vlen);
+		ctr_heap_free(dataBuff);
+		ctr_heap_free(callArgument->next);
+		ctr_heap_free(callArgument);
+		close(connfd);
+	}
+	shutdown(listenfd, SHUT_RDWR);
+	close(listenfd);
+	return 0;
 }
 
 /**

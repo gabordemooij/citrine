@@ -8,6 +8,12 @@
 #include <stdint.h>
 #include <time.h>
 #include <regex.h>
+#include <errno.h>
+
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
 
 #include "citrine.h"
 #include "siphash.h"
@@ -271,7 +277,7 @@ ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList )
 		CtrStdFlow = ctr_build_string_from_cstring( "Dynamic message expects array." );
 		return CtrStdNil;
 	}
-	ctr_size length = (int) ctr_array_count( arr, argumentList )->value.nvalue;
+	ctr_size length = (int) ctr_array_count( arr,  NULL )->value.nvalue;
 	int i = 0;
 	ctr_argument* args = ctr_heap_allocate( sizeof( ctr_argument ) );
 	ctr_argument* cur  = args;
@@ -288,10 +294,14 @@ ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList )
 	char* flatMessage = ctr_heap_allocate_cstring( message );
 	ctr_object* answer = ctr_send_message( myself, flatMessage, message->value.svalue->vlen, args);
 	cur = args;
-	for ( i = 0; i < length; i ++ ) {
-		ctr_argument* a = cur;
-		if ( i < length - 1 ) cur = cur->next;
-		ctr_heap_free( a );
+	if ( length == 0 ) {
+		ctr_heap_free(args);
+	} else {
+		for ( i = 0; i < length; i ++ ) {
+			ctr_argument* a = cur;
+			if ( i < length - 1 ) cur = cur->next;
+			ctr_heap_free( a );
+		}
 	}
 	ctr_heap_free( flatMessage );
 	return answer;
@@ -330,6 +340,70 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+
+ctr_object* ctr_sock_error( int fd, int want2close ) {
+	CtrStdFlow = ctr_build_string_from_cstring( strerror( errno ) );
+	if (want2close) {
+		shutdown(fd, SHUT_RDWR);
+		close(fd);
+	}
+	return CtrStdNil;
+}
+
+ctr_object* ctr_object_send2remote(ctr_object* myself, ctr_argument* argumentList) {
+	char* ip;
+	int sockfd = 0, n = 0;
+	char* responseBuff;
+	size_t responseLength;
+	struct sockaddr_in6 serv_addr;
+	ctr_object* answer;
+	ctr_object* messageObj;
+	ctr_object* ipObj;
+	struct hostent *server;
+	ipObj = ctr_internal_object_find_property(
+		myself,
+		ctr_build_string_from_cstring("@"),
+		CTR_CATEGORY_PRIVATE_PROPERTY
+	);
+	if (ipObj == NULL) return CtrStdNil;
+	ipObj = ctr_internal_cast2string(ipObj);
+	ip = ctr_heap_allocate_cstring(ipObj);
+	answer = ctr_build_empty_string();
+	messageObj = ctr_internal_cast2string(
+		argumentList->object
+	);
+	if((sockfd = socket(AF_INET6, SOCK_STREAM, 0)) < 0) return ctr_sock_error( sockfd, 0 );
+	memset(&serv_addr, '0', sizeof(serv_addr));
+	server = gethostbyname2(ip,AF_INET6);
+    if (server == NULL) {
+        fprintf(stderr, "ERROR, no such host\n");
+        exit(0);
+    }
+	memset((char *) &serv_addr, 0, sizeof(serv_addr));
+    serv_addr.sin6_flowinfo = 0;
+    serv_addr.sin6_family = AF_INET6;
+    memmove((char *) &serv_addr.sin6_addr.s6_addr, (char *) server->h_addr, server->h_length);
+    serv_addr.sin6_port = htons(ctr_default_port);
+	int c = 0;
+	c = connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
+	if ( c != 0 ) return ctr_sock_error( sockfd, 1 );
+	c = send(sockfd, (size_t*) &messageObj->value.svalue->vlen, sizeof(size_t), 0);
+	if ( c < 0 ) ctr_sock_error( sockfd, 1 );
+	c = send(sockfd, messageObj->value.svalue->value, messageObj->value.svalue->vlen, 0);
+	if ( c < 0 ) ctr_sock_error( sockfd, 1 );
+	n = read(sockfd, (size_t*) &responseLength, sizeof(responseLength));
+	if ( n == 0 ) ctr_sock_error( sockfd, 1 );
+	responseBuff = ctr_heap_allocate( responseLength + 1 );
+	n = read(sockfd, responseBuff, responseLength);
+	if ( n == 0 ) ctr_sock_error( sockfd, 1 );
+	answer = ctr_build_string_from_cstring( responseBuff );
+	shutdown(sockfd, SHUT_RDWR);
+	close(sockfd);
+	ctr_heap_free(ip);
+	ctr_heap_free(responseBuff);
+	return answer;
+}
+
 /**
  * [Object] respondTo: [String]
  *
@@ -341,7 +415,55 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
  * Default respond-to implemention, does nothing.
  */
 ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList) {
-	return myself;
+	if (myself->info.remote == 0) return myself;
+	ctr_object* arr;
+	ctr_object* answer;
+	ctr_argument* newArgumentList;
+	arr = ctr_array_new( CtrStdArray, argumentList );
+	newArgumentList = ctr_heap_allocate( sizeof(ctr_argument) );
+	newArgumentList->object = argumentList->object;
+	ctr_array_push( arr, newArgumentList );
+	newArgumentList->object = ctr_array_to_string( arr, NULL );
+	answer = ctr_object_send2remote( myself, newArgumentList );
+	ctr_heap_free(newArgumentList);
+	return answer;
+}
+
+
+ctr_object* ctr_object_respond_and(ctr_object* myself, ctr_argument* argumentList) {
+	if (myself->info.remote == 0) return myself;
+	ctr_object* arr;
+	ctr_object* answer;
+	ctr_argument* newArgumentList;
+	arr = ctr_array_new( CtrStdArray, argumentList );
+	newArgumentList = ctr_heap_allocate( sizeof(ctr_argument) );
+	newArgumentList->object = argumentList->object;
+	ctr_array_push( arr, newArgumentList );
+	newArgumentList->object = argumentList->next->object;
+	ctr_array_push( arr, newArgumentList );
+	newArgumentList->object = ctr_array_to_string( arr, NULL );
+	answer = ctr_object_send2remote( myself, newArgumentList );
+	ctr_heap_free(newArgumentList);
+	return answer;
+}
+
+ctr_object* ctr_object_respond_and_and(ctr_object* myself, ctr_argument* argumentList) {
+	if (myself->info.remote == 0) return myself;
+	ctr_object* arr;
+	ctr_object* answer;
+	ctr_argument* newArgumentList;
+	arr = ctr_array_new( CtrStdArray, argumentList );
+	newArgumentList = ctr_heap_allocate( sizeof(ctr_argument) );
+	newArgumentList->object = argumentList->object;
+	ctr_array_push( arr, newArgumentList );
+	newArgumentList->object = argumentList->next->object;
+	ctr_array_push( arr, newArgumentList );
+	newArgumentList->object = argumentList->next->next->object;
+	ctr_array_push( arr, newArgumentList );
+	newArgumentList->object = ctr_array_to_string( arr, NULL );
+	answer = ctr_object_send2remote( myself, newArgumentList );
+	ctr_heap_free(newArgumentList);
+	return answer;
 }
 
 /**

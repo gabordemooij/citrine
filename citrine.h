@@ -154,6 +154,7 @@ struct ctr_object {
 		unsigned int mark: 1;
 		unsigned int sticky: 1;
 		unsigned int chainMode: 1;
+		unsigned int remote: 1;
 	} info;
 	struct ctr_object* link;
 	union uvalue {
@@ -377,6 +378,9 @@ ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argum
 ctr_object* ctr_object_to_string(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_object_remote(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_object_respond_and(ctr_object* myseld, ctr_argument* ctr_argumentList);
+ctr_object* ctr_object_respond_and_and(ctr_object* myseld, ctr_argument* ctr_argumentList);
 
 /**
  * Boolean Interface
@@ -588,6 +592,12 @@ ctr_object* ctr_command_warn(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_command_err(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_command_crit(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_command_pid(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_command_accept(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_command_accept_number(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_command_remote(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_command_default_port(ctr_object* myself, ctr_argument* argumentList );
+
+
 void ctr_check_permission( uint8_t operationID );
 uint8_t ctr_command_security_profile;
 uint64_t ctr_command_tick;
@@ -698,3 +708,7 @@ void* ctr_heap_reallocate(void* oldptr, size_t size );
 size_t ctr_heap_get_latest_tracking_id();
 void* ctr_heap_reallocate_tracked(size_t tracking_id, size_t size );
 char* ctr_heap_allocate_cstring( ctr_object* o );
+
+
+uint8_t  ctr_accept_n_connections;
+uint16_t ctr_default_port;

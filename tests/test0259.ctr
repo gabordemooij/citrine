@@ -1,29 +1,43 @@
+os := (Shell call: 'uname').
+file := Nil.
 
+((os indexOf: 'Linux') > -1) ifTrue: {
+	file := '/var/log/syslog'.
+}.
+
+((os indexOf: 'OpenBSD') > -1) ifTrue: {
+	file := '/var/log/messages'.
+}.
+
+(file isNil) ifTrue: {
+	Pen write: 'Unable to determine location of system log for test', brk.
+	Program exit.
+}.
 
 key := '--Citrine-->0'.
 Program log: key.
-str := (Shell tail: '/var/log/syslog').
+str := (Shell tail: file).
 ((str indexOf: key) > -1) ifTrue: {
 	Pen write: 'OK'.
 }.
 
 key := '--Citrine-->1'.
 Program warning: key.
-str := (Shell tail: '/var/log/syslog').
+str := (Shell tail: file).
 ((str indexOf: key) > -1) ifTrue: {
 	Pen write: 'OK'.
 }.
 
 key := '--Citrine-->2'.
 Program error: key.
-str := (Shell tail: '/var/log/syslog').
+str := (Shell tail: file).
 ((str indexOf: key) > -1) ifTrue: {
 	Pen write: 'OK'.
 }.
 
 key := '--Citrine-->3'.
 Program alert: key.
-str := (Shell tail: '/var/log/syslog').
+str := (Shell tail: file).
 ((str indexOf: key) > -1) ifTrue: {
 	Pen write: 'OK'.
 }.

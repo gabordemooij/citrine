@@ -341,12 +341,12 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 		printf("Index must be number.\n"); exit(1);
 	}
 	i = (int) getIndex->value.nvalue;
-	if (myself->value.avalue->head <= i || i < myself->value.avalue->tail) {
+	if (myself->value.avalue->head <= (i + myself->value.avalue->tail) || i < 0) {
 		CtrStdFlow = ctr_build_string_from_cstring("Index out of bounds.");
 		CtrStdFlow->info.sticky = 1;
 		return CtrStdNil;
 	}
-	return *(myself->value.avalue->elements + i);
+	return *(myself->value.avalue->elements + myself->value.avalue->tail + i);
 }
 
 /**
