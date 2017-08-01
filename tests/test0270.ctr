@@ -1,0 +1,1 @@
+q := (File new: 'nonexistant') list.

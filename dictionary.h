@@ -131,6 +131,7 @@
 #define CTR_DICT_INCLUDE         "include" 
 #define CTR_DICT_OPEN            "open:"
 #define CTR_DICT_CLOSE           "close"
+#define CTR_DICT_LIST            "list"
 #define CTR_DICT_READ_BYTES      "readBytes:" 
 #define CTR_DICT_WRITE_BYTES     "writeBytes:" 
 #define CTR_DICT_SEEK            "seek:"

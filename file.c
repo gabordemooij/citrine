@@ -8,7 +8,7 @@
 #include <stdint.h>
 #include <time.h>
 #include <sys/file.h>
-
+#include <dirent.h>
 #include "citrine.h"
 #include "siphash.h"
 
@@ -526,4 +526,68 @@ ctr_object* ctr_file_unlock(ctr_object* myself, ctr_argument* argumentList) {
 
 ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_file_lock_generic( myself, argumentList, LOCK_EX | LOCK_NB );
+}
+
+ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
+	DIR* d;
+	struct dirent* entry;
+	char* pathValue;
+	ctr_object* fileList;
+	ctr_object* fileListItem;
+	ctr_object* path;
+	ctr_argument* putArgumentList;
+	ctr_argument* addArgumentList;
+	path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
+	fileList = ctr_array_new(CtrStdArray, NULL);
+	pathValue = ctr_heap_allocate_cstring( path );
+	d = opendir( pathValue );
+	if (d == 0) {
+		CtrStdFlow = ctr_build_string_from_cstring("Failed to open folder.");
+		ctr_heap_free(pathValue);
+		return CtrStdNil;
+	}
+	putArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
+	addArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
+	putArgumentList->next = ctr_heap_allocate( sizeof( ctr_argument ) );
+	while((entry = readdir(d))) {
+		fileListItem = ctr_map_new(CtrStdMap, NULL);
+		putArgumentList->next->object = ctr_build_string_from_cstring( "file" );
+		putArgumentList->object = ctr_build_string_from_cstring(entry->d_name);
+		ctr_map_put(fileListItem, putArgumentList);
+		putArgumentList->next->object = ctr_build_string_from_cstring( "type" );
+		switch(entry->d_type) {
+			case DT_REG:
+				putArgumentList->object = ctr_build_string_from_cstring("file");
+				break;
+			case DT_DIR:
+				putArgumentList->object = ctr_build_string_from_cstring("folder");
+				break;
+			case DT_LNK:
+				putArgumentList->object = ctr_build_string_from_cstring("symbolic link");
+				break;
+			case DT_CHR:
+				putArgumentList->object = ctr_build_string_from_cstring("character device");
+				break;
+			case DT_BLK:
+				putArgumentList->object = ctr_build_string_from_cstring("block device");
+				break;
+			case DT_SOCK:
+				putArgumentList->object = ctr_build_string_from_cstring("socket");
+				break;
+			case DT_FIFO:
+				putArgumentList->object = ctr_build_string_from_cstring("named pipe");
+				break;
+			default:
+				putArgumentList->object = ctr_build_string_from_cstring("other");
+				break;
+		}
+		ctr_map_put(fileListItem, putArgumentList);
+		addArgumentList->object = fileListItem;
+		ctr_array_push(fileList, addArgumentList);
+	}
+	ctr_heap_free(putArgumentList->next);
+	ctr_heap_free(putArgumentList);
+	ctr_heap_free(addArgumentList);
+	ctr_heap_free(pathValue);
+	return fileList;
 }

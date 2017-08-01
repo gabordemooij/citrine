@@ -567,6 +567,8 @@ ctr_object* ctr_file_descriptor(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList, int lock);
 ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_unlock(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList);
+
 
 
 /**

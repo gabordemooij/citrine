@@ -1,0 +1,17 @@
+(File new: '/tmp/testje') exists ifFalse: {
+	Shell call: 'mkdir /tmp/testje'.	
+}.
+
+(File new: '/tmp/testje/file1') exists ifFalse: {
+	Shell call: 'touch /tmp/testje/file1'.	
+}.
+
+(File new: '/tmp/testje/folder1') exists ifFalse: {
+	Shell call: 'mkdir /tmp/testje/folder1'.	
+}.
+
+l := (File new: '/tmp/testje') list.
+l each: { :k :v
+	((v @ 'file' = 'file1') & (v @ 'type' = 'file')) ifTrue: { Pen write: 'OK', brk. }.
+	((v @ 'file' = 'folder1') & (v @ 'type' = 'folder')) ifTrue: { Pen write: 'OK', brk. }.
+}.
