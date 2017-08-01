@@ -427,12 +427,30 @@ char* ctr_clex_readstr() {
 
 		if ( c == '\n' ) ctr_clex_line_number ++;
 
-		if (c == 'n' && escape == 1) {
-			c = '\n';
-		}
-
-		if (c == 'r' && escape == 1) {
-			c = '\r';
+		if ( escape == 1 ) {
+			switch(c) {
+				case 'n':
+					c = '\n';
+					break;
+				case 'r':
+					c = '\r';
+					break;
+				case 't':
+					c = '\t';
+					break;
+				case 'v':
+					c = '\v';
+					break;
+				case 'b':
+					c = '\b';
+					break;
+				case 'a':
+					c = '\a';
+					break;
+				case 'f':
+					c = '\f';
+					break;
+			}
 		}
 
 		if (c == '\\' && escape == 0 && ctr_clex_verbatim_mode == 0) {
