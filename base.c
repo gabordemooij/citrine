@@ -2160,6 +2160,48 @@ ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
 	return newString;
 }
 
+
+ctr_object* ctr_string_padding(ctr_object* myself, ctr_argument* argumentList, int left) {
+	uint16_t padding;
+	char* buffer;
+	char* format;
+	char* stringParam;
+	ctr_size bufferSize;
+	ctr_argument* a;
+	ctr_object* answer;
+	ctr_object* formatObj;
+	if (left == 1) {
+		formatObj = ctr_build_string_from_cstring( "%" );
+	} else {
+		formatObj = ctr_build_string_from_cstring( "%-" );
+	}
+	a = ctr_heap_allocate( sizeof(ctr_argument) );
+	padding = (uint16_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	a->object = ctr_internal_cast2string( ctr_build_number_from_float( (ctr_number) padding ) );
+	formatObj = ctr_string_concat( formatObj, a );
+	a->object = ctr_build_string_from_cstring( "s" );
+	formatObj = ctr_string_concat( formatObj, a );
+	format = ctr_heap_allocate_cstring(formatObj);
+	bufferSize = ( myself->value.svalue->vlen + padding + 1);
+	buffer = ctr_heap_allocate( bufferSize );
+	stringParam = ctr_heap_allocate_cstring( myself );
+	sprintf( buffer, format, stringParam );
+	answer = ctr_build_string_from_cstring( buffer );
+	ctr_heap_free(buffer);
+	ctr_heap_free(stringParam);
+	ctr_heap_free(format);
+	ctr_heap_free(a);
+	return answer;
+}
+
+ctr_object* ctr_string_padding_left(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_string_padding( myself, argumentList, 1);
+}
+
+ctr_object* ctr_string_padding_right(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_string_padding( myself, argumentList, 0);
+}
+
 /**
  * [String] rightTrim
  *

@@ -471,6 +471,8 @@ ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_string_padding_left(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_string_padding_right(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList);
