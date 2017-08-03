@@ -611,6 +611,19 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 	return string;
 }
 
+ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
+	size_t n;
+	ctr_argument* newArgumentList;
+	n = ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	newArgumentList = ctr_heap_allocate( sizeof(ctr_argument) );
+	newArgumentList->object = argumentList->next->object;
+	for( int i = 0; i < n; i ++ ) {
+		ctr_array_push( myself, newArgumentList );
+	}
+	ctr_heap_free(newArgumentList);
+	return myself;
+}
+
 /**
  * [Array] serialize
  *
