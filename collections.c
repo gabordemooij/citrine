@@ -545,7 +545,7 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 		return myself;
 	}
 	temp_sorter = sorter;
-	qsort(myself->value.avalue->elements, myself->value.avalue->head, sizeof(ctr_object*), ctr_sort_cmp);
+	qsort((myself->value.avalue->elements+myself->value.avalue->tail), myself->value.avalue->head-myself->value.avalue->tail, sizeof(ctr_object*), ctr_sort_cmp);
 	return myself;
 }
 
