@@ -1,0 +1,15 @@
+#Can we extract a column from an array?
+a := Array <
+	(Array < 1 ; 2 ; 3) ;
+	(Array < 4 ; 5 ; 6) ;
+	(Array < 7 ; 8 ; 9)
+.
+
+b := a column: 1.
+Pen write: b, brk.
+
+b := a column: 20.
+Pen write: b, brk.
+
+b := a column: -100.
+Pen write: b, brk.
