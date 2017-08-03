@@ -624,6 +624,29 @@ ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
 	return myself;
 }
 
+ctr_object* ctr_array_column( ctr_object* myself, ctr_argument* argumentList ) {
+	int i;
+	size_t n;
+	ctr_argument* newArgumentList;
+	ctr_object* newArray;
+	ctr_object* element;
+	newArray = ctr_array_new( CtrStdArray, NULL );
+	n = ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	if ( n <= 0 ) {
+		return newArray;
+	}
+	newArgumentList = ctr_heap_allocate(sizeof(ctr_argument));
+	for(i = myself->value.avalue->tail; i < myself->value.avalue->head; i++) {
+		element = *(myself->value.avalue->elements + i);
+		if ( element->info.type != CTR_OBJECT_TYPE_OTARRAY ) continue;
+		if ( n >= element->value.avalue->head ) continue;
+		newArgumentList->object = *(element->value.avalue->elements + element->value.avalue->tail + n);
+		ctr_array_push( newArray, newArgumentList );
+	}
+	ctr_heap_free( newArgumentList );
+	return newArray;
+}
+
 /**
  * [Array] serialize
  *
