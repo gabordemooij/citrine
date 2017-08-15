@@ -2550,6 +2550,36 @@ ctr_object* ctr_string_quotes_escape(ctr_object* myself, ctr_argument* argumentL
 }
 
 /**
+ * [String] randomizeBytesWithLength: [Number].
+ *
+ * Returns a randomized string with the specified length using the pool of
+ * bytes contained in the String object.
+ */
+ctr_object* ctr_string_randomize_bytes(ctr_object* myself, ctr_argument* argumentList) {
+	size_t i;
+	size_t j;
+	size_t plen;
+	size_t len;
+	char* buffer;
+	char* newBuffer;
+	ctr_object* answer;
+	plen = myself->value.svalue->vlen;
+	len = (size_t) ctr_internal_cast2number(argumentList->object)->value.nvalue;
+	if ( len == 0 ) return ctr_build_empty_string();
+	buffer = ctr_heap_allocate_cstring( myself );
+	newBuffer = (char*) ctr_heap_allocate( len );
+	for( i = 0; i < len; i ++ ) {
+		j = (ctr_size) ((random() % (plen)));
+		newBuffer[i]=buffer[j];
+	}
+	answer = ctr_build_string_from_cstring(newBuffer);
+	ctr_heap_free(newBuffer);
+	ctr_heap_free(buffer);
+	return answer;
+}
+
+
+/**
  * Block
  *
  * Literal:

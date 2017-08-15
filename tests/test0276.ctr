@@ -1,0 +1,4 @@
+Pen write: (
+	'X' randomizeBytesWithLength: 10
+), brk.
+
