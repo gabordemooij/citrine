@@ -2572,7 +2572,7 @@ ctr_object* ctr_string_randomize_bytes(ctr_object* myself, ctr_argument* argumen
 		j = (ctr_size) ((random() % (plen)));
 		newBuffer[i]=buffer[j];
 	}
-	answer = ctr_build_string_from_cstring(newBuffer);
+	answer = ctr_build_string(newBuffer, len);
 	ctr_heap_free(newBuffer);
 	ctr_heap_free(buffer);
 	return answer;
