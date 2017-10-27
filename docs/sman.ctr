@@ -7,7 +7,7 @@
 
 # Start: ctr sman.ctr > ctr.1 ;mandoc -O style=ctrstyle.css -Thtml ctr.1 > docs.html ;mandoc -a ctr.1
 
-Broom memoryLimit: 400000.
+Broom memoryLimit: 600000.
 Broom mode: 4.
 
 ?>
