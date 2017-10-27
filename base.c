@@ -1575,10 +1575,15 @@ ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 	strObject = ctr_internal_cast2string(argumentList->object);
 	n1 = myself->value.svalue->vlen;
 	n2 = strObject->value.svalue->vlen;
+	if ( n1 < 0 || n2 < 0 ) {
+		printf("Invalid String length detected.\n");
+		exit(1);
+	}
+	if ( ( n1 + n2 ) == 0 ) return myself;
 	dest = ctr_heap_allocate( sizeof( char ) * ( n1 + n2 ) );
 	memcpy(dest, myself->value.svalue->value, n1);
 	memcpy(dest+n1, strObject->value.svalue->value, n2);
-	if ( myself->value.svalue->vlen > 0 ) {
+	if ( n1 > 0 ) {
 		ctr_heap_free( myself->value.svalue->value );
 	}
 	myself->value.svalue->value = dest;
