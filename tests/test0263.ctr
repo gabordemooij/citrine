@@ -1,7 +1,7 @@
 #Array Shifting bug... test
 i := Object new.
 i on: 'greet:' do: { :name
-	Pen write: 'Hello $$name', brk.
+	Pen write: 'Hello ❲name❳', brk.
 }.
 a := Array < 'greet:' ; 'Visitor'.
 b := a shift.

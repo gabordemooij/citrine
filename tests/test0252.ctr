@@ -25,7 +25,7 @@ Pen write: (
 	'W' + (clock week) + ' t' + (clock time) + ' ' + (clock zone)
 ), brk.
 
-clock2 := clock new zone: 'Europe/Amsterdam', hour: 8.
+clock2 := clock new zone: 'Europe/Amsterdam', month: 6, hour: 8.
 
 
 Pen write: (clock2 format: Nil), brk. #should not cause segfault - Nil
