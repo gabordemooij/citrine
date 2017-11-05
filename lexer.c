@@ -36,7 +36,7 @@ char* ctr_clex_desc_tok_booleanno = "False";
 char* ctr_clex_desc_tok_nil = "Nil";
 char* ctr_clex_desc_tok_assignment = ":=";
 char* ctr_clex_desc_tok_ret = "^";
-char* ctr_clex_desc_tok_ret_unicode = "↑";
+char* ctr_clex_desc_tok_ret_unicode = "↲";
 char* ctr_clex_desc_tok_fin = "end of program";
 char* ctr_clex_desc_tok_unknown = "(unknown token)";
 
@@ -255,9 +255,9 @@ int ctr_clex_tok() {
 	if (c == '^') { ctr_code++; return CTR_TOKEN_RET; }
 	//↑
 	if ( ( ctr_code + 2) < ctr_eofcode
-		&&   (uint8_t)            c == 226
-		&& ( (uint8_t) *(ctr_code+1)==134)
-		&& ( (uint8_t) *(ctr_code+2)==145)  ) {
+		&&   (uint8_t)            c == 0xE2
+		&& ( (uint8_t) *(ctr_code+1)==0x86)
+		&& ( (uint8_t) *(ctr_code+2)==0xB2)  ) {
 		ctr_code += 3;
 		return CTR_TOKEN_RET;
 	}

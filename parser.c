@@ -325,10 +325,28 @@ ctr_tnode* ctr_cparse_ref() {
 		r->modifier = 1;
 		r->vlen = ctr_clex_tok_value_length();
 	}
+	if (strncmp(ctr_clex_keyword_my_icon, tmp, ctr_clex_keyword_my_icon_len)==0 && r->vlen == ctr_clex_keyword_my_icon_len) {
+		int t = ctr_clex_tok();
+		if (t != CTR_TOKEN_REF) {
+			ctr_cparse_emit_error_unexpected( t, "'My' (icon) should always be followed by a property name!\n");
+		}
+		tmp = ctr_clex_tok_value();
+		r->modifier = 1;
+		r->vlen = ctr_clex_tok_value_length();
+	}
 	if (strncmp(ctr_clex_keyword_var, tmp, ctr_clex_keyword_var_len)==0 && r->vlen == ctr_clex_keyword_var_len) {
 		int t = ctr_clex_tok();
 		if (t != CTR_TOKEN_REF) {
 			ctr_cparse_emit_error_unexpected( t, "Keyword 'var' should always be followed by property name!\n");
+		}
+		tmp = ctr_clex_tok_value();
+		r->modifier = 2;
+		r->vlen = ctr_clex_tok_value_length();
+	}
+	if (strncmp(ctr_clex_keyword_var_icon, tmp, ctr_clex_keyword_var_icon_len)==0 && r->vlen == ctr_clex_keyword_var_icon_len) {
+		int t = ctr_clex_tok();
+		if (t != CTR_TOKEN_REF) {
+			ctr_cparse_emit_error_unexpected( t, "Keyword 'var (icon)' should always be followed by property name!\n");
 		}
 		tmp = ctr_clex_tok_value();
 		r->modifier = 2;

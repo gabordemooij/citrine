@@ -63,6 +63,11 @@ int main(int argc, char* argv[]) {
 	ctr_clex_keyword_var = CTR_DICT_VAR;
 	ctr_clex_keyword_my_len = strlen( ctr_clex_keyword_my );
 	ctr_clex_keyword_var_len = strlen( ctr_clex_keyword_var );
+	ctr_clex_keyword_me_icon = CTR_DICT_ME_ICON;
+	ctr_clex_keyword_my_icon = CTR_DICT_MY_ICON;
+	ctr_clex_keyword_var_icon = CTR_DICT_VAR_ICON;
+	ctr_clex_keyword_my_icon_len = strlen( ctr_clex_keyword_my_icon );
+	ctr_clex_keyword_var_icon_len = strlen( ctr_clex_keyword_var_icon );
 	prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
 	program = ctr_cparse_parse(prg, ctr_mode_input_file);
 	/*ctr_internal_debug_tree(program,1); -- for debugging */
