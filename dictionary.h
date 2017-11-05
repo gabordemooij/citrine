@@ -233,6 +233,8 @@
 #define CTR_DICT_RESET_COLOR     "resetColor"
 #define CTR_DICT_TAB             "tab"
 #define CTR_DICT_LINE            "line"
+#define CTR_DICT_STR_IPOL_START  "❲"
+#define CTR_DICT_STR_IPOL_STOP   "❳"
 #define CTR_DICT_NEW_ARRAY_AND_PUSH_SYMBOL       "←"
 #define CTR_DICT_ASCII_UPPER_CASE                "asciiUpperCase" 
 #define CTR_DICT_ASCII_LOWER_CASE                "asciiLowerCase"

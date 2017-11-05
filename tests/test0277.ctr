@@ -1,0 +1,18 @@
+#Test the new icons
+
+☞ Cat := Object new.
+
+Cat on: 'new' do: {
+	⚿ sound := 'meow!'.
+}.
+
+Cat on: 'makeSound' do: {
+	↲ ⚿ sound.
+}.
+
+Cat on: 'greet' do: {
+	↲ ⛏ makeSound.
+}.
+
+☞ cat := Cat new.
+Pen write: cat greet.

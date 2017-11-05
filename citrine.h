@@ -295,6 +295,9 @@ char* ctr_clex_keyword_my_icon;
 char* ctr_clex_keyword_var_icon;
 ctr_size ctr_clex_keyword_my_icon_len;
 ctr_size ctr_clex_keyword_var_icon_len;
+ctr_size ctr_clex_string_interpolation_start_len;
+ctr_size ctr_clex_string_interpolation_stop_len;
+
 
 /**
  * Lexer properties

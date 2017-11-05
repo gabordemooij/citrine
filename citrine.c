@@ -68,6 +68,8 @@ int main(int argc, char* argv[]) {
 	ctr_clex_keyword_var_icon = CTR_DICT_VAR_ICON;
 	ctr_clex_keyword_my_icon_len = strlen( ctr_clex_keyword_my_icon );
 	ctr_clex_keyword_var_icon_len = strlen( ctr_clex_keyword_var_icon );
+	ctr_clex_string_interpolation_start_len = strlen( CTR_DICT_STR_IPOL_START );
+	ctr_clex_string_interpolation_stop_len = strlen( CTR_DICT_STR_IPOL_STOP );
 	prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
 	program = ctr_cparse_parse(prg, ctr_mode_input_file);
 	/*ctr_internal_debug_tree(program,1); -- for debugging */

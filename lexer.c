@@ -40,6 +40,7 @@ char* ctr_clex_desc_tok_ret_unicode = "↲";
 char* ctr_clex_desc_tok_fin = "end of program";
 char* ctr_clex_desc_tok_unknown = "(unknown token)";
 
+
 int ctr_string_interpolation = 0;
 char* ivarname;
 int ivarlen;
@@ -172,7 +173,7 @@ long ctr_clex_tok_value_length() {
  * Puts back a token and resets the pointer to the previous one.
  */
 void ctr_clex_putback() {
-	if ( ctr_string_interpolation > 0 ) {
+	if ( ctr_string_interpolation > 0 && ctr_string_interpolation != 5 && ctr_string_interpolation != 6) {
 		ctr_string_interpolation--;
 		return;
 	}
@@ -198,31 +199,41 @@ int ctr_clex_tok() {
 	comment_mode = 0;
 
 	/* a little state machine to handle string interpolation, */
-	/* i.e. transforms ' $$x ' into: '' + x + ''. */
+	/* i.e. transforms ' "x" ' into: '' + ( x )  + ''. */
+	presetToken = 0;
 	switch( ctr_string_interpolation ) {
 		case 1:
+		case 8:
 			presetToken = CTR_TOKEN_QUOTE;
 			break;
 		case 2:
-		case 4:
+		case 7:
 			memcpy( ctr_clex_buffer, "+", 1 );
 			ctr_clex_tokvlen = 1;
 			presetToken = CTR_TOKEN_REF;
 			break;
 		case 3:
-			memcpy( ctr_clex_buffer, ivarname, ivarlen );
-			ctr_clex_tokvlen = ivarlen;
-			presetToken = CTR_TOKEN_REF;
+			presetToken = CTR_TOKEN_PAROPEN;
 			break;
-		case 5:
-			ctr_code = ctr_code_eoi;
-			presetToken = CTR_TOKEN_QUOTE;
+		case 6:
+			presetToken = CTR_TOKEN_PARCLOSE;
 			break;
 	}
 	/* return the preset token, and transition to next state */
-	if ( ctr_string_interpolation ) {
+	if ( ctr_string_interpolation > 0 && ctr_string_interpolation != 5) {
 		ctr_string_interpolation++;
-		return presetToken;
+		if (presetToken) return presetToken;
+	}
+
+	/* leave interpolation mode ( ..." ) */
+	if (
+		!ctr_clex_verbatim_mode &&
+		ctr_string_interpolation == 5 &&
+		(ctr_code + ctr_clex_string_interpolation_stop_len) < ctr_eofcode &&
+		strncmp( ctr_code, CTR_DICT_STR_IPOL_STOP, ctr_clex_string_interpolation_stop_len ) == 0
+	) {
+		ctr_string_interpolation = 6;
+		return CTR_TOKEN_PARCLOSE;
 	}
 
 	/* if verbatim mode is on and we passed the '>' verbatim write message, insert a 'fake quote' (?>') */
@@ -253,7 +264,6 @@ int ctr_clex_tok() {
 	}
 	if (c == ':') { ctr_code++; return CTR_TOKEN_COLON; }
 	if (c == '^') { ctr_code++; return CTR_TOKEN_RET; }
-	//↑
 	if ( ( ctr_code + 2) < ctr_eofcode
 		&&   (uint8_t)            c == 0xE2
 		&& ( (uint8_t) *(ctr_code+1)==0x86)
@@ -343,8 +353,12 @@ int ctr_clex_tok() {
 			&& ( (uint8_t) *(ctr_code+1)== 134)
 			&& ( (uint8_t) *(ctr_code+2)== 145) ) ) &&
 		c != ':' &&
-		c != '\''
-	) && ctr_code!=ctr_eofcode
+		c != '\'' &&
+		!(
+		((ctr_code + ctr_clex_string_interpolation_stop_len) < ctr_eofcode ) &&
+		(strncmp(ctr_code,CTR_DICT_STR_IPOL_STOP,ctr_clex_string_interpolation_stop_len)==0))
+	)
+	&& ctr_code!=ctr_eofcode
 	) {
 		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
 		i++;
@@ -372,8 +386,8 @@ char* ctr_clex_readstr() {
 	long page = 100; /* 100 byte pages */
 	size_t tracking_id;
 
-	if ( ctr_string_interpolation == 6 ) {
-		ctr_heap_free( ivarname );
+	if (ctr_string_interpolation >= 8) {
+		ctr_code += ctr_clex_string_interpolation_stop_len;
 		ctr_string_interpolation = 0;
 	}
 
@@ -405,24 +419,16 @@ char* ctr_clex_readstr() {
 		)
 	) {
 
-		/* enter interpolation mode ( $x} ) */
+		/* enter interpolation mode ( "x... ) */
 		if (
 			!ctr_clex_verbatim_mode &&
 			!escape &&
-			c == '$' &&
-			((ctr_code+1) < ctr_eofcode) &&
-			*(ctr_code+1) == '$'
+			(ctr_code + ctr_clex_string_interpolation_start_len) < ctr_eofcode &&
+			strncmp( ctr_code, CTR_DICT_STR_IPOL_START, ctr_clex_string_interpolation_start_len ) == 0
 		) {
-			int q = 2;
-			while( ( ctr_code + q ) < ctr_eofcode && !isspace(*(ctr_code + q)) && *(ctr_code + q) != '$' && *(ctr_code + q) != '\''  && q < 255 ) q++;
-			if (isspace(*(ctr_code + q)) || *(ctr_code + q) == '$' || *(ctr_code + q) == '\'') {
-				ivarname = ctr_heap_allocate( q );
-				ivarlen  = q - 2;
-				memcpy( ivarname, ctr_code + 2, q - 2 );
-				ctr_string_interpolation = 1;
-				ctr_code_eoi = ctr_code + q + 0; /* '$','$' and the name  ( name + 3 ) */
-				break;
-			}
+			ctr_string_interpolation = 1;
+			ctr_code += ctr_clex_string_interpolation_start_len;
+			break;
 		}
 
 		if ( c == '\n' ) ctr_clex_line_number ++;

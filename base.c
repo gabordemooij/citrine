@@ -2640,7 +2640,10 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 			parameter = parameterList->node;
 		}
 	}
-	if (my) ctr_assign_value_to_local_by_ref(ctr_build_string_from_cstring( ctr_clex_keyword_me ), my ); /* me should always point to object, otherwise you have to store me in self and cant use in if */
+	if (my) {
+		ctr_assign_value_to_local_by_ref(ctr_build_string_from_cstring( ctr_clex_keyword_me ), my ); /* me should always point to object, otherwise you have to store me in self and cant use in if */
+		ctr_assign_value_to_local_by_ref(ctr_build_string_from_cstring( ctr_clex_keyword_me_icon ), my );
+	}
 	ctr_assign_value_to_local(ctr_build_string_from_cstring( "thisBlock" ), myself ); /* otherwise running block may get gc'ed. */
 	result = ctr_cwlk_run(codeBlockPart2);
 	if (result == NULL) {

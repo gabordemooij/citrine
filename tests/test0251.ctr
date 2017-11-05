@@ -8,7 +8,7 @@ Number on: 'describe' do: {
 	( me = 1 ) ifTrue: {
 		text := 'one'.
 	}.
-	↑ text.
+	↲ text.
 }.
 
 Pen write: 0 describe + 1 describe, brk.
