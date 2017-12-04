@@ -39,6 +39,10 @@ char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
    prg = ctr_heap_allocate(real_size); /* add 4 bytes, 3 for optional closing sequence verbatim mode and one lucky byte! */
    ctr_program_length=0;
    while( ( ch = fgetc(fp) ) != EOF ) prg[ctr_program_length++]=ch;
+   if ( ctr_program_length != size ) {
+	printf( "Unable to read program file. %lu %lu \n", ctr_program_length, real_size );
+	exit(1);
+   }
    fclose(fp);
    *total_size = (uint64_t) real_size;
    return prg;
