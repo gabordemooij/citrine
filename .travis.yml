@@ -1,5 +1,7 @@
 language: c
 
+dist: trusty
+
 before_install:
   - sudo chmod 777 /var/log/syslog
   - sudo ln -s /usr/bin/make /usr/bin/gmake
