@@ -9,10 +9,14 @@
 *.project
 *.ignore
 *.tar.gz
+/gitignore
 /ctr
 docs/ctr
+docs/pages
 docs/pagemaker.ctr
 *.pid
 x.sh
+/plugins/jsonc
+/plugins/gtk
 
 
