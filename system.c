@@ -331,8 +331,7 @@ ctr_object* ctr_shell_respond_to_and(ctr_object* myself, ctr_argument* argumentL
  * Shell Object uses a fluid API.
  */
 ctr_object* ctr_shell_respond_to(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_shell_call(myself, argumentList);
-	return myself;
+	return ctr_shell_call(myself, argumentList);
 }
 
 /**
