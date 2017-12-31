@@ -1675,12 +1675,14 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* argument1;
 	ctr_argument* argument2;
 	ctr_object* result;
+	ctr_size textLength;
 	if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_empty_string();
 	argument1 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	argument2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	argument1->object = argumentList->object;
 	argument1->next = argument2;
-	argument2->object = ctr_build_number_from_float(myself->value.svalue->vlen - argumentList->object->value.nvalue);
+	textLength = ctr_getutf8len(myself->value.svalue->value, (ctr_size) myself->value.svalue->vlen);
+	argument2->object = ctr_build_number_from_float(textLength - argumentList->object->value.nvalue);
 	result = ctr_string_from_length(myself, argument1);
 	ctr_heap_free( argument1 );
 	ctr_heap_free( argument2 );
@@ -2807,7 +2809,7 @@ ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
  * If an error (exception) occurs within the block this block will be
  * executed.
  *
- * Example:
+ * Usage:
  *
  * #Raise error on division by zero.
  * {
