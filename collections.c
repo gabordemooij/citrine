@@ -327,7 +327,11 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
  * [Array] at: [Index]
  *
  * Returns the element in the array at the specified index.
- * Note that the fisrt index of the array is index 0.
+ * Note that the first index of the array is index 0.
+ * If you attempt to retrieve an element of the array
+ * using a an index that is something other than a number
+ * a catchable error will be triggered. An error will
+ * also be triggered if your index is out of bounds.
  *
  * Usage:
  *
@@ -338,7 +342,9 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* getIndex = argumentList->object;
 	int i;
 	if (getIndex->info.type != CTR_OBJECT_TYPE_OTNUMBER) {
-		printf("Index must be number.\n"); exit(1);
+		CtrStdFlow = ctr_build_string_from_cstring("Index must be number.");
+		CtrStdFlow->info.sticky = 1;
+		return CtrStdNil;
 	}
 	i = (int) getIndex->value.nvalue;
 	if (myself->value.avalue->head <= (i + myself->value.avalue->tail) || i < 0) {

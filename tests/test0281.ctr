@@ -1,0 +1,10 @@
+#Using wrong type as index should not cause fatal error but catchable error.
+☞ q := Array ← 1 ; 2 ; 3.
+{ q @ '1'. } catch: { ✎ write: 'caught!', brk. }, run.
+{ q @ True. } catch: { ✎ write: 'caught!', brk. }, run.
+{ q @ False. } catch: { ✎ write: 'caught!', brk. }, run.
+{ q @ Nil. } catch: { ✎ write: 'caught!', brk. }, run.
+{ q @ (Array new). } catch: { ✎ write: 'caught!', brk. }, run.
+{ q @ (Object new). } catch: { ✎ write: 'caught!', brk. }, run.
+{ q @ ({}). } catch: { ✎ write: 'caught!', brk. }, run.
+✎ write: 'caught them all', brk.
