@@ -16,6 +16,7 @@ docs/pages
 docs/pagemaker.ctr
 *.pid
 x.sh
+p.sh
 /plugins/jsonc
 /plugins/gtk
 
