@@ -564,7 +564,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_object_to_string );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_object_to_number );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_TOBOOL ), &ctr_object_to_boolean );
-	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( "fromComputer:" ), &ctr_command_remote );
+	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_FROM_COMPUTER ), &ctr_command_remote );
 
 	ctr_internal_object_add_property( CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_OBJECT ), CtrStdObject, 0 );
 	CtrStdObject->link = NULL;
@@ -691,9 +691,9 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TO_BYTE_ARRAY ),&ctr_string_to_byte_array );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_APPEND_BYTE ),&ctr_string_append_byte );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_CONTAINS ),&ctr_string_contains );
-	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "paddingLeft:" ),&ctr_string_padding_left );
-	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "paddingRight:" ),&ctr_string_padding_right );
-	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "randomizeBytesWithLength:" ),&ctr_string_randomize_bytes );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_PADDING_LEFT ),&ctr_string_padding_left );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_PADDING_RIGHT ),&ctr_string_padding_right );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_RANDOMIZE_BYTES_WITH_LENGTH ),&ctr_string_randomize_bytes );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_STRING ), CtrStdString, 0 );
 	CtrStdString->link = CtrStdObject;
 	CtrStdString->info.sticky = 1;
@@ -744,8 +744,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_LAST ), &ctr_array_last );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_SECOND_LAST ), &ctr_array_second_last );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_FIRST ), &ctr_array_first );
-	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( "fill:with:" ), &ctr_array_fill );
-	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( "column:" ), &ctr_array_column );
+	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_FILL_WITH ), &ctr_array_fill );
+	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_COLUMN ), &ctr_array_column );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_SERIALIZE ), &ctr_array_to_string );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_ARRAY ), CtrStdArray, 0 );
 	CtrStdArray->link = CtrStdObject;
