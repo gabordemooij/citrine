@@ -51,6 +51,13 @@ ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Array] add: [Element].
+ *
+ * Alias for [Array] push. Might be more readable
+ * in some situations.
+ */
+
+/**
  * [Array] push: [Element]
  *
  * Pushes an element on top of the array.

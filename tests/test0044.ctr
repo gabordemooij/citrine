@@ -1,5 +1,5 @@
 list := Array new.
-list push: 'hello'.
+list add: 'hello'.
 Pen write: list count.
 list push: 'world'.
 Pen write: list count.
