@@ -1427,6 +1427,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [Array] add: [Element].
+.nf
+    
+     Alias for [Array] push. Might be more readable
+     in some situations.
+.fi
+.BR.BR.BR
+
 .B [Array] push: [Element]
 .nf
     
@@ -1576,12 +1584,40 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns the element in the array at the specified index.
-     Note that the fisrt index of the array is index 0.
+     Note that the first index of the array is index 0.
+     If you attempt to retrieve an element of the array
+     using a an index that is something other than a number
+     a catchable error will be triggered. An error will
+     also be triggered if your index is out of bounds.
     
      Usage:
     
      fruits := Array ← 'apples' ; 'oranges' ; 'bananas'.
      fruits at: 1. #returns 'oranges'
+.fi
+.BR.BR.BR
+
+.B [Array] first.
+.nf
+     
+     Returns the first element of the array.
+     If the array is empty, Nil will be returned.
+.fi
+.BR.BR.BR
+
+.B [Array] last.
+.nf
+     
+     Returns the last element of the array.
+     If the array is empty, Nil will be returned.
+.fi
+.BR.BR.BR
+
+.B [Array] secondLast.
+.nf
+     
+     Returns the second last element of the array.
+     If the array is empty, Nil will be returned.
 .fi
 .BR.BR.BR
 
