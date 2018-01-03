@@ -16,7 +16,7 @@
 	☞ sum := (a + b).
 	
 	✎ write: 
-		' is ❲ sum ❳ ', brk.
+		' is ❲ sum ❳ ↵'.
 		
 	# add the sum to the array
 	f add: sum.
