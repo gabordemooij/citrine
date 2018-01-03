@@ -19,5 +19,5 @@
 		' is ❲ sum ❳ ', brk.
 		
 	# add the sum to the array
-	f push: sum.
+	f add: sum.
 }.
