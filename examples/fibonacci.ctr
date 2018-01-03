@@ -3,10 +3,10 @@
 0 to: 12 step: 1 do: {
 
 	#take the last element of f
-	☞ a := (f @ (f count - 1)).
+	☞ a := f last.
 	
 	#take the element before that
-	☞ b := (f @ (f count - 2)).
+	☞ b := f secondLast.
 	
 	#write them down
 	✎ write:
