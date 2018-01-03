@@ -546,6 +546,9 @@ ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_to_string(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_fill(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_column(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_array_second_last(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * HashMap Interface

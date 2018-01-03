@@ -1,0 +1,17 @@
+#test Array last and secondLast.
+
+☞ Italian places := Array ← 'Venice' ; 'Rome' ; 'Pompeii' ; 'Naples'.
+
+✎ write: (Italian places first), brk.
+✎ write: (Italian places last), brk.
+✎ write: (Italian places secondLast), brk.
+
+☞ Moon places := Array new.
+
+✎ write: (Moon places first), brk.
+✎ write: (Moon places last), brk.
+✎ write: (Moon places secondLast), brk.
+
+Italian places do pop pop pop done.
+
+✎ write: (Italian places secondLast), brk.

@@ -740,6 +740,9 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_SUM ), &ctr_array_sum );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_PRODUCT ), &ctr_array_product );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_array_to_string );
+	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_LAST ), &ctr_array_last );
+	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_SECOND_LAST ), &ctr_array_second_last );
+	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_FIRST ), &ctr_array_first );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( "fill:with:" ), &ctr_array_fill );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( "column:" ), &ctr_array_column );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_SERIALIZE ), &ctr_array_to_string );

@@ -356,6 +356,51 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Array] first.
+ * 
+ * Returns the first element of the array.
+ * If the array is empty, Nil will be returned.
+ */
+ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_size length = 0;
+	length = (ctr_size) myself->value.avalue->head - myself->value.avalue->tail;
+	if ( length < 1 ) {
+		return CtrStdNil;
+	}
+	return *(myself->value.avalue->elements + myself->value.avalue->tail);
+}
+
+/**
+ * [Array] last.
+ * 
+ * Returns the last element of the array.
+ * If the array is empty, Nil will be returned.
+ */
+ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_size length = 0;
+	length = (ctr_size) myself->value.avalue->head - myself->value.avalue->tail;
+	if ( length < 1 ) {
+		return CtrStdNil;
+	}
+	return *(myself->value.avalue->elements + myself->value.avalue->tail + (length - 1));
+}
+
+/**
+ * [Array] secondLast.
+ * 
+ * Returns the second last element of the array.
+ * If the array is empty, Nil will be returned.
+ */
+ctr_object* ctr_array_second_last(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_size length = 0;
+	length = (ctr_size) myself->value.avalue->head - myself->value.avalue->tail;
+	if ( length < 2 ) {
+		return CtrStdNil;
+	}
+	return *(myself->value.avalue->elements + myself->value.avalue->tail + (length - 2));
+}
+
+/**
  * [Array] @ [Index]
  *
  * Alias for [Array] at: [Index]
