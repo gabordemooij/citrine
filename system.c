@@ -530,20 +530,23 @@ ctr_object* ctr_command_waitforinput(ctr_object* myself, ctr_argument* argumentL
 	ctr_size bytes = 0;
 	char* buff;
 	ctr_size page = 10;
+	ctr_object* userInput;
 	buff = ctr_heap_allocate(page * sizeof(char));
 	while ((c = getchar()) != '\n') {
 		buff[bytes] = c;
 		bytes++;
 		if (bytes > page) {
 			page *= 2;
-			buff = (char*) realloc(buff, page * sizeof(char));
+			buff = (char*) ctr_heap_reallocate(buff, page * sizeof(char));
 			if (buff == NULL) {
 				CtrStdFlow = ctr_build_string_from_cstring("Out of memory");
 				return CtrStdNil;
 			}
 		}
 	}
-	return ctr_build_string(buff, bytes);
+	userInput = ctr_build_string(buff, bytes);
+	ctr_heap_free(buff);
+	return userInput;
 }
 
 /**
