@@ -17,6 +17,7 @@
 
 #ifdef forLinux
 #include <bsd/stdlib.h>
+#include <bsd/string.h>
 #endif
 
 #include "citrine.h"
@@ -559,16 +560,17 @@ ctr_object* ctr_command_waitforinput(ctr_object* myself, ctr_argument* argumentL
  * post := Program input.
  */
 ctr_object* ctr_command_input(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_size bytes = 0;
 	ctr_size page = 64;
 	char buffer[page];
-	size_t content_size = 1;
+	size_t content_size = 0;
 	char *content = ctr_heap_allocate(sizeof(char) * page);
-	while(fgets(buffer, page, stdin)) {
-		content_size += strlen(buffer);
+	while((bytes = fread(buffer, sizeof(char), page, stdin))) {
+		content_size += bytes;
 		content = ctr_heap_reallocate(content, content_size);
-		strcat(content, buffer);
+		strlcat(content, buffer, content_size);
 	}
-	ctr_object* str = ctr_build_string_from_cstring( content );
+	ctr_object* str = ctr_build_string( content, content_size );
 	ctr_heap_free( content );
 	return str;
 }
