@@ -1,0 +1,12 @@
+#A little Quiz
+
+✎ write: 'Guess the number... 1-6 ↵'.
+
+☞ y := Dice roll.
+☞ x := -1.
+
+{ ↲ (x = y). } whileFalse: {
+	x := Program waitForInput.
+}.
+
+✎ write: 'Correct! ↵'.
