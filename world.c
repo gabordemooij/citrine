@@ -45,7 +45,7 @@ char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
    ctr_program_length=0;
    while( ( ch = fgetc(fp) ) != EOF ) prg[ctr_program_length++]=ch;
    if ( ctr_program_length != size ) {
-	printf( "Unable to read program file. %lu %lu \n", ctr_program_length, real_size );
+	printf( "Unable to read program file.\n" );
 	exit(1);
    }
    fclose(fp);
