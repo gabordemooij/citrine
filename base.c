@@ -15,6 +15,11 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
+#ifdef forLinux
+#include <bsd/stdlib.h>
+#include <bsd/string.h>
+#endif
+
 #include "citrine.h"
 #include "siphash.h"
 
@@ -657,7 +662,7 @@ ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList) {
  * coinLandsOn := (Boolean flip).
  */
 ctr_object* ctr_bool_flip(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_bool((rand() % 2));
+	return ctr_build_bool( (int) arc4random_uniform( 2 ) );
 }
 
 /**
