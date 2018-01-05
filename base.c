@@ -2195,7 +2195,7 @@ ctr_object* ctr_string_padding(ctr_object* myself, ctr_argument* argumentList, i
 	bufferSize = ( myself->value.svalue->vlen + padding + 1);
 	buffer = ctr_heap_allocate( bufferSize );
 	stringParam = ctr_heap_allocate_cstring( myself );
-	sprintf( buffer, format, stringParam );
+	snprintf(buffer, bufferSize, format, stringParam );
 	answer = ctr_build_string_from_cstring( buffer );
 	ctr_heap_free(buffer);
 	ctr_heap_free(stringParam);
