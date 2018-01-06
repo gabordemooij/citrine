@@ -17,14 +17,14 @@ RECOMMENDED
 
 OPTIONAL
 
-≤ 2264 less or equal
-≥ 2265 greater or equal
-≠ 2260
-⇿ 21FF tab
-✎ 270E pencil        Pen          (Pen object)
-⏰ 23F0 clock         Clock         (Clock object)
-⚄ 2684 die           Dice          (Dice object)
-💻 1F4BB personal computer  Program (Program object)
+≤ 2264 less or equal  (ALT+L or ALT+SHIFT<)
+≥ 2265 greater or equal (ALT+M or ALT+SHIFT+>)
+≠ 2260 (ALT+U)
+⇿ 21FF tab (ALT+SHIFT+T)
+✎ 270E pencil        Pen          (Pen object)  (ALT+')
+⏰ 23F0 clock         Clock         (Clock object) (ALT+|)
+⚄ 2684 die           Dice          (Dice object) (ALT+?)
+💻 1F4BB personal computer  Program (Program object) (ALT+@)
 
 
 Why does Citrine use icons?
