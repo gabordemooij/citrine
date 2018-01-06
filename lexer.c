@@ -437,6 +437,13 @@ char* ctr_clex_readstr() {
 				ctr_code += 2;
 			}
 		}
+		
+		if (ctr_code < (ctr_eofcode - 2)) {
+			if ((uint8_t) *(ctr_code) == 226 && (uint8_t) *(ctr_code+1)==135 && (uint8_t) *(ctr_code+2)==191) {
+				c = '\t';
+				ctr_code += 2;
+			}
+		}
 
 		if ( c == '\n' ) ctr_clex_line_number ++;
 
