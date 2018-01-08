@@ -485,7 +485,12 @@ ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-
+/**
+ * @internal
+ *
+ * Locks a file or unlocks a file.
+ * All locking functions use this function under the hood.
+ */
 ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList, int lock) {
 	int b;
 	int fd;
