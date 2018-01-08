@@ -532,6 +532,20 @@ ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_file_lock_generic( myself, argumentList, LOCK_EX | LOCK_NB );
 }
 
+/**
+ * [File] list: [String].
+ *
+ * Returns the contents of the specified folder as a an array.
+ * Each entry of the array contains a map with the keys 'file'
+ * and 'type'. The 'file' entry contains a string with the name
+ * of the file while the 'type' entry contains a string describing
+ * the type of the file.
+ *
+ * Usage:
+ *
+ * files := File list: '/tmp/testje'.
+ *
+ */
 ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	DIR* d;
 	struct dirent* entry;
