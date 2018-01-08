@@ -895,6 +895,12 @@ ctr_object* ctr_command_pid(ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_internal_cast2number( pidObject );
 }
 
+/**
+ * @internal
+ *
+ * Internal generic logging function.
+ * All logging functionality uses this function under the hood.
+ */
 ctr_object* ctr_command_log_generic(ctr_object* myself, ctr_argument* argumentList, int level) {
 	char* message;
 	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
