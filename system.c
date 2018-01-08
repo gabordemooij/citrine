@@ -884,6 +884,12 @@ ctr_object* ctr_command_join(ctr_object* myself, ctr_argument* argumentList) {
 	return CtrStdNil;
 }
 
+/**
+ * [Program] pid.
+ *
+ * Returns the process identification number associated with the
+ * current program.
+ */
 ctr_object* ctr_command_pid(ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* pidObject;
 	pidObject = ctr_internal_object_find_property(
