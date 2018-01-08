@@ -1,0 +1,3 @@
+#Test whether input (may hang) is not allowed when count down is active
+Program remainingMessages: 100.
+Program input.

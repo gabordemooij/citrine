@@ -560,6 +560,7 @@ ctr_object* ctr_command_waitforinput(ctr_object* myself, ctr_argument* argumentL
  * post := Program input.
  */
 ctr_object* ctr_command_input(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	ctr_size bytes = 0;
 	ctr_size page = 64;
 	char buffer[page];
