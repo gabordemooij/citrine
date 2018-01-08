@@ -529,10 +529,25 @@ ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList
 	return answer;
 }
 
+/**
+ * [File] unlock.
+ *
+ * Attempts to unlock a file. This message is non-blocking, on failure
+ * it will immediately return. Answers True if the file has been
+ * unlocked succesfully. Otherwise, the answer is False.
+ */
 ctr_object* ctr_file_unlock(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_file_lock_generic( myself, argumentList, LOCK_UN | LOCK_NB );
 }
 
+/**
+ * [File] lock.
+ *
+ * Attempts to acquire an exclusive lock on file.
+ * This message is non-blocking, on failure
+ * it will immediately return. Answers True if the lock has been
+ * acquired and False otherwise.
+ */
 ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_file_lock_generic( myself, argumentList, LOCK_EX | LOCK_NB );
 }
