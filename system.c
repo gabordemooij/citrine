@@ -908,22 +908,45 @@ ctr_object* ctr_command_log_generic(ctr_object* myself, ctr_argument* argumentLi
 	return myself;
 }
 
+/**
+ * [Program] log: [String]
+ *
+ * Logs the specified message string using syslog using log level LOG_NOTICE.
+ * Use this for debugging messages or notice messages.
+ */
 ctr_object* ctr_command_log(ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_command_log_generic( myself, argumentList, LOG_NOTICE );
 }
 
+/**
+ * [Program] warn: [String]
+ *
+ * Logs the specified message string using syslog using log level LOG_WARNING.
+ * Use this to have your programs emit warnings.
+ */
 ctr_object* ctr_command_warn(ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_command_log_generic( myself, argumentList, LOG_WARNING );
 }
 
+/**
+ * [Program] error: [String]
+ *
+ * Logs the specified message string using syslog using log level LOG_ERR.
+ * Use this to log errors.
+ */
 ctr_object* ctr_command_err(ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_command_log_generic( myself, argumentList, LOG_ERR );
 }
 
+/**
+ * [Program] alert: [String]
+ *
+ * Logs the specified message string using syslog using log level LOG_EMERG.
+ * Use this to log critical errors or emergencies.
+ */
 ctr_object* ctr_command_crit(ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_command_log_generic( myself, argumentList, LOG_EMERG );
 }
-
 
 /**
  * Object fromComputer: [String]
