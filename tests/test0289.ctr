@@ -1,0 +1,11 @@
+#test whether stdin also works with large strings
+
+☞ large text := ''.
+1000 times: {
+	large text append: 'hello'.
+}.
+
+✎ write: (
+	Shell call: 'echo ❲large text❳  | ./ctr tests/assets/stdin_test.ctr'
+).
+

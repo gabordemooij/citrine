@@ -1,0 +1,5 @@
+
+20 times: {
+	☞ x := (Shell call: 'echo "aa" | ./ctr tests/assets/scrambler.ctr').
+	Pen write: x, brk write: x length, brk.
+}.

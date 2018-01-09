@@ -1,0 +1,3 @@
+☞ x := Program input.
+#Pen write: x, brk.
+✎ write: '❲x randomizeBytesWithLength: x bytes❳'.

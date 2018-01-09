@@ -554,10 +554,25 @@ ctr_object* ctr_command_waitforinput(ctr_object* myself, ctr_argument* argumentL
  * [Program] input.
  *
  * Reads all raw input from STDIN.
+ * The input message reads the standard input stream of the application
+ * which allows you to deal with pipes for instance. However this
+ * mechanism can also be used to read raw POSTs in case of CGI applications.
+ * Note that unlike other implementations the input messages also collects
+ * null bytes, a null byte \0 in the input stream will NOT cause it to end.
+ * Also note that the trailing newline (in case of CLI applications) will
+ * be stripped so you don't have to do this manually. This allows for
+ * one-liners like the one in the example below.
+ * The input message is not allowed if message countdown has been activated
+ * (Program remainingMessages:) because it might wait for content and this
+ * is not allowed in a countdown sandbox.
  *
- * Usage (for instance to read raw CGI post):
+ * Usage:
  *
- * post := Program input.
+ * echo "hello" | ctr test.ctr
+ *
+ * x := Program input.
+ * Pen write: x. #hello (without newline)
+ *
  */
 ctr_object* ctr_command_input(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
@@ -565,11 +580,19 @@ ctr_object* ctr_command_input(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size page = 64;
 	char buffer[page];
 	size_t content_size = 0;
-	char *content = ctr_heap_allocate(sizeof(char) * page);
-	while((bytes = fread(buffer, sizeof(char), page, stdin))) {
+	char *content = ctr_heap_allocate(0);
+	clearerr(stdin);
+	int reading = 1;
+	while(reading) {
+		bytes = fread(buffer, sizeof(char), page, stdin);
 		content_size += bytes;
 		content = ctr_heap_reallocate(content, content_size);
-		strlcat(content, buffer, content_size);
+		memcpy(content + (content_size - bytes),buffer,bytes);
+		reading = !(bytes != page && feof(stdin));
+	}
+	/* strip the last newline */
+	if ( content_size > 0 && *(content+(content_size-1))=='\n' ) {
+		content_size -= 1;
 	}
 	ctr_object* str = ctr_build_string( content, content_size );
 	ctr_heap_free( content );
