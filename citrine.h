@@ -606,39 +606,39 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList);
 /**
  * Command Object Interface
  */
-ctr_object* ctr_command_argument(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_command_num_of_args(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_command_waitforinput(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_command_input(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_command_exit(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_command_flush(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_command_forbid_shell(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_command_forbid_file_write(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_command_forbid_file_read(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_command_forbid_include(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_command_forbid_fork(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_command_countdown(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_command_fork(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_command_message(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_command_listen(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_command_join(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_command_log(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_command_warn(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_command_err(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_command_crit(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_command_pid(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_command_accept(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_command_accept_number(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_command_remote(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_command_default_port(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_program_num_of_args(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_program_get_env(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_program_exit(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_program_flush(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_program_forbid_shell(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_program_forbid_file_write(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_program_forbid_file_read(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_program_forbid_include(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_program_forbid_fork(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_program_countdown(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_program_fork(ctr_object* myself, ctr_argument* ctr_argumentList);
+ctr_object* ctr_program_message(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_program_listen(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_program_join(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_program_log(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_program_warn(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_program_crit(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_program_pid(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_program_accept(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_program_accept_number(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_program_remote(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_program_default_port(ctr_object* myself, ctr_argument* argumentList );
 
 
 void ctr_check_permission( uint8_t operationID );
-uint8_t ctr_command_security_profile;
-uint64_t ctr_command_tick;
-uint64_t ctr_command_maxtick;
+uint8_t ctr_program_security_profile;
+uint64_t ctr_program_tick;
+uint64_t ctr_program_maxtick;
 ctr_object* (*ctr_secpro_eval_whitelist[64])(ctr_object*, ctr_argument*);
 
 /**

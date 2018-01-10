@@ -2511,7 +2511,7 @@ ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
 	ctr_object* code;
 	/* activate white-list based security profile */
-	ctr_command_security_profile ^= CTR_SECPRO_EVAL;
+	ctr_program_security_profile ^= CTR_SECPRO_EVAL;
 	pathString = ctr_heap_allocate_tracked(sizeof(char)*5);
 	memcpy(pathString, "eval", 4);
 	memcpy(pathString+4,"\0",1);
@@ -2528,7 +2528,7 @@ ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_cwlk_subprogram--;
 	if ( result == NULL ) result = CtrStdNil;
 	ctr_heap_free( newArgumentList );
-	ctr_command_security_profile ^= CTR_SECPRO_EVAL;
+	ctr_program_security_profile ^= CTR_SECPRO_EVAL;
 	return result;
 }
 

@@ -436,7 +436,7 @@ ctr_object* ctr_slurp_obtain( ctr_object* myself, ctr_argument* argumentList ) {
  *
  * Obtains an argument from the CLI invocation.
  */
-ctr_object* ctr_command_argument(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* numberObject = ctr_internal_cast2number(argumentList->object);
 	int n = (int) numberObject->value.nvalue;
 	if (n >= ctr_argc || n < 0) return CtrStdNil;
@@ -448,7 +448,7 @@ ctr_object* ctr_command_argument(ctr_object* myself, ctr_argument* argumentList)
  *
  * Returns the number of CLI arguments passed to the script.
  */
-ctr_object* ctr_command_num_of_args(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_program_num_of_args(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (ctr_number) ctr_argc );
 }
 
@@ -457,7 +457,7 @@ ctr_object* ctr_command_num_of_args(ctr_object* myself, ctr_argument* argumentLi
  * 
  * Exits program immediately.
  */
-ctr_object* ctr_command_exit(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_program_exit(ctr_object* myself, ctr_argument* argumentList) {
 	CtrStdFlow = CtrStdExit;
 	return CtrStdNil;
 }
@@ -471,7 +471,7 @@ ctr_object* ctr_command_exit(ctr_object* myself, ctr_argument* argumentList) {
  *
  * x := Command env: 'MY_PATH_VAR'.
  */
-ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_program_get_env(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* envVarNameObj;
 	char*       envVarNameStr;
 	char*       envVal;
@@ -493,7 +493,7 @@ ctr_object* ctr_command_get_env(ctr_object* myself, ctr_argument* argumentList) 
  *
  * Sets the value of an environment variable.
  */
-ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* envVarNameObj;
 	ctr_object* envValObj;
 	char*       envVarNameStr;
@@ -525,7 +525,7 @@ ctr_object* ctr_command_set_env(ctr_object* myself, ctr_argument* argumentList) 
  * The example above asks the user for his/her name and
  * then displays the input received.
  */
-ctr_object* ctr_command_waitforinput(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	int c;
 	ctr_size bytes = 0;
@@ -574,7 +574,7 @@ ctr_object* ctr_command_waitforinput(ctr_object* myself, ctr_argument* argumentL
  * Pen write: x. #hello (without newline)
  *
  */
-ctr_object* ctr_command_input(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	ctr_size bytes = 0;
 	ctr_size page = 64;
@@ -606,7 +606,7 @@ ctr_object* ctr_command_input(ctr_object* myself, ctr_argument* argumentList) {
  */
 void ctr_check_permission( uint8_t operationID ) {
 	char* reason;
-	if ( ( ctr_command_security_profile & operationID ) ) {
+	if ( ( ctr_program_security_profile & operationID ) ) {
 		reason = "This program is not allowed to perform this operation.";
 		if ( operationID == CTR_SECPRO_NO_SHELL ) {
 			reason = "This program is not allowed to execute shell commands.";
@@ -639,8 +639,8 @@ void ctr_check_permission( uint8_t operationID ) {
  *
  * Program forbidShell.
  */
-ctr_object* ctr_command_forbid_shell( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_command_security_profile |= CTR_SECPRO_NO_SHELL;
+ctr_object* ctr_program_forbid_shell( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_program_security_profile |= CTR_SECPRO_NO_SHELL;
 	return myself;
 }
 
@@ -655,8 +655,8 @@ ctr_object* ctr_command_forbid_shell( ctr_object* myself, ctr_argument* argument
  *
  * Program forbidFileWrite.
  */
-ctr_object* ctr_command_forbid_file_write( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_command_security_profile |= CTR_SECPRO_NO_FILE_WRITE;
+ctr_object* ctr_program_forbid_file_write( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_program_security_profile |= CTR_SECPRO_NO_FILE_WRITE;
 	return myself;
 }
 
@@ -675,8 +675,8 @@ ctr_object* ctr_command_forbid_file_write( ctr_object* myself, ctr_argument* arg
  *
  * Program forbidFileRead.
  */
-ctr_object* ctr_command_forbid_file_read( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_command_security_profile |= CTR_SECPRO_NO_FILE_READ;
+ctr_object* ctr_program_forbid_file_read( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_program_security_profile |= CTR_SECPRO_NO_FILE_READ;
 	return myself;
 }
 
@@ -691,16 +691,16 @@ ctr_object* ctr_command_forbid_file_read( ctr_object* myself, ctr_argument* argu
  *
  * Program forbidInclude.
  */
-ctr_object* ctr_command_forbid_include( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_command_security_profile |= CTR_SECPRO_NO_INCLUDE;
+ctr_object* ctr_program_forbid_include( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_program_security_profile |= CTR_SECPRO_NO_INCLUDE;
 	return myself;
 }
 
 /**
  * [Program] forbidFork.
  */
-ctr_object* ctr_command_forbid_fork( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_command_security_profile |= CTR_SECPRO_FORK;
+ctr_object* ctr_program_forbid_fork( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_program_security_profile |= CTR_SECPRO_FORK;
 	return myself;
 }
 
@@ -716,13 +716,13 @@ ctr_object* ctr_command_forbid_fork( ctr_object* myself, ctr_argument* argumentL
  *
  * Program remainingMessages: 100.
  */
-ctr_object* ctr_command_countdown( ctr_object* myself, ctr_argument* argumentList ) {
-	if ( ctr_command_security_profile & CTR_SECPRO_COUNTDOWN ) {
+ctr_object* ctr_program_countdown( ctr_object* myself, ctr_argument* argumentList ) {
+	if ( ctr_program_security_profile & CTR_SECPRO_COUNTDOWN ) {
 		printf( "Message quota cannot change.\n" );
 		exit(1);
 	}
-	ctr_command_security_profile |= CTR_SECPRO_COUNTDOWN;
-	ctr_command_maxtick = (uint64_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	ctr_program_security_profile |= CTR_SECPRO_COUNTDOWN;
+	ctr_program_maxtick = (uint64_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
 	return myself;
 }
 
@@ -731,7 +731,7 @@ ctr_object* ctr_command_countdown( ctr_object* myself, ctr_argument* argumentLis
  *
  * Flushes the STDOUT output buffer.
  */
-ctr_object* ctr_command_flush(ctr_object* myself, ctr_argument* ctr_argumentList) {
+ctr_object* ctr_program_flush(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	 fflush(stdout);
 	 return myself;
 }
@@ -760,7 +760,7 @@ ctr_object* ctr_command_flush(ctr_object* myself, ctr_argument* ctr_argumentList
  * }.
  * Pen write: 'Parent'.
  */
-ctr_object* ctr_command_fork(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_program_fork(ctr_object* myself, ctr_argument* argumentList) {
 	int p;
 	int* ps;
 	FILE* pipes;
@@ -823,12 +823,12 @@ ctr_object* ctr_command_fork(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Command] message: [String].
+ * [Program] message: [String].
  *
  * Sends a message to another program, i.e. a child or a parent that is
  * running at the same time.
  */
-ctr_object* ctr_command_message(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_program_message(ctr_object* myself, ctr_argument* argumentList) {
 	char* str;
 	ctr_size n;
 	ctr_object* string;
@@ -849,14 +849,14 @@ ctr_object* ctr_command_message(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [Command] listen: [Block].
+ * [Program] listen: [Block].
  *
  * Stops the current flow of the program and starts listening for
  * messages from other programs that are running at the same time.
  * Upon receiving a message, the specified block will be invocated
  * and passed the message that has been received.
  */
-ctr_object* ctr_command_listen(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_program_listen(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* program;
 	ctr_object* answer;
 	ctr_resource* r;
@@ -883,13 +883,13 @@ ctr_object* ctr_command_listen(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Command] join
+ * [Program] join
  *
  * Rejoins the program with the main program.
  * This message will cause the current program to stop and wait
  * for the child program to end.
  */
-ctr_object* ctr_command_join(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_program_join(ctr_object* myself, ctr_argument* argumentList) {
 	int pid;
 	ctr_resource* rs = myself->value.rvalue;
 	if (rs == NULL) return CtrStdNil;
@@ -909,12 +909,12 @@ ctr_object* ctr_command_join(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Program] pid.
+ * [Program] pid
  *
  * Returns the process identification number associated with the
  * current program.
  */
-ctr_object* ctr_command_pid(ctr_object* myself, ctr_argument* argumentList ) {
+ctr_object* ctr_program_pid(ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* pidObject;
 	pidObject = ctr_internal_object_find_property(
 		myself,
@@ -931,7 +931,7 @@ ctr_object* ctr_command_pid(ctr_object* myself, ctr_argument* argumentList ) {
  * Internal generic logging function.
  * All logging functionality uses this function under the hood.
  */
-ctr_object* ctr_command_log_generic(ctr_object* myself, ctr_argument* argumentList, int level) {
+ctr_object* ctr_program_log_generic(ctr_object* myself, ctr_argument* argumentList, int level) {
 	char* message;
 	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	message = ctr_heap_allocate_cstring(
@@ -950,8 +950,8 @@ ctr_object* ctr_command_log_generic(ctr_object* myself, ctr_argument* argumentLi
  * Logs the specified message string using syslog using log level LOG_NOTICE.
  * Use this for debugging messages or notice messages.
  */
-ctr_object* ctr_command_log(ctr_object* myself, ctr_argument* argumentList ) {
-	return ctr_command_log_generic( myself, argumentList, LOG_NOTICE );
+ctr_object* ctr_program_log(ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_program_log_generic( myself, argumentList, LOG_NOTICE );
 }
 
 /**
@@ -960,8 +960,8 @@ ctr_object* ctr_command_log(ctr_object* myself, ctr_argument* argumentList ) {
  * Logs the specified message string using syslog using log level LOG_WARNING.
  * Use this to have your programs emit warnings.
  */
-ctr_object* ctr_command_warn(ctr_object* myself, ctr_argument* argumentList ) {
-	return ctr_command_log_generic( myself, argumentList, LOG_WARNING );
+ctr_object* ctr_program_warn(ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_program_log_generic( myself, argumentList, LOG_WARNING );
 }
 
 /**
@@ -970,8 +970,8 @@ ctr_object* ctr_command_warn(ctr_object* myself, ctr_argument* argumentList ) {
  * Logs the specified message string using syslog using log level LOG_ERR.
  * Use this to log errors.
  */
-ctr_object* ctr_command_err(ctr_object* myself, ctr_argument* argumentList ) {
-	return ctr_command_log_generic( myself, argumentList, LOG_ERR );
+ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_program_log_generic( myself, argumentList, LOG_ERR );
 }
 
 /**
@@ -980,8 +980,8 @@ ctr_object* ctr_command_err(ctr_object* myself, ctr_argument* argumentList ) {
  * Logs the specified message string using syslog using log level LOG_EMERG.
  * Use this to log critical errors or emergencies.
  */
-ctr_object* ctr_command_crit(ctr_object* myself, ctr_argument* argumentList ) {
-	return ctr_command_log_generic( myself, argumentList, LOG_EMERG );
+ctr_object* ctr_program_crit(ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_program_log_generic( myself, argumentList, LOG_EMERG );
 }
 
 /**
@@ -990,7 +990,7 @@ ctr_object* ctr_command_crit(ctr_object* myself, ctr_argument* argumentList ) {
  * Creates a remote object from the server specified by the
  * ip address.
  */
-ctr_object* ctr_command_remote(ctr_object* myself, ctr_argument* argumentList ) {
+ctr_object* ctr_program_remote(ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	ctr_object* remoteObj = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
 	remoteObj->link = CtrStdObject;
@@ -1007,11 +1007,11 @@ ctr_object* ctr_command_remote(ctr_object* myself, ctr_argument* argumentList ) 
 }
 
 /**
- * Program port: [Number].
+ * [Program] port: [Number]
  *
  * Sets the port to use for remote connections.
  */
-ctr_object* ctr_command_default_port(ctr_object* myself, ctr_argument* argumentList ) {
+ctr_object* ctr_program_default_port(ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_default_port = (uint16_t) ctr_internal_cast2number(
 		argumentList->object
 	)->value.nvalue;
@@ -1019,12 +1019,12 @@ ctr_object* ctr_command_default_port(ctr_object* myself, ctr_argument* argumentL
 }
 
 /**
- * Program connectionLimit: [Number].
+ * [Program] connectionLimit: [Number]
  *
  * Sets the maximum number of connections and requests that will be
  * accepted by the current program.
  */
-ctr_object* ctr_command_accept_number(ctr_object* myself, ctr_argument* argumentList ) {
+ctr_object* ctr_program_accept_number(ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_accept_n_connections = (uint8_t) ctr_internal_cast2number(
 		argumentList->object
 	)->value.nvalue;
@@ -1032,12 +1032,12 @@ ctr_object* ctr_command_accept_number(ctr_object* myself, ctr_argument* argument
 }
 
 /**
- * Program serve: [Object].
+ * [Program] serve: [Object]
  *
  * Serves an object. Client programs can now communicate with this object
  * and send messages to it.
  */
-ctr_object* ctr_command_accept(ctr_object* myself, ctr_argument* argumentList ) {
+ctr_object* ctr_program_accept(ctr_object* myself, ctr_argument* argumentList ) {
 	int listenfd =0,connfd=0;
 	ctr_object* responder;
 	ctr_object* answerObj;
@@ -1136,7 +1136,7 @@ ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Clock] new: [Number].
+ * [Clock] new: [Number]
  *
  * Creates a new clock instance from a UNIX time stamp.
  */

@@ -54,8 +54,8 @@ int main(int argc, char* argv[]) {
 	ctr_source_map_head = NULL;
 	ctr_source_mapping = 0;
 	CtrStdFlow = NULL;
-	ctr_command_security_profile = 0;
-	ctr_command_tick = 0;
+	ctr_program_security_profile = 0;
+	ctr_program_tick = 0;
 	ctr_cli_read_args(argc, argv);
 	ctr_source_mapping = 1;
 	ctr_clex_keyword_me = CTR_DICT_ME;
