@@ -6,6 +6,9 @@
 }.
 
 ✎ write: (
-	Shell call: 'echo ❲large text❳  | ./ctr tests/assets/stdin_test.ctr'
+	Shell call: (
+		Slurp echo: '❲large text❳',
+			| './ctr tests/assets/stdin_test.ctr'
+		) obtain
 ).
 
