@@ -374,8 +374,8 @@ ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentL
 	str = ctr_internal_cast2string( argumentList->object );
 	if ( (str->value.svalue->vlen > 0) && *(str->value.svalue->value + (str->value.svalue->vlen - 1)) == ':' ) {
 		char* ncstr = ctr_heap_allocate( str->value.svalue->vlen - 1 );
-		memcpy( ncstr, str->value.svalue->value, str->value.svalue->vlen -1 );
-		newArgumentList->object = ctr_build_string_from_cstring( ncstr );
+		memcpy( ncstr, str->value.svalue->value, str->value.svalue->vlen - 1 );
+		newArgumentList->object = ctr_build_string( ncstr, str->value.svalue->vlen - 1 );
 		ctr_slurp_respond_to( myself, newArgumentList );
 		ctr_heap_free( ncstr );
 	} else {
