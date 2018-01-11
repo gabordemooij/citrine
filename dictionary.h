@@ -160,7 +160,7 @@
 #define CTR_DICT_RESPOND_TO      "respondTo:" 
 #define CTR_DICT_RESPOND_TO_AND  "respondTo:and:" 
 #define CTR_DICT_CALL            "call:" 
-#define CTR_DICT_SHELL           "Shell"
+#define CTR_DICT_SHELL           "shell:"
 #define CTR_DICT_SWEEP           "sweep" 
 #define CTR_DICT_DUST            "dust"
 #define CTR_DICT_OBJECT_COUNT    "objectCount" 

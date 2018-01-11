@@ -1,2 +1,2 @@
 #Tests whether Citrine stdin handles null byte correctly
-Pen write: (Shell call: 'cat tests/assets/nullbyte.txt | ./ctr tests/assets/stdin_test.ctr').
+Pen write: (💻 shell: 'cat tests/assets/nullbyte.txt | ./ctr tests/assets/stdin_test.ctr').

@@ -852,6 +852,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SERVE ), &ctr_program_accept );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_CONN_LIMIT ), &ctr_program_accept_number );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_PORT ), &ctr_program_default_port );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SHELL ), &ctr_program_shell );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PROGRAM ), CtrStdCommand, 0 );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_COMP_ICON ), CtrStdCommand, 0 );
 	CtrStdCommand->link = CtrStdObject;
@@ -909,16 +910,7 @@ void ctr_initialize_world() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_SLURP ), CtrStdSlurp, 0 );
 	CtrStdSlurp->link = CtrStdObject;
 	CtrStdSlurp->info.sticky = 1;
-
-	/* Shell */
-	CtrStdShell = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
-	ctr_internal_create_func(CtrStdShell, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ), &ctr_shell_respond_to );
-	ctr_internal_create_func(CtrStdShell, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND ), &ctr_shell_respond_to_and );
-	ctr_internal_create_func(CtrStdShell, ctr_build_string_from_cstring( CTR_DICT_CALL ), &ctr_shell_call );
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_SHELL ), CtrStdShell, 0 );
-	CtrStdShell->link = CtrStdObject;
-	CtrStdShell->info.sticky = 1;
-
+	
 	/* Broom */
 	CtrStdGC = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_SWEEP ), &ctr_gc_collect );

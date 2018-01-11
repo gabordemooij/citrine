@@ -14,7 +14,7 @@ Program argument: 0.
 Dice roll.
 Dice rollWithSides: 10.
 Dice rawRandomNumber.
-Pen write: (Shell echo: 'Hello').
+✎ write: (💻 shell: 'echo \'Hello\'').
 
 Broom sweep.
 
@@ -28,7 +28,7 @@ Program argument: 0.
 Dice roll.
 Dice rollWithSides: 10.
 Dice rawRandomNumber.
-Pen write: (Shell echo: 'Hello').
+✎ write: (💻 shell: 'echo \'Hello\'').
 
 
 Broom sweep.
@@ -42,7 +42,7 @@ Program argument: 0.
 Dice roll.
 Dice rollWithSides: 10.
 Dice rawRandomNumber.
-Pen write: (Shell echo: 'Hello').
+✎ write: (💻 shell: 'echo \'Hello\'').
 
 Broom sweep.
 usedMemory3 := Broom keptAlloc.

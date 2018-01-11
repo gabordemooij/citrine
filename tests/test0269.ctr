@@ -1,13 +1,13 @@
 (File new: '/tmp/testje') exists ifFalse: {
-	Shell call: 'mkdir /tmp/testje'.	
+	💻 shell: 'mkdir /tmp/testje'.	
 }.
 
 (File new: '/tmp/testje/file1') exists ifFalse: {
-	Shell call: 'touch /tmp/testje/file1'.	
+	💻 shell: 'touch /tmp/testje/file1'.	
 }.
 
 (File new: '/tmp/testje/folder1') exists ifFalse: {
-	Shell call: 'mkdir /tmp/testje/folder1'.	
+	💻 shell: 'mkdir /tmp/testje/folder1'.	
 }.
 
 l := File list: '/tmp/testje'.

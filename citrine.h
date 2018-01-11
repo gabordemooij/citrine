@@ -633,7 +633,7 @@ ctr_object* ctr_program_accept(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_accept_number(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_remote(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_default_port(ctr_object* myself, ctr_argument* argumentList );
-
+ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList );
 
 void ctr_check_permission( uint8_t operationID );
 uint8_t ctr_program_security_profile;
@@ -681,13 +681,6 @@ void ctr_clock_init( ctr_object* clock );
 ctr_object* ctr_slurp_obtain(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_slurp_respond_to(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentList);
-
-/**
- * Shell Interface
- */
-ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_shell_respond_to(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_shell_respond_to_and(ctr_object* myself, ctr_argument* argumentList);
 
 
 /**

@@ -1,7 +1,7 @@
 #Test Shell fluid API
 
 #Test echo
-Pen write: (Shell echo: 'Hello I can write to console using fluid API!').
+Pen write: (Program shell: (Slurp echo: 'Hello I can write to console using fluid API!', obtain)).
 
 #delete files if necessary
 { File new: '/tmp/from.txt', delete. } catch: {}, run.
@@ -17,10 +17,11 @@ File new: '/tmp/from.txt', exists ifFalse: {
 
 
 #create the from file
-Shell do touch: '/tmp/from.txt', echo: '"hello world" > /tmp/from.txt', done.
+💻 shell: (Slurp touch: '/tmp/from.txt ;', echo: '"hello world" > /tmp/from.txt', obtain).
+
 
 #now use the fluid shell API to perform a copy action
-Shell cp: '/tmp/from.txt /tmp/to.txt'.
+💻 shell: (Slurp cp: '/tmp/from.txt /tmp/to.txt', obtain).
 
 File new: '/tmp/to.txt', exists ifTrue: {
 	Pen write: 'Confirmed. Target file has been created by shell.\n'.

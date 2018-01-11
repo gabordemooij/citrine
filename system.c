@@ -250,7 +250,7 @@ ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Shell] call: [String]
+ * [Program] shell: [String]
  *
  * Performs a Shell operation. The Shell object uses a fluid API, so you can
  * mix shell code with programming logic. For instance to list the contents
@@ -267,7 +267,7 @@ ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
  * Every message you send will be turned into a string and dispatched to
  * the 'call:' message.
  */
-ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_check_permission( CTR_SECPRO_NO_SHELL );
 	FILE* stream;
 	char* outputBuffer;
@@ -296,44 +296,7 @@ ctr_object* ctr_shell_call(ctr_object* myself, ctr_argument* argumentList) {
 	return outputString;
 }
 
-/**
- * @internal
- *
- * Shell Object uses a fluid API.
- */
-ctr_object* ctr_shell_respond_to_and(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object*   commandObj;
-	ctr_object*   prefix;
-	ctr_object*   suffix;
-	ctr_argument* newArgumentList;
-	ctr_object*   result;
-	char* command;
-	int len;
-	prefix = ctr_internal_cast2string(argumentList->object);
-	suffix = ctr_internal_cast2string(argumentList->next->object);
-	len = prefix->value.svalue->vlen + suffix->value.svalue->vlen;
-	if (len == 0) return myself;
-	command = (char*) ctr_heap_allocate( ( sizeof( char ) * len ) ); /* actually we need +1 for the space between commands, but we dont because we remove the colon : !*/
-	strncpy(command, prefix->value.svalue->value, prefix->value.svalue->vlen - 1); /* remove colon, gives room for space */
-	strncpy(command + (prefix->value.svalue->vlen - 1), " ", 1); /* space to separate commands */
-	strncpy(command + (prefix->value.svalue->vlen), suffix->value.svalue->value, suffix->value.svalue->vlen);
-	commandObj = ctr_build_string(command, len);
-	newArgumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
-	newArgumentList->object = commandObj;
-	result = ctr_shell_call(myself, newArgumentList);
-	ctr_heap_free( newArgumentList );
-	ctr_heap_free( command );
-	return result;
-}
 
-/**
- * @internal
- *
- * Shell Object uses a fluid API.
- */
-ctr_object* ctr_shell_respond_to(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_shell_call(myself, argumentList);
-}
 
 /**
  * @internal

@@ -5,9 +5,11 @@
 	large text append: 'hello'.
 }.
 
+
 ✎ write: (
-	Shell call: (
-		Slurp echo: '❲large text❳',
+	💻 shell: (
+		Slurp
+			echo: '❲large text❳',
 			| './ctr tests/assets/stdin_test.ctr'
 		) obtain
 ).
