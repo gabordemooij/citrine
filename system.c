@@ -1086,9 +1086,19 @@ ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList) {
 
 
 /**
- * [Clock] wait
+ * [Clock] wait: [Number]
  *
- * Waits X seconds.
+ * Suspends program execution for the specified number of seconds.
+ * This can be used for instance, together with a whileFalse loop as the
+ * following example illustrates. The following example demonstrates the
+ * use of the Clock object and the wait message to wait until an
+ * exclusive lock on the specified file has been acquired.
+ *
+ * Usage:
+ *
+ * { ↲ file lock. }
+ * whileFalse: { ⏰ wait: 1. }.
+ *
  */
 ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
