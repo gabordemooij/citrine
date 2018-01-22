@@ -478,6 +478,33 @@ ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Array] - [Number]
+ *
+ * Deletes the element specified by the index number and
+ * shrinks the array accordingly. If the index number does not exist,
+ * the array will remain the same. This operation changes the array itself.
+ *
+ * Usage:
+ *
+ * x := Array ← 1 ; 2 ; 3.
+ * x - 1. #1 ; 3
+ */
+ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_size index = ctr_internal_cast2number(argumentList->object)->value.nvalue;
+	ctr_size length = (ctr_size) myself->value.avalue->head - myself->value.avalue->tail;
+	ctr_size i;
+	ctr_size found = 0;
+	for( i = index; i <  length-1; i ++ ) {
+		*(myself->value.avalue->elements + i) = *(myself->value.avalue->elements + (i+1));
+		found = 1;
+	}
+	if (found) {
+		myself->value.avalue->head--;
+	}
+	return myself;
+}
+
+/**
  * [Array] shift
  *
  * Shifts off the first element of the array.

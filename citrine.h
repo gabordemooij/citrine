@@ -550,6 +550,7 @@ ctr_object* ctr_array_column(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_second_last(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * HashMap Interface
