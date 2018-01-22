@@ -743,6 +743,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_SORT ), &ctr_array_sort );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_PUT_AT ), &ctr_array_put );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_FROM_LENGTH ), &ctr_array_from_length );
+	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_SPLICE ), &ctr_array_splice );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_PLUS ), &ctr_array_add );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_MAP ), &ctr_array_map );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_EACH ), &ctr_array_map );

@@ -533,6 +533,76 @@ ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
+ * [Array] replace: [Number] length: [Number] with: [Array].
+ *
+ * Returns a copy of the array with the specified elements replaced.
+ * The first argument indicates the start index to begin the replacement.
+ * Here, 0 means the beginning of the array. The second argument (length)
+ * must indicate the number of elements to delete in the copy, counting
+ * from the starting point. Finally, one has to provide the replacement
+ * array as the third argument.
+ * If the replacement array is empty, the specified elements will only be
+ * removed from the copy.
+ * If the replacement is not an array an error will be thrown.
+ *
+ * Usage:
+ *
+ * ☞ cakes := Array ← 'apple' ; 'berry' ; 'choco' ; 'cheese'.
+ * #apple, cinnamon, pineapple, cheese
+ * ☞ buy := cakes replace: 1 length: 2 with: ( Array ← 'cinnamon' ; 'pineapple' ).
+ * #apple, cinnamon, pineapple
+ * ☞ buy := cakes replace: 1 length: 12 with: ( Array ← 'cinnamon' ; 'pineapple' ).
+ * #apple, berry
+ * ☞ buy := cakes replace: 2 length: 10 with: ( Array new ).
+ * #berry, choco, cheese
+ * ☞ buy := cakes replace: '' length: '1' with: ( Array new ).
+ * #error...
+ * ☞ buy := cakes replace: '' length: '1' with: 'x'.
+ *
+ */
+ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* newArray = ctr_array_new(CtrStdArray, NULL);
+	ctr_object* start = ctr_internal_cast2number(argumentList->object);
+	ctr_object* deleteCount = ctr_internal_cast2number(argumentList->next->object);
+	ctr_object* replacement = argumentList->next->next->object;
+	ctr_object* remainder;
+	ctr_argument* sliceFromArg;
+	ctr_argument* sliceLengthArg;
+	ctr_argument* replacementArg;
+	ctr_argument* remainderArg;
+	ctr_size n;
+	if ( replacement->info.type != CTR_OBJECT_TYPE_OTARRAY ) {
+		CtrStdFlow = ctr_build_string_from_cstring( "Replacement must be an array." );
+		return myself;
+	}
+	n = ( start->value.nvalue + deleteCount->value.nvalue );
+	sliceFromArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+	sliceLengthArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+	replacementArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+	remainderArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+	sliceFromArg->object = ctr_build_number_from_float(0);
+	sliceLengthArg->object = start;
+	sliceFromArg->next = sliceLengthArg;
+	newArray = ctr_array_from_length( myself, sliceFromArg );
+	replacementArg->object = replacement;
+	newArray = ctr_array_add(newArray, replacementArg);
+	sliceFromArg->object = ctr_build_number_from_float( n );
+	if ( n < (myself->value.avalue->head - myself->value.avalue->tail) ) {
+		sliceLengthArg->object = ctr_build_number_from_float( (myself->value.avalue->head - myself->value.avalue->tail) - n );
+		sliceFromArg->next = sliceLengthArg;
+		remainder = ctr_array_from_length( myself, sliceFromArg );
+		remainderArg->object = remainder;
+		newArray = ctr_array_add( newArray, remainderArg );
+	}
+	ctr_heap_free( sliceFromArg );
+	ctr_heap_free( sliceLengthArg );
+	ctr_heap_free( replacementArg );
+	ctr_heap_free( remainderArg );
+	return newArray;
+}
+
+
+/**
  * [Array] + [Array]
  *
  * Returns a new array, containing elements of itself and the other
