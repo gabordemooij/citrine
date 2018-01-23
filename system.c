@@ -1057,6 +1057,17 @@ ctr_object* ctr_program_accept(ctr_object* myself, ctr_argument* argumentList ) 
 }
 
 /**
+ * [Dice]
+ *
+ * The Dice object represents the random number generator.
+ * Using a separate object for this makes it easy to spot randomness
+ * in any program. The random number generator of Citrine uses the
+ * BSD arc4random secure random number generator for high quality
+ * randomness that is generally considered to be cryptographically
+ * secure.
+ */
+
+/**
  * [Dice] rollWithSides: [Number]
  *
  * Rolls the dice, generates a pseudo random number.
