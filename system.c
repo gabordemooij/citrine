@@ -1088,7 +1088,8 @@ ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList) {
  * [Dice] drawFrom: [String] length: [Number].
  *
  * Returns a randomized string with the specified length using the pool of
- * bytes contained in the String object.
+ * characters contained in the String object. This message is useful for
+ * creating random nonces, passwords, temporary files, keys or identifiers.
  */
 ctr_object* ctr_dice_randomize_bytes(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size i;
