@@ -1084,6 +1084,41 @@ ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (ctr_number) (arc4random()) );
 }
 
+/**
+ * [Dice] drawFrom: [String] length: [Number].
+ *
+ * Returns a randomized string with the specified length using the pool of
+ * bytes contained in the String object.
+ */
+ctr_object* ctr_dice_randomize_bytes(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_size i;
+	ctr_size j;
+	ctr_size k;
+	ctr_size m;
+	ctr_size byteOffset;
+	ctr_size byteLength;
+	ctr_size plen;
+	ctr_size len;
+	char* newBuffer;
+	ctr_object* answer;
+	ctr_object* pool = ctr_internal_cast2string(argumentList->object);
+	plen = ctr_getutf8len( pool->value.svalue->value, pool->value.svalue->vlen );
+	len = (size_t) ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
+	if ( len == 0 ) return ctr_build_empty_string();
+	newBuffer = (char*) ctr_heap_allocate( len * 4 );
+	m = 0;
+	for( i = 0; i < len; i ++ ) {
+		j = (ctr_size) arc4random_uniform( (uint32_t) plen );
+		byteOffset = getBytesUtf8( pool->value.svalue->value, 0, j );
+		byteLength = getBytesUtf8( pool->value.svalue->value, byteOffset, 1 );
+		for (k = 0; k < byteLength; k++) {
+			newBuffer[m++]=*(pool->value.svalue->value+byteOffset+k);
+		}
+	}
+	answer = ctr_build_string(newBuffer, m);
+	ctr_heap_free(newBuffer);
+	return answer;
+}
 
 /**
  * [Clock] wait: [Number]

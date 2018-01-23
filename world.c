@@ -703,7 +703,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_CONTAINS ),&ctr_string_contains );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_PADDING_LEFT ),&ctr_string_padding_left );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_PADDING_RIGHT ),&ctr_string_padding_right );
-	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_RANDOMIZE_BYTES_WITH_LENGTH ),&ctr_string_randomize_bytes );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_STRING ), CtrStdString, 0 );
 	CtrStdString->link = CtrStdObject;
 	CtrStdString->info.sticky = 1;
@@ -899,6 +898,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdDice, ctr_build_string_from_cstring( CTR_DICT_ROLL ), &ctr_dice_throw );
 	ctr_internal_create_func(CtrStdDice, ctr_build_string_from_cstring( CTR_DICT_ROLL_WITH_SIDES ), &ctr_dice_sides );
 	ctr_internal_create_func(CtrStdDice, ctr_build_string_from_cstring( CTR_DICT_RAW_RANDOM_NUMBER ), &ctr_dice_rand );
+	ctr_internal_create_func(CtrStdDice, ctr_build_string_from_cstring( CTR_DICT_RANDOMIZE_BYTES_WITH_LENGTH ),&ctr_dice_randomize_bytes );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_DICE ), CtrStdDice, 0 );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_DICE_ICON ), CtrStdDice, 0 );
 	CtrStdDice->link = CtrStdObject;

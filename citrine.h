@@ -506,7 +506,6 @@ ctr_object* ctr_string_quotes_escape( ctr_object* myself, ctr_argument* argument
 ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_string_to_byte_array( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_string_append_byte(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_string_randomize_bytes(ctr_object* myself, ctr_argument* argumentList );
 
 /**
  * Block Interface
@@ -716,6 +715,7 @@ uint64_t ctr_gc_memlimit;
 ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_dice_sides(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_dice_randomize_bytes(ctr_object* myself, ctr_argument* argumentList );
 
 /**
  * Literal Constructors (internal only)

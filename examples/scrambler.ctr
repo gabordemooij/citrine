@@ -1,2 +1,2 @@
 ☞ x := Program input.
-✎ write: '❲x randomizeBytesWithLength: x bytes❳↵'.
+✎ write: '❲ ⚄ drawFrom: x length: x length ❳↵'.

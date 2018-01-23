@@ -1,4 +1,7 @@
-Pen write: (
-	'X' randomizeBytesWithLength: 10
-), brk.
+#Can we easily generate a random string from a pool of characters?
+?? := '🦀🦁🦂🦃🦄'.
+☞ random := ⚄ drawFrom: ?? length: ?? length.
+#✎ write: random, brk.
+✎ write: '❲ random length ❳↵'.
+✎ write: '❲ ?? length ❳↵'.
 

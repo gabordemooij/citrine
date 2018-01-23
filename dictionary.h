@@ -248,7 +248,7 @@
 #define CTR_DICT_STR_IPOL_STOP   "❳"
 #define CTR_DICT_SPLICE          "replace:length:with:"
 #define CTR_DICT_NEW_ARRAY_AND_PUSH_SYMBOL       "←"
-#define CTR_DICT_RANDOMIZE_BYTES_WITH_LENGTH     "randomizeBytesWithLength:"
+#define CTR_DICT_RANDOMIZE_BYTES_WITH_LENGTH     "drawFrom:length:"
 #define CTR_DICT_ASCII_UPPER_CASE                "asciiUpperCase" 
 #define CTR_DICT_ASCII_LOWER_CASE                "asciiLowerCase"
 #define CTR_DICT_ASCII_UPPER_CASE_1              "asciiUpperCase1st" 
