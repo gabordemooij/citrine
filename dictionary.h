@@ -34,7 +34,6 @@
 #define CTR_DICT_NOTEQUAL        "!=:"
 #define CTR_DICT_TONUMBER        "toNumber"
 #define CTR_DICT_TOSTRING        "toString"
-#define CTR_DICT_FLIP            "flip"
 #define CTR_DICT_EITHEROR        "either:or:"
 #define CTR_DICT_BOOLEAN         "Boolean"
 #define CTR_DICT_TOSTEPDO        "to:step:do:"

@@ -602,7 +602,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_NOTEQUAL ), &ctr_bool_neq );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_bool_to_number );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_bool_to_string );
-	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_FLIP ), &ctr_bool_flip );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_EITHEROR ), &ctr_bool_either_or );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_BOOLEAN ), CtrStdBool, 0 );
 	CtrStdBool->link = CtrStdObject;

@@ -654,18 +654,6 @@ ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] flip
- *
- * 'Flips a coin'. Returns a random boolean value True or False.
- *
- * Usage:
- * coinLandsOn := (Boolean flip).
- */
-ctr_object* ctr_bool_flip(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_bool( (int) arc4random_uniform( 2 ) );
-}
-
-/**
  * [Boolean] either: [this] or: [that]
  *
  * Returns argument #1 if boolean value is True and argument #2 otherwise.
