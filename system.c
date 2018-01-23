@@ -1080,7 +1080,7 @@ ctr_object* ctr_dice_sides(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [Dice] roll
  *
- * Rolls a standard dice with 6 sides.
+ * Rolls a standard die with 6 sides.
  */
 ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (ctr_number) 1 + arc4random_uniform( (uint32_t) 6 ) );
