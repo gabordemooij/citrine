@@ -352,6 +352,15 @@ ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentL
 }
 
 /**
+ * [Slurp]
+ *
+ * Slurp is an object that takes any message and converts it to a string.
+ * The message 'obtain' can be used to acquire the generated string.
+ * The Slurp object is a separate object with minimal messages to avoid
+ * 'message collision'.
+ */
+
+/**
  * [Slurp] obtain.
  * 
  * Obtains the string generated using the Slurp object.
