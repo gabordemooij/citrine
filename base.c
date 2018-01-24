@@ -2370,6 +2370,15 @@ ctr_object* ctr_string_append_byte( ctr_object* myself, ctr_argument* argumentLi
 	return myself;
 }
 
+/**
+ * [String] compare: [String]
+ *
+ * Compares a string using the UTF-8 compatible strcmp function.
+ *
+ * Usage:
+ *
+ * word compare: other.
+ */
 ctr_object* ctr_string_compare( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_size maxlen;
 	if (myself->value.svalue->vlen < argumentList->object->value.svalue->vlen) {
