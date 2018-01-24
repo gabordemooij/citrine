@@ -1,0 +1,9 @@
+#Can we construct a map from a pair of arrays?
+☞ city        := Array ← 'London' ; 'Paris' ; 'Berlin'.
+☞ temperature := Array ← '15' ; '16' ; '15'.
+☞ weather := temperature by: city.
+cities       := weather entries sort: { :a :b  ↲ (a compare: b). }.
+temperatures := weather values sort: { :a :b  ↲ (a compare: b) neg. }.
+#✎ write: weather, brk.
+✎ write: (cities join: ','), brk.
+✎ write: (temperatures join: ','), brk.

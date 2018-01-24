@@ -505,6 +505,7 @@ ctr_object* ctr_string_quotes_escape( ctr_object* myself, ctr_argument* argument
 ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_string_to_byte_array( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_string_append_byte(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_string_compare(ctr_object* myself, ctr_argument* argumentList );
 
 /**
  * Block Interface
@@ -549,6 +550,7 @@ ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_second_last(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * HashMap Interface
@@ -561,6 +563,9 @@ ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_to_string(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_map_values(ctr_object* myself, ctr_argument* argumentList);
+
 
 
 /**

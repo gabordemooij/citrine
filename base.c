@@ -2370,6 +2370,20 @@ ctr_object* ctr_string_append_byte( ctr_object* myself, ctr_argument* argumentLi
 	return myself;
 }
 
+ctr_object* ctr_string_compare( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_size maxlen;
+	if (myself->value.svalue->vlen < argumentList->object->value.svalue->vlen) {
+		maxlen = myself->value.svalue->vlen;
+	} else {
+		maxlen = argumentList->object->value.svalue->vlen;
+	}
+	return ctr_build_number_from_float( (ctr_number) strncmp(
+		myself->value.svalue->value,
+		ctr_internal_cast2string(argumentList->object)->value.svalue->value,
+		maxlen
+	) );
+}
+
 /**
  * [String] htmlEscape
  *

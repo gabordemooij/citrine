@@ -665,6 +665,38 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Array] by: [Array].
+ *
+ * Combines the first array with the second one thus creating
+ * a map. The keys of the newly generated map will be provided by the
+ * first array while the values are extracted from the second one.
+ *
+ * Usage:
+ *
+ * ☞ city        := Array ← 'London' ; 'Paris' ; 'Berlin'.
+ * ☞ temperature := Array ← '15' ; '16' ; '15'.
+ * ☞ weather := temperature by: city.
+ */
+ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_size i;
+	ctr_argument* key   = ctr_heap_allocate( sizeof( ctr_argument ) );
+	ctr_argument* value = ctr_heap_allocate( sizeof( ctr_argument ) );
+	ctr_argument* index = ctr_heap_allocate( sizeof( ctr_argument ) );
+	ctr_object* map = ctr_map_new( CtrStdMap, argumentList );
+	for(i = myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
+			index->object = ctr_build_number_from_float((ctr_number) i);
+			key->object = ctr_array_get( myself, index );
+			value->object = ctr_array_get( argumentList->object, index );
+			key->next = value;
+			ctr_map_put( map, key );
+	}
+	ctr_heap_free(key);
+	ctr_heap_free(value);
+	ctr_heap_free(index);
+	return map;
+}
+
+/**
  * @internal
  *
  * Internal sort function, for use with ArraySort.
@@ -883,6 +915,73 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_internal_object_delete_property(myself, ctr_internal_cast2string(argumentList->object), 0);
 	return myself;
+}
+
+/**
+ * [Map] keys
+ *
+ * Returns an array containing all the keys in the map.
+ * The order of the keys is undefined. Use the sort message
+ * to enforce a specific order. The 'entries' message
+ * does exactly the same and is an alias for 'keys'.
+ *
+ * Usage:
+ *
+ * ☞ city        := Array ← 'London' ; 'Paris' ; 'Berlin'.
+ * ☞ temperature := Array ← '15' ; '16' ; '15'.
+ *
+ * ☞ weather := temperature by: city.
+ * cities := weather entries sort: {
+ * 	:a :b  ↲ (a compare: b).
+ * }.
+ */
+ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* list;
+	ctr_mapitem* m;
+	ctr_argument* element;
+	list = ctr_array_new( CtrStdArray, argumentList );
+	m = myself->properties->head;
+	element = ctr_heap_allocate( sizeof( ctr_argument ) );
+	while( m ) {
+		element->object = m->key;
+		ctr_array_push( list, element );
+		m = m->next;
+	}
+	ctr_heap_free( element );
+	return list;
+}
+
+/**
+ * [Map] values
+ *
+ * Returns an array containing all the keys in the map.
+ * The order of the keys is undefined. Use the sort message
+ * to enforce a specific order.
+ *
+ * Usage:
+ *
+ * ☞ city        := Array ← 'London' ; 'Paris' ; 'Berlin'.
+ * ☞ temperature := Array ← '15' ; '16' ; '15'.
+ *
+ * ☞ weather := temperature by: city.
+ * temperatures := weather values sort: {
+ * 	:a :b  ↲ (a compare: b).
+ * }.
+ */
+ctr_object* ctr_map_values(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* list;
+	ctr_mapitem* m;
+	ctr_argument* element;
+	list = ctr_array_new( CtrStdArray, argumentList );
+	m = myself->properties->head;
+	element = ctr_heap_allocate( sizeof( ctr_argument ) );
+	while( m ) {
+		element->object = m->value;
+		ctr_array_push( list, element );
+		m = m->next;
+	}
+	ctr_heap_free( element );
+	return list;
 }
 
 /**
