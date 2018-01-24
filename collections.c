@@ -875,6 +875,17 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Map] - [String]
+ *
+ * Deletes the entry, identified by the key specified in [String], from
+ * the map.
+ */
+ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_internal_object_delete_property(myself, ctr_internal_cast2string(argumentList->object), 0);
+	return myself;
+}
+
+/**
  * [Map] at: [Key]
  *
  * Retrieves the value specified by the key from the map.

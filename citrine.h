@@ -560,6 +560,8 @@ ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_to_string(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList);
+
 
 /**
  * Console Interface
