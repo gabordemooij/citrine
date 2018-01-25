@@ -2394,6 +2394,62 @@ ctr_object* ctr_string_compare( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
+ * [String] < [String]
+ *
+ * Returns True if the first String comes before the latter
+ * alphabetically. The actual comparison is based on the UTF-8 compatible
+ * function strcmp.
+ */
+ctr_object* ctr_string_before(ctr_object* myself, ctr_argument* argumentList ) {
+	if ( ctr_string_compare( myself, argumentList )->value.nvalue < 0 ) {
+		return ctr_build_bool( 1 );
+	}
+	return ctr_build_bool( 0 );
+}
+
+/**
+ * [String] ≤ [String]
+ *
+ * Returns True if the first String comes before or at the same
+ * position as the latter alphabetically. The actual comparison is based on the UTF-8 compatible
+ * function strcmp.
+ */
+ctr_object* ctr_string_before_or_same(ctr_object* myself, ctr_argument* argumentList ) {
+	if ( ctr_string_compare( myself, argumentList )->value.nvalue <= 0 ) {
+		return ctr_build_bool( 1 );
+	}
+	return ctr_build_bool( 0 );
+}
+
+/**
+ * [String] > [String]
+ *
+ * Returns True if the first String comes after the latter
+ * alphabetically. The actual comparison is based on the UTF-8 compatible
+ * function strcmp.
+ */
+ctr_object* ctr_string_after(ctr_object* myself, ctr_argument* argumentList ) {
+	if ( ctr_string_compare( myself, argumentList )->value.nvalue > 0 ) {
+		return ctr_build_bool( 1 );
+	}
+	return ctr_build_bool( 0 );
+}
+
+/**
+ * [String] ≥ [String]
+ *
+ * Returns True if the first String comes after or at the same position as the latter
+ * alphabetically. The actual comparison is based on the UTF-8 compatible
+ * function strcmp.
+ */
+ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentList ) {
+	if ( ctr_string_compare( myself, argumentList )->value.nvalue >= 0 ) {
+		return ctr_build_bool( 1 );
+	}
+	return ctr_build_bool( 0 );
+}
+
+/**
  * [String] htmlEscape
  *
  * Escapes HTML chars.

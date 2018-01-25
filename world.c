@@ -703,6 +703,10 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_PADDING_LEFT ),&ctr_string_padding_left );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_PADDING_RIGHT ),&ctr_string_padding_right );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_COMPARE_SET ),&ctr_string_compare );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_LESS ),&ctr_string_before );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_LESS_OR_EQUAL_SYMBOL ),&ctr_string_before_or_same );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_GREATER ),&ctr_string_after );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_GREATER_OR_EQUAL_SYMBOL ),&ctr_string_after_or_same);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_STRING ), CtrStdString, 0 );
 	CtrStdString->link = CtrStdObject;
 	CtrStdString->info.sticky = 1;
