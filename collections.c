@@ -836,6 +836,42 @@ ctr_object* ctr_array_column( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
+ * [Array] indexOf: [Object].
+ *
+ * Checks whether the specified object occurs in the array and returns the index number
+ * if so. If not, the index number -1 will be returned. Note that the comparison
+ * will be performed by converting both values to strings.
+ *
+ * Usage:
+ *
+ * ☞ colors := Array ← 'red' ; 'green' ; 'blue' ; 3 ; (Array new) ; False ; Nil.
+ *
+ * ✎ write: (colors indexOf: 'green'), brk. #1
+ * ✎ write: (colors indexOf: 'blue'), brk. #2
+ * ✎ write: (colors indexOf: 'red'), brk. #0
+ * ✎ write: (colors indexOf: 3), brk. #3
+ * ✎ write: (colors indexOf: (Array new)), brk. #4
+ * ✎ write: (colors indexOf: 'False'), brk. #5
+ * ✎ write: (colors indexOf: Nil), brk. #6
+ * ✎ write: (colors indexOf: 'purple'), brk. #-1
+ */
+ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList ) {
+	int64_t found = -1, i = 0;
+	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
+	ctr_object* element;
+	for(i = myself->value.avalue->tail; i < myself->value.avalue->head; i++) {
+		element = ctr_internal_cast2string( (ctr_object*) *(myself->value.avalue->elements + i) );
+		if (
+		element->value.svalue->vlen == needle->value.svalue->vlen &&
+		strncmp(element->value.svalue->value,needle->value.svalue->value,needle->value.svalue->vlen)==0) {
+			found = i;
+			break;
+		}
+	}
+	return ctr_build_number_from_float(found);
+}
+
+/**
  * [Array] serialize
  *
  * Alias for [Array] toString.
