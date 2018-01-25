@@ -1,0 +1,18 @@
+#String comparison
+☞ dictionary := (
+	Map new
+		put: 'b' at: 'a',
+		put: 'a' at: 'b',
+		put: 'z' at: 'x',
+		put: 'hello' at: 'hallo',
+		put: 'human' at: 'human'
+).
+
+☞ comparisons := Array new.
+dictionary each: { :a :b
+	comparisons ; ('❲a❳ ❲b❳ | ❲ a > b ❳ ❲ a ≥ b ❳ ❲ a < b ❳ ❲ a ≤ b ❳ ❲ a compare: b ❳').
+}.
+
+comparisons sort: { :a :b ↲ ( a compare: b ). }.
+✎ write: ( comparisons join: '↵' ), brk.
+comparisons join: '↵'.
