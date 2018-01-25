@@ -1069,6 +1069,47 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Map] has: [Object]
+ *
+ * Checks whether the map contains the specified value.
+ * Note that the object gets converted to a string before
+ * comparison. In case of a map or array this means the comparison
+ * will be based on the serialized structure.
+ *
+ * Usage:
+ *
+ * ☞ shop := (Map new
+ *	put: 'magazine' at: 'books',
+ *	put: 'computer' at: 'electronics',
+ *	put: 'lipstick' at: 'cosmetics'
+ * ).
+ * ✎ write: (shop has: 'computer'), brk. #True
+ * ✎ write: (shop has: 'sausage'), brk. #False
+ * ✎ write: (shop has: 'computers'), brk. #False
+ * ✎ write: (shop has: 'compute'), brk. #False
+ * ✎ write: (shop has: '2computer'), brk. #False
+ */
+ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList) {
+	int found = 0;
+	ctr_mapitem* m;
+	ctr_object* candidate;
+	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
+	m = myself->properties->head;
+	while(m) {
+		candidate = ctr_internal_cast2string(m->value);
+		if ( needle->value.svalue->vlen == candidate->value.svalue->vlen ) {
+			if ( strncmp(
+			candidate->value.svalue->value,
+			needle->value.svalue->value, needle->value.svalue->vlen)) {
+				found = 1;
+			}
+		}
+		m = m->next;
+	}
+	return ctr_build_bool(found);
+}
+
+/**
  * [Map] toString
  *
  * Returns a string representation of a map encoded in Citrine itself.

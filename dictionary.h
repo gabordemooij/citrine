@@ -251,6 +251,7 @@
 #define CTR_DICT_VALUES          "values"
 #define CTR_DICT_ENTRIES         "entries"
 #define CTR_DICT_COMPARE_SET     "compare:"
+#define CTR_DICT_HAS             "has:"
 #define CTR_DICT_NEW_ARRAY_AND_PUSH_SYMBOL       "←"
 #define CTR_DICT_RANDOMIZE_BYTES_WITH_LENGTH     "drawFrom:length:"
 #define CTR_DICT_ASCII_UPPER_CASE                "asciiUpperCase" 

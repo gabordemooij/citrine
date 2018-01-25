@@ -569,8 +569,7 @@ ctr_object* ctr_map_to_string(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_map_values(ctr_object* myself, ctr_argument* argumentList);
-
-
+ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Console Interface
