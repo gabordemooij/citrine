@@ -314,7 +314,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 		o = *( myself->value.avalue->elements + i );
 		str = ctr_internal_cast2string(o);
 		pos = len;
-		if (len == 0) {
+		if (i == myself->value.avalue->tail) {
 			len = str->value.svalue->vlen;
 			result = ctr_heap_allocate(sizeof(char)*len);
 		} else {
@@ -326,7 +326,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 		memcpy(result+pos, str->value.svalue->value, str->value.svalue->vlen);
 	}
 	resultStr = ctr_build_string(result, len);
-	if (len > 0) ctr_heap_free( result );
+	if (i > myself->value.avalue->tail) ctr_heap_free( result );
 	return resultStr;
 }
 
