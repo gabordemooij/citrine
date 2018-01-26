@@ -556,6 +556,7 @@ ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_array_index_of(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_array_copy(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * HashMap Interface

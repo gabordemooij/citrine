@@ -697,6 +697,37 @@ ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Array] copy
+ *
+ * Copies the array. The array object will answer this message by
+ * returning a shallow copy of itself. This means that the values in the
+ * newly returned array can be replaced or deleted without affecting
+ * the original array. However, modifying the values in the array will
+ * still cause their counterparts in the original array to be modified
+ * as well.
+ *
+ * Usage:
+ *
+ * ☞ a := Array ← 1 ; 2 ; 3.
+ * ☞ b := a copy.
+ * b put: 999 at: 1. #b @ 1 = 999
+ */
+ctr_object* ctr_array_copy(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_size i = 0;
+	ctr_object* copy = ctr_array_new( CtrStdArray, argumentList );
+	ctr_argument* arg = ctr_heap_allocate(sizeof(ctr_argument));
+	ctr_argument* index   = ctr_heap_allocate( sizeof( ctr_argument ) );
+	for(i = myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
+		index->object = ctr_build_number_from_float((ctr_number) i);
+		arg->object = ctr_array_get( myself, index );
+		ctr_array_push( copy, arg );
+	}
+	ctr_heap_free( arg );
+	ctr_heap_free( index );
+	return copy;
+}
+
+/**
  * @internal
  *
  * Internal sort function, for use with ArraySort.
