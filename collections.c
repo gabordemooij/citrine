@@ -974,6 +974,40 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Map] [Key]: [Value]
+ *
+ * You can fill the map object with key-value pairs by sending any
+ * binary or keyword message that is not part if its standard behaviour.
+ * Likewise you can retrieve any value from the map by sending the corresponding key
+ * as a unary message. This allows for a very natural looking notation to create
+ * and modify map objects.
+ *
+ * Usage:
+ *
+ * ☞ menu := Map new
+ *	Margherita: 11.90, #set using keyword message
+ *	Hawaii: 12.99,
+ *	QuattroFormaggi: 13.00, #set using binary message
+ *	X 15.99.
+ *
+ * ✎ write: ( menu @ 'Hawaii' ), brk. #retrieve with @
+ * ✎ write: ( menu Margherita ), brk. #retrieve with message
+ * ✎ write: ( menu @ 'X' ), brk. #in this case you have to use @
+ *
+ */
+ctr_object* ctr_map_key_value(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* newKey;
+	ctr_object* key = ctr_internal_cast2string(argumentList->object);
+	newKey = key;
+	if (key->value.svalue->vlen>1) {
+		newKey = ctr_build_string(key->value.svalue->value,key->value.svalue->vlen-1);
+	}
+	argumentList->object = argumentList->next->object;
+	argumentList->next->object = newKey;
+	return ctr_map_put( myself, argumentList );
+}
+
+/**
  * [Map] - [String]
  *
  * Deletes the entry, identified by the key specified in [String], from
