@@ -259,6 +259,72 @@ ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
+ * [Object] case: [Object] do: [Block].
+ *
+ * This message makes the recipient compare itself to the specified object.
+ * If the recipient considers itself to be equal, it will carry out the
+ * instructions in the associated block of code. The recipient will send
+ * the message '=' to itself with the other object as an argument. This leaves
+ * it up to the recipient to determine whether the objects are considered
+ * equal. If the recipient decides the objects are not equal, the associated
+ * code block will be ignored. Note that this allows you to implement a
+ * so-called switch-statement like those found in other languages. Because
+ * of the generic implementation, you can use the case statements on almost
+ * any object. Case-do statements may provide a readable alternative to a
+ * long list of if-else messages.
+ *
+ * The example program below will print the text 'It's a Merlot!'.
+ *
+ * Usage:
+ *
+ * #Can we use a switch statement in Citrine?
+ *
+ * #create a good wine
+ * ☞ wine := Object new.
+ *
+ * #define a string representation for this wine
+ * wine on: 'toString' do: {
+ *	↲ 'merlot'.
+ * }.
+ *
+ * #define how wines are to be compared
+ * wine on: '=' do: { :other wine
+ *	↲ ( me toString = other wine ).
+ *}.
+ *
+ * #now select the correct wine from the list
+ * wine
+ *	case: 'cabernet' do: { ✎ write: 'it\'s a Cabernet!'. },
+ *	case: 'syrah'    do: { ✎ write: 'it\'s a Syrah!'.    },
+ *	case: 'merlot'   do: { ✎ write: 'it\'s a Merlot!'.   },
+ *	case: 'malbec'   do: { ✎ write: 'it\'s a Malbec!'.   }.
+ */
+ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* block = argumentList->next->object;
+	ctr_argument* compareArguments;
+	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
+		CtrStdFlow = ctr_build_string_from_cstring("Expected block for case.");
+		return CtrStdNil;
+	}
+	compareArguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+	compareArguments->object = argumentList->object;
+	compareArguments->next = NULL;
+	if (
+		ctr_internal_cast2bool(
+			ctr_send_message( myself, "=", 1, compareArguments )
+		)->value.bvalue == 1) {
+		block->info.sticky = 1;
+		ctr_block_run(block, compareArguments, NULL);
+		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL; /* consume continue */
+		if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
+		block->info.mark = 0;
+		block->info.sticky = 0;
+	}
+	ctr_heap_free( compareArguments );
+	return myself;
+}
+
+/**
  * [Object] message: [String] arguments: [Array]
  *
  * Sends a custom or 'dynamic' message to an object. This takes a string containing
