@@ -1,0 +1,10 @@
+#Simple case:do: statement
+location := 'Wetering Brug'.
+x := 0.
+location
+	case: 'Lisserweg' do: { x := 1 .},
+	case: 'Wetering Brug' do: { x := 2. },
+	case: 'Immink' do: { x := 3. }.
+
+Pen write: x, brk.
+
