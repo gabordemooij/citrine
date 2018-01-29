@@ -1,0 +1,3 @@
+#Can we use the List alias and constants?
+☞ x := List ← A-Z ; a-z ; 𝛑 ; pi.
+✎ write: x, brk.

@@ -659,6 +659,11 @@ void ctr_initialize_world() {
 	CtrStdNumber->link = CtrStdObject;
 	CtrStdNumber->info.sticky = 1;
 
+	ctr_object* pi = ctr_build_number_from_float(3.14159265358979323846);
+	pi->info.sticky = 1;
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PI ), pi, 0);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PI_SYMBOL ), pi, 0);
+
 	/* String */
 	CtrStdString = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_BYTES ), &ctr_string_bytes );
@@ -711,12 +716,12 @@ void ctr_initialize_world() {
 	CtrStdString->link = CtrStdObject;
 	CtrStdString->info.sticky = 1;
 
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_LC_A_Z ),
-		ctr_build_string_from_cstring("abcdefghijklmnopqrstuvwxyz"), 0
-	);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_UC_A_Z ),
-		ctr_build_string_from_cstring("ABCDEFGHIJKLMNOPQRSYUVWXYZ"), 0
-	);
+	ctr_object* az = ctr_build_string_from_cstring("abcdefghijklmnopqrstuvwxyz");
+	ctr_object* AZ = ctr_build_string_from_cstring("ABCDEFGHIJKLMNOPQRSYUVWXYZ");
+	az->info.sticky = 1;
+	AZ->info.sticky = 1;
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_LC_A_Z ), az, 0);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_UC_A_Z ), AZ, 0);
 
 	/* Block */
 	CtrStdBlock = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBLOCK);
