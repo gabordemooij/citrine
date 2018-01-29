@@ -255,6 +255,8 @@
 #define CTR_DICT_COPY            "copy"
 #define CTR_DICT_CASE_DO         "case:do:"
 #define CTR_DICT_LIST_OBJECT     "List"
+#define CTR_DICT_UC_A_Z          "A-Z"
+#define CTR_DICT_LC_A_Z          "a-z"
 #define CTR_DICT_NEW_ARRAY_AND_PUSH_SYMBOL       "←"
 #define CTR_DICT_RANDOMIZE_BYTES_WITH_LENGTH     "drawFrom:length:"
 #define CTR_DICT_ASCII_UPPER_CASE                "asciiUpperCase" 
