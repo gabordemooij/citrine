@@ -12,6 +12,18 @@
 #include "siphash.h"
 
 /**
+ * [List] new
+ *
+ * Creates a new list or array. List is an alias for array.
+ * For more details regarding the list object please consult the Array API.
+ *
+ * Usage:
+ *
+ * ☞ todo := List ← 'dishes' ; 'cleaning'.
+ *
+ */
+
+/**
  * [Array] new
  *
  * Creates a new Array.
