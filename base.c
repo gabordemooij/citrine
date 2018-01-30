@@ -815,6 +815,8 @@ ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList) {
  * 1
  * -8
  * 2.5
+ * pi
+ * 𝛑
  *
  * Represents a number object in Citrine.
  */
@@ -1500,10 +1502,21 @@ ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList
  *
  * 'Hello World, this is a String.'
  *
- * A sequence of characters. In Citrine, strings are UTF-8 aware.
+ * A sequence of bytes or characters. In Citrine, strings are UTF-8 aware.
  * You may only use single quotes. To escape a character use the
- * backslash '\' character.
+ * backslash '\' character. Use the special characters ↵ and ⇿ to
+ * insert a newline or tab respectively.
  *
+ * The following string constants exist:
+ *
+ * a-z equals abcdefghijklmnopqrstuvwxyz
+ * A-Z equals ABCDEFGHIJKLMNOPQRESTUVWXYZ
+ *
+ * Strings in Citrine represent a series of bytes. Strings can be
+ * interpreted as real bytes or as text depending on the messages
+ * send. For instance, the message 'bytes' returns the number of bytes
+ * in a string, while the message 'length' returns the number of
+ * characters (as defined as separate UTF-8 code points) in a string.
  */
 ctr_object* ctr_build_string(char* stringValue, long size) {
 	ctr_object* stringObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
