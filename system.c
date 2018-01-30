@@ -404,6 +404,28 @@ ctr_object* ctr_slurp_obtain( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
+ * [ShortSlurp] [String]
+ *
+ * The Short Slurp Object responds to any unary message by answering
+ * with the String object respresenting the contents of the message.
+ * The Short Slurp Object appears as a little bullet and can be used
+ * to avoid the use of quotes, for instance in array notation. The following
+ * code creates an array using no quotes but bullets instead. This works because
+ * every bullet refers to the global Short Slurp object that transforms the
+ * message into a string.
+ *
+ * Usage:
+ *
+ * ☞ meals := List ←
+ *	• hamburger ;
+ *	• pizza ;
+ *	• haggis.
+ */
+ctr_object* ctr_slurpshort_respond_to( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_internal_cast2string( argumentList->object );
+}
+
+/**
  * [Program] argument: [Number]
  *
  * Obtains an argument from the CLI invocation.

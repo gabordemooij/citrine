@@ -940,7 +940,14 @@ void ctr_initialize_world() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_SLURP ), CtrStdSlurp, 0 );
 	CtrStdSlurp->link = CtrStdObject;
 	CtrStdSlurp->info.sticky = 1;
-	
+
+	/* Slurp short */
+	CtrStdSlurpShort = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
+	ctr_internal_create_func(CtrStdSlurpShort, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ), &ctr_slurpshort_respond_to );
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_BULLET ), CtrStdSlurpShort, 0 );
+	CtrStdSlurpShort->link = CtrStdObject;
+	CtrStdSlurpShort->info.sticky = 1;
+
 	/* Broom */
 	CtrStdGC = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_SWEEP ), &ctr_gc_collect );
