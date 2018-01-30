@@ -841,6 +841,15 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 	return string;
 }
 
+/**
+ * [Array] fill: [Number] with: [Object]
+ *
+ * Fills the array with the specified number of objects.
+ *
+ * Usage:
+ *
+ * ☞ a := Array new fill: 42 with: 'x'.
+ */
 ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
 	size_t n;
 	int i;
@@ -855,6 +864,22 @@ ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
 	return myself;
 }
 
+/**
+ * [Array] column: [Number]
+ *
+ * Extracts the specified column from the array.
+ * In a nested array this message will select the Nth
+ * element of every array. N is specified using the
+ * Number argument.
+ *
+ * Usage:
+ *
+ * ☞ a := Array ←
+ *	(Array ← 1 ; 2 ; 3) ;
+ *	(Array ← 4 ; 5 ; 6) ;
+ *	(Array ← 7 ; 8 ; 9).
+ * ☞ b := a column: 1. #2,5,8
+ */
 ctr_object* ctr_array_column( ctr_object* myself, ctr_argument* argumentList ) {
 	int i;
 	size_t n;
