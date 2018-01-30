@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) {
 	ctr_heap_free_rest();
 	//For memory profiling
 	if ( ctr_gc_alloc != 0 ) {
-		printf( "[WARNING] Citrine has detected an internal memory leak of: %" PRIu64 " bytes.\n", ctr_gc_alloc );
+		fprintf( stderr, "[WARNING] Citrine has detected an internal memory leak of: %" PRIu64 " bytes.\n", ctr_gc_alloc );
 		exit(1);
 	}
 	exit(0);
