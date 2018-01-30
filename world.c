@@ -33,7 +33,7 @@ char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
    FILE* fp;
    fp = fopen(file_name,"r");
    if( fp == NULL ) {
-      printf("Error while opening the file.\n");
+      fprintf(stderr, "Error while opening the file.\n");
       exit(1);
    }
    prev = ftell(fp);
@@ -45,7 +45,7 @@ char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
    ctr_program_length=0;
    while( ( ch = fgetc(fp) ) != EOF ) prg[ctr_program_length++]=ch;
    if ( ctr_program_length != size ) {
-	printf( "Unable to read program file.\n" );
+	fprintf(stderr, "Unable to read program file.\n" );
 	exit(1);
    }
    fclose(fp);
@@ -1010,7 +1010,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	if (CtrStdFlow != NULL) return CtrStdNil; /* Error mode, ignore subsequent messages until resolved. */
 	if ( ctr_program_security_profile & CTR_SECPRO_COUNTDOWN ) {
 		if ( ctr_program_tick > ctr_program_maxtick ) {
-			printf( "This program has exceeded the maximum number of messages.\n" );
+			fprintf(stderr,"This program has exceeded the maximum number of messages.\n" );
 			exit(1);
 		}
 		ctr_program_tick += 1;
@@ -1067,7 +1067,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 				}
 			}
 			if ( !messageApproved ) {
-				printf( "Native message not allowed in eval %s.\n", msg->value.svalue->value );
+				fprintf(stderr, "Native message not allowed in eval %s.\n", msg->value.svalue->value );
 				exit(1);
 			}
 		}
@@ -1075,7 +1075,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	}
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTBLOCK ) {
 		if ( ctr_program_security_profile & CTR_SECPRO_EVAL ) {
-			printf( "Custom message not allowed in eval.\n" );
+			fprintf(stderr, "Custom message not allowed in eval.\n" );
 			exit(1);
 		}
 		result = ctr_block_run(methodObject, argumentList, receiverObject);

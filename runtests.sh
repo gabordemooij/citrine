@@ -39,7 +39,7 @@ for i in $(find tests -name 'test*.ctr'); do
 	fitem=$i
 	echo -n "$fitem interpret";
 	fexpect="${i%%.ctr}.exp"
-	result=`echo "test" | ./ctr ${fitem}`
+	result=`echo "test" | ./ctr ${fitem} 2>&1`
 	expected=`cat $fexpect`
 	if [ "$result" = "$expected" ]; then
 		echo "[$j]"

@@ -1054,7 +1054,7 @@ ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* arguments;
 	int t;
 	int i;
-	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) { printf("Expected code block."); exit(1); }
+	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) { fprintf(stderr, "Expected code block."); exit(1); }
 	block->info.sticky = 1;
 	t = myself->value.nvalue;
 	arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
@@ -1693,7 +1693,7 @@ ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 	n1 = myself->value.svalue->vlen;
 	n2 = strObject->value.svalue->vlen;
 	if ( n1 < 0 || n2 < 0 ) {
-		printf("Invalid String length detected.\n");
+		fprintf(stderr, "Invalid String length detected.\n");
 		exit(1);
 	}
 	if ( ( n1 + n2 ) == 0 ) return myself;

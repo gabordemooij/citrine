@@ -85,7 +85,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	fseek(f, 0, SEEK_SET);
 	buffer=(char *)ctr_heap_allocate(fileLen+1);
 	if (!buffer){
-		printf("Out of memory\n");
+		fprintf(stderr,"Out of memory\n");
 		fclose(f);exit(1);	
 	}
 	fread(buffer, fileLen, 1, f);

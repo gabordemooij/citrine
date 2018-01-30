@@ -20,9 +20,9 @@ char* ctr_cparse_current_program;
 void ctr_cparse_emit_error_unexpected( int t, char* hint )
 {
 	char* message = ctr_clex_tok_describe( t );
-	printf( "Parse error, unexpected %s ( %s: %d )\n", message,  ctr_cparse_current_program, ctr_clex_line_number+1);
+	fprintf(stderr, "Parse error, unexpected %s ( %s: %d )\n", message,  ctr_cparse_current_program, ctr_clex_line_number+1);
 	if (hint) {
-		printf( "%s", hint );
+		fprintf(stderr, "%s", hint );
 	}
 	exit(1);
 }

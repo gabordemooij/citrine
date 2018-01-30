@@ -595,7 +595,7 @@ void ctr_check_permission( uint8_t operationID ) {
 		if ( operationID == CTR_SECPRO_FORK ) {
 			reason = "This program is not allowed to spawn other processes or serve remote objects.";
 		}
-		printf( "%s\n", reason );
+		fprintf(stderr, "%s\n", reason );
 		exit(1);
 	}
 }
@@ -690,7 +690,7 @@ ctr_object* ctr_program_forbid_fork( ctr_object* myself, ctr_argument* argumentL
  */
 ctr_object* ctr_program_countdown( ctr_object* myself, ctr_argument* argumentList ) {
 	if ( ctr_program_security_profile & CTR_SECPRO_COUNTDOWN ) {
-		printf( "Message quota cannot change.\n" );
+		fprintf(stderr, "Message quota cannot change.\n" );
 		exit(1);
 	}
 	ctr_program_security_profile |= CTR_SECPRO_COUNTDOWN;

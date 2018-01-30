@@ -233,13 +233,13 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 			if (CtrStdFlow && CtrStdFlow != CtrStdExit && ctr_cwlk_subprogram == 0) {
 				fprintf(stderr,"Uncatched error has occurred.\n");
 				if (CtrStdFlow->info.type == CTR_OBJECT_TYPE_OTSTRING) {
-					fwrite(CtrStdFlow->value.svalue->value, sizeof(char), CtrStdFlow->value.svalue->vlen, stdout);
+					fwrite(CtrStdFlow->value.svalue->value, sizeof(char), CtrStdFlow->value.svalue->vlen, stderr);
 					fprintf(stderr,"\n");
 				}
 				for ( i = ctr_callstack_index; i > 0; i--) {
 					fprintf(stderr,"#%d ", i);
 					stackNode = ctr_callstack[i-1];
-					fwrite(stackNode->value, sizeof(char), stackNode->vlen, stdout);
+					fwrite(stackNode->value, sizeof(char), stackNode->vlen, stderr);
 					mapItem = ctr_source_map_head;
 					line = -1;
 					while(mapItem) {
