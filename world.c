@@ -654,6 +654,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_BETWEEN ),&ctr_number_between );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_TO_BYTE ),&ctr_number_to_byte );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_QUALIFY ),&ctr_number_qualify );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ),&ctr_number_qualification );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ),&ctr_number_qualify );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NUMBER ), CtrStdNumber, 0);
 	CtrStdNumber->link = CtrStdObject;
@@ -1102,6 +1103,10 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 			break;
 		case CTR_OBJECT_TYPE_OTNUMBER:
 			object = ctr_build_number_from_float(o->value.nvalue);
+			ctr_object* q = ctr_internal_object_find_property(o, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), CTR_CATEGORY_PRIVATE_PROPERTY);
+			if (q != NULL) {
+				ctr_internal_object_set_property(object, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), q, CTR_CATEGORY_PRIVATE_PROPERTY );
+			}
 			break;
 		case CTR_OBJECT_TYPE_OTSTRING:
 			object = ctr_build_string(o->value.svalue->value, o->value.svalue->vlen);
@@ -1139,6 +1144,10 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 			break;
 		case CTR_OBJECT_TYPE_OTNUMBER:
 			object = ctr_build_number_from_float(o->value.nvalue);
+			ctr_object* q = ctr_internal_object_find_property(o, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), CTR_CATEGORY_PRIVATE_PROPERTY);
+			if (q != NULL) {
+				ctr_internal_object_set_property(object, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), q, CTR_CATEGORY_PRIVATE_PROPERTY );
+			}
 			break;
 		case CTR_OBJECT_TYPE_OTSTRING:
 			object = ctr_build_string(o->value.svalue->value, o->value.svalue->vlen);
@@ -1176,6 +1185,10 @@ ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* o) {
 			break;
 		case CTR_OBJECT_TYPE_OTNUMBER:
 			object = ctr_build_number_from_float(o->value.nvalue);
+			ctr_object* q = ctr_internal_object_find_property(o, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), CTR_CATEGORY_PRIVATE_PROPERTY);
+			if (q != NULL) {
+				ctr_internal_object_set_property(object, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), q, CTR_CATEGORY_PRIVATE_PROPERTY );
+			}
 			break;
 		case CTR_OBJECT_TYPE_OTSTRING:
 			object = ctr_build_string(o->value.svalue->value, o->value.svalue->vlen);

@@ -462,6 +462,7 @@ ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_to_byte(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_number_qualification(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_number_respond_to(ctr_object* myself, ctr_argument* argumentList);
 
 

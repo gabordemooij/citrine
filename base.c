@@ -1319,11 +1319,56 @@ ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(floor(myself->value.nvalue));
 }
 
+/**
+ * [Number] qualify: 'meters'.
+ *
+ * Qualifies a number. Alias for: [Number] [String].
+ * See the [Number] [String] message signature for more details.
+ */
+
+/**
+ * [Number] [String]
+ *
+ * Qualifies a number. By sending an arbitrary (undocumented) unary message to
+ * a Number object your message will be set as the qualification property of the number
+ * and passed around along with the number value itself.
+ *
+ * Usage:
+ *
+ * Number learn: 'plus:' means: '+'.
+ * Number on: '+' do: { :x
+ *	☞ rate := 1.
+ *	☞ currency := x qualification.
+ *	(currency = 'euros') ifTrue: {
+ *		rate := 2.
+ *	}.
+ *	↲ (⛏ plus: (x * rate)).
+ * }.
+ * ☞ money := 3 dollars + 2 euros. #7
+ */
 ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( "qualification" ), ctr_internal_cast2string( argumentList->object ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), ctr_internal_cast2string( argumentList->object ), CTR_CATEGORY_PRIVATE_PROPERTY );
 	return myself;
 }
 
+/**
+ * [Number] qualification.
+ *
+ * Returns the qualification of a number object. For instance, as a
+ * number (let's say 99) has been qualified as the number of bottles using
+ * a message like: '99 bottles' this message will return the descriptive string
+ * 'bottles'. For usage examples, please consult the [Number] [String] message
+ * signature.
+ */
+ctr_object* ctr_number_qualification(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* answer = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	if ( answer == NULL ) return CtrStdNil;
+	return answer;
+}
+
+/**
+ * @internal
+ */
 ctr_object* ctr_number_respond_to(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_number_qualify( myself, argumentList );
 }

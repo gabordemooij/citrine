@@ -1,0 +1,12 @@
+#Can we qualify numbers?
+Number learn: 'plus:' means: '+'.
+Number on: '+' do: { :x
+	☞ rate := 1.
+	☞ currency := x qualification.
+	(currency = 'euros') ifTrue: {
+		rate := 2.
+	}.
+	↲ (⛏ plus: (x * rate)).
+}.
+☞ money := 3 dollars + 2 euros. #7
+✎ write: money, brk.
