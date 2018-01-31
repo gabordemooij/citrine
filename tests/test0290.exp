@@ -1,8 +1,8 @@
-Uncatched error has occurred.
-Replacement must be an array.
-#2 replace:length:with: (tests/test0290.ctr: 26)
-#1 buy (tests/test0290.ctr: 26)
 apple,cinnamon,pineapple,cheese
 apple,cinnamon,pineapple
 apple,berry
 berry,choco,cheese
+Uncatched error has occurred.
+Replacement must be an array.
+#2 replace:length:with: (tests/test0290.ctr: 26)
+#1 buy (tests/test0290.ctr: 26)

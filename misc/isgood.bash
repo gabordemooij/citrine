@@ -1,5 +1,10 @@
 #!/bin/bash
-result=`./ctr 2>&1 $1`
+rm /tmp/a
+rm /tmp/b
+touch /tmp/a
+touch /tmp/b
+result1=`./ctr $1 1>/tmp/a 2>/tmp/b`
+result=`cat /tmp/a /tmp/b`
 dest="${1:0: -4}.exp"
 touch $dest
 echo "$result" > $dest

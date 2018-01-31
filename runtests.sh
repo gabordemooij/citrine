@@ -36,10 +36,13 @@ make clean;
 
 j=1
 for i in $(find tests -name 'test*.ctr'); do
+	touch /tmp/a
+	touch /tmp/b
 	fitem=$i
 	echo -n "$fitem interpret";
 	fexpect="${i%%.ctr}.exp"
-	result=`echo "test" | ./ctr ${fitem} 2>&1`
+	result1=`echo "test" | ./ctr ${fitem} 1>/tmp/a 2>/tmp/b`
+	result=`cat /tmp/a /tmp/b`
 	expected=`cat $fexpect`
 	if [ "$result" = "$expected" ]; then
 		echo "[$j]"
@@ -53,6 +56,8 @@ for i in $(find tests -name 'test*.ctr'); do
 		echo $result
 		exit 1
 	fi
+	rm /tmp/a
+	rm /tmp/b
 	headline=$(head -n 1 $fitem)
 done
 echo ""

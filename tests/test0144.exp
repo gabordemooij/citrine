@@ -1,6 +1,5 @@
-Uncatched error has occurred.
+coffeeUncatched error has occurred.
 Object property not found: tealeaves
 #3 tealeaves (tests/test0144.ctr: 16)
 #2 makeTea (tests/test0144.ctr: 27)
 #1 write: (tests/test0144.ctr: 25)
-coffee
