@@ -885,6 +885,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SHELL ), &ctr_program_shell );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_USE_STDERR ), &ctr_program_use_stderr );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_USE_SYSLOG ), &ctr_program_use_syslog );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_program_to_string );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PROGRAM ), CtrStdCommand, 0 );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_COMP_ICON ), CtrStdCommand, 0 );
 	CtrStdCommand->link = CtrStdObject;

@@ -652,6 +652,7 @@ ctr_object* ctr_program_default_port(ctr_object* myself, ctr_argument* argumentL
 ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_use_stderr(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_use_syslog(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_program_to_string(ctr_object* myself, ctr_argument* argumentList );
 
 void ctr_check_permission( uint8_t operationID );
 uint8_t ctr_program_security_profile;

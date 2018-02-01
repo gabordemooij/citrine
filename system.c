@@ -906,7 +906,8 @@ ctr_object* ctr_program_join(ctr_object* myself, ctr_argument* argumentList) {
  * [Program] pid
  *
  * Returns the process identification number associated with the
- * current program.
+ * program. If the program instance refers to the currently running
+ * program PID 0 will be returned.
  */
 ctr_object* ctr_program_pid(ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* pidObject;
@@ -917,6 +918,22 @@ ctr_object* ctr_program_pid(ctr_object* myself, ctr_argument* argumentList ) {
 	);
 	if (pidObject == NULL) return CtrStdNil;
 	return ctr_internal_cast2number( pidObject );
+}
+
+/**
+ * [Program] toString
+ *
+ * Returns a string representation of the program. This will be something like
+ * [PID:2833], or in case of the currently active program: [PID:0].
+ */
+ctr_object* ctr_program_to_string(ctr_object* myself, ctr_argument* argumentList ) {
+	int pid = (int) ctr_program_pid( myself, argumentList )->value.nvalue;
+	char* info = ctr_heap_allocate( sizeof(char) * 40 );
+	ctr_object* answer;
+	snprintf( info, 40, "[PID:%d]", pid);
+	answer = ctr_build_string_from_cstring( info );
+	ctr_heap_free( info );
+	return answer;
 }
 
 /**
