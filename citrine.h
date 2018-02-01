@@ -650,6 +650,8 @@ ctr_object* ctr_program_accept_number(ctr_object* myself, ctr_argument* argument
 ctr_object* ctr_program_remote(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_default_port(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_program_use_stderr(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_program_use_syslog(ctr_object* myself, ctr_argument* argumentList );
 
 void ctr_check_permission( uint8_t operationID );
 uint8_t ctr_program_security_profile;
@@ -759,3 +761,5 @@ char* ctr_heap_allocate_cstring( ctr_object* o );
 
 uint8_t  ctr_accept_n_connections;
 uint16_t ctr_default_port;
+
+char ctr_program_log_type;

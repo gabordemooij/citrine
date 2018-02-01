@@ -933,8 +933,45 @@ ctr_object* ctr_program_log_generic(ctr_object* myself, ctr_argument* argumentLi
 			argumentList->object
 		)
 	);
-	syslog( level, "%s", message );
+	if (ctr_program_log_type == 's') {
+		syslog( level, "%s", message );
+	} else {
+		if (level == LOG_WARNING ) {
+			fwrite( CTR_ANSI_COLOR_YELLOW, sizeof(char), strlen(CTR_ANSI_COLOR_RED), stderr);
+		}
+		if (level == LOG_ERR || level == LOG_EMERG ) {
+			fwrite( CTR_ANSI_COLOR_RED, sizeof(char), strlen(CTR_ANSI_COLOR_RED), stderr);
+		}
+		fwrite( message, sizeof(char), strlen(message), stderr);
+		fwrite( "\n", sizeof(char), 1, stderr);
+	}
 	ctr_heap_free( message );
+	return myself;
+}
+
+/**
+ * [Program] useStandardError
+ *
+ * Makes the running programming use standard error for logging.
+ * Default is syslog. Use this message to select the standard error channel
+ * for logging. After sending this message, all messages that write log entries
+ * will use the standard error channel.
+ */
+ctr_object* ctr_program_use_stderr(ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_program_log_type = 'e';
+	return myself;
+}
+
+/**
+ * [Program] useSyslog
+ *
+ * Makes the running programming use the system logger for logging.
+ * This is the default. Use this message to select the syslog channel
+ * for logging. After sending this message, all messages that write log entries
+ * will use the system logger facility.
+ */
+ctr_object* ctr_program_use_syslog(ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_program_log_type = 's';
 	return myself;
 }
 

@@ -260,6 +260,8 @@
 #define CTR_DICT_PI              "pi"
 #define CTR_DICT_PI_SYMBOL       "𝛑"
 #define CTR_DICT_BULLET          "•"
+#define CTR_DICT_USE_STDERR      "useStandardError"
+#define CTR_DICT_USE_SYSLOG      "useSysLog"
 #define CTR_DICT_NEW_ARRAY_AND_PUSH_SYMBOL       "←"
 #define CTR_DICT_RANDOMIZE_BYTES_WITH_LENGTH     "drawFrom:length:"
 #define CTR_DICT_ASCII_UPPER_CASE                "asciiUpperCase" 
