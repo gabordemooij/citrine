@@ -186,6 +186,49 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [Object] case: [Object] do: [Block].
+.nf
+    
+     This message makes the recipient compare itself to the specified object.
+     If the recipient considers itself to be equal, it will carry out the
+     instructions in the associated block of code. The recipient will send
+     the message '=' to itself with the other object as an argument. This leaves
+     it up to the recipient to determine whether the objects are considered
+     equal. If the recipient decides the objects are not equal, the associated
+     code block will be ignored. Note that this allows you to implement a
+     so-called switch-statement like those found in other languages. Because
+     of the generic implementation, you can use the case statements on almost
+     any object. Case-do statements may provide a readable alternative to a
+     long list of if-else messages.
+    
+     The example program below will print the text 'It's a Merlot!'.
+    
+     Usage:
+    
+     #Can we use a switch statement in Citrine?
+    
+     #create a good wine
+     ☞ wine := Object new.
+    
+     #define a string representation for this wine
+     wine on: 'toString' do: {
+    	↲ 'merlot'.
+     }.
+    
+     #define how wines are to be compared
+     wine on: '=' do: { :other wine
+    	↲ ( me toString = other wine ).
+    }.
+    
+     #now select the correct wine from the list
+     wine
+    	case: 'cabernet' do: { ✎ write: 'it\\'s a Cabernet!'. },
+    	case: 'syrah'    do: { ✎ write: 'it\\'s a Syrah!'.    },
+    	case: 'merlot'   do: { ✎ write: 'it\\'s a Merlot!'.   },
+    	case: 'malbec'   do: { ✎ write: 'it\\'s a Malbec!'.   }.
+.fi
+.BR.BR.BR
+
 .B [Object] message: [String] arguments: [Array]
 .nf
     
@@ -349,16 +392,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Boolean] flip
-.nf
-    
-     'Flips a coin'. Returns a random boolean value True or False.
-    
-     Usage:
-     coinLandsOn := (Boolean flip).
-.fi
-.BR.BR.BR
-
 .B [Boolean] either: [this] or: [that]
 .nf
     
@@ -435,6 +468,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
      1
      -8
      2.5
+     pi
+     𝛑
     
      Represents a number object in Citrine.
 .fi
@@ -730,6 +765,49 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [Number] qualify: 'meters'.
+.nf
+    
+     Qualifies a number. Alias for: [Number] [String].
+     See the [Number] [String] message signature for more details.
+.fi
+.BR.BR.BR
+
+.B [Number] [String]
+.nf
+    
+     Qualifies a number. By sending an arbitrary (undocumented) unary message to
+     a Number object your message will be set as the qualification property of the number
+     and passed around along with the number value itself.
+    
+     Usage:
+    
+     Number learn: 'plus:' means: '+'.
+     Number on: '+' do: { :x
+    	☞ rate := 1.
+    	☞ currency := x qualification.
+    	(currency = 'euros') ifTrue: {
+    		rate := 2.
+    	}.
+    	↲ (⛏ plus: (x * rate)).
+     }.
+     ☞ money := 3 dollars + 2 euros. #7
+.fi
+.BR.BR.BR
+
+.B [Number] qualification.
+.nf
+    
+     Returns the qualification of a number object. For instance, as a
+     number (let's say 99) has been qualified as the number of bottles using
+     a message like: '99 bottles' this message will return the descriptive string
+     'bottles'. For usage examples, please consult the [Number] [String] message
+     signature.
+.fi
+.BR.BR.BR
+
+.BR.BR.BR
+
 .B [Number] ceil
 .nf
     
@@ -853,10 +931,21 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      'Hello World, this is a String.'
     
-     A sequence of characters. In Citrine, strings are UTF-8 aware.
+     A sequence of bytes or characters. In Citrine, strings are UTF-8 aware.
      You may only use single quotes. To escape a character use the
-     backslash '\\' character.
+     backslash '\\' character. Use the special characters ↵ and ⇿ to
+     insert a newline or tab respectively.
     
+     The following string constants exist:
+    
+     a-z equals abcdefghijklmnopqrstuvwxyz
+     A-Z equals ABCDEFGHIJKLMNOPQRESTUVWXYZ
+    
+     Strings in Citrine represent a series of bytes. Strings can be
+     interpreted as real bytes or as text depending on the messages
+     send. For instance, the message 'bytes' returns the number of bytes
+     in a string, while the message 'length' returns the number of
+     characters (as defined as separate UTF-8 code points) in a string.
 .fi
 .BR.BR.BR
 
@@ -1199,6 +1288,53 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [String] compare: [String]
+.nf
+    
+     Compares a string using the UTF-8 compatible strcmp function.
+    
+     Usage:
+    
+     word compare: other.
+.fi
+.BR.BR.BR
+
+.B [String] < [String]
+.nf
+    
+     Returns True if the first String comes before the latter
+     alphabetically. The actual comparison is based on the UTF-8 compatible
+     function strcmp.
+.fi
+.BR.BR.BR
+
+.B [String] ≤ [String]
+.nf
+    
+     Returns True if the first String comes before or at the same
+     position as the latter alphabetically. The actual comparison is based on the UTF-8 compatible
+     function strcmp.
+.fi
+.BR.BR.BR
+
+.B [String] > [String]
+.nf
+    
+     Returns True if the first String comes after the latter
+     alphabetically. The actual comparison is based on the UTF-8 compatible
+     function strcmp.
+.fi
+.BR.BR.BR
+
+.B [String] ≥ [String]
+.nf
+    
+     Returns True if the first String comes after or at the same position as the latter
+     alphabetically. The actual comparison is based on the UTF-8 compatible
+     function strcmp.
+.fi
+.BR.BR.BR
+
 .B [String] htmlEscape
 .nf
     
@@ -1236,14 +1372,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Escapes all single quotes in a string. Sending this message to a
      string will cause all single quotes (') to be replaced with (\\').
-.fi
-.BR.BR.BR
-
-.B [String] randomizeBytesWithLength: [Number].
-.nf
-    
-     Returns a randomized string with the specified length using the pool of
-     bytes contained in the String object.
 .fi
 .BR.BR.BR
 
@@ -1396,6 +1524,19 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Returns a string representation of the Block. This basic behavior, part
      of any object will just return [Block]. Other objects typically override this
      behavior with more useful implementations.
+.fi
+.BR.BR.BR
+
+.B [List] new
+.nf
+    
+     Creates a new list or array. List is an alias for array.
+     For more details regarding the list object please consult the Array API.
+    
+     Usage:
+    
+     ☞ todo := List ← 'dishes' ; 'cleaning'.
+    
 .fi
 .BR.BR.BR
 
@@ -1649,6 +1790,20 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [Array] - [Number]
+.nf
+    
+     Deletes the element specified by the index number and
+     shrinks the array accordingly. If the index number does not exist,
+     the array will remain the same. This operation changes the array itself.
+    
+     Usage:
+    
+     x := Array ← 1 ; 2 ; 3.
+     x - 1. #1 ; 3
+.fi
+.BR.BR.BR
+
 .B [Array] shift
 .nf
     
@@ -1671,11 +1826,74 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [Array] replace: [Number] length: [Number] with: [Array].
+.nf
+    
+     Returns a copy of the array with the specified elements replaced.
+     The first argument indicates the start index to begin the replacement.
+     Here, 0 means the beginning of the array. The second argument (length)
+     must indicate the number of elements to delete in the copy, counting
+     from the starting point. Finally, one has to provide the replacement
+     array as the third argument.
+     If the replacement array is empty, the specified elements will only be
+     removed from the copy.
+     If the replacement is not an array an error will be thrown.
+    
+     Usage:
+    
+     ☞ cakes := Array ← 'apple' ; 'berry' ; 'choco' ; 'cheese'.
+     #apple, cinnamon, pineapple, cheese
+     ☞ buy := cakes replace: 1 length: 2 with: ( Array ← 'cinnamon' ; 'pineapple' ).
+     #apple, cinnamon, pineapple
+     ☞ buy := cakes replace: 1 length: 12 with: ( Array ← 'cinnamon' ; 'pineapple' ).
+     #apple, berry
+     ☞ buy := cakes replace: 2 length: 10 with: ( Array new ).
+     #berry, choco, cheese
+     ☞ buy := cakes replace: '' length: '1' with: ( Array new ).
+     #error...
+     ☞ buy := cakes replace: '' length: '1' with: 'x'.
+    
+.fi
+.BR.BR.BR
+
 .B [Array] + [Array]
 .nf
     
      Returns a new array, containing elements of itself and the other
      array.
+.fi
+.BR.BR.BR
+
+.B [Array] by: [Array].
+.nf
+    
+     Combines the first array with the second one thus creating
+     a map. The keys of the newly generated map will be provided by the
+     first array while the values are extracted from the second one.
+    
+     Usage:
+    
+     ☞ city        := Array ← 'London' ; 'Paris' ; 'Berlin'.
+     ☞ temperature := Array ← '15' ; '16' ; '15'.
+     ☞ weather := temperature by: city.
+.fi
+.BR.BR.BR
+
+.B [Array] copy
+.nf
+    
+     Copies the array. The array object will answer this message by
+     returning a shallow copy of itself. This means that the values in the
+     newly returned array can be replaced or deleted without affecting
+     the original array. However, modifying the values in the array will
+     still cause their counterparts in the original array to be modified
+     as well.
+    
+     Usage:
+    
+     ☞ a := Array ← 1 ; 2 ; 3.
+     ☞ b := a copy.
+     b put: 999 at: 1. #b @ 1 = 999
 .fi
 .BR.BR.BR
 
@@ -1707,6 +1925,57 @@ The following messages are part of the Core API of the Citrine Programming Langu
      attempting to write an Array using a Pen.
     
      You can also use the alias 'serialize'.
+.fi
+.BR.BR.BR
+
+.B [Array] fill: [Number] with: [Object]
+.nf
+    
+     Fills the array with the specified number of objects.
+    
+     Usage:
+    
+     ☞ a := Array new fill: 42 with: 'x'.
+.fi
+.BR.BR.BR
+
+.B [Array] column: [Number]
+.nf
+    
+     Extracts the specified column from the array.
+     In a nested array this message will select the Nth
+     element of every array. N is specified using the
+     Number argument.
+    
+     Usage:
+    
+     ☞ a := Array ←
+    	(Array ← 1 ; 2 ; 3) ;
+    	(Array ← 4 ; 5 ; 6) ;
+    	(Array ← 7 ; 8 ; 9).
+     ☞ b := a column: 1. #2,5,8
+.fi
+.BR.BR.BR
+
+.B [Array] indexOf: [Object].
+.nf
+    
+     Checks whether the specified object occurs in the array and returns the index number
+     if so. If not, the index number -1 will be returned. Note that the comparison
+     will be performed by converting both values to strings.
+    
+     Usage:
+    
+     ☞ colors := Array ← 'red' ; 'green' ; 'blue' ; 3 ; (Array new) ; False ; Nil.
+    
+     ✎ write: (colors indexOf: 'green'), brk. #1
+     ✎ write: (colors indexOf: 'blue'), brk. #2
+     ✎ write: (colors indexOf: 'red'), brk. #0
+     ✎ write: (colors indexOf: 3), brk. #3
+     ✎ write: (colors indexOf: (Array new)), brk. #4
+     ✎ write: (colors indexOf: 'False'), brk. #5
+     ✎ write: (colors indexOf: Nil), brk. #6
+     ✎ write: (colors indexOf: 'purple'), brk. #-1
 .fi
 .BR.BR.BR
 
@@ -1751,6 +2020,77 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [Map] [Key]: [Value]
+.nf
+    
+     You can fill the map object with key-value pairs by sending any
+     binary or keyword message that is not part if its standard behaviour.
+     Likewise you can retrieve any value from the map by sending the corresponding key
+     as a unary message. This allows for a very natural looking notation to create
+     and modify map objects.
+    
+     Usage:
+    
+     ☞ menu := Map new
+    	Margherita: 11.90, #set using keyword message
+    	Hawaii: 12.99,
+    	QuattroFormaggi: 13.00, #set using binary message
+    	X 15.99.
+    
+     ✎ write: ( menu @ 'Hawaii' ), brk. #retrieve with @
+     ✎ write: ( menu Margherita ), brk. #retrieve with message
+     ✎ write: ( menu @ 'X' ), brk. #in this case you have to use @
+    
+.fi
+.BR.BR.BR
+
+.B [Map] - [String]
+.nf
+    
+     Deletes the entry, identified by the key specified in [String], from
+     the map.
+.fi
+.BR.BR.BR
+
+.B [Map] keys
+.nf
+    
+     Returns an array containing all the keys in the map.
+     The order of the keys is undefined. Use the sort message
+     to enforce a specific order. The 'entries' message
+     does exactly the same and is an alias for 'keys'.
+    
+     Usage:
+    
+     ☞ city        := Array ← 'London' ; 'Paris' ; 'Berlin'.
+     ☞ temperature := Array ← '15' ; '16' ; '15'.
+    
+     ☞ weather := temperature by: city.
+     cities := weather entries sort: {
+     	:a :b  ↲ (a compare: b).
+     }.
+.fi
+.BR.BR.BR
+
+.B [Map] values
+.nf
+    
+     Returns an array containing all the keys in the map.
+     The order of the keys is undefined. Use the sort message
+     to enforce a specific order.
+    
+     Usage:
+    
+     ☞ city        := Array ← 'London' ; 'Paris' ; 'Berlin'.
+     ☞ temperature := Array ← '15' ; '16' ; '15'.
+    
+     ☞ weather := temperature by: city.
+     temperatures := weather values sort: {
+     	:a :b  ↲ (a compare: b).
+     }.
+.fi
+.BR.BR.BR
+
 .B [Map] at: [Key]
 .nf
     
@@ -1778,6 +2118,29 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Iterates over the map, passing key-value pairs to the specified block.
      Note that within an each/map block, 'me' and 'my' refer to the collection.
+.fi
+.BR.BR.BR
+
+.B [Map] has: [Object]
+.nf
+    
+     Checks whether the map contains the specified value.
+     Note that the object gets converted to a string before
+     comparison. In case of a map or array this means the comparison
+     will be based on the serialized structure.
+    
+     Usage:
+    
+     ☞ shop := (Map new
+    	put: 'magazine' at: 'books',
+    	put: 'computer' at: 'electronics',
+    	put: 'lipstick' at: 'cosmetics'
+     ).
+     ✎ write: (shop has: 'computer'), brk. #True
+     ✎ write: (shop has: 'sausage'), brk. #False
+     ✎ write: (shop has: 'computers'), brk. #False
+     ✎ write: (shop has: 'compute'), brk. #False
+     ✎ write: (shop has: '2computer'), brk. #False
 .fi
 .BR.BR.BR
 
@@ -1836,6 +2199,16 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Returns the path of a file. The file object will respond to this
      message by returning a string object describing the full path to the
      recipient.
+.fi
+.BR.BR.BR
+
+.B [File] toString
+.nf
+    
+     Returns a string representation of the file. If a path has been associated
+     with this file, this message will return the path of the file on the file system.
+     If no path has been associated with the file, the string [File (no path)] will
+     be returned.
 .fi
 .BR.BR.BR
 
@@ -2026,6 +2399,43 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
+.B [File] unlock.
+.nf
+    
+     Attempts to unlock a file. This message is non-blocking, on failure
+     it will immediately return. Answers True if the file has been
+     unlocked succesfully. Otherwise, the answer is False.
+.fi
+.BR.BR.BR
+
+.B [File] lock.
+.nf
+    
+     Attempts to acquire an exclusive lock on file.
+     This message is non-blocking, on failure
+     it will immediately return. Answers True if the lock has been
+     acquired and False otherwise.
+.fi
+.BR.BR.BR
+
+.B [File] list: [String].
+.nf
+    
+     Returns the contents of the specified folder as a an array.
+     Each entry of the array contains a map with the keys 'file'
+     and 'type'. The 'file' entry contains a string with the name
+     of the file while the 'type' entry contains a string describing
+     the type of the file.
+    
+     Usage:
+    
+     files := File list: '/tmp/testje'.
+    
+.fi
+.BR.BR.BR
+
+.BR.BR.BR
+
 .BR.BR.BR
 
 .BR.BR.BR
@@ -2097,7 +2507,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Shell] call: [String]
+.B [Program] shell: [String]
 .nf
     
      Performs a Shell operation. The Shell object uses a fluid API, so you can
@@ -2121,8 +2531,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.BR.BR.BR
-
+.B [Slurp]
+.nf
+    
+     Slurp is an object that takes any message and converts it to a string.
+     The message 'obtain' can be used to acquire the generated string.
+     The Slurp object is a separate object with minimal messages to avoid
+     'message collision'.
+.fi
 .BR.BR.BR
 
 .B [Slurp] obtain.
@@ -2155,6 +2571,26 @@ The following messages are part of the Core API of the Citrine Programming Langu
      the language of Citrine. However even with these restrictions (some of which might be
      alleviated in future versions) it's quite comfortable and readable to interweave
      an external language in your Citrine script code.
+.fi
+.BR.BR.BR
+
+.B [ShortSlurp] [String]
+.nf
+    
+     The Short Slurp Object responds to any unary message by answering
+     with the String object respresenting the contents of the message.
+     The Short Slurp Object appears as a little bullet and can be used
+     to avoid the use of quotes, for instance in array notation. The following
+     code creates an array using no quotes but bullets instead. This works because
+     every bullet refers to the global Short Slurp object that transforms the
+     message into a string.
+    
+     Usage:
+    
+     ☞ meals := List ←
+    	• hamburger ;
+    	• pizza ;
+    	• haggis.
 .fi
 .BR.BR.BR
 
@@ -2219,10 +2655,25 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Reads all raw input from STDIN.
+     The input message reads the standard input stream of the application
+     which allows you to deal with pipes for instance. However this
+     mechanism can also be used to read raw POSTs in case of CGI applications.
+     Note that unlike other implementations the input messages also collects
+     null bytes, a null byte \\0 in the input stream will NOT cause it to end.
+     Also note that the trailing newline (in case of CLI applications) will
+     be stripped so you don't have to do this manually. This allows for
+     one-liners like the one in the example below.
+     The input message is not allowed if message countdown has been activated
+     (Program remainingMessages:) because it might wait for content and this
+     is not allowed in a countdown sandbox.
     
-     Usage (for instance to read raw CGI post):
+     Usage:
     
-     post := Program input.
+     echo "hello" | ctr test.ctr
+    
+     x := Program input.
+     Pen write: x. #hello (without newline)
+    
 .fi
 .BR.BR.BR
 
@@ -2336,7 +2787,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Command] message: [String].
+.B [Program] message: [String].
 .nf
     
      Sends a message to another program, i.e. a child or a parent that is
@@ -2344,7 +2795,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Command] listen: [Block].
+.B [Program] listen: [Block].
 .nf
     
      Stops the current flow of the program and starts listening for
@@ -2354,12 +2805,90 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Command] join
+.B [Program] join
 .nf
     
      Rejoins the program with the main program.
      This message will cause the current program to stop and wait
      for the child program to end.
+.fi
+.BR.BR.BR
+
+.B [Program] pid
+.nf
+    
+     Returns the process identification number associated with the
+     program. If the program instance refers to the currently running
+     program PID 0 will be returned.
+.fi
+.BR.BR.BR
+
+.B [Program] toString
+.nf
+    
+     Returns a string representation of the program. This will be something like
+     [PID:2833], or in case of the currently active program: [PID:0].
+.fi
+.BR.BR.BR
+
+.B [Program] toNumber
+.nf
+    
+     Returns the program pid as a number.
+.fi
+.BR.BR.BR
+
+.BR.BR.BR
+
+.B [Program] useStandardError
+.nf
+    
+     Makes the running programming use standard error for logging.
+     Default is syslog. Use this message to select the standard error channel
+     for logging. After sending this message, all messages that write log entries
+     will use the standard error channel.
+.fi
+.BR.BR.BR
+
+.B [Program] useSyslog
+.nf
+    
+     Makes the running programming use the system logger for logging.
+     This is the default. Use this message to select the syslog channel
+     for logging. After sending this message, all messages that write log entries
+     will use the system logger facility.
+.fi
+.BR.BR.BR
+
+.B [Program] log: [String]
+.nf
+    
+     Logs the specified message string using syslog using log level LOG_NOTICE.
+     Use this for debugging messages or notice messages.
+.fi
+.BR.BR.BR
+
+.B [Program] warn: [String]
+.nf
+    
+     Logs the specified message string using syslog using log level LOG_WARNING.
+     Use this to have your programs emit warnings.
+.fi
+.BR.BR.BR
+
+.B [Program] error: [String]
+.nf
+    
+     Logs the specified message string using syslog using log level LOG_ERR.
+     Use this to log errors.
+.fi
+.BR.BR.BR
+
+.B [Program] alert: [String]
+.nf
+    
+     Logs the specified message string using syslog using log level LOG_EMERG.
+     Use this to log critical errors or emergencies.
 .fi
 .BR.BR.BR
 
@@ -2371,14 +2900,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B Program port: [Number].
+.B [Program] port: [Number]
 .nf
     
      Sets the port to use for remote connections.
 .fi
 .BR.BR.BR
 
-.B Program connectionLimit: [Number].
+.B [Program] connectionLimit: [Number]
 .nf
     
      Sets the maximum number of connections and requests that will be
@@ -2386,11 +2915,23 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B Program serve: [Object].
+.B [Program] serve: [Object]
 .nf
     
      Serves an object. Client programs can now communicate with this object
      and send messages to it.
+.fi
+.BR.BR.BR
+
+.B [Dice]
+.nf
+    
+     The Dice object represents the random number generator.
+     Using a separate object for this makes it easy to spot randomness
+     in any program. The random number generator of Citrine uses the
+     BSD arc4random secure random number generator for high quality
+     randomness that is generally considered to be cryptographically
+     secure.
 .fi
 .BR.BR.BR
 
@@ -2404,7 +2945,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .B [Dice] roll
 .nf
     
-     Rolls a standard dice with 6 sides.
+     Rolls a standard die with 6 sides.
 .fi
 .BR.BR.BR
 
@@ -2415,14 +2956,65 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Clock] wait
+.B [Dice] toNumber
 .nf
     
-     Waits X seconds.
+     On receiving this message, the Dice instance will send the message
+     'rawRandomNumber' to itself and return the result as a string.
+     Note that you can override this behaviour with a custom rawRandomNumber implementation.
+    
+     Usage:
+    
+     #rig the dice ;)
+     ⚄ on: 'rawRandomNumber' do: { ↲ 6. }.
+     ✎ write: ⚄, brk. #6
+     ✎ write: ⚄ toNumber, brk. #6
 .fi
 .BR.BR.BR
 
-.B [Clock] new: [Number].
+.B [Dice] toNumber
+.nf
+    
+     On receiving this message, the Dice instance will send the message
+     'rawRandomNumber' to itself and return the result.
+     Note that you can override this behaviour with a custom rawRandomNumber implementation.
+    
+     Usage:
+    
+     #rig the dice ;)
+     ⚄ on: 'rawRandomNumber' do: { ↲ 6. }.
+     ✎ write: ⚄, brk. #6
+     ✎ write: ⚄ toNumber, brk. #6
+.fi
+.BR.BR.BR
+
+.B [Dice] drawFrom: [String] length: [Number].
+.nf
+    
+     Returns a randomized string with the specified length using the pool of
+     characters contained in the String object. This message is useful for
+     creating random nonces, passwords, temporary files, keys or identifiers.
+.fi
+.BR.BR.BR
+
+.B [Clock] wait: [Number]
+.nf
+    
+     Suspends program execution for the specified number of seconds.
+     This can be used for instance, together with a whileFalse loop as the
+     following example illustrates. The following example demonstrates the
+     use of the Clock object and the wait message to wait until an
+     exclusive lock on the specified file has been acquired.
+    
+     Usage:
+    
+     { ↲ file lock. }
+     whileFalse: { ⏰ wait: 1. }.
+    
+.fi
+.BR.BR.BR
+
+.B [Clock] new: [Number]
 .nf
     
      Creates a new clock instance from a UNIX time stamp.
@@ -2584,8 +3176,40 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .B [Clock] toString
 .nf
     
-     Returns a string describing the date and time 
-     represented by the clock object.
+     Returns a string describing the date and time
+     represented by the clock object. On receiving this message, the Clock
+     instance will send the message 'format:' to itself and the argument:
+     '%Y-%m-%d %H:%M:%S'. It will return the answer as a string. Note that you
+     can override this behaviour by adding your own 'format:' implementation.
+    
+     Usage:
+    
+     #build a time machine! ;)
+     ⏰ on: 'format:' do: { ↲ 'beautiful moment'. }.
+     ⏰ on: 'time' do: { ↲ '999'. }.
+    
+     write: ⏰, brk. #beautiful moment
+     ✎ write: ⏰ toNumber, brk. #999
+.fi
+.BR.BR.BR
+
+.B [Clock] toNumber
+.nf
+    
+     Returns a time stamp describing the date and time
+     represented by the clock object. On receiving this message, the Clock
+     instance will send the message 'time' to itself
+     and return the answer as a number. Note that you
+     can override this behaviour by adding your own 'time' implementation.
+    
+     Usage:
+    
+     #build a time machine! ;)
+     ⏰ on: 'format:' do: { ↲ 'beautiful moment'. }.
+     ⏰ on: 'time' do: { ↲ '999'. }.
+    
+     write: ⏰, brk. #beautiful moment
+     ✎ write: ⏰ toNumber, brk. #999
 .fi
 .BR.BR.BR
 
@@ -2648,8 +3272,71 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .B [Pen] brk
 .nf
-     
+    
      Outputs a newline character.
+.fi
+.BR.BR.BR
+
+.B [Pen] red
+.nf
+    
+     Changes the text color of the console to red.
+.fi
+.BR.BR.BR
+
+.B [Pen] green
+.nf
+    
+     Changes the text color of the console to green.
+.fi
+.BR.BR.BR
+
+.B [Pen] yellow
+.nf
+    
+     Changes the text color of the console to yellow.
+.fi
+.BR.BR.BR
+
+.B [Pen] blue
+.nf
+    
+     Changes the text color of the console to blue.
+.fi
+.BR.BR.BR
+
+.B [Pen] magenta
+.nf
+    
+     Changes the text color of the console to magenta.
+.fi
+.BR.BR.BR
+
+.B [Pen] cyan
+.nf
+    
+     Changes the text color of the console to cyan.
+.fi
+.BR.BR.BR
+
+.B [Pen] reset
+.nf
+    
+     Resets the console text color to the default.
+.fi
+.BR.BR.BR
+
+.B [Pen] tab
+.nf
+    
+     Prints a tab character to the console output.
+.fi
+.BR.BR.BR
+
+.B [Pen] line
+.nf
+    
+     Draws an ASCII line and a newline character.
 .fi
 .BR.BR.BR
 
