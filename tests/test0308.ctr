@@ -1,0 +1,36 @@
+#Test the toStrings
+
+💻 on: 'pid' do: { ↲ '[Program]'. }.
+✎ write: 'Sending toString to Program yields a PID string:', brk.
+✎ write: 💻, brk.
+✎ write: 'Sending toNumber to Program yields a PID number:', brk.
+✎ write: 💻 toNumber, brk.
+
+#rig the dice ;)
+⚄ on: 'rawRandomNumber' do: { ↲ 666. }.
+
+✎ write: 'Sending toString to Dice yields a random number string:', brk.
+✎ write: ⚄, brk.
+✎ write: 'Sending toNumber to Dice yields a random number:', brk.
+✎ write: ⚄ toNumber, brk.
+
+#build a time machine! ;)
+⏰ on: 'format:' do: { ↲ '1666-01-13 06:06:06'. }.
+⏰ on: 'time' do: { ↲ '999'. }.
+
+✎ write: 'Sending toString to Clock yields a date and time string:', brk.
+✎ write: ⏰, brk.
+✎ write: 'Sending toNumber to Clock yields a time stamp number:', brk.
+✎ write: ⏰ toNumber, brk.
+
+✎ write: 'Sending toString to File yields a path:', brk.
+✎ write: File, brk.
+✎ write: 'Sending toNumber to File yields a 1:', brk.
+✎ write: File toNumber, brk.
+
+✎ write: (Map new
+	dice: ⚄,
+	program: 💻
+), brk.
+
+✎ write: (List ← ⚄ ; 💻 ), brk.

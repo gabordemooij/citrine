@@ -927,14 +927,18 @@ ctr_object* ctr_program_pid(ctr_object* myself, ctr_argument* argumentList ) {
  * [PID:2833], or in case of the currently active program: [PID:0].
  */
 ctr_object* ctr_program_to_string(ctr_object* myself, ctr_argument* argumentList ) {
-	int pid = (int) ctr_program_pid( myself, argumentList )->value.nvalue;
-	char* info = ctr_heap_allocate( sizeof(char) * 40 );
-	ctr_object* answer;
-	snprintf( info, 40, "[PID:%d]", pid);
-	answer = ctr_build_string_from_cstring( info );
-	ctr_heap_free( info );
-	return answer;
+	return ctr_internal_cast2string(ctr_program_pid(myself, argumentList));
 }
+
+/**
+ * [Program] toNumber
+ *
+ * Returns the program pid as a number.
+ */
+ctr_object* ctr_program_to_number(ctr_object* myself, ctr_argument* argumentList ) {
+       return ctr_internal_cast2number(ctr_program_pid(myself, argumentList));
+}
+
 
 /**
  * @internal
@@ -1178,6 +1182,42 @@ ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (ctr_number) (arc4random()) );
+}
+
+/**
+ * [Dice] toNumber
+ *
+ * On receiving this message, the Dice instance will send the message
+ * 'rawRandomNumber' to itself and return the result as a string.
+ * Note that you can override this behaviour with a custom rawRandomNumber implementation.
+ *
+ * Usage:
+ *
+ * #rig the dice ;)
+ * ⚄ on: 'rawRandomNumber' do: { ↲ 6. }.
+ * ✎ write: ⚄, brk. #6
+ * ✎ write: ⚄ toNumber, brk. #6
+ */
+ctr_object* ctr_dice_to_string(ctr_object* myself, ctr_argument* argumentList) {
+       return ctr_internal_cast2string( ctr_send_message( myself, "rawRandomNumber", strlen("rawRandomNumber"), argumentList ) );
+}
+
+/**
+ * [Dice] toNumber
+ *
+ * On receiving this message, the Dice instance will send the message
+ * 'rawRandomNumber' to itself and return the result.
+ * Note that you can override this behaviour with a custom rawRandomNumber implementation.
+ *
+ * Usage:
+ *
+ * #rig the dice ;)
+ * ⚄ on: 'rawRandomNumber' do: { ↲ 6. }.
+ * ✎ write: ⚄, brk. #6
+ * ✎ write: ⚄ toNumber, brk. #6
+ */
+ctr_object* ctr_dice_to_number(ctr_object* myself, ctr_argument* argumentList) {
+       return ctr_internal_cast2number( ctr_send_message( myself, "rawRandomNumber", strlen("rawRandomNumber"), argumentList ) );
 }
 
 /**
@@ -1598,17 +1638,51 @@ ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList ) {
 /**
  * [Clock] toString
  *
- * Returns a string describing the date and time 
- * represented by the clock object.
+ * Returns a string describing the date and time
+ * represented by the clock object. On receiving this message, the Clock
+ * instance will send the message 'format:' to itself and the argument:
+ * '%Y-%m-%d %H:%M:%S'. It will return the answer as a string. Note that you
+ * can override this behaviour by adding your own 'format:' implementation.
+ *
+ * Usage:
+ *
+ * #build a time machine! ;)
+ * ⏰ on: 'format:' do: { ↲ 'beautiful moment'. }.
+ * ⏰ on: 'time' do: { ↲ '999'. }.
+ *
+ * write: ⏰, brk. #beautiful moment
+ * ✎ write: ⏰ toNumber, brk. #999
  */
 ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_argument* newArgumentList;
 	ctr_object*   answer;
 	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
 	newArgumentList->object = ctr_build_string_from_cstring( "%Y-%m-%d %H:%M:%S" );
-	answer = ctr_clock_format( myself, newArgumentList );
+	answer = ctr_send_message( myself, "format:", strlen("format:"), newArgumentList );
 	ctr_heap_free( newArgumentList );
 	return answer;
+}
+
+/**
+ * [Clock] toNumber
+ *
+ * Returns a time stamp describing the date and time
+ * represented by the clock object. On receiving this message, the Clock
+ * instance will send the message 'time' to itself
+ * and return the answer as a number. Note that you
+ * can override this behaviour by adding your own 'time' implementation.
+ *
+ * Usage:
+ *
+ * #build a time machine! ;)
+ * ⏰ on: 'format:' do: { ↲ 'beautiful moment'. }.
+ * ⏰ on: 'time' do: { ↲ '999'. }.
+ *
+ * write: ⏰, brk. #beautiful moment
+ * ✎ write: ⏰ toNumber, brk. #999
+ */
+ctr_object* ctr_clock_to_number( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_send_message( myself, "time", strlen("time"), argumentList );
 }
 
 /**

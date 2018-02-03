@@ -597,6 +597,7 @@ ctr_object* ctr_console_line(ctr_object* myself, ctr_argument* argumentList);
  */
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList);
@@ -653,6 +654,7 @@ ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_use_stderr(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_use_syslog(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_to_string(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_program_to_number(ctr_object* myself, ctr_argument* argumentList );
 
 void ctr_check_permission( uint8_t operationID );
 uint8_t ctr_program_security_profile;
@@ -692,6 +694,7 @@ ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList 
 ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_clock_to_number( ctr_object* myself, ctr_argument* argumentList );
 void ctr_clock_init( ctr_object* clock );
 
 /**
@@ -734,6 +737,8 @@ ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_dice_sides(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_dice_randomize_bytes(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_dice_to_string(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_dice_to_number(ctr_object* myself, ctr_argument* argumentList );
 
 /**
  * Literal Constructors (internal only)

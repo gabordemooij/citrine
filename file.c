@@ -48,6 +48,22 @@ ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [File] toString
+ *
+ * Returns a string representation of the file. If a path has been associated
+ * with this file, this message will return the path of the file on the file system.
+ * If no path has been associated with the file, the string [File (no path)] will
+ * be returned.
+ */
+ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* path = ctr_file_path(myself,argumentList);
+	if ( path == CtrStdNil) {
+		return ctr_build_string_from_cstring("[File (no path)]");
+	}
+	return ctr_internal_cast2string(path);
+}
+
+/**
  * [File] read
  *
  * Reads contents of a file. Send this message to a file to read the entire contents in
