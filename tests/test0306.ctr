@@ -1,8 +1,11 @@
 #Can we use the fluid array notation, using Slurp short?
-☞ meals := List ←
-	• hamburger ;
-	• pizza ;
-	• haggis.
+
+☞ meals :=
+	List new
+	• 'hamburger'
+	• 'pizza'
+	• 'haggis'.
+
 ✎ write: '❲meals join: '|'❳↵'.
 
 

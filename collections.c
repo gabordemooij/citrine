@@ -15,31 +15,60 @@
  * [List] new
  *
  * Creates a new list or array. List is an alias for array.
- * For more details regarding the list object please consult the Array API.
+ * An array is a collection of items. To create a new array,
+ * send the 'new' message to the array. To add an element send
+ * the 'push:' message to an array with the element to add as
+ * an argument. Instead of using the push-message you can also
+ * use the • message. This message is suitable for vertically
+ * written arrays because they look similar to lists seen in
+ * regular documents. Besides 'push:' and • you can also use
+ * the ; message to push an new element on top of the array.
+ * The arrow message is the same as 'new' plus 'push:', just a
+ * shorter notation. The ; message is very suitable for
+ * horizontally written arrays. Finally, the last example
+ * depicts a notation using just ascii characters.
  *
  * Usage:
  *
+ * ☞ meals :=
+ *	List new
+ *	• 'hamburger'
+ *	• 'pizza'
+ *	• 'haggis'.
+ *
  * ☞ todo := List ← 'dishes' ; 'cleaning'.
  *
+ * var a := Array < 1 ; 2 ; 3.
  */
 
 /**
  * [Array] new
  *
- * Creates a new Array.
+ * Creates a new array.
+ * An array is a collection of items. To create a new array,
+ * send the 'new' message to the array. To add an element send
+ * the 'push:' message to an array with the element to add as
+ * an argument. Instead of using the push-message you can also
+ * use the • message. This message is suitable for vertically
+ * written arrays because they look similar to lists seen in
+ * regular documents. Besides 'push:' and • you can also use
+ * the ; message to push an new element on top of the array.
+ * The arrow message is the same as 'new' plus 'push:', just a
+ * shorter notation. The ; message is very suitable for
+ * horizontally written arrays. Finally, the last example
+ * depicts a notation using just ascii characters.
  *
  * Usage:
  *
- * a := Array new.
+ * ☞ meals :=
+ *	List new
+ *	• 'hamburger'
+ *	• 'pizza'
+ *	• 'haggis'.
  *
- * or, the short form:
+ * ☞ todo := List ← 'dishes' ; 'cleaning'.
  *
- * a := Array ← 1 ; 2 ; 3.
- *
- * or (if you prefer ASCII only symbols):
- *
- * a := Array < 1 ; 2 ; 3.
- *
+ * var a := Array < 1 ; 2 ; 3.
  */
 ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTARRAY);
