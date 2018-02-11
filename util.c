@@ -128,3 +128,27 @@ void* ctr_internal_plugin_find(ctr_object* key) {
 	(void) init_plugin();
 	return handle;
 }
+
+/**
+ * @internal
+ *
+ * Causes the program flow to switch to error mode.
+ * This function takes a pointer to a message string and
+ * an integer error code (errno). It will create a string object
+ * containing the specified message and the integrated error message
+ * derived from the specified error code. This error string will
+ * be assigned to the CtrStdFlow variable which will cause
+ * program execution to go into error mode, i.e. all remaining
+ * instructions will be ignored until either the error is dealt with
+ * by a catch clause or the program ends in which case an error will
+ * produced to stderr.
+ */
+ctr_object* ctr_error( char* message, int error_code ) {
+	char* errstr;
+	errstr = ctr_heap_allocate( sizeof(char) * 200 );
+	snprintf( errstr, 200, message, strerror( error_code ) );
+	CtrStdFlow = ctr_build_string_from_cstring( errstr );
+	ctr_heap_free( errstr );
+	CtrStdFlow->info.sticky = 1;
+	return CtrStdFlow;
+}

@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <time.h>
+#include <errno.h>
 #include <sys/file.h>
 #include <dirent.h>
 #include "citrine.h"
@@ -84,16 +85,17 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	char* pathString;
 	char *buffer;
 	FILE* f;
+	int error_code;
 	if (path == NULL) return CtrStdNil;
 	vlen = path->value.svalue->vlen;
 	pathString = ctr_heap_allocate( sizeof(char) * ( vlen + 1 ) );
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "rb");
+	error_code = errno;
 	ctr_heap_free( pathString );
 	if (!f) {
-		CtrStdFlow = ctr_build_string_from_cstring( "Unable to open file." );
-		CtrStdFlow->info.sticky = 1;
+		ctr_error( "Unable to open file: %s.", error_code );
 		return CtrStdNil;
 	}
 	fseek(f, 0, SEEK_END);
@@ -132,16 +134,17 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	FILE* f;
 	ctr_size vlen;
 	char* pathString;
+	int error_code;
 	if (path == NULL) return CtrStdNil;
 	vlen = path->value.svalue->vlen;
 	pathString = ctr_heap_allocate(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "wb+");
+	error_code = errno;
 	ctr_heap_free( pathString );
 	if (!f) {
-		CtrStdFlow = ctr_build_string_from_cstring( "Unable to open file." );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( "Unable to open file: %s.", error_code );
 		return CtrStdNil;
 	}
 	fwrite(str->value.svalue->value, sizeof(char), str->value.svalue->vlen, f);

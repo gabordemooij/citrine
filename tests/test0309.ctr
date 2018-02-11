@@ -1,0 +1,27 @@
+#Test whether correct descriptive error messages are displayed.
+💻 shell:
+	(Slurp
+		touch: '/tmp/blah.txt;',
+		chmod uog-w: '/tmp/blah.txt',
+	obtain).
+
+{
+	☞ file := File new: '/tmp/blah.txt'.
+	file write: 'hello'.
+} catch: { :error 
+	✎ write: error, brk.
+}, run.
+
+	
+💻 shell: (
+	Slurp chmod uog-r: '/tmp/blah.txt', obtain
+).
+
+{
+	☞ file := File new: '/tmp/blah.txt'.
+	file read.
+} catch: { :error 
+	✎ write: error, brk.
+}, run.
+
+

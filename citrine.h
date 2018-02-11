@@ -761,7 +761,7 @@ void* ctr_heap_reallocate(void* oldptr, size_t size );
 size_t ctr_heap_get_latest_tracking_id();
 void* ctr_heap_reallocate_tracked(size_t tracking_id, size_t size );
 char* ctr_heap_allocate_cstring( ctr_object* o );
-
+ctr_object* ctr_error( char* error_string, int error_code );
 
 uint8_t  ctr_accept_n_connections;
 uint16_t ctr_default_port;
