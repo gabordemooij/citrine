@@ -431,6 +431,8 @@ char* ctr_clex_readstr() {
 			break;
 		}
 
+		if ( c == '\n' ) ctr_clex_line_number ++;
+
 		if (ctr_code < (ctr_eofcode - 2)) {
 			if ((uint8_t) *(ctr_code) == 226 && (uint8_t) *(ctr_code+1)==134 && (uint8_t) *(ctr_code+2)==181) {
 				c = '\n';
@@ -444,8 +446,6 @@ char* ctr_clex_readstr() {
 				ctr_code += 2;
 			}
 		}
-
-		if ( c == '\n' ) ctr_clex_line_number ++;
 
 		if ( escape == 1 ) {
 			switch(c) {
