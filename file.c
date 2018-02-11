@@ -87,6 +87,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	FILE* f;
 	int error_code;
 	if (path == NULL) return CtrStdNil;
+	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	vlen = path->value.svalue->vlen;
 	pathString = ctr_heap_allocate( sizeof(char) * ( vlen + 1 ) );
 	memcpy(pathString, path->value.svalue->value, vlen);
