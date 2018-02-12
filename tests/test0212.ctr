@@ -1,3 +1,3 @@
 #can we forbid reading file ?
 Program forbidFileRead.
-File new: '/tmp/bla.txt'.
+(File new: '/tmp/bla.txt') read.

@@ -24,7 +24,6 @@
  * File new: '/example/path/to/file.txt'.
  */
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	ctr_object* s = ctr_object_make(myself, argumentList);
 	ctr_object* pathObject;
 	s->info.type = CTR_OBJECT_TYPE_OTEX; /* indicates resource for GC */
@@ -195,6 +194,7 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 	char* pathString;
 	FILE* f;
 	int exists;
+	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	if (path == NULL) return ctr_build_bool(0);
 	vlen = path->value.svalue->vlen;
 	pathString = ctr_heap_allocate(vlen + 1);
@@ -273,6 +273,7 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 	char* pathString;
 	FILE* f;
 	int prev, sz;
+	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	if (path == NULL) return ctr_build_number_from_float(0);
 	vlen = path->value.svalue->vlen;
 	pathString = ctr_heap_allocate( sizeof(char) * ( vlen + 1 ) );
@@ -304,6 +305,7 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
  * The example above opens the file in f for reading and writing.
  */
 ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	ctr_object* pathObj = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	char* mode;
 	char* path;
@@ -342,6 +344,7 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
  * The example above opens and closes a file.
  */
 ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
 	if (myself->value.rvalue->ptr) {
@@ -371,6 +374,7 @@ ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) 
 	int bytes;
 	char* buffer;
 	ctr_object* result;
+	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
 	bytes = ctr_internal_cast2number(argumentList->object)->value.nvalue;
