@@ -424,6 +424,24 @@ ctr_object* ctr_slurp_obtain( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
+ * [Slurp] toString.
+ *
+ * Sending the message 'toString' to a slurp object is the same as sending the
+ * obtain message. It will cause the Slurp object to answer with the collected
+ * string information from previous interactions. If for some reason the
+ * obtain message does not return a string, this message will answer with
+ * an empty string, otherwise the resulting string from 'obtain' will be
+ * returned.
+ */
+ctr_object* ctr_slurp_to_string( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* commandObj = ctr_slurp_obtain(myself, argumentList);
+	if (commandObj->info.type != CTR_OBJECT_TYPE_OTSTRING) {
+		return ctr_build_empty_string();
+	}
+	return commandObj;
+}
+
+/**
  * [Program] argument: [Number]
  *
  * Obtains an argument from the CLI invocation.

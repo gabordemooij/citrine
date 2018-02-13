@@ -946,6 +946,7 @@ void ctr_initialize_world() {
 	/* Slurp */
 	CtrStdSlurp = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
 	ctr_internal_create_func(CtrStdSlurp, ctr_build_string_from_cstring( CTR_DICT_OBTAIN ), &ctr_slurp_obtain );
+	ctr_internal_create_func(CtrStdSlurp, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_slurp_to_string );
 	ctr_internal_create_func(CtrStdSlurp, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ), &ctr_slurp_respond_to );
 	ctr_internal_create_func( CtrStdSlurp, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND ), &ctr_slurp_respond_to_and );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_SLURP ), CtrStdSlurp, 0 );

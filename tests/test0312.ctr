@@ -1,0 +1,10 @@
+#Can we generate a string by sending (implicitly) the toString message to a Slurp?
+
+☞ query := Slurp
+	select: '*',
+	from
+		users 
+	where 
+		user_id=: 1.
+
+✎ write: query, brk.

@@ -702,6 +702,7 @@ void ctr_clock_init( ctr_object* clock );
 ctr_object* ctr_slurp_obtain(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_slurp_respond_to(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_slurp_to_string(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Garbage Collector Object Interface
