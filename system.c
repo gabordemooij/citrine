@@ -250,6 +250,16 @@ ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Broom] toString.
+ *
+ * Returns the number of objects that have been collected by the
+ * garbage collector.
+ */
+ctr_object* ctr_gc_to_string(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_internal_cast2string( ctr_gc_dust( myself, argumentList ) );
+}
+
+/**
  * [Program] shell: [String]
  *
  * Performs a Shell operation. The Shell object uses a fluid API, so you can
