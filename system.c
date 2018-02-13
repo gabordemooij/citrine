@@ -395,10 +395,6 @@ ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentL
  * This will output: 'hello world'.
  * Use the Slurp object to integrate verbose shell commands, other programming languages
  * (like SQL) etc into your main program without overusing strings.
- * 
- * Example:
- * 
- * query select: '*', from users where: 'id = 2'.
  *
  * Note that we can't use the = and * unfortunately right now
  * because = is also a method in the main object. While * can be used
@@ -410,6 +406,17 @@ ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentL
  * the language of Citrine. However even with these restrictions (some of which might be
  * alleviated in future versions) it's quite comfortable and readable to interweave
  * an external language in your Citrine script code.
+ *
+ * Usage:
+ *
+ * ☞ query := Slurp
+ *	select: '*',
+ *	from
+ *		users
+ *	where
+ *		user_id=: 1.
+ *
+ * #result: select * from users where user_id= 1
  */
 ctr_object* ctr_slurp_obtain( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* commandObj;
