@@ -963,6 +963,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_MEMORY_LIMIT ), &ctr_gc_setmemlimit );
 	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_MODE ),  &ctr_gc_setmode );
 	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ),  &ctr_gc_to_string );
+	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ),  &ctr_gc_to_number );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_BROOM ), CtrStdGC, 0 );
 	CtrStdGC->link = CtrStdObject;
 	CtrStdGC->info.sticky = 1;
