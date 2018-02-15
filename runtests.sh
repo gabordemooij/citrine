@@ -30,6 +30,14 @@ cd ..
 cd ..
 cp plugins/request/libctrrequest.so mods/request/libctrrequest.so
 
+#json test
+cd plugins/jsmn/jsmn;
+gcc -c jsmn.c -Wall	-Werror -fpic -o jsmn.o
+cd ..
+gcc -c jsmn.c -Wall	-Werror -fpic -o jsmn.o ; gcc -shared -o libctrjsmn.so jsmn.o jsmn/jsmn.o
+cd ..
+cd ..
+cp plugins/jsmn/libctrjsmn.so mods/jsmn/libctrjsmn.so
 
 make clean;
 ./mk.sh

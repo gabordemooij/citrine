@@ -1,0 +1,29 @@
+#Can we use JSON?
+
+☞ garden := '{
+	"garden": {
+		"chairs": 2,
+		"pool": true,
+		"shed": false,
+		"flower": [
+			"tulips",
+			"roses"
+		],
+		"size": {
+			"width":8,
+			"length":15
+		},
+		"insects":Nil,
+		"dog":undefined
+	}
+}'.
+
+☞ g := Jsmn parse: garden.
+
+✎ write: 'There are ❲g @ 'garden' @ 'chairs'❳ chairs in the sunny garden.', brk.
+✎ write: 'A rubber duck swims in the ❲(g garden pool) ifTrue: { ↲ 'pool'. }❳.', brk.
+✎ write: 'Is there a shed in the garden? Well.. ❲g garden shed❳', brk.
+✎ write: 'In the garden you smell the fragrance of ❲(g garden flower join: ' and ')❳.', brk.
+✎ write: 'The garden is ❲g garden size length❳ meters long.', brk.
+✎ write: 'Luckily, this day, there are ❲g garden insects❳ wasps in the garden.', brk.
+✎ write: 'The dog named ❲g garden dog❳ sleeps under the tree.', brk.
