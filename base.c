@@ -2573,12 +2573,43 @@ ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentL
 	return ctr_build_bool( 0 );
 }
 
+ctr_object* ctr_string_escape(ctr_object* myself, ctr_argument* argumentList)  {
+	ctr_object* escape = argumentList->object;
+	ctr_object* newString = NULL;
+	char* str = myself->value.svalue->value;
+	long  len = myself->value.svalue->vlen;
+	char* tstr;
+	long i=0;
+	long k=0;
+	long tlen = 0;
+	
+	long tag_len = 0;
+	for(i =0; i < len; i++) {
+		char c = str[i];
+		if (c == escape->value.svalue->value[0]) {
+			tag_len += 2;
+		}
+	}
+	tlen = len + tag_len;
+	tstr = ctr_heap_allocate( tlen * sizeof( char ) );
+	for(i = 0; i < len; i++) {
+		char c = str[i];
+		if (c == escape->value.svalue->value[0]) {
+			tstr[k++] = '\\';
+			
+		}
+		tstr[k++] = str[i];
+	}
+	newString = ctr_build_string(tstr, tlen);
+	ctr_heap_free( tstr );
+	return newString;
+}
+
 /**
  * [String] htmlEscape
  *
  * Escapes HTML chars.
  */
-
 ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentList)  {
 	ctr_object* newString = NULL;
 	char* str = myself->value.svalue->value;

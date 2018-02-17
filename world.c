@@ -713,6 +713,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_LESS ),&ctr_string_before );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_LESS_OR_EQUAL_SYMBOL ),&ctr_string_before_or_same );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_GREATER ),&ctr_string_after );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_ESCAPE ),&ctr_string_escape );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_GREATER_OR_EQUAL_SYMBOL ),&ctr_string_after_or_same);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_STRING ), CtrStdString, 0 );
 	CtrStdString->link = CtrStdObject;

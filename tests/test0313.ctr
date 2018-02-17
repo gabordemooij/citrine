@@ -7,18 +7,19 @@
 		"shed": false,
 		"flower": [
 			"tulips",
-			"roses"
+			"roses",
+			"lillies"
 		],
 		"size": {
 			"width":8,
 			"length":15
 		},
-		"insects":Nil,
-		"dog":undefined
+		"insects":null,
+		"dog":
 	}
 }'.
 
-☞ g := Jsmn parse: garden.
+☞ g := Json parse: garden.
 
 ✎ write: 'There are ❲g @ 'garden' @ 'chairs'❳ chairs in the sunny garden.', brk.
 ✎ write: 'A rubber duck swims in the ❲(g garden pool) ifTrue: { ↲ 'pool'. }❳.', brk.
@@ -27,3 +28,15 @@
 ✎ write: 'The garden is ❲g garden size length❳ meters long.', brk.
 ✎ write: 'Luckily, this day, there are ❲g garden insects❳ wasps in the garden.', brk.
 ✎ write: 'The dog named ❲g garden dog❳ sleeps under the tree.', brk.
+
+✎ write: ('a"bb"ccc"' escape: '"'), brk.
+✎ write: g, brk.
+#✎ write: (Jsmn parse: '{"a":{"b":"c","d":"e"},"aa":"zz"}'), brk.
+#✎ write: (Jsmn parse: '{"a":undefined,"b":null}'), brk.
+#✎ write: (Jsmn parse: '{"a":"b","x":[1,2,3]}'), brk.
+✎ write: (Json jsonify: g), brk.
+
+#✎ write: (Map new put: (Map new put: 'hello' at: 'world', put: 'doei' at: 'holland') at: 'waarden'), brk.
+#✎ write: (Jsmn jsonify: (Map new put: (Map new put: 'he"llo' at: 'greeting') at: 'world', put: (Array ← 1 ; 2 ; (Map new put: 'x' at: 9)) at: 'arr')), brk.
+
+

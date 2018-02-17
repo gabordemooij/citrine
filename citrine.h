@@ -512,6 +512,7 @@ ctr_object* ctr_string_before(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_string_before_or_same(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_string_after(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_string_escape(ctr_object* myself, ctr_argument* argumentList );
 
 /**
  * Block Interface
