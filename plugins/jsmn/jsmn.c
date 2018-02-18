@@ -106,8 +106,18 @@ ctr_object* ctr_json_parse(ctr_object* myself, ctr_argument* argumentList) {
 	jsmntok_t* t;
 	jsmntok_t* ot;
 	int r;
+	int s;
 	jsmn_init(&jsmn);
-	size = (ctr_size) jsmn_parse(&jsmn, jsonString, strlen(jsonString), NULL, 0);
+	s = jsmn_parse(&jsmn, jsonString, strlen(jsonString), NULL, 0);
+	printf("size = %d \n", s);
+	if ( s <= 0 ) {
+		ctr_heap_free( jsonString );
+		if ( s == JSMN_ERROR_INVAL ) {
+			CtrStdFlow = ctr_build_string_from_cstring("Bad token, JSON string is corrupted.");
+		}
+		return CtrStdNil;
+	}
+	size = (ctr_size) s;
 	t = (jsmntok_t*) ctr_heap_allocate( sizeof(jsmntok_t) * size );
 	ot = t;
 	jsmn_init(&jsmn2);
