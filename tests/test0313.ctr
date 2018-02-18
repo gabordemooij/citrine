@@ -21,6 +21,7 @@
 
 ☞ g := Json parse: garden.
 
+✎ resetColor.
 ✎ write: 'There are ❲g @ 'garden' @ 'chairs'❳ chairs in the sunny garden.', brk.
 ✎ write: 'A rubber duck swims in the ❲(g garden pool) ifTrue: { ↲ 'pool'. }❳.', brk.
 ✎ write: 'Is there a shed in the garden? Well.. ❲g garden shed❳', brk.
