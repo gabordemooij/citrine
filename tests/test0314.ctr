@@ -1,0 +1,22 @@
+#Test JSON Error Handling
+☞ garden := '
+	"garden": {
+		chairs,
+		"pool": true,
+		"shed": false,
+		"flower": [
+			"tulips",
+			"roses",
+			"lillies"
+		],
+		"size": {
+			"width":8,
+			"length":15
+		},
+		"insects":null,
+		"dog":
+	}
+}'.
+
+☞ g := Json parse: garden.
+✎ write: g, brk.

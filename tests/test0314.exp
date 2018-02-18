@@ -1,0 +1,4 @@
+Uncatched error has occurred.
+Bad token, JSON string is corrupted.
+#2 parse: (tests/test0314.ctr: 21)
+#1 g (tests/test0314.ctr: 21)
