@@ -109,7 +109,6 @@ ctr_object* ctr_json_parse(ctr_object* myself, ctr_argument* argumentList) {
 	int s;
 	jsmn_init(&jsmn);
 	s = jsmn_parse(&jsmn, jsonString, strlen(jsonString), NULL, 0);
-	printf("size = %d \n", s);
 	if ( s <= 0 ) {
 		ctr_heap_free( jsonString );
 		if ( s == JSMN_ERROR_INVAL ) {
