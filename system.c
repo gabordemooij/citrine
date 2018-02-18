@@ -1910,7 +1910,7 @@ ctr_object* ctr_console_cyan(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Pen] reset
+ * [Pen] resetColor
  *
  * Resets the console text color to the default.
  */
