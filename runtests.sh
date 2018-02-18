@@ -37,7 +37,7 @@ cd ..
 gcc -c jsmn.c -Wall	-Werror -fpic -o jsmn.o ; gcc -shared -o libctrjsmn.so jsmn.o jsmn/jsmn.o
 cd ..
 cd ..
-cp plugins/jsmn/libctrjsmn.so mods/jsmn/libctrjson.so
+cp plugins/jsmn/libctrjsmn.so mods/json/libctrjson.so
 
 make clean;
 ./mk.sh
