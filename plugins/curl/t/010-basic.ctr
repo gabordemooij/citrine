@@ -1,0 +1,10 @@
+#!/usr/bin/ctr
+
+handle := Curl new.
+
+handle url: 'http://example.com'.
+handle followlocation: True.
+
+html := handle perform.
+
+Pen write: html.

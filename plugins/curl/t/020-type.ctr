@@ -1,0 +1,3 @@
+handle := Curl new.
+Pen write: (handle type) + '\n'.
+handle cleanup.
