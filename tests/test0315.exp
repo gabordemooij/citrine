@@ -1,7 +1,26 @@
-(Map new) put:'a\"b' at:'test'
+(Map new) put:'a"b' at:'test'
 (Map new) put:(Array ← 1 ; 2 ; (Array ← 3 ; 4) ; ((Map new) put:Nil at:Array ← 3 ; 4, put:1 at:'foo')) at:'nested', put:False at:'legend', put:27 at:'age', put:'Jack' at:'name'
-a\tb
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
 hello	world
 hello
 world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
 hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

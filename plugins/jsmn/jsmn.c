@@ -31,6 +31,10 @@ ctr_object* ctr_jsmn_dump( char* data, jsmntok_t** tt ) {
 	jsmntok_t* t = *(tt);
 	if (t->type == JSMN_STRING) {
 		answer = ctr_build_string( (data + t->start), (t->end - t->start) );
+		a = ctr_heap_allocate( sizeof(ctr_argument) );
+		a->object = ctr_build_string_from_cstring("\"\t\b\n\r\f\\");
+		answer = ctr_string_unescape( answer, a );
+		ctr_heap_free(a);
 		*(tt)+=1;
 	}
 	else if (t->type == JSMN_PRIMITIVE ) {
@@ -165,7 +169,8 @@ ctr_object* ctr_json_jsonify(ctr_object* myself, ctr_argument* argumentList) {
 		else if ( mapItem->key->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
 			newArgumentList->object = ctr_build_string_from_cstring( "\"" );
 			ctr_string_append( string, newArgumentList );
-			newArgumentList->object = ctr_string_quotes_escape( mapItem->key, newArgumentList );
+			newArgumentList->object = ctr_build_string_from_cstring("\"\n\b\r\t\f\\");
+			newArgumentList->object = ctr_string_escape( mapItem->key, newArgumentList );
 			ctr_string_append( string, newArgumentList );
 			newArgumentList->object = ctr_build_string_from_cstring( "\"" );
 			ctr_string_append( string, newArgumentList );
@@ -191,6 +196,7 @@ ctr_object* ctr_json_jsonify(ctr_object* myself, ctr_argument* argumentList) {
 		else if ( mapItem->value->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
 			newArgumentList->object = ctr_build_string_from_cstring( "\"" );
 			ctr_string_append( string, newArgumentList );
+			newArgumentList->object = ctr_build_string_from_cstring("\"\n\b\r\t\f\\");
 			newArgumentList->object = ctr_string_escape( mapItem->value, newArgumentList );
 			ctr_string_append( string, newArgumentList );
 			newArgumentList->object = ctr_build_string_from_cstring( "\"" );

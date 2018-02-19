@@ -10,6 +10,31 @@
 ☞ json := '{"test":"a\\tb"}'.
 ✎ write: (Json parse: json) test, brk.
 
+☞ json := '{"test":"a\\t\\tb"}'.
+✎ write: (Json jsonify: (Json parse: json)), brk.
+
+☞ json := '{"test":"a\\nb"}'.
+✎ write: (Json jsonify: (Json parse: json)), brk.
+
+☞ json := '{"test":"a\\"b"}'.
+✎ write: (Json jsonify: (Json parse: json)), brk.
+
+☞ json := '{"test":"a\\b"}'.
+✎ write: (Json jsonify: (Json parse: json)), brk.
+
+✎ write: '______________________Unescape\n'.
+✎ write: ('hello\\tworld' unescape: ''), brk.
+✎ write: ('\"hello world\"' unescape: '"'), brk.
+✎ write: ('a\\"b' unescape: '"'), brk.
 ✎ write: ('hello\\tworld' unescape: '\t'), brk.
 ✎ write: ('hello\\nworld' unescape: '\n'), brk.
+✎ write: ('hello\\two\\nrld' unescape: '\t\n'), brk.
+✎ write: ('hello\\t\\two\\n\\nrld' unescape: '\t\n'), brk.
+
+✎ write: '______________________Escape\n'.
+✎ write: ('hello\tworld' escape: ''), brk.
+✎ write: ('a"b' escape: '"'), brk.
+✎ write: ('\"hello world\"' escape: '"'), brk.
 ✎ write: ('hello\two\nrld' escape: '\t', escape: '\n'), brk.
+✎ write: ('hello\two\nrld' escape: '\t\n'), brk.
+✎ write: ('hello\t\two\n\nrld' escape: '\t\n'), brk.

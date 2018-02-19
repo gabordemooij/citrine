@@ -2588,49 +2588,69 @@ ctr_object* ctr_string_escape(ctr_object* myself, ctr_argument* argumentList)  {
 	char* tstr;
 	long i=0;
 	long k=0;
+	ctr_size q = 0;
+	ctr_size numOfCharacters = 0;
 	long tlen = 0;
+	char* characters;
 	char character;
 	char characterDescription;
 	char isControlChar = 0;
+	char escaped;
 	long tag_len = 0;
-	if (escape->value.svalue->vlen < 1) {
+	characters = escape->value.svalue->value;
+	numOfCharacters = escape->value.svalue->vlen;
+	if (numOfCharacters < 1) {
 		return myself;
 	}
-	character = escape->value.svalue->value[0];
-	if (character == '\t') {
-		characterDescription = 't';
-		isControlChar = 1;
-	}
-	if (character == '\r') {
-		characterDescription = 'r';
-		isControlChar = 1;
-	}
-	if (character == '\n') {
-		characterDescription = 'n';
-		isControlChar = 1;
-	}
-	if (character == '\b') {
-		characterDescription = 'b';
-		isControlChar = 1;
-	}
-	for(i =0; i < len; i++) {
-		char c = str[i];
-		if (c == character) {
-			tag_len += 2;
+	for (q = 0; q < numOfCharacters; q ++) {
+		character = characters[q];
+		isControlChar = 0;
+		characterDescription = character;
+		for(i =0; i < len; i++) {
+			char c = str[i];
+			if (c == character) {
+				tag_len += 2;
+			}
 		}
 	}
 	tlen = len + tag_len;
 	tstr = ctr_heap_allocate( tlen * sizeof( char ) );
 	for(i = 0; i < len; i++) {
 		char c = str[i];
-		if (c == character) {
-			tstr[k++] = '\\';
-			if (isControlChar) {
-				tstr[k++] = characterDescription;
-				i++;
+		escaped = 0;
+		for (q = 0; q < numOfCharacters; q ++) {
+			character = characters[q];
+			isControlChar = 0;
+			if (character == '\t') {
+				characterDescription = 't';
+				isControlChar = 1;
+			}
+			if (character == '\r') {
+				characterDescription = 'r';
+				isControlChar = 1;
+			}
+			if (character == '\n') {
+				characterDescription = 'n';
+				isControlChar = 1;
+			}
+			if (character == '\b') {
+				characterDescription = 'b';
+				isControlChar = 1;
+			}
+			if (c == character) {
+				tstr[k++] = '\\';
+				if (isControlChar) {
+					tstr[k++] = characterDescription;
+				} else {
+					tstr[k++] = str[i];
+				}
+				escaped = 1;
+				break;
 			}
 		}
-		tstr[k++] = str[i];
+		if (!escaped) {
+			tstr[k++] = str[i];
+		}
 	}
 	newString = ctr_build_string(tstr, tlen);
 	ctr_heap_free( tstr );
@@ -2651,58 +2671,93 @@ ctr_object* ctr_string_unescape(ctr_object* myself, ctr_argument* argumentList) 
 	long  len = myself->value.svalue->vlen;
 	char* tstr;
 	char isControlChar = 0;
+	char* characters;
+	ctr_size numOfCharacters;
+	char unescaped;
+	ctr_size q;
 	long i=0;
 	long k=0;
 	long tlen = 0;
 	long tag_len = 0;
-	if (escape->value.svalue->vlen < 1) {
+	characters = escape->value.svalue->value;
+	numOfCharacters = escape->value.svalue->vlen;
+	if (numOfCharacters < 1) {
 		return myself;
 	}
-	character = escape->value.svalue->value[0];
-	characterDescription = character;
-	if (character == '\t') {
-		characterDescription = 't';
-		isControlChar = 1;
-	}
-	if (character == '\r') {
-		characterDescription = 'r';
-		isControlChar = 1;
-	}
-	if (character == '\n') {
-		characterDescription = 'n';
-		isControlChar = 1;
-	}
-	if (character == '\b') {
-		characterDescription = 'b';
-		isControlChar = 1;
-	}
-	for(i = 0; i < len; i++) {
-		if (i<len-1 && str[i] == '\\' && str[i+1] == characterDescription) {
-			tag_len -= 1;
+	for (q = 0; q < numOfCharacters; q ++) {
+		character = characters[q];
+		isControlChar = 0;
+		characterDescription = character;
+		if (character == '\t') {
+			characterDescription = 't';
+			isControlChar = 1;
+		}
+		if (character == '\r') {
+			characterDescription = 'r';
+			isControlChar = 1;
+		}
+		if (character == '\n') {
+			characterDescription = 'n';
+			isControlChar = 1;
+		}
+		if (character == '\b') {
+			characterDescription = 'b';
+			isControlChar = 1;
+		}
+		for(i = 0; i < len; i++) {
+			if (i<len-1 && str[i] == '\\' && str[i+1] == characterDescription) {
+				tag_len -= 1;
+			}
 		}
 	}
 	tlen = len + tag_len;
 	tstr = ctr_heap_allocate( tlen * sizeof( char ) );
 	for(i = 0; i < len; i++) {
-		if (i<len-1 && str[i] == '\\' && str[i+1] == characterDescription) {
-			if (isControlChar) {
-				if ( characterDescription == 'n' ) {
-					tstr[k++] = '\n';
-				}
-				if ( characterDescription == 'r' ) {
-					tstr[k++] = '\r';
-				}
-				if ( characterDescription == 't' ) {
-					tstr[k++] = '\t';
-				}
-				if ( characterDescription == 'b' ) {
-					tstr[k++] = '\b';
-				}
+		unescaped = 0;
+		for (q = 0; q < numOfCharacters; q ++) {
+			character = characters[q];
+			characterDescription = character;
+			isControlChar = 0;
+			if (character == '\t') {
+				characterDescription = 't';
+				isControlChar = 1;
 			}
-			i++;
-			continue;
+			if (character == '\r') {
+				characterDescription = 'r';
+				isControlChar = 1;
+			}
+			if (character == '\n') {
+				characterDescription = 'n';
+				isControlChar = 1;
+			}
+			if (character == '\b') {
+				characterDescription = 'b';
+				isControlChar = 1;
+			}
+			if (i<len-1 && str[i] == '\\' && str[i+1] == characterDescription) {
+				if (isControlChar) {
+					if ( characterDescription == 'n' ) {
+						tstr[k++] = '\n';
+					}
+					if ( characterDescription == 'r' ) {
+						tstr[k++] = '\r';
+					}
+					if ( characterDescription == 't' ) {
+						tstr[k++] = '\t';
+					}
+					if ( characterDescription == 'b' ) {
+						tstr[k++] = '\b';
+					}
+				} else {
+					tstr[k++] = str[i+1];
+				}
+				i++;
+				unescaped = 1;
+			}
 		}
-		tstr[k++] = str[i];
+		if (unescaped == 0) {
+			tstr[k++] = str[i];
+		}
 	}
 	newString = ctr_build_string(tstr, tlen);
 	ctr_heap_free( tstr );
