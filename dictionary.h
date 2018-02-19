@@ -176,6 +176,7 @@
 #define CTR_DICT_EVAL            "eval"
 #define CTR_DICT_ESCAPE_QUOTES   "escapeQuotes"
 #define CTR_DICT_ESCAPE          "escape:"
+#define CTR_DICT_UNESCAPE        "unescape:"
 #define CTR_DICT_TO_BYTE         "toByte"
 #define CTR_DICT_CHARACTERS      "characters"
 #define CTR_DICT_TO_BYTE_ARRAY   "toByteArray"

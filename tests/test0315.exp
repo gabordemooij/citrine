@@ -1,0 +1,7 @@
+(Map new) put:'a\"b' at:'test'
+(Map new) put:(Array ← 1 ; 2 ; (Array ← 3 ; 4) ; ((Map new) put:Nil at:Array ← 3 ; 4, put:1 at:'foo')) at:'nested', put:False at:'legend', put:27 at:'age', put:'Jack' at:'name'
+a\tb
+hello	world
+hello
+world
+hello\two\nrld
