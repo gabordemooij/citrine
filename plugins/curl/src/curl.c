@@ -1,24 +1,13 @@
-#include <citrine/citrine.h>
 #include <curl/curl.h>
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
 
+#include "../../../citrine.h"
+
+
 #define CTR_OBJECT_RESOURCE_CURL 54
 
-/**
- * @internal
- *
- * Throws error with object, message, and a description
- *
- **/
-void ctr_curl_internal_error(ctr_object* myself, char* msg, char* desc) {
-	char errstr[80];
-	sprintf(errstr, "%s ~ %s", msg, desc);
-	ctr_argument errArgs;
-	errArgs.object = ctr_build_string_from_cstring(errstr);
-	ctr_block_error(myself, &errArgs);
-}
 
 /**
  * @internal
@@ -97,7 +86,7 @@ ctr_object* ctr_curl_respondto(ctr_object* myself, ctr_argument* argumentList) {
 	//ctr_object *valObj;
 	void* val = NULL;
 
-	char msg_and_args[80];
+	char msg_and_args[200];
 	CURLoption opt;
 
 	unsigned int cancel = 0;
@@ -127,11 +116,7 @@ ctr_object* ctr_curl_respondto(ctr_object* myself, ctr_argument* argumentList) {
 		case CTR_OBJECT_TYPE_OTMISC:
 		case CTR_OBJECT_TYPE_OTEX:
 
-			sprintf(msg_and_args, "Curl %s: '%s'",
-				msg, (char *)ctr_object_type(argObj, NULL)->value.svalue);
-
-			ctr_curl_internal_error(myself, msg_and_args, "Cannot set this value");
-
+			CtrStdFlow = ctr_build_string_from_cstring("Invalid argument type.");
 			return myself;
 	}
 
@@ -139,15 +124,17 @@ ctr_object* ctr_curl_respondto(ctr_object* myself, ctr_argument* argumentList) {
 	else if (strcasecmp(msg, "url") == 0) { opt = CURLOPT_URL; }
 	else if (strcasecmp(msg, "path_as_is") == 0) { opt = CURLOPT_PATH_AS_IS; }
 	else if (strcasecmp(msg, "proxy") == 0) { opt = CURLOPT_PROXY; }
-	else if (strcasecmp(msg, "pre_proxy") == 0) { opt = CURLOPT_PRE_PROXY; }
+//	else if (strcasecmp(msg, "pre_proxy") == 0) { opt = CURLOPT_PRE_PROXY; }
 	else if (strcasecmp(msg, "proxyport") == 0) { opt = CURLOPT_PROXYPORT; }
 	else if (strcasecmp(msg, "proxytype") == 0) { opt = CURLOPT_PROXYTYPE; }
 	else if (strcasecmp(msg, "noproxy") == 0) { opt = CURLOPT_NOPROXY; }
 	else if (strcasecmp(msg, "httpproxytunnel") == 0) { opt = CURLOPT_HTTPPROXYTUNNEL; }
+#ifdef CURLOPT_CONNECT_TO
 	else if (strcasecmp(msg, "connect_to") == 0) { opt = CURLOPT_CONNECT_TO; }
+#endif
 	else if (strcasecmp(msg, "socks5_gssapi_service") == 0) { opt = CURLOPT_SOCKS5_GSSAPI_SERVICE; }
 	else if (strcasecmp(msg, "socks5_gssapi_nec") == 0) { opt = CURLOPT_SOCKS5_GSSAPI_NEC; }
-	else if (strcasecmp(msg, "proxy_service_name") == 0) { opt = CURLOPT_PROXY_SERVICE_NAME; }
+	//else if (strcasecmp(msg, "proxy_service_name") == 0) { opt = CURLOPT_PROXY_SERVICE_NAME; }
 	else if (strcasecmp(msg, "service_name") == 0) { opt = CURLOPT_SERVICE_NAME; }
 	else if (strcasecmp(msg, "interface") == 0) { opt = CURLOPT_INTERFACE; }
 	else if (strcasecmp(msg, "localport") == 0) { opt = CURLOPT_LOCALPORT; }
@@ -156,14 +143,14 @@ ctr_object* ctr_curl_respondto(ctr_object* myself, ctr_argument* argumentList) {
 	else if (strcasecmp(msg, "dns_use_global_cache") == 0) { opt = CURLOPT_DNS_USE_GLOBAL_CACHE; }
 	else if (strcasecmp(msg, "buffersize") == 0) { opt = CURLOPT_BUFFERSIZE; }
 	else if (strcasecmp(msg, "port") == 0) { opt = CURLOPT_PORT; }
-	else if (strcasecmp(msg, "tcp_fastopen") == 0) { opt = CURLOPT_TCP_FASTOPEN; }
+	//else if (strcasecmp(msg, "tcp_fastopen") == 0) { opt = CURLOPT_TCP_FASTOPEN; }
 	else if (strcasecmp(msg, "tcp_nodelay") == 0) { opt = CURLOPT_TCP_NODELAY; }
 	else if (strcasecmp(msg, "address_scope") == 0) { opt = CURLOPT_ADDRESS_SCOPE; }
 	else if (strcasecmp(msg, "tcp_keepalive") == 0) { opt = CURLOPT_TCP_KEEPALIVE; }
 	else if (strcasecmp(msg, "tcp_keepidle") == 0) { opt = CURLOPT_TCP_KEEPIDLE; }
 	else if (strcasecmp(msg, "tcp_keepintvl") == 0) { opt = CURLOPT_TCP_KEEPINTVL; }
 	else if (strcasecmp(msg, "unix_socket_path") == 0) { opt = CURLOPT_UNIX_SOCKET_PATH; }
-	else if (strcasecmp(msg, "abstract_unix_socket") == 0) { opt = CURLOPT_ABSTRACT_UNIX_SOCKET; }
+	//else if (strcasecmp(msg, "abstract_unix_socket") == 0) { opt = CURLOPT_ABSTRACT_UNIX_SOCKET; }
 	else if (strcasecmp(msg, "netrc") == 0) { opt = CURLOPT_NETRC; }
 	else if (strcasecmp(msg, "netrc_file") == 0) { opt = CURLOPT_NETRC_FILE; }
 	else if (strcasecmp(msg, "userpwd") == 0) { opt = CURLOPT_USERPWD; }
@@ -175,11 +162,11 @@ ctr_object* ctr_curl_respondto(ctr_object* myself, ctr_argument* argumentList) {
 	else if (strcasecmp(msg, "proxypassword") == 0) { opt = CURLOPT_PROXYPASSWORD; }
 	else if (strcasecmp(msg, "httpauth") == 0) { opt = CURLOPT_HTTPAUTH; }
 	else if (strcasecmp(msg, "tlsauth_username") == 0) { opt = CURLOPT_TLSAUTH_USERNAME; }
-	else if (strcasecmp(msg, "proxy_tlsauth_username") == 0) { opt = CURLOPT_PROXY_TLSAUTH_USERNAME; }
+	//else if (strcasecmp(msg, "proxy_tlsauth_username") == 0) { opt = CURLOPT_PROXY_TLSAUTH_USERNAME; }
 	else if (strcasecmp(msg, "tlsauth_password") == 0) { opt = CURLOPT_TLSAUTH_PASSWORD; }
-	else if (strcasecmp(msg, "proxy_tlsauth_password") == 0) { opt = CURLOPT_PROXY_TLSAUTH_PASSWORD; }
+	//else if (strcasecmp(msg, "proxy_tlsauth_password") == 0) { opt = CURLOPT_PROXY_TLSAUTH_PASSWORD; }
 	else if (strcasecmp(msg, "tlsauth_type") == 0) { opt = CURLOPT_TLSAUTH_TYPE; }
-	else if (strcasecmp(msg, "proxy_tlsauth_type") == 0) { opt = CURLOPT_PROXY_TLSAUTH_TYPE; }
+	//else if (strcasecmp(msg, "proxy_tlsauth_type") == 0) { opt = CURLOPT_PROXY_TLSAUTH_TYPE; }
 	else if (strcasecmp(msg, "proxyauth") == 0) { opt = CURLOPT_PROXYAUTH; }
 	else if (strcasecmp(msg, "sasl_ir") == 0) { opt = CURLOPT_SASL_IR; }
 	else if (strcasecmp(msg, "xoauth2_bearer") == 0) { opt = CURLOPT_XOAUTH2_BEARER; }
@@ -222,7 +209,7 @@ ctr_object* ctr_curl_respondto(ctr_object* myself, ctr_argument* argumentList) {
 	else if (strcasecmp(msg, "mail_rcpt") == 0) { opt = CURLOPT_MAIL_RCPT; }
 	else if (strcasecmp(msg, "mail_auth") == 0) { opt = CURLOPT_MAIL_AUTH; }
 	else if (strcasecmp(msg, "tftp_blksize") == 0) { opt = CURLOPT_TFTP_BLKSIZE; }
-	else if (strcasecmp(msg, "tftp_no_options") == 0) { opt = CURLOPT_TFTP_NO_OPTIONS; }
+	//else if (strcasecmp(msg, "tftp_no_options") == 0) { opt = CURLOPT_TFTP_NO_OPTIONS; }
 	else if (strcasecmp(msg, "ftpport") == 0) { opt = CURLOPT_FTPPORT; }
 	else if (strcasecmp(msg, "quote") == 0) { opt = CURLOPT_QUOTE; }
 	else if (strcasecmp(msg, "postquote") == 0) { opt = CURLOPT_POSTQUOTE; }
@@ -283,44 +270,44 @@ ctr_object* ctr_curl_respondto(ctr_object* myself, ctr_argument* argumentList) {
 	else if (strcasecmp(msg, "dns_servers") == 0) { opt = CURLOPT_DNS_SERVERS; }
 	else if (strcasecmp(msg, "accepttimeout_ms") == 0) { opt = CURLOPT_ACCEPTTIMEOUT_MS; }
        	else if (strcasecmp(msg, "sslcert") == 0) { opt = CURLOPT_SSLCERT; }
-	else if (strcasecmp(msg, "proxy_sslcert") == 0) { opt = CURLOPT_PROXY_SSLCERT; }
+	//else if (strcasecmp(msg, "proxy_sslcert") == 0) { opt = CURLOPT_PROXY_SSLCERT; }
 	else if (strcasecmp(msg, "sslcerttype") == 0) { opt = CURLOPT_SSLCERTTYPE; }
-	else if (strcasecmp(msg, "proxy_sslcerttype") == 0) { opt = CURLOPT_PROXY_SSLCERTTYPE; }
+	//else if (strcasecmp(msg, "proxy_sslcerttype") == 0) { opt = CURLOPT_PROXY_SSLCERTTYPE; }
 	else if (strcasecmp(msg, "sslkey") == 0) { opt = CURLOPT_SSLKEY; }
-	else if (strcasecmp(msg, "proxy_sslkey") == 0) { opt = CURLOPT_PROXY_SSLKEY; }
+	//else if (strcasecmp(msg, "proxy_sslkey") == 0) { opt = CURLOPT_PROXY_SSLKEY; }
 	else if (strcasecmp(msg, "sslkeytype") == 0) { opt = CURLOPT_SSLKEYTYPE; }
-	else if (strcasecmp(msg, "proxy_sslkeytype") == 0) { opt = CURLOPT_PROXY_SSLKEYTYPE; }
+	//else if (strcasecmp(msg, "proxy_sslkeytype") == 0) { opt = CURLOPT_PROXY_SSLKEYTYPE; }
 	else if (strcasecmp(msg, "keypasswd") == 0) { opt = CURLOPT_KEYPASSWD; }
-	else if (strcasecmp(msg, "proxy_keypasswd") == 0) { opt = CURLOPT_PROXY_KEYPASSWD; }
+//	else if (strcasecmp(msg, "proxy_keypasswd") == 0) { opt = CURLOPT_PROXY_KEYPASSWD; }
 	else if (strcasecmp(msg, "ssl_enable_alpn") == 0) { opt = CURLOPT_SSL_ENABLE_ALPN; }
 	else if (strcasecmp(msg, "ssl_enable_npn") == 0) { opt = CURLOPT_SSL_ENABLE_NPN; }
 	else if (strcasecmp(msg, "sslengine") == 0) { opt = CURLOPT_SSLENGINE; }
 	else if (strcasecmp(msg, "sslengine_default") == 0) { opt = CURLOPT_SSLENGINE_DEFAULT; }
 	else if (strcasecmp(msg, "ssl_falsestart") == 0) { opt = CURLOPT_SSL_FALSESTART; }
 	else if (strcasecmp(msg, "sslversion") == 0) { opt = CURLOPT_SSLVERSION; }
-	else if (strcasecmp(msg, "proxy_sslversion") == 0) { opt = CURLOPT_PROXY_SSLVERSION; }
+//	else if (strcasecmp(msg, "proxy_sslversion") == 0) { opt = CURLOPT_PROXY_SSLVERSION; }
 	else if (strcasecmp(msg, "ssl_verifyhost") == 0) { opt = CURLOPT_SSL_VERIFYHOST; }
-	else if (strcasecmp(msg, "proxy_ssl_verifyhost") == 0) { opt = CURLOPT_PROXY_SSL_VERIFYHOST; }
+//	else if (strcasecmp(msg, "proxy_ssl_verifyhost") == 0) { opt = CURLOPT_PROXY_SSL_VERIFYHOST; }
 	else if (strcasecmp(msg, "ssl_verifypeer") == 0) { opt = CURLOPT_SSL_VERIFYPEER; }
-	else if (strcasecmp(msg, "proxy_ssl_verifypeer") == 0) { opt = CURLOPT_PROXY_SSL_VERIFYPEER; }
+//	else if (strcasecmp(msg, "proxy_ssl_verifypeer") == 0) { opt = CURLOPT_PROXY_SSL_VERIFYPEER; }
 	else if (strcasecmp(msg, "ssl_verifystatus") == 0) { opt = CURLOPT_SSL_VERIFYSTATUS; }
 	else if (strcasecmp(msg, "cainfo") == 0) { opt = CURLOPT_CAINFO; }
-	else if (strcasecmp(msg, "proxy_cainfo") == 0) { opt = CURLOPT_PROXY_CAINFO; }
+	//else if (strcasecmp(msg, "proxy_cainfo") == 0) { opt = CURLOPT_PROXY_CAINFO; }
 	else if (strcasecmp(msg, "issuercert") == 0) { opt = CURLOPT_ISSUERCERT; }
 	else if (strcasecmp(msg, "capath") == 0) { opt = CURLOPT_CAPATH; }
-	else if (strcasecmp(msg, "proxy_capath") == 0) { opt = CURLOPT_PROXY_CAPATH; }
+	//else if (strcasecmp(msg, "proxy_capath") == 0) { opt = CURLOPT_PROXY_CAPATH; }
 	else if (strcasecmp(msg, "crlfile") == 0) { opt = CURLOPT_CRLFILE; }
-	else if (strcasecmp(msg, "proxy_crlfile") == 0) { opt = CURLOPT_PROXY_CRLFILE; }
+	//else if (strcasecmp(msg, "proxy_crlfile") == 0) { opt = CURLOPT_PROXY_CRLFILE; }
 	else if (strcasecmp(msg, "certinfo") == 0) { opt = CURLOPT_CERTINFO; }
 	else if (strcasecmp(msg, "pinnedpublickey") == 0) { opt = CURLOPT_PINNEDPUBLICKEY; }
-	else if (strcasecmp(msg, "proxy_pinnedpublickey") == 0) { opt = CURLOPT_PROXY_PINNEDPUBLICKEY; }
+	//else if (strcasecmp(msg, "proxy_pinnedpublickey") == 0) { opt = CURLOPT_PROXY_PINNEDPUBLICKEY; }
 	else if (strcasecmp(msg, "random_file") == 0) { opt = CURLOPT_RANDOM_FILE; }
 	else if (strcasecmp(msg, "egdsocket") == 0) { opt = CURLOPT_EGDSOCKET; }
 	else if (strcasecmp(msg, "ssl_cipher_list") == 0) { opt = CURLOPT_SSL_CIPHER_LIST; }
-	else if (strcasecmp(msg, "proxy_ssl_cipher_list") == 0) { opt = CURLOPT_PROXY_SSL_CIPHER_LIST; }
+//	else if (strcasecmp(msg, "proxy_ssl_cipher_list") == 0) { opt = CURLOPT_PROXY_SSL_CIPHER_LIST; }
 	else if (strcasecmp(msg, "ssl_sessionid_cache") == 0) { opt = CURLOPT_SSL_SESSIONID_CACHE; }
 	else if (strcasecmp(msg, "ssl_options") == 0) { opt = CURLOPT_SSL_OPTIONS; }
-	else if (strcasecmp(msg, "proxy_ssl_options") == 0) { opt = CURLOPT_PROXY_SSL_OPTIONS; }
+//	else if (strcasecmp(msg, "proxy_ssl_options") == 0) { opt = CURLOPT_PROXY_SSL_OPTIONS; }
 	else if (strcasecmp(msg, "krblevel") == 0) { opt = CURLOPT_KRBLEVEL; }
 	else if (strcasecmp(msg, "gssapi_delegation") == 0) { opt = CURLOPT_GSSAPI_DELEGATION; }
        	else if (strcasecmp(msg, "ssh_auth_types") == 0) { opt = CURLOPT_SSH_AUTH_TYPES; }
@@ -336,22 +323,20 @@ ctr_object* ctr_curl_respondto(ctr_object* myself, ctr_argument* argumentList) {
 	else if (strcasecmp(msg, "new_directory_perms") == 0) { opt = CURLOPT_NEW_DIRECTORY_PERMS; }
        	else if (strcasecmp(msg, "telnetoptions") == 0) { opt = CURLOPT_TELNETOPTIONS; }
        	else {
-		sprintf(msg_and_args, "Curl %s:", msg);
-		ctr_curl_internal_error(myself, msg_and_args, "Option invalid");
+		CtrStdFlow = ctr_build_string_from_cstring("Invalid option.");
 		cancel = 1;
        	}
-
 	if (!cancel) {
 	       	CURLcode res = curl_easy_setopt(myself->value.rvalue->ptr, opt, val);
 		if (res != CURLE_OK) {
-			sprintf(msg_and_args, "Curl %s `%s`", msg, (char *)ctr_object_type(argObj, NULL)->value.svalue);
-			ctr_curl_internal_error(myself, msg_and_args, (char *)curl_easy_strerror(res));
+			char* args = ctr_heap_allocate_cstring(ctr_internal_cast2string(argObj));
+			snprintf(msg_and_args, 200, "Curl %s `%s` : %s", msg, args, (char *)curl_easy_strerror(res));
+			CtrStdFlow = ctr_build_string_from_cstring(msg_and_args);
+			ctr_heap_free(args);
 		}
 	}
-
 	ctr_heap_free(msg);
 	if (ctrstr) ctr_heap_free(val);
-
 	return myself;
 }
 
@@ -362,15 +347,11 @@ ctr_object* ctr_curl_respondto(ctr_object* myself, ctr_argument* argumentList) {
  *
  **/
 ctr_object* ctr_curl_perform(ctr_object* myself, ctr_argument* argumentList) {
-
 	FILE *temp = tmpfile();
 	curl_easy_setopt(myself->value.rvalue->ptr, CURLOPT_WRITEDATA, temp);
-
 	CURLcode code = curl_easy_perform(myself->value.rvalue->ptr);
-
 	if (code != CURLE_OK)
-		ctr_curl_internal_error(myself, "Curl perform", "Received Curl error code");
-
+		CtrStdFlow = ctr_build_string_from_cstring("Received Curl error code");
 	fseek(temp, 0, SEEK_END);
 	ctr_size fileLen = ftell(temp);
 	fseek(temp, 0, SEEK_SET);
@@ -384,11 +365,8 @@ ctr_object* ctr_curl_perform(ctr_object* myself, ctr_argument* argumentList) {
 	fclose(temp);
 	ctr_object *str = ctr_build_string(buffer, fileLen);
 	ctr_heap_free(buffer);
-
 	return str;
 }
-
-/* Loading */
 
 /**
  * @internal
