@@ -1,0 +1,8 @@
+#test whether we can use CURL to load a site
+
+☞ browser := Curl new.
+browser url: 'https://gaborsoftware.nl'.
+☞ content := browser perform.
+(content contains: '<html') ifTrue: {
+	✎ write: 'CURL test FETCH HTML = OK', brk.
+}.
