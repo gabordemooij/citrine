@@ -83,7 +83,6 @@ ctr_object* ctr_curl_respondto(ctr_object* myself, ctr_argument* argumentList) {
 	msg[strlen(msg)-1] = 0;
 
 	ctr_object *argObj = argumentList->next->object;
-	//ctr_object *valObj;
 	void* val = NULL;
 
 	char msg_and_args[200];

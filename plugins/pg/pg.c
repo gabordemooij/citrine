@@ -35,6 +35,7 @@ ctr_object* ctr_pg_query(ctr_object* myself, ctr_argument* argumentList) {
 	char* command = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->object ) );
 	int resultFormat = 0;
 	int nParams = 0;
+	int i,q,j;
 	char** paramValues;
 	char* paramValue;
 	ctr_argument* a;
@@ -45,7 +46,7 @@ ctr_object* ctr_pg_query(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* param;
 	int len = (int) ctr_internal_cast2number( ctr_array_count( params, NULL ) )->value.nvalue;
 	paramValues = ctr_heap_allocate( len );
-	for(int q=0; q<len; q++) {
+	for(q=0; q<len; q++) {
 		b->object = ctr_build_number_from_float((ctr_number)q);
 		param = ctr_array_get(params, b);
 		nParams++;
@@ -60,9 +61,9 @@ ctr_object* ctr_pg_query(ctr_object* myself, ctr_argument* argumentList) {
 	char* value;
 	int colno;
 	ctr_object* crows = ctr_array_new(CtrStdArray, NULL);
-	for(int i=0; i<rows; i++) {
+	for(i=0; i<rows; i++) {
 		cells = ctr_map_new(CtrStdMap,NULL);
-		for(int j=0; j<cols; j++) {
+		for(j=0; j<cols; j++) {
 			field = PQfname(res, j);
 			colno = PQfnumber(res, field);
 			value = PQgetvalue(res, i, colno);
