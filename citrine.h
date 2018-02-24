@@ -112,6 +112,13 @@ typedef  char*        ctr_raw_string;
 
 typedef  size_t ctr_size;
 
+
+
+
+char* ctr_pool_alloc( ctr_size podSize );
+int ctr_pool_dealloc( void* ptr, int use_for_realloc );
+
+
 /**
  * Internal Citrine String
  */
@@ -330,6 +337,7 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn);
 /**
  * Internal World functions
  */
+void		ctr_pool_init();
 void        ctr_initialize_world();
 char*       ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, int reverse );
 void        ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_object* value, int m);
@@ -693,6 +701,7 @@ ctr_object* ctr_clock_set_zone( ctr_object* myself, ctr_argument* argumentList )
 ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList );
+ctr_object* ctr_clock_ticks( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_to_number( ctr_object* myself, ctr_argument* argumentList );

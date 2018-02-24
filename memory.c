@@ -61,7 +61,8 @@ void* ctr_heap_allocate( size_t size ) {
 	}
 
 	/* Perform allocation and check result */
-	slice_of_memory = calloc( size, 1 );
+	//slice_of_memory = calloc( size, 1 );
+	slice_of_memory = ctr_pool_alloc( size );
 
 	if ( slice_of_memory == NULL ) {
 		printf( "Out of memory. Failed to allocate %lu bytes (malloc failed). \n", size );
@@ -153,8 +154,12 @@ void ctr_heap_free( void* ptr ) {
 	block_width = (size_t*) ptr;
 	size = *(block_width);
 
-	free( ptr );
+	//free( ptr );
+	ctr_pool_dealloc( ptr, 0 );
+	
+	
 	ctr_gc_alloc -= size;
+	printf("*****\n");
 }
 
 /**
@@ -183,7 +188,21 @@ void* ctr_heap_reallocate(void* oldptr, size_t size ) {
 	/* update the ledger */
 	ctr_gc_alloc = ( ctr_gc_alloc - old_size ) + size;
 	/* re-allocate memory */
-	nptr = realloc( oldptr, size );
+	
+	printf("start rallocing...\n");
+	int success = ctr_pool_dealloc(oldptr, 1);
+	if (success) {
+		printf("handle pool dealloc\n");
+		nptr = calloc( size, 1 );
+		memcpy( nptr, oldptr, old_size );
+		printf("handle pool dealloc end\n");
+		
+	} else {
+		printf("raw realloc\n");
+		nptr = realloc( oldptr, size );
+		printf("raw realloc end\n");
+		
+	}
 
 	/* store the size of the new block at the beginning */
 	block_width = (size_t*) nptr;
@@ -226,4 +245,148 @@ char* ctr_heap_allocate_cstring( ctr_object* stringObject ) {
 	cstring[length] = '\0';
 
 	return cstring;
+}
+
+int usePools = 0;
+ctr_size preallocPool;
+
+
+char* mem;
+char** freelist;
+ctr_size freepods = 0;
+ctr_size podCount = 0;
+
+
+char* mem2;
+char** freelist2;
+ctr_size freepods2 = 0;
+ctr_size podCount2 = 0;
+
+
+void ctr_pool_init( ctr_size poolSize ) {
+
+	usePools = 1;
+	preallocPool = poolSize;
+	
+	ctr_size pods = ((preallocPool/2) / (sizeof(ctr_object) + sizeof(size_t)));
+	ctr_size pods2 =  ((preallocPool/2) / (sizeof(ctr_argument) + sizeof(size_t)));
+	
+	mem =  calloc( poolSize, 1 );
+	if (mem == NULL) {
+		printf( "Out of memory... %lu \n", poolSize );
+		exit(1);
+	}
+	
+	mem2 = mem + (preallocPool/2);
+	
+	
+	freelist = (char**) calloc(pods*sizeof(char*), 1);
+	freelist2 = (char**) calloc(pods*sizeof(char*), 1);
+	
+	
+	
+	
+	
+	//printf("---> we now have room for %lu pods.", pods);
+
+}
+
+char* ctr_pool_alloc( ctr_size podSize ) {
+	
+	if (!usePools) {
+		return (char*) calloc(podSize, 1);
+	}
+	
+	
+	char* memblock;
+	
+	printf("---> I want a piece of size %lu \n", podSize);
+	
+	
+	if (podSize == (sizeof(ctr_object) + sizeof(size_t))) {
+		
+		//printf("--> select block from prealloc pool\n");
+		
+		printf("--> no of recycled pods available: %lu \n", freepods);
+		
+		if (freepods>0) {
+			printf(" --> selecting a recycled pod \n");
+			memblock = (char*) (freelist[--freepods]);
+		} else {
+			printf("--> using a new pod\n");
+			memblock = (mem + podCount*podSize);
+			podCount++;
+		}
+		
+	} else if (podSize == sizeof(ctr_argument) + sizeof(size_t))  {
+			
+		if (freepods2>0) {
+			printf(" --> selecting a recycled pod \n");
+			memblock = (char*) (freelist2[--freepods2]);
+		} else {
+			printf("--> using a new pod\n");
+			memblock = (mem2 + podCount2*podSize);
+			podCount2++;
+		}
+		
+		
+	} else {
+		
+		printf("--> select block from cust pool\n");
+		
+		return (char*) calloc(podSize, 1);
+		
+		//memblock = (mem + preallocPool + custCount);
+		//custCount += podSize;
+	}
+	
+	printf("---> podCount = %lu custCount = %lu ", podCount, podCount2);
+	printf("---> returning %p \n", (memblock));
+	
+	return (char*) memblock;
+	
+}
+
+
+
+int ctr_pool_dealloc( void* ptr, int use_for_realloc ) {
+	
+	if (!usePools) {
+		if (!use_for_realloc) free(ptr);
+		return 0;
+	}
+	
+	ctr_size podSize;
+	
+	podSize = *((ctr_size*) ptr);
+
+	
+	//printf("---> bringing back a pod of size %lu \n", podSize);
+	
+	if (podSize == (sizeof(ctr_object) + sizeof(size_t))) {
+		printf("--> adding to freelist\n");
+		freelist[freepods++] = (char*) ptr;
+		printf("--> added: recycled pods available: %lu \n", freepods);
+		return 1;
+		
+	} else if (podSize == (sizeof(ctr_argument) + sizeof(size_t))) {
+		
+		
+		printf("-------- freepods %lu \n", freepods2);
+		
+		freelist2[freepods2++] = (char*) ptr;
+		printf("--------2\n");
+		return 1;
+	
+	} else {
+		printf("freeing\n");
+		if (!use_for_realloc) free(ptr);
+		printf("freeing done\n");
+		
+		return 0;
+	}
+	
+	
+	
+	
 }

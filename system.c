@@ -23,6 +23,26 @@
 #include "citrine.h"
 #include "siphash.h"
 
+// call this function to start a nanosecond-resolution timer
+struct timespec timer_start(){
+    struct timespec start_time;
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start_time);
+    return start_time;
+}
+
+// call this function to end a timer, returning nanoseconds elapsed as a long
+long timer_end(struct timespec start_time){
+    struct timespec end_time;
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end_time);
+    long diffInNanos = (end_time.tv_sec - start_time.tv_sec) * (long)1e9 + (end_time.tv_nsec - start_time.tv_nsec);
+    return diffInNanos;
+}
+
+int CtrTimerStartEnd = 0;
+
+struct timespec vartime;
+long time_elapsed_nanos;
+
 /**
  * @internal
  * GarbageCollector Marker
@@ -230,7 +250,25 @@ ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList) 
  * an out-of-memory error.
  */
 ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
+	
+	printf("---> %lu \n", ctr_gc_memlimit);
+	
+	ctr_size alreadyAllocated = ctr_gc_memlimit;
+	
 	ctr_gc_memlimit = (uint64_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	
+	ctr_size poolSize = ctr_gc_memlimit - alreadyAllocated; 
+	
+	ctr_pool_init(poolSize);
+	
+	printf("---> %lu \n", ctr_gc_memlimit);
+	
+	printf("---> %lu \n", alreadyAllocated);
+	
+	
+	printf("---> %lu \n", poolSize);
+	
+	
 	return myself;
 }
 
@@ -1559,6 +1597,27 @@ ctr_object* ctr_clock_minute( ctr_object* myself, ctr_argument* argumentList ) {
  */
 ctr_object* ctr_clock_second( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_get_time( myself, argumentList, 's' );
+}
+
+/**
+ * [Clock] ticks
+ *
+ * Returns the number of clock ticks elapsed since the start of the program.
+ */
+ctr_object* ctr_clock_ticks( ctr_object* myself, ctr_argument* argumentList ) {
+	
+	
+	
+	time_elapsed_nanos = 0;
+	if (!CtrTimerStartEnd) {
+		vartime = timer_start();
+		CtrTimerStartEnd = 1;
+	} else {
+		CtrTimerStartEnd = 0;
+		time_elapsed_nanos = timer_end(vartime);
+	}
+	
+	return ctr_build_number_from_float( (ctr_number) time_elapsed_nanos / 1000);
 }
 
 /**
