@@ -1,0 +1,11 @@
+
+Broom memoryLimit: 64000000.
+Broom mode: 4.
+⏰ ticks.
+
+9000 times: {
+	☞ tekst := 'hello ❲⚄ roll❳ world'.
+}.
+
+✎ write: ⏰ ticks, brk.
+
