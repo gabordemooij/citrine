@@ -50,7 +50,7 @@ ctr_object* ctr_pg_query(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* param;
 	int len = (int) ctr_internal_cast2number( ctr_array_count( params, NULL ) )->value.nvalue;
 	psql = (PGconn*) myself->value.rvalue->ptr;
-	paramValues = ctr_heap_allocate( len );
+	paramValues = ctr_heap_allocate( len * sizeof(char*) );
 	for(q=0; q<len; q++) {
 		b->object = ctr_build_number_from_float((ctr_number)q);
 		param = ctr_array_get(params, b);
