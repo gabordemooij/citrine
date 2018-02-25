@@ -1,0 +1,22 @@
+
+
+
+☞ pg := Pg new: 'hostaddr = \'127.0.0.1\' port = \'\' dbname = \'testje\' user = \'gabor\' password = \'gabor\' connect_timeout = \'10\''.
+
+
+✎ write: (Json jsonify: (Map new put: ( pg query: 'SELECT * FROM boeken WHERE id <= $1' parameters: (List ← '1') ) at: 'result')), brk.
+
+✎ write: '\n'.
+
+✎ write: (Json jsonify: (Map new put: ( pg query: 'SELECT * FROM boeken WHERE titel like $1' parameters: (List ← '%telefoon%') ) at: 'result')), brk.
+
+✎ write: '\n'.
+
+✎ write: (Json jsonify: (Map new put: ( pg query: 'SELECT * FROM boeken WHERE id IN ($1,$2)' parameters: (List ← 1 ; 2) ) at: 'result')), brk.
+
+✎ write: '\n'.
+
+pg close.
+
+pg := Pg new: 'xxx'.
+
