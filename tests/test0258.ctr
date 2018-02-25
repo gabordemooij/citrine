@@ -28,16 +28,3 @@ myFile2 write: 'lock'.
 
 { isUnlocked := myFile2 unlock. ↲ isUnlocked. } whileFalse: { ⏰ wait: 1. }.
 ✎ write: isUnlocked, brk.
-
-
-Program new: {
-
-	☞ myFile := File new: '/tmp/lock'.
-	☞ myFile2 := File new: '/tmp/lock2'.
-	
-	✎ write: 'Other process', brk.
-	isLocked := myFile lock.
-	✎ write: isLocked, brk.
-	isLocked := myFile2 lock.
-	✎ write: isLocked, brk.
-}.
