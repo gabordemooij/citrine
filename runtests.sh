@@ -39,6 +39,31 @@ cd ..
 cd ..
 cp plugins/jsmn/libctrjsmn.so mods/json/libctrjson.so
 
+#curl test
+rm plugins/curl/src/libctrcurl.so
+rm plugins/curl/src/curl.o
+rm mods/curl/libctrcurl.so
+cd plugins/curl/src;
+gcc -c curl.c -Wall	-Werror -fpic -o curl.o
+gcc -shared -o libctrcurl.so curl.o -lcurl
+cd ..
+cd ..
+cd ..
+cp plugins/curl/src/libctrcurl.so mods/curl/libctrcurl.so
+
+#pg test
+rm plugins/pg/libctrpg.so
+rm plugins/pg/pg.o
+rm mods/pg/libctrpg.so
+cd plugins/pg;
+gcc -c pg.c -Wall -I/usr/include/postgresql/ -lpq -Werror -fpic -o pg.o
+gcc -shared -o libctrpg.so pg.o -I/usr/include/postgresql/ -lpq
+cd ..
+cd ..
+cp plugins/pg/libctrpg.so mods/pg/libctrpg.so
+
+
+
 make clean;
 ./mk.sh
 
