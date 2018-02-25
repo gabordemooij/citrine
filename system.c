@@ -23,6 +23,26 @@
 #include "citrine.h"
 #include "siphash.h"
 
+// call this function to start a nanosecond-resolution timer
+struct timespec timer_start(){
+    struct timespec start_time;
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start_time);
+    return start_time;
+}
+
+// call this function to end a timer, returning nanoseconds elapsed as a long
+long timer_end(struct timespec start_time){
+    struct timespec end_time;
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end_time);
+    long diffInNanos = (end_time.tv_sec - start_time.tv_sec) * (long)1e9 + (end_time.tv_nsec - start_time.tv_nsec);
+    return diffInNanos;
+}
+
+int CtrTimerStartEnd = 0;
+
+struct timespec vartime;
+long time_elapsed_nanos;
+
 /**
  * @internal
  * GarbageCollector Marker
@@ -231,6 +251,7 @@ ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList) 
  */
 ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_gc_memlimit = (uint64_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	ctr_size poolSize = ctr_gc_memlimit;
 	return myself;
 }
 
@@ -241,11 +262,15 @@ ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Available Modes:
  * 0 - No Garbage Collection
- * 1 - Activate Garbage Collector
+ * 1 - Activate Garbage Collector (default)
  * 4 - Activate Garbage Collector for every single step (testing only)
+ * 8 - Activate experimental Pool Memory Allocation Manager (experimental!)
  */
 ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_gc_mode = (int) ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	if (ctr_gc_mode & 8) {
+		ctr_pool_init(ctr_gc_memlimit/2);
+	}
 	return myself;
 }
 
