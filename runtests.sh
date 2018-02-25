@@ -44,7 +44,7 @@ rm plugins/curl/src/libctrcurl.so
 rm plugins/curl/src/curl.o
 rm mods/curl/libctrcurl.so
 cd plugins/curl/src;
-gcc -c curl.c -Wall	-Werror -fpic -o curl.o
+gcc -DCTRPLUGIN_CURL_CURLOPT_URL -c curl.c -Wall	-Werror -fpic -o curl.o
 gcc -shared -o libctrcurl.so curl.o -lcurl
 cd ..
 cd ..
