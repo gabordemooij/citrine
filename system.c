@@ -250,25 +250,8 @@ ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList) 
  * an out-of-memory error.
  */
 ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
-	
-	printf("---> %lu \n", ctr_gc_memlimit);
-	
-	ctr_size alreadyAllocated = ctr_gc_memlimit;
-	
 	ctr_gc_memlimit = (uint64_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
-	
-	ctr_size poolSize = ctr_gc_memlimit - alreadyAllocated; 
-	
-	ctr_pool_init(poolSize);
-	
-	printf("---> %lu \n", ctr_gc_memlimit);
-	
-	printf("---> %lu \n", alreadyAllocated);
-	
-	
-	printf("---> %lu \n", poolSize);
-	
-	
+	ctr_size poolSize = ctr_gc_memlimit;
 	return myself;
 }
 
@@ -279,11 +262,15 @@ ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Available Modes:
  * 0 - No Garbage Collection
- * 1 - Activate Garbage Collector
+ * 1 - Activate Garbage Collector (default)
  * 4 - Activate Garbage Collector for every single step (testing only)
+ * 8 - Activate experimental Pool Memory Allocation Manager (experimental!)
  */
 ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_gc_mode = (int) ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	if (ctr_gc_mode & 8) {
+		ctr_pool_init(ctr_gc_memlimit/2);
+	}
 	return myself;
 }
 
