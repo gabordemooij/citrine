@@ -1,0 +1,10 @@
+#test file argument validation
+
+☞ file := File new: File messagedoesnotexist.
+☞ file := File new: Nil.
+☞ file := File new: 123.
+☞ file := File new: True.
+☞ file := File new: False.
+☞ file := File new: Object.
+
+✎ write: 'I did not crash!', brk.

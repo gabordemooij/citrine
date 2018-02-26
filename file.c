@@ -29,7 +29,7 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	s->info.type = CTR_OBJECT_TYPE_OTEX; /* indicates resource for GC */
 	s->link = myself;
 	s->value.rvalue = NULL;
-	pathObject = ctr_build_string( argumentList->object->value.svalue->value, argumentList->object->value.svalue->vlen );
+	pathObject = ctr_internal_cast2string( argumentList->object );
 	ctr_internal_object_add_property( s, ctr_build_string_from_cstring( "path" ), pathObject, 0 );
 	return s;
 }
