@@ -1,4 +1,6 @@
-CFLAGS = -mtune=native -Wall -D forLinux
+CTRLANG = langUS
+
+CFLAGS = -mtune=native -Wall -D forLinux -D$(CTRLANG)
 OBJS = siphash.o utf8.o memory.o util.o base.o collections.o file.o system.o \
        world.o lexer.o parser.o walker.o citrine.o
 

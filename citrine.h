@@ -1,4 +1,10 @@
+
+#ifdef langNL
+#include "i18n/nl/dictionarynl.h"
+#else
 #include "dictionary.h"
+#endif
+
 #include <inttypes.h>
 #include <stdlib.h>
 
