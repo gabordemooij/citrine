@@ -4,11 +4,12 @@
 #include <ctype.h>
 #include <stdarg.h>
 #include <math.h>
-#include <unistd.h>
 #include <stdint.h>
 #include <time.h>
 
-#ifdef forLinux
+#ifdef __MINGW32__
+#include "win/rand.h"
+#elif defined(forLinux)
 #include <bsd/stdlib.h>
 #include <bsd/string.h>
 #endif

@@ -34,7 +34,7 @@
 #if defined(__BYTE_ORDER__) && defined(__ORDER_LITTLE_ENDIAN__) && \
 	__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
 #  define _le64toh(x) ((uint64_t)(x))
-#elif defined(_WIN32)
+#elif defined(__MINGW32__)
 /* Windows is always little endian, unless you're on xbox360
    http://msdn.microsoft.com/en-us/library/b0084kay(v=vs.80).aspx */
 #  define _le64toh(x) ((uint64_t)(x))

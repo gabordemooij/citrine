@@ -5,9 +5,9 @@
 #include <stdarg.h>
 #include <math.h>
 #include <stdint.h>
-#include <unistd.h>
-#include <dlfcn.h>
 #include "citrine.h"
+#include <dlfcn.h>
+#include <unistd.h>
 
 char* np;
 
@@ -105,6 +105,7 @@ void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
  * On loading, the plugin will get a chance to add its objects to the world
  * through a constructor function.
  */
+
 typedef void* (*plugin_init_func)();
 void* ctr_internal_plugin_find(ctr_object* key) {
 	ctr_object* modNameObject = ctr_internal_cast2string(key);
@@ -114,12 +115,16 @@ void* ctr_internal_plugin_find(ctr_object* key) {
 	char* modNameLow;
 	plugin_init_func init_plugin;
 	char* realPathModName = NULL;
-	modName = ctr_heap_allocate_cstring( modNameObject );
+	modName = ctr_heap_allocate_cstring(modNameObject);
 	modNameLow = modName;
-	for ( ; *modNameLow; ++modNameLow) *modNameLow = tolower(*modNameLow);
-	snprintf(pathNameMod, 1024,"mods/%s/libctr%s.so", modName, modName);
-	ctr_heap_free( modName );
+	for (; *modNameLow; ++modNameLow) *modNameLow = tolower(*modNameLow);
+	snprintf(pathNameMod, 1024, "mods/%s/libctr%s.so", modName, modName);
+	ctr_heap_free(modName);
+	#ifdef __MINGW32__
+	_fullpath(realPathModName, pathNameMod, 1024);
+	#else
 	realPathModName = realpath(pathNameMod, NULL);
+	#endif
 	if (access(realPathModName, F_OK) == -1) return NULL;
 	handle =  dlopen(realPathModName, RTLD_NOW);
 	free(realPathModName);

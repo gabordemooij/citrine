@@ -8,9 +8,12 @@
 #include <stdarg.h>
 #include <math.h>
 #include <stdint.h>
-#include <unistd.h>
 #include "citrine.h"
 #include "siphash.h"
+
+#ifdef __MINGW32__
+#include <winsock2.h>
+#endif
 
 int ctr_argc;
 char** ctr_argv;
@@ -65,6 +68,11 @@ int main(int argc, char* argv[]) {
 	ctr_program_security_profile = 0;
 	ctr_program_tick = 0;
 	ctr_cli_read_args(argc, argv);
+	#ifdef __MINGW32__
+   	WORD versionWanted = MAKEWORD(2, 2);
+   	WSADATA wsaData;
+   	WSAStartup(versionWanted, &wsaData);
+	#endif
 	ctr_source_mapping = 1;
 	ctr_clex_keyword_me = CTR_DICT_ME;
 	ctr_clex_keyword_my = CTR_DICT_MY;

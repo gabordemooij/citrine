@@ -4,7 +4,6 @@
 #include <ctype.h>
 #include <stdarg.h>
 #include <math.h>
-#include <unistd.h>
 #include <stdint.h>
 #include <time.h>
 

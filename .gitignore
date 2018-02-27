@@ -19,5 +19,7 @@ x.sh
 p.sh
 /plugins/jsonc
 /plugins/gtk
-
+.vs
+.vscode
+*.vsspell
 

@@ -4,20 +4,29 @@
 #include <ctype.h>
 #include <stdarg.h>
 #include <math.h>
-#include <unistd.h>
 #include <stdint.h>
 #include <time.h>
-#include <regex.h>
 #include <errno.h>
 
+#ifdef __MINGW32__
+#include <winsock2.h>
+#include <Ws2tcpip.h>
+//#include <pcreposix.h>
+#include <tre/regex.h>
+#include "win/rand.h"
+
+#define SHUT_RDWR SD_BOTH
+#else
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <regex.h>
 
 #ifdef forLinux
 #include <bsd/stdlib.h>
 #include <bsd/string.h>
+#endif
 #endif
 
 #include "citrine.h"
@@ -418,7 +427,11 @@ ctr_object* ctr_sock_error( int fd, int want2close ) {
 	CtrStdFlow = ctr_build_string_from_cstring( strerror( errno ) );
 	if (want2close) {
 		shutdown(fd, SHUT_RDWR);
+		#ifdef __MINGW32__
+		closesocket(fd);
+		#else
 		close(fd);
+		#endif
 	}
 	return CtrStdNil;
 }
@@ -450,7 +463,11 @@ ctr_object* ctr_object_send2remote(ctr_object* myself, ctr_argument* argumentLis
 	);
 	if((sockfd = socket(AF_INET6, SOCK_STREAM, 0)) < 0) return ctr_sock_error( sockfd, 0 );
 	memset(&serv_addr, '0', sizeof(serv_addr));
+	#ifdef __MINGW32__
+	server = gethostbyname(ip);
+	#else
 	server = gethostbyname2(ip,AF_INET6);
+	#endif
     if (server == NULL) {
         fprintf(stderr, "ERROR, no such host\n");
         exit(0);
@@ -463,18 +480,30 @@ ctr_object* ctr_object_send2remote(ctr_object* myself, ctr_argument* argumentLis
 	int c = 0;
 	c = connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
 	if ( c != 0 ) return ctr_sock_error( sockfd, 1 );
-	c = send(sockfd, (size_t*) &messageObj->value.svalue->vlen, sizeof(size_t), 0);
+	c = send(sockfd, (char*) &messageObj->value.svalue->vlen, sizeof(size_t), 0);
 	if ( c < 0 ) ctr_sock_error( sockfd, 1 );
 	c = send(sockfd, messageObj->value.svalue->value, messageObj->value.svalue->vlen, 0);
 	if ( c < 0 ) ctr_sock_error( sockfd, 1 );
+	#ifdef __MINGW32__
+	n = recv(sockfd, (char*) &responseLength, sizeof(responseLength), 0);
+	#else	
 	n = read(sockfd, (size_t*) &responseLength, sizeof(responseLength));
+	#endif
 	if ( n == 0 ) ctr_sock_error( sockfd, 1 );
 	responseBuff = ctr_heap_allocate( responseLength + 1 );
+	#ifdef __MINGW32__
+	n = recv(sockfd, responseBuff, responseLength, 0);
+	#else
 	n = read(sockfd, responseBuff, responseLength);
+	#endif
 	if ( n == 0 ) ctr_sock_error( sockfd, 1 );
 	answer = ctr_build_string_from_cstring( responseBuff );
 	shutdown(sockfd, SHUT_RDWR);
+	#ifdef __MINGW32__
+	closesocket(sockfd);
+	#else
 	close(sockfd);
+	#endif
 	ctr_heap_free(ip);
 	ctr_heap_free(responseBuff);
 	return answer;

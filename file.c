@@ -4,14 +4,14 @@
 #include <ctype.h>
 #include <stdarg.h>
 #include <math.h>
-#include <unistd.h>
 #include <stdint.h>
 #include <time.h>
 #include <errno.h>
-#include <sys/file.h>
-#include <dirent.h>
 #include "citrine.h"
 #include "siphash.h"
+#include <unistd.h>
+#include <sys/file.h>
+#include <dirent.h>
 
 /**
  * File
@@ -509,6 +509,7 @@ ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+#ifndef __MINGW32__
 /**
  * @internal
  *
@@ -655,3 +656,19 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_heap_free(pathValue);
 	return fileList;
 }
+
+#else
+
+ctr_object* ctr_file_unlock(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool(0);
+}
+
+ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool(1);
+}
+
+ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_array_new(CtrStdArray, NULL);
+}
+
+#endif

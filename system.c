@@ -4,21 +4,33 @@
 #include <ctype.h>
 #include <stdarg.h>
 #include <math.h>
-#include <unistd.h>
 #include <stdint.h>
 #include <time.h>
-#include <sys/wait.h>
-#include <syslog.h>
 #include <signal.h>
 
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
+#ifdef __MINGW32__
+#include <winsock2.h>
+#include <Ws2tcpip.h>
+#include "win/syslog.h"
+#include <malloc.h> // for alloca
+#include "win/rand.h"
+#include <tre/regex.h>
 
+#define SHUT_RDWR SD_BOTH
+#else
 #ifdef forLinux
 #include <bsd/stdlib.h>
 #include <bsd/string.h>
 #endif
+#include <regex.h>
+#include <sys/wait.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <syslog.h>
+#endif
+
 
 #include "citrine.h"
 #include "siphash.h"
@@ -544,7 +556,14 @@ ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList) 
 	envValObj = ctr_internal_cast2string(argumentList->next->object);
 	envVarNameStr = ctr_heap_allocate_cstring( envVarNameObj );
 	envValStr = ctr_heap_allocate_cstring( envValObj );
+	#ifdef __MINGW32__
+	size_t envStringLength = strlen(envVarNameStr) + strlen(envValStr) + 1;
+	char envStringBuffer[envStringLength];
+	sprintf(envStringBuffer, "%s=%s", envVarNameStr, envValStr);
+	_putenv(envStringBuffer);
+	#else
 	setenv(envVarNameStr, envValStr, 1);
+	#endif
 	ctr_heap_free( envValStr );
 	ctr_heap_free( envVarNameStr );
 	return myself;
@@ -619,7 +638,11 @@ ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	ctr_size bytes = 0;
 	ctr_size page = 64;
+#ifndef __MINGW32__
 	char buffer[page];
+#else
+	char* buffer = alloca(page * sizeof(char));
+#endif
 	size_t content_size = 0;
 	char *content = ctr_heap_allocate(0);
 	clearerr(stdin);
@@ -801,6 +824,7 @@ ctr_object* ctr_program_flush(ctr_object* myself, ctr_argument* ctr_argumentList
  * }.
  * Pen write: 'Parent'.
  */
+#ifndef __MINGW32__
 ctr_object* ctr_program_fork(ctr_object* myself, ctr_argument* argumentList) {
 	int p;
 	int* ps;
@@ -862,6 +886,11 @@ ctr_object* ctr_program_fork(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	return child;
 }
+#else
+ctr_object* ctr_program_fork(ctr_object* myself, ctr_argument* argumentList) {
+	return CtrStdNil;
+}
+#endif
 
 /**
  * [Program] message: [String].
@@ -930,6 +959,7 @@ ctr_object* ctr_program_listen(ctr_object* myself, ctr_argument* argumentList) {
  * This message will cause the current program to stop and wait
  * for the child program to end.
  */
+#ifndef __MINGW32__
 ctr_object* ctr_program_join(ctr_object* myself, ctr_argument* argumentList) {
 	int pid;
 	ctr_resource* rs = myself->value.rvalue;
@@ -948,6 +978,11 @@ ctr_object* ctr_program_join(ctr_object* myself, ctr_argument* argumentList) {
 	waitpid(pid, 0, 0);
 	return CtrStdNil;
 }
+#else
+ctr_object* ctr_program_join(ctr_object* myself, ctr_argument* argumentList) {
+	return CtrStdNil;
+}
+#endif
 
 /**
  * [Program] pid
@@ -1001,9 +1036,12 @@ ctr_object* ctr_program_log_generic(ctr_object* myself, ctr_argument* argumentLi
 			argumentList->object
 		)
 	);
+#ifndef __MINGW32__
 	if (ctr_program_log_type == 's') {
-		syslog( level, "%s", message );
-	} else {
+		syslog(level, "%s", message);
+	} else
+#endif // !_WIN
+	 {
 		if (level == LOG_WARNING ) {
 			fwrite( CTR_ANSI_COLOR_YELLOW, sizeof(char), strlen(CTR_ANSI_COLOR_RED), stderr);
 		}
@@ -1152,7 +1190,7 @@ ctr_object* ctr_program_accept(ctr_object* myself, ctr_argument* argumentList ) 
 	ctr_check_permission( CTR_SECPRO_FORK );
 	responder = argumentList->object;
 	listenfd = socket(AF_INET6, SOCK_STREAM, 0);
-	bzero((char *) &serv_addr, sizeof(serv_addr));
+	memset(&serv_addr, 0, sizeof(serv_addr));
     serv_addr.sin6_flowinfo = 0;
     serv_addr.sin6_family = AF_INET6;
     serv_addr.sin6_addr = in6addr_any;
@@ -1167,9 +1205,17 @@ ctr_object* ctr_program_accept(ctr_object* myself, ctr_argument* argumentList ) 
 	{
 		x++;
 		connfd = accept(listenfd, (struct sockaddr*)NULL ,NULL); // accept awaiting request
+		#ifdef __MINGW32__
+		recv(connfd, (char*)&lengthBuff, sizeof(size_t), 0);
+		#else
 		read( connfd, &lengthBuff, sizeof(size_t));
+		#endif
 		dataBuff = ctr_heap_allocate( lengthBuff + 1 );
-		read(connfd, dataBuff, lengthBuff);
+		#ifdef __MINGW32__
+		recv(connfd, dataBuff, lengthBuff, 0);
+		#else
+		read(connfd, dataBuff, lengthBuff);		
+		#endif
 		stringObj = ctr_build_string_from_cstring(dataBuff);
 		messageDescriptorArray = ctr_string_eval( stringObj, NULL );
 		messageSelector = ctr_array_shift( messageDescriptorArray, NULL );
@@ -1180,15 +1226,28 @@ ctr_object* ctr_program_accept(ctr_object* myself, ctr_argument* argumentList ) 
 		answerObj = ctr_internal_cast2string(
 			ctr_object_message( responder, callArgument )
 		);
+		#ifdef __MINGW32__
+		send(connfd, (char*)&answerObj->value.svalue->vlen, sizeof(size_t), 0);
+		send(connfd, answerObj->value.svalue->value, answerObj->value.svalue->vlen, 0);		
+		#else
 		write( connfd, (size_t*) &answerObj->value.svalue->vlen, sizeof(size_t) );
 		write( connfd, answerObj->value.svalue->value, answerObj->value.svalue->vlen);
+		#endif
 		ctr_heap_free(dataBuff);
 		ctr_heap_free(callArgument->next);
 		ctr_heap_free(callArgument);
+		#ifdef __MINGW32__
+		closesocket(connfd);
+		#else
 		close(connfd);
+		#endif
 	}
 	shutdown(listenfd, SHUT_RDWR);
+	#ifdef __MINGW32__
+	closesocket(listenfd);
+	#else
 	close(listenfd);
+	#endif
 	return 0;
 }
 
@@ -1323,7 +1382,11 @@ ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	ctr_object* arg = ctr_internal_cast2number(argumentList->object);
 	int n = (int) arg->value.nvalue;
+	#ifdef __MINGW32__
+	Sleep(n * 1000);
+	#else
 	sleep(n);
+	#endif
 	return myself;
 }
 
@@ -1346,18 +1409,15 @@ ctr_object* ctr_clock_get_time( ctr_object* myself, ctr_argument* argumentList, 
 	struct tm* date;
 	time_t timeStamp;
 	ctr_object* answer;
-	char* zone;
 	timeStamp = (time_t) ctr_internal_cast2number(
 		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), CTR_CATEGORY_PRIVATE_PROPERTY )
 	)->value.nvalue;
-	zone = ctr_heap_allocate_cstring(
-		ctr_internal_cast2string(
-			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY )
-		)
-	);
-	setenv( "TZ", zone, 1 );
-	date = localtime( &timeStamp );
+	#ifdef __MINGW32__
+	_putenv("TZ=UTC");
+	#else
 	setenv( "TZ", "UTC", 1 );
+	#endif
+	date = localtime( &timeStamp );
 	switch( part ) {
 		case 'Y':
 			answer = ctr_build_number_from_float( (ctr_number) date->tm_year + 1900 );
@@ -1378,7 +1438,6 @@ ctr_object* ctr_clock_get_time( ctr_object* myself, ctr_argument* argumentList, 
 			answer = ctr_build_number_from_float( (ctr_number) date->tm_sec );
 			break;
 	}
-	ctr_heap_free( zone );
 	return answer;
 }
 
@@ -1399,7 +1458,7 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
 			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY )
 		)
 	);
-	setenv( "TZ", zone, 1 );
+	// setenv( "TZ", zone, 1 );
 	date = localtime( &timeStamp );
 	switch( part ) {
 		case 'Y':
@@ -1423,7 +1482,7 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
 	}
 	ctr_heap_free( zone );
 	ctr_internal_object_set_property( myself, key, ctr_build_number_from_float( (double_t) mktime( date ) ), 0 );
-	setenv( "TZ", "UTC", 1 );
+	// setenv( "TZ", "UTC", 1 );
 	return myself;
 }
 
@@ -1672,9 +1731,9 @@ ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList ) {
 		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), 0 )
 	)->value.nvalue;
 	description = ctr_heap_allocate( 41 );
-	setenv( "TZ", zone, 1 );
+	// setenv( "TZ", zone, 1 );
 	strftime( description, 40, format, localtime( &timeStamp ) );
-	setenv( "TZ", "UTC", 1 );
+	// setenv( "TZ", "UTC", 1 );
 	answer = ctr_build_string_from_cstring( description );
 	ctr_heap_free( description );
 	ctr_heap_free( format );
@@ -1772,7 +1831,7 @@ ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, ui
 			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY )
 		)
 	);
-	setenv( "TZ", zone, 1 );
+	// setenv( "TZ", zone, 1 );
 	date = localtime( &time );
 	if ( strncmp( unit, CTR_DICT_HOURS, l ) == 0 || strncmp( unit, CTR_DICT_HOUR, l ) == 0 || strncmp( unit, CTR_DICT_HOURS_ABBR, l ) == 0  ) {
 		date->tm_hour += number;
@@ -1790,7 +1849,7 @@ ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, ui
 		date->tm_mday += number * 7;
 	}
 	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), ctr_build_number_from_float( (ctr_number) mktime( date ) ), CTR_CATEGORY_PRIVATE_PROPERTY  );
-	setenv( "TZ", "UTC", 1 );
+	// setenv( "TZ", "UTC", 1 );
 	ctr_heap_free( zone );
 	return myself;
 }
