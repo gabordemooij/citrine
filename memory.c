@@ -298,7 +298,7 @@ int ctr_pool_bucket( ctr_size size ) {
 		size = mpod;
 	} else if ( size > mpod && size <= lpod && lpodCount<lpods) {
 		size = lpod;
-	} else if (size <= lpod) {
+	} else if (size == spod || size == mpod || size == lpod) {
 		size = size + 1; /* identify as custom size (avoid ambiguity 32 -> 33) otherwise double free(). */
 	}
 	return size;
