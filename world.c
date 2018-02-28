@@ -49,32 +49,41 @@ char CtrHashKey[16];
  * Reads in an entire file.
  */
 char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
-   char* prg;
-   char ch;
-   int prev;
-   uint64_t size;
-   uint64_t real_size;
-   FILE* fp;
-   fp = fopen(file_name,"r");
-   if( fp == NULL ) {
-      fprintf(stderr, "Error while opening the file.\n");
-      exit(1);
-   }
-   prev = ftell(fp);
-   fseek(fp,0L,SEEK_END);
-   size = ftell(fp);
-   fseek(fp,prev,SEEK_SET);
-   real_size = (size+4)*sizeof(char);
-   prg = ctr_heap_allocate(real_size); /* add 4 bytes, 3 for optional closing sequence verbatim mode and one lucky byte! */
-   ctr_program_length=0;
-   while( ( ch = fgetc(fp) ) != EOF ) prg[ctr_program_length++]=ch;
-   if ( ctr_program_length != size ) {
-	fprintf(stderr, "Unable to read program file.\n" );
-	exit(1);
-   }
-   fclose(fp);
-   *total_size = (uint64_t) real_size;
-   return prg;
+    char* prg;
+    char ch;
+    int prev;
+    uint64_t size;
+    uint64_t real_size;
+    FILE* fp;
+    fp = fopen(file_name,"r");
+    if( fp == NULL ) {
+       fprintf(stderr, "Error while opening the file.\n");
+       exit(1);
+    }
+    prev = ftell(fp);
+    fseek(fp,0L,SEEK_END);
+    size = ftell(fp);
+    fseek(fp,prev,SEEK_SET);
+    real_size = (size+4)*sizeof(char);
+    prg = ctr_heap_allocate(real_size); /* add 4 bytes, 3 for optional closing sequence verbatim mode and one lucky byte! */
+    ctr_program_length=0;
+	uint64_t charactersRead = 0;
+    while( ( ch = fgetc(fp) ) != EOF ) {
+ 		prg[ctr_program_length++]=ch;
+#ifdef __MINGW32__
+		 /* On Windows, line endings consist of the two characters CRLF.
+		  	However, fgetc automatically converts this to a single \n on windows. */
+		charactersRead++;
+		if (ch == '\n') charactersRead++;
+#endif
+	}		 
+    if ( charactersRead != size ) {
+		fprintf(stderr, "Unable to read program file.\n" );
+		exit(1);
+    }
+    fclose(fp);
+    *total_size = (uint64_t) real_size;
+    return prg;
 }
 
 /**

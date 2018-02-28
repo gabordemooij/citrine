@@ -1,6 +1,7 @@
 *.ksh
 *.html
 *.atxt
+*.exe
 *.so
 *.o
 *.php
@@ -22,4 +23,3 @@ p.sh
 .vs
 .vscode
 *.vsspell
-
