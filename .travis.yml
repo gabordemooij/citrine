@@ -13,10 +13,12 @@ before_script:
       sudo sh -c 'echo 0 > /proc/sys/net/ipv6/conf/all/disable_ipv6';
     fi
   - psql -c 'create role gabor;' -U postgres
-  - psql -c 'alter role gabor with password "gabor";' -U postgres
+  - psql -c "alter role gabor with password 'gabor';" -U postgres
   - psql -c 'create database testje;' -U postgres
   - psql -c 'grant all privileges on database testje to gabor;' -U postgres
-  - psql -c 'grant all privileges on database testje to gabor;' -U gabor -d testje
+  - psql -c 'create table boeken (id integer, titel varchar(100));' -U gabor -d testje
+  - psql -c "insert into boeken values(1,'handboek')" -U gabor -d testje
+  - psql -c "insert into boeken values(2,'telefoongids')" -U gabor -d testje
 
 before_install:
   - sudo chmod 777 /var/log/syslog
