@@ -1,12 +1,22 @@
 language: c
 
 dist: trusty
+
+
+services:
+  - postgresql
+
 before_script:
   # Add an IPv6 config - see the corresponding Travis issue
   # https://github.com/travis-ci/travis-ci/issues/8361
   - if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
       sudo sh -c 'echo 0 > /proc/sys/net/ipv6/conf/all/disable_ipv6';
     fi
+  - psql -c 'create role gabor;' -U postgres
+  - psql -c 'alter role gabor with password "gabor";' -U postgres
+  - psql -c 'create database testje;' -U postgres
+  - psql -c 'grant all privileges on database testje to gabor;' -U postgres
+  - psql -c 'grant all privileges on database testje to gabor;' -U gabor -d testje
 
 before_install:
   - sudo chmod 777 /var/log/syslog
