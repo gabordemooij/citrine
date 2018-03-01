@@ -7,12 +7,12 @@ usedMemory4 := 0.
 
 Broom mode: 0.
 
-f := File new: '/tmp/test.txt'.
+f := File new: File tempDir + '/test.txt'.
 f write: 'Lorem Ipsum'.
 f close.
   
 
-f := File new: '/tmp/test.txt'.
+f := File new: File tempDir + '/test.txt'.
 text := f read.
 f close.
 
@@ -23,7 +23,7 @@ usedMemory1 := Broom keptAlloc.
 #Pen write: usedMemory1, brk.
 
 
-f := File new: '/tmp/test.txt'.
+f := File new: File tempDir + '/test.txt'.
 text := f read.
 f close.
 
@@ -31,7 +31,7 @@ Broom sweep.
 usedMemory2 := Broom keptAlloc.
 #Pen write: usedMemory2, brk.
 
-f := File new: '/tmp/test.txt'.
+f := File new: File tempDir + '/test.txt'.
 text := f read.
 f close.
 

@@ -3,7 +3,7 @@ File close. #should do nothing
 File readBytes: 100. #does nothing
 File writeBytes: 'x'. #does nothing
 File open. #does nothing
-f := File new: '/tmp/from.txt'.
+f := File new: File tempDir + '/from.txt'.
 f write: 'hello'.
 Pen write: 'file contains: ' + (f read) + '\n'.
 f open: 'r+'.
@@ -14,7 +14,4 @@ Pen write: 'read 3 more bytes: "' + x + '"\n'.
 w := f writeBytes: ' friend!'.
 f close.
 Pen write: 'Bytes written: ' + w, brk.
-Pen write: 'Finally, file contains: '+ (File new: '/tmp/from.txt', read) + '\n'.
-
-
-
+Pen write: 'Finally, file contains: '+ (File new: File tempDir + '/from.txt', read) + '\n'.

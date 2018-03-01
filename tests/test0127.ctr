@@ -1,10 +1,10 @@
 #File Seek test
 
 #delete files if necessary
-{ File new: '/tmp/seek_test.txt', delete. } catch: {}, run.
+{ File new: File tempDir + '/seek_test.txt', delete. } catch: {}, run.
 
 #confirm base condition
-File new: '/tmp/seek_test.txt', exists ifFalse: {
+File new: File tempDir + '/seek_test.txt', exists ifFalse: {
 	Pen write: 'Confirmed. Target file does not exist.\n'.
 }.
 
@@ -12,7 +12,7 @@ File new: '/tmp/seek_test.txt', exists ifFalse: {
 File seek: 9.
 
 #create the from file
-f := File new: '/tmp/seek_test.txt'.
+f := File new: File tempDir + '/seek_test.txt'.
 f write: 'hello world'.
 Pen write: f read, brk.
 

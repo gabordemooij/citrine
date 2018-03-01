@@ -623,12 +623,12 @@ ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList
 ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_unlock(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList);
-
-
+ctr_object* ctr_file_temp_directory(ctr_object* myself, ctr_argument* argumentList); 
 
 /**
  * Command Object Interface
  */
+ctr_object* ctr_program_OS(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_program_num_of_args(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentList);

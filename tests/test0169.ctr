@@ -7,11 +7,11 @@ usedMemory4 := 0.
 
 Broom mode: 0.
 
-f := File new: '/tmp/citrine_test_file.txt'.
+f := File new: File tempDir + '/citrine_test_file.txt'.
 f exists: { f delete. }.
 f write: 'hello world'.
 
-f := File new: '/tmp/citrine_test_file.txt'.
+f := File new: File tempDir + '/citrine_test_file.txt'.
 q := f read.
 Pen write: q, brk.
 
@@ -19,7 +19,7 @@ Broom sweep.
 usedMemory1 := Broom keptAlloc.
 #Pen write: usedMemory1, brk.
 
-f := File new: '/tmp/citrine_test_file.txt'.
+f := File new: File tempDir + '/citrine_test_file.txt'.
 q := f read.
 Pen write: q, brk.
 
@@ -27,7 +27,7 @@ Broom sweep.
 usedMemory2 := Broom keptAlloc.
 #Pen write: usedMemory2, brk.
 
-f := File new: '/tmp/citrine_test_file.txt'.
+f := File new: File tempDir + '/citrine_test_file.txt'.
 q := f read.
 Pen write: q, brk.
 

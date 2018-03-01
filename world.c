@@ -70,10 +70,10 @@ char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
 	uint64_t charactersRead = 0;
     while( ( ch = fgetc(fp) ) != EOF ) {
  		prg[ctr_program_length++]=ch;
+		charactersRead++;
 #ifdef __MINGW32__
 		 /* On Windows, line endings consist of the two characters CRLF.
 		  	However, fgetc automatically converts this to a single \n on windows. */
-		charactersRead++;
 		if (ch == '\n') charactersRead++;
 #endif
 	}		 
@@ -887,12 +887,14 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_UNLOCK ), &ctr_file_unlock );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_LIST ), &ctr_file_list );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_file_to_string );
+	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_TEMPDIR ), &ctr_file_temp_directory);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_FILE ), CtrStdFile, 0);
 	CtrStdFile->link = CtrStdObject;
 	CtrStdFile->info.sticky = 1;
 
 	/* Command */
 	CtrStdCommand = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_OS ), &ctr_program_OS );	
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ARGUMENT ), &ctr_program_argument );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ARGUMENT_COUNT ), &ctr_program_num_of_args );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ENVIRONMENT_VARIABLE ), &ctr_program_get_env );

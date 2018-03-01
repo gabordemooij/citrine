@@ -7,7 +7,7 @@ usedMemory4 := 0.
 
 Broom mode: 0.
 
-f := File new: '/tmp/citrine_test_file.txt'.
+f := File new: File tempDir + '/citrine_test_file.txt'.
 f open: 'r'.
 f close.
 

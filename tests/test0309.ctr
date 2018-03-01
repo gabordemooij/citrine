@@ -1,12 +1,12 @@
 #Test whether correct descriptive error messages are displayed.
 💻 shell:
 	(Slurp
-		touch: '/tmp/blah.txt;',
-		chmod uog-w: '/tmp/blah.txt',
+		touch: File tempDir + '/blah.txt;',
+		chmod uog-w: File tempDir + '/blah.txt',
 	obtain).
 
 {
-	☞ file := File new: '/tmp/blah.txt'.
+	☞ file := File new: File tempDir + '/blah.txt'.
 	file write: 'hello'.
 } catch: { :error 
 	✎ write: error, brk.
@@ -14,11 +14,11 @@
 
 	
 💻 shell: (
-	Slurp chmod uog-r: '/tmp/blah.txt', obtain
+	Slurp chmod uog-r: File tempDir + '/blah.txt', obtain
 ).
 
 {
-	☞ file := File new: '/tmp/blah.txt'.
+	☞ file := File new: File tempDir + '/blah.txt'.
 	file read.
 } catch: { :error 
 	✎ write: error, brk.

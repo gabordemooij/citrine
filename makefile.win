@@ -6,6 +6,9 @@ OBJS = siphash.o utf8.o memory.o util.o base.o collections.o file.o system.o \
 
 all:ctr
 
+debug: CFLAGS += -DDEBUG -g
+debug: ctr
+
 install: ctr
 	cp ./ctr /usr/bin/ctr
 

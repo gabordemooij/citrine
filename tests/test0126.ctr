@@ -1,31 +1,37 @@
 #Test Shell fluid API
+fromPath := File tempDir + '/from.txt'.
+toPath := File tempDir + '/to.txt'.
 
 #Test echo
 Pen write: (Program shell: (Slurp echo: 'Hello I can write to console using fluid API!', obtain)).
 
 #delete files if necessary
-{ File new: '/tmp/from.txt', delete. } catch: {}, run.
-{ File new: '/tmp/to.txt', delete. } catch: {}, run.
+{ File new: fromPath, delete. } catch: {}, run.
+{ File new: toPath, delete. } catch: {}, run.
 
 #confirm base condition
-File new: '/tmp/to.txt', exists ifFalse: {
+File new: toPath, exists ifFalse: {
 	Pen write: 'Confirmed. Target file does not exist.\n'.
 }.
-File new: '/tmp/from.txt', exists ifFalse: {
+File new: fromPath, exists ifFalse: {
 	Pen write: 'Confirmed. Source file does not exist.\n'.
 }.
 
 
 #create the from file
-💻 shell: (Slurp touch: '/tmp/from.txt ;', echo: '"hello world" > /tmp/from.txt', obtain).
+💻 OS = 'WINDOWS' ifTrue: {
+	💻 shell: (Slurp type: 'nul > ' + fromPath + ' && ', echo: '"hello world" > ' + fromPath, obtain). 
+}, else: {
+	💻 shell: (Slurp touch: fromPath + ' ;', echo: '"hello world" > ' + fromPath, obtain).
+}.	
 
 
 #now use the fluid shell API to perform a copy action
-💻 shell: (Slurp cp: '/tmp/from.txt /tmp/to.txt', obtain).
+💻 shell: (Slurp cp: fromPath + ' ' + toPath, obtain).
 
-File new: '/tmp/to.txt', exists ifTrue: {
+File new: toPath, exists ifTrue: {
 	Pen write: 'Confirmed. Target file has been created by shell.\n'.
 }.
 
 #Can we read contents?
-Pen write: 'Contents of file is:' + (File new: '/tmp/to.txt', read), brk.
+Pen write: 'Contents of file is:' + (File new: toPath, read), brk.

@@ -13,6 +13,10 @@
 #include <sys/file.h>
 #include <dirent.h>
 
+#ifdef __MINGW32__
+#include <windows.h>
+#endif
+
 /**
  * File
  * 
@@ -508,6 +512,26 @@ ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	return myself;
 }
+
+ctr_object* ctr_file_temp_directory(ctr_object* myself, ctr_argument* argumentList) {
+#ifdef __MINGW32__
+	char tempDirectory[_MAX_PATH + 1];
+	int pathLength = GetTempPath(_MAX_PATH + 1, tempDirectory);
+	if (pathLength == 0) {
+		CtrStdFlow = ctr_build_string_from_cstring("Unable to get temp directory.");
+		CtrStdFlow->info.sticky = 1;
+	}
+	tempDirectory[pathLength - 1] = '\0';	// Remove trailing backslash.
+#else
+	char* tempDirectory = getenv("TMPDIR");
+	if (tempDirectory == NULL) {
+		tempDirectory = "/tmp";
+	}
+#endif
+
+	return ctr_build_string_from_cstring(tempDirectory);	
+}
+
 
 #ifndef __MINGW32__
 /**

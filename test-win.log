@@ -1,0 +1,504 @@
+tests/test0001.ctr interpret[1]
+tests/test0002.ctr interpret[2]
+tests/test0003.ctr interpret[3]
+tests/test0004.ctr interpret[4]
+tests/test0005.ctr interpret[5]
+tests/test0006.ctr interpret[6]
+tests/test0007.ctr interpret[7]
+tests/test0008.ctr interpret[8]
+tests/test0009.ctr interpret[9]
+tests/test0010.ctr interpret[10]
+tests/test0011.ctr interpret[11]
+tests/test0012.ctr interpret[12]
+tests/test0013.ctr interpret[13]
+tests/test0014.ctr interpret[14]
+tests/test0015.ctr interpret[15]
+tests/test0016.ctr interpret[16]
+tests/test0017.ctr interpret[17]
+tests/test0018.ctr interpret[18]
+tests/test0019.ctr interpret[19]
+tests/test0020.ctr interpret[20]
+tests/test0021.ctr interpret[21]
+tests/test0022.ctr interpret[22]
+tests/test0023.ctr interpret[23]
+tests/test0024.ctr interpret[24]
+tests/test0025.ctr interpret[25]
+tests/test0026.ctr interpret[26]
+tests/test0027.ctr interpret[27]
+tests/test0028.ctr interpret[28]
+tests/test0029.ctr interpret[29]
+tests/test0030.ctr interpret[30]
+tests/test0031.ctr interpret[31]
+tests/test0032.ctr interpret[32]
+tests/test0033.ctr interpret[33]
+tests/test0034.ctr interpret[34]
+tests/test0035.ctr interpret[35]
+tests/test0036.ctr interpret[36]
+tests/test0037.ctr interpret[37]
+tests/test0038.ctr interpret[38]
+tests/test0039.ctr interpret[39]
+tests/test0040.ctr interpret[40]
+tests/test0041.ctr interpret[41]
+tests/test0042.ctr interpret[42]
+tests/test0043.ctr interpret[43]
+tests/test0044.ctr interpret[44]
+tests/test0045.ctr interpret[45]
+tests/test0046.ctr interpret[46]
+tests/test0047.ctr interpret[47]
+tests/test0048.ctr interpret[48]
+tests/test0049.ctr interpretFAIL.
+EXPECTED:
+/tmp/test.txtHello!World!!1200
+
+BUT GOT:
+/tmp/test.txtUncatched error has occurred. Unable to open file: No such file or directory. #1 write: (tests/test0049.ctr: 5)
+tests/test0050.ctr interpret[49]
+tests/test0051.ctr interpret[50]
+tests/test0052.ctr interpret[51]
+tests/test0053.ctr interpret[52]
+tests/test0054.ctr interpret[53]
+tests/test0055.ctr interpret[54]
+tests/test0056.ctr interpret[55]
+tests/test0057.ctr interpret[56]
+tests/test0058.ctr interpret[57]
+tests/test0059.ctr interpret[58]
+tests/test0060.ctr interpret[59]
+tests/test0061.ctr interpret[60]
+tests/test0062.ctr interpret[61]
+tests/test0063.ctr interpret[62]
+tests/test0064.ctr interpret[63]
+tests/test0065.ctr interpret[64]
+tests/test0066.ctr interpret[65]
+tests/test0067.ctr interpret[66]
+tests/test0068.ctr interpret[67]
+tests/test0069.ctr interpret[68]
+tests/test0070.ctr interpret[69]
+tests/test0071.ctr interpret[70]
+tests/test0072.ctr interpret[71]
+tests/test0073.ctr interpret[72]
+tests/test0074.ctr interpret[73]
+tests/test0075.ctr interpret[74]
+tests/test0076.ctr interpret[75]
+tests/test0077.ctr interpret[76]
+tests/test0078.ctr interpret[77]
+tests/test0079.ctr interpret[78]
+tests/test0080.ctr interpret[79]
+tests/test0081.ctr interpret[80]
+tests/test0082.ctr interpret[81]
+tests/test0083.ctr interpret[82]
+tests/test0084.ctr interpret[83]
+tests/test0085.ctr interpret[84]
+tests/test0086.ctr interpret[85]
+tests/test0087.ctr interpret[86]
+tests/test0088.ctr interpret[87]
+tests/test0092.ctr interpret[88]
+tests/test0093.ctr interpret[89]
+tests/test0094.ctr interpret[90]
+tests/test0096.ctr interpret[91]
+tests/test0097.ctr interpret[92]
+tests/test0098.ctr interpret[93]
+tests/test0099.ctr interpret[94]
+tests/test0100.ctr interpret[95]
+tests/test0101.ctr interpret[96]
+tests/test0102.ctr interpret[97]
+tests/test0103.ctr interpret[98]
+tests/test0104.ctr interpret[99]
+tests/test0105.ctr interpret[100]
+tests/test0106.ctr interpret[101]
+tests/test0107.ctr interpret[102]
+tests/test0108.ctr interpret[103]
+tests/test0109.ctr interpret[104]
+tests/test0110.ctr interpret[105]
+tests/test0111.ctr interpret[106]
+tests/test0112.ctr interpret[107]
+tests/test0113.ctr interpret[108]
+tests/test0114.ctr interpret[109]
+tests/test0115.ctr interpret[110]
+tests/test0116.ctr interpret[111]
+tests/test0117.ctr interpretFAIL.
+EXPECTED:
+Let's make a nice cup of coffee! No more coffee. Ohno! Add some coffee (3) and water (2)! Let's brew... Coffee! Let's brew some more... Coffee! Let's brew some more... No more water. Ah fine, that's enough coffee for today!
+
+BUT GOT:
+Let's make a nice cup of coffee! Uncatched error has occurred. Key not found: Percolator #2 Percolator (tests/test0117.ctr: 5) #1 perky (tests/test0117.ctr: 5)
+tests/test0118.ctr interpretFAIL.
+EXPECTED:
+Number:0 String:0 File:NilNil[File (no path)][File (no path)]False[File (no path)][File (no path)] Array:Nil0Array ← 99919990 Map:01 Percolator:No more coffee.
+
+BUT GOT:
+Number:0 String:0 File:NilNil[File (no path)][File (no path)]False[File (no path)][File (no path)] Array:Nil0Array ← 99919990 Map:01 Percolator:Uncatched error has occurred. Key not found: Percolator #2 Percolator (tests/test0118.ctr: 44) #1 write: (tests/test0118.ctr: 44)
+tests/test0119.ctr interpretFAIL.
+EXPECTED:
+search=table&restaurant=pizzaria&menu=spaghetti&menu=macaroni&course[main]=canneloni&course[dessert]=tiramisu I was looking for a free table in a pizzaria,  but the waiter told me all tables have been corrupted by  spaghetti, macaroni and canneloni code.
+
+BUT GOT:
+search=table&restaurant=pizzaria&menu=spaghetti&menu=macaroni&course[main]=canneloni&course[dessert]=tiramisu Uncatched error has occurred. Key not found: Request #2 Request (tests/test0119.ctr: 5) #1 s (tests/test0119.ctr: 5)
+tests/test0120.ctr interpret[112]
+tests/test0121.ctr interpret[113]
+tests/test0122.ctr interpret[114]
+tests/test0123.ctr interpret[115]
+tests/test0124.ctr interpret[116]
+tests/test0125.ctr interpretFAIL.
+EXPECTED:
+file contains: hello read 2 bytes: "he" read 3 more bytes: "llo" Bytes written: 8 Finally, file contains: hello friend!
+
+BUT GOT:
+Uncatched error has occurred. Unable to open file: No such file or directory. #1 write: (tests/test0125.ctr: 7)
+tests/test0126.ctr interpretFAIL.
+EXPECTED:
+Hello I can write to console using fluid API! Confirmed. Target file does not exist. Confirmed. Source file does not exist. Confirmed. Target file has been created by shell. Contents of file is:hello world
+
+BUT GOT:
+Hello I can write to console using fluid API! Confirmed. Target file does not exist. Confirmed. Source file does not exist. Het systeem kan het opgegeven pad niet vinden. cp: kan status van '/tmp/from.txt' niet opvragen: No such file or directory Uncatched error has occurred. Unable to open file: No such file or directory. #5 read (tests/test0126.ctr: 31) #4 + (tests/test0126.ctr: 31) #3 write: (tests/test0126.ctr: 31) #2 run (tests/test0126.ctr: 8) #1 run (tests/test0126.ctr: 7)
+tests/test0127.ctr interpretFAIL.
+EXPECTED:
+Confirmed. Target file does not exist. hello world lo el ld
+
+BUT GOT:
+Confirmed. Target file does not exist. Uncatched error has occurred. Unable to open file: No such file or directory. #2 write: (tests/test0127.ctr: 16) #1 run (tests/test0127.ctr: 4)
+tests/test0128.ctr interpret[117]
+tests/test0129.ctr interpret[118]
+tests/test0130.ctr interpret[119]
+tests/test0131.ctr interpret[120]
+tests/test0132.ctr interpret[121]
+tests/test0133.ctr interpret[122]
+tests/test0134.ctr interpret[123]
+tests/test0135.ctr interpret[124]
+tests/test0136.ctr interpret[125]
+tests/test0137.ctr interpret[126]
+tests/test0138.ctr interpret[127]
+tests/test0139.ctr interpret[128]
+tests/test0140.ctr interpret[129]
+tests/test0141.ctr interpret[130]
+tests/test0142.ctr interpret[131]
+tests/test0143.ctr interpret[132]
+tests/test0144.ctr interpret[133]
+tests/test0145.ctr interpret[134]
+tests/test0146.ctr interpret[135]
+tests/test0147.ctr interpret[136]
+tests/test0148.ctr interpret[137]
+tests/test0149.ctr interpret[138]
+tests/test0150.ctr interpret[139]
+tests/test0151.ctr interpret[140]
+tests/test0152.ctr interpret[141]
+tests/test0153.ctr interpret[142]
+tests/test0154.ctr interpret[143]
+tests/test0155.ctr interpret[144]
+tests/test0156.ctr interpret[145]
+tests/test0157.ctr interpret[146]
+tests/test0158.ctr interpret[147]
+tests/test0159.ctr interpret[148]
+tests/test0160.ctr interpret[149]
+tests/test0161.ctr interpretFAIL.
+EXPECTED:
+No memory leaks here
+
+BUT GOT:
+Uncatched error has occurred. Unable to open file: No such file or directory. #1 write: (tests/test0161.ctr: 11)
+tests/test0162.ctr interpretFAIL.
+EXPECTED:
+No memory leaks here
+
+BUT GOT:
+Uncatched error has occurred. Unable to open file: No such file or directory. #1 write: (tests/test0162.ctr: 12)
+tests/test0163.ctr interpret[150]
+tests/test0164.ctr interpretFAIL.
+EXPECTED:
+No memory leaks here
+
+BUT GOT:
+Uncatched error has occurred. Unable to open file: No such file or directory. #1 write: (tests/test0164.ctr: 12)
+tests/test0165.ctr interpretFAIL.
+EXPECTED:
+rldheNo memory leaks here
+
+BUT GOT:
+Uncatched error has occurred. Unable to open file: No such file or directory. #1 write: (tests/test0165.ctr: 12)
+tests/test0166.ctr interpret[151]
+tests/test0167.ctr interpretFAIL.
+EXPECTED:
+11 11 11 11 No memory leaks here
+
+BUT GOT:
+Uncatched error has occurred. Unable to open file: No such file or directory. #1 write: (tests/test0167.ctr: 12)
+tests/test0168.ctr interpretFAIL.
+EXPECTED:
+No memory leaks here
+
+BUT GOT:
+Uncatched error has occurred. Unable to open file: No such file or directory. #1 write: (tests/test0168.ctr: 12)
+tests/test0169.ctr interpretFAIL.
+EXPECTED:
+hello world hello world hello world No memory leaks here
+
+BUT GOT:
+Uncatched error has occurred. Unable to open file: No such file or directory. #1 write: (tests/test0169.ctr: 12)
+tests/test0170.ctr interpret[152]
+tests/test0171.ctr interpret[153]
+tests/test0172.ctr interpret[154]
+tests/test0173.ctr interpret[155]
+tests/test0174.ctr interpret[156]
+tests/test0175.ctr interpret[157]
+tests/test0176.ctr interpret[158]
+tests/test0177.ctr interpret[159]
+tests/test0178.ctr interpret[160]
+tests/test0179.ctr interpret[161]
+tests/test0180.ctr interpret[162]
+tests/test0181.ctr interpret[163]
+tests/test0182.ctr interpret[164]
+tests/test0183.ctr interpret[165]
+tests/test0184.ctr interpret[166]
+tests/test0185.ctr interpret[167]
+tests/test0186.ctr interpret[168]
+tests/test0187.ctr interpret[169]
+tests/test0188.ctr interpret[170]
+tests/test0189.ctr interpret[171]
+tests/test0190.ctr interpretFAIL.
+EXPECTED:
+2 Hello 2 Hello 2 Hello No memory leaks here
+
+BUT GOT:
+2 'Hello' 2 'Hello' 2 'Hello' No memory leaks here
+tests/test0191.ctr interpret[172]
+tests/test0192.ctr interpret[173]
+tests/test0193.ctr interpret[174]
+tests/test0194.ctr interpret[175]
+tests/test0195.ctr interpret[176]
+tests/test0196.ctr interpret[177]
+tests/test0197.ctr interpret[178]
+tests/test0198.ctr interpret[179]
+tests/test0199.ctr interpret[180]
+tests/test0200.ctr interpret[181]
+tests/test0201.ctr interpret[182]
+tests/test0202.ctr interpret[183]
+tests/test0203.ctr interpret[184]
+tests/test0204.ctr interpret[185]
+tests/test0205.ctr interpret[186]
+tests/test0206.ctr interpret[187]
+tests/test0207.ctr interpret[188]
+tests/test0208.ctr interpret[189]
+tests/test0209.ctr interpret[190]
+tests/test0210.ctr interpret[191]
+tests/test0211.ctr interpret[192]
+tests/test0212.ctr interpret[193]
+tests/test0213.ctr interpret[194]
+tests/test0214.ctr interpret[195]
+tests/test0215.ctr interpret[196]
+tests/test0216.ctr interpret[197]
+tests/test0217.ctr interpret[198]
+tests/test0218.ctr interpret[199]
+tests/test0219.ctr interpret[200]
+tests/test0220.ctr interpret[201]
+tests/test0221.ctr interpret[202]
+tests/test0222.ctr interpret[203]
+tests/test0223.ctr interpret[204]
+tests/test0224.ctr interpret[205]
+tests/test0225.ctr interpret[206]
+tests/test0226.ctr interpret[207]
+tests/test0227.ctr interpret[208]
+tests/test0228.ctr interpret[209]
+tests/test0229.ctr interpret[210]
+tests/test0230.ctr interpret[211]
+tests/test0231.ctr interpret[212]
+tests/test0232.ctr interpret[213]
+tests/test0233.ctr interpret[214]
+tests/test0234.ctr interpret[215]
+tests/test0235.ctr interpret[216]
+tests/test0236.ctr interpret[217]
+tests/test0237.ctr interpret[218]
+tests/test0238.ctr interpret[219]
+tests/test0239.ctr interpret[220]
+tests/test0240.ctr interpret[221]
+tests/test0241.ctr interpret[222]
+tests/test0242.ctr interpret[223]
+tests/test0243.ctr interpret[224]
+tests/test0244.ctr interpret[225]
+tests/test0245.ctr interpret[226]
+tests/test0246.ctr interpret[227]
+tests/test0247.ctr interpret[228]
+tests/test0248.ctr interpret[229]
+tests/test0249.ctr interpret[230]
+tests/test0250.ctr interpret[231]
+tests/test0251.ctr interpret[232]
+tests/test0252.ctr interpretFAIL.
+EXPECTED:
+1981-01-05 13:15:13 1981-1-5 13:15:13 W1 t347548513 UTC 1981-1-5 14:15:13 W1 t347548513 Europe/Amsterdam Nil Clock1 14 Clock2 08 Clock1 14 Clock2 06 Clock3 13
+
+BUT GOT:
+1981-01-05 13:15:13 1981-1-5 13:15:13 W1 t347544913 UTC 1981-1-5 13:15:13 W1 t347544913 Europe/Amsterdam Nil Clock1 13 Clock2 08 Clock1 13 Clock2 08 Clock3 13
+tests/test0253.ctr interpret[233]
+tests/test0254.ctr interpretFAIL.
+EXPECTED:
+2017-07-10 10:00:00 2017-07-10 09:00:00 2017-07-10 10:00:00
+
+BUT GOT:
+2017-07-10 11:00:00 2017-07-10 10:00:00 2017-07-10 11:00:00
+tests/test0255.ctr interpretFAIL.
+EXPECTED:
+I am the Child process Child received: hello Child received: world Child received: stop Child sleeps 4 sec, wait for it... 1 1 1 1 Child is Done I am Parent Process Parent received: thanks for hello Parent received: thanks for world Parent received: thanks for stop Joined processes Parent is Done
+
+BUT GOT:
+I am Parent Process Joined processes Parent is Done
+tests/test0256.ctr interpretFAIL.
+EXPECTED:
+Child says: hello Child says: hello Child says: hello Child says: hello Child says: hello
+
+BUT GOT:
+
+tests/test0257.ctr interpretFAIL.
+EXPECTED:
+hello1
+
+BUT GOT:
+
+tests/test0258.ctr interpretFAIL.
+EXPECTED:
+True True True True True True True True Other process False True
+
+BUT GOT:
+Uncatched error has occurred. Unable to open file: No such file or directory. #1 write: (tests/test0258.ctr: 7)
+tests/test0259.ctr interpretFAIL.
+EXPECTED:
+OKOKOKOK
+
+BUT GOT:
+Unable to determine location of system log for test
+tests/test0260.ctr interpretFAIL.
+EXPECTED:
+True True True False
+
+BUT GOT:
+True True
+tests/test0261.ctr interpret[234]
+tests/test0262.ctr interpretFAIL.
+EXPECTED:
+I received from remote object (server):  test 1. test 2: A,A. test 3: B,C.
+
+BUT GOT:
+ERROR, no such host
+tests/test0263.ctr interpret[235]
+tests/test0264.ctr interpretFAIL.
+EXPECTED:
+This program is not allowed to spawn other processes or serve remote objects.
+
+BUT GOT:
+
+tests/test0265.ctr interpret[236]
+tests/test0266.ctr interpret[237]
+tests/test0267.ctr interpretFAIL.
+EXPECTED:
+aHello WorldHow AreYa?\n
+
+BUT GOT:
+aHello WorldHow AreYa?\n
+tests/test0268.ctr interpret[238]
+tests/test0269.ctr interpretFAIL.
+EXPECTED:
+OK OK
+
+BUT GOT:
+The syntax of the command is incorrect. touch: kan tijdsstempels van '/tmp/testje/file1' niet wijzigen: No such file or directory The syntax of the command is incorrect.
+tests/test0270.ctr interpretFAIL.
+EXPECTED:
+Uncatched error has occurred. Failed to open folder. #2 list: (tests/test0270.ctr: 1) #1 q (tests/test0270.ctr: 1)
+
+BUT GOT:
+
+tests/test0271.ctr interpret[239]
+tests/test0272.ctr interpret[240]
+tests/test0273.ctr interpret[241]
+tests/test0274.ctr interpret[242]
+tests/test0275.ctr interpret[243]
+tests/test0276.ctr interpret[244]
+tests/test0277.ctr interpret[245]
+tests/test0278.ctr interpret[246]
+tests/test0279.ctr interpret[247]
+tests/test0280.ctr interpret[248]
+tests/test0281.ctr interpret[249]
+tests/test0282.ctr interpret[250]
+tests/test0283.ctr interpretFAIL.
+EXPECTED:
+11 characters.
+
+BUT GOT:
+'.' is not recognized as an internal or external command, operable program or batch file.
+tests/test0284.ctr interpretFAIL.
+EXPECTED:
+11 characters.
+
+BUT GOT:
+'.' is not recognized as an internal or external command, operable program or batch file.
+tests/test0285.ctr interpret[251]
+tests/test0286.ctr interpret[252]
+tests/test0287.ctr interpret[253]
+tests/test0288.ctr interpretFAIL.
+EXPECTED:
+aa 2 aa 2 aa 2 aa 2 aa 2 aa 2 aa 2 aa 2 aa 2 aa 2 aa 2 aa 2 aa 2 aa 2 aa 2 aa 2 aa 2 aa 2 aa 2 aa 2
+
+BUT GOT:
+ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file. '.' is not recognized as an internal or external command, operable program or batch file.
+tests/test0289.ctr interpretFAIL.
+EXPECTED:
+5000 characters.
+
+BUT GOT:
+'.' is not recognized as an internal or external command, operable program or batch file.
+tests/test0290.ctr interpret[254]
+tests/test0291.ctr interpret[255]
+tests/test0292.ctr interpret[256]
+tests/test0293.ctr interpret[257]
+tests/test0294.ctr interpret[258]
+tests/test0295.ctr interpretFAIL.
+EXPECTED:
+a b | False False True True -1 b a | True True False False 1 hallo hello | False False True True -4 human human | False True False True 0 x z | False False True True -2
+
+BUT GOT:
+a b | False False True True -1 b a | True True False False 1 hallo hello | False False True True -1 human human | False True False True 0 x z | False False True True -1
+tests/test0296.ctr interpret[259]
+tests/test0297.ctr interpret[260]
+tests/test0298.ctr interpret[261]
+tests/test0299.ctr interpret[262]
+tests/test0300.ctr interpret[263]
+tests/test0301.ctr interpret[264]
+tests/test0302.ctr interpret[265]
+tests/test0303.ctr interpret[266]
+tests/test0304.ctr interpret[267]
+tests/test0305.ctr interpret[268]
+tests/test0306.ctr interpret[269]
+tests/test0307.ctr interpret[270]
+tests/test0308.ctr interpret[271]
+tests/test0309.ctr interpretFAIL.
+EXPECTED:
+Unable to open file: Permission denied. Unable to open file: Permission denied.
+
+BUT GOT:
+Unable to open file: No such file or directory. Unable to open file: No such file or directory.
+tests/test0310.ctr interpret[272]
+tests/test0311.ctr interpret[273]
+tests/test0312.ctr interpret[274]
+tests/test0313.ctr interpretFAIL.
+EXPECTED:
+[0mThere are 2 chairs in the sunny garden. A rubber duck swims in the pool. Is there a shed in the garden? Well.. False In the garden you smell the fragrance of tulips and roses and lillies. The garden is 15 meters long. Luckily, this day, there are Nil wasps in the garden. The dog named Nil sleeps under the tree. a\"bb\"ccc\" (Map new) put:((Map new) put:Nil at:dog, put:Nil at:insects, put:((Map new) put:15 at:'length', put:8 at:'width') at:'size', put:(Array ← 'tulips' ; 'roses' ; 'lillies') at:'flower', put:False at:'shed', put:True at:'pool', put:2 at:'chairs') at:'garden' {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}
+
+BUT GOT:
+Uncatched error has occurred. Key not found: Json #2 Json (tests/test0313.ctr: 22) #1 g (tests/test0313.ctr: 22)
+tests/test0314.ctr interpretFAIL.
+EXPECTED:
+Uncatched error has occurred. Bad token, JSON string is corrupted. #2 parse: (tests/test0314.ctr: 21) #1 g (tests/test0314.ctr: 21)
+
+BUT GOT:
+Uncatched error has occurred. Key not found: Json #2 Json (tests/test0314.ctr: 21) #1 g (tests/test0314.ctr: 21)
+tests/test0315.ctr interpretFAIL.
+EXPECTED:
+(Map new) put:'a"b' at:'test' (Map new) put:(Array ← 1 ; 2 ; (Array ← 3 ; 4) ; ((Map new) put:Nil at:Array ← 3 ; 4, put:1 at:'foo')) at:'nested', put:False at:'legend', put:27 at:'age', put:'Jack' at:'name' a b {"test":"a\t\tb"} {"test":"a\nb"} {"test":"a\"b"} {"test":"a\b"} ______________________Unescape hello\tworld "hello world" a"b hello world hello world hello wo rld hello wo  rld ______________________Escape hello world a\"b \"hello world\" hello\two\nrld hello\two\nrld hello\t\two\n\nrld
+
+BUT GOT:
+Uncatched error has occurred. Key not found: Json #2 Json (tests/test0315.ctr: 4) #1 write: (tests/test0315.ctr: 4)
+tests/test0316.ctr interpretFAIL.
+EXPECTED:
+CURL test FETCH HTML = OK
+
+BUT GOT:
+Uncatched error has occurred. Key not found: Curl #2 Curl (tests/test0316.ctr: 3) #1 browser (tests/test0316.ctr: 3)
+
+All tests passed.

@@ -7,7 +7,7 @@ usedMemory4 := 0.
 
 Broom mode: 0.
 
-f := File new: '/tmp/none.txt'.
+f := File new: File tempDir + '/none.txt'.
 f open: 'r+'.
 
 

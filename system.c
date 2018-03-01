@@ -7,6 +7,7 @@
 #include <stdint.h>
 #include <time.h>
 #include <signal.h>
+#include <unistd.h>
 
 #ifdef __MINGW32__
 #include <winsock2.h>
@@ -482,6 +483,15 @@ ctr_object* ctr_slurp_to_string( ctr_object* myself, ctr_argument* argumentList 
 		return ctr_build_empty_string();
 	}
 	return commandObj;
+}
+
+
+ctr_object* ctr_program_OS( ctr_object* myself, ctr_argument* argumentList ) {
+#ifdef __MINGW32__
+	return ctr_build_string_from_cstring("WINDOWS");
+#else
+	return ctr_build_string_from_cstring("POSIX");
+#endif
 }
 
 /**

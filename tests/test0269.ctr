@@ -1,16 +1,16 @@
-(File new: '/tmp/testje') exists ifFalse: {
+(File new: File tempDir + '/testje') exists ifFalse: {
 	💻 shell: 'mkdir /tmp/testje'.	
 }.
 
-(File new: '/tmp/testje/file1') exists ifFalse: {
+(File new: File tempDir + '/testje/file1') exists ifFalse: {
 	💻 shell: 'touch /tmp/testje/file1'.	
 }.
 
-(File new: '/tmp/testje/folder1') exists ifFalse: {
+(File new: File tempDir + '/testje/folder1') exists ifFalse: {
 	💻 shell: 'mkdir /tmp/testje/folder1'.	
 }.
 
-l := File list: '/tmp/testje'.
+l := File list: File tempDir + '/testje'.
 l each: { :k :v
 	((v @ 'file' = 'file1') & (v @ 'type' = 'file')) ifTrue: { Pen write: 'OK', brk. }.
 	((v @ 'file' = 'folder1') & (v @ 'type' = 'folder')) ifTrue: { Pen write: 'OK', brk. }.
