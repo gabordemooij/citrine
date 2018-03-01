@@ -14,6 +14,7 @@ before_script:
     fi
   - psql -c 'create role gabor;' -U postgres
   - psql -c "alter role gabor with password 'gabor';" -U postgres
+  - psql -c "alter role gabor login;" -U postgres
   - psql -c 'create database testje;' -U postgres
   - psql -c 'grant all privileges on database testje to gabor;' -U postgres
   - psql -c 'create table boeken (id integer, titel varchar(100));' -U gabor -d testje
