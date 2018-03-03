@@ -70,7 +70,6 @@ ctr_object* ctr_curl_type(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- *
  * [Curl] respondTo: [string] with: [Object]
  *
  * Default response sets Curl option

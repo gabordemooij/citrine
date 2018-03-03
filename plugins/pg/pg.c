@@ -7,6 +7,12 @@
 
 #define CTR_OBJECT_RESOURCE_PG 40
 
+/**
+ * [Pg] new: [String].
+ *
+ * Creates a new PostgreSQL connection using the specified connection details
+ * in the string.
+ */
 ctr_object* ctr_pg_new(ctr_object* myself, ctr_argument* argumentList) {
 	PGconn *psql;
 	char* connectionString = ctr_heap_allocate_cstring(argumentList->object);
@@ -30,7 +36,11 @@ ctr_object* ctr_pg_new(ctr_object* myself, ctr_argument* argumentList) {
 	return pgInstance;	
 }
 
-
+/**
+ * [Pg] query: [String] parameters: [Array].
+ *
+ * Executes the query with specified parameters.
+ */
 ctr_object* ctr_pg_query(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.rvalue == NULL) {
 		return myself;
@@ -91,6 +101,11 @@ ctr_object* ctr_pg_query(ctr_object* myself, ctr_argument* argumentList) {
 	return crows;
 }
 
+/**
+ * [Pg] close.
+ *
+ * Closes connection.
+ */
 ctr_object* ctr_pg_close(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.rvalue == NULL) {
 		return myself;
