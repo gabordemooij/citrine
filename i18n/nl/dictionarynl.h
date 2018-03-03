@@ -240,7 +240,7 @@
 #define CTR_DICT_LINE            "lijn"
 #define CTR_DICT_LAST            "laatste"
 #define CTR_DICT_FIRST           "eerste"
-#define CTR_DICT_SECOND_LAST     "eennalaatste"
+#define CTR_DICT_SECOND_LAST     "een-na-laatste"
 #define CTR_DICT_PADDING_LEFT    "opvullingLinks:"
 #define CTR_DICT_PADDING_RIGHT   "opvullingRechts:"
 #define CTR_DICT_FILL_WITH       "vul:met:"
