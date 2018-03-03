@@ -263,6 +263,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.BR.BR.BR
+
+.BR.BR.BR
+
 .B [Object] respondTo: [String]
 .nf
     
@@ -272,6 +276,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
      [Object] respondTo: [String] with: [String] and: [String]
     
      Default respond-to implemention, does nothing.
+     You can override this behaviour to implement generic behaviour.
+     Listening to these messages allows users to send any message to an
+     object. For instance an object can respond to any message it does not
+     understand by echoing the message.
 .fi
 .BR.BR.BR
 
@@ -1224,6 +1232,20 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [String] paddingLeft: [Number].
+.nf
+    
+     Adds the specified number of spaces to the left of the string.
+.fi
+.BR.BR.BR
+
+.B [String] paddingLeft: [Number].
+.nf
+    
+     Adds the specified number of spaces to the right of the string.
+.fi
+.BR.BR.BR
+
 .B [String] rightTrim
 .nf
     
@@ -1332,6 +1354,22 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Returns True if the first String comes after or at the same position as the latter
      alphabetically. The actual comparison is based on the UTF-8 compatible
      function strcmp.
+.fi
+.BR.BR.BR
+
+.B [String] escape: '\n'.
+.nf
+    
+     Escapes the specified ASCII character in a string.
+     If the character is a control character, the well known
+     C-based character substitute will be used.
+.fi
+.BR.BR.BR
+
+.B [String] unescape: '\n'.
+.nf
+    
+     'UnEscapes' the specified ASCII character in a string.
 .fi
 .BR.BR.BR
 
@@ -1531,32 +1569,61 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Creates a new list or array. List is an alias for array.
-     For more details regarding the list object please consult the Array API.
+     An array is a collection of items. To create a new array,
+     send the 'new' message to the array. To add an element send
+     the 'push:' message to an array with the element to add as
+     an argument. Instead of using the push-message you can also
+     use the • message. This message is suitable for vertically
+     written arrays because they look similar to lists seen in
+     regular documents. Besides 'push:' and • you can also use
+     the ; message to push an new element on top of the array.
+     The arrow message is the same as 'new' plus 'push:', just a
+     shorter notation. The ; message is very suitable for
+     horizontally written arrays. Finally, the last example
+     depicts a notation using just ascii characters.
     
      Usage:
     
+     ☞ meals :=
+    	List new
+    	• 'hamburger'
+    	• 'pizza'
+    	• 'haggis'.
+    
      ☞ todo := List ← 'dishes' ; 'cleaning'.
     
+     var a := Array < 1 ; 2 ; 3.
 .fi
 .BR.BR.BR
 
 .B [Array] new
 .nf
     
-     Creates a new Array.
+     Creates a new array.
+     An array is a collection of items. To create a new array,
+     send the 'new' message to the array. To add an element send
+     the 'push:' message to an array with the element to add as
+     an argument. Instead of using the push-message you can also
+     use the • message. This message is suitable for vertically
+     written arrays because they look similar to lists seen in
+     regular documents. Besides 'push:' and • you can also use
+     the ; message to push an new element on top of the array.
+     The arrow message is the same as 'new' plus 'push:', just a
+     shorter notation. The ; message is very suitable for
+     horizontally written arrays. Finally, the last example
+     depicts a notation using just ascii characters.
     
      Usage:
     
-     a := Array new.
+     ☞ meals :=
+    	List new
+    	• 'hamburger'
+    	• 'pizza'
+    	• 'haggis'.
     
-     or, the short form:
+     ☞ todo := List ← 'dishes' ; 'cleaning'.
     
-     a := Array ← 1 ; 2 ; 3.
-    
-     or (if you prefer ASCII only symbols):
-    
-     a := Array < 1 ; 2 ; 3.
-    
+     var a := Array < 1 ; 2 ; 3.
 .fi
 .BR.BR.BR
 
@@ -2502,8 +2569,25 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Available Modes:
      0 - No Garbage Collection
-     1 - Activate Garbage Collector
+     1 - Activate Garbage Collector (default)
      4 - Activate Garbage Collector for every single step (testing only)
+     8 - Activate experimental Pool Memory Allocation Manager (experimental!)
+.fi
+.BR.BR.BR
+
+.B [Broom] toString.
+.nf
+    
+     Returns the number of objects that have been collected by the
+     garbage collector.
+.fi
+.BR.BR.BR
+
+.B [Broom] toNumber.
+.nf
+    
+     Returns the number of objects that have been collected by the
+     garbage collector.
 .fi
 .BR.BR.BR
 
@@ -2556,10 +2640,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
      This will output: 'hello world'.
      Use the Slurp object to integrate verbose shell commands, other programming languages
      (like SQL) etc into your main program without overusing strings.
-     
-     Example:
-     
-     query select: '*', from users where: 'id = 2'.
     
      Note that we can't use the = and * unfortunately right now
      because = is also a method in the main object. While * can be used
@@ -2571,26 +2651,29 @@ The following messages are part of the Core API of the Citrine Programming Langu
      the language of Citrine. However even with these restrictions (some of which might be
      alleviated in future versions) it's quite comfortable and readable to interweave
      an external language in your Citrine script code.
-.fi
-.BR.BR.BR
-
-.B [ShortSlurp] [String]
-.nf
-    
-     The Short Slurp Object responds to any unary message by answering
-     with the String object respresenting the contents of the message.
-     The Short Slurp Object appears as a little bullet and can be used
-     to avoid the use of quotes, for instance in array notation. The following
-     code creates an array using no quotes but bullets instead. This works because
-     every bullet refers to the global Short Slurp object that transforms the
-     message into a string.
     
      Usage:
     
-     ☞ meals := List ←
-    	• hamburger ;
-    	• pizza ;
-    	• haggis.
+     ☞ query := Slurp
+    	select: '*',
+    	from
+    		users
+    	where
+    		user_id=: 1.
+    
+     #result: select * from users where user_id= 1
+.fi
+.BR.BR.BR
+
+.B [Slurp] toString.
+.nf
+    
+     Sending the message 'toString' to a slurp object is the same as sending the
+     obtain message. It will cause the Slurp object to answer with the collected
+     string information from previous interactions. If for some reason the
+     obtain message does not return a string, this message will answer with
+     an empty string, otherwise the resulting string from 'obtain' will be
+     returned.
 .fi
 .BR.BR.BR
 
@@ -3319,7 +3402,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Pen] reset
+.B [Pen] resetColor
 .nf
     
      Resets the console text color to the default.
@@ -3471,6 +3554,96 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.BR.BR.BR
+
+.BR.BR.BR
+
+.B Curl new.
+.nf
+    
+     Creates new Curl handle via curl_easy_init
+    
+.fi
+.BR.BR.BR
+
+.B [Curl] cleanup.
+.nf
+    
+     Destroy Curl handle in resource
+    
+.fi
+.BR.BR.BR
+
+.B [Curl] type.
+.nf
+    
+     Returns 'Curl' as the type string
+    
+.fi
+.BR.BR.BR
+
+.B 
+.nf
+     [Curl] respondTo: [string] with: [Object]
+    
+     Default response sets Curl option
+    
+.fi
+.BR.BR.BR
+
+.B [Curl] perform.
+.nf
+    
+     Performs a blocking file transfer
+    
+.fi
+.BR.BR.BR
+
+.BR.BR.BR
+
+.B [Json] new
+.nf
+    
+     Creates a new instance of the Json object.
+     The Json object allows you to use the Json protocol to communicate with
+     other applications.
+.fi
+.BR.BR.BR
+
+.BR.BR.BR
+
+.B [Json] parse: [String].
+.nf
+     
+     Parses a string containing Json encoded data into native Citrine objects.
+     The Json structure must begin with an object (notation: {}). Therefore,
+     the answer to this message from the Json object will always be a Map.
+    
+     Usage:
+    
+     ☞ tasks := '{"todo":7,"finished":3}'.
+     ✎ write: tasks todo. #7
+    
+.fi
+.BR.BR.BR
+
+.B [Json] jsonify: [Map].
+.nf
+    
+     Given a map, the jsonify: message will make the Json object return a
+     String object representing the Map.
+.fi
+.BR.BR.BR
+
+.B C-constructor function.
+.nf
+    
+     This function gets called when the plugin is loaded into memory.
+     Here we have a chance to add the new object(s) to the World.
+    
+     In this case, we are going to add the Json object to the
+     world.
+.fi
 
 .SH BUGS
 This is a preliminary version (< 1.0) of Citrine, there might still be very serious bugs.
