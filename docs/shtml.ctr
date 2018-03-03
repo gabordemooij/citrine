@@ -9,7 +9,10 @@ files := Array <
 			'../collections.c' ;
 			'../file.c' ;
 			'../system.c' ;
-			'../plugins/request/request.c'.
+			'../plugins/request/request.c' ;
+			'../plugins/curl/src/curl.c' ;
+			'../plugins/jsmn/jsmn.c' ;
+			'../plugins/pg/pg.c'.
 
 files each: { :index :file
 	var f := File new: file.
