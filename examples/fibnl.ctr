@@ -1,0 +1,22 @@
+☞ f := Lijst ← 0 ; 1.
+
+0 tot: 12 stap: 1 doen: {
+
+   #neem laatste element van f
+   ☞ a := f laatste.
+	
+   #neem het element ervoor
+   ☞ b := f een-na-laatste.
+   
+   #schrijf het op
+   ✎ schrijf:
+      'de som van ' + a  + 'en  ' +  b.
+
+   #bereken de som
+   ☞ som := (a + b).
+   ✎ schrijf: 
+      ' is ❲ som ❳ '.
+
+   # voeg de som toe aan de lijst
+   f erbij: som.
+}.
