@@ -411,7 +411,9 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-
+/**
+ * @internal
+ */
 ctr_object* ctr_sock_error( int fd, int want2close ) {
 	CtrStdFlow = ctr_build_string_from_cstring( strerror( errno ) );
 	if (want2close) {
@@ -421,6 +423,9 @@ ctr_object* ctr_sock_error( int fd, int want2close ) {
 	return CtrStdNil;
 }
 
+/**
+ * @internal
+ */
 ctr_object* ctr_object_send2remote(ctr_object* myself, ctr_argument* argumentList) {
 	char* ip;
 	int sockfd = 0, n = 0;
@@ -484,6 +489,10 @@ ctr_object* ctr_object_send2remote(ctr_object* myself, ctr_argument* argumentLis
  * [Object] respondTo: [String] with: [String] and: [String]
  *
  * Default respond-to implemention, does nothing.
+ * You can override this behaviour to implement generic behaviour.
+ * Listening to these messages allows users to send any message to an
+ * object. For instance an object can respond to any message it does not
+ * understand by echoing the message.
  */
 ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->info.remote == 0) return myself;
@@ -2321,10 +2330,20 @@ ctr_object* ctr_string_padding(ctr_object* myself, ctr_argument* argumentList, i
 	return answer;
 }
 
+/**
+ * [String] paddingLeft: [Number].
+ *
+ * Adds the specified number of spaces to the left of the string.
+ */
 ctr_object* ctr_string_padding_left(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_string_padding( myself, argumentList, 1);
 }
 
+/**
+ * [String] paddingLeft: [Number].
+ *
+ * Adds the specified number of spaces to the right of the string.
+ */
 ctr_object* ctr_string_padding_right(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_string_padding( myself, argumentList, 0);
 }
