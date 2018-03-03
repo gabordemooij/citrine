@@ -337,7 +337,7 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
 	if ( o->info.type == CTR_OBJECT_TYPE_OTNUMBER ) return o;
 	ctr_argument* a = ctr_heap_allocate( sizeof( ctr_argument ) );
 	a->object = CtrStdNil;
-	ctr_object* numObject = ctr_send_message( o, "toNumber", 8, a );
+	ctr_object* numObject = ctr_send_message( o, CTR_DICT_TONUMBER, strlen(CTR_DICT_TONUMBER), a );
 	ctr_heap_free(a);
 	if ( numObject->info.type != CTR_OBJECT_TYPE_OTNUMBER ) {
 		CtrStdFlow = ctr_build_string_from_cstring( "toNumber must return a number." );
@@ -357,7 +357,7 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 	if ( o->info.type == CTR_OBJECT_TYPE_OTSTRING ) return o;
 	ctr_argument* a = ctr_heap_allocate( sizeof( ctr_argument ) );
 	a->object = CtrStdNil;
-	ctr_object* stringObject = ctr_send_message( o, "toString", 8, a );
+	ctr_object* stringObject = ctr_send_message( o, CTR_DICT_TOSTRING, strlen(CTR_DICT_TOSTRING), a );
 	ctr_heap_free(a);
 	if ( stringObject->info.type != CTR_OBJECT_TYPE_OTSTRING ) {
 		CtrStdFlow = ctr_build_string_from_cstring( "toString must return a string." );
@@ -377,7 +377,7 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
 	if (o->info.type == CTR_OBJECT_TYPE_OTBOOL) return o;
 	ctr_argument* a = ctr_heap_allocate( sizeof( ctr_argument ) );
 	a->object = CtrStdNil;
-	ctr_object* boolObject = ctr_send_message( o, "toBoolean", 9, a );
+	ctr_object* boolObject = ctr_send_message( o, CTR_DICT_TOBOOL, strlen(CTR_DICT_TOBOOL), a );
 	ctr_heap_free(a);
 	if ( boolObject->info.type != CTR_OBJECT_TYPE_OTBOOL ) {
 		CtrStdFlow = ctr_build_string_from_cstring( "toBoolean must return a boolean." );
