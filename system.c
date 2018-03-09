@@ -13,7 +13,7 @@
 #include <winsock2.h>
 #include <Ws2tcpip.h>
 #include "win/syslog.h"
-#include <malloc.h> // for alloca
+#include "win/setenv.h"
 #include "win/rand.h"
 #include <tre/regex.h>
 
@@ -566,14 +566,7 @@ ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList) 
 	envValObj = ctr_internal_cast2string(argumentList->next->object);
 	envVarNameStr = ctr_heap_allocate_cstring( envVarNameObj );
 	envValStr = ctr_heap_allocate_cstring( envValObj );
-	#ifdef __MINGW32__
-	size_t envStringLength = strlen(envVarNameStr) + strlen(envValStr) + 1;
-	char envStringBuffer[envStringLength];
-	sprintf(envStringBuffer, "%s=%s", envVarNameStr, envValStr);
-	_putenv(envStringBuffer);
-	#else
 	setenv(envVarNameStr, envValStr, 1);
-	#endif
 	ctr_heap_free( envValStr );
 	ctr_heap_free( envVarNameStr );
 	return myself;
@@ -648,11 +641,7 @@ ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	ctr_size bytes = 0;
 	ctr_size page = 64;
-#ifndef __MINGW32__
 	char buffer[page];
-#else
-	char* buffer = alloca(page * sizeof(char));
-#endif
 	size_t content_size = 0;
 	char *content = ctr_heap_allocate(0);
 	clearerr(stdin);
@@ -1419,15 +1408,20 @@ ctr_object* ctr_clock_get_time( ctr_object* myself, ctr_argument* argumentList, 
 	struct tm* date;
 	time_t timeStamp;
 	ctr_object* answer;
+	char* zone;
 	timeStamp = (time_t) ctr_internal_cast2number(
 		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), CTR_CATEGORY_PRIVATE_PROPERTY )
 	)->value.nvalue;
-	#ifdef __MINGW32__
-	_putenv("TZ=UTC");
-	#else
-	setenv( "TZ", "UTC", 1 );
-	#endif
+	zone = ctr_heap_allocate_cstring(
+		ctr_internal_cast2string(
+				ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY )
+		)
+	);
+	setenv( "TZ", zone, 1 );
+	tzset();
 	date = localtime( &timeStamp );
+	setenv( "TZ", "UTC", 1 );
+	tzset();
 	switch( part ) {
 		case 'Y':
 			answer = ctr_build_number_from_float( (ctr_number) date->tm_year + 1900 );
@@ -1448,6 +1442,7 @@ ctr_object* ctr_clock_get_time( ctr_object* myself, ctr_argument* argumentList, 
 			answer = ctr_build_number_from_float( (ctr_number) date->tm_sec );
 			break;
 	}
+	ctr_heap_free( zone );
 	return answer;
 }
 
@@ -1468,7 +1463,8 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
 			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY )
 		)
 	);
-	// setenv( "TZ", zone, 1 );
+	setenv( "TZ", zone, 1 );
+	tzset();
 	date = localtime( &timeStamp );
 	switch( part ) {
 		case 'Y':
@@ -1492,7 +1488,8 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
 	}
 	ctr_heap_free( zone );
 	ctr_internal_object_set_property( myself, key, ctr_build_number_from_float( (double_t) mktime( date ) ), 0 );
-	// setenv( "TZ", "UTC", 1 );
+	setenv( "TZ", "UTC", 1 );
+	tzset();
 	return myself;
 }
 
@@ -1741,9 +1738,11 @@ ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList ) {
 		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), 0 )
 	)->value.nvalue;
 	description = ctr_heap_allocate( 41 );
-	// setenv( "TZ", zone, 1 );
+	setenv( "TZ", zone, 1 );
+	tzset();
 	strftime( description, 40, format, localtime( &timeStamp ) );
-	// setenv( "TZ", "UTC", 1 );
+	setenv( "TZ", "UTC", 1 );
+	tzset();
 	answer = ctr_build_string_from_cstring( description );
 	ctr_heap_free( description );
 	ctr_heap_free( format );
@@ -1841,7 +1840,8 @@ ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, ui
 			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY )
 		)
 	);
-	// setenv( "TZ", zone, 1 );
+	setenv( "TZ", zone, 1 );
+	tzset();
 	date = localtime( &time );
 	if ( strncmp( unit, CTR_DICT_HOURS, l ) == 0 || strncmp( unit, CTR_DICT_HOUR, l ) == 0 || strncmp( unit, CTR_DICT_HOURS_ABBR, l ) == 0  ) {
 		date->tm_hour += number;
@@ -1859,7 +1859,8 @@ ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, ui
 		date->tm_mday += number * 7;
 	}
 	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), ctr_build_number_from_float( (ctr_number) mktime( date ) ), CTR_CATEGORY_PRIVATE_PROPERTY  );
-	// setenv( "TZ", "UTC", 1 );
+	setenv( "TZ", "UTC", 1 );
+	tzset();
 	ctr_heap_free( zone );
 	return myself;
 }
