@@ -36,5 +36,6 @@ before_install:
   - sudo rm /etc/ld.so.cache
   - sudo ldconfig
   - cd ..
+  - cd ..
 
 script: ./runtests.sh
