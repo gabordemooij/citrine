@@ -62,7 +62,16 @@ cd ..
 cd ..
 cp plugins/pg/libctrpg.so mods/pg/libctrpg.so
 
-
+#sodium
+rm plugins/crypt/libctrpassword.so
+rm plugins/crypt/crypt.o
+rm mods/password/libctrpassword.so
+cd plugins/crypt;
+gcc -c crypt.c -Wall -I/usr/local/include/  -Werror -fpic -o crypt.o
+gcc -shared -o libctrpassword.so crypt.o -L/usr/local/lib/ -lsodium
+cd ..
+cd ..
+cp plugins/crypt/libctrpassword.so mods/password/libctrpassword.so
 
 make clean;
 ./mk.sh
