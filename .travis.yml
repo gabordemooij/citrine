@@ -31,6 +31,7 @@ before_install:
   - sudo ls -la /etc
   - sudo ls -la /etc/ld.so.conf.d
   - sudo touch /etc/ld.so.conf.d/liblocal.conf
+  - sudo chmod u+w /etc/ld.so.conf.d/liblocal.conf
   - sudo echo "/usr/local/lib/*" > /etc/ld.so.conf.d/liblocal.conf
   - sudo rm /etc/ld.so.cache
   - sudo ldconfig
