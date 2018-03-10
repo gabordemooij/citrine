@@ -24,6 +24,6 @@ before_script:
 before_install:
   - sudo chmod 777 /var/log/syslog
   - sudo ln -s /usr/bin/make /usr/bin/gmake
-  - sudo sudo apt-get install libbsd-dev libpq-dev
+  - sudo sudo apt-get install libbsd-dev libpq-dev libsodium-dev
   
 script: ./runtests.sh
