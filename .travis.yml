@@ -28,6 +28,8 @@ before_install:
   - sudo mkdir locallibs; cd locallibs
   - sudo wget https://download.libsodium.org/libsodium/releases/libsodium-stable-2018-03-10.tar.gz
   - sudo tar zvxf libsodium-stable-2018-03-10.tar.gz ; cd libsodium-stable ; sudo ./configure ; sudo make ; sudo make install
+  - sudo ls -la /etc
+  - sudo ls -la /etc/ld.so.conf.d
   - sudo echo "/usr/local/lib/*" > /etc/ld.so.conf.d/liblocal.conf
   - sudo rm /etc/ld.so.cache
   - sudo ldconfig
