@@ -25,6 +25,6 @@ before_install:
   - sudo chmod 777 /var/log/syslog
   - sudo ln -s /usr/bin/make /usr/bin/gmake
   - sudo sudo apt-get install libbsd-dev libpq-dev
-  - sudo mkdir locallibs; cd locallibs ; wget https://download.libsodium.org/libsodium/releases/libsodium-stable-2018-03-10.tar.gz ; tar zvxf libsodium-stable-2018-03-10.tar.gz ; cd libsodium-stable ; sudo ./configure ; sudo make ; sudo make install
+  - sudo mkdir locallibs; cd locallibs ; sudo wget https://download.libsodium.org/libsodium/releases/libsodium-stable-2018-03-10.tar.gz ; sudo tar zvxf libsodium-stable-2018-03-10.tar.gz ; sudo cd libsodium-stable ; sudo ./configure ; sudo make ; sudo make install
   
 script: ./runtests.sh
