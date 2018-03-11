@@ -256,6 +256,7 @@ extern ctr_object* CtrStdSystem;
 extern ctr_object* CtrStdDice;
 extern ctr_object* CtrStdCommand;
 extern ctr_object* CtrStdSlurp;
+extern ctr_object* CtrStdShell;
 extern ctr_object* CtrStdClock;
 extern ctr_object* CtrStdFlow;
 extern ctr_object* CtrStdBreak;
