@@ -13,7 +13,7 @@ install: ctr
 	cp ./ctr /usr/bin/ctr
 
 ctr:	$(OBJS)
-	$(CC) $(OBJS) -static -L /usr/lib -lm -ldl -lpsapi -ltre -lsodium  -lws2_32 -o ctr -Wl,--export-all-symbols,--out-implib=libctr.dll.a
+	$(CC) $(OBJS) -static -L /usr/lib -lm -ldl -lpsapi -ltre -lsodium  -lws2_32 -o ctr -Wl,--out-implib=libctr.dll.a
 
 .c.o:
 	$(CC) $(CFLAGS) -c $<
