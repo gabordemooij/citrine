@@ -55,7 +55,7 @@ char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
     uint64_t size;
     uint64_t real_size;
     FILE* fp;
-    fp = fopen(file_name,"r");
+    fp = fopen(file_name,"rb");
     if( fp == NULL ) {
        fprintf(stderr, "Error while opening the file.\n");
        exit(1);
@@ -67,17 +67,31 @@ char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
     real_size = (size+4)*sizeof(char);
     prg = ctr_heap_allocate(real_size); /* add 4 bytes, 3 for optional closing sequence verbatim mode and one lucky byte! */
     ctr_program_length=0;
-	uint64_t charactersRead = 0;
+	uint64_t bytesRead = 0;
     while( ( ch = fgetc(fp) ) != EOF ) {
- 		prg[ctr_program_length++]=ch;
-		charactersRead++;
-#ifdef __MINGW32__
-		 /* On Windows, line endings consist of the two characters CRLF.
-		  	However, fgetc automatically converts this to a single \n on windows. */
-		if (ch == '\n') charactersRead++;
-#endif
-	}		 
-    if ( charactersRead != size ) {
+		if (ch == '\r') {
+			char nextCh = fgetc(fp);
+			if (nextCh == '\n') {
+				prg[ctr_program_length++] = '\n';
+				bytesRead+=2;
+			}
+			else if (nextCh == EOF) {
+				prg[ctr_program_length++] = '\r';
+				bytesRead++;
+				break;
+			}
+			else {
+				prg[ctr_program_length++] = '\r';
+				prg[ctr_program_length++] = nextCh;
+				bytesRead+=2;
+			};
+		} else {
+			prg[ctr_program_length++]=ch;
+			bytesRead++;
+		};
+	}
+
+    if ( bytesRead != size ) {
 		fprintf(stderr, "Unable to read program file.\n" );
 		exit(1);
     }
