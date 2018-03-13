@@ -10,6 +10,10 @@
  * Creates a new password from the specified string of characters.
  * Upon creation, the string will be hashed immediately. Any attempt to
  * display the password will result in outputting the hash.
+ *
+ * Usage:
+ *
+ * ☞ myPassword := Password new: 'secret123'.
  */
 ctr_object* ctr_hash_new(ctr_object* myself, ctr_argument* argumentList) {
 	char hashed_password[crypto_pwhash_STRBYTES];
@@ -61,9 +65,16 @@ ctr_object* ctr_password_verify(ctr_object* myself, ctr_argument* argumentList) 
 /**
  * [Password] toString
  *
- * Returns a string representation of the password. This will always return a string
+ * Returns a string representation of the password.
+ * This will always return a string
  * of the hashed password. There is no way to extract the original input from the
- * Password object.
+ * Password object. This message will also be send if somehow an other object is forced
+ * to perform a 'toString' conversion, like in the following example:
+ *
+ * Usage:
+ *
+ * ☞ myPassword := Password new: 'secret123'.
+ * ✎ write: myPassword. #outputs hash
  */
 ctr_object* ctr_password_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* answer = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("value"), CTR_CATEGORY_PRIVATE_PROPERTY );
