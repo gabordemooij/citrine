@@ -122,6 +122,7 @@ void* ctr_internal_plugin_find(ctr_object* key) {
 	realPathModName = realpath(pathNameMod, NULL);
 	if (access(realPathModName, F_OK) == -1) return NULL;
 	handle =  dlopen(realPathModName, RTLD_NOW);
+	free(realPathModName);
 	if ( !handle ) return NULL;
 	*(void**)(&init_plugin) = dlsym( handle, "begin" );
 	if ( !init_plugin ) return NULL;
