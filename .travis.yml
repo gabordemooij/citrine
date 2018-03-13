@@ -27,7 +27,7 @@ before_install:
   - sudo sudo apt-get install libbsd-dev libpq-dev
   - sudo mkdir locallibs; cd locallibs
   - sudo wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.16.tar.gz
-  - sudo tar zvxf libsodium-stable-2018-03-10.tar.gz ; cd libsodium-stable ; sudo ./configure ; sudo make ; sudo make install
+  - sudo tar zvxf libsodium-1.0.16.tar.gz ; cd libsodium-stable ; sudo ./configure ; sudo make ; sudo make install
   - sudo ls -la /etc
   - sudo touch /etc/ld.so.conf.d/liblocal.conf
   - sudo chmod uog+w /etc/ld.so.conf.d/liblocal.conf
