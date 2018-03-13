@@ -16,6 +16,28 @@
 #include "citrine.h"
 #include "siphash.h"
 
+ctr_object* CtrStdWorld;
+ctr_object* CtrStdObject;
+ctr_object* CtrStdBlock;
+ctr_object* CtrStdString;
+ctr_object* CtrStdNumber;
+ctr_object* CtrStdBool;
+ctr_object* CtrStdConsole;
+ctr_object* CtrStdNil;
+ctr_object* CtrStdGC;
+ctr_object* CtrStdMap;
+ctr_object* CtrStdArray;
+ctr_object* CtrStdFile;
+ctr_object* CtrStdSystem;
+ctr_object* CtrStdDice;
+ctr_object* CtrStdCommand;
+ctr_object* CtrStdSlurp;
+ctr_object* CtrStdClock;
+ctr_object* CtrStdFlow;
+ctr_object* CtrStdBreak;
+ctr_object* CtrStdContinue;
+ctr_object* CtrStdExit;
+ctr_object* ctr_first_object;
 
 /**
  * @internal

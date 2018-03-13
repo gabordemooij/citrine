@@ -240,29 +240,28 @@ int ctr_source_mapping;
 /**
  * Core Objects
  */
-ctr_object* CtrStdWorld;
-ctr_object* CtrStdObject;
-ctr_object* CtrStdBlock;
-ctr_object* CtrStdString;
-ctr_object* CtrStdNumber;
-ctr_object* CtrStdBool;
-ctr_object* CtrStdConsole;
-ctr_object* CtrStdNil;
-ctr_object* CtrStdGC;
-ctr_object* CtrStdMap;
-ctr_object* CtrStdArray;
-ctr_object* CtrStdFile;
-ctr_object* CtrStdSystem;
-ctr_object* CtrStdDice;
-ctr_object* CtrStdCommand;
-ctr_object* CtrStdSlurp;
-ctr_object* CtrStdShell;
-ctr_object* CtrStdClock;
-ctr_object* CtrStdFlow;
-ctr_object* CtrStdBreak;
-ctr_object* CtrStdContinue;
-ctr_object* CtrStdExit;
-ctr_object* ctr_first_object;
+extern ctr_object* CtrStdWorld;
+extern ctr_object* CtrStdObject;
+extern ctr_object* CtrStdBlock;
+extern ctr_object* CtrStdString;
+extern ctr_object* CtrStdNumber;
+extern ctr_object* CtrStdBool;
+extern ctr_object* CtrStdConsole;
+extern ctr_object* CtrStdNil;
+extern ctr_object* CtrStdGC;
+extern ctr_object* CtrStdMap;
+extern ctr_object* CtrStdArray;
+extern ctr_object* CtrStdFile;
+extern ctr_object* CtrStdSystem;
+extern ctr_object* CtrStdDice;
+extern ctr_object* CtrStdCommand;
+extern ctr_object* CtrStdSlurp;
+extern ctr_object* CtrStdClock;
+extern ctr_object* CtrStdFlow;
+extern ctr_object* CtrStdBreak;
+extern ctr_object* CtrStdContinue;
+extern ctr_object* CtrStdExit;
+extern ctr_object* ctr_first_object;
 
 /**
  * Hashkey
