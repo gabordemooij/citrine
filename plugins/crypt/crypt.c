@@ -4,11 +4,12 @@
 #include <sodium.h>
 #include "../../citrine.h"
 
-
 /**
- * [Hash] new: [String]
+ * [Password] new: [String]
  *
- * Creates a new hash from the string. 
+ * Creates a new password from the specified string of characters.
+ * Upon creation, the string will be hashed immediately. Any attempt to
+ * display the password will result in outputting the hash.
  */
 ctr_object* ctr_hash_new(ctr_object* myself, ctr_argument* argumentList) {
 	char hashed_password[crypto_pwhash_STRBYTES];
@@ -24,6 +25,29 @@ ctr_object* ctr_hash_new(ctr_object* myself, ctr_argument* argumentList) {
 	return cryptInstance;
 }
 
+/**
+ * [Password] = [String]
+ *
+ * Compares a string with the password. This operation will check if hash of the password equals the
+ * hash of the string (and therefore if the string can be considered the correct password). Note that this
+ * operation takes the form of an '=' message. So comparing passwords will always be safe. Also, under
+ * the hood this message employs the hash specific time constant verification function to combat
+ * timing attacks. In the example below we create a new password from string 'secret123'.
+ * The moment we create the password instance, the string will already be hashed using
+ * the underlying hashing algorithm provided by the current LibSodium version.
+ * All information required to verify passwords will be stored in this string as well. After
+ * creation of a Password object, the original input will not be retrievable anymore. To compare
+ * the password using a hash specific verification function with protection against timing attacks
+ * all you have to do is use the '=' message. This message implements all the logic required
+ * to perform a secure password verification without burdening the developer.
+ *
+ * Usage:
+ *
+ * ☞ myPassword := Password new: 'secret123'.
+ * ( myPassword = 'secret123' ) ifTrue: {
+ * 	✎ write: 'You are logged in!'.
+ * }.
+ */
 ctr_object* ctr_password_verify(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* value = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("value"), CTR_CATEGORY_PRIVATE_PROPERTY );
 	if (value == NULL) value = ctr_build_empty_string();
@@ -34,12 +58,26 @@ ctr_object* ctr_password_verify(ctr_object* myself, ctr_argument* argumentList) 
     return ctr_build_bool(1);
 }
 
+/**
+ * [Password] toString
+ *
+ * Returns a string representation of the password. This will always return a string
+ * of the hashed password. There is no way to extract the original input from the
+ * Password object.
+ */
 ctr_object* ctr_password_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* answer = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring("value"), CTR_CATEGORY_PRIVATE_PROPERTY );
 	if (answer == NULL) return CtrStdNil;
 	return answer;
 }
 
+/**
+ * [Password] fromHash: [String].
+ *
+ * Returns a password instance representing the password described by the specified string.
+ * This message can be used to load an existing password hash from the database
+ * into the password object for comparison.
+ */
 ctr_object* ctr_password_from_hash(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* cryptInstance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	cryptInstance->link = myself;
@@ -47,7 +85,11 @@ ctr_object* ctr_password_from_hash(ctr_object* myself, ctr_argument* argumentLis
 	return cryptInstance;
 }
 
-
+/**
+ * @internal
+ * Gets called after loading the plugin.
+ * This function will add the Password object to the World.
+ */
 void begin(){
 	if (sodium_init() >= 0) {
 		ctr_object* cryptObject = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
