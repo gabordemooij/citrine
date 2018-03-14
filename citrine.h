@@ -271,8 +271,8 @@ extern char CtrHashKey[16];
 /**
  * CLI Arguments
  */
-int ctr_argc;
-char** ctr_argv;
+extern int ctr_argc;
+extern char** ctr_argv;
 
 /**
  * Mode of Operation

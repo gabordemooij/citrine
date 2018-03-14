@@ -12,6 +12,9 @@
 #include "citrine.h"
 #include "siphash.h"
 
+int ctr_argc;
+char** ctr_argv;
+
 /**
  * CommandLine Display Welcome Message
  * Displays a Welcome message, copyright information,
