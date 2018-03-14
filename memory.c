@@ -25,6 +25,7 @@ size_t     maxNumberOfMemBlocks = 0;
 char* ctr_pool_alloc( ctr_size podSize );
 void ctr_pool_dealloc( void* ptr );
 void ctr_pool_init();
+int ctr_pool_bucket( ctr_size size );
 
 /**
  * Heap allocate raw memory
@@ -270,7 +271,7 @@ void ctr_pool_init( ctr_size pool ) {
 	mpodmem =  malloc( poolSize );
 	lpodmem =  malloc( poolSize );
 	if (spodmem == NULL || mpodmem == NULL || lpodmem == NULL) {
-		printf( "Unable to allocate memory pool.\n", poolSize );
+		printf( "Unable to allocate memory pool.\n" );
 		exit(1);
 	}
 	freeslist = (char**) malloc(sizeof(char**) * spods);
