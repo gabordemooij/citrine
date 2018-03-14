@@ -266,7 +266,7 @@ extern ctr_object* ctr_first_object;
 /**
  * Hashkey
  */
-char CtrHashKey[16];
+extern char CtrHashKey[16];
 
 /**
  * CLI Arguments

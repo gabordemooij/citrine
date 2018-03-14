@@ -38,6 +38,7 @@ ctr_object* CtrStdBreak;
 ctr_object* CtrStdContinue;
 ctr_object* CtrStdExit;
 ctr_object* ctr_first_object;
+char CtrHashKey[16];
 
 /**
  * @internal
