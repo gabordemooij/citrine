@@ -83,7 +83,7 @@ ctr_object* ctr_password_to_string(ctr_object* myself, ctr_argument* argumentLis
 }
 
 /**
- * [Password] fromHash: [String].
+ * [Password] fromHash: [String]
  *
  * Returns a password instance representing the password described by the specified string.
  * This message can be used to load an existing password hash from the database
