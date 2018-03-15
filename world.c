@@ -363,7 +363,7 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
 	ctr_object* numObject = ctr_send_message( o, CTR_DICT_TONUMBER, strlen(CTR_DICT_TONUMBER), a );
 	ctr_heap_free(a);
 	if ( numObject->info.type != CTR_OBJECT_TYPE_OTNUMBER ) {
-		CtrStdFlow = ctr_build_string_from_cstring( "toNumber must return a number." );
+		CtrStdFlow = ctr_error_text( "toNumber must return a number." );
 		return ctr_build_number_from_float((ctr_number)0);
 	}
 	return numObject;
@@ -383,7 +383,7 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 	ctr_object* stringObject = ctr_send_message( o, CTR_DICT_TOSTRING, strlen(CTR_DICT_TOSTRING), a );
 	ctr_heap_free(a);
 	if ( stringObject->info.type != CTR_OBJECT_TYPE_OTSTRING ) {
-		CtrStdFlow = ctr_build_string_from_cstring( "toString must return a string." );
+		CtrStdFlow = ctr_error_text( "toString must return a string." );
 		return ctr_build_string_from_cstring( "?" );
 	}
 	return stringObject;
@@ -403,7 +403,7 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
 	ctr_object* boolObject = ctr_send_message( o, CTR_DICT_TOBOOL, strlen(CTR_DICT_TOBOOL), a );
 	ctr_heap_free(a);
 	if ( boolObject->info.type != CTR_OBJECT_TYPE_OTBOOL ) {
-		CtrStdFlow = ctr_build_string_from_cstring( "toBoolean must return a boolean." );
+		CtrStdFlow = ctr_error_text( "toBoolean must return a boolean." );
 		return ctr_build_bool(0);
 	}
 	return boolObject;
