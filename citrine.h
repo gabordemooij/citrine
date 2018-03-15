@@ -772,6 +772,7 @@ size_t ctr_heap_get_latest_tracking_id();
 void* ctr_heap_reallocate_tracked(size_t tracking_id, size_t size );
 char* ctr_heap_allocate_cstring( ctr_object* o );
 ctr_object* ctr_error( char* error_string, int error_code );
+ctr_object* ctr_error_text( char* error_string );
 void ctr_pool_init( ctr_size pool );
 
 uint8_t  ctr_accept_n_connections;

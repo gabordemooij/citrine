@@ -153,3 +153,15 @@ ctr_object* ctr_error( char* message, int error_code ) {
 	CtrStdFlow->info.sticky = 1;
 	return CtrStdFlow;
 }
+
+/**
+ * @internal
+ *
+ * Causes the program flow to switch to error mode.
+ * Assigns the specified string to the Error Object.
+ */
+ctr_object* ctr_error_text( char* message ) {
+	CtrStdFlow = ctr_build_string_from_cstring( message );
+	CtrStdFlow->info.sticky = 1;
+	return CtrStdFlow;
+}
