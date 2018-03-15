@@ -345,7 +345,7 @@ ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList )
 	ctr_object* message = ctr_internal_cast2string( argumentList->object );
 	ctr_object* arr     = argumentList->next->object;
 	if ( arr->info.type != CTR_OBJECT_TYPE_OTARRAY ) {
-		CtrStdFlow = ctr_build_string_from_cstring( "Dynamic message expects array." );
+		ctr_error_text( "Dynamic message expects array." );
 		return CtrStdNil;
 	}
 	ctr_size length = (int) ctr_array_count( arr,  NULL )->value.nvalue;
@@ -2079,6 +2079,7 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument* argumentList ) {
 	regex_t pattern;
 	int reti;
+	int sticky1, sticky2, sticky3;
 	int regex_error = 0;
 	size_t n = 255;
 	size_t i = 0;
@@ -2108,6 +2109,7 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 	reti = regcomp(&pattern, needle, eflags);
 	if ( reti ) {
 		CtrStdFlow = ctr_build_string_from_cstring( "Could not compile regular expression." );
+		CtrStdFlow->info.sticky=1;
 		return CtrStdNil;
 	}
 	char* haystack = ctr_heap_allocate_cstring(myself);
@@ -2140,7 +2142,16 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 			offset += matches[0].rm_eo;
 			ctr_heap_free( arg );
 		}
-		ctr_object* replacement = ctr_block_run( block, blockArguments, block );
+		sticky1 = block->info.sticky;
+		sticky2 = blockArguments->object->info.sticky;
+		sticky3 = newString->info.sticky;
+		block->info.sticky = 1;
+		blockArguments->object->info.sticky = 1;
+		newString->info.sticky = 1;
+		ctr_object* replacement = replacement = ctr_block_run( block, blockArguments, block );
+		block->info.sticky = sticky1;
+		blockArguments->object->info.sticky = sticky2;
+		newString->info.sticky = sticky3;
 		ctr_argument* arg = ctr_heap_allocate( sizeof( ctr_argument ) );
 		arg->object = replacement;
 		ctr_string_append( newString, arg );
@@ -2208,7 +2219,7 @@ ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argum
 	ctr_object* answer;
 	regex_error = regcomp(&pattern, needle, REG_EXTENDED);
 	if ( regex_error ) {
-		CtrStdFlow = ctr_build_string_from_cstring( "Could not compile regular expression." );
+		CtrStdFlow = ctr_error_text( "Could not compile regular expression." );
 		answer = CtrStdNil;
 	} else {
 		result = regexec(&pattern, haystack, 0, NULL, 0 );
@@ -2879,7 +2890,7 @@ ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argument
 	char* keyString = ctr_heap_allocate_cstring( argumentList->object );
 	if ( strlen( keyString ) < 16 ) {
 		ctr_heap_free( keyString );
-		CtrStdFlow = ctr_build_string_from_cstring( "Key must be exactly 16 bytes long." );
+		CtrStdFlow = ctr_error_text( "Key must be exactly 16 bytes long." );
 		return CtrStdNil;
 	}
 	uint64_t t = siphash24( myself->value.svalue->value, myself->value.svalue->vlen, keyString);
@@ -3005,6 +3016,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	ctr_tlistitem* parameterList = codeBlockPart1->nodes;
 	ctr_tnode* parameter;
 	ctr_object* a;
+	int sticky;
 	ctr_open_context();
 	if (parameterList && parameterList->node) {
 		parameter = parameterList->node;
@@ -3035,9 +3047,12 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "catch" ), 0);
 		if (catchBlock != NULL) {
 			ctr_argument* a = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
-			a->object = CtrStdFlow;
+			a->object = ctr_internal_cast2string(CtrStdFlow);
 			CtrStdFlow = NULL;
+			sticky = a->object->info.sticky;
+			a->object->info.sticky = 1;
 			ctr_block_run(catchBlock, a, my);
+			a->object->info.sticky = sticky;
 			ctr_heap_free( a );
 			result = myself;
 		}
