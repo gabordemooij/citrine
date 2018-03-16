@@ -24,7 +24,7 @@ ctr_object* ctr_hash_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* password = ctr_internal_cast2string( argumentList->object );
 	if (crypto_pwhash_str(value->value.svalue->value, password->value.svalue->value, password->value.svalue->vlen,
      crypto_pwhash_OPSLIMIT_MODERATE, crypto_pwhash_MEMLIMIT_MODERATE) != 0) {
-		CtrStdFlow = ctr_build_string_from_cstring("Unable to encrypt password.");
+		CtrStdFlow = ctr_error_text("Unable to encrypt password.");
 	}
 	return cryptInstance;
 }

@@ -116,7 +116,7 @@ ctr_object* ctr_json_parse(ctr_object* myself, ctr_argument* argumentList) {
 	if ( s <= 0 ) {
 		ctr_heap_free( jsonString );
 		if ( s == JSMN_ERROR_INVAL ) {
-			CtrStdFlow = ctr_build_string_from_cstring("Bad token, JSON string is corrupted.");
+			CtrStdFlow = ctr_error_text("Bad token, JSON string is corrupted.");
 		}
 		return CtrStdNil;
 	}

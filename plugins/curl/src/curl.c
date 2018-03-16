@@ -944,7 +944,7 @@ ctr_object* ctr_curl_perform(ctr_object* myself, ctr_argument* argumentList) {
 	curl_easy_setopt(myself->value.rvalue->ptr, CURLOPT_WRITEDATA, temp);
 	CURLcode code = curl_easy_perform(myself->value.rvalue->ptr);
 	if (code != CURLE_OK)
-		CtrStdFlow = ctr_build_string_from_cstring("Received Curl error code");
+		CtrStdFlow = ctr_error_text("Received Curl error code");
 	fseek(temp, 0, SEEK_END);
 	ctr_size fileLen = ftell(temp);
 	fseek(temp, 0, SEEK_SET);

@@ -19,11 +19,11 @@ ctr_object* ctr_pg_new(ctr_object* myself, ctr_argument* argumentList) {
 	psql = PQconnectdb(connectionString);
 	ctr_heap_free(connectionString);
 	if (!psql) {
-		CtrStdFlow = ctr_build_string_from_cstring("PostgreSQL: Unable to establish a connection.");
+		CtrStdFlow = ctr_error_text("PostgreSQL: Unable to establish a connection.");
 		return CtrStdNil;
 	}
 	if (PQstatus(psql) != CONNECTION_OK) {
-		CtrStdFlow = ctr_build_string_from_cstring("PostgreSQL: Connection not OK.");
+		CtrStdFlow = ctr_error_text("PostgreSQL: Connection not OK.");
 		return CtrStdNil;
 	}
 	ctr_object* pgInstance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
