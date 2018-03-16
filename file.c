@@ -605,7 +605,7 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	pathValue = ctr_heap_allocate_cstring( path );
 	d = opendir( pathValue );
 	if (d == 0) {
-		CtrStdFlow = ctr_build_string_from_cstring("Failed to open folder.");
+		CtrStdFlow = ctr_error_text("Failed to open folder.");
 		ctr_heap_free(pathValue);
 		return CtrStdNil;
 	}

@@ -640,7 +640,7 @@ ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* remainderArg;
 	ctr_size n;
 	if ( replacement->info.type != CTR_OBJECT_TYPE_OTARRAY ) {
-		CtrStdFlow = ctr_build_string_from_cstring( "Replacement must be an array." );
+		CtrStdFlow = ctr_error_text( "Replacement must be an array." );
 		return myself;
 	}
 	n = ( start->value.nvalue + deleteCount->value.nvalue );
