@@ -25,8 +25,14 @@ ctr_object* ctr_cwlk_return(ctr_tnode* node) {
 	if (!li->node) {
 		fprintf(stderr,"Invalid return expression 2.\n");
 		exit(1);
-	} 
+	}
 	e = ctr_cwlk_expr(li->node, &wasReturn);
+	char* temp = ctr_heap_allocate( 32 );
+	snprintf(temp, 30, " @%p", e);
+	if (ctr_context_id>0) {
+		ctr_internal_object_set_property( ctr_contexts[ctr_context_id-1], ctr_build_string_from_cstring(temp), e, CTR_CATEGORY_PRIVATE_PROPERTY);
+	}
+	ctr_heap_free(temp);
 	return e;
 }
 
