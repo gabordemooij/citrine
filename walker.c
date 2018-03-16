@@ -8,6 +8,8 @@
 
 #include "citrine.h"
 
+int ctr_in_message = 0;
+
 /**
  * CTRWalkerReturn
  *
@@ -27,12 +29,17 @@ ctr_object* ctr_cwlk_return(ctr_tnode* node) {
 		exit(1);
 	}
 	e = ctr_cwlk_expr(li->node, &wasReturn);
-	char* temp = ctr_heap_allocate( 32 );
-	snprintf(temp, 30, " @%p", e);
-	if (ctr_context_id>0) {
-		ctr_internal_object_set_property( ctr_contexts[ctr_context_id-1], ctr_build_string_from_cstring(temp), e, CTR_CATEGORY_PRIVATE_PROPERTY);
+
+	/* protect result in-argument from being destroyed by GC. */
+	if (ctr_in_message) {
+		char* temp = ctr_heap_allocate( 32 );
+		snprintf(temp, 30, " @%p", e);
+		if (ctr_context_id>0) {
+			ctr_internal_object_set_property( ctr_contexts[ctr_context_id-1], ctr_build_string_from_cstring(temp), e, CTR_CATEGORY_PRIVATE_PROPERTY);
+		}
+		ctr_heap_free(temp);
 	}
-	ctr_heap_free(temp);
+
 	return e;
 }
 
@@ -116,7 +123,9 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 			ctr_tnode* node;
 			node = argumentList->node;
 			while(1) {
+				ctr_in_message++;
 				ctr_object* o = ctr_cwlk_expr(node, &wasReturn);
+				ctr_in_message--;
 				aItem->object = o;
 				/* we always send at least one argument, note that if you want to modify the argumentList, be sure to take this into account */
 				/* there is always an extra empty argument at the end */
