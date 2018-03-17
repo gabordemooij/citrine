@@ -1,0 +1,35 @@
+#Test return values, you should not be able to change return values
+#from the outside.
+#Correct output: only lists coffees.
+☞ CoffeeMachine := Object new.
+CoffeeMachine on: 'order:' do: { :id
+	☞ coffee := 'Americano'.
+	( id = 1 ) ifTrue: {
+		coffee := 'Cappuccino'.
+	}.
+	( id = 2 ) ifTrue: {
+		coffee := 'Espresso'.
+	}.
+	( id = 3 ) ifTrue: {
+		coffee := 'Latte'.
+	}.
+	↲ coffee.
+}.
+☞ SimpleCoffeeMachine := Object new.
+SimpleCoffeeMachine on: 'order' do: { ↲ 'Black'. }.
+☞ redCup := CoffeeMachine order: 1.
+✎ write: redCup, brk.
+redCup := 'Tea'. #Can we contaminate the return value?
+☞ greenCup := CoffeeMachine order: 0.
+✎ write: greenCup, brk.
+☞ yellowCup := CoffeeMachine order: 1.
+✎ write: yellowCup, brk.
+☞ blueCup := CoffeeMachine order: 0.
+✎ write: blueCup, brk.
+☞ plasticCup := SimpleCoffeeMachine order.
+plasticCup := 'Lemonade'. #Can we contaminate the return value?
+☞ blackCup := SimpleCoffeeMachine order.
+✎ write: blackCup, brk.
+blackCup append: ' nooo.... beer. '.
+☞ orangeCup := SimpleCoffeeMachine order.
+✎ write: orangeCup, brk.
