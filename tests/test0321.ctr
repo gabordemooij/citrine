@@ -1,0 +1,40 @@
+#GC numbers must be same within file (absolute numbers may change), 7 apples.
+Broom mode: 12.
+Broom sweep.
+
+Fruit := Object new.
+Fruit on: 'new' do: {
+	var f := me `new.
+	f apples: 0.
+	^ f.
+}.
+Fruit on: 'apples:' do: { :a my apples := a. }.
+Fruit on: 'apples' do: { ^ my apples. }.
+Fruit on: '+' do: { :f
+	var n := Fruit new.
+	n apples: (f apples + my apples).
+	^ n.
+}.
+Number on: 'apples' do: {
+	^ ((Fruit new) apples: me).
+}.
+
+Fruit on: 'toString' do: {
+	↲ my apples + ' apples '.
+}.
+
+q := 3 apples + 4 apples.
+✎ write: q, brk.
+✎ write: Broom keptAlloc, brk.
+#Broom sweep.
+✎ write: Broom keptAlloc, brk.
+
+q := 3 apples + 4 apples.
+✎ write: q, brk.
+#Broom sweep.
+✎ write: Broom keptAlloc, brk.
+
+q := 3 apples + 4 apples.
+✎ write: q, brk.
+#Broom sweep.
+✎ write: Broom keptAlloc, brk.
