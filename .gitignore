@@ -23,3 +23,5 @@ p.sh
 .vs
 .vscode
 *.vsspell
+build/
+
