@@ -1023,6 +1023,9 @@ void ctr_initialize_world() {
 
 	/* maximum number of connections to accept (in total) */
 	ctr_accept_n_connections = 0;
+
+	/* Create a dummy variable to balance memory use in tests. */
+	ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(".rs"), ctr_build_number_from_float(1), CTR_CATEGORY_PRIVATE_PROPERTY );
 }
 
 /**

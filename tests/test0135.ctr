@@ -23,7 +23,10 @@ dust2   := Broom dust.
 #test case
 #this should not cause extra garbage.
 
-#{ var a := 'dust!'. } run.
+{ var a := 'dust!'. } run.
+{ var a := 'dust!'. } run.
+{ var a := 'dust!'. } run.
+{ ↲ 'dust!'. } run.
 
 #end of test case
 
