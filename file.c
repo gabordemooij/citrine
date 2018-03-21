@@ -11,10 +11,12 @@
 #include "siphash.h"
 #include <unistd.h>
 #include <sys/file.h>
-#include <dirent.h>
 
 #ifdef __MINGW32__
 #include <windows.h>
+#include "ext/dirent/include/dirent.h"
+#else
+#include <dirent.h>
 #endif
 
 /**
@@ -601,6 +603,18 @@ ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_file_lock_generic( myself, argumentList, LOCK_EX | LOCK_NB );
 }
 
+#else
+
+ctr_object* ctr_file_unlock(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool(0);
+}
+
+ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_bool(1);
+}
+
+#endif
+
 /**
  * [File] list: [String].
  *
@@ -613,8 +627,8 @@ ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * files := File list: '/tmp/testje'.
- *
  */
+ 
 ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	DIR* d;
 	struct dirent* entry;
@@ -650,17 +664,20 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 			case DT_DIR:
 				putArgumentList->object = ctr_build_string_from_cstring("folder");
 				break;
+#ifndef __MINGW32__
+// On windows, link and socket file types cannot be distinguished from block devices 
 			case DT_LNK:
 				putArgumentList->object = ctr_build_string_from_cstring("symbolic link");
 				break;
+			case DT_SOCK:
+				putArgumentList->object = ctr_build_string_from_cstring("socket");
+				break;
+#endif
 			case DT_CHR:
 				putArgumentList->object = ctr_build_string_from_cstring("character device");
 				break;
 			case DT_BLK:
 				putArgumentList->object = ctr_build_string_from_cstring("block device");
-				break;
-			case DT_SOCK:
-				putArgumentList->object = ctr_build_string_from_cstring("socket");
 				break;
 			case DT_FIFO:
 				putArgumentList->object = ctr_build_string_from_cstring("named pipe");
@@ -680,19 +697,3 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_heap_free(pathValue);
 	return fileList;
 }
-
-#else
-
-ctr_object* ctr_file_unlock(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_bool(0);
-}
-
-ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_bool(1);
-}
-
-ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_array_new(CtrStdArray, NULL);
-}
-
-#endif
