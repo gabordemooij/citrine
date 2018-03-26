@@ -119,10 +119,10 @@ void* ctr_internal_plugin_find(ctr_object* key) {
 	modNameLow = modName;
 	for (; *modNameLow; ++modNameLow) *modNameLow = tolower(*modNameLow);
 	#ifdef __MINGW32__
-	snprintf(pathNameMod, 1024, "mods/%s/libctr%s.dll", modName, modName);
+	snprintf(pathNameMod, 1024, "mods/libctr%s.dll", modName);
 	realPathModName = _fullpath(realPathModName, pathNameMod, 1024);
 	#else
-	snprintf(pathNameMod, 1024, "mods/%s/libctr%s.so", modName, modName);
+	snprintf(pathNameMod, 1024, "mods/libctr%s.so", modName);
 	realPathModName = realpath(pathNameMod, NULL);
 	#endif
 	if (access(realPathModName, F_OK) == -1) return NULL;

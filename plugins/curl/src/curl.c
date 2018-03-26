@@ -182,27 +182,27 @@ ctr_object* ctr_curl_respondto(ctr_object* myself, ctr_argument* argumentList) {
 #ifdef CTRPLUGIN_CURL_CURLOPT_LOCALPORTRANGE
 	else if (strcasecmp(msg, "localportrange") == 0) { opt = CURLOPT_LOCALPORTRANGE; }
 #endif
-	
+
 #ifdef CTRPLUGIN_CURL_CURLOPT_DNS_CACHE_TIMEOUT
 	else if (strcasecmp(msg, "dns_cache_timeout") == 0) { opt = CURLOPT_DNS_CACHE_TIMEOUT; }
 #endif
-	
+
 #ifdef CTRPLUGIN_CURL_CURLOPT_DNS_USE_GLOBAL_CACHE
 	else if (strcasecmp(msg, "dns_use_global_cache") == 0) { opt = CURLOPT_DNS_USE_GLOBAL_CACHE; }
 #endif
-	
+
 #ifdef CTRPLUGIN_CURL_CURLOPT_BUFFERSIZE
 	else if (strcasecmp(msg, "buffersize") == 0) { opt = CURLOPT_BUFFERSIZE; }
 #endif
-	
+
 #ifdef CTRPLUGIN_CURL_CURLOPT_PORT
 	else if (strcasecmp(msg, "port") == 0) { opt = CURLOPT_PORT; }
 #endif
-	
+
 #ifdef CTRPLUGIN_CURL_CURLOPT_TCP_FASTOPEN
 	else if (strcasecmp(msg, "tcp_fastopen") == 0) { opt = CURLOPT_TCP_FASTOPEN; }
 #endif
-	
+
 #ifdef CTRPLUGIN_CURL_CURLOPT_TCP_NODELAY
 	else if (strcasecmp(msg, "tcp_nodelay") == 0) { opt = CURLOPT_TCP_NODELAY; }
 #endif
@@ -269,8 +269,8 @@ ctr_object* ctr_curl_respondto(ctr_object* myself, ctr_argument* argumentList) {
 
 #ifdef CTRPLUGIN_CURL_CURLOPT_HTTPAUTH
 	else if (strcasecmp(msg, "httpauth") == 0) { opt = CURLOPT_HTTPAUTH; }
-#endif	
-	
+#endif
+
 #ifdef CTRPLUGIN_CURL_CURLOPT_TLSAUTH_USERNAME
 	else if (strcasecmp(msg, "tlsauth_username") == 0) { opt = CURLOPT_TLSAUTH_USERNAME; }
 #endif
@@ -278,640 +278,640 @@ ctr_object* ctr_curl_respondto(ctr_object* myself, ctr_argument* argumentList) {
 #ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_TLSAUTH_USERNAME
 	else if (strcasecmp(msg, "proxy_tlsauth_username") == 0) { opt = CURLOPT_PROXY_TLSAUTH_USERNAME; }
 #endif
-	
+
 #ifdef CTRPLUGIN_CURL_CURLOPT_TLSAUTH_PASSWORD
 	else if (strcasecmp(msg, "tlsauth_password") == 0) { opt = CURLOPT_TLSAUTH_PASSWORD; }
-#endif 
+#endif
 
 #ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_TLSAUTH_PASSWORD
 	else if (strcasecmp(msg, "proxy_tlsauth_password") == 0) { opt = CURLOPT_PROXY_TLSAUTH_PASSWORD; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_TLSAUTH_TYPE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_TLSAUTH_TYPE
   else if (strcasecmp(msg, "tlsauth_type") == 0) {  opt = CURLOPT_TLSAUTH_TYPE; }
-#endif 
+#endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_TLSAUTH_TYPE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_TLSAUTH_TYPE
   else if (strcasecmp(msg, "proxy_tlsauth_type") == 0) {  opt = CURLOPT_PROXY_TLSAUTH_TYPE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXYAUTH 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXYAUTH
   else if (strcasecmp(msg, "proxyauth") == 0) {  opt = CURLOPT_PROXYAUTH; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SASL_IR 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SASL_IR
   else if (strcasecmp(msg, "sasl_ir") == 0) {  opt = CURLOPT_SASL_IR; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_XOAUTH2_BEARER 
+#ifdef CTRPLUGIN_CURL_CURLOPT_XOAUTH2_BEARER
   else if (strcasecmp(msg, "xoauth2_bearer") == 0) {  opt = CURLOPT_XOAUTH2_BEARER; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_AUTOREFERER 
+#ifdef CTRPLUGIN_CURL_CURLOPT_AUTOREFERER
   else if (strcasecmp(msg, "autoreferer") == 0) {  opt = CURLOPT_AUTOREFERER; }
-#endif 
+#endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_ACCEPT_ENCODING 
+#ifdef CTRPLUGIN_CURL_CURLOPT_ACCEPT_ENCODING
   else if (strcasecmp(msg, "accept_encoding") == 0) {  opt = CURLOPT_ACCEPT_ENCODING; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_TRANSFER_ENCODING 
+#ifdef CTRPLUGIN_CURL_CURLOPT_TRANSFER_ENCODING
   else if (strcasecmp(msg, "transfer_encoding") == 0) {  opt = CURLOPT_TRANSFER_ENCODING; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FOLLOWLOCATION 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FOLLOWLOCATION
   else if (strcasecmp(msg, "followlocation") == 0) {  opt = CURLOPT_FOLLOWLOCATION; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_UNRESTRICTED_AUTH 
+#ifdef CTRPLUGIN_CURL_CURLOPT_UNRESTRICTED_AUTH
   else if (strcasecmp(msg, "unrestricted_auth") == 0) {  opt = CURLOPT_UNRESTRICTED_AUTH; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_MAXREDIRS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_MAXREDIRS
   else if (strcasecmp(msg, "maxredirs") == 0) {  opt = CURLOPT_MAXREDIRS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_POSTREDIR 
+#ifdef CTRPLUGIN_CURL_CURLOPT_POSTREDIR
   else if (strcasecmp(msg, "postredir") == 0) {  opt = CURLOPT_POSTREDIR; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PUT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PUT
   else if (strcasecmp(msg, "put") == 0) {  opt = CURLOPT_PUT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_POST 
+#ifdef CTRPLUGIN_CURL_CURLOPT_POST
   else if (strcasecmp(msg, "post") == 0) {  opt = CURLOPT_POST; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_POSTFIELDS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_POSTFIELDS
   else if (strcasecmp(msg, "postfields") == 0) {  opt = CURLOPT_POSTFIELDS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_POSTFIELDSIZE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_POSTFIELDSIZE
   else if (strcasecmp(msg, "postfieldsize") == 0) {  opt = CURLOPT_POSTFIELDSIZE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_POSTFIELDSIZE_LARGE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_POSTFIELDSIZE_LARGE
   else if (strcasecmp(msg, "postfieldsize_large") == 0) {  opt = CURLOPT_POSTFIELDSIZE_LARGE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_COPYPOSTFIELDS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_COPYPOSTFIELDS
   else if (strcasecmp(msg, "copypostfields") == 0) {  opt = CURLOPT_COPYPOSTFIELDS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_HTTPPOST 
+#ifdef CTRPLUGIN_CURL_CURLOPT_HTTPPOST
   else if (strcasecmp(msg, "httppost") == 0) {  opt = CURLOPT_HTTPPOST; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_REFERER 
+#ifdef CTRPLUGIN_CURL_CURLOPT_REFERER
   else if (strcasecmp(msg, "referer") == 0) {  opt = CURLOPT_REFERER; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_USERAGENT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_USERAGENT
   else if (strcasecmp(msg, "useragent") == 0) {  opt = CURLOPT_USERAGENT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_HTTPHEADER 
+#ifdef CTRPLUGIN_CURL_CURLOPT_HTTPHEADER
   else if (strcasecmp(msg, "httpheader") == 0) {  opt = CURLOPT_HTTPHEADER; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_HEADEROPT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_HEADEROPT
   else if (strcasecmp(msg, "headeropt") == 0) {  opt = CURLOPT_HEADEROPT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXYHEADER 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXYHEADER
   else if (strcasecmp(msg, "proxyheader") == 0) {  opt = CURLOPT_PROXYHEADER; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_HTTP200ALIASES 
+#ifdef CTRPLUGIN_CURL_CURLOPT_HTTP200ALIASES
   else if (strcasecmp(msg, "http200aliases") == 0) {  opt = CURLOPT_HTTP200ALIASES; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_COOKIE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_COOKIE
   else if (strcasecmp(msg, "cookie") == 0) {  opt = CURLOPT_COOKIE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_COOKIEFILE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_COOKIEFILE
   else if (strcasecmp(msg, "cookiefile") == 0) {  opt = CURLOPT_COOKIEFILE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_COOKIEJAR 
+#ifdef CTRPLUGIN_CURL_CURLOPT_COOKIEJAR
   else if (strcasecmp(msg, "cookiejar") == 0) {  opt = CURLOPT_COOKIEJAR; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_COOKIESESSION 
+#ifdef CTRPLUGIN_CURL_CURLOPT_COOKIESESSION
   else if (strcasecmp(msg, "cookiesession") == 0) {  opt = CURLOPT_COOKIESESSION; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_COOKIELIST 
+#ifdef CTRPLUGIN_CURL_CURLOPT_COOKIELIST
   else if (strcasecmp(msg, "cookielist") == 0) {  opt = CURLOPT_COOKIELIST; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_HTTPGET 
+#ifdef CTRPLUGIN_CURL_CURLOPT_HTTPGET
   else if (strcasecmp(msg, "httpget") == 0) {  opt = CURLOPT_HTTPGET; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_HTTP_VERSION 
+#ifdef CTRPLUGIN_CURL_CURLOPT_HTTP_VERSION
   else if (strcasecmp(msg, "http_version") == 0) {  opt = CURLOPT_HTTP_VERSION; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_IGNORE_CONTENT_LENGTH 
+#ifdef CTRPLUGIN_CURL_CURLOPT_IGNORE_CONTENT_LENGTH
   else if (strcasecmp(msg, "ignore_content_length") == 0) {  opt = CURLOPT_IGNORE_CONTENT_LENGTH; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_HTTP_CONTENT_DECODING 
+#ifdef CTRPLUGIN_CURL_CURLOPT_HTTP_CONTENT_DECODING
   else if (strcasecmp(msg, "http_content_decoding") == 0) {  opt = CURLOPT_HTTP_CONTENT_DECODING; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_HTTP_TRANSFER_DECODING 
+#ifdef CTRPLUGIN_CURL_CURLOPT_HTTP_TRANSFER_DECODING
   else if (strcasecmp(msg, "http_transfer_decoding") == 0) {  opt = CURLOPT_HTTP_TRANSFER_DECODING; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_EXPECT_100_TIMEOUT_MS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_EXPECT_100_TIMEOUT_MS
   else if (strcasecmp(msg, "expect_100_timeout_ms") == 0) {  opt = CURLOPT_EXPECT_100_TIMEOUT_MS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PIPEWAIT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PIPEWAIT
   else if (strcasecmp(msg, "pipewait") == 0) {  opt = CURLOPT_PIPEWAIT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_STREAM_DEPENDS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_STREAM_DEPENDS
   else if (strcasecmp(msg, "stream_depends") == 0) {  opt = CURLOPT_STREAM_DEPENDS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_STREAM_DEPENDS_E 
+#ifdef CTRPLUGIN_CURL_CURLOPT_STREAM_DEPENDS_E
   else if (strcasecmp(msg, "stream_depends_e") == 0) {  opt = CURLOPT_STREAM_DEPENDS_E; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_STREAM_WEIGHT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_STREAM_WEIGHT
   else if (strcasecmp(msg, "stream_weight") == 0) {  opt = CURLOPT_STREAM_WEIGHT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_MAIL_FROM 
+#ifdef CTRPLUGIN_CURL_CURLOPT_MAIL_FROM
   else if (strcasecmp(msg, "mail_from") == 0) {  opt = CURLOPT_MAIL_FROM; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_MAIL_RCPT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_MAIL_RCPT
   else if (strcasecmp(msg, "mail_rcpt") == 0) {  opt = CURLOPT_MAIL_RCPT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_MAIL_AUTH 
+#ifdef CTRPLUGIN_CURL_CURLOPT_MAIL_AUTH
   else if (strcasecmp(msg, "mail_auth") == 0) {  opt = CURLOPT_MAIL_AUTH; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_TFTP_BLKSIZE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_TFTP_BLKSIZE
   else if (strcasecmp(msg, "tftp_blksize") == 0) {  opt = CURLOPT_TFTP_BLKSIZE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_TFTP_NO_OPTIONS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_TFTP_NO_OPTIONS
   else if (strcasecmp(msg, "tftp_no_options") == 0) {  opt = CURLOPT_TFTP_NO_OPTIONS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FTPPORT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FTPPORT
   else if (strcasecmp(msg, "ftpport") == 0) {  opt = CURLOPT_FTPPORT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_QUOTE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_QUOTE
   else if (strcasecmp(msg, "quote") == 0) {  opt = CURLOPT_QUOTE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_POSTQUOTE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_POSTQUOTE
   else if (strcasecmp(msg, "postquote") == 0) {  opt = CURLOPT_POSTQUOTE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PREQUOTE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PREQUOTE
   else if (strcasecmp(msg, "prequote") == 0) {  opt = CURLOPT_PREQUOTE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_APPEND 
+#ifdef CTRPLUGIN_CURL_CURLOPT_APPEND
   else if (strcasecmp(msg, "append") == 0) {  opt = CURLOPT_APPEND; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_USE_EPRT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_USE_EPRT
   else if (strcasecmp(msg, "ftp_use_eprt") == 0) {  opt = CURLOPT_FTP_USE_EPRT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_USE_EPSV 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_USE_EPSV
   else if (strcasecmp(msg, "ftp_use_epsv") == 0) {  opt = CURLOPT_FTP_USE_EPSV; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_USE_PRET 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_USE_PRET
   else if (strcasecmp(msg, "ftp_use_pret") == 0) {  opt = CURLOPT_FTP_USE_PRET; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_CREATE_MISSING_DIRS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_CREATE_MISSING_DIRS
   else if (strcasecmp(msg, "ftp_create_missing_dirs") == 0) {  opt = CURLOPT_FTP_CREATE_MISSING_DIRS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_RESPONSE_TIMEOUT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_RESPONSE_TIMEOUT
   else if (strcasecmp(msg, "ftp_response_timeout") == 0) {  opt = CURLOPT_FTP_RESPONSE_TIMEOUT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_ALTERNATIVE_TO_USER 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_ALTERNATIVE_TO_USER
   else if (strcasecmp(msg, "ftp_alternative_to_user") == 0) {  opt = CURLOPT_FTP_ALTERNATIVE_TO_USER; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_SKIP_PASV_IP 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_SKIP_PASV_IP
   else if (strcasecmp(msg, "ftp_skip_pasv_ip") == 0) {  opt = CURLOPT_FTP_SKIP_PASV_IP; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FTPSSLAUTH 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FTPSSLAUTH
   else if (strcasecmp(msg, "ftpsslauth") == 0) {  opt = CURLOPT_FTPSSLAUTH; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_SSL_CCC 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_SSL_CCC
   else if (strcasecmp(msg, "ftp_ssl_ccc") == 0) {  opt = CURLOPT_FTP_SSL_CCC; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_ACCOUNT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_ACCOUNT
   else if (strcasecmp(msg, "ftp_account") == 0) {  opt = CURLOPT_FTP_ACCOUNT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_FILEMETHOD 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FTP_FILEMETHOD
   else if (strcasecmp(msg, "ftp_filemethod") == 0) {  opt = CURLOPT_FTP_FILEMETHOD; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_RTSP_REQUEST 
+#ifdef CTRPLUGIN_CURL_CURLOPT_RTSP_REQUEST
   else if (strcasecmp(msg, "rtsp_request") == 0) {  opt = CURLOPT_RTSP_REQUEST; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_RTSP_SESSION_ID 
+#ifdef CTRPLUGIN_CURL_CURLOPT_RTSP_SESSION_ID
   else if (strcasecmp(msg, "rtsp_session_id") == 0) {  opt = CURLOPT_RTSP_SESSION_ID; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_RTSP_STREAM_URI 
+#ifdef CTRPLUGIN_CURL_CURLOPT_RTSP_STREAM_URI
   else if (strcasecmp(msg, "rtsp_stream_uri") == 0) {  opt = CURLOPT_RTSP_STREAM_URI; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_RTSP_TRANSPORT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_RTSP_TRANSPORT
   else if (strcasecmp(msg, "rtsp_transport") == 0) {  opt = CURLOPT_RTSP_TRANSPORT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_RTSP_CLIENT_CSEQ 
+#ifdef CTRPLUGIN_CURL_CURLOPT_RTSP_CLIENT_CSEQ
   else if (strcasecmp(msg, "rtsp_client_cseq") == 0) {  opt = CURLOPT_RTSP_CLIENT_CSEQ; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_RTSP_SERVER_CSEQ 
+#ifdef CTRPLUGIN_CURL_CURLOPT_RTSP_SERVER_CSEQ
   else if (strcasecmp(msg, "rtsp_server_cseq") == 0) {  opt = CURLOPT_RTSP_SERVER_CSEQ; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_TRANSFERTEXT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_TRANSFERTEXT
   else if (strcasecmp(msg, "transfertext") == 0) {  opt = CURLOPT_TRANSFERTEXT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_TRANSFER_MODE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_TRANSFER_MODE
   else if (strcasecmp(msg, "proxy_transfer_mode") == 0) {  opt = CURLOPT_PROXY_TRANSFER_MODE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_CRLF 
+#ifdef CTRPLUGIN_CURL_CURLOPT_CRLF
   else if (strcasecmp(msg, "crlf") == 0) {  opt = CURLOPT_CRLF; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_RANGE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_RANGE
   else if (strcasecmp(msg, "range") == 0) {  opt = CURLOPT_RANGE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_RESUME_FROM 
+#ifdef CTRPLUGIN_CURL_CURLOPT_RESUME_FROM
   else if (strcasecmp(msg, "resume_from") == 0) {  opt = CURLOPT_RESUME_FROM; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_RESUME_FROM_LARGE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_RESUME_FROM_LARGE
   else if (strcasecmp(msg, "resume_from_large") == 0) {  opt = CURLOPT_RESUME_FROM_LARGE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_CUSTOMREQUEST 
+#ifdef CTRPLUGIN_CURL_CURLOPT_CUSTOMREQUEST
   else if (strcasecmp(msg, "customrequest") == 0) {  opt = CURLOPT_CUSTOMREQUEST; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FILETIME 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FILETIME
   else if (strcasecmp(msg, "filetime") == 0) {  opt = CURLOPT_FILETIME; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_DIRLISTONLY 
+#ifdef CTRPLUGIN_CURL_CURLOPT_DIRLISTONLY
   else if (strcasecmp(msg, "dirlistonly") == 0) {  opt = CURLOPT_DIRLISTONLY; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_NOBODY 
+#ifdef CTRPLUGIN_CURL_CURLOPT_NOBODY
   else if (strcasecmp(msg, "nobody") == 0) {  opt = CURLOPT_NOBODY; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_INFILESIZE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_INFILESIZE
   else if (strcasecmp(msg, "infilesize") == 0) {  opt = CURLOPT_INFILESIZE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_INFILESIZE_LARGE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_INFILESIZE_LARGE
   else if (strcasecmp(msg, "infilesize_large") == 0) {  opt = CURLOPT_INFILESIZE_LARGE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_UPLOAD 
+#ifdef CTRPLUGIN_CURL_CURLOPT_UPLOAD
   else if (strcasecmp(msg, "upload") == 0) {  opt = CURLOPT_UPLOAD; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_MAXFILESIZE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_MAXFILESIZE
   else if (strcasecmp(msg, "maxfilesize") == 0) {  opt = CURLOPT_MAXFILESIZE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_MAXFILESIZE_LARGE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_MAXFILESIZE_LARGE
   else if (strcasecmp(msg, "maxfilesize_large") == 0) {  opt = CURLOPT_MAXFILESIZE_LARGE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_TIMECONDITION 
+#ifdef CTRPLUGIN_CURL_CURLOPT_TIMECONDITION
   else if (strcasecmp(msg, "timecondition") == 0) {  opt = CURLOPT_TIMECONDITION; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_TIMEVALUE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_TIMEVALUE
   else if (strcasecmp(msg, "timevalue") == 0) {  opt = CURLOPT_TIMEVALUE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_TIMEOUT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_TIMEOUT
   else if (strcasecmp(msg, "timeout") == 0) {  opt = CURLOPT_TIMEOUT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_TIMEOUT_MS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_TIMEOUT_MS
   else if (strcasecmp(msg, "timeout_ms") == 0) {  opt = CURLOPT_TIMEOUT_MS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_LOW_SPEED_LIMIT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_LOW_SPEED_LIMIT
   else if (strcasecmp(msg, "low_speed_limit") == 0) {  opt = CURLOPT_LOW_SPEED_LIMIT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_LOW_SPEED_TIME 
+#ifdef CTRPLUGIN_CURL_CURLOPT_LOW_SPEED_TIME
   else if (strcasecmp(msg, "low_speed_time") == 0) {  opt = CURLOPT_LOW_SPEED_TIME; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_MAX_SEND_SPEED_LARGE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_MAX_SEND_SPEED_LARGE
   else if (strcasecmp(msg, "max_send_speed_large") == 0) {  opt = CURLOPT_MAX_SEND_SPEED_LARGE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_MAX_RECV_SPEED_LARGE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_MAX_RECV_SPEED_LARGE
   else if (strcasecmp(msg, "max_recv_speed_large") == 0) {  opt = CURLOPT_MAX_RECV_SPEED_LARGE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_MAXCONNECTS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_MAXCONNECTS
   else if (strcasecmp(msg, "maxconnects") == 0) {  opt = CURLOPT_MAXCONNECTS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FRESH_CONNECT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FRESH_CONNECT
   else if (strcasecmp(msg, "fresh_connect") == 0) {  opt = CURLOPT_FRESH_CONNECT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_FORBID_REUSE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_FORBID_REUSE
   else if (strcasecmp(msg, "forbid_reuse") == 0) {  opt = CURLOPT_FORBID_REUSE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_CONNECTTIMEOUT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_CONNECTTIMEOUT
   else if (strcasecmp(msg, "connecttimeout") == 0) {  opt = CURLOPT_CONNECTTIMEOUT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_CONNECTTIMEOUT_MS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_CONNECTTIMEOUT_MS
   else if (strcasecmp(msg, "connecttimeout_ms") == 0) {  opt = CURLOPT_CONNECTTIMEOUT_MS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_IPRESOLVE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_IPRESOLVE
   else if (strcasecmp(msg, "ipresolve") == 0) {  opt = CURLOPT_IPRESOLVE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_CONNECT_ONLY 
+#ifdef CTRPLUGIN_CURL_CURLOPT_CONNECT_ONLY
   else if (strcasecmp(msg, "connect_only") == 0) {  opt = CURLOPT_CONNECT_ONLY; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_USE_SSL 
+#ifdef CTRPLUGIN_CURL_CURLOPT_USE_SSL
   else if (strcasecmp(msg, "use_ssl") == 0) {  opt = CURLOPT_USE_SSL; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_RESOLVE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_RESOLVE
   else if (strcasecmp(msg, "resolve") == 0) {  opt = CURLOPT_RESOLVE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_DNS_INTERFACE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_DNS_INTERFACE
   else if (strcasecmp(msg, "dns_interface") == 0) {  opt = CURLOPT_DNS_INTERFACE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_DNS_LOCAL_IP4 
+#ifdef CTRPLUGIN_CURL_CURLOPT_DNS_LOCAL_IP4
   else if (strcasecmp(msg, "dns_local_ip4") == 0) {  opt = CURLOPT_DNS_LOCAL_IP4; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_DNS_LOCAL_IP6 
+#ifdef CTRPLUGIN_CURL_CURLOPT_DNS_LOCAL_IP6
   else if (strcasecmp(msg, "dns_local_ip6") == 0) {  opt = CURLOPT_DNS_LOCAL_IP6; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_DNS_SERVERS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_DNS_SERVERS
   else if (strcasecmp(msg, "dns_servers") == 0) {  opt = CURLOPT_DNS_SERVERS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_ACCEPTTIMEOUT_MS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_ACCEPTTIMEOUT_MS
   else if (strcasecmp(msg, "accepttimeout_ms") == 0) {  opt = CURLOPT_ACCEPTTIMEOUT_MS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSLCERT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSLCERT
   else if (strcasecmp(msg, "sslcert") == 0) {  opt = CURLOPT_SSLCERT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSLCERT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSLCERT
   else if (strcasecmp(msg, "proxy_sslcert") == 0) {  opt = CURLOPT_PROXY_SSLCERT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSLCERTTYPE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSLCERTTYPE
   else if (strcasecmp(msg, "sslcerttype") == 0) {  opt = CURLOPT_SSLCERTTYPE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSLCERTTYPE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSLCERTTYPE
   else if (strcasecmp(msg, "proxy_sslcerttype") == 0) {  opt = CURLOPT_PROXY_SSLCERTTYPE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSLKEY 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSLKEY
   else if (strcasecmp(msg, "sslkey") == 0) {  opt = CURLOPT_SSLKEY; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSLKEY 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSLKEY
   else if (strcasecmp(msg, "proxy_sslkey") == 0) {  opt = CURLOPT_PROXY_SSLKEY; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSLKEYTYPE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSLKEYTYPE
   else if (strcasecmp(msg, "sslkeytype") == 0) {  opt = CURLOPT_SSLKEYTYPE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSLKEYTYPE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSLKEYTYPE
   else if (strcasecmp(msg, "proxy_sslkeytype") == 0) {  opt = CURLOPT_PROXY_SSLKEYTYPE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_KEYPASSWD 
+#ifdef CTRPLUGIN_CURL_CURLOPT_KEYPASSWD
   else if (strcasecmp(msg, "keypasswd") == 0) {  opt = CURLOPT_KEYPASSWD; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_KEYPASSWD 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_KEYPASSWD
   else if (strcasecmp(msg, "proxy_keypasswd") == 0) {  opt = CURLOPT_PROXY_KEYPASSWD; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_ENABLE_ALPN 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_ENABLE_ALPN
   else if (strcasecmp(msg, "ssl_enable_alpn") == 0) {  opt = CURLOPT_SSL_ENABLE_ALPN; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_ENABLE_NPN 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_ENABLE_NPN
   else if (strcasecmp(msg, "ssl_enable_npn") == 0) {  opt = CURLOPT_SSL_ENABLE_NPN; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSLENGINE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSLENGINE
   else if (strcasecmp(msg, "sslengine") == 0) {  opt = CURLOPT_SSLENGINE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSLENGINE_DEFAULT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSLENGINE_DEFAULT
   else if (strcasecmp(msg, "sslengine_default") == 0) {  opt = CURLOPT_SSLENGINE_DEFAULT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_FALSESTART 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_FALSESTART
   else if (strcasecmp(msg, "ssl_falsestart") == 0) {  opt = CURLOPT_SSL_FALSESTART; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSLVERSION 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSLVERSION
   else if (strcasecmp(msg, "sslversion") == 0) {  opt = CURLOPT_SSLVERSION; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSLVERSION 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSLVERSION
   else if (strcasecmp(msg, "proxy_sslversion") == 0) {  opt = CURLOPT_PROXY_SSLVERSION; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_VERIFYHOST 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_VERIFYHOST
   else if (strcasecmp(msg, "ssl_verifyhost") == 0) {  opt = CURLOPT_SSL_VERIFYHOST; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSL_VERIFYHOST 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSL_VERIFYHOST
   else if (strcasecmp(msg, "proxy_ssl_verifyhost") == 0) {  opt = CURLOPT_PROXY_SSL_VERIFYHOST; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_VERIFYPEER 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_VERIFYPEER
   else if (strcasecmp(msg, "ssl_verifypeer") == 0) {  opt = CURLOPT_SSL_VERIFYPEER; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSL_VERIFYPEER 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSL_VERIFYPEER
   else if (strcasecmp(msg, "proxy_ssl_verifypeer") == 0) {  opt = CURLOPT_PROXY_SSL_VERIFYPEER; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_VERIFYSTATUS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_VERIFYSTATUS
   else if (strcasecmp(msg, "ssl_verifystatus") == 0) {  opt = CURLOPT_SSL_VERIFYSTATUS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_CAINFO 
+#ifdef CTRPLUGIN_CURL_CURLOPT_CAINFO
   else if (strcasecmp(msg, "cainfo") == 0) {  opt = CURLOPT_CAINFO; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_CAINFO 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_CAINFO
   else if (strcasecmp(msg, "proxy_cainfo") == 0) {  opt = CURLOPT_PROXY_CAINFO; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_ISSUERCERT 
+#ifdef CTRPLUGIN_CURL_CURLOPT_ISSUERCERT
   else if (strcasecmp(msg, "issuercert") == 0) {  opt = CURLOPT_ISSUERCERT; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_CAPATH 
+#ifdef CTRPLUGIN_CURL_CURLOPT_CAPATH
   else if (strcasecmp(msg, "capath") == 0) {  opt = CURLOPT_CAPATH; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_CAPATH 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_CAPATH
   else if (strcasecmp(msg, "proxy_capath") == 0) {  opt = CURLOPT_PROXY_CAPATH; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_CRLFILE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_CRLFILE
   else if (strcasecmp(msg, "crlfile") == 0) {  opt = CURLOPT_CRLFILE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_CRLFILE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_CRLFILE
   else if (strcasecmp(msg, "proxy_crlfile") == 0) {  opt = CURLOPT_PROXY_CRLFILE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_CERTINFO 
+#ifdef CTRPLUGIN_CURL_CURLOPT_CERTINFO
   else if (strcasecmp(msg, "certinfo") == 0) {  opt = CURLOPT_CERTINFO; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PINNEDPUBLICKEY 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PINNEDPUBLICKEY
   else if (strcasecmp(msg, "pinnedpublickey") == 0) {  opt = CURLOPT_PINNEDPUBLICKEY; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_PINNEDPUBLICKEY 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_PINNEDPUBLICKEY
   else if (strcasecmp(msg, "proxy_pinnedpublickey") == 0) {  opt = CURLOPT_PROXY_PINNEDPUBLICKEY; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_RANDOM_FILE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_RANDOM_FILE
   else if (strcasecmp(msg, "random_file") == 0) {  opt = CURLOPT_RANDOM_FILE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_EGDSOCKET 
+#ifdef CTRPLUGIN_CURL_CURLOPT_EGDSOCKET
   else if (strcasecmp(msg, "egdsocket") == 0) {  opt = CURLOPT_EGDSOCKET; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_CIPHER_LIST 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_CIPHER_LIST
   else if (strcasecmp(msg, "ssl_cipher_list") == 0) {  opt = CURLOPT_SSL_CIPHER_LIST; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSL_CIPHER_LIST 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSL_CIPHER_LIST
   else if (strcasecmp(msg, "proxy_ssl_cipher_list") == 0) {  opt = CURLOPT_PROXY_SSL_CIPHER_LIST; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_SESSIONID_CACHE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_SESSIONID_CACHE
   else if (strcasecmp(msg, "ssl_sessionid_cache") == 0) {  opt = CURLOPT_SSL_SESSIONID_CACHE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_OPTIONS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSL_OPTIONS
   else if (strcasecmp(msg, "ssl_options") == 0) {  opt = CURLOPT_SSL_OPTIONS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSL_OPTIONS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PROXY_SSL_OPTIONS
   else if (strcasecmp(msg, "proxy_ssl_options") == 0) {  opt = CURLOPT_PROXY_SSL_OPTIONS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_KRBLEVEL 
+#ifdef CTRPLUGIN_CURL_CURLOPT_KRBLEVEL
   else if (strcasecmp(msg, "krblevel") == 0) {  opt = CURLOPT_KRBLEVEL; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_GSSAPI_DELEGATION 
+#ifdef CTRPLUGIN_CURL_CURLOPT_GSSAPI_DELEGATION
   else if (strcasecmp(msg, "gssapi_delegation") == 0) {  opt = CURLOPT_GSSAPI_DELEGATION; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSH_AUTH_TYPES 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSH_AUTH_TYPES
   else if (strcasecmp(msg, "ssh_auth_types") == 0) {  opt = CURLOPT_SSH_AUTH_TYPES; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSH_HOST_PUBLIC_KEY_MD5 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSH_HOST_PUBLIC_KEY_MD5
   else if (strcasecmp(msg, "ssh_host_public_key_md5") == 0) {  opt = CURLOPT_SSH_HOST_PUBLIC_KEY_MD5; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSH_PUBLIC_KEYFILE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSH_PUBLIC_KEYFILE
   else if (strcasecmp(msg, "ssh_public_keyfile") == 0) {  opt = CURLOPT_SSH_PUBLIC_KEYFILE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSH_PRIVATE_KEYFILE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSH_PRIVATE_KEYFILE
   else if (strcasecmp(msg, "ssh_private_keyfile") == 0) {  opt = CURLOPT_SSH_PRIVATE_KEYFILE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSH_KNOWNHOSTS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSH_KNOWNHOSTS
   else if (strcasecmp(msg, "ssh_knownhosts") == 0) {  opt = CURLOPT_SSH_KNOWNHOSTS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSH_KEYFUNCTION 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSH_KEYFUNCTION
   else if (strcasecmp(msg, "ssh_keyfunction") == 0) {  opt = CURLOPT_SSH_KEYFUNCTION; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SSH_KEYDATA 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SSH_KEYDATA
   else if (strcasecmp(msg, "ssh_keydata") == 0) {  opt = CURLOPT_SSH_KEYDATA; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_PRIVATE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_PRIVATE
   else if (strcasecmp(msg, "private") == 0) {  opt = CURLOPT_PRIVATE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_SHARE 
+#ifdef CTRPLUGIN_CURL_CURLOPT_SHARE
   else if (strcasecmp(msg, "share") == 0) {  opt = CURLOPT_SHARE; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_NEW_FILE_PERMS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_NEW_FILE_PERMS
   else if (strcasecmp(msg, "new_file_perms") == 0) {  opt = CURLOPT_NEW_FILE_PERMS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_NEW_DIRECTORY_PERMS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_NEW_DIRECTORY_PERMS
   else if (strcasecmp(msg, "new_directory_perms") == 0) {  opt = CURLOPT_NEW_DIRECTORY_PERMS; }
 #endif
 
-#ifdef CTRPLUGIN_CURL_CURLOPT_TELNETOPTIONS 
+#ifdef CTRPLUGIN_CURL_CURLOPT_TELNETOPTIONS
   else if (strcasecmp(msg, "telnetoptions") == 0) {  opt = CURLOPT_TELNETOPTIONS; }
 #endif
 
@@ -940,8 +940,14 @@ ctr_object* ctr_curl_respondto(ctr_object* myself, ctr_argument* argumentList) {
  *
  **/
 ctr_object* ctr_curl_perform(ctr_object* myself, ctr_argument* argumentList) {
-	FILE *temp = tmpfile();
-	curl_easy_setopt(myself->value.rvalue->ptr, CURLOPT_WRITEDATA, temp);
+#ifdef __MINGW32__
+  char* tmpname = _tempnam(NULL, "ctr_curl");
+  FILE *temp = fopen(tmpname, "w+b");
+#else
+  FILE *temp = tmpfile();
+#endif
+
+  curl_easy_setopt(myself->value.rvalue->ptr, CURLOPT_WRITEDATA, temp);
 	CURLcode code = curl_easy_perform(myself->value.rvalue->ptr);
 	if (code != CURLE_OK)
 		CtrStdFlow = ctr_error_text("Received Curl error code");
@@ -952,10 +958,18 @@ ctr_object* ctr_curl_perform(ctr_object* myself, ctr_argument* argumentList) {
 	if (!buffer) {
 		printf("Out of memory\n");
 		fclose(temp);
+#ifdef __MINGW32__
+    unlink(tmpname);
+    free(tmpname);
+#endif
 		exit(1);
 	}
 	fread(buffer, fileLen, 1, temp);
 	fclose(temp);
+#ifdef __MINGW32__
+  unlink(tmpname);
+  free(tmpname);
+#endif
 	ctr_object *str = ctr_build_string(buffer, fileLen);
 	ctr_heap_free(buffer);
 	return str;

@@ -1,4 +1,3 @@
-
 #ifdef langNL
 #include "i18n/nl/dictionarynl.h"
 #else
