@@ -36,13 +36,23 @@ void ctr_cli_welcome() {
  * CommandLine Read Arguments
  * Parses command line arguments and sets global settings accordingly.
  */
-void ctr_cli_read_args(int argc, char* argv[]) {
+int ctr_cli_read_args(int argc, char* argv[]) {
+	int mode = 0;
 	if (argc == 1) {
 		ctr_cli_welcome();
 		exit(0);
 	}
-	ctr_mode_input_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
-	strncpy(ctr_mode_input_file, argv[1], 254);
+	if (argc == 4 && strncmp(argv[1],"-t", 2)==0) {
+		ctr_mode_dict_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
+		strncpy(ctr_mode_dict_file, argv[2], 254);
+		ctr_mode_input_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
+		strncpy(ctr_mode_input_file, argv[3], 254);
+		mode = 1;
+	} else {
+		ctr_mode_input_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
+		strncpy(ctr_mode_input_file, argv[1], 254);
+	}
+	return mode;
 }
 
 /**
@@ -64,7 +74,6 @@ int main(int argc, char* argv[]) {
 	CtrStdFlow = NULL;
 	ctr_program_security_profile = 0;
 	ctr_program_tick = 0;
-	ctr_cli_read_args(argc, argv);
 	ctr_source_mapping = 1;
 	ctr_clex_keyword_me = CTR_DICT_ME;
 	ctr_clex_keyword_my = CTR_DICT_MY;
@@ -78,6 +87,11 @@ int main(int argc, char* argv[]) {
 	ctr_clex_keyword_var_icon_len = strlen( ctr_clex_keyword_var_icon );
 	ctr_clex_string_interpolation_start_len = strlen( CTR_DICT_STR_IPOL_START );
 	ctr_clex_string_interpolation_stop_len = strlen( CTR_DICT_STR_IPOL_STOP );
+	if (ctr_cli_read_args(argc, argv)) {
+		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
+		ctr_translate_program(prg, ctr_mode_input_file);
+		exit(0);
+	}
 	prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
 	program = ctr_cparse_parse(prg, ctr_mode_input_file);
 	/*ctr_internal_debug_tree(program,1); -- for debugging */

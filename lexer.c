@@ -20,6 +20,7 @@ char* ctr_clex_olderptr;
 int       ctr_clex_verbatim_mode = 0;              /* flag: indicates whether lexer operates in verbatim mode or not (1 = ON, 0 = OFF) */
 uintptr_t ctr_clex_verbatim_mode_insert_quote = 0; /* pointer to 'overlay' the 'fake quote' for verbatim mode */
 int ctr_clex_old_line_number = 0;
+int ctr_clex_ignore_modes = 0;
 
 char* ctr_clex_desc_tok_ref = "reference";
 char* ctr_clex_desc_tok_quote = "'";
@@ -201,44 +202,46 @@ int ctr_clex_tok() {
 	/* a little state machine to handle string interpolation, */
 	/* i.e. transforms ' "x" ' into: '' + ( x )  + ''. */
 	presetToken = 0;
-	switch( ctr_string_interpolation ) {
-		case 1:
-		case 8:
-			presetToken = CTR_TOKEN_QUOTE;
-			break;
-		case 2:
-		case 7:
-			memcpy( ctr_clex_buffer, "+", 1 );
-			ctr_clex_tokvlen = 1;
-			presetToken = CTR_TOKEN_REF;
-			break;
-		case 3:
-			presetToken = CTR_TOKEN_PAROPEN;
-			break;
-		case 6:
-			presetToken = CTR_TOKEN_PARCLOSE;
-			break;
-	}
-	/* return the preset token, and transition to next state */
-	if ( ctr_string_interpolation > 0 && ctr_string_interpolation != 5) {
-		ctr_string_interpolation++;
-		if (presetToken) return presetToken;
-	}
+	if (!ctr_clex_ignore_modes) {
+		switch( ctr_string_interpolation ) {
+			case 1:
+			case 8:
+				presetToken = CTR_TOKEN_QUOTE;
+				break;
+			case 2:
+			case 7:
+				memcpy( ctr_clex_buffer, "+", 1 );
+				ctr_clex_tokvlen = 1;
+				presetToken = CTR_TOKEN_REF;
+				break;
+			case 3:
+				presetToken = CTR_TOKEN_PAROPEN;
+				break;
+			case 6:
+				presetToken = CTR_TOKEN_PARCLOSE;
+				break;
+		}
+		/* return the preset token, and transition to next state */
+		if ( ctr_string_interpolation > 0 && ctr_string_interpolation != 5) {
+			ctr_string_interpolation++;
+			if (presetToken) return presetToken;
+		}
 
-	/* leave interpolation mode ( ..." ) */
-	if (
-		!ctr_clex_verbatim_mode &&
-		ctr_string_interpolation == 5 &&
-		(ctr_code + ctr_clex_string_interpolation_stop_len) < ctr_eofcode &&
-		strncmp( ctr_code, CTR_DICT_STR_IPOL_STOP, ctr_clex_string_interpolation_stop_len ) == 0
-	) {
-		ctr_string_interpolation = 6;
-		return CTR_TOKEN_PARCLOSE;
-	}
+		/* leave interpolation mode ( ..." ) */
+		if (
+			!ctr_clex_verbatim_mode &&
+			ctr_string_interpolation == 5 &&
+			(ctr_code + ctr_clex_string_interpolation_stop_len) < ctr_eofcode &&
+			strncmp( ctr_code, CTR_DICT_STR_IPOL_STOP, ctr_clex_string_interpolation_stop_len ) == 0
+		) {
+			ctr_string_interpolation = 6;
+			return CTR_TOKEN_PARCLOSE;
+		}
 
-	/* if verbatim mode is on and we passed the '>' verbatim write message, insert a 'fake quote' (?>') */
-	if (ctr_clex_verbatim_mode == 1 && ctr_clex_verbatim_mode_insert_quote == (uintptr_t) ctr_code) {
-		return CTR_TOKEN_QUOTE;
+		/* if verbatim mode is on and we passed the '>' verbatim write message, insert a 'fake quote' (?>') */
+		if (ctr_clex_verbatim_mode == 1 && ctr_clex_verbatim_mode_insert_quote == (uintptr_t) ctr_code) {
+			return CTR_TOKEN_QUOTE;
+		}
 	}
 
 	c = *ctr_code;
@@ -271,7 +274,17 @@ int ctr_clex_tok() {
 		ctr_code += 3;
 		return CTR_TOKEN_RET;
 	}
-	if (c == '\'') { ctr_code++; return CTR_TOKEN_QUOTE; }
+
+	if ((
+		ctr_clex_ignore_modes &&
+		(ctr_code + ctr_clex_string_interpolation_start_len) < ctr_eofcode &&
+		(strncmp(ctr_code,CTR_DICT_STR_IPOL_STOP,ctr_clex_string_interpolation_stop_len)==0)
+	)) {
+		ctr_code+=3; return CTR_TOKEN_QUOTE; }
+
+	if (c == '\'') {
+		ctr_code++; return CTR_TOKEN_QUOTE; }
+
 	if ((c == '-' && (ctr_code+1)<ctr_eofcode && isdigit(*(ctr_code+1))) || isdigit(c)) {
 		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
 		i++;
@@ -319,22 +332,24 @@ int ctr_clex_tok() {
 		}
 	}
 
-	/* if we encounter a '?>' sequence, switch to verbatim mode in lexer */
-	if (strncmp(ctr_code, "?>", 2)==0){
-		ctr_clex_verbatim_mode = 1;
-		ctr_code ++;
-		memcpy(ctr_clex_buffer, "?", 1);
-		ctr_clex_tokvlen = 1;
-		return CTR_TOKEN_REF;
-	}
+	if (!ctr_clex_ignore_modes) {
+		/* if we encounter a '?>' sequence, switch to verbatim mode in lexer */
+		if (strncmp(ctr_code, "?>", 2)==0){
+			ctr_clex_verbatim_mode = 1;
+			ctr_code ++;
+			memcpy(ctr_clex_buffer, "?", 1);
+			ctr_clex_tokvlen = 1;
+			return CTR_TOKEN_REF;
+		}
 
-	/* if lexer is in verbatim mode and we pass the '>' symbol insert a fake quote as next token */
-	if (strncmp(ctr_code, ">", 1)==0 && ctr_clex_verbatim_mode == 1) {
-		ctr_clex_verbatim_mode_insert_quote = (uintptr_t) (ctr_code+1); /* this way because multiple invocations should return same result */
-		ctr_code ++;
-		memcpy(ctr_clex_buffer, ">", 1);
-		ctr_clex_tokvlen = 1;
-		return CTR_TOKEN_REF;
+		/* if lexer is in verbatim mode and we pass the '>' symbol insert a fake quote as next token */
+		if (strncmp(ctr_code, ">", 1)==0 && ctr_clex_verbatim_mode == 1) {
+			ctr_clex_verbatim_mode_insert_quote = (uintptr_t) (ctr_code+1); /* this way because multiple invocations should return same result */
+			ctr_code ++;
+			memcpy(ctr_clex_buffer, ">", 1);
+			ctr_clex_tokvlen = 1;
+			return CTR_TOKEN_REF;
+		}
 	}
 
 	while(
@@ -370,6 +385,11 @@ int ctr_clex_tok() {
 	}
 	return CTR_TOKEN_REF;
 }
+
+char* ctr_clex_code_pointer() {
+	return ctr_code;
+}
+
 
 
 /**
@@ -505,4 +525,12 @@ char* ctr_clex_readstr() {
 	ctr_clex_verbatim_mode = 0;               /* always turn verbatim mode off */
 	ctr_clex_verbatim_mode_insert_quote = 0;  /* erase verbatim mode pointer overlay for fake quote */
 	return beginbuff;
+}
+
+void ctr_clex_set_ignore_modes( int ignore ) {
+	ctr_clex_ignore_modes = ignore;
+}
+
+void ctr_clex_move_code_pointer(int movement) {
+	ctr_code += movement;
 }

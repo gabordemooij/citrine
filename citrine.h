@@ -278,13 +278,14 @@ extern char** ctr_argv;
  * Mode of Operation
  */
 char* ctr_mode_input_file;
-
+char* ctr_mode_dict_file;
 
 /**
  * Lexer functions
  */
 void 	ctr_clex_load(char* prg);
 int 	ctr_clex_tok();
+char*  ctr_clex_code_pointer();
 char* 	ctr_clex_tok_value();
 long    ctr_clex_tok_value_length();
 void 	ctr_clex_putback();
@@ -302,6 +303,7 @@ ctr_size ctr_clex_keyword_my_icon_len;
 ctr_size ctr_clex_keyword_var_icon_len;
 ctr_size ctr_clex_string_interpolation_start_len;
 ctr_size ctr_clex_string_interpolation_stop_len;
+void ctr_clex_set_ignore_modes( int ignore );
 
 
 /**
@@ -324,6 +326,11 @@ int ctr_utf8size(char c);
 ctr_tnode* ctr_cparse_parse(char* prg, char* pathString);
 ctr_tnode* ctr_cparse_expr(int mode);
 ctr_tnode* ctr_cparse_ret();
+
+/**
+ * Translator functions
+ */
+void ctr_translate_program(char* prg, char* pathString);
 
 /**
  * Abstract Tree Walker functions
@@ -779,3 +786,5 @@ uint8_t  ctr_accept_n_connections;
 uint16_t ctr_default_port;
 
 char ctr_program_log_type;
+int ctr_string_interpolation;
+void ctr_clex_move_code_pointer(int movement);
