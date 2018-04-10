@@ -206,7 +206,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 					else if (quote && *(e+i) == '\'') quote = 0;
 					else if (!comment && *(e+i) == '#') comment = 1;
 					else if (comment && *(e+i) == '\n') comment = 0;
-					if (!nesting && !quote && !comment && !blocks) {
+					else if (!nesting && !quote && !comment && !blocks) {
 						if (*(e+i)=='.' || *(e+i)==')') {
 							if (debug) printf("[ends> %d ]", i);
 							break;
@@ -219,6 +219,8 @@ void ctr_translate_program(char* prg, char* programPath) {
 							for(q=0; q<80; q++) {
 								char backScanChar = *(e+i-q);
 								if (
+									backScanChar == '\n'||
+									backScanChar == '\t'||
 									backScanChar == ' ' ||
 									backScanChar == ')' ||
 									backScanChar == '}'
@@ -247,7 +249,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 					usedPart = 1;
 				}
 			}
-			if (debug) printf("[to transl=%s]", v);
+			if (debug) printf("[to transl=%s/%d]", v,l);
 			char* remainder = calloc(80,1);
 			if (!usedPart) {
 				if (!ctr_translate_translate( v, l, dictionary, 't', remainder )) {
