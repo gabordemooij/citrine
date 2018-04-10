@@ -279,6 +279,8 @@ extern char** ctr_argv;
  */
 char* ctr_mode_input_file;
 char* ctr_mode_dict_file;
+char* ctr_mode_hfile1;
+char* ctr_mode_hfile2;
 
 /**
  * Lexer functions
@@ -312,6 +314,7 @@ void ctr_clex_set_ignore_modes( int ignore );
 ctr_size ctr_clex_len;
 ctr_size ctr_program_length;
 int ctr_clex_line_number;
+char* ctr_eofcode;
 
 /**
  * UTF-8 functions
@@ -330,7 +333,8 @@ ctr_tnode* ctr_cparse_ret();
 /**
  * Translator functions
  */
-void ctr_translate_program(char* prg, char* pathString);
+void ctr_translate_program(char* prg, char* programPath);
+void ctr_translate_generate_dicts(char* hfile1, char* hfile2);
 
 /**
  * Abstract Tree Walker functions

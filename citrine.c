@@ -42,6 +42,15 @@ int ctr_cli_read_args(int argc, char* argv[]) {
 		ctr_cli_welcome();
 		exit(0);
 	}
+	
+	if (argc == 4 && strncmp(argv[1],"-g", 2)==0) {
+		ctr_mode_hfile1 = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
+		strncpy(ctr_mode_hfile1, argv[2], 254);
+		ctr_mode_hfile2 = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
+		strncpy(ctr_mode_hfile2, argv[3], 254);
+		mode = 2;
+	}
+	
 	if (argc == 4 && strncmp(argv[1],"-t", 2)==0) {
 		ctr_mode_dict_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
 		strncpy(ctr_mode_dict_file, argv[2], 254);
@@ -87,11 +96,21 @@ int main(int argc, char* argv[]) {
 	ctr_clex_keyword_var_icon_len = strlen( ctr_clex_keyword_var_icon );
 	ctr_clex_string_interpolation_start_len = strlen( CTR_DICT_STR_IPOL_START );
 	ctr_clex_string_interpolation_stop_len = strlen( CTR_DICT_STR_IPOL_STOP );
-	if (ctr_cli_read_args(argc, argv)) {
+	int mode = ctr_cli_read_args(argc, argv);
+	
+	if (mode == 1) {
 		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
+		program = ctr_cparse_parse(prg, ctr_mode_input_file);
 		ctr_translate_program(prg, ctr_mode_input_file);
 		exit(0);
 	}
+	
+	if (mode == 2) {
+		ctr_translate_generate_dicts(ctr_mode_hfile1, ctr_mode_hfile2);
+		exit(0);
+	}
+	
+	
 	prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
 	program = ctr_cparse_parse(prg, ctr_mode_input_file);
 	/*ctr_internal_debug_tree(program,1); -- for debugging */

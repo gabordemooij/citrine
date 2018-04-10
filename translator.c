@@ -7,6 +7,7 @@
 #include <stdint.h>
 #include "citrine.h"
 
+int debug = 0;
 struct ctr_dict {
 	char type;
 	char* word;
@@ -17,6 +18,33 @@ struct ctr_dict {
 };
 
 typedef struct ctr_dict ctr_dict;
+
+void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
+	FILE* f1 = fopen(hfile1, "r");
+	FILE* f2 = fopen(hfile2, "r");
+	char* word = calloc(80, 1);
+	char* translation = calloc(80, 1);
+	char* key1  = calloc(80, 1);
+	char* key2  = calloc(80, 1);
+	int lineCounter = 0;
+	while( 
+		fscanf( f1, "#define %80s \"%80[^\"]\"\n", key1, word ) > 0 &&
+		fscanf( f2, "#define %80s \"%80[^\"]\"\n", key2, translation) > 0
+	) {
+		if (strlen(key1)!=strlen(key2)) {
+			printf("Error: key mismatch %s %s on line %d\n", key1, key2, lineCounter);
+			exit(1);
+		}
+		if (strncmp(key1, key2, strlen(key1))!=0) {
+			printf("Error: key mismatch %s %s on line %d\n", key1, key2, lineCounter);
+			exit(1);
+		}
+		printf("t %s %s\n", word, translation);
+		lineCounter++;
+	}
+	close(f1);
+	close(f2);
+}
 
 ctr_dict* ctr_translate_load_dictionary() {
 	FILE* file = fopen(ctr_mode_dict_file,"r");
@@ -68,8 +96,7 @@ void ctr_translate_unload_dictionary(ctr_dict* dictionary) {
 	}
 }
 
-
-int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char context) {
+int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char context, char* remainder) {
 	int found = 0;
 	ctr_dict* entry;
 	entry = dictionary;
@@ -77,17 +104,28 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 		ctr_size ml;
 		ml = entry->wordLength;
 		if ( l == entry->wordLength && context == entry->type && strncmp( entry->word, v, ml ) == 0 ) {
-			fwrite(entry->translation, entry->translationLength, 1,stdout);
+			if (context == 't') {
+				int i = 0;
+				for (i = 0; i<entry->translationLength; i++) {
+					fwrite(entry->translation + i,1,1,stdout);
+					if (*(entry->translation + i)==':') {
+						if (debug) printf("[snip...]");
+						memcpy(remainder,entry->translation+i+1,(entry->translationLength-i));
+						break;
+					}
+				}
+			} else {
+				fwrite(entry->translation, entry->translationLength, 1,stdout);
+			}
 			found = 1;
 			break;
 		}
 		entry = entry->next;
 	}
-
 	return found;
 }
 
-void ctr_translate_program(char* prg, char* pathString) {
+void ctr_translate_program(char* prg, char* programPath) {
 	ctr_dict* entry;
 	ctr_dict* dictionary = ctr_translate_load_dictionary();
 	ctr_clex_set_ignore_modes(1);
@@ -95,13 +133,22 @@ void ctr_translate_program(char* prg, char* pathString) {
 	int t;
 	t = ctr_clex_tok();
 	char* p;
+	int partCount = 0;
 	p = prg;
 	char* e;
 	ctr_size l;
+	int n = 1000;
+	int j = 0;
+	char* notes[1000];
+	char* parts[1000];
+	int noteCount = 0;
+	int springOverDeKomma = 0;
 	while ( 1 ) {
+		springOverDeKomma = 0;
 		if ( t == CTR_TOKEN_FIN ) {
 			e = ctr_clex_code_pointer();
-			fwrite(p, ((e - l ) - p),1, stdout);
+			l =   ctr_clex_tok_value_length();
+			fwrite(p, ((e - l) - p),1, stdout);
 			fwrite(e-l, l, 1, stdout);
 			break;
 		}
@@ -117,7 +164,7 @@ void ctr_translate_program(char* prg, char* pathString) {
 			}
 			char* v = ctr_clex_tok_value();
 			fwrite(p, e-p-l, 1, stdout);
-			if (!ctr_translate_translate(s,l,dictionary,'s')) {
+			if (!ctr_translate_translate(s,l,dictionary,'s',NULL)) {
 				fwrite(s,l,1,stdout);
 			}
 			if (ctr_string_interpolation) {
@@ -128,22 +175,119 @@ void ctr_translate_program(char* prg, char* pathString) {
 			p = e;
 		} 
 		else if ( t == CTR_TOKEN_REF) {
+			if (debug) printf("{");
 			e = ctr_clex_code_pointer();
 			l =   ctr_clex_tok_value_length();
 			char* v = ctr_clex_tok_value();
 			int found = 0;		
 			fwrite(p, ((e - l ) - p),1, stdout);
-			if (!ctr_translate_translate( v, l, dictionary, 't' )) {
-				fwrite(e-l, l, 1, stdout);
+			if (debug) printf("|");
+			noteCount = 0;
+			/* is this part of a keyword message (end with colon?) */
+			if (*(e)==':') {
+				if (debug) printf("*");
+				springOverDeKomma = 1;
+				int nesting = 0;
+				int blocks = 0;
+				int quote = 0;
+				int comment = 0;
+				int i = 1;
+				int q = 0;
+				char* message = calloc(80,1);
+				memcpy(message, e-l,l+1);
+				v = message;
+				if (debug) printf("[msg=%s]",message);
+				while(e+i < ctr_eofcode) {
+					if (*(e+i) == '(') nesting++;
+					else if (*(e+i) == ')') nesting--;
+					else if (*(e+i) == '{') blocks++;
+					else if (*(e+i) == '}') blocks--;
+					else if (!quote && *(e+i) == '\'') quote = 1;
+					else if (quote && *(e+i) == '\'') quote = 0;
+					else if (!comment && *(e+i) == '#') comment = 1;
+					else if (comment && *(e+i) == '\n') comment = 0;
+					if (!nesting && !quote && !comment && !blocks) {
+						if (*(e+i)=='.' || *(e+i)==')') {
+							if (debug) printf("[ends> %d ]", i);
+							break;
+						}
+						if (*(e+i)==':') {
+							if (debug) printf("[next> %p ]", e+i);
+							notes[j++] = e+i;
+							noteCount++;
+							/* back-scan */
+							for(q=0; q<80; q++) {
+								char backScanChar = *(e+i-q);
+								if (
+									backScanChar == ' ' ||
+									backScanChar == ')' ||
+									backScanChar == '}'
+								) {
+									memcpy(message+l+1,e+i-q+1, (e+i+1)-(e+i-q+1));
+									if (debug) printf("[msgp=%s]",message);
+									l += ((e+i+1)-(e+i-q+1));
+									/* now we found the message */
+									v = message;
+									break;
+								}
+							}
+						}
+					}
+					i++;
+				}
+				l++;
 			}
+			if (debug) printf("[p=%p]",e);
+			int k = 0;
+			int usedPart = 0;
+			for (k=0; k<j; k++) {
+				if (e == notes[k] && parts[k]) {
+					if (debug) printf("[*note=%s]",parts[k]);
+					fwrite(parts[k], strlen(parts[k]),1,stdout);
+					usedPart = 1;
+				}
+			}
+			if (debug) printf("[to transl=%s]", v);
+			char* remainder = calloc(80,1);
+			if (!usedPart) {
+				if (!ctr_translate_translate( v, l, dictionary, 't', remainder )) {
+					fwrite(e-l, l, 1, stdout);
+				} else {
+					if (debug) printf("[r=%s]", remainder);
+					/* we have notes, so disect the remainder */
+					if (noteCount>0) {
+						if (debug) printf("**");
+						int s;
+						for(partCount=j-noteCount; partCount<j; partCount++) {
+							parts[partCount] = calloc(80,1);
+						}
+						partCount = j-noteCount;
+						if (debug) printf("[nc=%d %d]",noteCount, partCount);
+						int t;
+						t = 0;
+						for(s=0; s<strlen(remainder); s++) {
+							*(parts[partCount] + (t++)) = *(remainder+s); 
+							if (*(remainder + s) == ':') {
+								t = 0;
+								partCount++;
+							}
+						}
+						for(partCount=j-noteCount; partCount<noteCount; partCount++) {
+							if (debug) printf("[part %d %s]",partCount, parts[partCount]);
+						}
+					}
+				}
+			}
+			if (debug) printf("}");
+			if (springOverDeKomma) e++;
 			p=e;
 		}
 		else {
 			e = ctr_clex_code_pointer();
 			fwrite(p, e-p,1,stdout);
-			p=e;
+			p=e;	
 		}
-		t = ctr_clex_tok();
+		t = ctr_clex_tok();	
 	}
 	ctr_translate_unload_dictionary( dictionary );
 }
