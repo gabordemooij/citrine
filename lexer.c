@@ -453,17 +453,18 @@ char* ctr_clex_readstr() {
 
 		if ( c == '\n' ) ctr_clex_line_number ++;
 
-		if (ctr_code < (ctr_eofcode - 2)) {
-			if ((uint8_t) *(ctr_code) == 226 && (uint8_t) *(ctr_code+1)==134 && (uint8_t) *(ctr_code+2)==181) {
-				c = '\n';
-				ctr_code += 2;
+		if ( !ctr_clex_ignore_modes ) {
+			if (ctr_code < (ctr_eofcode - 2)) {
+				if ((uint8_t) *(ctr_code) == 226 && (uint8_t) *(ctr_code+1)==134 && (uint8_t) *(ctr_code+2)==181) {
+					c = '\n';
+					ctr_code += 2;
+				}
 			}
-		}
-		
-		if (ctr_code < (ctr_eofcode - 2)) {
-			if ((uint8_t) *(ctr_code) == 226 && (uint8_t) *(ctr_code+1)==135 && (uint8_t) *(ctr_code+2)==191) {
-				c = '\t';
-				ctr_code += 2;
+			if (ctr_code < (ctr_eofcode - 2)) {
+				if ((uint8_t) *(ctr_code) == 226 && (uint8_t) *(ctr_code+1)==135 && (uint8_t) *(ctr_code+2)==191) {
+					c = '\t';
+					ctr_code += 2;
+				}
 			}
 		}
 
@@ -493,7 +494,7 @@ char* ctr_clex_readstr() {
 			}
 		}
 
-		if (c == '\\' && escape == 0 && ctr_clex_verbatim_mode == 0) {
+		if (c == '\\' && escape == 0 && ctr_clex_verbatim_mode == 0 && !ctr_clex_ignore_modes) {
 			escape = 1;
 			ctr_code++;
 			c = *ctr_code;
