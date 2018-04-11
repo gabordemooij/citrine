@@ -18,6 +18,61 @@ struct ctr_dict {
 };
 
 typedef struct ctr_dict ctr_dict;
+struct ctr_note {
+	char* attachment;
+	char* attachedTo;
+	int mark;
+	struct ctr_note* next;
+};
+
+typedef struct ctr_note ctr_note;
+
+ctr_note* previousNote = NULL;
+ctr_note* firstNote = NULL;
+
+ctr_note* ctr_note_create( char* pointer ) {
+	ctr_note* note = (ctr_note*) calloc(sizeof(ctr_note), 1);
+	note->attachedTo = pointer;
+	note->attachment = calloc(80, 1);
+	note->next = NULL;
+	note->mark = -1;
+	return note;
+}
+
+void ctr_notebook_add( ctr_note* note, int mark ) {
+	if (previousNote == NULL) {
+		firstNote = note;
+	} else {
+		previousNote->next = note;
+	}
+	note->mark = mark;
+	previousNote = note;
+}
+
+void ctr_note_attach( ctr_note* note, char* buffer ) {
+	memcpy(note->attachment,buffer,strlen(buffer));
+}
+
+ctr_note* ctr_notebook_search( char* codePoint ) {
+	ctr_note* note = firstNote;
+	while(note) {
+		if ( note->attachedTo == codePoint ) { break; }
+		note = note->next;
+	}
+	return note;
+}
+
+ctr_note* ctr_note_grab( int mark ) {
+	ctr_note* note = firstNote;
+	while(note != NULL) {
+		if (note->mark == mark) {
+			note->mark = -1;
+			break;
+		}
+		note = note->next;
+	}
+	return note;
+}
 
 void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 	FILE* f1 = fopen(hfile1, "r");
@@ -131,10 +186,10 @@ void ctr_translate_program(char* prg, char* programPath) {
 	ctr_size l;
 	int n = 1000;
 	int j = 0;
-	char* notes[1000];
-	char* parts[1000];
 	int noteCount = 0;
 	int springOverDeKomma = 0;
+	char*  buff;
+	buff = calloc(80, 1);
 	while ( 1 ) {
 		springOverDeKomma = 0;
 		if ( t == CTR_TOKEN_FIN ) {
@@ -205,7 +260,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 						}
 						if (*(e+i)==':') {
 							if (debug) printf("[next> %p ]", e+i);
-							notes[j++] = e+i;
+							ctr_notebook_add( ctr_note_create(e+i), noteCount );
 							noteCount++;
 							/* back-scan */
 							for(q=0; q<80; q++) {
@@ -232,14 +287,11 @@ void ctr_translate_program(char* prg, char* programPath) {
 				l++;
 			}
 			if (debug) printf("[p=%p]",e);
-			int k = 0;
 			int usedPart = 0;
-			for (k=0; k<j; k++) {
-				if (e == notes[k] && parts[k]) {
-					if (debug) printf("[*note=%s]",parts[k]);
-					fwrite(parts[k], strlen(parts[k]),1,stdout);
-					usedPart = 1;
-				}
+			ctr_note* foundNote = ctr_notebook_search( e );
+			if (foundNote) {
+				fwrite(foundNote->attachment, strlen(foundNote->attachment),1,stdout);
+				usedPart = 1;
 			}
 			if (debug) printf("[to transl=%s/%d]", v,l);
 			char* remainder = calloc(80,1);
@@ -250,24 +302,16 @@ void ctr_translate_program(char* prg, char* programPath) {
 					if (debug) printf("[r=%s]", remainder);
 					/* we have notes, so disect the remainder */
 					if (noteCount>0) {
-						if (debug) printf("**");
 						int s;
-						for(partCount=j-noteCount; partCount<j; partCount++) {
-							parts[partCount] = calloc(80,1);
-						}
-						partCount = j-noteCount;
-						if (debug) printf("[nc=%d %d]",noteCount, partCount);
-						int t;
-						t = 0;
+						int qq = 0;
+						int jj = 0;
 						for(s=0; s<strlen(remainder); s++) {
-							*(parts[partCount] + (t++)) = *(remainder+s); 
+							*(buff+(jj++))=*(remainder+s);
 							if (*(remainder + s) == ':') {
-								t = 0;
-								partCount++;
+								ctr_note_attach( ctr_note_grab( qq++ ), buff );
+								memset(buff, 0, 80);
+								jj=0;
 							}
-						}
-						for(partCount=j-noteCount; partCount<noteCount; partCount++) {
-							if (debug) printf("[part %d %s]",partCount, parts[partCount]);
 						}
 					}
 				}
