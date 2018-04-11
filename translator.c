@@ -39,7 +39,7 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 			printf("Error: key mismatch %s %s on line %d\n", key1, key2, lineCounter);
 			exit(1);
 		}
-		printf("t %s %s\n", word, translation);
+		printf("t \"%s\" \"%s\"\n", word, translation);
 		lineCounter++;
 	}
 	close(f1);
@@ -56,23 +56,15 @@ ctr_dict* ctr_translate_load_dictionary() {
 	ctr_dict* entry;
 	ctr_dict* previousEntry = NULL;
 	int i;
-	while( fscanf( file, "%c %s %s\n", &translationType, word, translation) > 0 ) {
+	while( fscanf( file, "%c \"%80[^\"]\" \"%80[^\"]\"\n", &translationType, word, translation) > 0 ) {
 		entry = (ctr_dict*) calloc( sizeof(ctr_dict), 1 );
 		entry->type = translationType;
 		entry->wordLength = strlen(word);
 		entry->translationLength = strlen(translation);
 		entry->word = calloc( entry->wordLength, 1 );
 		entry->translation = calloc( entry->translationLength, 1 );
-		for(i=0; i<entry->wordLength; i++) {
-			char c = word[i];
-			if (c == '~') c = ' ';
-			entry->word[i] = c;
-		}
-		for(i=0; i<entry->translationLength; i++) {
-			char c = translation[i];
-			if (c == '~') c = ' ';
-			entry->translation[i] = c;
-		}
+		memcpy(entry->word, word, entry->wordLength);
+		memcpy(entry->translation, translation, entry->translationLength);
 		if (previousEntry) {
 			entry->next = previousEntry;
 		} else {
