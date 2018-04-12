@@ -73,18 +73,24 @@ cd ..
 cd ..
 cp plugins/crypt/libctrpassword.so mods/password/libctrpassword.so
 
-make clean;
+
 ./mk.sh
 
 j=1
 for i in $(find tests -name 'test*.ctr'); do
 	touch /tmp/a
 	touch /tmp/b
+	touch /tmp/c
+	touch /tmp/d
+	touch /tmp/transl.ctr
 	fitem=$i
 	echo -n "$fitem interpret";
 	fexpect="${i%%.ctr}.exp"
 	result1=`echo "test" | ./ctr ${fitem} 1>/tmp/a 2>/tmp/b`
+	trans=`./ctr -t ennl.dict ${fitem} > /tmp/transl.ctr`
+	result2=`echo "test" | ./ctrnl /tmp/transl.ctr 1>/tmp/c 2>/tmp/d`
 	result=`cat /tmp/a /tmp/b`
+	resultB=`cat /tmp/c /tmp/d`
 	expected=`cat $fexpect`
 	if [ "$result" = "$expected" ]; then
 		echo "[$j]"
@@ -98,8 +104,24 @@ for i in $(find tests -name 'test*.ctr'); do
 		echo $result
 		exit 1
 	fi
+	
+	if [ "$resultB" = "$expected" ]; then
+		echo "[$j]"
+		j=$((j+1))
+	else
+		echo "FAIL."
+		echo "EXPECTED:"
+		echo $expected
+		echo ""
+		echo "BUT GOT:"
+		echo $resultB
+		exit 1
+	fi
 	rm /tmp/a
 	rm /tmp/b
+	rm /tmp/c
+	rm /tmp/d
+	rm /tmp/transl.ctr
 	headline=$(head -n 1 $fitem)
 done
 echo ""

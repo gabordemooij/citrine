@@ -49,6 +49,17 @@ void ctr_notebook_add( ctr_note* note, int mark ) {
 	previousNote = note;
 }
 
+void ctr_notebook_remove() {
+	ctr_note* note = firstNote;
+	while(note) {
+		if (note->mark > -1) {
+			 note->mark = -1;
+			 note->attachedTo = NULL;
+		 }
+		note = note->next;
+	}
+}
+
 void ctr_notebook_clear_marks() {
 	ctr_note* note = firstNote;
 	while(note) {
@@ -198,6 +209,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 	ctr_size l;
 	int n = 1000;
 	int j = 0;
+	ctr_size ol = 0;
 	int noteCount = 0;
 	int springOverDeKomma = 0;
 	char*  buff;
@@ -237,6 +249,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 			if (debug) printf("{");
 			e = ctr_clex_code_pointer();
 			l =   ctr_clex_tok_value_length();
+			ol = l;
 			char* v = ctr_clex_tok_value();
 			int found = 0;		
 			fwrite(p, ((e - l ) - p),1, stdout);
@@ -253,8 +266,8 @@ void ctr_translate_program(char* prg, char* programPath) {
 				v = message;
 				if (debug) printf("[msg=%s]",message);
 				ctr_size i = 1;
-				while(ctr_clex_forward_scan(e, ":.", &i)) {
-					if (*(e+i)=='.' || *(e+i)==')') {
+				while(ctr_clex_forward_scan(e, ":.,)", &i)) {
+					if (*(e+i)=='.' || *(e+i)==')' || *(e+i)==',') {
 							if (debug) printf("[ends> %d ]", i);
 							break;
 					}
@@ -294,9 +307,14 @@ void ctr_translate_program(char* prg, char* programPath) {
 			}
 			if (debug) printf("[to transl=%s/%d]", v,l);
 			char* remainder = calloc(80,1);
+			if (debug) printf("[usedpart=%d]", usedPart);
 			if (!usedPart) {
 				if (!ctr_translate_translate( v, l, dictionary, 't', remainder )) {
-					fwrite(e-l, l, 1, stdout);
+					//printf("[niet vertaald!]");
+					springOverDeKomma = 0;
+					fwrite(e-ol, l, 1, stdout);
+					ctr_notebook_remove();
+					
 				} else {
 					if (debug) printf("[r=%s]", remainder);
 					/* we have notes, so disect the remainder */

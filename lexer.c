@@ -547,9 +547,9 @@ int ctr_clex_forward_scan(char* e, char* bytes, ctr_size* newCodePointer) {
 	int found = 0;
 	while( (e+i) < ctr_eofcode ) {
 		if (*(e+i) == '(') nesting++;
-		else if (*(e+i) == ')') nesting--;
+		else if (nesting && *(e+i) == ')') nesting--;
 		else if (*(e+i) == '{') blocks++;
-		else if (*(e+i) == '}') blocks--;
+		else if (blocks && *(e+i) == '}') blocks--;
 		else if (!quote && *(e+i) == '\'') quote = 1;
 		else if (quote && *(e+i) == '\'') quote = 0;
 		else if (!comment && *(e+i) == '#') comment = 1;
