@@ -49,14 +49,25 @@ void ctr_notebook_add( ctr_note* note, int mark ) {
 	previousNote = note;
 }
 
+void ctr_notebook_clear_marks() {
+	ctr_note* note = firstNote;
+	while(note) {
+		note->mark = -1;
+		note = note->next;
+	}
+}
+
 void ctr_note_attach( ctr_note* note, char* buffer ) {
 	memcpy(note->attachment,buffer,strlen(buffer));
+	//printf("[attach to notebook: %p note= %s]",note->attachedTo,note->attachment);
+
 }
 
 ctr_note* ctr_notebook_search( char* codePoint ) {
 	ctr_note* note = firstNote;
 	while(note) {
-		if ( note->attachedTo == codePoint ) { break; }
+		//printf("[compare notes %p = %p (%s) ?]\n",codePoint, note, note->attachment);
+		if ( note->attachedTo == codePoint ) {  break; }
 		note = note->next;
 	}
 	return note;
@@ -66,6 +77,7 @@ ctr_note* ctr_note_grab( int mark ) {
 	ctr_note* note = firstNote;
 	while(note != NULL) {
 		if (note->mark == mark) {
+			//printf("[grabbed note: %d]",note->mark);
 			note->mark = -1;
 			break;
 		}
@@ -233,52 +245,39 @@ void ctr_translate_program(char* prg, char* programPath) {
 			/* is this part of a keyword message (end with colon?) */
 			if (*(e)==':') {
 				if (debug) printf("*");
+				ctr_notebook_clear_marks();
 				springOverDeKomma = 1;
-				int nesting = 0;
-				int blocks = 0;
-				int quote = 0;
-				int comment = 0;
-				int i = 1;
 				int q = 0;
 				char* message = calloc(80,1);
 				memcpy(message, e-l,l+1);
 				v = message;
 				if (debug) printf("[msg=%s]",message);
-				while(e+i < ctr_eofcode) {
-					if (*(e+i) == '(') nesting++;
-					else if (*(e+i) == ')') nesting--;
-					else if (*(e+i) == '{') blocks++;
-					else if (*(e+i) == '}') blocks--;
-					else if (!quote && *(e+i) == '\'') quote = 1;
-					else if (quote && *(e+i) == '\'') quote = 0;
-					else if (!comment && *(e+i) == '#') comment = 1;
-					else if (comment && *(e+i) == '\n') comment = 0;
-					else if (!nesting && !quote && !comment && !blocks) {
-						if (*(e+i)=='.' || *(e+i)==')') {
+				ctr_size i = 1;
+				while(ctr_clex_forward_scan(e, ":.", &i)) {
+					if (*(e+i)=='.' || *(e+i)==')') {
 							if (debug) printf("[ends> %d ]", i);
 							break;
-						}
-						if (*(e+i)==':') {
-							if (debug) printf("[next> %p ]", e+i);
-							ctr_notebook_add( ctr_note_create(e+i), noteCount );
-							noteCount++;
-							/* back-scan */
-							for(q=0; q<80; q++) {
-								char backScanChar = *(e+i-q);
-								if (
-									backScanChar == '\n'||
-									backScanChar == '\t'||
-									backScanChar == ' ' ||
-									backScanChar == ')' ||
-									backScanChar == '}'
-								) {
-									memcpy(message+l+1,e+i-q+1, (e+i+1)-(e+i-q+1));
-									if (debug) printf("[msgp=%s]",message);
-									l += ((e+i+1)-(e+i-q+1));
-									/* now we found the message */
-									v = message;
-									break;
-								}
+					}
+					if (*(e+i)==':') {
+						if (debug) printf("[next> %p ]", e+i);
+						ctr_notebook_add( ctr_note_create(e+i), noteCount );
+						noteCount++;
+						/* back-scan */
+						for(q=0; q<80; q++) {
+							char backScanChar = *(e+i-q);
+							if (
+								backScanChar == '\n'||
+								backScanChar == '\t'||
+								backScanChar == ' ' ||
+								backScanChar == ')' ||
+								backScanChar == '}'
+							) {
+								memcpy(message+l+1,e+i-q+1, (e+i+1)-(e+i-q+1));
+								if (debug) printf("[msgp=%s]",message);
+								l += ((e+i+1)-(e+i-q+1));
+								/* now we found the message */
+								v = message;
+								break;
 							}
 						}
 					}

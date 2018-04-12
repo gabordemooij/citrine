@@ -535,3 +535,36 @@ void ctr_clex_set_ignore_modes( int ignore ) {
 void ctr_clex_move_code_pointer(int movement) {
 	ctr_code += movement;
 }
+
+int ctr_clex_forward_scan(char* e, char* bytes, ctr_size* newCodePointer) {
+	ctr_size i = *(newCodePointer);
+	int len = strlen(bytes);
+	int nesting = 0;
+	int blocks = 0;
+	int quote = 0;
+	int comment = 0;
+	int q;
+	int found = 0;
+	while( (e+i) < ctr_eofcode ) {
+		if (*(e+i) == '(') nesting++;
+		else if (*(e+i) == ')') nesting--;
+		else if (*(e+i) == '{') blocks++;
+		else if (*(e+i) == '}') blocks--;
+		else if (!quote && *(e+i) == '\'') quote = 1;
+		else if (quote && *(e+i) == '\'') quote = 0;
+		else if (!comment && *(e+i) == '#') comment = 1;
+		else if (comment && *(e+i) == '\n') comment = 0;
+		else if (!nesting && !quote && !comment && !blocks) {
+			for (q=0; q<len; q++) {
+				if (*(e+i)==bytes[q]) {
+					*(newCodePointer) = i;
+					found = 1;
+					break;
+				}
+			}
+			if (found) break;
+		}
+		i++;
+	}
+	return found;
+}
