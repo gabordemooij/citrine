@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #GC numbers must be same within file (absolute numbers may change), 7 apples.
 Broom mode: 12.
 Broom sweep.
@@ -8,6 +9,7 @@ Fruit on: 'new' do: {
 	f apples: 0.
 	^ f.
 }.
+
 Fruit on: 'apples:' do: { :a my apples := a. }.
 Fruit on: 'apples' do: { ^ my apples. }.
 Fruit on: '+' do: { :f
