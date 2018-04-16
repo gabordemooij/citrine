@@ -1,4 +1,4 @@
-#NOAST
+#SINGLE_LANGUAGE
 #Trying to assign to an undefined variable should trigger error
 {
 	undef := 1.

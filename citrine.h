@@ -793,3 +793,4 @@ char ctr_program_log_type;
 int ctr_string_interpolation;
 void ctr_clex_move_code_pointer(int movement);
 int ctr_clex_forward_scan( char* codePointer, char* bytes, ctr_size* newCodePointer );
+int ctr_clex_is_verbatim();

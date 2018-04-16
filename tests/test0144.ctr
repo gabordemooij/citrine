@@ -1,4 +1,4 @@
-#NOAST
+#SINGLE_LANGUAGE
 #Test stacktrace if we send a message to a non-existing
 #object property.
 

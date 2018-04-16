@@ -1,0 +1,7 @@
+s "respondTo:and:and:" "reageerOp:en:en:"
+s "respondTo:and:" "reageerOp:en:"
+s "respondTo:" "reageerOp:"
+t "color" "kleur"
+s "tests/assets/includetesten.ctr" "tests/assets/includetestnl.ctr"
+s "add:" "optellen:"
+s "subtract:" "aftrekken:"

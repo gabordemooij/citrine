@@ -1,4 +1,4 @@
-#NOAST
+#SINGLE_LANGUAGE
 #Test parser error
 var :=.
 

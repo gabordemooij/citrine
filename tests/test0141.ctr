@@ -1,4 +1,4 @@
-#NOAST
+#SINGLE_LANGUAGE
 #Test stacktrace over multiple files
 Pen write: 'Test Stack trace over multiple files.', brk.
 File new: 'tests/test0140.ctr', include.

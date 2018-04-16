@@ -5,5 +5,5 @@
 1
 Uncatched error has occurred.
 Index out of bounds.
-#2 @ (tests/test0204.ctr: 10)
-#1 write: (tests/test0204.ctr: 10)
+#2 @ (tests/test0204.ctr: 11)
+#1 write: (tests/test0204.ctr: 11)

@@ -1,4 +1,4 @@
-#NOAST
+#SINGLE_LANGUAGE
 #Test too many contexts open
 
 j := 1.

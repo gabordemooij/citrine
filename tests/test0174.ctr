@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #Map operations should not leak memory
 
 usedMemory1 := 0.

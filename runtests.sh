@@ -12,12 +12,24 @@ fi
 find . -name "*.so" -exec rm {} +
 
 #For plugin test, compile Percolator plugin
+rm plugins/percolator/libctrpercolator.so
+rm mods/percolator/libctrpercolator.so
 cd plugins/percolator;
 cc -c percolator.c -Wall -Werror -fPIC -o percolator.o
 cc ${LDFLAGS} -o libctrpercolator.so percolator.o
 cd ..
 cd ..
 cp plugins/percolator/libctrpercolator.so mods/percolator/libctrpercolator.so
+
+
+rm plugins/percolator/libctrpercolator.so
+cd plugins/percolator;
+cc -DlangNL -c percolator.c -Wall -Werror -fPIC -o koffiezetter.o
+cc ${LDFLAGS} -o libctrkoffiezetter.so koffiezetter.o
+cd ..
+cd ..
+cp plugins/percolator/libctrkoffiezetter.so mods/koffiezetter/libctrkoffiezetter.so
+
 
 #request test
 cd plugins/request/ccgi-1.2;
@@ -104,18 +116,21 @@ for i in $(find tests -name 'test*.ctr'); do
 		echo $result
 		exit 1
 	fi
-	
-	if [ "$resultB" = "$expected" ]; then
-		echo "[$j]"
-		j=$((j+1))
-	else
-		echo "FAIL."
-		echo "EXPECTED:"
-		echo $expected
-		echo ""
-		echo "BUT GOT:"
-		echo $resultB
-		exit 1
+
+	directive=`head -n1 ${fitem}`
+	if [ "$directive" != "#SINGLE_LANGUAGE" ]; then
+		if [ "$resultB" = "$expected" ]; then
+			echo "[$j]"
+			j=$((j+1))
+		else
+			echo "FAIL."
+			echo "EXPECTED:"
+			echo $expected
+			echo ""
+			echo "BUT GOT:"
+			echo $resultB
+			exit 1
+		fi
 	fi
 	rm /tmp/a
 	rm /tmp/b

@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #File operations should not leak memory
 
 usedMemory1 := 0.
@@ -9,7 +10,6 @@ Broom mode: 0.
 
 f := File new: '/tmp/none.txt'.
 f open: 'r+'.
-
 
 
 

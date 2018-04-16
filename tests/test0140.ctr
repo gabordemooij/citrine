@@ -1,4 +1,4 @@
-#NOAST
+#SINGLE_LANGUAGE
 #Test stack trace
 Pen write: 'Trigger an error'.
 #NonExistingObject doSomething.

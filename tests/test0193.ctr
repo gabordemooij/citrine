@@ -1,4 +1,4 @@
-# Proper parse error with line number
+#SINGLE_LANGUAGE
 a := '
  line number 4... '.
 Pen write: 'testje.ctr' + grep: 'Shell'.

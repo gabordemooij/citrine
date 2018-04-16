@@ -1,4 +1,4 @@
-#Can we trace the correct line number ?
+#SINGLE_LANGUAGE
 ' line 2
 line 3 '.
 a := 1 / 0. #line 4, not 3.

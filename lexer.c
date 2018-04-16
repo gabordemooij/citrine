@@ -238,12 +238,13 @@ int ctr_clex_tok() {
 			return CTR_TOKEN_PARCLOSE;
 		}
 
-		/* if verbatim mode is on and we passed the '>' verbatim write message, insert a 'fake quote' (?>') */
+		
+	}
+
+	/* if verbatim mode is on and we passed the '>' verbatim write message, insert a 'fake quote' (?>') */
 		if (ctr_clex_verbatim_mode == 1 && ctr_clex_verbatim_mode_insert_quote == (uintptr_t) ctr_code) {
 			return CTR_TOKEN_QUOTE;
 		}
-	}
-
 	c = *ctr_code;
 	while(ctr_code != ctr_eofcode && (isspace(c) || c == '#' || comment_mode)) {
 		if (c == '\n') {
@@ -332,7 +333,7 @@ int ctr_clex_tok() {
 		}
 	}
 
-	if (!ctr_clex_ignore_modes) {
+	//if (!ctr_clex_ignore_modes) {
 		/* if we encounter a '?>' sequence, switch to verbatim mode in lexer */
 		if (strncmp(ctr_code, "?>", 2)==0){
 			ctr_clex_verbatim_mode = 1;
@@ -350,7 +351,7 @@ int ctr_clex_tok() {
 			ctr_clex_tokvlen = 1;
 			return CTR_TOKEN_REF;
 		}
-	}
+	//}
 
 	while(
 	!isspace(c) && (
@@ -438,7 +439,6 @@ char* ctr_clex_readstr() {
 			(ctr_code < ctr_eofcode)
 		)
 	) {
-
 		/* enter interpolation mode ( "x... ) */
 		if (
 			!ctr_clex_verbatim_mode &&
@@ -468,7 +468,7 @@ char* ctr_clex_readstr() {
 			}
 		}
 
-		if ( escape == 1 ) {
+		if ( escape == 1 && !ctr_clex_ignore_modes) {
 			switch(c) {
 				case 'n':
 					c = '\n';
@@ -511,6 +511,11 @@ char* ctr_clex_readstr() {
 			strbuff = beginbuff + (ctr_clex_tokvlen -1);
 		}
 		escape = 0;
+		
+		if (c == '\\' && escape == 0 && ctr_clex_verbatim_mode == 0 && ctr_clex_ignore_modes) {
+			escape = 1;
+		}
+		
 		*(strbuff) = c;
 		strbuff++;
 		ctr_code++;
@@ -521,7 +526,7 @@ char* ctr_clex_readstr() {
 			strncpy(ctr_code,"<?.", 3);
 			ctr_eofcode += 3;
 		}
-		ctr_code++; /* in verbatim mode, hop over the trailing ? as well */
+		if (!ctr_clex_ignore_modes) ctr_code++; /* in verbatim mode, hop over the trailing ? as well */
 	}
 	ctr_clex_verbatim_mode = 0;               /* always turn verbatim mode off */
 	ctr_clex_verbatim_mode_insert_quote = 0;  /* erase verbatim mode pointer overlay for fake quote */
@@ -536,27 +541,41 @@ void ctr_clex_move_code_pointer(int movement) {
 	ctr_code += movement;
 }
 
+int ctr_clex_is_verbatim() {
+	return ctr_clex_verbatim_mode;
+}
+
+
+
 int ctr_clex_forward_scan(char* e, char* bytes, ctr_size* newCodePointer) {
 	ctr_size i = *(newCodePointer);
 	int len = strlen(bytes);
 	int nesting = 0;
 	int blocks = 0;
 	int quote = 0;
+	int verbatim = 0;
 	int comment = 0;
 	int q;
 	int found = 0;
 	while( (e+i) < ctr_eofcode ) {
-		if (*(e+i) == '(') nesting++;
-		else if (nesting && *(e+i) == ')') nesting--;
-		else if (*(e+i) == '{') blocks++;
-		else if (blocks && *(e+i) == '}') blocks--;
-		else if (!quote && *(e+i) == '\'') quote = 1;
-		else if (quote && *(e+i) == '\'') quote = 0;
-		else if (!comment && *(e+i) == '#') comment = 1;
-		else if (comment && *(e+i) == '\n') comment = 0;
-		else if (!nesting && !quote && !comment && !blocks) {
+		if (!verbatim && !quote && *(e+i) == '(') nesting++;
+		else if (!verbatim && !quote && nesting && *(e+i) == ')') nesting--;
+		else if (!verbatim && !quote && *(e+i) == '{') blocks++;
+		else if (!verbatim && !quote && blocks && *(e+i) == '}') blocks--;
+		else if (!verbatim && !quote && *(e+i) == '\'' && *(e+i-1)!='\\') quote = 1;
+		else if (!verbatim && !quote && !verbatim && *(e+i) == '?' && (e+i+1) < ctr_eofcode && *(e+i+1) == '>') {
+			verbatim = 1;
+		}
+		else if (!quote && verbatim && *(e+i) == '<' && (e+i+1) < ctr_eofcode && *(e+i+1) == '?') {
+			verbatim = 0;
+		}
+		else if (!verbatim && quote && *(e+i) == '\'' && *(e+i-1)!='\\') quote = 0;
+		else if (!verbatim && !quote && !comment && *(e+i) == '#') comment = 1;
+		else if (!verbatim && !quote && comment && *(e+i) == '\n') comment = 0;
+		else if (!verbatim && !nesting && !quote && !comment && !blocks) {
 			for (q=0; q<len; q++) {
 				if (*(e+i)==bytes[q]) {
+					if (bytes[q]=='.' && isdigit(*(e+i-1)) && (e+i+1)<ctr_eofcode && isdigit(*(e+i+1))) continue;
 					*(newCodePointer) = i;
 					found = 1;
 					break;

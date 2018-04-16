@@ -224,17 +224,25 @@ void ctr_translate_program(char* prg, char* programPath) {
 			break;
 		}
 		else if ( t == CTR_TOKEN_QUOTE ) {
+			if (debug) printf("[begin str]");
 			if (ctr_string_interpolation) {
 				ctr_string_interpolation = 0;
 			}
+			
+			//int vm = 0;
+			//if (ctr_clex_is_verbatim()) vm = 1;
+			
+			
 			char* s = ctr_clex_readstr();
 			l =  ctr_clex_tok_value_length(s);
+			//printf("S[%d][%s][v%d]",l,s,ctr_clex_is_verbatim());
 			e = ctr_clex_code_pointer();
 			if (ctr_string_interpolation) {
 				e -= 3;
 			}
 			char* v = ctr_clex_tok_value();
 			fwrite(p, e-p-l, 1, stdout);
+			
 			if (!ctr_translate_translate(s,l,dictionary,'s',NULL)) {
 				fwrite(s,l,1,stdout);
 			}
@@ -243,7 +251,15 @@ void ctr_translate_program(char* prg, char* programPath) {
 			} else {
 				ctr_clex_tok();
 			}
+			
+			//if (vm) {
+				//printf("<");
+				//e++;
+				
+			//}
 			p = e;
+			//printf("]]");
+			if (debug) printf("[end str]");
 		} 
 		else if ( t == CTR_TOKEN_REF) {
 			if (debug) printf("{");
@@ -251,6 +267,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 			l =   ctr_clex_tok_value_length();
 			ol = l;
 			char* v = ctr_clex_tok_value();
+			if (debug) printf("[v=%s]",v);
 			int found = 0;		
 			fwrite(p, ((e - l ) - p),1, stdout);
 			if (debug) printf("|");
@@ -272,7 +289,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 							break;
 					}
 					if (*(e+i)==':') {
-						if (debug) printf("[next> %p ]", e+i);
+						if (debug) printf("[next> %d ]", i);
 						ctr_notebook_add( ctr_note_create(e+i), noteCount );
 						noteCount++;
 						/* back-scan */
@@ -306,14 +323,17 @@ void ctr_translate_program(char* prg, char* programPath) {
 				usedPart = 1;
 			}
 			if (debug) printf("[to transl=%s/%d]", v,l);
+			
 			char* remainder = calloc(80,1);
 			if (debug) printf("[usedpart=%d]", usedPart);
 			if (!usedPart) {
 				if (!ctr_translate_translate( v, l, dictionary, 't', remainder )) {
-					//printf("[niet vertaald!]");
+					if (debug) printf("[no trans]");
 					springOverDeKomma = 0;
-					fwrite(e-ol, l, 1, stdout);
+					fwrite(e-ol, ol, 1, stdout);
 					ctr_notebook_remove();
+					
+					
 					
 				} else {
 					if (debug) printf("[r=%s]", remainder);
@@ -342,7 +362,10 @@ void ctr_translate_program(char* prg, char* programPath) {
 			fwrite(p, e-p,1,stdout);
 			p=e;	
 		}
-		t = ctr_clex_tok();	
+		//printf("[ptr=%p]",ctr_clex_code_pointer());
+		t = ctr_clex_tok();
+		//printf("[ptr2=%p]",ctr_clex_code_pointer());
+		//printf("[nxtok=%d]",t);
 	}
 	ctr_translate_unload_dictionary( dictionary );
 }

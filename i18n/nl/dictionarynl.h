@@ -121,7 +121,7 @@
 #define CTR_DICT_SUM             "som"
 #define CTR_DICT_PRODUCT         "product" 
 #define CTR_DICT_ARRAY           "Reeks"
-#define CTR_DICT_MAP_OBJECT      "woordlijst"
+#define CTR_DICT_MAP_OBJECT      "Woordlijst"
 #define CTR_DICT_WRITE           "schrijf:"
 #define CTR_DICT_BRK             "stop" 
 #define CTR_DICT_PEN             "Pen"
@@ -297,3 +297,4 @@
 #define CTR_DICT_CODEGEN_MAP_PUT_AT              " bij:"
 #define CTR_DICT_CODEGEN_ARRAY_NEW               "Reeks nieuw "
 #define CTR_DICT_CODEGEN_ARRAY_NEW_PUSH          "Reeks ← "
+#define CTR_DICT_PERCOLATOR                      "Koffiezetter"

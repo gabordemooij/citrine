@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
  animal := Object new. 
  
  animal on: 'name:' do: { :n

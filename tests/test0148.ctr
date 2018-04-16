@@ -1,3 +1,3 @@
-#NOAST
+#SINGLE_LANGUAGE
 #Test whether we can generate a correct parser error.
 Nil {.

@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #test whether can fire custom messages to objects
 str := 'write:'.
 Pen message: 'write:' arguments: (Array < 'Hello World'), brk. #test on native object
