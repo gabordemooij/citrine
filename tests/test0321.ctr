@@ -9,7 +9,6 @@ Fruit on: 'new' do: {
 	f apples: 0.
 	^ f.
 }.
-
 Fruit on: 'apples:' do: { :a my apples := a. }.
 Fruit on: 'apples' do: { ^ my apples. }.
 Fruit on: '+' do: { :f
@@ -27,16 +26,16 @@ Fruit on: 'toString' do: {
 
 q := 3 apples + 4 apples.
 ✎ write: q, brk.
-✎ write: Broom keptAlloc, brk.
+#✎ write: Broom keptAlloc, brk.
 #Broom sweep.
-✎ write: Broom keptAlloc, brk.
+#✎ write: Broom keptAlloc, brk.
 
 q := 3 apples + 4 apples.
 ✎ write: q, brk.
 #Broom sweep.
-✎ write: Broom keptAlloc, brk.
+#✎ write: Broom keptAlloc, brk.
 
 q := 3 apples + 4 apples.
 ✎ write: q, brk.
 #Broom sweep.
-✎ write: Broom keptAlloc, brk.
+#✎ write: Broom keptAlloc, brk.
