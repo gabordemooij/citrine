@@ -7,7 +7,6 @@
 #include <stdint.h>
 #include "citrine.h"
 
-int debug = 0;
 struct ctr_dict {
 	char type;
 	char* word;
@@ -70,14 +69,11 @@ void ctr_notebook_clear_marks() {
 
 void ctr_note_attach( ctr_note* note, char* buffer ) {
 	memcpy(note->attachment,buffer,strlen(buffer));
-	//printf("[attach to notebook: %p note= %s]",note->attachedTo,note->attachment);
-
 }
 
 ctr_note* ctr_notebook_search( char* codePoint ) {
 	ctr_note* note = firstNote;
 	while(note) {
-		//printf("[compare notes %p = %p (%s) ?]\n",codePoint, note, note->attachment);
 		if ( note->attachedTo == codePoint ) {  break; }
 		note = note->next;
 	}
@@ -88,7 +84,6 @@ ctr_note* ctr_note_grab( int mark ) {
 	ctr_note* note = firstNote;
 	while(note != NULL) {
 		if (note->mark == mark) {
-			//printf("[grabbed note: %d]",note->mark);
 			note->mark = -1;
 			break;
 		}
@@ -179,7 +174,6 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 				for (i = 0; i<entry->translationLength; i++) {
 					fwrite(entry->translation + i,1,1,stdout);
 					if (*(entry->translation + i)==':') {
-						if (debug) printf("[snip...]");
 						memcpy(remainder,entry->translation+i+1,(entry->translationLength-i));
 						break;
 					}
@@ -224,18 +218,11 @@ void ctr_translate_program(char* prg, char* programPath) {
 			break;
 		}
 		else if ( t == CTR_TOKEN_QUOTE ) {
-			if (debug) printf("[begin str]");
 			if (ctr_string_interpolation) {
 				ctr_string_interpolation = 0;
 			}
-			
-			//int vm = 0;
-			//if (ctr_clex_is_verbatim()) vm = 1;
-			
-			
 			char* s = ctr_clex_readstr();
 			l =  ctr_clex_tok_value_length(s);
-			//printf("S[%d][%s][v%d]",l,s,ctr_clex_is_verbatim());
 			e = ctr_clex_code_pointer();
 			if (ctr_string_interpolation) {
 				e -= 3;
@@ -251,48 +238,32 @@ void ctr_translate_program(char* prg, char* programPath) {
 			} else {
 				ctr_clex_tok();
 			}
-			
-			//if (vm) {
-				//printf("<");
-				//e++;
-				
-			//}
 			p = e;
-			//printf("]]");
-			if (debug) printf("[end str]");
 		} 
 		else if ( t == CTR_TOKEN_REF) {
-			if (debug) printf("{");
 			e = ctr_clex_code_pointer();
 			l =   ctr_clex_tok_value_length();
 			ol = l;
 			char* v = ctr_clex_tok_value();
-			if (debug) printf("[v=%s]",v);
 			int found = 0;		
 			fwrite(p, ((e - l ) - p),1, stdout);
-			if (debug) printf("|");
 			noteCount = 0;
 			/* is this part of a keyword message (end with colon?) */
 			if (*(e)==':') {
-				if (debug) printf("*");
 				ctr_notebook_clear_marks();
 				springOverDeKomma = 1;
 				int q = 0;
 				char* message = calloc(80,1);
 				memcpy(message, e-l,l+1);
 				v = message;
-				if (debug) printf("[msg=%s]",message);
 				ctr_size i = 1;
 				while(ctr_clex_forward_scan(e, ":.,)", &i)) {
 					if (*(e+i)=='.' || *(e+i)==')' || *(e+i)==',') {
-							if (debug) printf("[ends> %d ]", i);
 							break;
 					}
 					if (*(e+i)==':') {
-						if (debug) printf("[next> %d ]", i);
 						ctr_notebook_add( ctr_note_create(e+i), noteCount );
 						noteCount++;
-						/* back-scan */
 						for(q=0; q<80; q++) {
 							char backScanChar = *(e+i-q);
 							if (
@@ -303,7 +274,6 @@ void ctr_translate_program(char* prg, char* programPath) {
 								backScanChar == '}'
 							) {
 								memcpy(message+l+1,e+i-q+1, (e+i+1)-(e+i-q+1));
-								if (debug) printf("[msgp=%s]",message);
 								l += ((e+i+1)-(e+i-q+1));
 								/* now we found the message */
 								v = message;
@@ -315,28 +285,20 @@ void ctr_translate_program(char* prg, char* programPath) {
 				}
 				l++;
 			}
-			if (debug) printf("[p=%p]",e);
 			int usedPart = 0;
 			ctr_note* foundNote = ctr_notebook_search( e );
 			if (foundNote) {
 				fwrite(foundNote->attachment, strlen(foundNote->attachment),1,stdout);
 				usedPart = 1;
 			}
-			if (debug) printf("[to transl=%s/%d]", v,l);
 			
 			char* remainder = calloc(80,1);
-			if (debug) printf("[usedpart=%d]", usedPart);
 			if (!usedPart) {
 				if (!ctr_translate_translate( v, l, dictionary, 't', remainder )) {
-					if (debug) printf("[no trans]");
 					springOverDeKomma = 0;
 					fwrite(e-ol, ol, 1, stdout);
 					ctr_notebook_remove();
-					
-					
-					
 				} else {
-					if (debug) printf("[r=%s]", remainder);
 					/* we have notes, so disect the remainder */
 					if (noteCount>0) {
 						int s;
@@ -353,7 +315,6 @@ void ctr_translate_program(char* prg, char* programPath) {
 					}
 				}
 			}
-			if (debug) printf("}");
 			if (springOverDeKomma) e++;
 			p=e;
 		}
@@ -362,10 +323,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 			fwrite(p, e-p,1,stdout);
 			p=e;	
 		}
-		//printf("[ptr=%p]",ctr_clex_code_pointer());
 		t = ctr_clex_tok();
-		//printf("[ptr2=%p]",ctr_clex_code_pointer());
-		//printf("[nxtok=%d]",t);
 	}
 	ctr_translate_unload_dictionary( dictionary );
 }
