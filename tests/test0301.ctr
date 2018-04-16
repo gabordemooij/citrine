@@ -8,6 +8,10 @@ wine on: 'toString' do: {
 	↲ 'merlot'.
 }.
 
+wine on: 'naarTekst' do: {
+	↲ 'merlot'.
+}.
+
 #define how wines are to be compared
 wine on: '=' do: { :other wine
 	↲ ( me toString = other wine ).

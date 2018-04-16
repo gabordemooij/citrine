@@ -4,6 +4,10 @@ To-Do on: 'new' do: {
 	⚿ list := Array new.
 }.
 
+To-Do on: 'nieuw' do: {
+	⚿ list := Array new.
+}.
+
 To-Do on: '+' do: { :task
 	⚿ list push: task.
 }.

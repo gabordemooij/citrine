@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #It should not be possible to 'trick' eval whitelists by overriding native message with custom message
 Array on: '<' do: {
 	Pen write: 'Blaaaa', brk.

@@ -1022,7 +1022,7 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 	emptyArgumentList->next = NULL;
 	emptyArgumentList->object = NULL;
 
-	putKey = ctr_send_message(nextArgument->object, "toString", 8, emptyArgumentList);
+	putKey = ctr_send_message(nextArgument->object, CTR_DICT_TOSTRING, strlen(CTR_DICT_TOSTRING), emptyArgumentList);
 
 	/* If developer returns something other than string (ouch, toString), then cast anyway */
 	if (putKey->info.type != CTR_OBJECT_TYPE_OTSTRING) {
@@ -1169,7 +1169,7 @@ ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
 	searchKey = argumentList->object;
 
 	/* Give developer a chance to define a key for array */
-	searchKey = ctr_send_message(searchKey, "toString", 8, emptyArgumentList);
+	searchKey = ctr_send_message(searchKey, CTR_DICT_TOSTRING, strlen(CTR_DICT_TOSTRING), emptyArgumentList);
 	ctr_heap_free( emptyArgumentList );
 
 	/* If developer returns something other than string (ouch, toString), then cast anyway */

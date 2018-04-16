@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #test whether we can split a string into bytes
 
 q := 'abc'.

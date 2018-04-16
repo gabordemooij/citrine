@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #Test whether we can split a string in an array of single unicode points
 
 q := 'abc'.

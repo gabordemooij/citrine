@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #test whether we can append a raw byte to a string.
 str := 'abc'.
 str appendByte: 96.

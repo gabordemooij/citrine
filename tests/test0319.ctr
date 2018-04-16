@@ -1,4 +1,4 @@
-
+#SINGLE_LANGUAGE
 ☞ myPassword := Password new: 'hello world'.
 ✎ write: (myPassword = 'hello world'), brk.
 

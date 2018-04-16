@@ -6,6 +6,10 @@ Cat on: 'new' do: {
 	⚿ sound := 'meow!'.
 }.
 
+Cat on: 'nieuw' do: {
+	⚿ sound := 'meow!'.
+}.
+
 Cat on: 'makeSound' do: {
 	↲ ⚿ sound.
 }.

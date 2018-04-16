@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #quotes should be escaped in strings!
 Q := (39 toByte).
 

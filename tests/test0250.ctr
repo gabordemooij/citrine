@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #Test Array with arrow symbol notation
 a := Array ← 1 ; 2 ; 3. #Can we form an array using ← ?
 Pen write: a, brk.

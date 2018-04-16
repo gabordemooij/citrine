@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #Test JSON Error Handling
 ☞ garden := '
 	"garden": {

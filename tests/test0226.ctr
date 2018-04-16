@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #Can we translate messages?
 Boolean learn: 'alsWaar:'
 		means: 'ifTrue:'.

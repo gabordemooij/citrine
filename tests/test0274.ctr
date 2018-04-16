@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #Can we extract a column from an array?
 a := Array <
 	(Array < 1 ; 2 ; 3) ;

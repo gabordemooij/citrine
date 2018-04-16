@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 $ := Object new.
 
 $ on: 'respondTo:' do: { :x

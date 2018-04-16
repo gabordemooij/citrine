@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #relaxed eval
 var calc := 'x := ((3 toPowerOf: 2) + 2 - 1 * 7 / (25 sqrt))'.
 Pen write: calc eval, brk.

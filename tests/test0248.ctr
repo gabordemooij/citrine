@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #everyday use case and can we use the alias 'serialize' ?
 
 a := (Array < (

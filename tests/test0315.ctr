@@ -1,3 +1,4 @@
+#SINGLE_LANGUAGE
 #Verify correct JSON decoding
 
 ☞ json := '{"test":"a\\"b"}'.
