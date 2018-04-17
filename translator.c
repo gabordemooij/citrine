@@ -121,11 +121,8 @@ ctr_dict* ctr_translate_load_dictionary() {
 	char  translationType;
 	char* word = calloc(80, 1);
 	char* translation = calloc(80, 1);
-	int wordLength = 0;
-	int translationLength = 0;
 	ctr_dict* entry;
 	ctr_dict* previousEntry = NULL;
-	int i;
 	while( fscanf( file, "%c \"%80[^\"]\" \"%80[^\"]\"\n", &translationType, word, translation) > 0 ) {
 		entry = (ctr_dict*) calloc( sizeof(ctr_dict), 1 );
 		entry->type = translationType;
