@@ -184,19 +184,15 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 }
 
 void ctr_translate_program(char* prg, char* programPath) {
-	ctr_dict* entry;
 	ctr_dict* dictionary = ctr_translate_load_dictionary();
 	ctr_clex_set_ignore_modes(1);
 	ctr_clex_load(prg);
 	int t;
 	t = ctr_clex_tok();
 	char* p;
-	int partCount = 0;
 	p = prg;
 	char* e;
 	ctr_size l;
-	int n = 1000;
-	int j = 0;
 	ctr_size ol = 0;
 	int noteCount = 0;
 	int springOverDeKomma = 0;
@@ -221,9 +217,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 			if (ctr_string_interpolation) {
 				e -= 3;
 			}
-			char* v = ctr_clex_tok_value();
 			fwrite(p, e-p-l, 1, stdout);
-			
 			if (!ctr_translate_translate(s,l,dictionary,'s',NULL)) {
 				fwrite(s,l,1,stdout);
 			}
@@ -239,7 +233,6 @@ void ctr_translate_program(char* prg, char* programPath) {
 			l =   ctr_clex_tok_value_length();
 			ol = l;
 			char* v = ctr_clex_tok_value();
-			int found = 0;		
 			fwrite(p, ((e - l ) - p),1, stdout);
 			noteCount = 0;
 			/* is this part of a keyword message (end with colon?) */
