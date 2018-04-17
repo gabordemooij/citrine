@@ -334,6 +334,7 @@ ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList) {
 		newArgumentList->object = appendString;
 		ctr_string_append( outputString, newArgumentList );
 	}
+	pclose( stream );
 	ctr_heap_free( outputBuffer );
 	ctr_heap_free( newArgumentList );
 	ctr_heap_free( comString );
