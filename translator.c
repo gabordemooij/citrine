@@ -115,8 +115,8 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 		printf("t \"%s\" \"%s\"\n", word, translation);
 		lineCounter++;
 	}
-	close(f1);
-	close(f2);
+	fclose(f1);
+	fclose(f2);
 }
 
 ctr_dict* ctr_translate_load_dictionary() {
@@ -145,7 +145,7 @@ ctr_dict* ctr_translate_load_dictionary() {
 		}
 		previousEntry = entry;
 	}
-	close(file);
+	fclose(file);
 	return entry;
 }
 
