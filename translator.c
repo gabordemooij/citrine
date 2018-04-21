@@ -239,33 +239,24 @@ void ctr_translate_program(char* prg, char* programPath) {
 			if (*(e)==':') {
 				ctr_notebook_clear_marks();
 				springOverDeKomma = 1;
-				int q = 0;
+				ctr_size q;
 				char* message = calloc(80,1);
 				memcpy(message, e-l,l+1);
 				v = message;
 				ctr_size i = 1;
 				while(ctr_clex_forward_scan(e, ":.,)", &i)) {
-					if (*(e+i)=='.' || *(e+i)==')' || *(e+i)==',') {
-							break;
-					}
+					if (*(e+i)=='.' || *(e+i)==')' || *(e+i)==',') break;
 					if (*(e+i)==':') {
 						ctr_notebook_add( ctr_note_create(e+i), noteCount );
 						noteCount++;
-						for(q=0; q<80; q++) {
-							char backScanChar = *(e+i-q);
-							if (
-								backScanChar == '\n'||
-								backScanChar == '\t'||
-								backScanChar == ' ' ||
-								backScanChar == ')' ||
-								backScanChar == '}'
-							) {
-								memcpy(message+l+1,e+i-q+1, (e+i+1)-(e+i-q+1));
-								l += ((e+i+1)-(e+i-q+1));
-								/* now we found the message */
-								v = message;
-								break;
-							}
+						q = 0;
+						if (ctr_clex_backward_scan(e+i, "\n\t )}", &q, 80)) {
+							memcpy(message+l+1,e+i-q+1, (e+i+1)-(e+i-q+1));
+							l += ((e+i+1)-(e+i-q+1));
+							v = message;
+						} else {
+							printf("error.");
+							exit(1);
 						}
 					}
 					i++;

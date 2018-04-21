@@ -13,6 +13,7 @@ int ctr_clex_bflmt = 255;
 ctr_size ctr_clex_tokvlen = 0; /* length of the string value of a token */
 char* ctr_clex_buffer;
 char* ctr_code;
+char* ctr_code_start;
 char* ctr_code_eoi;
 
 char* ctr_clex_oldptr;
@@ -83,6 +84,7 @@ void ctr_clex_emit_error( char* message ) {
  */
 void ctr_clex_load(char* prg) {
 	ctr_code = prg;
+	ctr_code_start = prg;
 	ctr_clex_buffer = ctr_heap_allocate_tracked(ctr_clex_bflmt);
 	ctr_clex_buffer[0] = '\0';
 	ctr_eofcode = (ctr_code + ctr_program_length);
@@ -587,3 +589,23 @@ int ctr_clex_forward_scan(char* e, char* bytes, ctr_size* newCodePointer) {
 	}
 	return found;
 }
+
+int ctr_clex_backward_scan( char* codePointer, char* bytes, ctr_size* offset, ctr_size limit ) {
+	ctr_size q = *(offset);
+	for(q=0; q<limit; q++) {
+		if ((codePointer-q)<ctr_code_start) return 0;
+		char backScanChar = *(codePointer-q);
+		if (
+			backScanChar == '\n'||
+			backScanChar == '\t'||
+			backScanChar == ' ' ||
+			backScanChar == ')' ||
+			backScanChar == '}'
+		) {
+			*(offset) = q;
+			return 1;
+		}
+	}
+	return 0;
+}
+
