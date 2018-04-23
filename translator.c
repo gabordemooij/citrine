@@ -228,6 +228,73 @@ char* ctr_translate_string(char* codePointer, ctr_dict* dictionary) {
 	return e;
 }
 
+char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
+	char* v;
+	char* message;
+	int usedPart;
+	int noteCount;
+	int springOverDeKomma;
+	char* remainder;
+	char* p = codePointer;
+	char* e;
+	ctr_size l;
+	ctr_size ol;
+	ctr_note* foundNote;
+	springOverDeKomma = 0;
+	e = ctr_clex_code_pointer();
+	l =   ctr_clex_tok_value_length();
+	ol = l;
+	v = ctr_clex_tok_value();
+	fwrite(p, ((e - l ) - p),1, stdout);
+	noteCount = 0;
+	/* is this part of a keyword message (end with colon?) */
+	if (*(e)==':') {
+		ctr_notebook_clear_marks();
+		springOverDeKomma = 1;
+		ctr_size q;
+		message = calloc(80,1);
+		memcpy(message, e-l,l+1);
+		v = message;
+		ctr_size i = 1;
+		while(ctr_clex_forward_scan(e, ":.,)", &i)) {
+			if (*(e+i)=='.' || *(e+i)==')' || *(e+i)==',') break;
+			if (*(e+i)==':') {
+				ctr_notebook_add( ctr_note_create(e+i), noteCount );
+				noteCount++;
+				q = 0;
+				if (ctr_clex_backward_scan(e+i, "\n\t )}", &q, 80)) {
+					memcpy(message+l+1,e+i-q+1, (e+i+1)-(e+i-q+1));
+					l += ((e+i+1)-(e+i-q+1));
+					v = message;
+				} else {
+					printf("error.");
+					exit(1);
+				}
+			}
+			i++;
+		}
+		l++;
+	}
+	usedPart = 0;
+	foundNote = ctr_notebook_search( e );
+	if (foundNote) {
+		fwrite(foundNote->attachment, strlen(foundNote->attachment),1,stdout);
+		usedPart = 1;
+	}
+	remainder = calloc(80,1);
+	if (!usedPart) {
+		if (!ctr_translate_translate( v, l, dictionary, 't', remainder )) {
+			springOverDeKomma = 0;
+			fwrite(e-ol, ol, 1, stdout);
+			ctr_notebook_remove();
+		} else {
+			if (noteCount>0) ctr_note_collect(remainder);
+		}
+	}
+	if (springOverDeKomma) e++;
+	return e;
+}
+
 
 void ctr_translate_program(char* prg, char* programPath) {
 	ctr_dict* dictionary;
@@ -236,13 +303,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 	char* p;
 	char* e;
 	char* s;
-	char* v;
-	char* message;
-	int usedPart;
-	int noteCount;
 	int springOverDeKomma;
-	char* remainder;
-	noteCount = 0;
 	springOverDeKomma = 0;
 	dictionary = ctr_translate_load_dictionary();
 	ctr_clex_set_ignore_modes(1);
@@ -265,57 +326,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 			p = e;
 		} 
 		else if ( t == CTR_TOKEN_REF) {
-			e = ctr_clex_code_pointer();
-			l =   ctr_clex_tok_value_length();
-			ol = l;
-			v = ctr_clex_tok_value();
-			fwrite(p, ((e - l ) - p),1, stdout);
-			noteCount = 0;
-			/* is this part of a keyword message (end with colon?) */
-			if (*(e)==':') {
-				ctr_notebook_clear_marks();
-				springOverDeKomma = 1;
-				ctr_size q;
-				message = calloc(80,1);
-				memcpy(message, e-l,l+1);
-				v = message;
-				ctr_size i = 1;
-				while(ctr_clex_forward_scan(e, ":.,)", &i)) {
-					if (*(e+i)=='.' || *(e+i)==')' || *(e+i)==',') break;
-					if (*(e+i)==':') {
-						ctr_notebook_add( ctr_note_create(e+i), noteCount );
-						noteCount++;
-						q = 0;
-						if (ctr_clex_backward_scan(e+i, "\n\t )}", &q, 80)) {
-							memcpy(message+l+1,e+i-q+1, (e+i+1)-(e+i-q+1));
-							l += ((e+i+1)-(e+i-q+1));
-							v = message;
-						} else {
-							printf("error.");
-							exit(1);
-						}
-					}
-					i++;
-				}
-				l++;
-			}
-			usedPart = 0;
-			foundNote = ctr_notebook_search( e );
-			if (foundNote) {
-				fwrite(foundNote->attachment, strlen(foundNote->attachment),1,stdout);
-				usedPart = 1;
-			}
-			remainder = calloc(80,1);
-			if (!usedPart) {
-				if (!ctr_translate_translate( v, l, dictionary, 't', remainder )) {
-					springOverDeKomma = 0;
-					fwrite(e-ol, ol, 1, stdout);
-					ctr_notebook_remove();
-				} else {
-					if (noteCount>0) ctr_note_collect(remainder);
-				}
-			}
-			if (springOverDeKomma) e++;
+			e = ctr_translate_ref(p,dictionary);
 			p=e;
 		}
 		else {
