@@ -315,7 +315,6 @@ void ctr_translate_fin(char* codePointer) {
 	fwrite(e-l, l, 1, stdout);
 }
 
-
 void ctr_translate_program(char* prg, char* programPath) {
 	ctr_dict* dictionary;
 	ctr_note* foundNote;
@@ -323,8 +322,6 @@ void ctr_translate_program(char* prg, char* programPath) {
 	char* p;
 	char* e;
 	char* s;
-	int springOverDeKomma;
-	springOverDeKomma = 0;
 	dictionary = ctr_translate_load_dictionary();
 	ctr_clex_set_ignore_modes(1);
 	ctr_clex_load(prg);
@@ -333,7 +330,6 @@ void ctr_translate_program(char* prg, char* programPath) {
 	ctr_size l;
 	ctr_size ol = 0;
 	while ( 1 ) {
-		springOverDeKomma = 0;
 		if ( t == CTR_TOKEN_FIN ) {
 			ctr_translate_fin(p);
 			break;
