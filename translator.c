@@ -295,6 +295,15 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 	return e;
 }
 
+char* ctr_translate_rest(char* codePointer) {
+	char* p;
+	char* e;
+	p = codePointer;
+	e = ctr_clex_code_pointer();
+	fwrite(p, e-p,1,stdout);
+	return e;
+}
+
 void ctr_translate_fin(char* codePointer) {
 	char* e;
 	char* p;
@@ -335,12 +344,11 @@ void ctr_translate_program(char* prg, char* programPath) {
 		} 
 		else if ( t == CTR_TOKEN_REF) {
 			e = ctr_translate_ref(p,dictionary);
-			p=e;
+			p = e;
 		}
 		else {
-			e = ctr_clex_code_pointer();
-			fwrite(p, e-p,1,stdout);
-			p=e;	
+			e = ctr_translate_rest(p);
+			p = e;
 		}
 		t = ctr_clex_tok();
 	}
