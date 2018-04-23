@@ -295,6 +295,17 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 	return e;
 }
 
+void ctr_translate_fin(char* codePointer) {
+	char* e;
+	char* p;
+	p = codePointer;
+	ctr_size l;
+	e = ctr_clex_code_pointer();
+	l =   ctr_clex_tok_value_length();
+	fwrite(p, ((e - l) - p),1, stdout);
+	fwrite(e-l, l, 1, stdout);
+}
+
 
 void ctr_translate_program(char* prg, char* programPath) {
 	ctr_dict* dictionary;
@@ -315,10 +326,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 	while ( 1 ) {
 		springOverDeKomma = 0;
 		if ( t == CTR_TOKEN_FIN ) {
-			e = ctr_clex_code_pointer();
-			l =   ctr_clex_tok_value_length();
-			fwrite(p, ((e - l) - p),1, stdout);
-			fwrite(e-l, l, 1, stdout);
+			ctr_translate_fin(p);
 			break;
 		}
 		else if ( t == CTR_TOKEN_QUOTE ) {
