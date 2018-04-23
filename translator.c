@@ -220,9 +220,7 @@ char* ctr_translate_string(char* codePointer, ctr_dict* dictionary) {
 	if (!ctr_translate_translate(s,l,dictionary,'s',NULL)) {
 		fwrite(s,l,1,stdout);
 	}
-	if (ctr_string_interpolation) {
-		//l += 3;
-	} else {
+	if (!ctr_string_interpolation) {
 		ctr_clex_tok();
 	}
 	return e;
