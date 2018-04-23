@@ -201,6 +201,32 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 	return found;
 }
 
+char* ctr_translate_string(char* codePointer, ctr_dict* dictionary) {
+	char* s;
+	ctr_size l;
+	char* e;
+	char* p;
+	p = codePointer;
+	if (ctr_string_interpolation) {
+		ctr_string_interpolation = 0;
+	}
+	s = ctr_clex_readstr();
+	l =  ctr_clex_tok_value_length(s);
+	e = ctr_clex_code_pointer();
+	if (ctr_string_interpolation) {
+		e -= 3;
+	}
+	fwrite(p, e-p-l, 1, stdout);
+	if (!ctr_translate_translate(s,l,dictionary,'s',NULL)) {
+		fwrite(s,l,1,stdout);
+	}
+	if (ctr_string_interpolation) {
+		//l += 3;
+	} else {
+		ctr_clex_tok();
+	}
+	return e;
+}
 
 
 void ctr_translate_program(char* prg, char* programPath) {
@@ -235,24 +261,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 			break;
 		}
 		else if ( t == CTR_TOKEN_QUOTE ) {
-			if (ctr_string_interpolation) {
-				ctr_string_interpolation = 0;
-			}
-			s = ctr_clex_readstr();
-			l =  ctr_clex_tok_value_length(s);
-			e = ctr_clex_code_pointer();
-			if (ctr_string_interpolation) {
-				e -= 3;
-			}
-			fwrite(p, e-p-l, 1, stdout);
-			if (!ctr_translate_translate(s,l,dictionary,'s',NULL)) {
-				fwrite(s,l,1,stdout);
-			}
-			if (ctr_string_interpolation) {
-				l += 3;
-			} else {
-				ctr_clex_tok();
-			}
+			e = ctr_translate_string(p, dictionary);
 			p = e;
 		} 
 		else if ( t == CTR_TOKEN_REF) {
