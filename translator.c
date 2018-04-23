@@ -184,19 +184,31 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 }
 
 void ctr_translate_program(char* prg, char* programPath) {
-	ctr_dict* dictionary = ctr_translate_load_dictionary();
+	ctr_dict* dictionary;
+	ctr_note* foundNote;
+	int t;
+	char* p;
+	char* e;
+	char* s;
+	char* v;
+	char* message;
+	char* buff;
+	int usedPart;
+	int noteCount;
+	int springOverDeKomma;
+	char* remainder;
+	int qq;
+	int jj;
+	int k;		
+	noteCount = 0;
+	springOverDeKomma = 0;
+	dictionary = ctr_translate_load_dictionary();
 	ctr_clex_set_ignore_modes(1);
 	ctr_clex_load(prg);
-	int t;
 	t = ctr_clex_tok();
-	char* p;
 	p = prg;
-	char* e;
 	ctr_size l;
 	ctr_size ol = 0;
-	int noteCount = 0;
-	int springOverDeKomma = 0;
-	char*  buff;
 	buff = calloc(80, 1);
 	while ( 1 ) {
 		springOverDeKomma = 0;
@@ -211,7 +223,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 			if (ctr_string_interpolation) {
 				ctr_string_interpolation = 0;
 			}
-			char* s = ctr_clex_readstr();
+			s = ctr_clex_readstr();
 			l =  ctr_clex_tok_value_length(s);
 			e = ctr_clex_code_pointer();
 			if (ctr_string_interpolation) {
@@ -232,7 +244,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 			e = ctr_clex_code_pointer();
 			l =   ctr_clex_tok_value_length();
 			ol = l;
-			char* v = ctr_clex_tok_value();
+			v = ctr_clex_tok_value();
 			fwrite(p, ((e - l ) - p),1, stdout);
 			noteCount = 0;
 			/* is this part of a keyword message (end with colon?) */
@@ -240,7 +252,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 				ctr_notebook_clear_marks();
 				springOverDeKomma = 1;
 				ctr_size q;
-				char* message = calloc(80,1);
+				message = calloc(80,1);
 				memcpy(message, e-l,l+1);
 				v = message;
 				ctr_size i = 1;
@@ -263,14 +275,13 @@ void ctr_translate_program(char* prg, char* programPath) {
 				}
 				l++;
 			}
-			int usedPart = 0;
-			ctr_note* foundNote = ctr_notebook_search( e );
+			usedPart = 0;
+			foundNote = ctr_notebook_search( e );
 			if (foundNote) {
 				fwrite(foundNote->attachment, strlen(foundNote->attachment),1,stdout);
 				usedPart = 1;
 			}
-			
-			char* remainder = calloc(80,1);
+			remainder = calloc(80,1);
 			if (!usedPart) {
 				if (!ctr_translate_translate( v, l, dictionary, 't', remainder )) {
 					springOverDeKomma = 0;
@@ -279,12 +290,11 @@ void ctr_translate_program(char* prg, char* programPath) {
 				} else {
 					/* we have notes, so disect the remainder */
 					if (noteCount>0) {
-						int s;
-						int qq = 0;
-						int jj = 0;
-						for(s=0; s<strlen(remainder); s++) {
-							*(buff+(jj++))=*(remainder+s);
-							if (*(remainder + s) == ':') {
+						qq = 0;
+						jj = 0;
+						for(k=0; k<strlen(remainder); k++) {
+							*(buff+(jj++))=*(remainder+k);
+							if (*(remainder + k) == ':') {
 								ctr_note_attach( ctr_note_grab( qq++ ), buff );
 								memset(buff, 0, 80);
 								jj=0;
