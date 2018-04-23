@@ -315,18 +315,13 @@ void ctr_translate_fin(char* codePointer) {
 
 void ctr_translate_program(char* prg, char* programPath) {
 	ctr_dict* dictionary;
-	ctr_note* foundNote;
 	int t;
 	char* p;
-	char* e;
-	char* s;
 	dictionary = ctr_translate_load_dictionary();
 	ctr_clex_set_ignore_modes(1);
 	ctr_clex_load(prg);
 	t = ctr_clex_tok();
 	p = prg;
-	ctr_size l;
-	ctr_size ol = 0;
 	while ( 1 ) {
 		if ( t == CTR_TOKEN_FIN ) {
 			ctr_translate_fin(p);
