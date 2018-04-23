@@ -89,6 +89,24 @@ ctr_note* ctr_note_grab( int mark ) {
 	return note;
 }
 
+void ctr_note_collect( char* remainder ) {
+	int qq;
+	int jj;
+	int k;
+	char* buff;
+	buff = calloc(80, 1);
+	qq = 0;
+	jj = 0;
+	for(k=0; k<strlen(remainder); k++) {
+		*(buff+(jj++))=*(remainder+k);
+		if (*(remainder + k) == ':') {
+			ctr_note_attach( ctr_note_grab( qq++ ), buff );
+			memset(buff, 0, 80);
+			jj=0;
+		}
+	}
+}
+
 void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 	FILE* f1 = fopen(hfile1, "r");
 	FILE* f2 = fopen(hfile2, "r");
@@ -183,6 +201,8 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 	return found;
 }
 
+
+
 void ctr_translate_program(char* prg, char* programPath) {
 	ctr_dict* dictionary;
 	ctr_note* foundNote;
@@ -192,14 +212,10 @@ void ctr_translate_program(char* prg, char* programPath) {
 	char* s;
 	char* v;
 	char* message;
-	char* buff;
 	int usedPart;
 	int noteCount;
 	int springOverDeKomma;
 	char* remainder;
-	int qq;
-	int jj;
-	int k;		
 	noteCount = 0;
 	springOverDeKomma = 0;
 	dictionary = ctr_translate_load_dictionary();
@@ -209,7 +225,6 @@ void ctr_translate_program(char* prg, char* programPath) {
 	p = prg;
 	ctr_size l;
 	ctr_size ol = 0;
-	buff = calloc(80, 1);
 	while ( 1 ) {
 		springOverDeKomma = 0;
 		if ( t == CTR_TOKEN_FIN ) {
@@ -288,19 +303,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 					fwrite(e-ol, ol, 1, stdout);
 					ctr_notebook_remove();
 				} else {
-					/* we have notes, so disect the remainder */
-					if (noteCount>0) {
-						qq = 0;
-						jj = 0;
-						for(k=0; k<strlen(remainder); k++) {
-							*(buff+(jj++))=*(remainder+k);
-							if (*(remainder + k) == ':') {
-								ctr_note_attach( ctr_note_grab( qq++ ), buff );
-								memset(buff, 0, 80);
-								jj=0;
-							}
-						}
-					}
+					if (noteCount>0) ctr_note_collect(remainder);
 				}
 			}
 			if (springOverDeKomma) e++;
