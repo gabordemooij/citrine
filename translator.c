@@ -335,16 +335,13 @@ void ctr_translate_program(char* prg, char* programPath) {
 			break;
 		}
 		else if ( t == CTR_TOKEN_QUOTE ) {
-			e = ctr_translate_string(p, dictionary);
-			p = e;
+			p = ctr_translate_string(p, dictionary);
 		} 
 		else if ( t == CTR_TOKEN_REF) {
-			e = ctr_translate_ref(p,dictionary);
-			p = e;
+			p = ctr_translate_ref(p,dictionary);
 		}
 		else {
-			e = ctr_translate_rest(p);
-			p = e;
+			p = ctr_translate_rest(p);
 		}
 		t = ctr_clex_tok();
 	}
