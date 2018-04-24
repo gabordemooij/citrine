@@ -229,7 +229,6 @@ char* ctr_translate_string(char* codePointer, ctr_dict* dictionary) {
 char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 	char* v;
 	char* message;
-	int usedPart;
 	int noteCount;
 	int springOverDeKomma;
 	char* remainder;
@@ -273,14 +272,11 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 		}
 		l++;
 	}
-	usedPart = 0;
 	foundNote = ctr_notebook_search( e );
 	if (foundNote) {
 		fwrite(foundNote->attachment, strlen(foundNote->attachment),1,stdout);
-		usedPart = 1;
-	}
-	remainder = calloc(80,1);
-	if (!usedPart) {
+	} else {
+		remainder = calloc(80,1);
 		if (!ctr_translate_translate( v, l, dictionary, 't', remainder )) {
 			springOverDeKomma = 0;
 			fwrite(e-ol, ol, 1, stdout);
