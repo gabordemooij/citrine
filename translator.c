@@ -230,14 +230,14 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 	char* v;
 	char* message;
 	int noteCount;
-	int springOverDeKomma;
+	int skipColon;
 	char* remainder;
 	char* p = codePointer;
 	char* e;
 	ctr_size l;
 	ctr_size ol;
 	ctr_note* foundNote;
-	springOverDeKomma = 0;
+	skipColon = 0;
 	e = ctr_clex_code_pointer();
 	l =   ctr_clex_tok_value_length();
 	ol = l;
@@ -247,7 +247,7 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 	/* is this part of a keyword message (end with colon?) */
 	if (*(e)==':') {
 		ctr_notebook_clear_marks();
-		springOverDeKomma = 1;
+		skipColon = 1;
 		ctr_size q;
 		message = calloc(80,1);
 		memcpy(message, e-l,l+1);
@@ -278,14 +278,14 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 	} else {
 		remainder = calloc(80,1);
 		if (!ctr_translate_translate( v, l, dictionary, 't', remainder )) {
-			springOverDeKomma = 0;
+			skipColon = 0;
 			fwrite(e-ol, ol, 1, stdout);
 			ctr_notebook_remove();
 		} else {
 			if (noteCount>0) ctr_note_collect(remainder);
 		}
 	}
-	if (springOverDeKomma) e++;
+	if (skipColon) e++;
 	return e;
 }
 
