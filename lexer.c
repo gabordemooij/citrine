@@ -545,8 +545,6 @@ int ctr_clex_is_verbatim() {
 	return ctr_clex_verbatim_mode;
 }
 
-
-
 int ctr_clex_forward_scan(char* e, char* bytes, ctr_size* newCodePointer) {
 	ctr_size i = *(newCodePointer);
 	int len = strlen(bytes);

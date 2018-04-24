@@ -176,6 +176,11 @@ void ctr_translate_unload_dictionary(ctr_dict* dictionary) {
 	}
 }
 
+/**
+ * Translates a word in the program using a dictionary and a context flag.
+ * If the word is a keyword message and there is translation available, the remainder
+ * gets filled for the next parts of the message to come.
+ */
 int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char context, char* remainder) {
 	int found = 0;
 	int i;
@@ -204,6 +209,9 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 	return found;
 }
 
+/**
+ * Prints translatable strings in the program.
+ */
 char* ctr_translate_string(char* codePointer, ctr_dict* dictionary) {
 	char* s;
 	ctr_size l;
@@ -229,6 +237,9 @@ char* ctr_translate_string(char* codePointer, ctr_dict* dictionary) {
 	return e;
 }
 
+/**
+ * Prints a translatable reference in the program.
+ */
 char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 	char* message;
 	int noteCount;
@@ -289,6 +300,10 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 	return (e + skipColon);
 }
 
+/**
+ * Prints a part of the program that does not contain
+ * translatable items.
+ */
 char* ctr_translate_rest(char* codePointer) {
 	char* p;
 	char* e;
@@ -298,17 +313,23 @@ char* ctr_translate_rest(char* codePointer) {
 	return e;
 }
 
+/**
+ * Prints the remaining part of the program.
+ */
 void ctr_translate_fin(char* codePointer) {
 	char* e;
 	char* p;
 	p = codePointer;
 	ctr_size l;
 	e = ctr_clex_code_pointer();
-	l =   ctr_clex_tok_value_length();
+	l = ctr_clex_tok_value_length();
 	fwrite(p, ((e - l) - p),1, stdout);
 	fwrite(e-l, l, 1, stdout);
 }
 
+/**
+ * Translates a program from one human language to another.
+ */
 void ctr_translate_program(char* prg, char* programPath) {
 	ctr_dict* dictionary;
 	int t;
