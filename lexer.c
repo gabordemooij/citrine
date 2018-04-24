@@ -335,26 +335,24 @@ int ctr_clex_tok() {
 		}
 	}
 
-	//if (!ctr_clex_ignore_modes) {
-		/* if we encounter a '?>' sequence, switch to verbatim mode in lexer */
-		if (strncmp(ctr_code, "?>", 2)==0){
-			ctr_clex_verbatim_mode = 1;
-			ctr_code ++;
-			memcpy(ctr_clex_buffer, "?", 1);
-			ctr_clex_tokvlen = 1;
-			return CTR_TOKEN_REF;
-		}
+	/* if we encounter a '?>' sequence, switch to verbatim mode in lexer */
+	if (strncmp(ctr_code, "?>", 2)==0){
+		ctr_clex_verbatim_mode = 1;
+		ctr_code ++;
+		memcpy(ctr_clex_buffer, "?", 1);
+		ctr_clex_tokvlen = 1;
+		return CTR_TOKEN_REF;
+	}
 
-		/* if lexer is in verbatim mode and we pass the '>' symbol insert a fake quote as next token */
-		if (strncmp(ctr_code, ">", 1)==0 && ctr_clex_verbatim_mode == 1) {
-			ctr_clex_verbatim_mode_insert_quote = (uintptr_t) (ctr_code+1); /* this way because multiple invocations should return same result */
-			ctr_code ++;
-			memcpy(ctr_clex_buffer, ">", 1);
-			ctr_clex_tokvlen = 1;
-			return CTR_TOKEN_REF;
-		}
-	//}
-
+	/* if lexer is in verbatim mode and we pass the '>' symbol insert a fake quote as next token */
+	if (strncmp(ctr_code, ">", 1)==0 && ctr_clex_verbatim_mode == 1) {
+		ctr_clex_verbatim_mode_insert_quote = (uintptr_t) (ctr_code+1); /* this way because multiple invocations should return same result */
+		ctr_code ++;
+		memcpy(ctr_clex_buffer, ">", 1);
+		ctr_clex_tokvlen = 1;
+		return CTR_TOKEN_REF;
+	}
+	
 	while(
 	!isspace(c) && (
 		c != '#' &&
