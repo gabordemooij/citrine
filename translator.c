@@ -230,7 +230,7 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 	char* v;
 	char* message;
 	int noteCount;
-	int skipColon;
+	char skipColon;
 	char* remainder;
 	char* p = codePointer;
 	char* e;
