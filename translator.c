@@ -285,8 +285,7 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 			if (noteCount>0) ctr_note_collect(remainder);
 		}
 	}
-	if (skipColon) e++;
-	return e;
+	return (e + skipColon);
 }
 
 char* ctr_translate_rest(char* codePointer) {
