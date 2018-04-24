@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include "citrine.h"
 
+const int CTR_TRANSLATE_MAX_WORD_LEN = 180;
+
 struct ctr_dict {
 	char type;
 	char* word;
@@ -29,7 +31,7 @@ ctr_note* firstNote = NULL;
 ctr_note* ctr_note_create( char* pointer ) {
 	ctr_note* note = (ctr_note*) calloc(sizeof(ctr_note), 1);
 	note->attachedTo = pointer;
-	note->attachment = calloc(80, 1);
+	note->attachment = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	note->next = NULL;
 	note->mark = -1;
 	return note;
@@ -94,14 +96,14 @@ void ctr_note_collect( char* remainder ) {
 	int jj;
 	int k;
 	char* buff;
-	buff = calloc(80, 1);
+	buff = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	qq = 0;
 	jj = 0;
 	for(k=0; k<strlen(remainder); k++) {
 		*(buff+(jj++))=*(remainder+k);
 		if (*(remainder + k) == ':') {
 			ctr_note_attach( ctr_note_grab( qq++ ), buff );
-			memset(buff, 0, 80);
+			memset(buff, 0, CTR_TRANSLATE_MAX_WORD_LEN);
 			jj=0;
 		}
 	}
@@ -111,14 +113,14 @@ void ctr_note_collect( char* remainder ) {
 void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 	FILE* f1 = fopen(hfile1, "r");
 	FILE* f2 = fopen(hfile2, "r");
-	char* word = calloc(80, 1);
-	char* translation = calloc(80, 1);
-	char* key1  = calloc(80, 1);
-	char* key2  = calloc(80, 1);
+	char* word = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
+	char* translation = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
+	char* key1  = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
+	char* key2  = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	int lineCounter = 0;
 	while( 
-		fscanf( f1, "#define %80s \"%80[^\"]\"\n", key1, word ) > 0 &&
-		fscanf( f2, "#define %80s \"%80[^\"]\"\n", key2, translation) > 0
+		fscanf( f1, "#define %180s \"%180[^\"]\"\n", key1, word ) > 0 &&
+		fscanf( f2, "#define %180s \"%180[^\"]\"\n", key2, translation) > 0
 	) {
 		if (strlen(key1)!=strlen(key2)) {
 			printf("Error: key mismatch %s %s on line %d\n", key1, key2, lineCounter);
@@ -138,8 +140,8 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 ctr_dict* ctr_translate_load_dictionary() {
 	FILE* file = fopen(ctr_mode_dict_file,"r");
 	char  translationType;
-	char* word = calloc(80, 1);
-	char* translation = calloc(80, 1);
+	char* word = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
+	char* translation = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	ctr_dict* entry;
 	ctr_dict* previousEntry = NULL;
 	while( fscanf( file, "%c \"%80[^\"]\" \"%80[^\"]\"\n", &translationType, word, translation) > 0 ) {
@@ -249,7 +251,7 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 		ctr_notebook_clear_marks();
 		skipColon = 1;
 		ctr_size q;
-		message = calloc(80,1);
+		message = calloc(CTR_TRANSLATE_MAX_WORD_LEN,1);
 		memcpy(message, e-l,l+1);
 		ctr_size i = 1;
 		while(ctr_clex_forward_scan(e, ":.,)", &i)) {
@@ -258,7 +260,7 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 				ctr_notebook_add( ctr_note_create(e+i), noteCount );
 				noteCount++;
 				q = 0;
-				if (ctr_clex_backward_scan(e+i, "\n\t )}", &q, 80)) {
+				if (ctr_clex_backward_scan(e+i, "\n\t )}", &q, CTR_TRANSLATE_MAX_WORD_LEN)) {
 					memcpy(message+l+1,e+i-q+1, (e+i+1)-(e+i-q+1));
 					l += ((e+i+1)-(e+i-q+1));
 				} else {
@@ -274,7 +276,7 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 	if (foundNote) {
 		fwrite(foundNote->attachment, strlen(foundNote->attachment),1,stdout);
 	} else {
-		remainder = calloc(80,1);
+		remainder = calloc(CTR_TRANSLATE_MAX_WORD_LEN,1);
 		if (!ctr_translate_translate( message, l, dictionary, 't', remainder )) {
 			skipColon = 0;
 			fwrite(e-ol, ol, 1, stdout);
