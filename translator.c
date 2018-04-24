@@ -105,6 +105,7 @@ void ctr_note_collect( char* remainder ) {
 			jj=0;
 		}
 	}
+	free(buff);
 }
 
 void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
@@ -175,6 +176,7 @@ void ctr_translate_unload_dictionary(ctr_dict* dictionary) {
 
 int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char context, char* remainder) {
 	int found = 0;
+	int i;
 	ctr_dict* entry;
 	entry = dictionary;
 	while( entry ) {
@@ -182,7 +184,6 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 		ml = entry->wordLength;
 		if ( l == entry->wordLength && context == entry->type && strncmp( entry->word, v, ml ) == 0 ) {
 			if (context == 't') {
-				int i = 0;
 				for (i = 0; i<entry->translationLength; i++) {
 					fwrite(entry->translation + i,1,1,stdout);
 					if (*(entry->translation + i)==':') {
@@ -227,7 +228,6 @@ char* ctr_translate_string(char* codePointer, ctr_dict* dictionary) {
 }
 
 char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
-	char* v;
 	char* message;
 	int noteCount;
 	char skipColon;
@@ -239,9 +239,9 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 	ctr_note* foundNote;
 	skipColon = 0;
 	e = ctr_clex_code_pointer();
-	l =   ctr_clex_tok_value_length();
+	l = ctr_clex_tok_value_length();
 	ol = l;
-	v = ctr_clex_tok_value();
+	message = ctr_clex_tok_value();
 	fwrite(p, ((e - l ) - p),1, stdout);
 	noteCount = 0;
 	/* is this part of a keyword message (end with colon?) */
@@ -251,7 +251,6 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 		ctr_size q;
 		message = calloc(80,1);
 		memcpy(message, e-l,l+1);
-		v = message;
 		ctr_size i = 1;
 		while(ctr_clex_forward_scan(e, ":.,)", &i)) {
 			if (*(e+i)=='.' || *(e+i)==')' || *(e+i)==',') break;
@@ -262,7 +261,6 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 				if (ctr_clex_backward_scan(e+i, "\n\t )}", &q, 80)) {
 					memcpy(message+l+1,e+i-q+1, (e+i+1)-(e+i-q+1));
 					l += ((e+i+1)-(e+i-q+1));
-					v = message;
 				} else {
 					printf("error.");
 					exit(1);
@@ -277,7 +275,7 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 		fwrite(foundNote->attachment, strlen(foundNote->attachment),1,stdout);
 	} else {
 		remainder = calloc(80,1);
-		if (!ctr_translate_translate( v, l, dictionary, 't', remainder )) {
+		if (!ctr_translate_translate( message, l, dictionary, 't', remainder )) {
 			skipColon = 0;
 			fwrite(e-ol, ol, 1, stdout);
 			ctr_notebook_remove();
