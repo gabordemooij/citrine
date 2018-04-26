@@ -11,6 +11,7 @@
 *.tar.gz
 /gitignore
 /ctr
+/ctrnl
 docs/ctr
 docs/pages
 docs/pagemaker.ctr
