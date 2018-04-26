@@ -1701,10 +1701,6 @@ ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 	strObject = ctr_internal_cast2string(argumentList->object);
 	n1 = myself->value.svalue->vlen;
 	n2 = strObject->value.svalue->vlen;
-	if ( n1 < 0 || n2 < 0 ) {
-		fprintf(stderr, "Invalid String length detected.\n");
-		exit(1);
-	}
 	if ( ( n1 + n2 ) == 0 ) return myself;
 	dest = ctr_heap_allocate( sizeof( char ) * ( n1 + n2 ) );
 	memcpy(dest, myself->value.svalue->value, n1);
@@ -1829,7 +1825,7 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
-	ctr_size a = (ctr_size) (fromPos->value.nvalue);
+	int32_t a = (int32_t) (fromPos->value.nvalue);
 	ctr_size textLength = ctr_getutf8len(myself->value.svalue->value, (ctr_size) myself->value.svalue->vlen);
 	if (a < 0) return CtrStdNil;
 	if (a > textLength) return CtrStdNil;
