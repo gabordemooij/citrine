@@ -96,6 +96,10 @@ void ctr_note_collect( char* remainder ) {
 	int jj;
 	int k;
 	char* buff;
+	if (strlen(remainder)>CTR_TRANSLATE_MAX_WORD_LEN) {
+		printf("Translation error, message too long.\n");
+		exit(1);
+	}
 	buff = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	qq = 0;
 	jj = 0;
@@ -149,6 +153,10 @@ ctr_dict* ctr_translate_load_dictionary() {
 		entry->type = translationType;
 		entry->wordLength = strlen(word);
 		entry->translationLength = strlen(translation);
+		if (entry->wordLength > CTR_TRANSLATE_MAX_WORD_LEN || entry->translationLength > CTR_TRANSLATE_MAX_WORD_LEN) {
+			printf("Dictionary entry too long.\n");
+			exit(1);
+		} 
 		entry->word = calloc( entry->wordLength, 1 );
 		entry->translation = calloc( entry->translationLength, 1 );
 		memcpy(entry->word, word, entry->wordLength);
@@ -194,6 +202,10 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 				for (i = 0; i<entry->translationLength; i++) {
 					fwrite(entry->translation + i,1,1,stdout);
 					if (*(entry->translation + i)==':') {
+						if ((entry->translationLength-i)>CTR_TRANSLATE_MAX_WORD_LEN) {
+							printf("Unable to copy translation to buffer.\n");
+							exit(1);
+						}
 						memcpy(remainder,entry->translation+i+1,(entry->translationLength-i));
 						break;
 					}
@@ -263,6 +275,10 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 		skipColon = 1;
 		ctr_size q;
 		message = calloc(CTR_TRANSLATE_MAX_WORD_LEN,1);
+		if (l+1 > CTR_TRANSLATE_MAX_WORD_LEN) {
+			printf("Token length exceeds maximum buffer size.\n");
+			exit(1);
+		}
 		memcpy(message, e-l,l+1);
 		ctr_size i = 1;
 		while(ctr_clex_forward_scan(e, ":.,)", &i)) {
@@ -272,6 +288,10 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 				noteCount++;
 				q = 0;
 				if (ctr_clex_backward_scan(e+i, "\n\t )}", &q, CTR_TRANSLATE_MAX_WORD_LEN)) {
+					if ((l+1)+((e+i+1)-(e+i-q+1))>CTR_TRANSLATE_MAX_WORD_LEN) {
+						printf("Part of keyword message token exceeds buffer limit.\n");
+						exit(1);
+					}
 					memcpy(message+l+1,e+i-q+1, (e+i+1)-(e+i-q+1));
 					l += ((e+i+1)-(e+i-q+1));
 				} else {
