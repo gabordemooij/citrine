@@ -201,7 +201,7 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 			if (context == 't') {
 				for (i = 0; i<entry->translationLength; i++) {
 					fwrite(entry->translation + i,1,1,stdout);
-					if (*(entry->translation + i)==':') {
+					if (*(entry->translation + i)==':' && entry->translationLength > (i+1)) {
 						if ((entry->translationLength-i)>CTR_TRANSLATE_MAX_WORD_LEN) {
 							printf("Unable to copy translation to buffer.\n");
 							exit(1);
