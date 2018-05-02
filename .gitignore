@@ -9,6 +9,7 @@
 *.project
 *.ignore
 *.tar.gz
+/tests/runner*
 /gitignore
 /ctr
 /ctrnl
