@@ -969,6 +969,7 @@ ctr_object* ctr_curl_perform(ctr_object* myself, ctr_argument* argumentList) {
 void begin(){
 	ctr_object*  CtrStdHandle = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdHandle, ctr_build_string_from_cstring( "new" ), &ctr_curl_new );
+	ctr_internal_create_func(CtrStdHandle, ctr_build_string_from_cstring( "nieuw" ), &ctr_curl_new );
 	ctr_internal_create_func(CtrStdHandle, ctr_build_string_from_cstring( "type" ), &ctr_curl_type );
 	ctr_internal_create_func(CtrStdHandle, ctr_build_string_from_cstring( "cleanup" ), &ctr_curl_cleanup );
 	ctr_internal_create_func(CtrStdHandle, ctr_build_string_from_cstring( "perform" ), &ctr_curl_perform );
