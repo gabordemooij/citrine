@@ -326,7 +326,7 @@ void begin(){
 	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_HTTP_REQUEST_POST_SET ), &ctr_request_post_string );
 	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_HTTP_REQUEST_UPLOAD_SET ), &ctr_request_file );
 	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_HTTP_REQUEST_POST_LIST_SET ), &ctr_request_post_array );
-	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_HTTP_REQUEST_OPTION_IS_SET ), &ctr_request_server_option );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_SET_ENVIRONMENT_VARIABLE ), &ctr_request_server_option );
 	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_PLUGIN_REQUEST_SERVE ), &ctr_request_serve );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PLUGIN_REQUEST ), requestObject, 0);
 	varlistGet = CGI_get_query(NULL);
