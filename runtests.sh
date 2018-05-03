@@ -102,12 +102,12 @@ for i in $(find tests -name 'test*.ctr'); do
 	rm tests/runner5.ctr ; echo "Broom mode: 9." > tests/runner5.ctr ; cat ${fitem} >> tests/runner5.ctr
 	rm tests/runner6.ctr ; echo "Broom mode: 12." > tests/runner6.ctr ; cat ${fitem} >> tests/runner6.ctr
 	echo "[translating...]"
-	rm tests/runner7.ctr ; ./ctr -t ennl.dict tests/runner1.ctr > tests/runner7.ctr
-	rm tests/runner8.ctr ; ./ctr -t ennl.dict tests/runner2.ctr > tests/runner8.ctr
-	rm tests/runner9.ctr ; ./ctr -t ennl.dict tests/runner3.ctr > tests/runner9.ctr
-	rm tests/runner10.ctr ; ./ctr -t ennl.dict tests/runner4.ctr > tests/runner10.ctr
-	rm tests/runner11.ctr ; ./ctr -t ennl.dict tests/runner5.ctr > tests/runner11.ctr
-	rm tests/runner12.ctr ; ./ctr -t ennl.dict tests/runner6.ctr > tests/runner12.ctr
+	rm tests/runner7.ctr ; ./ctr -t ennl.dict tests/runner1.ctr 1> tests/runner7.ctr 2> tests/terrors7.log
+	rm tests/runner8.ctr ; ./ctr -t ennl.dict tests/runner2.ctr 1> tests/runner8.ctr 2> tests/terrors8.log
+	rm tests/runner9.ctr ; ./ctr -t ennl.dict tests/runner3.ctr 1> tests/runner9.ctr 2> tests/terrors9.log
+	rm tests/runner10.ctr ; ./ctr -t ennl.dict tests/runner4.ctr 1> tests/runner10.ctr 2> tests/terrors10.log
+	rm tests/runner11.ctr ; ./ctr -t ennl.dict tests/runner5.ctr 1> tests/runner11.ctr 2> tests/terrors11.log
+	rm tests/runner12.ctr ; ./ctr -t ennl.dict tests/runner6.ctr 1> tests/runner12.ctr 2> tests/terrors12.log
 	echo "[running...]";
 	echo "test" | ./ctr ${fitem} 1>/tmp/a0 2>/tmp/b0
 	echo "test" | ./ctr tests/runner1.ctr 1>/tmp/a1 2>/tmp/b1
@@ -152,7 +152,7 @@ for i in $(find tests -name 'test*.ctr'); do
 		for q in {1..12}
 		do
 			if [ "${result[$q]}" = "$expected" ]; then
-				echo "[$j]"
+				echo -n "[✓$j]"
 				j=$((j+1))
 			else
 				echo "FAIL."
@@ -165,6 +165,7 @@ for i in $(find tests -name 'test*.ctr'); do
 			fi
 		done
 	fi
+	echo "[done]"
 done
 echo ""
 echo "All tests passed."

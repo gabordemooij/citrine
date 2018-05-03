@@ -10,6 +10,7 @@
 *.ignore
 *.tar.gz
 /tests/runner*
+/tests/terrors*
 /gitignore
 /ctr
 /ctrnl
