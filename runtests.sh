@@ -137,6 +137,7 @@ for i in $(find tests -name 'test*.ctr'); do
 	result[12]=`cat /tmp/a12 /tmp/b12`
 	expected=`cat $fexpect`
 	if [ "${result[0]}" = "$expected" ]; then
+		echo -n "[✓$j*]"
 		j=$((j+1))
 	else
 		echo "FAIL."

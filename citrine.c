@@ -23,10 +23,10 @@ char** ctr_argv;
 void ctr_cli_welcome() {
 	printf("\n");
 	#ifdef langNL
-		printf("Citrine Programmeertaal V 0.7.9\n");
+		printf("Citrine Programmeertaal V 0.7.10\n");
 		printf("Geschreven door Gabor de Mooij © alle rechten voorbehouden 2018, Licensie BSD.\n");
 	#else
-		printf("Citrine Programming Language V 0.7.9\n");
+		printf("Citrine Programming Language V 0.7.10\n");
 		printf("Written by Gabor de Mooij © copyright 2018, Licensed BSD.\n");
 	#endif
 	printf("\n");
