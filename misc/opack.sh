@@ -10,7 +10,7 @@ mkdir /tmp/opack/mods/curl
 mkdir /tmp/opack/mods/json
 
 
-#copy the Linux binaries
+#copy the OBSD binaries
 cp ../ctr /tmp/opack/
 cp ../ctrnl /tmp/opack/
 cp ../mods/percolator/*.so /tmp/opack/mods/percolator/
