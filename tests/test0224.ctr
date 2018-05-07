@@ -17,9 +17,9 @@ foods by: countries, each: { :key :value
 
 ✎ write: 'we serve ❲counter❳ dishes', brk.
 
-☞ counter := 0.
-'Trytosortthiswithoutsegfaulting' characters sort: { :v
-	counter +=: 1.
+☞ counter := 42.
+'TrytosortthiswithoutsegfaultingButActualNumberDependsOnOS' characters sort: { :v
+	counter +=: 0.
 }.
 
 ✎ write: 'we sort ❲counter❳ dishes', brk.
