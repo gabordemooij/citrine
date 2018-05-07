@@ -1,5 +1,4 @@
 #Tests whether GC does not destroy receiver array in loop (and inner loop :) )
-Broom mode: 4.
 'Verbatim Syntax' characters each: { :number :letter
 	10 times: {
 		✎ write: number.

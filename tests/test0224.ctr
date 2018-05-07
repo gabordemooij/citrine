@@ -1,8 +1,43 @@
-x := 6.
-who := 'Devil'.
+#Test whether Map does not get GC'ed
+☞ countries := List new
+	• 'Switzerland'
+	• 'Italy'
+	• 'Germany'.
 
-Pen write: '{$$the} '.
-Pen write: '\$$number of the ❲who❳ i$: ❲x❳❲x❳❲x❳ !!!!', brk.
+☞ foods := List new
+	• 'Rösti'
+	• 'Spaghetti'
+	• 'Sauerkraut'.
 
 
+☞ counter := 0.
+foods by: countries, each: { :key :value
+	counter +=: 1.
+}.
 
+✎ write: 'we serve ❲counter❳ dishes', brk.
+
+☞ counter := 0.
+'Trytosortthiswithoutsegfaulting' characters sort: { :v
+	counter +=: 1.
+}.
+
+✎ write: 'we sort ❲counter❳ dishes', brk.
+
+
+☞ counter := 0.
+100 times: {
+	(3 + 1 + 1 * 0.5) times: {
+		counter +=: 1.
+	}.
+}.
+
+
+✎ write: 'we calculate ❲counter❳ numbers.', brk.
+
+
+☞ counter := 0.
+List new fill: 142 with: 'x', join: 'o', findPattern: '([x])' do: { :arr
+	10 times: { counter +=: 1. }.
+} options: ''.
+✎ write: 'we replace ❲counter❳ letters.', brk.

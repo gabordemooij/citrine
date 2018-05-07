@@ -261,8 +261,7 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 		arguments->next = argument2;
 		argument2->next = argument3;
 		/* keep receiver in block object otherwise, GC will destroy it */
-		ctr_internal_object_add_property(block, ctr_build_string_from_cstring("@receiver"), myself, CTR_CATEGORY_PRIVATE_PROPERTY);
-		ctr_block_run(block, arguments, NULL);
+		ctr_block_run(block, arguments, myself);
 		ctr_heap_free( arguments );
 		ctr_heap_free( argument2 );
 		ctr_heap_free( argument3 );
@@ -777,6 +776,7 @@ ctr_object* ctr_array_copy(ctr_object* myself, ctr_argument* argumentList) {
  * Interfaces with qsort-compatible function.
  */
 ctr_object* temp_sorter;
+ctr_object* temp_self;
 int ctr_sort_cmp(const void * a, const void * b) {
 	ctr_argument* arg1 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	ctr_argument* arg2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
@@ -785,7 +785,7 @@ int ctr_sort_cmp(const void * a, const void * b) {
 	arg1->next = arg2;
 	arg1->object = *((ctr_object**) a);
 	arg2->object = *((ctr_object**) b);
-	result = ctr_block_run(temp_sorter, arg1, NULL);
+	result = ctr_block_run(temp_sorter, arg1, temp_self);
 	numResult = ctr_internal_cast2number(result);
 	ctr_heap_free( arg1 );
 	ctr_heap_free( arg2 );
@@ -806,6 +806,7 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 		return myself;
 	}
 	temp_sorter = sorter;
+	temp_self = myself;
 	qsort((myself->value.avalue->elements+myself->value.avalue->tail), myself->value.avalue->head-myself->value.avalue->tail, sizeof(ctr_object*), ctr_sort_cmp);
 	return myself;
 }
@@ -1224,7 +1225,7 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 		argument3->object = myself;
 		arguments->next = argument2;
 		argument2->next = argument3;
-		ctr_block_run(block, arguments, NULL);
+		ctr_block_run(block, arguments, myself);
 		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL;
 		m = m->next;
 		ctr_heap_free( arguments );
