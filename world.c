@@ -1049,7 +1049,6 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	ctr_object* (*funct)(ctr_object* receiverObject, ctr_argument* argumentList);
 	ctr_object* msg = NULL;
 	int argCount;
-	//printf(">> %s \n", message);
 	if (CtrStdFlow != NULL) return CtrStdNil; /* Error mode, ignore subsequent messages until resolved. */
 	if ( ctr_program_security_profile & CTR_SECPRO_COUNTDOWN ) {
 		if ( ctr_program_tick > ctr_program_maxtick ) {
