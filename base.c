@@ -3075,6 +3075,10 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
  * Don't forget to use the return ^ symbol in the first block.
  */
 ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* block = argumentList->object;
+	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
+		CtrStdFlow = ctr_error_text( "No block found." );
+	}
 	int sticky1, sticky2;
 	sticky1 = myself->info.sticky;
 	sticky2 = argumentList->object->info.sticky;
@@ -3109,6 +3113,10 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
  * Don't forget to use the return ^ symbol in the first block.
  */
 ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* block = argumentList->object;
+	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
+		CtrStdFlow = ctr_error_text( "No block found." );
+	}
 	while (1 && !CtrStdFlow) {
 		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, NULL));
 		if (result->value.bvalue == 1 || CtrStdFlow) break;

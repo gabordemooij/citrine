@@ -1,39 +1,9 @@
-#Can we fork?
+☞ counter := 10.
 
-q := Program new: { :p
-	Pen write: 'I am the Child process', brk.
-	{ ^ True. } whileTrue: {
-		var word := Nil.
-		p listen: { :m
-			word := m.
-			Pen write: 'Child received: ' + m, brk.
-			p message: 'thanks for ' + m.
-		}.
-		( word = 'stop' ) break.
-	}.
-	Pen write: 'Child sleeps 4 sec, wait for it...', brk.
-	Clock wait: 2.
-	Pen write: 1, brk.
-	Clock wait: 1.
-	Pen write: 1, brk.
-	Clock wait: 1.
-	Pen write: 1, brk.
-	Clock wait: 1.
-	Pen write: 1, brk.
-	Pen write: 'Child is Done', brk.
-	Program exit.
-}.
+{
+	{ ↲ (counter > 0). } whileTrue: 'dont segfault!'.
+} catch: { :err ✎ write: '❲err❳↵'. }, run.
 
-Pen write: 'I am Parent Process', brk.
-q message: 'hello'.
-q message: 'world'.
-q message: 'stop'.
-Clock wait: 1.
-3 times: {
-	q listen: { :c
-		Pen write: 'Parent received: ' + c, brk.
-	}.
-}.
-q join.
-Pen write: 'Joined processes\n'.
-Pen write: 'Parent is Done', brk.
+{
+	{ ↲ (counter < 10). } whileFalse: 'dont segfault!'.
+} catch: { :err ✎ write: '❲err❳↵'. }, run.
