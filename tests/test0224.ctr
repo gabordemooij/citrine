@@ -1,6 +1,7 @@
 x := 6.
 who := 'Devil'.
-?>{$$the} <?.
+
+Pen write: '{$$the} '.
 Pen write: '\$$number of the ❲who❳ i$: ❲x❳❲x❳❲x❳ !!!!', brk.
 
 

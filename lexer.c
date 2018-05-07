@@ -18,8 +18,6 @@ char* ctr_code_eoi;
 
 char* ctr_clex_oldptr;
 char* ctr_clex_olderptr;
-int       ctr_clex_verbatim_mode = 0;              /* flag: indicates whether lexer operates in verbatim mode or not (1 = ON, 0 = OFF) */
-uintptr_t ctr_clex_verbatim_mode_insert_quote = 0; /* pointer to 'overlay' the 'fake quote' for verbatim mode */
 int ctr_clex_old_line_number = 0;
 int ctr_clex_ignore_modes = 0;
 
@@ -231,7 +229,6 @@ int ctr_clex_tok() {
 
 		/* leave interpolation mode ( ..." ) */
 		if (
-			!ctr_clex_verbatim_mode &&
 			ctr_string_interpolation == 5 &&
 			(ctr_code + ctr_clex_string_interpolation_stop_len) < ctr_eofcode &&
 			strncmp( ctr_code, CTR_DICT_STR_IPOL_STOP, ctr_clex_string_interpolation_stop_len ) == 0
@@ -243,10 +240,6 @@ int ctr_clex_tok() {
 		
 	}
 
-	/* if verbatim mode is on and we passed the '>' verbatim write message, insert a 'fake quote' (?>') */
-		if (ctr_clex_verbatim_mode == 1 && ctr_clex_verbatim_mode_insert_quote == (uintptr_t) ctr_code) {
-			return CTR_TOKEN_QUOTE;
-		}
 	c = *ctr_code;
 	while(ctr_code != ctr_eofcode && (isspace(c) || c == '#' || comment_mode)) {
 		if (c == '\n') {
@@ -335,24 +328,6 @@ int ctr_clex_tok() {
 		}
 	}
 
-	/* if we encounter a '?>' sequence, switch to verbatim mode in lexer */
-	if (strncmp(ctr_code, "?>", 2)==0){
-		ctr_clex_verbatim_mode = 1;
-		ctr_code ++;
-		memcpy(ctr_clex_buffer, "?", 1);
-		ctr_clex_tokvlen = 1;
-		return CTR_TOKEN_REF;
-	}
-
-	/* if lexer is in verbatim mode and we pass the '>' symbol insert a fake quote as next token */
-	if (strncmp(ctr_code, ">", 1)==0 && ctr_clex_verbatim_mode == 1) {
-		ctr_clex_verbatim_mode_insert_quote = (uintptr_t) (ctr_code+1); /* this way because multiple invocations should return same result */
-		ctr_code ++;
-		memcpy(ctr_clex_buffer, ">", 1);
-		ctr_clex_tokvlen = 1;
-		return CTR_TOKEN_REF;
-	}
-	
 	while(
 	!isspace(c) && (
 		c != '#' &&
@@ -419,29 +394,15 @@ char* ctr_clex_readstr() {
 	escape = 0;
 	beginbuff = strbuff;
 	while(
-		(   /* reading string in non-verbatim mode, read until the first non-escaped quote */
-			ctr_clex_verbatim_mode == 0 &&
+		(   /* read until the first non-escaped quote */
 			(
 				c != '\'' ||
 				escape == 1
 			)
 		)
-		||
-		(   /* reading string in verbatim mode, read until the '<?' sequence */
-			ctr_clex_verbatim_mode == 1
-			&&
-			!(
-				c == '<' &&
-				((ctr_code+1) < ctr_eofcode) &&
-				*(ctr_code+1) == '?'
-			)
-			&&
-			(ctr_code < ctr_eofcode)
-		)
 	) {
 		/* enter interpolation mode ( "x... ) */
 		if (
-			!ctr_clex_verbatim_mode &&
 			!escape &&
 			(ctr_code + ctr_clex_string_interpolation_start_len) < ctr_eofcode &&
 			strncmp( ctr_code, CTR_DICT_STR_IPOL_START, ctr_clex_string_interpolation_start_len ) == 0
@@ -494,7 +455,7 @@ char* ctr_clex_readstr() {
 			}
 		}
 
-		if (c == '\\' && escape == 0 && ctr_clex_verbatim_mode == 0 && !ctr_clex_ignore_modes) {
+		if (c == '\\' && escape == 0 && !ctr_clex_ignore_modes) {
 			escape = 1;
 			ctr_code++;
 			c = *ctr_code;
@@ -512,7 +473,7 @@ char* ctr_clex_readstr() {
 		}
 		escape = 0;
 		
-		if (c == '\\' && escape == 0 && ctr_clex_verbatim_mode == 0 && ctr_clex_ignore_modes) {
+		if (c == '\\' && escape == 0 && ctr_clex_ignore_modes) {
 			escape = 1;
 		}
 		
@@ -521,15 +482,6 @@ char* ctr_clex_readstr() {
 		ctr_code++;
 		c = *ctr_code;
 	}
-	if (ctr_clex_verbatim_mode) {
-		if (ctr_code >= ctr_eofcode) { /* if we reached EOF in verbatim mode, append closing sequence '<?.' */
-			strncpy(ctr_code,"<?.", 3);
-			ctr_eofcode += 3;
-		}
-		if (!ctr_clex_ignore_modes) ctr_code++; /* in verbatim mode, hop over the trailing ? as well */
-	}
-	ctr_clex_verbatim_mode = 0;               /* always turn verbatim mode off */
-	ctr_clex_verbatim_mode_insert_quote = 0;  /* erase verbatim mode pointer overlay for fake quote */
 	return beginbuff;
 }
 
@@ -541,37 +493,36 @@ void ctr_clex_move_code_pointer(int movement) {
 	ctr_code += movement;
 }
 
-int ctr_clex_is_verbatim() {
-	return ctr_clex_verbatim_mode;
-}
-
 int ctr_clex_forward_scan(char* e, char* bytes, ctr_size* newCodePointer) {
 	ctr_size i = *(newCodePointer);
 	int len = strlen(bytes);
 	int nesting = 0;
 	int blocks = 0;
 	int quote = 0;
-	int verbatim = 0;
 	int comment = 0;
 	int q;
 	int found = 0;
 	while( (e+i) < ctr_eofcode ) {
-		if (!verbatim && !quote && *(e+i) == '(') nesting++;
-		else if (!verbatim && !quote && nesting && *(e+i) == ')') nesting--;
-		else if (!verbatim && !quote && *(e+i) == '{') blocks++;
-		else if (!verbatim && !quote && blocks && *(e+i) == '}') blocks--;
-		else if (!verbatim && !quote && *(e+i) == '\'' && *(e+i-1)!='\\') quote = 1;
-		else if (!verbatim && !quote && !verbatim && *(e+i) == '?' && (e+i+1) < ctr_eofcode && *(e+i+1) == '>') {
-			verbatim = 1;
-		}
-		else if (!quote && verbatim && *(e+i) == '<' && (e+i+1) < ctr_eofcode && *(e+i+1) == '?') {
-			verbatim = 0;
-		}
-		else if (!verbatim && quote && *(e+i) == '\'' && *(e+i-1)!='\\') quote = 0;
-		else if (!verbatim && !quote && !comment && *(e+i) == '#') comment = 1;
-		else if (!verbatim && !quote && comment && *(e+i) == '\n') comment = 0;
-		else if (!verbatim && !nesting && !quote && !comment && !blocks) {
+		if (!quote && *(e+i) == '(') nesting++;
+		else if (!quote && nesting && *(e+i) == ')') nesting--;
+		else if (!quote && *(e+i) == '{') blocks++;
+		else if (!quote && blocks && *(e+i) == '}') blocks--;
+		else if (!quote && *(e+i) == '\'' && *(e+i-1)!='\\') quote = 1;
+		else if (quote && *(e+i) == '\'' && *(e+i-1)!='\\') quote = 0;
+		else if (!quote && !comment && *(e+i) == '#') comment = 1;
+		else if (!quote && comment && *(e+i) == '\n') comment = 0;
+		else if (!nesting && !quote && !comment && !blocks) {
 			for (q=0; q<len; q++) {
+				if (bytes[q]=='"') {
+					if (
+						((e+i) + ctr_clex_string_interpolation_start_len) < ctr_eofcode &&
+						strncmp( (e+i), CTR_DICT_STR_IPOL_STOP, ctr_clex_string_interpolation_start_len ) == 0
+					) {
+						*(newCodePointer) = i;
+						found = 1;
+						break;
+					}
+				}
 				if (*(e+i)==bytes[q]) {
 					if (bytes[q]=='.' && isdigit(*(e+i-1)) && (e+i+1)<ctr_eofcode && isdigit(*(e+i+1))) continue;
 					*(newCodePointer) = i;

@@ -281,8 +281,9 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 		}
 		memcpy(message, e-l,l+1);
 		ctr_size i = 1;
-		while(ctr_clex_forward_scan(e, ":.,)", &i)) {
-			if (*(e+i)=='.' || *(e+i)==')' || *(e+i)==',') break;
+		char* bytes="❳";
+		while(ctr_clex_forward_scan(e, ":.,)\"", &i)) {
+			if (*(e+i)=='.' || *(e+i)==')' || *(e+i)==',' || *(e+i)==bytes[0]) break;
 			if (*(e+i)==':') {
 				ctr_notebook_add( ctr_note_create(e+i), noteCount );
 				noteCount++;

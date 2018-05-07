@@ -1,1 +1,6 @@
-?>ab
+?> := Pen new.
+?> on: 'respondTo:' do: { :content
+	✎ write: content.
+}.
+
+?> ab.

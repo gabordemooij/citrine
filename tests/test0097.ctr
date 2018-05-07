@@ -1,4 +1,33 @@
-?>
-<html>
-<body>
-<p>Hello this is a <?.
+
+HtmlBrush := Object new.
+
+HtmlBrush on: 'respondTo:' do: { :tag
+	✎ write: '<❲tag❳>↵'.
+}.
+
+HtmlBrush on: 'respondTo:and:' do: { :tag :content
+	✎ write: '<❲tag from: 0 to: (tag length - 1)❳ ❲content❳>'.
+}.
+
+HtmlBrush on: 'content:' do: { :text
+	✎ write: text htmlEscape, brk.
+}.
+
+HtmlBrush on: 'attr:value:' do: { :attr :value
+	↲ '❲attr❳="❲value❳"'.
+}.
+
+h := HtmlBrush new.
+
+
+h html
+	body
+		h1
+			content: 'hello world',
+		/h1
+		span:
+			(h attr: 'class' value: 'bold'),
+		/span
+	/body
+/html.
+		

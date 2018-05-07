@@ -1,14 +1,7 @@
-#Demonstrates/tests how to override the Pen object alias to implement
-#output buffering
-? := Object new.
-? on: 'init' do: {
-	my buffer := ''.
+#Tests whether GC does not destroy receiver array in loop (and inner loop :) )
+Broom mode: 4.
+'Verbatim Syntax' characters each: { :number :letter
+	10 times: {
+		✎ write: number.
+	}.
 }.
-? on: '>' do: { :str
-	my buffer := my buffer + str.
-}.
-? on: 'buffer' do: { ^ my buffer. }.
-? init.
-?>world<?.
-b := (? buffer).
-Pen write: 'hello '+ b.

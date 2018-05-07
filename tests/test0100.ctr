@@ -1,13 +1,27 @@
-?>
+
+☞ list := List new.
+
+'Verbatim Syntax' characters each: { :number :letter
+	list ; ('<li>#❲number + 1❳:❲letter❳</li>').
+}.
+
+✎ list.
+
+
+
+
+
+☞ template := '
 <html>
-<?. x := 'Verbatim Syntax'. 
-?><body>
-<p>Hello this is a <?. Pen write: 'test!'. ?></p>
-<p>The string '<? write: x. ?>' has: <?. Pen write: (x length) + ' code points'. ?>...</p>
+<body>
+<p>Hello this is a test!</p>
+<p>The string \'Verbatim Syntax\' has: 15 code points...</p>
 <ul>
-<?. (x length) times: { :i
-?><li><? write: '#' + (i + 1) + ':' + (x at: i). ?></li>
-<?. }. 
-?></ul>
+❲list join: '↵'❳
+</ul>
 </body> 
 </html>
+'.
+
+✎ write: template.
+
