@@ -1,3 +1,8 @@
+Number on: 'factorial' do: {
+	☞ total := 1.
+	{ :index total multiply by: (⛏ - index). } * ⛏.
+	↲ total.
+}.
 ✎ write: 'first', write: 'second'.
 ✎ write: 3 factorial, write: 3 factorial.
 ✎ write: 3 + 2, write: 7 / 2.

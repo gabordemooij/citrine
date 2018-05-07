@@ -1,4 +1,11 @@
 
+List on: 'sum' do: {
+	☞ total := 0.
+	⛏ each: { :index :element
+		total add: element.
+	}.
+	↲ total.
+}.
 
 ☞ usedMemory1 := 0.
 ☞ usedMemory2 := 0.

@@ -1,3 +1,8 @@
+Number on: 'factorial' do: {
+	☞ total := 1.
+	{ :index total multiply by: (⛏ - index). } * ⛏.
+	↲ total.
+}.
 ☞ Printer := Object new.
 Printer on: 'print:and:' do: { :x :y
 	✎ write: 'a=' + x + ', b=' + y, end.

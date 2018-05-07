@@ -1,5 +1,13 @@
 'SINGLE_LANGUAGE'.
 
+List on: 'sum' do: {
+	☞ total := 0.
+	⛏ each: { :index :element
+		total add: element.
+	}.
+	↲ total.
+}.
+
 List on: 'product' do: {
 	☞ total := 1.
 	⛏ each: { :index :element
