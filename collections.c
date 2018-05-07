@@ -260,6 +260,8 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 		argument3->object = myself;
 		arguments->next = argument2;
 		argument2->next = argument3;
+		/* keep receiver in block object otherwise, GC will destroy it */
+		ctr_internal_object_add_property(block, ctr_build_string_from_cstring("@receiver"), myself, CTR_CATEGORY_PRIVATE_PROPERTY);
 		ctr_block_run(block, arguments, NULL);
 		ctr_heap_free( arguments );
 		ctr_heap_free( argument2 );
