@@ -1,0 +1,10 @@
+(List ← 1 ; '2' ; (List ← 'A' ; 'B')) each: { :index :element
+	( element number = 2 ) true: {
+		element := element number multiply by: 2.
+	}.
+	✎ write: (
+		'# <I>: <E>↵'
+			<I>: index,
+			<E>: element
+	).
+}.
