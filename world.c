@@ -594,7 +594,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_object_to_string );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_object_to_number );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_TOBOOL ), &ctr_object_to_boolean );
-	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_FROM_COMPUTER ), &ctr_program_remote );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_CASE_DO ), &ctr_object_case_do );
 	ctr_internal_object_add_property( CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_OBJECT ), CtrStdObject, 0 );
 	CtrStdObject->link = NULL;
@@ -895,20 +894,12 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FORBID_FILE_WRITE ), &ctr_program_forbid_file_write );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FORBID_FILE_READ ), &ctr_program_forbid_file_read );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FORBID_INCLUDE ), &ctr_program_forbid_include );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FORBID_FORK ), &ctr_program_forbid_fork );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SET_REMAINING_MESSAGES ), &ctr_program_countdown );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_program_fork );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MESSAGE ), &ctr_program_message );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_LISTEN ), &ctr_program_listen );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_JOIN_PROCESS ), &ctr_program_join );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_LOG_SET ), &ctr_program_log );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_WARNING ), &ctr_program_warn );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ALERT ), &ctr_program_crit );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ERROR ), &ctr_program_err );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_PID ), &ctr_program_pid );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SERVE ), &ctr_program_accept );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_CONN_LIMIT ), &ctr_program_accept_number );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_PORT ), &ctr_program_default_port );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SHELL ), &ctr_program_shell );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_USE_STDERR ), &ctr_program_use_stderr );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_USE_SYSLOG ), &ctr_program_use_syslog );

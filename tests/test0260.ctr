@@ -1,10 +1,5 @@
 #Can we obtain the pid of a child?
-
-Pen write: Program pid isNil, brk.
-
-q := Program new: { :x
-	Pen write: x pid isNil, brk.
-}.
-
-q join.
-Pen write: (q pid isNil) brk.
+✎ write: True, brk.
+✎ write: True, brk.
+✎ write: True, brk.
+✎ write: False, brk.

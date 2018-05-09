@@ -1,9 +1,14 @@
-#Child may not join.
-x := Program new: { :child
-	Pen write: 'hello1\n'.
-	child join.
-	Pen write: 'hello2\n'.
+#
+☞ Greeter := Object new.
+Greeter on: 'new' do: {
+	⚿ name := '?'.
 }.
-
-x join.
-Program join.
+Greeter on: 'name:' do: { :name
+	⚿ name := name.
+}.
+Greeter on: 'greet' do: {
+	✎ write: 'hello❲⚿ name❳'.
+}.
+☞ friend := Greeter new.
+friend name: '1'.
+friend greet.

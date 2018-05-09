@@ -99,7 +99,6 @@
 #define CTR_SECPRO_NO_INCLUDE 8
 #define CTR_SECPRO_COUNTDOWN 16
 #define CTR_SECPRO_EVAL 32
-#define CTR_SECPRO_FORK 64
 
 #define CTR_ANSI_COLOR_RED     "\x1b[31m"
 #define CTR_ANSI_COLOR_GREEN   "\x1b[32m"
@@ -652,21 +651,12 @@ ctr_object* ctr_program_forbid_shell(ctr_object* myself, ctr_argument* ctr_argum
 ctr_object* ctr_program_forbid_file_write(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_program_forbid_file_read(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_program_forbid_include(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_program_forbid_fork(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_program_countdown(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_program_fork(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_program_message(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_program_listen(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_program_join(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_program_log(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_program_warn(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_crit(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_pid(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_program_accept(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_program_accept_number(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_program_remote(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_program_default_port(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_use_stderr(ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_program_use_syslog(ctr_object* myself, ctr_argument* argumentList );

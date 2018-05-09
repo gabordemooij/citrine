@@ -11,7 +11,6 @@
 #include <syslog.h>
 #include <signal.h>
 
-#include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
@@ -662,9 +661,6 @@ void ctr_check_permission( uint8_t operationID ) {
 		if ( operationID == CTR_SECPRO_NO_INCLUDE ) {
 			reason = "This program is not allowed to include any other files for code execution.";
 		}
-		if ( operationID == CTR_SECPRO_FORK ) {
-			reason = "This program is not allowed to spawn other processes or serve remote objects.";
-		}
 		fprintf(stderr, "%s\n", reason );
 		exit(1);
 	}
@@ -739,14 +735,6 @@ ctr_object* ctr_program_forbid_include( ctr_object* myself, ctr_argument* argume
 }
 
 /**
- * [Program] forbidFork.
- */
-ctr_object* ctr_program_forbid_fork( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_program_security_profile |= CTR_SECPRO_FORK;
-	return myself;
-}
-
-/**
  * [Program] remainingMessages: [Number]
  *
  * This method is part of the security profiles feature of Citrine.
@@ -776,178 +764,6 @@ ctr_object* ctr_program_countdown( ctr_object* myself, ctr_argument* argumentLis
 ctr_object* ctr_program_flush(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	 fflush(stdout);
 	 return myself;
-}
-
-/**
- * [Program] new: [Block].
- *
- * Forks the program into two programs.
- * Creates another program that will run at the same time as the
- * current program. Both the parent and the child will obtain a reference
- * to the newly created program. The child will obtain a reference to
- * itself passed as a parameter to the code block while the parent will
- * obtain its version of the program instance as the return value of the
- * new: message.
- *
- * Note that spawning a new program will leak memory.
- * The file descriptors used to setup communication between parent and
- * child will be removed when the main program ends but any newly created
- * program will add a descriptor pair to the set. This is a limitation
- * in the current implementation.
- *
- * Usage:
- *
- * child := Program new: { :program
- * 	Pen write: 'Child', brk.
- * }.
- * Pen write: 'Parent'.
- */
-ctr_object* ctr_program_fork(ctr_object* myself, ctr_argument* argumentList) {
-	int p;
-	int* ps;
-	FILE* pipes;
-	ctr_object* child;
-	ctr_argument* newArgumentList;
-	ctr_resource* rs;
-	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
-	ctr_check_permission( CTR_SECPRO_FORK );
-	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
-	child = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
-	child->link = myself;
-	ps = ctr_heap_allocate( sizeof(int) * 4 );
-	pipes = ctr_heap_allocate_tracked( sizeof( FILE ) * 2 );
-	rs = ctr_heap_allocate_tracked( sizeof( ctr_resource ) );
-	rs->type = 2;
-	rs->ptr = (void*) pipes;
-	child->value.rvalue = rs;
-	newArgumentList->object = child;
-	pipe(ps);
-	pipe(ps + 2);
-	p = fork();
-	if ( p < 0 ) {
-		CtrStdFlow = ctr_build_string_from_cstring( "Unable to fork" );
-		ctr_heap_free( newArgumentList );
-		ctr_heap_free( rs );
-		return CtrStdNil;
-	}
-	if ( p == 0 ) {
-		close(*(ps + 0));
-		close(*(ps + 3));
-		*((FILE**)rs->ptr + 1) = fdopen( *(ps + 1), "wb" );
-		*((FILE**)rs->ptr + 2) = fdopen( *(ps + 2), "rb" );
-		setvbuf( *((FILE**)rs->ptr + 1), NULL, _IONBF, 0 );
-		setvbuf( *((FILE**)rs->ptr + 2), NULL, _IONBF, 0 );
-		rs->type = 3;
-		ctr_block_runIt( argumentList->object, newArgumentList );
-		fclose(*((FILE**)rs->ptr + 1));
-		fclose(*((FILE**)rs->ptr + 2));
-		ctr_heap_free( newArgumentList );
-		ctr_heap_free( ps);
-		CtrStdFlow = CtrStdExit;
-		return CtrStdNil;
-	} else {
-		ctr_internal_object_set_property(
-				child,
-				ctr_build_string_from_cstring( "pid" ),
-				ctr_build_number_from_float( (ctr_number) p ),
-				CTR_CATEGORY_PRIVATE_PROPERTY
-		);
-		close(*(ps+1));
-		close(*(ps+2));
-		*((FILE**)rs->ptr + 3) = fdopen( *(ps + 3), "wb" );
-		*((FILE**)rs->ptr + 0) = fdopen( *(ps + 0), "rb" );
-		setvbuf( *((FILE**)rs->ptr + 3), NULL, _IONBF, 0 );
-		setvbuf( *((FILE**)rs->ptr + 0), NULL, _IONBF, 0 );
-		ctr_heap_free( newArgumentList );
-		ctr_heap_free( ps );
-	}
-	return child;
-}
-
-/**
- * [Program] message: [String].
- *
- * Sends a message to another program, i.e. a child or a parent that is
- * running at the same time.
- */
-ctr_object* ctr_program_message(ctr_object* myself, ctr_argument* argumentList) {
-	char* str;
-	ctr_size n;
-	ctr_object* string;
-	ctr_resource* rs;
-	int q;
-	FILE* fd;
-	string = ctr_internal_cast2string( argumentList->object );
-	str = ctr_heap_allocate_cstring( string );
-	n = argumentList->object->value.svalue->vlen;
-	q = 1;
-	rs = myself->value.rvalue;
-	if (rs->type == 2) q = 3;
-	fd = *((FILE**)rs->ptr + q);
-	fwrite( &n, sizeof(ctr_size), 1, fd);
-	fwrite( str, 1, n, fd);
-	ctr_heap_free(str);
-	return myself;
-}
-
-/**
- * [Program] listen: [Block].
- *
- * Stops the current flow of the program and starts listening for
- * messages from other programs that are running at the same time.
- * Upon receiving a message, the specified block will be invocated
- * and passed the message that has been received.
- */
-ctr_object* ctr_program_listen(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* program;
-	ctr_object* answer;
-	ctr_resource* r;
-	ctr_argument* newArgumentList;
-	int q;
-	ctr_size sz;
-	FILE* fd;
-	char* blob;
-	program = myself;
-	q = 0;
-	r = program->value.rvalue;
-	if (r->type == 3) q = 2;
-	fd = *((FILE**)r->ptr + q);
-	sz = 0;
-	fread(&sz, sizeof(ctr_size), 1, fd);
-	blob = ctr_heap_allocate( sz );
-	fread( blob, 1, sz, fd );
-	newArgumentList = ctr_heap_allocate( sizeof(ctr_argument) );
-	newArgumentList->object = ctr_build_string( blob, sz );
-	answer = ctr_block_runIt( argumentList->object, newArgumentList );
-	ctr_heap_free( blob );
-	ctr_heap_free(newArgumentList);
-	return answer;
-}
-
-/**
- * [Program] join
- *
- * Rejoins the program with the main program.
- * This message will cause the current program to stop and wait
- * for the child program to end.
- */
-ctr_object* ctr_program_join(ctr_object* myself, ctr_argument* argumentList) {
-	int pid;
-	ctr_resource* rs = myself->value.rvalue;
-	if (rs == NULL) return CtrStdNil;
-	if (rs->type == 3) {
-		CtrStdFlow = ctr_build_string_from_cstring( "a child process can not join." );
-		return CtrStdNil;
-	}
-	pid = (int) ctr_internal_object_find_property(
-		myself,
-		ctr_build_string_from_cstring("pid"),
-		CTR_CATEGORY_PRIVATE_PROPERTY
-	)->value.nvalue;
-	fclose(*((FILE**)rs->ptr + 0));
-	fclose(*((FILE**)rs->ptr + 3));
-	waitpid(pid, 0, 0);
-	return CtrStdNil;
 }
 
 /**
@@ -1104,93 +920,6 @@ ctr_object* ctr_program_remote(ctr_object* myself, ctr_argument* argumentList ) 
 		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	return remoteObj;
-}
-
-/**
- * [Program] port: [Number]
- *
- * Sets the port to use for remote connections.
- */
-ctr_object* ctr_program_default_port(ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_default_port = (uint16_t) ctr_internal_cast2number(
-		argumentList->object
-	)->value.nvalue;
-	return myself;
-}
-
-/**
- * [Program] connectionLimit: [Number]
- *
- * Sets the maximum number of connections and requests that will be
- * accepted by the current program.
- */
-ctr_object* ctr_program_accept_number(ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_accept_n_connections = (uint8_t) ctr_internal_cast2number(
-		argumentList->object
-	)->value.nvalue;
-	return myself;
-}
-
-/**
- * [Program] serve: [Object]
- *
- * Serves an object. Client programs can now communicate with this object
- * and send messages to it.
- */
-ctr_object* ctr_program_accept(ctr_object* myself, ctr_argument* argumentList ) {
-	int listenfd =0,connfd=0;
-	ctr_object* responder;
-	ctr_object* answerObj;
-	ctr_object* stringObj;
-	ctr_object* messageDescriptorArray;
-	ctr_object* messageSelector;
-	ctr_argument* callArgument;
-	char* dataBuff;
-	size_t lengthBuff;
-	struct sockaddr_in6 serv_addr;
-	uint8_t x;
-	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
-	ctr_check_permission( CTR_SECPRO_FORK );
-	responder = argumentList->object;
-	listenfd = socket(AF_INET6, SOCK_STREAM, 0);
-	bzero((char *) &serv_addr, sizeof(serv_addr));
-    serv_addr.sin6_flowinfo = 0;
-    serv_addr.sin6_family = AF_INET6;
-    serv_addr.sin6_addr = in6addr_any;
-    serv_addr.sin6_port = htons(ctr_default_port);//atoi?
-	bind(listenfd, (struct sockaddr*)&serv_addr,sizeof(serv_addr));
-	if(listen(listenfd, 10) == -1){
-		CtrStdFlow = ctr_build_string_from_cstring("Unable to listen to socket.");
-		return CtrStdNil;
-	}
-	x = 0;
-	while(1 && (ctr_accept_n_connections==0 || (x < ctr_accept_n_connections)))
-	{
-		x++;
-		connfd = accept(listenfd, (struct sockaddr*)NULL ,NULL); // accept awaiting request
-		read( connfd, &lengthBuff, sizeof(size_t));
-		dataBuff = ctr_heap_allocate( lengthBuff + 1 );
-		read(connfd, dataBuff, lengthBuff);
-		stringObj = ctr_build_string_from_cstring(dataBuff);
-		messageDescriptorArray = ctr_string_eval( stringObj, NULL );
-		messageSelector = ctr_array_shift( messageDescriptorArray, NULL );
-		callArgument = ctr_heap_allocate( sizeof(ctr_argument) );
-		callArgument->object = messageSelector;
-		callArgument->next = ctr_heap_allocate( sizeof(ctr_argument) );
-		callArgument->next->object = messageDescriptorArray;
-		answerObj = ctr_internal_cast2string(
-			ctr_object_message( responder, callArgument )
-		);
-		write( connfd, (size_t*) &answerObj->value.svalue->vlen, sizeof(size_t) );
-		write( connfd, answerObj->value.svalue->value, answerObj->value.svalue->vlen);
-		ctr_heap_free(dataBuff);
-		ctr_heap_free(callArgument->next);
-		ctr_heap_free(callArgument);
-		close(connfd);
-	}
-	shutdown(listenfd, SHUT_RDWR);
-	close(listenfd);
-	return 0;
 }
 
 /**
