@@ -411,7 +411,6 @@ ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argum
 ctr_object* ctr_object_to_string(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_object_remote(ctr_object* myself, ctr_argument* ctr_argumentList);
 ctr_object* ctr_object_respond_and(ctr_object* myseld, ctr_argument* ctr_argumentList);
 ctr_object* ctr_object_respond_and_and(ctr_object* myseld, ctr_argument* ctr_argumentList);
 ctr_object* ctr_object_case_do(ctr_object* myseld, ctr_argument* ctr_argumentList);
