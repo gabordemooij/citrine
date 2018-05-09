@@ -259,6 +259,37 @@ ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
+ * [Object] copy
+ *
+ * Contrary to other languages, all objects, even booleans, numbers and
+ * strings are assigned and passed by reference. To create a shallow copy
+ * of a number, string or boolean send the message 'copy'.
+ *
+ * Usage:
+ *
+ * a := 5.
+ * b := a copy.
+ * b +=: 1.
+ *
+ */
+ctr_object* ctr_object_copy( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* object;
+	switch(myself->info.type){
+		case CTR_OBJECT_TYPE_OTBOOL:
+			object = ctr_build_bool(myself->value.bvalue);
+        break;
+		case CTR_OBJECT_TYPE_OTNUMBER:
+            object = ctr_build_number_from_float(myself->value.nvalue);
+        break;
+        case CTR_OBJECT_TYPE_OTSTRING:
+			object = ctr_build_string(myself->value.svalue->value, myself->value.svalue->vlen);
+		break;
+	}
+	return object;
+}
+
+
+/**
  * [Object] case: [Object] do: [Block].
  *
  * This message makes the recipient compare itself to the specified object.

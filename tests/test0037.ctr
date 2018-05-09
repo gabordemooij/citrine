@@ -1,6 +1,6 @@
 #numbers, pass by value
 a := 3.
-b := a.
+b := a copy.
 a -=: 1.
 Pen write: ' a = ' + a.
 Pen write: ' b = ' + b.
@@ -9,7 +9,7 @@ b := a + 4.
 Pen write: ' a = ' + a.
 Pen write: ' b = ' + b.
 x := 3.
-y := x.
+y := x copy.
 x +=: 10.
 y -=: 1.
 Pen write: ' x = ' + x.

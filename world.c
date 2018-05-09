@@ -576,6 +576,7 @@ void ctr_initialize_world() {
 	/* Object */
 	CtrStdObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_object_make );
+	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_COPY ), &ctr_object_copy );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_EQUALS ), &ctr_object_equals );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_SYMBOL_EQUALS ), &ctr_object_equals );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_ONDO ), &ctr_object_on_do );
@@ -1130,30 +1131,7 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 	ctr_object* object = NULL;
 	if (CtrStdFlow) return CtrStdNil;
 	key->info.sticky = 0;
-	switch(o->info.type){
-		case CTR_OBJECT_TYPE_OTBOOL:
-			object = ctr_build_bool(o->value.bvalue);
-			break;
-		case CTR_OBJECT_TYPE_OTNUMBER:
-			object = ctr_build_number_from_float(o->value.nvalue);
-			ctr_object* q = ctr_internal_object_find_property(o, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), CTR_CATEGORY_PRIVATE_PROPERTY);
-			if (q != NULL) {
-				ctr_internal_object_set_property(object, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), q, CTR_CATEGORY_PRIVATE_PROPERTY );
-			}
-			break;
-		case CTR_OBJECT_TYPE_OTSTRING:
-			object = ctr_build_string(o->value.svalue->value, o->value.svalue->vlen);
-			break;
-		case CTR_OBJECT_TYPE_OTNIL:
-		case CTR_OBJECT_TYPE_OTNATFUNC:
-		case CTR_OBJECT_TYPE_OTOBJECT:
-		case CTR_OBJECT_TYPE_OTEX:
-		case CTR_OBJECT_TYPE_OTMISC:
-		case CTR_OBJECT_TYPE_OTARRAY:
-		case CTR_OBJECT_TYPE_OTBLOCK:
-			object = o;
-			break;
-	}
+	object = o;
 	ctr_set(key, object);
 	return object;
 }
@@ -1171,30 +1149,7 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 	ctr_object* my = ctr_find(ctr_build_string_from_cstring( ctr_clex_keyword_me ) );
 	if (CtrStdFlow) return CtrStdNil;
 	key->info.sticky = 0;
-	switch(o->info.type){
-		case CTR_OBJECT_TYPE_OTBOOL:
-			object = ctr_build_bool(o->value.bvalue);
-			break;
-		case CTR_OBJECT_TYPE_OTNUMBER:
-			object = ctr_build_number_from_float(o->value.nvalue);
-			ctr_object* q = ctr_internal_object_find_property(o, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), CTR_CATEGORY_PRIVATE_PROPERTY);
-			if (q != NULL) {
-				ctr_internal_object_set_property(object, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), q, CTR_CATEGORY_PRIVATE_PROPERTY );
-			}
-			break;
-		case CTR_OBJECT_TYPE_OTSTRING:
-			object = ctr_build_string(o->value.svalue->value, o->value.svalue->vlen);
-			break;
-		case CTR_OBJECT_TYPE_OTNIL:
-		case CTR_OBJECT_TYPE_OTNATFUNC:
-		case CTR_OBJECT_TYPE_OTOBJECT:
-		case CTR_OBJECT_TYPE_OTEX:
-		case CTR_OBJECT_TYPE_OTMISC:
-		case CTR_OBJECT_TYPE_OTARRAY:
-		case CTR_OBJECT_TYPE_OTBLOCK:
-			object = o;
-			break;
-	}
+	object = o;
 	ctr_internal_object_set_property(my, key, object, 0);
 	return object;
 }
@@ -1212,30 +1167,7 @@ ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* o) {
 	if (CtrStdFlow) return CtrStdNil;
 	context = ctr_contexts[ctr_context_id];
 	key->info.sticky = 0;
-	switch(o->info.type){
-		case CTR_OBJECT_TYPE_OTBOOL:
-			object = ctr_build_bool(o->value.bvalue);
-			break;
-		case CTR_OBJECT_TYPE_OTNUMBER:
-			object = ctr_build_number_from_float(o->value.nvalue);
-			ctr_object* q = ctr_internal_object_find_property(o, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), CTR_CATEGORY_PRIVATE_PROPERTY);
-			if (q != NULL) {
-				ctr_internal_object_set_property(object, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), q, CTR_CATEGORY_PRIVATE_PROPERTY );
-			}
-			break;
-		case CTR_OBJECT_TYPE_OTSTRING:
-			object = ctr_build_string(o->value.svalue->value, o->value.svalue->vlen);
-			break;
-		case CTR_OBJECT_TYPE_OTNIL:
-		case CTR_OBJECT_TYPE_OTNATFUNC:
-		case CTR_OBJECT_TYPE_OTOBJECT:
-		case CTR_OBJECT_TYPE_OTEX:
-		case CTR_OBJECT_TYPE_OTMISC:
-		case CTR_OBJECT_TYPE_OTARRAY:
-		case CTR_OBJECT_TYPE_OTBLOCK:
-			object = o;
-			break;
-	}
+	object = o;
 	ctr_internal_object_set_property(context, key, object, 0);
 	return object;
 }
