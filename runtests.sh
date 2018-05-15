@@ -149,7 +149,7 @@ for i in $(find tests -name 'test*.ctr'); do
 		exit 1
 	fi
 	directive=`head -n1 $fitem`
-    if [ "$directive" != "#SINGLE_LANGUAGE" ]; then
+    if [ "$directive" != "'SINGLE_LANGUAGE'." ]; then
 		for q in {1..12}
 		do
 			if [ "${result[$q]}" = "$expected" ]; then

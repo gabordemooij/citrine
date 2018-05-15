@@ -1,4 +1,4 @@
-#SINGLE_LANGUAGE
-#Test parser error
+'SINGLE_LANGUAGE'.
+
 var :=.
 

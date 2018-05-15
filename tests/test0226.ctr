@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#Can we translate messages?
+'SINGLE_LANGUAGE'.
+
 Boolean learn: 'alsWaar:'
 		means: 'ifTrue:'.
 Pen learn: 'schrijf:'
@@ -11,7 +11,7 @@ Object learn: 'nieuw' means: 'new'.
 Object learn: 'antwoord:met:' means: 'on:do:'.
 
 
-#Dutch code here!
+
 Verteller := Object nieuw.
 Verteller antwoord: 'schrijf:' met: { :wat
 	var x := 2.

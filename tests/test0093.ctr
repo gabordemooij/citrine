@@ -1,4 +1,4 @@
-#Tests local scope. (3332)
+
 var q := 2.
 c := 0.
 f := {

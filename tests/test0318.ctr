@@ -1,4 +1,4 @@
-#SINGLE_LANGUAGE
+'SINGLE_LANGUAGE'.
 
 ☞ file := File new: File messagedoesnotexist.
 ☞ file := File new: Nil.

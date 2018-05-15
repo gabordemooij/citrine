@@ -1,4 +1,4 @@
-#SINGLE_LANGUAGE
-#Can we fill an array
+'SINGLE_LANGUAGE'.
+
 a := Array new fill: 42 with: 'x'.
 Pen write: a, brk.

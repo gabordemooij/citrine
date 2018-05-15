@@ -1,4 +1,4 @@
-#Test positive and negative messages.
+
 Pen write: 'If hope is 0.1...\n'.
 hope := 0.2.
 ( hope pos ) ifTrue: { Pen write: 'Still a little hope for humanity\n'. }.

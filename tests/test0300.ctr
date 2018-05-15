@@ -1,4 +1,4 @@
-#Can we use a fluid interface to define a map?
+
 ☞ menu := Map new
 	Margherita: 11.90,
 	Hawaii: 12.99,

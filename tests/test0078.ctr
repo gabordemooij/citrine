@@ -1,4 +1,4 @@
-#Test whether we can include files.
+
 myVar := 123.
 Pen write: 'Start include test', brk.
 (File new: 'tests/assets/includetesten.ctr') include.

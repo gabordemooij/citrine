@@ -1,11 +1,11 @@
-#Can we check if a map contains a certain value?
+
 ☞ shop := (Map new
 	put: 'magazine' at: 'books',
 	put: 'computer' at: 'electronics',
 	put: 'lipstick' at: 'cosmetics'
 ).
-✎ write: (shop has: 'computer'), brk. #True
-✎ write: (shop has: 'sausage'), brk. #False
-✎ write: (shop has: 'computers'), brk. #False
-✎ write: (shop has: 'compute'), brk. #False
-✎ write: (shop has: '2computer'), brk. #False
+✎ write: (shop has: 'computer'), brk. 
+✎ write: (shop has: 'sausage'), brk. 
+✎ write: (shop has: 'computers'), brk. 
+✎ write: (shop has: 'compute'), brk. 
+✎ write: (shop has: '2computer'), brk. 

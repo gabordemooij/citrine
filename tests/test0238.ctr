@@ -1,29 +1,29 @@
-#SINGLE_LANGUAGE
-#test array serialization
+'SINGLE_LANGUAGE'.
+
 a := Array < 1 ; 2 ; 3.
 b := (a toString).
 
-Pen write: b, brk. #Array < 1 ; 2 ; 3
+Pen write: b, brk. 
 b := b eval.
 
-Pen write: b @ 2, brk. #2
+Pen write: b @ 2, brk. 
 
-Pen write: (( Array < 1 ; 2 ; 3 )), brk. #Array < 1 ; 2 ; 3
+Pen write: (( Array < 1 ; 2 ; 3 )), brk. 
 
-Pen write: ((Map new) put: 1 at: 2), brk. #(Map new) put:1at:'2'
+Pen write: ((Map new) put: 1 at: 2), brk. 
 
 x := ( (Array < 1 ; ( Array < 9 ) ; True ) ) toString.
-Pen write: x, brk. #Array < 1 ; (Array < 9) ; True
+Pen write: x, brk. 
 x := x eval.
 
-Pen write: x @ 1 @ 0, brk. #9
+Pen write: x @ 1 @ 0, brk. 
 
 y := (Map new) put: (Array < 1) at: (Array < 2).
-Pen write: y, brk. #(Map new) put:(Array < 1) at:'Array < 2' --> as string
+Pen write: y, brk. 
 
 y := y toString eval.
-#here we use Array < 2 as key, it gets transformed into string 'Array < 2'.
+
 Pen write: (y at: (Array < 2) toString ), brk.
 
-Pen write: (Array new), brk. #should only print Array new
-Pen write: (Map new), brk. #should only print (Map new)
+Pen write: (Array new), brk. 
+Pen write: (Map new), brk. 

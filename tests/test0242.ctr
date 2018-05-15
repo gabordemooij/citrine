@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#Test eval whitelist
-'Array new' eval. #okay
-'Object new' eval. #not okay
+'SINGLE_LANGUAGE'.
+
+'Array new' eval. 
+'Object new' eval. 
 

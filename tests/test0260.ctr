@@ -1,5 +1,1 @@
-#Can we obtain the pid of a child?
-✎ write: True, brk.
-✎ write: True, brk.
-✎ write: True, brk.
-✎ write: False, brk.
+✎ write: 'Test no longer in use↵'.

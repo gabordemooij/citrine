@@ -191,13 +191,12 @@ void ctr_clex_putback() {
  */
 int ctr_clex_tok() {
 	char c;
-	int i, comment_mode, presetToken;
+	int i, presetToken;
 	ctr_clex_tokvlen = 0;
 	ctr_clex_olderptr = ctr_clex_oldptr;
 	ctr_clex_oldptr = ctr_code;
 	ctr_clex_old_line_number = ctr_clex_line_number;
 	i = 0;
-	comment_mode = 0;
 
 	/* a little state machine to handle string interpolation, */
 	/* i.e. transforms ' "x" ' into: '' + ( x )  + ''. */
@@ -241,12 +240,8 @@ int ctr_clex_tok() {
 	}
 
 	c = *ctr_code;
-	while(ctr_code != ctr_eofcode && (isspace(c) || c == '#' || comment_mode)) {
-		if (c == '\n') {
-			comment_mode = 0;
-			ctr_clex_line_number++;
-		}
-		if (c == '#') comment_mode = 1;
+	while(ctr_code != ctr_eofcode && (isspace(c))) {
+		if (c == '\n') ctr_clex_line_number++;
 		ctr_code ++;
 		c = *ctr_code;
 	}
@@ -330,7 +325,6 @@ int ctr_clex_tok() {
 
 	while(
 	!isspace(c) && (
-		c != '#' &&
 		c != '(' &&
 		c != ')' &&
 		c != '{' &&
@@ -395,6 +389,8 @@ char* ctr_clex_readstr() {
 	beginbuff = strbuff;
 	while(
 		(   /* read until the first non-escaped quote */
+			ctr_code < ctr_eofcode
+			&&
 			(
 				c != '\'' ||
 				escape == 1
@@ -499,7 +495,6 @@ int ctr_clex_forward_scan(char* e, char* bytes, ctr_size* newCodePointer) {
 	int nesting = 0;
 	int blocks = 0;
 	int quote = 0;
-	int comment = 0;
 	int q;
 	int found = 0;
 	while( (e+i) < ctr_eofcode ) {
@@ -509,9 +504,7 @@ int ctr_clex_forward_scan(char* e, char* bytes, ctr_size* newCodePointer) {
 		else if (!quote && blocks && *(e+i) == '}') blocks--;
 		else if (!quote && *(e+i) == '\'' && *(e+i-1)!='\\') quote = 1;
 		else if (quote && *(e+i) == '\'' && *(e+i-1)!='\\') quote = 0;
-		else if (!quote && !comment && *(e+i) == '#') comment = 1;
-		else if (!quote && comment && *(e+i) == '\n') comment = 0;
-		else if (!nesting && !quote && !comment && !blocks) {
+		else if (!nesting && !quote && !blocks) {
 			for (q=0; q<len; q++) {
 				if (bytes[q]=='"') {
 					if (

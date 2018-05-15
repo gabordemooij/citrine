@@ -1,4 +1,4 @@
-#Basic boolean operations should not leak memory
+
 
 usedMemory1 := 0.
 usedMemory2 := 0.
@@ -27,13 +27,13 @@ PoemAboutLife :=
 	' because I ' +
 	(canDo either: 'can do what I want' or: 'cannot do what I want') +
 	' to do to make this world a better place.'.
-Boolean flip. #cannot output this because its random
+Boolean flip. 
 Pen write: PoemAboutLife, brk.
 
 Broom sweep.
 
 usedMemory1 := Broom keptAlloc.
-#Pen write: usedMemory1, brk.
+
 
 money  := False.
 desire := True.
@@ -55,14 +55,14 @@ PoemAboutLife :=
 	' because I ' +
 	(canDo either: 'can do what I want' or: 'cannot do what I want') +
 	' to do to make this world a better place.'.
-Boolean flip. #cannot output this because its random
+Boolean flip. 
 Pen write: PoemAboutLife, brk.
 
 
 
 Broom sweep.
 usedMemory2 := Broom keptAlloc.
-#Pen write: usedMemory2, brk.
+
 
 money  := False.
 desire := True.
@@ -84,14 +84,14 @@ PoemAboutLife :=
 	' because I ' +
 	(canDo either: 'can do what I want' or: 'cannot do what I want') +
 	' to do to make this world a better place.'.
-Boolean flip. #cannot output this because its random
+Boolean flip. 
 Pen write: PoemAboutLife, brk.
 
 Broom sweep.
 usedMemory3 := Broom keptAlloc.
-#Pen write: usedMemory3, brk.
 
-#memory counters need to be equal!
+
+
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {
 	Pen write: 'No memory leaks here'.
 }, ifFalse: {

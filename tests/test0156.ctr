@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#Test too many contexts open
+'SINGLE_LANGUAGE'.
+
 
 j := 1.
 

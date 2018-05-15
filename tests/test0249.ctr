@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#test whether we can append a raw byte to a string.
+'SINGLE_LANGUAGE'.
+
 str := 'abc'.
 str appendByte: 96.
 Pen write: str, brk.

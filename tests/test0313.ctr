@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#Can we use JSON?
+'SINGLE_LANGUAGE'.
+
 
 ☞ garden := '{
 	"garden": {
@@ -33,12 +33,12 @@
 
 ✎ write: ('a"bb"ccc"' escape: '"'), brk.
 ✎ write: g, brk.
-#✎ write: (Jsmn parse: '{"a":{"b":"c","d":"e"},"aa":"zz"}'), brk.
-#✎ write: (Jsmn parse: '{"a":undefined,"b":null}'), brk.
-#✎ write: (Jsmn parse: '{"a":"b","x":[1,2,3]}'), brk.
+
+
+
 ✎ write: (Json jsonify: g), brk.
 
-#✎ write: (Map new put: (Map new put: 'hello' at: 'world', put: 'doei' at: 'holland') at: 'waarden'), brk.
-#✎ write: (Jsmn jsonify: (Map new put: (Map new put: 'he"llo' at: 'greeting') at: 'world', put: (Array ← 1 ; 2 ; (Map new put: 'x' at: 9)) at: 'arr')), brk.
+
+
 
 

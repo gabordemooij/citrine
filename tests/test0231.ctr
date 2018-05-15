@@ -1,9 +1,9 @@
-#Test the slurp object
+
 Slurp hello world.
-Pen write: (Slurp obtain), brk. #print 'hello world'
-Pen write: (Slurp obtain), brk. #then an empty line
+Pen write: (Slurp obtain), brk. 
+Pen write: (Slurp obtain), brk. 
 Slurp hello world.
 x := Slurp new.
-Pen write: (x obtain), brk. #another empty line, not hello...
+Pen write: (x obtain), brk. 
 x hi there.
-Pen write: (x obtain), brk. #hi there, no space in front...
+Pen write: (x obtain), brk. 

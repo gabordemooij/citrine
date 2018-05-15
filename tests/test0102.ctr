@@ -1,9 +1,9 @@
-#Test boolean nor
+
 motive := False.
 opportunity := False.
 Pen write: (motive ! opportunity).
 Pen write: (motive not & opportunity not).
-#Test boolean equality messages
+
 Pen write: (True = True).
 Pen write: (True !=: True).
 Pen write: (True !=: False).

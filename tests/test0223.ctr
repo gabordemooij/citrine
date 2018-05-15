@@ -1,4 +1,4 @@
-#Just simple regex tests
+
 	Pen write: ( 'hello world' containsPattern: 'hello' ), brk.
 Pen write: ( 'hello world' containsPattern: 'bye' ), brk.
 Pen write: ( 'hello world' containsPattern: 'h[eai]llo' ), brk.

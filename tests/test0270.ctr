@@ -1,2 +1,2 @@
-#SINGLE_LANGUAGE
+'SINGLE_LANGUAGE'.
 q := (File list: 'nonexistant').

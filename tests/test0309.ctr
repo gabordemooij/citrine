@@ -1,4 +1,4 @@
-#Test whether correct descriptive error messages are displayed.
+
 💻 shell:
 	(Slurp
 		touch: '/tmp/blah.txt;',

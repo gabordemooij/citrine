@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#Test JSON Error Handling
+'SINGLE_LANGUAGE'.
+
 ☞ garden := '
 	"garden": {
 		chairs,

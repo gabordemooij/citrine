@@ -1,4 +1,4 @@
-#SINGLE_LANGUAGE
-#test whether can fire custom messages to objects - error message test
+'SINGLE_LANGUAGE'.
+
 str := 'write:'.
 Pen message: 'write:' arguments: 0.

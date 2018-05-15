@@ -1,4 +1,4 @@
-#test whether stdin also works with large strings
+
 
 ☞ large text := ''.
 1000 times: {

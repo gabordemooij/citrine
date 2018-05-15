@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#Trying to assign to an undefined variable should trigger error
+'SINGLE_LANGUAGE'.
+
 {
 	undef := 1.
 } run.

@@ -1,13 +1,13 @@
-#Can we request the position of an element in an array?
+
 
 ☞ colors := Array ← 'red' ; 'green' ; 'blue' ; 3 ; (Array new) ; False ; Nil.
 
-✎ write: (colors indexOf: 'green'), brk. #1
-✎ write: (colors indexOf: 'blue'), brk. #2
-✎ write: (colors indexOf: 'red'), brk. #0
-✎ write: (colors indexOf: 3), brk. #3
-✎ write: (colors indexOf: (Array new)), brk. #4
-✎ write: (colors indexOf: 'False'), brk. #5
-✎ write: (colors indexOf: Nil), brk. #6
-✎ write: (colors indexOf: 'purple'), brk. #-1
+✎ write: (colors indexOf: 'green'), brk. 
+✎ write: (colors indexOf: 'blue'), brk. 
+✎ write: (colors indexOf: 'red'), brk. 
+✎ write: (colors indexOf: 3), brk. 
+✎ write: (colors indexOf: (Array new)), brk. 
+✎ write: (colors indexOf: 'False'), brk. 
+✎ write: (colors indexOf: Nil), brk. 
+✎ write: (colors indexOf: 'purple'), brk. 
 

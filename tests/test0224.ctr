@@ -1,4 +1,4 @@
-#Test whether Map does not get GC'ed
+
 ☞ countries := List new
 	• 'Switzerland'
 	• 'Italy'

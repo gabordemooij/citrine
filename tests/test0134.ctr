@@ -1,4 +1,4 @@
-#Test GC: a simple command should not cause garbage - expected 0,0
+
 
 kept1   := Broom keptCount.
 sticky1 := Broom stickyCount.
@@ -10,7 +10,7 @@ dust2   := Broom dust.
 
 Broom sweep.
 
-#initialize
+
 
 kept1   := Broom keptCount.
 sticky1 := Broom stickyCount.
@@ -20,20 +20,20 @@ kept2   := Broom keptCount.
 sticky2 := Broom stickyCount.
 dust2   := Broom dust.
 
-#test case
-#this should not cause extra garbage.
+
+
 
 Pen write: ''.
 
-#end of test case
+
 
 Broom sweep.
 
-#now nothing should remain...
+
 
 kept2   := Broom keptCount.
 sticky2 := Broom stickyCount.
 dust2   := Broom dust.
 
-Pen write: (kept2   - kept1), brk. #should be 0, no difference
-Pen write: (sticky2 - sticky1), brk. #should be 0, no difference
+Pen write: (kept2   - kept1), brk. 
+Pen write: (sticky2 - sticky1), brk. 

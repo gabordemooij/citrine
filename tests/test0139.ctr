@@ -1,4 +1,3 @@
-#SINGLE_LANGUAGE
-#Test whether we can set memory limit and create an out-of-memory error
-Broom memoryLimit: 10. #way too low
-a := 1.
+'SINGLE_LANGUAGE'.
+Broom memoryLimit: 10.
+☞ a := 1.

@@ -1,4 +1,3 @@
-#test assignment, strings etc copied by value: HelloHelloWorld
 a := 'Hello'.
 c := a.
 Pen write: a.

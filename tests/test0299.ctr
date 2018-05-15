@@ -1,2 +1,2 @@
-#Can we copy an empty array?
+
 ✎ write: (Array new) copy count, brk.

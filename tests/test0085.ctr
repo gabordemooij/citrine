@@ -1,9 +1,9 @@
-#Functions test
-q := { ^9. } run. #yields 9
+
+q := { ^9. } run. 
 Pen write: q, brk.
-q := { :a ^ a * a. } applyTo: 6. #yields 36
+q := { :a ^ a * a. } applyTo: 6. 
 Pen write: q, brk.
-q := { :a :b ^ (a + b). } applyTo: 3 and: 4. #yields 7
+q := { :a :b ^ (a + b). } applyTo: 3 and: 4. 
 Pen write: q, brk.
-q := { :a :b :c ^ (a + b + c). } applyTo: 3 and: 4 and: 1. #yields 8
+q := { :a :b :c ^ (a + b + c). } applyTo: 3 and: 4 and: 1. 
 Pen write: q, brk.

@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#Can we remove elements from an array by index?
+'SINGLE_LANGUAGE'.
+
 ✎ write: ((Array ← 'red' ; 'green') + (Array ← 'blue')), brk.
 ✎ write: ((Array ← 'red' ; 'green' ; 'blue') - 0), brk.
 ✎ write: ((Array ← 'red' ; 'green' ; 'blue') - 1), brk.

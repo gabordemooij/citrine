@@ -1,4 +1,4 @@
-#
+
 ☞ Greeter := Object new.
 Greeter on: 'new' do: {
 	⚿ name := '?'.

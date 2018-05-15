@@ -1,4 +1,3 @@
-#Test regular numeric for-loop
 
 1 to: 6 step: 1 do: { :i
 	Pen write: 'This is step #' + i, brk.

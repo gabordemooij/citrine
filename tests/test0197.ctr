@@ -1,4 +1,4 @@
-#Like test 45 but with continous GC (mode 4) to test for GC regressions.
+
 
 Broom mode: 4.
 {

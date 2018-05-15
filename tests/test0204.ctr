@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#Test whether we canNOT access elements below tail (that have been shift off)
+'SINGLE_LANGUAGE'.
+
 a := Array < 1 ; 2 ; 3.
 Pen write: a count, brk.
 Pen write: a @ 1, brk.

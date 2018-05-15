@@ -1,6 +1,6 @@
-#Number of vars remains the same, so memory needs te remain same
 
-#Deactivate automatic GC and recycling
+
+
 Broom mode: 0.
 
 x := 0.
@@ -18,8 +18,8 @@ usedMemory5 := 0.
 Broom sweep.
 usedMemory1 := Broom keptAlloc.
 
-#Pen write: x, brk.
-#Pen write: usedMemory1, brk.
+
+
 
 x := 1.
 y := 'Hello'.
@@ -30,8 +30,8 @@ a := Array < 1 ; 2 ; 3 ; 5.
 Broom sweep.
 usedMemory2 := Broom keptAlloc.
 
-#Pen write: x, brk.
-#Pen write: usedMemory2, brk.
+
+
 
 x := 2.
 y := 'Hello'.
@@ -42,8 +42,8 @@ a := Array < 1 ; 2 ; 3 ; 4.
 Broom sweep.
 usedMemory3 := Broom keptAlloc.
 
-#Pen write: x, brk.
-#Pen write: usedMemory3, brk.
+
+
 
 x := 3.
 y := 'Hello'.
@@ -55,8 +55,8 @@ a := Array < 1 ; 2 ; 3 ; 5.
 Broom sweep.
 usedMemory4 := Broom keptAlloc.
 
-#Pen write: x, brk.
-#Pen write: usedMemory4, brk.
+
+
 
 
 x := 4.
@@ -68,8 +68,8 @@ a := Array < 1 ; 2 ; 3 ; 4.
 Broom sweep.
 usedMemory5 := Broom keptAlloc.
 
-#Pen write: x, brk.
-#Pen write: usedMemory5, brk.
+
+
 
 (usedMemory1 = usedMemory2 = usedMemory3 = usedMemory4 = usedMemory5) ifTrue: {
 	Pen write: 'Memory usage remains stable.', brk.

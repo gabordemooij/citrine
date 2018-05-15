@@ -1,4 +1,4 @@
-#Can we qualify numbers?
+
 Number learn: 'plus:' means: '+'.
 Number on: '+' do: { :x
 	☞ rate := 1.

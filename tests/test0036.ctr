@@ -10,6 +10,5 @@
 	}.
 	garbageMaker putGarbageOnScreen.
 	Pen write: a.
-	#dont remove your own code block.
 	Broom sweep.
 }.

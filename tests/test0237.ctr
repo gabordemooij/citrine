@@ -1,4 +1,4 @@
-#Test native serialization of Map and Array objects
+
 map :=
 	(Map new)
 	put: 'Hi There' at: 'two',

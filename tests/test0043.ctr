@@ -1,4 +1,3 @@
-#Developers can implement magic methods by adding respondTo-methods.
 repeater := Object new.
 repeater on: 'respondTo:' do: { :what
 	Pen write: what + ' '.

@@ -1,6 +1,3 @@
-#test explicit message chaining using ,
 Pen write: 'first', write: 'second'.
-#test chaining with unary message.
 Pen write: 3 factorial, write: 3 factorial.
-#and binary message
 Pen write: 3 + 2, write: 7 / 2.

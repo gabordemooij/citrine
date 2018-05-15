@@ -1,4 +1,3 @@
-#test assignment to my, same as 32 but with objects
 x := Object new.
 x on: 'set:' do: { :v my val := v. }.
 x on: 'get' do: { ^ my val. }.

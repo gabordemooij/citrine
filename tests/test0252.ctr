@@ -1,11 +1,11 @@
 
-#c := Clock new: 3600 * 55. #3
-#Pen write: c day, brk.
+
+
 
 clock := Clock new.
 
 
-#set a clock date and time
+
 clock year: 1981, month: 1, day: 5,
       hour: 13, minute: 15, second: 13.
 
@@ -28,7 +28,7 @@ Pen write: (
 clock2 := clock new zone: 'Europe/Amsterdam', month: 6, hour: 8.
 
 
-Pen write: (clock2 format: Nil), brk. #should not cause segfault - Nil
+Pen write: (clock2 format: Nil), brk. 
 Pen write: (clock format: 'Clock1 %H'), brk.
 Pen write: (clock2 format: 'Clock2 %H'), brk.
 
@@ -40,4 +40,4 @@ clock3 := Clock new like: (Clock new zone: 'UTC', hour: 13).
 clock3 := Clock new: clock3 time.
 Pen write: (clock3 format: 'Clock3 %H'), brk.
 
-#GTK greet.
+

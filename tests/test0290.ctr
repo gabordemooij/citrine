@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#Can we slice an a-rray?
+'SINGLE_LANGUAGE'.
+
 
 ☞ cakes := Array ←
 	'apple' ;
@@ -7,22 +7,22 @@
 	'choco' ;
 	'cheese'.
 
-#apple, cinnamon, pineapple, cheese
+
 ☞ buy := cakes replace: 1 length: 2 with: ( Array ← 'cinnamon' ; 'pineapple' ).
 ✎ write: (buy join: ','), brk.
 
-#apple, cinnamon, pineapple
+
 ☞ buy := cakes replace: 1 length: 12 with: ( Array ← 'cinnamon' ; 'pineapple' ).
 ✎ write: (buy join: ','), brk.
 
-#apple, berry
+
 ☞ buy := cakes replace: 2 length: 10 with: ( Array new ).
 ✎ write: (buy join: ','), brk.
 
-#berry, choco, cheese
+
 ☞ buy := cakes replace: '' length: '1' with: ( Array new ).
 ✎ write: (buy join: ','), brk.
 
-#berry, choco, cheese
+
 ☞ buy := cakes replace: '' length: '1' with: 'x'.
 ✎ write: (buy join: ','), brk.

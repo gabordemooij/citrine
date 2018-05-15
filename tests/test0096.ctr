@@ -1,4 +1,4 @@
-#same as 63 but with un-mirrored times call and me
+
 Product := Object new.
 Product on: 'a' do: { :price
 	Pen write: 'cost '+ price.
@@ -7,9 +7,9 @@ Apples := Product new.
 Pen write: 'Apples cost: '.
 Apples a 60.
 Pen write: ' cent a piece.'.
-#and now a funny unicode one... a very cool trick!
-#let's extend the number object with a unicode times equivalent!
+
+
 Number on: '×' do: { :b
-	me times: b. #this line is different, other way around.
+	me times: b. 
 }.
 7 × { :i Pen write: i. }.

@@ -1,5 +1,5 @@
-#Can we fork multiple childs and send them messages?
-#p := Program new.
+
+
 Program message: 'hello'.
 5 times: {
 	✎ write: 'Child says: hello↵'.

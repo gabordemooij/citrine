@@ -1,24 +1,9 @@
-#skip should not subtract number from bytes but from utf8 length
-#otherwise we'll end up with infoleak or 0 bytes.
-
-#wrong output looks like this:
-#length before skip = 4
-#bytes before skip = 6
-#length after skip = 3
-#bytes after skip = 5
-#byte: -30
-#byte: -122
-#byte: -112
-#byte: 0
-#byte: 0
-
 str := 'xxx←'.
 Pen write: 'length before skip = ' + str length, brk.
 Pen write: 'bytes before skip = ' + str bytes, brk.
 str2 := str skip: 3.
 Pen write: 'length after skip = ' + str2 length, brk.
 Pen write: 'bytes after skip = ' + str2 bytes, brk.
-#no 0 bytes.
 0 to: str2 bytes - 1 step: 1 do: { :index
 	Pen write: ('byte: ' + (str2 byteAt: index)), brk.
 }.

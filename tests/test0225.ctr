@@ -1,4 +1,4 @@
-#count from 1 to 10 and list the even and odd numbers, tests whether falsy comparisons work
+
 1 to: 10 step: 1 do: { :i
 	var type := ''.
 	( i % 2 ) ifTrue: { type := 'odd'. }.

@@ -1,13 +1,12 @@
-#Test String Object (530-1-1021212130)
-Pen write: (' a a a   ' lastIndexOf: 'a'). #5
-Pen write: (' trees ' indexOf: 'ee'). #3
+Pen write: (' a a a   ' lastIndexOf: 'a'). 
+Pen write: (' trees ' indexOf: 'ee'). 
 h := 'can you find the needle in the haystack?'.
-Pen write: (h indexOf: 'can'). #0
-Pen write: (h indexOf: ''). #-1
-Pen write: ('' indexOf: 'a'). #-1
-Pen write: ('a' indexOf: 'a'). #0
-Pen write: ('the needle is at the end' indexOf: 'end'). #21
-Pen write: ('the needle is at the end' lastIndexOf: 'end'). #21
-Pen write: ('friend, it is at the end' lastIndexOf: 'end'). #21
-Pen write: ('friend, it is at the end' indexOf: 'end'). #3
-Pen write: ('a' lastIndexOf: 'a'). #0
+Pen write: (h indexOf: 'can'). 
+Pen write: (h indexOf: ''). 
+Pen write: ('' indexOf: 'a'). 
+Pen write: ('a' indexOf: 'a'). 
+Pen write: ('the needle is at the end' indexOf: 'end'). 
+Pen write: ('the needle is at the end' lastIndexOf: 'end'). 
+Pen write: ('friend, it is at the end' lastIndexOf: 'end'). 
+Pen write: ('friend, it is at the end' indexOf: 'end'). 
+Pen write: ('a' lastIndexOf: 'a'). 

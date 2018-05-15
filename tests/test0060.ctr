@@ -1,4 +1,3 @@
-#Test shift and unshift messages to array
 a := Array new.
 a unshift: 'Hello'.
 a unshift: 'World'.

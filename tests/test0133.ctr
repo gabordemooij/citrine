@@ -1,6 +1,6 @@
-#me/my should point to block when using apply and to object otherwise
 
-#should point to object
+
+
 Deck := Array new.
 Deck on: 'print' do: {
         var len := me count - 1.

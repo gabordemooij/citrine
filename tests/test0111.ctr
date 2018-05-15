@@ -1,5 +1,4 @@
-#Test error handling thru mute should not have
-#side effects
+
 a := 0.
 {
 	Pen write: 'Block 1.\n'.
@@ -7,5 +6,5 @@ a := 0.
 	a := 1.
 } catch: {
 	Pen write: 'Catch Block.\n'.
-	Pen write: 'a = ' + a, brk. #a should be 0!
+	Pen write: 'a = ' + a, brk.
 }, run.

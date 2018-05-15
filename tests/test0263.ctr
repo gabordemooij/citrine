@@ -1,4 +1,3 @@
-#Array Shifting bug... test
 i := Object new.
 i on: 'greet:' do: { :name
 	Pen write: 'Hello ❲name❳', brk.

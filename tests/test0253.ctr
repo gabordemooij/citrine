@@ -1,4 +1,4 @@
-#Can we add hours to a clock using simple language?
+
 
 clock := Clock
 	new zone: 'Europe/Amsterdam',
@@ -9,7 +9,7 @@ clock on: 'tell' do: {
 	Pen write: me, brk.
 }.
 
-#add up to all 21!
+
 clock add: 2    hours, tell.
 clock add: 1     hour, tell.
 clock add: 19 minutes, tell.

@@ -1,4 +1,3 @@
-#Test whether assign is copy-by-value for arrays.
 cafe := Array new.
 cafe push: 'coffee'.
 cafe push: 'beer'.

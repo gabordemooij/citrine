@@ -1,4 +1,4 @@
-#SINGLE_LANGUAGE
+'SINGLE_LANGUAGE'.
 
 
 ☞ pg := Pg new: 'hostaddr = \'127.0.0.1\' port = \'\' dbname = \'testje\' user = \'gabor\' password = \'gabor\' connect_timeout = \'10\''.

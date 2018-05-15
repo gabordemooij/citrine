@@ -1,4 +1,3 @@
-#Test basic Math functions, also test result is new object (not modifying itself)
 Printer := Object new.
 Printer on: 'print:and:' do: { :x :y
 	Pen write: 'a=' + x + ', b=' + y, brk.

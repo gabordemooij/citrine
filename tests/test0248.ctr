@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#everyday use case and can we use the alias 'serialize' ?
+'SINGLE_LANGUAGE'.
+
 
 a := (Array < (
 	(Map new)

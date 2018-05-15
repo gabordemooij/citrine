@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#Array operations should not leak memory
+'SINGLE_LANGUAGE'.
+
 
 usedMemory1 := 0.
 usedMemory2 := 0.
@@ -20,7 +20,7 @@ a each: { :i :e Pen write: ( i ), brk. }.
 
 Broom sweep.
 usedMemory1 := Broom keptAlloc.
-#Pen write: usedMemory1, brk.
+
 
 a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( Array < 1 ).
@@ -35,7 +35,7 @@ a each: { :i :e Pen write: ( i ), brk. }.
 
 Broom sweep.
 usedMemory2 := Broom keptAlloc.
-#Pen write: usedMemory2, brk.
+
 
 a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( Array < 1 ).
@@ -50,9 +50,9 @@ a each: { :i :e Pen write: ( i ), brk. }.
 
 Broom sweep.
 usedMemory3 := Broom keptAlloc.
-#Pen write: usedMemory3, brk.
 
-#memory counters need to be equal!
+
+
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {
 	Pen write: 'No memory leaks here'.
 }, ifFalse: {

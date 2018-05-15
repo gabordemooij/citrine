@@ -1,4 +1,4 @@
-#Can we switch to use stderr instead of syslog?
+
 ✎ write: 'this goes to standard out', brk.
 💻 useStandardError log: 'this goes to standard error'.
 💻 useSyslog log: 'this goes to syslog'.

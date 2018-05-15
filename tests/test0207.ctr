@@ -1,3 +1,3 @@
-#test whether we can block shell access
+
 Program forbidShell.
 a := Program shell: 'ls -la'.

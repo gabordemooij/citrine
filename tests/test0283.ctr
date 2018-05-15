@@ -1,2 +1,2 @@
-#Tests whether we can use stdin (pipes) with Citrine.
+
 Pen write: (💻 shell: 'echo "Hello World" | ./ctr tests/assets/stdin_test.ctr').

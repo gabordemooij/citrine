@@ -1,9 +1,9 @@
-#Can we use a switch statement in Citrine?
 
-#create a good wine
+
+
 ☞ wine := Object new.
 
-#define a string representation for this wine
+
 wine on: 'toString' do: {
 	↲ 'merlot'.
 }.
@@ -12,12 +12,12 @@ wine on: 'naarTekst' do: {
 	↲ 'merlot'.
 }.
 
-#define how wines are to be compared
+
 wine on: '=' do: { :other wine
 	↲ ( me toString = other wine ).
 }.
 
-#now select the correct wine from the list
+
 wine
 	case: 'cabernet' do: { ✎ write: 'it\'s a Cabernet!'. },
 	case: 'syrah'    do: { ✎ write: 'it\'s a Syrah!'.    },

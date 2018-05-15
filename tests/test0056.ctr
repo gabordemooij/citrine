@@ -9,8 +9,8 @@ Pen write: z value.
 x := z.
 Pen write: x value.
 z := Nil.
-Pen write: z value. #should print [Nil]
-Pen write: x value. #x should still have a reference to the object z had
+Pen write: z value.
+Pen write: x value.
 Pen write: 'hello'.
 Pen write: 3 + 2.
 Pen write: (3 > 2).

@@ -1,4 +1,4 @@
-#Trigonometric operations should not leak memory
+
 
 usedMemory1 := 0.
 usedMemory2 := 0.
@@ -17,7 +17,7 @@ a := a tangent.
 Broom sweep.
 
 usedMemory1 := Broom keptAlloc.
-#Pen write: usedMemory1, brk.
+
 
 a := -2 absolute.
 a := a arctangent.
@@ -29,7 +29,7 @@ a := a tangent.
 
 Broom sweep.
 usedMemory2 := Broom keptAlloc.
-#Pen write: usedMemory2, brk.
+
 
 a := -2 absolute.
 a := a arctangent.
@@ -40,9 +40,9 @@ a := a tangent.
 
 Broom sweep.
 usedMemory3 := Broom keptAlloc.
-#Pen write: usedMemory3, brk.
 
-#memory counters need to be equal!
+
+
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {
 	Pen write: 'No memory leaks here'.
 }, ifFalse: {

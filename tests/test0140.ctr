@@ -1,18 +1,18 @@
-#SINGLE_LANGUAGE
-#Test stack trace
+'SINGLE_LANGUAGE'.
+
 Pen write: 'Trigger an error'.
-#NonExistingObject doSomething.
-#
-#
-#
+
+
+
+
 { Pen write: 'aaa'. 
 	{
-#	
+
 		thisBlock error: 'Hi!'.
 		} run.
-#		
-#	
+
+
 } run.
 
-#
-#
+
+

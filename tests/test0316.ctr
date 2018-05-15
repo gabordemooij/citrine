@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#test whether we can use CURL to load a site
+'SINGLE_LANGUAGE'.
+
 
 ☞ browser := Curl new.
 browser url: 'https://gaborsoftware.nl'.

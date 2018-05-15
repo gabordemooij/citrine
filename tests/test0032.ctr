@@ -1,4 +1,3 @@
-#test assignment to my... testtesttest
 a := Object new.
 a on: 'init' do: {
 	var v := 'test'.

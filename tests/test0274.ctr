@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#Can we extract a column from an array?
+'SINGLE_LANGUAGE'.
+
 a := Array <
 	(Array < 1 ; 2 ; 3) ;
 	(Array < 4 ; 5 ; 6) ;

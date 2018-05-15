@@ -1,32 +1,32 @@
 w := 'A_bottle_of_Whisky and a rare steak.'.
 Pen write: '=== Basic test, grab the bottle! ===', brk.
-Pen write: '>'+(w from:2 to: 8), brk. #bottle
-Pen write: '>'+(w from:8 to: 2), brk. #bottle
-Pen write: '>'+(w from:2 length: 6), brk. #bottle
-Pen write: '>'+(w from:8 length: -6), brk. #bottle
+Pen write: '>'+(w from:2 to: 8), brk. 
+Pen write: '>'+(w from:8 to: 2), brk. 
+Pen write: '>'+(w from:2 length: 6), brk. 
+Pen write: '>'+(w from:8 length: -6), brk. 
 Pen write: '=== Take a single char ===', brk.
-Pen write: '>'+(w from:7 to: 8), brk. #single char case
-Pen write: '>'+(w from:7 length: 1), brk. #single char case
+Pen write: '>'+(w from:7 to: 8), brk. 
+Pen write: '>'+(w from:7 length: 1), brk. 
 Pen write: '=== The 0 case, empty string ===', brk.
-Pen write: '>'+(w from:7 to: 7), brk. #empty string
-Pen write: '>'+(w from:7 length: 0), brk. #empty string
+Pen write: '>'+(w from:7 to: 7), brk. 
+Pen write: '>'+(w from:7 length: 0), brk. 
 Pen write: '=== Edge case, first character only ===', brk.
-Pen write: '>'+(w from:0 to: 1), brk. #edge case, first
-Pen write: '>'+(w from:0 length: 1), brk. #edge case first
-Pen write: '>'+(w from:1 to: 0), brk. #edge case first
-Pen write: '>'+(w from:1 length: -1), brk. #edge case first
+Pen write: '>'+(w from:0 to: 1), brk. 
+Pen write: '>'+(w from:0 length: 1), brk. 
+Pen write: '>'+(w from:1 to: 0), brk. 
+Pen write: '>'+(w from:1 length: -1), brk. 
 Pen write: '=== Edge case, last character only ===', brk.
-Pen write: '>'+(w from:35 to: 36), brk. #edge case, last
-Pen write: '>'+(w from:35 length: 1), brk. #edge case last
-Pen write: '>'+(w from:36 to: 35), brk. #edge case last
-Pen write: '>'+(w from:36 length: -1), brk. #edge case last
+Pen write: '>'+(w from:35 to: 36), brk. 
+Pen write: '>'+(w from:35 length: 1), brk. 
+Pen write: '>'+(w from:36 to: 35), brk. 
+Pen write: '>'+(w from:36 length: -1), brk. 
 Pen write: '=== Out of bounds, empty string ===', brk.
-Pen write: '>'+(w from:36 to: 37), brk. #out of bounds
-Pen write: '>'+(w from:36 to: 47), brk. #out of bounds
-Pen write: '>'+(w from:-1 to: -2), brk. #out of bounds
-Pen write: '>'+(w from:-2 to: -1), brk. #out of bounds
+Pen write: '>'+(w from:36 to: 37), brk. 
+Pen write: '>'+(w from:36 to: 47), brk. 
+Pen write: '>'+(w from:-1 to: -2), brk. 
+Pen write: '>'+(w from:-2 to: -1), brk. 
 Pen write: '=== Part out of bounds, full string ===', brk.
-Pen write: '>'+(w from:-20 to: 90), brk. #part out of bounds
-Pen write: '>'+(w from:90 to: -20), brk. #part out of bounds
-Pen write: '>'+(w from:-20 length: 90), brk. #part out of bounds
-Pen write: '>'+(w from:90 length: -120), brk. #part out of bounds
+Pen write: '>'+(w from:-20 to: 90), brk. 
+Pen write: '>'+(w from:90 to: -20), brk. 
+Pen write: '>'+(w from:-20 length: 90), brk. 
+Pen write: '>'+(w from:90 length: -120), brk. 

@@ -1,4 +1,4 @@
-#Test Slurp Object
+
 x := Slurp new.
 x + 3.
 Pen write: (x obtain), brk.

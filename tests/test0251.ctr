@@ -1,4 +1,4 @@
-#Can we use the unicode return arrow instead of the ascii one?
+
 
 Number on: 'describe' do: {
 	var text := Nil.

@@ -1,4 +1,4 @@
-#String comparison
+
 ☞ dictionary := (
 	Map new
 		put: 'b' at: 'a',

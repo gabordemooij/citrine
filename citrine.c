@@ -100,7 +100,6 @@ int main(int argc, char* argv[]) {
 	
 	if (mode == 1) {
 		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
-		program = ctr_cparse_parse(prg, ctr_mode_input_file);
 		ctr_translate_program(prg, ctr_mode_input_file);
 		exit(0);
 	}

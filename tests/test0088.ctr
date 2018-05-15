@@ -1,4 +1,4 @@
-#Test scope, common scenarios
+
 santaLaugh := 'ho'.
 laugh := ''.
 3 times: { laugh := laugh + santaLaugh. }.

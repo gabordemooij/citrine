@@ -1,4 +1,3 @@
-#GC should not destroy blocks that have a reference
 Pen write: 'hi!'.
 a := 2.
 x := 2.

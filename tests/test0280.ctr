@@ -1,5 +1,3 @@
-#byteAt/at should not read outside boundaries.
-#wrong output includes: empty string or Segmentation fault.
 Pen write: '4th byte = ' + ('xxx' byteAt: 4), brk.
 Pen write: '4th char = ' + ('xxx' @ 4), brk.
 Pen write: '4th byte = ' + ('xxx' byteAt: -1), brk.

@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#test whether we can split a string into bytes
+'SINGLE_LANGUAGE'.
+
 
 q := 'abc'.
 x := q toByteArray.

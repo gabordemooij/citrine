@@ -1,4 +1,3 @@
-#a non existing message should not trigger an error or produce any output.
 Pen nonexistantmessage.
 Pen nonexistantmessage: 'b'.
 Pen nonexistantmessage: 'b' more: 123.

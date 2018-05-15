@@ -1,3 +1,2 @@
-#Can we use String contains:?
 Pen write: ('Hello World' contains: 'World'), brk.
 Pen write: ('Hello World' contains: 'Bye'), brk.

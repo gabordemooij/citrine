@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#quotes should be escaped in strings!
+'SINGLE_LANGUAGE'.
+
 Q := (39 toByte).
 
 q := Array < ('Quotes ' + Q + ' are evil?') ; 1.

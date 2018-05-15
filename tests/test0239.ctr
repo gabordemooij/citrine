@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#Can we override more representations?
+'SINGLE_LANGUAGE'.
+
 
 a := True.
 
@@ -36,18 +36,18 @@ b on: 'toBoolean' do: {
 }.
 
 
-Pen write: a, brk.  #Yep
-Pen write: (90 + a), brk. #100
-Pen write: b, brk. #Devil
-Pen write: (True & b), brk. #False
+Pen write: a, brk.  
+Pen write: (90 + a), brk. 
+Pen write: b, brk. 
+Pen write: (True & b), brk. 
 
-a := Array < 'hello' ; 'world' ; True ; Nil ; 666. #Nil should be present as well.
+a := Array < 'hello' ; 'world' ; True ; Nil ; 666. 
 a := a + ( Array < 1 ).
 Pen write: a, brk.
 Pen write: ((Map new) put: Nil at: Nil), brk.
-Pen write: a sum, brk. #668 cause True == 1
+Pen write: a sum, brk. 
 
-#returning something else than a string in toString should not cause segfault but Exception
+
 {
 	a on: 'toString' do: { ^ Nil. }.
 	a := '' + a. 
@@ -56,7 +56,7 @@ Pen write: a sum, brk. #668 cause True == 1
 }, run.
 
 
-#returning something else than a string in toString should not cause segfault but Exception
+
 {
 	a on: 'toNumber' do: { ^ Nil. }.
 	a := 3 * a. 
@@ -64,7 +64,7 @@ Pen write: a sum, brk. #668 cause True == 1
 	Pen write: 'Error noted: ' + error, brk.
 }, run.
 
-#returning something else than a boolean in toBoolean should not cause segfault but Exception
+
 {
 	a on: 'toBoolean' do: { ^ Nil. }.
 	a := True & a. 
@@ -75,7 +75,7 @@ Pen write: a sum, brk. #668 cause True == 1
 
 
 
-#returning something else than a string in toString should not cause segfault but Exception
+
 {
 	a on: 'toString' do: { ^ False. }.
 	a := '' + a. 
@@ -84,7 +84,7 @@ Pen write: a sum, brk. #668 cause True == 1
 }, run.
 
 
-#returning something else than a string in toString should not cause segfault but Exception
+
 {
 	a on: 'toNumber' do: { ^ True. }.
 	a := 3 * a. 
@@ -92,7 +92,7 @@ Pen write: a sum, brk. #668 cause True == 1
 	Pen write: 'Error noted: ' + error, brk.
 }, run.
 
-#returning something else than a boolean in toBoolean should not cause segfault but Exception
+
 {
 	a on: 'toBoolean' do: { ^ 1. }.
 	a := True & a. 
@@ -103,7 +103,7 @@ Pen write: a sum, brk. #668 cause True == 1
 
 
 
-#returning something else than a string in toString should not cause segfault but Exception
+
 {
 	a on: 'toString' do: { ^ 1. }.
 	a := '' + a. 
@@ -112,7 +112,7 @@ Pen write: a sum, brk. #668 cause True == 1
 }, run.
 
 
-#returning something else than a string in toString should not cause segfault but Exception
+
 {
 	a on: 'toNumber' do: { ^ ''. }.
 	a := 3 * a. 
@@ -120,7 +120,7 @@ Pen write: a sum, brk. #668 cause True == 1
 	Pen write: 'Error noted: ' + error, brk.
 }, run.
 
-#returning something else than a boolean in toBoolean should not cause segfault but Exception
+
 {
 	a on: 'toBoolean' do: { ^ ''. }.
 	a := True & a. 
@@ -132,7 +132,7 @@ Pen write: a sum, brk. #668 cause True == 1
 
 
 
-#returning something else than a string in toString should not cause segfault but Exception
+
 {
 	a on: 'toString' do: { ^ (Map new). }.
 	a := '' + a. 
@@ -141,7 +141,7 @@ Pen write: a sum, brk. #668 cause True == 1
 }, run.
 
 
-#returning something else than a string in toString should not cause segfault but Exception
+
 {
 	a on: 'toNumber' do: { ^ (Object new). }.
 	a := 3 * a. 
@@ -149,7 +149,7 @@ Pen write: a sum, brk. #668 cause True == 1
 	Pen write: 'Error noted: ' + error, brk.
 }, run.
 
-#returning something else than a boolean in toBoolean should not cause segfault but Exception
+
 {
 	a on: 'toBoolean' do: { ^ (Object new). }.
 	a := True & a. 

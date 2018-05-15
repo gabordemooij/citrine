@@ -1,4 +1,4 @@
-#can we compare with Nil?
+
 Pen write: ( 'hello' = Nil ), brk.
 Pen write: ( 'hello' !=: Nil ), brk.
 Pen write: ( 2 > Nil ), brk.

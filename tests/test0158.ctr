@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#File operations should not leak memory
+'SINGLE_LANGUAGE'.
+
 
 usedMemory1 := 0.
 usedMemory2 := 0.

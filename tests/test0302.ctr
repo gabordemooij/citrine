@@ -1,4 +1,4 @@
-#Simple case:do: statement
+
 location := 'Wetering Brug'.
 x := 0.
 location

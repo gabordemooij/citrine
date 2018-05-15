@@ -1,4 +1,3 @@
-#Test Simplified OOP - basic override
 Animal := Object new.
 Animal on: 'makeSound' do: {
 	Pen write: '?'.

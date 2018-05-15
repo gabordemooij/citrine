@@ -1,6 +1,6 @@
-#SINGLE_LANGUAGE
-#Test too many contexts open icw GC mode 4
-#to demonstrate why there should be no early return in open_context() as proposed in GH80/84
+'SINGLE_LANGUAGE'.
+
+
 
 Broom mode: 4.
 j := 1.

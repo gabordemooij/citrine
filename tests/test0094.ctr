@@ -1,4 +1,4 @@
-#Test recursion
+
 f := { :x
 	var result := 0.
 	(x = 1) ifTrue: {
@@ -8,4 +8,4 @@ f := { :x
 	}.
 	^ result.
 }.
-Pen write: (f applyTo: 4). #24.
+Pen write: (f applyTo: 4). 

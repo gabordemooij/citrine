@@ -1,4 +1,4 @@
-#Test basic GET/POST support
+
 Broom mode: 0.
 Program env: 'QUERY_STRING' val: 'search=table&restaurant=pizzaria&menu=spaghetti&menu=macaroni&course[main]=canneloni&course[dessert]=tiramisu'.
 Pen write: (Program env: 'QUERY_STRING'), brk.

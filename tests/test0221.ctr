@@ -3,12 +3,12 @@
 	Pen write: (arr join: '|'), brk.
 }.
 
-#test with ignore flag
+
 '- -rood - -groen -blauw -' findPattern: '(-[^[:space:]]+)' do: { :arr
 	Pen write: (arr join: '|'), brk.
 } options: '!'.
 
-#test with newline flag
+
 '-
     -rood
     -groen
@@ -19,7 +19,7 @@
 } options: 'n'.
 
 
-#should not work without newline flag
+
 '-
     -rood
     -groen
@@ -30,7 +30,7 @@
 } options: ''.
 
 
-#test case insens. flag
+
 '-
     -rooD
     -groeN

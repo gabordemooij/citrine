@@ -1,5 +1,3 @@
-#test Array last and secondLast.
-
 ☞ Italian places := Array ← 'Venice' ; 'Rome' ; 'Pompeii' ; 'Naples'.
 
 ✎ write: (Italian places first), brk.

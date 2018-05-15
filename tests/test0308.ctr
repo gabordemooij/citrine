@@ -1,5 +1,5 @@
-#SINGLE_LANGUAGE
-#Test the toStrings
+'SINGLE_LANGUAGE'.
+
 
 💻 on: 'pid' do: { ↲ '[Program]'. }.
 ✎ write: 'Sending toString to Program yields a PID string:', brk.
@@ -7,7 +7,7 @@
 ✎ write: 'Sending toNumber to Program yields a PID number:', brk.
 ✎ write: 💻 toNumber, brk.
 
-#rig the dice ;)
+
 ⚄ on: 'rawRandomNumber' do: { ↲ 666. }.
 
 ✎ write: 'Sending toString to Dice yields a random number string:', brk.
@@ -15,7 +15,7 @@
 ✎ write: 'Sending toNumber to Dice yields a random number:', brk.
 ✎ write: ⚄ toNumber, brk.
 
-#build a time machine! ;)
+
 ⏰ on: 'format:' do: { ↲ '1666-01-13 06:06:06'. }.
 ⏰ on: 'time' do: { ↲ '999'. }.
 

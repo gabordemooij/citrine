@@ -1,8 +1,8 @@
-#Test file messages
-File close. #should do nothing
-File readBytes: 100. #does nothing
-File writeBytes: 'x'. #does nothing
-File open. #does nothing
+
+File close. 
+File readBytes: 100. 
+File writeBytes: 'x'. 
+File open. 
 f := File new: '/tmp/from.txt'.
 f write: 'hello'.
 Pen write: 'file contains: ' + (f read) + '\n'.
