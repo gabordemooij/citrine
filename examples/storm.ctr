@@ -1,13 +1,3 @@
-
-#Citrine Storm Server Demo
-
-#To kill this server
-#kill $(cat /var/run/storm.pid) 
-
-#To find CTR processes
-#ps -aux | grep "ctr" 
-
-#Override the Pen object so it can deal with output buffering
 Pen := Pen new.
 Pen on: 'resetBuffer' do: { my buffer := ''.  my header := ''. }.
 Pen on: 'write:' do: { :bytes my buffer append: bytes. }.

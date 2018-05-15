@@ -2,22 +2,17 @@
 
 0 to: 12 step: 1 do: {
 
-	#take the last element of f
 	☞ a := f last.
 	
-	#take the element before that
 	☞ b := f secondLast.
 	
-	#write them down
 	✎ write:
 		'the sum of ❲ a ❳ and ❲ b ❳'.
 	
-	#calculate the sum
 	☞ sum := (a + b).
 	
 	✎ write: 
 		' is ❲ sum ❳ ↵'.
 		
-	# add the sum to the array
 	f add: sum.
 }.

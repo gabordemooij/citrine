@@ -1,5 +1,3 @@
-# Shuffle an Array
-
 Deck := Array new.
 
 Deck on: 'shuffle' do: {

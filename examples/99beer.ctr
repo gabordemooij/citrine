@@ -1,5 +1,3 @@
-#99 Bottles of beer song
-
 Number on: 'bottles' do: {
 	var phrase := 'no more bottles of beer'.
 	var n := me.

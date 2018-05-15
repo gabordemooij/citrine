@@ -1,5 +1,3 @@
-# Smalltalkish Boolean
-
 Boolean on: 'ifTrue:ifFalse:' do: { :trueBlock :falseBlock
 	me ifTrue: trueBlock.
 	me ifFalse: falseBlock.
