@@ -523,10 +523,6 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 	int i = ctr_context_id;
 	ctr_object* context;
 	ctr_object* foundObject = NULL;
-	if (ctr_contexts[ctr_context_id] == CtrStdWorld) {
-		ctr_internal_object_set_property(ctr_contexts[ctr_context_id], key, object, 0);
-		return;
-	}
 	while((i>-1 && foundObject == NULL)) {
 		context = ctr_contexts[i];
 		foundObject = ctr_internal_object_find_property(context, key, 0);

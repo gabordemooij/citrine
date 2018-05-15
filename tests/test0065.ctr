@@ -1,8 +1,8 @@
-Printer := Object new.
+☞ Printer := Object new.
 Printer on: 'print:and:' do: { :x :y
 	Pen write: 'a=' + x + ', b=' + y, brk.
 }.
-a := 4.5. b := a floor.
+☞ a := 4.5. ☞ b := a floor.
 Printer print: a and: b.
 a := 4. b := a factorial.
 Printer print: a and: b.

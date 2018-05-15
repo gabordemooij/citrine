@@ -3,9 +3,9 @@
 
 
 Broom mode: 4.
-j := 1.
+☞ j := 1.
 
-func := {
+☞ func := {
 
 	Pen write: 'Nested call #' + j, brk.
 	j +=: 1.

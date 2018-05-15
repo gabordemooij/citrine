@@ -1,15 +1,15 @@
-makeAdder := { :x
+☞ makeAdder := { :x
 	var f := { :y ^ (my x + y). } set: 'x' value: x. 
 	^ f.
 }.
-mapper := { :array :func
+☞ mapper := { :array :func
 	var mapping := { :i my q put: (my f applyTo: (my q @ i)) at: i. } 
 	set: 'q' value: array,
 	set: 'f' value: func.
 	(array count) times: { :i mapping applyTo: i. }.
 }.
 
-a := Array < 1; 2; 3.
+☞ a := Array < 1; 2; 3.
 mapper applyTo: a and: (makeAdder applyTo: 100).
 Pen write: (a at: 0), brk.
 Pen write: (a at: 1), brk.

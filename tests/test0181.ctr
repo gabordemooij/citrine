@@ -1,13 +1,13 @@
 
 
-usedMemory1 := 0.
-usedMemory2 := 0.
-usedMemory3 := 0.
-usedMemory4 := 0.
+☞ usedMemory1 := 0.
+☞ usedMemory2 := 0.
+☞ usedMemory3 := 0.
+☞ usedMemory4 := 0.
 
 Broom mode: 0.
 
-txt := 'World Salad'.
+☞ txt := 'World Salad'.
 Pen write: 'this text contains: ' + ( ( txt split: ' ' ) count ) + ' words.', brk.
 txt := txt from: 6 to: 10.
 Pen write: txt, brk.

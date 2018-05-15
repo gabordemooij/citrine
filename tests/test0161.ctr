@@ -1,19 +1,19 @@
 
 
-usedMemory1 := 0.
-usedMemory2 := 0.
-usedMemory3 := 0.
-usedMemory4 := 0.
+☞ usedMemory1 := 0.
+☞ usedMemory2 := 0.
+☞ usedMemory3 := 0.
+☞ usedMemory4 := 0.
 
 Broom mode: 0.
 
-f := File new: '/tmp/test.txt'.
+☞ f := File new: '/tmp/test.txt'.
 f write: 'Lorem Ipsum'.
 f close.
   
 
 f := File new: '/tmp/test.txt'.
-text := f read.
+☞ text := f read.
 f close.
 
 

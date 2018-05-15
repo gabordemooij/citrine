@@ -1,10 +1,10 @@
 
-motive := False.
-opportunity := False.
-Pen write: (motive ! opportunity).
-Pen write: (motive not & opportunity not).
+☞ motive := False.
+☞ opportunity := False.
+✎ write: (motive ! opportunity).
+✎ write: (motive not & opportunity not).
 
-Pen write: (True = True).
-Pen write: (True !=: True).
-Pen write: (True !=: False).
-Pen write: (True = False).
+✎ write: (True = True).
+✎ write: (True !=: True).
+✎ write: (True !=: False).
+✎ write: (True = False).

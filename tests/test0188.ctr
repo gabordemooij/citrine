@@ -1,9 +1,9 @@
 
 
-usedMemory1 := 0.
-usedMemory2 := 0.
-usedMemory3 := 0.
-usedMemory4 := 0.
+☞ usedMemory1 := 0.
+☞ usedMemory2 := 0.
+☞ usedMemory3 := 0.
+☞ usedMemory4 := 0.
 
 Broom mode: 0.
 
@@ -14,7 +14,7 @@ Pen brk.
 ( 1 > 2 ) ifFalse: { Pen write: 'BLOCK 1', brk. }.
 ( 2 > 1 ) ifTrue:  { Pen write: 'BLOCK 2', brk. }.
 
-i := 0.
+☞ i := 0.
 { ^( i < 3). } whileTrue: { Pen write: i. i +=: 1. }.
 Pen brk.
 

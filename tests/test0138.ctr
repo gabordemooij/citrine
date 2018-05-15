@@ -2,22 +2,22 @@
 
 Broom mode: 1.
 
-x := 0.
-y := 'Hello'.
-q := {}.
-p := True.
-a := Array < 1 ; 2 ; 3 ; 4.
-c := Object new.
+☞ x := 0.
+☞ y := 'Hello'.
+☞ q := {}.
+☞ p := True.
+☞ a := Array < 1 ; 2 ; 3 ; 4.
+☞ c := Object new.
 c on: 'greet:' do: { Pen write: 'greet!'. }.
 
-usedMemory1 := 0.
-usedMemory2 := 0.
-usedMemory3 := 0.
-usedMemory4 := 0.
-usedMemory5 := 0.
+☞ usedMemory1 := 0.
+☞ usedMemory2 := 0.
+☞ usedMemory3 := 0.
+☞ usedMemory4 := 0.
+☞ usedMemory5 := 0.
 
 Broom sweep.
-usedMemory1 := Broom keptAlloc.
+☞ usedMemory1 := Broom keptAlloc.
 
 
 
@@ -32,7 +32,7 @@ c on: 'greet:' do: { Pen write: 'greet!'. }.
 
 
 Broom sweep.
-usedMemory2 := Broom keptAlloc.
+☞ usedMemory2 := Broom keptAlloc.
 
 
 
@@ -46,7 +46,7 @@ c := Object new.
 c on: 'greet:' do: { Pen write: 'greet!'. }.
 
 Broom sweep.
-usedMemory3 := Broom keptAlloc.
+☞ usedMemory3 := Broom keptAlloc.
 
 
 
@@ -63,7 +63,7 @@ c on: 'greet:' do: { Pen write: 'a different greet!', brk. }.
 
 
 Broom sweep.
-usedMemory4 := Broom keptAlloc.
+☞ usedMemory4 := Broom keptAlloc.
 
 
 
@@ -79,7 +79,7 @@ c on: 'greet:' do: { Pen write: 'greet!'. }.
 
 
 Broom sweep.
-usedMemory5 := Broom keptAlloc.
+☞ usedMemory5 := Broom keptAlloc.
 
 
 

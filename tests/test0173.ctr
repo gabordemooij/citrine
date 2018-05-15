@@ -1,14 +1,14 @@
 'SINGLE_LANGUAGE'.
 
 
-usedMemory1 := 0.
-usedMemory2 := 0.
-usedMemory3 := 0.
-usedMemory4 := 0.
+☞ usedMemory1 := 0.
+☞ usedMemory2 := 0.
+☞ usedMemory3 := 0.
+☞ usedMemory4 := 0.
 
 Broom mode: 0.
 
-a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
+☞ a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( Array < 1 ).
 Pen write: ( 'sum: ' + ( a sum ) ), brk.
 Pen write: ( 'min: ' + ( a min ) ), brk.

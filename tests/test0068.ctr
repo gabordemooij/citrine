@@ -1,4 +1,4 @@
-w := 'A_bottle_of_Whisky and a rare steak.'.
+☞ w := 'A_bottle_of_Whisky and a rare steak.'.
 Pen write: '=== Basic test, grab the bottle! ===', brk.
 Pen write: '>'+(w from:2 to: 8), brk. 
 Pen write: '>'+(w from:8 to: 2), brk. 

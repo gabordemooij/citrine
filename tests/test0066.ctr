@@ -3,7 +3,7 @@ Pen write: ('hello' at: 2).
 Pen write: ('🎄🎄🎄' length). 
 Pen write: ('' bytes) + ('' length). 
 Pen write: ('papyrus' at: ( ('🎃halloween' indexOf: 'hallo') + ('no' indexOf: 'y') ) ). 
-a := ('--a..nom..t..nom..r..nom..' replace: '..nom..' with: '=x=XX=x=').
+☞ a := ('--a..nom..t..nom..r..nom..' replace: '..nom..' with: '=x=XX=x=').
 a := a replace: '.' with: '++'. 
 a := a replace: '' with: '++'. 
 Pen write: ('' replace: 'x' with: 'y'). 

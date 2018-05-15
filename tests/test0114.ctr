@@ -1,4 +1,4 @@
-welcome := Array < 'Hello' ; 'World' ; 'Welcome' ; 'To' ; 'Citrine'.
+☞ welcome := Array < 'Hello' ; 'World' ; 'Welcome' ; 'To' ; 'Citrine'.
 welcome each: { :key :value
 	Pen write: key + ':'+ value, brk.
 }.

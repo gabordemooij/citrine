@@ -1,4 +1,4 @@
-echo := Object new.
+☞ echo := Object new.
 echo on: 'respondTo:' do: {
 	:sound
 	2 times: { Pen write: sound. }.

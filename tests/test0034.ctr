@@ -1,11 +1,11 @@
-a := Object new.
-x := 0.
+☞ a := Object new.
+☞ x := 0.
 a on: 'test1' do: {
 	x := 123.
 }.
 a test1.
 Pen write: x.
-b := Object new.
+☞ b := Object new.
 b on: 'test2' do: {
 	Pen write: x.
 }.

@@ -1,4 +1,4 @@
-?> := Pen new.
+☞ ?> := Pen new.
 ?> on: 'respondTo:' do: { :content
 	✎ write: content.
 }.

@@ -1,7 +1,7 @@
 
 Pen write: 'Let\'s make a nice cup of coffee!', brk.
 
-perky := Percolator new.
+☞ perky := Percolator new.
 Pen write: perky brew, brk.
 
 Pen write: 'Ohno! Add some coffee (3) and water (2)!', brk.

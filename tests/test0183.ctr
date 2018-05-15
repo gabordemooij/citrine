@@ -1,14 +1,14 @@
 
 
-usedMemory1 := 0.
-usedMemory2 := 0.
-usedMemory3 := 0.
-usedMemory4 := 0.
+☞ usedMemory1 := 0.
+☞ usedMemory2 := 0.
+☞ usedMemory3 := 0.
+☞ usedMemory4 := 0.
 
 Broom mode: 0.
 
-o  := Object new.
-o2 := Object new.
+☞ o  := Object new.
+☞ o2 := Object new.
 Pen write: o isNil, brk.
 Pen write: o type, brk.
 Pen write: ( o equals: o ), brk.

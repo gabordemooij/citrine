@@ -1,6 +1,6 @@
 Pen write: (' a a a   ' lastIndexOf: 'a'). 
 Pen write: (' trees ' indexOf: 'ee'). 
-h := 'can you find the needle in the haystack?'.
+☞ h := 'can you find the needle in the haystack?'.
 Pen write: (h indexOf: 'can'). 
 Pen write: (h indexOf: ''). 
 Pen write: ('' indexOf: 'a'). 

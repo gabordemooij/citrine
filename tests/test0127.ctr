@@ -12,15 +12,15 @@ File new: '/tmp/seek_test.txt', exists ifFalse: {
 File seek: 9.
 
 
-f := File new: '/tmp/seek_test.txt'.
+☞ f := File new: '/tmp/seek_test.txt'.
 f write: 'hello world'.
 Pen write: f read, brk.
 
 f open. 
-q := f readBytes: 1. 
+☞ q := f readBytes: 1. 
 
 
-x := f open: 'r', seek: 3, readBytes: 2.
+☞ x := f open: 'r', seek: 3, readBytes: 2.
 Pen write: x, brk.
 
 

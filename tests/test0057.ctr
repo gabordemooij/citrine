@@ -1,6 +1,6 @@
-cafe := Array new.
+☞ cafe := Array new.
 cafe push: 'coffee'.
 cafe push: 'beer'.
 Pen write: (cafe at: 0), write: (cafe at: 1).
-pub := cafe.
+☞ pub := cafe.
 Pen write: (pub at: 0), write: (pub at: 1).

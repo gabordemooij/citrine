@@ -1,4 +1,4 @@
-z := Object new.
+☞ z := Object new.
 z on: 'value:' do: { :v
 	my value := v.
 	^ me.
@@ -6,7 +6,7 @@ z on: 'value:' do: { :v
 z on: 'value' do: { ^ my value. }.
 (z setValue: 1) value: 2.
 Pen write: z value.
-x := z.
+☞ x := z.
 Pen write: x value.
 z := Nil.
 Pen write: z value.

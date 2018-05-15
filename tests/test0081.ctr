@@ -1,6 +1,6 @@
-map1 := Map new.
-key1 := Array new.
-key2 := Array new.
+☞ map1 := Map new.
+☞ key1 := Array new.
+☞ key2 := Array new.
 
 map1
 	put: 'hello' at: key1,
@@ -11,12 +11,12 @@ Pen
 	write: 'Map #1 contains: ' + (map1 at: key1),
 	write: ' and ' + (map1 at: key2), brk.
 
-KeyeableArray := Array new.
+☞ KeyeableArray := Array new.
 KeyeableArray on: 'toString' do: {
 	^ (me count) toString.
 }.
 
-map2 := Map new.
+☞ map2 := Map new.
 key1 := KeyeableArray new.
 key2 := KeyeableArray new.
 

@@ -1,7 +1,7 @@
 
 Broom mode: 4.
 
-Animal := Object new.
+☞ Animal := Object new.
 Animal on: 'make' do: {
 	var animal := Object new.
 	animal on: 'makeSound' do: {
@@ -9,7 +9,7 @@ Animal on: 'make' do: {
 	}.
 	^animal.
 }.
-Cat := Object new.
+☞ Cat := Object new.
 Cat on: 'make' do: {
 	var cat := Animal make.
 	cat on: 'init' do: {
@@ -18,5 +18,5 @@ Cat on: 'make' do: {
 	cat init.
 	^cat.
 }.
-tom := Cat make.
+☞ tom := Cat make.
 tom makeSound.

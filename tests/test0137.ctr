@@ -3,17 +3,16 @@
 
 Broom mode: 0.
 
-x := 0.
-y := 'Hello'.
-q := {}.
-p := True.
-a := Array < 1 ; 2 ; 3 ; 4.
+☞ x := 0.
+☞ y := 'Hello'.
+☞ q := {}.
+☞ p := True.
+☞ a := Array < 1 ; 2 ; 3 ; 4.
 
-usedMemory1 := 0.
-usedMemory2 := 0.
-usedMemory3 := 0.
-usedMemory4 := 0.
-usedMemory5 := 0.
+☞ usedMemory1 := 0.
+☞ usedMemory2 := 0.
+☞ usedMemory3 := 0.
+☞ usedMemory4 := 0.
 
 Broom sweep.
 usedMemory1 := Broom keptAlloc.
@@ -66,7 +65,7 @@ p := True.
 a := Array < 1 ; 2 ; 3 ; 4.
 
 Broom sweep.
-usedMemory5 := Broom keptAlloc.
+☞ usedMemory5 := Broom keptAlloc.
 
 
 

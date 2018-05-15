@@ -1,4 +1,4 @@
 
-x := 'Append this'.
-y := 'to a String'.
+☞ x := 'Append this'.
+☞ y := 'to a String'.
 Pen write: ('' append: x, append: ' ', append: y).

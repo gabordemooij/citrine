@@ -1,4 +1,4 @@
-items := Map new.
+☞ items := Map new.
 items put: 'black' at: 'coffee', put: 'earl grey' at: 'tea'.
 Pen write: (items at: 'coffee'), write: (items at: 'tea').
 Pen write: 'there are' + items count + ' items in the array.'.

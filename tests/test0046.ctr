@@ -1,4 +1,4 @@
-cat := Object new.
+☞ cat := Object new.
 cat on: 'work' do: {
 	thisBlock error: 'Cats have personel for that!'.
 	Pen write: 'dont print this!'.

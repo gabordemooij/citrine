@@ -1,5 +1,5 @@
-a := 3.
-b := a copy.
+☞ a := 3.
+☞ b := a copy.
 a -=: 1.
 Pen write: ' a = ' + a.
 Pen write: ' b = ' + b.
@@ -7,13 +7,13 @@ a := 3.
 b := a + 4.
 Pen write: ' a = ' + a.
 Pen write: ' b = ' + b.
-x := 3.
-y := x copy.
+☞ x := 3.
+☞ y := x copy.
 x +=: 10.
 y -=: 1.
 Pen write: ' x = ' + x.
 Pen write: ' y = ' + y.
-q := Object new.
+☞ q := Object new.
 q on: 'setProperty:' do: { :x
 	my prop := x.
 }.
@@ -21,6 +21,6 @@ q on: 'getProperty' do: {
 	^ my prop.
 }.
 q setProperty: 9.
-p := q.
+☞ p := q.
 q setProperty: 6.
 Pen write: ' p = ' + (p getProperty).

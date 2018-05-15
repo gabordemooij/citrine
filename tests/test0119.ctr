@@ -2,10 +2,10 @@
 Broom mode: 0.
 Program env: 'QUERY_STRING' val: 'search=table&restaurant=pizzaria&menu=spaghetti&menu=macaroni&course[main]=canneloni&course[dessert]=tiramisu'.
 Pen write: (Program env: 'QUERY_STRING'), brk.
-s := Request get: 'search'.
+var s := Request get: 'search'.
 Pen write: 'I was looking for a free ' + s.
 Pen write: ' in a ' + (Request get: 'restaurant') + ', ', brk.
 Pen write: 'but the waiter told me all tables have been corrupted by ', brk.
-m := Request getArray: 'menu'.
+var m := Request getArray: 'menu'.
 Pen write: (m join: ', ') + ' and '+(Request get: 'course[main]') + ' code.', brk.
 

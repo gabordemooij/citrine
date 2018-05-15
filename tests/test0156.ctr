@@ -1,9 +1,9 @@
 'SINGLE_LANGUAGE'.
 
 
-j := 1.
+☞ j := 1.
 
-func := {
+☞ func := {
 
 	Pen write: 'Nested call #' + j, brk.
 	j +=: 1.

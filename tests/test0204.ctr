@@ -1,6 +1,6 @@
 'SINGLE_LANGUAGE'.
 
-a := Array < 1 ; 2 ; 3.
+☞ a := Array < 1 ; 2 ; 3.
 Pen write: a count, brk.
 Pen write: a @ 1, brk.
 a shift.

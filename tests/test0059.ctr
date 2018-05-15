@@ -1,4 +1,4 @@
-z := Array new.
+☞ z := Array new.
 {
 	var x := 'hello'.
 	z push: x.

@@ -1,4 +1,4 @@
-o := Object new.
+☞ o := Object new.
 o on: 'hello' do: {}.
 { o on: 2 do: 3.} catch: { :e Pen write: e, brk. }, run.
 { o on: 'test' do: 3.} catch: { :e Pen write: e, brk. }, run.

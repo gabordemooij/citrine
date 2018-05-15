@@ -1,13 +1,13 @@
 
 
-usedMemory1 := 0.
-usedMemory2 := 0.
-usedMemory3 := 0.
-usedMemory4 := 0.
+☞ usedMemory1 := 0.
+☞ usedMemory2 := 0.
+☞ usedMemory3 := 0.
+☞ usedMemory4 := 0.
 
 Broom mode: 0.
 
-f := File new: '/tmp/citrine_test_file.txt'.
+☞ f := File new: '/tmp/citrine_test_file.txt'.
 f exists: { f delete. }.
 f open: 'w'.
 f writeBytes: 'hello'.

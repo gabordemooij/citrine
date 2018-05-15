@@ -1,14 +1,14 @@
 
 
-usedMemory1 := 0.
-usedMemory2 := 0.
-usedMemory3 := 0.
-usedMemory4 := 0.
+☞ usedMemory1 := 0.
+☞ usedMemory2 := 0.
+☞ usedMemory3 := 0.
+☞ usedMemory4 := 0.
 
 Broom mode: 0.
 
-a := Array new.
-b := Array < 1 ; 2.
+☞ a := Array new.
+☞ b := Array < 1 ; 2.
 
 Broom sweep.
 usedMemory1 := Broom keptAlloc.

@@ -1,5 +1,5 @@
-x := Map new.
+☞ x := Map new.
 x put: 'hello' at: 'world'.
-d := x at: 'world'.
+☞ d := x at: 'world'.
 Pen write: d.
 

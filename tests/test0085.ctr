@@ -1,5 +1,5 @@
 
-q := { ^9. } run. 
+☞ q := { ^9. } run. 
 Pen write: q, brk.
 q := { :a ^ a * a. } applyTo: 6. 
 Pen write: q, brk.

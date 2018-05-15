@@ -1,5 +1,5 @@
 
-a := 0.
+☞ a := 0.
 {
 	Pen write: 'Block 1.\n'.
 	thisBlock error: 'Err'.

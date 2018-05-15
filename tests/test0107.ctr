@@ -4,8 +4,8 @@ Pen write: 'Break for-loop, 0-4.', brk.
 	(i = 4) break.
 }.
 
-x := 0.
-xIsLessThan10 := { ^( x < 10 ). }.
+☞ x := 0.
+☞ xIsLessThan10 := { ^( x < 10 ). }.
 
 Pen write: 'Break while-true loop, 0-4.', brk.
 xIsLessThan10 whileTrue: {
@@ -40,7 +40,7 @@ Pen write: 'Test Array each-loop: 0,1', brk.
 }.
 
 Pen write: 'Test Map each-loop: c only', brk.
-m := Map new.
+☞ m := Map new.
 m put: 'first' at: 'a', put: 'second' at: 'b', put: 'third' at: 'c'.
 m each: { :k :v
 	Pen write: 'iteration' + v + k, brk.

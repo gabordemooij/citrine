@@ -1,6 +1,6 @@
 'SINGLE_LANGUAGE'.
 
-str := 'write:'.
+☞ str := 'write:'.
 Pen message: 'write:' arguments: (Array < 'Hello World'), brk. 
 
 
@@ -9,7 +9,7 @@ Pen write: (3 message: str arguments: (Array < 2 ; 8)), brk.
 Pen write: (3 message: str arguments: (Array < 1 ; 2)), brk.
 
 
-CoffeeMachine := Object new.
+☞ CoffeeMachine := Object new.
 CoffeeMachine on: 'makeCoffeeWithSugar:milk:' do: { :sugar :milk
 	^ ( 'Here ya go... coffee with ' + 
 			sugar +
@@ -19,6 +19,6 @@ CoffeeMachine on: 'makeCoffeeWithSugar:milk:' do: { :sugar :milk
 	).
 }.
 
-var order := 'makeCoffeeWithSugar:milk:'.
-var coffeeConfiguration := Array < 4 ; 2.
+☞ order := 'makeCoffeeWithSugar:milk:'.
+☞ coffeeConfiguration := Array < 4 ; 2.
 Pen write: ( CoffeeMachine message: order arguments: coffeeConfiguration ) , brk.

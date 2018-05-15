@@ -1,9 +1,9 @@
-a := 'hello'.
-b := 'hello'.
-z := a.
-c := Nil.
-q := Object new.
-p := q.
+☞ a := 'hello'.
+☞ b := 'hello'.
+☞ z := a.
+☞ c := Nil.
+☞ q := Object new.
+☞ p := q.
 (a equals: a) ifTrue: { Pen write: 'Y1'. }.
 (a equals: b) ifTrue: { Pen write: 'Y2'. }.
 (a equals: c) ifTrue: { Pen write: 'Y3'. }.

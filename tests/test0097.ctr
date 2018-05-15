@@ -1,5 +1,5 @@
 
-HtmlBrush := Object new.
+☞ HtmlBrush := Object new.
 
 HtmlBrush on: 'respondTo:' do: { :tag
 	✎ write: '<❲tag❳>↵'.
@@ -17,7 +17,7 @@ HtmlBrush on: 'attr:value:' do: { :attr :value
 	↲ '❲attr❳="❲value❳"'.
 }.
 
-h := HtmlBrush new.
+☞ h := HtmlBrush new.
 
 
 h html

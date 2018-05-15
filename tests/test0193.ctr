@@ -1,5 +1,5 @@
 'SINGLE_LANGUAGE'.
-a := '
+☞ a := '
  line number 4... '.
 Pen write: 'testje.ctr' + grep: 'Shell'.
 

@@ -1,13 +1,13 @@
 
 
-usedMemory1 := 0.
-usedMemory2 := 0.
-usedMemory3 := 0.
-usedMemory4 := 0.
+☞ usedMemory1 := 0.
+☞ usedMemory2 := 0.
+☞ usedMemory3 := 0.
+☞ usedMemory4 := 0.
 
 Broom mode: 0.
 
-a := -2 absolute.
+☞ a := -2 absolute.
 a := a arctangent.
 a := a cosine.
 a := a logarithm.

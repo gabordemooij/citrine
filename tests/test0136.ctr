@@ -1,12 +1,12 @@
 
 
-kept1   := Broom keptCount.
-sticky1 := Broom stickyCount.
-dust1   := Broom dust.
+☞ kept1   := Broom keptCount.
+☞ sticky1 := Broom stickyCount.
+☞ dust1   := Broom dust.
 
-kept2   := Broom keptCount.
-sticky2 := Broom stickyCount.
-dust2   := Broom dust.
+☞ kept2   := Broom keptCount.
+☞ sticky2 := Broom stickyCount.
+☞ dust2   := Broom dust.
 
 Broom sweep.
 
@@ -23,7 +23,7 @@ dust2   := Broom dust.
 
 
 
-a := 'dust'.
+☞ a := 'dust'.
 
 
 

@@ -1,21 +1,21 @@
 'SINGLE_LANGUAGE'.
 
 
-usedMemory1 := 0.
-usedMemory2 := 0.
-usedMemory3 := 0.
-usedMemory4 := 0.
+☞ usedMemory1 := 0.
+☞ usedMemory2 := 0.
+☞ usedMemory3 := 0.
+☞ usedMemory4 := 0.
 
 Broom mode: 0.
 
-palette := Map new.
+☞ palette := Map new.
 palette 
 	put: '#F00' at: 'red',
 	put: '#0F0' at: 'green',
 	put: '#00F' at: 'blue'.
 Pen write: 'number of RGB codes in palette: ' + ( palette count ), brk.
 Pen write: 'RGB code of green is: ' + ( palette @ 'green' ), brk.
-colors := ''.
+☞ colors := ''.
 ( palette each: { :name :code
 		colors := colors + ( name + ':' + code ).
 } ).

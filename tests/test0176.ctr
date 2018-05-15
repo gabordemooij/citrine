@@ -1,13 +1,13 @@
 
 
-usedMemory1 := 0.
-usedMemory2 := 0.
-usedMemory3 := 0.
-usedMemory4 := 0.
+☞ usedMemory1 := 0.
+☞ usedMemory2 := 0.
+☞ usedMemory3 := 0.
+☞ usedMemory4 := 0.
 
 Broom mode: 0.
 
-txt := 'Word Salad'.
+☞ txt := 'Word Salad'.
 Pen write: 'Text Length: ' + txt length, brk.
 Pen write: 'Text Length in bytes: ' + txt bytes, brk.
 Pen write: 'Character at 2:' + ( txt @ 2 ), brk.

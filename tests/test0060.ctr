@@ -1,4 +1,4 @@
-a := Array new.
+☞ a := Array new.
 a unshift: 'Hello'.
 a unshift: 'World'.
 Pen write: (a at: 1), write: (a at: 0), brk.
