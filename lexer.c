@@ -87,6 +87,13 @@ void ctr_clex_load(char* prg) {
 	ctr_clex_buffer[0] = '\0';
 	ctr_eofcode = (ctr_code + ctr_program_length);
 	ctr_clex_line_number = 0;
+	/* skip the first line if it starts with a #. */
+	if (*ctr_code_start=='#') {
+		while(ctr_code<ctr_eofcode && *ctr_code!='\n') {
+			ctr_code++;
+		}
+	}
+	ctr_code_start = ctr_code;
 }
 
 /**
