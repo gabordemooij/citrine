@@ -1,10 +1,10 @@
 'SINGLE_LANGUAGE'.
 
 
-a := (Array < (
+☞ a := (Array ← (
 	(Map new)
 		put: 'domain' at: 'mywebsite.com',
-		put: (Array <
+		put: (Array ←
 			((Map new)
 				put: 'home' at: 'title',
 				put: '<html></html>' at: 'body',
@@ -18,15 +18,15 @@ a := (Array < (
 	)
 ) serialize.
 
-Pen write: a type, brk.
-Pen write: a, brk.
+✎ write: a type, brk.
+✎ write: a, brk.
 
-var b := a eval.
-Pen write: b @ 0 @ 'pages' @ 1 @ 'body', brk.
+☞ b := a eval.
+✎ write: b @ 0 @ 'pages' @ 1 @ 'body', brk.
 
-var c := b @ 0.
-var d := c serialize.
-Pen write: d type, brk.
+☞ c := b @ 0.
+☞ d := c serialize.
+✎ write: d type, brk.
 
-var e := d eval.
-Pen write: e @ 'pages' @ 0, brk.
+☞ e := d eval.
+✎ write: e @ 'pages' @ 0, brk.

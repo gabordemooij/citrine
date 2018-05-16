@@ -3,7 +3,7 @@ Slurp hello world.
 Pen write: (Slurp obtain), brk. 
 Pen write: (Slurp obtain), brk. 
 Slurp hello world.
-x := Slurp new.
+☞ x := Slurp new.
 Pen write: (x obtain), brk. 
 x hi there.
 Pen write: (x obtain), brk. 

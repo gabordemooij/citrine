@@ -1,15 +1,15 @@
 'SINGLE_LANGUAGE'.
 
-Q := (39 toByte).
+☞ Q := (39 toByte).
 
-q := Array < ('Quotes ' + Q + ' are evil?') ; 1.
-x := q toString.
-Pen write: x, brk.
-y := x eval.
-Pen write: y @ 0, brk.
+☞ q := Array ← ('Quotes ' + Q + ' are evil?') ; 1.
+☞ x := q toString.
+✎ write: x, brk.
+☞ y := x eval.
+✎ write: y @ 0, brk.
 
 q := Map put: Q at: (Q + 'quote' + Q).
 x := q toString.
-Pen write: x, brk.
+✎ write: x, brk.
 y := x eval.
-Pen write: y @ '\'quote\'', brk.
+✎ write: y @ '\'quote\'', brk.

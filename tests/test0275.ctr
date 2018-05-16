@@ -1,14 +1,14 @@
 'SINGLE_LANGUAGE'.
 
 
-a := Array < 6 ; 5 ; 4 ; 3 ; 2 ; 1.
+☞ a := Array < 6 ; 5 ; 4 ; 3 ; 2 ; 1.
 Pen write: a, brk.
 
 a shift.
 Pen write: a, brk.
 
 a sort: { :a :b
- ^ (a > b).
+ ↲ (a > b).
 }.
 
 Pen write: a, brk.

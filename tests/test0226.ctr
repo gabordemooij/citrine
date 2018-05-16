@@ -5,14 +5,14 @@ Boolean learn: 'alsWaar:'
 Pen learn: 'schrijf:'
 	means: 'write:'.
 Pen learn: 'nieuweRegel' means: 'brk'.
-Potlood := Pen.
+☞ Potlood := Pen.
 
 Object learn: 'nieuw' means: 'new'.
 Object learn: 'antwoord:met:' means: 'on:do:'.
 
 
 
-Verteller := Object nieuw.
+☞ Verteller := Object nieuw.
 Verteller antwoord: 'schrijf:' met: { :wat
 	var x := 2.
 	( x > 1 ) alsWaar: {

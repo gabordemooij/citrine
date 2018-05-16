@@ -1,7 +1,7 @@
 'SINGLE_LANGUAGE'.
 
-a := Array < 1 ; 2 ; 3.
-b := (a toString).
+☞ a := Array < 1 ; 2 ; 3.
+☞ b := (a toString).
 
 Pen write: b, brk. 
 b := b eval.
@@ -12,13 +12,13 @@ Pen write: (( Array < 1 ; 2 ; 3 )), brk.
 
 Pen write: ((Map new) put: 1 at: 2), brk. 
 
-x := ( (Array < 1 ; ( Array < 9 ) ; True ) ) toString.
+☞ x := ( (Array < 1 ; ( Array < 9 ) ; True ) ) toString.
 Pen write: x, brk. 
 x := x eval.
 
 Pen write: x @ 1 @ 0, brk. 
 
-y := (Map new) put: (Array < 1) at: (Array < 2).
+☞ y := (Map new) put: (Array < 1) at: (Array < 2).
 Pen write: y, brk. 
 
 y := y toString eval.

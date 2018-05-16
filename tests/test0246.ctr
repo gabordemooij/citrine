@@ -1,10 +1,10 @@
 'SINGLE_LANGUAGE'.
 
 
-q := 'abc'.
-x := q characters.
-Pen write: x, brk.
-Pen write: x count, brk.
+☞ q := 'abc'.
+☞ x := q characters.
+✎ write: x, brk.
+✎ write: x count, brk.
 
 q := '기나 긴 여행'.
 x := q characters.

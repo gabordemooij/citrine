@@ -1,5 +1,5 @@
 'SINGLE_LANGUAGE'.
-$ := Object new.
+☞ $ := Object new.
 
 $ on: 'respondTo:' do: { :x
 	
@@ -12,69 +12,69 @@ $ on: 'respondTo:' do: { :x
 		( valuta = '£' ) ifTrue: { amount := 1.28 * money. }.
 	}.
 	
-	^ amount.
+	↲ amount.
 }.
 
 
 
-x := $ +£20.
+☞ x := $ +£20.
 
-Pen write: x, brk.
+✎ write: x, brk.
 
 
-Fruit := Object new.
+☞ Fruit := Object new.
 
 Fruit on: 'new' do: {
-	var f := me `new.
+	☞ f := me `new.
 	f apples: 0.
 	f oranges: 0.
-	^ f.
+	↲ f.
 }.
 
-Fruit on: 'apples:' do: { :a my apples := a. }.
-Fruit on: 'oranges:' do: { :p my oranges := p. }.
-Fruit on: 'apples' do: { ^ my apples. }.
-Fruit on: 'oranges' do: { ^ my oranges. }.
+Fruit on: 'apples:' do: { :a ⚿ apples := a. }.
+Fruit on: 'oranges:' do: { :p ⚿ oranges := p. }.
+Fruit on: 'apples' do: { ↲ ⚿ apples. }.
+Fruit on: 'oranges' do: { ↲ ⚿ oranges. }.
 
 Fruit on: '+' do: { :f
 	
-	var n := Fruit new.
+	☞ n := Fruit new.
 	
-	n apples: (f apples + my apples).
-	n oranges:  (f oranges  + my oranges).
-	^ n.
+	n apples: (f apples + ⚿ apples).
+	n oranges:  (f oranges  + ⚿ oranges).
+	↲ n.
 }.
 
 Fruit on: 'toString' do: {
 	
-	^ ( my apples toString + ' apples and ' + my oranges + ' oranges' ).
+	↲ ( ⚿ apples toString + ' apples and ' + ⚿ oranges + ' oranges' ).
 }.
 
 Number on: 'apples' do: {
-	^ ((Fruit new) apples: me).
+	↲ ((Fruit new) apples: ⛏).
 }.
 
 Number on: 'apple' do: {
-	^ ((Fruit new) apples: me).
+	↲ ((Fruit new) apples: ⛏).
 }.
 
 Number on: 'oranges' do: {
-	^ ((Fruit new) oranges: me).
+	↲ ((Fruit new) oranges: ⛏).
 }.
 
 
 
 
-Pen write: (1 apple + 3 oranges + 4 apples), brk.
+✎ write: (1 apple + 3 oranges + 4 apples), brk.
 
 
 String on: 'twice' do: {
-	^ ((me toString) + (me toString)).
+	↲ ((me toString) + (me toString)).
 }.
 
 
 
-Pen write: '❤❤❤' twice.
+✎ write: '❤❤❤' twice.
 
 
 

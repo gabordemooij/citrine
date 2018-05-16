@@ -1,4 +1,4 @@
 'SINGLE_LANGUAGE'.
 
-str := 'write:'.
+☞ str := 'write:'.
 Pen message: 'write:' arguments: 0.

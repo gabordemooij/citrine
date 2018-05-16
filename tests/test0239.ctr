@@ -1,7 +1,7 @@
 'SINGLE_LANGUAGE'.
 
 
-a := True.
+☞ a := True.
 
 
 
@@ -25,7 +25,7 @@ a on: 'toNumber' do: {
 	^ answer.
 }.
 
-b := 666.
+☞ b := 666.
 
 b on: 'toString' do: {
 	^ 'Devil'.

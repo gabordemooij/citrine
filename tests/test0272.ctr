@@ -1,4 +1,4 @@
-str := 'a' paddingLeft: 10.
+☞ str := 'a' paddingLeft: 10.
 Pen write: '| ❲str❳ |', brk.
 str := 'a' paddingRight: 10.
 Pen write: '| ❲str❳ |', brk.

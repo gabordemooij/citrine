@@ -1,5 +1,5 @@
 
-x := Slurp new.
+☞ x := Slurp new.
 x + 3.
 Pen write: (x obtain), brk.
 x echo: 'Hello world'.

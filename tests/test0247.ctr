@@ -1,12 +1,12 @@
 'SINGLE_LANGUAGE'.
 
 
-q := 'abc'.
-x := q toByteArray.
-Pen write: x, brk.
-Pen write: x count, brk.
+☞ q := 'abc'.
+☞ x := q toByteArray.
+✎ write: x, brk.
+✎ write: x count, brk.
 
 q := '기나 긴 여행'.
 x := q toByteArray.
-Pen write: x, brk.
-Pen write: (x count), brk.
+✎ write: x, brk.
+✎ write: (x count), brk.

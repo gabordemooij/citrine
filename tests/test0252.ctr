@@ -2,16 +2,16 @@
 
 
 
-clock := Clock new.
+☞ clock := ⏰ new.
 
 
 
 clock year: 1981, month: 1, day: 5,
       hour: 13, minute: 15, second: 13.
 
-Pen write: clock, brk.
+✎ write: clock, brk.
 
-Pen write: (
+✎ write: (
 	(clock year) + '-' + (clock month) + '-' + (clock day) + ' ' +
 	(clock hour) + ':' + (clock minute) + ':' + (clock second) + ' ' +
 	'W' + (clock week) + ' t' + (clock time) + ' ' + (clock zone)
@@ -19,25 +19,25 @@ Pen write: (
 
 
 clock zone: 'Europe/Amsterdam'.
-Pen write: (
+✎ write: (
 	(clock year) + '-' + (clock month) + '-' + (clock day) + ' ' +
 	(clock hour) + ':' + (clock minute) + ':' + (clock second) + ' ' +
 	'W' + (clock week) + ' t' + (clock time) + ' ' + (clock zone)
 ), brk.
 
-clock2 := clock new zone: 'Europe/Amsterdam', month: 6, hour: 8.
+☞ clock2 := clock new zone: 'Europe/Amsterdam', month: 6, hour: 8.
 
 
-Pen write: (clock2 format: Nil), brk. 
-Pen write: (clock format: 'Clock1 %H'), brk.
-Pen write: (clock2 format: 'Clock2 %H'), brk.
+✎ write: (clock2 format: Nil), brk. 
+✎ write: (clock format: 'Clock1 %H'), brk.
+✎ write: (clock2 format: 'Clock2 %H'), brk.
 
 clock2 zone: 'America/New York'.
-Pen write: (clock format: 'Clock1 %H'), brk.
-Pen write: (clock2 format: 'Clock2 %H'), brk.
+✎ write: (clock format: 'Clock1 %H'), brk.
+✎ write: (clock2 format: 'Clock2 %H'), brk.
 
-clock3 := Clock new like: (Clock new zone: 'UTC', hour: 13).
+☞ clock3 := Clock new like: (Clock new zone: 'UTC', hour: 13).
 clock3 := Clock new: clock3 time.
-Pen write: (clock3 format: 'Clock3 %H'), brk.
+✎ write: (clock3 format: 'Clock3 %H'), brk.
 
 

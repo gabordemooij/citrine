@@ -1,4 +1,4 @@
-?? := '🦀🦁🦂🦃🦄'.
+☞ ?? := '🦀🦁🦂🦃🦄'.
 ☞ random := ⚄ drawFrom: ?? length: ?? length.
 ✎ write: '❲ random length ❳↵'.
 ✎ write: '❲ ?? length ❳↵'.

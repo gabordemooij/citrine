@@ -1,5 +1,5 @@
-os := (💻 shell: 'uname').
-file := Nil.
+☞ os := (💻 shell: 'uname').
+☞ file := Nil.
 
 ((os indexOf: 'Linux') > -1) ifTrue: {
 	file := '/var/log/syslog'.
@@ -10,34 +10,34 @@ file := Nil.
 }.
 
 (file isNil) ifTrue: {
-	Pen write: 'Unable to determine location of system log for test', brk.
-	Program exit.
+	✎ write: 'Unable to determine location of system log for test', brk.
+	💻 exit.
 }.
 
-key := '--Citrine-->0'.
-Program log: key.
-str := (💻 shell: (Slurp tail: file, obtain)).
+☞ key := '--Citrine-->0'.
+💻 log: key.
+☞ str := (💻 shell: (Slurp tail: file, obtain)).
 ((str indexOf: key) > -1) ifTrue: {
-	Pen write: 'OK'.
+	✎ write: 'OK'.
 }.
 
 key := '--Citrine-->1'.
-Program warning: key.
+💻 warning: key.
 str := (💻 shell: (Slurp tail: file, obtain)).
 ((str indexOf: key) > -1) ifTrue: {
-	Pen write: 'OK'.
+	✎ write: 'OK'.
 }.
 
 key := '--Citrine-->2'.
-Program error: key.
+💻 error: key.
 str := (💻 shell: (Slurp tail: file, obtain)).
 ((str indexOf: key) > -1) ifTrue: {
-	Pen write: 'OK'.
+	✎ write: 'OK'.
 }.
 
 key := '--Citrine-->3'.
-Program alert: key.
+💻 alert: key.
 str := (💻 shell: (Slurp tail: file, obtain)).
 ((str indexOf: key) > -1) ifTrue: {
-	Pen write: 'OK'.
+	✎ write: 'OK'.
 }.

@@ -1,7 +1,7 @@
 'SINGLE_LANGUAGE'.
 
 Array on: '<' do: {
-	Pen write: 'Blaaaa', brk.
+	✎ write: 'Blaaaa', brk.
 }.
-q := 'x := Array < 1'.
+☞ q := 'x := Array < 1'.
 q eval.

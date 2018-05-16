@@ -1,2 +1,2 @@
-a := Program input.
+☞ a := Program input.
 Pen write: a, brk.

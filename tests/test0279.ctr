@@ -1,7 +1,7 @@
-str := 'xxx←'.
+☞ str := 'xxx←'.
 Pen write: 'length before skip = ' + str length, brk.
 Pen write: 'bytes before skip = ' + str bytes, brk.
-str2 := str skip: 3.
+☞ str2 := str skip: 3.
 Pen write: 'length after skip = ' + str2 length, brk.
 Pen write: 'bytes after skip = ' + str2 bytes, brk.
 0 to: str2 bytes - 1 step: 1 do: { :index

@@ -1,4 +1,4 @@
 'SINGLE_LANGUAGE'.
 
-a := Array ← 1 ; 2 ; 3. 
-Pen write: a, brk.
+☞ a := Array ← 1 ; 2 ; 3. 
+✎ write: a, brk.

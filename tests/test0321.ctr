@@ -3,7 +3,7 @@
 Broom mode: 12.
 Broom sweep.
 
-Fruit := Object new.
+☞ Fruit := Object new.
 Fruit on: 'new' do: {
 	var f := me `new.
 	f apples: 0.
@@ -24,7 +24,7 @@ Fruit on: 'toString' do: {
 	↲ my apples + ' apples '.
 }.
 
-q := 3 apples + 4 apples.
+☞ q := 3 apples + 4 apples.
 ✎ write: q, brk.
 
 

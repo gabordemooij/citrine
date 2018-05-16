@@ -13,7 +13,7 @@ f write: 'hello world'.
 
 f := File new: '/tmp/citrine_test_file.txt'.
 f open: 'r'.
-q := f end seek: -3, readBytes: 3.
+☞ q := f end seek: -3, readBytes: 3.
 q := q + (f rewind readBytes: 2). 
 
 

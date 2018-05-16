@@ -1,4 +1,4 @@
 
-query := Slurp new.
+☞ query := Slurp new.
 query select: '*', from users where: 'id = 2'.
 Pen write: (query obtain), brk.

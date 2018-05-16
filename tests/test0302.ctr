@@ -1,6 +1,6 @@
 
-location := 'Wetering Brug'.
-x := 0.
+☞ location := 'Wetering Brug'.
+☞ x := 0.
 location
 	case: 'Lisserweg' do: { x := 1 .},
 	case: 'Wetering Brug' do: { x := 2. },

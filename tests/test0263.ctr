@@ -1,8 +1,8 @@
-i := Object new.
+☞ i := Object new.
 i on: 'greet:' do: { :name
 	Pen write: 'Hello ❲name❳', brk.
 }.
-a := Array < 'greet:' ; 'Visitor'.
-b := a shift.
-Pen write: a @ 0, brk.
+☞ a := Array ← 'greet:' ; 'Visitor'.
+☞ b := a shift.
+✎ write: a @ 0, brk.
 i message: b arguments: a.

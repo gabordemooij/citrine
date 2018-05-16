@@ -1,12 +1,12 @@
 
 
-clock := Clock
+☞ clock := ⏰
 	new zone: 'Europe/Amsterdam',
 	year: 2017, month: 7, day: 13,
 	hour: 18, minute: 0, second: 0.
 
 clock on: 'tell' do: {
-	Pen write: me, brk.
+	✎ write: me, brk.
 }.
 
 
