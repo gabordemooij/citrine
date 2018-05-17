@@ -2024,6 +2024,24 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentL
 }
 
 /**
+ * [String] [key]: [value]
+ *
+ * Replaces the character sequence 'key' with the contents of value.
+ *
+ * Usage:
+ *
+ * '$ money' money: 10.
+ *
+ * The example will produce the string '$ 10'.
+ */
+ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* message = ctr_internal_cast2string( argumentList->object );
+	ctr_object* slot = ctr_build_string( message->value.svalue->value, message->value.svalue->vlen - 1);
+	argumentList->object = slot;
+	return ctr_string_replace_with( myself, argumentList );
+}
+
+/**
  * [String] replace: [string] with: [other]
  *
  * Replaces needle with replacement in original string and returns
