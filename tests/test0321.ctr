@@ -12,7 +12,7 @@ Fruit on: 'new' do: {
 Fruit on: 'apples:' do: { :a ⚿ apples := a. }.
 Fruit on: 'apples' do: { ↲ ⚿ apples. }.
 Fruit on: '+' do: { :f
-	var n := Fruit new.
+	☞ n := Fruit new.
 	n apples: (f apples + ⚿ apples).
 	↲ n.
 }.
