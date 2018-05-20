@@ -5,7 +5,7 @@ Broom sweep.
 
 ☞ Fruit := Object new.
 Fruit on: 'new' do: {
-	var f := ⛏ `new.
+	☞ f := ⛏ `new.
 	f apples: 0.
 	↲ f.
 }.
