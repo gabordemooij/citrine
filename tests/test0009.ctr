@@ -3,14 +3,14 @@ Greeter on: 'make' do: {
 	☞ greeter := Object new.
 	greeter on: 'name:' do: { :name
 		Pen write: 'setting a name'.
-		my myName := name.
+		⚿ myName := name.
 	}.
 	greeter on: 'performGreeting' do: {
 		Pen write: 'Hello'.
-		Pen write: my myName.
+		Pen write: ⚿ myName.
 	}.
 	greeter on: 'greet' do: {
-		me performGreeting.
+		⛏ performGreeting.
 	}.
 	↲greeter.
 }.

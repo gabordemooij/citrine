@@ -8,19 +8,19 @@
 Broom mode: 0.
 
 Number on: 'add:' do: { :x
-	me +=: x.
+	⛏ +=: x.
 }.
 
 Number on: 'subtract:' do: { :x
-	me -=: x.
+	⛏ -=: x.
 }.
 
 Number on: 'multiplyBy:' do: { :x
-	me *=: x.
+	⛏ *=: x.
 }.
 
 Number on: 'divideBy:' do: { :x
-	me /=: x.
+	⛏ /=: x.
 }.
 
 

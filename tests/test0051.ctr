@@ -1,9 +1,9 @@
 ☞ x := Object new.
 x on: 'getA' do: {
-	my a := 2.
+	⚿ a := 2.
 	a := 1.
 	Pen write: a.
-	Pen write: my a.
+	Pen write: ⚿ a.
 }.
 ☞ a := 3.
 x getA.

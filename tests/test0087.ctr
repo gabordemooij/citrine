@@ -1,5 +1,5 @@
 
-☞ multiplier := { :m  ↲ { :x ↲ (my f * x). } set: 'f' value: m. }.
+☞ multiplier := { :m  ↲ { :x ↲ (⚿ f * x). } set: 'f' value: m. }.
 ☞ double := multiplier applyTo: 2.
 ☞ q := double applyTo: 9.
 Pen write: q. 

@@ -2,5 +2,5 @@
 
 ☞ o := Object new.
 o on: 'test' do: {
-	my := 123.
+	⚿ := 123.
 }.

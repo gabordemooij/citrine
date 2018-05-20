@@ -1,11 +1,11 @@
 ☞ a := Object new.
 a on: 'init' do: {
 	☞ v := 'test'.
-	my value := v.
-	my value2 := my value.
-	☞ x := my value2.
+	⚿ value := v.
+	⚿ value2 := ⚿ value.
+	☞ x := ⚿ value2.
 	Pen write: x.
-	Pen write: my value.
-	Pen write: my value2.
+	Pen write: ⚿ value.
+	Pen write: ⚿ value2.
 }.
 a init.

@@ -14,7 +14,7 @@ wine on: 'naarTekst' do: {
 
 
 wine on: '=' do: { :other wine
-	↲ ( me toString = other wine ).
+	↲ ( ⛏ toString = other wine ).
 }.
 
 

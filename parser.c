@@ -316,7 +316,7 @@ ctr_tnode* ctr_cparse_ref() {
 	r->type = CTR_AST_NODE_REFERENCE;
 	r->vlen = ctr_clex_tok_value_length();
 	tmp = ctr_clex_tok_value();
-	if (strncmp(ctr_clex_keyword_my, tmp, ctr_clex_keyword_my_len)==0 && r->vlen == ctr_clex_keyword_my_len) {
+	if (strncmp(ctr_clex_keyword_my_icon, tmp, ctr_clex_keyword_my_icon_len)==0 && r->vlen == ctr_clex_keyword_my_icon_len) {
 		int t = ctr_clex_tok();
 		if (t != CTR_TOKEN_REF) {
 			ctr_cparse_emit_error_unexpected( t, "'My' should always be followed by a property name!\n");

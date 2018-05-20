@@ -7,14 +7,14 @@ CoffeeGrounds on: 'extract' do: { ↲ 'coffee'. }.
 
 ☞ CoffeeMachine := Object new.
 CoffeeMachine on: 'init' do: {
-	my coffeegrounds := CoffeeGrounds new.
+	⚿ coffeegrounds := CoffeeGrounds new.
 }.
 CoffeeMachine on: 'new' do: {
 	↲ CoffeeMachine `new init.
 }.
 
-CoffeeMachine on: 'makeTea' do: {	↲ (my tealeaves extract). }.
-CoffeeMachine on: 'makeCoffee' do: { ↲ (my coffeegrounds extract). }.
+CoffeeMachine on: 'makeTea' do: {	↲ (⚿ tealeaves extract). }.
+CoffeeMachine on: 'makeCoffee' do: { ↲ (⚿ coffeegrounds extract). }.
 
 ☞ coffeeDream := CoffeeMachine new.
 

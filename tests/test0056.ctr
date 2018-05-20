@@ -1,9 +1,9 @@
 ☞ z := Object new.
 z on: 'value:' do: { :v
-	my value := v.
-	↲ me.
+	⚿ value := v.
+	↲ ⛏.
 }.
-z on: 'value' do: { ↲ my value. }.
+z on: 'value' do: { ↲ ⚿ value. }.
 (z setValue: 1) value: 2.
 Pen write: z value.
 ☞ x := z.

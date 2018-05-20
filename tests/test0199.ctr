@@ -5,7 +5,7 @@ Broom mode: 4.
 Animal on: 'make' do: {
 	☞ animal := Object new.
 	animal on: 'makeSound' do: {
-		Pen write: my sound.
+		Pen write: ⚿ sound.
 	}.
 	↲animal.
 }.
@@ -13,7 +13,7 @@ Animal on: 'make' do: {
 Cat on: 'make' do: {
 	☞ cat := Animal make.
 	cat on: 'init' do: {
-		my sound := 'meow!'.
+		⚿ sound := 'meow!'.
 	}.
 	cat init.
 	↲cat.

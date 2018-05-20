@@ -2,10 +2,10 @@
 Greeter on: 'make' do: {
 	☞ gr := Object new.
 	gr on: 'setName:' do: { :aname
-		my name := aname.
+		⚿ name := aname.
 	}.
 	gr on: 'greet' do: {
-		Pen write: my name.
+		Pen write: ⚿ name.
 	}.
 	↲gr.
 }.

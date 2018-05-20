@@ -7,7 +7,7 @@
 
 a on: 'toString' do: {
 	☞ answer := Nil.
-	( me = True ) ifTrue: {
+	( ⛏ = True ) ifTrue: {
 		answer := 'Yep'.
 	}, else: {
 		answer := 'Nope'.
@@ -17,7 +17,7 @@ a on: 'toString' do: {
 
 a on: 'toNumber' do: {
 	☞ answer := Nil.
-	( me = True ) ifTrue: {
+	( ⛏ = True ) ifTrue: {
 		answer := 10.
 	}, else: {
 		answer := 20.

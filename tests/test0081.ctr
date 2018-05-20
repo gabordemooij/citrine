@@ -13,7 +13,7 @@ Pen
 
 ☞ KeyeableArray := Array new.
 KeyeableArray on: 'toString' do: {
-	↲ (me count) toString.
+	↲ (⛏ count) toString.
 }.
 
 ☞ map2 := Map new.

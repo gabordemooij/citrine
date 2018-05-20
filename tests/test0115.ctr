@@ -7,7 +7,7 @@
 
 {
 	thisBlock error: 'Dont fail.'.
-	my unknown doSomething.
+	⚿ unknown doSomething.
 } catch: {
 	Pen write: 'Caught!'.
 }, run.

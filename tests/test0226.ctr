@@ -20,8 +20,8 @@ Verteller antwoord: 'schrijf:' met: { :wat
 	}.
 }.
 Verteller on: 'vertel' do: {
-	my taal := 'Nederlands'.
-	me schrijf: 'Het ' + my taal + ' is een mooie taal.'.
+	⚿ taal := 'Nederlands'.
+	⛏ schrijf: 'Het ' + ⚿ taal + ' is een mooie taal.'.
 }.
 
 Verteller vertel.

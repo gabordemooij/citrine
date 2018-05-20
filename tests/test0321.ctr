@@ -5,23 +5,23 @@ Broom sweep.
 
 ☞ Fruit := Object new.
 Fruit on: 'new' do: {
-	var f := me `new.
+	var f := ⛏ `new.
 	f apples: 0.
 	↲ f.
 }.
-Fruit on: 'apples:' do: { :a my apples := a. }.
-Fruit on: 'apples' do: { ↲ my apples. }.
+Fruit on: 'apples:' do: { :a ⚿ apples := a. }.
+Fruit on: 'apples' do: { ↲ ⚿ apples. }.
 Fruit on: '+' do: { :f
 	var n := Fruit new.
-	n apples: (f apples + my apples).
+	n apples: (f apples + ⚿ apples).
 	↲ n.
 }.
 Number on: 'apples' do: {
-	↲ ((Fruit new) apples: me).
+	↲ ((Fruit new) apples: ⛏).
 }.
 
 Fruit on: 'toString' do: {
-	↲ my apples + ' apples '.
+	↲ ⚿ apples + ' apples '.
 }.
 
 ☞ q := 3 apples + 4 apples.

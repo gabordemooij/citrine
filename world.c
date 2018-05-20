@@ -489,7 +489,7 @@ ctr_object* ctr_find(ctr_object* key) {
  * Tries to locate a property of an object.
  */
 ctr_object* ctr_find_in_my(ctr_object* key) {
-	ctr_object* context = ctr_find(ctr_build_string_from_cstring( ctr_clex_keyword_me ) );
+	ctr_object* context = ctr_find(ctr_build_string_from_cstring( ctr_clex_keyword_me_icon ) );
 	ctr_object* foundObject = ctr_internal_object_find_property(context, key, 0);
 	if (CtrStdFlow) return CtrStdNil;
 	if (foundObject == NULL) {
@@ -1049,7 +1049,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	methodObject = NULL;
 	searchObject = receiverObject;
 	if (vlen > 1 && message[0] == '`') {
-		me = ctr_internal_object_find_property(ctr_contexts[ctr_context_id], ctr_build_string_from_cstring( ctr_clex_keyword_me ), 0);
+		me = ctr_internal_object_find_property(ctr_contexts[ctr_context_id], ctr_build_string_from_cstring( ctr_clex_keyword_me_icon ), 0);
 		if (searchObject == me) {
 			toParent = 1;
 			message = message + 1;
@@ -1143,7 +1143,7 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
  */
 ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 	ctr_object* object = NULL;
-	ctr_object* my = ctr_find(ctr_build_string_from_cstring( ctr_clex_keyword_me ) );
+	ctr_object* my = ctr_find(ctr_build_string_from_cstring( ctr_clex_keyword_me_icon ) );
 	if (CtrStdFlow) return CtrStdNil;
 	key->info.sticky = 0;
 	object = o;

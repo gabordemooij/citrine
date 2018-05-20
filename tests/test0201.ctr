@@ -8,7 +8,7 @@ Animal on: 'makeSound' do: {
 ☞ Cat := Animal new.
 Cat on: 'makeSound' do: {
 	Pen write: 'meow!'.
-	me `makeSound. 
+	⛏ `makeSound. 
 }.
 ☞ Tom := Cat new.
 Tom makeSound.

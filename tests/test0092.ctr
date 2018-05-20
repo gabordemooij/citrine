@@ -6,8 +6,8 @@ Pen write: g, brk.
 ☞ Secret := Object new.
 Secret on: 'test' do: {
 	☞ message := 'Hello'.
-	my message := 'World'.
-	Pen write: message + ' ' + my message, brk.
+	⚿ message := 'World'.
+	Pen write: message + ' ' + ⚿ message, brk.
 }.
 Secret test.
 Pen write: message.

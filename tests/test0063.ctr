@@ -7,6 +7,6 @@ Pen write: 'Apples cost: '.
 Apples a 60.
 Pen write: ' cent a piece.'.
 Number on: '×' do: { :b
-	me times: b.
+	⛏ times: b.
 }.
 7 × { :i Pen write: i. }.

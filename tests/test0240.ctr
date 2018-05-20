@@ -25,7 +25,7 @@ $ on: 'respondTo:' do: { :x
 ☞ Fruit := Object new.
 
 Fruit on: 'new' do: {
-	☞ f := me `new.
+	☞ f := ⛏ `new.
 	f apples: 0.
 	f oranges: 0.
 	↲ f.
@@ -69,7 +69,7 @@ Number on: 'oranges' do: {
 
 
 String on: 'twice' do: {
-	↲ ((me toString) + (me toString)).
+	↲ ((⛏ toString) + (⛏ toString)).
 }.
 
 

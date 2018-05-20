@@ -7,7 +7,7 @@ Animal on: 'eat' do: {
 ☞ Cat := Animal new.
 Cat on: 'eat' do: {
 	Pen write: 'meow', brk.
-	me `eat.
+	⛏ `eat.
 }.
 
 

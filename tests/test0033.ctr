@@ -1,6 +1,6 @@
 ☞ x := Object new.
-x on: 'set:' do: { :v my val := v. }.
-x on: 'get' do: { ↲ my val. }.
+x on: 'set:' do: { :v ⚿ val := v. }.
+x on: 'get' do: { ↲ ⚿ val. }.
 ☞ a := Object new.
 a on: 'init' do: {
 	☞ y := x new.

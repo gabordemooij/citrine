@@ -15,10 +15,10 @@ Pen write: ' x = ' + x.
 Pen write: ' y = ' + y.
 ☞ q := Object new.
 q on: 'setProperty:' do: { :x
-	my prop := x.
+	⚿ prop := x.
 }.
 q on: 'getProperty' do: {
-	↲ my prop.
+	↲ ⚿ prop.
 }.
 q setProperty: 9.
 ☞ p := q.

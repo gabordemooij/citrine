@@ -2,7 +2,7 @@
 ☞ animal := Object new. 
  
  animal on: 'name:' do: { :n
-my name := n.
+⚿ name := n.
 }. 
 
 
@@ -18,7 +18,7 @@ animal on: 'name' do: {
  
  cat on: 'name' do: {
 ↲ 'your royal highness '
-+ (me `name).
++ (⛏ `name).
 }.
 
 Pen write: cat name.
