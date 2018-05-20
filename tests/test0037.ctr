@@ -18,7 +18,7 @@ q on: 'setProperty:' do: { :x
 	my prop := x.
 }.
 q on: 'getProperty' do: {
-	^ my prop.
+	↲ my prop.
 }.
 q setProperty: 9.
 ☞ p := q.

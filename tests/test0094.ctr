@@ -6,6 +6,6 @@
 	}, else: {
 		result := x * (f applyTo: (x - 1)).
 	}.
-	^ result.
+	↲ result.
 }.
 Pen write: (f applyTo: 4). 

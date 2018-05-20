@@ -77,7 +77,7 @@ files each: { :index :file
 				var n := 2.
 				{
 					line := lines at: n. 
-					^ ((line indexOf: '*/') = -1). 
+					↲ ((line indexOf: '*/') = -1). 
 				}
 				whileTrue: {
 						line := line replace: '\\' with: '\\\\'.

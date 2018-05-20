@@ -6,10 +6,10 @@ EnglishLines each: { :index :line
 	☞ nativeLine := NativeLines @ index.
 	☞ EnglishWord := Nil.
 	☞ nativeWord  := Nil.
-	line findPattern: '"([^"]+)"' do: { :match
+	line findPattern: '"([↲"]+)"' do: { :match
 		EnglishWord :=  match @ 1. 
 	}.
-	nativeLine findPattern: '"([^"]+)"' do: { :match
+	nativeLine findPattern: '"([↲"]+)"' do: { :match
 		nativeWord :=  match @ 1. 
 	}.
 	✎ write: '"❲EnglishWord❳";"❲nativeWord❳"\n'.

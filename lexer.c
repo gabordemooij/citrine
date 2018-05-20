@@ -35,7 +35,6 @@ char* ctr_clex_desc_tok_booleanyes = "True";
 char* ctr_clex_desc_tok_booleanno = "False";
 char* ctr_clex_desc_tok_nil = "Nil";
 char* ctr_clex_desc_tok_assignment = ":=";
-char* ctr_clex_desc_tok_ret = "^";
 char* ctr_clex_desc_tok_ret_unicode = "↲";
 char* ctr_clex_desc_tok_fin = "end of program";
 char* ctr_clex_desc_tok_unknown = "(unknown token)";
@@ -112,7 +111,7 @@ char* ctr_clex_tok_describe(int token)
 	char* description;
 	switch(token) {
 		case CTR_TOKEN_RET:
-			description = ctr_clex_desc_tok_ret;
+			description = ctr_clex_desc_tok_ret_unicode;
 			break;
 		case CTR_TOKEN_ASSIGNMENT:
 			description = ctr_clex_desc_tok_assignment;
@@ -222,7 +221,6 @@ int ctr_clex_tok() {
 		return CTR_TOKEN_ASSIGNMENT; 
 	}
 	if (c == ':') { ctr_code++; return CTR_TOKEN_COLON; }
-	if (c == '^') { ctr_code++; return CTR_TOKEN_RET; }
 	if ( ( ctr_code + 2) < ctr_eofcode
 		&&   (uint8_t)            c == 0xE2
 		&& ( (uint8_t) *(ctr_code+1)==0x86)
@@ -296,7 +294,6 @@ int ctr_clex_tok() {
 		c != '}' &&
 		c !='.'  &&
 		c !=','  &&
-		c !='^'  &&
 		( !(
 		( ctr_code + 2) < ctr_eofcode
 			&&   (uint8_t)            c == 226

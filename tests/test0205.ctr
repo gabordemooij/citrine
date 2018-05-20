@@ -11,7 +11,7 @@ Pen write: (3 message: str arguments: (Array < 1 ; 2)), brk.
 
 ☞ CoffeeMachine := Object new.
 CoffeeMachine on: 'makeCoffeeWithSugar:milk:' do: { :sugar :milk
-	^ ( 'Here ya go... coffee with ' + 
+	↲ ( 'Here ya go... coffee with ' + 
 			sugar +
 			' spoons of sugar and ' +
 			milk +

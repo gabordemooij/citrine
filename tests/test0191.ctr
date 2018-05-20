@@ -1,6 +1,6 @@
 
 Pen write: ( {
 	Pen write: 'START', brk.
-	^ 'END'.
+	↲ 'END'.
 	Pen write: 'DONT', brk.
 } run ), brk.

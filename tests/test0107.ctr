@@ -5,7 +5,7 @@ Pen write: 'Break for-loop, 0-4.', brk.
 }.
 
 ☞ x := 0.
-☞ xIsLessThan10 := { ^( x < 10 ). }.
+☞ xIsLessThan10 := { ↲( x < 10 ). }.
 
 Pen write: 'Break while-true loop, 0-4.', brk.
 xIsLessThan10 whileTrue: {
@@ -15,7 +15,7 @@ xIsLessThan10 whileTrue: {
 }.
 
 Pen write: 'Break while-false loop, 5,4.', brk.
-{ ^(x = 0). } whileFalse: {
+{ ↲(x = 0). } whileFalse: {
 	Pen write: 'iteration #' + x, brk.
 	x -=: 1.
 	(x = 3) break.

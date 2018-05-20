@@ -7,7 +7,7 @@ Number on: 'bottles' do: {
 	(me > 1) ifTrue: {
 		phrase := (n + ' bottles of beer').
 	}.
-	^phrase.
+	↲phrase.
 }.
 
 99 to: 0 step: -1 do: { :i

@@ -9,7 +9,7 @@ my name := n.
 animal name: 'Diva'. 
  
 animal on: 'name' do: {
-^ name.
+↲ name.
 }.
 
 ☞ cat := animal new.
@@ -17,7 +17,7 @@ animal on: 'name' do: {
  cat name: 'Diva'. 
  
  cat on: 'name' do: {
-^ 'your royal highness '
+↲ 'your royal highness '
 + (me `name).
 }.
 

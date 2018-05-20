@@ -4,7 +4,7 @@ Cat on: 'make' do: {
 	cat on: 'meow' do: {
 		Pen write: 'meow!'.
 	}.
-	^cat.
+	↲cat.
 }.
 ☞ cat := Cat make.
 cat meow.

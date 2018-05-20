@@ -5,7 +5,7 @@ Program flush.
 
 Application := Object new.
 Application on: 'run' do: {
-	{ ^True. } whileTrue: {
+	{ ↲True. } whileTrue: {
 		var event := Program waitForInput.
 		listeners each: { :key :action
 			(key = event) ifTrue: {

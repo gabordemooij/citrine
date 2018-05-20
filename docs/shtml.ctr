@@ -42,7 +42,7 @@ files each: { :index :file
 				var n := 2.
 				{
 					line := lines at: n. 
-					^ ((line indexOf: '*/') = -1). 
+					↲ ((line indexOf: '*/') = -1). 
 				}
 				whileTrue: {
 						line := line replace: '\\' with: '\\\\'.
@@ -65,7 +65,7 @@ files each: { :index :file
 				
 				var filename := (headline skip: 3) 
 					asciiLowerCase
-					findPattern: '[^a-z0-9]' do: {^ ''.}.
+					findPattern: '[↲a-z0-9]' do: {↲ ''.}.
 				
 				menu append: '<li><a href="' + filename + '.ctr">' + (chapter htmlEscape) + '</a></li>'.
 				

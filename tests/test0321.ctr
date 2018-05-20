@@ -7,17 +7,17 @@ Broom sweep.
 Fruit on: 'new' do: {
 	var f := me `new.
 	f apples: 0.
-	^ f.
+	↲ f.
 }.
 Fruit on: 'apples:' do: { :a my apples := a. }.
-Fruit on: 'apples' do: { ^ my apples. }.
+Fruit on: 'apples' do: { ↲ my apples. }.
 Fruit on: '+' do: { :f
 	var n := Fruit new.
 	n apples: (f apples + my apples).
-	^ n.
+	↲ n.
 }.
 Number on: 'apples' do: {
-	^ ((Fruit new) apples: me).
+	↲ ((Fruit new) apples: me).
 }.
 
 Fruit on: 'toString' do: {

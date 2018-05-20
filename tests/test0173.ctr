@@ -15,7 +15,7 @@ Pen write: ( 'min: ' + ( a min ) ), brk.
 Pen write: ( 'max: ' + ( a max ) ), brk.
 Pen write: ( '3rd: ' + ( a @ 2 ) ), brk.
 Pen write: ( 'prd: ' + ( a product ) ), brk.
-a sort: { :a :b ^ (b - a). }.
+a sort: { :a :b ↲ (b - a). }.
 a each: { :i :e Pen write: ( i ), brk. }.
 
 Broom sweep.
@@ -29,7 +29,7 @@ Pen write: ( 'min: ' + ( a min ) ), brk.
 Pen write: ( 'max: ' + ( a max ) ), brk.
 Pen write: ( '3rd: ' + ( a @ 2 ) ), brk.
 Pen write: ( 'prd: ' + ( a product ) ), brk.
-a sort: { :a :b ^ (b - a). }.
+a sort: { :a :b ↲ (b - a). }.
 a each: { :i :e Pen write: ( i ), brk. }.
 
 
@@ -44,7 +44,7 @@ Pen write: ( 'min: ' + ( a min ) ), brk.
 Pen write: ( 'max: ' + ( a max ) ), brk.
 Pen write: ( '3rd: ' + ( a @ 2 ) ), brk.
 Pen write: ( 'prd: ' + ( a product ) ), brk.
-a sort: { :a :b ^ (b - a). }.
+a sort: { :a :b ↲ (b - a). }.
 a each: { :i :e Pen write: ( i ), brk. }.
 
 

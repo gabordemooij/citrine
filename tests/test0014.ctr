@@ -7,7 +7,7 @@ Greeter on: 'make' do: {
 	gr on: 'greet' do: {
 		Pen write: my name.
 	}.
-	^gr.
+	↲gr.
 }.
 ☞ a := Greeter make.
 ☞ b := Greeter make.

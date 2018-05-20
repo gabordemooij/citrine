@@ -2980,7 +2980,7 @@ ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 	/* add a return statement so we can catch result */
 	ctr_argument* newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
 	newArgumentList->object = myself;
-	code = ctr_string_append( ctr_build_string_from_cstring( "^ " ), newArgumentList );
+	code = ctr_string_append( ctr_build_string_from_cstring( "↲ " ), newArgumentList );
 	newArgumentList->object = ctr_build_string_from_cstring( "." );
 	code = ctr_string_append( code, newArgumentList );
 	ctr_program_length = code->value.svalue->vlen;
