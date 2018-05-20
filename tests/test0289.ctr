@@ -9,7 +9,7 @@
 ✎ write: (
 	💻 shell: (
 		Slurp
-			echo: '❲large text❳',
+			echo: large text,
 			| './ctr tests/assets/stdin_test.ctr'
 		) obtain
 ).

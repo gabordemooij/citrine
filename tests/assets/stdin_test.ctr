@@ -1,1 +1,1 @@
-✎ write: '❲Program input bytes❳ characters.↵'.
+✎ write: '% characters.↵' % (Program input bytes).

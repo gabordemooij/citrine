@@ -2,7 +2,7 @@
 ☞ list := List new.
 
 'Verbatim Syntax' characters each: { :number :letter
-	list ; ('<li>#❲number + 1❳:❲letter❳</li>').
+	list ; (('<li>#Number:Letter</li>') Number: (number + 1), Letter: letter).
 }.
 
 ✎ list.
@@ -17,11 +17,11 @@
 <p>Hello this is a test!</p>
 <p>The string \'Verbatim Syntax\' has: 15 code points...</p>
 <ul>
-❲list join: '↵'❳
+[list]
 </ul>
 </body> 
 </html>
-'.
+' [list]: (list join: '↵').
 
 ✎ write: template.
 

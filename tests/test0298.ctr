@@ -3,4 +3,4 @@
 ☞ a := Array ← 1 ; 2 ; 3.
 ☞ b := a copy.
 b put: 999 at: 1.
-✎ write: '❲a❳ ❲b❳', brk.
+✎ write: ('a b' a a b b), brk.

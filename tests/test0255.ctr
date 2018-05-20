@@ -2,8 +2,8 @@
 
 {
 	{ ↲ (counter > 0). } whileTrue: 'dont segfault!'.
-} catch: { :err ✎ write: '❲err❳↵'. }, run.
+} catch: { :err ✎ write: err, brk. }, run.
 
 {
 	{ ↲ (counter < 10). } whileFalse: 'dont segfault!'.
-} catch: { :err ✎ write: '❲err❳↵'. }, run.
+} catch: { :err ✎ write: err, brk. }, run.

@@ -7,7 +7,7 @@ Greeter on: 'name:' do: { :name
 	⚿ name := name.
 }.
 Greeter on: 'greet' do: {
-	✎ write: 'hello❲⚿ name❳'.
+	✎ write: ('hello[you]' [you]: ⚿ name).
 }.
 ☞ friend := Greeter new.
 friend name: '1'.

@@ -10,7 +10,16 @@
 
 ☞ comparisons := Array new.
 dictionary each: { :a :b
-	comparisons ; ('❲a❳ ❲b❳ | ❲ a > b ❳ ❲ a ≥ b ❳ ❲ a < b ❳ ❲ a ≤ b ❳ ❲ a compare: b ❳').
+	comparisons ; (
+		'a= b= | a>b a≥b a<b a≤b ab'
+		a=: a,
+		b=: b,
+		a>b: ( a > b ),
+		a≥b: ( a ≥ b ),
+		a<b: ( a < b ),
+		a≤b: ( a ≤ b ),
+		ab:  ( a compare: b)
+	).
 }.
 
 comparisons sort: { :a :b ↲ ( a compare: b ). }.

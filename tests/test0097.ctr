@@ -2,11 +2,12 @@
 ☞ HtmlBrush := Object new.
 
 HtmlBrush on: 'respondTo:' do: { :tag
-	✎ write: '<❲tag❳>↵'.
+	✎ write: ('<tag>↵' tag: tag ).
 }.
 
 HtmlBrush on: 'respondTo:and:' do: { :tag :content
-	✎ write: '<❲tag from: 0 to: (tag length - 1)❳ ❲content❳>'.
+	tag := ( tag from: 0 to: (tag length - 1) ).
+	✎ write: ('<tag content>↵' tag: tag, content: content).
 }.
 
 HtmlBrush on: 'content:' do: { :text
@@ -14,7 +15,7 @@ HtmlBrush on: 'content:' do: { :text
 }.
 
 HtmlBrush on: 'attr:value:' do: { :attr :value
-	↲ '❲attr❳="❲value❳"'.
+	↲ 'attr="value"' attr: attr, value: value.
 }.
 
 ☞ h := HtmlBrush new.

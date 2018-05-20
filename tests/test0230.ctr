@@ -1,3 +1,3 @@
 
 ☞ catcall := 'meow'.
-Pen write: 'The cat goes ❲catcall❳'.
+✎ write: ('The cat goes catcall' catcall: catcall).

@@ -204,48 +204,6 @@ int ctr_clex_tok() {
 	ctr_clex_oldptr = ctr_code;
 	ctr_clex_old_line_number = ctr_clex_line_number;
 	i = 0;
-
-	/* a little state machine to handle string interpolation, */
-	/* i.e. transforms ' "x" ' into: '' + ( x )  + ''. */
-	presetToken = 0;
-	if (!ctr_clex_ignore_modes) {
-		switch( ctr_string_interpolation ) {
-			case 1:
-			case 8:
-				presetToken = CTR_TOKEN_QUOTE;
-				break;
-			case 2:
-			case 7:
-				memcpy( ctr_clex_buffer, "+", 1 );
-				ctr_clex_tokvlen = 1;
-				presetToken = CTR_TOKEN_REF;
-				break;
-			case 3:
-				presetToken = CTR_TOKEN_PAROPEN;
-				break;
-			case 6:
-				presetToken = CTR_TOKEN_PARCLOSE;
-				break;
-		}
-		/* return the preset token, and transition to next state */
-		if ( ctr_string_interpolation > 0 && ctr_string_interpolation != 5) {
-			ctr_string_interpolation++;
-			if (presetToken) return presetToken;
-		}
-
-		/* leave interpolation mode ( ..." ) */
-		if (
-			ctr_string_interpolation == 5 &&
-			(ctr_code + ctr_clex_string_interpolation_stop_len) < ctr_eofcode &&
-			strncmp( ctr_code, CTR_DICT_STR_IPOL_STOP, ctr_clex_string_interpolation_stop_len ) == 0
-		) {
-			ctr_string_interpolation = 6;
-			return CTR_TOKEN_PARCLOSE;
-		}
-
-		
-	}
-
 	c = *ctr_code;
 	while(ctr_code != ctr_eofcode && (isspace(c))) {
 		if (c == '\n') ctr_clex_line_number++;
@@ -345,10 +303,7 @@ int ctr_clex_tok() {
 			&& ( (uint8_t) *(ctr_code+1)== 134)
 			&& ( (uint8_t) *(ctr_code+2)== 145) ) ) &&
 		c != ':' &&
-		c != '\'' &&
-		!(
-		((ctr_code + ctr_clex_string_interpolation_stop_len) < ctr_eofcode ) &&
-		(strncmp(ctr_code,CTR_DICT_STR_IPOL_STOP,ctr_clex_string_interpolation_stop_len)==0))
+		c != '\''
 	)
 	&& ctr_code!=ctr_eofcode
 	) {
@@ -367,8 +322,6 @@ char* ctr_clex_code_pointer() {
 	return ctr_code;
 }
 
-
-
 /**
  * CTRLexerStringReader
  *
@@ -382,11 +335,6 @@ char* ctr_clex_readstr() {
 	char* beginbuff;
 	long page = 100; /* 100 byte pages */
 	size_t tracking_id;
-
-	if (ctr_string_interpolation >= 8) {
-		ctr_code += ctr_clex_string_interpolation_stop_len;
-		ctr_string_interpolation = 0;
-	}
 
 	ctr_clex_tokvlen=0;
 	strbuff = (char*) ctr_heap_allocate_tracked(memblock);
@@ -404,34 +352,21 @@ char* ctr_clex_readstr() {
 			)
 		)
 	) {
-		/* enter interpolation mode ( "x... ) */
-		if (
-			!escape &&
-			(ctr_code + ctr_clex_string_interpolation_start_len) < ctr_eofcode &&
-			strncmp( ctr_code, CTR_DICT_STR_IPOL_START, ctr_clex_string_interpolation_start_len ) == 0
-		) {
-			ctr_string_interpolation = 1;
-			ctr_code += ctr_clex_string_interpolation_start_len;
-			break;
-		}
-
 		if ( c == '\n' ) ctr_clex_line_number ++;
-
 		if ( !ctr_clex_ignore_modes ) {
-			if (ctr_code < (ctr_eofcode - 2)) {
-				if ((uint8_t) *(ctr_code) == 226 && (uint8_t) *(ctr_code+1)==134 && (uint8_t) *(ctr_code+2)==181) {
-					c = '\n';
-					ctr_code += 2;
-				}
-			}
-			if (ctr_code < (ctr_eofcode - 2)) {
-				if ((uint8_t) *(ctr_code) == 226 && (uint8_t) *(ctr_code+1)==135 && (uint8_t) *(ctr_code+2)==191) {
-					c = '\t';
-					ctr_code += 2;
-				}
-			}
+			   if (ctr_code < (ctr_eofcode - 2)) {
+					   if ((uint8_t) *(ctr_code) == 226 && (uint8_t) *(ctr_code+1)==134 && (uint8_t) *(ctr_code+2)==181) {
+							   c = '\n';
+							   ctr_code += 2;
+					   }
+			   }
+			   if (ctr_code < (ctr_eofcode - 2)) {
+					   if ((uint8_t) *(ctr_code) == 226 && (uint8_t) *(ctr_code+1)==135 && (uint8_t) *(ctr_code+2)==191) {
+							   c = '\t';
+							   ctr_code += 2;
+					   }
+			   }
 		}
-
 		if ( escape == 1 && !ctr_clex_ignore_modes) {
 			switch(c) {
 				case 'n':
@@ -457,7 +392,6 @@ char* ctr_clex_readstr() {
 					break;
 			}
 		}
-
 		if (c == '\\' && escape == 0 && !ctr_clex_ignore_modes) {
 			escape = 1;
 			ctr_code++;
@@ -475,11 +409,9 @@ char* ctr_clex_readstr() {
 			strbuff = beginbuff + (ctr_clex_tokvlen -1);
 		}
 		escape = 0;
-		
 		if (c == '\\' && escape == 0 && ctr_clex_ignore_modes) {
 			escape = 1;
 		}
-		
 		*(strbuff) = c;
 		strbuff++;
 		ctr_code++;
@@ -513,16 +445,6 @@ int ctr_clex_forward_scan(char* e, char* bytes, ctr_size* newCodePointer) {
 		else if (quote && *(e+i) == '\'' && *(e+i-1)!='\\') quote = 0;
 		else if (!nesting && !quote && !blocks) {
 			for (q=0; q<len; q++) {
-				if (bytes[q]=='"') {
-					if (
-						((e+i) + ctr_clex_string_interpolation_start_len) < ctr_eofcode &&
-						strncmp( (e+i), CTR_DICT_STR_IPOL_STOP, ctr_clex_string_interpolation_start_len ) == 0
-					) {
-						*(newCodePointer) = i;
-						found = 1;
-						break;
-					}
-				}
 				if (*(e+i)==bytes[q]) {
 					if (bytes[q]=='.' && isdigit(*(e+i-1)) && (e+i+1)<ctr_eofcode && isdigit(*(e+i+1))) continue;
 					*(newCodePointer) = i;

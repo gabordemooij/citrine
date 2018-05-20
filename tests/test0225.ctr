@@ -3,5 +3,5 @@
 	var type := ''.
 	( i % 2 ) ifTrue: { type := 'odd'. }.
 	( i % 2 ) ifFalse: { type := 'even'. }.
-	Pen write: '❲i❳ is an ❲type❳ number.', brk.
+	Pen write: ('Q is an type number.' type: type, Q i), brk.
 }.
