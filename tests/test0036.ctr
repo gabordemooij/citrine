@@ -1,11 +1,11 @@
 1000 times: {
-	var a := 'First'.
-	var b := 'Second'.
+	☞ a := 'First'.
+	☞ b := 'Second'.
 	a := b.
-	var garbageMaker := Object new.
+	☞ garbageMaker := Object new.
 	garbageMaker method: 'putGarbageOnScreen' does: {
-		var x := 1.
-		var y := 2.
+		☞ x := 1.
+		☞ y := 2.
 		Broom sweep.
 	}.
 	garbageMaker putGarbageOnScreen.

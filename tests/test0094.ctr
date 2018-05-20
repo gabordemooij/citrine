@@ -1,6 +1,6 @@
 
 ☞ f := { :x
-	var result := 0.
+	☞ result := 0.
 	(x = 1) ifTrue: {
 		result := 1.
 	}, else: {

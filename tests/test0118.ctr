@@ -31,7 +31,7 @@ Pen write: (((Array push: 999) toString) replace: 'Reeks' with: 'Array').
 Pen write: Array count.
 Pen write: Array shift.
 Pen write: (Array join: ',').
-var f := Array new.
+☞ f := Array new.
 Pen write: f count. 
 Pen brk.
 

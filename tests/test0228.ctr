@@ -1,5 +1,5 @@
 
-var str := 'Hello'.
+☞ str := 'Hello'.
 str +=: ' '.
 str +=: 'World'.
 Pen write: str, brk.

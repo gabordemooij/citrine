@@ -1,9 +1,9 @@
 ☞ makeAdder := { :x
-	var f := { :y ↲ (my x + y). } set: 'x' value: x. 
+	☞ f := { :y ↲ (my x + y). } set: 'x' value: x. 
 	↲ f.
 }.
 ☞ mapper := { :array :func
-	var mapping := { :i my q put: (my f applyTo: (my q @ i)) at: i. } 
+	☞ mapping := { :i my q put: (my f applyTo: (my q @ i)) at: i. } 
 	set: 'q' value: array,
 	set: 'f' value: func.
 	(array count) times: { :i mapping applyTo: i. }.

@@ -3,10 +3,10 @@
 
 $ on: 'respondTo:' do: { :x
 	
-	var operation := x @ 0.
-	var valuta    := x @ 1.
-	var money     := x skip: 2.
-	var amount    := 0.
+	☞ operation := x @ 0.
+	☞ valuta    := x @ 1.
+	☞ money     := x skip: 2.
+	☞ amount    := 0.
 		
 	( operation = '+' ) ifTrue: {
 		( valuta = '£' ) ifTrue: { amount := 1.28 * money. }.

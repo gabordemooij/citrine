@@ -14,7 +14,7 @@ Object learn: 'antwoord:met:' means: 'on:do:'.
 
 ☞ Verteller := Object nieuw.
 Verteller antwoord: 'schrijf:' met: { :wat
-	var x := 2.
+	☞ x := 2.
 	( x > 1 ) alsWaar: {
 		Potlood schrijf: wat, nieuweRegel.
 	}.

@@ -1,5 +1,5 @@
 {
-	var a := Array new.
+	☞ a := Array new.
 	a push: 1.
 	a push: 2.
 	Pen write: (a join: ','), brk.

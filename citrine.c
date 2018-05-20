@@ -86,9 +86,7 @@ int main(int argc, char* argv[]) {
 	ctr_source_mapping = 1;
 	ctr_clex_keyword_me = CTR_DICT_ME;
 	ctr_clex_keyword_my = CTR_DICT_MY;
-	ctr_clex_keyword_var = CTR_DICT_VAR;
 	ctr_clex_keyword_my_len = strlen( ctr_clex_keyword_my );
-	ctr_clex_keyword_var_len = strlen( ctr_clex_keyword_var );
 	ctr_clex_keyword_me_icon = CTR_DICT_ME_ICON;
 	ctr_clex_keyword_my_icon = CTR_DICT_MY_ICON;
 	ctr_clex_keyword_var_icon = CTR_DICT_VAR_ICON;

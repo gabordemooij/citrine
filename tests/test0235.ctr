@@ -1,4 +1,4 @@
 
-var s := Slurp new.
+☞ s := Slurp new.
 s hello: 'world'.
 Pen write: ( s obtain ), brk.

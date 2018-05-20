@@ -1,6 +1,6 @@
 
 1 to: 10 step: 1 do: { :i
-	var type := ''.
+	☞ type := ''.
 	( i % 2 ) ifTrue: { type := 'odd'. }.
 	( i % 2 ) ifFalse: { type := 'even'. }.
 	Pen write: ('Q is an type number.' type: type, Q i), brk.

@@ -1,6 +1,6 @@
 ☞ z := Array new.
 {
-	var x := 'hello'.
+	☞ x := 'hello'.
 	z push: x.
 } run.
 Pen write: (z at: 0).

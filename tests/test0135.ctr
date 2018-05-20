@@ -23,9 +23,9 @@ dust2   := Broom dust.
 
 
 
-{ var a := 'dust!'. } run.
-{ var a := 'dust!'. } run.
-{ var a := 'dust!'. } run.
+{ ☞ a := 'dust!'. } run.
+{ ☞ a := 'dust!'. } run.
+{ ☞ a := 'dust!'. } run.
 { ↲ 'dust!'. } run.
 
 

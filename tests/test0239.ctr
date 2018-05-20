@@ -6,7 +6,7 @@
 
 
 a on: 'toString' do: {
-	var answer := Nil.
+	☞ answer := Nil.
 	( me = True ) ifTrue: {
 		answer := 'Yep'.
 	}, else: {
@@ -16,7 +16,7 @@ a on: 'toString' do: {
 }.
 
 a on: 'toNumber' do: {
-	var answer := Nil.
+	☞ answer := Nil.
 	( me = True ) ifTrue: {
 		answer := 10.
 	}, else: {
