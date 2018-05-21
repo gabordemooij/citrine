@@ -1,16 +1,7 @@
-
-# Source Code Extracted API/Manual
-# --------------------------------
-# API documentation generation script
-# generates man-style documentation
-# written by Gabor de Mooij
-
 # Start: ctr sman.ctr > ctr.1 ;mandoc -O style=ctrstyle.css -Thtml ctr.1 > docs.html ;mandoc -a ctr.1
-
 Broom memoryLimit: 600000.
 Broom mode: 4.
-
-?>
+✎ write: '
 .\" Manpage for ctr.
 .TH man 1 "1 June 2017" "1.0" "CTR man page"
 .SH NAME
@@ -29,7 +20,7 @@ Citrine has 5 literals:
 .br
 - Numbers (1, -2, 3.5)
 .br
-- Strings 'All Strings are UTF8!'
+- Strings \'All Strings are UTF8!\'
 .br
 - Code Blocks { parameters code }
 .br
@@ -37,9 +28,9 @@ Citrine has 5 literals:
 .RE
 The following messages are part of the Core API of the Citrine Programming Language:
 .br
-<?.
+'.
 
-files := Array <
+☞ files := Array ←
 			'../base.c' ;
 			'../collections.c' ;
 			'../file.c' ;
@@ -49,55 +40,44 @@ files := Array <
 			'../plugins/jsmn/jsmn.c' ;
 			'../plugins/pg/pg.c'.
 
-
 files each: { :index :file
-	var f := File new: file.
-	var str := f read.
-	var commentBlocks := str split: '/**'.
+	☞ f := File new: file.
+	☞ str := f read.
+	☞ commentBlocks := str split: '/**'.
 	commentBlocks shift.
-	
 	(commentBlocks count) times: {
-		var comment := commentBlocks shift.
-		var lines   := comment split: '\n'.
-		lines count > 3 ifTrue: {
-		
-			#print the headline
-			var headline := lines @ 1.
-			
-			Pen write: '.BR.BR.BR', brk brk.
-			
-			((headline indexOf: '@internal') = -1) ifTrue: {
-				
-				Pen write: '.B ' + (headline skip: 3), brk.
-				
-				
-				#print the rest
-				Pen write: '.nf', brk.
-				var line := ''.
-				var n := 2.
+		☞ comment := commentBlocks shift.
+		☞ lines   := comment split: '\n'.
+		lines count > 3 true: {
+			☞ headline := lines @ 1.
+			✎ write: '.BR.BR.BR', brk brk.
+			((headline indexOf: '@internal') = -1) true: {
+				✎ write: '.B ' + (headline skip: 3), brk.
+				✎ write: '.nf', brk.
+				☞ line := ''.
+				☞ n := 2.
 				{
 					line := lines at: n. 
 					↲ ((line indexOf: '*/') = -1). 
 				}
-				whileTrue: {
+				true: {
 						line := line replace: '\\' with: '\\\\'.
-						Pen write: '    '+(line skip: 2), brk.
+						✎ write: '    '+(line skip: 2), brk.
 						n +=: 1.
 				}.
-				Pen write: '.fi', brk.
+				✎ write: '.fi', brk.
 			}.
 		}.
 	}.
 	file close.
 }.
 
-
-
-?>
+✎ write: '
 .SH BUGS
 This is a preliminary version (< 1.0) of Citrine, there might still be very serious bugs.
 Please refrain from using this version in a production environment. This version of Citrine
-is still considered 'alpha' stage and cannot be expected to be reliable.
+is still considered \'alpha\' stage and cannot be expected to be reliable.
 
 .SH AUTHOR
 Gabor de Mooij and the Citrine Community
+'.

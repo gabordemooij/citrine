@@ -681,16 +681,13 @@ ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] ifTrue: [block]
+ * [Boolean] true: [block]
  *
  * Executes a block of code if the value of the boolean
  * object is True.
  *
  * Usage:
- * (some expression) ifTrue: { ... }.
- *
- * You can also use ifFalse and ifTrue with other objects because the
- * Object instance also responds to these messages.
+ * (some expression) true: { ... }.
  */
 ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
@@ -707,16 +704,13 @@ ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] ifFalse: [block]
+ * [Boolean] false: [block]
  *
  * Executes a block of code if the value of the boolean
  * object is True.
  *
  * Usage:
- * (some expression) ifFalse: { ... }.
- *
- * You can also use ifFalse and ifTrue with other objects because the
- * Object instance also responds to these messages.
+ * (some expression) false: { ... }.
  */
 ctr_object* ctr_bool_if_false(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
@@ -3122,8 +3116,8 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
  * Usage:
  *
  * x := 0.
- * { ^(x < 6). } whileFalse:
- * { x add: 1. }. #increment x until it reaches 6.
+ * { ^(x < 6). } false:
+ * { x add: 1. }.
  *
  * Here we increment variable x by one until it reaches 6.
  * While the number x is lower than 6 we keep incrementing it.
@@ -3161,7 +3155,7 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
  *
  * x := 0.
  * { ^(x > 5). }
- * whileFalse: { x add: 1. }. #increment x until it reaches 6.
+ * false: { x add: 1. }.
  *
  * Here we increment variable x by one until it reaches 6.
  * While the number x is not higher than 5 we keep incrementing it.
