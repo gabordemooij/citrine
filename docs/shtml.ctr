@@ -1,10 +1,8 @@
 Broom memoryLimit: 600000.
 Broom mode: 4.
-
-template := (File new: 'template.html') read.
-
-menu  := '<ul>'.
-files := Array <
+☞ template := (File new: 'template.html') read.
+☞ menu  := '<ul>'.
+☞ files := Array <
 			'../base.c' ;
 			'../collections.c' ;
 			'../file.c' ;
@@ -14,68 +12,62 @@ files := Array <
 			'../plugins/jsmn/jsmn.c' ;
 			'../plugins/pg/pg.c'.
 
-files each: { :index :file
-	var f := File new: file.
-	var str := f read.
-	var commentBlocks := str split: '/**'.
+☞ files each: { :index :file
+	
+	☞  f := File new: file.
+	☞ str := f read.
+	
+	☞ commentBlocks := str split: '/**'.
 	commentBlocks shift.
 	
 	(commentBlocks count) times: {
-		var comment := commentBlocks shift.
-		var lines   := comment split: '\n'.
-		lines count > 3 ifTrue: {
+		☞ comment := commentBlocks shift.
+		☞ lines   := comment split: '\n'.
+		lines count > 3 true: {
 		
-			#print the headline
-			var headline := lines @ 1.
+			☞ headline := lines @ 1.
 			
 			
-			((headline indexOf: '@internal') = -1) ifTrue: {
+			((headline indexOf: '@internal') = -1) true: {
 				
-				var chapter := headline skip: 3.
-				var page := template.
+				☞ chapter := headline skip: 3.
+				☞ page := template.
 				page := page replace: '{{title}}' with: chapter htmlEscape.
 				
-				var content := ''.
-				var line := ''.
-				var endsWithCode := False.
+				☞ content := ''.
+				☞ line := ''.
+				☞ endsWithCode := False.
 				
-				var n := 2.
+				☞ n := 2.
 				{
 					line := lines at: n. 
 					↲ ((line indexOf: '*/') = -1). 
 				}
-				whileTrue: {
+				true: {
 						line := line replace: '\\' with: '\\\\'.
-						var contentLine := ((line skip: 2) htmlEscape).
+						☞ contentLine := ((line skip: 2) htmlEscape).
 						
-						((contentLine indexOf: 'Usage:') > -1) ifTrue: {
+						((contentLine indexOf: 'Usage:') > -1) true: {
 							endsWithCode := True.
 							contentLine := contentLine replace: 'Usage:' with: '<br>Usage:</p><pre>'.
 						}.
 						content append: contentLine + '\n'.
-						
 						n +=: 1.
-						
 				}.
-				
-				endsWithCode ifTrue: {
+				endsWithCode true: {
 					content append: '</pre><p>'.
 				}.
 				page := page replace: '{{content}}' with: content.
-				
-				var filename := (headline skip: 3) 
+				☞ filename := (headline skip: 3) 
 					asciiLowerCase
-					findPattern: '[↲a-z0-9]' do: {↲ ''.}.
-				
+					findPattern: '[^↲a-z0-9]' do: {↲ ''.}.
 				menu append: '<li><a href="' + filename + '.ctr">' + (chapter htmlEscape) + '</a></li>'.
-				
-				var pageFile := (File new: ('pages/' + filename + '.ctr')).
+				☞ pageFile := (File new: ('pages/' + filename + '.ctr')).
+				✎ write: pageFile path, brk.
 				pageFile write: page.
 			}.
 		}.
 	}.
-	
-	
 	file close.
 }.
 
@@ -85,5 +77,5 @@ menu append: '</ul>'.
 menu := template replace: '{{content}}' with: menu.
 menu := menu replace: '{{title}}' with: 'Main Menu | Manual Pages'.
 
-var menuFile := (File new: 'pages/menu.ctr').
+☞ menuFile := (File new: 'pages/menu.ctr').
 menuFile write: menu.

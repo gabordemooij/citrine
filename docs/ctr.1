@@ -1,12 +1,12 @@
 
-.\" Manpage for ctr.
+." Manpage for ctr.
 .TH man 1 "1 June 2017" "1.0" "CTR man page"
 .SH NAME
-ctr \- run a Citrine program
+ctr - run a Citrine program
 .SH SYNOPSIS
 ctr [PROGRAM]
 .SH DESCRIPTION
-Citrine\*R is general purpose programming language for UNIX\*R-like operating systems.
+Citrine*R is general purpose programming language for UNIX*R-like operating systems.
 .SH REFERENCE MANUAL
 Citrine has 5 literals:
 .RS 4
@@ -186,6 +186,22 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [Object] copy
+.nf
+    
+     Contrary to other languages, all objects, even booleans, numbers and
+     strings are assigned and passed by reference. To create a shallow copy
+     of a number, string or boolean send the message 'copy'.
+    
+     Usage:
+    
+     a := 5.
+     b := a copy.
+     b +=: 1.
+    
+.fi
+.BR.BR.BR
+
 .B [Object] case: [Object] do: [Block].
 .nf
     
@@ -357,31 +373,25 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Boolean] ifTrue: [block]
+.B [Boolean] true: [block]
 .nf
     
      Executes a block of code if the value of the boolean
      object is True.
     
      Usage:
-     (some expression) ifTrue: { ... }.
-    
-     You can also use ifFalse and ifTrue with other objects because the
-     Object instance also responds to these messages.
+     (some expression) true: { ... }.
 .fi
 .BR.BR.BR
 
-.B [Boolean] ifFalse: [block]
+.B [Boolean] false: [block]
 .nf
     
      Executes a block of code if the value of the boolean
      object is True.
     
      Usage:
-     (some expression) ifFalse: { ... }.
-    
-     You can also use ifFalse and ifTrue with other objects because the
-     Object instance also responds to these messages.
+     (some expression) false: { ... }.
 .fi
 .BR.BR.BR
 
@@ -1137,6 +1147,19 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.B [String] [key]: [value]
+.nf
+    
+     Replaces the character sequence 'key' with the contents of value.
+    
+     Usage:
+    
+     '$ money' money: 10.
+    
+     The example will produce the string '$ 10'.
+.fi
+.BR.BR.BR
+
 .B [String] replace: [string] with: [other]
 .nf
     
@@ -1451,8 +1474,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := 0.
-     { ^(x < 6). } whileFalse:
-     { x add: 1. }. #increment x until it reaches 6.
+     { ^(x < 6). } false:
+     { x add: 1. }.
     
      Here we increment variable x by one until it reaches 6.
      While the number x is lower than 6 we keep incrementing it.
@@ -1470,7 +1493,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      x := 0.
      { ^(x > 5). }
-     whileFalse: { x add: 1. }. #increment x until it reaches 6.
+     false: { x add: 1. }.
     
      Here we increment variable x by one until it reaches 6.
      While the number x is not higher than 5 we keep incrementing it.
@@ -2818,11 +2841,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Program] forbidFork.
-.nf
-.fi
-.BR.BR.BR
-
 .B [Program] remainingMessages: [Number]
 .nf
     
@@ -2841,59 +2859,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Flushes the STDOUT output buffer.
-.fi
-.BR.BR.BR
-
-.B [Program] new: [Block].
-.nf
-    
-     Forks the program into two programs.
-     Creates another program that will run at the same time as the
-     current program. Both the parent and the child will obtain a reference
-     to the newly created program. The child will obtain a reference to
-     itself passed as a parameter to the code block while the parent will
-     obtain its version of the program instance as the return value of the
-     new: message.
-    
-     Note that spawning a new program will leak memory.
-     The file descriptors used to setup communication between parent and
-     child will be removed when the main program ends but any newly created
-     program will add a descriptor pair to the set. This is a limitation
-     in the current implementation.
-    
-     Usage:
-    
-     child := Program new: { :program
-     	Pen write: 'Child', brk.
-     }.
-     Pen write: 'Parent'.
-.fi
-.BR.BR.BR
-
-.B [Program] message: [String].
-.nf
-    
-     Sends a message to another program, i.e. a child or a parent that is
-     running at the same time.
-.fi
-.BR.BR.BR
-
-.B [Program] listen: [Block].
-.nf
-    
-     Stops the current flow of the program and starts listening for
-     messages from other programs that are running at the same time.
-     Upon receiving a message, the specified block will be invocated
-     and passed the message that has been received.
-.fi
-.BR.BR.BR
-
-.B [Program] join
-.nf
-    
-     Rejoins the program with the main program.
-     This message will cause the current program to stop and wait
-     for the child program to end.
 .fi
 .BR.BR.BR
 
@@ -2980,29 +2945,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Creates a remote object from the server specified by the
      ip address.
-.fi
-.BR.BR.BR
-
-.B [Program] port: [Number]
-.nf
-    
-     Sets the port to use for remote connections.
-.fi
-.BR.BR.BR
-
-.B [Program] connectionLimit: [Number]
-.nf
-    
-     Sets the maximum number of connections and requests that will be
-     accepted by the current program.
-.fi
-.BR.BR.BR
-
-.B [Program] serve: [Object]
-.nf
-    
-     Serves an object. Client programs can now communicate with this object
-     and send messages to it.
 .fi
 .BR.BR.BR
 
@@ -3582,9 +3524,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B 
+.B [Curl] respondTo: [string] with: [Object]
 .nf
-     [Curl] respondTo: [string] with: [Object]
     
      Default response sets Curl option
     
@@ -3643,6 +3584,28 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      In this case, we are going to add the Json object to the
      world.
+.fi
+.BR.BR.BR
+
+.B [Pg] new: [String].
+.nf
+    
+     Creates a new PostgreSQL connection using the specified connection details
+     in the string.
+.fi
+.BR.BR.BR
+
+.B [Pg] query: [String] parameters: [Array].
+.nf
+    
+     Executes the query with specified parameters.
+.fi
+.BR.BR.BR
+
+.B [Pg] close.
+.nf
+    
+     Closes connection.
 .fi
 
 .SH BUGS
