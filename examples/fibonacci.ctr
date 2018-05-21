@@ -6,13 +6,9 @@
 	
 	☞ b := f secondLast.
 	
-	✎ write:
-		'the sum of ❲ a ❳ and ❲ b ❳'.
 	
 	☞ sum := (a + b).
-	
-	✎ write: 
-		' is ❲ sum ❳ ↵'.
+	✎ write: sum, brk.
 		
 	f add: sum.
 }.

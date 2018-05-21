@@ -21,11 +21,7 @@ cp ../docs/info.txt /tmp/dist/
 cp ../misc/dictionaries/*.dict /tmp/dist/dictionaries/
 
 #Copy examples
-cp ../examples/99beer.ctr /tmp/dist/examples/
 cp ../examples/fibonacci.ctr /tmp/dist/examples/
-cp ../examples/hello.ctr /tmp/dist/examples/
-cp ../examples/fizzbuzz.ctr /tmp/dist/examples/
-cp ../examples/quiz.ctr /tmp/dist/examples/
 
 #Copy documentation
 cp ../docs/ctr.1 /tmp/dist/docs/ctr.1
