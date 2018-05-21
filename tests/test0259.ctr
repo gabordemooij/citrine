@@ -1,15 +1,15 @@
 ☞ os := (💻 shell: 'uname').
 ☞ file := Nil.
 
-((os indexOf: 'Linux') > -1) ifTrue: {
+((os indexOf: 'Linux') > -1) true: {
 	file := '/var/log/syslog'.
 }.
 
-((os indexOf: 'OpenBSD') > -1) ifTrue: {
+((os indexOf: 'OpenBSD') > -1) true: {
 	file := '/var/log/messages'.
 }.
 
-(file isNil) ifTrue: {
+(file isNil) true: {
 	✎ write: 'Unable to determine location of system log for test', brk.
 	💻 exit.
 }.
@@ -17,27 +17,27 @@
 ☞ key := '--Citrine-->0'.
 💻 log: key.
 ☞ str := (💻 shell: (Slurp tail: file, obtain)).
-((str indexOf: key) > -1) ifTrue: {
+((str indexOf: key) > -1) true: {
 	✎ write: 'OK'.
 }.
 
 key := '--Citrine-->1'.
 💻 warning: key.
 str := (💻 shell: (Slurp tail: file, obtain)).
-((str indexOf: key) > -1) ifTrue: {
+((str indexOf: key) > -1) true: {
 	✎ write: 'OK'.
 }.
 
 key := '--Citrine-->2'.
 💻 error: key.
 str := (💻 shell: (Slurp tail: file, obtain)).
-((str indexOf: key) > -1) ifTrue: {
+((str indexOf: key) > -1) true: {
 	✎ write: 'OK'.
 }.
 
 key := '--Citrine-->3'.
 💻 alert: key.
 str := (💻 shell: (Slurp tail: file, obtain)).
-((str indexOf: key) > -1) ifTrue: {
+((str indexOf: key) > -1) true: {
 	✎ write: 'OK'.
 }.

@@ -4,12 +4,12 @@
 ☞ c := Nil.
 ☞ q := Object new.
 ☞ p := q.
-(a equals: a) ifTrue: { Pen write: 'Y1'. }.
-(a equals: b) ifTrue: { Pen write: 'Y2'. }.
-(a equals: c) ifTrue: { Pen write: 'Y3'. }.
-(a equals: z) ifTrue: { Pen write: 'Y4'. }.
-(z equals: a) ifTrue: { Pen write: 'Y5'. }.
-(q equals: q) ifTrue: { Pen write: 'Y6'. }.
-(p equals: q) ifTrue: { Pen write: 'Y7'. }.
-(p equals: a) ifTrue: { Pen write: 'Y8'. }.
-(p equals: Nil) ifTrue: { Pen write: 'Y9'. }.
+(a equals: a) true: { Pen write: 'Y1'. }.
+(a equals: b) true: { Pen write: 'Y2'. }.
+(a equals: c) true: { Pen write: 'Y3'. }.
+(a equals: z) true: { Pen write: 'Y4'. }.
+(z equals: a) true: { Pen write: 'Y5'. }.
+(q equals: q) true: { Pen write: 'Y6'. }.
+(p equals: q) true: { Pen write: 'Y7'. }.
+(p equals: a) true: { Pen write: 'Y8'. }.
+(p equals: Nil) true: { Pen write: 'Y9'. }.

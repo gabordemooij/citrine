@@ -3,7 +3,7 @@ Number learn: 'plus:' means: '+'.
 Number on: '+' do: { :x
 	☞ rate := 1.
 	☞ currency := x qualification.
-	(currency = 'euros') ifTrue: {
+	(currency = 'euros') true: {
 		rate := 2.
 	}.
 	↲ (⛏ plus: (x * rate)).

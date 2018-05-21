@@ -60,8 +60,8 @@ usedMemory3 := Broom keptAlloc.
 
 
 
-( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) ifTrue: {
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
 	Pen write: 'No memory leaks here'.
-}, ifFalse: {
+}, false: {
 	Pen write: 'Leaking memory...'.
 }.

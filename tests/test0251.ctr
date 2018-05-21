@@ -2,10 +2,10 @@
 
 Number on: 'describe' do: {
 	☞ text := Nil.
-	( ⛏ = 0 ) ifTrue: {
+	( ⛏ = 0 ) true: {
 		text := 'zero'.
 	}.
-	( ⛏ = 1 ) ifTrue: {
+	( ⛏ = 1 ) true: {
 		text := 'one'.
 	}.
 	↲ text.

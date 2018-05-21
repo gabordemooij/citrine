@@ -8,8 +8,8 @@ $ on: 'respondTo:' do: { :x
 	☞ money     := x skip: 2.
 	☞ amount    := 0.
 		
-	( operation = '+' ) ifTrue: {
-		( valuta = '£' ) ifTrue: { amount := 1.28 * money. }.
+	( operation = '+' ) true: {
+		( valuta = '£' ) true: { amount := 1.28 * money. }.
 	}.
 	
 	↲ amount.

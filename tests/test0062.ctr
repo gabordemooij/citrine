@@ -4,9 +4,9 @@ o on: 'hello' do: {}.
 { o on: 'test' do: 3.} catch: { :e Pen write: e, brk. }, run.
 { o on: 'hello' do: {}.} catch: { :e Pen write: e, brk. }, run. 
 { ☞ z := 4 / 0. } catch: { :e Pen write: e, brk. }, run. 
-{ (True & Nil) ifTrue: { Pen write: 'X'.}. } catch: { :e Pen write: e, brk. }, run. 
-{ ('' ? 0) ifTrue: { Pen write: 'X'.}. } catch: { :e Pen write: e, brk. }, run. 
-{ (1 < '2') ifTrue: { Pen write: 'OK'. }. } catch: { :e Pen write: e, brk. }, run. 
-{ (1 < '2.0') ifTrue: { Pen write: 'OK'. }. } catch: { :e Pen write: e, brk. }, run. 
-{ (1 < 'x2.0') ifTrue: { Pen write: 'NO!'. }. } catch: { :e Pen write: e, brk. }, run. 
+{ (True & Nil) true: { Pen write: 'X'.}. } catch: { :e Pen write: e, brk. }, run. 
+{ ('' ? 0) true: { Pen write: 'X'.}. } catch: { :e Pen write: e, brk. }, run. 
+{ (1 < '2') true: { Pen write: 'OK'. }. } catch: { :e Pen write: e, brk. }, run. 
+{ (1 < '2.0') true: { Pen write: 'OK'. }. } catch: { :e Pen write: e, brk. }, run. 
+{ (1 < 'x2.0') true: { Pen write: 'NO!'. }. } catch: { :e Pen write: e, brk. }, run. 
 { Pen write: ('hello OK there' from: '6' to: '8'). } run. 

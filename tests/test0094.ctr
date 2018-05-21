@@ -1,7 +1,7 @@
 
 ☞ f := { :x
 	☞ result := 0.
-	(x = 1) ifTrue: {
+	(x = 1) true: {
 		result := 1.
 	}, else: {
 		result := x * (f applyTo: (x - 1)).

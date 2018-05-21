@@ -70,7 +70,7 @@ Broom sweep.
 
 
 
-(usedMemory1 = usedMemory2 = usedMemory3 = usedMemory4 = usedMemory5) ifTrue: {
+(usedMemory1 = usedMemory2 = usedMemory3 = usedMemory4 = usedMemory5) true: {
 	Pen write: 'Memory usage remains stable.', brk.
 }, else: {
 	Pen write: 'Used memory not stable.', brk.

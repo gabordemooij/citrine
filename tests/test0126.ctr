@@ -8,10 +8,10 @@ Pen write: (Program shell: (Slurp echo: 'Hello I can write to console using flui
 { File new: '/tmp/to.txt', delete. } catch: {}, run.
 
 
-File new: '/tmp/to.txt', exists ifFalse: {
+File new: '/tmp/to.txt', exists false: {
 	Pen write: 'Confirmed. Target file does not exist.\n'.
 }.
-File new: '/tmp/from.txt', exists ifFalse: {
+File new: '/tmp/from.txt', exists false: {
 	Pen write: 'Confirmed. Source file does not exist.\n'.
 }.
 
@@ -23,7 +23,7 @@ File new: '/tmp/from.txt', exists ifFalse: {
 
 💻 shell: (Slurp cp: '/tmp/from.txt /tmp/to.txt', obtain).
 
-File new: '/tmp/to.txt', exists ifTrue: {
+File new: '/tmp/to.txt', exists true: {
 	Pen write: 'Confirmed. Target file has been created by shell.\n'.
 }.
 

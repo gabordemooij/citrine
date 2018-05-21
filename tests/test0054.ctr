@@ -1,9 +1,9 @@
 (Program argCount) times: { :i
-	((Program argument: i) !=: '-r') ifTrue: {
-		(((Program argument: i) indexOf: '.ast') > -1) ifTrue: {
+	((Program argument: i) !=: '-r') true: {
+		(((Program argument: i) indexOf: '.ast') > -1) true: {
 			Pen write: 'Found argument file.'.
 		}.
-		(((Program argument: i) indexOf: '.ctr') > -1) ifTrue: {
+		(((Program argument: i) indexOf: '.ctr') > -1) true: {
 			Pen write: 'Found argument file.'.
 		}.
 	}.

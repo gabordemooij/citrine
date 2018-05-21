@@ -3,6 +3,6 @@
 ☞ x := Object new.
 x on: 'test' do: { ↲ True. }.
 
-(x test) ifTrue: {
+(x test) true: {
 	'x test' eval.
 }.

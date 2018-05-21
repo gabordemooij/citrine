@@ -1,7 +1,7 @@
 'SINGLE_LANGUAGE'.
 
 Boolean learn: 'alsWaar:'
-		means: 'ifTrue:'.
+		means: 'true:'.
 Pen learn: 'schrijf:'
 	means: 'write:'.
 Pen learn: 'nieuweRegel' means: 'brk'.

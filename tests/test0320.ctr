@@ -4,13 +4,13 @@
 ☞ CoffeeMachine := Object new.
 CoffeeMachine on: 'order:' do: { :id
 	☞ coffee := 'Americano'.
-	( id = 1 ) ifTrue: {
+	( id = 1 ) true: {
 		coffee := 'Cappuccino'.
 	}.
-	( id = 2 ) ifTrue: {
+	( id = 2 ) true: {
 		coffee := 'Espresso'.
 	}.
-	( id = 3 ) ifTrue: {
+	( id = 3 ) true: {
 		coffee := 'Latte'.
 	}.
 	↲ coffee.

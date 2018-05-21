@@ -1,8 +1,8 @@
-(Nil = Nil) ifTrue: { Pen write: 'Nil is Nil!'.}.
-(2 > 1) ifTrue: { Pen write: 'YES'. }.
-(2 > 3) ifTrue: { Pen write: 'NO'. }.
-(2 > 3) ifFalse: { Pen write: 'Nonono..'.}.
-True ifTrue: { Pen write: 'TRUE is TRUE!'. }.
-(True) ifTrue: { Pen write: 'TRUE is TRUE!'. }.
-False ifFalse: { Pen write: 'FALSE is FALSE!'. }.
-(False) ifFalse: { Pen write: 'FALSE is FALSE!'. }.
+(Nil = Nil) true: { Pen write: 'Nil is Nil!'.}.
+(2 > 1) true: { Pen write: 'YES'. }.
+(2 > 3) true: { Pen write: 'NO'. }.
+(2 > 3) false: { Pen write: 'Nonono..'.}.
+True true: { Pen write: 'TRUE is TRUE!'. }.
+(True) true: { Pen write: 'TRUE is TRUE!'. }.
+False false: { Pen write: 'FALSE is FALSE!'. }.
+(False) false: { Pen write: 'FALSE is FALSE!'. }.

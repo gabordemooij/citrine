@@ -1,2 +1,2 @@
 
-(3 myself = 3) ifTrue: { Pen write: 'I am myself.'. }.
+(3 myself = 3) true: { Pen write: 'I am myself.'. }.

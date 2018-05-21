@@ -4,7 +4,7 @@
 { File new: '/tmp/seek_test.txt', delete. } catch: {}, run.
 
 
-File new: '/tmp/seek_test.txt', exists ifFalse: {
+File new: '/tmp/seek_test.txt', exists false: {
 	Pen write: 'Confirmed. Target file does not exist.\n'.
 }.
 
