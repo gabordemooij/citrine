@@ -1,9 +1,9 @@
 ☞ counter := 10.
 
 {
-	{ ↲ (counter > 0). } whileTrue: 'dont segfault!'.
+	{ ↲ (counter > 0). } true: 'dont segfault!'.
 } catch: { :err ✎ write: err, brk. }, run.
 
 {
-	{ ↲ (counter < 10). } whileFalse: 'dont segfault!'.
+	{ ↲ (counter < 10). } false: 'dont segfault!'.
 } catch: { :err ✎ write: err, brk. }, run.

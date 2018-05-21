@@ -98,8 +98,6 @@
 #define CTR_DICT_SET_VALUE       "gebruik:waarde:" 
 #define CTR_DICT_ERROR	         "fout:" 
 #define CTR_DICT_CATCH           "bijUitzondering:" 
-#define CTR_DICT_WHILE_TRUE      "zolangJa:" 
-#define CTR_DICT_WHILE_FALSE     "zolangNee:" 
 #define CTR_DICT_CODE_BLOCK      "CodeBlok" 
 #define CTR_DICT_PUSH            "erbij:"
 #define CTR_DICT_PUSH_SYMBOL     ";" 

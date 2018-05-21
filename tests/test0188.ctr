@@ -15,11 +15,11 @@ Pen brk.
 ( 2 > 1 ) true:  { Pen write: 'BLOCK 2', brk. }.
 
 ☞ i := 0.
-{ ↲( i < 3). } whileTrue: { Pen write: i. i +=: 1. }.
+{ ↲( i < 3). } true: { Pen write: i. i +=: 1. }.
 Pen brk.
 
 i := 3.
-{ ↲( i > 0). } whileTrue: { Pen write: i. i := i - 1. }.
+{ ↲( i > 0). } true: { Pen write: i. i := i - 1. }.
 Pen brk.
 
 
@@ -36,11 +36,11 @@ Pen brk.
 ( 2 > 1 ) true:  { Pen write: 'BLOCK 2', brk. }.
 
 i := 0.
-{ ↲( i < 3). } whileTrue: { Pen write: i. i +=: 1. }.
+{ ↲( i < 3). } true: { Pen write: i. i +=: 1. }.
 Pen brk.
 
 i := 3.
-{ ↲( i > 0). } whileTrue: { Pen write: i. i := i - 1. }.
+{ ↲( i > 0). } true: { Pen write: i. i := i - 1. }.
 Pen brk.
 
 
@@ -57,11 +57,11 @@ Pen brk.
 ( 2 > 1 ) true:  { Pen write: 'BLOCK 2', brk. }.
 
 i := 0.
-{ ↲( i < 3). } whileTrue: { Pen write: i. i +=: 1. }.
+{ ↲( i < 3). } true: { Pen write: i. i +=: 1. }.
 Pen brk.
 
 i := 3.
-{ ↲( i > 0). } whileTrue: { Pen write: i. i := i - 1. }.
+{ ↲( i > 0). } true: { Pen write: i. i := i - 1. }.
 Pen brk.
 
 Broom sweep.

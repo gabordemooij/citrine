@@ -98,8 +98,6 @@
 #define CTR_DICT_SET_VALUE       "set:value:" 
 #define CTR_DICT_ERROR	         "error:" 
 #define CTR_DICT_CATCH           "catch:" 
-#define CTR_DICT_WHILE_TRUE      "whileTrue:" 
-#define CTR_DICT_WHILE_FALSE     "whileFalse:" 
 #define CTR_DICT_CODE_BLOCK      "CodeBlock" 
 #define CTR_DICT_PUSH            "push:" 
 #define CTR_DICT_PUSH_SYMBOL     ";" 

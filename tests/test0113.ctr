@@ -9,7 +9,7 @@ Pen write: 'Continue for-loop, No - before 6 and up.', brk.
 ☞ xIsLessThan10 := { ↲( x < 10 ). }.
 Pen brk.
 Pen write: 'Continue while-true, No --> before 5 and up.', brk.
-xIsLessThan10 whileTrue: {
+xIsLessThan10 true: {
 	Pen write: 'iteration #' + x, brk.
 	x +=: 1.
 	((x < 5) not) continue.
@@ -17,7 +17,7 @@ xIsLessThan10 whileTrue: {
 }.
 Pen brk.
 Pen write: 'Continue while-false, No - before 3 only.', brk.
-{ ↲(x = 0). } whileFalse: {
+{ ↲(x = 0). } false: {
 	Pen write: 'iteration #' + x, brk.
 	x -=: 1.
 	(x = 3) continue.
