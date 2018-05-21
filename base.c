@@ -700,7 +700,7 @@ ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
 		arguments->object = myself;
 		result = ctr_block_run(codeBlock, arguments, NULL);
 		ctr_heap_free( arguments );
-		return result;
+		return myself;
 	}
 	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
 	return myself;
@@ -726,7 +726,7 @@ ctr_object* ctr_bool_if_false(ctr_object* myself, ctr_argument* argumentList) {
 		arguments->object = myself;
 		result = ctr_block_run(codeBlock, arguments, NULL);
 		ctr_heap_free( arguments );
-		return result;
+		return myself;
 	}
 	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
 	return myself;
