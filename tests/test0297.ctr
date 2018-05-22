@@ -2,12 +2,12 @@
 
 ☞ colors := Array ← 'red' ; 'green' ; 'blue' ; 3 ; (Array new) ; False ; Nil.
 
-✎ write: (colors indexOf: 'green'), brk. 
-✎ write: (colors indexOf: 'blue'), brk. 
-✎ write: (colors indexOf: 'red'), brk. 
-✎ write: (colors indexOf: 3), brk. 
-✎ write: (colors indexOf: (Array new)), brk. 
-✎ write: (colors indexOf: 'False'), brk. 
-✎ write: (colors indexOf: Nil), brk. 
-✎ write: (colors indexOf: 'purple'), brk. 
+✎ write: (colors find: 'green'), brk. 
+✎ write: (colors find: 'blue'), brk. 
+✎ write: (colors find: 'red'), brk. 
+✎ write: (colors find: 3), brk. 
+✎ write: (colors find: (Array new)), brk. 
+✎ write: (colors find: 'False'), brk. 
+✎ write: (colors find: Nil), brk. 
+✎ write: (colors find: 'purple'), brk. 
 

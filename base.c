@@ -1886,14 +1886,14 @@ ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [String] indexOf: [subject]
+ * [String] first: [subject]
  *
  * Returns the index (character number, not the byte!) of the
  * needle in the haystack.
  *
  * Usage:
  *
- * 'find the needle' indexOf: 'needle'. #9
+ * 'find the needle' find: 'needle'.
  *
  */
 ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) {
@@ -1995,14 +1995,14 @@ ctr_object* ctr_string_to_string(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [String] lastIndexOf: [subject]
+ * [String] last: [subject]
  *
  * Returns the index (character number, not the byte!) of the
  * needle in the haystack.
  *
  * Usage:
  *
- * 'find the needle' lastIndexOf: 'needle'. #9
+ * 'find the needle' last: 'needle'.
  */
 ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sub = ctr_internal_cast2string(argumentList->object);

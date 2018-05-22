@@ -1,11 +1,11 @@
 ☞ os := (💻 shell: 'uname').
 ☞ file := Nil.
 
-((os indexOf: 'Linux') > -1) true: {
+((os find: 'Linux') > -1) true: {
 	file := '/var/log/syslog'.
 }.
 
-((os indexOf: 'OpenBSD') > -1) true: {
+((os find: 'OpenBSD') > -1) true: {
 	file := '/var/log/messages'.
 }.
 
@@ -17,27 +17,27 @@
 ☞ key := '--Citrine-->0'.
 💻 log: key.
 ☞ str := (💻 shell: (Slurp tail: file, obtain)).
-((str indexOf: key) > -1) true: {
+((str find: key) > -1) true: {
 	✎ write: 'OK'.
 }.
 
 key := '--Citrine-->1'.
 💻 warning: key.
 str := (💻 shell: (Slurp tail: file, obtain)).
-((str indexOf: key) > -1) true: {
+((str find: key) > -1) true: {
 	✎ write: 'OK'.
 }.
 
 key := '--Citrine-->2'.
 💻 error: key.
 str := (💻 shell: (Slurp tail: file, obtain)).
-((str indexOf: key) > -1) true: {
+((str find: key) > -1) true: {
 	✎ write: 'OK'.
 }.
 
 key := '--Citrine-->3'.
 💻 alert: key.
 str := (💻 shell: (Slurp tail: file, obtain)).
-((str indexOf: key) > -1) true: {
+((str find: key) > -1) true: {
 	✎ write: 'OK'.
 }.

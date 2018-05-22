@@ -8,11 +8,11 @@
 Broom mode: 0.
 
 ☞ txt := 'Word Salad'.
-Pen write: 'last index of ord = ' + ( txt lastIndexOf: 'ord' ), brk.
-Pen write: 'index of ord = ' + ( txt indexOf: 'ord' ), brk.
-Pen write: 'index of ad = ' + ( txt indexOf: 'ad' ), brk.
-Pen write: 'last index of W = ' + ( txt lastIndexOf: 'W' ), brk.
-Pen write: 'last index of d = ' + ( txt lastIndexOf: 'd' ), brk.
+Pen write: 'last index of ord = ' + ( txt last: 'ord' ), brk.
+Pen write: 'index of ord = ' + ( txt find: 'ord' ), brk.
+Pen write: 'index of ad = ' + ( txt find: 'ad' ), brk.
+Pen write: 'last index of W = ' + ( txt last: 'W' ), brk.
+Pen write: 'last index of d = ' + ( txt last: 'd' ), brk.
 Pen write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), brk.
 Pen write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
 Pen write: 'txt does not equal Word Salad = ' + ( txt !=: 'Word Salad' ), brk.
@@ -24,11 +24,11 @@ usedMemory1 := Broom keptAlloc.
 
 
 txt := 'Word Salad'.
-Pen write: 'last index of ord = ' + ( txt lastIndexOf: 'ord' ), brk.
-Pen write: 'index of ord = ' + ( txt indexOf: 'ord' ), brk.
-Pen write: 'index of ad = ' + ( txt indexOf: 'ad' ), brk.
-Pen write: 'last index of W = ' + ( txt lastIndexOf: 'W' ), brk.
-Pen write: 'last index of d = ' + ( txt lastIndexOf: 'd' ), brk.
+Pen write: 'last index of ord = ' + ( txt last: 'ord' ), brk.
+Pen write: 'index of ord = ' + ( txt find: 'ord' ), brk.
+Pen write: 'index of ad = ' + ( txt find: 'ad' ), brk.
+Pen write: 'last index of W = ' + ( txt last: 'W' ), brk.
+Pen write: 'last index of d = ' + ( txt last: 'd' ), brk.
 Pen write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), brk.
 Pen write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
 Pen write: 'txt does not equal Word Salad = ' + ( txt !=: 'Word Salad' ), brk.
@@ -39,11 +39,11 @@ usedMemory2 := Broom keptAlloc.
 
 
 txt := 'Word Salad'.
-Pen write: 'last index of ord = ' + ( txt lastIndexOf: 'ord' ), brk.
-Pen write: 'index of ord = ' + ( txt indexOf: 'ord' ), brk.
-Pen write: 'index of ad = ' + ( txt indexOf: 'ad' ), brk.
-Pen write: 'last index of W = ' + ( txt lastIndexOf: 'W' ), brk.
-Pen write: 'last index of d = ' + ( txt lastIndexOf: 'd' ), brk.
+Pen write: 'last index of ord = ' + ( txt last: 'ord' ), brk.
+Pen write: 'index of ord = ' + ( txt find: 'ord' ), brk.
+Pen write: 'index of ad = ' + ( txt find: 'ad' ), brk.
+Pen write: 'last index of W = ' + ( txt last: 'W' ), brk.
+Pen write: 'last index of d = ' + ( txt last: 'd' ), brk.
 Pen write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), brk.
 Pen write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
 Pen write: 'txt does not equal Word Salad = ' + ( txt !=: 'Word Salad' ), brk.
