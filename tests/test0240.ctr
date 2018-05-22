@@ -45,9 +45,9 @@ Fruit on: '+' do: { :f
 	↲ n.
 }.
 
-Fruit on: 'toString' do: {
+Fruit on: 'string' do: {
 	
-	↲ ( ⚿ apples toString + ' apples and ' + ⚿ oranges + ' oranges' ).
+	↲ ( ⚿ apples string + ' apples and ' + ⚿ oranges + ' oranges' ).
 }.
 
 Number on: 'apples' do: {
@@ -69,7 +69,7 @@ Number on: 'oranges' do: {
 
 
 String on: 'twice' do: {
-	↲ ((⛏ toString) + (⛏ toString)).
+	↲ ((⛏ string) + (⛏ string)).
 }.
 
 

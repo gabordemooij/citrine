@@ -1566,7 +1566,7 @@ ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [Number] toBoolean
+ * [Number] boolean
  *
  * Casts a number to a boolean object.
  */

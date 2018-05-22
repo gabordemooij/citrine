@@ -403,7 +403,7 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
 	ctr_object* boolObject = ctr_send_message( o, CTR_DICT_TOBOOL, strlen(CTR_DICT_TOBOOL), a );
 	ctr_heap_free(a);
 	if ( boolObject->info.type != CTR_OBJECT_TYPE_OTBOOL ) {
-		CtrStdFlow = ctr_error_text( "toBoolean must return a boolean." );
+		CtrStdFlow = ctr_error_text( "boolean must return a boolean." );
 		return ctr_build_bool(0);
 	}
 	return boolObject;
