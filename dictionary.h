@@ -59,7 +59,7 @@
 #define CTR_DICT_TAN             "tan"
 #define CTR_DICT_ATAN            "atan"
 #define CTR_DICT_LOG             "log" 
-#define CTR_DICT_POWER           "toPowerOf:"
+#define CTR_DICT_POWER           "power:"
 #define CTR_DICT_MIN             "min" 
 #define CTR_DICT_MAX             "max"
 #define CTR_DICT_MIN_ARG   	     "min:" 

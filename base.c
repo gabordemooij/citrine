@@ -1193,14 +1193,14 @@ ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] toPowerOf: [power]
+ * [Number] power: [power]
  *
  * Returns a new object representing the
  * number to the specified power.
  *
  * Usage:
  *
- * x := 2 toPowerOf: 8. #x will be 256
+ * x := 2 power: 8.
  *
  * The example above will raise 2 to the power of 8 resulting in
  * a new Number object: 256.

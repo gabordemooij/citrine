@@ -20,6 +20,6 @@ Pen write: -666 abs, brk.
 Pen write: 2 sin, brk write: 2 tan, brk write: 2 log, brk.
 Pen write: 2 exp, brk write: 2 atan, brk.
 Pen write: 49 sqrt, brk.
-Pen write: (2 toPowerOf: 3), brk.
+Pen write: (2 power: 3), brk.
 Pen write: ((9 max: 5) min: 6).
 
