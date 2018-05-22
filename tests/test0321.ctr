@@ -20,7 +20,7 @@ Number on: 'apples' do: {
 	↲ ((Fruit new) apples: ⛏).
 }.
 
-Fruit on: 'toString' do: {
+Fruit on: 'string' do: {
 	↲ ⚿ apples + ' apples '.
 }.
 
