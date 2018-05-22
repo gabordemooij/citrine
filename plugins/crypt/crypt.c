@@ -107,7 +107,7 @@ void begin(){
 		cryptObject->link = CtrStdObject;
 		ctr_internal_create_func(cryptObject, ctr_build_string_from_cstring( "new:" ), &ctr_hash_new );
     	ctr_internal_create_func(cryptObject, ctr_build_string_from_cstring( "=" ), &ctr_password_verify );
-    	ctr_internal_create_func(cryptObject, ctr_build_string_from_cstring( "toString" ), &ctr_password_to_string );
+    	ctr_internal_create_func(cryptObject, ctr_build_string_from_cstring( "string" ), &ctr_password_to_string );
     	ctr_internal_create_func(cryptObject, ctr_build_string_from_cstring( "fromHash:" ), &ctr_password_from_hash );
     	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Password" ), cryptObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	}
