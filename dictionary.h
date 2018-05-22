@@ -81,7 +81,7 @@
 #define CTR_DICT_HTML_ESCAPE	 "htmlEscape" 
 #define CTR_DICT_AT              "at:" 
 #define CTR_DICT_AT_SYMBOL       "@" 
-#define CTR_DICT_BYTE_AT         "byteAt:" 
+#define CTR_DICT_BYTE_AT         "byte:" 
 #define CTR_DICT_INDEX_OF        "indexOf:" 
 #define CTR_DICT_LAST_INDEX_OF	 "lastIndexOf:" 
 #define CTR_DICT_REPLACE_WITH	 "replace:with:" 
