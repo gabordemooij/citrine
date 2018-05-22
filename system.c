@@ -283,7 +283,7 @@ ctr_object* ctr_gc_to_string(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Broom] toNumber.
+ * [Broom] number.
  *
  * Returns the number of objects that have been collected by the
  * garbage collector.
@@ -795,7 +795,7 @@ ctr_object* ctr_program_to_string(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [Program] toNumber
+ * [Program] number
  *
  * Returns the program pid as a number.
  */
@@ -962,7 +962,7 @@ ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Dice] toNumber
+ * [Dice] number
  *
  * On receiving this message, the Dice instance will send the message
  * 'rawRandomNumber' to itself and return the result as a string.
@@ -973,14 +973,14 @@ ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList) {
  * #rig the dice ;)
  * ⚄ on: 'rawRandomNumber' do: { ↲ 6. }.
  * ✎ write: ⚄, brk. #6
- * ✎ write: ⚄ toNumber, brk. #6
+ * ✎ write: ⚄ number, brk. #6
  */
 ctr_object* ctr_dice_to_string(ctr_object* myself, ctr_argument* argumentList) {
        return ctr_internal_cast2string( ctr_send_message( myself, "rawRandomNumber", strlen("rawRandomNumber"), argumentList ) );
 }
 
 /**
- * [Dice] toNumber
+ * [Dice] number
  *
  * On receiving this message, the Dice instance will send the message
  * 'rawRandomNumber' to itself and return the result.
@@ -991,7 +991,7 @@ ctr_object* ctr_dice_to_string(ctr_object* myself, ctr_argument* argumentList) {
  * #rig the dice ;)
  * ⚄ on: 'rawRandomNumber' do: { ↲ 6. }.
  * ✎ write: ⚄, brk. #6
- * ✎ write: ⚄ toNumber, brk. #6
+ * ✎ write: ⚄ number, brk. #6
  */
 ctr_object* ctr_dice_to_number(ctr_object* myself, ctr_argument* argumentList) {
        return ctr_internal_cast2number( ctr_send_message( myself, "rawRandomNumber", strlen("rawRandomNumber"), argumentList ) );
@@ -1427,8 +1427,8 @@ ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList ) {
  * ⏰ on: 'format:' do: { ↲ 'beautiful moment'. }.
  * ⏰ on: 'time' do: { ↲ '999'. }.
  *
- * write: ⏰, brk. #beautiful moment
- * ✎ write: ⏰ toNumber, brk. #999
+ * write: ⏰, brk.
+ * ✎ write: ⏰ number, brk.
  */
 ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_argument* newArgumentList;
@@ -1441,7 +1441,7 @@ ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList 
 }
 
 /**
- * [Clock] toNumber
+ * [Clock] number
  *
  * Returns a time stamp describing the date and time
  * represented by the clock object. On receiving this message, the Clock
@@ -1455,8 +1455,8 @@ ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList 
  * ⏰ on: 'format:' do: { ↲ 'beautiful moment'. }.
  * ⏰ on: 'time' do: { ↲ '999'. }.
  *
- * write: ⏰, brk. #beautiful moment
- * ✎ write: ⏰ toNumber, brk. #999
+ * ✎ write: ⏰, brk.
+ * ✎ write: ⏰ number, brk.
  */
 ctr_object* ctr_clock_to_number( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_send_message( myself, "time", strlen("time"), argumentList );

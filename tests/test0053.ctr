@@ -5,9 +5,9 @@
 	x := Dice rollWithSides: 3.
 	(x < 3) false: { Pen write: 'FAIL'. }.
 	(x>-1) false: { Pen write: 'FAIL'. }.
-	x := ((Boolean flip) toNumber).
+	x := ((Boolean flip) number).
 	(x = 0 or: x = 1) false: { Pen write: 'FAIL'. }.
-	x := ((True flip) toNumber).
+	x := ((True flip) number).
 	(x = 0 or: x = 1) false: { Pen write: 'FAIL'. }.
 	x := (Boolean flip either: 'HEAD' or: 'TAIL').
 	(x = 'HEAD' | x = 'TAIL') false: { Pen write: 'FAIL'. }.

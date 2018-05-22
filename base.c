@@ -50,7 +50,7 @@ ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Nil] toString
+ * [Nil] string
  *
  * Returns the string representation of Nil: 'Nil'.
  */
@@ -59,7 +59,7 @@ ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Nil] toNumber
+ * [Nil] number
  *
  * Returns the numerical representation of Nil: 0.
  */
@@ -68,7 +68,7 @@ ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* ctr_argumentList
 }
 
 /**
- * [Nil] toBoolean
+ * [Nil] boolean
  *
  * Returns the boolean representation of Nil: False.
  */

@@ -363,7 +363,7 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
 	ctr_object* numObject = ctr_send_message( o, CTR_DICT_TONUMBER, strlen(CTR_DICT_TONUMBER), a );
 	ctr_heap_free(a);
 	if ( numObject->info.type != CTR_OBJECT_TYPE_OTNUMBER ) {
-		CtrStdFlow = ctr_error_text( "toNumber must return a number." );
+		CtrStdFlow = ctr_error_text( "number must return a number." );
 		return ctr_build_number_from_float((ctr_number)0);
 	}
 	return numObject;
@@ -383,7 +383,7 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 	ctr_object* stringObject = ctr_send_message( o, CTR_DICT_TOSTRING, strlen(CTR_DICT_TOSTRING), a );
 	ctr_heap_free(a);
 	if ( stringObject->info.type != CTR_OBJECT_TYPE_OTSTRING ) {
-		CtrStdFlow = ctr_error_text( "toString must return a string." );
+		CtrStdFlow = ctr_error_text( "string must return a string." );
 		return ctr_build_string_from_cstring( "?" );
 	}
 	return stringObject;
@@ -713,7 +713,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_SKIP ), &ctr_string_skip );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_APPEND ), &ctr_string_append );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_ADD ), &ctr_string_append );
-	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TO_NUMBER ), &ctr_string_to_number );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_string_to_number );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TOBOOL ), &ctr_string_to_boolean );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_FIND_PATTERN_DO ), &ctr_string_find_pattern_do );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_FIND_PATTERN_DO_OPTIONS ), &ctr_string_find_pattern_options_do );

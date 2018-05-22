@@ -27,7 +27,7 @@ Pen brk.
 Pen write: 'Array:'.
 Pen write: Array pop.
 Pen write: Array count.
-Pen write: (((Array push: 999) toString) replace: 'Reeks' with: 'Array').
+Pen write: (((Array push: 999) string) replace: 'Reeks' with: 'Array').
 Pen write: Array count.
 Pen write: Array shift.
 Pen write: (Array join: ',').
