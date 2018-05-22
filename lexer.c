@@ -229,13 +229,6 @@ int ctr_clex_tok() {
 		return CTR_TOKEN_RET;
 	}
 
-	if ((
-		ctr_clex_ignore_modes &&
-		(ctr_code + ctr_clex_string_interpolation_start_len) < ctr_eofcode &&
-		(strncmp(ctr_code,CTR_DICT_STR_IPOL_STOP,ctr_clex_string_interpolation_stop_len)==0)
-	)) {
-		ctr_code+=3; return CTR_TOKEN_QUOTE; }
-
 	if (c == '\'') {
 		ctr_code++; return CTR_TOKEN_QUOTE; }
 

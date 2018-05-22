@@ -833,7 +833,6 @@ void ctr_initialize_world() {
 	/* Console */
 	CtrStdConsole = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_WRITE ), &ctr_console_write );
-	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_WRITE_TEMPLATE_SYMBOL ), &ctr_console_write );
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_BRK ), &ctr_console_brk );
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_RED ), &ctr_console_red );
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_GREEN ), &ctr_console_green );
@@ -846,7 +845,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_TAB ), &ctr_console_tab );
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_LINE ), &ctr_console_line );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PEN ), CtrStdConsole, 0 );
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PEN_TEMPLATE_SYMBOL ), CtrStdConsole, 0 );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PEN_ICON ), CtrStdConsole, 0 );
 	CtrStdConsole->link = CtrStdObject;
 	CtrStdConsole->info.sticky = 1;
