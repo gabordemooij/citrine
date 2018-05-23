@@ -88,7 +88,7 @@
 #define CTR_DICT_SPLIT	         "opsplitsen:"
 #define CTR_DICT_SKIP            "overslaan:" 
 #define CTR_DICT_APPEND          "toevoegen:" 
-#define CTR_DICT_FIND_PATTERN_DO "vindPatroon:doen:" 
+#define CTR_DICT_FIND_PATTERN_DO "patroon:doen:" 
 #define CTR_DICT_STRING          "Tekst" 
 #define CTR_DICT_RUN             "start" 
 #define CTR_DICT_APPLY_TO        "toepassen:" 

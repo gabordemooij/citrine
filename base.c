@@ -2100,7 +2100,7 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 }
 
 /**
- * [String] findPattern: [String] do: [Block] options: [String].
+ * [String] pattern: [String] do: [Block] options: [String].
  *
  * Matches the POSIX regular expression in the first argument against
  * the string and executes the specified block on every match passing
@@ -2113,7 +2113,7 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
  *
  * Usage:
  *
- * 'hello world' findPattern: '([hl])' do: { :arr
+ * 'hello world' pattern: '([hl])' do: { :arr
  *  Pen write: (arr join: '|'), brk.
  * } options: ''.
  *
@@ -2216,9 +2216,9 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 }
 
 /**
- * [String] findPattern: [String] do: [Block].
+ * [String] pattern: [String] do: [Block].
  *
- * Same as findPattern:do:options: but without the options, no flags will
+ * Same as pattern:do:options: but without the options, no flags will
  * be send to the regex engine.
  */
 ctr_object* ctr_string_find_pattern_do( ctr_object* myself, ctr_argument* argumentList ) {
