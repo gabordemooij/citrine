@@ -11,7 +11,7 @@ HtmlBrush on: 'respondTo:and:' do: { :tag :content
 }.
 
 HtmlBrush on: 'content:' do: { :text
-	✎ write: text htmlEscape, brk.
+	✎ write: text html, brk.
 }.
 
 HtmlBrush on: 'attr:value:' do: { :attr :value

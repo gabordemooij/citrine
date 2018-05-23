@@ -78,7 +78,7 @@
 #define CTR_DICT_TRIM	         "trim" 
 #define CTR_DICT_LEFT_TRIM	     "leftTrim" 
 #define CTR_DICT_RIGHT_TRIM      "rightTrim" 
-#define CTR_DICT_HTML_ESCAPE	 "htmlEscape" 
+#define CTR_DICT_HTML_ESCAPE	 "html" 
 #define CTR_DICT_AT              "at:" 
 #define CTR_DICT_AT_SYMBOL       "@" 
 #define CTR_DICT_BYTE_AT         "byte:" 

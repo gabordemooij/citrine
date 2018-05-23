@@ -2840,7 +2840,7 @@ ctr_object* ctr_string_unescape(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [String] htmlEscape
+ * [String] html
  *
  * Escapes HTML chars.
  */

@@ -8,7 +8,7 @@
 Broom mode: 0.
 
 ☞ txt := '<h1>"Hell\'o & Goodbye"</h1>'.
-Pen write: txt htmlEscape, brk.
+Pen write: txt html, brk.
 Pen write: txt asciiLowerCase, brk.
 Pen write: txt asciiUpperCase, brk.
 Pen write: 'uppercase first' asciiUpperCase1st, brk.
@@ -20,7 +20,7 @@ usedMemory1 := Broom keptAlloc.
 
 
 txt := '<h1>"Hell\'o & Goodbye"</h1>'.
-Pen write: txt htmlEscape, brk.
+Pen write: txt html, brk.
 Pen write: txt asciiLowerCase, brk.
 Pen write: txt asciiUpperCase, brk.
 Pen write: 'uppercase first' asciiUpperCase1st, brk.
@@ -31,7 +31,7 @@ usedMemory2 := Broom keptAlloc.
 
 
 txt := '<h1>"Hell\'o & Goodbye"</h1>'.
-Pen write: txt htmlEscape, brk.
+Pen write: txt html, brk.
 Pen write: txt asciiLowerCase, brk.
 Pen write: txt asciiUpperCase, brk.
 Pen write: 'uppercase first' asciiUpperCase1st, brk.

@@ -78,7 +78,7 @@
 #define CTR_DICT_TRIM	         "knippen" 
 #define CTR_DICT_LEFT_TRIM	     "linksKnippen" 
 #define CTR_DICT_RIGHT_TRIM      "rechtsKnippen" 
-#define CTR_DICT_HTML_ESCAPE	 "htmlCoderen" 
+#define CTR_DICT_HTML_ESCAPE	 "html" 
 #define CTR_DICT_AT              "bij:" 
 #define CTR_DICT_AT_SYMBOL       "@" 
 #define CTR_DICT_BYTE_AT         "byteBij:" 

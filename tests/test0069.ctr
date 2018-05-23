@@ -4,4 +4,4 @@ Pen write: ('zzz' byte: 10).
 Pen write: ('zzz' byte: -10).
 Pen brk.
 Pen write: (' left trimmed ' leftTrim) + ( 'and right trimmed   ' rightTrim) + '!', brk.
-Pen write: '<html>"html & entities"</html>' htmlEscape.
+Pen write: '<html>"html & entities"</html>' html.
