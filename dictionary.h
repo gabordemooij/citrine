@@ -259,7 +259,7 @@
 #define CTR_DICT_FORBID_INCLUDE                  "forbidInclude"
 #define CTR_DICT_SET_REMAINING_MESSAGES          "remainingMessages:"
 #define CTR_DICT_FIND_PATTERN_DO_OPTIONS         "pattern:do:options:"
-#define CTR_DICT_CONTAINS_PATTERN                "containsPattern:"
+#define CTR_DICT_CONTAINS_PATTERN                "matches:"
 #define CTR_DICT_CONTAINS                        "contains:"
 #define CTR_DICT_APPLY_TO_AND_AND                "applyTo:and:and:"
 #define CTR_DICT_NEW_ARRAY_AND_PUSH              "<"

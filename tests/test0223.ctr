@@ -1,11 +1,11 @@
 
-	Pen write: ( 'hello world' containsPattern: 'hello' ), brk.
-Pen write: ( 'hello world' containsPattern: 'bye' ), brk.
-Pen write: ( 'hello world' containsPattern: 'h[eai]llo' ), brk.
-Pen write: ( 'hello world' containsPattern: 'h[iao]llo' ), brk.
-Pen write: ( 'hello world' containsPattern: 'h([eai])llo' ), brk.
-Pen write: ( 'hello world' containsPattern: 'h([iao])llo' ), brk.
-Pen write: ( 'hello world' containsPattern: '[:space:]' ), brk.
-{ Pen write: ( 'hello world' containsPattern: '[:space:' ), brk. } catch: { :e
+	Pen write: ( 'hello world' matches: 'hello' ), brk.
+Pen write: ( 'hello world' matches: 'bye' ), brk.
+Pen write: ( 'hello world' matches: 'h[eai]llo' ), brk.
+Pen write: ( 'hello world' matches: 'h[iao]llo' ), brk.
+Pen write: ( 'hello world' matches: 'h([eai])llo' ), brk.
+Pen write: ( 'hello world' matches: 'h([iao])llo' ), brk.
+Pen write: ( 'hello world' matches: '[:space:]' ), brk.
+{ Pen write: ( 'hello world' matches: '[:space:' ), brk. } catch: { :e
 	Pen write: e, brk.
 }, run.

@@ -2244,14 +2244,14 @@ ctr_object* ctr_string_contains( ctr_object* myself, ctr_argument* argumentList 
 }
 
 /**
- * [String] containsPattern: [String].
+ * [String] matches: [String].
  *
  * Tests the pattern against the string and returns True if there is a match
  * and False otherwise.
  *
  * Usage:
  *
- * var match := 'Hello World' containsPattern: '[:space:]'.
+ * var match := 'Hello World' matches: '[:space:]'.
  * #match will be True because there is a space in 'Hello World'
  */
 ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argumentList ) {
