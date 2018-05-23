@@ -138,7 +138,7 @@
 #define CTR_DICT_FILE            "Bestand"
 #define CTR_DICT_ARGUMENT	     "argument:" 
 #define CTR_DICT_ARGUMENT_COUNT	 "aantalArgumenten" 
-#define CTR_DICT_WAIT_FOR_INPUT	 "wachtOpInvoer" 
+#define CTR_DICT_WAIT_FOR_INPUT	 "vraag" 
 #define CTR_DICT_INPUT           "invoer" 
 #define CTR_DICT_EXIT            "uit"
 #define CTR_DICT_FLUSH           "spoelen"
