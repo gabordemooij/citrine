@@ -86,7 +86,6 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	FILE* f;
 	int error_code;
 	if (path == NULL) return CtrStdNil;
-	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	vlen = path->value.svalue->vlen;
 	pathString = ctr_heap_allocate( sizeof(char) * ( vlen + 1 ) );
 	memcpy(pathString, path->value.svalue->value, vlen);
@@ -128,7 +127,6 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
  * called myxml.xml in the current working directory.
  */
 ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE );
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0 );
 	FILE* f;
@@ -160,7 +158,6 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
  * will be appended to the existing content inside the file.
  */
 ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE );
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_size vlen;
@@ -194,7 +191,6 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 	char* pathString;
 	FILE* f;
 	int exists;
-	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	if (path == NULL) return ctr_build_bool(0);
 	vlen = path->value.svalue->vlen;
 	pathString = ctr_heap_allocate(vlen + 1);
@@ -215,7 +211,6 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
  * Includes the file as a piece of executable code.
  */
 ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_check_permission( CTR_SECPRO_NO_INCLUDE );
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_tnode* parsedCode;
 	ctr_size vlen;
@@ -242,7 +237,6 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
  * Deletes the file.
  */
 ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE );
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_size vlen;
 	char* pathString;
@@ -273,7 +267,6 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 	char* pathString;
 	FILE* f;
 	int prev, sz;
-	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	if (path == NULL) return ctr_build_number_from_float(0);
 	vlen = path->value.svalue->vlen;
 	pathString = ctr_heap_allocate( sizeof(char) * ( vlen + 1 ) );
@@ -305,7 +298,6 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
  * The example above opens the file in f for reading and writing.
  */
 ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	ctr_object* pathObj = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	char* mode;
 	char* path;
@@ -344,7 +336,6 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
  * The example above opens and closes a file.
  */
 ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
 	if (myself->value.rvalue->ptr) {
@@ -374,7 +365,6 @@ ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) 
 	int bytes;
 	char* buffer;
 	ctr_object* result;
-	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
 	bytes = ctr_internal_cast2number(argumentList->object)->value.nvalue;
@@ -408,7 +398,6 @@ ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) 
  * The number of bytes written is returned in variable n.
  */
 ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE );
 	int bytes, written;
 	ctr_object* string2write;
 	char* buffer;
@@ -439,7 +428,6 @@ ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList)
 ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
 	int offset;
 	int error;
-	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
 	offset = (long int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
@@ -468,7 +456,6 @@ ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList) {
 	int error;
-	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
 	error = fseek((FILE*)myself->value.rvalue->ptr, 0, SEEK_SET);
@@ -498,7 +485,6 @@ ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList)
  */
 ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList) {
 	int error;
-	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	if (myself->value.rvalue == NULL) return myself;
 	if (myself->value.rvalue->type != 1) return myself;
 	error = fseek((FILE*)myself->value.rvalue->ptr, 0, SEEK_END);
@@ -523,7 +509,6 @@ ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList
 	ctr_object* answer;
 	ctr_object* fdObj;
 	ctr_object* fdObjKey;
-	ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE );
 	pathObj = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	path = ctr_heap_allocate_cstring( pathObj );
 	fdObjKey = ctr_build_string_from_cstring("fileDescriptor");
@@ -599,7 +584,6 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path;
 	ctr_argument* putArgumentList;
 	ctr_argument* addArgumentList;
-	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	path = ctr_internal_cast2string( argumentList->object );
 	fileList = ctr_array_new(CtrStdArray, NULL);
 	pathValue = ctr_heap_allocate_cstring( path );

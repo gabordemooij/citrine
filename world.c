@@ -885,11 +885,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_INPUT ), &ctr_program_input );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_EXIT ), &ctr_program_exit );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FLUSH ), &ctr_program_flush );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FORBID_SHELL ), &ctr_program_forbid_shell );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FORBID_FILE_WRITE ), &ctr_program_forbid_file_write );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FORBID_FILE_READ ), &ctr_program_forbid_file_read );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FORBID_INCLUDE ), &ctr_program_forbid_include );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SET_REMAINING_MESSAGES ), &ctr_program_countdown );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_LOG_SET ), &ctr_program_log );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_WARNING ), &ctr_program_warn );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ALERT ), &ctr_program_crit );

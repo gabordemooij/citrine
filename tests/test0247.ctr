@@ -2,11 +2,11 @@
 
 
 ☞ q := 'abc'.
-☞ x := q toByteArray.
+☞ x := q list.
 ✎ write: x, brk.
 ✎ write: x count, brk.
 
 q := '기나 긴 여행'.
-x := q toByteArray.
+x := q list.
 ✎ write: x, brk.
 ✎ write: (x count), brk.

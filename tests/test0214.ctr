@@ -1,6 +1,1 @@
-
-Program remainingMessages: 15.
-200 times: { :i
-	Pen write: i, brk.
-}.
-
+✎ write: 'Test no longer in use↵'.

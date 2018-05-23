@@ -1,3 +1,1 @@
-
-Program forbidFileRead.
-(File new: '/tmp/bla.txt') read.
+✎ write: 'Test no longer in use↵'.

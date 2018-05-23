@@ -1,4 +1,1 @@
-
-Program forbidFileWrite.
-File new: '/tmp/bla.txt'.
-File delete.
+✎ write: 'Test no longer in use↵'.

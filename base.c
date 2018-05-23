@@ -1524,7 +1524,7 @@ ctr_object* ctr_number_log(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] toByte
+ * [Number] byte
  *
  * Converts a number to a single byte.
  */
@@ -2529,7 +2529,7 @@ ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentLis
 }
 
 /**
- * [String] toByteArray
+ * [String] list
  *
  * Returns an array of bytes representing the string.
  */

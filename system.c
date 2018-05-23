@@ -311,7 +311,6 @@ ctr_object* ctr_gc_to_number(ctr_object* myself, ctr_argument* argumentList) {
  * the 'call:' message.
  */
 ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_check_permission( CTR_SECPRO_NO_SHELL );
 	FILE* stream;
 	char* outputBuffer;
 	ctr_argument* newArgumentList;
@@ -384,7 +383,6 @@ ctr_object* ctr_program_get_env(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_object* envVarNameObj;
 	char*       envVarNameStr;
 	char*       envVal;
-	ctr_check_permission( CTR_SECPRO_NO_FILE_READ );
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
 	envVarNameStr = ctr_heap_allocate((envVarNameObj->value.svalue->vlen+1)*sizeof(char));
 	strncpy(envVarNameStr, envVarNameObj->value.svalue->value, envVarNameObj->value.svalue->vlen);
@@ -407,7 +405,6 @@ ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_object* envValObj;
 	char*       envVarNameStr;
 	char*       envValStr;
-	ctr_check_permission( CTR_SECPRO_NO_FILE_WRITE );
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
 	envValObj = ctr_internal_cast2string(argumentList->next->object);
 	envVarNameStr = ctr_heap_allocate_cstring( envVarNameObj );
@@ -435,7 +432,6 @@ ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList) 
  * then displays the input received.
  */
 ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	int c;
 	ctr_size bytes = 0;
 	char* buff;
@@ -484,7 +480,6 @@ ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentL
  *
  */
 ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	ctr_size bytes = 0;
 	ctr_size page = 64;
 	char buffer[page];
@@ -506,122 +501,6 @@ ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_build_string( content, content_size );
 	ctr_heap_free( content );
 	return str;
-}
-
-/**
- * @internal
- *
- * Checks whether the user is allowed to perform this kind of operation.
- */
-void ctr_check_permission( uint8_t operationID ) {
-	char* reason;
-	if ( ( ctr_program_security_profile & operationID ) ) {
-		reason = "This program is not allowed to perform this operation.";
-		if ( operationID == CTR_SECPRO_NO_SHELL ) {
-			reason = "This program is not allowed to execute shell commands.";
-		}
-		if ( operationID == CTR_SECPRO_NO_FILE_WRITE ) {
-			reason = "This program is not allowed to modify or delete any files or folders.";
-		}
-		if ( operationID == CTR_SECPRO_NO_FILE_READ ) {
-			reason = "This program is not allowed to perform any file operations.";
-		}
-		if ( operationID == CTR_SECPRO_NO_INCLUDE ) {
-			reason = "This program is not allowed to include any other files for code execution.";
-		}
-		fprintf(stderr, "%s\n", reason );
-		exit(1);
-	}
-}
-
-/**
- * [Program] forbidShell
- *
- * This method is part of the security profiles feature of Citrine.
- * This will forbid the program to execute any shell operations. All
- * external libraries and plugins are assumed to respect this setting as well.
- *
- * Usage:
- *
- * Program forbidShell.
- */
-ctr_object* ctr_program_forbid_shell( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_program_security_profile |= CTR_SECPRO_NO_SHELL;
-	return myself;
-}
-
-/**
- * [Program] forbidFileWrite
- *
- * This method is part of the security profiles feature of Citrine.
- * This will forbid the program to modify, create or delete any files. All
- * external libraries and plugins are assumed to respect this setting as well.
- *
- * Usage:
- *
- * Program forbidFileWrite.
- */
-ctr_object* ctr_program_forbid_file_write( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_program_security_profile |= CTR_SECPRO_NO_FILE_WRITE;
-	return myself;
-}
-
-/**
- * [Program] forbidFileRead
- *
- * This method is part of the security profiles feature of Citrine.
- * This will forbid the program to read any files. In fact this will prevent you from
- * creating the file object at all.
- * This will also prevent you from reading environment variables.
- * All external libraries and plugins are assumed to respect this setting as well.
- * Forbidding a program to read files also has the effect to forbid including other
- * source files.
- *
- * Usage:
- *
- * Program forbidFileRead.
- */
-ctr_object* ctr_program_forbid_file_read( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_program_security_profile |= CTR_SECPRO_NO_FILE_READ;
-	return myself;
-}
-
-/**
- * [Program] forbidInclude
- *
- * This method is part of the security profiles feature of Citrine.
- * This will forbid the program to include any other files. All
- * external libraries and plugins are assumed to respect this setting as well.
- *
- * Usage:
- *
- * Program forbidInclude.
- */
-ctr_object* ctr_program_forbid_include( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_program_security_profile |= CTR_SECPRO_NO_INCLUDE;
-	return myself;
-}
-
-/**
- * [Program] remainingMessages: [Number]
- *
- * This method is part of the security profiles feature of Citrine.
- * This will initiate a countdown for the program, you can specify the maximum quota of
- * messages the program may process, once this quota has been exhausted the program will
- * be killed entirely (no exception).
- *
- * Usage:
- *
- * Program remainingMessages: 100.
- */
-ctr_object* ctr_program_countdown( ctr_object* myself, ctr_argument* argumentList ) {
-	if ( ctr_program_security_profile & CTR_SECPRO_COUNTDOWN ) {
-		fprintf(stderr, "Message quota cannot change.\n" );
-		exit(1);
-	}
-	ctr_program_security_profile |= CTR_SECPRO_COUNTDOWN;
-	ctr_program_maxtick = (uint64_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
-	return myself;
 }
 
 /**
@@ -680,7 +559,6 @@ ctr_object* ctr_program_to_number(ctr_object* myself, ctr_argument* argumentList
  */
 ctr_object* ctr_program_log_generic(ctr_object* myself, ctr_argument* argumentList, int level) {
 	char* message;
-	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	message = ctr_heap_allocate_cstring(
 		ctr_internal_cast2string(
 			argumentList->object
@@ -775,7 +653,6 @@ ctr_object* ctr_program_crit(ctr_object* myself, ctr_argument* argumentList ) {
  * ip address.
  */
 ctr_object* ctr_program_remote(ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	ctr_object* remoteObj = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
 	remoteObj->link = CtrStdObject;
 	remoteObj->info.remote = 1;
@@ -918,7 +795,6 @@ ctr_object* ctr_dice_randomize_bytes(ctr_object* myself, ctr_argument* argumentL
  *
  */
 ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_check_permission( CTR_SECPRO_COUNTDOWN );
 	ctr_object* arg = ctr_internal_cast2number(argumentList->object);
 	int n = (int) arg->value.nvalue;
 	sleep(n);
