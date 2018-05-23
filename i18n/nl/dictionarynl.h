@@ -162,8 +162,6 @@
 #define CTR_DICT_MODE            "modus:" 
 #define CTR_DICT_BROOM           "Bezem"
 #define CTR_DICT_HASH_WITH_KEY   "klutsMetSleutel:"
-#define CTR_DICT_OBTAIN          "verkrijgen"
-#define CTR_DICT_SLURP           "Slurp"
 #define CTR_DICT_EVAL            "evalueren"
 #define CTR_DICT_ESCAPE_QUOTES   "onthaken"
 #define CTR_DICT_ESCAPE          "codeer:"

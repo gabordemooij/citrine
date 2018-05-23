@@ -162,8 +162,6 @@
 #define CTR_DICT_MODE            "mode:" 
 #define CTR_DICT_BROOM           "Broom"
 #define CTR_DICT_HASH_WITH_KEY   "hashWithKey:"
-#define CTR_DICT_OBTAIN          "obtain"
-#define CTR_DICT_SLURP           "Slurp"
 #define CTR_DICT_EVAL            "eval"
 #define CTR_DICT_ESCAPE_QUOTES   "escapeQuotes"
 #define CTR_DICT_ESCAPE          "escape:"

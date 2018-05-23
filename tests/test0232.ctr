@@ -1,3 +1,36 @@
+☞ Slurp := Object new.
+
+Slurp on: 'new' do: {
+	⚿ str := ''.
+}.
+
+Slurp learn: 'nieuw' means: 'new'.
+
+Slurp on: 'respondTo:' do: { :blah
+		(⚿ str = '') true: {
+			⚿ str append: blah.
+		}, else: {
+			⚿ str append: ' '.
+			⚿ str append: blah.
+		}.
+}.
+
+Slurp on: 'respondTo:and:' do: { :blah :blahah
+		(blah length > 1) true: {
+			⚿ str append: (blah from: 0 length: (blah length - 1)).
+		}, else: {
+			⚿ str append: blah.
+		}.
+		⚿ str append: ' '.
+		⚿ str append: blahah.
+}.
+
+Slurp on: 'obtain' do: {
+	☞ buffer := ⚿ str.
+	⚿ str := ''.
+	↲ buffer.
+}.
+
 
 ☞ x := Slurp new.
 x + 3.

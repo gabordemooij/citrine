@@ -1,7 +1,30 @@
 
+☞ Slurp := Object new.
+
+Slurp on: 'new' do: {
+	⚿ str := ''.
+}.
+
+Slurp learn: 'nieuw' means: 'new'.
+
+Slurp on: 'respondTo:' do: { :blah
+		⚿ str append: blah.
+}.
+
+Slurp on: 'respondTo:and:' do: { :blah :blahah
+		⚿ str append: (blah from: 0 length: (blah length - 1)).
+		⚿ str append: ' '.
+		⚿ str append: blahah.
+}.
+
+Slurp on: 'obtain' do: {
+	☞ buffer := ⚿ str.
+	⚿ str := ''.
+	↲ buffer.
+}.
 
 
-Pen write: (Program shell: (Slurp echo: 'Hello I can write to console using fluid API!', obtain)).
+Pen write: (Program shell: (Slurp new echo: 'Hello I can write to console using fluid API!', obtain)).
 
 
 { File new: '/tmp/from.txt', delete. } catch: {}, run.
@@ -17,11 +40,11 @@ File new: '/tmp/from.txt', exists false: {
 
 
 
-💻 shell: (Slurp touch: '/tmp/from.txt ;', echo: '"hello world" > /tmp/from.txt', obtain).
+💻 shell: (Slurp new touch: '/tmp/from.txt ;', echo: '"hello world" > /tmp/from.txt', obtain).
 
 
 
-💻 shell: (Slurp cp: '/tmp/from.txt /tmp/to.txt', obtain).
+💻 shell: (Slurp new cp: '/tmp/from.txt /tmp/to.txt', obtain).
 
 File new: '/tmp/to.txt', exists true: {
 	Pen write: 'Confirmed. Target file has been created by shell.\n'.

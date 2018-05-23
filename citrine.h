@@ -254,7 +254,6 @@ extern ctr_object* CtrStdFile;
 extern ctr_object* CtrStdSystem;
 extern ctr_object* CtrStdDice;
 extern ctr_object* CtrStdCommand;
-extern ctr_object* CtrStdSlurp;
 extern ctr_object* CtrStdClock;
 extern ctr_object* CtrStdFlow;
 extern ctr_object* CtrStdBreak;
@@ -698,14 +697,6 @@ ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList );
 ctr_object* ctr_clock_to_number( ctr_object* myself, ctr_argument* argumentList );
 void ctr_clock_init( ctr_object* clock );
-
-/**
- * Slurp Interface
- */
-ctr_object* ctr_slurp_obtain(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_slurp_respond_to(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_slurp_to_string(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Garbage Collector Object Interface

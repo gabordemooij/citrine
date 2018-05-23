@@ -1,5 +1,31 @@
-
-
+☞ Slurp := Object new.
+Slurp on: 'new' do: {
+	⚿ str := ''.
+}.
+Slurp learn: 'nieuw' means: 'new'.
+Slurp on: 'respondTo:' do: { :blah
+		(⚿ str !=: '') true: {
+			⚿ str append: ' '.
+		}.
+		⚿ str append: blah.
+}.
+Slurp on: 'respondTo:and:' do: { :blah :blahah
+		(⚿ str !=: '') true: {
+			⚿ str append: ' '.
+		}.
+		(blah length > 1) true: {
+			⚿ str append: (blah from: 0 length: (blah length - 1)).
+		}, else: {
+			⚿ str append: blah.
+		}.
+		⚿ str append: ' '.
+		⚿ str append: blahah.
+}.
+Slurp on: 'obtain' do: {
+	☞ buffer := ⚿ str.
+	⚿ str := ''.
+	↲ buffer.
+}.
 ☞ large text := ''.
 1000 times: {
 	large text append: 'hello'.
@@ -8,7 +34,7 @@
 
 ✎ write: (
 	💻 shell: (
-		Slurp
+		Slurp new
 			echo: large text,
 			| './ctr tests/assets/stdin_test.ctr'
 		) obtain
