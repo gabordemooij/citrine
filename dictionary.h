@@ -231,7 +231,6 @@
 #define CTR_DICT_PADDING_LEFT    "paddingLeft:"
 #define CTR_DICT_PADDING_RIGHT   "paddingRight:"
 #define CTR_DICT_FILL_WITH       "fill:with:"
-#define CTR_DICT_FROM_COMPUTER   "fromComputer:"
 #define CTR_DICT_COLUMN          "column:"
 #define CTR_DICT_SPLICE          "replace:length:with:"
 #define CTR_DICT_KEYS            "keys"

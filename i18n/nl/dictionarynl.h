@@ -231,7 +231,6 @@
 #define CTR_DICT_PADDING_LEFT    "opvullingLinks:"
 #define CTR_DICT_PADDING_RIGHT   "opvullingRechts:"
 #define CTR_DICT_FILL_WITH       "vul:met:"
-#define CTR_DICT_FROM_COMPUTER   "vanComputer:"
 #define CTR_DICT_COLUMN          "kolom:"
 #define CTR_DICT_SPLICE          "vervang:lengte:door:"
 #define CTR_DICT_KEYS            "sleutels"
