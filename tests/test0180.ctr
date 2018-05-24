@@ -5,7 +5,7 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom mode: 0.
+Broom tidiness: 0.
 
 ☞ txt := '<h1>"Hell\'o & Goodbye"</h1>'.
 Pen write: txt html, brk.

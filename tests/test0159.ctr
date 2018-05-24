@@ -4,7 +4,7 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom mode: 0.
+Broom tidiness: 0.
 
 ☞ f := File new: '/tmp/citrine_test_file.txt'.
 f open: 'r'.

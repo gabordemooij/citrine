@@ -6,7 +6,7 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom mode: 0.
+Broom tidiness: 0.
 
 ☞ a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( Array < 1 ).

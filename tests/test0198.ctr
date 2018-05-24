@@ -1,6 +1,6 @@
 
 
-Broom mode: 4.
+Broom tidiness: 4.
 {
 	☞ cat := Object new.
 	cat on: 'work' do: {

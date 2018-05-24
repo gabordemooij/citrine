@@ -5,7 +5,7 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom mode: 0.
+Broom tidiness: 0.
 
 ☞ txt := 'Word Salad'.
 Pen write: ( txt from: 5 length: 5 ).

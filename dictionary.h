@@ -155,7 +155,7 @@
 #define CTR_DICT_KEPT_ALLOC      "keptAlloc" 
 #define CTR_DICT_STICKY_COUNT	 "stickyCount" 
 #define CTR_DICT_MEMORY_LIMIT	 "memoryLimit:" 
-#define CTR_DICT_MODE            "mode:" 
+#define CTR_DICT_MODE            "tidiness:" 
 #define CTR_DICT_BROOM           "Broom"
 #define CTR_DICT_HASH_WITH_KEY   "hashWithKey:"
 #define CTR_DICT_EVAL            "eval"

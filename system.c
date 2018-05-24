@@ -254,7 +254,7 @@ ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Broom] mode: [Number]
+ * [Broom] tidiness: [Number]
  *
  * Selects mode of operation for GC.
  *

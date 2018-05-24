@@ -1,5 +1,5 @@
 
-Broom mode: 4.
+Broom tidiness: 4.
 
 ☞ Animal := Object new.
 Animal on: 'makeSound' do: {
