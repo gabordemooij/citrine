@@ -1,11 +1,1 @@
-
-✎ write: 'this goes to standard out', brk.
-💻 useStandardError log: 'this goes to standard error'.
-💻 useSyslog log: 'this goes to syslog'.
-💻 useStandardError log: 'this goes to standard error again'.
-💻 useStandardError warning: 'warning'.
-💻 useStandardError error: 'error'.
-💻 useStandardError alert: 'critical'.
-
-
-
+✎ write: 'Test no longer in use↵'.
