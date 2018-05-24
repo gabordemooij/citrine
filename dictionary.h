@@ -223,8 +223,6 @@
 #define CTR_DICT_COPY            "copy"
 #define CTR_DICT_CASE_DO         "case:do:"
 #define CTR_DICT_LIST_OBJECT     "List"
-#define CTR_DICT_UC_A_Z          "A-Z"
-#define CTR_DICT_LC_A_Z          "a-z"
 #define CTR_DICT_PI              "pi"
 #define CTR_DICT_PI_SYMBOL       "𝛑"
 #define CTR_DICT_BULLET          "•"

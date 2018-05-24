@@ -223,8 +223,6 @@
 #define CTR_DICT_COPY            "kopieer"
 #define CTR_DICT_CASE_DO         "inGeval:doen:"
 #define CTR_DICT_LIST_OBJECT     "Lijst"
-#define CTR_DICT_UC_A_Z          "A-Z"
-#define CTR_DICT_LC_A_Z          "a-z"
 #define CTR_DICT_PI              "pi"
 #define CTR_DICT_PI_SYMBOL       "𝛑"
 #define CTR_DICT_BULLET          "•"

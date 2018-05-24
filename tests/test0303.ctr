@@ -1,4 +1,7 @@
 'SINGLE_LANGUAGE'.
 
+☞ A-Z := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.
+☞ a-z := 'abcdefghijklmnopqrstuvwxyz'.
+
 ☞ x := List ← A-Z ; a-z ; 𝛑 ; pi.
 ✎ write: x, brk.
