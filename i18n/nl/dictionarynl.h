@@ -157,7 +157,6 @@
 #define CTR_DICT_MODE            "opruimingsniveau:" 
 #define CTR_DICT_HASH_WITH_KEY   "klutsMetSleutel:"
 #define CTR_DICT_EVAL            "evalueren"
-#define CTR_DICT_ESCAPE_QUOTES   "onthaken"
 #define CTR_DICT_ESCAPE          "codeer:"
 #define CTR_DICT_UNESCAPE        "decodeer:"
 #define CTR_DICT_TO_BYTE         "naarByte"
