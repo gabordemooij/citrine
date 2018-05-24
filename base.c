@@ -1070,27 +1070,26 @@ ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [Number] times: [Block]
+ * [Block] * [Number]
  *
  * Runs the block of code a 'Number' of times.
  * This is the most basic form of a loop.
  *
  * Usage:
  *
- * 7 times: { :i Pen write: i. }.
+ * { :i Pen write: i. } * 7.
  *
  * The example above runs the block 7 times. The current iteration
  * number is passed to the block as a parameter (i in this example).
  */
-ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* indexNumber;
-	ctr_object* block = argumentList->object;
+	ctr_object* block = myself;
 	ctr_argument* arguments;
 	int t;
 	int i;
-	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) { fprintf(stderr, "Expected code block."); exit(1); }
 	block->info.sticky = 1;
-	t = myself->value.nvalue;
+	t = ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	for(i=0; i<t; i++) {
 		indexNumber = ctr_build_number_from_float((ctr_number) i);
@@ -1297,43 +1296,6 @@ ctr_object* ctr_number_factorial(ctr_object* myself, ctr_argument* argumentList)
 		a = a * i;
 	}
 	return ctr_build_number_from_float(a);
-}
-
-/**
- * [Number] to: [number] step: [step] do: [block]
- *
- * Runs the specified block for each step it takes to go from
- * the start value to the target value using the specified step size.
- * This is basically how you write for-loops in Citrine.
- *
- * Usage:
- *
- * 1 to: 5 step: 1 do: { :step Pen write: 'this is step #'+step. }.
- */
-ctr_object* ctr_number_to_step_do(ctr_object* myself, ctr_argument* argumentList) {
-	double startValue = myself->value.nvalue;
-	double endValue   = ctr_internal_cast2number(argumentList->object)->value.nvalue;
-	double incValue   = ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
-	double curValue   = startValue;
-	ctr_object* codeBlock = argumentList->next->next->object;
-	ctr_argument* arguments;
-	int forward = 0;
-	if (startValue == endValue) return myself;
-	forward = (startValue < endValue);
-	if (codeBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_build_string_from_cstring("Expected block.");
-		return myself;
-	}
-	while(((forward && curValue <= endValue) || (!forward && curValue >= endValue)) && !CtrStdFlow) {
-		arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
-		arguments->object = ctr_build_number_from_float(curValue);
-		ctr_block_run(codeBlock, arguments, NULL);
-		ctr_heap_free( arguments );
-		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL; /* consume continue and go on */
-		curValue += incValue;
-	}
-	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
-	return myself;
 }
 
 /**

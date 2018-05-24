@@ -1,1 +1,1 @@
-5 times: { :i Pen write: i. }.
+{ :i Pen write: i. } * 5.

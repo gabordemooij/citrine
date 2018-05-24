@@ -628,13 +628,11 @@ void ctr_initialize_world() {
 
 	/* Number */
 	CtrStdNumber = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_TOSTEPDO ), &ctr_number_to_step_do );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_PLUS ), &ctr_number_add );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_ADD ), &ctr_number_inc );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_MINUS ), &ctr_number_minus );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_SUBTRACT ), &ctr_number_dec );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_MULTIPLIER ),&ctr_number_multiply );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_TIMES ),&ctr_number_times );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_MULTIPLY ),&ctr_number_mul );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_DIVISION ), &ctr_number_divide );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_DIVIDE ), &ctr_number_div );
@@ -742,6 +740,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_SET_VALUE ), &ctr_block_set );
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_ERROR ), &ctr_block_error );
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_CATCH ), &ctr_block_catch );
+	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_MULTIPLIER ), &ctr_block_times );
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_IFTRUE ), &ctr_block_while_true );
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_IFFALSE ), &ctr_block_while_false );
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_block_to_string );

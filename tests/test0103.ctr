@@ -1,6 +1,6 @@
 ☞ a := Array < Object ; True ; False ; Boolean ; 1 ; Number ; 'Str' ; String ; {}.
 Pen write: (a count), brk.
-(a count) times: { :i
+{ :i
 	Pen write: 
 		'a ' + 
 		((a @ i) type) +
@@ -9,5 +9,5 @@ Pen write: (a count), brk.
 		(((a @ i) isNil) either: '' or: 'NOT') + 
 		' Nil.',
 		brk.
-}.
+} * (a count).
 Pen write: 'but.. Nil is.. ' + ((Nil isNil) either: 'certainly NIL!' or: 'not NIL??'), brk.

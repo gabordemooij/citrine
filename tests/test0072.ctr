@@ -1,7 +1,7 @@
 ☞ echo := Object new.
 echo on: 'respondTo:' do: {
 	:sound
-	2 times: { Pen write: sound. }.
+	{ Pen write: sound. } * 2.
 }.
 echo ho!. 
 
@@ -9,7 +9,7 @@ echo ho!.
 echo := Object new.
 echo on: 'respondTo:and:' do: {
 	:sound :x
-	x times: { Pen write: sound. }.
+	{ Pen write: sound. } * x.
 }.
 echo o 5. 
 echo wooo: 3. 
@@ -18,7 +18,7 @@ echo wooo: 3.
 echo := Object new.
 echo on: 'respondTo:and:and:' do: {
 	:operation :sound :x
-	x times: {	Pen write: sound. }.
+	{ Pen write: sound. } * x.
 }.
 echo shout: 'la' times: 4. 
 

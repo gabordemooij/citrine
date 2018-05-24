@@ -1,9 +1,9 @@
 Pen write: 'Continue for-loop, No - before 6 and up.', brk.
-1 to: 10 step: 1 do: { :i
-	Pen write: i, brk.
-	(i > 4) continue.
+{ :i
+	Pen write: (i + 1), brk.
+	((i + 1) > 4) continue.
 	Pen write: '-'.
-}.
+} * 10.
 
 ☞ x := 0.
 ☞ xIsLessThan10 := { ↲( x < 10 ). }.
@@ -26,11 +26,11 @@ Pen write: 'Continue while-false, No - before 3 only.', brk.
 
 Pen brk.
 Pen write: 'Continue times-loop, No ||| before 3.', brk.
-5 times: { :i
+{ :i
 	Pen write: 'iteration #' + i, brk.
 	(i = 2) continue.
 	Pen write: '|||'.
-}.
+} * 5.
 
 Pen brk.
 

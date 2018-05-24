@@ -1,4 +1,4 @@
-1000 times: {
+{
 	☞ a := 'First'.
 	☞ b := 'Second'.
 	a := b.
@@ -11,4 +11,4 @@
 	garbageMaker putGarbageOnScreen.
 	Pen write: a.
 	Broom sweep.
-}.
+} * 1000.

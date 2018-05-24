@@ -1,8 +1,8 @@
 Pen write: 'Break for-loop, 0-4.', brk.
-0 to: 10 step: 1 do: { :i
+{ :i
 	Pen write: 'iteration #' + i, brk.
 	(i = 4) break.
-}.
+} * 10.
 
 ☞ x := 0.
 ☞ xIsLessThan10 := { ↲( x < 10 ). }.
@@ -22,10 +22,10 @@ Pen write: 'Break while-false loop, 5,4.', brk.
 }.
 
 Pen write: 'Break times loop, 1-4.', brk.
-5 times: { :i
+{ :i
 	Pen write: 'iteration #' + i, brk.
 	(i = 4) break.
-}.
+} * 5.
 
 Pen write: 'Break block, dont print line.', brk.
 { True break. Pen write: 'dont write this!', brk. } run.

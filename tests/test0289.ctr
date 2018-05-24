@@ -27,9 +27,9 @@ Slurp on: 'obtain' do: {
 	↲ buffer.
 }.
 ☞ large text := ''.
-1000 times: {
+{
 	large text append: 'hello'.
-}.
+} * 1000.
 
 
 ✎ write: (

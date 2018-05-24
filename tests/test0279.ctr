@@ -4,6 +4,6 @@ Pen write: 'bytes before skip = ' + str bytes, brk.
 ☞ str2 := str skip: 3.
 Pen write: 'length after skip = ' + str2 length, brk.
 Pen write: 'bytes after skip = ' + str2 bytes, brk.
-0 to: str2 bytes - 1 step: 1 do: { :index
+{ :index
 	Pen write: ('byte: ' + (str2 byte: index)), brk.
-}.
+} * (str2 bytes).

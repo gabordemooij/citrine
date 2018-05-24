@@ -1,7 +1,7 @@
 
 ☞ santaLaugh := 'ho'.
 ☞ laugh := ''.
-3 times: { laugh := laugh + santaLaugh. }.
+{ laugh := laugh + santaLaugh. } * 3.
 Pen write: laugh, brk.
 
 ☞ locked := False.

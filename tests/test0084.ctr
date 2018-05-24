@@ -6,7 +6,7 @@
 	☞ mapping := { :i ⚿ q put: (⚿ f applyTo: (⚿ q @ i)) at: i. } 
 	set: 'q' value: array,
 	set: 'f' value: func.
-	(array count) times: { :i mapping applyTo: i. }.
+	{ :i mapping applyTo: i. } * (array count).
 }.
 
 ☞ a := Array < 1; 2; 3.

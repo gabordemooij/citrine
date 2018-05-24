@@ -4,13 +4,13 @@
 ☞ Deck := Array new.
 Deck on: 'print' do: {
         ☞ len := ⛏ count - 1.
-        1 to: len step: 1 do: { :i
+        { :i
                 ☞ len2 := ⛏ count - 1.
                 Pen write: 'len: '.
                 Pen write: len, brk.
                 Pen write: 'len2: '.
                 Pen write: len2, brk.
-        }.
+        } * len.
 }.
 
 ☞ d := Deck < 1 ; 4 ; 9 ; 16 ; 25 ; 36 ; 49 ; 64 ; 81.

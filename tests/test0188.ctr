@@ -7,9 +7,9 @@
 
 Broom mode: 0.
 
-4 times: { :i Pen write: i. }.
+{ :i Pen write: i. } * 4.
 Pen brk.
-4 to: 1 step: -1 do: { :i Pen write: i. }.
+{ :i Pen write: (4 - i). } * 4.
 Pen brk.
 ( 1 > 2 ) false: { Pen write: 'BLOCK 1', brk. }.
 ( 2 > 1 ) true:  { Pen write: 'BLOCK 2', brk. }.
@@ -28,9 +28,9 @@ Broom sweep.
 usedMemory1 := Broom keptAlloc.
 
 
-4 times: { :i Pen write: i. }.
+{ :i Pen write: i. } * 4.
 Pen brk.
-4 to: 1 step: -1 do: { :i Pen write: i. }.
+{ :i Pen write: (4 - i). } * 4.
 Pen brk.
 ( 1 > 2 ) false: { Pen write: 'BLOCK 1', brk. }.
 ( 2 > 1 ) true:  { Pen write: 'BLOCK 2', brk. }.
@@ -49,9 +49,9 @@ Broom sweep.
 usedMemory2 := Broom keptAlloc.
 
 
-4 times: { :i Pen write: i. }.
+{ :i Pen write: i. } * 4.
 Pen brk.
-4 to: 1 step: -1 do: { :i Pen write: i. }.
+{ :i Pen write: (4 - i). } * 4.
 Pen brk.
 ( 1 > 2 ) false: { Pen write: 'BLOCK 1', brk. }.
 ( 2 > 1 ) true:  { Pen write: 'BLOCK 2', brk. }.

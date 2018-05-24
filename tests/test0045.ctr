@@ -1,11 +1,11 @@
 Broom mode: 4.
 
 ☞ oops := 0.
-1000 times: {
+{
 	{ 3 / 0. } catch: {
 		oops +=: 1.
 	}, run.
-}.
+} * 1000.
 
 {
 	Pen write: 'hi there!'.

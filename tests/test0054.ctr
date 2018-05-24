@@ -1,4 +1,4 @@
-(Program argCount) times: { :i
+{ :i
 	((Program argument: i) !=: '-r') true: {
 		(((Program argument: i) find: '.ast') > -1) true: {
 			Pen write: 'Found argument file.'.
@@ -7,5 +7,5 @@
 			Pen write: 'Found argument file.'.
 		}.
 	}.
-}.
+} * (Program argCount).
 Pen write: (Program argument: 999).

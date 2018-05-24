@@ -1,3 +1,3 @@
-5 times: { Pen write: 'ho'. }.
+{ Pen write: 'ho'. } * 5.
 ☞ a := Object new.
 Pen write: a.

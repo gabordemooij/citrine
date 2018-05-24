@@ -1,6 +1,6 @@
 
 
 💻 message: 'hello'.
-5 times: {
+{
 	✎ write: 'Child says: hello↵'.
-}.
+} * 5.

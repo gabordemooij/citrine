@@ -1,16 +1,18 @@
 
-1 to: 6 step: 1 do: { :i
-	Pen write: 'This is step #' + i, brk.
-}.
+{ :i
+	Pen write: 'This is step #' + ( i + 1 ), brk.
+} * 6.
 
-3 to: -2 step: -1 do: { :i
-	Pen write: 'This is step #' + i, brk.
-}.
+{ :i
+	Pen write: 'This is step #' + ( 3 - i ), brk.
+} * 6.
 
-0 to: 0 step: 1 do: { :i
+{ :i
 	Pen write: 'NEVER!', brk.
-}.
+} * 0.
 
--3 to: 2 step: 0.5 do: { :i
-	Pen write: 'This is step #' + i, brk.
-}.
+
+
+{ :i
+	Pen write: 'This is step #' + ( -3 + ( i / 2 ) ), brk.
+} * 11.
