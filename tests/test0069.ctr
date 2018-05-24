@@ -3,5 +3,5 @@ Pen write: ('a' byte: 0).
 Pen write: ('zzz' byte: 10).
 Pen write: ('zzz' byte: -10).
 Pen brk.
-Pen write: (' left trimmed ' leftTrim) + ( 'and right trimmed   ' rightTrim) + '!', brk.
+Pen write: (' left trimmed ' trim) + ' ' + ( 'and right trimmed' trim) + '!', brk.
 Pen write: '<html>"html & entities"</html>' html.

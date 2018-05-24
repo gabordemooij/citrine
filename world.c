@@ -695,8 +695,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_UNEQUALS ), &ctr_string_neq );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_UNEQUALS_SYMBOL ), &ctr_string_neq );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TRIM ), &ctr_string_trim );
-	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_LEFT_TRIM ), &ctr_string_ltrim );
-	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_RIGHT_TRIM ), &ctr_string_rtrim );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_HTML_ESCAPE ), &ctr_string_html_escape );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_AT ), &ctr_string_at );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_AT_SYMBOL ), &ctr_string_at );
@@ -725,8 +723,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TO_BYTE_ARRAY ),&ctr_string_to_byte_array );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_APPEND_BYTE ),&ctr_string_append_byte );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_CONTAINS ),&ctr_string_contains );
-	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_PADDING_LEFT ),&ctr_string_padding_left );
-	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_PADDING_RIGHT ),&ctr_string_padding_right );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_COMPARE_SET ),&ctr_string_compare );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_LESS ),&ctr_string_before );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_LESS_OR_EQUAL_SYMBOL ),&ctr_string_before_or_same );

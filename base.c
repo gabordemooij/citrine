@@ -2292,7 +2292,7 @@ ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argum
  *
  * Usage:
  *
- * ' hello ' trim. #hello
+ * ' hello ' trim.
  *
  * The example above will strip all white space characters from the
  * recipient on both sides of the text. Also see: leftTrim and rightTrim
@@ -2319,121 +2319,6 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	return newString;
 }
 
-
-/**
- * [String] leftTrim
- *
- * Removes all the whitespace at the left side of the string.
- *
- * Usage:
- *
- * message := ' hello world  '.
- * message leftTrim.
- *
- * The example above will remove all the whitespace at the left of the
- * string but leave the spaces at the right side intact.
- */
-ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* newString = NULL;
-	char* str = myself->value.svalue->value;
-	long  len = myself->value.svalue->vlen;
-	long i = 0, begin;
-	long tlen;
-	char* tstr;
-	if (len == 0) return ctr_build_empty_string();
-	while(i < len && isspace(*(str+i))) i++;
-	begin = i;
-	i = len - 1;
-	tlen = (len - begin);
-	tstr = ctr_heap_allocate( tlen * sizeof(char) );
-	memcpy(tstr, str+begin, tlen);
-	newString = ctr_build_string(tstr, tlen);
-	ctr_heap_free( tstr );
-	return newString;
-}
-
-
-ctr_object* ctr_string_padding(ctr_object* myself, ctr_argument* argumentList, int left) {
-	uint16_t padding;
-	char* buffer;
-	char* format;
-	char* stringParam;
-	ctr_size bufferSize;
-	ctr_argument* a;
-	ctr_object* answer;
-	ctr_object* formatObj;
-	if (left == 1) {
-		formatObj = ctr_build_string_from_cstring( "%" );
-	} else {
-		formatObj = ctr_build_string_from_cstring( "%-" );
-	}
-	a = ctr_heap_allocate( sizeof(ctr_argument) );
-	padding = (uint16_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
-	a->object = ctr_internal_cast2string( ctr_build_number_from_float( (ctr_number) padding ) );
-	formatObj = ctr_string_concat( formatObj, a );
-	a->object = ctr_build_string_from_cstring( "s" );
-	formatObj = ctr_string_concat( formatObj, a );
-	format = ctr_heap_allocate_cstring(formatObj);
-	bufferSize = ( myself->value.svalue->vlen + padding + 1);
-	buffer = ctr_heap_allocate( bufferSize );
-	stringParam = ctr_heap_allocate_cstring( myself );
-	snprintf(buffer, bufferSize, format, stringParam );
-	answer = ctr_build_string_from_cstring( buffer );
-	ctr_heap_free(buffer);
-	ctr_heap_free(stringParam);
-	ctr_heap_free(format);
-	ctr_heap_free(a);
-	return answer;
-}
-
-/**
- * [String] paddingLeft: [Number].
- *
- * Adds the specified number of spaces to the left of the string.
- */
-ctr_object* ctr_string_padding_left(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_string_padding( myself, argumentList, 1);
-}
-
-/**
- * [String] paddingLeft: [Number].
- *
- * Adds the specified number of spaces to the right of the string.
- */
-ctr_object* ctr_string_padding_right(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_string_padding( myself, argumentList, 0);
-}
-
-/**
- * [String] rightTrim
- *
- * Removes all the whitespace at the right side of the string.
- *
- * Usage:
- *
- * message := ' hello world  '.
- * message rightTrim.
- *
- * The example above will remove all the whitespace at the right of the
- * string but leave the spaces at the left side intact.
- */
-ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* newString = NULL;
-	char* str = myself->value.svalue->value;
-	long  len = myself->value.svalue->vlen;
-	long i = 0, end, tlen;
-	char* tstr;
-	if (len == 0) return ctr_build_empty_string();
-	i = len - 1;
-	while(i > 0 && isspace(*(str+i))) i--;
-	end = i + 1;
-	tlen = end;
-	tstr = ctr_heap_allocate( tlen * sizeof(char) );
-	memcpy(tstr, str, tlen);
-	newString = ctr_build_string(tstr, tlen);
-	ctr_heap_free( tstr );
-	return newString;
-}
 
 /**
  * [String] toNumber
