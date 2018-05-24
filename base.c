@@ -2844,9 +2844,9 @@ ctr_object* ctr_string_quotes_escape(ctr_object* myself, ctr_argument* argumentL
  * Examples:
  *
  * { Pen write: 'a simple code block'. } run.
- * { :param Pen write: param. } applyTo: 'write this!'.
- * { :a :b ^ a + b. } applyTo: 1 and: 2.
- * { :a :b :c ^ a + b + c. } applyTo: 1 and: 2 and: 3.
+ * { :param Pen write: param. } apply: 'write this!'.
+ * { :a :b ^ a + b. } apply: 1 and: 2.
+ * { :a :b :c ^ a + b + c. } apply: 1 and: 2 and: 3.
  *
  */
 ctr_object* ctr_build_block(ctr_tnode* node) {
@@ -2857,10 +2857,10 @@ ctr_object* ctr_build_block(ctr_tnode* node) {
 }
 
 /**
- * [Block] applyTo: [object]
+ * [Block] apply: [object]
  *
  * Runs a block of code using the specified object as a parameter.
- * If you run a block using the messages 'run' or 'applyTo:', me/my will
+ * If you run a block using the messages 'run' or 'apply:', me/my will
  * refer to the block itself instead of the containing object.
  */
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my) {

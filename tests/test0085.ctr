@@ -1,9 +1,9 @@
 
 ☞ q := { ↲9. } run. 
 Pen write: q, brk.
-q := { :a ↲ a * a. } applyTo: 6. 
+q := { :a ↲ a * a. } apply: 6. 
 Pen write: q, brk.
-q := { :a :b ↲ (a + b). } applyTo: 3 and: 4. 
+q := { :a :b ↲ (a + b). } apply: 3 and: 4. 
 Pen write: q, brk.
-q := { :a :b :c ↲ (a + b + c). } applyTo: 3 and: 4 and: 1. 
+q := { :a :b :c ↲ (a + b + c). } apply: 3 and: 4 and: 1. 
 Pen write: q, brk.

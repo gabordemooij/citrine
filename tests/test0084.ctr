@@ -3,14 +3,14 @@
 	↲ f.
 }.
 ☞ mapper := { :array :func
-	☞ mapping := { :i ⚿ q put: (⚿ f applyTo: (⚿ q @ i)) at: i. } 
+	☞ mapping := { :i ⚿ q put: (⚿ f apply: (⚿ q @ i)) at: i. } 
 	set: 'q' value: array,
 	set: 'f' value: func.
-	{ :i mapping applyTo: i. } * (array count).
+	{ :i mapping apply: i. } * (array count).
 }.
 
 ☞ a := List ← 1; 2; 3.
-mapper applyTo: a and: (makeAdder applyTo: 100).
+mapper apply: a and: (makeAdder apply: 100).
 Pen write: (a at: 0), brk.
 Pen write: (a at: 1), brk.
 Pen write: (a at: 2), brk.
