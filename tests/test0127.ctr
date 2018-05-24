@@ -17,18 +17,18 @@ f write: 'hello world'.
 Pen write: f read, brk.
 
 f open. 
-☞ q := f readBytes: 1. 
+☞ q := f read bytes: 1. 
 
 
-☞ x := f open: 'r', seek: 3, readBytes: 2.
+☞ x := f open: 'r', seek: 3, read bytes: 2.
 Pen write: x, brk.
 
 
-x := f rewind seek: 1, readBytes: 2.
+x := f rewind seek: 1, read bytes: 2.
 Pen write: x, brk.
 
 
-x := f end seek: -2, readBytes: 2.
+x := f end seek: -2, read bytes: 2.
 Pen write: x, brk.
 
 f close.

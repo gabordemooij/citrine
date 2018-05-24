@@ -10,7 +10,7 @@ Program tidiness: 0.
 ☞ f := File new: '/tmp/citrine_test_file.txt'.
 f exists: { f delete. }.
 f open: 'w'.
-f writeBytes: 'hello'.
+f write bytes: 'hello'.
 f close.
 
 Program sweep.
@@ -20,7 +20,7 @@ usedMemory1 := Program keptAlloc.
 f := File new: '/tmp/citrine_test_file.txt'.
 f exists: {f delete. }.
 f open: 'w'.
-f writeBytes: 'hello world'.
+f write bytes: 'hello world'.
 f close.
 Program sweep.
 usedMemory2 := Program keptAlloc.
@@ -29,7 +29,7 @@ usedMemory2 := Program keptAlloc.
 f := File new: '/tmp/citrine_test_file.txt'.
 f exists: { f delete. }.
 f open: 'w'.
-f writeBytes: 'hello world'.
+f write bytes: 'hello world'.
 f close.
 Program sweep.
 usedMemory3 := Program keptAlloc.
