@@ -14,7 +14,7 @@ f write bytes: 'hello'.
 f close.
 
 Program sweep.
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 f := File new: '/tmp/citrine_test_file.txt'.
@@ -23,7 +23,7 @@ f open: 'w'.
 f write bytes: 'hello world'.
 f close.
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 f := File new: '/tmp/citrine_test_file.txt'.
@@ -32,7 +32,7 @@ f open: 'w'.
 f write bytes: 'hello world'.
 f close.
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

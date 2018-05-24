@@ -17,7 +17,7 @@ Pen write: t type, brk.
 
 Program sweep.
 
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 txt := '1.6'.
@@ -29,7 +29,7 @@ Pen write: n type, brk.
 Pen write: t type, brk.
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 txt := '1.6'.
@@ -41,7 +41,7 @@ Pen write: n type, brk.
 Pen write: t type, brk.
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

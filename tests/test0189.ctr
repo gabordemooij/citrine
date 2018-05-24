@@ -32,7 +32,7 @@ Pen write: PoemAboutLife, brk.
 
 Program sweep.
 
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 money  := False.
@@ -61,7 +61,7 @@ Pen write: PoemAboutLife, brk.
 
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 money  := False.
@@ -88,7 +88,7 @@ Boolean flip.
 Pen write: PoemAboutLife, brk.
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

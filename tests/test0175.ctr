@@ -17,7 +17,7 @@ Pen write: txt.
 
 Program sweep.
 
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 txt := 'hello ' + 'world'.
@@ -27,7 +27,7 @@ txt append: '!!'.
 Pen write: txt.
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 txt := 'hello ' + 'world'.
@@ -37,7 +37,7 @@ txt append: '!!'.
 Pen write: txt.
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

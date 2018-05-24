@@ -22,7 +22,7 @@ Pen write: 'RGB code of green is: ' + ( palette @ 'green' ), brk.
 Pen write: 'All colors in palette: ' + colors, brk.
 
 Program sweep.
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 palette := Map new.
@@ -39,7 +39,7 @@ colors := ''.
 Pen write: 'All colors in palette: ' + colors, brk.
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 palette := Map new.
 palette 
@@ -56,7 +56,7 @@ Pen write: 'All colors in palette: ' + colors, brk.
 
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

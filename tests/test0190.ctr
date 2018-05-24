@@ -18,7 +18,7 @@ Dice rawRandomNumber.
 
 Program sweep.
 
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 Clock time.
@@ -32,7 +32,7 @@ Dice rawRandomNumber.
 
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 Clock time.
@@ -45,7 +45,7 @@ Dice rawRandomNumber.
 ✎ write: (💻 shell: 'echo \'Hello\'').
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

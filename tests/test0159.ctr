@@ -11,19 +11,19 @@ f open: 'r'.
 f close.
 
 Program sweep.
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 f open: 'r'.
 f close.
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 f open: 'r'.
 f close.
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

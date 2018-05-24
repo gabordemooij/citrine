@@ -20,7 +20,7 @@ Pen write: 'txt does not equal Ceasar Salad = ' + ( txt !=: 'Ceasar Salad' ), br
 
 Program sweep.
 
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 txt := 'Word Salad'.
@@ -35,7 +35,7 @@ Pen write: 'txt does not equal Word Salad = ' + ( txt !=: 'Word Salad' ), brk.
 Pen write: 'txt does not equal Ceasar Salad = ' + ( txt !=: 'Ceasar Salad' ), brk.
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 txt := 'Word Salad'.
@@ -50,7 +50,7 @@ Pen write: 'txt does not equal Word Salad = ' + ( txt !=: 'Word Salad' ), brk.
 Pen write: 'txt does not equal Ceasar Salad = ' + ( txt !=: 'Ceasar Salad' ), brk.
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

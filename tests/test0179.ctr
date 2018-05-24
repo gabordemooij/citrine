@@ -13,7 +13,7 @@ Pen write: ( txt skip: 4, trim ), brk.
 
 Program sweep.
 
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 txt := 'Word Salad'.
@@ -21,7 +21,7 @@ Pen write: ( txt from: 5 length: 5 ).
 Pen write: ( txt skip: 4, trim ), brk.
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 txt := 'Word Salad'.
@@ -29,7 +29,7 @@ Pen write: ( txt from: 5 length: 5 ).
 Pen write: ( txt skip: 4, trim ), brk.
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

@@ -18,7 +18,7 @@ q := f size.
 Pen write: q, brk.
 
 Program sweep.
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 f := File new: '/tmp/citrine_test_file.txt'.
@@ -26,7 +26,7 @@ q := f size.
 Pen write: q, brk.
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 f := File new: '/tmp/citrine_test_file.txt'.
@@ -34,7 +34,7 @@ q := f size.
 Pen write: q, brk.
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

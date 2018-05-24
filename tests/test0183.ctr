@@ -18,7 +18,7 @@ Pen write: ( o do done ), brk.
 
 Program sweep.
 
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 o  := Object new.
@@ -31,7 +31,7 @@ Pen write: o myself, brk.
 Pen write: ( o do done ), brk.
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 o  := Object new.
@@ -44,7 +44,7 @@ Pen write: o myself, brk.
 Pen write: ( o do done ), brk.
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

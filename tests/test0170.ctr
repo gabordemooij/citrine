@@ -11,21 +11,21 @@ Program tidiness: 0.
 ☞ b := List ← 1 ; 2.
 
 Program sweep.
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 a := List new.
 b := List ← 1 ; 2.
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 a := List new.
 b := List ← 1 ; 2.
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

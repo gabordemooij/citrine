@@ -16,7 +16,7 @@ a := a tangent.
 
 Program sweep.
 
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 a := -2 absolute.
@@ -28,7 +28,7 @@ a := a tangent.
 
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 a := -2 absolute.
@@ -39,7 +39,7 @@ a := a sine.
 a := a tangent.
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

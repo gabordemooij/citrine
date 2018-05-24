@@ -1,23 +1,23 @@
 
 
-☞ kept1   := Program keptCount.
-☞ sticky1 := Program stickyCount.
+☞ kept1   := Program kept.
+☞ sticky1 := Program stuck.
 ☞ dust1   := Program dust.
 
-☞ kept2   := Program keptCount.
-☞ sticky2 := Program stickyCount.
+☞ kept2   := Program kept.
+☞ sticky2 := Program stuck.
 ☞ dust2   := Program dust.
 
 Program sweep.
 
 
 
-kept1   := Program keptCount.
-sticky1 := Program stickyCount.
+kept1   := Program kept.
+sticky1 := Program stuck.
 dust1   := Program dust.
 
-kept2   := Program keptCount.
-sticky2 := Program stickyCount.
+kept2   := Program kept.
+sticky2 := Program stuck.
 dust2   := Program dust.
 
 
@@ -31,8 +31,8 @@ Program sweep.
 
 
 
-kept2   := Program keptCount.
-sticky2 := Program stickyCount.
+kept2   := Program kept.
+sticky2 := Program stuck.
 dust2   := Program dust.
 
 Pen write: (kept2   - kept1), brk. 

@@ -1,4 +1,4 @@
 'SINGLE_LANGUAGE'.
-Pen write: ('hello' hashWithKey: '1234567890123456'), brk.
-Pen write: ('hello' hashWithKey: '1234567890123456'), brk.
-Pen write: ('hello' hashWithKey: '123'), brk.
+Pen write: ('hello' hash: '1234567890123456'), brk.
+Pen write: ('hello' hash: '1234567890123456'), brk.
+Pen write: ('hello' hash: '123'), brk.

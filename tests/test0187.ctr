@@ -16,7 +16,7 @@ Pen write: (7.9 floor), brk.
 
 Program sweep.
 
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 2 exponent factorial.
@@ -26,7 +26,7 @@ Pen write: (7.1 ceil), brk.
 Pen write: (7.9 floor), brk.
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 2 exponent factorial.
@@ -36,7 +36,7 @@ Pen write: (7.1 ceil), brk.
 Pen write: (7.9 floor), brk.
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

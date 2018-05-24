@@ -14,7 +14,7 @@ Pen write: txt asciiUpperCase, brk.
 
 Program sweep.
 
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 txt := '<h1>"Hell\'o & Goodbye"</h1>'.
@@ -23,7 +23,7 @@ Pen write: txt asciiLowerCase, brk.
 Pen write: txt asciiUpperCase, brk.
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 txt := '<h1>"Hell\'o & Goodbye"</h1>'.
@@ -32,7 +32,7 @@ Pen write: txt asciiLowerCase, brk.
 Pen write: txt asciiUpperCase, brk.
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

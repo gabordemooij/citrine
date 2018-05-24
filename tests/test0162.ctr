@@ -12,7 +12,7 @@ f exists: { f delete. }.
 f write: 'hello world'.
 
 Program sweep.
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 f := File new: '/tmp/citrine_test_file.txt'.
@@ -20,7 +20,7 @@ f exists: { f delete. }.
 f write: 'hello world'.
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 f := File new: '/tmp/citrine_test_file.txt'.
@@ -28,7 +28,7 @@ f exists: { f delete. }.
 f write: 'hello world'.
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

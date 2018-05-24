@@ -16,7 +16,7 @@ Pen write: ( txt find: 'S' ), brk.
 
 Program sweep.
 
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 txt := 'Word Salad'.
@@ -27,7 +27,7 @@ Pen write: 'Byte at 2:' + ( txt byte: 2 ), brk.
 Pen write: ( txt find: 'S' ), brk.
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 txt := 'Word Salad'.
@@ -38,7 +38,7 @@ Pen write: 'Byte at 2:' + ( txt byte: 2 ), brk.
 Pen write: ( txt find: 'S' ), brk.
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

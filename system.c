@@ -214,7 +214,7 @@ ctr_object* ctr_gc_object_count(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [Program] keptCount
+ * [Program] kept
  *
  * Returns the total number of objects that have been marked during the
  * latest cycle and have therefore been allowed to stay in memory.
@@ -224,7 +224,7 @@ ctr_object* ctr_gc_kept_count(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Program] keptAlloc
+ * [Program] allocated
  *
  * Returns the amount of allocated memory.
  */
@@ -233,7 +233,7 @@ ctr_object* ctr_gc_kept_alloc(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Program] stickyCount
+ * [Program] stuck
  *
  * Returns the total number of objects that have a sticky flag.
  * These objects will never be removed.

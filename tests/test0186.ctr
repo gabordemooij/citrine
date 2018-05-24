@@ -22,7 +22,7 @@ Pen write: 1 boolean, brk.
 
 Program sweep.
 
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 Pen write: (6 < 5), brk.
@@ -39,7 +39,7 @@ Pen write: (3 !=: 3), brk.
 Pen write: 1 boolean, brk.
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 Pen write: (6 < 5), brk.
@@ -56,7 +56,7 @@ Pen write: (3 !=: 3), brk.
 Pen write: 1 boolean, brk.
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 

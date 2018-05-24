@@ -1,7 +1,7 @@
 'SINGLE_LANGUAGE'.
 
-Broom tidiness: 12.
-Broom sweep.
+Program tidiness: 12.
+Program sweep.
 
 ☞ Fruit := Object new.
 Fruit on: 'new' do: {

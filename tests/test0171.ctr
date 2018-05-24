@@ -12,7 +12,7 @@ a do pop shift unshift: 'hi', push: 999, done.
 Pen write: ( a join: ',' ), brk.
 
 Program sweep.
-usedMemory1 := Program keptAlloc.
+usedMemory1 := Program allocated.
 
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
@@ -21,7 +21,7 @@ Pen write: ( a join: ',' ), brk.
 
 
 Program sweep.
-usedMemory2 := Program keptAlloc.
+usedMemory2 := Program allocated.
 
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
@@ -30,7 +30,7 @@ Pen write: ( a join: ',' ), brk.
 
 
 Program sweep.
-usedMemory3 := Program keptAlloc.
+usedMemory3 := Program allocated.
 
 
 
