@@ -9,7 +9,7 @@ Program tidiness: 0.
 
 Clock time.
 Clock wait: 1.
-Pen write: Program argCount, brk.
+Pen write: Program arguments, brk.
 Program argument: 0.
 Dice roll.
 Dice rollWithSides: 10.
@@ -23,7 +23,7 @@ usedMemory1 := Program keptAlloc.
 
 Clock time.
 Clock wait: 1.
-Pen write: Program argCount, brk.
+Pen write: Program arguments, brk.
 Program argument: 0.
 Dice roll.
 Dice rollWithSides: 10.
@@ -37,7 +37,7 @@ usedMemory2 := Program keptAlloc.
 
 Clock time.
 Clock wait: 1.
-Pen write: Program argCount, brk.
+Pen write: Program arguments, brk.
 Program argument: 0.
 Dice roll.
 Dice rollWithSides: 10.

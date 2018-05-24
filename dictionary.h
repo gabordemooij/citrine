@@ -132,7 +132,7 @@
 #define CTR_DICT_END             "end"
 #define CTR_DICT_FILE            "File"
 #define CTR_DICT_ARGUMENT	     "argument:" 
-#define CTR_DICT_ARGUMENT_COUNT	 "argCount" 
+#define CTR_DICT_ARGUMENT_COUNT	 "arguments" 
 #define CTR_DICT_WAIT_FOR_INPUT	 "ask" 
 #define CTR_DICT_INPUT           "input" 
 #define CTR_DICT_EXIT            "exit"
