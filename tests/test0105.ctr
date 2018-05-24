@@ -1,4 +1,4 @@
 
-☞ mapUp := { :i :v :m m put: ((m @ i) asciiUpperCase) at: i. }.
+☞ mapUp := { :i :v :m m put: ((m @ i) uppercase) at: i. }.
 ☞ a := 'lololol' split: 'o', map: mapUp, join: 'x'.
 Pen write: a.

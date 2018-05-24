@@ -1212,6 +1212,15 @@ ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Number] random
+ *
+ * Generates a random number, the traditional way (like rand()).
+ */
+ctr_object* ctr_number_random(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float( (ctr_number) (arc4random()) );
+}
+
+/**
  * [Number] pos
  *
  * Returns a boolean indicating wether the number is positive.
@@ -1872,7 +1881,7 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [String] asciiUpperCase
+ * [String] uppercase
  *
  * Returns a new uppercased version of the string.
  * Note that this is just basic ASCII case functionality, this should only
@@ -1895,7 +1904,7 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
 
 
 /**
- * [String] asciiLowerCase
+ * [String] lowercase
  *
  * Returns a new lowercased version of the string.
  * Note that this is just basic ASCII case functionality, this should only

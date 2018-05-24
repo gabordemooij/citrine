@@ -11,9 +11,7 @@ Clock time.
 Clock wait: 1.
 Pen write: Program arguments, brk.
 Program argument: 0.
-Dice roll.
-Dice rollWithSides: 10.
-Dice rawRandomNumber.
+Number random.
 ✎ write: (💻 shell: 'echo \'Hello\'').
 
 Program sweep.
@@ -25,9 +23,7 @@ Clock time.
 Clock wait: 1.
 Pen write: Program arguments, brk.
 Program argument: 0.
-Dice roll.
-Dice rollWithSides: 10.
-Dice rawRandomNumber.
+Number random.
 ✎ write: (💻 shell: 'echo \'Hello\'').
 
 
@@ -39,9 +35,7 @@ Clock time.
 Clock wait: 1.
 Pen write: Program arguments, brk.
 Program argument: 0.
-Dice roll.
-Dice rollWithSides: 10.
-Dice rawRandomNumber.
+Number random.
 ✎ write: (💻 shell: 'echo \'Hello\'').
 
 Program sweep.

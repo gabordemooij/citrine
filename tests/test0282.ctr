@@ -2,14 +2,14 @@
 
 ✎ write: (Italian places first), brk.
 ✎ write: (Italian places last), brk.
-✎ write: (Italian places secondLast), brk.
+✎ write: (Italian places second last), brk.
 
 ☞ Moon places := List new.
 
 ✎ write: (Moon places first), brk.
 ✎ write: (Moon places last), brk.
-✎ write: (Moon places secondLast), brk.
+✎ write: (Moon places second last), brk.
 
 Italian places do pop pop pop done.
 
-✎ write: (Italian places secondLast), brk.
+✎ write: (Italian places second last), brk.

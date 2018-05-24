@@ -673,6 +673,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_QUALIFY ),&ctr_number_qualify );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ),&ctr_number_qualification );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ),&ctr_number_qualify );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_RAW_RANDOM_NUMBER ),&ctr_number_random );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NUMBER ), CtrStdNumber, 0);
 	CtrStdNumber->link = CtrStdObject;
 	CtrStdNumber->info.sticky = 1;
@@ -911,21 +912,6 @@ void ctr_initialize_world() {
 	ctr_clock_init( CtrStdClock );
 	CtrStdClock->link = CtrStdObject;
 	CtrStdFile->info.sticky = 1;
-
-	/* Dice */
-	CtrStdDice = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
-	ctr_internal_create_func(CtrStdDice, ctr_build_string_from_cstring( CTR_DICT_ROLL ), &ctr_dice_throw );
-	ctr_internal_create_func(CtrStdDice, ctr_build_string_from_cstring( CTR_DICT_ROLL_WITH_SIDES ), &ctr_dice_sides );
-	ctr_internal_create_func(CtrStdDice, ctr_build_string_from_cstring( CTR_DICT_RAW_RANDOM_NUMBER ), &ctr_dice_rand );
-	ctr_internal_create_func(CtrStdDice, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_dice_rand );
-	ctr_internal_create_func(CtrStdDice, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_dice_to_string );
-	ctr_internal_create_func(CtrStdDice, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_dice_to_number );
-	ctr_internal_create_func(CtrStdDice, ctr_build_string_from_cstring( CTR_DICT_RANDOMIZE_BYTES_WITH_LENGTH ),&ctr_dice_randomize_bytes );
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_DICE ), CtrStdDice, 0 );
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_DICE_ICON ), CtrStdDice, 0 );
-	CtrStdDice->link = CtrStdObject;
-	CtrStdDice->info.sticky = 1;
-
 	
 	/* Other objects */
 	CtrStdBreak = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);

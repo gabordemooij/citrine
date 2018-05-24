@@ -8,7 +8,8 @@
 ✎ write: 💻 number, brk.
 
 
-⚄ on: 'rawRandomNumber' do: { ↲ 666. }.
+⚄ on: 'number' do: { ↲ 666. }.
+⚄ on: 'string' do: { ↲ '666'. }.
 
 ✎ write: 'Sending toString to Dice yields a random number string:', brk.
 ✎ write: ⚄, brk.
