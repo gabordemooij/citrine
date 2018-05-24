@@ -7,7 +7,7 @@
 #define CTR_DICT_SYMBOL_EQUALS   "="
 #define CTR_DICT_ONDO            "on:do:"
 #define CTR_DICT_TYPE            "type"
-#define CTR_DICT_ISNIL           "isNil"
+#define CTR_DICT_ISNIL           "Nil?"
 #define CTR_DICT_MYSELF          "myself"
 #define CTR_DICT_DO              "do"
 #define CTR_DICT_DONE            "done"

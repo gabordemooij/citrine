@@ -41,7 +41,7 @@ ctr_object* ctr_build_nil() {
 }
 
 /**
- * [Nil] isNil
+ * [Nil] Nil?
  *
  * Nil always answers this message with a boolean object 'True'.
  */
@@ -578,9 +578,9 @@ ctr_object* ctr_object_respond_and_and(ctr_object* myself, ctr_argument* argumen
 }
 
 /**
- * [Object] isNil
+ * [Object] Nil?
  *
- * Default isNil implementation.
+ * Default Nil? implementation.
  *
  * Always returns boolean object False.
  */

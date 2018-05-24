@@ -7,7 +7,7 @@
 #define CTR_DICT_SYMBOL_EQUALS   "="
 #define CTR_DICT_ONDO            "bij:doen:" 
 #define CTR_DICT_TYPE            "type" 
-#define CTR_DICT_ISNIL           "isNiets"
+#define CTR_DICT_ISNIL           "niets?"
 #define CTR_DICT_MYSELF          "mijzelf"
 #define CTR_DICT_DO              "doen"
 #define CTR_DICT_DONE            "klaar"

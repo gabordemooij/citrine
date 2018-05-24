@@ -9,7 +9,7 @@ Program tidiness: 0.
 
 ☞ o  := Object new.
 ☞ o2 := Object new.
-Pen write: o isNil, brk.
+Pen write: o Nil?, brk.
 Pen write: o type, brk.
 Pen write: ( o equals: o ), brk.
 Pen write: ( o equals: o2 ), brk.
@@ -23,7 +23,7 @@ usedMemory1 := Program keptAlloc.
 
 o  := Object new.
 o2 := Object new.
-Pen write: o isNil, brk.
+Pen write: o Nil?, brk.
 Pen write: o type, brk.
 Pen write: ( o equals: o ), brk.
 Pen write: ( o equals: o2 ), brk.
@@ -36,7 +36,7 @@ usedMemory2 := Program keptAlloc.
 
 o  := Object new.
 o2 := Object new.
-Pen write: o isNil, brk.
+Pen write: o Nil?, brk.
 Pen write: o type, brk.
 Pen write: ( o equals: o ), brk.
 Pen write: ( o equals: o2 ), brk.
