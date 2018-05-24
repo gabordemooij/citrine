@@ -1,7 +1,7 @@
 'SINGLE_LANGUAGE'.
 ☞ $ := Object new.
 
-$ on: 'respondTo:' do: { :x
+$ on: 'respond:' do: { :x
 	
 	☞ operation := x @ 0.
 	☞ valuta    := x @ 1.

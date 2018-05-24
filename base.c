@@ -512,12 +512,12 @@ ctr_object* ctr_object_send2remote(ctr_object* myself, ctr_argument* argumentLis
 }
 
 /**
- * [Object] respondTo: [String]
+ * [Object] respond: [String]
  *
  * Variations:
  *
- * [Object] respondTo: [String] with: [String]
- * [Object] respondTo: [String] with: [String] and: [String]
+ * [Object] respond: [String] with: [String]
+ * [Object] respond: [String] with: [String] and: [String]
  *
  * Default respond-to implemention, does nothing.
  * You can override this behaviour to implement generic behaviour.

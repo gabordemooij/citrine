@@ -1,11 +1,11 @@
 
 ☞ HtmlBrush := Object new.
 
-HtmlBrush on: 'respondTo:' do: { :tag
+HtmlBrush on: 'respond:' do: { :tag
 	✎ write: ('<tag>↵' tag: tag ).
 }.
 
-HtmlBrush on: 'respondTo:and:' do: { :tag :content
+HtmlBrush on: 'respond:and:' do: { :tag :content
 	tag := ( tag from: 0 to: (tag length - 1) ).
 	✎ write: ('<tag content>↵' tag: tag, content: content).
 }.

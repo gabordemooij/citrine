@@ -6,7 +6,7 @@ Slurp on: 'new' do: {
 
 Slurp learn: 'nieuw' means: 'new'.
 
-Slurp on: 'respondTo:' do: { :blah
+Slurp on: 'respond:' do: { :blah
 		(⚿ str = '') true: {
 			⚿ str append: blah.
 		}, else: {
@@ -15,7 +15,7 @@ Slurp on: 'respondTo:' do: { :blah
 		}.
 }.
 
-Slurp on: 'respondTo:and:' do: { :blah :blahah
+Slurp on: 'respond:and:' do: { :blah :blahah
 		⚿ str append: (blah from: 0 length: (blah length - 1)).
 		⚿ str append: ' '.
 		⚿ str append: blahah.

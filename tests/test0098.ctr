@@ -1,5 +1,5 @@
 ☞ ?> := Pen new.
-?> on: 'respondTo:' do: { :content
+?> on: 'respond:' do: { :content
 	✎ write: content.
 }.
 
