@@ -5,7 +5,7 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom tidiness: 0.
+Program tidiness: 0.
 
 ☞ txt := '1.6'.
 ☞ n := txt number.
@@ -15,21 +15,9 @@ Pen write: t, brk.
 Pen write: n type, brk.
 Pen write: t type, brk.
 
-Broom sweep.
+Program sweep.
 
-usedMemory1 := Broom keptAlloc.
-
-
-txt := '1.6'.
-n := txt number.
-t := txt boolean.
-Pen write: n, brk.
-Pen write: t, brk.
-Pen write: n type, brk.
-Pen write: t type, brk.
-
-Broom sweep.
-usedMemory2 := Broom keptAlloc.
+usedMemory1 := Program keptAlloc.
 
 
 txt := '1.6'.
@@ -40,8 +28,20 @@ Pen write: t, brk.
 Pen write: n type, brk.
 Pen write: t type, brk.
 
-Broom sweep.
-usedMemory3 := Broom keptAlloc.
+Program sweep.
+usedMemory2 := Program keptAlloc.
+
+
+txt := '1.6'.
+n := txt number.
+t := txt boolean.
+Pen write: n, brk.
+Pen write: t, brk.
+Pen write: n type, brk.
+Pen write: t type, brk.
+
+Program sweep.
+usedMemory3 := Program keptAlloc.
 
 
 

@@ -5,7 +5,7 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom tidiness: 0.
+Program tidiness: 0.
 
 Clock time.
 Clock wait: 1.
@@ -16,23 +16,9 @@ Dice rollWithSides: 10.
 Dice rawRandomNumber.
 ✎ write: (💻 shell: 'echo \'Hello\'').
 
-Broom sweep.
+Program sweep.
 
-usedMemory1 := Broom keptAlloc.
-
-
-Clock time.
-Clock wait: 1.
-Pen write: Program argCount, brk.
-Program argument: 0.
-Dice roll.
-Dice rollWithSides: 10.
-Dice rawRandomNumber.
-✎ write: (💻 shell: 'echo \'Hello\'').
-
-
-Broom sweep.
-usedMemory2 := Broom keptAlloc.
+usedMemory1 := Program keptAlloc.
 
 
 Clock time.
@@ -44,8 +30,22 @@ Dice rollWithSides: 10.
 Dice rawRandomNumber.
 ✎ write: (💻 shell: 'echo \'Hello\'').
 
-Broom sweep.
-usedMemory3 := Broom keptAlloc.
+
+Program sweep.
+usedMemory2 := Program keptAlloc.
+
+
+Clock time.
+Clock wait: 1.
+Pen write: Program argCount, brk.
+Program argument: 0.
+Dice roll.
+Dice rollWithSides: 10.
+Dice rawRandomNumber.
+✎ write: (💻 shell: 'echo \'Hello\'').
+
+Program sweep.
+usedMemory3 := Program keptAlloc.
 
 
 

@@ -5,7 +5,7 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom tidiness: 0.
+Program tidiness: 0.
 
 ☞ txt := 'Word Salad'.
 Pen write: 'Text Length: ' + txt length, brk.
@@ -14,20 +14,9 @@ Pen write: 'Character at 2:' + ( txt @ 2 ), brk.
 Pen write: 'Byte at 2:' + ( txt byte: 2 ), brk.
 Pen write: ( txt find: 'S' ), brk.
 
-Broom sweep.
+Program sweep.
 
-usedMemory1 := Broom keptAlloc.
-
-
-txt := 'Word Salad'.
-Pen write: 'Text Length: ' + txt length, brk.
-Pen write: 'Text Length in bytes: ' + txt bytes, brk.
-Pen write: 'Character at 2:' + ( txt @ 2 ), brk.
-Pen write: 'Byte at 2:' + ( txt byte: 2 ), brk.
-Pen write: ( txt find: 'S' ), brk.
-
-Broom sweep.
-usedMemory2 := Broom keptAlloc.
+usedMemory1 := Program keptAlloc.
 
 
 txt := 'Word Salad'.
@@ -37,8 +26,19 @@ Pen write: 'Character at 2:' + ( txt @ 2 ), brk.
 Pen write: 'Byte at 2:' + ( txt byte: 2 ), brk.
 Pen write: ( txt find: 'S' ), brk.
 
-Broom sweep.
-usedMemory3 := Broom keptAlloc.
+Program sweep.
+usedMemory2 := Program keptAlloc.
+
+
+txt := 'Word Salad'.
+Pen write: 'Text Length: ' + txt length, brk.
+Pen write: 'Text Length in bytes: ' + txt bytes, brk.
+Pen write: 'Character at 2:' + ( txt @ 2 ), brk.
+Pen write: 'Byte at 2:' + ( txt byte: 2 ), brk.
+Pen write: ( txt find: 'S' ), brk.
+
+Program sweep.
+usedMemory3 := Program keptAlloc.
 
 
 

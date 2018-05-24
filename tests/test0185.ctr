@@ -5,7 +5,7 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom tidiness: 0.
+Program tidiness: 0.
 
 ☞ a := -2 absolute.
 a := a arctangent.
@@ -14,21 +14,9 @@ a := a logarithm.
 a := a sine.
 a := a tangent.
 
-Broom sweep.
+Program sweep.
 
-usedMemory1 := Broom keptAlloc.
-
-
-a := -2 absolute.
-a := a arctangent.
-a := a cosine.
-a := a logarithm.
-a := a sine.
-a := a tangent.
-
-
-Broom sweep.
-usedMemory2 := Broom keptAlloc.
+usedMemory1 := Program keptAlloc.
 
 
 a := -2 absolute.
@@ -38,8 +26,20 @@ a := a logarithm.
 a := a sine.
 a := a tangent.
 
-Broom sweep.
-usedMemory3 := Broom keptAlloc.
+
+Program sweep.
+usedMemory2 := Program keptAlloc.
+
+
+a := -2 absolute.
+a := a arctangent.
+a := a cosine.
+a := a logarithm.
+a := a sine.
+a := a tangent.
+
+Program sweep.
+usedMemory3 := Program keptAlloc.
 
 
 

@@ -7,7 +7,7 @@
 
 ☞ x := 100.
 
-Broom tidiness: 0.
+Program tidiness: 0.
 
 ☞ txt := 'hello ' + 'world'.
 txt := txt + ' - can we use strings.. '.
@@ -15,19 +15,9 @@ txt := txt + 'without leaking ' + x + 's of bytes ?'.
 txt append: '!!'.
 Pen write: txt.
 
-Broom sweep.
+Program sweep.
 
-usedMemory1 := Broom keptAlloc.
-
-
-txt := 'hello ' + 'world'.
-txt := txt + ' - can we use strings.. '.
-txt := txt + 'without leaking ' + x + 's of bytes ?'.
-txt append: '!!'.
-Pen write: txt.
-
-Broom sweep.
-usedMemory2 := Broom keptAlloc.
+usedMemory1 := Program keptAlloc.
 
 
 txt := 'hello ' + 'world'.
@@ -36,8 +26,18 @@ txt := txt + 'without leaking ' + x + 's of bytes ?'.
 txt append: '!!'.
 Pen write: txt.
 
-Broom sweep.
-usedMemory3 := Broom keptAlloc.
+Program sweep.
+usedMemory2 := Program keptAlloc.
+
+
+txt := 'hello ' + 'world'.
+txt := txt + ' - can we use strings.. '.
+txt := txt + 'without leaking ' + x + 's of bytes ?'.
+txt append: '!!'.
+Pen write: txt.
+
+Program sweep.
+usedMemory3 := Program keptAlloc.
 
 
 

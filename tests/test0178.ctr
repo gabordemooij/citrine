@@ -5,7 +5,7 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom tidiness: 0.
+Program tidiness: 0.
 
 ☞ txt := 'Word Salad'.
 Pen write: 'last index of ord = ' + ( txt last: 'ord' ), brk.
@@ -18,24 +18,9 @@ Pen write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
 Pen write: 'txt does not equal Word Salad = ' + ( txt !=: 'Word Salad' ), brk.
 Pen write: 'txt does not equal Ceasar Salad = ' + ( txt !=: 'Ceasar Salad' ), brk.
 
-Broom sweep.
+Program sweep.
 
-usedMemory1 := Broom keptAlloc.
-
-
-txt := 'Word Salad'.
-Pen write: 'last index of ord = ' + ( txt last: 'ord' ), brk.
-Pen write: 'index of ord = ' + ( txt find: 'ord' ), brk.
-Pen write: 'index of ad = ' + ( txt find: 'ad' ), brk.
-Pen write: 'last index of W = ' + ( txt last: 'W' ), brk.
-Pen write: 'last index of d = ' + ( txt last: 'd' ), brk.
-Pen write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), brk.
-Pen write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
-Pen write: 'txt does not equal Word Salad = ' + ( txt !=: 'Word Salad' ), brk.
-Pen write: 'txt does not equal Ceasar Salad = ' + ( txt !=: 'Ceasar Salad' ), brk.
-
-Broom sweep.
-usedMemory2 := Broom keptAlloc.
+usedMemory1 := Program keptAlloc.
 
 
 txt := 'Word Salad'.
@@ -49,8 +34,23 @@ Pen write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
 Pen write: 'txt does not equal Word Salad = ' + ( txt !=: 'Word Salad' ), brk.
 Pen write: 'txt does not equal Ceasar Salad = ' + ( txt !=: 'Ceasar Salad' ), brk.
 
-Broom sweep.
-usedMemory3 := Broom keptAlloc.
+Program sweep.
+usedMemory2 := Program keptAlloc.
+
+
+txt := 'Word Salad'.
+Pen write: 'last index of ord = ' + ( txt last: 'ord' ), brk.
+Pen write: 'index of ord = ' + ( txt find: 'ord' ), brk.
+Pen write: 'index of ad = ' + ( txt find: 'ad' ), brk.
+Pen write: 'last index of W = ' + ( txt last: 'W' ), brk.
+Pen write: 'last index of d = ' + ( txt last: 'd' ), brk.
+Pen write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), brk.
+Pen write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
+Pen write: 'txt does not equal Word Salad = ' + ( txt !=: 'Word Salad' ), brk.
+Pen write: 'txt does not equal Ceasar Salad = ' + ( txt !=: 'Ceasar Salad' ), brk.
+
+Program sweep.
+usedMemory3 := Program keptAlloc.
 
 
 

@@ -5,7 +5,7 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom tidiness: 0.
+Program tidiness: 0.
 
 { :i Pen write: i. } * 4.
 Pen brk.
@@ -23,30 +23,9 @@ i := 3.
 Pen brk.
 
 
-Broom sweep.
+Program sweep.
 
-usedMemory1 := Broom keptAlloc.
-
-
-{ :i Pen write: i. } * 4.
-Pen brk.
-{ :i Pen write: (4 - i). } * 4.
-Pen brk.
-( 1 > 2 ) false: { Pen write: 'BLOCK 1', brk. }.
-( 2 > 1 ) true:  { Pen write: 'BLOCK 2', brk. }.
-
-i := 0.
-{ ↲( i < 3). } true: { Pen write: i. i +=: 1. }.
-Pen brk.
-
-i := 3.
-{ ↲( i > 0). } true: { Pen write: i. i := i - 1. }.
-Pen brk.
-
-
-
-Broom sweep.
-usedMemory2 := Broom keptAlloc.
+usedMemory1 := Program keptAlloc.
 
 
 { :i Pen write: i. } * 4.
@@ -64,8 +43,29 @@ i := 3.
 { ↲( i > 0). } true: { Pen write: i. i := i - 1. }.
 Pen brk.
 
-Broom sweep.
-usedMemory3 := Broom keptAlloc.
+
+
+Program sweep.
+usedMemory2 := Program keptAlloc.
+
+
+{ :i Pen write: i. } * 4.
+Pen brk.
+{ :i Pen write: (4 - i). } * 4.
+Pen brk.
+( 1 > 2 ) false: { Pen write: 'BLOCK 1', brk. }.
+( 2 > 1 ) true:  { Pen write: 'BLOCK 2', brk. }.
+
+i := 0.
+{ ↲( i < 3). } true: { Pen write: i. i +=: 1. }.
+Pen brk.
+
+i := 3.
+{ ↲( i > 0). } true: { Pen write: i. i := i - 1. }.
+Pen brk.
+
+Program sweep.
+usedMemory3 := Program keptAlloc.
 
 
 

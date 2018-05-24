@@ -1,5 +1,5 @@
 
-Broom tidiness: 0.
+Program tidiness: 0.
 Program env: 'QUERY_STRING' val: 'search=table&restaurant=pizzaria&menu=spaghetti&menu=macaroni&course[main]=canneloni&course[dessert]=tiramisu'.
 Pen write: (Program env: 'QUERY_STRING'), brk.
 ☞ s := Request get: 'search'.

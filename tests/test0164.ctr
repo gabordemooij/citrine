@@ -5,7 +5,7 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom tidiness: 0.
+Program tidiness: 0.
 
 ☞ f := File new: '/tmp/citrine_test_file.txt'.
 f exists: { f delete. }.
@@ -13,20 +13,20 @@ f write: 'hello'.
 f := File new: '/tmp/citrine_test_file.txt'.
 f append: 'hello'.
 
-Broom sweep.
-usedMemory1 := Broom keptAlloc.
+Program sweep.
+usedMemory1 := Program keptAlloc.
 
 
 f := File new: '/tmp/citrine_test_file.txt'.
 f append: 'hello'.
-Broom sweep.
-usedMemory2 := Broom keptAlloc.
+Program sweep.
+usedMemory2 := Program keptAlloc.
 
 
 f := File new: '/tmp/citrine_test_file.txt'.
 f append: 'hello'.
-Broom sweep.
-usedMemory3 := Broom keptAlloc.
+Program sweep.
+usedMemory3 := Program keptAlloc.
 
 
 

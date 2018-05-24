@@ -5,14 +5,14 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom tidiness: 0.
+Program tidiness: 0.
 
 ☞ a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
 ☞ b := a from: 2 length: 2.
 Pen write: ( b join: '|' ), write: b count.
 
-Broom sweep.
-usedMemory1 := Broom keptAlloc.
+Program sweep.
+usedMemory1 := Program keptAlloc.
 
 
 a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
@@ -20,8 +20,8 @@ b := a from: 2 length: 2.
 Pen write: ( b join: '|' ), write: b count.
 
 
-Broom sweep.
-usedMemory2 := Broom keptAlloc.
+Program sweep.
+usedMemory2 := Program keptAlloc.
 
 
 a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
@@ -29,8 +29,8 @@ b := a from: 2 length: 2.
 Pen write: ( b join: '|' ), write: b count.
 
 
-Broom sweep.
-usedMemory3 := Broom keptAlloc.
+Program sweep.
+usedMemory3 := Program keptAlloc.
 
 
 

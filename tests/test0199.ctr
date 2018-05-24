@@ -1,5 +1,5 @@
 
-Broom tidiness: 4.
+Program tidiness: 4.
 
 ☞ Animal := Object new.
 Animal on: 'make' do: {

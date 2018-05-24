@@ -867,6 +867,14 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SHELL ), &ctr_program_shell );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_program_to_string );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_program_to_number );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SWEEP ), &ctr_gc_collect );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_DUST ), &ctr_gc_dust );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_OBJECT_COUNT ), &ctr_gc_object_count );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_KEPT_COUNT ), &ctr_gc_kept_count );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_KEPT_ALLOC ), &ctr_gc_kept_alloc );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_STICKY_COUNT ), &ctr_gc_sticky_count );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MEMORY_LIMIT ), &ctr_gc_setmemlimit );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MODE ),  &ctr_gc_setmode );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PROGRAM ), CtrStdCommand, 0 );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_COMP_ICON ), CtrStdCommand, 0 );
 	CtrStdCommand->link = CtrStdObject;
@@ -921,22 +929,7 @@ void ctr_initialize_world() {
 	CtrStdDice->link = CtrStdObject;
 	CtrStdDice->info.sticky = 1;
 
-	/* Broom */
-	CtrStdGC = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
-	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_SWEEP ), &ctr_gc_collect );
-	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_DUST ), &ctr_gc_dust );
-	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_OBJECT_COUNT ), &ctr_gc_object_count );
-	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_KEPT_COUNT ), &ctr_gc_kept_count );
-	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_KEPT_ALLOC ), &ctr_gc_kept_alloc );
-	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_STICKY_COUNT ), &ctr_gc_sticky_count );
-	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_MEMORY_LIMIT ), &ctr_gc_setmemlimit );
-	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_MODE ),  &ctr_gc_setmode );
-	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ),  &ctr_gc_to_string );
-	ctr_internal_create_func(CtrStdGC, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ),  &ctr_gc_to_number );
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_BROOM ), CtrStdGC, 0 );
-	CtrStdGC->link = CtrStdObject;
-	CtrStdGC->info.sticky = 1;
-
+	
 	/* Other objects */
 	CtrStdBreak = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	CtrStdContinue = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);

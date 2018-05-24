@@ -5,7 +5,7 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom tidiness: 0.
+Program tidiness: 0.
 
 ☞ money  := False.
 ☞ desire := True.
@@ -30,38 +30,9 @@ Broom tidiness: 0.
 Boolean flip. 
 Pen write: PoemAboutLife, brk.
 
-Broom sweep.
+Program sweep.
 
-usedMemory1 := Broom keptAlloc.
-
-
-money  := False.
-desire := True.
-canDo := (money & desire).
-depression := (money ? desire).
-isHuman := (money | desire).
-isRobot := (money ! desire).
-PoemAboutLife := 
-	'I am a ' + 
-	(isHuman either: 'human being' or: 'not a human being') +
-	', ' +
-	(isRobot either: 'robot' or: 'not a robot') +
-	', so I have ' +
-	( desire either: 'desires' or: 'no desires') +
-	' but ' +
-	(money either: 'money' or: 'no money') +
-	', so I am' +
-	(depression either: 'depressive' or: 'happy') +
-	' because I ' +
-	(canDo either: 'can do what I want' or: 'cannot do what I want') +
-	' to do to make this world a better place.'.
-Boolean flip. 
-Pen write: PoemAboutLife, brk.
-
-
-
-Broom sweep.
-usedMemory2 := Broom keptAlloc.
+usedMemory1 := Program keptAlloc.
 
 
 money  := False.
@@ -87,8 +58,37 @@ PoemAboutLife :=
 Boolean flip. 
 Pen write: PoemAboutLife, brk.
 
-Broom sweep.
-usedMemory3 := Broom keptAlloc.
+
+
+Program sweep.
+usedMemory2 := Program keptAlloc.
+
+
+money  := False.
+desire := True.
+canDo := (money & desire).
+depression := (money ? desire).
+isHuman := (money | desire).
+isRobot := (money ! desire).
+PoemAboutLife := 
+	'I am a ' + 
+	(isHuman either: 'human being' or: 'not a human being') +
+	', ' +
+	(isRobot either: 'robot' or: 'not a robot') +
+	', so I have ' +
+	( desire either: 'desires' or: 'no desires') +
+	' but ' +
+	(money either: 'money' or: 'no money') +
+	', so I am' +
+	(depression either: 'depressive' or: 'happy') +
+	' because I ' +
+	(canDo either: 'can do what I want' or: 'cannot do what I want') +
+	' to do to make this world a better place.'.
+Boolean flip. 
+Pen write: PoemAboutLife, brk.
+
+Program sweep.
+usedMemory3 := Program keptAlloc.
 
 
 

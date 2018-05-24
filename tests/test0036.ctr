@@ -6,9 +6,9 @@
 	garbageMaker method: 'putGarbageOnScreen' does: {
 		☞ x := 1.
 		☞ y := 2.
-		Broom sweep.
+		Program sweep.
 	}.
 	garbageMaker putGarbageOnScreen.
 	Pen write: a.
-	Broom sweep.
+	Program sweep.
 } * 1000.

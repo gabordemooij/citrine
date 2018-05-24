@@ -1,7 +1,7 @@
 
 
 
-Broom tidiness: 0.
+Program tidiness: 0.
 
 ☞ x := 0.
 ☞ y := 'Hello'.
@@ -14,8 +14,8 @@ Broom tidiness: 0.
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom sweep.
-usedMemory1 := Broom keptAlloc.
+Program sweep.
+usedMemory1 := Program keptAlloc.
 
 
 
@@ -26,8 +26,8 @@ q := {}.
 p := True.
 a := Array < 1 ; 2 ; 3 ; 5.
 
-Broom sweep.
-usedMemory2 := Broom keptAlloc.
+Program sweep.
+usedMemory2 := Program keptAlloc.
 
 
 
@@ -38,8 +38,8 @@ q := {}.
 p := True.
 a := Array < 1 ; 2 ; 3 ; 4.
 
-Broom sweep.
-usedMemory3 := Broom keptAlloc.
+Program sweep.
+usedMemory3 := Program keptAlloc.
 
 
 
@@ -51,8 +51,8 @@ p := True.
 a := Array < 1 ; 2 ; 3 ; 5.
 
 
-Broom sweep.
-usedMemory4 := Broom keptAlloc.
+Program sweep.
+usedMemory4 := Program keptAlloc.
 
 
 
@@ -64,8 +64,8 @@ q := {}.
 p := True.
 a := Array < 1 ; 2 ; 3 ; 4.
 
-Broom sweep.
-☞ usedMemory5 := Broom keptAlloc.
+Program sweep.
+☞ usedMemory5 := Program keptAlloc.
 
 
 

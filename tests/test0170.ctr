@@ -5,27 +5,27 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom tidiness: 0.
+Program tidiness: 0.
 
 ☞ a := Array new.
 ☞ b := Array < 1 ; 2.
 
-Broom sweep.
-usedMemory1 := Broom keptAlloc.
+Program sweep.
+usedMemory1 := Program keptAlloc.
 
 
 a := Array new.
 b := Array < 1 ; 2.
 
-Broom sweep.
-usedMemory2 := Broom keptAlloc.
+Program sweep.
+usedMemory2 := Program keptAlloc.
 
 
 a := Array new.
 b := Array < 1 ; 2.
 
-Broom sweep.
-usedMemory3 := Broom keptAlloc.
+Program sweep.
+usedMemory3 := Program keptAlloc.
 
 
 

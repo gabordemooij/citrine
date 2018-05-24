@@ -1,6 +1,6 @@
 
 
-Broom tidiness: 1.
+Program tidiness: 1.
 
 ☞ x := 0.
 ☞ y := 'Hello'.
@@ -16,8 +16,8 @@ c on: 'greet:' do: { Pen write: 'greet!'. }.
 ☞ usedMemory4 := 0.
 ☞ usedMemory5 := 0.
 
-Broom sweep.
-☞ usedMemory1 := Broom keptAlloc.
+Program sweep.
+☞ usedMemory1 := Program keptAlloc.
 
 
 
@@ -31,8 +31,8 @@ c := Object new.
 c on: 'greet:' do: { Pen write: 'greet!'. }.
 
 
-Broom sweep.
-☞ usedMemory2 := Broom keptAlloc.
+Program sweep.
+☞ usedMemory2 := Program keptAlloc.
 
 
 
@@ -45,8 +45,8 @@ a := Array < 1 ; 2 ; 3 ; 4.
 c := Object new.
 c on: 'greet:' do: { Pen write: 'greet!'. }.
 
-Broom sweep.
-☞ usedMemory3 := Broom keptAlloc.
+Program sweep.
+☞ usedMemory3 := Program keptAlloc.
 
 
 
@@ -62,8 +62,8 @@ c := Object new.
 c on: 'greet:' do: { Pen write: 'a different greet!', brk. }.
 
 
-Broom sweep.
-☞ usedMemory4 := Broom keptAlloc.
+Program sweep.
+☞ usedMemory4 := Program keptAlloc.
 
 
 
@@ -78,8 +78,8 @@ c := Object new.
 c on: 'greet:' do: { Pen write: 'greet!'. }.
 
 
-Broom sweep.
-☞ usedMemory5 := Broom keptAlloc.
+Program sweep.
+☞ usedMemory5 := Program keptAlloc.
 
 
 

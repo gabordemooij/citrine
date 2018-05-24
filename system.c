@@ -183,11 +183,11 @@ void  ctr_gc_internal_collect() {
 }
 
 /**
- * Broom
+ * Program
  *
  * GarbageCollector, to invoke use:
  *
- * [Broom] sweep.
+ * [Program] sweep.
  */
 ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 	ctr_gc_internal_collect(); /* calls internal because automatic GC has to use this function as well and requires low overhead. */
@@ -195,7 +195,7 @@ ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Broom] dust
+ * [Program] dust
  *
  * Returns the number of objects collected.
  */
@@ -204,7 +204,7 @@ ctr_object* ctr_gc_dust(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Broom] objectCount
+ * [Program] objectCount
  *
  * Returns the total number of objects considered in the latest collect
  * cycle.
@@ -214,7 +214,7 @@ ctr_object* ctr_gc_object_count(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [Broom] keptCount
+ * [Program] keptCount
  *
  * Returns the total number of objects that have been marked during the
  * latest cycle and have therefore been allowed to stay in memory.
@@ -224,7 +224,7 @@ ctr_object* ctr_gc_kept_count(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Broom] keptAlloc
+ * [Program] keptAlloc
  *
  * Returns the amount of allocated memory.
  */
@@ -233,7 +233,7 @@ ctr_object* ctr_gc_kept_alloc(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Broom] stickyCount
+ * [Program] stickyCount
  *
  * Returns the total number of objects that have a sticky flag.
  * These objects will never be removed.
@@ -243,7 +243,7 @@ ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [Broom] memoryLimit
+ * [Program] memoryLimit
  *
  * Sets the memory limit, if this limit gets exceeded the program will produce
  * an out-of-memory error.
@@ -254,7 +254,7 @@ ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Broom] tidiness: [Number]
+ * [Program] tidiness: [Number]
  *
  * Selects mode of operation for GC.
  *
@@ -273,7 +273,7 @@ ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Broom] toString.
+ * [Program] toString.
  *
  * Returns the number of objects that have been collected by the
  * garbage collector.
@@ -283,7 +283,7 @@ ctr_object* ctr_gc_to_string(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Broom] number.
+ * [Program] number.
  *
  * Returns the number of objects that have been collected by the
  * garbage collector.

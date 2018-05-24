@@ -4,5 +4,5 @@
 	z push: x.
 } run.
 Pen write: (z at: 0).
-Broom sweep.
+Program sweep.
 Pen write: (z at: 0).

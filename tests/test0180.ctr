@@ -5,25 +5,16 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom tidiness: 0.
+Program tidiness: 0.
 
 ☞ txt := '<h1>"Hell\'o & Goodbye"</h1>'.
 Pen write: txt html, brk.
 Pen write: txt asciiLowerCase, brk.
 Pen write: txt asciiUpperCase, brk.
 
-Broom sweep.
+Program sweep.
 
-usedMemory1 := Broom keptAlloc.
-
-
-txt := '<h1>"Hell\'o & Goodbye"</h1>'.
-Pen write: txt html, brk.
-Pen write: txt asciiLowerCase, brk.
-Pen write: txt asciiUpperCase, brk.
-
-Broom sweep.
-usedMemory2 := Broom keptAlloc.
+usedMemory1 := Program keptAlloc.
 
 
 txt := '<h1>"Hell\'o & Goodbye"</h1>'.
@@ -31,8 +22,17 @@ Pen write: txt html, brk.
 Pen write: txt asciiLowerCase, brk.
 Pen write: txt asciiUpperCase, brk.
 
-Broom sweep.
-usedMemory3 := Broom keptAlloc.
+Program sweep.
+usedMemory2 := Program keptAlloc.
+
+
+txt := '<h1>"Hell\'o & Goodbye"</h1>'.
+Pen write: txt html, brk.
+Pen write: txt asciiLowerCase, brk.
+Pen write: txt asciiUpperCase, brk.
+
+Program sweep.
+usedMemory3 := Program keptAlloc.
 
 
 

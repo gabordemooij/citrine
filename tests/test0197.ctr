@@ -1,6 +1,6 @@
 
 
-Broom tidiness: 4.
+Program tidiness: 4.
 {
 	Pen write: 'hi there!'.
 	thisBlock error: 'oops'.

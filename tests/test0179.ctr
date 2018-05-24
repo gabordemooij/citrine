@@ -5,31 +5,31 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom tidiness: 0.
+Program tidiness: 0.
 
 ☞ txt := 'Word Salad'.
 Pen write: ( txt from: 5 length: 5 ).
 Pen write: ( txt skip: 4, trim ), brk.
 
-Broom sweep.
+Program sweep.
 
-usedMemory1 := Broom keptAlloc.
-
-
-txt := 'Word Salad'.
-Pen write: ( txt from: 5 length: 5 ).
-Pen write: ( txt skip: 4, trim ), brk.
-
-Broom sweep.
-usedMemory2 := Broom keptAlloc.
+usedMemory1 := Program keptAlloc.
 
 
 txt := 'Word Salad'.
 Pen write: ( txt from: 5 length: 5 ).
 Pen write: ( txt skip: 4, trim ), brk.
 
-Broom sweep.
-usedMemory3 := Broom keptAlloc.
+Program sweep.
+usedMemory2 := Program keptAlloc.
+
+
+txt := 'Word Salad'.
+Pen write: ( txt from: 5 length: 5 ).
+Pen write: ( txt skip: 4, trim ), brk.
+
+Program sweep.
+usedMemory3 := Program keptAlloc.
 
 
 

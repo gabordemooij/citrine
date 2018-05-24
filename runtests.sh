@@ -95,12 +95,12 @@ for i in $(find tests -name 'test*.ctr'); do
 	echo "[suite: $fitem]";
 	fexpect="${i%%.ctr}.exp"
 	#test for every GC mode (0/1/4/8/9/12) mode x every language (EN/NL)
-	rm tests/runner1.ctr ; echo "Broom tidiness: 0." > tests/runner1.ctr ; cat ${fitem} >> tests/runner1.ctr
-	rm tests/runner2.ctr ; echo "Broom tidiness: 1." > tests/runner2.ctr ; cat ${fitem} >> tests/runner2.ctr
-	rm tests/runner3.ctr ; echo "Broom tidiness: 4." > tests/runner3.ctr ; cat ${fitem} >> tests/runner3.ctr
-	rm tests/runner4.ctr ; echo "Broom tidiness: 8." > tests/runner4.ctr ; cat ${fitem} >> tests/runner4.ctr
-	rm tests/runner5.ctr ; echo "Broom tidiness: 9." > tests/runner5.ctr ; cat ${fitem} >> tests/runner5.ctr
-	rm tests/runner6.ctr ; echo "Broom tidiness: 12." > tests/runner6.ctr ; cat ${fitem} >> tests/runner6.ctr
+	rm tests/runner1.ctr ; echo "Program tidiness: 0." > tests/runner1.ctr ; cat ${fitem} >> tests/runner1.ctr
+	rm tests/runner2.ctr ; echo "Program tidiness: 1." > tests/runner2.ctr ; cat ${fitem} >> tests/runner2.ctr
+	rm tests/runner3.ctr ; echo "Program tidiness: 4." > tests/runner3.ctr ; cat ${fitem} >> tests/runner3.ctr
+	rm tests/runner4.ctr ; echo "Program tidiness: 8." > tests/runner4.ctr ; cat ${fitem} >> tests/runner4.ctr
+	rm tests/runner5.ctr ; echo "Program tidiness: 9." > tests/runner5.ctr ; cat ${fitem} >> tests/runner5.ctr
+	rm tests/runner6.ctr ; echo "Program tidiness: 12." > tests/runner6.ctr ; cat ${fitem} >> tests/runner6.ctr
 	echo "[translating...]"
 	rm tests/runner7.ctr ; ./ctr -t ennl.dict tests/runner1.ctr 1> tests/runner7.ctr 2> tests/terrors7.log
 	rm tests/runner8.ctr ; ./ctr -t ennl.dict tests/runner2.ctr 1> tests/runner8.ctr 2> tests/terrors8.log

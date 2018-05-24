@@ -5,7 +5,7 @@
 ☞ usedMemory3 := 0.
 ☞ usedMemory4 := 0.
 
-Broom tidiness: 0.
+Program tidiness: 0.
 
 Pen write: (6 < 5), brk.
 Pen write: (2 > 1), brk.
@@ -20,26 +20,9 @@ Pen write: (3 = 3), brk.
 Pen write: (3 !=: 3), brk.
 Pen write: 1 boolean, brk.
 
-Broom sweep.
+Program sweep.
 
-usedMemory1 := Broom keptAlloc.
-
-
-Pen write: (6 < 5), brk.
-Pen write: (2 > 1), brk.
-Pen write: (2 <=: 1), brk.
-Pen write: (9 >=: 1), brk.
-Pen write: (2 odd), brk.
-Pen write: (4 even), brk.
-Pen write: (-1 pos), brk.
-Pen write: (-2 neg), brk.
-Pen write: (3 between: 4 and: 5), brk.
-Pen write: (3 = 3), brk.
-Pen write: (3 !=: 3), brk.
-Pen write: 1 boolean, brk.
-
-Broom sweep.
-usedMemory2 := Broom keptAlloc.
+usedMemory1 := Program keptAlloc.
 
 
 Pen write: (6 < 5), brk.
@@ -55,8 +38,25 @@ Pen write: (3 = 3), brk.
 Pen write: (3 !=: 3), brk.
 Pen write: 1 boolean, brk.
 
-Broom sweep.
-usedMemory3 := Broom keptAlloc.
+Program sweep.
+usedMemory2 := Program keptAlloc.
+
+
+Pen write: (6 < 5), brk.
+Pen write: (2 > 1), brk.
+Pen write: (2 <=: 1), brk.
+Pen write: (9 >=: 1), brk.
+Pen write: (2 odd), brk.
+Pen write: (4 even), brk.
+Pen write: (-1 pos), brk.
+Pen write: (-2 neg), brk.
+Pen write: (3 between: 4 and: 5), brk.
+Pen write: (3 = 3), brk.
+Pen write: (3 !=: 3), brk.
+Pen write: 1 boolean, brk.
+
+Program sweep.
+usedMemory3 := Program keptAlloc.
 
 
 
