@@ -592,15 +592,7 @@ ctr_object* ctr_map_key_value(ctr_object* myself, ctr_argument* argumentList);
  */
 ctr_object* ctr_console_write(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_console_brk(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_console_red(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_console_green(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_console_yellow(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_console_blue(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_console_magenta(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_console_cyan(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_console_reset(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_console_tab(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_console_line(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * File Interface

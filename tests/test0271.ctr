@@ -1,8 +1,1 @@
-✎
-	red write: 'H',
-	yellow write: 'e',
-	green write: 'l',
-	cyan write: 'l',
-	blue write: 'o',
-	purple write: '!',
-	resetColor tab line brk.
+✎ write: 'Test no longer in use↵'.

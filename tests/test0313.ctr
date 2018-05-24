@@ -22,7 +22,6 @@
 
 ☞ g := Json parse: garden.
 
-✎ resetColor.
 ✎ write: 'There are x chairs in the sunny garden.' x (g @ 'garden' @ 'chairs'), brk.
 ✎ write: 'A rubber duck swims in the x.' x ((g garden pool) either: 'pool' or: ''), brk.
 ✎ write: 'Is there a shed in the garden? Well.. x' x (g garden shed), brk.
