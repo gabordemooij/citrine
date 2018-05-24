@@ -107,7 +107,6 @@
 #define CTR_DICT_EACH            "each:"
 #define CTR_DICT_SUM             "sum"
 #define CTR_DICT_PRODUCT         "product" 
-#define CTR_DICT_ARRAY           "Array"
 #define CTR_DICT_MAP_OBJECT      "Map"
 #define CTR_DICT_WRITE           "write:"
 #define CTR_DICT_BRK             "brk" 
@@ -231,7 +230,6 @@
 #define CTR_DICT_CONTAINS_PATTERN                "matches:"
 #define CTR_DICT_CONTAINS                        "contains:"
 #define CTR_DICT_APPLY_TO_AND_AND                "applyTo:and:and:"
-#define CTR_DICT_NEW_ARRAY_AND_PUSH              "<"
 #define CTR_DICT_ENVIRONMENT_VARIABLE            "env:"
 #define CTR_DICT_SET_ENVIRONMENT_VARIABLE        "env:val:" 
 #define CTR_DICT_ROLL_WITH_SIDES                 "rollWithSides:"
@@ -244,8 +242,8 @@
 #define CTR_DICT_CODEGEN_MAP_NEW                 "(Map new) "
 #define CTR_DICT_CODEGEN_MAP_PUT                 "put:"
 #define CTR_DICT_CODEGEN_MAP_PUT_AT              " at:"
-#define CTR_DICT_CODEGEN_ARRAY_NEW               "Array new "
-#define CTR_DICT_CODEGEN_ARRAY_NEW_PUSH          "Array ← "
+#define CTR_DICT_CODEGEN_ARRAY_NEW               "List new "
+#define CTR_DICT_CODEGEN_ARRAY_NEW_PUSH          "List ← "
 #define CTR_DICT_PERCOLATOR                      "Percolator"
 
 

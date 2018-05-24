@@ -9,7 +9,7 @@
 	{ :i mapping applyTo: i. } * (array count).
 }.
 
-☞ a := Array < 1; 2; 3.
+☞ a := List ← 1; 2; 3.
 mapper applyTo: a and: (makeAdder applyTo: 100).
 Pen write: (a at: 0), brk.
 Pen write: (a at: 1), brk.

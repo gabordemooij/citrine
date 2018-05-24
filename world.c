@@ -751,7 +751,6 @@ void ctr_initialize_world() {
 	/* Array */
 	CtrStdArray = ctr_array_new(CtrStdObject, NULL);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_array_new );
-	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_NEW_ARRAY_AND_PUSH ), &ctr_array_new_and_push );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_NEW_ARRAY_AND_PUSH_SYMBOL ), &ctr_array_new_and_push );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_TYPE ), &ctr_array_type );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_PUSH ), &ctr_array_push );
@@ -787,7 +786,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_BY_SET ), &ctr_array_combine );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_INDEX_OF ), &ctr_array_index_of );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_COPY ), &ctr_array_copy );
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_ARRAY ), CtrStdArray, 0 );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_LIST_OBJECT ), CtrStdArray, 0 );
 	CtrStdArray->link = CtrStdObject;
 	CtrStdArray->info.sticky = 1;
@@ -1045,7 +1043,8 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 				}
 			}
 			if ( !messageApproved ) {
-				fprintf(stderr, "Native message not allowed in eval %s.\n", msg->value.svalue->value );
+				char* nmsg = ctr_heap_allocate_cstring( msg );
+				fprintf(stderr, "Native message not allowed in eval %s.\n", nmsg );
 				exit(1);
 			}
 		}

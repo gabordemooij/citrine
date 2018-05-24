@@ -1,7 +1,8 @@
 'SINGLE_LANGUAGE'.
 
-Array on: '<' do: {
+List on: '←' do: {
 	✎ write: 'Blaaaa', brk.
 }.
-☞ q := 'x := Array < 1'.
+☞ x := Nil.
+☞ q := 'x := List ← 1'.
 q eval.

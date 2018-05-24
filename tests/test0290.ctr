@@ -1,26 +1,26 @@
 'SINGLE_LANGUAGE'.
 
 
-☞ cakes := Array ←
+☞ cakes := List ←
 	'apple' ;
 	'berry' ;
 	'choco' ;
 	'cheese'.
 
 
-☞ buy := cakes replace: 1 length: 2 with: ( Array ← 'cinnamon' ; 'pineapple' ).
+☞ buy := cakes replace: 1 length: 2 with: ( List ← 'cinnamon' ; 'pineapple' ).
 ✎ write: (buy join: ','), brk.
 
 
-☞ buy := cakes replace: 1 length: 12 with: ( Array ← 'cinnamon' ; 'pineapple' ).
+☞ buy := cakes replace: 1 length: 12 with: ( List ← 'cinnamon' ; 'pineapple' ).
 ✎ write: (buy join: ','), brk.
 
 
-☞ buy := cakes replace: 2 length: 10 with: ( Array new ).
+☞ buy := cakes replace: 2 length: 10 with: ( List new ).
 ✎ write: (buy join: ','), brk.
 
 
-☞ buy := cakes replace: '' length: '1' with: ( Array new ).
+☞ buy := cakes replace: '' length: '1' with: ( List new ).
 ✎ write: (buy join: ','), brk.
 
 

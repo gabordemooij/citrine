@@ -1,6 +1,6 @@
 ☞ map1 := Map new.
-☞ key1 := Array new.
-☞ key2 := Array new.
+☞ key1 := List new.
+☞ key2 := List new.
 
 map1
 	put: 'hello' at: key1,
@@ -11,7 +11,7 @@ Pen
 	write: 'Map #1 contains: ' + (map1 at: key1),
 	write: ' and ' + (map1 at: key2), brk.
 
-☞ KeyeableArray := Array new.
+☞ KeyeableArray := List new.
 KeyeableArray on: 'toString' do: {
 	↲ (⛏ count) toString.
 }.

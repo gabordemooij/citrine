@@ -25,13 +25,13 @@ Pen brk.
 
 
 Pen write: 'Array:'.
-Pen write: Array pop.
-Pen write: Array count.
-Pen write: (((Array push: 999) string) replace: 'Reeks' with: 'Array').
-Pen write: Array count.
-Pen write: Array shift.
-Pen write: (Array join: ',').
-☞ f := Array new.
+Pen write: List pop.
+Pen write: List count.
+Pen write: (((List push: 999) string) replace: 'Lijst' with: 'List').
+Pen write: List count.
+Pen write: List shift.
+Pen write: (List join: ',').
+☞ f := List new.
 Pen write: f count. 
 Pen brk.
 

@@ -1,4 +1,4 @@
-☞ list := Array new.
+☞ list := List new.
 list add: 'hello'.
 Pen write: list count.
 list push: 'world'.

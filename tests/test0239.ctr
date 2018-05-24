@@ -41,8 +41,8 @@ Pen write: (90 + a), brk.
 Pen write: b, brk. 
 Pen write: (True & b), brk. 
 
-a := Array < 'hello' ; 'world' ; True ; Nil ; 666. 
-a := a + ( Array < 1 ).
+a := List ← 'hello' ; 'world' ; True ; Nil ; 666. 
+a := a + ( List ← 1 ).
 Pen write: a, brk.
 Pen write: ((Map new) put: Nil at: Nil), brk.
 Pen write: a sum, brk. 

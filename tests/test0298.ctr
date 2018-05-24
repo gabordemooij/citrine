@@ -1,6 +1,6 @@
 'SINGLE_LANGUAGE'.
 
-☞ a := Array ← 1 ; 2 ; 3.
+☞ a := List ← 1 ; 2 ; 3.
 ☞ b := a copy.
 b put: 999 at: 1.
 ✎ write: ('a b' a a b b), brk.

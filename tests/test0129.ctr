@@ -1,6 +1,6 @@
 
-☞ a := Array < 1 ; 2 ; 3.
+☞ a := List ← 1 ; 2 ; 3.
 Pen write: a product, brk.
-Pen write: (Array < 2 ; 4 ; 8) product, brk. 
-Pen write: (Array < -2 ; 10) product, brk. 
-Pen write: (Array < 0.5 ; -2) product, brk. 
+Pen write: (List ← 2 ; 4 ; 8) product, brk. 
+Pen write: (List ← -2 ; 10) product, brk. 
+Pen write: (List ← 0.5 ; -2) product, brk. 

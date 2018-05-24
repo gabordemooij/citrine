@@ -2,7 +2,7 @@
 
 ☞ Q := (39 byte).
 
-☞ q := Array ← ('Quotes ' + Q + ' are evil?') ; 1.
+☞ q := List ← ('Quotes ' + Q + ' are evil?') ; 1.
 ☞ x := q string.
 ✎ write: x, brk.
 ☞ y := x eval.

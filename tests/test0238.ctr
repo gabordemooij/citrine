@@ -1,6 +1,6 @@
 'SINGLE_LANGUAGE'.
 
-☞ a := Array < 1 ; 2 ; 3.
+☞ a := List ← 1 ; 2 ; 3.
 ☞ b := (a string).
 
 Pen write: b, brk. 
@@ -8,22 +8,22 @@ b := b eval.
 
 Pen write: b @ 2, brk. 
 
-Pen write: (( Array < 1 ; 2 ; 3 )), brk. 
+Pen write: (( List ← 1 ; 2 ; 3 )), brk. 
 
 Pen write: ((Map new) put: 1 at: 2), brk. 
 
-☞ x := ( (Array < 1 ; ( Array < 9 ) ; True ) ) string.
+☞ x := ( (List ← 1 ; ( List ← 9 ) ; True ) ) string.
 Pen write: x, brk. 
 x := x eval.
 
 Pen write: x @ 1 @ 0, brk. 
 
-☞ y := (Map new) put: (Array < 1) at: (Array < 2).
+☞ y := (Map new) put: (List ← 1) at: (List ← 2).
 Pen write: y, brk. 
 
 y := y string eval.
 
-Pen write: (y at: (Array < 2) string ), brk.
+Pen write: (y at: (List ← 2) string ), brk.
 
-Pen write: (Array new), brk. 
+Pen write: (List new), brk. 
 Pen write: (Map new), brk. 

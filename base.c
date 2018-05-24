@@ -231,7 +231,7 @@ ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argum
  *
  * Usage:
  *
- * a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
+ * a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
  * a do pop shift unshift: 'hi', push: 999, done.
  *
  * Because of 'chain mode' you can do 'a do pop shift' etc, instead of
@@ -367,7 +367,7 @@ ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList )
  * Usage:
  *
  * var str := 'write:'.
- * Pen message: 'write:' arguments: (Array < 'Hello World').
+ * Pen message: 'write:' arguments: (List ← 'Hello World').
  *
  * This will print the string 'Hello world' on the screen using a dynamically
  * crafted message.
@@ -2769,7 +2769,7 @@ ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argument
  *
  * Usage:
  *
- * a := 'Array < 1 ; 2 ; 3' eval.
+ * a := 'List ← 1 ; 2 ; 3' eval.
  * x := a @ 2. #3
  */
 ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {

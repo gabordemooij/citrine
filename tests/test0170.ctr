@@ -7,22 +7,22 @@
 
 Program tidiness: 0.
 
-☞ a := Array new.
-☞ b := Array < 1 ; 2.
+☞ a := List new.
+☞ b := List ← 1 ; 2.
 
 Program sweep.
 usedMemory1 := Program keptAlloc.
 
 
-a := Array new.
-b := Array < 1 ; 2.
+a := List new.
+b := List ← 1 ; 2.
 
 Program sweep.
 usedMemory2 := Program keptAlloc.
 
 
-a := Array new.
-b := Array < 1 ; 2.
+a := List new.
+b := List ← 1 ; 2.
 
 Program sweep.
 usedMemory3 := Program keptAlloc.

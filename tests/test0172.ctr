@@ -7,7 +7,7 @@
 
 Program tidiness: 0.
 
-☞ a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
+☞ a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 ☞ b := a from: 2 length: 2.
 Pen write: ( b join: '|' ), write: b count.
 
@@ -15,7 +15,7 @@ Program sweep.
 usedMemory1 := Program keptAlloc.
 
 
-a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
+a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 b := a from: 2 length: 2.
 Pen write: ( b join: '|' ), write: b count.
 
@@ -24,7 +24,7 @@ Program sweep.
 usedMemory2 := Program keptAlloc.
 
 
-a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
+a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 b := a from: 2 length: 2.
 Pen write: ( b join: '|' ), write: b count.
 

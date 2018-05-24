@@ -8,8 +8,8 @@
 
 Program tidiness: 0.
 
-☞ a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
-a := a + ( Array < 1 ).
+☞ a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
+a := a + ( List ← 1 ).
 Pen write: ( 'sum: ' + ( a sum ) ), brk.
 Pen write: ( 'min: ' + ( a min ) ), brk.
 Pen write: ( 'max: ' + ( a max ) ), brk.
@@ -22,8 +22,8 @@ Program sweep.
 usedMemory1 := Program keptAlloc.
 
 
-a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
-a := a + ( Array < 1 ).
+a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
+a := a + ( List ← 1 ).
 Pen write: ( 'sum: ' + ( a sum ) ), brk.
 Pen write: ( 'min: ' + ( a min ) ), brk.
 Pen write: ( 'max: ' + ( a max ) ), brk.
@@ -37,8 +37,8 @@ Program sweep.
 usedMemory2 := Program keptAlloc.
 
 
-a := Array < 'hello' ; 'world' ; True ; Nil ; 666.
-a := a + ( Array < 1 ).
+a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
+a := a + ( List ← 1 ).
 Pen write: ( 'sum: ' + ( a sum ) ), brk.
 Pen write: ( 'min: ' + ( a min ) ), brk.
 Pen write: ( 'max: ' + ( a max ) ), brk.

@@ -1,4 +1,4 @@
-☞ z := Array new.
+☞ z := List new.
 {
 	☞ x := 'hello'.
 	z push: x.

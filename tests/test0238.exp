@@ -1,10 +1,10 @@
-Array ← 1 ; 2 ; 3
+List ← 1 ; 2 ; 3
 3
-Array ← 1 ; 2 ; 3
+List ← 1 ; 2 ; 3
 (Map new) put:1 at:'2'
-Array ← 1 ; (Array ← 9) ; True
+List ← 1 ; (List ← 9) ; True
 9
-(Map new) put:(Array ← 1) at:'Array ← 2'
-Array ← 1
-Array new 
+(Map new) put:(List ← 1) at:'List ← 2'
+List ← 1
+List new 
 (Map new) 

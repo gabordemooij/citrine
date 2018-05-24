@@ -6,7 +6,7 @@ Program tidiness: 1.
 ☞ y := 'Hello'.
 ☞ q := {}.
 ☞ p := True.
-☞ a := Array < 1 ; 2 ; 3 ; 4.
+☞ a := List ← 1 ; 2 ; 3 ; 4.
 ☞ c := Object new.
 c on: 'greet:' do: { Pen write: 'greet!'. }.
 
@@ -26,7 +26,7 @@ x := 1.
 y := 'Hello'.
 q := {}.
 p := True.
-a := Array < 1 ; 2 ; 3 ; 5.
+a := List ← 1 ; 2 ; 3 ; 5.
 c := Object new.
 c on: 'greet:' do: { Pen write: 'greet!'. }.
 
@@ -41,7 +41,7 @@ x := 2.
 y := 'Hello'.
 q := {}.
 p := True.
-a := Array < 1 ; 2 ; 3 ; 4.
+a := List ← 1 ; 2 ; 3 ; 4.
 c := Object new.
 c on: 'greet:' do: { Pen write: 'greet!'. }.
 
@@ -55,7 +55,7 @@ x := 3.
 y := 'Hello'.
 q := {}.
 p := True.
-a := Array < 1 ; 2 ; 3 ; 5.
+a := List ← 1 ; 2 ; 3 ; 5.
 c := Object new.
 c on: 'greet:' do: { Pen write: 'greet!'. }.
 c := Object new.
@@ -73,7 +73,7 @@ x := 4.
 y := 'Hello'.
 q := {}.
 p := True.
-a := Array < 1 ; 2 ; 3 ; 4.
+a := List ← 1 ; 2 ; 3 ; 4.
 c := Object new.
 c on: 'greet:' do: { Pen write: 'greet!'. }.
 

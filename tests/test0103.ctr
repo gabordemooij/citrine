@@ -1,4 +1,4 @@
-☞ a := Array < Object ; True ; False ; Boolean ; 1 ; Number ; 'Str' ; String ; {}.
+☞ a := List ← Object ; True ; False ; Boolean ; 1 ; Number ; 'Str' ; String ; {}.
 Pen write: (a count), brk.
 { :i
 	Pen write: 

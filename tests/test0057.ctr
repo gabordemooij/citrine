@@ -1,4 +1,4 @@
-☞ cafe := Array new.
+☞ cafe := List new.
 cafe push: 'coffee'.
 cafe push: 'beer'.
 Pen write: (cafe at: 0), write: (cafe at: 1).

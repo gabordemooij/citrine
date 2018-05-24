@@ -1,6 +1,6 @@
 
 ☞ blue := 'blue'.
-☞ colors := Array < 'yellow'; 'green'; blue ; 'red'; 'orange'; 'purple'; 'pink'.
+☞ colors := List ← 'yellow'; 'green'; blue ; 'red'; 'orange'; 'purple'; 'pink'.
 ☞ palette := colors from: 2 length: 3.
 Pen write: (palette join: ','), brk. 
 blue := 'cyan'.

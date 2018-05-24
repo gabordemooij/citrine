@@ -34,7 +34,7 @@ Pen write: 'Break block, dont fire catch...', brk.
 { True break. Pen write: 'dont write this!', brk. } catch: { Pen write: 'Dont catch this!'. }, run.
 
 Pen write: 'Test Array each-loop: 0,1', brk.
-(Array < 1 ; 2 ; 3) map: { :i
+(List ← 1 ; 2 ; 3) map: { :i
 	Pen write: 'iteration #' + i, brk.
 	(i = 1) break.
 }.

@@ -1,10 +1,10 @@
 'SINGLE_LANGUAGE'.
 
 
-☞ a := (Array ← (
+☞ a := (List ← (
 	(Map new)
 		put: 'domain' at: 'mywebsite.com',
-		put: (Array ←
+		put: (List ←
 			((Map new)
 				put: 'home' at: 'title',
 				put: '<html></html>' at: 'body',

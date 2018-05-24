@@ -39,7 +39,7 @@ Pen brk.
 { True continue. Pen write: 'dont write this!', brk. } catch: { Pen write: 'Dont catch this!'. }, run.
 
 Pen write: 'Test Array each-loop: 0, ... ,2', brk.
-(Array < 1 ; 2 ; 3) map: { :i
+(List ← 1 ; 2 ; 3) map: { :i
 	(i = 1) continue.
 	Pen write: 'iteration #' + i, brk.
 }.
