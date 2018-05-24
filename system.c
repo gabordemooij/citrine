@@ -647,27 +647,6 @@ ctr_object* ctr_program_crit(ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * Object fromComputer: [String]
- *
- * Creates a remote object from the server specified by the
- * ip address.
- */
-ctr_object* ctr_program_remote(ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_object* remoteObj = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
-	remoteObj->link = CtrStdObject;
-	remoteObj->info.remote = 1;
-	ctr_internal_object_set_property(
-		remoteObj,
-		ctr_build_string_from_cstring("@"),
-		ctr_internal_cast2string(
-				argumentList->object
-		),
-		CTR_CATEGORY_PRIVATE_PROPERTY
-	);
-	return remoteObj;
-}
-
-/**
  * [Dice]
  *
  * The Dice object represents the random number generator.
