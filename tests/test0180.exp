@@ -1,16 +1,10 @@
 &lt;h1&gt;&quot;Hell&apos;o &amp; Goodbye&quot;&lt;/h1&gt;
 <h1>"hell'o & goodbye"</h1>
 <H1>"HELL'O & GOODBYE"</H1>
-Uppercase first
-lOWERcase first
 &lt;h1&gt;&quot;Hell&apos;o &amp; Goodbye&quot;&lt;/h1&gt;
 <h1>"hell'o & goodbye"</h1>
 <H1>"HELL'O & GOODBYE"</H1>
-Uppercase first
-lOWERcase first
 &lt;h1&gt;&quot;Hell&apos;o &amp; Goodbye&quot;&lt;/h1&gt;
 <h1>"hell'o & goodbye"</h1>
 <H1>"HELL'O & GOODBYE"</H1>
-Uppercase first
-lOWERcase first
 No memory leaks here

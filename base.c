@@ -1954,42 +1954,6 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
 	return newString;
 }
 
-/**
- * [String] asciiLowerCase1st
- *
- * Converts the first character of the recipient to lowercase and
- * returns the resulting string object.
- */
-ctr_object* ctr_string_to_lower1st(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* newString = NULL;
-	size_t len = myself->value.svalue->vlen;
-	if (len == 0) return ctr_build_empty_string();
-	char* tstr = ctr_heap_allocate( len * sizeof( char ) );
-	strncpy(tstr, myself->value.svalue->value, len);
-	tstr[0] = tolower(tstr[0]);
-	newString = ctr_build_string(tstr, len);
-	ctr_heap_free( tstr );
-	return newString;
-}
-
-/**
- * [String] asciiUpperCase1st
- *
- * Converts the first character of the recipient to uppercase and
- * returns the resulting string object.
- */
-ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* newString;
-	size_t len = myself->value.svalue->vlen;
-	if (len == 0) return ctr_build_empty_string();
-	char* tstr = ctr_heap_allocate( len * sizeof( char ) );
-	strncpy(tstr, myself->value.svalue->value, len);
-	tstr[0] = toupper(tstr[0]);
-	newString = ctr_build_string(tstr, len);
-	ctr_heap_free( tstr );
-	return newString;
-}
-
 ctr_object* ctr_string_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }

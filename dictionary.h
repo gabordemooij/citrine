@@ -237,8 +237,6 @@
 #define CTR_DICT_RANDOMIZE_BYTES_WITH_LENGTH     "drawFrom:length:"
 #define CTR_DICT_ASCII_UPPER_CASE                "asciiUpperCase" 
 #define CTR_DICT_ASCII_LOWER_CASE                "asciiLowerCase"
-#define CTR_DICT_ASCII_UPPER_CASE_1              "asciiUpperCase1st" 
-#define CTR_DICT_ASCII_LOWER_CASE_1              "asciiLowerCase1st"
 #define CTR_DICT_FIND_PATTERN_DO_OPTIONS         "pattern:do:options:"
 #define CTR_DICT_CONTAINS_PATTERN                "matches:"
 #define CTR_DICT_CONTAINS                        "contains:"

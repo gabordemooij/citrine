@@ -1,7 +1,1 @@
-
-Pen
-	write: ('title' asciiUpperCase1st),
-	write: (''      asciiUpperCase1st),
-	write: ('Case'  asciiLowerCase1st),
-	write: (''      asciiLowerCase1st),
-	brk.
+✎ write: 'Test no longer in use↵'.

@@ -237,8 +237,6 @@
 #define CTR_DICT_RANDOMIZE_BYTES_WITH_LENGTH     "kiesUit:lengte:"
 #define CTR_DICT_ASCII_UPPER_CASE                "asciiHoofdletters" 
 #define CTR_DICT_ASCII_LOWER_CASE                "asciiKleineLetters"
-#define CTR_DICT_ASCII_UPPER_CASE_1              "asciiBeginMetHoofdletter" 
-#define CTR_DICT_ASCII_LOWER_CASE_1              "asciiBeginMetKleineLetter"
 #define CTR_DICT_FIND_PATTERN_DO_OPTIONS         "vindPatroon:doe:opties:"
 #define CTR_DICT_CONTAINS_PATTERN                "bevatPatroon:"
 #define CTR_DICT_CONTAINS                        "bevat:"
