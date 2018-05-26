@@ -1,6 +1,6 @@
 # Start: ctr sman.ctr > ctr.1 ;mandoc -O style=ctrstyle.css -Thtml ctr.1 > docs.html ;mandoc -a ctr.1
-Broom memoryLimit: 600000.
-Broom mode: 4.
+💻 memory: 600000.
+💻 tidiness: 4.
 ✎ write: '
 .\" Manpage for ctr.
 .TH man 1 "1 June 2017" "1.0" "CTR man page"
@@ -30,7 +30,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .br
 '.
 
-☞ files := Array ←
+☞ files := List ←
 			'../base.c' ;
 			'../collections.c' ;
 			'../file.c' ;
@@ -45,13 +45,13 @@ files each: { :index :file
 	☞ str := f read.
 	☞ commentBlocks := str split: '/**'.
 	commentBlocks shift.
-	(commentBlocks count) times: {
+	{
 		☞ comment := commentBlocks shift.
 		☞ lines   := comment split: '\n'.
 		lines count > 3 true: {
 			☞ headline := lines @ 1.
 			✎ write: '.BR.BR.BR', brk brk.
-			((headline indexOf: '@internal') = -1) true: {
+			((headline find: '@internal') = -1) true: {
 				✎ write: '.B ' + (headline skip: 3), brk.
 				✎ write: '.nf', brk.
 				☞ line := ''.
@@ -68,7 +68,7 @@ files each: { :index :file
 				✎ write: '.fi', brk.
 			}.
 		}.
-	}.
+	} * (commentBlocks count).
 	file close.
 }.
 

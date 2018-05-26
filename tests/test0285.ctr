@@ -1,4 +1,10 @@
 
+☞ ⚄ := Object new.
+
+⚄ on: 'type' do: {
+	↲ 'Object'.
+}.
+
 ✎ write: '⇿?↵' ? ⚄ type.
 ✎ write: '⇿?↵' ? ⏰ type.
 ✎ write: '⇿?↵' ? 💻 type.
