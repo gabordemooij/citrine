@@ -1,8 +1,8 @@
-Broom memoryLimit: 600000.
-Broom mode: 4.
+💻 memory: 600000.
+💻 tidiness: 4.
 ☞ template := (File new: 'template.html') read.
 ☞ menu  := '<ul>'.
-☞ files := Array <
+☞ files := List ←
 			'../base.c' ;
 			'../collections.c' ;
 			'../file.c' ;
@@ -20,7 +20,7 @@ Broom mode: 4.
 	☞ commentBlocks := str split: '/**'.
 	commentBlocks shift.
 	
-	(commentBlocks count) times: {
+	{
 		☞ comment := commentBlocks shift.
 		☞ lines   := comment split: '\n'.
 		lines count > 3 true: {
@@ -28,11 +28,11 @@ Broom mode: 4.
 			☞ headline := lines @ 1.
 			
 			
-			((headline indexOf: '@internal') = -1) true: {
+			((headline find: '@internal') = -1) true: {
 				
 				☞ chapter := headline skip: 3.
 				☞ page := template.
-				page := page replace: '{{title}}' with: chapter htmlEscape.
+				page := page replace: '{{title}}' with: chapter html.
 				
 				☞ content := ''.
 				☞ line := ''.
@@ -41,13 +41,13 @@ Broom mode: 4.
 				☞ n := 2.
 				{
 					line := lines at: n. 
-					↲ ((line indexOf: '*/') = -1). 
+					↲ ((line find: '*/') = -1). 
 				}
 				true: {
 						line := line replace: '\\' with: '\\\\'.
-						☞ contentLine := ((line skip: 2) htmlEscape).
+						☞ contentLine := ((line skip: 2) html).
 						
-						((contentLine indexOf: 'Usage:') > -1) true: {
+						((contentLine find: 'Usage:') > -1) true: {
 							endsWithCode := True.
 							contentLine := contentLine replace: 'Usage:' with: '<br>Usage:</p><pre>'.
 						}.
@@ -59,15 +59,15 @@ Broom mode: 4.
 				}.
 				page := page replace: '{{content}}' with: content.
 				☞ filename := (headline skip: 3) 
-					asciiLowerCase
-					findPattern: '[^↲a-z0-9]' do: {↲ ''.}.
-				menu append: '<li><a href="' + filename + '.ctr">' + (chapter htmlEscape) + '</a></li>'.
+					lowercase
+					pattern: '[^↲a-z0-9]' do: {↲ ''.}.
+				menu append: '<li><a href="' + filename + '.ctr">' + (chapter html) + '</a></li>'.
 				☞ pageFile := (File new: ('pages/' + filename + '.ctr')).
 				✎ write: pageFile path, brk.
 				pageFile write: page.
 			}.
 		}.
-	}.
+	} * (commentBlocks count).
 	file close.
 }.
 

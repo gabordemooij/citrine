@@ -9,7 +9,7 @@ ctr \- run a Citrine program
 .SH SYNOPSIS
 ctr [PROGRAM]
 .SH DESCRIPTION
-Citrine\*R is general purpose programming language for UNIX\*R-like operating systems.
+Citrine is general purpose programming language for UNIX-like operating systems.
 .SH REFERENCE MANUAL
 Citrine has 5 literals:
 .RS 4
@@ -51,6 +51,7 @@ files each: { :index :file
 		lines count > 3 true: {
 			☞ headline := lines @ 1.
 			✎ write: '.BR.BR.BR', brk brk.
+			
 			((headline find: '@internal') = -1) true: {
 				✎ write: '.B ' + (headline skip: 3), brk.
 				✎ write: '.nf', brk.
@@ -58,7 +59,7 @@ files each: { :index :file
 				☞ n := 2.
 				{
 					line := lines at: n. 
-					↲ ((line indexOf: '*/') = -1). 
+					↲ ((line find: '*/') = -1). 
 				}
 				true: {
 						line := line replace: '\\' with: '\\\\'.
