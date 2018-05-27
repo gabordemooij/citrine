@@ -2399,6 +2399,7 @@ ctr_object* ctr_string_append_byte( ctr_object* myself, ctr_argument* argumentLi
  * word compare: other.
  */
 ctr_object* ctr_string_compare( ctr_object* myself, ctr_argument* argumentList ) {
+	argumentList->object = ctr_internal_cast2string(argumentList->object);
 	ctr_size maxlen;
 	if (myself->value.svalue->vlen < argumentList->object->value.svalue->vlen) {
 		maxlen = myself->value.svalue->vlen;
