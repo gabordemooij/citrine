@@ -38,11 +38,10 @@
  *
  * ☞ todo := List ← 'dishes' ; 'cleaning'.
  *
- * var a := Array < 1 ; 2 ; 3.
  */
 
 /**
- * [Array] new
+ * [List] new
  *
  * Creates a new array.
  * An array is a collection of items. To create a new array,
@@ -68,7 +67,6 @@
  *
  * ☞ todo := List ← 'dishes' ; 'cleaning'.
  *
- * var a := Array < 1 ; 2 ; 3.
  */
 ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTARRAY);
@@ -82,7 +80,7 @@ ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] type
+ * [List] type
  *
  * Returns the string 'Array'.
  *
@@ -92,20 +90,20 @@ ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] add: [Element].
+ * [List] add: [Element].
  *
- * Alias for [Array] push. Might be more readable
+ * Alias for [List] push. Might be more readable
  * in some situations.
  */
 
 /**
- * [Array] push: [Element]
+ * [List] push: [Element]
  *
  * Pushes an element on top of the array.
  *
  * Usage:
  *
- * numbers := Array new.
+ * numbers := List new.
  * numbers push: 3.
  */
 ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
@@ -123,13 +121,13 @@ ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] min
+ * [List] min
  *
  * Returns the minimum value from an array.
  *
  * Usage:
  *
- * a := Array ← 8 ; 4 ; 2 ; 16.
+ * a := List ← 8 ; 4 ; 2 ; 16.
  * m := a min. #2
  *
  */
@@ -149,13 +147,13 @@ ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] max
+ * [List] max
  *
  * Returns the maximum value from an array.
  *
  * Usage:
  *
- * a := Array ← 8 ; 4 ; 2 ; 16.
+ * a := List ← 8 ; 4 ; 2 ; 16.
  * m := a max. #16
  *
  */
@@ -175,14 +173,14 @@ ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] sum
+ * [List] sum
  *
  * Takes the sum of an array. This message will calculate the
  * sum of the numerical elements in the array.
  *
  * Usage:
  *
- * a := Array ← 1 ; 2 ; 3.
+ * a := List ← 1 ; 2 ; 3.
  * s := a sum. #6
  *
  * In the example above, the sum of array will be stored in s and
@@ -200,15 +198,15 @@ ctr_object* ctr_array_sum(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] product
+ * [List] product
  *
  * Takes the product of an array. On receiving this message, the
- * Array recipient object will calculate the product of its
+ * List recipient object will calculate the product of its
  * numerical elements.
  *
  * Usage:
  *
- * a := Array ← 2 ; 4 ; 8.
+ * a := List ← 2 ; 4 ; 8.
  * p := a product. #64
  *
  * In the example above, the product of the array will be calculated
@@ -227,7 +225,7 @@ ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] map: [Block].
+ * [List] map: [Block].
  *
  * Iterates over the array. Passing each element as a key-value pair to the
  * specified block.
@@ -275,25 +273,21 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] each: [Block].
+ * [List] each: [Block].
  *
- *  Alias for [Array] map: [Block].
+ *  Alias for [List] map: [Block].
  */
 
 /**
- * [Array] ← [Element1] ; [Element2] ; ...
+ * [List] ← [Element1] ; [Element2] ; ...
  *
  * Creates a new instance of an array and initializes this
- * array with a first element, useful for literal-like Array
+ * array with a first element, useful for literal-like List
  * notations.
  *
  * Usage:
  *
- * a := Array ← 1 ; 2 ; 3.
- *
- * or if you like ASCII-only:
- *
- * a := Array < 1 ; 2 ; 3.
+ * a := List ← 1 ; 2 ; 3.
  *
  * Note that the ; symbol here is an alias for 'push:'.
  */
@@ -303,14 +297,14 @@ ctr_object* ctr_array_new_and_push(ctr_object* myclass, ctr_argument* argumentLi
 }
 
 /**
- * [Array] unshift: [Element].
+ * [List] unshift: [Element].
  *
  * Unshift operation for array.
  * Adds the specified element to the beginning of the array.
  *
  * Usage:
  *
- * a := Array new.
+ * a := List new.
  * a push: 1.
  * a unshift: 3. #now contains: 3,1
  */
@@ -331,14 +325,14 @@ ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] join: [Glue].
+ * [List] join: [Glue].
  *
  * Joins the elements of an array together in a string
  * separated by a specified glue string.
  *
  * Usage:
  *
- * collection := Array new.
+ * collection := List new.
  * collection push: 1, push: 2, push 3.
  * collection join: ','. # results in string: '1,2,3'
  */
@@ -373,7 +367,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] at: [Index]
+ * [List] at: [Index]
  *
  * Returns the element in the array at the specified index.
  * Note that the first index of the array is index 0.
@@ -384,7 +378,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * fruits := Array ← 'apples' ; 'oranges' ; 'bananas'.
+ * fruits := List ← 'apples' ; 'oranges' ; 'bananas'.
  * fruits at: 1. #returns 'oranges'
  */
 ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
@@ -405,7 +399,7 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] first.
+ * [List] first.
  * 
  * Returns the first element of the array.
  * If the array is empty, Nil will be returned.
@@ -420,7 +414,7 @@ ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] last.
+ * [List] last.
  * 
  * Returns the last element of the array.
  * If the array is empty, Nil will be returned.
@@ -435,7 +429,7 @@ ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] secondLast.
+ * [List] secondLast.
  * 
  * Returns the second last element of the array.
  * If the array is empty, Nil will be returned.
@@ -450,21 +444,21 @@ ctr_object* ctr_array_second_last(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [Array] @ [Index]
+ * [List] @ [Index]
  *
- * Alias for [Array] at: [Index]
+ * Alias for [List] at: [Index]
  */
 
 /**
- * [Array] put: [Element] at: [Index]
+ * [List] put: [Element] at: [Index]
  *
  * Puts a value in the array at the specified index.
- * Array will be automatically expanded if the index is higher than
+ * List will be automatically expanded if the index is higher than
  * the maximum index of the array.
  *
  * Usage:
  *
- * fruits := Array new.
+ * fruits := List new.
  * fruits put: 'apples' at: 5.
  */
 ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
@@ -507,7 +501,7 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] pop
+ * [List] pop
  *
  * Pops off the last element of the array.
  */
@@ -520,7 +514,7 @@ ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] - [Number]
+ * [List] - [Number]
  *
  * Deletes the element specified by the index number and
  * shrinks the array accordingly. If the index number does not exist,
@@ -528,7 +522,7 @@ ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * x := Array ← 1 ; 2 ; 3.
+ * x := List ← 1 ; 2 ; 3.
  * x - 1. #1 ; 3
  */
 ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList) {
@@ -547,7 +541,7 @@ ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] shift
+ * [List] shift
  *
  * Shifts off the first element of the array.
  */
@@ -562,7 +556,7 @@ ctr_object* ctr_array_shift(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] count
+ * [List] count
  *
  * Returns the number of elements in the array.
  */
@@ -573,7 +567,7 @@ ctr_object* ctr_array_count(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] from: [Begin] length: [End]
+ * [List] from: [Begin] length: [End]
  *
  * Copies part of an array indicated by from and to and
  * returns a new array consisting of a copy of this region.
@@ -602,7 +596,7 @@ ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [Array] replace: [Number] length: [Number] with: [Array].
+ * [List] replace: [Number] length: [Number] with: [List].
  *
  * Returns a copy of the array with the specified elements replaced.
  * The first argument indicates the start index to begin the replacement.
@@ -616,15 +610,15 @@ ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList
  *
  * Usage:
  *
- * ☞ cakes := Array ← 'apple' ; 'berry' ; 'choco' ; 'cheese'.
+ * ☞ cakes := List ← 'apple' ; 'berry' ; 'choco' ; 'cheese'.
  * #apple, cinnamon, pineapple, cheese
- * ☞ buy := cakes replace: 1 length: 2 with: ( Array ← 'cinnamon' ; 'pineapple' ).
+ * ☞ buy := cakes replace: 1 length: 2 with: ( List ← 'cinnamon' ; 'pineapple' ).
  * #apple, cinnamon, pineapple
- * ☞ buy := cakes replace: 1 length: 12 with: ( Array ← 'cinnamon' ; 'pineapple' ).
+ * ☞ buy := cakes replace: 1 length: 12 with: ( List ← 'cinnamon' ; 'pineapple' ).
  * #apple, berry
- * ☞ buy := cakes replace: 2 length: 10 with: ( Array new ).
+ * ☞ buy := cakes replace: 2 length: 10 with: ( List new ).
  * #berry, choco, cheese
- * ☞ buy := cakes replace: '' length: '1' with: ( Array new ).
+ * ☞ buy := cakes replace: '' length: '1' with: ( List new ).
  * #error...
  * ☞ buy := cakes replace: '' length: '1' with: 'x'.
  *
@@ -672,7 +666,7 @@ ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
 
 
 /**
- * [Array] + [Array]
+ * [List] + [List]
  *
  * Returns a new array, containing elements of itself and the other
  * array.
@@ -707,16 +701,16 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] by: [Array].
+ * [List] by: [List].
  *
- * Combines the first array with the second one thus creating
+ * Combines the first list with the second one thus creating
  * a map. The keys of the newly generated map will be provided by the
  * first array while the values are extracted from the second one.
  *
  * Usage:
  *
- * ☞ city        := Array ← 'London' ; 'Paris' ; 'Berlin'.
- * ☞ temperature := Array ← '15' ; '16' ; '15'.
+ * ☞ city        := List ← 'London' ; 'Paris' ; 'Berlin'.
+ * ☞ temperature := List ← '15' ; '16' ; '15'.
  * ☞ weather := temperature by: city.
  */
 ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
@@ -739,7 +733,7 @@ ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] copy
+ * [List] copy
  *
  * Copies the array. The array object will answer this message by
  * returning a shallow copy of itself. This means that the values in the
@@ -750,7 +744,7 @@ ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * ☞ a := Array ← 1 ; 2 ; 3.
+ * ☞ a := List ← 1 ; 2 ; 3.
  * ☞ b := a copy.
  * b put: 999 at: 1. #b @ 1 = 999
  */
@@ -793,7 +787,7 @@ int ctr_sort_cmp(const void * a, const void * b) {
 }
 
 /**
- * [Array] sort: [Block]
+ * [List] sort: [Block]
  *
  * Sorts the contents of an array using a sort block.
  * Uses qsort.
@@ -812,7 +806,7 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Array] toString
+ * [List] string
  * 
  * Returns a string representation of the array and its contents.
  * This representation will be encoded in the Citrine language itself and is
@@ -820,13 +814,13 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * Usage:
  * 
- * a := Array ← 'hello' ; 'world'.
- * b := a toString.
+ * a := List ← 'hello' ; 'world'.
+ * b := a string.
  * c := b eval.
  * x := c @ 1. #world
  * 
- * toString messages are implicitly send by some objects, for instance when
- * attempting to write an Array using a Pen.
+ * 'string' messages are implicitly send by some objects, for instance when
+ * attempting to write a List using a Pen.
  *
  * You can also use the alias 'serialize'.
  */
@@ -874,13 +868,13 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 }
 
 /**
- * [Array] fill: [Number] with: [Object]
+ * [List] fill: [Number] with: [Object]
  *
  * Fills the array with the specified number of objects.
  *
  * Usage:
  *
- * ☞ a := Array new fill: 42 with: 'x'.
+ * ☞ a := List new fill: 42 with: 'x'.
  */
 ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
 	size_t n;
@@ -897,7 +891,7 @@ ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Array] column: [Number]
+ * [List] column: [Number]
  *
  * Extracts the specified column from the array.
  * In a nested array this message will select the Nth
@@ -906,10 +900,10 @@ ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
  *
  * Usage:
  *
- * ☞ a := Array ←
- *	(Array ← 1 ; 2 ; 3) ;
- *	(Array ← 4 ; 5 ; 6) ;
- *	(Array ← 7 ; 8 ; 9).
+ * ☞ a := List ←
+ *	(List ← 1 ; 2 ; 3) ;
+ *	(List ← 4 ; 5 ; 6) ;
+ *	(List ← 7 ; 8 ; 9).
  * ☞ b := a column: 1. #2,5,8
  */
 ctr_object* ctr_array_column( ctr_object* myself, ctr_argument* argumentList ) {
@@ -936,7 +930,7 @@ ctr_object* ctr_array_column( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Array] indexOf: [Object].
+ * [List] indexOf: [Object].
  *
  * Checks whether the specified object occurs in the array and returns the index number
  * if so. If not, the index number -1 will be returned. Note that the comparison
@@ -944,13 +938,13 @@ ctr_object* ctr_array_column( ctr_object* myself, ctr_argument* argumentList ) {
  *
  * Usage:
  *
- * ☞ colors := Array ← 'red' ; 'green' ; 'blue' ; 3 ; (Array new) ; False ; Nil.
+ * ☞ colors := List ← 'red' ; 'green' ; 'blue' ; 3 ; (List new) ; False ; Nil.
  *
  * ✎ write: (colors indexOf: 'green'), brk. #1
  * ✎ write: (colors indexOf: 'blue'), brk. #2
  * ✎ write: (colors indexOf: 'red'), brk. #0
  * ✎ write: (colors indexOf: 3), brk. #3
- * ✎ write: (colors indexOf: (Array new)), brk. #4
+ * ✎ write: (colors indexOf: (List new)), brk. #4
  * ✎ write: (colors indexOf: 'False'), brk. #5
  * ✎ write: (colors indexOf: Nil), brk. #6
  * ✎ write: (colors indexOf: 'purple'), brk. #-1
@@ -972,9 +966,9 @@ ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [Array] serialize
+ * [List] serialize
  *
- * Alias for [Array] toString.
+ * Alias for [List] toString.
  *
  * See 'Map serialize' for the reason for this alias.
  */
@@ -1097,8 +1091,8 @@ ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * ☞ city        := Array ← 'London' ; 'Paris' ; 'Berlin'.
- * ☞ temperature := Array ← '15' ; '16' ; '15'.
+ * ☞ city        := List ← 'London' ; 'Paris' ; 'Berlin'.
+ * ☞ temperature := List ← '15' ; '16' ; '15'.
  *
  * ☞ weather := temperature by: city.
  * cities := weather entries sort: {
@@ -1130,8 +1124,8 @@ ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * ☞ city        := Array ← 'London' ; 'Paris' ; 'Berlin'.
- * ☞ temperature := Array ← '15' ; '16' ; '15'.
+ * ☞ city        := List ← 'London' ; 'Paris' ; 'Berlin'.
+ * ☞ temperature := List ← '15' ; '16' ; '15'.
  *
  * ☞ weather := temperature by: city.
  * temperatures := weather values sort: {
@@ -1365,9 +1359,9 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
  *
  * Alias for [Map] toString.
  * A toString message, sometimes implicitly send by other messages like
- * 'Pen write:' will give you a serialized version of the Map or Array.
+ * 'Pen write:' will give you a serialized version of the Map or List.
  * This is far more useful than a 'dumb' textual description of the object like
- * 'array' or 'object'. However, when working with very large Maps or Arrays
+ * 'array' or 'object'. However, when working with very large Maps or Lists
  * accidentally dumping the entire contents can be annoying, in this case you can
  * override the toString behaviour but you don't have to remap the original, you
  * can just use this alias. Also, this alias can be used if you want to make
