@@ -1,9 +1,1 @@
-'SINGLE_LANGUAGE'.
-
-
-☞ browser := Curl new.
-browser url: 'https://gaborsoftware.nl'.
-☞ content := browser perform.
-(content contains: '<html') true: {
-	✎ write: 'CURL test FETCH HTML = OK', brk.
-}.
+✎ write: 'Test no longer in use↵'.

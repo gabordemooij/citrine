@@ -40,9 +40,6 @@ Pen write: Map count.
 Pen write: (Map put: 'a' at: 'b')  count. 
 Pen brk.
 
-Pen write: 'Percolator:'.
-Pen write: Percolator brew.
-Pen brk.
 
 
 

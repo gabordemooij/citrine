@@ -1,10 +1,1 @@
-{"result":[{"titel":"handboek", "id":"1"}]}
-
-{"result":[{"titel":"telefoongids", "id":"2"}]}
-
-{"result":[{"titel":"handboek", "id":"1"},{"titel":"telefoongids", "id":"2"}]}
-
-Uncatched error has occurred.
-PostgreSQL: Connection not OK.
-#2 new: (tests/test0317.ctr: 21)
-#1 pg (tests/test0317.ctr: 21)
+Test no longer in use
