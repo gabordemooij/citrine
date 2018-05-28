@@ -55,7 +55,7 @@ ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
  * Returns the string representation of Nil: 'Nil'.
  */
 ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_string_from_cstring( "Nil" );
+	return ctr_build_string_from_cstring( CTR_DICT_NIL );
 }
 
 /**
@@ -640,9 +640,9 @@ ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue == 1) {
-		return ctr_build_string_from_cstring( "True" );
+		return ctr_build_string_from_cstring( CTR_DICT_TRUE );
 	} else {
-		return ctr_build_string_from_cstring( "False" );
+		return ctr_build_string_from_cstring( CTR_DICT_FALSE );
 	}
 }
 

@@ -1,12 +1,12 @@
 Pen schrijf: '12' type + ',' + ('12' naarGetal) type, stop.
-Pen schrijf: 'False' type + ',' + ('False' naarBoolean) type, stop.
+Pen schrijf: 'Onwaar' type + ',' + ('False' naarBoolean) type, stop.
 Pen schrijf: 12 type + ',' + (12 naarTekst) type, stop.
 Pen schrijf: 12 type + ',' + (12 naarBoolean) type, stop.
-Pen schrijf: True type + ',' + (True naarGetal) type, stop.
-Pen schrijf: False type + ',' + (False naarGetal) type, stop.
-Pen schrijf: True type + ',' + (True naarTekst) type, stop.
-Pen schrijf: False type + ',' + (False naarTekst) type, stop.
+Pen schrijf: Waar type + ',' + (Waar naarGetal) type, stop.
+Pen schrijf: Onwaar type + ',' + (Onwaar naarGetal) type, stop.
+Pen schrijf: Waar type + ',' + (Waar naarTekst) type, stop.
+Pen schrijf: Onwaar type + ',' + (Onwaar naarTekst) type, stop.
 Pen schrijf: '=== String test ===', stop.
 Pen schrijf: 123 naarTekst, stop.
-Pen schrijf: False naarTekst, stop.
-Pen schrijf: True naarTekst, stop.
+Pen schrijf: Onwaar naarTekst, stop.
+Pen schrijf: Waar naarTekst, stop.

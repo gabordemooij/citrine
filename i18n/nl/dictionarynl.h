@@ -218,6 +218,9 @@
 #define CTR_DICT_PI              "pi"
 #define CTR_DICT_PI_SYMBOL       "𝛑"
 #define CTR_DICT_BULLET          "•"
+#define CTR_DICT_TRUE            "Waar"
+#define CTR_DICT_FALSE           "Onwaar"
+#define CTR_DICT_NIL             "Niets"
 #define CTR_DICT_NEW_ARRAY_AND_PUSH_SYMBOL       "←"
 #define CTR_DICT_ASCII_UPPER_CASE                "hoofdletters" 
 #define CTR_DICT_ASCII_LOWER_CASE                "kleine letters"
@@ -238,4 +241,4 @@
 #define CTR_DICT_CODEGEN_MAP_PUT_AT              " bij:"
 #define CTR_DICT_CODEGEN_ARRAY_NEW               "Lijst nieuw "
 #define CTR_DICT_CODEGEN_ARRAY_NEW_PUSH          "Lijst ← "
-#define CTR_DICT_PERCOLATOR                      "Koffiezetter"
+

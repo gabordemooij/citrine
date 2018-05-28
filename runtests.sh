@@ -95,6 +95,7 @@ for i in $(find tests -name 'test*.ctr'); do
 	fitem=$i
 	echo "[suite: $fitem]";
 	fexpect="${i%%.ctr}.exp"
+	fexpectnl="${i%%.ctr}nl.exp"
 	#test for every GC mode (0/1/4/8/9/12) mode x every language (EN/NL)
 	rm tests/runner1.ctr ; echo "Program tidiness: 0." > tests/runner1.ctr ; cat ${fitem} >> tests/runner1.ctr
 	rm tests/runner2.ctr ; echo "Program tidiness: 1." > tests/runner2.ctr ; cat ${fitem} >> tests/runner2.ctr
@@ -137,6 +138,10 @@ for i in $(find tests -name 'test*.ctr'); do
 	result[11]=`cat /tmp/a11 /tmp/b11`
 	result[12]=`cat /tmp/a12 /tmp/b12`
 	expected=`cat $fexpect`
+	expectednl=''
+	if [ -f $fexpectnl ]; then
+		expectednl=`cat $fexpectnl`
+	fi
 	if [ "${result[0]}" = "$expected" ]; then
 		echo -n "[✓$j*]"
 		j=$((j+1))
@@ -153,7 +158,7 @@ for i in $(find tests -name 'test*.ctr'); do
     if [ "$directive" != "'SINGLE_LANGUAGE'." ]; then
 		for q in {1..12}
 		do
-			if [ "${result[$q]}" = "$expected" ]; then
+			if [ "${result[$q]}" = "$expected" ] || [ "${result[$q]}" = "$expectednl" ]; then
 				echo -n "[✓$j]"
 				j=$((j+1))
 			else

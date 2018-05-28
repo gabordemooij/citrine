@@ -368,7 +368,7 @@ void ctr_translate_program(char* prg, char* programPath) {
 		else if ( t == CTR_TOKEN_QUOTE ) {
 			p = ctr_translate_string(p, dictionary);
 		} 
-		else if ( t == CTR_TOKEN_REF) {
+		else if ( t == CTR_TOKEN_REF || t == CTR_TOKEN_BOOLEANYES || t == CTR_TOKEN_BOOLEANNO || t == CTR_TOKEN_NIL ) {
 			p = ctr_translate_ref(p,dictionary);
 		}
 		else {

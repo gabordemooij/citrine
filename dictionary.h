@@ -218,6 +218,9 @@
 #define CTR_DICT_PI              "pi"
 #define CTR_DICT_PI_SYMBOL       "𝛑"
 #define CTR_DICT_BULLET          "•"
+#define CTR_DICT_TRUE            "True"
+#define CTR_DICT_FALSE           "False"
+#define CTR_DICT_NIL             "Nil"
 #define CTR_DICT_NEW_ARRAY_AND_PUSH_SYMBOL       "←"
 #define CTR_DICT_ASCII_UPPER_CASE                "uppercase" 
 #define CTR_DICT_ASCII_LOWER_CASE                "lowercase"
@@ -238,6 +241,4 @@
 #define CTR_DICT_CODEGEN_MAP_PUT_AT              " at:"
 #define CTR_DICT_CODEGEN_ARRAY_NEW               "List new "
 #define CTR_DICT_CODEGEN_ARRAY_NEW_PUSH          "List ← "
-#define CTR_DICT_PERCOLATOR                      "Percolator"
-
 

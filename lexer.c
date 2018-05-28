@@ -39,6 +39,9 @@ char* ctr_clex_desc_tok_ret_unicode = "↲";
 char* ctr_clex_desc_tok_fin = "end of program";
 char* ctr_clex_desc_tok_unknown = "(unknown token)";
 
+int ctr_clex_true_len = 0;
+int ctr_clex_false_len = 0;
+int ctr_clex_nil_len = 0;
 
 int ctr_string_interpolation = 0;
 char* ivarname;
@@ -80,6 +83,11 @@ void ctr_clex_emit_error( char* message ) {
  * Loads program into memory.
  */
 void ctr_clex_load(char* prg) {
+	
+	ctr_clex_true_len = strlen(CTR_DICT_TRUE);
+	ctr_clex_false_len = strlen(CTR_DICT_FALSE);
+	ctr_clex_nil_len = strlen(CTR_DICT_NIL);
+
 	ctr_code = prg;
 	ctr_code_start = prg;
 	ctr_clex_buffer = ctr_heap_allocate_tracked(ctr_clex_bflmt);
@@ -260,21 +268,27 @@ int ctr_clex_tok() {
 		}
 		return CTR_TOKEN_NUMBER;
 	}
-	if (strncmp(ctr_code, "True", 4)==0){
-		if ( ctr_clex_is_delimiter( *( ctr_code + 4 ) ) ) {
-			ctr_code += 4;
+	if (strncmp(ctr_code, CTR_DICT_TRUE, ctr_clex_true_len)==0){
+		if ( ctr_clex_is_delimiter( *( ctr_code + ctr_clex_true_len ) ) ) {
+			ctr_code += ctr_clex_true_len;
+			memcpy(ctr_clex_buffer, CTR_DICT_TRUE, ctr_clex_true_len);
+			ctr_clex_tokvlen = ctr_clex_true_len;
 			return CTR_TOKEN_BOOLEANYES;
 		}
 	}
-	if (strncmp(ctr_code, "False", 5)==0){
-		if ( ctr_clex_is_delimiter( *( ctr_code + 5 ) ) ) {
-			ctr_code += 5;
+	if (strncmp(ctr_code, CTR_DICT_FALSE, ctr_clex_false_len)==0){
+		if ( ctr_clex_is_delimiter( *( ctr_code + ctr_clex_false_len ) ) ) {
+			ctr_code += ctr_clex_false_len;
+			memcpy(ctr_clex_buffer, CTR_DICT_FALSE, ctr_clex_false_len);
+			ctr_clex_tokvlen = ctr_clex_false_len;
 			return CTR_TOKEN_BOOLEANNO;
 		}
 	}
-	if (strncmp(ctr_code, "Nil", 3)==0){
-		if ( ctr_clex_is_delimiter( *( ctr_code + 3 ) ) ) {
-			ctr_code += 3;
+	if (strncmp(ctr_code, CTR_DICT_NIL, ctr_clex_nil_len)==0){
+		if ( ctr_clex_is_delimiter( *( ctr_code + ctr_clex_nil_len ) ) ) {
+			ctr_code += ctr_clex_nil_len;
+			memcpy(ctr_clex_buffer, CTR_DICT_NIL, ctr_clex_nil_len);
+			ctr_clex_tokvlen = ctr_clex_nil_len;
 			return CTR_TOKEN_NIL;
 		}
 	}

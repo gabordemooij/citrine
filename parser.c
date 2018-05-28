@@ -401,9 +401,9 @@ ctr_tnode* ctr_cparse_false() {
 	ctr_clex_tok();
 	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_LTRBOOLFALSE;
-	r->value = ctr_heap_allocate_tracked( sizeof( char ) * 4 );
-	memcpy( r->value, "False", 5 );
-	r->vlen = 5;
+	r->value = ctr_heap_allocate_tracked( sizeof( char ) * ctr_clex_tok_value_length() );
+	memcpy( r->value, ctr_clex_tok_value(), ctr_clex_tok_value_length() );
+	r->vlen = ctr_clex_tok_value_length();
 	return r;
 }
 
@@ -417,9 +417,9 @@ ctr_tnode* ctr_cparse_true() {
 	ctr_clex_tok();
 	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_LTRBOOLTRUE;
-	r->value = ctr_heap_allocate_tracked( sizeof( char ) * 4 );
-	memcpy( r->value, "True", 4 );
-	r->vlen = 4;
+	r->value = ctr_heap_allocate_tracked( sizeof( char ) * ctr_clex_tok_value_length() );
+	memcpy( r->value, ctr_clex_tok_value(), ctr_clex_tok_value_length() );
+	r->vlen = ctr_clex_tok_value_length();
 	return r;
 }
 
@@ -433,8 +433,9 @@ ctr_tnode* ctr_cparse_nil() {
 	ctr_clex_tok();
 	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_LTRNIL;
-	r->value = "Nil";
-	r->vlen = 3;
+	r->value = ctr_heap_allocate_tracked( sizeof( char ) * ctr_clex_tok_value_length() );
+	memcpy( r->value, ctr_clex_tok_value(), ctr_clex_tok_value_length() );
+	r->vlen = ctr_clex_tok_value_length();
 	return r;
 }
 
