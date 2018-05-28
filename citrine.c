@@ -73,7 +73,7 @@ int main(int argc, char* argv[]) {
 	char* prg;
 	ctr_tnode* program;
 	uint64_t program_text_size = 0;
-	ctr_gc_mode = 1; /* default GC mode: activate GC */
+	ctr_gc_mode = 9; /* default GC mode: activate GC 1 + Pool 8 = 9 */
 	ctr_argc = argc;
 	ctr_argv = argv;
 	ctr_gc_memlimit = 8388608;
