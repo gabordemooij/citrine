@@ -1,2 +1,2 @@
 
-Pen write: (💻 shell: 'cat tests/assets/nullbyte.txt | ./ctr tests/assets/stdin_test.ctr').
+✎ write: (Program shell: 'cat tests/assets/nullbyte.txt | ./ctr tests/assets/stdin_test.ctr').

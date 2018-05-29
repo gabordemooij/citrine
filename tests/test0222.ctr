@@ -2,4 +2,4 @@
 ☞ newString := ('hello world' pattern: '([eor])([l]+)' do: { :match
 	↲ '*'.
 }).
-Pen write: newString,brk.
+✎ write: newString,brk.

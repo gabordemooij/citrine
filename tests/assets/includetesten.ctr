@@ -1,12 +1,12 @@
-Pen write: '12' type + ',' + ('12' number) type, brk.
-Pen write: 'False' type + ',' + ('False' boolean) type, brk.
-Pen write: 12 type + ',' + (12 string) type, brk.
-Pen write: 12 type + ',' + (12 boolean) type, brk.
-Pen write: True type + ',' + (True number) type, brk.
-Pen write: False type + ',' + (False number) type, brk.
-Pen write: True type + ',' + (True string) type, brk.
-Pen write: False type + ',' + (False string) type, brk.
-Pen write: '=== String test ===', brk.
-Pen write: 123 string, brk.
-Pen write: False string, brk.
-Pen write: True string, brk.
+✎ write: '12' type + ',' + ('12' number) type, brk.
+✎ write: 'False' type + ',' + ('False' boolean) type, brk.
+✎ write: 12 type + ',' + (12 string) type, brk.
+✎ write: 12 type + ',' + (12 boolean) type, brk.
+✎ write: True type + ',' + (True number) type, brk.
+✎ write: False type + ',' + (False number) type, brk.
+✎ write: True type + ',' + (True string) type, brk.
+✎ write: False type + ',' + (False string) type, brk.
+✎ write: '=== String test ===', brk.
+✎ write: 123 string, brk.
+✎ write: False string, brk.
+✎ write: True string, brk.

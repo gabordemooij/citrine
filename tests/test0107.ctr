@@ -1,49 +1,49 @@
-Pen write: 'Break for-loop, 0-4.', brk.
+✎ write: 'Break for-loop, 0-4.', brk.
 { :i
-	Pen write: 'iteration #' + i, brk.
+	✎ write: 'iteration #' + i, brk.
 	(i = 4) break.
 } * 10.
 
 ☞ x := 0.
 ☞ xIsLessThan10 := { ↲( x < 10 ). }.
 
-Pen write: 'Break while-true loop, 0-4.', brk.
+✎ write: 'Break while-true loop, 0-4.', brk.
 xIsLessThan10 true: {
-	Pen write: 'iteration #' + x, brk.
+	✎ write: 'iteration #' + x, brk.
 	x +=: 1.
 	((x < 5) not) break.
 }.
 
-Pen write: 'Break while-false loop, 5,4.', brk.
+✎ write: 'Break while-false loop, 5,4.', brk.
 { ↲(x = 0). } false: {
-	Pen write: 'iteration #' + x, brk.
+	✎ write: 'iteration #' + x, brk.
 	x -=: 1.
 	(x = 3) break.
 }.
 
-Pen write: 'Break times loop, 1-4.', brk.
+✎ write: 'Break times loop, 1-4.', brk.
 { :i
-	Pen write: 'iteration #' + i, brk.
+	✎ write: 'iteration #' + i, brk.
 	(i = 4) break.
 } * 5.
 
-Pen write: 'Break block, dont print line.', brk.
-{ True break. Pen write: 'dont write this!', brk. } run.
+✎ write: 'Break block, dont print line.', brk.
+{ True break. ✎ write: 'dont write this!', brk. } run.
 
-Pen write: 'Break block, dont fire catch...', brk.
-{ True break. Pen write: 'dont write this!', brk. } catch: { Pen write: 'Dont catch this!'. }, run.
+✎ write: 'Break block, dont fire catch...', brk.
+{ True break. ✎ write: 'dont write this!', brk. } catch: { ✎ write: 'Dont catch this!'. }, run.
 
-Pen write: 'Test Array each-loop: 0,1', brk.
+✎ write: 'Test Array each-loop: 0,1', brk.
 (List ← 1 ; 2 ; 3) map: { :i
-	Pen write: 'iteration #' + i, brk.
+	✎ write: 'iteration #' + i, brk.
 	(i = 1) break.
 }.
 
-Pen write: 'Test Map each-loop: c only', brk.
+✎ write: 'Test Map each-loop: c only', brk.
 ☞ m := Map new.
 m put: 'first' at: 'a', put: 'second' at: 'b', put: 'third' at: 'c'.
 m each: { :k :v
-	Pen write: 'iteration' + v + k, brk.
+	✎ write: 'iteration' + v + k, brk.
 	True break.
 }.
 

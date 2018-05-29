@@ -1,13 +1,13 @@
 ☞ list := List new.
 list add: 'hello'.
-Pen write: list count.
-list push: 'world'.
-Pen write: list count.
-Pen write: list pop, write: list count.
-list push: 'there'.
-Pen write: list count.
-Pen write: (list at: 0), write: (list at: 1).
+✎ write: list count.
+list append: 'world'.
+✎ write: list count.
+✎ write: list pop, write: list count.
+list append: 'there'.
+✎ write: list count.
+✎ write: (list at: 0), write: (list at: 1).
 list put: 'xmas' at: 1.
 list put: 'merry' at: 0.
-Pen write: list count.
-Pen write: (list at: 0), write: (list at: 1).
+✎ write: list count.
+✎ write: (list at: 0), write: (list at: 1).

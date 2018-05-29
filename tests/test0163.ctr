@@ -37,7 +37,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

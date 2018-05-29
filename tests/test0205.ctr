@@ -1,12 +1,12 @@
 'SINGLE_LANGUAGE'.
 
 ☞ str := 'write:'.
-Pen message: 'write:' arguments: (List ← 'Hello World'), brk. 
+✎ message: 'write:' arguments: (List ← 'Hello World'), brk. 
 
 
 str := 'between:and:'.
-Pen write: (3 message: str arguments: (List ← 2 ; 8)), brk.
-Pen write: (3 message: str arguments: (List ← 1 ; 2)), brk.
+✎ write: (3 message: str arguments: (List ← 2 ; 8)), brk.
+✎ write: (3 message: str arguments: (List ← 1 ; 2)), brk.
 
 
 ☞ CoffeeMachine := Object new.
@@ -21,4 +21,4 @@ CoffeeMachine on: 'makeCoffeeWithSugar:milk:' do: { :sugar :milk
 
 ☞ order := 'makeCoffeeWithSugar:milk:'.
 ☞ coffeeConfiguration := List ← 4 ; 2.
-Pen write: ( CoffeeMachine message: order arguments: coffeeConfiguration ) , brk.
+✎ write: ( CoffeeMachine message: order arguments: coffeeConfiguration ) , brk.

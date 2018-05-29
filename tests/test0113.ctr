@@ -1,54 +1,54 @@
-Pen write: 'Continue for-loop, No - before 6 and up.', brk.
+✎ write: 'Continue for-loop, No - before 6 and up.', brk.
 { :i
-	Pen write: (i + 1), brk.
+	✎ write: (i + 1), brk.
 	((i + 1) > 4) continue.
-	Pen write: '-'.
+	✎ write: '-'.
 } * 10.
 
 ☞ x := 0.
 ☞ xIsLessThan10 := { ↲( x < 10 ). }.
-Pen brk.
-Pen write: 'Continue while-true, No --> before 5 and up.', brk.
+✎ brk.
+✎ write: 'Continue while-true, No --> before 5 and up.', brk.
 xIsLessThan10 true: {
-	Pen write: 'iteration #' + x, brk.
+	✎ write: 'iteration #' + x, brk.
 	x +=: 1.
 	((x < 5) not) continue.
-	Pen write: '-->'.
+	✎ write: '-->'.
 }.
-Pen brk.
-Pen write: 'Continue while-false, No - before 3 only.', brk.
+✎ brk.
+✎ write: 'Continue while-false, No - before 3 only.', brk.
 { ↲(x = 0). } false: {
-	Pen write: 'iteration #' + x, brk.
+	✎ write: 'iteration #' + x, brk.
 	x -=: 1.
 	(x = 3) continue.
-	Pen write: '-'.
+	✎ write: '-'.
 }.
 
-Pen brk.
-Pen write: 'Continue times-loop, No ||| before 3.', brk.
+✎ brk.
+✎ write: 'Continue times-loop, No ||| before 3.', brk.
 { :i
-	Pen write: 'iteration #' + i, brk.
+	✎ write: 'iteration #' + i, brk.
 	(i = 2) continue.
-	Pen write: '|||'.
+	✎ write: '|||'.
 } * 5.
 
-Pen brk.
+✎ brk.
 
-{ True continue. Pen write: 'dont write this!', brk. } run.
+{ True continue. ✎ write: 'dont write this!', brk. } run.
 
-{ True continue. Pen write: 'dont write this!', brk. } catch: { Pen write: 'Dont catch this!'. }, run.
+{ True continue. ✎ write: 'dont write this!', brk. } catch: { ✎ write: 'Dont catch this!'. }, run.
 
-Pen write: 'Test Array each-loop: 0, ... ,2', brk.
+✎ write: 'Test Array each-loop: 0, ... ,2', brk.
 (List ← 1 ; 2 ; 3) map: { :i
 	(i = 1) continue.
-	Pen write: 'iteration #' + i, brk.
+	✎ write: 'iteration #' + i, brk.
 }.
 
-Pen write: 'Test Map each-loop: c only', brk.
+✎ write: 'Test Map each-loop: c only', brk.
 ☞ m := Map new.
 m put: 'first' at: 'a', put: 'second' at: 'b', put: 'third' at: 'c'.
 m each: { :k :v
-	(k !=: 'c') continue.
-	Pen write: 'iteration' + k + v, brk.
+	(k ≠ 'c') continue.
+	✎ write: 'iteration' + k + v, brk.
 }.
 

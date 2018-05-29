@@ -1,11 +1,11 @@
 'SINGLE_LANGUAGE'.
 
 
-💻 on: 'pid' do: { ↲ '[Program]'. }.
+Program on: 'pid' do: { ↲ '[Program]'. }.
 ✎ write: 'Sending toString to Program yields a PID string:', brk.
-✎ write: 💻, brk.
+✎ write: Program, brk.
 ✎ write: 'Sending toNumber to Program yields a PID number:', brk.
-✎ write: 💻 number, brk.
+✎ write: Program number, brk.
 
 ☞ ⚄ := Object new.
 ⚄ on: 'number' do: { ↲ 666. }.
@@ -17,13 +17,13 @@
 ✎ write: ⚄ number, brk.
 
 
-⏰ on: 'format:' do: { ↲ '1666-01-13 06:06:06'. }.
-⏰ on: 'time' do: { ↲ '999'. }.
+Moment on: 'format:' do: { ↲ '1666-01-13 06:06:06'. }.
+Moment on: 'time' do: { ↲ '999'. }.
 
 ✎ write: 'Sending toString to Clock yields a date and time string:', brk.
-✎ write: ⏰, brk.
+✎ write: Moment, brk.
 ✎ write: 'Sending toNumber to Clock yields a time stamp number:', brk.
-✎ write: ⏰ number, brk.
+✎ write: Moment number, brk.
 
 ✎ write: 'Sending toString to File yields a path:', brk.
 ✎ write: File, brk.
@@ -32,7 +32,7 @@
 
 ✎ write: (Map new
 	dice: ⚄,
-	program: 💻
+	Program: Program
 ), brk.
 
-✎ write: (List ← ⚄ ; 💻 ), brk.
+✎ write: (List ← ⚄ ; Program ), brk.

@@ -8,8 +8,8 @@
 Program tidiness: 0.
 
 ☞ txt := 'Word Salad'.
-Pen write: ( txt from: 5 length: 5 ).
-Pen write: ( txt skip: 4, trim ), brk.
+✎ write: ( txt from: 5 length: 5 ).
+✎ write: ( txt skip: 4, trim ), brk.
 
 Program sweep.
 
@@ -17,16 +17,16 @@ usedMemory1 := Program allocated.
 
 
 txt := 'Word Salad'.
-Pen write: ( txt from: 5 length: 5 ).
-Pen write: ( txt skip: 4, trim ), brk.
+✎ write: ( txt from: 5 length: 5 ).
+✎ write: ( txt skip: 4, trim ), brk.
 
 Program sweep.
 usedMemory2 := Program allocated.
 
 
 txt := 'Word Salad'.
-Pen write: ( txt from: 5 length: 5 ).
-Pen write: ( txt skip: 4, trim ), brk.
+✎ write: ( txt from: 5 length: 5 ).
+✎ write: ( txt skip: 4, trim ), brk.
 
 Program sweep.
 usedMemory3 := Program allocated.
@@ -34,7 +34,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

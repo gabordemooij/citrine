@@ -1,4 +1,4 @@
 ☞ t := Object new.
-t on: 'hi' do: { Pen write: 'Hi!'. }.
+t on: 'hi' do: { ✎ write: 'Hi!'. }.
 t hi.
 t hi.

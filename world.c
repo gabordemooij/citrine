@@ -637,10 +637,8 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_DIVISION ), &ctr_number_divide );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_DIVIDE ), &ctr_number_div );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_GREATER ), &ctr_number_higherThan );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_GREATER_OR_EQUAL ), &ctr_number_higherEqThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_GREATER_OR_EQUAL_SYMBOL ), &ctr_number_higherEqThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_LESS ), &ctr_number_lowerThan );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_LESS_OR_EQUAL ), &ctr_number_lowerEqThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_LESS_OR_EQUAL_SYMBOL ), &ctr_number_lowerEqThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_SYMBOL_EQUALS ), &ctr_number_eq );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_NOTEQUAL ), &ctr_number_neq );
@@ -680,7 +678,6 @@ void ctr_initialize_world() {
 
 	ctr_object* pi = ctr_build_number_from_float(3.14159265358979323846);
 	pi->info.sticky = 1;
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PI ), pi, 0);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PI_SYMBOL ), pi, 0);
 
 	/* String */
@@ -691,7 +688,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_FROM_LENGTH ), &ctr_string_from_length );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_PLUS ), &ctr_string_concat );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_SYMBOL_EQUALS ), &ctr_string_eq );
-	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_UNEQUALS ), &ctr_string_neq );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_UNEQUALS_SYMBOL ), &ctr_string_neq );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TRIM ), &ctr_string_trim );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_HTML_ESCAPE ), &ctr_string_html_escape );
@@ -753,11 +749,11 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_array_new );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_NEW_ARRAY_AND_PUSH_SYMBOL ), &ctr_array_new_and_push );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_TYPE ), &ctr_array_type );
-	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_PUSH ), &ctr_array_push );
+	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_APPEND ), &ctr_array_push );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_BULLET ), &ctr_array_push );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_PUSH_SYMBOL ), &ctr_array_push );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_ADD_SET ), &ctr_array_push );
-	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_UNSHIFT ), &ctr_array_unshift );
+	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_PREPEND ), &ctr_array_unshift );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_SHIFT ), &ctr_array_shift );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_COUNT ), &ctr_array_count );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_JOIN ), &ctr_array_join );
@@ -817,8 +813,6 @@ void ctr_initialize_world() {
 	CtrStdConsole = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_WRITE ), &ctr_console_write );
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_BRK ), &ctr_console_brk );
-	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_TAB ), &ctr_console_tab );
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PEN ), CtrStdConsole, 0 );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PEN_ICON ), CtrStdConsole, 0 );
 	CtrStdConsole->link = CtrStdObject;
 	CtrStdConsole->info.sticky = 1;
@@ -873,7 +867,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_STICKY_COUNT ), &ctr_gc_sticky_count );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MEMORY_LIMIT ), &ctr_gc_setmemlimit );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MODE ),  &ctr_gc_setmode );
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PROGRAM ), CtrStdCommand, 0 );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_COMP_ICON ), CtrStdCommand, 0 );
 	CtrStdCommand->link = CtrStdObject;
 	CtrStdCommand->info.sticky = 1;
@@ -907,7 +900,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_clock_to_number );
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( CTR_DICT_ADD_SET ), &ctr_clock_add );
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( CTR_DICT_SUBTRACT_SET ), &ctr_clock_subtract );
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_CLOCK ), CtrStdClock, 0 );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_CLOCK_ICON ), CtrStdClock, 0 );
 	ctr_clock_init( CtrStdClock );
 	CtrStdClock->link = CtrStdObject;

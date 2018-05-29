@@ -2,8 +2,8 @@
 a on: 'setVal:' do: { :v ⚿ value := v. }.
 a on: 'getVal' do: { ↲ ⚿ value. }.
 a setVal: 'hi'.
-Pen write: a getVal.
+✎ write: a getVal.
 ☞ b := a.
 b setVal: 'boo!'.
-Pen write: a getVal.
-Pen write: b getVal.
+✎ write: a getVal.
+✎ write: b getVal.

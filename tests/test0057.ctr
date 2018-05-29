@@ -1,6 +1,6 @@
 ☞ cafe := List new.
-cafe push: 'coffee'.
-cafe push: 'beer'.
-Pen write: (cafe at: 0), write: (cafe at: 1).
+cafe append: 'coffee'.
+cafe append: 'beer'.
+✎ write: (cafe at: 0), write: (cafe at: 1).
 ☞ pub := cafe.
-Pen write: (pub at: 0), write: (pub at: 1).
+✎ write: (pub at: 0), write: (pub at: 1).

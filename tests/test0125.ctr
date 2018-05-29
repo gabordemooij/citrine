@@ -5,16 +5,16 @@ File write bytes: 'x'.
 File open. 
 ☞ f := File new: '/tmp/from.txt'.
 f write: 'hello'.
-Pen write: 'file contains: ' + (f read) + '\n'.
+✎ write: 'file contains: ' + (f read) + '\n'.
 f open: 'r+'.
 ☞ x := f read bytes: 2.
-Pen write: 'read 2 bytes: "' + x + '"\n'.
+✎ write: 'read 2 bytes: "' + x + '"\n'.
 x := f read bytes: 3.
-Pen write: 'read 3 more bytes: "' + x + '"\n'.
+✎ write: 'read 3 more bytes: "' + x + '"\n'.
 ☞ w := f write bytes: ' friend!'.
 f close.
-Pen write: 'Bytes written: ' + w, brk.
-Pen write: 'Finally, file contains: '+ (File new: '/tmp/from.txt', read) + '\n'.
+✎ write: 'Bytes written: ' + w, brk.
+✎ write: 'Finally, file contains: '+ (File new: '/tmp/from.txt', read) + '\n'.
 
 
 

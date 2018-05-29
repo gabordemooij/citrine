@@ -11,6 +11,6 @@
 
 ☞ a := List ← 1; 2; 3.
 mapper apply: a and: (makeAdder apply: 100).
-Pen write: (a at: 0), brk.
-Pen write: (a at: 1), brk.
-Pen write: (a at: 2), brk.
+✎ write: (a at: 0), brk.
+✎ write: (a at: 1), brk.
+✎ write: (a at: 2), brk.

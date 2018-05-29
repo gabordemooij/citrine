@@ -5,9 +5,9 @@ Program tidiness: 4.
 	☞ cat := Object new.
 	cat on: 'work' do: {
 		thisBlock error: 'Uncatched error has occurred.\nCats have personel for that!'.
-		Pen write: 'dont print this!'.
+		✎ write: 'dont print this!'.
 	}.
 	{ cat work. } run.
 } catch: { :e
-	Pen write: e.
+	✎ write: e.
 }, run.

@@ -2,7 +2,7 @@
 Animal on: 'make' do: {
 	☞ animal := Object new.
 	animal on: 'makeSound' do: {
-		Pen write: ⚿ sound.
+		✎ write: ⚿ sound.
 	}.
 	↲animal.
 }.

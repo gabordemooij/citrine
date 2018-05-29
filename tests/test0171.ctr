@@ -8,16 +8,16 @@
 Program tidiness: 0.
 
 ☞ a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
-a do pop shift unshift: 'hi', push: 999, done.
-Pen write: ( a join: ',' ), brk.
+a do pop shift prepend: 'hi', append: 999, done.
+✎ write: ( a join: ',' ), brk.
 
 Program sweep.
 usedMemory1 := Program allocated.
 
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
-a pop. a shift. a unshift: 'hi', push: 999.
-Pen write: ( a join: ',' ), brk.
+a pop. a shift. a prepend: 'hi', append: 999.
+✎ write: ( a join: ',' ), brk.
 
 
 Program sweep.
@@ -25,8 +25,8 @@ usedMemory2 := Program allocated.
 
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
-a do pop shift unshift: 'hi', push: 999, done.
-Pen write: ( a join: ',' ), brk.
+a do pop shift prepend: 'hi', append: 999, done.
+✎ write: ( a join: ',' ), brk.
 
 
 Program sweep.
@@ -35,7 +35,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

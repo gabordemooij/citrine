@@ -2,10 +2,10 @@
 
 Boolean learn: 'alsWaar:'
 		means: 'true:'.
-Pen learn: 'schrijf:'
+✎ learn: 'schrijf:'
 	means: 'write:'.
-Pen learn: 'nieuweRegel' means: 'brk'.
-☞ Potlood := Pen.
+✎ learn: 'nieuweRegel' means: 'brk'.
+☞ Potlood := ✎.
 
 Object learn: 'nieuw' means: 'new'.
 Object learn: 'antwoord:met:' means: 'on:do:'.

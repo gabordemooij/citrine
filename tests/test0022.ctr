@@ -1,8 +1,8 @@
-(3 >=: 3) true: { Pen write: 'Yep'. }.
-(3 <=: 3) true: { Pen write: 'Yep'. }.
-(3 >=:  4) true: { Pen write: 'Nope'. }.
-(4 <=:   8) true: { Pen write: 'Yep'. }.
-(3 >=: 5 ) true: { Pen write: 'No'. }.
-(  0 <=: 3 ) true: { Pen write: 'Yep'. }.
-( 2 = 2 ) true: { Pen write: 'Yep'. }.
-( 2.9 = 2.9 ) true: { Pen write: 'Yep'. }.
+(3 ≥ 3) true: { ✎ write: 'Yep'. }.
+(3 ≤ 3) true: { ✎ write: 'Yep'. }.
+(3 ≥  4) true: { ✎ write: 'Nope'. }.
+(4 ≤   8) true: { ✎ write: 'Yep'. }.
+(3 ≥ 5 ) true: { ✎ write: 'No'. }.
+(  0 ≤ 3 ) true: { ✎ write: 'Yep'. }.
+( 2 = 2 ) true: { ✎ write: 'Yep'. }.
+( 2.9 = 2.9 ) true: { ✎ write: 'Yep'. }.

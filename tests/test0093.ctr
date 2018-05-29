@@ -9,7 +9,7 @@
 		f run.
 	}.
 	x +=: 2.
-	Pen write: x.
+	✎ write: x.
 }.
 f run.
-Pen write: q.
+✎ write: q.

@@ -1,14 +1,14 @@
 ☞ a := List new.
-a unshift: 'Hello'.
-a unshift: 'World'.
-Pen write: (a at: 1), write: (a at: 0), brk.
-Pen write: (a count) + ' left in array.', brk.
-Pen write: (a shift), write: (a shift), write: a shift, brk.
-Pen write: (a count) + ' left in array.', brk.
-Pen write: (a pop), brk.
-a unshift: 'Hi', unshift: 'There'.
-Pen write: (a count) + ' left in array.', brk.
-Pen write: (a at: 1), write: (a at: 0), brk.
+a prepend: 'Hello'.
+a prepend: 'World'.
+✎ write: (a at: 1), write: (a at: 0), brk.
+✎ write: (a count) + ' left in array.', brk.
+✎ write: (a shift), write: (a shift), write: a shift, brk.
+✎ write: (a count) + ' left in array.', brk.
+✎ write: (a pop), brk.
+a prepend: 'Hi', prepend: 'There'.
+✎ write: (a count) + ' left in array.', brk.
+✎ write: (a at: 1), write: (a at: 0), brk.
 { a shift. } * 4.
-Pen write: (a count) + ' left in array.', brk.
-Pen write: a shift.
+✎ write: (a count) + ' left in array.', brk.
+✎ write: a shift.

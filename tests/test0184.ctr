@@ -39,7 +39,7 @@ a := a + (2 power: -1).
 a := a + (49 sqrt).   
 a add: (0 max: 1).          
 a add: (2 min: 3).          
-Pen write: a.
+✎ write: a.
 
 Program sweep.
 
@@ -61,7 +61,7 @@ a := a + (2 power: -1).
 a := a + (49 sqrt).   
 a add: (0 max: 1).          
 a add: (2 min: 3).          
-Pen write: a.
+✎ write: a.
 
 Program sweep.
 usedMemory2 := Program allocated.
@@ -82,7 +82,7 @@ a := a + (2 power: -1).
 a := a + (49 sqrt).   
 a add: (0 max: 1).          
 a add: (2 min: 3).          
-Pen write: a.
+✎ write: a.
 
 Program sweep.
 usedMemory3 := Program allocated.
@@ -90,7 +90,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

@@ -7,20 +7,20 @@
 
 Program tidiness: 0.
 
-{ :i Pen write: i. } * 4.
-Pen brk.
-{ :i Pen write: (4 - i). } * 4.
-Pen brk.
-( 1 > 2 ) false: { Pen write: 'BLOCK 1', brk. }.
-( 2 > 1 ) true:  { Pen write: 'BLOCK 2', brk. }.
+{ :i ✎ write: i. } * 4.
+✎ brk.
+{ :i ✎ write: (4 - i). } * 4.
+✎ brk.
+( 1 > 2 ) false: { ✎ write: 'BLOCK 1', brk. }.
+( 2 > 1 ) true:  { ✎ write: 'BLOCK 2', brk. }.
 
 ☞ i := 0.
-{ ↲( i < 3). } true: { Pen write: i. i +=: 1. }.
-Pen brk.
+{ ↲( i < 3). } true: { ✎ write: i. i +=: 1. }.
+✎ brk.
 
 i := 3.
-{ ↲( i > 0). } true: { Pen write: i. i := i - 1. }.
-Pen brk.
+{ ↲( i > 0). } true: { ✎ write: i. i := i - 1. }.
+✎ brk.
 
 
 Program sweep.
@@ -28,20 +28,20 @@ Program sweep.
 usedMemory1 := Program allocated.
 
 
-{ :i Pen write: i. } * 4.
-Pen brk.
-{ :i Pen write: (4 - i). } * 4.
-Pen brk.
-( 1 > 2 ) false: { Pen write: 'BLOCK 1', brk. }.
-( 2 > 1 ) true:  { Pen write: 'BLOCK 2', brk. }.
+{ :i ✎ write: i. } * 4.
+✎ brk.
+{ :i ✎ write: (4 - i). } * 4.
+✎ brk.
+( 1 > 2 ) false: { ✎ write: 'BLOCK 1', brk. }.
+( 2 > 1 ) true:  { ✎ write: 'BLOCK 2', brk. }.
 
 i := 0.
-{ ↲( i < 3). } true: { Pen write: i. i +=: 1. }.
-Pen brk.
+{ ↲( i < 3). } true: { ✎ write: i. i +=: 1. }.
+✎ brk.
 
 i := 3.
-{ ↲( i > 0). } true: { Pen write: i. i := i - 1. }.
-Pen brk.
+{ ↲( i > 0). } true: { ✎ write: i. i := i - 1. }.
+✎ brk.
 
 
 
@@ -49,20 +49,20 @@ Program sweep.
 usedMemory2 := Program allocated.
 
 
-{ :i Pen write: i. } * 4.
-Pen brk.
-{ :i Pen write: (4 - i). } * 4.
-Pen brk.
-( 1 > 2 ) false: { Pen write: 'BLOCK 1', brk. }.
-( 2 > 1 ) true:  { Pen write: 'BLOCK 2', brk. }.
+{ :i ✎ write: i. } * 4.
+✎ brk.
+{ :i ✎ write: (4 - i). } * 4.
+✎ brk.
+( 1 > 2 ) false: { ✎ write: 'BLOCK 1', brk. }.
+( 2 > 1 ) true:  { ✎ write: 'BLOCK 2', brk. }.
 
 i := 0.
-{ ↲( i < 3). } true: { Pen write: i. i +=: 1. }.
-Pen brk.
+{ ↲( i < 3). } true: { ✎ write: i. i +=: 1. }.
+✎ brk.
 
 i := 3.
-{ ↲( i > 0). } true: { Pen write: i. i := i - 1. }.
-Pen brk.
+{ ↲( i > 0). } true: { ✎ write: i. i := i - 1. }.
+✎ brk.
 
 Program sweep.
 usedMemory3 := Program allocated.
@@ -70,7 +70,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

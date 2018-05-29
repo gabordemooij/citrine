@@ -1,9 +1,9 @@
 ☞ numbers := '1,2,3' split: ','.
-Pen write: 'I got: ' + numbers count + ' numbers.' ,brk.
-{ :i Pen write: 'number #' + i + ':' + (numbers at: i), brk.} * 3.
+✎ write: 'I got: ' + numbers count + ' numbers.' ,brk.
+{ :i ✎ write: 'number #' + i + ':' + (numbers at: i), brk.} * 3.
 ☞ beverages := 'Tea Or Coffee Or Milk Or Orange Juice Or Water'.
 beverages := beverages split: ' Or '.
-Pen write: 'We serve', brk.
-{ :i Pen write: '->' + (beverages at: i), brk. } * (beverages count).
-Pen write: (beverages join: ','), brk.
-Pen write: (numbers join: '||').
+✎ write: 'We serve', brk.
+{ :i ✎ write: '->' + (beverages at: i), brk. } * (beverages count).
+✎ write: (beverages join: ','), brk.
+✎ write: (numbers join: '||').

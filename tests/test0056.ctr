@@ -5,12 +5,12 @@ z on: 'value:' do: { :v
 }.
 z on: 'value' do: { ↲ ⚿ value. }.
 (z setValue: 1) value: 2.
-Pen write: z value.
+✎ write: z value.
 ☞ x := z.
-Pen write: x value.
+✎ write: x value.
 z := Nil.
-Pen write: z value.
-Pen write: x value.
-Pen write: 'hello'.
-Pen write: 3 + 2.
-Pen write: (3 > 2).
+✎ write: z value.
+✎ write: x value.
+✎ write: 'hello'.
+✎ write: 3 + 2.
+✎ write: (3 > 2).

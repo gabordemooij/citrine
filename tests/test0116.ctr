@@ -1,6 +1,6 @@
 ☞ wrong := Program argument: -10.
 (wrong = Nil) true: {
-	Pen write: 'I can handle out-of-bound Command arguments.\n'.
+	✎ write: 'I can handle out-of-bound Command arguments.\n'.
 }, else: {
-	Pen write: 'Fail\n'.
+	✎ write: 'Fail\n'.
 }.

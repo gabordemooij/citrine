@@ -9,7 +9,7 @@ Program tidiness: 0.
 
 ☞ q := 'You should be able'.
 q append: (' to append something to a string'+'!').
-Pen write: q.
+✎ write: q.
 
 Program sweep.
 usedMemory1 := Program allocated.
@@ -17,7 +17,7 @@ usedMemory1 := Program allocated.
 
 q := 'You should be able'.
 q append: (' to append something to a string'+'!').
-Pen write: q.
+✎ write: q.
 
 Program sweep.
 usedMemory2 := Program allocated.
@@ -25,7 +25,7 @@ usedMemory2 := Program allocated.
 
 q := 'You should be able'.
 q append: (' to append something to a string'+'!').
-Pen write: q.
+✎ write: q.
 
 Program sweep.
 usedMemory3 := Program allocated.
@@ -33,7 +33,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

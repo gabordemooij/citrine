@@ -9,7 +9,7 @@ To-Do on: 'nieuw' do: {
 }.
 
 To-Do on: '+' do: { :task
-	⚿ list push: task.
+	⚿ list append: task.
 }.
 
 To-Do on: 'number of tasks?' do: {

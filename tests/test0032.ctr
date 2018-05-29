@@ -4,8 +4,8 @@ a on: 'init' do: {
 	⚿ value := v.
 	⚿ value2 := ⚿ value.
 	☞ x := ⚿ value2.
-	Pen write: x.
-	Pen write: ⚿ value.
-	Pen write: ⚿ value2.
+	✎ write: x.
+	✎ write: ⚿ value.
+	✎ write: ⚿ value2.
 }.
 a init.

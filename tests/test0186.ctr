@@ -7,53 +7,53 @@
 
 Program tidiness: 0.
 
-Pen write: (6 < 5), brk.
-Pen write: (2 > 1), brk.
-Pen write: (2 <=: 1), brk.
-Pen write: (9 >=: 1), brk.
-Pen write: (2 odd), brk.
-Pen write: (4 even), brk.
-Pen write: (-1 pos), brk.
-Pen write: (-2 neg), brk.
-Pen write: (3 between: 4 and: 5), brk.
-Pen write: (3 = 3), brk.
-Pen write: (3 !=: 3), brk.
-Pen write: 1 boolean, brk.
+✎ write: (6 < 5), brk.
+✎ write: (2 > 1), brk.
+✎ write: (2 ≤ 1), brk.
+✎ write: (9 ≥ 1), brk.
+✎ write: (2 odd), brk.
+✎ write: (4 even), brk.
+✎ write: (-1 pos), brk.
+✎ write: (-2 neg), brk.
+✎ write: (3 between: 4 and: 5), brk.
+✎ write: (3 = 3), brk.
+✎ write: (3 ≠ 3), brk.
+✎ write: 1 boolean, brk.
 
 Program sweep.
 
 usedMemory1 := Program allocated.
 
 
-Pen write: (6 < 5), brk.
-Pen write: (2 > 1), brk.
-Pen write: (2 <=: 1), brk.
-Pen write: (9 >=: 1), brk.
-Pen write: (2 odd), brk.
-Pen write: (4 even), brk.
-Pen write: (-1 pos), brk.
-Pen write: (-2 neg), brk.
-Pen write: (3 between: 4 and: 5), brk.
-Pen write: (3 = 3), brk.
-Pen write: (3 !=: 3), brk.
-Pen write: 1 boolean, brk.
+✎ write: (6 < 5), brk.
+✎ write: (2 > 1), brk.
+✎ write: (2 ≤ 1), brk.
+✎ write: (9 ≥ 1), brk.
+✎ write: (2 odd), brk.
+✎ write: (4 even), brk.
+✎ write: (-1 pos), brk.
+✎ write: (-2 neg), brk.
+✎ write: (3 between: 4 and: 5), brk.
+✎ write: (3 = 3), brk.
+✎ write: (3 ≠ 3), brk.
+✎ write: 1 boolean, brk.
 
 Program sweep.
 usedMemory2 := Program allocated.
 
 
-Pen write: (6 < 5), brk.
-Pen write: (2 > 1), brk.
-Pen write: (2 <=: 1), brk.
-Pen write: (9 >=: 1), brk.
-Pen write: (2 odd), brk.
-Pen write: (4 even), brk.
-Pen write: (-1 pos), brk.
-Pen write: (-2 neg), brk.
-Pen write: (3 between: 4 and: 5), brk.
-Pen write: (3 = 3), brk.
-Pen write: (3 !=: 3), brk.
-Pen write: 1 boolean, brk.
+✎ write: (6 < 5), brk.
+✎ write: (2 > 1), brk.
+✎ write: (2 ≤ 1), brk.
+✎ write: (9 ≥ 1), brk.
+✎ write: (2 odd), brk.
+✎ write: (4 even), brk.
+✎ write: (-1 pos), brk.
+✎ write: (-2 neg), brk.
+✎ write: (3 between: 4 and: 5), brk.
+✎ write: (3 = 3), brk.
+✎ write: (3 ≠ 3), brk.
+✎ write: 1 boolean, brk.
 
 Program sweep.
 usedMemory3 := Program allocated.
@@ -61,7 +61,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

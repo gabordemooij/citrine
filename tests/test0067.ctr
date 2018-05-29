@@ -1,12 +1,12 @@
-Pen write: (' a a a   ' last: 'a'). 
-Pen write: (' trees ' find: 'ee'). 
+✎ write: (' a a a   ' last: 'a'). 
+✎ write: (' trees ' find: 'ee'). 
 ☞ h := 'can you find the needle in the haystack?'.
-Pen write: (h find: 'can'). 
-Pen write: (h find: ''). 
-Pen write: ('' find: 'a'). 
-Pen write: ('a' find: 'a'). 
-Pen write: ('the needle is at the end' find: 'end'). 
-Pen write: ('the needle is at the end' last: 'end'). 
-Pen write: ('friend, it is at the end' last: 'end'). 
-Pen write: ('friend, it is at the end' find: 'end'). 
-Pen write: ('a' last: 'a'). 
+✎ write: (h find: 'can'). 
+✎ write: (h find: ''). 
+✎ write: ('' find: 'a'). 
+✎ write: ('a' find: 'a'). 
+✎ write: ('the needle is at the end' find: 'end'). 
+✎ write: ('the needle is at the end' last: 'end'). 
+✎ write: ('friend, it is at the end' last: 'end'). 
+✎ write: ('friend, it is at the end' find: 'end'). 
+✎ write: ('a' last: 'a'). 

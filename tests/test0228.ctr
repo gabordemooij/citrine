@@ -2,4 +2,4 @@
 ☞ str := 'Hello'.
 str +=: ' '.
 str +=: 'World'.
-Pen write: str, brk.
+✎ write: str, brk.

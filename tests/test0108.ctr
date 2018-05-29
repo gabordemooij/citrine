@@ -1,5 +1,5 @@
 
-(7 odd) true: { Pen write: '7 is an ODD NUMBER', brk. }, else: { Pen write: 'WRONG!'. }.
-(4 even) true: { Pen write: '4 is an EVEN NUMBER', brk. }, else: { Pen write: 'WRONG!'. }.
-(5 even) true: { Pen write: 'WRONG!'. }, else: { Pen write: '5 is NOT AN EVEN NUMBER', brk. }.
-(6 odd) true: { Pen write: 'WRONG!'. }, else: { Pen write: '6 is NOT AN ODD NUMBER', brk. }.
+(7 odd) true: { ✎ write: '7 is an ODD NUMBER', brk. }, else: { ✎ write: 'WRONG!'. }.
+(4 even) true: { ✎ write: '4 is an EVEN NUMBER', brk. }, else: { ✎ write: 'WRONG!'. }.
+(5 even) true: { ✎ write: 'WRONG!'. }, else: { ✎ write: '5 is NOT AN EVEN NUMBER', brk. }.
+(6 odd) true: { ✎ write: 'WRONG!'. }, else: { ✎ write: '6 is NOT AN ODD NUMBER', brk. }.

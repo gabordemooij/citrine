@@ -2,5 +2,5 @@
 ☞ a := List ← 1 ; 2 ; 3.
 ☞ b := List ← 4 ; 5 ; 6.
 ☞ c := a + b.
-Pen write: 'Array:' + (c join: ','), brk.
-Pen write: 'Array:' + ((b + a) join: ','), brk.
+✎ write: 'Array:' + (c join: ','), brk.
+✎ write: 'Array:' + ((b + a) join: ','), brk.

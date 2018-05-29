@@ -10,13 +10,13 @@ Program tidiness: 0.
 
 ☞ a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( List ← 1 ).
-Pen write: ( 'sum: ' + ( a sum ) ), brk.
-Pen write: ( 'min: ' + ( a min ) ), brk.
-Pen write: ( 'max: ' + ( a max ) ), brk.
-Pen write: ( '3rd: ' + ( a @ 2 ) ), brk.
-Pen write: ( 'prd: ' + ( a product ) ), brk.
+✎ write: ( 'sum: ' + ( a sum ) ), brk.
+✎ write: ( 'min: ' + ( a min ) ), brk.
+✎ write: ( 'max: ' + ( a max ) ), brk.
+✎ write: ( '3rd: ' + ( a @ 2 ) ), brk.
+✎ write: ( 'prd: ' + ( a product ) ), brk.
 a sort: { :a :b ↲ (b - a). }.
-a each: { :i :e Pen write: ( i ), brk. }.
+a each: { :i :e ✎ write: ( i ), brk. }.
 
 Program sweep.
 usedMemory1 := Program allocated.
@@ -24,13 +24,13 @@ usedMemory1 := Program allocated.
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( List ← 1 ).
-Pen write: ( 'sum: ' + ( a sum ) ), brk.
-Pen write: ( 'min: ' + ( a min ) ), brk.
-Pen write: ( 'max: ' + ( a max ) ), brk.
-Pen write: ( '3rd: ' + ( a @ 2 ) ), brk.
-Pen write: ( 'prd: ' + ( a product ) ), brk.
+✎ write: ( 'sum: ' + ( a sum ) ), brk.
+✎ write: ( 'min: ' + ( a min ) ), brk.
+✎ write: ( 'max: ' + ( a max ) ), brk.
+✎ write: ( '3rd: ' + ( a @ 2 ) ), brk.
+✎ write: ( 'prd: ' + ( a product ) ), brk.
 a sort: { :a :b ↲ (b - a). }.
-a each: { :i :e Pen write: ( i ), brk. }.
+a each: { :i :e ✎ write: ( i ), brk. }.
 
 
 Program sweep.
@@ -39,13 +39,13 @@ usedMemory2 := Program allocated.
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( List ← 1 ).
-Pen write: ( 'sum: ' + ( a sum ) ), brk.
-Pen write: ( 'min: ' + ( a min ) ), brk.
-Pen write: ( 'max: ' + ( a max ) ), brk.
-Pen write: ( '3rd: ' + ( a @ 2 ) ), brk.
-Pen write: ( 'prd: ' + ( a product ) ), brk.
+✎ write: ( 'sum: ' + ( a sum ) ), brk.
+✎ write: ( 'min: ' + ( a min ) ), brk.
+✎ write: ( 'max: ' + ( a max ) ), brk.
+✎ write: ( '3rd: ' + ( a @ 2 ) ), brk.
+✎ write: ( 'prd: ' + ( a product ) ), brk.
 a sort: { :a :b ↲ (b - a). }.
-a each: { :i :e Pen write: ( i ), brk. }.
+a each: { :i :e ✎ write: ( i ), brk. }.
 
 
 Program sweep.
@@ -54,7 +54,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

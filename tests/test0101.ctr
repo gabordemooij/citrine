@@ -1,2 +1,2 @@
 Program env: 'TSTVAR' val: 'Hello World!'.
-Pen write: 'value = ' + (Program env: 'TSTVAR').
+✎ write: 'value = ' + (Program env: 'TSTVAR').

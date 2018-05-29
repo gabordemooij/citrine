@@ -13,13 +13,13 @@ palette
 	put: '#F00' at: 'red',
 	put: '#0F0' at: 'green',
 	put: '#00F' at: 'blue'.
-Pen write: 'number of RGB codes in palette: ' + ( palette count ), brk.
-Pen write: 'RGB code of green is: ' + ( palette @ 'green' ), brk.
+✎ write: 'number of RGB codes in palette: ' + ( palette count ), brk.
+✎ write: 'RGB code of green is: ' + ( palette @ 'green' ), brk.
 ☞ colors := ''.
 ( palette each: { :name :code
 		colors := colors + ( name + ':' + code ).
 } ).
-Pen write: 'All colors in palette: ' + colors, brk.
+✎ write: 'All colors in palette: ' + colors, brk.
 
 Program sweep.
 usedMemory1 := Program allocated.
@@ -30,13 +30,13 @@ palette
 	put: '#F00' at: 'red',
 	put: '#0F0' at: 'green',
 	put: '#00F' at: 'blue'.
-Pen write: 'number of RGB codes in palette: ' + ( palette count ), brk.
-Pen write: 'RGB code of green is: ' + ( palette @ 'green' ), brk.
+✎ write: 'number of RGB codes in palette: ' + ( palette count ), brk.
+✎ write: 'RGB code of green is: ' + ( palette @ 'green' ), brk.
 colors := ''.
 ( palette each: { :name :code
 		colors := colors + ( name + ':' + code ).
 } ).
-Pen write: 'All colors in palette: ' + colors, brk.
+✎ write: 'All colors in palette: ' + colors, brk.
 
 Program sweep.
 usedMemory2 := Program allocated.
@@ -46,13 +46,13 @@ palette
 	put: '#F00' at: 'red',
 	put: '#0F0' at: 'green',
 	put: '#00F' at: 'blue'.
-Pen write: 'number of RGB codes in palette: ' + ( palette count ), brk.
-Pen write: 'RGB code of green is: ' + ( palette @ 'green' ), brk.
+✎ write: 'number of RGB codes in palette: ' + ( palette count ), brk.
+✎ write: 'RGB code of green is: ' + ( palette @ 'green' ), brk.
 colors := ''.
 ( palette each: { :name :code
 		colors := colors + ( name + ':' + code ).
 } ).
-Pen write: 'All colors in palette: ' + colors, brk.
+✎ write: 'All colors in palette: ' + colors, brk.
 
 
 Program sweep.
@@ -61,7 +61,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

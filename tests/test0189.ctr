@@ -28,7 +28,7 @@ Program tidiness: 0.
 	(canDo either: 'can do what I want' or: 'cannot do what I want') +
 	' to do to make this world a better place.'.
 Boolean flip. 
-Pen write: PoemAboutLife, brk.
+✎ write: PoemAboutLife, brk.
 
 Program sweep.
 
@@ -56,7 +56,7 @@ PoemAboutLife :=
 	(canDo either: 'can do what I want' or: 'cannot do what I want') +
 	' to do to make this world a better place.'.
 Boolean flip. 
-Pen write: PoemAboutLife, brk.
+✎ write: PoemAboutLife, brk.
 
 
 
@@ -85,7 +85,7 @@ PoemAboutLife :=
 	(canDo either: 'can do what I want' or: 'cannot do what I want') +
 	' to do to make this world a better place.'.
 Boolean flip. 
-Pen write: PoemAboutLife, brk.
+✎ write: PoemAboutLife, brk.
 
 Program sweep.
 usedMemory3 := Program allocated.
@@ -93,7 +93,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

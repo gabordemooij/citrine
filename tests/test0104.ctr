@@ -1,18 +1,18 @@
 
 { :i
-	Pen write: 'This is step #' + ( i + 1 ), brk.
+	✎ write: 'This is step #' + ( i + 1 ), brk.
 } * 6.
 
 { :i
-	Pen write: 'This is step #' + ( 3 - i ), brk.
+	✎ write: 'This is step #' + ( 3 - i ), brk.
 } * 6.
 
 { :i
-	Pen write: 'NEVER!', brk.
+	✎ write: 'NEVER!', brk.
 } * 0.
 
 
 
 { :i
-	Pen write: 'This is step #' + ( -3 + ( i / 2 ) ), brk.
+	✎ write: 'This is step #' + ( -3 + ( i / 2 ) ), brk.
 } * 11.

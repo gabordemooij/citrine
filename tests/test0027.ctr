@@ -1,6 +1,6 @@
-Pen write: 'Length is:' + 'ABCD' length.
+✎ write: 'Length is:' + 'ABCD' length.
 ☞ x := 'ABCDE'.
-Pen write: 'Length is:' + x length.
-(('ABC' length + 1 = 4) & (2 !=: 3)) not not true: { Pen write: 'Yes'. }.
-(((3 > 4) | (4 > 2)) & (True | False) & (True ? True) not ) true: { Pen write: 'Yes'. }.
-{ Pen write: 'Running'. } run.
+✎ write: 'Length is:' + x length.
+(('ABC' length + 1 = 4) & (2 ≠ 3)) not not true: { ✎ write: 'Yes'. }.
+(((3 > 4) | (4 > 2)) & (True | False) & (True ? True) not ) true: { ✎ write: 'Yes'. }.
+{ ✎ write: 'Running'. } run.

@@ -9,10 +9,10 @@ Program tidiness: 0.
 
 
 2 exponent factorial.
-Pen write: (11 % 3), brk.
-Pen write: (3.4 round), brk.
-Pen write: (7.1 ceil), brk.
-Pen write: (7.9 floor), brk.
+✎ write: (11 % 3), brk.
+✎ write: (3.4 round), brk.
+✎ write: (7.1 ceil), brk.
+✎ write: (7.9 floor), brk.
 
 Program sweep.
 
@@ -20,20 +20,20 @@ usedMemory1 := Program allocated.
 
 
 2 exponent factorial.
-Pen write: (11 % 3), brk.
-Pen write: (3.4 round), brk.
-Pen write: (7.1 ceil), brk.
-Pen write: (7.9 floor), brk.
+✎ write: (11 % 3), brk.
+✎ write: (3.4 round), brk.
+✎ write: (7.1 ceil), brk.
+✎ write: (7.9 floor), brk.
 
 Program sweep.
 usedMemory2 := Program allocated.
 
 
 2 exponent factorial.
-Pen write: (11 % 3), brk.
-Pen write: (3.4 round), brk.
-Pen write: (7.1 ceil), brk.
-Pen write: (7.9 floor), brk.
+✎ write: (11 % 3), brk.
+✎ write: (3.4 round), brk.
+✎ write: (7.1 ceil), brk.
+✎ write: (7.9 floor), brk.
 
 Program sweep.
 usedMemory3 := Program allocated.
@@ -41,7 +41,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

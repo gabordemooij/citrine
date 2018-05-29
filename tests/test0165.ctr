@@ -17,7 +17,7 @@ f open: 'r'.
 q := q + (f rewind read bytes: 2). 
 
 
-Pen write: q.
+✎ write: q.
 
 f := File new: '/tmp/citrine_test_file.txt'.
 f append: 'hello'.
@@ -40,7 +40,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

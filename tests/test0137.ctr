@@ -71,12 +71,12 @@ Program sweep.
 
 
 (usedMemory1 = usedMemory2 = usedMemory3 = usedMemory4 = usedMemory5) true: {
-	Pen write: 'Memory usage remains stable.', brk.
+	✎ write: 'Memory usage remains stable.', brk.
 }, else: {
-	Pen write: 'Used memory not stable.', brk.
-	Pen write: usedMemory1, brk.
-	Pen write: usedMemory2, brk.
-	Pen write: usedMemory3, brk.
-	Pen write: usedMemory4, brk.
-	Pen write: usedMemory5, brk.
+	✎ write: 'Used memory not stable.', brk.
+	✎ write: usedMemory1, brk.
+	✎ write: usedMemory2, brk.
+	✎ write: usedMemory3, brk.
+	✎ write: usedMemory4, brk.
+	✎ write: usedMemory5, brk.
 }.

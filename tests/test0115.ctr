@@ -2,40 +2,40 @@
 	thisBlock error: 'Dont fail.'.
 	unknown doSomething.
 } catch: {
-	Pen write: 'Caught!'.
+	✎ write: 'Caught!'.
 }, run.
 
 {
 	thisBlock error: 'Dont fail.'.
 	⚿ unknown doSomething.
 } catch: {
-	Pen write: 'Caught!'.
+	✎ write: 'Caught!'.
 }, run.
 
 {
 	thisBlock error: 'Dont fail.'.
 	unknown := 122.
 } catch: {
-	Pen write: 'Caught!'.
+	✎ write: 'Caught!'.
 }, run.
 
 
 {
 	thisBlock error: 'Dont fail.'.
 	True break.
-	Pen write: 'FAIL'.
+	✎ write: 'FAIL'.
 } catch: {
-	Pen write: 'Caught!'.
+	✎ write: 'Caught!'.
 }, run.
 
 {
 	{
 		thisBlock error: 'Dont fail.'.
 		True break.
-		Pen write: 'FAIL'.
+		✎ write: 'FAIL'.
 	} catch: { :x
 		(x = 'Dont fail.') true: { thisBlock error: 'Nested Caught!'. }.
 	}, run.
 } catch: { :e
-	Pen write: e.
+	✎ write: e.
 }, run.

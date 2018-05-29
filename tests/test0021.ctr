@@ -1,10 +1,10 @@
-(2 < 9) true: { Pen write: 'Yes, nine is less than ten.'. }.
-(9 < 2) true: { Pen write: 'My logic fails'. }.
-Pen write: (-2 + 6).
-Pen write: (-3 - -3).
+(2 < 9) true: { ✎ write: 'Yes, nine is less than ten.'. }.
+(9 < 2) true: { ✎ write: 'My logic fails'. }.
+✎ write: (-2 + 6).
+✎ write: (-3 - -3).
 ☞ TrueIsNice := 3.
-Pen write: TrueIsNice.
+✎ write: TrueIsNice.
 ☞ FalseIsBad := 'Not true!'.
-Pen write: FalseIsBad.
+✎ write: FalseIsBad.
 ☞ NilIsEmpty := 'Yep'.
-Pen write: NilIsEmpty.
+✎ write: NilIsEmpty.

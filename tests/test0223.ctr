@@ -1,11 +1,11 @@
 
-	Pen write: ( 'hello world' matches: 'hello' ), brk.
-Pen write: ( 'hello world' matches: 'bye' ), brk.
-Pen write: ( 'hello world' matches: 'h[eai]llo' ), brk.
-Pen write: ( 'hello world' matches: 'h[iao]llo' ), brk.
-Pen write: ( 'hello world' matches: 'h([eai])llo' ), brk.
-Pen write: ( 'hello world' matches: 'h([iao])llo' ), brk.
-Pen write: ( 'hello world' matches: '[:space:]' ), brk.
-{ Pen write: ( 'hello world' matches: '[:space:' ), brk. } catch: { :e
-	Pen write: e, brk.
+	✎ write: ( 'hello world' matches: 'hello' ), brk.
+✎ write: ( 'hello world' matches: 'bye' ), brk.
+✎ write: ( 'hello world' matches: 'h[eai]llo' ), brk.
+✎ write: ( 'hello world' matches: 'h[iao]llo' ), brk.
+✎ write: ( 'hello world' matches: 'h([eai])llo' ), brk.
+✎ write: ( 'hello world' matches: 'h([iao])llo' ), brk.
+✎ write: ( 'hello world' matches: '[:space:]' ), brk.
+{ ✎ write: ( 'hello world' matches: '[:space:' ), brk. } catch: { :e
+	✎ write: e, brk.
 }, run.

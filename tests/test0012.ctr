@@ -1,10 +1,10 @@
 ☞ Animal := Object new.
 Animal on: 'makeSound' do: {
-	Pen write: '?'.
+	✎ write: '?'.
 }.
 ☞ Cat := Animal new.
 Cat on: 'makeSound' do: {
-	Pen write: 'meow!'.
+	✎ write: 'meow!'.
 	⛏ `makeSound.
 }.
 ☞ Tom := Cat new.

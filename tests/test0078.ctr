@@ -1,7 +1,7 @@
 
 ☞ myVar := 123.
-Pen write: 'Start include test', brk.
+✎ write: 'Start include test', brk.
 (File new: 'tests/assets/includetesten.ctr') include.
-Pen brk write: 'End include test', brk.
-Pen write: 'Are my variables still intact?'.
-Pen brk write: myVar.
+✎ brk write: 'End include test', brk.
+✎ write: 'Are my variables still intact?'.
+✎ brk write: myVar.

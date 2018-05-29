@@ -21,4 +21,4 @@ animal on: 'name' do: {
 + (⛏ `name).
 }.
 
-Pen write: cat name.
+✎ write: cat name.

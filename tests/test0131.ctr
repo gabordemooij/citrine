@@ -1,11 +1,11 @@
 
 ☞ a := List ← (List ← 100 ; 200 ; 300) ; (List ← 9 ; 8 ; 7).
-Pen write: 'at 0,1 :'.
-Pen write: a @ 0 @ 1, brk. 
-Pen write: 'at 1,2 :'.
-Pen write: a @ 1 @ 2, brk. 
+✎ write: 'at 0,1 :'.
+✎ write: a @ 0 @ 1, brk. 
+✎ write: 'at 1,2 :'.
+✎ write: a @ 1 @ 2, brk. 
 ☞ menu := Map new.
 menu put: (List ← 'pizza' ; 'spaghetti') at: 'Italian Cuisine'.
 menu put: (List ← 'bifteki' ; 'suflaki') at: 'Greek Cuisine'.
-Pen write: 'I love ' + (menu @ 'Greek Cuisine' @ 0) + ' and ' + (menu @ 'Italian Cuisine' @ 1), brk. 
-Pen write: 'but not on the same plate.', brk.
+✎ write: 'I love ' + (menu @ 'Greek Cuisine' @ 0) + ' and ' + (menu @ 'Italian Cuisine' @ 1), brk. 
+✎ write: 'but not on the same plate.', brk.

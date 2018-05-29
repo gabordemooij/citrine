@@ -1,7 +1,7 @@
-Pen write: ('abc' byte: 1).
-Pen write: ('a' byte: 0).
-Pen write: ('zzz' byte: 10).
-Pen write: ('zzz' byte: -10).
-Pen brk.
-Pen write: (' left trimmed ' trim) + ' ' + ( 'and right trimmed' trim) + '!', brk.
-Pen write: '<html>"html & entities"</html>' html.
+✎ write: ('abc' byte: 1).
+✎ write: ('a' byte: 0).
+✎ write: ('zzz' byte: 10).
+✎ write: ('zzz' byte: -10).
+✎ brk.
+✎ write: (' left trimmed ' trim) + ' ' + ( 'and right trimmed' trim) + '!', brk.
+✎ write: '<html>"html & entities"</html>' html.

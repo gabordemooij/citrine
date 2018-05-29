@@ -1,11 +1,11 @@
 'SINGLE_LANGUAGE'.
 
-Pen write: 'Trigger an error'.
+✎ write: 'Trigger an error'.
 
 
 
 
-{ Pen write: 'aaa'. 
+{ ✎ write: 'aaa'. 
 	{
 
 		thisBlock error: 'Hi!'.

@@ -1,7 +1,7 @@
 ☞ a := List ← Object ; True ; False ; Boolean ; 1 ; Number ; 'Str' ; String ; {}.
-Pen write: (a count), brk.
+✎ write: (a count), brk.
 { :i
-	Pen write: 
+	✎ write: 
 		'a ' + 
 		((a @ i) type) +
 		' \''+((a @ i))+'\' '+
@@ -10,4 +10,4 @@ Pen write: (a count), brk.
 		' Nil.',
 		brk.
 } * (a count).
-Pen write: 'but.. Nil is.. ' + ((Nil Nil?) either: 'certainly NIL!' or: 'not NIL??'), brk.
+✎ write: 'but.. Nil is.. ' + ((Nil Nil?) either: 'certainly NIL!' or: 'not NIL??'), brk.

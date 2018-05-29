@@ -24,7 +24,7 @@ Slurp on: 'obtain' do: {
 }.
 
 
-Pen write: (Program shell: (Slurp new echo: 'Hello I can write to console using fluid API!', obtain)).
+✎ write: (Program shell: (Slurp new echo: 'Hello I can write to console using fluid API!', obtain)).
 
 
 { File new: '/tmp/from.txt', delete. } catch: {}, run.
@@ -32,23 +32,23 @@ Pen write: (Program shell: (Slurp new echo: 'Hello I can write to console using 
 
 
 File new: '/tmp/to.txt', exists false: {
-	Pen write: 'Confirmed. Target file does not exist.\n'.
+	✎ write: 'Confirmed. Target file does not exist.\n'.
 }.
 File new: '/tmp/from.txt', exists false: {
-	Pen write: 'Confirmed. Source file does not exist.\n'.
+	✎ write: 'Confirmed. Source file does not exist.\n'.
 }.
 
 
 
-💻 shell: (Slurp new touch: '/tmp/from.txt ;', echo: '"hello world" > /tmp/from.txt', obtain).
+Program shell: (Slurp new touch: '/tmp/from.txt ;', echo: '"hello world" > /tmp/from.txt', obtain).
 
 
 
-💻 shell: (Slurp new cp: '/tmp/from.txt /tmp/to.txt', obtain).
+Program shell: (Slurp new cp: '/tmp/from.txt /tmp/to.txt', obtain).
 
 File new: '/tmp/to.txt', exists true: {
-	Pen write: 'Confirmed. Target file has been created by shell.\n'.
+	✎ write: 'Confirmed. Target file has been created by shell.\n'.
 }.
 
 
-Pen write: 'Contents of file is:' + (File new: '/tmp/to.txt', read), brk.
+✎ write: 'Contents of file is:' + (File new: '/tmp/to.txt', read), brk.

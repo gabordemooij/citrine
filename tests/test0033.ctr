@@ -7,6 +7,6 @@ a on: 'init' do: {
 	y set: 123.
 	☞ q := x new.
 	q set: 666.
-	Pen write: (y get) , write: (q get).
+	✎ write: (y get) , write: (q get).
 }.
 a init.

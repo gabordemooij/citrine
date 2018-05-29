@@ -1,6 +1,6 @@
 ☞ i := Object new.
 i on: 'greet:' do: { :name
-	Pen write: 'Hello %' % name, brk.
+	✎ write: 'Hello %' % name, brk.
 }.
 ☞ a := List ← 'greet:' ; 'Visitor'.
 ☞ b := a shift.

@@ -4,9 +4,9 @@ a on: 'test1' do: {
 	x := 123.
 }.
 a test1.
-Pen write: x.
+✎ write: x.
 ☞ b := Object new.
 b on: 'test2' do: {
-	Pen write: x.
+	✎ write: x.
 }.
 b test2.

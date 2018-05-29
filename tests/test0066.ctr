@@ -1,13 +1,13 @@
-Pen write: ('Santa Clause' from: 6 to: 7). 
-Pen write: ('hello' at: 2). 
-Pen write: ('🎄🎄🎄' length). 
-Pen write: ('' bytes) + ('' length). 
-Pen write: ('papyrus' at: ( ('🎃halloween' find: 'hallo') + ('no' find: 'y') ) ). 
+✎ write: ('Santa Clause' from: 6 to: 7). 
+✎ write: ('hello' at: 2). 
+✎ write: ('🎄🎄🎄' length). 
+✎ write: ('' bytes) + ('' length). 
+✎ write: ('papyrus' at: ( ('🎃halloween' find: 'hallo') + ('no' find: 'y') ) ). 
 ☞ a := ('--a..nom..t..nom..r..nom..' replace: '..nom..' with: '=x=XX=x=').
 a := a replace: '.' with: '++'. 
 a := a replace: '' with: '++'. 
-Pen write: ('' replace: 'x' with: 'y'). 
+✎ write: ('' replace: 'x' with: 'y'). 
 a := ((a replace: '=x=XX=x=' with: '') replace: '--' with: '').
-Pen write: a.
+✎ write: a.
 a := '  a	 ' trim + '' trim + ' ' trim.
-Pen write: a.
+✎ write: a.

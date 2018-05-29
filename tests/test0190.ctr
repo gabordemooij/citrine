@@ -7,36 +7,36 @@
 
 Program tidiness: 0.
 
-Clock time.
-Clock wait: 1.
-Pen write: Program arguments, brk.
+Moment time.
+Moment wait: 1.
+✎ write: Program arguments, brk.
 Program argument: 0.
 Number random.
-✎ write: (💻 shell: 'echo \'Hello\'').
+✎ write: (Program shell: 'echo \'Hello\'').
 
 Program sweep.
 
 usedMemory1 := Program allocated.
 
 
-Clock time.
-Clock wait: 1.
-Pen write: Program arguments, brk.
+Moment time.
+Moment wait: 1.
+✎ write: Program arguments, brk.
 Program argument: 0.
 Number random.
-✎ write: (💻 shell: 'echo \'Hello\'').
+✎ write: (Program shell: 'echo \'Hello\'').
 
 
 Program sweep.
 usedMemory2 := Program allocated.
 
 
-Clock time.
-Clock wait: 1.
-Pen write: Program arguments, brk.
+Moment time.
+Moment wait: 1.
+✎ write: Program arguments, brk.
 Program argument: 0.
 Number random.
-✎ write: (💻 shell: 'echo \'Hello\'').
+✎ write: (Program shell: 'echo \'Hello\'').
 
 Program sweep.
 usedMemory3 := Program allocated.
@@ -44,7 +44,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

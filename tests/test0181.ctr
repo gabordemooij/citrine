@@ -8,9 +8,9 @@
 Program tidiness: 0.
 
 ☞ txt := 'World Salad'.
-Pen write: 'this text contains: ' + ( ( txt split: ' ' ) count ) + ' words.', brk.
+✎ write: 'this text contains: ' + ( ( txt split: ' ' ) count ) + ' words.', brk.
 txt := txt from: 6 to: 10.
-Pen write: txt, brk.
+✎ write: txt, brk.
 
 Program sweep.
 
@@ -18,18 +18,18 @@ usedMemory1 := Program allocated.
 
 
 txt := 'World Salad'.
-Pen write: 'this text contains: ' + ( ( txt split: ' ' ) count ) + ' words.', brk.
+✎ write: 'this text contains: ' + ( ( txt split: ' ' ) count ) + ' words.', brk.
 txt := txt from: 6 to: 10.
-Pen write: txt, brk.
+✎ write: txt, brk.
 
 Program sweep.
 usedMemory2 := Program allocated.
 
 
 txt := 'World Salad'.
-Pen write: 'this text contains: ' + ( ( txt split: ' ' ) count ) + ' words.', brk.
+✎ write: 'this text contains: ' + ( ( txt split: ' ' ) count ) + ' words.', brk.
 txt := txt from: 6 to: 10.
-Pen write: txt, brk.
+✎ write: txt, brk.
 
 Program sweep.
 usedMemory3 := Program allocated.
@@ -37,7 +37,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

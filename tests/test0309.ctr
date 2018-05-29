@@ -4,13 +4,13 @@ Slurp on: 'new' do: {
 }.
 Slurp learn: 'nieuw' means: 'new'.
 Slurp on: 'respond:' do: { :blah
-		(⚿ str !=: '') true: {
+		(⚿ str ≠ '') true: {
 			⚿ str append: ' '.
 		}.
 		⚿ str append: blah.
 }.
 Slurp on: 'respond:and:' do: { :blah :blahah
-		(⚿ str !=: '') true: {
+		(⚿ str ≠ '') true: {
 			⚿ str append: ' '.
 		}.
 		(blah length > 1) true: {
@@ -27,7 +27,7 @@ Slurp on: 'obtain' do: {
 	↲ buffer.
 }.
 
-💻 shell:
+Program shell:
 	(Slurp new
 		touch: '/tmp/blah.txt;',
 		chmod uog-w: '/tmp/blah.txt',
@@ -41,7 +41,7 @@ Slurp on: 'obtain' do: {
 }, run.
 
 	
-💻 shell: (
+Program shell: (
 	Slurp new chmod uog-r: '/tmp/blah.txt', obtain
 ).
 

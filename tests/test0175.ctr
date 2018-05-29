@@ -13,7 +13,7 @@ Program tidiness: 0.
 txt := txt + ' - can we use strings.. '.
 txt := txt + 'without leaking ' + x + 's of bytes ?'.
 txt append: '!!'.
-Pen write: txt.
+✎ write: txt.
 
 Program sweep.
 
@@ -24,7 +24,7 @@ txt := 'hello ' + 'world'.
 txt := txt + ' - can we use strings.. '.
 txt := txt + 'without leaking ' + x + 's of bytes ?'.
 txt append: '!!'.
-Pen write: txt.
+✎ write: txt.
 
 Program sweep.
 usedMemory2 := Program allocated.
@@ -34,7 +34,7 @@ txt := 'hello ' + 'world'.
 txt := txt + ' - can we use strings.. '.
 txt := txt + 'without leaking ' + x + 's of bytes ?'.
 txt append: '!!'.
-Pen write: txt.
+✎ write: txt.
 
 Program sweep.
 usedMemory3 := Program allocated.
@@ -42,7 +42,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

@@ -1,7 +1,7 @@
 
-Pen write: 'If hope is 0.1...\n'.
+✎ write: 'If hope is 0.1...\n'.
 ☞ hope := 0.2.
-( hope pos ) true: { Pen write: 'Still a little hope for humanity\n'. }.
-Pen write: 'If hope is -1...\n'.
+( hope pos ) true: { ✎ write: 'Still a little hope for humanity\n'. }.
+✎ write: 'If hope is -1...\n'.
 hope := -1.
-(hope neg) true: { Pen write: 'No hope left\n'. }.
+(hope neg) true: { ✎ write: 'No hope left\n'. }.

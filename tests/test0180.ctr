@@ -8,9 +8,9 @@
 Program tidiness: 0.
 
 ☞ txt := '<h1>"Hell\'o & Goodbye"</h1>'.
-Pen write: txt html, brk.
-Pen write: txt lowercase, brk.
-Pen write: txt uppercase, brk.
+✎ write: txt html, brk.
+✎ write: txt lowercase, brk.
+✎ write: txt uppercase, brk.
 
 Program sweep.
 
@@ -18,18 +18,18 @@ usedMemory1 := Program allocated.
 
 
 txt := '<h1>"Hell\'o & Goodbye"</h1>'.
-Pen write: txt html, brk.
-Pen write: txt lowercase, brk.
-Pen write: txt uppercase, brk.
+✎ write: txt html, brk.
+✎ write: txt lowercase, brk.
+✎ write: txt uppercase, brk.
 
 Program sweep.
 usedMemory2 := Program allocated.
 
 
 txt := '<h1>"Hell\'o & Goodbye"</h1>'.
-Pen write: txt html, brk.
-Pen write: txt lowercase, brk.
-Pen write: txt uppercase, brk.
+✎ write: txt html, brk.
+✎ write: txt lowercase, brk.
+✎ write: txt uppercase, brk.
 
 Program sweep.
 usedMemory3 := Program allocated.
@@ -37,7 +37,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

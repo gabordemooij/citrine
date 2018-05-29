@@ -1,11 +1,11 @@
 { :i
-	((Program argument: i) !=: '-r') true: {
+	((Program argument: i) ≠ '-r') true: {
 		(((Program argument: i) find: '.ast') > -1) true: {
-			Pen write: 'Found argument file.'.
+			✎ write: 'Found argument file.'.
 		}.
 		(((Program argument: i) find: '.ctr') > -1) true: {
-			Pen write: 'Found argument file.'.
+			✎ write: 'Found argument file.'.
 		}.
 	}.
 } * (Program arguments).
-Pen write: (Program argument: 999).
+✎ write: (Program argument: 999).

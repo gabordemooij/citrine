@@ -1,1 +1,1 @@
-(3 between: 19 - 17 and: 20 ) true: { Pen write: 'Yes.'. }.
+(3 between: 19 - 17 and: 20 ) true: { ✎ write: 'Yes.'. }.

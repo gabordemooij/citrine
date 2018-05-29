@@ -1,12 +1,12 @@
-Pen write: 'hi!'.
+✎ write: 'hi!'.
 ☞ a := 2.
 ☞ x := 2.
-{ ☞ c := 3. Pen write: 'x'. ☞ t := 1.  Program sweep. } run.
+{ ☞ c := 3. ✎ write: 'x'. ☞ t := 1.  Program sweep. } run.
 Program sweep.
 ☞ q := 2.
 a := 22.
-☞ t := { ☞ d := 3. ☞ z := 'hello'. Pen write: z.}.
+☞ t := { ☞ d := 3. ☞ z := 'hello'. ✎ write: z.}.
 t run.
 Program sweep.
-Pen write: ' a = ' + a + ' and q = ' + q + ' and x = ' + x.
+✎ write: ' a = ' + a + ' and q = ' + q + ' and x = ' + x.
 t run.

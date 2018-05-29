@@ -1,18 +1,18 @@
 ☞ a := 3.
 ☞ b := a copy.
 a -=: 1.
-Pen write: ' a = ' + a.
-Pen write: ' b = ' + b.
+✎ write: ' a = ' + a.
+✎ write: ' b = ' + b.
 a := 3.
 b := a + 4.
-Pen write: ' a = ' + a.
-Pen write: ' b = ' + b.
+✎ write: ' a = ' + a.
+✎ write: ' b = ' + b.
 ☞ x := 3.
 ☞ y := x copy.
 x +=: 10.
 y -=: 1.
-Pen write: ' x = ' + x.
-Pen write: ' y = ' + y.
+✎ write: ' x = ' + x.
+✎ write: ' y = ' + y.
 ☞ q := Object new.
 q on: 'setProperty:' do: { :x
 	⚿ prop := x.
@@ -23,4 +23,4 @@ q on: 'getProperty' do: {
 q setProperty: 9.
 ☞ p := q.
 q setProperty: 6.
-Pen write: ' p = ' + (p getProperty).
+✎ write: ' p = ' + (p getProperty).

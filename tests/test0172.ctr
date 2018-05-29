@@ -9,7 +9,7 @@ Program tidiness: 0.
 
 ☞ a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 ☞ b := a from: 2 length: 2.
-Pen write: ( b join: '|' ), write: b count.
+✎ write: ( b join: '|' ), write: b count.
 
 Program sweep.
 usedMemory1 := Program allocated.
@@ -17,7 +17,7 @@ usedMemory1 := Program allocated.
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 b := a from: 2 length: 2.
-Pen write: ( b join: '|' ), write: b count.
+✎ write: ( b join: '|' ), write: b count.
 
 
 Program sweep.
@@ -26,7 +26,7 @@ usedMemory2 := Program allocated.
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 b := a from: 2 length: 2.
-Pen write: ( b join: '|' ), write: b count.
+✎ write: ( b join: '|' ), write: b count.
 
 
 Program sweep.
@@ -35,7 +35,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

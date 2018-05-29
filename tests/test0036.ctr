@@ -9,6 +9,6 @@
 		Program sweep.
 	}.
 	garbageMaker putGarbageOnScreen.
-	Pen write: a.
+	✎ write: a.
 	Program sweep.
 } * 1000.

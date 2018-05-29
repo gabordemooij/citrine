@@ -1,10 +1,10 @@
 
 ☞ a := 0.
 {
-	Pen write: 'Block 1.\n'.
+	✎ write: 'Block 1.\n'.
 	thisBlock error: 'Err'.
 	a := 1.
 } catch: {
-	Pen write: 'Catch Block.\n'.
-	Pen write: 'a = ' + a, brk.
+	✎ write: 'Catch Block.\n'.
+	✎ write: 'a = ' + a, brk.
 }, run.

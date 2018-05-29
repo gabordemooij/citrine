@@ -7,10 +7,10 @@
 .
 
 ☞ b := a column: 1.
-Pen write: b, brk.
+✎ write: b, brk.
 
 b := a column: 20.
-Pen write: b, brk.
+✎ write: b, brk.
 
 b := a column: -100.
-Pen write: b, brk.
+✎ write: b, brk.

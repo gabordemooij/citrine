@@ -19,4 +19,4 @@ Cat on: 'greet' do: {
 }.
 
 ☞ cat := Cat new.
-Pen write: cat greet.
+✎ write: cat greet.

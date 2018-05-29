@@ -1,7 +1,7 @@
 ☞ a := 'Hello'.
 ☞ c := a.
-Pen write: a.
+✎ write: a.
 c := 'World'.
-Pen write: a.
+✎ write: a.
 ☞ a := '!'.
-Pen write: c.
+✎ write: c.

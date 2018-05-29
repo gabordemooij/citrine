@@ -2,9 +2,9 @@
 x on: 'getA' do: {
 	⚿ a := 2.
 	a := 1.
-	Pen write: a.
-	Pen write: ⚿ a.
+	✎ write: a.
+	✎ write: ⚿ a.
 }.
 ☞ a := 3.
 x getA.
-Pen write: a.
+✎ write: a.

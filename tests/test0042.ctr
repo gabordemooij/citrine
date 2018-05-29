@@ -1,9 +1,9 @@
 ☞ items := Map new.
 items put: 'black' at: 'coffee', put: 'earl grey' at: 'tea'.
-Pen write: (items at: 'coffee'), write: (items at: 'tea').
-Pen write: 'there are' + items count + ' items in the array.'.
+✎ write: (items at: 'coffee'), write: (items at: 'tea').
+✎ write: 'there are' + items count + ' items in the array.'.
 items put: 'capuccino' at: 'coffee'.
-Pen write: 'Now my coffee is.. ' + (items at: 'coffee').
+✎ write: 'Now my coffee is.. ' + (items at: 'coffee').
 items put: 'aaa' at: '1'.
 items put: 'bbb' at: '2'.
-Pen write: (items at: 'a').
+✎ write: (items at: 'a').

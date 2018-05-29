@@ -1,44 +1,44 @@
 
 
 
-Pen write: 'Number:'.
+✎ write: 'Number:'.
 ☞ a := Number + Number + 1.
 a := Number - 2.
 a := Number * 2.
 a := Number / 2.
-Pen write: a.
-Pen brk.
+✎ write: a.
+✎ brk.
 
-Pen write: 'String:'.
-Pen write: String length.
-Pen brk.
+✎ write: 'String:'.
+✎ write: String length.
+✎ brk.
 
-Pen write: 'File:'.
-Pen write: File read.
-Pen write: (File write: 'test').
-Pen write: (File append: 'test').
-Pen write: File delete.
-Pen write: File exists.
-Pen write: File include.
-Pen write: File run.
-Pen brk.
+✎ write: 'File:'.
+✎ write: File read.
+✎ write: (File write: 'test').
+✎ write: (File append: 'test').
+✎ write: File delete.
+✎ write: File exists.
+✎ write: File include.
+✎ write: File run.
+✎ brk.
 
 
-Pen write: 'Array:'.
-Pen write: List pop.
-Pen write: List count.
-Pen write: (((List push: 999) string) replace: 'Lijst' with: 'List').
-Pen write: List count.
-Pen write: List shift.
-Pen write: (List join: ',').
+✎ write: 'Array:'.
+✎ write: List pop.
+✎ write: List count.
+✎ write: (((List append: 999) string) replace: 'Lijst' with: 'List').
+✎ write: List count.
+✎ write: List shift.
+✎ write: (List join: ',').
 ☞ f := List new.
-Pen write: f count. 
-Pen brk.
+✎ write: f count. 
+✎ brk.
 
-Pen write: 'Map:'.
-Pen write: Map count.
-Pen write: (Map put: 'a' at: 'b')  count. 
-Pen brk.
+✎ write: 'Map:'.
+✎ write: Map count.
+✎ write: (Map put: 'a' at: 'b')  count. 
+✎ brk.
 
 
 

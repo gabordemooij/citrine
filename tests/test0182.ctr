@@ -10,10 +10,10 @@ Program tidiness: 0.
 ☞ txt := '1.6'.
 ☞ n := txt number.
 ☞ t := txt boolean.
-Pen write: n, brk.
-Pen write: t, brk.
-Pen write: n type, brk.
-Pen write: t type, brk.
+✎ write: n, brk.
+✎ write: t, brk.
+✎ write: n type, brk.
+✎ write: t type, brk.
 
 Program sweep.
 
@@ -23,10 +23,10 @@ usedMemory1 := Program allocated.
 txt := '1.6'.
 n := txt number.
 t := txt boolean.
-Pen write: n, brk.
-Pen write: t, brk.
-Pen write: n type, brk.
-Pen write: t type, brk.
+✎ write: n, brk.
+✎ write: t, brk.
+✎ write: n type, brk.
+✎ write: t type, brk.
 
 Program sweep.
 usedMemory2 := Program allocated.
@@ -35,10 +35,10 @@ usedMemory2 := Program allocated.
 txt := '1.6'.
 n := txt number.
 t := txt boolean.
-Pen write: n, brk.
-Pen write: t, brk.
-Pen write: n type, brk.
-Pen write: t type, brk.
+✎ write: n, brk.
+✎ write: t, brk.
+✎ write: n type, brk.
+✎ write: t type, brk.
 
 Program sweep.
 usedMemory3 := Program allocated.
@@ -46,7 +46,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.

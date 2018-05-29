@@ -6,10 +6,10 @@ Deck on: 'print' do: {
         ☞ len := ⛏ count - 1.
         { :i
                 ☞ len2 := ⛏ count - 1.
-                Pen write: 'len: '.
-                Pen write: len, brk.
-                Pen write: 'len2: '.
-                Pen write: len2, brk.
+                ✎ write: 'len: '.
+                ✎ write: len, brk.
+                ✎ write: 'len2: '.
+                ✎ write: len2, brk.
         } * len.
 }.
 

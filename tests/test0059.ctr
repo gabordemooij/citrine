@@ -1,8 +1,8 @@
 ☞ z := List new.
 {
 	☞ x := 'hello'.
-	z push: x.
+	z append: x.
 } run.
-Pen write: (z at: 0).
+✎ write: (z at: 0).
 Program sweep.
-Pen write: (z at: 0).
+✎ write: (z at: 0).

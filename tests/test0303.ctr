@@ -3,5 +3,5 @@
 ☞ A-Z := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.
 ☞ a-z := 'abcdefghijklmnopqrstuvwxyz'.
 
-☞ x := List ← A-Z ; a-z ; 𝛑 ; pi.
+☞ x := List ← A-Z ; a-z ; 𝛑 .
 ✎ write: x, brk.

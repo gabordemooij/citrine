@@ -8,4 +8,4 @@
 	}.
 	↲ result.
 }.
-Pen write: (f apply: 4). 
+✎ write: (f apply: 4). 

@@ -1,9 +1,9 @@
 
-Pen write: ( 'hello' = Nil ), brk.
-Pen write: ( 'hello' !=: Nil ), brk.
-Pen write: ( 2 > Nil ), brk.
-Pen write: ( 2 < Nil ), brk.
-Pen write: ( 2 >=: Nil ), brk.
-Pen write: ( 2 <=: Nil ), brk.
-Pen write: ( True = Nil ), brk.
-Pen write: ( False !=: Nil ), brk.
+✎ write: ( 'hello' = Nil ), brk.
+✎ write: ( 'hello' ≠ Nil ), brk.
+✎ write: ( 2 > Nil ), brk.
+✎ write: ( 2 < Nil ), brk.
+✎ write: ( 2 ≥ Nil ), brk.
+✎ write: ( 2 ≤ Nil ), brk.
+✎ write: ( True = Nil ), brk.
+✎ write: ( False ≠ Nil ), brk.

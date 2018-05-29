@@ -18,10 +18,10 @@ CoffeeMachine on: 'makeCoffee' do: { ↲ (⚿ coffeegrounds extract). }.
 
 ☞ coffeeDream := CoffeeMachine new.
 
-Pen write:
+✎ write:
 	coffeeDream 
 	makeCoffee.
 
-Pen write:
+✎ write:
 	coffeeDream 
 	makeTea.

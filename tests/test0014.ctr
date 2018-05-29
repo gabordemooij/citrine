@@ -5,7 +5,7 @@ Greeter on: 'make' do: {
 		⚿ name := aname.
 	}.
 	gr on: 'greet' do: {
-		Pen write: ⚿ name.
+		✎ write: ⚿ name.
 	}.
 	↲gr.
 }.

@@ -1,8 +1,8 @@
 
 ☞ x := 10.
 x /=: 2.
-Pen write: '10 / 2 = '.
-Pen write: x, brk.
+✎ write: '10 / 2 = '.
+✎ write: x, brk.
 x *=: 2.
-Pen write: ' * 2 makes... '.
-Pen write: x, brk.
+✎ write: ' * 2 makes... '.
+✎ write: x, brk.

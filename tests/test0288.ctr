@@ -1,5 +1,5 @@
 
 {
-	☞ x := (💻 shell: 'echo "aa" | ./ctr tests/assets/scrambler.ctr').
-	Pen write: x, brk write: x length, brk.
+	☞ x := (Program shell: 'echo "aa" | ./ctr tests/assets/scrambler.ctr').
+	✎ write: x, brk write: x length, brk.
 } * 20.

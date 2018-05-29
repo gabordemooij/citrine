@@ -3,11 +3,11 @@ Program tidiness: 4.
 
 ☞ Animal := Object new.
 Animal on: 'makeSound' do: {
-	Pen write: '?'.
+	✎ write: '?'.
 }.
 ☞ Cat := Animal new.
 Cat on: 'makeSound' do: {
-	Pen write: 'meow!'.
+	✎ write: 'meow!'.
 }.
 ☞ Tom := Cat new.
 Tom makeSound.

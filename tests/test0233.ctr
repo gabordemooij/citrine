@@ -31,4 +31,4 @@ Slurp on: 'obtain' do: {
 	↲ buffer.
 }.
 
-Pen write: ( Program shell: ( Slurp new echo hello world obtain ) ).
+✎ write: ( Program shell: ( Slurp new echo hello world obtain ) ).

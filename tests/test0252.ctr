@@ -2,7 +2,7 @@
 
 
 
-☞ clock := ⏰ new.
+☞ clock := Moment new.
 
 
 
@@ -36,8 +36,8 @@ clock2 zone: 'America/New York'.
 ✎ write: (clock format: 'Clock1 %H'), brk.
 ✎ write: (clock2 format: 'Clock2 %H'), brk.
 
-☞ clock3 := Clock new like: (Clock new zone: 'UTC', hour: 13).
-clock3 := Clock new: clock3 time.
+☞ clock3 := Moment new like: (Moment new zone: 'UTC', hour: 13).
+clock3 := Moment new: clock3 time.
 ✎ write: (clock3 format: 'Clock3 %H'), brk.
 
 

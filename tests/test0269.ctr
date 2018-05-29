@@ -1,17 +1,17 @@
 (File new: '/tmp/testje') exists false: {
-	💻 shell: 'mkdir /tmp/testje'.	
+	Program shell: 'mkdir /tmp/testje'.	
 }.
 
 (File new: '/tmp/testje/file1') exists false: {
-	💻 shell: 'touch /tmp/testje/file1'.	
+	Program shell: 'touch /tmp/testje/file1'.	
 }.
 
 (File new: '/tmp/testje/folder1') exists false: {
-	💻 shell: 'mkdir /tmp/testje/folder1'.	
+	Program shell: 'mkdir /tmp/testje/folder1'.	
 }.
 
 ☞ l := File list: '/tmp/testje'.
 l each: { :k :v
-	((v @ 'file' = 'file1') & (v @ 'type' = 'file')) true: { Pen write: 'OK', brk. }.
-	((v @ 'file' = 'folder1') & (v @ 'type' = 'folder')) true: { Pen write: 'OK', brk. }.
+	((v @ 'file' = 'file1') & (v @ 'type' = 'file')) true: { ✎ write: 'OK', brk. }.
+	((v @ 'file' = 'folder1') & (v @ 'type' = 'folder')) true: { ✎ write: 'OK', brk. }.
 }.

@@ -1,7 +1,7 @@
-(('abcdef' from: 2 to: 6 - 1) = 'cde') true: { Pen write: 'yes'.}.
-Pen write: 'a' + 1.
-Pen write: 'x' + 3.5.
-Pen write: 'y' + True.
-Pen write: 'z' + False + Nil + 2.
+(('abcdef' from: 2 to: 6 - 1) = 'cde') true: { ✎ write: 'yes'.}.
+✎ write: 'a' + 1.
+✎ write: 'x' + 3.5.
+✎ write: 'y' + True.
+✎ write: 'z' + False + Nil + 2.
 
 

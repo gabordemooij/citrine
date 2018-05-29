@@ -5,7 +5,7 @@ items put: 'red' at: 'color-3'.
 ☞ i := 0.
 ☞ s := ''.
 items each: { :key :color
-	Pen write: 'color #' + i + ' is: ' + color + ' '.
+	✎ write: 'color #' + i + ' is: ' + color + ' '.
 	i +=: 1.
 }.
-Pen write: i + ' colors!'.
+✎ write: i + ' colors!'.

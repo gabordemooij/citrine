@@ -8,11 +8,11 @@
 Program tidiness: 0.
 
 ☞ txt := 'Word Salad'.
-Pen write: 'Text Length: ' + txt length, brk.
-Pen write: 'Text Length in bytes: ' + txt bytes, brk.
-Pen write: 'Character at 2:' + ( txt @ 2 ), brk.
-Pen write: 'Byte at 2:' + ( txt byte: 2 ), brk.
-Pen write: ( txt find: 'S' ), brk.
+✎ write: 'Text Length: ' + txt length, brk.
+✎ write: 'Text Length in bytes: ' + txt bytes, brk.
+✎ write: 'Character at 2:' + ( txt @ 2 ), brk.
+✎ write: 'Byte at 2:' + ( txt byte: 2 ), brk.
+✎ write: ( txt find: 'S' ), brk.
 
 Program sweep.
 
@@ -20,22 +20,22 @@ usedMemory1 := Program allocated.
 
 
 txt := 'Word Salad'.
-Pen write: 'Text Length: ' + txt length, brk.
-Pen write: 'Text Length in bytes: ' + txt bytes, brk.
-Pen write: 'Character at 2:' + ( txt @ 2 ), brk.
-Pen write: 'Byte at 2:' + ( txt byte: 2 ), brk.
-Pen write: ( txt find: 'S' ), brk.
+✎ write: 'Text Length: ' + txt length, brk.
+✎ write: 'Text Length in bytes: ' + txt bytes, brk.
+✎ write: 'Character at 2:' + ( txt @ 2 ), brk.
+✎ write: 'Byte at 2:' + ( txt byte: 2 ), brk.
+✎ write: ( txt find: 'S' ), brk.
 
 Program sweep.
 usedMemory2 := Program allocated.
 
 
 txt := 'Word Salad'.
-Pen write: 'Text Length: ' + txt length, brk.
-Pen write: 'Text Length in bytes: ' + txt bytes, brk.
-Pen write: 'Character at 2:' + ( txt @ 2 ), brk.
-Pen write: 'Byte at 2:' + ( txt byte: 2 ), brk.
-Pen write: ( txt find: 'S' ), brk.
+✎ write: 'Text Length: ' + txt length, brk.
+✎ write: 'Text Length in bytes: ' + txt bytes, brk.
+✎ write: 'Character at 2:' + ( txt @ 2 ), brk.
+✎ write: 'Byte at 2:' + ( txt byte: 2 ), brk.
+✎ write: ( txt find: 'S' ), brk.
 
 Program sweep.
 usedMemory3 := Program allocated.
@@ -43,7 +43,7 @@ usedMemory3 := Program allocated.
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	Pen write: 'No memory leaks here'.
+	✎ write: 'No memory leaks here'.
 }, false: {
-	Pen write: 'Leaking memory...'.
+	✎ write: 'Leaking memory...'.
 }.
