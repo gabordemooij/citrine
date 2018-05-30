@@ -12,7 +12,7 @@ Program tidiness: 0.
 ✎ write: ( b join: '|' ), write: b count.
 
 Program sweep.
-usedMemory1 := Program allocated.
+usedMemory1 := (Program memory @ 0).
 
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
@@ -21,7 +21,7 @@ b := a from: 2 length: 2.
 
 
 Program sweep.
-usedMemory2 := Program allocated.
+usedMemory2 := (Program memory @ 0).
 
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
@@ -30,7 +30,7 @@ b := a from: 2 length: 2.
 
 
 Program sweep.
-usedMemory3 := Program allocated.
+usedMemory3 := (Program memory @ 0).
 
 
 

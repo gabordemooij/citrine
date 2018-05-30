@@ -12,7 +12,7 @@ a do pop shift prepend: 'hi', append: 999, done.
 ✎ write: ( a join: ',' ), brk.
 
 Program sweep.
-usedMemory1 := Program allocated.
+usedMemory1 := (Program memory @ 0).
 
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
@@ -21,7 +21,7 @@ a pop. a shift. a prepend: 'hi', append: 999.
 
 
 Program sweep.
-usedMemory2 := Program allocated.
+usedMemory2 := (Program memory @ 0).
 
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
@@ -30,7 +30,7 @@ a do pop shift prepend: 'hi', append: 999, done.
 
 
 Program sweep.
-usedMemory3 := Program allocated.
+usedMemory3 := (Program memory @ 0).
 
 
 

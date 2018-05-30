@@ -195,6 +195,29 @@ ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Program] memory
+ */
+ctr_object* ctr_gc_memory(ctr_object* myself, ctr_argument* argumentList) {
+	
+	ctr_object* list = ctr_array_new( CtrStdArray, NULL );
+	
+	ctr_argument* args = ctr_heap_allocate(sizeof(ctr_argument));
+	args->object = ctr_build_number_from_float( ctr_gc_alloc );
+	ctr_array_push( list, args );
+	args->object = ctr_build_number_from_float( ctr_gc_object_counter );
+	ctr_array_push( list, args );
+	args->object = ctr_build_number_from_float( ctr_gc_sticky_counter );
+	ctr_array_push( list, args );
+	args->object = ctr_build_number_from_float( ctr_gc_kept_counter );
+	ctr_array_push( list, args );
+	args->object = ctr_build_number_from_float( ctr_gc_dust_counter );
+	ctr_array_push( list, args );
+	ctr_heap_free(args);
+	return list;
+}
+
+
+/**
  * [Program] dust
  *
  * Returns the number of objects collected.

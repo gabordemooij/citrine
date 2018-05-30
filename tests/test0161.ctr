@@ -19,7 +19,7 @@ f close.
 
 
 Program sweep.
-usedMemory1 := Program allocated.
+usedMemory1 := (Program memory @ 0).
 
 
 
@@ -28,7 +28,7 @@ text := f read.
 f close.
 
 Program sweep.
-usedMemory2 := Program allocated.
+usedMemory2 := (Program memory @ 0).
 
 
 f := File new: '/tmp/test.txt'.
@@ -36,7 +36,7 @@ text := f read.
 f close.
 
 Program sweep.
-usedMemory3 := Program allocated.
+usedMemory3 := (Program memory @ 0).
 
 
 

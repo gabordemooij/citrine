@@ -1,24 +1,24 @@
 
 
-☞ kept1   := Program kept.
-☞ sticky1 := Program stuck.
-☞ dust1   := Program dust.
+☞ kept1   := (Program memory @ 3).
+☞ sticky1 := (Program memory @ 2).
+☞ dust1   := (Program memory @ 4).
 
-☞ kept2   := Program kept.
-☞ sticky2 := Program stuck.
-☞ dust2   := Program dust.
+☞ kept2   := (Program memory @ 3).
+☞ sticky2 := (Program memory @ 2).
+☞ dust2   := (Program memory @ 4).
 
 Program sweep.
 
 
 
-kept1   := Program kept.
-sticky1 := Program stuck.
-dust1   := Program dust.
+kept1   := (Program memory @ 3).
+sticky1 := (Program memory @ 2).
+dust1   := (Program memory @ 4).
 
-kept2   := Program kept.
-sticky2 := Program stuck.
-dust2   := Program dust.
+kept2   := (Program memory @ 3).
+sticky2 := (Program memory @ 2).
+dust2   := (Program memory @ 4).
 
 
 
@@ -31,9 +31,9 @@ Program sweep.
 
 
 
-kept2   := Program kept.
-sticky2 := Program stuck.
-dust2   := Program dust.
+kept2   := (Program memory @ 3).
+sticky2 := (Program memory @ 2).
+dust2   := (Program memory @ 4).
 
 ✎ write: (kept2 > kept1), brk. 
 ✎ write: (sticky2 - sticky1), brk. 

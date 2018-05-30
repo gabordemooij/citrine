@@ -17,7 +17,7 @@ c on: 'greet:' do: { ✎ write: 'greet!'. }.
 ☞ usedMemory5 := 0.
 
 Program sweep.
-☞ usedMemory1 := Program allocated.
+☞ usedMemory1 := (Program memory @ 0).
 
 
 
@@ -32,7 +32,7 @@ c on: 'greet:' do: { ✎ write: 'greet!'. }.
 
 
 Program sweep.
-☞ usedMemory2 := Program allocated.
+☞ usedMemory2 := (Program memory @ 0).
 
 
 
@@ -46,7 +46,7 @@ c := Object new.
 c on: 'greet:' do: { ✎ write: 'greet!'. }.
 
 Program sweep.
-☞ usedMemory3 := Program allocated.
+☞ usedMemory3 := (Program memory @ 0).
 
 
 
@@ -63,7 +63,7 @@ c on: 'greet:' do: { ✎ write: 'a different greet!', brk. }.
 
 
 Program sweep.
-☞ usedMemory4 := Program allocated.
+☞ usedMemory4 := (Program memory @ 0).
 
 
 
@@ -79,7 +79,7 @@ c on: 'greet:' do: { ✎ write: 'greet!'. }.
 
 
 Program sweep.
-☞ usedMemory5 := Program allocated.
+☞ usedMemory5 := (Program memory @ 0).
 
 
 

@@ -22,7 +22,7 @@ palette
 ✎ write: 'All colors in palette: ' + colors, brk.
 
 Program sweep.
-usedMemory1 := Program allocated.
+usedMemory1 := (Program memory @ 0).
 
 
 palette := Map new.
@@ -39,7 +39,7 @@ colors := ''.
 ✎ write: 'All colors in palette: ' + colors, brk.
 
 Program sweep.
-usedMemory2 := Program allocated.
+usedMemory2 := (Program memory @ 0).
 
 palette := Map new.
 palette 
@@ -56,7 +56,7 @@ colors := ''.
 
 
 Program sweep.
-usedMemory3 := Program allocated.
+usedMemory3 := (Program memory @ 0).
 
 
 

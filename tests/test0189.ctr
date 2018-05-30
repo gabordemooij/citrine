@@ -32,7 +32,7 @@ Boolean flip.
 
 Program sweep.
 
-usedMemory1 := Program allocated.
+usedMemory1 := (Program memory @ 0).
 
 
 money  := False.
@@ -61,7 +61,7 @@ Boolean flip.
 
 
 Program sweep.
-usedMemory2 := Program allocated.
+usedMemory2 := (Program memory @ 0).
 
 
 money  := False.
@@ -88,7 +88,7 @@ Boolean flip.
 ✎ write: PoemAboutLife, brk.
 
 Program sweep.
-usedMemory3 := Program allocated.
+usedMemory3 := (Program memory @ 0).
 
 
 

@@ -16,7 +16,7 @@ Program tidiness: 0.
 
 Program sweep.
 
-usedMemory1 := Program allocated.
+usedMemory1 := (Program memory @ 0).
 
 
 2 exponent factorial.
@@ -26,7 +26,7 @@ usedMemory1 := Program allocated.
 ✎ write: (7.9 floor), brk.
 
 Program sweep.
-usedMemory2 := Program allocated.
+usedMemory2 := (Program memory @ 0).
 
 
 2 exponent factorial.
@@ -36,7 +36,7 @@ usedMemory2 := Program allocated.
 ✎ write: (7.9 floor), brk.
 
 Program sweep.
-usedMemory3 := Program allocated.
+usedMemory3 := (Program memory @ 0).
 
 
 

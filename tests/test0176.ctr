@@ -16,7 +16,7 @@ Program tidiness: 0.
 
 Program sweep.
 
-usedMemory1 := Program allocated.
+usedMemory1 := (Program memory @ 0).
 
 
 txt := 'Word Salad'.
@@ -27,7 +27,7 @@ txt := 'Word Salad'.
 ✎ write: ( txt find: 'S' ), brk.
 
 Program sweep.
-usedMemory2 := Program allocated.
+usedMemory2 := (Program memory @ 0).
 
 
 txt := 'Word Salad'.
@@ -38,7 +38,7 @@ txt := 'Word Salad'.
 ✎ write: ( txt find: 'S' ), brk.
 
 Program sweep.
-usedMemory3 := Program allocated.
+usedMemory3 := (Program memory @ 0).
 
 
 

@@ -741,6 +741,7 @@ ctr_object* ctr_build_bool(int truth);
 ctr_object* ctr_build_nil();
 ctr_object* ctr_build_string_from_cstring( char* str );
 void ctr_gc_internal_collect();
+ctr_object* ctr_gc_memory(ctr_object* myself, ctr_argument* argumentList);
 
 
 void* ctr_heap_allocate( size_t size );

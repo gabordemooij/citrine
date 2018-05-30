@@ -14,19 +14,19 @@ f := File new: '/tmp/citrine_test_file.txt'.
 f append: 'hello'.
 
 Program sweep.
-usedMemory1 := Program allocated.
+usedMemory1 := (Program memory @ 0).
 
 
 f := File new: '/tmp/citrine_test_file.txt'.
 f append: 'hello'.
 Program sweep.
-usedMemory2 := Program allocated.
+usedMemory2 := (Program memory @ 0).
 
 
 f := File new: '/tmp/citrine_test_file.txt'.
 f append: 'hello'.
 Program sweep.
-usedMemory3 := Program allocated.
+usedMemory3 := (Program memory @ 0).
 
 
 

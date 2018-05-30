@@ -17,7 +17,7 @@ Program tidiness: 0.
 
 Program sweep.
 
-usedMemory1 := Program allocated.
+usedMemory1 := (Program memory @ 0).
 
 
 txt := '1.6'.
@@ -29,7 +29,7 @@ t := txt boolean.
 ✎ write: t type, brk.
 
 Program sweep.
-usedMemory2 := Program allocated.
+usedMemory2 := (Program memory @ 0).
 
 
 txt := '1.6'.
@@ -41,7 +41,7 @@ t := txt boolean.
 ✎ write: t type, brk.
 
 Program sweep.
-usedMemory3 := Program allocated.
+usedMemory3 := (Program memory @ 0).
 
 
 
