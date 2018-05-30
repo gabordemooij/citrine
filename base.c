@@ -1440,61 +1440,6 @@ ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] exp
- *
- * Returns the exponent of the number.
- */
-ctr_object* ctr_number_exp(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float(exp(myself->value.nvalue));
-}
-
-/**
- * [Number] sin
- *
- * Returns the sine of the number.
- */
-
-ctr_object* ctr_number_sin(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float(sin(myself->value.nvalue));
-}
-
-/**
- * [Number] cos
- *
- * Returns the cosine of the number.
- */
-ctr_object* ctr_number_cos(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float(cos(myself->value.nvalue));
-}
-
-/**
- * [Number] tan
- *
- * Caculates the tangent of a number.
- */
-ctr_object* ctr_number_tan(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float(tan(myself->value.nvalue));
-}
-
-/**
- * [Number] atan
- *
- * Caculates the arctangent of a number.
- */
-ctr_object* ctr_number_atan(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float(atan(myself->value.nvalue));
-}
-
-/**
- * [Number] log
- *
- * Calculates the logarithm of a number.
- */
-ctr_object* ctr_number_log(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float(log(myself->value.nvalue));
-}
-
-/**
  * [Number] byte
  *
  * Converts a number to a single byte.
