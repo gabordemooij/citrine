@@ -1,6 +1,6 @@
 ☞ a := 3.
 ☞ b := a copy.
-a -=: 1.
+a subtract: 1.
 ✎ write: ' a = ' + a.
 ✎ write: ' b = ' + b.
 a := 3.
@@ -9,8 +9,8 @@ b := a + 4.
 ✎ write: ' b = ' + b.
 ☞ x := 3.
 ☞ y := x copy.
-x +=: 10.
-y -=: 1.
+x add: 10.
+y subtract: 1.
 ✎ write: ' x = ' + x.
 ✎ write: ' y = ' + y.
 ☞ q := Object new.

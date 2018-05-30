@@ -12,14 +12,14 @@
 
 ☞ counter := 0.
 foods by: countries, each: { :key :value
-	counter +=: 1.
+	counter add: 1.
 }.
 
 ✎ write: ('we serve "counter" dishes' "counter": counter), brk.
 
 ☞ counter := 42.
 'TrytosortthiswithoutsegfaultingButActualNumberDe✎dsOnOS' characters sort: { :v
-	counter +=: 0.
+	counter add: 0.
 }.
 
 ✎ write: ('we sort counter dishes' counter: counter), brk.
@@ -28,7 +28,7 @@ foods by: countries, each: { :key :value
 ☞ counter := 0.
 {
 	{
-		counter +=: 1.
+		counter add: 1.
 	} * (3 + 1 + 1 * 0.5).
 } * 100.
 
@@ -38,6 +38,6 @@ foods by: countries, each: { :key :value
 
 ☞ counter := 0.
 List new fill: 142 with: 'x', join: 'o', pattern: '([x])' do: { :arr
-	{ counter +=: 1. } * 10.
+	{ counter add: 1. } * 10.
 } options: ''.
 ✎ write: ('we replace counter letters.' counter: counter), brk.

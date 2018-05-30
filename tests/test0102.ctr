@@ -5,6 +5,6 @@
 ✎ write: (motive not & opportunity not).
 
 ✎ write: (True = True).
-✎ write: (True !=: True).
-✎ write: (True !=: False).
+✎ write: (True ≠ True).
+✎ write: (True ≠ False).
 ✎ write: (True = False).

@@ -2,13 +2,13 @@
 ☞ q := 2.
 ☞ c := 0.
 ☞ f := {
-	c +=: 1.
+	c add: 1.
 	☞ x := 1.
 	(c < 3) true: {
 		☞ q := 0.
 		f run.
 	}.
-	x +=: 2.
+	x add: 2.
 	✎ write: x.
 }.
 f run.

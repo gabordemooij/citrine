@@ -10,14 +10,14 @@
 ✎ write: 'Break while-true loop, 0-4.', brk.
 xIsLessThan10 true: {
 	✎ write: 'iteration #' + x, brk.
-	x +=: 1.
+	x add: 1.
 	((x < 5) not) break.
 }.
 
 ✎ write: 'Break while-false loop, 5,4.', brk.
 { ↲(x = 0). } false: {
 	✎ write: 'iteration #' + x, brk.
-	x -=: 1.
+	x subtract: 1.
 	(x = 3) break.
 }.
 

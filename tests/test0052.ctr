@@ -6,6 +6,6 @@ items put: 'red' at: 'color-3'.
 ☞ s := ''.
 items each: { :key :color
 	✎ write: 'color #' + i + ' is: ' + color + ' '.
-	i +=: 1.
+	i add: 1.
 }.
 ✎ write: i + ' colors!'.

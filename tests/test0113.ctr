@@ -11,7 +11,7 @@
 ✎ write: 'Continue while-true, No --> before 5 and up.', brk.
 xIsLessThan10 true: {
 	✎ write: 'iteration #' + x, brk.
-	x +=: 1.
+	x add: 1.
 	((x < 5) not) continue.
 	✎ write: '-->'.
 }.
@@ -19,7 +19,7 @@ xIsLessThan10 true: {
 ✎ write: 'Continue while-false, No - before 3 only.', brk.
 { ↲(x = 0). } false: {
 	✎ write: 'iteration #' + x, brk.
-	x -=: 1.
+	x subtract: 1.
 	(x = 3) continue.
 	✎ write: '-'.
 }.

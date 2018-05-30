@@ -618,7 +618,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_OR ), &ctr_bool_or );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_XOR ), &ctr_bool_xor );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_SYMBOL_EQUALS ),&ctr_bool_eq );
-	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_NOTEQUAL ), &ctr_bool_neq );
+	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_UNEQUALS_SYMBOL ), &ctr_bool_neq );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_bool_to_number );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_bool_to_string );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_EITHEROR ), &ctr_bool_either_or );
@@ -629,19 +629,18 @@ void ctr_initialize_world() {
 	/* Number */
 	CtrStdNumber = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_PLUS ), &ctr_number_add );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_ADD ), &ctr_number_inc );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_ADD_SET ), &ctr_number_inc );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_MINUS ), &ctr_number_minus );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_SUBTRACT ), &ctr_number_dec );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_SUBTRACT_SET ), &ctr_number_dec );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_MULTIPLIER ),&ctr_number_multiply );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_MULTIPLY ),&ctr_number_mul );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_MULTIPLIER_SET ),&ctr_number_mul );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_DIVISION ), &ctr_number_divide );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_DIVIDE ), &ctr_number_div );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_DIVIDER_SET ), &ctr_number_div );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_GREATER ), &ctr_number_higherThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_GREATER_OR_EQUAL_SYMBOL ), &ctr_number_higherEqThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_LESS ), &ctr_number_lowerThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_LESS_OR_EQUAL_SYMBOL ), &ctr_number_lowerEqThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_SYMBOL_EQUALS ), &ctr_number_eq );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_NOTEQUAL ), &ctr_number_neq );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_UNEQUALS_SYMBOL ), &ctr_number_neq );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_MODULO ), &ctr_number_modulo );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_FACTORIAL ), &ctr_number_factorial );
@@ -702,7 +701,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_ASCII_LOWER_CASE ), &ctr_string_to_lower );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_SKIP ), &ctr_string_skip );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_APPEND ), &ctr_string_append );
-	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_ADD ), &ctr_string_append );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_ADD_SET ), &ctr_string_append );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_string_to_number );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TOBOOL ), &ctr_string_to_boolean );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_FIND_PATTERN_DO ), &ctr_string_find_pattern_do );

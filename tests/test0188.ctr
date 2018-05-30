@@ -15,7 +15,7 @@ Program tidiness: 0.
 ( 2 > 1 ) true:  { ✎ write: 'BLOCK 2', brk. }.
 
 ☞ i := 0.
-{ ↲( i < 3). } true: { ✎ write: i. i +=: 1. }.
+{ ↲( i < 3). } true: { ✎ write: i. i add: 1. }.
 ✎ brk.
 
 i := 3.
@@ -36,7 +36,7 @@ usedMemory1 := Program allocated.
 ( 2 > 1 ) true:  { ✎ write: 'BLOCK 2', brk. }.
 
 i := 0.
-{ ↲( i < 3). } true: { ✎ write: i. i +=: 1. }.
+{ ↲( i < 3). } true: { ✎ write: i. i add: 1. }.
 ✎ brk.
 
 i := 3.
@@ -57,7 +57,7 @@ usedMemory2 := Program allocated.
 ( 2 > 1 ) true:  { ✎ write: 'BLOCK 2', brk. }.
 
 i := 0.
-{ ↲( i < 3). } true: { ✎ write: i. i +=: 1. }.
+{ ↲( i < 3). } true: { ✎ write: i. i add: 1. }.
 ✎ brk.
 
 i := 3.
