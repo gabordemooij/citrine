@@ -3,7 +3,7 @@
 ☞ temperature := List ← '15' ; '16' ; '15'.
 ☞ weather := temperature by: city.
 ☞ cities       := weather entries sort: { :a :b  ↲ (a compare: b). }.
-☞ temperatures := weather values sort: { :a :b  ↲ (a compare: b) neg. }.
+☞ temperatures := weather values sort: { :a :b  ↲ (a compare: b) negative?. }.
 
 ✎ write: (cities join: ','), brk.
 ✎ write: (temperatures join: ','), brk.

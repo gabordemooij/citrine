@@ -137,7 +137,6 @@
 #define CTR_DICT_TIME	         "tijd" 
 #define CTR_DICT_RESPOND_TO      "reageerOp:" 
 #define CTR_DICT_RESPOND_TO_AND  "reageerOp:en:" 
-#define CTR_DICT_CALL            "aanroepen:" 
 #define CTR_DICT_SHELL           "opdrachtregel:"
 #define CTR_DICT_SWEEP           "vegen" 
 #define CTR_DICT_MEMORY_LIMIT	 "geheugenLimiet:"
