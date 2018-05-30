@@ -1221,7 +1221,7 @@ ctr_object* ctr_number_random(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] pos
+ * [Number] positive?
  *
  * Returns a boolean indicating wether the number is positive.
  * This message will return a boolean object 'True' if the recipient is
@@ -1230,7 +1230,7 @@ ctr_object* ctr_number_random(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * hope := 0.1.
- * ( hope pos ) ifTrue: { Pen write: 'Still a little hope for humanity'. }.
+ * ( hope positive? ) ifTrue: { Pen write: 'Still a little hope for humanity'. }.
  *
  * The example above will print the message because hope is higher than 0.
  */
@@ -1239,7 +1239,7 @@ ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [Number] neg
+ * [Number] negative?
  *
  * Returns a boolean indicating wether the number is negative.
  * This message will return a boolean object 'True' if the recipient is
@@ -1249,7 +1249,7 @@ ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList) 
  * Usage:
  *
  * hope := -1.
- * (hope neg) ifTrue: { Pen write: 'No hope left'. }.
+ * (hope negative?) ifTrue: { Pen write: 'No hope left'. }.
  *
  * The example above will print the message because the value of the variable
  * hope is less than 0.
