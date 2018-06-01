@@ -954,20 +954,48 @@ ctr_object* ctr_number_neq(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] between: [low] and: [high]
+ * [Number] between: [Number] and: [Number]
  *
- * Returns True if the number instance has a value between the two
- * specified values.
+ * Returns a random number between the specified boundaries,
+ * including the upper and lower boundary of the number. So,
+ * asking for a number between 0 and 10 may result in numbers like
+ * 0 and 10 as well. Only rounded numbers are returned and the
+ * boundaries will be rounded as well. So a random number between
+ * 0.5 and 1 will always result in 1. Negative numbers are allowed
+ * as well.
  *
  * Usage:
  *
- * q between: x and: y
+ * ☞ x := Number between 0 and: 10.
  */
 ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
-	ctr_argument* nextArgumentItem = argumentList->next;
-	ctr_object* nextArgument = ctr_internal_cast2number(nextArgumentItem->object);
-	return ctr_build_bool((myself->value.nvalue >=  otherNum->value.nvalue) && (myself->value.nvalue <= nextArgument->value.nvalue));
+	ctr_number upper_bound;
+	ctr_number lower_bound;
+	ctr_number upper_bound_from_zero;
+	ctr_number swap;
+	lower_bound = ctr_internal_cast2number(
+		argumentList->object
+	)->value.nvalue;
+	upper_bound = ctr_internal_cast2number(
+		argumentList->next->object
+	)->value.nvalue;
+	lower_bound = round(lower_bound);
+	upper_bound = round(upper_bound);
+	if (lower_bound > upper_bound) {
+		swap = lower_bound;
+		lower_bound = upper_bound;
+		upper_bound = swap;
+	}
+	if ( lower_bound == upper_bound ) {
+		return ctr_build_number_from_float( lower_bound );
+	}
+	upper_bound_from_zero = abs(upper_bound - lower_bound);
+	return ctr_build_number_from_float(
+		(ctr_number) (
+			arc4random_uniform( upper_bound_from_zero  + 1 ) +
+			lower_bound
+		)
+	);
 }
 
 /**
@@ -1209,15 +1237,6 @@ ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number a = myself->value.nvalue;
 	ctr_number b = otherNum->value.nvalue;
 	return ctr_build_number_from_float(pow(a,b));
-}
-
-/**
- * [Number] random
- *
- * Generates a random number, the traditional way (like rand()).
- */
-ctr_object* ctr_number_random(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float( (ctr_number) (arc4random()) );
 }
 
 /**

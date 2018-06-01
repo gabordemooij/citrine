@@ -216,55 +216,6 @@ ctr_object* ctr_gc_memory(ctr_object* myself, ctr_argument* argumentList) {
 	return list;
 }
 
-
-/**
- * [Program] dust
- *
- * Returns the number of objects collected.
- */
-ctr_object* ctr_gc_dust(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float((ctr_number) ctr_gc_dust_counter);
-}
-
-/**
- * [Program] objectCount
- *
- * Returns the total number of objects considered in the latest collect
- * cycle.
- */
-ctr_object* ctr_gc_object_count(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float((ctr_number) ctr_gc_object_counter);
-}
-
-/**
- * [Program] kept
- *
- * Returns the total number of objects that have been marked during the
- * latest cycle and have therefore been allowed to stay in memory.
- */
-ctr_object* ctr_gc_kept_count(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float((ctr_number) ctr_gc_kept_counter);
-}
-
-/**
- * [Program] allocated
- *
- * Returns the amount of allocated memory.
- */
-ctr_object* ctr_gc_kept_alloc(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float((ctr_number) ctr_gc_alloc);
-}
-
-/**
- * [Program] stuck
- *
- * Returns the total number of objects that have a sticky flag.
- * These objects will never be removed.
- */
-ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_float((ctr_number) ctr_gc_sticky_counter);
-}
-
 /**
  * [Program] memoryLimit
  *
@@ -293,26 +244,6 @@ ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_pool_init(ctr_gc_memlimit/2);
 	}
 	return myself;
-}
-
-/**
- * [Program] toString.
- *
- * Returns the number of objects that have been collected by the
- * garbage collector.
- */
-ctr_object* ctr_gc_to_string(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_cast2string( ctr_gc_dust( myself, argumentList ) );
-}
-
-/**
- * [Program] number.
- *
- * Returns the number of objects that have been collected by the
- * garbage collector.
- */
-ctr_object* ctr_gc_to_number(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_cast2number( ctr_gc_dust( myself, argumentList ) );
 }
 
 /**

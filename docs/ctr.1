@@ -6,7 +6,7 @@ ctr - run a Citrine program
 .SH SYNOPSIS
 ctr [PROGRAM]
 .SH DESCRIPTION
-Citrine*R is general purpose programming language for UNIX*R-like operating systems.
+Citrine is general purpose programming language for UNIX-like operating systems.
 .SH REFERENCE MANUAL
 Citrine has 5 literals:
 .RS 4
@@ -539,15 +539,20 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] between: [low] and: [high]
+.B [Number] between: [Number] and: [Number]
 .nf
     
-     Returns True if the number instance has a value between the two
-     specified values.
+     Returns a random number between the specified boundaries,
+     including the upper and lower boundary of the number. So,
+     asking for a number between 0 and 10 may result in numbers like
+     0 and 10 as well. Only rounded numbers are returned and the
+     boundaries will be rounded as well. So a random number between
+     0.5 and 1 will always result in 1. Negative numbers are allowed
+     as well.
     
      Usage:
     
-     q between: x and: y
+     ☞ x := Number between 0 and: 10.
 .fi
 .BR.BR.BR
 
@@ -690,14 +695,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] random
-.nf
-    
-     Generates a random number, the traditional way (like rand()).
-.fi
-.BR.BR.BR
-
-.B [Number] pos
+.B [Number] positive?
 .nf
     
      Returns a boolean indicating wether the number is positive.
@@ -707,13 +705,13 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      hope := 0.1.
-     ( hope pos ) ifTrue: { Pen write: 'Still a little hope for humanity'. }.
+     ( hope positive? ) ifTrue: { Pen write: 'Still a little hope for humanity'. }.
     
      The example above will print the message because hope is higher than 0.
 .fi
 .BR.BR.BR
 
-.B [Number] neg
+.B [Number] negative?
 .nf
     
      Returns a boolean indicating wether the number is negative.
@@ -724,7 +722,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      hope := -1.
-     (hope neg) ifTrue: { Pen write: 'No hope left'. }.
+     (hope negative?) ifTrue: { Pen write: 'No hope left'. }.
     
      The example above will print the message because the value of the variable
      hope is less than 0.
@@ -870,48 +868,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      The example above takes the square root of 49, resulting in the
      number 7.
-.fi
-.BR.BR.BR
-
-.B [Number] exp
-.nf
-    
-     Returns the exponent of the number.
-.fi
-.BR.BR.BR
-
-.B [Number] sin
-.nf
-    
-     Returns the sine of the number.
-.fi
-.BR.BR.BR
-
-.B [Number] cos
-.nf
-    
-     Returns the cosine of the number.
-.fi
-.BR.BR.BR
-
-.B [Number] tan
-.nf
-    
-     Caculates the tangent of a number.
-.fi
-.BR.BR.BR
-
-.B [Number] atan
-.nf
-    
-     Caculates the arctangent of a number.
-.fi
-.BR.BR.BR
-
-.B [Number] log
-.nf
-    
-     Calculates the logarithm of a number.
 .fi
 .BR.BR.BR
 
@@ -1549,11 +1505,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ☞ todo := List ← 'dishes' ; 'cleaning'.
     
-     var a := Array < 1 ; 2 ; 3.
 .fi
 .BR.BR.BR
 
-.B [Array] new
+.B [List] new
 .nf
     
      Creates a new array.
@@ -1580,11 +1535,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ☞ todo := List ← 'dishes' ; 'cleaning'.
     
-     var a := Array < 1 ; 2 ; 3.
 .fi
 .BR.BR.BR
 
-.B [Array] type
+.B [List] type
 .nf
     
      Returns the string 'Array'.
@@ -1592,53 +1546,53 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Array] add: [Element].
+.B [List] add: [Element].
 .nf
     
-     Alias for [Array] push. Might be more readable
+     Alias for [List] push. Might be more readable
      in some situations.
 .fi
 .BR.BR.BR
 
-.B [Array] push: [Element]
+.B [List] push: [Element]
 .nf
     
      Pushes an element on top of the array.
     
      Usage:
     
-     numbers := Array new.
+     numbers := List new.
      numbers push: 3.
 .fi
 .BR.BR.BR
 
-.B [Array] min
+.B [List] min
 .nf
     
      Returns the minimum value from an array.
     
      Usage:
     
-     a := Array ← 8 ; 4 ; 2 ; 16.
+     a := List ← 8 ; 4 ; 2 ; 16.
      m := a min. #2
     
 .fi
 .BR.BR.BR
 
-.B [Array] max
+.B [List] max
 .nf
     
      Returns the maximum value from an array.
     
      Usage:
     
-     a := Array ← 8 ; 4 ; 2 ; 16.
+     a := List ← 8 ; 4 ; 2 ; 16.
      m := a max. #16
     
 .fi
 .BR.BR.BR
 
-.B [Array] sum
+.B [List] sum
 .nf
     
      Takes the sum of an array. This message will calculate the
@@ -1646,7 +1600,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     a := Array ← 1 ; 2 ; 3.
+     a := List ← 1 ; 2 ; 3.
      s := a sum. #6
     
      In the example above, the sum of array will be stored in s and
@@ -1654,16 +1608,16 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Array] product
+.B [List] product
 .nf
     
      Takes the product of an array. On receiving this message, the
-     Array recipient object will calculate the product of its
+     List recipient object will calculate the product of its
      numerical elements.
     
      Usage:
     
-     a := Array ← 2 ; 4 ; 8.
+     a := List ← 2 ; 4 ; 8.
      p := a product. #64
     
      In the example above, the product of the array will be calculated
@@ -1672,7 +1626,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Array] map: [Block].
+.B [List] map: [Block].
 .nf
     
      Iterates over the array. Passing each element as a key-value pair to the
@@ -1691,33 +1645,29 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Array] each: [Block].
+.B [List] each: [Block].
 .nf
     
-      Alias for [Array] map: [Block].
+      Alias for [List] map: [Block].
 .fi
 .BR.BR.BR
 
-.B [Array] ← [Element1] ; [Element2] ; ...
+.B [List] ← [Element1] ; [Element2] ; ...
 .nf
     
      Creates a new instance of an array and initializes this
-     array with a first element, useful for literal-like Array
+     array with a first element, useful for literal-like List
      notations.
     
      Usage:
     
-     a := Array ← 1 ; 2 ; 3.
-    
-     or if you like ASCII-only:
-    
-     a := Array < 1 ; 2 ; 3.
+     a := List ← 1 ; 2 ; 3.
     
      Note that the ; symbol here is an alias for 'push:'.
 .fi
 .BR.BR.BR
 
-.B [Array] unshift: [Element].
+.B [List] unshift: [Element].
 .nf
     
      Unshift operation for array.
@@ -1725,13 +1675,13 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     a := Array new.
+     a := List new.
      a push: 1.
      a unshift: 3. #now contains: 3,1
 .fi
 .BR.BR.BR
 
-.B [Array] join: [Glue].
+.B [List] join: [Glue].
 .nf
     
      Joins the elements of an array together in a string
@@ -1739,13 +1689,13 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     collection := Array new.
+     collection := List new.
      collection push: 1, push: 2, push 3.
      collection join: ','. # results in string: '1,2,3'
 .fi
 .BR.BR.BR
 
-.B [Array] at: [Index]
+.B [List] at: [Index]
 .nf
     
      Returns the element in the array at the specified index.
@@ -1757,12 +1707,12 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     fruits := Array ← 'apples' ; 'oranges' ; 'bananas'.
+     fruits := List ← 'apples' ; 'oranges' ; 'bananas'.
      fruits at: 1. #returns 'oranges'
 .fi
 .BR.BR.BR
 
-.B [Array] first.
+.B [List] first.
 .nf
      
      Returns the first element of the array.
@@ -1770,7 +1720,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Array] last.
+.B [List] last.
 .nf
      
      Returns the last element of the array.
@@ -1778,7 +1728,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Array] secondLast.
+.B [List] secondLast.
 .nf
      
      Returns the second last element of the array.
@@ -1786,35 +1736,35 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Array] @ [Index]
+.B [List] @ [Index]
 .nf
     
-     Alias for [Array] at: [Index]
+     Alias for [List] at: [Index]
 .fi
 .BR.BR.BR
 
-.B [Array] put: [Element] at: [Index]
+.B [List] put: [Element] at: [Index]
 .nf
     
      Puts a value in the array at the specified index.
-     Array will be automatically expanded if the index is higher than
+     List will be automatically expanded if the index is higher than
      the maximum index of the array.
     
      Usage:
     
-     fruits := Array new.
+     fruits := List new.
      fruits put: 'apples' at: 5.
 .fi
 .BR.BR.BR
 
-.B [Array] pop
+.B [List] pop
 .nf
     
      Pops off the last element of the array.
 .fi
 .BR.BR.BR
 
-.B [Array] - [Number]
+.B [List] - [Number]
 .nf
     
      Deletes the element specified by the index number and
@@ -1823,26 +1773,26 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     x := Array ← 1 ; 2 ; 3.
+     x := List ← 1 ; 2 ; 3.
      x - 1. #1 ; 3
 .fi
 .BR.BR.BR
 
-.B [Array] shift
+.B [List] shift
 .nf
     
      Shifts off the first element of the array.
 .fi
 .BR.BR.BR
 
-.B [Array] count
+.B [List] count
 .nf
     
      Returns the number of elements in the array.
 .fi
 .BR.BR.BR
 
-.B [Array] from: [Begin] length: [End]
+.B [List] from: [Begin] length: [End]
 .nf
     
      Copies part of an array indicated by from and to and
@@ -1850,7 +1800,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Array] replace: [Number] length: [Number] with: [Array].
+.B [List] replace: [Number] length: [Number] with: [List].
 .nf
     
      Returns a copy of the array with the specified elements replaced.
@@ -1865,22 +1815,22 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     ☞ cakes := Array ← 'apple' ; 'berry' ; 'choco' ; 'cheese'.
+     ☞ cakes := List ← 'apple' ; 'berry' ; 'choco' ; 'cheese'.
      #apple, cinnamon, pineapple, cheese
-     ☞ buy := cakes replace: 1 length: 2 with: ( Array ← 'cinnamon' ; 'pineapple' ).
+     ☞ buy := cakes replace: 1 length: 2 with: ( List ← 'cinnamon' ; 'pineapple' ).
      #apple, cinnamon, pineapple
-     ☞ buy := cakes replace: 1 length: 12 with: ( Array ← 'cinnamon' ; 'pineapple' ).
+     ☞ buy := cakes replace: 1 length: 12 with: ( List ← 'cinnamon' ; 'pineapple' ).
      #apple, berry
-     ☞ buy := cakes replace: 2 length: 10 with: ( Array new ).
+     ☞ buy := cakes replace: 2 length: 10 with: ( List new ).
      #berry, choco, cheese
-     ☞ buy := cakes replace: '' length: '1' with: ( Array new ).
+     ☞ buy := cakes replace: '' length: '1' with: ( List new ).
      #error...
      ☞ buy := cakes replace: '' length: '1' with: 'x'.
     
 .fi
 .BR.BR.BR
 
-.B [Array] + [Array]
+.B [List] + [List]
 .nf
     
      Returns a new array, containing elements of itself and the other
@@ -1888,22 +1838,22 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Array] by: [Array].
+.B [List] by: [List].
 .nf
     
-     Combines the first array with the second one thus creating
+     Combines the first list with the second one thus creating
      a map. The keys of the newly generated map will be provided by the
      first array while the values are extracted from the second one.
     
      Usage:
     
-     ☞ city        := Array ← 'London' ; 'Paris' ; 'Berlin'.
-     ☞ temperature := Array ← '15' ; '16' ; '15'.
+     ☞ city        := List ← 'London' ; 'Paris' ; 'Berlin'.
+     ☞ temperature := List ← '15' ; '16' ; '15'.
      ☞ weather := temperature by: city.
 .fi
 .BR.BR.BR
 
-.B [Array] copy
+.B [List] copy
 .nf
     
      Copies the array. The array object will answer this message by
@@ -1915,7 +1865,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     ☞ a := Array ← 1 ; 2 ; 3.
+     ☞ a := List ← 1 ; 2 ; 3.
      ☞ b := a copy.
      b put: 999 at: 1. #b @ 1 = 999
 .fi
@@ -1923,7 +1873,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B [Array] sort: [Block]
+.B [List] sort: [Block]
 .nf
     
      Sorts the contents of an array using a sort block.
@@ -1931,7 +1881,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Array] toString
+.B [List] string
 .nf
      
      Returns a string representation of the array and its contents.
@@ -1940,30 +1890,30 @@ The following messages are part of the Core API of the Citrine Programming Langu
      
      Usage:
      
-     a := Array ← 'hello' ; 'world'.
-     b := a toString.
+     a := List ← 'hello' ; 'world'.
+     b := a string.
      c := b eval.
      x := c @ 1. #world
      
-     toString messages are implicitly send by some objects, for instance when
-     attempting to write an Array using a Pen.
+     'string' messages are implicitly send by some objects, for instance when
+     attempting to write a List using a Pen.
     
      You can also use the alias 'serialize'.
 .fi
 .BR.BR.BR
 
-.B [Array] fill: [Number] with: [Object]
+.B [List] fill: [Number] with: [Object]
 .nf
     
      Fills the array with the specified number of objects.
     
      Usage:
     
-     ☞ a := Array new fill: 42 with: 'x'.
+     ☞ a := List new fill: 42 with: 'x'.
 .fi
 .BR.BR.BR
 
-.B [Array] column: [Number]
+.B [List] column: [Number]
 .nf
     
      Extracts the specified column from the array.
@@ -1973,15 +1923,15 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     ☞ a := Array ←
-    	(Array ← 1 ; 2 ; 3) ;
-    	(Array ← 4 ; 5 ; 6) ;
-    	(Array ← 7 ; 8 ; 9).
+     ☞ a := List ←
+    	(List ← 1 ; 2 ; 3) ;
+    	(List ← 4 ; 5 ; 6) ;
+    	(List ← 7 ; 8 ; 9).
      ☞ b := a column: 1. #2,5,8
 .fi
 .BR.BR.BR
 
-.B [Array] indexOf: [Object].
+.B [List] indexOf: [Object].
 .nf
     
      Checks whether the specified object occurs in the array and returns the index number
@@ -1990,23 +1940,23 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     ☞ colors := Array ← 'red' ; 'green' ; 'blue' ; 3 ; (Array new) ; False ; Nil.
+     ☞ colors := List ← 'red' ; 'green' ; 'blue' ; 3 ; (List new) ; False ; Nil.
     
      ✎ write: (colors indexOf: 'green'), brk. #1
      ✎ write: (colors indexOf: 'blue'), brk. #2
      ✎ write: (colors indexOf: 'red'), brk. #0
      ✎ write: (colors indexOf: 3), brk. #3
-     ✎ write: (colors indexOf: (Array new)), brk. #4
+     ✎ write: (colors indexOf: (List new)), brk. #4
      ✎ write: (colors indexOf: 'False'), brk. #5
      ✎ write: (colors indexOf: Nil), brk. #6
      ✎ write: (colors indexOf: 'purple'), brk. #-1
 .fi
 .BR.BR.BR
 
-.B [Array] serialize
+.B [List] serialize
 .nf
     
-     Alias for [Array] toString.
+     Alias for [List] toString.
     
      See 'Map serialize' for the reason for this alias.
 .fi
@@ -2086,8 +2036,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     ☞ city        := Array ← 'London' ; 'Paris' ; 'Berlin'.
-     ☞ temperature := Array ← '15' ; '16' ; '15'.
+     ☞ city        := List ← 'London' ; 'Paris' ; 'Berlin'.
+     ☞ temperature := List ← '15' ; '16' ; '15'.
     
      ☞ weather := temperature by: city.
      cities := weather entries sort: {
@@ -2105,8 +2055,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     ☞ city        := Array ← 'London' ; 'Paris' ; 'Berlin'.
-     ☞ temperature := Array ← '15' ; '16' ; '15'.
+     ☞ city        := List ← 'London' ; 'Paris' ; 'Berlin'.
+     ☞ temperature := List ← '15' ; '16' ; '15'.
     
      ☞ weather := temperature by: city.
      temperatures := weather values sort: {
@@ -2195,9 +2145,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Alias for [Map] toString.
      A toString message, sometimes implicitly send by other messages like
-     'Pen write:' will give you a serialized version of the Map or Array.
+     'Pen write:' will give you a serialized version of the Map or List.
      This is far more useful than a 'dumb' textual description of the object like
-     'array' or 'object'. However, when working with very large Maps or Arrays
+     'array' or 'object'. However, when working with very large Maps or Lists
      accidentally dumping the entire contents can be annoying, in this case you can
      override the toString behaviour but you don't have to remap the original, you
      can just use this alias. Also, this alias can be used if you want to make
@@ -2473,41 +2423,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Program] dust
+.B [Program] memory
 .nf
-    
-     Returns the number of objects collected.
-.fi
-.BR.BR.BR
-
-.B [Program] objectCount
-.nf
-    
-     Returns the total number of objects considered in the latest collect
-     cycle.
-.fi
-.BR.BR.BR
-
-.B [Program] kept
-.nf
-    
-     Returns the total number of objects that have been marked during the
-     latest cycle and have therefore been allowed to stay in memory.
-.fi
-.BR.BR.BR
-
-.B [Program] allocated
-.nf
-    
-     Returns the amount of allocated memory.
-.fi
-.BR.BR.BR
-
-.B [Program] stuck
-.nf
-    
-     Returns the total number of objects that have a sticky flag.
-     These objects will never be removed.
 .fi
 .BR.BR.BR
 
@@ -2529,22 +2446,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
      1 - Activate Garbage Collector (default)
      4 - Activate Garbage Collector for every single step (testing only)
      8 - Activate experimental Pool Memory Allocation Manager (experimental!)
-.fi
-.BR.BR.BR
-
-.B [Program] toString.
-.nf
-    
-     Returns the number of objects that have been collected by the
-     garbage collector.
-.fi
-.BR.BR.BR
-
-.B [Program] number.
-.nf
-    
-     Returns the number of objects that have been collected by the
-     garbage collector.
 .fi
 .BR.BR.BR
 
@@ -3110,50 +3011,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.BR.BR.BR
-
-.B Curl new.
-.nf
-    
-     Creates new Curl handle via curl_easy_init
-    
-.fi
-.BR.BR.BR
-
-.B [Curl] cleanup.
-.nf
-    
-     Destroy Curl handle in resource
-    
-.fi
-.BR.BR.BR
-
-.B [Curl] type.
-.nf
-    
-     Returns 'Curl' as the type string
-    
-.fi
-.BR.BR.BR
-
-.B [Curl] respondTo: [string] with: [Object]
-.nf
-    
-     Default response sets Curl option
-    
-.fi
-.BR.BR.BR
-
-.B [Curl] perform.
-.nf
-    
-     Performs a blocking file transfer
-    
-.fi
-.BR.BR.BR
-
-.BR.BR.BR
-
 .B [Json] new
 .nf
     
@@ -3196,28 +3053,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      In this case, we are going to add the Json object to the
      world.
-.fi
-.BR.BR.BR
-
-.B [Pg] new: [String].
-.nf
-    
-     Creates a new PostgreSQL connection using the specified connection details
-     in the string.
-.fi
-.BR.BR.BR
-
-.B [Pg] query: [String] parameters: [Array].
-.nf
-    
-     Executes the query with specified parameters.
-.fi
-.BR.BR.BR
-
-.B [Pg] close.
-.nf
-    
-     Closes connection.
 .fi
 
 .SH BUGS

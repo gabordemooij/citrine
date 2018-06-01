@@ -1,5 +1,5 @@
-💻 memory: 600000.
-💻 tidiness: 4.
+Program memory: 600000.
+Program tidiness: 4.
 ☞ template := (File new: 'template.html') read.
 ☞ menu  := '<ul>'.
 ☞ files := List ←
@@ -8,10 +8,8 @@
 			'../file.c' ;
 			'../system.c' ;
 			'../plugins/request/request.c' ;
-			'../plugins/curl/src/curl.c' ;
-			'../plugins/jsmn/jsmn.c' ;
-			'../plugins/pg/pg.c'.
-
+			'../plugins/jsmn/jsmn.c'.
+			
 ☞ files each: { :index :file
 	
 	☞  f := File new: file.
@@ -52,7 +50,7 @@
 							contentLine := contentLine replace: 'Usage:' with: '<br>Usage:</p><pre>'.
 						}.
 						content append: contentLine + '\n'.
-						n +=: 1.
+						n add: 1.
 				}.
 				endsWithCode true: {
 					content append: '</pre><p>'.

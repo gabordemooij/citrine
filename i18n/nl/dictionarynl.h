@@ -215,6 +215,5 @@
 #define CTR_DICT_APPLY_TO_AND_AND                "toepassen:en:en:"
 #define CTR_DICT_ENVIRONMENT_VARIABLE            "omgeving:"
 #define CTR_DICT_SET_ENVIRONMENT_VARIABLE        "omgeving:is:" 
-#define CTR_DICT_RAW_RANDOM_NUMBER               "willekeurig" 
 #define CTR_DICT_RESPOND_TO_AND_AND              "reageer:en:en:"
 

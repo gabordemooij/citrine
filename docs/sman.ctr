@@ -1,6 +1,6 @@
 # Start: ctr sman.ctr > ctr.1 ;mandoc -O style=ctrstyle.css -Thtml ctr.1 > docs.html ;mandoc -a ctr.1
-💻 memory: 600000.
-💻 tidiness: 4.
+Program memory: 600000.
+Program tidiness: 4.
 ✎ write: '
 .\" Manpage for ctr.
 .TH man 1 "1 June 2017" "1.0" "CTR man page"
@@ -36,9 +36,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 			'../file.c' ;
 			'../system.c' ;
 			'../plugins/request/request.c' ;
-			'../plugins/curl/src/curl.c' ;
-			'../plugins/jsmn/jsmn.c' ;
-			'../plugins/pg/pg.c'.
+			'../plugins/jsmn/jsmn.c'.
 
 files each: { :index :file
 	☞ f := File new: file.
@@ -64,7 +62,7 @@ files each: { :index :file
 				true: {
 						line := line replace: '\\' with: '\\\\'.
 						✎ write: '    '+(line skip: 2), brk.
-						n +=: 1.
+						n add: 1.
 				}.
 				✎ write: '.fi', brk.
 			}.

@@ -15,7 +15,7 @@ Program tidiness: 0.
 ✎ write: (4 even), brk.
 ✎ write: (-1 positive?), brk.
 ✎ write: (-2 negative?), brk.
-✎ write: (3 between: 4 and: 5), brk.
+✎ write: ((3 ≥ 4) & (3 ≤ 5)), brk.
 ✎ write: (3 = 3), brk.
 ✎ write: (3 ≠ 3), brk.
 ✎ write: 1 boolean, brk.
@@ -33,7 +33,7 @@ usedMemory1 := (Program memory @ 0).
 ✎ write: (4 even), brk.
 ✎ write: (-1 positive?), brk.
 ✎ write: (-2 negative?), brk.
-✎ write: (3 between: 4 and: 5), brk.
+✎ write: ((3 ≥ 4) & (3 ≤ 5)), brk.
 ✎ write: (3 = 3), brk.
 ✎ write: (3 ≠ 3), brk.
 ✎ write: 1 boolean, brk.
@@ -50,7 +50,7 @@ usedMemory2 := (Program memory @ 0).
 ✎ write: (4 even), brk.
 ✎ write: (-1 positive?), brk.
 ✎ write: (-2 negative?), brk.
-✎ write: (3 between: 4 and: 5), brk.
+✎ write: ((3 ≥ 4) & (3 ≤ 5)), brk.
 ✎ write: (3 = 3), brk.
 ✎ write: (3 ≠ 3), brk.
 ✎ write: 1 boolean, brk.

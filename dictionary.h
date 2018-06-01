@@ -215,7 +215,6 @@
 #define CTR_DICT_APPLY_TO_AND_AND                "apply:and:and:"
 #define CTR_DICT_ENVIRONMENT_VARIABLE            "env:"
 #define CTR_DICT_SET_ENVIRONMENT_VARIABLE        "env:val:" 
-#define CTR_DICT_RAW_RANDOM_NUMBER               "random" 
 #define CTR_DICT_RESPOND_TO_AND_AND              "respond:and:and:"
 
 

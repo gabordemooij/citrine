@@ -3,8 +3,11 @@
 ☞ str := 'write:'.
 ✎ message: 'write:' arguments: (List ← 'Hello World'), brk. 
 
+Number on: 'isbetween:and:' do: { :a :b
+	↲ ((⛏ ≥ a) & (⛏ ≤ b)).
+}.
 
-str := 'between:and:'.
+str := 'isbetween:and:'.
 ✎ write: (3 message: str arguments: (List ← 2 ; 8)), brk.
 ✎ write: (3 message: str arguments: (List ← 1 ; 2)), brk.
 
