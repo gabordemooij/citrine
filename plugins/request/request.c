@@ -12,6 +12,12 @@
 #include <syslog.h>
 #include "../../citrine.h"
 
+#ifdef langNL
+#include "i18n/nl/dictionary.h"
+#else
+#include "i18n/en/dictionary.h"
+#endif
+
 #include "ccgi-1.2/ccgi.h"
 
 
@@ -313,16 +319,16 @@ ctr_object* ctr_request_serve(ctr_object* myself, ctr_argument* argumentList) {
 void begin(){
 	ctr_object* requestObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	requestObject->link = CtrStdObject;
-	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "get:" ), &ctr_request_get_string );
-	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "getArray:" ), &ctr_request_get_array );
-	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "cookie:" ), &ctr_request_cookie_string );
-	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "cookieArray:" ), &ctr_request_cookie_array );
-	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "post:" ), &ctr_request_post_string );
-	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "file:" ), &ctr_request_file );
-	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "postArray:" ), &ctr_request_post_array );
-	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "serverOption:is:" ), &ctr_request_server_option );
-	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( "host:listen:pid:callback:" ), &ctr_request_serve );
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Request" ), requestObject, 0);
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_HTTP_REQUEST_GET_SET ), &ctr_request_get_string );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_HTTP_REQUEST_GET_LIST_SET ), &ctr_request_get_array );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_HTTP_REQUEST_COOKIE_SET ), &ctr_request_cookie_string );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_HTTP_REQUEST_COOKIE_LIST_SET ), &ctr_request_cookie_array );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_HTTP_REQUEST_POST_SET ), &ctr_request_post_string );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_HTTP_REQUEST_UPLOAD_SET ), &ctr_request_file );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_HTTP_REQUEST_POST_LIST_SET ), &ctr_request_post_array );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_HTTP_REQUEST_OPTION_IS_SET ), &ctr_request_server_option );
+	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_PLUGIN_REQUEST_SERVE ), &ctr_request_serve );
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PLUGIN_REQUEST ), requestObject, 0);
 	varlistGet = CGI_get_query(NULL);
 	varlistPost = CGI_get_post(NULL,"/tmp/_upXXXXXX");
 	varlistCookie = CGI_get_cookie(NULL);

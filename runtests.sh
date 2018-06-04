@@ -35,11 +35,19 @@ cd plugins/request/ccgi-1.2;
 cc -c ccgi.c -Wall	-Werror -fPIC -o ccgi.o
 cc -c prefork.c -Wall -Werror -fPIC -o prefork.o
 cd ..
-cc -c request.c -Wall -Werror -fPIC -o request.o
+
+cc -c request.c -Wall -Werror -DlangEN -fPIC -o request.o
 cc ${LDFLAGS} -o libctrrequest.so request.o ccgi-1.2/ccgi.o ccgi-1.2/prefork.o
+
+cc -c request.c -Wall -Werror -DlangNL -fPIC -o verzoek.o
+cc ${LDFLAGS} -o libctrverzoek.so verzoek.o ccgi-1.2/ccgi.o ccgi-1.2/prefork.o
+
 cd ..
 cd ..
+
 cp plugins/request/libctrrequest.so mods/request/libctrrequest.so
+cp plugins/request/libctrverzoek.so mods/verzoek/libctrverzoek.so
+
 
 #json test
 cd plugins/jsmn/jsmn;
