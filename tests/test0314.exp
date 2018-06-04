@@ -1,4 +1,4 @@
 Uncatched error has occurred.
 Bad token, JSON string is corrupted.
-#2 parse: (tests/test0314.ctr: 22)
+#2 to object: (tests/test0314.ctr: 22)
 #1 g (tests/test0314.ctr: 22)

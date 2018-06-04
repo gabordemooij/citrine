@@ -19,5 +19,5 @@
 	}
 }'.
 
-☞ g := Json parse: garden.
+☞ g := Json to object: garden.
 ✎ write: g, brk.
