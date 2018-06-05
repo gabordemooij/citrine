@@ -210,8 +210,8 @@
 #define CTR_DICT_CONTAINS_PATTERN                "matches:"
 #define CTR_DICT_CONTAINS                        "contains:"
 #define CTR_DICT_APPLY_TO_AND_AND                "apply:and:and:"
-#define CTR_DICT_ENVIRONMENT_VARIABLE            "env:"
-#define CTR_DICT_SET_ENVIRONMENT_VARIABLE        "env:val:" 
+#define CTR_DICT_ENVIRONMENT_VARIABLE            "setting:"
+#define CTR_DICT_SET_ENVIRONMENT_VARIABLE        "setting:value:" 
 #define CTR_DICT_RESPOND_TO_AND_AND              "respond:and:and:"
 
 

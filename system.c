@@ -325,7 +325,7 @@ ctr_object* ctr_program_exit(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Program] env: [String]
+ * [Program] setting: [String]
  *
  * Returns the value of an environment variable.
  *
@@ -350,7 +350,7 @@ ctr_object* ctr_program_get_env(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [Program] env: [Key] val: [Value]
+ * [Program] setting: [Key] value: [Value]
  *
  * Sets the value of an environment variable.
  */

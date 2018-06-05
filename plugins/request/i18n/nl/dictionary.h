@@ -5,6 +5,5 @@
 #define CTR_DICT_HTTP_REQUEST_POST_SET             "zending:"
 #define CTR_DICT_HTTP_REQUEST_POST_LIST_SET        "zendingen:"
 #define CTR_DICT_HTTP_REQUEST_UPLOAD_SET           "bestand:"
-#define CTR_DICT_HTTP_REQUEST_OPTION_IS_SET        "instelling:waarde:"
 #define CTR_DICT_PLUGIN_REQUEST_SERVE "host:poort:pid:routine:"
 #define CTR_DICT_PLUGIN_REQUEST       "Verzoek"

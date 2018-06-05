@@ -5,6 +5,5 @@
 #define CTR_DICT_HTTP_REQUEST_POST_SET             "post:"
 #define CTR_DICT_HTTP_REQUEST_POST_LIST_SET        "post list:"
 #define CTR_DICT_HTTP_REQUEST_UPLOAD_SET           "file:"
-#define CTR_DICT_HTTP_REQUEST_OPTION_IS_SET        "setting:value:"
 #define CTR_DICT_PLUGIN_REQUEST_SERVE "host:listen:pid:callback:"
 #define CTR_DICT_PLUGIN_REQUEST       "Request"
