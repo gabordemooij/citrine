@@ -7,7 +7,7 @@
 	put: (List ← ((Map new) put: 'treasure' at: 'hidden') ; 2) at: 'four'. 
 ☞ str := map string.
 ☞ map2 := str eval.
-✎ write: map2 @ 'one' @ 0.
-✎ write: map2 @ 'one' @ 1.
-✎ write: map2 @ 'four' @ 0 @ 'hidden'.
-✎ write: map2 @ 'one' @ 2 @ 2.
+✎ write: map2 ? 'one' ? 0.
+✎ write: map2 ? 'one' ? 1.
+✎ write: map2 ? 'four' ? 0 ? 'hidden'.
+✎ write: map2 ? 'one' ? 2 ? 2.

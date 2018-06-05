@@ -6,7 +6,7 @@
 ✎ write: b, brk. 
 b := b eval.
 
-✎ write: b @ 2, brk. 
+✎ write: b ? 2, brk. 
 
 ✎ write: (( List ← 1 ; 2 ; 3 )), brk. 
 
@@ -16,7 +16,7 @@ b := b eval.
 ✎ write: x, brk. 
 x := x eval.
 
-✎ write: x @ 1 @ 0, brk. 
+✎ write: x ? 1 ? 0, brk. 
 
 ☞ y := (Map new) put: (List ← 1) at: (List ← 2).
 ✎ write: y, brk. 

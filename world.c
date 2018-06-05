@@ -40,7 +40,7 @@ ctr_object* ctr_first_object;
 char CtrHashKey[16];
 
 /**
- * @internal
+ * ?internal
  *
  * ReadFile
  *
@@ -76,7 +76,7 @@ char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
 }
 
 /**
- * @internal
+ * ?internal
  *
  * InternalObjectIsEqual
  *
@@ -115,7 +115,7 @@ int ctr_internal_object_is_equal(ctr_object* object1, ctr_object* object2) {
 }
 
 /**
- * @internal
+ * ?internal
  *
  * InternalObjectIndexHash
  *
@@ -128,7 +128,7 @@ uint64_t ctr_internal_index_hash(ctr_object* key) {
 }
 
 /**
- * @internal
+ * ?internal
  *
  * InternalObjectFindProperty
  *
@@ -160,7 +160,7 @@ ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key
 
 
 /**
- * @internal
+ * ?internal
  *
  * InternalObjectDeleteProperty
  *
@@ -221,7 +221,7 @@ void ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int
 }
 
 /**
- * @internal
+ * ?internal
  *
  * InternalObjectAddProperty
  *
@@ -259,7 +259,7 @@ void ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_ob
 }
 
 /**
- * @internal
+ * ?internal
  *
  * InternalObjectSetProperty
  *
@@ -271,7 +271,7 @@ void ctr_internal_object_set_property(ctr_object* owner, ctr_object* key, ctr_ob
 }
 
 /**
- * @internal
+ * ?internal
  *
  * InternalMemMem
  *
@@ -299,7 +299,7 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
 }
 
 /**
- * @internal
+ * ?internal
  *
  * InternalObjectCreate
  *
@@ -336,7 +336,7 @@ ctr_object* ctr_internal_create_object(int type) {
 }
 
 /**
- * @internal
+ * ?internal
  *
  * InternalFunctionCreate
  *
@@ -349,7 +349,7 @@ void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func
 }
 
 /**
- * @internal
+ * ?internal
  *
  * InternalNumberCast
  *
@@ -369,7 +369,7 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
 }
 
 /**
- * @internal
+ * ?internal
  *
  * InternalStringCast
  *
@@ -389,7 +389,7 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 }
 
 /**
- * @internal
+ * ?internal
  *
  * InternalBooleanCast
  *
@@ -409,7 +409,7 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
 }
 
 /**
- * @internal
+ * ?internal
  *
  * ContextOpen
  *
@@ -427,7 +427,7 @@ void ctr_open_context() {
 }
 
 /**
- * @internal
+ * ?internal
  *
  * ContextClose
  *
@@ -440,7 +440,7 @@ void ctr_close_context() {
 }
 
 /**
- * @internal
+ * ?internal
  *
  * CTRFind
  *
@@ -481,7 +481,7 @@ ctr_object* ctr_find(ctr_object* key) {
 }
 
 /**
- * @internal
+ * ?internal
  *
  * CTRFindInMy
  *
@@ -512,7 +512,7 @@ ctr_object* ctr_find_in_my(ctr_object* key) {
 }
 
 /**
- * @internal
+ * ?internal
  *
  * CTRSetBasic
  *
@@ -549,7 +549,7 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 }
 
 /**
- * @internal
+ * ?internal
  *
  * WorldInitialize
  *
@@ -616,7 +616,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_AND ), &ctr_bool_and );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_NOR ), &ctr_bool_nor );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_OR ), &ctr_bool_or );
-	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_XOR ), &ctr_bool_xor );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_SYMBOL_EQUALS ),&ctr_bool_eq );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_UNEQUALS_SYMBOL ), &ctr_bool_neq );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_bool_to_number );
@@ -684,7 +683,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TRIM ), &ctr_string_trim );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_HTML_ESCAPE ), &ctr_string_html_escape );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_AT ), &ctr_string_at );
-	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_AT_SYMBOL ), &ctr_string_at );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_BYTE_AT ), &ctr_string_byte_at );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_INDEX_OF ), &ctr_string_index_of );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_LAST_INDEX_OF ), &ctr_string_last_index_of );
@@ -928,7 +926,7 @@ void ctr_initialize_world() {
 }
 
 /**
- * @internal
+ * ?internal
  *
  * CTRMessageSend
  *
@@ -1029,7 +1027,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 
 
 /**
- * @internal
+ * ?internal
  *
  * CTRValueAssignment
  *
@@ -1046,7 +1044,7 @@ ctr_object* ctr_assign_value(ctr_object* key, ctr_object* o) {
 
 
 /**
- * @internal
+ * ?internal
  *
  * CTRAssignValueObject
  *
@@ -1063,7 +1061,7 @@ ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* o) {
 }
 
 /**
- * @internal
+ * ?internal
  *
  * CTRAssignValueObjectLocal
  *

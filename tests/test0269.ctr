@@ -12,6 +12,6 @@
 
 ☞ l := File list: '/tmp/testje'.
 l each: { :k :v
-	((v @ 'file' = 'file1') & (v @ 'type' = 'file')) true: { ✎ write: 'OK', brk. }.
-	((v @ 'file' = 'folder1') & (v @ 'type' = 'folder')) true: { ✎ write: 'OK', brk. }.
+	((v ? 'file' = 'file1') & (v ? 'type' = 'file')) true: { ✎ write: 'OK', brk. }.
+	((v ? 'file' = 'folder1') & (v ? 'type' = 'folder')) true: { ✎ write: 'OK', brk. }.
 }.

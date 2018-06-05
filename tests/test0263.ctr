@@ -4,5 +4,5 @@ i on: 'greet:' do: { :name
 }.
 ☞ a := List ← 'greet:' ; 'Visitor'.
 ☞ b := a shift.
-✎ write: a @ 0, brk.
+✎ write: a ? 0, brk.
 i message: b arguments: a.

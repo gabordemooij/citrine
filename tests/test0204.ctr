@@ -2,10 +2,10 @@
 
 ☞ a := List ← 1 ; 2 ; 3.
 ✎ write: a count, brk.
-✎ write: a @ 1, brk.
+✎ write: a ? 1, brk.
 a shift.
 ✎ write: a count, brk.
-✎ write: a @ 1, brk.
+✎ write: a ? 1, brk.
 a shift.
 ✎ write: a count, brk.
-✎ write: a @ 1, brk.
+✎ write: a ? 1, brk.

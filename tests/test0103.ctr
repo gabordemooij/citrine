@@ -3,10 +3,10 @@
 { :i
 	✎ write: 
 		'a ' + 
-		((a @ i) type) +
-		' \''+((a @ i))+'\' '+
+		((a ? i) type) +
+		' \''+((a ? i))+'\' '+
 		' is ' +
-		(((a @ i) Nil?) either: '' or: 'NOT') + 
+		(((a ? i) Nil?) either: '' or: 'NOT') + 
 		' Nil.',
 		brk.
 } * (a count).

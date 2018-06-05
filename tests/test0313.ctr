@@ -19,9 +19,9 @@
 
 ☞ g := Json to object: garden.
 
-✎ write: 'There are x chairs in the sunny garden.' x (g @ 'garden' @ 'chairs'), brk.
+✎ write: 'There are x chairs in the sunny garden.' x (g ? 'garden' ? 'chairs'), brk.
 ✎ write: 'A rubber duck swims in the x.' x ((g garden pool) either: 'pool' or: ''), brk.
-✎ write: 'Is there a shed in the garden? Well.. x' x (g @ 'garden' @ 'shed'), brk.
+✎ write: 'Is there a shed in the garden? Well.. x' x (g ? 'garden' ? 'shed'), brk.
 ✎ write: 'In the garden you smell the fragrance of x.' x ((g garden flower join: ' and ')), brk.
 ✎ write: 'The garden is x meters long.' x (g garden size length), brk.
 ✎ write: 'Luckily, this day, there are x wasps in the garden.' x (g garden insects), brk.

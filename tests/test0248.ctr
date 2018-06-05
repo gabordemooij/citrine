@@ -22,11 +22,11 @@
 ✎ write: a, brk.
 
 ☞ b := a eval.
-✎ write: b @ 0 @ 'pages' @ 1 @ 'body', brk.
+✎ write: b ? 0 ? 'pages' ? 1 ? 'body', brk.
 
-☞ c := b @ 0.
+☞ c := b ? 0.
 ☞ d := c serialize.
 ✎ write: d type, brk.
 
 ☞ e := d eval.
-✎ write: e @ 'pages' @ 0, brk.
+✎ write: e ? 'pages' ? 0, brk.
