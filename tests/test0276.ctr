@@ -7,7 +7,7 @@
 	
 	{
 		☞ index := Number random % (pool length).
-		result append: ( pool at: index ).
+		result append: ( pool character: index ).
 		
 	} * count.
 	

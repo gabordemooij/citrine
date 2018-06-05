@@ -1,8 +1,8 @@
 ✎ write: ('Santa Clause' from: 6 to: 7). 
-✎ write: ('hello' at: 2). 
+✎ write: ('hello' character: 2). 
 ✎ write: ('🎄🎄🎄' length). 
 ✎ write: ('' bytes) + ('' length). 
-✎ write: ('papyrus' at: ( ('🎃halloween' find: 'hallo') + ('no' find: 'y') ) ). 
+✎ write: ('papyrus' character: ( ('🎃halloween' find: 'hallo') + ('no' find: 'y') ) ). 
 ☞ a := ('--a..nom..t..nom..r..nom..' replace: '..nom..' with: '=x=XX=x=').
 a := a replace: '.' with: '++'. 
 a := a replace: '' with: '++'. 

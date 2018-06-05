@@ -10,7 +10,7 @@ Program tidiness: 0.
 ☞ txt := 'Word Salad'.
 ✎ write: 'Text Length: ' + txt length, brk.
 ✎ write: 'Text Length in bytes: ' + txt bytes, brk.
-✎ write: 'Character at 2:' + ( txt at: 2 ), brk.
+✎ write: 'Character at 2:' + ( txt character: 2 ), brk.
 ✎ write: 'Byte at 2:' + ( txt byte: 2 ), brk.
 ✎ write: ( txt find: 'S' ), brk.
 
@@ -22,7 +22,7 @@ usedMemory1 := (Program memory ? 0).
 txt := 'Word Salad'.
 ✎ write: 'Text Length: ' + txt length, brk.
 ✎ write: 'Text Length in bytes: ' + txt bytes, brk.
-✎ write: 'Character at 2:' + ( txt at: 2 ), brk.
+✎ write: 'Character at 2:' + ( txt character: 2 ), brk.
 ✎ write: 'Byte at 2:' + ( txt byte: 2 ), brk.
 ✎ write: ( txt find: 'S' ), brk.
 
@@ -33,7 +33,7 @@ usedMemory2 := (Program memory ? 0).
 txt := 'Word Salad'.
 ✎ write: 'Text Length: ' + txt length, brk.
 ✎ write: 'Text Length in bytes: ' + txt bytes, brk.
-✎ write: 'Character at 2:' + ( txt at: 2 ), brk.
+✎ write: 'Character at 2:' + ( txt character: 2 ), brk.
 ✎ write: 'Byte at 2:' + ( txt byte: 2 ), brk.
 ✎ write: ( txt find: 'S' ), brk.
 

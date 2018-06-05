@@ -3,8 +3,8 @@
 
 $ on: 'respond:' do: { :x
 	
-	☞ operation := x at: 0.
-	☞ valuta    := x at: 1.
+	☞ operation := x character: 0.
+	☞ valuta    := x character: 1.
 	☞ money     := x skip: 2.
 	☞ amount    := 0.
 		

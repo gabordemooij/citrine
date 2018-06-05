@@ -1,5 +1,5 @@
 ✎ write: '4th byte = ' + ('xxx' byte: 4), brk.
-✎ write: '4th char = ' + ('xxx' at: 4), brk.
+✎ write: '4th char = ' + ('xxx' character: 4), brk.
 ✎ write: '4th byte = ' + ('xxx' byte: -1), brk.
-✎ write: '4th char = ' + ('xxx' at: -1), brk.
+✎ write: '4th char = ' + ('xxx' character: -1), brk.
 
