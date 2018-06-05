@@ -992,11 +992,11 @@ ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, ui
 	);
 	setenv( "TZ", zone, 1 );
 	date = localtime( &time );
-	if ( strncmp( unit, CTR_DICT_HOURS, l ) == 0 || strncmp( unit, CTR_DICT_HOUR, l ) == 0 || strncmp( unit, CTR_DICT_HOURS_ABBR, l ) == 0  ) {
+	if ( strncmp( unit, CTR_DICT_HOURS, l ) == 0 || strncmp( unit, CTR_DICT_HOUR, l ) == 0  ) {
 		date->tm_hour += number;
-	} else if ( strncmp( unit, CTR_DICT_MINUTES, l ) == 0 || strncmp( unit, CTR_DICT_MINUTE, l ) == 0 || strncmp( unit, CTR_DICT_MINUTES_ABBR, l ) == 0  ) {
+	} else if ( strncmp( unit, CTR_DICT_MINUTES, l ) == 0 || strncmp( unit, CTR_DICT_MINUTE, l ) == 0  ) {
 		date->tm_min += number;
-	} else if ( strncmp( unit, CTR_DICT_SECONDS, l ) == 0 || strncmp( unit, CTR_DICT_SECOND, l ) == 0 || strncmp( unit, CTR_DICT_SECONDS_ABBR, l ) == 0 ) {
+	} else if ( strncmp( unit, CTR_DICT_SECONDS, l ) == 0 || strncmp( unit, CTR_DICT_SECOND, l ) == 0 ) {
 		date->tm_sec += number;
 	} else if ( strncmp( unit, CTR_DICT_DAYS, l ) == 0 || strncmp( unit, CTR_DICT_DAY, l ) == 0 ) {
 		date->tm_mday += number;
