@@ -379,7 +379,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * fruits := List ← 'apples' ; 'oranges' ; 'bananas'.
- * fruits at: 1. #returns 'oranges'
+ * fruits position: 1.
  */
 ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* getIndex = argumentList->object;
@@ -429,7 +429,7 @@ ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] secondLast.
+ * [List] second last.
  * 
  * Returns the second last element of the array.
  * If the array is empty, Nil will be returned.
@@ -444,9 +444,9 @@ ctr_object* ctr_array_second_last(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [List] @ [Index]
+ * [List] ? [Index]
  *
- * Alias for [List] at: [Index]
+ * Alias for [List] position: [Index]
  */
 
 /**
@@ -523,7 +523,7 @@ ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * x := List ← 1 ; 2 ; 3.
- * x - 1. #1 ; 3
+ * x - 1.
  */
 ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size index = ctr_internal_cast2number(argumentList->object)->value.nvalue;
@@ -610,17 +610,7 @@ ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList
  *
  * Usage:
  *
- * ☞ cakes := List ← 'apple' ; 'berry' ; 'choco' ; 'cheese'.
- * #apple, cinnamon, pineapple, cheese
  * ☞ buy := cakes replace: 1 length: 2 with: ( List ← 'cinnamon' ; 'pineapple' ).
- * #apple, cinnamon, pineapple
- * ☞ buy := cakes replace: 1 length: 12 with: ( List ← 'cinnamon' ; 'pineapple' ).
- * #apple, berry
- * ☞ buy := cakes replace: 2 length: 10 with: ( List new ).
- * #berry, choco, cheese
- * ☞ buy := cakes replace: '' length: '1' with: ( List new ).
- * #error...
- * ☞ buy := cakes replace: '' length: '1' with: 'x'.
  *
  */
 ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
@@ -930,24 +920,12 @@ ctr_object* ctr_array_column( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [List] indexOf: [Object].
+ * [List] find: [Object].
  *
  * Checks whether the specified object occurs in the array and returns the index number
  * if so. If not, the index number -1 will be returned. Note that the comparison
  * will be performed by converting both values to strings.
  *
- * Usage:
- *
- * ☞ colors := List ← 'red' ; 'green' ; 'blue' ; 3 ; (List new) ; False ; Nil.
- *
- * ✎ write: (colors indexOf: 'green'), brk. #1
- * ✎ write: (colors indexOf: 'blue'), brk. #2
- * ✎ write: (colors indexOf: 'red'), brk. #0
- * ✎ write: (colors indexOf: 3), brk. #3
- * ✎ write: (colors indexOf: (List new)), brk. #4
- * ✎ write: (colors indexOf: 'False'), brk. #5
- * ✎ write: (colors indexOf: Nil), brk. #6
- * ✎ write: (colors indexOf: 'purple'), brk. #-1
  */
 ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList ) {
 	int64_t found = -1, i = 0;
@@ -1048,14 +1026,12 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * ☞ menu := Map new
- *	Margherita: 11.90, #set using keyword message
+ *	Margherita: 11.90,
  *	Hawaii: 12.99,
- *	QuattroFormaggi: 13.00, #set using binary message
- *	X 15.99.
+ *	QuattroFormaggi: 13.00.
  *
- * ✎ write: ( menu @ 'Hawaii' ), brk. #retrieve with @
- * ✎ write: ( menu Margherita ), brk. #retrieve with message
- * ✎ write: ( menu @ 'X' ), brk. #in this case you have to use @
+ * ✎ write: ( menu ? 'Hawaii' ), brk. 
+ * ✎ write: ( menu Margherita ), brk.
  *
  */
 ctr_object* ctr_map_key_value(ctr_object* myself, ctr_argument* argumentList) {

@@ -3,6 +3,6 @@
 	☞ x := 'hello'.
 	z append: x.
 } run.
-✎ write: (z at: 0).
+✎ write: (z position: 0).
 Program sweep.
-✎ write: (z at: 0).
+✎ write: (z position: 0).

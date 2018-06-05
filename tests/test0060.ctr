@@ -1,14 +1,14 @@
 ☞ a := List new.
 a prepend: 'Hello'.
 a prepend: 'World'.
-✎ write: (a at: 1), write: (a at: 0), brk.
+✎ write: (a position: 1), write: (a position: 0), brk.
 ✎ write: (a count) + ' left in array.', brk.
 ✎ write: (a shift), write: (a shift), write: a shift, brk.
 ✎ write: (a count) + ' left in array.', brk.
 ✎ write: (a pop), brk.
 a prepend: 'Hi', prepend: 'There'.
 ✎ write: (a count) + ' left in array.', brk.
-✎ write: (a at: 1), write: (a at: 0), brk.
+✎ write: (a position: 1), write: (a position: 0), brk.
 { a shift. } * 4.
 ✎ write: (a count) + ' left in array.', brk.
 ✎ write: a shift.

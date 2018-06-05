@@ -6,8 +6,8 @@ list append: 'world'.
 ✎ write: list pop, write: list count.
 list append: 'there'.
 ✎ write: list count.
-✎ write: (list at: 0), write: (list at: 1).
+✎ write: (list position: 0), write: (list position: 1).
 list put: 'xmas' at: 1.
 list put: 'merry' at: 0.
 ✎ write: list count.
-✎ write: (list at: 0), write: (list at: 1).
+✎ write: (list position: 0), write: (list position: 1).
