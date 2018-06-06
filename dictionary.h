@@ -152,7 +152,6 @@
 #define CTR_DICT_TO_BYTE         "byte"
 #define CTR_DICT_CHARACTERS      "characters"
 #define CTR_DICT_TO_BYTE_ARRAY   "list"
-#define CTR_DICT_SERIALIZE       "serialize"
 #define CTR_DICT_APPEND_BYTE     "append byte:"
 #define CTR_DICT_QUALIFY         "qualify:"
 #define CTR_DICT_QUALIFICATION   "qualification"

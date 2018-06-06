@@ -16,7 +16,7 @@
 			)
 		) at: 'pages'
 	)
-) serialize.
+) string.
 
 ✎ write: a type, brk.
 ✎ write: a, brk.
@@ -25,7 +25,7 @@
 ✎ write: b ? 0 ? 'pages' ? 1 ? 'body', brk.
 
 ☞ c := b ? 0.
-☞ d := c serialize.
+☞ d := c string.
 ✎ write: d type, brk.
 
 ☞ e := d eval.
