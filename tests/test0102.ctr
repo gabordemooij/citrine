@@ -1,7 +1,7 @@
 
 ☞ motive := False.
 ☞ opportunity := False.
-✎ write: (motive ! opportunity).
+✎ write: (motive nor: opportunity).
 ✎ write: (motive not & opportunity not).
 
 ✎ write: (True = True).
