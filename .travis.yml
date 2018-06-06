@@ -13,7 +13,5 @@ before_install:
   - sudo echo "/usr/local/lib/*" > /etc/ld.so.conf.d/liblocal.conf
   - sudo rm /etc/ld.so.cache
   - sudo ldconfig
-  - cd ..
-  - cd ..
 
 script: ./runtests.sh
