@@ -173,57 +173,6 @@ ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Object] learn: [String] means: [String].
- *
- * Teaches any object to repsond to the first specified message just like
- * it would upon receiving the second. This allows you to map existing
- * responses to new messages. You can use this to translate messages into your native
- * language. After mapping, sending the alias message will be just as fast
- * as sending the original message. You can use this to create programs
- * in your native language without sacrficing performance. Of course the mapping itself
- * has a cost, but the mapped calls will be 'toll-free'.
- *
- * Usage:
- *
- * #in this example we'll map a message to a Dutch word:
- *
- * Boolean learn: 'alsWaar:'
- *         means: 'ifTrue:'.
- *
- * (2 > 1) alsWaar: {
- *   Pen write: 'alsWaar means ifTrue in Dutch'.
- * }
- */
-ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argumentList) {
-	char*  current_method_name_str;
-	ctr_size     current_method_name_len;
-	ctr_size     i                      = 0;
-	ctr_size     len                    = 0;
-	ctr_mapitem* current_method         = myself->methods->head;
-	ctr_object*  target_method_name     = ctr_internal_cast2string( ctr_argumentList->next->object );
-	char*        target_method_name_str = target_method_name->value.svalue->value;
-	ctr_size     target_method_name_len = target_method_name->value.svalue->vlen;
-	ctr_object*  alias                  = ctr_internal_cast2string( ctr_argumentList->object );
-	while( i < myself->methods->size ) {
-		current_method_name_str = current_method->key->value.svalue->value;
-		current_method_name_len = current_method->key->value.svalue->vlen;
-		if (  current_method_name_len > target_method_name_len ) {
-			len = current_method_name_len;
-		} else {
-			len = target_method_name_len;
-		}
-		if ( strncmp( current_method_name_str, target_method_name_str, len ) == 0 ) {
-			ctr_internal_object_add_property( myself, alias, current_method->value, 1);
-			break;
-		}
-		current_method = current_method->next;
-		i ++;
-	}
-	return myself;
-}
-
-
-/**
  * [Object] do
  *
  * Activates 'chain mode'. If chain mode is active, all messages will
@@ -587,6 +536,58 @@ ctr_object* ctr_object_respond_and_and(ctr_object* myself, ctr_argument* argumen
 ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(0);
 }
+
+/**
+ * [Object] learn: [String] means: [String].
+ *
+ * Teaches any object to repsond to the first specified message just like
+ * it would upon receiving the second. This allows you to map existing
+ * responses to new messages. You can use this to translate messages into your native
+ * language. After mapping, sending the alias message will be just as fast
+ * as sending the original message. You can use this to create programs
+ * in your native language without sacrficing performance. Of course the mapping itself
+ * has a cost, but the mapped calls will be 'toll-free'.
+ *
+ * Usage:
+ *
+ * #in this example we'll map a message to a Dutch word:
+ *
+ * Boolean learn: 'alsWaar:'
+ *         means: 'ifTrue:'.
+ *
+ * (2 > 1) alsWaar: {
+ *   Pen write: 'alsWaar means ifTrue in Dutch'.
+ * }
+ */
+ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argumentList) {
+       char*  current_method_name_str;
+       ctr_size     current_method_name_len;
+       ctr_size     i                      = 0;
+       ctr_size     len                    = 0;
+       ctr_mapitem* current_method         = myself->methods->head;
+       ctr_object*  target_method_name     = ctr_internal_cast2string( ctr_argumentList->next->object );
+       char*        target_method_name_str = target_method_name->value.svalue->value;
+       ctr_size     target_method_name_len = target_method_name->value.svalue->vlen;
+       ctr_object*  alias                  = ctr_internal_cast2string( ctr_argumentList->object );
+       while( i < myself->methods->size ) {
+               current_method_name_str = current_method->key->value.svalue->value;
+               current_method_name_len = current_method->key->value.svalue->vlen;
+               if (  current_method_name_len > target_method_name_len ) {
+                       len = current_method_name_len;
+               } else {
+                       len = target_method_name_len;
+               }
+               if ( strncmp( current_method_name_str, target_method_name_str, len ) == 0 ) {
+                       ctr_internal_object_add_property( myself, alias, current_method->value, 1);
+                       break;
+               }
+               current_method = current_method->next;
+               i ++;
+       }
+       return myself;
+}
+
+
 
 /**
  * Boolean
@@ -1278,40 +1279,6 @@ ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [Number] max: [other]
- *
- * Returns the biggest number of the two.
- *
- * Usage:
- *
- * x := 6 max: 4. #x is 6
- * x := 6 max: 7. #x is 7
- */
-ctr_object* ctr_number_max(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
-	ctr_number a = myself->value.nvalue;
-	ctr_number b = otherNum->value.nvalue;
-	return ctr_build_number_from_float((a >= b) ? a : b);
-}
-
-/**
- * [Number] min: [other]
- *
- * Returns a the smallest number.
- *
- * Usage:
- *
- * x := 6 min: 4. #x is 4
- * x := 6 min: 7. #x is 7
- */
-ctr_object* ctr_number_min(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
-	ctr_number a = myself->value.nvalue;
-	ctr_number b = otherNum->value.nvalue;
-	return ctr_build_number_from_float((a <= b) ? a : b);
-}
-
-/**
  * [Number] factorial
  *
  * Calculates the factorial of a number.
@@ -1442,14 +1409,14 @@ ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] sqrt
+ * [Number] square root
  *
  * Returns the square root of the recipient.
  *
  * Usage:
  *
- * x := 49.
- * y := x sqrt. #y will be 7
+ * ☞ x := 49.
+ * ☞ y := x square root.
  *
  * The example above takes the square root of 49, resulting in the
  * number 7.
@@ -1472,7 +1439,7 @@ ctr_object* ctr_number_to_byte(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] toString
+ * [Number] string
  *
  * Wrapper for cast function.
  */
@@ -1520,11 +1487,6 @@ ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList
  * You may only use single quotes. To escape a character use the
  * backslash '\' character. Use the special characters ↵ and ⇿ to
  * insert a newline or tab respectively.
- *
- * The following string constants exist:
- *
- * a-z equals abcdefghijklmnopqrstuvwxyz
- * A-Z equals ABCDEFGHIJKLMNOPQRESTUVWXYZ
  *
  * Strings in Citrine represent a series of bytes. Strings can be
  * interpreted as real bytes or as text depending on the messages
@@ -1589,7 +1551,7 @@ ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [String] != [other]
+ * [String] ≠ [other]
  *
  * Returns True if the other string is not the same (in bytes).
  */
@@ -1646,12 +1608,8 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
  *
  * x := 'Hello '.
  * x append: 'World'.
- * Pen write: x. #Hello World
+ * ✎ write: x.
  *
- * Instead of using the append message you may also use its short form,
- * like this:
- *
- * x +=: 'World'.
  */
 ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* strObject;
@@ -2184,14 +2142,14 @@ ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argum
 }
 
 /**
- * [String] trim
+ * [String] remove surrounding spaces
  *
  * Trims a string. Removes surrounding white space characters
  * from string and returns the result as a new string object.
  *
  * Usage:
  *
- * ' hello ' trim.
+ * ' hello ' remove surrounding spaces.
  *
  * The example above will strip all white space characters from the
  * recipient on both sides of the text. Also see: leftTrim and rightTrim
@@ -2765,7 +2723,7 @@ ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argument
 }
 
 /**
- * [String] eval
+ * [String] evaluate
  *
  * Evaluates the contents of the string as code.
  * In contrast to other languages, an eval statement can only
@@ -2775,8 +2733,8 @@ ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argument
  *
  * Usage:
  *
- * a := 'List ← 1 ; 2 ; 3' eval.
- * x := a @ 2. #3
+ * a := 'List ← 1 ; 2 ; 3' evaluate.
+ * x := a @ 2.
  */
 ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_tnode* parsedCode;

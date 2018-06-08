@@ -1,7 +1,7 @@
 'SINGLE_LANGUAGE'.
 
 Program tidiness: 12.
-Program sweep.
+Program clean memory.
 
 ☞ Fruit := Object new.
 Fruit on: 'new' do: {

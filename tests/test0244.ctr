@@ -5,4 +5,4 @@ List on: '←' do: {
 }.
 ☞ x := Nil.
 ☞ q := 'x := List ← 1'.
-q eval.
+q evaluate.

@@ -8,7 +8,7 @@
 ☞ sticky2 := (Program memory ? 2).
 ☞ dust2   := (Program memory ? 4).
 
-Program sweep.
+Program clean memory.
 
 
 
@@ -27,7 +27,7 @@ dust2   := (Program memory ? 4).
 
 
 
-Program sweep.
+Program clean memory.
 
 
 

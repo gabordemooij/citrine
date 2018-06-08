@@ -3,5 +3,5 @@
 ✎ write: ('zzz' byte: 10).
 ✎ write: ('zzz' byte: -10).
 ✎ brk.
-✎ write: (' left trimmed ' trim) + ' ' + ( 'and right trimmed' trim) + '!', brk.
+✎ write: (' left trimmed ' remove surrounding spaces) + ' ' + ( 'and right trimmed' remove surrounding spaces) + '!', brk.
 ✎ write: '<html>"html & entities"</html>' html.

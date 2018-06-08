@@ -21,12 +21,12 @@
 ✎ write: a type, brk.
 ✎ write: a, brk.
 
-☞ b := a eval.
+☞ b := a evaluate.
 ✎ write: b ? 0 ? 'pages' ? 1 ? 'body', brk.
 
 ☞ c := b ? 0.
 ☞ d := c string.
 ✎ write: d type, brk.
 
-☞ e := d eval.
+☞ e := d evaluate.
 ✎ write: e ? 'pages' ? 0, brk.

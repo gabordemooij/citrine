@@ -586,11 +586,11 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_IFFALSE ), &ctr_object_if_false );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_IFTRUE ), &ctr_object_if_true );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_MESSAGEARGS), &ctr_object_message );
-	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_LEARN ), &ctr_object_learn_meaning );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_object_to_string );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_object_to_number );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_TOBOOL ), &ctr_object_to_boolean );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_CASE_DO ), &ctr_object_case_do );
+	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_LEARN ), &ctr_object_learn_meaning );
 	ctr_internal_object_add_property( CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_OBJECT ), CtrStdObject, 0 );
 	CtrStdObject->link = NULL;
 	CtrStdObject->info.sticky = 1;
@@ -649,8 +649,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_ABS ), &ctr_number_abs );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_SQRT ), &ctr_number_sqrt );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_POWER ), &ctr_number_pow );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_MIN_ARG ), &ctr_number_min );
-	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_MAX_ARG ), &ctr_number_max );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_ODD ), &ctr_number_odd );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_EVEN ), &ctr_number_even );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_POS ), &ctr_number_positive );
@@ -840,7 +838,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SET_ENVIRONMENT_VARIABLE ), &ctr_program_set_env );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_WAIT_FOR_INPUT ), &ctr_program_waitforinput );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_INPUT ), &ctr_program_input );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_EXIT ), &ctr_program_exit );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_program_exit );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FLUSH ), &ctr_program_flush );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ERROR ), &ctr_program_err );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SHELL ), &ctr_program_shell );

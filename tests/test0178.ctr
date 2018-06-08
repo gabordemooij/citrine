@@ -18,7 +18,7 @@ Program tidiness: 0.
 ✎ write: 'txt does not equal Word Salad = ' + ( txt ≠ 'Word Salad' ), brk.
 ✎ write: 'txt does not equal Ceasar Salad = ' + ( txt ≠ 'Ceasar Salad' ), brk.
 
-Program sweep.
+Program clean memory.
 
 usedMemory1 := (Program memory ? 0).
 
@@ -34,7 +34,7 @@ txt := 'Word Salad'.
 ✎ write: 'txt does not equal Word Salad = ' + ( txt ≠ 'Word Salad' ), brk.
 ✎ write: 'txt does not equal Ceasar Salad = ' + ( txt ≠ 'Ceasar Salad' ), brk.
 
-Program sweep.
+Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
@@ -49,7 +49,7 @@ txt := 'Word Salad'.
 ✎ write: 'txt does not equal Word Salad = ' + ( txt ≠ 'Word Salad' ), brk.
 ✎ write: 'txt does not equal Ceasar Salad = ' + ( txt ≠ 'Ceasar Salad' ), brk.
 
-Program sweep.
+Program clean memory.
 usedMemory3 := (Program memory ? 0).
 
 

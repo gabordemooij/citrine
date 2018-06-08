@@ -13,7 +13,7 @@ f open: 'w'.
 f write bytes: 'hello'.
 f close.
 
-Program sweep.
+Program clean memory.
 usedMemory1 := (Program memory ? 0).
 
 
@@ -22,7 +22,7 @@ f exists: {f delete. }.
 f open: 'w'.
 f write bytes: 'hello world'.
 f close.
-Program sweep.
+Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
@@ -31,7 +31,7 @@ f exists: { f delete. }.
 f open: 'w'.
 f write bytes: 'hello world'.
 f close.
-Program sweep.
+Program clean memory.
 usedMemory3 := (Program memory ? 0).
 
 

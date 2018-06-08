@@ -16,8 +16,9 @@ a := 4.2. b := a round.
 Printer print: a and: b.
 
 ✎ write: (9 % 5), brk.
-✎ write: -666 abs, brk.
-✎ write: 49 sqrt, brk.
+✎ write: -666 absolute, brk.
+✎ write: 49 square root, brk.
 ✎ write: (2 power: 3), brk.
-✎ write: ((9 max: 5) min: 6).
+☞ l := (List ← 9 ; 6).
+✎ write: l minimum.
 

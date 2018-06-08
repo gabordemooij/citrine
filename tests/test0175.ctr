@@ -15,7 +15,7 @@ txt := txt + 'without leaking ' + x + 's of bytes ?'.
 txt append: '!!'.
 ✎ write: txt.
 
-Program sweep.
+Program clean memory.
 
 usedMemory1 := (Program memory ? 0).
 
@@ -26,7 +26,7 @@ txt := txt + 'without leaking ' + x + 's of bytes ?'.
 txt append: '!!'.
 ✎ write: txt.
 
-Program sweep.
+Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
@@ -36,7 +36,7 @@ txt := txt + 'without leaking ' + x + 's of bytes ?'.
 txt append: '!!'.
 ✎ write: txt.
 
-Program sweep.
+Program clean memory.
 usedMemory3 := (Program memory ? 0).
 
 

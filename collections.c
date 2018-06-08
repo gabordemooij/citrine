@@ -121,14 +121,14 @@ ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] min
+ * [List] minimum
  *
  * Returns the minimum value from an array.
  *
  * Usage:
  *
  * a := List ← 8 ; 4 ; 2 ; 16.
- * m := a min. #2
+ * m := a minimum.
  *
  */
 ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList) {
@@ -147,14 +147,14 @@ ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] max
+ * [List] maximum
  *
  * Returns the maximum value from an array.
  *
  * Usage:
  *
  * a := List ← 8 ; 4 ; 2 ; 16.
- * m := a max. #16
+ * m := a maximum.
  *
  */
 ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
@@ -1156,7 +1156,7 @@ ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Map] @ [Key]
+ * [Map] ? [Key]
  *
  * Alias for [Map] at: [Key].
  *

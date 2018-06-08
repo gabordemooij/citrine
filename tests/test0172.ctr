@@ -11,7 +11,7 @@ Program tidiness: 0.
 ☞ b := a from: 2 length: 2.
 ✎ write: ( b join: '|' ), write: b count.
 
-Program sweep.
+Program clean memory.
 usedMemory1 := (Program memory ? 0).
 
 
@@ -20,7 +20,7 @@ b := a from: 2 length: 2.
 ✎ write: ( b join: '|' ), write: b count.
 
 
-Program sweep.
+Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
@@ -29,7 +29,7 @@ b := a from: 2 length: 2.
 ✎ write: ( b join: '|' ), write: b count.
 
 
-Program sweep.
+Program clean memory.
 usedMemory3 := (Program memory ? 0).
 
 

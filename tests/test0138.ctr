@@ -16,7 +16,7 @@ c on: 'greet:' do: { ✎ write: 'greet!'. }.
 ☞ usedMemory4 := 0.
 ☞ usedMemory5 := 0.
 
-Program sweep.
+Program clean memory.
 ☞ usedMemory1 := (Program memory ? 0).
 
 
@@ -31,7 +31,7 @@ c := Object new.
 c on: 'greet:' do: { ✎ write: 'greet!'. }.
 
 
-Program sweep.
+Program clean memory.
 ☞ usedMemory2 := (Program memory ? 0).
 
 
@@ -45,7 +45,7 @@ a := List ← 1 ; 2 ; 3 ; 4.
 c := Object new.
 c on: 'greet:' do: { ✎ write: 'greet!'. }.
 
-Program sweep.
+Program clean memory.
 ☞ usedMemory3 := (Program memory ? 0).
 
 
@@ -62,7 +62,7 @@ c := Object new.
 c on: 'greet:' do: { ✎ write: 'a different greet!', brk. }.
 
 
-Program sweep.
+Program clean memory.
 ☞ usedMemory4 := (Program memory ? 0).
 
 
@@ -78,7 +78,7 @@ c := Object new.
 c on: 'greet:' do: { ✎ write: 'greet!'. }.
 
 
-Program sweep.
+Program clean memory.
 ☞ usedMemory5 := (Program memory ? 0).
 
 

@@ -5,7 +5,7 @@ $ on: 'respond:' do: { :x
 	
 	☞ operation := x character: 0.
 	☞ valuta    := x character: 1.
-	☞ money     := x skip: 2.
+	☞ money     := x offset: 2.
 	☞ amount    := 0.
 		
 	( operation = '+' ) true: {

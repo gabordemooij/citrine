@@ -1,5 +1,5 @@
 
-☞ newString := ('hello world' pattern: '([eor])([l]+)' do: { :match
+☞ newString := ('hello world' pattern: '([eor])([l]+)' process: { :match
 	↲ '*'.
 }).
 ✎ write: newString,brk.

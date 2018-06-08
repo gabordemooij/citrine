@@ -11,44 +11,44 @@ Program tidiness: 0.
 ☞ a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( List ← 1 ).
 ✎ write: ( 'sum: ' + ( a sum ) ), brk.
-✎ write: ( 'min: ' + ( a min ) ), brk.
-✎ write: ( 'max: ' + ( a max ) ), brk.
+✎ write: ( 'min: ' + ( a minimum ) ), brk.
+✎ write: ( 'max: ' + ( a maximum ) ), brk.
 ✎ write: ( '3rd: ' + ( a ? 2 ) ), brk.
 ✎ write: ( 'prd: ' + ( a product ) ), brk.
 a sort: { :a :b ↲ (b - a). }.
 a each: { :i :e ✎ write: ( i ), brk. }.
 
-Program sweep.
+Program clean memory.
 usedMemory1 := (Program memory ? 0).
 
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( List ← 1 ).
 ✎ write: ( 'sum: ' + ( a sum ) ), brk.
-✎ write: ( 'min: ' + ( a min ) ), brk.
-✎ write: ( 'max: ' + ( a max ) ), brk.
+✎ write: ( 'min: ' + ( a minimum ) ), brk.
+✎ write: ( 'max: ' + ( a maximum ) ), brk.
 ✎ write: ( '3rd: ' + ( a ? 2 ) ), brk.
 ✎ write: ( 'prd: ' + ( a product ) ), brk.
 a sort: { :a :b ↲ (b - a). }.
 a each: { :i :e ✎ write: ( i ), brk. }.
 
 
-Program sweep.
+Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( List ← 1 ).
 ✎ write: ( 'sum: ' + ( a sum ) ), brk.
-✎ write: ( 'min: ' + ( a min ) ), brk.
-✎ write: ( 'max: ' + ( a max ) ), brk.
+✎ write: ( 'min: ' + ( a minimum ) ), brk.
+✎ write: ( 'max: ' + ( a maximum ) ), brk.
 ✎ write: ( '3rd: ' + ( a ? 2 ) ), brk.
 ✎ write: ( 'prd: ' + ( a product ) ), brk.
 a sort: { :a :b ↲ (b - a). }.
 a each: { :i :e ✎ write: ( i ), brk. }.
 
 
-Program sweep.
+Program clean memory.
 usedMemory3 := (Program memory ? 0).
 
 

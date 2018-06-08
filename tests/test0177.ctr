@@ -9,29 +9,29 @@ Program tidiness: 0.
 
 ☞ txt := ' Word Salad '.
 txt := txt replace: 'Word' with: 'Ceasar'.
-txt := txt ltrim rtrim trim.
+txt := txt remove surrounding spaces.
 ✎ write: txt, brk.
 
-Program sweep.
+Program clean memory.
 
 usedMemory1 := (Program memory ? 0).
 
 
 txt := ' Word Salad '.
 txt := txt replace: 'Word' with: 'Ceasar'.
-txt := txt ltrim rtrim trim.
+txt := txt remove surrounding spaces.
 ✎ write: txt, brk.
 
-Program sweep.
+Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
 txt := ' Word Salad '.
 txt := txt replace: 'Word' with: 'Ceasar'.
-txt := txt ltrim rtrim trim.
+txt := txt remove surrounding spaces.
 ✎ write: txt, brk.
 
-Program sweep.
+Program clean memory.
 usedMemory3 := (Program memory ? 0).
 
 

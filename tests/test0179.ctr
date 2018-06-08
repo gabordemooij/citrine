@@ -9,26 +9,26 @@ Program tidiness: 0.
 
 ☞ txt := 'Word Salad'.
 ✎ write: ( txt from: 5 length: 5 ).
-✎ write: ( txt skip: 4, trim ), brk.
+✎ write: ( txt offset: 4, remove surrounding spaces ), brk.
 
-Program sweep.
+Program clean memory.
 
 usedMemory1 := (Program memory ? 0).
 
 
 txt := 'Word Salad'.
 ✎ write: ( txt from: 5 length: 5 ).
-✎ write: ( txt skip: 4, trim ), brk.
+✎ write: ( txt offset: 4, remove surrounding spaces ), brk.
 
-Program sweep.
+Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
 txt := 'Word Salad'.
 ✎ write: ( txt from: 5 length: 5 ).
-✎ write: ( txt skip: 4, trim ), brk.
+✎ write: ( txt offset: 4, remove surrounding spaces ), brk.
 
-Program sweep.
+Program clean memory.
 usedMemory3 := (Program memory ? 0).
 
 

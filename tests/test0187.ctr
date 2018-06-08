@@ -14,7 +14,7 @@ Program tidiness: 0.
 ✎ write: (7.1 ceil), brk.
 ✎ write: (7.9 floor), brk.
 
-Program sweep.
+Program clean memory.
 
 usedMemory1 := (Program memory ? 0).
 
@@ -25,7 +25,7 @@ usedMemory1 := (Program memory ? 0).
 ✎ write: (7.1 ceil), brk.
 ✎ write: (7.9 floor), brk.
 
-Program sweep.
+Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
@@ -35,7 +35,7 @@ usedMemory2 := (Program memory ? 0).
 ✎ write: (7.1 ceil), brk.
 ✎ write: (7.9 floor), brk.
 
-Program sweep.
+Program clean memory.
 usedMemory3 := (Program memory ? 0).
 
 

@@ -4,7 +4,7 @@
 ☞ b := (a string).
 
 ✎ write: b, brk. 
-b := b eval.
+b := b evaluate.
 
 ✎ write: b ? 2, brk. 
 
@@ -14,14 +14,14 @@ b := b eval.
 
 ☞ x := ( (List ← 1 ; ( List ← 9 ) ; True ) ) string.
 ✎ write: x, brk. 
-x := x eval.
+x := x evaluate.
 
 ✎ write: x ? 1 ? 0, brk. 
 
 ☞ y := (Map new) put: (List ← 1) at: (List ← 2).
 ✎ write: y, brk. 
 
-y := y string eval.
+y := y string evaluate.
 
 ✎ write: (y at: (List ← 2) string ), brk.
 

@@ -16,7 +16,7 @@ Program tidiness: 0.
 ✎ write: o myself, brk.
 ✎ write: ( o do done ), brk.
 
-Program sweep.
+Program clean memory.
 
 usedMemory1 := (Program memory ? 0).
 
@@ -30,7 +30,7 @@ o2 := Object new.
 ✎ write: o myself, brk.
 ✎ write: ( o do done ), brk.
 
-Program sweep.
+Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
@@ -43,7 +43,7 @@ o2 := Object new.
 ✎ write: o myself, brk.
 ✎ write: ( o do done ), brk.
 
-Program sweep.
+Program clean memory.
 usedMemory3 := (Program memory ? 0).
 
 

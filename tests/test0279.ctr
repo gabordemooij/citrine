@@ -1,7 +1,7 @@
 ☞ str := 'xxx←'.
 ✎ write: 'length before skip = ' + str length, brk.
 ✎ write: 'bytes before skip = ' + str bytes, brk.
-☞ str2 := str skip: 3.
+☞ str2 := str offset: 3.
 ✎ write: 'length after skip = ' + str2 length, brk.
 ✎ write: 'bytes after skip = ' + str2 bytes, brk.
 { :index

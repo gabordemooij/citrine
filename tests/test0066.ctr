@@ -9,5 +9,5 @@ a := a replace: '' with: '++'.
 ✎ write: ('' replace: 'x' with: 'y'). 
 a := ((a replace: '=x=XX=x=' with: '') replace: '--' with: '').
 ✎ write: a.
-a := '  a	 ' trim + '' trim + ' ' trim.
+a := '  a	 ' remove surrounding spaces + '' remove surrounding spaces + ' ' remove surrounding spaces.
 ✎ write: a.

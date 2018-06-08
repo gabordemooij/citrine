@@ -14,7 +14,7 @@ Program tidiness: 0.
 ✎ write: 'Byte at 2:' + ( txt byte: 2 ), brk.
 ✎ write: ( txt find: 'S' ), brk.
 
-Program sweep.
+Program clean memory.
 
 usedMemory1 := (Program memory ? 0).
 
@@ -26,7 +26,7 @@ txt := 'Word Salad'.
 ✎ write: 'Byte at 2:' + ( txt byte: 2 ), brk.
 ✎ write: ( txt find: 'S' ), brk.
 
-Program sweep.
+Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
@@ -37,7 +37,7 @@ txt := 'Word Salad'.
 ✎ write: 'Byte at 2:' + ( txt byte: 2 ), brk.
 ✎ write: ( txt find: 'S' ), brk.
 
-Program sweep.
+Program clean memory.
 usedMemory3 := (Program memory ? 0).
 
 

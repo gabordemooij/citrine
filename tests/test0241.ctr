@@ -5,11 +5,11 @@
 ☞ q := List ← ('Quotes ' + Q + ' are evil?') ; 1.
 ☞ x := q string.
 ✎ write: x, brk.
-☞ y := x eval.
+☞ y := x evaluate.
 ✎ write: y ? 0, brk.
 
 q := Map put: Q at: (Q + 'quote' + Q).
 x := q string.
 ✎ write: x, brk.
-y := x eval.
+y := x evaluate.
 ✎ write: y ? '\'quote\'', brk.

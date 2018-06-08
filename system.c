@@ -183,11 +183,11 @@ void  ctr_gc_internal_collect() {
 }
 
 /**
- * Program
+ * [Program] clean memory
  *
  * GarbageCollector, to invoke use:
  *
- * [Program] sweep.
+ * Program clean memory.
  */
 ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 	ctr_gc_internal_collect(); /* calls internal because automatic GC has to use this function as well and requires low overhead. */
@@ -306,7 +306,7 @@ ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [Program] argCount
+ * [Program] arguments
  *
  * Returns the number of CLI arguments passed to the script.
  */
@@ -315,7 +315,7 @@ ctr_object* ctr_program_num_of_args(ctr_object* myself, ctr_argument* argumentLi
 }
 
 /**
- * [Program] exit
+ * [Program] end
  * 
  * Exits program immediately.
  */

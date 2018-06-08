@@ -4,5 +4,5 @@
 x on: 'test' do: { ↲ True. }.
 
 (x test) true: {
-	'x test' eval.
+	'x test' evaluate.
 }.

@@ -6,9 +6,9 @@
 	garbageMaker method: 'putGarbageOnScreen' does: {
 		☞ x := 1.
 		☞ y := 2.
-		Program sweep.
+		Program clean memory.
 	}.
 	garbageMaker putGarbageOnScreen.
 	✎ write: a.
-	Program sweep.
+	Program clean memory.
 } * 1000.

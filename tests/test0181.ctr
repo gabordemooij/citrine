@@ -12,7 +12,7 @@ Program tidiness: 0.
 txt := txt from: 6 to: 10.
 ✎ write: txt, brk.
 
-Program sweep.
+Program clean memory.
 
 usedMemory1 := (Program memory ? 0).
 
@@ -22,7 +22,7 @@ txt := 'World Salad'.
 txt := txt from: 6 to: 10.
 ✎ write: txt, brk.
 
-Program sweep.
+Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
@@ -31,7 +31,7 @@ txt := 'World Salad'.
 txt := txt from: 6 to: 10.
 ✎ write: txt, brk.
 
-Program sweep.
+Program clean memory.
 usedMemory3 := (Program memory ? 0).
 
 

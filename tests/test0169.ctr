@@ -15,7 +15,7 @@ f := File new: '/tmp/citrine_test_file.txt'.
 ☞ q := f read.
 ✎ write: q, brk.
 
-Program sweep.
+Program clean memory.
 usedMemory1 := (Program memory ? 0).
 
 
@@ -23,7 +23,7 @@ f := File new: '/tmp/citrine_test_file.txt'.
 q := f read.
 ✎ write: q, brk.
 
-Program sweep.
+Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
@@ -31,7 +31,7 @@ f := File new: '/tmp/citrine_test_file.txt'.
 q := f read.
 ✎ write: q, brk.
 
-Program sweep.
+Program clean memory.
 usedMemory3 := (Program memory ? 0).
 
 

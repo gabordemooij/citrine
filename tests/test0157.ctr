@@ -8,17 +8,17 @@ Program tidiness: 0.
 ☞ f := Object new.
 f blah.
 
-Program sweep.
+Program clean memory.
 usedMemory1 := (Program memory ? 0).
 
 
 f blah.
-Program sweep.
+Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
 f blah.
-Program sweep.
+Program clean memory.
 usedMemory3 := (Program memory ? 0).
 
 

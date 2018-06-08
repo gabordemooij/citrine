@@ -36,12 +36,12 @@ a := a - -1.
 a multiplyBy: 0.5.
 a := a + (2 power: 8).  
 a := a + (2 power: -1). 
-a := a + (49 sqrt).   
-a addNum: (0 max: 1).          
-a addNum: (2 min: 3).          
+a := a + (49 square root).   
+a addNum: ((List ← 0 ; 1) maximum).          
+a addNum: ((List ← 2 ; 3) minimum).
 ✎ write: a.
 
-Program sweep.
+Program clean memory.
 
 usedMemory1 := (Program memory ? 0).
 
@@ -58,12 +58,12 @@ a := a - -1.
 a multiplyBy: 0.5.
 a := a + (2 power: 8).  
 a := a + (2 power: -1). 
-a := a + (49 sqrt).   
-a addNum: (0 max: 1).          
-a addNum: (2 min: 3).          
+a := a + (49 square root).   
+a addNum: ((List ← 0 ; 1) maximum).          
+a addNum: ((List ← 2 ; 3) minimum).
 ✎ write: a.
 
-Program sweep.
+Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
@@ -79,12 +79,12 @@ a := a - -1.
 a multiplyBy: 0.5.
 a := a + (2 power: 8).  
 a := a + (2 power: -1). 
-a := a + (49 sqrt).   
-a addNum: (0 max: 1).          
-a addNum: (2 min: 3).          
+a := a + (49 square root).   
+a addNum: ((List ← 0 ; 1) maximum).          
+a addNum: ((List ← 2 ; 3) minimum).
 ✎ write: a.
 
-Program sweep.
+Program clean memory.
 usedMemory3 := (Program memory ? 0).
 
 

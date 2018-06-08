@@ -15,7 +15,7 @@ Program tidiness: 0.
 ✎ write: n type, brk.
 ✎ write: t type, brk.
 
-Program sweep.
+Program clean memory.
 
 usedMemory1 := (Program memory ? 0).
 
@@ -28,7 +28,7 @@ t := txt boolean.
 ✎ write: n type, brk.
 ✎ write: t type, brk.
 
-Program sweep.
+Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
@@ -40,7 +40,7 @@ t := txt boolean.
 ✎ write: n type, brk.
 ✎ write: t type, brk.
 
-Program sweep.
+Program clean memory.
 usedMemory3 := (Program memory ? 0).
 
 
