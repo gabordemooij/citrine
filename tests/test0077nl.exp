@@ -1,11 +1,11 @@
-String,Number
-String,Boolean
-Number,String
-Number,Boolean
-Boolean,Number
-Boolean,Number
-Boolean,String
-Boolean,String
+Tekst,Getal
+Tekst,Boolean
+Getal,Tekst
+Getal,Boolean
+Boolean,Getal
+Boolean,Getal
+Boolean,Tekst
+Boolean,Tekst
 === String test ===
 123
 Onwaar

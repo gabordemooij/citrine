@@ -7,5 +7,5 @@ a Number '1'  is NOT Nil.
 a Number '0'  is NOT Nil.
 a String 'Str'  is NOT Nil.
 a String ''  is NOT Nil.
-a Block '[Block]'  is NOT Nil.
+a Code '[Block]'  is NOT Nil.
 but.. Nil is.. certainly NIL!

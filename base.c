@@ -97,18 +97,18 @@ ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 	switch(myself->info.type){
 		case CTR_OBJECT_TYPE_OTNIL:
-			return ctr_build_string_from_cstring("Nil");
+			return ctr_build_string_from_cstring( CTR_DICT_NIL );
 		case CTR_OBJECT_TYPE_OTBOOL:
-			return ctr_build_string_from_cstring("Boolean");
+			return ctr_build_string_from_cstring( CTR_DICT_BOOLEAN );
 		case CTR_OBJECT_TYPE_OTNUMBER:
-			return ctr_build_string_from_cstring("Number");
+			return ctr_build_string_from_cstring( CTR_DICT_NUMBER );
 		case CTR_OBJECT_TYPE_OTSTRING:
-			return ctr_build_string_from_cstring("String");
+			return ctr_build_string_from_cstring( CTR_DICT_STRING );
 		case CTR_OBJECT_TYPE_OTBLOCK:
 		case CTR_OBJECT_TYPE_OTNATFUNC:
-			return ctr_build_string_from_cstring("Block");
+			return ctr_build_string_from_cstring( CTR_DICT_CODE_BLOCK );
 		default:
-			return ctr_build_string_from_cstring("Object");
+			return ctr_build_string_from_cstring( CTR_DICT_OBJECT );
 	}
 }
 

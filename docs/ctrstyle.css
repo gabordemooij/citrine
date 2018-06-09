@@ -1,2 +1,22 @@
-body { background-color: black; color: #ddd; font-family: 'courier new','courier'; }
 
+
+ 
+@font-face {
+  font-family: 'CitrineBook';
+  src: url('citrine.ttf')  format('truetype');  
+
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('ubuntu83/Ubuntu-R.ttf') format('truetype');
+}
+
+
+body {
+		font-family:'Ubuntu','CitrineBook';
+		background-color: #846F61; 
+		color:#fff;
+		font-weight:600;
+		
+}

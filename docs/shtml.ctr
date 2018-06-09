@@ -23,12 +23,12 @@ Program tidiness: 4.
 		☞ lines   := comment split: '\n'.
 		lines count > 3 true: {
 		
-			☞ headline := lines @ 1.
+			☞ headline := lines ? 1.
 			
 			
 			((headline find: '@internal') = -1) true: {
 				
-				☞ chapter := headline skip: 3.
+				☞ chapter := headline offset: 3.
 				☞ page := template.
 				page := page replace: '{{title}}' with: chapter html.
 				
@@ -38,12 +38,12 @@ Program tidiness: 4.
 				
 				☞ n := 2.
 				{
-					line := lines at: n. 
+					line := lines position: n. 
 					↲ ((line find: '*/') = -1). 
 				}
 				true: {
 						line := line replace: '\\' with: '\\\\'.
-						☞ contentLine := ((line skip: 2) html).
+						☞ contentLine := ((line offset: 2) html).
 						
 						((contentLine find: 'Usage:') > -1) true: {
 							endsWithCode := True.
@@ -56,9 +56,9 @@ Program tidiness: 4.
 					content append: '</pre><p>'.
 				}.
 				page := page replace: '{{content}}' with: content.
-				☞ filename := (headline skip: 3) 
+				☞ filename := (headline offset: 3) 
 					lowercase
-					pattern: '[^↲a-z0-9]' do: {↲ ''.}.
+					pattern: '[^↲a-z0-9]' process: {↲ ''.}.
 				menu append: '<li><a href="' + filename + '.ctr">' + (chapter html) + '</a></li>'.
 				☞ pageFile := (File new: ('pages/' + filename + '.ctr')).
 				✎ write: pageFile path, brk.

@@ -1,1 +1,32 @@
-✎ write: 'Test no longer in use↵'.
+☞ unknown := Request get: 'item'.
+✎ write: unknown.
+☞ unknown := Request new get: 'item'.
+✎ write: unknown.
+☞ unknown := Request new new get: 'item'.
+✎ write: unknown.
+☞ unknown := Request new new can you get: 'item'.
+✎ write: unknown.
+
+☞ unknown := Request get: 123.
+✎ write: unknown.
+☞ unknown := Request get: Object.
+✎ write: unknown.
+☞ unknown := Request get: Request new.
+✎ write: unknown.
+☞ unknown := Request post: Request new.
+✎ write: unknown.
+
+☞ unknown := Request get list: Request new.
+✎ write: unknown type.
+☞ unknown := Request post list: Request new.
+✎ write: unknown type.
+
+☞ response := Json to object: '{"#status":"OK"}'.
+✎ write: (response #status).
+☞ response := Json new to object: '{"#status":"OK"}'.
+✎ write: (response #status).
+☞ response := Json new new to object: '{"#status":"OK"}'.
+✎ write: (response #status).
+☞ response := Json new new can you convert to object: '{"#status":"OK"}'.
+✎ write: (response #status).
+

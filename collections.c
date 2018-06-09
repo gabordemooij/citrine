@@ -86,7 +86,7 @@ ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
  *
  **/
 ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_string_from_cstring("Array");
+	return ctr_build_string_from_cstring( CTR_DICT_LIST_OBJECT );
 }
 
 /**
@@ -974,7 +974,7 @@ ctr_object* ctr_map_new(ctr_object* myclass, ctr_argument* argumentList) {
  *
  **/
 ctr_object* ctr_map_type(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_string_from_cstring("Map");
+	return ctr_build_string_from_cstring( CTR_DICT_MAP_OBJECT );
 }
 
 /**

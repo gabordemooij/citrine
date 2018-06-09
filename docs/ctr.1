@@ -27,7 +27,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .br
 .BR.BR.BR
 
-.B Nil
+.B  * Nil
 .nf
     
      Nil represents 'nothing' or NULL in other languages.
@@ -42,35 +42,35 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Nil] Nil?
+.B  * [Nil] Nil?
 .nf
     
      Nil always answers this message with a boolean object 'True'.
 .fi
 .BR.BR.BR
 
-.B [Nil] string
+.B  * [Nil] string
 .nf
     
      Returns the string representation of Nil: 'Nil'.
 .fi
 .BR.BR.BR
 
-.B [Nil] number
+.B  * [Nil] number
 .nf
     
      Returns the numerical representation of Nil: 0.
 .fi
 .BR.BR.BR
 
-.B [Nil] boolean
+.B  * [Nil] boolean
 .nf
     
      Returns the boolean representation of Nil: False.
 .fi
 .BR.BR.BR
 
-.B Object
+.B  * Object
 .nf
     
      This is the base object, the parent of all other objects.
@@ -78,14 +78,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Object] type
+.B  * [Object] type
 .nf
     
      Returns a string representation of the type of object.
 .fi
 .BR.BR.BR
 
-.B [Object] toString
+.B  * [Object] toString
 .nf
     
      Returns a string representation of a generic object.
@@ -95,7 +95,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Object] toNumber
+.B  * [Object] toNumber
 .nf
     
      Returns a numerical representation of the object. This basic behavior, part
@@ -104,7 +104,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Object] toBoolean
+.B  * [Object] toBoolean
 .nf
     
      Returns a boolean representation of the object. This basic behavior, part
@@ -113,7 +113,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Object] equals: [other]
+.B  * [Object] equals: [other]
 .nf
     
      Tests whether the current instance is the same as
@@ -126,38 +126,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Object] myself
+.B  * [Object] myself
 .nf
     
      Returns the object itself.
 .fi
 .BR.BR.BR
 
-.B [Object] learn: [String] means: [String].
-.nf
-    
-     Teaches any object to repsond to the first specified message just like
-     it would upon receiving the second. This allows you to map existing
-     responses to new messages. You can use this to translate messages into your native
-     language. After mapping, sending the alias message will be just as fast
-     as sending the original message. You can use this to create programs
-     in your native language without sacrficing performance. Of course the mapping itself
-     has a cost, but the mapped calls will be 'toll-free'.
-    
-     Usage:
-    
-     #in this example we'll map a message to a Dutch word:
-    
-     Boolean learn: 'alsWaar:'
-             means: 'ifTrue:'.
-    
-     (2 > 1) alsWaar: {
-       Pen write: 'alsWaar means ifTrue in Dutch'.
-     }
-.fi
-.BR.BR.BR
-
-.B [Object] do
+.B  * [Object] do
 .nf
     
      Activates 'chain mode'. If chain mode is active, all messages will
@@ -179,14 +155,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Object] done
+.B  * [Object] done
 .nf
     
      Deactivates 'chain mode'.
 .fi
 .BR.BR.BR
 
-.B [Object] copy
+.B  * [Object] copy
 .nf
     
      Contrary to other languages, all objects, even booleans, numbers and
@@ -202,7 +178,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Object] case: [Object] do: [Block].
+.B  * [Object] case: [Object] do: [Block].
 .nf
     
      This message makes the recipient compare itself to the specified object.
@@ -245,7 +221,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Object] message: [String] arguments: [Array]
+.B  * [Object] message: [String] arguments: [Array]
 .nf
     
      Sends a custom or 'dynamic' message to an object. This takes a string containing
@@ -264,7 +240,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Object] on: [String] do: [Block]
+.B  * [Object] on: [String] do: [Block]
 .nf
     
      Makes the object respond to a new kind of message.
@@ -283,7 +259,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B [Object] respond: [String]
+.B  * [Object] respond: [String]
 .nf
     
      Variations:
@@ -299,7 +275,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Object] Nil?
+.B  * [Object] Nil?
 .nf
     
      Default Nil? implementation.
@@ -308,7 +284,31 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B Boolean
+.B  * [Object] learn: [String] means: [String].
+.nf
+    
+     Teaches any object to repsond to the first specified message just like
+     it would upon receiving the second. This allows you to map existing
+     responses to new messages. You can use this to translate messages into your native
+     language. After mapping, sending the alias message will be just as fast
+     as sending the original message. You can use this to create programs
+     in your native language without sacrficing performance. Of course the mapping itself
+     has a cost, but the mapped calls will be 'toll-free'.
+    
+     Usage:
+    
+     #in this example we'll map a message to a Dutch word:
+    
+     Boolean learn: 'alsWaar:'
+             means: 'ifTrue:'.
+    
+     (2 > 1) alsWaar: {
+       Pen write: 'alsWaar means ifTrue in Dutch'.
+     }
+.fi
+.BR.BR.BR
+
+.B  * Boolean
 .nf
     
      Literal:
@@ -318,7 +318,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Boolean] = [other]
+.B  * [Boolean] = [other]
 .nf
     
      Tests whether the other object (as a boolean) has the
@@ -330,7 +330,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Boolean] != [other]
+.B  * [Boolean] != [other]
 .nf
     
      Tests whether the other object (as a boolean) has the
@@ -342,14 +342,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Boolean] toString
+.B  * [Boolean] toString
 .nf
     
      Simple cast function.
 .fi
 .BR.BR.BR
 
-.B [Boolean] break
+.B  * [Boolean] break
 .nf
     
      Breaks out of the current block and bubbles up to the parent block if
@@ -361,7 +361,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Boolean] continue
+.B  * [Boolean] continue
 .nf
     
      Skips the remainder of the current block in a loop, continues to the next
@@ -373,7 +373,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Boolean] true: [block]
+.B  * [Boolean] true: [block]
 .nf
     
      Executes a block of code if the value of the boolean
@@ -384,7 +384,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Boolean] false: [block]
+.B  * [Boolean] false: [block]
 .nf
     
      Executes a block of code if the value of the boolean
@@ -399,7 +399,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B [Boolean] not
+.B  * [Boolean] not
 .nf
     
      Returns the opposite of the current value.
@@ -410,7 +410,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Boolean] either: [this] or: [that]
+.B  * [Boolean] either: [this] or: [that]
 .nf
     
      Returns argument #1 if boolean value is True and argument #2 otherwise.
@@ -420,7 +420,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Boolean] & [other]
+.B  * [Boolean] & [other]
 .nf
     
      Returns True if both the object value is True and the
@@ -433,7 +433,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Boolean] ! [other]
+.B  * [Boolean] nor: [other]
 .nf
     
      Returns True if the object value is False and the
@@ -441,12 +441,12 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     a ! b
+     a nor: b
     
 .fi
 .BR.BR.BR
 
-.B [Boolean] | [other]
+.B  * [Boolean] | [other]
 .nf
     
      Returns True if either the object value is True or the
@@ -458,7 +458,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Boolean] ? [other]
+.B  * [Boolean] ? [other]
 .nf
     
      Returns True if either the object value is True or the
@@ -470,14 +470,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Boolean] toNumber
+.B  * [Boolean] toNumber
 .nf
     
      Returns 0 if boolean is False and 1 otherwise.
 .fi
 .BR.BR.BR
 
-.B Number
+.B  * Number
 .nf
     
      Literal:
@@ -497,49 +497,49 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B [Number] > [other]
+.B  * [Number] > [other]
 .nf
     
      Returns True if the number is higher than other number.
 .fi
 .BR.BR.BR
 
-.B [Number] >=: [other]
+.B  * [Number] >=: [other]
 .nf
     
      Returns True if the number is higher than or equal to other number.
 .fi
 .BR.BR.BR
 
-.B [Number] < [other]
+.B  * [Number] < [other]
 .nf
     
      Returns True if the number is less than other number.
 .fi
 .BR.BR.BR
 
-.B [Number] <=: [other]
+.B  * [Number] <=: [other]
 .nf
     
      Returns True if the number is less than or equal to other number.
 .fi
 .BR.BR.BR
 
-.B [Number] = [other]
+.B  * [Number] = [other]
 .nf
     
      Returns True if the number equals the other number.
 .fi
 .BR.BR.BR
 
-.B [Number] !=: [other]
+.B  * [Number] !=: [other]
 .nf
     
      Returns True if the number does not equal the other number.
 .fi
 .BR.BR.BR
 
-.B [Number] between: [Number] and: [Number]
+.B  * [Number] between: [Number] and: [Number]
 .nf
     
      Returns a random number between the specified boundaries,
@@ -556,21 +556,21 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] odd
+.B  * [Number] odd
 .nf
     
      Returns True if the number is odd and False otherwise.
 .fi
 .BR.BR.BR
 
-.B [Number] even
+.B  * [Number] even
 .nf
     
      Returns True if the number is even and False otherwise.
 .fi
 .BR.BR.BR
 
-.B [Number] + [Number]
+.B  * [Number] + [Number]
 .nf
     
      Adds the other number to the current one. Returns a new
@@ -578,7 +578,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] +=: [Number]
+.B  * [Number] +=: [Number]
 .nf
     
      Increases the number ITSELF by the specified amount, this message will change the
@@ -586,7 +586,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] - [Number]
+.B  * [Number] - [Number]
 .nf
     
      Subtracts the other number from the current one. Returns a new
@@ -594,7 +594,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] -=: [number]
+.B  * [Number] -=: [number]
 .nf
     
      Decreases the number ITSELF by the specified amount, this message will change the
@@ -602,7 +602,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] * [Number or Block]
+.B  * [Number] * [Number or Block]
 .nf
     
      Multiplies the number by the specified multiplier. Returns a new
@@ -610,7 +610,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Block] * [Number]
+.B  * [Block] * [Number]
 .nf
     
      Runs the block of code a 'Number' of times.
@@ -625,7 +625,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] *=: [Number]
+.B  * [Number] *=: [Number]
 .nf
     
      Multiplies the number ITSELF by multiplier, this message will change the
@@ -641,7 +641,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] / [Number]
+.B  * [Number] / [Number]
 .nf
     
      Divides the number by the specified divider. Returns a new
@@ -649,7 +649,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] /=: [Number]
+.B  * [Number] /=: [Number]
 .nf
     
      Divides the number ITSELF by divider, this message will change the
@@ -665,7 +665,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] % [modulo]
+.B  * [Number] % [modulo]
 .nf
     
      Returns the modulo of the number. This message will return a new
@@ -680,7 +680,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] power: [power]
+.B  * [Number] power: [power]
 .nf
     
      Returns a new object representing the
@@ -695,7 +695,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] positive?
+.B  * [Number] positive?
 .nf
     
      Returns a boolean indicating wether the number is positive.
@@ -711,7 +711,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] negative?
+.B  * [Number] negative?
 .nf
     
      Returns a boolean indicating wether the number is negative.
@@ -729,38 +729,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] max: [other]
-.nf
-    
-     Returns the biggest number of the two.
-    
-     Usage:
-    
-     x := 6 max: 4. #x is 6
-     x := 6 max: 7. #x is 7
-.fi
-.BR.BR.BR
-
-.B [Number] min: [other]
-.nf
-    
-     Returns a the smallest number.
-    
-     Usage:
-    
-     x := 6 min: 4. #x is 4
-     x := 6 min: 7. #x is 7
-.fi
-.BR.BR.BR
-
-.B [Number] factorial
+.B  * [Number] factorial
 .nf
     
      Calculates the factorial of a number.
 .fi
 .BR.BR.BR
 
-.B [Number] floor
+.B  * [Number] floor
 .nf
     
      Gives the largest integer less than the recipient.
@@ -775,7 +751,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] qualify: 'meters'.
+.B  * [Number] qualify: 'meters'.
 .nf
     
      Qualifies a number. Alias for: [Number] [String].
@@ -783,7 +759,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] [String]
+.B  * [Number] [String]
 .nf
     
      Qualifies a number. By sending an arbitrary (undocumented) unary message to
@@ -805,7 +781,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] qualification.
+.B  * [Number] qualification.
 .nf
     
      Returns the qualification of a number object. For instance, as a
@@ -818,7 +794,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B [Number] ceil
+.B  * [Number] ceil
 .nf
     
      Rounds up the recipient number and returns the next higher integer number
@@ -834,14 +810,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] round
+.B  * [Number] round
 .nf
     
      Returns the rounded number.
 .fi
 .BR.BR.BR
 
-.B [Number] abs
+.B  * [Number] abs
 .nf
     
      Returns the absolute (unsigned, positive) value of the number.
@@ -856,43 +832,43 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] sqrt
+.B  * [Number] square root
 .nf
     
      Returns the square root of the recipient.
     
      Usage:
     
-     x := 49.
-     y := x sqrt. #y will be 7
+     ☞ x := 49.
+     ☞ y := x square root.
     
      The example above takes the square root of 49, resulting in the
      number 7.
 .fi
 .BR.BR.BR
 
-.B [Number] byte
+.B  * [Number] byte
 .nf
     
      Converts a number to a single byte.
 .fi
 .BR.BR.BR
 
-.B [Number] toString
+.B  * [Number] string
 .nf
     
      Wrapper for cast function.
 .fi
 .BR.BR.BR
 
-.B [Number] boolean
+.B  * [Number] boolean
 .nf
     
      Casts a number to a boolean object.
 .fi
 .BR.BR.BR
 
-.B String
+.B  * String
 .nf
     
      Literal:
@@ -903,11 +879,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
      You may only use single quotes. To escape a character use the
      backslash '\\' character. Use the special characters ↵ and ⇿ to
      insert a newline or tab respectively.
-    
-     The following string constants exist:
-    
-     a-z equals abcdefghijklmnopqrstuvwxyz
-     A-Z equals ABCDEFGHIJKLMNOPQRESTUVWXYZ
     
      Strings in Citrine represent a series of bytes. Strings can be
      interpreted as real bytes or as text depending on the messages
@@ -921,7 +892,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B [String] bytes
+.B  * [String] bytes
 .nf
     
      Returns the number of bytes in a string, as opposed to
@@ -929,21 +900,21 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] = [other]
+.B  * [String] = [other]
 .nf
     
      Returns True if the other string is the same (in bytes).
 .fi
 .BR.BR.BR
 
-.B [String] != [other]
+.B  * [String] ≠ [other]
 .nf
     
      Returns True if the other string is not the same (in bytes).
 .fi
 .BR.BR.BR
 
-.B [String] length
+.B  * [String] length
 .nf
     
      Returns the length of the string in symbols.
@@ -951,7 +922,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] + [other]
+.B  * [String] + [other]
 .nf
     
      Appends other string to self and returns the resulting
@@ -959,7 +930,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] append: [String].
+.B  * [String] append: [String].
 .nf
     
      Appends the specified string to itself. This is different from the '+'
@@ -970,16 +941,12 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      x := 'Hello '.
      x append: 'World'.
-     Pen write: x. #Hello World
+     ✎ write: x.
     
-     Instead of using the append message you may also use its short form,
-     like this:
-    
-     x +=: 'World'.
 .fi
 .BR.BR.BR
 
-.B [String] from: [position] to: [destination]
+.B  * [String] from: [position] to: [destination]
 .nf
     
      Returns a portion of a string defined by from-to values.
@@ -991,7 +958,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] from: [start] length: [length]
+.B  * [String] from: [start] length: [length]
 .nf
     
      Returns a portion of a string defined by from
@@ -1004,14 +971,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] skip: [number]
+.B  * [String] 3: [number]
 .nf
     
      Returns a string without the first X characters.
 .fi
 .BR.BR.BR
 
-.B [String] at: [position]
+.B  * [String] at: [position]
 .nf
     
      Returns the character at the specified position (UTF8 aware).
@@ -1024,7 +991,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] byte: [position]
+.B  * [String] byte: [position]
 .nf
     
      Returns the byte at the specified position (in bytes).
@@ -1036,7 +1003,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] first: [subject]
+.B  * [String] first: [subject]
 .nf
     
      Returns the index (character number, not the byte!) of the
@@ -1049,7 +1016,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] uppercase
+.B  * [String] uppercase
 .nf
     
      Returns a new uppercased version of the string.
@@ -1059,7 +1026,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] lowercase
+.B  * [String] lowercase
 .nf
     
      Returns a new lowercased version of the string.
@@ -1069,7 +1036,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] last: [subject]
+.B  * [String] last: [subject]
 .nf
     
      Returns the index (character number, not the byte!) of the
@@ -1081,7 +1048,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] [key]: [value]
+.B  * [String] [key]: [value]
 .nf
     
      Replaces the character sequence 'key' with the contents of value.
@@ -1094,7 +1061,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] replace: [string] with: [other]
+.B  * [String] replace: [string] with: [other]
 .nf
     
      Replaces needle with replacement in original string and returns
@@ -1106,7 +1073,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] pattern: [String] do: [Block] options: [String].
+.B  * [String] pattern: [String] do: [Block] options: [String].
 .nf
     
      Matches the POSIX regular expression in the first argument against
@@ -1130,7 +1097,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] pattern: [String] do: [Block].
+.B  * [String] pattern: [String] do: [Block].
 .nf
     
      Same as pattern:do:options: but without the options, no flags will
@@ -1138,14 +1105,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] contains: [String]
+.B  * [String] contains: [String]
 .nf
     
      Returns True if the other string is a substring.
 .fi
 .BR.BR.BR
 
-.B [String] matches: [String].
+.B  * [String] matches: [String].
 .nf
     
      Tests the pattern against the string and returns True if there is a match
@@ -1158,7 +1125,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] trim
+.B  * [String] remove surrounding spaces
 .nf
     
      Trims a string. Removes surrounding white space characters
@@ -1166,7 +1133,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     ' hello ' trim.
+     ' hello ' remove surrounding spaces.
     
      The example above will strip all white space characters from the
      recipient on both sides of the text. Also see: leftTrim and rightTrim
@@ -1174,21 +1141,21 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] toNumber
+.B  * [String] toNumber
 .nf
     
      Converts string to a number.
 .fi
 .BR.BR.BR
 
-.B [String] toBoolean
+.B  * [String] toBoolean
 .nf
     
      Converts string to boolean
 .fi
 .BR.BR.BR
 
-.B [String] split: [String]
+.B  * [String] split: [String]
 .nf
     
      Converts a string to an array by splitting the string using
@@ -1196,7 +1163,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] characters.
+.B  * [String] characters.
 .nf
     
      Splits the string in UTF-8 characters and returns
@@ -1209,21 +1176,21 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] list
+.B  * [String] list
 .nf
     
      Returns an array of bytes representing the string.
 .fi
 .BR.BR.BR
 
-.B [String] append byte: [Number].
+.B  * [String] append byte: [Number].
 .nf
     
      Appends a raw byte to a string.
 .fi
 .BR.BR.BR
 
-.B [String] compare: [String]
+.B  * [String] compare: [String]
 .nf
     
      Compares a string using the UTF-8 compatible strcmp function.
@@ -1234,7 +1201,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] < [String]
+.B  * [String] < [String]
 .nf
     
      Returns True if the first String comes before the latter
@@ -1243,7 +1210,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] ≤ [String]
+.B  * [String] ≤ [String]
 .nf
     
      Returns True if the first String comes before or at the same
@@ -1252,7 +1219,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] > [String]
+.B  * [String] > [String]
 .nf
     
      Returns True if the first String comes after the latter
@@ -1261,7 +1228,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] ≥ [String]
+.B  * [String] ≥ [String]
 .nf
     
      Returns True if the first String comes after or at the same position as the latter
@@ -1270,7 +1237,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] escape: '\n'.
+.B  * [String] escape: '\n'.
 .nf
     
      Escapes the specified ASCII character in a string.
@@ -1279,7 +1246,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] escapeQuotes.
+.B  * [String] escapeQuotes.
 .nf
     
      Escapes all single quotes in a string. Sending this message to a
@@ -1287,21 +1254,21 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] unescape: '\n'.
+.B  * [String] unescape: '\n'.
 .nf
     
      'UnEscapes' the specified ASCII character in a string.
 .fi
 .BR.BR.BR
 
-.B [String] html
+.B  * [String] html
 .nf
     
      Escapes HTML chars.
 .fi
 .BR.BR.BR
 
-.B [String] hashWithKey: [String]
+.B  * [String] hashWithKey: [String]
 .nf
     
      Returns the hash of the recipient String using the specified key.
@@ -1310,7 +1277,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [String] eval
+.B  * [String] evaluate
 .nf
     
      Evaluates the contents of the string as code.
@@ -1321,12 +1288,12 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     a := 'List ← 1 ; 2 ; 3' eval.
-     x := a @ 2. #3
+     a := 'List ← 1 ; 2 ; 3' evaluate.
+     x := a @ 2.
 .fi
 .BR.BR.BR
 
-.B Block
+.B  * Block
 .nf
     
      Literal:
@@ -1346,7 +1313,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Block] apply: [object]
+.B  * [Block] apply: [object]
 .nf
     
      Runs a block of code using the specified object as a parameter.
@@ -1355,7 +1322,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Block] whileTrue: [block]
+.B  * [Block] whileTrue: [block]
 .nf
     
      Runs a block of code, depending on the outcome runs the other block
@@ -1373,7 +1340,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Block] whileFalse: [block]
+.B  * [Block] whileFalse: [block]
 .nf
     
      Runs a block of code, depending on the outcome runs the other block
@@ -1391,7 +1358,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Block] run
+.B  * [Block] run
 .nf
     
      Sending the unary message 'run' to a block will cause it to execute.
@@ -1408,7 +1375,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Block] set: [name] value: [object]
+.B  * [Block] set: [name] value: [object]
 .nf
     
      Sets a variable in a block of code. This how you can get closure-like
@@ -1433,7 +1400,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Block] error: [object].
+.B  * [Block] error: [object].
 .nf
     
      Sets error flag on a block of code.
@@ -1451,7 +1418,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Block] catch: [otherBlock]
+.B  * [Block] catch: [otherBlock]
 .nf
     
      Associates an error clause to a block.
@@ -1469,7 +1436,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Block] toString
+.B  * [Block] toString
 .nf
     
      Returns a string representation of the Block. This basic behavior, part
@@ -1478,7 +1445,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] new
+.B  * [List] new
 .nf
     
      Creates a new list or array. List is an alias for array.
@@ -1508,7 +1475,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] new
+.B  * [List] new
 .nf
     
      Creates a new array.
@@ -1538,7 +1505,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] type
+.B  * [List] type
 .nf
     
      Returns the string 'Array'.
@@ -1546,7 +1513,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] add: [Element].
+.B  * [List] add: [Element].
 .nf
     
      Alias for [List] push. Might be more readable
@@ -1554,7 +1521,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] push: [Element]
+.B  * [List] push: [Element]
 .nf
     
      Pushes an element on top of the array.
@@ -1566,7 +1533,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] min
+.B  * [List] minimum
 .nf
     
      Returns the minimum value from an array.
@@ -1574,12 +1541,12 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      a := List ← 8 ; 4 ; 2 ; 16.
-     m := a min. #2
+     m := a minimum.
     
 .fi
 .BR.BR.BR
 
-.B [List] max
+.B  * [List] maximum
 .nf
     
      Returns the maximum value from an array.
@@ -1587,12 +1554,12 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      a := List ← 8 ; 4 ; 2 ; 16.
-     m := a max. #16
+     m := a maximum.
     
 .fi
 .BR.BR.BR
 
-.B [List] sum
+.B  * [List] sum
 .nf
     
      Takes the sum of an array. This message will calculate the
@@ -1608,7 +1575,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] product
+.B  * [List] product
 .nf
     
      Takes the product of an array. On receiving this message, the
@@ -1626,7 +1593,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] map: [Block].
+.B  * [List] map: [Block].
 .nf
     
      Iterates over the array. Passing each element as a key-value pair to the
@@ -1645,14 +1612,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] each: [Block].
+.B  * [List] each: [Block].
 .nf
     
       Alias for [List] map: [Block].
 .fi
 .BR.BR.BR
 
-.B [List] ← [Element1] ; [Element2] ; ...
+.B  * [List] ← [Element1] ; [Element2] ; ...
 .nf
     
      Creates a new instance of an array and initializes this
@@ -1667,7 +1634,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] unshift: [Element].
+.B  * [List] unshift: [Element].
 .nf
     
      Unshift operation for array.
@@ -1681,7 +1648,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] join: [Glue].
+.B  * [List] join: [Glue].
 .nf
     
      Joins the elements of an array together in a string
@@ -1695,7 +1662,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] at: [Index]
+.B  * [List] at: [Index]
 .nf
     
      Returns the element in the array at the specified index.
@@ -1708,11 +1675,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      fruits := List ← 'apples' ; 'oranges' ; 'bananas'.
-     fruits at: 1. #returns 'oranges'
+     fruits position: 1.
 .fi
 .BR.BR.BR
 
-.B [List] first.
+.B  * [List] first.
 .nf
      
      Returns the first element of the array.
@@ -1720,7 +1687,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] last.
+.B  * [List] last.
 .nf
      
      Returns the last element of the array.
@@ -1728,7 +1695,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] secondLast.
+.B  * [List] second last.
 .nf
      
      Returns the second last element of the array.
@@ -1736,14 +1703,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] @ [Index]
+.B  * [List] ? [Index]
 .nf
     
-     Alias for [List] at: [Index]
+     Alias for [List] position: [Index]
 .fi
 .BR.BR.BR
 
-.B [List] put: [Element] at: [Index]
+.B  * [List] put: [Element] at: [Index]
 .nf
     
      Puts a value in the array at the specified index.
@@ -1757,14 +1724,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] pop
+.B  * [List] pop
 .nf
     
      Pops off the last element of the array.
 .fi
 .BR.BR.BR
 
-.B [List] - [Number]
+.B  * [List] - [Number]
 .nf
     
      Deletes the element specified by the index number and
@@ -1774,25 +1741,25 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := List ← 1 ; 2 ; 3.
-     x - 1. #1 ; 3
+     x - 1.
 .fi
 .BR.BR.BR
 
-.B [List] shift
+.B  * [List] shift
 .nf
     
      Shifts off the first element of the array.
 .fi
 .BR.BR.BR
 
-.B [List] count
+.B  * [List] count
 .nf
     
      Returns the number of elements in the array.
 .fi
 .BR.BR.BR
 
-.B [List] from: [Begin] length: [End]
+.B  * [List] from: [Begin] length: [End]
 .nf
     
      Copies part of an array indicated by from and to and
@@ -1800,7 +1767,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] replace: [Number] length: [Number] with: [List].
+.B  * [List] replace: [Number] length: [Number] with: [List].
 .nf
     
      Returns a copy of the array with the specified elements replaced.
@@ -1815,22 +1782,12 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     ☞ cakes := List ← 'apple' ; 'berry' ; 'choco' ; 'cheese'.
-     #apple, cinnamon, pineapple, cheese
      ☞ buy := cakes replace: 1 length: 2 with: ( List ← 'cinnamon' ; 'pineapple' ).
-     #apple, cinnamon, pineapple
-     ☞ buy := cakes replace: 1 length: 12 with: ( List ← 'cinnamon' ; 'pineapple' ).
-     #apple, berry
-     ☞ buy := cakes replace: 2 length: 10 with: ( List new ).
-     #berry, choco, cheese
-     ☞ buy := cakes replace: '' length: '1' with: ( List new ).
-     #error...
-     ☞ buy := cakes replace: '' length: '1' with: 'x'.
     
 .fi
 .BR.BR.BR
 
-.B [List] + [List]
+.B  * [List] + [List]
 .nf
     
      Returns a new array, containing elements of itself and the other
@@ -1838,7 +1795,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] by: [List].
+.B  * [List] by: [List].
 .nf
     
      Combines the first list with the second one thus creating
@@ -1853,7 +1810,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] copy
+.B  * [List] copy
 .nf
     
      Copies the array. The array object will answer this message by
@@ -1873,7 +1830,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B [List] sort: [Block]
+.B  * [List] sort: [Block]
 .nf
     
      Sorts the contents of an array using a sort block.
@@ -1881,7 +1838,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] string
+.B  * [List] string
 .nf
      
      Returns a string representation of the array and its contents.
@@ -1902,7 +1859,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] fill: [Number] with: [Object]
+.B  * [List] fill: [Number] with: [Object]
 .nf
     
      Fills the array with the specified number of objects.
@@ -1913,7 +1870,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] column: [Number]
+.B  * [List] column: [Number]
 .nf
     
      Extracts the specified column from the array.
@@ -1931,29 +1888,17 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [List] indexOf: [Object].
+.B  * [List] find: [Object].
 .nf
     
      Checks whether the specified object occurs in the array and returns the index number
      if so. If not, the index number -1 will be returned. Note that the comparison
      will be performed by converting both values to strings.
     
-     Usage:
-    
-     ☞ colors := List ← 'red' ; 'green' ; 'blue' ; 3 ; (List new) ; False ; Nil.
-    
-     ✎ write: (colors indexOf: 'green'), brk. #1
-     ✎ write: (colors indexOf: 'blue'), brk. #2
-     ✎ write: (colors indexOf: 'red'), brk. #0
-     ✎ write: (colors indexOf: 3), brk. #3
-     ✎ write: (colors indexOf: (List new)), brk. #4
-     ✎ write: (colors indexOf: 'False'), brk. #5
-     ✎ write: (colors indexOf: Nil), brk. #6
-     ✎ write: (colors indexOf: 'purple'), brk. #-1
 .fi
 .BR.BR.BR
 
-.B [List] serialize
+.B  * [List] serialize
 .nf
     
      Alias for [List] toString.
@@ -1962,7 +1907,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B Map
+.B  * Map
 .nf
     
      Creates a Map object.
@@ -1974,7 +1919,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Map] type
+.B  * [Map] type
 .nf
     
      Returns the string 'Map'.
@@ -1982,7 +1927,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Map] put: [Element] at: [Key]
+.B  * [Map] put: [Element] at: [Key]
 .nf
     
      Puts a key-value pair in a map.
@@ -1994,7 +1939,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Map] [Key]: [Value]
+.B  * [Map] [Key]: [Value]
 .nf
     
      You can fill the map object with key-value pairs by sending any
@@ -2006,19 +1951,17 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      ☞ menu := Map new
-    	Margherita: 11.90, #set using keyword message
+    	Margherita: 11.90,
     	Hawaii: 12.99,
-    	QuattroFormaggi: 13.00, #set using binary message
-    	X 15.99.
+    	QuattroFormaggi: 13.00.
     
-     ✎ write: ( menu @ 'Hawaii' ), brk. #retrieve with @
-     ✎ write: ( menu Margherita ), brk. #retrieve with message
-     ✎ write: ( menu @ 'X' ), brk. #in this case you have to use @
+     ✎ write: ( menu ? 'Hawaii' ), brk. 
+     ✎ write: ( menu Margherita ), brk.
     
 .fi
 .BR.BR.BR
 
-.B [Map] - [String]
+.B  * [Map] - [String]
 .nf
     
      Deletes the entry, identified by the key specified in [String], from
@@ -2026,7 +1969,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Map] keys
+.B  * [Map] keys
 .nf
     
      Returns an array containing all the keys in the map.
@@ -2046,7 +1989,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Map] values
+.B  * [Map] values
 .nf
     
      Returns an array containing all the keys in the map.
@@ -2065,14 +2008,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Map] at: [Key]
+.B  * [Map] at: [Key]
 .nf
     
      Retrieves the value specified by the key from the map.
 .fi
 .BR.BR.BR
 
-.B [Map] @ [Key]
+.B  * [Map] ? [Key]
 .nf
     
      Alias for [Map] at: [Key].
@@ -2080,14 +2023,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Map] count
+.B  * [Map] count
 .nf
     
      Returns the number of elements in the map.
 .fi
 .BR.BR.BR
 
-.B [Map] each: [Block]
+.B  * [Map] each: [Block]
 .nf
     
      Iterates over the map, passing key-value pairs to the specified block.
@@ -2095,7 +2038,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Map] has: [Object]
+.B  * [Map] has: [Object]
 .nf
     
      Checks whether the map contains the specified value.
@@ -2118,7 +2061,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Map] toString
+.B  * [Map] toString
 .nf
     
      Returns a string representation of a map encoded in Citrine itself.
@@ -2140,7 +2083,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Map] serialize
+.B  * [Map] serialize
 .nf
     
      Alias for [Map] toString.
@@ -2155,7 +2098,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B File
+.B  * File
 .nf
      
      Represents a File object.
@@ -2167,7 +2110,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [File] path
+.B  * [File] path
 .nf
     
      Returns the path of a file. The file object will respond to this
@@ -2176,7 +2119,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [File] toString
+.B  * [File] toString
 .nf
     
      Returns a string representation of the file. If a path has been associated
@@ -2186,7 +2129,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [File] read
+.B  * [File] read
 .nf
     
      Reads contents of a file. Send this message to a file to read the entire contents in
@@ -2202,7 +2145,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [File] write: [String]
+.B  * [File] write: [String]
 .nf
     
      Writes content to a file. Send this message to a file object to write the
@@ -2218,7 +2161,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [File] append: [String]
+.B  * [File] append: [String]
 .nf
     
      Appends content to a file. The file object responds to this message like it
@@ -2227,35 +2170,35 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [File] exists
+.B  * [File] exists
 .nf
     
      Returns True if the file exists and False otherwise.
 .fi
 .BR.BR.BR
 
-.B [File] include
+.B  * [File] include
 .nf
     
      Includes the file as a piece of executable code.
 .fi
 .BR.BR.BR
 
-.B [File] delete
+.B  * [File] delete
 .nf
     
      Deletes the file.
 .fi
 .BR.BR.BR
 
-.B [File] size
+.B  * [File] size
 .nf
     
      Returns the size of the file.
 .fi
 .BR.BR.BR
 
-.B [File] open: [string]
+.B  * [File] open: [string]
 .nf
     
      Open a file with using the specified mode.
@@ -2269,7 +2212,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [File] close.
+.B  * [File] close.
 .nf
     
      Closes the file represented by the recipient.
@@ -2284,7 +2227,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [File] readBytes: [Number].
+.B  * [File] readBytes: [Number].
 .nf
     
      Reads a number of bytes from the file.
@@ -2301,7 +2244,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [File] writeBytes: [String].
+.B  * [File] writeBytes: [String].
 .nf
     
      Takes a string and writes the bytes in the string to the file
@@ -2319,7 +2262,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [File] seek: [Number].
+.B  * [File] seek: [Number].
 .nf
     
      Moves the file pointer to the specified position in the file
@@ -2335,7 +2278,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [File] rewind.
+.B  * [File] rewind.
 .nf
     
      Rewinds the file. Moves the file pointer to the beginning of the file.
@@ -2352,7 +2295,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [File] end.
+.B  * [File] end.
 .nf
     
      Moves the file pointer to the end of the file. Use this in combination with
@@ -2373,7 +2316,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B [File] unlock.
+.B  * [File] unlock.
 .nf
     
      Attempts to unlock a file. This message is non-blocking, on failure
@@ -2382,7 +2325,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [File] lock.
+.B  * [File] lock.
 .nf
     
      Attempts to acquire an exclusive lock on file.
@@ -2392,7 +2335,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [File] list: [String].
+.B  * [File] list: [String].
 .nf
     
      Returns the contents of the specified folder as a an array.
@@ -2414,21 +2357,21 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B Program
+.B  * [Program] clean memory
 .nf
     
      GarbageCollector, to invoke use:
     
-     [Program] sweep.
+     Program clean memory.
 .fi
 .BR.BR.BR
 
-.B [Program] memory
+.B  * [Program] memory
 .nf
 .fi
 .BR.BR.BR
 
-.B [Program] memoryLimit
+.B  * [Program] memoryLimit
 .nf
     
      Sets the memory limit, if this limit gets exceeded the program will produce
@@ -2436,7 +2379,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Program] tidiness: [Number]
+.B  * [Program] tidiness: [Number]
 .nf
     
      Selects mode of operation for GC.
@@ -2449,7 +2392,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Program] shell: [String]
+.B  * [Program] shell: [String]
 .nf
     
      Performs a Shell operation. The Shell object uses a fluid API, so you can
@@ -2469,28 +2412,28 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Program] argument: [Number]
+.B  * [Program] argument: [Number]
 .nf
     
      Obtains an argument from the CLI invocation.
 .fi
 .BR.BR.BR
 
-.B [Program] argCount
+.B  * [Program] arguments
 .nf
     
      Returns the number of CLI arguments passed to the script.
 .fi
 .BR.BR.BR
 
-.B [Program] exit
+.B  * [Program] end
 .nf
      
      Exits program immediately.
 .fi
 .BR.BR.BR
 
-.B [Program] env: [String]
+.B  * [Program] setting: [String]
 .nf
     
      Returns the value of an environment variable.
@@ -2501,14 +2444,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Program] env: [Key] val: [Value]
+.B  * [Program] setting: [Key] value: [Value]
 .nf
     
      Sets the value of an environment variable.
 .fi
 .BR.BR.BR
 
-.B [Program] waitForInput
+.B  * [Program] waitForInput
 .nf
     
      Ask a question on the command-line, resumes program
@@ -2526,7 +2469,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Program] input.
+.B  * [Program] input.
 .nf
     
      Reads all raw input from STDIN.
@@ -2552,14 +2495,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Program] flush.
+.B  * [Program] flush.
 .nf
     
      Flushes the STDOUT output buffer.
 .fi
 .BR.BR.BR
 
-.B [Program] pid
+.B  * [Program] pid
 .nf
     
      Returns the process identification number associated with the
@@ -2568,7 +2511,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Program] toString
+.B  * [Program] toString
 .nf
     
      Returns a string representation of the program. This will be something like
@@ -2576,14 +2519,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Program] number
+.B  * [Program] number
 .nf
     
      Returns the program pid as a number.
 .fi
 .BR.BR.BR
 
-.B [Program] error: [String]
+.B  * [Program] error: [String]
 .nf
     
      Logs the specified message string using syslog using log level LOG_ERR.
@@ -2591,7 +2534,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Clock] wait: [Number]
+.B  * [Clock] wait: [Number]
 .nf
     
      Suspends program execution for the specified number of seconds.
@@ -2608,7 +2551,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Clock] new: [Number]
+.B  * [Clock] new: [Number]
 .nf
     
      Creates a new clock instance from a UNIX time stamp.
@@ -2619,7 +2562,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B [Clock] like: [Clock]
+.B  * [Clock] like: [Clock]
 .nf
     
      Syncs a clock. Copies the time AND zone from the other clock.
@@ -2630,119 +2573,119 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Clock] zone: [String]
+.B  * [Clock] zone: [String]
 .nf
     
      Sets the time zone of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] zone
+.B  * [Clock] zone
 .nf
     
      Returns time zone of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] zone: [Number]
+.B  * [Clock] zone: [Number]
 .nf
     
      Sets the year of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] zone: [Number]
+.B  * [Clock] zone: [Number]
 .nf
     
      Sets the month of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] zone: [Number]
+.B  * [Clock] zone: [Number]
 .nf
     
      Sets the day of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] zone: [Number]
+.B  * [Clock] zone: [Number]
 .nf
     
      Sets the hour of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] zone: [Number]
+.B  * [Clock] zone: [Number]
 .nf
     
      Sets the minute of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] zone: [Number]
+.B  * [Clock] zone: [Number]
 .nf
     
      Sets the second of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] year
+.B  * [Clock] year
 .nf
     
      Returns year of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] month
+.B  * [Clock] month
 .nf
     
      Returns month of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] day
+.B  * [Clock] day
 .nf
     
      Returns day of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] hour
+.B  * [Clock] hour
 .nf
     
      Returns hour of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] minute
+.B  * [Clock] minute
 .nf
     
      Returns minute of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] second
+.B  * [Clock] second
 .nf
     
      Returns second of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] yearday
+.B  * [Clock] yearday
 .nf
     
      Returns day number of the year.
 .fi
 .BR.BR.BR
 
-.B [Clock] weekday
+.B  * [Clock] weekday
 .nf
     
      Returns the week day number of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] time.
+.B  * [Clock] time.
 .nf
     
      Returns the UNIX time stamp representation of the time.
@@ -2752,14 +2695,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Clock] week
+.B  * [Clock] week
 .nf
     
      Returns the week number of the clock.
 .fi
 .BR.BR.BR
 
-.B [Clock] format: [String]
+.B  * [Clock] format: [String]
 .nf
     
      Returns a string describing the date and time represented by the clock object
@@ -2767,7 +2710,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Clock] toString
+.B  * [Clock] toString
 .nf
     
      Returns a string describing the date and time
@@ -2787,7 +2730,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Clock] number
+.B  * [Clock] number
 .nf
     
      Returns a time stamp describing the date and time
@@ -2811,7 +2754,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B [Clock] add: [Number].
+.B  * [Clock] add: [Number].
 .nf
     
      Adds the number to the clock, updating its time accordingly.
@@ -2841,7 +2784,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Clock] subtract: [Number].
+.B  * [Clock] subtract: [Number].
 .nf
     
      Same as '[Clock] add:' but subtracts the number instead of adding it to
@@ -2849,7 +2792,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Clock] new
+.B  * [Clock] new
 .nf
     
      Creates a new clock, by default a clock will be set to
@@ -2857,21 +2800,21 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Pen] write: [String]
+.B  * [Pen] write: [String]
 .nf
     
      Writes string to console. 
 .fi
 .BR.BR.BR
 
-.B [Pen] brk
+.B  * [Pen] brk
 .nf
     
      Outputs a newline character.
 .fi
 .BR.BR.BR
 
-.B [Pen] tab
+.B  * [Pen] tab
 .nf
     
      Prints a tab character to the console output.
@@ -2886,7 +2829,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B Request get: [string]
+.B  * Request get: [string]
 .nf
      
      Returns the value of the specified GET parameter from the HTTP query string.
@@ -2899,7 +2842,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B Request getArray: [string].
+.B  * Request getArray: [string].
 .nf
      
      Returns an array of strings extracted from the query string.
@@ -2916,7 +2859,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B Request post: [string].
+.B  * Request post: [string].
 .nf
      
      Obtains a string from the HTTP POST payload. Just like 'get:' but for
@@ -2924,7 +2867,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B Request postArray: [string].
+.B  * Request postArray: [string].
 .nf
      
      Obtains an array from the HTTP POST payload. Just like 'getArray:' but for
@@ -2932,7 +2875,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B Request cookie: [string].
+.B  * Request cookie: [string].
 .nf
      
      Obtains a string from the HTTP COOKIE payload. Just like 'get:' but for
@@ -2940,7 +2883,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B Request cookieArray: [string].
+.B  * Request cookieArray: [string].
 .nf
      
      Obtains an array from the HTTP COOKIE payload. Just like 'getArray:' but for
@@ -2948,7 +2891,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B Request file: [string].
+.B  * Request file: [string].
 .nf
      
      Returns array containing the path to the uploaded temporay file (0) and
@@ -2956,7 +2899,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B Request serverOption: [string] is: [string].
+.B  * Request serverOption: [string] is: [string].
 .nf
      
      Sets a server option, available server option for SCGI server include:
@@ -2978,7 +2921,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B Request host: [string] listen: [string] pid: [string] callback: [block].
+.B  * Request host: [string] listen: [string] pid: [string] callback: [block].
 .nf
     
      Sets up Storm Server.
@@ -3011,7 +2954,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B [Json] new
+.B  * [Json] new
 .nf
     
      Creates a new instance of the Json object.
@@ -3022,7 +2965,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B [Json] parse: [String].
+.B  * [Json] parse: [String].
 .nf
      
      Parses a string containing Json encoded data into native Citrine objects.
@@ -3037,7 +2980,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Json] jsonify: [Map].
+.B  * [Json] jsonify: [Map].
 .nf
     
      Given a map, the jsonify: message will make the Json object return a
@@ -3045,7 +2988,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B C-constructor function.
+.B  * C-constructor function.
 .nf
     
      This function gets called when the plugin is loaded into memory.

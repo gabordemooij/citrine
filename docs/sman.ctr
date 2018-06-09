@@ -47,7 +47,7 @@ files each: { :index :file
 		☞ comment := commentBlocks shift.
 		☞ lines   := comment split: '\n'.
 		lines count > 3 true: {
-			☞ headline := lines @ 1.
+			☞ headline := lines ? 1.
 			✎ write: '.BR.BR.BR', brk brk.
 			
 			((headline find: '@internal') = -1) true: {
@@ -56,12 +56,12 @@ files each: { :index :file
 				☞ line := ''.
 				☞ n := 2.
 				{
-					line := lines at: n. 
+					line := lines position: n. 
 					↲ ((line find: '*/') = -1). 
 				}
 				true: {
 						line := line replace: '\\' with: '\\\\'.
-						✎ write: '    '+(line skip: 2), brk.
+						✎ write: '    '+(line offset: 2), brk.
 						n add: 1.
 				}.
 				✎ write: '.fi', brk.
