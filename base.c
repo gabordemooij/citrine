@@ -572,15 +572,13 @@ ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argum
        while( i < myself->methods->size ) {
                current_method_name_str = current_method->key->value.svalue->value;
                current_method_name_len = current_method->key->value.svalue->vlen;
-               if (  current_method_name_len > target_method_name_len ) {
-                       len = current_method_name_len;
-               } else {
-                       len = target_method_name_len;
-               }
-               if ( strncmp( current_method_name_str, target_method_name_str, len ) == 0 ) {
+               if (  current_method_name_len == target_method_name_len ) {
+					if ( strncmp( current_method_name_str, target_method_name_str, len ) == 0 ) {
                        ctr_internal_object_add_property( myself, alias, current_method->value, 1);
                        break;
-               }
+                
+					}
+				}
                current_method = current_method->next;
                i ++;
        }
@@ -1986,8 +1984,8 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 	size_t n = 255;
 	size_t i = 0;
 	regmatch_t matches[255];
-	char* needle = ctr_heap_allocate_cstring( argumentList->object );
-	char* options = ctr_heap_allocate_cstring( argumentList->next->next->object );
+	char* needle = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->object ) );
+	char* options = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->next->next->object ) );
 	uint8_t olen = strlen( options );
 	uint8_t p = 0;
 	uint8_t flagIgnore = 0;
@@ -2088,7 +2086,7 @@ ctr_object* ctr_string_find_pattern_do( ctr_object* myself, ctr_argument* argume
 }
 
 /**
- * [String] contains: [String]
+ * [String] matches: [String]
  *
  * Returns True if the other string is a substring.
  */
@@ -2116,7 +2114,7 @@ ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argum
 	int regex_error = 0;
 	int result = 0;
 	char* error_message = ctr_heap_allocate( 255 );
-	char* needle = ctr_heap_allocate_cstring( argumentList->object );
+	char* needle = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->object ) );
 	char* haystack = ctr_heap_allocate_cstring(myself);
 	ctr_object* answer;
 	regex_error = regcomp(&pattern, needle, REG_EXTENDED);
@@ -2399,7 +2397,7 @@ ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentL
  * C-based character substitute will be used.
  */
 ctr_object* ctr_string_escape(ctr_object* myself, ctr_argument* argumentList)  {
-	ctr_object* escape = argumentList->object;
+	ctr_object* escape = ctr_internal_cast2string( argumentList->object );
 	ctr_object* newString = NULL;
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
@@ -2513,7 +2511,7 @@ ctr_object* ctr_string_quotes_escape(ctr_object* myself, ctr_argument* argumentL
  * 'UnEscapes' the specified ASCII character in a string.
  */
 ctr_object* ctr_string_unescape(ctr_object* myself, ctr_argument* argumentList)  {
-	ctr_object* escape = argumentList->object;
+	ctr_object* escape = ctr_internal_cast2string( argumentList->object );
 	ctr_object* newString = NULL;
 	char character;
 	char characterDescription;
@@ -2707,7 +2705,7 @@ ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentLis
  * SipHash can protect against hash flooding attacks.
  */
 ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argumentList ) {
-	char* keyString = ctr_heap_allocate_cstring( argumentList->object );
+	char* keyString = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->object ) );
 	if ( strlen( keyString ) < 16 ) {
 		ctr_heap_free( keyString );
 		CtrStdFlow = ctr_error_text( "Key must be exactly 16 bytes long." );
@@ -2720,47 +2718,6 @@ ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argument
 	ctr_heap_free( dest );
 	ctr_heap_free( keyString );
 	return hash;
-}
-
-/**
- * [String] evaluate
- *
- * Evaluates the contents of the string as code.
- * In contrast to other languages, an eval statement can only
- * execute a very limited set of messages. Typically only Array and
- * Map building can be performed using eval. Using eval in Citrine can
- * therefore be considered 'safe'.
- *
- * Usage:
- *
- * a := 'List ← 1 ; 2 ; 3' evaluate.
- * x := a @ 2.
- */
-ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_tnode* parsedCode;
-	char* pathString;
-	ctr_object* result;
-	ctr_object* code;
-	/* activate white-list based security profile */
-	ctr_program_security_profile ^= CTR_SECPRO_EVAL;
-	pathString = ctr_heap_allocate_tracked(sizeof(char)*5);
-	memcpy(pathString, "eval", 4);
-	memcpy(pathString+4,"\0",1);
-	/* add a return statement so we can catch result */
-	ctr_argument* newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
-	newArgumentList->object = myself;
-	code = ctr_string_append( ctr_build_string_from_cstring( "↲ " ), newArgumentList );
-	newArgumentList->object = ctr_build_string_from_cstring( "." );
-	code = ctr_string_append( code, newArgumentList );
-	ctr_program_length = code->value.svalue->vlen;
-	parsedCode = ctr_cparse_parse(code->value.svalue->value, pathString);
-	ctr_cwlk_subprogram++;
-	result = ctr_cwlk_run(parsedCode);
-	ctr_cwlk_subprogram--;
-	if ( result == NULL ) result = CtrStdNil;
-	ctr_heap_free( newArgumentList );
-	ctr_program_security_profile ^= CTR_SECPRO_EVAL;
-	return result;
 }
 
 /**
@@ -2788,6 +2745,41 @@ ctr_object* ctr_build_block(ctr_tnode* node) {
 	return codeBlockObject;
 }
 
+ctr_object* ctr_block_new(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_tnode* parsedCode;
+	char* pathString;
+	ctr_object* code;
+	ctr_tnode* r;
+	ctr_tlistitem* codeBlockPart1;
+	ctr_tlistitem* codeBlockPart2;
+	ctr_tnode* paramList;
+	ctr_tnode* codeList;
+	ctr_tlistitem* previousListItem;
+	ctr_tlistitem* previousCodeListItem;
+	int t;
+	ctr_object* block = ctr_internal_create_object( CTR_OBJECT_TYPE_OTBLOCK );
+	code = ctr_internal_cast2string(argumentList->object);
+	block->link = CtrStdBlock;
+	ctr_program_length = code->value.svalue->vlen;
+	char* str = ctr_heap_allocate_cstring( code );
+	parsedCode = ctr_cparse_parse( str, "eval");
+	r = ctr_cparse_create_node( CTR_AST_NODE );
+	r->type = CTR_AST_NODE_CODEBLOCK;
+	codeBlockPart1 = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
+	r->nodes = codeBlockPart1;
+	codeBlockPart2 = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
+	r->nodes->next = codeBlockPart2;
+	paramList = ctr_cparse_create_node( CTR_AST_NODE );
+	codeList  = parsedCode;
+	codeBlockPart1->node = paramList;
+	codeBlockPart2->node = codeList;
+	paramList->type = CTR_AST_NODE_PARAMLIST;
+	codeList->type = CTR_AST_NODE_INSTRLIST;
+	block->value.block = r;
+	ctr_heap_free(str);
+	return block;
+}
+
 /**
  * [Block] apply: [object]
  *
@@ -2796,8 +2788,12 @@ ctr_object* ctr_build_block(ctr_tnode* node) {
  * refer to the block itself instead of the containing object.
  */
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my) {
+	char* pathString;
+	ctr_tnode* parsedCode;
+	ctr_argument* newArgumentList;
 	ctr_object* result;
 	ctr_tnode* node = myself->value.block;
+	if (node == NULL) return CtrStdNil;
 	ctr_tlistitem* codeBlockParts = node->nodes;
 	ctr_tnode* codeBlockPart1 = codeBlockParts->node;
 	ctr_tnode* codeBlockPart2 = codeBlockParts->next->node;
@@ -2825,7 +2821,9 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 		ctr_assign_value_to_local(ctr_build_string_from_cstring( ctr_clex_keyword_me_icon ), my );
 	}
 	ctr_assign_value_to_local(ctr_build_string_from_cstring( "thisBlock" ), myself ); /* otherwise running block may get gc'ed. */
+	ctr_cwlk_subprogram++;
 	result = ctr_cwlk_run(codeBlockPart2);
+	ctr_cwlk_subprogram--;
 	if (result == NULL) {
 		if (my) result = my; else result = myself;
 	}

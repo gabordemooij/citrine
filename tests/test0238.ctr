@@ -1,4 +1,7 @@
 'SINGLE_LANGUAGE'.
+String on: 'evaluate' do: {
+	↲ (Code new: ('↲ <code>.' <code>: ⛏ string)) run.
+}.
 
 ☞ a := List ← 1 ; 2 ; 3.
 ☞ b := (a string).

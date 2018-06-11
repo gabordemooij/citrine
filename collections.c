@@ -395,7 +395,8 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 		CtrStdFlow->info.sticky = 1;
 		return CtrStdNil;
 	}
-	return *(myself->value.avalue->elements + myself->value.avalue->tail + i);
+	ctr_object* q =  *(myself->value.avalue->elements + myself->value.avalue->tail + i);
+	return q;
 }
 
 /**
@@ -705,15 +706,19 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size i;
+	ctr_object* map = ctr_map_new( CtrStdMap, argumentList );
+	if (argumentList->object->info.type != CTR_OBJECT_TYPE_OTARRAY) {
+		return map;
+	}
 	ctr_argument* key   = ctr_heap_allocate( sizeof( ctr_argument ) );
 	ctr_argument* value = ctr_heap_allocate( sizeof( ctr_argument ) );
 	ctr_argument* index = ctr_heap_allocate( sizeof( ctr_argument ) );
-	ctr_object* map = ctr_map_new( CtrStdMap, argumentList );
 	for(i = myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
 			index->object = ctr_build_number_from_float((ctr_number) i);
 			key->object = ctr_array_get( myself, index );
 			value->object = ctr_array_get( argumentList->object, index );
 			key->next = value;
+			ctr_send_message( map, CTR_DICT_PUT_AT, strlen(CTR_DICT_PUT_AT), key);
 			ctr_map_put( map, key );
 	}
 	ctr_heap_free(key);

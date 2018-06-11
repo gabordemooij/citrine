@@ -143,7 +143,6 @@
 #define CTR_DICT_MEMORY      	 "geheugen" 
 #define CTR_DICT_MODE            "opruimingsniveau:" 
 #define CTR_DICT_HASH_WITH_KEY   "kluts:"
-#define CTR_DICT_EVAL            "evalueren"
 #define CTR_DICT_ESCAPE          "codeer:"
 #define CTR_DICT_UNESCAPE        "decodeer:"
 #define CTR_DICT_TO_BYTE         "byte"

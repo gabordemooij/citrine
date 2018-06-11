@@ -335,6 +335,8 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2);
 uint64_t    ctr_cwlk_subprogram;
 ctr_object* ctr_cwlk_run(ctr_tnode* program);
 ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn);
+ctr_tnode* ctr_cparse_block();
+ctr_tnode* ctr_cparse_create_node( int type );
 
 /**
  * Internal World functions
@@ -528,6 +530,7 @@ ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList);
 /**
  * Block Interface
  */
+ctr_object* ctr_block_new(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList);

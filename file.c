@@ -310,7 +310,10 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 		CtrStdFlow->info.sticky = 1;
 		return myself;
 	}
-	if ( pathObj == NULL ) return myself;
+	if ( pathObj == NULL ) {
+		ctr_heap_free( rs );
+		return myself;
+	}
 	path = ctr_heap_allocate_cstring( pathObj );
 	mode = ctr_heap_allocate_cstring( modeStrObj );
 	handle = fopen(path,mode);
@@ -510,6 +513,10 @@ ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList
 	ctr_object* fdObj;
 	ctr_object* fdObjKey;
 	pathObj = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
+	if (pathObj == NULL) {
+		CtrStdFlow = ctr_build_string_from_cstring("Unable to lock file.");
+		return CtrStdNil;
+	}
 	path = ctr_heap_allocate_cstring( pathObj );
 	fdObjKey = ctr_build_string_from_cstring("fileDescriptor");
 	fdObj = ctr_internal_object_find_property(
@@ -519,6 +526,11 @@ ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList
 	);
 	if (fdObj == NULL) {
 		fd = open( path, O_CREAT );
+		if (fd < 0) {
+			CtrStdFlow = ctr_build_string_from_cstring("Unable to lock file.");
+			ctr_heap_free( path );
+			return CtrStdNil;
+		}
 		fdObj = ctr_build_number_from_float( (ctr_size) fd );
 		ctr_internal_object_set_property(
 			myself, fdObjKey, fdObj, CTR_CATEGORY_PRIVATE_PROPERTY

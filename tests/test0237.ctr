@@ -1,4 +1,8 @@
 
+String on: 'evaluate' do: {
+	↲ (Code new: ('↲ <code>.' <code>: ⛏ string)) run.
+}.
+
 ☞ map :=
 	(Map new)
 	put: 'Hi There' at: 'two',

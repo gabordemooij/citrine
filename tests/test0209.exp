@@ -1,1 +1,1975 @@
-Test no longer in use
+hello there
++ 3 to Number gives: 3 
+Adding 3 to Number gives: 3 
+Appending something to String gives: something
+False
+[Block]
+Can I execute a code block without assigning code?
+[Block]
+[Block]
+[Object]
+This Nil has no file
+0
+Boolean 𝛑 0.
+Boolean ☞ 0.
+Boolean ⛏ 0.
+Boolean ⚿ 0.
+Boolean • 0.
+Boolean = 0.
+Boolean & 0.
+Boolean | 0.
+Boolean + 0.
+Boolean - 0.
+Boolean * 0.
+Boolean / 0.
+Boolean > 0.
+Boolean < 0.
+Boolean % 0.
+Boolean ? 0.
+Boolean ✎ 0.
+Boolean ← 0.
+Boolean ≥ 0.
+Boolean ≤ 0.
+Boolean ≠ 0.
+Boolean new.
+Boolean new: 0 .
+Boolean equals: 0 .
+Boolean nor: 0 .
+Boolean on: 0 do: 0 .
+error
+Boolean type.
+Boolean Nil?.
+Boolean myself.
+Boolean do.
+Boolean done.
+Boolean false: 0 .
+Boolean true: 0 .
+Boolean message: 0 arguments: 0 .
+error
+Boolean message: 0 .
+Boolean learn: 0 means: 0 .
+Boolean break.
+Boolean continue.
+Boolean else: 0 .
+Boolean not.
+Boolean number.
+Boolean string.
+Boolean character: 0 .
+Boolean either: 0 or: 0 .
+Boolean by: 0 .
+Boolean factorial.
+Boolean floor.
+Boolean ceil.
+Boolean round.
+Boolean absolute.
+Boolean square root.
+Boolean power: 0 .
+Boolean minimum.
+Boolean maximum.
+Boolean odd.
+Boolean even.
+Boolean positive?.
+Boolean negative?.
+Boolean boolean.
+Boolean between: 0 and: 0 .
+Boolean bytes.
+Boolean length.
+Boolean from: 0 to: 0 .
+Boolean from: 0 length: 0 .
+Boolean remove surrounding spaces.
+Boolean html.
+Boolean at: 0 .
+Boolean position: 0 .
+Boolean byte: 0 .
+Boolean find: 0 .
+Boolean last: 0 .
+Boolean replace: 0 with: 0 .
+Boolean split: 0 .
+Boolean offset: 0 .
+Boolean append: 0 .
+Boolean pattern: 0 process: 0 .
+Boolean run.
+Boolean apply: 0 .
+Boolean apply: 0 and: 0 .
+Boolean set: 0 value: 0 .
+Boolean error: 0 .
+Boolean catch: 0 .
+Boolean ; 0.
+Boolean shift.
+Boolean count.
+Boolean join: 0 .
+Boolean pop.
+Boolean sort: 0 .
+Boolean put: 0 at: 0 .
+Boolean from: 0 length: 0 .
+Boolean map: 0 .
+Boolean each: 0 .
+Boolean sum.
+Boolean product.
+Boolean write: 0 .
+Boolean brk.
+Boolean path.
+Boolean read.
+Boolean append: 0 .
+Boolean prepend: 0 .
+Boolean exists.
+Boolean size.
+Boolean delete.
+Boolean include.
+Boolean open: 0 .
+Boolean close.
+Boolean list: 0 .
+Boolean read bytes: 0 .
+Boolean write bytes: 0 .
+Boolean seek: 0 .
+Boolean rewind.
+Boolean end.
+Boolean argument: 0 .
+Boolean arguments.
+Boolean ask.
+Boolean input.
+Boolean flush.
+Boolean wait: 0 .
+Boolean time.
+Boolean respond: 0 .
+Boolean respond: 0 and: 0 .
+Boolean shell: 0 .
+Boolean clean memory.
+Boolean memory: 0 .
+Boolean memory.
+Boolean tidiness: 0 .
+Boolean hash: 0 .
+Boolean escape: 0 .
+Boolean unescape: 0 .
+Boolean byte.
+Boolean characters.
+Boolean list.
+Boolean append byte: 0 .
+Boolean qualify: 0 .
+Boolean qualification.
+Boolean new: 0 .
+Boolean hour.
+Boolean hour: 0 .
+Boolean hours.
+Boolean minute: 0 .
+Boolean minute.
+Boolean minutes.
+Boolean second: 0 .
+Boolean second.
+Boolean seconds.
+Boolean day.
+Boolean day: 0 .
+Boolean days.
+Boolean week.
+Boolean week: 0 .
+Boolean weeks.
+Boolean month.
+Boolean month: 0 .
+Boolean months.
+Boolean year.
+Boolean year: 0 .
+Boolean years.
+Boolean weekday.
+Boolean yearday.
+Boolean zone.
+Boolean zone: 0 .
+Boolean add: 0 .
+Boolean subtract: 0 .
+Boolean multiply: 0 .
+Boolean divider: 0 .
+Boolean like: 0 .
+Boolean format: 0 .
+Boolean lock.
+Boolean unlock.
+Boolean error: 0 .
+Boolean last.
+Boolean first.
+Boolean second last.
+Boolean fill: 0 with: 0 .
+Boolean column: 0 .
+Boolean replace: 0 length: 0 with: 0 .
+Boolean keys.
+Boolean values.
+Boolean entries.
+Boolean compare: 0 .
+Boolean has: 0 .
+Boolean copy.
+Boolean case: 0 do: 0 .
+error
+Boolean uppercase.
+Boolean lowercase.
+Boolean pattern: 0 process: 0 options: 0 .
+Boolean matches: 0 .
+Boolean contains: 0 .
+Boolean apply: 0 and: 0 and: 0 .
+Boolean setting: 0 .
+Boolean setting: 0 value: 0 .
+Boolean respond: 0 and: 0 and: 0 .
+True 𝛑 0.
+True ☞ 0.
+True ⛏ 0.
+True ⚿ 0.
+True • 0.
+True = 0.
+True & 0.
+True | 0.
+True + 0.
+True - 0.
+True * 0.
+True / 0.
+True > 0.
+True < 0.
+True % 0.
+True ? 0.
+True ✎ 0.
+True ← 0.
+True ≥ 0.
+True ≤ 0.
+True ≠ 0.
+True new.
+True new: 0 .
+True equals: 0 .
+True nor: 0 .
+True on: 0 do: 0 .
+error
+True type.
+True Nil?.
+True myself.
+True do.
+True done.
+True false: 0 .
+True true: 0 .
+True message: 0 arguments: 0 .
+error
+True message: 0 .
+True learn: 0 means: 0 .
+True break.
+True continue.
+True else: 0 .
+True not.
+True number.
+True string.
+True character: 0 .
+True either: 0 or: 0 .
+True by: 0 .
+True factorial.
+True floor.
+True ceil.
+True round.
+True absolute.
+True square root.
+True power: 0 .
+True minimum.
+True maximum.
+True odd.
+True even.
+True positive?.
+True negative?.
+True boolean.
+True between: 0 and: 0 .
+True bytes.
+True length.
+True from: 0 to: 0 .
+True from: 0 length: 0 .
+True remove surrounding spaces.
+True html.
+True at: 0 .
+True position: 0 .
+True byte: 0 .
+True find: 0 .
+True last: 0 .
+True replace: 0 with: 0 .
+True split: 0 .
+True offset: 0 .
+True append: 0 .
+True pattern: 0 process: 0 .
+True run.
+True apply: 0 .
+True apply: 0 and: 0 .
+True set: 0 value: 0 .
+True error: 0 .
+True catch: 0 .
+True ; 0.
+True shift.
+True count.
+True join: 0 .
+True pop.
+True sort: 0 .
+True put: 0 at: 0 .
+True from: 0 length: 0 .
+True map: 0 .
+True each: 0 .
+True sum.
+True product.
+True write: 0 .
+True brk.
+True path.
+True read.
+True append: 0 .
+True prepend: 0 .
+True exists.
+True size.
+True delete.
+True include.
+True open: 0 .
+True close.
+True list: 0 .
+True read bytes: 0 .
+True write bytes: 0 .
+True seek: 0 .
+True rewind.
+True end.
+True argument: 0 .
+True arguments.
+True ask.
+True input.
+True flush.
+True wait: 0 .
+True time.
+True respond: 0 .
+True respond: 0 and: 0 .
+True shell: 0 .
+True clean memory.
+True memory: 0 .
+True memory.
+True tidiness: 0 .
+True hash: 0 .
+True escape: 0 .
+True unescape: 0 .
+True byte.
+True characters.
+True list.
+True append byte: 0 .
+True qualify: 0 .
+True qualification.
+True new: 0 .
+True hour.
+True hour: 0 .
+True hours.
+True minute: 0 .
+True minute.
+True minutes.
+True second: 0 .
+True second.
+True seconds.
+True day.
+True day: 0 .
+True days.
+True week.
+True week: 0 .
+True weeks.
+True month.
+True month: 0 .
+True months.
+True year.
+True year: 0 .
+True years.
+True weekday.
+True yearday.
+True zone.
+True zone: 0 .
+True add: 0 .
+True subtract: 0 .
+True multiply: 0 .
+True divider: 0 .
+True like: 0 .
+True format: 0 .
+True lock.
+True unlock.
+True error: 0 .
+True last.
+True first.
+True second last.
+True fill: 0 with: 0 .
+True column: 0 .
+True replace: 0 length: 0 with: 0 .
+True keys.
+True values.
+True entries.
+True compare: 0 .
+True has: 0 .
+True copy.
+True case: 0 do: 0 .
+error
+True uppercase.
+True lowercase.
+True pattern: 0 process: 0 options: 0 .
+True matches: 0 .
+True contains: 0 .
+True apply: 0 and: 0 and: 0 .
+True setting: 0 .
+True setting: 0 value: 0 .
+True respond: 0 and: 0 and: 0 .
+False 𝛑 0.
+False ☞ 0.
+False ⛏ 0.
+False ⚿ 0.
+False • 0.
+False = 0.
+False & 0.
+False | 0.
+False + 0.
+False - 0.
+False * 0.
+False / 0.
+False > 0.
+False < 0.
+False % 0.
+False ? 0.
+False ✎ 0.
+False ← 0.
+False ≥ 0.
+False ≤ 0.
+False ≠ 0.
+False new.
+False new: 0 .
+False equals: 0 .
+False nor: 0 .
+False on: 0 do: 0 .
+error
+False type.
+False Nil?.
+False myself.
+False do.
+False done.
+False false: 0 .
+False true: 0 .
+False message: 0 arguments: 0 .
+error
+False message: 0 .
+False learn: 0 means: 0 .
+False break.
+False continue.
+False else: 0 .
+False not.
+False number.
+False string.
+False character: 0 .
+False either: 0 or: 0 .
+False by: 0 .
+False factorial.
+False floor.
+False ceil.
+False round.
+False absolute.
+False square root.
+False power: 0 .
+False minimum.
+False maximum.
+False odd.
+False even.
+False positive?.
+False negative?.
+False boolean.
+False between: 0 and: 0 .
+False bytes.
+False length.
+False from: 0 to: 0 .
+False from: 0 length: 0 .
+False remove surrounding spaces.
+False html.
+False at: 0 .
+False position: 0 .
+False byte: 0 .
+False find: 0 .
+False last: 0 .
+False replace: 0 with: 0 .
+False split: 0 .
+False offset: 0 .
+False append: 0 .
+False pattern: 0 process: 0 .
+False run.
+False apply: 0 .
+False apply: 0 and: 0 .
+False set: 0 value: 0 .
+False error: 0 .
+False catch: 0 .
+False ; 0.
+False shift.
+False count.
+False join: 0 .
+False pop.
+False sort: 0 .
+False put: 0 at: 0 .
+False from: 0 length: 0 .
+False map: 0 .
+False each: 0 .
+False sum.
+False product.
+False write: 0 .
+False brk.
+False path.
+False read.
+False append: 0 .
+False prepend: 0 .
+False exists.
+False size.
+False delete.
+False include.
+False open: 0 .
+False close.
+False list: 0 .
+False read bytes: 0 .
+False write bytes: 0 .
+False seek: 0 .
+False rewind.
+False end.
+False argument: 0 .
+False arguments.
+False ask.
+False input.
+False flush.
+False wait: 0 .
+False time.
+False respond: 0 .
+False respond: 0 and: 0 .
+False shell: 0 .
+False clean memory.
+False memory: 0 .
+False memory.
+False tidiness: 0 .
+False hash: 0 .
+False escape: 0 .
+False unescape: 0 .
+False byte.
+False characters.
+False list.
+False append byte: 0 .
+False qualify: 0 .
+False qualification.
+False new: 0 .
+False hour.
+False hour: 0 .
+False hours.
+False minute: 0 .
+False minute.
+False minutes.
+False second: 0 .
+False second.
+False seconds.
+False day.
+False day: 0 .
+False days.
+False week.
+False week: 0 .
+False weeks.
+False month.
+False month: 0 .
+False months.
+False year.
+False year: 0 .
+False years.
+False weekday.
+False yearday.
+False zone.
+False zone: 0 .
+False add: 0 .
+False subtract: 0 .
+False multiply: 0 .
+False divider: 0 .
+False like: 0 .
+False format: 0 .
+False lock.
+False unlock.
+False error: 0 .
+False last.
+False first.
+False second last.
+False fill: 0 with: 0 .
+False column: 0 .
+False replace: 0 length: 0 with: 0 .
+False keys.
+False values.
+False entries.
+False compare: 0 .
+False has: 0 .
+False copy.
+False case: 0 do: 0 .
+error
+False uppercase.
+False lowercase.
+False pattern: 0 process: 0 options: 0 .
+False matches: 0 .
+False contains: 0 .
+False apply: 0 and: 0 and: 0 .
+False setting: 0 .
+False setting: 0 value: 0 .
+False respond: 0 and: 0 and: 0 .
+Number 𝛑 0.
+Number ☞ 0.
+Number ⛏ 0.
+Number ⚿ 0.
+Number • 0.
+Number = 0.
+Number & 0.
+Number | 0.
+Number + 0.
+Number - 0.
+Number * 0.
+Number / 0.
+error
+Number > 0.
+Number < 0.
+Number % 0.
+error
+Number ? 0.
+Number ✎ 0.
+Number ← 0.
+Number ≥ 0.
+Number ≤ 0.
+Number ≠ 0.
+Number new.
+Number new: 0 .
+Number equals: 0 .
+Number nor: 0 .
+Number on: 0 do: 0 .
+error
+Number type.
+Number Nil?.
+Number myself.
+Number do.
+Number done.
+Number false: 0 .
+Number true: 0 .
+Number message: 0 arguments: 0 .
+error
+Number message: 0 .
+Number learn: 0 means: 0 .
+Number break.
+Number continue.
+Number else: 0 .
+Number not.
+Number number.
+Number string.
+Number character: 0 .
+Number either: 0 or: 0 .
+Number by: 0 .
+Number factorial.
+Number floor.
+Number ceil.
+Number round.
+Number absolute.
+Number square root.
+Number power: 0 .
+Number minimum.
+Number maximum.
+Number odd.
+Number even.
+Number positive?.
+Number negative?.
+Number boolean.
+Number between: 0 and: 0 .
+Number bytes.
+Number length.
+Number from: 0 to: 0 .
+Number from: 0 length: 0 .
+Number remove surrounding spaces.
+Number html.
+Number at: 0 .
+Number position: 0 .
+Number byte: 0 .
+Number find: 0 .
+Number last: 0 .
+Number replace: 0 with: 0 .
+Number split: 0 .
+Number offset: 0 .
+Number append: 0 .
+Number pattern: 0 process: 0 .
+Number run.
+Number apply: 0 .
+Number apply: 0 and: 0 .
+Number set: 0 value: 0 .
+Number error: 0 .
+Number catch: 0 .
+Number ; 0.
+Number shift.
+Number count.
+Number join: 0 .
+Number pop.
+Number sort: 0 .
+Number put: 0 at: 0 .
+Number from: 0 length: 0 .
+Number map: 0 .
+Number each: 0 .
+Number sum.
+Number product.
+Number write: 0 .
+Number brk.
+Number path.
+Number read.
+Number append: 0 .
+Number prepend: 0 .
+Number exists.
+Number size.
+Number delete.
+Number include.
+Number open: 0 .
+Number close.
+Number list: 0 .
+Number read bytes: 0 .
+Number write bytes: 0 .
+Number seek: 0 .
+Number rewind.
+Number end.
+Number argument: 0 .
+Number arguments.
+Number ask.
+Number input.
+Number flush.
+Number wait: 0 .
+Number time.
+Number respond: 0 .
+Number respond: 0 and: 0 .
+Number shell: 0 .
+Number clean memory.
+Number memory: 0 .
+Number memory.
+Number tidiness: 0 .
+Number hash: 0 .
+Number escape: 0 .
+Number unescape: 0 .
+Number byte.
+Number characters.
+Number list.
+Number append byte: 0 .
+Number qualify: 0 .
+Number qualification.
+Number new: 0 .
+Number hour.
+Number hour: 0 .
+Number hours.
+Number minute: 0 .
+Number minute.
+Number minutes.
+Number second: 0 .
+Number second.
+Number seconds.
+Number day.
+Number day: 0 .
+Number days.
+Number week.
+Number week: 0 .
+Number weeks.
+Number month.
+Number month: 0 .
+Number months.
+Number year.
+Number year: 0 .
+Number years.
+Number weekday.
+Number yearday.
+Number zone.
+Number zone: 0 .
+Number add: 0 .
+Number subtract: 0 .
+Number multiply: 0 .
+Number divider: 0 .
+error
+Number like: 0 .
+Number format: 0 .
+Number lock.
+Number unlock.
+Number error: 0 .
+Number last.
+Number first.
+Number second last.
+Number fill: 0 with: 0 .
+Number column: 0 .
+Number replace: 0 length: 0 with: 0 .
+Number keys.
+Number values.
+Number entries.
+Number compare: 0 .
+Number has: 0 .
+Number copy.
+Number case: 0 do: 0 .
+error
+Number uppercase.
+Number lowercase.
+Number pattern: 0 process: 0 options: 0 .
+Number matches: 0 .
+Number contains: 0 .
+Number apply: 0 and: 0 and: 0 .
+Number setting: 0 .
+Number setting: 0 value: 0 .
+Number respond: 0 and: 0 and: 0 .
+String 𝛑 0.
+String ☞ 0.
+String ⛏ 0.
+String ⚿ 0.
+String • 0.
+String = 0.
+String & 0.
+String | 0.
+String + 0.
+String - 0.
+String * 0.
+String / 0.
+String > 0.
+String < 0.
+String % 0.
+String ? 0.
+String ✎ 0.
+String ← 0.
+String ≥ 0.
+String ≤ 0.
+String ≠ 0.
+String new.
+String new: 0 .
+String equals: 0 .
+String nor: 0 .
+String on: 0 do: 0 .
+error
+String type.
+String Nil?.
+String myself.
+String do.
+String done.
+String false: 0 .
+String true: 0 .
+String message: 0 arguments: 0 .
+error
+String message: 0 .
+String learn: 0 means: 0 .
+String break.
+String continue.
+String else: 0 .
+String not.
+String number.
+String string.
+String character: 0 .
+String either: 0 or: 0 .
+String by: 0 .
+String factorial.
+String floor.
+String ceil.
+String round.
+String absolute.
+String square root.
+String power: 0 .
+String minimum.
+String maximum.
+String odd.
+String even.
+String positive?.
+String negative?.
+String boolean.
+String between: 0 and: 0 .
+String bytes.
+String length.
+String from: 0 to: 0 .
+String from: 0 length: 0 .
+String remove surrounding spaces.
+String html.
+String at: 0 .
+String position: 0 .
+String byte: 0 .
+String find: 0 .
+String last: 0 .
+String replace: 0 with: 0 .
+String split: 0 .
+String offset: 0 .
+String append: 0 .
+String pattern: 0 process: 0 .
+String run.
+String apply: 0 .
+String apply: 0 and: 0 .
+String set: 0 value: 0 .
+String error: 0 .
+String catch: 0 .
+String ; 0.
+String shift.
+String count.
+String join: 0 .
+String pop.
+String sort: 0 .
+String put: 0 at: 0 .
+String from: 0 length: 0 .
+String map: 0 .
+String each: 0 .
+String sum.
+String product.
+String write: 0 .
+String brk.
+String path.
+String read.
+String append: 0 .
+String prepend: 0 .
+String exists.
+String size.
+String delete.
+String include.
+String open: 0 .
+String close.
+String list: 0 .
+String read bytes: 0 .
+String write bytes: 0 .
+String seek: 0 .
+String rewind.
+String end.
+String argument: 0 .
+String arguments.
+String ask.
+String input.
+String flush.
+String wait: 0 .
+String time.
+String respond: 0 .
+String respond: 0 and: 0 .
+String shell: 0 .
+String clean memory.
+String memory: 0 .
+String memory.
+String tidiness: 0 .
+String hash: 0 .
+error
+String escape: 0 .
+String unescape: 0 .
+String byte.
+String characters.
+String list.
+String append byte: 0 .
+String qualify: 0 .
+String qualification.
+String new: 0 .
+String hour.
+String hour: 0 .
+String hours.
+String minute: 0 .
+String minute.
+String minutes.
+String second: 0 .
+String second.
+String seconds.
+String day.
+String day: 0 .
+String days.
+String week.
+String week: 0 .
+String weeks.
+String month.
+String month: 0 .
+String months.
+String year.
+String year: 0 .
+String years.
+String weekday.
+String yearday.
+String zone.
+String zone: 0 .
+String add: 0 .
+String subtract: 0 .
+String multiply: 0 .
+String divider: 0 .
+String like: 0 .
+String format: 0 .
+String lock.
+String unlock.
+String error: 0 .
+String last.
+String first.
+String second last.
+String fill: 0 with: 0 .
+String column: 0 .
+String replace: 0 length: 0 with: 0 .
+String keys.
+String values.
+String entries.
+String compare: 0 .
+String has: 0 .
+String copy.
+String case: 0 do: 0 .
+error
+String uppercase.
+String lowercase.
+String pattern: 0 process: 0 options: 0 .
+String matches: 0 .
+String contains: 0 .
+String apply: 0 and: 0 and: 0 .
+String setting: 0 .
+String setting: 0 value: 0 .
+String respond: 0 and: 0 and: 0 .
+Object 𝛑 0.
+Object ☞ 0.
+Object ⛏ 0.
+Object ⚿ 0.
+Object • 0.
+Object = 0.
+Object & 0.
+Object | 0.
+Object + 0.
+Object - 0.
+Object * 0.
+Object / 0.
+Object > 0.
+Object < 0.
+Object % 0.
+Object ? 0.
+Object ✎ 0.
+Object ← 0.
+Object ≥ 0.
+Object ≤ 0.
+Object ≠ 0.
+Object new.
+Object new: 0 .
+Object equals: 0 .
+Object nor: 0 .
+Object on: 0 do: 0 .
+error
+Object type.
+Object Nil?.
+Object myself.
+Object do.
+Object done.
+Object false: 0 .
+Object true: 0 .
+Object message: 0 arguments: 0 .
+error
+Object message: 0 .
+Object learn: 0 means: 0 .
+Object break.
+Object continue.
+Object else: 0 .
+Object not.
+Object number.
+Object string.
+Object character: 0 .
+Object either: 0 or: 0 .
+Object by: 0 .
+Object factorial.
+Object floor.
+Object ceil.
+Object round.
+Object absolute.
+Object square root.
+Object power: 0 .
+Object minimum.
+Object maximum.
+Object odd.
+Object even.
+Object positive?.
+Object negative?.
+Object boolean.
+Object between: 0 and: 0 .
+Object bytes.
+Object length.
+Object from: 0 to: 0 .
+Object from: 0 length: 0 .
+Object remove surrounding spaces.
+Object html.
+Object at: 0 .
+Object position: 0 .
+Object byte: 0 .
+Object find: 0 .
+Object last: 0 .
+Object replace: 0 with: 0 .
+Object split: 0 .
+Object offset: 0 .
+Object append: 0 .
+Object pattern: 0 process: 0 .
+Object run.
+Object apply: 0 .
+Object apply: 0 and: 0 .
+Object set: 0 value: 0 .
+Object error: 0 .
+Object catch: 0 .
+Object ; 0.
+Object shift.
+Object count.
+Object join: 0 .
+Object pop.
+Object sort: 0 .
+Object put: 0 at: 0 .
+Object from: 0 length: 0 .
+Object map: 0 .
+Object each: 0 .
+Object sum.
+Object product.
+Object write: 0 .
+Object brk.
+Object path.
+Object read.
+Object append: 0 .
+Object prepend: 0 .
+Object exists.
+Object size.
+Object delete.
+Object include.
+Object open: 0 .
+Object close.
+Object list: 0 .
+Object read bytes: 0 .
+Object write bytes: 0 .
+Object seek: 0 .
+Object rewind.
+Object end.
+Object argument: 0 .
+Object arguments.
+Object ask.
+Object input.
+Object flush.
+Object wait: 0 .
+Object time.
+Object respond: 0 .
+Object respond: 0 and: 0 .
+Object shell: 0 .
+Object clean memory.
+Object memory: 0 .
+Object memory.
+Object tidiness: 0 .
+Object hash: 0 .
+Object escape: 0 .
+Object unescape: 0 .
+Object byte.
+Object characters.
+Object list.
+Object append byte: 0 .
+Object qualify: 0 .
+Object qualification.
+Object new: 0 .
+Object hour.
+Object hour: 0 .
+Object hours.
+Object minute: 0 .
+Object minute.
+Object minutes.
+Object second: 0 .
+Object second.
+Object seconds.
+Object day.
+Object day: 0 .
+Object days.
+Object week.
+Object week: 0 .
+Object weeks.
+Object month.
+Object month: 0 .
+Object months.
+Object year.
+Object year: 0 .
+Object years.
+Object weekday.
+Object yearday.
+Object zone.
+Object zone: 0 .
+Object add: 0 .
+Object subtract: 0 .
+Object multiply: 0 .
+Object divider: 0 .
+Object like: 0 .
+Object format: 0 .
+Object lock.
+Object unlock.
+Object error: 0 .
+Object last.
+Object first.
+Object second last.
+Object fill: 0 with: 0 .
+Object column: 0 .
+Object replace: 0 length: 0 with: 0 .
+Object keys.
+Object values.
+Object entries.
+Object compare: 0 .
+Object has: 0 .
+Object copy.
+Object case: 0 do: 0 .
+error
+Object uppercase.
+Object lowercase.
+Object pattern: 0 process: 0 options: 0 .
+Object matches: 0 .
+Object contains: 0 .
+Object apply: 0 and: 0 and: 0 .
+Object setting: 0 .
+Object setting: 0 value: 0 .
+Object respond: 0 and: 0 and: 0 .
+List 𝛑 0.
+List ☞ 0.
+List ⛏ 0.
+List ⚿ 0.
+List • 0.
+List = 0.
+List & 0.
+List | 0.
+List + 0.
+List - 0.
+List * 0.
+List / 0.
+List > 0.
+List < 0.
+List % 0.
+List ? 0.
+List ✎ 0.
+List ← 0.
+List ≥ 0.
+List ≤ 0.
+List ≠ 0.
+List new.
+List new: 0 .
+List equals: 0 .
+List nor: 0 .
+List on: 0 do: 0 .
+error
+List type.
+List Nil?.
+List myself.
+List do.
+List done.
+List false: 0 .
+List true: 0 .
+List message: 0 arguments: 0 .
+error
+List message: 0 .
+List learn: 0 means: 0 .
+List break.
+List continue.
+List else: 0 .
+List not.
+List number.
+List string.
+List character: 0 .
+List either: 0 or: 0 .
+List by: 0 .
+List factorial.
+List floor.
+List ceil.
+List round.
+List absolute.
+List square root.
+List power: 0 .
+List minimum.
+List maximum.
+List odd.
+List even.
+List positive?.
+List negative?.
+List boolean.
+List between: 0 and: 0 .
+List bytes.
+List length.
+List from: 0 to: 0 .
+List from: 0 length: 0 .
+List remove surrounding spaces.
+List html.
+List at: 0 .
+List position: 0 .
+List byte: 0 .
+List find: 0 .
+List last: 0 .
+List replace: 0 with: 0 .
+List split: 0 .
+List offset: 0 .
+List append: 0 .
+List pattern: 0 process: 0 .
+List run.
+List apply: 0 .
+List apply: 0 and: 0 .
+List set: 0 value: 0 .
+List error: 0 .
+List catch: 0 .
+List ; 0.
+List shift.
+List count.
+List join: 0 .
+List pop.
+List sort: 0 .
+error
+List put: 0 at: 0 .
+List from: 0 length: 0 .
+List map: 0 .
+error
+List each: 0 .
+error
+List sum.
+List product.
+List write: 0 .
+List brk.
+List path.
+List read.
+List append: 0 .
+List prepend: 0 .
+List exists.
+List size.
+List delete.
+List include.
+List open: 0 .
+List close.
+List list: 0 .
+List read bytes: 0 .
+List write bytes: 0 .
+List seek: 0 .
+List rewind.
+List end.
+List argument: 0 .
+List arguments.
+List ask.
+List input.
+List flush.
+List wait: 0 .
+List time.
+List respond: 0 .
+List respond: 0 and: 0 .
+List shell: 0 .
+List clean memory.
+List memory: 0 .
+List memory.
+List tidiness: 0 .
+List hash: 0 .
+List escape: 0 .
+List unescape: 0 .
+List byte.
+List characters.
+List list.
+List append byte: 0 .
+List qualify: 0 .
+List qualification.
+List new: 0 .
+List hour.
+List hour: 0 .
+List hours.
+List minute: 0 .
+List minute.
+List minutes.
+List second: 0 .
+List second.
+List seconds.
+List day.
+List day: 0 .
+List days.
+List week.
+List week: 0 .
+List weeks.
+List month.
+List month: 0 .
+List months.
+List year.
+List year: 0 .
+List years.
+List weekday.
+List yearday.
+List zone.
+List zone: 0 .
+List add: 0 .
+List subtract: 0 .
+List multiply: 0 .
+List divider: 0 .
+List like: 0 .
+List format: 0 .
+List lock.
+List unlock.
+List error: 0 .
+List last.
+List first.
+List second last.
+List fill: 0 with: 0 .
+List column: 0 .
+List replace: 0 length: 0 with: 0 .
+error
+List keys.
+List values.
+List entries.
+List compare: 0 .
+List has: 0 .
+List copy.
+List case: 0 do: 0 .
+error
+List uppercase.
+List lowercase.
+List pattern: 0 process: 0 options: 0 .
+List matches: 0 .
+List contains: 0 .
+List apply: 0 and: 0 and: 0 .
+List setting: 0 .
+List setting: 0 value: 0 .
+List respond: 0 and: 0 and: 0 .
+Map 𝛑 0.
+Map ☞ 0.
+Map ⛏ 0.
+Map ⚿ 0.
+Map • 0.
+Map = 0.
+Map & 0.
+Map | 0.
+Map + 0.
+Map - 0.
+Map * 0.
+Map / 0.
+Map > 0.
+Map < 0.
+Map % 0.
+Map ? 0.
+Map ✎ 0.
+Map ← 0.
+Map ≥ 0.
+Map ≤ 0.
+Map ≠ 0.
+Map new.
+Map new: 0 .
+Map equals: 0 .
+Map nor: 0 .
+Map on: 0 do: 0 .
+error
+Map type.
+Map Nil?.
+Map myself.
+Map do.
+Map done.
+Map false: 0 .
+Map true: 0 .
+Map message: 0 arguments: 0 .
+error
+Map message: 0 .
+Map learn: 0 means: 0 .
+Map break.
+Map continue.
+Map else: 0 .
+Map not.
+Map number.
+Map string.
+Map character: 0 .
+Map either: 0 or: 0 .
+Map by: 0 .
+Map factorial.
+Map floor.
+Map ceil.
+Map round.
+Map absolute.
+Map square root.
+Map power: 0 .
+Map minimum.
+Map maximum.
+Map odd.
+Map even.
+Map positive?.
+Map negative?.
+Map boolean.
+Map between: 0 and: 0 .
+Map bytes.
+Map length.
+Map from: 0 to: 0 .
+Map from: 0 length: 0 .
+Map remove surrounding spaces.
+Map html.
+Map at: 0 .
+Map position: 0 .
+Map byte: 0 .
+Map find: 0 .
+Map last: 0 .
+Map replace: 0 with: 0 .
+Map split: 0 .
+Map offset: 0 .
+Map append: 0 .
+Map pattern: 0 process: 0 .
+Map run.
+Map apply: 0 .
+Map apply: 0 and: 0 .
+Map set: 0 value: 0 .
+Map error: 0 .
+Map catch: 0 .
+Map ; 0.
+Map shift.
+Map count.
+Map join: 0 .
+Map pop.
+Map sort: 0 .
+Map put: 0 at: 0 .
+Map from: 0 length: 0 .
+Map map: 0 .
+error
+Map each: 0 .
+error
+Map sum.
+Map product.
+Map write: 0 .
+Map brk.
+Map path.
+Map read.
+Map append: 0 .
+Map prepend: 0 .
+Map exists.
+Map size.
+Map delete.
+Map include.
+Map open: 0 .
+Map close.
+Map list: 0 .
+Map read bytes: 0 .
+Map write bytes: 0 .
+Map seek: 0 .
+Map rewind.
+Map end.
+Map argument: 0 .
+Map arguments.
+Map ask.
+Map input.
+Map flush.
+Map wait: 0 .
+Map time.
+Map respond: 0 .
+Map respond: 0 and: 0 .
+Map shell: 0 .
+Map clean memory.
+Map memory: 0 .
+Map memory.
+Map tidiness: 0 .
+Map hash: 0 .
+Map escape: 0 .
+Map unescape: 0 .
+Map byte.
+Map characters.
+Map list.
+Map append byte: 0 .
+Map qualify: 0 .
+Map qualification.
+Map new: 0 .
+Map hour.
+Map hour: 0 .
+Map hours.
+Map minute: 0 .
+Map minute.
+Map minutes.
+Map second: 0 .
+Map second.
+Map seconds.
+Map day.
+Map day: 0 .
+Map days.
+Map week.
+Map week: 0 .
+Map weeks.
+Map month.
+Map month: 0 .
+Map months.
+Map year.
+Map year: 0 .
+Map years.
+Map weekday.
+Map yearday.
+Map zone.
+Map zone: 0 .
+Map add: 0 .
+Map subtract: 0 .
+Map multiply: 0 .
+Map divider: 0 .
+Map like: 0 .
+Map format: 0 .
+Map lock.
+Map unlock.
+Map error: 0 .
+Map last.
+Map first.
+Map second last.
+Map fill: 0 with: 0 .
+Map column: 0 .
+Map replace: 0 length: 0 with: 0 .
+Map keys.
+Map values.
+Map entries.
+Map compare: 0 .
+Map has: 0 .
+Map copy.
+Map case: 0 do: 0 .
+error
+Map uppercase.
+Map lowercase.
+Map pattern: 0 process: 0 options: 0 .
+Map matches: 0 .
+Map contains: 0 .
+Map apply: 0 and: 0 and: 0 .
+Map setting: 0 .
+Map setting: 0 value: 0 .
+Map respond: 0 and: 0 and: 0 .
+File 𝛑 0.
+File ☞ 0.
+File ⛏ 0.
+File ⚿ 0.
+File • 0.
+File = 0.
+File & 0.
+File | 0.
+File + 0.
+File - 0.
+File * 0.
+File / 0.
+File > 0.
+File < 0.
+File % 0.
+File ? 0.
+File ✎ 0.
+File ← 0.
+File ≥ 0.
+File ≤ 0.
+File ≠ 0.
+File new.
+File new: 0 .
+File equals: 0 .
+File nor: 0 .
+File on: 0 do: 0 .
+error
+File type.
+File Nil?.
+File myself.
+File do.
+File done.
+File false: 0 .
+File true: 0 .
+File message: 0 arguments: 0 .
+error
+File message: 0 .
+File learn: 0 means: 0 .
+File break.
+File continue.
+File else: 0 .
+File not.
+File number.
+File string.
+File character: 0 .
+File either: 0 or: 0 .
+File by: 0 .
+File factorial.
+File floor.
+File ceil.
+File round.
+File absolute.
+File square root.
+File power: 0 .
+File minimum.
+File maximum.
+File odd.
+File even.
+File positive?.
+File negative?.
+File boolean.
+File between: 0 and: 0 .
+File bytes.
+File length.
+File from: 0 to: 0 .
+File from: 0 length: 0 .
+File remove surrounding spaces.
+File html.
+File at: 0 .
+File position: 0 .
+File byte: 0 .
+File find: 0 .
+File last: 0 .
+File replace: 0 with: 0 .
+File split: 0 .
+File offset: 0 .
+File append: 0 .
+File pattern: 0 process: 0 .
+File run.
+File apply: 0 .
+File apply: 0 and: 0 .
+File set: 0 value: 0 .
+File error: 0 .
+File catch: 0 .
+File ; 0.
+File shift.
+File count.
+File join: 0 .
+File pop.
+File sort: 0 .
+File put: 0 at: 0 .
+File from: 0 length: 0 .
+File map: 0 .
+File each: 0 .
+File sum.
+File product.
+File write: 0 .
+File brk.
+File path.
+File read.
+File append: 0 .
+File prepend: 0 .
+File exists.
+File size.
+File delete.
+File include.
+File open: 0 .
+File close.
+File list: 0 .
+error
+File read bytes: 0 .
+File write bytes: 0 .
+File seek: 0 .
+File rewind.
+File end.
+File argument: 0 .
+File arguments.
+File ask.
+File input.
+File flush.
+File wait: 0 .
+File time.
+File respond: 0 .
+File respond: 0 and: 0 .
+File shell: 0 .
+File clean memory.
+File memory: 0 .
+File memory.
+File tidiness: 0 .
+File hash: 0 .
+File escape: 0 .
+File unescape: 0 .
+File byte.
+File characters.
+File list.
+File append byte: 0 .
+File qualify: 0 .
+File qualification.
+File new: 0 .
+File hour.
+File hour: 0 .
+File hours.
+File minute: 0 .
+File minute.
+File minutes.
+File second: 0 .
+File second.
+File seconds.
+File day.
+File day: 0 .
+File days.
+File week.
+File week: 0 .
+File weeks.
+File month.
+File month: 0 .
+File months.
+File year.
+File year: 0 .
+File years.
+File weekday.
+File yearday.
+File zone.
+File zone: 0 .
+File add: 0 .
+File subtract: 0 .
+File multiply: 0 .
+File divider: 0 .
+File like: 0 .
+File format: 0 .
+File lock.
+error
+File unlock.
+error
+File error: 0 .
+File last.
+File first.
+File second last.
+File fill: 0 with: 0 .
+File column: 0 .
+File replace: 0 length: 0 with: 0 .
+File keys.
+File values.
+File entries.
+File compare: 0 .
+File has: 0 .
+File copy.
+File case: 0 do: 0 .
+error
+File uppercase.
+File lowercase.
+File pattern: 0 process: 0 options: 0 .
+File matches: 0 .
+File contains: 0 .
+File apply: 0 and: 0 and: 0 .
+File setting: 0 .
+File setting: 0 value: 0 .
+File respond: 0 and: 0 and: 0 .
+Moment 𝛑 0.
+Moment ☞ 0.
+Moment ⛏ 0.
+Moment ⚿ 0.
+Moment • 0.
+Moment = 0.
+Moment & 0.
+Moment | 0.
+Moment + 0.
+Moment - 0.
+Moment * 0.
+Moment / 0.
+Moment > 0.
+Moment < 0.
+Moment % 0.
+Moment ? 0.
+Moment ✎ 0.
+Moment ← 0.
+Moment ≥ 0.
+Moment ≤ 0.
+Moment ≠ 0.
+Moment new.
+Moment new: 0 .
+Moment equals: 0 .
+Moment nor: 0 .
+Moment on: 0 do: 0 .
+error
+Moment type.
+Moment Nil?.
+Moment myself.
+Moment do.
+Moment done.
+Moment false: 0 .
+Moment true: 0 .
+Moment message: 0 arguments: 0 .
+error
+Moment message: 0 .
+Moment learn: 0 means: 0 .
+Moment break.
+Moment continue.
+Moment else: 0 .
+Moment not.
+Moment number.
+Moment string.
+Moment character: 0 .
+Moment either: 0 or: 0 .
+Moment by: 0 .
+Moment factorial.
+Moment floor.
+Moment ceil.
+Moment round.
+Moment absolute.
+Moment square root.
+Moment power: 0 .
+Moment minimum.
+Moment maximum.
+Moment odd.
+Moment even.
+Moment positive?.
+Moment negative?.
+Moment boolean.
+Moment between: 0 and: 0 .
+Moment bytes.
+Moment length.
+Moment from: 0 to: 0 .
+Moment from: 0 length: 0 .
+Moment remove surrounding spaces.
+Moment html.
+Moment at: 0 .
+Moment position: 0 .
+Moment byte: 0 .
+Moment find: 0 .
+Moment last: 0 .
+Moment replace: 0 with: 0 .
+Moment split: 0 .
+Moment offset: 0 .
+Moment append: 0 .
+Moment pattern: 0 process: 0 .
+Moment run.
+Moment apply: 0 .
+Moment apply: 0 and: 0 .
+Moment set: 0 value: 0 .
+Moment error: 0 .
+Moment catch: 0 .
+Moment ; 0.
+Moment shift.
+Moment count.
+Moment join: 0 .
+Moment pop.
+Moment sort: 0 .
+Moment put: 0 at: 0 .
+Moment from: 0 length: 0 .
+Moment map: 0 .
+Moment each: 0 .
+Moment sum.
+Moment product.
+Moment write: 0 .
+Moment brk.
+Moment path.
+Moment read.
+Moment append: 0 .
+Moment prepend: 0 .
+Moment exists.
+Moment size.
+Moment delete.
+Moment include.
+Moment open: 0 .
+Moment close.
+Moment list: 0 .
+Moment read bytes: 0 .
+Moment write bytes: 0 .
+Moment seek: 0 .
+Moment rewind.
+Moment end.
+Moment argument: 0 .
+Moment arguments.
+Moment ask.
+Moment input.
+Moment flush.
+Moment wait: 0 .
+Moment time.
+Moment respond: 0 .
+Moment respond: 0 and: 0 .
+Moment shell: 0 .
+Moment clean memory.
+Moment memory: 0 .
+Moment memory.
+Moment tidiness: 0 .
+Moment hash: 0 .
+Moment escape: 0 .
+Moment unescape: 0 .
+Moment byte.
+Moment characters.
+Moment list.
+Moment append byte: 0 .
+Moment qualify: 0 .
+Moment qualification.
+Moment new: 0 .
+Moment hour.
+Moment hour: 0 .
+Moment hours.
+Moment minute: 0 .
+Moment minute.
+Moment minutes.
+Moment second: 0 .
+Moment second.
+Moment seconds.
+Moment day.
+Moment day: 0 .
+Moment days.
+Moment week.
+Moment week: 0 .
+Moment weeks.
+Moment month.
+Moment month: 0 .
+Moment months.
+Moment year.
+Moment year: 0 .
+Moment years.
+Moment weekday.
+Moment yearday.
+Moment zone.
+Moment zone: 0 .
+Moment add: 0 .
+Moment subtract: 0 .
+Moment multiply: 0 .
+Moment divider: 0 .
+Moment like: 0 .
+Moment format: 0 .
+Moment lock.
+Moment unlock.
+Moment error: 0 .
+Moment last.
+Moment first.
+Moment second last.
+Moment fill: 0 with: 0 .
+Moment column: 0 .
+Moment replace: 0 length: 0 with: 0 .
+Moment keys.
+Moment values.
+Moment entries.
+Moment compare: 0 .
+Moment has: 0 .
+Moment copy.
+Moment case: 0 do: 0 .
+error
+Moment uppercase.
+Moment lowercase.
+Moment pattern: 0 process: 0 options: 0 .
+Moment matches: 0 .
+Moment contains: 0 .
+Moment apply: 0 and: 0 and: 0 .
+Moment setting: 0 .
+Moment setting: 0 value: 0 .
+Moment respond: 0 and: 0 and: 0 .

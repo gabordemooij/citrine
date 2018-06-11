@@ -143,7 +143,6 @@
 #define CTR_DICT_MEMORY          "memory"
 #define CTR_DICT_MODE            "tidiness:" 
 #define CTR_DICT_HASH_WITH_KEY   "hash:"
-#define CTR_DICT_EVAL            "evaluate"
 #define CTR_DICT_ESCAPE          "escape:"
 #define CTR_DICT_UNESCAPE        "unescape:"
 #define CTR_DICT_TO_BYTE         "byte"
