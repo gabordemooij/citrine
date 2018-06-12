@@ -11,8 +11,8 @@ Program tidiness: 0.
 ✎ write: (2 > 1), brk.
 ✎ write: (2 ≤ 1), brk.
 ✎ write: (9 ≥ 1), brk.
-✎ write: (2 odd), brk.
-✎ write: (4 even), brk.
+✎ write: (2 odd?), brk.
+✎ write: (4 even?), brk.
 ✎ write: (-1 positive?), brk.
 ✎ write: (-2 negative?), brk.
 ✎ write: ((3 ≥ 4) & (3 ≤ 5)), brk.
@@ -29,8 +29,8 @@ usedMemory1 := (Program memory ? 0).
 ✎ write: (2 > 1), brk.
 ✎ write: (2 ≤ 1), brk.
 ✎ write: (9 ≥ 1), brk.
-✎ write: (2 odd), brk.
-✎ write: (4 even), brk.
+✎ write: (2 odd?), brk.
+✎ write: (4 even?), brk.
 ✎ write: (-1 positive?), brk.
 ✎ write: (-2 negative?), brk.
 ✎ write: ((3 ≥ 4) & (3 ≤ 5)), brk.
@@ -46,8 +46,8 @@ usedMemory2 := (Program memory ? 0).
 ✎ write: (2 > 1), brk.
 ✎ write: (2 ≤ 1), brk.
 ✎ write: (9 ≥ 1), brk.
-✎ write: (2 odd), brk.
-✎ write: (4 even), brk.
+✎ write: (2 odd?), brk.
+✎ write: (4 even?), brk.
 ✎ write: (-1 positive?), brk.
 ✎ write: (-2 negative?), brk.
 ✎ write: ((3 ≥ 4) & (3 ≤ 5)), brk.

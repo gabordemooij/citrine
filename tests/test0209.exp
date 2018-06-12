@@ -66,8 +66,8 @@ Boolean square root.
 Boolean power: 0 .
 Boolean minimum.
 Boolean maximum.
-Boolean odd.
-Boolean even.
+Boolean odd?.
+Boolean even?.
 Boolean positive?.
 Boolean negative?.
 Boolean boolean.
@@ -176,7 +176,7 @@ Boolean zone: 0 .
 Boolean add: 0 .
 Boolean subtract: 0 .
 Boolean multiply: 0 .
-Boolean divider: 0 .
+Boolean divide by: 0 .
 Boolean like: 0 .
 Boolean format: 0 .
 Boolean lock.
@@ -261,8 +261,8 @@ True square root.
 True power: 0 .
 True minimum.
 True maximum.
-True odd.
-True even.
+True odd?.
+True even?.
 True positive?.
 True negative?.
 True boolean.
@@ -371,7 +371,7 @@ True zone: 0 .
 True add: 0 .
 True subtract: 0 .
 True multiply: 0 .
-True divider: 0 .
+True divide by: 0 .
 True like: 0 .
 True format: 0 .
 True lock.
@@ -456,8 +456,8 @@ False square root.
 False power: 0 .
 False minimum.
 False maximum.
-False odd.
-False even.
+False odd?.
+False even?.
 False positive?.
 False negative?.
 False boolean.
@@ -566,7 +566,7 @@ False zone: 0 .
 False add: 0 .
 False subtract: 0 .
 False multiply: 0 .
-False divider: 0 .
+False divide by: 0 .
 False like: 0 .
 False format: 0 .
 False lock.
@@ -653,8 +653,8 @@ Number square root.
 Number power: 0 .
 Number minimum.
 Number maximum.
-Number odd.
-Number even.
+Number odd?.
+Number even?.
 Number positive?.
 Number negative?.
 Number boolean.
@@ -763,7 +763,7 @@ Number zone: 0 .
 Number add: 0 .
 Number subtract: 0 .
 Number multiply: 0 .
-Number divider: 0 .
+Number divide by: 0 .
 error
 Number like: 0 .
 Number format: 0 .
@@ -849,8 +849,8 @@ String square root.
 String power: 0 .
 String minimum.
 String maximum.
-String odd.
-String even.
+String odd?.
+String even?.
 String positive?.
 String negative?.
 String boolean.
@@ -960,7 +960,7 @@ String zone: 0 .
 String add: 0 .
 String subtract: 0 .
 String multiply: 0 .
-String divider: 0 .
+String divide by: 0 .
 String like: 0 .
 String format: 0 .
 String lock.
@@ -1045,8 +1045,8 @@ Object square root.
 Object power: 0 .
 Object minimum.
 Object maximum.
-Object odd.
-Object even.
+Object odd?.
+Object even?.
 Object positive?.
 Object negative?.
 Object boolean.
@@ -1155,7 +1155,7 @@ Object zone: 0 .
 Object add: 0 .
 Object subtract: 0 .
 Object multiply: 0 .
-Object divider: 0 .
+Object divide by: 0 .
 Object like: 0 .
 Object format: 0 .
 Object lock.
@@ -1240,8 +1240,8 @@ List square root.
 List power: 0 .
 List minimum.
 List maximum.
-List odd.
-List even.
+List odd?.
+List even?.
 List positive?.
 List negative?.
 List boolean.
@@ -1353,7 +1353,7 @@ List zone: 0 .
 List add: 0 .
 List subtract: 0 .
 List multiply: 0 .
-List divider: 0 .
+List divide by: 0 .
 List like: 0 .
 List format: 0 .
 List lock.
@@ -1439,8 +1439,8 @@ Map square root.
 Map power: 0 .
 Map minimum.
 Map maximum.
-Map odd.
-Map even.
+Map odd?.
+Map even?.
 Map positive?.
 Map negative?.
 Map boolean.
@@ -1551,7 +1551,7 @@ Map zone: 0 .
 Map add: 0 .
 Map subtract: 0 .
 Map multiply: 0 .
-Map divider: 0 .
+Map divide by: 0 .
 Map like: 0 .
 Map format: 0 .
 Map lock.
@@ -1636,8 +1636,8 @@ File square root.
 File power: 0 .
 File minimum.
 File maximum.
-File odd.
-File even.
+File odd?.
+File even?.
 File positive?.
 File negative?.
 File boolean.
@@ -1747,7 +1747,7 @@ File zone: 0 .
 File add: 0 .
 File subtract: 0 .
 File multiply: 0 .
-File divider: 0 .
+File divide by: 0 .
 File like: 0 .
 File format: 0 .
 File lock.
@@ -1834,8 +1834,8 @@ Moment square root.
 Moment power: 0 .
 Moment minimum.
 Moment maximum.
-Moment odd.
-Moment even.
+Moment odd?.
+Moment even?.
 Moment positive?.
 Moment negative?.
 Moment boolean.
@@ -1944,7 +1944,7 @@ Moment zone: 0 .
 Moment add: 0 .
 Moment subtract: 0 .
 Moment multiply: 0 .
-Moment divider: 0 .
+Moment divide by: 0 .
 Moment like: 0 .
 Moment format: 0 .
 Moment lock.

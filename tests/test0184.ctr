@@ -20,7 +20,7 @@ Number on: 'multiplyBy:' do: { :x
 }.
 
 Number on: 'divideBy:' do: { :x
-	⛏ divider: x.
+	⛏ divide by: x.
 }.
 
 
