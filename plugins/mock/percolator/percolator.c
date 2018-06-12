@@ -1,4 +1,4 @@
-#include "../../citrine.h"
+#include "../../../citrine.h"
 
 /**
  * Example Plugin 'Coffee Percolator'
@@ -173,10 +173,10 @@ void begin(){
 	percolatorObject->link = CtrStdObject;
 
 	/* Add the method 'new' so people can create their percolators */
-	ctr_internal_create_func(percolatorObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_percolator_new );
+	ctr_internal_create_func(percolatorObject, ctr_build_string_from_cstring( "new" ), &ctr_percolator_new );
 	ctr_internal_create_func(percolatorObject, ctr_build_string_from_cstring( "brew" ), &ctr_percolator_brew );
 	ctr_internal_create_func(percolatorObject, ctr_build_string_from_cstring( "coffee:water:" ), &ctr_percolator_add_coffee_water );
 
 	/* Make the Percolator accessible to the world */
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PERCOLATOR ), percolatorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Percolator" ), percolatorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 }

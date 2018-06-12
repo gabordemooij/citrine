@@ -1,1 +1,7 @@
-✎ write: 'Test no longer in use↵'.
+☞ perky := Percolator new.
+✎ write: perky brew, brk.
+Percolator brew.
+Percolator coffee: 1 water: 2, brew.
+☞ cupOfCoffee  := perky coffee: 1 water: 2, brew.
+✎ write: cupOfCoffee, brk.
+

@@ -11,14 +11,16 @@ fi
 find . -name "*.so" -exec rm {} +
 
 #For plugin test, compile Percolator plugin
-rm plugins/percolator/libctrpercolator.so
+rm plugins/mock/percolator/libctrpercolator.so
 rm mods/percolator/libctrpercolator.so
-#cd plugins/percolator;
-#cc -c percolator.c -Wall -Werror -fPIC -o percolator.o
-#cc ${LDFLAGS} -o libctrpercolator.so percolator.o
-#cd ..
-#cd ..
-#cp plugins/percolator/libctrpercolator.so mods/percolator/libctrpercolator.so
+rm plugins/mockpercolator/percolator.o
+cd plugins/mock/percolator;
+cc -c percolator.c -Wall -Werror -fPIC -o percolator.o
+cc ${LDFLAGS} -o libctrpercolator.so percolator.o
+cd ..
+cd ..
+cd ..
+cp plugins/mock/percolator/libctrpercolator.so mods/percolator/libctrpercolator.so
 
 
 #rm plugins/percolator/libctrpercolator.so
