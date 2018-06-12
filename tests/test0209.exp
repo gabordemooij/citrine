@@ -77,7 +77,6 @@ Boolean length.
 Boolean from: 0 to: 0 .
 Boolean from: 0 length: 0 .
 Boolean remove surrounding spaces.
-Boolean html.
 Boolean at: 0 .
 Boolean position: 0 .
 Boolean byte: 0 .
@@ -139,8 +138,6 @@ Boolean memory: 0 .
 Boolean memory.
 Boolean tidiness: 0 .
 Boolean hash: 0 .
-Boolean escape: 0 .
-Boolean unescape: 0 .
 Boolean byte.
 Boolean characters.
 Boolean list.
@@ -272,7 +269,6 @@ True length.
 True from: 0 to: 0 .
 True from: 0 length: 0 .
 True remove surrounding spaces.
-True html.
 True at: 0 .
 True position: 0 .
 True byte: 0 .
@@ -334,8 +330,6 @@ True memory: 0 .
 True memory.
 True tidiness: 0 .
 True hash: 0 .
-True escape: 0 .
-True unescape: 0 .
 True byte.
 True characters.
 True list.
@@ -467,7 +461,6 @@ False length.
 False from: 0 to: 0 .
 False from: 0 length: 0 .
 False remove surrounding spaces.
-False html.
 False at: 0 .
 False position: 0 .
 False byte: 0 .
@@ -529,8 +522,6 @@ False memory: 0 .
 False memory.
 False tidiness: 0 .
 False hash: 0 .
-False escape: 0 .
-False unescape: 0 .
 False byte.
 False characters.
 False list.
@@ -664,7 +655,6 @@ Number length.
 Number from: 0 to: 0 .
 Number from: 0 length: 0 .
 Number remove surrounding spaces.
-Number html.
 Number at: 0 .
 Number position: 0 .
 Number byte: 0 .
@@ -726,8 +716,6 @@ Number memory: 0 .
 Number memory.
 Number tidiness: 0 .
 Number hash: 0 .
-Number escape: 0 .
-Number unescape: 0 .
 Number byte.
 Number characters.
 Number list.
@@ -860,7 +848,6 @@ String length.
 String from: 0 to: 0 .
 String from: 0 length: 0 .
 String remove surrounding spaces.
-String html.
 String at: 0 .
 String position: 0 .
 String byte: 0 .
@@ -923,8 +910,6 @@ String memory.
 String tidiness: 0 .
 String hash: 0 .
 error
-String escape: 0 .
-String unescape: 0 .
 String byte.
 String characters.
 String list.
@@ -1056,7 +1041,6 @@ Object length.
 Object from: 0 to: 0 .
 Object from: 0 length: 0 .
 Object remove surrounding spaces.
-Object html.
 Object at: 0 .
 Object position: 0 .
 Object byte: 0 .
@@ -1118,8 +1102,6 @@ Object memory: 0 .
 Object memory.
 Object tidiness: 0 .
 Object hash: 0 .
-Object escape: 0 .
-Object unescape: 0 .
 Object byte.
 Object characters.
 Object list.
@@ -1251,7 +1233,6 @@ List length.
 List from: 0 to: 0 .
 List from: 0 length: 0 .
 List remove surrounding spaces.
-List html.
 List at: 0 .
 List position: 0 .
 List byte: 0 .
@@ -1316,8 +1297,6 @@ List memory: 0 .
 List memory.
 List tidiness: 0 .
 List hash: 0 .
-List escape: 0 .
-List unescape: 0 .
 List byte.
 List characters.
 List list.
@@ -1450,7 +1429,6 @@ Map length.
 Map from: 0 to: 0 .
 Map from: 0 length: 0 .
 Map remove surrounding spaces.
-Map html.
 Map at: 0 .
 Map position: 0 .
 Map byte: 0 .
@@ -1514,8 +1492,6 @@ Map memory: 0 .
 Map memory.
 Map tidiness: 0 .
 Map hash: 0 .
-Map escape: 0 .
-Map unescape: 0 .
 Map byte.
 Map characters.
 Map list.
@@ -1647,7 +1623,6 @@ File length.
 File from: 0 to: 0 .
 File from: 0 length: 0 .
 File remove surrounding spaces.
-File html.
 File at: 0 .
 File position: 0 .
 File byte: 0 .
@@ -1710,8 +1685,6 @@ File memory: 0 .
 File memory.
 File tidiness: 0 .
 File hash: 0 .
-File escape: 0 .
-File unescape: 0 .
 File byte.
 File characters.
 File list.
@@ -1845,7 +1818,6 @@ Moment length.
 Moment from: 0 to: 0 .
 Moment from: 0 length: 0 .
 Moment remove surrounding spaces.
-Moment html.
 Moment at: 0 .
 Moment position: 0 .
 Moment byte: 0 .
@@ -1907,8 +1879,6 @@ Moment memory: 0 .
 Moment memory.
 Moment tidiness: 0 .
 Moment hash: 0 .
-Moment escape: 0 .
-Moment unescape: 0 .
 Moment byte.
 Moment characters.
 Moment list.

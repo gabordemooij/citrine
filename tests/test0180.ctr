@@ -1,4 +1,13 @@
-
+String on: 'html' do: {
+	↲ (
+		⛏
+		replace: '&' with: '&amp;',
+		replace: '<' with: '&lt;',
+		replace: '>' with: '&gt;',
+		replace: '\'' with: '&apos;',
+		replace: '"' with: '&quot;'
+	).
+}.
 
 ☞ usedMemory1 := 0.
 ☞ usedMemory2 := 0.

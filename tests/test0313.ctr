@@ -1,3 +1,52 @@
+String on: 'escape:' do: { :characters
+	☞ str := ⛏.
+	characters characters each: { :number :character
+		
+		☞ replacement := '\\' + character factorial.
+		
+		(character = '\t') true: {
+			replacement := '\\t'.
+		}.
+		
+		(character = '\n') true: {
+			replacement := '\\n'.
+		}.
+		
+		str := str replace: character with: replacement.
+	}.
+	↲ str.
+}.
+
+String on: 'unescape:' do: { :text
+	☞ str := ⛏.
+	text characters each: { :number :character
+		
+		(character = '\t') true: {
+			character := '\\t'.
+		}.
+		
+		(character = '\n') true: {
+			character := '\\n'.
+		}.
+		
+		str := str pattern: ('\\\\+(X)' X character) process: { :match
+			
+			☞ special := match ? 1.
+			
+			((match ? 0) = '\\t') true: {
+				special := '⇿'.
+			}.
+			
+			((match ? 0) = '\\n') true: {
+				special := '↵'.
+			}.
+			
+			↲ special.
+		}.
+	}.
+	↲ str.
+}.
+
 ☞ garden := '{
 	"garden": {
 		"chairs": 2,

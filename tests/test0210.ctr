@@ -1,3 +1,4 @@
+'SINGLE_LANGUAGE'.
 ☞ perky := Percolator new.
 ✎ write: perky brew, brk.
 Percolator brew.

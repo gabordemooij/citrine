@@ -10,6 +10,200 @@
 #include "i18n/en/dictionary.h"
 #endif
 
+
+/**
+ * [String] escape: '\n'.
+ *
+ * Escapes the specified ASCII character in a string.
+ * If the character is a control character, the well known
+ * C-based character substitute will be used.
+ */
+ctr_object* ctr_string_escape(ctr_object* myself, ctr_argument* argumentList)  {
+	ctr_object* escape = ctr_internal_cast2string( argumentList->object );
+	ctr_object* newString = NULL;
+	char* str = myself->value.svalue->value;
+	long  len = myself->value.svalue->vlen;
+	char* tstr;
+	long i=0;
+	long k=0;
+	ctr_size q = 0;
+	ctr_size numOfCharacters = 0;
+	long tlen = 0;
+	char* characters;
+	char character;
+	char characterDescription;
+	char isControlChar = 0;
+	char escaped;
+	long tag_len = 0;
+	characters = escape->value.svalue->value;
+	numOfCharacters = escape->value.svalue->vlen;
+	if (numOfCharacters < 1) {
+		return myself;
+	}
+	for (q = 0; q < numOfCharacters; q ++) {
+		character = characters[q];
+		isControlChar = 0;
+		characterDescription = character;
+		for(i =0; i < len; i++) {
+			char c = str[i];
+			if (c == character) {
+				tag_len += 2;
+			}
+		}
+	}
+	tlen = len + tag_len;
+	tstr = ctr_heap_allocate( tlen * sizeof( char ) );
+	for(i = 0; i < len; i++) {
+		char c = str[i];
+		escaped = 0;
+		for (q = 0; q < numOfCharacters; q ++) {
+			character = characters[q];
+			isControlChar = 0;
+			if (character == '\t') {
+				characterDescription = 't';
+				isControlChar = 1;
+			}
+			if (character == '\r') {
+				characterDescription = 'r';
+				isControlChar = 1;
+			}
+			if (character == '\n') {
+				characterDescription = 'n';
+				isControlChar = 1;
+			}
+			if (character == '\b') {
+				characterDescription = 'b';
+				isControlChar = 1;
+			}
+			if (c == character) {
+				tstr[k++] = '\\';
+				if (isControlChar) {
+					tstr[k++] = characterDescription;
+				} else {
+					tstr[k++] = str[i];
+				}
+				escaped = 1;
+				break;
+			}
+		}
+		if (!escaped) {
+			tstr[k++] = str[i];
+		}
+	}
+	newString = ctr_build_string(tstr, tlen);
+	ctr_heap_free( tstr );
+	return newString;
+}
+
+
+/**
+ * [String] unescape: '\n'.
+ *
+ * 'UnEscapes' the specified ASCII character in a string.
+ */
+ctr_object* ctr_string_unescape(ctr_object* myself, ctr_argument* argumentList)  {
+	ctr_object* escape = ctr_internal_cast2string( argumentList->object );
+	ctr_object* newString = NULL;
+	char character;
+	char characterDescription;
+	char* str = myself->value.svalue->value;
+	long  len = myself->value.svalue->vlen;
+	char* tstr;
+	char isControlChar = 0;
+	char* characters;
+	ctr_size numOfCharacters;
+	char unescaped;
+	ctr_size q;
+	long i=0;
+	long k=0;
+	long tlen = 0;
+	long tag_len = 0;
+	characters = escape->value.svalue->value;
+	numOfCharacters = escape->value.svalue->vlen;
+	if (numOfCharacters < 1) {
+		return myself;
+	}
+	for (q = 0; q < numOfCharacters; q ++) {
+		character = characters[q];
+		isControlChar = 0;
+		characterDescription = character;
+		if (character == '\t') {
+			characterDescription = 't';
+			isControlChar = 1;
+		}
+		if (character == '\r') {
+			characterDescription = 'r';
+			isControlChar = 1;
+		}
+		if (character == '\n') {
+			characterDescription = 'n';
+			isControlChar = 1;
+		}
+		if (character == '\b') {
+			characterDescription = 'b';
+			isControlChar = 1;
+		}
+		for(i = 0; i < len; i++) {
+			if (i<len-1 && str[i] == '\\' && str[i+1] == characterDescription) {
+				tag_len -= 1;
+			}
+		}
+	}
+	tlen = len + tag_len;
+	tstr = ctr_heap_allocate( tlen * sizeof( char ) );
+	for(i = 0; i < len; i++) {
+		unescaped = 0;
+		for (q = 0; q < numOfCharacters; q ++) {
+			character = characters[q];
+			characterDescription = character;
+			isControlChar = 0;
+			if (character == '\t') {
+				characterDescription = 't';
+				isControlChar = 1;
+			}
+			if (character == '\r') {
+				characterDescription = 'r';
+				isControlChar = 1;
+			}
+			if (character == '\n') {
+				characterDescription = 'n';
+				isControlChar = 1;
+			}
+			if (character == '\b') {
+				characterDescription = 'b';
+				isControlChar = 1;
+			}
+			if (i<len-1 && str[i] == '\\' && str[i+1] == characterDescription) {
+				if (isControlChar) {
+					if ( characterDescription == 'n' ) {
+						tstr[k++] = '\n';
+					}
+					if ( characterDescription == 'r' ) {
+						tstr[k++] = '\r';
+					}
+					if ( characterDescription == 't' ) {
+						tstr[k++] = '\t';
+					}
+					if ( characterDescription == 'b' ) {
+						tstr[k++] = '\b';
+					}
+				} else {
+					tstr[k++] = str[i+1];
+				}
+				i++;
+				unescaped = 1;
+			}
+		}
+		if (unescaped == 0) {
+			tstr[k++] = str[i];
+		}
+	}
+	newString = ctr_build_string(tstr, tlen);
+	ctr_heap_free( tstr );
+	return newString;
+}
+
+
 /**
  * [Json] new
  *

@@ -396,7 +396,9 @@ char* ctr_clex_readstr() {
 					break;
 			}
 		}
-		if (c == '\\' && escape == 0 && !ctr_clex_ignore_modes) {
+		if (escape == 1 && !ctr_clex_ignore_modes) {
+			escape = 0;
+		} else if (c == '\\' && escape == 0 && !ctr_clex_ignore_modes) {
 			escape = 1;
 			ctr_code++;
 			c = *ctr_code;
@@ -412,8 +414,9 @@ char* ctr_clex_readstr() {
 			/* reset pointer, memory location might have been changed */
 			strbuff = beginbuff + (ctr_clex_tokvlen -1);
 		}
-		escape = 0;
-		if (c == '\\' && escape == 0 && ctr_clex_ignore_modes) {
+		if (escape == 1 && ctr_clex_ignore_modes) {
+			escape = 0;
+		} else if (c == '\\' && escape == 0 && ctr_clex_ignore_modes) {
 			escape = 1;
 		}
 		*(strbuff) = c;
@@ -440,13 +443,17 @@ int ctr_clex_forward_scan(char* e, char* bytes, ctr_size* newCodePointer) {
 	int quote = 0;
 	int q;
 	int found = 0;
+	int escape = 0;
 	while( (e+i) < ctr_eofcode ) {
-		if (!quote && *(e+i) == '(') nesting++;
+		//printf("\n==>[%c%c%c]<==",*(e+i-1),*(e+i),*(e+i+1));
+		if (escape) escape = 0;
+		else if (!quote && *(e+i) == '(') nesting++;
 		else if (!quote && nesting && *(e+i) == ')') nesting--;
 		else if (!quote && *(e+i) == '{') blocks++;
 		else if (!quote && blocks && *(e+i) == '}') blocks--;
-		else if (!quote && *(e+i) == '\'' && *(e+i-1)!='\\') quote = 1;
-		else if (quote && *(e+i) == '\'' && *(e+i-1)!='\\') quote = 0;
+		else if (!quote && *(e+i) == '\'' && !escape) quote = 1;
+		else if (quote && *(e+i) == '\'' && !escape) quote = 0;
+		else if (quote && *(e+i) == '\\' && !escape) { escape = 1;  }
 		else if (!nesting && !quote && !blocks) {
 			for (q=0; q<len; q++) {
 				if (*(e+i)==bytes[q]) {
@@ -458,6 +465,7 @@ int ctr_clex_forward_scan(char* e, char* bytes, ctr_size* newCodePointer) {
 			}
 			if (found) break;
 		}
+		//printf("== Q%d N%d E%d B%d \n",quote,nesting,escape,blocks);
 		i++;
 	}
 	return found;
