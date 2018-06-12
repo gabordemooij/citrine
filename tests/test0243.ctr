@@ -1,8 +1,10 @@
-
+String on: 'evaluate' do: {
+	↲ (Code new: ('↲ <code>.' <code>: ⛏ string)) run.
+}.
 
 ☞ x := Object new.
 x on: 'test' do: { ↲ True. }.
 
 (x test) true: {
-	'x test' evaluate.
+	✎ write: 'x test' evaluate.
 }.

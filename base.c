@@ -573,7 +573,7 @@ ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argum
                current_method_name_str = current_method->key->value.svalue->value;
                current_method_name_len = current_method->key->value.svalue->vlen;
                if (  current_method_name_len == target_method_name_len ) {
-					if ( strncmp( current_method_name_str, target_method_name_str, len ) == 0 ) {
+					if ( strncmp( current_method_name_str, target_method_name_str, current_method_name_len ) == 0 ) {
                        ctr_internal_object_add_property( myself, alias, current_method->value, 1);
                        break;
                 

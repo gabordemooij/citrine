@@ -1,5 +1,11 @@
 'SINGLE_LANGUAGE'.
 
+String on: 'evaluate' do: {
+	↲ (Code new: ('↲ <code>.' <code>: ⛏ string)) run.
+}.
+
 'List new' evaluate. 
 'Object new' evaluate. 
 
+☞ a := 123.
+'✎ write: a, brk' evaluate.

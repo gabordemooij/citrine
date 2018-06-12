@@ -1,4 +1,6 @@
 'SINGLE_LANGUAGE'.
-
+String on: 'evaluate' do: {
+	↲ (Code new: ('↲ <code>.' <code>: ⛏ string)) run.
+}.
 ☞ calc := '☞ x := ((3 power: 2) + 2 - 1 * 7 / (25 square root))'.
 ✎ write: calc evaluate, brk.

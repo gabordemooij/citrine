@@ -1,4 +1,7 @@
 'SINGLE_LANGUAGE'.
+String on: 'evaluate' do: {
+	↲ (Code new: ('↲ <code>.' <code>: ⛏ string)) run.
+}.
 
 List on: '←' do: {
 	✎ write: 'Blaaaa', brk.

@@ -1,5 +1,9 @@
 'SINGLE_LANGUAGE'.
 
+String on: 'evaluate' do: {
+	↲ (Code new: ('↲ <code>.' <code>: ⛏ string)) run.
+}.
+
 ☞ Q := (39 byte).
 
 ☞ q := List ← ('Quotes ' + Q + ' are evil?') ; 1.
