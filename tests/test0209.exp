@@ -73,7 +73,6 @@ Boolean boolean.
 Boolean between: 0 and: 0 .
 Boolean bytes.
 Boolean length.
-Boolean from: 0 to: 0 .
 Boolean from: 0 length: 0 .
 Boolean remove surrounding spaces.
 Boolean at: 0 .
@@ -170,7 +169,7 @@ Boolean zone.
 Boolean zone: 0 .
 Boolean add: 0 .
 Boolean subtract: 0 .
-Boolean multiply: 0 .
+Boolean multiply by: 0 .
 Boolean divide by: 0 .
 Boolean like: 0 .
 Boolean format: 0 .
@@ -263,7 +262,6 @@ True boolean.
 True between: 0 and: 0 .
 True bytes.
 True length.
-True from: 0 to: 0 .
 True from: 0 length: 0 .
 True remove surrounding spaces.
 True at: 0 .
@@ -360,7 +358,7 @@ True zone.
 True zone: 0 .
 True add: 0 .
 True subtract: 0 .
-True multiply: 0 .
+True multiply by: 0 .
 True divide by: 0 .
 True like: 0 .
 True format: 0 .
@@ -453,7 +451,6 @@ False boolean.
 False between: 0 and: 0 .
 False bytes.
 False length.
-False from: 0 to: 0 .
 False from: 0 length: 0 .
 False remove surrounding spaces.
 False at: 0 .
@@ -550,7 +547,7 @@ False zone.
 False zone: 0 .
 False add: 0 .
 False subtract: 0 .
-False multiply: 0 .
+False multiply by: 0 .
 False divide by: 0 .
 False like: 0 .
 False format: 0 .
@@ -645,7 +642,6 @@ Number boolean.
 Number between: 0 and: 0 .
 Number bytes.
 Number length.
-Number from: 0 to: 0 .
 Number from: 0 length: 0 .
 Number remove surrounding spaces.
 Number at: 0 .
@@ -742,7 +738,7 @@ Number zone.
 Number zone: 0 .
 Number add: 0 .
 Number subtract: 0 .
-Number multiply: 0 .
+Number multiply by: 0 .
 Number divide by: 0 .
 error
 Number like: 0 .
@@ -836,7 +832,6 @@ String boolean.
 String between: 0 and: 0 .
 String bytes.
 String length.
-String from: 0 to: 0 .
 String from: 0 length: 0 .
 String remove surrounding spaces.
 String at: 0 .
@@ -934,7 +929,7 @@ String zone.
 String zone: 0 .
 String add: 0 .
 String subtract: 0 .
-String multiply: 0 .
+String multiply by: 0 .
 String divide by: 0 .
 String like: 0 .
 String format: 0 .
@@ -1027,7 +1022,6 @@ Object boolean.
 Object between: 0 and: 0 .
 Object bytes.
 Object length.
-Object from: 0 to: 0 .
 Object from: 0 length: 0 .
 Object remove surrounding spaces.
 Object at: 0 .
@@ -1124,7 +1118,7 @@ Object zone.
 Object zone: 0 .
 Object add: 0 .
 Object subtract: 0 .
-Object multiply: 0 .
+Object multiply by: 0 .
 Object divide by: 0 .
 Object like: 0 .
 Object format: 0 .
@@ -1217,7 +1211,6 @@ List boolean.
 List between: 0 and: 0 .
 List bytes.
 List length.
-List from: 0 to: 0 .
 List from: 0 length: 0 .
 List remove surrounding spaces.
 List at: 0 .
@@ -1317,7 +1310,7 @@ List zone.
 List zone: 0 .
 List add: 0 .
 List subtract: 0 .
-List multiply: 0 .
+List multiply by: 0 .
 List divide by: 0 .
 List like: 0 .
 List format: 0 .
@@ -1411,7 +1404,6 @@ Map boolean.
 Map between: 0 and: 0 .
 Map bytes.
 Map length.
-Map from: 0 to: 0 .
 Map from: 0 length: 0 .
 Map remove surrounding spaces.
 Map at: 0 .
@@ -1510,7 +1502,7 @@ Map zone.
 Map zone: 0 .
 Map add: 0 .
 Map subtract: 0 .
-Map multiply: 0 .
+Map multiply by: 0 .
 Map divide by: 0 .
 Map like: 0 .
 Map format: 0 .
@@ -1603,7 +1595,6 @@ File boolean.
 File between: 0 and: 0 .
 File bytes.
 File length.
-File from: 0 to: 0 .
 File from: 0 length: 0 .
 File remove surrounding spaces.
 File at: 0 .
@@ -1701,7 +1692,7 @@ File zone.
 File zone: 0 .
 File add: 0 .
 File subtract: 0 .
-File multiply: 0 .
+File multiply by: 0 .
 File divide by: 0 .
 File like: 0 .
 File format: 0 .
@@ -1796,7 +1787,6 @@ Moment boolean.
 Moment between: 0 and: 0 .
 Moment bytes.
 Moment length.
-Moment from: 0 to: 0 .
 Moment from: 0 length: 0 .
 Moment remove surrounding spaces.
 Moment at: 0 .
@@ -1893,7 +1883,7 @@ Moment zone.
 Moment zone: 0 .
 Moment add: 0 .
 Moment subtract: 0 .
-Moment multiply: 0 .
+Moment multiply by: 0 .
 Moment divide by: 0 .
 Moment like: 0 .
 Moment format: 0 .

@@ -1,4 +1,4 @@
-✎ write: ('Santa Clause' from: 6 to: 7). 
+✎ write: ('Santa Clause' from: 6 length: 1). 
 ✎ write: ('hello' character: 2). 
 ✎ write: ('🎄🎄🎄' length). 
 ✎ write: ('' bytes) + ('' length). 

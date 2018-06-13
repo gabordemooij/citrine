@@ -15,7 +15,7 @@ HtmlBrush on: 'respond:' do: { :tag
 }.
 
 HtmlBrush on: 'respond:and:' do: { :tag :content
-	tag := ( tag from: 0 to: (tag length - 1) ).
+	tag := ( tag from: 0 length: (tag length - 1) ).
 	✎ write: ('<tag content>↵' tag: tag, content: content).
 }.
 

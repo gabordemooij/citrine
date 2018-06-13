@@ -113,7 +113,7 @@ ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Object] toString
+ * [Object] string
  *
  * Returns a string representation of a generic object.
  * This string representation will be:
@@ -125,7 +125,7 @@ ctr_object* ctr_object_to_string( ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [Object] toNumber
+ * [Object] number
  *
  * Returns a numerical representation of the object. This basic behavior, part
  * of any object will just return 1. Other objects typically override this
@@ -136,7 +136,7 @@ ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentL
 }
 
 /**
- * [Object] toBoolean
+ * [Object] boolean
  *
  * Returns a boolean representation of the object. This basic behavior, part
  * of any object will just return True. Other objects typically override this
@@ -257,22 +257,6 @@ ctr_object* ctr_object_copy( ctr_object* myself, ctr_argument* argumentList ) {
  *
  * Usage:
  *
- * #Can we use a switch statement in Citrine?
- *
- * #create a good wine
- * ☞ wine := Object new.
- *
- * #define a string representation for this wine
- * wine on: 'toString' do: {
- *	↲ 'merlot'.
- * }.
- *
- * #define how wines are to be compared
- * wine on: '=' do: { :other wine
- *	↲ ( me toString = other wine ).
- *}.
- *
- * #now select the correct wine from the list
  * wine
  *	case: 'cabernet' do: { ✎ write: 'it\'s a Cabernet!'. },
  *	case: 'syrah'    do: { ✎ write: 'it\'s a Syrah!'.    },
@@ -315,8 +299,8 @@ ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList )
  *
  * Usage:
  *
- * var str := 'write:'.
- * Pen message: 'write:' arguments: (List ← 'Hello World').
+ * ☞ str := 'write:'.
+ * ✎ message: 'write:' arguments: (List ← 'Hello World').
  *
  * This will print the string 'Hello world' on the screen using a dynamically
  * crafted message.
@@ -611,7 +595,7 @@ ctr_object* ctr_build_bool(int truth) {
  *
  * Usage:
  *
- * (True = False) ifFalse: { Pen write: 'This is not True!'. }.
+ * (True = False) false: { Pen write: 'This is not True!'. }.
  */
 ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(ctr_internal_cast2bool(argumentList->object)->value.bvalue == myself->value.bvalue);
@@ -633,7 +617,7 @@ ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] toString
+ * [Boolean] string
  *
  * Simple cast function.
  */
@@ -831,7 +815,7 @@ ctr_object* ctr_bool_xor(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] toNumber
+ * [Boolean] number
  *
  * Returns 0 if boolean is False and 1 otherwise.
  */
@@ -848,8 +832,6 @@ ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList) {
  * 1
  * -8
  * 2.5
- * pi
- * 𝛑
  *
  * Represents a number object in Citrine.
  */
@@ -903,7 +885,7 @@ ctr_object* ctr_number_higherThan(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [Number] >=: [other]
+ * [Number] ≥ [other]
  *
  * Returns True if the number is higher than or equal to other number.
  */
@@ -923,7 +905,7 @@ ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [Number] <=: [other]
+ * [Number] ≤ [other]
  *
  * Returns True if the number is less than or equal to other number.
  */
@@ -943,7 +925,7 @@ ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] !=: [other]
+ * [Number] ≠ [other]
  *
  * Returns True if the number does not equal the other number.
  */
@@ -998,7 +980,7 @@ ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] odd
+ * [Number] odd?
  *
  * Returns True if the number is odd and False otherwise.
  */
@@ -1007,7 +989,7 @@ ctr_object* ctr_number_odd(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] even
+ * [Number] even?
  *
  * Returns True if the number is even and False otherwise.
  */
@@ -1044,7 +1026,7 @@ ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] +=: [Number]
+ * [Number] add: [Number]
  *
  * Increases the number ITSELF by the specified amount, this message will change the
  * value of the number object itself instead of returning a new number.
@@ -1069,7 +1051,7 @@ ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] -=: [number]
+ * [Number] subtract: [number]
  *
  * Decreases the number ITSELF by the specified amount, this message will change the
  * value of the number object itself instead of returning a new number.
@@ -1133,7 +1115,7 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] *=: [Number]
+ * [Number] multiply by: [Number]
  *
  * Multiplies the number ITSELF by multiplier, this message will change the
  * value of the number object itself instead of returning a new number.
@@ -1141,7 +1123,7 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * x := 5.
- * x *=: 2. #x is now 10.
+ * x multiply by: 2. #x is now 10.
  *
  * Use this message to apply the operation to the object itself instead
  * of creating and returning a new object.
@@ -1171,7 +1153,7 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] /=: [Number]
+ * [Number] devide by: [Number]
  *
  * Divides the number ITSELF by divider, this message will change the
  * value of the number object itself instead of returning a new number.
@@ -1179,7 +1161,7 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * x := 10.
- * x /=: 2. #x will now be 5.
+ * x divide by: 2. #x will now be 5.
  *
  * Use this message to apply the operation to the object itself instead
  * of generating a new object.
@@ -1371,7 +1353,7 @@ ctr_object* ctr_number_respond_to(ctr_object* myself, ctr_argument* argumentList
  * Usage:
  *
  * x := 4.5.
- * y = x ceil. #y will be 5
+ * y = x ceil.
  *
  * The example above applies the ceiling function to the recipient (4.5)
  * returning a new number object (5).
@@ -1390,14 +1372,14 @@ ctr_object* ctr_number_round(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] abs
+ * [Number] absolute
  *
  * Returns the absolute (unsigned, positive) value of the number.
  *
  * Usage:
  *
  * x := -7.
- * y := x abs. #y will be 7
+ * y := x absolute. #y will be 7
  *
  * The example above strips the sign off the value -7 resulting
  * in 7.
@@ -1629,42 +1611,6 @@ ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-/**
- * [String] from: [position] to: [destination]
- *
- * Returns a portion of a string defined by from-to values.
- * This message is UTF-8 unicode aware.
- *
- * Usage:
- *
- * 'hello' from: 2 to: 3. #ll
- */
-ctr_object* ctr_string_fromto(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
-	ctr_object* toPos = ctr_internal_cast2number(argumentList->next->object);
-	long len = myself->value.svalue->vlen;
-	long a = (fromPos->value.nvalue);
-	long b = (toPos->value.nvalue);
-	long t;
-	long ua, ub;
-	char* dest;
-	ctr_object* newString;
-	if (b == a) return ctr_build_empty_string();
-	if (a > b) {
-		t = a; a = b; b = t;
-	}
-	if (a > len) return ctr_build_empty_string();
-	if (b > len) b = len;
-	if (a < 0) a = 0;
-	if (b < 0) return ctr_build_empty_string();
-	ua = getBytesUtf8(myself->value.svalue->value, 0, a);
-	ub = getBytesUtf8(myself->value.svalue->value, ua, ((b - a)));
-	dest = ctr_heap_allocate( ub * sizeof(char) );
-	memcpy(dest, (myself->value.svalue->value) + ua, ub);
-	newString = ctr_build_string(dest,ub);
-	ctr_heap_free( dest );
-	return newString;
-}
 
 /**
  * [String] from: [start] length: [length]
@@ -1675,7 +1621,7 @@ ctr_object* ctr_string_fromto(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * 'hello' from: 2 length: 3. #llo
+ * 'hello' from: 2 length: 3.
  */
 ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);

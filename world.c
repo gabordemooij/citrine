@@ -672,7 +672,6 @@ void ctr_initialize_world() {
 	CtrStdString = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_BYTES ), &ctr_string_bytes );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_LENGTH ), &ctr_string_length );
-	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_FROM_TO ), &ctr_string_fromto );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_FROM_LENGTH ), &ctr_string_from_length );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_PLUS ), &ctr_string_concat );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_SYMBOL_EQUALS ), &ctr_string_eq );

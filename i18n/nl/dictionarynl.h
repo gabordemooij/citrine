@@ -77,7 +77,6 @@
 #define CTR_DICT_BETWEEN         "tussen:en:" 
 #define CTR_DICT_BYTES	         "bytes" 
 #define CTR_DICT_LENGTH	         "lengte" 
-#define CTR_DICT_FROM_TO	     "van:tot:" 
 #define CTR_DICT_FROM_LENGTH	 "van:lengte:" 
 #define CTR_DICT_TRIM	         "verwijder omliggende spaties" 
 #define CTR_DICT_AT              "bij:"

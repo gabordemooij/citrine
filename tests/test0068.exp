@@ -22,10 +22,10 @@
 === Out of bounds, empty string ===
 >
 >
->
->
+>A_
+>A
 === Part out of bounds, full string ===
 >A_bottle_of_Whisky and a rare steak.
->A_bottle_of_Whisky and a rare steak.
+>
 >A_bottle_of_Whisky and a rare steak.
 >A_bottle_of_Whisky and a rare steak.

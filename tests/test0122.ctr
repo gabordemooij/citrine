@@ -3,6 +3,6 @@
 x divide by: 2.
 ✎ write: '10 / 2 = '.
 ✎ write: x, end.
-x multiply: 2.
+x multiply by: 2.
 ✎ write: ' * 2 makes... '.
 ✎ write: x, end.

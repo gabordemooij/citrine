@@ -16,7 +16,7 @@ Number on: 'subtractNum:' do: { :x
 }.
 
 Number on: 'multiplyBy:' do: { :x
-	⛏ multiply: x.
+	⛏ multiply by: x.
 }.
 
 Number on: 'divideBy:' do: { :x

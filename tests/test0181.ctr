@@ -9,7 +9,7 @@ Program tidiness: 0.
 
 ☞ txt := 'World Salad'.
 ✎ write: 'this text contains: ' + ( ( txt split: ' ' ) count ) + ' words.', end.
-txt := txt from: 6 to: 10.
+txt := txt from: 6 length: 4.
 ✎ write: txt, end.
 
 Program clean memory.
@@ -19,7 +19,7 @@ usedMemory1 := (Program memory ? 0).
 
 txt := 'World Salad'.
 ✎ write: 'this text contains: ' + ( ( txt split: ' ' ) count ) + ' words.', end.
-txt := txt from: 6 to: 10.
+txt := txt from: 6 length: 4.
 ✎ write: txt, end.
 
 Program clean memory.
@@ -28,7 +28,7 @@ usedMemory2 := (Program memory ? 0).
 
 txt := 'World Salad'.
 ✎ write: 'this text contains: ' + ( ( txt split: ' ' ) count ) + ' words.', end.
-txt := txt from: 6 to: 10.
+txt := txt from: 6 length: 4.
 ✎ write: txt, end.
 
 Program clean memory.

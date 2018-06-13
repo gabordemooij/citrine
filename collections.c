@@ -181,7 +181,7 @@ ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * a := List ← 1 ; 2 ; 3.
- * s := a sum. #6
+ * s := a sum.
  *
  * In the example above, the sum of array will be stored in s and
  * it's value will be 6.
@@ -207,14 +207,14 @@ ctr_object* ctr_array_sum(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * a := List ← 2 ; 4 ; 8.
- * p := a product. #64
+ * p := a product.
  *
  * In the example above, the product of the array will be calculated
  * because the array receives the message 'product'. The product of the elements
  * ( 2 * 4 * 8 = 64 ) will be stored in p.
  */
 ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList) {
-	double product = 1;
+	ctr_number product = 1;
 	ctr_object* el;
 	size_t i = 0;
 	for(i = 0; i < myself->value.avalue->head; i++) {
@@ -238,7 +238,7 @@ ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList) {
  * files map: showName.
  * files map: {
  *   :key :filename :files
- *   Pen write: filename, brk.
+ *   ✎ write: filename.
  * }.
  */
 ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
@@ -367,7 +367,7 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] at: [Index]
+ * [List] position: [Index]
  *
  * Returns the element in the array at the specified index.
  * Note that the first index of the array is index 0.
@@ -949,14 +949,6 @@ ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [List] serialize
- *
- * Alias for [List] toString.
- *
- * See 'Map serialize' for the reason for this alias.
- */
-
-/**
  * Map
  *
  * Creates a Map object.
@@ -1255,7 +1247,7 @@ ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Map] toString
+ * [Map] string
  *
  * Returns a string representation of a map encoded in Citrine itself.
  * This will give you an
@@ -1264,13 +1256,12 @@ ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList) {
  * Usage
  *
  * m := (Map new) put: 'hello' at: 'world'.
- * x := m toString
- * m := x eval.
+ * x := m string.
  *
- * The toString method is automatically invoked when attempting to
+ * The sting method is automatically invoked when attempting to
  * print a Map:
  *
- * Pen write: (Map new). #prints Map new.
+ * ✎ write: (Map new).
  *
  * You can also use the alias 'serialize'.
  */
@@ -1334,17 +1325,3 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 	ctr_heap_free( newArgumentList );
 	return string;
 }
-
-/**
- * [Map] serialize
- *
- * Alias for [Map] toString.
- * A toString message, sometimes implicitly send by other messages like
- * 'Pen write:' will give you a serialized version of the Map or List.
- * This is far more useful than a 'dumb' textual description of the object like
- * 'array' or 'object'. However, when working with very large Maps or Lists
- * accidentally dumping the entire contents can be annoying, in this case you can
- * override the toString behaviour but you don't have to remap the original, you
- * can just use this alias. Also, this alias can be used if you want to make
- * the serialization more explicit.
- */
