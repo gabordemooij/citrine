@@ -10,7 +10,6 @@ Can I execute a code block without assigning code?
 [Object]
 This Nil has no file
 0
-Boolean 𝛑 0.
 Boolean ☞ 0.
 Boolean ⛏ 0.
 Boolean ⚿ 0.
@@ -201,7 +200,6 @@ Boolean apply: 0 and: 0 and: 0 .
 Boolean setting: 0 .
 Boolean setting: 0 value: 0 .
 Boolean respond: 0 and: 0 and: 0 .
-True 𝛑 0.
 True ☞ 0.
 True ⛏ 0.
 True ⚿ 0.
@@ -392,7 +390,6 @@ True apply: 0 and: 0 and: 0 .
 True setting: 0 .
 True setting: 0 value: 0 .
 True respond: 0 and: 0 and: 0 .
-False 𝛑 0.
 False ☞ 0.
 False ⛏ 0.
 False ⚿ 0.
@@ -583,7 +580,6 @@ False apply: 0 and: 0 and: 0 .
 False setting: 0 .
 False setting: 0 value: 0 .
 False respond: 0 and: 0 and: 0 .
-Number 𝛑 0.
 Number ☞ 0.
 Number ⛏ 0.
 Number ⚿ 0.
@@ -777,7 +773,6 @@ Number apply: 0 and: 0 and: 0 .
 Number setting: 0 .
 Number setting: 0 value: 0 .
 Number respond: 0 and: 0 and: 0 .
-String 𝛑 0.
 String ☞ 0.
 String ⛏ 0.
 String ⚿ 0.
@@ -969,7 +964,6 @@ String apply: 0 and: 0 and: 0 .
 String setting: 0 .
 String setting: 0 value: 0 .
 String respond: 0 and: 0 and: 0 .
-Object 𝛑 0.
 Object ☞ 0.
 Object ⛏ 0.
 Object ⚿ 0.
@@ -1160,7 +1154,6 @@ Object apply: 0 and: 0 and: 0 .
 Object setting: 0 .
 Object setting: 0 value: 0 .
 Object respond: 0 and: 0 and: 0 .
-List 𝛑 0.
 List ☞ 0.
 List ⛏ 0.
 List ⚿ 0.
@@ -1355,7 +1348,6 @@ List apply: 0 and: 0 and: 0 .
 List setting: 0 .
 List setting: 0 value: 0 .
 List respond: 0 and: 0 and: 0 .
-Map 𝛑 0.
 Map ☞ 0.
 Map ⛏ 0.
 Map ⚿ 0.
@@ -1548,7 +1540,6 @@ Map apply: 0 and: 0 and: 0 .
 Map setting: 0 .
 Map setting: 0 value: 0 .
 Map respond: 0 and: 0 and: 0 .
-File 𝛑 0.
 File ☞ 0.
 File ⛏ 0.
 File ⚿ 0.
@@ -1742,7 +1733,6 @@ File apply: 0 and: 0 and: 0 .
 File setting: 0 .
 File setting: 0 value: 0 .
 File respond: 0 and: 0 and: 0 .
-Moment 𝛑 0.
 Moment ☞ 0.
 Moment ⛏ 0.
 Moment ⚿ 0.

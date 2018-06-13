@@ -16,7 +16,6 @@
 #define CTR_DICT_COMP_ICON       "Programma"
 #define CTR_DICT_FILE            "Bestand"
 #define CTR_DICT_CLOCK_ICON      "Moment"
-#define CTR_DICT_PI_SYMBOL       "𝛑"
 #define CTR_DICT_VAR_ICON        "☞"
 #define CTR_DICT_ME_ICON         "⛏"
 #define CTR_DICT_MY_ICON         "⚿"
