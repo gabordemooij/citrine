@@ -10,10 +10,10 @@ Program tidiness: 0.
 ☞ txt := '1.6'.
 ☞ n := txt number.
 ☞ t := txt boolean.
-✎ write: n, brk.
-✎ write: t, brk.
-✎ write: n type, brk.
-✎ write: t type, brk.
+✎ write: n, end.
+✎ write: t, end.
+✎ write: n type, end.
+✎ write: t type, end.
 
 Program clean memory.
 
@@ -23,10 +23,10 @@ usedMemory1 := (Program memory ? 0).
 txt := '1.6'.
 n := txt number.
 t := txt boolean.
-✎ write: n, brk.
-✎ write: t, brk.
-✎ write: n type, brk.
-✎ write: t type, brk.
+✎ write: n, end.
+✎ write: t, end.
+✎ write: n type, end.
+✎ write: t type, end.
 
 Program clean memory.
 usedMemory2 := (Program memory ? 0).
@@ -35,10 +35,10 @@ usedMemory2 := (Program memory ? 0).
 txt := '1.6'.
 n := txt number.
 t := txt boolean.
-✎ write: n, brk.
-✎ write: t, brk.
-✎ write: n type, brk.
-✎ write: t type, brk.
+✎ write: n, end.
+✎ write: t, end.
+✎ write: n type, end.
+✎ write: t type, end.
 
 Program clean memory.
 usedMemory3 := (Program memory ? 0).

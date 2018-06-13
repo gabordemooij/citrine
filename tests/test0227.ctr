@@ -6,5 +6,5 @@
 q shift.
 q each: { :i :x
 
-	✎ write: '#' + i + ' = ' + x, brk.
+	✎ write: '#' + i + ' = ' + x, end.
 }.

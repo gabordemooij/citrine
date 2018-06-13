@@ -1,8 +1,8 @@
 
 ☞ a := List ← 9 ; 8 ; 7.
-✎ write: (a sum), brk. 
+✎ write: (a sum), end. 
 ☞ a := List ← 1 ; 9.
-✎ write: (a sum), brk. 
+✎ write: (a sum), end. 
 ☞ a := List ← 'o' ; 2.
-✎ write: (a sum), brk. 
-✎ write: (List new sum), brk. 
+✎ write: (a sum), end. 
+✎ write: (List new sum), end. 

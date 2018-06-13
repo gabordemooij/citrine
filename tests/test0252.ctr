@@ -9,13 +9,13 @@
 clock year: 1981, month: 1, day: 5,
       hour: 13, minute: 15, second: 13.
 
-✎ write: clock, brk.
+✎ write: clock, end.
 
 ✎ write: (
 	(clock year) + '-' + (clock month) + '-' + (clock day) + ' ' +
 	(clock hour) + ':' + (clock minute) + ':' + (clock second) + ' ' +
 	'W' + (clock week) + ' t' + (clock time) + ' ' + (clock zone)
-), brk.
+), end.
 
 
 clock zone: 'Europe/Amsterdam'.
@@ -23,21 +23,21 @@ clock zone: 'Europe/Amsterdam'.
 	(clock year) + '-' + (clock month) + '-' + (clock day) + ' ' +
 	(clock hour) + ':' + (clock minute) + ':' + (clock second) + ' ' +
 	'W' + (clock week) + ' t' + (clock time) + ' ' + (clock zone)
-), brk.
+), end.
 
 ☞ clock2 := clock new zone: 'Europe/Amsterdam', month: 6, hour: 8.
 
 
-✎ write: (clock2 format: Nil), brk. 
-✎ write: (clock format: 'Clock1 %H'), brk.
-✎ write: (clock2 format: 'Clock2 %H'), brk.
+✎ write: (clock2 format: Nil), end. 
+✎ write: (clock format: 'Clock1 %H'), end.
+✎ write: (clock2 format: 'Clock2 %H'), end.
 
 clock2 zone: 'America/New York'.
-✎ write: (clock format: 'Clock1 %H'), brk.
-✎ write: (clock2 format: 'Clock2 %H'), brk.
+✎ write: (clock format: 'Clock1 %H'), end.
+✎ write: (clock2 format: 'Clock2 %H'), end.
 
 ☞ clock3 := Moment new like: (Moment new zone: 'UTC', hour: 13).
 clock3 := Moment new: clock3 time.
-✎ write: (clock3 format: 'Clock3 %H'), brk.
+✎ write: (clock3 format: 'Clock3 %H'), end.
 
 

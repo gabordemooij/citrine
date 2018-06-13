@@ -1,18 +1,18 @@
 'SINGLE_LANGUAGE'.
 (Code new: 'List by: 0.') run.
-☞ x := Code new: '✎ write: \'hello there\', brk.'.
+☞ x := Code new: '✎ write: \'hello there\', end.'.
 x run.
-✎ write: '+ 3 to Number gives: ? ' ? (Number + 3), brk.
-✎ write: 'Adding 3 to Number gives: ? ' ? (Number add: 3), brk.
-✎ write: ('Appending something to String gives: [this]' [this]: (String append: 'something')), brk.
-✎ write: Boolean string, brk.
-✎ write: Code string, brk.
-✎ write: 'Can I execute a code block without assigning code?', brk.
-✎ write: (Code * 10), brk.
-✎ write: (Code true: {}), brk.
-✎ write: (Object done), brk.
-✎ write: ('This <path> has no file' <path>: File path), brk.
-✎ write: List count, brk.
+✎ write: '+ 3 to Number gives: ? ' ? (Number + 3), end.
+✎ write: 'Adding 3 to Number gives: ? ' ? (Number add: 3), end.
+✎ write: ('Appending something to String gives: [this]' [this]: (String append: 'something')), end.
+✎ write: Boolean string, end.
+✎ write: Code string, end.
+✎ write: 'Can I execute a code block without assigning code?', end.
+✎ write: (Code * 10), end.
+✎ write: (Code true: {}), end.
+✎ write: (Object done), end.
+✎ write: ('This <path> has no file' <path>: File path), end.
+✎ write: List count, end.
 ☞ dictionary := (File new: 'dictionary.h') read.
 ☞ words := List new.
 ☞ things := List new.
@@ -40,9 +40,9 @@ things each: { :n :thing
 		(word length = 1) true: { task append: ' 0'. }.
 		task append: '.'.
 		
-		✎ write: task, brk.
+		✎ write: task, end.
 		☞ code := Code new: task.
-		code catch: { :error ✎ write: 'error', brk. }, run.
+		code catch: { :error ✎ write: 'error', end. }, run.
 	}.
 }.
 

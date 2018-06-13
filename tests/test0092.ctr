@@ -1,13 +1,13 @@
 
 ☞ g := 'global'.
-{ ☞ g := 'local'. ✎ write: g, brk. } run. 
-✎ write: g, brk. 
+{ ☞ g := 'local'. ✎ write: g, end. } run. 
+✎ write: g, end. 
 ☞ message := 'Bye'.
 ☞ Secret := Object new.
 Secret on: 'test' do: {
 	☞ message := 'Hello'.
 	⚿ message := 'World'.
-	✎ write: message + ' ' + ⚿ message, brk.
+	✎ write: message + ' ' + ⚿ message, end.
 }.
 Secret test.
 ✎ write: message.

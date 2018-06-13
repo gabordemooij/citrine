@@ -2,20 +2,20 @@
 	☞ a := List new.
 	a append: 1.
 	a append: 2.
-	✎ write: (a join: ','), brk.
+	✎ write: (a join: ','), end.
 	a put: 3 at: 2.
-	✎ write: (a join: ','), brk.
+	✎ write: (a join: ','), end.
 	a put: 4 at: 10.
-	✎ write: (a join: ','), brk.
+	✎ write: (a join: ','), end.
 	a shift.
 	a shift.
 	a shift.
-	✎ write: (a join: ','), brk.
+	✎ write: (a join: ','), end.
 	a put: 9 at: 0.
-	✎ write: (a join: ','), brk.
+	✎ write: (a join: ','), end.
 	a put: 6 at: -1.
 } catch: { :e
-	✎ write: 'Uncatched error has occurred.\n' + e, brk.
+	✎ write: 'Uncatched error has occurred.\n' + e, end.
 }, run.
 
 

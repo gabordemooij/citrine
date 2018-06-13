@@ -28,10 +28,10 @@ Slurp on: 'obtain' do: {
 
 
 Slurp new hello world.
-✎ write: (Slurp obtain), brk. 
-✎ write: (Slurp obtain), brk. 
+✎ write: (Slurp obtain), end. 
+✎ write: (Slurp obtain), end. 
 Slurp hello world.
 ☞ x := Slurp new.
-✎ write: (x obtain), brk. 
+✎ write: (x obtain), end. 
 x hi there.
-✎ write: (x obtain), brk. 
+✎ write: (x obtain), end. 

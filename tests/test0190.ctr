@@ -9,7 +9,7 @@ Program tidiness: 0.
 
 Moment time.
 Moment wait: 1.
-✎ write: Program arguments, brk.
+✎ write: Program arguments, end.
 Program argument: 0.
 Number random.
 ✎ write: (Program shell: 'echo \'Hello\'').
@@ -21,7 +21,7 @@ usedMemory1 := (Program memory ? 0).
 
 Moment time.
 Moment wait: 1.
-✎ write: Program arguments, brk.
+✎ write: Program arguments, end.
 Program argument: 0.
 Number random.
 ✎ write: (Program shell: 'echo \'Hello\'').
@@ -33,7 +33,7 @@ usedMemory2 := (Program memory ? 0).
 
 Moment time.
 Moment wait: 1.
-✎ write: Program arguments, brk.
+✎ write: Program arguments, end.
 Program argument: 0.
 Number random.
 ✎ write: (Program shell: 'echo \'Hello\'').

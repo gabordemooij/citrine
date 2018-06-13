@@ -20,4 +20,4 @@
 }'.
 
 ☞ g := Json to object: garden.
-✎ write: g, brk.
+✎ write: g, end.

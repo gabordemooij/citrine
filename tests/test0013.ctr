@@ -5,7 +5,7 @@ Animal on: 'makeSound' do: {
 ☞ Cat := Animal new.
 Cat on: 'makeSound' do: {
 	✎ write: 'meow!'.
-	⛏ `makeSound. #call makeSound on parent.
+	⛏ `makeSound.
 }.
 ☞ Tom := Cat new.
 Tom `makeSound.

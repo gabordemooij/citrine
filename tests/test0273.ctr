@@ -1,4 +1,4 @@
 'SINGLE_LANGUAGE'.
 
 ☞ a := List new fill: 42 with: 'x'.
-✎ write: a, brk.
+✎ write: a, end.

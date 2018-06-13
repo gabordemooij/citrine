@@ -106,7 +106,6 @@ Boolean each: 0 .
 Boolean sum.
 Boolean product.
 Boolean write: 0 .
-Boolean brk.
 Boolean path.
 Boolean read.
 Boolean append: 0 .
@@ -298,7 +297,6 @@ True each: 0 .
 True sum.
 True product.
 True write: 0 .
-True brk.
 True path.
 True read.
 True append: 0 .
@@ -490,7 +488,6 @@ False each: 0 .
 False sum.
 False product.
 False write: 0 .
-False brk.
 False path.
 False read.
 False append: 0 .
@@ -684,7 +681,6 @@ Number each: 0 .
 Number sum.
 Number product.
 Number write: 0 .
-Number brk.
 Number path.
 Number read.
 Number append: 0 .
@@ -877,7 +873,6 @@ String each: 0 .
 String sum.
 String product.
 String write: 0 .
-String brk.
 String path.
 String read.
 String append: 0 .
@@ -1070,7 +1065,6 @@ Object each: 0 .
 Object sum.
 Object product.
 Object write: 0 .
-Object brk.
 Object path.
 Object read.
 Object append: 0 .
@@ -1265,7 +1259,6 @@ error
 List sum.
 List product.
 List write: 0 .
-List brk.
 List path.
 List read.
 List append: 0 .
@@ -1460,7 +1453,6 @@ error
 Map sum.
 Map product.
 Map write: 0 .
-Map brk.
 Map path.
 Map read.
 Map append: 0 .
@@ -1652,7 +1644,6 @@ File each: 0 .
 File sum.
 File product.
 File write: 0 .
-File brk.
 File path.
 File read.
 File append: 0 .
@@ -1847,7 +1838,6 @@ Moment each: 0 .
 Moment sum.
 Moment product.
 Moment write: 0 .
-Moment brk.
 Moment path.
 Moment read.
 Moment append: 0 .

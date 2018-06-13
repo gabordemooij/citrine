@@ -7,4 +7,4 @@
 ☞ file := File new: False.
 ☞ file := File new: Object.
 
-✎ write: 'I did not crash!', brk.
+✎ write: 'I did not crash!', end.

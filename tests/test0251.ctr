@@ -11,4 +11,4 @@ Number on: 'describe' do: {
 	↲ text.
 }.
 
-✎ write: 0 describe + 1 describe, brk.
+✎ write: 0 describe + 1 describe, end.

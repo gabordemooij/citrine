@@ -25,17 +25,17 @@ Fruit on: 'string' do: {
 }.
 
 ☞ q := 3 apples + 4 apples.
-✎ write: q, brk.
+✎ write: q, end.
 
 
 
 
 q := 3 apples + 4 apples.
-✎ write: q, brk.
+✎ write: q, end.
 
 
 
 q := 3 apples + 4 apples.
-✎ write: q, brk.
+✎ write: q, end.
 
 

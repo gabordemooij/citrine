@@ -6,7 +6,7 @@
 	hour: 18, minute: 0, second: 0.
 
 clock on: 'tell' do: {
-	✎ write: ⛏, brk.
+	✎ write: ⛏, end.
 }.
 
 

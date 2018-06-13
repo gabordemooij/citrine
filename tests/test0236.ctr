@@ -30,4 +30,4 @@ Slurp on: 'obtain' do: {
 
 ☞ query := Slurp new.
 query select: '*', from users where: 'id = 2'.
-✎ write: (query obtain), brk.
+✎ write: (query obtain), end.

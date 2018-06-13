@@ -10,13 +10,13 @@ Program tidiness: 0.
 
 ☞ a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( List ← 1 ).
-✎ write: ( 'sum: ' + ( a sum ) ), brk.
-✎ write: ( 'min: ' + ( a minimum ) ), brk.
-✎ write: ( 'max: ' + ( a maximum ) ), brk.
-✎ write: ( '3rd: ' + ( a ? 2 ) ), brk.
-✎ write: ( 'prd: ' + ( a product ) ), brk.
+✎ write: ( 'sum: ' + ( a sum ) ), end.
+✎ write: ( 'min: ' + ( a minimum ) ), end.
+✎ write: ( 'max: ' + ( a maximum ) ), end.
+✎ write: ( '3rd: ' + ( a ? 2 ) ), end.
+✎ write: ( 'prd: ' + ( a product ) ), end.
 a sort: { :a :b ↲ (b - a). }.
-a each: { :i :e ✎ write: ( i ), brk. }.
+a each: { :i :e ✎ write: ( i ), end. }.
 
 Program clean memory.
 usedMemory1 := (Program memory ? 0).
@@ -24,13 +24,13 @@ usedMemory1 := (Program memory ? 0).
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( List ← 1 ).
-✎ write: ( 'sum: ' + ( a sum ) ), brk.
-✎ write: ( 'min: ' + ( a minimum ) ), brk.
-✎ write: ( 'max: ' + ( a maximum ) ), brk.
-✎ write: ( '3rd: ' + ( a ? 2 ) ), brk.
-✎ write: ( 'prd: ' + ( a product ) ), brk.
+✎ write: ( 'sum: ' + ( a sum ) ), end.
+✎ write: ( 'min: ' + ( a minimum ) ), end.
+✎ write: ( 'max: ' + ( a maximum ) ), end.
+✎ write: ( '3rd: ' + ( a ? 2 ) ), end.
+✎ write: ( 'prd: ' + ( a product ) ), end.
 a sort: { :a :b ↲ (b - a). }.
-a each: { :i :e ✎ write: ( i ), brk. }.
+a each: { :i :e ✎ write: ( i ), end. }.
 
 
 Program clean memory.
@@ -39,13 +39,13 @@ usedMemory2 := (Program memory ? 0).
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( List ← 1 ).
-✎ write: ( 'sum: ' + ( a sum ) ), brk.
-✎ write: ( 'min: ' + ( a minimum ) ), brk.
-✎ write: ( 'max: ' + ( a maximum ) ), brk.
-✎ write: ( '3rd: ' + ( a ? 2 ) ), brk.
-✎ write: ( 'prd: ' + ( a product ) ), brk.
+✎ write: ( 'sum: ' + ( a sum ) ), end.
+✎ write: ( 'min: ' + ( a minimum ) ), end.
+✎ write: ( 'max: ' + ( a maximum ) ), end.
+✎ write: ( '3rd: ' + ( a ? 2 ) ), end.
+✎ write: ( 'prd: ' + ( a product ) ), end.
 a sort: { :a :b ↲ (b - a). }.
-a each: { :i :e ✎ write: ( i ), brk. }.
+a each: { :i :e ✎ write: ( i ), end. }.
 
 
 Program clean memory.

@@ -8,19 +8,19 @@
 Program tidiness: 0.
 
 { :i ✎ write: i. } * 4.
-✎ brk.
+✎ end.
 { :i ✎ write: (4 - i). } * 4.
-✎ brk.
-( 1 > 2 ) false: { ✎ write: 'BLOCK 1', brk. }.
-( 2 > 1 ) true:  { ✎ write: 'BLOCK 2', brk. }.
+✎ end.
+( 1 > 2 ) false: { ✎ write: 'BLOCK 1', end. }.
+( 2 > 1 ) true:  { ✎ write: 'BLOCK 2', end. }.
 
 ☞ i := 0.
 { ↲( i < 3). } true: { ✎ write: i. i add: 1. }.
-✎ brk.
+✎ end.
 
 i := 3.
 { ↲( i > 0). } true: { ✎ write: i. i := i - 1. }.
-✎ brk.
+✎ end.
 
 
 Program clean memory.
@@ -29,19 +29,19 @@ usedMemory1 := (Program memory ? 0).
 
 
 { :i ✎ write: i. } * 4.
-✎ brk.
+✎ end.
 { :i ✎ write: (4 - i). } * 4.
-✎ brk.
-( 1 > 2 ) false: { ✎ write: 'BLOCK 1', brk. }.
-( 2 > 1 ) true:  { ✎ write: 'BLOCK 2', brk. }.
+✎ end.
+( 1 > 2 ) false: { ✎ write: 'BLOCK 1', end. }.
+( 2 > 1 ) true:  { ✎ write: 'BLOCK 2', end. }.
 
 i := 0.
 { ↲( i < 3). } true: { ✎ write: i. i add: 1. }.
-✎ brk.
+✎ end.
 
 i := 3.
 { ↲( i > 0). } true: { ✎ write: i. i := i - 1. }.
-✎ brk.
+✎ end.
 
 
 
@@ -50,19 +50,19 @@ usedMemory2 := (Program memory ? 0).
 
 
 { :i ✎ write: i. } * 4.
-✎ brk.
+✎ end.
 { :i ✎ write: (4 - i). } * 4.
-✎ brk.
-( 1 > 2 ) false: { ✎ write: 'BLOCK 1', brk. }.
-( 2 > 1 ) true:  { ✎ write: 'BLOCK 2', brk. }.
+✎ end.
+( 1 > 2 ) false: { ✎ write: 'BLOCK 1', end. }.
+( 2 > 1 ) true:  { ✎ write: 'BLOCK 2', end. }.
 
 i := 0.
 { ↲( i < 3). } true: { ✎ write: i. i add: 1. }.
-✎ brk.
+✎ end.
 
 i := 3.
 { ↲( i > 0). } true: { ✎ write: i. i := i - 1. }.
-✎ brk.
+✎ end.
 
 Program clean memory.
 usedMemory3 := (Program memory ? 0).

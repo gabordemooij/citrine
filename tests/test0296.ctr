@@ -4,8 +4,8 @@
 	put: 'computer' at: 'electronics',
 	put: 'lipstick' at: 'cosmetics'
 ).
-✎ write: (shop has: 'computer'), brk. 
-✎ write: (shop has: 'sausage'), brk. 
-✎ write: (shop has: 'computers'), brk. 
-✎ write: (shop has: 'compute'), brk. 
-✎ write: (shop has: '2computer'), brk. 
+✎ write: (shop has: 'computer'), end. 
+✎ write: (shop has: 'sausage'), end. 
+✎ write: (shop has: 'computers'), end. 
+✎ write: (shop has: 'compute'), end. 
+✎ write: (shop has: '2computer'), end. 

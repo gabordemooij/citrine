@@ -2,37 +2,37 @@
 
 
 Program on: 'pid' do: { ↲ '[Program]'. }.
-✎ write: 'Sending toString to Program yields a PID string:', brk.
-✎ write: Program, brk.
-✎ write: 'Sending toNumber to Program yields a PID number:', brk.
-✎ write: Program number, brk.
+✎ write: 'Sending toString to Program yields a PID string:', end.
+✎ write: Program, end.
+✎ write: 'Sending toNumber to Program yields a PID number:', end.
+✎ write: Program number, end.
 
 ☞ ⚄ := Object new.
 ⚄ on: 'number' do: { ↲ 666. }.
 ⚄ on: 'string' do: { ↲ '666'. }.
 
-✎ write: 'Sending toString to Dice yields a random number string:', brk.
-✎ write: ⚄, brk.
-✎ write: 'Sending toNumber to Dice yields a random number:', brk.
-✎ write: ⚄ number, brk.
+✎ write: 'Sending toString to Dice yields a random number string:', end.
+✎ write: ⚄, end.
+✎ write: 'Sending toNumber to Dice yields a random number:', end.
+✎ write: ⚄ number, end.
 
 
 Moment on: 'format:' do: { ↲ '1666-01-13 06:06:06'. }.
 Moment on: 'time' do: { ↲ '999'. }.
 
-✎ write: 'Sending toString to Clock yields a date and time string:', brk.
-✎ write: Moment, brk.
-✎ write: 'Sending toNumber to Clock yields a time stamp number:', brk.
-✎ write: Moment number, brk.
+✎ write: 'Sending toString to Clock yields a date and time string:', end.
+✎ write: Moment, end.
+✎ write: 'Sending toNumber to Clock yields a time stamp number:', end.
+✎ write: Moment number, end.
 
-✎ write: 'Sending toString to File yields a path:', brk.
-✎ write: File, brk.
-✎ write: 'Sending toNumber to File yields a 1:', brk.
-✎ write: File number, brk.
+✎ write: 'Sending toString to File yields a path:', end.
+✎ write: File, end.
+✎ write: 'Sending toNumber to File yields a 1:', end.
+✎ write: File number, end.
 
 ✎ write: (Map new
 	dice: ⚄,
 	Program: Program
-), brk.
+), end.
 
-✎ write: (List ← ⚄ ; Program ), brk.
+✎ write: (List ← ⚄ ; Program ), end.

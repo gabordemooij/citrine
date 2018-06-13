@@ -28,5 +28,5 @@ kept2   := Program memory ? 3.
 sticky2 := (Program memory ? 2).
 dust2   := (Program memory ? 4).
 
-✎ write: (kept2   - kept1), brk. 
-✎ write: (sticky2 - sticky1), brk. 
+✎ write: (kept2   - kept1), end. 
+✎ write: (sticky2 - sticky1), end. 

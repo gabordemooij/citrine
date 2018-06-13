@@ -1,11 +1,11 @@
 'SINGLE_LANGUAGE'.
 
-✎ write: ((List ← 'red' ; 'green') + (List ← 'blue')), brk.
-✎ write: ((List ← 'red' ; 'green' ; 'blue') - 0), brk.
-✎ write: ((List ← 'red' ; 'green' ; 'blue') - 1), brk.
-✎ write: ((List ← 'red' ; 'green' ; 'blue') - 2), brk.
-✎ write: ((List ← 'red' ; 'green' ; 'blue') - -1), brk.
-✎ write: ((List ← 'red' ; 'green' ; 'blue') - 3), brk.
-✎ write: ((List ← 'red' ; 'green' ; 'blue') - 12), brk.
+✎ write: ((List ← 'red' ; 'green') + (List ← 'blue')), end.
+✎ write: ((List ← 'red' ; 'green' ; 'blue') - 0), end.
+✎ write: ((List ← 'red' ; 'green' ; 'blue') - 1), end.
+✎ write: ((List ← 'red' ; 'green' ; 'blue') - 2), end.
+✎ write: ((List ← 'red' ; 'green' ; 'blue') - -1), end.
+✎ write: ((List ← 'red' ; 'green' ; 'blue') - 3), end.
+✎ write: ((List ← 'red' ; 'green' ; 'blue') - 12), end.
 
 

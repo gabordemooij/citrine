@@ -5,7 +5,7 @@
 
 ☞ func := {
 
-	✎ write: 'Nested call #' + j, brk.
+	✎ write: 'Nested call #' + j, end.
 	j add: 1.
 
 	func run.

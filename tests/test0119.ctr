@@ -1,11 +1,11 @@
 
 Program tidiness: 0.
 Program setting: 'QUERY_STRING' value: 'search=table&restaurant=pizzaria&menu=spaghetti&menu=macaroni&course[main]=canneloni&course[dessert]=tiramisu'.
-✎ write: (Program setting: 'QUERY_STRING'), brk.
+✎ write: (Program setting: 'QUERY_STRING'), end.
 ☞ s := Request get: 'search'.
 ✎ write: 'I was looking for a free ' + s.
-✎ write: ' in a ' + (Request get: 'restaurant') + ', ', brk.
-✎ write: 'but the waiter told me all tables have been corrupted by ', brk.
+✎ write: ' in a ' + (Request get: 'restaurant') + ', ', end.
+✎ write: 'but the waiter told me all tables have been corrupted by ', end.
 ☞ m := Request get list: 'menu'.
-✎ write: (m join: ', ') + ' and '+(Request get: 'course[main]') + ' code.', brk.
+✎ write: (m join: ', ') + ' and '+(Request get: 'course[main]') + ' code.', end.
 

@@ -9,4 +9,4 @@ Number on: '+' do: { :x
 	↲ (⛏ plus: (x * rate)).
 }.
 ☞ money := 3 dollars + 2 euros. 
-✎ write: money, brk.
+✎ write: money, end.

@@ -1,11 +1,11 @@
 
-	✎ write: ( 'hello world' matches: 'hello' ), brk.
-✎ write: ( 'hello world' matches: 'bye' ), brk.
-✎ write: ( 'hello world' matches: 'h[eai]llo' ), brk.
-✎ write: ( 'hello world' matches: 'h[iao]llo' ), brk.
-✎ write: ( 'hello world' matches: 'h([eai])llo' ), brk.
-✎ write: ( 'hello world' matches: 'h([iao])llo' ), brk.
-✎ write: ( 'hello world' matches: '[:space:]' ), brk.
-{ ✎ write: ( 'hello world' matches: '[:space:' ), brk. } catch: { :e
-	✎ write: e, brk.
+	✎ write: ( 'hello world' matches: 'hello' ), end.
+✎ write: ( 'hello world' matches: 'bye' ), end.
+✎ write: ( 'hello world' matches: 'h[eai]llo' ), end.
+✎ write: ( 'hello world' matches: 'h[iao]llo' ), end.
+✎ write: ( 'hello world' matches: 'h([eai])llo' ), end.
+✎ write: ( 'hello world' matches: 'h([iao])llo' ), end.
+✎ write: ( 'hello world' matches: '[:space:]' ), end.
+{ ✎ write: ( 'hello world' matches: '[:space:' ), end. } catch: { :e
+	✎ write: e, end.
 }, run.

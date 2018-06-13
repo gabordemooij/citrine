@@ -5,5 +5,5 @@
 ☞ cities       := weather entries sort: { :a :b  ↲ (a compare: b). }.
 ☞ temperatures := weather values sort: { :a :b  ↲ (a compare: b) negative?. }.
 
-✎ write: (cities join: ','), brk.
-✎ write: (temperatures join: ','), brk.
+✎ write: (cities join: ','), end.
+✎ write: (temperatures join: ','), end.

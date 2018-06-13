@@ -8,15 +8,15 @@
 Program tidiness: 0.
 
 ☞ txt := 'Word Salad'.
-✎ write: 'last index of ord = ' + ( txt last: 'ord' ), brk.
-✎ write: 'index of ord = ' + ( txt find: 'ord' ), brk.
-✎ write: 'index of ad = ' + ( txt find: 'ad' ), brk.
-✎ write: 'last index of W = ' + ( txt last: 'W' ), brk.
-✎ write: 'last index of d = ' + ( txt last: 'd' ), brk.
-✎ write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), brk.
-✎ write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
-✎ write: 'txt does not equal Word Salad = ' + ( txt ≠ 'Word Salad' ), brk.
-✎ write: 'txt does not equal Ceasar Salad = ' + ( txt ≠ 'Ceasar Salad' ), brk.
+✎ write: 'last index of ord = ' + ( txt last: 'ord' ), end.
+✎ write: 'index of ord = ' + ( txt find: 'ord' ), end.
+✎ write: 'index of ad = ' + ( txt find: 'ad' ), end.
+✎ write: 'last index of W = ' + ( txt last: 'W' ), end.
+✎ write: 'last index of d = ' + ( txt last: 'd' ), end.
+✎ write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), end.
+✎ write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), end.
+✎ write: 'txt does not equal Word Salad = ' + ( txt ≠ 'Word Salad' ), end.
+✎ write: 'txt does not equal Ceasar Salad = ' + ( txt ≠ 'Ceasar Salad' ), end.
 
 Program clean memory.
 
@@ -24,30 +24,30 @@ usedMemory1 := (Program memory ? 0).
 
 
 txt := 'Word Salad'.
-✎ write: 'last index of ord = ' + ( txt last: 'ord' ), brk.
-✎ write: 'index of ord = ' + ( txt find: 'ord' ), brk.
-✎ write: 'index of ad = ' + ( txt find: 'ad' ), brk.
-✎ write: 'last index of W = ' + ( txt last: 'W' ), brk.
-✎ write: 'last index of d = ' + ( txt last: 'd' ), brk.
-✎ write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), brk.
-✎ write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
-✎ write: 'txt does not equal Word Salad = ' + ( txt ≠ 'Word Salad' ), brk.
-✎ write: 'txt does not equal Ceasar Salad = ' + ( txt ≠ 'Ceasar Salad' ), brk.
+✎ write: 'last index of ord = ' + ( txt last: 'ord' ), end.
+✎ write: 'index of ord = ' + ( txt find: 'ord' ), end.
+✎ write: 'index of ad = ' + ( txt find: 'ad' ), end.
+✎ write: 'last index of W = ' + ( txt last: 'W' ), end.
+✎ write: 'last index of d = ' + ( txt last: 'd' ), end.
+✎ write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), end.
+✎ write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), end.
+✎ write: 'txt does not equal Word Salad = ' + ( txt ≠ 'Word Salad' ), end.
+✎ write: 'txt does not equal Ceasar Salad = ' + ( txt ≠ 'Ceasar Salad' ), end.
 
 Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
 txt := 'Word Salad'.
-✎ write: 'last index of ord = ' + ( txt last: 'ord' ), brk.
-✎ write: 'index of ord = ' + ( txt find: 'ord' ), brk.
-✎ write: 'index of ad = ' + ( txt find: 'ad' ), brk.
-✎ write: 'last index of W = ' + ( txt last: 'W' ), brk.
-✎ write: 'last index of d = ' + ( txt last: 'd' ), brk.
-✎ write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), brk.
-✎ write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), brk.
-✎ write: 'txt does not equal Word Salad = ' + ( txt ≠ 'Word Salad' ), brk.
-✎ write: 'txt does not equal Ceasar Salad = ' + ( txt ≠ 'Ceasar Salad' ), brk.
+✎ write: 'last index of ord = ' + ( txt last: 'ord' ), end.
+✎ write: 'index of ord = ' + ( txt find: 'ord' ), end.
+✎ write: 'index of ad = ' + ( txt find: 'ad' ), end.
+✎ write: 'last index of W = ' + ( txt last: 'W' ), end.
+✎ write: 'last index of d = ' + ( txt last: 'd' ), end.
+✎ write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), end.
+✎ write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), end.
+✎ write: 'txt does not equal Word Salad = ' + ( txt ≠ 'Word Salad' ), end.
+✎ write: 'txt does not equal Ceasar Salad = ' + ( txt ≠ 'Ceasar Salad' ), end.
 
 Program clean memory.
 usedMemory3 := (Program memory ? 0).

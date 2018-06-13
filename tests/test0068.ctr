@@ -1,32 +1,32 @@
 ☞ w := 'A_bottle_of_Whisky and a rare steak.'.
-✎ write: '=== Basic test, grab the bottle! ===', brk.
-✎ write: '>'+(w from:2 to: 8), brk. 
-✎ write: '>'+(w from:8 to: 2), brk. 
-✎ write: '>'+(w from:2 length: 6), brk. 
-✎ write: '>'+(w from:8 length: -6), brk. 
-✎ write: '=== Take a single char ===', brk.
-✎ write: '>'+(w from:7 to: 8), brk. 
-✎ write: '>'+(w from:7 length: 1), brk. 
-✎ write: '=== The 0 case, empty string ===', brk.
-✎ write: '>'+(w from:7 to: 7), brk. 
-✎ write: '>'+(w from:7 length: 0), brk. 
-✎ write: '=== Edge case, first character only ===', brk.
-✎ write: '>'+(w from:0 to: 1), brk. 
-✎ write: '>'+(w from:0 length: 1), brk. 
-✎ write: '>'+(w from:1 to: 0), brk. 
-✎ write: '>'+(w from:1 length: -1), brk. 
-✎ write: '=== Edge case, last character only ===', brk.
-✎ write: '>'+(w from:35 to: 36), brk. 
-✎ write: '>'+(w from:35 length: 1), brk. 
-✎ write: '>'+(w from:36 to: 35), brk. 
-✎ write: '>'+(w from:36 length: -1), brk. 
-✎ write: '=== Out of bounds, empty string ===', brk.
-✎ write: '>'+(w from:36 to: 37), brk. 
-✎ write: '>'+(w from:36 to: 47), brk. 
-✎ write: '>'+(w from:-1 to: -2), brk. 
-✎ write: '>'+(w from:-2 to: -1), brk. 
-✎ write: '=== Part out of bounds, full string ===', brk.
-✎ write: '>'+(w from:-20 to: 90), brk. 
-✎ write: '>'+(w from:90 to: -20), brk. 
-✎ write: '>'+(w from:-20 length: 90), brk. 
-✎ write: '>'+(w from:90 length: -120), brk. 
+✎ write: '=== Basic test, grab the bottle! ===', end.
+✎ write: '>'+(w from:2 to: 8), end. 
+✎ write: '>'+(w from:8 to: 2), end. 
+✎ write: '>'+(w from:2 length: 6), end. 
+✎ write: '>'+(w from:8 length: -6), end. 
+✎ write: '=== Take a single char ===', end.
+✎ write: '>'+(w from:7 to: 8), end. 
+✎ write: '>'+(w from:7 length: 1), end. 
+✎ write: '=== The 0 case, empty string ===', end.
+✎ write: '>'+(w from:7 to: 7), end. 
+✎ write: '>'+(w from:7 length: 0), end. 
+✎ write: '=== Edge case, first character only ===', end.
+✎ write: '>'+(w from:0 to: 1), end. 
+✎ write: '>'+(w from:0 length: 1), end. 
+✎ write: '>'+(w from:1 to: 0), end. 
+✎ write: '>'+(w from:1 length: -1), end. 
+✎ write: '=== Edge case, last character only ===', end.
+✎ write: '>'+(w from:35 to: 36), end. 
+✎ write: '>'+(w from:35 length: 1), end. 
+✎ write: '>'+(w from:36 to: 35), end. 
+✎ write: '>'+(w from:36 length: -1), end. 
+✎ write: '=== Out of bounds, empty string ===', end.
+✎ write: '>'+(w from:36 to: 37), end. 
+✎ write: '>'+(w from:36 to: 47), end. 
+✎ write: '>'+(w from:-1 to: -2), end. 
+✎ write: '>'+(w from:-2 to: -1), end. 
+✎ write: '=== Part out of bounds, full string ===', end.
+✎ write: '>'+(w from:-20 to: 90), end. 
+✎ write: '>'+(w from:90 to: -20), end. 
+✎ write: '>'+(w from:-20 length: 90), end. 
+✎ write: '>'+(w from:90 length: -120), end. 

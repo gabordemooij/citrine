@@ -1,4 +1,4 @@
 ☞ welcome := List ← 'Hello' ; 'World' ; 'Welcome' ; 'To' ; 'Citrine'.
 welcome each: { :key :value
-	✎ write: key + ':'+ value, brk.
+	✎ write: key + ':'+ value, end.
 }.

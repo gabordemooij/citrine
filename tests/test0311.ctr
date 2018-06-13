@@ -1,3 +1,3 @@
 Program tidiness: 4.
-✎ write: 'Can we convert the broom object to a number?', brk.
-✎ write: (Program memory ? 4), brk.
+✎ write: 'Can we convert the broom object to a number?', end.
+✎ write: (Program memory ? 4), end.

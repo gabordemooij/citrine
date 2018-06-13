@@ -6,6 +6,6 @@
 	• 'pizza'
 	• 'haggis'.
 
-✎ write: (meals join: '|'), brk.
+✎ write: (meals join: '|'), end.
 
 

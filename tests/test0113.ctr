@@ -1,54 +1,54 @@
-✎ write: 'Continue for-loop, No - before 6 and up.', brk.
+✎ write: 'Continue for-loop, No - before 6 and up.', end.
 { :i
-	✎ write: (i + 1), brk.
+	✎ write: (i + 1), end.
 	((i + 1) > 4) continue.
 	✎ write: '-'.
 } * 10.
 
 ☞ x := 0.
 ☞ xIsLessThan10 := { ↲( x < 10 ). }.
-✎ brk.
-✎ write: 'Continue while-true, No --> before 5 and up.', brk.
+✎ end.
+✎ write: 'Continue while-true, No --> before 5 and up.', end.
 xIsLessThan10 true: {
-	✎ write: 'iteration #' + x, brk.
+	✎ write: 'iteration #' + x, end.
 	x add: 1.
 	((x < 5) not) continue.
 	✎ write: '-->'.
 }.
-✎ brk.
-✎ write: 'Continue while-false, No - before 3 only.', brk.
+✎ end.
+✎ write: 'Continue while-false, No - before 3 only.', end.
 { ↲(x = 0). } false: {
-	✎ write: 'iteration #' + x, brk.
+	✎ write: 'iteration #' + x, end.
 	x subtract: 1.
 	(x = 3) continue.
 	✎ write: '-'.
 }.
 
-✎ brk.
-✎ write: 'Continue times-loop, No ||| before 3.', brk.
+✎ end.
+✎ write: 'Continue times-loop, No ||| before 3.', end.
 { :i
-	✎ write: 'iteration #' + i, brk.
+	✎ write: 'iteration #' + i, end.
 	(i = 2) continue.
 	✎ write: '|||'.
 } * 5.
 
-✎ brk.
+✎ end.
 
-{ True continue. ✎ write: 'dont write this!', brk. } run.
+{ True continue. ✎ write: 'dont write this!', end. } run.
 
-{ True continue. ✎ write: 'dont write this!', brk. } catch: { ✎ write: 'Dont catch this!'. }, run.
+{ True continue. ✎ write: 'dont write this!', end. } catch: { ✎ write: 'Dont catch this!'. }, run.
 
-✎ write: 'Test Array each-loop: 0, ... ,2', brk.
+✎ write: 'Test Array each-loop: 0, ... ,2', end.
 (List ← 1 ; 2 ; 3) map: { :i
 	(i = 1) continue.
-	✎ write: 'iteration #' + i, brk.
+	✎ write: 'iteration #' + i, end.
 }.
 
-✎ write: 'Test Map each-loop: c only', brk.
+✎ write: 'Test Map each-loop: c only', end.
 ☞ m := Map new.
 m put: 'first' at: 'a', put: 'second' at: 'b', put: 'third' at: 'c'.
 m each: { :k :v
 	(k ≠ 'c') continue.
-	✎ write: 'iteration' + k + v, brk.
+	✎ write: 'iteration' + k + v, end.
 }.
 

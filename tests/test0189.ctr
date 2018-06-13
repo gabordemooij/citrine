@@ -30,7 +30,7 @@ Program tidiness: 0.
 	(canDo either: 'can do what I want' or: 'cannot do what I want') +
 	' to do to make this world a better place.'.
 Boolean flip. 
-✎ write: PoemAboutLife, brk.
+✎ write: PoemAboutLife, end.
 
 Program clean memory.
 
@@ -58,7 +58,7 @@ PoemAboutLife :=
 	(canDo either: 'can do what I want' or: 'cannot do what I want') +
 	' to do to make this world a better place.'.
 Boolean flip. 
-✎ write: PoemAboutLife, brk.
+✎ write: PoemAboutLife, end.
 
 
 
@@ -87,7 +87,7 @@ PoemAboutLife :=
 	(canDo either: 'can do what I want' or: 'cannot do what I want') +
 	' to do to make this world a better place.'.
 Boolean flip. 
-✎ write: PoemAboutLife, brk.
+✎ write: PoemAboutLife, end.
 
 Program clean memory.
 usedMemory3 := (Program memory ? 0).

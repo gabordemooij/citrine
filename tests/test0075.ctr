@@ -1,5 +1,5 @@
 ☞ i := 0.
-✎ write: 'Can we count to 10 using a whileTrue loop ?', brk.
-{ i add: 1. ↲ (i ≤ 10). } true: { ✎ write: i, brk. }.
-✎ write: 'Can we count back from 10 to 0 using a whileFalse loop ?', brk.
-{ i subtract: 1. ↲ (i ≥ 0). } true: { ✎ write: i, brk. }.
+✎ write: 'Can we count to 10 using a whileTrue loop ?', end.
+{ i add: 1. ↲ (i ≤ 10). } true: { ✎ write: i, end. }.
+✎ write: 'Can we count back from 10 to 0 using a whileFalse loop ?', end.
+{ i subtract: 1. ↲ (i ≥ 0). } true: { ✎ write: i, end. }.

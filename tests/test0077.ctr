@@ -1,12 +1,12 @@
-✎ write: '12' type + ',' + ('12' number) type, brk.
-✎ write: 'False' type + ',' + ('False' boolean) type, brk.
-✎ write: 12 type + ',' + (12 string) type, brk.
-✎ write: 12 type + ',' + (12 boolean) type, brk.
-✎ write: True type + ',' + (True number) type, brk.
-✎ write: False type + ',' + (False number) type, brk.
-✎ write: True type + ',' + (True string) type, brk.
-✎ write: False type + ',' + (False string) type, brk.
-✎ write: '=== String test ===', brk.
-✎ write: 123 string, brk.
-✎ write: False string, brk.
-✎ write: True string, brk.
+✎ write: '12' type + ',' + ('12' number) type, end.
+✎ write: 'False' type + ',' + ('False' boolean) type, end.
+✎ write: 12 type + ',' + (12 string) type, end.
+✎ write: 12 type + ',' + (12 boolean) type, end.
+✎ write: True type + ',' + (True number) type, end.
+✎ write: False type + ',' + (False number) type, end.
+✎ write: True type + ',' + (True string) type, end.
+✎ write: False type + ',' + (False string) type, end.
+✎ write: '=== String test ===', end.
+✎ write: 123 string, end.
+✎ write: False string, end.
+✎ write: True string, end.

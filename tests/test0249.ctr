@@ -2,7 +2,7 @@
 
 ☞ str := 'abc'.
 str append byte: 96.
-✎ write: str, brk.
+✎ write: str, end.
 
 ☞ q := List ← 234 ; 184 ; 176 ; 235 ; 130 ; 152 ; 32 ; 234 ; 184 ; 180 ; 32 ; 236 ; 151 ; 172 ; 237 ; 150 ; 137.
 
@@ -12,4 +12,4 @@ q each: { :i :b
 	a append byte: b.
 }.
 
-✎ write: a, brk.
+✎ write: a, end.

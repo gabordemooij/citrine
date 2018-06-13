@@ -21,15 +21,15 @@ String on: 'evaluate' do: {
 	)
 ) string.
 
-✎ write: a type, brk.
-✎ write: a, brk.
+✎ write: a type, end.
+✎ write: a, end.
 
 ☞ b := a evaluate.
-✎ write: b ? 0 ? 'pages' ? 1 ? 'body', brk.
+✎ write: b ? 0 ? 'pages' ? 1 ? 'body', end.
 
 ☞ c := b ? 0.
 ☞ d := c string.
-✎ write: d type, brk.
+✎ write: d type, end.
 
 ☞ e := d evaluate.
-✎ write: e ? 'pages' ? 0, brk.
+✎ write: e ? 'pages' ? 0, end.

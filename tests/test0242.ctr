@@ -8,4 +8,4 @@ String on: 'evaluate' do: {
 'Object new' evaluate. 
 
 ☞ a := 123.
-'✎ write: a, brk' evaluate.
+'✎ write: a, end' evaluate.

@@ -7,9 +7,9 @@ Deck on: 'print' do: {
         { :i
                 ☞ len2 := ⛏ count - 1.
                 ✎ write: 'len: '.
-                ✎ write: len, brk.
+                ✎ write: len, end.
                 ✎ write: 'len2: '.
-                ✎ write: len2, brk.
+                ✎ write: len2, end.
         } * len.
 }.
 

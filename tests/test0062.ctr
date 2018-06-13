@@ -4,13 +4,13 @@ Boolean on: 'xor:' do: { :a :b
 
 ☞ o := Object new.
 o on: 'hello' do: {}.
-{ o on: 2 do: 3.} catch: { :e ✎ write: e, brk. }, run.
-{ o on: 'test' do: 3.} catch: { :e ✎ write: e, brk. }, run.
-{ o on: 'hello' do: {}.} catch: { :e ✎ write: e, brk. }, run. 
-{ ☞ z := 4 / 0. } catch: { :e ✎ write: e, brk. }, run. 
-{ (True & Nil) true: { ✎ write: 'X'.}. } catch: { :e ✎ write: e, brk. }, run. 
-{ ('' xor: 0) true: { ✎ write: 'X'.}. } catch: { :e ✎ write: e, brk. }, run. 
-{ (1 < '2') true: { ✎ write: 'OK'. }. } catch: { :e ✎ write: e, brk. }, run. 
-{ (1 < '2.0') true: { ✎ write: 'OK'. }. } catch: { :e ✎ write: e, brk. }, run. 
-{ (1 < 'x2.0') true: { ✎ write: 'NO!'. }. } catch: { :e ✎ write: e, brk. }, run. 
+{ o on: 2 do: 3.} catch: { :e ✎ write: e, end. }, run.
+{ o on: 'test' do: 3.} catch: { :e ✎ write: e, end. }, run.
+{ o on: 'hello' do: {}.} catch: { :e ✎ write: e, end. }, run. 
+{ ☞ z := 4 / 0. } catch: { :e ✎ write: e, end. }, run. 
+{ (True & Nil) true: { ✎ write: 'X'.}. } catch: { :e ✎ write: e, end. }, run. 
+{ ('' xor: 0) true: { ✎ write: 'X'.}. } catch: { :e ✎ write: e, end. }, run. 
+{ (1 < '2') true: { ✎ write: 'OK'. }. } catch: { :e ✎ write: e, end. }, run. 
+{ (1 < '2.0') true: { ✎ write: 'OK'. }. } catch: { :e ✎ write: e, end. }, run. 
+{ (1 < 'x2.0') true: { ✎ write: 'NO!'. }. } catch: { :e ✎ write: e, end. }, run. 
 { ✎ write: ('hello OK there' from: '6' to: '8'). } run. 

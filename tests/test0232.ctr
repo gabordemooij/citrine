@@ -32,8 +32,8 @@ Slurp on: 'obtain' do: {
 
 ☞ x := Slurp new.
 x + 3.
-✎ write: (x obtain), brk.
+✎ write: (x obtain), end.
 x echo: 'Hello world'.
-✎ write: (x obtain), brk.
+✎ write: (x obtain), end.
 x tellme: 123 and: 987.
-✎ write: (x obtain), brk.
+✎ write: (x obtain), end.

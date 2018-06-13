@@ -4,5 +4,5 @@
 	☞ type := ''.
 	( i % 2 ) true: { type := 'odd'. }.
 	( i % 2 ) false: { type := 'even'. }.
-	✎ write: ('Q is an type number.' type: type, Q i), brk.
+	✎ write: ('Q is an type number.' type: type, Q i), end.
 } * 10.

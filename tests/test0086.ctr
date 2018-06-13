@@ -1,10 +1,10 @@
 
 { ☞ q := 1. { ✎ write: q. } run. } run. 
-✎ brk.
+✎ end.
 { ☞ q := 1. { q := 2. ✎ write: q. } run. } run. 
-✎ brk.
+✎ end.
 ☞ f := { q := 2. }. { ☞ q := 1. f run. ✎ write: q. } run. 
-✎ brk.
+✎ end.
 { ☞ q := 1. { x := 2. ✎ write: x. } run. } 
 catch: { ✎ write: 'Error, cannot assign, key not found: x, forgot to use ☞ ?'. }, run.
-✎ brk.
+✎ end.

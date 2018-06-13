@@ -110,7 +110,6 @@
 #define CTR_DICT_SUM             "som"
 #define CTR_DICT_PRODUCT         "product"
 #define CTR_DICT_WRITE           "schrijf:"
-#define CTR_DICT_BRK             "stop" 
 #define CTR_DICT_PATH            "pad"
 #define CTR_DICT_READ            "lezen"
 #define CTR_DICT_APPEND          "toevoegen:"

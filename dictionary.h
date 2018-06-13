@@ -110,7 +110,6 @@
 #define CTR_DICT_SUM             "sum"
 #define CTR_DICT_PRODUCT         "product" 
 #define CTR_DICT_WRITE           "write:"
-#define CTR_DICT_BRK             "brk" 
 #define CTR_DICT_PATH            "path"
 #define CTR_DICT_READ            "read"
 #define CTR_DICT_APPEND          "append:"

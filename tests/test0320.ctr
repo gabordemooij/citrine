@@ -18,18 +18,18 @@ CoffeeMachine on: 'order:' do: { :id
 ☞ SimpleCoffeeMachine := Object new.
 SimpleCoffeeMachine on: 'order' do: { ↲ 'Black'. }.
 ☞ redCup := CoffeeMachine order: 1.
-✎ write: redCup, brk.
+✎ write: redCup, end.
 redCup := 'Tea'. 
 ☞ greenCup := CoffeeMachine order: 0.
-✎ write: greenCup, brk.
+✎ write: greenCup, end.
 ☞ yellowCup := CoffeeMachine order: 1.
-✎ write: yellowCup, brk.
+✎ write: yellowCup, end.
 ☞ blueCup := CoffeeMachine order: 0.
-✎ write: blueCup, brk.
+✎ write: blueCup, end.
 ☞ plasticCup := SimpleCoffeeMachine order.
 plasticCup := 'Lemonade'. 
 ☞ blackCup := SimpleCoffeeMachine order.
-✎ write: blackCup, brk.
+✎ write: blackCup, end.
 blackCup append: ' nooo.... beer. '.
 ☞ orangeCup := SimpleCoffeeMachine order.
-✎ write: orangeCup, brk.
+✎ write: orangeCup, end.

@@ -11,11 +11,11 @@ Program tidiness: 0.
 f exists: { f delete. }.
 f write: 'hello world'.
 ☞ q := f size.
-✎ write: q, brk.
+✎ write: q, end.
 
 f := File new: '/tmp/citrine_test_file.txt'.
 q := f size.
-✎ write: q, brk.
+✎ write: q, end.
 
 Program clean memory.
 usedMemory1 := (Program memory ? 0).
@@ -23,7 +23,7 @@ usedMemory1 := (Program memory ? 0).
 
 f := File new: '/tmp/citrine_test_file.txt'.
 q := f size.
-✎ write: q, brk.
+✎ write: q, end.
 
 Program clean memory.
 usedMemory2 := (Program memory ? 0).
@@ -31,7 +31,7 @@ usedMemory2 := (Program memory ? 0).
 
 f := File new: '/tmp/citrine_test_file.txt'.
 q := f size.
-✎ write: q, brk.
+✎ write: q, end.
 
 Program clean memory.
 usedMemory3 := (Program memory ? 0).

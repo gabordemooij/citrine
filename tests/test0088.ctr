@@ -2,12 +2,12 @@
 ☞ santaLaugh := 'ho'.
 ☞ laugh := ''.
 { laugh := laugh + santaLaugh. } * 3.
-✎ write: laugh, brk.
+✎ write: laugh, end.
 
 ☞ locked := False.
 ☞ security := True.
 security true: { locked := True. }.
-✎ write: locked, brk.
+✎ write: locked, end.
 
 ☞ n := 7.
 (True) true: { n := 9. }.

@@ -2,12 +2,12 @@
 
 ☞ colors := List ← 'red' ; 'green' ; 'blue' ; 3 ; (List new) ; False ; Nil.
 
-✎ write: (colors find: 'green'), brk. 
-✎ write: (colors find: 'blue'), brk. 
-✎ write: (colors find: 'red'), brk. 
-✎ write: (colors find: 3), brk. 
-✎ write: (colors find: (List new)), brk. 
-✎ write: (colors find: 'False'), brk. 
-✎ write: (colors find: Nil), brk. 
-✎ write: (colors find: 'purple'), brk. 
+✎ write: (colors find: 'green'), end. 
+✎ write: (colors find: 'blue'), end. 
+✎ write: (colors find: 'red'), end. 
+✎ write: (colors find: 3), end. 
+✎ write: (colors find: (List new)), end. 
+✎ write: (colors find: 'False'), end. 
+✎ write: (colors find: Nil), end. 
+✎ write: (colors find: 'purple'), end. 
 

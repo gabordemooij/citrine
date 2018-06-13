@@ -798,7 +798,7 @@ void ctr_initialize_world() {
 	/* Console */
 	CtrStdConsole = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_WRITE ), &ctr_console_write );
-	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_BRK ), &ctr_console_brk );
+	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_console_brk );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PEN_ICON ), CtrStdConsole, 0 );
 	CtrStdConsole->link = CtrStdObject;
 	CtrStdConsole->info.sticky = 1;

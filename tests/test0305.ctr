@@ -13,4 +13,4 @@ Number on: '+' do: { :x
 dollars qualify: 'dollars'.
 euros qualify: 'euros'.
 ☞ money := dollars + euros.
-✎ write: money, brk.
+✎ write: money, end.

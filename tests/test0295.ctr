@@ -23,5 +23,5 @@ dictionary each: { :a :b
 }.
 
 comparisons sort: { :a :b ↲ ( a compare: b ). }.
-✎ write: ( comparisons join: '↵' ), brk.
+✎ write: ( comparisons join: '↵' ), end.
 comparisons join: '↵'.

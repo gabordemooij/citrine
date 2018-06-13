@@ -4,4 +4,4 @@
 ☞ a-z := 'abcdefghijklmnopqrstuvwxyz'.
 
 ☞ x := List ← A-Z ; a-z ; 𝛑 .
-✎ write: x, brk.
+✎ write: x, end.

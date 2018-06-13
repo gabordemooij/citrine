@@ -1,5 +1,5 @@
 ☞ a := List ← Object ; True ; False ; Boolean ; 1 ; Number ; 'Str' ; String ; {}.
-✎ write: (a count), brk.
+✎ write: (a count), end.
 { :i
 	✎ write: 
 		'a ' + 
@@ -8,6 +8,6 @@
 		' is ' +
 		(((a ? i) Nil?) either: '' or: 'NOT') + 
 		' Nil.',
-		brk.
+		end.
 } * (a count).
-✎ write: 'but.. Nil is.. ' + ((Nil Nil?) either: 'certainly NIL!' or: 'not NIL??'), brk.
+✎ write: 'but.. Nil is.. ' + ((Nil Nil?) either: 'certainly NIL!' or: 'not NIL??'), end.

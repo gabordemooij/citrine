@@ -1,15 +1,15 @@
 ☞ Italian places := List ← 'Venice' ; 'Rome' ; 'Pompeii' ; 'Naples'.
 
-✎ write: (Italian places first), brk.
-✎ write: (Italian places last), brk.
-✎ write: (Italian places second last), brk.
+✎ write: (Italian places first), end.
+✎ write: (Italian places last), end.
+✎ write: (Italian places second last), end.
 
 ☞ Moon places := List new.
 
-✎ write: (Moon places first), brk.
-✎ write: (Moon places last), brk.
-✎ write: (Moon places second last), brk.
+✎ write: (Moon places first), end.
+✎ write: (Moon places last), end.
+✎ write: (Moon places second last), end.
 
 Italian places do pop pop pop done.
 
-✎ write: (Italian places second last), brk.
+✎ write: (Italian places second last), end.

@@ -71,12 +71,12 @@ Program clean memory.
 
 
 (usedMemory1 = usedMemory2 = usedMemory3 = usedMemory4 = usedMemory5) true: {
-	✎ write: 'Memory usage remains stable.', brk.
+	✎ write: 'Memory usage remains stable.', end.
 }, else: {
-	✎ write: 'Used memory not stable.', brk.
-	✎ write: usedMemory1, brk.
-	✎ write: usedMemory2, brk.
-	✎ write: usedMemory3, brk.
-	✎ write: usedMemory4, brk.
-	✎ write: usedMemory5, brk.
+	✎ write: 'Used memory not stable.', end.
+	✎ write: usedMemory1, end.
+	✎ write: usedMemory2, end.
+	✎ write: usedMemory3, end.
+	✎ write: usedMemory4, end.
+	✎ write: usedMemory5, end.
 }.

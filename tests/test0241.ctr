@@ -8,12 +8,12 @@ String on: 'evaluate' do: {
 
 ☞ q := List ← ('Quotes ' + Q + ' are evil?') ; 1.
 ☞ x := q string.
-✎ write: x, brk.
+✎ write: x, end.
 ☞ y := x evaluate.
-✎ write: y ? 0, brk.
+✎ write: y ? 0, end.
 
 q := Map put: Q at: (Q + 'quote' + Q).
 x := q string.
-✎ write: x, brk.
+✎ write: x, end.
 y := x evaluate.
-✎ write: y ? '\'quote\'', brk.
+✎ write: y ? '\'quote\'', end.

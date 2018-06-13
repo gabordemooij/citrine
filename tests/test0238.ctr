@@ -6,27 +6,27 @@ String on: 'evaluate' do: {
 ☞ a := List ← 1 ; 2 ; 3.
 ☞ b := (a string).
 
-✎ write: b, brk. 
+✎ write: b, end. 
 b := b evaluate.
 
-✎ write: b ? 2, brk. 
+✎ write: b ? 2, end. 
 
-✎ write: (( List ← 1 ; 2 ; 3 )), brk. 
+✎ write: (( List ← 1 ; 2 ; 3 )), end. 
 
-✎ write: ((Map new) put: 1 at: 2), brk. 
+✎ write: ((Map new) put: 1 at: 2), end. 
 
 ☞ x := ( (List ← 1 ; ( List ← 9 ) ; True ) ) string.
-✎ write: x, brk. 
+✎ write: x, end. 
 x := x evaluate.
 
-✎ write: x ? 1 ? 0, brk. 
+✎ write: x ? 1 ? 0, end. 
 
 ☞ y := (Map new) put: (List ← 1) at: (List ← 2).
-✎ write: y, brk. 
+✎ write: y, end. 
 
 y := y string evaluate.
 
-✎ write: (y at: (List ← 2) string ), brk.
+✎ write: (y at: (List ← 2) string ), end.
 
-✎ write: (List new), brk. 
-✎ write: (Map new), brk. 
+✎ write: (List new), end. 
+✎ write: (Map new), end. 

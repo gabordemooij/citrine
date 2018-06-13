@@ -9,10 +9,10 @@ Program tidiness: 0.
 
 
 2 exponent factorial.
-✎ write: (11 % 3), brk.
-✎ write: (3.4 round), brk.
-✎ write: (7.1 ceil), brk.
-✎ write: (7.9 floor), brk.
+✎ write: (11 % 3), end.
+✎ write: (3.4 round), end.
+✎ write: (7.1 ceil), end.
+✎ write: (7.9 floor), end.
 
 Program clean memory.
 
@@ -20,20 +20,20 @@ usedMemory1 := (Program memory ? 0).
 
 
 2 exponent factorial.
-✎ write: (11 % 3), brk.
-✎ write: (3.4 round), brk.
-✎ write: (7.1 ceil), brk.
-✎ write: (7.9 floor), brk.
+✎ write: (11 % 3), end.
+✎ write: (3.4 round), end.
+✎ write: (7.1 ceil), end.
+✎ write: (7.9 floor), end.
 
 Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
 2 exponent factorial.
-✎ write: (11 % 3), brk.
-✎ write: (3.4 round), brk.
-✎ write: (7.1 ceil), brk.
-✎ write: (7.9 floor), brk.
+✎ write: (11 % 3), end.
+✎ write: (3.4 round), end.
+✎ write: (7.1 ceil), end.
+✎ write: (7.9 floor), end.
 
 Program clean memory.
 usedMemory3 := (Program memory ? 0).

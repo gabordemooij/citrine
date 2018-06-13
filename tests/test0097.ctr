@@ -20,7 +20,7 @@ HtmlBrush on: 'respond:and:' do: { :tag :content
 }.
 
 HtmlBrush on: 'content:' do: { :text
-	✎ write: text html, brk.
+	✎ write: text html, end.
 }.
 
 HtmlBrush on: 'attr:value:' do: { :attr :value

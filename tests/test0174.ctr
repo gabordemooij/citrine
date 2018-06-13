@@ -13,13 +13,13 @@ palette
 	put: '#F00' at: 'red',
 	put: '#0F0' at: 'green',
 	put: '#00F' at: 'blue'.
-✎ write: 'number of RGB codes in palette: ' + ( palette count ), brk.
-✎ write: 'RGB code of green is: ' + ( palette ? 'green' ), brk.
+✎ write: 'number of RGB codes in palette: ' + ( palette count ), end.
+✎ write: 'RGB code of green is: ' + ( palette ? 'green' ), end.
 ☞ colors := ''.
 ( palette each: { :name :code
 		colors := colors + ( name + ':' + code ).
 } ).
-✎ write: 'All colors in palette: ' + colors, brk.
+✎ write: 'All colors in palette: ' + colors, end.
 
 Program clean memory.
 usedMemory1 := (Program memory ? 0).
@@ -30,13 +30,13 @@ palette
 	put: '#F00' at: 'red',
 	put: '#0F0' at: 'green',
 	put: '#00F' at: 'blue'.
-✎ write: 'number of RGB codes in palette: ' + ( palette count ), brk.
-✎ write: 'RGB code of green is: ' + ( palette ? 'green' ), brk.
+✎ write: 'number of RGB codes in palette: ' + ( palette count ), end.
+✎ write: 'RGB code of green is: ' + ( palette ? 'green' ), end.
 colors := ''.
 ( palette each: { :name :code
 		colors := colors + ( name + ':' + code ).
 } ).
-✎ write: 'All colors in palette: ' + colors, brk.
+✎ write: 'All colors in palette: ' + colors, end.
 
 Program clean memory.
 usedMemory2 := (Program memory ? 0).
@@ -46,13 +46,13 @@ palette
 	put: '#F00' at: 'red',
 	put: '#0F0' at: 'green',
 	put: '#00F' at: 'blue'.
-✎ write: 'number of RGB codes in palette: ' + ( palette count ), brk.
-✎ write: 'RGB code of green is: ' + ( palette ? 'green' ), brk.
+✎ write: 'number of RGB codes in palette: ' + ( palette count ), end.
+✎ write: 'RGB code of green is: ' + ( palette ? 'green' ), end.
 colors := ''.
 ( palette each: { :name :code
 		colors := colors + ( name + ':' + code ).
 } ).
-✎ write: 'All colors in palette: ' + colors, brk.
+✎ write: 'All colors in palette: ' + colors, end.
 
 
 Program clean memory.

@@ -1,6 +1,6 @@
 ☞ a := List ← 3 ; 2 ; 1.
-✎ write: ( a join: ',' ), brk.
+✎ write: ( a join: ',' ), end.
 a sort: { :i :j ↲ ( i - j ). }.
-✎ write: ( a join: ',' ), brk.
+✎ write: ( a join: ',' ), end.
 a sort: { :i :j ↲ ( j - i ). }.
-✎ write: ( a join: ',' ), brk.
+✎ write: ( a join: ',' ), end.
