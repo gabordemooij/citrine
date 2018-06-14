@@ -109,6 +109,8 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		a = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		aItem = a;
 		aItem->object = CtrStdNil;
+		sticky = r->info.sticky;
+		r->info.sticky = 1;
 		if (argumentList) {
 			ctr_tnode* node;
 			node = argumentList->node;
@@ -127,8 +129,6 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 				node = argumentList->node;
 			}
 		}
-		sticky = r->info.sticky;
-		r->info.sticky = 1;
 		result = ctr_send_message(r, message, l, a);
 		r->info.sticky = sticky;
 		aItem = a;

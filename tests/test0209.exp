@@ -56,7 +56,6 @@ Boolean string.
 Boolean character: 0 .
 Boolean either: 0 or: 0 .
 Boolean by: 0 .
-Boolean factorial.
 Boolean floor.
 Boolean ceil.
 Boolean round.
@@ -101,7 +100,6 @@ Boolean put: 0 at: 0 .
 Boolean from: 0 length: 0 .
 Boolean map: 0 .
 Boolean each: 0 .
-Boolean sum.
 Boolean write: 0 .
 Boolean path.
 Boolean read.
@@ -243,7 +241,6 @@ True string.
 True character: 0 .
 True either: 0 or: 0 .
 True by: 0 .
-True factorial.
 True floor.
 True ceil.
 True round.
@@ -288,7 +285,6 @@ True put: 0 at: 0 .
 True from: 0 length: 0 .
 True map: 0 .
 True each: 0 .
-True sum.
 True write: 0 .
 True path.
 True read.
@@ -430,7 +426,6 @@ False string.
 False character: 0 .
 False either: 0 or: 0 .
 False by: 0 .
-False factorial.
 False floor.
 False ceil.
 False round.
@@ -475,7 +470,6 @@ False put: 0 at: 0 .
 False from: 0 length: 0 .
 False map: 0 .
 False each: 0 .
-False sum.
 False write: 0 .
 False path.
 False read.
@@ -619,7 +613,6 @@ Number string.
 Number character: 0 .
 Number either: 0 or: 0 .
 Number by: 0 .
-Number factorial.
 Number floor.
 Number ceil.
 Number round.
@@ -664,7 +657,6 @@ Number put: 0 at: 0 .
 Number from: 0 length: 0 .
 Number map: 0 .
 Number each: 0 .
-Number sum.
 Number write: 0 .
 Number path.
 Number read.
@@ -807,7 +799,6 @@ String string.
 String character: 0 .
 String either: 0 or: 0 .
 String by: 0 .
-String factorial.
 String floor.
 String ceil.
 String round.
@@ -852,7 +843,6 @@ String put: 0 at: 0 .
 String from: 0 length: 0 .
 String map: 0 .
 String each: 0 .
-String sum.
 String write: 0 .
 String path.
 String read.
@@ -995,7 +985,6 @@ Object string.
 Object character: 0 .
 Object either: 0 or: 0 .
 Object by: 0 .
-Object factorial.
 Object floor.
 Object ceil.
 Object round.
@@ -1040,7 +1029,6 @@ Object put: 0 at: 0 .
 Object from: 0 length: 0 .
 Object map: 0 .
 Object each: 0 .
-Object sum.
 Object write: 0 .
 Object path.
 Object read.
@@ -1182,7 +1170,6 @@ List string.
 List character: 0 .
 List either: 0 or: 0 .
 List by: 0 .
-List factorial.
 List floor.
 List ceil.
 List round.
@@ -1230,7 +1217,6 @@ List map: 0 .
 error
 List each: 0 .
 error
-List sum.
 List write: 0 .
 List path.
 List read.
@@ -1373,7 +1359,6 @@ Map string.
 Map character: 0 .
 Map either: 0 or: 0 .
 Map by: 0 .
-Map factorial.
 Map floor.
 Map ceil.
 Map round.
@@ -1420,7 +1405,6 @@ Map map: 0 .
 error
 Map each: 0 .
 error
-Map sum.
 Map write: 0 .
 Map path.
 Map read.
@@ -1562,7 +1546,6 @@ File string.
 File character: 0 .
 File either: 0 or: 0 .
 File by: 0 .
-File factorial.
 File floor.
 File ceil.
 File round.
@@ -1607,7 +1590,6 @@ File put: 0 at: 0 .
 File from: 0 length: 0 .
 File map: 0 .
 File each: 0 .
-File sum.
 File write: 0 .
 File path.
 File read.
@@ -1752,7 +1734,6 @@ Moment string.
 Moment character: 0 .
 Moment either: 0 or: 0 .
 Moment by: 0 .
-Moment factorial.
 Moment floor.
 Moment ceil.
 Moment round.
@@ -1797,7 +1778,6 @@ Moment put: 0 at: 0 .
 Moment from: 0 length: 0 .
 Moment map: 0 .
 Moment each: 0 .
-Moment sum.
 Moment write: 0 .
 Moment path.
 Moment read.
