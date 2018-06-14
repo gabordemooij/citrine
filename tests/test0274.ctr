@@ -1,5 +1,17 @@
 'SINGLE_LANGUAGE'.
 
+List on: 'column:' do: { :column
+	☞ result := List new.
+	⛏ each: { :index :row
+		row each: { :index :cell
+			
+			(index = column) true: { result append: cell. }.
+		}.
+	}.
+	↲ result.
+}.
+
+
 ☞ a := List ←
 	(List ← 1 ; 2 ; 3) ;
 	(List ← 4 ; 5 ; 6) ;

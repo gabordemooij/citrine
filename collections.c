@@ -198,33 +198,6 @@ ctr_object* ctr_array_sum(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] product
- *
- * Takes the product of an array. On receiving this message, the
- * List recipient object will calculate the product of its
- * numerical elements.
- *
- * Usage:
- *
- * a := List ← 2 ; 4 ; 8.
- * p := a product.
- *
- * In the example above, the product of the array will be calculated
- * because the array receives the message 'product'. The product of the elements
- * ( 2 * 4 * 8 = 64 ) will be stored in p.
- */
-ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_number product = 1;
-	ctr_object* el;
-	size_t i = 0;
-	for(i = 0; i < myself->value.avalue->head; i++) {
-		el = *(myself->value.avalue->elements + i);
-		product *= ctr_internal_cast2number(el)->value.nvalue;
-	}
-	return ctr_build_number_from_float(product);
-}
-
-/**
  * [List] map: [Block].
  *
  * Iterates over the array. Passing each element as a key-value pair to the
@@ -883,45 +856,6 @@ ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
 	}
 	ctr_heap_free(newArgumentList);
 	return myself;
-}
-
-/**
- * [List] column: [Number]
- *
- * Extracts the specified column from the array.
- * In a nested array this message will select the Nth
- * element of every array. N is specified using the
- * Number argument.
- *
- * Usage:
- *
- * ☞ a := List ←
- *	(List ← 1 ; 2 ; 3) ;
- *	(List ← 4 ; 5 ; 6) ;
- *	(List ← 7 ; 8 ; 9).
- * ☞ b := a column: 1. #2,5,8
- */
-ctr_object* ctr_array_column( ctr_object* myself, ctr_argument* argumentList ) {
-	int i;
-	size_t n;
-	ctr_argument* newArgumentList;
-	ctr_object* newArray;
-	ctr_object* element;
-	newArray = ctr_array_new( CtrStdArray, NULL );
-	n = ctr_internal_cast2number( argumentList->object )->value.nvalue;
-	if ( n <= 0 ) {
-		return newArray;
-	}
-	newArgumentList = ctr_heap_allocate(sizeof(ctr_argument));
-	for(i = myself->value.avalue->tail; i < myself->value.avalue->head; i++) {
-		element = *(myself->value.avalue->elements + i);
-		if ( element->info.type != CTR_OBJECT_TYPE_OTARRAY ) continue;
-		if ( n >= element->value.avalue->head ) continue;
-		newArgumentList->object = *(element->value.avalue->elements + element->value.avalue->tail + n);
-		ctr_array_push( newArray, newArgumentList );
-	}
-	ctr_heap_free( newArgumentList );
-	return newArray;
 }
 
 /**

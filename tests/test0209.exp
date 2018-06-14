@@ -102,7 +102,6 @@ Boolean from: 0 length: 0 .
 Boolean map: 0 .
 Boolean each: 0 .
 Boolean sum.
-Boolean product.
 Boolean write: 0 .
 Boolean path.
 Boolean read.
@@ -164,7 +163,7 @@ Boolean year.
 Boolean year: 0 .
 Boolean years.
 Boolean weekday.
-Boolean yearday.
+Boolean day of the year.
 Boolean zone.
 Boolean zone: 0 .
 Boolean add: 0 .
@@ -180,7 +179,6 @@ Boolean last.
 Boolean first.
 Boolean second last.
 Boolean fill: 0 with: 0 .
-Boolean column: 0 .
 Boolean replace: 0 length: 0 with: 0 .
 Boolean keys.
 Boolean values.
@@ -291,7 +289,6 @@ True from: 0 length: 0 .
 True map: 0 .
 True each: 0 .
 True sum.
-True product.
 True write: 0 .
 True path.
 True read.
@@ -353,7 +350,7 @@ True year.
 True year: 0 .
 True years.
 True weekday.
-True yearday.
+True day of the year.
 True zone.
 True zone: 0 .
 True add: 0 .
@@ -369,7 +366,6 @@ True last.
 True first.
 True second last.
 True fill: 0 with: 0 .
-True column: 0 .
 True replace: 0 length: 0 with: 0 .
 True keys.
 True values.
@@ -480,7 +476,6 @@ False from: 0 length: 0 .
 False map: 0 .
 False each: 0 .
 False sum.
-False product.
 False write: 0 .
 False path.
 False read.
@@ -542,7 +537,7 @@ False year.
 False year: 0 .
 False years.
 False weekday.
-False yearday.
+False day of the year.
 False zone.
 False zone: 0 .
 False add: 0 .
@@ -558,7 +553,6 @@ False last.
 False first.
 False second last.
 False fill: 0 with: 0 .
-False column: 0 .
 False replace: 0 length: 0 with: 0 .
 False keys.
 False values.
@@ -671,7 +665,6 @@ Number from: 0 length: 0 .
 Number map: 0 .
 Number each: 0 .
 Number sum.
-Number product.
 Number write: 0 .
 Number path.
 Number read.
@@ -733,7 +726,7 @@ Number year.
 Number year: 0 .
 Number years.
 Number weekday.
-Number yearday.
+Number day of the year.
 Number zone.
 Number zone: 0 .
 Number add: 0 .
@@ -750,7 +743,6 @@ Number last.
 Number first.
 Number second last.
 Number fill: 0 with: 0 .
-Number column: 0 .
 Number replace: 0 length: 0 with: 0 .
 Number keys.
 Number values.
@@ -861,7 +853,6 @@ String from: 0 length: 0 .
 String map: 0 .
 String each: 0 .
 String sum.
-String product.
 String write: 0 .
 String path.
 String read.
@@ -924,7 +915,7 @@ String year.
 String year: 0 .
 String years.
 String weekday.
-String yearday.
+String day of the year.
 String zone.
 String zone: 0 .
 String add: 0 .
@@ -940,7 +931,6 @@ String last.
 String first.
 String second last.
 String fill: 0 with: 0 .
-String column: 0 .
 String replace: 0 length: 0 with: 0 .
 String keys.
 String values.
@@ -1051,7 +1041,6 @@ Object from: 0 length: 0 .
 Object map: 0 .
 Object each: 0 .
 Object sum.
-Object product.
 Object write: 0 .
 Object path.
 Object read.
@@ -1113,7 +1102,7 @@ Object year.
 Object year: 0 .
 Object years.
 Object weekday.
-Object yearday.
+Object day of the year.
 Object zone.
 Object zone: 0 .
 Object add: 0 .
@@ -1129,7 +1118,6 @@ Object last.
 Object first.
 Object second last.
 Object fill: 0 with: 0 .
-Object column: 0 .
 Object replace: 0 length: 0 with: 0 .
 Object keys.
 Object values.
@@ -1243,7 +1231,6 @@ error
 List each: 0 .
 error
 List sum.
-List product.
 List write: 0 .
 List path.
 List read.
@@ -1305,7 +1292,7 @@ List year.
 List year: 0 .
 List years.
 List weekday.
-List yearday.
+List day of the year.
 List zone.
 List zone: 0 .
 List add: 0 .
@@ -1321,7 +1308,6 @@ List last.
 List first.
 List second last.
 List fill: 0 with: 0 .
-List column: 0 .
 List replace: 0 length: 0 with: 0 .
 error
 List keys.
@@ -1435,7 +1421,6 @@ error
 Map each: 0 .
 error
 Map sum.
-Map product.
 Map write: 0 .
 Map path.
 Map read.
@@ -1497,7 +1482,7 @@ Map year.
 Map year: 0 .
 Map years.
 Map weekday.
-Map yearday.
+Map day of the year.
 Map zone.
 Map zone: 0 .
 Map add: 0 .
@@ -1513,7 +1498,6 @@ Map last.
 Map first.
 Map second last.
 Map fill: 0 with: 0 .
-Map column: 0 .
 Map replace: 0 length: 0 with: 0 .
 Map keys.
 Map values.
@@ -1624,7 +1608,6 @@ File from: 0 length: 0 .
 File map: 0 .
 File each: 0 .
 File sum.
-File product.
 File write: 0 .
 File path.
 File read.
@@ -1687,7 +1670,7 @@ File year.
 File year: 0 .
 File years.
 File weekday.
-File yearday.
+File day of the year.
 File zone.
 File zone: 0 .
 File add: 0 .
@@ -1705,7 +1688,6 @@ File last.
 File first.
 File second last.
 File fill: 0 with: 0 .
-File column: 0 .
 File replace: 0 length: 0 with: 0 .
 File keys.
 File values.
@@ -1816,7 +1798,6 @@ Moment from: 0 length: 0 .
 Moment map: 0 .
 Moment each: 0 .
 Moment sum.
-Moment product.
 Moment write: 0 .
 Moment path.
 Moment read.
@@ -1878,7 +1859,7 @@ Moment year.
 Moment year: 0 .
 Moment years.
 Moment weekday.
-Moment yearday.
+Moment day of the year.
 Moment zone.
 Moment zone: 0 .
 Moment add: 0 .
@@ -1894,7 +1875,6 @@ Moment last.
 Moment first.
 Moment second last.
 Moment fill: 0 with: 0 .
-Moment column: 0 .
 Moment replace: 0 length: 0 with: 0 .
 Moment keys.
 Moment values.

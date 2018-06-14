@@ -1,5 +1,12 @@
 'SINGLE_LANGUAGE'.
 
+List on: 'product' do: {
+	☞ total := 1.
+	⛏ each: { :index :element
+		total multiply by: element.
+	}.
+	↲ total.
+}.
 
 ☞ usedMemory1 := 0.
 ☞ usedMemory2 := 0.
