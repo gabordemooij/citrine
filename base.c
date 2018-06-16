@@ -278,7 +278,10 @@ ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList )
 			ctr_send_message( myself, "=", 1, compareArguments )
 		)->value.bvalue == 1) {
 		block->info.sticky = 1;
+		int sticky = myself->info.sticky;
+		myself->info.sticky = 1;
 		ctr_block_run(block, compareArguments, NULL);
+		myself->info.sticky = sticky;
 		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL; /* consume continue */
 		if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
 		block->info.mark = 0;
@@ -678,7 +681,10 @@ ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_object* codeBlock = argumentList->object;
 		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = myself;
+		int sticky = myself->info.sticky;
+		myself->info.sticky = 1;
 		result = ctr_block_run(codeBlock, arguments, NULL);
+		myself->info.sticky = sticky;
 		ctr_heap_free( arguments );
 		return myself;
 	}
@@ -701,7 +707,10 @@ ctr_object* ctr_bool_if_false(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_object* codeBlock = argumentList->object;
 		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = myself;
+		int sticky = myself->info.sticky;
+		myself->info.sticky = 1;
 		result = ctr_block_run(codeBlock, arguments, NULL);
+		myself->info.sticky = sticky;
 		ctr_heap_free( arguments );
 		return myself;
 	}
@@ -1925,7 +1934,7 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument* argumentList ) {
 	regex_t pattern;
 	int reti;
-	int sticky1, sticky2, sticky3;
+	int sticky1, sticky2, sticky3, sticky4;
 	int regex_error = 0;
 	size_t n = 255;
 	size_t i = 0;
@@ -1991,6 +2000,7 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 		sticky1 = block->info.sticky;
 		sticky2 = blockArguments->object->info.sticky;
 		sticky3 = newString->info.sticky;
+		sticky4 = myself->info.sticky;
 		block->info.sticky = 1;
 		blockArguments->object->info.sticky = 1;
 		newString->info.sticky = 1;
@@ -1998,6 +2008,7 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 		block->info.sticky = sticky1;
 		blockArguments->object->info.sticky = sticky2;
 		newString->info.sticky = sticky3;
+		myself->info.sticky = sticky4;
 		ctr_argument* arg = ctr_heap_allocate( sizeof( ctr_argument ) );
 		arg->object = replacement;
 		ctr_string_append( newString, arg );
@@ -2578,6 +2589,11 @@ ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
 		CtrStdFlow = ctr_error_text( "No block found." );
 	}
+	int sticky1, sticky2;
+	sticky1 = myself->info.sticky;
+	sticky2 = argumentList->object->info.sticky;
+	myself->info.sticky = 1;
+	argumentList->object->info.sticky = 1;
 	while (1 && !CtrStdFlow) {
 		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, NULL));
 		if (result->value.bvalue == 1 || CtrStdFlow) break;
@@ -2585,6 +2601,8 @@ ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList
 		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL; /* consume continue */
 	}
 	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
+	myself->info.sticky = sticky1;
+	argumentList->object->info.sticky = sticky2;
 	return myself;
 }
 

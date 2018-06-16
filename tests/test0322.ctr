@@ -1,0 +1,19 @@
+'SINGLE_LANGUAGE'.
+Program tidiness: 12.
+☞ Matryoshka := Object new.
+Matryoshka on: 'double:' do: { :secret
+	⚿ secret := secret * 2.
+}.
+Matryoshka on: 'new:' do: { :secret
+	☞ answer := Nil.
+	☞ t := (secret > 255).
+	✎ write: (secret + ' | ' + t), end.
+	t true: {
+		answer := secret.
+	}, else: {
+		answer := Matryoshka new: (⛏ double: secret).
+	}.
+	↲ answer.
+}.
+
+☞ x := Matryoshka new: 2.
