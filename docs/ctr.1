@@ -85,7 +85,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [Object] toString
+.B  * [Object] string
 .nf
     
      Returns a string representation of a generic object.
@@ -95,7 +95,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [Object] toNumber
+.B  * [Object] number
 .nf
     
      Returns a numerical representation of the object. This basic behavior, part
@@ -104,7 +104,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [Object] toBoolean
+.B  * [Object] boolean
 .nf
     
      Returns a boolean representation of the object. This basic behavior, part
@@ -197,22 +197,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     #Can we use a switch statement in Citrine?
-    
-     #create a good wine
-     ☞ wine := Object new.
-    
-     #define a string representation for this wine
-     wine on: 'toString' do: {
-    	↲ 'merlot'.
-     }.
-    
-     #define how wines are to be compared
-     wine on: '=' do: { :other wine
-    	↲ ( me toString = other wine ).
-    }.
-    
-     #now select the correct wine from the list
      wine
     	case: 'cabernet' do: { ✎ write: 'it\\'s a Cabernet!'. },
     	case: 'syrah'    do: { ✎ write: 'it\\'s a Syrah!'.    },
@@ -232,8 +216,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     var str := 'write:'.
-     Pen message: 'write:' arguments: (List ← 'Hello World').
+     ☞ str := 'write:'.
+     ✎ message: 'write:' arguments: (List ← 'Hello World').
     
      This will print the string 'Hello world' on the screen using a dynamically
      crafted message.
@@ -326,7 +310,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     (True = False) ifFalse: { Pen write: 'This is not True!'. }.
+     (True = False) false: { Pen write: 'This is not True!'. }.
 .fi
 .BR.BR.BR
 
@@ -342,7 +326,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [Boolean] toString
+.B  * [Boolean] string
 .nf
     
      Simple cast function.
@@ -470,7 +454,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [Boolean] toNumber
+.B  * [Boolean] number
 .nf
     
      Returns 0 if boolean is False and 1 otherwise.
@@ -486,8 +470,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
      1
      -8
      2.5
-     pi
-     𝛑
     
      Represents a number object in Citrine.
 .fi
@@ -504,7 +486,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [Number] >=: [other]
+.B  * [Number] ≥ [other]
 .nf
     
      Returns True if the number is higher than or equal to other number.
@@ -518,7 +500,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [Number] <=: [other]
+.B  * [Number] ≤ [other]
 .nf
     
      Returns True if the number is less than or equal to other number.
@@ -532,7 +514,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [Number] !=: [other]
+.B  * [Number] ≠ [other]
 .nf
     
      Returns True if the number does not equal the other number.
@@ -556,14 +538,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [Number] odd
+.B  * [Number] odd?
 .nf
     
      Returns True if the number is odd and False otherwise.
 .fi
 .BR.BR.BR
 
-.B  * [Number] even
+.B  * [Number] even?
 .nf
     
      Returns True if the number is even and False otherwise.
@@ -578,7 +560,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [Number] +=: [Number]
+.B  * [Number] add: [Number]
 .nf
     
      Increases the number ITSELF by the specified amount, this message will change the
@@ -594,7 +576,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [Number] -=: [number]
+.B  * [Number] subtract: [number]
 .nf
     
      Decreases the number ITSELF by the specified amount, this message will change the
@@ -625,7 +607,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [Number] *=: [Number]
+.B  * [Number] multiply by: [Number]
 .nf
     
      Multiplies the number ITSELF by multiplier, this message will change the
@@ -634,7 +616,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := 5.
-     x *=: 2. #x is now 10.
+     x multiply by: 2. #x is now 10.
     
      Use this message to apply the operation to the object itself instead
      of creating and returning a new object.
@@ -649,7 +631,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [Number] /=: [Number]
+.B  * [Number] devide by: [Number]
 .nf
     
      Divides the number ITSELF by divider, this message will change the
@@ -658,7 +640,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := 10.
-     x /=: 2. #x will now be 5.
+     x divide by: 2. #x will now be 5.
     
      Use this message to apply the operation to the object itself instead
      of generating a new object.
@@ -803,7 +785,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := 4.5.
-     y = x ceil. #y will be 5
+     y = x ceil.
     
      The example above applies the ceiling function to the recipient (4.5)
      returning a new number object (5).
@@ -817,7 +799,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [Number] abs
+.B  * [Number] absolute
 .nf
     
      Returns the absolute (unsigned, positive) value of the number.
@@ -825,7 +807,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := -7.
-     y := x abs. #y will be 7
+     y := x absolute. #y will be 7
     
      The example above strips the sign off the value -7 resulting
      in 7.
@@ -946,18 +928,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [String] from: [position] to: [destination]
-.nf
-    
-     Returns a portion of a string defined by from-to values.
-     This message is UTF-8 unicode aware.
-    
-     Usage:
-    
-     'hello' from: 2 to: 3. #ll
-.fi
-.BR.BR.BR
-
 .B  * [String] from: [start] length: [length]
 .nf
     
@@ -967,7 +937,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     'hello' from: 2 length: 3. #llo
+     'hello' from: 2 length: 3.
 .fi
 .BR.BR.BR
 
@@ -1105,7 +1075,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [String] contains: [String]
+.B  * [String] matches: [String]
 .nf
     
      Returns True if the other string is a substring.
@@ -1237,34 +1207,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [String] escape: '\n'.
-.nf
-    
-     Escapes the specified ASCII character in a string.
-     If the character is a control character, the well known
-     C-based character substitute will be used.
-.fi
-.BR.BR.BR
-
 .B  * [String] escapeQuotes.
 .nf
     
      Escapes all single quotes in a string. Sending this message to a
      string will cause all single quotes (') to be replaced with (\\').
-.fi
-.BR.BR.BR
-
-.B  * [String] unescape: '\n'.
-.nf
-    
-     'UnEscapes' the specified ASCII character in a string.
-.fi
-.BR.BR.BR
-
-.B  * [String] html
-.nf
-    
-     Escapes HTML chars.
 .fi
 .BR.BR.BR
 
@@ -1274,22 +1221,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Returns the hash of the recipient String using the specified key.
      The default hash in Citrine is the SipHash which is also used internally.
      SipHash can protect against hash flooding attacks.
-.fi
-.BR.BR.BR
-
-.B  * [String] evaluate
-.nf
-    
-     Evaluates the contents of the string as code.
-     In contrast to other languages, an eval statement can only
-     execute a very limited set of messages. Typically only Array and
-     Map building can be performed using eval. Using eval in Citrine can
-     therefore be considered 'safe'.
-    
-     Usage:
-    
-     a := 'List ← 1 ; 2 ; 3' evaluate.
-     x := a @ 2.
 .fi
 .BR.BR.BR
 
@@ -1568,28 +1499,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      a := List ← 1 ; 2 ; 3.
-     s := a sum. #6
+     s := a sum.
     
      In the example above, the sum of array will be stored in s and
      it's value will be 6.
-.fi
-.BR.BR.BR
-
-.B  * [List] product
-.nf
-    
-     Takes the product of an array. On receiving this message, the
-     List recipient object will calculate the product of its
-     numerical elements.
-    
-     Usage:
-    
-     a := List ← 2 ; 4 ; 8.
-     p := a product. #64
-    
-     In the example above, the product of the array will be calculated
-     because the array receives the message 'product'. The product of the elements
-     ( 2 * 4 * 8 = 64 ) will be stored in p.
 .fi
 .BR.BR.BR
 
@@ -1607,7 +1520,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      files map: showName.
      files map: {
        :key :filename :files
-       Pen write: filename, brk.
+       ✎ write: filename.
      }.
 .fi
 .BR.BR.BR
@@ -1662,7 +1575,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [List] at: [Index]
+.B  * [List] position: [Index]
 .nf
     
      Returns the element in the array at the specified index.
@@ -1870,24 +1783,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [List] column: [Number]
-.nf
-    
-     Extracts the specified column from the array.
-     In a nested array this message will select the Nth
-     element of every array. N is specified using the
-     Number argument.
-    
-     Usage:
-    
-     ☞ a := List ←
-    	(List ← 1 ; 2 ; 3) ;
-    	(List ← 4 ; 5 ; 6) ;
-    	(List ← 7 ; 8 ; 9).
-     ☞ b := a column: 1. #2,5,8
-.fi
-.BR.BR.BR
-
 .B  * [List] find: [Object].
 .nf
     
@@ -1895,15 +1790,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
      if so. If not, the index number -1 will be returned. Note that the comparison
      will be performed by converting both values to strings.
     
-.fi
-.BR.BR.BR
-
-.B  * [List] serialize
-.nf
-    
-     Alias for [List] toString.
-    
-     See 'Map serialize' for the reason for this alias.
 .fi
 .BR.BR.BR
 
@@ -2061,7 +1947,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B  * [Map] toString
+.B  * [Map] string
 .nf
     
      Returns a string representation of a map encoded in Citrine itself.
@@ -2071,30 +1957,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage
     
      m := (Map new) put: 'hello' at: 'world'.
-     x := m toString
-     m := x eval.
+     x := m string.
     
-     The toString method is automatically invoked when attempting to
+     The sting method is automatically invoked when attempting to
      print a Map:
     
-     Pen write: (Map new). #prints Map new.
+     ✎ write: (Map new).
     
      You can also use the alias 'serialize'.
-.fi
-.BR.BR.BR
-
-.B  * [Map] serialize
-.nf
-    
-     Alias for [Map] toString.
-     A toString message, sometimes implicitly send by other messages like
-     'Pen write:' will give you a serialized version of the Map or List.
-     This is far more useful than a 'dumb' textual description of the object like
-     'array' or 'object'. However, when working with very large Maps or Lists
-     accidentally dumping the entire contents can be annoying, in this case you can
-     override the toString behaviour but you don't have to remap the original, you
-     can just use this alias. Also, this alias can be used if you want to make
-     the serialization more explicit.
 .fi
 .BR.BR.BR
 
@@ -2952,6 +2822,22 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
+.BR.BR.BR
+
+.B  * [String] escape: '\n'.
+.nf
+    
+     Escapes the specified ASCII character in a string.
+     If the character is a control character, the well known
+     C-based character substitute will be used.
+.fi
+.BR.BR.BR
+
+.B  * [String] unescape: '\n'.
+.nf
+    
+     'UnEscapes' the specified ASCII character in a string.
+.fi
 .BR.BR.BR
 
 .B  * [Json] new
