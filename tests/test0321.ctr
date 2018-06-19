@@ -1,6 +1,5 @@
 'SINGLE_LANGUAGE'.
 
-Program tidiness: 12.
 Program clean memory.
 
 ☞ Fruit := Object new.

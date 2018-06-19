@@ -1,0 +1,30 @@
+'SINGLE_LANGUAGE'.
+
+Program clean memory.
+
+
+☞ Veggy := Object new.
+Veggy on: 'new' do: {
+	☞ f := ⛏ `new.
+	f veggies: 0.
+	↲ f.
+}.
+Veggy on: 'carrots:' do: { :a ⚿ veggies := a. ↲ Nil. }.
+Veggy on: 'carrots' do: { ↲ ⚿ veggies. }.
+Veggy on: '+' do: { :f
+	☞ n := Veggy new.
+	n carrots: (1 + ⚿ veggies).
+	↲ n.
+}.
+Number on: 'carrots' do: {
+	☞ x := ⛏ `new.
+	x Veggy: ⛏.
+	↲ x.
+}.
+
+Number on: 'add:and:' do: { :a :b
+	↲ (a + b).
+}.
+
+☞ q := 0 add: (3 carrots + 2 carrots) and: 4 carrots.
+✎ write: q, end.

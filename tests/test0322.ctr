@@ -1,5 +1,5 @@
 'SINGLE_LANGUAGE'.
-Program tidiness: 12.
+
 ☞ Matryoshka := Object new.
 Matryoshka on: 'double:' do: { :secret
 	⚿ secret := secret * 2.
