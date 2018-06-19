@@ -48,6 +48,7 @@
 #define CTR_DICT_DONE            "klaar"
 #define CTR_DICT_IFFALSE         "onwaar:"
 #define CTR_DICT_IFTRUE          "waar:"
+#define CTR_DICT_WHILE           "zolang:"
 #define CTR_DICT_MESSAGEARGS     "bericht:argumenten:"
 #define CTR_DICT_MESSAGE         "bericht:"
 #define CTR_DICT_LEARN           "leer:betekent:"

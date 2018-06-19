@@ -2531,20 +2531,19 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 }
 
 /**
- * [Block] whileTrue: [block]
+ * [Block] while: [block]
  *
  * Runs a block of code, depending on the outcome runs the other block
  * as long as the result of the first one equals boolean True.
  *
  * Usage:
  *
- * x := 0.
- * { ^(x < 6). } false:
- * { x add: 1. }.
+ * ☞ x := 0.
+ * { x add: 1. } while: { ↲ (x < 6). }.
  *
  * Here we increment variable x by one until it reaches 6.
  * While the number x is lower than 6 we keep incrementing it.
- * Don't forget to use the return ^ symbol in the first block.
+ * Don't forget to use the return ↲ symbol in the first block.
  */
 ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
@@ -2557,47 +2556,9 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
 	myself->info.sticky = 1;
 	argumentList->object->info.sticky = 1;
 	while (1 && !CtrStdFlow) {
-		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, NULL));
+		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(block, argumentList, NULL));
 		if (result->value.bvalue == 0 || CtrStdFlow) break;
-		ctr_block_run(argumentList->object, argumentList, NULL);
-		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL; /* consume continue */
-	}
-	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
-	myself->info.sticky = sticky1;
-	argumentList->object->info.sticky = sticky2;
-	return myself;
-}
-
-/**
- * [Block] whileFalse: [block]
- *
- * Runs a block of code, depending on the outcome runs the other block
- * as long as the result of the first one equals to False.
- *
- * Usage:
- *
- * x := 0.
- * { ^(x > 5). }
- * false: { x add: 1. }.
- *
- * Here we increment variable x by one until it reaches 6.
- * While the number x is not higher than 5 we keep incrementing it.
- * Don't forget to use the return ^ symbol in the first block.
- */
-ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* block = argumentList->object;
-	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_error_text( "No block found." );
-	}
-	int sticky1, sticky2;
-	sticky1 = myself->info.sticky;
-	sticky2 = argumentList->object->info.sticky;
-	myself->info.sticky = 1;
-	argumentList->object->info.sticky = 1;
-	while (1 && !CtrStdFlow) {
-		ctr_object* result = ctr_internal_cast2bool(ctr_block_run(myself, argumentList, NULL));
-		if (result->value.bvalue == 1 || CtrStdFlow) break;
-		ctr_block_run(argumentList->object, argumentList, NULL);
+		ctr_block_run(myself, argumentList, NULL);
 		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL; /* consume continue */
 	}
 	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */

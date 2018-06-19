@@ -1,3 +1,5 @@
+Program tidiness: 12.
+
 String on: 'escape:' do: { :characters
 	☞ str := ⛏.
 	characters characters each: { :number :character

@@ -9,20 +9,20 @@
 ☞ xIsLessThan10 := { ↲( x < 10 ). }.
 ✎ end.
 ✎ write: 'Continue while-true, No --> before 5 and up.', end.
-xIsLessThan10 true: {
+{
 	✎ write: 'iteration #' + x, end.
 	x add: 1.
 	((x < 5) not) continue.
 	✎ write: '-->'.
-}.
+} while: xIsLessThan10.
 ✎ end.
 ✎ write: 'Continue while-false, No - before 3 only.', end.
-{ ↲(x = 0). } false: {
+{
 	✎ write: 'iteration #' + x, end.
 	x subtract: 1.
 	(x = 3) continue.
 	✎ write: '-'.
-}.
+} while: { ↲ ( x > 0). }.
 
 ✎ end.
 ✎ write: 'Continue times-loop, No ||| before 3.', end.

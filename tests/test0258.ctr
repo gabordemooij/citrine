@@ -9,10 +9,10 @@ myFile write: 'lock'.
 ☞ isLocked   := False.
 ☞ isUnlocked := False.
 
-{ isLocked := myFile lock. ↲ isLocked. } false: { Moment wait: 1. }.
+{ Moment wait: 1. } while: { isLocked := myFile lock. ↲ isLocked not. }.
 ✎ write: isLocked, end.
 
-{ isLocked := myFile lock. ↲ isLocked. } false: { Moment wait: 1. }.
+{ Moment wait: 1. } while: { isLocked := myFile lock. ↲ isLocked not. }.
 ✎ write: isLocked, end.
 
 ☞ myFile2 := File new: '/tmp/lock2'.
@@ -23,8 +23,8 @@ myFile2 exists true: {
 
 myFile2 write: 'lock'.
 
-{ isLocked := myFile2 lock. ↲ isLocked. } false: { Moment wait: 1. }.
+{ Moment wait: 1. } while: { isLocked := myFile2 lock. ↲ isLocked not. }.
 ✎ write: isLocked, end.
 
-{ isUnlocked := myFile2 unlock. ↲ isUnlocked. } false: { Moment wait: 1. }.
+{ Moment wait: 1. } while: { isUnlocked := myFile2 unlock. ↲ isUnlocked not. }.
 ✎ write: isUnlocked, end.

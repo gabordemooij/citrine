@@ -8,18 +8,18 @@
 ☞ xIsLessThan10 := { ↲( x < 10 ). }.
 
 ✎ write: 'Break while-true loop, 0-4.', end.
-xIsLessThan10 true: {
+{
 	✎ write: 'iteration #' + x, end.
 	x add: 1.
 	((x < 5) not) break.
-}.
+} while: xIsLessThan10.
 
 ✎ write: 'Break while-false loop, 5,4.', end.
-{ ↲(x = 0). } false: {
+{
 	✎ write: 'iteration #' + x, end.
 	x subtract: 1.
 	(x = 3) break.
-}.
+} while: { ↲ (x > 0). }.
 
 ✎ write: 'Break times loop, 1-4.', end.
 { :i

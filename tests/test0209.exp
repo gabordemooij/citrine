@@ -6,7 +6,7 @@ False
 [Block]
 Can I execute a code block without assigning code?
 [Block]
-[Block]
+True
 [Object]
 This Nil has no file
 0
@@ -43,6 +43,7 @@ Boolean do.
 Boolean done.
 Boolean false: 0 .
 Boolean true: 0 .
+Boolean while: 0 .
 Boolean message: 0 arguments: 0 .
 error
 Boolean message: 0 .
@@ -228,6 +229,7 @@ True do.
 True done.
 True false: 0 .
 True true: 0 .
+True while: 0 .
 True message: 0 arguments: 0 .
 error
 True message: 0 .
@@ -413,6 +415,7 @@ False do.
 False done.
 False false: 0 .
 False true: 0 .
+False while: 0 .
 False message: 0 arguments: 0 .
 error
 False message: 0 .
@@ -600,6 +603,7 @@ Number do.
 Number done.
 Number false: 0 .
 Number true: 0 .
+Number while: 0 .
 Number message: 0 arguments: 0 .
 error
 Number message: 0 .
@@ -786,6 +790,7 @@ String do.
 String done.
 String false: 0 .
 String true: 0 .
+String while: 0 .
 String message: 0 arguments: 0 .
 error
 String message: 0 .
@@ -972,6 +977,7 @@ Object do.
 Object done.
 Object false: 0 .
 Object true: 0 .
+Object while: 0 .
 Object message: 0 arguments: 0 .
 error
 Object message: 0 .
@@ -1157,6 +1163,7 @@ List do.
 List done.
 List false: 0 .
 List true: 0 .
+List while: 0 .
 List message: 0 arguments: 0 .
 error
 List message: 0 .
@@ -1346,6 +1353,7 @@ Map do.
 Map done.
 Map false: 0 .
 Map true: 0 .
+Map while: 0 .
 Map message: 0 arguments: 0 .
 error
 Map message: 0 .
@@ -1533,6 +1541,7 @@ File do.
 File done.
 File false: 0 .
 File true: 0 .
+File while: 0 .
 File message: 0 arguments: 0 .
 error
 File message: 0 .
@@ -1721,6 +1730,7 @@ Moment do.
 Moment done.
 Moment false: 0 .
 Moment true: 0 .
+Moment while: 0 .
 Moment message: 0 arguments: 0 .
 error
 Moment message: 0 .
