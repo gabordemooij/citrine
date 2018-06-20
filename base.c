@@ -2004,7 +2004,7 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 		block->info.sticky = 1;
 		blockArguments->object->info.sticky = 1;
 		newString->info.sticky = 1;
-		ctr_object* replacement = replacement = ctr_block_run( block, blockArguments, block );
+		ctr_object* replacement = replacement = ctr_block_run( block, blockArguments, ctr_build_empty_string() );	
 		block->info.sticky = sticky1;
 		blockArguments->object->info.sticky = sticky2;
 		newString->info.sticky = sticky3;

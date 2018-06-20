@@ -1,0 +1,6 @@
+
+☞ x := 'Hello' pattern: '[eo]' process: { :match
+	✎ write: ('found: needle' needle: match), end.
+}.
+
+✎ write: x, end.
