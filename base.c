@@ -2515,7 +2515,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	
 	if (ctr_in_message) {
 	char* str = ctr_heap_allocate(40);
-	snprintf(str, 40, ".rs%p", result);
+	snprintf(str, 40, ".rs%p", (void*) result);
 	ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), result, CTR_CATEGORY_PRIVATE_PROPERTY );
 	ctr_heap_free(str);
 	}
@@ -2683,3 +2683,4 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_block_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( "[Block]" );
 }
+
