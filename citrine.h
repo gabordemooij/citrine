@@ -341,6 +341,7 @@ ctr_tnode* ctr_cparse_create_node( int type );
 /**
  * Internal World functions
  */
+int ctr_in_message;
 void        ctr_initialize_world();
 char*       ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, int reverse );
 void        ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_object* value, int m);

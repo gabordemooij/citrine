@@ -8,7 +8,7 @@
 
 #include "citrine.h"
 
-int ctr_in_message = 0;
+
 
 /**
  * CTRWalkerReturn

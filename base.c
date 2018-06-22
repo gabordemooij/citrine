@@ -2511,7 +2511,16 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	}
 	ctr_close_context();
 	/* assign result to lower context to prevent it from being GC'ed. */
-	ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(".rs"), result, CTR_CATEGORY_PRIVATE_PROPERTY );
+	//printf(">pinning result: %s (%p) to context: %p (%d) \n", ctr_heap_allocate_cstring(ctr_internal_cast2string(result)),result,ctr_contexts[ctr_context_id], ctr_context_id );
+	
+	if (ctr_in_message) {
+	char* str = ctr_heap_allocate(40);
+	snprintf(str, 40, ".rs%p", result);
+	ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), result, CTR_CATEGORY_PRIVATE_PROPERTY );
+	ctr_heap_free(str);
+	}
+	
+	//ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(".rs"), result, CTR_CATEGORY_PRIVATE_PROPERTY );
 	if (CtrStdFlow != NULL && CtrStdFlow != CtrStdBreak && CtrStdFlow != CtrStdContinue) {
 		ctr_object* catchBlock = ctr_internal_create_object( CTR_OBJECT_TYPE_OTBLOCK );
 		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "catch" ), 0);

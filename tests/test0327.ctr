@@ -1,0 +1,47 @@
+
+List on: 'fixture:' do: { :f
+	⚿ fixture := f.
+}.
+
+List on: 'count' do: {
+	↲ ⚿ fixture.
+}.
+
+List on: 'aantal' do: {
+	↲ ⚿ fixture.
+}.
+
+
+☞ x := Nil.
+{
+
+	x := 'hello' 
+	replace:
+		('hel' + 
+			('l<x>' <x>:
+				('==o' character: 2)
+			)
+		)
+	with: (
+		('...hal' + 'lo') 
+			uppercase 
+			lowecase 
+			uppercase 
+			offset: ( 
+				10 - 12 + (
+					(
+						(
+							(
+								List ← 0 ; 1 ; 4; 9 ; (List ← 0 ; 3; 1) ; 4
+							) second last
+						) ? 1
+					) + 
+					((List ← 'X' ; 'Y' ; 'Z') fixture: 2) 
+					count
+				)
+			)
+	).
+
+} * 10.
+✎ write: x, end.
+

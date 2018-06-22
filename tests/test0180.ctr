@@ -16,29 +16,35 @@ String on: 'html' do: {
 
 Program tidiness: 0.
 
+{
 ☞ txt := '<h1>"Hell\'o & Goodbye"</h1>'.
 ✎ write: txt html, end.
 ✎ write: txt lowercase, end.
 ✎ write: txt uppercase, end.
+} run.
 
 Program clean memory.
 
 usedMemory1 := (Program memory ? 0).
 
 
-txt := '<h1>"Hell\'o & Goodbye"</h1>'.
+{
+☞ txt := '<h1>"Hell\'o & Goodbye"</h1>'.
 ✎ write: txt html, end.
 ✎ write: txt lowercase, end.
 ✎ write: txt uppercase, end.
+} run.
 
 Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
-txt := '<h1>"Hell\'o & Goodbye"</h1>'.
+{
+☞ txt := '<h1>"Hell\'o & Goodbye"</h1>'.
 ✎ write: txt html, end.
 ✎ write: txt lowercase, end.
 ✎ write: txt uppercase, end.
+} run.
 
 Program clean memory.
 usedMemory3 := (Program memory ? 0).
