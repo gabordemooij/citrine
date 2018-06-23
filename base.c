@@ -1859,7 +1859,7 @@ ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * 'LiLo BootLoader' replace: 'L' with: 'l'. #lilo Bootloader
+ * 'LiLo BootLoader' replace: 'L' with: 'l'.
  */
 ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
@@ -1910,7 +1910,7 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 }
 
 /**
- * [String] pattern: [String] do: [Block] options: [String].
+ * [String] pattern: [String] process: [Block] options: [String].
  *
  * Matches the POSIX regular expression in the first argument against
  * the string and executes the specified block on every match passing
@@ -1923,8 +1923,8 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
  *
  * Usage:
  *
- * 'hello world' pattern: '([hl])' do: { :arr
- *  Pen write: (arr join: '|'), brk.
+ * 'hello world' pattern: '([hl])' process: { :arr
+ *  	✎ write: (arr join: '|'), end.
  * } options: ''.
  *
  * On every match the block gets executed and the matches are
