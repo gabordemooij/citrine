@@ -82,7 +82,7 @@ ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 /**
  * [List] type
  *
- * Returns the string 'Array'.
+ * Returns the string description for this object type.
  *
  **/
 ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList) {
@@ -90,21 +90,21 @@ ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] add: [Element].
+ * [List] append: [Element]
  *
- * Alias for [List] push. Might be more readable
- * in some situations.
- */
-
-/**
- * [List] push: [Element]
- *
- * Pushes an element on top of the array.
+ * Adds an element to the end of the list.
+ * You can also use add: to do this or one of the symbolic
+ * representations: • and ;. Depending on the context, one might be
+ * more readable than the other.
  *
  * Usage:
  *
  * numbers := List new.
- * numbers push: 3.
+ * numbers append: 3.
+ * numbers add: 3.
+ * numbers ; 3.
+ * numbers • 3.
+ * 
  */
 ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pushValue;
@@ -123,8 +123,9 @@ ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [List] minimum
  *
- * Returns the minimum value from an array.
- *
+ * Returns the minimum value in a list.
+ * In the example this message will return the number 2.
+ * 
  * Usage:
  *
  * a := List ← 8 ; 4 ; 2 ; 16.
@@ -149,7 +150,8 @@ ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [List] maximum
  *
- * Returns the maximum value from an array.
+ * Returns the maximum value in a list.
+ * In the example this will yield the number 16.
  *
  * Usage:
  *
@@ -173,43 +175,24 @@ ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] sum
- *
- * Takes the sum of an array. This message will calculate the
- * sum of the numerical elements in the array.
- *
- * Usage:
- *
- * a := List ← 1 ; 2 ; 3.
- * s := a sum.
- *
- * In the example above, the sum of array will be stored in s and
- * it's value will be 6.
- */
-ctr_object* ctr_array_sum(ctr_object* myself, ctr_argument* argumentList) {
-	double sum = 0;
-	ctr_object* el;
-	size_t i = 0;
-	for(i = 0; i < myself->value.avalue->head; i++) {
-		el = *(myself->value.avalue->elements + i);
-		sum += ctr_internal_cast2number(el)->value.nvalue;
-	}
-	return ctr_build_number_from_float(sum);
-}
-
-/**
  * [List] map: [Block].
  *
  * Iterates over the array. Passing each element as a key-value pair to the
  * specified block.
  * The map message will pass the following arguments to the block, the key,
  * the value and a reference to the array itself. The last argument might seem
- * redundant but allows for a more functional programming style.
+ * redundant but allows for a more functional programming style. Instead of map,
+ * you can also use each:.
  *
  * Usage:
  *
  * files map: showName.
  * files map: {
+ *   :key :filename :files
+ *   ✎ write: filename.
+ * }.
+ * 
+ * files each: {
  *   :key :filename :files
  *   ✎ write: filename.
  * }.
@@ -246,23 +229,17 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] each: [Block].
- *
- *  Alias for [List] map: [Block].
- */
-
-/**
  * [List] ← [Element1] ; [Element2] ; ...
  *
- * Creates a new instance of an array and initializes this
+ * Creates a new instance of a list and initializes this
  * array with a first element, useful for literal-like List
- * notations.
+ * notations. In the example we create a new list consisting
+ * of the numbers 1, 2 and 3.
  *
  * Usage:
  *
  * a := List ← 1 ; 2 ; 3.
  *
- * Note that the ; symbol here is an alias for 'push:'.
  */
 ctr_object* ctr_array_new_and_push(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_array_new(myclass, NULL);
@@ -270,16 +247,17 @@ ctr_object* ctr_array_new_and_push(ctr_object* myclass, ctr_argument* argumentLi
 }
 
 /**
- * [List] unshift: [Element].
+ * [List] prepend: [Element].
  *
- * Unshift operation for array.
  * Adds the specified element to the beginning of the array.
+ * At the end of the example code, the list will consist of the
+ * numbers: 3 and 1 (in that order).
  *
  * Usage:
  *
  * a := List new.
- * a push: 1.
- * a unshift: 3. #now contains: 3,1
+ * a append: 1.
+ * a prepend: 3.
  */
 ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pushValue = argumentList->object;
@@ -298,16 +276,17 @@ ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] join: [Glue].
+ * [List] join: [String].
  *
- * Joins the elements of an array together in a string
- * separated by a specified glue string.
+ * Joins the elements of a list together in a string
+ * separated by a specified glue string. The example
+ * code results in the string: '1,2,3'.
  *
  * Usage:
  *
  * collection := List new.
- * collection push: 1, push: 2, push 3.
- * collection join: ','. # results in string: '1,2,3'
+ * collection append: 1, append: 2, append 3.
+ * collection join: ','.
  */
 ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 	int i;
@@ -340,19 +319,22 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] position: [Index]
+ * [List] position: [Number]
  *
- * Returns the element in the array at the specified index.
- * Note that the first index of the array is index 0.
- * If you attempt to retrieve an element of the array
+ * Returns the element in the list at the specified position.
+ * Note that the first position of the list is index 0.
+ * If you attempt to retrieve an element of the list
  * using a an index that is something other than a number
  * a catchable error will be triggered. An error will
- * also be triggered if your index is out of bounds.
+ * also be triggered if your position is out of bounds
+ * (i.e. outside the list). Instead of the message
+ * 'position:' you can also send the message '?'.
  *
  * Usage:
  *
- * fruits := List ← 'apples' ; 'oranges' ; 'bananas'.
- * fruits position: 1.
+ * ☞ fruits  := List ← 'apples' ; 'oranges' ; 'bananas'.
+ * ☞ oranges := fruits position: 1.
+ * ☞ oranges := fruits ? 1.
  */
 ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* getIndex = argumentList->object;
@@ -375,8 +357,8 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [List] first.
  * 
- * Returns the first element of the array.
- * If the array is empty, Nil will be returned.
+ * Returns the first element of the list.
+ * If the list is empty, Nil will be returned.
  */
 ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size length = 0;
@@ -390,8 +372,8 @@ ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [List] last.
  * 
- * Returns the last element of the array.
- * If the array is empty, Nil will be returned.
+ * Returns the last element of the list.
+ * If the list is empty, Nil will be returned.
  */
 ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size length = 0;
@@ -405,8 +387,8 @@ ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [List] second last.
  * 
- * Returns the second last element of the array.
- * If the array is empty, Nil will be returned.
+ * Returns the second last element of the list.
+ * If the list is empty, Nil will be returned.
  */
 ctr_object* ctr_array_second_last(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size length = 0;
@@ -417,23 +399,19 @@ ctr_object* ctr_array_second_last(ctr_object* myself, ctr_argument* argumentList
 	return *(myself->value.avalue->elements + myself->value.avalue->tail + (length - 2));
 }
 
-/**
- * [List] ? [Index]
- *
- * Alias for [List] position: [Index]
- */
 
 /**
- * [List] put: [Element] at: [Index]
+ * [List] put: [Object] at: [Number]
  *
- * Puts a value in the array at the specified index.
- * List will be automatically expanded if the index is higher than
- * the maximum index of the array.
+ * Puts an object (which can be anything) in the list
+ * at the specified position.
+ * The list will be automatically expanded if the position number
+ * is higher than the maximum of the list.
  *
  * Usage:
  *
- * fruits := List new.
- * fruits put: 'apples' at: 5.
+ * ☞ fruits := List new.
+ * ☞ fruits put: 'apples' at: 5.
  */
 ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 
@@ -491,13 +469,14 @@ ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList) {
  * [List] - [Number]
  *
  * Deletes the element specified by the index number and
- * shrinks the array accordingly. If the index number does not exist,
- * the array will remain the same. This operation changes the array itself.
+ * shrinks the list accordingly. If the position number does not exist,
+ * the list will remain the same. This operation changes the list itself.
+ * The example will remove element 1 (2) from the list.
  *
  * Usage:
  *
- * x := List ← 1 ; 2 ; 3.
- * x - 1.
+ * ☞ x := List ← 1 ; 2 ; 3.
+ * ☞ x - 1.
  */
 ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size index = ctr_internal_cast2number(argumentList->object)->value.nvalue;
@@ -517,7 +496,7 @@ ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [List] shift
  *
- * Shifts off the first element of the array.
+ * Shifts off the first element of the list.
  */
 ctr_object* ctr_array_shift(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* shiftedOff;
@@ -532,7 +511,7 @@ ctr_object* ctr_array_shift(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [List] count
  *
- * Returns the number of elements in the array.
+ * Returns the number of elements in the list.
  */
 ctr_object* ctr_array_count(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number d = 0;
@@ -572,19 +551,23 @@ ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList
 /**
  * [List] replace: [Number] length: [Number] with: [List].
  *
- * Returns a copy of the array with the specified elements replaced.
+ * Returns a copy of the list with the specified elements replaced.
  * The first argument indicates the start index to begin the replacement.
- * Here, 0 means the beginning of the array. The second argument (length)
+ * Here, 0 means the beginning of the list.
+ * The second argument (length)
  * must indicate the number of elements to delete in the copy, counting
  * from the starting point. Finally, one has to provide the replacement
- * array as the third argument.
- * If the replacement array is empty, the specified elements will only be
+ * list as the third argument.
+ * If the replacement list is empty, the specified elements will only be
  * removed from the copy.
  * If the replacement is not an array an error will be thrown.
  *
  * Usage:
  *
- * ☞ buy := cakes replace: 1 length: 2 with: ( List ← 'cinnamon' ; 'pineapple' ).
+ * ☞ buy := cakes
+ *     replace: 1
+ *     length: 2
+ *     with: ( List ← 'cinnamon' ; 'pineapple' ).
  *
  */
 ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
@@ -632,8 +615,8 @@ ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [List] + [List]
  *
- * Returns a new array, containing elements of itself and the other
- * array.
+ * Returns a new list, containing elements of itself and the other
+ * list.
  */
 ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherArray = argumentList->object;
@@ -667,9 +650,11 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [List] by: [List].
  *
- * Combines the first list with the second one thus creating
+ * Combines the first list with the second one, thus creating
  * a map. The keys of the newly generated map will be provided by the
- * first array while the values are extracted from the second one.
+ * first list while the values are extracted from the second one.
+ * In the example we derive a temperature map from a pair of lists
+ * (cities and temperatures).
  *
  * Usage:
  *
@@ -703,18 +688,22 @@ ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [List] copy
  *
- * Copies the array. The array object will answer this message by
+ * Copies the list. The list object will answer this message by
  * returning a shallow copy of itself. This means that the values in the
- * newly returned array can be replaced or deleted without affecting
- * the original array. However, modifying the values in the array will
- * still cause their counterparts in the original array to be modified
+ * newly returned list can be replaced or deleted without affecting
+ * the original one. However, modifying the values in the list will
+ * still cause their counterparts in the original list to be modified
  * as well.
+ * In the example we replace the first item (1) in b with 999.
+ * The first element in a will still be 1 though because we have created
+ * copy b by sending the message 'copy' to a and assiging the result
+ * to b.
  *
  * Usage:
  *
  * ☞ a := List ← 1 ; 2 ; 3.
  * ☞ b := a copy.
- * b put: 999 at: 1. #b @ 1 = 999
+ * b put: 999 at: 1.
  */
 ctr_object* ctr_array_copy(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size i = 0;
@@ -757,7 +746,7 @@ int ctr_sort_cmp(const void * a, const void * b) {
 /**
  * [List] sort: [Block]
  *
- * Sorts the contents of an array using a sort block.
+ * Sorts the contents of an list using a sort block.
  * Uses qsort.
  */
 ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
@@ -776,21 +765,18 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [List] string
  * 
- * Returns a string representation of the array and its contents.
- * This representation will be encoded in the Citrine language itself and is
- * therefore evallable.
- * 
- * Usage:
- * 
- * a := List ← 'hello' ; 'world'.
- * b := a string.
- * c := b eval.
- * x := c @ 1. #world
- * 
- * 'string' messages are implicitly send by some objects, for instance when
+ * Returns a string representation of the list and its contents.
+ * This representation will be encoded in the Citrine language itself and can
+ * therefore be evaluated again.
+ * In the example: 'string' messages are implicitly
+ * send by some objects, for instance when
  * attempting to write a List using a Pen.
  *
- * You can also use the alias 'serialize'.
+ * Usage:
+ * 
+ * ☞ a := List ← 'hello' ; 'world'.
+ * ☞ b := a string.
+ * ☞ c := b evaluate.
  */
 ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	int i;
@@ -838,7 +824,7 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 /**
  * [List] fill: [Number] with: [Object]
  *
- * Fills the array with the specified number of objects.
+ * Fills the list with the specified number of objects.
  *
  * Usage:
  *
@@ -861,8 +847,9 @@ ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
 /**
  * [List] find: [Object].
  *
- * Checks whether the specified object occurs in the array and returns the index number
- * if so. If not, the index number -1 will be returned. Note that the comparison
+ * Checks whether the specified object occurs in the list
+ * and returns the index number if so.
+ * If not, the index number -1 will be returned. Note that the comparison
  * will be performed by converting both values to strings.
  *
  */
@@ -889,8 +876,8 @@ ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList )
  *
  * Usage:
  *
- * files := Map new.
- * files put: 'readme.txt' at: 'textfile'.
+ * ☞ files := Map new.
+ * ☞ files put: 'readme.txt' at: 'textfile'.
  */
 ctr_object* ctr_map_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -1106,7 +1093,7 @@ ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList) {
  * [Map] each: [Block]
  *
  * Iterates over the map, passing key-value pairs to the specified block.
- * Note that within an each/map block, 'me' and 'my' refer to the collection.
+ * Note that within an each/map block, '⛏' and '⚿' refer to the collection.
  */
 ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
@@ -1146,7 +1133,8 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
  * Note that the object gets converted to a string before
  * comparison. In case of a map or array this means the comparison
  * will be based on the serialized structure.
- *
+ * The example will output: True False False False False.
+ * 
  * Usage:
  *
  * ☞ shop := (Map new
@@ -1154,11 +1142,11 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
  *	put: 'computer' at: 'electronics',
  *	put: 'lipstick' at: 'cosmetics'
  * ).
- * ✎ write: (shop has: 'computer'), brk. #True
- * ✎ write: (shop has: 'sausage'), brk. #False
- * ✎ write: (shop has: 'computers'), brk. #False
- * ✎ write: (shop has: 'compute'), brk. #False
- * ✎ write: (shop has: '2computer'), brk. #False
+ * ✎ write: (shop has: 'computer'), end.
+ * ✎ write: (shop has: 'sausage'), end.
+ * ✎ write: (shop has: 'computers'), end.
+ * ✎ write: (shop has: 'compute'), end.
+ * ✎ write: (shop has: '2computer'), end.
  */
 ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList) {
 	int found = 0;
@@ -1186,18 +1174,15 @@ ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList) {
  * Returns a string representation of a map encoded in Citrine itself.
  * This will give you an
  * evallable representation of the map and all of its members.
+ * The sting method is automatically invoked when attempting to
+ * print a Map:
  *
  * Usage
  *
  * m := (Map new) put: 'hello' at: 'world'.
  * x := m string.
- *
- * The sting method is automatically invoked when attempting to
- * print a Map:
- *
  * ✎ write: (Map new).
  *
- * You can also use the alias 'serialize'.
  */
 ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object*  string;
