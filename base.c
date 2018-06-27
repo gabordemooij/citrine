@@ -150,11 +150,13 @@ ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argument
  * [Object] equals: [other]
  *
  * Tests whether the current instance is the same as
- * the argument.
- *
- * Alias: =
+ * the argument. You also use the message '=' for this
+ * however, often that message will be overridden by a
+ * derived object (Number will use = to compare the numeric values
+ * for instance).
  *
  * Usage:
+ *
  * object equals: other
  */
 ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
@@ -177,20 +179,13 @@ ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Activates 'chain mode'. If chain mode is active, all messages will
  * return the recipient object regardless of their return signature.
+ * The 'do' message tells the object to always return itself and disgard
+ * the original return value until the message 'done' has been received.
  *
  * Usage:
  *
  * a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
- * a do pop shift unshift: 'hi', push: 999, done.
- *
- * Because of 'chain mode' you can do 'a do pop shift' etc, instead of
- *
- * a pop.
- * a shift.
- * etc..
- *
- * The 'do' message tells the object to always return itself and disgard
- * the original return value until the message 'done' has been received.
+ * a do pop shift prepend: 'hi', append: 999, done.
  */
 ctr_object* ctr_object_do( ctr_object* myself, ctr_argument* argumentList ) {
 	myself->info.chainMode = 1;
@@ -218,7 +213,7 @@ ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
  *
  * a := 5.
  * b := a copy.
- * b +=: 1.
+ * b add: 1.
  *
  */
 ctr_object* ctr_object_copy( ctr_object* myself, ctr_argument* argumentList ) {
@@ -292,13 +287,13 @@ ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [Object] message: [String] arguments: [Array]
+ * [Object] message: [String] arguments: [List]
  *
  * Sends a custom or 'dynamic' message to an object. This takes a string containing
  * the message to be send to the object and an array listing the arguments at the
  * correct indexes. If the array fails to provide the correct indexes this will
  * generate an out-of-bounds error coming from the Array object. If something other
- * than an Array is provided an error will be thrown as well.
+ * than an List is provided an error will be thrown as well.
  *
  * Usage:
  *
@@ -537,14 +532,8 @@ ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * #in this example we'll map a message to a Dutch word:
+ * Boolean learn: 'yes:' means: 'true:'.
  *
- * Boolean learn: 'alsWaar:'
- *         means: 'ifTrue:'.
- *
- * (2 > 1) alsWaar: {
- *   Pen write: 'alsWaar means ifTrue in Dutch'.
- * }
  */
 ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argumentList) {
        char*  current_method_name_str;
@@ -598,7 +587,7 @@ ctr_object* ctr_build_bool(int truth) {
  *
  * Usage:
  *
- * (True = False) false: { Pen write: 'This is not True!'. }.
+ * (True = False) false: { ✎ write: 'This is not True!'. }.
  */
 ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(ctr_internal_cast2bool(argumentList->object)->value.bvalue == myself->value.bvalue);
@@ -613,7 +602,7 @@ ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * (True != False) ifTrue: { Pen write: 'This is not True!'. }.
+ * (True != False) true: { ✎ write: 'This is not True!'. }.
  */
 ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(ctr_internal_cast2bool(argumentList->object)->value.bvalue != myself->value.bvalue);
@@ -622,7 +611,7 @@ ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [Boolean] string
  *
- * Simple cast function.
+ * Returns a string representation of a boolean value, i.e. 'True' or 'False'.
  */
 ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue == 1) {
@@ -640,7 +629,9 @@ ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * (iteration > 10) break. #breaks out of loop after 10 iterations
+ * { :iteration
+ *     (iteration > 10) break.
+ * } * 20.
  */
 ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
@@ -673,6 +664,7 @@ ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
  * object is True.
  *
  * Usage:
+ *
  * (some expression) true: { ... }.
  */
 ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
@@ -699,6 +691,7 @@ ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
  * object is True.
  *
  * Usage:
+ *
  * (some expression) false: { ... }.
  */
 ctr_object* ctr_bool_if_false(ctr_object* myself, ctr_argument* argumentList) {
@@ -749,9 +742,6 @@ ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList) {
  * [Boolean] either: [this] or: [that]
  *
  * Returns argument #1 if boolean value is True and argument #2 otherwise.
- *
- * Usage:
- * Pen write: 'the coin lands on: ' + (Boolean flip either: 'head' or: 'tail').
  */
 ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
@@ -1092,13 +1082,13 @@ ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) 
  *
  * Runs the block of code a 'Number' of times.
  * This is the most basic form of a loop.
- *
+ * The example runs the block 7 times. The current iteration
+ * number is passed to the block as a parameter (i in this example).
+ * 
  * Usage:
  *
- * { :i Pen write: i. } * 7.
+ * { :i ✎ write: i. } * 7.
  *
- * The example above runs the block 7 times. The current iteration
- * number is passed to the block as a parameter (i in this example).
  */
 ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* indexNumber;
@@ -1128,14 +1118,13 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Multiplies the number ITSELF by multiplier, this message will change the
  * value of the number object itself instead of returning a new number.
+ * Use this message to apply the operation to the object itself instead
+ * of creating and returning a new object.
  *
  * Usage:
  *
  * x := 5.
- * x multiply by: 2. #x is now 10.
- *
- * Use this message to apply the operation to the object itself instead
- * of creating and returning a new object.
+ * x multiply by: 2.
  */
 ctr_object* ctr_number_mul(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1166,14 +1155,14 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Divides the number ITSELF by divider, this message will change the
  * value of the number object itself instead of returning a new number.
+ * Use this message to apply the operation to the object itself instead
+ * of generating a new object.
  *
  * Usage:
  *
  * x := 10.
- * x divide by: 2. #x will now be 5.
+ * x divide by: 2.
  *
- * Use this message to apply the operation to the object itself instead
- * of generating a new object.
  */
 ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1214,13 +1203,12 @@ ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Returns a new object representing the
  * number to the specified power.
+ * The example above will raise 2 to the power of 8 resulting in
+ * a new Number object: 256.
  *
  * Usage:
  *
  * x := 2 power: 8.
- *
- * The example above will raise 2 to the power of 8 resulting in
- * a new Number object: 256.
  */
 ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1235,13 +1223,14 @@ ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
  * Returns a boolean indicating wether the number is positive.
  * This message will return a boolean object 'True' if the recipient is
  * positive and 'False' otherwise.
+ * The example above will print the message because hope is higher than 0.
  *
  * Usage:
  *
  * hope := 0.1.
- * ( hope positive? ) ifTrue: { Pen write: 'Still a little hope for humanity'. }.
- *
- * The example above will print the message because hope is higher than 0.
+ * ( hope positive? ) true: {
+ *     ✎ write: 'Still a little hope for humanity'.
+ * }.
  */
 ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool( ( myself->value.nvalue > 0) );
@@ -1254,46 +1243,30 @@ ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList) 
  * This message will return a boolean object 'True' if the recipient is
  * negative and 'False' otherwise. It's the eaxct opposite of the 'positive'
  * message.
+ * The example above will print the message because the value of the variable
+ * hope is less than 0.
  *
  * Usage:
  *
  * hope := -1.
  * (hope negative?) ifTrue: { Pen write: 'No hope left'. }.
  *
- * The example above will print the message because the value of the variable
- * hope is less than 0.
  */
 ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool( ( myself->value.nvalue < 0) );
 }
 
 /**
- * [Number] factorial
- *
- * Calculates the factorial of a number.
- */
-ctr_object* ctr_number_factorial(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_number t = myself->value.nvalue;
-	int i;
-	ctr_number a = 1;
-	for(i = (int) t; i > 0; i--) {
-		a = a * i;
-	}
-	return ctr_build_number_from_float(a);
-}
-
-/**
  * [Number] floor
  *
  * Gives the largest integer less than the recipient.
+ * The example above applies the floor function to the recipient (4.5)
+ * returning a new number object (4).
  *
  * Usage:
  *
  * x := 4.5
- * y := x floor. #y will be 4
- *
- * The example above applies the floor function to the recipient (4.5)
- * returning a new number object (4).
+ * y := x floor.
  */
 ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(floor(myself->value.nvalue));
@@ -1317,14 +1290,14 @@ ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Number learn: 'plus:' means: '+'.
  * Number on: '+' do: { :x
- *	☞ rate := 1.
- *	☞ currency := x qualification.
- *	(currency = 'euros') ifTrue: {
- *		rate := 2.
- *	}.
- *	↲ (⛏ plus: (x * rate)).
+ *     ☞ rate := 1.
+ *     ☞ currency := x qualification.
+ *     (currency = 'euros') true: {
+ *         rate := 2.
+ *     }.
+ *     ↲ (⛏ plus: (x * rate)).
  * }.
- * ☞ money := 3 dollars + 2 euros. #7
+ * ☞ money := 3 dollars + 2 euros.
  */
 ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), ctr_internal_cast2string( argumentList->object ), CTR_CATEGORY_PRIVATE_PROPERTY );
@@ -1358,14 +1331,13 @@ ctr_object* ctr_number_respond_to(ctr_object* myself, ctr_argument* argumentList
  *
  * Rounds up the recipient number and returns the next higher integer number
  * as a result.
+ * The example above applies the ceiling function to the recipient (4.5)
+ * returning a new number object (5).
  *
  * Usage:
  *
  * x := 4.5.
  * y = x ceil.
- *
- * The example above applies the ceiling function to the recipient (4.5)
- * returning a new number object (5).
  */
 ctr_object* ctr_number_ceil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(ceil(myself->value.nvalue));
@@ -1384,14 +1356,13 @@ ctr_object* ctr_number_round(ctr_object* myself, ctr_argument* argumentList) {
  * [Number] absolute
  *
  * Returns the absolute (unsigned, positive) value of the number.
+ * The example above strips the sign off the value -7 resulting
+ * in 7.
  *
  * Usage:
  *
  * x := -7.
- * y := x absolute. #y will be 7
- *
- * The example above strips the sign off the value -7 resulting
- * in 7.
+ * y := x absolute.
  */
 ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(fabs(myself->value.nvalue));
@@ -1401,14 +1372,13 @@ ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList) {
  * [Number] square root
  *
  * Returns the square root of the recipient.
+ * The example above takes the square root of 49, resulting in the
+ * number 7.
  *
  * Usage:
  *
  * ☞ x := 49.
  * ☞ y := x square root.
- *
- * The example above takes the square root of 49, resulting in the
- * number 7.
  */
 ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(sqrt(myself->value.nvalue));
@@ -1660,7 +1630,7 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 }
 
 /**
- * [String] skip: [number]
+ * [String] offset: [Number]
  *
  * Returns a string without the first X characters.
  */
@@ -1684,15 +1654,14 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 
 
 /**
- * [String] at: [position]
+ * [String] character: [Number]
  *
  * Returns the character at the specified position (UTF8 aware).
- * You may also use the alias '@'.
  *
  * Usage:
  *
- * ('hello' at: 2). #l
- * ('hello' @ 2). #l
+ * ('hello' character: 2).
+ *
  */
 ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
@@ -1711,14 +1680,12 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [String] byte: [position]
+ * [String] byte: [Number]
  *
  * Returns the byte at the specified position (in bytes).
- * Note that you cannot use the '@' message here because that will
- * return the unicode point at the specified position, not the byte.
  *
  * Usage:
- * ('abc' byte: 1). #98
+ * ('abc' byte: 1).
  */
 ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList) {
 	char x;
@@ -1732,7 +1699,7 @@ ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [String] first: [subject]
+ * [String] find: [subject]
  *
  * Returns the index (character number, not the byte!) of the
  * needle in the haystack.
@@ -1831,12 +1798,11 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentL
  * [String] [key]: [value]
  *
  * Replaces the character sequence 'key' with the contents of value.
+ * The example will produce the string '$ 10'.
  *
  * Usage:
  *
  * '$ money' money: 10.
- *
- * The example will produce the string '$ 10'.
  */
 ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* message = ctr_internal_cast2string( argumentList->object );
@@ -2028,9 +1994,9 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 }
 
 /**
- * [String] pattern: [String] do: [Block].
+ * [String] pattern: [String] process: [Block].
  *
- * Same as pattern:do:options: but without the options, no flags will
+ * Same as pattern:process:options: but without the options, no flags will
  * be send to the regex engine.
  */
 ctr_object* ctr_string_find_pattern_do( ctr_object* myself, ctr_argument* argumentList ) {
@@ -2043,7 +2009,7 @@ ctr_object* ctr_string_find_pattern_do( ctr_object* myself, ctr_argument* argume
 }
 
 /**
- * [String] matches: [String]
+ * [String] contains: [String]
  *
  * Returns True if the other string is a substring.
  */
@@ -2060,11 +2026,12 @@ ctr_object* ctr_string_contains( ctr_object* myself, ctr_argument* argumentList 
  *
  * Tests the pattern against the string and returns True if there is a match
  * and False otherwise.
+ * In the example: match will be True because there is a space in 'Hello World'.
  *
  * Usage:
  *
- * var match := 'Hello World' matches: '[:space:]'.
- * #match will be True because there is a space in 'Hello World'
+ * ☞ match := 'Hello World' matches: '[:space:]'.
+ *
  */
 ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argumentList ) {
 	regex_t pattern;
@@ -2101,14 +2068,13 @@ ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argum
  *
  * Trims a string. Removes surrounding white space characters
  * from string and returns the result as a new string object.
+ * The example above will strip all white space characters from the
+ * recipient on both sides of the text.
  *
  * Usage:
  *
  * ' hello ' remove surrounding spaces.
  *
- * The example above will strip all white space characters from the
- * recipient on both sides of the text. Also see: leftTrim and rightTrim
- * for variations of this message.
  */
 ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newString = NULL;
@@ -2133,7 +2099,7 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 
 
 /**
- * [String] toNumber
+ * [String] number
  *
  * Converts string to a number.
  */
@@ -2142,7 +2108,7 @@ ctr_object* ctr_string_to_number(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [String] toBoolean
+ * [String] boolean
  *
  * Converts string to boolean
  */
@@ -2205,7 +2171,7 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * a := 'abc' characters.
- * a count. #3
+ * a count.
  */
 ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_size i;
@@ -2347,7 +2313,7 @@ ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentL
 }
 
  /**
- * [String] escapeQuotes.
+ * @internal
  *
  * Escapes all single quotes in a string. Sending this message to a
  * string will cause all single quotes (') to be replaced with (\').
@@ -2380,7 +2346,7 @@ ctr_object* ctr_string_quotes_escape(ctr_object* myself, ctr_argument* argumentL
 
 
 /**
- * [String] hashWithKey: [String]
+ * [String] hash: [String]
  *
  * Returns the hash of the recipient String using the specified key.
  * The default hash in Citrine is the SipHash which is also used internally.
@@ -2412,12 +2378,12 @@ ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argument
  * each parameter has to be prefixed with
  * a colon (:).
  *
- * Examples:
+ * Usage:
  *
- * { Pen write: 'a simple code block'. } run.
- * { :param Pen write: param. } apply: 'write this!'.
- * { :a :b ^ a + b. } apply: 1 and: 2.
- * { :a :b :c ^ a + b + c. } apply: 1 and: 2 and: 3.
+ * { ✎ write: 'a simple code block'. } run.
+ * { :param ✎ write: param. } apply: 'write this!'.
+ * { :a :b ↲ a + b. } apply: 1 and: 2.
+ * { :a :b :c ↲ a + b + c. } apply: 1 and: 2 and: 3.
  *
  */
 ctr_object* ctr_build_block(ctr_tnode* node) {
@@ -2544,15 +2510,14 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
  *
  * Runs a block of code, depending on the outcome runs the other block
  * as long as the result of the first one equals boolean True.
+ * Example: Here we increment variable x by one until it reaches 6.
+ * While the number x is lower than 6 we keep incrementing it.
+ * Don't forget to use the return ↲ symbol in the first block.
  *
  * Usage:
  *
  * ☞ x := 0.
  * { x add: 1. } while: { ↲ (x < 6). }.
- *
- * Here we increment variable x by one until it reaches 6.
- * While the number x is lower than 6 we keep incrementing it.
- * Don't forget to use the return ↲ symbol in the first block.
  */
 ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
@@ -2583,13 +2548,13 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
  * The run message takes no arguments, if you want to use the block as a function
  * and send arguments, consider using the applyTo-family of messages instead.
  * This message just simply runs the block of code without any arguments.
- * 
+ * In the example we will run the code inside the block and display
+ * the greeting.
+ *
  * Usage:
  * 
- * { Pen write: 'Hello World'. } run. #prints 'Hello World'
+ * { ✎ write: 'Hello World'. } run.
  * 
- * The example above will run the code inside the block and display
- * the greeting.
  */
 ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
@@ -2603,23 +2568,22 @@ ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Sets a variable in a block of code. This how you can get closure-like
  * functionality.
- *
- * Usage:
- *
- * shout := { Pen write: (my message + '!!!'). }.
- * shout set: 'message' value: 'hello'.
- * shout run.
- *
- * Here we assign a block to a variable named 'shout'.
+ * In the example we assign a block to a variable named 'shout'.
  * We assign the string 'hello' to the variable 'message' inside the block.
  * When we invoke the block 'shout' by sending the run message without any
  * arguments it will display the string: 'hello!!!'.
- *
  * Similarly, you could use this technique to create a block that returns a
  * block that applies a formula (for instance simple multiplication) and then set the
  * multiplier to use in the formula. This way, you could create a block
  * building 'formula blocks'. This is how you implement use closures
  * in Citrine.
+ * 
+ * Usage:
+ * 
+ * shout := { ✎ write: (my message + '!!!'). }.
+ * shout set: 'message' value: 'hello'.
+ * shout run.
+ *
  */
 ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* key = ctr_internal_cast2string(argumentList->object);
@@ -2636,12 +2600,12 @@ ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
  * You can attach an object to the error, for instance
  * an error message.
  *
- * Example:
+ * Usage:
  *
  * {
  *   thisBlock error: 'oops!'.
  * } catch: { :errorMessage
- *   Pen write: errorMessage.
+ *   ✎ write: errorMessage.
  * }, run.
  */
 ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
@@ -2659,11 +2623,10 @@ ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * #Raise error on division by zero.
  * {
- *    var z := 4 / 0.
- * } catch: { :errorMessage
- *    Pen write: e, brk.
+ *    ☞ z := 4 / 0.
+ * } catch: { :e
+ *    ✎ write: e, brk.
  * }, run.
  */
 ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
@@ -2674,7 +2637,7 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Block] toString
+ * [Block] string
  *
  * Returns a string representation of the Block. This basic behavior, part
  * of any object will just return [Block]. Other objects typically override this
