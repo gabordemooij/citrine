@@ -1,1 +1,8 @@
-✎ write: 'Test no longer in use↵'.
+☞ notes := Map new.
+
+notes
+	talisker: 'strong',
+	springbank: 'peaty',
+	glenfarclas: 'elegant'.
+
+✎ write: ( ( notes entries sort: { :a :b ↲ (a > b). } ) join: ',' ), end.
