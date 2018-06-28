@@ -2626,7 +2626,7 @@ ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
  * {
  *    ☞ z := 4 / 0.
  * } catch: { :e
- *    ✎ write: e, brk.
+ *    ✎ write: e, end.
  * }, run.
  */
 ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
