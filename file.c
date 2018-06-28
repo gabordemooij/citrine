@@ -48,7 +48,7 @@ ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [File] toString
+ * [File] string
  *
  * Returns a string representation of the file. If a path has been associated
  * with this file, this message will return the path of the file on the file system.
@@ -68,14 +68,14 @@ ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Reads contents of a file. Send this message to a file to read the entire contents in
  * one go. For big files you might want to prefer a streaming approach to avoid
- * memory exhaustion (see readBytes etc).
+ * memory exhaustion.
+ * In the example we read the contents of the entire CSV file callled mydata.csv
+ * in the variable called data.
  *
  * Usage:
  *
- * data := File new: '/path/to/mydata.csv', read.
+ * ☞ data := File new: '/path/to/mydata.csv', read.
  *
- * In the example above we read the contents of the entire CSV file callled mydata.csv
- * in the variable called data.
  */
 ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -119,13 +119,15 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
  * entire contents of the specified string to the file in one go. The file object
  * responds to this message for convience reasons, however for big files it might
  * be a better idea to use the streaming API if possible (see readBytes etc.).
- *
- * data := '<xml>hello</xml>'.
+ * In the example we write the XML snippet in variable data to a file
+ * called myxml.xml in the current working directory.
+ * 
+ * Usage:
+ * 
+ * ☞ data := '<xml>hello</xml>'.
  * File new: 'myxml.xml', write: data.
  *
- * In the example above we write the XML snippet in variable data to a file
- * called myxml.xml in the current working directory.
- */
+ */ 
 ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0 );
@@ -289,13 +291,12 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
  * [File] open: [string]
  *
  * Open a file with using the specified mode.
+ * The example opens the file in f for reading and writing.
  *
  * Usage:
  *
- * f := File new: '/path/to/file'.
- * f open: 'r+'. #opens file for reading and writing
- *
- * The example above opens the file in f for reading and writing.
+ * ☞ f := File new: '/path/to/file'.
+ * f open: 'r+'.
  */
 ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pathObj = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -329,14 +330,13 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
  * [File] close.
  *
  * Closes the file represented by the recipient.
+ * The example above opens and closes a file.
  *
  * Usage:
  *
- * f := File new: '/path/to/file.txt'.
+ * ☞ f := File new: '/path/to/file.txt'.
  * f open: 'r+'.
  * f close.
- *
- * The example above opens and closes a file.
  */
 ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.rvalue == NULL) return myself;
@@ -350,19 +350,18 @@ ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [File] readBytes: [Number].
+ * [File] read bytes: [Number].
  *
  * Reads a number of bytes from the file.
+ * The example reads 10 bytes from the file represented by f
+ * and puts them in buffer x.
  *
  * Usage:
  *
- * f := File new: '/path/to/file.txt'.
+ * ☞ f := File new: '/path/to/file.txt'.
  * f open: 'r+'.
- * x := f readBytes: 10.
+ * ☞ x := f read bytes: 10.
  * f close.
- *
- * The example above reads 10 bytes from the file represented by f
- * and puts them in buffer x.
  */
 ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) {
 	int bytes;
@@ -385,20 +384,20 @@ ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [File] writeBytes: [String].
+ * [File] write bytes: [String].
  *
  * Takes a string and writes the bytes in the string to the file
  * object. Returns the number of bytes actually written.
+ * The example above writes 'Hello World' to the specified file as bytes.
+ * The number of bytes written is returned in variable n.
  *
  * Usage:
  *
- * f := File new: '/path/to/file.txt'.
+ * ☞ f := File new: '/path/to/file.txt'.
  * f open: 'r+'.
- * n := f writeBytes: 'Hello World'.
+ * ☞ n := f write bytes: 'Hello World'.
  * f close.
  *
- * The example above writes 'Hello World' to the specified file as bytes.
- * The number of bytes written is returned in variable n.
  */
 ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList) {
 	int bytes, written;
@@ -419,14 +418,13 @@ ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList)
  *
  * Moves the file pointer to the specified position in the file
  * (relative to the current position).
+ * The example opens a file for reading and moves the
+ * pointer to position 10 (meaning 10 bytes from the beginning of the file).
+ * The seek value may be negative.
  *
  * Usage:
  *
  * file open: 'r', seek: 10.
- *
- * The example above opens a file for reading and moves the
- * pointer to position 10 (meaning 10 bytes from the beginning of the file).
- * The seek value may be negative.
  */
 ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
 	int offset;
@@ -446,16 +444,16 @@ ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
  * [File] rewind.
  *
  * Rewinds the file. Moves the file pointer to the beginning of the file.
+ * The example reads the same sequence of 10 bytes twice, resulting
+ * in variable x and y being equal.
  *
  * Usage:
  *
  * file open: 'r'.
- * x := file readBytes: 10. #read 10 bytes
- * file rewind.        #rewind, set pointer to begin again
- * y := file readBytes: 10. #re-read same 10 bytes
+ * ☞ x := file read bytes: 10.
+ * file rewind.
+ * ☞ y := file read bytes: 10.
  *
- * The example above reads the same sequence of 10 bytes twice, resulting
- * in variable x and y being equal.
  */
 ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList) {
 	int error;
@@ -474,17 +472,17 @@ ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList)
  *
  * Moves the file pointer to the end of the file. Use this in combination with
  * negative seek operations.
+ * The example will read the last 10 bytes of the file. This is
+ * accomplished by first moving the file pointer to the end of the file,
+ * then putting it back 10 bytes (negative number), and then reading 10
+ * bytes.
  *
  * Usage:
  *
  * file open: 'r'.
  * file end.
- * x := file seek: -10, readBytes: 10.
+ * ☞ x := file seek: -10, read bytes: 10.
  *
- * The example above will read the last 10 bytes of the file. This is
- * accomplished by first moving the file pointer to the end of the file,
- * then putting it back 10 bytes (negative number), and then reading 10
- * bytes.
  */
 ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList) {
 	int error;
@@ -584,7 +582,7 @@ ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * files := File list: '/tmp/testje'.
+ * ☞ files := File list: '/tmp/testje'.
  *
  */
 ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {

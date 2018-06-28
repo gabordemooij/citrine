@@ -217,7 +217,7 @@ ctr_object* ctr_gc_memory(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Program] memoryLimit
+ * [Program] memory: [Number]
  *
  * Sets the memory limit, if this limit gets exceeded the program will produce
  * an out-of-memory error.
@@ -249,20 +249,12 @@ ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [Program] shell: [String]
  *
- * Performs a Shell operation. The Shell object uses a fluid API, so you can
- * mix shell code with programming logic. For instance to list the contents
- * of a directory use:
+ * Performs a Shell operation.
  *
- * Shell ls
+ * Usage:
  *
- * This will output the contents of the current working directly, you
- * can also pass keyword messages like so:
+ * ☞ files := Shell ls
  *
- * Shell echo: 'Hello from the Shell!'.
- *
- * The example above will output the specified message to the console.
- * Every message you send will be turned into a string and dispatched to
- * the 'call:' message.
  */
 ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList) {
 	FILE* stream;
@@ -331,7 +323,7 @@ ctr_object* ctr_program_exit(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  *
- * x := Command env: 'MY_PATH_VAR'.
+ * ☞ x := Command setting: 'MY_PATH_VAR'.
  */
 ctr_object* ctr_program_get_env(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* envVarNameObj;
@@ -370,20 +362,20 @@ ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [Program] waitForInput
+ * [Program] ask
  *
  * Ask a question on the command-line, resumes program
  * only after pressing the enter key.
  * Only reads up to 100 characters.
+ * The example asks the user for his/her name and
+ * then displays the input received.
  *
  * Usage:
  *
- * Pen write: 'What is your name ?'.
- * x := Command waitForInput.
- * Pen write: 'Hello ' + x + ' !', brk.
+ * ✎ write: 'What is your name ?'.
+ * ☞ x := Program ask.
+ * ✎ write: ('Hello you' you: x), end.
  *
- * The example above asks the user for his/her name and
- * then displays the input received.
  */
 ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentList) {
 	int c;
@@ -429,8 +421,8 @@ ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentL
  *
  * echo "hello" | ctr test.ctr
  *
- * x := Program input.
- * Pen write: x. #hello (without newline)
+ * ☞ x := Program input.
+ * ✎ write: x.
  *
  */
 ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList) {
@@ -468,43 +460,6 @@ ctr_object* ctr_program_flush(ctr_object* myself, ctr_argument* ctr_argumentList
 }
 
 /**
- * [Program] pid
- *
- * Returns the process identification number associated with the
- * program. If the program instance refers to the currently running
- * program PID 0 will be returned.
- */
-ctr_object* ctr_program_pid(ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_object* pidObject;
-	pidObject = ctr_internal_object_find_property(
-		myself,
-		ctr_build_string_from_cstring("pid"),
-		CTR_CATEGORY_PRIVATE_PROPERTY
-	);
-	if (pidObject == NULL) return CtrStdNil;
-	return ctr_internal_cast2number( pidObject );
-}
-
-/**
- * [Program] toString
- *
- * Returns a string representation of the program. This will be something like
- * [PID:2833], or in case of the currently active program: [PID:0].
- */
-ctr_object* ctr_program_to_string(ctr_object* myself, ctr_argument* argumentList ) {
-	return ctr_internal_cast2string(ctr_program_pid(myself, argumentList));
-}
-
-/**
- * [Program] number
- *
- * Returns the program pid as a number.
- */
-ctr_object* ctr_program_to_number(ctr_object* myself, ctr_argument* argumentList ) {
-       return ctr_internal_cast2number(ctr_program_pid(myself, argumentList));
-}
-
-/**
  * [Program] error: [String]
  *
  * Logs the specified message string using syslog using log level LOG_ERR.
@@ -535,7 +490,7 @@ ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * { ↲ file lock. }
- * whileFalse: { ⏰ wait: 1. }.
+ * false: { ⏰ wait: 1. }.
  *
  */
 ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
@@ -651,8 +606,9 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
  * Syncs a clock. Copies the time AND zone from the other clock.
  *
  * Usage:
- * clock := Clock new: timeStamp.
- * copyClock := Clock new like: clock.
+ * 
+ * ☞ clock := Clock new: timestamp.
+ * ☞ copied := Clock new like: clock.
  */
 ctr_object* ctr_clock_like( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* otherClock;
@@ -696,7 +652,7 @@ ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [Clock] zone: [Number]
+ * [Clock] year: [Number]
  *
  * Sets the year of the clock.
  */
@@ -705,7 +661,7 @@ ctr_object* ctr_clock_set_year( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [Clock] zone: [Number]
+ * [Clock] month: [Number]
  *
  * Sets the month of the clock.
  */
@@ -714,7 +670,7 @@ ctr_object* ctr_clock_set_month( ctr_object* myself, ctr_argument* argumentList 
 }
 
 /**
- * [Clock] zone: [Number]
+ * [Clock] day: [Number]
  *
  * Sets the day of the clock.
  */
@@ -723,7 +679,7 @@ ctr_object* ctr_clock_set_day( ctr_object* myself, ctr_argument* argumentList ) 
 }
 
 /**
- * [Clock] zone: [Number]
+ * [Clock] hour: [Number]
  *
  * Sets the hour of the clock.
  */
@@ -732,7 +688,7 @@ ctr_object* ctr_clock_set_hour( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [Clock] zone: [Number]
+ * [Clock] minute: [Number]
  *
  * Sets the minute of the clock.
  */
@@ -741,7 +697,7 @@ ctr_object* ctr_clock_set_minute( ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [Clock] zone: [Number]
+ * [Clock] second: [Number]
  *
  * Sets the second of the clock.
  */
@@ -804,7 +760,7 @@ ctr_object* ctr_clock_second( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Clock] yearday
+ * [Clock] day of the year
  *
  * Returns day number of the year.
  */
@@ -839,7 +795,9 @@ ctr_object* ctr_clock_weekday( ctr_object* myself, ctr_argument* argumentList ) 
  * Returns the UNIX time stamp representation of the time.
  * Note: this is the time OF CREATION OF THE OBJECT. To get the actual time use:
  *
- * [Clock] new time.
+ * Usage:
+ *
+ * ☞ time := Clock new time.
  */
 ctr_object* ctr_clock_time( ctr_object* myself, ctr_argument* argumentList ) {
 	time_t timeStamp;
@@ -901,7 +859,7 @@ ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Clock] toString
+ * [Clock] string
  *
  * Returns a string describing the date and time
  * represented by the clock object. On receiving this message, the Clock
@@ -911,12 +869,11 @@ ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList ) {
  *
  * Usage:
  *
- * #build a time machine! ;)
  * ⏰ on: 'format:' do: { ↲ 'beautiful moment'. }.
  * ⏰ on: 'time' do: { ↲ '999'. }.
  *
- * write: ⏰, brk.
- * ✎ write: ⏰ number, brk.
+ * ✎ write: ⏰, end.
+ * ✎ write: ⏰ number, end.
  */
 ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_argument* newArgumentList;
@@ -931,7 +888,7 @@ ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList 
 /**
  * [Clock] number
  *
- * Returns a time stamp describing the date and time
+ * Returns a timestamp describing the date and time
  * represented by the clock object. On receiving this message, the Clock
  * instance will send the message 'time' to itself
  * and return the answer as a number. Note that you
@@ -939,7 +896,6 @@ ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList 
  *
  * Usage:
  *
- * #build a time machine! ;)
  * ⏰ on: 'format:' do: { ↲ 'beautiful moment'. }.
  * ⏰ on: 'time' do: { ↲ '999'. }.
  *
@@ -1037,9 +993,9 @@ ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, ui
  *
  * Usage:
  *
- * clock add: 3 minutes. #adds 3 minutes
- * clock add: 1 hour.    #adds 1 hour
- * clock add: 2 second.  #adds 2 seconds
+ * clock add: 3 minutes.
+ * clock add: 1 hour.
+ * clock add: 2 second.
  */
 ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_change( myself, argumentList, 1 );
@@ -1082,21 +1038,11 @@ ctr_object* ctr_console_write(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Pen] brk
+ * [Pen] end
  *
  * Outputs a newline character.
  */
 ctr_object* ctr_console_brk(ctr_object* myself, ctr_argument* argumentList) {
 	fwrite("\n", sizeof(char), 1, stdout);
-	return myself;
-}
-
-/**
- * [Pen] tab
- *
- * Prints a tab character to the console output.
- */
-ctr_object* ctr_console_tab(ctr_object* myself, ctr_argument* argumentList) {
-	fwrite( "\t", sizeof(char), strlen("\t"), stdout);
 	return myself;
 }

@@ -1,7 +1,7 @@
 Sending toString to Program yields a PID string:
-Nil
+[Object]
 Sending toNumber to Program yields a PID number:
-0
+1
 Sending toString to Dice yields a random number string:
 666
 Sending toNumber to Dice yields a random number:
@@ -14,5 +14,5 @@ Sending toString to File yields a path:
 [File (no path)]
 Sending toNumber to File yields a 1:
 1
-(Map new) put:(Nil) at:'Program', put:(666) at:'dice'
-List ← (666) ; (Nil)
+(Map new) put:([Object]) at:'Program', put:(666) at:'dice'
+List ← (666) ; ([Object])
