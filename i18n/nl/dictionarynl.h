@@ -183,7 +183,6 @@
 #define CTR_DICT_SECOND_LAST     "een-na-laatste"
 #define CTR_DICT_FILL_WITH       "vul:met:"
 #define CTR_DICT_SPLICE          "vervang:lengte:door:"
-#define CTR_DICT_KEYS            "sleutels"
 #define CTR_DICT_VALUES          "waarden"
 #define CTR_DICT_ENTRIES         "ingangen"
 #define CTR_DICT_COMPARE_SET     "vergelijk:"

@@ -179,7 +179,6 @@ Boolean first.
 Boolean second last.
 Boolean fill: 0 with: 0 .
 Boolean replace: 0 length: 0 with: 0 .
-Boolean keys.
 Boolean values.
 Boolean entries.
 Boolean compare: 0 .
@@ -365,7 +364,6 @@ True first.
 True second last.
 True fill: 0 with: 0 .
 True replace: 0 length: 0 with: 0 .
-True keys.
 True values.
 True entries.
 True compare: 0 .
@@ -551,7 +549,6 @@ False first.
 False second last.
 False fill: 0 with: 0 .
 False replace: 0 length: 0 with: 0 .
-False keys.
 False values.
 False entries.
 False compare: 0 .
@@ -740,7 +737,6 @@ Number first.
 Number second last.
 Number fill: 0 with: 0 .
 Number replace: 0 length: 0 with: 0 .
-Number keys.
 Number values.
 Number entries.
 Number compare: 0 .
@@ -927,7 +923,6 @@ String first.
 String second last.
 String fill: 0 with: 0 .
 String replace: 0 length: 0 with: 0 .
-String keys.
 String values.
 String entries.
 String compare: 0 .
@@ -1113,7 +1108,6 @@ Object first.
 Object second last.
 Object fill: 0 with: 0 .
 Object replace: 0 length: 0 with: 0 .
-Object keys.
 Object values.
 Object entries.
 Object compare: 0 .
@@ -1303,7 +1297,6 @@ List second last.
 List fill: 0 with: 0 .
 List replace: 0 length: 0 with: 0 .
 error
-List keys.
 List values.
 List entries.
 List compare: 0 .
@@ -1491,7 +1484,6 @@ Map first.
 Map second last.
 Map fill: 0 with: 0 .
 Map replace: 0 length: 0 with: 0 .
-Map keys.
 Map values.
 Map entries.
 Map compare: 0 .
@@ -1680,7 +1672,6 @@ File first.
 File second last.
 File fill: 0 with: 0 .
 File replace: 0 length: 0 with: 0 .
-File keys.
 File values.
 File entries.
 File compare: 0 .
@@ -1866,7 +1857,6 @@ Moment first.
 Moment second last.
 Moment fill: 0 with: 0 .
 Moment replace: 0 length: 0 with: 0 .
-Moment keys.
 Moment values.
 Moment entries.
 Moment compare: 0 .

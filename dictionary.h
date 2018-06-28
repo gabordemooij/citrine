@@ -183,7 +183,6 @@
 #define CTR_DICT_SECOND_LAST     "second last"
 #define CTR_DICT_FILL_WITH       "fill:with:"
 #define CTR_DICT_SPLICE          "replace:length:with:"
-#define CTR_DICT_KEYS            "keys"
 #define CTR_DICT_VALUES          "values"
 #define CTR_DICT_ENTRIES         "entries"
 #define CTR_DICT_COMPARE_SET     "compare:"
