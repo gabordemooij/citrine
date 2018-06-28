@@ -82,8 +82,6 @@ int main(int argc, char* argv[]) {
 	ctr_source_map_head = NULL;
 	ctr_source_mapping = 0;
 	CtrStdFlow = NULL;
-	ctr_program_security_profile = 0;
-	ctr_program_tick = 0;
 	ctr_source_mapping = 1;
 	ctr_clex_keyword_me_icon = CTR_DICT_ME_ICON;
 	ctr_clex_keyword_my_icon = CTR_DICT_MY_ICON;

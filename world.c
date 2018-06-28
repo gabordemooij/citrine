@@ -929,13 +929,6 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	ctr_object* msg = NULL;
 	int argCount;
 	if (CtrStdFlow != NULL) return CtrStdNil; /* Error mode, ignore subsequent messages until resolved. */
-	if ( ctr_program_security_profile & CTR_SECPRO_COUNTDOWN ) {
-		if ( ctr_program_tick > ctr_program_maxtick ) {
-			fprintf(stderr,"This program has exceeded the maximum number of messages.\n" );
-			exit(1);
-		}
-		ctr_program_tick += 1;
-	}
 	methodObject = NULL;
 	searchObject = receiverObject;
 	if (vlen > 1 && message[0] == '`') {
@@ -979,27 +972,9 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	}
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTNATFUNC) {
 		funct = methodObject->value.fvalue;
-		if ( ctr_program_security_profile & CTR_SECPRO_EVAL ) {
-			messageApproved = 0;
-			for ( i = 0; i < 15; i ++ ) {
-				if ( funct == ctr_secpro_eval_whitelist[i] ) {
-					messageApproved = 1;
-					break;
-				}
-			}
-			if ( !messageApproved ) {
-				char* nmsg = ctr_heap_allocate_cstring( msg );
-				fprintf(stderr, "Native message not allowed in eval %s.\n", nmsg );
-				exit(1);
-			}
-		}
 		result = funct(receiverObject, argumentList);
 	}
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTBLOCK ) {
-		if ( ctr_program_security_profile & CTR_SECPRO_EVAL ) {
-			fprintf(stderr, "Custom message not allowed in eval.\n" );
-			exit(1);
-		}
 		result = ctr_block_run(methodObject, argumentList, receiverObject);
 	}
 	if (msg) msg->info.sticky = 0;
