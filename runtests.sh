@@ -115,13 +115,16 @@ for i in $(find tests -name 'test*.ctr'); do
 	rm tests/runner4.ctr ; echo "Program tidiness: 8." > tests/runner4.ctr ; cat ${fitem} >> tests/runner4.ctr
 	rm tests/runner5.ctr ; echo "Program tidiness: 9." > tests/runner5.ctr ; cat ${fitem} >> tests/runner5.ctr
 	rm tests/runner6.ctr ; echo "Program tidiness: 12." > tests/runner6.ctr ; cat ${fitem} >> tests/runner6.ctr
+	directive=`head -n1 $fitem`
 	echo "[translating...]"
-	rm tests/runner7.ctr ; ./ctr -t ennl.dict tests/runner1.ctr 1> tests/runner7.ctr 2> tests/terrors7.log
-	rm tests/runner8.ctr ; ./ctr -t ennl.dict tests/runner2.ctr 1> tests/runner8.ctr 2> tests/terrors8.log
-	rm tests/runner9.ctr ; ./ctr -t ennl.dict tests/runner3.ctr 1> tests/runner9.ctr 2> tests/terrors9.log
-	rm tests/runner10.ctr ; ./ctr -t ennl.dict tests/runner4.ctr 1> tests/runner10.ctr 2> tests/terrors10.log
-	rm tests/runner11.ctr ; ./ctr -t ennl.dict tests/runner5.ctr 1> tests/runner11.ctr 2> tests/terrors11.log
-	rm tests/runner12.ctr ; ./ctr -t ennl.dict tests/runner6.ctr 1> tests/runner12.ctr 2> tests/terrors12.log
+	if [ "$directive" != "'SINGLE_LANGUAGE'." ]; then
+		rm tests/runner7.ctr ; ./ctr -t ennl.dict tests/runner1.ctr 1> tests/runner7.ctr 2> tests/terrors7.log
+		rm tests/runner8.ctr ; ./ctr -t ennl.dict tests/runner2.ctr 1> tests/runner8.ctr 2> tests/terrors8.log
+		rm tests/runner9.ctr ; ./ctr -t ennl.dict tests/runner3.ctr 1> tests/runner9.ctr 2> tests/terrors9.log
+		rm tests/runner10.ctr ; ./ctr -t ennl.dict tests/runner4.ctr 1> tests/runner10.ctr 2> tests/terrors10.log
+		rm tests/runner11.ctr ; ./ctr -t ennl.dict tests/runner5.ctr 1> tests/runner11.ctr 2> tests/terrors11.log
+		rm tests/runner12.ctr ; ./ctr -t ennl.dict tests/runner6.ctr 1> tests/runner12.ctr 2> tests/terrors12.log
+	fi
 	echo "[running...]";
 	echo "test" | ./ctr ${fitem} 1>/tmp/a0 2>/tmp/b0
 	echo "test" | ./ctr tests/runner1.ctr 1>/tmp/a1 2>/tmp/b1
@@ -130,12 +133,14 @@ for i in $(find tests -name 'test*.ctr'); do
 	echo "test" | ./ctr tests/runner4.ctr 1>/tmp/a4 2>/tmp/b4
 	echo "test" | ./ctr tests/runner5.ctr 1>/tmp/a5 2>/tmp/b5
 	echo "test" | ./ctr tests/runner6.ctr 1>/tmp/a6 2>/tmp/b6
-	echo "test" | ./ctrnl tests/runner7.ctr 1>/tmp/a7 2>/tmp/b7
-	echo "test" | ./ctrnl tests/runner8.ctr 1>/tmp/a8 2>/tmp/b8
-	echo "test" | ./ctrnl tests/runner9.ctr 1>/tmp/a9 2>/tmp/b9
-	echo "test" | ./ctrnl tests/runner10.ctr 1>/tmp/a10 2>/tmp/b10
-	echo "test" | ./ctrnl tests/runner11.ctr 1>/tmp/a11 2>/tmp/b11
-	echo "test" | ./ctrnl tests/runner12.ctr 1>/tmp/a12 2>/tmp/b12
+	if [ "$directive" != "'SINGLE_LANGUAGE'." ]; then
+		echo "test" | ./ctrnl tests/runner7.ctr 1>/tmp/a7 2>/tmp/b7
+		echo "test" | ./ctrnl tests/runner8.ctr 1>/tmp/a8 2>/tmp/b8
+		echo "test" | ./ctrnl tests/runner9.ctr 1>/tmp/a9 2>/tmp/b9
+		echo "test" | ./ctrnl tests/runner10.ctr 1>/tmp/a10 2>/tmp/b10
+		echo "test" | ./ctrnl tests/runner11.ctr 1>/tmp/a11 2>/tmp/b11
+		echo "test" | ./ctrnl tests/runner12.ctr 1>/tmp/a12 2>/tmp/b12
+	fi
 	result[0]=`cat /tmp/a0 /tmp/b0`
 	result[1]=`cat /tmp/a1 /tmp/b1`
 	result[2]=`cat /tmp/a2 /tmp/b2`
@@ -166,7 +171,6 @@ for i in $(find tests -name 'test*.ctr'); do
 		echo $result[0]
 		exit 1
 	fi
-	directive=`head -n1 $fitem`
     if [ "$directive" != "'SINGLE_LANGUAGE'." ]; then
 		for q in {1..12}
 		do
