@@ -1,5 +1,16 @@
 Program memory: 600000.
 Program tidiness: 4.
+
+String on: 'html' do: {
+	↲ (
+		⛏
+		replace: '&' with: '&amp;',
+		replace: '<' with: '&lt;',
+		replace: '>' with: '&gt;',
+		replace: '"' with: '&quot;'
+	).
+}.
+
 ☞ template := (File new: 'template.html') read.
 ☞ menu  := '<ul>'.
 ☞ files := List ←
@@ -37,13 +48,11 @@ Program tidiness: 4.
 				☞ endsWithCode := False.
 				
 				☞ n := 2.
+				
 				{
-					line := lines position: n. 
-					↲ ((line find: '*/') = -1). 
-				}
-				true: {
 						line := line replace: '\\' with: '\\\\'.
 						☞ contentLine := ((line offset: 2) html).
+						
 						
 						((contentLine find: 'Usage:') > -1) true: {
 							endsWithCode := True.
@@ -51,17 +60,25 @@ Program tidiness: 4.
 						}.
 						content append: contentLine + '\n'.
 						n add: 1.
+				}
+				while: 
+				{
+					line := lines position: n. 
+					↲ ((line find: '*/') = -1). 
 				}.
+				
 				endsWithCode true: {
 					content append: '</pre><p>'.
 				}.
 				page := page replace: '{{content}}' with: content.
 				☞ filename := (headline offset: 3) 
 					lowercase
-					pattern: '[^↲a-z0-9]' process: {↲ ''.}.
+					pattern: '[^a-z0-9]' process: {↲ ''.}.
+					
+				
 				menu append: '<li><a href="' + filename + '.ctr">' + (chapter html) + '</a></li>'.
 				☞ pageFile := (File new: ('pages/' + filename + '.ctr')).
-				✎ write: pageFile path, brk.
+				✎ write: pageFile path, end.
 				pageFile write: page.
 			}.
 		}.
