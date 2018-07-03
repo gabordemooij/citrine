@@ -1,5 +1,6 @@
 (Lijst nieuw) zet:'a"b' bij:'test'
-(Lijst nieuw) zet:(Reeks ← 1 ; 2 ; (Reeks ← 3 ; 4) ; ((Lijst nieuw) zet:Niets bij:Reeks ← 3 ; 4, zet:1 bij:'foo')) bij:'nested', zet:Onwaar bij:'legend', zet:27 bij:'age', zet:'Jack' bij:'name'
+Invalid JSON.
+(Lijst nieuw) zet:(Reeks ← 1 ; 2 ; (Reeks ← 3 ; 4) ; ((Lijst nieuw) zet:(Reeks ← 3 ; 4) bij:'bar', zet:1 bij:'foo')) bij:'nested', zet:Onwaar bij:'legend', zet:27 bij:'age', zet:'Jack' bij:'name'
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

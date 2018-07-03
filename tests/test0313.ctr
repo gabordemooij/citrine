@@ -62,7 +62,7 @@ String on: 'unescape:' do: { :text
 			"length":15
 		},
 		"insects":null,
-		"dog":
+		"dog":null
 	}
 }'.
 

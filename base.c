@@ -2477,7 +2477,6 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	}
 	ctr_close_context();
 	/* assign result to lower context to prevent it from being GC'ed. */
-	//printf(">pinning result: %s (%p) to context: %p (%d) \n", ctr_heap_allocate_cstring(ctr_internal_cast2string(result)),result,ctr_contexts[ctr_context_id], ctr_context_id );
 	
 	if (ctr_in_message) {
 	char* str = ctr_heap_allocate(40);

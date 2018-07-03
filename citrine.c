@@ -77,7 +77,7 @@ int main(int argc, char* argv[]) {
 	ctr_argc = argc;
 	ctr_argv = argv;
 	ctr_in_message = 0;
-	ctr_gc_memlimit = 8388608;
+	ctr_gc_memlimit = 8500000;
 	ctr_callstack_index = 0;
 	ctr_source_map_head = NULL;
 	ctr_source_mapping = 0;
