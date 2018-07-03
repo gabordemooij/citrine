@@ -229,6 +229,18 @@ ctr_object* ctr_jsmn_dump( char* data, jsmntok_t** tt ) {
 	b = NULL;
 	int i;
 	jsmntok_t* t = *(tt);
+	ctr_size len = strlen(data);
+	if (CtrStdFlow != NULL) {
+		return CtrStdNil;
+	}
+	if (t == NULL) {
+		CtrStdFlow = ctr_error_text("Invalid JSON.");
+		return CtrStdNil;
+	}
+	if (t->start < 0 || t->end < 0 || t->start >= len || ((t->end - t->start) < 0) || (( t->end - t->start ) > len) || (t->start == t->end)) {
+		CtrStdFlow = ctr_error_text("Invalid JSON.");
+		return CtrStdNil;
+	}
 	if (t->type == JSMN_STRING) {
 		answer = ctr_build_string( (data + t->start), (t->end - t->start) );
 		a = ctr_heap_allocate( sizeof(ctr_argument) );
@@ -271,6 +283,7 @@ ctr_object* ctr_jsmn_dump( char* data, jsmntok_t** tt ) {
 		for (i = 0; i<(t->size); i+=1) {
 			ctr_object* property = ctr_jsmn_dump( data, tt );
 			ctr_object* value = ctr_jsmn_dump( data, tt );
+			if (CtrStdFlow != NULL) break;
 			a->object = value;
 			b->object = property;
 			a->next = b;
@@ -280,8 +293,8 @@ ctr_object* ctr_jsmn_dump( char* data, jsmntok_t** tt ) {
 		ctr_heap_free(b);
 	}
 	else {
+		CtrStdFlow = ctr_error_text("Invalid JSON.");
 		answer = CtrStdNil;
-		*(tt)+=1;
 	}
 	return answer;
 }
@@ -315,9 +328,7 @@ ctr_object* ctr_json_parse(ctr_object* myself, ctr_argument* argumentList) {
 	s = jsmn_parse(&jsmn, jsonString, strlen(jsonString), NULL, 0);
 	if ( s <= 0 ) {
 		ctr_heap_free( jsonString );
-		if ( s == JSMN_ERROR_INVAL ) {
-			CtrStdFlow = ctr_error_text("Bad token, JSON string is corrupted.");
-		}
+		CtrStdFlow = ctr_error_text("Invalid JSON.");
 		return CtrStdNil;
 	}
 	size = (ctr_size) s;
