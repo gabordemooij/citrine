@@ -155,7 +155,7 @@ for i in $(find tests -name 'test*.ctr'); do
 	result[11]=`cat /tmp/a11 /tmp/b11`
 	result[12]=`cat /tmp/a12 /tmp/b12`
 	expected=`cat $fexpect`
-	expectednl=''
+	expectednl=$expected
 	if [ -f $fexpectnl ]; then
 		expectednl=`cat $fexpectnl`
 	fi
