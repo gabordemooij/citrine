@@ -374,9 +374,9 @@ void ctr_close_context();
 /**
  * Global Scoping variables
  */
-ctr_object* ctr_contexts[300];
+ctr_object* ctr_contexts[301];
 int ctr_context_id;
-ctr_tnode* ctr_callstack[300];
+ctr_tnode* ctr_callstack[301];
 uint8_t ctr_callstack_index;
 
 /**
