@@ -4,7 +4,7 @@
 ✎ message: 'write:' arguments: (List ← 'Hello World'), end. 
 
 Number on: 'isbetween:and:' do: { :a :b
-	↲ ((⛏ ≥ a) & (⛏ ≤ b)).
+	↲ ((⛏ ≥ a) and: (⛏ ≤ b)).
 }.
 
 str := 'isbetween:and:'.

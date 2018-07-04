@@ -15,15 +15,12 @@ Boolean ⛏ 0.
 Boolean ⚿ 0.
 Boolean • 0.
 Boolean = 0.
-Boolean & 0.
-Boolean | 0.
 Boolean + 0.
 Boolean - 0.
 Boolean * 0.
 Boolean / 0.
 Boolean > 0.
 Boolean < 0.
-Boolean % 0.
 Boolean ? 0.
 Boolean ✎ 0.
 Boolean ← 0.
@@ -33,6 +30,9 @@ Boolean ≠ 0.
 Boolean new.
 Boolean new: 0 .
 Boolean equals: 0 .
+Boolean and: 0 .
+Boolean or: 0 .
+Boolean modulo: 0 .
 Boolean nor: 0 .
 Boolean on: 0 do: 0 .
 error
@@ -200,15 +200,12 @@ True ⛏ 0.
 True ⚿ 0.
 True • 0.
 True = 0.
-True & 0.
-True | 0.
 True + 0.
 True - 0.
 True * 0.
 True / 0.
 True > 0.
 True < 0.
-True % 0.
 True ? 0.
 True ✎ 0.
 True ← 0.
@@ -218,6 +215,9 @@ True ≠ 0.
 True new.
 True new: 0 .
 True equals: 0 .
+True and: 0 .
+True or: 0 .
+True modulo: 0 .
 True nor: 0 .
 True on: 0 do: 0 .
 error
@@ -385,15 +385,12 @@ False ⛏ 0.
 False ⚿ 0.
 False • 0.
 False = 0.
-False & 0.
-False | 0.
 False + 0.
 False - 0.
 False * 0.
 False / 0.
 False > 0.
 False < 0.
-False % 0.
 False ? 0.
 False ✎ 0.
 False ← 0.
@@ -403,6 +400,9 @@ False ≠ 0.
 False new.
 False new: 0 .
 False equals: 0 .
+False and: 0 .
+False or: 0 .
+False modulo: 0 .
 False nor: 0 .
 False on: 0 do: 0 .
 error
@@ -570,8 +570,6 @@ Number ⛏ 0.
 Number ⚿ 0.
 Number • 0.
 Number = 0.
-Number & 0.
-Number | 0.
 Number + 0.
 Number - 0.
 Number * 0.
@@ -579,8 +577,6 @@ Number / 0.
 error
 Number > 0.
 Number < 0.
-Number % 0.
-error
 Number ? 0.
 Number ✎ 0.
 Number ← 0.
@@ -590,6 +586,10 @@ Number ≠ 0.
 Number new.
 Number new: 0 .
 Number equals: 0 .
+Number and: 0 .
+Number or: 0 .
+Number modulo: 0 .
+error
 Number nor: 0 .
 Number on: 0 do: 0 .
 error
@@ -758,15 +758,12 @@ String ⛏ 0.
 String ⚿ 0.
 String • 0.
 String = 0.
-String & 0.
-String | 0.
 String + 0.
 String - 0.
 String * 0.
 String / 0.
 String > 0.
 String < 0.
-String % 0.
 String ? 0.
 String ✎ 0.
 String ← 0.
@@ -776,6 +773,9 @@ String ≠ 0.
 String new.
 String new: 0 .
 String equals: 0 .
+String and: 0 .
+String or: 0 .
+String modulo: 0 .
 String nor: 0 .
 String on: 0 do: 0 .
 error
@@ -944,15 +944,12 @@ Object ⛏ 0.
 Object ⚿ 0.
 Object • 0.
 Object = 0.
-Object & 0.
-Object | 0.
 Object + 0.
 Object - 0.
 Object * 0.
 Object / 0.
 Object > 0.
 Object < 0.
-Object % 0.
 Object ? 0.
 Object ✎ 0.
 Object ← 0.
@@ -962,6 +959,9 @@ Object ≠ 0.
 Object new.
 Object new: 0 .
 Object equals: 0 .
+Object and: 0 .
+Object or: 0 .
+Object modulo: 0 .
 Object nor: 0 .
 Object on: 0 do: 0 .
 error
@@ -1129,15 +1129,12 @@ List ⛏ 0.
 List ⚿ 0.
 List • 0.
 List = 0.
-List & 0.
-List | 0.
 List + 0.
 List - 0.
 List * 0.
 List / 0.
 List > 0.
 List < 0.
-List % 0.
 List ? 0.
 List ✎ 0.
 List ← 0.
@@ -1147,6 +1144,9 @@ List ≠ 0.
 List new.
 List new: 0 .
 List equals: 0 .
+List and: 0 .
+List or: 0 .
+List modulo: 0 .
 List nor: 0 .
 List on: 0 do: 0 .
 error
@@ -1318,15 +1318,12 @@ Map ⛏ 0.
 Map ⚿ 0.
 Map • 0.
 Map = 0.
-Map & 0.
-Map | 0.
 Map + 0.
 Map - 0.
 Map * 0.
 Map / 0.
 Map > 0.
 Map < 0.
-Map % 0.
 Map ? 0.
 Map ✎ 0.
 Map ← 0.
@@ -1336,6 +1333,9 @@ Map ≠ 0.
 Map new.
 Map new: 0 .
 Map equals: 0 .
+Map and: 0 .
+Map or: 0 .
+Map modulo: 0 .
 Map nor: 0 .
 Map on: 0 do: 0 .
 error
@@ -1505,15 +1505,12 @@ File ⛏ 0.
 File ⚿ 0.
 File • 0.
 File = 0.
-File & 0.
-File | 0.
 File + 0.
 File - 0.
 File * 0.
 File / 0.
 File > 0.
 File < 0.
-File % 0.
 File ? 0.
 File ✎ 0.
 File ← 0.
@@ -1523,6 +1520,9 @@ File ≠ 0.
 File new.
 File new: 0 .
 File equals: 0 .
+File and: 0 .
+File or: 0 .
+File modulo: 0 .
 File nor: 0 .
 File on: 0 do: 0 .
 error
@@ -1693,15 +1693,12 @@ Moment ⛏ 0.
 Moment ⚿ 0.
 Moment • 0.
 Moment = 0.
-Moment & 0.
-Moment | 0.
 Moment + 0.
 Moment - 0.
 Moment * 0.
 Moment / 0.
 Moment > 0.
 Moment < 0.
-Moment % 0.
 Moment ? 0.
 Moment ✎ 0.
 Moment ← 0.
@@ -1711,6 +1708,9 @@ Moment ≠ 0.
 Moment new.
 Moment new: 0 .
 Moment equals: 0 .
+Moment and: 0 .
+Moment or: 0 .
+Moment modulo: 0 .
 Moment nor: 0 .
 Moment on: 0 do: 0 .
 error
@@ -1873,3 +1873,6 @@ Moment apply: 0 and: 0 and: 0 .
 Moment setting: 0 .
 Moment setting: 0 value: 0 .
 Moment respond: 0 and: 0 and: 0 .
+☞ ☞ 0.
+Parse error, unexpected number ( eval: 1 )
+Expected a dot (.).

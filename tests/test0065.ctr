@@ -20,7 +20,7 @@ Printer print: a and: b.
 a := 4.2. b := a round.
 Printer print: a and: b.
 
-✎ write: (9 % 5), end.
+✎ write: (9 modulo: 5), end.
 ✎ write: -666 absolute, end.
 ✎ write: 49 square root, end.
 ✎ write: (2 power: 3), end.

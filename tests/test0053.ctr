@@ -10,7 +10,7 @@
 	x := ((True flip) number).
 	(x = 0 or: x = 1) false: { ✎ write: 'FAIL'. }.
 	x := (Boolean flip either: 'HEAD' or: 'TAIL').
-	(x = 'HEAD' | x = 'TAIL') false: { ✎ write: 'FAIL'. }.
+	((x = 'HEAD') or: (x = 'TAIL')) false: { ✎ write: 'FAIL'. }.
 }.
 ✎ write: 'DONE'.
 

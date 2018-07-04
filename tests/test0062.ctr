@@ -1,5 +1,5 @@
 Boolean on: 'xor:' do: { :a :b
-	↲ ((a & b not) | (a not & b)).
+	↲ ((a & b not) or: (a not & b)).
 }.
 
 ☞ o := Object new.
@@ -8,7 +8,7 @@ o on: 'hello' do: {}.
 { o on: 'test' do: 3.} catch: { :e ✎ write: e, end. }, run.
 { o on: 'hello' do: {}.} catch: { :e ✎ write: e, end. }, run. 
 { ☞ z := 4 / 0. } catch: { :e ✎ write: e, end. }, run. 
-{ (True & Nil) true: { ✎ write: 'X'.}. } catch: { :e ✎ write: e, end. }, run. 
+{ (True and: Nil) true: { ✎ write: 'X'.}. } catch: { :e ✎ write: e, end. }, run. 
 { ('' xor: 0) true: { ✎ write: 'X'.}. } catch: { :e ✎ write: e, end. }, run. 
 { (1 < '2') true: { ✎ write: 'OK'. }. } catch: { :e ✎ write: e, end. }, run. 
 { (1 < '2.0') true: { ✎ write: 'OK'. }. } catch: { :e ✎ write: e, end. }, run. 

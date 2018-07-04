@@ -46,7 +46,7 @@ b on: 'boolean' do: {
 ✎ write: a, end.  
 ✎ write: (90 + a), end. 
 ✎ write: b, end. 
-✎ write: (True & b), end. 
+✎ write: (True and: b), end.
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666. 
 a := a + ( List ← 1 ).
@@ -57,7 +57,7 @@ a := a + ( List ← 1 ).
 
 {
 	a on: 'string' do: { ↲ Nil. }.
-	a := '' + a. 
+	a := '' + a.
 } catch: { :error
 	✎ write: 'Error noted: ' + error, end.
 }, run.
@@ -66,7 +66,7 @@ a := a + ( List ← 1 ).
 
 {
 	a on: 'number' do: { ↲ Nil. }.
-	a := 3 * a. 
+	a := 3 * a.
 } catch: { :error
 	✎ write: 'Error noted: ' + error, end.
 }, run.
@@ -74,7 +74,7 @@ a := a + ( List ← 1 ).
 
 {
 	a on: 'boolean' do: { ↲ Nil. }.
-	a := True & a. 
+	a := True and: a. 
 } catch: { :error
 	✎ write: 'Error noted: ' + error, end.
 }, run.
@@ -85,7 +85,7 @@ a := a + ( List ← 1 ).
 
 {
 	a on: 'string' do: { ↲ False. }.
-	a := '' + a. 
+	a := '' + a.
 } catch: { :error
 	✎ write: 'Error noted: ' + error, end.
 }, run.
@@ -94,7 +94,7 @@ a := a + ( List ← 1 ).
 
 {
 	a on: 'number' do: { ↲ True. }.
-	a := 3 * a. 
+	a := 3 * a.
 } catch: { :error
 	✎ write: 'Error noted: ' + error, end.
 }, run.
@@ -102,7 +102,7 @@ a := a + ( List ← 1 ).
 
 {
 	a on: 'boolean' do: { ↲ 1. }.
-	a := True & a. 
+	a := True and: a.
 } catch: { :error
 	✎ write: 'Error noted: ' + error, end.
 }, run.
@@ -113,7 +113,7 @@ a := a + ( List ← 1 ).
 
 {
 	a on: 'string' do: { ↲ 1. }.
-	a := '' + a. 
+	a := '' + a.
 } catch: { :error
 	✎ write: 'Error noted: ' + error, end.
 }, run.
@@ -122,7 +122,7 @@ a := a + ( List ← 1 ).
 
 {
 	a on: 'number' do: { ↲ ''. }.
-	a := 3 * a. 
+	a := 3 * a.
 } catch: { :error
 	✎ write: 'Error noted: ' + error, end.
 }, run.
@@ -130,7 +130,7 @@ a := a + ( List ← 1 ).
 
 {
 	a on: 'boolean' do: { ↲ ''. }.
-	a := True & a. 
+	a := True and: a.
 } catch: { :error
 	✎ write: 'Error noted: ' + error, end.
 }, run.
@@ -159,7 +159,7 @@ a := a + ( List ← 1 ).
 
 {
 	a on: 'boolean' do: { ↲ (Object new). }.
-	a := True & a. 
+	a := True and: a.
 } catch: { :error
 	✎ write: 'Error noted: ' + error, end.
 }, run.
