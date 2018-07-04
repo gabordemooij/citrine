@@ -218,6 +218,16 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 		}
 		entry = entry->next;
 	}
+	if (context == 't' && !found && memmem(v,l,":",1)>NULL) {
+		for (i = 0; i<l; i++) {
+				fwrite(v+i,1,1,stdout);
+				if (*(v + i)==':') {
+					memcpy(remainder,v+i+1,(l-i));
+					found = 1;
+					break;
+				}
+			}
+	}
 	return found;
 }
 
