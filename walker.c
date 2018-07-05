@@ -98,7 +98,13 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 			fprintf(stderr,"Cannot send message to receiver of type: %d \n", receiverNode->type);
 			break;
 	}
+	int ctr_assume_message_level = ctr_in_message;
+	int ctr_is_chain = 0;
 	while(li->next) {
+		if (ctr_is_chain) {
+			ctr_in_message++;
+		}
+		ctr_is_chain++;
 		ctr_argument* a;
 		ctr_argument* aItem;
 		ctr_size l;
@@ -167,6 +173,11 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 			ctr_internal_object_delete_property( ctr_contexts[ctr_context_id], keys[--key_index], CTR_CATEGORY_PRIVATE_PROPERTY );
 		}
 		r = result;
+	}
+	ctr_in_message -= (ctr_is_chain - 1);
+	if (ctr_in_message != ctr_assume_message_level) {
+		printf("Detected message level anomaly.\n");
+		exit(1);
 	}
 	if (recipientName) recipientName->info.sticky = 0;
 	return result;

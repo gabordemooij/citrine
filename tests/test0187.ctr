@@ -11,33 +11,39 @@ Number on: 'factorial' do: {
 
 Program tidiness: 0.
 
-
+{
 2 exponent factorial.
 ✎ write: (11 modulo: 3), end.
 ✎ write: (3.4 round), end.
 ✎ write: (7.1 ceil), end.
 ✎ write: (7.9 floor), end.
+}
+run.
 
 Program clean memory.
 
 usedMemory1 := (Program memory ? 0).
 
-
+{
 2 exponent factorial.
 ✎ write: (11 modulo: 3), end.
 ✎ write: (3.4 round), end.
 ✎ write: (7.1 ceil), end.
 ✎ write: (7.9 floor), end.
+}
+run.
 
 Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
+{
 2 exponent factorial.
 ✎ write: (11 modulo: 3), end.
 ✎ write: (3.4 round), end.
 ✎ write: (7.1 ceil), end.
 ✎ write: (7.9 floor), end.
+} run.
 
 Program clean memory.
 usedMemory3 := (Program memory ? 0).

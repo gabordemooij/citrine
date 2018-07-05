@@ -512,7 +512,7 @@ ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList
 	ctr_object* fdObjKey;
 	pathObj = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	if (pathObj == NULL) {
-		CtrStdFlow = ctr_build_string_from_cstring("Unable to lock file.");
+		CtrStdFlow = ctr_error_text("Unable to lock file.");
 		return CtrStdNil;
 	}
 	path = ctr_heap_allocate_cstring( pathObj );
@@ -525,7 +525,7 @@ ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList
 	if (fdObj == NULL) {
 		fd = open( path, O_CREAT );
 		if (fd < 0) {
-			CtrStdFlow = ctr_build_string_from_cstring("Unable to lock file.");
+			CtrStdFlow = ctr_error_text("Unable to lock file.");
 			ctr_heap_free( path );
 			return CtrStdNil;
 		}

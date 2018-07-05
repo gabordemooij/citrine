@@ -1,4 +1,3 @@
-
 ☞ newString := ('hello world' pattern: '([eor])([l]+)' process: { :match
 	↲ '*'.
 }).

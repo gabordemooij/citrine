@@ -262,7 +262,7 @@ ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList )
 	ctr_object* block = argumentList->next->object;
 	ctr_argument* compareArguments;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_build_string_from_cstring("Expected block for case.");
+		CtrStdFlow = ctr_error_text("Expected block for case.");
 		return CtrStdNil;
 	}
 	compareArguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
@@ -1963,6 +1963,9 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 			offset += matches[0].rm_eo;
 			ctr_heap_free( arg );
 		}
+		
+		
+		
 		sticky1 = block->info.sticky;
 		sticky2 = blockArguments->object->info.sticky;
 		sticky3 = newString->info.sticky;
@@ -1970,11 +1973,43 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 		block->info.sticky = 1;
 		blockArguments->object->info.sticky = 1;
 		newString->info.sticky = 1;
+		
+		
+		char* str; 
+		str = ctr_heap_allocate(40);
+		snprintf(str, 40, ".1%p", (void*) block);
+		ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), block, CTR_CATEGORY_PRIVATE_PROPERTY );
+		ctr_heap_free(str);
+		
+		str = ctr_heap_allocate(40);
+		snprintf(str, 40, ".2%p", (void*) blockArguments->object);
+		ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), blockArguments->object, CTR_CATEGORY_PRIVATE_PROPERTY );
+		ctr_heap_free(str);
+		
+		str = ctr_heap_allocate(40);
+		snprintf(str, 40, ".3%p", (void*) newString);
+		ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), newString, CTR_CATEGORY_PRIVATE_PROPERTY );
+		ctr_heap_free(str);
+		
+		str = ctr_heap_allocate(40);
+		snprintf(str, 40, ".4%p", (void*) myself);
+		ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), myself, CTR_CATEGORY_PRIVATE_PROPERTY );
+		ctr_heap_free(str);
+		
+		
+		
 		ctr_object* replacement = replacement = ctr_block_run( block, blockArguments, ctr_build_empty_string() );	
+		
+		
+		
 		block->info.sticky = sticky1;
 		blockArguments->object->info.sticky = sticky2;
 		newString->info.sticky = sticky3;
 		myself->info.sticky = sticky4;
+		
+		
+		
+		
 		ctr_argument* arg = ctr_heap_allocate( sizeof( ctr_argument ) );
 		arg->object = replacement;
 		ctr_string_append( newString, arg );
@@ -2437,6 +2472,7 @@ ctr_object* ctr_block_new(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my) {
 	char* pathString;
+	char* str;
 	ctr_tnode* parsedCode;
 	ctr_argument* newArgumentList;
 	ctr_object* result;
@@ -2479,10 +2515,10 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	/* assign result to lower context to prevent it from being GC'ed. */
 	
 	if (ctr_in_message) {
-	char* str = ctr_heap_allocate(40);
-	snprintf(str, 40, ".rs%p", (void*) result);
-	ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), result, CTR_CATEGORY_PRIVATE_PROPERTY );
-	ctr_heap_free(str);
+		str = ctr_heap_allocate(40);
+		snprintf(str, 40, ".rs%p", (void*) result);
+		ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), result, CTR_CATEGORY_PRIVATE_PROPERTY );
+		ctr_heap_free(str);
 	}
 	
 	//ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(".rs"), result, CTR_CATEGORY_PRIVATE_PROPERTY );
@@ -2495,6 +2531,12 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 			CtrStdFlow = NULL;
 			sticky = a->object->info.sticky;
 			a->object->info.sticky = 1;
+			
+			str = ctr_heap_allocate(18);
+			snprintf(str, 18, ":%p", (void*) a->object);
+			ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), a->object, CTR_CATEGORY_PRIVATE_PROPERTY );
+			ctr_heap_free(str);
+			
 			ctr_block_run(catchBlock, a, my);
 			a->object->info.sticky = sticky;
 			ctr_heap_free( a );
@@ -2645,4 +2687,3 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_block_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( "[Block]" );
 }
-

@@ -736,6 +736,24 @@ int ctr_sort_cmp(const void * a, const void * b) {
 	arg1->next = arg2;
 	arg1->object = *((ctr_object**) a);
 	arg2->object = *((ctr_object**) b);
+	
+	char* str; 
+	str = ctr_heap_allocate(40);
+	snprintf(str, 40, ".1%p", (void*) temp_sorter);
+	ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), temp_sorter, CTR_CATEGORY_PRIVATE_PROPERTY );
+	ctr_heap_free(str);
+	
+	str = ctr_heap_allocate(40);
+	snprintf(str, 40, ".1%p", (void*) temp_self);
+	ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), temp_self, CTR_CATEGORY_PRIVATE_PROPERTY );
+	ctr_heap_free(str);
+	
+	
+	str = ctr_heap_allocate(40);
+	snprintf(str, 40, ".1%p", (void*) arg1->object);
+	ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), arg1->object, CTR_CATEGORY_PRIVATE_PROPERTY );
+	ctr_heap_free(str);
+	
 	result = ctr_block_run(temp_sorter, arg1, temp_self);
 	numResult = ctr_internal_cast2number(result);
 	ctr_heap_free( arg1 );
