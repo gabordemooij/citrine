@@ -123,11 +123,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		r->info.sticky = 1;
 		char* str;
 		if (literal) {
-			str = ctr_heap_allocate(18);
-			snprintf(str, 18, "}%p", (void*) r);
-			keys[key_index] = ctr_build_string_from_cstring(str);
-			ctr_internal_object_set_property( ctr_contexts[ctr_context_id], keys[key_index++], r, CTR_CATEGORY_PRIVATE_PROPERTY );
-			ctr_heap_free(str);
+			keys[key_index++] = ctr_gc_internal_pin(r);
 		}
 		if (argumentList) {
 			ctr_tnode* node;
@@ -137,15 +133,12 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 				ctr_object* o = ctr_cwlk_expr(node, &wasReturn);
 				ctr_in_message--;
 				aItem->object = o;
-				char* str = ctr_heap_allocate(18);
-				snprintf(str, 18, "{%p", (void*)o);
-				keys[key_index]=ctr_build_string_from_cstring(str);
-				ctr_internal_object_set_property( ctr_contexts[ctr_context_id], keys[key_index++], o, CTR_CATEGORY_PRIVATE_PROPERTY );
+				keys[key_index++] = ctr_gc_internal_pin(o);
+				
 				if (key_index > 39) {
 					printf("Key index exhausted.");
 					exit(1);
 				}
-				ctr_heap_free(str);
 				/* we always send at least one argument, note that if you want to modify the argumentList, be sure to take this into account */
 				/* there is always an extra empty argument at the end */
 				aItem->next = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );

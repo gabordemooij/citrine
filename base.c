@@ -1963,9 +1963,6 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 			offset += matches[0].rm_eo;
 			ctr_heap_free( arg );
 		}
-		
-		
-		
 		sticky1 = block->info.sticky;
 		sticky2 = blockArguments->object->info.sticky;
 		sticky3 = newString->info.sticky;
@@ -1974,42 +1971,15 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 		blockArguments->object->info.sticky = 1;
 		newString->info.sticky = 1;
 		
-		
-		char* str; 
-		str = ctr_heap_allocate(40);
-		snprintf(str, 40, ".1%p", (void*) block);
-		ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), block, CTR_CATEGORY_PRIVATE_PROPERTY );
-		ctr_heap_free(str);
-		
-		str = ctr_heap_allocate(40);
-		snprintf(str, 40, ".2%p", (void*) blockArguments->object);
-		ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), blockArguments->object, CTR_CATEGORY_PRIVATE_PROPERTY );
-		ctr_heap_free(str);
-		
-		str = ctr_heap_allocate(40);
-		snprintf(str, 40, ".3%p", (void*) newString);
-		ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), newString, CTR_CATEGORY_PRIVATE_PROPERTY );
-		ctr_heap_free(str);
-		
-		str = ctr_heap_allocate(40);
-		snprintf(str, 40, ".4%p", (void*) myself);
-		ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), myself, CTR_CATEGORY_PRIVATE_PROPERTY );
-		ctr_heap_free(str);
-		
-		
-		
+		ctr_gc_internal_pin(block);
+		ctr_gc_internal_pin(blockArguments->object);
+		ctr_gc_internal_pin(newString);
+		ctr_gc_internal_pin(myself);
 		ctr_object* replacement = replacement = ctr_block_run( block, blockArguments, ctr_build_empty_string() );	
-		
-		
-		
 		block->info.sticky = sticky1;
 		blockArguments->object->info.sticky = sticky2;
 		newString->info.sticky = sticky3;
 		myself->info.sticky = sticky4;
-		
-		
-		
-		
 		ctr_argument* arg = ctr_heap_allocate( sizeof( ctr_argument ) );
 		arg->object = replacement;
 		ctr_string_append( newString, arg );
@@ -2513,15 +2483,9 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	}
 	ctr_close_context();
 	/* assign result to lower context to prevent it from being GC'ed. */
-	
 	if (ctr_in_message) {
-		str = ctr_heap_allocate(40);
-		snprintf(str, 40, ".rs%p", (void*) result);
-		ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), result, CTR_CATEGORY_PRIVATE_PROPERTY );
-		ctr_heap_free(str);
+		ctr_gc_internal_pin( result );
 	}
-	
-	//ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(".rs"), result, CTR_CATEGORY_PRIVATE_PROPERTY );
 	if (CtrStdFlow != NULL && CtrStdFlow != CtrStdBreak && CtrStdFlow != CtrStdContinue) {
 		ctr_object* catchBlock = ctr_internal_create_object( CTR_OBJECT_TYPE_OTBLOCK );
 		catchBlock = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "catch" ), 0);
@@ -2532,10 +2496,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 			sticky = a->object->info.sticky;
 			a->object->info.sticky = 1;
 			
-			str = ctr_heap_allocate(18);
-			snprintf(str, 18, ":%p", (void*) a->object);
-			ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), a->object, CTR_CATEGORY_PRIVATE_PROPERTY );
-			ctr_heap_free(str);
+			ctr_gc_internal_pin( a->object );
 			
 			ctr_block_run(catchBlock, a, my);
 			a->object->info.sticky = sticky;

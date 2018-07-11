@@ -1,3 +1,4 @@
+Program tidiness: 4.
 Number on: 'factorial' do: {
 	☞ total := 1.
 	{ :index total multiply by: (⛏ - index). } * ⛏.

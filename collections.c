@@ -204,7 +204,6 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 		CtrStdFlow = ctr_build_string_from_cstring("Expected Block.");
 		CtrStdFlow->info.sticky = 1;
 	}
-	block->info.sticky = 1;
 	for(i = myself->value.avalue->tail; i < myself->value.avalue->head; i++) {
 		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		ctr_argument* argument2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
@@ -215,6 +214,9 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 		arguments->next = argument2;
 		argument2->next = argument3;
 		/* keep receiver in block object otherwise, GC will destroy it */
+		ctr_gc_internal_pin(block);
+		ctr_gc_internal_pin(myself);
+		ctr_gc_internal_pin(argument2->object);
 		ctr_block_run(block, arguments, myself);
 		ctr_heap_free( arguments );
 		ctr_heap_free( argument2 );
@@ -223,8 +225,6 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 		if (CtrStdFlow) break;
 	}
 	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
-	block->info.mark = 0;
-	block->info.sticky = 0;
 	return myself;
 }
 
@@ -736,24 +736,11 @@ int ctr_sort_cmp(const void * a, const void * b) {
 	arg1->next = arg2;
 	arg1->object = *((ctr_object**) a);
 	arg2->object = *((ctr_object**) b);
-	
 	char* str; 
-	str = ctr_heap_allocate(40);
-	snprintf(str, 40, ".1%p", (void*) temp_sorter);
-	ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), temp_sorter, CTR_CATEGORY_PRIVATE_PROPERTY );
-	ctr_heap_free(str);
-	
-	str = ctr_heap_allocate(40);
-	snprintf(str, 40, ".1%p", (void*) temp_self);
-	ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), temp_self, CTR_CATEGORY_PRIVATE_PROPERTY );
-	ctr_heap_free(str);
-	
-	
-	str = ctr_heap_allocate(40);
-	snprintf(str, 40, ".1%p", (void*) arg1->object);
-	ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(str), arg1->object, CTR_CATEGORY_PRIVATE_PROPERTY );
-	ctr_heap_free(str);
-	
+	ctr_gc_internal_pin(temp_sorter);
+	ctr_gc_internal_pin(temp_self);
+	ctr_gc_internal_pin(arg1->object);
+	ctr_gc_internal_pin(temp_self);
 	result = ctr_block_run(temp_sorter, arg1, temp_self);
 	numResult = ctr_internal_cast2number(result);
 	ctr_heap_free( arg1 );
