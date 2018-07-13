@@ -968,7 +968,7 @@ ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList) {
 	if ( lower_bound == upper_bound ) {
 		return ctr_build_number_from_float( lower_bound );
 	}
-	upper_bound_from_zero = abs(upper_bound - lower_bound);
+	upper_bound_from_zero = abs( (int)upper_bound - (int)lower_bound);
 	return ctr_build_number_from_float(
 		(ctr_number) (
 			arc4random_uniform( upper_bound_from_zero  + 1 ) +
