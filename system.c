@@ -183,15 +183,8 @@ void  ctr_gc_internal_collect() {
 }
 
 ctr_object* ctr_gc_internal_pin( ctr_object* object ) {
-	ctr_object* key;
-	char* str;
-	str = ctr_heap_allocate(18);
-	snprintf(str, 18, ".%p", (void*) object);
-	key = ctr_build_string_from_cstring(str);
-	ctr_heap_free(str);
-	//if ( ctr_internal_object_find_property( ctr_contexts[ctr_context_id], key, CTR_CATEGORY_PRIVATE_PROPERTY ) == NULL ) {
-		ctr_internal_object_add_property( ctr_contexts[ctr_context_id], key, object, CTR_CATEGORY_PRIVATE_PROPERTY );
-	//}
+	ctr_object* key = ctr_build_empty_string();
+	ctr_internal_object_add_property( ctr_contexts[ctr_context_id], key, object, CTR_CATEGORY_PRIVATE_PROPERTY );
 	return key;
 }
 
