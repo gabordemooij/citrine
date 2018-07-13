@@ -736,7 +736,6 @@ int ctr_sort_cmp(const void * a, const void * b) {
 	arg1->next = arg2;
 	arg1->object = *((ctr_object**) a);
 	arg2->object = *((ctr_object**) b);
-	char* str; 
 	ctr_gc_internal_pin(temp_sorter);
 	ctr_gc_internal_pin(temp_self);
 	ctr_gc_internal_pin(arg1->object);

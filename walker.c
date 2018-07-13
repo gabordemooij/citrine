@@ -121,7 +121,6 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		aItem->object = CtrStdNil;
 		sticky = r->info.sticky;
 		r->info.sticky = 1;
-		char* str;
 		if (literal) {
 			keys[key_index++] = ctr_gc_internal_pin(r);
 		}

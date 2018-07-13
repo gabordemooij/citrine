@@ -539,7 +539,6 @@ ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argum
        char*  current_method_name_str;
        ctr_size     current_method_name_len;
        ctr_size     i                      = 0;
-       ctr_size     len                    = 0;
        ctr_mapitem* current_method         = myself->methods->head;
        ctr_object*  target_method_name     = ctr_internal_cast2string( ctr_argumentList->next->object );
        char*        target_method_name_str = target_method_name->value.svalue->value;
@@ -2400,16 +2399,12 @@ ctr_object* ctr_build_block(ctr_tnode* node) {
 
 ctr_object* ctr_block_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_tnode* parsedCode;
-	char* pathString;
 	ctr_object* code;
 	ctr_tnode* r;
 	ctr_tlistitem* codeBlockPart1;
 	ctr_tlistitem* codeBlockPart2;
 	ctr_tnode* paramList;
 	ctr_tnode* codeList;
-	ctr_tlistitem* previousListItem;
-	ctr_tlistitem* previousCodeListItem;
-	int t;
 	ctr_object* block = ctr_internal_create_object( CTR_OBJECT_TYPE_OTBLOCK );
 	code = ctr_internal_cast2string(argumentList->object);
 	block->link = CtrStdBlock;
@@ -2441,10 +2436,6 @@ ctr_object* ctr_block_new(ctr_object* myself, ctr_argument* argumentList) {
  * refer to the block itself instead of the containing object.
  */
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my) {
-	char* pathString;
-	char* str;
-	ctr_tnode* parsedCode;
-	ctr_argument* newArgumentList;
 	ctr_object* result;
 	ctr_tnode* node = myself->value.block;
 	if (node == NULL) return CtrStdNil;

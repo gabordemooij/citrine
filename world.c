@@ -916,8 +916,6 @@ void ctr_initialize_world() {
  */
 ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vlen, ctr_argument* argumentList) {
 	char toParent = 0;
-	int  i = 0;
-	char messageApproved = 0;
 	ctr_object* me;
 	ctr_object* methodObject;
 	ctr_object* searchObject;

@@ -205,7 +205,7 @@ void ctr_clex_putback() {
  */
 int ctr_clex_tok() {
 	char c;
-	int i, presetToken;
+	int i;
 	ctr_clex_tokvlen = 0;
 	ctr_clex_olderptr = ctr_clex_oldptr;
 	ctr_clex_oldptr = ctr_code;
