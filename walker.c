@@ -8,6 +8,8 @@
 
 #include "citrine.h"
 
+ctr_tnode* ctr_callstack[301];
+uint8_t ctr_callstack_index;
 
 
 /**

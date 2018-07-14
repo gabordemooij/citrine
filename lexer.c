@@ -16,6 +16,9 @@ char* ctr_code;
 char* ctr_code_start;
 char* ctr_code_eoi;
 
+int ctr_clex_line_number;
+char* ctr_eofcode;
+
 char* ctr_clex_oldptr;
 char* ctr_clex_olderptr;
 int ctr_clex_old_line_number = 0;
@@ -38,6 +41,12 @@ char* ctr_clex_desc_tok_assignment = ":=";
 char* ctr_clex_desc_tok_ret_unicode = "↲";
 char* ctr_clex_desc_tok_fin = "end of program";
 char* ctr_clex_desc_tok_unknown = "(unknown token)";
+
+char* ctr_clex_keyword_me_icon;
+char* ctr_clex_keyword_my_icon;
+char* ctr_clex_keyword_var_icon;
+ctr_size ctr_clex_keyword_my_icon_len;
+ctr_size ctr_clex_keyword_var_icon_len;
 
 int ctr_clex_true_len = 0;
 int ctr_clex_false_len = 0;

@@ -7,6 +7,9 @@
 #include <stdint.h>
 #include "citrine.h"
 
+uint64_t ctr_gc_alloc;
+uint64_t ctr_gc_memlimit;
+
 /**
  * Heap Object, represents dynamic memory.
  */

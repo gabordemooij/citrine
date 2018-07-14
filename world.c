@@ -39,6 +39,10 @@ ctr_object* CtrStdExit;
 ctr_object* ctr_first_object;
 char CtrHashKey[16];
 
+ctr_object* ctr_contexts[301];
+int ctr_context_id;
+
+
 /**
  * ?internal
  *
@@ -569,8 +573,7 @@ void ctr_initialize_world() {
 	CtrStdWorld = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	CtrStdWorld->info.sticky = 1;
 	ctr_contexts[0] = CtrStdWorld;
-	ctr_program_log_type = 's';
-
+	
 	/* Object */
 	CtrStdObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_object_make );
@@ -880,28 +883,6 @@ void ctr_initialize_world() {
 	CtrStdBreak->info.sticky = 1;
 	CtrStdContinue->info.sticky = 1;
 	CtrStdExit->info.sticky = 1;
-
-	/* Construct the whitelist for eval */
-	ctr_secpro_eval_whitelist[0] = ctr_array_push;
-	ctr_secpro_eval_whitelist[1] = ctr_map_new;
-	ctr_secpro_eval_whitelist[2] = ctr_map_put;
-	ctr_secpro_eval_whitelist[3] = ctr_array_new;
-	ctr_secpro_eval_whitelist[4] = ctr_nil_to_string;
-	ctr_secpro_eval_whitelist[5] = ctr_bool_to_string;
-	ctr_secpro_eval_whitelist[6] = ctr_number_to_string;
-	ctr_secpro_eval_whitelist[7] = ctr_string_to_string;
-	ctr_secpro_eval_whitelist[8] = ctr_array_new_and_push;
-
-	/* relax eval a bit */
-	ctr_secpro_eval_whitelist[9] = ctr_number_add;
-	ctr_secpro_eval_whitelist[10] = ctr_number_minus;
-	ctr_secpro_eval_whitelist[11] = ctr_number_divide;
-	ctr_secpro_eval_whitelist[12] = ctr_number_multiply;
-	ctr_secpro_eval_whitelist[13] = ctr_number_sqrt;
-	ctr_secpro_eval_whitelist[14] = ctr_number_pow;
-
-	/* maximum number of connections to accept (in total) */
-	ctr_accept_n_connections = 0;
 
 	/* Create a dummy variable to balance memory use in tests. */
 	ctr_internal_object_set_property( ctr_contexts[ctr_context_id], ctr_build_string_from_cstring(".rs"), ctr_build_number_from_float(1), CTR_CATEGORY_PRIVATE_PROPERTY );

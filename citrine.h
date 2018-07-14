@@ -275,497 +275,497 @@ extern char** ctr_argv;
 /**
  * Mode of Operation
  */
-char* ctr_mode_input_file;
-char* ctr_mode_dict_file;
-char* ctr_mode_hfile1;
-char* ctr_mode_hfile2;
+extern char* ctr_mode_input_file;
+extern char* ctr_mode_dict_file;
+extern char* ctr_mode_hfile1;
+extern char* ctr_mode_hfile2;
 
 /**
  * Lexer functions
  */
-void 	ctr_clex_load(char* prg);
-int 	ctr_clex_tok();
-char*  ctr_clex_code_pointer();
-char* 	ctr_clex_tok_value();
-long    ctr_clex_tok_value_length();
-void 	ctr_clex_putback();
-char*	ctr_clex_readstr();
-char*   ctr_clex_tok_describe( int token );
-char* ctr_clex_keyword_me_icon;
-char* ctr_clex_keyword_my_icon;
-char* ctr_clex_keyword_var_icon;
-ctr_size ctr_clex_keyword_my_icon_len;
-ctr_size ctr_clex_keyword_var_icon_len;
-ctr_size ctr_clex_string_interpolation_start_len;
-ctr_size ctr_clex_string_interpolation_stop_len;
-void ctr_clex_set_ignore_modes( int ignore );
+extern void 	ctr_clex_load(char* prg);
+extern int 	ctr_clex_tok();
+extern char*  ctr_clex_code_pointer();
+extern char* 	ctr_clex_tok_value();
+extern long    ctr_clex_tok_value_length();
+extern void 	ctr_clex_putback();
+extern char*	ctr_clex_readstr();
+extern char*   ctr_clex_tok_describe( int token );
+extern char* ctr_clex_keyword_me_icon;
+extern char* ctr_clex_keyword_my_icon;
+extern char* ctr_clex_keyword_var_icon;
+extern ctr_size ctr_clex_keyword_my_icon_len;
+extern ctr_size ctr_clex_keyword_var_icon_len;
+extern ctr_size ctr_clex_string_interpolation_start_len;
+extern ctr_size ctr_clex_string_interpolation_stop_len;
+extern void ctr_clex_set_ignore_modes( int ignore );
 
 
 /**
  * Lexer properties
  */
-ctr_size ctr_clex_len;
-ctr_size ctr_program_length;
-int ctr_clex_line_number;
-char* ctr_eofcode;
+extern ctr_size ctr_clex_len;
+extern ctr_size ctr_program_length;
+extern int ctr_clex_line_number;
+extern char* ctr_eofcode;
 
 /**
  * UTF-8 functions
  */
-ctr_size getBytesUtf8(char* strval, long startByte, ctr_size lenUChar);
-ctr_size ctr_getutf8len(char* strval, ctr_size max);
-int ctr_utf8size(char c);
+extern ctr_size getBytesUtf8(char* strval, long startByte, ctr_size lenUChar);
+extern ctr_size ctr_getutf8len(char* strval, ctr_size max);
+extern int ctr_utf8size(char c);
 
 /**
  * Parser functions
  */
-ctr_tnode* ctr_cparse_parse(char* prg, char* pathString);
-ctr_tnode* ctr_cparse_expr(int mode);
-ctr_tnode* ctr_cparse_ret();
+extern ctr_tnode* ctr_cparse_parse(char* prg, char* pathString);
+extern ctr_tnode* ctr_cparse_expr(int mode);
+extern ctr_tnode* ctr_cparse_ret();
 
 /**
  * Translator functions
  */
-void ctr_translate_program(char* prg, char* programPath);
-void ctr_translate_generate_dicts(char* hfile1, char* hfile2);
+extern void ctr_translate_program(char* prg, char* programPath);
+extern void ctr_translate_generate_dicts(char* hfile1, char* hfile2);
 
 /**
  * Abstract Tree Walker functions
  */
-uint64_t    ctr_cwlk_subprogram;
-ctr_object* ctr_cwlk_run(ctr_tnode* program);
-ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn);
-ctr_tnode* ctr_cparse_block();
-ctr_tnode* ctr_cparse_create_node( int type );
+extern uint64_t    ctr_cwlk_subprogram;
+extern ctr_object* ctr_cwlk_run(ctr_tnode* program);
+extern ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn);
+extern ctr_tnode* ctr_cparse_block();
+extern ctr_tnode* ctr_cparse_create_node( int type );
 
 /**
  * Internal World functions
  */
-int ctr_in_message;
-void        ctr_initialize_world();
-char*       ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, int reverse );
-void        ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_object* value, int m);
-void        ctr_internal_object_set_property(ctr_object* owner, ctr_object* key, ctr_object* value, int is_method);
-void        ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int is_method);
-ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key, int is_method);
-uint64_t    ctr_internal_index_hash(ctr_object* key);
-void        ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_object* value, int m);
-ctr_object* ctr_internal_cast2bool( ctr_object* o );
-ctr_object* ctr_internal_cast2number(ctr_object* o);
-ctr_object* ctr_internal_create_object(int type);
-ctr_object* ctr_internal_cast2string( ctr_object* o );
-void*       ctr_internal_plugin_find( ctr_object* key );
-ctr_object* ctr_find(ctr_object* key);
-ctr_object* ctr_find_in_my(ctr_object* key);
-ctr_object* ctr_assign_value(ctr_object* key, ctr_object* val);
-ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* val);
-ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* val);
-char*       ctr_internal_readf(char* file_name, uint64_t* size_allocated);
-void        ctr_internal_debug_tree(ctr_tnode* ti, int indent);
-ctr_object* ctr_send_message(ctr_object* receiver, char* message, long len, ctr_argument* argumentList);
-void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func)( ctr_object*, ctr_argument* ) );
+extern int ctr_in_message;
+extern void        ctr_initialize_world();
+extern char*       ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, int reverse );
+extern void        ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_object* value, int m);
+extern void        ctr_internal_object_set_property(ctr_object* owner, ctr_object* key, ctr_object* value, int is_method);
+extern void        ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int is_method);
+extern ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key, int is_method);
+extern uint64_t    ctr_internal_index_hash(ctr_object* key);
+extern void        ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_object* value, int m);
+extern ctr_object* ctr_internal_cast2bool( ctr_object* o );
+extern ctr_object* ctr_internal_cast2number(ctr_object* o);
+extern ctr_object* ctr_internal_create_object(int type);
+extern ctr_object* ctr_internal_cast2string( ctr_object* o );
+extern void*       ctr_internal_plugin_find( ctr_object* key );
+extern ctr_object* ctr_find(ctr_object* key);
+extern ctr_object* ctr_find_in_my(ctr_object* key);
+extern ctr_object* ctr_assign_value(ctr_object* key, ctr_object* val);
+extern ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* val);
+extern ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* val);
+extern char*       ctr_internal_readf(char* file_name, uint64_t* size_allocated);
+extern void        ctr_internal_debug_tree(ctr_tnode* ti, int indent);
+extern ctr_object* ctr_send_message(ctr_object* receiver, char* message, long len, ctr_argument* argumentList);
+extern void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func)( ctr_object*, ctr_argument* ) );
 
 /**
  * Scoping functions
  */
-void ctr_open_context();
-void ctr_close_context();
+extern void ctr_open_context();
+extern void ctr_close_context();
 
 /**
  * Global Scoping variables
  */
-ctr_object* ctr_contexts[301];
-int ctr_context_id;
-ctr_tnode* ctr_callstack[301];
-uint8_t ctr_callstack_index;
+extern ctr_object* ctr_contexts[301];
+extern int ctr_context_id;
+extern ctr_tnode* ctr_callstack[301];
+extern uint8_t ctr_callstack_index;
 
 /**
  * Nil Interface
  */
-ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Object Interface
  */
-ctr_object* ctr_object_copy(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_object_do(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_object_done(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_object_message(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_object_if_false(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_object_if_true(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_object_to_string(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_object_respond_and(ctr_object* myseld, ctr_argument* ctr_argumentList);
-ctr_object* ctr_object_respond_and_and(ctr_object* myseld, ctr_argument* ctr_argumentList);
-ctr_object* ctr_object_case_do(ctr_object* myseld, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_object_copy(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_object_do(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_object_done(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_object_message(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_object_if_false(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_object_if_true(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_object_to_string(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_object_respond_and(ctr_object* myseld, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_object_respond_and_and(ctr_object* myseld, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_object_case_do(ctr_object* myseld, ctr_argument* ctr_argumentList);
 
 /**
  * Boolean Interface
  */
-ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_bool_if_false(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_bool_xor(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_bool_if_false(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_bool_xor(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Number Interface
  */
-ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_inc(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_dec(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_mul(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_higherThan(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_higherEqThan(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_lowerEqThan(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_neq(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_factorial(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_ceil(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_round(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_sin(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_cos(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_exp(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_tan(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_atan(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_log(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_min(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_max(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_odd(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_even(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_to_step_do(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_to_byte(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_qualification(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_respond_to(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_number_random(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_inc(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_dec(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_times(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_mul(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_higherThan(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_higherEqThan(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_lowerEqThan(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_neq(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_factorial(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_ceil(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_round(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_sin(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_cos(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_exp(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_tan(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_atan(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_log(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_min(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_max(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_odd(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_even(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_to_step_do(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_to_byte(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_qualification(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_respond_to(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_random(ctr_object* myself, ctr_argument* argumentList);
 
 
 /**
  * String Interface
  */
-ctr_object* ctr_string_bytes(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_fromto(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_padding_left(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_padding_right(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_to_number(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_to_lower1st(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_find_pattern_do(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_find_pattern_options_do(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_contains_pattern(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_contains(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_hash_with_key(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_string_to_string( ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_string_eval( ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_string_quotes_escape( ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_string_to_byte_array( ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_string_append_byte(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_string_compare(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_string_before(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_string_before_or_same(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_string_after(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_string_escape(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_string_unescape(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_bytes(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_fromto(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_ltrim(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_rtrim(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_padding_left(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_padding_right(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_html_escape(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_to_number(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_to_lower1st(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_to_upper1st(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_find_pattern_do(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_find_pattern_options_do(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_contains_pattern(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_contains(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_hash_with_key(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_to_string( ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_string_eval( ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_string_quotes_escape( ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_string_to_byte_array( ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_string_append_byte(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_string_compare(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_string_before(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_string_before_or_same(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_string_after(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_string_escape(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_string_unescape(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Block Interface
  */
-ctr_object* ctr_block_new(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my);
-ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_block_to_string(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_block_new(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_block_while_false(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my);
+extern ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_block_to_string(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Array Interface
  */
-ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList);
-ctr_object* ctr_array_new_and_push(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_shift(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_count(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_sum(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_to_string(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_fill(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_column(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_second_last(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_index_of(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_array_copy(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList);
+extern ctr_object* ctr_array_new_and_push(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_shift(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_count(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_sum(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_product(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_to_string(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_fill(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_column(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_second_last(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_index_of(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_copy(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * HashMap Interface
  */
-ctr_object* ctr_map_new(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_map_type(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_map_to_string(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_map_values(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_map_key_value(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_map_new(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_map_type(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_map_to_string(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_map_values(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_map_key_value(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Console Interface
  */
-ctr_object* ctr_console_write(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_console_brk(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_console_tab(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_console_write(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_console_brk(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_console_tab(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * File Interface
  */
-ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_descriptor(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList, int lock);
-ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_unlock(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_descriptor(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList, int lock);
+extern ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_unlock(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList);
 
 
 
 /**
  * Command Object Interface
  */
-ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_program_num_of_args(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_program_get_env(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_program_exit(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_program_flush(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_program_forbid_shell(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_program_forbid_file_write(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_program_forbid_file_read(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_program_forbid_include(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_program_countdown(ctr_object* myself, ctr_argument* ctr_argumentList);
-ctr_object* ctr_program_log(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_program_warn(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_program_crit(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_program_pid(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_program_use_stderr(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_program_use_syslog(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_program_to_string(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_program_to_number(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_program_num_of_args(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_program_get_env(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_program_exit(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_program_flush(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_program_forbid_shell(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_program_forbid_file_write(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_program_forbid_file_read(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_program_forbid_include(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_program_countdown(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_program_log(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_program_warn(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_program_crit(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_program_pid(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_program_use_stderr(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_program_use_syslog(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_program_to_string(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_program_to_number(ctr_object* myself, ctr_argument* argumentList );
 
-void ctr_check_permission( uint8_t operationID );
-uint8_t ctr_program_security_profile;
-uint64_t ctr_program_tick;
-uint64_t ctr_program_maxtick;
-ctr_object* (*ctr_secpro_eval_whitelist[64])(ctr_object*, ctr_argument*);
+extern void ctr_check_permission( uint8_t operationID );
+extern uint8_t ctr_program_security_profile;
+extern uint64_t ctr_program_tick;
+extern uint64_t ctr_program_maxtick;
+extern ctr_object* (*ctr_secpro_eval_whitelist[64])(ctr_object*, ctr_argument*);
 
 /**
  * Clock Interface
  */
-ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, uint8_t forward );
-ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_time(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_new(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_new_set(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_like(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_day(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_month(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_year(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_hour(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_minute(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_second(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_weekday(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_yearday(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_week(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_set_day(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_set_month(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_set_year(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_set_hour(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_set_minute(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_set_second(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_clock_get_time( ctr_object* myself, ctr_argument* argumentList, char part );
-ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, char part );
-ctr_object* ctr_clock_set_zone( ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_clock_to_number( ctr_object* myself, ctr_argument* argumentList );
-void ctr_clock_init( ctr_object* clock );
+extern ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, uint8_t forward );
+extern ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_time(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_new(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_new_set(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_like(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_day(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_month(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_year(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_hour(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_minute(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_second(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_weekday(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_yearday(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_week(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_set_day(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_set_month(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_set_year(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_set_hour(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_set_minute(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_set_second(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_clock_get_time( ctr_object* myself, ctr_argument* argumentList, char part );
+extern ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, char part );
+extern ctr_object* ctr_clock_set_zone( ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_clock_to_number( ctr_object* myself, ctr_argument* argumentList );
+extern void ctr_clock_init( ctr_object* clock );
 
 /**
  * Garbage Collector Object Interface
  */
-ctr_object* ctr_gc_collect(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_gc_dust(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_gc_object_count(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_gc_kept_count(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_gc_kept_alloc(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_gc_to_string(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_gc_to_number(ctr_object* myself, ctr_argument* argumentList);
-void ctr_gc_sweep( int all );
+extern ctr_object* ctr_gc_collect(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_gc_dust(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_gc_object_count(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_gc_kept_count(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_gc_kept_alloc(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_gc_to_string(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_gc_to_number(ctr_object* myself, ctr_argument* argumentList);
+extern void ctr_gc_sweep( int all );
 
 /**
  * Global Garbage Collector variables
  */
-int ctr_gc_dust_counter;
-int ctr_gc_object_counter;
-int ctr_gc_kept_counter;
-int ctr_gc_sticky_counter;
-int ctr_gc_mode;
+extern int ctr_gc_dust_counter;
+extern int ctr_gc_object_counter;
+extern int ctr_gc_kept_counter;
+extern int ctr_gc_sticky_counter;
+extern int ctr_gc_mode;
 
-uint64_t ctr_gc_alloc;
-uint64_t ctr_gc_memlimit;
+extern uint64_t ctr_gc_alloc;
+extern uint64_t ctr_gc_memlimit;
 
 /**
  * Misc Interfaces
  */
-ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_dice_sides(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_dice_randomize_bytes(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_dice_to_string(ctr_object* myself, ctr_argument* argumentList );
-ctr_object* ctr_dice_to_number(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_dice_sides(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_dice_randomize_bytes(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_dice_to_string(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_dice_to_number(ctr_object* myself, ctr_argument* argumentList );
 
 /**
  * Literal Constructors (internal only)
  */
-ctr_object* ctr_build_empty_string();
-ctr_object* ctr_build_string(char* object, long vlen);
-ctr_object* ctr_build_block(ctr_tnode* node);
-ctr_object* ctr_build_number(char* object);
-ctr_object* ctr_build_number_from_string(char* fixedStr, ctr_size strLength);
-ctr_object* ctr_build_number_from_float(ctr_number floatNumber);
-ctr_object* ctr_build_bool(int truth);
-ctr_object* ctr_build_nil();
-ctr_object* ctr_build_string_from_cstring( char* str );
-void ctr_gc_internal_collect();
-ctr_object* ctr_gc_internal_pin( ctr_object* object );
-ctr_object* ctr_gc_memory(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_build_empty_string();
+extern ctr_object* ctr_build_string(char* object, long vlen);
+extern ctr_object* ctr_build_block(ctr_tnode* node);
+extern ctr_object* ctr_build_number(char* object);
+extern ctr_object* ctr_build_number_from_string(char* fixedStr, ctr_size strLength);
+extern ctr_object* ctr_build_number_from_float(ctr_number floatNumber);
+extern ctr_object* ctr_build_bool(int truth);
+extern ctr_object* ctr_build_nil();
+extern ctr_object* ctr_build_string_from_cstring( char* str );
+extern void ctr_gc_internal_collect();
+extern ctr_object* ctr_gc_internal_pin( ctr_object* object );
+extern ctr_object* ctr_gc_memory(ctr_object* myself, ctr_argument* argumentList);
 
 
-void* ctr_heap_allocate( size_t size );
-void* ctr_heap_allocate_tracked( size_t size );
-void  ctr_heap_free( void* ptr );
-void  ctr_heap_free_rest();
-void* ctr_heap_reallocate(void* oldptr, size_t size );
-size_t ctr_heap_get_latest_tracking_id();
-void* ctr_heap_reallocate_tracked(size_t tracking_id, size_t size );
-char* ctr_heap_allocate_cstring( ctr_object* o );
-ctr_object* ctr_error( char* error_string, int error_code );
-ctr_object* ctr_error_text( char* error_string );
-void ctr_pool_init( ctr_size pool );
+extern void* ctr_heap_allocate( size_t size );
+extern void* ctr_heap_allocate_tracked( size_t size );
+extern void  ctr_heap_free( void* ptr );
+extern void  ctr_heap_free_rest();
+extern void* ctr_heap_reallocate(void* oldptr, size_t size );
+extern size_t ctr_heap_get_latest_tracking_id();
+extern void* ctr_heap_reallocate_tracked(size_t tracking_id, size_t size );
+extern char* ctr_heap_allocate_cstring( ctr_object* o );
+extern ctr_object* ctr_error( char* error_string, int error_code );
+extern ctr_object* ctr_error_text( char* error_string );
+extern void ctr_pool_init( ctr_size pool );
 
-uint8_t  ctr_accept_n_connections;
-uint16_t ctr_default_port;
+extern uint8_t  ctr_accept_n_connections;
+extern uint16_t ctr_default_port;
 
-char ctr_program_log_type;
-int ctr_string_interpolation;
-void ctr_clex_move_code_pointer(int movement);
-int ctr_clex_forward_scan( char* codePointer, char* bytes, ctr_size* newCodePointer );
-int ctr_clex_backward_scan( char* codePointer, char* bytes, ctr_size* newCodePointer, ctr_size limit );
+extern char ctr_program_log_type;
+extern int ctr_string_interpolation;
+extern void ctr_clex_move_code_pointer(int movement);
+extern int ctr_clex_forward_scan( char* codePointer, char* bytes, ctr_size* newCodePointer );
+extern int ctr_clex_backward_scan( char* codePointer, char* bytes, ctr_size* newCodePointer, ctr_size limit );

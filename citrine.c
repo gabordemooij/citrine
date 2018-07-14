@@ -15,6 +15,11 @@
 int ctr_argc;
 char** ctr_argv;
 
+char* ctr_mode_input_file;
+char* ctr_mode_dict_file;
+char* ctr_mode_hfile1;
+char* ctr_mode_hfile2;
+
 /**
  * CommandLine Display Welcome Message
  * Displays a Welcome message, copyright information,
