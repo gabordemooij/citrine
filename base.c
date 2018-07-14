@@ -1068,14 +1068,14 @@ ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] % [modulo]
+ * [Number] modulo: [modulo]
  *
  * Returns the modulo of the number. This message will return a new
  * object representing the modulo of the recipient.
  *
  * Usage:
  *
- * x := 11 % 3. #x will now be 2
+ * x := 11 modulo: 3.
  *
  * Use this message to apply the operation of division to the
  * object itself instead of generating a new one.

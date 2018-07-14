@@ -1,6 +1,6 @@
 
 ." Manpage for ctr.
-.TH man 1 "1 June 2017" "1.0" "CTR man page"
+.TH man 1 "14 July 2018" "1.0" "CTR man page"
 .SH NAME
 ctr - run a Citrine program
 .SH SYNOPSIS
@@ -648,7 +648,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .fi
 .BR.BR.BR
 
-.B [Number] % [modulo]
+.B [Number] modulo: [modulo]
 .nf
     
      Returns the modulo of the number. This message will return a new
@@ -656,7 +656,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
     
-     x := 11 % 3. #x will now be 2
+     x := 11 modulo: 3.
     
      Use this message to apply the operation of division to the
      object itself instead of generating a new one.

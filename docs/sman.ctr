@@ -3,7 +3,7 @@ Program memory: 600000.
 Program tidiness: 4.
 ✎ write: '
 .\" Manpage for ctr.
-.TH man 1 "1 June 2017" "1.0" "CTR man page"
+.TH man 1 "14 July 2018" "1.0" "CTR man page"
 .SH NAME
 ctr \- run a Citrine program
 .SH SYNOPSIS
