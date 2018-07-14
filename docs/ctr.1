@@ -4,9 +4,25 @@
 .SH NAME
 ctr - run a Citrine program
 .SH SYNOPSIS
-ctr [PROGRAM]
+ctr [OPTION]... [PROGRAM]
 .SH DESCRIPTION
 Citrine is general purpose programming language for UNIX-like operating systems.
+
+.BR
+.BR
+.BR
+
+.B -t 
+translate a program instead of running it (followed by dictionary file to use).
+
+.BR
+.BR
+.BR
+
+.B -g 
+generate a new dictionary file from a pair of dictionary.h Citrine source headers.
+
+
 .SH REFERENCE MANUAL
 Citrine has 5 literals:
 .RS 4
@@ -27,181 +43,344 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .br
 .BR.BR.BR
 
-.B  * Nil
+.B Nil
 .nf
     
+     Nil represents 'nothing' or NULL in other languages.
+     Any object property that has not been assigned a value
+     will contain Nil. Unlike some other programming languages
+     Citrine has no concept of 'undefined' or isset, Nil is actually the
+     same as 'undefined' or not set.
+    
+     Literal:
+    
+     Nil
 .fi
 .BR.BR.BR
 
-.B  * [Nil] Nil?
+.B [Nil] Nil?
 .nf
     
+     Nil always answers this message with a boolean object 'True'.
 .fi
 .BR.BR.BR
 
-.B  * [Nil] string
+.B [Nil] string
 .nf
     
+     Returns the string representation of Nil: 'Nil'.
 .fi
 .BR.BR.BR
 
-.B  * [Nil] number
+.B [Nil] number
 .nf
     
+     Returns the numerical representation of Nil: 0.
 .fi
 .BR.BR.BR
 
-.B  * [Nil] boolean
+.B [Nil] boolean
 .nf
     
+     Returns the boolean representation of Nil: False.
 .fi
 .BR.BR.BR
 
-.B  * Object
+.B Object
 .nf
     
+     This is the base object, the parent of all other objects.
+     It contains essential object oriented programming features.
 .fi
 .BR.BR.BR
 
-.B  * [Object] type
+.B [Object] type
 .nf
     
+     Returns a string representation of the type of object.
 .fi
 .BR.BR.BR
 
-.B  * [Object] string
+.B [Object] string
 .nf
     
+     Returns a string representation of a generic object.
+     This string representation will be:
+    
+     [Object]
 .fi
 .BR.BR.BR
 
-.B  * [Object] number
+.B [Object] number
 .nf
     
+     Returns a numerical representation of the object. This basic behavior, part
+     of any object will just return 1. Other objects typically override this
+     behavior with more useful implementations.
 .fi
 .BR.BR.BR
 
-.B  * [Object] boolean
+.B [Object] boolean
 .nf
     
+     Returns a boolean representation of the object. This basic behavior, part
+     of any object will just return True. Other objects typically override this
+     behavior with more useful implementations.
 .fi
 .BR.BR.BR
 
-.B  * [Object] equals: [other]
+.B [Object] equals: [other]
 .nf
+    
+     Tests whether the current instance is the same as
+     the argument. You also use the message '=' for this
+     however, often that message will be overridden by a
+     derived object (Number will use = to compare the numeric values
+     for instance).
     
+     Usage:
+    
+     object equals: other
 .fi
 .BR.BR.BR
 
-.B  * [Object] myself
+.B [Object] myself
 .nf
     
+     Returns the object itself.
 .fi
 .BR.BR.BR
 
-.B  * [Object] do
+.B [Object] do
 .nf
+    
+     Activates 'chain mode'. If chain mode is active, all messages will
+     return the recipient object regardless of their return signature.
+     The 'do' message tells the object to always return itself and disgard
+     the original return value until the message 'done' has been received.
     
+     Usage:
+    
+     a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
+     a do pop shift prepend: 'hi', append: 999, done.
 .fi
 .BR.BR.BR
 
-.B  * [Object] done
+.B [Object] done
 .nf
     
+     Deactivates 'chain mode'.
 .fi
 .BR.BR.BR
 
-.B  * [Object] copy
+.B [Object] copy
 .nf
+    
+     Contrary to other languages, all objects, even booleans, numbers and
+     strings are assigned and passed by reference. To create a shallow copy
+     of a number, string or boolean send the message 'copy'.
     
+     Usage:
+    
+     a := 5.
+     b := a copy.
+     b add: 1.
+    
 .fi
 .BR.BR.BR
 
-.B  * [Object] case: [Object] do: [Block].
+.B [Object] case: [Object] do: [Block].
 .nf
+    
+     This message makes the recipient compare itself to the specified object.
+     If the recipient considers itself to be equal, it will carry out the
+     instructions in the associated block of code. The recipient will send
+     the message '=' to itself with the other object as an argument. This leaves
+     it up to the recipient to determine whether the objects are considered
+     equal. If the recipient decides the objects are not equal, the associated
+     code block will be ignored. Note that this allows you to implement a
+     so-called switch-statement like those found in other languages. Because
+     of the generic implementation, you can use the case statements on almost
+     any object. Case-do statements may provide a readable alternative to a
+     long list of if-else messages.
+    
+     The example program below will print the text 'It's a Merlot!'.
     
+     Usage:
+    
+     wine
+    	case: 'cabernet' do: { ✎ write: 'it\\'s a Cabernet!'. },
+    	case: 'syrah'    do: { ✎ write: 'it\\'s a Syrah!'.    },
+    	case: 'merlot'   do: { ✎ write: 'it\\'s a Merlot!'.   },
+    	case: 'malbec'   do: { ✎ write: 'it\\'s a Malbec!'.   }.
 .fi
 .BR.BR.BR
 
-.B  * [Object] message: [String] arguments: [List]
+.B [Object] message: [String] arguments: [List]
 .nf
+    
+     Sends a custom or 'dynamic' message to an object. This takes a string containing
+     the message to be send to the object and an array listing the arguments at the
+     correct indexes. If the array fails to provide the correct indexes this will
+     generate an out-of-bounds error coming from the Array object. If something other
+     than an List is provided an error will be thrown as well.
+    
+     Usage:
+    
+     ☞ str := 'write:'.
+     ✎ message: 'write:' arguments: (List ← 'Hello World').
     
+     This will print the string 'Hello world' on the screen using a dynamically
+     crafted message.
 .fi
 .BR.BR.BR
 
-.B  * [Object] on: [String] do: [Block]
+.B [Object] on: [String] do: [Block]
 .nf
     
+     Makes the object respond to a new kind of message.
+     Use the semicolons to indicate the positions of the arguments to be
+     passed.
+    
+     Usage:
+    
+     object on: 'greet' do: { ... }.
+     object on: 'between:and:' do: { ... }.
+    
 .fi
-.BR.BR.BR
-
-.BR.BR.BR
-
 .BR.BR.BR
 
-.B  * [Object] respond: [String]
+.B [Object] respond: [String]
 .nf
+    
+     Variations:
     
+     [Object] respond: [String] with: [String]
+     [Object] respond: [String] with: [String] and: [String]
+    
+     Default respond-to implemention, does nothing.
+     You can override this behaviour to implement generic behaviour.
+     Listening to these messages allows users to send any message to an
+     object. For instance an object can respond to any message it does not
+     understand by echoing the message.
 .fi
 .BR.BR.BR
 
-.B  * [Object] Nil?
+.B [Object] Nil?
 .nf
+    
+     Default Nil? implementation.
     
+     Always returns boolean object False.
 .fi
 .BR.BR.BR
 
-.B  * [Object] learn: [String] means: [String].
+.B [Object] learn: [String] means: [String].
 .nf
+    
+     Teaches any object to repsond to the first specified message just like
+     it would upon receiving the second. This allows you to map existing
+     responses to new messages. You can use this to translate messages into your native
+     language. After mapping, sending the alias message will be just as fast
+     as sending the original message. You can use this to create programs
+     in your native language without sacrficing performance. Of course the mapping itself
+     has a cost, but the mapped calls will be 'toll-free'.
+    
+     Usage:
     
+     Boolean learn: 'yes:' means: 'true:'.
+    
 .fi
 .BR.BR.BR
 
-.B  * Boolean
+.B Boolean
 .nf
+    
+     Literal:
     
+     True
+     False
 .fi
 .BR.BR.BR
 
-.B  * [Boolean] = [other]
+.B [Boolean] = [other]
 .nf
     
+     Tests whether the other object (as a boolean) has the
+     same value (boolean state True or False) as the current one.
+    
+     Usage:
+    
+     (True = False) false: { ✎ write: 'This is not True!'. }.
 .fi
 .BR.BR.BR
 
-.B  * [Boolean] != [other]
+.B [Boolean] != [other]
 .nf
+    
+     Tests whether the other object (as a boolean) has the
+     same value (boolean state True or False) as the current one.
     
+     Usage:
+    
+     (True != False) true: { ✎ write: 'This is not True!'. }.
 .fi
 .BR.BR.BR
 
-.B  * [Boolean] string
+.B [Boolean] string
 .nf
     
+     Returns a string representation of a boolean value, i.e. 'True' or 'False'.
 .fi
 .BR.BR.BR
 
-.B  * [Boolean] break
+.B [Boolean] break
 .nf
+    
+     Breaks out of the current block and bubbles up to the parent block if
+     the value of the receiver equals boolean True.
     
+     Usage:
+    
+     { :iteration
+         (iteration > 10) break.
+     } * 20.
 .fi
 .BR.BR.BR
 
-.B  * [Boolean] continue
+.B [Boolean] continue
 .nf
+    
+     Skips the remainder of the current block in a loop, continues to the next
+     iteration.
     
+     Usage:
+    
+     (iteration > 10) continue.
 .fi
 .BR.BR.BR
 
-.B  * [Boolean] true: [block]
+.B [Boolean] true: [block]
 .nf
+    
+     Executes a block of code if the value of the boolean
+     object is True.
     
+     Usage:
+    
+     (some expression) true: { ... }.
 .fi
 .BR.BR.BR
 
-.B  * [Boolean] false: [block]
+.B [Boolean] false: [block]
 .nf
+    
+     Executes a block of code if the value of the boolean
+     object is True.
     
+     Usage:
+    
+     (some expression) false: { ... }.
 .fi
 .BR.BR.BR
 
@@ -209,51 +388,92 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B  * [Boolean] not
+.B [Boolean] not
 .nf
+    
+     Returns the opposite of the current value.
     
+     Usage:
+     True := False not.
+    
 .fi
 .BR.BR.BR
 
-.B  * [Boolean] either: [this] or: [that]
+.B [Boolean] either: [this] or: [that]
 .nf
     
+     Returns argument #1 if boolean value is True and argument #2 otherwise.
 .fi
 .BR.BR.BR
 
-.B  * [Boolean] and: [other]
+.B [Boolean] and: [other]
 .nf
+    
+     Returns True if both the object value is True and the
+     argument is True as well.
     
+     Usage:
+    
+     a and: b
+    
 .fi
 .BR.BR.BR
 
-.B  * [Boolean] nor: [other]
+.B [Boolean] nor: [other]
 .nf
+    
+     Returns True if the object value is False and the
+     argument is False as well.
+    
+     Usage:
+    
+     a nor: b
     
 .fi
 .BR.BR.BR
 
-.B  * [Boolean] or: [other]
+.B [Boolean] or: [other]
 .nf
     
+     Returns True if either the object value is True or the
+     argument is True or both are True.
+    
+     Usage:
+    
+     a or: b
 .fi
 .BR.BR.BR
 
-.B  * [Boolean] ? [other]
+.B [Boolean] ? [other]
 .nf
+    
+     Returns True if either the object value is True or the
+     argument is True but not both.
+    
+     Usage:
     
+     a ? b
 .fi
 .BR.BR.BR
 
-.B  * [Boolean] number
+.B [Boolean] number
 .nf
     
+     Returns 0 if boolean is False and 1 otherwise.
 .fi
 .BR.BR.BR
 
-.B  * Number
+.B Number
 .nf
     
+     Literal:
+    
+     0
+     1
+     -8
+     2.5
+    
+     Represents a number object in Citrine.
 .fi
 .BR.BR.BR
 
@@ -261,209 +481,382 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B  * [Number] > [other]
+.B [Number] > [other]
 .nf
     
+     Returns True if the number is higher than other number.
 .fi
 .BR.BR.BR
 
-.B  * [Number] ≥ [other]
+.B [Number] ≥ [other]
 .nf
     
+     Returns True if the number is higher than or equal to other number.
 .fi
 .BR.BR.BR
 
-.B  * [Number] < [other]
+.B [Number] < [other]
 .nf
     
+     Returns True if the number is less than other number.
 .fi
 .BR.BR.BR
 
-.B  * [Number] ≤ [other]
+.B [Number] ≤ [other]
 .nf
     
+     Returns True if the number is less than or equal to other number.
 .fi
 .BR.BR.BR
 
-.B  * [Number] = [other]
+.B [Number] = [other]
 .nf
     
+     Returns True if the number equals the other number.
 .fi
 .BR.BR.BR
 
-.B  * [Number] ≠ [other]
+.B [Number] ≠ [other]
 .nf
     
+     Returns True if the number does not equal the other number.
 .fi
 .BR.BR.BR
 
-.B  * [Number] between: [Number] and: [Number]
+.B [Number] between: [Number] and: [Number]
 .nf
+    
+     Returns a random number between the specified boundaries,
+     including the upper and lower boundary of the number. So,
+     asking for a number between 0 and 10 may result in numbers like
+     0 and 10 as well. Only rounded numbers are returned and the
+     boundaries will be rounded as well. So a random number between
+     0.5 and 1 will always result in 1. Negative numbers are allowed
+     as well.
+    
+     Usage:
     
+     ☞ x := Number between 0 and: 10.
 .fi
 .BR.BR.BR
 
-.B  * [Number] odd?
+.B [Number] odd?
 .nf
     
+     Returns True if the number is odd and False otherwise.
 .fi
 .BR.BR.BR
 
-.B  * [Number] even?
+.B [Number] even?
 .nf
     
+     Returns True if the number is even and False otherwise.
 .fi
 .BR.BR.BR
 
-.B  * [Number] + [Number]
+.B [Number] + [Number]
 .nf
     
+     Adds the other number to the current one. Returns a new
+     number object.
 .fi
 .BR.BR.BR
 
-.B  * [Number] add: [Number]
+.B [Number] add: [Number]
 .nf
     
+     Increases the number ITSELF by the specified amount, this message will change the
+     value of the number object itself instead of returning a new number.
 .fi
 .BR.BR.BR
 
-.B  * [Number] - [Number]
+.B [Number] - [Number]
 .nf
     
+     Subtracts the other number from the current one. Returns a new
+     number object.
 .fi
 .BR.BR.BR
 
-.B  * [Number] subtract: [number]
+.B [Number] subtract: [number]
 .nf
     
+     Decreases the number ITSELF by the specified amount, this message will change the
+     value of the number object itself instead of returning a new number.
 .fi
 .BR.BR.BR
 
-.B  * [Number] * [Number or Block]
+.B [Number] * [Number or Block]
 .nf
     
+     Multiplies the number by the specified multiplier. Returns a new
+     number object.
 .fi
 .BR.BR.BR
 
-.B  * [Block] * [Number]
+.B [Block] * [Number]
 .nf
     
+     Runs the block of code a 'Number' of times.
+     This is the most basic form of a loop.
+     The example runs the block 7 times. The current iteration
+     number is passed to the block as a parameter (i in this example).
+     
+     Usage:
+    
+     { :i ✎ write: i. } * 7.
+    
 .fi
 .BR.BR.BR
 
-.B  * [Number] multiply by: [Number]
+.B [Number] multiply by: [Number]
 .nf
+    
+     Multiplies the number ITSELF by multiplier, this message will change the
+     value of the number object itself instead of returning a new number.
+     Use this message to apply the operation to the object itself instead
+     of creating and returning a new object.
+    
+     Usage:
     
+     x := 5.
+     x multiply by: 2.
 .fi
 .BR.BR.BR
 
-.B  * [Number] / [Number]
+.B [Number] / [Number]
 .nf
     
+     Divides the number by the specified divider. Returns a new
+     number object.
 .fi
 .BR.BR.BR
 
-.B  * [Number] devide by: [Number]
+.B [Number] devide by: [Number]
 .nf
     
+     Divides the number ITSELF by divider, this message will change the
+     value of the number object itself instead of returning a new number.
+     Use this message to apply the operation to the object itself instead
+     of generating a new object.
+    
+     Usage:
+    
+     x := 10.
+     x divide by: 2.
+    
 .fi
 .BR.BR.BR
 
-.B  * [Number] % [modulo]
+.B [Number] % [modulo]
 .nf
+    
+     Returns the modulo of the number. This message will return a new
+     object representing the modulo of the recipient.
+    
+     Usage:
     
+     x := 11 % 3. #x will now be 2
+    
+     Use this message to apply the operation of division to the
+     object itself instead of generating a new one.
 .fi
 .BR.BR.BR
 
-.B  * [Number] power: [power]
+.B [Number] power: [power]
 .nf
+    
+     Returns a new object representing the
+     number to the specified power.
+     The example above will raise 2 to the power of 8 resulting in
+     a new Number object: 256.
     
+     Usage:
+    
+     x := 2 power: 8.
 .fi
 .BR.BR.BR
 
-.B  * [Number] positive?
+.B [Number] positive?
 .nf
+    
+     Returns a boolean indicating wether the number is positive.
+     This message will return a boolean object 'True' if the recipient is
+     positive and 'False' otherwise.
+     The example above will print the message because hope is higher than 0.
     
+     Usage:
+    
+     hope := 0.1.
+     ( hope positive? ) true: {
+         ✎ write: 'Still a little hope for humanity'.
+     }.
 .fi
 .BR.BR.BR
 
-.B  * [Number] negative?
+.B [Number] negative?
 .nf
+    
+     Returns a boolean indicating wether the number is negative.
+     This message will return a boolean object 'True' if the recipient is
+     negative and 'False' otherwise. It's the eaxct opposite of the 'positive'
+     message.
+     The example above will print the message because the value of the variable
+     hope is less than 0.
+    
+     Usage:
+    
+     hope := -1.
+     (hope negative?) ifTrue: { Pen write: 'No hope left'. }.
     
 .fi
 .BR.BR.BR
 
-.B  * [Number] floor
+.B [Number] floor
 .nf
     
+     Gives the largest integer less than the recipient.
+     The example above applies the floor function to the recipient (4.5)
+     returning a new number object (4).
+    
+     Usage:
+    
+     x := 4.5
+     y := x floor.
 .fi
 .BR.BR.BR
 
-.B  * [Number] qualify: 'meters'.
+.B [Number] qualify: 'meters'.
 .nf
     
+     Qualifies a number. Alias for: [Number] [String].
+     See the [Number] [String] message signature for more details.
 .fi
 .BR.BR.BR
 
-.B  * [Number] [String]
+.B [Number] [String]
 .nf
+    
+     Qualifies a number. By sending an arbitrary (undocumented) unary message to
+     a Number object your message will be set as the qualification property of the number
+     and passed around along with the number value itself.
+    
+     Usage:
     
+     Number learn: 'plus:' means: '+'.
+     Number on: '+' do: { :x
+         ☞ rate := 1.
+         ☞ currency := x qualification.
+         (currency = 'euros') true: {
+             rate := 2.
+         }.
+         ↲ (⛏ plus: (x * rate)).
+     }.
+     ☞ money := 3 dollars + 2 euros.
 .fi
 .BR.BR.BR
 
-.B  * [Number] qualification.
+.B [Number] qualification.
 .nf
     
+     Returns the qualification of a number object. For instance, as a
+     number (let's say 99) has been qualified as the number of bottles using
+     a message like: '99 bottles' this message will return the descriptive string
+     'bottles'. For usage examples, please consult the [Number] [String] message
+     signature.
 .fi
 .BR.BR.BR
 
 .BR.BR.BR
 
-.B  * [Number] ceil
+.B [Number] ceil
 .nf
     
+     Rounds up the recipient number and returns the next higher integer number
+     as a result.
+     The example above applies the ceiling function to the recipient (4.5)
+     returning a new number object (5).
+    
+     Usage:
+    
+     x := 4.5.
+     y = x ceil.
 .fi
 .BR.BR.BR
 
-.B  * [Number] round
+.B [Number] round
 .nf
     
+     Returns the rounded number.
 .fi
 .BR.BR.BR
 
-.B  * [Number] absolute
+.B [Number] absolute
 .nf
     
+     Returns the absolute (unsigned, positive) value of the number.
+     The example above strips the sign off the value -7 resulting
+     in 7.
+    
+     Usage:
+    
+     x := -7.
+     y := x absolute.
 .fi
 .BR.BR.BR
 
-.B  * [Number] square root
+.B [Number] square root
 .nf
+    
+     Returns the square root of the recipient.
+     The example above takes the square root of 49, resulting in the
+     number 7.
     
+     Usage:
+    
+     ☞ x := 49.
+     ☞ y := x square root.
 .fi
 .BR.BR.BR
 
-.B  * [Number] byte
+.B [Number] byte
 .nf
     
+     Converts a number to a single byte.
 .fi
 .BR.BR.BR
 
-.B  * [Number] string
+.B [Number] string
 .nf
     
+     Wrapper for cast function.
 .fi
 .BR.BR.BR
 
-.B  * [Number] boolean
+.B [Number] boolean
 .nf
     
+     Casts a number to a boolean object.
 .fi
 .BR.BR.BR
 
-.B  * String
+.B String
 .nf
+    
+     Literal:
+    
+     'Hello World, this is a String.'
+    
+     A sequence of bytes or characters. In Citrine, strings are UTF-8 aware.
+     You may only use single quotes. To escape a character use the
+     backslash '\\' character. Use the special characters ↵ and ⇿ to
+     insert a newline or tab respectively.
     
+     Strings in Citrine represent a series of bytes. Strings can be
+     interpreted as real bytes or as text depending on the messages
+     send. For instance, the message 'bytes' returns the number of bytes
+     in a string, while the message 'length' returns the number of
+     characters (as defined as separate UTF-8 code points) in a string.
 .fi
 .BR.BR.BR
 
@@ -471,620 +864,1305 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B  * [String] bytes
+.B [String] bytes
 .nf
     
+     Returns the number of bytes in a string, as opposed to
+     length which returns the number of UTF-8 code points (symbols or characters).
 .fi
 .BR.BR.BR
 
-.B  * [String] = [other]
+.B [String] = [other]
 .nf
     
+     Returns True if the other string is the same (in bytes).
 .fi
 .BR.BR.BR
 
-.B  * [String] ≠ [other]
+.B [String] ≠ [other]
 .nf
     
+     Returns True if the other string is not the same (in bytes).
 .fi
 .BR.BR.BR
 
-.B  * [String] length
+.B [String] length
 .nf
     
+     Returns the length of the string in symbols.
+     This message is UTF-8 unicode aware. A 4 byte character will be counted as ONE.
 .fi
 .BR.BR.BR
 
-.B  * [String] + [other]
+.B [String] + [other]
 .nf
     
+     Appends other string to self and returns the resulting
+     string as a new object.
 .fi
 .BR.BR.BR
 
-.B  * [String] append: [String].
+.B [String] append: [String].
 .nf
     
+     Appends the specified string to itself. This is different from the '+'
+     message, the '+' message adds the specified string while creating a new string.
+     Appends on the other hand modifies the original string.
+    
+     Usage:
+    
+     x := 'Hello '.
+     x append: 'World'.
+     ✎ write: x.
+    
 .fi
 .BR.BR.BR
 
-.B  * [String] from: [start] length: [length]
+.B [String] from: [start] length: [length]
 .nf
+    
+     Returns a portion of a string defined by from
+     and length values.
+     This message is UTF-8 unicode aware.
     
+     Usage:
+    
+     'hello' from: 2 length: 3.
 .fi
 .BR.BR.BR
 
-.B  * [String] offset: [Number]
+.B [String] offset: [Number]
 .nf
     
+     Returns a string without the first X characters.
 .fi
 .BR.BR.BR
 
-.B  * [String] character: [Number]
+.B [String] character: [Number]
 .nf
+    
+     Returns the character at the specified position (UTF8 aware).
+    
+     Usage:
+    
+     ('hello' character: 2).
     
 .fi
 .BR.BR.BR
 
-.B  * [String] byte: [Number]
+.B [String] byte: [Number]
 .nf
     
+     Returns the byte at the specified position (in bytes).
+    
+     Usage:
+     ('abc' byte: 1).
 .fi
 .BR.BR.BR
 
-.B  * [String] find: [subject]
+.B [String] find: [subject]
 .nf
+    
+     Returns the index (character number, not the byte!) of the
+     needle in the haystack.
     
+     Usage:
+    
+     'find the needle' find: 'needle'.
+    
 .fi
 .BR.BR.BR
 
-.B  * [String] uppercase
+.B [String] uppercase
 .nf
     
+     Returns a new uppercased version of the string.
+     Note that this is just basic ASCII case functionality, this should only
+     be used for internal keys and as a basic utility function. This function
+     DOES NOT WORK WITH UTF8 characters !
 .fi
 .BR.BR.BR
 
-.B  * [String] lowercase
+.B [String] lowercase
 .nf
     
+     Returns a new lowercased version of the string.
+     Note that this is just basic ASCII case functionality, this should only
+     be used for internal keys and as a basic utility function. This function
+     DOES NOT WORK WITH UTF8 characters !
 .fi
 .BR.BR.BR
 
-.B  * [String] last: [subject]
+.B [String] last: [subject]
 .nf
+    
+     Returns the index (character number, not the byte!) of the
+     needle in the haystack.
     
+     Usage:
+    
+     'find the needle' last: 'needle'.
 .fi
 .BR.BR.BR
 
-.B  * [String] [key]: [value]
+.B [String] [key]: [value]
 .nf
+    
+     Replaces the character sequence 'key' with the contents of value.
+     The example will produce the string '$ 10'.
     
+     Usage:
+    
+     '$ money' money: 10.
 .fi
 .BR.BR.BR
 
-.B  * [String] replace: [string] with: [other]
+.B [String] replace: [string] with: [other]
 .nf
+    
+     Replaces needle with replacement in original string and returns
+     the result as a new string object.
     
+     Usage:
+    
+     'LiLo BootLoader' replace: 'L' with: 'l'.
 .fi
 .BR.BR.BR
 
-.B  * [String] pattern: [String] process: [Block] options: [String].
+.B [String] pattern: [String] process: [Block] options: [String].
 .nf
+    
+     Matches the POSIX regular expression in the first argument against
+     the string and executes the specified block on every match passing
+     an array containing the matches.
+    
+     The options parameter can be used to pass specific flags to the
+     regular expression engine. As of the moment of writing this functionality
+     has not been implemented yet. The only flag you can set at this moment is
+     the 'ignore' flag, just a test flag. This flag does not execute the block.
+    
+     Usage:
     
+     'hello world' pattern: '([hl])' process: { :arr
+      	✎ write: (arr join: '|'), end.
+     } options: ''.
+    
+     On every match the block gets executed and the matches are
+     passed to the block as arguments. You can also use this feature to replace
+     parts of the string, simply return the replacement string in your block.
 .fi
 .BR.BR.BR
 
-.B  * [String] pattern: [String] process: [Block].
+.B [String] pattern: [String] process: [Block].
 .nf
     
+     Same as pattern:process:options: but without the options, no flags will
+     be send to the regex engine.
 .fi
 .BR.BR.BR
 
-.B  * [String] contains: [String]
+.B [String] contains: [String]
 .nf
     
+     Returns True if the other string is a substring.
 .fi
 .BR.BR.BR
 
-.B  * [String] matches: [String].
+.B [String] matches: [String].
 .nf
+    
+     Tests the pattern against the string and returns True if there is a match
+     and False otherwise.
+     In the example: match will be True because there is a space in 'Hello World'.
+    
+     Usage:
+    
+     ☞ match := 'Hello World' matches: '[:space:]'.
     
 .fi
 .BR.BR.BR
 
-.B  * [String] remove surrounding spaces
+.B [String] remove surrounding spaces
 .nf
     
+     Trims a string. Removes surrounding white space characters
+     from string and returns the result as a new string object.
+     The example above will strip all white space characters from the
+     recipient on both sides of the text.
+    
+     Usage:
+    
+     ' hello ' remove surrounding spaces.
+    
 .fi
 .BR.BR.BR
 
-.B  * [String] number
+.B [String] number
 .nf
     
+     Converts string to a number.
 .fi
 .BR.BR.BR
 
-.B  * [String] boolean
+.B [String] boolean
 .nf
     
+     Converts string to boolean
 .fi
 .BR.BR.BR
 
-.B  * [String] split: [String]
+.B [String] split: [String]
 .nf
     
+     Converts a string to an array by splitting the string using
+     the specified delimiter (also a string).
 .fi
 .BR.BR.BR
 
-.B  * [String] characters.
+.B [String] characters.
 .nf
+    
+     Splits the string in UTF-8 characters and returns
+     those as an array.
+    
+     Usage:
     
+     a := 'abc' characters.
+     a count.
 .fi
 .BR.BR.BR
 
-.B  * [String] list
+.B [String] list
 .nf
     
+     Returns an array of bytes representing the string.
 .fi
 .BR.BR.BR
 
-.B  * [String] append byte: [Number].
+.B [String] append byte: [Number].
 .nf
     
+     Appends a raw byte to a string.
 .fi
 .BR.BR.BR
 
-.B  * [String] compare: [String]
+.B [String] compare: [String]
 .nf
     
+     Compares a string using the UTF-8 compatible strcmp function.
+    
+     Usage:
+    
+     word compare: other.
 .fi
 .BR.BR.BR
 
-.B  * [String] < [String]
+.B [String] < [String]
 .nf
     
+     Returns True if the first String comes before the latter
+     alphabetically. The actual comparison is based on the UTF-8 compatible
+     function strcmp.
 .fi
 .BR.BR.BR
 
-.B  * [String] ≤ [String]
+.B [String] ≤ [String]
 .nf
     
+     Returns True if the first String comes before or at the same
+     position as the latter alphabetically. The actual comparison is based on the UTF-8 compatible
+     function strcmp.
 .fi
 .BR.BR.BR
 
-.B  * [String] > [String]
+.B [String] > [String]
 .nf
     
+     Returns True if the first String comes after the latter
+     alphabetically. The actual comparison is based on the UTF-8 compatible
+     function strcmp.
 .fi
 .BR.BR.BR
 
-.B  * [String] ≥ [String]
+.B [String] ≥ [String]
 .nf
     
+     Returns True if the first String comes after or at the same position as the latter
+     alphabetically. The actual comparison is based on the UTF-8 compatible
+     function strcmp.
 .fi
 .BR.BR.BR
 
 .BR.BR.BR
 
-.B  * [String] hash: [String]
+.B [String] hash: [String]
 .nf
     
+     Returns the hash of the recipient String using the specified key.
+     The default hash in Citrine is the SipHash which is also used internally.
+     SipHash can protect against hash flooding attacks.
 .fi
 .BR.BR.BR
 
-.B  * Block
+.B Block
 .nf
+    
+     Literal:
+    
+     { parameters (if any) here... code here... }
     
+     each parameter has to be prefixed with
+     a colon (:).
+    
+     Usage:
+    
+     { ✎ write: 'a simple code block'. } run.
+     { :param ✎ write: param. } apply: 'write this!'.
+     { :a :b ↲ a + b. } apply: 1 and: 2.
+     { :a :b :c ↲ a + b + c. } apply: 1 and: 2 and: 3.
+    
 .fi
 .BR.BR.BR
 
-.B  * [Block] apply: [object]
+.B [Block] apply: [object]
 .nf
     
+     Runs a block of code using the specified object as a parameter.
+     If you run a block using the messages 'run' or 'apply:', me/my will
+     refer to the block itself instead of the containing object.
 .fi
 .BR.BR.BR
 
-.B  * [Block] while: [block]
+.B [Block] while: [block]
 .nf
+    
+     Runs a block of code, depending on the outcome runs the other block
+     as long as the result of the first one equals boolean True.
+     Example: Here we increment variable x by one until it reaches 6.
+     While the number x is lower than 6 we keep incrementing it.
+     Don't forget to use the return ↲ symbol in the first block.
     
+     Usage:
+    
+     ☞ x := 0.
+     { x add: 1. } while: { ↲ (x < 6). }.
 .fi
 .BR.BR.BR
 
-.B  * [Block] run
+.B [Block] run
 .nf
+    
+     Sending the unary message 'run' to a block will cause it to execute.
+     The run message takes no arguments, if you want to use the block as a function
+     and send arguments, consider using the applyTo-family of messages instead.
+     This message just simply runs the block of code without any arguments.
+     In the example we will run the code inside the block and display
+     the greeting.
     
+     Usage:
+     
+     { ✎ write: 'Hello World'. } run.
+     
 .fi
 .BR.BR.BR
 
-.B  * [Block] set: [name] value: [object]
+.B [Block] set: [name] value: [object]
 .nf
     
+     Sets a variable in a block of code. This how you can get closure-like
+     functionality.
+     In the example we assign a block to a variable named 'shout'.
+     We assign the string 'hello' to the variable 'message' inside the block.
+     When we invoke the block 'shout' by sending the run message without any
+     arguments it will display the string: 'hello!!!'.
+     Similarly, you could use this technique to create a block that returns a
+     block that applies a formula (for instance simple multiplication) and then set the
+     multiplier to use in the formula. This way, you could create a block
+     building 'formula blocks'. This is how you implement use closures
+     in Citrine.
+     
+     Usage:
+     
+     shout := { ✎ write: (my message + '!!!'). }.
+     shout set: 'message' value: 'hello'.
+     shout run.
+    
 .fi
 .BR.BR.BR
 
-.B  * [Block] error: [object].
+.B [Block] error: [object].
 .nf
+    
+     Sets error flag on a block of code.
+     This will throw an error / exception.
+     You can attach an object to the error, for instance
+     an error message.
     
+     Usage:
+    
+     {
+       thisBlock error: 'oops!'.
+     } catch: { :errorMessage
+       ✎ write: errorMessage.
+     }, run.
 .fi
 .BR.BR.BR
 
-.B  * [Block] catch: [otherBlock]
+.B [Block] catch: [otherBlock]
 .nf
+    
+     Associates an error clause to a block.
+     If an error (exception) occurs within the block this block will be
+     executed.
     
+     Usage:
+    
+     {
+        ☞ z := 4 / 0.
+     } catch: { :e
+        ✎ write: e, end.
+     }, run.
 .fi
 .BR.BR.BR
 
-.B  * [Block] string
+.B [Block] string
 .nf
     
+     Returns a string representation of the Block. This basic behavior, part
+     of any object will just return [Block]. Other objects typically override this
+     behavior with more useful implementations.
 .fi
 .BR.BR.BR
 
-.B  * [List] new
+.B [List] new
 .nf
+    
+     Creates a new list or array. List is an alias for array.
+     An array is a collection of items. To create a new array,
+     send the 'new' message to the array. To add an element send
+     the 'push:' message to an array with the element to add as
+     an argument. Instead of using the push-message you can also
+     use the • message. This message is suitable for vertically
+     written arrays because they look similar to lists seen in
+     regular documents. Besides 'push:' and • you can also use
+     the ; message to push an new element on top of the array.
+     The arrow message is the same as 'new' plus 'push:', just a
+     shorter notation. The ; message is very suitable for
+     horizontally written arrays. Finally, the last example
+     depicts a notation using just ascii characters.
+    
+     Usage:
     
+     ☞ meals :=
+    	List new
+    	• 'hamburger'
+    	• 'pizza'
+    	• 'haggis'.
+    
+     ☞ todo := List ← 'dishes' ; 'cleaning'.
+    
 .fi
 .BR.BR.BR
 
-.B  * [List] new
+.B [List] new
 .nf
+    
+     Creates a new array.
+     An array is a collection of items. To create a new array,
+     send the 'new' message to the array. To add an element send
+     the 'push:' message to an array with the element to add as
+     an argument. Instead of using the push-message you can also
+     use the • message. This message is suitable for vertically
+     written arrays because they look similar to lists seen in
+     regular documents. Besides 'push:' and • you can also use
+     the ; message to push an new element on top of the array.
+     The arrow message is the same as 'new' plus 'push:', just a
+     shorter notation. The ; message is very suitable for
+     horizontally written arrays. Finally, the last example
+     depicts a notation using just ascii characters.
+    
+     Usage:
     
+     ☞ meals :=
+    	List new
+    	• 'hamburger'
+    	• 'pizza'
+    	• 'haggis'.
+    
+     ☞ todo := List ← 'dishes' ; 'cleaning'.
+    
 .fi
 .BR.BR.BR
 
-.B  * [List] type
+.B [List] type
 .nf
     
+     Returns the string description for this object type.
+    
 .fi
 .BR.BR.BR
 
-.B  * [List] append: [Element]
+.B [List] append: [Element]
 .nf
+    
+     Adds an element to the end of the list.
+     You can also use add: to do this or one of the symbolic
+     representations: • and ;. Depending on the context, one might be
+     more readable than the other.
     
+     Usage:
+    
+     numbers := List new.
+     numbers append: 3.
+     numbers add: 3.
+     numbers ; 3.
+     numbers • 3.
+     
 .fi
 .BR.BR.BR
 
-.B  * [List] minimum
+.B [List] minimum
 .nf
+    
+     Returns the minimum value in a list.
+     In the example this message will return the number 2.
+     
+     Usage:
     
+     a := List ← 8 ; 4 ; 2 ; 16.
+     m := a minimum.
+    
 .fi
 .BR.BR.BR
 
-.B  * [List] maximum
+.B [List] maximum
 .nf
+    
+     Returns the maximum value in a list.
+     In the example this will yield the number 16.
     
+     Usage:
+    
+     a := List ← 8 ; 4 ; 2 ; 16.
+     m := a maximum.
+    
 .fi
 .BR.BR.BR
 
-.B  * [List] map: [Block].
+.B [List] map: [Block].
 .nf
+    
+     Iterates over the array. Passing each element as a key-value pair to the
+     specified block.
+     The map message will pass the following arguments to the block, the key,
+     the value and a reference to the array itself. The last argument might seem
+     redundant but allows for a more functional programming style. Instead of map,
+     you can also use each:.
+    
+     Usage:
     
+     files map: showName.
+     files map: {
+       :key :filename :files
+       ✎ write: filename.
+     }.
+     
+     files each: {
+       :key :filename :files
+       ✎ write: filename.
+     }.
 .fi
 .BR.BR.BR
 
-.B  * [List] ← [Element1] ; [Element2] ; ...
+.B [List] ← [Element1] ; [Element2] ; ...
 .nf
     
+     Creates a new instance of a list and initializes this
+     array with a first element, useful for literal-like List
+     notations. In the example we create a new list consisting
+     of the numbers 1, 2 and 3.
+    
+     Usage:
+    
+     a := List ← 1 ; 2 ; 3.
+    
 .fi
 .BR.BR.BR
 
-.B  * [List] prepend: [Element].
+.B [List] prepend: [Element].
 .nf
+    
+     Adds the specified element to the beginning of the array.
+     At the end of the example code, the list will consist of the
+     numbers: 3 and 1 (in that order).
     
+     Usage:
+    
+     a := List new.
+     a append: 1.
+     a prepend: 3.
 .fi
 .BR.BR.BR
 
-.B  * [List] join: [String].
+.B [List] join: [String].
 .nf
+    
+     Joins the elements of a list together in a string
+     separated by a specified glue string. The example
+     code results in the string: '1,2,3'.
     
+     Usage:
+    
+     collection := List new.
+     collection append: 1, append: 2, append 3.
+     collection join: ','.
 .fi
 .BR.BR.BR
 
-.B  * [List] position: [Number]
+.B [List] position: [Number]
 .nf
+    
+     Returns the element in the list at the specified position.
+     Note that the first position of the list is index 0.
+     If you attempt to retrieve an element of the list
+     using a an index that is something other than a number
+     a catchable error will be triggered. An error will
+     also be triggered if your position is out of bounds
+     (i.e. outside the list). Instead of the message
+     'position:' you can also send the message '?'.
     
+     Usage:
+    
+     ☞ fruits  := List ← 'apples' ; 'oranges' ; 'bananas'.
+     ☞ oranges := fruits position: 1.
+     ☞ oranges := fruits ? 1.
 .fi
 .BR.BR.BR
 
-.B  * [List] first.
+.B [List] first.
 .nf
-    
+     
+     Returns the first element of the list.
+     If the list is empty, Nil will be returned.
 .fi
 .BR.BR.BR
 
-.B  * [List] last.
+.B [List] last.
 .nf
-    
+     
+     Returns the last element of the list.
+     If the list is empty, Nil will be returned.
 .fi
 .BR.BR.BR
 
-.B  * [List] second last.
+.B [List] second last.
 .nf
-    
+     
+     Returns the second last element of the list.
+     If the list is empty, Nil will be returned.
 .fi
 .BR.BR.BR
 
-.B  * [List] put: [Object] at: [Number]
+.B [List] put: [Object] at: [Number]
 .nf
     
+     Puts an object (which can be anything) in the list
+     at the specified position.
+     The list will be automatically expanded if the position number
+     is higher than the maximum of the list.
+    
+     Usage:
+    
+     ☞ fruits := List new.
+     ☞ fruits put: 'apples' at: 5.
 .fi
 .BR.BR.BR
 
-.B  * [List] pop
+.B [List] pop
 .nf
     
+     Pops off the last element of the array.
 .fi
 .BR.BR.BR
 
-.B  * [List] - [Number]
+.B [List] - [Number]
 .nf
     
+     Deletes the element specified by the index number and
+     shrinks the list accordingly. If the position number does not exist,
+     the list will remain the same. This operation changes the list itself.
+     The example will remove element 1 (2) from the list.
+    
+     Usage:
+    
+     ☞ x := List ← 1 ; 2 ; 3.
+     ☞ x - 1.
 .fi
 .BR.BR.BR
 
-.B  * [List] shift
+.B [List] shift
 .nf
     
+     Shifts off the first element of the list.
 .fi
 .BR.BR.BR
 
-.B  * [List] count
+.B [List] count
 .nf
     
+     Returns the number of elements in the list.
 .fi
 .BR.BR.BR
 
-.B  * [List] from: [Begin] length: [End]
+.B [List] from: [Begin] length: [End]
 .nf
     
+     Copies part of an array indicated by from and to and
+     returns a new array consisting of a copy of this region.
 .fi
 .BR.BR.BR
 
-.B  * [List] replace: [Number] length: [Number] with: [List].
+.B [List] replace: [Number] length: [Number] with: [List].
 .nf
+    
+     Returns a copy of the list with the specified elements replaced.
+     The first argument indicates the start index to begin the replacement.
+     Here, 0 means the beginning of the list.
+     The second argument (length)
+     must indicate the number of elements to delete in the copy, counting
+     from the starting point. Finally, one has to provide the replacement
+     list as the third argument.
+     If the replacement list is empty, the specified elements will only be
+     removed from the copy.
+     If the replacement is not an array an error will be thrown.
     
+     Usage:
+    
+     ☞ buy := cakes
+         replace: 1
+         length: 2
+         with: ( List ← 'cinnamon' ; 'pineapple' ).
+    
 .fi
 .BR.BR.BR
 
-.B  * [List] + [List]
+.B [List] + [List]
 .nf
     
+     Returns a new list, containing elements of itself and the other
+     list.
 .fi
 .BR.BR.BR
 
-.B  * [List] by: [List].
+.B [List] by: [List].
 .nf
+    
+     Combines the first list with the second one, thus creating
+     a map. The keys of the newly generated map will be provided by the
+     first list while the values are extracted from the second one.
+     In the example we derive a temperature map from a pair of lists
+     (cities and temperatures).
+    
+     Usage:
     
+     ☞ city        := List ← 'London' ; 'Paris' ; 'Berlin'.
+     ☞ temperature := List ← '15' ; '16' ; '15'.
+     ☞ weather := temperature by: city.
 .fi
 .BR.BR.BR
 
-.B  * [List] copy
+.B [List] copy
 .nf
     
+     Copies the list. The list object will answer this message by
+     returning a shallow copy of itself. This means that the values in the
+     newly returned list can be replaced or deleted without affecting
+     the original one. However, modifying the values in the list will
+     still cause their counterparts in the original list to be modified
+     as well.
+     In the example we replace the first item (1) in b with 999.
+     The first element in a will still be 1 though because we have created
+     copy b by sending the message 'copy' to a and assiging the result
+     to b.
+    
+     Usage:
+    
+     ☞ a := List ← 1 ; 2 ; 3.
+     ☞ b := a copy.
+     b put: 999 at: 1.
 .fi
 .BR.BR.BR
 
 .BR.BR.BR
 
-.B  * [List] sort: [Block]
+.B [List] sort: [Block]
 .nf
     
+     Sorts the contents of an list using a sort block.
+     Uses qsort.
 .fi
 .BR.BR.BR
 
-.B  * [List] string
+.B [List] string
 .nf
+     
+     Returns a string representation of the list and its contents.
+     This representation will be encoded in the Citrine language itself and can
+     therefore be evaluated again.
+     In the example: 'string' messages are implicitly
+     send by some objects, for instance when
+     attempting to write a List using a Pen.
     
+     Usage:
+     
+     ☞ a := List ← 'hello' ; 'world'.
+     ☞ b := a string.
+     ☞ c := b evaluate.
 .fi
 .BR.BR.BR
 
-.B  * [List] fill: [Number] with: [Object]
+.B [List] fill: [Number] with: [Object]
 .nf
+    
+     Fills the list with the specified number of objects.
+    
+     Usage:
     
+     ☞ a := List new fill: 42 with: 'x'.
 .fi
 .BR.BR.BR
 
-.B  * [List] find: [Object].
+.B [List] find: [Object].
 .nf
     
+     Checks whether the specified object occurs in the list
+     and returns the index number if so.
+     If not, the index number -1 will be returned. Note that the comparison
+     will be performed by converting both values to strings.
+    
 .fi
 .BR.BR.BR
 
-.B  * Map
+.B Map
 .nf
+    
+     Creates a Map object.
     
+     Usage:
+    
+     ☞ files := Map new.
+     ☞ files put: 'readme.txt' at: 'textfile'.
 .fi
 .BR.BR.BR
 
-.B  * [Map] type
+.B [Map] type
 .nf
+    
+     Returns the string 'Map'.
     
 .fi
 .BR.BR.BR
 
-.B  * [Map] put: [Element] at: [Key]
+.B [Map] put: [Element] at: [Key]
 .nf
     
+     Puts a key-value pair in a map.
+    
+     Usage:
+    
+     map put: 'hello' at: 'world'.
+    
 .fi
 .BR.BR.BR
 
-.B  * [Map] [Key]: [Value]
+.B [Map] [Key]: [Value]
 .nf
+    
+     You can fill the map object with key-value pairs by sending any
+     binary or keyword message that is not part if its standard behaviour.
+     Likewise you can retrieve any value from the map by sending the corresponding key
+     as a unary message. This allows for a very natural looking notation to create
+     and modify map objects.
+    
+     Usage:
     
+     ☞ menu := Map new
+    	Margherita: 11.90,
+    	Hawaii: 12.99,
+    	QuattroFormaggi: 13.00.
+    
+     ✎ write: ( menu ? 'Hawaii' ), brk. 
+     ✎ write: ( menu Margherita ), brk.
+    
 .fi
 .BR.BR.BR
 
-.B  * [Map] - [String]
+.B [Map] - [String]
 .nf
     
+     Deletes the entry, identified by the key specified in [String], from
+     the map.
 .fi
 .BR.BR.BR
 
-.B  * [Map] keys
+.B [Map] keys
 .nf
+    
+     Returns an array containing all the keys in the map.
+     The order of the keys is undefined. Use the sort message
+     to enforce a specific order. The 'entries' message
+     does exactly the same and is an alias for 'keys'.
+    
+     Usage:
     
+     ☞ city        := List ← 'London' ; 'Paris' ; 'Berlin'.
+     ☞ temperature := List ← '15' ; '16' ; '15'.
+    
+     ☞ weather := temperature by: city.
+     cities := weather entries sort: {
+     	:a :b  ↲ (a compare: b).
+     }.
 .fi
 .BR.BR.BR
 
-.B  * [Map] values
+.B [Map] values
 .nf
+    
+     Returns an array containing all the keys in the map.
+     The order of the keys is undefined. Use the sort message
+     to enforce a specific order.
+    
+     Usage:
+    
+     ☞ city        := List ← 'London' ; 'Paris' ; 'Berlin'.
+     ☞ temperature := List ← '15' ; '16' ; '15'.
     
+     ☞ weather := temperature by: city.
+     temperatures := weather values sort: {
+     	:a :b  ↲ (a compare: b).
+     }.
 .fi
 .BR.BR.BR
 
-.B  * [Map] at: [Key]
+.B [Map] at: [Key]
 .nf
     
+     Retrieves the value specified by the key from the map.
 .fi
 .BR.BR.BR
 
-.B  * [Map] ? [Key]
+.B [Map] ? [Key]
 .nf
     
+     Alias for [Map] at: [Key].
+    
 .fi
 .BR.BR.BR
 
-.B  * [Map] count
+.B [Map] count
 .nf
     
+     Returns the number of elements in the map.
 .fi
 .BR.BR.BR
 
-.B  * [Map] each: [Block]
+.B [Map] each: [Block]
 .nf
     
+     Iterates over the map, passing key-value pairs to the specified block.
+     Note that within an each/map block, '⛏' and '⚿' refer to the collection.
 .fi
 .BR.BR.BR
 
-.B  * [Map] has: [Object]
+.B [Map] has: [Object]
 .nf
+    
+     Checks whether the map contains the specified value.
+     Note that the object gets converted to a string before
+     comparison. In case of a map or array this means the comparison
+     will be based on the serialized structure.
+     The example will output: True False False False False.
+     
+     Usage:
     
+     ☞ shop := (Map new
+    	put: 'magazine' at: 'books',
+    	put: 'computer' at: 'electronics',
+    	put: 'lipstick' at: 'cosmetics'
+     ).
+     ✎ write: (shop has: 'computer'), end.
+     ✎ write: (shop has: 'sausage'), end.
+     ✎ write: (shop has: 'computers'), end.
+     ✎ write: (shop has: 'compute'), end.
+     ✎ write: (shop has: '2computer'), end.
 .fi
 .BR.BR.BR
 
-.B  * [Map] string
+.B [Map] string
 .nf
+    
+     Returns a string representation of a map encoded in Citrine itself.
+     This will give you an
+     evallable representation of the map and all of its members.
+     The sting method is automatically invoked when attempting to
+     print a Map:
+    
+     Usage
     
+     m := (Map new) put: 'hello' at: 'world'.
+     x := m string.
+     ✎ write: (Map new).
+    
 .fi
 .BR.BR.BR
 
-.B  * File
+.B File
 .nf
-    
+     
+     Represents a File object.
+     Creates a new file object based on the specified path.
+     
+     Usage:
+     
+     File new: '/example/path/to/file.txt'.
 .fi
 .BR.BR.BR
 
-.B  * [File] path
+.B [File] path
 .nf
     
+     Returns the path of a file. The file object will respond to this
+     message by returning a string object describing the full path to the
+     recipient.
 .fi
 .BR.BR.BR
 
-.B  * [File] string
+.B [File] string
 .nf
     
+     Returns a string representation of the file. If a path has been associated
+     with this file, this message will return the path of the file on the file system.
+     If no path has been associated with the file, the string [File (no path)] will
+     be returned.
 .fi
 .BR.BR.BR
 
-.B  * [File] read
+.B [File] read
 .nf
+    
+     Reads contents of a file. Send this message to a file to read the entire contents in
+     one go. For big files you might want to prefer a streaming approach to avoid
+     memory exhaustion.
+     In the example we read the contents of the entire CSV file callled mydata.csv
+     in the variable called data.
+    
+     Usage:
+    
+     ☞ data := File new: '/path/to/mydata.csv', read.
     
 .fi
 .BR.BR.BR
 
-.B  * [File] write: [String]
+.B [File] write: [String]
 .nf
     
+     Writes content to a file. Send this message to a file object to write the
+     entire contents of the specified string to the file in one go. The file object
+     responds to this message for convience reasons, however for big files it might
+     be a better idea to use the streaming API if possible (see readBytes etc.).
+     In the example we write the XML snippet in variable data to a file
+     called myxml.xml in the current working directory.
+     
+     Usage:
+     
+     ☞ data := '<xml>hello</xml>'.
+     File new: 'myxml.xml', write: data.
+    
 .fi
 .BR.BR.BR
 
-.B  * [File] append: [String]
+.B [File] append: [String]
 .nf
     
+     Appends content to a file. The file object responds to this message like it
+     responds to the write-message, however in this case the contents of the string
+     will be appended to the existing content inside the file.
 .fi
 .BR.BR.BR
 
-.B  * [File] exists
+.B [File] exists
 .nf
     
+     Returns True if the file exists and False otherwise.
 .fi
 .BR.BR.BR
 
-.B  * [File] include
+.B [File] include
 .nf
     
+     Includes the file as a piece of executable code.
 .fi
 .BR.BR.BR
 
-.B  * [File] delete
+.B [File] delete
 .nf
     
+     Deletes the file.
 .fi
 .BR.BR.BR
 
-.B  * [File] size
+.B [File] size
 .nf
     
+     Returns the size of the file.
 .fi
 .BR.BR.BR
 
-.B  * [File] open: [string]
+.B [File] open: [string]
 .nf
+    
+     Open a file with using the specified mode.
+     The example opens the file in f for reading and writing.
     
+     Usage:
+    
+     ☞ f := File new: '/path/to/file'.
+     f open: 'r+'.
 .fi
 .BR.BR.BR
 
-.B  * [File] close.
+.B [File] close.
 .nf
+    
+     Closes the file represented by the recipient.
+     The example above opens and closes a file.
     
+     Usage:
+    
+     ☞ f := File new: '/path/to/file.txt'.
+     f open: 'r+'.
+     f close.
 .fi
 .BR.BR.BR
 
-.B  * [File] read bytes: [Number].
+.B [File] read bytes: [Number].
 .nf
+    
+     Reads a number of bytes from the file.
+     The example reads 10 bytes from the file represented by f
+     and puts them in buffer x.
     
+     Usage:
+    
+     ☞ f := File new: '/path/to/file.txt'.
+     f open: 'r+'.
+     ☞ x := f read bytes: 10.
+     f close.
 .fi
 .BR.BR.BR
 
-.B  * [File] write bytes: [String].
+.B [File] write bytes: [String].
 .nf
+    
+     Takes a string and writes the bytes in the string to the file
+     object. Returns the number of bytes actually written.
+     The example above writes 'Hello World' to the specified file as bytes.
+     The number of bytes written is returned in variable n.
     
+     Usage:
+    
+     ☞ f := File new: '/path/to/file.txt'.
+     f open: 'r+'.
+     ☞ n := f write bytes: 'Hello World'.
+     f close.
+    
 .fi
 .BR.BR.BR
 
-.B  * [File] seek: [Number].
+.B [File] seek: [Number].
 .nf
+    
+     Moves the file pointer to the specified position in the file
+     (relative to the current position).
+     The example opens a file for reading and moves the
+     pointer to position 10 (meaning 10 bytes from the beginning of the file).
+     The seek value may be negative.
+    
+     Usage:
     
+     file open: 'r', seek: 10.
 .fi
 .BR.BR.BR
 
-.B  * [File] rewind.
+.B [File] rewind.
 .nf
     
+     Rewinds the file. Moves the file pointer to the beginning of the file.
+     The example reads the same sequence of 10 bytes twice, resulting
+     in variable x and y being equal.
+    
+     Usage:
+    
+     file open: 'r'.
+     ☞ x := file read bytes: 10.
+     file rewind.
+     ☞ y := file read bytes: 10.
+    
 .fi
 .BR.BR.BR
 
-.B  * [File] end.
+.B [File] end.
 .nf
+    
+     Moves the file pointer to the end of the file. Use this in combination with
+     negative seek operations.
+     The example will read the last 10 bytes of the file. This is
+     accomplished by first moving the file pointer to the end of the file,
+     then putting it back 10 bytes (negative number), and then reading 10
+     bytes.
+    
+     Usage:
     
+     file open: 'r'.
+     file end.
+     ☞ x := file seek: -10, read bytes: 10.
+    
 .fi
 .BR.BR.BR
 
 .BR.BR.BR
 
-.B  * [File] unlock.
+.B [File] unlock.
 .nf
     
+     Attempts to unlock a file. This message is non-blocking, on failure
+     it will immediately return. Answers True if the file has been
+     unlocked succesfully. Otherwise, the answer is False.
 .fi
 .BR.BR.BR
 
-.B  * [File] lock.
+.B [File] lock.
 .nf
     
+     Attempts to acquire an exclusive lock on file.
+     This message is non-blocking, on failure
+     it will immediately return. Answers True if the lock has been
+     acquired and False otherwise.
 .fi
 .BR.BR.BR
 
-.B  * [File] list: [String].
+.B [File] list: [String].
 .nf
+    
+     Returns the contents of the specified folder as a an array.
+     Each entry of the array contains a map with the keys 'file'
+     and 'type'. The 'file' entry contains a string with the name
+     of the file while the 'type' entry contains a string describing
+     the type of the file.
+    
+     Usage:
+    
+     ☞ files := File list: '/tmp/testje'.
     
 .fi
 .BR.BR.BR
@@ -1095,99 +2173,172 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B  * [Program] clean memory
+.B [Program] clean memory
 .nf
     
+     GarbageCollector, to invoke use:
+    
+     Program clean memory.
 .fi
 .BR.BR.BR
 
-.B  * [Program] memory
+.B [Program] memory
 .nf
-    
 .fi
 .BR.BR.BR
 
-.B  * [Program] memory: [Number]
+.B [Program] memory: [Number]
 .nf
     
+     Sets the memory limit, if this limit gets exceeded the program will produce
+     an out-of-memory error.
 .fi
 .BR.BR.BR
 
-.B  * [Program] tidiness: [Number]
+.B [Program] tidiness: [Number]
 .nf
     
+     Selects mode of operation for GC.
+    
+     Available Modes:
+     0 - No Garbage Collection
+     1 - Activate Garbage Collector (default)
+     4 - Activate Garbage Collector for every single step (testing only)
+     8 - Activate experimental Pool Memory Allocation Manager (experimental!)
 .fi
 .BR.BR.BR
 
-.B  * [Program] shell: [String]
+.B [Program] shell: [String]
 .nf
+    
+     Performs a Shell operation.
     
+     Usage:
+    
+     ☞ files := Shell ls
+    
 .fi
 .BR.BR.BR
 
-.B  * [Program] argument: [Number]
+.B [Program] argument: [Number]
 .nf
     
+     Obtains an argument from the CLI invocation.
 .fi
 .BR.BR.BR
 
-.B  * [Program] arguments
+.B [Program] arguments
 .nf
     
+     Returns the number of CLI arguments passed to the script.
 .fi
 .BR.BR.BR
 
-.B  * [Program] end
+.B [Program] end
 .nf
-    
+     
+     Exits program immediately.
 .fi
 .BR.BR.BR
 
-.B  * [Program] setting: [String]
+.B [Program] setting: [String]
 .nf
+    
+     Returns the value of an environment variable.
     
+     Usage:
+    
+     ☞ x := Command setting: 'MY_PATH_VAR'.
 .fi
 .BR.BR.BR
 
-.B  * [Program] setting: [Key] value: [Value]
+.B [Program] setting: [Key] value: [Value]
 .nf
     
+     Sets the value of an environment variable.
 .fi
 .BR.BR.BR
 
-.B  * [Program] ask
+.B [Program] ask
 .nf
+    
+     Ask a question on the command-line, resumes program
+     only after pressing the enter key.
+     Only reads up to 100 characters.
+     The example asks the user for his/her name and
+     then displays the input received.
     
+     Usage:
+    
+     ✎ write: 'What is your name ?'.
+     ☞ x := Program ask.
+     ✎ write: ('Hello you' you: x), end.
+    
 .fi
 .BR.BR.BR
 
-.B  * [Program] input.
+.B [Program] input.
 .nf
+    
+     Reads all raw input from STDIN.
+     The input message reads the standard input stream of the application
+     which allows you to deal with pipes for instance. However this
+     mechanism can also be used to read raw POSTs in case of CGI applications.
+     Note that unlike other implementations the input messages also collects
+     null bytes, a null byte \\0 in the input stream will NOT cause it to end.
+     Also note that the trailing newline (in case of CLI applications) will
+     be stripped so you don't have to do this manually. This allows for
+     one-liners like the one in the example below.
+     The input message is not allowed if message countdown has been activated
+     (Program remainingMessages:) because it might wait for content and this
+     is not allowed in a countdown sandbox.
     
+     Usage:
+    
+     echo "hello" | ctr test.ctr
+    
+     ☞ x := Program input.
+     ✎ write: x.
+    
 .fi
 .BR.BR.BR
 
-.B  * [Program] flush.
+.B [Program] flush.
 .nf
     
+     Flushes the STDOUT output buffer.
 .fi
 .BR.BR.BR
 
-.B  * [Program] error: [String]
+.B [Program] error: [String]
 .nf
     
+     Logs the specified message string using syslog using log level LOG_ERR.
+     Use this to log errors.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] wait: [Number]
+.B [Clock] wait: [Number]
 .nf
+    
+     Suspends program execution for the specified number of seconds.
+     This can be used for instance, together with a whileFalse loop as the
+     following example illustrates. The following example demonstrates the
+     use of the Clock object and the wait message to wait until an
+     exclusive lock on the specified file has been acquired.
     
+     Usage:
+    
+     { ↲ file lock. }
+     false: { ⏰ wait: 1. }.
+    
 .fi
 .BR.BR.BR
 
-.B  * [Clock] new: [Number]
+.B [Clock] new: [Number]
 .nf
     
+     Creates a new clock instance from a UNIX time stamp.
 .fi
 .BR.BR.BR
 
@@ -1195,135 +2346,192 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B  * [Clock] like: [Clock]
+.B [Clock] like: [Clock]
 .nf
     
+     Syncs a clock. Copies the time AND zone from the other clock.
+    
+     Usage:
+     
+     ☞ clock := Clock new: timestamp.
+     ☞ copied := Clock new like: clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] zone: [String]
+.B [Clock] zone: [String]
 .nf
     
+     Sets the time zone of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] zone
+.B [Clock] zone
 .nf
     
+     Returns time zone of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] year: [Number]
+.B [Clock] year: [Number]
 .nf
     
+     Sets the year of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] month: [Number]
+.B [Clock] month: [Number]
 .nf
     
+     Sets the month of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] day: [Number]
+.B [Clock] day: [Number]
 .nf
     
+     Sets the day of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] hour: [Number]
+.B [Clock] hour: [Number]
 .nf
     
+     Sets the hour of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] minute: [Number]
+.B [Clock] minute: [Number]
 .nf
     
+     Sets the minute of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] second: [Number]
+.B [Clock] second: [Number]
 .nf
     
+     Sets the second of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] year
+.B [Clock] year
 .nf
     
+     Returns year of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] month
+.B [Clock] month
 .nf
     
+     Returns month of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] day
+.B [Clock] day
 .nf
     
+     Returns day of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] hour
+.B [Clock] hour
 .nf
     
+     Returns hour of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] minute
+.B [Clock] minute
 .nf
     
+     Returns minute of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] second
+.B [Clock] second
 .nf
     
+     Returns second of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] day of the year
+.B [Clock] day of the year
 .nf
     
+     Returns day number of the year.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] weekday
+.B [Clock] weekday
 .nf
     
+     Returns the week day number of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] time.
+.B [Clock] time.
 .nf
+    
+     Returns the UNIX time stamp representation of the time.
+     Note: this is the time OF CREATION OF THE OBJECT. To get the actual time use:
     
+     Usage:
+    
+     ☞ time := Clock new time.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] week
+.B [Clock] week
 .nf
     
+     Returns the week number of the clock.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] format: [String]
+.B [Clock] format: [String]
 .nf
     
+     Returns a string describing the date and time represented by the clock object
+     according to the specified format. See strftime for format syntax details.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] string
+.B [Clock] string
 .nf
+    
+     Returns a string describing the date and time
+     represented by the clock object. On receiving this message, the Clock
+     instance will send the message 'format:' to itself and the argument:
+     '%Y-%m-%d %H:%M:%S'. It will return the answer as a string. Note that you
+     can override this behaviour by adding your own 'format:' implementation.
+    
+     Usage:
+    
+     ⏰ on: 'format:' do: { ↲ 'beautiful moment'. }.
+     ⏰ on: 'time' do: { ↲ '999'. }.
     
+     ✎ write: ⏰, end.
+     ✎ write: ⏰ number, end.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] number
+.B [Clock] number
 .nf
     
+     Returns a timestamp describing the date and time
+     represented by the clock object. On receiving this message, the Clock
+     instance will send the message 'time' to itself
+     and return the answer as a number. Note that you
+     can override this behaviour by adding your own 'time' implementation.
+    
+     Usage:
+    
+     ⏰ on: 'format:' do: { ↲ 'beautiful moment'. }.
+     ⏰ on: 'time' do: { ↲ '999'. }.
+    
+     ✎ write: ⏰, brk.
+     ✎ write: ⏰ number, brk.
 .fi
 .BR.BR.BR
 
@@ -1331,33 +2539,63 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B  * [Clock] add: [Number].
+.B [Clock] add: [Number].
 .nf
+    
+     Adds the number to the clock, updating its time accordingly.
+     Note that this is typically used with a qualifier.
+     If the qualifier is 'hours' the number is treated as hours and
+     the specified number of hours will be added to the time.
+    
+     The Clock object understands the following qualifiers
+     if the selected language is English:
     
+     sec, second, seconds,
+     min, minute, minutes,
+     hrs, hour, hours,
+     day, days,
+     week, weeks,
+     month, months,
+     year, years
+    
+     Note that it does not matter which form you use, 2 hour means
+     the same as 2 hours (plural).
+    
+     Usage:
+    
+     clock add: 3 minutes.
+     clock add: 1 hour.
+     clock add: 2 second.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] subtract: [Number].
+.B [Clock] subtract: [Number].
 .nf
     
+     Same as '[Clock] add:' but subtracts the number instead of adding it to
+     the clock's time.
 .fi
 .BR.BR.BR
 
-.B  * [Clock] new
+.B [Clock] new
 .nf
     
+     Creates a new clock, by default a clock will be set to
+     the UTC timezone having the current time.
 .fi
 .BR.BR.BR
 
-.B  * [Pen] write: [String]
+.B [Pen] write: [String]
 .nf
     
+     Writes string to console. 
 .fi
 .BR.BR.BR
 
-.B  * [Pen] end
+.B [Pen] end
 .nf
     
+     Outputs a newline character.
 .fi
 .BR.BR.BR
 
@@ -1369,97 +2607,189 @@ The following messages are part of the Core API of the Citrine Programming Langu
 
 .BR.BR.BR
 
-.B  * Request get: [string]
+.B Request get: [string]
 .nf
-    
+     
+     Returns the value of the specified GET parameter from the HTTP query string.
+     For example if the query string of an url is: ?search=glasses
+     then the value of:
+     
+     item := Request get: 'search'.
+     
+     would be 'glasses'.
 .fi
 .BR.BR.BR
 
-.B  * Request getArray: [string].
+.B Request getArray: [string].
 .nf
-    
+     
+     Returns an array of strings extracted from the query string.
+     For example if the query string contains: ?option=a&option=b
+     
+     Request getArray: 'option'.
+     
+     will contain two elements: 'a' and 'b'. Note that
+     this also works with array-like notation: ?option[]='a'&option[]=b:
+     
+     Request getArray: 'option[]'.
+     
+     will return the same array.
 .fi
 .BR.BR.BR
 
-.B  * Request post: [string].
+.B Request post: [string].
 .nf
-    
+     
+     Obtains a string from the HTTP POST payload. Just like 'get:' but for
+     POST variables. See 'Request get:' for details.
 .fi
 .BR.BR.BR
 
-.B  * Request postArray: [string].
+.B Request postArray: [string].
 .nf
-    
+     
+     Obtains an array from the HTTP POST payload. Just like 'getArray:' but for
+     POST variables. See 'Request getArray:' for details.
 .fi
 .BR.BR.BR
 
-.B  * Request cookie: [string].
+.B Request cookie: [string].
 .nf
-    
+     
+     Obtains a string from the HTTP COOKIE payload. Just like 'get:' but for
+     COOKIE variables. See 'Request get:' for details.
 .fi
 .BR.BR.BR
 
-.B  * Request cookieArray: [string].
+.B Request cookieArray: [string].
 .nf
-    
+     
+     Obtains an array from the HTTP COOKIE payload. Just like 'getArray:' but for
+     COOKIE variables. See 'Request getArray:' for details.
 .fi
 .BR.BR.BR
 
-.B  * Request file: [string].
+.B Request file: [string].
 .nf
-    
+     
+     Returns array containing the path to the uploaded temporay file (0) and
+     the desired name of the uploaded file (1).
 .fi
 .BR.BR.BR
 
-.B  * Request serverOption: [string] is: [string].
+.B Request serverOption: [string] is: [string].
 .nf
-    
+     
+     Sets a server option, available server option for SCGI server include:
+     
+     - minidle, minimum number of idle processes
+     - maxidle, maximum number of idle processes
+     - maxproc, maximum number of processes
+     - maxreq,  maximum number of concurrent requests to allow
+     
+     Usage:
+     
+     Request
+      serverOption: 'minidle' is: 8,
+      serverOption: 'maxreq'  is: 100.
+     
+     This sets the minimum number of idle processes to 8 and the
+     maximum number of concurrent requests to 100, you can chain
+     multiple options using a comma (,).
 .fi
 .BR.BR.BR
 
-.B  * Request host: [string] listen: [string] pid: [string] callback: [block].
+.B Request host: [string] listen: [string] pid: [string] callback: [block].
 .nf
+    
+     Sets up Storm Server.
+     Storm Server is an SCGI server. Both the Request Object Plugin and Storm Server
+     are based on S. Losen's CCGI library (http://libccgi.sourceforge.net/doc.html)
+     licensed LGPL.
     
+     To set up a Storm Server, specify host (i.e. 'localhost'),
+     a port to listen to (i.e. 9000) a pid file '/var/run/mypid.pid' and a
+     callback block.
+    
+     Usage:
+    
+     Request host:'localhost' listen:4000 pid:'/var/run/storm.pid' callback: {
+      Pen write: 'Content-type: text/html\\n\\n'.
+      var fname  := Command env: 'DOCUMENT_URI'.
+      var script := File new: '/var/www/webapp'+fname.
+      script include.
+     }.
+     
+     Here we set up a server listening to port 4000. The callback prints out
+     the content type header. Then, we extract the DOCUMENT URI, i.e. '/hello.ctr'
+     and map this to a path '/var/www/webapp/hello.ctr'
+     
+     By default there is no output buffering, either create another callback or
+     simply override the '<' or 'Pen' object to buffer instead of outputting
+     directly.
 .fi
 .BR.BR.BR
 
 .BR.BR.BR
 
-.B  * [String] escape: '\n'.
+.B [String] escape: '\n'.
 .nf
     
+     Escapes the specified ASCII character in a string.
+     If the character is a control character, the well known
+     C-based character substitute will be used.
 .fi
 .BR.BR.BR
 
-.B  * [String] unescape: '\n'.
+.B [String] unescape: '\n'.
 .nf
     
+     'UnEscapes' the specified ASCII character in a string.
 .fi
 .BR.BR.BR
 
-.B  * [Json] new
+.B [Json] new
 .nf
     
+     Creates a new instance of the Json object.
+     The Json object allows you to use the Json protocol to communicate with
+     other applications.
 .fi
 .BR.BR.BR
 
 .BR.BR.BR
 
-.B  * [Json] parse: [String].
+.B [Json] parse: [String].
 .nf
+     
+     Parses a string containing Json encoded data into native Citrine objects.
+     The Json structure must begin with an object (notation: {}). Therefore,
+     the answer to this message from the Json object will always be a Map.
     
+     Usage:
+    
+     ☞ tasks := '{"todo":7,"finished":3}'.
+     ✎ write: tasks todo. #7
+    
 .fi
 .BR.BR.BR
 
-.B  * [Json] jsonify: [Map].
+.B [Json] jsonify: [Map].
 .nf
     
+     Given a map, the jsonify: message will make the Json object return a
+     String object representing the Map.
 .fi
 .BR.BR.BR
 
-.B  * C-constructor function.
+.B C-constructor function.
 .nf
+    
+     This function gets called when the plugin is loaded into memory.
+     Here we have a chance to add the new object(s) to the World.
     
+     In this case, we are going to add the Json object to the
+     world.
 .fi
 
 .SH BUGS

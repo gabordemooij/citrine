@@ -7,9 +7,25 @@ Program tidiness: 4.
 .SH NAME
 ctr \- run a Citrine program
 .SH SYNOPSIS
-ctr [PROGRAM]
+ctr [OPTION]... [PROGRAM]
 .SH DESCRIPTION
 Citrine is general purpose programming language for UNIX-like operating systems.
+
+.BR
+.BR
+.BR
+
+.B -t 
+translate a program instead of running it (followed by dictionary file to use).
+
+.BR
+.BR
+.BR
+
+.B -g 
+generate a new dictionary file from a pair of dictionary.h Citrine source headers.
+
+
 .SH REFERENCE MANUAL
 Citrine has 5 literals:
 .RS 4
@@ -51,18 +67,17 @@ files each: { :index :file
 			✎ write: '.BR.BR.BR', end end.
 			
 			((headline find: '@internal') = -1) true: {
-				✎ write: '.B ' + (headline skip: 3), end.
+				✎ write: '.B ' + (headline offset: 3), end.
 				✎ write: '.nf', end.
 				☞ line := ''.
 				☞ n := 2.
 				{
-					line := lines position: n. 
-					↲ ((line find: '*/') = -1). 
-				}
-				true: {
 						line := line replace: '\\' with: '\\\\'.
-						✎ write: '    '+(line offset: 2), end.
+						✎ write: '    ' + (line offset: 2), end.
 						n add: 1.
+				} while: {
+					line := lines position: n.
+					↲ ((line find: '*/') = -1).
 				}.
 				✎ write: '.fi', end.
 			}.
