@@ -563,14 +563,13 @@ ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
  * (some expression) true: { ... }.
  */
 ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* result;
 	if (myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
 		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = myself;
 		int sticky = myself->info.sticky;
 		myself->info.sticky = 1;
-		result = ctr_block_run(codeBlock, arguments, NULL);
+		ctr_block_run(codeBlock, arguments, NULL);
 		myself->info.sticky = sticky;
 		ctr_heap_free( arguments );
 		return myself;
@@ -590,14 +589,13 @@ ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
  * (some expression) false: { ... }.
  */
 ctr_object* ctr_bool_if_false(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* result;
 	if (!myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
 		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = myself;
 		int sticky = myself->info.sticky;
 		myself->info.sticky = 1;
-		result = ctr_block_run(codeBlock, arguments, NULL);
+		ctr_block_run(codeBlock, arguments, NULL);
 		myself->info.sticky = sticky;
 		ctr_heap_free( arguments );
 		return myself;

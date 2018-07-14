@@ -218,7 +218,7 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 		}
 		entry = entry->next;
 	}
-	if (context == 't' && !found && memmem(v,l,":",1)>NULL) {
+	if (context == 't' && !found && ctr_internal_memmem(v,l,":",1,0)>((char*)NULL)) {
 		for (i = 0; i<l; i++) {
 				fwrite(v+i,1,1,stdout);
 				if (*(v + i)==':') {
