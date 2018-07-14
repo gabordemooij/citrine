@@ -143,6 +143,10 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 
 ctr_dict* ctr_translate_load_dictionary() {
 	FILE* file = fopen(ctr_mode_dict_file,"r");
+	if (file == NULL) {
+		printf("Unable to open dictionary.\n");
+		exit(1);
+	}
 	char  translationType;
 	char* word = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	char* translation = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
