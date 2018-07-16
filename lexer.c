@@ -454,7 +454,6 @@ int ctr_clex_forward_scan(char* e, char* bytes, ctr_size* newCodePointer) {
 	int found = 0;
 	int escape = 0;
 	while( (e+i) < ctr_eofcode ) {
-		//printf("\n==>[%c%c%c]<==",*(e+i-1),*(e+i),*(e+i+1));
 		if (escape) escape = 0;
 		else if (!quote && *(e+i) == '(') nesting++;
 		else if (!quote && nesting && *(e+i) == ')') nesting--;
@@ -474,7 +473,6 @@ int ctr_clex_forward_scan(char* e, char* bytes, ctr_size* newCodePointer) {
 			}
 			if (found) break;
 		}
-		//printf("== Q%d N%d E%d B%d \n",quote,nesting,escape,blocks);
 		i++;
 	}
 	return found;
