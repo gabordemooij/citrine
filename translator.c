@@ -152,6 +152,7 @@ ctr_dict* ctr_translate_load_dictionary() {
 	char* translation = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	ctr_dict* entry;
 	ctr_dict* previousEntry = NULL;
+	ctr_dict* e;
 	while( fscanf( file, "%c \"%80[^\"]\" \"%80[^\"]\"\n", &translationType, word, translation) > 0 ) {
 		entry = (ctr_dict*) calloc( sizeof(ctr_dict), 1 );
 		entry->type = translationType;
@@ -171,6 +172,24 @@ ctr_dict* ctr_translate_load_dictionary() {
 			entry->next = NULL;
 		}
 		previousEntry = entry;
+		e = entry;
+		while(e->next != NULL) {
+			e = e->next;
+			if (e->type == entry->type) {
+				if ( e->wordLength == entry->wordLength ) {
+					if ( strncmp( e->word, entry->word, entry->wordLength ) == 0 ) {
+						printf( "Ambigious word in dictionary. %s \n", entry->word );
+						exit(1);
+					}
+				}
+				if ( e->translationLength == entry->translationLength ) {
+					if ( strncmp( e->translation, entry->translation, entry->translationLength ) == 0 ) {
+						printf( "Ambigious translation in dictionary %s.\n", entry->translation );
+						exit(1);
+					}
+				}
+			}
+		}
 	}
 	fclose(file);
 	return entry;

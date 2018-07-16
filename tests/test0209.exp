@@ -28,7 +28,6 @@ Boolean ≥ 0.
 Boolean ≤ 0.
 Boolean ≠ 0.
 Boolean new.
-Boolean new: 0 .
 Boolean equals: 0 .
 Boolean and: 0 .
 Boolean or: 0 .
@@ -83,7 +82,6 @@ Boolean last: 0 .
 Boolean replace: 0 with: 0 .
 Boolean split: 0 .
 Boolean offset: 0 .
-Boolean append: 0 .
 Boolean pattern: 0 process: 0 .
 Boolean run.
 Boolean apply: 0 .
@@ -98,7 +96,6 @@ Boolean join: 0 .
 Boolean pop.
 Boolean sort: 0 .
 Boolean put: 0 at: 0 .
-Boolean from: 0 length: 0 .
 Boolean map: 0 .
 Boolean each: 0 .
 Boolean write: 0 .
@@ -173,7 +170,6 @@ Boolean like: 0 .
 Boolean format: 0 .
 Boolean lock.
 Boolean unlock.
-Boolean error: 0 .
 Boolean last.
 Boolean first.
 Boolean second last.
@@ -213,7 +209,6 @@ True ≥ 0.
 True ≤ 0.
 True ≠ 0.
 True new.
-True new: 0 .
 True equals: 0 .
 True and: 0 .
 True or: 0 .
@@ -268,7 +263,6 @@ True last: 0 .
 True replace: 0 with: 0 .
 True split: 0 .
 True offset: 0 .
-True append: 0 .
 True pattern: 0 process: 0 .
 True run.
 True apply: 0 .
@@ -283,7 +277,6 @@ True join: 0 .
 True pop.
 True sort: 0 .
 True put: 0 at: 0 .
-True from: 0 length: 0 .
 True map: 0 .
 True each: 0 .
 True write: 0 .
@@ -358,7 +351,6 @@ True like: 0 .
 True format: 0 .
 True lock.
 True unlock.
-True error: 0 .
 True last.
 True first.
 True second last.
@@ -398,7 +390,6 @@ False ≥ 0.
 False ≤ 0.
 False ≠ 0.
 False new.
-False new: 0 .
 False equals: 0 .
 False and: 0 .
 False or: 0 .
@@ -453,7 +444,6 @@ False last: 0 .
 False replace: 0 with: 0 .
 False split: 0 .
 False offset: 0 .
-False append: 0 .
 False pattern: 0 process: 0 .
 False run.
 False apply: 0 .
@@ -468,7 +458,6 @@ False join: 0 .
 False pop.
 False sort: 0 .
 False put: 0 at: 0 .
-False from: 0 length: 0 .
 False map: 0 .
 False each: 0 .
 False write: 0 .
@@ -543,7 +532,6 @@ False like: 0 .
 False format: 0 .
 False lock.
 False unlock.
-False error: 0 .
 False last.
 False first.
 False second last.
@@ -584,7 +572,6 @@ Number ≥ 0.
 Number ≤ 0.
 Number ≠ 0.
 Number new.
-Number new: 0 .
 Number equals: 0 .
 Number and: 0 .
 Number or: 0 .
@@ -640,7 +627,6 @@ Number last: 0 .
 Number replace: 0 with: 0 .
 Number split: 0 .
 Number offset: 0 .
-Number append: 0 .
 Number pattern: 0 process: 0 .
 Number run.
 Number apply: 0 .
@@ -655,7 +641,6 @@ Number join: 0 .
 Number pop.
 Number sort: 0 .
 Number put: 0 at: 0 .
-Number from: 0 length: 0 .
 Number map: 0 .
 Number each: 0 .
 Number write: 0 .
@@ -731,7 +716,6 @@ Number like: 0 .
 Number format: 0 .
 Number lock.
 Number unlock.
-Number error: 0 .
 Number last.
 Number first.
 Number second last.
@@ -771,7 +755,6 @@ String ≥ 0.
 String ≤ 0.
 String ≠ 0.
 String new.
-String new: 0 .
 String equals: 0 .
 String and: 0 .
 String or: 0 .
@@ -826,7 +809,6 @@ String last: 0 .
 String replace: 0 with: 0 .
 String split: 0 .
 String offset: 0 .
-String append: 0 .
 String pattern: 0 process: 0 .
 String run.
 String apply: 0 .
@@ -841,7 +823,6 @@ String join: 0 .
 String pop.
 String sort: 0 .
 String put: 0 at: 0 .
-String from: 0 length: 0 .
 String map: 0 .
 String each: 0 .
 String write: 0 .
@@ -917,7 +898,6 @@ String like: 0 .
 String format: 0 .
 String lock.
 String unlock.
-String error: 0 .
 String last.
 String first.
 String second last.
@@ -957,7 +937,6 @@ Object ≥ 0.
 Object ≤ 0.
 Object ≠ 0.
 Object new.
-Object new: 0 .
 Object equals: 0 .
 Object and: 0 .
 Object or: 0 .
@@ -1012,7 +991,6 @@ Object last: 0 .
 Object replace: 0 with: 0 .
 Object split: 0 .
 Object offset: 0 .
-Object append: 0 .
 Object pattern: 0 process: 0 .
 Object run.
 Object apply: 0 .
@@ -1027,7 +1005,6 @@ Object join: 0 .
 Object pop.
 Object sort: 0 .
 Object put: 0 at: 0 .
-Object from: 0 length: 0 .
 Object map: 0 .
 Object each: 0 .
 Object write: 0 .
@@ -1102,7 +1079,6 @@ Object like: 0 .
 Object format: 0 .
 Object lock.
 Object unlock.
-Object error: 0 .
 Object last.
 Object first.
 Object second last.
@@ -1142,7 +1118,6 @@ List ≥ 0.
 List ≤ 0.
 List ≠ 0.
 List new.
-List new: 0 .
 List equals: 0 .
 List and: 0 .
 List or: 0 .
@@ -1197,7 +1172,6 @@ List last: 0 .
 List replace: 0 with: 0 .
 List split: 0 .
 List offset: 0 .
-List append: 0 .
 List pattern: 0 process: 0 .
 List run.
 List apply: 0 .
@@ -1213,7 +1187,6 @@ List pop.
 List sort: 0 .
 error
 List put: 0 at: 0 .
-List from: 0 length: 0 .
 List map: 0 .
 error
 List each: 0 .
@@ -1290,7 +1263,6 @@ List like: 0 .
 List format: 0 .
 List lock.
 List unlock.
-List error: 0 .
 List last.
 List first.
 List second last.
@@ -1331,7 +1303,6 @@ Map ≥ 0.
 Map ≤ 0.
 Map ≠ 0.
 Map new.
-Map new: 0 .
 Map equals: 0 .
 Map and: 0 .
 Map or: 0 .
@@ -1386,7 +1357,6 @@ Map last: 0 .
 Map replace: 0 with: 0 .
 Map split: 0 .
 Map offset: 0 .
-Map append: 0 .
 Map pattern: 0 process: 0 .
 Map run.
 Map apply: 0 .
@@ -1401,7 +1371,6 @@ Map join: 0 .
 Map pop.
 Map sort: 0 .
 Map put: 0 at: 0 .
-Map from: 0 length: 0 .
 Map map: 0 .
 error
 Map each: 0 .
@@ -1478,7 +1447,6 @@ Map like: 0 .
 Map format: 0 .
 Map lock.
 Map unlock.
-Map error: 0 .
 Map last.
 Map first.
 Map second last.
@@ -1518,7 +1486,6 @@ File ≥ 0.
 File ≤ 0.
 File ≠ 0.
 File new.
-File new: 0 .
 File equals: 0 .
 File and: 0 .
 File or: 0 .
@@ -1573,7 +1540,6 @@ File last: 0 .
 File replace: 0 with: 0 .
 File split: 0 .
 File offset: 0 .
-File append: 0 .
 File pattern: 0 process: 0 .
 File run.
 File apply: 0 .
@@ -1588,7 +1554,6 @@ File join: 0 .
 File pop.
 File sort: 0 .
 File put: 0 at: 0 .
-File from: 0 length: 0 .
 File map: 0 .
 File each: 0 .
 File write: 0 .
@@ -1666,7 +1631,6 @@ File lock.
 error
 File unlock.
 error
-File error: 0 .
 File last.
 File first.
 File second last.
@@ -1706,7 +1670,6 @@ Moment ≥ 0.
 Moment ≤ 0.
 Moment ≠ 0.
 Moment new.
-Moment new: 0 .
 Moment equals: 0 .
 Moment and: 0 .
 Moment or: 0 .
@@ -1761,7 +1724,6 @@ Moment last: 0 .
 Moment replace: 0 with: 0 .
 Moment split: 0 .
 Moment offset: 0 .
-Moment append: 0 .
 Moment pattern: 0 process: 0 .
 Moment run.
 Moment apply: 0 .
@@ -1776,7 +1738,6 @@ Moment join: 0 .
 Moment pop.
 Moment sort: 0 .
 Moment put: 0 at: 0 .
-Moment from: 0 length: 0 .
 Moment map: 0 .
 Moment each: 0 .
 Moment write: 0 .
@@ -1851,7 +1812,6 @@ Moment like: 0 .
 Moment format: 0 .
 Moment lock.
 Moment unlock.
-Moment error: 0 .
 Moment last.
 Moment first.
 Moment second last.

@@ -798,7 +798,7 @@ void ctr_initialize_world() {
 	/* File */
 	CtrStdFile = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	CtrStdFile->value.rvalue = NULL;
-	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_NEW_ARG ), &ctr_file_new );
+	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_file_new );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_PATH ), &ctr_file_path );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_READ ), &ctr_file_read );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_WRITE ), &ctr_file_write );
