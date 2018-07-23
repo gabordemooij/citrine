@@ -6,6 +6,13 @@
 
 const int CTR_TRANSLATE_MAX_WORD_LEN = 180;
 
+/**
+ * Dictionary Structure
+ * A dictionary is used to translate citrine code from
+ * one human language to another. The structure consists of
+ * a type (i.e. s for string and t for token), word, translation
+ * and lengths. It's a linked list.
+ */
 struct ctr_dict {
 	char type;
 	char* word;
@@ -15,6 +22,16 @@ struct ctr_dict {
 	struct ctr_dict* next;
 };
 
+/**
+ * A Note structure is used by the translation system to make notes.
+ * Notes form a linked list known as the notebook and can have markers
+ * (integers) and attachments (string buffers) and are attached to
+ * certain positions in the Citrine code (code pointers).
+ * The notebook is used to associate parts of messages with the message
+ * signature like 'and:' in 'respond:and:'. String buffers containing
+ * message parts ('and:') are stored in the notebook and associated with
+ * code pointers. This way messages can be translated 'as a whole'.
+ */
 typedef struct ctr_dict ctr_dict;
 struct ctr_note {
 	char* attachment;
@@ -24,10 +41,16 @@ struct ctr_note {
 };
 
 typedef struct ctr_note ctr_note;
-
 ctr_note* previousNote = NULL;
 ctr_note* firstNote = NULL;
 
+/**
+ * Creates a note and attached it to the specified pointer.
+ * The notebook is used to associate parts of messages with the message
+ * signature like 'and:' in 'respond:and:'. String buffers containing
+ * message parts ('and:') are stored in the notebook and associated with
+ * code pointers. This way messages can be translated 'as a whole'.
+ */
 ctr_note* ctr_note_create( char* pointer ) {
 	ctr_note* note = (ctr_note*) calloc(sizeof(ctr_note), 1);
 	note->attachedTo = pointer;
@@ -37,6 +60,14 @@ ctr_note* ctr_note_create( char* pointer ) {
 	return note;
 }
 
+/**
+ * Adds the specified note to the notebook and
+ * marks the note using the specified code.
+ * The notebook is used to associate parts of messages with the message
+ * signature like 'and:' in 'respond:and:'. String buffers containing
+ * message parts ('and:') are stored in the notebook and associated with
+ * code pointers. This way messages can be translated 'as a whole'.
+ */
 void ctr_notebook_add( ctr_note* note, int mark ) {
 	if (previousNote == NULL) {
 		firstNote = note;
@@ -47,6 +78,13 @@ void ctr_notebook_add( ctr_note* note, int mark ) {
 	previousNote = note;
 }
 
+/**
+ * Removes the entire notebook.
+ * The notebook is used to associate parts of messages with the message
+ * signature like 'and:' in 'respond:and:'. String buffers containing
+ * message parts ('and:') are stored in the notebook and associated with
+ * code pointers. This way messages can be translated 'as a whole'.
+ */
 void ctr_notebook_remove() {
 	ctr_note* note = firstNote;
 	while(note) {
@@ -58,6 +96,13 @@ void ctr_notebook_remove() {
 	}
 }
 
+/**
+ * Clear all marks in the notebook.
+ * The notebook is used to associate parts of messages with the message
+ * signature like 'and:' in 'respond:and:'. String buffers containing
+ * message parts ('and:') are stored in the notebook and associated with
+ * code pointers. This way messages can be translated 'as a whole'.
+ */
 void ctr_notebook_clear_marks() {
 	ctr_note* note = firstNote;
 	while(note) {
@@ -66,10 +111,25 @@ void ctr_notebook_clear_marks() {
 	}
 }
 
+/**
+ * Attaches a buffer to the note.
+ * The notebook is used to associate parts of messages with the message
+ * signature like 'and:' in 'respond:and:'. String buffers containing
+ * message parts ('and:') are stored in the notebook and associated with
+ * code pointers. This way messages can be translated 'as a whole'.
+ */
 void ctr_note_attach( ctr_note* note, char* buffer ) {
 	memcpy(note->attachment,buffer,strlen(buffer));
 }
 
+/**
+ * Searches the notebook for a note associated with the
+ * specified code pointer.
+ * The notebook is used to associate parts of messages with the message
+ * signature like 'and:' in 'respond:and:'. String buffers containing
+ * message parts ('and:') are stored in the notebook and associated with
+ * code pointers. This way messages can be translated 'as a whole'.
+ */
 ctr_note* ctr_notebook_search( char* codePoint ) {
 	ctr_note* note = firstNote;
 	while(note) {
@@ -79,6 +139,14 @@ ctr_note* ctr_notebook_search( char* codePoint ) {
 	return note;
 }
 
+/**
+ * Returns the note object associated with the specified
+ * marker.
+ * The notebook is used to associate parts of messages with the message
+ * signature like 'and:' in 'respond:and:'. String buffers containing
+ * message parts ('and:') are stored in the notebook and associated with
+ * code pointers. This way messages can be translated 'as a whole'.
+ */
 ctr_note* ctr_note_grab( int mark ) {
 	ctr_note* note = firstNote;
 	while(note != NULL) {
@@ -91,6 +159,17 @@ ctr_note* ctr_note_grab( int mark ) {
 	return note;
 }
 
+/**
+ * Attaches string buffers of message parts to all
+ * marked notes in the notebook. Given the remainder of a message
+ * (i.e. everything after the first ':') this function will
+ * find the marked notes (and their code pointers) and attach
+ * the string buffers associated with the remaining message parts.
+ * The notebook is used to associate parts of messages with the message
+ * signature like 'and:' in 'respond:and:'. String buffers containing
+ * message parts ('and:') are stored in the notebook and associated with
+ * code pointers. This way messages can be translated 'as a whole'.
+ */
 void ctr_note_collect( char* remainder ) {
 	int qq;
 	int jj;
@@ -114,6 +193,10 @@ void ctr_note_collect( char* remainder ) {
 	free(buff);
 }
 
+/**
+ * Given a pair of Citrine dictionary source headers this functions
+ * generates a token translation dictionary.
+ */
 void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 	FILE* f1 = fopen(hfile1, "r");
 	FILE* f2 = fopen(hfile2, "r");
@@ -147,6 +230,19 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 	fclose(f2);
 }
 
+/**
+ * Loads a dictionary into memory.
+ * A dictionary file has the following format:
+ *
+ * <t> "<word>" "<translation>"
+ *
+ * Where <t> is 't' for token (i.e. a programming language word)
+ * or 's' for string (a literal series of bytes declared in the Citrine program).
+ * This allows the dictionary to specify both translations for
+ * objects, variables and messages as well as for user interface strings
+ * and text snippets. There is no need to translate comments because
+ * Citrine does not support them. This is always the reason why.
+ */
 ctr_dict* ctr_translate_load_dictionary() {
 	FILE* file = fopen(ctr_mode_dict_file,"r");
 	if (file == NULL) {
@@ -201,6 +297,19 @@ ctr_dict* ctr_translate_load_dictionary() {
 	return entry;
 }
 
+/**
+ * Unloads a dictionary.
+ * A dictionary file has the following format:
+ *
+ * <t> "<word>" "<translation>"
+ *
+ * Where <t> is 't' for token (i.e. a programming language word)
+ * or 's' for string (a literal series of bytes declared in the Citrine program).
+ * This allows the dictionary to specify both translations for
+ * objects, variables and messages as well as for user interface strings
+ * and text snippets. There is no need to translate comments because
+ * Citrine does not support them. This is always the reason why.
+ */
 void ctr_translate_unload_dictionary(ctr_dict* dictionary) {
 	ctr_dict* entry = dictionary;
 	ctr_dict* previousEntry;
