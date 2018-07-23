@@ -199,28 +199,25 @@ void ctr_note_collect( char* remainder ) {
 void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 	FILE* f1 = fopen(hfile1, "r");
 	FILE* f2 = fopen(hfile2, "r");
-	if (f1 == NULL) {
+	if (f1 == NULL || f2 == NULL) {
 		ctr_print_error("Error opening source dictionary.", 1);
-	}
-	if (f2 == NULL) {
-		ctr_print_error("Error opening target dictionary.", 1);
 	}
 	char* word = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	char* translation = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	char* key1  = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	char* key2  = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
+	char* format;
+	char* buffer;
 	int lineCounter = 0;
 	while( 
 		fscanf( f1, "#define %180s \"%180[^\"]\"\n", key1, word ) > 0 &&
 		fscanf( f2, "#define %180s \"%180[^\"]\"\n", key2, translation) > 0
 	) {
-		if (strlen(key1)!=strlen(key2)) {
-			printf("Error: key mismatch %s %s on line %d\n", key1, key2, lineCounter);
-			exit(1);
-		}
-		if (strncmp(key1, key2, strlen(key1))!=0) {
-			printf("Error: key mismatch %s %s on line %d\n", key1, key2, lineCounter);
-			exit(1);
+		if (strlen(key1)!=strlen(key2) || strncmp(key1, key2, strlen(key1))!=0) {
+			format = "Error: key mismatch %s %s on line %d\n";
+			buffer = ctr_heap_allocate(600);
+			snprintf(buffer, 600, format, key1, key2, lineCounter);
+			ctr_print_error(buffer, 1);
 		}
 		printf("t \"%s\" \"%s\"\n", word, translation);
 		lineCounter++;
@@ -250,6 +247,8 @@ ctr_dict* ctr_translate_load_dictionary() {
 	char  translationType;
 	char* word = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	char* translation = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
+	char* buffer;
+	char* format;
 	ctr_dict* entry;
 	ctr_dict* previousEntry = NULL;
 	ctr_dict* e;
@@ -277,14 +276,18 @@ ctr_dict* ctr_translate_load_dictionary() {
 			if (e->type == entry->type) {
 				if ( e->wordLength == entry->wordLength ) {
 					if ( strncmp( e->word, entry->word, entry->wordLength ) == 0 ) {
-						printf( "Ambigious word in dictionary. %s \n", entry->word );
-						exit(1);
+						format = "Ambigious word in dictionary: %s.";
+						buffer = ctr_heap_allocate( 600 * sizeof(char) );
+						snprintf( buffer, 600 * sizeof(char), format, word );
+						ctr_print_error( buffer, 1 );
 					}
 				}
 				if ( e->translationLength == entry->translationLength ) {
 					if ( strncmp( e->translation, entry->translation, entry->translationLength ) == 0 ) {
-						printf( "Ambigious translation in dictionary %s.\n", entry->translation );
-						exit(1);
+						format = "Ambigious translation in dictionary: %s.";
+						buffer = ctr_heap_allocate(600 * sizeof(char));
+						snprintf( buffer, 600 * sizeof(char), format, translation);
+						ctr_print_error( buffer, 1 );
 					}
 				}
 			}
