@@ -176,8 +176,7 @@ void ctr_note_collect( char* remainder ) {
 	int k;
 	char* buff;
 	if (strlen(remainder)>CTR_TRANSLATE_MAX_WORD_LEN) {
-		printf("Translation error, message too long.\n");
-		exit(1);
+		ctr_print_error("Translation error, message too long.",1);
 	}
 	buff = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	qq = 0;
@@ -246,8 +245,7 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 ctr_dict* ctr_translate_load_dictionary() {
 	FILE* file = fopen(ctr_mode_dict_file,"r");
 	if (file == NULL) {
-		printf("Unable to open dictionary.\n");
-		exit(1);
+		ctr_print_error("Unable to open dictionary.", 1);
 	}
 	char  translationType;
 	char* word = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
@@ -261,8 +259,7 @@ ctr_dict* ctr_translate_load_dictionary() {
 		entry->wordLength = strlen(word);
 		entry->translationLength = strlen(translation);
 		if (entry->wordLength > CTR_TRANSLATE_MAX_WORD_LEN || entry->translationLength > CTR_TRANSLATE_MAX_WORD_LEN) {
-			printf("Dictionary entry too long.\n");
-			exit(1);
+			ctr_print_error("Dictionary entry too long.", 1);
 		} 
 		entry->word = calloc( entry->wordLength, 1 );
 		entry->translation = calloc( entry->translationLength, 1 );
@@ -341,8 +338,7 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 					fwrite(entry->translation + i,1,1,stdout);
 					if (*(entry->translation + i)==':' && entry->translationLength > (i+1)) {
 						if ((entry->translationLength-i)>CTR_TRANSLATE_MAX_WORD_LEN) {
-							printf("Unable to copy translation to buffer.\n");
-							exit(1);
+							ctr_print_error("Unable to copy translation to buffer.", 1);
 						}
 						memcpy(remainder,entry->translation+i+1,(entry->translationLength-i-1));
 						break;
@@ -424,8 +420,7 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 		ctr_size q;
 		message = calloc(CTR_TRANSLATE_MAX_WORD_LEN,1);
 		if (l+1 > CTR_TRANSLATE_MAX_WORD_LEN) {
-			printf("Token length exceeds maximum buffer size.\n");
-			exit(1);
+			ctr_print_error("Token length exceeds maximum buffer size.", 1);
 		}
 		memcpy(message, e-l,l+1);
 		ctr_size i = 1;
@@ -437,14 +432,12 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 				q = 0;
 				if (ctr_clex_backward_scan(e+i, "\n\t )}", &q, CTR_TRANSLATE_MAX_WORD_LEN)) {
 					if ((l+1)+((e+i+1)-(e+i-q+1))>CTR_TRANSLATE_MAX_WORD_LEN) {
-						printf("Part of keyword message token exceeds buffer limit.\n");
-						exit(1);
+						ctr_print_error("Part of keyword message token exceeds buffer limit.", 1);
 					}
 					memcpy(message+l+1,e+i-q+1, (e+i+1)-(e+i-q+1));
 					l += ((e+i+1)-(e+i-q+1));
 				} else {
-					printf("error.");
-					exit(1);
+					ctr_print_error("error.",1);
 				}
 			}
 			i++;
