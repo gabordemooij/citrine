@@ -124,6 +124,7 @@ for i in $(find tests -name 'test*.ctr'); do
 		rm tests/runner10.ctr ; ./ctr -t ennl.dict tests/runner4.ctr 1> tests/runner10.ctr 2> tests/terrors10.log
 		rm tests/runner11.ctr ; ./ctr -t ennl.dict tests/runner5.ctr 1> tests/runner11.ctr 2> tests/terrors11.log
 		rm tests/runner12.ctr ; ./ctr -t ennl.dict tests/runner6.ctr 1> tests/runner12.ctr 2> tests/terrors12.log
+		rm tests/runner13.ctr ; ./ctr -t nlen.dict tests/runner12.ctr 1> tests/runner13.ctr 2> tests/terrors13.log
 	fi
 	echo "[running...]";
 	echo "test" | ./ctr ${fitem} 1>/tmp/a0 2>/tmp/b0
@@ -140,6 +141,7 @@ for i in $(find tests -name 'test*.ctr'); do
 		echo "test" | ./ctrnl tests/runner10.ctr 1>/tmp/a10 2>/tmp/b10
 		echo "test" | ./ctrnl tests/runner11.ctr 1>/tmp/a11 2>/tmp/b11
 		echo "test" | ./ctrnl tests/runner12.ctr 1>/tmp/a12 2>/tmp/b12
+		echo "test" | ./ctr tests/runner13.ctr 1>/tmp/a13 2>/tmp/b13
 	fi
 	result[0]=`cat /tmp/a0 /tmp/b0`
 	result[1]=`cat /tmp/a1 /tmp/b1`
@@ -154,6 +156,7 @@ for i in $(find tests -name 'test*.ctr'); do
 	result[10]=`cat /tmp/a10 /tmp/b10`
 	result[11]=`cat /tmp/a11 /tmp/b11`
 	result[12]=`cat /tmp/a12 /tmp/b12`
+	result[13]=`cat /tmp/a13 /tmp/b13`
 	expected=`cat $fexpect`
 	expectednl=$expected
 	if [ -f $fexpectnl ]; then
@@ -187,6 +190,10 @@ for i in $(find tests -name 'test*.ctr'); do
 				exit 1
 			fi
 		done
+		if [ "${result[13]}" = "$expected" ]; then
+			echo -n "[✓$j!]"
+			j=$((j+1))
+		fi
 	fi
 	echo "[done]"
 done
