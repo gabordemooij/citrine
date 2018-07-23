@@ -726,3 +726,4 @@ extern int ctr_string_interpolation;
 extern void ctr_clex_move_code_pointer(int movement);
 extern int ctr_clex_forward_scan( char* codePointer, char* bytes, ctr_size* newCodePointer );
 extern int ctr_clex_backward_scan( char* codePointer, char* bytes, ctr_size* newCodePointer, ctr_size limit );
+extern void ctr_print_error(char* error, int code);

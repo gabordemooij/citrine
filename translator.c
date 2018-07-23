@@ -117,6 +117,12 @@ void ctr_note_collect( char* remainder ) {
 void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 	FILE* f1 = fopen(hfile1, "r");
 	FILE* f2 = fopen(hfile2, "r");
+	if (f1 == NULL) {
+		ctr_print_error("Error opening source dictionary.", 1);
+	}
+	if (f2 == NULL) {
+		ctr_print_error("Error opening target dictionary.", 1);
+	}
 	char* word = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	char* translation = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	char* key1  = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);

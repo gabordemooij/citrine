@@ -165,3 +165,16 @@ ctr_object* ctr_error_text( char* message ) {
 	CtrStdFlow->info.sticky = 1;
 	return CtrStdFlow;
 }
+
+/**
+ * @internal
+ *
+ * Prints a message to the error stream.
+ */
+void ctr_print_error( char* error, int code ) {
+	fwrite( error, sizeof(char), strlen(error), stderr );
+	fwrite( "\n", sizeof(char), 1, stderr );
+	if ( code > -1 ) {
+		exit(code);
+	}
+}

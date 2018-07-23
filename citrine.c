@@ -47,16 +47,20 @@ int ctr_cli_read_args(int argc, char* argv[]) {
 		ctr_cli_welcome();
 		exit(0);
 	}
-	
-	if (argc == 4 && strncmp(argv[1],"-g", 2)==0) {
+	if (strncmp(argv[1],"-g", 2)==0) {
+		if (argc < 4) {
+			ctr_print_error( "Not enough arguments. Usage: ctr -g file1.h file2.h", 1 );
+		}
 		ctr_mode_hfile1 = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
 		strncpy(ctr_mode_hfile1, argv[2], 254);
 		ctr_mode_hfile2 = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
 		strncpy(ctr_mode_hfile2, argv[3], 254);
 		mode = 2;
 	}
-	
-	if (argc == 4 && strncmp(argv[1],"-t", 2)==0) {
+	if (strncmp(argv[1],"-t", 2)==0) {
+		if (argc < 4) {
+			ctr_print_error( "Not enough arguments. Usage: ctr -t d.dict program.ctr", 1 );
+		}
 		ctr_mode_dict_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
 		strncpy(ctr_mode_dict_file, argv[2], 254);
 		ctr_mode_input_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
