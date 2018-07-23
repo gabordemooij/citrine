@@ -769,7 +769,18 @@ ctr_object* ctr_build_number_from_float(ctr_number f) {
 /**
  * [Number] > [other]
  *
- * Returns True if the number is higher than other number.
+ * Upon receiving this binary message, the Number object will
+ * compare itself to the specified Number (other). If the value of
+ * the Number object is higher than the other Number object, it will
+ * answer with a boolean object True,
+ * otherwise it will answer with a boolean object False.
+ *
+ * Usage:
+ *
+ * ☞ x := 8 > 7.
+ *
+ * The code snippet above will compare the two number objects.
+ * The result (True) will be stored in variable x.
  */
 ctr_object* ctr_number_higherThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -779,7 +790,18 @@ ctr_object* ctr_number_higherThan(ctr_object* myself, ctr_argument* argumentList
 /**
  * [Number] ≥ [other]
  *
- * Returns True if the number is higher than or equal to other number.
+ * Upon receiving this binary message, the Number object will
+ * compare itself to the specified Number (other). If the value of
+ * the Number object is higher than or equal to the other Number object, it will
+ * answer with a boolean object True,
+ * otherwise it will answer with a boolean object False.
+ *
+ * Usage:
+ *
+ * ☞ x := 8 ≥ 7.
+ *
+ * The code snippet above will compare the two number objects.
+ * The result (True) will be stored in variable x.
  */
 ctr_object* ctr_number_higherEqThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -789,7 +811,18 @@ ctr_object* ctr_number_higherEqThan(ctr_object* myself, ctr_argument* argumentLi
 /**
  * [Number] < [other]
  *
- * Returns True if the number is less than other number.
+ * Upon receiving this binary message, the Number object will
+ * compare itself to the specified Number (other). If the value of
+ * the Number object is less than the other Number object, it will
+ * answer with a boolean object True,
+ * otherwise it will answer with a boolean object False.
+ *
+ * Usage:
+ *
+ * ☞ x := 7 < 8.
+ *
+ * The code snippet above will compare the two number objects.
+ * The result (True) will be stored in variable x.
  */
 ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -799,7 +832,18 @@ ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList)
 /**
  * [Number] ≤ [other]
  *
- * Returns True if the number is less than or equal to other number.
+ * Upon receiving this binary message, the Number object will
+ * compare itself to the specified Number (other). If the value of
+ * the Number object is lower than or equal to the other Number object, it will
+ * answer with a boolean object True,
+ * otherwise it will answer with a boolean object False.
+ *
+ * Usage:
+ *
+ * ☞ x := 7 ≤ 8.
+ *
+ * The code snippet above will compare the two number objects.
+ * The result (True) will be stored in variable x.
  */
 ctr_object* ctr_number_lowerEqThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -809,7 +853,18 @@ ctr_object* ctr_number_lowerEqThan(ctr_object* myself, ctr_argument* argumentLis
 /**
  * [Number] = [other]
  *
- * Returns True if the number equals the other number.
+ * Upon receiving this binary message, the Number object will
+ * compare itself to the specified Number (other). If the value of
+ * the Number object equals the other Number object, it will
+ * answer with a boolean object True,
+ * otherwise it will answer with a boolean object False.
+ *
+ * Usage:
+ *
+ * ☞ x := 8 = 8.
+ *
+ * The code snippet above will compare the two number objects.
+ * The result (True) will be stored in variable x.
  */
 ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -817,9 +872,20 @@ ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] ≠ [other]
+ * [Number] = [other]
  *
- * Returns True if the number does not equal the other number.
+ * Upon receiving this binary message, the Number object will
+ * compare itself to the specified Number (other). If the value of
+ * the Number object does not equal the other Number object, it will
+ * answer with a boolean object True,
+ * otherwise it will answer with a boolean object False.
+ *
+ * Usage:
+ *
+ * ☞ x := 7 ≠ 8.
+ *
+ * The code snippet above will compare the two number objects.
+ * The result (True) will be stored in variable x.
  */
 ctr_object* ctr_number_neq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
