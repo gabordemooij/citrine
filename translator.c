@@ -235,7 +235,7 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 							printf("Unable to copy translation to buffer.\n");
 							exit(1);
 						}
-						memcpy(remainder,entry->translation+i+1,(entry->translationLength-i));
+						memcpy(remainder,entry->translation+i+1,(entry->translationLength-i-1));
 						break;
 					}
 				}
