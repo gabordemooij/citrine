@@ -484,42 +484,108 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .B [Number] > [other]
 .nf
     
-     Returns True if the number is higher than other number.
+     Upon receiving this binary message, the Number object will
+     compare itself to the specified Number (other). If the value of
+     the Number object is higher than the other Number object, it will
+     answer with a boolean object True,
+     otherwise it will answer with a boolean object False.
+    
+     Usage:
+    
+     ☞ x := 8 > 7.
+    
+     The code snippet above will compare the two number objects.
+     The result (True) will be stored in variable x.
 .fi
 .BR.BR.BR
 
 .B [Number] ≥ [other]
 .nf
     
-     Returns True if the number is higher than or equal to other number.
+     Upon receiving this binary message, the Number object will
+     compare itself to the specified Number (other). If the value of
+     the Number object is higher than or equal to the other Number object, it will
+     answer with a boolean object True,
+     otherwise it will answer with a boolean object False.
+    
+     Usage:
+    
+     ☞ x := 8 ≥ 7.
+    
+     The code snippet above will compare the two number objects.
+     The result (True) will be stored in variable x.
 .fi
 .BR.BR.BR
 
 .B [Number] < [other]
 .nf
     
-     Returns True if the number is less than other number.
+     Upon receiving this binary message, the Number object will
+     compare itself to the specified Number (other). If the value of
+     the Number object is less than the other Number object, it will
+     answer with a boolean object True,
+     otherwise it will answer with a boolean object False.
+    
+     Usage:
+    
+     ☞ x := 7 < 8.
+    
+     The code snippet above will compare the two number objects.
+     The result (True) will be stored in variable x.
 .fi
 .BR.BR.BR
 
 .B [Number] ≤ [other]
 .nf
     
-     Returns True if the number is less than or equal to other number.
+     Upon receiving this binary message, the Number object will
+     compare itself to the specified Number (other). If the value of
+     the Number object is lower than or equal to the other Number object, it will
+     answer with a boolean object True,
+     otherwise it will answer with a boolean object False.
+    
+     Usage:
+    
+     ☞ x := 7 ≤ 8.
+    
+     The code snippet above will compare the two number objects.
+     The result (True) will be stored in variable x.
 .fi
 .BR.BR.BR
 
 .B [Number] = [other]
 .nf
     
-     Returns True if the number equals the other number.
+     Upon receiving this binary message, the Number object will
+     compare itself to the specified Number (other). If the value of
+     the Number object equals the other Number object, it will
+     answer with a boolean object True,
+     otherwise it will answer with a boolean object False.
+    
+     Usage:
+    
+     ☞ x := 8 = 8.
+    
+     The code snippet above will compare the two number objects.
+     The result (True) will be stored in variable x.
 .fi
 .BR.BR.BR
 
-.B [Number] ≠ [other]
+.B [Number] = [other]
 .nf
     
-     Returns True if the number does not equal the other number.
+     Upon receiving this binary message, the Number object will
+     compare itself to the specified Number (other). If the value of
+     the Number object does not equal the other Number object, it will
+     answer with a boolean object True,
+     otherwise it will answer with a boolean object False.
+    
+     Usage:
+    
+     ☞ x := 7 ≠ 8.
+    
+     The code snippet above will compare the two number objects.
+     The result (True) will be stored in variable x.
 .fi
 .BR.BR.BR
 
