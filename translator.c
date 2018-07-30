@@ -365,6 +365,13 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 				}
 			}
 	}
+	if (!found) {
+		char* buffer = ctr_heap_allocate( 600 );
+		char* warning = "Warning: Not translated: ";
+		memcpy(buffer, warning, strlen(warning));
+		memcpy(buffer + (strlen(warning)), v, l);
+		ctr_print_error( buffer, -1 );
+	}
 	return found;
 }
 
