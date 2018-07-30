@@ -331,12 +331,21 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 	int found = 0;
 	int i;
 	ctr_dict* entry;
+	char* buffer;
+	char* warning;
 	entry = dictionary;
 	while( entry ) {
 		ctr_size ml;
 		ml = entry->wordLength;
 		if ( l == entry->wordLength && context == entry->type && strncmp( entry->word, v, ml ) == 0 ) {
 			if (context == 't') {
+				if ((entry->translationLength == 1 && l > 1) || (entry->translationLength > 1 && l== 1)) {
+					buffer = ctr_heap_allocate( 600 );
+					warning = "Keyword/Binary mismatch:";
+					memcpy(buffer, warning, strlen(warning));
+					memcpy(buffer + (strlen(warning)), v, l);
+					ctr_print_error( buffer, 1 );
+				}
 				for (i = 0; i<entry->translationLength; i++) {
 					fwrite(entry->translation + i,1,1,stdout);
 					if (*(entry->translation + i)==':' && entry->translationLength > (i+1)) {
@@ -366,8 +375,8 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 			}
 	}
 	if (!found) {
-		char* buffer = ctr_heap_allocate( 600 );
-		char* warning = "Warning: Not translated: ";
+		buffer = ctr_heap_allocate( 600 );
+		warning = "Warning: Not translated: ";
 		memcpy(buffer, warning, strlen(warning));
 		memcpy(buffer + (strlen(warning)), v, l);
 		ctr_print_error( buffer, -1 );
