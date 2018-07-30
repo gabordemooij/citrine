@@ -371,6 +371,7 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 		memcpy(buffer, warning, strlen(warning));
 		memcpy(buffer + (strlen(warning)), v, l);
 		ctr_print_error( buffer, -1 );
+		ctr_heap_free(buffer);
 	}
 	return found;
 }
