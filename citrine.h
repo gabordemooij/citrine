@@ -1,8 +1,10 @@
 
 #ifdef langNL
 #include "i18n/nl/dictionarynl.h"
+#include "i18n/nl/msgnl.h"
 #else
 #include "dictionary.h"
+#include "i18n/en_us/msg.h"
 #endif
 
 #include <inttypes.h>
@@ -727,3 +729,5 @@ extern void ctr_clex_move_code_pointer(int movement);
 extern int ctr_clex_forward_scan( char* codePointer, char* bytes, ctr_size* newCodePointer );
 extern int ctr_clex_backward_scan( char* codePointer, char* bytes, ctr_size* newCodePointer, ctr_size limit );
 extern void ctr_print_error(char* error, int code);
+
+extern void ctr_plugin_check_language( char* code );

@@ -317,6 +317,7 @@ ctr_object* ctr_request_serve(ctr_object* myself, ctr_argument* argumentList) {
  * Adds the Request object to the World.
  */
 void begin(){
+	ctr_plugin_check_language( CTR_MSG_LANG_CODE );
 	ctr_object* requestObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	requestObject->link = CtrStdObject;
 	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_HTTP_REQUEST_GET_SET ), &ctr_request_get_string );
