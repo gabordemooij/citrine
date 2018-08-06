@@ -1,4 +1,4 @@
 Uncatched error has occurred.
-Failed to open folder.
+Unable to open: %s.
 #2 list: (tests/test0270.ctr: 2)
 #1 q (tests/test0270.ctr: 2)

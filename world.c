@@ -58,7 +58,7 @@ char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
    FILE* fp;
    fp = fopen(file_name,"r");
    if( fp == NULL ) {
-      fprintf(stderr, "Error while opening the file.\n");
+      fprintf(stderr, CTR_ERR_FOPEN );
       exit(1);
    }
    prev = ftell(fp);
@@ -70,7 +70,7 @@ char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
    ctr_program_length=0;
    while( ( ch = fgetc(fp) ) != EOF ) prg[ctr_program_length++]=ch;
    if ( ctr_program_length != size ) {
-	fprintf(stderr, "Unable to read program file.\n" );
+	fprintf(stderr, CTR_ERR_SEEK );
 	exit(1);
    }
    fclose(fp);
@@ -368,7 +368,7 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
 	ctr_object* numObject = ctr_send_message( o, CTR_DICT_TONUMBER, strlen(CTR_DICT_TONUMBER), a );
 	ctr_heap_free(a);
 	if ( numObject->info.type != CTR_OBJECT_TYPE_OTNUMBER ) {
-		CtrStdFlow = ctr_error_text( "number must return a number." );
+		CtrStdFlow = ctr_error_text( CTR_ERR_RNUM );
 		return ctr_build_number_from_float((ctr_number)0);
 	}
 	return numObject;
@@ -388,7 +388,7 @@ ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 	ctr_object* stringObject = ctr_send_message( o, CTR_DICT_TOSTRING, strlen(CTR_DICT_TOSTRING), a );
 	ctr_heap_free(a);
 	if ( stringObject->info.type != CTR_OBJECT_TYPE_OTSTRING ) {
-		CtrStdFlow = ctr_error_text( "string must return a string." );
+		CtrStdFlow = ctr_error_text( CTR_ERR_RSTR );
 		return ctr_build_string_from_cstring( "?" );
 	}
 	return stringObject;
@@ -408,7 +408,7 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
 	ctr_object* boolObject = ctr_send_message( o, CTR_DICT_TOBOOL, strlen(CTR_DICT_TOBOOL), a );
 	ctr_heap_free(a);
 	if ( boolObject->info.type != CTR_OBJECT_TYPE_OTBOOL ) {
-		CtrStdFlow = ctr_error_text( "boolean must return a boolean." );
+		CtrStdFlow = ctr_error_text( CTR_ERR_RBOOL );
 		return ctr_build_bool(0);
 	}
 	return boolObject;
@@ -424,7 +424,7 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
 void ctr_open_context() {
 	ctr_object* context;
 	if (ctr_context_id >= 299) {
-		CtrStdFlow = ctr_build_string_from_cstring( "Too many nested calls." );
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_NESTING );
 		CtrStdFlow->info.sticky = 1;
 	}
 	context = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -471,7 +471,7 @@ ctr_object* ctr_find(ctr_object* key) {
 		char* message;
 		char* full_message;
 		int message_size;
-		message = "Key not found: ";
+		message = CTR_ERR_KNF;
 		message_size = ((strlen(message))+key->value.svalue->vlen);
 		full_message = ctr_heap_allocate( message_size * sizeof( char ) );
 		key_name = ctr_heap_allocate_cstring( key );
@@ -502,7 +502,7 @@ ctr_object* ctr_find_in_my(ctr_object* key) {
 		char* message;
 		char* full_message;
 		int message_size;
-		message = "Object property not found: ";
+		message = CTR_ERR_KNF;
 		message_size = ((strlen(message))+key->value.svalue->vlen);
 		full_message = ctr_heap_allocate( message_size * sizeof( char ) );
 		key_name = ctr_heap_allocate_cstring( key );
@@ -539,7 +539,7 @@ void ctr_set(ctr_object* key, ctr_object* object) {
 		char* message;
 		char* full_message;
 		int message_size;
-		message = "Cannot assign to undefined variable: ";
+		message = CTR_ERR_ASSIGN;
 		message_size = ((strlen(message))+key->value.svalue->vlen);
 		full_message = ctr_heap_allocate(message_size*sizeof(char));
 		key_name = ctr_heap_allocate_cstring( key );

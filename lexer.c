@@ -82,7 +82,7 @@ uint8_t ctr_clex_is_delimiter( char symbol ) {
  * Displays an error message for the lexer.
  */
 void ctr_clex_emit_error( char* message ) {
-	printf( "%s on line: %d. \n", message, ctr_clex_line_number );
+	printf(CTR_ERR_LEX, message, ctr_clex_line_number );
 	exit(1);
 }
 
@@ -323,7 +323,7 @@ int ctr_clex_tok() {
 		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
 		i++;
 		if (i > ctr_clex_bflmt) {
-			ctr_clex_emit_error( "Token Buffer Exausted. Tokens may not exceed 255 bytes" );
+			ctr_clex_emit_error( CTR_ERR_TOKBUFF );
 		}
 		ctr_code++;
 		c = *ctr_code;
@@ -418,7 +418,7 @@ char* ctr_clex_readstr() {
 			memblock += page;
 			beginbuff = (char*) ctr_heap_reallocate_tracked( tracking_id, memblock );
 			if (beginbuff == NULL) {
-				ctr_clex_emit_error( "Out of memory" );
+				ctr_clex_emit_error( CTR_ERR_OOM );
 			}
 			/* reset pointer, memory location might have been changed */
 			strbuff = beginbuff + (ctr_clex_tokvlen -1);

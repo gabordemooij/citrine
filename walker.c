@@ -22,12 +22,12 @@ ctr_object* ctr_cwlk_return(ctr_tnode* node) {
 	ctr_tlistitem* li;
 	ctr_object* e;
 	if (!node->nodes) {
-		fprintf(stderr,"Invalid return expression.\n");
+		fprintf(stderr, CTR_ERR_RET );
 		exit(1);
 	}
 	li = node->nodes;
 	if (!li->node) {
-		fprintf(stderr,"Invalid return expression 2.\n");
+		fprintf(stderr, CTR_ERR_RET );
 		exit(1);
 	}
 	e = ctr_cwlk_expr(li->node, &wasReturn);
@@ -97,7 +97,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 			r = ctr_build_block(receiverNode);
 			break;
 		default:
-			fprintf(stderr,"Cannot send message to receiver of type: %d \n", receiverNode->type);
+			fprintf(stderr, CTR_ERR_SEND, receiverNode->type);
 			break;
 	}
 	int ctr_assume_message_level = ctr_in_message;
@@ -137,7 +137,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 				keys[key_index++] = ctr_gc_internal_pin(o);
 				
 				if (key_index > 39) {
-					printf("Key index exhausted.");
+					printf( CTR_ERR_KEYINX );
 					exit(1);
 				}
 				/* we always send at least one argument, note that if you want to modify the argumentList, be sure to take this into account */
@@ -170,7 +170,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 	}
 	ctr_in_message -= (ctr_is_chain - 1);
 	if (ctr_in_message != ctr_assume_message_level) {
-		printf("Detected message level anomaly.\n");
+		printf( CTR_ERR_ANOMALY );
 		exit(1);
 	}
 	if (recipientName) recipientName->info.sticky = 0;
@@ -266,7 +266,7 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 			break;
 		case CTR_AST_NODE_ENDOFPROGRAM:
 			if (CtrStdFlow && CtrStdFlow != CtrStdExit && ctr_cwlk_subprogram == 0) {
-				fprintf(stderr,"Uncatched error has occurred.\n");
+				fprintf(stderr, CTR_ERR_UNCAUGHT );
 				if (CtrStdFlow->info.type == CTR_OBJECT_TYPE_OTSTRING) {
 					fwrite(CtrStdFlow->value.svalue->value, sizeof(char), CtrStdFlow->value.svalue->vlen, stderr);
 					fprintf(stderr,"\n");
@@ -294,7 +294,7 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 			result = ctr_build_nil();
 			break;
 		default:
-			fprintf(stderr,"Runtime Error. Invalid parse node: %d %s \n", node->type,node->value);
+			fprintf(stderr, CTR_ERR_NODE, node->type,node->value);
 			exit(1);
 			break;
 	}
@@ -314,7 +314,7 @@ ctr_object* ctr_cwlk_run(ctr_tnode* program) {
 	while(li) {
 		ctr_tnode* node = li->node;
 		if (!li->node) {
-			fprintf(stderr,"Missing parse node\n");
+			fprintf(stderr, CTR_ERR_MISSING );
 			exit(1);
 		}
 		wasReturn = 0;

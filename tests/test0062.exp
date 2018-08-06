@@ -1,4 +1,4 @@
-Expected on: argument to be of type string.
-Expected argument do: to be of type block.
+Expected string.
+Expected block.
 Division by zero.
 OKOKOK

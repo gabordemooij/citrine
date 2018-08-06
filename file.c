@@ -58,7 +58,7 @@ ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_file_path(myself,argumentList);
 	if ( path == CtrStdNil) {
-		return ctr_build_string_from_cstring("[File (no path)]");
+		return ctr_build_string_from_cstring( CTR_SYM_FILE );
 	}
 	return ctr_internal_cast2string(path);
 }
@@ -94,7 +94,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	error_code = errno;
 	ctr_heap_free( pathString );
 	if (!f) {
-		ctr_error( "Unable to open file: %s.", error_code );
+		ctr_error( CTR_ERR_OPEN, error_code );
 		return CtrStdNil;
 	}
 	fseek(f, 0, SEEK_END);
@@ -102,7 +102,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	fseek(f, 0, SEEK_SET);
 	buffer=(char *)ctr_heap_allocate(fileLen+1);
 	if (!buffer){
-		fprintf(stderr,"Out of memory\n");
+		fprintf(stderr, CTR_ERR_OOM );
 		fclose(f);exit(1);	
 	}
 	fread(buffer, fileLen, 1, f);
@@ -144,7 +144,7 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	error_code = errno;
 	ctr_heap_free( pathString );
 	if (!f) {
-		CtrStdFlow = ctr_error( "Unable to open file: %s.", error_code );
+		CtrStdFlow = ctr_error( CTR_ERR_OPEN, error_code );
 		return CtrStdNil;
 	}
 	fwrite(str->value.svalue->value, sizeof(char), str->value.svalue->vlen, f);
@@ -173,7 +173,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	f = fopen(pathString, "ab+");
 	ctr_heap_free( pathString );
 	if (!f) {
-		CtrStdFlow = ctr_build_string_from_cstring("Unable to open file.\0");
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_OPEN );
 		CtrStdFlow->info.sticky = 1;
 		return CtrStdNil;
 	}
@@ -251,7 +251,7 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
 	r = remove(pathString);
 	ctr_heap_free( pathString );
 	if (r!=0) {
-		CtrStdFlow = ctr_build_string_from_cstring( "Unable to delete file." );
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_DELETE );
 		CtrStdFlow->info.sticky = 1;
 		return CtrStdNil;
 	}
@@ -307,7 +307,7 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* modeStrObj = ctr_internal_cast2string( argumentList->object );
 	if ( myself->value.rvalue != NULL ) {
 		ctr_heap_free( rs );
-		CtrStdFlow = ctr_build_string_from_cstring( "File has already been opened." );
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_FOPENED );
 		CtrStdFlow->info.sticky = 1;
 		return myself;
 	}
@@ -373,7 +373,7 @@ ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) 
 	if (bytes < 0) return ctr_build_string_from_cstring("");
 	buffer = (char*) ctr_heap_allocate(bytes);
 	if (buffer == NULL) {
-		CtrStdFlow = ctr_build_string_from_cstring("Cannot allocate memory for file buffer.");
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_OOM );
 		CtrStdFlow->info.sticky = 1;
 		return ctr_build_string_from_cstring("");
 	}
@@ -434,7 +434,7 @@ ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
 	offset = (long int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	error = fseek((FILE*)myself->value.rvalue->ptr, offset, SEEK_CUR);
 	if (error) {
-		CtrStdFlow = ctr_build_string_from_cstring("Seek failed.");
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_SEEK );
 		CtrStdFlow->info.sticky = 1;
 	}
 	return myself;
@@ -461,7 +461,7 @@ ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList)
 	if (myself->value.rvalue->type != 1) return myself;
 	error = fseek((FILE*)myself->value.rvalue->ptr, 0, SEEK_SET);
 	if (error) {
-		CtrStdFlow = ctr_build_string_from_cstring("Seek rewind failed.");
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_SEEK );
 		CtrStdFlow->info.sticky = 1;
 	}
 	return myself;
@@ -490,7 +490,7 @@ ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.rvalue->type != 1) return myself;
 	error = fseek((FILE*)myself->value.rvalue->ptr, 0, SEEK_END);
 	if (error) {
-		CtrStdFlow = ctr_build_string_from_cstring("Seek end failed.");
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_SEEK );
 		CtrStdFlow->info.sticky = 1;
 	}
 	return myself;
@@ -512,7 +512,7 @@ ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList
 	ctr_object* fdObjKey;
 	pathObj = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	if (pathObj == NULL) {
-		CtrStdFlow = ctr_error_text("Unable to lock file.");
+		CtrStdFlow = ctr_error_text( CTR_ERR_LOCK );
 		return CtrStdNil;
 	}
 	path = ctr_heap_allocate_cstring( pathObj );
@@ -525,7 +525,7 @@ ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList
 	if (fdObj == NULL) {
 		fd = open( path, O_CREAT );
 		if (fd < 0) {
-			CtrStdFlow = ctr_error_text("Unable to lock file.");
+			CtrStdFlow = ctr_error_text( CTR_ERR_LOCK );
 			ctr_heap_free( path );
 			return CtrStdNil;
 		}
@@ -599,7 +599,7 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	pathValue = ctr_heap_allocate_cstring( path );
 	d = opendir( pathValue );
 	if (d == 0) {
-		CtrStdFlow = ctr_error_text("Failed to open folder.");
+		CtrStdFlow = ctr_error_text( CTR_ERR_OPEN );
 		ctr_heap_free(pathValue);
 		return CtrStdNil;
 	}
@@ -608,34 +608,34 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	putArgumentList->next = ctr_heap_allocate( sizeof( ctr_argument ) );
 	while((entry = readdir(d))) {
 		fileListItem = ctr_map_new(CtrStdMap, NULL);
-		putArgumentList->next->object = ctr_build_string_from_cstring( "file" );
+		putArgumentList->next->object = ctr_build_string_from_cstring( CTR_MSG_DSC_FILE );
 		putArgumentList->object = ctr_build_string_from_cstring(entry->d_name);
 		ctr_map_put(fileListItem, putArgumentList);
-		putArgumentList->next->object = ctr_build_string_from_cstring( "type" );
+		putArgumentList->next->object = ctr_build_string_from_cstring( CTR_MSG_DSC_TYPE );
 		switch(entry->d_type) {
 			case DT_REG:
-				putArgumentList->object = ctr_build_string_from_cstring("file");
+				putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_FILE );
 				break;
 			case DT_DIR:
-				putArgumentList->object = ctr_build_string_from_cstring("folder");
+				putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_FLDR );
 				break;
 			case DT_LNK:
-				putArgumentList->object = ctr_build_string_from_cstring("symbolic link");
+				putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_SLNK );
 				break;
 			case DT_CHR:
-				putArgumentList->object = ctr_build_string_from_cstring("character device");
+				putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_CDEV );
 				break;
 			case DT_BLK:
-				putArgumentList->object = ctr_build_string_from_cstring("block device");
+				putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_BDEV );
 				break;
 			case DT_SOCK:
-				putArgumentList->object = ctr_build_string_from_cstring("socket");
+				putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_SOCK );
 				break;
 			case DT_FIFO:
-				putArgumentList->object = ctr_build_string_from_cstring("named pipe");
+				putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_NPIP );
 				break;
 			default:
-				putArgumentList->object = ctr_build_string_from_cstring("other");
+				putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_OTHR );
 				break;
 		}
 		ctr_map_put(fileListItem, putArgumentList);

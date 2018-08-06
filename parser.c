@@ -20,7 +20,7 @@ char* ctr_cparse_current_program;
 void ctr_cparse_emit_error_unexpected( int t, char* hint )
 {
 	char* message = ctr_clex_tok_describe( t );
-	fprintf(stderr, "Parse error, unexpected %s ( %s: %d )\n", message,  ctr_cparse_current_program, ctr_clex_line_number+1);
+	fprintf(stderr, CTR_ERR_SYNTAX, message,  ctr_cparse_current_program, ctr_clex_line_number+1);
 	if (hint) {
 		fprintf(stderr, "%s", hint );
 	}
@@ -72,7 +72,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 	t = ctr_clex_tok();
 	msgpartlen = ctr_clex_tok_value_length();
 	if ((msgpartlen) > 255) {
-		ctr_cparse_emit_error_unexpected( t, "Message too long\n" );
+		ctr_cparse_emit_error_unexpected( t, CTR_ERR_LONG );
 	}
 	m = ctr_cparse_create_node( CTR_AST_NODE );
 	m->type = -1;
@@ -103,7 +103,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 		*(msg + msgpartlen) = ':';
 		msgpartlen += 1;
 		if ((msgpartlen) > 255) {
-			ctr_cparse_emit_error_unexpected( t, "Message too long\n" );
+			ctr_cparse_emit_error_unexpected( t, CTR_ERR_LONG );
 		}
 		m->type = CTR_AST_NODE_KWMESSAGE;
 		t = ctr_clex_tok();
@@ -127,7 +127,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 			if (t == CTR_TOKEN_REF) {
 				long l = ctr_clex_tok_value_length(); 
 				if ((msgpartlen + l) > 255) {
-					ctr_cparse_emit_error_unexpected( t, "Message too long\n" );
+					ctr_cparse_emit_error_unexpected( t, CTR_ERR_LONG );
 				}
 				memcpy( (msg+msgpartlen), ctr_clex_tok_value(), l);
 				msgpartlen = msgpartlen + l;
@@ -135,7 +135,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 				msgpartlen ++;
 				t = ctr_clex_tok();
 				if (t != CTR_TOKEN_COLON) {
-					ctr_cparse_emit_error_unexpected( t, "Expected colon.\n" );
+					ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_COLON );
 				}
 			}
 		}
@@ -168,7 +168,7 @@ ctr_tlistitem* ctr_cparse_messages(ctr_tnode* r, int mode) {
 		if (t == CTR_TOKEN_CHAIN) {
 			t = ctr_clex_tok();
 			if (t != CTR_TOKEN_REF) {
-				ctr_cparse_emit_error_unexpected( t, "Expected message.\n" );
+				ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_MSG );
 			}
 		}
 		li = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
@@ -214,7 +214,7 @@ ctr_tnode* ctr_cparse_popen() {
 	li->node = ctr_cparse_expr(0);
 	t = ctr_clex_tok();
 	if (t != CTR_TOKEN_PARCLOSE) {
-		ctr_cparse_emit_error_unexpected( t, "Expected ).\n" );
+		ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_PCLS );
 	}
 	return r;
 }
@@ -297,7 +297,7 @@ ctr_tnode* ctr_cparse_block() {
 		}
 		t = ctr_clex_tok();
 		if (t != CTR_TOKEN_DOT) {
-			ctr_cparse_emit_error_unexpected( t, "Expected a dot (.).\n" );
+			ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_DOT );
 		}
 	}
 	return r;
@@ -319,16 +319,7 @@ ctr_tnode* ctr_cparse_ref() {
 	if (strncmp(ctr_clex_keyword_my_icon, tmp, ctr_clex_keyword_my_icon_len)==0 && r->vlen == ctr_clex_keyword_my_icon_len) {
 		int t = ctr_clex_tok();
 		if (t != CTR_TOKEN_REF) {
-			ctr_cparse_emit_error_unexpected( t, "'My' should always be followed by a property name!\n");
-		}
-		tmp = ctr_clex_tok_value();
-		r->modifier = 1;
-		r->vlen = ctr_clex_tok_value_length();
-	}
-	if (strncmp(ctr_clex_keyword_my_icon, tmp, ctr_clex_keyword_my_icon_len)==0 && r->vlen == ctr_clex_keyword_my_icon_len) {
-		int t = ctr_clex_tok();
-		if (t != CTR_TOKEN_REF) {
-			ctr_cparse_emit_error_unexpected( t, "'My' (icon) should always be followed by a property name!\n");
+			ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_KEY );
 		}
 		tmp = ctr_clex_tok_value();
 		r->modifier = 1;
@@ -337,7 +328,7 @@ ctr_tnode* ctr_cparse_ref() {
 	if (strncmp(ctr_clex_keyword_var_icon, tmp, ctr_clex_keyword_var_icon_len)==0 && r->vlen == ctr_clex_keyword_var_icon_len) {
 		int t = ctr_clex_tok();
 		if (t != CTR_TOKEN_REF) {
-			ctr_cparse_emit_error_unexpected( t, "Keyword 'var (icon)' should always be followed by property name!\n");
+			ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_VAR );
 		}
 		tmp = ctr_clex_tok_value();
 		r->modifier = 2;
@@ -467,7 +458,7 @@ ctr_tnode* ctr_cparse_receiver() {
 			return ctr_cparse_popen();
 		default:
 			/* This function always exits, so return a dummy value. */
-			ctr_cparse_emit_error_unexpected( t, "Expected a message recipient.\n" );
+			ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_RCP );
 			return NULL;
 	}
 }
@@ -510,12 +501,12 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 
 	/* user tries to put colon directly after recipient */
 	if ( t2 == CTR_TOKEN_COLON ) {
-		ctr_cparse_emit_error_unexpected( t2, "Recipient cannot be followed by colon.\n" );
+		ctr_cparse_emit_error_unexpected( t2, CTR_ERR_EXP_MSG2 );
 	}
 
 	if ( t2 == CTR_TOKEN_ASSIGNMENT ) {
 		if ( r->type != CTR_AST_NODE_REFERENCE ) {
-			ctr_cparse_emit_error_unexpected( t2, "Invalid left-hand assignment.\n" );
+			ctr_cparse_emit_error_unexpected( t2, CTR_ERR_INV_LAS );
 			exit(1);
 		}
 		e = ctr_cparse_assignment(r);
@@ -591,7 +582,7 @@ ctr_tlistitem* ctr_cparse_statement() {
 	}
 	t = ctr_clex_tok();
 	if (t != CTR_TOKEN_DOT) {
-		ctr_cparse_emit_error_unexpected( t, "Expected a dot (.).\n" );
+		ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_DOT );
 	}
 	return li;
 }

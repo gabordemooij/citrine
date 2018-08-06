@@ -5,15 +5,15 @@ False
 List ← 'hello' ; 'world' ; True ; Nil ; 666 ; 1
 (Map new) put:Nil at:Nil
 668
-Error noted: string must return a string.
-Error noted: number must return a number.
-Error noted: boolean must return a boolean.
-Error noted: string must return a string.
-Error noted: number must return a number.
-Error noted: boolean must return a boolean.
-Error noted: string must return a string.
-Error noted: number must return a number.
-Error noted: boolean must return a boolean.
-Error noted: string must return a string.
-Error noted: number must return a number.
-Error noted: boolean must return a boolean.
+Error noted: Must return a string.
+Error noted: Must return a number.
+Error noted: Must return a boolean.
+Error noted: Must return a string.
+Error noted: Must return a number.
+Error noted: Must return a boolean.
+Error noted: Must return a string.
+Error noted: Must return a number.
+Error noted: Must return a boolean.
+Error noted: Must return a string.
+Error noted: Must return a number.
+Error noted: Must return a boolean.

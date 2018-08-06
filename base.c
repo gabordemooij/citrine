@@ -125,7 +125,7 @@ ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
  * [Object]
  */
 ctr_object* ctr_object_to_string( ctr_object* myself, ctr_argument* argumentList ) {
-	return ctr_build_string_from_cstring( "[Object]" );
+	return ctr_build_string_from_cstring( CTR_SYM_OBJECT );
 }
 
 /**
@@ -266,7 +266,7 @@ ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList )
 	ctr_object* block = argumentList->next->object;
 	ctr_argument* compareArguments;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_error_text("Expected block for case.");
+		CtrStdFlow = ctr_error_text( CTR_ERR_EXP_BLK );
 		return CtrStdNil;
 	}
 	compareArguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
@@ -311,7 +311,7 @@ ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList )
 	ctr_object* message = ctr_internal_cast2string( argumentList->object );
 	ctr_object* arr     = argumentList->next->object;
 	if ( arr->info.type != CTR_OBJECT_TYPE_OTARRAY ) {
-		ctr_error_text( "Dynamic message expects array." );
+		ctr_error_text( CTR_ERR_EXP_ARR );
 		return CtrStdNil;
 	}
 	ctr_size length = (int) ctr_array_count( arr,  NULL )->value.nvalue;
@@ -362,14 +362,14 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* methodBlock;
 	ctr_object* methodName = argumentList->object;
 	if (methodName->info.type != CTR_OBJECT_TYPE_OTSTRING) {
-		CtrStdFlow = ctr_build_string_from_cstring("Expected on: argument to be of type string.");
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_EXP_STR );
 		CtrStdFlow->info.sticky = 1;
 		return myself;
 	}
 	nextArgument = argumentList->next;
 	methodBlock = nextArgument->object;
 	if (methodBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_build_string_from_cstring("Expected argument do: to be of type block.");
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_EXP_BLK );
 		CtrStdFlow->info.sticky = 1;
 		return myself;
 	}
@@ -1102,7 +1102,7 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number a = myself->value.nvalue;
 	ctr_number b = otherNum->value.nvalue;
 	if (b == 0) {
-		CtrStdFlow = ctr_build_string_from_cstring("Division by zero.");
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_DIVZERO );
 		CtrStdFlow->info.sticky = 1;
 		return myself;
 	}
@@ -1126,7 +1126,7 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	if (otherNum->value.nvalue == 0) {
-		CtrStdFlow = ctr_build_string_from_cstring("Division by zero.");
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_DIVZERO );
 		return myself;
 	}
 	myself->value.nvalue /= otherNum->value.nvalue;
@@ -1151,7 +1151,7 @@ ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number a = myself->value.nvalue;
 	ctr_number b = otherNum->value.nvalue;
 	if (b == 0) {
-		CtrStdFlow = ctr_build_string_from_cstring("Division by zero.");
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_DIVZERO );
 		return myself;
 	}
 	return ctr_build_number_from_float(fmod(a,b));
@@ -1888,7 +1888,7 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 	if (flagCI) eflags |= REG_ICASE;
 	reti = regcomp(&pattern, needle, eflags);
 	if ( reti ) {
-		CtrStdFlow = ctr_build_string_from_cstring( "Could not compile regular expression." );
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_REGEX );
 		CtrStdFlow->info.sticky=1;
 		return CtrStdNil;
 	}
@@ -2007,7 +2007,7 @@ ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argum
 	ctr_object* answer;
 	regex_error = regcomp(&pattern, needle, REG_EXTENDED);
 	if ( regex_error ) {
-		CtrStdFlow = ctr_error_text( "Could not compile regular expression." );
+		CtrStdFlow = ctr_error_text( CTR_ERR_REGEX );
 		answer = CtrStdNil;
 	} else {
 		result = regexec(&pattern, haystack, 0, NULL, 0 );
@@ -2320,7 +2320,7 @@ ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argument
 	char* keyString = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->object ) );
 	if ( strlen( keyString ) < 16 ) {
 		ctr_heap_free( keyString );
-		CtrStdFlow = ctr_error_text( "Key must be exactly 16 bytes long." );
+		CtrStdFlow = ctr_error_text( CTR_ERR_SIPHKEY );
 		return CtrStdNil;
 	}
 	uint64_t t = siphash24( myself->value.svalue->value, myself->value.svalue->vlen, keyString);
@@ -2475,7 +2475,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_error_text( "No block found." );
+		CtrStdFlow = ctr_error_text( CTR_ERR_EXP_BLK );
 	}
 	int sticky1, sticky2;
 	sticky1 = myself->info.sticky;
@@ -2597,5 +2597,5 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
  * behavior with more useful implementations.
  */
 ctr_object* ctr_block_to_string(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_string_from_cstring( "[Block]" );
+	return ctr_build_string_from_cstring( CTR_SYM_BLOCK );
 }
