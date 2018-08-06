@@ -27,13 +27,9 @@ char* ctr_mode_hfile2;
  */
 void ctr_cli_welcome() {
 	printf("\n");
-	#ifdef langNL
-		printf("Citrine Programmeertaal V 0.8.2\n");
-		printf("Geschreven door Gabor de Mooij © alle rechten voorbehouden 2018, Licensie BSD.\n");
-	#else
-		printf("Citrine Programming Language V 0.8.2\n");
-		printf("Written by Gabor de Mooij © copyright 2018, Licensed BSD.\n");
-	#endif
+	printf( CTR_MSG_WELCOME );
+	printf( CTR_MSG_COPYRIGHT );
+	printf( CTR_VERSION );
 	printf("\n");
 }
 

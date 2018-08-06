@@ -11,6 +11,11 @@
 #include <stdlib.h>
 
 /**
+ * Version information
+ */
+#define CTR_VERSION "0.8.3"
+
+/**
  * Define the Citrine tokens 
  */
 #define CTR_TOKEN_REF 1
