@@ -179,7 +179,7 @@ void ctr_plugin_check_language( char* code ) {
 			return;
 		}
 	}
-	ctr_print_error("Language mismatch.", 1);
+	ctr_print_error(CTR_TERR_LMISMAT, 1);
 }
 
 /**

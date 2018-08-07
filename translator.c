@@ -176,7 +176,7 @@ void ctr_note_collect( char* remainder ) {
 	int k;
 	char* buff;
 	if (strlen(remainder)>CTR_TRANSLATE_MAX_WORD_LEN) {
-		ctr_print_error("Translation error, message too long.",1);
+		ctr_print_error(CTR_TERR_LONG,1);
 	}
 	buff = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	qq = 0;
@@ -200,7 +200,7 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 	FILE* f1 = fopen(hfile1, "r");
 	FILE* f2 = fopen(hfile2, "r");
 	if (f1 == NULL || f2 == NULL) {
-		ctr_print_error("Error opening source dictionary.", 1);
+		ctr_print_error(CTR_TERR_DICT, 1);
 	}
 	char* word = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	char* translation = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
@@ -214,7 +214,7 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 		fscanf( f2, "#define %180s \"%180[^\"]\"\n", key2, translation) > 0
 	) {
 		if (strlen(key1)!=strlen(key2) || strncmp(key1, key2, strlen(key1))!=0) {
-			format = "Error: key mismatch %s %s on line %d\n";
+			format = CTR_TERR_KMISMAT;
 			buffer = ctr_heap_allocate(600);
 			snprintf(buffer, 600, format, key1, key2, lineCounter);
 			ctr_print_error(buffer, 1);
@@ -242,7 +242,7 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 ctr_dict* ctr_translate_load_dictionary() {
 	FILE* file = fopen(ctr_mode_dict_file,"r");
 	if (file == NULL) {
-		ctr_print_error("Unable to open dictionary.", 1);
+		ctr_print_error(CTR_TERR_DICT, 1);
 	}
 	char  translationType;
 	char* word = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
@@ -258,7 +258,7 @@ ctr_dict* ctr_translate_load_dictionary() {
 		entry->wordLength = strlen(word);
 		entry->translationLength = strlen(translation);
 		if (entry->wordLength > CTR_TRANSLATE_MAX_WORD_LEN || entry->translationLength > CTR_TRANSLATE_MAX_WORD_LEN) {
-			ctr_print_error("Dictionary entry too long.", 1);
+			ctr_print_error(CTR_TERR_ELONG, 1);
 		} 
 		entry->word = calloc( entry->wordLength, 1 );
 		entry->translation = calloc( entry->translationLength, 1 );
@@ -276,7 +276,7 @@ ctr_dict* ctr_translate_load_dictionary() {
 			if (e->type == entry->type) {
 				if ( e->wordLength == entry->wordLength ) {
 					if ( strncmp( e->word, entry->word, entry->wordLength ) == 0 ) {
-						format = "Ambigious word in dictionary: %s.";
+						format = CTR_TERR_AMWORD;
 						buffer = ctr_heap_allocate( 600 * sizeof(char) );
 						snprintf( buffer, 600 * sizeof(char), format, word );
 						ctr_print_error( buffer, 1 );
@@ -284,7 +284,7 @@ ctr_dict* ctr_translate_load_dictionary() {
 				}
 				if ( e->translationLength == entry->translationLength ) {
 					if ( strncmp( e->translation, entry->translation, entry->translationLength ) == 0 ) {
-						format = "Ambigious translation in dictionary: %s.";
+						format = CTR_TERR_AMTRANS;
 						buffer = ctr_heap_allocate(600 * sizeof(char));
 						snprintf( buffer, 600 * sizeof(char), format, translation);
 						ctr_print_error( buffer, 1 );
@@ -341,7 +341,7 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 			if (context == 't') {
 				if ((entry->translationLength == 1 && l > 1) || (entry->translationLength > 1 && l== 1)) {
 					buffer = ctr_heap_allocate( 600 );
-					warning = "Keyword/Binary mismatch:";
+					warning = CTR_TERR_TMISMAT;
 					memcpy(buffer, warning, strlen(warning));
 					memcpy(buffer + (strlen(warning)), v, l);
 					ctr_print_error( buffer, 1 );
@@ -350,7 +350,7 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 					fwrite(entry->translation + i,1,1,stdout);
 					if (*(entry->translation + i)==':' && entry->translationLength > (i+1)) {
 						if ((entry->translationLength-i)>CTR_TRANSLATE_MAX_WORD_LEN) {
-							ctr_print_error("Unable to copy translation to buffer.", 1);
+							ctr_print_error(CTR_TERR_BUFF, 1);
 						}
 						memcpy(remainder,entry->translation+i+1,(entry->translationLength-i-1));
 						break;
@@ -376,7 +376,7 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 	}
 	if (!found) {
 		buffer = ctr_heap_allocate( 600 );
-		warning = "Warning: Not translated: ";
+		warning = CTR_TERR_WARN;
 		memcpy(buffer, warning, strlen(warning));
 		memcpy(buffer + (strlen(warning)), v, l);
 		ctr_print_error( buffer, -1 );
@@ -440,7 +440,7 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 		ctr_size q;
 		message = calloc(CTR_TRANSLATE_MAX_WORD_LEN,1);
 		if (l+1 > CTR_TRANSLATE_MAX_WORD_LEN) {
-			ctr_print_error("Token length exceeds maximum buffer size.", 1);
+			ctr_print_error(CTR_TERR_TOK, 1);
 		}
 		memcpy(message, e-l,l+1);
 		ctr_size i = 1;
@@ -452,12 +452,12 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 				q = 0;
 				if (ctr_clex_backward_scan(e+i, "\n\t )}", &q, CTR_TRANSLATE_MAX_WORD_LEN)) {
 					if ((l+1)+((e+i+1)-(e+i-q+1))>CTR_TRANSLATE_MAX_WORD_LEN) {
-						ctr_print_error("Part of keyword message token exceeds buffer limit.", 1);
+						ctr_print_error(CTR_TERR_PART, 1);
 					}
 					memcpy(message+l+1,e+i-q+1, (e+i+1)-(e+i-q+1));
 					l += ((e+i+1)-(e+i-q+1));
 				} else {
-					ctr_print_error("error.",1);
+					ctr_print_error(CTR_MSG_ERROR,1);
 				}
 			}
 			i++;
