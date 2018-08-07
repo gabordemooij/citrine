@@ -62,13 +62,13 @@ void* ctr_heap_allocate( size_t size ) {
 	/* Check whether we can afford to allocate this much */
 	ctr_gc_alloc += size;
 	if (ctr_gc_memlimit < ctr_gc_alloc) {
-		printf( "Out of memory. Failed to allocate %lu bytes.\n", size );
+		printf( CTR_MERR_OOM, size );
 		exit(1);
 	}
 	/* Perform allocation and check result */
 	slice_of_memory = ctr_pool_alloc( size );
 	if ( slice_of_memory == NULL ) {
-		printf( "Out of memory. Failed to allocate %lu bytes (malloc failed). \n", size );
+		printf( CTR_MERR_MALLOC, size );
 		exit(1);
 	}
 	/* Store the width of the memory block in the slice itself so we can always find it */
@@ -274,7 +274,7 @@ void ctr_pool_init( ctr_size pool ) {
 	mpodmem =  malloc( poolSize );
 	lpodmem =  malloc( poolSize );
 	if (spodmem == NULL || mpodmem == NULL || lpodmem == NULL) {
-		printf( "Unable to allocate memory pool.\n" );
+		printf( CTR_MERR_POOL );
 		exit(1);
 	}
 	freeslist = (char**) malloc(sizeof(char**) * spods);
