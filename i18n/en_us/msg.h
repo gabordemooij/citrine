@@ -69,6 +69,7 @@
 #define CTR_TERR_WARN     "Warning: Not translated: "
 #define CTR_TERR_TOK      "Token length exceeds maximum buffer size."
 #define CTR_TERR_PART     "Part of keyword message token exceeds buffer limit."
+#define CTR_TERR_COLONS   "Different no. of colons."
 #define CTR_MSG_ERROR     "Error."
 #define CTR_MERR_OOM      "Out of memory. Failed to allocate %lu bytes.\n"
 #define CTR_MERR_MALLOC   "Out of memory. Failed to allocate %lu bytes (malloc failed). \n"

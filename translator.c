@@ -329,7 +329,7 @@ void ctr_translate_unload_dictionary(ctr_dict* dictionary) {
  */
 int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char context, char* remainder) {
 	int found = 0;
-	int i;
+	int i, p, q;
 	ctr_dict* entry;
 	char* buffer;
 	char* warning;
@@ -345,6 +345,16 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 					memcpy(buffer, warning, strlen(warning));
 					memcpy(buffer + (strlen(warning)), v, l);
 					ctr_print_error( buffer, 1 );
+				}
+				p = 0; q = 0;
+				for (i = 0; i<entry->wordLength; i++) {
+					if (*(entry->word + i)==':') p++;
+				}
+				for (i = 0; i<entry->translationLength; i++) {
+					if (*(entry->translation + i)==':') q++;
+				}
+				if ( p != q ) {
+					ctr_print_error(CTR_TERR_COLONS, 1);
 				}
 				for (i = 0; i<entry->translationLength; i++) {
 					fwrite(entry->translation + i,1,1,stdout);

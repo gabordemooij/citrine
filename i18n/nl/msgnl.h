@@ -69,6 +69,7 @@
 #define CTR_TERR_WARN     "Waarchuwing, niet vertaald: "
 #define CTR_TERR_TOK      "Tokenlengte overschrijdt bufferruimte"
 #define CTR_TERR_PART     "Deel van sleutelwoordbericht past niet in buffer."
+#define CTR_TERR_COLONS   "Verschillend aantal dubbele punten."
 #define CTR_MSG_ERROR     "Algemene fout."
 #define CTR_MERR_OOM      "Geen geheugen meer, kon geen %lu bytes aanvragen.\n"
 #define CTR_MERR_MALLOC   "Geen geheugen meer, kon geen %lu bytes aanvragen (malloc faalde). \n"
