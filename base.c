@@ -42,7 +42,6 @@ int ctr_in_message;
  *
  * In other languages:
  * Dutch: Niets
- * Latin: Nihil
  */
 ctr_object* ctr_build_nil() {
 	return CtrStdNil;
@@ -55,7 +54,6 @@ ctr_object* ctr_build_nil() {
  *
  * In other languages:
  * Dutch: [Niets] Niets? | antwoord altijd met Waar.
- * Latin: [Nihil] Nihil?
  */
 ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(1);
@@ -68,7 +66,6 @@ ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
  *
  * In other languages:
  * Dutch: [Niets] tekst | geeft de tekstweergave van Niets (en dat is altijd 'Niets')
- * Latin: [Nihil] illud
  */
 ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( CTR_DICT_NIL );
@@ -81,7 +78,6 @@ ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList) {
  *
  * In other languages:
  * Dutch: [Niets] boolean | geeft de getalswaarde voor Niets terug (altijd 0).
- * Latin: [Nihil] numerus
  */
 ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_number_from_float(0);
@@ -94,7 +90,6 @@ ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* ctr_argumentList
  *
  * In other languages:
  * Dutch: [Niets] boolean | Niets is altijd gelijk aan Onwaar
- * Latin: [Nihil] verum
  */
 ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_bool(0);
@@ -108,7 +103,6 @@ ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentLis
  * 
  * In other languages:
  * Dutch: Object | Dit is het generieke object, de vader van alle objecten
- * Latin: Object
  */
 ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* objectInstance = NULL;
@@ -124,7 +118,6 @@ ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * In other languages:
  * Dutch: [Object] type | Geeft het basistype object terug
- * Latin: [Object] genus
  */
 ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 	switch(myself->info.type){
@@ -154,7 +147,6 @@ ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
  *
  * In other languages:
  * Dutch: [Object] tekst | Geeft het de tekstuele omschrijving van het moederobject ('[Object]')
- * Latin: [Object] illud
  */
 ctr_object* ctr_object_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_build_string_from_cstring( CTR_SYM_OBJECT );
@@ -169,7 +161,6 @@ ctr_object* ctr_object_to_string( ctr_object* myself, ctr_argument* argumentList
  * 
  * In other languages:
  * Dutch: [Object] getal | Geeft de getalswaarde van het algemene object (altijd 1)
- * Latin: [Object] numerus
  */
 ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_number_from_float(1);
@@ -184,7 +175,6 @@ ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentL
  *
  * In other languages:
  * Dutch: [Object] boolean | Geeft de waarheidswaarde van het algemene object (altijd Waar)
- * Latin: [Object] verum
  */
 ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_bool(1);
@@ -205,7 +195,6 @@ ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argument
  *
  * In other languages:
  * Dutch: [Object] gelijk: [Object] | Geeft Waar terug als beide objecten een en dezelfde zijn
- * Latin: [Object] aequalis: [Object]
  */
 ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherObject = argumentList->object;
@@ -220,7 +209,6 @@ ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
  *
  * In other languages:
  * Dutch: [Object] mijzelf | Geeft het object zelf terug
- * Latin: [Object] me
  */
 ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
@@ -241,7 +229,6 @@ ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
  *
  * In other languages:
  * Dutch: [Object] doen | Stel object zo in dat het alle berichten antwoord met zichzelf
- * Latin: [Object] facite
  */
 ctr_object* ctr_object_do( ctr_object* myself, ctr_argument* argumentList ) {
 	myself->info.chainMode = 1;
@@ -255,7 +242,6 @@ ctr_object* ctr_object_do( ctr_object* myself, ctr_argument* argumentList ) {
  *
  * In other languages:
  * Dutch: [Object] klaar | Stop de doen-modus
- * Latin: [Object] paratus
  */
 ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
 	myself->info.chainMode = 0;
@@ -277,7 +263,6 @@ ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
  *
  * In other languages:
  * Dutch: [Object] kopieer | Geeft een kopie van het object terug
- * Latin: [Object] exemplum
  */
 ctr_object* ctr_object_copy( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* object;
@@ -322,7 +307,6 @@ ctr_object* ctr_object_copy( ctr_object* myself, ctr_argument* argumentList ) {
  *
  * In other languages:
  * Dutch: [Object] geval: [Object] doen: [Blok]| Voert het blok bij doen: uit als geval: Waar is
- * Latin: [Object] casu: [Object] facite: [Logicae]
  */
 ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* block = argumentList->next->object;
@@ -371,7 +355,6 @@ ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList )
  * 
  * In other languages:
  * Dutch: [Object] bericht:[Tekst] argumenten:[Reeks] | Stuurt een dynamisch bericht naar object
- * Latin: [Object] nuntius:[Illud] argumentorum:[Seriem]
  */
 ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* message = ctr_internal_cast2string( argumentList->object );
@@ -424,7 +407,6 @@ ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList )
  *
  * In other languages:
  * Dutch: [Object] bij: [Tekst] doen:[Codeblok] | Voegt gedrag toe aan object (bij ontvangst bericht - doen)
- * Latin: [Object] si: [Illud] igitur: [Logicae]
  */
 ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* nextArgument;
@@ -462,7 +444,6 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
  *
  * In other languages:
  * Dutch: [Object] reageer: [Tekst] en: [Tekst] en: [Tekst]
- * Latin: [Object] respondeo: [Illud] et: [Illud] et: [Illud]
  */
 ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
@@ -486,7 +467,6 @@ ctr_object* ctr_object_respond_and_and(ctr_object* myself, ctr_argument* argumen
  *
  * In other languages:
  * Dutch: [Object] Niets? | Vraagt aan een object of het niets is (Object antwoord altijd Onwaar)
- * Latin: [Object] Nihil?
  */
 ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(0);
@@ -509,7 +489,6 @@ ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList) {
  *
  * In other languages:
  * Dutch: [Object] leer: [Tekst] betekent: [Tekst] | Leert object dat bericht 1 hetzelfde betekent als bericht 2
- * Latin: [Object] corium: [Illud] medium: [Illud]
  */
 ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argumentList) {
        char*  current_method_name_str;
@@ -545,7 +524,6 @@ ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argum
  * 
  * In other languages:
  * Dutch: Boolean (waarheid: Waar of Onwaar)
- * Latin: Verum (Etaim, Non)
  */
 ctr_object* ctr_build_bool(int truth) {
 	ctr_object* boolObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
@@ -567,7 +545,6 @@ ctr_object* ctr_build_bool(int truth) {
  * 
  * In other languages:
  * Dutch: Boolean (waarheid: Waar of Onwaar)
- * Latin: Verum (Etaim, Non)
  */
 ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(ctr_internal_cast2bool(argumentList->object)->value.bvalue == myself->value.bvalue);
@@ -595,7 +572,6 @@ ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * In other languages:
  * Dutch: tekst | geeft beschrijving van de waarheidswaarde ('Waar' of 'Onwaar')
- * Latin: illud
  */
 ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue == 1) {
@@ -618,8 +594,7 @@ ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
  * } * 20.
  *
  * In other languages:
- * Dutch: afbreken | Indien waarheidswaarde gelijk is aan Waar dan wordt de lus afgebroken
- * Latin: intermissum
+ * Dutch: [Boolean] afbreken | Indien waarheidswaarde gelijk is aan Waar dan wordt de lus afgebroken
  */
 ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
@@ -637,6 +612,9 @@ ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * (iteration > 10) continue.
+ * 
+ * In other languages:
+ * Dutch: [Boolean] doorgaan | Indien verzonden naar Waar, slaat de rest van het blok over en vervolgt de lus
  */
 ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
@@ -654,6 +632,9 @@ ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * (some expression) true: { ... }.
+ *
+ * In other languages:
+ * Dutch: [Boolean] waar: [Codeblok] |  Indien verzonden naar Waar, voert het gegeven blok uit
  */
 ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
@@ -680,6 +661,9 @@ ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * (some expression) false: { ... }.
+ * 
+ * In other languages:
+ * Dutch: [Boolean] onwaar: [Codeblok] |  Indien verzonden naar Onwaar, voert het gegeven blok uit
  */
 ctr_object* ctr_bool_if_false(ctr_object* myself, ctr_argument* argumentList) {
 	if (!myself->value.bvalue) {
@@ -719,6 +703,8 @@ ctr_object* ctr_object_if_true( ctr_object* myself, ctr_argument* argumentList )
  * Usage:
  * True := False not.
  *
+ * In other languages:
+ * Dutch: [Boolean] niet |  Geeft de omgekeerde waarde terug
  */
 ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(!myself->value.bvalue);
@@ -728,6 +714,9 @@ ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList) {
  * [Boolean] either: [this] or: [that]
  *
  * Returns argument #1 if boolean value is True and argument #2 otherwise.
+ *
+ * In other languages:
+ * Dutch: [Boolean] of: [Object] of: [Object] | Antwoord met 1e object als Waar anders 2e.
  */
 ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
@@ -746,7 +735,9 @@ ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * a and: b
- *
+ * 
+ * In other languages:
+ * Dutch: [Boolean] en: [Object] | Antwoord met Waar als beide Waar zijn
  */
 ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
@@ -763,6 +754,8 @@ ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList) {
  *
  * a nor: b
  *
+ * In other languages:
+ * Dutch: [Boolean] noch: [Object] | Antwoord met Waar als beide Onwaar zijn
  */
 ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
@@ -778,6 +771,9 @@ ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * a or: b
+ *
+ * In other languages:
+ * Dutch: [Boolean] of: [Object] | Antwoord met Waar als een van beide objecten Waar is
  */
 ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
@@ -785,24 +781,12 @@ ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] ? [other]
- *
- * Returns True if either the object value is True or the
- * argument is True but not both.
- *
- * Usage:
- *
- * a ? b
- */
-ctr_object* ctr_bool_xor(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
-	return ctr_build_bool((myself->value.bvalue ^ other->value.bvalue));
-}
-
-/**
  * [Boolean] number
  *
  * Returns 0 if boolean is False and 1 otherwise.
+ *
+ * In other languages:
+ * Dutch: [Boolean] getal | Antwoord 0 als Onwaar en 1 als Waar
  */
 ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (ctr_number) myself->value.bvalue );
@@ -819,6 +803,9 @@ ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList) {
  * 2.5
  *
  * Represents a number object in Citrine.
+ *
+ * In other languages:
+ * Dutch: Getal, representeert een getal
  */
 ctr_object* ctr_build_number(char* n) {
 	ctr_object* numberObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
@@ -874,6 +861,9 @@ ctr_object* ctr_build_number_from_float(ctr_number f) {
  *
  * The code snippet above will compare the two number objects.
  * The result (True) will be stored in variable x.
+ *
+ * In other languages:
+ * Dutch: [Getal] > [Getal] | Antwoord Waar als eerste getal groter is dan het tweede
  */
 ctr_object* ctr_number_higherThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -895,6 +885,9 @@ ctr_object* ctr_number_higherThan(ctr_object* myself, ctr_argument* argumentList
  *
  * The code snippet above will compare the two number objects.
  * The result (True) will be stored in variable x.
+ *
+ * In other languages:
+ * Dutch: [Getal] ≥ [Getal] | Antwoord Waar als eerste getal groter is dan of gelijk is aan het tweede
  */
 ctr_object* ctr_number_higherEqThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -916,6 +909,9 @@ ctr_object* ctr_number_higherEqThan(ctr_object* myself, ctr_argument* argumentLi
  *
  * The code snippet above will compare the two number objects.
  * The result (True) will be stored in variable x.
+ *
+ * In other languages:
+ * Dutch: [Getal] < [Getal] | Antwoord Waar als eerste getal kleiner is dan het tweede
  */
 ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -937,6 +933,9 @@ ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList)
  *
  * The code snippet above will compare the two number objects.
  * The result (True) will be stored in variable x.
+ * 
+ * In other languages:
+ * Dutch: [Getal] ≤ [Getal] | Antwoord Waar als eerste getal kleiner of gelijk is dan het tweede
  */
 ctr_object* ctr_number_lowerEqThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -958,6 +957,9 @@ ctr_object* ctr_number_lowerEqThan(ctr_object* myself, ctr_argument* argumentLis
  *
  * The code snippet above will compare the two number objects.
  * The result (True) will be stored in variable x.
+ *
+ * In other languages:
+ * Dutch: [Getal] = [Getal] | Antwoord Waar als eerste gelijk is aan het tweede
  */
 ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -979,6 +981,9 @@ ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList) {
  *
  * The code snippet above will compare the two number objects.
  * The result (True) will be stored in variable x.
+ *
+ * In other languages:
+ * Dutch: [Getal] ≠ [Getal] | Antwoord Waar als eerste ongelijk is aan het tweede
  */
 ctr_object* ctr_number_neq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -999,6 +1004,9 @@ ctr_object* ctr_number_neq(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * ☞ x := Number between 0 and: 10.
+ *
+ * In other languages:
+ * Dutch: [Getal] tussen: [Getal] en: [Getal] | Geeft een getal tussen getal1 en 2.
  */
 ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number upper_bound;
@@ -1034,6 +1042,9 @@ ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList) {
  * [Number] odd?
  *
  * Returns True if the number is odd and False otherwise.
+ *
+ * In other languages:
+ * Dutch: [Getal] oneven | Antwoord Waar als het getal oneven is.
  */
 ctr_object* ctr_number_odd(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool((int)myself->value.nvalue % 2);
@@ -1043,6 +1054,9 @@ ctr_object* ctr_number_odd(ctr_object* myself, ctr_argument* argumentList) {
  * [Number] even?
  *
  * Returns True if the number is even and False otherwise.
+ *
+ * In other languages:
+ * Dutch: [Getal] even | Antwoord Waar als het getal even is.
  */
 ctr_object* ctr_number_even(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(!((int)myself->value.nvalue % 2));
@@ -1053,6 +1067,9 @@ ctr_object* ctr_number_even(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Adds the other number to the current one. Returns a new
  * number object.
+ *
+ * In other languages:
+ * Dutch: [Getal] + [Getal] | Geeft de som der getallen.
  */
 ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* newArg;
@@ -1081,6 +1098,9 @@ ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Increases the number ITSELF by the specified amount, this message will change the
  * value of the number object itself instead of returning a new number.
+ * 
+ * In other languages:
+ * Dutch: [Getal] optellen: [Getal] | Telt het gespecificeerde getal op bij het huidige.
  */
 ctr_object* ctr_number_inc(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1093,6 +1113,9 @@ ctr_object* ctr_number_inc(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Subtracts the other number from the current one. Returns a new
  * number object.
+ *
+ * In other languages:
+ * Dutch: [Getal] - [Getal] | Trekt 2 getallen van elkaar af.
  */
 ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1106,6 +1129,9 @@ ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Decreases the number ITSELF by the specified amount, this message will change the
  * value of the number object itself instead of returning a new number.
+ *
+ * In other languages:
+ * Dutch: [Getal] aftrekken: [Getal] | Trekt het gespecificeerde getal af van het huidige.
  */
 ctr_object* ctr_number_dec(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1118,6 +1144,9 @@ ctr_object* ctr_number_dec(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Multiplies the number by the specified multiplier. Returns a new
  * number object.
+ *
+ * In other languages:
+ * Dutch: [Getal] * [Getal] | Geeft het product van de getallen.
  */
 ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum;
@@ -1140,7 +1169,9 @@ ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) 
  * Usage:
  *
  * { :i ✎ write: i. } * 7.
- *
+ * 
+ * In other languages:
+ * Dutch: [Codeblok] * [Getal] | Voert het blok het opgegeven aantal keren uit.
  */
 ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* indexNumber;
@@ -1177,6 +1208,9 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
  *
  * x := 5.
  * x multiply by: 2.
+ * 
+ * In other languages:
+ * Dutch: [Getal] vermenigvuldig met: [Getal] | Vermenigvuldigd het huidige getal met de opgegeven waarde.
  */
 ctr_object* ctr_number_mul(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1189,6 +1223,9 @@ ctr_object* ctr_number_mul(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Divides the number by the specified divider. Returns a new
  * number object.
+ * 
+ * In other languages:
+ * Dutch: [Getal] / [Getal] | Deling.
  */
 ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1215,6 +1252,8 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
  * x := 10.
  * x divide by: 2.
  *
+ * In other languages:
+ * Dutch: [Getal] deel door: [Getal] | Deelt het huidige getal door de opgegeven waarde.
  */
 ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1238,6 +1277,9 @@ ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Use this message to apply the operation of division to the
  * object itself instead of generating a new one.
+ *
+ * In other languages:
+ * Dutch: [Getal] modulo: [Getal]
  */
 ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1261,6 +1303,9 @@ ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * x := 2 power: 8.
+ * 
+ * In other languages:
+ * Dutch: [Getal] tot de macht: [Getal] | Machtsverheffen.
  */
 ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1283,6 +1328,9 @@ ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
  * ( hope positive? ) true: {
  *     ✎ write: 'Still a little hope for humanity'.
  * }.
+ * 
+ * In other languages:
+ * Dutch: [Getal] positief? | Antwoord Waar als het getal groter is dan 0.
  */
 ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool( ( myself->value.nvalue > 0) );
@@ -1302,7 +1350,9 @@ ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList) 
  *
  * hope := -1.
  * (hope negative?) ifTrue: { Pen write: 'No hope left'. }.
- *
+ * 
+ * In other languages:
+ * Dutch: [Getal] negatief? | Antwoord Waar als het getal kleiner is dan 0.
  */
 ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool( ( myself->value.nvalue < 0) );
@@ -1319,6 +1369,9 @@ ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList) 
  *
  * x := 4.5
  * y := x floor.
+ * 
+ * In other languages:
+ * Dutch: [Getal]  afgerond naar beneden
  */
 ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(floor(myself->value.nvalue));
@@ -1390,6 +1443,9 @@ ctr_object* ctr_number_respond_to(ctr_object* myself, ctr_argument* argumentList
  *
  * x := 4.5.
  * y = x ceil.
+ * 
+ * In other languages:
+ * Dutch: [Getal]  afgerond naar boven
  */
 ctr_object* ctr_number_ceil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(ceil(myself->value.nvalue));
@@ -1415,6 +1471,9 @@ ctr_object* ctr_number_round(ctr_object* myself, ctr_argument* argumentList) {
  *
  * x := -7.
  * y := x absolute.
+ * 
+ * In other languages:
+ * Dutch: [Getal] absoluut
  */
 ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(fabs(myself->value.nvalue));
@@ -1431,6 +1490,9 @@ ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList) {
  *
  * ☞ x := 49.
  * ☞ y := x square root.
+ * 
+ * In other languages:
+ * Dutch: [Getal] vierkantswortel
  */
 ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(sqrt(myself->value.nvalue));
@@ -1440,6 +1502,9 @@ ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList) {
  * [Number] byte
  *
  * Converts a number to a single byte.
+ * 
+ * In other languages:
+ * Dutch: [Getal] byte
  */
 ctr_object* ctr_number_to_byte(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_build_empty_string();
@@ -1453,6 +1518,9 @@ ctr_object* ctr_number_to_byte(ctr_object* myself, ctr_argument* argumentList) {
  * [Number] string
  *
  * Wrapper for cast function.
+ * 
+ * In other languages:
+ * Dutch: [Getal] tekst
  */
 ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* o = myself;
@@ -1482,6 +1550,9 @@ ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList)
  * [Number] boolean
  *
  * Casts a number to a boolean object.
+ * 
+ * In other languages:
+ * Dutch: [Getal] boolean
  */
 ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool( myself->value.nvalue );
@@ -1504,6 +1575,9 @@ ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList
  * send. For instance, the message 'bytes' returns the number of bytes
  * in a string, while the message 'length' returns the number of
  * characters (as defined as separate UTF-8 code points) in a string.
+ * 
+ * In other languages:
+ * Dutch: Tekst
  */
 ctr_object* ctr_build_string(char* stringValue, long size) {
 	ctr_object* stringObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
@@ -1543,6 +1617,9 @@ ctr_object* ctr_build_empty_string() {
  *
  * Returns the number of bytes in a string, as opposed to
  * length which returns the number of UTF-8 code points (symbols or characters).
+ * 
+ * In other languages:
+ * Dutch: [Tekst] bytes
  */
 ctr_object* ctr_string_bytes(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float((float)myself->value.svalue->vlen);
@@ -1552,6 +1629,9 @@ ctr_object* ctr_string_bytes(ctr_object* myself, ctr_argument* argumentList) {
  * [String] = [other]
  *
  * Returns True if the other string is the same (in bytes).
+ * 
+ * In other languages:
+ * Dutch: [Tekst] = [Tekst] | Geeft Waar als beide teksten dezelfde inhoud bevatten.
  */
 ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2string( argumentList->object );
@@ -1565,6 +1645,9 @@ ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
  * [String] ≠ [other]
  *
  * Returns True if the other string is not the same (in bytes).
+ * 
+ * In other languages:
+ * Dutch: [Tekst] ≠ [Tekst] | Geeft Waar als beide teksten niet dezelfde inhoud bevatten.
  */
 ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2string( argumentList->object );
@@ -1579,6 +1662,9 @@ ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Returns the length of the string in symbols.
  * This message is UTF-8 unicode aware. A 4 byte character will be counted as ONE.
+ * 
+ * In other languages:
+ * Dutch: [Tekst] lengte | Geeft lengte van tekst in tekens.
  */
 ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size n = ctr_getutf8len(myself->value.svalue->value, (ctr_size) myself->value.svalue->vlen);
@@ -1590,6 +1676,9 @@ ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Appends other string to self and returns the resulting
  * string as a new object.
+ * 
+ * In other languages:
+ * Dutch: [Tekst] + [Tekst] | Voegt beide teksten samen.
  */
 ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
@@ -1620,6 +1709,9 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
  * x := 'Hello '.
  * x append: 'World'.
  * ✎ write: x.
+ *
+ * In other languages:
+ * Dutch: [Tekst] toevoegen: [Tekst] | Voegt tweede tekst toe aan eerste.
  *
  */
 ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
@@ -1653,6 +1745,9 @@ ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * 'hello' from: 2 length: 3.
+ *
+ * In other languages:
+ * Dutch: [Tekst] van: [Getal] lengte: [Getal] | Antwoord het deel van de tekst tussen de twee posities.
  */
 ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
@@ -1685,6 +1780,9 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
  * [String] offset: [Number]
  *
  * Returns a string without the first X characters.
+ * 
+ * In other languages:
+ * Dutch: [Tekst] overslaan: [Getal] | Geeft de tekst vanaf de opgegeven positie.
  */
 ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* argument1;
@@ -1704,7 +1802,6 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	return result;
 }
 
-
 /**
  * [String] character: [Number]
  *
@@ -1713,7 +1810,9 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * ('hello' character: 2).
- *
+ * 
+ * In other languages:
+ * Dutch: [Tekst] letter: [Getal] | Geeft de letter op aangegeven positie.
  */
 ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
@@ -1738,6 +1837,9 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  * ('abc' byte: 1).
+ * 
+ * In other languages:
+ * Dutch: [Tekst] byte: [Getal] | Geeft de byte op aangegeven positie.
  */
 ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList) {
 	char x;
@@ -1760,6 +1862,8 @@ ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList) {
  *
  * 'find the needle' find: 'needle'.
  *
+ * In other languages:
+ * Dutch: [Tekst] vind: [Tekst] | Geeft positie van eerste voorkomen deeltekst.
  */
 ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sub = ctr_internal_cast2string(argumentList->object);
@@ -1781,6 +1885,9 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
  * Note that this is just basic ASCII case functionality, this should only
  * be used for internal keys and as a basic utility function. This function
  * DOES NOT WORK WITH UTF8 characters !
+ *
+ * In other languages:
+ * Dutch: [Tekst] hoofdletters | Geeft de tekst in hoofdletters.
  */
 ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newString = NULL;
@@ -1804,6 +1911,9 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
  * Note that this is just basic ASCII case functionality, this should only
  * be used for internal keys and as a basic utility function. This function
  * DOES NOT WORK WITH UTF8 characters !
+ *
+ * In other languages:
+ * Dutch: [Tekst] kleine letters | Geeft de tekst in hoofdletters.
  */
 ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newString = NULL;
@@ -1832,6 +1942,9 @@ ctr_object* ctr_string_to_string(ctr_object* myself, ctr_argument* argumentList)
  * Usage:
  *
  * 'find the needle' last: 'needle'.
+ *
+ * In other languages:
+ * Dutch: [Tekst] laatste: [Tekst] | Geeft laatste positie deeltekst.
  */
 ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sub = ctr_internal_cast2string(argumentList->object);
@@ -1855,6 +1968,9 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentL
  * Usage:
  *
  * '$ money' money: 10.
+ *
+ * In other languages:
+ * Dutch: [Tekst] [Tekst]: [Tekst] | Vervangt tekst 2 met tekst 3.
  */
 ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* message = ctr_internal_cast2string( argumentList->object );
@@ -1878,6 +1994,9 @@ ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * 'LiLo BootLoader' replace: 'L' with: 'l'.
+ * 
+ * In other languages:
+ * Dutch: [Tekst] vervang: [Tekst] door: [Tekst] | Vervangt tekst 2 met 3.
  */
 ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
@@ -1948,6 +2067,9 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
  * On every match the block gets executed and the matches are
  * passed to the block as arguments. You can also use this feature to replace
  * parts of the string, simply return the replacement string in your block.
+ * 
+ * In other languages:
+ * Dutch: [Tekst] patroon: [Tekst] verwerk: [Codeblok] opties: [Tekst] | Past reguliere expressie toe.
  */
 ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument* argumentList ) {
 	regex_t pattern;

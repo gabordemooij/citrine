@@ -64,22 +64,22 @@ files each: { :index :file
 		☞ lines   := comment split: '\n'.
 		lines count > 3 true: {
 			☞ headline := lines ? 1.
-			✎ write: '.BR.BR.BR', end end.
+			✎ write: '.BR.BR.BR', stop stop.
 			
 			((headline find: '@internal') = -1) true: {
-				✎ write: '.B ' + (headline offset: 3), end.
-				✎ write: '.nf', end.
+				✎ write: '.B ' + (headline offset: 3), stop.
+				✎ write: '.nf', stop.
 				☞ line := ''.
 				☞ n := 2.
 				{
 						line := line replace: '\\' with: '\\\\'.
-						✎ write: '    ' + (line offset: 2), end.
+						✎ write: '    ' + (line offset: 2), stop.
 						n add: 1.
 				} while: {
 					line := lines position: n.
 					↲ ((line find: '*/') = -1).
 				}.
-				✎ write: '.fi', end.
+				✎ write: '.fi', stop.
 			}.
 		}.
 	} * (commentBlocks count).
