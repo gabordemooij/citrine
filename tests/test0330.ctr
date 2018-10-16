@@ -1,0 +1,6 @@
+☞ str := 'abc'.
+☞ x := str character: 3.
+( x = Nil ) true: {
+	✎ write: 'Found string boundary'.
+}.
+✎ write: x, end.

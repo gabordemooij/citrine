@@ -1627,7 +1627,7 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 	int32_t a = (int32_t) (fromPos->value.nvalue);
 	ctr_size textLength = ctr_getutf8len(myself->value.svalue->value, (ctr_size) myself->value.svalue->vlen);
 	if (a < 0) return CtrStdNil;
-	if (a > textLength) return CtrStdNil;
+	if (a >= textLength) return CtrStdNil;
 	long ua = getBytesUtf8(myself->value.svalue->value, 0, a);
 	long ub = getBytesUtf8(myself->value.svalue->value, ua, 1);
 	ctr_object* newString;
