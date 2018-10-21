@@ -339,6 +339,7 @@ ctr_object* ctr_json_parse(ctr_object* myself, ctr_argument* argumentList) {
 	if (r < size || t[0].type != JSMN_OBJECT) {
 		ctr_heap_free( t );
 		ctr_heap_free( jsonString );
+		CtrStdFlow = ctr_error_text("Invalid JSON.");
 		return CtrStdNil;
 	}
 	answer = ctr_jsmn_dump(jsonString, &t);

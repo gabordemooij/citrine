@@ -1,0 +1,9 @@
+{ ☞ x := Json to object: '{}'. 	✎ write: x, end. } catch: { :e	✎ write: e, end. }, run.
+{ ☞ x := Json to object: '""'. 	✎ write: x, end. } catch: { :e	✎ write: e, end. }, run.
+{ ☞ x := Json to object: ''. 	✎ write: x, end. } catch: { :e	✎ write: e, end. }, run.
+{ ☞ x := Json to object: '"'. 	✎ write: x, end. } catch: { :e	✎ write: e, end. }, run.
+{ ☞ x := Json to object: '\''. 	✎ write: x, end. } catch: { :e	✎ write: e, end. }, run.
+{ ☞ x := Json to object: '\'\''. 	✎ write: x, end. } catch: { :e	✎ write: e, end. }, run.
+{ ☞ x := Json to object: '0'. 	✎ write: x, end. } catch: { :e	✎ write: e, end. }, run.
+{ ☞ x := Json to object: '"x"'. 	✎ write: x, end. } catch: { :e	✎ write: e, end. }, run.
+{ ☞ x := Json to object: '[]'. 	✎ write: x, end. } catch: { :e	✎ write: e, end. }, run.
