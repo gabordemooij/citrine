@@ -237,7 +237,7 @@ ctr_object* ctr_jsmn_dump( char* data, jsmntok_t** tt ) {
 		CtrStdFlow = ctr_error_text("Invalid JSON.");
 		return CtrStdNil;
 	}
-	if (t->start < 0 || t->end < 0 || t->start >= len || ((t->end - t->start) < 0) || (( t->end - t->start ) > len) || (t->start == t->end)) {
+	if (t->start < 0 || t->end < 0 || t->start >= len || ((t->end - t->start) < 0) || (( t->end - t->start ) > len) ) {
 		CtrStdFlow = ctr_error_text("Invalid JSON.");
 		return CtrStdNil;
 	}
