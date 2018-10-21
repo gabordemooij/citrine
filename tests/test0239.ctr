@@ -43,23 +43,23 @@ b on: 'boolean' do: {
 }.
 
 
-✎ write: a, end.  
-✎ write: (90 + a), end. 
-✎ write: b, end. 
-✎ write: (True and: b), end.
+✎ write: a, stop.  
+✎ write: (90 + a), stop. 
+✎ write: b, stop. 
+✎ write: (True and: b), stop.
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666. 
 a := a + ( List ← 1 ).
-✎ write: a, end.
-✎ write: ((Map new) put: Nil at: Nil), end.
-✎ write: a sum, end. 
+✎ write: a, stop.
+✎ write: ((Map new) put: Nil at: Nil), stop.
+✎ write: a sum, stop. 
 
 
 {
 	a on: 'string' do: { ↲ Nil. }.
 	a := '' + a.
 } catch: { :error
-	✎ write: 'Error noted: ' + error, end.
+	✎ write: 'Error noted: ' + error, stop.
 }, run.
 
 
@@ -68,7 +68,7 @@ a := a + ( List ← 1 ).
 	a on: 'number' do: { ↲ Nil. }.
 	a := 3 * a.
 } catch: { :error
-	✎ write: 'Error noted: ' + error, end.
+	✎ write: 'Error noted: ' + error, stop.
 }, run.
 
 
@@ -76,7 +76,7 @@ a := a + ( List ← 1 ).
 	a on: 'boolean' do: { ↲ Nil. }.
 	a := True and: a. 
 } catch: { :error
-	✎ write: 'Error noted: ' + error, end.
+	✎ write: 'Error noted: ' + error, stop.
 }, run.
 
 
@@ -87,7 +87,7 @@ a := a + ( List ← 1 ).
 	a on: 'string' do: { ↲ False. }.
 	a := '' + a.
 } catch: { :error
-	✎ write: 'Error noted: ' + error, end.
+	✎ write: 'Error noted: ' + error, stop.
 }, run.
 
 
@@ -96,7 +96,7 @@ a := a + ( List ← 1 ).
 	a on: 'number' do: { ↲ True. }.
 	a := 3 * a.
 } catch: { :error
-	✎ write: 'Error noted: ' + error, end.
+	✎ write: 'Error noted: ' + error, stop.
 }, run.
 
 
@@ -104,7 +104,7 @@ a := a + ( List ← 1 ).
 	a on: 'boolean' do: { ↲ 1. }.
 	a := True and: a.
 } catch: { :error
-	✎ write: 'Error noted: ' + error, end.
+	✎ write: 'Error noted: ' + error, stop.
 }, run.
 
 
@@ -115,7 +115,7 @@ a := a + ( List ← 1 ).
 	a on: 'string' do: { ↲ 1. }.
 	a := '' + a.
 } catch: { :error
-	✎ write: 'Error noted: ' + error, end.
+	✎ write: 'Error noted: ' + error, stop.
 }, run.
 
 
@@ -124,7 +124,7 @@ a := a + ( List ← 1 ).
 	a on: 'number' do: { ↲ ''. }.
 	a := 3 * a.
 } catch: { :error
-	✎ write: 'Error noted: ' + error, end.
+	✎ write: 'Error noted: ' + error, stop.
 }, run.
 
 
@@ -132,7 +132,7 @@ a := a + ( List ← 1 ).
 	a on: 'boolean' do: { ↲ ''. }.
 	a := True and: a.
 } catch: { :error
-	✎ write: 'Error noted: ' + error, end.
+	✎ write: 'Error noted: ' + error, stop.
 }, run.
 
 
@@ -144,7 +144,7 @@ a := a + ( List ← 1 ).
 	a on: 'string' do: { ↲ (Map new). }.
 	a := '' + a. 
 } catch: { :error
-	✎ write: 'Error noted: ' + error, end.
+	✎ write: 'Error noted: ' + error, stop.
 }, run.
 
 
@@ -153,7 +153,7 @@ a := a + ( List ← 1 ).
 	a on: 'number' do: { ↲ (Object new). }.
 	a := 3 * a. 
 } catch: { :error
-	✎ write: 'Error noted: ' + error, end.
+	✎ write: 'Error noted: ' + error, stop.
 }, run.
 
 
@@ -161,6 +161,6 @@ a := a + ( List ← 1 ).
 	a on: 'boolean' do: { ↲ (Object new). }.
 	a := True and: a.
 } catch: { :error
-	✎ write: 'Error noted: ' + error, end.
+	✎ write: 'Error noted: ' + error, stop.
 }, run.
 

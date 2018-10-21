@@ -185,6 +185,7 @@
 #define CTR_DICT_HAS             "heeft:"
 #define CTR_DICT_COPY            "kopieer"
 #define CTR_DICT_CASE_DO         "geval:doen:"
+#define CTR_DICT_STOP            "stop"
 #define CTR_DICT_ASCII_UPPER_CASE                "hoofdletters" 
 #define CTR_DICT_ASCII_LOWER_CASE                "kleine letters"
 #define CTR_DICT_FIND_PATTERN_DO_OPTIONS         "patroon:verwerk:opties:"

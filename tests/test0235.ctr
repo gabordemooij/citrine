@@ -29,4 +29,4 @@ Slurp on: 'obtain' do: {
 
 ☞ s := Slurp new.
 s hello: 'world'.
-✎ write: ( s obtain ), end.
+✎ write: ( s obtain ), stop.

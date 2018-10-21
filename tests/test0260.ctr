@@ -2,4 +2,4 @@
 	☞ x := 1.
 }.
 
-✎ write: (result should not be block type), end.
+✎ write: (result should not be block type), stop.

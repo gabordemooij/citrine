@@ -1,7 +1,7 @@
 
 ☞ myVar := 123.
-✎ write: 'Start include test', end.
+✎ write: 'Start include test', stop.
 (File new: 'tests/assets/includetesten.ctr') include.
-✎ end write: 'End include test', end.
+✎ stop write: 'End include test', stop.
 ✎ write: 'Are my variables still intact?'.
-✎ end write: myVar.
+✎ stop write: myVar.

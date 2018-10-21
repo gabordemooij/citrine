@@ -7,11 +7,11 @@ a := Number - 2.
 a := Number * 2.
 a := Number / 2.
 ✎ write: a.
-✎ end.
+✎ stop.
 
 ✎ write: 'String:'.
 ✎ write: String length.
-✎ end.
+✎ stop.
 
 ✎ write: 'File:'.
 ✎ write: File read.
@@ -21,7 +21,7 @@ a := Number / 2.
 ✎ write: File exists.
 ✎ write: File include.
 ✎ write: File run.
-✎ end.
+✎ stop.
 
 
 ✎ write: 'Array:'.
@@ -33,12 +33,12 @@ a := Number / 2.
 ✎ write: (List join: ',').
 ☞ f := List new.
 ✎ write: f count. 
-✎ end.
+✎ stop.
 
 ✎ write: 'Map:'.
 ✎ write: Map count.
 ✎ write: (Map put: 'a' at: 'b')  count. 
-✎ end.
+✎ stop.
 
 
 

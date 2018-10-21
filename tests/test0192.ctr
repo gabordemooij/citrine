@@ -3,7 +3,7 @@
 Program tidiness: 4.
 
 ☞ i := 0.
-✎ write: 'Can we count to 10 using a whileTrue loop ?', end.
-{ ✎ write: i, end. } while: { i add: 1. ↲ (i ≤ 10). }.
-✎ write: 'Can we count back from 10 to 0 using a whileFalse loop ?', end.
-{ ✎ write: i, end. } while: { i subtract: 1. ↲ (i ≥ 0). }.
+✎ write: 'Can we count to 10 using a whileTrue loop ?', stop.
+{ ✎ write: i, stop. } while: { i add: 1. ↲ (i ≤ 10). }.
+✎ write: 'Can we count back from 10 to 0 using a whileFalse loop ?', stop.
+{ ✎ write: i, stop. } while: { i subtract: 1. ↲ (i ≥ 0). }.

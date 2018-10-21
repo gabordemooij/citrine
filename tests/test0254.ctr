@@ -1,8 +1,8 @@
 
 
 ☞ x := Moment new hour: 10, minute: 0, second: 0, year:2017, day:10, month:7.
-✎ write: x, end.
+✎ write: x, stop.
 x subtract: 1 hour.
-✎ write: x, end.
+✎ write: x, stop.
 x subtract: -1 hour.
-✎ write: x, end.
+✎ write: x, stop.

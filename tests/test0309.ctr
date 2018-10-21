@@ -37,7 +37,7 @@ Program shell:
 	☞ file := File new: '/tmp/blah.txt'.
 	file write: 'hello'.
 } catch: { :error 
-	✎ write: error, end.
+	✎ write: error, stop.
 }, run.
 
 	
@@ -49,7 +49,7 @@ Program shell: (
 	☞ file := File new: '/tmp/blah.txt'.
 	file read.
 } catch: { :error 
-	✎ write: error, end.
+	✎ write: error, stop.
 }, run.
 
 

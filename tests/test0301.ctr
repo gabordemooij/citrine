@@ -24,4 +24,4 @@ wine
 	case: 'merlot'   do: { ✎ write: 'it\'s a Merlot!'.   },
 	case: 'malbec'   do: { ✎ write: 'it\'s a Malbec!'.   }.
 
-✎ end.
+✎ stop.

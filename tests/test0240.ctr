@@ -19,7 +19,7 @@ $ on: 'respond:' do: { :x
 
 ☞ x := $ +£20.
 
-✎ write: x, end.
+✎ write: x, stop.
 
 
 ☞ Fruit := Object new.
@@ -65,7 +65,7 @@ Number on: 'oranges' do: {
 
 
 
-✎ write: (1 apple + 3 oranges + 4 apples), end.
+✎ write: (1 apple + 3 oranges + 4 apples), stop.
 
 
 String on: 'twice' do: {

@@ -4,7 +4,7 @@ String on: 'evaluate' do: {
 }.
 
 List on: '←' do: {
-	✎ write: 'Blaaaa', end.
+	✎ write: 'Blaaaa', stop.
 }.
 ☞ x := Nil.
 ☞ q := 'x := List ← 1'.

@@ -1,11 +1,11 @@
 'SINGLE_LANGUAGE'.
 
 ☞ a := List ← 1 ; 2 ; 3.
-✎ write: a count, end.
-✎ write: a ? 1, end.
+✎ write: a count, stop.
+✎ write: a ? 1, stop.
 a shift.
-✎ write: a count, end.
-✎ write: a ? 1, end.
+✎ write: a count, stop.
+✎ write: a ? 1, stop.
 a shift.
-✎ write: a count, end.
-✎ write: a ? 1, end.
+✎ write: a count, stop.
+✎ write: a ? 1, stop.

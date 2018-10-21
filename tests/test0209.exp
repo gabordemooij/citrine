@@ -182,6 +182,7 @@ Boolean has: 0 .
 Boolean copy.
 Boolean case: 0 do: 0 .
 error
+Boolean stop.
 Boolean uppercase.
 Boolean lowercase.
 Boolean pattern: 0 process: 0 options: 0 .
@@ -363,6 +364,7 @@ True has: 0 .
 True copy.
 True case: 0 do: 0 .
 error
+True stop.
 True uppercase.
 True lowercase.
 True pattern: 0 process: 0 options: 0 .
@@ -544,6 +546,7 @@ False has: 0 .
 False copy.
 False case: 0 do: 0 .
 error
+False stop.
 False uppercase.
 False lowercase.
 False pattern: 0 process: 0 options: 0 .
@@ -728,6 +731,7 @@ Number has: 0 .
 Number copy.
 Number case: 0 do: 0 .
 error
+Number stop.
 Number uppercase.
 Number lowercase.
 Number pattern: 0 process: 0 options: 0 .
@@ -910,6 +914,7 @@ String has: 0 .
 String copy.
 String case: 0 do: 0 .
 error
+String stop.
 String uppercase.
 String lowercase.
 String pattern: 0 process: 0 options: 0 .
@@ -1091,6 +1096,7 @@ Object has: 0 .
 Object copy.
 Object case: 0 do: 0 .
 error
+Object stop.
 Object uppercase.
 Object lowercase.
 Object pattern: 0 process: 0 options: 0 .
@@ -1276,6 +1282,7 @@ List has: 0 .
 List copy.
 List case: 0 do: 0 .
 error
+List stop.
 List uppercase.
 List lowercase.
 List pattern: 0 process: 0 options: 0 .
@@ -1459,6 +1466,7 @@ Map has: 0 .
 Map copy.
 Map case: 0 do: 0 .
 error
+Map stop.
 Map uppercase.
 Map lowercase.
 Map pattern: 0 process: 0 options: 0 .
@@ -1643,6 +1651,7 @@ File has: 0 .
 File copy.
 File case: 0 do: 0 .
 error
+File stop.
 File uppercase.
 File lowercase.
 File pattern: 0 process: 0 options: 0 .
@@ -1824,6 +1833,7 @@ Moment has: 0 .
 Moment copy.
 Moment case: 0 do: 0 .
 error
+Moment stop.
 Moment uppercase.
 Moment lowercase.
 Moment pattern: 0 process: 0 options: 0 .

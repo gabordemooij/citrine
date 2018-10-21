@@ -7,7 +7,7 @@ Matryoshka on: 'double:' do: { :secret
 Matryoshka on: 'new:' do: { :secret
 	☞ answer := Nil.
 	☞ t := (secret > 255).
-	✎ write: (secret + ' | ' + t), end.
+	✎ write: (secret + ' | ' + t), stop.
 	t true: {
 		answer := secret.
 	}, else: {

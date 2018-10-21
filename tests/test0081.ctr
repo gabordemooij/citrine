@@ -9,7 +9,7 @@ map1
 
 ✎
 	write: 'Map #1 contains: ' + (map1 at: key1),
-	write: ' and ' + (map1 at: key2), end.
+	write: ' and ' + (map1 at: key2), stop.
 
 ☞ KeyeableArray := List new.
 KeyeableArray on: 'toString' do: {
@@ -28,4 +28,4 @@ map2
 
 ✎
 	write: 'Map #2 contains: ' + (map2 at: key1),
-	write: ' and ' + (map2 at: key2), end.
+	write: ' and ' + (map2 at: key2), stop.

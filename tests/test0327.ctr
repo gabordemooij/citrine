@@ -44,5 +44,5 @@ List on: 'aantal' do: {
 	).
 
 } * 10.
-✎ write: x, end.
+✎ write: x, stop.
 

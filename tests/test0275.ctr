@@ -2,15 +2,15 @@
 
 
 ☞ a := List ← 6 ; 5 ; 4 ; 3 ; 2 ; 1.
-✎ write: a, end.
+✎ write: a, stop.
 
 a shift.
-✎ write: a, end.
+✎ write: a, stop.
 
 a sort: { :a :b
  ↲ (a > b).
 }.
 
-✎ write: a, end.
+✎ write: a, stop.
 
 

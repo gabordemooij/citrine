@@ -7,53 +7,53 @@
 
 Program tidiness: 0.
 
-✎ write: (6 < 5), end.
-✎ write: (2 > 1), end.
-✎ write: (2 ≤ 1), end.
-✎ write: (9 ≥ 1), end.
-✎ write: (2 odd?), end.
-✎ write: (4 even?), end.
-✎ write: (-1 positive?), end.
-✎ write: (-2 negative?), end.
-✎ write: ((3 ≥ 4) & (3 ≤ 5)), end.
-✎ write: (3 = 3), end.
-✎ write: (3 ≠ 3), end.
-✎ write: 1 boolean, end.
+✎ write: (6 < 5), stop.
+✎ write: (2 > 1), stop.
+✎ write: (2 ≤ 1), stop.
+✎ write: (9 ≥ 1), stop.
+✎ write: (2 odd?), stop.
+✎ write: (4 even?), stop.
+✎ write: (-1 positive?), stop.
+✎ write: (-2 negative?), stop.
+✎ write: ((3 ≥ 4) & (3 ≤ 5)), stop.
+✎ write: (3 = 3), stop.
+✎ write: (3 ≠ 3), stop.
+✎ write: 1 boolean, stop.
 
 Program clean memory.
 
 usedMemory1 := (Program memory ? 0).
 
 
-✎ write: (6 < 5), end.
-✎ write: (2 > 1), end.
-✎ write: (2 ≤ 1), end.
-✎ write: (9 ≥ 1), end.
-✎ write: (2 odd?), end.
-✎ write: (4 even?), end.
-✎ write: (-1 positive?), end.
-✎ write: (-2 negative?), end.
-✎ write: ((3 ≥ 4) & (3 ≤ 5)), end.
-✎ write: (3 = 3), end.
-✎ write: (3 ≠ 3), end.
-✎ write: 1 boolean, end.
+✎ write: (6 < 5), stop.
+✎ write: (2 > 1), stop.
+✎ write: (2 ≤ 1), stop.
+✎ write: (9 ≥ 1), stop.
+✎ write: (2 odd?), stop.
+✎ write: (4 even?), stop.
+✎ write: (-1 positive?), stop.
+✎ write: (-2 negative?), stop.
+✎ write: ((3 ≥ 4) & (3 ≤ 5)), stop.
+✎ write: (3 = 3), stop.
+✎ write: (3 ≠ 3), stop.
+✎ write: 1 boolean, stop.
 
 Program clean memory.
 usedMemory2 := (Program memory ? 0).
 
 
-✎ write: (6 < 5), end.
-✎ write: (2 > 1), end.
-✎ write: (2 ≤ 1), end.
-✎ write: (9 ≥ 1), end.
-✎ write: (2 odd?), end.
-✎ write: (4 even?), end.
-✎ write: (-1 positive?), end.
-✎ write: (-2 negative?), end.
-✎ write: ((3 ≥ 4) & (3 ≤ 5)), end.
-✎ write: (3 = 3), end.
-✎ write: (3 ≠ 3), end.
-✎ write: 1 boolean, end.
+✎ write: (6 < 5), stop.
+✎ write: (2 > 1), stop.
+✎ write: (2 ≤ 1), stop.
+✎ write: (9 ≥ 1), stop.
+✎ write: (2 odd?), stop.
+✎ write: (4 even?), stop.
+✎ write: (-1 positive?), stop.
+✎ write: (-2 negative?), stop.
+✎ write: ((3 ≥ 4) & (3 ≤ 5)), stop.
+✎ write: (3 = 3), stop.
+✎ write: (3 ≠ 3), stop.
+✎ write: 1 boolean, stop.
 
 Program clean memory.
 usedMemory3 := (Program memory ? 0).

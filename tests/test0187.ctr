@@ -13,10 +13,10 @@ Program tidiness: 0.
 
 {
 2 exponent factorial.
-✎ write: (11 modulo: 3), end.
-✎ write: (3.4 round), end.
-✎ write: (7.1 ceil), end.
-✎ write: (7.9 floor), end.
+✎ write: (11 modulo: 3), stop.
+✎ write: (3.4 round), stop.
+✎ write: (7.1 ceil), stop.
+✎ write: (7.9 floor), stop.
 }
 run.
 
@@ -26,10 +26,10 @@ usedMemory1 := (Program memory ? 0).
 
 {
 2 exponent factorial.
-✎ write: (11 modulo: 3), end.
-✎ write: (3.4 round), end.
-✎ write: (7.1 ceil), end.
-✎ write: (7.9 floor), end.
+✎ write: (11 modulo: 3), stop.
+✎ write: (3.4 round), stop.
+✎ write: (7.1 ceil), stop.
+✎ write: (7.9 floor), stop.
 }
 run.
 
@@ -39,10 +39,10 @@ usedMemory2 := (Program memory ? 0).
 
 {
 2 exponent factorial.
-✎ write: (11 modulo: 3), end.
-✎ write: (3.4 round), end.
-✎ write: (7.1 ceil), end.
-✎ write: (7.9 floor), end.
+✎ write: (11 modulo: 3), stop.
+✎ write: (3.4 round), stop.
+✎ write: (7.1 ceil), stop.
+✎ write: (7.9 floor), stop.
 } run.
 
 Program clean memory.

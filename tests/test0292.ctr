@@ -6,12 +6,12 @@
 	).
 }.
 
-✎ write: (((winery run) - 'nothing') count), end.
-✎ write: (((winery run) - 'merlot') count), end.
-✎ write: (((winery run) - 'malbec') count), end.
-✎ write: (((winery run) - 'syrah') count), end.
-✎ write: (((winery run) - 'merlot' - 'malbec') count), end.
-✎ write: (((winery run) - 'merlot' - 'syrah') count), end.
-✎ write: (((winery run) - 'malbec' -'syrah') count), end.
-✎ write: (((winery run) - 'malbec' - 'syrah' - 'merlot') count), end.
+✎ write: (((winery run) - 'nothing') count), stop.
+✎ write: (((winery run) - 'merlot') count), stop.
+✎ write: (((winery run) - 'malbec') count), stop.
+✎ write: (((winery run) - 'syrah') count), stop.
+✎ write: (((winery run) - 'merlot' - 'malbec') count), stop.
+✎ write: (((winery run) - 'merlot' - 'syrah') count), stop.
+✎ write: (((winery run) - 'malbec' -'syrah') count), stop.
+✎ write: (((winery run) - 'malbec' - 'syrah' - 'merlot') count), stop.
 

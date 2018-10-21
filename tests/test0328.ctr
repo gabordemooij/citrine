@@ -34,4 +34,4 @@ Multiplier on: 'multiply:and:' do: { :x :y
 		and:
 			(Multiplier multiply: 3 and: 4)
 		)
-), end.
+), stop.

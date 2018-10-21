@@ -9,7 +9,7 @@ Program tidiness: 0.
 
 ☞ a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 a do pop shift prepend: 'hi', append: 999, done.
-✎ write: ( a join: ',' ), end.
+✎ write: ( a join: ',' ), stop.
 
 Program clean memory.
 usedMemory1 := (Program memory ? 0).
@@ -17,7 +17,7 @@ usedMemory1 := (Program memory ? 0).
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 a pop. a shift. a prepend: 'hi', append: 999.
-✎ write: ( a join: ',' ), end.
+✎ write: ( a join: ',' ), stop.
 
 
 Program clean memory.
@@ -26,7 +26,7 @@ usedMemory2 := (Program memory ? 0).
 
 a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 a do pop shift prepend: 'hi', append: 999, done.
-✎ write: ( a join: ',' ), end.
+✎ write: ( a join: ',' ), stop.
 
 
 Program clean memory.

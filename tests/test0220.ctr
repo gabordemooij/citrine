@@ -1,9 +1,9 @@
 
-✎ write: ( 'hello' = Nil ), end.
-✎ write: ( 'hello' ≠ Nil ), end.
-✎ write: ( 2 > Nil ), end.
-✎ write: ( 2 < Nil ), end.
-✎ write: ( 2 ≥ Nil ), end.
-✎ write: ( 2 ≤ Nil ), end.
-✎ write: ( True = Nil ), end.
-✎ write: ( False ≠ Nil ), end.
+✎ write: ( 'hello' = Nil ), stop.
+✎ write: ( 'hello' ≠ Nil ), stop.
+✎ write: ( 2 > Nil ), stop.
+✎ write: ( 2 < Nil ), stop.
+✎ write: ( 2 ≥ Nil ), stop.
+✎ write: ( 2 ≤ Nil ), stop.
+✎ write: ( True = Nil ), stop.
+✎ write: ( False ≠ Nil ), stop.

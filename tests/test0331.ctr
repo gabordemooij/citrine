@@ -3,4 +3,4 @@
 ( x Nil? ) true: {
 	✎ write: 'Found string boundary'.
 }.
-✎ write: x, end.
+✎ write: x, stop.

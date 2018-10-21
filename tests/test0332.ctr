@@ -1,2 +1,2 @@
 ☞ x := Json to object: '{"box":""}'.
-✎ write: x, end.
+✎ write: x, stop.

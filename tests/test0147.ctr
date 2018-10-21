@@ -1,4 +1,4 @@
 'SINGLE_LANGUAGE'.
-✎ write: 'aaa', end.
+✎ write: 'aaa', stop.
 { ↲↲. } run.
-✎ write: 'aaa', end.
+✎ write: 'aaa', stop.

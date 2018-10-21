@@ -6,5 +6,5 @@ location
 	case: 'Wetering Brug' do: { x := 2. },
 	case: 'Immink' do: { x := 3. }.
 
-✎ write: x, end.
+✎ write: x, stop.
 

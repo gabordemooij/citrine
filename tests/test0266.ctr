@@ -1,2 +1,2 @@
-✎ write: ('Hello World' contains: 'World'), end.
-✎ write: ('Hello World' contains: 'Bye'), end.
+✎ write: ('Hello World' contains: 'World'), stop.
+✎ write: ('Hello World' contains: 'Bye'), stop.

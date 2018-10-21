@@ -48,7 +48,7 @@ a each: { :i :x
 				} * 10.
 				
 				
-				✎ write: ' ✓OK ', end.
+				✎ write: ' ✓OK ', stop.
 				
 			}.
 		}.
@@ -58,13 +58,13 @@ a each: { :i :x
 ✎ write: 'Can we draw a random(?) no. between 2 and 2 ?'.
 ☞ x := Number between: 2 and: 2.
 (x = 2) true: {
-	✎ write: ' ✓OK ', end.
+	✎ write: ' ✓OK ', stop.
 }.
 
 ✎ write: 'Can we draw a random(?) no. between 1.5 and 1.9 ?'.
 ☞ x := Number between: 2 and: 2.
 (x = 2) true: {
-	✎ write: ' ✓OK ', end.
+	✎ write: ' ✓OK ', stop.
 }.
 
 

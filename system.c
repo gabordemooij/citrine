@@ -1050,7 +1050,7 @@ ctr_object* ctr_console_write(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Pen] end
+ * [Pen] stop
  *
  * Outputs a newline character.
  */

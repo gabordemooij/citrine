@@ -6,7 +6,7 @@ Animal on: 'eat' do: {
 
 ☞ Cat := Animal new.
 Cat on: 'eat' do: {
-	✎ write: 'meow', end.
+	✎ write: 'meow', stop.
 	⛏ `eat.
 }.
 

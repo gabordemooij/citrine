@@ -3,10 +3,10 @@
 
 ☞ q := 'abc'.
 ☞ x := q list.
-✎ write: x, end.
-✎ write: x count, end.
+✎ write: x, stop.
+✎ write: x count, stop.
 
 q := '기나 긴 여행'.
 x := q list.
-✎ write: x, end.
-✎ write: (x count), end.
+✎ write: x, stop.
+✎ write: (x count), stop.

@@ -13,7 +13,7 @@ x := f read bytes: 3.
 ✎ write: 'read 3 more bytes: "' + x + '"\n'.
 ☞ w := f write bytes: ' friend!'.
 f close.
-✎ write: 'Bytes written: ' + w, end.
+✎ write: 'Bytes written: ' + w, stop.
 ✎ write: 'Finally, file contains: '+ (File new: '/tmp/from.txt', read) + '\n'.
 
 

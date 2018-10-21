@@ -1,9 +1,9 @@
 ☞ str := 'xxx←'.
-✎ write: 'length before skip = ' + str length, end.
-✎ write: 'bytes before skip = ' + str bytes, end.
+✎ write: 'length before skip = ' + str length, stop.
+✎ write: 'bytes before skip = ' + str bytes, stop.
 ☞ str2 := str offset: 3.
-✎ write: 'length after skip = ' + str2 length, end.
-✎ write: 'bytes after skip = ' + str2 bytes, end.
+✎ write: 'length after skip = ' + str2 length, stop.
+✎ write: 'bytes after skip = ' + str2 bytes, stop.
 { :index
-	✎ write: ('byte: ' + (str2 byte: index)), end.
+	✎ write: ('byte: ' + (str2 byte: index)), stop.
 } * (str2 bytes).

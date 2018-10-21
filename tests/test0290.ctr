@@ -9,20 +9,20 @@
 
 
 ☞ buy := cakes replace: 1 length: 2 with: ( List ← 'cinnamon' ; 'pineapple' ).
-✎ write: (buy join: ','), end.
+✎ write: (buy join: ','), stop.
 
 
 ☞ buy := cakes replace: 1 length: 12 with: ( List ← 'cinnamon' ; 'pineapple' ).
-✎ write: (buy join: ','), end.
+✎ write: (buy join: ','), stop.
 
 
 ☞ buy := cakes replace: 2 length: 10 with: ( List new ).
-✎ write: (buy join: ','), end.
+✎ write: (buy join: ','), stop.
 
 
 ☞ buy := cakes replace: '' length: '1' with: ( List new ).
-✎ write: (buy join: ','), end.
+✎ write: (buy join: ','), stop.
 
 
 ☞ buy := cakes replace: '' length: '1' with: 'x'.
-✎ write: (buy join: ','), end.
+✎ write: (buy join: ','), stop.

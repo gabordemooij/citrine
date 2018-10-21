@@ -1,9 +1,9 @@
 ☞ q := List ← 1 ; 2 ; 3.
-{ q ? '1'. } catch: { ✎ write: 'caught!', end. }, run.
-{ q ? True. } catch: { ✎ write: 'caught!', end. }, run.
-{ q ? False. } catch: { ✎ write: 'caught!', end. }, run.
-{ q ? Nil. } catch: { ✎ write: 'caught!', end. }, run.
-{ q ? (List new). } catch: { ✎ write: 'caught!', end. }, run.
-{ q ? (Object new). } catch: { ✎ write: 'caught!', end. }, run.
-{ q ? ({}). } catch: { ✎ write: 'caught!', end. }, run.
-✎ write: 'caught them all', end.
+{ q ? '1'. } catch: { ✎ write: 'caught!', stop. }, run.
+{ q ? True. } catch: { ✎ write: 'caught!', stop. }, run.
+{ q ? False. } catch: { ✎ write: 'caught!', stop. }, run.
+{ q ? Nil. } catch: { ✎ write: 'caught!', stop. }, run.
+{ q ? (List new). } catch: { ✎ write: 'caught!', stop. }, run.
+{ q ? (Object new). } catch: { ✎ write: 'caught!', stop. }, run.
+{ q ? ({}). } catch: { ✎ write: 'caught!', stop. }, run.
+✎ write: 'caught them all', stop.

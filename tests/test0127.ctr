@@ -14,21 +14,21 @@ File seek: 9.
 
 ☞ f := File new: '/tmp/seek_test.txt'.
 f write: 'hello world'.
-✎ write: f read, end.
+✎ write: f read, stop.
 
 f open. 
 ☞ q := f read bytes: 1. 
 
 
 ☞ x := f open: 'r', seek: 3, read bytes: 2.
-✎ write: x, end.
+✎ write: x, stop.
 
 
 x := f rewind seek: 1, read bytes: 2.
-✎ write: x, end.
+✎ write: x, stop.
 
 
 x := f end seek: -2, read bytes: 2.
-✎ write: x, end.
+✎ write: x, stop.
 
 f close.

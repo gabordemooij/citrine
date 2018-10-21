@@ -28,8 +28,8 @@ Cat on: 'new' do: {
 	↲ Animal new sound: 'meow!'.
 }.
 
-✎ write: Dog new sound, end.
-✎ write: Cat new sound, end.
+✎ write: Dog new sound, stop.
+✎ write: Cat new sound, stop.
 
 Factory on: 'mix:and:' do: { :beast1 :beast2
 	↲ Animal new sound: (
@@ -38,4 +38,4 @@ Factory on: 'mix:and:' do: { :beast1 :beast2
 	).
 }.
 
-✎ write: (Factory mix: Dog new and: Cat new) sound, end.
+✎ write: (Factory mix: Dog new and: Cat new) sound, stop.

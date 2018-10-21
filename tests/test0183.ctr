@@ -9,12 +9,12 @@ Program tidiness: 0.
 
 ☞ o  := Object new.
 ☞ o2 := Object new.
-✎ write: o Nil?, end.
-✎ write: o type, end.
-✎ write: ( o equals: o ), end.
-✎ write: ( o equals: o2 ), end.
-✎ write: o myself, end.
-✎ write: ( o do done ), end.
+✎ write: o Nil?, stop.
+✎ write: o type, stop.
+✎ write: ( o equals: o ), stop.
+✎ write: ( o equals: o2 ), stop.
+✎ write: o myself, stop.
+✎ write: ( o do done ), stop.
 
 Program clean memory.
 
@@ -23,12 +23,12 @@ usedMemory1 := (Program memory ? 0).
 
 o  := Object new.
 o2 := Object new.
-✎ write: o Nil?, end.
-✎ write: o type, end.
-✎ write: ( o equals: o ), end.
-✎ write: ( o equals: o2 ), end.
-✎ write: o myself, end.
-✎ write: ( o do done ), end.
+✎ write: o Nil?, stop.
+✎ write: o type, stop.
+✎ write: ( o equals: o ), stop.
+✎ write: ( o equals: o2 ), stop.
+✎ write: o myself, stop.
+✎ write: ( o do done ), stop.
 
 Program clean memory.
 usedMemory2 := (Program memory ? 0).
@@ -36,12 +36,12 @@ usedMemory2 := (Program memory ? 0).
 
 o  := Object new.
 o2 := Object new.
-✎ write: o Nil?, end.
-✎ write: o type, end.
-✎ write: ( o equals: o ), end.
-✎ write: ( o equals: o2 ), end.
-✎ write: o myself, end.
-✎ write: ( o do done ), end.
+✎ write: o Nil?, stop.
+✎ write: o type, stop.
+✎ write: ( o equals: o ), stop.
+✎ write: ( o equals: o2 ), stop.
+✎ write: o myself, stop.
+✎ write: ( o do done ), stop.
 
 Program clean memory.
 usedMemory3 := (Program memory ? 0).

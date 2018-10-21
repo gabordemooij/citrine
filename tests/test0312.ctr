@@ -35,4 +35,4 @@ Slurp on: 'obtain' do: {
 	where 
 		user_id=: 1.
 
-✎ write: query obtain, end.
+✎ write: query obtain, stop.

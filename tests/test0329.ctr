@@ -9,7 +9,7 @@
 	• (List ← 1 ; 2 ; 3 ; 4 ; 5)
 ) each: { :i :el
 	{ ✎ write: thisBlock. } * el count.
-	✎ end.
-}) plaque, end.
+	✎ stop.
+}) plaque, stop.
 
 

@@ -1,8 +1,8 @@
 'SINGLE_LANGUAGE'.
 ☞ perky := Percolator new.
-✎ write: perky brew, end.
+✎ write: perky brew, stop.
 Percolator brew.
 Percolator coffee: 1 water: 2, brew.
 ☞ cupOfCoffee  := perky coffee: 1 water: 2, brew.
-✎ write: cupOfCoffee, end.
+✎ write: cupOfCoffee, stop.
 

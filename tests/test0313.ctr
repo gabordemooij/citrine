@@ -68,20 +68,20 @@ String on: 'unescape:' do: { :text
 
 ☞ g := Json to object: garden.
 
-✎ write: 'There are x chairs in the sunny garden.' x (g ? 'garden' ? 'chairs'), end.
-✎ write: 'A rubber duck swims in the x.' x ((g garden pool) either: 'pool' or: ''), end.
-✎ write: 'Is there a shed in the garden? Well.. x' x (g ? 'garden' ? 'shed'), end.
-✎ write: 'In the garden you smell the fragrance of x.' x ((g garden flower join: ' and ')), end.
-✎ write: 'The garden is x meters long.' x (g garden size length), end.
-✎ write: 'Luckily, this day, there are x wasps in the garden.' x (g garden insects), end.
-✎ write: 'The dog named x sleeps under the tree.' x (g garden dog), end.
+✎ write: 'There are x chairs in the sunny garden.' x (g ? 'garden' ? 'chairs'), stop.
+✎ write: 'A rubber duck swims in the x.' x ((g garden pool) either: 'pool' or: ''), stop.
+✎ write: 'Is there a shed in the garden? Well.. x' x (g ? 'garden' ? 'shed'), stop.
+✎ write: 'In the garden you smell the fragrance of x.' x ((g garden flower join: ' and ')), stop.
+✎ write: 'The garden is x meters long.' x (g garden size length), stop.
+✎ write: 'Luckily, this day, there are x wasps in the garden.' x (g garden insects), stop.
+✎ write: 'The dog named x sleeps under the tree.' x (g garden dog), stop.
 
-✎ write: ('a"bb"ccc"' escape: '"'), end.
-✎ write: g, end.
+✎ write: ('a"bb"ccc"' escape: '"'), stop.
+✎ write: g, stop.
 
 
 
-✎ write: (Json jsonify: g), end.
+✎ write: (Json jsonify: g), stop.
 
 
 

@@ -27,13 +27,13 @@ Program tidiness: 0.
 
 ☞ a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( List ← 1 ).
-✎ write: ( 'sum: ' + ( a sum ) ), end.
-✎ write: ( 'min: ' + ( a minimum ) ), end.
-✎ write: ( 'max: ' + ( a maximum ) ), end.
-✎ write: ( '3rd: ' + ( a ? 2 ) ), end.
-✎ write: ( 'prd: ' + ( a product ) ), end.
+✎ write: ( 'sum: ' + ( a sum ) ), stop.
+✎ write: ( 'min: ' + ( a minimum ) ), stop.
+✎ write: ( 'max: ' + ( a maximum ) ), stop.
+✎ write: ( '3rd: ' + ( a ? 2 ) ), stop.
+✎ write: ( 'prd: ' + ( a product ) ), stop.
 a sort: { :a :b ↲ (b - a). }.
-a each: { :i :e ✎ write: ( i ), end. }.
+a each: { :i :e ✎ write: ( i ), stop. }.
 
 } run.
 
@@ -45,13 +45,13 @@ usedMemory1 := (Program memory ? 0).
 
 ☞ a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( List ← 1 ).
-✎ write: ( 'sum: ' + ( a sum ) ), end.
-✎ write: ( 'min: ' + ( a minimum ) ), end.
-✎ write: ( 'max: ' + ( a maximum ) ), end.
-✎ write: ( '3rd: ' + ( a ? 2 ) ), end.
-✎ write: ( 'prd: ' + ( a product ) ), end.
+✎ write: ( 'sum: ' + ( a sum ) ), stop.
+✎ write: ( 'min: ' + ( a minimum ) ), stop.
+✎ write: ( 'max: ' + ( a maximum ) ), stop.
+✎ write: ( '3rd: ' + ( a ? 2 ) ), stop.
+✎ write: ( 'prd: ' + ( a product ) ), stop.
 a sort: { :a :b ↲ (b - a). }.
-a each: { :i :e ✎ write: ( i ), end. }.
+a each: { :i :e ✎ write: ( i ), stop. }.
 
 } run.
 
@@ -65,13 +65,13 @@ usedMemory2 := (Program memory ? 0).
 
 ☞ a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
 a := a + ( List ← 1 ).
-✎ write: ( 'sum: ' + ( a sum ) ), end.
-✎ write: ( 'min: ' + ( a minimum ) ), end.
-✎ write: ( 'max: ' + ( a maximum ) ), end.
-✎ write: ( '3rd: ' + ( a ? 2 ) ), end.
-✎ write: ( 'prd: ' + ( a product ) ), end.
+✎ write: ( 'sum: ' + ( a sum ) ), stop.
+✎ write: ( 'min: ' + ( a minimum ) ), stop.
+✎ write: ( 'max: ' + ( a maximum ) ), stop.
+✎ write: ( '3rd: ' + ( a ? 2 ) ), stop.
+✎ write: ( 'prd: ' + ( a product ) ), stop.
 a sort: { :a :b ↲ (b - a). }.
-a each: { :i :e ✎ write: ( i ), end. }.
+a each: { :i :e ✎ write: ( i ), stop. }.
 
 } run.
 

@@ -27,4 +27,4 @@ Number on: 'add:and:' do: { :a :b
 }.
 
 ☞ q := 0 add: (3 carrots + 2 carrots) and: 4 carrots.
-✎ write: q, end.
+✎ write: q, stop.

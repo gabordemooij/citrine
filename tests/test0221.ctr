@@ -1,11 +1,11 @@
 
 '- -rood - -groen -blauw -' pattern: '(-[^[:space:]]+)' process: { :arr
-	✎ write: (arr join: '|'), end.
+	✎ write: (arr join: '|'), stop.
 }.
 
 
 '- -rood - -groen -blauw -' pattern: '(-[^[:space:]]+)' process: { :arr
-	✎ write: (arr join: '|'), end.
+	✎ write: (arr join: '|'), stop.
 } options: '!'.
 
 
@@ -15,7 +15,7 @@
     -blauw
 
 -' pattern: '^[[:space:]]+(-[^[:space:]]+)$' process: { :arr
-	✎ write: (arr join: '|'), end.
+	✎ write: (arr join: '|'), stop.
 } options: 'n'.
 
 
@@ -26,7 +26,7 @@
     -blauw
 
 -' pattern: '^[[:space:]]+(-[^[:space:]]+)$' process: { :arr
-	✎ write: (arr join: '|'), end.
+	✎ write: (arr join: '|'), stop.
 } options: ''.
 
 
@@ -37,5 +37,5 @@
     -blauW
 
 -' pattern: '^[[:space:]]+-(Rood|Groen|Blauw)$' process: { :arr
-	✎ write: (arr join: '|'), end.
+	✎ write: (arr join: '|'), stop.
 } options: 'ni'.

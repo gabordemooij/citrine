@@ -8,9 +8,9 @@ List on: 'sum' do: {
 }.
 
 ☞ a := List ← 9 ; 8 ; 7.
-✎ write: (a sum), end. 
+✎ write: (a sum), stop. 
 ☞ a := List ← 1 ; 9.
-✎ write: (a sum), end. 
+✎ write: (a sum), stop. 
 ☞ a := List ← 'o' ; 2.
-✎ write: (a sum), end. 
-✎ write: (List new sum), end. 
+✎ write: (a sum), stop. 
+✎ write: (List new sum), stop. 

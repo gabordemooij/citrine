@@ -19,10 +19,10 @@ List on: 'column:' do: { :column
 .
 
 ☞ b := a column: 1.
-✎ write: b, end.
+✎ write: b, stop.
 
 b := a column: 20.
-✎ write: b, end.
+✎ write: b, stop.
 
 b := a column: -100.
-✎ write: b, end.
+✎ write: b, stop.

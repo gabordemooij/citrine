@@ -7,7 +7,7 @@ Program tidiness: 4.
 
 ☞ func := {
 
-	✎ write: 'Nested call #' + j, end.
+	✎ write: 'Nested call #' + j, stop.
 	j add: 1.
 
 	func run.
