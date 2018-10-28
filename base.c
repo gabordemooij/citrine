@@ -39,6 +39,10 @@ int ctr_in_message;
  * Literal:
  *
  * Nil
+ *
+ * In other languages:
+ * Dutch: Niets
+ * Latin: Nihil
  */
 ctr_object* ctr_build_nil() {
 	return CtrStdNil;
@@ -48,6 +52,10 @@ ctr_object* ctr_build_nil() {
  * [Nil] Nil?
  *
  * Nil always answers this message with a boolean object 'True'.
+ *
+ * In other languages:
+ * Dutch: [Niets] Niets? | antwoord altijd met Waar.
+ * Latin: [Nihil] Nihil?
  */
 ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(1);
@@ -57,6 +65,10 @@ ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
  * [Nil] string
  *
  * Returns the string representation of Nil: 'Nil'.
+ *
+ * In other languages:
+ * Dutch: [Niets] tekst | geeft de tekstweergave van Niets (en dat is altijd 'Niets')
+ * Latin: [Nihil] illud
  */
 ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( CTR_DICT_NIL );
@@ -66,6 +78,10 @@ ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList) {
  * [Nil] number
  *
  * Returns the numerical representation of Nil: 0.
+ *
+ * In other languages:
+ * Dutch: [Niets] boolean | geeft de getalswaarde voor Niets terug (altijd 0).
+ * Latin: [Nihil] numerus
  */
 ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_number_from_float(0);
@@ -75,6 +91,10 @@ ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* ctr_argumentList
  * [Nil] boolean
  *
  * Returns the boolean representation of Nil: False.
+ *
+ * In other languages:
+ * Dutch: [Niets] boolean | Niets is altijd gelijk aan Onwaar
+ * Latin: [Nihil] verum
  */
 ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_bool(0);
@@ -85,6 +105,10 @@ ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentLis
  *
  * This is the base object, the parent of all other objects.
  * It contains essential object oriented programming features.
+ * 
+ * In other languages:
+ * Dutch: Object | Dit is het generieke object, de vader van alle objecten
+ * Latin: Object
  */
 ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* objectInstance = NULL;
@@ -97,6 +121,10 @@ ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
  * [Object] type
  *
  * Returns a string representation of the type of object.
+ * 
+ * In other languages:
+ * Dutch: [Object] type | Geeft het basistype object terug
+ * Latin: [Object] genus
  */
 ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 	switch(myself->info.type){
@@ -123,6 +151,10 @@ ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
  * This string representation will be:
  *
  * [Object]
+ *
+ * In other languages:
+ * Dutch: [Object] tekst | Geeft het de tekstuele omschrijving van het moederobject ('[Object]')
+ * Latin: [Object] illud
  */
 ctr_object* ctr_object_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_build_string_from_cstring( CTR_SYM_OBJECT );
@@ -134,6 +166,10 @@ ctr_object* ctr_object_to_string( ctr_object* myself, ctr_argument* argumentList
  * Returns a numerical representation of the object. This basic behavior, part
  * of any object will just return 1. Other objects typically override this
  * behavior with more useful implementations.
+ * 
+ * In other languages:
+ * Dutch: [Object] getal | Geeft de getalswaarde van het algemene object (altijd 1)
+ * Latin: [Object] numerus
  */
 ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_number_from_float(1);
@@ -145,6 +181,10 @@ ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentL
  * Returns a boolean representation of the object. This basic behavior, part
  * of any object will just return True. Other objects typically override this
  * behavior with more useful implementations.
+ *
+ * In other languages:
+ * Dutch: [Object] boolean | Geeft de waarheidswaarde van het algemene object (altijd Waar)
+ * Latin: [Object] verum
  */
 ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_bool(1);
@@ -162,6 +202,10 @@ ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argument
  * Usage:
  *
  * object equals: other
+ *
+ * In other languages:
+ * Dutch: [Object] gelijk: [Object] | Geeft Waar terug als beide objecten een en dezelfde zijn
+ * Latin: [Object] aequalis: [Object]
  */
 ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherObject = argumentList->object;
@@ -173,6 +217,10 @@ ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
  * [Object] myself
  *
  * Returns the object itself.
+ *
+ * In other languages:
+ * Dutch: [Object] mijzelf | Geeft het object zelf terug
+ * Latin: [Object] me
  */
 ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
@@ -190,6 +238,10 @@ ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
  *
  * a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
  * a do pop shift prepend: 'hi', append: 999, done.
+ *
+ * In other languages:
+ * Dutch: [Object] doen | Stel object zo in dat het alle berichten antwoord met zichzelf
+ * Latin: [Object] facite
  */
 ctr_object* ctr_object_do( ctr_object* myself, ctr_argument* argumentList ) {
 	myself->info.chainMode = 1;
@@ -200,6 +252,10 @@ ctr_object* ctr_object_do( ctr_object* myself, ctr_argument* argumentList ) {
  * [Object] done
  *
  * Deactivates 'chain mode'.
+ *
+ * In other languages:
+ * Dutch: [Object] klaar | Stop de doen-modus
+ * Latin: [Object] paratus
  */
 ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
 	myself->info.chainMode = 0;
@@ -219,6 +275,9 @@ ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
  * b := a copy.
  * b add: 1.
  *
+ * In other languages:
+ * Dutch: [Object] kopieer | Geeft een kopie van het object terug
+ * Latin: [Object] exemplum
  */
 ctr_object* ctr_object_copy( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* object;
@@ -235,7 +294,6 @@ ctr_object* ctr_object_copy( ctr_object* myself, ctr_argument* argumentList ) {
 	}
 	return object;
 }
-
 
 /**
  * [Object] case: [Object] do: [Block].
@@ -261,6 +319,10 @@ ctr_object* ctr_object_copy( ctr_object* myself, ctr_argument* argumentList ) {
  *	case: 'syrah'    do: { ✎ write: 'it\'s a Syrah!'.    },
  *	case: 'merlot'   do: { ✎ write: 'it\'s a Merlot!'.   },
  *	case: 'malbec'   do: { ✎ write: 'it\'s a Malbec!'.   }.
+ *
+ * In other languages:
+ * Dutch: [Object] geval: [Object] doen: [Blok]| Voert het blok bij doen: uit als geval: Waar is
+ * Latin: [Object] casu: [Object] facite: [Logicae]
  */
 ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* block = argumentList->next->object;
@@ -306,6 +368,10 @@ ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList )
  *
  * This will print the string 'Hello world' on the screen using a dynamically
  * crafted message.
+ * 
+ * In other languages:
+ * Dutch: [Object] bericht:[Tekst] argumenten:[Reeks] | Stuurt een dynamisch bericht naar object
+ * Latin: [Object] nuntius:[Illud] argumentorum:[Seriem]
  */
 ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* message = ctr_internal_cast2string( argumentList->object );
@@ -356,6 +422,9 @@ ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList )
  * object on: 'greet' do: { ... }.
  * object on: 'between:and:' do: { ... }.
  *
+ * In other languages:
+ * Dutch: [Object] bij: [Tekst] doen:[Codeblok] | Voegt gedrag toe aan object (bij ontvangst bericht - doen)
+ * Latin: [Object] si: [Illud] igitur: [Logicae]
  */
 ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* nextArgument;
@@ -390,6 +459,10 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
  * Listening to these messages allows users to send any message to an
  * object. For instance an object can respond to any message it does not
  * understand by echoing the message.
+ *
+ * In other languages:
+ * Dutch: [Object] reageer: [Tekst] en: [Tekst] en: [Tekst]
+ * Latin: [Object] respondeo: [Illud] et: [Illud] et: [Illud]
  */
 ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
@@ -410,6 +483,10 @@ ctr_object* ctr_object_respond_and_and(ctr_object* myself, ctr_argument* argumen
  * Default Nil? implementation.
  *
  * Always returns boolean object False.
+ *
+ * In other languages:
+ * Dutch: [Object] Niets? | Vraagt aan een object of het niets is (Object antwoord altijd Onwaar)
+ * Latin: [Object] Nihil?
  */
 ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(0);
@@ -430,6 +507,9 @@ ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Boolean learn: 'yes:' means: 'true:'.
  *
+ * In other languages:
+ * Dutch: [Object] leer: [Tekst] betekent: [Tekst] | Leert object dat bericht 1 hetzelfde betekent als bericht 2
+ * Latin: [Object] corium: [Illud] medium: [Illud]
  */
 ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argumentList) {
        char*  current_method_name_str;
@@ -447,7 +527,6 @@ ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argum
 					if ( strncmp( current_method_name_str, target_method_name_str, current_method_name_len ) == 0 ) {
                        ctr_internal_object_add_property( myself, alias, current_method->value, 1);
                        break;
-                
 					}
 				}
                current_method = current_method->next;
@@ -456,8 +535,6 @@ ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argum
        return myself;
 }
 
-
-
 /**
  * Boolean
  *
@@ -465,6 +542,10 @@ ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argum
  *
  * True
  * False
+ * 
+ * In other languages:
+ * Dutch: Boolean (waarheid: Waar of Onwaar)
+ * Latin: Verum (Etaim, Non)
  */
 ctr_object* ctr_build_bool(int truth) {
 	ctr_object* boolObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
@@ -483,6 +564,10 @@ ctr_object* ctr_build_bool(int truth) {
  * Usage:
  *
  * (True = False) false: { ✎ write: 'This is not True!'. }.
+ * 
+ * In other languages:
+ * Dutch: Boolean (waarheid: Waar of Onwaar)
+ * Latin: Verum (Etaim, Non)
  */
 ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(ctr_internal_cast2bool(argumentList->object)->value.bvalue == myself->value.bvalue);
@@ -507,6 +592,10 @@ ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
  * [Boolean] string
  *
  * Returns a string representation of a boolean value, i.e. 'True' or 'False'.
+ * 
+ * In other languages:
+ * Dutch: tekst | geeft beschrijving van de waarheidswaarde ('Waar' of 'Onwaar')
+ * Latin: illud
  */
 ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue == 1) {
@@ -527,6 +616,10 @@ ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
  * { :iteration
  *     (iteration > 10) break.
  * } * 20.
+ *
+ * In other languages:
+ * Dutch: afbreken | Indien waarheidswaarde gelijk is aan Waar dan wordt de lus afgebroken
+ * Latin: intermissum
  */
 ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
