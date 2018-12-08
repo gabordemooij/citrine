@@ -704,7 +704,7 @@ ctr_object* ctr_object_if_true( ctr_object* myself, ctr_argument* argumentList )
  * True := False not.
  *
  * In other languages:
- * Dutch: [Boolean] niet |  Geeft de omgekeerde waarde terug
+ * Dutch: [Boolean] niet | Geeft de omgekeerde waarde terug
  */
 ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(!myself->value.bvalue);
@@ -2177,6 +2177,9 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
  *
  * Same as pattern:process:options: but without the options, no flags will
  * be send to the regex engine.
+ * 
+ * In other languages:
+ * Dutch: [Tekst] patroon: [Tekst] verwerk: [Codeblok] | Past reguliere expressie toe.
  */
 ctr_object* ctr_string_find_pattern_do( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_argument* no_options = ctr_heap_allocate( sizeof( ctr_argument ) );
@@ -2191,6 +2194,11 @@ ctr_object* ctr_string_find_pattern_do( ctr_object* myself, ctr_argument* argume
  * [String] contains: [String]
  *
  * Returns True if the other string is a substring.
+ * 
+ * In other languages:
+ * Dutch: [Tekst] bevat: [Tekst]
+ * geeft Waar terug als het ontvangende tekstobject
+ * de aangegeven tekst bevat.
  */
 ctr_object* ctr_string_contains( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_build_bool(
@@ -2210,7 +2218,11 @@ ctr_object* ctr_string_contains( ctr_object* myself, ctr_argument* argumentList 
  * Usage:
  *
  * ☞ match := 'Hello World' matches: '[:space:]'.
- *
+ * 
+ * In other languages:
+ * Dutch: [Tekst] patroon: [Tekst]
+ * Geeft Waar terug als het ontvangende tekstobject overeenkomt
+ * met de reguliere uitdrukking.
  */
 ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argumentList ) {
 	regex_t pattern;
@@ -2253,7 +2265,9 @@ ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argum
  * Usage:
  *
  * ' hello ' remove surrounding spaces.
- *
+ * 
+ * In other languages:
+ * Dutch: [Tekst] verwijder omliggende spaties | verwijderd witruimte links en rechts.
  */
 ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newString = NULL;
@@ -2276,11 +2290,13 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	return newString;
 }
 
-
 /**
  * [String] number
  *
  * Converts string to a number.
+ * 
+ * In other languages:
+ * Dutch: [Tekst] getal | Geeft de getalwaarde van de tekst of anders 0.
  */
 ctr_object* ctr_string_to_number(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_string(myself->value.svalue->value, myself->value.svalue->vlen);
@@ -2290,6 +2306,9 @@ ctr_object* ctr_string_to_number(ctr_object* myself, ctr_argument* argumentList)
  * [String] boolean
  *
  * Converts string to boolean
+ * 
+ * In other languages:
+ * Dutch: [Tekst] boolean | Geeft de booleaanse waarheid van de tekst.
  */
 ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList) {
 	if ( myself->value.svalue->vlen == 0 ) return ctr_build_bool(0);
@@ -2351,6 +2370,9 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
  *
  * a := 'abc' characters.
  * a count.
+ * 
+ * In other languages:
+ * Dutch: [Tekst] letters | Geeft het aantal letters dat de tekst bevat.
  */
 ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_size i;
@@ -2374,6 +2396,9 @@ ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentLis
  * [String] list
  *
  * Returns an array of bytes representing the string.
+ * 
+ * In other languages:
+ * Dutch: [Tekst] bytereeks | Geeft de bytes als reeks waaruit de tekst bestaat.
  */
 ctr_object* ctr_string_to_byte_array( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_size i;
@@ -2395,6 +2420,9 @@ ctr_object* ctr_string_to_byte_array( ctr_object* myself, ctr_argument* argument
  * [String] append byte: [Number].
  *
  * Appends a raw byte to a string.
+ *
+ * In other languages:
+ * Dutch: [Tekst] voeg byte toe: [Getal] | Voegt bytewaarde aangegeven door getal toe aan tekst.
  */
 ctr_object* ctr_string_append_byte( ctr_object* myself, ctr_argument* argumentList ) {
 	char* dest;
@@ -2415,10 +2443,15 @@ ctr_object* ctr_string_append_byte( ctr_object* myself, ctr_argument* argumentLi
  * [String] compare: [String]
  *
  * Compares a string using the UTF-8 compatible strcmp function.
+ * Returns less than zero if receiving object comes before specified string,
+ * higher than zero if receiving string comes after and 0 if equal.
  *
  * Usage:
  *
  * word compare: other.
+ *
+ * In other languages:
+ * Dutch: [Tekst] vergelijk: [Tekst] | Geeft <0 terug als ontvanger voor tekst komt, >0 erna, =0 gelijk.
  */
 ctr_object* ctr_string_compare( ctr_object* myself, ctr_argument* argumentList ) {
 	argumentList->object = ctr_internal_cast2string(argumentList->object);
@@ -2441,6 +2474,9 @@ ctr_object* ctr_string_compare( ctr_object* myself, ctr_argument* argumentList )
  * Returns True if the first String comes before the latter
  * alphabetically. The actual comparison is based on the UTF-8 compatible
  * function strcmp.
+ *
+ * In other languages:
+ * Dutch: [Tekst] < [Tekst] | Geeft Waar als eerste voor tweede komt alfabetisch.
  */
 ctr_object* ctr_string_before(ctr_object* myself, ctr_argument* argumentList ) {
 	if ( ctr_string_compare( myself, argumentList )->value.nvalue < 0 ) {
@@ -2455,6 +2491,9 @@ ctr_object* ctr_string_before(ctr_object* myself, ctr_argument* argumentList ) {
  * Returns True if the first String comes before or at the same
  * position as the latter alphabetically. The actual comparison is based on the UTF-8 compatible
  * function strcmp.
+ *
+ * In other languages:
+ * Dutch: [Tekst] ≤ [Tekst] | Geeft Waar als eerste voor tweede komt alfabetisch of gelijk.
  */
 ctr_object* ctr_string_before_or_same(ctr_object* myself, ctr_argument* argumentList ) {
 	if ( ctr_string_compare( myself, argumentList )->value.nvalue <= 0 ) {
@@ -2469,6 +2508,9 @@ ctr_object* ctr_string_before_or_same(ctr_object* myself, ctr_argument* argument
  * Returns True if the first String comes after the latter
  * alphabetically. The actual comparison is based on the UTF-8 compatible
  * function strcmp.
+ *
+ * In other languages:
+ * Dutch: [Tekst] > [Tekst] | Geeft Waar als eerste na tweede komt alfabetisch.
  */
 ctr_object* ctr_string_after(ctr_object* myself, ctr_argument* argumentList ) {
 	if ( ctr_string_compare( myself, argumentList )->value.nvalue > 0 ) {
@@ -2483,6 +2525,9 @@ ctr_object* ctr_string_after(ctr_object* myself, ctr_argument* argumentList ) {
  * Returns True if the first String comes after or at the same position as the latter
  * alphabetically. The actual comparison is based on the UTF-8 compatible
  * function strcmp.
+ * 
+ * In other languages:
+ * Dutch: [Tekst] ≥ [Tekst] | Geeft Waar als eerste gelijk of na tweede komt alfabetisch.
  */
 ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentList ) {
 	if ( ctr_string_compare( myself, argumentList )->value.nvalue >= 0 ) {
@@ -2498,29 +2543,29 @@ ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentL
  * string will cause all single quotes (') to be replaced with (\').
  */
 ctr_object* ctr_string_quotes_escape(ctr_object* myself, ctr_argument* argumentList) {
-       ctr_object* answer;
-       char* str;
-       ctr_size len;
-       ctr_size i;
-       ctr_size j;
-       len = myself->value.svalue->vlen;
-       for( i = 0; i < myself->value.svalue->vlen; i++ ) {
-               if ( *(myself->value.svalue->value + i) == '\'' ) {
-                       len++;
-               }
-       }
-       str = ctr_heap_allocate( len + 1 );
-       j = 0;
-       for( i = 0; i < myself->value.svalue->vlen; i++ ) {
-               if ( *(myself->value.svalue->value + i) == '\'' ) {
-                       str[j+i] = '\\';
-                       j++;
-               }
-               str[j+i] = *(myself->value.svalue->value + i);
-       }
-       answer = ctr_build_string_from_cstring( str );
-       ctr_heap_free( str );
-       return answer;
+	ctr_object* answer;
+	char* str;
+	ctr_size len;
+	ctr_size i;
+	ctr_size j;
+	len = myself->value.svalue->vlen;
+	for( i = 0; i < myself->value.svalue->vlen; i++ ) {
+		if ( *(myself->value.svalue->value + i) == '\'' ) {
+				len++;
+		}
+	}
+	str = ctr_heap_allocate( len + 1 );
+	j = 0;
+	for( i = 0; i < myself->value.svalue->vlen; i++ ) {
+		if ( *(myself->value.svalue->value + i) == '\'' ) {
+				str[j+i] = '\\';
+				j++;
+		}
+		str[j+i] = *(myself->value.svalue->value + i);
+	}
+	answer = ctr_build_string_from_cstring( str );
+	ctr_heap_free( str );
+	return answer;
 }
 
 
@@ -2530,6 +2575,9 @@ ctr_object* ctr_string_quotes_escape(ctr_object* myself, ctr_argument* argumentL
  * Returns the hash of the recipient String using the specified key.
  * The default hash in Citrine is the SipHash which is also used internally.
  * SipHash can protect against hash flooding attacks.
+ *
+ * In other languages:
+ * Dutch: [Tekst] kluts [Tekst] | Geeft de kluts (SipHash) terug voor de gespecificeerde sleutel
  */
 ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argumentList ) {
 	char* keyString = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->object ) );
@@ -2564,6 +2612,10 @@ ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argument
  * { :a :b ↲ a + b. } apply: 1 and: 2.
  * { :a :b :c ↲ a + b + c. } apply: 1 and: 2 and: 3.
  *
+ * In other languages:
+ * Dutch: een letterlijk codeblok begint met { en eindigt met }.
+ * De parameters komen na de openingsaccolade en worden voorafgegaan door
+ * een dubbele punt.
  */
 ctr_object* ctr_build_block(ctr_tnode* node) {
 	ctr_object* codeBlockObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBLOCK);
@@ -2609,6 +2661,9 @@ ctr_object* ctr_block_new(ctr_object* myself, ctr_argument* argumentList) {
  * Runs a block of code using the specified object as a parameter.
  * If you run a block using the messages 'run' or 'apply:', me/my will
  * refer to the block itself instead of the containing object.
+ *
+ * In other languages:
+ * Dutch: [Codeblok] toepassen: [Object] | Start het codeblok met het opgegeven object als argument.
  */
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my) {
 	ctr_object* result;
@@ -2661,9 +2716,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 			CtrStdFlow = NULL;
 			sticky = a->object->info.sticky;
 			a->object->info.sticky = 1;
-			
 			ctr_gc_internal_pin( a->object );
-			
 			ctr_block_run(catchBlock, a, my);
 			a->object->info.sticky = sticky;
 			ctr_heap_free( a );
@@ -2686,6 +2739,10 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
  *
  * ☞ x := 0.
  * { x add: 1. } while: { ↲ (x < 6). }.
+ * 
+ * In other languages:
+ * Dutch: [Codeblok] zolang: [Codeblok]
+ * Draait het codeblok net zolang totdat de uitkomst van het opgegeven blok negatief wordt.
  */
 ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
@@ -2723,6 +2780,8 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
  * 
  * { ✎ write: 'Hello World'. } run.
  * 
+ * In other languages:
+ * Dutch: [Codeblok] start. | Start het blok code.
  */
 ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
@@ -2751,7 +2810,10 @@ ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
  * shout := { ✎ write: (my message + '!!!'). }.
  * shout set: 'message' value: 'hello'.
  * shout run.
- *
+ * 
+ * In other languages:
+ * Dutch: [Codeblok] gebruik: [Tekst] waarde: [Object]
+ * Stelt een variabele in die binnen het blok bruikbaar wordt.
  */
 ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* key = ctr_internal_cast2string(argumentList->object);
@@ -2775,6 +2837,9 @@ ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
  * } catch: { :errorMessage
  *   ✎ write: errorMessage.
  * }, run.
+ *
+ * In other languages:
+ * Dutch: [Codeblok] fout: [Object] | Laat een kunstmatige een fout of uitzondering optreden.
  */
 ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
 	CtrStdFlow = argumentList->object;
@@ -2796,6 +2861,11 @@ ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
  * } catch: { :e
  *    ✎ write: e, end.
  * }, run.
+ *
+ * In other languages:
+ * Dutch: [Codeblok] afhandelen: [Codeblok]
+ * Stelt een codeblok in dat gebruikt moet worden door het ontvangende blok
+ * indien er een fout opgetreden is.
  */
 ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* catchBlock = argumentList->object;
@@ -2810,6 +2880,9 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
  * Returns a string representation of the Block. This basic behavior, part
  * of any object will just return [Block]. Other objects typically override this
  * behavior with more useful implementations.
+ *
+ * In other languages:
+ * Dutch: [Codeblok] tekst | Geeft tekstuele weergave van een codeblok.
  */
 ctr_object* ctr_block_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( CTR_SYM_BLOCK );
