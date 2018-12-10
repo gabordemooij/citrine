@@ -19,8 +19,8 @@ x run.
 ☞ counter := 0.
 (dictionary split: '↵') each: { :number :line
 	line pattern: '"([^"]+)"' process: { :match
-		(counter > 17) true: { words add: (match position: 1). }.
-		((counter > 5) & (counter < 18)) true: { things add: (match position: 1). }.
+		(counter > 17) true: { words append: (match position: 1). }.
+		((counter > 5) & (counter < 18)) true: { things append: (match position: 1). }.
 		counter add: 1.
 	}.
 }.

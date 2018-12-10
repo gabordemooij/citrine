@@ -37,7 +37,11 @@
  *	• 'haggis'.
  *
  * ☞ todo := List ← 'dishes' ; 'cleaning'.
- *
+ * 
+ * In other languages:
+ * Dutch: Reeks nieuw. Maakt een nieuwe reeks.
+ * Gebruik ← om een lijst te maken en direct te vullen.
+ * Voorbeeld: ☞ oneven := Reeks ← 1 ; 3 ; 5.
  */
 
 /**
@@ -66,6 +70,11 @@
  *	• 'haggis'.
  *
  * ☞ todo := List ← 'dishes' ; 'cleaning'.
+ * 
+ * In other languages:
+ * Dutch: Reeks nieuw. Maakt een nieuwe reeks.
+ * Gebruik ← om een lijst te maken en direct te vullen.
+ * Voorbeeld: ☞ oneven := Reeks ← 1 ; 3 ; 5.
  *
  */
 ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
@@ -83,6 +92,9 @@ ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
  * [List] type
  *
  * Returns the string description for this object type.
+ * 
+ * In other languages:
+ * Dutch: [Reeks] type. | Geeft een beschrijving van het object.
  *
  **/
 ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList) {
@@ -101,9 +113,12 @@ ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList) {
  *
  * numbers := List new.
  * numbers append: 3.
- * numbers add: 3.
  * numbers ; 3.
  * numbers • 3.
+ * 
+ * In other languages:
+ * Dutch: [Reeks] toevoegen: [Object]. | Voegt iets toe aan een reeks.
+ * Alternatieve notaties: • of ;.
  * 
  */
 ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {

@@ -1169,7 +1169,7 @@ ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) 
  * Usage:
  *
  * { :i ✎ write: i. } * 7.
- * 
+ *
  * In other languages:
  * Dutch: [Codeblok] * [Getal] | Voert het blok het opgegeven aantal keren uit.
  */
@@ -1208,7 +1208,7 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
  *
  * x := 5.
  * x multiply by: 2.
- * 
+ *
  * In other languages:
  * Dutch: [Getal] vermenigvuldig met: [Getal] | Vermenigvuldigd het huidige getal met de opgegeven waarde.
  */
@@ -1223,7 +1223,7 @@ ctr_object* ctr_number_mul(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Divides the number by the specified divider. Returns a new
  * number object.
- * 
+ *
  * In other languages:
  * Dutch: [Getal] / [Getal] | Deling.
  */
@@ -1303,7 +1303,7 @@ ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * x := 2 power: 8.
- * 
+ *
  * In other languages:
  * Dutch: [Getal] tot de macht: [Getal] | Machtsverheffen.
  */
@@ -1328,7 +1328,7 @@ ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
  * ( hope positive? ) true: {
  *     ✎ write: 'Still a little hope for humanity'.
  * }.
- * 
+ *
  * In other languages:
  * Dutch: [Getal] positief? | Antwoord Waar als het getal groter is dan 0.
  */
@@ -1350,7 +1350,7 @@ ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList) 
  *
  * hope := -1.
  * (hope negative?) ifTrue: { Pen write: 'No hope left'. }.
- * 
+ *
  * In other languages:
  * Dutch: [Getal] negatief? | Antwoord Waar als het getal kleiner is dan 0.
  */
@@ -1369,7 +1369,7 @@ ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList) 
  *
  * x := 4.5
  * y := x floor.
- * 
+ *
  * In other languages:
  * Dutch: [Getal]  afgerond naar beneden
  */
@@ -1443,7 +1443,7 @@ ctr_object* ctr_number_respond_to(ctr_object* myself, ctr_argument* argumentList
  *
  * x := 4.5.
  * y = x ceil.
- * 
+ *
  * In other languages:
  * Dutch: [Getal]  afgerond naar boven
  */
@@ -1471,7 +1471,7 @@ ctr_object* ctr_number_round(ctr_object* myself, ctr_argument* argumentList) {
  *
  * x := -7.
  * y := x absolute.
- * 
+ *
  * In other languages:
  * Dutch: [Getal] absoluut
  */
@@ -1490,7 +1490,7 @@ ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList) {
  *
  * ☞ x := 49.
  * ☞ y := x square root.
- * 
+ *
  * In other languages:
  * Dutch: [Getal] vierkantswortel
  */
@@ -1502,7 +1502,7 @@ ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList) {
  * [Number] byte
  *
  * Converts a number to a single byte.
- * 
+ *
  * In other languages:
  * Dutch: [Getal] byte
  */
@@ -1518,7 +1518,7 @@ ctr_object* ctr_number_to_byte(ctr_object* myself, ctr_argument* argumentList) {
  * [Number] string
  *
  * Wrapper for cast function.
- * 
+ *
  * In other languages:
  * Dutch: [Getal] tekst
  */
@@ -1550,7 +1550,7 @@ ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList)
  * [Number] boolean
  *
  * Casts a number to a boolean object.
- * 
+ *
  * In other languages:
  * Dutch: [Getal] boolean
  */
@@ -1575,7 +1575,7 @@ ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList
  * send. For instance, the message 'bytes' returns the number of bytes
  * in a string, while the message 'length' returns the number of
  * characters (as defined as separate UTF-8 code points) in a string.
- * 
+ *
  * In other languages:
  * Dutch: Tekst
  */
@@ -1617,7 +1617,7 @@ ctr_object* ctr_build_empty_string() {
  *
  * Returns the number of bytes in a string, as opposed to
  * length which returns the number of UTF-8 code points (symbols or characters).
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] bytes
  */
@@ -1645,7 +1645,7 @@ ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
  * [String] ≠ [other]
  *
  * Returns True if the other string is not the same (in bytes).
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] ≠ [Tekst] | Geeft Waar als beide teksten niet dezelfde inhoud bevatten.
  */
@@ -1676,7 +1676,7 @@ ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Appends other string to self and returns the resulting
  * string as a new object.
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] + [Tekst] | Voegt beide teksten samen.
  */
@@ -1712,7 +1712,6 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
  *
  * In other languages:
  * Dutch: [Tekst] toevoegen: [Tekst] | Voegt tweede tekst toe aan eerste.
- *
  */
 ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* strObject;
@@ -1780,7 +1779,7 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
  * [String] offset: [Number]
  *
  * Returns a string without the first X characters.
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] overslaan: [Getal] | Geeft de tekst vanaf de opgegeven positie.
  */
@@ -1810,7 +1809,7 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * ('hello' character: 2).
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] letter: [Getal] | Geeft de letter op aangegeven positie.
  */
@@ -1837,7 +1836,7 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Usage:
  * ('abc' byte: 1).
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] byte: [Getal] | Geeft de byte op aangegeven positie.
  */
@@ -1994,7 +1993,7 @@ ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * 'LiLo BootLoader' replace: 'L' with: 'l'.
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] vervang: [Tekst] door: [Tekst] | Vervangt tekst 2 met 3.
  */
@@ -2067,7 +2066,7 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
  * On every match the block gets executed and the matches are
  * passed to the block as arguments. You can also use this feature to replace
  * parts of the string, simply return the replacement string in your block.
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] patroon: [Tekst] verwerk: [Codeblok] opties: [Tekst] | Past reguliere expressie toe.
  */
@@ -2194,7 +2193,7 @@ ctr_object* ctr_string_find_pattern_do( ctr_object* myself, ctr_argument* argume
  * [String] contains: [String]
  *
  * Returns True if the other string is a substring.
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] bevat: [Tekst]
  * geeft Waar terug als het ontvangende tekstobject
@@ -2265,7 +2264,7 @@ ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argum
  * Usage:
  *
  * ' hello ' remove surrounding spaces.
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] verwijder omliggende spaties | verwijderd witruimte links en rechts.
  */
@@ -2294,7 +2293,7 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
  * [String] number
  *
  * Converts string to a number.
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] getal | Geeft de getalwaarde van de tekst of anders 0.
  */
@@ -2370,7 +2369,7 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
  *
  * a := 'abc' characters.
  * a count.
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] letters | Geeft het aantal letters dat de tekst bevat.
  */
@@ -2396,7 +2395,7 @@ ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentLis
  * [String] list
  *
  * Returns an array of bytes representing the string.
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] bytereeks | Geeft de bytes als reeks waaruit de tekst bestaat.
  */
@@ -2525,7 +2524,7 @@ ctr_object* ctr_string_after(ctr_object* myself, ctr_argument* argumentList ) {
  * Returns True if the first String comes after or at the same position as the latter
  * alphabetically. The actual comparison is based on the UTF-8 compatible
  * function strcmp.
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] ≥ [Tekst] | Geeft Waar als eerste gelijk of na tweede komt alfabetisch.
  */
@@ -2739,7 +2738,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
  *
  * ☞ x := 0.
  * { x add: 1. } while: { ↲ (x < 6). }.
- * 
+ *
  * In other languages:
  * Dutch: [Codeblok] zolang: [Codeblok]
  * Draait het codeblok net zolang totdat de uitkomst van het opgegeven blok negatief wordt.
@@ -2779,7 +2778,7 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
  * Usage:
  * 
  * { ✎ write: 'Hello World'. } run.
- * 
+ *
  * In other languages:
  * Dutch: [Codeblok] start. | Start het blok code.
  */
@@ -2810,7 +2809,7 @@ ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
  * shout := { ✎ write: (my message + '!!!'). }.
  * shout set: 'message' value: 'hello'.
  * shout run.
- * 
+ *
  * In other languages:
  * Dutch: [Codeblok] gebruik: [Tekst] waarde: [Object]
  * Stelt een variabele in die binnen het blok bruikbaar wordt.

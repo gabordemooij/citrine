@@ -1,5 +1,5 @@
 ☞ list := List new.
-list add: 'hello'.
+list • 'hello'.
 ✎ write: list count.
 list append: 'world'.
 ✎ write: list count.
