@@ -119,7 +119,6 @@ ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList) {
  * In other languages:
  * Dutch: [Reeks] toevoegen: [Object]. | Voegt iets toe aan een reeks.
  * Alternatieve notaties: • of ;.
- * 
  */
 ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pushValue;
@@ -145,7 +144,9 @@ ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
  *
  * a := List ← 8 ; 4 ; 2 ; 16.
  * m := a minimum.
- *
+ * 
+ * In other languages:
+ * Dutch: [Reeks] maximum | Geeft de laagste waarde uit de reeks terug.
  */
 ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList) {
 	double min = 0;
@@ -172,6 +173,9 @@ ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList) {
  *
  * a := List ← 8 ; 4 ; 2 ; 16.
  * m := a maximum.
+ * 
+ * In other languages:
+ * Dutch: [Reeks] maximum | Geeft de hoogste waarde uit de reeks terug.
  *
  */
 ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
@@ -211,6 +215,9 @@ ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
  *   :key :filename :files
  *   ✎ write: filename.
  * }.
+ * 
+ * In other languages:
+ * Dutch: [Reeks] lijst: [Codeblok] | Maakt van een reeks 
  */
 ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
@@ -255,6 +262,10 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
  *
  * a := List ← 1 ; 2 ; 3.
  *
+ * In other languages:
+ * Dutch: [Reeks] ← [Element1] ; [Element2] ; ... | De pijl maakt een nieuwe reeks en voegt het eerste
+ * element direct toe, opvolgende elementen kunnen worden gescheiden door puntkomma's (;), hiermee
+ * voegt men telkens een nieuw element toe aan de reeks.
  */
 ctr_object* ctr_array_new_and_push(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_array_new(myclass, NULL);
@@ -273,6 +284,9 @@ ctr_object* ctr_array_new_and_push(ctr_object* myclass, ctr_argument* argumentLi
  * a := List new.
  * a append: 1.
  * a prepend: 3.
+ *
+ * In other languages:
+ * Dutch: [Reeks] invoegen: [Object] | Voegt het aangegeven object in aan het begin van de reeks.
  */
 ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pushValue = argumentList->object;
@@ -302,6 +316,10 @@ ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
  * collection := List new.
  * collection append: 1, append: 2, append 3.
  * collection join: ','.
+ *
+ * In other languages:
+ * Dutch: [Reeks] samenvoegen: [Tekst] | Maakt een tekst door
+ * reekselementen samen te voegen met gespecificeerde koppelteken(s).
  */
 ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 	int i;
@@ -350,6 +368,9 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
  * ☞ fruits  := List ← 'apples' ; 'oranges' ; 'bananas'.
  * ☞ oranges := fruits position: 1.
  * ☞ oranges := fruits ? 1.
+ *
+ * In other languages:
+ * Dutch: [Reeks] positie: [Getal] | Geeft het object op de aangegeven plek in de reeks.
  */
 ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* getIndex = argumentList->object;
@@ -374,6 +395,9 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * Returns the first element of the list.
  * If the list is empty, Nil will be returned.
+ *
+ * In other languages:
+ * Dutch: [Reeks] eerste | Geef het eerste element uit de reeks.
  */
 ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size length = 0;
@@ -389,6 +413,9 @@ ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * Returns the last element of the list.
  * If the list is empty, Nil will be returned.
+ *
+ * In other languages:
+ * Dutch: [Reeks] laatste | Geeft het laatste element uit de reeks.
  */
 ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size length = 0;
@@ -404,6 +431,9 @@ ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * Returns the second last element of the list.
  * If the list is empty, Nil will be returned.
+ *
+ * In other languages:
+ * Dutch: [Reeks] op-een-na-laatste | Geeft het op-een-na-laatste element uit reeks.
  */
 ctr_object* ctr_array_second_last(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size length = 0;
@@ -427,6 +457,10 @@ ctr_object* ctr_array_second_last(ctr_object* myself, ctr_argument* argumentList
  *
  * ☞ fruits := List new.
  * ☞ fruits put: 'apples' at: 5.
+ *
+ * In other languages:
+ * Dutch: [Reeks] zet: [Object] bij: [Getal]
+ * Plaatst het object op de aangegeven positie in de reeks.
  */
 ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 
@@ -471,6 +505,9 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
  * [List] pop
  *
  * Pops off the last element of the array.
+ *
+ * In other languages:
+ * Dutch: [Reeks] eraf | Schuift laatste element uit reeks af en geeft het terug.
  */
 ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.avalue->tail >= myself->value.avalue->head) {
@@ -492,6 +529,9 @@ ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList) {
  *
  * ☞ x := List ← 1 ; 2 ; 3.
  * ☞ x - 1.
+ *
+ * In other languages:
+ * Dutch: [Reeks] - [Getal] | Verwijder het element op de aangegeven plek.
  */
 ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size index = ctr_internal_cast2number(argumentList->object)->value.nvalue;
@@ -512,6 +552,9 @@ ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList) {
  * [List] shift
  *
  * Shifts off the first element of the list.
+ *
+ * In other languages:
+ * Dutch: [Reeks] afschuiven | Schuift het eerste element van de reeks.
  */
 ctr_object* ctr_array_shift(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* shiftedOff;
@@ -527,6 +570,9 @@ ctr_object* ctr_array_shift(ctr_object* myself, ctr_argument* argumentList) {
  * [List] count
  *
  * Returns the number of elements in the list.
+ *
+ * In other languages:
+ * Dutch: [Reeks] aantal | Geeft het aantal elementen in de reeks.
  */
 ctr_object* ctr_array_count(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number d = 0;
@@ -539,6 +585,9 @@ ctr_object* ctr_array_count(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Copies part of an array indicated by from and to and
  * returns a new array consisting of a copy of this region.
+ *
+ * In other languages:
+ * Dutch: [Reeks] van: [Getal] lengte: [Getal] | Geeft subreeks.
  */
 ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* pushArg;
@@ -584,6 +633,9 @@ ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList
  *     length: 2
  *     with: ( List ← 'cinnamon' ; 'pineapple' ).
  *
+ * In other languages:
+ * Dutch: [Reeks] vervang: [Getal] lengte: [Getal] door: [Reeks]
+ * Vervangt een deel van de reeks door een andere reeks.
  */
 ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newArray = ctr_array_new(CtrStdArray, NULL);
@@ -626,12 +678,14 @@ ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
 	return newArray;
 }
 
-
 /**
  * [List] + [List]
  *
  * Returns a new list, containing elements of itself and the other
  * list.
+ *
+ * In other languages:
+ * Dutch: [Reeks] + [Reeks] | Geeft de reeks die bestaat uit de samenvoeging van gegeven reeksen.
  */
 ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherArray = argumentList->object;
@@ -676,6 +730,11 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
  * ☞ city        := List ← 'London' ; 'Paris' ; 'Berlin'.
  * ☞ temperature := List ← '15' ; '16' ; '15'.
  * ☞ weather := temperature by: city.
+ *
+ * In other languages:
+ * Dutch: [Reeks] per: [Reeks]
+ * Maakt een Lijst door elementen uit de eerste reeks te koppelen
+ * aan de elementen op dezelfde plek uit de tweede reeks.
  */
 ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size i;
@@ -719,6 +778,9 @@ ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
  * ☞ a := List ← 1 ; 2 ; 3.
  * ☞ b := a copy.
  * b put: 999 at: 1.
+ *
+ * In other languages:
+ * Dutch: [Reeks] kopieer | Maakt een kopie van de reeks.
  */
 ctr_object* ctr_array_copy(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size i = 0;
@@ -767,6 +829,10 @@ int ctr_sort_cmp(const void * a, const void * b) {
  *
  * Sorts the contents of an list using a sort block.
  * Uses qsort.
+ *
+ * In other languages:
+ * Dutch: [Reeks] sorteer: [Codeblok]
+ * Sorteert de reeks door de elementen door het codeblok te halen.
  */
 ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sorter = argumentList->object;
@@ -796,6 +862,11 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
  * ☞ a := List ← 'hello' ; 'world'.
  * ☞ b := a string.
  * ☞ c := b evaluate.
+ *
+ * In other languages:
+ * Dutch: [Reeks] tekst
+ * Geeft een tekstuele versie van de reeks terug. Deze tekst kan opnieuw worden
+ * ingelezen door Citrine om er een reeks van te maken (evalueer).
  */
 ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	int i;
@@ -848,6 +919,10 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
  * Usage:
  *
  * ☞ a := List new fill: 42 with: 'x'.
+ *
+ * In other languages:
+ * Dutch: [Reeks] vul: [Getal] met: [Object]
+ * Vult de reeks op met een gespecificeerd aantal elementen.
  */
 ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
 	size_t n;
@@ -871,6 +946,9 @@ ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
  * If not, the index number -1 will be returned. Note that the comparison
  * will be performed by converting both values to strings.
  *
+ * In other languages:
+ * Dutch: [Reeks] vind: [Object]
+ * Geeft de positie van het object terug of -1 als niet gevonden.
  */
 ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList ) {
 	int64_t found = -1, i = 0;
@@ -897,6 +975,9 @@ ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList )
  *
  * ☞ files := Map new.
  * ☞ files put: 'readme.txt' at: 'textfile'.
+ *
+ * In other languages:
+ * Dutch: Lijst een verzameling van gepaarde elementen in de vorm sleutel = waarde.
  */
 ctr_object* ctr_map_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -909,7 +990,9 @@ ctr_object* ctr_map_new(ctr_object* myclass, ctr_argument* argumentList) {
  *
  * Returns the string 'Map'.
  *
- **/
+ * In other languages:
+ * Dutch: [Lijst] tekst | Geeft een tekstuele beschrijving van de Lijst ('Lijst').
+ */
 ctr_object* ctr_map_type(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( CTR_DICT_MAP_OBJECT );
 }
@@ -923,6 +1006,12 @@ ctr_object* ctr_map_type(ctr_object* myself, ctr_argument* argumentList) {
  *
  * map put: 'hello' at: 'world'.
  *
+ * In other languages:
+ * Dutch: [Lijst] zet: [Object] bij: [Object]
+ * Zet het gespecificeerde object element bij de plek die bekend staat als
+ * het andere object. Net als bij een reeks, alleen in dit geval is het tweede
+ * Object de sleutel waarmee het eerste object weer uit de lijst gevist kan
+ * worden.
  */
 ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 	char* key;
@@ -970,6 +1059,20 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
  * ✎ write: ( menu ? 'Hawaii' ), brk. 
  * ✎ write: ( menu Margherita ), brk.
  *
+ * In other languages:
+ *
+ * Dutch: [Lijst] [Object]: [Object]
+ * Snelle en leesbare notatie om objecten toe te voegen aan een lijst.
+ * Elk bericht dat niet wordt herkend wordt door de lijst als een
+ * sleutel beschouwd, het opvolgende object zal op de plek worden
+ * gezet in de lijst die door de sleutel wordt aangegeven. Dus om een
+ * menukaart te vullen kan men zeggen:
+ *
+ * ☞ menu := Lijst nieuw.
+ * menu pannekoek: 10. (hier kopppelen we pannekoek aan 10)
+ *
+ * Om nu op te vragen hoeveel een pannekoek kost schrijven we:
+ * ☞ prijs := menu pannekoek.
  */
 ctr_object* ctr_map_key_value(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newKey;
@@ -988,6 +1091,9 @@ ctr_object* ctr_map_key_value(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Deletes the entry, identified by the key specified in [String], from
  * the map.
+ *
+ * In other languages:
+ * Dutch: [Lijst] - [Tekst] | Verwijderd de ingang voor aangegeven sleutel.
  */
 ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_internal_object_delete_property(myself, ctr_internal_cast2string(argumentList->object), 0);
@@ -1011,6 +1117,9 @@ ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList) {
  * cities := weather entries sort: {
  * 	:a :b  ↲ (a compare: b).
  * }.
+ *
+ * In other languages:
+ * Dutch: [Lijst] ingangen | Geeft alle sleutels uit de lijst als een reeks.
  */
 ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* list;
@@ -1044,6 +1153,9 @@ ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList) {
  * temperatures := weather values sort: {
  * 	:a :b  ↲ (a compare: b).
  * }.
+ *
+ * In other languages:
+ * Dutch: [Lijst] waarden | Geeft alle waarden uit de lijst als een reeks.
  */
 ctr_object* ctr_map_values(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* list;
@@ -1065,6 +1177,9 @@ ctr_object* ctr_map_values(ctr_object* myself, ctr_argument* argumentList) {
  * [Map] at: [Key]
  *
  * Retrieves the value specified by the key from the map.
+ *
+ * In other languages:
+ * Dutch: [Lijst] bij: [Object] | Geeft de waarde bij de bijbehorende sleutel.
  */
 ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
 
@@ -1097,12 +1212,17 @@ ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Alias for [Map] at: [Key].
  *
+ * In other languages:
+ * Dutch: [Lijst] ? [Object] | Geeft de waarde bij de sleutel.
  */
 
 /**
  * [Map] count
  *
  * Returns the number of elements in the map.
+ *
+ * In other languages:
+ * Dutch: [Lijst] aantal | Geeft het aantal zaken op de lijst.
  */
 ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( myself->properties->size );
@@ -1113,6 +1233,9 @@ ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Iterates over the map, passing key-value pairs to the specified block.
  * Note that within an each/map block, '⛏' and '⚿' refer to the collection.
+ *
+ * In other languages:
+ * Dutch: [Lijst] elk: [Codeblok] | Past het blok code toe op elk paar uit de lijst.
  */
 ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
@@ -1166,6 +1289,10 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
  * ✎ write: (shop has: 'computers'), end.
  * ✎ write: (shop has: 'compute'), end.
  * ✎ write: (shop has: '2computer'), end.
+ *
+ * In other languages:
+ * Dutch: [Lijst] heeft: [Object]
+ * Beantwoord de vraag of het object op de lijst staat met Waar of Onwaar.
  */
 ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList) {
 	int found = 0;
@@ -1202,6 +1329,8 @@ ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList) {
  * x := m string.
  * ✎ write: (Map new).
  *
+ * In other languages:
+ * Dutch: [Lijst] tekst | Geeft tekstuele weergave van lijst (kan weer worden geevalueerd)
  */
 ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object*  string;
