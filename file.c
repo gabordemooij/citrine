@@ -178,6 +178,10 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
  * Appends content to a file. The file object responds to this message like it
  * responds to the write-message, however in this case the contents of the string
  * will be appended to the existing content inside the file.
+ *
+ * In other languages:
+ * Dutch: [bestand] toevoegen: gegevens.
+ * Voegt inhoud toe aan bestand.
  */
 ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
@@ -206,6 +210,11 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
  * [File] exists
  *
  * Returns True if the file exists and False otherwise.
+ *
+ * In other languages:
+ * Dutch: [bestand] bestaat.
+ * Antwoordt Waar als het bestand bestaat en Onwaar als het bestaat
+ * niet bestaat.
  */
 ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -231,6 +240,11 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
  * [File] include
  *
  * Includes the file as a piece of executable code.
+ *
+ * In other languages:
+ * Dutch: [bestand] invoegen.
+ * Voegt het bestand in als uitvoerbare programmacode.
+ * De inhoud van het bestand zal worden uitgevoerd.
  */
 ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -257,6 +271,9 @@ ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
  * [File] delete
  *
  * Deletes the file.
+ *
+ * In other languages:
+ * Dutch: [bestand] verwijderen.
  */
 ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -282,6 +299,10 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
  * [File] size
  *
  * Returns the size of the file.
+ *
+ * In other languages:
+ * Dutch: [bestand] grootte.
+ * Geeft de bestandsgrootte terug van het bestand.
  */
 ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -317,6 +338,15 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
  *
  * ☞ f := File new: '/path/to/file'.
  * f open: 'r+'.
+ *
+ * In other languages:
+ * Dutch: [bestand] openen: modus.
+ * Opent het bestand in de gegeven modus (r+) voor
+ * lezen en schrijven.
+ * Voorbeeld:
+ * ☞ f := Bestand nieuw: 'test.txt'.
+ * f openen: 'r+'.
+ * f sluiten.
  */
 ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pathObj = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -357,6 +387,14 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
  * ☞ f := File new: '/path/to/file.txt'.
  * f open: 'r+'.
  * f close.
+ *
+ * In other languages:
+ * Dutch: [bestand] sluiten.
+ * Sluit het geopende bestand.
+ * Voorbeeld:
+ * ☞ f := Bestand nieuw: 'test.txt'.
+ * f openen: 'r+'.
+ * f sluiten.
  */
 ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.rvalue == NULL) return myself;
@@ -382,6 +420,17 @@ ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList) {
  * f open: 'r+'.
  * ☞ x := f read bytes: 10.
  * f close.
+ *
+ * In other languages:
+ * Dutch: [bestand] lees bytes: [getal].
+ * Leest aantal bytes uit bestand en geeft dit terug.
+ * In het onderstaande voorbeeld lezen we de eerste 10
+ * bytes uit het bestand test.txt.
+ * Voorbeeld:
+ * ☞ f := Bestand nieuw: 'test.txt'.
+ * f openen: 'r+'.
+ * ☞ x := f lees bytes: 10.
+ * f sluiten.
  */
 ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) {
 	int bytes;
@@ -418,6 +467,15 @@ ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) 
  * ☞ n := f write bytes: 'Hello World'.
  * f close.
  *
+ * In other languages:
+ * Dutch: [bestand] schrijf bytes: [tekst].
+ * Schrijft bytes naar het bestand. In het onderstaande voorbeeld
+ * schrijven we de tekst 'hallo' naar het bestand test.txt.
+ * Voorbeeld:
+ * ☞ f := Bestand nieuw: 'test.txt'.
+ * f openen: 'r+'.
+ * ☞ x := f schrijf bytes: 'hallo'.
+ * f sluiten.
  */
 ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList) {
 	int bytes, written;
@@ -445,6 +503,16 @@ ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList)
  * Usage:
  *
  * file open: 'r', seek: 10.
+ *
+ * In other languages:
+ * Dutch: [bestand] zoeken: [getal].
+ * Verplaatst de cursor naar de gespecificeerde positie in het bestand.
+ * In onderstaand voorbeeld openen we een bestand voor lezen en verplaatsen
+ * we de cursor naar positie 10 (10 bytes ten opzichte van het
+ * begin van het bestand). Een zoekwaarde kan negatief zijn.
+ * Voorbeeld:
+ *
+ * f open: 'r', zoeken: 10.
  */
 ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
 	int offset;
@@ -474,6 +542,9 @@ ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
  * file rewind.
  * ☞ y := file read bytes: 10.
  *
+ * In other languages:
+ * Dutch: [bestand] terugspoelen.
+ * Plaatst de cursor weer aan het beginpunt van het bestand.
  */
 ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList) {
 	int error;
@@ -503,6 +574,9 @@ ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList)
  * file end.
  * ☞ x := file seek: -10, read bytes: 10.
  *
+ * In other languages:
+ * Dutch: [bestand] terugspoelen.
+ * Plaatst de cursor aan het einde van het bestand.
  */
 ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList) {
 	int error;
@@ -574,6 +648,10 @@ ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList
  * Attempts to unlock a file. This message is non-blocking, on failure
  * it will immediately return. Answers True if the file has been
  * unlocked succesfully. Otherwise, the answer is False.
+ *
+ * In other languages:
+ * Dutch: [bestand] ontgrendel.
+ * Poogt het bestand te ontgrendelen. Geeft Waar terug als poging slaagt.
  */
 ctr_object* ctr_file_unlock(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_file_lock_generic( myself, argumentList, LOCK_UN | LOCK_NB );
@@ -586,6 +664,10 @@ ctr_object* ctr_file_unlock(ctr_object* myself, ctr_argument* argumentList) {
  * This message is non-blocking, on failure
  * it will immediately return. Answers True if the lock has been
  * acquired and False otherwise.
+ *
+ * In other languages:
+ * Dutch: [bestand] vergrendel.
+ * Poogt het bestand te vergrendelen. Geeft Waar terug als poging slaagt.
  */
 ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_file_lock_generic( myself, argumentList, LOCK_EX | LOCK_NB );
@@ -604,6 +686,14 @@ ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList) {
  *
  * ☞ files := File list: '/tmp/testje'.
  *
+ *
+ * In other languages:
+ * Dutch: Bestand lijst: [tekst]
+ * Geeft de inhoud van de opgegeven map terug.
+ *
+ * Voorbeeld:
+ *
+ * bestanden := Bestand lijst: '/mijnmap'.
  */
 ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	DIR* d;
