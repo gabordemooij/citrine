@@ -200,6 +200,10 @@ ctr_object* ctr_gc_internal_pin( ctr_object* object ) {
  * GarbageCollector, to invoke use:
  *
  * Program clean memory.
+ * 
+ * In other languages:
+ * Dutch: Programma vegen.
+ * Ruimt ongebruikt geheugen op.
  */
 ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 	ctr_gc_internal_collect(); /* calls internal because automatic GC has to use this function as well and requires low overhead. */
@@ -208,11 +212,27 @@ ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * [Program] memory
+ * 
+ * Returns memory statistics.
+ * Array with:
+ * 0: allocated memory
+ * 1: number of objects
+ * 2: number of sticky objects
+ * 3: number of remaining objects
+ * 4: number of removed objects
+ *
+ * In other languages:
+ * Dutch: Programma geheugen.
+ * Geeft informatie over geheugengebruik terug.
+ * Geeft reeks met op positie
+ * 0: gealloceerde ruimte,
+ * 1: aantal objecten
+ * 2: aantal vastgezette objecten
+ * 3: aantal overgebleven objecten
+ * 4: aantal opgeruimde objecten 
  */
 ctr_object* ctr_gc_memory(ctr_object* myself, ctr_argument* argumentList) {
-	
 	ctr_object* list = ctr_array_new( CtrStdArray, NULL );
-	
 	ctr_argument* args = ctr_heap_allocate(sizeof(ctr_argument));
 	args->object = ctr_build_number_from_float( ctr_gc_alloc );
 	ctr_array_push( list, args );
@@ -233,6 +253,10 @@ ctr_object* ctr_gc_memory(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Sets the memory limit, if this limit gets exceeded the program will produce
  * an out-of-memory error.
+ * 
+ * In other languages:
+ * Dutch: Programma geheugen: [getal].
+ * Stelt geheugenlimiet in, in bytes.
  */
 ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_gc_memlimit = (uint64_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
@@ -249,6 +273,15 @@ ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
  * 1 - Activate Garbage Collector (default)
  * 4 - Activate Garbage Collector for every single step (testing only)
  * 8 - Activate experimental Pool Memory Allocation Manager (experimental!)
+ * 
+ * In other languages:
+ * Dutch: Programma opruimingsniveau: [getal].
+ *
+ * Mogelijke instellingen:
+ * 0 - Geen opruiming
+ * 1 - Standaard opruiming
+ * 4 - Geheugen opruimen bij elke stap in het programma
+ * 8 - Gebruik maken van gedeelde geheugen blokken (experimenteel)
  */
 ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_gc_mode = (int) ctr_internal_cast2number( argumentList->object )->value.nvalue;
@@ -267,6 +300,14 @@ ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
  *
  * ☞ files := Shell ls
  *
+ * In other languages:
+ * Dutch: Programma opdrachtregel: [Tekst].
+ * Geeft een tekst door aan de opdrachtregel van het
+ * besturingsysteem. Deze opdracht zal door het systeem
+ * worden afgehandeld.
+ * 
+ * Voorbeeld (voor Linux/UNIX):
+ * ☞ bestanden := Opdrachtregel ls.
  */
 ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList) {
 	FILE* stream;
@@ -301,6 +342,11 @@ ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList) {
  * [Program] argument: [Number]
  *
  * Obtains an argument from the CLI invocation.
+ * 
+ * In other languages:
+ * Dutch: Programma argument: [Getal].
+ * Geeft het middels opdrachtregel opgegeven argument terug
+ * op aangegeven positie.
  */
 ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* numberObject = ctr_internal_cast2number(argumentList->object);
@@ -313,6 +359,10 @@ ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList)
  * [Program] arguments
  *
  * Returns the number of CLI arguments passed to the script.
+ * 
+ * In other languages:
+ * Dutch: Programma argumenten.
+ * Geeft aantal middels opdrachtregel opgegeven argumenten terug.
  */
 ctr_object* ctr_program_num_of_args(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (ctr_number) ctr_argc );
@@ -322,6 +372,10 @@ ctr_object* ctr_program_num_of_args(ctr_object* myself, ctr_argument* argumentLi
  * [Program] end
  * 
  * Exits program immediately.
+ * 
+ * In other languages:
+ * Dutch: Programma einde.
+ * Stopt de uitvoering van het programma.
  */
 ctr_object* ctr_program_exit(ctr_object* myself, ctr_argument* argumentList) {
 	CtrStdFlow = CtrStdExit;
@@ -336,6 +390,10 @@ ctr_object* ctr_program_exit(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * ☞ x := Command setting: 'MY_PATH_VAR'.
+ * 
+ * In other languages:
+ * Dutch: Programma instelling: [Tekst].
+ * Geeft de omgevingsvariabele terug bij de opgegeven sleutel.
  */
 ctr_object* ctr_program_get_env(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* envVarNameObj;
@@ -357,6 +415,10 @@ ctr_object* ctr_program_get_env(ctr_object* myself, ctr_argument* argumentList) 
  * [Program] setting: [Key] value: [Value]
  *
  * Sets the value of an environment variable.
+ * 
+ * In other languages:
+ * Dutch: Programma instelling: [Tekst] waarde: [Tekst].
+ * Stelt een omgevingsvariabele in met de opgegeven waarde.
  */
 ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* envVarNameObj;
@@ -387,7 +449,11 @@ ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList) 
  * ✎ write: 'What is your name ?'.
  * ☞ x := Program ask.
  * ✎ write: ('Hello you' you: x), end.
- *
+ * 
+ * In other languages:
+ * Dutch: Programma vraag.
+ * Pauzeert de uitvoering van het programma in afwachting van
+ * gebruikersinvoer en geeft de invoer als Tekst terug na afloop.
  */
 ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentList) {
 	int c;
@@ -425,9 +491,6 @@ ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentL
  * Also note that the trailing newline (in case of CLI applications) will
  * be stripped so you don't have to do this manually. This allows for
  * one-liners like the one in the example below.
- * The input message is not allowed if message countdown has been activated
- * (Program remainingMessages:) because it might wait for content and this
- * is not allowed in a countdown sandbox.
  *
  * Usage:
  *
@@ -435,7 +498,10 @@ ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentL
  *
  * ☞ x := Program input.
  * ✎ write: x.
- *
+ * 
+ * In other languages:
+ * Dutch: Programma invoer.
+ * Leest alle ruwe invoer vanuit STDIN.
  */
 ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size bytes = 0;
@@ -465,6 +531,11 @@ ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList) {
  * [Program] flush.
  *
  * Flushes the STDOUT output buffer.
+ * 
+ * In other languages:
+ * Dutch: Programma spoelen.
+ * Spoelt de STDOUT buffer. Alles wat in de buffer zit zal naar
+ * STDOUT worden geschreven en de buffer zal leeggemaakt worden.
  */
 ctr_object* ctr_program_flush(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	 fflush(stdout);
@@ -476,6 +547,10 @@ ctr_object* ctr_program_flush(ctr_object* myself, ctr_argument* ctr_argumentList
  *
  * Logs the specified message string using syslog using log level LOG_ERR.
  * Use this to log errors.
+ * 
+ * In other languages:
+ * Dutch: Programma fout: [Tekst].
+ * Schrijft een fout weg in het logboek van het programma.
  */
 ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList) {
 	char* message;
@@ -503,7 +578,11 @@ ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList) {
  *
  * { ↲ file lock. }
  * false: { ⏰ wait: 1. }.
- *
+ * 
+ * In other languages:
+ * Dutch: Moment wacht: [Getal].
+ * Wacht het aangegeven aantal seconde alvorens de uitvoering van
+ * het programma te hervatten.
  */
 ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* arg = ctr_internal_cast2number(argumentList->object);
@@ -516,6 +595,12 @@ ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
  * [Clock] new: [Number]
  *
  * Creates a new clock instance from a UNIX time stamp.
+ * 
+ * In other languages:
+ * Dutch: Moment nieuw: [Getal].
+ * Maakt een nieuw tijdsobject aan en stelt de tijd in
+ * aan de hand van het UNIX time stamp getal dat wordt
+ * meegegeven.
  */
 ctr_object* ctr_clock_new_set( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* clock;
@@ -621,6 +706,11 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
  * 
  * ☞ clock := Clock new: timestamp.
  * ☞ copied := Clock new like: clock.
+ * 
+ * In other languages:
+ * Dutch: Moment zoals: [Moment].
+ * Synchroniseert twee momenten. Stelt het eerste moment gelijk aan
+ * het tweede.
  */
 ctr_object* ctr_clock_like( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* otherClock;
@@ -648,6 +738,10 @@ ctr_object* ctr_clock_like( ctr_object* myself, ctr_argument* argumentList ) {
  * [Clock] zone: [String]
  *
  * Sets the time zone of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] zone: [Tekst].
+ * Stelt de tijdzone van het moment in.
  */
 ctr_object* ctr_clock_set_zone( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), ctr_internal_cast2string( argumentList->object ), CTR_CATEGORY_PRIVATE_PROPERTY );
@@ -658,6 +752,10 @@ ctr_object* ctr_clock_set_zone( ctr_object* myself, ctr_argument* argumentList )
  * [Clock] zone
  *
  * Returns time zone of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] zone: [Tekst].
+ * Geeft de tijdzone van het moment terug.
  */
 ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY );
@@ -667,6 +765,10 @@ ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList )
  * [Clock] year: [Number]
  *
  * Sets the year of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] jaar: [Getal].
+ * Stelt het jaar van een moment in.
  */
 ctr_object* ctr_clock_set_year( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_set_time( myself, argumentList, 'Y' );
@@ -676,6 +778,10 @@ ctr_object* ctr_clock_set_year( ctr_object* myself, ctr_argument* argumentList )
  * [Clock] month: [Number]
  *
  * Sets the month of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] maand: [Getal].
+ * Stelt de maand van een moment in.
  */
 ctr_object* ctr_clock_set_month( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_set_time( myself, argumentList, 'm' );
@@ -685,6 +791,10 @@ ctr_object* ctr_clock_set_month( ctr_object* myself, ctr_argument* argumentList 
  * [Clock] day: [Number]
  *
  * Sets the day of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] dag: [Getal].
+ * Stelt de dag van het moment in.
  */
 ctr_object* ctr_clock_set_day( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_set_time( myself, argumentList, 'd' );
@@ -694,6 +804,10 @@ ctr_object* ctr_clock_set_day( ctr_object* myself, ctr_argument* argumentList ) 
  * [Clock] hour: [Number]
  *
  * Sets the hour of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] uur: [Getal].
+ * Stelt het korte wijzer van een moment in.
  */
 ctr_object* ctr_clock_set_hour( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_set_time( myself, argumentList, 'H' );
@@ -703,6 +817,10 @@ ctr_object* ctr_clock_set_hour( ctr_object* myself, ctr_argument* argumentList )
  * [Clock] minute: [Number]
  *
  * Sets the minute of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] minuut: [Getal].
+ * Stelt de lange wijzer van een moment in.
  */
 ctr_object* ctr_clock_set_minute( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_set_time( myself, argumentList, 'i' );
@@ -712,6 +830,10 @@ ctr_object* ctr_clock_set_minute( ctr_object* myself, ctr_argument* argumentList
  * [Clock] second: [Number]
  *
  * Sets the second of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] seconde: [Getal].
+ * Stelt de secondewijzer van het moment.
  */
 ctr_object* ctr_clock_set_second( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_set_time( myself, argumentList, 's' );
@@ -721,6 +843,10 @@ ctr_object* ctr_clock_set_second( ctr_object* myself, ctr_argument* argumentList
  * [Clock] year
  *
  * Returns year of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] jaar.
+ * Geeft het jaar van het moment terug.
  */
 ctr_object* ctr_clock_year( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_get_time( myself, argumentList, 'Y' );
@@ -730,6 +856,10 @@ ctr_object* ctr_clock_year( ctr_object* myself, ctr_argument* argumentList ) {
  * [Clock] month
  *
  * Returns month of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] maand.
+ * Geeft de maand van het moment terug.
  */
 ctr_object* ctr_clock_month( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_get_time( myself, argumentList, 'm' );
@@ -739,6 +869,10 @@ ctr_object* ctr_clock_month( ctr_object* myself, ctr_argument* argumentList ) {
  * [Clock] day
  *
  * Returns day of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] dag.
+ * Geeft de dag van het moment terug.
  */
 ctr_object* ctr_clock_day( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_get_time( myself, argumentList, 'd' );
@@ -748,6 +882,10 @@ ctr_object* ctr_clock_day( ctr_object* myself, ctr_argument* argumentList ) {
  * [Clock] hour
  *
  * Returns hour of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] uur.
+ * Geeft het uur van het moment terug.
  */
 ctr_object* ctr_clock_hour( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_get_time( myself, argumentList, 'H' );
@@ -757,6 +895,10 @@ ctr_object* ctr_clock_hour( ctr_object* myself, ctr_argument* argumentList ) {
  * [Clock] minute
  *
  * Returns minute of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] minuut.
+ * Geeft de minuut van het moment terug.
  */
 ctr_object* ctr_clock_minute( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_get_time( myself, argumentList, 'i' );
@@ -766,6 +908,10 @@ ctr_object* ctr_clock_minute( ctr_object* myself, ctr_argument* argumentList ) {
  * [Clock] second
  *
  * Returns second of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] seconde.
+ * Geeft de seconde van het moment terug.
  */
 ctr_object* ctr_clock_second( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_get_time( myself, argumentList, 's' );
@@ -775,6 +921,11 @@ ctr_object* ctr_clock_second( ctr_object* myself, ctr_argument* argumentList ) {
  * [Clock] day of the year
  *
  * Returns day number of the year.
+ * 
+ * In other languages:
+ * Dutch: [Moment] jaardag.
+ * Geeft het dag van het jaar terug waarop het moment
+ * plaatsvindt.
  */
 ctr_object* ctr_clock_yearday( ctr_object* myself, ctr_argument* argumentList ) {
 	struct tm* date;
@@ -790,6 +941,11 @@ ctr_object* ctr_clock_yearday( ctr_object* myself, ctr_argument* argumentList ) 
  * [Clock] weekday
  *
  * Returns the week day number of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] weekdag.
+ * Geeft het dag van de week terug waarop het moment
+ * plaatsvindt.
  */
 ctr_object* ctr_clock_weekday( ctr_object* myself, ctr_argument* argumentList ) {
 	struct tm* date;
@@ -810,6 +966,11 @@ ctr_object* ctr_clock_weekday( ctr_object* myself, ctr_argument* argumentList ) 
  * Usage:
  *
  * ☞ time := Clock new time.
+ * 
+ * In other languages:
+ * Dutch: [Moment] tijd.
+ * Geeft de UNIX tijd van het moment terug.
+ * Let op! Dit is de tijd waarop het moment is gemaakt.
  */
 ctr_object* ctr_clock_time( ctr_object* myself, ctr_argument* argumentList ) {
 	time_t timeStamp;
@@ -823,6 +984,11 @@ ctr_object* ctr_clock_time( ctr_object* myself, ctr_argument* argumentList ) {
  * [Clock] week
  *
  * Returns the week number of the clock.
+ * 
+ * In other languages:
+ * Dutch: [Moment] week.
+ * Geeft de week van het jaar terug waarop het moment
+ * plaatsvindt.
  */
 ctr_object* ctr_clock_week( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* weekNumber;
@@ -843,6 +1009,11 @@ ctr_object* ctr_clock_week( ctr_object* myself, ctr_argument* argumentList ) {
  *
  * Returns a string describing the date and time represented by the clock object
  * according to the specified format. See strftime for format syntax details.
+ * 
+ * In other languages:
+ * Dutch: [Moment] formaat: [Tekst].
+ * Geeft een beschrijving terug van het moment als tekst volgens het ingesteld
+ * formaat. Het formaat dient opgegeven te zijn volgens de strftime methode.
  */
 ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList ) {
 	char*       zone;
@@ -886,6 +1057,10 @@ ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList ) {
  *
  * ✎ write: ⏰, end.
  * ✎ write: ⏰ number, end.
+ * 
+ * In other languages:
+ * Dutch: [Moment] tekst.
+ * Geeft een standaard tekstrepresentatie van het moment terug.
  */
 ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_argument* newArgumentList;
@@ -913,6 +1088,10 @@ ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList 
  *
  * ✎ write: ⏰, brk.
  * ✎ write: ⏰ number, brk.
+ * 
+ * In other languages:
+ * Dutch: [Moment] getal.
+ * Alias voor [Moment] tijd.
  */
 ctr_object* ctr_clock_to_number( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_send_message( myself, "time", strlen("time"), argumentList );
@@ -1008,6 +1187,11 @@ ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, ui
  * clock add: 3 minutes.
  * clock add: 1 hour.
  * clock add: 2 second.
+ * 
+ * In other languages:
+ * Dutch: [Moment] optellen: [Getal].
+ * Verschuift het moment in de tijd op basis van het getal.
+ * Het getal kan gekwalificeerd worden als minuten, uren of seconden.
  */
 ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_change( myself, argumentList, 1 );
@@ -1018,6 +1202,11 @@ ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
  *
  * Same as '[Clock] add:' but subtracts the number instead of adding it to
  * the clock's time.
+ * 
+ * In other languages:
+ * Dutch: [Moment] aftrekken: [Getal].
+ * Verschuift het moment in de tijd op basis van het getal.
+ * Het getal kan gekwalificeerd worden als minuten, uren of seconden.
  */
 ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_change( myself, argumentList, 0 );
@@ -1028,6 +1217,10 @@ ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList )
  *
  * Creates a new clock, by default a clock will be set to
  * the UTC timezone having the current time.
+ * 
+ * In other languages:
+ * Dutch: [Moment] nieuw.
+ * Maakt een nieuw moment aan voor het huidige tijdstip.
  */
 ctr_object* ctr_clock_new( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* clock;
@@ -1038,9 +1231,13 @@ ctr_object* ctr_clock_new( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Pen] write: [String]
+ * ✎ write: [String]
  *
- * Writes string to console. 
+ * Writes string to console.
+ * 
+ * In other languages:
+ * Dutch: ✎ schrijf: [Tekst].
+ * Schrijft de opgegeven tekst naar STDOUT/console.
  */
 ctr_object* ctr_console_write(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* argument1 = argumentList->object;
@@ -1050,9 +1247,13 @@ ctr_object* ctr_console_write(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Pen] stop
+ * ✎ stop
  *
  * Outputs a newline character.
+ * 
+ * In other languages:
+ * Dutch: ✎ stop.
+ * Sluit een regel af met een einde-regel-symbool.
  */
 ctr_object* ctr_console_brk(ctr_object* myself, ctr_argument* argumentList) {
 	fwrite("\n", sizeof(char), 1, stdout);
