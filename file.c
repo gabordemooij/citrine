@@ -15,13 +15,17 @@
 
 /**
  * File
- * 
+ *
  * Represents a File object.
  * Creates a new file object based on the specified path.
- * 
+ *
  * Usage:
- * 
+ *
  * File new: '/example/path/to/file.txt'.
+ *
+ * In other languages:
+ * Dutch: Bestand nieuw. Maakt een nieuw bestand.
+ * Voorbeeld: ☞ bestand := Bestand nieuw: 'voorbeeld.txt'.
  */
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* s = ctr_object_make(myself, argumentList);
@@ -40,6 +44,10 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
  * Returns the path of a file. The file object will respond to this
  * message by returning a string object describing the full path to the
  * recipient.
+ *
+ * In other languages:
+ * Dutch: [bestand] pad.
+ * Geeft de locatie van het bestand terug.
  */
 ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -54,6 +62,10 @@ ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
  * with this file, this message will return the path of the file on the file system.
  * If no path has been associated with the file, the string [File (no path)] will
  * be returned.
+ *
+ * In other languages:
+ * Dutch: [bestand] tekst. Geeft tekstrepresentatie van bestand terug.
+ * Meestal is dit het pad.
  */
 ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_file_path(myself,argumentList);
@@ -76,6 +88,10 @@ ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList) {
  *
  * ☞ data := File new: '/path/to/mydata.csv', read.
  *
+ * In other languages:
+ * Dutch: [bestand] lees.
+ * Leest het bestand in en geeft inhoud terug als tekst.
+ * Voorbeeld: gegevens := Bestand nieuw: 'test.txt', lees.
  */
 ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -103,7 +119,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	buffer=(char *)ctr_heap_allocate(fileLen+1);
 	if (!buffer){
 		fprintf(stderr, CTR_ERR_OOM );
-		fclose(f);exit(1);	
+		fclose(f);exit(1);
 	}
 	fread(buffer, fileLen, 1, f);
 	fclose(f);
@@ -121,13 +137,17 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
  * be a better idea to use the streaming API if possible (see readBytes etc.).
  * In the example we write the XML snippet in variable data to a file
  * called myxml.xml in the current working directory.
- * 
+ *
  * Usage:
- * 
+ *
  * ☞ data := '<xml>hello</xml>'.
  * File new: 'myxml.xml', write: data.
  *
- */ 
+ * In other languages:
+ * Dutch: [bestand] schrijf: gegevens.
+ * Schrijf inhoud variabele naar bestand.
+ * Voorbeeld: Bestand nieuw: 'test.txt', schrijf: 'inhoud'.
+ */
 ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0 );

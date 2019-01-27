@@ -100,7 +100,7 @@ ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentLis
  *
  * This is the base object, the parent of all other objects.
  * It contains essential object oriented programming features.
- * 
+ *
  * In other languages:
  * Dutch: Object | Dit is het generieke object, de vader van alle objecten
  */
@@ -115,7 +115,7 @@ ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
  * [Object] type
  *
  * Returns a string representation of the type of object.
- * 
+ *
  * In other languages:
  * Dutch: [Object] type | Geeft het basistype object terug
  */
@@ -158,7 +158,7 @@ ctr_object* ctr_object_to_string( ctr_object* myself, ctr_argument* argumentList
  * Returns a numerical representation of the object. This basic behavior, part
  * of any object will just return 1. Other objects typically override this
  * behavior with more useful implementations.
- * 
+ *
  * In other languages:
  * Dutch: [Object] getal | Geeft de getalswaarde van het algemene object (altijd 1)
  */
@@ -352,7 +352,7 @@ ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList )
  *
  * This will print the string 'Hello world' on the screen using a dynamically
  * crafted message.
- * 
+ *
  * In other languages:
  * Dutch: [Object] bericht:[Tekst] argumenten:[Reeks] | Stuurt een dynamisch bericht naar object
  */
@@ -521,7 +521,7 @@ ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argum
  *
  * True
  * False
- * 
+ *
  * In other languages:
  * Dutch: Boolean (waarheid: Waar of Onwaar)
  */
@@ -542,7 +542,7 @@ ctr_object* ctr_build_bool(int truth) {
  * Usage:
  *
  * (True = False) false: { ✎ write: 'This is not True!'. }.
- * 
+ *
  * In other languages:
  * Dutch: Boolean (waarheid: Waar of Onwaar)
  */
@@ -569,7 +569,7 @@ ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
  * [Boolean] string
  *
  * Returns a string representation of a boolean value, i.e. 'True' or 'False'.
- * 
+ *
  * In other languages:
  * Dutch: tekst | geeft beschrijving van de waarheidswaarde ('Waar' of 'Onwaar')
  */
@@ -612,7 +612,7 @@ ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * (iteration > 10) continue.
- * 
+ *
  * In other languages:
  * Dutch: [Boolean] doorgaan | Indien verzonden naar Waar, slaat de rest van het blok over en vervolgt de lus
  */
@@ -661,7 +661,7 @@ ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * (some expression) false: { ... }.
- * 
+ *
  * In other languages:
  * Dutch: [Boolean] onwaar: [Codeblok] |  Indien verzonden naar Onwaar, voert het gegeven blok uit
  */
@@ -735,7 +735,7 @@ ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * a and: b
- * 
+ *
  * In other languages:
  * Dutch: [Boolean] en: [Object] | Antwoord met Waar als beide Waar zijn
  */
@@ -933,7 +933,7 @@ ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList)
  *
  * The code snippet above will compare the two number objects.
  * The result (True) will be stored in variable x.
- * 
+ *
  * In other languages:
  * Dutch: [Getal] ≤ [Getal] | Antwoord Waar als eerste getal kleiner of gelijk is dan het tweede
  */
@@ -1098,7 +1098,7 @@ ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Increases the number ITSELF by the specified amount, this message will change the
  * value of the number object itself instead of returning a new number.
- * 
+ *
  * In other languages:
  * Dutch: [Getal] optellen: [Getal] | Telt het gespecificeerde getal op bij het huidige.
  */
@@ -1165,7 +1165,7 @@ ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) 
  * This is the most basic form of a loop.
  * The example runs the block 7 times. The current iteration
  * number is passed to the block as a parameter (i in this example).
- * 
+ *
  * Usage:
  *
  * { :i ✎ write: i. } * 7.
@@ -1629,7 +1629,7 @@ ctr_object* ctr_string_bytes(ctr_object* myself, ctr_argument* argumentList) {
  * [String] = [other]
  *
  * Returns True if the other string is the same (in bytes).
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] = [Tekst] | Geeft Waar als beide teksten dezelfde inhoud bevatten.
  */
@@ -1662,7 +1662,7 @@ ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Returns the length of the string in symbols.
  * This message is UTF-8 unicode aware. A 4 byte character will be counted as ONE.
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] lengte | Geeft lengte van tekst in tekens.
  */
@@ -2143,12 +2143,12 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 		block->info.sticky = 1;
 		blockArguments->object->info.sticky = 1;
 		newString->info.sticky = 1;
-		
+
 		ctr_gc_internal_pin(block);
 		ctr_gc_internal_pin(blockArguments->object);
 		ctr_gc_internal_pin(newString);
 		ctr_gc_internal_pin(myself);
-		ctr_object* replacement = replacement = ctr_block_run( block, blockArguments, ctr_build_empty_string() );	
+		ctr_object* replacement = replacement = ctr_block_run( block, blockArguments, ctr_build_empty_string() );
 		block->info.sticky = sticky1;
 		blockArguments->object->info.sticky = sticky2;
 		newString->info.sticky = sticky3;
@@ -2176,7 +2176,7 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
  *
  * Same as pattern:process:options: but without the options, no flags will
  * be send to the regex engine.
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] patroon: [Tekst] verwerk: [Codeblok] | Past reguliere expressie toe.
  */
@@ -2217,7 +2217,7 @@ ctr_object* ctr_string_contains( ctr_object* myself, ctr_argument* argumentList 
  * Usage:
  *
  * ☞ match := 'Hello World' matches: '[:space:]'.
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] patroon: [Tekst]
  * Geeft Waar terug als het ontvangende tekstobject overeenkomt
@@ -2305,7 +2305,7 @@ ctr_object* ctr_string_to_number(ctr_object* myself, ctr_argument* argumentList)
  * [String] boolean
  *
  * Converts string to boolean
- * 
+ *
  * In other languages:
  * Dutch: [Tekst] boolean | Geeft de booleaanse waarheid van de tekst.
  */
@@ -2776,7 +2776,7 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
  * the greeting.
  *
  * Usage:
- * 
+ *
  * { ✎ write: 'Hello World'. } run.
  *
  * In other languages:
@@ -2803,9 +2803,9 @@ ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
  * multiplier to use in the formula. This way, you could create a block
  * building 'formula blocks'. This is how you implement use closures
  * in Citrine.
- * 
+ *
  * Usage:
- * 
+ *
  * shout := { ✎ write: (my message + '!!!'). }.
  * shout set: 'message' value: 'hello'.
  * shout run.

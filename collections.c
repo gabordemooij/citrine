@@ -37,7 +37,7 @@
  *	• 'haggis'.
  *
  * ☞ todo := List ← 'dishes' ; 'cleaning'.
- * 
+ *
  * In other languages:
  * Dutch: Reeks nieuw. Maakt een nieuwe reeks.
  * Gebruik ← om een lijst te maken en direct te vullen.
@@ -70,7 +70,7 @@
  *	• 'haggis'.
  *
  * ☞ todo := List ← 'dishes' ; 'cleaning'.
- * 
+ *
  * In other languages:
  * Dutch: Reeks nieuw. Maakt een nieuwe reeks.
  * Gebruik ← om een lijst te maken en direct te vullen.
@@ -92,7 +92,7 @@ ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
  * [List] type
  *
  * Returns the string description for this object type.
- * 
+ *
  * In other languages:
  * Dutch: [Reeks] type. | Geeft een beschrijving van het object.
  *
@@ -115,7 +115,7 @@ ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList) {
  * numbers append: 3.
  * numbers ; 3.
  * numbers • 3.
- * 
+ *
  * In other languages:
  * Dutch: [Reeks] toevoegen: [Object]. | Voegt iets toe aan een reeks.
  * Alternatieve notaties: • of ;.
@@ -139,12 +139,12 @@ ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Returns the minimum value in a list.
  * In the example this message will return the number 2.
- * 
+ *
  * Usage:
  *
  * a := List ← 8 ; 4 ; 2 ; 16.
  * m := a minimum.
- * 
+ *
  * In other languages:
  * Dutch: [Reeks] maximum | Geeft de laagste waarde uit de reeks terug.
  */
@@ -173,7 +173,7 @@ ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList) {
  *
  * a := List ← 8 ; 4 ; 2 ; 16.
  * m := a maximum.
- * 
+ *
  * In other languages:
  * Dutch: [Reeks] maximum | Geeft de hoogste waarde uit de reeks terug.
  *
@@ -210,14 +210,14 @@ ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
  *   :key :filename :files
  *   ✎ write: filename.
  * }.
- * 
+ *
  * files each: {
  *   :key :filename :files
  *   ✎ write: filename.
  * }.
- * 
+ *
  * In other languages:
- * Dutch: [Reeks] lijst: [Codeblok] | Maakt van een reeks 
+ * Dutch: [Reeks] lijst: [Codeblok] | Maakt van een reeks
  */
 ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
@@ -392,7 +392,7 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * [List] first.
- * 
+ *
  * Returns the first element of the list.
  * If the list is empty, Nil will be returned.
  *
@@ -410,7 +410,7 @@ ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * [List] last.
- * 
+ *
  * Returns the last element of the list.
  * If the list is empty, Nil will be returned.
  *
@@ -428,7 +428,7 @@ ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * [List] second last.
- * 
+ *
  * Returns the second last element of the list.
  * If the list is empty, Nil will be returned.
  *
@@ -849,7 +849,7 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * [List] string
- * 
+ *
  * Returns a string representation of the list and its contents.
  * This representation will be encoded in the Citrine language itself and can
  * therefore be evaluated again.
@@ -858,7 +858,7 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
  * attempting to write a List using a Pen.
  *
  * Usage:
- * 
+ *
  * ☞ a := List ← 'hello' ; 'world'.
  * ☞ b := a string.
  * ☞ c := b evaluate.
@@ -1056,7 +1056,7 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
  *	Hawaii: 12.99,
  *	QuattroFormaggi: 13.00.
  *
- * ✎ write: ( menu ? 'Hawaii' ), brk. 
+ * ✎ write: ( menu ? 'Hawaii' ), brk.
  * ✎ write: ( menu Margherita ), brk.
  *
  * In other languages:
@@ -1276,7 +1276,7 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
  * comparison. In case of a map or array this means the comparison
  * will be based on the serialized structure.
  * The example will output: True False False False False.
- * 
+ *
  * Usage:
  *
  * ☞ shop := (Map new
@@ -1342,7 +1342,7 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 	while( mapItem ) {
 		newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_CODEGEN_MAP_PUT );
 		ctr_string_append( string, newArgumentList );
-		if ( mapItem->value->info.type == CTR_OBJECT_TYPE_OTBOOL || mapItem->value->info.type == CTR_OBJECT_TYPE_OTNUMBER 
+		if ( mapItem->value->info.type == CTR_OBJECT_TYPE_OTBOOL || mapItem->value->info.type == CTR_OBJECT_TYPE_OTNUMBER
 		|| mapItem->value->info.type == CTR_OBJECT_TYPE_OTNIL
 		) {
 			newArgumentList->object = mapItem->value;
