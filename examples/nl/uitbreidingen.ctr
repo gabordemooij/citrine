@@ -1,0 +1,5 @@
+(Bestand nieuw: 'examples/gereedschapskist/gereedschapskist.ctr') invoegen.
+☞ gereedschap := Gereedschapskist nieuw locatie: 'examples/gereedschapskist/scripts/'.
+☞ vondst := gereedschap zoek bestand: '*.ctr' in: '/tmp'.
+✎ schrijf: vondst, stop.
+
