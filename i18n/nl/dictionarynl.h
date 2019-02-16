@@ -195,4 +195,5 @@
 #define CTR_DICT_ENVIRONMENT_VARIABLE            "instelling:"
 #define CTR_DICT_SET_ENVIRONMENT_VARIABLE        "instelling:is:" 
 #define CTR_DICT_RESPOND_TO_AND_AND              "reageer:en:en:"
+#define CTR_DICT_THIS_BLOCK                      "dit codeblok"
 

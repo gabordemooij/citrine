@@ -106,7 +106,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      This is the base object, the parent of all other objects.
      It contains essential object oriented programming features.
-     
+    
      In other languages:
      Dutch: Object | Dit is het generieke object, de vader van alle objecten
 .fi
@@ -116,7 +116,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns a string representation of the type of object.
-     
+    
      In other languages:
      Dutch: [Object] type | Geeft het basistype object terug
 .fi
@@ -141,7 +141,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Returns a numerical representation of the object. This basic behavior, part
      of any object will just return 1. Other objects typically override this
      behavior with more useful implementations.
-     
+    
      In other languages:
      Dutch: [Object] getal | Geeft de getalswaarde van het algemene object (altijd 1)
 .fi
@@ -279,7 +279,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      This will print the string 'Hello world' on the screen using a dynamically
      crafted message.
-     
+    
      In other languages:
      Dutch: [Object] bericht:[Tekst] argumenten:[Reeks] | Stuurt een dynamisch bericht naar object
 .fi
@@ -360,7 +360,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      True
      False
-     
+    
      In other languages:
      Dutch: Boolean (waarheid: Waar of Onwaar)
 .fi
@@ -375,7 +375,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      (True = False) false: { ✎ write: 'This is not True!'. }.
-     
+    
      In other languages:
      Dutch: Boolean (waarheid: Waar of Onwaar)
 .fi
@@ -397,7 +397,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns a string representation of a boolean value, i.e. 'True' or 'False'.
-     
+    
      In other languages:
      Dutch: tekst | geeft beschrijving van de waarheidswaarde ('Waar' of 'Onwaar')
 .fi
@@ -429,7 +429,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      (iteration > 10) continue.
-     
+    
      In other languages:
      Dutch: [Boolean] doorgaan | Indien verzonden naar Waar, slaat de rest van het blok over en vervolgt de lus
 .fi
@@ -459,7 +459,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      (some expression) false: { ... }.
-     
+    
      In other languages:
      Dutch: [Boolean] onwaar: [Codeblok] |  Indien verzonden naar Onwaar, voert het gegeven blok uit
 .fi
@@ -501,7 +501,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      a and: b
-     
+    
      In other languages:
      Dutch: [Boolean] en: [Object] | Antwoord met Waar als beide Waar zijn
 .fi
@@ -646,7 +646,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      The code snippet above will compare the two number objects.
      The result (True) will be stored in variable x.
-     
+    
      In other languages:
      Dutch: [Getal] ≤ [Getal] | Antwoord Waar als eerste getal kleiner of gelijk is dan het tweede
 .fi
@@ -750,7 +750,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Increases the number ITSELF by the specified amount, this message will change the
      value of the number object itself instead of returning a new number.
-     
+    
      In other languages:
      Dutch: [Getal] optellen: [Getal] | Telt het gespecificeerde getal op bij het huidige.
 .fi
@@ -796,11 +796,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
      This is the most basic form of a loop.
      The example runs the block 7 times. The current iteration
      number is passed to the block as a parameter (i in this example).
-     
+    
      Usage:
     
      { :i ✎ write: i. } * 7.
-     
+    
      In other languages:
      Dutch: [Codeblok] * [Getal] | Voert het blok het opgegeven aantal keren uit.
 .fi
@@ -818,7 +818,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      x := 5.
      x multiply by: 2.
-     
+    
      In other languages:
      Dutch: [Getal] vermenigvuldig met: [Getal] | Vermenigvuldigd het huidige getal met de opgegeven waarde.
 .fi
@@ -829,7 +829,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Divides the number by the specified divider. Returns a new
      number object.
-     
+    
      In other languages:
      Dutch: [Getal] / [Getal] | Deling.
 .fi
@@ -882,7 +882,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      x := 2 power: 8.
-     
+    
      In other languages:
      Dutch: [Getal] tot de macht: [Getal] | Machtsverheffen.
 .fi
@@ -902,7 +902,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      ( hope positive? ) true: {
          ✎ write: 'Still a little hope for humanity'.
      }.
-     
+    
      In other languages:
      Dutch: [Getal] positief? | Antwoord Waar als het getal groter is dan 0.
 .fi
@@ -922,7 +922,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      hope := -1.
      (hope negative?) ifTrue: { Pen write: 'No hope left'. }.
-     
+    
      In other languages:
      Dutch: [Getal] negatief? | Antwoord Waar als het getal kleiner is dan 0.
 .fi
@@ -939,7 +939,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      x := 4.5
      y := x floor.
-     
+    
      In other languages:
      Dutch: [Getal]  afgerond naar beneden
 .fi
@@ -1000,7 +1000,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      x := 4.5.
      y = x ceil.
-     
+    
      In other languages:
      Dutch: [Getal]  afgerond naar boven
 .fi
@@ -1024,7 +1024,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      x := -7.
      y := x absolute.
-     
+    
      In other languages:
      Dutch: [Getal] absoluut
 .fi
@@ -1041,7 +1041,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ☞ x := 49.
      ☞ y := x square root.
-     
+    
      In other languages:
      Dutch: [Getal] vierkantswortel
 .fi
@@ -1051,7 +1051,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Converts a number to a single byte.
-     
+    
      In other languages:
      Dutch: [Getal] byte
 .fi
@@ -1061,7 +1061,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Wrapper for cast function.
-     
+    
      In other languages:
      Dutch: [Getal] tekst
 .fi
@@ -1071,7 +1071,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Casts a number to a boolean object.
-     
+    
      In other languages:
      Dutch: [Getal] boolean
 .fi
@@ -1094,7 +1094,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      send. For instance, the message 'bytes' returns the number of bytes
      in a string, while the message 'length' returns the number of
      characters (as defined as separate UTF-8 code points) in a string.
-     
+    
      In other languages:
      Dutch: Tekst
 .fi
@@ -1109,7 +1109,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Returns the number of bytes in a string, as opposed to
      length which returns the number of UTF-8 code points (symbols or characters).
-     
+    
      In other languages:
      Dutch: [Tekst] bytes
 .fi
@@ -1119,7 +1119,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns True if the other string is the same (in bytes).
-     
+    
      In other languages:
      Dutch: [Tekst] = [Tekst] | Geeft Waar als beide teksten dezelfde inhoud bevatten.
 .fi
@@ -1129,7 +1129,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns True if the other string is not the same (in bytes).
-     
+    
      In other languages:
      Dutch: [Tekst] ≠ [Tekst] | Geeft Waar als beide teksten niet dezelfde inhoud bevatten.
 .fi
@@ -1140,7 +1140,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Returns the length of the string in symbols.
      This message is UTF-8 unicode aware. A 4 byte character will be counted as ONE.
-     
+    
      In other languages:
      Dutch: [Tekst] lengte | Geeft lengte van tekst in tekens.
 .fi
@@ -1151,7 +1151,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Appends other string to self and returns the resulting
      string as a new object.
-     
+    
      In other languages:
      Dutch: [Tekst] + [Tekst] | Voegt beide teksten samen.
 .fi
@@ -1172,7 +1172,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      In other languages:
      Dutch: [Tekst] toevoegen: [Tekst] | Voegt tweede tekst toe aan eerste.
-    
 .fi
 .BR.BR.BR
 
@@ -1196,7 +1195,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns a string without the first X characters.
-     
+    
      In other languages:
      Dutch: [Tekst] overslaan: [Getal] | Geeft de tekst vanaf de opgegeven positie.
 .fi
@@ -1210,7 +1209,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      ('hello' character: 2).
-     
+    
      In other languages:
      Dutch: [Tekst] letter: [Getal] | Geeft de letter op aangegeven positie.
 .fi
@@ -1223,7 +1222,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Usage:
      ('abc' byte: 1).
-     
+    
      In other languages:
      Dutch: [Tekst] byte: [Getal] | Geeft de byte op aangegeven positie.
 .fi
@@ -1309,7 +1308,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      'LiLo BootLoader' replace: 'L' with: 'l'.
-     
+    
      In other languages:
      Dutch: [Tekst] vervang: [Tekst] door: [Tekst] | Vervangt tekst 2 met 3.
 .fi
@@ -1336,7 +1335,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      On every match the block gets executed and the matches are
      passed to the block as arguments. You can also use this feature to replace
      parts of the string, simply return the replacement string in your block.
-     
+    
      In other languages:
      Dutch: [Tekst] patroon: [Tekst] verwerk: [Codeblok] opties: [Tekst] | Past reguliere expressie toe.
 .fi
@@ -1347,7 +1346,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Same as pattern:process:options: but without the options, no flags will
      be send to the regex engine.
-     
+    
      In other languages:
      Dutch: [Tekst] patroon: [Tekst] verwerk: [Codeblok] | Past reguliere expressie toe.
 .fi
@@ -1357,11 +1356,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns True if the other string is a substring.
-     
+    
      In other languages:
      Dutch: [Tekst] bevat: [Tekst]
      geeft Waar terug als het ontvangende tekstobject
-     de aangegeven tekst bevat
+     de aangegeven tekst bevat.
 .fi
 .BR.BR.BR
 
@@ -1376,6 +1375,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ☞ match := 'Hello World' matches: '[:space:]'.
     
+     In other languages:
+     Dutch: [Tekst] patroon: [Tekst]
+     Geeft Waar terug als het ontvangende tekstobject overeenkomt
+     met de reguliere uitdrukking.
 .fi
 .BR.BR.BR
 
@@ -1391,6 +1394,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ' hello ' remove surrounding spaces.
     
+     In other languages:
+     Dutch: [Tekst] verwijder omliggende spaties | verwijderd witruimte links en rechts.
 .fi
 .BR.BR.BR
 
@@ -1398,6 +1403,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Converts string to a number.
+    
+     In other languages:
+     Dutch: [Tekst] getal | Geeft de getalwaarde van de tekst of anders 0.
 .fi
 .BR.BR.BR
 
@@ -1405,6 +1413,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Converts string to boolean
+    
+     In other languages:
+     Dutch: [Tekst] boolean | Geeft de booleaanse waarheid van de tekst.
 .fi
 .BR.BR.BR
 
@@ -1426,6 +1437,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      a := 'abc' characters.
      a count.
+    
+     In other languages:
+     Dutch: [Tekst] letters | Geeft het aantal letters dat de tekst bevat.
 .fi
 .BR.BR.BR
 
@@ -1433,6 +1447,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns an array of bytes representing the string.
+    
+     In other languages:
+     Dutch: [Tekst] bytereeks | Geeft de bytes als reeks waaruit de tekst bestaat.
 .fi
 .BR.BR.BR
 
@@ -1440,6 +1457,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Appends a raw byte to a string.
+    
+     In other languages:
+     Dutch: [Tekst] voeg byte toe: [Getal] | Voegt bytewaarde aangegeven door getal toe aan tekst.
 .fi
 .BR.BR.BR
 
@@ -1447,10 +1467,15 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Compares a string using the UTF-8 compatible strcmp function.
+     Returns less than zero if receiving object comes before specified string,
+     higher than zero if receiving string comes after and 0 if equal.
     
      Usage:
     
      word compare: other.
+    
+     In other languages:
+     Dutch: [Tekst] vergelijk: [Tekst] | Geeft <0 terug als ontvanger voor tekst komt, >0 erna, =0 gelijk.
 .fi
 .BR.BR.BR
 
@@ -1460,6 +1485,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Returns True if the first String comes before the latter
      alphabetically. The actual comparison is based on the UTF-8 compatible
      function strcmp.
+    
+     In other languages:
+     Dutch: [Tekst] < [Tekst] | Geeft Waar als eerste voor tweede komt alfabetisch.
 .fi
 .BR.BR.BR
 
@@ -1469,6 +1497,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Returns True if the first String comes before or at the same
      position as the latter alphabetically. The actual comparison is based on the UTF-8 compatible
      function strcmp.
+    
+     In other languages:
+     Dutch: [Tekst] ≤ [Tekst] | Geeft Waar als eerste voor tweede komt alfabetisch of gelijk.
 .fi
 .BR.BR.BR
 
@@ -1478,6 +1509,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Returns True if the first String comes after the latter
      alphabetically. The actual comparison is based on the UTF-8 compatible
      function strcmp.
+    
+     In other languages:
+     Dutch: [Tekst] > [Tekst] | Geeft Waar als eerste na tweede komt alfabetisch.
 .fi
 .BR.BR.BR
 
@@ -1487,6 +1521,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Returns True if the first String comes after or at the same position as the latter
      alphabetically. The actual comparison is based on the UTF-8 compatible
      function strcmp.
+    
+     In other languages:
+     Dutch: [Tekst] ≥ [Tekst] | Geeft Waar als eerste gelijk of na tweede komt alfabetisch.
 .fi
 .BR.BR.BR
 
@@ -1498,6 +1535,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Returns the hash of the recipient String using the specified key.
      The default hash in Citrine is the SipHash which is also used internally.
      SipHash can protect against hash flooding attacks.
+    
+     In other languages:
+     Dutch: [Tekst] kluts [Tekst] | Geeft de kluts (SipHash) terug voor de gespecificeerde sleutel
 .fi
 .BR.BR.BR
 
@@ -1518,6 +1558,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
      { :a :b ↲ a + b. } apply: 1 and: 2.
      { :a :b :c ↲ a + b + c. } apply: 1 and: 2 and: 3.
     
+     In other languages:
+     Dutch: een letterlijk codeblok begint met { en eindigt met }.
+     De parameters komen na de openingsaccolade en worden voorafgegaan door
+     een dubbele punt.
 .fi
 .BR.BR.BR
 
@@ -1527,6 +1571,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Runs a block of code using the specified object as a parameter.
      If you run a block using the messages 'run' or 'apply:', me/my will
      refer to the block itself instead of the containing object.
+    
+     In other languages:
+     Dutch: [Codeblok] toepassen: [Object] | Start het codeblok met het opgegeven object als argument.
 .fi
 .BR.BR.BR
 
@@ -1543,6 +1590,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ☞ x := 0.
      { x add: 1. } while: { ↲ (x < 6). }.
+    
+     In other languages:
+     Dutch: [Codeblok] zolang: [Codeblok]
+     Draait het codeblok net zolang totdat de uitkomst van het opgegeven blok negatief wordt.
 .fi
 .BR.BR.BR
 
@@ -1557,9 +1608,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
      the greeting.
     
      Usage:
-     
+    
      { ✎ write: 'Hello World'. } run.
-     
+    
+     In other languages:
+     Dutch: [Codeblok] start. | Start het blok code.
 .fi
 .BR.BR.BR
 
@@ -1577,13 +1630,16 @@ The following messages are part of the Core API of the Citrine Programming Langu
      multiplier to use in the formula. This way, you could create a block
      building 'formula blocks'. This is how you implement use closures
      in Citrine.
-     
+    
      Usage:
-     
+    
      shout := { ✎ write: (my message + '!!!'). }.
      shout set: 'message' value: 'hello'.
      shout run.
     
+     In other languages:
+     Dutch: [Codeblok] gebruik: [Tekst] waarde: [Object]
+     Stelt een variabele in die binnen het blok bruikbaar wordt.
 .fi
 .BR.BR.BR
 
@@ -1598,10 +1654,21 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      {
-       thisBlock error: 'oops!'.
+       this code block error: 'oops!'.
      } catch: { :errorMessage
        ✎ write: errorMessage.
      }, run.
+    
+     In other languages:
+     Dutch: [Codeblok] fout: [Object] | Laat een kunstmatige een fout of uitzondering optreden.
+     Om te verwijzen naar het huidige blok code gebruik: dit codeblok.
+     Voorbeeld:
+    
+     {
+       dit codeblock fout: 'oeps!'.
+     } afhandelen: { :fout
+       ✎ schrijf: fout.
+     }, start.
 .fi
 .BR.BR.BR
 
@@ -1619,6 +1686,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
      } catch: { :e
         ✎ write: e, end.
      }, run.
+    
+     In other languages:
+     Dutch: [Codeblok] afhandelen: [Codeblok]
+     Stelt een codeblok in dat gebruikt moet worden door het ontvangende blok
+     indien er een fout opgetreden is.
 .fi
 .BR.BR.BR
 
@@ -1628,6 +1700,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Returns a string representation of the Block. This basic behavior, part
      of any object will just return [Block]. Other objects typically override this
      behavior with more useful implementations.
+    
+     In other languages:
+     Dutch: [Codeblok] tekst | Geeft tekstuele weergave van een codeblok.
 .fi
 .BR.BR.BR
 
@@ -1658,6 +1733,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ☞ todo := List ← 'dishes' ; 'cleaning'.
     
+     In other languages:
+     Dutch: Reeks nieuw. Maakt een nieuwe reeks.
+     Gebruik ← om een lijst te maken en direct te vullen.
+     Voorbeeld: ☞ oneven := Reeks ← 1 ; 3 ; 5.
 .fi
 .BR.BR.BR
 
@@ -1688,6 +1767,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ☞ todo := List ← 'dishes' ; 'cleaning'.
     
+     In other languages:
+     Dutch: Reeks nieuw. Maakt een nieuwe reeks.
+     Gebruik ← om een lijst te maken en direct te vullen.
+     Voorbeeld: ☞ oneven := Reeks ← 1 ; 3 ; 5.
+    
 .fi
 .BR.BR.BR
 
@@ -1695,6 +1779,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns the string description for this object type.
+    
+     In other languages:
+     Dutch: [Reeks] type. | Geeft een beschrijving van het object.
     
 .fi
 .BR.BR.BR
@@ -1711,10 +1798,12 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      numbers := List new.
      numbers append: 3.
-     numbers add: 3.
      numbers ; 3.
      numbers • 3.
-     
+    
+     In other languages:
+     Dutch: [Reeks] toevoegen: [Object]. | Voegt iets toe aan een reeks.
+     Alternatieve notaties: • of ;.
 .fi
 .BR.BR.BR
 
@@ -1723,12 +1812,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Returns the minimum value in a list.
      In the example this message will return the number 2.
-     
+    
      Usage:
     
      a := List ← 8 ; 4 ; 2 ; 16.
      m := a minimum.
     
+     In other languages:
+     Dutch: [Reeks] maximum | Geeft de laagste waarde uit de reeks terug.
 .fi
 .BR.BR.BR
 
@@ -1742,6 +1833,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      a := List ← 8 ; 4 ; 2 ; 16.
      m := a maximum.
+    
+     In other languages:
+     Dutch: [Reeks] maximum | Geeft de hoogste waarde uit de reeks terug.
     
 .fi
 .BR.BR.BR
@@ -1763,11 +1857,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
        :key :filename :files
        ✎ write: filename.
      }.
-     
+    
      files each: {
        :key :filename :files
        ✎ write: filename.
      }.
+    
+     In other languages:
+     Dutch: [Reeks] lijst: [Codeblok] | Maakt van een reeks
 .fi
 .BR.BR.BR
 
@@ -1783,6 +1880,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      a := List ← 1 ; 2 ; 3.
     
+     In other languages:
+     Dutch: [Reeks] ← [Element1] ; [Element2] ; ... | De pijl maakt een nieuwe reeks en voegt het eerste
+     element direct toe, opvolgende elementen kunnen worden gescheiden door puntkomma's (;), hiermee
+     voegt men telkens een nieuw element toe aan de reeks.
 .fi
 .BR.BR.BR
 
@@ -1798,6 +1899,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      a := List new.
      a append: 1.
      a prepend: 3.
+    
+     In other languages:
+     Dutch: [Reeks] invoegen: [Object] | Voegt het aangegeven object in aan het begin van de reeks.
 .fi
 .BR.BR.BR
 
@@ -1813,6 +1917,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
      collection := List new.
      collection append: 1, append: 2, append 3.
      collection join: ','.
+    
+     In other languages:
+     Dutch: [Reeks] samenvoegen: [Tekst] | Maakt een tekst door
+     reekselementen samen te voegen met gespecificeerde koppelteken(s).
 .fi
 .BR.BR.BR
 
@@ -1833,30 +1941,42 @@ The following messages are part of the Core API of the Citrine Programming Langu
      ☞ fruits  := List ← 'apples' ; 'oranges' ; 'bananas'.
      ☞ oranges := fruits position: 1.
      ☞ oranges := fruits ? 1.
+    
+     In other languages:
+     Dutch: [Reeks] positie: [Getal] | Geeft het object op de aangegeven plek in de reeks.
 .fi
 .BR.BR.BR
 
 .B [List] first.
 .nf
-     
+    
      Returns the first element of the list.
      If the list is empty, Nil will be returned.
+    
+     In other languages:
+     Dutch: [Reeks] eerste | Geef het eerste element uit de reeks.
 .fi
 .BR.BR.BR
 
 .B [List] last.
 .nf
-     
+    
      Returns the last element of the list.
      If the list is empty, Nil will be returned.
+    
+     In other languages:
+     Dutch: [Reeks] laatste | Geeft het laatste element uit de reeks.
 .fi
 .BR.BR.BR
 
 .B [List] second last.
 .nf
-     
+    
      Returns the second last element of the list.
      If the list is empty, Nil will be returned.
+    
+     In other languages:
+     Dutch: [Reeks] op-een-na-laatste | Geeft het op-een-na-laatste element uit reeks.
 .fi
 .BR.BR.BR
 
@@ -1872,6 +1992,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ☞ fruits := List new.
      ☞ fruits put: 'apples' at: 5.
+    
+     In other languages:
+     Dutch: [Reeks] zet: [Object] bij: [Getal]
+     Plaatst het object op de aangegeven positie in de reeks.
 .fi
 .BR.BR.BR
 
@@ -1879,6 +2003,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Pops off the last element of the array.
+    
+     In other languages:
+     Dutch: [Reeks] eraf | Schuift laatste element uit reeks af en geeft het terug.
 .fi
 .BR.BR.BR
 
@@ -1894,6 +2021,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ☞ x := List ← 1 ; 2 ; 3.
      ☞ x - 1.
+    
+     In other languages:
+     Dutch: [Reeks] - [Getal] | Verwijder het element op de aangegeven plek.
 .fi
 .BR.BR.BR
 
@@ -1901,6 +2031,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Shifts off the first element of the list.
+    
+     In other languages:
+     Dutch: [Reeks] afschuiven | Schuift het eerste element van de reeks.
 .fi
 .BR.BR.BR
 
@@ -1908,6 +2041,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns the number of elements in the list.
+    
+     In other languages:
+     Dutch: [Reeks] aantal | Geeft het aantal elementen in de reeks.
 .fi
 .BR.BR.BR
 
@@ -1916,6 +2052,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Copies part of an array indicated by from and to and
      returns a new array consisting of a copy of this region.
+    
+     In other languages:
+     Dutch: [Reeks] van: [Getal] lengte: [Getal] | Geeft subreeks.
 .fi
 .BR.BR.BR
 
@@ -1940,6 +2079,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
          length: 2
          with: ( List ← 'cinnamon' ; 'pineapple' ).
     
+     In other languages:
+     Dutch: [Reeks] vervang: [Getal] lengte: [Getal] door: [Reeks]
+     Vervangt een deel van de reeks door een andere reeks.
 .fi
 .BR.BR.BR
 
@@ -1948,6 +2090,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Returns a new list, containing elements of itself and the other
      list.
+    
+     In other languages:
+     Dutch: [Reeks] + [Reeks] | Geeft de reeks die bestaat uit de samenvoeging van gegeven reeksen.
 .fi
 .BR.BR.BR
 
@@ -1965,6 +2110,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
      ☞ city        := List ← 'London' ; 'Paris' ; 'Berlin'.
      ☞ temperature := List ← '15' ; '16' ; '15'.
      ☞ weather := temperature by: city.
+    
+     In other languages:
+     Dutch: [Reeks] per: [Reeks]
+     Maakt een Lijst door elementen uit de eerste reeks te koppelen
+     aan de elementen op dezelfde plek uit de tweede reeks.
 .fi
 .BR.BR.BR
 
@@ -1987,6 +2137,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      ☞ a := List ← 1 ; 2 ; 3.
      ☞ b := a copy.
      b put: 999 at: 1.
+    
+     In other languages:
+     Dutch: [Reeks] kopieer | Maakt een kopie van de reeks.
 .fi
 .BR.BR.BR
 
@@ -1997,12 +2150,16 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Sorts the contents of an list using a sort block.
      Uses qsort.
+    
+     In other languages:
+     Dutch: [Reeks] sorteer: [Codeblok]
+     Sorteert de reeks door de elementen door het codeblok te halen.
 .fi
 .BR.BR.BR
 
 .B [List] string
 .nf
-     
+    
      Returns a string representation of the list and its contents.
      This representation will be encoded in the Citrine language itself and can
      therefore be evaluated again.
@@ -2011,10 +2168,15 @@ The following messages are part of the Core API of the Citrine Programming Langu
      attempting to write a List using a Pen.
     
      Usage:
-     
+    
      ☞ a := List ← 'hello' ; 'world'.
      ☞ b := a string.
      ☞ c := b evaluate.
+    
+     In other languages:
+     Dutch: [Reeks] tekst
+     Geeft een tekstuele versie van de reeks terug. Deze tekst kan opnieuw worden
+     ingelezen door Citrine om er een reeks van te maken (evalueer).
 .fi
 .BR.BR.BR
 
@@ -2026,6 +2188,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      ☞ a := List new fill: 42 with: 'x'.
+    
+     In other languages:
+     Dutch: [Reeks] vul: [Getal] met: [Object]
+     Vult de reeks op met een gespecificeerd aantal elementen.
 .fi
 .BR.BR.BR
 
@@ -2037,6 +2203,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      If not, the index number -1 will be returned. Note that the comparison
      will be performed by converting both values to strings.
     
+     In other languages:
+     Dutch: [Reeks] vind: [Object]
+     Geeft de positie van het object terug of -1 als niet gevonden.
 .fi
 .BR.BR.BR
 
@@ -2049,6 +2218,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ☞ files := Map new.
      ☞ files put: 'readme.txt' at: 'textfile'.
+    
+     In other languages:
+     Dutch: Lijst een verzameling van gepaarde elementen in de vorm sleutel = waarde.
 .fi
 .BR.BR.BR
 
@@ -2057,6 +2229,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Returns the string 'Map'.
     
+     In other languages:
+     Dutch: [Lijst] tekst | Geeft een tekstuele beschrijving van de Lijst ('Lijst').
 .fi
 .BR.BR.BR
 
@@ -2069,6 +2243,12 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      map put: 'hello' at: 'world'.
     
+     In other languages:
+     Dutch: [Lijst] zet: [Object] bij: [Object]
+     Zet het gespecificeerde object element bij de plek die bekend staat als
+     het andere object. Net als bij een reeks, alleen in dit geval is het tweede
+     Object de sleutel waarmee het eerste object weer uit de lijst gevist kan
+     worden.
 .fi
 .BR.BR.BR
 
@@ -2088,9 +2268,23 @@ The following messages are part of the Core API of the Citrine Programming Langu
     	Hawaii: 12.99,
     	QuattroFormaggi: 13.00.
     
-     ✎ write: ( menu ? 'Hawaii' ), brk. 
+     ✎ write: ( menu ? 'Hawaii' ), brk.
      ✎ write: ( menu Margherita ), brk.
     
+     In other languages:
+    
+     Dutch: [Lijst] [Object]: [Object]
+     Snelle en leesbare notatie om objecten toe te voegen aan een lijst.
+     Elk bericht dat niet wordt herkend wordt door de lijst als een
+     sleutel beschouwd, het opvolgende object zal op de plek worden
+     gezet in de lijst die door de sleutel wordt aangegeven. Dus om een
+     menukaart te vullen kan men zeggen:
+    
+     ☞ menu := Lijst nieuw.
+     menu pannekoek: 10. (hier kopppelen we pannekoek aan 10)
+    
+     Om nu op te vragen hoeveel een pannekoek kost schrijven we:
+     ☞ prijs := menu pannekoek.
 .fi
 .BR.BR.BR
 
@@ -2099,6 +2293,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Deletes the entry, identified by the key specified in [String], from
      the map.
+    
+     In other languages:
+     Dutch: [Lijst] - [Tekst] | Verwijderd de ingang voor aangegeven sleutel.
 .fi
 .BR.BR.BR
 
@@ -2119,6 +2316,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      cities := weather entries sort: {
      	:a :b  ↲ (a compare: b).
      }.
+    
+     In other languages:
+     Dutch: [Lijst] ingangen | Geeft alle sleutels uit de lijst als een reeks.
 .fi
 .BR.BR.BR
 
@@ -2138,6 +2338,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      temperatures := weather values sort: {
      	:a :b  ↲ (a compare: b).
      }.
+    
+     In other languages:
+     Dutch: [Lijst] waarden | Geeft alle waarden uit de lijst als een reeks.
 .fi
 .BR.BR.BR
 
@@ -2145,6 +2348,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Retrieves the value specified by the key from the map.
+    
+     In other languages:
+     Dutch: [Lijst] bij: [Object] | Geeft de waarde bij de bijbehorende sleutel.
 .fi
 .BR.BR.BR
 
@@ -2153,6 +2359,8 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Alias for [Map] at: [Key].
     
+     In other languages:
+     Dutch: [Lijst] ? [Object] | Geeft de waarde bij de sleutel.
 .fi
 .BR.BR.BR
 
@@ -2160,6 +2368,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns the number of elements in the map.
+    
+     In other languages:
+     Dutch: [Lijst] aantal | Geeft het aantal zaken op de lijst.
 .fi
 .BR.BR.BR
 
@@ -2168,6 +2379,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Iterates over the map, passing key-value pairs to the specified block.
      Note that within an each/map block, '⛏' and '⚿' refer to the collection.
+    
+     In other languages:
+     Dutch: [Lijst] elk: [Codeblok] | Past het blok code toe op elk paar uit de lijst.
 .fi
 .BR.BR.BR
 
@@ -2179,7 +2393,7 @@ The following messages are part of the Core API of the Citrine Programming Langu
      comparison. In case of a map or array this means the comparison
      will be based on the serialized structure.
      The example will output: True False False False False.
-     
+    
      Usage:
     
      ☞ shop := (Map new
@@ -2192,6 +2406,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
      ✎ write: (shop has: 'computers'), end.
      ✎ write: (shop has: 'compute'), end.
      ✎ write: (shop has: '2computer'), end.
+    
+     In other languages:
+     Dutch: [Lijst] heeft: [Object]
+     Beantwoord de vraag of het object op de lijst staat met Waar of Onwaar.
 .fi
 .BR.BR.BR
 
@@ -2210,18 +2428,24 @@ The following messages are part of the Core API of the Citrine Programming Langu
      x := m string.
      ✎ write: (Map new).
     
+     In other languages:
+     Dutch: [Lijst] tekst | Geeft tekstuele weergave van lijst (kan weer worden geevalueerd)
 .fi
 .BR.BR.BR
 
 .B File
 .nf
-     
+    
      Represents a File object.
      Creates a new file object based on the specified path.
-     
+    
      Usage:
-     
+    
      File new: '/example/path/to/file.txt'.
+    
+     In other languages:
+     Dutch: Bestand nieuw. Maakt een nieuw bestand.
+     Voorbeeld: ☞ bestand := Bestand nieuw: 'voorbeeld.txt'.
 .fi
 .BR.BR.BR
 
@@ -2231,6 +2455,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Returns the path of a file. The file object will respond to this
      message by returning a string object describing the full path to the
      recipient.
+    
+     In other languages:
+     Dutch: [bestand] pad.
+     Geeft de locatie van het bestand terug.
 .fi
 .BR.BR.BR
 
@@ -2241,6 +2469,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
      with this file, this message will return the path of the file on the file system.
      If no path has been associated with the file, the string [File (no path)] will
      be returned.
+    
+     In other languages:
+     Dutch: [bestand] tekst. Geeft tekstrepresentatie van bestand terug.
+     Meestal is dit het pad.
 .fi
 .BR.BR.BR
 
@@ -2257,6 +2489,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ☞ data := File new: '/path/to/mydata.csv', read.
     
+     In other languages:
+     Dutch: [bestand] lees.
+     Leest het bestand in en geeft inhoud terug als tekst.
+     Voorbeeld: gegevens := Bestand nieuw: 'test.txt', lees.
 .fi
 .BR.BR.BR
 
@@ -2269,12 +2505,16 @@ The following messages are part of the Core API of the Citrine Programming Langu
      be a better idea to use the streaming API if possible (see readBytes etc.).
      In the example we write the XML snippet in variable data to a file
      called myxml.xml in the current working directory.
-     
+    
      Usage:
-     
+    
      ☞ data := '<xml>hello</xml>'.
      File new: 'myxml.xml', write: data.
     
+     In other languages:
+     Dutch: [bestand] schrijf: gegevens.
+     Schrijf inhoud variabele naar bestand.
+     Voorbeeld: Bestand nieuw: 'test.txt', schrijf: 'inhoud'.
 .fi
 .BR.BR.BR
 
@@ -2284,6 +2524,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Appends content to a file. The file object responds to this message like it
      responds to the write-message, however in this case the contents of the string
      will be appended to the existing content inside the file.
+    
+     In other languages:
+     Dutch: [bestand] toevoegen: gegevens.
+     Voegt inhoud toe aan bestand.
 .fi
 .BR.BR.BR
 
@@ -2291,6 +2535,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns True if the file exists and False otherwise.
+    
+     In other languages:
+     Dutch: [bestand] bestaat.
+     Antwoordt Waar als het bestand bestaat en Onwaar als het bestaat
+     niet bestaat.
 .fi
 .BR.BR.BR
 
@@ -2298,6 +2547,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Includes the file as a piece of executable code.
+    
+     In other languages:
+     Dutch: [bestand] invoegen.
+     Voegt het bestand in als uitvoerbare programmacode.
+     De inhoud van het bestand zal worden uitgevoerd.
 .fi
 .BR.BR.BR
 
@@ -2305,6 +2559,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Deletes the file.
+    
+     In other languages:
+     Dutch: [bestand] verwijderen.
 .fi
 .BR.BR.BR
 
@@ -2312,6 +2569,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns the size of the file.
+    
+     In other languages:
+     Dutch: [bestand] grootte.
+     Geeft de bestandsgrootte terug van het bestand.
 .fi
 .BR.BR.BR
 
@@ -2325,6 +2586,15 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ☞ f := File new: '/path/to/file'.
      f open: 'r+'.
+    
+     In other languages:
+     Dutch: [bestand] openen: modus.
+     Opent het bestand in de gegeven modus (r+) voor
+     lezen en schrijven.
+     Voorbeeld:
+     ☞ f := Bestand nieuw: 'test.txt'.
+     f openen: 'r+'.
+     f sluiten.
 .fi
 .BR.BR.BR
 
@@ -2339,6 +2609,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
      ☞ f := File new: '/path/to/file.txt'.
      f open: 'r+'.
      f close.
+    
+     In other languages:
+     Dutch: [bestand] sluiten.
+     Sluit het geopende bestand.
+     Voorbeeld:
+     ☞ f := Bestand nieuw: 'test.txt'.
+     f openen: 'r+'.
+     f sluiten.
 .fi
 .BR.BR.BR
 
@@ -2355,6 +2633,17 @@ The following messages are part of the Core API of the Citrine Programming Langu
      f open: 'r+'.
      ☞ x := f read bytes: 10.
      f close.
+    
+     In other languages:
+     Dutch: [bestand] lees bytes: [getal].
+     Leest aantal bytes uit bestand en geeft dit terug.
+     In het onderstaande voorbeeld lezen we de eerste 10
+     bytes uit het bestand test.txt.
+     Voorbeeld:
+     ☞ f := Bestand nieuw: 'test.txt'.
+     f openen: 'r+'.
+     ☞ x := f lees bytes: 10.
+     f sluiten.
 .fi
 .BR.BR.BR
 
@@ -2373,6 +2662,15 @@ The following messages are part of the Core API of the Citrine Programming Langu
      ☞ n := f write bytes: 'Hello World'.
      f close.
     
+     In other languages:
+     Dutch: [bestand] schrijf bytes: [tekst].
+     Schrijft bytes naar het bestand. In het onderstaande voorbeeld
+     schrijven we de tekst 'hallo' naar het bestand test.txt.
+     Voorbeeld:
+     ☞ f := Bestand nieuw: 'test.txt'.
+     f openen: 'r+'.
+     ☞ x := f schrijf bytes: 'hallo'.
+     f sluiten.
 .fi
 .BR.BR.BR
 
@@ -2388,6 +2686,16 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      file open: 'r', seek: 10.
+    
+     In other languages:
+     Dutch: [bestand] zoeken: [getal].
+     Verplaatst de cursor naar de gespecificeerde positie in het bestand.
+     In onderstaand voorbeeld openen we een bestand voor lezen en verplaatsen
+     we de cursor naar positie 10 (10 bytes ten opzichte van het
+     begin van het bestand). Een zoekwaarde kan negatief zijn.
+     Voorbeeld:
+    
+     f open: 'r', zoeken: 10.
 .fi
 .BR.BR.BR
 
@@ -2405,6 +2713,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      file rewind.
      ☞ y := file read bytes: 10.
     
+     In other languages:
+     Dutch: [bestand] terugspoelen.
+     Plaatst de cursor weer aan het beginpunt van het bestand.
 .fi
 .BR.BR.BR
 
@@ -2424,6 +2735,9 @@ The following messages are part of the Core API of the Citrine Programming Langu
      file end.
      ☞ x := file seek: -10, read bytes: 10.
     
+     In other languages:
+     Dutch: [bestand] terugspoelen.
+     Plaatst de cursor aan het einde van het bestand.
 .fi
 .BR.BR.BR
 
@@ -2435,6 +2749,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Attempts to unlock a file. This message is non-blocking, on failure
      it will immediately return. Answers True if the file has been
      unlocked succesfully. Otherwise, the answer is False.
+    
+     In other languages:
+     Dutch: [bestand] ontgrendel.
+     Poogt het bestand te ontgrendelen. Geeft Waar terug als poging slaagt.
 .fi
 .BR.BR.BR
 
@@ -2445,6 +2763,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
      This message is non-blocking, on failure
      it will immediately return. Answers True if the lock has been
      acquired and False otherwise.
+    
+     In other languages:
+     Dutch: [bestand] vergrendel.
+     Poogt het bestand te vergrendelen. Geeft Waar terug als poging slaagt.
 .fi
 .BR.BR.BR
 
@@ -2461,6 +2783,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ☞ files := File list: '/tmp/testje'.
     
+    
+     In other languages:
+     Dutch: Bestand lijst: [tekst]
+     Geeft de inhoud van de opgegeven map terug.
+    
+     Voorbeeld:
+    
+     bestanden := Bestand lijst: '/mijnmap'.
 .fi
 .BR.BR.BR
 
@@ -2476,11 +2806,33 @@ The following messages are part of the Core API of the Citrine Programming Langu
      GarbageCollector, to invoke use:
     
      Program clean memory.
+     
+     In other languages:
+     Dutch: Programma vegen.
+     Ruimt ongebruikt geheugen op.
 .fi
 .BR.BR.BR
 
 .B [Program] memory
 .nf
+     
+     Returns memory statistics.
+     Array with:
+     0: allocated memory
+     1: number of objects
+     2: number of sticky objects
+     3: number of remaining objects
+     4: number of removed objects
+    
+     In other languages:
+     Dutch: Programma geheugen.
+     Geeft informatie over geheugengebruik terug.
+     Geeft reeks met op positie
+     0: gealloceerde ruimte,
+     1: aantal objecten
+     2: aantal vastgezette objecten
+     3: aantal overgebleven objecten
+     4: aantal opgeruimde objecten 
 .fi
 .BR.BR.BR
 
@@ -2489,6 +2841,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Sets the memory limit, if this limit gets exceeded the program will produce
      an out-of-memory error.
+     
+     In other languages:
+     Dutch: Programma geheugen: [getal].
+     Stelt geheugenlimiet in, in bytes.
 .fi
 .BR.BR.BR
 
@@ -2502,6 +2858,15 @@ The following messages are part of the Core API of the Citrine Programming Langu
      1 - Activate Garbage Collector (default)
      4 - Activate Garbage Collector for every single step (testing only)
      8 - Activate experimental Pool Memory Allocation Manager (experimental!)
+     
+     In other languages:
+     Dutch: Programma opruimingsniveau: [getal].
+    
+     Mogelijke instellingen:
+     0 - Geen opruiming
+     1 - Standaard opruiming
+     4 - Geheugen opruimen bij elke stap in het programma
+     8 - Gebruik maken van gedeelde geheugen blokken (experimenteel)
 .fi
 .BR.BR.BR
 
@@ -2514,6 +2879,14 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ☞ files := Shell ls
     
+     In other languages:
+     Dutch: Programma opdrachtregel: [Tekst].
+     Geeft een tekst door aan de opdrachtregel van het
+     besturingsysteem. Deze opdracht zal door het systeem
+     worden afgehandeld.
+     
+     Voorbeeld (voor Linux/UNIX):
+     ☞ bestanden := Opdrachtregel ls.
 .fi
 .BR.BR.BR
 
@@ -2521,6 +2894,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Obtains an argument from the CLI invocation.
+     
+     In other languages:
+     Dutch: Programma argument: [Getal].
+     Geeft het middels opdrachtregel opgegeven argument terug
+     op aangegeven positie.
 .fi
 .BR.BR.BR
 
@@ -2528,6 +2906,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns the number of CLI arguments passed to the script.
+     
+     In other languages:
+     Dutch: Programma argumenten.
+     Geeft aantal middels opdrachtregel opgegeven argumenten terug.
 .fi
 .BR.BR.BR
 
@@ -2535,6 +2917,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
      
      Exits program immediately.
+     
+     In other languages:
+     Dutch: Programma einde.
+     Stopt de uitvoering van het programma.
 .fi
 .BR.BR.BR
 
@@ -2546,6 +2932,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      ☞ x := Command setting: 'MY_PATH_VAR'.
+     
+     In other languages:
+     Dutch: Programma instelling: [Tekst].
+     Geeft de omgevingsvariabele terug bij de opgegeven sleutel.
 .fi
 .BR.BR.BR
 
@@ -2553,6 +2943,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Sets the value of an environment variable.
+     
+     In other languages:
+     Dutch: Programma instelling: [Tekst] waarde: [Tekst].
+     Stelt een omgevingsvariabele in met de opgegeven waarde.
 .fi
 .BR.BR.BR
 
@@ -2570,7 +2964,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
      ✎ write: 'What is your name ?'.
      ☞ x := Program ask.
      ✎ write: ('Hello you' you: x), end.
-    
+     
+     In other languages:
+     Dutch: Programma vraag.
+     Pauzeert de uitvoering van het programma in afwachting van
+     gebruikersinvoer en geeft de invoer als Tekst terug na afloop.
 .fi
 .BR.BR.BR
 
@@ -2586,9 +2984,6 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Also note that the trailing newline (in case of CLI applications) will
      be stripped so you don't have to do this manually. This allows for
      one-liners like the one in the example below.
-     The input message is not allowed if message countdown has been activated
-     (Program remainingMessages:) because it might wait for content and this
-     is not allowed in a countdown sandbox.
     
      Usage:
     
@@ -2596,7 +2991,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ☞ x := Program input.
      ✎ write: x.
-    
+     
+     In other languages:
+     Dutch: Programma invoer.
+     Leest alle ruwe invoer vanuit STDIN.
 .fi
 .BR.BR.BR
 
@@ -2604,6 +3002,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Flushes the STDOUT output buffer.
+     
+     In other languages:
+     Dutch: Programma spoelen.
+     Spoelt de STDOUT buffer. Alles wat in de buffer zit zal naar
+     STDOUT worden geschreven en de buffer zal leeggemaakt worden.
 .fi
 .BR.BR.BR
 
@@ -2612,6 +3015,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Logs the specified message string using syslog using log level LOG_ERR.
      Use this to log errors.
+     
+     In other languages:
+     Dutch: Programma fout: [Tekst].
+     Schrijft een fout weg in het logboek van het programma.
 .fi
 .BR.BR.BR
 
@@ -2628,7 +3035,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      { ↲ file lock. }
      false: { ⏰ wait: 1. }.
-    
+     
+     In other languages:
+     Dutch: Moment wacht: [Getal].
+     Wacht het aangegeven aantal seconde alvorens de uitvoering van
+     het programma te hervatten.
 .fi
 .BR.BR.BR
 
@@ -2636,6 +3047,12 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Creates a new clock instance from a UNIX time stamp.
+     
+     In other languages:
+     Dutch: Moment nieuw: [Getal].
+     Maakt een nieuw tijdsobject aan en stelt de tijd in
+     aan de hand van het UNIX time stamp getal dat wordt
+     meegegeven.
 .fi
 .BR.BR.BR
 
@@ -2652,6 +3069,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
      
      ☞ clock := Clock new: timestamp.
      ☞ copied := Clock new like: clock.
+     
+     In other languages:
+     Dutch: Moment zoals: [Moment].
+     Synchroniseert twee momenten. Stelt het eerste moment gelijk aan
+     het tweede.
 .fi
 .BR.BR.BR
 
@@ -2659,6 +3081,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Sets the time zone of the clock.
+     
+     In other languages:
+     Dutch: [Moment] zone: [Tekst].
+     Stelt de tijdzone van het moment in.
 .fi
 .BR.BR.BR
 
@@ -2666,6 +3092,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns time zone of the clock.
+     
+     In other languages:
+     Dutch: [Moment] zone: [Tekst].
+     Geeft de tijdzone van het moment terug.
 .fi
 .BR.BR.BR
 
@@ -2673,6 +3103,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Sets the year of the clock.
+     
+     In other languages:
+     Dutch: [Moment] jaar: [Getal].
+     Stelt het jaar van een moment in.
 .fi
 .BR.BR.BR
 
@@ -2680,6 +3114,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Sets the month of the clock.
+     
+     In other languages:
+     Dutch: [Moment] maand: [Getal].
+     Stelt de maand van een moment in.
 .fi
 .BR.BR.BR
 
@@ -2687,6 +3125,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Sets the day of the clock.
+     
+     In other languages:
+     Dutch: [Moment] dag: [Getal].
+     Stelt de dag van het moment in.
 .fi
 .BR.BR.BR
 
@@ -2694,6 +3136,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Sets the hour of the clock.
+     
+     In other languages:
+     Dutch: [Moment] uur: [Getal].
+     Stelt het korte wijzer van een moment in.
 .fi
 .BR.BR.BR
 
@@ -2701,6 +3147,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Sets the minute of the clock.
+     
+     In other languages:
+     Dutch: [Moment] minuut: [Getal].
+     Stelt de lange wijzer van een moment in.
 .fi
 .BR.BR.BR
 
@@ -2708,6 +3158,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Sets the second of the clock.
+     
+     In other languages:
+     Dutch: [Moment] seconde: [Getal].
+     Stelt de secondewijzer van het moment.
 .fi
 .BR.BR.BR
 
@@ -2715,6 +3169,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns year of the clock.
+     
+     In other languages:
+     Dutch: [Moment] jaar.
+     Geeft het jaar van het moment terug.
 .fi
 .BR.BR.BR
 
@@ -2722,6 +3180,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns month of the clock.
+     
+     In other languages:
+     Dutch: [Moment] maand.
+     Geeft de maand van het moment terug.
 .fi
 .BR.BR.BR
 
@@ -2729,6 +3191,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns day of the clock.
+     
+     In other languages:
+     Dutch: [Moment] dag.
+     Geeft de dag van het moment terug.
 .fi
 .BR.BR.BR
 
@@ -2736,6 +3202,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns hour of the clock.
+     
+     In other languages:
+     Dutch: [Moment] uur.
+     Geeft het uur van het moment terug.
 .fi
 .BR.BR.BR
 
@@ -2743,6 +3213,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns minute of the clock.
+     
+     In other languages:
+     Dutch: [Moment] minuut.
+     Geeft de minuut van het moment terug.
 .fi
 .BR.BR.BR
 
@@ -2750,6 +3224,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns second of the clock.
+     
+     In other languages:
+     Dutch: [Moment] seconde.
+     Geeft de seconde van het moment terug.
 .fi
 .BR.BR.BR
 
@@ -2757,6 +3235,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns day number of the year.
+     
+     In other languages:
+     Dutch: [Moment] jaardag.
+     Geeft het dag van het jaar terug waarop het moment
+     plaatsvindt.
 .fi
 .BR.BR.BR
 
@@ -2764,6 +3247,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns the week day number of the clock.
+     
+     In other languages:
+     Dutch: [Moment] weekdag.
+     Geeft het dag van de week terug waarop het moment
+     plaatsvindt.
 .fi
 .BR.BR.BR
 
@@ -2776,6 +3264,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
      Usage:
     
      ☞ time := Clock new time.
+     
+     In other languages:
+     Dutch: [Moment] tijd.
+     Geeft de UNIX tijd van het moment terug.
+     Let op! Dit is de tijd waarop het moment is gemaakt.
 .fi
 .BR.BR.BR
 
@@ -2783,6 +3276,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
 .nf
     
      Returns the week number of the clock.
+     
+     In other languages:
+     Dutch: [Moment] week.
+     Geeft de week van het jaar terug waarop het moment
+     plaatsvindt.
 .fi
 .BR.BR.BR
 
@@ -2791,6 +3289,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Returns a string describing the date and time represented by the clock object
      according to the specified format. See strftime for format syntax details.
+     
+     In other languages:
+     Dutch: [Moment] formaat: [Tekst].
+     Geeft een beschrijving terug van het moment als tekst volgens het ingesteld
+     formaat. Het formaat dient opgegeven te zijn volgens de strftime methode.
 .fi
 .BR.BR.BR
 
@@ -2810,6 +3313,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ✎ write: ⏰, end.
      ✎ write: ⏰ number, end.
+     
+     In other languages:
+     Dutch: [Moment] tekst.
+     Geeft een standaard tekstrepresentatie van het moment terug.
 .fi
 .BR.BR.BR
 
@@ -2829,6 +3336,10 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      ✎ write: ⏰, brk.
      ✎ write: ⏰ number, brk.
+     
+     In other languages:
+     Dutch: [Moment] getal.
+     Alias voor [Moment] tijd.
 .fi
 .BR.BR.BR
 
@@ -2863,6 +3374,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
      clock add: 3 minutes.
      clock add: 1 hour.
      clock add: 2 second.
+     
+     In other languages:
+     Dutch: [Moment] optellen: [Getal].
+     Verschuift het moment in de tijd op basis van het getal.
+     Het getal kan gekwalificeerd worden als minuten, uren of seconden.
 .fi
 .BR.BR.BR
 
@@ -2871,6 +3387,11 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Same as '[Clock] add:' but subtracts the number instead of adding it to
      the clock's time.
+     
+     In other languages:
+     Dutch: [Moment] aftrekken: [Getal].
+     Verschuift het moment in de tijd op basis van het getal.
+     Het getal kan gekwalificeerd worden als minuten, uren of seconden.
 .fi
 .BR.BR.BR
 
@@ -2879,20 +3400,32 @@ The following messages are part of the Core API of the Citrine Programming Langu
     
      Creates a new clock, by default a clock will be set to
      the UTC timezone having the current time.
+     
+     In other languages:
+     Dutch: [Moment] nieuw.
+     Maakt een nieuw moment aan voor het huidige tijdstip.
 .fi
 .BR.BR.BR
 
-.B [Pen] write: [String]
+.B ✎ write: [String]
 .nf
     
-     Writes string to console. 
+     Writes string to console.
+     
+     In other languages:
+     Dutch: ✎ schrijf: [Tekst].
+     Schrijft de opgegeven tekst naar STDOUT/console.
 .fi
 .BR.BR.BR
 
-.B [Pen] stop
+.B ✎ stop
 .nf
     
      Outputs a newline character.
+     
+     In other languages:
+     Dutch: ✎ stop.
+     Sluit een regel af met een einde-regel-symbool.
 .fi
 .BR.BR.BR
 

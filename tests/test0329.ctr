@@ -8,7 +8,7 @@
 	• (List ← 1 ; 2 ; 3 ; 4)
 	• (List ← 1 ; 2 ; 3 ; 4 ; 5)
 ) each: { :i :el
-	{ ✎ write: thisBlock. } * el count.
+	{ ✎ write: this code block. } * el count.
 	✎ stop.
 }) plaque, stop.
 

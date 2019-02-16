@@ -3,7 +3,7 @@
 Program tidiness: 4.
 {
 	✎ write: 'hi there!'.
-	thisBlock error: 'oops'.
+	this code block error: 'oops'.
 	✎ write: 'hi there!'.
 	{ ✎ write: 'dont print this'. } run.
 } catch: { :e 

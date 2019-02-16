@@ -2694,7 +2694,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 		/* me should always point to object, otherwise you have to store me in self and cant use in if */
 		ctr_assign_value_to_local(ctr_build_string_from_cstring( ctr_clex_keyword_me_icon ), my );
 	}
-	ctr_assign_value_to_local(ctr_build_string_from_cstring( "thisBlock" ), myself ); /* otherwise running block may get gc'ed. */
+	ctr_assign_value_to_local(ctr_build_string_from_cstring( CTR_DICT_THIS_BLOCK ), myself ); /* otherwise running block may get gc'ed. */
 	ctr_cwlk_subprogram++;
 	result = ctr_cwlk_run(codeBlockPart2);
 	ctr_cwlk_subprogram--;
@@ -2832,13 +2832,21 @@ ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * {
- *   thisBlock error: 'oops!'.
+ *   this code block error: 'oops!'.
  * } catch: { :errorMessage
  *   ✎ write: errorMessage.
  * }, run.
  *
  * In other languages:
  * Dutch: [Codeblok] fout: [Object] | Laat een kunstmatige een fout of uitzondering optreden.
+ * Om te verwijzen naar het huidige blok code gebruik: dit codeblok.
+ * Voorbeeld:
+ *
+ * {
+ *   dit codeblock fout: 'oeps!'.
+ * } afhandelen: { :fout
+ *   ✎ schrijf: fout.
+ * }, start.
  */
 ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
 	CtrStdFlow = argumentList->object;

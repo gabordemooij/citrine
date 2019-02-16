@@ -1,7 +1,7 @@
 {
 	☞ cat := Object new.
 	cat on: 'work' do: {
-		thisBlock error: 'Uncatched error has occurred.\nCats have personel for that!'.
+		this code block error: 'Uncatched error has occurred.\nCats have personel for that!'.
 		✎ write: 'dont print this!'.
 	}.
 	{ cat work. } run.

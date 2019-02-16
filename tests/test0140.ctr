@@ -8,7 +8,7 @@
 { ✎ write: 'aaa'. 
 	{
 
-		thisBlock error: 'Hi!'.
+		this code block error: 'Hi!'.
 		} run.
 
 

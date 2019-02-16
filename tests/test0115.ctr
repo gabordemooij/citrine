@@ -1,19 +1,19 @@
 {
-	thisBlock error: 'Dont fail.'.
+	this code block error: 'Dont fail.'.
 	unknown doSomething.
 } catch: {
 	✎ write: 'Caught!'.
 }, run.
 
 {
-	thisBlock error: 'Dont fail.'.
+	this code block error: 'Dont fail.'.
 	⚿ unknown doSomething.
 } catch: {
 	✎ write: 'Caught!'.
 }, run.
 
 {
-	thisBlock error: 'Dont fail.'.
+	this code block error: 'Dont fail.'.
 	unknown := 122.
 } catch: {
 	✎ write: 'Caught!'.
@@ -21,7 +21,7 @@
 
 
 {
-	thisBlock error: 'Dont fail.'.
+	this code block error: 'Dont fail.'.
 	True break.
 	✎ write: 'FAIL'.
 } catch: {
@@ -30,11 +30,11 @@
 
 {
 	{
-		thisBlock error: 'Dont fail.'.
+		this code block error: 'Dont fail.'.
 		True break.
 		✎ write: 'FAIL'.
 	} catch: { :x
-		(x = 'Dont fail.') true: { thisBlock error: 'Nested Caught!'. }.
+		(x = 'Dont fail.') true: { this code block error: 'Nested Caught!'. }.
 	}, run.
 } catch: { :e
 	✎ write: e.

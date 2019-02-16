@@ -2,7 +2,7 @@
 ☞ a := 0.
 {
 	✎ write: 'Block 1.\n'.
-	thisBlock error: 'Err'.
+	this code block error: 'Err'.
 	a := 1.
 } catch: {
 	✎ write: 'Catch Block.\n'.
