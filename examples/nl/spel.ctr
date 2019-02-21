@@ -1,0 +1,7 @@
+☞ x := Getal tussen: 1 en: 10.
+☞ gok := Programma vraag.
+(x = gok) waar: {
+	✎ schrijf: 'Goed geraden!'.
+}, anders: {
+	✎ schrijf: ('Nee, getal was: dit' dit: x).
+}.
