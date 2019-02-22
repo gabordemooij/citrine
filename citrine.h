@@ -13,7 +13,7 @@
 /**
  * Version information
  */
-#define CTR_VERSION "0.8.5"
+#define CTR_VERSION "0.9"
 
 /**
  * Define the Citrine tokens 
