@@ -4,7 +4,7 @@
 #Decides which makefile to use
 OS=$(uname -s)
 if [ "$OS" = "OpenBSD" -o "$OS" = "FreeBSD" -o "$OS" = "Darwin" ]; then
-echo "using BSD Makefile."
+	echo "using BSD Makefile."
 	make -f makefile.bsd clean
 	make -f makefile.bsd all
 	./ctr -g dictionary.h i18n/nl/dictionarynl.h > ennl.dict #build Dutch dictionary
