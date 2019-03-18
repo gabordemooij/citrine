@@ -1,0 +1,5 @@
+☞ FourArguments := Object new.
+FourArguments on: 'respond:and:and:and:' do: { :one :two :three :four 
+	✎ write: (one + two + three + four).
+}.
+FourArguments make: 'coffee' with: 'sugar' and: 'milk'.
