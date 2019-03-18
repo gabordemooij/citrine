@@ -3,7 +3,7 @@
 #Written by Gabor de Mooij
 #Decides which makefile to use
 OS=$(uname -s)
-if [ "$OS" = "OpenBSD" -o "$OS" = "FreeBSD" ]; then
+if [ "$OS" = "OpenBSD" -o "$OS" = "FreeBSD" -o "$OS" = "Darwin" ]; then
 	echo "using BSD Makefile."
 	make -f makefile.bsd clean
 	make -f makefile.bsd all
