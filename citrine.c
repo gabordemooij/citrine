@@ -19,6 +19,8 @@ char* ctr_mode_input_file;
 char* ctr_mode_dict_file;
 char* ctr_mode_hfile1;
 char* ctr_mode_hfile2;
+char ctr_flag_sandbox;
+uint16_t ctr_sandbox_steps = 0;
 
 /**
  * CommandLine Display Welcome Message
@@ -63,8 +65,14 @@ int ctr_cli_read_args(int argc, char* argv[]) {
 		strncpy(ctr_mode_input_file, argv[3], 254);
 		mode = 1;
 	} else {
-		ctr_mode_input_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
-		strncpy(ctr_mode_input_file, argv[1], 254);
+		if (strncmp(argv[1],"-s", 2)==0) {
+			ctr_flag_sandbox = 1;
+			ctr_mode_input_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
+			strncpy(ctr_mode_input_file, argv[2], 254);
+		} else {
+			ctr_mode_input_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
+			strncpy(ctr_mode_input_file, argv[1], 254);
+		}
 	}
 	return mode;
 }
@@ -84,6 +92,7 @@ int main(int argc, char* argv[]) {
 	ctr_in_message = 0;
 	ctr_gc_memlimit = 8500000;
 	ctr_callstack_index = 0;
+	ctr_sandbox_steps = 0;
 	ctr_source_map_head = NULL;
 	ctr_source_mapping = 0;
 	CtrStdFlow = NULL;

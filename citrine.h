@@ -13,7 +13,7 @@
 /**
  * Version information
  */
-#define CTR_VERSION "0.9"
+#define CTR_VERSION "0.9.1"
 
 /**
  * Define the Citrine tokens 
@@ -114,6 +114,8 @@
 #define CTR_ANSI_COLOR_MAGENTA "\x1b[35m"
 #define CTR_ANSI_COLOR_CYAN    "\x1b[36m"
 #define CTR_ANSI_COLOR_RESET   "\x1b[0m"
+
+#define CTR_MAX_STEPS_LIMIT 2000
 
 /**
  * Define basic types for Citrine
@@ -727,6 +729,8 @@ extern void ctr_pool_init( ctr_size pool );
 
 extern uint8_t  ctr_accept_n_connections;
 extern uint16_t ctr_default_port;
+extern char ctr_flag_sandbox;
+extern uint16_t ctr_sandbox_steps;
 
 extern char ctr_program_log_type;
 extern int ctr_string_interpolation;

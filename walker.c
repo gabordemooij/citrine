@@ -21,6 +21,7 @@ ctr_object* ctr_cwlk_return(ctr_tnode* node) {
 	char wasReturn = 0;
 	ctr_tlistitem* li;
 	ctr_object* e;
+	if (ctr_flag_sandbox && ++ctr_sandbox_steps>CTR_MAX_STEPS_LIMIT) exit(1);
 	if (!node->nodes) {
 		fprintf(stderr, CTR_ERR_RET );
 		exit(1);
@@ -55,6 +56,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 	ctr_tlistitem* argumentList;
 	ctr_object* r;
 	ctr_object* recipientName = NULL;
+	if (ctr_flag_sandbox && ++ctr_sandbox_steps>CTR_MAX_STEPS_LIMIT) exit(1);
 	switch (receiverNode->type) {
 		case CTR_AST_NODE_REFERENCE:
 			literal = 0;
@@ -103,6 +105,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 	int ctr_assume_message_level = ctr_in_message;
 	int ctr_is_chain = 0;
 	while(li->next) {
+		if (ctr_flag_sandbox && ++ctr_sandbox_steps>CTR_MAX_STEPS_LIMIT) exit(1);
 		if (ctr_is_chain) {
 			ctr_in_message++;
 		}
@@ -190,6 +193,7 @@ ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
 	ctr_tnode* value = valueListItem->node;
 	ctr_object* x;
 	ctr_object* result;
+	if (ctr_flag_sandbox && ++ctr_sandbox_steps>CTR_MAX_STEPS_LIMIT) exit(1);
 	if (CtrStdFlow == NULL) {
 		ctr_callstack[ctr_callstack_index++] = assignee;
 	}
@@ -219,6 +223,7 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 	char* currentProgram = "?";
 	ctr_tnode* stackNode;
 	ctr_source_map* mapItem;
+	if (ctr_flag_sandbox && ++ctr_sandbox_steps>CTR_MAX_STEPS_LIMIT) exit(1);
 	switch (node->type) {
 		case CTR_AST_NODE_LTRSTRING:
 			result = ctr_build_string(node->value, node->vlen);
