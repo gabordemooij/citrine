@@ -97,24 +97,6 @@
 #define CTR_CATEGORY_PUBLIC_PROPERTY 0 /* same, all properties are PRIVATE, except those in CtrStdWorld, this is just to avoid confusion */
 #define CTR_CATEGORY_PUBLIC_METHOD 1
 
-/**
- * Security profile bit flags.
- */
-#define CTR_SECPRO_NO_SHELL 1
-#define CTR_SECPRO_NO_FILE_WRITE 2
-#define CTR_SECPRO_NO_FILE_READ 4
-#define CTR_SECPRO_NO_INCLUDE 8
-#define CTR_SECPRO_COUNTDOWN 16
-#define CTR_SECPRO_EVAL 32
-
-#define CTR_ANSI_COLOR_RED     "\x1b[31m"
-#define CTR_ANSI_COLOR_GREEN   "\x1b[32m"
-#define CTR_ANSI_COLOR_YELLOW  "\x1b[33m"
-#define CTR_ANSI_COLOR_BLUE    "\x1b[34m"
-#define CTR_ANSI_COLOR_MAGENTA "\x1b[35m"
-#define CTR_ANSI_COLOR_CYAN    "\x1b[36m"
-#define CTR_ANSI_COLOR_RESET   "\x1b[0m"
-
 #define CTR_MAX_STEPS_LIMIT 2000
 
 /**
@@ -690,16 +672,6 @@ extern uint64_t ctr_gc_alloc;
 extern uint64_t ctr_gc_memlimit;
 
 /**
- * Misc Interfaces
- */
-extern ctr_object* ctr_dice_throw(ctr_object* myself, ctr_argument* argumentList);
-extern ctr_object* ctr_dice_sides(ctr_object* myself, ctr_argument* argumentList);
-extern ctr_object* ctr_dice_rand(ctr_object* myself, ctr_argument* argumentList);
-extern ctr_object* ctr_dice_randomize_bytes(ctr_object* myself, ctr_argument* argumentList );
-extern ctr_object* ctr_dice_to_string(ctr_object* myself, ctr_argument* argumentList );
-extern ctr_object* ctr_dice_to_number(ctr_object* myself, ctr_argument* argumentList );
-
-/**
  * Literal Constructors (internal only)
  */
 extern ctr_object* ctr_build_empty_string();
@@ -728,8 +700,6 @@ extern ctr_object* ctr_error( char* error_string, int error_code );
 extern ctr_object* ctr_error_text( char* error_string );
 extern void ctr_pool_init( ctr_size pool );
 
-extern uint8_t  ctr_accept_n_connections;
-extern uint16_t ctr_default_port;
 extern char ctr_flag_sandbox;
 extern uint16_t ctr_sandbox_steps;
 
