@@ -417,6 +417,7 @@ extern ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_ar
 extern ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList);
 extern ctr_object* ctr_object_respond_and(ctr_object* myseld, ctr_argument* ctr_argumentList);
 extern ctr_object* ctr_object_respond_and_and(ctr_object* myseld, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_object_respond_and_and_and(ctr_object* myseld, ctr_argument* ctr_argumentList);
 extern ctr_object* ctr_object_case_do(ctr_object* myseld, ctr_argument* ctr_argumentList);
 
 /**

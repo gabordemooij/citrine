@@ -433,8 +433,9 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
  *
  * Variations:
  *
- * [Object] respond: [String] with: [String]
- * [Object] respond: [String] with: [String] and: [String]
+ * [Object] respond: [String] and: [String]
+ * [Object] respond: [String] and: [String] and: [String]
+ * [Object] respond: [String] and: [String] and: [String] and: [String]
  *
  * Default respond-to implemention, does nothing.
  * You can override this behaviour to implement generic behaviour.
@@ -455,6 +456,10 @@ ctr_object* ctr_object_respond_and(ctr_object* myself, ctr_argument* argumentLis
 }
 
 ctr_object* ctr_object_respond_and_and(ctr_object* myself, ctr_argument* argumentList) {
+	return myself;
+}
+
+ctr_object* ctr_object_respond_and_and_and(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 

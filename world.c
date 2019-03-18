@@ -583,6 +583,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ), &ctr_object_respond );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND ), &ctr_object_respond_and );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND_AND ), &ctr_object_respond_and_and);
+	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND_AND_AND ), &ctr_object_respond_and_and_and);
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_TYPE ), &ctr_object_type );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_ISNIL ), &ctr_object_is_nil );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_MYSELF ), &ctr_object_myself );
@@ -939,12 +940,14 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 		mesgArgument = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		mesgArgument->object = ctr_build_string(message, vlen);
 		mesgArgument->next = argumentList;
-		if (argCount == 0 || argCount > 2) {
+		if (argCount == 0 || argCount > 3) {
 			returnValue = ctr_send_message(receiverObject, CTR_DICT_RESPOND_TO, strlen(CTR_DICT_RESPOND_TO),  mesgArgument);
 		} else if (argCount == 1) {
 			returnValue = ctr_send_message(receiverObject, CTR_DICT_RESPOND_TO_AND, strlen(CTR_DICT_RESPOND_TO_AND),  mesgArgument);
 		} else if (argCount == 2) {
 			returnValue = ctr_send_message(receiverObject, CTR_DICT_RESPOND_TO_AND_AND, strlen(CTR_DICT_RESPOND_TO_AND_AND),  mesgArgument);
+		} else if (argCount == 3) {
+			returnValue = ctr_send_message(receiverObject, CTR_DICT_RESPOND_TO_AND_AND_AND, strlen(CTR_DICT_RESPOND_TO_AND_AND_AND),  mesgArgument);
 		}
 		ctr_heap_free( mesgArgument );
 		msg->info.sticky = 0;
