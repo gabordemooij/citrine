@@ -1,7 +1,7 @@
 Citrine
 =======
 
-Citrine Programming Language
+Citrine Programming Language.
 
 Welcome to the Citrine Programming Language Project.
 
