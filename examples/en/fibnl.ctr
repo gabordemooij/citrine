@@ -1,17 +1,14 @@
-☞ f := Lijst ← 0 ; 1.
+☞ f := Reeks ← 0 ; 1.
 
-0 tot: 12 stap: 1 doen: {
-
+{
    ☞ a := f laatste.
-	
+
    ☞ b := f een-na-laatste.
-   
-   ✎ schrijf:
-      'de som van ' + a  + 'en  ' +  b.
 
    ☞ som := (a + b).
-   ✎ schrijf: 
-      ' is ❲ som ❳ '.
 
-   f erbij: som.
-}.
+   ✎ schrijf: som, stop.
+
+   f toevoegen: som.
+
+} * 12.
