@@ -1,20 +1,43 @@
+
+☞ song := ''.
+
 Number on: 'bottles' do: {
-	var phrase := 'no more bottles of beer'.
-	var n := me.
-	(me = 1) ifTrue: {
-		phrase := '1 bottle of beer'.
+
+	☞ sing := 'no more bottles of beer'.
+	(⛏ = 1) true: {
+		sing :=
+		'1 bottle of beer'.
 	}.
-	(me > 1) ifTrue: {
-		phrase := (n + ' bottles of beer').
+
+	(⛏ > 1) true: {
+		sing := 
+		('number bottles of beer' number: ⛏).
 	}.
-	↲phrase.
+	↲ sing.
 }.
 
-99 to: 0 step: -1 do: { :i
-	Pen write: 
-		i bottles +
-		' on the wall, ' + i bottles + '.\n' +
-	((i > 0) either: 
-		('Take one down and pass it around, ' + ((i - 1) bottles) + ' on the wall.\n')
-		or: 'Go to the store and buy some more, 99 bottles of beer on the wall.').	
-}.
+{ :round
+
+	☞ x := 99 - round.
+
+	song append:
+	(
+	'bottles on the wall, bottles.'
+	bottles: (x bottles)
+	).
+	
+	(x > 0) true: {
+		song append:
+		(
+		'Take one down and pass it around, less bottles on the wall.↵'
+		less: ((x - 1) bottles)
+		).
+	}, else: {
+		song append:
+		'Go to the store and buy some more, 99 bottles of beer on the wall.↵'.
+	}.
+
+} * 100.
+
+
+✎ write: song, stop.
