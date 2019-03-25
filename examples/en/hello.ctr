@@ -1,7 +1,0 @@
-☞ Butler := Object new.
-Butler on: 'greet:' do: { :name
-	✎ write: 'Welcome ' + name.
-}.
-☞ james := Butler new.
-james greet: 'visitor'.
-
