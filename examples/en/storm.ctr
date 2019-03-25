@@ -1,28 +1,14 @@
-Pen := Pen new.
-Pen on: 'resetBuffer' do: { my buffer := ''.  my header := ''. }.
-Pen on: 'write:' do: { :bytes my buffer append: bytes. }.
-Pen on: 'brk' do: { my buffer append: '\n'. }.
-Pen on: '>' do: { :bytes my buffer append: bytes. }.
-Pen on: 'writeHeader:' do: { :bytes my header append: bytes. }.
-Pen on: 'flush' do: { me `write: my header, `write: '\n', `write: my buffer, resetBuffer. }.
-Pen resetBuffer.
-Pen write: 'Start Citrine Storm Server v1', brk.
-Pen flush.
-? := Pen.
-
-Request serverOption: 'minidle' is: 1, serverOption: 'maxidle' is: 2.
-
-Request host:'localhost' listen:4000 pid:'storm.pid' callback: {
-	Pen resetBuffer.
-	Pen writeHeader: 'Content-type: text/html\n'.
-	var fname := Program env: 'DOCUMENT_URI'.
-	var script := File new: '/var/www/htdocs' + fname.
+✎ write: (Request), stop.
+✎ write: 'Start Storm Server↵'.
+Request host:'localhost' listen:4001 pid:'storm.pid' callback: {
+	✎ write: 'Content-type: text/html\n'.
+	☞ fname := Program env: 'DOCUMENT_URI'.
+	☞ script := File new: '/var/www/htdocs' + fname.
 	{
-		1 times: {	script include.	}.
+		1 * {	script include.	}.
 	} catch: { :e
-		Pen write: 'An error has occurred.', brk.
-		Pen write: e, brk.
+		✎ write: 'An error has occurred.', stop.
+		✎ write: e, stop.
 	}, run.
-	Pen flush.
 }.
-Pen write: 'DONE', brk.
+✎ write: 'DONE', stop.
