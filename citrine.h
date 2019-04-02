@@ -1,11 +1,6 @@
 
-#ifdef langNL
-#include "i18n/nl/dictionarynl.h"
-#include "i18n/nl/msgnl.h"
-#else
 #include "dictionary.h"
-#include "i18n/en_us/msg.h"
-#endif
+#include "msg.h"
 
 #include <inttypes.h>
 #include <stdlib.h>

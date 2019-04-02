@@ -1,2 +1,2 @@
-#/bin/bash
+#!/bin/bash
 find $2 -name $1

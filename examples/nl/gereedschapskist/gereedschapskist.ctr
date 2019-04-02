@@ -17,7 +17,14 @@ Gereedschapskist bij: 'nieuw' doen: {
 		↲ ⚿ locatie.
 	}.
 	
-	
+	gereedschapskist bij: 'reageer:en:' doen: { :berichtdeel1 :berichtdeel2
+	    berichtdeel1 := berichtdeel1 vervang: ':' door: '__'.
+	    berichtdeel1 := berichtdeel1 vervang: ' ' door: '_'.
+	    berichtdeel1 := berichtdeel1 van: 0 lengte: (berichtdeel1 lengte - 2).
+	    berichtdeel1 toevoegen: '.sh'.
+	    ☞ opdracht := (⚿ locatie + berichtdeel1 + ' "' + berichtdeel2 + '"').
+		↲ Programma opdrachtregel: opdracht.
+	}.
 	
 	gereedschapskist bij: 'reageer:en:en:' doen: { :berichtdeel1 :berichtdeel2 :berichtdeel3
 	    berichtdeel1 := berichtdeel1 vervang: ':' door: '__'.

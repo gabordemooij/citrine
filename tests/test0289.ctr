@@ -36,7 +36,7 @@ Slurp on: 'obtain' do: {
 	Program shell: (
 		Slurp new
 			echo: large text,
-			| './ctr tests/assets/stdin_test.ctr'
+			| './bin/Generic/ctr tests/assets/stdin_test.ctr'
 		) obtain
 ).
 
