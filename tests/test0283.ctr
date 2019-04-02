@@ -1,2 +1,2 @@
 
-✎ write: (Program shell: 'echo "Hello World" | ./ctr tests/assets/stdin_test.ctr').
+✎ write: (Program shell: 'echo "Hello World" | ./bin/Generic/ctr tests/assets/stdin_test.ctr').

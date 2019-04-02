@@ -13,7 +13,7 @@ x run.
 ✎ write: (Object done), stop.
 ✎ write: ('This <path> has no file' <path>: File path), stop.
 ✎ write: List count, stop.
-☞ dictionary := (File new: 'dictionary.h') read.
+☞ dictionary := (File new: 'i18n/us/dictionary.h') read.
 ☞ words := List new.
 ☞ things := List new.
 ☞ counter := 0.

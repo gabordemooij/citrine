@@ -15,7 +15,7 @@
 #ifdef langNL
 #include "i18n/nl/dictionary.h"
 #else
-#include "i18n/en/dictionary.h"
+#include "i18n/us/dictionary.h"
 #endif
 
 #include "ccgi-1.2/ccgi.h"

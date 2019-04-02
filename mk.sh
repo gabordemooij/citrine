@@ -1,29 +1,22 @@
 #!/bin/sh
-#MK Script
-#Written by Gabor de Mooij
-#Decides which makefile to use
 OS=$(uname -s)
 if [ "$OS" = "OpenBSD" -o "$OS" = "FreeBSD" -o "$OS" = "Darwin" ]; then
-	echo "using BSD Makefile."
-	make -f makefile.bsd clean
-	make -f makefile.bsd all
-	./ctr -g dictionary.h i18n/nl/dictionarynl.h > ennl.dict #build Dutch dictionary
-	./ctr -g plugins/request/i18n/en/dictionary.h plugins/request/i18n/nl/dictionary.h >> ennl.dict #request
-	./ctr -g plugins/jsmn/i18n/en/dictionary.h plugins/jsmn/i18n/nl/dictionary.h >> ennl.dict #json
-	cat i18n/nl/extra.dict >> ennl.dict #extra translations
-	make -f makefile.bsd.nl clean
-	make -f makefile.bsd.nl all
+	MAKEFILE=makefile.bsd
 else
-	echo "using Linux Makefile."
-	make -f makefile clean
-	make -f makefile all
-	./ctr -g dictionary.h i18n/nl/dictionarynl.h > ennl.dict #build Dutch dictionary
-	./ctr -g plugins/request/i18n/en/dictionary.h plugins/request/i18n/nl/dictionary.h >> ennl.dict #request
-	./ctr -g plugins/jsmn/i18n/en/dictionary.h plugins/jsmn/i18n/nl/dictionary.h >> ennl.dict #json
-	cat i18n/nl/extra.dict >> ennl.dict #extra translations
-	make -f makefile.nl clean
-	make -f makefile.nl all
+	MAKEFILE=makefile
 fi
+echo "USING: ${MAKEFILE}"
+for ISO in $(ls i18n)
+do
+	echo $ISO
+	export ISO
+	export OS
+	make -f $MAKEFILE clean
+	make -f $MAKEFILE all
+	rm dict/en${ISO}.dict
+	bin/${OS}/ctrus -g i18n/us/dictionary.h i18n/${ISO}/dictionary.h > dict/en${ISO}.dict
+	cat i18n/${ISO}/extra.dict >> dict/en${ISO}.dict
+done
 
 #Clear object files
 rm *.o
