@@ -86,6 +86,10 @@ for i in $(find tests -name 'test*.ctr'); do
 		rm tests/runner11.ctr ; ./bin/${OS}/ctrus -t dict/ennl.dict tests/runner5.ctr 1> tests/runner11.ctr 2> tests/terrors11.log
 		rm tests/runner12.ctr ; ./bin/${OS}/ctrus -t dict/ennl.dict tests/runner6.ctr 1> tests/runner12.ctr 2> tests/terrors12.log
 		rm tests/runner13.ctr ; ./bin/${OS}/ctrus -t dict/nlen.dict tests/runner12.ctr 1> tests/runner13.ctr 2> tests/terrors13.log
+		for ISO in $(ls i18n)
+		do
+			rm tests/runner${ISO}.ctr ; ./bin/${OS}/ctr${ISO} -t dict/en${ISO}.dict tests/runner1.ctr 1>tests/runner${ISO}.ctr 2>tests/terrors${ISO}.log
+		done
 	fi
 	echo "[running...]";
 	echo "test" | ./bin/${OS}/ctrus ${fitem} 1>/tmp/a0 2>/tmp/b0
@@ -103,6 +107,11 @@ for i in $(find tests -name 'test*.ctr'); do
 		echo "test" | ./bin/${OS}/ctrnl tests/runner11.ctr 1>/tmp/a11 2>/tmp/b11
 		echo "test" | ./bin/${OS}/ctrnl tests/runner12.ctr 1>/tmp/a12 2>/tmp/b12
 		echo "test" | ./bin/${OS}/ctrus tests/runner13.ctr 1>/tmp/a13 2>/tmp/b13
+		echo "test" | ./bin/${OS}/ctrro tests/runner14.ctr 1>/tmp/a14 2>/tmp/b14
+		for ISO in $(ls i18n)
+		do
+			echo "test" | ./bin/${OS}/ctr${ISO} tests/runner${ISO}.ctr 1>/tmp/a${ISO} 2>/tmp/b${ISO}
+		done
 	fi
 	result[0]=`cat /tmp/a0 /tmp/b0`
 	result[1]=`cat /tmp/a1 /tmp/b1`
@@ -151,6 +160,28 @@ for i in $(find tests -name 'test*.ctr'); do
 				exit 1
 			fi
 		done
+
+		for ISO in $(ls i18n)
+		do
+			langexp="${i%%.ctr}${ISO}.exp"
+			if [ -f $langexp ]; then
+				expecting=`cat $langexp`
+				actual=`cat /tmp/a${ISO} /tmp/b${ISO}`
+				if [ "$actual" = "$expecting" ]; then
+					echo -n "[✓$j|${ISO}]"
+					j=$((j+1))
+				else
+					echo "FAIL for Language: ro"
+					echo "EXPECTED:"
+					echo $expecting
+					echo ""
+					echo "BUT GOT:"
+					echo "$actual"
+					exit 1
+				fi
+			fi
+		done
+
 		if [ "${result[13]}" = "$expected" ]; then
 			echo -n "[✓$j!]"
 			j=$((j+1))
