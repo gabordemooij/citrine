@@ -33,7 +33,7 @@
 #define CTR_DICT_GREATER_OR_EQUAL_SYMBOL         "≥"
 #define CTR_DICT_LESS_OR_EQUAL_SYMBOL            "≤"
 #define CTR_DICT_UNEQUALS_SYMBOL                 "≠"
-#define CTR_DICT_NEW             "nou"
+#define CTR_DICT_NEW             "crea"
 #define CTR_DICT_EQUALS          "egal:"
 #define CTR_DICT_AND             "şi:"
 #define CTR_DICT_OR              "sau:"
