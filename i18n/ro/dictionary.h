@@ -105,7 +105,7 @@
 #define CTR_DICT_WRITE           "scrie:"
 #define CTR_DICT_PATH            "cale"
 #define CTR_DICT_READ            "citeşte"
-#define CTR_DICT_APPEND          "adaugă la sfârşit:"
+#define CTR_DICT_APPEND          "adaugă la sfârşit:"
 #define CTR_DICT_PREPEND         "adaugă la început:"
 #define CTR_DICT_EXISTS          "există"
 #define CTR_DICT_SIZE            "dimensiune"

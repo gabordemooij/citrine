@@ -145,9 +145,9 @@ for i in $(find tests -name 'test*.ctr'); do
 		exit 1
 	fi
     if [ "$directive" != "'SINGLE_LANGUAGE'." ]; then
-		for q in {1..12}
+		for q in {1..6}
 		do
-			if [ "${result[$q]}" = "$expected" ] || [ "${result[$q]}" = "$expectednl" ]; then
+			if [ "${result[$q]}" = "$expected" ]; then
 				echo -n "[✓$j]"
 				j=$((j+1))
 			else
@@ -163,10 +163,10 @@ for i in $(find tests -name 'test*.ctr'); do
 
 		for ISO in $(ls i18n)
 		do
+			actual=`cat /tmp/a${ISO} /tmp/b${ISO}`
 			langexp="${i%%.ctr}${ISO}.exp"
 			if [ -f $langexp ]; then
 				expecting=`cat $langexp`
-				actual=`cat /tmp/a${ISO} /tmp/b${ISO}`
 				if [ "$actual" = "$expecting" ]; then
 					echo -n "[✓$j|${ISO}]"
 					j=$((j+1))
@@ -178,6 +178,24 @@ for i in $(find tests -name 'test*.ctr'); do
 					echo "BUT GOT:"
 					echo "$actual"
 					exit 1
+				fi
+			else
+				if [ "$1" = "--record" ]; then
+					echo "=========================== CHECK RESULTS:"
+					echo "EXPECTED BASE:"
+					cat /tmp/a0
+					echo ""
+					echo "ISO RESULT ${ISO} (${langexp}):"
+					echo "$actual"
+					echo "---------------------------"
+					echo "is this correct, create expectation file? y/n"
+					read accept
+					if [ "$accept" = "y" ]; then
+						touch $langexp
+						echo "$actual" > $langexp
+						dest = ""
+						echo "OK, file created."
+					fi
 				fi
 			fi
 		done
