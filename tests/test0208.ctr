@@ -1,3 +1,4 @@
+'SINGLE_LANGUAGE'.
 ☞ unknown := Request get: 'item'.
 ✎ write: unknown.
 ☞ unknown := Request new get: 'item'.

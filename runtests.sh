@@ -163,38 +163,40 @@ for i in $(find tests -name 'test*.ctr'); do
 
 		for ISO in $(ls i18n)
 		do
-			actual=`cat /tmp/a${ISO} /tmp/b${ISO}`
-			langexp="${i%%.ctr}${ISO}.exp"
-			if [ -f $langexp ]; then
-				expecting=`cat $langexp`
-				if [ "$actual" = "$expecting" ]; then
-					echo -n "[✓$j|${ISO}]"
-					j=$((j+1))
+			if [ $ISO != 'us' ]; then
+				actual=`cat /tmp/a${ISO} /tmp/b${ISO}`
+				langexp="${i%%.ctr}${ISO}.exp"
+				if [ -f $langexp ]; then
+					expecting=`cat $langexp`
+					if [ "$actual" = "$expecting" ]; then
+						echo -n "[✓$j|${ISO}]"
+						j=$((j+1))
+					else
+						echo "FAIL for Language: ${ISO}"
+						echo "EXPECTED:"
+						echo $expecting
+						echo ""
+						echo "BUT GOT:"
+						echo "$actual"
+						exit 1
+					fi
 				else
-					echo "FAIL for Language: ro"
-					echo "EXPECTED:"
-					echo $expecting
-					echo ""
-					echo "BUT GOT:"
-					echo "$actual"
-					exit 1
-				fi
-			else
-				if [ "$1" = "--record" ]; then
-					echo "=========================== CHECK RESULTS:"
-					echo "EXPECTED BASE:"
-					cat /tmp/a0
-					echo ""
-					echo "ISO RESULT ${ISO} (${langexp}):"
-					echo "$actual"
-					echo "---------------------------"
-					echo "is this correct, create expectation file? y/n"
-					read accept
-					if [ "$accept" = "y" ]; then
-						touch $langexp
-						echo "$actual" > $langexp
-						dest = ""
-						echo "OK, file created."
+					echo "> Missing: ${ISO}!"
+					if [ "$1" = "--record" ]; then
+						echo "=========================== CHECK RESULTS:"
+						echo "EXPECTED BASE:"
+						cat /tmp/a0
+						echo ""
+						echo "ISO RESULT ${ISO} (${langexp}):"
+						echo "$actual"
+						echo "---------------------------"
+						echo "is this correct, create expectation file? y/n"
+						read accept
+						if [ "$accept" = "y" ]; then
+							touch $langexp
+							echo "$actual" > $langexp
+							echo "OK, file created."
+						fi
 					fi
 				fi
 			fi

@@ -140,7 +140,7 @@
 #define CTR_DICT_APPEND_BYTE     "adaugă octet:"
 #define CTR_DICT_QUALIFY         "califică:"
 #define CTR_DICT_QUALIFICATION   "calificare"
-#define CTR_DICT_NEW_SET         "nou:"
+#define CTR_DICT_NEW_SET         "crea:"
 #define CTR_DICT_HOUR            "oră"
 #define CTR_DICT_SET_HOUR        "oră:"
 #define CTR_DICT_HOURS           "ore"

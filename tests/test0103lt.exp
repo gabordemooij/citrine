@@ -1,0 +1,11 @@
+9
+a Objektas '[Objektas]'  is NOT Nil.
+a Loginis 'Tiesa'  is NOT Nil.
+a Loginis 'Netiesa'  is NOT Nil.
+a Loginis 'Netiesa'  is NOT Nil.
+a Skaičius '1'  is NOT Nil.
+a Skaičius '0'  is NOT Nil.
+a Tekstą 'Str'  is NOT Nil.
+a Tekstą ''  is NOT Nil.
+a Kodas '[Blokas]'  is NOT Nil.
+but.. Nil is.. certainly NIL!

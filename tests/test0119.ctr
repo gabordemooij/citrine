@@ -1,4 +1,4 @@
-
+'SINGLE_LANGUAGE'.
 Program tidiness: 0.
 Program setting: 'QUERY_STRING' value: 'search=table&restaurant=pizzaria&menu=spaghetti&menu=macaroni&course[main]=canneloni&course[dessert]=tiramisu'.
 ✎ write: (Program setting: 'QUERY_STRING'), stop.
