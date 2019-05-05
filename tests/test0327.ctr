@@ -1,4 +1,4 @@
-Program tidiness: 4.
+'SINGLE_LANGUAGE'.
 
 List on: 'fixture:' do: { :f
 	⚿ fixture := f.

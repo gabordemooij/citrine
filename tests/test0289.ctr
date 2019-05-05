@@ -2,7 +2,6 @@
 Slurp on: 'new' do: {
 	⚿ str := ''.
 }.
-Slurp learn: 'nieuw' means: 'new'.
 Slurp on: 'respond:' do: { :blah
 		(⚿ str ≠ '') true: {
 			⚿ str append: ' '.

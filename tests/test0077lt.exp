@@ -1,0 +1,12 @@
+Tekstą,Skaičius
+Tekstą,Loginis
+Skaičius,Tekstą
+Skaičius,Loginis
+Loginis,Skaičius
+Loginis,Skaičius
+Loginis,Tekstą
+Loginis,Tekstą
+=== String test ===
+123
+Netiesa
+Tiesa

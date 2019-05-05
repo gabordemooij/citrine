@@ -1,4 +1,4 @@
-
+'SINGLE_LANGUAGE'.
 ☞ myVar := 123.
 ✎ write: 'Start include test', stop.
 (File new: 'tests/assets/includetesten.ctr') include.
