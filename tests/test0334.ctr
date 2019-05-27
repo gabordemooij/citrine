@@ -1,3 +1,4 @@
+'SINGLE_LANGUAGE'.
 ☞ FourArguments := Object new.
 FourArguments on: 'respond:and:and:and:' do: { :one :two :three :four 
 	✎ write: (one + two + three + four).
