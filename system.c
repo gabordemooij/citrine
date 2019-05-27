@@ -566,7 +566,7 @@ ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Clock] wait: [Number]
+ * [Moment] wait: [Number]
  *
  * Suspends program execution for the specified number of seconds.
  * This can be used for instance, together with a whileFalse loop as the
@@ -577,7 +577,7 @@ ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList) {
  * Usage:
  *
  * { ↲ file lock. }
- * false: { ⏰ wait: 1. }.
+ * false: { Moment wait: 1. }.
  * 
  * In other languages:
  * Dutch: Moment wacht: [Getal].
@@ -592,7 +592,7 @@ ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Clock] new: [Number]
+ * [Moment] new: [Number]
  *
  * Creates a new clock instance from a UNIX time stamp.
  * 
@@ -698,7 +698,7 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
 }
 
 /**
- * [Clock] like: [Clock]
+ * [Moment] like: [Moment]
  *
  * Syncs a clock. Copies the time AND zone from the other clock.
  *
@@ -735,7 +735,7 @@ ctr_object* ctr_clock_like( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Clock] zone: [String]
+ * [Moment] zone: [String]
  *
  * Sets the time zone of the clock.
  * 
@@ -749,7 +749,7 @@ ctr_object* ctr_clock_set_zone( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [Clock] zone
+ * [Moment] zone
  *
  * Returns time zone of the clock.
  * 
@@ -762,7 +762,7 @@ ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [Clock] year: [Number]
+ * [Moment] year: [Number]
  *
  * Sets the year of the clock.
  * 
@@ -775,7 +775,7 @@ ctr_object* ctr_clock_set_year( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [Clock] month: [Number]
+ * [Moment] month: [Number]
  *
  * Sets the month of the clock.
  * 
@@ -788,7 +788,7 @@ ctr_object* ctr_clock_set_month( ctr_object* myself, ctr_argument* argumentList 
 }
 
 /**
- * [Clock] day: [Number]
+ * [Moment] day: [Number]
  *
  * Sets the day of the clock.
  * 
@@ -801,7 +801,7 @@ ctr_object* ctr_clock_set_day( ctr_object* myself, ctr_argument* argumentList ) 
 }
 
 /**
- * [Clock] hour: [Number]
+ * [Moment] hour: [Number]
  *
  * Sets the hour of the clock.
  * 
@@ -814,7 +814,7 @@ ctr_object* ctr_clock_set_hour( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [Clock] minute: [Number]
+ * [Moment] minute: [Number]
  *
  * Sets the minute of the clock.
  * 
@@ -827,7 +827,7 @@ ctr_object* ctr_clock_set_minute( ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [Clock] second: [Number]
+ * [Moment] second: [Number]
  *
  * Sets the second of the clock.
  * 
@@ -840,7 +840,7 @@ ctr_object* ctr_clock_set_second( ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [Clock] year
+ * [Moment] year
  *
  * Returns year of the clock.
  * 
@@ -853,7 +853,7 @@ ctr_object* ctr_clock_year( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Clock] month
+ * [Moment] month
  *
  * Returns month of the clock.
  * 
@@ -866,7 +866,7 @@ ctr_object* ctr_clock_month( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Clock] day
+ * [Moment] day
  *
  * Returns day of the clock.
  * 
@@ -879,7 +879,7 @@ ctr_object* ctr_clock_day( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Clock] hour
+ * [Moment] hour
  *
  * Returns hour of the clock.
  * 
@@ -892,7 +892,7 @@ ctr_object* ctr_clock_hour( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Clock] minute
+ * [Moment] minute
  *
  * Returns minute of the clock.
  * 
@@ -905,7 +905,7 @@ ctr_object* ctr_clock_minute( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Clock] second
+ * [Moment] second
  *
  * Returns second of the clock.
  * 
@@ -918,7 +918,7 @@ ctr_object* ctr_clock_second( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Clock] day of the year
+ * [Moment] day of the year
  *
  * Returns day number of the year.
  * 
@@ -938,7 +938,7 @@ ctr_object* ctr_clock_yearday( ctr_object* myself, ctr_argument* argumentList ) 
 }
 
 /**
- * [Clock] weekday
+ * [Moment] weekday
  *
  * Returns the week day number of the clock.
  * 
@@ -958,7 +958,7 @@ ctr_object* ctr_clock_weekday( ctr_object* myself, ctr_argument* argumentList ) 
 }
 
 /**
- * [Clock] time.
+ * [Moment] time.
  *
  * Returns the UNIX time stamp representation of the time.
  * Note: this is the time OF CREATION OF THE OBJECT. To get the actual time use:
@@ -981,7 +981,7 @@ ctr_object* ctr_clock_time( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Clock] week
+ * [Moment] week
  *
  * Returns the week number of the clock.
  * 
@@ -1005,7 +1005,7 @@ ctr_object* ctr_clock_week( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Clock] format: [String]
+ * [Moment] format: [String]
  *
  * Returns a string describing the date and time represented by the clock object
  * according to the specified format. See strftime for format syntax details.
@@ -1042,7 +1042,7 @@ ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Clock] string
+ * [Moment] string
  *
  * Returns a string describing the date and time
  * represented by the clock object. On receiving this message, the Clock
@@ -1052,11 +1052,11 @@ ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList ) {
  *
  * Usage:
  *
- * ⏰ on: 'format:' do: { ↲ 'beautiful moment'. }.
- * ⏰ on: 'time' do: { ↲ '999'. }.
+ * Moment on: 'format:' do: { ↲ 'beautiful moment'. }.
+ * Moment on: 'time' do: { ↲ '999'. }.
  *
- * ✎ write: ⏰, end.
- * ✎ write: ⏰ number, end.
+ * ✎ write: Moment, end.
+ * ✎ write: Moment number, end.
  * 
  * In other languages:
  * Dutch: [Moment] tekst.
@@ -1073,7 +1073,7 @@ ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList 
 }
 
 /**
- * [Clock] number
+ * [Moment] number
  *
  * Returns a timestamp describing the date and time
  * represented by the clock object. On receiving this message, the Clock
@@ -1083,11 +1083,11 @@ ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList 
  *
  * Usage:
  *
- * ⏰ on: 'format:' do: { ↲ 'beautiful moment'. }.
- * ⏰ on: 'time' do: { ↲ '999'. }.
+ * Moment on: 'format:' do: { ↲ 'beautiful moment'. }.
+ * Moment on: 'time' do: { ↲ '999'. }.
  *
- * ✎ write: ⏰, brk.
- * ✎ write: ⏰ number, brk.
+ * ✎ write: Moment, brk.
+ * ✎ write: Moment number, brk.
  * 
  * In other languages:
  * Dutch: [Moment] getal.
@@ -1161,7 +1161,7 @@ ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, ui
 }
 
 /**
- * [Clock] add: [Number].
+ * [Moment] add: [Number].
  *
  * Adds the number to the clock, updating its time accordingly.
  * Note that this is typically used with a qualifier.
@@ -1198,9 +1198,9 @@ ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Clock] subtract: [Number].
+ * [Moment] subtract: [Number].
  *
- * Same as '[Clock] add:' but subtracts the number instead of adding it to
+ * Same as '[Moment] add:' but subtracts the number instead of adding it to
  * the clock's time.
  * 
  * In other languages:
@@ -1213,7 +1213,7 @@ ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [Clock] new
+ * [Moment] new
  *
  * Creates a new clock, by default a clock will be set to
  * the UTC timezone having the current time.
