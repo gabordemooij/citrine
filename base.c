@@ -2619,7 +2619,9 @@ ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argument
  * In other languages:
  * Dutch: een letterlijk codeblok begint met { en eindigt met }.
  * De parameters komen na de openingsaccolade en worden voorafgegaan door
- * een dubbele punt.
+ * een dubbele punt. Om vanuit een codeblok terug te keren naar het
+ * bovenliggende programma en een antwoord terug te sturen gebruikt men
+ * het terugkeersymbool: ↲.
  */
 ctr_object* ctr_build_block(ctr_tnode* node) {
 	ctr_object* codeBlockObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBLOCK);
