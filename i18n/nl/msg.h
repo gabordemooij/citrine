@@ -26,7 +26,7 @@
 #define CTR_ERR_BOUNDS    "Index valt buiten bereik."
 #define CTR_ERR_SIPHKEY   "Sleutel moet exact 16 bytes lang zijn."
 #define CTR_SYM_OBJECT    "[Object]"
-#define CTR_SYM_BLOCK     "[Blok]"
+#define CTR_SYM_BLOCK     "[Taak]"
 #define CTR_SYM_FILE      "[Bestand (geen pad)]"
 #define CTR_ERR_OPEN      "Kan niet openen: %s."
 #define CTR_ERR_DELETE    "Kan niet verwijderen."

@@ -9,7 +9,7 @@
 #define CTR_DICT_FALSE           "Onwaar"
 #define CTR_DICT_NUMBER          "Getal"
 #define CTR_DICT_STRING          "Tekst"
-#define CTR_DICT_CODE_BLOCK      "Codeblok"
+#define CTR_DICT_CODE_BLOCK      "Taak"
 #define CTR_DICT_OBJECT          "Object"
 #define CTR_DICT_LIST_OBJECT     "Reeks"
 #define CTR_DICT_MAP_OBJECT      "Lijst"
