@@ -7,5 +7,5 @@ a Getal '1'  is NOT Nil.
 a Getal '0'  is NOT Nil.
 a Tekst 'Str'  is NOT Nil.
 a Tekst ''  is NOT Nil.
-a Codeblok '[Blok]'  is NOT Nil.
+a Taak '[Taak]'  is NOT Nil.
 but.. Nil is.. certainly NIL!
