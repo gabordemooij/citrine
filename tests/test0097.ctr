@@ -1,3 +1,4 @@
+'SINGLE_LANGUAGE'.
 String on: 'html' do: {
 	↲ (
 		⛏

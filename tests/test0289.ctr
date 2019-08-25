@@ -1,3 +1,4 @@
+'SINGLE_LANGUAGE'.
 ☞ Slurp := Object new.
 Slurp on: 'new' do: {
 	⚿ str := ''.

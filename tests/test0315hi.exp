@@ -1,0 +1,27 @@
+(नक्शा नया) रखना:'a"b' पर:'test'
+Invalid JSON.
+(नक्शा नया) रखना:(सूची ← 1 ; 2 ; (सूची ← 3 ; 4) ; ((नक्शा नया) रखना:(सूची ← 3 ; 4) पर:'bar', रखना:1 पर:'foo')) पर:'nested', रखना:असत्य पर:'legend', रखना:27 पर:'age', रखना:'Jack' पर:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld
