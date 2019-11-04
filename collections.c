@@ -538,7 +538,7 @@ ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size length = (ctr_size) myself->value.avalue->head - myself->value.avalue->tail;
 	ctr_size i;
 	ctr_size found = 0;
-	for( i = index; i <  length-1; i ++ ) {
+	for( i = index; i < length; i ++ ) {
 		*(myself->value.avalue->elements + i) = *(myself->value.avalue->elements + (i+1));
 		found = 1;
 	}
