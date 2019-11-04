@@ -1264,6 +1264,7 @@ ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	if (otherNum->value.nvalue == 0) {
 		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_DIVZERO );
+		CtrStdFlow->info.sticky = 1;
 		return myself;
 	}
 	myself->value.nvalue /= otherNum->value.nvalue;
