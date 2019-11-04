@@ -1130,6 +1130,7 @@ List / 0.
 List > 0.
 List < 0.
 List ? 0.
+error
 List ✎ 0.
 List ← 0.
 List ≥ 0.
@@ -1184,6 +1185,7 @@ List from: 0 length: 0 .
 List remove surrounding spaces.
 List at: 0 .
 List position: 0 .
+error
 List byte: 0 .
 List find: 0 .
 List last: 0 .
