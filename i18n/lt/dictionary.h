@@ -3,6 +3,7 @@
 #define CTR_DICT_CODEGEN_MAP_PUT_AT              " _į:"
 #define CTR_DICT_CODEGEN_ARRAY_NEW               "Naujas sąrašas "
 #define CTR_DICT_CODEGEN_ARRAY_NEW_PUSH          "Sąrašas ← "
+#define CTR_DICT_END_OF_LINE     "."
 #define CTR_DICT_NIL             "Nulis"
 #define CTR_DICT_BOOLEAN         "Loginis"
 #define CTR_DICT_TRUE            "Tiesa"

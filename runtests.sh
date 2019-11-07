@@ -88,7 +88,7 @@ for i in $(find tests -name 'test*.ctr'); do
 		rm tests/runner13.ctr ; ./bin/${OS}/ctrus -t dict/nlen.dict tests/runner12.ctr 1> tests/runner13.ctr 2> tests/terrors13.log
 		for ISO in $(ls i18n)
 		do
-			rm tests/runner${ISO}.ctr ; ./bin/${OS}/ctr${ISO} -t dict/en${ISO}.dict tests/runner1.ctr 1>tests/runner${ISO}.ctr 2>tests/terrors${ISO}.log
+			rm tests/runner${ISO}.ctr ; ./bin/${OS}/ctrus -t dict/en${ISO}.dict tests/runner1.ctr 1>tests/runner${ISO}.ctr 2>tests/terrors${ISO}.log
 		done
 	fi
 	echo "[running...]";
@@ -138,10 +138,10 @@ for i in $(find tests -name 'test*.ctr'); do
 	else
 		echo "FAIL."
 		echo "EXPECTED:"
-		echo $expected
+		echo "$expected"
 		echo ""
 		echo "BUT GOT:"
-		echo $result[0]
+		echo "{$result[0]}"
 		exit 1
 	fi
     if [ "$directive" != "'SINGLE_LANGUAGE'." ]; then
@@ -153,7 +153,7 @@ for i in $(find tests -name 'test*.ctr'); do
 			else
 				echo "FAIL."
 				echo "EXPECTED:"
-				echo $expected
+				echo "$expected"
 				echo ""
 				echo "BUT GOT:"
 				echo "${result[$q]}"
@@ -174,7 +174,7 @@ for i in $(find tests -name 'test*.ctr'); do
 					else
 						echo "FAIL for Language: ${ISO}"
 						echo "EXPECTED:"
-						echo $expecting
+						echo "$expecting"
 						echo ""
 						echo "BUT GOT:"
 						echo "$actual"

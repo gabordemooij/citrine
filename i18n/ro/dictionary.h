@@ -3,6 +3,7 @@
 #define CTR_DICT_CODEGEN_MAP_PUT_AT              " la:"
 #define CTR_DICT_CODEGEN_ARRAY_NEW               "Listă crea "
 #define CTR_DICT_CODEGEN_ARRAY_NEW_PUSH          "Listă ← "
+#define CTR_DICT_END_OF_LINE     "."
 #define CTR_DICT_NIL             "Nul"
 #define CTR_DICT_BOOLEAN         "Boolean"
 #define CTR_DICT_TRUE            "Adevărat"

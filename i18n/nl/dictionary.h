@@ -3,6 +3,7 @@
 #define CTR_DICT_CODEGEN_MAP_PUT_AT              " bij:"
 #define CTR_DICT_CODEGEN_ARRAY_NEW               "Reeks nieuw "
 #define CTR_DICT_CODEGEN_ARRAY_NEW_PUSH          "Reeks ← "
+#define CTR_DICT_END_OF_LINE     "."
 #define CTR_DICT_NIL             "Niets"
 #define CTR_DICT_BOOLEAN         "Boolean"
 #define CTR_DICT_TRUE            "Waar"

@@ -3,6 +3,7 @@
 #define CTR_DICT_CODEGEN_MAP_PUT_AT              " पर:"
 #define CTR_DICT_CODEGEN_ARRAY_NEW               "सूची नया "
 #define CTR_DICT_CODEGEN_ARRAY_NEW_PUSH          "सूची ← "
+#define CTR_DICT_END_OF_LINE     "।"
 #define CTR_DICT_NIL             "कुछ-नहीं"
 #define CTR_DICT_BOOLEAN         "द्विपद"
 #define CTR_DICT_TRUE            "सच"

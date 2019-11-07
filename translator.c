@@ -334,12 +334,15 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 	char* buffer;
 	char* warning;
 	entry = dictionary;
+	ctr_size utf8TransLength;
+	ctr_size utf8WordLength = ctr_getutf8len(v,l);
 	while( entry ) {
 		ctr_size ml;
 		ml = entry->wordLength;
 		if ( l == entry->wordLength && context == entry->type && strncmp( entry->word, v, ml ) == 0 ) {
 			if (context == 't') {
-				if ((entry->translationLength == 1 && l > 1) || (entry->translationLength > 1 && l== 1)) {
+				utf8TransLength = ctr_getutf8len(entry->translation,entry->translationLength);
+				if ((utf8TransLength == 1 && utf8WordLength > 1) || (utf8WordLength == 1 && utf8TransLength > 1)) {
 					buffer = ctr_heap_allocate( 600 );
 					warning = CTR_TERR_TMISMAT;
 					memcpy(buffer, warning, strlen(warning));
@@ -404,22 +407,16 @@ char* ctr_translate_string(char* codePointer, ctr_dict* dictionary) {
 	char* e;
 	char* p;
 	p = codePointer;
-	if (ctr_string_interpolation) {
-		ctr_string_interpolation = 0;
-	}
 	s = ctr_clex_readstr();
-	l =  ctr_clex_tok_value_length(s);
+	l = ctr_clex_tok_value_length(s);
 	e = ctr_clex_code_pointer();
-	if (ctr_string_interpolation) {
-		e -= 3;
-	}
 	fwrite(p, e-p-l, 1, stdout);
 	if (!ctr_translate_translate(s,l,dictionary,'s',NULL)) {
 		fwrite(s,l,1,stdout);
 	}
-	if (!ctr_string_interpolation) {
-		ctr_clex_tok();
-	}
+	ctr_clex_tok();
+	fwrite("'", 1, 1, stdout);
+	e = ctr_clex_code_pointer();
 	return e;
 }
 
@@ -454,8 +451,8 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 		}
 		memcpy(message, e-l,l+1);
 		ctr_size i = 1;
-		while(ctr_clex_forward_scan(e, ":.,)\"", &i)) {
-			if (*(e+i)=='.' || *(e+i)==')' || *(e+i)==',') break;
+		while(ctr_clex_forward_scan(e, &i)) {
+			if (strncmp(e+i,CTR_DICT_END_OF_LINE,ctr_clex_keyword_eol_len)==0 || *(e+i)==')' || *(e+i)==',') break;
 			if (*(e+i)==':') {
 				ctr_notebook_add( ctr_note_create(e+i), noteCount );
 				noteCount++;
@@ -505,6 +502,16 @@ char* ctr_translate_rest(char* codePointer) {
 }
 
 /**
+ * Prints a language specific line terminator.
+ * For instance, Indian languages end a line with danda instead of
+ * a dot.
+ */
+char* ctr_translate_dot(char* codePointer, ctr_dict* dictionary) {
+	ctr_translate_translate(CTR_DICT_END_OF_LINE,ctr_clex_keyword_eol_len,dictionary,'t',(char*)NULL);
+	return ctr_clex_code_pointer();
+}
+
+/**
  * Prints the remaining part of the program.
  */
 void ctr_translate_fin(char* codePointer) {
@@ -540,6 +547,9 @@ void ctr_translate_program(char* prg, char* programPath) {
 		} 
 		else if ( t == CTR_TOKEN_REF || t == CTR_TOKEN_BOOLEANYES || t == CTR_TOKEN_BOOLEANNO || t == CTR_TOKEN_NIL ) {
 			p = ctr_translate_ref(p,dictionary);
+		}
+		else if ( t == CTR_TOKEN_DOT ) {
+			p = ctr_translate_dot(p,dictionary);
 		}
 		else {
 			p = ctr_translate_rest(p);
