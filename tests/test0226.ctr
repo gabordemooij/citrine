@@ -1,0 +1,13 @@
+☞ collection := List ← 1 ; 2 ; 3.
+collection - 1.
+collection - 1.
+collection - 1.
+collection - -1.
+collection - 0.
+collection - 1.
+collection - -1.
+✎ write: collection count, stop.
+☞ collection := List new.
+collection - 1.
+collection - -1.
+✎ write: collection count, stop.

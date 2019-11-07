@@ -52,7 +52,6 @@ int ctr_clex_true_len = 0;
 int ctr_clex_false_len = 0;
 int ctr_clex_nil_len = 0;
 
-int ctr_string_interpolation = 0;
 char* ivarname;
 int ivarlen;
 
@@ -61,17 +60,19 @@ int ivarlen;
  * Determines whether the specified symbol is a delimiter.
  * Returns 1 if the symbol is a delimiter and 0 otherwise.
  *
- * @param char symbol symbol to be inspected
+ * @param char* code code to be inspected
  *
  * @return uint8_t
  */
-uint8_t ctr_clex_is_delimiter( char symbol ) {
-
+uint8_t ctr_clex_is_delimiter( char* code ) {
+	if (strncmp(code, CTR_DICT_END_OF_LINE, ctr_clex_keyword_eol_len) == 0) {
+		return 1;
+	}
+	char symbol = *(code);
 	return (
 	   symbol == '('
 	|| symbol == ')'
 	|| symbol == ','
-	|| symbol == '.'
 	|| symbol == ':'
 	|| symbol == ' ' );
 }
@@ -197,10 +198,6 @@ long ctr_clex_tok_value_length() {
  * Puts back a token and resets the pointer to the previous one.
  */
 void ctr_clex_putback() {
-	if ( ctr_string_interpolation > 0 && ctr_string_interpolation != 5 && ctr_string_interpolation != 6) {
-		ctr_string_interpolation--;
-		return;
-	}
 	ctr_code = ctr_clex_oldptr;
 	ctr_clex_oldptr = ctr_clex_olderptr;
 	ctr_clex_line_number = ctr_clex_old_line_number;
@@ -215,6 +212,7 @@ void ctr_clex_putback() {
 int ctr_clex_tok() {
 	char c;
 	int i;
+	char eol;
 	ctr_clex_tokvlen = 0;
 	ctr_clex_olderptr = ctr_clex_oldptr;
 	ctr_clex_oldptr = ctr_code;
@@ -231,7 +229,10 @@ int ctr_clex_tok() {
 	if (c == ')') { ctr_code++; return CTR_TOKEN_PARCLOSE; }
 	if (c == '{') { ctr_code++; return CTR_TOKEN_BLOCKOPEN; }
 	if (c == '}') { ctr_code++; return CTR_TOKEN_BLOCKCLOSE; }
-	if (c == '.') { ctr_code++; return CTR_TOKEN_DOT; }
+	if (strncmp(ctr_code, CTR_DICT_END_OF_LINE, ctr_clex_keyword_eol_len)==0) {
+		ctr_code+=ctr_clex_keyword_eol_len;
+		return CTR_TOKEN_DOT;
+	}
 	if (c == ',') { ctr_code++; return CTR_TOKEN_CHAIN; }
 	if (c == ':' && (ctr_code+1)<ctr_eofcode && (*(ctr_code+1)=='=')) {
 		ctr_code += 2;
@@ -247,8 +248,10 @@ int ctr_clex_tok() {
 	}
 
 	if (c == '\'') {
-		ctr_code++; return CTR_TOKEN_QUOTE; }
+		ctr_code++; return CTR_TOKEN_QUOTE;
+	}
 
+	eol = ( strncmp(ctr_code,CTR_DICT_END_OF_LINE,ctr_clex_keyword_eol_len)==0 );
 	if ((c == '-' && (ctr_code+1)<ctr_eofcode && isdigit(*(ctr_code+1))) || isdigit(c)) {
 		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
 		i++;
@@ -260,7 +263,8 @@ int ctr_clex_tok() {
 			ctr_code++;
 			c = *ctr_code;
 		}
-		if (c=='.' && (ctr_code+1 <= ctr_eofcode) && !isdigit(*(ctr_code+1))) {
+		eol = ( strncmp(ctr_code,CTR_DICT_END_OF_LINE,ctr_clex_keyword_eol_len)==0 );
+		if (eol && (ctr_code+ctr_clex_keyword_eol_len <= ctr_eofcode) && !isdigit(*(ctr_code+ctr_clex_keyword_eol_len))) {
 			return CTR_TOKEN_NUMBER;
 		}
 		if (c=='.') {
@@ -278,7 +282,7 @@ int ctr_clex_tok() {
 		return CTR_TOKEN_NUMBER;
 	}
 	if (strncmp(ctr_code, CTR_DICT_TRUE, ctr_clex_true_len)==0){
-		if ( ctr_clex_is_delimiter( *( ctr_code + ctr_clex_true_len ) ) ) {
+		if ( ctr_clex_is_delimiter( ( ctr_code + ctr_clex_true_len ) ) ) {
 			ctr_code += ctr_clex_true_len;
 			memcpy(ctr_clex_buffer, CTR_DICT_TRUE, ctr_clex_true_len);
 			ctr_clex_tokvlen = ctr_clex_true_len;
@@ -286,7 +290,7 @@ int ctr_clex_tok() {
 		}
 	}
 	if (strncmp(ctr_code, CTR_DICT_FALSE, ctr_clex_false_len)==0){
-		if ( ctr_clex_is_delimiter( *( ctr_code + ctr_clex_false_len ) ) ) {
+		if ( ctr_clex_is_delimiter( ( ctr_code + ctr_clex_false_len ) ) ) {
 			ctr_code += ctr_clex_false_len;
 			memcpy(ctr_clex_buffer, CTR_DICT_FALSE, ctr_clex_false_len);
 			ctr_clex_tokvlen = ctr_clex_false_len;
@@ -294,7 +298,7 @@ int ctr_clex_tok() {
 		}
 	}
 	if (strncmp(ctr_code, CTR_DICT_NIL, ctr_clex_nil_len)==0){
-		if ( ctr_clex_is_delimiter( *( ctr_code + ctr_clex_nil_len ) ) ) {
+		if ( ctr_clex_is_delimiter( ( ctr_code + ctr_clex_nil_len ) ) ) {
 			ctr_code += ctr_clex_nil_len;
 			memcpy(ctr_clex_buffer, CTR_DICT_NIL, ctr_clex_nil_len);
 			ctr_clex_tokvlen = ctr_clex_nil_len;
@@ -308,7 +312,7 @@ int ctr_clex_tok() {
 		c != ')' &&
 		c != '{' &&
 		c != '}' &&
-		c !='.'  &&
+		!eol &&
 		c !=','  &&
 		( !(
 		( ctr_code + 2) < ctr_eofcode
@@ -327,6 +331,7 @@ int ctr_clex_tok() {
 		}
 		ctr_code++;
 		c = *ctr_code;
+		eol = ( strncmp(ctr_code,CTR_DICT_END_OF_LINE,ctr_clex_keyword_eol_len)==0 );
 	}
 	return CTR_TOKEN_REF;
 }
@@ -444,7 +449,15 @@ void ctr_clex_move_code_pointer(int movement) {
 	ctr_code += movement;
 }
 
-int ctr_clex_forward_scan(char* e, char* bytes, ctr_size* newCodePointer) {
+int ctr_clex_forward_scan(char* e, ctr_size* newCodePointer) {
+	char* bytes;
+	char* eol = NULL;
+	if (strncmp(CTR_DICT_END_OF_LINE,".",1)==0) {
+		bytes = ":.,)\"";
+	} else {
+		bytes = ":,)\"";
+		eol = CTR_DICT_END_OF_LINE;
+	}
 	ctr_size i = *(newCodePointer);
 	int len = strlen(bytes);
 	int nesting = 0;
@@ -466,6 +479,11 @@ int ctr_clex_forward_scan(char* e, char* bytes, ctr_size* newCodePointer) {
 			for (q=0; q<len; q++) {
 				if (*(e+i)==bytes[q]) {
 					if (bytes[q]=='.' && isdigit(*(e+i-1)) && (e+i+1)<ctr_eofcode && isdigit(*(e+i+1))) continue;
+					*(newCodePointer) = i;
+					found = 1;
+					break;
+				}
+				if (eol!=NULL && strncmp((e+i),eol,ctr_clex_keyword_eol_len)==0) {
 					*(newCodePointer) = i;
 					found = 1;
 					break;

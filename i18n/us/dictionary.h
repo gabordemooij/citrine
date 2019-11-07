@@ -3,6 +3,7 @@
 #define CTR_DICT_CODEGEN_MAP_PUT_AT              " at:"
 #define CTR_DICT_CODEGEN_ARRAY_NEW               "List new "
 #define CTR_DICT_CODEGEN_ARRAY_NEW_PUSH          "List ← "
+#define CTR_DICT_END_OF_LINE     "."
 #define CTR_DICT_NIL             "Nil"
 #define CTR_DICT_BOOLEAN         "Boolean"
 #define CTR_DICT_TRUE            "True"

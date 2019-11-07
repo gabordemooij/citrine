@@ -281,10 +281,8 @@ extern char* ctr_clex_keyword_my_icon;
 extern char* ctr_clex_keyword_var_icon;
 extern ctr_size ctr_clex_keyword_my_icon_len;
 extern ctr_size ctr_clex_keyword_var_icon_len;
-extern ctr_size ctr_clex_string_interpolation_start_len;
-extern ctr_size ctr_clex_string_interpolation_stop_len;
+extern ctr_size ctr_clex_keyword_eol_len;
 extern void ctr_clex_set_ignore_modes( int ignore );
-
 
 /**
  * Lexer properties
@@ -699,9 +697,8 @@ extern char ctr_flag_sandbox;
 extern uint16_t ctr_sandbox_steps;
 
 extern char ctr_program_log_type;
-extern int ctr_string_interpolation;
 extern void ctr_clex_move_code_pointer(int movement);
-extern int ctr_clex_forward_scan( char* codePointer, char* bytes, ctr_size* newCodePointer );
+extern int ctr_clex_forward_scan( char* codePointer, ctr_size* newCodePointer );
 extern int ctr_clex_backward_scan( char* codePointer, char* bytes, ctr_size* newCodePointer, ctr_size limit );
 extern void ctr_print_error(char* error, int code);
 
