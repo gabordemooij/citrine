@@ -1,12 +1,12 @@
-✎ schrijf: '12' type + ',' + ('12' getal) type, stop.
-✎ schrijf: 'Onwaar' type + ',' + ('False' boolean) type, stop.
-✎ schrijf: 12 type + ',' + (12 tekst) type, stop.
-✎ schrijf: 12 type + ',' + (12 boolean) type, stop.
-✎ schrijf: Waar type + ',' + (Waar getal) type, stop.
-✎ schrijf: Onwaar type + ',' + (Onwaar getal) type, stop.
-✎ schrijf: Waar type + ',' + (Waar tekst) type, stop.
-✎ schrijf: Onwaar type + ',' + (Onwaar tekst) type, stop.
-✎ schrijf: '=== String test ===', stop.
-✎ schrijf: 123 tekst, stop.
-✎ schrijf: Onwaar tekst, stop.
-✎ schrijf: Waar tekst, stop.
+✎ schrĳf: '12' type + ',' + ('12' getal) type, stop.
+✎ schrĳf: 'Onwaar' type + ',' + ('False' boolean) type, stop.
+✎ schrĳf: 12 type + ',' + (12 tekst) type, stop.
+✎ schrĳf: 12 type + ',' + (12 boolean) type, stop.
+✎ schrĳf: Waar type + ',' + (Waar getal) type, stop.
+✎ schrĳf: Onwaar type + ',' + (Onwaar getal) type, stop.
+✎ schrĳf: Waar type + ',' + (Waar tekst) type, stop.
+✎ schrĳf: Onwaar type + ',' + (Onwaar tekst) type, stop.
+✎ schrĳf: '=== String test ===', stop.
+✎ schrĳf: 123 tekst, stop.
+✎ schrĳf: Onwaar tekst, stop.
+✎ schrĳf: Waar tekst, stop.

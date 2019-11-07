@@ -27,7 +27,7 @@ a := Number / 2.
 ✎ write: 'Array:'.
 ✎ write: List pop.
 ✎ write: List count.
-✎ write: (((List append: 999) string) replace: 'Lijst' with: 'List').
+✎ write: (((List append: 999) string) replace: 'Lĳst' with: 'List').
 ✎ write: List count.
 ✎ write: List shift.
 ✎ write: (List join: ',').
