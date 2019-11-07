@@ -1,44 +1,20 @@
+Special characters
 
+⛏	26CF	ALT.  send message to self, replay own behavior
+⚿	26BF	ALTk  access own property
+☞	261E	ALT=  declare variable
+←	2190	ALT+  create new list and append first value
+↲	21B2	ALT,  return answer
+✎	270E	ALT'  standard output/console
+•	2022	ALT*  append element to list
+≤	2264	ALT<  
+≥	2265	ALT>
+≠	2260	ALTu
+ 	2009	ALT; (thin space)
 
+Language Specific
 
-Citrine character codes:
+Dutch
 
-RECOMMENDED
-
-⛏ 26CF pick/hammer  me           (perform own action, play symbol), ALT+PERIOD
-⚿ 26BF key          my           (own property, protected) ALT+K
-☞ 261E hand         var          (declare variable) ALT+EQUAL
-← 2190 left arrow    new and push (create new array and push value)
-↲ 21B2 return arrow  return       (returns from block of code) ALT+COMMA
-↵ 21B5 enter/new line ALT+N
-❲ 2772 bracket open  (string interpolation start) ALT+[
-❳ 2773 bracket close (string interpolation stop) ALT+]
-   2009 thin space ALT+SEMICOLON
-
-OPTIONAL
-
-≤ 2264 less or equal  (ALT+L or ALT+SHIFT<)
-≥ 2265 greater or equal (ALT+M or ALT+SHIFT+>)
-≠ 2260 (ALT+U)
-⇿ 21FF tab (ALT+SHIFT+T)
-✎ 270E pencil        Pen          (Pen object)  (ALT+')
-⏰ 23F0 clock         Clock         (Clock object) (ALT+|)
-⚄ 2684 die           Dice          (Dice object) (ALT+?)
-💻 1F4BB personal computer  Program (Program object) (ALT+@)
-
-
-Why does Citrine use icons?
-
-1. It's crazy that we only use about 1% of all unicode glyphs to express complex programming logic
-2. Once you have setup your key bindings typing icons significantly reduces typing effort and program size
-3. Using icons for keywords like var, me and my makes Citrine less tied to the English language 
-(i.e. it's possible to write entire program files in your native language)
-4. Using unicode characters removes the need for escape characters for string interpolation, tab and newline characters
-5. Using thin space unicode glyphs one can form more natural looking messages (no need for camelCase)
-6. Using icons can make programming more accessible
-
-
-
-
-
-
+ĳ   0133    ALTy
+Ĳ   0132    ALTi
