@@ -15,11 +15,6 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
-#ifdef forLinux
-#include <bsd/stdlib.h>
-#include <bsd/string.h>
-#endif
-
 #include "citrine.h"
 #include "siphash.h"
 
@@ -1035,11 +1030,13 @@ ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList) {
 		return ctr_build_number_from_float( lower_bound );
 	}
 	upper_bound_from_zero = abs( (int)upper_bound - (int)lower_bound);
+	int rolls = ceil(upper_bound_from_zero / RAND_MAX);
+	int64_t result = 0;
+	while(rolls-- > 0) {
+		result += rand();
+	}
 	return ctr_build_number_from_float(
-		(ctr_number) (
-			arc4random_uniform( upper_bound_from_zero  + 1 ) +
-			lower_bound
-		)
+		(ctr_number) (int64_t) (result % ((int64_t) upper_bound_from_zero + 1)) + (int64_t) lower_bound
 	);
 }
 
