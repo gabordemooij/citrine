@@ -1,4 +1,4 @@
-CFLAGS = -g -mtune=native -Wall -D forLinux -D CTRLANG=${ISO}
+CFLAGS = -g -mtune=native -Wall -D CTRLANG=${ISO}
 OBJS = siphash.o utf8.o memory.o util.o base.o collections.o file.o system.o \
        world.o lexer.o parser.o walker.o translator.o citrine.o
 
@@ -10,7 +10,7 @@ install: ctr
 	cp ./ctr /usr/bin/ctr
 
 ctr:	$(OBJS)
-	$(CC) $(OBJS) -g -rdynamic -lm -ldl -lbsd -o ctr
+	$(CC) $(OBJS) -g -rdynamic -lm -ldl -o ctr
 	cp ctr bin/${OS}/ctr
 	mv ctr bin/${OS}/ctr${ISO}
 

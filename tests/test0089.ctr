@@ -1,0 +1,37 @@
+☞ randomizer := { :a :b
+	☞ minimum := ( a < b ) either: a or: b.
+	☞ maximum := ( a > b ) either: a or: b.
+	☞ x := Nil.
+	{
+		x := Number between: a and: b.
+		((x < minimum) or: (x > maximum)) true: { 
+			✎ write: ('Invalid value!').
+			Program end.
+		}.
+	} 
+	* 100.
+	↲ x.
+}.
+randomizer apply: 0 and: 0.
+randomizer apply: 1 and: 0.
+randomizer apply: 1 and: 1.
+randomizer apply: 0 and: 1.
+randomizer apply: -1 and: 0.
+randomizer apply: -1 and: -1.
+randomizer apply: 0 and: -1.
+randomizer apply: 100 and: 200.
+randomizer apply: 999999999999998 and: 999999999999999.
+randomizer apply: 999999999999999 and: 999999999999998.
+randomizer apply: 999999999999999 and: 999999999999999.
+randomizer apply: -999999999999998 and: -999999999999999.
+randomizer apply: -999999999999999 and: -999999999999998.
+randomizer apply: -999999999999999 and: -999999999999999.
+randomizer apply: 999999999999998 and: -999999999999999.
+randomizer apply: 999999999999999 and: -999999999999998.
+randomizer apply: 999999999999999 and: -999999999999999.
+randomizer apply: -999999999999998 and: 999999999999999.
+randomizer apply: -999999999999999 and: 999999999999998.
+randomizer apply: -999999999999999 and: 999999999999999.
+✎ write: 'OK'.
+
+

@@ -8,11 +8,6 @@
 #include <stdint.h>
 #include <time.h>
 
-#ifdef forLinux
-#include <bsd/stdlib.h>
-#include <bsd/string.h>
-#endif
-
 #include "citrine.h"
 #include "siphash.h"
 
@@ -565,7 +560,7 @@ void ctr_initialize_world() {
 	int i;
 	srand((unsigned)time(NULL));
 	for(i=0; i<16; i++) {
-		CtrHashKey[i] = (int) arc4random_uniform(256);
+		CtrHashKey[i] = (int) (rand() % 256);
 	}
 
 	ctr_first_object = NULL;
