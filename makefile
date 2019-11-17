@@ -12,7 +12,7 @@ install: ctr
 ctr:	$(OBJS)
 	$(CC) $(OBJS) -g -rdynamic -lm -ldl -o ctr
 	cp ctr bin/${OS}/ctr
-	mv ctr bin/${OS}/ctr${ISO}
+	cp ctr bin/${OS}/ctr${ISO}
 
 .c.o:
 	$(CC) $(CFLAGS) -I i18n/${ISO} -c $<
