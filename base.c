@@ -259,20 +259,16 @@ ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
  * In other languages:
  * Dutch: [Object] kopieer | Geeft een kopie van het object terug
  */
-ctr_object* ctr_object_copy( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_object* object;
-	switch(myself->info.type){
-		case CTR_OBJECT_TYPE_OTBOOL:
-			object = ctr_build_bool(myself->value.bvalue);
-        break;
-		case CTR_OBJECT_TYPE_OTNUMBER:
-            object = ctr_build_number_from_float(myself->value.nvalue);
-        break;
-        case CTR_OBJECT_TYPE_OTSTRING:
-			object = ctr_build_string(myself->value.svalue->value, myself->value.svalue->vlen);
-		break;
-	}
-	return object;
+ctr_object* ctr_bool_copy( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_build_bool(myself->value.bvalue);
+}
+
+ctr_object* ctr_number_copy( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_build_number_from_float(myself->value.nvalue);
+}
+
+ctr_object* ctr_string_copy( ctr_object* myself, ctr_argument* argumentList ) {
+	return ctr_build_string(myself->value.svalue->value, myself->value.svalue->vlen);
 }
 
 /**
