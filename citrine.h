@@ -373,7 +373,6 @@ extern ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* argument
 /**
  * Object Interface
  */
-extern ctr_object* ctr_object_copy(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList);
@@ -411,6 +410,7 @@ extern ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_bool_copy(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Number Interface
@@ -453,6 +453,7 @@ extern ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argument
 extern ctr_object* ctr_number_qualification(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_number_respond_to(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_number_random(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_copy(ctr_object* myself, ctr_argument* argumentList);
 
 
 /**
@@ -495,6 +496,7 @@ extern ctr_object* ctr_string_before_or_same(ctr_object* myself, ctr_argument* a
 extern ctr_object* ctr_string_after(ctr_object* myself, ctr_argument* argumentList );
 extern ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentList );
 extern ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_copy(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Block Interface
