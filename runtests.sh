@@ -141,7 +141,7 @@ for i in $(find tests -name 'test*.ctr'); do
 		echo "$expected"
 		echo ""
 		echo "BUT GOT:"
-		echo "{$result[0]}"
+		echo "${result[0]}"
 		exit 1
 	fi
     if [ "$directive" != "'SINGLE_LANGUAGE'." ]; then
