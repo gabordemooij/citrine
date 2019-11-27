@@ -410,6 +410,7 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	nextArgument = argumentList->next;
 	methodBlock = nextArgument->object;
+	methodBlock->info.selfbind = 1;
 	if (methodBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
 		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_EXP_BLK );
 		CtrStdFlow->info.sticky = 1;
@@ -2147,7 +2148,7 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 		ctr_gc_internal_pin(blockArguments->object);
 		ctr_gc_internal_pin(newString);
 		ctr_gc_internal_pin(myself);
-		ctr_object* replacement = replacement = ctr_block_run( block, blockArguments, ctr_build_empty_string() );
+		ctr_object* replacement = replacement = ctr_block_run( block, blockArguments, NULL );
 		block->info.sticky = sticky1;
 		blockArguments->object->info.sticky = sticky2;
 		newString->info.sticky = sticky3;
@@ -2694,6 +2695,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	if (my) {
 		/* me should always point to object, otherwise you have to store me in self and cant use in if */
 		ctr_assign_value_to_local(ctr_build_string_from_cstring( ctr_clex_keyword_me_icon ), my );
+		ctr_assign_value_to_local(ctr_build_string_from_cstring( ctr_clex_keyword_my_icon ), my );
 	}
 	ctr_assign_value_to_local(ctr_build_string_from_cstring( CTR_DICT_THIS_BLOCK ), myself ); /* otherwise running block may get gc'ed. */
 	ctr_cwlk_subprogram++;
@@ -2717,7 +2719,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 			sticky = a->object->info.sticky;
 			a->object->info.sticky = 1;
 			ctr_gc_internal_pin( a->object );
-			ctr_block_run(catchBlock, a, my);
+			ctr_block_run(catchBlock, a, NULL);
 			a->object->info.sticky = sticky;
 			ctr_heap_free( a );
 			result = myself;

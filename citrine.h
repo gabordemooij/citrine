@@ -154,7 +154,7 @@ struct ctr_object {
 		unsigned int mark: 1;
 		unsigned int sticky: 1;
 		unsigned int chainMode: 1;
-		unsigned int remote: 1;
+		unsigned int selfbind: 1;
 	} info;
 	struct ctr_object* link;
 	union uvalue {

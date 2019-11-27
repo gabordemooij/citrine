@@ -239,7 +239,7 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_gc_internal_pin(block);
 		ctr_gc_internal_pin(myself);
 		ctr_gc_internal_pin(argument2->object);
-		ctr_block_run(block, arguments, myself);
+		ctr_block_run(block, arguments, NULL);
 		ctr_heap_free( arguments );
 		ctr_heap_free( argument2 );
 		ctr_heap_free( argument3 );
@@ -817,7 +817,7 @@ int ctr_sort_cmp(const void * a, const void * b) {
 	ctr_gc_internal_pin(temp_self);
 	ctr_gc_internal_pin(arg1->object);
 	ctr_gc_internal_pin(temp_self);
-	result = ctr_block_run(temp_sorter, arg1, temp_self);
+	result = ctr_block_run(temp_sorter, arg1, NULL);
 	numResult = ctr_internal_cast2number(result);
 	ctr_heap_free( arg1 );
 	ctr_heap_free( arg2 );
@@ -1253,9 +1253,10 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 		arguments->object = m->key;
 		argument2->object = m->value;
 		argument3->object = myself;
+		ctr_gc_internal_pin(myself);
 		arguments->next = argument2;
 		argument2->next = argument3;
-		ctr_block_run(block, arguments, myself);
+		ctr_block_run(block, arguments, NULL);
 		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL;
 		m = m->next;
 		ctr_heap_free( arguments );
