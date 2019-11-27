@@ -315,7 +315,7 @@ ctr_object* ctr_internal_create_object(int type) {
 	o->info.type = type;
 	o->info.sticky = 0;
 	o->info.mark = 0;
-	o->info.remote = 0;
+	o->info.selfbind = 0;
 	if (type==CTR_OBJECT_TYPE_OTBOOL) o->value.bvalue = 0;
 	if (type==CTR_OBJECT_TYPE_OTNUMBER) o->value.nvalue = 0;
 	if (type==CTR_OBJECT_TYPE_OTSTRING) {
@@ -957,8 +957,11 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 		funct = methodObject->value.fvalue;
 		result = funct(receiverObject, argumentList);
 	}
-	if (methodObject->info.type == CTR_OBJECT_TYPE_OTBLOCK ) {
+	if (methodObject->info.type == CTR_OBJECT_TYPE_OTBLOCK && methodObject->info.selfbind == 1) {
 		result = ctr_block_run(methodObject, argumentList, receiverObject);
+	}
+	if (methodObject->info.type == CTR_OBJECT_TYPE_OTBLOCK && methodObject->info.selfbind == 0) {
+		result = ctr_block_run(methodObject, argumentList, NULL);
 	}
 	if (msg) msg->info.sticky = 0;
 	if (receiverObject->info.chainMode == 1) return receiverObject;
