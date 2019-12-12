@@ -61,26 +61,32 @@ void ctr_gc_mark(ctr_object* object) {
 	if (object->info.type == CTR_OBJECT_TYPE_OTARRAY) {
 		for (i = 0; i < object->value.avalue->head; i++) {
 			el = *(object->value.avalue->elements+i);
-			el->info.mark = 1;
-			ctr_gc_mark(el);
+			if (!el->info.mark) {
+				el->info.mark = 1;
+				ctr_gc_mark(el);
+			}
 		}
 	}
 	item = object->properties->head;
 	while(item) {
 		k = item->key;
 		o = item->value;
-		o->info.mark = 1;
 		k->info.mark = 1;
-		ctr_gc_mark(o);
+		if (!o->info.mark) {
+			o->info.mark = 1;
+			ctr_gc_mark(o);
+		}
 		item = item->next;
 	} 
 	item = object->methods->head;
 	while(item) {
 		o = item->value;
 		k = item->key;
-		o->info.mark = 1;
 		k->info.mark = 1;
-		ctr_gc_mark(o);
+		if (!o->info.mark) {
+			o->info.mark = 1;
+			ctr_gc_mark(o);
+		}
 		item = item->next;
 	} 
 }
