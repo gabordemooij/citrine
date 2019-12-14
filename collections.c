@@ -872,6 +872,12 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 	int i;
 	ctr_object* arrayElement;
 	ctr_argument* newArgumentList;
+	static uint8_t call_depth = 0;
+	call_depth++;
+	if (call_depth>99) {
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_NESTING );
+		return ctr_build_empty_string();
+	}
 	ctr_object* string = ctr_build_empty_string();
 	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
 	if ( myself->value.avalue->tail == myself->value.avalue->head ) {
@@ -908,6 +914,7 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 		}
 	}
 	ctr_heap_free( newArgumentList );
+	call_depth--;
 	return string;
 }
 
@@ -1337,6 +1344,12 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object*  string;
 	ctr_mapitem* mapItem;
 	ctr_argument* newArgumentList;
+	static uint8_t call_depth = 0;
+	call_depth++;
+	if (call_depth>99) {
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_NESTING );
+		return ctr_build_empty_string();
+	}
 	string  = ctr_build_string_from_cstring( CTR_DICT_CODEGEN_MAP_NEW );
 	mapItem = myself->properties->head;
 	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
@@ -1391,5 +1404,6 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 		}
 	}
 	ctr_heap_free( newArgumentList );
+	call_depth--;
 	return string;
 }
