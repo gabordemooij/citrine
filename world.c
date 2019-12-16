@@ -899,7 +899,7 @@ void ctr_initialize_world() {
  */
 ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vlen, ctr_argument* argumentList) {
 	char toParent = 0;
-	ctr_object* me;
+	ctr_object* me = NULL;
 	ctr_object* methodObject;
 	ctr_object* searchObject;
 	ctr_object* returnValue;
@@ -913,8 +913,12 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	methodObject = NULL;
 	searchObject = receiverObject;
 	if (vlen > 1 && message[0] == '`') {
-		me = ctr_internal_object_find_property(ctr_contexts[ctr_context_id], ctr_build_string_from_cstring( ctr_clex_keyword_me_icon ), 0);
-		if (searchObject == me) {
+		int j = ctr_context_id;
+		while( !me && j ) {
+			me = ctr_internal_object_find_property(ctr_contexts[j--], ctr_build_string_from_cstring( ctr_clex_keyword_my_icon ), 0);
+		}
+		if (me) {
+			searchObject = me;
 			toParent = 1;
 			message = message + 1;
 			vlen--;
