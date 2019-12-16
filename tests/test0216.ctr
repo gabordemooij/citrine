@@ -1,0 +1,6 @@
+'SINGLE_LANGUAGE'.
+Program tidiness: 0.
+Program memory: 180000000.
+☞ a := Map new.
+a property: a.
+✎ write: a, stop.
