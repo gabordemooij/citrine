@@ -12,4 +12,4 @@ Apples a 60.
 Number on: '×' do: { :b
 	b * ⛏. 
 }.
-7 × { :i ✎ write: i. }.
+7 × { :i ✎ write: (i - 1). }.

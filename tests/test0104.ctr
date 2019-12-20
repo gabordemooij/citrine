@@ -1,10 +1,10 @@
 
 { :i
-	✎ write: 'This is step #' + ( i + 1 ), stop.
+	✎ write: 'This is step #' + ( ( i - 1 ) + 1 ), stop.
 } * 6.
 
 { :i
-	✎ write: 'This is step #' + ( 3 - i ), stop.
+	✎ write: 'This is step #' + ( 3 - ( i - 1 ) ), stop.
 } * 6.
 
 { :i
@@ -14,5 +14,5 @@
 
 
 { :i
-	✎ write: 'This is step #' + ( -3 + ( i / 2 ) ), stop.
+	✎ write: 'This is step #' + ( -3 + ( ( i - 1 ) / 2 ) ), stop.
 } * 11.

@@ -15,7 +15,7 @@ Program tidiness: 0.
 ☞ usedMemory4 := 0.
 
 Program clean memory.
-usedMemory1 := (Program memory ? 0).
+usedMemory1 := (Program memory ? 1).
 
 
 
@@ -27,7 +27,7 @@ p := True.
 a := List ← 1 ; 2 ; 3 ; 5.
 
 Program clean memory.
-usedMemory2 := (Program memory ? 0).
+usedMemory2 := (Program memory ? 1).
 
 
 
@@ -39,7 +39,7 @@ p := True.
 a := List ← 1 ; 2 ; 3 ; 4.
 
 Program clean memory.
-usedMemory3 := (Program memory ? 0).
+usedMemory3 := (Program memory ? 1).
 
 
 
@@ -52,7 +52,7 @@ a := List ← 1 ; 2 ; 3 ; 5.
 
 
 Program clean memory.
-usedMemory4 := (Program memory ? 0).
+usedMemory4 := (Program memory ? 1).
 
 
 
@@ -65,7 +65,7 @@ p := True.
 a := List ← 1 ; 2 ; 3 ; 4.
 
 Program clean memory.
-☞ usedMemory5 := (Program memory ? 0).
+☞ usedMemory5 := (Program memory ? 1).
 
 
 

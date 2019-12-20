@@ -1,24 +1,24 @@
 
 
-☞ kept1   := (Program memory ? 3).
-☞ sticky1 := (Program memory ? 2).
-☞ dust1   := (Program memory ? 4).
+☞ kept1   := (Program memory ? 4).
+☞ sticky1 := (Program memory ? 3).
+☞ dust1   := (Program memory ? 5).
 
-☞ kept2   := (Program memory ? 3).
-☞ sticky2 := (Program memory ? 2).
-☞ dust2   := (Program memory ? 4).
+☞ kept2   := (Program memory ? 4).
+☞ sticky2 := (Program memory ? 3).
+☞ dust2   := (Program memory ? 5).
 
 Program clean memory.
 
 
 
-kept1   := (Program memory ? 3).
-sticky1 := (Program memory ? 2).
-dust1   := (Program memory ? 4).
+kept1   := (Program memory ? 4).
+sticky1 := (Program memory ? 3).
+dust1   := (Program memory ? 5).
 
-kept2   := (Program memory ? 3).
-sticky2 := (Program memory ? 2).
-dust2   := (Program memory ? 4).
+kept2   := (Program memory ? 4).
+sticky2 := (Program memory ? 3).
+dust2   := (Program memory ? 5).
 
 
 
@@ -34,9 +34,9 @@ Program clean memory.
 
 
 
-kept2   := (Program memory ? 3).
-sticky2 := (Program memory ? 2).
-dust2   := (Program memory ? 4).
+kept2   := (Program memory ? 4).
+sticky2 := (Program memory ? 3).
+dust2   := (Program memory ? 5).
 
 ✎ write: (kept2   - kept1), stop. 
 ✎ write: (sticky2 - sticky1), stop. 

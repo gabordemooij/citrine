@@ -10,7 +10,7 @@ String on: 'evaluate' do: {
 ☞ x := q string.
 ✎ write: x, stop.
 ☞ y := x evaluate.
-✎ write: y ? 0, stop.
+✎ write: y ? 1, stop.
 
 q := Map put: Q at: (Q + 'quote' + Q).
 x := q string.

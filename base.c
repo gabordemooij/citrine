@@ -364,7 +364,7 @@ ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList )
 			cur->next = ctr_heap_allocate( sizeof( ctr_argument ) );
 			cur = cur->next;
 		}
-		index->object = ctr_build_number_from_float( (double) i );
+		index->object = ctr_build_number_from_float( (double) i + 1 );
 		cur->object = ctr_array_get( arr, index );
 		ctr_heap_free( index );
 	}
@@ -636,6 +636,11 @@ ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
+		if (codeBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
+			CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_DIVZERO );
+			CtrStdFlow->info.sticky = 1;
+			return myself;
+		}
 		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = myself;
 		int sticky = myself->info.sticky;
@@ -665,6 +670,11 @@ ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_bool_if_false(ctr_object* myself, ctr_argument* argumentList) {
 	if (!myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
+		if (codeBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
+			CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_DIVZERO );
+			CtrStdFlow->info.sticky = 1;
+			return myself;
+		}
 		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = myself;
 		int sticky = myself->info.sticky;
@@ -1182,7 +1192,7 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
 	t = ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	for(i=0; i<t; i++) {
-		indexNumber = ctr_build_number_from_float((ctr_number) i);
+		indexNumber = ctr_build_number_from_float((ctr_number) i + 1);
 		arguments->object = indexNumber;
 		ctr_block_run(block, arguments, NULL);
 		if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL; /* consume continue */
@@ -1752,7 +1762,7 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
 	ctr_object* length = ctr_internal_cast2number(argumentList->next->object);
 	long len = myself->value.svalue->vlen;
-	long a = (fromPos->value.nvalue);
+	long a = (fromPos->value.nvalue) - 1;
 	long b = (length->value.nvalue);
 	long ua, ub;
 	char* dest;
@@ -1788,13 +1798,14 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* argument2;
 	ctr_object* result;
 	ctr_size textLength;
-	if (myself->value.svalue->vlen < argumentList->object->value.nvalue) return ctr_build_empty_string();
+	ctr_number a = argumentList->object->value.nvalue;
+	if (myself->value.svalue->vlen < a) return ctr_build_empty_string();
 	argument1 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	argument2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
-	argument1->object = argumentList->object;
+	argument1->object = ctr_build_number_from_float( a );
 	argument1->next = argument2;
 	textLength = ctr_getutf8len(myself->value.svalue->value, (ctr_size) myself->value.svalue->vlen);
-	argument2->object = ctr_build_number_from_float(textLength - argumentList->object->value.nvalue);
+	argument2->object = ctr_build_number_from_float(textLength - (a - 1) );
 	result = ctr_string_from_length(myself, argument1);
 	ctr_heap_free( argument1 );
 	ctr_heap_free( argument2 );
@@ -1815,7 +1826,7 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
-	int32_t a = (int32_t) (fromPos->value.nvalue);
+	int32_t a = (int32_t) (fromPos->value.nvalue) - 1;
 	ctr_size textLength = ctr_getutf8len(myself->value.svalue->value, (ctr_size) myself->value.svalue->vlen);
 	if (a < 0) return CtrStdNil;
 	if (a >= textLength) return CtrStdNil;
@@ -1843,7 +1854,7 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList) {
 	char x;
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
-	long a = (fromPos->value.nvalue);
+	long a = (fromPos->value.nvalue) - 1;
 	long len = myself->value.svalue->vlen;
 	if (a >= len) return CtrStdNil;
 	if (a < 0) return CtrStdNil;
@@ -1871,10 +1882,10 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
 	uintptr_t byte_index;
 	ctr_size uchar_index;
 	char* p = ctr_internal_memmem(myself->value.svalue->value, hlen, sub->value.svalue->value, nlen, 0);
-	if (p == NULL) return ctr_build_number_from_float((ctr_number)-1);
+	if (p == NULL) return ctr_build_nil();
 	byte_index = (uintptr_t) p - (uintptr_t) (myself->value.svalue->value);
 	uchar_index = ctr_getutf8len(myself->value.svalue->value, byte_index);
-	return ctr_build_number_from_float((ctr_number) uchar_index);
+	return ctr_build_number_from_float((ctr_number) uchar_index + 1);
 }
 
 /**
@@ -1952,10 +1963,10 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentL
 	ctr_size uchar_index;
 	ctr_size byte_index;
 	char* p = ctr_internal_memmem( myself->value.svalue->value, hlen, sub->value.svalue->value, nlen, 1 );
-	if (p == NULL) return ctr_build_number_from_float((float)-1);
+	if (p == NULL) return ctr_build_nil();
 	byte_index = (ctr_size) ( p - (myself->value.svalue->value) );
 	uchar_index = ctr_getutf8len(myself->value.svalue->value, byte_index);
-	return ctr_build_number_from_float((float) uchar_index);
+	return ctr_build_number_from_float((float) uchar_index + 1);
 }
 
 /**
@@ -2097,6 +2108,11 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 		}
 	}
 	ctr_object* block = argumentList->next->object;
+	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
+		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_DIVZERO );
+		CtrStdFlow->info.sticky = 1;
+		return myself;
+	}
 	int eflags = REG_EXTENDED;
 	if (flagNewLine) eflags |= REG_NEWLINE;
 	if (flagCI) eflags |= REG_ICASE;

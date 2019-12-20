@@ -25,7 +25,7 @@ i := 3.
 
 Program clean memory.
 
-usedMemory1 := (Program memory ? 0).
+usedMemory1 := (Program memory ? 1).
 
 
 { :i ✎ write: i. } * 4.
@@ -46,7 +46,7 @@ i := 3.
 
 
 Program clean memory.
-usedMemory2 := (Program memory ? 0).
+usedMemory2 := (Program memory ? 1).
 
 
 { :i ✎ write: i. } * 4.
@@ -65,7 +65,7 @@ i := 3.
 ✎ stop.
 
 Program clean memory.
-usedMemory3 := (Program memory ? 0).
+usedMemory3 := (Program memory ? 1).
 
 
 

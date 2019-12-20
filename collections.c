@@ -221,16 +221,19 @@ ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
-	int i = 0;
+	ctr_size i = 0;
+	ctr_size j = 0;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
 		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_EXP_BLK );
 		CtrStdFlow->info.sticky = 1;
+		return myself;
 	}
 	for(i = myself->value.avalue->tail; i < myself->value.avalue->head; i++) {
+		j++;
 		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		ctr_argument* argument2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		ctr_argument* argument3 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
-		arguments->object = ctr_build_number_from_float((double) i);
+		arguments->object = ctr_build_number_from_float((double) j);
 		argument2->object = *(myself->value.avalue->elements + i);
 		argument3->object = myself;
 		arguments->next = argument2;
@@ -380,7 +383,7 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 		CtrStdFlow->info.sticky = 1;
 		return CtrStdNil;
 	}
-	i = (int) getIndex->value.nvalue;
+	i = (int) getIndex->value.nvalue - 1;
 	if (myself->value.avalue->head <= (i + myself->value.avalue->tail) || i < 0) {
 		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_BOUNDS );
 		CtrStdFlow->info.sticky = 1;
@@ -470,7 +473,7 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size head;
 	ctr_size tail;
 
-	if (putIndex->value.nvalue < 0) {
+	if (putIndex->value.nvalue < 1) {
 		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_BOUNDS );
 		CtrStdFlow->info.sticky = 1;
 		return myself;
@@ -478,7 +481,7 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 
 	head = (ctr_size) myself->value.avalue->head;
 	tail = (ctr_size) myself->value.avalue->tail;
-	putIndexNumber = (ctr_size) putIndex->value.nvalue;
+	putIndexNumber = (ctr_size) putIndex->value.nvalue - 1;
 	if (head <= putIndexNumber) {
 		ctr_size j;
 		for(j = head; j <= putIndexNumber; j++) {
@@ -538,6 +541,7 @@ ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size length = (ctr_size) myself->value.avalue->head - myself->value.avalue->tail;
 	ctr_size i;
 	ctr_size found = 0;
+	index--;
 	for( i = index; i < length; i ++ ) {
 		*(myself->value.avalue->elements + i) = *(myself->value.avalue->elements + (i+1));
 		found = 1;
@@ -639,25 +643,28 @@ ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList
  */
 ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newArray = ctr_array_new(CtrStdArray, NULL);
-	ctr_object* start = ctr_internal_cast2number(argumentList->object);
+	
 	ctr_object* deleteCount = ctr_internal_cast2number(argumentList->next->object);
 	ctr_object* replacement = argumentList->next->next->object;
-	ctr_object* remainder;
+	ctr_object* remainder; 
 	ctr_argument* sliceFromArg;
 	ctr_argument* sliceLengthArg;
 	ctr_argument* replacementArg;
 	ctr_argument* remainderArg;
 	ctr_size n;
+	ctr_object* start = ctr_number_copy(ctr_internal_cast2number(argumentList->object),NULL);
+	start->value.nvalue--;
 	if ( replacement->info.type != CTR_OBJECT_TYPE_OTARRAY ) {
 		CtrStdFlow = ctr_error_text( CTR_ERR_EXP_ARR );
 		return myself;
 	}
+	
 	n = ( start->value.nvalue + deleteCount->value.nvalue );
 	sliceFromArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	sliceLengthArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	replacementArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	remainderArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
-	sliceFromArg->object = ctr_build_number_from_float(0);
+	sliceFromArg->object = ctr_build_number_from_float(1);
 	sliceLengthArg->object = start;
 	sliceFromArg->next = sliceLengthArg;
 	newArray = ctr_array_from_length( myself, sliceFromArg );
@@ -665,7 +672,7 @@ ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
 	newArray = ctr_array_add(newArray, replacementArg);
 	sliceFromArg->object = ctr_build_number_from_float( n );
 	if ( n < (myself->value.avalue->head - myself->value.avalue->tail) ) {
-		sliceLengthArg->object = ctr_build_number_from_float( (myself->value.avalue->head - myself->value.avalue->tail) - n );
+		sliceLengthArg->object = ctr_build_number_from_float( 1 + (myself->value.avalue->head - myself->value.avalue->tail) - n );
 		sliceFromArg->next = sliceLengthArg;
 		remainder = ctr_array_from_length( myself, sliceFromArg );
 		remainderArg->object = remainder;
@@ -694,7 +701,7 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 	for(i = myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
 		ctr_argument* pushArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		ctr_argument* elnumArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
-		ctr_object* elnum = ctr_build_number_from_float((ctr_number) i);
+		ctr_object* elnum = ctr_build_number_from_float((ctr_number) i + 1);
 		elnumArg->object = elnum;
 		pushArg->object = ctr_array_get(myself, elnumArg);
 		ctr_array_push(newArray, pushArg);
@@ -705,7 +712,7 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 		for(i = otherArray->value.avalue->tail; i<otherArray->value.avalue->head; i++) {
 			ctr_argument* pushArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 			ctr_argument* elnumArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
-			ctr_object* elnum = ctr_build_number_from_float((ctr_number) i);
+			ctr_object* elnum = ctr_build_number_from_float((ctr_number) i + 1);
 			elnumArg->object = elnum;
 			pushArg->object = ctr_array_get(otherArray, elnumArg);
 			ctr_array_push(newArray, pushArg);
@@ -746,7 +753,7 @@ ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* value = ctr_heap_allocate( sizeof( ctr_argument ) );
 	ctr_argument* index = ctr_heap_allocate( sizeof( ctr_argument ) );
 	for(i = myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
-			index->object = ctr_build_number_from_float((ctr_number) i);
+			index->object = ctr_build_number_from_float((ctr_number) i + 1);
 			key->object = ctr_array_get( myself, index );
 			value->object = ctr_array_get( argumentList->object, index );
 			key->next = value;
@@ -788,7 +795,7 @@ ctr_object* ctr_array_copy(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* arg = ctr_heap_allocate(sizeof(ctr_argument));
 	ctr_argument* index   = ctr_heap_allocate( sizeof( ctr_argument ) );
 	for(i = myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
-		index->object = ctr_build_number_from_float((ctr_number) i);
+		index->object = ctr_build_number_from_float((ctr_number) i + 1);
 		arg->object = ctr_array_get( myself, index );
 		ctr_array_push( copy, arg );
 	}
@@ -958,7 +965,7 @@ ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
  * Geeft de positie van het object terug of -1 als niet gevonden.
  */
 ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList ) {
-	int64_t found = -1, i = 0;
+	int found = -1, i = 0;
 	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
 	ctr_object* element;
 	for(i = myself->value.avalue->tail; i < myself->value.avalue->head; i++) {
@@ -970,7 +977,8 @@ ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList )
 			break;
 		}
 	}
-	return ctr_build_number_from_float(found);
+	if (found == -1) return ctr_build_nil();
+	return ctr_build_number_from_float(found + 1);
 }
 
 /**

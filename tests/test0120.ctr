@@ -1,6 +1,6 @@
 
 'Verbatim Syntax' characters each: { :number :letter
 	{
-		✎ write: number.
+		✎ write: (number - 1).
 	} * 10.
 }.
