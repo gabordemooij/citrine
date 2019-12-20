@@ -3,11 +3,14 @@
 
 $ on: 'respond:' do: { :x
 	
-	☞ operation := x character: 0.
-	☞ valuta    := x character: 1.
-	☞ money     := x offset: 2.
+	☞ operation := x character: 1.
+	☞ valuta    := x character: 2.
+	☞ money     := x offset: 3.
+	
+	☞ xmoney := x from: 3 length: 10.
+	
 	☞ amount    := 0.
-		
+
 	( operation = '+' ) true: {
 		( valuta = '£' ) true: { amount := 1.28 * money. }.
 	}.
@@ -39,6 +42,7 @@ Fruit on: 'oranges' do: { ↲ ⚿ oranges. }.
 Fruit on: '+' do: { :f
 	
 	☞ n := Fruit new.
+	f add: 1.
 	
 	n apples: (f apples + ⚿ apples).
 	n oranges:  (f oranges  + ⚿ oranges).

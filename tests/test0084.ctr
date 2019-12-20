@@ -11,6 +11,6 @@
 
 ☞ a := List ← 1; 2; 3.
 mapper apply: a and: (makeAdder apply: 100).
-✎ write: (a position: 0), stop.
-✎ write: (a ? 1), stop.
+✎ write: (a position: 1), stop.
 ✎ write: (a ? 2), stop.
+✎ write: (a ? 3), stop.

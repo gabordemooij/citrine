@@ -17,7 +17,7 @@ c on: 'greet:' do: { ✎ write: 'greet!'. }.
 ☞ usedMemory5 := 0.
 
 Program clean memory.
-☞ usedMemory1 := (Program memory ? 0).
+☞ usedMemory1 := (Program memory ? 1).
 
 
 
@@ -32,7 +32,7 @@ c on: 'greet:' do: { ✎ write: 'greet!'. }.
 
 
 Program clean memory.
-☞ usedMemory2 := (Program memory ? 0).
+☞ usedMemory2 := (Program memory ? 1).
 
 
 
@@ -46,7 +46,7 @@ c := Object new.
 c on: 'greet:' do: { ✎ write: 'greet!'. }.
 
 Program clean memory.
-☞ usedMemory3 := (Program memory ? 0).
+☞ usedMemory3 := (Program memory ? 1).
 
 
 
@@ -63,7 +63,7 @@ c on: 'greet:' do: { ✎ write: 'a different greet!', stop. }.
 
 
 Program clean memory.
-☞ usedMemory4 := (Program memory ? 0).
+☞ usedMemory4 := (Program memory ? 1).
 
 
 
@@ -79,7 +79,7 @@ c on: 'greet:' do: { ✎ write: 'greet!'. }.
 
 
 Program clean memory.
-☞ usedMemory5 := (Program memory ? 0).
+☞ usedMemory5 := (Program memory ? 1).
 
 
 

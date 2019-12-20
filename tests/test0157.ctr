@@ -9,17 +9,17 @@ Program tidiness: 0.
 f blah.
 
 Program clean memory.
-usedMemory1 := (Program memory ? 0).
+usedMemory1 := (Program memory ? 1).
 
 
 f blah.
 Program clean memory.
-usedMemory2 := (Program memory ? 0).
+usedMemory2 := (Program memory ? 1).
 
 
 f blah.
 Program clean memory.
-usedMemory3 := (Program memory ? 0).
+usedMemory3 := (Program memory ? 1).
 
 
 

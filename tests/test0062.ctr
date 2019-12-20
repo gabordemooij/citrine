@@ -13,4 +13,4 @@ o on: 'hello' do: {}.
 { (1 < '2') true: { ✎ write: 'OK'. }. } catch: { :e ✎ write: e, stop. }, run. 
 { (1 < '2.0') true: { ✎ write: 'OK'. }. } catch: { :e ✎ write: e, stop. }, run. 
 { (1 < 'x2.0') true: { ✎ write: 'NO!'. }. } catch: { :e ✎ write: e, stop. }, run. 
-{ ✎ write: ('hello OK there' from: '6' length: '2'). } run. 
+{ ✎ write: ('hello OK there' from: '7' length: '2'). } run. 

@@ -19,8 +19,8 @@ x run.
 ☞ counter := 0.
 (dictionary split: '↵') each: { :number :line
 	line pattern: '"([^"]+)"' process: { :match
-		(counter > 18) true: { words append: (match position: 1). }.
-		((counter > 6) & (counter < 19)) true: { things append: (match position: 1). }.
+		(counter > 18) true: { words append: (match position: 2). }.
+		((counter > 6) & (counter < 19)) true: { things append: (match position: 2). }.
 		counter add: 1.
 	}.
 }.
@@ -36,8 +36,8 @@ things each: { :n :thing
 		task := task <message>: word.
 		
 		
-		task := task replace: ':' with: ': 0 '.
-		(word length = 1) true: { task append: ' 0'. }.
+		task := task replace: ':' with: ': 1 '.
+		(word length = 1) true: { task append: ' 1'. }.
 		task append: '.'.
 		
 		✎ write: task, stop.

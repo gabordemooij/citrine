@@ -9,7 +9,7 @@ String on: 'evaluate' do: {
 ✎ write: b, stop. 
 b := b evaluate.
 
-✎ write: b ? 2, stop. 
+✎ write: b ? 3, stop. 
 
 ✎ write: (( List ← 1 ; 2 ; 3 )), stop. 
 
@@ -19,7 +19,7 @@ b := b evaluate.
 ✎ write: x, stop. 
 x := x evaluate.
 
-✎ write: x ? 1 ? 0, stop. 
+✎ write: x ? 2 ? 1, stop. 
 
 ☞ y := (Map new) put: (List ← 1) at: (List ← 2).
 ✎ write: y, stop. 

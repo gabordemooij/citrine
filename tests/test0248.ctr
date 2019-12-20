@@ -25,11 +25,11 @@ String on: 'evaluate' do: {
 ✎ write: a, stop.
 
 ☞ b := a evaluate.
-✎ write: b ? 0 ? 'pages' ? 1 ? 'body', stop.
+✎ write: b ? 1 ? 'pages' ? 2 ? 'body', stop.
 
-☞ c := b ? 0.
+☞ c := b ? 1.
 ☞ d := c string.
 ✎ write: d type, stop.
 
 ☞ e := d evaluate.
-✎ write: e ? 'pages' ? 0, stop.
+✎ write: e ? 'pages' ? 1, stop.

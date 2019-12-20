@@ -1,5 +1,6 @@
 ✎ write: 'Continue for-loop, No - before 6 and up.', stop.
 { :i
+	i subtract: 1.
 	✎ write: (i + 1), stop.
 	((i + 1) > 4) continue.
 	✎ write: '-'.
@@ -27,6 +28,7 @@
 ✎ stop.
 ✎ write: 'Continue times-loop, No ||| before 3.', stop.
 { :i
+	i subtract: 1.
 	✎ write: 'iteration #' + i, stop.
 	(i = 2) continue.
 	✎ write: '|||'.
@@ -40,8 +42,8 @@
 
 ✎ write: 'Test Array each-loop: 0, ... ,2', stop.
 (List ← 1 ; 2 ; 3) map: { :i
-	(i = 1) continue.
-	✎ write: 'iteration #' + i, stop.
+	((i - 1) = 1) continue.
+	✎ write: 'iteration #' + (i - 1), stop.
 }.
 
 ✎ write: 'Test Map each-loop: c only', stop.

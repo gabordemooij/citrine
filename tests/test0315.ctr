@@ -33,13 +33,13 @@ String on: 'unescape:' do: { :text
 		
 		str := str pattern: ('\\\\+(X)' X character) process: { :match
 			
-			☞ special := match ? 1.
+			☞ special := match ? 2.
 			
-			((match ? 0) = '\\t') true: {
+			((match ? 1) = '\\t') true: {
 				special := '⇿'.
 			}.
 			
-			((match ? 0) = '\\n') true: {
+			((match ? 1) = '\\n') true: {
 				special := '↵'.
 			}.
 			
