@@ -5,7 +5,7 @@ List on: 'column:' do: { :column
 	⛏ each: { :index :row
 		row each: { :index :cell
 			
-			(index = column) true: { result append: cell. }.
+			((index - 1) = column) true: { result append: cell. }.
 		}.
 	}.
 	↲ result.

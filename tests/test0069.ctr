@@ -10,10 +10,10 @@ String on: 'html' do: {
 	).
 }.
 
-✎ write: ('abc' byte: 1).
-✎ write: ('a' byte: 0).
-✎ write: ('zzz' byte: 10).
-✎ write: ('zzz' byte: -10).
+✎ write: ('abc' byte: 2).
+✎ write: ('a' byte: 1).
+✎ write: ('zzz' byte: 11).
+✎ write: ('zzz' byte: -11).
 ✎ stop.
 ✎ write: (' left trimmed ' remove surrounding spaces) + ' ' + ( 'and right trimmed' remove surrounding spaces) + '!', stop.
 ✎ write: '<html>"html & entities"</html>' html.

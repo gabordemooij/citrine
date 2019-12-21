@@ -644,35 +644,34 @@ ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList
 ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newArray = ctr_array_new(CtrStdArray, NULL);
 	
-	ctr_object* deleteCount = ctr_internal_cast2number(argumentList->next->object);
-	ctr_object* replacement = argumentList->next->next->object;
+	ctr_object* fromObject        = ctr_internal_cast2number(argumentList->object);
+	ctr_object* lengthObject      = ctr_internal_cast2number(argumentList->next->object);
+	ctr_object* replacement       = argumentList->next->next->object;
+	ctr_number from   = fromObject->value.nvalue;
+	ctr_number length = lengthObject->value.nvalue;
 	ctr_object* remainder; 
 	ctr_argument* sliceFromArg;
 	ctr_argument* sliceLengthArg;
 	ctr_argument* replacementArg;
 	ctr_argument* remainderArg;
-	ctr_size n;
-	ctr_object* start = ctr_number_copy(ctr_internal_cast2number(argumentList->object),NULL);
-	start->value.nvalue--;
 	if ( replacement->info.type != CTR_OBJECT_TYPE_OTARRAY ) {
 		CtrStdFlow = ctr_error_text( CTR_ERR_EXP_ARR );
 		return myself;
 	}
-	
-	n = ( start->value.nvalue + deleteCount->value.nvalue );
 	sliceFromArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	sliceLengthArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	replacementArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	remainderArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
-	sliceFromArg->object = ctr_build_number_from_float(1);
-	sliceLengthArg->object = start;
+	sliceFromArg->object   = ctr_build_number_from_float(1);
+	sliceLengthArg->object = ctr_build_number_from_float(from - 1);
 	sliceFromArg->next = sliceLengthArg;
 	newArray = ctr_array_from_length( myself, sliceFromArg );
 	replacementArg->object = replacement;
 	newArray = ctr_array_add(newArray, replacementArg);
-	sliceFromArg->object = ctr_build_number_from_float( n );
-	if ( n < (myself->value.avalue->head - myself->value.avalue->tail) ) {
-		sliceLengthArg->object = ctr_build_number_from_float( 1 + (myself->value.avalue->head - myself->value.avalue->tail) - n );
+	sliceFromArg->object = ctr_build_number_from_float( from + length  );
+	ctr_object* totalLength = ctr_array_count( myself, NULL );
+	if (sliceFromArg->object->value.nvalue <= totalLength->value.nvalue) {
+		sliceLengthArg->object = ctr_build_number_from_float( 1 + totalLength->value.nvalue - sliceFromArg->object->value.nvalue );
 		sliceFromArg->next = sliceLengthArg;
 		remainder = ctr_array_from_length( myself, sliceFromArg );
 		remainderArg->object = remainder;

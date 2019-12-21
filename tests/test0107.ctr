@@ -1,5 +1,6 @@
 ✎ write: 'Break for-loop, 0-4.', stop.
 { :i
+	i subtract: 1.
 	✎ write: 'iteration #' + i, stop.
 	(i = 4) break.
 } * 10.
@@ -23,6 +24,7 @@
 
 ✎ write: 'Break times loop, 1-4.', stop.
 { :i
+	i subtract: 1.
 	✎ write: 'iteration #' + i, stop.
 	(i = 4) break.
 } * 5.
@@ -35,6 +37,7 @@
 
 ✎ write: 'Test Array each-loop: 0,1', stop.
 (List ← 1 ; 2 ; 3) map: { :i
+	i subtract: 1.
 	✎ write: 'iteration #' + i, stop.
 	(i = 1) break.
 }.
