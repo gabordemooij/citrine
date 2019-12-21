@@ -2219,7 +2219,7 @@ ctr_object* ctr_string_contains( ctr_object* myself, ctr_argument* argumentList 
 	return ctr_build_bool(
 		ctr_internal_cast2number(
 			ctr_string_index_of( myself, argumentList )
-		)->value.nvalue > -1
+		)->value.nvalue > 0
 	);
 }
 
