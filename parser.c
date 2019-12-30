@@ -504,6 +504,10 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 		ctr_cparse_emit_error_unexpected( t2, CTR_ERR_EXP_MSG2 );
 	}
 
+	if ( t2 == CTR_TOKEN_BLOCKCLOSE ) {
+		ctr_cparse_emit_error_unexpected( t2, NULL );
+	}
+
 	if ( t2 == CTR_TOKEN_ASSIGNMENT ) {
 		if ( r->type != CTR_AST_NODE_REFERENCE ) {
 			ctr_cparse_emit_error_unexpected( t2, CTR_ERR_INV_LAS );
