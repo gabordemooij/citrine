@@ -471,7 +471,7 @@ ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentL
 	while ((c = getchar()) != '\n') {
 		buff[bytes] = c;
 		bytes++;
-		if (bytes > page) {
+		if (bytes >= page) {
 			page *= 2;
 			buff = (char*) ctr_heap_reallocate(buff, page * sizeof(char));
 			if (buff == NULL) {
