@@ -357,8 +357,8 @@ ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* numberObject = ctr_internal_cast2number(argumentList->object);
 	int n = (int) numberObject->value.nvalue;
-	if (n >= ctr_argc || n < 0) return CtrStdNil;
-	return ctr_build_string(ctr_argv[n], strlen(ctr_argv[n]));
+	if (n > ctr_argc || n < 1) return CtrStdNil;
+	return ctr_build_string(ctr_argv[n-1], strlen(ctr_argv[n-1]));
 }
 
 /**
