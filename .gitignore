@@ -9,9 +9,15 @@
 *.project
 *.ignore
 *.tar.gz
+core
+/container
 /tests/runner*
 /tests/terrors*
 /gitignore
+/examples/work
+/misc/tabelmaker*
+/notes/prelim
+/notes/translations.txt
 /ctr
 /ctrnl
 /bin
@@ -20,6 +26,7 @@ docs/ctr
 docs/pages
 docs/pagemaker.ctr
 *.pid
+*.dat
 x.sh
 p.sh
 /plugins/jsonc
