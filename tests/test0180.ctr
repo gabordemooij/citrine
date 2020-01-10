@@ -18,9 +18,9 @@ Program tidiness: 0.
 
 {
 ☞ txt := '<h1>"Hell\'o & Goodbye"</h1>'.
-✎ write: txt html, stop.
-✎ write: txt lowercase, stop.
-✎ write: txt uppercase, stop.
+✎ write: txt copy html, stop.
+✎ write: txt copy lowercase, stop.
+✎ write: txt copy uppercase, stop.
 } run.
 
 Program clean memory.
@@ -30,9 +30,9 @@ usedMemory1 := (Program memory ? 1).
 
 {
 ☞ txt := '<h1>"Hell\'o & Goodbye"</h1>'.
-✎ write: txt html, stop.
-✎ write: txt lowercase, stop.
-✎ write: txt uppercase, stop.
+✎ write: txt copy html, stop.
+✎ write: txt copy lowercase, stop.
+✎ write: txt copy uppercase, stop.
 } run.
 
 Program clean memory.
@@ -41,9 +41,9 @@ usedMemory2 := (Program memory ? 1).
 
 {
 ☞ txt := '<h1>"Hell\'o & Goodbye"</h1>'.
-✎ write: txt html, stop.
-✎ write: txt lowercase, stop.
-✎ write: txt uppercase, stop.
+✎ write: txt copy html, stop.
+✎ write: txt copy lowercase, stop.
+✎ write: txt copy uppercase, stop.
 } run.
 
 Program clean memory.
