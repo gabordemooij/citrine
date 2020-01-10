@@ -1,13 +1,13 @@
-☞ bestandsnaam := Programma argument: 2.
+☞ bestandsnaam := Programma argument: 3.
 
 ☞ bestand := Bestand nieuw: bestandsnaam.
 
-☞ gegevens := bestand lezen.
+☞ rĳen := bestand lezen opsplitsen: '↵'.
 
-☞ rijen := gegevens opsplitsen: '↵'.
+☞ rĳ := Getal tussen: 1 en: rĳen aantal.
 
-☞ rij := Getal tussen: 0 en: rijen aantal - 1.
+☞ keuze := rĳen positie: rĳ.
 
-☞ gekozen rij := rijen positie: rij.
+✎ schrĳf: keuze, stop.
 
-✎ schrijf: gekozen rij, stop.
+
