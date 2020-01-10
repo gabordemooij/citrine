@@ -1998,8 +1998,9 @@ ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [String] replace: [string] with: [other]
  *
- * Replaces needle with replacement in original string and returns
- * the result as a new string object.
+ * Replaces needle with replacement in original string.
+ * Modifies the original string and returns it as well.
+ * To preserve the original string, copy it first.
  *
  * Usage:
  *
@@ -2011,7 +2012,6 @@ ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
 	ctr_object* replacement = ctr_internal_cast2string(argumentList->next->object);
-	ctr_object* str;
 	char* dest;
 	char* odest;
 	char* src = myself->value.svalue->value;
@@ -2051,9 +2051,10 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 		i++;
 	}
 	memcpy(dest, src, hlen);
-	str = ctr_build_string(odest, dlen);
-	ctr_heap_free( odest );
-	return str;
+	ctr_heap_free( myself->value.svalue->value );
+	myself->value.svalue->value = odest;
+	myself->value.svalue->vlen  = dlen;
+	return myself;
 }
 
 /**
