@@ -10,18 +10,18 @@ clock on: 'tell' do: {
 }.
 
 
-clock add: 2    hours, tell.
-clock add: 1     hour, tell.
-clock add: 19 minutes, tell.
-clock add: 1   minute, tell.
-clock add: 1   minute, tell.
-clock add: 19 seconds, tell.
-clock add: 1   seconds, tell.
-clock add: 1   second, tell.
-clock add: 2    years, tell.
-clock add: 1     year, tell.
-clock add: 5   months, tell.
-clock add: 1    month, tell.
-clock add: 19    days, tell.
-clock add: 1    hours, tell.
-clock add: 120  yards, tell.
+clock add: 2    hour, tell.
+clock add: 1    hour, tell.
+clock add: 19 minute, tell.
+clock add: 1  minute, tell.
+clock add: 1  minute, tell.
+clock add: 19 second, tell.
+clock add: 1  second, tell.
+clock add: 1  second, tell.
+clock add: 2    year, tell.
+clock add: 1    year, tell.
+clock add: 5   month, tell.
+clock add: 1   month, tell.
+clock add: 19    day, tell.
+clock add: 1    hour, tell.
+clock add: 120  yard, tell.

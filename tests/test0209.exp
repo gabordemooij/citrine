@@ -141,25 +141,18 @@ Boolean qualification.
 Boolean new: 1 .
 Boolean hour.
 Boolean hour: 1 .
-Boolean hours.
 Boolean minute: 1 .
 Boolean minute.
-Boolean minutes.
 Boolean second: 1 .
 Boolean second.
-Boolean seconds.
 Boolean day.
 Boolean day: 1 .
-Boolean days.
 Boolean week.
 Boolean week: 1 .
-Boolean weeks.
 Boolean month.
 Boolean month: 1 .
-Boolean months.
 Boolean year.
 Boolean year: 1 .
-Boolean years.
 Boolean weekday.
 Boolean day of the year.
 Boolean zone.
@@ -326,25 +319,18 @@ True qualification.
 True new: 1 .
 True hour.
 True hour: 1 .
-True hours.
 True minute: 1 .
 True minute.
-True minutes.
 True second: 1 .
 True second.
-True seconds.
 True day.
 True day: 1 .
-True days.
 True week.
 True week: 1 .
-True weeks.
 True month.
 True month: 1 .
-True months.
 True year.
 True year: 1 .
-True years.
 True weekday.
 True day of the year.
 True zone.
@@ -512,25 +498,18 @@ False qualification.
 False new: 1 .
 False hour.
 False hour: 1 .
-False hours.
 False minute: 1 .
 False minute.
-False minutes.
 False second: 1 .
 False second.
-False seconds.
 False day.
 False day: 1 .
-False days.
 False week.
 False week: 1 .
-False weeks.
 False month.
 False month: 1 .
-False months.
 False year.
 False year: 1 .
-False years.
 False weekday.
 False day of the year.
 False zone.
@@ -697,25 +676,18 @@ Number qualification.
 Number new: 1 .
 Number hour.
 Number hour: 1 .
-Number hours.
 Number minute: 1 .
 Number minute.
-Number minutes.
 Number second: 1 .
 Number second.
-Number seconds.
 Number day.
 Number day: 1 .
-Number days.
 Number week.
 Number week: 1 .
-Number weeks.
 Number month.
 Number month: 1 .
-Number months.
 Number year.
 Number year: 1 .
-Number years.
 Number weekday.
 Number day of the year.
 Number zone.
@@ -884,25 +856,18 @@ String qualification.
 String new: 1 .
 String hour.
 String hour: 1 .
-String hours.
 String minute: 1 .
 String minute.
-String minutes.
 String second: 1 .
 String second.
-String seconds.
 String day.
 String day: 1 .
-String days.
 String week.
 String week: 1 .
-String weeks.
 String month.
 String month: 1 .
-String months.
 String year.
 String year: 1 .
-String years.
 String weekday.
 String day of the year.
 String zone.
@@ -1070,25 +1035,18 @@ Object qualification.
 Object new: 1 .
 Object hour.
 Object hour: 1 .
-Object hours.
 Object minute: 1 .
 Object minute.
-Object minutes.
 Object second: 1 .
 Object second.
-Object seconds.
 Object day.
 Object day: 1 .
-Object days.
 Object week.
 Object week: 1 .
-Object weeks.
 Object month.
 Object month: 1 .
-Object months.
 Object year.
 Object year: 1 .
-Object years.
 Object weekday.
 Object day of the year.
 Object zone.
@@ -1261,25 +1219,18 @@ List qualification.
 List new: 1 .
 List hour.
 List hour: 1 .
-List hours.
 List minute: 1 .
 List minute.
-List minutes.
 List second: 1 .
 List second.
-List seconds.
 List day.
 List day: 1 .
-List days.
 List week.
 List week: 1 .
-List weeks.
 List month.
 List month: 1 .
-List months.
 List year.
 List year: 1 .
-List years.
 List weekday.
 List day of the year.
 List zone.
@@ -1449,25 +1400,18 @@ Map qualification.
 Map new: 1 .
 Map hour.
 Map hour: 1 .
-Map hours.
 Map minute: 1 .
 Map minute.
-Map minutes.
 Map second: 1 .
 Map second.
-Map seconds.
 Map day.
 Map day: 1 .
-Map days.
 Map week.
 Map week: 1 .
-Map weeks.
 Map month.
 Map month: 1 .
-Map months.
 Map year.
 Map year: 1 .
-Map years.
 Map weekday.
 Map day of the year.
 Map zone.
@@ -1635,25 +1579,18 @@ File qualification.
 File new: 1 .
 File hour.
 File hour: 1 .
-File hours.
 File minute: 1 .
 File minute.
-File minutes.
 File second: 1 .
 File second.
-File seconds.
 File day.
 File day: 1 .
-File days.
 File week.
 File week: 1 .
-File weeks.
 File month.
 File month: 1 .
-File months.
 File year.
 File year: 1 .
-File years.
 File weekday.
 File day of the year.
 File zone.
@@ -1822,25 +1759,18 @@ Moment qualification.
 Moment new: 1 .
 Moment hour.
 Moment hour: 1 .
-Moment hours.
 Moment minute: 1 .
 Moment minute.
-Moment minutes.
 Moment second: 1 .
 Moment second.
-Moment seconds.
 Moment day.
 Moment day: 1 .
-Moment days.
 Moment week.
 Moment week: 1 .
-Moment weeks.
 Moment month.
 Moment month: 1 .
-Moment months.
 Moment year.
 Moment year: 1 .
-Moment years.
 Moment weekday.
 Moment day of the year.
 Moment zone.

@@ -1145,19 +1145,19 @@ ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, ui
 	);
 	setenv( "TZ", zone, 1 );
 	date = localtime( &time );
-	if ( strncmp( unit, CTR_DICT_HOURS, l ) == 0 || strncmp( unit, CTR_DICT_HOUR, l ) == 0  ) {
+	if ( strncmp( unit, CTR_DICT_HOUR, l ) == 0 ) {
 		date->tm_hour += number;
-	} else if ( strncmp( unit, CTR_DICT_MINUTES, l ) == 0 || strncmp( unit, CTR_DICT_MINUTE, l ) == 0  ) {
+	} else if ( strncmp( unit, CTR_DICT_MINUTE, l ) == 0 ) {
 		date->tm_min += number;
-	} else if ( strncmp( unit, CTR_DICT_SECONDS, l ) == 0 || strncmp( unit, CTR_DICT_SECOND, l ) == 0 ) {
+	} else if ( strncmp( unit, CTR_DICT_SECOND, l ) == 0 ) {
 		date->tm_sec += number;
-	} else if ( strncmp( unit, CTR_DICT_DAYS, l ) == 0 || strncmp( unit, CTR_DICT_DAY, l ) == 0 ) {
+	} else if ( strncmp( unit, CTR_DICT_DAY, l ) == 0 ) {
 		date->tm_mday += number;
-	} else if ( strncmp( unit, CTR_DICT_MONTHS, l ) == 0 || strncmp( unit, CTR_DICT_MONTH, l ) == 0 ) {
+	} else if ( strncmp( unit, CTR_DICT_MONTH, l ) == 0 ) {
 		date->tm_mon += number;
-	} else if ( strncmp( unit, CTR_DICT_YEARS, l ) == 0 || strncmp( unit, CTR_DICT_YEAR, l ) == 0 ) {
+	} else if ( strncmp( unit, CTR_DICT_YEAR, l ) == 0 ) {
 		date->tm_year += number;
-	} else if ( strncmp( unit, CTR_DICT_WEEKS, l ) == 0 || strncmp( unit, CTR_DICT_WEEK, l ) == 0 ) {
+	} else if ( strncmp( unit, CTR_DICT_WEEK, l ) == 0 ) {
 		date->tm_mday += number * 7;
 	}
 	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), ctr_build_number_from_float( (ctr_number) mktime( date ) ), CTR_CATEGORY_PRIVATE_PROPERTY  );
@@ -1177,20 +1177,11 @@ ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, ui
  * The Clock object understands the following qualifiers
  * if the selected language is English:
  *
- * sec, second, seconds,
- * min, minute, minutes,
- * hrs, hour, hours,
- * day, days,
- * week, weeks,
- * month, months,
- * year, years
- *
- * Note that it does not matter which form you use, 2 hour means
- * the same as 2 hours (plural).
+ * second, minute, hours, day, week, month, year
  *
  * Usage:
  *
- * clock add: 3 minutes.
+ * clock add: 3 minute.
  * clock add: 1 hour.
  * clock add: 2 second.
  * 
