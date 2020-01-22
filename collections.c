@@ -1036,14 +1036,11 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* emptyArgumentList = ctr_heap_allocate(sizeof(ctr_argument));
 	emptyArgumentList->next = NULL;
 	emptyArgumentList->object = NULL;
-
 	putKey = ctr_send_message(nextArgument->object, CTR_DICT_TOSTRING, strlen(CTR_DICT_TOSTRING), emptyArgumentList);
-
 	/* If developer returns something other than string (ouch, toString), then cast anyway */
 	if (putKey->info.type != CTR_OBJECT_TYPE_OTSTRING) {
 		putKey = ctr_internal_cast2string(putKey);
 	}
-
 	key = ctr_heap_allocate( putKey->value.svalue->vlen * sizeof( char ) );
 	keyLen = putKey->value.svalue->vlen;
 	memcpy(key, putKey->value.svalue->value, keyLen);
@@ -1242,6 +1239,24 @@ ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( myself->properties->size );
 }
 
+ctr_object* ctr_map_copy(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* copy = ctr_map_new(CtrStdMap, argumentList);
+	ctr_mapitem* m;
+	m = myself->properties->head;
+	while(m) {
+		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+		ctr_argument* argument2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+		arguments->object = m->value;
+		argument2->object = m->key;
+		arguments->next = argument2;
+		ctr_map_put(copy, arguments);
+		m = m->next;
+		ctr_heap_free( arguments );
+		ctr_heap_free( argument2 );
+	}
+	return copy;
+}
+
 /**
  * [Map] each: [Block]
  *
@@ -1258,16 +1273,21 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_EXP_BLK );
 		CtrStdFlow->info.sticky = 1;
 	}
+	ctr_object* copy = ctr_map_copy(myself, argumentList);
 	block->info.sticky = 1;
-	m = myself->properties->head;
+	m = copy->properties->head;
 	while(m && !CtrStdFlow) {
 		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		ctr_argument* argument2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		ctr_argument* argument3 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		arguments->object = m->key;
 		argument2->object = m->value;
-		argument3->object = myself;
-		ctr_gc_internal_pin(myself);
+		argument3->object = copy;
+		/* keep receiver in block object otherwise, GC will destroy it */
+		ctr_gc_internal_pin(block);
+		ctr_gc_internal_pin(copy);
+		ctr_gc_internal_pin(argument2->object);
+		ctr_gc_internal_pin(argument3->object);
 		arguments->next = argument2;
 		argument2->next = argument3;
 		ctr_block_run(block, arguments, NULL);
@@ -1282,6 +1302,7 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	block->info.sticky = 0;
 	return myself;
 }
+
 
 /**
  * [Map] has: [Object]
