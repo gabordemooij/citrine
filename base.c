@@ -368,15 +368,20 @@ ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList )
 		cur->object = ctr_array_get( arr, index );
 		ctr_heap_free( index );
 	}
+	if ( i > 0 ) {
+		ctr_argument* closingArgument = ctr_heap_allocate( sizeof( ctr_argument ) );
+		closingArgument->object = CtrStdNil;
+		cur->next = closingArgument;
+	}
 	char* flatMessage = ctr_heap_allocate_cstring( message );
 	ctr_object* answer = ctr_send_message( myself, flatMessage, message->value.svalue->vlen, args);
 	cur = args;
 	if ( length == 0 ) {
 		ctr_heap_free(args);
 	} else {
-		for ( i = 0; i < length; i ++ ) {
+		for ( i = 0; i <= length; i ++ ) {
 			ctr_argument* a = cur;
-			if ( i < length - 1 ) cur = cur->next;
+			if ( i < length ) cur = cur->next;
 			ctr_heap_free( a );
 		}
 	}
