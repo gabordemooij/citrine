@@ -1,8 +1,8 @@
 9
 a Object '[Object]'  is NOT Nil.
-a Boolean 'Waar'  is NOT Nil.
-a Boolean 'Onwaar'  is NOT Nil.
-a Boolean 'Onwaar'  is NOT Nil.
+a Ja of Nee 'Ja'  is NOT Nil.
+a Ja of Nee 'Nee'  is NOT Nil.
+a Ja of Nee 'Nee'  is NOT Nil.
 a Getal '1'  is NOT Nil.
 a Getal '0'  is NOT Nil.
 a Tekst 'Str'  is NOT Nil.

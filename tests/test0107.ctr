@@ -1,3 +1,4 @@
+'SINGLE_LANGUAGE'.
 ✎ write: 'Break for-loop, 0-4.', stop.
 { :i
 	i subtract: 1.
