@@ -644,6 +644,7 @@ extern ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentL
 extern ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList );
 extern ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList );
 extern ctr_object* ctr_clock_to_number( ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_clock_copy( ctr_object* myself, ctr_argument* argumentList );
 extern void ctr_clock_init( ctr_object* clock );
 
 /**

@@ -986,6 +986,17 @@ ctr_object* ctr_clock_time( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_build_number_from_float( (double_t) timeStamp );
 }
 
+ctr_object* ctr_clock_copy( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* clock;
+	clock = ctr_clock_new( myself, argumentList );
+	ctr_internal_object_add_property( clock,
+		ctr_build_string_from_cstring( CTR_DICT_TIME ),
+		ctr_clock_time( myself, NULL ),
+		CTR_CATEGORY_PRIVATE_PROPERTY
+	);
+	return clock;
+}
+
 /**
  * [Moment] week
  *
