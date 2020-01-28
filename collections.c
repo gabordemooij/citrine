@@ -224,8 +224,7 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size i = 0;
 	ctr_size j = 0;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_EXP_BLK );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_EXP_BLK, 0 );
 		return myself;
 	}
 	for(i = myself->value.avalue->tail; i < myself->value.avalue->head; i++) {
@@ -379,14 +378,12 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* getIndex = argumentList->object;
 	int i;
 	if (getIndex->info.type != CTR_OBJECT_TYPE_OTNUMBER) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_EXP_NUM );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_EXP_NUM, 0 );
 		return CtrStdNil;
 	}
 	i = (int) getIndex->value.nvalue - 1;
 	if (myself->value.avalue->head <= (i + myself->value.avalue->tail) || i < 0) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_BOUNDS );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_BOUNDS, 0 );
 		return CtrStdNil;
 	}
 	ctr_object* q =  *(myself->value.avalue->elements + myself->value.avalue->tail + i);
@@ -474,8 +471,7 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size tail;
 
 	if (putIndex->value.nvalue < 1) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_BOUNDS );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_BOUNDS, 0 );
 		return myself;
 	}
 
@@ -655,7 +651,7 @@ ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* replacementArg;
 	ctr_argument* remainderArg;
 	if ( replacement->info.type != CTR_OBJECT_TYPE_OTARRAY ) {
-		CtrStdFlow = ctr_error_text( CTR_ERR_EXP_ARR );
+		CtrStdFlow = ctr_error( CTR_ERR_EXP_ARR, 0 );
 		return myself;
 	}
 	sliceFromArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
@@ -843,8 +839,7 @@ int ctr_sort_cmp(const void * a, const void * b) {
 ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sorter = argumentList->object;
 	if (sorter->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_EXP_BLK );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_EXP_BLK, 0 );
 		return myself;
 	}
 	temp_sorter = sorter;
@@ -881,7 +876,7 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 	static uint8_t call_depth = 0;
 	call_depth++;
 	if (call_depth>99) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_NESTING );
+		CtrStdFlow = ctr_error( CTR_ERR_NESTING, 0 );
 		return ctr_build_empty_string();
 	}
 	ctr_object* string = ctr_build_empty_string();
@@ -1270,8 +1265,7 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
 	ctr_mapitem* m;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_EXP_BLK );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_EXP_BLK, 0 );
 	}
 	ctr_object* copy = ctr_map_copy(myself, argumentList);
 	block->info.sticky = 1;
@@ -1375,7 +1369,7 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 	static uint8_t call_depth = 0;
 	call_depth++;
 	if (call_depth>99) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_NESTING );
+		CtrStdFlow = ctr_error( CTR_ERR_NESTING, 0 );
 		return ctr_build_empty_string();
 	}
 	string  = ctr_build_string_from_cstring( CTR_DICT_CODEGEN_MAP_NEW );

@@ -19,12 +19,21 @@ char* ctr_cparse_current_program;
  */
 void ctr_cparse_emit_error_unexpected( int t, char* hint )
 {
+	char* flowMessage  = ctr_heap_allocate( 500 );
+	char* errorMessage = ctr_heap_allocate( 250 );
+	char* hintMessage  = ctr_heap_allocate( 250 );
 	char* message = ctr_clex_tok_describe( t );
-	fprintf(stderr, CTR_ERR_SYNTAX, message,  ctr_cparse_current_program, ctr_clex_line_number+1);
+	snprintf(errorMessage, 250, CTR_ERR_SYNTAX, message,  ctr_cparse_current_program, ctr_clex_line_number+1);
 	if (hint) {
-		fprintf(stderr, "%s", hint );
+		snprintf(hintMessage, 250, "%s", hint);
+	} else {
+		snprintf(hintMessage, 250, "%s", "");
 	}
-	exit(1);
+	snprintf(flowMessage, 500, "%s%s", errorMessage, hintMessage);
+	CtrStdFlow = ctr_error(flowMessage, 0);
+	ctr_heap_free(errorMessage);
+	ctr_heap_free(hintMessage);
+	ctr_heap_free(flowMessage);
 }
 
 /**
@@ -73,6 +82,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 	msgpartlen = ctr_clex_tok_value_length();
 	if ((msgpartlen) > 255) {
 		ctr_cparse_emit_error_unexpected( t, CTR_ERR_LONG );
+		return NULL;
 	}
 	m = ctr_cparse_create_node( CTR_AST_NODE );
 	m->type = -1;
@@ -91,6 +101,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 		m->vlen = msgpartlen;
 		li = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
 		li->node = ctr_cparse_expr(2);
+		if (li->node == NULL) return NULL;
 		m->nodes = li;
 		return m;
 	}
@@ -111,6 +122,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 		while(1) {
 			li = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
 			li->node = ctr_cparse_expr(1);
+			if (li->node == NULL) return NULL;
 			if (first) {
 				m->nodes = li;
 				curlistitem = m->nodes;
@@ -128,6 +140,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 				long l = ctr_clex_tok_value_length(); 
 				if ((msgpartlen + l) > 255) {
 					ctr_cparse_emit_error_unexpected( t, CTR_ERR_LONG );
+					return NULL;
 				}
 				memcpy( (msg+msgpartlen), ctr_clex_tok_value(), l);
 				msgpartlen = msgpartlen + l;
@@ -169,14 +182,17 @@ ctr_tlistitem* ctr_cparse_messages(ctr_tnode* r, int mode) {
 			t = ctr_clex_tok();
 			if (t != CTR_TOKEN_REF) {
 				ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_MSG );
+				return NULL;
 			}
 		}
 		li = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
 		ctr_clex_putback();
 		node = ctr_cparse_message(mode);
+		if (node == NULL) return NULL;
 		if (node->type == -1) {
 			if (first) {
-				return NULL;
+				li->node = node;
+				return li;
 			}
 			ctr_clex_tok();
 			break;
@@ -193,6 +209,10 @@ ctr_tlistitem* ctr_cparse_messages(ctr_tnode* r, int mode) {
 		t = ctr_clex_tok();
 	}
 	ctr_clex_putback();
+	if (first) {
+		ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_MSG );
+		fli = NULL;
+	}
 	return fli;
 }
 
@@ -212,9 +232,11 @@ ctr_tnode* ctr_cparse_popen() {
 	li = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
 	r->nodes = li;
 	li->node = ctr_cparse_expr(0);
+	if (li->node == NULL) return NULL;
 	t = ctr_clex_tok();
 	if (t != CTR_TOKEN_PARCLOSE) {
 		ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_PCLS );
+		return NULL;
 	}
 	return r;
 }
@@ -286,6 +308,7 @@ ctr_tnode* ctr_cparse_block() {
 		} else {
 			codeNode = ctr_cparse_expr(0);
 		}
+		if (codeNode == NULL) return NULL;
 		codeListItem->node = codeNode;
 		if (first) {
 			codeList->nodes = codeListItem;
@@ -298,6 +321,7 @@ ctr_tnode* ctr_cparse_block() {
 		t = ctr_clex_tok();
 		if (t != CTR_TOKEN_DOT) {
 			ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_DOT );
+			return NULL;
 		}
 	}
 	return r;
@@ -320,6 +344,7 @@ ctr_tnode* ctr_cparse_ref() {
 		int t = ctr_clex_tok();
 		if (t != CTR_TOKEN_REF) {
 			ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_KEY );
+			return NULL;
 		}
 		tmp = ctr_clex_tok_value();
 		r->modifier = 1;
@@ -329,6 +354,7 @@ ctr_tnode* ctr_cparse_ref() {
 		int t = ctr_clex_tok();
 		if (t != CTR_TOKEN_REF) {
 			ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_VAR );
+			return NULL;
 		}
 		tmp = ctr_clex_tok_value();
 		r->modifier = 2;
@@ -356,7 +382,11 @@ ctr_tnode* ctr_cparse_string() {
 	r->value = ctr_heap_allocate_tracked( sizeof( char ) * vlen );
 	memcpy(r->value, n, vlen);
 	r->vlen = vlen;
-	ctr_clex_tok(); /* eat trailing quote. */
+	int t = ctr_clex_tok(); /* eat trailing quote. */
+	if (t == CTR_TOKEN_FIN) {
+		ctr_cparse_emit_error_unexpected( t, NULL );
+		return NULL;
+	}
 	return r;
 }
 
@@ -479,7 +509,8 @@ ctr_tnode* ctr_cparse_assignment(ctr_tnode* r) {
 	a->type = CTR_AST_NODE_EXPRASSIGNMENT;
 	a->nodes = li;
 	li->node = r;
-	liAssignExpr->node =   ctr_cparse_expr(0);  
+	liAssignExpr->node = ctr_cparse_expr(0);
+	if (liAssignExpr->node == NULL) return NULL;
 	li->next = liAssignExpr;
 	return a;
 }
@@ -496,22 +527,22 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 	ctr_tlistitem* nodes;
 	ctr_tlistitem* rli;
 	r = ctr_cparse_receiver();
+	if (r == NULL) return NULL;
 	t2 = ctr_clex_tok();
 	ctr_clex_putback();
-
 	/* user tries to put colon directly after recipient */
 	if ( t2 == CTR_TOKEN_COLON ) {
 		ctr_cparse_emit_error_unexpected( t2, CTR_ERR_EXP_MSG2 );
+		return NULL;
 	}
-
 	if ( t2 == CTR_TOKEN_BLOCKCLOSE ) {
 		ctr_cparse_emit_error_unexpected( t2, NULL );
+		return NULL;
 	}
-
 	if ( t2 == CTR_TOKEN_ASSIGNMENT ) {
 		if ( r->type != CTR_AST_NODE_REFERENCE ) {
 			ctr_cparse_emit_error_unexpected( t2, CTR_ERR_INV_LAS );
-			exit(1);
+			return NULL;
 		}
 		e = ctr_cparse_assignment(r);
 	} else if (
@@ -523,6 +554,9 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 		e->type = CTR_AST_NODE_EXPRMESSAGE;
 		nodes = ctr_cparse_messages(r, mode);
 		if (nodes == NULL) {
+			return NULL; 
+		}
+		if (nodes->node->type == -1) {
 			ctr_clex_tok();
 			ctr_clex_putback();
 			return r; /* no messages, then just return receiver (might be in case of argument). */
@@ -551,6 +585,7 @@ ctr_tnode* ctr_cparse_ret() {
 	li = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
 	r->nodes = li;
 	li->node = ctr_cparse_expr(0);
+	if (li->node == NULL) return NULL;
 	return r;
 }
 
@@ -581,12 +616,15 @@ ctr_tlistitem* ctr_cparse_statement() {
 		return li;
 	} else if (t == CTR_TOKEN_RET) {
 		li->node = ctr_cparse_ret();
+		if (li->node == NULL) return NULL;
 	} else {
 		li->node = ctr_cparse_expr(0);
+		if (li->node == NULL) return NULL;
 	}
 	t = ctr_clex_tok();
 	if (t != CTR_TOKEN_DOT) {
 		ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_DOT );
+		return NULL;
 	}
 	return li;
 }
@@ -603,6 +641,9 @@ ctr_tnode* ctr_cparse_program() {
 	int first = 1;
 	while(1) {
 		ctr_tlistitem* li = ctr_cparse_statement();
+		if (li == NULL) {
+			return NULL;
+		}
 		if (first) {
 			first = 0;
 			program->nodes = li;
@@ -625,6 +666,9 @@ ctr_tnode*  ctr_cparse_parse(char* prg, char* pathString) {
 	ctr_clex_load(prg);
 	ctr_cparse_current_program = pathString;
 	program = ctr_cparse_program();
+	if (program == NULL) {
+		return NULL;
+	}
 	program->value = pathString;
 	program->vlen = strlen(pathString);
 	program->type = CTR_AST_NODE_PROGRAM;

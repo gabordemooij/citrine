@@ -62,7 +62,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 			literal = 0;
 			recipientName = ctr_build_string(receiverNode->value, receiverNode->vlen);
 			recipientName->info.sticky = 1;
-			if (CtrStdFlow == NULL) {
+			if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
 				ctr_callstack[ctr_callstack_index++] = receiverNode;
 			}
 			if (receiverNode->modifier == 1) {
@@ -70,8 +70,10 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 			} else {
 				r = ctr_find(recipientName);
 			}
-			if (CtrStdFlow == NULL) {
+			if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
 				ctr_callstack_index--;
+			} else {
+				errstack++;
 			}
 			if (!r) {
 				exit(1);
@@ -117,7 +119,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		msgnode = li->node;
 		message = msgnode->value;
 		l = msgnode->vlen;
-		if (CtrStdFlow == NULL) {
+		if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
 			ctr_callstack[ctr_callstack_index++] = msgnode;
 		}
 		argumentList = msgnode->nodes;
@@ -156,8 +158,10 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		result = ctr_send_message(r, message, l, a);
 		r->info.sticky = sticky;
 		aItem = a;
-		if (CtrStdFlow == NULL) {
+		if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
 			ctr_callstack_index --;
+		} else {
+			errstack++;
 		}
 		while(aItem->next) {
 			a = aItem;
@@ -194,7 +198,7 @@ ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
 	ctr_object* x;
 	ctr_object* result;
 	if (ctr_flag_sandbox && ++ctr_sandbox_steps>CTR_MAX_STEPS_LIMIT) exit(1);
-	if (CtrStdFlow == NULL) {
+	if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
 		ctr_callstack[ctr_callstack_index++] = assignee;
 	}
 	x = ctr_cwlk_expr(value, &wasReturn);
@@ -205,8 +209,10 @@ ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
 	} else {
 		result = ctr_assign_value(ctr_build_string(assignee->value, assignee->vlen), x);
 	}
-	if (CtrStdFlow == NULL) {
+	if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
 		ctr_callstack_index--;
+	} else {
+		errstack ++;
 	}
 	return result;
 }	
@@ -244,7 +250,7 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 			result = ctr_build_block(node);
 			break;
 		case CTR_AST_NODE_REFERENCE:
-			if (CtrStdFlow == NULL) {
+			if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
 				ctr_callstack[ctr_callstack_index++] = node;
 			}
 			if (node->modifier == 1) {
@@ -252,8 +258,10 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 			} else {
 				result = ctr_find(ctr_build_string(node->value, node->vlen));
 			}
-			if (CtrStdFlow == NULL) {
+			if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
 				ctr_callstack_index--;
+			} else {
+				errstack++;
 			}
 			break;
 		case CTR_AST_NODE_EXPRMESSAGE:

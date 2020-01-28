@@ -256,6 +256,8 @@ extern char CtrHashKey[16];
  */
 extern int ctr_argc;
 extern char** ctr_argv;
+extern int errstack;
+extern int hascatch;
 
 /**
  * Mode of Operation
@@ -706,3 +708,4 @@ extern int ctr_clex_backward_scan( char* codePointer, char* bytes, ctr_size* new
 extern void ctr_print_error(char* error, int code);
 
 extern void ctr_plugin_check_language( char* code );
+

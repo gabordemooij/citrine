@@ -329,7 +329,7 @@ ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(comString+vlen,"\0",1);
 	newArgumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	if ( !( stream = popen( comString, "r" ) ) ) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_EXEC );
+		CtrStdFlow = ctr_error( CTR_ERR_EXEC, 0 );
 	}
 	outputString = ctr_build_empty_string();
 	while ( fgets( outputBuffer, 512, stream ) ) {
@@ -475,7 +475,7 @@ ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentL
 			page *= 2;
 			buff = (char*) ctr_heap_reallocate(buff, page * sizeof(char));
 			if (buff == NULL) {
-				CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_OOM );
+				CtrStdFlow = ctr_error( CTR_ERR_OOM, 0 );
 				return CtrStdNil;
 			}
 		}

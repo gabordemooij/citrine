@@ -187,6 +187,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_size vlen;
+	int error_code;
 	char* pathString;
 	FILE* f;
 	if (path == NULL) return myself;
@@ -195,10 +196,10 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
 	f = fopen(pathString, "ab+");
+	error_code = errno;
 	ctr_heap_free( pathString );
 	if (!f) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_OPEN );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_OPEN, error_code );
 		return CtrStdNil;
 	}
 	fwrite(str->value.svalue->value, sizeof(char), str->value.svalue->vlen, f);
@@ -288,8 +289,7 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
 	r = remove(pathString);
 	ctr_heap_free( pathString );
 	if (r!=0) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_DELETE );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_DELETE, 0 );
 		return CtrStdNil;
 	}
 	return myself;
@@ -357,8 +357,7 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* modeStrObj = ctr_internal_cast2string( argumentList->object );
 	if ( myself->value.rvalue != NULL ) {
 		ctr_heap_free( rs );
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_FOPENED );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_FOPENED, 0 );
 		return myself;
 	}
 	if ( pathObj == NULL ) {
@@ -442,8 +441,7 @@ ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) 
 	if (bytes < 0) return ctr_build_string_from_cstring("");
 	buffer = (char*) ctr_heap_allocate(bytes);
 	if (buffer == NULL) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_OOM );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_OOM, 0 );
 		return ctr_build_string_from_cstring("");
 	}
 	fread(buffer, sizeof(char), (int)bytes, (FILE*)myself->value.rvalue->ptr);
@@ -522,8 +520,7 @@ ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
 	offset = (long int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	error = fseek((FILE*)myself->value.rvalue->ptr, offset, SEEK_CUR);
 	if (error) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_SEEK );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_SEEK, 0 );
 	}
 	return myself;
 }
@@ -552,8 +549,7 @@ ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList)
 	if (myself->value.rvalue->type != 1) return myself;
 	error = fseek((FILE*)myself->value.rvalue->ptr, 0, SEEK_SET);
 	if (error) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_SEEK );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_SEEK, 0 );
 	}
 	return myself;
 }
@@ -584,8 +580,7 @@ ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.rvalue->type != 1) return myself;
 	error = fseek((FILE*)myself->value.rvalue->ptr, 0, SEEK_END);
 	if (error) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_SEEK );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_SEEK, 0 );
 	}
 	return myself;
 }
@@ -606,7 +601,7 @@ ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList
 	ctr_object* fdObjKey;
 	pathObj = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	if (pathObj == NULL) {
-		CtrStdFlow = ctr_error_text( CTR_ERR_LOCK );
+		CtrStdFlow = ctr_error( CTR_ERR_LOCK, 0 );
 		return CtrStdNil;
 	}
 	path = ctr_heap_allocate_cstring( pathObj );
@@ -619,7 +614,7 @@ ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList
 	if (fdObj == NULL) {
 		fd = open( path, O_CREAT );
 		if (fd < 0) {
-			CtrStdFlow = ctr_error_text( CTR_ERR_LOCK );
+			CtrStdFlow = ctr_error( CTR_ERR_LOCK, 0 );
 			ctr_heap_free( path );
 			return CtrStdNil;
 		}
@@ -709,7 +704,8 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	pathValue = ctr_heap_allocate_cstring( path );
 	d = opendir( pathValue );
 	if (d == 0) {
-		CtrStdFlow = ctr_error_text( CTR_ERR_OPEN );
+		int error_code = errno;
+		CtrStdFlow = ctr_error( CTR_ERR_OPEN, error_code );
 		ctr_heap_free(pathValue);
 		return CtrStdNil;
 	}
