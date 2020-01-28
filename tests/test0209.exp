@@ -1808,5 +1808,11 @@ Moment respond: 1 and: 1 and: 1 .
 Moment respond: 1 and: 1 and: 1 and: 1 .
 Moment this code block.
 ☞ ☞ 1.
+Uncatched error has occurred.
 Parse error, unexpected number ( eval: 1 )
-Expected a dot (.).
+Expected message.
+
+#4 new: (tests/test0209.ctr: 44)
+#3 code (tests/test0209.ctr: 44)
+#2 each: (tests/test0209.ctr: 29)
+#1 each: (tests/test0209.ctr: 28)

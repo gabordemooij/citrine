@@ -303,7 +303,7 @@ ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList )
 	ctr_object* block = argumentList->next->object;
 	ctr_argument* compareArguments;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_error_text( CTR_ERR_EXP_BLK );
+		CtrStdFlow = ctr_error( CTR_ERR_EXP_BLK, 0 );
 		return CtrStdNil;
 	}
 	compareArguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
@@ -351,7 +351,7 @@ ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList )
 	ctr_object* message = ctr_internal_cast2string( argumentList->object );
 	ctr_object* arr     = argumentList->next->object;
 	if ( arr->info.type != CTR_OBJECT_TYPE_OTARRAY ) {
-		ctr_error_text( CTR_ERR_EXP_ARR );
+		ctr_error( CTR_ERR_EXP_ARR, 0 );
 		return CtrStdNil;
 	}
 	ctr_size length = (int) ctr_array_count( arr,  NULL )->value.nvalue;
@@ -409,16 +409,14 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* methodBlock;
 	ctr_object* methodName = argumentList->object;
 	if (methodName->info.type != CTR_OBJECT_TYPE_OTSTRING) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_EXP_STR );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_EXP_STR, 0 );
 		return myself;
 	}
 	nextArgument = argumentList->next;
 	methodBlock = nextArgument->object;
 	methodBlock->info.selfbind = 1;
 	if (methodBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_EXP_BLK );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_EXP_BLK, 0 );
 		return myself;
 	}
 	ctr_internal_object_add_property(myself, methodName, methodBlock, 1);
@@ -642,8 +640,7 @@ ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
 		if (codeBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-			CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_DIVZERO );
-			CtrStdFlow->info.sticky = 1;
+			CtrStdFlow = ctr_error( CTR_ERR_DIVZERO, 0 );
 			return myself;
 		}
 		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
@@ -676,8 +673,7 @@ ctr_object* ctr_bool_if_false(ctr_object* myself, ctr_argument* argumentList) {
 	if (!myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
 		if (codeBlock->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-			CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_DIVZERO );
-			CtrStdFlow->info.sticky = 1;
+			CtrStdFlow = ctr_error( CTR_ERR_DIVZERO, 0 );
 			return myself;
 		}
 		ctr_argument* arguments = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
@@ -1246,8 +1242,7 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number a = myself->value.nvalue;
 	ctr_number b = otherNum->value.nvalue;
 	if (b == 0) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_DIVZERO );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_DIVZERO, 0 );
 		return myself;
 	}
 	return ctr_build_number_from_float((a/b));
@@ -1272,8 +1267,7 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	if (otherNum->value.nvalue == 0) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_DIVZERO );
-		CtrStdFlow->info.sticky = 1;
+		CtrStdFlow = ctr_error( CTR_ERR_DIVZERO, 0 );
 		return myself;
 	}
 	myself->value.nvalue /= otherNum->value.nvalue;
@@ -1301,7 +1295,7 @@ ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number a = myself->value.nvalue;
 	ctr_number b = otherNum->value.nvalue;
 	if (b == 0) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_DIVZERO );
+		CtrStdFlow = ctr_error( CTR_ERR_DIVZERO, 0 );
 		return myself;
 	}
 	return ctr_build_number_from_float(fmod(a,b));
@@ -2115,8 +2109,9 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 	}
 	ctr_object* block = argumentList->next->object;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_DIVZERO );
-		CtrStdFlow->info.sticky = 1;
+		ctr_heap_free( needle );
+		ctr_heap_free( options );
+		CtrStdFlow = ctr_error(CTR_ERR_DIVZERO,0);
 		return myself;
 	}
 	int eflags = REG_EXTENDED;
@@ -2124,8 +2119,9 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 	if (flagCI) eflags |= REG_ICASE;
 	reti = regcomp(&pattern, needle, eflags);
 	if ( reti ) {
-		CtrStdFlow = ctr_build_string_from_cstring( CTR_ERR_REGEX );
-		CtrStdFlow->info.sticky=1;
+		ctr_heap_free( needle );
+		ctr_heap_free( options );
+		CtrStdFlow = ctr_error(CTR_ERR_REGEX,0);
 		return CtrStdNil;
 	}
 	char* haystack = ctr_heap_allocate_cstring(myself);
@@ -2255,7 +2251,7 @@ ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argum
 	ctr_object* answer;
 	regex_error = regcomp(&pattern, needle, REG_EXTENDED);
 	if ( regex_error ) {
-		CtrStdFlow = ctr_error_text( CTR_ERR_REGEX );
+		CtrStdFlow = ctr_error( CTR_ERR_REGEX, 0 );
 		answer = CtrStdNil;
 	} else {
 		result = regexec(&pattern, haystack, 0, NULL, 0 );
@@ -2264,7 +2260,7 @@ ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argum
 		} else if ( result == REG_NOMATCH ) {
 			answer = ctr_build_bool( 0 );
 		} else {
-			CtrStdFlow = ctr_build_string_from_cstring( error_message );
+			CtrStdFlow = ctr_error( error_message, 0 );
 			answer = CtrStdNil;
 		}
 	}
@@ -2604,7 +2600,7 @@ ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argument
 	char* keyString = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->object ) );
 	if ( strlen( keyString ) < 16 ) {
 		ctr_heap_free( keyString );
-		CtrStdFlow = ctr_error_text( CTR_ERR_SIPHKEY );
+		CtrStdFlow = ctr_error( CTR_ERR_SIPHKEY, 0 );
 		return CtrStdNil;
 	}
 	uint64_t t = siphash24( myself->value.svalue->value, myself->value.svalue->vlen, keyString);
@@ -2661,6 +2657,11 @@ ctr_object* ctr_block_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_program_length = code->value.svalue->vlen;
 	char* str = ctr_heap_allocate_cstring( code );
 	parsedCode = ctr_cparse_parse( str, "eval");
+	if (parsedCode == NULL) {
+		ctr_heap_free(str);
+		return CtrStdNil;
+	}
+	//ctr_internal_debug_tree(parsedCode,0);
 	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_CODEBLOCK;
 	codeBlockPart1 = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
@@ -2688,6 +2689,8 @@ ctr_object* ctr_block_new(ctr_object* myself, ctr_argument* argumentList) {
  * In other languages:
  * Dutch: [Codeblok] toepassen: [Object] | Start het codeblok met het opgegeven object als argument.
  */
+ 
+int xx = 0;
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my) {
 	ctr_object* result;
 	ctr_tnode* node = myself->value.block;
@@ -2738,6 +2741,8 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 			ctr_argument* a = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 			a->object = ctr_internal_cast2string(CtrStdFlow);
 			CtrStdFlow = NULL;
+			ctr_callstack_index -= errstack;
+			errstack = 0;
 			sticky = a->object->info.sticky;
 			a->object->info.sticky = 1;
 			ctr_gc_internal_pin( a->object );
@@ -2771,7 +2776,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
-		CtrStdFlow = ctr_error_text( CTR_ERR_EXP_BLK );
+		CtrStdFlow = ctr_error( CTR_ERR_EXP_BLK, 0 );
 	}
 	int sticky1, sticky2;
 	sticky1 = myself->info.sticky;

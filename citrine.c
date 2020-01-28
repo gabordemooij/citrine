@@ -116,7 +116,11 @@ int main(int argc, char* argv[]) {
 	}
 	prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
 	program = ctr_cparse_parse(prg, ctr_mode_input_file);
-	/*ctr_internal_debug_tree(program,1); -- for debugging */
+	if (program == NULL) {
+		fwrite(CtrStdFlow->value.svalue->value, CtrStdFlow->value.svalue->vlen, 1, stderr);
+		exit(1);
+	}
+	/* ctr_internal_debug_tree(program,1); -- for debugging */
 	ctr_initialize_world();
 	ctr_cwlk_run(program);
 	ctr_gc_sweep(1);

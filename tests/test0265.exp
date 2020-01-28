@@ -1,0 +1,5 @@
+Uncatched error has occurred.
+Division by zero.
+#3 / (tests/test0265.ctr: 7)
+#2 true: (tests/test0265.ctr: 7)
+#1 * (tests/test0265.ctr: 8)
