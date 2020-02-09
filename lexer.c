@@ -352,11 +352,8 @@ char* ctr_clex_readstr() {
 	int escape;
 	char* beginbuff;
 	long page = 100; /* 100 byte pages */
-	size_t tracking_id;
-
 	ctr_clex_tokvlen=0;
-	strbuff = (char*) ctr_heap_allocate_tracked(memblock);
-	tracking_id = ctr_heap_get_latest_tracking_id();
+	strbuff = (char*) ctr_heap_allocate(memblock);
 	c = *ctr_code;
 	escape = 0;
 	beginbuff = strbuff;
@@ -421,7 +418,7 @@ char* ctr_clex_readstr() {
 		ctr_clex_tokvlen ++;
 		if (ctr_clex_tokvlen >= memblock) {
 			memblock += page;
-			beginbuff = (char*) ctr_heap_reallocate_tracked( tracking_id, memblock );
+			beginbuff = (char*) ctr_heap_reallocate( beginbuff, memblock );
 			if (beginbuff == NULL) {
 				ctr_clex_emit_error( CTR_ERR_OOM );
 			}

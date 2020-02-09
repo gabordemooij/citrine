@@ -382,6 +382,7 @@ ctr_tnode* ctr_cparse_string() {
 	r->value = ctr_heap_allocate_tracked( sizeof( char ) * vlen );
 	memcpy(r->value, n, vlen);
 	r->vlen = vlen;
+	ctr_heap_free(n);
 	int t = ctr_clex_tok(); /* eat trailing quote. */
 	if (t == CTR_TOKEN_FIN) {
 		ctr_cparse_emit_error_unexpected( t, NULL );
