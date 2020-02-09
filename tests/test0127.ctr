@@ -1,7 +1,7 @@
 
 
 
-{ File new: '/tmp/seek_test.txt', delete. } catch: {}, run.
+{ File new: '/tmp/seek_test.txt', delete. } catch: { 'Empty'. }, run.
 
 
 File new: '/tmp/seek_test.txt', exists false: {

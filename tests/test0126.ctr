@@ -29,8 +29,8 @@ Slurp on: 'obtain' do: {
 ✎ write: (Program shell: (Slurp new echo: 'Hello I can write to console using fluid API!', obtain)).
 
 
-{ File new: '/tmp/from.txt', delete. } catch: {}, run.
-{ File new: '/tmp/to.txt', delete. } catch: {}, run.
+{ File new: '/tmp/from.txt', delete. } catch: { 'Empty'. }, run.
+{ File new: '/tmp/to.txt', delete. } catch: { 'Empty'. }, run.
 
 
 File new: '/tmp/to.txt', exists false: {
