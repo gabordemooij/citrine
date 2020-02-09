@@ -1,4 +1,4 @@
-☞ a := List ← Object ; True ; False ; Boolean ; 1 ; Number ; 'Str' ; String ; {}.
+☞ a := List ← Object ; True ; False ; Boolean ; 1 ; Number ; 'Str' ; String ; { 'Empty'. }.
 ✎ write: (a count), stop.
 { :i
 	✎ write: 

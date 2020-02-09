@@ -270,6 +270,10 @@ ctr_tnode* ctr_cparse_block() {
 	paramList->type = CTR_AST_NODE_PARAMLIST;
 	codeList->type = CTR_AST_NODE_INSTRLIST;
 	t = ctr_clex_tok();
+	if (t == CTR_TOKEN_BLOCKCLOSE) {
+		ctr_cparse_emit_error_unexpected( t, NULL );
+		return NULL;
+	}
 	first = 1;
 	while(t == CTR_TOKEN_COLON) {
 		/* okay we have new parameter, load it */

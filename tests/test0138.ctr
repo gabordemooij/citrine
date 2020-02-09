@@ -4,7 +4,7 @@ Program tidiness: 1.
 
 ☞ x := 0.
 ☞ y := 'Hello'.
-☞ q := {}.
+☞ q := { ''. }.
 ☞ p := True.
 ☞ a := List ← 1 ; 2 ; 3 ; 4.
 ☞ c := Object new.
@@ -24,7 +24,7 @@ Program clean memory.
 
 x := 1.
 y := 'Hello'.
-q := {}.
+q := { ''. }.
 p := True.
 a := List ← 1 ; 2 ; 3 ; 5.
 c := Object new.
@@ -39,7 +39,7 @@ Program clean memory.
 
 x := 2.
 y := 'Hello'.
-q := {}.
+q := { ''. }.
 p := True.
 a := List ← 1 ; 2 ; 3 ; 4.
 c := Object new.
@@ -53,7 +53,7 @@ Program clean memory.
 
 x := 3.
 y := 'Hello'.
-q := {}.
+q := { ''. }.
 p := True.
 a := List ← 1 ; 2 ; 3 ; 5.
 c := Object new.
@@ -71,7 +71,7 @@ Program clean memory.
 
 x := 4.
 y := 'Hello'.
-q := {}.
+q := { ''. }.
 p := True.
 a := List ← 1 ; 2 ; 3 ; 4.
 c := Object new.

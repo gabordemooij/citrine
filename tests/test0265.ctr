@@ -3,6 +3,6 @@
 	{
 		☞ a := Code new: '{ 1 / 0. } run.'. 
 		a run.
-	} catch: {	}, run.
+	} catch: { 'Empty'.	}, run.
 	(i = 5) true: {  1 / 0. }.
 } * 10.

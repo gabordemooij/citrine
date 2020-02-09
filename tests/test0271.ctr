@@ -8,7 +8,7 @@ Program memory: 16000000.
 		☞ y := Number between: 1 and: (tokens length).
 		code append: (tokens character: y).
 	} * x.
-	{ Code new: code. } catch: { }, run.
+	{ Code new: code. } catch: { 'Empty'. }, run.
 
 } * 10000.
 ✎ write: 'OK', stop.

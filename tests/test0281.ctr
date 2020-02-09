@@ -5,5 +5,5 @@
 { q ? Nil. } catch: { ✎ write: 'caught!', stop. }, run.
 { q ? (List new). } catch: { ✎ write: 'caught!', stop. }, run.
 { q ? (Object new). } catch: { ✎ write: 'caught!', stop. }, run.
-{ q ? ({}). } catch: { ✎ write: 'caught!', stop. }, run.
+{ q ? ({ 'Empty'. }). } catch: { ✎ write: 'caught!', stop. }, run.
 ✎ write: 'caught them all', stop.

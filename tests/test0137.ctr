@@ -5,7 +5,7 @@ Program tidiness: 0.
 
 ☞ x := 0.
 ☞ y := 'Hello'.
-☞ q := {}.
+☞ q := { 'Empty'. }.
 ☞ p := True.
 ☞ a := List ← 1 ; 2 ; 3 ; 4.
 
@@ -22,7 +22,7 @@ usedMemory1 := (Program memory ? 1).
 
 x := 1.
 y := 'Hello'.
-q := {}.
+q := { 'Empty'. }.
 p := True.
 a := List ← 1 ; 2 ; 3 ; 5.
 
@@ -34,7 +34,7 @@ usedMemory2 := (Program memory ? 1).
 
 x := 2.
 y := 'Hello'.
-q := {}.
+q := { 'Empty'. }.
 p := True.
 a := List ← 1 ; 2 ; 3 ; 4.
 
@@ -46,7 +46,7 @@ usedMemory3 := (Program memory ? 1).
 
 x := 3.
 y := 'Hello'.
-q := {}.
+q := { 'Empty'. }.
 p := True.
 a := List ← 1 ; 2 ; 3 ; 5.
 
@@ -60,7 +60,7 @@ usedMemory4 := (Program memory ? 1).
 
 x := 4.
 y := 'Hello'.
-q := {}.
+q := { 'Empty'. }.
 p := True.
 a := List ← 1 ; 2 ; 3 ; 4.
 
