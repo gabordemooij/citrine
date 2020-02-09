@@ -260,13 +260,14 @@ ctr_tnode* ctr_cparse_block() {
 	r = ctr_cparse_create_node( CTR_AST_NODE );
 	r->type = CTR_AST_NODE_CODEBLOCK;
 	codeBlockPart1 = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
-	r->nodes = codeBlockPart1;
 	codeBlockPart2 = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
-	r->nodes->next = codeBlockPart2;
+	r->nodes = codeBlockPart1;
 	paramList = ctr_cparse_create_node( CTR_AST_NODE );
 	codeList  = ctr_cparse_create_node( CTR_AST_NODE );
 	codeBlockPart1->node = paramList;
 	codeBlockPart2->node = codeList;
+	codeBlockPart1->next = codeBlockPart2;
+	codeBlockPart2->next = NULL; /* a codeblock has fixed nodes: instr and param, just 2 */
 	paramList->type = CTR_AST_NODE_PARAMLIST;
 	codeList->type = CTR_AST_NODE_INSTRLIST;
 	t = ctr_clex_tok();
