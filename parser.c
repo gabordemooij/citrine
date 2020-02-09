@@ -270,6 +270,13 @@ ctr_tnode* ctr_cparse_block() {
 	codeBlockPart2->next = NULL; /* a codeblock has fixed nodes: instr and param, just 2 */
 	paramList->type = CTR_AST_NODE_PARAMLIST;
 	codeList->type = CTR_AST_NODE_INSTRLIST;
+	paramList->value = NULL;
+	paramList->vlen = 0;
+	paramList->nodes = NULL;
+	codeList->type = CTR_AST_NODE_INSTRLIST;
+	codeList->value = NULL;
+	codeList->vlen = 0;
+	codeList->nodes = NULL;
 	t = ctr_clex_tok();
 	if (t == CTR_TOKEN_BLOCKCLOSE) {
 		ctr_cparse_emit_error_unexpected( t, NULL );
