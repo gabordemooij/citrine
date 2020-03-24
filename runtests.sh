@@ -58,8 +58,9 @@ cp bin/${OS}/ctrus bin/Generic/ctr
 #Add plugin translations
 ./bin/${OS}/ctrus -g plugins/request/i18n/us/dictionary.h plugins/request/i18n/nl/dictionary.h >> dict/ennl.dict
 
+
 j=1
-for i in $(find tests -name 'test*.ctr'); do
+for i in $(find tests -name 'test0*.ctr'); do
 	touch /tmp/a
 	touch /tmp/b
 	touch /tmp/c

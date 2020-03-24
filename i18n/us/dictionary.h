@@ -191,5 +191,8 @@
 #define CTR_DICT_RESPOND_TO_AND_AND              "respond:and:and:"
 #define CTR_DICT_RESPOND_TO_AND_AND_AND          "respond:and:and:and:"
 #define CTR_DICT_THIS_BLOCK                      "this code block"
+#define CTR_DICT_NUM_DEC_SEP                     "."
+#define CTR_DICT_NUM_THO_SEP                     ","
+
 
 

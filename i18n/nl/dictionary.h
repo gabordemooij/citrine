@@ -191,4 +191,5 @@
 #define CTR_DICT_RESPOND_TO_AND_AND              "reageer:en:en:"
 #define CTR_DICT_RESPOND_TO_AND_AND_AND          "reageer:en:en:en:"
 #define CTR_DICT_THIS_BLOCK                      "dit codeblok"
-
+#define CTR_DICT_NUM_DEC_SEP                     ","
+#define CTR_DICT_NUM_THO_SEP                     "."

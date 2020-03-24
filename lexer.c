@@ -252,14 +252,26 @@ int ctr_clex_tok() {
 	}
 
 	eol = ( strncmp(ctr_code,CTR_DICT_END_OF_LINE,ctr_clex_keyword_eol_len)==0 );
+	
 	if ((c == '-' && (ctr_code+1)<ctr_eofcode && isdigit(*(ctr_code+1))) || isdigit(c)) {
 		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
 		i++;
 		ctr_code++;
 		c = *ctr_code;
-		while((isdigit(c))) {
-			ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
-			i++;
+		while(
+			(isdigit(c)) 
+			|| 
+			(
+				((ctr_code+ctr_clex_keyword_num_sep_tho_len+1) <= ctr_eofcode) &&
+				(strncmp(ctr_code,CTR_DICT_NUM_THO_SEP,ctr_clex_keyword_num_sep_tho_len)==0) &&
+				(isdigit(*(ctr_code+ctr_clex_keyword_num_sep_tho_len)))
+			)
+		) {
+			//Parse thousands separator (filter)
+			if (!(strncmp(ctr_code,CTR_DICT_NUM_THO_SEP,ctr_clex_keyword_num_sep_tho_len)==0)) {
+				ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
+				i++;
+			}
 			ctr_code++;
 			c = *ctr_code;
 		}
@@ -267,12 +279,18 @@ int ctr_clex_tok() {
 		if (eol && (ctr_code+ctr_clex_keyword_eol_len <= ctr_eofcode) && !isdigit(*(ctr_code+ctr_clex_keyword_eol_len))) {
 			return CTR_TOKEN_NUMBER;
 		}
-		if (c=='.') {
-			ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
+		
+		//Parse decimal separator (turn into international symbol .)
+		if (
+		((ctr_code+ctr_clex_keyword_num_sep_dec_len+1) <= ctr_eofcode) &&
+		isdigit(*(ctr_code+ctr_clex_keyword_num_sep_dec_len)) &&
+		strncmp(ctr_code,CTR_DICT_NUM_DEC_SEP,ctr_clex_keyword_num_sep_dec_len)==0) {
+			ctr_clex_buffer[i] = '.'; ctr_clex_tokvlen++;
 			i++;
 			ctr_code++;
 			c = *ctr_code;
 		}
+		
 		while((isdigit(c))) {
 			ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
 			i++;

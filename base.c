@@ -1531,15 +1531,18 @@ ctr_object* ctr_number_to_byte(ctr_object* myself, ctr_argument* argumentList) {
  * In other languages:
  * Dutch: [Getal] tekst
  */
+char* ctr_international_number(char* old_number, char* new_number);
 ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* o = myself;
 	int slen;
 	char* s;
+	char* q;
 	char* p;
 	char* buf;
 	int bufSize;
 	ctr_object* stringObject;
-	s = ctr_heap_allocate( 80 * sizeof( char ) );
+	s = ctr_heap_allocate( 100 * sizeof( char ) );
+	q = ctr_heap_allocate( 100 * sizeof( char ) );
 	bufSize = 100 * sizeof( char );
 	buf = ctr_heap_allocate( bufSize );
 	snprintf( buf, 99, "%.10f", o->value.nvalue );
@@ -1549,10 +1552,31 @@ ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList)
 	if ( *p == '.' ) *p = '\0';
 	strncpy( s, buf, strlen( buf ) );
 	ctr_heap_free( buf );
-	slen = strlen(s);
-	stringObject = ctr_build_string(s, slen);
+	q = ctr_international_number( s, q );
+	slen = strlen(q);
+	stringObject = ctr_build_string(q, slen);
+	ctr_heap_free( q );
 	ctr_heap_free( s );
 	return stringObject;
+}
+
+/**
+ * Format a number to the target language.
+ */
+char* ctr_international_number(char* old_number, char* new_number) {
+	char i, j, l, old_length;
+	l = strlen(CTR_DICT_NUM_DEC_SEP);
+	old_length = strlen( old_number );
+	for( i = 0; i < old_length; i ++ ) {
+		if ( *(old_number + i) == '.' ) {
+			strncpy( new_number + j , CTR_DICT_NUM_DEC_SEP, l);
+			j += l;
+			continue;
+		}
+		*(new_number + j) = *(old_number + i);
+		j++;
+	}
+	return new_number;
 }
 
 /**
