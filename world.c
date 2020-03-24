@@ -709,7 +709,6 @@ void ctr_initialize_world() {
 
 	/* Block */
 	CtrStdBlock = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBLOCK);
-	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_block_new );
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_RUN ), &ctr_block_runIt );
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_APPLY_TO ), &ctr_block_runIt );
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_APPLY_TO_AND ), &ctr_block_runIt );
@@ -802,7 +801,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_EXISTS ), &ctr_file_exists );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_SIZE ), &ctr_file_size );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_DELETE ), &ctr_file_delete );
-	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_INCLUDE ), &ctr_file_include );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_OPEN ), &ctr_file_open );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_CLOSE ), &ctr_file_close );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_READ_BYTES ), &ctr_file_read_bytes );
@@ -837,6 +835,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FLUSH ), &ctr_program_flush );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ERROR ), &ctr_program_err );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MEMORY ), &ctr_gc_memory );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_USE_SET ), &ctr_program_include );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_COMP_ICON ), CtrStdCommand, 0 );
 	CtrStdCommand->link = CtrStdObject;
 	CtrStdCommand->info.sticky = 1;

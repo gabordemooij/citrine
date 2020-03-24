@@ -1,4 +1,4 @@
 'SINGLE_LANGUAGE'.
 
 ✎ write: 'Test Stack trace over multiple files.', stop.
-File new: 'tests/test0140.ctr', include.
+Program use: 'tests/test0140.ctr'.

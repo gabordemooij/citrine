@@ -1,7 +1,9 @@
 'SINGLE_LANGUAGE'.
 
 String on: 'evaluate' do: {
-	↲ (Code new: ('↲ <code>.' <code>: ⛏ string)) run.
+	☞ code := File new: '/tmp/eval.ctr'.
+	code write: (⛏ string + '.').
+	Program use: '/tmp/eval.ctr'.
 }.
 
 ☞ Q := (39 byte).
@@ -9,11 +11,13 @@ String on: 'evaluate' do: {
 ☞ q := List ← ('Quotes ' + Q + ' are evil?') ; 1.
 ☞ x := q string.
 ✎ write: x, stop.
-☞ y := x evaluate.
+☞ y := Nil.
+('y := ' + x ) evaluate.
 ✎ write: y ? 1, stop.
 
 q := Map put: Q at: (Q + 'quote' + Q).
 x := q string.
 ✎ write: x, stop.
-y := x evaluate.
+y := Nil.
+('y := ' + x ) evaluate.
 ✎ write: y ? '\'quote\'', stop.

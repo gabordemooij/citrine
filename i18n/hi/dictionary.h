@@ -111,7 +111,7 @@
 #define CTR_DICT_EXISTS          "मौजूद"
 #define CTR_DICT_SIZE            "आकार"
 #define CTR_DICT_DELETE          "हटाना"
-#define CTR_DICT_INCLUDE         "शामिल" 
+#define CTR_DICT_USE_SET         "उपयोग:"
 #define CTR_DICT_OPEN            "खोलना:"
 #define CTR_DICT_CLOSE           "बंद-करे"
 #define CTR_DICT_LIST            "सूची:"

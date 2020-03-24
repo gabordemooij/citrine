@@ -111,7 +111,7 @@
 #define CTR_DICT_EXISTS          "egzistuoja"
 #define CTR_DICT_SIZE            "dydis"
 #define CTR_DICT_DELETE          "ištrinti"
-#define CTR_DICT_INCLUDE         "įdėti"
+#define CTR_DICT_USE_SET         "naudoti:"
 #define CTR_DICT_OPEN            "atidaryti:"
 #define CTR_DICT_CLOSE           "uždaryti"
 #define CTR_DICT_LIST            "sąrašas:"

@@ -362,6 +362,38 @@ ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
+ * [Program] add: [String]
+ *
+ * Includes the Citrine Program file identified by the file name string.
+ */
+ctr_object* ctr_program_include(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_size vlen;
+	char* pathString;
+	ctr_object* path;
+	ctr_tnode* parsedCode;
+	char* prg;
+	uint64_t program_size;
+	path = ctr_internal_cast2string(argumentList->object);
+	vlen = path->value.svalue->vlen;
+	pathString = ctr_heap_allocate_tracked(sizeof(char)*(vlen+1)); //needed until end, pathString appears in stracktrace
+	if (path == NULL) return myself;
+	program_size = 0;
+	memcpy(pathString, path->value.svalue->value, vlen);
+	memcpy(pathString+vlen,"\0",1);
+	prg = ctr_internal_readf(pathString, &program_size);
+	parsedCode = ctr_cparse_parse(prg, pathString);
+	if (parsedCode == NULL) {
+		ctr_heap_free( prg );
+		return CtrStdNil;
+	}
+	ctr_heap_free( prg );
+	ctr_cwlk_subprogram++;
+	ctr_cwlk_run(parsedCode);
+	ctr_cwlk_subprogram--;
+	return myself;
+}
+
+/**
  * [Program] arguments
  *
  * Returns the number of CLI arguments passed to the script.

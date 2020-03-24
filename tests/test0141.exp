@@ -4,4 +4,4 @@ Hi!
 #4 error: (tests/test0140.ctr: 11)
 #3 run (tests/test0140.ctr: 12)
 #2 run (tests/test0140.ctr: 15)
-#1 include (tests/test0141.ctr: 4)
+#1 use: (tests/test0141.ctr: 4)

@@ -2643,42 +2643,6 @@ ctr_object* ctr_build_block(ctr_tnode* node) {
 	return codeBlockObject;
 }
 
-ctr_object* ctr_block_new(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_tnode* parsedCode;
-	ctr_object* code;
-	ctr_tnode* r;
-	ctr_tlistitem* codeBlockPart1;
-	ctr_tlistitem* codeBlockPart2;
-	ctr_tnode* paramList;
-	ctr_tnode* codeList;
-	ctr_object* block = ctr_internal_create_object( CTR_OBJECT_TYPE_OTBLOCK );
-	code = ctr_internal_cast2string(argumentList->object);
-	block->link = CtrStdBlock;
-	ctr_program_length = code->value.svalue->vlen;
-	char* str = ctr_heap_allocate_cstring( code );
-	parsedCode = ctr_cparse_parse( str, "eval");
-	if (parsedCode == NULL) {
-		ctr_heap_free(str);
-		return CtrStdNil;
-	}
-	//ctr_internal_debug_tree(parsedCode,0);
-	r = ctr_cparse_create_node( CTR_AST_NODE );
-	r->type = CTR_AST_NODE_CODEBLOCK;
-	codeBlockPart1 = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
-	r->nodes = codeBlockPart1;
-	codeBlockPart2 = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
-	r->nodes->next = codeBlockPart2;
-	paramList = ctr_cparse_create_node( CTR_AST_NODE );
-	codeList  = parsedCode;
-	codeBlockPart1->node = paramList;
-	codeBlockPart2->node = codeList;
-	paramList->type = CTR_AST_NODE_PARAMLIST;
-	codeList->type = CTR_AST_NODE_INSTRLIST;
-	block->value.block = r;
-	ctr_heap_free(str);
-	return block;
-}
-
 /**
  * [Block] apply: [object]
  *

@@ -238,37 +238,6 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [File] include
- *
- * Includes the file as a piece of executable code.
- *
- * In other languages:
- * Dutch: [bestand] invoegen.
- * Voegt het bestand in als uitvoerbare programmacode.
- * De inhoud van het bestand zal worden uitgevoerd.
- */
-ctr_object* ctr_file_include(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
-	ctr_tnode* parsedCode;
-	ctr_size vlen;
-	char* pathString;
-	char* prg;
-	uint64_t program_size = 0;
-	if (path == NULL) return myself;
-	vlen = path->value.svalue->vlen;
-	pathString = ctr_heap_allocate_tracked(sizeof(char)*(vlen+1)); //needed until end, pathString appears in stracktrace
-	memcpy(pathString, path->value.svalue->value, vlen);
-	memcpy(pathString+vlen,"\0",1);
-	prg = ctr_internal_readf(pathString, &program_size);
-	parsedCode = ctr_cparse_parse(prg, pathString);
-	ctr_heap_free( prg );
-	ctr_cwlk_subprogram++;
-	ctr_cwlk_run(parsedCode);
-	ctr_cwlk_subprogram--;
-	return myself;
-}
-
-/**
  * [File] delete
  *
  * Deletes the file.

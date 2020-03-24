@@ -612,6 +612,7 @@ extern ctr_object* ctr_program_forbid_include(ctr_object* myself, ctr_argument* 
 extern ctr_object* ctr_program_countdown(ctr_object* myself, ctr_argument* ctr_argumentList);
 extern ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList );
 extern ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_program_include(ctr_object* myself, ctr_argument* argumentList );
 
 /**
  * Clock Interface
