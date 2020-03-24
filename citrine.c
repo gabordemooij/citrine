@@ -21,6 +21,8 @@ char* ctr_mode_hfile1;
 char* ctr_mode_hfile2;
 char ctr_flag_sandbox;
 ctr_size ctr_clex_keyword_eol_len;
+ctr_size ctr_clex_keyword_num_sep_dec_len;
+ctr_size ctr_clex_keyword_num_sep_tho_len;
 uint16_t ctr_sandbox_steps = 0;
 
 /**
@@ -104,6 +106,8 @@ int main(int argc, char* argv[]) {
 	ctr_clex_keyword_my_icon_len = strlen( ctr_clex_keyword_my_icon );
 	ctr_clex_keyword_var_icon_len = strlen( ctr_clex_keyword_var_icon );
 	ctr_clex_keyword_eol_len = strlen( CTR_DICT_END_OF_LINE );
+	ctr_clex_keyword_num_sep_dec_len = strlen( CTR_DICT_NUM_DEC_SEP );
+	ctr_clex_keyword_num_sep_tho_len = strlen( CTR_DICT_NUM_THO_SEP );
 	int mode = ctr_cli_read_args(argc, argv);
 	if (mode == 1) {
 		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);

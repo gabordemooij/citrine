@@ -13,36 +13,3 @@ x run.
 ✎ write: (Object done), stop.
 ✎ write: ('This <path> has no file' <path>: File path), stop.
 ✎ write: List count, stop.
-☞ dictionary := (File new: 'i18n/us/dictionary.h') read.
-☞ words := List new.
-☞ things := List new.
-☞ counter := 0.
-(dictionary split: '↵') each: { :number :line
-	line pattern: '"([^"]+)"' process: { :match
-		(counter > 18) true: { words append: (match position: 2). }.
-		((counter > 6) & (counter < 19)) true: { things append: (match position: 2). }.
-		counter add: 1.
-	}.
-}.
-
-things each: { :n :thing
-	words each: { :i :word
-		☞ task := '<object> <message>'.
-		
-		(thing = 'Code' & word = 'new:') continue.
-		(thing = 'Program' & word = 'ask') continue.
-		
-		task := task <object>:  thing.
-		task := task <message>: word.
-		
-		
-		task := task replace: ':' with: ': 1 '.
-		(word length = 1) true: { task append: ' 1'. }.
-		task append: '.'.
-		
-		✎ write: task, stop.
-		☞ code := Code new: task.
-		code catch: { :error ✎ write: 'error', stop. }, run.
-	}.
-}.
-

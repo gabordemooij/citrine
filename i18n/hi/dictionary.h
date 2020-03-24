@@ -191,3 +191,5 @@
 #define CTR_DICT_RESPOND_TO_AND_AND              "प्रतिक्रिया:और:और:"
 #define CTR_DICT_RESPOND_TO_AND_AND_AND          "प्रतिक्रिया:और:और:और:"
 #define CTR_DICT_THIS_BLOCK                      "यह-सूत्र-स्थान-है"
+#define CTR_DICT_NUM_DEC_SEP                     "."
+#define CTR_DICT_NUM_THO_SEP                     ","

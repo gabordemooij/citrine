@@ -284,6 +284,8 @@ extern char* ctr_clex_keyword_var_icon;
 extern ctr_size ctr_clex_keyword_my_icon_len;
 extern ctr_size ctr_clex_keyword_var_icon_len;
 extern ctr_size ctr_clex_keyword_eol_len;
+extern ctr_size ctr_clex_keyword_num_sep_dec_len;
+extern ctr_size ctr_clex_keyword_num_sep_tho_len;
 extern void ctr_clex_set_ignore_modes( int ignore );
 
 /**

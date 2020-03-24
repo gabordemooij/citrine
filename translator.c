@@ -44,6 +44,9 @@ typedef struct ctr_note ctr_note;
 ctr_note* previousNote = NULL;
 ctr_note* firstNote = NULL;
 
+ctr_dict* ctr_trans_d;
+ctr_dict* ctr_trans_x;
+
 /**
  * Creates a note and attached it to the specified pointer.
  * The notebook is used to associate parts of messages with the message
@@ -219,7 +222,14 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 			snprintf(buffer, 600, format, key1, key2, lineCounter);
 			ctr_print_error(buffer, 1);
 		}
-		printf("t \"%s\" \"%s\"\n", word, translation);
+		if (strncmp(key1, "CTR_DICT_NUM_DEC_SEP", strlen("CTR_DICT_NUM_DEC_SEP"))==0) {
+			printf("d \"%s\" \"%s\"\n", word, translation);
+		}
+		else if (strncmp(key1, "CTR_DICT_NUM_THO_SEP", strlen("CTR_DICT_NUM_THO_SEP"))==0) {
+			printf("x \"%s\" \"%s\"\n", word, translation);
+		} else {
+			printf("t \"%s\" \"%s\"\n", word, translation);
+		}
 		lineCounter++;
 	}
 	fclose(f1);
@@ -264,6 +274,14 @@ ctr_dict* ctr_translate_load_dictionary() {
 		entry->translation = calloc( entry->translationLength, 1 );
 		memcpy(entry->word, word, entry->wordLength);
 		memcpy(entry->translation, translation, entry->translationLength);
+		
+		if (translationType == 'd') {
+			ctr_trans_d = entry;
+		}
+		if (translationType == 'x') {
+			ctr_trans_x = entry;
+		}
+		
 		if (previousEntry) {
 			entry->next = previousEntry;
 		} else {
@@ -512,6 +530,37 @@ char* ctr_translate_dot(char* codePointer, ctr_dict* dictionary) {
 }
 
 /**
+ * Translates a number from one language into another taking into
+ * account numeric writing systems like decimal separators and thousand
+ * separators.
+ */
+char* ctr_translate_number(char* codePointer) {
+	char* p;
+	char* e;
+	p = codePointer;
+	e = ctr_clex_code_pointer();
+	while( p < e ) {
+		if ( ctr_trans_d->wordLength <= ( e - p ) ) {
+			if ( strncmp( ctr_trans_d->word, p, ctr_trans_d->wordLength ) == 0 ) {
+				fwrite(ctr_trans_d->translation, ctr_trans_d->translationLength,1,stdout);
+				p += ctr_trans_d->wordLength;
+				continue;
+			}
+		}
+		if ( ctr_trans_x->wordLength <= ( e - p ) ) {
+			if ( strncmp( ctr_trans_x->word, p, ctr_trans_x->wordLength ) == 0 ) {
+				fwrite(ctr_trans_x->translation, ctr_trans_x->translationLength,1,stdout);
+				p += ctr_trans_x->wordLength;
+				continue;
+			}
+		}
+		fwrite(p, 1,1,stdout);
+		p += 1;
+	}
+	return e;
+}
+
+/**
  * Prints the remaining part of the program.
  */
 void ctr_translate_fin(char* codePointer) {
@@ -551,6 +600,9 @@ void ctr_translate_program(char* prg, char* programPath) {
 		else if ( t == CTR_TOKEN_DOT ) {
 			p = ctr_translate_dot(p,dictionary);
 		}
+		else if ( t == CTR_TOKEN_NUMBER ) {
+			p = ctr_translate_number(p);
+		}	
 		else {
 			p = ctr_translate_rest(p);
 		}
