@@ -1,7 +1,7 @@
 'SINGLE_LANGUAGE'.
 ☞ myVar := 123.
 ✎ write: 'Start include test', stop.
-(File new: 'tests/assets/includetesten.ctr') include.
+Program use: 'tests/assets/includetesten.ctr'.
 ✎ stop write: 'End include test', stop.
 ✎ write: 'Are my variables still intact?'.
 ✎ stop write: myVar.

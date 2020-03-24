@@ -1,11 +1,12 @@
 'SINGLE_LANGUAGE'.
 String on: 'evaluate' do: {
-	↲ (Code new: ('↲ <code>.' <code>: ⛏ string)) run.
+	☞ code := File new: '/tmp/eval.ctr'.
+	code write: ⛏ string.
+	Program use: '/tmp/eval.ctr'.
 }.
-
 List on: '←' do: {
 	✎ write: 'Blaaaa', stop.
 }.
 ☞ x := Nil.
-☞ q := 'x := List ← 1'.
+☞ q := 'x := List ← 1.'.
 q evaluate.

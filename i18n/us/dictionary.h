@@ -111,7 +111,7 @@
 #define CTR_DICT_EXISTS          "exists"
 #define CTR_DICT_SIZE            "size"
 #define CTR_DICT_DELETE          "delete"
-#define CTR_DICT_INCLUDE         "include" 
+#define CTR_DICT_USE_SET         "use:" 
 #define CTR_DICT_OPEN            "open:"
 #define CTR_DICT_CLOSE           "close"
 #define CTR_DICT_LIST            "list:"

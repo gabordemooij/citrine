@@ -111,7 +111,7 @@
 #define CTR_DICT_EXISTS          "există"
 #define CTR_DICT_SIZE            "dimensiune"
 #define CTR_DICT_DELETE          "şterge"
-#define CTR_DICT_INCLUDE         "include" 
+#define CTR_DICT_USE_SET         "utilizare:" 
 #define CTR_DICT_OPEN            "deschide:"
 #define CTR_DICT_CLOSE           "închide"
 #define CTR_DICT_LIST            "listă:"

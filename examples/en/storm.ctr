@@ -2,10 +2,10 @@
 ✎ write: 'Start Storm Server↵'.
 Request host:'localhost' listen:4001 pid:'storm.pid' callback: {
 	✎ write: 'Content-type: text/html\n'.
-	☞ fname := Program env: 'DOCUMENT_URI'.
+	☞ fname := Program setting: 'DOCUMENT_URI'.
 	☞ script := File new: '/var/www/htdocs' + fname.
 	{
-		1 * {	script include.	}.
+		1 * { script include.	}.
 	} catch: { :e
 		✎ write: 'An error has occurred.', stop.
 		✎ write: e, stop.
