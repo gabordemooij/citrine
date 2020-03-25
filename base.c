@@ -23,6 +23,65 @@ uint64_t    ctr_cwlk_subprogram;
 int ctr_in_message;
 
 /**
+ * Format a number to the target language.
+ */
+char* ctr_international_number(char* old_number, char* new_number) {
+	char i, j, l, s, k, old_length;
+	char* x;
+	j = 0;
+	k = 0;
+	l = strlen(CTR_DICT_NUM_DEC_SEP);
+	old_length = strlen( old_number );
+	x = strchr( old_number, '.' );
+	if ( x == NULL ) {
+		s = old_length;
+	} else {
+		s = (char) (x - old_number);
+	}
+	for( i = 0; i < old_length; i ++ ) {
+		if ( *(old_number + i) == '.' ) {
+			strncpy( new_number + j , CTR_DICT_NUM_DEC_SEP, l);
+			j += l;
+			continue;
+		}
+		if ( (i < s) && ( k > 0 ) && ( ( s - i ) % 3 ) == 0 ) {
+			strncpy( new_number + j, CTR_DICT_NUM_THO_SEP, ctr_clex_keyword_num_sep_tho_len );
+			j += ctr_clex_keyword_num_sep_tho_len;
+		}
+		if (isdigit(*(old_number + i))) {
+			k++;
+		}
+		*(new_number + j) = *(old_number + i);
+		j++;
+	}
+	return new_number;
+}
+
+/**
+ * Format a national number to international notation.
+ */
+char* ctr_national_number(char* old_number, char* new_number) {
+	char i, j, old_length;
+	j = 0;
+	old_length = strlen( old_number );
+	for( i = 0; i < old_length; i ++ ) {
+		if ( strncmp(old_number+i, CTR_DICT_NUM_THO_SEP, ctr_clex_keyword_num_sep_tho_len) == 0 ) {
+			i += (ctr_clex_keyword_num_sep_tho_len - 1);
+			continue;
+		}
+		if ( strncmp(old_number+i, CTR_DICT_NUM_DEC_SEP, ctr_clex_keyword_num_sep_dec_len) == 0 ) {
+			i += (ctr_clex_keyword_num_sep_tho_len - 1);
+			*(new_number + j) = '.';
+			j++;
+			continue;
+		}
+		*(new_number + j) = *(old_number + i);
+		j++;
+	}
+	return new_number;
+}
+
+/**
  * Nil
  *
  * Nil represents 'nothing' or NULL in other languages.
@@ -826,17 +885,26 @@ ctr_object* ctr_build_number(char* n) {
  * @internal
  * BuildNumberFromString
  */
-ctr_object* ctr_build_number_from_string(char* str, ctr_size length) {
-	char* numCStr;
+ctr_object* ctr_build_number_from_string(char* str, ctr_size length, char international) {
+	char* old_number;
+	char* new_number;
 	ctr_object* numberObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	/* turn string into a C-string before feeding it to atof */
 	int stringNumberLength = ( length <= 40 ) ? length : 40;
 	/* max length is 40 (and that's probably even too long... ) */
-	numCStr = (char*) ctr_heap_allocate( 41 * sizeof( char ) );
-	memcpy( numCStr, str, stringNumberLength );
-	numberObject->value.nvalue = atof(numCStr);
+	old_number = (char*) ctr_heap_allocate( 41 * sizeof( char ) );
+	memcpy( old_number, str, stringNumberLength );
+	/* convert national number to international number */
+	if (international) {
+		new_number = (char*) ctr_heap_allocate( 41 * sizeof( char ) );
+		ctr_national_number( old_number, new_number );
+		numberObject->value.nvalue = atof(new_number);
+		ctr_heap_free( new_number );
+	} else {
+		numberObject->value.nvalue = atof(old_number);
+	}
 	numberObject->link = CtrStdNumber;
-	ctr_heap_free( numCStr );
+	ctr_heap_free( old_number );
 	return numberObject;
 }
 
@@ -1561,22 +1629,34 @@ ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * Format a number to the target language.
+ * [Number] international number
+ *
+ * Returns a string representation of the number, parsing the number
+ * as an international number (using the dot as the decimal separator and
+ * using no thousands separator).
  */
-char* ctr_international_number(char* old_number, char* new_number) {
-	char i, j, l, old_length;
-	l = strlen(CTR_DICT_NUM_DEC_SEP);
-	old_length = strlen( old_number );
-	for( i = 0; i < old_length; i ++ ) {
-		if ( *(old_number + i) == '.' ) {
-			strncpy( new_number + j , CTR_DICT_NUM_DEC_SEP, l);
-			j += l;
-			continue;
-		}
-		*(new_number + j) = *(old_number + i);
-		j++;
-	}
-	return new_number;
+ctr_object* ctr_number_to_string_flat(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* o = myself;
+	int slen;
+	char* s;
+	char* p;
+	char* buf;
+	int bufSize;
+	ctr_object* stringObject;
+	s = ctr_heap_allocate( 100 * sizeof( char ) );
+	bufSize = 100 * sizeof( char );
+	buf = ctr_heap_allocate( bufSize );
+	snprintf( buf, 99, "%.10f", o->value.nvalue );
+	p = buf + strlen(buf) - 1;
+	while ( *p == '0' && *p-- != '.' );
+	*( p + 1 ) = '\0';
+	if ( *p == '.' ) *p = '\0';
+	strncpy( s, buf, strlen( buf ) );
+	ctr_heap_free( buf );
+	slen = strlen(s);
+	stringObject = ctr_build_string(s, slen);
+	ctr_heap_free( s );
+	return stringObject;
 }
 
 /**
@@ -2340,7 +2420,11 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
  * Dutch: [Tekst] getal | Geeft de getalwaarde van de tekst of anders 0.
  */
 ctr_object* ctr_string_to_number(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_number_from_string(myself->value.svalue->value, myself->value.svalue->vlen);
+	return ctr_build_number_from_string(myself->value.svalue->value, myself->value.svalue->vlen, 1);
+}
+
+ctr_object* ctr_string_in_to_number(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_string(myself->value.svalue->value, myself->value.svalue->vlen, 0);
 }
 
 /**
