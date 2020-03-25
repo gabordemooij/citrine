@@ -8,7 +8,7 @@
 Program tidiness: 0.
 
 ☞ txt := '1.6'.
-☞ n := txt number.
+☞ n := txt international number.
 ☞ t := txt boolean.
 ✎ write: n, stop.
 ✎ write: t, stop.
@@ -21,7 +21,7 @@ usedMemory1 := (Program memory ? 1).
 
 
 txt := '1.6'.
-n := txt number.
+n := txt international number.
 t := txt boolean.
 ✎ write: n, stop.
 ✎ write: t, stop.
@@ -33,7 +33,7 @@ usedMemory2 := (Program memory ? 1).
 
 
 txt := '1.6'.
-n := txt number.
+n := txt international number.
 t := txt boolean.
 ✎ write: n, stop.
 ✎ write: t, stop.

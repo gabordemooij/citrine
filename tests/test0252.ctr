@@ -12,17 +12,17 @@ clock year: 1981, month: 1, day: 5,
 ✎ write: clock, stop.
 
 ✎ write: (
-	(clock year) + '-' + (clock month) + '-' + (clock day) + ' ' +
+	(clock year raw) + '-' + (clock month) + '-' + (clock day) + ' ' +
 	(clock hour) + ':' + (clock minute) + ':' + (clock second) + ' ' +
-	'W' + (clock week) + ' t' + (clock time) + ' ' + (clock zone)
+	'W' + (clock week) + ' t' + (clock time raw) + ' ' + (clock zone)
 ), stop.
 
 
 clock zone: 'Europe/Amsterdam'.
 ✎ write: (
-	(clock year) + '-' + (clock month) + '-' + (clock day) + ' ' +
+	(clock year raw) + '-' + (clock month) + '-' + (clock day) + ' ' +
 	(clock hour) + ':' + (clock minute) + ':' + (clock second) + ' ' +
-	'W' + (clock week) + ' t' + (clock time) + ' ' + (clock zone)
+	'W' + (clock week) + ' t' + (clock time raw) + ' ' + (clock zone)
 ), stop.
 
 ☞ clock2 := clock new zone: 'Europe/Amsterdam', month: 6, hour: 8.

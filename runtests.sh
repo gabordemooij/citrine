@@ -93,27 +93,31 @@ for i in $(find tests -name 'test0*.ctr'); do
 		done
 	fi
 	echo "[running...]";
-	echo "test" | ./bin/${OS}/ctrus ${fitem} 1>/tmp/a0 2>/tmp/b0
-	if [ "$directive" != "'SINGLE_RUN'." ]; then
-		echo "test" | ./bin/${OS}/ctrus tests/runner1.ctr 1>/tmp/a1 2>/tmp/b1
-		echo "test" | ./bin/${OS}/ctrus tests/runner2.ctr 1>/tmp/a2 2>/tmp/b2
-		echo "test" | ./bin/${OS}/ctrus tests/runner3.ctr 1>/tmp/a3 2>/tmp/b3
-		echo "test" | ./bin/${OS}/ctrus tests/runner4.ctr 1>/tmp/a4 2>/tmp/b4
-		echo "test" | ./bin/${OS}/ctrus tests/runner5.ctr 1>/tmp/a5 2>/tmp/b5
-		echo "test" | ./bin/${OS}/ctrus tests/runner6.ctr 1>/tmp/a6 2>/tmp/b6
-		if [ "$directive" != "'SINGLE_LANGUAGE'." ]; then
-			echo "test" | ./bin/${OS}/ctrnl tests/runner7.ctr 1>/tmp/a7 2>/tmp/b7
-			echo "test" | ./bin/${OS}/ctrnl tests/runner8.ctr 1>/tmp/a8 2>/tmp/b8
-			echo "test" | ./bin/${OS}/ctrnl tests/runner9.ctr 1>/tmp/a9 2>/tmp/b9
-			echo "test" | ./bin/${OS}/ctrnl tests/runner10.ctr 1>/tmp/a10 2>/tmp/b10
-			echo "test" | ./bin/${OS}/ctrnl tests/runner11.ctr 1>/tmp/a11 2>/tmp/b11
-			echo "test" | ./bin/${OS}/ctrnl tests/runner12.ctr 1>/tmp/a12 2>/tmp/b12
-			echo "test" | ./bin/${OS}/ctrus tests/runner13.ctr 1>/tmp/a13 2>/tmp/b13
-			echo "test" | ./bin/${OS}/ctrro tests/runner14.ctr 1>/tmp/a14 2>/tmp/b14
-			for ISO in $(ls i18n)
-			do
-				echo "test" | ./bin/${OS}/ctr${ISO} tests/runner${ISO}.ctr 1>/tmp/a${ISO} 2>/tmp/b${ISO}
-			done
+	if [ "$directive" == "'NL-ONLY'." ]; then
+		echo "test" | ./bin/${OS}/ctrnl ${fitem} 1>/tmp/a0 2>/tmp/b0
+	else
+		echo "test" | ./bin/${OS}/ctrus ${fitem} 1>/tmp/a0 2>/tmp/b0
+		if [ "$directive" != "'SINGLE_RUN'." ]; then
+			echo "test" | ./bin/${OS}/ctrus tests/runner1.ctr 1>/tmp/a1 2>/tmp/b1
+			echo "test" | ./bin/${OS}/ctrus tests/runner2.ctr 1>/tmp/a2 2>/tmp/b2
+			echo "test" | ./bin/${OS}/ctrus tests/runner3.ctr 1>/tmp/a3 2>/tmp/b3
+			echo "test" | ./bin/${OS}/ctrus tests/runner4.ctr 1>/tmp/a4 2>/tmp/b4
+			echo "test" | ./bin/${OS}/ctrus tests/runner5.ctr 1>/tmp/a5 2>/tmp/b5
+			echo "test" | ./bin/${OS}/ctrus tests/runner6.ctr 1>/tmp/a6 2>/tmp/b6
+			if [ "$directive" != "'SINGLE_LANGUAGE'." ]; then
+				echo "test" | ./bin/${OS}/ctrnl tests/runner7.ctr 1>/tmp/a7 2>/tmp/b7
+				echo "test" | ./bin/${OS}/ctrnl tests/runner8.ctr 1>/tmp/a8 2>/tmp/b8
+				echo "test" | ./bin/${OS}/ctrnl tests/runner9.ctr 1>/tmp/a9 2>/tmp/b9
+				echo "test" | ./bin/${OS}/ctrnl tests/runner10.ctr 1>/tmp/a10 2>/tmp/b10
+				echo "test" | ./bin/${OS}/ctrnl tests/runner11.ctr 1>/tmp/a11 2>/tmp/b11
+				echo "test" | ./bin/${OS}/ctrnl tests/runner12.ctr 1>/tmp/a12 2>/tmp/b12
+				echo "test" | ./bin/${OS}/ctrus tests/runner13.ctr 1>/tmp/a13 2>/tmp/b13
+				echo "test" | ./bin/${OS}/ctrro tests/runner14.ctr 1>/tmp/a14 2>/tmp/b14
+				for ISO in $(ls i18n)
+				do
+					echo "test" | ./bin/${OS}/ctr${ISO} tests/runner${ISO}.ctr 1>/tmp/a${ISO} 2>/tmp/b${ISO}
+				done
+			fi
 		fi
 	fi
 	result[0]=`cat /tmp/a0 /tmp/b0`
@@ -134,6 +138,10 @@ for i in $(find tests -name 'test0*.ctr'); do
 	expectednl=$expected
 	if [ -f $fexpectnl ]; then
 		expectednl=`cat $fexpectnl`
+	fi
+	if [ "$directive" = "'NL-ONLY'." ]; then
+		directive="'SINGLE_RUN'."
+		expected="$expectednl"
 	fi
 	if [ "${result[0]}" = "$expected" ]; then
 		echo -n "[✓$j*]"
