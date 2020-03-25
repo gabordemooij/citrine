@@ -1592,15 +1592,12 @@ ctr_object* ctr_number_to_byte(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] string
- *
- * Wrapper for cast function.
- *
- * In other languages:
- * Dutch: [Getal] tekst
+ * @internal
+ * Generic method, used by:
+ * - ctr_number_to_string
+ * - ctr_number_to_string_flat
  */
-char* ctr_international_number(char* old_number, char* new_number);
-ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_internal_number_to_string(ctr_object* myself, ctr_argument* argumentList, char flat) {
 	ctr_object* o = myself;
 	int slen;
 	char* s;
@@ -1610,7 +1607,9 @@ ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList)
 	int bufSize;
 	ctr_object* stringObject;
 	s = ctr_heap_allocate( 100 * sizeof( char ) );
-	q = ctr_heap_allocate( 100 * sizeof( char ) );
+	if (!flat) {
+		q = ctr_heap_allocate( 100 * sizeof( char ) );
+	}
 	bufSize = 100 * sizeof( char );
 	buf = ctr_heap_allocate( bufSize );
 	snprintf( buf, 99, "%.10f", o->value.nvalue );
@@ -1620,12 +1619,29 @@ ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList)
 	if ( *p == '.' ) *p = '\0';
 	strncpy( s, buf, strlen( buf ) );
 	ctr_heap_free( buf );
-	q = ctr_international_number( s, q );
-	slen = strlen(q);
-	stringObject = ctr_build_string(q, slen);
-	ctr_heap_free( q );
+	if (!flat) {
+		q = ctr_international_number( s, q );
+		slen = strlen(q);
+		stringObject = ctr_build_string(q, slen);
+		ctr_heap_free( q );
+	} else {
+		slen = strlen(s);
+		stringObject = ctr_build_string(s, slen);
+	}
 	ctr_heap_free( s );
 	return stringObject;
+}
+
+/**
+ * [Number] string
+ *
+ * Wrapper for cast function.
+ *
+ * In other languages:
+ * Dutch: [Getal] tekst
+ */
+ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_internal_number_to_string(myself, argumentList, 0);
 }
 
 /**
@@ -1636,27 +1652,7 @@ ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList)
  * using no thousands separator).
  */
 ctr_object* ctr_number_to_string_flat(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* o = myself;
-	int slen;
-	char* s;
-	char* p;
-	char* buf;
-	int bufSize;
-	ctr_object* stringObject;
-	s = ctr_heap_allocate( 100 * sizeof( char ) );
-	bufSize = 100 * sizeof( char );
-	buf = ctr_heap_allocate( bufSize );
-	snprintf( buf, 99, "%.10f", o->value.nvalue );
-	p = buf + strlen(buf) - 1;
-	while ( *p == '0' && *p-- != '.' );
-	*( p + 1 ) = '\0';
-	if ( *p == '.' ) *p = '\0';
-	strncpy( s, buf, strlen( buf ) );
-	ctr_heap_free( buf );
-	slen = strlen(s);
-	stringObject = ctr_build_string(s, slen);
-	ctr_heap_free( s );
-	return stringObject;
+	return ctr_internal_number_to_string(myself, argumentList, 1);
 }
 
 /**
