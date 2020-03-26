@@ -1942,22 +1942,21 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 /**
  * [String] byte: [Number]
  *
- * Returns the byte at the specified position (in bytes).
- *
  * Usage:
- * ('abc' byte: 1).
- *
- * In other languages:
- * Dutch: [Tekst] byte: [Getal] | Geeft de byte op aangegeven positie.
+ * ☞ x := 'abc' byte: 1.
+ * ✎ write: x, stop.
+ * 
+ * Output:
+ * 65
  */
 ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList) {
-	char x;
+	uint8_t x;
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
 	long a = (fromPos->value.nvalue) - 1;
 	long len = myself->value.svalue->vlen;
 	if (a >= len) return CtrStdNil;
 	if (a < 0) return CtrStdNil;
-	x = (char) *(myself->value.svalue->value + a);
+	x = (uint8_t) *(myself->value.svalue->value + a);
 	return ctr_build_number_from_float((double)x);
 }
 

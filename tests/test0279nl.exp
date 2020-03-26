@@ -2,6 +2,6 @@ length before skip = 4
 bytes before skip = 6
 length after skip = 1
 bytes after skip = 3
-byte: -30
-byte: -122
-byte: -112
+byte: 226
+byte: 134
+byte: 144
