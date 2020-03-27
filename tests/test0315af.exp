@@ -1,0 +1,27 @@
+(Kaart nuwe) sit by:'a"b' __:'test'
+Invalid JSON.
+(Kaart nuwe) sit by:(Lys ← 1 ; 2 ; (Lys ← 3 ; 4) ; ((Kaart nuwe) sit by:(Lys ← 3 ; 4) __:'bar', sit by:1 __:'foo')) __:'nested', sit by:Onwaar __:'legend', sit by:27 __:'age', sit by:'Jack' __:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

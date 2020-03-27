@@ -210,6 +210,31 @@ for i in $(find tests -name 'test0*.ctr'); do
 							echo "OK, file created."
 						fi
 					fi
+					
+					if [ "$1" = "--record2" ]; then
+						expectingnew=`cat /tmp/a0`
+						if [ "$actual" = "$expectingnew" ]; then
+							echo "SAME RESULT OK"
+							touch $langexp
+							echo "$actual" > $langexp
+							echo "OK, file created."
+						else
+							echo "=========================== CHECK DIFF RESULTS:"
+							echo "EXPECTED BASE:"
+							cat /tmp/a0
+							echo ""
+							echo "ISO RESULT ${ISO} (${langexp}):"
+							echo "$actual"
+							echo "---------------------------"
+							echo "is this correct, create expectation file? y/n"
+							read accept
+							if [ "$accept" = "y" ]; then
+								touch $langexp
+								echo "$actual" > $langexp
+								echo "OK, file created."
+							fi
+						fi
+					fi
 				fi
 			fi
 		done

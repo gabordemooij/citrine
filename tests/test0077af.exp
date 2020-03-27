@@ -1,0 +1,12 @@
+String,Aantal
+String,Boole
+Aantal,String
+Aantal,Boole
+Boole,Aantal
+Boole,Aantal
+Boole,String
+Boole,String
+=== String test ===
+123
+Onwaar
+True
