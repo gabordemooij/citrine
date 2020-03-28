@@ -1,0 +1,5 @@
+a b | Lažno Lažno Prav Prav -1
+b a | Prav Prav Lažno Lažno 1
+hallo hello | Lažno Lažno Prav Prav -4
+human human | Lažno Prav Lažno Prav 0
+x z | Lažno Lažno Prav Prav -2

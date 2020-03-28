@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. Vale
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is Null meters long.
+Luckily, this day, there are Null wasps in the garden.
+The dog named Null sleeps under the tree.
+a\"bb\"ccc\"
+(Kaart uus) panna:((Kaart uus) panna:Null juures:dog, panna:Null juures:insects, panna:((Kaart uus) panna:15 juures:'length', panna:8 juures:'width') juures:'size', panna:(Loend ← 'tulips' ; 'roses' ; 'lillies') juures:'flower', panna:Vale juures:'shed', panna:Tõsi juures:'pool', panna:2 juures:'chairs') juures:'garden'
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

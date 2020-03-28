@@ -1,0 +1,27 @@
+(Քարտեզ նոր) տեղադրել:'a"b' at:'test'
+Invalid JSON.
+(Քարտեզ նոր) տեղադրել:(Ցուցակ ← 1 ; 2 ; (Ցուցակ ← 3 ; 4) ; ((Քարտեզ նոր) տեղադրել:(Ցուցակ ← 3 ; 4) at:'bar', տեղադրել:1 at:'foo')) at:'nested', տեղադրել:Կեղծ at:'legend', տեղադրել:27 at:'age', տեղադրել:'Jack' at:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

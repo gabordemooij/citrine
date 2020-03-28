@@ -1,0 +1,12 @@
+String,Àireamh
+String,Boole
+Àireamh,String
+Àireamh,Boole
+Boole,Àireamh
+Boole,Àireamh
+Boole,String
+Boole,String
+=== String test ===
+123
+Meallta
+Fìor

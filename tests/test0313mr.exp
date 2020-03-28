@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. खोटे
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is शून्य meters long.
+Luckily, this day, there are शून्य wasps in the garden.
+The dog named शून्य sleeps under the tree.
+a\"bb\"ccc\"
+(नकाशा नवीन) ठेवले:((नकाशा नवीन) ठेवले:शून्य येथे:dog, ठेवले:शून्य येथे:insects, ठेवले:((नकाशा नवीन) ठेवले:15 येथे:'length', ठेवले:8 येथे:'width') येथे:'size', ठेवले:(यादी ← 'tulips' ; 'roses' ; 'lillies') येथे:'flower', ठेवले:खोटे येथे:'shed', ठेवले:खरे येथे:'pool', ठेवले:2 येथे:'chairs') येथे:'garden'
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

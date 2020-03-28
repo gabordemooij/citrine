@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. Hoʻolaha
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is Nau meters long.
+Luckily, this day, there are Nau wasps in the garden.
+The dog named Nau sleeps under the tree.
+a\"bb\"ccc\"
+(Mua hou) waiho:((Mua hou) waiho:Nau ma:dog, waiho:Nau ma:insects, waiho:((Mua hou) waiho:15 ma:'length', waiho:8 ma:'width') ma:'size', waiho:(Palapala ← 'tulips' ; 'roses' ; 'lillies') ma:'flower', waiho:Hoʻolaha ma:'shed', waiho:Kūpono ma:'pool', waiho:2 ma:'chairs') ma:'garden'
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

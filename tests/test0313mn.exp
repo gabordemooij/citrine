@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. Худал
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is Нил meters long.
+Luckily, this day, there are Нил wasps in the garden.
+The dog named Нил sleeps under the tree.
+a\"bb\"ccc\"
+(Газрын зураг шинэ) тавих:((Газрын зураг шинэ) тавих:Нил дээр__:dog, тавих:Нил дээр__:insects, тавих:((Газрын зураг шинэ) тавих:15 дээр__:'length', тавих:8 дээр__:'width') дээр__:'size', тавих:(Жагсаалт ← 'tulips' ; 'roses' ; 'lillies') дээр__:'flower', тавих:Худал дээр__:'shed', тавих:Үнэн шүү дээр__:'pool', тавих:2 дээр__:'chairs') дээр__:'garden'
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

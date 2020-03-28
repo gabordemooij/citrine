@@ -1,0 +1,12 @@
+Filum,Numerus
+Filum,Boolean
+Numerus,Filum
+Numerus,Boolean
+Boolean,Numerus
+Boolean,Numerus
+Boolean,Filum
+Boolean,Filum
+=== String test ===
+123
+Falsus
+Verum

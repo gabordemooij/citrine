@@ -1,0 +1,27 @@
+(Карта нові) поставити:'a"b' _у:'test'
+Invalid JSON.
+(Карта нові) поставити:(Список ← 1 ; 2 ; (Список ← 3 ; 4) ; ((Карта нові) поставити:(Список ← 3 ; 4) _у:'bar', поставити:1 _у:'foo')) _у:'nested', поставити:помилковий _у:'legend', поставити:27 _у:'age', поставити:'Jack' _у:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

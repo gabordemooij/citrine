@@ -1,0 +1,12 @@
+Niz,Broj
+Niz,Booleova
+Broj,Niz
+Broj,Booleova
+Booleova,Broj
+Booleova,Broj
+Booleova,Niz
+Booleova,Niz
+=== String test ===
+123
+Lažan
+Pravi

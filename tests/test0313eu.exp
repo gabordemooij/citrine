@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. Gezurra
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is Nil meters long.
+Luckily, this day, there are Nil wasps in the garden.
+The dog named Nil sleeps under the tree.
+a\"bb\"ccc\"
+(Mapa berriaren) jarri:((Mapa berriaren) jarri:Nil en:dog, jarri:Nil en:insects, jarri:((Mapa berriaren) jarri:15 en:'length', jarri:8 en:'width') en:'size', jarri:(Zerrenda ← 'tulips' ; 'roses' ; 'lillies') en:'flower', jarri:Gezurra en:'shed', jarri:True en:'pool', jarri:2 en:'chairs') en:'garden'
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

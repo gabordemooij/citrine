@@ -1,0 +1,27 @@
+(ካርታ አዲስ) ያስገቡ:'a"b' _በ:'test'
+Invalid JSON.
+(ካርታ አዲስ) ያስገቡ:(ዝርዝር ← 1 ; 2 ; (ዝርዝር ← 3 ; 4) ; ((ካርታ አዲስ) ያስገቡ:(ዝርዝር ← 3 ; 4) _በ:'bar', ያስገቡ:1 _በ:'foo')) _በ:'nested', ያስገቡ:ሐሰት _በ:'legend', ያስገቡ:27 _በ:'age', ያስገቡ:'Jack' _በ:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

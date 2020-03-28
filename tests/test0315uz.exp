@@ -1,0 +1,27 @@
+(Xarita yangi) qo’yish:'a"b' da__:'test'
+Invalid JSON.
+(Xarita yangi) qo’yish:(Ro‘yxat ← 1 ; 2 ; (Ro‘yxat ← 3 ; 4) ; ((Xarita yangi) qo’yish:(Ro‘yxat ← 3 ; 4) da__:'bar', qo’yish:1 da__:'foo')) da__:'nested', qo’yish:Yolg’on da__:'legend', qo’yish:27 da__:'age', qo’yish:'Jack' da__:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

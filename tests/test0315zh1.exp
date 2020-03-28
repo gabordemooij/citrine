@@ -1,0 +1,27 @@
+(地圖 _新) 放在：在：__:'a"b' __:'test'
+Invalid JSON.
+(地圖 _新) 放在：在：__:(清單 ← 1 ; 2 ; (清單 ← 3 ; 4) ; ((地圖 _新) 放在：在：__:(清單 ← 3 ; 4) __:'bar', 放在：在：__:1 __:'foo')) __:'nested', 放在：在：__:_假 __:'legend', 放在：在：__:27 __:'age', 放在：在：__:'Jack' __:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

@@ -1,0 +1,12 @@
+String,Bilang
+String,Boolean
+Bilang,String
+Bilang,Boolean
+Boolean,Bilang
+Boolean,Bilang
+Boolean,String
+Boolean,String
+=== String test ===
+123
+Mali
+Totoo

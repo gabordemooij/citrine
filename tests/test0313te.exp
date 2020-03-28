@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. తప్పుడు
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is శూన్యం meters long.
+Luckily, this day, there are శూన్యం wasps in the garden.
+The dog named శూన్యం sleeps under the tree.
+a\"bb\"ccc\"
+(మ్యాప్ కొత్త) చాలు:((మ్యాప్ కొత్త) చాలు:శూన్యం వద్ద:dog, చాలు:శూన్యం వద్ద:insects, చాలు:((మ్యాప్ కొత్త) చాలు:15 వద్ద:'length', చాలు:8 వద్ద:'width') వద్ద:'size', చాలు:(జాబితా ← 'tulips' ; 'roses' ; 'lillies') వద్ద:'flower', చాలు:తప్పుడు వద్ద:'shed', చాలు:ట్రూ వద్ద:'pool', చాలు:2 వద్ద:'chairs') వద్ద:'garden'
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

@@ -1,0 +1,27 @@
+(Peta baru) menempatkan:'a"b' di:'test'
+Invalid JSON.
+(Peta baru) menempatkan:(Daftar ← 1 ; 2 ; (Daftar ← 3 ; 4) ; ((Peta baru) menempatkan:(Daftar ← 3 ; 4) di:'bar', menempatkan:1 di:'foo')) di:'nested', menempatkan:Salah di:'legend', menempatkan:27 di:'age', menempatkan:'Jack' di:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

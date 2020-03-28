@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. שקר
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is אפס meters long.
+Luckily, this day, there are אפס wasps in the garden.
+The dog named אפס sleeps under the tree.
+a\"bb\"ccc\"
+(מפה חדש) לשים:((מפה חדש) לשים:אפס _ב:dog, לשים:אפס _ב:insects, לשים:((מפה חדש) לשים:15 _ב:'length', לשים:8 _ב:'width') _ב:'size', לשים:(רשימה ← 'tulips' ; 'roses' ; 'lillies') _ב:'flower', לשים:שקר _ב:'shed', לשים:נכון _ב:'pool', לשים:2 _ב:'chairs') _ב:'garden'
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

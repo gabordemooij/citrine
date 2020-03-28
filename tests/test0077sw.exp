@@ -1,0 +1,12 @@
+Kamba,Nambari
+Kamba,Boolean
+Nambari,Kamba
+Nambari,Boolean
+Boolean,Nambari
+Boolean,Nambari
+Boolean,Kamba
+Boolean,Kamba
+=== String test ===
+123
+Uongo
+Kweli

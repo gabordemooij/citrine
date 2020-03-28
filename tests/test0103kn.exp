@@ -1,0 +1,11 @@
+9
+a ವಸ್ತು '[Object]'  is NOT Nil.
+a ಬೂಲಿಯನ್ 'ನಿಜ'  is NOT Nil.
+a ಬೂಲಿಯನ್ 'ತಪ್ಪು'  is NOT Nil.
+a ಬೂಲಿಯನ್ 'ತಪ್ಪು'  is NOT Nil.
+a ಸಂಖ್ಯೆ '1'  is NOT Nil.
+a ಸಂಖ್ಯೆ '0'  is NOT Nil.
+a ಸ್ಟ್ರಿಂಗ್ 'Str'  is NOT Nil.
+a ಸ್ಟ್ರಿಂಗ್ ''  is NOT Nil.
+a ಕೋಡ್ '[Block]'  is NOT Nil.
+but.. Nil is.. certainly NIL!

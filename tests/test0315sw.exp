@@ -1,0 +1,27 @@
+(Ramani mpya) weka:'a"b' saa:'test'
+Invalid JSON.
+(Ramani mpya) weka:(Orodha ← 1 ; 2 ; (Orodha ← 3 ; 4) ; ((Ramani mpya) weka:(Orodha ← 3 ; 4) saa:'bar', weka:1 saa:'foo')) saa:'nested', weka:Uongo saa:'legend', weka:27 saa:'age', weka:'Jack' saa:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

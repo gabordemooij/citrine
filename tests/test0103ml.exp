@@ -1,0 +1,11 @@
+9
+a വസ്തു '[Object]'  is NOT Nil.
+a ബൂളിയൻ 'ശരിയാണ്'  is NOT Nil.
+a ബൂളിയൻ 'തെറ്റായ'  is NOT Nil.
+a ബൂളിയൻ 'തെറ്റായ'  is NOT Nil.
+a നമ്പർ '1'  is NOT Nil.
+a നമ്പർ '0'  is NOT Nil.
+a സ്ട്രിംഗ് 'Str'  is NOT Nil.
+a സ്ട്രിംഗ് ''  is NOT Nil.
+a കോഡ് '[Block]'  is NOT Nil.
+but.. Nil is.. certainly NIL!

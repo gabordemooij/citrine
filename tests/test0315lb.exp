@@ -1,0 +1,27 @@
+(Kaart nei) setzen:'a"b' bei:'test'
+Invalid JSON.
+(Kaart nei) setzen:(Lëscht ← 1 ; 2 ; (Lëscht ← 3 ; 4) ; ((Kaart nei) setzen:(Lëscht ← 3 ; 4) bei:'bar', setzen:1 bei:'foo')) bei:'nested', setzen:Falsch bei:'legend', setzen:27 bei:'age', setzen:'Jack' bei:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

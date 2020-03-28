@@ -1,0 +1,27 @@
+(Mapa berriaren) jarri:'a"b' en:'test'
+Invalid JSON.
+(Mapa berriaren) jarri:(Zerrenda ← 1 ; 2 ; (Zerrenda ← 3 ; 4) ; ((Mapa berriaren) jarri:(Zerrenda ← 3 ; 4) en:'bar', jarri:1 en:'foo')) en:'nested', jarri:Gezurra en:'legend', jarri:27 en:'age', jarri:'Jack' en:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

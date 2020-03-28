@@ -1,0 +1,27 @@
+(Карта жаңа) қою:'a"b' __:'test'
+Invalid JSON.
+(Карта жаңа) қою:(Тізім ← 1 ; 2 ; (Тізім ← 3 ; 4) ; ((Карта жаңа) қою:(Тізім ← 3 ; 4) __:'bar', қою:1 __:'foo')) __:'nested', қою:Жалған __:'legend', қою:27 __:'age', қою:'Jack' __:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

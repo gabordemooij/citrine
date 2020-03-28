@@ -1,0 +1,27 @@
+(מפה חדש) לשים:'a"b' _ב:'test'
+Invalid JSON.
+(מפה חדש) לשים:(רשימה ← 1 ; 2 ; (רשימה ← 3 ; 4) ; ((מפה חדש) לשים:(רשימה ← 3 ; 4) _ב:'bar', לשים:1 _ב:'foo')) _ב:'nested', לשים:שקר _ב:'legend', לשים:27 _ב:'age', לשים:'Jack' _ב:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

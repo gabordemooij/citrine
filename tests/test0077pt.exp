@@ -1,0 +1,12 @@
+Corda,Número
+Corda,Boleano
+Número,Corda
+Número,Boleano
+Boleano,Número
+Boleano,Número
+Boleano,Corda
+Boleano,Corda
+=== String test ===
+123
+Falso
+Verdade

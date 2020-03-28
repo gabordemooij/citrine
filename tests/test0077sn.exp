@@ -1,0 +1,12 @@
+Tambo,Nhamba
+Tambo,Boolean
+Nhamba,Tambo
+Nhamba,Boolean
+Boolean,Nhamba
+Boolean,Nhamba
+Boolean,Tambo
+Boolean,Tambo
+=== String test ===
+123
+Nhema
+Chokwadi

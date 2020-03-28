@@ -1,0 +1,12 @@
+Snor,Nummer
+Snor,Boolean
+Nummer,Snor
+Nummer,Boolean
+Boolean,Nummer
+Boolean,Nummer
+Boolean,Snor
+Boolean,Snor
+=== String test ===
+123
+Falsk
+Rigtigt

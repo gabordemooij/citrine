@@ -1,0 +1,11 @@
+9
+a 賓語 '[Object]'  is NOT Nil.
+a 布爾型 '真正'  is NOT Nil.
+a 布爾型 '_假'  is NOT Nil.
+a 布爾型 '_假'  is NOT Nil.
+a _數 '1'  is NOT Nil.
+a _數 '0'  is NOT Nil.
+a _串 'Str'  is NOT Nil.
+a _串 ''  is NOT Nil.
+a _碼 '[Block]'  is NOT Nil.
+but.. Nil is.. certainly NIL!

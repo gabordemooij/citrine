@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. фалшив
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is нула meters long.
+Luckily, this day, there are нула wasps in the garden.
+The dog named нула sleeps under the tree.
+a\"bb\"ccc\"
+(карта нов) слагам:((карта нов) слагам:нула на адрес:dog, слагам:нула на адрес:insects, слагам:((карта нов) слагам:15 на адрес:'length', слагам:8 на адрес:'width') на адрес:'size', слагам:(списък ← 'tulips' ; 'roses' ; 'lillies') на адрес:'flower', слагам:фалшив на адрес:'shed', слагам:Вярно на адрес:'pool', слагам:2 на адрес:'chairs') на адрес:'garden'
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

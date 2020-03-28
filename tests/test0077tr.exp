@@ -1,0 +1,12 @@
+Sicim,Numara
+Sicim,Boole
+Numara,Sicim
+Numara,Boole
+Boole,Numara
+Boole,Numara
+Boole,Sicim
+Boole,Sicim
+=== String test ===
+123
+Yanlış
+Doğru
