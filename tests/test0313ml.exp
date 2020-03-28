@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. തെറ്റായ
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is ഇല്ല meters long.
+Luckily, this day, there are ഇല്ല wasps in the garden.
+The dog named ഇല്ല sleeps under the tree.
+a\"bb\"ccc\"
+(മാപ്പ് പുതിയത്) ഇടുക:((മാപ്പ് പുതിയത്) ഇടുക:ഇല്ല at:dog, ഇടുക:ഇല്ല at:insects, ഇടുക:((മാപ്പ് പുതിയത്) ഇടുക:15 at:'length', ഇടുക:8 at:'width') at:'size', ഇടുക:(പട്ടിക ← 'tulips' ; 'roses' ; 'lillies') at:'flower', ഇടുക:തെറ്റായ at:'shed', ഇടുക:ശരിയാണ് at:'pool', ഇടുക:2 at:'chairs') at:'garden'
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

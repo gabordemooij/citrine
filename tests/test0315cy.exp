@@ -1,0 +1,27 @@
+(Map newydd) rhoi:'a"b' yn:'test'
+Invalid JSON.
+(Map newydd) rhoi:(Rhestr ← 1 ; 2 ; (Rhestr ← 3 ; 4) ; ((Map newydd) rhoi:(Rhestr ← 3 ; 4) yn:'bar', rhoi:1 yn:'foo')) yn:'nested', rhoi:Anghywir yn:'legend', rhoi:27 yn:'age', rhoi:'Jack' yn:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

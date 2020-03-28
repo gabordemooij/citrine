@@ -1,0 +1,27 @@
+(Térkép új) magyarán:'a"b' itt:'test'
+Invalid JSON.
+(Térkép új) magyarán:(Lista ← 1 ; 2 ; (Lista ← 3 ; 4) ; ((Térkép új) magyarán:(Lista ← 3 ; 4) itt:'bar', magyarán:1 itt:'foo')) itt:'nested', magyarán:Hamis itt:'legend', magyarán:27 itt:'age', magyarán:'Jack' itt:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

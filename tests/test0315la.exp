@@ -1,0 +1,27 @@
+(Map novus) posuit:'a"b' at:'test'
+Invalid JSON.
+(Map novus) posuit:(Album ← 1 ; 2 ; (Album ← 3 ; 4) ; ((Map novus) posuit:(Album ← 3 ; 4) at:'bar', posuit:1 at:'foo')) at:'nested', posuit:Falsus at:'legend', posuit:27 at:'age', posuit:'Jack' at:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

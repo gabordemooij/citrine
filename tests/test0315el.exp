@@ -1,0 +1,27 @@
+(Χάρτης νέος) βάλτε:'a"b' στη διεύθυνση:'test'
+Invalid JSON.
+(Χάρτης νέος) βάλτε:(Λίστα ← 1 ; 2 ; (Λίστα ← 3 ; 4) ; ((Χάρτης νέος) βάλτε:(Λίστα ← 3 ; 4) στη διεύθυνση:'bar', βάλτε:1 στη διεύθυνση:'foo')) στη διεύθυνση:'nested', βάλτε:Ψευδής στη διεύθυνση:'legend', βάλτε:27 στη διεύθυνση:'age', βάλτε:'Jack' στη διεύθυνση:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

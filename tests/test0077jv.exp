@@ -1,0 +1,12 @@
+Senar,Nomer
+Senar,Boolean
+Nomer,Senar
+Nomer,Boolean
+Boolean,Nomer
+Boolean,Nomer
+Boolean,Senar
+Boolean,Senar
+=== String test ===
+123
+Salah
+Bener

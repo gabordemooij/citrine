@@ -1,0 +1,27 @@
+(नकाशा नवीन) ठेवले:'a"b' येथे:'test'
+Invalid JSON.
+(नकाशा नवीन) ठेवले:(यादी ← 1 ; 2 ; (यादी ← 3 ; 4) ; ((नकाशा नवीन) ठेवले:(यादी ← 3 ; 4) येथे:'bar', ठेवले:1 येथे:'foo')) येथे:'nested', ठेवले:खोटे येथे:'legend', ठेवले:27 येथे:'age', ठेवले:'Jack' येथे:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

@@ -1,0 +1,11 @@
+9
+a Nesne '[Object]'  is NOT Nil.
+a Boole 'Doğru'  is NOT Nil.
+a Boole 'Yanlış'  is NOT Nil.
+a Boole 'Yanlış'  is NOT Nil.
+a Numara '1'  is NOT Nil.
+a Numara '0'  is NOT Nil.
+a Sicim 'Str'  is NOT Nil.
+a Sicim ''  is NOT Nil.
+a Kod '[Block]'  is NOT Nil.
+but.. Nil is.. certainly NIL!

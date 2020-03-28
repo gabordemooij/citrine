@@ -1,0 +1,11 @@
+9
+a Objekt '[Object]'  is NOT Nil.
+a Boolean 'Tõsi'  is NOT Nil.
+a Boolean 'Vale'  is NOT Nil.
+a Boolean 'Vale'  is NOT Nil.
+a Arv '1'  is NOT Nil.
+a Arv '0'  is NOT Nil.
+a Keel 'Str'  is NOT Nil.
+a Keel ''  is NOT Nil.
+a Kood '[Block]'  is NOT Nil.
+but.. Nil is.. certainly NIL!

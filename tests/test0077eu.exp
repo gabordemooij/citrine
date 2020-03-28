@@ -1,0 +1,12 @@
+String,Zenbakia
+String,Boolearrak
+Zenbakia,String
+Zenbakia,Boolearrak
+Boolearrak,Zenbakia
+Boolearrak,Zenbakia
+Boolearrak,String
+Boolearrak,String
+=== String test ===
+123
+Gezurra
+True

@@ -1,0 +1,12 @@
+Cadea,Número
+Cadea,Booleano
+Número,Cadea
+Número,Booleano
+Booleano,Número
+Booleano,Número
+Booleano,Cadea
+Booleano,Cadea
+=== String test ===
+123
+Falso
+Certo

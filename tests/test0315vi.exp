@@ -1,0 +1,27 @@
+(Bản đồ mới) đặt:'a"b' tại:'test'
+Invalid JSON.
+(Bản đồ mới) đặt:(Danh sách ← 1 ; 2 ; (Danh sách ← 3 ; 4) ; ((Bản đồ mới) đặt:(Danh sách ← 3 ; 4) tại:'bar', đặt:1 tại:'foo')) tại:'nested', đặt:Sai tại:'legend', đặt:27 tại:'age', đặt:'Jack' tại:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

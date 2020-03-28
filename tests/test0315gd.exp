@@ -1,0 +1,27 @@
+(Mapa ùr) put:'a"b' aig:'test'
+Invalid JSON.
+(Mapa ùr) put:(Liosta ← 1 ; 2 ; (Liosta ← 3 ; 4) ; ((Mapa ùr) put:(Liosta ← 3 ; 4) aig:'bar', put:1 aig:'foo')) aig:'nested', put:Meallta aig:'legend', put:27 aig:'age', put:'Jack' aig:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

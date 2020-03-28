@@ -1,0 +1,27 @@
+(Харитаи нав) гузошта:'a"b' дар:'test'
+Invalid JSON.
+(Харитаи нав) гузошта:(Рӯйхат ← 1 ; 2 ; (Рӯйхат ← 3 ; 4) ; ((Харитаи нав) гузошта:(Рӯйхат ← 3 ; 4) дар:'bar', гузошта:1 дар:'foo')) дар:'nested', гузошта:Бардурӯғ дар:'legend', гузошта:27 дар:'age', гузошта:'Jack' дар:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

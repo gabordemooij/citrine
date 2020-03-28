@@ -1,0 +1,5 @@
+a b | Gezurra Gezurra True True -1
+b a | True True Gezurra Gezurra 1
+hallo hello | Gezurra Gezurra True True -4
+human human | Gezurra True Gezurra True 0
+x z | Gezurra Gezurra True True -2

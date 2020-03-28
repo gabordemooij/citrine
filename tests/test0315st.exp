@@ -1,0 +1,27 @@
+(’Mapa ncha) beha:'a"b' ka:'test'
+Invalid JSON.
+(’Mapa ncha) beha:(Lenane ← 1 ; 2 ; (Lenane ← 3 ; 4) ; ((’Mapa ncha) beha:(Lenane ← 3 ; 4) ka:'bar', beha:1 ka:'foo')) ka:'nested', beha:Bohata ka:'legend', beha:27 ka:'age', beha:'Jack' ka:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

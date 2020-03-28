@@ -1,0 +1,11 @@
+9
+a Obxecto '[Object]'  is NOT Nil.
+a Booleano 'Certo'  is NOT Nil.
+a Booleano 'Falso'  is NOT Nil.
+a Booleano 'Falso'  is NOT Nil.
+a Número '1'  is NOT Nil.
+a Número '0'  is NOT Nil.
+a Cadea 'Str'  is NOT Nil.
+a Cadea ''  is NOT Nil.
+a Código '[Block]'  is NOT Nil.
+but.. Nil is.. certainly NIL!

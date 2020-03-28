@@ -1,0 +1,12 @@
+String,Nummer
+String,Boolean
+Nummer,String
+Nummer,Boolean
+Boolean,Nummer
+Boolean,Nummer
+Boolean,String
+Boolean,String
+=== String test ===
+123
+Falsk
+Ekte

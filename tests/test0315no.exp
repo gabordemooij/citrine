@@ -1,0 +1,27 @@
+(Kart ny) sagt:'a"b' at:'test'
+Invalid JSON.
+(Kart ny) sagt:(Liste ← 1 ; 2 ; (Liste ← 3 ; 4) ; ((Kart ny) sagt:(Liste ← 3 ; 4) at:'bar', sagt:1 at:'foo')) at:'nested', sagt:Falsk at:'legend', sagt:27 at:'age', sagt:'Jack' at:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. ખોટું
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is નીલ meters long.
+Luckily, this day, there are નીલ wasps in the garden.
+The dog named નીલ sleeps under the tree.
+a\"bb\"ccc\"
+(નકશો નવું) મૂકો:((નકશો નવું) મૂકો:નીલ પર:dog, મૂકો:નીલ પર:insects, મૂકો:((નકશો નવું) મૂકો:15 પર:'length', મૂકો:8 પર:'width') પર:'size', મૂકો:(યાદી ← 'tulips' ; 'roses' ; 'lillies') પર:'flower', મૂકો:ખોટું પર:'shed', મૂકો:સાચું પર:'pool', મૂકો:2 પર:'chairs') પર:'garden'
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

@@ -1,0 +1,5 @@
+a b | Faux Faux Vrai Vrai -1
+b a | Vrai Vrai Faux Faux 1
+hallo hello | Faux Faux Vrai Vrai -4
+human human | Faux Vrai Faux Vrai 0
+x z | Faux Faux Vrai Vrai -2

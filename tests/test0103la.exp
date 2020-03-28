@@ -1,0 +1,11 @@
+9
+a Object '[Object]'  is NOT Nil.
+a Boolean 'Verum'  is NOT Nil.
+a Boolean 'Falsus'  is NOT Nil.
+a Boolean 'Falsus'  is NOT Nil.
+a Numerus '1'  is NOT Nil.
+a Numerus '0'  is NOT Nil.
+a Filum 'Str'  is NOT Nil.
+a Filum ''  is NOT Nil.
+a Code '[Block]'  is NOT Nil.
+but.. Nil is.. certainly NIL!

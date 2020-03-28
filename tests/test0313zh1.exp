@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. _假
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is _零 meters long.
+Luckily, this day, there are _零 wasps in the garden.
+The dog named _零 sleeps under the tree.
+a\"bb\"ccc\"
+(地圖 _新) 放在：在：__:((地圖 _新) 放在：在：__:_零 __:dog, 放在：在：__:_零 __:insects, 放在：在：__:((地圖 _新) 放在：在：__:15 __:'length', 放在：在：__:8 __:'width') __:'size', 放在：在：__:(清單 ← 'tulips' ; 'roses' ; 'lillies') __:'flower', 放在：在：__:_假 __:'shed', 放在：在：__:真正 __:'pool', 放在：在：__:2 __:'chairs') __:'garden'
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

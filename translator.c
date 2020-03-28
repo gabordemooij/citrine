@@ -2,6 +2,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdint.h>
+#include <locale.h>
 #include "citrine.h"
 
 const int CTR_TRANSLATE_MAX_WORD_LEN = 180;
@@ -262,9 +263,18 @@ ctr_dict* ctr_translate_load_dictionary() {
 	ctr_dict* entry;
 	ctr_dict* previousEntry = NULL;
 	ctr_dict* e;
-	while( fscanf( file, "%c \"%80[^\"]\" \"%80[^\"]\"\n", &translationType, word, translation) > 0 ) {
+	int qq = 0;
+	while( fscanf( file, "%c \"%200[^\"]\" \"%200[^\"]\"\n", &translationType, word, translation) > 0 ) {
+		
+		
+		if (translationType != 't' && translationType != 's' && translationType != 'd' && translationType != 'x') {
+			printf("Invalid translation line: %d \n",qq);
+			exit(1);
+		}
 		entry = (ctr_dict*) calloc( sizeof(ctr_dict), 1 );
 		entry->type = translationType;
+		qq++;
+		
 		entry->wordLength = strlen(word);
 		entry->translationLength = strlen(translation);
 		if (entry->wordLength > CTR_TRANSLATE_MAX_WORD_LEN || entry->translationLength > CTR_TRANSLATE_MAX_WORD_LEN) {
@@ -277,9 +287,11 @@ ctr_dict* ctr_translate_load_dictionary() {
 		
 		if (translationType == 'd') {
 			ctr_trans_d = entry;
+			continue;
 		}
 		if (translationType == 'x') {
 			ctr_trans_x = entry;
+			continue;
 		}
 		
 		if (previousEntry) {
@@ -297,6 +309,11 @@ ctr_dict* ctr_translate_load_dictionary() {
 						format = CTR_TERR_AMWORD;
 						buffer = ctr_heap_allocate( 600 * sizeof(char) );
 						snprintf( buffer, 600 * sizeof(char), format, word );
+						printf("----> |%s| \n",entry->word);
+						printf("----> |%s| \n",word);
+						printf("----> |%s| \n",entry->translation);
+						printf("----> |%s| \n",translation);
+						printf("----> %d \n",qq);
 						ctr_print_error( buffer, 1 );
 					}
 				}

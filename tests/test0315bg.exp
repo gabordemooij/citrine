@@ -1,0 +1,27 @@
+(карта нов) слагам:'a"b' на адрес:'test'
+Invalid JSON.
+(карта нов) слагам:(списък ← 1 ; 2 ; (списък ← 3 ; 4) ; ((карта нов) слагам:(списък ← 3 ; 4) на адрес:'bar', слагам:1 на адрес:'foo')) на адрес:'nested', слагам:фалшив на адрес:'legend', слагам:27 на адрес:'age', слагам:'Jack' на адрес:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

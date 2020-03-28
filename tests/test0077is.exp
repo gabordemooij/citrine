@@ -1,0 +1,12 @@
+Strengur,Fjöldi
+Strengur,Boolean
+Fjöldi,Strengur
+Fjöldi,Boolean
+Boolean,Fjöldi
+Boolean,Fjöldi
+Boolean,Strengur
+Boolean,Strengur
+=== String test ===
+123
+Rangt
+Satt
