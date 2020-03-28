@@ -1,0 +1,14 @@
+☞ f := Lista ← 0 ; 1.
+
+{
+	☞ a := f ostatni ubiegły zeszły.
+
+	☞ b := f drugi od końca.
+
+	☞ sum := (a + b).
+
+	✎ pisać: sum, zatrzymać.
+		
+	f dodać: sum.
+
+} * 12.

@@ -1,0 +1,14 @@
+☞ f := List ← 0 ; 1.
+
+{
+	☞ a := f farany.
+
+	☞ b := f faharoa farany.
+
+	☞ sum := (a + b).
+
+	✎ manoratra: sum, mijanòna.
+		
+	f manampy: sum.
+
+} * 12.

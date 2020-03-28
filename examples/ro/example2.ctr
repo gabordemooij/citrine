@@ -1,0 +1,14 @@
+☞ f := Listă ← 0 ; 1.
+
+{
+	☞ a := f ultim.
+
+	☞ b := f penultim.
+
+	☞ sum := (a + b).
+
+	✎ scrie: sum, stop.
+		
+	f adaugă la sfârşit: sum.
+
+} * 12.

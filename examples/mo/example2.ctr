@@ -1,0 +1,14 @@
+☞ f := List ← 0 ; 1.
+
+{
+	☞ a := f last.
+
+	☞ b := f second last.
+
+	☞ sum := (a + b).
+
+	✎ łrite: sum, stop.
+		
+	f append: sum.
+
+} * 12.

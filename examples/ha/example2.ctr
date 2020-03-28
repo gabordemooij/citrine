@@ -1,0 +1,14 @@
+☞ f := Lissafi ← 0 ; 1.
+
+{
+	☞ a := f karshe.
+
+	☞ b := f na biyu na karshe.
+
+	☞ sum := (a + b).
+
+	✎ rubuta: sum, tsayawa.
+		
+	f append: sum.
+
+} * 12.

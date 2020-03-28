@@ -1,0 +1,14 @@
+☞ f := Paglista ← 0 ; 1.
+
+{
+	☞ a := f ulahi.
+
+	☞ b := f ikaduha nga naulahi.
+
+	☞ sum := (a + b).
+
+	✎ pagsulat: sum, hunong.
+		
+	f sumpay: sum.
+
+} * 12.

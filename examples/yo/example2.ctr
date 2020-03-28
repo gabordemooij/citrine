@@ -1,0 +1,14 @@
+☞ f := Atokọ ← 0 ; 1.
+
+{
+	☞ a := f kẹhin.
+
+	☞ b := f keji kẹhin.
+
+	☞ sum := (a + b).
+
+	✎ kọ: sum, duro.
+		
+	f append: sum.
+
+} * 12.

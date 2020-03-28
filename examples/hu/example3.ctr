@@ -1,0 +1,6 @@
+☞ x := Szám között és: 1 __: 10.
+☞ q := 0.
+
+{ q := Program kérdez. } míg: { ↲ x szám ≠ q szám. }.
+
+✎ ír: ':-)↵'.

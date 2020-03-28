@@ -1,0 +1,14 @@
+☞ f := Lista ← 0 ; 1.
+
+{
+	☞ a := f l-aħħar.
+
+	☞ b := f it-tieni l-aħħar.
+
+	☞ sum := (a + b).
+
+	✎ ikteb: sum, waqfa.
+		
+	f appendja: sum.
+
+} * 12.

@@ -1,0 +1,14 @@
+☞ f := Danh sách ← 0 ; 1.
+
+{
+	☞ a := f cuối cùng.
+
+	☞ b := f thứ hai cuối cùng.
+
+	☞ sum := (a + b).
+
+	✎ viết: sum, dừng lại.
+		
+	f nối thêm: sum.
+
+} * 12.

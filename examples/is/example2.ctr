@@ -1,0 +1,14 @@
+☞ f := Listi ← 0 ; 1.
+
+{
+	☞ a := f síðast.
+
+	☞ b := f næst síðast.
+
+	☞ sum := (a + b).
+
+	✎ skrifa: sum, hætta.
+		
+	f bætið við: sum.
+
+} * 12.

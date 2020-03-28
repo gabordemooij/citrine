@@ -1,0 +1,14 @@
+☞ f := Senarai ← 0 ; 1.
+
+{
+	☞ a := f lepas.
+
+	☞ b := f kedua terakhir.
+
+	☞ sum := (a + b).
+
+	✎ tulis: sum, berhenti.
+		
+	f tambah: sum.
+
+} * 12.

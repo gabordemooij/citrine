@@ -1,0 +1,14 @@
+☞ f := Lys ← 0 ; 1.
+
+{
+	☞ a := f laaste.
+
+	☞ b := f voorlaaste.
+
+	☞ sum := (a + b).
+
+	✎ skryf: sum, stop.
+		
+	f aanhegnavraag: sum.
+
+} * 12.

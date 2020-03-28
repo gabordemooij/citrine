@@ -1,0 +1,14 @@
+☞ f := Popis ← 0 ; 1.
+
+{
+	☞ a := f posljednji.
+
+	☞ b := f predzadnji.
+
+	☞ sum := (a + b).
+
+	✎ pisati: sum, stop.
+		
+	f dodati: sum.
+
+} * 12.

@@ -1,0 +1,14 @@
+☞ f := Seznam ← 0 ; 1.
+
+{
+	☞ a := f zadnji.
+
+	☞ b := f drugi zadnji.
+
+	☞ sum := (a + b).
+
+	✎ napišite: sum, ustavi se.
+		
+	f dodaj: sum.
+
+} * 12.

@@ -1,0 +1,14 @@
+☞ f := Rhestr ← 0 ; 1.
+
+{
+	☞ a := f olaf.
+
+	☞ b := f ail olaf.
+
+	☞ sum := (a + b).
+
+	✎ ysgrifennu: sum, stopio.
+		
+	f atodiad: sum.
+
+} * 12.

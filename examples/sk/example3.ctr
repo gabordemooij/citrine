@@ -1,0 +1,6 @@
+☞ x := číslo medzi a: 1 __: 10.
+☞ q := 0.
+
+{ q := Program opýtať sa. } zatiaľ čo: { ↲ x _číslo ≠ q _číslo. }.
+
+✎ píšu: ':-)↵'.

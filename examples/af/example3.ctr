@@ -1,0 +1,6 @@
+☞ x := Aantal tussen: 1 en: 10.
+☞ q := 0.
+
+{ q := Program vra. } terwyl: { ↲ x aantal ≠ q aantal. }.
+
+✎ skryf: ':-)↵'.

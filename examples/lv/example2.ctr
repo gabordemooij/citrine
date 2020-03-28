@@ -1,0 +1,14 @@
+☞ f := Saraksts ← 0 ; 1.
+
+{
+	☞ a := f pēdējais.
+
+	☞ b := f otrais pēdējais.
+
+	☞ sum := (a + b).
+
+	✎ rakstīt: sum, apstāties.
+		
+	f pievienot: sum.
+
+} * 12.

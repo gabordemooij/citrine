@@ -1,0 +1,14 @@
+☞ f := Raarangi ← 0 ; 1.
+
+{
+	☞ a := f whakamutunga.
+
+	☞ b := f _tuarua.
+
+	☞ sum := (a + b).
+
+	✎ tuhi: sum, _kati.
+		
+	f taapiri: sum.
+
+} * 12.

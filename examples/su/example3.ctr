@@ -1,0 +1,6 @@
+☞ x := Nomer antara: 1 jeung: 10.
+☞ q := 0.
+
+{ q := Program naros. } sedengkeun: { ↲ x jumlah ≠ q jumlah. }.
+
+✎ nulis: ':-)↵'.

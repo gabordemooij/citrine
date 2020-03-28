@@ -1,0 +1,6 @@
+☞ x := Nombor antara: 1 dan: 10.
+☞ q := 0.
+
+{ q := Program tanya. } sementara: { ↲ x nombor ≠ q nombor. }.
+
+✎ tulis: ':-)↵'.

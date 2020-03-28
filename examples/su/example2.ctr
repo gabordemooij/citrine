@@ -1,0 +1,14 @@
+☞ f := Daptar ← 0 ; 1.
+
+{
+	☞ a := f tukang.
+
+	☞ b := f kadua panungtungan.
+
+	☞ sum := (a + b).
+
+	✎ nulis: sum, eureun.
+		
+	f lampiran: sum.
+
+} * 12.

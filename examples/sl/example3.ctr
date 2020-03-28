@@ -1,0 +1,6 @@
+☞ x := Številka med: 1 in: 10.
+☞ q := 0.
+
+{ q := Program vprašati. } medtem: { ↲ x številka ≠ q številka. }.
+
+✎ napišite: ':-)↵'.

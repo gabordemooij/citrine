@@ -1,0 +1,6 @@
+☞ x := Nummer zwischen und: 1 __: 10.
+☞ q := 0.
+
+{ q := Programm fragen. } während: { ↲ x nummer ≠ q nummer. }.
+
+✎ schreiben: ':-)↵'.

@@ -1,0 +1,6 @@
+☞ x := Nömrə arasında: 1 və: 10.
+☞ q := 0.
+
+{ q := Proqram soruş. } isə: { ↲ x nömrə ≠ q nömrə. }.
+
+✎ yaz: ':-)↵'.

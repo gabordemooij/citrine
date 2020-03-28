@@ -1,0 +1,14 @@
+☞ f := Elencu ← 0 ; 1.
+
+{
+	☞ a := f ultimu.
+
+	☞ b := f siconda ultimu.
+
+	☞ sum := (a + b).
+
+	✎ scrive: sum, _finisci.
+		
+	f appendicà: sum.
+
+} * 12.

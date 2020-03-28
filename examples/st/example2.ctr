@@ -1,0 +1,14 @@
+☞ f := Lenane ← 0 ; 1.
+
+{
+	☞ a := f qetela.
+
+	☞ b := f ea bobeli ea ho qetela.
+
+	☞ sum := (a + b).
+
+	✎ ngola: sum, ema.
+		
+	f eketsa: sum.
+
+} * 12.

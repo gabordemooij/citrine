@@ -1,0 +1,14 @@
+☞ f := Rêzok ← 0 ; 1.
+
+{
+	☞ a := f dawîn.
+
+	☞ b := f ya paşîn paşîn.
+
+	☞ sum := (a + b).
+
+	✎ nivîsîn: sum, rawestan.
+		
+	f append: sum.
+
+} * 12.

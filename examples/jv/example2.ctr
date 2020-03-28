@@ -1,0 +1,14 @@
+☞ f := Dhaptar ← 0 ; 1.
+
+{
+	☞ a := f terakhir.
+
+	☞ b := f kaloro pungkasan.
+
+	☞ sum := (a + b).
+
+	✎ nulis: sum, mandheg.
+		
+	f lampiran: sum.
+
+} * 12.

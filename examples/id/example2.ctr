@@ -1,0 +1,14 @@
+☞ f := Daftar ← 0 ; 1.
+
+{
+	☞ a := f terakhir.
+
+	☞ b := f kedua terakhir.
+
+	☞ sum := (a + b).
+
+	✎ menulis: sum, berhenti.
+		
+	f menambahkan: sum.
+
+} * 12.

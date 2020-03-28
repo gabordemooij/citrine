@@ -1,0 +1,14 @@
+☞ f := Reeks ← 0 ; 1.
+
+{
+	☞ a := f laatste.
+
+	☞ b := f een-na-laatste.
+
+	☞ sum := (a + b).
+
+	✎ schrĳf: sum, stop.
+		
+	f toevoegen: sum.
+
+} * 12.

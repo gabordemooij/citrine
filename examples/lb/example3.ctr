@@ -1,0 +1,6 @@
+☞ x := Zuel tëscht: 1 an: 10.
+☞ q := 0.
+
+{ q := Programm froen. } während: { ↲ x zuel ≠ q zuel. }.
+
+✎ schreiwen: ':-)↵'.

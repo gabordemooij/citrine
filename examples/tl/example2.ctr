@@ -1,0 +1,14 @@
+☞ f := Listahan ← 0 ; 1.
+
+{
+	☞ a := f huling.
+
+	☞ b := f pangalawa sa huli.
+
+	☞ sum := (a + b).
+
+	✎ sumulat: sum, huminto.
+		
+	f ikabit__: sum.
+
+} * 12.

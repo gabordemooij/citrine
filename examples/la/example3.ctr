@@ -1,0 +1,6 @@
+☞ x := Numerus inter; et: 1 __: 10.
+☞ q := 0.
+
+{ q := Program quaerere. } dum;__: { ↲ x numerus ≠ q numerus. }.
+
+✎ scribe: ':-)↵'.

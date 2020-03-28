@@ -1,0 +1,14 @@
+☞ f := Ndepụta ← 0 ; 1.
+
+{
+	☞ a := f nke ikpeazu.
+
+	☞ b := f nke abụọ ikpeazụ.
+
+	☞ sum := (a + b).
+
+	✎ dee: sum, kwụsị.
+		
+	f append: sum.
+
+} * 12.

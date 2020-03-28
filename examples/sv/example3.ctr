@@ -1,0 +1,6 @@
+☞ x := Siffra mellan och: 1 __: 10.
+☞ q := 0.
+
+{ q := Program fråga. } medan: { ↲ x siffra ≠ q siffra. }.
+
+✎ skriva: ':-)↵'.
