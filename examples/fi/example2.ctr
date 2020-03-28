@@ -1,0 +1,14 @@
+☞ f := Lista ← 0 ; 1.
+
+{
+	☞ a := f kestää.
+
+	☞ b := f toiseksi viimeinen.
+
+	☞ sum := (a + b).
+
+	✎ kirjoittaa: sum, lopettaa.
+		
+	f append: sum.
+
+} * 12.

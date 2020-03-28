@@ -1,0 +1,6 @@
+☞ x := Fjöldi milli: 1 og: 10.
+☞ q := 0.
+
+{ q := Forrit spyrja. } meðan: { ↲ x númer ≠ q númer. }.
+
+✎ skrifa: ':-)↵'.

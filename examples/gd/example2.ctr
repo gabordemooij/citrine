@@ -1,0 +1,14 @@
+☞ f := Liosta ← 0 ; 1.
+
+{
+	☞ a := f mu dheireadh.
+
+	☞ b := f an dàrna fear mu dheireadh.
+
+	☞ sum := (a + b).
+
+	✎ sgrìobh: sum, stad.
+		
+	f eàrr-sgrìobhadh: sum.
+
+} * 12.

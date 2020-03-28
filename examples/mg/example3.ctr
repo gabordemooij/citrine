@@ -1,0 +1,6 @@
+☞ x := Number eo: 1 ary: 10.
+☞ q := 0.
+
+{ q := Program manontany. } raha: { ↲ x isa ≠ q isa. }.
+
+✎ manoratra: ':-)↵'.

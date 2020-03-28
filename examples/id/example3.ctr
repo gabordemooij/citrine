@@ -1,0 +1,6 @@
+☞ x := Jumlah diantara dan: 1 __: 10.
+☞ q := 0.
+
+{ q := Program meminta. } sementara: { ↲ x jumlah ≠ q jumlah. }.
+
+✎ menulis: ':-)↵'.

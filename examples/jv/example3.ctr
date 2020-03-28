@@ -1,0 +1,6 @@
+☞ x := Nomer antarane: 1 lan: 10.
+☞ q := 0.
+
+{ q := Program takon. } nalika: { ↲ x nomer ≠ q nomer. }.
+
+✎ nulis: ':-)↵'.

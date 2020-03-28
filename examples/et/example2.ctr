@@ -1,0 +1,14 @@
+☞ f := Loend ← 0 ; 1.
+
+{
+	☞ a := f viimane.
+
+	☞ b := f teine ​​viimane.
+
+	☞ sum := (a + b).
+
+	✎ kirjuta: sum, peatus.
+		
+	f lisa: sum.
+
+} * 12.

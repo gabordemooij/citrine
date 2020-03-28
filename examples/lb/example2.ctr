@@ -1,0 +1,14 @@
+☞ f := Lëscht ← 0 ; 1.
+
+{
+	☞ a := f lescht.
+
+	☞ b := f zweet lescht.
+
+	☞ sum := (a + b).
+
+	✎ schreiwen: sum, stoppen.
+		
+	f dobäizemaachen: sum.
+
+} * 12.

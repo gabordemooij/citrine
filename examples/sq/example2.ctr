@@ -1,0 +1,14 @@
+☞ f := Listë ← 0 ; 1.
+
+{
+	☞ a := f i fundit.
+
+	☞ b := f kaluar dytë.
+
+	☞ sum := (a + b).
+
+	✎ shkruaj: sum, ndaluar.
+		
+	f append: sum.
+
+} * 12.

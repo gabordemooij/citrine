@@ -1,0 +1,14 @@
+☞ f := Lista ← 0 ; 1.
+
+{
+	☞ a := f utolsó.
+
+	☞ b := f utolsó előtti.
+
+	☞ sum := (a + b).
+
+	✎ ír: sum, állj meg.
+		
+	f append: sum.
+
+} * 12.

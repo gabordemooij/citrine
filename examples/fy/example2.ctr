@@ -1,0 +1,14 @@
+☞ f := List ← 0 ; 1.
+
+{
+	☞ a := f lêst.
+
+	☞ b := f twadde lêste.
+
+	☞ sum := (a + b).
+
+	✎ skriuwe: sum, halte.
+		
+	f tafoegje: sum.
+
+} * 12.

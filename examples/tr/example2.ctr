@@ -1,0 +1,14 @@
+☞ f := Liste ← 0 ; 1.
+
+{
+	☞ a := f _son.
+
+	☞ b := f sondan ikinci.
+
+	☞ sum := (a + b).
+
+	✎ yazmak: sum, dur.
+		
+	f ekleme: sum.
+
+} * 12.

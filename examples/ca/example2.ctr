@@ -1,0 +1,14 @@
+☞ f := Llista ← 0 ; 1.
+
+{
+	☞ a := f últim.
+
+	☞ b := f segon últim.
+
+	☞ sum := (a + b).
+
+	✎ escriu: sum, atura.
+		
+	f annexar: sum.
+
+} * 12.

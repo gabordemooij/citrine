@@ -1,0 +1,14 @@
+☞ f := Palapala ← 0 ; 1.
+
+{
+	☞ a := f hope loa.
+
+	☞ b := f lua a hope.
+
+	☞ sum := (a + b).
+
+	✎ kākau: sum, oki.
+		
+	f append: sum.
+
+} * 12.

@@ -1,0 +1,14 @@
+☞ f := Lista ← 0 ; 1.
+
+{
+	☞ a := f sista.
+
+	☞ b := f näst sist.
+
+	☞ sum := (a + b).
+
+	✎ skriva: sum, sluta.
+		
+	f bifoga: sum.
+
+} * 12.

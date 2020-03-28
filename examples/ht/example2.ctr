@@ -1,0 +1,14 @@
+☞ f := Lis ← 0 ; 1.
+
+{
+	☞ a := f dènye.
+
+	☞ b := f dezyèm dènye.
+
+	☞ sum := (a + b).
+
+	✎ ekri: sum, kanpe.
+		
+	f ajoute: sum.
+
+} * 12.

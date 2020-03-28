@@ -1,0 +1,6 @@
+☞ x := Număr între: 1 şi: 10.
+☞ q := 0.
+
+{ q := Program întreabă. } cât timp: { ↲ x număr ≠ q număr. }.
+
+✎ scrie: ':-)↵'.

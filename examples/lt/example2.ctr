@@ -1,0 +1,14 @@
+☞ f := Sąrašas ← 0 ; 1.
+
+{
+	☞ a := f paskutinis.
+
+	☞ b := f priešpaskutinis.
+
+	☞ sum := (a + b).
+
+	✎ atspausdinti: sum, sustoti.
+		
+	f pridėti: sum.
+
+} * 12.

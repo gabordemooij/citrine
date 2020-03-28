@@ -1,0 +1,14 @@
+☞ f := Siyahı ← 0 ; 1.
+
+{
+	☞ a := f _son.
+
+	☞ b := f ikinci son.
+
+	☞ sum := (a + b).
+
+	✎ yaz: sum, dayan.
+		
+	f əlavə etmək: sum.
+
+} * 12.

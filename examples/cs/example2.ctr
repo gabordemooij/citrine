@@ -1,0 +1,14 @@
+☞ f := Seznam ← 0 ; 1.
+
+{
+	☞ a := f poslední.
+
+	☞ b := f sekunda poslední.
+
+	☞ sum := (a + b).
+
+	✎ napsat: sum, stop.
+		
+	f _připojit: sum.
+
+} * 12.

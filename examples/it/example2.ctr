@@ -1,0 +1,14 @@
+☞ f := Elenco ← 0 ; 1.
+
+{
+	☞ a := f scorso.
+
+	☞ b := f penultimo.
+
+	☞ sum := (a + b).
+
+	✎ scrivi: sum, fermare.
+		
+	f aggiungere: sum.
+
+} * 12.

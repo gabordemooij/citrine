@@ -1,0 +1,6 @@
+☞ x := Arv vahel: 1 ja: 10.
+☞ q := 0.
+
+{ q := Programm küsige. } samas: { ↲ x number ≠ q number. }.
+
+✎ kirjuta: ':-)↵'.

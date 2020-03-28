@@ -1,0 +1,14 @@
+☞ f := Zoznam ← 0 ; 1.
+
+{
+	☞ a := f posledná.
+
+	☞ b := f predposledný.
+
+	☞ sum := (a + b).
+
+	✎ píšu: sum, zastávka.
+		
+	f _pripojiť: sum.
+
+} * 12.

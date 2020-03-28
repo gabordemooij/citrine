@@ -1,0 +1,6 @@
+☞ x := Número entre: 1 _i: 10.
+☞ q := 0.
+
+{ q := Programa pregunta. } mentre: { ↲ x núm ≠ q núm. }.
+
+✎ escriu: ':-)↵'.

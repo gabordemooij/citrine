@@ -1,7 +1,0 @@
-☞ klusjes := Reeks nieuw
-	• 'vaten'
-	• 'stofzuigen'
-	• 'boodschappen'.
-
-✎ schrijf: (klusjes samenvoegen: ',').
-

@@ -1,0 +1,14 @@
+☞ f := Aufführen ← 0 ; 1.
+
+{
+	☞ a := f zuletzt.
+
+	☞ b := f vorletzte.
+
+	☞ sum := (a + b).
+
+	✎ schreiben: sum, halt.
+		
+	f anhängen: sum.
+
+} * 12.

@@ -1,0 +1,6 @@
+☞ x := Skaičius tarp: 1 ir: 10.
+☞ q := 0.
+
+{ q := Programa klausti. } kol: { ↲ x skaičius ≠ q skaičius. }.
+
+✎ atspausdinti: ':-)↵'.

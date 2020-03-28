@@ -1,0 +1,6 @@
+☞ x := Broj između i: 1 __: 10.
+☞ q := 0.
+
+{ q := Program pitati. } dok: { ↲ x broj ≠ q broj. }.
+
+✎ pisati: ':-)↵'.

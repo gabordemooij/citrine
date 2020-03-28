@@ -1,0 +1,14 @@
+☞ f := Lista ← 0 ; 1.
+
+{
+	☞ a := f último.
+
+	☞ b := f segundo último.
+
+	☞ sum := (a + b).
+
+	✎ escribir: sum, parar.
+		
+	f anexo: sum.
+
+} * 12.

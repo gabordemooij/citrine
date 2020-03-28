@@ -1,0 +1,14 @@
+☞ f := Liosta ← 0 ; 1.
+
+{
+	☞ a := f seo caite.
+
+	☞ b := f an dara ceann deireanach.
+
+	☞ sum := (a + b).
+
+	✎ scríobh: sum, stad.
+		
+	f aguisín: sum.
+
+} * 12.

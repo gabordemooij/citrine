@@ -1,0 +1,14 @@
+☞ f := Album ← 0 ; 1.
+
+{
+	☞ a := f tandem.
+
+	☞ b := f secundo novissimo.
+
+	☞ sum := (a + b).
+
+	✎ scribe: sum, prohibere.
+		
+	f append: sum.
+
+} * 12.

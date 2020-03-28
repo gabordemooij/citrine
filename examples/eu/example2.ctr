@@ -1,0 +1,14 @@
+☞ f := Zerrenda ← 0 ; 1.
+
+{
+	☞ a := f azken.
+
+	☞ b := f bigarren azken.
+
+	☞ sum := (a + b).
+
+	✎ idatzi: sum, geldialdia.
+		
+	f erantsi: sum.
+
+} * 12.

@@ -1,0 +1,6 @@
+☞ x := Bilang sa pagitan ng: 1 at: 10.
+☞ q := 0.
+
+{ q := Program magtanong. } habang: { ↲ x bilang ≠ q bilang. }.
+
+✎ sumulat: ':-)↵'.

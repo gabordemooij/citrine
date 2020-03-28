@@ -1,0 +1,6 @@
+☞ x := Nombre entre et: 1 __: 10.
+☞ q := 0.
+
+{ q := Programme demander. } tandis que: { ↲ x nombre ≠ q nombre. }.
+
+✎ écrire: ':-)↵'.

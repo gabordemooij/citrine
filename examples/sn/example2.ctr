@@ -1,0 +1,14 @@
+☞ f := Rondedzero ← 0 ; 1.
+
+{
+	☞ a := f pekupedzisira.
+
+	☞ b := f yechipiri yekupedzisira.
+
+	☞ sum := (a + b).
+
+	✎ nyora: sum, mira.
+		
+	f _shandisa: sum.
+
+} * 12.

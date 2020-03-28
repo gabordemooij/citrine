@@ -1,0 +1,6 @@
+☞ x := Rhif rhwng: 1 _a: 10.
+☞ q := 0.
+
+{ q := Rhaglen gofynnwch. } tra: { ↲ x rhif ≠ q rhif. }.
+
+✎ ysgrifennu: ':-)↵'.

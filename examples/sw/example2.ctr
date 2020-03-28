@@ -1,0 +1,14 @@
+☞ f := Orodha ← 0 ; 1.
+
+{
+	☞ a := f _mwisho.
+
+	☞ b := f pili la mwisho.
+
+	☞ sum := (a + b).
+
+	✎ andika: sum, acha.
+		
+	f ongeza: sum.
+
+} * 12.

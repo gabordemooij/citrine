@@ -1,0 +1,6 @@
+☞ x := Numru bejn: 1 _u: 10.
+☞ q := 0.
+
+{ q := Programm staqsi. } waqt: { ↲ x numru ≠ q numru. }.
+
+✎ ikteb: ':-)↵'.
