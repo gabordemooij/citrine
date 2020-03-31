@@ -81,81 +81,87 @@ char* ctr_national_number(char* old_number, char* new_number) {
 }
 
 /**
+ * @def
+ * Welcome
+ * 
+ * @example
+ * ☞ x := Object new.
+ * x on: 'greet:' do: { :somebody
+ *   ☞ greeting := 'Hello you!'.
+ *   greeting you: somebody.
+ *   ✎ write: greeting, stop.
+ * }.
+ * x greet: 'World'.
+ */
+
+
+/**
+ * @def
  * Nil
  *
- * Nil represents 'nothing' or NULL in other languages.
- * Any object property that has not been assigned a value
- * will contain Nil. Unlike some other programming languages
- * Citrine has no concept of 'undefined' or isset, Nil is actually the
- * same as 'undefined' or not set.
- *
- * Literal:
- *
- * Nil
- *
- * In other languages:
- * Dutch: Niets
+ * @example
+ * ☞ x := Nil.
+ * ✎ write: x Nil?, stop.
  */
 ctr_object* ctr_build_nil() {
 	return CtrStdNil;
 }
 
 /**
+ * @def
  * [Nil] Nil?
  *
- * Nil always answers this message with a boolean object 'True'.
- *
- * In other languages:
- * Dutch: [Niets] Niets? | antwoord altijd met Waar.
+ * @example
+ * ☞ x := Nil.
+ * ✎ write: x Nil?, stop.
  */
 ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(1);
 }
 
 /**
+ * @def
  * [Nil] string
  *
- * Returns the string representation of Nil: 'Nil'.
- *
- * In other languages:
- * Dutch: [Niets] tekst | geeft de tekstweergave van Niets (en dat is altijd 'Niets')
+ * @example
+ * ☞ x := Nil.
+ * ✎ write: x string, stop.
  */
 ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( CTR_DICT_NIL );
 }
 
 /**
+ * @def
  * [Nil] number
  *
- * Returns the numerical representation of Nil: 0.
- *
- * In other languages:
- * Dutch: [Niets] boolean | geeft de getalswaarde voor Niets terug (altijd 0).
+ * @example
+ * ☞ x := Nil.
+ * ✎ write: x number, stop.
  */
 ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_number_from_float(0);
 }
 
 /**
+ * @def
  * [Nil] boolean
  *
- * Returns the boolean representation of Nil: False.
- *
- * In other languages:
- * Dutch: [Niets] boolean | Niets is altijd gelijk aan Onwaar
+ * @example
+ * ☞ x := Nil.
+ * ✎ write: x boolean, stop.
  */
 ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_bool(0);
 }
 
 /**
+ * @def
  * Object
  *
- * This is the base object, the parent of all other objects.
- * It contains essential object oriented programming features.
- *
- * In other languages:
- * Dutch: Object | Dit is het generieke object, de vader van alle objecten
+ * @example
+ * ☞ x := Object.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* objectInstance = NULL;
@@ -165,12 +171,12 @@ ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Object] type
+ * @def
+ * [ Object ] type
  *
- * Returns a string representation of the type of object.
- *
- * In other languages:
- * Dutch: [Object] type | Geeft het basistype object terug
+ * @example
+ * ☞ x := Object.
+ * ✎ write: x type, stop.
  */
 ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 	switch(myself->info.type){
@@ -191,63 +197,51 @@ ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Object] string
+ * @def
+ * [ Object ] string
  *
- * Returns a string representation of a generic object.
- * This string representation will be:
- *
- * [Object]
- *
- * In other languages:
- * Dutch: [Object] tekst | Geeft het de tekstuele omschrijving van het moederobject ('[Object]')
+ * @example
+ * ☞ x := Object.
+ * ✎ write: x string, stop.
  */
 ctr_object* ctr_object_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_build_string_from_cstring( CTR_SYM_OBJECT );
 }
 
 /**
- * [Object] number
+ * @def
+ * [ Object ] number
  *
- * Returns a numerical representation of the object. This basic behavior, part
- * of any object will just return 1. Other objects typically override this
- * behavior with more useful implementations.
- *
- * In other languages:
- * Dutch: [Object] getal | Geeft de getalswaarde van het algemene object (altijd 1)
+ * @example
+ * ☞ x := Object.
+ * ✎ write: x number, stop.
  */
 ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_number_from_float(1);
 }
 
 /**
- * [Object] boolean
+ * @def
+ * [ Object ] boolean
  *
- * Returns a boolean representation of the object. This basic behavior, part
- * of any object will just return True. Other objects typically override this
- * behavior with more useful implementations.
- *
- * In other languages:
- * Dutch: [Object] boolean | Geeft de waarheidswaarde van het algemene object (altijd Waar)
+ * @example
+ * ☞ x := Object.
+ * ✎ write: x boolean, stop.
  */
 ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_bool(1);
 }
 
 /**
- * [Object] equals: [other]
+ * @def
+ * [ Object ] equals: [ Object ]
  *
- * Tests whether the current instance is the same as
- * the argument. You also use the message '=' for this
- * however, often that message will be overridden by a
- * derived object (Number will use = to compare the numeric values
- * for instance).
- *
- * Usage:
- *
- * object equals: other
- *
- * In other languages:
- * Dutch: [Object] gelijk: [Object] | Geeft Waar terug als beide objecten een en dezelfde zijn
+ * @example
+ * ☞ x := Object new.
+ * ☞ y := Object new.
+ * ☞ z := x.
+ * ✎ write: ( x equals: y ), stop.
+ * ✎ write: ( x equals: z ), stop.
  */
 ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherObject = argumentList->object;
@@ -256,32 +250,25 @@ ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Object] myself
+ * @def
+ * [ Object ] myself.
  *
- * Returns the object itself.
- *
- * In other languages:
- * Dutch: [Object] mijzelf | Geeft het object zelf terug
+ * @example
+ * ☞ x := Object.
+ * ✎ write: ( x = x myself ), stop.
  */
 ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
 /**
- * [Object] do
+ * @def
+ * [ Object ] do.
  *
- * Activates 'chain mode'. If chain mode is active, all messages will
- * return the recipient object regardless of their return signature.
- * The 'do' message tells the object to always return itself and disgard
- * the original return value until the message 'done' has been received.
- *
- * Usage:
- *
- * a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
- * a do pop shift prepend: 'hi', append: 999, done.
- *
- * In other languages:
- * Dutch: [Object] doen | Stel object zo in dat het alle berichten antwoord met zichzelf
+ * @example
+ * ☞ x := List ← 1 ; 2 ; 3.
+ * x do pop shift done.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_object_do( ctr_object* myself, ctr_argument* argumentList ) {
 	myself->info.chainMode = 1;
@@ -289,12 +276,13 @@ ctr_object* ctr_object_do( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Object] done
+ * @def
+ * [ Object ] done.
  *
- * Deactivates 'chain mode'.
- *
- * In other languages:
- * Dutch: [Object] klaar | Stop de doen-modus
+ * @example
+ * ☞ x := List ← 1 ; 2 ; 3.
+ * x do pop shift done.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
 	myself->info.chainMode = 0;
@@ -302,20 +290,17 @@ ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Object] copy
+ * @def
+ * [ Object ] copy.
  *
- * Contrary to other languages, all objects, even booleans, numbers and
- * strings are assigned and passed by reference. To create a shallow copy
- * of a number, string or boolean send the message 'copy'.
- *
- * Usage:
- *
- * a := 5.
- * b := a copy.
- * b add: 1.
- *
- * In other languages:
- * Dutch: [Object] kopieer | Geeft een kopie van het object terug
+ * @example
+ * ☞ x := 1.
+ * ☞ y := x.
+ * ☞ z := x copy.
+ * x add: 1.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
+ * ✎ write: z, stop.
  */
 ctr_object* ctr_bool_copy( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_build_bool(myself->value.bvalue);
@@ -330,32 +315,17 @@ ctr_object* ctr_string_copy( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
+ * 
+ * @def
  * [Object] case: [Object] do: [Block].
  *
- * This message makes the recipient compare itself to the specified object.
- * If the recipient considers itself to be equal, it will carry out the
- * instructions in the associated block of code. The recipient will send
- * the message '=' to itself with the other object as an argument. This leaves
- * it up to the recipient to determine whether the objects are considered
- * equal. If the recipient decides the objects are not equal, the associated
- * code block will be ignored. Note that this allows you to implement a
- * so-called switch-statement like those found in other languages. Because
- * of the generic implementation, you can use the case statements on almost
- * any object. Case-do statements may provide a readable alternative to a
- * long list of if-else messages.
- *
- * The example program below will print the text 'It's a Merlot!'.
- *
- * Usage:
- *
- * wine
- *	case: 'cabernet' do: { ✎ write: 'it\'s a Cabernet!'. },
- *	case: 'syrah'    do: { ✎ write: 'it\'s a Syrah!'.    },
- *	case: 'merlot'   do: { ✎ write: 'it\'s a Merlot!'.   },
- *	case: 'malbec'   do: { ✎ write: 'it\'s a Malbec!'.   }.
- *
- * In other languages:
- * Dutch: [Object] geval: [Object] doen: [Blok]| Voert het blok bij doen: uit als geval: Waar is
+ * @example
+ * ☞ x := '**'.
+ * x
+ *  case: '*' do: { ✎ write: 1. },
+ *  case: '**' do: { ✎ write: 2. },
+ *  case: '***' do: { ✎ write: 3. }.
+ * ✎ stop.
  */
 ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* block = argumentList->next->object;
@@ -386,24 +356,13 @@ ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [Object] message: [String] arguments: [List]
+ * @def
+ * [ Object ] message: [ String ] arguments: [ List ]
  *
- * Sends a custom or 'dynamic' message to an object. This takes a string containing
- * the message to be send to the object and an array listing the arguments at the
- * correct indexes. If the array fails to provide the correct indexes this will
- * generate an out-of-bounds error coming from the Array object. If something other
- * than an List is provided an error will be thrown as well.
- *
- * Usage:
- *
- * ☞ str := 'write:'.
- * ✎ message: 'write:' arguments: (List ← 'Hello World').
- *
- * This will print the string 'Hello world' on the screen using a dynamically
- * crafted message.
- *
- * In other languages:
- * Dutch: [Object] bericht:[Tekst] argumenten:[Reeks] | Stuurt een dynamisch bericht naar object
+ * @example
+ * ☞ x := 5.
+ * ☞ y := x message: '*' arguments: (List ← 2).
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* message = ctr_internal_cast2string( argumentList->object );
@@ -448,19 +407,23 @@ ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [Object] on: [String] do: [Block]
+ * @def
+ * [ Object ] on: [ String ] do: [ Block ]
  *
- * Makes the object respond to a new kind of message.
- * Use the semicolons to indicate the positions of the arguments to be
- * passed.
- *
- * Usage:
- *
- * object on: 'greet' do: { ... }.
- * object on: 'between:and:' do: { ... }.
- *
- * In other languages:
- * Dutch: [Object] bij: [Tekst] doen:[Codeblok] | Voegt gedrag toe aan object (bij ontvangst bericht - doen)
+ * @example
+ * ☞ ☃ := Object new.
+ * ☃ on: 'name:' do: { :x
+ * ⚿ name := x. 
+ * }.
+ * ☃ on: 'name' do: { ↲ ⚿ name. }.
+ * ☃ name: 'Snowman'.
+ * ✎ write: ☃ name, stop.
+ * ☞ ⛇ := ☃ new.
+ * ⛇ on: 'name' do: {
+ *   ↲ 'Inverted version' me: ⛏ `name.
+ * }.
+ * ⛇ name: 'Snowman'.
+ * ✎ write: ⛇ name, stop.
  */
 ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* nextArgument;
@@ -482,22 +445,15 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Object] respond: [String]
+ * @def
+ * [ Object ] respond: [ String ]
  *
- * Variations:
- *
- * [Object] respond: [String] and: [String]
- * [Object] respond: [String] and: [String] and: [String]
- * [Object] respond: [String] and: [String] and: [String] and: [String]
- *
- * Default respond-to implemention, does nothing.
- * You can override this behaviour to implement generic behaviour.
- * Listening to these messages allows users to send any message to an
- * object. For instance an object can respond to any message it does not
- * understand by echoing the message.
- *
- * In other languages:
- * Dutch: [Object] reageer: [Tekst] en: [Tekst] en: [Tekst]
+ * @example
+ * ☞ echo := Object new.
+ * echo on: 'respond:' do: { :s 
+ * 	↲ (s + s).
+ * }.
+ * ✎ write: echo ho!.
  */
 ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
@@ -517,36 +473,23 @@ ctr_object* ctr_object_respond_and_and_and(ctr_object* myself, ctr_argument* arg
 }
 
 /**
- * [Object] Nil?
+ * @def
+ * [ Object ] Nil?
  *
- * Default Nil? implementation.
- *
- * Always returns boolean object False.
- *
- * In other languages:
- * Dutch: [Object] Niets? | Vraagt aan een object of het niets is (Object antwoord altijd Onwaar)
+ * @example
+ * ✎ write: Object Nil?, stop.
  */
 ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(0);
 }
 
 /**
- * [Object] learn: [String] means: [String].
+ * @def
+ * [ Object ] learn: [ String ] means: [ String ].
  *
- * Teaches any object to repsond to the first specified message just like
- * it would upon receiving the second. This allows you to map existing
- * responses to new messages. You can use this to translate messages into your native
- * language. After mapping, sending the alias message will be just as fast
- * as sending the original message. You can use this to create programs
- * in your native language without sacrficing performance. Of course the mapping itself
- * has a cost, but the mapped calls will be 'toll-free'.
- *
- * Usage:
- *
- * Boolean learn: 'yes:' means: 'true:'.
- *
- * In other languages:
- * Dutch: [Object] leer: [Tekst] betekent: [Tekst] | Leert object dat bericht 1 hetzelfde betekent als bericht 2
+ * @example
+ * Number learn: '-' means: '+'.
+ * ✎ write: 2 - 1, stop.
  */
 ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argumentList) {
        char*  current_method_name_str;
@@ -573,15 +516,14 @@ ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argum
 }
 
 /**
+ * @def
  * Boolean
  *
- * Literal:
- *
- * True
- * False
- *
- * In other languages:
- * Dutch: Boolean (waarheid: Waar of Onwaar)
+ * @example
+ * ☞ x := (1 = 0).
+ * ☞ y := (1 = 1).
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_build_bool(int truth) {
 	ctr_object* boolObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
@@ -592,17 +534,11 @@ ctr_object* ctr_build_bool(int truth) {
 }
 
 /**
- * [Boolean] = [other]
+ * @def
+ * [ Boolean ] = [ Boolean ]
  *
- * Tests whether the other object (as a boolean) has the
- * same value (boolean state True or False) as the current one.
- *
- * Usage:
- *
- * (True = False) false: { ✎ write: 'This is not True!'. }.
- *
- * In other languages:
- * Dutch: Boolean (waarheid: Waar of Onwaar)
+ * @example
+ * ✎ write: (True = False), stop.
  */
 ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(ctr_internal_cast2bool(argumentList->object)->value.bvalue == myself->value.bvalue);
@@ -610,26 +546,25 @@ ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
 
 
 /**
- * [Boolean] != [other]
+ * @def
+ * [ Boolean ] != [ Boolean ]
  *
- * Tests whether the other object (as a boolean) has the
- * same value (boolean state True or False) as the current one.
- *
- * Usage:
- *
- * (True != False) true: { ✎ write: 'This is not True!'. }.
+ * @example
+ * (True != False) true: { 
+ * 	✎ write: 'This is not True!'.
+ * }.
  */
 ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(ctr_internal_cast2bool(argumentList->object)->value.bvalue != myself->value.bvalue);
 }
 
 /**
- * [Boolean] string
+ * @def
+ * [ Boolean ] string
  *
- * Returns a string representation of a boolean value, i.e. 'True' or 'False'.
- *
- * In other languages:
- * Dutch: tekst | geeft beschrijving van de waarheidswaarde ('Waar' of 'Onwaar')
+ * @example
+ * ✎ write: True string, stop.
+ * ✎ write: False string, stop.
  */
 ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue == 1) {
@@ -640,19 +575,14 @@ ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] break
+ * @def
+ * [ Boolean ] break
  *
- * Breaks out of the current block and bubbles up to the parent block if
- * the value of the receiver equals boolean True.
- *
- * Usage:
- *
- * { :iteration
- *     (iteration > 10) break.
+ * @example
+ * { :i
+ * 		✎ write: i, stop.
+ *     (i > 10) break.
  * } * 20.
- *
- * In other languages:
- * Dutch: [Boolean] afbreken | Indien waarheidswaarde gelijk is aan Waar dan wordt de lus afgebroken
  */
 ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
@@ -662,17 +592,14 @@ ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] continue
+ * @def
+ * [ Boolean ] continue
  *
- * Skips the remainder of the current block in a loop, continues to the next
- * iteration.
- *
- * Usage:
- *
- * (iteration > 10) continue.
- *
- * In other languages:
- * Dutch: [Boolean] doorgaan | Indien verzonden naar Waar, slaat de rest van het blok over en vervolgt de lus
+ * @example
+ * { :i
+ *      (i > 10 and: i < 15) continue.
+ * 		✎ write: i, stop.
+ * } * 20.
  */
 ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
@@ -682,17 +609,14 @@ ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] true: [block]
+ * @def
+ * [ Boolean ] true: [ Block ]
  *
- * Executes a block of code if the value of the boolean
- * object is True.
- *
- * Usage:
- *
- * (some expression) true: { ... }.
- *
- * In other languages:
- * Dutch: [Boolean] waar: [Codeblok] |  Indien verzonden naar Waar, voert het gegeven blok uit
+ * @example
+ * ☞ x := 10.
+ * (x > 9 and: x < 11) true: {
+ * 	✎ write: x, stop.
+ * }.
  */
 ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
@@ -715,17 +639,15 @@ ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] false: [block]
+ * @def
+ * [ Boolean ] false: [ Block ]
  *
- * Executes a block of code if the value of the boolean
- * object is True.
- *
- * Usage:
- *
- * (some expression) false: { ... }.
- *
- * In other languages:
- * Dutch: [Boolean] onwaar: [Codeblok] |  Indien verzonden naar Onwaar, voert het gegeven blok uit
+ * @example
+ * ('a' > 'b') false: {
+ *   ✎ write: 'a', stop.
+ * }, else: {
+ *   ✎ write: 'b', stop.
+ * }.
  */
 ctr_object* ctr_bool_if_false(ctr_object* myself, ctr_argument* argumentList) {
 	if (!myself->value.bvalue) {
@@ -762,27 +684,28 @@ ctr_object* ctr_object_if_true( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [Boolean] not
+ * @def
+ * [ Boolean ] not
  *
- * Returns the opposite of the current value.
- *
- * Usage:
- * True := False not.
- *
- * In other languages:
- * Dutch: [Boolean] niet | Geeft de omgekeerde waarde terug
+ * @example
+ * ✎ write: True not, stop.
+ * ✎ write: False not, stop.
+ * ✎ write: True not not, stop.
+ * ✎ write: False not not not, stop.
  */
 ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(!myself->value.bvalue);
 }
 
 /**
- * [Boolean] either: [this] or: [that]
+ * @def
+ * [ Boolean ] either: [ Object ] or: [ Object ]
  *
- * Returns argument #1 if boolean value is True and argument #2 otherwise.
- *
- * In other languages:
- * Dutch: [Boolean] of: [Object] of: [Object] | Antwoord met 1e object als Waar anders 2e.
+ * @example
+ * ☞ x := ( 1 > 2 ) either: 'Y' or: 'N'.
+ * ☞ y := ( 2 > 1 ) either: 'Y' or: 'N'.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop. 
  */
 ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
@@ -793,17 +716,14 @@ ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] and: [other]
- *
- * Returns True if both the object value is True and the
- * argument is True as well.
- *
- * Usage:
- *
- * a and: b
- *
- * In other languages:
- * Dutch: [Boolean] en: [Object] | Antwoord met Waar als beide Waar zijn
+ * @def
+ * [ Boolean ] and: [ Boolean ]
+ * 
+ * @example
+ * ☞ x := ( 2 > 1 ) and: ( 3 > 2 ).
+ * ☞ y := ( 2 > 1 ) and: ( 2 > 3 ).
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
@@ -811,17 +731,14 @@ ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] nor: [other]
+ * @def
+ * [ Boolean ] nor: [ Boolean ]
  *
- * Returns True if the object value is False and the
- * argument is False as well.
- *
- * Usage:
- *
- * a nor: b
- *
- * In other languages:
- * Dutch: [Boolean] noch: [Object] | Antwoord met Waar als beide Onwaar zijn
+ * @example
+ * ☞ x := ( 1 > 2 ) nor: ( 2 > 3 ).
+ * ☞ y := ( 2 > 1 ) nor: ( 3 > 2 ).
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
@@ -829,17 +746,12 @@ ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] or: [other]
+ * @def
+ * [ Boolean ] or: [ Boolean ]
  *
- * Returns True if either the object value is True or the
- * argument is True or both are True.
- *
- * Usage:
- *
- * a or: b
- *
- * In other languages:
- * Dutch: [Boolean] of: [Object] | Antwoord met Waar als een van beide objecten Waar is
+ * @example
+ * ☞ x := 10.
+ * ✎ write: (x = 11 or: x = 10), stop.
  */
 ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
@@ -847,31 +759,24 @@ ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Boolean] number
+ * @def
+ * [ Boolean ] number
  *
- * Returns 0 if boolean is False and 1 otherwise.
- *
- * In other languages:
- * Dutch: [Boolean] getal | Antwoord 0 als Onwaar en 1 als Waar
+ * @example
+ * ✎ write: True number, stop.
+ * ✎ write: False number, stop.
  */
 ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (ctr_number) myself->value.bvalue );
 }
 
 /**
+ * @def
  * Number
  *
- * Literal:
- *
- * 0
- * 1
- * -8
- * 2.5
- *
- * Represents a number object in Citrine.
- *
- * In other languages:
- * Dutch: Getal, representeert een getal
+ * @example
+ * ☞ x := 123.
+ * ✎ write: x type, stop.
  */
 ctr_object* ctr_build_number(char* n) {
 	ctr_object* numberObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
@@ -922,23 +827,12 @@ ctr_object* ctr_build_number_from_float(ctr_number f) {
 }
 
 /**
- * [Number] > [other]
+ * @def
+ * [ Number ] > [ Number ]
  *
- * Upon receiving this binary message, the Number object will
- * compare itself to the specified Number (other). If the value of
- * the Number object is higher than the other Number object, it will
- * answer with a boolean object True,
- * otherwise it will answer with a boolean object False.
- *
- * Usage:
- *
- * ☞ x := 8 > 7.
- *
- * The code snippet above will compare the two number objects.
- * The result (True) will be stored in variable x.
- *
- * In other languages:
- * Dutch: [Getal] > [Getal] | Antwoord Waar als eerste getal groter is dan het tweede
+ * @example
+ * ✎ write: 8 > 7, stop.
+ * ✎ write: 7 > 8, stop.
  */
 ctr_object* ctr_number_higherThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -946,23 +840,12 @@ ctr_object* ctr_number_higherThan(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [Number] ≥ [other]
+ * @def
+ * [ Number ] ≥ [ Number ]
  *
- * Upon receiving this binary message, the Number object will
- * compare itself to the specified Number (other). If the value of
- * the Number object is higher than or equal to the other Number object, it will
- * answer with a boolean object True,
- * otherwise it will answer with a boolean object False.
- *
- * Usage:
- *
+ * @example
  * ☞ x := 8 ≥ 7.
- *
- * The code snippet above will compare the two number objects.
- * The result (True) will be stored in variable x.
- *
- * In other languages:
- * Dutch: [Getal] ≥ [Getal] | Antwoord Waar als eerste getal groter is dan of gelijk is aan het tweede
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_number_higherEqThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -970,23 +853,14 @@ ctr_object* ctr_number_higherEqThan(ctr_object* myself, ctr_argument* argumentLi
 }
 
 /**
- * [Number] < [other]
- *
- * Upon receiving this binary message, the Number object will
- * compare itself to the specified Number (other). If the value of
- * the Number object is less than the other Number object, it will
- * answer with a boolean object True,
- * otherwise it will answer with a boolean object False.
- *
- * Usage:
- *
- * ☞ x := 7 < 8.
- *
- * The code snippet above will compare the two number objects.
- * The result (True) will be stored in variable x.
- *
- * In other languages:
- * Dutch: [Getal] < [Getal] | Antwoord Waar als eerste getal kleiner is dan het tweede
+ * @def
+ * [ Number ] < [ Number ]
+ * 
+ * @example
+ * ☞ x := 8 < 7.
+ * ☞ y := 7 < 8.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop. 
  */
 ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -994,23 +868,14 @@ ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [Number] ≤ [other]
- *
- * Upon receiving this binary message, the Number object will
- * compare itself to the specified Number (other). If the value of
- * the Number object is lower than or equal to the other Number object, it will
- * answer with a boolean object True,
- * otherwise it will answer with a boolean object False.
- *
- * Usage:
- *
- * ☞ x := 7 ≤ 8.
- *
- * The code snippet above will compare the two number objects.
- * The result (True) will be stored in variable x.
- *
- * In other languages:
- * Dutch: [Getal] ≤ [Getal] | Antwoord Waar als eerste getal kleiner of gelijk is dan het tweede
+ * @def
+ * [ Number ] ≤ [ Number ]
+ * 
+ * @example
+ * ☞ x := 8 ≤ 7.
+ * ☞ y := 7 ≤ 8.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop. 
  */
 ctr_object* ctr_number_lowerEqThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1018,23 +883,14 @@ ctr_object* ctr_number_lowerEqThan(ctr_object* myself, ctr_argument* argumentLis
 }
 
 /**
- * [Number] = [other]
+ * @def
+ * [ Number ] = [ Number ]
  *
- * Upon receiving this binary message, the Number object will
- * compare itself to the specified Number (other). If the value of
- * the Number object equals the other Number object, it will
- * answer with a boolean object True,
- * otherwise it will answer with a boolean object False.
- *
- * Usage:
- *
+ * @example
  * ☞ x := 8 = 8.
- *
- * The code snippet above will compare the two number objects.
- * The result (True) will be stored in variable x.
- *
- * In other languages:
- * Dutch: [Getal] = [Getal] | Antwoord Waar als eerste gelijk is aan het tweede
+ * ☞ y := 8 = 9.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1042,23 +898,14 @@ ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] = [other]
+ * @def
+ * [ Number ] ≠ [ Number ]
  *
- * Upon receiving this binary message, the Number object will
- * compare itself to the specified Number (other). If the value of
- * the Number object does not equal the other Number object, it will
- * answer with a boolean object True,
- * otherwise it will answer with a boolean object False.
- *
- * Usage:
- *
- * ☞ x := 7 ≠ 8.
- *
- * The code snippet above will compare the two number objects.
- * The result (True) will be stored in variable x.
- *
- * In other languages:
- * Dutch: [Getal] ≠ [Getal] | Antwoord Waar als eerste ongelijk is aan het tweede
+ * @example
+ * ☞ x := 8 ≠ 8.
+ * ☞ y := 8 ≠ 9.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_number_neq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1066,22 +913,12 @@ ctr_object* ctr_number_neq(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] between: [Number] and: [Number]
- *
- * Returns a random number between the specified boundaries,
- * including the upper and lower boundary of the number. So,
- * asking for a number between 0 and 10 may result in numbers like
- * 0 and 10 as well. Only rounded numbers are returned and the
- * boundaries will be rounded as well. So a random number between
- * 0.5 and 1 will always result in 1. Negative numbers are allowed
- * as well.
- *
- * Usage:
- *
- * ☞ x := Number between 0 and: 10.
- *
- * In other languages:
- * Dutch: [Getal] tussen: [Getal] en: [Getal] | Geeft een getal tussen getal1 en 2.
+ * @def
+ * [ Number ] between: [ Number ] and: [ Number ]
+ * 
+ * @example
+ * ☞ x := Number between: 0 and: 10.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number upper_bound;
@@ -1116,37 +953,38 @@ ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] odd?
+ * @def
+ * [ Number ] odd?
  *
- * Returns True if the number is odd and False otherwise.
- *
- * In other languages:
- * Dutch: [Getal] oneven | Antwoord Waar als het getal oneven is.
+ * @example
+ * ✎ write: 2 odd?, stop.
+ * ✎ write: 3 odd?, stop.
  */
 ctr_object* ctr_number_odd(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool((int)myself->value.nvalue % 2);
 }
 
 /**
- * [Number] even?
+ * @def
+ * [ Number ] even?
  *
- * Returns True if the number is even and False otherwise.
- *
- * In other languages:
- * Dutch: [Getal] even | Antwoord Waar als het getal even is.
+ * @example
+ * ✎ write: 2 even?, stop.
+ * ✎ write: 3 even?, stop.
  */
 ctr_object* ctr_number_even(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(!((int)myself->value.nvalue % 2));
 }
 
 /**
- * [Number] + [Number]
+ * @def
+ * [ Number ] + [ Number ]
  *
- * Adds the other number to the current one. Returns a new
- * number object.
- *
- * In other languages:
- * Dutch: [Getal] + [Getal] | Geeft de som der getallen.
+ * @example
+ * ☞ x := 2 + 2.
+ * ☞ y := x + 0.5.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* newArg;
@@ -1171,13 +1009,13 @@ ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] add: [Number]
+ * @def
+ * [ Number ] add: [ Number ]
  *
- * Increases the number ITSELF by the specified amount, this message will change the
- * value of the number object itself instead of returning a new number.
- *
- * In other languages:
- * Dutch: [Getal] optellen: [Getal] | Telt het gespecificeerde getal op bij het huidige.
+ * @example
+ * ☞ x := 1.
+ * x add: 2.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_number_inc(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1186,13 +1024,13 @@ ctr_object* ctr_number_inc(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] - [Number]
+ * @def
+ * [ Number ] - [ Number ]
  *
- * Subtracts the other number from the current one. Returns a new
- * number object.
- *
- * In other languages:
- * Dutch: [Getal] - [Getal] | Trekt 2 getallen van elkaar af.
+ * @example
+ * ☞ x := 9.
+ * ☞ y := x - 4.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1202,13 +1040,13 @@ ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] subtract: [number]
+ * @def
+ * [ Number ] subtract: [ number ]
  *
- * Decreases the number ITSELF by the specified amount, this message will change the
- * value of the number object itself instead of returning a new number.
- *
- * In other languages:
- * Dutch: [Getal] aftrekken: [Getal] | Trekt het gespecificeerde getal af van het huidige.
+ * @example
+ * ☞ x := 3.
+ * x subtract: 1.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_number_dec(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1217,13 +1055,12 @@ ctr_object* ctr_number_dec(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] * [Number or Block]
- *
- * Multiplies the number by the specified multiplier. Returns a new
- * number object.
- *
- * In other languages:
- * Dutch: [Getal] * [Getal] | Geeft het product van de getallen.
+ * @def
+ * [ Number ] * [ Number ]
+ * 
+ * @example
+ * ☞ x := 3 * 3.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum;
@@ -1236,19 +1073,11 @@ ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [Block] * [Number]
+ * @def
+ * [ Block ] * [ Number ]
  *
- * Runs the block of code a 'Number' of times.
- * This is the most basic form of a loop.
- * The example runs the block 7 times. The current iteration
- * number is passed to the block as a parameter (i in this example).
- *
- * Usage:
- *
+ * @example
  * { :i ✎ write: i. } * 7.
- *
- * In other languages:
- * Dutch: [Codeblok] * [Getal] | Voert het blok het opgegeven aantal keren uit.
  */
 ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* indexNumber;
@@ -1274,20 +1103,13 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] multiply by: [Number]
- *
- * Multiplies the number ITSELF by multiplier, this message will change the
- * value of the number object itself instead of returning a new number.
- * Use this message to apply the operation to the object itself instead
- * of creating and returning a new object.
- *
- * Usage:
- *
- * x := 5.
+ * @def
+ * [ Number ] multiply by: [ Number ]
+ * 
+ * @example
+ * ☞ x := 5.
  * x multiply by: 2.
- *
- * In other languages:
- * Dutch: [Getal] vermenigvuldig met: [Getal] | Vermenigvuldigd het huidige getal met de opgegeven waarde.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_number_mul(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1296,13 +1118,11 @@ ctr_object* ctr_number_mul(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] / [Number]
+ * @def
+ * [ Number ] / [ Number ]
  *
- * Divides the number by the specified divider. Returns a new
- * number object.
- *
- * In other languages:
- * Dutch: [Getal] / [Getal] | Deling.
+ * @example
+ * ✎ write: 10 / 2, stop.
  */
 ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1316,20 +1136,13 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] devide by: [Number]
+ * @def
+ * [ Number ] devide by: [ Number ]
  *
- * Divides the number ITSELF by divider, this message will change the
- * value of the number object itself instead of returning a new number.
- * Use this message to apply the operation to the object itself instead
- * of generating a new object.
- *
- * Usage:
- *
- * x := 10.
+ * @example
+ * ☞ x := 10.
  * x divide by: 2.
- *
- * In other languages:
- * Dutch: [Getal] deel door: [Getal] | Deelt het huidige getal door de opgegeven waarde.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1342,20 +1155,12 @@ ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] modulo: [modulo]
+ * @def
+ * [ Number ] modulo: [ modulo ]
  *
- * Returns the modulo of the number. This message will return a new
- * object representing the modulo of the recipient.
- *
- * Usage:
- *
- * x := 11 modulo: 3.
- *
- * Use this message to apply the operation of division to the
- * object itself instead of generating a new one.
- *
- * In other languages:
- * Dutch: [Getal] modulo: [Getal]
+ * @example
+ * ☞ x := 11 modulo: 3.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1369,19 +1174,11 @@ ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] power: [power]
- *
- * Returns a new object representing the
- * number to the specified power.
- * The example above will raise 2 to the power of 8 resulting in
- * a new Number object: 256.
- *
- * Usage:
- *
- * x := 2 power: 8.
- *
- * In other languages:
- * Dutch: [Getal] tot de macht: [Getal] | Machtsverheffen.
+ * @def
+ * [ Number ] power: [ Number ]
+ * 
+ * @example
+ * ✎ write: 2 power: 3.
  */
 ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1391,94 +1188,51 @@ ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] positive?
+ * @def
+ * [ Number ] positive?
  *
- * Returns a boolean indicating wether the number is positive.
- * This message will return a boolean object 'True' if the recipient is
- * positive and 'False' otherwise.
- * The example above will print the message because hope is higher than 0.
- *
- * Usage:
- *
- * hope := 0.1.
- * ( hope positive? ) true: {
- *     ✎ write: 'Still a little hope for humanity'.
- * }.
- *
- * In other languages:
- * Dutch: [Getal] positief? | Antwoord Waar als het getal groter is dan 0.
+ * @example
+ * { :i 
+ * ✎ write: ( i - 5 ) positive?, stop.
+ * } * 10.
  */
 ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool( ( myself->value.nvalue > 0) );
 }
 
 /**
- * [Number] negative?
- *
- * Returns a boolean indicating wether the number is negative.
- * This message will return a boolean object 'True' if the recipient is
- * negative and 'False' otherwise. It's the eaxct opposite of the 'positive'
- * message.
- * The example above will print the message because the value of the variable
- * hope is less than 0.
- *
- * Usage:
- *
- * hope := -1.
- * (hope negative?) ifTrue: { Pen write: 'No hope left'. }.
- *
- * In other languages:
- * Dutch: [Getal] negatief? | Antwoord Waar als het getal kleiner is dan 0.
+ * @def
+ * [ Number ] negative?
+ * 
+ * @example
+ * { :i 
+ * ✎ write: ( i - 5 ) negative?, stop.
+ * } * 10.
  */
 ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool( ( myself->value.nvalue < 0) );
 }
 
 /**
- * [Number] floor
+ * @def
+ * [ Number ] floor
  *
- * Gives the largest integer less than the recipient.
- * The example above applies the floor function to the recipient (4.5)
- * returning a new number object (4).
- *
- * Usage:
- *
- * x := 4.5
- * y := x floor.
- *
- * In other languages:
- * Dutch: [Getal]  afgerond naar beneden
+ * @example
+ * ☞ x := 4.5
+ * ✎ write: x floor, stop.
  */
 ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(floor(myself->value.nvalue));
 }
 
 /**
- * [Number] qualify: 'meters'.
+ * @def
+ * [ Number ] [ String ]
  *
- * Qualifies a number. Alias for: [Number] [String].
- * See the [Number] [String] message signature for more details.
- */
-
-/**
- * [Number] [String]
- *
- * Qualifies a number. By sending an arbitrary (undocumented) unary message to
- * a Number object your message will be set as the qualification property of the number
- * and passed around along with the number value itself.
- *
- * Usage:
- *
- * Number learn: 'plus:' means: '+'.
- * Number on: '+' do: { :x
- *     ☞ rate := 1.
- *     ☞ currency := x qualification.
- *     (currency = 'euros') true: {
- *         rate := 2.
- *     }.
- *     ↲ (⛏ plus: (x * rate)).
- * }.
- * ☞ money := 3 dollars + 2 euros.
+ * @example
+ * ☞ x := 3 dollars.
+ * ✎ write: x qualification.
+ * 
  */
 ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), ctr_internal_cast2string( argumentList->object ), CTR_CATEGORY_PRIVATE_PROPERTY );
@@ -1486,13 +1240,12 @@ ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Number] qualification.
+ * @def
+ * [ Number ] qualification.
  *
- * Returns the qualification of a number object. For instance, as a
- * number (let's say 99) has been qualified as the number of bottles using
- * a message like: '99 bottles' this message will return the descriptive string
- * 'bottles'. For usage examples, please consult the [Number] [String] message
- * signature.
+ * @example
+ * ☞ x := 3 dollars.
+ * ✎ write: x qualification.
  */
 ctr_object* ctr_number_qualification(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* answer = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), CTR_CATEGORY_PRIVATE_PROPERTY );
@@ -1508,79 +1261,60 @@ ctr_object* ctr_number_respond_to(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [Number] ceil
- *
- * Rounds up the recipient number and returns the next higher integer number
- * as a result.
- * The example above applies the ceiling function to the recipient (4.5)
- * returning a new number object (5).
- *
- * Usage:
- *
- * x := 4.5.
- * y = x ceil.
- *
- * In other languages:
- * Dutch: [Getal]  afgerond naar boven
+ * @def
+ * [ Number ] ceil
+ * 
+ * @example
+ * ☞ x := 4.5.
+ * ✎ write: x ceil, stop.
  */
 ctr_object* ctr_number_ceil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(ceil(myself->value.nvalue));
 }
 
 /**
- * [Number] round
- *
- * Returns the rounded number.
+ * @def
+ * [ Number ] round
+ * 
+ * @example
+ * ☞ x := 5.5.
+ * ✎ write: x round, stop.
  */
 ctr_object* ctr_number_round(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(round(myself->value.nvalue));
 }
 
 /**
- * [Number] absolute
+ * @def
+ * [ Number ] absolute
  *
- * Returns the absolute (unsigned, positive) value of the number.
- * The example above strips the sign off the value -7 resulting
- * in 7.
- *
- * Usage:
- *
- * x := -7.
- * y := x absolute.
- *
- * In other languages:
- * Dutch: [Getal] absoluut
+ * @example
+ * ☞ x := -7.
+ * ✎ write: x absolute, stop.
  */
 ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(fabs(myself->value.nvalue));
 }
 
 /**
- * [Number] square root
+ * @def
+ * [ Number ] square root
  *
- * Returns the square root of the recipient.
- * The example above takes the square root of 49, resulting in the
- * number 7.
- *
- * Usage:
- *
+ * @example
  * ☞ x := 49.
  * ☞ y := x square root.
- *
- * In other languages:
- * Dutch: [Getal] vierkantswortel
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(sqrt(myself->value.nvalue));
 }
 
 /**
- * [Number] byte
+ * @def
+ * [ Number ] byte
  *
- * Converts a number to a single byte.
- *
- * In other languages:
- * Dutch: [Getal] byte
+ * @example
+ * ✎ write: 65 byte, stop.
  */
 ctr_object* ctr_number_to_byte(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_build_empty_string();
@@ -1632,60 +1366,57 @@ ctr_object* ctr_internal_number_to_string(ctr_object* myself, ctr_argument* argu
 }
 
 /**
- * [Number] string
+ * @def
+ * [ Number ] string
  *
- * Wrapper for cast function.
- *
- * In other languages:
- * Dutch: [Getal] tekst
+ * @example
+ * ☞ x := 123.
+ * ✎ write: x, stop.
+ * ☞ x := 1.23.
+ * ✎ write: x, stop.
+ * ☞ x := 1,000,000.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_number_to_string(myself, argumentList, 0);
 }
 
 /**
- * [Number] international number
+ * @def
+ * [ Number ] international number
  *
- * Returns a string representation of the number, parsing the number
- * as an international number (using the dot as the decimal separator and
- * using no thousands separator).
+ * @example
+ * ☞ x := 123.
+ * ✎ write: x international number, stop.
+ * ☞ x := 1.23.
+ * ✎ write: x international number, stop.
+ * ☞ x := 1,000,000.
+ * ✎ write: x international number, stop.
  */
 ctr_object* ctr_number_to_string_flat(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_number_to_string(myself, argumentList, 1);
 }
 
 /**
- * [Number] boolean
+ * @def
+ * [ Number ] boolean
  *
- * Casts a number to a boolean object.
- *
- * In other languages:
- * Dutch: [Getal] boolean
+ * @example
+ * { :i
+ * 	✎ write: i boolean, stop.
+ * } * 10.
  */
 ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool( myself->value.nvalue );
 }
 
 /**
+ * @def
  * String
  *
- * Literal:
- *
- * 'Hello World, this is a String.'
- *
- * A sequence of bytes or characters. In Citrine, strings are UTF-8 aware.
- * You may only use single quotes. To escape a character use the
- * backslash '\' character. Use the special characters ↵ and ⇿ to
- * insert a newline or tab respectively.
- *
- * Strings in Citrine represent a series of bytes. Strings can be
- * interpreted as real bytes or as text depending on the messages
- * send. For instance, the message 'bytes' returns the number of bytes
- * in a string, while the message 'length' returns the number of
- * characters (as defined as separate UTF-8 code points) in a string.
- *
- * In other languages:
- * Dutch: Tekst
+ * @example
+ * ☞ x := 'abcdef'.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_build_string(char* stringValue, long size) {
 	ctr_object* stringObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
@@ -1721,25 +1452,27 @@ ctr_object* ctr_build_empty_string() {
 }
 
 /**
+ * @def
  * [String] bytes
  *
- * Returns the number of bytes in a string, as opposed to
- * length which returns the number of UTF-8 code points (symbols or characters).
- *
- * In other languages:
- * Dutch: [Tekst] bytes
+ * @example
+ * ☞ x := '☘☘☘'.
+ * ✎ write: x bytes, stop.
+ * ✎ write: x length, stop.
  */
 ctr_object* ctr_string_bytes(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float((float)myself->value.svalue->vlen);
 }
 
 /**
- * [String] = [other]
- *
- * Returns True if the other string is the same (in bytes).
- *
- * In other languages:
- * Dutch: [Tekst] = [Tekst] | Geeft Waar als beide teksten dezelfde inhoud bevatten.
+ * @def
+ * [ String ] = [ String ]
+ * 
+ * @example
+ * ☞ x := 'Hello' = 'Hello'.
+ * ✎ write: x, stop.
+ * ☞ x := 'World' = 'Hello'.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2string( argumentList->object );
@@ -1750,12 +1483,14 @@ ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [String] ≠ [other]
- *
- * Returns True if the other string is not the same (in bytes).
- *
- * In other languages:
- * Dutch: [Tekst] ≠ [Tekst] | Geeft Waar als beide teksten niet dezelfde inhoud bevatten.
+ * @def
+ * [ String ] ≠ [ String ]
+ * 
+ * @example
+ * ☞ x := 'Hello' = 'Hello'.
+ * ✎ write: x, stop.
+ * ☞ x := 'World' = 'Hello'.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2string( argumentList->object );
@@ -1766,13 +1501,13 @@ ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * @def
  * [String] length
  *
- * Returns the length of the string in symbols.
- * This message is UTF-8 unicode aware. A 4 byte character will be counted as ONE.
- *
- * In other languages:
- * Dutch: [Tekst] lengte | Geeft lengte van tekst in tekens.
+ * @example
+ * ☞ x := '☘☘☘'.
+ * ✎ write: x bytes, stop.
+ * ✎ write: x length, stop.
  */
 ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size n = ctr_getutf8len(myself->value.svalue->value, (ctr_size) myself->value.svalue->vlen);
@@ -1780,13 +1515,14 @@ ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [String] + [other]
+ * @def
+ * [ String ] + [ String ]
  *
- * Appends other string to self and returns the resulting
- * string as a new object.
- *
- * In other languages:
- * Dutch: [Tekst] + [Tekst] | Voegt beide teksten samen.
+ * @example
+ * ☞ x := 'ABC'.
+ * ☞ y := 'DEF'.
+ * ☞ z := x + y.
+ * ✎ write: z, stop.
  */
 ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
@@ -1806,20 +1542,13 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [String] append: [String].
+ * @def
+ * [ String ] append: [ String ].
  *
- * Appends the specified string to itself. This is different from the '+'
- * message, the '+' message adds the specified string while creating a new string.
- * Appends on the other hand modifies the original string.
- *
- * Usage:
- *
- * x := 'Hello '.
- * x append: 'World'.
- * ✎ write: x.
- *
- * In other languages:
- * Dutch: [Tekst] toevoegen: [Tekst] | Voegt tweede tekst toe aan eerste.
+ * @example
+ * ☞ x := '123'.
+ * x append: '456'.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* strObject;
@@ -1843,18 +1572,12 @@ ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 
 
 /**
- * [String] from: [start] length: [length]
+ * @def
+ * [ String ] from: [ Number ] length: [ Number ].
  *
- * Returns a portion of a string defined by from
- * and length values.
- * This message is UTF-8 unicode aware.
- *
- * Usage:
- *
- * 'hello' from: 2 length: 3.
- *
- * In other languages:
- * Dutch: [Tekst] van: [Getal] lengte: [Getal] | Antwoord het deel van de tekst tussen de twee posities.
+ * @example
+ * ☞ x := 'hello' from: 2 length: 3.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
@@ -1884,12 +1607,12 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 }
 
 /**
- * [String] offset: [Number]
+ * @def
+ * [ String ] offset: [ Number ]
  *
- * Returns a string without the first X characters.
- *
- * In other languages:
- * Dutch: [Tekst] overslaan: [Getal] | Geeft de tekst vanaf de opgegeven positie.
+ * @example
+ * ☞ x =: '1234' offset: 2.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* argument1;
@@ -1911,16 +1634,11 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [String] character: [Number]
+ * @def
+ * [ String ] character: [ Number ]
  *
- * Returns the character at the specified position (UTF8 aware).
- *
- * Usage:
- *
- * ('hello' character: 2).
- *
- * In other languages:
- * Dutch: [Tekst] letter: [Getal] | Geeft de letter op aangegeven positie.
+ * @example
+ * ✎ write: ('.☘.' character: 2), stop.
  */
 ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
@@ -1939,14 +1657,12 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [String] byte: [Number]
+ * @def
+ * [ String ] byte: [ Number ]
  *
- * Usage:
+ * @example
  * ☞ x := 'abc' byte: 1.
  * ✎ write: x, stop.
- * 
- * Output:
- * 65
  */
 ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList) {
 	uint8_t x;
@@ -1960,17 +1676,12 @@ ctr_object* ctr_string_byte_at(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [String] find: [subject]
+ * @def
+ * [ String ] find: [ String ].
  *
- * Returns the index (character number, not the byte!) of the
- * needle in the haystack.
- *
- * Usage:
- *
- * 'find the needle' find: 'needle'.
- *
- * In other languages:
- * Dutch: [Tekst] vind: [Tekst] | Geeft positie van eerste voorkomen deeltekst.
+ * @example
+ * ☞ x := 'abc' find: 'b'.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sub = ctr_internal_cast2string(argumentList->object);
@@ -1986,15 +1697,11 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [String] uppercase
+ * @def
+ * [ String ] uppercase.
  *
- * Returns a new uppercased version of the string.
- * Note that this is just basic ASCII case functionality, this should only
- * be used for internal keys and as a basic utility function. This function
- * DOES NOT WORK WITH UTF8 characters !
- *
- * In other languages:
- * Dutch: [Tekst] hoofdletters | Geeft de tekst in hoofdletters.
+ * @example
+ * ✎ write: 'abc' uppercase, stop.
  */
 ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newString = NULL;
@@ -2012,15 +1719,12 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
 
 
 /**
- * [String] lowercase
+ * @def
+ * [ String ] lowercase
  *
- * Returns a new lowercased version of the string.
- * Note that this is just basic ASCII case functionality, this should only
- * be used for internal keys and as a basic utility function. This function
- * DOES NOT WORK WITH UTF8 characters !
- *
- * In other languages:
- * Dutch: [Tekst] kleine letters | Geeft de tekst in hoofdletters.
+ * @example
+ * ☞ x := 'ABC' lowercase.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newString = NULL;
@@ -2041,17 +1745,12 @@ ctr_object* ctr_string_to_string(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [String] last: [subject]
+ * @def
+ * [ String ] last: [ String ]
  *
- * Returns the index (character number, not the byte!) of the
- * needle in the haystack.
- *
- * Usage:
- *
- * 'find the needle' last: 'needle'.
- *
- * In other languages:
- * Dutch: [Tekst] laatste: [Tekst] | Geeft laatste positie deeltekst.
+ * @example
+ * ☞ x := 'abca' last: 'a'.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sub = ctr_internal_cast2string(argumentList->object);
@@ -2067,17 +1766,13 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentL
 }
 
 /**
- * [String] [key]: [value]
+ * @def
+ * [String] [String]: [String]
  *
- * Replaces the character sequence 'key' with the contents of value.
- * The example will produce the string '$ 10'.
- *
- * Usage:
- *
- * '$ money' money: 10.
- *
- * In other languages:
- * Dutch: [Tekst] [Tekst]: [Tekst] | Vervangt tekst 2 met tekst 3.
+ * @example
+ * ☞ x := '$ money'.
+ * x money: 10.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* message = ctr_internal_cast2string( argumentList->object );
@@ -2093,18 +1788,13 @@ ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [String] replace: [string] with: [other]
+ * @def
+ * [ String ] replace: [ String ] with: [ String ]
  *
- * Replaces needle with replacement in original string.
- * Modifies the original string and returns it as well.
- * To preserve the original string, copy it first.
- *
- * Usage:
- *
- * 'LiLo BootLoader' replace: 'L' with: 'l'.
- *
- * In other languages:
- * Dutch: [Tekst] vervang: [Tekst] door: [Tekst] | Vervangt tekst 2 met 3.
+ * @example
+ * ☞ x := '1...2...3'.
+ * x replace: '...' width: ','.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
@@ -2155,29 +1845,14 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 }
 
 /**
- * [String] pattern: [String] process: [Block] options: [String].
+ * 
+ * @def
+ * [ String ] pattern: [ String ] process: [ Block ] options: [ String ]
  *
- * Matches the POSIX regular expression in the first argument against
- * the string and executes the specified block on every match passing
- * an array containing the matches.
- *
- * The options parameter can be used to pass specific flags to the
- * regular expression engine. As of the moment of writing this functionality
- * has not been implemented yet. The only flag you can set at this moment is
- * the 'ignore' flag, just a test flag. This flag does not execute the block.
- *
- * Usage:
- *
+ * @example
  * 'hello world' pattern: '([hl])' process: { :arr
  *  	✎ write: (arr join: '|'), end.
  * } options: ''.
- *
- * On every match the block gets executed and the matches are
- * passed to the block as arguments. You can also use this feature to replace
- * parts of the string, simply return the replacement string in your block.
- *
- * In other languages:
- * Dutch: [Tekst] patroon: [Tekst] verwerk: [Codeblok] opties: [Tekst] | Past reguliere expressie toe.
  */
 ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument* argumentList ) {
 	regex_t pattern;
@@ -2287,15 +1962,6 @@ ctr_object* ctr_string_find_pattern_options_do( ctr_object* myself, ctr_argument
 	return newString;
 }
 
-/**
- * [String] pattern: [String] process: [Block].
- *
- * Same as pattern:process:options: but without the options, no flags will
- * be send to the regex engine.
- *
- * In other languages:
- * Dutch: [Tekst] patroon: [Tekst] verwerk: [Codeblok] | Past reguliere expressie toe.
- */
 ctr_object* ctr_string_find_pattern_do( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_argument* no_options = ctr_heap_allocate( sizeof( ctr_argument ) );
 	argumentList->next->next->object = ctr_build_empty_string();
@@ -2306,14 +1972,14 @@ ctr_object* ctr_string_find_pattern_do( ctr_object* myself, ctr_argument* argume
 }
 
 /**
+ * @def
  * [String] contains: [String]
  *
- * Returns True if the other string is a substring.
- *
- * In other languages:
- * Dutch: [Tekst] bevat: [Tekst]
- * geeft Waar terug als het ontvangende tekstobject
- * de aangegeven tekst bevat.
+ * @example
+ * ☞ x := 'abc' contains: 'a'.
+ * ☞ y := 'abc' contains: 'z'.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_string_contains( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_build_bool(
@@ -2324,20 +1990,12 @@ ctr_object* ctr_string_contains( ctr_object* myself, ctr_argument* argumentList 
 }
 
 /**
- * [String] matches: [String].
+ * @def
+ * [ String ] matches: [ String ].
  *
- * Tests the pattern against the string and returns True if there is a match
- * and False otherwise.
- * In the example: match will be True because there is a space in 'Hello World'.
- *
- * Usage:
- *
- * ☞ match := 'Hello World' matches: '[:space:]'.
- *
- * In other languages:
- * Dutch: [Tekst] patroon: [Tekst]
- * Geeft Waar terug als het ontvangende tekstobject overeenkomt
- * met de reguliere uitdrukking.
+ * @example
+ * ☞ x := 'Hello World' matches: '[:space:]'.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argumentList ) {
 	regex_t pattern;
@@ -2370,19 +2028,12 @@ ctr_object* ctr_string_contains_pattern( ctr_object* myself, ctr_argument* argum
 }
 
 /**
- * [String] remove surrounding spaces
+ * @def
+ * [ String ] remove surrounding spaces
  *
- * Trims a string. Removes surrounding white space characters
- * from string and returns the result as a new string object.
- * The example above will strip all white space characters from the
- * recipient on both sides of the text.
- *
- * Usage:
- *
- * ' hello ' remove surrounding spaces.
- *
- * In other languages:
- * Dutch: [Tekst] verwijder omliggende spaties | verwijderd witruimte links en rechts.
+ * @example
+ * ☞ x := '  x  '.
+ * ✎ write: x remove surrounding spaces, stop.
  */
 ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newString = NULL;
@@ -2406,12 +2057,16 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [String] number
+ * @def
+ * [ String ] number
  *
- * Converts string to a number.
- *
- * In other languages:
- * Dutch: [Tekst] getal | Geeft de getalwaarde van de tekst of anders 0.
+ * @example
+ * ☞ x := '12345678'.
+ * ☞ y := x number.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
+ * ✎ write: x type, stop.
+ * ✎ write: y type, stop.
  */
 ctr_object* ctr_string_to_number(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_string(myself->value.svalue->value, myself->value.svalue->vlen, 1);
@@ -2422,12 +2077,14 @@ ctr_object* ctr_string_in_to_number(ctr_object* myself, ctr_argument* argumentLi
 }
 
 /**
- * [String] boolean
+ * @def
+ * [ String ] boolean
  *
- * Converts string to boolean
- *
- * In other languages:
- * Dutch: [Tekst] boolean | Geeft de booleaanse waarheid van de tekst.
+ * @example
+ * ✎ write: '' boolean, stop.
+ * ✎ write: '   ' boolean, stop.
+ * ✎ write: 'abc' boolean, stop.
+ * ✎ write: '123' boolean, stop.
  */
 ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList) {
 	if ( myself->value.svalue->vlen == 0 ) return ctr_build_bool(0);
@@ -2435,10 +2092,12 @@ ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [String] split: [String]
+ * @def
+ * [ String ] split: [ String ]
  *
- * Converts a string to an array by splitting the string using
- * the specified delimiter (also a string).
+ * @example
+ * ☞ x := '1,2,3' split: ','.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
@@ -2480,18 +2139,12 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [String] characters.
+ * @def
+ * [ String ] characters.
  *
- * Splits the string in UTF-8 characters and returns
- * those as an array.
- *
- * Usage:
- *
- * a := 'abc' characters.
- * a count.
- *
- * In other languages:
- * Dutch: [Tekst] letters | Geeft het aantal letters dat de tekst bevat.
+ * @example
+ * ☞ x := '123' characters.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_size i;
@@ -2512,12 +2165,12 @@ ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentLis
 }
 
 /**
- * [String] list
+ * @def
+ * [ String ] list
  *
- * Returns an array of bytes representing the string.
- *
- * In other languages:
- * Dutch: [Tekst] bytereeks | Geeft de bytes als reeks waaruit de tekst bestaat.
+ * @example
+ * ☞ x := '123'.
+ * ✎ write: x list, stop.
  */
 ctr_object* ctr_string_to_byte_array( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_size i;
@@ -2536,12 +2189,13 @@ ctr_object* ctr_string_to_byte_array( ctr_object* myself, ctr_argument* argument
 }
 
 /**
- * [String] append byte: [Number].
+ * @def
+ * [ String ] append byte: [ Number ].
  *
- * Appends a raw byte to a string.
- *
- * In other languages:
- * Dutch: [Tekst] voeg byte toe: [Getal] | Voegt bytewaarde aangegeven door getal toe aan tekst.
+ * @example
+ * ☞ x := '123'.
+ * x append byte: 65.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_string_append_byte( ctr_object* myself, ctr_argument* argumentList ) {
 	char* dest;
@@ -2559,18 +2213,16 @@ ctr_object* ctr_string_append_byte( ctr_object* myself, ctr_argument* argumentLi
 }
 
 /**
- * [String] compare: [String]
+ * @def
+ * [ String ] compare: [ String ]
  *
- * Compares a string using the UTF-8 compatible strcmp function.
- * Returns less than zero if receiving object comes before specified string,
- * higher than zero if receiving string comes after and 0 if equal.
- *
- * Usage:
- *
- * word compare: other.
- *
- * In other languages:
- * Dutch: [Tekst] vergelijk: [Tekst] | Geeft <0 terug als ontvanger voor tekst komt, >0 erna, =0 gelijk.
+ * @example
+ * ☞ x := 'abc'.
+ * ☞ y := 'def'.
+ * ☞ z := x compare: y.
+ * ☞ q := y compare: x.
+ * ✎ write: z, stop.
+ * ✎ write: q, stop.
  */
 ctr_object* ctr_string_compare( ctr_object* myself, ctr_argument* argumentList ) {
 	argumentList->object = ctr_internal_cast2string(argumentList->object);
@@ -2588,14 +2240,12 @@ ctr_object* ctr_string_compare( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [String] < [String]
- *
- * Returns True if the first String comes before the latter
- * alphabetically. The actual comparison is based on the UTF-8 compatible
- * function strcmp.
- *
- * In other languages:
- * Dutch: [Tekst] < [Tekst] | Geeft Waar als eerste voor tweede komt alfabetisch.
+ * @def
+ * [ String ] < [ String ]
+ * 
+ * @example
+ * ✎ write: ('abc' < 'def'), stop.
+ * ✎ write: ('def' < 'abc'), stop.
  */
 ctr_object* ctr_string_before(ctr_object* myself, ctr_argument* argumentList ) {
 	if ( ctr_string_compare( myself, argumentList )->value.nvalue < 0 ) {
@@ -2604,15 +2254,14 @@ ctr_object* ctr_string_before(ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_build_bool( 0 );
 }
 
+
 /**
- * [String] ≤ [String]
- *
- * Returns True if the first String comes before or at the same
- * position as the latter alphabetically. The actual comparison is based on the UTF-8 compatible
- * function strcmp.
- *
- * In other languages:
- * Dutch: [Tekst] ≤ [Tekst] | Geeft Waar als eerste voor tweede komt alfabetisch of gelijk.
+ * @def
+ * [ String ] ≤ [ String ]
+ * 
+ * @example
+ * ✎ write: ('abc' ≤ 'def'), stop.
+ * ✎ write: ('def' ≤ 'abc'), stop.
  */
 ctr_object* ctr_string_before_or_same(ctr_object* myself, ctr_argument* argumentList ) {
 	if ( ctr_string_compare( myself, argumentList )->value.nvalue <= 0 ) {
@@ -2622,14 +2271,12 @@ ctr_object* ctr_string_before_or_same(ctr_object* myself, ctr_argument* argument
 }
 
 /**
- * [String] > [String]
- *
- * Returns True if the first String comes after the latter
- * alphabetically. The actual comparison is based on the UTF-8 compatible
- * function strcmp.
- *
- * In other languages:
- * Dutch: [Tekst] > [Tekst] | Geeft Waar als eerste na tweede komt alfabetisch.
+ * @def
+ * [ String ] > [ String ]
+ * 
+ * @example
+ * ✎ write: ('abc' > 'def'), stop.
+ * ✎ write: ('def' > 'abc'), stop.
  */
 ctr_object* ctr_string_after(ctr_object* myself, ctr_argument* argumentList ) {
 	if ( ctr_string_compare( myself, argumentList )->value.nvalue > 0 ) {
@@ -2638,15 +2285,14 @@ ctr_object* ctr_string_after(ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_build_bool( 0 );
 }
 
-/**
- * [String] ≥ [String]
- *
- * Returns True if the first String comes after or at the same position as the latter
- * alphabetically. The actual comparison is based on the UTF-8 compatible
- * function strcmp.
- *
- * In other languages:
- * Dutch: [Tekst] ≥ [Tekst] | Geeft Waar als eerste gelijk of na tweede komt alfabetisch.
+
+ /**
+ * @def
+ * [ String ] ≥ [ String ]
+ * 
+ * @example
+ * ✎ write: ('abc' ≥ 'def'), stop.
+ * ✎ write: ('def' ≥ 'abc'), stop.
  */
 ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentList ) {
 	if ( ctr_string_compare( myself, argumentList )->value.nvalue >= 0 ) {
@@ -2689,14 +2335,14 @@ ctr_object* ctr_string_quotes_escape(ctr_object* myself, ctr_argument* argumentL
 
 
 /**
- * [String] hash: [String]
+ * @def
+ * [ String ] hash: [ String ]
  *
- * Returns the hash of the recipient String using the specified key.
- * The default hash in Citrine is the SipHash which is also used internally.
- * SipHash can protect against hash flooding attacks.
- *
- * In other languages:
- * Dutch: [Tekst] kluts [Tekst] | Geeft de kluts (SipHash) terug voor de gespecificeerde sleutel
+ * @example
+ * ☞ x := '123'.
+ * ☞ y := x hash: '1234567890123456'.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argumentList ) {
 	char* keyString = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->object ) );
@@ -2715,28 +2361,12 @@ ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argument
 }
 
 /**
+ * @def
  * Block
  *
- * Literal:
- *
- * { parameters (if any) here... code here... }
- *
- * each parameter has to be prefixed with
- * a colon (:).
- *
- * Usage:
- *
- * { ✎ write: 'a simple code block'. } run.
- * { :param ✎ write: param. } apply: 'write this!'.
- * { :a :b ↲ a + b. } apply: 1 and: 2.
- * { :a :b :c ↲ a + b + c. } apply: 1 and: 2 and: 3.
- *
- * In other languages:
- * Dutch: een letterlijk codeblok begint met { en eindigt met }.
- * De parameters komen na de openingsaccolade en worden voorafgegaan door
- * een dubbele punt. Om vanuit een codeblok terug te keren naar het
- * bovenliggende programma en een antwoord terug te sturen gebruikt men
- * het terugkeersymbool: ↲.
+ * @example
+ * ☞ x := { :a :b :c ↲ a + b + c. } apply: 1 and: 2 and: 3.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_build_block(ctr_tnode* node) {
 	ctr_object* codeBlockObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBLOCK);
@@ -2746,16 +2376,12 @@ ctr_object* ctr_build_block(ctr_tnode* node) {
 }
 
 /**
- * [Block] apply: [object]
- *
- * Runs a block of code using the specified object as a parameter.
- * If you run a block using the messages 'run' or 'apply:', me/my will
- * refer to the block itself instead of the containing object.
- *
- * In other languages:
- * Dutch: [Codeblok] toepassen: [Object] | Start het codeblok met het opgegeven object als argument.
+ * @def
+ * [ Block ] run.
+ * 
+ * @example
+ * { ✎ write: '123', stop. } run.
  */
- 
 int xx = 0;
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my) {
 	ctr_object* result;
@@ -2822,22 +2448,13 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 }
 
 /**
- * [Block] while: [block]
+ * @def
+ * [ Block ] while: [ Block ]
  *
- * Runs a block of code, depending on the outcome runs the other block
- * as long as the result of the first one equals boolean True.
- * Example: Here we increment variable x by one until it reaches 6.
- * While the number x is lower than 6 we keep incrementing it.
- * Don't forget to use the return ↲ symbol in the first block.
- *
- * Usage:
- *
+ * @example
  * ☞ x := 0.
  * { x add: 1. } while: { ↲ (x < 6). }.
- *
- * In other languages:
- * Dutch: [Codeblok] zolang: [Codeblok]
- * Draait het codeblok net zolang totdat de uitkomst van het opgegeven blok negatief wordt.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
@@ -2861,23 +2478,6 @@ ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList)
 	return myself;
 }
 
-/**
- * [Block] run
- *
- * Sending the unary message 'run' to a block will cause it to execute.
- * The run message takes no arguments, if you want to use the block as a function
- * and send arguments, consider using the applyTo-family of messages instead.
- * This message just simply runs the block of code without any arguments.
- * In the example we will run the code inside the block and display
- * the greeting.
- *
- * Usage:
- *
- * { ✎ write: 'Hello World'. } run.
- *
- * In other languages:
- * Dutch: [Codeblok] start. | Start het blok code.
- */
 ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
 	result = ctr_block_run(myself, argumentList, myself); /* here me/my refers to block itself not object - this allows closures. */
@@ -2886,29 +2486,13 @@ ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Block] set: [name] value: [object]
+ * @def
+ * [ Block ] set: [ String ] value: [ Object ]
  *
- * Sets a variable in a block of code. This how you can get closure-like
- * functionality.
- * In the example we assign a block to a variable named 'shout'.
- * We assign the string 'hello' to the variable 'message' inside the block.
- * When we invoke the block 'shout' by sending the run message without any
- * arguments it will display the string: 'hello!!!'.
- * Similarly, you could use this technique to create a block that returns a
- * block that applies a formula (for instance simple multiplication) and then set the
- * multiplier to use in the formula. This way, you could create a block
- * building 'formula blocks'. This is how you implement use closures
- * in Citrine.
- *
- * Usage:
- *
- * shout := { ✎ write: (my message + '!!!'). }.
- * shout set: 'message' value: 'hello'.
- * shout run.
- *
- * In other languages:
- * Dutch: [Codeblok] gebruik: [Tekst] waarde: [Object]
- * Stelt een variabele in die binnen het blok bruikbaar wordt.
+ * @example
+ * ! := { ✎ write: (⚿ q + '!'), stop. }.
+ * ! set: 'q' value: '123'.
+ * ! run.
  */
 ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* key = ctr_internal_cast2string(argumentList->object);
@@ -2918,31 +2502,15 @@ ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Block] error: [object].
+ * @def
+ * [ Block ] error: [ Object ].
  *
- * Sets error flag on a block of code.
- * This will throw an error / exception.
- * You can attach an object to the error, for instance
- * an error message.
- *
- * Usage:
- *
+ * @example
  * {
  *   this code block error: 'oops!'.
- * } catch: { :errorMessage
- *   ✎ write: errorMessage.
+ * } catch: { :e
+ *   ✎ write: e.
  * }, run.
- *
- * In other languages:
- * Dutch: [Codeblok] fout: [Object] | Laat een kunstmatige een fout of uitzondering optreden.
- * Om te verwijzen naar het huidige blok code gebruik: dit codeblok.
- * Voorbeeld:
- *
- * {
- *   dit codeblock fout: 'oeps!'.
- * } afhandelen: { :fout
- *   ✎ schrijf: fout.
- * }, start.
  */
 ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
 	CtrStdFlow = argumentList->object;
@@ -2951,24 +2519,15 @@ ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Block] catch: [otherBlock]
+ * @def
+ * [ Block ] catch: [ Block ]
  *
- * Associates an error clause to a block.
- * If an error (exception) occurs within the block this block will be
- * executed.
- *
- * Usage:
- *
+ * @example
  * {
  *    ☞ z := 4 / 0.
  * } catch: { :e
  *    ✎ write: e, end.
  * }, run.
- *
- * In other languages:
- * Dutch: [Codeblok] afhandelen: [Codeblok]
- * Stelt een codeblok in dat gebruikt moet worden door het ontvangende blok
- * indien er een fout opgetreden is.
  */
 ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* catchBlock = argumentList->object;
@@ -2978,14 +2537,12 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Block] string
+ * @def
+ * [ Block ] string
  *
- * Returns a string representation of the Block. This basic behavior, part
- * of any object will just return [Block]. Other objects typically override this
- * behavior with more useful implementations.
- *
- * In other languages:
- * Dutch: [Codeblok] tekst | Geeft tekstuele weergave van een codeblok.
+ * @example
+ * ☞ x := {}.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_block_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( CTR_SYM_BLOCK );
