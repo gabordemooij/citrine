@@ -22,6 +22,8 @@ core
 /ctrnl
 /bin
 /dict
+docs/server
+docs/keys
 docs/ctr
 docs/pages
 docs/pagemaker.ctr

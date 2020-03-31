@@ -45,11 +45,11 @@ blokken elk: { :nummer :blok
 		🠶totaal: totaal
 	).
 
-	blok
-	vervang: ' * ' door: '',
-	vervang: ' *↵' door: ''.
-
 	☞ blokinhoud    := blok opsplitsen: '*/', eerste.
+	
+	blokinhoud
+	vervang: '↵ *' door: '↵',
+	vervang: ' *↵' door: '↵'.
 	
 	☞ blokdelen     := blokinhoud opsplitsen: '@example'.
 	☞ definitie     := blokdelen eerste verwĳder omliggende spaties.
