@@ -1080,7 +1080,7 @@ ctr_object* ctr_clock_weekday( ctr_object* myself, ctr_argument* argumentList ) 
 
 /**
  * @def
- * [Moment] time.
+ * [ Moment ] time.
  *
  * @example
  * ☞ t := Moment new time.
@@ -1295,13 +1295,13 @@ ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [Moment] subtract: [Number].
+ * [ Moment ] subtract: [Number].
  *
- * Same as '[Moment] add:' but subtracts the number instead of adding it to
+ * Same as '[ Moment ] add:' but subtracts the number instead of adding it to
  * the clock's time.
  * 
  * In other languages:
- * Dutch: [Moment] aftrekken: [Getal].
+ * Dutch: [ Moment ] aftrekken: [Getal].
  * Verschuift het moment in de tijd op basis van het getal.
  * Het getal kan gekwalificeerd worden als minuten, uren of seconden.
  */
@@ -1310,13 +1310,13 @@ ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
- * [Moment] new
+ * [ Moment ] new
  *
  * Creates a new clock, by default a clock will be set to
  * the UTC timezone having the current time.
  * 
  * In other languages:
- * Dutch: [Moment] nieuw.
+ * Dutch: [ Moment ] nieuw.
  * Maakt een nieuw moment aan voor het huidige tijdstip.
  */
 ctr_object* ctr_clock_new( ctr_object* myself, ctr_argument* argumentList ) {

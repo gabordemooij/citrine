@@ -125,7 +125,7 @@ ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ List ] each: [Block].
+ * [ List ] each: [ Block ].
  *
  * @example
  * ☞ x := List ← 1 ; 2 ; 3.
@@ -858,7 +858,7 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Map ] [ String ]: [Object]
+ * [ Map ] [ String ]: [ Object ]
  *
  * @example
  * ☞ x :=

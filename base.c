@@ -109,7 +109,7 @@ ctr_object* ctr_build_nil() {
 
 /**
  * @def
- * [Nil] Nil?
+ * [ Nil ] Nil?
  *
  * @example
  * ☞ x := Nil.
@@ -121,7 +121,7 @@ ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [Nil] string
+ * [ Nil ] string
  *
  * @example
  * ☞ x := Nil.
@@ -133,7 +133,7 @@ ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [Nil] number
+ * [ Nil ] number
  *
  * @example
  * ☞ x := Nil.
@@ -145,7 +145,7 @@ ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* ctr_argumentList
 
 /**
  * @def
- * [Nil] boolean
+ * [ Nil ] boolean
  *
  * @example
  * ☞ x := Nil.
@@ -317,7 +317,7 @@ ctr_object* ctr_string_copy( ctr_object* myself, ctr_argument* argumentList ) {
 /**
  * 
  * @def
- * [Object] case: [Object] do: [Block].
+ * [ Object ] case: [ Object ] do: [ Block ].
  *
  * @example
  * ☞ x := '**'.
@@ -1453,7 +1453,7 @@ ctr_object* ctr_build_empty_string() {
 
 /**
  * @def
- * [String] bytes
+ * [ String ] bytes
  *
  * @example
  * ☞ x := '☘☘☘'.
@@ -1502,7 +1502,7 @@ ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [String] length
+ * [ String ] length
  *
  * @example
  * ☞ x := '☘☘☘'.
@@ -1767,7 +1767,7 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentL
 
 /**
  * @def
- * [String] [String]: [String]
+ * [ String ] [ String ]: [ String ]
  *
  * @example
  * ☞ x := '$ money'.
@@ -1973,7 +1973,7 @@ ctr_object* ctr_string_find_pattern_do( ctr_object* myself, ctr_argument* argume
 
 /**
  * @def
- * [String] contains: [String]
+ * [ String ] contains: [ String ]
  *
  * @example
  * ☞ x := 'abc' contains: 'a'.
