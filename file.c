@@ -14,18 +14,15 @@
 #include "siphash.h"
 
 /**
+ * @def
  * File
  *
- * Represents a File object.
- * Creates a new file object based on the specified path.
- *
- * Usage:
- *
- * File new: '/example/path/to/file.txt'.
- *
- * In other languages:
- * Dutch: Bestand nieuw. Maakt een nieuw bestand.
- * Voorbeeld: ☞ bestand := Bestand nieuw: 'voorbeeld.txt'.
+ * @example
+ * ☞ f := File new: '/tmp/test.txt'.
+ * f write: 'test'.
+ * f close.
+ * ☞ q := File new: '/tmp/test.txt'.
+ * ✎ write: q read, stop.
  */
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* s = ctr_object_make(myself, argumentList);
@@ -39,15 +36,12 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [File] path
+ * @def
+ * [ File ] path
  *
- * Returns the path of a file. The file object will respond to this
- * message by returning a string object describing the full path to the
- * recipient.
- *
- * In other languages:
- * Dutch: [bestand] pad.
- * Geeft de locatie van het bestand terug.
+ * @example
+ * ☞ f := File new: '/tmp/test.txt'.
+ * ✎ write: f path, stop.
  */
 ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -56,16 +50,14 @@ ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [File] string
- *
- * Returns a string representation of the file. If a path has been associated
- * with this file, this message will return the path of the file on the file system.
- * If no path has been associated with the file, the string [File (no path)] will
- * be returned.
- *
- * In other languages:
- * Dutch: [bestand] tekst. Geeft tekstrepresentatie van bestand terug.
- * Meestal is dit het pad.
+ * @def
+ * [ File ] string
+ * 
+ * @example
+ * ☞ x := File new.
+ * ✎ write: x, stop.
+ * ☞ y := File new: '/tmp/a.txt'.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_file_path(myself,argumentList);
@@ -76,22 +68,15 @@ ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [File] read
+ * @def
+ * [ File ] read
  *
- * Reads contents of a file. Send this message to a file to read the entire contents in
- * one go. For big files you might want to prefer a streaming approach to avoid
- * memory exhaustion.
- * In the example we read the contents of the entire CSV file callled mydata.csv
- * in the variable called data.
- *
- * Usage:
- *
- * ☞ data := File new: '/path/to/mydata.csv', read.
- *
- * In other languages:
- * Dutch: [bestand] lees.
- * Leest het bestand in en geeft inhoud terug als tekst.
- * Voorbeeld: gegevens := Bestand nieuw: 'test.txt', lees.
+ * @example
+ * ☞ f := File new: '/tmp/test.txt'.
+ * f write: 'test'.
+ * f close.
+ * ☞ q := File new: '/tmp/test.txt'.
+ * ✎ write: q read, stop.
  */
 ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -129,24 +114,15 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [File] write: [String]
+ * @def
+ * [ File ] write: [ String ]
  *
- * Writes content to a file. Send this message to a file object to write the
- * entire contents of the specified string to the file in one go. The file object
- * responds to this message for convience reasons, however for big files it might
- * be a better idea to use the streaming API if possible (see readBytes etc.).
- * In the example we write the XML snippet in variable data to a file
- * called myxml.xml in the current working directory.
- *
- * Usage:
- *
- * ☞ data := '<xml>hello</xml>'.
- * File new: 'myxml.xml', write: data.
- *
- * In other languages:
- * Dutch: [bestand] schrijf: gegevens.
- * Schrijf inhoud variabele naar bestand.
- * Voorbeeld: Bestand nieuw: 'test.txt', schrijf: 'inhoud'.
+ * @example
+ * ☞ f := File new: '/tmp/test.txt'.
+ * f write: 'test'.
+ * f close.
+ * ☞ q := File new: '/tmp/test.txt'.
+ * ✎ write: q read, stop.
  */
 ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
@@ -173,15 +149,15 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [File] append: [String]
+ * @def
+ * [ File ] append: [ String ]
  *
- * Appends content to a file. The file object responds to this message like it
- * responds to the write-message, however in this case the contents of the string
- * will be appended to the existing content inside the file.
- *
- * In other languages:
- * Dutch: [bestand] toevoegen: gegevens.
- * Voegt inhoud toe aan bestand.
+ * @example
+ * ☞ x := File new: '/tmp/a.txt'.
+ * x write: '123'.
+ * ✎ write: x read, stop.
+ * x append: '345'.
+ * ✎ write: x read, stop.
  */
 ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
@@ -208,14 +184,16 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [File] exists
+ * @def
+ * [ File ] exists
  *
- * Returns True if the file exists and False otherwise.
- *
- * In other languages:
- * Dutch: [bestand] bestaat.
- * Antwoordt Waar als het bestand bestaat en Onwaar als het bestaat
- * niet bestaat.
+ * @example
+ * ☞ f := '/tmp/a.txt'.
+ * ☞ x := File new: f.
+ * Program shell: 'rm ' + f.
+ * ✎ write: f exists, stop.
+ * Program shell: 'touch ' + f.
+ * ✎ write: f exists, stop.
  */
 ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -238,12 +216,15 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [File] delete
- *
- * Deletes the file.
- *
- * In other languages:
- * Dutch: [bestand] verwijderen.
+ * @def
+ * [ File ] delete
+ * 
+ * @example
+ * ☞ x := File new: '/tmp/a.txt'.
+ * x write: 'abc'.
+ * ✎ write: x exists, stop.
+ * x delete.
+ * ✎ write: x exists, stop.
  */
 ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -265,13 +246,15 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [File] size
- *
- * Returns the size of the file.
- *
- * In other languages:
- * Dutch: [bestand] grootte.
- * Geeft de bestandsgrootte terug van het bestand.
+ * @def
+ * [ File ] size
+ * 
+ * @example
+ * ☞ x := File new: '/tmp/a.txt'.
+ * x write: 'abc'.
+ * ✎ write: x size, stop.
+ * x append: 'def'.
+ * ✎ write: x size, stop.
  */
 ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -298,24 +281,17 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [File] open: [string]
+ * @def
+ * [ File ] open: [ String ].
  *
- * Open a file with using the specified mode.
- * The example opens the file in f for reading and writing.
- *
- * Usage:
- *
- * ☞ f := File new: '/path/to/file'.
- * f open: 'r+'.
- *
- * In other languages:
- * Dutch: [bestand] openen: modus.
- * Opent het bestand in de gegeven modus (r+) voor
- * lezen en schrijven.
- * Voorbeeld:
- * ☞ f := Bestand nieuw: 'test.txt'.
- * f openen: 'r+'.
- * f sluiten.
+ * @example
+ * ☞ f := File new: '/tmp/a.txt'.
+ * f write: 'abcdefgh'.
+ * f open: 'r'.
+ * ☞ x := f end, seek: -5, read bytes: 3.
+ * ☞ y := f rewind, seek: 5, read bytes: 3.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pathObj = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -345,24 +321,20 @@ ctr_object* ctr_file_open(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [File] close.
- *
- * Closes the file represented by the recipient.
- * The example above opens and closes a file.
- *
- * Usage:
- *
- * ☞ f := File new: '/path/to/file.txt'.
- * f open: 'r+'.
+ * @def
+ * [ File ] close
+ * 
+ * @example
+ * ☞ f := '/tmp/a.txt'.
+ * f open: 'r+'
+ * ☞ n := f write bytes: '123'.
+ * ✎ write: n, stop.
  * f close.
- *
- * In other languages:
- * Dutch: [bestand] sluiten.
- * Sluit het geopende bestand.
- * Voorbeeld:
- * ☞ f := Bestand nieuw: 'test.txt'.
- * f openen: 'r+'.
- * f sluiten.
+ * ☞ q := '/tmp/a.txt'.
+ * q open: 'r'.
+ * ☞ x := q read bytes: 2.
+ * ✎ write: x, stop.
+ * q close.
  */
 ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.rvalue == NULL) return myself;
@@ -376,29 +348,20 @@ ctr_object* ctr_file_close(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [File] read bytes: [Number].
- *
- * Reads a number of bytes from the file.
- * The example reads 10 bytes from the file represented by f
- * and puts them in buffer x.
- *
- * Usage:
- *
- * ☞ f := File new: '/path/to/file.txt'.
- * f open: 'r+'.
- * ☞ x := f read bytes: 10.
+ * @def
+ * [ File ] read bytes: [ Number ]
+ * 
+ * @example
+ * ☞ f := '/tmp/a.txt'.
+ * f open: 'r+'
+ * ☞ n := f write bytes: '123'.
+ * ✎ write: n, stop.
  * f close.
- *
- * In other languages:
- * Dutch: [bestand] lees bytes: [getal].
- * Leest aantal bytes uit bestand en geeft dit terug.
- * In het onderstaande voorbeeld lezen we de eerste 10
- * bytes uit het bestand test.txt.
- * Voorbeeld:
- * ☞ f := Bestand nieuw: 'test.txt'.
- * f openen: 'r+'.
- * ☞ x := f lees bytes: 10.
- * f sluiten.
+ * ☞ q := '/tmp/a.txt'.
+ * q open: 'r'.
+ * ☞ x := q read bytes: 2.
+ * ✎ write: x, stop.
+ * q close.
  */
 ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) {
 	int bytes;
@@ -420,29 +383,20 @@ ctr_object* ctr_file_read_bytes(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 /**
- * [File] write bytes: [String].
- *
- * Takes a string and writes the bytes in the string to the file
- * object. Returns the number of bytes actually written.
- * The example above writes 'Hello World' to the specified file as bytes.
- * The number of bytes written is returned in variable n.
- *
- * Usage:
- *
- * ☞ f := File new: '/path/to/file.txt'.
- * f open: 'r+'.
- * ☞ n := f write bytes: 'Hello World'.
+ * @def
+ * [ File ] write bytes: [ String ]
+ * 
+ * @example
+ * ☞ f := '/tmp/a.txt'.
+ * f open: 'r+'
+ * ☞ n := f write bytes: '123'.
+ * ✎ write: n, stop.
  * f close.
- *
- * In other languages:
- * Dutch: [bestand] schrijf bytes: [tekst].
- * Schrijft bytes naar het bestand. In het onderstaande voorbeeld
- * schrijven we de tekst 'hallo' naar het bestand test.txt.
- * Voorbeeld:
- * ☞ f := Bestand nieuw: 'test.txt'.
- * f openen: 'r+'.
- * ☞ x := f schrijf bytes: 'hallo'.
- * f sluiten.
+ * ☞ q := '/tmp/a.txt'.
+ * q open: 'r'.
+ * ☞ x := q read bytes: 2.
+ * ✎ write: x, stop.
+ * q close.
  */
 ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList) {
 	int bytes, written;
@@ -459,27 +413,17 @@ ctr_object* ctr_file_write_bytes(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [File] seek: [Number].
+ * @def
+ * [ File ] seek
  *
- * Moves the file pointer to the specified position in the file
- * (relative to the current position).
- * The example opens a file for reading and moves the
- * pointer to position 10 (meaning 10 bytes from the beginning of the file).
- * The seek value may be negative.
- *
- * Usage:
- *
- * file open: 'r', seek: 10.
- *
- * In other languages:
- * Dutch: [bestand] zoeken: [getal].
- * Verplaatst de cursor naar de gespecificeerde positie in het bestand.
- * In onderstaand voorbeeld openen we een bestand voor lezen en verplaatsen
- * we de cursor naar positie 10 (10 bytes ten opzichte van het
- * begin van het bestand). Een zoekwaarde kan negatief zijn.
- * Voorbeeld:
- *
- * f open: 'r', zoeken: 10.
+ * @example
+ * ☞ f := File new: '/tmp/a.txt'.
+ * f write: 'abcdefgh'.
+ * f open: 'r'.
+ * ☞ x := f end, seek: -5, read bytes: 3.
+ * ☞ y := f rewind, seek: 5, read bytes: 3.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
 	int offset;
@@ -495,22 +439,17 @@ ctr_object* ctr_file_seek(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [File] rewind.
+ * @def
+ * [ File ] rewind
  *
- * Rewinds the file. Moves the file pointer to the beginning of the file.
- * The example reads the same sequence of 10 bytes twice, resulting
- * in variable x and y being equal.
- *
- * Usage:
- *
- * file open: 'r'.
- * ☞ x := file read bytes: 10.
- * file rewind.
- * ☞ y := file read bytes: 10.
- *
- * In other languages:
- * Dutch: [bestand] terugspoelen.
- * Plaatst de cursor weer aan het beginpunt van het bestand.
+ * @example
+ * ☞ f := File new: '/tmp/a.txt'.
+ * f write: 'abcdefgh'.
+ * f open: 'r'.
+ * ☞ x := f end, seek: -5, read bytes: 3.
+ * ☞ y := f rewind, seek: 5, read bytes: 3.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList) {
 	int error;
@@ -524,24 +463,17 @@ ctr_object* ctr_file_seek_rewind(ctr_object* myself, ctr_argument* argumentList)
 }
 
 /**
- * [File] end.
+ * @def
+ * [ File ] end.
  *
- * Moves the file pointer to the end of the file. Use this in combination with
- * negative seek operations.
- * The example will read the last 10 bytes of the file. This is
- * accomplished by first moving the file pointer to the end of the file,
- * then putting it back 10 bytes (negative number), and then reading 10
- * bytes.
- *
- * Usage:
- *
- * file open: 'r'.
- * file end.
- * ☞ x := file seek: -10, read bytes: 10.
- *
- * In other languages:
- * Dutch: [bestand] terugspoelen.
- * Plaatst de cursor aan het einde van het bestand.
+ * @example
+ * ☞ f := File new: '/tmp/a.txt'.
+ * f write: 'abcdefgh'.
+ * f open: 'r'.
+ * ☞ x := f end, seek: -5, read bytes: 3.
+ * ☞ y := f rewind, seek: 5, read bytes: 3.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_file_seek_end(ctr_object* myself, ctr_argument* argumentList) {
 	int error;
@@ -607,57 +539,41 @@ ctr_object* ctr_file_lock_generic(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [File] unlock.
- *
- * Attempts to unlock a file. This message is non-blocking, on failure
- * it will immediately return. Answers True if the file has been
- * unlocked succesfully. Otherwise, the answer is False.
- *
- * In other languages:
- * Dutch: [bestand] ontgrendel.
- * Poogt het bestand te ontgrendelen. Geeft Waar terug als poging slaagt.
+ * @def
+ * [ File ] unlock
+ * 
+ * @example
+ * ☞ f := File new: 'x.txt'.
+ * ☞ l := f unlock.
+ * ✎ write: l, stop.
  */
 ctr_object* ctr_file_unlock(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_file_lock_generic( myself, argumentList, LOCK_UN | LOCK_NB );
 }
 
 /**
- * [File] lock.
- *
- * Attempts to acquire an exclusive lock on file.
- * This message is non-blocking, on failure
- * it will immediately return. Answers True if the lock has been
- * acquired and False otherwise.
- *
- * In other languages:
- * Dutch: [bestand] vergrendel.
- * Poogt het bestand te vergrendelen. Geeft Waar terug als poging slaagt.
+ * @def
+ * [ File ] lock
+ * 
+ * @example
+ * ☞ f := File new: 'x.txt'.
+ * ☞ l := f lock.
+ * ✎ write: l, stop.
  */
 ctr_object* ctr_file_lock(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_file_lock_generic( myself, argumentList, LOCK_EX | LOCK_NB );
 }
 
 /**
- * [File] list: [String].
- *
- * Returns the contents of the specified folder as a an array.
- * Each entry of the array contains a map with the keys 'file'
- * and 'type'. The 'file' entry contains a string with the name
- * of the file while the 'type' entry contains a string describing
- * the type of the file.
- *
- * Usage:
- *
- * ☞ files := File list: '/tmp/testje'.
- *
- *
- * In other languages:
- * Dutch: Bestand lijst: [tekst]
- * Geeft de inhoud van de opgegeven map terug.
- *
- * Voorbeeld:
- *
- * bestanden := Bestand lijst: '/mijnmap'.
+ * @def
+ * [ File ] list: [ String ].
+ * 
+ * @example
+ * Program shell: 'mkdir /tmp/files'.
+ * Program shell: 'touch /tmp/files/a.txt'.
+ * Program shell: 'touch /tmp/files/b.txt'.
+ * ☞ x := File list: '/tmp/files'.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	DIR* d;

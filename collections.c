@@ -12,24 +12,10 @@
 #include "siphash.h"
 
 /**
- * [List] new
- *
- * Creates a new list or array. List is an alias for array.
- * An array is a collection of items. To create a new array,
- * send the 'new' message to the array. To add an element send
- * the 'push:' message to an array with the element to add as
- * an argument. Instead of using the push-message you can also
- * use the • message. This message is suitable for vertically
- * written arrays because they look similar to lists seen in
- * regular documents. Besides 'push:' and • you can also use
- * the ; message to push an new element on top of the array.
- * The arrow message is the same as 'new' plus 'push:', just a
- * shorter notation. The ; message is very suitable for
- * horizontally written arrays. Finally, the last example
- * depicts a notation using just ascii characters.
- *
- * Usage:
- *
+ * @def
+ * List
+ * 
+ * @example
  * ☞ meals :=
  *	List new
  *	• 'hamburger'
@@ -37,45 +23,8 @@
  *	• 'haggis'.
  *
  * ☞ todo := List ← 'dishes' ; 'cleaning'.
- *
- * In other languages:
- * Dutch: Reeks nieuw. Maakt een nieuwe reeks.
- * Gebruik ← om een lijst te maken en direct te vullen.
- * Voorbeeld: ☞ oneven := Reeks ← 1 ; 3 ; 5.
- */
-
-/**
- * [List] new
- *
- * Creates a new array.
- * An array is a collection of items. To create a new array,
- * send the 'new' message to the array. To add an element send
- * the 'push:' message to an array with the element to add as
- * an argument. Instead of using the push-message you can also
- * use the • message. This message is suitable for vertically
- * written arrays because they look similar to lists seen in
- * regular documents. Besides 'push:' and • you can also use
- * the ; message to push an new element on top of the array.
- * The arrow message is the same as 'new' plus 'push:', just a
- * shorter notation. The ; message is very suitable for
- * horizontally written arrays. Finally, the last example
- * depicts a notation using just ascii characters.
- *
- * Usage:
- *
- * ☞ meals :=
- *	List new
- *	• 'hamburger'
- *	• 'pizza'
- *	• 'haggis'.
- *
- * ☞ todo := List ← 'dishes' ; 'cleaning'.
- *
- * In other languages:
- * Dutch: Reeks nieuw. Maakt een nieuwe reeks.
- * Gebruik ← om een lijst te maken en direct te vullen.
- * Voorbeeld: ☞ oneven := Reeks ← 1 ; 3 ; 5.
- *
+ * ✎ write: meals, stop.
+ * ✎ write: todo, stop.
  */
 ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTARRAY);
@@ -89,36 +38,28 @@ ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 }
 
 /**
- * [List] type
+ * @def
+ * [ List ] type
  *
- * Returns the string description for this object type.
- *
- * In other languages:
- * Dutch: [Reeks] type. | Geeft een beschrijving van het object.
- *
- **/
+ * @example
+ * ☞ x := List new.
+ * ☞ y := x type.
+ * ✎ write: y, stop.
+ */
 ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( CTR_DICT_LIST_OBJECT );
 }
 
 /**
- * [List] append: [Element]
- *
- * Adds an element to the end of the list.
- * You can also use add: to do this or one of the symbolic
- * representations: • and ;. Depending on the context, one might be
- * more readable than the other.
- *
- * Usage:
- *
- * numbers := List new.
- * numbers append: 3.
- * numbers ; 3.
- * numbers • 3.
- *
- * In other languages:
- * Dutch: [Reeks] toevoegen: [Object]. | Voegt iets toe aan een reeks.
- * Alternatieve notaties: • of ;.
+ * @def
+ * [ List ] append: [ String ]
+ * 
+ * @example
+ * ☞ x := List new.
+ * x append: 3.
+ * x ; 3.
+ * x • 3.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pushValue;
@@ -135,18 +76,13 @@ ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] minimum
+ * @def
+ * [ List ] minimum
  *
- * Returns the minimum value in a list.
- * In the example this message will return the number 2.
- *
- * Usage:
- *
- * a := List ← 8 ; 4 ; 2 ; 16.
- * m := a minimum.
- *
- * In other languages:
- * Dutch: [Reeks] maximum | Geeft de laagste waarde uit de reeks terug.
+ * @example
+ * ☞ x := List ← 8 ; 4 ; 2 ; 16.
+ * ☞ y := x minimum.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList) {
 	double min = 0;
@@ -164,19 +100,13 @@ ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] maximum
+ * @def
+ * [ List ] maximum
  *
- * Returns the maximum value in a list.
- * In the example this will yield the number 16.
- *
- * Usage:
- *
- * a := List ← 8 ; 4 ; 2 ; 16.
- * m := a maximum.
- *
- * In other languages:
- * Dutch: [Reeks] maximum | Geeft de hoogste waarde uit de reeks terug.
- *
+ * @example
+ * ☞ x := List ← 8 ; 4 ; 2 ; 16.
+ * ☞ y := x maximum.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
 	double max = 0;
@@ -194,30 +124,14 @@ ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] map: [Block].
+ * @def
+ * [ List ] each: [Block].
  *
- * Iterates over the array. Passing each element as a key-value pair to the
- * specified block.
- * The map message will pass the following arguments to the block, the key,
- * the value and a reference to the array itself. The last argument might seem
- * redundant but allows for a more functional programming style. Instead of map,
- * you can also use each:.
- *
- * Usage:
- *
- * files map: showName.
- * files map: {
- *   :key :filename :files
- *   ✎ write: filename.
+ * @example
+ * ☞ x := List ← 1 ; 2 ; 3.
+ * x each: { :x
+ *   ✎ write: x, stop.
  * }.
- *
- * files each: {
- *   :key :filename :files
- *   ✎ write: filename.
- * }.
- *
- * In other languages:
- * Dutch: [Reeks] lijst: [Codeblok] | Maakt van een reeks
  */
 ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
@@ -253,21 +167,12 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] ← [Element1] ; [Element2] ; ...
+ * @def
+ * [ List ] ← [ Object ]
  *
- * Creates a new instance of a list and initializes this
- * array with a first element, useful for literal-like List
- * notations. In the example we create a new list consisting
- * of the numbers 1, 2 and 3.
- *
- * Usage:
- *
- * a := List ← 1 ; 2 ; 3.
- *
- * In other languages:
- * Dutch: [Reeks] ← [Element1] ; [Element2] ; ... | De pijl maakt een nieuwe reeks en voegt het eerste
- * element direct toe, opvolgende elementen kunnen worden gescheiden door puntkomma's (;), hiermee
- * voegt men telkens een nieuw element toe aan de reeks.
+ * @example
+ * ☞ x := List ← 1 ; '2' ; False ; Nil.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_array_new_and_push(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_array_new(myclass, NULL);
@@ -275,20 +180,14 @@ ctr_object* ctr_array_new_and_push(ctr_object* myclass, ctr_argument* argumentLi
 }
 
 /**
- * [List] prepend: [Element].
- *
- * Adds the specified element to the beginning of the array.
- * At the end of the example code, the list will consist of the
- * numbers: 3 and 1 (in that order).
- *
- * Usage:
- *
- * a := List new.
- * a append: 1.
- * a prepend: 3.
- *
- * In other languages:
- * Dutch: [Reeks] invoegen: [Object] | Voegt het aangegeven object in aan het begin van de reeks.
+ * @def
+ * [ List ] prepend: [ String ].
+ * 
+ * @example
+ * ☞ x := List ← 1 ; 2 ; 3.
+ * x append: 0.
+ * x prepend: 9.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pushValue = argumentList->object;
@@ -307,21 +206,12 @@ ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] join: [String].
+ * @def
+ * [ List ] join: [ String ].
  *
- * Joins the elements of a list together in a string
- * separated by a specified glue string. The example
- * code results in the string: '1,2,3'.
- *
- * Usage:
- *
- * collection := List new.
- * collection append: 1, append: 2, append 3.
- * collection join: ','.
- *
- * In other languages:
- * Dutch: [Reeks] samenvoegen: [Tekst] | Maakt een tekst door
- * reekselementen samen te voegen met gespecificeerde koppelteken(s).
+ * @example
+ * ☞ x := List ← 1 ; 2 ; 3.
+ * ✎ write: (x join: ','), stop.
  */
 ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 	int i;
@@ -354,25 +244,15 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] position: [Number]
+ * @def
+ * [ List ] position: [ Number ]
  *
- * Returns the element in the list at the specified position.
- * Note that the first position of the list is index 0.
- * If you attempt to retrieve an element of the list
- * using a an index that is something other than a number
- * a catchable error will be triggered. An error will
- * also be triggered if your position is out of bounds
- * (i.e. outside the list). Instead of the message
- * 'position:' you can also send the message '?'.
- *
- * Usage:
- *
- * ☞ fruits  := List ← 'apples' ; 'oranges' ; 'bananas'.
- * ☞ oranges := fruits position: 1.
- * ☞ oranges := fruits ? 1.
- *
- * In other languages:
- * Dutch: [Reeks] positie: [Getal] | Geeft het object op de aangegeven plek in de reeks.
+ * @example
+ * ☞ x  := List ← 'A' ; 'B' ; 'C'.
+ * ☞ y  := x position: 1.
+ * ☞ z  := x ? 2.
+ * ✎ write: y, stop.
+ * ✎ write: z, stop.
  */
 ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* getIndex = argumentList->object;
@@ -391,13 +271,14 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] first.
+ * @def
+ * [ List ] first
  *
- * Returns the first element of the list.
- * If the list is empty, Nil will be returned.
- *
- * In other languages:
- * Dutch: [Reeks] eerste | Geef het eerste element uit de reeks.
+ * @example
+ * ☞ x := List ← 1 ; 2 ; 3 ; 4.
+ * ☞ y := x first.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size length = 0;
@@ -409,13 +290,14 @@ ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] last.
+ * @def
+ * [ List ] last
  *
- * Returns the last element of the list.
- * If the list is empty, Nil will be returned.
- *
- * In other languages:
- * Dutch: [Reeks] laatste | Geeft het laatste element uit de reeks.
+ * @example
+ * ☞ x := List ← 1 ; 2 ; 3 ; 4.
+ * ☞ y := x last.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size length = 0;
@@ -427,13 +309,14 @@ ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] second last.
+ * @def
+ * [ List ] second last
  *
- * Returns the second last element of the list.
- * If the list is empty, Nil will be returned.
- *
- * In other languages:
- * Dutch: [Reeks] op-een-na-laatste | Geeft het op-een-na-laatste element uit reeks.
+ * @example
+ * ☞ x := List ← 1 ; 2 ; 3 ; 4.
+ * ☞ y := x second last.
+ * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_array_second_last(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size length = 0;
@@ -446,21 +329,13 @@ ctr_object* ctr_array_second_last(ctr_object* myself, ctr_argument* argumentList
 
 
 /**
- * [List] put: [Object] at: [Number]
+ * @def
+ * [ List ] put: [ Object ] at: [ Number ]
  *
- * Puts an object (which can be anything) in the list
- * at the specified position.
- * The list will be automatically expanded if the position number
- * is higher than the maximum of the list.
- *
- * Usage:
- *
- * ☞ fruits := List new.
- * ☞ fruits put: 'apples' at: 5.
- *
- * In other languages:
- * Dutch: [Reeks] zet: [Object] bij: [Getal]
- * Plaatst het object op de aangegeven positie in de reeks.
+ * @example
+ * ☞ x := List new.
+ * ☞ x put: 'a' at: 5.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 
@@ -501,12 +376,14 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] pop
+ * @def
+ * [ List ] pop
  *
- * Pops off the last element of the array.
- *
- * In other languages:
- * Dutch: [Reeks] eraf | Schuift laatste element uit reeks af en geeft het terug.
+ * @example
+ * ☞ x := List ← 1 ; 2 ; 3.
+ * ✎ write: x, stop.
+ * x pop.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.avalue->tail >= myself->value.avalue->head) {
@@ -517,20 +394,14 @@ ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] - [Number]
+ * @def
+ * [ List ] - [ Number ]
  *
- * Deletes the element specified by the index number and
- * shrinks the list accordingly. If the position number does not exist,
- * the list will remain the same. This operation changes the list itself.
- * The example will remove element 1 (2) from the list.
- *
- * Usage:
- *
+ * @example
  * ☞ x := List ← 1 ; 2 ; 3.
+ * ✎ write: x, stop.
  * ☞ x - 1.
- *
- * In other languages:
- * Dutch: [Reeks] - [Getal] | Verwijder het element op de aangegeven plek.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size index = ctr_internal_cast2number(argumentList->object)->value.nvalue;
@@ -549,12 +420,14 @@ ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] shift
+ * @def
+ * [ List ] shift
  *
- * Shifts off the first element of the list.
- *
- * In other languages:
- * Dutch: [Reeks] afschuiven | Schuift het eerste element van de reeks.
+ * @example
+ * ☞ x := List ← 1 ; 2 ; 3.
+ * ☞ y := x shift.
+ * ✎ write: y, stop.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_array_shift(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* shiftedOff;
@@ -567,12 +440,13 @@ ctr_object* ctr_array_shift(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] count
- *
- * Returns the number of elements in the list.
- *
- * In other languages:
- * Dutch: [Reeks] aantal | Geeft het aantal elementen in de reeks.
+ * @def
+ * [ List ] count
+ * 
+ * @example
+ * ☞ x := List ← 1 ; 2 ; 3.
+ * ☞ y := x count.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_array_count(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number d = 0;
@@ -581,13 +455,13 @@ ctr_object* ctr_array_count(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] from: [Begin] length: [End]
- *
- * Copies part of an array indicated by from and to and
- * returns a new array consisting of a copy of this region.
- *
- * In other languages:
- * Dutch: [Reeks] van: [Getal] lengte: [Getal] | Geeft subreeks.
+ * @def
+ * [ List ] from: [ Number ] length: [ Number ]
+ * 
+ * @example
+ * ☞ x := List ← 1 ; 2 ; 3 ; 4 ; 5.
+ * ☞ y := x from: 2 length: 2.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* pushArg;
@@ -613,29 +487,14 @@ ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList
 }
 
 /**
- * [List] replace: [Number] length: [Number] with: [List].
- *
- * Returns a copy of the list with the specified elements replaced.
- * The first argument indicates the start index to begin the replacement.
- * Here, 0 means the beginning of the list.
- * The second argument (length)
- * must indicate the number of elements to delete in the copy, counting
- * from the starting point. Finally, one has to provide the replacement
- * list as the third argument.
- * If the replacement list is empty, the specified elements will only be
- * removed from the copy.
- * If the replacement is not an array an error will be thrown.
- *
- * Usage:
- *
- * ☞ buy := cakes
- *     replace: 1
- *     length: 2
- *     with: ( List ← 'cinnamon' ; 'pineapple' ).
- *
- * In other languages:
- * Dutch: [Reeks] vervang: [Getal] lengte: [Getal] door: [Reeks]
- * Vervangt een deel van de reeks door een andere reeks.
+ * @def
+ * [ List ] replace: [ Number ] length: [ Number ] with: [ List ].
+ * 
+ * @example
+ * ☞ x := List ← 1 ; 2 ; 3 ; 4 ; 5.
+ * ☞ z := List ← 9.
+ * ☞ y := x replace: 2 length: 1 with: z.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newArray = ctr_array_new(CtrStdArray, NULL);
@@ -681,13 +540,14 @@ ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] + [List]
+ * @def
+ * [ List ] + [ List ]
  *
- * Returns a new list, containing elements of itself and the other
- * list.
- *
- * In other languages:
- * Dutch: [Reeks] + [Reeks] | Geeft de reeks die bestaat uit de samenvoeging van gegeven reeksen.
+ * @example
+ * ☞ x := List ← 1 ; 2.
+ * ☞ y := List ← 3 ; 4.
+ * ☞ z := x + y.
+ * ✎ write: z, stop.
  */
 ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherArray = argumentList->object;
@@ -719,24 +579,14 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] by: [List].
+ * @def
+ * [ List ] by: [ List ].
  *
- * Combines the first list with the second one, thus creating
- * a map. The keys of the newly generated map will be provided by the
- * first list while the values are extracted from the second one.
- * In the example we derive a temperature map from a pair of lists
- * (cities and temperatures).
- *
- * Usage:
- *
- * ☞ city        := List ← 'London' ; 'Paris' ; 'Berlin'.
- * ☞ temperature := List ← '15' ; '16' ; '15'.
- * ☞ weather := temperature by: city.
- *
- * In other languages:
- * Dutch: [Reeks] per: [Reeks]
- * Maakt een Lijst door elementen uit de eerste reeks te koppelen
- * aan de elementen op dezelfde plek uit de tweede reeks.
+ * @example
+ * ☞ x := List ← 'A' ; 'B' ; 'C'.
+ * ☞ y := List ← 1 ; 2 ; 3.
+ * ☞ z := x by: y.
+ * ✎ write: z, stop.
  */
 ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size i;
@@ -762,27 +612,15 @@ ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] copy
+ * @def
+ * [ List ] copy
  *
- * Copies the list. The list object will answer this message by
- * returning a shallow copy of itself. This means that the values in the
- * newly returned list can be replaced or deleted without affecting
- * the original one. However, modifying the values in the list will
- * still cause their counterparts in the original list to be modified
- * as well.
- * In the example we replace the first item (1) in b with 999.
- * The first element in a will still be 1 though because we have created
- * copy b by sending the message 'copy' to a and assiging the result
- * to b.
- *
- * Usage:
- *
+ * @example
  * ☞ a := List ← 1 ; 2 ; 3.
  * ☞ b := a copy.
  * b put: 999 at: 1.
- *
- * In other languages:
- * Dutch: [Reeks] kopieer | Maakt een kopie van de reeks.
+ * ✎ write: a, stop.
+ * ✎ write: b, stop.
  */
 ctr_object* ctr_array_copy(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size i = 0;
@@ -827,14 +665,13 @@ int ctr_sort_cmp(const void * a, const void * b) {
 }
 
 /**
- * [List] sort: [Block]
+ * @def
+ * [ List ] sort: [ Block ]
  *
- * Sorts the contents of an list using a sort block.
- * Uses qsort.
- *
- * In other languages:
- * Dutch: [Reeks] sorteer: [Codeblok]
- * Sorteert de reeks door de elementen door het codeblok te halen.
+ * @example
+ * ☞ x := List ← 2 ; 1 ; 3.
+ * x sort: { :a :b ↲ a < b.}.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sorter = argumentList->object;
@@ -849,25 +686,13 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [List] string
- *
- * Returns a string representation of the list and its contents.
- * This representation will be encoded in the Citrine language itself and can
- * therefore be evaluated again.
- * In the example: 'string' messages are implicitly
- * send by some objects, for instance when
- * attempting to write a List using a Pen.
- *
- * Usage:
- *
- * ☞ a := List ← 'hello' ; 'world'.
- * ☞ b := a string.
- * ☞ c := b evaluate.
- *
- * In other languages:
- * Dutch: [Reeks] tekst
- * Geeft een tekstuele versie van de reeks terug. Deze tekst kan opnieuw worden
- * ingelezen door Citrine om er een reeks van te maken (evalueer).
+ * @def
+ * [ List ] string
+ * 
+ * @example
+ * ☞ x := List ← 'a' ; 'b' ; 'c'.
+ * ☞ y := x string.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	int i;
@@ -920,17 +745,13 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 }
 
 /**
- * [List] fill: [Number] with: [Object]
+ * @def
+ * [ List ] fill: [ Number ] with: [ Object ]
  *
- * Fills the list with the specified number of objects.
- *
- * Usage:
- *
- * ☞ a := List new fill: 42 with: 'x'.
- *
- * In other languages:
- * Dutch: [Reeks] vul: [Getal] met: [Object]
- * Vult de reeks op met een gespecificeerd aantal elementen.
+ * @example
+ * ☞ x := List new
+ * fill: 10 with: 'X'.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
 	size_t n;
@@ -947,16 +768,13 @@ ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
- * [List] find: [Object].
+ * @def
+ * [ List ] find: [ Object ].
  *
- * Checks whether the specified object occurs in the list
- * and returns the index number if so.
- * If not, the index number -1 will be returned. Note that the comparison
- * will be performed by converting both values to strings.
- *
- * In other languages:
- * Dutch: [Reeks] vind: [Object]
- * Geeft de positie van het object terug of -1 als niet gevonden.
+ * @example
+ * ☞ x := List ← 1 ; 2 ; 3.
+ * ☞ y := x find: 2.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList ) {
 	int found = -1, i = 0;
@@ -976,17 +794,16 @@ ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList )
 }
 
 /**
+ * @def
  * Map
- *
- * Creates a Map object.
- *
- * Usage:
- *
- * ☞ files := Map new.
- * ☞ files put: 'readme.txt' at: 'textfile'.
- *
- * In other languages:
- * Dutch: Lijst een verzameling van gepaarde elementen in de vorm sleutel = waarde.
+ * 
+ * @example
+ * ☞ menu := Map new.
+ * menu 
+ * pizza: 8,
+ * hamburger: 12,
+ * pancake: 10.
+ * ✎ write: menu pizza, stop.
  */
 ctr_object* ctr_map_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -995,32 +812,25 @@ ctr_object* ctr_map_new(ctr_object* myclass, ctr_argument* argumentList) {
 }
 
 /**
- * [Map] type
+ * @def
+ * [ Map ] type
  *
- * Returns the string 'Map'.
- *
- * In other languages:
- * Dutch: [Lijst] tekst | Geeft een tekstuele beschrijving van de Lijst ('Lijst').
+ * @example
+ * ☞ x := Map new.
+ * ✎ write: x type, stop.
  */
 ctr_object* ctr_map_type(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( CTR_DICT_MAP_OBJECT );
 }
 
 /**
- * [Map] put: [Element] at: [Key]
+ * @def
+ * [ Map ] put: [ Object ] at: [ Object ]
  *
- * Puts a key-value pair in a map.
- *
- * Usage:
- *
- * map put: 'hello' at: 'world'.
- *
- * In other languages:
- * Dutch: [Lijst] zet: [Object] bij: [Object]
- * Zet het gespecificeerde object element bij de plek die bekend staat als
- * het andere object. Net als bij een reeks, alleen in dit geval is het tweede
- * Object de sleutel waarmee het eerste object weer uit de lijst gevist kan
- * worden.
+ * @example
+ * ☞ x := Map new.
+ * x put: 'hello' at: 'world'.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 	char* key;
@@ -1047,38 +857,17 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Map] [Key]: [Value]
+ * @def
+ * [ Map ] [ String ]: [Object]
  *
- * You can fill the map object with key-value pairs by sending any
- * binary or keyword message that is not part if its standard behaviour.
- * Likewise you can retrieve any value from the map by sending the corresponding key
- * as a unary message. This allows for a very natural looking notation to create
- * and modify map objects.
- *
- * Usage:
- *
- * ☞ menu := Map new
- *	Margherita: 11.90,
- *	Hawaii: 12.99,
- *	QuattroFormaggi: 13.00.
- *
- * ✎ write: ( menu ? 'Hawaii' ), brk.
- * ✎ write: ( menu Margherita ), brk.
- *
- * In other languages:
- *
- * Dutch: [Lijst] [Object]: [Object]
- * Snelle en leesbare notatie om objecten toe te voegen aan een lijst.
- * Elk bericht dat niet wordt herkend wordt door de lijst als een
- * sleutel beschouwd, het opvolgende object zal op de plek worden
- * gezet in de lijst die door de sleutel wordt aangegeven. Dus om een
- * menukaart te vullen kan men zeggen:
- *
- * ☞ menu := Lijst nieuw.
- * menu pannekoek: 10. (hier kopppelen we pannekoek aan 10)
- *
- * Om nu op te vragen hoeveel een pannekoek kost schrijven we:
- * ☞ prijs := menu pannekoek.
+ * @example
+ * ☞ x :=
+ * Map new
+ * Margherita: 11.90,
+ * Hawaii: 12.99,
+ * QuattroFormaggi: 13.00.
+ * ✎ write: ( x ? 'Hawaii' ), stop.
+ * ✎ write: ( x Margherita ), stop.
  */
 ctr_object* ctr_map_key_value(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newKey;
@@ -1093,13 +882,14 @@ ctr_object* ctr_map_key_value(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Map] - [String]
+ * @def
+ * [ Map ] - [ Object ]
  *
- * Deletes the entry, identified by the key specified in [String], from
- * the map.
- *
- * In other languages:
- * Dutch: [Lijst] - [Tekst] | Verwijderd de ingang voor aangegeven sleutel.
+ * @example
+ * ☞ x := Map new.
+ * x red: 'green', yellow: 'blue'.
+ * x - 'yellow'.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_internal_object_delete_property(myself, ctr_internal_cast2string(argumentList->object), 0);
@@ -1107,25 +897,13 @@ ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Map] keys
- *
- * Returns an array containing all the keys in the map.
- * The order of the keys is undefined. Use the sort message
- * to enforce a specific order. The 'entries' message
- * does exactly the same and is an alias for 'keys'.
- *
- * Usage:
- *
- * ☞ city        := List ← 'London' ; 'Paris' ; 'Berlin'.
- * ☞ temperature := List ← '15' ; '16' ; '15'.
- *
- * ☞ weather := temperature by: city.
- * cities := weather entries sort: {
- * 	:a :b  ↲ (a compare: b).
- * }.
- *
- * In other languages:
- * Dutch: [Lijst] ingangen | Geeft alle sleutels uit de lijst als een reeks.
+ * @def
+ * [ Map ] keys
+ * 
+ * @example
+ * ☞ x := Map new.
+ * x red: 'green', yellow: 'blue'.
+ * ✎ write: x keys, stop.
  */
 ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* list;
@@ -1144,24 +922,13 @@ ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Map] values
- *
- * Returns an array containing all the keys in the map.
- * The order of the keys is undefined. Use the sort message
- * to enforce a specific order.
- *
- * Usage:
- *
- * ☞ city        := List ← 'London' ; 'Paris' ; 'Berlin'.
- * ☞ temperature := List ← '15' ; '16' ; '15'.
- *
- * ☞ weather := temperature by: city.
- * temperatures := weather values sort: {
- * 	:a :b  ↲ (a compare: b).
- * }.
- *
- * In other languages:
- * Dutch: [Lijst] waarden | Geeft alle waarden uit de lijst als een reeks.
+ * @def
+ * [ Map ] values
+ * 
+ * @example
+ * ☞ x := Map new.
+ * x red: 'green', yellow: 'blue'.
+ * ✎ write: x values, stop.
  */
 ctr_object* ctr_map_values(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* list;
@@ -1180,12 +947,16 @@ ctr_object* ctr_map_values(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Map] at: [Key]
- *
- * Retrieves the value specified by the key from the map.
- *
- * In other languages:
- * Dutch: [Lijst] bij: [Object] | Geeft de waarde bij de bijbehorende sleutel.
+ * @def
+ * [ Map ] at: [ Object ]
+ * 
+ * @example
+ * ☞ x := Map new.
+ * x put: 'a' at: 'b'.
+ * x put: 'hello' at: 'world'.
+ * ✎ write: (x at: b), stop.
+ * ✎ write: (x world), stop.
+ * ✎ write: (x ? b), stop.
  */
 ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
 
@@ -1213,22 +984,17 @@ ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
 	return foundObject;
 }
 
-/**
- * [Map] ? [Key]
- *
- * Alias for [Map] at: [Key].
- *
- * In other languages:
- * Dutch: [Lijst] ? [Object] | Geeft de waarde bij de sleutel.
- */
 
 /**
- * [Map] count
+ * @def
+ * [ Map ] count
  *
- * Returns the number of elements in the map.
- *
- * In other languages:
- * Dutch: [Lijst] aantal | Geeft het aantal zaken op de lijst.
+ * @example
+ * ☞ x := Map new.
+ * x
+ * put: 'a' at: 'b',
+ * put: 'c' at: 'd'.
+ * ✎ write: x count, stop.
  */
 ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( myself->properties->size );
@@ -1253,13 +1019,21 @@ ctr_object* ctr_map_copy(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Map] each: [Block]
+ * @def
+ * [ Map ] each: [ Block ]
  *
- * Iterates over the map, passing key-value pairs to the specified block.
- * Note that within an each/map block, '⛏' and '⚿' refer to the collection.
- *
- * In other languages:
- * Dutch: [Lijst] elk: [Codeblok] | Past het blok code toe op elk paar uit de lijst.
+ * @example
+ * ☞ scores := Map new.
+ * scores
+ * team1: 100,
+ * team2: 200.
+ * scores each: { :team :score
+ * 	☞ x := 'Team: team score points ↵'.
+ *  x
+ *  team: team,
+ *  score: score.
+ *  ✎ write: x, stop.
+ * }.
  */
 ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
@@ -1299,30 +1073,14 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
 
 
 /**
- * [Map] has: [Object]
+ * @def
+ * [ Map ] has: [ Object ]
  *
- * Checks whether the map contains the specified value.
- * Note that the object gets converted to a string before
- * comparison. In case of a map or array this means the comparison
- * will be based on the serialized structure.
- * The example will output: True False False False False.
- *
- * Usage:
- *
- * ☞ shop := (Map new
- *	put: 'magazine' at: 'books',
- *	put: 'computer' at: 'electronics',
- *	put: 'lipstick' at: 'cosmetics'
- * ).
- * ✎ write: (shop has: 'computer'), end.
- * ✎ write: (shop has: 'sausage'), end.
- * ✎ write: (shop has: 'computers'), end.
- * ✎ write: (shop has: 'compute'), end.
- * ✎ write: (shop has: '2computer'), end.
- *
- * In other languages:
- * Dutch: [Lijst] heeft: [Object]
- * Beantwoord de vraag of het object op de lijst staat met Waar of Onwaar.
+ * @example
+ * ✎ x := Map new.
+ * x red: 'green', yellow: 'blue'.
+ * ✎ write: (x has: 'red'), stop.
+ * ✎ write: (x has: 'purple'), stop.
  */
 ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList) {
 	int found = 0;
@@ -1345,22 +1103,14 @@ ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
- * [Map] string
- *
- * Returns a string representation of a map encoded in Citrine itself.
- * This will give you an
- * evallable representation of the map and all of its members.
- * The sting method is automatically invoked when attempting to
- * print a Map:
- *
- * Usage
- *
- * m := (Map new) put: 'hello' at: 'world'.
- * x := m string.
- * ✎ write: (Map new).
- *
- * In other languages:
- * Dutch: [Lijst] tekst | Geeft tekstuele weergave van lijst (kan weer worden geevalueerd)
+ * @def
+ * [ Map ] string
+ * 
+ * @example
+ * ☞ x := Map new.
+ * x put: 'Hello' at: 'World'.
+ * ☞ y := x string.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object*  string;
