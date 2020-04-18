@@ -20,10 +20,10 @@ blokken afschuiven.
 Tekst bĳ: 'html' doen: {
 	
 	☞ html := ⛏ tekst kopieer.
+	html vervang: '&' door: '&amp;'.
 	html vervang: '"' door: '&quot;'.
 	html vervang: '<' door: '&lt;'.
 	html vervang: '>' door: '&gt;'.
-	html vervang: '&' door: '&amp;'.
 	html vervang: '↵' door: '<br>'.
 	↲ html.
 }.
