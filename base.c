@@ -1489,7 +1489,7 @@ ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
  * @example
  * ☞ x := 'Hello' = 'Hello'.
  * ✎ write: x, stop.
- * ☞ x := 'World' = 'Hello'.
+ * ☞ x := 'World' ≠ 'Hello'.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
