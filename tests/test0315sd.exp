@@ -1,0 +1,27 @@
+(نئون نقشو)رکيو:'a"b' تي:'test'
+Invalid JSON.
+(نئون نقشو)رکيو:(فهرست ←1 ; 2 ; (فهرست ←3 ; 4) ; ((نئون نقشو)رکيو:(فهرست ←3 ; 4) تي:'bar', رکيو:1 تي:'foo')) تي:'nested', رکيو:وڙو تي:'legend', رکيو:27 تي:'age', رکيو:'Jack' تي:'name'
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld
