@@ -8,3 +8,7 @@ for FILE in $(ls downloads/windows)
 do
 	echo "<li><a href=\"/downloads/iso/windows/${FILE}\">${FILE}</a></li>"
 done
+for FILE in $(ls downloads/OpenBSD)
+do
+	echo "<li><a href=\"/downloads/iso/OpenBSD/${FILE}\">${FILE}</a></li>"
+done
