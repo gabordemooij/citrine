@@ -1,4 +1,4 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 
 ☞ a := List ← 1 ; 2 ; 3.
 ✎ write: a count, stop.

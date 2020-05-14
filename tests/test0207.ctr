@@ -16,7 +16,7 @@
 	
 	between boundaries? false: {
 		✎ write: (
-			'WRONG: number !↵' number: x
+			‘WRONG: number !↵’ number: x
 		).
 		Program exit.
 	}.
@@ -34,7 +34,7 @@ a each: { :i :x
 				
 				
 				✎ write: (
-					'Can we draw a random no. between A and B ?'
+					‘Can we draw a random no. between A and B ?’
 					A (x * fx)
 					B (y * fy)
 				).
@@ -48,23 +48,23 @@ a each: { :i :x
 				} * 10.
 				
 				
-				✎ write: ' ✓OK ', stop.
+				✎ write: ‘ ✓OK ’, stop.
 				
 			}.
 		}.
 	}.
 }.
 
-✎ write: 'Can we draw a random(?) no. between 2 and 2 ?'.
+✎ write: ‘Can we draw a random(?) no. between 2 and 2 ?’.
 ☞ x := Number between: 2 and: 2.
 (x = 2) true: {
-	✎ write: ' ✓OK ', stop.
+	✎ write: ‘ ✓OK ’, stop.
 }.
 
-✎ write: 'Can we draw a random(?) no. between 1.5 and 1.9 ?'.
+✎ write: ‘Can we draw a random(?) no. between 1.5 and 1.9 ?’.
 ☞ x := Number between: 2 and: 2.
 (x = 2) true: {
-	✎ write: ' ✓OK ', stop.
+	✎ write: ‘ ✓OK ’, stop.
 }.
 
 

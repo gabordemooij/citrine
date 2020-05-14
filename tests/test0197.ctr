@@ -2,11 +2,11 @@
 
 Program tidiness: 4.
 {
-	✎ write: 'hi there!'.
-	this code block error: 'oops'.
-	✎ write: 'hi there!'.
-	{ ✎ write: 'dont print this'. } run.
+	✎ write: ‘hi there!’.
+	this code block error: ‘oops’.
+	✎ write: ‘hi there!’.
+	{ ✎ write: ‘dont print this’. } run.
 } catch: { :e 
-	✎ write: 'got ya!'. 
+	✎ write: ‘got ya!’. 
 	✎ write: e.
 }, run.

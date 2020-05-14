@@ -1,7 +1,7 @@
 ✎ write: ((List new
-	on: 'plaque:' do: { :x ⚿ o := x. },
-	on: 'plaque'  do: { ↲ ⚿ o. },
-	plaque: 'Let\'s build a pyramid of blocks!',
+	on: ‘plaque:’ do: { :x ⚿ o := x. },
+	on: ‘plaque’  do: { ↲ ⚿ o. },
+	plaque: ‘Let\’s build a pyramid of blocks!‘,
 	• (List ← 1)
 	• (List ← 1 ; 2)
 	• (List ← 1 ; 2 ; 3)

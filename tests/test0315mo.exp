@@ -1,6 +1,6 @@
-(Map neł) put:'a"b' at:'test'
+(Map neł) put:‘a"b’ at:‘test’
 Invalid JSON.
-(Map neł) put:(List ← 1 ; 2 ; (List ← 3 ; 4) ; ((Map neł) put:(List ← 3 ; 4) at:'bar', put:1 at:'foo')) at:'nested', put:False at:'legend', put:27 at:'age', put:'Jack' at:'name'
+(Map neł) put:(List ← 1 ; 2 ; (List ← 3 ; 4) ; ((Map neł) put:(List ← 3 ; 4) at:‘bar’, put:1 at:‘foo’)) at:‘nested’, put:False at:‘legend’, put:27 at:‘age’, put:‘Jack’ at:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

@@ -1,6 +1,6 @@
-(Karta ny) sätta vid:'a"b' __:'test'
+(Karta ny) sätta vid:‘a"b’ __:‘test’
 Invalid JSON.
-(Karta ny) sätta vid:(Lista ← 1 ; 2 ; (Lista ← 3 ; 4) ; ((Karta ny) sätta vid:(Lista ← 3 ; 4) __:'bar', sätta vid:1 __:'foo')) __:'nested', sätta vid:Falsk __:'legend', sätta vid:27 __:'age', sätta vid:'Jack' __:'name'
+(Karta ny) sätta vid:(Lista ← 1 ; 2 ; (Lista ← 3 ; 4) ; ((Karta ny) sätta vid:(Lista ← 3 ; 4) __:‘bar’, sätta vid:1 __:‘foo’)) __:‘nested’, sätta vid:Falsk __:‘legend’, sätta vid:27 __:‘age’, sätta vid:‘Jack’ __:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

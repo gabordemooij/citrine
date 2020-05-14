@@ -1,9 +1,9 @@
 ☞ a := Object new.
-a on: 'setVal:' do: { :v ⚿ value := v. }.
-a on: 'getVal' do: { ↲ ⚿ value. }.
-a setVal: 'hi'.
+a on: ‘setVal:’ do: { :v ⚿ value := v. }.
+a on: ‘getVal’ do: { ↲ ⚿ value. }.
+a setVal: ‘hi’.
 ✎ write: a getVal.
 ☞ b := a.
-b setVal: 'boo!'.
+b setVal: ‘boo!’.
 ✎ write: a getVal.
 ✎ write: b getVal.

@@ -1,11 +1,11 @@
 9
-a Ntho '[Object]'  is NOT Nil.
-a Boolean 'Ke nnete'  is NOT Nil.
-a Boolean 'Bohata'  is NOT Nil.
-a Boolean 'Bohata'  is NOT Nil.
-a Palo '1'  is NOT Nil.
-a Palo '0'  is NOT Nil.
-a Khoele 'Str'  is NOT Nil.
-a Khoele ''  is NOT Nil.
-a Khoutu '[Block]'  is NOT Nil.
+a Ntho ‘[Object]’  is NOT Nil.
+a Boolean ‘Ke nnete’  is NOT Nil.
+a Boolean ‘Bohata’  is NOT Nil.
+a Boolean ‘Bohata’  is NOT Nil.
+a Palo ‘1’  is NOT Nil.
+a Palo ‘0’  is NOT Nil.
+a Khoele ‘Str’  is NOT Nil.
+a Khoele ‘’  is NOT Nil.
+a Khoutu ‘[Block]’  is NOT Nil.
 but.. Nil is.. certainly NIL!

@@ -1,7 +1,7 @@
-(('abcdef' from: 3 length: 4 - 1) = 'cde') true: { ✎ write: 'yes'.}.
-✎ write: 'a' + 1.
-✎ write: 'x' + 3.5.
-✎ write: 'y' + True.
-✎ write: 'z' + False + Nil + 2.
+((‘abcdef’ from: 3 length: 4 - 1) = ‘cde’) true: { ✎ write: ‘yes’.}.
+✎ write: ‘a’ + 1.
+✎ write: ‘x’ + 3.5.
+✎ write: ‘y’ + True.
+✎ write: ‘z’ + False + Nil + 2.
 
 

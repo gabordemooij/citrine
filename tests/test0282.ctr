@@ -1,4 +1,4 @@
-☞ Italian places := List ← 'Venice' ; 'Rome' ; 'Pompeii' ; 'Naples'.
+☞ Italian places := List ← ‘Venice’ ; ‘Rome’ ; ‘Pompeii’ ; ‘Naples’.
 
 ✎ write: (Italian places first), stop.
 ✎ write: (Italian places last), stop.

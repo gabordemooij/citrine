@@ -1,13 +1,13 @@
 ☞ list := List new.
-list • 'hello'.
+list • ‘hello’.
 ✎ write: list count.
-list append: 'world'.
+list append: ‘world’.
 ✎ write: list count.
 ✎ write: list pop, write: list count.
-list append: 'there'.
+list append: ‘there’.
 ✎ write: list count.
 ✎ write: (list position: 1), write: (list position: 2).
-list put: 'xmas' at: 2.
-list put: 'merry' at: 1.
+list put: ‘xmas’ at: 2.
+list put: ‘merry’ at: 1.
 ✎ write: list count.
 ✎ write: (list position: 1), write: (list position: 2).

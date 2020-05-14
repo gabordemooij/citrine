@@ -1,4 +1,4 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 
-☞ str := 'write:'.
-✎ message: 'write:' arguments: 0.
+☞ str := ‘write:’.
+✎ message: ‘write:’ arguments: 0.

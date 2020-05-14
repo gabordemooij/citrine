@@ -1,10 +1,10 @@
 
 ☞ a := 0.
 {
-	✎ write: 'Block 1.\n'.
-	this code block error: 'Err'.
+	✎ write: ‘Block 1.\n’.
+	this code block error: ‘Err’.
 	a := 1.
 } catch: {
-	✎ write: 'Catch Block.\n'.
-	✎ write: 'a = ' + a, stop.
+	✎ write: ‘Catch Block.\n’.
+	✎ write: ‘a = ’ + a, stop.
 }, run.

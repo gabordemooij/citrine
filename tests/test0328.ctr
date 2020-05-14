@@ -1,23 +1,23 @@
 Program tidiness: 4.
 
 
-'>pinning result: 6 (0xafec5ce3608) to context: 0xafec5ce4d88 (0) 
+‘>pinning result: 6 (0xafec5ce3608) to context: 0xafec5ce4d88 (0) 
 >pinning result: 12 (0xaff4cacb188) to context: 0xafec5ce4d88 (0) 
 >pinning result: 36 (0xaff4cacb788) to context: 0xafec5ce4d88 (0) 
 >pinning result: 6 (0xaff010dc848) to context: 0xafec5ce4d88 (0) 
 >pinning result: 12 (0xafec5ce3f08) to context: 0xafec5ce4d88 (0) 
 >pinning result: 36 (0xafec5ce3648) to context: 0xafec5ce4d88 (0) 
-Bus error (core dumped)'.
+Bus error (core dumped)’.
 
 
 ☞ Doubler := Object new.
 ☞ Multiplier := Object new.
-Doubler on: 'double:and:' do: { :x :y
+Doubler on: ‘double:and:’ do: { :x :y
 	☞ q := x + 1.
 	↲ ((x * 2) + (y * 2)).
 }.
 
-Multiplier on: 'multiply:and:' do: { :x :y
+Multiplier on: ‘multiply:and:’ do: { :x :y
 	↲ (x * y).
 }.
 

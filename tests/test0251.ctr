@@ -1,12 +1,12 @@
 
 
-Number on: 'describe' do: {
+Number on: ‘describe’ do: {
 	☞ text := Nil.
 	( ⛏ = 0 ) true: {
-		text := 'zero'.
+		text := ‘zero’.
 	}.
 	( ⛏ = 1 ) true: {
-		text := 'one'.
+		text := ‘one’.
 	}.
 	↲ text.
 }.

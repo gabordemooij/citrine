@@ -1,6 +1,6 @@
-(Kaart nij) put:'a"b' at:'test'
+(Kaart nij) put:‘a"b’ at:‘test’
 Invalid JSON.
-(Kaart nij) put:(List ← 1 ; 2 ; (List ← 3 ; 4) ; ((Kaart nij) put:(List ← 3 ; 4) at:'bar', put:1 at:'foo')) at:'nested', put:Falsk at:'legend', put:27 at:'age', put:'Jack' at:'name'
+(Kaart nij) put:(List ← 1 ; 2 ; (List ← 3 ; 4) ; ((Kaart nij) put:(List ← 3 ; 4) at:‘bar’, put:1 at:‘foo’)) at:‘nested’, put:Falsk at:‘legend’, put:27 at:‘age’, put:‘Jack’ at:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

@@ -1,11 +1,11 @@
 9
-a Objecte '[Object]'  is NOT Nil.
-a Booleà 'És cert'  is NOT Nil.
-a Booleà 'Fals'  is NOT Nil.
-a Booleà 'Fals'  is NOT Nil.
-a Número '1'  is NOT Nil.
-a Número '0'  is NOT Nil.
-a Cadena 'Str'  is NOT Nil.
-a Cadena ''  is NOT Nil.
-a Codi '[Block]'  is NOT Nil.
+a Objecte ‘[Object]’  is NOT Nil.
+a Booleà ‘És cert’  is NOT Nil.
+a Booleà ‘Fals’  is NOT Nil.
+a Booleà ‘Fals’  is NOT Nil.
+a Número ‘1’  is NOT Nil.
+a Número ‘0’  is NOT Nil.
+a Cadena ‘Str’  is NOT Nil.
+a Cadena ‘’  is NOT Nil.
+a Codi ‘[Block]’  is NOT Nil.
 but.. Nil is.. certainly NIL!

@@ -2,4 +2,4 @@
 ☞ b:= Map new.
 a link: b.
 b link: a.
-✎ write: 'No infinite recursion in GC.'.
+✎ write: ‘No infinite recursion in GC.’.

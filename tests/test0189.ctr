@@ -1,4 +1,4 @@
-Boolean on: 'xor:' do: { :b
+Boolean on: ‘xor:’ do: { :b
 	↲ ((⛏ and: b not) or: (⛏ not and: b)).
 }.
 
@@ -16,19 +16,19 @@ Program tidiness: 0.
 ☞ isHuman := (money or: desire).
 ☞ isRobot := (money ! desire).
 ☞ PoemAboutLife := 
-	'I am a ' + 
-	(isHuman either: 'human being' or: 'not a human being') +
-	', ' +
-	(isRobot either: 'robot' or: 'not a robot') +
-	', so I have ' +
-	( desire either: 'desires' or: 'no desires') +
-	' but ' +
-	(money either: 'money' or: 'no money') +
-	', so I am' +
-	(depression either: 'depressive' or: 'happy') +
-	' because I ' +
-	(canDo either: 'can do what I want' or: 'cannot do what I want') +
-	' to do to make this world a better place.'.
+	‘I am a ’ + 
+	(isHuman either: ‘human being’ or: ‘not a human being’) +
+	‘, ’ +
+	(isRobot either: ‘robot’ or: ‘not a robot’) +
+	‘, so I have ’ +
+	( desire either: ‘desires’ or: ‘no desires’) +
+	‘ but ’ +
+	(money either: ‘money’ or: ‘no money’) +
+	‘, so I am’ +
+	(depression either: ‘depressive’ or: ‘happy’) +
+	‘ because I ’ +
+	(canDo either: ‘can do what I want’ or: ‘cannot do what I want’) +
+	‘ to do to make this world a better place.’.
 Boolean flip. 
 ✎ write: PoemAboutLife, stop.
 
@@ -44,19 +44,19 @@ depression := (money xor: desire).
 isHuman := (money or: desire).
 isRobot := (money ! desire).
 PoemAboutLife := 
-	'I am a ' + 
-	(isHuman either: 'human being' or: 'not a human being') +
-	', ' +
-	(isRobot either: 'robot' or: 'not a robot') +
-	', so I have ' +
-	( desire either: 'desires' or: 'no desires') +
-	' but ' +
-	(money either: 'money' or: 'no money') +
-	', so I am' +
-	(depression either: 'depressive' or: 'happy') +
-	' because I ' +
-	(canDo either: 'can do what I want' or: 'cannot do what I want') +
-	' to do to make this world a better place.'.
+	‘I am a ’ + 
+	(isHuman either: ‘human being’ or: ‘not a human being’) +
+	‘, ’ +
+	(isRobot either: ‘robot’ or: ‘not a robot’) +
+	‘, so I have ’ +
+	( desire either: ‘desires’ or: ‘no desires’) +
+	‘ but ’ +
+	(money either: ‘money’ or: ‘no money’) +
+	‘, so I am’ +
+	(depression either: ‘depressive’ or: ‘happy’) +
+	‘ because I ’ +
+	(canDo either: ‘can do what I want’ or: ‘cannot do what I want’) +
+	‘ to do to make this world a better place.’.
 Boolean flip. 
 ✎ write: PoemAboutLife, stop.
 
@@ -73,19 +73,19 @@ depression := (money xor: desire).
 isHuman := (money or: desire).
 isRobot := (money ! desire).
 PoemAboutLife := 
-	'I am a ' + 
-	(isHuman either: 'human being' or: 'not a human being') +
-	', ' +
-	(isRobot either: 'robot' or: 'not a robot') +
-	', so I have ' +
-	( desire either: 'desires' or: 'no desires') +
-	' but ' +
-	(money either: 'money' or: 'no money') +
-	', so I am' +
-	(depression either: 'depressive' or: 'happy') +
-	' because I ' +
-	(canDo either: 'can do what I want' or: 'cannot do what I want') +
-	' to do to make this world a better place.'.
+	‘I am a ’ + 
+	(isHuman either: ‘human being’ or: ‘not a human being’) +
+	‘, ’ +
+	(isRobot either: ‘robot’ or: ‘not a robot’) +
+	‘, so I have ’ +
+	( desire either: ‘desires’ or: ‘no desires’) +
+	‘ but ’ +
+	(money either: ‘money’ or: ‘no money’) +
+	‘, so I am’ +
+	(depression either: ‘depressive’ or: ‘happy’) +
+	‘ because I ’ +
+	(canDo either: ‘can do what I want’ or: ‘cannot do what I want’) +
+	‘ to do to make this world a better place.’.
 Boolean flip. 
 ✎ write: PoemAboutLife, stop.
 
@@ -95,7 +95,7 @@ usedMemory3 := (Program memory ? 1).
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	✎ write: 'No memory leaks here'.
+	✎ write: ‘No memory leaks here’.
 }, false: {
-	✎ write: 'Leaking memory...'.
+	✎ write: ‘Leaking memory...’.
 }.

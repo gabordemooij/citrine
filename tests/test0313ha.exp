@@ -6,5 +6,5 @@ The garden is Nil meters long.
 Luckily, this day, there are Nil wasps in the garden.
 The dog named Nil sleeps under the tree.
 a\"bb\"ccc\"
-(Taswira sabo) sanya:((Taswira sabo) sanya:Nil _a:dog, sanya:Nil _a:insects, sanya:((Taswira sabo) sanya:15 _a:'length', sanya:8 _a:'width') _a:'size', sanya:(Lissafi ← 'tulips' ; 'roses' ; 'lillies') _a:'flower', sanya:Karya _a:'shed', sanya:Gaskiya ne _a:'pool', sanya:2 _a:'chairs') _a:'garden'
+(Taswira sabo) sanya:((Taswira sabo) sanya:Nil _a:dog, sanya:Nil _a:insects, sanya:((Taswira sabo) sanya:15 _a:‘length’, sanya:8 _a:‘width’) _a:‘size’, sanya:(Lissafi ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _a:‘flower’, sanya:Karya _a:‘shed’, sanya:Gaskiya ne _a:‘pool’, sanya:2 _a:‘chairs’) _a:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

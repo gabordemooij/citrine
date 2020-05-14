@@ -1,12 +1,12 @@
-✎ write: 'Hello' bytes.
-✎ write: 'Great' bytes + 5.
-✎ write: '象形' bytes - '象形' length.
-✎ write: ('Hello!' from: 2 length: 3).
-✎ write: ('Hello!' from: 3 length: 3).
+✎ write: ‘Hello’ bytes.
+✎ write: ‘Great’ bytes + 5.
+✎ write: ‘象形’ bytes - ‘象形’ length.
+✎ write: (‘Hello!’ from: 2 length: 3).
+✎ write: (‘Hello!’ from: 3 length: 3).
 ☞ a := 2.
 ☞ b := 5.
-✎ write: ('Hello!' from: ( a + 1 ) length: b - a).
-✎ write: ('形声字形聲字' from: 3 length: 3).
-✎ write: '形声字形聲字' length.
-✎ write: '形声a' length.
-✎ write: 'Organ' + 'Works'.
+✎ write: (‘Hello!’ from: ( a + 1 ) length: b - a).
+✎ write: (‘形声字形聲字’ from: 3 length: 3).
+✎ write: ‘形声字形聲字’ length.
+✎ write: ‘形声a’ length.
+✎ write: ‘Organ’ + ‘Works’.

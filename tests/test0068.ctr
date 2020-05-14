@@ -1,32 +1,32 @@
-☞ w := 'A_bottle_of_Whisky and a rare steak.'.
-✎ write: '=== Basic test, grab the bottle! ===', stop.
-✎ write: '>'+(w from:3 length: 6), stop. 
-✎ write: '>'+(w from:9 length: -6), stop. 
-✎ write: '>'+(w from:3 length: 6), stop. 
-✎ write: '>'+(w from:9 length: -6), stop. 
-✎ write: '=== Take a single char ===', stop.
-✎ write: '>'+(w from:8 length: 1), stop. 
-✎ write: '>'+(w from:8 length: 1), stop. 
-✎ write: '=== The 0 case, empty string ===', stop.
-✎ write: '>'+(w from:8 length: 0), stop. 
-✎ write: '>'+(w from:8 length: 0), stop. 
-✎ write: '=== Edge case, first character only ===', stop.
-✎ write: '>'+(w from:1 length: 1), stop. 
-✎ write: '>'+(w from:1 length: 1), stop. 
-✎ write: '>'+(w from:2 length: -1), stop. 
-✎ write: '>'+(w from:2 length: -1), stop. 
-✎ write: '=== Edge case, last character only ===', stop.
-✎ write: '>'+(w from:36 length: 1), stop. 
-✎ write: '>'+(w from:36 length: 1), stop. 
-✎ write: '>'+(w from:37 length: -1), stop. 
-✎ write: '>'+(w from:37 length: -1), stop. 
-✎ write: '=== Out of bounds, empty string ===', stop.
-✎ write: '>'+(w from:37 length: 37), stop. 
-✎ write: '>'+(w from:37 length: 47), stop. 
-✎ write: '>'+(w from:-1 length: -2), stop. 
-✎ write: '>'+(w from:-2 length: -1), stop. 
-✎ write: '=== Part out of bounds, full string ===', stop.
-✎ write: '>'+(w from:-20 length: 90), stop. 
-✎ write: '>'+(w from:90 length: -20), stop. 
-✎ write: '>'+(w from:-20 length: 90), stop. 
-✎ write: '>'+(w from:90 length: -120), stop. 
+☞ w := ‘A_bottle_of_Whisky and a rare steak.’.
+✎ write: ‘=== Basic test, grab the bottle! ===’, stop.
+✎ write: ‘>’+(w from:3 length: 6), stop. 
+✎ write: ‘>’+(w from:9 length: -6), stop. 
+✎ write: ‘>’+(w from:3 length: 6), stop. 
+✎ write: ‘>’+(w from:9 length: -6), stop. 
+✎ write: ‘=== Take a single char ===’, stop.
+✎ write: ‘>’+(w from:8 length: 1), stop. 
+✎ write: ‘>’+(w from:8 length: 1), stop. 
+✎ write: ‘=== The 0 case, empty string ===’, stop.
+✎ write: ‘>’+(w from:8 length: 0), stop. 
+✎ write: ‘>’+(w from:8 length: 0), stop. 
+✎ write: ‘=== Edge case, first character only ===’, stop.
+✎ write: ‘>’+(w from:1 length: 1), stop. 
+✎ write: ‘>’+(w from:1 length: 1), stop. 
+✎ write: ‘>’+(w from:2 length: -1), stop. 
+✎ write: ‘>’+(w from:2 length: -1), stop. 
+✎ write: ‘=== Edge case, last character only ===’, stop.
+✎ write: ‘>’+(w from:36 length: 1), stop. 
+✎ write: ‘>’+(w from:36 length: 1), stop. 
+✎ write: ‘>’+(w from:37 length: -1), stop. 
+✎ write: ‘>’+(w from:37 length: -1), stop. 
+✎ write: ‘=== Out of bounds, empty string ===’, stop.
+✎ write: ‘>’+(w from:37 length: 37), stop. 
+✎ write: ‘>’+(w from:37 length: 47), stop. 
+✎ write: ‘>’+(w from:-1 length: -2), stop. 
+✎ write: ‘>’+(w from:-2 length: -1), stop. 
+✎ write: ‘=== Part out of bounds, full string ===’, stop.
+✎ write: ‘>’+(w from:-20 length: 90), stop. 
+✎ write: ‘>’+(w from:90 length: -20), stop. 
+✎ write: ‘>’+(w from:-20 length: 90), stop. 
+✎ write: ‘>’+(w from:90 length: -120), stop. 

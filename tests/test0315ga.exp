@@ -1,6 +1,6 @@
-(Léarscáil nua) put:'a"b' at:'test'
+(Léarscáil nua) put:‘a"b’ at:‘test’
 Invalid JSON.
-(Léarscáil nua) put:(Liosta ← 1 ; 2 ; (Liosta ← 3 ; 4) ; ((Léarscáil nua) put:(Liosta ← 3 ; 4) at:'bar', put:1 at:'foo')) at:'nested', put:Bréagach at:'legend', put:27 at:'age', put:'Jack' at:'name'
+(Léarscáil nua) put:(Liosta ← 1 ; 2 ; (Liosta ← 3 ; 4) ; ((Léarscáil nua) put:(Liosta ← 3 ; 4) at:‘bar’, put:1 at:‘foo’)) at:‘nested’, put:Bréagach at:‘legend’, put:27 at:‘age’, put:‘Jack’ at:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

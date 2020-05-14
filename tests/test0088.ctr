@@ -1,6 +1,6 @@
 
-☞ santaLaugh := 'ho'.
-☞ laugh := ''.
+☞ santaLaugh := ‘ho’.
+☞ laugh := ‘’.
 { laugh := laugh + santaLaugh. } * 3.
 ✎ write: laugh, stop.
 

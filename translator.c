@@ -123,6 +123,10 @@ void ctr_notebook_clear_marks() {
  * code pointers. This way messages can be translated 'as a whole'.
  */
 void ctr_note_attach( ctr_note* note, char* buffer ) {
+	if (!note) {
+		printf("Invalid");
+		exit(1);
+	}
 	memcpy(note->attachment,buffer,strlen(buffer));
 }
 
@@ -135,12 +139,13 @@ void ctr_note_attach( ctr_note* note, char* buffer ) {
  * code pointers. This way messages can be translated 'as a whole'.
  */
 ctr_note* ctr_notebook_search( char* codePoint ) {
+	ctr_note* found = NULL;
 	ctr_note* note = firstNote;
 	while(note) {
-		if ( note->attachedTo == codePoint ) {  break; }
+		if ( note->attachedTo == codePoint ) { found = note;  break; }
 		note = note->next;
 	}
-	return note;
+	return found;
 }
 
 /**
@@ -152,15 +157,17 @@ ctr_note* ctr_notebook_search( char* codePoint ) {
  * code pointers. This way messages can be translated 'as a whole'.
  */
 ctr_note* ctr_note_grab( int mark ) {
+	ctr_note* found = NULL;
 	ctr_note* note = firstNote;
 	while(note != NULL) {
 		if (note->mark == mark) {
 			note->mark = -1;
+			found = note;
 			break;
 		}
 		note = note->next;
 	}
-	return note;
+	return found;
 }
 
 /**
@@ -265,8 +272,6 @@ ctr_dict* ctr_translate_load_dictionary() {
 	ctr_dict* e;
 	int qq = 0;
 	while( fscanf( file, "%c \"%200[^\"]\" \"%200[^\"]\"\n", &translationType, word, translation) > 0 ) {
-		
-		
 		if (translationType != 't' && translationType != 's' && translationType != 'd' && translationType != 'x') {
 			printf("Invalid translation line: %d \n",qq);
 			exit(1);
@@ -309,11 +314,6 @@ ctr_dict* ctr_translate_load_dictionary() {
 						format = CTR_TERR_AMWORD;
 						buffer = ctr_heap_allocate( 600 * sizeof(char) );
 						snprintf( buffer, 600 * sizeof(char), format, word );
-						printf("----> |%s| \n",entry->word);
-						printf("----> |%s| \n",word);
-						printf("----> |%s| \n",entry->translation);
-						printf("----> |%s| \n",translation);
-						printf("----> %d \n",qq);
 						ctr_print_error( buffer, 1 );
 					}
 				}
@@ -442,15 +442,17 @@ char* ctr_translate_string(char* codePointer, ctr_dict* dictionary) {
 	char* e;
 	char* p;
 	p = codePointer;
+	e = ctr_clex_code_pointer();
+	fwrite(p, ((e - ctr_clex_keyword_qo_len) - p),1, stdout);
 	s = ctr_clex_readstr();
 	l = ctr_clex_tok_value_length(s);
 	e = ctr_clex_code_pointer();
-	fwrite(p, e-p-l, 1, stdout);
+	ctr_translate_translate(CTR_DICT_QUOT_OPEN,ctr_clex_keyword_qo_len,dictionary,'t',NULL);
 	if (!ctr_translate_translate(s,l,dictionary,'s',NULL)) {
 		fwrite(s,l,1,stdout);
 	}
 	ctr_clex_tok();
-	fwrite("'", 1, 1, stdout);
+	ctr_translate_translate(CTR_DICT_QUOT_CLOSE,ctr_clex_keyword_qc_len,dictionary,'t',NULL);
 	e = ctr_clex_code_pointer();
 	return e;
 }

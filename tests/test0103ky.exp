@@ -1,11 +1,11 @@
 9
-a зат '[Object]'  is NOT Nil.
-a логикалык 'True'  is NOT Nil.
-a логикалык 'False'  is NOT Nil.
-a логикалык 'False'  is NOT Nil.
-a сан '1'  is NOT Nil.
-a сан '0'  is NOT Nil.
-a аркан 'Str'  is NOT Nil.
-a аркан ''  is NOT Nil.
-a Code '[Block]'  is NOT Nil.
+a зат ‘[Object]’  is NOT Nil.
+a логикалык ‘True’  is NOT Nil.
+a логикалык ‘False’  is NOT Nil.
+a логикалык ‘False’  is NOT Nil.
+a сан ‘1’  is NOT Nil.
+a сан ‘0’  is NOT Nil.
+a аркан ‘Str’  is NOT Nil.
+a аркан ‘’  is NOT Nil.
+a Code ‘[Block]’  is NOT Nil.
 but.. Nil is.. certainly NIL!

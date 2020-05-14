@@ -1,16 +1,16 @@
 ☞ Animal := Object new.
-Animal on: 'make' do: {
+Animal on: ‘make’ do: {
 	☞ animal := Object new.
-	animal on: 'makeSound' do: {
+	animal on: ‘makeSound’ do: {
 		✎ write: ⚿ sound.
 	}.
 	↲animal.
 }.
 ☞ Cat := Object new.
-Cat on: 'make' do: {
+Cat on: ‘make’ do: {
 	☞ cat := Animal make.
-	cat on: 'init' do: {
-		⚿ sound := 'meow!'.
+	cat on: ‘init’ do: {
+		⚿ sound := ‘meow!’.
 	}.
 	cat init.
 	↲cat.

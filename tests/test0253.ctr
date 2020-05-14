@@ -1,11 +1,11 @@
 
 
 ☞ clock := Moment
-	new zone: 'Europe/Amsterdam',
+	new zone: ‘Europe/Amsterdam’,
 	year: 2017, month: 7, day: 13,
 	hour: 18, minute: 0, second: 0.
 
-clock on: 'tell' do: {
+clock on: ‘tell’ do: {
 	✎ write: ⛏, stop.
 }.
 

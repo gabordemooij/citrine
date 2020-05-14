@@ -1,6 +1,6 @@
-(Faʻafanua fou) tuʻu:'a"b' _i:'test'
+(Faʻafanua fou) tuʻu:‘a"b’ _i:‘test’
 Invalid JSON.
-(Faʻafanua fou) tuʻu:(Lisi ← 1 ; 2 ; (Lisi ← 3 ; 4) ; ((Faʻafanua fou) tuʻu:(Lisi ← 3 ; 4) _i:'bar', tuʻu:1 _i:'foo')) _i:'nested', tuʻu:Sese _i:'legend', tuʻu:27 _i:'age', tuʻu:'Jack' _i:'name'
+(Faʻafanua fou) tuʻu:(Lisi ← 1 ; 2 ; (Lisi ← 3 ; 4) ; ((Faʻafanua fou) tuʻu:(Lisi ← 3 ; 4) _i:‘bar’, tuʻu:1 _i:‘foo’)) _i:‘nested’, tuʻu:Sese _i:‘legend’, tuʻu:27 _i:‘age’, tuʻu:‘Jack’ _i:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

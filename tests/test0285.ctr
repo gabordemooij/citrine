@@ -1,13 +1,13 @@
 
 ☞ ⚄ := Object new.
 
-⚄ on: 'type' do: {
-	↲ 'Object'.
+⚄ on: ‘type’ do: {
+	↲ ‘Object’.
 }.
 
-✎ write: '⇿?↵' ? ⚄ type.
-✎ write: '⇿?↵' ? Moment type.
-✎ write: '⇿?↵' ? Program type.
-✎ write: '⇿?↵' ? (1 ≠ 2).
-✎ write: '⇿?↵' ? (2 ≥ 1).
-✎ write: '⇿?↵' ? (1 ≤ 2).
+✎ write: ‘⇿?↵’ ? ⚄ type.
+✎ write: ‘⇿?↵’ ? Moment type.
+✎ write: ‘⇿?↵’ ? Program type.
+✎ write: ‘⇿?↵’ ? (1 ≠ 2).
+✎ write: ‘⇿?↵’ ? (2 ≥ 1).
+✎ write: ‘⇿?↵’ ? (1 ≤ 2).

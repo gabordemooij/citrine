@@ -1,6 +1,6 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 
 ☞ o := Object new.
-o on: 'test' do: {
+o on: ‘test’ do: {
 	⚿ := 123.
 }.

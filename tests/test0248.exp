@@ -1,5 +1,5 @@
 String
-List ← ((Map new) put:(List ← ((Map new) put:'2017-01-01' at:'created', put:'<html></html>' at:'body', put:'home' at:'title') ; ((Map new) put:'<credits>Author Inc.</credits>' at:'body', put:'aboutus(c)' at:'title')) at:'pages', put:'domain' at:'mywebsite.com')
+List ← ((Map new) put:(List ← ((Map new) put:‘2017-01-01’ at:‘created’, put:‘<html></html>’ at:‘body’, put:‘home’ at:‘title’) ; ((Map new) put:‘<credits>Author Inc.</credits>’ at:‘body’, put:‘aboutus(c)’ at:‘title’)) at:‘pages’, put:‘domain’ at:‘mywebsite.com’)
 <credits>Author Inc.</credits>
 String
-(Map new) put:'2017-01-01' at:'created', put:'<html></html>' at:'body', put:'home' at:'title'
+(Map new) put:‘2017-01-01’ at:‘created’, put:‘<html></html>’ at:‘body’, put:‘home’ at:‘title’

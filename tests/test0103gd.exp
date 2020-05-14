@@ -1,11 +1,11 @@
 9
-a Rud '[Object]'  is NOT Nil.
-a Boole 'Fìor'  is NOT Nil.
-a Boole 'Meallta'  is NOT Nil.
-a Boole 'Meallta'  is NOT Nil.
-a Àireamh '1'  is NOT Nil.
-a Àireamh '0'  is NOT Nil.
-a String 'Str'  is NOT Nil.
-a String ''  is NOT Nil.
-a Còd '[Block]'  is NOT Nil.
+a Rud ‘[Object]’  is NOT Nil.
+a Boole ‘Fìor’  is NOT Nil.
+a Boole ‘Meallta’  is NOT Nil.
+a Boole ‘Meallta’  is NOT Nil.
+a Àireamh ‘1’  is NOT Nil.
+a Àireamh ‘0’  is NOT Nil.
+a String ‘Str’  is NOT Nil.
+a String ‘’  is NOT Nil.
+a Còd ‘[Block]’  is NOT Nil.
 but.. Nil is.. certainly NIL!

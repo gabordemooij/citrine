@@ -1,6 +1,6 @@
-(Kort ny) sætte:'a"b' på:'test'
+(Kort ny) sætte:‘a"b’ på:‘test’
 Invalid JSON.
-(Kort ny) sætte:(Liste ← 1 ; 2 ; (Liste ← 3 ; 4) ; ((Kort ny) sætte:(Liste ← 3 ; 4) på:'bar', sætte:1 på:'foo')) på:'nested', sætte:Falsk på:'legend', sætte:27 på:'age', sætte:'Jack' på:'name'
+(Kort ny) sætte:(Liste ← 1 ; 2 ; (Liste ← 3 ; 4) ; ((Kort ny) sætte:(Liste ← 3 ; 4) på:‘bar’, sætte:1 på:‘foo’)) på:‘nested’, sætte:Falsk på:‘legend’, sætte:27 på:‘age’, sætte:‘Jack’ på:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

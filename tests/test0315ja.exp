@@ -1,6 +1,6 @@
-(地図 新着) put：at：__:'a"b' __:'test'
+(地図 新着) put：at：__:‘a"b’ __:‘test’
 Invalid JSON.
-(地図 新着) put：at：__:(リスト ← 1 ; 2 ; (リスト ← 3 ; 4) ; ((地図 新着) put：at：__:(リスト ← 3 ; 4) __:'bar', put：at：__:1 __:'foo')) __:'nested', put：at：__:誤り __:'legend', put：at：__:27 __:'age', put：at：__:'Jack' __:'name'
+(地図 新着) put：at：__:(リスト ← 1 ; 2 ; (リスト ← 3 ; 4) ; ((地図 新着) put：at：__:(リスト ← 3 ; 4) __:‘bar’, put：at：__:1 __:‘foo’)) __:‘nested’, put：at：__:誤り __:‘legend’, put：at：__:27 __:‘age’, put：at：__:‘Jack’ __:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

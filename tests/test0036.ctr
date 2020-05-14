@@ -1,9 +1,9 @@
 {
-	☞ a := 'First'.
-	☞ b := 'Second'.
+	☞ a := ‘First’.
+	☞ b := ‘Second’.
 	a := b.
 	☞ garbageMaker := Object new.
-	garbageMaker method: 'putGarbageOnScreen' does: {
+	garbageMaker method: ‘putGarbageOnScreen’ does: {
 		☞ x := 1.
 		☞ y := 2.
 		Program clean memory.

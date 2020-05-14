@@ -1,13 +1,13 @@
-☞ a := List ← Object ; True ; False ; Boolean ; 1 ; Number ; 'Str' ; String ; { 'Empty'. }.
+☞ a := List ← Object ; True ; False ; Boolean ; 1 ; Number ; ‘Str’ ; String ; { ‘Empty’. }.
 ✎ write: (a count), stop.
 { :i
 	✎ write: 
-		'a ' + 
+		‘a ’ + 
 		((a ? i) type) +
-		' \''+((a ? i))+'\' '+
-		' is ' +
-		(((a ? i) Nil?) either: '' or: 'NOT') + 
-		' Nil.',
+		(‘ ‘this’ ’ this: (a ? i))  +
+		‘ is ’ +
+		(((a ? i) Nil?) either: ‘’ or: ‘NOT’) + 
+		‘ Nil.’,
 		stop.
 } * (a count).
-✎ write: 'but.. Nil is.. ' + ((Nil Nil?) either: 'certainly NIL!' or: 'not NIL??'), stop.
+✎ write: ‘but.. Nil is.. ’ + ((Nil Nil?) either: ‘certainly NIL!’ or: ‘not NIL??’), stop.

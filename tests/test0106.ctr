@@ -1,4 +1,4 @@
-Number on: 'factorial' do: {
+Number on: ‘factorial’ do: {
 	☞ total := 1.
 	{ :index total multiply by: (⛏ - ( index - 1 ) ). } * ⛏.
 	↲ total.

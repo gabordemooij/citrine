@@ -1,14 +1,14 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 
-✎ write: 'Trigger an error'.
-
-
+✎ write: ‘Trigger an error’.
 
 
-{ ✎ write: 'aaa'. 
+
+
+{ ✎ write: ‘aaa’. 
 	{
 
-		this code block error: 'Hi!'.
+		this code block error: ‘Hi!’.
 		} run.
 
 

@@ -1,8 +1,8 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 ☞ x := List ← 2 ; 3 ; 4.
 
 x each: { :i :v
-	x put: 'x' at: i.
+	x put: ‘x’ at: i.
 }.
 
 ✎ write: x, stop.
@@ -10,7 +10,7 @@ x each: { :i :v
 ☞ x := (Map new one: 1, two: 2, three: 3).
 
 x each: { :v :i
-	x put: 'x' at: i.
+	x put: ‘x’ at: i.
 }.
 
 ✎ write: x, stop.

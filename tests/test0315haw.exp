@@ -1,6 +1,6 @@
-(Mua hou) waiho:'a"b' ma:'test'
+(Mua hou) waiho:‘a"b’ ma:‘test’
 Invalid JSON.
-(Mua hou) waiho:(Palapala ← 1 ; 2 ; (Palapala ← 3 ; 4) ; ((Mua hou) waiho:(Palapala ← 3 ; 4) ma:'bar', waiho:1 ma:'foo')) ma:'nested', waiho:Hoʻolaha ma:'legend', waiho:27 ma:'age', waiho:'Jack' ma:'name'
+(Mua hou) waiho:(Palapala ← 1 ; 2 ; (Palapala ← 3 ; 4) ; ((Mua hou) waiho:(Palapala ← 3 ; 4) ma:‘bar’, waiho:1 ma:‘foo’)) ma:‘nested’, waiho:Hoʻolaha ma:‘legend’, waiho:27 ma:‘age’, waiho:‘Jack’ ma:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

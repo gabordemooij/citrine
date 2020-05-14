@@ -1,11 +1,11 @@
 9
-a Ob’ekt '[Object]'  is NOT Nil.
-a Boolean 'Rost'  is NOT Nil.
-a Boolean 'Yolg’on'  is NOT Nil.
-a Boolean 'Yolg’on'  is NOT Nil.
-a Raqam '1'  is NOT Nil.
-a Raqam '0'  is NOT Nil.
-a Qator 'Str'  is NOT Nil.
-a Qator ''  is NOT Nil.
-a Kod '[Block]'  is NOT Nil.
+a Ob’ekt ‘[Object]’  is NOT Nil.
+a Boolean ‘Rost’  is NOT Nil.
+a Boolean ‘Yolg’on’  is NOT Nil.
+a Boolean ‘Yolg’on’  is NOT Nil.
+a Raqam ‘1’  is NOT Nil.
+a Raqam ‘0’  is NOT Nil.
+a Qator ‘Str’  is NOT Nil.
+a Qator ‘’  is NOT Nil.
+a Kod ‘[Block]’  is NOT Nil.
 but.. Nil is.. certainly NIL!

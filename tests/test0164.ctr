@@ -7,31 +7,31 @@
 
 Program tidiness: 0.
 
-☞ f := File new: '/tmp/citrine_test_file.txt'.
+☞ f := File new: ‘/tmp/citrine_test_file.txt’.
 f exists: { f delete. }.
-f write: 'hello'.
-f := File new: '/tmp/citrine_test_file.txt'.
-f append: 'hello'.
+f write: ‘hello’.
+f := File new: ‘/tmp/citrine_test_file.txt’.
+f append: ‘hello’.
 
 Program clean memory.
 usedMemory1 := (Program memory ? 1).
 
 
-f := File new: '/tmp/citrine_test_file.txt'.
-f append: 'hello'.
+f := File new: ‘/tmp/citrine_test_file.txt’.
+f append: ‘hello’.
 Program clean memory.
 usedMemory2 := (Program memory ? 1).
 
 
-f := File new: '/tmp/citrine_test_file.txt'.
-f append: 'hello'.
+f := File new: ‘/tmp/citrine_test_file.txt’.
+f append: ‘hello’.
 Program clean memory.
 usedMemory3 := (Program memory ? 1).
 
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	✎ write: 'No memory leaks here'.
+	✎ write: ‘No memory leaks here’.
 }, false: {
-	✎ write: 'Leaking memory...'.
+	✎ write: ‘Leaking memory...’.
 }.

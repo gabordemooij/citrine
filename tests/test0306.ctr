@@ -2,10 +2,10 @@
 
 ☞ meals :=
 	List new
-	• 'hamburger'
-	• 'pizza'
-	• 'haggis'.
+	• ‘hamburger’
+	• ‘pizza’
+	• ‘haggis’.
 
-✎ write: (meals join: '|'), stop.
+✎ write: (meals join: ‘|’), stop.
 
 

@@ -6,5 +6,5 @@ The garden is Nil meters long.
 Luckily, this day, there are Nil wasps in the garden.
 The dog named Nil sleeps under the tree.
 a\"bb\"ccc\"
-(Kat nouvo) mete:((Kat nouvo) mete:Nil nan:dog, mete:Nil nan:insects, mete:((Kat nouvo) mete:15 nan:'length', mete:8 nan:'width') nan:'size', mete:(Lis ← 'tulips' ; 'roses' ; 'lillies') nan:'flower', mete:Fo nan:'shed', mete:Vrè nan:'pool', mete:2 nan:'chairs') nan:'garden'
+(Kat nouvo) mete:((Kat nouvo) mete:Nil nan:dog, mete:Nil nan:insects, mete:((Kat nouvo) mete:15 nan:‘length’, mete:8 nan:‘width’) nan:‘size’, mete:(Lis ← ‘tulips’ ; ‘roses’ ; ‘lillies’) nan:‘flower’, mete:Fo nan:‘shed’, mete:Vrè nan:‘pool’, mete:2 nan:‘chairs’) nan:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

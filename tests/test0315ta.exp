@@ -1,6 +1,6 @@
-(வரைபடம் புதியது) put:'a"b' at:'test'
+(வரைபடம் புதியது) put:‘a"b’ at:‘test’
 Invalid JSON.
-(வரைபடம் புதியது) put:(பட்டியல் ← 1 ; 2 ; (பட்டியல் ← 3 ; 4) ; ((வரைபடம் புதியது) put:(பட்டியல் ← 3 ; 4) at:'bar', put:1 at:'foo')) at:'nested', put:பொய் at:'legend', put:27 at:'age', put:'Jack' at:'name'
+(வரைபடம் புதியது) put:(பட்டியல் ← 1 ; 2 ; (பட்டியல் ← 3 ; 4) ; ((வரைபடம் புதியது) put:(பட்டியல் ← 3 ; 4) at:‘bar’, put:1 at:‘foo’)) at:‘nested’, put:பொய் at:‘legend’, put:27 at:‘age’, put:‘Jack’ at:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

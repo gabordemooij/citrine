@@ -1,24 +1,24 @@
 ☞ To-Do := Object new.
 
-To-Do on: 'new' do: {
+To-Do on: ‘new’ do: {
 	⚿ list := List new.
 }.
 
-To-Do on: 'nieuw' do: {
+To-Do on: ‘nieuw’ do: {
 	⚿ list := List new.
 }.
 
-To-Do on: '+' do: { :task
+To-Do on: ‘+’ do: { :task
 	⚿ list append: task.
 }.
 
-To-Do on: 'number of tasks?' do: {
+To-Do on: ‘number of tasks?’ do: {
 	↲  ⚿ list count.
 }.
 
 ☞ todos := 
 	To-Do new 
-	+ 'cook dinner' 
-	+ 'clean room'.
+	+ ‘cook dinner’ 
+	+ ‘clean room’.
 	
-✎ write: 'You have # tasks to do' # todos number of tasks?.
+✎ write: ‘You have # tasks to do’ # todos number of tasks?.

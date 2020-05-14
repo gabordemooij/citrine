@@ -720,11 +720,11 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 			newArgumentList->object = arrayElement;
 			string = ctr_string_append( string, newArgumentList );
 		} else if ( arrayElement->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
-			newArgumentList->object = ctr_build_string_from_cstring("'");
+			newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_OPEN );
 			string = ctr_string_append( string, newArgumentList );
 			newArgumentList->object = ctr_string_quotes_escape( arrayElement, newArgumentList );
 			string = ctr_string_append( string, newArgumentList );
-			newArgumentList->object = ctr_build_string_from_cstring("'");
+			newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_CLOSE );
 			string = ctr_string_append( string, newArgumentList );
 		} else {
 			newArgumentList->object = ctr_build_string_from_cstring("(");
@@ -1134,11 +1134,11 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 			newArgumentList->object = mapItem->value;
 			ctr_string_append( string, newArgumentList );
 		} else if ( mapItem->value->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
-			newArgumentList->object = ctr_build_string_from_cstring( "'" );
+			newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_OPEN );
 			ctr_string_append( string, newArgumentList );
 			newArgumentList->object = ctr_string_quotes_escape( mapItem->value, newArgumentList );
 			ctr_string_append( string, newArgumentList );
-			newArgumentList->object = ctr_build_string_from_cstring( "'" );
+			newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_CLOSE );
 			ctr_string_append( string, newArgumentList );
 		} else {
 			newArgumentList->object = ctr_build_string_from_cstring( "(" );
@@ -1155,11 +1155,11 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 			newArgumentList->object = mapItem->key;
 			ctr_string_append( string, newArgumentList );
 		} else if ( mapItem->key->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
-			newArgumentList->object = ctr_build_string_from_cstring( "'" );
+			newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_OPEN );
 			ctr_string_append( string, newArgumentList );
 			newArgumentList->object = ctr_string_quotes_escape( mapItem->key, newArgumentList );
 			ctr_string_append( string, newArgumentList );
-			newArgumentList->object = ctr_build_string_from_cstring( "'" );
+			newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_CLOSE );
 			ctr_string_append( string, newArgumentList );
 		} else {
 			newArgumentList->object = ctr_build_string_from_cstring( "(" );

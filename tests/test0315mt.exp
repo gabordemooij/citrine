@@ -1,6 +1,6 @@
-(Mappa ġdid) tpoġġi:'a"b' fi:'test'
+(Mappa ġdid) tpoġġi:‘a"b’ fi:‘test’
 Invalid JSON.
-(Mappa ġdid) tpoġġi:(Lista ← 1 ; 2 ; (Lista ← 3 ; 4) ; ((Mappa ġdid) tpoġġi:(Lista ← 3 ; 4) fi:'bar', tpoġġi:1 fi:'foo')) fi:'nested', tpoġġi:Falz fi:'legend', tpoġġi:27 fi:'age', tpoġġi:'Jack' fi:'name'
+(Mappa ġdid) tpoġġi:(Lista ← 1 ; 2 ; (Lista ← 3 ; 4) ; ((Mappa ġdid) tpoġġi:(Lista ← 3 ; 4) fi:‘bar’, tpoġġi:1 fi:‘foo’)) fi:‘nested’, tpoġġi:Falz fi:‘legend’, tpoġġi:27 fi:‘age’, tpoġġi:‘Jack’ fi:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

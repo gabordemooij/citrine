@@ -1,41 +1,41 @@
 
-'- -rood - -groen -blauw -' pattern: '(-[^[:space:]]+)' process: { :arr
-	✎ write: (arr join: '|'), stop.
+‘- -rood - -groen -blauw -’ pattern: ‘(-[^[:space:]]+)’ process: { :arr
+	✎ write: (arr join: ‘|’), stop.
 }.
 
 
-'- -rood - -groen -blauw -' pattern: '(-[^[:space:]]+)' process: { :arr
-	✎ write: (arr join: '|'), stop.
-} options: '!'.
+‘- -rood - -groen -blauw -’ pattern: ‘(-[^[:space:]]+)’ process: { :arr
+	✎ write: (arr join: ‘|’), stop.
+} options: ‘!’.
 
 
-'-
+‘-
     -rood
     -groen
     -blauw
 
--' pattern: '^[[:space:]]+(-[^[:space:]]+)$' process: { :arr
-	✎ write: (arr join: '|'), stop.
-} options: 'n'.
+-’ pattern: ‘^[[:space:]]+(-[^[:space:]]+)$’ process: { :arr
+	✎ write: (arr join: ‘|’), stop.
+} options: ‘n’.
 
 
 
-'-
+‘-
     -rood
     -groen
     -blauw
 
--' pattern: '^[[:space:]]+(-[^[:space:]]+)$' process: { :arr
-	✎ write: (arr join: '|'), stop.
-} options: ''.
+-’ pattern: ‘^[[:space:]]+(-[^[:space:]]+)$’ process: { :arr
+	✎ write: (arr join: ‘|’), stop.
+} options: ‘’.
 
 
 
-'-
+‘-
     -rooD
     -groeN
     -blauW
 
--' pattern: '^[[:space:]]+-(Rood|Groen|Blauw)$' process: { :arr
-	✎ write: (arr join: '|'), stop.
-} options: 'ni'.
+-’ pattern: ‘^[[:space:]]+-(Rood|Groen|Blauw)$’ process: { :arr
+	✎ write: (arr join: ‘|’), stop.
+} options: ‘ni’.

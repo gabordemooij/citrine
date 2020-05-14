@@ -7,19 +7,19 @@
 
 Program tidiness: 0.
 
-Number on: 'addNum:' do: { :x
+Number on: ‘addNum:’ do: { :x
 	⛏ add: x.
 }.
 
-Number on: 'subtractNum:' do: { :x
+Number on: ‘subtractNum:’ do: { :x
 	⛏ subtract: x.
 }.
 
-Number on: 'multiplyBy:' do: { :x
+Number on: ‘multiplyBy:’ do: { :x
 	⛏ multiply by: x.
 }.
 
-Number on: 'divideBy:' do: { :x
+Number on: ‘divideBy:’ do: { :x
 	⛏ divide by: x.
 }.
 
@@ -90,7 +90,7 @@ usedMemory3 := (Program memory ? 1).
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	✎ write: 'No memory leaks here'.
+	✎ write: ‘No memory leaks here’.
 }, false: {
-	✎ write: 'Leaking memory...'.
+	✎ write: ‘Leaking memory...’.
 }.

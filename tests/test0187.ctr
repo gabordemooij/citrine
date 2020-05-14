@@ -1,4 +1,4 @@
-Number on: 'factorial' do: {
+Number on: ‘factorial’ do: {
 	☞ total := 1.
 	{ :index total multiply by: (⛏ - index). } * ⛏.
 	↲ total.
@@ -51,7 +51,7 @@ usedMemory3 := (Program memory ? 1).
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	✎ write: 'No memory leaks here'.
+	✎ write: ‘No memory leaks here’.
 }, false: {
-	✎ write: 'Leaking memory...'.
+	✎ write: ‘Leaking memory...’.
 }.

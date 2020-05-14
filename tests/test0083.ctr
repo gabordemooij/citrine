@@ -1,12 +1,12 @@
 
 ☞ Animal := Object new.
-Animal on: 'eat' do: {
-	✎ write: 'munch! munch!'.
+Animal on: ‘eat’ do: {
+	✎ write: ‘munch! munch!’.
 }.
 
 ☞ Cat := Animal new.
-Cat on: 'eat' do: {
-	✎ write: 'meow', stop.
+Cat on: ‘eat’ do: {
+	✎ write: ‘meow’, stop.
 	⛏ `eat.
 }.
 

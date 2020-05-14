@@ -3,12 +3,12 @@
 Program tidiness: 1.
 
 ☞ x := 0.
-☞ y := 'Hello'.
-☞ q := { ''. }.
+☞ y := ‘Hello’.
+☞ q := { ‘’. }.
 ☞ p := True.
 ☞ a := List ← 1 ; 2 ; 3 ; 4.
 ☞ c := Object new.
-c on: 'greet:' do: { ✎ write: 'greet!'. }.
+c on: ‘greet:’ do: { ✎ write: ‘greet!’. }.
 
 ☞ usedMemory1 := 0.
 ☞ usedMemory2 := 0.
@@ -23,12 +23,12 @@ Program clean memory.
 
 
 x := 1.
-y := 'Hello'.
-q := { ''. }.
+y := ‘Hello’.
+q := { ‘’. }.
 p := True.
 a := List ← 1 ; 2 ; 3 ; 5.
 c := Object new.
-c on: 'greet:' do: { ✎ write: 'greet!'. }.
+c on: ‘greet:’ do: { ✎ write: ‘greet!’. }.
 
 
 Program clean memory.
@@ -38,12 +38,12 @@ Program clean memory.
 
 
 x := 2.
-y := 'Hello'.
-q := { ''. }.
+y := ‘Hello’.
+q := { ‘’. }.
 p := True.
 a := List ← 1 ; 2 ; 3 ; 4.
 c := Object new.
-c on: 'greet:' do: { ✎ write: 'greet!'. }.
+c on: ‘greet:’ do: { ✎ write: ‘greet!’. }.
 
 Program clean memory.
 ☞ usedMemory3 := (Program memory ? 1).
@@ -52,14 +52,14 @@ Program clean memory.
 
 
 x := 3.
-y := 'Hello'.
-q := { ''. }.
+y := ‘Hello’.
+q := { ‘’. }.
 p := True.
 a := List ← 1 ; 2 ; 3 ; 5.
 c := Object new.
-c on: 'greet:' do: { ✎ write: 'greet!'. }.
+c on: ‘greet:’ do: { ✎ write: ‘greet!’. }.
 c := Object new.
-c on: 'greet:' do: { ✎ write: 'a different greet!', stop. }.
+c on: ‘greet:’ do: { ✎ write: ‘a different greet!’, stop. }.
 
 
 Program clean memory.
@@ -70,12 +70,12 @@ Program clean memory.
 
 
 x := 4.
-y := 'Hello'.
-q := { ''. }.
+y := ‘Hello’.
+q := { ‘’. }.
 p := True.
 a := List ← 1 ; 2 ; 3 ; 4.
 c := Object new.
-c on: 'greet:' do: { ✎ write: 'greet!'. }.
+c on: ‘greet:’ do: { ✎ write: ‘greet!’. }.
 
 
 Program clean memory.
@@ -85,7 +85,7 @@ Program clean memory.
 
 
 (usedMemory1 = usedMemory2 = usedMemory3 = usedMemory4 = usedMemory5) true: { 
-	✎ write: 'Memory usage remains stable.', stop.
+	✎ write: ‘Memory usage remains stable.’, stop.
 }, else: {
-	✎ write: 'Used memory not stable.', stop.
+	✎ write: ‘Used memory not stable.’, stop.
 }.

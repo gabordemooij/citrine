@@ -1,6 +1,6 @@
 
 ✎ write: ( {
-	✎ write: 'START', stop.
-	↲ 'END'.
-	✎ write: 'DONT', stop.
+	✎ write: ‘START’, stop.
+	↲ ‘END’.
+	✎ write: ‘DONT’, stop.
 } run ), stop.

@@ -1,11 +1,11 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 Program tidiness: 0.
-Program setting: 'QUERY_STRING' value: 'search=table&restaurant=pizzaria&menu=spaghetti&menu=macaroni&course[main]=canneloni&course[dessert]=tiramisu'.
-✎ write: (Program setting: 'QUERY_STRING'), stop.
-☞ s := Request get: 'search'.
-✎ write: 'I was looking for a free ' + s.
-✎ write: ' in a ' + (Request get: 'restaurant') + ', ', stop.
-✎ write: 'but the waiter told me all tables have been corrupted by ', stop.
-☞ m := Request get list: 'menu'.
-✎ write: (m join: ', ') + ' and '+(Request get: 'course[main]') + ' code.', stop.
+Program setting: ‘QUERY_STRING’ value: ‘search=table&restaurant=pizzaria&menu=spaghetti&menu=macaroni&course[main]=canneloni&course[dessert]=tiramisu’.
+✎ write: (Program setting: ‘QUERY_STRING’), stop.
+☞ s := Request get: ‘search’.
+✎ write: ‘I was looking for a free ’ + s.
+✎ write: ‘ in a ’ + (Request get: ‘restaurant’) + ‘, ’, stop.
+✎ write: ‘but the waiter told me all tables have been corrupted by ’, stop.
+☞ m := Request get list: ‘menu’.
+✎ write: (m join: ‘, ’) + ‘ and ’+(Request get: ‘course[main]’) + ‘ code.’, stop.
 

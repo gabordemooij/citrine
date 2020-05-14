@@ -3,16 +3,16 @@
 ☞ key2 := List new.
 
 map1
-	put: 'hello' at: key1,
-	put: 'world' at: key2.
+	put: ‘hello’ at: key1,
+	put: ‘world’ at: key2.
 
 
 ✎
-	write: 'Map #1 contains: ' + (map1 at: key1),
-	write: ' and ' + (map1 at: key2), stop.
+	write: ‘Map #1 contains: ’ + (map1 at: key1),
+	write: ‘ and ’ + (map1 at: key2), stop.
 
 ☞ KeyeableArray := List new.
-KeyeableArray on: 'toString' do: {
+KeyeableArray on: ‘toString’ do: {
 	↲ (⛏ count) toString.
 }.
 
@@ -23,9 +23,9 @@ key2 := KeyeableArray new.
 key1 append: 1.
 
 map2
-	put: 'hello' at: key1,
-	put: 'world' at: key2.
+	put: ‘hello’ at: key1,
+	put: ‘world’ at: key2.
 
 ✎
-	write: 'Map #2 contains: ' + (map2 at: key1),
-	write: ' and ' + (map2 at: key2), stop.
+	write: ‘Map #2 contains: ’ + (map2 at: key1),
+	write: ‘ and ’ + (map2 at: key2), stop.

@@ -1,6 +1,6 @@
-(Karta novi) staviti:'a"b' na:'test'
+(Karta novi) staviti:‘a"b’ na:‘test’
 Invalid JSON.
-(Karta novi) staviti:(Popis ← 1 ; 2 ; (Popis ← 3 ; 4) ; ((Karta novi) staviti:(Popis ← 3 ; 4) na:'bar', staviti:1 na:'foo')) na:'nested', staviti:Lažan na:'legend', staviti:27 na:'age', staviti:'Jack' na:'name'
+(Karta novi) staviti:(Popis ← 1 ; 2 ; (Popis ← 3 ; 4) ; ((Karta novi) staviti:(Popis ← 3 ; 4) na:‘bar’, staviti:1 na:‘foo’)) na:‘nested’, staviti:Lažan na:‘legend’, staviti:27 na:‘age’, staviti:‘Jack’ na:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

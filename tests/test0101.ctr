@@ -1,2 +1,2 @@
-Program setting: 'TSTVAR' value: 'Hello World!'.
-✎ write: 'value = ' + (Program setting: 'TSTVAR').
+Program setting: ‘TSTVAR’ value: ‘Hello World!’.
+✎ write: ‘value = ’ + (Program setting: ‘TSTVAR’).

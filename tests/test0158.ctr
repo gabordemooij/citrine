@@ -1,4 +1,4 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 
 
 ☞ usedMemory1 := 0.
@@ -8,10 +8,10 @@
 
 Program tidiness: 0.
 
-☞ f := File new: '/tmp/none.txt'.
-f open: 'r+'.
+☞ f := File new: ‘/tmp/none.txt’.
+f open: ‘r+’.
 
 
 
 
-f open: 'r+'.
+f open: ‘r+’.

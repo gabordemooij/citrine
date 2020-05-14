@@ -1,11 +1,11 @@
 9
-a Obyek '[Object]'  is NOT Nil.
-a Boolean 'Bener'  is NOT Nil.
-a Boolean 'Salah'  is NOT Nil.
-a Boolean 'Salah'  is NOT Nil.
-a Nomer '1'  is NOT Nil.
-a Nomer '0'  is NOT Nil.
-a Senar 'Str'  is NOT Nil.
-a Senar ''  is NOT Nil.
-a Kode '[Block]'  is NOT Nil.
+a Obyek ‘[Object]’  is NOT Nil.
+a Boolean ‘Bener’  is NOT Nil.
+a Boolean ‘Salah’  is NOT Nil.
+a Boolean ‘Salah’  is NOT Nil.
+a Nomer ‘1’  is NOT Nil.
+a Nomer ‘0’  is NOT Nil.
+a Senar ‘Str’  is NOT Nil.
+a Senar ‘’  is NOT Nil.
+a Kode ‘[Block]’  is NOT Nil.
 but.. Nil is.. certainly NIL!

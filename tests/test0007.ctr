@@ -1,8 +1,8 @@
 ☞ Cat := Object new.
-Cat on: 'make' do: {
+Cat on: ‘make’ do: {
 	☞ cat := Object new.
-	cat on: 'meow' do: {
-		✎ write: 'meow!'.
+	cat on: ‘meow’ do: {
+		✎ write: ‘meow!’.
 	}.
 	↲cat.
 }.

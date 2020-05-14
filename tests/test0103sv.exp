@@ -1,11 +1,11 @@
 9
-a Objekt '[Object]'  is NOT Nil.
-a Boolean 'Sann'  is NOT Nil.
-a Boolean 'Falsk'  is NOT Nil.
-a Boolean 'Falsk'  is NOT Nil.
-a Siffra '1'  is NOT Nil.
-a Siffra '0'  is NOT Nil.
-a Sträng 'Str'  is NOT Nil.
-a Sträng ''  is NOT Nil.
-a Koda '[Block]'  is NOT Nil.
+a Objekt ‘[Object]’  is NOT Nil.
+a Boolean ‘Sann’  is NOT Nil.
+a Boolean ‘Falsk’  is NOT Nil.
+a Boolean ‘Falsk’  is NOT Nil.
+a Siffra ‘1’  is NOT Nil.
+a Siffra ‘0’  is NOT Nil.
+a Sträng ‘Str’  is NOT Nil.
+a Sträng ‘’  is NOT Nil.
+a Koda ‘[Block]’  is NOT Nil.
 but.. Nil is.. certainly NIL!

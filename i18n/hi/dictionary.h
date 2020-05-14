@@ -195,3 +195,6 @@
 #define CTR_DICT_THIS_BLOCK                      "यह-सूत्र-स्थान-है"
 #define CTR_DICT_NUM_DEC_SEP                     "."
 #define CTR_DICT_NUM_THO_SEP                     ","
+
+#define CTR_DICT_QUOT_OPEN                       "‘"
+#define CTR_DICT_QUOT_CLOSE                      "’"

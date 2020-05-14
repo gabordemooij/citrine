@@ -1,4 +1,4 @@
-'Thousands and decimals'.
+‘Thousands and decimals’.
 
 ☞ x := 1,000,000.5.
 ☞ y := 1,000,000.5.
@@ -10,7 +10,7 @@
 
 ✎ write: (x + y), stop.
 
-'Decimal'.
+‘Decimal’.
 
 ☞ x := 1.001.
 ☞ y := 1.100.
@@ -18,7 +18,7 @@
 
 ✎ write: (x + y + z), stop.
 
-'Weird but valid'.
+‘Weird but valid’.
 
 ☞ x := 0,1.001.
 ☞ y := 0,1.100.

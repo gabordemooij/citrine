@@ -1,12 +1,12 @@
 ☞ a := Object new.
 ☞ x := 0.
-a on: 'test1' do: {
+a on: ‘test1’ do: {
 	x := 123.
 }.
 a test1.
 ✎ write: x.
 ☞ b := Object new.
-b on: 'test2' do: {
+b on: ‘test2’ do: {
 	✎ write: x.
 }.
 b test2.

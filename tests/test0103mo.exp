@@ -1,11 +1,11 @@
 9
-a Obđect '[Object]'  is NOT Nil.
-a Būlean 'True'  is NOT Nil.
-a Būlean 'False'  is NOT Nil.
-a Būlean 'False'  is NOT Nil.
-a Number '1'  is NOT Nil.
-a Number '0'  is NOT Nil.
-a Striŋ 'Str'  is NOT Nil.
-a Striŋ ''  is NOT Nil.
-a Code '[Block]'  is NOT Nil.
+a Obđect ‘[Object]’  is NOT Nil.
+a Būlean ‘True’  is NOT Nil.
+a Būlean ‘False’  is NOT Nil.
+a Būlean ‘False’  is NOT Nil.
+a Number ‘1’  is NOT Nil.
+a Number ‘0’  is NOT Nil.
+a Striŋ ‘Str’  is NOT Nil.
+a Striŋ ‘’  is NOT Nil.
+a Code ‘[Block]’  is NOT Nil.
 but.. Nil is.. certainly NIL!

@@ -1,11 +1,11 @@
 9
-a قصد '[مقصد]'  is NOT Nil.
-a ولين 'چو'  is NOT Nil.
-a ولين 'وڙو'  is NOT Nil.
-a ولين 'وڙو'  is NOT Nil.
-a مبر '1'  is NOT Nil.
-a مبر '0'  is NOT Nil.
-a سٽرنگ 'Str'  is NOT Nil.
-a سٽرنگ ''  is NOT Nil.
-a وڊ '[بلاڪ]'  is NOT Nil.
+a قصد ‘[مقصد]’  is NOT Nil.
+a ولين ‘چو’  is NOT Nil.
+a ولين ‘وڙو’  is NOT Nil.
+a ولين ‘وڙو’  is NOT Nil.
+a مبر ‘1’  is NOT Nil.
+a مبر ‘0’  is NOT Nil.
+a سٽرنگ ‘Str’  is NOT Nil.
+a سٽرنگ ‘’  is NOT Nil.
+a وڊ ‘[بلاڪ]’  is NOT Nil.
 but.. Nil is.. certainly NIL!

@@ -1,11 +1,11 @@
 9
-a Jectબ્જેક્ટ '[Object]'  is NOT Nil.
-a બુલિયન 'સાચું'  is NOT Nil.
-a બુલિયન 'ખોટું'  is NOT Nil.
-a બુલિયન 'ખોટું'  is NOT Nil.
-a નંબર '1'  is NOT Nil.
-a નંબર '0'  is NOT Nil.
-a તાર 'Str'  is NOT Nil.
-a તાર ''  is NOT Nil.
-a કોડ '[Block]'  is NOT Nil.
+a Jectબ્જેક્ટ ‘[Object]’  is NOT Nil.
+a બુલિયન ‘સાચું’  is NOT Nil.
+a બુલિયન ‘ખોટું’  is NOT Nil.
+a બુલિયન ‘ખોટું’  is NOT Nil.
+a નંબર ‘1’  is NOT Nil.
+a નંબર ‘0’  is NOT Nil.
+a તાર ‘Str’  is NOT Nil.
+a તાર ‘’  is NOT Nil.
+a કોડ ‘[Block]’  is NOT Nil.
 but.. Nil is.. certainly NIL!

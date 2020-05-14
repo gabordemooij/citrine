@@ -12,32 +12,32 @@ clock year: 1981, month: 1, day: 5,
 ✎ write: clock, stop.
 
 ✎ write: (
-	(clock year raw) + '-' + (clock month) + '-' + (clock day) + ' ' +
-	(clock hour) + ':' + (clock minute) + ':' + (clock second) + ' ' +
-	'W' + (clock week) + ' t' + (clock time raw) + ' ' + (clock zone)
+	(clock year raw) + ‘-’ + (clock month) + ‘-’ + (clock day) + ‘ ’ +
+	(clock hour) + ‘:’ + (clock minute) + ‘:’ + (clock second) + ‘ ’ +
+	‘W’ + (clock week) + ‘ t’ + (clock time raw) + ‘ ’ + (clock zone)
 ), stop.
 
 
-clock zone: 'Europe/Amsterdam'.
+clock zone: ‘Europe/Amsterdam’.
 ✎ write: (
-	(clock year raw) + '-' + (clock month) + '-' + (clock day) + ' ' +
-	(clock hour) + ':' + (clock minute) + ':' + (clock second) + ' ' +
-	'W' + (clock week) + ' t' + (clock time raw) + ' ' + (clock zone)
+	(clock year raw) + ‘-’ + (clock month) + ‘-’ + (clock day) + ‘ ’ +
+	(clock hour) + ‘:’ + (clock minute) + ‘:’ + (clock second) + ‘ ’ +
+	‘W’ + (clock week) + ‘ t’ + (clock time raw) + ‘ ’ + (clock zone)
 ), stop.
 
-☞ clock2 := clock new zone: 'Europe/Amsterdam', month: 6, hour: 8.
+☞ clock2 := clock new zone: ‘Europe/Amsterdam’, month: 6, hour: 8.
 
 
 ✎ write: (clock2 format: Nil), stop. 
-✎ write: (clock format: 'Clock1 %H'), stop.
-✎ write: (clock2 format: 'Clock2 %H'), stop.
+✎ write: (clock format: ‘Clock1 %H’), stop.
+✎ write: (clock2 format: ‘Clock2 %H’), stop.
 
-clock2 zone: 'America/New York'.
-✎ write: (clock format: 'Clock1 %H'), stop.
-✎ write: (clock2 format: 'Clock2 %H'), stop.
+clock2 zone: ‘America/New York’.
+✎ write: (clock format: ‘Clock1 %H’), stop.
+✎ write: (clock2 format: ‘Clock2 %H’), stop.
 
-☞ clock3 := Moment new like: (Moment new zone: 'UTC', hour: 13).
+☞ clock3 := Moment new like: (Moment new zone: ‘UTC’, hour: 13).
 clock3 := Moment new: clock3 time.
-✎ write: (clock3 format: 'Clock3 %H'), stop.
+✎ write: (clock3 format: ‘Clock3 %H’), stop.
 
 

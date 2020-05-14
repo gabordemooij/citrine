@@ -1,8 +1,8 @@
-✎ write: '1,2,3,4,5,6,7,8,9,A,', stop.
+✎ write: ‘1,2,3,4,5,6,7,8,9,A,’, stop.
 ☞ Scope := Object new.
-Scope on: 'initialize:' do: { :x ⚿ property := x. }.
-Scope on: 'confirm' do: { ✎ write: ','. }.
-Scope on: 'test' do: {
+Scope on: ‘initialize:’ do: { :x ⚿ property := x. }.
+Scope on: ‘confirm’ do: { ✎ write: ‘,’. }.
+Scope on: ‘test’ do: {
 	✎ write: ⚿ property.
 	⛏ confirm.
 	( 1 = 1 ) true: { ✎ write: ⚿ property. ⛏ confirm. }.
@@ -11,16 +11,16 @@ Scope on: 'test' do: {
 	{ ✎ write: ⚿ property. ⛏ confirm. } * 1.
 	(List ← 1) each: {  ✎ write: ⚿ property. ⛏ confirm. }.
 	(List ← 1 ; 2) sort: {  ✎ write: ⚿ property. ⛏ confirm. ↲ 0. }.
-	(Map new one: 'item') each: { ✎ write: ⚿ property. ⛏ confirm. }.
-	'abc' pattern: '([a])' process: { ✎ write: ⚿ property. ⛏ confirm. } options: ''.
+	(Map new one: ‘item’) each: { ✎ write: ⚿ property. ⛏ confirm. }.
+	‘abc’ pattern: ‘([a])’ process: { ✎ write: ⚿ property. ⛏ confirm. } options: ‘’.
 	{ 1 / 0. } catch: { ✎ write: ⚿ property. ⛏ confirm. }, run.
 	✎ stop.
 }.
 ☞ scope1 := Scope new.
-scope1 initialize: 'X'.
+scope1 initialize: ‘X’.
 scope1 test.
 ☞ function := { 
-	⚿ property := 'Y'.
+	⚿ property := ‘Y’.
 	✎ write: ⚿ property.
 	⛏ confirm.
 	( 1 = 1 ) true: { ✎ write: ⚿ property. ⛏ confirm. }.
@@ -29,10 +29,10 @@ scope1 test.
 	{ ✎ write: ⚿ property. ⛏ confirm. } * 1.
 	(List ← 1) each: {  ✎ write: ⚿ property. ⛏ confirm. }.
 	(List ← 1 ; 2) sort: {  ✎ write: ⚿ property. ⛏ confirm. ↲ 0. }.
-	(Map new one: 'item') each: { ✎ write: ⚿ property. ⛏ confirm. }.
-	'abc' pattern: '([a])' process: { ✎ write: ⚿ property. ⛏ confirm. } options: ''.
+	(Map new one: ‘item’) each: { ✎ write: ⚿ property. ⛏ confirm. }.
+	‘abc’ pattern: ‘([a])’ process: { ✎ write: ⚿ property. ⛏ confirm. } options: ‘’.
 	{ 1 / 0. } catch: { ✎ write: ⚿ property. ⛏ confirm. }, run.
 	✎ stop.
 }.
-function on: 'confirm' do: { ✎ write: ','. }.
+function on: ‘confirm’ do: { ✎ write: ‘,’. }.
 function apply: 1 and: 2.

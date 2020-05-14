@@ -56,6 +56,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 	ctr_tlistitem* argumentList;
 	ctr_object* r;
 	ctr_object* recipientName = NULL;
+	result = CtrStdNil;
 	if (ctr_flag_sandbox && ++ctr_sandbox_steps>CTR_MAX_STEPS_LIMIT) exit(1);
 	switch (receiverNode->type) {
 		case CTR_AST_NODE_REFERENCE:
@@ -74,6 +75,8 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 				ctr_callstack_index--;
 			} else {
 				errstack++;
+				recipientName->info.sticky = 0;
+				return CtrStdNil;
 			}
 			if (!r) {
 				exit(1);
@@ -140,7 +143,6 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 				ctr_in_message--;
 				aItem->object = o;
 				keys[key_index++] = ctr_gc_internal_pin(o);
-				
 				if (key_index > 39) {
 					printf( CTR_ERR_KEYINX );
 					exit(1);
@@ -229,6 +231,7 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 	char* currentProgram = "?";
 	ctr_tnode* stackNode;
 	ctr_source_map* mapItem;
+	result = CtrStdNil;
 	if (ctr_flag_sandbox && ++ctr_sandbox_steps>CTR_MAX_STEPS_LIMIT) exit(1);
 	switch (node->type) {
 		case CTR_AST_NODE_LTRSTRING:
