@@ -1,33 +1,33 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 
 
-Program on: 'pid' do: { ↲ '[Program]'. }.
-✎ write: 'Sending toString to Program yields a PID string:', stop.
+Program on: ‘pid’ do: { ↲ ‘[Program]’. }.
+✎ write: ‘Sending toString to Program yields a PID string:’, stop.
 ✎ write: Program, stop.
-✎ write: 'Sending toNumber to Program yields a PID number:', stop.
+✎ write: ‘Sending toNumber to Program yields a PID number:’, stop.
 ✎ write: Program number, stop.
 
 ☞ ⚄ := Object new.
-⚄ on: 'number' do: { ↲ 666. }.
-⚄ on: 'string' do: { ↲ '666'. }.
+⚄ on: ‘number’ do: { ↲ 666. }.
+⚄ on: ‘string’ do: { ↲ ‘666’. }.
 
-✎ write: 'Sending toString to Dice yields a random number string:', stop.
+✎ write: ‘Sending toString to Dice yields a random number string:’, stop.
 ✎ write: ⚄, stop.
-✎ write: 'Sending toNumber to Dice yields a random number:', stop.
+✎ write: ‘Sending toNumber to Dice yields a random number:’, stop.
 ✎ write: ⚄ number, stop.
 
 
-Moment on: 'format:' do: { ↲ '1666-01-13 06:06:06'. }.
-Moment on: 'time' do: { ↲ '999'. }.
+Moment on: ‘format:’ do: { ↲ ‘1666-01-13 06:06:06’. }.
+Moment on: ‘time’ do: { ↲ ‘999’. }.
 
-✎ write: 'Sending toString to Clock yields a date and time string:', stop.
+✎ write: ‘Sending toString to Clock yields a date and time string:’, stop.
 ✎ write: Moment, stop.
-✎ write: 'Sending toNumber to Clock yields a time stamp number:', stop.
+✎ write: ‘Sending toNumber to Clock yields a time stamp number:’, stop.
 ✎ write: Moment number, stop.
 
-✎ write: 'Sending toString to File yields a path:', stop.
+✎ write: ‘Sending toString to File yields a path:’, stop.
 ✎ write: File, stop.
-✎ write: 'Sending toNumber to File yields a 1:', stop.
+✎ write: ‘Sending toNumber to File yields a 1:’, stop.
 ✎ write: File number, stop.
 
 ✎ write: (Map new

@@ -6,5 +6,5 @@ The garden is Μηδέν meters long.
 Luckily, this day, there are Μηδέν wasps in the garden.
 The dog named Μηδέν sleeps under the tree.
 a\"bb\"ccc\"
-(Χάρτης νέος) βάλτε:((Χάρτης νέος) βάλτε:Μηδέν στη διεύθυνση:dog, βάλτε:Μηδέν στη διεύθυνση:insects, βάλτε:((Χάρτης νέος) βάλτε:15 στη διεύθυνση:'length', βάλτε:8 στη διεύθυνση:'width') στη διεύθυνση:'size', βάλτε:(Λίστα ← 'tulips' ; 'roses' ; 'lillies') στη διεύθυνση:'flower', βάλτε:Ψευδής στη διεύθυνση:'shed', βάλτε:Αληθής στη διεύθυνση:'pool', βάλτε:2 στη διεύθυνση:'chairs') στη διεύθυνση:'garden'
+(Χάρτης νέος) βάλτε:((Χάρτης νέος) βάλτε:Μηδέν στη διεύθυνση:dog, βάλτε:Μηδέν στη διεύθυνση:insects, βάλτε:((Χάρτης νέος) βάλτε:15 στη διεύθυνση:‘length’, βάλτε:8 στη διεύθυνση:‘width’) στη διεύθυνση:‘size’, βάλτε:(Λίστα ← ‘tulips’ ; ‘roses’ ; ‘lillies’) στη διεύθυνση:‘flower’, βάλτε:Ψευδής στη διεύθυνση:‘shed’, βάλτε:Αληθής στη διεύθυνση:‘pool’, βάλτε:2 στη διεύθυνση:‘chairs’) στη διεύθυνση:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

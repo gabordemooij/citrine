@@ -1,11 +1,11 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 
 
 ☞ j := 1.
 
 ☞ func := {
 
-	✎ write: 'Nested call #' + j, stop.
+	✎ write: ‘Nested call #’ + j, stop.
 	j add: 1.
 
 	func run.

@@ -1,17 +1,17 @@
 
 ☞ dictionary := (
 	Map new
-		put: 'b' at: 'a',
-		put: 'a' at: 'b',
-		put: 'z' at: 'x',
-		put: 'hello' at: 'hallo',
-		put: 'human' at: 'human'
+		put: ‘b’ at: ‘a’,
+		put: ‘a’ at: ‘b’,
+		put: ‘z’ at: ‘x’,
+		put: ‘hello’ at: ‘hallo’,
+		put: ‘human’ at: ‘human’
 ).
 
 ☞ comparisons := List new.
 dictionary each: { :a :b
 	comparisons ; (
-		'a= b= | a>b a≥b a<b a≤b ab'
+		‘a= b= | a>b a≥b a<b a≤b ab’
 		a=: a,
 		b=: b,
 		a>b: ( a > b ),
@@ -23,5 +23,5 @@ dictionary each: { :a :b
 }.
 
 comparisons sort: { :a :b ↲ ( a compare: b ). }.
-✎ write: ( comparisons join: '↵' ), stop.
-comparisons join: '↵'.
+✎ write: ( comparisons join: ‘↵’ ), stop.
+comparisons join: ‘↵’.

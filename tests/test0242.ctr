@@ -1,13 +1,13 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 
-String on: 'evaluate' do: {
-	☞ code := File new: '/tmp/eval.ctr'.
-	code write: (⛏ string + '.').
-	Program use: '/tmp/eval.ctr'.
+String on: ‘evaluate’ do: {
+	☞ code := File new: ‘/tmp/eval.ctr’.
+	code write: (⛏ string + ‘.’).
+	Program use: ‘/tmp/eval.ctr’.
 }.
 
-'List new' evaluate. 
-'Object new' evaluate. 
+‘List new’ evaluate. 
+‘Object new’ evaluate. 
 
 ☞ a := 123.
-'✎ write: a, stop' evaluate.
+‘✎ write: a, stop’ evaluate.

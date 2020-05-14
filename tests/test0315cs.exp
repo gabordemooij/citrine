@@ -1,6 +1,6 @@
-(Mapa nový) dát:'a"b' na:'test'
+(Mapa nový) dát:‘a"b’ na:‘test’
 Invalid JSON.
-(Mapa nový) dát:(Seznam ← 1 ; 2 ; (Seznam ← 3 ; 4) ; ((Mapa nový) dát:(Seznam ← 3 ; 4) na:'bar', dát:1 na:'foo')) na:'nested', dát:Nepravdivé na:'legend', dát:27 na:'age', dát:'Jack' na:'name'
+(Mapa nový) dát:(Seznam ← 1 ; 2 ; (Seznam ← 3 ; 4) ; ((Mapa nový) dát:(Seznam ← 3 ; 4) na:‘bar’, dát:1 na:‘foo’)) na:‘nested’, dát:Nepravdivé na:‘legend’, dát:27 na:‘age’, dát:‘Jack’ na:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

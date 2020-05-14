@@ -1,5 +1,5 @@
 ☞ echo := Object new.
-echo on: 'respond:' do: {
+echo on: ‘respond:’ do: {
 	:sound
 	{ ✎ write: sound. } * 2.
 }.
@@ -7,7 +7,7 @@ echo ho!.
 
 
 echo := Object new.
-echo on: 'respond:and:' do: {
+echo on: ‘respond:and:’ do: {
 	:sound :x
 	{ ✎ write: sound. } * x.
 }.
@@ -16,10 +16,10 @@ echo wooo: 3.
 
 
 echo := Object new.
-echo on: 'respond:and:and:' do: {
+echo on: ‘respond:and:and:’ do: {
 	:operation :sound :x
 	{ ✎ write: sound. } * x.
 }.
-echo shout: 'la' times: 4. 
+echo shout: ‘la’ times: 4. 
 
 

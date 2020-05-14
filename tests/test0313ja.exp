@@ -6,5 +6,5 @@ The garden is なし meters long.
 Luckily, this day, there are なし wasps in the garden.
 The dog named なし sleeps under the tree.
 a\"bb\"ccc\"
-(地図 新着) put：at：__:((地図 新着) put：at：__:なし __:dog, put：at：__:なし __:insects, put：at：__:((地図 新着) put：at：__:15 __:'length', put：at：__:8 __:'width') __:'size', put：at：__:(リスト ← 'tulips' ; 'roses' ; 'lillies') __:'flower', put：at：__:誤り __:'shed', put：at：__:本当 __:'pool', put：at：__:2 __:'chairs') __:'garden'
+(地図 新着) put：at：__:((地図 新着) put：at：__:なし __:dog, put：at：__:なし __:insects, put：at：__:((地図 新着) put：at：__:15 __:‘length’, put：at：__:8 __:‘width’) __:‘size’, put：at：__:(リスト ← ‘tulips’ ; ‘roses’ ; ‘lillies’) __:‘flower’, put：at：__:誤り __:‘shed’, put：at：__:本当 __:‘pool’, put：at：__:2 __:‘chairs’) __:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

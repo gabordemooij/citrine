@@ -1,5 +1,5 @@
 
-(7 odd?) true: { ✎ write: '7 is an ODD NUMBER', stop. }, else: { ✎ write: 'WRONG!'. }.
-(4 even?) true: { ✎ write: '4 is an EVEN NUMBER', stop. }, else: { ✎ write: 'WRONG!'. }.
-(5 even?) true: { ✎ write: 'WRONG!'. }, else: { ✎ write: '5 is NOT AN EVEN NUMBER', stop. }.
-(6 odd?) true: { ✎ write: 'WRONG!'. }, else: { ✎ write: '6 is NOT AN ODD NUMBER', stop. }.
+(7 odd?) true: { ✎ write: ‘7 is an ODD NUMBER’, stop. }, else: { ✎ write: ‘WRONG!’. }.
+(4 even?) true: { ✎ write: ‘4 is an EVEN NUMBER’, stop. }, else: { ✎ write: ‘WRONG!’. }.
+(5 even?) true: { ✎ write: ‘WRONG!’. }, else: { ✎ write: ‘5 is NOT AN EVEN NUMBER’, stop. }.
+(6 odd?) true: { ✎ write: ‘WRONG!’. }, else: { ✎ write: ‘6 is NOT AN ODD NUMBER’, stop. }.

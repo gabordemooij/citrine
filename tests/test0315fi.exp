@@ -1,6 +1,6 @@
-(Kartta uusi) laita:'a"b' osoitteessa:'test'
+(Kartta uusi) laita:‘a"b’ osoitteessa:‘test’
 Invalid JSON.
-(Kartta uusi) laita:(Lista ← 1 ; 2 ; (Lista ← 3 ; 4) ; ((Kartta uusi) laita:(Lista ← 3 ; 4) osoitteessa:'bar', laita:1 osoitteessa:'foo')) osoitteessa:'nested', laita:Väärä osoitteessa:'legend', laita:27 osoitteessa:'age', laita:'Jack' osoitteessa:'name'
+(Kartta uusi) laita:(Lista ← 1 ; 2 ; (Lista ← 3 ; 4) ; ((Kartta uusi) laita:(Lista ← 3 ; 4) osoitteessa:‘bar’, laita:1 osoitteessa:‘foo’)) osoitteessa:‘nested’, laita:Väärä osoitteessa:‘legend’, laita:27 osoitteessa:‘age’, laita:‘Jack’ osoitteessa:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

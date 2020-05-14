@@ -48,6 +48,9 @@ char* ctr_clex_keyword_var_icon;
 ctr_size ctr_clex_keyword_my_icon_len;
 ctr_size ctr_clex_keyword_var_icon_len;
 
+ctr_size ctr_clex_keyword_qo_len;
+ctr_size ctr_clex_keyword_qc_len;
+
 int ctr_clex_true_len = 0;
 int ctr_clex_false_len = 0;
 int ctr_clex_nil_len = 0;
@@ -213,6 +216,7 @@ int ctr_clex_tok() {
 	char c;
 	int i;
 	char eol;
+	char qo;
 	ctr_clex_tokvlen = 0;
 	ctr_clex_olderptr = ctr_clex_oldptr;
 	ctr_clex_oldptr = ctr_code;
@@ -247,10 +251,11 @@ int ctr_clex_tok() {
 		return CTR_TOKEN_RET;
 	}
 
-	if (c == '\'') {
-		ctr_code++; return CTR_TOKEN_QUOTE;
+	if (strncmp(ctr_code, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len)==0) {
+		ctr_code+=ctr_clex_keyword_qo_len;
+		return CTR_TOKEN_QUOTE;
 	}
-
+	
 	eol = ( strncmp(ctr_code,CTR_DICT_END_OF_LINE,ctr_clex_keyword_eol_len)==0 );
 	
 	if ((c == '-' && (ctr_code+1)<ctr_eofcode && isdigit(*(ctr_code+1))) || isdigit(c)) {
@@ -324,6 +329,7 @@ int ctr_clex_tok() {
 		}
 	}
 
+	qo  = ( strncmp(ctr_code, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len)==0 );
 	while(
 	!isspace(c) && (
 		c != '(' &&
@@ -331,14 +337,14 @@ int ctr_clex_tok() {
 		c != '{' &&
 		c != '}' &&
 		!eol &&
+		!qo  &&
 		c !=','  &&
 		( !(
 		( ctr_code + 2) < ctr_eofcode
 			&&   (uint8_t)            c == 226
 			&& ( (uint8_t) *(ctr_code+1)== 134)
 			&& ( (uint8_t) *(ctr_code+2)== 145) ) ) &&
-		c != ':' &&
-		c != '\''
+		c != ':'
 	)
 	&& ctr_code!=ctr_eofcode
 	) {
@@ -350,6 +356,7 @@ int ctr_clex_tok() {
 		ctr_code++;
 		c = *ctr_code;
 		eol = ( strncmp(ctr_code,CTR_DICT_END_OF_LINE,ctr_clex_keyword_eol_len)==0 );
+		qo  = ( strncmp(ctr_code, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len)==0 );
 	}
 	return CTR_TOKEN_REF;
 }
@@ -364,94 +371,59 @@ char* ctr_clex_code_pointer() {
  * Reads an entire string between a pair of quotes.
  */
 char* ctr_clex_readstr() {
+	ctr_size nesting = 0;
 	char* strbuff;
 	char c;
-	long memblock = 1;
-	int escape;
 	char* beginbuff;
-	long page = 100; /* 100 byte pages */
+	ctr_size page = 100; /* 100 byte pages */
+	ctr_size memblock = 100;
 	ctr_clex_tokvlen=0;
 	strbuff = (char*) ctr_heap_allocate(memblock);
-	c = *ctr_code;
-	escape = 0;
 	beginbuff = strbuff;
-	while(
-		(   /* read until the first non-escaped quote */
-			ctr_code < ctr_eofcode
-			&&
-			(
-				c != '\'' ||
-				escape == 1
-			)
-		)
-	) {
+	while(strncmp(ctr_code, CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len)!=0 || nesting>0) {
+		c = *ctr_code;
 		if ( c == '\n' ) ctr_clex_line_number ++;
-		if ( !ctr_clex_ignore_modes ) {
-			   if (ctr_code < (ctr_eofcode - 2)) {
-					   if ((uint8_t) *(ctr_code) == 226 && (uint8_t) *(ctr_code+1)==134 && (uint8_t) *(ctr_code+2)==181) {
-							   c = '\n';
-							   ctr_code += 2;
-					   }
-			   }
-			   if (ctr_code < (ctr_eofcode - 2)) {
-					   if ((uint8_t) *(ctr_code) == 226 && (uint8_t) *(ctr_code+1)==135 && (uint8_t) *(ctr_code+2)==191) {
-							   c = '\t';
-							   ctr_code += 2;
-					   }
-			   }
+		
+		if (strncmp(ctr_code, "↵", 3)==0) {
+			ctr_code += 3;
+			ctr_clex_tokvlen += 1;
+			*(strbuff) = '\n';
+			strbuff++;
 		}
-		if ( escape == 1 && !ctr_clex_ignore_modes) {
-			switch(c) {
-				case 'n':
-					c = '\n';
-					break;
-				case 'r':
-					c = '\r';
-					break;
-				case 't':
-					c = '\t';
-					break;
-				case 'v':
-					c = '\v';
-					break;
-				case 'b':
-					c = '\b';
-					break;
-				case 'a':
-					c = '\a';
-					break;
-				case 'f':
-					c = '\f';
-					break;
-			}
+		else if (strncmp(ctr_code, "⇿", 3)==0) {
+			ctr_code += 3;
+			ctr_clex_tokvlen += 1;
+			*(strbuff) = '\t';
+			strbuff++;
 		}
-		if (escape == 1 && !ctr_clex_ignore_modes) {
-			escape = 0;
-		} else if (c == '\\' && escape == 0 && !ctr_clex_ignore_modes) {
-			escape = 1;
+		else if (strncmp(ctr_code, CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len)==0) {
+			nesting--;
+			strncpy(strbuff, CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len);
+			ctr_code += ctr_clex_keyword_qc_len;
+			ctr_clex_tokvlen += ctr_clex_keyword_qc_len;
+			strbuff += ctr_clex_keyword_qc_len;
+		}
+		else if (strncmp(ctr_code, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len)==0) {
+			nesting++;
+			strncpy(strbuff, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len);
+			ctr_code += ctr_clex_keyword_qo_len;
+			ctr_clex_tokvlen += ctr_clex_keyword_qo_len;
+			strbuff += ctr_clex_keyword_qo_len;
+		} else {
+			*(strbuff) = *(ctr_code);
+			strbuff++;
 			ctr_code++;
-			c = *ctr_code;
-			continue;
+			ctr_clex_tokvlen++;
 		}
-		ctr_clex_tokvlen ++;
-		if (ctr_clex_tokvlen >= memblock) {
+		if ((ctr_clex_tokvlen + 10) >= memblock) {
 			memblock += page;
 			beginbuff = (char*) ctr_heap_reallocate( beginbuff, memblock );
 			if (beginbuff == NULL) {
 				ctr_clex_emit_error( CTR_ERR_OOM );
 			}
 			/* reset pointer, memory location might have been changed */
-			strbuff = beginbuff + (ctr_clex_tokvlen -1);
+			strbuff = beginbuff + ctr_clex_tokvlen;
 		}
-		if (escape == 1 && ctr_clex_ignore_modes) {
-			escape = 0;
-		} else if (c == '\\' && escape == 0 && ctr_clex_ignore_modes) {
-			escape = 1;
-		}
-		*(strbuff) = c;
-		strbuff++;
-		ctr_code++;
-		c = *ctr_code;
 	}
 	return beginbuff;
 }
@@ -468,9 +440,9 @@ int ctr_clex_forward_scan(char* e, ctr_size* newCodePointer) {
 	char* bytes;
 	char* eol = NULL;
 	if (strncmp(CTR_DICT_END_OF_LINE,".",1)==0) {
-		bytes = ":.,)\"";
+		bytes = ":.,)";
 	} else {
-		bytes = ":,)\"";
+		bytes = ":,)";
 		eol = CTR_DICT_END_OF_LINE;
 	}
 	ctr_size i = *(newCodePointer);
@@ -480,16 +452,13 @@ int ctr_clex_forward_scan(char* e, ctr_size* newCodePointer) {
 	int quote = 0;
 	int q;
 	int found = 0;
-	int escape = 0;
 	while( (e+i) < ctr_eofcode ) {
-		if (escape) escape = 0;
-		else if (!quote && *(e+i) == '(') nesting++;
+		if (!quote && *(e+i) == '(') nesting++;
 		else if (!quote && nesting && *(e+i) == ')') nesting--;
 		else if (!quote && *(e+i) == '{') blocks++;
 		else if (!quote && blocks && *(e+i) == '}') blocks--;
-		else if (!quote && *(e+i) == '\'' && !escape) quote = 1;
-		else if (quote && *(e+i) == '\'' && !escape) quote = 0;
-		else if (quote && *(e+i) == '\\' && !escape) { escape = 1;  }
+		else if (!quote && strncmp((e+i),CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len) == 0) quote++;
+		else if (quote && strncmp((e+i),CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len) == 0) quote--;
 		else if (!nesting && !quote && !blocks) {
 			for (q=0; q<len; q++) {
 				if (*(e+i)==bytes[q]) {

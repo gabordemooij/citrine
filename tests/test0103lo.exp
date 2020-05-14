@@ -1,11 +1,11 @@
 9
-a ຈຸດປະສົງ '[Object]'  is NOT Nil.
-a ບົວບານ 'ຖືກຕ້ອງ'  is NOT Nil.
-a ບົວບານ 'ບໍ່ຖືກຕ້ອງ'  is NOT Nil.
-a ບົວບານ 'ບໍ່ຖືກຕ້ອງ'  is NOT Nil.
-a ເລກ '1'  is NOT Nil.
-a ເລກ '0'  is NOT Nil.
-a ຊ່ອຍແນ່ 'Str'  is NOT Nil.
-a ຊ່ອຍແນ່ ''  is NOT Nil.
-a ລະຫັດ '[Block]'  is NOT Nil.
+a ຈຸດປະສົງ ‘[Object]’  is NOT Nil.
+a ບົວບານ ‘ຖືກຕ້ອງ’  is NOT Nil.
+a ບົວບານ ‘ບໍ່ຖືກຕ້ອງ’  is NOT Nil.
+a ບົວບານ ‘ບໍ່ຖືກຕ້ອງ’  is NOT Nil.
+a ເລກ ‘1’  is NOT Nil.
+a ເລກ ‘0’  is NOT Nil.
+a ຊ່ອຍແນ່ ‘Str’  is NOT Nil.
+a ຊ່ອຍແນ່ ‘’  is NOT Nil.
+a ລະຫັດ ‘[Block]’  is NOT Nil.
 but.. Nil is.. certainly NIL!

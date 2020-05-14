@@ -1,5 +1,5 @@
 
-☞ str := 'Hello'.
-str add: ' '.
-str add: 'World'.
+☞ str := ‘Hello’.
+str add: ‘ ’.
+str add: ‘World’.
 ✎ write: str, stop.

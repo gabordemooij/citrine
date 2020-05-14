@@ -1,5 +1,5 @@
 
-List on: 'sum' do: {
+List on: ‘sum’ do: {
 	☞ total := 0.
 	⛏ each: { :index :element
 		total add: element.
@@ -14,12 +14,12 @@ List on: 'sum' do: {
 
 Program tidiness: 0.
 
-☞ f := File new: '/tmp/test.txt'.
-f write: 'Lorem Ipsum'.
+☞ f := File new: ‘/tmp/test.txt’.
+f write: ‘Lorem Ipsum’.
 f close.
   
 
-f := File new: '/tmp/test.txt'.
+f := File new: ‘/tmp/test.txt’.
 ☞ text := f read.
 f close.
 
@@ -30,7 +30,7 @@ usedMemory1 := (Program memory ? 1).
 
 
 
-f := File new: '/tmp/test.txt'.
+f := File new: ‘/tmp/test.txt’.
 text := f read.
 f close.
 
@@ -38,7 +38,7 @@ Program clean memory.
 usedMemory2 := (Program memory ? 1).
 
 
-f := File new: '/tmp/test.txt'.
+f := File new: ‘/tmp/test.txt’.
 text := f read.
 f close.
 
@@ -48,7 +48,7 @@ usedMemory3 := (Program memory ? 1).
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	✎ write: 'No memory leaks here'.
+	✎ write: ‘No memory leaks here’.
 }, false: {
-	✎ write: 'Leaking memory...'.
+	✎ write: ‘Leaking memory...’.
 }.

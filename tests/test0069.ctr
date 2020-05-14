@@ -1,19 +1,19 @@
 
 
-String on: 'html' do: {
+String on: ‘html’ do: {
 	↲ (
 		⛏
-		replace: '&' with: '&amp;',
-		replace: '<' with: '&lt;',
-		replace: '>' with: '&gt;',
-		replace: '"' with: '&quot;'
+		replace: ‘&’ with: ‘&amp;’,
+		replace: ‘<’ with: ‘&lt;’,
+		replace: ‘>’ with: ‘&gt;’,
+		replace: ‘"’ with: ‘&quot;’
 	).
 }.
 
-✎ write: ('abc' byte: 2).
-✎ write: ('a' byte: 1).
-✎ write: ('zzz' byte: 11).
-✎ write: ('zzz' byte: -11).
+✎ write: (‘abc’ byte: 2).
+✎ write: (‘a’ byte: 1).
+✎ write: (‘zzz’ byte: 11).
+✎ write: (‘zzz’ byte: -11).
 ✎ stop.
-✎ write: (' left trimmed ' remove surrounding spaces) + ' ' + ( 'and right trimmed' remove surrounding spaces) + '!', stop.
-✎ write: '<html>"html & entities"</html>' html.
+✎ write: (‘ left trimmed ’ remove surrounding spaces) + ‘ ’ + ( ‘and right trimmed’ remove surrounding spaces) + ‘!’, stop.
+✎ write: ‘<html>"html & entities"</html>’ html.

@@ -1,11 +1,11 @@
 
 ☞ shop := (Map new
-	put: 'magazine' at: 'books',
-	put: 'computer' at: 'electronics',
-	put: 'lipstick' at: 'cosmetics'
+	put: ‘magazine’ at: ‘books’,
+	put: ‘computer’ at: ‘electronics’,
+	put: ‘lipstick’ at: ‘cosmetics’
 ).
-✎ write: (shop has: 'computer'), stop. 
-✎ write: (shop has: 'sausage'), stop. 
-✎ write: (shop has: 'computers'), stop. 
-✎ write: (shop has: 'compute'), stop. 
-✎ write: (shop has: '2computer'), stop. 
+✎ write: (shop has: ‘computer’), stop. 
+✎ write: (shop has: ‘sausage’), stop. 
+✎ write: (shop has: ‘computers’), stop. 
+✎ write: (shop has: ‘compute’), stop. 
+✎ write: (shop has: ‘2computer’), stop. 

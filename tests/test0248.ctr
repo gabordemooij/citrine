@@ -1,25 +1,25 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 
-String on: 'evaluate' do: {
-	☞ code := File new: '/tmp/eval.ctr'.
-	code write: ⛏ string + '.'.
-	Program use: '/tmp/eval.ctr'.
+String on: ‘evaluate’ do: {
+	☞ code := File new: ‘/tmp/eval.ctr’.
+	code write: ⛏ string + ‘.’.
+	Program use: ‘/tmp/eval.ctr’.
 }.
 
 ☞ a := (List ← (
 	(Map new)
-		put: 'domain' at: 'mywebsite.com',
+		put: ‘domain’ at: ‘mywebsite.com’,
 		put: (List ←
 			((Map new)
-				put: 'home' at: 'title',
-				put: '<html></html>' at: 'body',
-				put: '2017-01-01' at: 'created'
+				put: ‘home’ at: ‘title’,
+				put: ‘<html></html>’ at: ‘body’,
+				put: ‘2017-01-01’ at: ‘created’
 			) ;
 			((Map new)
-				put: 'aboutus(c)' at: 'title',
-				put: '<credits>Author Inc.</credits>' at: 'body'
+				put: ‘aboutus(c)’ at: ‘title’,
+				put: ‘<credits>Author Inc.</credits>’ at: ‘body’
 			)
-		) at: 'pages'
+		) at: ‘pages’
 	)
 ) string.
 
@@ -27,13 +27,13 @@ String on: 'evaluate' do: {
 ✎ write: a, stop.
 
 ☞ b := Nil.
-('b := ' + a) evaluate.
-✎ write: b ? 1 ? 'pages' ? 2 ? 'body', stop.
+(‘b := ’ + a) evaluate.
+✎ write: b ? 1 ? ‘pages’ ? 2 ? ‘body’, stop.
 
 ☞ c := b ? 1.
 ☞ d := c string.
 ✎ write: d type, stop.
 
 ☞ e := Nil.
-('e := ' + d) evaluate.
-✎ write: e ? 'pages' ? 1, stop.
+(‘e := ’ + d) evaluate.
+✎ write: e ? ‘pages’ ? 1, stop.

@@ -1,11 +1,11 @@
 9
-a Аб’ект '[Object]'  is NOT Nil.
-a Булева 'Праўда'  is NOT Nil.
-a Булева 'Ілжывая'  is NOT Nil.
-a Булева 'Ілжывая'  is NOT Nil.
-a Нумар '1'  is NOT Nil.
-a Нумар '0'  is NOT Nil.
-a Радок 'Str'  is NOT Nil.
-a Радок ''  is NOT Nil.
-a Кодэкс '[Block]'  is NOT Nil.
+a Аб’ект ‘[Object]’  is NOT Nil.
+a Булева ‘Праўда’  is NOT Nil.
+a Булева ‘Ілжывая’  is NOT Nil.
+a Булева ‘Ілжывая’  is NOT Nil.
+a Нумар ‘1’  is NOT Nil.
+a Нумар ‘0’  is NOT Nil.
+a Радок ‘Str’  is NOT Nil.
+a Радок ‘’  is NOT Nil.
+a Кодэкс ‘[Block]’  is NOT Nil.
 but.. Nil is.. certainly NIL!

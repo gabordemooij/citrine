@@ -108,6 +108,8 @@ int main(int argc, char* argv[]) {
 	ctr_clex_keyword_eol_len = strlen( CTR_DICT_END_OF_LINE );
 	ctr_clex_keyword_num_sep_dec_len = strlen( CTR_DICT_NUM_DEC_SEP );
 	ctr_clex_keyword_num_sep_tho_len = strlen( CTR_DICT_NUM_THO_SEP );
+	ctr_clex_keyword_qo_len = strlen( CTR_DICT_QUOT_OPEN );
+	ctr_clex_keyword_qc_len = strlen( CTR_DICT_QUOT_CLOSE );
 	int mode = ctr_cli_read_args(argc, argv);
 	if (mode == 1) {
 		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
@@ -124,7 +126,7 @@ int main(int argc, char* argv[]) {
 		fwrite(CtrStdFlow->value.svalue->value, CtrStdFlow->value.svalue->vlen, 1, stderr);
 		exit(1);
 	}
-	/* ctr_internal_debug_tree(program,1); -- for debugging */
+	/*ctr_internal_debug_tree(program,1); -- for debugging */
 	ctr_initialize_world();
 	ctr_cwlk_run(program);
 	ctr_gc_sweep(1);

@@ -2,12 +2,12 @@
 Program tidiness: 4.
 
 ☞ Animal := Object new.
-Animal on: 'makeSound' do: {
-	✎ write: '?'.
+Animal on: ‘makeSound’ do: {
+	✎ write: ‘?’.
 }.
 ☞ Cat := Animal new.
-Cat on: 'makeSound' do: {
-	✎ write: 'meow!'.
+Cat on: ‘makeSound’ do: {
+	✎ write: ‘meow!’.
 	⛏ `makeSound. 
 }.
 ☞ Tom := Cat new.

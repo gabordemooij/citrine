@@ -1,6 +1,6 @@
-(Map bago) ilagay:'a"b' sa:'test'
+(Map bago) ilagay:‘a"b’ sa:‘test’
 Invalid JSON.
-(Map bago) ilagay:(Listahan ← 1 ; 2 ; (Listahan ← 3 ; 4) ; ((Map bago) ilagay:(Listahan ← 3 ; 4) sa:'bar', ilagay:1 sa:'foo')) sa:'nested', ilagay:Mali sa:'legend', ilagay:27 sa:'age', ilagay:'Jack' sa:'name'
+(Map bago) ilagay:(Listahan ← 1 ; 2 ; (Listahan ← 3 ; 4) ; ((Map bago) ilagay:(Listahan ← 3 ; 4) sa:‘bar’, ilagay:1 sa:‘foo’)) sa:‘nested’, ilagay:Mali sa:‘legend’, ilagay:27 sa:‘age’, ilagay:‘Jack’ sa:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

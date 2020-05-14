@@ -1,15 +1,15 @@
-☞ a := 'hello'.
-☞ b := 'hello'.
+☞ a := ‘hello’.
+☞ b := ‘hello’.
 ☞ z := a.
 ☞ c := Nil.
 ☞ q := Object new.
 ☞ p := q.
-(a equals: a) true: { ✎ write: 'Y1'. }.
-(a equals: b) true: { ✎ write: 'Y2'. }.
-(a equals: c) true: { ✎ write: 'Y3'. }.
-(a equals: z) true: { ✎ write: 'Y4'. }.
-(z equals: a) true: { ✎ write: 'Y5'. }.
-(q equals: q) true: { ✎ write: 'Y6'. }.
-(p equals: q) true: { ✎ write: 'Y7'. }.
-(p equals: a) true: { ✎ write: 'Y8'. }.
-(p equals: Nil) true: { ✎ write: 'Y9'. }.
+(a equals: a) true: { ✎ write: ‘Y1’. }.
+(a equals: b) true: { ✎ write: ‘Y2’. }.
+(a equals: c) true: { ✎ write: ‘Y3’. }.
+(a equals: z) true: { ✎ write: ‘Y4’. }.
+(z equals: a) true: { ✎ write: ‘Y5’. }.
+(q equals: q) true: { ✎ write: ‘Y6’. }.
+(p equals: q) true: { ✎ write: ‘Y7’. }.
+(p equals: a) true: { ✎ write: ‘Y8’. }.
+(p equals: Nil) true: { ✎ write: ‘Y9’. }.

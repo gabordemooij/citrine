@@ -1,6 +1,6 @@
 ☞ z := List new.
 {
-	☞ x := 'hello'.
+	☞ x := ‘hello’.
 	z append: x.
 } run.
 ✎ write: (z position: 1).

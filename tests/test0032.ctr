@@ -1,6 +1,6 @@
 ☞ a := Object new.
-a on: 'init' do: {
-	☞ v := 'test'.
+a on: ‘init’ do: {
+	☞ v := ‘test’.
 	⚿ value := v.
 	⚿ value2 := ⚿ value.
 	☞ x := ⚿ value2.

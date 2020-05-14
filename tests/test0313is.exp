@@ -6,5 +6,5 @@ The garden is Núll meters long.
 Luckily, this day, there are Núll wasps in the garden.
 The dog named Núll sleeps under the tree.
 a\"bb\"ccc\"
-(Kort nýtt) setja:((Kort nýtt) setja:Núll _á:dog, setja:Núll _á:insects, setja:((Kort nýtt) setja:15 _á:'length', setja:8 _á:'width') _á:'size', setja:(Listi ← 'tulips' ; 'roses' ; 'lillies') _á:'flower', setja:Rangt _á:'shed', setja:Satt _á:'pool', setja:2 _á:'chairs') _á:'garden'
+(Kort nýtt) setja:((Kort nýtt) setja:Núll _á:dog, setja:Núll _á:insects, setja:((Kort nýtt) setja:15 _á:‘length’, setja:8 _á:‘width’) _á:‘size’, setja:(Listi ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _á:‘flower’, setja:Rangt _á:‘shed’, setja:Satt _á:‘pool’, setja:2 _á:‘chairs’) _á:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

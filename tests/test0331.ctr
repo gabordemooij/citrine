@@ -1,6 +1,6 @@
-☞ str := 'abc'.
+☞ str := ‘abc’.
 ☞ x := str byte: 4.
 ( x Nil? ) true: {
-	✎ write: 'Found string boundary'.
+	✎ write: ‘Found string boundary’.
 }.
 ✎ write: x, stop.

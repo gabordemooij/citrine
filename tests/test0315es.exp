@@ -1,6 +1,6 @@
-(Mapa nuevo) ponlo en:'a"b' __:'test'
+(Mapa nuevo) ponlo en:‘a"b’ __:‘test’
 Invalid JSON.
-(Mapa nuevo) ponlo en:(Lista ← 1 ; 2 ; (Lista ← 3 ; 4) ; ((Mapa nuevo) ponlo en:(Lista ← 3 ; 4) __:'bar', ponlo en:1 __:'foo')) __:'nested', ponlo en:Falso __:'legend', ponlo en:27 __:'age', ponlo en:'Jack' __:'name'
+(Mapa nuevo) ponlo en:(Lista ← 1 ; 2 ; (Lista ← 3 ; 4) ; ((Mapa nuevo) ponlo en:(Lista ← 3 ; 4) __:‘bar’, ponlo en:1 __:‘foo’)) __:‘nested’, ponlo en:Falso __:‘legend’, ponlo en:27 __:‘age’, ponlo en:‘Jack’ __:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

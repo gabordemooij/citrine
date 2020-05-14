@@ -1,6 +1,6 @@
-(Map vaovao) hametraka:'a"b' amin’ny:'test'
+(Map vaovao) hametraka:‘a"b’ amin’ny:‘test’
 Invalid JSON.
-(Map vaovao) hametraka:(List ← 1 ; 2 ; (List ← 3 ; 4) ; ((Map vaovao) hametraka:(List ← 3 ; 4) amin’ny:'bar', hametraka:1 amin’ny:'foo')) amin’ny:'nested', hametraka:Diso amin’ny:'legend', hametraka:27 amin’ny:'age', hametraka:'Jack' amin’ny:'name'
+(Map vaovao) hametraka:(List ← 1 ; 2 ; (List ← 3 ; 4) ; ((Map vaovao) hametraka:(List ← 3 ; 4) amin’ny:‘bar’, hametraka:1 amin’ny:‘foo’)) amin’ny:‘nested’, hametraka:Diso amin’ny:‘legend’, hametraka:27 amin’ny:‘age’, hametraka:‘Jack’ amin’ny:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

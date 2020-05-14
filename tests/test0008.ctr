@@ -1,16 +1,16 @@
 ☞ Greeter := Object new.
-Greeter on: 'make' do: {
+Greeter on: ‘make’ do: {
 	☞ greeter := Object new.
-	greeter on: 'name:' do: { :name
-		✎ write: 'setting a name'.
+	greeter on: ‘name:’ do: { :name
+		✎ write: ‘setting a name’.
 		⚿ myName := name.
 	}.
-	greeter on: 'greet' do: {
-		✎ write: 'Hello'.
+	greeter on: ‘greet’ do: {
+		✎ write: ‘Hello’.
 		✎ write: ⚿ myName.
 	}.
 	↲greeter.
 }.
 ☞ greeter := Greeter make.
-greeter name: 'sunshine!'.
+greeter name: ‘sunshine!’.
 greeter greet.

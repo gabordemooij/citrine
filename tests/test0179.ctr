@@ -7,7 +7,7 @@
 
 Program tidiness: 0.
 
-☞ txt := 'Word Salad'.
+☞ txt := ‘Word Salad’.
 ✎ write: ( txt from: 6 length: 5 ).
 ✎ write: ( txt offset: 5, remove surrounding spaces ), stop.
 
@@ -16,7 +16,7 @@ Program clean memory.
 usedMemory1 := (Program memory ? 1).
 
 
-txt := 'Word Salad'.
+txt := ‘Word Salad’.
 ✎ write: ( txt from: 6 length: 5 ).
 ✎ write: ( txt offset: 5, remove surrounding spaces ), stop.
 
@@ -24,7 +24,7 @@ Program clean memory.
 usedMemory2 := (Program memory ? 1).
 
 
-txt := 'Word Salad'.
+txt := ‘Word Salad’.
 ✎ write: ( txt from: 6 length: 5 ).
 ✎ write: ( txt offset: 5, remove surrounding spaces ), stop.
 
@@ -34,7 +34,7 @@ usedMemory3 := (Program memory ? 1).
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	✎ write: 'No memory leaks here'.
+	✎ write: ‘No memory leaks here’.
 }, false: {
-	✎ write: 'Leaking memory...'.
+	✎ write: ‘Leaking memory...’.
 }.

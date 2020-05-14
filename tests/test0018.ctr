@@ -1,8 +1,8 @@
 ☞ Animal := Object new.
-Animal on: 'sound:' do: { :s ⚿ sound := s. }.
-Animal on: 'makeSound' do: { ✎ write: ⚿ sound. }.
+Animal on: ‘sound:’ do: { :s ⚿ sound := s. }.
+Animal on: ‘makeSound’ do: { ✎ write: ⚿ sound. }.
 ☞ Cat := Animal new.
-Cat on: 'init' do: { ⚿ sound := 'MEOW!'.}.
-Cat on: 'meow' do: { ⛏ makeSound. }.
+Cat on: ‘init’ do: { ⚿ sound := ‘MEOW!’.}.
+Cat on: ‘meow’ do: { ⛏ makeSound. }.
 Cat init.
 Cat meow.

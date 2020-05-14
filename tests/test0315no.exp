@@ -1,6 +1,6 @@
-(Kart ny) sagt:'a"b' at:'test'
+(Kart ny) sagt:‘a"b’ at:‘test’
 Invalid JSON.
-(Kart ny) sagt:(Liste ← 1 ; 2 ; (Liste ← 3 ; 4) ; ((Kart ny) sagt:(Liste ← 3 ; 4) at:'bar', sagt:1 at:'foo')) at:'nested', sagt:Falsk at:'legend', sagt:27 at:'age', sagt:'Jack' at:'name'
+(Kart ny) sagt:(Liste ← 1 ; 2 ; (Liste ← 3 ; 4) ; ((Kart ny) sagt:(Liste ← 3 ; 4) at:‘bar’, sagt:1 at:‘foo’)) at:‘nested’, sagt:Falsk at:‘legend’, sagt:27 at:‘age’, sagt:‘Jack’ at:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

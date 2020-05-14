@@ -1,6 +1,6 @@
 
-✎ write: ( 'hello' = Nil ), stop.
-✎ write: ( 'hello' ≠ Nil ), stop.
+✎ write: ( ‘hello’ = Nil ), stop.
+✎ write: ( ‘hello’ ≠ Nil ), stop.
 ✎ write: ( 2 > Nil ), stop.
 ✎ write: ( 2 < Nil ), stop.
 ✎ write: ( 2 ≥ Nil ), stop.

@@ -1,3 +1,3 @@
 
-☞ catcall := 'meow'.
-✎ write: ('The cat goes catcall' catcall: catcall).
+☞ catcall := ‘meow’.
+✎ write: (‘The cat goes catcall’ catcall: catcall).

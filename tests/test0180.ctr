@@ -1,11 +1,11 @@
-String on: 'html' do: {
+String on: ‘html’ do: {
 	↲ (
 		⛏
-		replace: '&' with: '&amp;',
-		replace: '<' with: '&lt;',
-		replace: '>' with: '&gt;',
-		replace: '\'' with: '&apos;',
-		replace: '"' with: '&quot;'
+		replace: ‘&’ with: ‘&amp;’,
+		replace: ‘<’ with: ‘&lt;’,
+		replace: ‘>’ with: ‘&gt;’,
+		replace: ‘'’ with: ‘&apos;’,
+		replace: ‘"’ with: ‘&quot;’
 	).
 }.
 
@@ -17,7 +17,7 @@ String on: 'html' do: {
 Program tidiness: 0.
 
 {
-☞ txt := '<h1>"Hell\'o & Goodbye"</h1>'.
+☞ txt := ‘<h1>"Hell'o & Goodbye"</h1>’.
 ✎ write: txt copy html, stop.
 ✎ write: txt copy lowercase, stop.
 ✎ write: txt copy uppercase, stop.
@@ -29,7 +29,7 @@ usedMemory1 := (Program memory ? 1).
 
 
 {
-☞ txt := '<h1>"Hell\'o & Goodbye"</h1>'.
+☞ txt := ‘<h1>"Hell'o & Goodbye"</h1>’.
 ✎ write: txt copy html, stop.
 ✎ write: txt copy lowercase, stop.
 ✎ write: txt copy uppercase, stop.
@@ -40,7 +40,7 @@ usedMemory2 := (Program memory ? 1).
 
 
 {
-☞ txt := '<h1>"Hell\'o & Goodbye"</h1>'.
+☞ txt := ‘<h1>"Hell'o & Goodbye"</h1>’.
 ✎ write: txt copy html, stop.
 ✎ write: txt copy lowercase, stop.
 ✎ write: txt copy uppercase, stop.
@@ -52,7 +52,7 @@ usedMemory3 := (Program memory ? 1).
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	✎ write: 'No memory leaks here'.
+	✎ write: ‘No memory leaks here’.
 }, false: {
-	✎ write: 'Leaking memory...'.
+	✎ write: ‘Leaking memory...’.
 }.

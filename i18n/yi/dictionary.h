@@ -195,3 +195,5 @@
 #define CTR_DICT_THIS_BLOCK                       "דעם קאָד פאַרשפּאַרן"
 #define CTR_DICT_NUM_DEC_SEP                     ","
 #define CTR_DICT_NUM_THO_SEP                     "."
+#define CTR_DICT_QUOT_OPEN                       "‘"
+#define CTR_DICT_QUOT_CLOSE                      "’"

@@ -7,26 +7,26 @@
 
 Program tidiness: 0.
 
-☞ a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
+☞ a := List ← ‘hello’ ; ‘world’ ; True ; Nil ; 666.
 ☞ b := a from: 3 length: 2.
-✎ write: ( b join: '|' ), write: b count.
+✎ write: ( b join: ‘|’ ), write: b count.
 
 Program clean memory.
 usedMemory1 := (Program memory ? 1).
 
 
-a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
+a := List ← ‘hello’ ; ‘world’ ; True ; Nil ; 666.
 b := a from: 3 length: 2.
-✎ write: ( b join: '|' ), write: b count.
+✎ write: ( b join: ‘|’ ), write: b count.
 
 
 Program clean memory.
 usedMemory2 := (Program memory ? 1).
 
 
-a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
+a := List ← ‘hello’ ; ‘world’ ; True ; Nil ; 666.
 b := a from: 3 length: 2.
-✎ write: ( b join: '|' ), write: b count.
+✎ write: ( b join: ‘|’ ), write: b count.
 
 
 Program clean memory.
@@ -35,7 +35,7 @@ usedMemory3 := (Program memory ? 1).
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	✎ write: 'No memory leaks here'.
+	✎ write: ‘No memory leaks here’.
 }, false: {
-	✎ write: 'Leaking memory...'.
+	✎ write: ‘Leaking memory...’.
 }.

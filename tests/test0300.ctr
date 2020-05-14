@@ -4,6 +4,6 @@
 	Hawaii: 12.99,
 	QuattroFormaggi: 13.00,
 	X 15.99.
-✎ write: ( menu ? 'Hawaii' ), stop.
+✎ write: ( menu ? ‘Hawaii’ ), stop.
 ✎ write: ( menu Margherita ), stop.
-✎ write: ( menu ? 'X' ), stop.
+✎ write: ( menu ? ‘X’ ), stop.

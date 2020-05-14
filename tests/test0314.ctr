@@ -1,6 +1,6 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 
-☞ garden := '
+☞ garden := ‘
 	"garden": {
 		chairs,
 		"pool": true,
@@ -17,7 +17,7 @@
 		"insects":null,
 		"dog":
 	}
-}'.
+}’.
 
 ☞ g := Json to object: garden.
 ✎ write: g, stop.

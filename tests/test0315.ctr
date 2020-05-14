@@ -1,17 +1,17 @@
 Program tidiness: 12.
 
-String on: 'escape:' do: { :characters
+String on: ‘escape:’ do: { :characters
 	☞ str := ⛏.
 	characters characters each: { :number :character
 		
-		☞ replacement := '\\' + character.
+		☞ replacement := ‘\\’ + character.
 		
-		(character = '\t') true: {
-			replacement := '\\t'.
+		(character = ‘\t’) true: {
+			replacement := ‘\\t’.
 		}.
 		
-		(character = '\n') true: {
-			replacement := '\\n'.
+		(character = ‘\n’) true: {
+			replacement := ‘\\n’.
 		}.
 		
 		str := str replace: character with: replacement.
@@ -19,28 +19,28 @@ String on: 'escape:' do: { :characters
 	↲ str.
 }.
 
-String on: 'unescape:' do: { :text
+String on: ‘unescape:’ do: { :text
 	☞ str := ⛏.
 	text characters each: { :number :character
 		
-		(character = '\t') true: {
-			character := '\\t'.
+		(character = ‘\t’) true: {
+			character := ‘\\t’.
 		}.
 		
-		(character = '\n') true: {
-			character := '\\n'.
+		(character = ‘\n’) true: {
+			character := ‘\\n’.
 		}.
 		
-		str := str pattern: ('\\\\+(X)' X character) process: { :match
+		str := str pattern: (‘\\\\+(X)’ X character) process: { :match
 			
 			☞ special := match ? 2.
 			
-			((match ? 1) = '\\t') true: {
-				special := '⇿'.
+			((match ? 1) = ‘\\t’) true: {
+				special := ‘⇿’.
 			}.
 			
-			((match ? 1) = '\\n') true: {
-				special := '↵'.
+			((match ? 1) = ‘\\n’) true: {
+				special := ‘↵’.
 			}.
 			
 			↲ special.
@@ -50,10 +50,10 @@ String on: 'unescape:' do: { :text
 }.
 
 
-☞ json := '{"test":"a\\"b"}'.
+☞ json := ‘{"test":"a\\"b"}’.
 ✎ write: (Json to object: json), stop.
 
-☞ json := '{ "name" : "Jack", "age" : 27, "legend" : false, "nested": [1, 2, [3, 4], {"foo": 1, [3, 4]}] }'.
+☞ json := ‘{ "name" : "Jack", "age" : 27, "legend" : false, "nested": [1, 2, [3, 4], {"foo": 1, [3, 4]}] }’.
 
 {
 	Json to object: json.
@@ -61,37 +61,37 @@ String on: 'unescape:' do: { :text
 	✎ write: e, stop.
 }, run.
 
-☞ json := '{ "name" : "Jack", "age" : 27, "legend" : false, "nested": [1, 2, [3, 4], {"foo": 1, "bar":[3, 4]}] }'.
+☞ json := ‘{ "name" : "Jack", "age" : 27, "legend" : false, "nested": [1, 2, [3, 4], {"foo": 1, "bar":[3, 4]}] }’.
 ✎ write: (Json to object: json), stop.
 
-☞ json := '{"test":"a\\tb"}'.
+☞ json := ‘{"test":"a\\tb"}’.
 ✎ write: (Json to object: json) test, stop.
 
-☞ json := '{"test":"a\\t\\tb"}'.
+☞ json := ‘{"test":"a\\t\\tb"}’.
 ✎ write: (Json jsonify: (Json to object: json)), stop.
 
-☞ json := '{"test":"a\\nb"}'.
+☞ json := ‘{"test":"a\\nb"}’.
 ✎ write: (Json jsonify: (Json to object: json)), stop.
 
-☞ json := '{"test":"a\\"b"}'.
+☞ json := ‘{"test":"a\\"b"}’.
 ✎ write: (Json jsonify: (Json to object: json)), stop.
 
-☞ json := '{"test":"a\\b"}'.
+☞ json := ‘{"test":"a\\b"}’.
 ✎ write: (Json jsonify: (Json to object: json)), stop.
 
-✎ write: '______________________Unescape\n'.
-✎ write: ('hello\\tworld' unescape: ''), stop.
-✎ write: ('\"hello world\"' unescape: '"'), stop.
-✎ write: ('a\\"b' unescape: '"'), stop.
-✎ write: ('hello\\tworld' unescape: '\t'), stop.
-✎ write: ('hello\\nworld' unescape: '\n'), stop.
-✎ write: ('hello\\two\\nrld' unescape: '\t\n'), stop.
-✎ write: ('hello\\t\\two\\n\\nrld' unescape: '\t\n'), stop.
+✎ write: ‘______________________Unescape\n’.
+✎ write: (‘hello\\tworld’ unescape: ‘’), stop.
+✎ write: (‘\"hello world\"’ unescape: ‘"’), stop.
+✎ write: (‘a\\"b’ unescape: ‘"’), stop.
+✎ write: (‘hello\\tworld’ unescape: ‘\t’), stop.
+✎ write: (‘hello\\nworld’ unescape: ‘\n’), stop.
+✎ write: (‘hello\\two\\nrld’ unescape: ‘\t\n’), stop.
+✎ write: (‘hello\\t\\two\\n\\nrld’ unescape: ‘\t\n’), stop.
 
-✎ write: '______________________Escape\n'.
-✎ write: ('hello\tworld' escape: ''), stop.
-✎ write: ('a"b' escape: '"'), stop.
-✎ write: ('\"hello world\"' escape: '"'), stop.
-✎ write: ('hello\two\nrld' escape: '\t', escape: '\n'), stop.
-✎ write: ('hello\two\nrld' escape: '\t\n'), stop.
-✎ write: ('hello\t\two\n\nrld' escape: '\t\n'), stop.
+✎ write: ‘______________________Escape\n’.
+✎ write: (‘hello\tworld’ escape: ‘’), stop.
+✎ write: (‘a"b’ escape: ‘"’), stop.
+✎ write: (‘\"hello world\"’ escape: ‘"’), stop.
+✎ write: (‘hello\two\nrld’ escape: ‘\t’, escape: ‘\n’), stop.
+✎ write: (‘hello\two\nrld’ escape: ‘\t\n’), stop.
+✎ write: (‘hello\t\two\n\nrld’ escape: ‘\t\n’), stop.

@@ -1,11 +1,11 @@
 9
-a Nkan '[Object]'  is NOT Nil.
-a Boolean 'Otitọ'  is NOT Nil.
-a Boolean 'Irọ'  is NOT Nil.
-a Boolean 'Irọ'  is NOT Nil.
-a Nọmba '1'  is NOT Nil.
-a Nọmba '0'  is NOT Nil.
-a Okun 'Str'  is NOT Nil.
-a Okun ''  is NOT Nil.
-a Koodu '[Block]'  is NOT Nil.
+a Nkan ‘[Object]’  is NOT Nil.
+a Boolean ‘Otitọ’  is NOT Nil.
+a Boolean ‘Irọ’  is NOT Nil.
+a Boolean ‘Irọ’  is NOT Nil.
+a Nọmba ‘1’  is NOT Nil.
+a Nọmba ‘0’  is NOT Nil.
+a Okun ‘Str’  is NOT Nil.
+a Okun ‘’  is NOT Nil.
+a Koodu ‘[Block]’  is NOT Nil.
 but.. Nil is.. certainly NIL!

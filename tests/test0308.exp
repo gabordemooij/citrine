@@ -14,5 +14,5 @@ Sending toString to File yields a path:
 [File (no path)]
 Sending toNumber to File yields a 1:
 1
-(Map new) put:([Object]) at:'Program', put:(666) at:'dice'
+(Map new) put:([Object]) at:‘Program’, put:(666) at:‘dice’
 List ← (666) ; ([Object])

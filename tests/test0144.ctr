@@ -1,20 +1,20 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 
 
 
 ☞ CoffeeGrounds := Object new.
-CoffeeGrounds on: 'extract' do: { ↲ 'coffee'. }.
+CoffeeGrounds on: ‘extract’ do: { ↲ ‘coffee’. }.
 
 ☞ CoffeeMachine := Object new.
-CoffeeMachine on: 'init' do: {
+CoffeeMachine on: ‘init’ do: {
 	⚿ coffeegrounds := CoffeeGrounds new.
 }.
-CoffeeMachine on: 'new' do: {
+CoffeeMachine on: ‘new’ do: {
 	↲ CoffeeMachine `new init.
 }.
 
-CoffeeMachine on: 'makeTea' do: {	↲ (⚿ tealeaves extract). }.
-CoffeeMachine on: 'makeCoffee' do: { ↲ (⚿ coffeegrounds extract). }.
+CoffeeMachine on: ‘makeTea’ do: {	↲ (⚿ tealeaves extract). }.
+CoffeeMachine on: ‘makeCoffee’ do: { ↲ (⚿ coffeegrounds extract). }.
 
 ☞ coffeeDream := CoffeeMachine new.
 

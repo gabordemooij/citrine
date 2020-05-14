@@ -1,6 +1,6 @@
-(Hartë i ri) vënë:'a"b' në:'test'
+(Hartë i ri) vënë:‘a"b’ në:‘test’
 Invalid JSON.
-(Hartë i ri) vënë:(Listë ← 1 ; 2 ; (Listë ← 3 ; 4) ; ((Hartë i ri) vënë:(Listë ← 3 ; 4) në:'bar', vënë:1 në:'foo')) në:'nested', vënë:I rremë në:'legend', vënë:27 në:'age', vënë:'Jack' në:'name'
+(Hartë i ri) vënë:(Listë ← 1 ; 2 ; (Listë ← 3 ; 4) ; ((Hartë i ri) vënë:(Listë ← 3 ; 4) në:‘bar’, vënë:1 në:‘foo’)) në:‘nested’, vënë:I rremë në:‘legend’, vënë:27 në:‘age’, vënë:‘Jack’ në:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

@@ -1,23 +1,23 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 ☞ animal := Object new. 
  
- animal on: 'name:' do: { :n
+ animal on: ‘name:’ do: { :n
 ⚿ name := n.
 }. 
 
 
-animal name: 'Diva'. 
+animal name: ‘Diva’. 
  
-animal on: 'name' do: {
+animal on: ‘name’ do: {
 ↲ name.
 }.
 
 ☞ cat := animal new.
  
- cat name: 'Diva'. 
+ cat name: ‘Diva’. 
  
- cat on: 'name' do: {
-↲ 'your royal highness '
+ cat on: ‘name’ do: {
+↲ ‘your royal highness ’
 + (⛏ `name).
 }.
 

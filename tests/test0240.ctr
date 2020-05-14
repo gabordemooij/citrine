@@ -1,7 +1,7 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 ☞ $ := Object new.
 
-$ on: 'respond:' do: { :x
+$ on: ‘respond:’ do: { :x
 	
 	☞ operation := x character: 1.
 	☞ valuta    := x character: 2.
@@ -11,8 +11,8 @@ $ on: 'respond:' do: { :x
 	
 	☞ amount    := 0.
 
-	( operation = '+' ) true: {
-		( valuta = '£' ) true: { amount := 1.28 * money. }.
+	( operation = ‘+’ ) true: {
+		( valuta = ‘£’ ) true: { amount := 1.28 * money. }.
 	}.
 	
 	↲ amount.
@@ -27,19 +27,19 @@ $ on: 'respond:' do: { :x
 
 ☞ Fruit := Object new.
 
-Fruit on: 'new' do: {
+Fruit on: ‘new’ do: {
 	☞ f := ⛏ `new.
 	f apples: 0.
 	f oranges: 0.
 	↲ f.
 }.
 
-Fruit on: 'apples:' do: { :a ⚿ apples := a. }.
-Fruit on: 'oranges:' do: { :p ⚿ oranges := p. }.
-Fruit on: 'apples' do: { ↲ ⚿ apples. }.
-Fruit on: 'oranges' do: { ↲ ⚿ oranges. }.
+Fruit on: ‘apples:’ do: { :a ⚿ apples := a. }.
+Fruit on: ‘oranges:’ do: { :p ⚿ oranges := p. }.
+Fruit on: ‘apples’ do: { ↲ ⚿ apples. }.
+Fruit on: ‘oranges’ do: { ↲ ⚿ oranges. }.
 
-Fruit on: '+' do: { :f
+Fruit on: ‘+’ do: { :f
 	
 	☞ n := Fruit new.
 	f add: 1.
@@ -49,20 +49,20 @@ Fruit on: '+' do: { :f
 	↲ n.
 }.
 
-Fruit on: 'string' do: {
+Fruit on: ‘string’ do: {
 	
-	↲ ( ⚿ apples string + ' apples and ' + ⚿ oranges + ' oranges' ).
+	↲ ( ⚿ apples string + ‘ apples and ’ + ⚿ oranges + ‘ oranges’ ).
 }.
 
-Number on: 'apples' do: {
+Number on: ‘apples’ do: {
 	↲ ((Fruit new) apples: ⛏).
 }.
 
-Number on: 'apple' do: {
+Number on: ‘apple’ do: {
 	↲ ((Fruit new) apples: ⛏).
 }.
 
-Number on: 'oranges' do: {
+Number on: ‘oranges’ do: {
 	↲ ((Fruit new) oranges: ⛏).
 }.
 
@@ -72,13 +72,13 @@ Number on: 'oranges' do: {
 ✎ write: (1 apple + 3 oranges + 4 apples), stop.
 
 
-String on: 'twice' do: {
+String on: ‘twice’ do: {
 	↲ ((⛏ string) + (⛏ string)).
 }.
 
 
 
-✎ write: '❤❤❤' twice.
+✎ write: ‘❤❤❤’ twice.
 
 
 

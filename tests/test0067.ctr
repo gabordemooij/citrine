@@ -1,12 +1,12 @@
-✎ write: (-1 + (' a a a   ' last: 'a')). 
-✎ write: (-1 + (' trees ' find: 'ee')). 
-☞ h := 'can you find the needle in the haystack?'.
-✎ write: (-1 + (h find: 'can')). 
-✎ write: (-1 + (h find: '')). 
-✎ write: (-1 + ('' find: 'a')). 
-✎ write: (-1 + ('a' find: 'a')). 
-✎ write: (-1 + ('the needle is at the end' find: 'end')). 
-✎ write: (-1 + ('the needle is at the end' last: 'end')). 
-✎ write: (-1 + ('friend, it is at the end' last: 'end')). 
-✎ write: (-1 + ('friend, it is at the end' find: 'end')). 
-✎ write: (-1 + ('a' last: 'a')). 
+✎ write: (-1 + (‘ a a a   ’ last: ‘a’)). 
+✎ write: (-1 + (‘ trees ’ find: ‘ee’)). 
+☞ h := ‘can you find the needle in the haystack?’.
+✎ write: (-1 + (h find: ‘can’)). 
+✎ write: (-1 + (h find: ‘’)). 
+✎ write: (-1 + (‘’ find: ‘a’)). 
+✎ write: (-1 + (‘a’ find: ‘a’)). 
+✎ write: (-1 + (‘the needle is at the end’ find: ‘end’)). 
+✎ write: (-1 + (‘the needle is at the end’ last: ‘end’)). 
+✎ write: (-1 + (‘friend, it is at the end’ last: ‘end’)). 
+✎ write: (-1 + (‘friend, it is at the end’ find: ‘end’)). 
+✎ write: (-1 + (‘a’ last: ‘a’)). 

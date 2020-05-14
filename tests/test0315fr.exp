@@ -1,6 +1,6 @@
-(Carte nouveau) mettre:'a"b' _à:'test'
+(Carte nouveau) mettre:‘a"b’ _à:‘test’
 Invalid JSON.
-(Carte nouveau) mettre:(Liste ← 1 ; 2 ; (Liste ← 3 ; 4) ; ((Carte nouveau) mettre:(Liste ← 3 ; 4) _à:'bar', mettre:1 _à:'foo')) _à:'nested', mettre:Faux _à:'legend', mettre:27 _à:'age', mettre:'Jack' _à:'name'
+(Carte nouveau) mettre:(Liste ← 1 ; 2 ; (Liste ← 3 ; 4) ; ((Carte nouveau) mettre:(Liste ← 3 ; 4) _à:‘bar’, mettre:1 _à:‘foo’)) _à:‘nested’, mettre:Faux _à:‘legend’, mettre:27 _à:‘age’, mettre:‘Jack’ _à:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

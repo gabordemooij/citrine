@@ -1,14 +1,14 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 
-List on: 'fixture:' do: { :f
+List on: ‘fixture:’ do: { :f
 	⚿ fixture := f.
 }.
 
-List on: 'count' do: {
+List on: ‘count’ do: {
 	↲ ⚿ fixture.
 }.
 
-List on: 'aantal' do: {
+List on: ‘aantal’ do: {
 	↲ ⚿ fixture.
 }.
 
@@ -16,15 +16,15 @@ List on: 'aantal' do: {
 ☞ x := Nil.
 {
 
-	x := 'hello' 
+	x := ‘hello’ 
 	replace:
-		('hel' + 
-			('l<x>' <x>:
-				('==o' character: 3)
+		(‘hel’ + 
+			(‘l<x>’ <x>:
+				(‘==o’ character: 3)
 			)
 		)
 	with: (
-		('...hal' + 'lo') 
+		(‘...hal’ + ‘lo’) 
 			uppercase 
 			lowecase 
 			uppercase 
@@ -37,7 +37,7 @@ List on: 'aantal' do: {
 							) second last
 						) ? 2
 					) + 
-					((List ← 'X' ; 'Y' ; 'Z') fixture: 2) 
+					((List ← ‘X’ ; ‘Y’ ; ‘Z’) fixture: 2) 
 					count
 				)
 			)

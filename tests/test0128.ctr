@@ -1,5 +1,5 @@
 
-List on: 'sum' do: {
+List on: ‘sum’ do: {
 	☞ total := 0.
 	⛏ each: { :index :element
 		total add: element.
@@ -11,6 +11,6 @@ List on: 'sum' do: {
 ✎ write: (a sum), stop. 
 ☞ a := List ← 1 ; 9.
 ✎ write: (a sum), stop. 
-☞ a := List ← 'o' ; 2.
+☞ a := List ← ‘o’ ; 2.
 ✎ write: (a sum), stop. 
 ✎ write: (List new sum), stop. 

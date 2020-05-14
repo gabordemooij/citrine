@@ -7,47 +7,47 @@
 
 Program tidiness: 0.
 
-☞ txt := 'Word Salad'.
-✎ write: 'last index of ord = ' + (( txt last: 'ord' ) - 1), stop.
-✎ write: 'index of ord = ' + (( txt find: 'ord' ) - 1), stop.
-✎ write: 'index of ad = ' + (( txt find: 'ad' ) - 1), stop.
-✎ write: 'last index of W = ' + (( txt last: 'W' ) - 1), stop.
-✎ write: 'last index of d = ' + (( txt last: 'd' ) - 1), stop.
-✎ write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), stop.
-✎ write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), stop.
-✎ write: 'txt does not equal Word Salad = ' + ( txt ≠ 'Word Salad' ), stop.
-✎ write: 'txt does not equal Ceasar Salad = ' + ( txt ≠ 'Ceasar Salad' ), stop.
+☞ txt := ‘Word Salad’.
+✎ write: ‘last index of ord = ’ + (( txt last: ‘ord’ ) - 1), stop.
+✎ write: ‘index of ord = ’ + (( txt find: ‘ord’ ) - 1), stop.
+✎ write: ‘index of ad = ’ + (( txt find: ‘ad’ ) - 1), stop.
+✎ write: ‘last index of W = ’ + (( txt last: ‘W’ ) - 1), stop.
+✎ write: ‘last index of d = ’ + (( txt last: ‘d’ ) - 1), stop.
+✎ write: ‘txt equals Word Salad = ’ + ( txt = ‘Word Salad’ ), stop.
+✎ write: ‘txt equals Ceasar Salad = ’ + ( txt = ‘Ceasar Salad’ ), stop.
+✎ write: ‘txt does not equal Word Salad = ’ + ( txt ≠ ‘Word Salad’ ), stop.
+✎ write: ‘txt does not equal Ceasar Salad = ’ + ( txt ≠ ‘Ceasar Salad’ ), stop.
 
 Program clean memory.
 
 usedMemory1 := (Program memory ? 1).
 
 
-txt := 'Word Salad'.
-✎ write: 'last index of ord = ' + (( txt last: 'ord' ) - 1), stop.
-✎ write: 'index of ord = ' + (( txt find: 'ord' ) - 1), stop.
-✎ write: 'index of ad = ' + (( txt find: 'ad' ) - 1), stop.
-✎ write: 'last index of W = ' + (( txt last: 'W' ) - 1), stop.
-✎ write: 'last index of d = ' + (( txt last: 'd' ) - 1), stop.
-✎ write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), stop.
-✎ write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), stop.
-✎ write: 'txt does not equal Word Salad = ' + ( txt ≠ 'Word Salad' ), stop.
-✎ write: 'txt does not equal Ceasar Salad = ' + ( txt ≠ 'Ceasar Salad' ), stop.
+txt := ‘Word Salad’.
+✎ write: ‘last index of ord = ’ + (( txt last: ‘ord’ ) - 1), stop.
+✎ write: ‘index of ord = ’ + (( txt find: ‘ord’ ) - 1), stop.
+✎ write: ‘index of ad = ’ + (( txt find: ‘ad’ ) - 1), stop.
+✎ write: ‘last index of W = ’ + (( txt last: ‘W’ ) - 1), stop.
+✎ write: ‘last index of d = ’ + (( txt last: ‘d’ ) - 1), stop.
+✎ write: ‘txt equals Word Salad = ’ + ( txt = ‘Word Salad’ ), stop.
+✎ write: ‘txt equals Ceasar Salad = ’ + ( txt = ‘Ceasar Salad’ ), stop.
+✎ write: ‘txt does not equal Word Salad = ’ + ( txt ≠ ‘Word Salad’ ), stop.
+✎ write: ‘txt does not equal Ceasar Salad = ’ + ( txt ≠ ‘Ceasar Salad’ ), stop.
 
 Program clean memory.
 usedMemory2 := (Program memory ? 1).
 
 
-txt := 'Word Salad'.
-✎ write: 'last index of ord = ' + (( txt last: 'ord' ) - 1), stop.
-✎ write: 'index of ord = ' + (( txt find: 'ord' ) - 1), stop.
-✎ write: 'index of ad = ' + (( txt find: 'ad' ) - 1), stop.
-✎ write: 'last index of W = ' + (( txt last: 'W' ) - 1), stop.
-✎ write: 'last index of d = ' + (( txt last: 'd' ) - 1), stop.
-✎ write: 'txt equals Word Salad = ' + ( txt = 'Word Salad' ), stop.
-✎ write: 'txt equals Ceasar Salad = ' + ( txt = 'Ceasar Salad' ), stop.
-✎ write: 'txt does not equal Word Salad = ' + ( txt ≠ 'Word Salad' ), stop.
-✎ write: 'txt does not equal Ceasar Salad = ' + ( txt ≠ 'Ceasar Salad' ), stop.
+txt := ‘Word Salad’.
+✎ write: ‘last index of ord = ’ + (( txt last: ‘ord’ ) - 1), stop.
+✎ write: ‘index of ord = ’ + (( txt find: ‘ord’ ) - 1), stop.
+✎ write: ‘index of ad = ’ + (( txt find: ‘ad’ ) - 1), stop.
+✎ write: ‘last index of W = ’ + (( txt last: ‘W’ ) - 1), stop.
+✎ write: ‘last index of d = ’ + (( txt last: ‘d’ ) - 1), stop.
+✎ write: ‘txt equals Word Salad = ’ + ( txt = ‘Word Salad’ ), stop.
+✎ write: ‘txt equals Ceasar Salad = ’ + ( txt = ‘Ceasar Salad’ ), stop.
+✎ write: ‘txt does not equal Word Salad = ’ + ( txt ≠ ‘Word Salad’ ), stop.
+✎ write: ‘txt does not equal Ceasar Salad = ’ + ( txt ≠ ‘Ceasar Salad’ ), stop.
 
 Program clean memory.
 usedMemory3 := (Program memory ? 1).
@@ -55,7 +55,7 @@ usedMemory3 := (Program memory ? 1).
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	✎ write: 'No memory leaks here'.
+	✎ write: ‘No memory leaks here’.
 }, false: {
-	✎ write: 'Leaking memory...'.
+	✎ write: ‘Leaking memory...’.
 }.

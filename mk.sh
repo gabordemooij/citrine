@@ -6,7 +6,7 @@ else
 	MAKEFILE=makefile
 fi
 echo "USING: ${MAKEFILE}"
-for ISO in $(ls i18n)
+for ISO in $(ls i18nsel)
 do
 	echo $ISO
 	export ISO

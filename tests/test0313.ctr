@@ -1,15 +1,15 @@
-String on: 'escape:' do: { :characters
+String on: ‘escape:’ do: { :characters
 	☞ str := ⛏.
 	characters characters each: { :number :character
 		
-		☞ replacement := '\\' + character factorial.
+		☞ replacement := ‘\\’ + character factorial.
 		
-		(character = '\t') true: {
-			replacement := '\\t'.
+		(character = ‘\t’) true: {
+			replacement := ‘\\t’.
 		}.
 		
-		(character = '\n') true: {
-			replacement := '\\n'.
+		(character = ‘\n’) true: {
+			replacement := ‘\\n’.
 		}.
 		
 		str := str replace: character with: replacement.
@@ -17,28 +17,28 @@ String on: 'escape:' do: { :characters
 	↲ str.
 }.
 
-String on: 'unescape:' do: { :text
+String on: ‘unescape:’ do: { :text
 	☞ str := ⛏.
 	text characters each: { :number :character
 		
-		(character = '\t') true: {
-			character := '\\t'.
+		(character = ‘\t’) true: {
+			character := ‘\\t’.
 		}.
 		
-		(character = '\n') true: {
-			character := '\\n'.
+		(character = ‘\n’) true: {
+			character := ‘\\n’.
 		}.
 		
-		str := str pattern: ('\\\\+(X)' X character) process: { :match
+		str := str pattern: (‘\\\\+(X)’ X character) process: { :match
 			
 			☞ special := match ? 1.
 			
-			((match ? 0) = '\\t') true: {
-				special := '⇿'.
+			((match ? 0) = ‘\\t’) true: {
+				special := ‘⇿’.
 			}.
 			
-			((match ? 0) = '\\n') true: {
-				special := '↵'.
+			((match ? 0) = ‘\\n’) true: {
+				special := ‘↵’.
 			}.
 			
 			↲ special.
@@ -47,7 +47,7 @@ String on: 'unescape:' do: { :text
 	↲ str.
 }.
 
-☞ garden := '{
+☞ garden := ‘{
 	"garden": {
 		"chairs": 2,
 		"pool": true,
@@ -64,19 +64,19 @@ String on: 'unescape:' do: { :text
 		"insects":null,
 		"dog":null
 	}
-}'.
+}’.
 
 ☞ g := Json to object: garden.
 
-✎ write: 'There are x chairs in the sunny garden.' x (g ? 'garden' ? 'chairs'), stop.
-✎ write: 'A rubber duck swims in the x.' x ((g garden pool) either: 'pool' or: ''), stop.
-✎ write: 'Is there a shed in the garden? Well.. x' x (g ? 'garden' ? 'shed'), stop.
-✎ write: 'In the garden you smell the fragrance of x.' x ((g garden flower join: ' and ')), stop.
-✎ write: 'The garden is x meters long.' x (g garden size length), stop.
-✎ write: 'Luckily, this day, there are x wasps in the garden.' x (g garden insects), stop.
-✎ write: 'The dog named x sleeps under the tree.' x (g garden dog), stop.
+✎ write: ‘There are x chairs in the sunny garden.’ x (g ? ‘garden’ ? ‘chairs’), stop.
+✎ write: ‘A rubber duck swims in the x.’ x ((g garden pool) either: ‘pool’ or: ‘’), stop.
+✎ write: ‘Is there a shed in the garden? Well.. x’ x (g ? ‘garden’ ? ‘shed’), stop.
+✎ write: ‘In the garden you smell the fragrance of x.’ x ((g garden flower join: ‘ and ’)), stop.
+✎ write: ‘The garden is x meters long.’ x (g garden size length), stop.
+✎ write: ‘Luckily, this day, there are x wasps in the garden.’ x (g garden insects), stop.
+✎ write: ‘The dog named x sleeps under the tree.’ x (g garden dog), stop.
 
-✎ write: ('a"bb"ccc"' escape: '"'), stop.
+✎ write: (‘a"bb"ccc"’ escape: ‘"’), stop.
 ✎ write: g, stop.
 
 

@@ -23,10 +23,10 @@ dust2   := (Program memory ? 5).
 
 
 
-{ ☞ a := 'dust!'. } run.
-{ ☞ a := 'dust!'. } run.
-{ ☞ a := 'dust!'. } run.
-{ ↲ 'dust!'. } run.
+{ ☞ a := ‘dust!’. } run.
+{ ☞ a := ‘dust!’. } run.
+{ ☞ a := ‘dust!’. } run.
+{ ↲ ‘dust!’. } run.
 
 
 

@@ -2,13 +2,13 @@
 
 
 ☞ Deck := List new.
-Deck on: 'print' do: {
+Deck on: ‘print’ do: {
         ☞ len := ⛏ count - 1.
         { :i
                 ☞ len2 := ⛏ count - 1.
-                ✎ write: 'len: '.
+                ✎ write: ‘len: ’.
                 ✎ write: len, stop.
-                ✎ write: 'len2: '.
+                ✎ write: ‘len2: ’.
                 ✎ write: len2, stop.
         } * len.
 }.

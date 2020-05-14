@@ -1,11 +1,11 @@
 9
-a Bagay '[Object]'  is NOT Nil.
-a Boolean 'Totoo'  is NOT Nil.
-a Boolean 'Mali'  is NOT Nil.
-a Boolean 'Mali'  is NOT Nil.
-a Bilang '1'  is NOT Nil.
-a Bilang '0'  is NOT Nil.
-a String 'Str'  is NOT Nil.
-a String ''  is NOT Nil.
-a Code '[Block]'  is NOT Nil.
+a Bagay ‘[Object]’  is NOT Nil.
+a Boolean ‘Totoo’  is NOT Nil.
+a Boolean ‘Mali’  is NOT Nil.
+a Boolean ‘Mali’  is NOT Nil.
+a Bilang ‘1’  is NOT Nil.
+a Bilang ‘0’  is NOT Nil.
+a String ‘Str’  is NOT Nil.
+a String ‘’  is NOT Nil.
+a Code ‘[Block]’  is NOT Nil.
 but.. Nil is.. certainly NIL!

@@ -1,6 +1,6 @@
-(Qert nşh) danîn:'a"b' li:'test'
+(Qert nşh) danîn:‘a"b’ li:‘test’
 Invalid JSON.
-(Qert nşh) danîn:(Rêzok ← 1 ; 2 ; (Rêzok ← 3 ; 4) ; ((Qert nşh) danîn:(Rêzok ← 3 ; 4) li:'bar', danîn:1 li:'foo')) li:'nested', danîn:şaş li:'legend', danîn:27 li:'age', danîn:'Jack' li:'name'
+(Qert nşh) danîn:(Rêzok ← 1 ; 2 ; (Rêzok ← 3 ; 4) ; ((Qert nşh) danîn:(Rêzok ← 3 ; 4) li:‘bar’, danîn:1 li:‘foo’)) li:‘nested’, danîn:şaş li:‘legend’, danîn:27 li:‘age’, danîn:‘Jack’ li:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

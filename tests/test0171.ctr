@@ -7,26 +7,26 @@
 
 Program tidiness: 0.
 
-☞ a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
-a do pop shift prepend: 'hi', append: 999, done.
-✎ write: ( a join: ',' ), stop.
+☞ a := List ← ‘hello’ ; ‘world’ ; True ; Nil ; 666.
+a do pop shift prepend: ‘hi’, append: 999, done.
+✎ write: ( a join: ‘,’ ), stop.
 
 Program clean memory.
 usedMemory1 := (Program memory ? 1).
 
 
-a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
-a pop. a shift. a prepend: 'hi', append: 999.
-✎ write: ( a join: ',' ), stop.
+a := List ← ‘hello’ ; ‘world’ ; True ; Nil ; 666.
+a pop. a shift. a prepend: ‘hi’, append: 999.
+✎ write: ( a join: ‘,’ ), stop.
 
 
 Program clean memory.
 usedMemory2 := (Program memory ? 1).
 
 
-a := List ← 'hello' ; 'world' ; True ; Nil ; 666.
-a do pop shift prepend: 'hi', append: 999, done.
-✎ write: ( a join: ',' ), stop.
+a := List ← ‘hello’ ; ‘world’ ; True ; Nil ; 666.
+a do pop shift prepend: ‘hi’, append: 999, done.
+✎ write: ( a join: ‘,’ ), stop.
 
 
 Program clean memory.
@@ -35,7 +35,7 @@ usedMemory3 := (Program memory ? 1).
 
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
-	✎ write: 'No memory leaks here'.
+	✎ write: ‘No memory leaks here’.
 }, false: {
-	✎ write: 'Leaking memory...'.
+	✎ write: ‘Leaking memory...’.
 }.

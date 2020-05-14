@@ -1,5 +1,5 @@
 
-'Verbatim Syntax' characters each: { :number :letter
+‘Verbatim Syntax’ characters each: { :number :letter
 	{
 		✎ write: (number - 1).
 	} * 10.

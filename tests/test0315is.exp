@@ -1,6 +1,6 @@
-(Kort nýtt) setja:'a"b' _á:'test'
+(Kort nýtt) setja:‘a"b’ _á:‘test’
 Invalid JSON.
-(Kort nýtt) setja:(Listi ← 1 ; 2 ; (Listi ← 3 ; 4) ; ((Kort nýtt) setja:(Listi ← 3 ; 4) _á:'bar', setja:1 _á:'foo')) _á:'nested', setja:Rangt _á:'legend', setja:27 _á:'age', setja:'Jack' _á:'name'
+(Kort nýtt) setja:(Listi ← 1 ; 2 ; (Listi ← 3 ; 4) ; ((Kort nýtt) setja:(Listi ← 3 ; 4) _á:‘bar’, setja:1 _á:‘foo’)) _á:‘nested’, setja:Rangt _á:‘legend’, setja:27 _á:‘age’, setja:‘Jack’ _á:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

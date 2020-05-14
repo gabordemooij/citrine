@@ -1,5 +1,5 @@
 
-List on: 'product' do: {
+List on: ‘product’ do: {
 	☞ total := 1.
 	⛏ each: { :index :element
 		total multiply by: element.

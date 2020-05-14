@@ -4,24 +4,24 @@
 ☞ wine := Object new.
 
 
-wine on: 'toString' do: {
-	↲ 'merlot'.
+wine on: ‘toString’ do: {
+	↲ ‘merlot’.
 }.
 
-wine on: 'naarTekst' do: {
-	↲ 'merlot'.
+wine on: ‘naarTekst’ do: {
+	↲ ‘merlot’.
 }.
 
 
-wine on: '=' do: { :other wine
+wine on: ‘=’ do: { :other wine
 	↲ ( ⛏ toString = other wine ).
 }.
 
 
 wine
-	case: 'cabernet' do: { ✎ write: 'it\'s a Cabernet!'. },
-	case: 'syrah'    do: { ✎ write: 'it\'s a Syrah!'.    },
-	case: 'merlot'   do: { ✎ write: 'it\'s a Merlot!'.   },
-	case: 'malbec'   do: { ✎ write: 'it\'s a Malbec!'.   }.
+	case: ‘cabernet’ do: { ✎ write: ‘it's a Cabernet!’. },
+	case: ‘syrah’    do: { ✎ write: ‘it's a Syrah!’.    },
+	case: ‘merlot’   do: { ✎ write: ‘it's a Merlot!’.   },
+	case: ‘malbec’   do: { ✎ write: ‘it's a Malbec!’.   }.
 
 ✎ stop.

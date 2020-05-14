@@ -5,7 +5,7 @@
 	{
 		x := Number between: a and: b.
 		((x < minimum) or: (x > maximum)) true: { 
-			✎ write: ('Invalid value!').
+			✎ write: (‘Invalid value!’).
 			Program end.
 		}.
 	} 
@@ -32,6 +32,6 @@ randomizer apply: 999999999999999 and: -999999999999999.
 randomizer apply: -999999999999998 and: 999999999999999.
 randomizer apply: -999999999999999 and: 999999999999998.
 randomizer apply: -999999999999999 and: 999999999999999.
-✎ write: 'OK'.
+✎ write: ‘OK’.
 
 

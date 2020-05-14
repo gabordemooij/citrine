@@ -1,11 +1,11 @@
-'SINGLE_LANGUAGE'.
-☞ unknown := Request get: 'item'.
+‘SINGLE_LANGUAGE’.
+☞ unknown := Request get: ‘item’.
 ✎ write: unknown.
-☞ unknown := Request new get: 'item'.
+☞ unknown := Request new get: ‘item’.
 ✎ write: unknown.
-☞ unknown := Request new new get: 'item'.
+☞ unknown := Request new new get: ‘item’.
 ✎ write: unknown.
-☞ unknown := Request new new can you get: 'item'.
+☞ unknown := Request new new can you get: ‘item’.
 ✎ write: unknown.
 
 ☞ unknown := Request get: 123.
@@ -22,12 +22,12 @@
 ☞ unknown := Request post list: Request new.
 ✎ write: unknown type.
 
-☞ response := Json to object: '{"#status":"OK"}'.
+☞ response := Json to object: ‘{"#status":"OK"}’.
 ✎ write: (response #status).
-☞ response := Json new to object: '{"#status":"OK"}'.
+☞ response := Json new to object: ‘{"#status":"OK"}’.
 ✎ write: (response #status).
-☞ response := Json new new to object: '{"#status":"OK"}'.
+☞ response := Json new new to object: ‘{"#status":"OK"}’.
 ✎ write: (response #status).
-☞ response := Json new new can you convert to object: '{"#status":"OK"}'.
+☞ response := Json new new can you convert to object: ‘{"#status":"OK"}’.
 ✎ write: (response #status).
 

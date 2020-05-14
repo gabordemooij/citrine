@@ -2,19 +2,19 @@
 
 ☞ Cat := Object new.
 
-Cat on: 'new' do: {
-	⚿ sound := 'meow!'.
+Cat on: ‘new’ do: {
+	⚿ sound := ‘meow!’.
 }.
 
-Cat on: 'nieuw' do: {
-	⚿ sound := 'meow!'.
+Cat on: ‘nieuw’ do: {
+	⚿ sound := ‘meow!’.
 }.
 
-Cat on: 'makeSound' do: {
+Cat on: ‘makeSound’ do: {
 	↲ ⚿ sound.
 }.
 
-Cat on: 'greet' do: {
+Cat on: ‘greet’ do: {
 	↲ ⛏ makeSound.
 }.
 

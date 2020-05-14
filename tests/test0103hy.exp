@@ -1,11 +1,11 @@
 9
-a Առարկա '[Object]'  is NOT Nil.
-a Բուլյան 'Ճիշտ'  is NOT Nil.
-a Բուլյան 'Կեղծ'  is NOT Nil.
-a Բուլյան 'Կեղծ'  is NOT Nil.
-a Թիվ '1'  is NOT Nil.
-a Թիվ '0'  is NOT Nil.
-a Լարային 'Str'  is NOT Nil.
-a Լարային ''  is NOT Nil.
-a Կոդ '[Block]'  is NOT Nil.
+a Առարկա ‘[Object]’  is NOT Nil.
+a Բուլյան ‘Ճիշտ’  is NOT Nil.
+a Բուլյան ‘Կեղծ’  is NOT Nil.
+a Բուլյան ‘Կեղծ’  is NOT Nil.
+a Թիվ ‘1’  is NOT Nil.
+a Թիվ ‘0’  is NOT Nil.
+a Լարային ‘Str’  is NOT Nil.
+a Լարային ‘’  is NOT Nil.
+a Կոդ ‘[Block]’  is NOT Nil.
 but.. Nil is.. certainly NIL!

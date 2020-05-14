@@ -1,12 +1,12 @@
 ☞ Product := Object new.
-Product on: 'a' do: { :price
-	✎ write: 'cost '+ price.
+Product on: ‘a’ do: { :price
+	✎ write: ‘cost ’+ price.
 }.
 ☞ Apples := Product new.
-✎ write: 'Apples cost: '.
+✎ write: ‘Apples cost: ’.
 Apples a 60.
-✎ write: ' cent a piece.'.
-Number on: '×' do: { :b
+✎ write: ‘ cent a piece.’.
+Number on: ‘×’ do: { :b
 	b * ⛏.
 }.
 7 × { :i ✎ write: i - 1. }.

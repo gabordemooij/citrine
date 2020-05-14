@@ -1,6 +1,6 @@
-(Kat nouvo) mete:'a"b' nan:'test'
+(Kat nouvo) mete:‘a"b’ nan:‘test’
 Invalid JSON.
-(Kat nouvo) mete:(Lis ← 1 ; 2 ; (Lis ← 3 ; 4) ; ((Kat nouvo) mete:(Lis ← 3 ; 4) nan:'bar', mete:1 nan:'foo')) nan:'nested', mete:Fo nan:'legend', mete:27 nan:'age', mete:'Jack' nan:'name'
+(Kat nouvo) mete:(Lis ← 1 ; 2 ; (Lis ← 3 ; 4) ; ((Kat nouvo) mete:(Lis ← 3 ; 4) nan:‘bar’, mete:1 nan:‘foo’)) nan:‘nested’, mete:Fo nan:‘legend’, mete:27 nan:‘age’, mete:‘Jack’ nan:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

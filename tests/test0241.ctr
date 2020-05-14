@@ -1,23 +1,23 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 
-String on: 'evaluate' do: {
-	☞ code := File new: '/tmp/eval.ctr'.
-	code write: (⛏ string + '.').
-	Program use: '/tmp/eval.ctr'.
+String on: ‘evaluate’ do: {
+	☞ code := File new: ‘/tmp/eval.ctr’.
+	code write: (⛏ string + ‘.’).
+	Program use: ‘/tmp/eval.ctr’.
 }.
 
 ☞ Q := (39 byte).
 
-☞ q := List ← ('Quotes ' + Q + ' are evil?') ; 1.
+☞ q := List ← (‘Quotes ’ + Q + ‘ are evil?’) ; 1.
 ☞ x := q string.
 ✎ write: x, stop.
 ☞ y := Nil.
-('y := ' + x ) evaluate.
+(‘y := ’ + x ) evaluate.
 ✎ write: y ? 1, stop.
 
-q := Map put: Q at: (Q + 'quote' + Q).
+q := Map put: Q at: (Q + ‘quote’ + Q).
 x := q string.
 ✎ write: x, stop.
 y := Nil.
-('y := ' + x ) evaluate.
-✎ write: y ? '\'quote\'', stop.
+(‘y := ’ + x ) evaluate.
+✎ write: y ? ‘\’quote\‘’, stop.

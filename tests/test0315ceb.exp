@@ -1,6 +1,6 @@
-(Mapa bag-o nga) gibutang:'a"b' sa:'test'
+(Mapa bag-o nga) gibutang:‘a"b’ sa:‘test’
 Invalid JSON.
-(Mapa bag-o nga) gibutang:(Paglista ← 1 ; 2 ; (Paglista ← 3 ; 4) ; ((Mapa bag-o nga) gibutang:(Paglista ← 3 ; 4) sa:'bar', gibutang:1 sa:'foo')) sa:'nested', gibutang:Bakak sa:'legend', gibutang:27 sa:'age', gibutang:'Jack' sa:'name'
+(Mapa bag-o nga) gibutang:(Paglista ← 1 ; 2 ; (Paglista ← 3 ; 4) ; ((Mapa bag-o nga) gibutang:(Paglista ← 3 ; 4) sa:‘bar’, gibutang:1 sa:‘foo’)) sa:‘nested’, gibutang:Bakak sa:‘legend’, gibutang:27 sa:‘age’, gibutang:‘Jack’ sa:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

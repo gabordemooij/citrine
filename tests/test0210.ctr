@@ -1,4 +1,4 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 ☞ perky := Percolator new.
 ✎ write: perky brew, stop.
 Percolator brew.

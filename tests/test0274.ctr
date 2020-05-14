@@ -1,6 +1,6 @@
-'SINGLE_LANGUAGE'.
+‘SINGLE_LANGUAGE’.
 
-List on: 'column:' do: { :column
+List on: ‘column:’ do: { :column
 	☞ result := List new.
 	⛏ each: { :index :row
 		row each: { :index :cell

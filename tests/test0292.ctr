@@ -1,17 +1,17 @@
 ☞ winery := {
 	↲ (	Map new
-		put: 2 at: 'merlot',
-		put: 3 at: 'malbec',
-		put: 4 at: 'syrah'
+		put: 2 at: ‘merlot’,
+		put: 3 at: ‘malbec’,
+		put: 4 at: ‘syrah’
 	).
 }.
 
-✎ write: (((winery run) - 'nothing') count), stop.
-✎ write: (((winery run) - 'merlot') count), stop.
-✎ write: (((winery run) - 'malbec') count), stop.
-✎ write: (((winery run) - 'syrah') count), stop.
-✎ write: (((winery run) - 'merlot' - 'malbec') count), stop.
-✎ write: (((winery run) - 'merlot' - 'syrah') count), stop.
-✎ write: (((winery run) - 'malbec' -'syrah') count), stop.
-✎ write: (((winery run) - 'malbec' - 'syrah' - 'merlot') count), stop.
+✎ write: (((winery run) - ‘nothing’) count), stop.
+✎ write: (((winery run) - ‘merlot’) count), stop.
+✎ write: (((winery run) - ‘malbec’) count), stop.
+✎ write: (((winery run) - ‘syrah’) count), stop.
+✎ write: (((winery run) - ‘merlot’ - ‘malbec’) count), stop.
+✎ write: (((winery run) - ‘merlot’ - ‘syrah’) count), stop.
+✎ write: (((winery run) - ‘malbec’ -‘syrah’) count), stop.
+✎ write: (((winery run) - ‘malbec’ - ‘syrah’ - ‘merlot’) count), stop.
 

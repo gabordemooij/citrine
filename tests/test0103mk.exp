@@ -1,11 +1,11 @@
 9
-a Објект '[Object]'  is NOT Nil.
-a Булеан 'Вистина'  is NOT Nil.
-a Булеан 'Лажни'  is NOT Nil.
-a Булеан 'Лажни'  is NOT Nil.
-a Број '1'  is NOT Nil.
-a Број '0'  is NOT Nil.
-a Низа 'Str'  is NOT Nil.
-a Низа ''  is NOT Nil.
-a Код '[Block]'  is NOT Nil.
+a Објект ‘[Object]’  is NOT Nil.
+a Булеан ‘Вистина’  is NOT Nil.
+a Булеан ‘Лажни’  is NOT Nil.
+a Булеан ‘Лажни’  is NOT Nil.
+a Број ‘1’  is NOT Nil.
+a Број ‘0’  is NOT Nil.
+a Низа ‘Str’  is NOT Nil.
+a Низа ‘’  is NOT Nil.
+a Код ‘[Block]’  is NOT Nil.
 but.. Nil is.. certainly NIL!
