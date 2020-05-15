@@ -1,6 +1,6 @@
 ‘SINGLE_LANGUAGE’.
 (Code new: ‘List by: 0.’) run.
-☞ x := Code new: ‘✎ write: \’hello there\‘, stop.’.
+☞ x := Code new: ‘✎ write: ‘hello there’, stop.’.
 x run.
 ✎ write: ‘+ 3 to Number gives: ? ’ ? (Number + 3), stop.
 ✎ write: ‘Adding 3 to Number gives: ? ’ ? (Number add: 3), stop.

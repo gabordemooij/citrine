@@ -451,7 +451,7 @@ char* ctr_translate_string(char* codePointer, ctr_dict* dictionary) {
 	if (!ctr_translate_translate(s,l,dictionary,'s',NULL)) {
 		fwrite(s,l,1,stdout);
 	}
-	ctr_clex_tok();
+	//ctr_clex_tok();
 	ctr_translate_translate(CTR_DICT_QUOT_CLOSE,ctr_clex_keyword_qc_len,dictionary,'t',NULL);
 	e = ctr_clex_code_pointer();
 	return e;

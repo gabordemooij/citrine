@@ -11,7 +11,7 @@ Moment wait: 1.
 ✎ write: Program arguments, stop.
 Program argument: 0.
 Number random.
-✎ write: (Program shell: ‘echo \’Hello\‘’).
+✎ write: (Program shell: ‘echo 'Hello'’).
 
 Program clean memory.
 
@@ -23,7 +23,7 @@ Moment wait: 1.
 ✎ write: Program arguments, stop.
 Program argument: 0.
 Number random.
-✎ write: (Program shell: ‘echo \’Hello\‘’).
+✎ write: (Program shell: ‘echo 'Hello'’).
 
 
 Program clean memory.
@@ -35,7 +35,7 @@ Moment wait: 1.
 ✎ write: Program arguments, stop.
 Program argument: 0.
 Number random.
-✎ write: (Program shell: ‘echo \’Hello\‘’).
+✎ write: (Program shell: ‘echo 'Hello'’).
 
 Program clean memory.
 usedMemory3 := (Program memory ? 1).

@@ -1,12 +1,12 @@
-‘NL-ONLY’.
+“NL-ONLY”.
 ✎ schrĳf: 1,23, stop.
-✎ schrĳf: (‘1,23’ getal), stop.
-✎ schrĳf: (‘1,23’ getal tekst getal), stop.
-✎ schrĳf: (‘1,23’ getal tekst getal tekst), stop.
-✎ schrĳf: ‘1.23’ getal, stop.
-✎ schrĳf: ‘1.23’ internationaal getal, stop.
-✎ schrĳf: ‘1.23’ internationaal getal tekst, stop.
-✎ schrĳf: ‘1.23’ internationaal getal tekst getal, stop.
+✎ schrĳf: (“1,23” getal), stop.
+✎ schrĳf: (“1,23” getal tekst getal), stop.
+✎ schrĳf: (“1,23” getal tekst getal tekst), stop.
+✎ schrĳf: “1.23” getal, stop.
+✎ schrĳf: “1.23” internationaal getal, stop.
+✎ schrĳf: “1.23” internationaal getal tekst, stop.
+✎ schrĳf: “1.23” internationaal getal tekst getal, stop.
 ☞ x := (3,5 * 1.000.000 + 1,5).
 ✎ schrĳf: x, stop.
 ☞ x := (3,5 * 1.000.00 + 0,0001 ).

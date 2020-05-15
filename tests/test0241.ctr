@@ -6,7 +6,7 @@ String on: ‘evaluate’ do: {
 	Program use: ‘/tmp/eval.ctr’.
 }.
 
-☞ Q := (39 byte).
+☞ Q := ‘\‘’.
 
 ☞ q := List ← (‘Quotes ’ + Q + ‘ are evil?’) ; 1.
 ☞ x := q string.
@@ -15,9 +15,11 @@ String on: ‘evaluate’ do: {
 (‘y := ’ + x ) evaluate.
 ✎ write: y ? 1, stop.
 
-q := Map put: Q at: (Q + ‘quote’ + Q).
+q := Map put: ‘\‘’ at: ‘‘quote’’.
 x := q string.
 ✎ write: x, stop.
 y := Nil.
 (‘y := ’ + x ) evaluate.
-✎ write: y ? ‘\’quote\‘’, stop.
+
+☞ q := (Map new) put:‘\‘’ at:‘\‘quote\’’.
+✎ write: y ? ‘‘quote’’, stop.
