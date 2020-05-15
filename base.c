@@ -2308,29 +2308,36 @@ ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentL
  * string will cause all single quotes (') to be replaced with (\').
  */
 ctr_object* ctr_string_quotes_escape(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* answer;
-	char* str;
-	ctr_size len;
-	ctr_size i;
-	ctr_size j;
-	len = myself->value.svalue->vlen;
-	for( i = 0; i < myself->value.svalue->vlen; i++ ) {
-		if ( *(myself->value.svalue->value + i) == '\'' ) {
+	 ctr_object* answer;
+       char* str;
+       ctr_size len;
+       ctr_size i;
+       ctr_size j;
+       len = myself->value.svalue->vlen;
+       for( i = 0; i < myself->value.svalue->vlen; i++ ) {
+               if (
+               strncmp( myself->value.svalue->value + i, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len) == 0 ||
+               strncmp( myself->value.svalue->value + i, CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len) == 0
+               ) {
 				len++;
-		}
-	}
-	str = ctr_heap_allocate( len + 1 );
-	j = 0;
-	for( i = 0; i < myself->value.svalue->vlen; i++ ) {
-		if ( *(myself->value.svalue->value + i) == '\'' ) {
-				str[j+i] = '\\';
-				j++;
-		}
-		str[j+i] = *(myself->value.svalue->value + i);
-	}
-	answer = ctr_build_string_from_cstring( str );
-	ctr_heap_free( str );
-	return answer;
+               }
+       }
+       str = ctr_heap_allocate( len + 1 );
+       j = 0;
+       for( i = 0; i < myself->value.svalue->vlen; i++ ) {
+               if (
+               strncmp( myself->value.svalue->value + i, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len) == 0 ||
+               strncmp( myself->value.svalue->value + i, CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len) == 0
+               ) {
+                               str[j+i] = '\\';
+                               j++;
+               }
+               str[j+i] = *(myself->value.svalue->value + i);
+       }
+       answer = ctr_build_string_from_cstring( str );
+       ctr_heap_free( str );
+       return answer;
+	
 }
 
 

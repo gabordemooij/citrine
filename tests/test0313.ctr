@@ -5,11 +5,11 @@ String on: ‘escape:’ do: { :characters
 		☞ replacement := ‘\\’ + character factorial.
 		
 		(character = ‘\t’) true: {
-			replacement := ‘\\t’.
+			replacement := ‘⇿’.
 		}.
 		
 		(character = ‘\n’) true: {
-			replacement := ‘\\n’.
+			replacement := ‘↵’.
 		}.
 		
 		str := str replace: character with: replacement.
@@ -76,7 +76,7 @@ String on: ‘unescape:’ do: { :text
 ✎ write: ‘Luckily, this day, there are x wasps in the garden.’ x (g garden insects), stop.
 ✎ write: ‘The dog named x sleeps under the tree.’ x (g garden dog), stop.
 
-✎ write: (‘a"bb"ccc"’ escape: ‘"’), stop.
+✎ write: (‘a\"bb\"ccc\"’ escape: ‘"’), stop.
 ✎ write: g, stop.
 
 

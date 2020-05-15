@@ -374,37 +374,104 @@ char* ctr_clex_readstr() {
 	ctr_size nesting = 0;
 	char* strbuff;
 	char c;
+	int escape;
 	char* beginbuff;
 	ctr_size page = 100; /* 100 byte pages */
 	ctr_size memblock = 100;
 	ctr_clex_tokvlen=0;
 	strbuff = (char*) ctr_heap_allocate(memblock);
 	beginbuff = strbuff;
-	while(strncmp(ctr_code, CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len)!=0 || nesting>0) {
+	escape = 0;
+	/* ignore_modes is used for translator, then you dont want to interpret escape sequence but copy -verbatim- */
+	while(
+		(ctr_code<ctr_eofcode-ctr_clex_keyword_qc_len) &&
+		(strncmp(ctr_code, CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len)!=0 || nesting>0 || escape)
+	) {
 		c = *ctr_code;
 		if ( c == '\n' ) ctr_clex_line_number ++;
-		
-		if (strncmp(ctr_code, "↵", 3)==0) {
+		if ( c == '\\' && !escape) {
+			escape = 1;
+			if (ctr_clex_ignore_modes) {
+				*(strbuff) = '\\';
+				ctr_clex_tokvlen += 1;
+				strbuff++;
+			}
+			ctr_code ++;
+			continue;
+		}
+		if ( escape == 1 ) {
+			switch(c) {
+				case 'n':
+					*(strbuff) = '\n';
+					ctr_clex_tokvlen += 1;
+					strbuff++;
+					ctr_code++;
+					break;
+				case 'r':
+					*(strbuff) = '\r';
+					ctr_clex_tokvlen += 1;
+					strbuff++;
+					ctr_code++;
+					break;
+				case 't':
+					*(strbuff) = '\t';
+					ctr_clex_tokvlen += 1;
+					strbuff++;
+					ctr_code++;
+					break;
+				case 'v':
+					*(strbuff) = '\v';
+					ctr_clex_tokvlen += 1;
+					strbuff++;
+					ctr_code++;
+					break;
+				case 'b':
+					*(strbuff) = '\b';
+					ctr_clex_tokvlen += 1;
+					strbuff++;
+					ctr_code++;
+					break;
+				case 'a':
+					*(strbuff) = '\a';
+					ctr_clex_tokvlen += 1;
+					strbuff++;
+					ctr_code++;
+					break;
+				case 'f':
+					*(strbuff) = '\f';
+					ctr_clex_tokvlen += 1;
+					strbuff++;
+					ctr_code++;
+					break;
+				default:
+					*(strbuff) = *(ctr_code);
+					strbuff++;
+					ctr_code++;
+					ctr_clex_tokvlen++;
+					break;
+			}
+		}
+		else if (!ctr_clex_ignore_modes && !escape && strncmp(ctr_code, "↵", 3)==0) {
 			ctr_code += 3;
 			ctr_clex_tokvlen += 1;
 			*(strbuff) = '\n';
 			strbuff++;
 		}
-		else if (strncmp(ctr_code, "⇿", 3)==0) {
+		else if (!ctr_clex_ignore_modes && !escape && strncmp(ctr_code, "⇿", 3)==0) {
 			ctr_code += 3;
 			ctr_clex_tokvlen += 1;
 			*(strbuff) = '\t';
 			strbuff++;
 		}
 		else if (strncmp(ctr_code, CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len)==0) {
-			nesting--;
+			if (!escape && !ctr_clex_ignore_modes) nesting--;
 			strncpy(strbuff, CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len);
 			ctr_code += ctr_clex_keyword_qc_len;
 			ctr_clex_tokvlen += ctr_clex_keyword_qc_len;
 			strbuff += ctr_clex_keyword_qc_len;
 		}
 		else if (strncmp(ctr_code, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len)==0) {
-			nesting++;
+			if (!escape && !ctr_clex_ignore_modes) nesting++;
 			strncpy(strbuff, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len);
 			ctr_code += ctr_clex_keyword_qo_len;
 			ctr_clex_tokvlen += ctr_clex_keyword_qo_len;
@@ -415,6 +482,7 @@ char* ctr_clex_readstr() {
 			ctr_code++;
 			ctr_clex_tokvlen++;
 		}
+		
 		if ((ctr_clex_tokvlen + 10) >= memblock) {
 			memblock += page;
 			beginbuff = (char*) ctr_heap_reallocate( beginbuff, memblock );
@@ -424,6 +492,11 @@ char* ctr_clex_readstr() {
 			/* reset pointer, memory location might have been changed */
 			strbuff = beginbuff + ctr_clex_tokvlen;
 		}
+		escape = 0;
+	}
+	/* absorb trailing quote, unless eof encountered - then string ends at eof */
+	if (ctr_code<ctr_eofcode-ctr_clex_keyword_qc_len) {
+		ctr_code += ctr_clex_keyword_qc_len;
 	}
 	return beginbuff;
 }
@@ -451,14 +524,17 @@ int ctr_clex_forward_scan(char* e, ctr_size* newCodePointer) {
 	int blocks = 0;
 	int quote = 0;
 	int q;
+	int escape = 0;
 	int found = 0;
 	while( (e+i) < ctr_eofcode ) {
+		if (escape) escape = 0;
 		if (!quote && *(e+i) == '(') nesting++;
 		else if (!quote && nesting && *(e+i) == ')') nesting--;
 		else if (!quote && *(e+i) == '{') blocks++;
 		else if (!quote && blocks && *(e+i) == '}') blocks--;
-		else if (!quote && strncmp((e+i),CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len) == 0) quote++;
-		else if (quote && strncmp((e+i),CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len) == 0) quote--;
+		else if (!escape && !quote && strncmp((e+i),CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len) == 0) quote++;
+		else if (!escape && quote && strncmp((e+i),CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len) == 0) quote--;
+		else if (quote && *(e+i) == '\\' && !escape) { escape = 1;  }
 		else if (!nesting && !quote && !blocks) {
 			for (q=0; q<len; q++) {
 				if (*(e+i)==bytes[q]) {

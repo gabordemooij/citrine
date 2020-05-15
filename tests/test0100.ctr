@@ -24,7 +24,7 @@ String on: ‘html’ do: {
 <html>
 <body>
 <p>Hello this is a test!</p>
-<p>The string ‘Verbatim Syntax’ has: 15 code points...</p>
+<p>The string \‘Verbatim Syntax\’ has: 15 code points...</p>
 <ul>
 [list]
 </ul>

@@ -93,7 +93,7 @@ for i in $(find tests -name 'test*.ctr'); do
 		done
 	fi
 	echo "[running...]";
-	if [ "$directive" == "‘NL-ONLY’." ]; then
+	if [ "$directive" == "“NL-ONLY”." ]; then
 		echo "test" | ./bin/${OS}/ctrnl ${fitem} 1>/tmp/a0 2>/tmp/b0
 	else
 		echo "test" | ./bin/${OS}/ctrus ${fitem} 1>/tmp/a0 2>/tmp/b0
@@ -139,7 +139,7 @@ for i in $(find tests -name 'test*.ctr'); do
 	if [ -f $fexpectnl ]; then
 		expectednl=`cat $fexpectnl`
 	fi
-	if [ "$directive" = "'NL-ONLY'." ]; then
+	if [ "$directive" = "“NL-ONLY”." ]; then
 		directive="'SINGLE_RUN'."
 		expected="$expectednl"
 	fi
