@@ -1,0 +1,4 @@
+Uncatched error has occurred.
+Key not found: aa
+#2 aa (tests/test0336.ctr: 6)
+#1 write: (tests/test0336.ctr: 6)
