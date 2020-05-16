@@ -140,7 +140,7 @@ for i in $(find tests -name 'test*.ctr'); do
 		expectednl=`cat $fexpectnl`
 	fi
 	if [ "$directive" = "“NL-ONLY”." ]; then
-		directive="'SINGLE_RUN'."
+		directive="‘SINGLE_RUN’."
 		expected="$expectednl"
 	fi
 	if [ "${result[0]}" = "$expected" ]; then

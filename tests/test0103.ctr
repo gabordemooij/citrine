@@ -4,7 +4,7 @@
 	✎ write: 
 		‘a ’ + 
 		((a ? i) type) +
-		(‘ ‘this’ ’ this: (a ? i))  +
+		(‘ \‘this\’ ’ this: (a ? i))  +
 		‘ is ’ +
 		(((a ? i) Nil?) either: ‘’ or: ‘NOT’) + 
 		‘ Nil.’,
