@@ -1,12 +1,12 @@
 ‘SINGLE_LANGUAGE’.
 
 
-☞ q := ‘abc’.
-☞ x := q list.
+☞ q ≔ ‘abc’.
+☞ x ≔ q list.
 ✎ write: x, stop.
 ✎ write: x count, stop.
 
-q := ‘기나 긴 여행’.
-x := q list.
+q ≔ ‘기나 긴 여행’.
+x ≔ q list.
 ✎ write: x, stop.
 ✎ write: (x count), stop.

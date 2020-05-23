@@ -1,13 +1,13 @@
 
 List on: ‘product’ do: {
-	☞ total := 1.
+	☞ total ≔ 1.
 	⛏ each: { :index :element
 		total multiply by: element.
 	}.
 	↲ total.
 }.
 
-☞ a := List ← 1 ; 2 ; 3.
+☞ a ≔ List ← 1 ; 2 ; 3.
 ✎ write: a product, stop.
 ✎ write: (List ← 2 ; 4 ; 8) product, stop. 
 ✎ write: (List ← -2 ; 10) product, stop. 

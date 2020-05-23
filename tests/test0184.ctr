@@ -1,9 +1,9 @@
 
 
-☞ usedMemory1 := 0.
-☞ usedMemory2 := 0.
-☞ usedMemory3 := 0.
-☞ usedMemory4 := 0.
+☞ usedMemory1 ≔ 0.
+☞ usedMemory2 ≔ 0.
+☞ usedMemory3 ≔ 0.
+☞ usedMemory4 ≔ 0.
 
 Program tidiness: 0.
 
@@ -24,68 +24,68 @@ Number on: ‘divideBy:’ do: { :x
 }.
 
 
-☞ a := 1.
-a := a + 1.
+☞ a ≔ 1.
+a ≔ a + 1.
 a addNum: 3.         
-a := a - 1.       
+a ≔ a - 1.       
 a subtractNum: -0.5. 
-a := a * 2.       
+a ≔ a * 2.       
 a divideBy: 3.    
-a := a / 0.1.     
-a := a - -1.      
+a ≔ a / 0.1.     
+a ≔ a - -1.      
 a multiplyBy: 0.5.
-a := a + (2 power: 8).  
-a := a + (2 power: -1). 
-a := a + (49 square root).   
+a ≔ a + (2 power: 8).  
+a ≔ a + (2 power: -1). 
+a ≔ a + (49 square root).   
 a addNum: ((List ← 0 ; 1) maximum).          
 a addNum: ((List ← 2 ; 3) minimum).
 ✎ write: a.
 
 Program clean memory.
 
-usedMemory1 := (Program memory ? 1).
+usedMemory1 ≔ (Program memory ? 1).
 
 
-a := 1.
-a := a + 1.       
+a ≔ 1.
+a ≔ a + 1.       
 a addNum: 3.         
-a := a - 1.       
+a ≔ a - 1.       
 a subtractNum: -0.5. 
-a := a * 2.       
+a ≔ a * 2.       
 a divideBy: 3.    
-a := a / 0.1.     
-a := a - -1.      
+a ≔ a / 0.1.     
+a ≔ a - -1.      
 a multiplyBy: 0.5.
-a := a + (2 power: 8).  
-a := a + (2 power: -1). 
-a := a + (49 square root).   
+a ≔ a + (2 power: 8).  
+a ≔ a + (2 power: -1). 
+a ≔ a + (49 square root).   
 a addNum: ((List ← 0 ; 1) maximum).          
 a addNum: ((List ← 2 ; 3) minimum).
 ✎ write: a.
 
 Program clean memory.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 ≔ (Program memory ? 1).
 
 
-a := 1.
-a := a + 1.       
+a ≔ 1.
+a ≔ a + 1.       
 a addNum: 3.         
-a := a - 1.       
+a ≔ a - 1.       
 a subtractNum: -0.5. 
-a := a * 2.       
+a ≔ a * 2.       
 a divideBy: 3.    
-a := a / 0.1.     
-a := a - -1.      
+a ≔ a / 0.1.     
+a ≔ a - -1.      
 a multiplyBy: 0.5.
-a := a + (2 power: 8).  
-a := a + (2 power: -1). 
-a := a + (49 square root).   
+a ≔ a + (2 power: 8).  
+a ≔ a + (2 power: -1). 
+a ≔ a + (49 square root).   
 a addNum: ((List ← 0 ; 1) maximum).          
 a addNum: ((List ← 2 ; 3) minimum).
 ✎ write: a.
 
 Program clean memory.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 ≔ (Program memory ? 1).
 
 
 

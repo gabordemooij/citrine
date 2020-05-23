@@ -1,5 +1,5 @@
 
 {
-	☞ x := (Program shell: ‘echo "aa" | ./bin/Generic/ctr tests/assets/scrambler.ctr’).
+	☞ x ≔ (Program shell: ‘echo "aa" | ./bin/Generic/ctr tests/assets/scrambler.ctr’).
 	✎ write: x, stop write: x length, stop.
 } * 20.

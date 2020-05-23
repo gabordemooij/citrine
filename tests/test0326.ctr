@@ -1,5 +1,5 @@
 
-☞ x := ‘Hello’ pattern: ‘[eo]’ process: { :match
+☞ x ≔ ‘Hello’ pattern: ‘[eo]’ process: { :match
 	✎ write: (‘found: needle’ needle: match), stop.
 	↲ ‘’.
 }.

@@ -1,6 +1,6 @@
-☞ Slurp := Object new.
+☞ Slurp ≔ Object new.
 Slurp on: ‘new’ do: {
-	⚿ str := ‘’.
+	⚿ str ≔ ‘’.
 }.
 Slurp learn: ‘nieuw’ means: ‘new’.
 Slurp on: ‘respond:’ do: { :blah
@@ -22,13 +22,13 @@ Slurp on: ‘respond:and:’ do: { :blah :blahah
 		⚿ str append: blahah.
 }.
 Slurp on: ‘obtain’ do: {
-	☞ buffer := ⚿ str.
-	⚿ str := ‘’.
+	☞ buffer ≔ ⚿ str.
+	⚿ str ≔ ‘’.
 	↲ buffer.
 }.
 
 
-☞ query := Slurp new
+☞ query ≔ Slurp new
 	select: ‘*’,
 	from
 		users 

@@ -1,4 +1,4 @@
-☞ counter := 10.
+☞ counter ≔ 10.
 
 {
 { ↲ (counter > 0). } while: ‘dont segfault!’.

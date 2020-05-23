@@ -1,6 +1,6 @@
 
 
-☞ meals :=
+☞ meals ≔
 	List new
 	• ‘hamburger’
 	• ‘pizza’

@@ -1,9 +1,9 @@
-☞ a := ‘hello’.
-☞ b := ‘hello’.
-☞ z := a.
-☞ c := Nil.
-☞ q := Object new.
-☞ p := q.
+☞ a ≔ ‘hello’.
+☞ b ≔ ‘hello’.
+☞ z ≔ a.
+☞ c ≔ Nil.
+☞ q ≔ Object new.
+☞ p ≔ q.
 (a equals: a) true: { ✎ write: ‘Y1’. }.
 (a equals: b) true: { ✎ write: ‘Y2’. }.
 (a equals: c) true: { ✎ write: ‘Y3’. }.

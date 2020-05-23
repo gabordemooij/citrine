@@ -2,6 +2,6 @@
 
 
 
-☞ x := Object new.
+☞ x ≔ Object new.
 x doesNotUnderstand this.
 y doYouExist.

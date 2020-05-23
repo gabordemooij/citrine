@@ -1,11 +1,11 @@
 ‘SINGLE_LANGUAGE’.
 Program memory: 16000000.
-☞ tokens := ‘{}↲.:,x() ’.
+☞ tokens ≔ ‘{}↲.:,x() ’.
 { :i
-	☞ code := ‘’.
-	☞ x := Number between: 1 and: 10.
+	☞ code ≔ ‘’.
+	☞ x ≔ Number between: 1 and: 10.
 	{
-		☞ y := Number between: 1 and: (tokens length).
+		☞ y ≔ Number between: 1 and: (tokens length).
 		code append: (tokens character: y).
 	} * x.
 	{ Code new: code. } catch: { ‘Empty’. }, run.

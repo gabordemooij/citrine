@@ -6,8 +6,8 @@
 	✎ write: ‘-’.
 } * 10.
 
-☞ x := 0.
-☞ xIsLessThan10 := { ↲( x < 10 ). }.
+☞ x ≔ 0.
+☞ xIsLessThan10 ≔ { ↲( x < 10 ). }.
 ✎ stop.
 ✎ write: ‘Continue while-true, No --> before 5 and up.’, stop.
 {
@@ -47,7 +47,7 @@
 }.
 
 ✎ write: ‘Test Map each-loop: c only’, stop.
-☞ m := Map new.
+☞ m ≔ Map new.
 m put: ‘first’ at: ‘a’, put: ‘second’ at: ‘b’, put: ‘third’ at: ‘c’.
 m each: { :k :v
 	(k ≠ ‘c’) continue.

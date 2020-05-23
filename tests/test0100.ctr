@@ -8,7 +8,7 @@ String on: ‘html’ do: {
 	).
 }.
 
-☞ list := List new.
+☞ list ≔ List new.
 
 ‘Verbatim Syntax’ characters each: { :number :letter
 	list ; ((‘<li>#Number:Letter</li>’) Number: (number), Letter: letter).
@@ -20,7 +20,7 @@ String on: ‘html’ do: {
 
 
 
-☞ template := ‘
+☞ template ≔ ‘
 <html>
 <body>
 <p>Hello this is a test!</p>

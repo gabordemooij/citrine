@@ -1,14 +1,14 @@
-☞ z := Object new.
+☞ z ≔ Object new.
 z on: ‘value:’ do: { :v
-	⚿ value := v.
+	⚿ value ≔ v.
 	↲ ⛏.
 }.
 z on: ‘value’ do: { ↲ ⚿ value. }.
 (z setValue: 1) value: 2.
 ✎ write: z value.
-☞ x := z.
+☞ x ≔ z.
 ✎ write: x value.
-z := Nil.
+z ≔ Nil.
 ✎ write: z value.
 ✎ write: x value.
 ✎ write: ‘hello’.

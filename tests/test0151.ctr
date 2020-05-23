@@ -1,6 +1,6 @@
 ‘SINGLE_LANGUAGE’.
 
-☞ o := Object new.
+☞ o ≔ Object new.
 o on: ‘test’ do: {
-	⚿ := 123.
+	⚿ ≔ 123.
 }.

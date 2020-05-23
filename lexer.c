@@ -37,14 +37,18 @@ char* ctr_clex_desc_tok_chain = ",";
 char* ctr_clex_desc_tok_booleanyes = "True";
 char* ctr_clex_desc_tok_booleanno = "False";
 char* ctr_clex_desc_tok_nil = "Nil";
-char* ctr_clex_desc_tok_assignment = ":=";
+char* ctr_clex_desc_tok_assignment = "≔";
+
 char* ctr_clex_desc_tok_ret_unicode = "↲";
 char* ctr_clex_desc_tok_fin = "end of program";
 char* ctr_clex_desc_tok_unknown = "(unknown token)";
 
+
 char* ctr_clex_keyword_me_icon;
 char* ctr_clex_keyword_my_icon;
 char* ctr_clex_keyword_var_icon;
+
+ctr_size ctr_clen_keyword_assignment_len;
 ctr_size ctr_clex_keyword_my_icon_len;
 ctr_size ctr_clex_keyword_var_icon_len;
 
@@ -71,13 +75,25 @@ uint8_t ctr_clex_is_delimiter( char* code ) {
 	if (strncmp(code, CTR_DICT_END_OF_LINE, ctr_clex_keyword_eol_len) == 0) {
 		return 1;
 	}
+	if (strncmp(code, CTR_DICT_ASSIGN, ctr_clex_keyword_assignment_len) == 0) {
+		return 1;
+	}
+	if (strncmp(code, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len) == 0 ) {
+		return 1;
+	}
+	if (strncmp(code, CTR_DICT_RETURN, ctr_clex_keyword_return_len) == 0 ) {
+		return 1;
+	}
 	char symbol = *(code);
 	return (
 	   symbol == '('
 	|| symbol == ')'
 	|| symbol == ','
 	|| symbol == ':'
-	|| symbol == ' ' );
+	|| symbol == ' '
+	|| symbol == '\n'
+	|| symbol == '\t'
+	);
 }
 
 /**
@@ -216,7 +232,6 @@ int ctr_clex_tok() {
 	char c;
 	int i;
 	char eol;
-	char qo;
 	ctr_clex_tokvlen = 0;
 	ctr_clex_olderptr = ctr_clex_oldptr;
 	ctr_clex_oldptr = ctr_code;
@@ -238,8 +253,8 @@ int ctr_clex_tok() {
 		return CTR_TOKEN_DOT;
 	}
 	if (c == ',') { ctr_code++; return CTR_TOKEN_CHAIN; }
-	if (c == ':' && (ctr_code+1)<ctr_eofcode && (*(ctr_code+1)=='=')) {
-		ctr_code += 2;
+	if (strncmp(ctr_code, ctr_clex_desc_tok_assignment, ctr_clex_keyword_assignment_len)==0) {
+		ctr_code += ctr_clex_keyword_assignment_len;
 		return CTR_TOKEN_ASSIGNMENT; 
 	}
 	if (c == ':') { ctr_code++; return CTR_TOKEN_COLON; }
@@ -328,26 +343,7 @@ int ctr_clex_tok() {
 			return CTR_TOKEN_NIL;
 		}
 	}
-
-	qo  = ( strncmp(ctr_code, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len)==0 );
-	while(
-	!isspace(c) && (
-		c != '(' &&
-		c != ')' &&
-		c != '{' &&
-		c != '}' &&
-		!eol &&
-		!qo  &&
-		c !=','  &&
-		( !(
-		( ctr_code + 2) < ctr_eofcode
-			&&   (uint8_t)            c == 226
-			&& ( (uint8_t) *(ctr_code+1)== 134)
-			&& ( (uint8_t) *(ctr_code+2)== 145) ) ) &&
-		c != ':'
-	)
-	&& ctr_code!=ctr_eofcode
-	) {
+	while( !ctr_clex_is_delimiter( ctr_code ) && ctr_code!=ctr_eofcode ) {
 		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
 		i++;
 		if (i > ctr_clex_bflmt) {
@@ -355,8 +351,6 @@ int ctr_clex_tok() {
 		}
 		ctr_code++;
 		c = *ctr_code;
-		eol = ( strncmp(ctr_code,CTR_DICT_END_OF_LINE,ctr_clex_keyword_eol_len)==0 );
-		qo  = ( strncmp(ctr_code, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len)==0 );
 	}
 	return CTR_TOKEN_REF;
 }

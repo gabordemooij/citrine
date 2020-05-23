@@ -1,4 +1,4 @@
-☞ myFile := File new: ‘/tmp/lock’.
+☞ myFile ≔ File new: ‘/tmp/lock’.
 
 myFile exists true: {
 	myFile delete.
@@ -6,16 +6,16 @@ myFile exists true: {
 
 myFile write: ‘lock’.
 
-☞ isLocked   := False.
-☞ isUnlocked := False.
+☞ isLocked   ≔ False.
+☞ isUnlocked ≔ False.
 
-{ Moment wait: 1. } while: { isLocked := myFile lock. ↲ isLocked not. }.
+{ Moment wait: 1. } while: { isLocked ≔ myFile lock. ↲ isLocked not. }.
 ✎ write: isLocked, stop.
 
-{ Moment wait: 1. } while: { isLocked := myFile lock. ↲ isLocked not. }.
+{ Moment wait: 1. } while: { isLocked ≔ myFile lock. ↲ isLocked not. }.
 ✎ write: isLocked, stop.
 
-☞ myFile2 := File new: ‘/tmp/lock2’.
+☞ myFile2 ≔ File new: ‘/tmp/lock2’.
 
 myFile2 exists true: {
 	myFile2 delete.
@@ -23,8 +23,8 @@ myFile2 exists true: {
 
 myFile2 write: ‘lock’.
 
-{ Moment wait: 1. } while: { isLocked := myFile2 lock. ↲ isLocked not. }.
+{ Moment wait: 1. } while: { isLocked ≔ myFile2 lock. ↲ isLocked not. }.
 ✎ write: isLocked, stop.
 
-{ Moment wait: 1. } while: { isUnlocked := myFile2 unlock. ↲ isUnlocked not. }.
+{ Moment wait: 1. } while: { isUnlocked ≔ myFile2 unlock. ↲ isUnlocked not. }.
 ✎ write: isUnlocked, stop.

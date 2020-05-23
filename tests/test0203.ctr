@@ -3,9 +3,9 @@
 
 
 Program tidiness: 4.
-☞ j := 1.
+☞ j ≔ 1.
 
-☞ func := {
+☞ func ≔ {
 
 	✎ write: ‘Nested call #’ + j, stop.
 	j add: 1.

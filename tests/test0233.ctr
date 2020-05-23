@@ -1,8 +1,8 @@
 ‘SINGLE_LANGUAGE’.
-☞ Slurp := Object new.
+☞ Slurp ≔ Object new.
 
 Slurp on: ‘new’ do: {
-	⚿ str := ‘’.
+	⚿ str ≔ ‘’.
 }.
 
 Slurp on: ‘respond:’ do: { :blah
@@ -25,8 +25,8 @@ Slurp on: ‘respond:and:’ do: { :blah :blahah
 }.
 
 Slurp on: ‘obtain’ do: {
-	☞ buffer := ⚿ str.
-	⚿ str := ‘’.
+	☞ buffer ≔ ⚿ str.
+	⚿ str ≔ ‘’.
 	↲ buffer.
 }.
 

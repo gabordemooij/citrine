@@ -1,12 +1,12 @@
 ‘SINGLE_LANGUAGE’.
 
 String on: ‘evaluate’ do: {
-	☞ code := File new: ‘/tmp/eval.ctr’.
+	☞ code ≔ File new: ‘/tmp/eval.ctr’.
 	code write: ⛏ string + ‘.’.
 	Program use: ‘/tmp/eval.ctr’.
 }.
 
-☞ a := (List ← (
+☞ a ≔ (List ← (
 	(Map new)
 		put: ‘domain’ at: ‘mywebsite.com’,
 		put: (List ←
@@ -26,14 +26,14 @@ String on: ‘evaluate’ do: {
 ✎ write: a type, stop.
 ✎ write: a, stop.
 
-☞ b := Nil.
-(‘b := ’ + a) evaluate.
+☞ b ≔ Nil.
+(‘b ≔ ’ + a) evaluate.
 ✎ write: b ? 1 ? ‘pages’ ? 2 ? ‘body’, stop.
 
-☞ c := b ? 1.
-☞ d := c string.
+☞ c ≔ b ? 1.
+☞ d ≔ c string.
 ✎ write: d type, stop.
 
-☞ e := Nil.
-(‘e := ’ + d) evaluate.
+☞ e ≔ Nil.
+(‘e ≔ ’ + d) evaluate.
 ✎ write: e ? ‘pages’ ? 1, stop.

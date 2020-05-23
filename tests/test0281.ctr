@@ -1,4 +1,4 @@
-☞ q := List ← 1 ; 2 ; 3.
+☞ q ≔ List ← 1 ; 2 ; 3.
 { q ? ‘1’. } catch: { ✎ write: ‘caught!’, stop. }, run.
 { q ? True. } catch: { ✎ write: ‘caught!’, stop. }, run.
 { q ? False. } catch: { ✎ write: ‘caught!’, stop. }, run.

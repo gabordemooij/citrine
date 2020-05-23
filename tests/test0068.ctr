@@ -1,4 +1,4 @@
-☞ w := ‘A_bottle_of_Whisky and a rare steak.’.
+☞ w ≔ ‘A_bottle_of_Whisky and a rare steak.’.
 ✎ write: ‘=== Basic test, grab the bottle! ===’, stop.
 ✎ write: ‘>’+(w from:3 length: 6), stop. 
 ✎ write: ‘>’+(w from:9 length: -6), stop. 

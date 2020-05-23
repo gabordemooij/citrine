@@ -1,6 +1,6 @@
 
 
-☞ clock := Moment
+☞ clock ≔ Moment
 	new zone: ‘Europe/Amsterdam’,
 	year: 2017, month: 7, day: 13,
 	hour: 18, minute: 0, second: 0.

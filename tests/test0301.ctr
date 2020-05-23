@@ -1,7 +1,7 @@
 
 
 
-☞ wine := Object new.
+☞ wine ≔ Object new.
 
 
 wine on: ‘toString’ do: {

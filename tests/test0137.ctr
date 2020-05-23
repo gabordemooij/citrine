@@ -3,69 +3,69 @@
 
 Program tidiness: 0.
 
-☞ x := 0.
-☞ y := ‘Hello’.
-☞ q := { ‘Empty’. }.
-☞ p := True.
-☞ a := List ← 1 ; 2 ; 3 ; 4.
+☞ x ≔ 0.
+☞ y ≔ ‘Hello’.
+☞ q ≔ { ‘Empty’. }.
+☞ p ≔ True.
+☞ a ≔ List ← 1 ; 2 ; 3 ; 4.
 
-☞ usedMemory1 := 0.
-☞ usedMemory2 := 0.
-☞ usedMemory3 := 0.
-☞ usedMemory4 := 0.
-
-Program clean memory.
-usedMemory1 := (Program memory ? 1).
-
-
-
-
-x := 1.
-y := ‘Hello’.
-q := { ‘Empty’. }.
-p := True.
-a := List ← 1 ; 2 ; 3 ; 5.
+☞ usedMemory1 ≔ 0.
+☞ usedMemory2 ≔ 0.
+☞ usedMemory3 ≔ 0.
+☞ usedMemory4 ≔ 0.
 
 Program clean memory.
-usedMemory2 := (Program memory ? 1).
+usedMemory1 ≔ (Program memory ? 1).
 
 
 
 
-x := 2.
-y := ‘Hello’.
-q := { ‘Empty’. }.
-p := True.
-a := List ← 1 ; 2 ; 3 ; 4.
-
-Program clean memory.
-usedMemory3 := (Program memory ? 1).
-
-
-
-
-x := 3.
-y := ‘Hello’.
-q := { ‘Empty’. }.
-p := True.
-a := List ← 1 ; 2 ; 3 ; 5.
-
+x ≔ 1.
+y ≔ ‘Hello’.
+q ≔ { ‘Empty’. }.
+p ≔ True.
+a ≔ List ← 1 ; 2 ; 3 ; 5.
 
 Program clean memory.
-usedMemory4 := (Program memory ? 1).
+usedMemory2 ≔ (Program memory ? 1).
 
 
 
 
-
-x := 4.
-y := ‘Hello’.
-q := { ‘Empty’. }.
-p := True.
-a := List ← 1 ; 2 ; 3 ; 4.
+x ≔ 2.
+y ≔ ‘Hello’.
+q ≔ { ‘Empty’. }.
+p ≔ True.
+a ≔ List ← 1 ; 2 ; 3 ; 4.
 
 Program clean memory.
-☞ usedMemory5 := (Program memory ? 1).
+usedMemory3 ≔ (Program memory ? 1).
+
+
+
+
+x ≔ 3.
+y ≔ ‘Hello’.
+q ≔ { ‘Empty’. }.
+p ≔ True.
+a ≔ List ← 1 ; 2 ; 3 ; 5.
+
+
+Program clean memory.
+usedMemory4 ≔ (Program memory ? 1).
+
+
+
+
+
+x ≔ 4.
+y ≔ ‘Hello’.
+q ≔ { ‘Empty’. }.
+p ≔ True.
+a ≔ List ← 1 ; 2 ; 3 ; 4.
+
+Program clean memory.
+☞ usedMemory5 ≔ (Program memory ? 1).
 
 
 

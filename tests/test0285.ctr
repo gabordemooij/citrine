@@ -1,5 +1,5 @@
 
-☞ ⚄ := Object new.
+☞ ⚄ ≔ Object new.
 
 ⚄ on: ‘type’ do: {
 	↲ ‘Object’.

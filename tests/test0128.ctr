@@ -1,16 +1,16 @@
 
 List on: ‘sum’ do: {
-	☞ total := 0.
+	☞ total ≔ 0.
 	⛏ each: { :index :element
 		total add: element.
 	}.
 	↲ total.
 }.
 
-☞ a := List ← 9 ; 8 ; 7.
+☞ a ≔ List ← 9 ; 8 ; 7.
 ✎ write: (a sum), stop. 
-☞ a := List ← 1 ; 9.
+☞ a ≔ List ← 1 ; 9.
 ✎ write: (a sum), stop. 
-☞ a := List ← ‘o’ ; 2.
+☞ a ≔ List ← ‘o’ ; 2.
 ✎ write: (a sum), stop. 
 ✎ write: (List new sum), stop. 

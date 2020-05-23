@@ -1,4 +1,4 @@
-☞ wrong := Program argument: -10.
+☞ wrong ≔ Program argument: -10.
 (wrong = Nil) true: {
 	✎ write: ‘I can handle out-of-bound Command arguments.↵’.
 }, else: {

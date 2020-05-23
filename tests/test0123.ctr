@@ -1,7 +1,7 @@
 
 ✎ write: ‘If hope is 0.1...↵’.
-☞ hope := 0.2.
+☞ hope ≔ 0.2.
 ( hope positive? ) true: { ✎ write: ‘Still a little hope for humanity↵’. }.
 ✎ write: ‘If hope is -1...↵’.
-hope := -1.
+hope ≔ -1.
 (hope negative? ) true: { ✎ write: ‘No hope left↵’. }.

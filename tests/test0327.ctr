@@ -1,7 +1,7 @@
 ‘SINGLE_LANGUAGE’.
 
 List on: ‘fixture:’ do: { :f
-	⚿ fixture := f.
+	⚿ fixture ≔ f.
 }.
 
 List on: ‘count’ do: {
@@ -13,10 +13,10 @@ List on: ‘aantal’ do: {
 }.
 
 
-☞ x := Nil.
+☞ x ≔ Nil.
 {
 
-	x := ‘hello’ 
+	x ≔ ‘hello’ 
 	replace:
 		(‘hel’ + 
 			(‘l<x>’ <x>:

@@ -1,29 +1,29 @@
 Number on: ‘factorial’ do: {
-	☞ total := 1.
+	☞ total ≔ 1.
 	{ :index total multiply by: (⛏ - (index - 1)). } * ⛏.
 	↲ total.
 }.
-☞ Printer := Object new.
+☞ Printer ≔ Object new.
 Printer on: ‘print:and:’ do: { :x :y
 	✎ write: ‘a=’ + x + ‘, b=’ + y, stop.
 }.
-☞ a := 4.5. ☞ b := a floor.
+☞ a ≔ 4.5. ☞ b ≔ a floor.
 Printer print: a and: b.
-a := 4. b := a factorial.
+a ≔ 4. b ≔ a factorial.
 Printer print: a and: b.
-a := 4.5. b := a ceil.
+a ≔ 4.5. b ≔ a ceil.
 Printer print: a and: b.
-a := 4.5. b := a floor.
+a ≔ 4.5. b ≔ a floor.
 Printer print: a and: b.
-a := 4.5. b := a round.
+a ≔ 4.5. b ≔ a round.
 Printer print: a and: b.
-a := 4.2. b := a round.
+a ≔ 4.2. b ≔ a round.
 Printer print: a and: b.
 
 ✎ write: (9 modulo: 5), stop.
 ✎ write: -666 absolute, stop.
 ✎ write: 49 square root, stop.
 ✎ write: (2 power: 3), stop.
-☞ l := (List ← 9 ; 6).
+☞ l ≔ (List ← 9 ; 6).
 ✎ write: l minimum.
 

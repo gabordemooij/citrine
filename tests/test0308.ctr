@@ -7,7 +7,7 @@ Program on: ‘pid’ do: { ↲ ‘[Program]’. }.
 ✎ write: ‘Sending toNumber to Program yields a PID number:’, stop.
 ✎ write: Program number, stop.
 
-☞ ⚄ := Object new.
+☞ ⚄ ≔ Object new.
 ⚄ on: ‘number’ do: { ↲ 666. }.
 ⚄ on: ‘string’ do: { ↲ ‘666’. }.
 

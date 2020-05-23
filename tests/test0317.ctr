@@ -1,6 +1,6 @@
 ‘SINGLE_LANGUAGE’.
 { 
-	☞ x := List ← 1 ; 2.
+	☞ x ≔ List ← 1 ; 2.
 	x ? 0.
 } catch: { :error 
 	✎ write: error, stop. 

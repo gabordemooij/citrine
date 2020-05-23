@@ -1,10 +1,10 @@
 
-☞ f := { :x
-	☞ result := 0.
+☞ f ≔ { :x
+	☞ result ≔ 0.
 	(x = 1) true: {
-		result := 1.
+		result ≔ 1.
 	}, else: {
-		result := x * (f apply: (x - 1)).
+		result ≔ x * (f apply: (x - 1)).
 	}.
 	↲ result.
 }.

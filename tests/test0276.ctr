@@ -1,12 +1,12 @@
-☞ ?? := ‘🦀🦁🦂🦃🦄’.
+☞ ?? ≔ ‘🦀🦁🦂🦃🦄’.
 
-☞ ⚄ := Object new.
+☞ ⚄ ≔ Object new.
 ⚄ on: ‘drawFrom:length:’ do: { :pool :count
 	
-	☞ result := ‘’.
+	☞ result ≔ ‘’.
 	
 	{
-		☞ index := Number random % (pool length).
+		☞ index ≔ Number random % (pool length).
 		result append: ( pool character: (index + 1) ).
 		
 	} * count.
@@ -14,7 +14,7 @@
 	↲ result.
 }.
 
-☞ random := ⚄ drawFrom: ?? length: ?? length.
+☞ random ≔ ⚄ drawFrom: ?? length: ?? length.
 ✎ write: (‘x↵’ x random length).
 ✎ write: (‘y↵’ y ?? length).
 

@@ -1,7 +1,7 @@
 
 
 
-☞ q := (‘a,b,c,d,e’ split: ‘,’).
+☞ q ≔ (‘a,b,c,d,e’ split: ‘,’).
 
 q shift.
 q each: { :i :x

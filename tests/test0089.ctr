@@ -1,9 +1,9 @@
-☞ randomizer := { :a :b
-	☞ minimum := ( a < b ) either: a or: b.
-	☞ maximum := ( a > b ) either: a or: b.
-	☞ x := Nil.
+☞ randomizer ≔ { :a :b
+	☞ minimum ≔ ( a < b ) either: a or: b.
+	☞ maximum ≔ ( a > b ) either: a or: b.
+	☞ x ≔ Nil.
 	{
-		x := Number between: a and: b.
+		x ≔ Number between: a and: b.
 		((x < minimum) or: (x > maximum)) true: { 
 			✎ write: (‘Invalid value!’).
 			Program end.

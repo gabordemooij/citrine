@@ -1,18 +1,18 @@
 ‘SINGLE_LANGUAGE’.
 
-☞ str := ‘write:’.
+☞ str ≔ ‘write:’.
 ✎ message: ‘write:’ arguments: (List ← ‘Hello World’), stop. 
 
 Number on: ‘isbetween:and:’ do: { :a :b
 	↲ ((⛏ ≥ a) and: (⛏ ≤ b)).
 }.
 
-str := ‘isbetween:and:’.
+str ≔ ‘isbetween:and:’.
 ✎ write: (3 message: str arguments: (List ← 2 ; 8)), stop.
 ✎ write: (3 message: str arguments: (List ← 1 ; 2)), stop.
 
 
-☞ CoffeeMachine := Object new.
+☞ CoffeeMachine ≔ Object new.
 CoffeeMachine on: ‘makeCoffeeWithSugar:milk:’ do: { :sugar :milk
 	↲ ( ‘Here ya go... coffee with ’ + 
 			sugar +
@@ -22,6 +22,6 @@ CoffeeMachine on: ‘makeCoffeeWithSugar:milk:’ do: { :sugar :milk
 	).
 }.
 
-☞ order := ‘makeCoffeeWithSugar:milk:’.
-☞ coffeeConfiguration := List ← 4 ; 2.
+☞ order ≔ ‘makeCoffeeWithSugar:milk:’.
+☞ coffeeConfiguration ≔ List ← 4 ; 2.
 ✎ write: ( CoffeeMachine message: order arguments: coffeeConfiguration ) , stop.

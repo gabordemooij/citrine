@@ -2,9 +2,9 @@
 (9 < 2) true: { ✎ write: ‘My logic fails’. }.
 ✎ write: (-2 + 6).
 ✎ write: (-3 - -3).
-☞ TrueIsNice := 3.
+☞ TrueIsNice ≔ 3.
 ✎ write: TrueIsNice.
-☞ FalseIsBad := ‘Not true!’.
+☞ FalseIsBad ≔ ‘Not true!’.
 ✎ write: FalseIsBad.
-☞ NilIsEmpty := ‘Yep’.
+☞ NilIsEmpty ≔ ‘Yep’.
 ✎ write: NilIsEmpty.

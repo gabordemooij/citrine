@@ -1,23 +1,23 @@
 
-☞ countries := List new
+☞ countries ≔ List new
 	• ‘Switzerland’
 	• ‘Italy’
 	• ‘Germany’.
 
-☞ foods := List new
+☞ foods ≔ List new
 	• ‘Rösti’
 	• ‘Spaghetti’
 	• ‘Sauerkraut’.
 
 
-☞ counter := 0.
+☞ counter ≔ 0.
 foods by: countries, each: { :key :value
 	counter add: 1.
 }.
 
 ✎ write: (‘we serve "counter" dishes’ "counter": counter), stop.
 
-☞ counter := 42.
+☞ counter ≔ 42.
 ‘TrytosortthiswithoutsegfaultingButActualNumberDe✎dsOnOS’ characters sort: { :v
 	counter add: 0.
 }.
@@ -25,7 +25,7 @@ foods by: countries, each: { :key :value
 ✎ write: (‘we sort counter dishes’ counter: counter), stop.
 
 
-☞ counter := 0.
+☞ counter ≔ 0.
 {
 	{
 		counter add: 1.
@@ -36,7 +36,7 @@ foods by: countries, each: { :key :value
 ✎ write: (‘we calculate counter numbers.’ counter: counter), stop.
 
 
-☞ counter := 0.
+☞ counter ≔ 0.
 List new fill: 142 with: ‘x’, join: ‘o’, pattern: ‘([x])’ process: { :arr
 	{ counter add: 1. } * 10.
 } options: ‘’.

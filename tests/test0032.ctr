@@ -1,9 +1,9 @@
-☞ a := Object new.
+☞ a ≔ Object new.
 a on: ‘init’ do: {
-	☞ v := ‘test’.
-	⚿ value := v.
-	⚿ value2 := ⚿ value.
-	☞ x := ⚿ value2.
+	☞ v ≔ ‘test’.
+	⚿ value ≔ v.
+	⚿ value2 ≔ ⚿ value.
+	☞ x ≔ ⚿ value2.
 	✎ write: x.
 	✎ write: ⚿ value.
 	✎ write: ⚿ value2.

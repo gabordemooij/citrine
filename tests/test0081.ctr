@@ -1,6 +1,6 @@
-☞ map1 := Map new.
-☞ key1 := List new.
-☞ key2 := List new.
+☞ map1 ≔ Map new.
+☞ key1 ≔ List new.
+☞ key2 ≔ List new.
 
 map1
 	put: ‘hello’ at: key1,
@@ -11,14 +11,14 @@ map1
 	write: ‘Map #1 contains: ’ + (map1 at: key1),
 	write: ‘ and ’ + (map1 at: key2), stop.
 
-☞ KeyeableArray := List new.
+☞ KeyeableArray ≔ List new.
 KeyeableArray on: ‘toString’ do: {
 	↲ (⛏ count) toString.
 }.
 
-☞ map2 := Map new.
-key1 := KeyeableArray new.
-key2 := KeyeableArray new.
+☞ map2 ≔ Map new.
+key1 ≔ KeyeableArray new.
+key2 ≔ KeyeableArray new.
 
 key1 append: 1.
 

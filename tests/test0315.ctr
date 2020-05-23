@@ -1,46 +1,46 @@
 Program tidiness: 12.
 
 String on: ‘escape:’ do: { :characters
-	☞ str := ⛏.
+	☞ str ≔ ⛏.
 	characters characters each: { :number :character
 		
-		☞ replacement := ‘\\’ + character.
+		☞ replacement ≔ ‘\\’ + character.
 		
 		(character = ‘\t’) true: {
-			replacement := ‘\\t’.
+			replacement ≔ ‘\\t’.
 		}.
 		
 		(character = ‘\n’) true: {
-			replacement := ‘\\n’.
+			replacement ≔ ‘\\n’.
 		}.
 		
-		str := str replace: character with: replacement.
+		str ≔ str replace: character with: replacement.
 	}.
 	↲ str.
 }.
 
 String on: ‘unescape:’ do: { :text
-	☞ str := ⛏.
+	☞ str ≔ ⛏.
 	text characters each: { :number :character
 		
 		(character = ‘\t’) true: {
-			character := ‘\\t’.
+			character ≔ ‘\\t’.
 		}.
 		
 		(character = ‘\n’) true: {
-			character := ‘\\n’.
+			character ≔ ‘\\n’.
 		}.
 		
-		str := str pattern: (‘\\\\+(X)’ X character) process: { :match
+		str ≔ str pattern: (‘\\\\+(X)’ X character) process: { :match
 			
-			☞ special := match ? 2.
+			☞ special ≔ match ? 2.
 			
 			((match ? 1) = ‘\\t’) true: {
-				special := ‘⇿’.
+				special ≔ ‘⇿’.
 			}.
 			
 			((match ? 1) = ‘\\n’) true: {
-				special := ‘↵’.
+				special ≔ ‘↵’.
 			}.
 			
 			↲ special.
@@ -50,10 +50,10 @@ String on: ‘unescape:’ do: { :text
 }.
 
 
-☞ json := ‘{"test":"a\\"b"}’.
+☞ json ≔ ‘{"test":"a\\"b"}’.
 ✎ write: (Json to object: json), stop.
 
-☞ json := ‘{ "name" : "Jack", "age" : 27, "legend" : false, "nested": [1, 2, [3, 4], {"foo": 1, [3, 4]}] }’.
+☞ json ≔ ‘{ "name" : "Jack", "age" : 27, "legend" : false, "nested": [1, 2, [3, 4], {"foo": 1, [3, 4]}] }’.
 
 {
 	Json to object: json.
@@ -61,22 +61,22 @@ String on: ‘unescape:’ do: { :text
 	✎ write: e, stop.
 }, run.
 
-☞ json := ‘{ "name" : "Jack", "age" : 27, "legend" : false, "nested": [1, 2, [3, 4], {"foo": 1, "bar":[3, 4]}] }’.
+☞ json ≔ ‘{ "name" : "Jack", "age" : 27, "legend" : false, "nested": [1, 2, [3, 4], {"foo": 1, "bar":[3, 4]}] }’.
 ✎ write: (Json to object: json), stop.
 
-☞ json := ‘{"test":"a\\tb"}’.
+☞ json ≔ ‘{"test":"a\\tb"}’.
 ✎ write: (Json to object: json) test, stop.
 
-☞ json := ‘{"test":"a\\t\\tb"}’.
+☞ json ≔ ‘{"test":"a\\t\\tb"}’.
 ✎ write: (Json jsonify: (Json to object: json)), stop.
 
-☞ json := ‘{"test":"a\\nb"}’.
+☞ json ≔ ‘{"test":"a\\nb"}’.
 ✎ write: (Json jsonify: (Json to object: json)), stop.
 
-☞ json := ‘{"test":"a\\"b"}’.
+☞ json ≔ ‘{"test":"a\\"b"}’.
 ✎ write: (Json jsonify: (Json to object: json)), stop.
 
-☞ json := ‘{"test":"a\\b"}’.
+☞ json ≔ ‘{"test":"a\\b"}’.
 ✎ write: (Json jsonify: (Json to object: json)), stop.
 
 ✎ write: ‘______________________Unescape\n’.

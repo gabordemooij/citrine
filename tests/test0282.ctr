@@ -1,10 +1,10 @@
-☞ Italian places := List ← ‘Venice’ ; ‘Rome’ ; ‘Pompeii’ ; ‘Naples’.
+☞ Italian places ≔ List ← ‘Venice’ ; ‘Rome’ ; ‘Pompeii’ ; ‘Naples’.
 
 ✎ write: (Italian places first), stop.
 ✎ write: (Italian places last), stop.
 ✎ write: (Italian places second last), stop.
 
-☞ Moon places := List new.
+☞ Moon places ≔ List new.
 
 ✎ write: (Moon places first), stop.
 ✎ write: (Moon places last), stop.

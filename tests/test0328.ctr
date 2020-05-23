@@ -10,10 +10,10 @@ Program tidiness: 4.
 Bus error (core dumped)’.
 
 
-☞ Doubler := Object new.
-☞ Multiplier := Object new.
+☞ Doubler ≔ Object new.
+☞ Multiplier ≔ Object new.
 Doubler on: ‘double:and:’ do: { :x :y
-	☞ q := x + 1.
+	☞ q ≔ x + 1.
 	↲ ((x * 2) + (y * 2)).
 }.
 

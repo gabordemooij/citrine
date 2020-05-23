@@ -2,10 +2,10 @@
 
 
 ✎ write: ‘Number:’.
-☞ a := Number + Number + 1.
-a := Number - 2.
-a := Number * 2.
-a := Number / 2.
+☞ a ≔ Number + Number + 1.
+a ≔ Number - 2.
+a ≔ Number * 2.
+a ≔ Number / 2.
 ✎ write: a.
 ✎ stop.
 
@@ -31,7 +31,7 @@ a := Number / 2.
 ✎ write: List count.
 ✎ write: List shift.
 ✎ write: (List join: ‘,’).
-☞ f := List new.
+☞ f ≔ List new.
 ✎ write: f count. 
 ✎ stop.
 

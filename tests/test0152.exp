@@ -1,2 +1,2 @@
-Parse error, unexpected := ( tests/test0152.ctr: 3 )
+Parse error, unexpected ≔ ( tests/test0152.ctr: 3 )
 Pointing hand should always be followed by variable!

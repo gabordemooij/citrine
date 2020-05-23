@@ -1,35 +1,35 @@
 
 
 
-☞ CoffeeMachine := Object new.
+☞ CoffeeMachine ≔ Object new.
 CoffeeMachine on: ‘order:’ do: { :id
-	☞ coffee := ‘Americano’.
+	☞ coffee ≔ ‘Americano’.
 	( id = 1 ) true: {
-		coffee := ‘Cappuccino’.
+		coffee ≔ ‘Cappuccino’.
 	}.
 	( id = 2 ) true: {
-		coffee := ‘Espresso’.
+		coffee ≔ ‘Espresso’.
 	}.
 	( id = 3 ) true: {
-		coffee := ‘Latte’.
+		coffee ≔ ‘Latte’.
 	}.
 	↲ coffee.
 }.
-☞ SimpleCoffeeMachine := Object new.
+☞ SimpleCoffeeMachine ≔ Object new.
 SimpleCoffeeMachine on: ‘order’ do: { ↲ ‘Black’. }.
-☞ redCup := CoffeeMachine order: 1.
+☞ redCup ≔ CoffeeMachine order: 1.
 ✎ write: redCup, stop.
-redCup := ‘Tea’. 
-☞ greenCup := CoffeeMachine order: 0.
+redCup ≔ ‘Tea’. 
+☞ greenCup ≔ CoffeeMachine order: 0.
 ✎ write: greenCup, stop.
-☞ yellowCup := CoffeeMachine order: 1.
+☞ yellowCup ≔ CoffeeMachine order: 1.
 ✎ write: yellowCup, stop.
-☞ blueCup := CoffeeMachine order: 0.
+☞ blueCup ≔ CoffeeMachine order: 0.
 ✎ write: blueCup, stop.
-☞ plasticCup := SimpleCoffeeMachine order.
-plasticCup := ‘Lemonade’. 
-☞ blackCup := SimpleCoffeeMachine order.
+☞ plasticCup ≔ SimpleCoffeeMachine order.
+plasticCup ≔ ‘Lemonade’. 
+☞ blackCup ≔ SimpleCoffeeMachine order.
 ✎ write: blackCup, stop.
 blackCup append: ‘ nooo.... beer. ’.
-☞ orangeCup := SimpleCoffeeMachine order.
+☞ orangeCup ≔ SimpleCoffeeMachine order.
 ✎ write: orangeCup, stop.

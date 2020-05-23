@@ -1,9 +1,9 @@
 
-☞ a := 0.
+☞ a ≔ 0.
 {
 	✎ write: ‘Block 1.↵’.
 	this code block error: ‘Err’.
-	a := 1.
+	a ≔ 1.
 } catch: {
 	✎ write: ‘Catch Block.↵’.
 	✎ write: ‘a = ’ + a, stop.
