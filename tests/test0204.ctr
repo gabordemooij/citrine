@@ -1,6 +1,6 @@
 ‘SINGLE_LANGUAGE’.
 
-☞ a := List ← 1 ; 2 ; 3.
+☞ a ≔ List ← 1 ; 2 ; 3.
 ✎ write: a count, stop.
 ✎ write: a ? 2, stop.
 a shift.

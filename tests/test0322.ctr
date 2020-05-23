@@ -1,19 +1,19 @@
 ‘SINGLE_LANGUAGE’.
 
-☞ Matryoshka := Object new.
+☞ Matryoshka ≔ Object new.
 Matryoshka on: ‘double:’ do: { :secret
-	⚿ secret := secret * 2.
+	⚿ secret ≔ secret * 2.
 }.
 Matryoshka on: ‘new:’ do: { :secret
-	☞ answer := Nil.
-	☞ t := (secret > 255).
+	☞ answer ≔ Nil.
+	☞ t ≔ (secret > 255).
 	✎ write: (secret + ‘ | ’ + t), stop.
 	t true: {
-		answer := secret.
+		answer ≔ secret.
 	}, else: {
-		answer := Matryoshka new: (⛏ double: secret).
+		answer ≔ Matryoshka new: (⛏ double: secret).
 	}.
 	↲ answer.
 }.
 
-☞ x := Matryoshka new: 2.
+☞ x ≔ Matryoshka new: 2.

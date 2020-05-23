@@ -23,6 +23,8 @@ char ctr_flag_sandbox;
 ctr_size ctr_clex_keyword_eol_len;
 ctr_size ctr_clex_keyword_num_sep_dec_len;
 ctr_size ctr_clex_keyword_num_sep_tho_len;
+ctr_size ctr_clex_keyword_assignment_len;
+ctr_size ctr_clex_keyword_return_len;
 uint16_t ctr_sandbox_steps = 0;
 
 /**
@@ -110,6 +112,8 @@ int main(int argc, char* argv[]) {
 	ctr_clex_keyword_num_sep_tho_len = strlen( CTR_DICT_NUM_THO_SEP );
 	ctr_clex_keyword_qo_len = strlen( CTR_DICT_QUOT_OPEN );
 	ctr_clex_keyword_qc_len = strlen( CTR_DICT_QUOT_CLOSE );
+	ctr_clex_keyword_assignment_len = strlen( CTR_DICT_ASSIGN );
+	ctr_clex_keyword_return_len = strlen( CTR_DICT_RETURN );
 	int mode = ctr_cli_read_args(argc, argv);
 	if (mode == 1) {
 		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);

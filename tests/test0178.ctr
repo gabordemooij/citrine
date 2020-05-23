@@ -1,13 +1,13 @@
 
 
-☞ usedMemory1 := 0.
-☞ usedMemory2 := 0.
-☞ usedMemory3 := 0.
-☞ usedMemory4 := 0.
+☞ usedMemory1 ≔ 0.
+☞ usedMemory2 ≔ 0.
+☞ usedMemory3 ≔ 0.
+☞ usedMemory4 ≔ 0.
 
 Program tidiness: 0.
 
-☞ txt := ‘Word Salad’.
+☞ txt ≔ ‘Word Salad’.
 ✎ write: ‘last index of ord = ’ + (( txt last: ‘ord’ ) - 1), stop.
 ✎ write: ‘index of ord = ’ + (( txt find: ‘ord’ ) - 1), stop.
 ✎ write: ‘index of ad = ’ + (( txt find: ‘ad’ ) - 1), stop.
@@ -20,10 +20,10 @@ Program tidiness: 0.
 
 Program clean memory.
 
-usedMemory1 := (Program memory ? 1).
+usedMemory1 ≔ (Program memory ? 1).
 
 
-txt := ‘Word Salad’.
+txt ≔ ‘Word Salad’.
 ✎ write: ‘last index of ord = ’ + (( txt last: ‘ord’ ) - 1), stop.
 ✎ write: ‘index of ord = ’ + (( txt find: ‘ord’ ) - 1), stop.
 ✎ write: ‘index of ad = ’ + (( txt find: ‘ad’ ) - 1), stop.
@@ -35,10 +35,10 @@ txt := ‘Word Salad’.
 ✎ write: ‘txt does not equal Ceasar Salad = ’ + ( txt ≠ ‘Ceasar Salad’ ), stop.
 
 Program clean memory.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 ≔ (Program memory ? 1).
 
 
-txt := ‘Word Salad’.
+txt ≔ ‘Word Salad’.
 ✎ write: ‘last index of ord = ’ + (( txt last: ‘ord’ ) - 1), stop.
 ✎ write: ‘index of ord = ’ + (( txt find: ‘ord’ ) - 1), stop.
 ✎ write: ‘index of ad = ’ + (( txt find: ‘ad’ ) - 1), stop.
@@ -50,7 +50,7 @@ txt := ‘Word Salad’.
 ✎ write: ‘txt does not equal Ceasar Salad = ’ + ( txt ≠ ‘Ceasar Salad’ ), stop.
 
 Program clean memory.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 ≔ (Program memory ? 1).
 
 
 

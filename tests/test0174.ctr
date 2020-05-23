@@ -1,65 +1,65 @@
 ‘SINGLE_LANGUAGE’.
 
 
-☞ usedMemory1 := 0.
-☞ usedMemory2 := 0.
-☞ usedMemory3 := 0.
-☞ usedMemory4 := 0.
+☞ usedMemory1 ≔ 0.
+☞ usedMemory2 ≔ 0.
+☞ usedMemory3 ≔ 0.
+☞ usedMemory4 ≔ 0.
 
 Program tidiness: 0.
-☞ palette := Nil.
-☞ colors := Nil.
+☞ palette ≔ Nil.
+☞ colors ≔ Nil.
 
 {
-palette := Map new.
+palette ≔ Map new.
 palette 
 	put: ‘#F00’ at: ‘red’,
 	put: ‘#0F0’ at: ‘green’,
 	put: ‘#00F’ at: ‘blue’.
 ✎ write: ‘number of RGB codes in palette: ’ + ( palette count ), stop.
 ✎ write: ‘RGB code of green is: ’ + ( palette ? ‘green’ ), stop.
-colors := ‘’.
+colors ≔ ‘’.
 ( palette each: { :name :code
-		colors := colors + ( name + ‘:’ + code ).
+		colors ≔ colors + ( name + ‘:’ + code ).
 } ).
 ✎ write: ‘All colors in palette: ’ + colors, stop.
 } run.
 Program clean memory.
-usedMemory1 := (Program memory ? 1).
+usedMemory1 ≔ (Program memory ? 1).
 
 {
-palette := Map new.
+palette ≔ Map new.
 palette 
 	put: ‘#F00’ at: ‘red’,
 	put: ‘#0F0’ at: ‘green’,
 	put: ‘#00F’ at: ‘blue’.
 ✎ write: ‘number of RGB codes in palette: ’ + ( palette count ), stop.
 ✎ write: ‘RGB code of green is: ’ + ( palette ? ‘green’ ), stop.
-colors := ‘’.
+colors ≔ ‘’.
 ( palette each: { :name :code
-		colors := colors + ( name + ‘:’ + code ).
+		colors ≔ colors + ( name + ‘:’ + code ).
 } ).
 ✎ write: ‘All colors in palette: ’ + colors, stop.
 } run.
 Program clean memory.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 ≔ (Program memory ? 1).
 
 {
-palette := Map new.
+palette ≔ Map new.
 palette 
 	put: ‘#F00’ at: ‘red’,
 	put: ‘#0F0’ at: ‘green’,
 	put: ‘#00F’ at: ‘blue’.
 ✎ write: ‘number of RGB codes in palette: ’ + ( palette count ), stop.
 ✎ write: ‘RGB code of green is: ’ + ( palette ? ‘green’ ), stop.
-colors := ‘’.
+colors ≔ ‘’.
 ( palette each: { :name :code
-		colors := colors + ( name + ‘:’ + code ).
+		colors ≔ colors + ( name + ‘:’ + code ).
 } ).
 ✎ write: ‘All colors in palette: ’ + colors, stop.
 } run.
 Program clean memory.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 ≔ (Program memory ? 1).
 
 
 

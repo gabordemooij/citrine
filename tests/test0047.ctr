@@ -1,5 +1,5 @@
 {
-	☞ cat := Object new.
+	☞ cat ≔ Object new.
 	cat on: ‘work’ do: {
 		this code block error: ‘Uncatched error has occurred.↵Cats have personel for that!’.
 		✎ write: ‘dont print this!’.

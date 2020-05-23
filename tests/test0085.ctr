@@ -1,9 +1,9 @@
 
-☞ q := { ↲9. } run. 
+☞ q ≔ { ↲9. } run. 
 ✎ write: q, stop.
-q := { :a ↲ a * a. } apply: 6. 
+q ≔ { :a ↲ a * a. } apply: 6. 
 ✎ write: q, stop.
-q := { :a :b ↲ (a + b). } apply: 3 and: 4. 
+q ≔ { :a :b ↲ (a + b). } apply: 3 and: 4. 
 ✎ write: q, stop.
-q := { :a :b :c ↲ (a + b + c). } apply: 3 and: 4 and: 1. 
+q ≔ { :a :b :c ↲ (a + b + c). } apply: 3 and: 4 and: 1. 
 ✎ write: q, stop.

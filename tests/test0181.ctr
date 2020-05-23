@@ -1,38 +1,38 @@
 
 
-☞ usedMemory1 := 0.
-☞ usedMemory2 := 0.
-☞ usedMemory3 := 0.
-☞ usedMemory4 := 0.
+☞ usedMemory1 ≔ 0.
+☞ usedMemory2 ≔ 0.
+☞ usedMemory3 ≔ 0.
+☞ usedMemory4 ≔ 0.
 
 Program tidiness: 0.
 
-☞ txt := ‘World Salad’.
+☞ txt ≔ ‘World Salad’.
 ✎ write: ‘this text contains: ’ + ( ( txt split: ‘ ’ ) count ) + ‘ words.’, stop.
-txt := txt from: 7 length: 4.
+txt ≔ txt from: 7 length: 4.
 ✎ write: txt, stop.
 
 Program clean memory.
 
-usedMemory1 := (Program memory ? 1).
+usedMemory1 ≔ (Program memory ? 1).
 
 
-txt := ‘World Salad’.
+txt ≔ ‘World Salad’.
 ✎ write: ‘this text contains: ’ + ( ( txt split: ‘ ’ ) count ) + ‘ words.’, stop.
-txt := txt from: 7 length: 4.
+txt ≔ txt from: 7 length: 4.
 ✎ write: txt, stop.
 
 Program clean memory.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 ≔ (Program memory ? 1).
 
 
-txt := ‘World Salad’.
+txt ≔ ‘World Salad’.
 ✎ write: ‘this text contains: ’ + ( ( txt split: ‘ ’ ) count ) + ‘ words.’, stop.
-txt := txt from: 7 length: 4.
+txt ≔ txt from: 7 length: 4.
 ✎ write: txt, stop.
 
 Program clean memory.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 ≔ (Program memory ? 1).
 
 
 

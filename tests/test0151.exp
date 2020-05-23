@@ -1,2 +1,2 @@
-Parse error, unexpected := ( tests/test0151.ctr: 5 )
+Parse error, unexpected ≔ ( tests/test0151.ctr: 5 )
 Key should always be followed by a property name!

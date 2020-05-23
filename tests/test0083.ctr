@@ -1,15 +1,15 @@
 
-☞ Animal := Object new.
+☞ Animal ≔ Object new.
 Animal on: ‘eat’ do: {
 	✎ write: ‘munch! munch!’.
 }.
 
-☞ Cat := Animal new.
+☞ Cat ≔ Animal new.
 Cat on: ‘eat’ do: {
 	✎ write: ‘meow’, stop.
 	⛏ `eat.
 }.
 
 
-☞ blackCat := Cat new.
+☞ blackCat ≔ Cat new.
 blackCat eat.

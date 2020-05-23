@@ -1,11 +1,11 @@
 ✎ write: ‘hi!’.
-☞ a := 2.
-☞ x := 2.
-{ ☞ c := 3. ✎ write: ‘x’. ☞ t := 1.  Program clean memory. } run.
+☞ a ≔ 2.
+☞ x ≔ 2.
+{ ☞ c ≔ 3. ✎ write: ‘x’. ☞ t ≔ 1.  Program clean memory. } run.
 Program clean memory.
-☞ q := 2.
-a := 22.
-☞ t := { ☞ d := 3. ☞ z := ‘hello’. ✎ write: z.}.
+☞ q ≔ 2.
+a ≔ 22.
+☞ t ≔ { ☞ d ≔ 3. ☞ z ≔ ‘hello’. ✎ write: z.}.
 t run.
 Program clean memory.
 ✎ write: ‘ a = ’ + a + ‘ and q = ’ + q + ‘ and x = ’ + x.

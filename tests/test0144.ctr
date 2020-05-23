@@ -2,12 +2,12 @@
 
 
 
-☞ CoffeeGrounds := Object new.
+☞ CoffeeGrounds ≔ Object new.
 CoffeeGrounds on: ‘extract’ do: { ↲ ‘coffee’. }.
 
-☞ CoffeeMachine := Object new.
+☞ CoffeeMachine ≔ Object new.
 CoffeeMachine on: ‘init’ do: {
-	⚿ coffeegrounds := CoffeeGrounds new.
+	⚿ coffeegrounds ≔ CoffeeGrounds new.
 }.
 CoffeeMachine on: ‘new’ do: {
 	↲ CoffeeMachine `new init.
@@ -16,7 +16,7 @@ CoffeeMachine on: ‘new’ do: {
 CoffeeMachine on: ‘makeTea’ do: {	↲ (⚿ tealeaves extract). }.
 CoffeeMachine on: ‘makeCoffee’ do: { ↲ (⚿ coffeegrounds extract). }.
 
-☞ coffeeDream := CoffeeMachine new.
+☞ coffeeDream ≔ CoffeeMachine new.
 
 ✎ write:
 	coffeeDream 

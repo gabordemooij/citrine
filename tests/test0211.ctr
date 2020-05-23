@@ -1,4 +1,4 @@
-☞ notes := Map new.
+☞ notes ≔ Map new.
 
 notes
 	talisker: ‘strong’,

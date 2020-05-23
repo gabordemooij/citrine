@@ -1,16 +1,16 @@
-☞ t := True.
+☞ t ≔ True.
 (t = True) true: { ✎ write: ‘T’. }.
 (t = False) true: { ✎ write: ‘F’. }.
 ✎ write: ‘|’.
-☞ t := False.
+☞ t ≔ False.
 (t = True) true: { ✎ write: ‘T’. }.
 (t = False) true: { ✎ write: ‘F’. }.
 ✎ write: ‘|’.
-☞ f := True.
+☞ f ≔ True.
 (t = True and: f = False) true: { ✎ write: ‘T’. }.
 (t = False and: f = True) true: { ✎ write: ‘F’. }.
 ✎ write: ‘|’.
-☞ n := Nil.
+☞ n ≔ Nil.
 (n Nil?) true: { ✎ write: ‘T’. }.
 (n Nil?) false: { ✎ write: ‘F’. }.
 ✎ write: ‘|’.

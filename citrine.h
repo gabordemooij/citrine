@@ -281,6 +281,7 @@ extern char*   ctr_clex_tok_describe( int token );
 extern char* ctr_clex_keyword_me_icon;
 extern char* ctr_clex_keyword_my_icon;
 extern char* ctr_clex_keyword_var_icon;
+extern char* ctr_clex_desc_tok_assignment;
 extern ctr_size ctr_clex_keyword_my_icon_len;
 extern ctr_size ctr_clex_keyword_var_icon_len;
 extern ctr_size ctr_clex_keyword_eol_len;
@@ -288,6 +289,9 @@ extern ctr_size ctr_clex_keyword_num_sep_dec_len;
 extern ctr_size ctr_clex_keyword_num_sep_tho_len;
 extern ctr_size ctr_clex_keyword_qo_len;
 extern ctr_size ctr_clex_keyword_qc_len;
+extern ctr_size ctr_clex_keyword_assignment_len;
+extern ctr_size ctr_clex_keyword_return_len;
+
 extern void ctr_clex_set_ignore_modes( int ignore );
 
 /**

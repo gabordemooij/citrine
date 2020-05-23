@@ -1,2 +1,2 @@
-Parse error, unexpected := ( tests/test0202.ctr: 3 )
+Parse error, unexpected ≔ ( tests/test0202.ctr: 3 )
 Invalid left-hand assignment.

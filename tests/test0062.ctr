@@ -2,12 +2,12 @@ Boolean on: ‘xor:’ do: { :a :b
 	↲ ((a & b not) or: (a not & b)).
 }.
 
-☞ o := Object new.
+☞ o ≔ Object new.
 o on: ‘hello’ do: { ‘Empty’. }.
 { o on: 2 do: 3.} catch: { :e ✎ write: e, stop. }, run.
 { o on: ‘test’ do: 3.} catch: { :e ✎ write: e, stop. }, run.
 { o on: ‘hello’ do: { ‘Empty’. }.} catch: { :e ✎ write: e, stop. }, run. 
-{ ☞ z := 4 / 0. } catch: { :e ✎ write: e, stop. }, run. 
+{ ☞ z ≔ 4 / 0. } catch: { :e ✎ write: e, stop. }, run. 
 { (True and: Nil) true: { ✎ write: ‘X’.}. } catch: { :e ✎ write: e, stop. }, run. 
 { (‘’ xor: 0) true: { ✎ write: ‘X’.}. } catch: { :e ✎ write: e, stop. }, run. 
 { (1 < ‘2’) true: { ✎ write: ‘OK’. }. } catch: { :e ✎ write: e, stop. }, run. 

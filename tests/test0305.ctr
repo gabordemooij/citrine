@@ -1,16 +1,16 @@
 
 Number learn: ‘plus:’ means: ‘+’.
 Number on: ‘+’ do: { :x
-	☞ rate := 1.
-	☞ currency := x qualification.
+	☞ rate ≔ 1.
+	☞ currency ≔ x qualification.
 	(currency = ‘euros’) true: {
-		rate := 2.
+		rate ≔ 2.
 	}.
 	↲ (⛏ plus: (x * rate)).
 }.
-☞ dollars := 3.
-☞ euros := 2.
+☞ dollars ≔ 3.
+☞ euros ≔ 2.
 dollars qualify: ‘dollars’.
 euros qualify: ‘euros’.
-☞ money := dollars + euros.
+☞ money ≔ dollars + euros.
 ✎ write: money, stop.

@@ -2,16 +2,16 @@
 
 Program clean memory.
 
-☞ Fruit := Object new.
+☞ Fruit ≔ Object new.
 Fruit on: ‘new’ do: {
-	☞ f := ⛏ `new.
+	☞ f ≔ ⛏ `new.
 	f apples: 0.
 	↲ f.
 }.
-Fruit on: ‘apples:’ do: { :a ⚿ apples := a. }.
+Fruit on: ‘apples:’ do: { :a ⚿ apples ≔ a. }.
 Fruit on: ‘apples’ do: { ↲ ⚿ apples. }.
 Fruit on: ‘+’ do: { :f
-	☞ n := Fruit new.
+	☞ n ≔ Fruit new.
 	n apples: (f apples + ⚿ apples).
 	↲ n.
 }.
@@ -23,18 +23,18 @@ Fruit on: ‘string’ do: {
 	↲ ⚿ apples + ‘ apples ’.
 }.
 
-☞ q := 3 apples + 4 apples.
+☞ q ≔ 3 apples + 4 apples.
 ✎ write: q, stop.
 
 
 
 
-q := 3 apples + 4 apples.
+q ≔ 3 apples + 4 apples.
 ✎ write: q, stop.
 
 
 
-q := 3 apples + 4 apples.
+q ≔ 3 apples + 4 apples.
 ✎ write: q, stop.
 
 

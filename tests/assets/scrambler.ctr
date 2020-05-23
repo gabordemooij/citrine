@@ -1,2 +1,2 @@
-☞ x := Program input.
+☞ x ≔ Program input.
 ✎ write: (x randomizeBytesWithLength: x bytes).

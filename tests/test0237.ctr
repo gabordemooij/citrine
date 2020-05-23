@@ -1,19 +1,19 @@
 ‘SINGLE_LANGUAGE’.
 String on: ‘evaluate’ do: {
-	☞ code := File new: ‘/tmp/eval.ctr’.
+	☞ code ≔ File new: ‘/tmp/eval.ctr’.
 	code write: (⛏ string + ‘.’).
 	Program use: ‘/tmp/eval.ctr’.
 }.
 
-☞ map :=
+☞ map ≔
 	(Map new)
 	put: ‘Hi There’ at: ‘two’,
 	put: (List ← ‘hello’ ; ‘world’ ; (List ← 1 ; 2; 9) ; False) at: ‘one’,
 	put: ( (Map new) put: ‘wrrld’ at: ‘misspelled’ ) at: ‘three’,
 	put: (List ← ((Map new) put: ‘treasure’ at: ‘hidden’) ; 2) at: ‘four’. 
-☞ str := map string.
-☞ map2 := Nil.
-(‘map2 := ’ + str ) evaluate.
+☞ str ≔ map string.
+☞ map2 ≔ Nil.
+(‘map2 ≔ ’ + str ) evaluate.
 ✎ write: map2 ? ‘one’ ? 1.
 ✎ write: map2 ? ‘one’ ? 2.
 ✎ write: map2 ? ‘four’ ? 1 ? ‘hidden’.

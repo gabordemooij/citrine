@@ -1,44 +1,44 @@
 String on: ‘escape:’ do: { :characters
-	☞ str := ⛏.
+	☞ str ≔ ⛏.
 	characters characters each: { :number :character
 		
-		☞ replacement := ‘\\’ + character factorial.
+		☞ replacement ≔ ‘\\’ + character factorial.
 		
 		(character = ‘\t’) true: {
-			replacement := ‘⇿’.
+			replacement ≔ ‘⇿’.
 		}.
 		
 		(character = ‘\n’) true: {
-			replacement := ‘↵’.
+			replacement ≔ ‘↵’.
 		}.
 		
-		str := str replace: character with: replacement.
+		str ≔ str replace: character with: replacement.
 	}.
 	↲ str.
 }.
 
 String on: ‘unescape:’ do: { :text
-	☞ str := ⛏.
+	☞ str ≔ ⛏.
 	text characters each: { :number :character
 		
 		(character = ‘\t’) true: {
-			character := ‘\\t’.
+			character ≔ ‘\\t’.
 		}.
 		
 		(character = ‘\n’) true: {
-			character := ‘\\n’.
+			character ≔ ‘\\n’.
 		}.
 		
-		str := str pattern: (‘\\\\+(X)’ X character) process: { :match
+		str ≔ str pattern: (‘\\\\+(X)’ X character) process: { :match
 			
-			☞ special := match ? 1.
+			☞ special ≔ match ? 1.
 			
 			((match ? 0) = ‘\\t’) true: {
-				special := ‘⇿’.
+				special ≔ ‘⇿’.
 			}.
 			
 			((match ? 0) = ‘\\n’) true: {
-				special := ‘↵’.
+				special ≔ ‘↵’.
 			}.
 			
 			↲ special.
@@ -47,7 +47,7 @@ String on: ‘unescape:’ do: { :text
 	↲ str.
 }.
 
-☞ garden := ‘{
+☞ garden ≔ ‘{
 	"garden": {
 		"chairs": 2,
 		"pool": true,
@@ -66,7 +66,7 @@ String on: ‘unescape:’ do: { :text
 	}
 }’.
 
-☞ g := Json to object: garden.
+☞ g ≔ Json to object: garden.
 
 ✎ write: ‘There are x chairs in the sunny garden.’ x (g ? ‘garden’ ? ‘chairs’), stop.
 ✎ write: ‘A rubber duck swims in the x.’ x ((g garden pool) either: ‘pool’ or: ‘’), stop.

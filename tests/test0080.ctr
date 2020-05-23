@@ -1,5 +1,5 @@
 {
-	☞ a := List new.
+	☞ a ≔ List new.
 	a append: 1.
 	a append: 2.
 	✎ write: (a join: ‘,’), stop.

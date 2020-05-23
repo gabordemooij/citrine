@@ -1,6 +1,6 @@
 ‘SINGLE_LANGUAGE’.
-☞ a := Map new.
-☞ b := Map new.
+☞ a ≔ Map new.
+☞ b ≔ Map new.
 a message: ‘omvang:’ arguments: (List ← ‘groot’).
 b omvang: ‘groot’.
 (a omvang = b omvang) true: { ✎ write: ‘OK’, stop. }.

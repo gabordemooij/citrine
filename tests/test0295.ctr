@@ -1,5 +1,5 @@
 
-☞ dictionary := (
+☞ dictionary ≔ (
 	Map new
 		put: ‘b’ at: ‘a’,
 		put: ‘a’ at: ‘b’,
@@ -8,7 +8,7 @@
 		put: ‘human’ at: ‘human’
 ).
 
-☞ comparisons := List new.
+☞ comparisons ≔ List new.
 dictionary each: { :a :b
 	comparisons ; (
 		‘a= b= | a>b a≥b a<b a≤b ab’

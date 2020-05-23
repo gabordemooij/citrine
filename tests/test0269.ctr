@@ -10,7 +10,7 @@
 	Program shell: ‘mkdir /tmp/testje/folder1’.	
 }.
 
-☞ l := File list: ‘/tmp/testje’.
+☞ l ≔ File list: ‘/tmp/testje’.
 l each: { :k :v
 	((v ? ‘file’ = ‘file1’) & (v ? ‘type’ = ‘file’)) true: { ✎ write: ‘OK’, stop. }.
 	((v ? ‘file’ = ‘folder1’) & (v ? ‘type’ = ‘folder’)) true: { ✎ write: ‘OK’, stop. }.

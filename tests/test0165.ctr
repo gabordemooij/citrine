@@ -1,41 +1,41 @@
 
 
-☞ usedMemory1 := 0.
-☞ usedMemory2 := 0.
-☞ usedMemory3 := 0.
-☞ usedMemory4 := 0.
+☞ usedMemory1 ≔ 0.
+☞ usedMemory2 ≔ 0.
+☞ usedMemory3 ≔ 0.
+☞ usedMemory4 ≔ 0.
 
 Program tidiness: 0.
 
-☞ f := File new: ‘/tmp/citrine_test_file.txt’.
+☞ f ≔ File new: ‘/tmp/citrine_test_file.txt’.
 f exists: { f delete. }.
 f write: ‘hello world’.
 
-f := File new: ‘/tmp/citrine_test_file.txt’.
+f ≔ File new: ‘/tmp/citrine_test_file.txt’.
 f open: ‘r’.
-☞ q := f end seek: -3, read bytes: 3.
-q := q + (f rewind read bytes: 2). 
+☞ q ≔ f end seek: -3, read bytes: 3.
+q ≔ q + (f rewind read bytes: 2). 
 
 
 ✎ write: q.
 
-f := File new: ‘/tmp/citrine_test_file.txt’.
+f ≔ File new: ‘/tmp/citrine_test_file.txt’.
 f append: ‘hello’.
 
 Program clean memory.
-usedMemory1 := (Program memory ? 1).
+usedMemory1 ≔ (Program memory ? 1).
 
 
-f := File new: ‘/tmp/citrine_test_file.txt’.
+f ≔ File new: ‘/tmp/citrine_test_file.txt’.
 f append: ‘hello’.
 Program clean memory.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 ≔ (Program memory ? 1).
 
 
-f := File new: ‘/tmp/citrine_test_file.txt’.
+f ≔ File new: ‘/tmp/citrine_test_file.txt’.
 f append: ‘hello’.
 Program clean memory.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 ≔ (Program memory ? 1).
 
 
 

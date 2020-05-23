@@ -1,6 +1,6 @@
 ‘SINGLE_LANGUAGE’.
 
-☞ colors := List ← ‘red’ ; ‘green’ ; ‘blue’ ; 3 ; (List new) ; False ; Nil.
+☞ colors ≔ List ← ‘red’ ; ‘green’ ; ‘blue’ ; 3 ; (List new) ; False ; Nil.
 
 ✎ write: (colors find: ‘green’), stop. 
 ✎ write: (colors find: ‘blue’), stop. 

@@ -1,4 +1,4 @@
-☞ winery := {
+☞ winery ≔ {
 	↲ (	Map new
 		put: 2 at: ‘merlot’,
 		put: 3 at: ‘malbec’,

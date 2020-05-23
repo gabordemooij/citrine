@@ -9,14 +9,14 @@ String on: ‘html’ do: {
 	).
 }.
 
-☞ HtmlBrush := Object new.
+☞ HtmlBrush ≔ Object new.
 
 HtmlBrush on: ‘respond:’ do: { :tag
 	✎ write: (‘<tag>↵’ tag: tag ).
 }.
 
 HtmlBrush on: ‘respond:and:’ do: { :tag :content
-	tag := ( tag from: 0 length: (tag length - 1) ).
+	tag ≔ ( tag from: 0 length: (tag length - 1) ).
 	✎ write: (‘<tag content>↵’ tag: tag, content: content).
 }.
 
@@ -28,7 +28,7 @@ HtmlBrush on: ‘attr:value:’ do: { :attr :value
 	↲ ‘attr="value"’ attr: attr, value: value.
 }.
 
-☞ h := HtmlBrush new.
+☞ h ≔ HtmlBrush new.
 
 
 h html

@@ -1,11 +1,11 @@
-☞ Animal := Object new.
+☞ Animal ≔ Object new.
 Animal on: ‘makeSound’ do: {
 	✎ write: ‘?’.
 }.
-☞ Cat := Animal new.
+☞ Cat ≔ Animal new.
 Cat on: ‘makeSound’ do: {
 	✎ write: ‘meow!’.
 	⛏ `makeSound.
 }.
-☞ Tom := Cat new.
+☞ Tom ≔ Cat new.
 Tom makeSound.

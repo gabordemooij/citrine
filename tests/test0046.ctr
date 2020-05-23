@@ -1,4 +1,4 @@
-☞ cat := Object new.
+☞ cat ≔ Object new.
 cat on: ‘work’ do: {
 	this code block error: ‘Cats have personel for that!’.
 	✎ write: ‘dont print this!’.

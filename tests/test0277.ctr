@@ -1,13 +1,13 @@
 
 
-☞ Cat := Object new.
+☞ Cat ≔ Object new.
 
 Cat on: ‘new’ do: {
-	⚿ sound := ‘meow!’.
+	⚿ sound ≔ ‘meow!’.
 }.
 
 Cat on: ‘nieuw’ do: {
-	⚿ sound := ‘meow!’.
+	⚿ sound ≔ ‘meow!’.
 }.
 
 Cat on: ‘makeSound’ do: {
@@ -18,5 +18,5 @@ Cat on: ‘greet’ do: {
 	↲ ⛏ makeSound.
 }.
 
-☞ cat := Cat new.
+☞ cat ≔ Cat new.
 ✎ write: cat greet.

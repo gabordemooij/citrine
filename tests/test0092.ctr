@@ -1,12 +1,12 @@
 
-☞ g := ‘global’.
-{ ☞ g := ‘local’. ✎ write: g, stop. } run. 
+☞ g ≔ ‘global’.
+{ ☞ g ≔ ‘local’. ✎ write: g, stop. } run. 
 ✎ write: g, stop. 
-☞ message := ‘Bye’.
-☞ Secret := Object new.
+☞ message ≔ ‘Bye’.
+☞ Secret ≔ Object new.
 Secret on: ‘test’ do: {
-	☞ message := ‘Hello’.
-	⚿ message := ‘World’.
+	☞ message ≔ ‘Hello’.
+	⚿ message ≔ ‘World’.
 	✎ write: message + ‘ ’ + ⚿ message, stop.
 }.
 Secret test.

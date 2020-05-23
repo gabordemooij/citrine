@@ -1,6 +1,6 @@
 
-☞ a := List ← 1 ; 2 ; 3.
-☞ b := List ← 4 ; 5 ; 6.
-☞ c := a + b.
+☞ a ≔ List ← 1 ; 2 ; 3.
+☞ b ≔ List ← 4 ; 5 ; 6.
+☞ c ≔ a + b.
 ✎ write: ‘Array:’ + (c join: ‘,’), stop.
 ✎ write: ‘Array:’ + ((b + a) join: ‘,’), stop.

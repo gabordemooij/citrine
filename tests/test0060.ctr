@@ -1,4 +1,4 @@
-☞ a := List new.
+☞ a ≔ List new.
 a prepend: ‘Hello’.
 a prepend: ‘World’.
 ✎ write: (a position: 2), write: (a position: 1), stop.

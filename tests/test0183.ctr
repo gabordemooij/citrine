@@ -1,14 +1,14 @@
 
 
-☞ usedMemory1 := 0.
-☞ usedMemory2 := 0.
-☞ usedMemory3 := 0.
-☞ usedMemory4 := 0.
+☞ usedMemory1 ≔ 0.
+☞ usedMemory2 ≔ 0.
+☞ usedMemory3 ≔ 0.
+☞ usedMemory4 ≔ 0.
 
 Program tidiness: 0.
 
-☞ o  := Object new.
-☞ o2 := Object new.
+☞ o  ≔ Object new.
+☞ o2 ≔ Object new.
 ✎ write: o Nil?, stop.
 ✎ write: o type, stop.
 ✎ write: ( o equals: o ), stop.
@@ -18,11 +18,11 @@ Program tidiness: 0.
 
 Program clean memory.
 
-usedMemory1 := (Program memory ? 1).
+usedMemory1 ≔ (Program memory ? 1).
 
 
-o  := Object new.
-o2 := Object new.
+o  ≔ Object new.
+o2 ≔ Object new.
 ✎ write: o Nil?, stop.
 ✎ write: o type, stop.
 ✎ write: ( o equals: o ), stop.
@@ -31,11 +31,11 @@ o2 := Object new.
 ✎ write: ( o do done ), stop.
 
 Program clean memory.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 ≔ (Program memory ? 1).
 
 
-o  := Object new.
-o2 := Object new.
+o  ≔ Object new.
+o2 ≔ Object new.
 ✎ write: o Nil?, stop.
 ✎ write: o type, stop.
 ✎ write: ( o equals: o ), stop.
@@ -44,7 +44,7 @@ o2 := Object new.
 ✎ write: ( o do done ), stop.
 
 Program clean memory.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 ≔ (Program memory ? 1).
 
 
 

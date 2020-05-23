@@ -1,4 +1,4 @@
-☞ ?> := ✎ new.
+☞ ?> ≔ ✎ new.
 ?> on: ‘respond:’ do: { :content
 	✎ write: content.
 }.

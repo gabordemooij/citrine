@@ -1,10 +1,10 @@
-☞ Cat := Object new.
+☞ Cat ≔ Object new.
 Cat on: ‘make’ do: {
-	☞ cat := Object new.
+	☞ cat ≔ Object new.
 	cat on: ‘meow’ do: {
 		✎ write: ‘meow!’.
 	}.
 	↲cat.
 }.
-☞ cat := Cat make.
+☞ cat ≔ Cat make.
 cat meow.

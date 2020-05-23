@@ -1,6 +1,6 @@
 Program tidiness: 4.
 
-☞ oops := 0.
+☞ oops ≔ 0.
 {
 	{ 3 / 0. } catch: {
 		oops +=: 1.

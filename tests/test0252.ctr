@@ -2,7 +2,7 @@
 
 
 
-☞ clock := Moment new.
+☞ clock ≔ Moment new.
 
 
 
@@ -25,7 +25,7 @@ clock zone: ‘Europe/Amsterdam’.
 	‘W’ + (clock week) + ‘ t’ + (clock time raw) + ‘ ’ + (clock zone)
 ), stop.
 
-☞ clock2 := clock new zone: ‘Europe/Amsterdam’, month: 6, hour: 8.
+☞ clock2 ≔ clock new zone: ‘Europe/Amsterdam’, month: 6, hour: 8.
 
 
 ✎ write: (clock2 format: Nil), stop. 
@@ -36,8 +36,8 @@ clock2 zone: ‘America/New York’.
 ✎ write: (clock format: ‘Clock1 %H’), stop.
 ✎ write: (clock2 format: ‘Clock2 %H’), stop.
 
-☞ clock3 := Moment new like: (Moment new zone: ‘UTC’, hour: 13).
-clock3 := Moment new: clock3 time.
+☞ clock3 ≔ Moment new like: (Moment new zone: ‘UTC’, hour: 13).
+clock3 ≔ Moment new: clock3 time.
 ✎ write: (clock3 format: ‘Clock3 %H’), stop.
 
 

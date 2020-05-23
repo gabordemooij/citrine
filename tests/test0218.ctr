@@ -1,5 +1,5 @@
 ‘SINGLE_LANGUAGE’.
-☞ books := List new.
+☞ books ≔ List new.
 books on: ‘append:’ do: { :book
 	True true: { ⛏ `append: book. }.
 }.

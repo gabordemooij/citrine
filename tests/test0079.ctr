@@ -1,5 +1,5 @@
 ‘SINGLE_LANGUAGE’.
-☞ time := Moment new time.
+☞ time ≔ Moment new time.
 Moment wait: 1.
-☞ time2 := Moment new time.
+☞ time2 ≔ Moment new time.
 (time2 > time) true: { ✎ write: ‘T1 < T2’. }.

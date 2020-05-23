@@ -1,11 +1,11 @@
 
 
 
-☞ Deck := List new.
+☞ Deck ≔ List new.
 Deck on: ‘print’ do: {
-        ☞ len := ⛏ count - 1.
+        ☞ len ≔ ⛏ count - 1.
         { :i
-                ☞ len2 := ⛏ count - 1.
+                ☞ len2 ≔ ⛏ count - 1.
                 ✎ write: ‘len: ’.
                 ✎ write: len, stop.
                 ✎ write: ‘len2: ’.
@@ -13,5 +13,5 @@ Deck on: ‘print’ do: {
         } * len.
 }.
 
-☞ d := Deck ← 1 ; 4 ; 9 ; 16 ; 25 ; 36 ; 49 ; 64 ; 81.
+☞ d ≔ Deck ← 1 ; 4 ; 9 ; 16 ; 25 ; 36 ; 49 ; 64 ; 81.
 d print.

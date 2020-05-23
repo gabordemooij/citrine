@@ -14,7 +14,7 @@
 
 {
 	this code block error: ‘Dont fail.’.
-	unknown := 122.
+	unknown ≔ 122.
 } catch: {
 	✎ write: ‘Caught!’.
 }, run.

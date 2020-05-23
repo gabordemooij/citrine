@@ -1,4 +1,4 @@
-☞ newString := (‘hello world’ pattern: ‘([eor])([l]+)’ process: { :match
+☞ newString ≔ (‘hello world’ pattern: ‘([eor])([l]+)’ process: { :match
 	↲ ‘*’.
 }).
 ✎ write: newString,end.

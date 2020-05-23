@@ -1,16 +1,16 @@
-☞ check random numbers := { :min :max
+☞ check random numbers ≔ { :min :max
 
-	min := min round.
-	max := max round.
+	min ≔ min round.
+	max ≔ max round.
 	(min > max) true: {
-		☞ t := max.
-		max := min.
-		min := t.
+		☞ t ≔ max.
+		max ≔ min.
+		min ≔ t.
 	}.
 	
-	☞ x := Number between: min and: max.
+	☞ x ≔ Number between: min and: max.
 	
-	☞ between boundaries? := (
+	☞ between boundaries? ≔ (
 		(x round ≥ min round) & (x round ≤ max round)
 	).
 	
@@ -23,9 +23,9 @@
 }.
 
 
-☞ a := List ← 4 ; 4.1 ; 4.5 ; 4.7.
-☞ b := List ← 7 ; 7.1 ; 7.5 ; 7.7.
-☞ c := List ← 1 ; -1.
+☞ a ≔ List ← 4 ; 4.1 ; 4.5 ; 4.7.
+☞ b ≔ List ← 7 ; 7.1 ; 7.5 ; 7.7.
+☞ c ≔ List ← 1 ; -1.
 
 a each: { :i :x
 	b each: { :j :y
@@ -56,13 +56,13 @@ a each: { :i :x
 }.
 
 ✎ write: ‘Can we draw a random(?) no. between 2 and 2 ?’.
-☞ x := Number between: 2 and: 2.
+☞ x ≔ Number between: 2 and: 2.
 (x = 2) true: {
 	✎ write: ‘ ✓OK ’, stop.
 }.
 
 ✎ write: ‘Can we draw a random(?) no. between 1.5 and 1.9 ?’.
-☞ x := Number between: 2 and: 2.
+☞ x ≔ Number between: 2 and: 2.
 (x = 2) true: {
 	✎ write: ‘ ✓OK ’, stop.
 }.

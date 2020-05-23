@@ -1,8 +1,8 @@
 ‘SINGLE_LANGUAGE’.
-☞ animal := Object new. 
+☞ animal ≔ Object new. 
  
  animal on: ‘name:’ do: { :n
-⚿ name := n.
+⚿ name ≔ n.
 }. 
 
 
@@ -12,7 +12,7 @@ animal on: ‘name’ do: {
 ↲ name.
 }.
 
-☞ cat := animal new.
+☞ cat ≔ animal new.
  
  cat name: ‘Diva’. 
  

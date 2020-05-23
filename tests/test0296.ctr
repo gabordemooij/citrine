@@ -1,5 +1,5 @@
 
-☞ shop := (Map new
+☞ shop ≔ (Map new
 	put: ‘magazine’ at: ‘books’,
 	put: ‘computer’ at: ‘electronics’,
 	put: ‘lipstick’ at: ‘cosmetics’

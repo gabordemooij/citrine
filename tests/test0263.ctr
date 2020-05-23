@@ -1,8 +1,8 @@
-☞ i := Object new.
+☞ i ≔ Object new.
 i on: ‘greet:’ do: { :name
 	✎ write: ‘Hello %’ % name, stop.
 }.
-☞ a := List ← ‘greet:’ ; ‘Visitor’.
-☞ b := a shift.
+☞ a ≔ List ← ‘greet:’ ; ‘Visitor’.
+☞ b ≔ a shift.
 ✎ write: a ? 1, stop.
 i message: b arguments: a.

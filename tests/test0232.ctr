@@ -1,7 +1,7 @@
-☞ Slurp := Object new.
+☞ Slurp ≔ Object new.
 
 Slurp on: ‘new’ do: {
-	⚿ str := ‘’.
+	⚿ str ≔ ‘’.
 }.
 
 Slurp on: ‘respond:’ do: { :blah
@@ -24,13 +24,13 @@ Slurp on: ‘respond:and:’ do: { :blah :blahah
 }.
 
 Slurp on: ‘obtain’ do: {
-	☞ buffer := ⚿ str.
-	⚿ str := ‘’.
+	☞ buffer ≔ ⚿ str.
+	⚿ str ≔ ‘’.
 	↲ buffer.
 }.
 
 
-☞ x := Slurp new.
+☞ x ≔ Slurp new.
 x + 3.
 ✎ write: (x obtain), stop.
 x echo: ‘Hello world’.

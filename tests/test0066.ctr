@@ -3,11 +3,11 @@
 ✎ write: (‘🎄🎄🎄’ length). 
 ✎ write: (‘’ bytes) + (‘’ length). 
 ✎ write: (‘papyrus’ character: ( (‘🎃halloween’ find: ‘hallo’) + (‘no’ find: ‘y’) - 1 ) ). 
-☞ a := (‘--a..nom..t..nom..r..nom..’ replace: ‘..nom..’ with: ‘=x=XX=x=’).
-a := a replace: ‘.’ with: ‘++’. 
-a := a replace: ‘’ with: ‘++’. 
+☞ a ≔ (‘--a..nom..t..nom..r..nom..’ replace: ‘..nom..’ with: ‘=x=XX=x=’).
+a ≔ a replace: ‘.’ with: ‘++’. 
+a ≔ a replace: ‘’ with: ‘++’. 
 ✎ write: (‘’ replace: ‘x’ with: ‘y’). 
-a := ((a replace: ‘=x=XX=x=’ with: ‘’) replace: ‘--’ with: ‘’).
+a ≔ ((a replace: ‘=x=XX=x=’ with: ‘’) replace: ‘--’ with: ‘’).
 ✎ write: a.
-a := ‘  a	 ’ remove surrounding spaces + ‘’ remove surrounding spaces + ‘ ’ remove surrounding spaces.
+a ≔ ‘  a	 ’ remove surrounding spaces + ‘’ remove surrounding spaces + ‘ ’ remove surrounding spaces.
 ✎ write: a.

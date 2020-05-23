@@ -1,7 +1,7 @@
 (List ← 1 ; ‘2’ ; (List ← ‘A’ ; ‘B’)) each: { :index :element
 	index subtract: 1.
 	( element number = 2 ) true: {
-		element := element number multiply by: 2.
+		element ≔ element number multiply by: 2.
 	}.
 	✎ write: (
 		‘# <I>: <E>↵’

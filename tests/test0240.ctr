@@ -1,18 +1,18 @@
 ‘SINGLE_LANGUAGE’.
-☞ $ := Object new.
+☞ $ ≔ Object new.
 
 $ on: ‘respond:’ do: { :x
 	
-	☞ operation := x character: 1.
-	☞ valuta    := x character: 2.
-	☞ money     := x offset: 3.
+	☞ operation ≔ x character: 1.
+	☞ valuta    ≔ x character: 2.
+	☞ money     ≔ x offset: 3.
 	
-	☞ xmoney := x from: 3 length: 10.
+	☞ xmoney ≔ x from: 3 length: 10.
 	
-	☞ amount    := 0.
+	☞ amount    ≔ 0.
 
 	( operation = ‘+’ ) true: {
-		( valuta = ‘£’ ) true: { amount := 1.28 * money. }.
+		( valuta = ‘£’ ) true: { amount ≔ 1.28 * money. }.
 	}.
 	
 	↲ amount.
@@ -20,28 +20,28 @@ $ on: ‘respond:’ do: { :x
 
 
 
-☞ x := $ +£20.
+☞ x ≔ $ +£20.
 
 ✎ write: x, stop.
 
 
-☞ Fruit := Object new.
+☞ Fruit ≔ Object new.
 
 Fruit on: ‘new’ do: {
-	☞ f := ⛏ `new.
+	☞ f ≔ ⛏ `new.
 	f apples: 0.
 	f oranges: 0.
 	↲ f.
 }.
 
-Fruit on: ‘apples:’ do: { :a ⚿ apples := a. }.
-Fruit on: ‘oranges:’ do: { :p ⚿ oranges := p. }.
+Fruit on: ‘apples:’ do: { :a ⚿ apples ≔ a. }.
+Fruit on: ‘oranges:’ do: { :p ⚿ oranges ≔ p. }.
 Fruit on: ‘apples’ do: { ↲ ⚿ apples. }.
 Fruit on: ‘oranges’ do: { ↲ ⚿ oranges. }.
 
 Fruit on: ‘+’ do: { :f
 	
-	☞ n := Fruit new.
+	☞ n ≔ Fruit new.
 	f add: 1.
 	
 	n apples: (f apples + ⚿ apples).

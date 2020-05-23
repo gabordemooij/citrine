@@ -6,8 +6,8 @@
 	(i = 4) break.
 } * 10.
 
-☞ x := 0.
-☞ xIsLessThan10 := { ↲( x < 10 ). }.
+☞ x ≔ 0.
+☞ xIsLessThan10 ≔ { ↲( x < 10 ). }.
 
 ✎ write: ‘Break while-true loop, 0-4.’, stop.
 {
@@ -44,7 +44,7 @@
 }.
 
 ✎ write: ‘Test Map each-loop: c only’, stop.
-☞ m := Map new.
+☞ m ≔ Map new.
 m put: ‘first’ at: ‘a’, put: ‘second’ at: ‘b’, put: ‘third’ at: ‘c’.
 m each: { :k :v
 	✎ write: ‘iteration’ + v + k, stop.

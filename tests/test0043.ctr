@@ -1,4 +1,4 @@
-☞ repeater := Object new.
+☞ repeater ≔ Object new.
 repeater on: ‘respond:’ do: { :what
 	✎ write: what + ‘ ’.
 }.
