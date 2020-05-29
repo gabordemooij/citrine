@@ -1,3 +1,3 @@
 ☞ x ≔ 5.
-{ x add: 1. } * x.
+{ x add: 1. } × x.
 ✎ write: x.

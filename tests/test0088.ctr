@@ -1,7 +1,7 @@
 
 ☞ santaLaugh ≔ ‘ho’.
 ☞ laugh ≔ ‘’.
-{ laugh ≔ laugh + santaLaugh. } * 3.
+{ laugh ≔ laugh + santaLaugh. } × 3.
 ✎ write: laugh, stop.
 
 ☞ locked ≔ False.

@@ -11,4 +11,4 @@
 	garbageMaker putGarbageOnScreen.
 	✎ write: a.
 	Program clean memory.
-} * 1000.
+} × 1000.

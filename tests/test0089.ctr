@@ -9,7 +9,7 @@
 			Program end.
 		}.
 	} 
-	* 100.
+	× 100.
 	↲ x.
 }.
 randomizer apply: 0 and: 0.

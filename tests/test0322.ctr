@@ -2,7 +2,7 @@
 
 ☞ Matryoshka ≔ Object new.
 Matryoshka on: ‘double:’ do: { :secret
-	⚿ secret ≔ secret * 2.
+	⚿ secret ≔ secret × 2.
 }.
 Matryoshka on: ‘new:’ do: { :secret
 	☞ answer ≔ Nil.

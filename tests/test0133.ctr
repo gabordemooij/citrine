@@ -10,7 +10,7 @@ Deck on: ‘print’ do: {
                 ✎ write: len, stop.
                 ✎ write: ‘len2: ’.
                 ✎ write: len2, stop.
-        } * len.
+        } × len.
 }.
 
 ☞ d ≔ Deck ← 1 ; 4 ; 9 ; 16 ; 25 ; 36 ; 49 ; 64 ; 81.

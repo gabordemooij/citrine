@@ -4,7 +4,7 @@
 	✎ write: (i + 1), stop.
 	((i + 1) > 4) continue.
 	✎ write: ‘-’.
-} * 10.
+} × 10.
 
 ☞ x ≔ 0.
 ☞ xIsLessThan10 ≔ { ↲( x < 10 ). }.
@@ -32,7 +32,7 @@
 	✎ write: ‘iteration #’ + i, stop.
 	(i = 2) continue.
 	✎ write: ‘|||’.
-} * 5.
+} × 5.
 
 ✎ stop.
 

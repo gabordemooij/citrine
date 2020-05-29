@@ -29,7 +29,7 @@ Slurp on: ‘obtain’ do: {
 ☞ large text ≔ ‘’.
 {
 	large text append: ‘hello’.
-} * 1000.
+} × 1000.
 
 ✎ write: (
 	Program shell: (

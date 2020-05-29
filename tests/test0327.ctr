@@ -43,6 +43,6 @@ List on: ‘aantal’ do: {
 			)
 	).
 
-} * 10.
+} × 10.
 ✎ write: x, stop.
 

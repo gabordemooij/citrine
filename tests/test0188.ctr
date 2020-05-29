@@ -7,9 +7,9 @@
 
 Program tidiness: 0.
 
-{ :i i subtract: 1. ✎ write: i. } * 4.
+{ :i i subtract: 1. ✎ write: i. } × 4.
 ✎ stop.
-{ :i i subtract: 1. ✎ write: (4 - i). } * 4.
+{ :i i subtract: 1. ✎ write: (4 - i). } × 4.
 ✎ stop.
 ( 1 > 2 ) false: { ✎ write: ‘BLOCK 1’, stop. }.
 ( 2 > 1 ) true:  { ✎ write: ‘BLOCK 2’, stop. }.
@@ -28,9 +28,9 @@ Program clean memory.
 usedMemory1 ≔ (Program memory ? 1).
 
 
-{ :i i subtract: 1. ✎ write: i. } * 4.
+{ :i i subtract: 1. ✎ write: i. } × 4.
 ✎ stop.
-{ :i i subtract: 1. ✎ write: (4 - i). } * 4.
+{ :i i subtract: 1. ✎ write: (4 - i). } × 4.
 ✎ stop.
 ( 1 > 2 ) false: { ✎ write: ‘BLOCK 1’, stop. }.
 ( 2 > 1 ) true:  { ✎ write: ‘BLOCK 2’, stop. }.
@@ -49,9 +49,9 @@ Program clean memory.
 usedMemory2 ≔ (Program memory ? 1).
 
 
-{ :i i subtract: 1. ✎ write: i. } * 4.
+{ :i i subtract: 1. ✎ write: i. } × 4.
 ✎ stop.
-{ :i i subtract: 1. ✎ write: (4 - i). } * 4.
+{ :i i subtract: 1. ✎ write: (4 - i). } × 4.
 ✎ stop.
 ( 1 > 2 ) false: { ✎ write: ‘BLOCK 1’, stop. }.
 ( 2 > 1 ) true:  { ✎ write: ‘BLOCK 2’, stop. }.

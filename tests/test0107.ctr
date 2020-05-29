@@ -4,7 +4,7 @@
 	i subtract: 1.
 	✎ write: ‘iteration #’ + i, stop.
 	(i = 4) break.
-} * 10.
+} × 10.
 
 ☞ x ≔ 0.
 ☞ xIsLessThan10 ≔ { ↲( x < 10 ). }.
@@ -28,7 +28,7 @@
 	i subtract: 1.
 	✎ write: ‘iteration #’ + i, stop.
 	(i = 4) break.
-} * 5.
+} × 5.
 
 ✎ write: ‘Break block, dont print line.’, stop.
 { True break. ✎ write: ‘dont write this!’, stop. } run.
