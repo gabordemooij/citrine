@@ -1,9 +1,9 @@
 Number on: ‘factorial’ do: {
 	☞ total ≔ 1.
-	{ :index total multiply by: (⛏ - ( index - 1 ) ). } * ⛏.
+	{ :index total multiply by: (⛏ - ( index - 1 ) ). } × ⛏.
 	↲ total.
 }.
 ✎ write: 2 + 3 factorial.
-✎ write: 60 * 30 + 3 / 2.
-✎ write: 20 + 5 * 4 - 10.
-✎ write: 20 + ( 5 * 4 ) - 10.
+✎ write: 60 × 30 + 3 ÷ 2.
+✎ write: 20 + 5 × 4 - 10.
+✎ write: 20 + ( 5 × 4 ) - 10.

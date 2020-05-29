@@ -5,5 +5,5 @@ String on: ‘evaluate’ do: {
 	Program use: ‘/tmp/eval.ctr’.
 	↲ x.
 }.
-☞ calc ≔ ‘☞ x ≔ ((3 power: 2) + 2 - 1 * 7 / (25 square root))’.
+☞ calc ≔ ‘☞ x ≔ ((3 power: 2) + 2 - 1 × 7 ÷ (25 square root))’.
 ✎ write: calc evaluate, stop.

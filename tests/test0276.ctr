@@ -9,7 +9,7 @@
 		☞ index ≔ Number random % (pool length).
 		result append: ( pool character: (index + 1) ).
 		
-	} * count.
+	} × count.
 	
 	↲ result.
 }.

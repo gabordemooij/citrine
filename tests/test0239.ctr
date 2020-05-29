@@ -66,7 +66,7 @@ a ≔ a + ( List ← 1 ).
 
 {
 	a on: ‘number’ do: { ↲ Nil. }.
-	a ≔ 3 * a.
+	a ≔ 3 × a.
 } catch: { :error
 	✎ write: ‘Error noted: ’ + error, stop.
 }, run.
@@ -94,7 +94,7 @@ a ≔ a + ( List ← 1 ).
 
 {
 	a on: ‘number’ do: { ↲ True. }.
-	a ≔ 3 * a.
+	a ≔ 3 × a.
 } catch: { :error
 	✎ write: ‘Error noted: ’ + error, stop.
 }, run.
@@ -122,7 +122,7 @@ a ≔ a + ( List ← 1 ).
 
 {
 	a on: ‘number’ do: { ↲ ‘’. }.
-	a ≔ 3 * a.
+	a ≔ 3 × a.
 } catch: { :error
 	✎ write: ‘Error noted: ’ + error, stop.
 }, run.
@@ -151,7 +151,7 @@ a ≔ a + ( List ← 1 ).
 
 {
 	a on: ‘number’ do: { ↲ (Object new). }.
-	a ≔ 3 * a. 
+	a ≔ 3 × a. 
 } catch: { :error
 	✎ write: ‘Error noted: ’ + error, stop.
 }, run.

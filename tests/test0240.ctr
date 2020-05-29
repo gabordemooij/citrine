@@ -12,7 +12,7 @@ $ on: ‘respond:’ do: { :x
 	☞ amount    ≔ 0.
 
 	( operation = ‘+’ ) true: {
-		( valuta = ‘£’ ) true: { amount ≔ 1.28 * money. }.
+		( valuta = ‘£’ ) true: { amount ≔ 1.28 × money. }.
 	}.
 	
 	↲ amount.

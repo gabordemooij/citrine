@@ -9,6 +9,6 @@ a prepend: ‘World’.
 a prepend: ‘Hi’, prepend: ‘There’.
 ✎ write: (a count) + ‘ left in array.’, stop.
 ✎ write: (a position: 2), write: (a position: 1), stop.
-{ a shift. } * 4.
+{ a shift. } × 4.
 ✎ write: (a count) + ‘ left in array.’, stop.
 ✎ write: a shift.

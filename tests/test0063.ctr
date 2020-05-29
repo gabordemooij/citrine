@@ -6,7 +6,7 @@ Product on: ‘a’ do: { :price
 ✎ write: ‘Apples cost: ’.
 Apples a 60.
 ✎ write: ‘ cent a piece.’.
-Number on: ‘×’ do: { :b
-	b * ⛏.
+Number on: ‘X’ do: { :b
+	b × ⛏.
 }.
-7 × { :i ✎ write: i - 1. }.
+7 X { :i ✎ write: i - 1. }.

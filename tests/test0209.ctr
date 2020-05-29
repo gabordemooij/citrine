@@ -8,7 +8,7 @@ x run.
 ✎ write: Boolean string, stop.
 ✎ write: Code string, stop.
 ✎ write: ‘Can I execute a code block without assigning code?’, stop.
-✎ write: (Code * 10), stop.
+✎ write: (Code × 10), stop.
 ✎ write: (Code true: { ‘Empty’. }), stop.
 ✎ write: (Object done), stop.
 ✎ write: (‘This <path> has no file’ <path>: File path), stop.

@@ -4,7 +4,7 @@
 	(x = 1) true: {
 		result ≔ 1.
 	}, else: {
-		result ≔ x * (f apply: (x - 1)).
+		result ≔ x × (f apply: (x - 1)).
 	}.
 	↲ result.
 }.

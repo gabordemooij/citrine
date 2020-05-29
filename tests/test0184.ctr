@@ -29,9 +29,9 @@ a ≔ a + 1.
 a addNum: 3.         
 a ≔ a - 1.       
 a subtractNum: -0.5. 
-a ≔ a * 2.       
+a ≔ a × 2.       
 a divideBy: 3.    
-a ≔ a / 0.1.     
+a ≔ a ÷ 0.1.     
 a ≔ a - -1.      
 a multiplyBy: 0.5.
 a ≔ a + (2 power: 8).  
@@ -51,9 +51,9 @@ a ≔ a + 1.
 a addNum: 3.         
 a ≔ a - 1.       
 a subtractNum: -0.5. 
-a ≔ a * 2.       
+a ≔ a × 2.       
 a divideBy: 3.    
-a ≔ a / 0.1.     
+a ≔ a ÷ 0.1.     
 a ≔ a - -1.      
 a multiplyBy: 0.5.
 a ≔ a + (2 power: 8).  
@@ -72,9 +72,9 @@ a ≔ a + 1.
 a addNum: 3.         
 a ≔ a - 1.       
 a subtractNum: -0.5. 
-a ≔ a * 2.       
+a ≔ a × 2.       
 a divideBy: 3.    
-a ≔ a / 0.1.     
+a ≔ a ÷ 0.1.     
 a ≔ a - -1.      
 a multiplyBy: 0.5.
 a ≔ a + (2 power: 8).  

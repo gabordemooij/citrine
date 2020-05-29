@@ -4,8 +4,8 @@
 ✎ write: ‘Number:’.
 ☞ a ≔ Number + Number + 1.
 a ≔ Number - 2.
-a ≔ Number * 2.
-a ≔ Number / 2.
+a ≔ Number × 2.
+a ≔ Number ÷ 2.
 ✎ write: a.
 ✎ stop.
 

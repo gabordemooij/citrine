@@ -1,8 +1,8 @@
 ‘SINGLE_LANGUAGE’.
 { :i
 	{
-		☞ a ≔ Code new: ‘{ 1 / 0. } run.’. 
+		☞ a ≔ Code new: ‘{ 1 ÷ 0. } run.’. 
 		a run.
 	} catch: { ‘Empty’.	}, run.
-	(i = 5) true: {  1 / 0. }.
-} * 10.
+	(i = 5) true: {  1 ÷ 0. }.
+} × 10.

@@ -35,17 +35,17 @@ a each: { :i :x
 				
 				✎ write: (
 					‘Can we draw a random no. between A and B ?’
-					A (x * fx)
-					B (y * fy)
+					A (x × fx)
+					B (y × fy)
 				).
 				
 				{ 
 					check random numbers apply: 
-						(x * fx)
+						(x × fx)
 					and:
-						(y * fy).
+						(y × fy).
 					
-				} * 10.
+				} × 10.
 				
 				
 				✎ write: ‘ ✓OK ’, stop.

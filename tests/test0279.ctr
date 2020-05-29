@@ -6,5 +6,5 @@
 ✎ write: ‘bytes after skip = ’ + str2 bytes, stop.
 { :index
 	✎ write: (‘byte: ’ + (str2 byte: index)), stop.
-} * (str2 bytes).
+} × (str2 bytes).
 
