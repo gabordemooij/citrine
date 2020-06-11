@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Uit geheue Kon nie %lu  byte toeken nie\n"
 #define CTR_MERR_MALLOC   "Uit geheue Kon nie %lu  byte toeken nie (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

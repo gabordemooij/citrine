@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Ji bîranînê Dabeşkirina %lu  bytes nehat têk çû\n"
 #define CTR_MERR_MALLOC   "Ji bîranînê Dabeşkirina %lu  bytes nehat têk çû (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Sense memòria No s’ha pogut assignar %lu  bytes\n"
 #define CTR_MERR_MALLOC   "Sense memòria No s’ha pogut assignar %lu  bytes (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Эс-тутуму жетпей калды %lu Оочу байт бөлүп койду\n"
 #define CTR_MERR_MALLOC   "Эс-тутуму жетпей калды %lu Оочу байт бөлүп койду (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

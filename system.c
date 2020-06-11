@@ -1188,7 +1188,7 @@ ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList 
 	ctr_argument* newArgumentList;
 	ctr_object*   answer;
 	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
-	newArgumentList->object = ctr_build_string_from_cstring( "%Y-%m-%d %H:%M:%S" );
+	newArgumentList->object = ctr_build_string_from_cstring( CTR_STDDATEFRMT );
 	answer = ctr_send_message( myself, CTR_DICT_FORMAT, strlen(CTR_DICT_FORMAT), newArgumentList );
 	ctr_heap_free( newArgumentList );
 	return answer;

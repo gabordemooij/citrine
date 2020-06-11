@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Ngapha kokungagcinwanga Ayiphumelelanga ukwaba %lu  i-byte\n"
 #define CTR_MERR_MALLOC   "Ngapha kokungagcinwanga Ayiphumelelanga ukwaba %lu  i-byte (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

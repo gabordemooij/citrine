@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Wala’y panumduman Napakyas sa paggahin %lu  byte\n"
 #define CTR_MERR_MALLOC   "Wala’y panumduman Napakyas sa paggahin %lu  byte (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

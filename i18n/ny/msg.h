@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Kuchokera kukumbukira Takanika kugawa %lu  mabwalo\n"
 #define CTR_MERR_MALLOC   "Kuchokera kukumbukira Takanika kugawa %lu  mabwalo (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

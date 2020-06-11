@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "A-mach às a ’chuimhne Dh’fhàillig air %lu  bytes a riarachadh\n"
 #define CTR_MERR_MALLOC   "A-mach às a ’chuimhne Dh’fhàillig air %lu  bytes a riarachadh (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

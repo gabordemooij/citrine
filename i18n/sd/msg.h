@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM "ميموري ختم ٿي وئي آھي.%lu bytes مختص ڪرڻ ۾ ناڪام. \n"
 #define CTR_MERR_MALLOC "ميموري ختم ٿي وئي آھي.%lu bytes مختص ڪرڻ ۾ ناڪام (malloc ناڪام). \n"
 #define CTR_MERR_POOL "ميموري پول مختص ڪرڻ جي قابل ناهي. \n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

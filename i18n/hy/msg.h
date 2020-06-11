@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Հիշողությունից դուրս Չհաջողվեց հատկացնել %lu  բայթ:\n"
 #define CTR_MERR_MALLOC   "Հիշողությունից դուրս Չհաջողվեց հատկացնել %lu  բայթ: (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

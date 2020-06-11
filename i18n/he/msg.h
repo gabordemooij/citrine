@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Out of memory. Failed to allocate %lu bytes.\n"
 #define CTR_MERR_MALLOC   "Out of memory. Failed to allocate %lu bytes (malloc failed). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

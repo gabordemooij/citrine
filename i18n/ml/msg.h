@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "മെമ്മറി തീർന്നു  %lu  ബൈറ്റുകൾ അനുവദിക്കുന്നതിൽ പരാജയപ്പെട്ടു\n"
 #define CTR_MERR_MALLOC   "മെമ്മറി തീർന്നു  %lu  ബൈറ്റുകൾ അനുവദിക്കുന്നതിൽ പരാജയപ്പെട്ടു (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

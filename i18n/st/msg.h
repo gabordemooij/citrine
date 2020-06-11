@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Ntle le mohopolo Ha rea ​​atleha ho abela %lu  byte\n"
 #define CTR_MERR_MALLOC   "Ntle le mohopolo Ha rea ​​atleha ho abela %lu  byte (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

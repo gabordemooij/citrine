@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Bez memorije Nije dodijeljeno %lu  bajtova\n"
 #define CTR_MERR_MALLOC   "Bez memorije Nije dodijeljeno %lu  bajtova (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

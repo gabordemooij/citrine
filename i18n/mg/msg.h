@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Tsaroana Tsy nahavita nampitaina %lu  bytes\n"
 #define CTR_MERR_MALLOC   "Tsaroana Tsy nahavita nampitaina %lu  bytes (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

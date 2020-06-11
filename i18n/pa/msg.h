@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "ਸਮਝ ਤੋ ਬਾਹਰ  %lu  ਬਾਈਟ ਨਿਰਧਾਰਤ ਕਰਨ ਵਿੱਚ ਅਸਫਲ\n"
 #define CTR_MERR_MALLOC   "ਸਮਝ ਤੋ ਬਾਹਰ  %lu  ਬਾਈਟ ਨਿਰਧਾਰਤ ਕਰਨ ਵਿੱਚ ਅਸਫਲ (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

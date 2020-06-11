@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Memoryatdan  %lu  baýt paýlap bilmedi\n"
 #define CTR_MERR_MALLOC   "Memoryatdan  %lu  baýt paýlap bilmedi (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"
