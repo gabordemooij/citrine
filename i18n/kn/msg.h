@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "ಮೆಮೊರಿಯಿಲ್ಲ  %lu  ಬೈಟ್‌ಗಳನ್ನು ನಿಯೋಜಿಸುವಲ್ಲಿ ವಿಫಲವಾಗಿದೆ\n"
 #define CTR_MERR_MALLOC   "ಮೆಮೊರಿಯಿಲ್ಲ  %lu  ಬೈಟ್‌ಗಳನ್ನು ನಿಯೋಜಿಸುವಲ್ಲಿ ವಿಫಲವಾಗಿದೆ (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

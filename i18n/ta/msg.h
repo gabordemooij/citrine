@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "நினைவகம் இல்லை  %lu  பைட்டுகளை ஒதுக்க முடியவில்லை\n"
 #define CTR_MERR_MALLOC   "நினைவகம் இல்லை  %lu  பைட்டுகளை ஒதுக்க முடியவில்லை (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Tsis nco Ua tsis tau kom faib %lu  bytes\n"
 #define CTR_MERR_MALLOC   "Tsis nco Ua tsis tau kom faib %lu  bytes (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

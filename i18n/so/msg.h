@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Xusuus la’aan Ku guuldaraystay qoondaynta %lu tes\n"
 #define CTR_MERR_MALLOC   "Xusuus la’aan Ku guuldaraystay qoondaynta %lu tes (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

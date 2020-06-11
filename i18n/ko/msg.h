@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "메모리가 부족합니다  %lu  바이트를 할당하지 못했습니다\n"
 #define CTR_MERR_MALLOC   "메모리가 부족합니다  %lu  바이트를 할당하지 못했습니다 (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

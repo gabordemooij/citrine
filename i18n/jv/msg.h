@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Kebak memorine Gagal nyedhiakake %lu bita\n"
 #define CTR_MERR_MALLOC   "Kebak memorine Gagal nyedhiakake %lu bita (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

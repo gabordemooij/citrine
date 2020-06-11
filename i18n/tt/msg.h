@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Хәтер җитми  %lu  байт бүлеп булмады\n"
 #define CTR_MERR_MALLOC   "Хәтер җитми  %lu  байт бүлеп булмады (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

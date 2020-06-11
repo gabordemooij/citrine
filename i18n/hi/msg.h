@@ -74,4 +74,5 @@
 #define CTR_MERR_OOM      "मेमोरी से बाहर। आवंटित करने में विफल %lu बाइट्स। \n"
 #define CTR_MERR_MALLOC   "मेमोरी से बाहर। आवंटित करने में विफल %lu बाइट्स (मॉलॉक असफल हुआ). \n"
 #define CTR_MERR_POOL     "मेमोरी क्षेत्र आवंटित करने में असमर्थ। \n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"
  

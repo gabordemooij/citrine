@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Búinn með minni Ekki tókst að úthluta %lu  bætum\n"
 #define CTR_MERR_MALLOC   "Búinn með minni Ekki tókst að úthluta %lu  bætum (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

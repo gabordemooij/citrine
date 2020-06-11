@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Elfogyott a memória Nem sikerült kiosztani a %lu  bájtot\n"
 #define CTR_MERR_MALLOC   "Elfogyott a memória Nem sikerült kiosztani a %lu  bájtot (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

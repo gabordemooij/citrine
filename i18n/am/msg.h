@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "ማህደረ ትውስታ ውጭ  %lu  ባይት ለመመደብ አልተሳካም።\n"
 #define CTR_MERR_MALLOC   "ማህደረ ትውስታ ውጭ  %lu  ባይት ለመመደብ አልተሳካም። (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

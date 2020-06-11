@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Нема меморија Не успеа да се распределат %lu  бајти\n"
 #define CTR_MERR_MALLOC   "Нема меморија Не успеа да се распределат %lu  бајти (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

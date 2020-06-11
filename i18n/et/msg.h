@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Mälu täis  %lu  baitide eraldamine ebaõnnestus\n"
 #define CTR_MERR_MALLOC   "Mälu täis  %lu  baitide eraldamine ebaõnnestus (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

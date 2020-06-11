@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Kunze kwendangariro Kukundikana kugovera %lu  bytes\n"
 #define CTR_MERR_MALLOC   "Kunze kwendangariro Kukundikana kugovera %lu  bytes (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

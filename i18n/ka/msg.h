@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "მეხსიერების გარეშე ვერ გამოყო %lu  ბაიტი\n"
 #define CTR_MERR_MALLOC   "მეხსიერების გარეშე ვერ გამოყო %lu  ბაიტი (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

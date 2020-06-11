@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Faʻamanatu mai Ua le mafai ona tuu le %lu  bytes\n"
 #define CTR_MERR_MALLOC   "Faʻamanatu mai Ua le mafai ona tuu le %lu  bytes (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Lupa Gagal memperuntukkan %lu  bait\n"
 #define CTR_MERR_MALLOC   "Lupa Gagal memperuntukkan %lu  bait (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Slut på minne Det gick inte att tilldela %lu  byte\n"
 #define CTR_MERR_MALLOC   "Slut på minne Det gick inte att tilldela %lu  byte (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

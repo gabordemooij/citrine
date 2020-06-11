@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Mémoire insuffisante Impossible d’allouer %lu  octets\n"
 #define CTR_MERR_MALLOC   "Mémoire insuffisante Impossible d’allouer %lu  octets (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

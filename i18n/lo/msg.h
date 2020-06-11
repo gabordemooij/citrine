@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "ໝົດ ຄວາມຊົງ ຈຳ ການຈັດສັນ %lu  bytes ລົ້ມເຫຼວ\n"
 #define CTR_MERR_MALLOC   "ໝົດ ຄວາມຊົງ ຈຳ ການຈັດສັນ %lu  bytes ລົ້ມເຫຼວ (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

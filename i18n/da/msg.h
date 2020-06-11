@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Ikke mere hukommelse Kunne ikke tildele %lu  bytes\n"
 #define CTR_MERR_MALLOC   "Ikke mere hukommelse Kunne ikke tildele %lu  bytes (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

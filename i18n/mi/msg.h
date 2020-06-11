@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Te kore whakamahara I rahua te toha %lu paita\n"
 #define CTR_MERR_MALLOC   "Te kore whakamahara I rahua te toha %lu paita (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Недостатньо помяті Не вдалося виділити %lu  байтів\n"
 #define CTR_MERR_MALLOC   "Недостатньо помяті Не вдалося виділити %lu  байтів (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

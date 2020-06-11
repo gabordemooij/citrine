@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Nicht genügend Speicher  %lu -Bytes konnten nicht zugeordnet werden\n"
 #define CTR_MERR_MALLOC   "Nicht genügend Speicher  %lu -Bytes konnten nicht zugeordnet werden (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

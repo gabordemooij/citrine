@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Oroimenik gabe Huts egin du %lu  byteak esleitzerakoan\n"
 #define CTR_MERR_MALLOC   "Oroimenik gabe Huts egin du %lu  byteak esleitzerakoan (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

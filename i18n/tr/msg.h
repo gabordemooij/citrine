@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Bellek yetersiz  %lu  bayt ayrılamadı\n"
 #define CTR_MERR_MALLOC   "Bellek yetersiz  %lu  bayt ayrılamadı (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

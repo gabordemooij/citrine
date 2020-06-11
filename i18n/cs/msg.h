@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Nedostatek paměti Nepodařilo se přidělit %lu  bajtů\n"
 #define CTR_MERR_MALLOC   "Nedostatek paměti Nepodařilo se přidělit %lu  bajtů (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

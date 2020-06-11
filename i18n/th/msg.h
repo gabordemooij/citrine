@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "ความจำเต็ม ไม่สามารถจัดสรร %lu  ไบต์ได้\n"
 #define CTR_MERR_MALLOC   "ความจำเต็ม ไม่สามารถจัดสรร %lu  ไบต์ได้ (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

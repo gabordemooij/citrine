@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Аз хотир Ҷудо кардани %lu  байт ба нокомӣ\n"
 #define CTR_MERR_MALLOC   "Аз хотир Ҷудо кардани %lu  байт ба нокомӣ (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

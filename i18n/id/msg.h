@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "Kehabisan memori Gagal mengalokasikan %lu  byte\n"
 #define CTR_MERR_MALLOC   "Kehabisan memori Gagal mengalokasikan %lu  byte (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"

@@ -74,3 +74,4 @@
 #define CTR_MERR_OOM      "內存不足。無法分配%lu個字節。\n"
 #define CTR_MERR_MALLOC   "內存不足。無法分配%lu個字節。 (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
+#define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"
