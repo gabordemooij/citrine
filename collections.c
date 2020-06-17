@@ -263,7 +263,6 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	i = (int) getIndex->value.nvalue - 1;
 	if (myself->value.avalue->head <= (i + myself->value.avalue->tail) || i < 0) {
-		CtrStdFlow = ctr_error( CTR_ERR_BOUNDS, 0 );
 		return CtrStdNil;
 	}
 	ctr_object* q =  *(myself->value.avalue->elements + myself->value.avalue->tail + i);

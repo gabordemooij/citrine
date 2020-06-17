@@ -1,0 +1,7 @@
+‘SINGLE_LANGUAGE’.
+{ 
+	☞ x ≔ List ← 1 ; 2.
+	this code block error: ‘error!’.
+} catch: { :error 
+	✎ write: error, stop. 
+}, run.
