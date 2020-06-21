@@ -1,5 +1,5 @@
 9
-a Ebumnuche ‘[Object]’  is NOT Nil.
+a Ebumnuche ‘Ebumnuche’  is NOT Nil.
 a Boolean ‘Eziokwu’  is NOT Nil.
 a Boolean ‘Gha’  is NOT Nil.
 a Boolean ‘Gha’  is NOT Nil.
@@ -7,5 +7,5 @@ a Nọmba ‘1’  is NOT Nil.
 a Nọmba ‘0’  is NOT Nil.
 a Eriri ‘Str’  is NOT Nil.
 a Eriri ‘’  is NOT Nil.
-a Koodu ‘[Block]’  is NOT Nil.
+a Koodu ‘Koodu’  is NOT Nil.
 but.. Nil is.. certainly NIL!

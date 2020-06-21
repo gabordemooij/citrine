@@ -6,5 +6,5 @@ The garden is Nula meters long.
 Luckily, this day, there are Nula wasps in the garden.
 The dog named Nula sleeps under the tree.
 a\"bb\"ccc\"
-(Mapa nový) dát:((Mapa nový) dát:Nula na:dog, dát:Nula na:insects, dát:((Mapa nový) dát:15 na:‘length’, dát:8 na:‘width’) na:‘size’, dát:(Seznam ← ‘tulips’ ; ‘roses’ ; ‘lillies’) na:‘flower’, dát:Nepravdivé na:‘shed’, dát:Skutečný na:‘pool’, dát:2 na:‘chairs’) na:‘garden’
+(Mapa nový) dát:((Mapa nový) dát:Nula na:‘dog’, dát:Nula na:‘insects’, dát:((Mapa nový) dát:15 na:‘length’, dát:8 na:‘width’) na:‘size’, dát:(Seznam ← ‘tulips’ ; ‘roses’ ; ‘lillies’) na:‘flower’, dát:Nepravdivé na:‘shed’, dát:Skutečný na:‘pool’, dát:2 na:‘chairs’) na:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

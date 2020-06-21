@@ -6,5 +6,5 @@ The garden is يل meters long.
 Luckily, this day, there are يل wasps in the garden.
 The dog named يل sleeps under the tree.
 a\"bb\"ccc\"
-(نئون نقشو)رکيو:((نئون نقشو)رکيو:يل تي:dog, رکيو:يل تي:insects, رکيو:((نئون نقشو)رکيو:15 تي:‘length’, رکيو:8 تي:‘width’) تي:‘size’, رکيو:(فهرست ←‘tulips’ ; ‘roses’ ; ‘lillies’) تي:‘flower’, رکيو:وڙو تي:‘shed’, رکيو:چو تي:‘pool’, رکيو:2 تي:‘chairs’) تي:‘garden’
+(نئون نقشو)رکيو:((نئون نقشو)رکيو:يل تي:‘dog’, رکيو:يل تي:‘insects’, رکيو:((نئون نقشو)رکيو:15 تي:‘length’, رکيو:8 تي:‘width’) تي:‘size’, رکيو:(فهرست ←‘tulips’ ; ‘roses’ ; ‘lillies’) تي:‘flower’, رکيو:وڙو تي:‘shed’, رکيو:چو تي:‘pool’, رکيو:2 تي:‘chairs’) تي:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

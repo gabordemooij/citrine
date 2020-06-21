@@ -1,5 +1,5 @@
 9
-a Об’єкт ‘[Object]’  is NOT Nil.
+a Об’єкт ‘Об’єкт’  is NOT Nil.
 a Булева ‘Правда’  is NOT Nil.
 a Булева ‘помилковий’  is NOT Nil.
 a Булева ‘помилковий’  is NOT Nil.
@@ -7,5 +7,5 @@ a Номер ‘1’  is NOT Nil.
 a Номер ‘0’  is NOT Nil.
 a Рядок ‘Str’  is NOT Nil.
 a Рядок ‘’  is NOT Nil.
-a Код ‘[Block]’  is NOT Nil.
+a Код ‘Код’  is NOT Nil.
 but.. Nil is.. certainly NIL!

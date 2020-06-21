@@ -1,5 +1,5 @@
 9
-a Kitu ‘[Object]’  is NOT Nil.
+a Kitu ‘Kitu’  is NOT Nil.
 a Boolean ‘Kweli’  is NOT Nil.
 a Boolean ‘Uongo’  is NOT Nil.
 a Boolean ‘Uongo’  is NOT Nil.
@@ -7,5 +7,5 @@ a Nambari ‘1’  is NOT Nil.
 a Nambari ‘0’  is NOT Nil.
 a Kamba ‘Str’  is NOT Nil.
 a Kamba ‘’  is NOT Nil.
-a Msimbo ‘[Block]’  is NOT Nil.
+a Msimbo ‘Msimbo’  is NOT Nil.
 but.. Nil is.. certainly NIL!

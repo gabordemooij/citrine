@@ -6,5 +6,5 @@ The garden is Nulis meters long.
 Luckily, this day, there are Nulis wasps in the garden.
 The dog named Nulis sleeps under the tree.
 a\"bb\"ccc\"
-(Map naujas) įdėti:((Map naujas) įdėti:Nulis _į:dog, įdėti:Nulis _į:insects, įdėti:((Map naujas) įdėti:15 _į:‘length’, įdėti:8 _į:‘width’) _į:‘size’, įdėti:(Sąrašas ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _į:‘flower’, įdėti:Netiesa _į:‘shed’, įdėti:Tiesa _į:‘pool’, įdėti:2 _į:‘chairs’) _į:‘garden’
+(Map naujas) įdėti:((Map naujas) įdėti:Nulis _į:‘dog’, įdėti:Nulis _į:‘insects’, įdėti:((Map naujas) įdėti:15 _į:‘length’, įdėti:8 _į:‘width’) _į:‘size’, įdėti:(Sąrašas ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _į:‘flower’, įdėti:Netiesa _į:‘shed’, įdėti:Tiesa _į:‘pool’, įdėti:2 _į:‘chairs’) _į:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

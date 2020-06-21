@@ -6,5 +6,5 @@ The garden is ноль meters long.
 Luckily, this day, there are ноль wasps in the garden.
 The dog named ноль sleeps under the tree.
 a\"bb\"ccc\"
-(карта новый) положить в:((карта новый) положить в:ноль __:dog, положить в:ноль __:insects, положить в:((карта новый) положить в:15 __:‘length’, положить в:8 __:‘width’) __:‘size’, положить в:(Список ← ‘tulips’ ; ‘roses’ ; ‘lillies’) __:‘flower’, положить в:Ложь __:‘shed’, положить в:Правда __:‘pool’, положить в:2 __:‘chairs’) __:‘garden’
+(карта новый) положить в:((карта новый) положить в:ноль __:‘dog’, положить в:ноль __:‘insects’, положить в:((карта новый) положить в:15 __:‘length’, положить в:8 __:‘width’) __:‘size’, положить в:(Список ← ‘tulips’ ; ‘roses’ ; ‘lillies’) __:‘flower’, положить в:Ложь __:‘shed’, положить в:Правда __:‘pool’, положить в:2 __:‘chairs’) __:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

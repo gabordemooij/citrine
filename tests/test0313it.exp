@@ -6,5 +6,5 @@ The garden is Zero meters long.
 Luckily, this day, there are Zero wasps in the garden.
 The dog named Zero sleeps under the tree.
 a\"bb\"ccc\"
-(Carta geografica nuovo) mettere:((Carta geografica nuovo) mettere:Zero _a:dog, mettere:Zero _a:insects, mettere:((Carta geografica nuovo) mettere:15 _a:‘length’, mettere:8 _a:‘width’) _a:‘size’, mettere:(Elenco ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _a:‘flower’, mettere:Falso _a:‘shed’, mettere:Vero _a:‘pool’, mettere:2 _a:‘chairs’) _a:‘garden’
+(Carta geografica nuovo) mettere:((Carta geografica nuovo) mettere:Zero _a:‘dog’, mettere:Zero _a:‘insects’, mettere:((Carta geografica nuovo) mettere:15 _a:‘length’, mettere:8 _a:‘width’) _a:‘size’, mettere:(Elenco ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _a:‘flower’, mettere:Falso _a:‘shed’, mettere:Vero _a:‘pool’, mettere:2 _a:‘chairs’) _a:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

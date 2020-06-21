@@ -704,6 +704,7 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 		return ctr_build_empty_string();
 	}
 	ctr_object* string = ctr_build_empty_string();
+	ctr_gc_internal_pin(string);
 	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
 	if ( myself->value.avalue->tail == myself->value.avalue->head ) {
 		newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_CODEGEN_ARRAY_NEW );
@@ -714,25 +715,9 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
 	}
 	for(i=myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
 		arrayElement = *( myself->value.avalue->elements + i );
-		if ( arrayElement->info.type == CTR_OBJECT_TYPE_OTBOOL || arrayElement->info.type == CTR_OBJECT_TYPE_OTNUMBER
-		|| arrayElement->info.type == CTR_OBJECT_TYPE_OTNIL ) {
-			newArgumentList->object = arrayElement;
-			string = ctr_string_append( string, newArgumentList );
-		} else if ( arrayElement->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
-			newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_OPEN );
-			string = ctr_string_append( string, newArgumentList );
-			newArgumentList->object = ctr_string_quotes_escape( arrayElement, newArgumentList );
-			string = ctr_string_append( string, newArgumentList );
-			newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_CLOSE );
-			string = ctr_string_append( string, newArgumentList );
-		} else {
-			newArgumentList->object = ctr_build_string_from_cstring("(");
-			ctr_string_append( string, newArgumentList );
-			newArgumentList->object = arrayElement;
-			string = ctr_string_append( string, newArgumentList );
-			newArgumentList->object = ctr_build_string_from_cstring(")");
-			ctr_string_append( string, newArgumentList );
-		}
+		newArgumentList->object = CtrStdNil;
+		newArgumentList->object = ctr_send_message( arrayElement, CTR_DICT_CODE, strlen(CTR_DICT_CODE), newArgumentList );
+		string = ctr_string_append( string, newArgumentList );
 		if (  (i + 1 )<myself->value.avalue->head ) {
 			newArgumentList->object = ctr_build_string_from_cstring(" ; ");
 			string = ctr_string_append( string, newArgumentList );
@@ -840,6 +825,7 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* emptyArgumentList = ctr_heap_allocate(sizeof(ctr_argument));
 	emptyArgumentList->next = NULL;
 	emptyArgumentList->object = NULL;
+	/* Use tostring and not tocode here because tocode will escape quotes, but tostring not, this will preserve the orig key */
 	putKey = ctr_send_message(nextArgument->object, CTR_DICT_TOSTRING, strlen(CTR_DICT_TOSTRING), emptyArgumentList);
 	/* If developer returns something other than string (ouch, toString), then cast anyway */
 	if (putKey->info.type != CTR_OBJECT_TYPE_OTSTRING) {
@@ -1127,47 +1113,12 @@ ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
 	while( mapItem ) {
 		newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_CODEGEN_MAP_PUT );
 		ctr_string_append( string, newArgumentList );
-		if ( mapItem->value->info.type == CTR_OBJECT_TYPE_OTBOOL || mapItem->value->info.type == CTR_OBJECT_TYPE_OTNUMBER
-		|| mapItem->value->info.type == CTR_OBJECT_TYPE_OTNIL
-		) {
-			newArgumentList->object = mapItem->value;
-			ctr_string_append( string, newArgumentList );
-		} else if ( mapItem->value->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
-			newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_OPEN );
-			ctr_string_append( string, newArgumentList );
-			newArgumentList->object = ctr_string_quotes_escape( mapItem->value, newArgumentList );
-			ctr_string_append( string, newArgumentList );
-			newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_CLOSE );
-			ctr_string_append( string, newArgumentList );
-		} else {
-			newArgumentList->object = ctr_build_string_from_cstring( "(" );
-			ctr_string_append( string, newArgumentList );
-			newArgumentList->object = mapItem->value;
-			ctr_string_append( string, newArgumentList );
-			newArgumentList->object = ctr_build_string_from_cstring( ")" );
-			ctr_string_append( string, newArgumentList );
-		}
+		newArgumentList->object = ctr_send_message( mapItem->value, CTR_DICT_CODE, strlen(CTR_DICT_CODE), newArgumentList );
+		ctr_string_append( string, newArgumentList );
 		newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_CODEGEN_MAP_PUT_AT );
 		ctr_string_append( string, newArgumentList );
-		if ( mapItem->key->info.type == CTR_OBJECT_TYPE_OTBOOL || mapItem->key->info.type == CTR_OBJECT_TYPE_OTNUMBER
-		|| mapItem->value->info.type == CTR_OBJECT_TYPE_OTNIL ) {
-			newArgumentList->object = mapItem->key;
-			ctr_string_append( string, newArgumentList );
-		} else if ( mapItem->key->info.type == CTR_OBJECT_TYPE_OTSTRING ) {
-			newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_OPEN );
-			ctr_string_append( string, newArgumentList );
-			newArgumentList->object = ctr_string_quotes_escape( mapItem->key, newArgumentList );
-			ctr_string_append( string, newArgumentList );
-			newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_CLOSE );
-			ctr_string_append( string, newArgumentList );
-		} else {
-			newArgumentList->object = ctr_build_string_from_cstring( "(" );
-			ctr_string_append( string, newArgumentList );
-			newArgumentList->object = mapItem->key;
-			ctr_string_append( string, newArgumentList );
-			newArgumentList->object = ctr_build_string_from_cstring( ")" );
-			ctr_string_append( string, newArgumentList );
-		}
+		newArgumentList->object = ctr_send_message( mapItem->key, CTR_DICT_CODE, strlen(CTR_DICT_CODE), newArgumentList );
+		ctr_string_append( string, newArgumentList );
 		mapItem = mapItem->next;
 		if ( mapItem ) {
 			newArgumentList->object = ctr_build_string_from_cstring( ", " );

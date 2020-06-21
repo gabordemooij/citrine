@@ -1,5 +1,5 @@
 9
-a Into ‘[Object]’  is NOT Nil.
+a Into ‘Into’  is NOT Nil.
 a Boolean ‘Kuyinyani’  is NOT Nil.
 a Boolean ‘Ubuxoki’  is NOT Nil.
 a Boolean ‘Ubuxoki’  is NOT Nil.
@@ -7,5 +7,5 @@ a Inani ‘1’  is NOT Nil.
 a Inani ‘0’  is NOT Nil.
 a Umtya ‘Str’  is NOT Nil.
 a Umtya ‘’  is NOT Nil.
-a Ikhowudi ‘[Block]’  is NOT Nil.
+a Ikhowudi ‘Ikhowudi’  is NOT Nil.
 but.. Nil is.. certainly NIL!

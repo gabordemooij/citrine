@@ -1,5 +1,5 @@
 9
-a Objek ‘[Object]’  is NOT Nil.
+a Objek ‘Objek’  is NOT Nil.
 a Boolean ‘Benar’  is NOT Nil.
 a Boolean ‘Salah’  is NOT Nil.
 a Boolean ‘Salah’  is NOT Nil.
@@ -7,5 +7,5 @@ a Nombor ‘1’  is NOT Nil.
 a Nombor ‘0’  is NOT Nil.
 a Tali ‘Str’  is NOT Nil.
 a Tali ‘’  is NOT Nil.
-a Kod ‘[Block]’  is NOT Nil.
+a Kod ‘Kod’  is NOT Nil.
 but.. Nil is.. certainly NIL!

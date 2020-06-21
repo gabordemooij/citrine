@@ -319,30 +319,6 @@ int ctr_clex_tok() {
 		}
 		return CTR_TOKEN_NUMBER;
 	}
-	if (strncmp(ctr_code, CTR_DICT_TRUE, ctr_clex_true_len)==0){
-		if ( ctr_clex_is_delimiter( ( ctr_code + ctr_clex_true_len ) ) ) {
-			ctr_code += ctr_clex_true_len;
-			memcpy(ctr_clex_buffer, CTR_DICT_TRUE, ctr_clex_true_len);
-			ctr_clex_tokvlen = ctr_clex_true_len;
-			return CTR_TOKEN_BOOLEANYES;
-		}
-	}
-	if (strncmp(ctr_code, CTR_DICT_FALSE, ctr_clex_false_len)==0){
-		if ( ctr_clex_is_delimiter( ( ctr_code + ctr_clex_false_len ) ) ) {
-			ctr_code += ctr_clex_false_len;
-			memcpy(ctr_clex_buffer, CTR_DICT_FALSE, ctr_clex_false_len);
-			ctr_clex_tokvlen = ctr_clex_false_len;
-			return CTR_TOKEN_BOOLEANNO;
-		}
-	}
-	if (strncmp(ctr_code, CTR_DICT_NIL, ctr_clex_nil_len)==0){
-		if ( ctr_clex_is_delimiter( ( ctr_code + ctr_clex_nil_len ) ) ) {
-			ctr_code += ctr_clex_nil_len;
-			memcpy(ctr_clex_buffer, CTR_DICT_NIL, ctr_clex_nil_len);
-			ctr_clex_tokvlen = ctr_clex_nil_len;
-			return CTR_TOKEN_NIL;
-		}
-	}
 	while( !ctr_clex_is_delimiter( ctr_code ) && ctr_code!=ctr_eofcode ) {
 		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
 		i++;

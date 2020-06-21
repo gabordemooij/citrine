@@ -1,5 +1,5 @@
 9
-a Autu ‘[Object]’  is NOT Nil.
+a Autu ‘Autu’  is NOT Nil.
 a Poei ‘Pono’  is NOT Nil.
 a Poei ‘Horihori’  is NOT Nil.
 a Poei ‘Horihori’  is NOT Nil.
@@ -7,5 +7,5 @@ a Tau ‘1’  is NOT Nil.
 a Tau ‘0’  is NOT Nil.
 a Manatu ‘Str’  is NOT Nil.
 a Manatu ‘’  is NOT Nil.
-a Waehere ‘[Block]’  is NOT Nil.
+a Waehere ‘Waehere’  is NOT Nil.
 but.. Nil is.. certainly NIL!

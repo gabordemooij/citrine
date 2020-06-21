@@ -1,5 +1,5 @@
 9
-a Sini ‘[Object]’  is NOT Nil.
+a Sini ‘Sini’  is NOT Nil.
 a Faʻamalie ‘Faamaoni’  is NOT Nil.
 a Faʻamalie ‘Sese’  is NOT Nil.
 a Faʻamalie ‘Sese’  is NOT Nil.
@@ -7,5 +7,5 @@ a Numera ‘1’  is NOT Nil.
 a Numera ‘0’  is NOT Nil.
 a Faʻailoga ‘Str’  is NOT Nil.
 a Faʻailoga ‘’  is NOT Nil.
-a Code ‘[Block]’  is NOT Nil.
+a Code ‘Code’  is NOT Nil.
 but.. Nil is.. certainly NIL!

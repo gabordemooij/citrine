@@ -6,5 +6,5 @@ The garden is نیل meters long.
 Luckily, this day, there are نیل wasps in the garden.
 The dog named نیل sleeps under the tree.
 a\"bb\"ccc\"
-(نقشه نوی) لګول:((نقشه نوی) لګول:نیل په:dog, لګول:نیل په:insects, لګول:((نقشه نوی) لګول:15 په:‘length’, لګول:8 په:‘width’) په:‘size’, لګول:(لیست ← ‘tulips’ ; ‘roses’ ; ‘lillies’) په:‘flower’, لګول:غلط په:‘shed’, لګول:ریښتیا په:‘pool’, لګول:2 په:‘chairs’) په:‘garden’
+(نقشه نوی) لګول:((نقشه نوی) لګول:نیل په:‘dog’, لګول:نیل په:‘insects’, لګول:((نقشه نوی) لګول:15 په:‘length’, لګول:8 په:‘width’) په:‘size’, لګول:(لیست ← ‘tulips’ ; ‘roses’ ; ‘lillies’) په:‘flower’, لګول:غلط په:‘shed’, لګول:ریښتیا په:‘pool’, لګول:2 په:‘chairs’) په:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

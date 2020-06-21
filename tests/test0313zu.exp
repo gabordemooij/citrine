@@ -6,5 +6,5 @@ The garden is Nil meters long.
 Luckily, this day, there are Nil wasps in the garden.
 The dog named Nil sleeps under the tree.
 a\"bb\"ccc\"
-(Imephu okusha) beka:((Imephu okusha) beka:Nil at:dog, beka:Nil at:insects, beka:((Imephu okusha) beka:15 at:‘length’, beka:8 at:‘width’) at:‘size’, beka:(Uhlu ← ‘tulips’ ; ‘roses’ ; ‘lillies’) at:‘flower’, beka:Amanga at:‘shed’, beka:Kuliqiniso at:‘pool’, beka:2 at:‘chairs’) at:‘garden’
+(Imephu okusha) beka:((Imephu okusha) beka:Nil at:‘dog’, beka:Nil at:‘insects’, beka:((Imephu okusha) beka:15 at:‘length’, beka:8 at:‘width’) at:‘size’, beka:(Uhlu ← ‘tulips’ ; ‘roses’ ; ‘lillies’) at:‘flower’, beka:Amanga at:‘shed’, beka:Kuliqiniso at:‘pool’, beka:2 at:‘chairs’) at:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

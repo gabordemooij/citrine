@@ -1,5 +1,5 @@
 9
-a Αντικείμενο ‘[Object]’  is NOT Nil.
+a Αντικείμενο ‘Αντικείμενο’  is NOT Nil.
 a Boolean ‘Αληθής’  is NOT Nil.
 a Boolean ‘Ψευδής’  is NOT Nil.
 a Boolean ‘Ψευδής’  is NOT Nil.
@@ -7,5 +7,5 @@ a Αριθμός ‘1’  is NOT Nil.
 a Αριθμός ‘0’  is NOT Nil.
 a Σειρά ‘Str’  is NOT Nil.
 a Σειρά ‘’  is NOT Nil.
-a Κώδικας ‘[Block]’  is NOT Nil.
+a Κώδικας ‘Κώδικας’  is NOT Nil.
 but.. Nil is.. certainly NIL!

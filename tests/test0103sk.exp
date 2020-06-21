@@ -1,5 +1,5 @@
 9
-a Objekt ‘[Object]’  is NOT Nil.
+a Objekt ‘Objekt’  is NOT Nil.
 a Boolean ‘Pravdivý’  is NOT Nil.
 a Boolean ‘Nepravdivý’  is NOT Nil.
 a Boolean ‘Nepravdivý’  is NOT Nil.
@@ -7,5 +7,5 @@ a číslo ‘1’  is NOT Nil.
 a číslo ‘0’  is NOT Nil.
 a Povrázok ‘Str’  is NOT Nil.
 a Povrázok ‘’  is NOT Nil.
-a Kód ‘[Block]’  is NOT Nil.
+a Kód ‘Kód’  is NOT Nil.
 but.. Nil is.. certainly NIL!

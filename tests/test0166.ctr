@@ -7,25 +7,31 @@
 
 Program tidiness: 0.
 
+{
 ☞ q ≔ ‘You should be able’.
 q append: (‘ to append something to a string’+‘!’).
 ✎ write: q.
+} run.
 
 Program clean memory.
 usedMemory1 ≔ (Program memory ? 1).
 
 
-q ≔ ‘You should be able’.
+{
+☞ q ≔ ‘You should be able’.
 q append: (‘ to append something to a string’+‘!’).
 ✎ write: q.
+} run.
 
 Program clean memory.
 usedMemory2 ≔ (Program memory ? 1).
 
 
-q ≔ ‘You should be able’.
+{
+☞ q ≔ ‘You should be able’.
 q append: (‘ to append something to a string’+‘!’).
 ✎ write: q.
+} run.
 
 Program clean memory.
 usedMemory3 ≔ (Program memory ? 1).

@@ -1,5 +1,5 @@
 9
-a वस्तु ‘[Object]’  is NOT Nil.
+a वस्तु ‘वस्तु’  is NOT Nil.
 a बुलियन ‘सही’  is NOT Nil.
 a बुलियन ‘गलत’  is NOT Nil.
 a बुलियन ‘गलत’  is NOT Nil.
@@ -7,5 +7,5 @@ a संख्या ‘1’  is NOT Nil.
 a संख्या ‘0’  is NOT Nil.
 a स्ट्रिंग ‘Str’  is NOT Nil.
 a स्ट्रिंग ‘’  is NOT Nil.
-a कोड ‘[Block]’  is NOT Nil.
+a कोड ‘कोड’  is NOT Nil.
 but.. Nil is.. certainly NIL!

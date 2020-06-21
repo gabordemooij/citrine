@@ -395,14 +395,8 @@ ctr_tnode* ctr_cparse_string() {
 	memcpy(r->value, n, vlen);
 	r->vlen = vlen;
 	ctr_heap_free(n);
-	//int t = ctr_clex_tok(); /* eat trailing quote. */
-	/*if (t == CTR_TOKEN_FIN) {
-		ctr_cparse_emit_error_unexpected( t, NULL );
-		return NULL;
-	}*/
 	return r;
 }
-
 
 /**
  * CTRParserNumber
@@ -426,54 +420,6 @@ ctr_tnode* ctr_cparse_number() {
 }
 
 /**
- * CTRParserBooleanFalse
- *
- * Generates a node to represent a boolean False.
- */
-ctr_tnode* ctr_cparse_false() {
-	ctr_tnode* r;
-	ctr_clex_tok();
-	r = ctr_cparse_create_node( CTR_AST_NODE );
-	r->type = CTR_AST_NODE_LTRBOOLFALSE;
-	r->value = ctr_heap_allocate_tracked( sizeof( char ) * ctr_clex_tok_value_length() );
-	memcpy( r->value, ctr_clex_tok_value(), ctr_clex_tok_value_length() );
-	r->vlen = ctr_clex_tok_value_length();
-	return r;
-}
-
-/**
- * CTRParserBooleanTrue
- *
- * Generates a node to represent a boolean True.
- */
-ctr_tnode* ctr_cparse_true() {
-	ctr_tnode* r;
-	ctr_clex_tok();
-	r = ctr_cparse_create_node( CTR_AST_NODE );
-	r->type = CTR_AST_NODE_LTRBOOLTRUE;
-	r->value = ctr_heap_allocate_tracked( sizeof( char ) * ctr_clex_tok_value_length() );
-	memcpy( r->value, ctr_clex_tok_value(), ctr_clex_tok_value_length() );
-	r->vlen = ctr_clex_tok_value_length();
-	return r;
-}
-
-/**
- * CTRParserNil
- *
- * Generates a node to represent Nil
- */
-ctr_tnode* ctr_cparse_nil() {
-	ctr_tnode* r;
-	ctr_clex_tok();
-	r = ctr_cparse_create_node( CTR_AST_NODE );
-	r->type = CTR_AST_NODE_LTRNIL;
-	r->value = ctr_heap_allocate_tracked( sizeof( char ) * ctr_clex_tok_value_length() );
-	memcpy( r->value, ctr_clex_tok_value(), ctr_clex_tok_value_length() );
-	r->vlen = ctr_clex_tok_value_length();
-	return r;
-}
-
-/**
  * CTRParserReceiver
  *
  * Generates a node to represent a receiver (of a message).
@@ -483,12 +429,6 @@ ctr_tnode* ctr_cparse_receiver() {
 	t = ctr_clex_tok();
 	ctr_clex_putback();
 	switch(t){
-		case CTR_TOKEN_NIL:
-			return ctr_cparse_nil();
-		case CTR_TOKEN_BOOLEANYES:
-			return ctr_cparse_true();
-		case CTR_TOKEN_BOOLEANNO:
-			return ctr_cparse_false();
 		case CTR_TOKEN_NUMBER:
 			return ctr_cparse_number();
 		case CTR_TOKEN_QUOTE:

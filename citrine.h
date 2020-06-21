@@ -231,6 +231,8 @@ extern ctr_object* CtrStdBlock;
 extern ctr_object* CtrStdString;
 extern ctr_object* CtrStdNumber;
 extern ctr_object* CtrStdBool;
+extern ctr_object* CtrStdBoolTrue;
+extern ctr_object* CtrStdBoolFalse;
 extern ctr_object* CtrStdConsole;
 extern ctr_object* CtrStdNil;
 extern ctr_object* CtrStdGC;
@@ -399,10 +401,11 @@ extern ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ct
 extern ctr_object* ctr_object_to_string(ctr_object* myself, ctr_argument* ctr_argumentList);
 extern ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentList);
 extern ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList);
-extern ctr_object* ctr_object_respond_and(ctr_object* myseld, ctr_argument* ctr_argumentList);
-extern ctr_object* ctr_object_respond_and_and(ctr_object* myseld, ctr_argument* ctr_argumentList);
-extern ctr_object* ctr_object_respond_and_and_and(ctr_object* myseld, ctr_argument* ctr_argumentList);
-extern ctr_object* ctr_object_case_do(ctr_object* myseld, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_object_respond_and(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_object_respond_and_and(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_object_respond_and_and_and(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_object_case_do(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_object_to_code(ctr_object* myself, ctr_argument* ctr_argumentList);
 
 /**
  * Boolean Interface
@@ -466,7 +469,6 @@ extern ctr_object* ctr_number_respond_to(ctr_object* myself, ctr_argument* argum
 extern ctr_object* ctr_number_random(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_number_copy(ctr_object* myself, ctr_argument* argumentList);
 
-
 /**
  * String Interface
  */
@@ -509,6 +511,7 @@ extern ctr_object* ctr_string_after(ctr_object* myself, ctr_argument* argumentLi
 extern ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentList );
 extern ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_string_copy(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_string_to_code(ctr_object* myself, ctr_argument* ctr_argumentList);
 
 /**
  * Block Interface

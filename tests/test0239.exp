@@ -3,8 +3,8 @@ Yep
 Devil
 False
 List ← ‘hello’ ; ‘world’ ; True ; Nil ; 666 ; 1
-(Map new) put:Nil at:Nil
-668
+(Map new) put:Nil at:‘Nil’
+677
 Error noted: Must return a string.
 Error noted: Must return a number.
 Error noted: Must return a boolean.
