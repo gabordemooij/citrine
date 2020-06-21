@@ -1,0 +1,35 @@
+‘SINGLE_RUN’.
+☞ a ≔ Object new.
+
+a on: ‘code’ do: {
+	☞ answer ≔ ‘‘A‘’’’.
+	↲ answer.
+}.
+
+☞ b ≔ ‘B’.
+
+✎ write: List ← a ; b, stop.
+✎ write: (Map new put: a at: a), stop.
+✎ write: List ← ( List ← a ), stop.
+✎ write: (Map new put: (Map new put: a at: a) at: (Map new put: a at: a)), stop.
+✎ write: (Map new put: (List ← a) at: (List ← a)), stop.
+✎ write: List ← (Map new put: a at: a), stop.
+
+‘paste output from above here, test if it is parseable:’.
+
+✎ write: ‘-- parse test --’, stop.
+
+☞ x1 ≔ List ← ‘A‘’’ ; ‘B’.
+☞ x2 ≔ (Map new) put:‘A‘’’ at:‘A‘’’.
+☞ x3 ≔ List ← (List ← ‘A‘’’).
+☞ x4 ≔ (Map new) put:((Map new) put:‘A‘’’ at:‘A‘’’) at:((Map new) put:‘A‘’’ at:‘A‘’’).
+☞ x5 ≔ (Map new) put:(List ← ‘A‘’’) at:(List ← ‘A‘’’).
+☞ x6 ≔ List ← ((Map new) put:‘A‘’’ at:‘A‘’’).
+
+✎ write: x1, stop.
+✎ write: x2, stop.
+✎ write: x3, stop.
+✎ write: x4, stop.
+✎ write: x5, stop.
+✎ write: x6, stop.
+

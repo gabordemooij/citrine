@@ -1,5 +1,5 @@
 9
-a Объект ‘[Object]’  is NOT Nil.
+a Объект ‘Объект’  is NOT Nil.
 a Булан ‘Дөрес’  is NOT Nil.
 a Булан ‘Ялган’  is NOT Nil.
 a Булан ‘Ялган’  is NOT Nil.
@@ -7,5 +7,5 @@ a Сан ‘1’  is NOT Nil.
 a Сан ‘0’  is NOT Nil.
 a Сызык ‘Str’  is NOT Nil.
 a Сызык ‘’  is NOT Nil.
-a Код ‘[Block]’  is NOT Nil.
+a Код ‘Код’  is NOT Nil.
 but.. Nil is.. certainly NIL!

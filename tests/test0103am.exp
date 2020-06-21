@@ -1,5 +1,5 @@
 9
-a ነገር ‘[Object]’  is NOT Nil.
+a ነገር ‘ነገር’  is NOT Nil.
 a ቡሊያን ‘እውነት ነው’  is NOT Nil.
 a ቡሊያን ‘ሐሰት’  is NOT Nil.
 a ቡሊያን ‘ሐሰት’  is NOT Nil.
@@ -7,5 +7,5 @@ a ቁጥር ‘1’  is NOT Nil.
 a ቁጥር ‘0’  is NOT Nil.
 a ሕብረቁምፊ ‘Str’  is NOT Nil.
 a ሕብረቁምፊ ‘’  is NOT Nil.
-a ኮድ ‘[Block]’  is NOT Nil.
+a ኮድ ‘ኮድ’  is NOT Nil.
 but.. Nil is.. certainly NIL!

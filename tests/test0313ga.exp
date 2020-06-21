@@ -6,5 +6,5 @@ The garden is Nialas meters long.
 Luckily, this day, there are Nialas wasps in the garden.
 The dog named Nialas sleeps under the tree.
 a\"bb\"ccc\"
-(Léarscáil nua) put:((Léarscáil nua) put:Nialas at:dog, put:Nialas at:insects, put:((Léarscáil nua) put:15 at:‘length’, put:8 at:‘width’) at:‘size’, put:(Liosta ← ‘tulips’ ; ‘roses’ ; ‘lillies’) at:‘flower’, put:Bréagach at:‘shed’, put:Fíor at:‘pool’, put:2 at:‘chairs’) at:‘garden’
+(Léarscáil nua) put:((Léarscáil nua) put:Nialas at:‘dog’, put:Nialas at:‘insects’, put:((Léarscáil nua) put:15 at:‘length’, put:8 at:‘width’) at:‘size’, put:(Liosta ← ‘tulips’ ; ‘roses’ ; ‘lillies’) at:‘flower’, put:Bréagach at:‘shed’, put:Fíor at:‘pool’, put:2 at:‘chairs’) at:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

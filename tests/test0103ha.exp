@@ -1,5 +1,5 @@
 9
-a Nasihu ‘[Object]’  is NOT Nil.
+a Nasihu ‘Nasihu’  is NOT Nil.
 a Boolean ‘Gaskiya ne’  is NOT Nil.
 a Boolean ‘Karya’  is NOT Nil.
 a Boolean ‘Karya’  is NOT Nil.
@@ -7,5 +7,5 @@ a Lambar ‘1’  is NOT Nil.
 a Lambar ‘0’  is NOT Nil.
 a Kiɗa ‘Str’  is NOT Nil.
 a Kiɗa ‘’  is NOT Nil.
-a _Lambar ‘[Block]’  is NOT Nil.
+a _Lambar ‘_Lambar’  is NOT Nil.
 but.. Nil is.. certainly NIL!

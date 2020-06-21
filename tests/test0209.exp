@@ -2,10 +2,10 @@
 Adding 3 to Number gives: 3 
 Appending something to String gives: something
 False
-[Block]
+Code
 Can I execute a code block without assigning code?
-[Block]
+Code
 True
-[Object]
+Object
 This Nil has no file
 0

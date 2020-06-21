@@ -1,5 +1,5 @@
 9
-a Kākau ‘[Object]’  is NOT Nil.
+a Kākau ‘Kākau’  is NOT Nil.
 a Boolean ‘Kūpono’  is NOT Nil.
 a Boolean ‘Hoʻolaha’  is NOT Nil.
 a Boolean ‘Hoʻolaha’  is NOT Nil.
@@ -7,5 +7,5 @@ a Helu ‘1’  is NOT Nil.
 a Helu ‘0’  is NOT Nil.
 a Peke ‘Str’  is NOT Nil.
 a Peke ‘’  is NOT Nil.
-a Pāʻālua ‘[Block]’  is NOT Nil.
+a Pāʻālua ‘Pāʻālua’  is NOT Nil.
 but.. Nil is.. certainly NIL!

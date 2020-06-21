@@ -1,5 +1,5 @@
 9
-a பொருள் ‘[Object]’  is NOT Nil.
+a பொருள் ‘பொருள்’  is NOT Nil.
 a பூலியன் ‘உண்மை’  is NOT Nil.
 a பூலியன் ‘பொய்’  is NOT Nil.
 a பூலியன் ‘பொய்’  is NOT Nil.
@@ -7,5 +7,5 @@ a எண் ‘1’  is NOT Nil.
 a எண் ‘0’  is NOT Nil.
 a லேசான கயிறு ‘Str’  is NOT Nil.
 a லேசான கயிறு ‘’  is NOT Nil.
-a குறியீடு ‘[Block]’  is NOT Nil.
+a குறியீடு ‘குறியீடு’  is NOT Nil.
 but.. Nil is.. certainly NIL!

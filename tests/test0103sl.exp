@@ -1,5 +1,5 @@
 9
-a Predmet ‘[Object]’  is NOT Nil.
+a Predmet ‘Predmet’  is NOT Nil.
 a Boolov ‘Prav’  is NOT Nil.
 a Boolov ‘Lažno’  is NOT Nil.
 a Boolov ‘Lažno’  is NOT Nil.
@@ -7,5 +7,5 @@ a Številka ‘1’  is NOT Nil.
 a Številka ‘0’  is NOT Nil.
 a Vrvica ‘Str’  is NOT Nil.
 a Vrvica ‘’  is NOT Nil.
-a Koda ‘[Block]’  is NOT Nil.
+a Koda ‘Koda’  is NOT Nil.
 but.. Nil is.. certainly NIL!

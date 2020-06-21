@@ -1,5 +1,5 @@
 9
-a Objeto ‘[Object]’  is NOT Nil.
+a Objeto ‘Objeto’  is NOT Nil.
 a Booleano ‘Cierto’  is NOT Nil.
 a Booleano ‘Falso’  is NOT Nil.
 a Booleano ‘Falso’  is NOT Nil.
@@ -7,5 +7,5 @@ a Número ‘1’  is NOT Nil.
 a Número ‘0’  is NOT Nil.
 a Cuerda ‘Str’  is NOT Nil.
 a Cuerda ‘’  is NOT Nil.
-a Código ‘[Block]’  is NOT Nil.
+a Código ‘Código’  is NOT Nil.
 but.. Nil is.. certainly NIL!

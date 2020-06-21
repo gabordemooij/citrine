@@ -6,5 +6,5 @@ The garden is Ha ho joalo meters long.
 Luckily, this day, there are Ha ho joalo wasps in the garden.
 The dog named Ha ho joalo sleeps under the tree.
 a\"bb\"ccc\"
-(’Mapa ncha) beha:((’Mapa ncha) beha:Ha ho joalo ka:dog, beha:Ha ho joalo ka:insects, beha:((’Mapa ncha) beha:15 ka:‘length’, beha:8 ka:‘width’) ka:‘size’, beha:(Lenane ← ‘tulips’ ; ‘roses’ ; ‘lillies’) ka:‘flower’, beha:Bohata ka:‘shed’, beha:Ke nnete ka:‘pool’, beha:2 ka:‘chairs’) ka:‘garden’
+(’Mapa ncha) beha:((’Mapa ncha) beha:Ha ho joalo ka:‘dog’, beha:Ha ho joalo ka:‘insects’, beha:((’Mapa ncha) beha:15 ka:‘length’, beha:8 ka:‘width’) ka:‘size’, beha:(Lenane ← ‘tulips’ ; ‘roses’ ; ‘lillies’) ka:‘flower’, beha:Bohata ka:‘shed’, beha:Ke nnete ka:‘pool’, beha:2 ka:‘chairs’) ka:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

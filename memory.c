@@ -315,6 +315,7 @@ int ctr_pool_bucket( ctr_size size ) {
 char* ctr_pool_alloc( ctr_size podSize ) {
 	if (!usePools) return (char*) calloc(podSize, 1);
 	char* memblock = NULL;
+	
 	if (podSize == spod && freespods>0) {
 		memblock = (char*) (freeslist[--freespods]);
 	} else if (podSize == spod && spodCount<spods) {

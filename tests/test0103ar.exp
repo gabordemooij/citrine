@@ -1,5 +1,5 @@
 9
-a موضوع ‘[Object]’  is NOT Nil.
+a موضوع ‘موضوع’  is NOT Nil.
 a منطقي ‘صحيح’  is NOT Nil.
 a منطقي ‘خاطئة’  is NOT Nil.
 a منطقي ‘خاطئة’  is NOT Nil.
@@ -7,5 +7,5 @@ a رقم ‘1’  is NOT Nil.
 a رقم ‘0’  is NOT Nil.
 a خيط ‘Str’  is NOT Nil.
 a خيط ‘’  is NOT Nil.
-a الشفرة ‘[Block]’  is NOT Nil.
+a الشفرة ‘الشفرة’  is NOT Nil.
 but.. Nil is.. certainly NIL!

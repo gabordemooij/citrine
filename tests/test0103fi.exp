@@ -1,5 +1,5 @@
 9
-a Esine ‘[Object]’  is NOT Nil.
+a Esine ‘Esine’  is NOT Nil.
 a Boolean ‘Totta’  is NOT Nil.
 a Boolean ‘Väärä’  is NOT Nil.
 a Boolean ‘Väärä’  is NOT Nil.
@@ -7,5 +7,5 @@ a Määrä ‘1’  is NOT Nil.
 a Määrä ‘0’  is NOT Nil.
 a Jono ‘Str’  is NOT Nil.
 a Jono ‘’  is NOT Nil.
-a Koodi ‘[Block]’  is NOT Nil.
+a Koodi ‘Koodi’  is NOT Nil.
 but.. Nil is.. certainly NIL!

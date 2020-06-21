@@ -6,5 +6,5 @@ The garden is ኒል meters long.
 Luckily, this day, there are ኒል wasps in the garden.
 The dog named ኒል sleeps under the tree.
 a\"bb\"ccc\"
-(ካርታ አዲስ) ያስገቡ:((ካርታ አዲስ) ያስገቡ:ኒል _በ:dog, ያስገቡ:ኒል _በ:insects, ያስገቡ:((ካርታ አዲስ) ያስገቡ:15 _በ:‘length’, ያስገቡ:8 _በ:‘width’) _በ:‘size’, ያስገቡ:(ዝርዝር ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _በ:‘flower’, ያስገቡ:ሐሰት _በ:‘shed’, ያስገቡ:እውነት ነው _በ:‘pool’, ያስገቡ:2 _በ:‘chairs’) _በ:‘garden’
+(ካርታ አዲስ) ያስገቡ:((ካርታ አዲስ) ያስገቡ:ኒል _በ:‘dog’, ያስገቡ:ኒል _በ:‘insects’, ያስገቡ:((ካርታ አዲስ) ያስገቡ:15 _በ:‘length’, ያስገቡ:8 _በ:‘width’) _በ:‘size’, ያስገቡ:(ዝርዝር ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _በ:‘flower’, ያስገቡ:ሐሰት _በ:‘shed’, ያስገቡ:እውነት ነው _በ:‘pool’, ያስገቡ:2 _በ:‘chairs’) _በ:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

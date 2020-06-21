@@ -6,5 +6,5 @@ The garden is Ніль meters long.
 Luckily, this day, there are Ніль wasps in the garden.
 The dog named Ніль sleeps under the tree.
 a\"bb\"ccc\"
-(Карта новы) пакласці:((Карта новы) пакласці:Ніль _у:dog, пакласці:Ніль _у:insects, пакласці:((Карта новы) пакласці:15 _у:‘length’, пакласці:8 _у:‘width’) _у:‘size’, пакласці:(Спіс ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _у:‘flower’, пакласці:Ілжывая _у:‘shed’, пакласці:Праўда _у:‘pool’, пакласці:2 _у:‘chairs’) _у:‘garden’
+(Карта новы) пакласці:((Карта новы) пакласці:Ніль _у:‘dog’, пакласці:Ніль _у:‘insects’, пакласці:((Карта новы) пакласці:15 _у:‘length’, пакласці:8 _у:‘width’) _у:‘size’, пакласці:(Спіс ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _у:‘flower’, пакласці:Ілжывая _у:‘shed’, пакласці:Праўда _у:‘pool’, пакласці:2 _у:‘chairs’) _у:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

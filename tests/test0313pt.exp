@@ -6,5 +6,5 @@ The garden is Nada meters long.
 Luckily, this day, there are Nada wasps in the garden.
 The dog named Nada sleeps under the tree.
 a\"bb\"ccc\"
-(Mapa novo) coloque em:((Mapa novo) coloque em:Nada __:dog, coloque em:Nada __:insects, coloque em:((Mapa novo) coloque em:15 __:‘length’, coloque em:8 __:‘width’) __:‘size’, coloque em:(Lista ← ‘tulips’ ; ‘roses’ ; ‘lillies’) __:‘flower’, coloque em:Falso __:‘shed’, coloque em:Verdade __:‘pool’, coloque em:2 __:‘chairs’) __:‘garden’
+(Mapa novo) coloque em:((Mapa novo) coloque em:Nada __:‘dog’, coloque em:Nada __:‘insects’, coloque em:((Mapa novo) coloque em:15 __:‘length’, coloque em:8 __:‘width’) __:‘size’, coloque em:(Lista ← ‘tulips’ ; ‘roses’ ; ‘lillies’) __:‘flower’, coloque em:Falso __:‘shed’, coloque em:Verdade __:‘pool’, coloque em:2 __:‘chairs’) __:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

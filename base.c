@@ -196,6 +196,20 @@ ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 	}
 }
 
+ctr_object* ctr_object_to_code(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_argument* newArgumentList;
+	ctr_object* string = ctr_build_empty_string();
+	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
+	newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_PAREN_OPEN );
+	string = ctr_string_append( string, newArgumentList );
+	newArgumentList->object = myself;
+	string = ctr_string_append( string, newArgumentList );
+	newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_PAREN_CLOSE );
+	string = ctr_string_append( string, newArgumentList );
+	ctr_heap_free(newArgumentList);
+	return string;
+}
+
 /**
  * @def
  * [ Object ] string
@@ -205,7 +219,7 @@ ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
  * ✎ write: x string, stop.
  */
 ctr_object* ctr_object_to_string( ctr_object* myself, ctr_argument* argumentList ) {
-	return ctr_build_string_from_cstring( CTR_SYM_OBJECT );
+	return ctr_build_string_from_cstring( CTR_DICT_OBJECT );
 }
 
 /**
@@ -1555,6 +1569,7 @@ ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size n1;
 	ctr_size n2;
 	char* dest;
+	ctr_gc_internal_pin(myself);
 	strObject = ctr_internal_cast2string(argumentList->object);
 	n1 = myself->value.svalue->vlen;
 	n2 = strObject->value.svalue->vlen;
@@ -1569,6 +1584,22 @@ ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 	myself->value.svalue->vlen  = (n1 + n2);
 	return myself;
 }
+
+ctr_object* ctr_string_to_code(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_argument* newArgumentList;
+	ctr_object* string = ctr_build_empty_string();
+	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
+	newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_OPEN );
+	string = ctr_string_append( string, newArgumentList );
+	newArgumentList->object = myself;
+	newArgumentList->object = ctr_string_quotes_escape( newArgumentList->object, newArgumentList );
+	string = ctr_string_append( string, newArgumentList );
+	newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_CLOSE );
+	string = ctr_string_append( string, newArgumentList );
+	ctr_heap_free(newArgumentList);
+	return string;
+}
+
 
 
 /**
@@ -2315,6 +2346,7 @@ ctr_object* ctr_string_quotes_escape(ctr_object* myself, ctr_argument* argumentL
        ctr_size j;
        len = myself->value.svalue->vlen;
        for( i = 0; i < myself->value.svalue->vlen; i++ ) {
+               if (*(myself->value.svalue->value + i)=='\\') continue;
                if (
                strncmp( myself->value.svalue->value + i, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len) == 0 ||
                strncmp( myself->value.svalue->value + i, CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len) == 0
@@ -2325,6 +2357,7 @@ ctr_object* ctr_string_quotes_escape(ctr_object* myself, ctr_argument* argumentL
        str = ctr_heap_allocate( len + 1 );
        j = 0;
        for( i = 0; i < myself->value.svalue->vlen; i++ ) {
+			 if (*(myself->value.svalue->value + i)=='\\') continue;
                if (
                strncmp( myself->value.svalue->value + i, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len) == 0 ||
                strncmp( myself->value.svalue->value + i, CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len) == 0
@@ -2552,5 +2585,5 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
  * ✎ write: x, stop.
  */
 ctr_object* ctr_block_to_string(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_string_from_cstring( CTR_SYM_BLOCK );
+	return ctr_build_string_from_cstring( CTR_DICT_CODE_BLOCK );
 }

@@ -1,5 +1,5 @@
 9
-a Objè ‘[Object]’  is NOT Nil.
+a Objè ‘Objè’  is NOT Nil.
 a Boolean ‘Vrè’  is NOT Nil.
 a Boolean ‘Fo’  is NOT Nil.
 a Boolean ‘Fo’  is NOT Nil.
@@ -7,5 +7,5 @@ a Nimewo ‘1’  is NOT Nil.
 a Nimewo ‘0’  is NOT Nil.
 a Fisèl ‘Str’  is NOT Nil.
 a Fisèl ‘’  is NOT Nil.
-a Kòd ‘[Block]’  is NOT Nil.
+a Kòd ‘Kòd’  is NOT Nil.
 but.. Nil is.. certainly NIL!

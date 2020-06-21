@@ -1,5 +1,5 @@
 9
-a ობიექტი ‘[Object]’  is NOT Nil.
+a ობიექტი ‘ობიექტი’  is NOT Nil.
 a ბულიონი ‘მართალია’  is NOT Nil.
 a ბულიონი ‘ყალბი’  is NOT Nil.
 a ბულიონი ‘ყალბი’  is NOT Nil.
@@ -7,5 +7,5 @@ a რიცხვი ‘1’  is NOT Nil.
 a რიცხვი ‘0’  is NOT Nil.
 a სიმებიანი ‘Str’  is NOT Nil.
 a სიმებიანი ‘’  is NOT Nil.
-a კოდი ‘[Block]’  is NOT Nil.
+a კოდი ‘კოდი’  is NOT Nil.
 but.. Nil is.. certainly NIL!

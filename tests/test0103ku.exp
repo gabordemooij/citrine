@@ -1,5 +1,5 @@
 9
-a Tişt ‘[Object]’  is NOT Nil.
+a Tişt ‘Tişt’  is NOT Nil.
 a Boolean ‘Rast’  is NOT Nil.
 a Boolean ‘şaş’  is NOT Nil.
 a Boolean ‘şaş’  is NOT Nil.
@@ -7,5 +7,5 @@ a Jimare ‘1’  is NOT Nil.
 a Jimare ‘0’  is NOT Nil.
 a Ben ‘Str’  is NOT Nil.
 a Ben ‘’  is NOT Nil.
-a Navê dizî ‘[Block]’  is NOT Nil.
+a Navê dizî ‘Navê dizî’  is NOT Nil.
 but.. Nil is.. certainly NIL!
