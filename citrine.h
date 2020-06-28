@@ -572,6 +572,7 @@ extern ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_map_values(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_map_key_value(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_map_find(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Console Interface
