@@ -8,6 +8,6 @@ Map new
 	five: 5.
 	
 (x has: 3) true: {
-	✎ write: (x find: 3), stop.
+	✎ write: ‘three’, stop.
 }.
 
