@@ -1087,26 +1087,6 @@ ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(found);
 }
 
-ctr_object* ctr_map_find(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* found = CtrStdNil;
-	ctr_mapitem* m;
-	ctr_object* candidate;
-	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
-	m = myself->properties->head;
-	while(m) {
-		candidate = ctr_internal_cast2string(m->value);
-		if ( needle->value.svalue->vlen == candidate->value.svalue->vlen ) {
-			if ( strncmp(
-			candidate->value.svalue->value,
-			needle->value.svalue->value, needle->value.svalue->vlen) == 0) {
-				found = m->key;
-			}
-		}
-		m = m->next;
-	}
-	return found;
-}
-
 /**
  * @def
  * [ Map ] string
