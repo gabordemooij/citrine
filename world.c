@@ -46,7 +46,7 @@ int ctr_context_id;
  */
 char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
    char* prg;
-   char ch;
+   int ch;
    int prev;
    uint64_t size;
    uint64_t real_size;
