@@ -350,6 +350,31 @@ ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList)
 
 /**
  * @def
+ * [ Program ] number.
+ *
+ * @example
+ * ☞ x := Program number.
+ * ✎ write: x, stop.
+ */
+ctr_object* ctr_program_tonumber(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float(CTR_VERSION_NUM);
+}
+
+/**
+ * @def
+ * [ Program ] string.
+ *
+ * @example
+ * ☞ x := Program string.
+ * ✎ write: x, stop.
+ */
+ctr_object* ctr_program_tostring(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_string_from_cstring(CTR_NAME);
+}
+
+
+/**
+ * @def
  * [ Program ] use: [ String ]
  *
  * @example
