@@ -10,7 +10,6 @@
  */
 #define CTR_VERSION "0.9.3"
 #define CTR_VERSION_NUM 93
-#define CTR_NAME    "Solleveld"
 
 /**
  * Define the Citrine tokens 
