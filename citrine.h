@@ -8,7 +8,9 @@
 /**
  * Version information
  */
-#define CTR_VERSION "0.9.2"
+#define CTR_VERSION "0.9.3"
+#define CTR_VERSION_NUM 93
+#define CTR_NAME    "Solleveld"
 
 /**
  * Define the Citrine tokens 
@@ -626,6 +628,8 @@ extern ctr_object* ctr_program_countdown(ctr_object* myself, ctr_argument* ctr_a
 extern ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList );
 extern ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList );
 extern ctr_object* ctr_program_include(ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_program_tonumber(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_program_tostring(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Clock Interface
