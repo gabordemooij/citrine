@@ -369,7 +369,7 @@ ctr_object* ctr_program_tonumber(ctr_object* myself, ctr_argument* argumentList)
  * ✎ write: x, stop.
  */
 ctr_object* ctr_program_tostring(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_string_from_cstring(CTR_NAME);
+	return ctr_build_string_from_cstring(CTR_MSG_WELCOME);
 }
 
 
