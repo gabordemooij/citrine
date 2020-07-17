@@ -107,6 +107,14 @@ ctr_object* ctr_build_nil() {
 	return CtrStdNil;
 }
 
+
+ctr_object* ctr_nil_new(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* nilObject = ctr_build_nil();
+	nilObject->link = myself;
+	return nilObject;
+}
+
+
 /**
  * @def
  * [ Nil ] Nil?
@@ -547,6 +555,12 @@ ctr_object* ctr_build_bool(int truth) {
 	return boolObject;
 }
 
+ctr_object* ctr_bool_new(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* boolObject = ctr_build_bool(0);
+	boolObject->link = myself;
+	return boolObject;
+}
+
 /**
  * @def
  * [ Boolean ] = [ Boolean ]
@@ -796,6 +810,12 @@ ctr_object* ctr_build_number(char* n) {
 	ctr_object* numberObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	numberObject->value.nvalue = atof(n);
 	numberObject->link = CtrStdNumber;
+	return numberObject;
+}
+
+ctr_object* ctr_number_new(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* numberObject = ctr_build_number_from_float(0);
+	numberObject->link = myself;
 	return numberObject;
 }
 
@@ -1583,6 +1603,13 @@ ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 	myself->value.svalue->value = dest;
 	myself->value.svalue->vlen  = (n1 + n2);
 	return myself;
+}
+
+
+ctr_object* ctr_string_new(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* stringObject = ctr_build_empty_string();
+	stringObject->link = myself;
+	return stringObject;
 }
 
 ctr_object* ctr_string_to_code(ctr_object* myself, ctr_argument* argumentList) {

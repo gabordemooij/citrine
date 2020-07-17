@@ -378,6 +378,7 @@ extern uint8_t ctr_callstack_index;
 /**
  * Nil Interface
  */
+extern ctr_object* ctr_nil_new(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* argumentList);
@@ -411,6 +412,7 @@ extern ctr_object* ctr_object_to_code(ctr_object* myself, ctr_argument* ctr_argu
 /**
  * Boolean Interface
  */
+extern ctr_object* ctr_bool_new(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_bool_if_false(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList);
@@ -429,6 +431,7 @@ extern ctr_object* ctr_bool_copy(ctr_object* myself, ctr_argument* argumentList)
 /**
  * Number Interface
  */
+extern ctr_object* ctr_number_new(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_number_inc(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList);
@@ -473,6 +476,7 @@ extern ctr_object* ctr_number_copy(ctr_object* myself, ctr_argument* argumentLis
 /**
  * String Interface
  */
+extern ctr_object* ctr_string_new(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_string_bytes(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_string_fromto(ctr_object* myself, ctr_argument* argumentList);

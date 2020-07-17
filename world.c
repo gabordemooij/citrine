@@ -610,6 +610,7 @@ void ctr_initialize_world() {
 
 	/* Boolean */
 	CtrStdBool = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
+	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_bool_new );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_IFTRUE ), &ctr_bool_if_true );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_IFFALSE ), &ctr_bool_if_false );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_BREAK ), &ctr_bool_break );
@@ -641,6 +642,7 @@ void ctr_initialize_world() {
 
 	/* Number */
 	CtrStdNumber = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_number_new );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_PLUS ), &ctr_number_add );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_ADD_SET ), &ctr_number_inc );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_MINUS ), &ctr_number_minus );
@@ -683,6 +685,7 @@ void ctr_initialize_world() {
 
 	/* String */
 	CtrStdString = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_string_new );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_BYTES ), &ctr_string_bytes );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_LENGTH ), &ctr_string_length );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_FROM_LENGTH ), &ctr_string_from_length );
