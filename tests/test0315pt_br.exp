@@ -1,0 +1,27 @@
+(Novo mapa) coloque:“a"b” no:“test”
+Invalid JSON.
+(Novo mapa) coloque:(Listar ← 1 ; 2 ; (Listar ← 3 ; 4) ; ((Novo mapa) coloque:(Listar ← 3 ; 4) no:“bar”, coloque:1 no:“foo”)) no:“nested”, coloque:Falso no:“legend”, coloque:27 no:“age”, coloque:“Jack” no:“name”
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld
