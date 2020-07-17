@@ -5,20 +5,28 @@ Program clean memory.
 
 ☞ Veggy ≔ Object new.
 Veggy on: ‘new’ do: {
-	☞ f ≔ ⛏ `new.
-	f veggies: 0.
-	↲ f.
+	☞ v ≔ ⛏ `new.
+	v init.
+	↲ v.
 }.
+
+Veggy on: ‘init’ do: { ⚿ veggies ≔ 0. }.
+
 Veggy on: ‘carrots:’ do: { :a ⚿ veggies ≔ a. ↲ Nil. }.
 Veggy on: ‘carrots’ do: { ↲ ⚿ veggies. }.
 Veggy on: ‘+’ do: { :f
 	☞ n ≔ Veggy new.
-	n carrots: (1 + ⚿ veggies).
+	n carrots: (f carrots + ⚿ veggies).
 	↲ n.
 }.
+
+Veggy on: ‘string’ do: {
+	↲ ⚿ veggies string.
+}.
+
 Number on: ‘carrots’ do: {
-	☞ x ≔ ⛏ `new.
-	x Veggy: ⛏.
+	☞ x ≔ Veggy new.
+	x carrots: ⛏.
 	↲ x.
 }.
 
