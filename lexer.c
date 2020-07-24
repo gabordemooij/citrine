@@ -22,7 +22,9 @@ char* ctr_eofcode;
 char* ctr_clex_oldptr;
 char* ctr_clex_olderptr;
 int ctr_clex_old_line_number = 0;
+int ctr_clex_older_line_number = 0;
 int ctr_clex_ignore_modes = 0;
+int ctr_clex_number_of_lines = 0;
 
 char* ctr_clex_desc_tok_ref = "reference";
 char* ctr_clex_desc_tok_quote = "'";
@@ -220,6 +222,7 @@ void ctr_clex_putback() {
 	ctr_code = ctr_clex_oldptr;
 	ctr_clex_oldptr = ctr_clex_olderptr;
 	ctr_clex_line_number = ctr_clex_old_line_number;
+	ctr_clex_old_line_number = ctr_clex_older_line_number;
 }
 
 /**
@@ -235,6 +238,7 @@ int ctr_clex_tok() {
 	ctr_clex_tokvlen = 0;
 	ctr_clex_olderptr = ctr_clex_oldptr;
 	ctr_clex_oldptr = ctr_code;
+	ctr_clex_older_line_number = ctr_clex_old_line_number;
 	ctr_clex_old_line_number = ctr_clex_line_number;
 	i = 0;
 	c = *ctr_code;

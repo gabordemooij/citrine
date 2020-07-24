@@ -1,0 +1,12 @@
+‘SINGLE_LANGUAGE’.
+☞ x13 ≔ Object new.
+x13 on: ‘a’ do: { :a ✎ write: 0, stop. }.
+x13 on: ‘a:’ do: { :a ✎ write: a, stop. ↲ 5. }.
+x13 on: ‘a:b:’ do: { :a :b ✎ write: (a + b), stop. }.
+x13 a 1 + 0.
+x13 a: 1.
+x13 a: 1 b: 1.
+x13 a: 1 + 1 b: 1.
+x13 a: 1 + 1 b: 1 + 1.
+x13 a: 1 + 1 + 1 b: 1 + 1.
+x13 a: (x13 a: 6) b: 1 + 1.

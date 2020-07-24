@@ -90,7 +90,8 @@ ctr_tnode* ctr_cparse_message(int mode) {
 	msg = ctr_heap_allocate_tracked( 255 * sizeof( char ) );
 	memcpy(msg, s, msgpartlen);
 	ulen = ctr_getutf8len(msg, msgpartlen);
-	isBin = (ulen == 1);
+	lookAhead = ctr_clex_tok(); ctr_clex_putback();
+	isBin = (ulen == 1 && lookAhead != CTR_TOKEN_COLON);
 	if (mode == 2 && isBin) {
 		ctr_clex_putback();
 		return m;
@@ -122,7 +123,9 @@ ctr_tnode* ctr_cparse_message(int mode) {
 		while(1) {
 			li = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
 			li->node = ctr_cparse_expr(1);
-			if (li->node == NULL) return NULL;
+			if (li->node == NULL) {
+				return NULL;
+			}
 			if (first) {
 				m->nodes = li;
 				curlistitem = m->nodes;
@@ -477,12 +480,19 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 	ctr_tnode* r;
 	ctr_tnode* e;
 	int t2;
+	int t3;
 	ctr_tlistitem* nodes;
 	ctr_tlistitem* rli;
 	r = ctr_cparse_receiver();
 	if (r == NULL) return NULL;
 	t2 = ctr_clex_tok();
+	t3 = ctr_clex_tok();
 	ctr_clex_putback();
+	ctr_clex_putback();
+	/* new part of message begins, end of argument */
+	if (mode == 1 && t2 == CTR_TOKEN_REF && t3 == CTR_TOKEN_COLON ) {
+		return r;
+	}
 	/* user tries to put colon directly after recipient */
 	if ( t2 == CTR_TOKEN_COLON ) {
 		ctr_cparse_emit_error_unexpected( t2, CTR_ERR_EXP_MSG2 );
