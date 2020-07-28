@@ -75,3 +75,4 @@
 #define CTR_MERR_MALLOC   "Ma waho o ka hoʻomanaʻo ʻAi ʻole e hāʻawi manawaleʻa %lu  bytes (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
 #define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"
+#define CTR_STDTIMEZONE   "UTC"

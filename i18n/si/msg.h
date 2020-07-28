@@ -75,3 +75,4 @@
 #define CTR_MERR_MALLOC   "මතකයෙන් ඉවතට  %lu  බයිට් වෙන් කිරීමට අපොහොසත් විය (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
 #define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"
+#define CTR_STDTIMEZONE   "UTC"

@@ -75,3 +75,4 @@
 #define CTR_MERR_MALLOC   "မှတ်ဥာဏ်မရှိ  %lu  bytes ကိုသတ်မှတ်ရန်မအောင်မြင်ပါ။ (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
 #define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"
+#define CTR_STDTIMEZONE   "UTC"

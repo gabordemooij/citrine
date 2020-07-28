@@ -75,3 +75,4 @@
 #define CTR_MERR_MALLOC   "Fuori dalla memoria Impossibile allocare %lu  byte (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
 #define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"
+#define CTR_STDTIMEZONE   "UTC"
