@@ -167,7 +167,7 @@
 #define CTR_DICT_MULTIPLIER_SET  "vermenigvuldig met:"
 #define CTR_DICT_DIVIDER_SET     "deel door:"
 #define CTR_DICT_LIKE            "zoals:"
-#define CTR_DICT_FORMAT          "formaat:"
+#define CTR_DICT_FORMAT          "notatie:"
 #define CTR_DICT_LOCK            "vergrendel"
 #define CTR_DICT_UNLOCK          "ontgrendel"
 #define CTR_DICT_LAST            "laatste"
