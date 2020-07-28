@@ -76,3 +76,5 @@
 #define CTR_MERR_POOL     "मेमोरी क्षेत्र आवंटित करने में असमर्थ। \n"
 #define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"
  
+
+#define CTR_STDTIMEZONE   "UTC"

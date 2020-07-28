@@ -75,3 +75,5 @@
 #define CTR_MERR_MALLOC   "Nu există destulă memorie. Nu au putut fi alocaţi %lu octeţi (malloc a eşuat). \n"
 #define CTR_MERR_POOL     "Nu s-a putut aloca spaţiul de memorie.\n"
 #define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"
+
+#define CTR_STDTIMEZONE   "UTC"

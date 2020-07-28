@@ -75,3 +75,4 @@
 #define CTR_MERR_MALLOC   "मेमोरी सकियो।  %lu  बाइट्स बाँडफाँड गर्न असफल। (malloc). \n"
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
 #define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"
+#define CTR_STDTIMEZONE   "UTC"

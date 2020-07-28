@@ -75,3 +75,5 @@
 #define CTR_MERR_MALLOC   "Neužtenka atminties. Neįmanoma paskirti %lu bitų (malloc nesuveikė). \n"
 #define CTR_MERR_POOL     "Neįmanoma paskirti atminties.\n"
 #define CTR_STDDATEFRMT   "%Y-%m-%d %H:%M:%S"
+
+#define CTR_STDTIMEZONE   "UTC"
