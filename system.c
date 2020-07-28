@@ -1100,7 +1100,7 @@ ctr_object* ctr_clock_weekday( ctr_object* myself, ctr_argument* argumentList ) 
 		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), 0 )
 	)->value.nvalue;
 	date = localtime( &timeStamp );
-	return ctr_build_number_from_float( (double_t) date->tm_wday );
+	return ctr_build_number_from_float( (double_t) date->tm_wday + 1 );
 }
 
 /**
@@ -1237,7 +1237,7 @@ ctr_object* ctr_clock_to_number( ctr_object* myself, ctr_argument* argumentList 
  */
 void ctr_clock_init( ctr_object* clock ) {
 	ctr_internal_object_add_property( clock, ctr_build_string_from_cstring( CTR_DICT_TIME ), ctr_build_number_from_float( (double_t) time( NULL ) ), 0 );
-	ctr_internal_object_add_property( clock, ctr_build_string_from_cstring( CTR_DICT_ZONE ), ctr_build_string_from_cstring( "UTC" ), 0 );
+	ctr_internal_object_add_property( clock, ctr_build_string_from_cstring( CTR_DICT_ZONE ), ctr_build_string_from_cstring( CTR_STDTIMEZONE ), 0 );
 }
 
 /**
