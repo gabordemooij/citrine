@@ -12,3 +12,8 @@ for FILE in $(ls downloads/OpenBSD)
 do
 	echo "<li><a href=\"/downloads/iso/OpenBSD/${FILE}\">${FILE}</a></li>"
 done
+for FILE in $(ls downloads/windows32)
+do
+        echo "<li><a href=\"/downloads/iso/windows32/${FILE}\">${FILE}</a></li>"
+done
+
