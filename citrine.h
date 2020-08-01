@@ -529,6 +529,7 @@ extern ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentLis
 extern ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my);
 extern ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_block_procedure(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_block_to_string(ctr_object* myself, ctr_argument* argumentList);
 
 /**
