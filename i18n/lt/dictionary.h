@@ -207,3 +207,4 @@
 #define CTR_DICT_RETURN                          "↲"
 #define CTR_DICT_SUPER                           "`"
 #define CTR_DICT_CODE                            "code"
+#define CTR_DICT_PROCEDURE                       "procedūra"

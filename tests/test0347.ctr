@@ -1,0 +1,8 @@
+✎ on: ‘test’ do: {
+	☞ x ≔ 3.
+	{
+		(x = 3) true: { ⛏ write: ‘OK↵’. }, break.
+		⛏ write: ‘NOT OK↵’.
+	} procedure.
+}.
+✎ test.

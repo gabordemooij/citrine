@@ -738,6 +738,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_ERROR ), &ctr_block_error );
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_CATCH ), &ctr_block_catch );
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_MULTIPLIER ), &ctr_block_times );
+	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_PROCEDURE ), &ctr_block_procedure );
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_WHILE ), &ctr_block_while_true );
 	ctr_internal_create_func(CtrStdBlock, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_block_to_string );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_CODE_BLOCK ), CtrStdBlock, 0 );
