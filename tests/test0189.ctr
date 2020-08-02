@@ -1,5 +1,5 @@
 Boolean on: ‘xor:’ do: { :b
-	↲ ((⛏ and: b not) or: (⛏ not and: b)).
+	↲ ((⛏ &: b not) |: (⛏ not &: b)).
 }.
 
 ☞ usedMemory1 ≔ 0.
@@ -11,9 +11,9 @@ Program tidiness: 0.
 
 ☞ money  ≔ False.
 ☞ desire ≔ True.
-☞ canDo ≔ (money and: desire).
+☞ canDo ≔ (money &: desire).
 ☞ depression ≔ (money xor: desire).
-☞ isHuman ≔ (money or: desire).
+☞ isHuman ≔ (money |: desire).
 ☞ isRobot ≔ (money ! desire).
 ☞ PoemAboutLife ≔ 
 	‘I am a ’ + 
@@ -39,9 +39,9 @@ usedMemory1 ≔ (Program memory ? 1).
 
 money  ≔ False.
 desire ≔ True.
-canDo ≔ (money and: desire).
+canDo ≔ (money &: desire).
 depression ≔ (money xor: desire).
-isHuman ≔ (money or: desire).
+isHuman ≔ (money |: desire).
 isRobot ≔ (money ! desire).
 PoemAboutLife ≔ 
 	‘I am a ’ + 
@@ -68,9 +68,9 @@ usedMemory2 ≔ (Program memory ? 1).
 
 money  ≔ False.
 desire ≔ True.
-canDo ≔ (money and: desire).
+canDo ≔ (money &: desire).
 depression ≔ (money xor: desire).
-isHuman ≔ (money or: desire).
+isHuman ≔ (money |: desire).
 isRobot ≔ (money ! desire).
 PoemAboutLife ≔ 
 	‘I am a ’ + 

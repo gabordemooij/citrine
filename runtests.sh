@@ -28,7 +28,7 @@ cc -c ccgi.c -Wall	-Werror -fPIC -o ccgi.o
 cc -c prefork.c -Wall -Werror -fPIC -o prefork.o
 cd ..
 
-cc -c request.c -Wall -Werror -I ../../i18nsel/us -D langUS -fPIC -o request.o
+cc -c request.c -Wall -Werror -I ../../i18nsel/xx -D langXX -fPIC -o request.o
 cc ${LDFLAGS} -o libctrrequest.so request.o ccgi-1.2/ccgi.o ccgi-1.2/prefork.o
 
 cc -c request.c -Wall -Werror -I ../../i18nsel/nl -D langNL -fPIC -o verzoek.o
@@ -44,8 +44,8 @@ cp plugins/request/libctrverzoek.so mods/verzoek/libctrverzoek.so
 cd plugins/jsmn/jsmn;
 gcc -c jsmn.c -Wall	-Werror -fpic -DJSMN_STRICT -DJSMN_PARENT_LINKS -o jsmn.o
 cd ..
-gcc -c jsmn.c -Wall	-I ../../i18nsel/us -I i18nsel/us -Werror -fpic -DJSMN_STRICT -DJSMN_PARENT_LINKS -o jsmn.o ; gcc -shared -o libctrjsmn.so jsmn.o jsmn/jsmn.o
-gcc -c jsmn.c -Wall	-I ../../i18nsel/nl -I i18nsel/nl -Werror -fpic -DJSMN_STRICT -DJSMN_PARENT_LINKS -o jsmnnl.o ; gcc -shared -o libctrjsmnnl.so jsmnnl.o jsmn/jsmn.o
+gcc -c jsmn.c -Wall	-I ../../i18n/us -I i18n/xx -Werror -fpic -DJSMN_STRICT -DJSMN_PARENT_LINKS -o jsmn.o ; gcc -shared -o libctrjsmn.so jsmn.o jsmn/jsmn.o
+gcc -c jsmn.c -Wall	-I ../../i18n/nl -I i18n/nl -Werror -fpic -DJSMN_STRICT -DJSMN_PARENT_LINKS -o jsmnnl.o ; gcc -shared -o libctrjsmnnl.so jsmnnl.o jsmn/jsmn.o
 cd ..
 cd ..
 cp plugins/jsmn/libctrjsmn.so mods/json/libctrjson.so
@@ -53,10 +53,10 @@ cp plugins/jsmn/libctrjsmnnl.so mods/jsonnl/libctrjsonnl.so
 
 
 ./mk.sh
-cp bin/${OS}/ctrus bin/Generic/ctr
+cp bin/${OS}/ctrxx bin/Generic/ctr
 
 #Add plugin translations
-./bin/${OS}/ctrus -g plugins/request/i18nsel/us/dictionary.h plugins/request/i18nsel/nl/dictionary.h >> dict/ennl.dict
+./bin/${OS}/ctrxx -g plugins/request/i18n/us/dictionary.h plugins/request/i18n/nl/dictionary.h >> dict/xxnl.dict
 
 
 j=1
@@ -80,30 +80,30 @@ for i in $(find tests -name 'test*.ctr'); do
 	directive=`head -n1 $fitem`
 	echo "[translating...]"
 	if [ "$directive" != "‘SINGLE_LANGUAGE’." ]; then
-		rm tests/runner7.ctr ; ./bin/${OS}/ctrus -t dict/ennl.dict tests/runner1.ctr 1> tests/runner7.ctr 2> tests/terrors7.log
-		rm tests/runner8.ctr ; ./bin/${OS}/ctrus -t dict/ennl.dict tests/runner2.ctr 1> tests/runner8.ctr 2> tests/terrors8.log
-		rm tests/runner9.ctr ; ./bin/${OS}/ctrus -t dict/ennl.dict tests/runner3.ctr 1> tests/runner9.ctr 2> tests/terrors9.log
-		rm tests/runner10.ctr ; ./bin/${OS}/ctrus -t dict/ennl.dict tests/runner4.ctr 1> tests/runner10.ctr 2> tests/terrors10.log
-		rm tests/runner11.ctr ; ./bin/${OS}/ctrus -t dict/ennl.dict tests/runner5.ctr 1> tests/runner11.ctr 2> tests/terrors11.log
-		rm tests/runner12.ctr ; ./bin/${OS}/ctrus -t dict/ennl.dict tests/runner6.ctr 1> tests/runner12.ctr 2> tests/terrors12.log
-		rm tests/runner13.ctr ; ./bin/${OS}/ctrnl -t dict/nlen.dict tests/runner12.ctr 1> tests/runner13.ctr 2> tests/terrors13.log
+		rm tests/runner7.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/runner1.ctr 1> tests/runner7.ctr 2> tests/terrors7.log
+		rm tests/runner8.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/runner2.ctr 1> tests/runner8.ctr 2> tests/terrors8.log
+		rm tests/runner9.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/runner3.ctr 1> tests/runner9.ctr 2> tests/terrors9.log
+		rm tests/runner10.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/runner4.ctr 1> tests/runner10.ctr 2> tests/terrors10.log
+		rm tests/runner11.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/runner5.ctr 1> tests/runner11.ctr 2> tests/terrors11.log
+		rm tests/runner12.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/runner6.ctr 1> tests/runner12.ctr 2> tests/terrors12.log
+		rm tests/runner13.ctr ; ./bin/${OS}/ctrnl -t dict/nlxx.dict tests/runner12.ctr 1> tests/runner13.ctr 2> tests/terrors13.log
 		for ISO in $(ls i18nsel)
 		do
-			rm tests/runner${ISO}.ctr ; ./bin/${OS}/ctrus -t dict/en${ISO}.dict tests/runner1.ctr 1>tests/runner${ISO}.ctr 2>tests/terrors${ISO}.log
+			rm tests/runner${ISO}.ctr ; ./bin/${OS}/ctrxx -t dict/xx${ISO}.dict tests/runner1.ctr 1>tests/runner${ISO}.ctr 2>tests/terrors${ISO}.log
 		done
 	fi
 	echo "[running...]";
 	if [ "$directive" == "“NL-ONLY”." ]; then
 		echo "test" | ./bin/${OS}/ctrnl ${fitem} 1>/tmp/a0 2>/tmp/b0
 	else
-		echo "test" | ./bin/${OS}/ctrus ${fitem} 1>/tmp/a0 2>/tmp/b0
+		echo "test" | ./bin/${OS}/ctrxx ${fitem} 1>/tmp/a0 2>/tmp/b0
 		if [ "$directive" != "‘SINGLE_RUN’." ]; then
-			echo "test" | ./bin/${OS}/ctrus tests/runner1.ctr 1>/tmp/a1 2>/tmp/b1
-			echo "test" | ./bin/${OS}/ctrus tests/runner2.ctr 1>/tmp/a2 2>/tmp/b2
-			echo "test" | ./bin/${OS}/ctrus tests/runner3.ctr 1>/tmp/a3 2>/tmp/b3
-			echo "test" | ./bin/${OS}/ctrus tests/runner4.ctr 1>/tmp/a4 2>/tmp/b4
-			echo "test" | ./bin/${OS}/ctrus tests/runner5.ctr 1>/tmp/a5 2>/tmp/b5
-			echo "test" | ./bin/${OS}/ctrus tests/runner6.ctr 1>/tmp/a6 2>/tmp/b6
+			echo "test" | ./bin/${OS}/ctrxx tests/runner1.ctr 1>/tmp/a1 2>/tmp/b1
+			echo "test" | ./bin/${OS}/ctrxx tests/runner2.ctr 1>/tmp/a2 2>/tmp/b2
+			echo "test" | ./bin/${OS}/ctrxx tests/runner3.ctr 1>/tmp/a3 2>/tmp/b3
+			echo "test" | ./bin/${OS}/ctrxx tests/runner4.ctr 1>/tmp/a4 2>/tmp/b4
+			echo "test" | ./bin/${OS}/ctrxx tests/runner5.ctr 1>/tmp/a5 2>/tmp/b5
+			echo "test" | ./bin/${OS}/ctrxx tests/runner6.ctr 1>/tmp/a6 2>/tmp/b6
 			if [ "$directive" != "‘SINGLE_LANGUAGE’." ]; then
 				echo "test" | ./bin/${OS}/ctrnl tests/runner7.ctr 1>/tmp/a7 2>/tmp/b7
 				echo "test" | ./bin/${OS}/ctrnl tests/runner8.ctr 1>/tmp/a8 2>/tmp/b8
@@ -111,7 +111,7 @@ for i in $(find tests -name 'test*.ctr'); do
 				echo "test" | ./bin/${OS}/ctrnl tests/runner10.ctr 1>/tmp/a10 2>/tmp/b10
 				echo "test" | ./bin/${OS}/ctrnl tests/runner11.ctr 1>/tmp/a11 2>/tmp/b11
 				echo "test" | ./bin/${OS}/ctrnl tests/runner12.ctr 1>/tmp/a12 2>/tmp/b12
-				echo "test" | ./bin/${OS}/ctrus tests/runner13.ctr 1>/tmp/a13 2>/tmp/b13
+				echo "test" | ./bin/${OS}/ctrxx tests/runner13.ctr 1>/tmp/a13 2>/tmp/b13
 				echo "test" | ./bin/${OS}/ctrro tests/runner14.ctr 1>/tmp/a14 2>/tmp/b14
 				for ISO in $(ls i18nsel)
 				do
@@ -175,7 +175,7 @@ for i in $(find tests -name 'test*.ctr'); do
 
 		for ISO in $(ls i18nsel)
 		do
-			if [ $ISO != 'us' ]; then
+			if [ $ISO != 'xx' ]; then
 				actual=`cat /tmp/a${ISO} /tmp/b${ISO}`
 				langexp="${i%%.ctr}${ISO}.exp"
 				if [ -f $langexp ]; then
