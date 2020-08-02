@@ -4,7 +4,7 @@
 	☞ x ≔ Nil.
 	{
 		x ≔ Number between: a and: b.
-		((x < minimum) or: (x > maximum)) true: { 
+		((x < minimum) |: (x > maximum)) true: { 
 			✎ write: (‘Invalid value!’).
 			Program end.
 		}.

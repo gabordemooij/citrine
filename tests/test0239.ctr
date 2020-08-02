@@ -46,7 +46,7 @@ b on: ‘boolean’ do: {
 ✎ write: a, stop.  
 ✎ write: (90 + a), stop. 
 ✎ write: b, stop. 
-✎ write: (True and: b), stop.
+✎ write: (True &: b), stop.
 
 a ≔ List ← ‘hello’ ; ‘world’ ; True ; Nil ; 666. 
 a ≔ a + ( List ← 1 ).
@@ -74,7 +74,7 @@ a ≔ a + ( List ← 1 ).
 
 {
 	a on: ‘boolean’ do: { ↲ Nil. }.
-	a ≔ True and: a. 
+	a ≔ True &: a. 
 } catch: { :error
 	✎ write: ‘Error noted: ’ + error, stop.
 }, run.
@@ -102,7 +102,7 @@ a ≔ a + ( List ← 1 ).
 
 {
 	a on: ‘boolean’ do: { ↲ 1. }.
-	a ≔ True and: a.
+	a ≔ True &: a.
 } catch: { :error
 	✎ write: ‘Error noted: ’ + error, stop.
 }, run.
@@ -130,7 +130,7 @@ a ≔ a + ( List ← 1 ).
 
 {
 	a on: ‘boolean’ do: { ↲ ‘’. }.
-	a ≔ True and: a.
+	a ≔ True &: a.
 } catch: { :error
 	✎ write: ‘Error noted: ’ + error, stop.
 }, run.
@@ -159,7 +159,7 @@ a ≔ a + ( List ← 1 ).
 
 {
 	a on: ‘boolean’ do: { ↲ (Object new). }.
-	a ≔ True and: a.
+	a ≔ True &: a.
 } catch: { :error
 	✎ write: ‘Error noted: ’ + error, stop.
 }, run.
