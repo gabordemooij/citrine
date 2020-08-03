@@ -14,8 +14,8 @@ do
 	make -f $MAKEFILE clean
 	make -f $MAKEFILE all
 	rm dict/xx${ISO}.dict
-	bin/${OS}/ctrxx -g i18n/xx/dictionary.h i18n/${ISO}/dictionary.h > dict/xx${ISO}.dict
-	bin/${OS}/ctrxx -g i18n/${ISO}/dictionary.h i18n/xx/dictionary.h > dict/${ISO}xx.dict
+	bin/${OS}/ctr -g i18n/xx/dictionary.h i18n/${ISO}/dictionary.h > dict/xx${ISO}.dict
+	bin/${OS}/ctr -g i18n/${ISO}/dictionary.h i18n/xx/dictionary.h > dict/${ISO}xx.dict
 	cat i18n/${ISO}/extra.dict >> dict/xx${ISO}.dict
 done
 
