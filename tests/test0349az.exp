@@ -1,0 +1,36 @@
+Nil
+Nil
+Boolean
+Doğru
+Boolean
+Yalan
+Nömrə
+1
+Nömrə
+-3
+Nömrə
+9,2
+Nömrə
+-9,2
+Siyahı
+Siyahı yeni 
+Siyahı
+Siyahı ← 1 ; 2
+Siyahı
+Siyahı ← 1 ; (Siyahı ← 2)
+Siyahı
+Siyahı ← 1 ; (Siyahı ← 2) ; 3
+Siyahı
+Siyahı ← 1 ; ((Xəritə yeni) qoymaq:‘a’ __:‘b’) ; 3
+Siyahı
+Siyahı ← 1 ; ((Xəritə yeni) qoymaq:(Siyahı ← 9) __:‘b’) ; 3
+Xəritə
+(Xəritə yeni) qoymaq:2 __:‘1’
+Xəritə
+(Xəritə yeni) qoymaq:2 __:‘x’
+Xəritə
+(Xəritə yeni) qoymaq:(Siyahı ← 1 ; 2) __:‘x’
+Xəritə
+(Xəritə yeni) qoymaq:(Siyahı ← ((Xəritə yeni) qoymaq:‘q’ __:‘y’) ; 2) __:‘x’
+Nil
+Nil

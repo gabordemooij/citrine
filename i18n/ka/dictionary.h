@@ -208,3 +208,4 @@
 #define CTR_DICT_SUPER                           "`"
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "პროცედურა"
+#define CTR_DICT_TOOBJECT        "როგორც ობიექტი"

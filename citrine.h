@@ -720,6 +720,7 @@ extern ctr_object* ctr_error( char* error_string, int error_code );
 extern ctr_object* ctr_error_text( char* error_string );
 extern void ctr_pool_init( ctr_size pool );
 
+extern char ctr_deserialize_mode;
 extern char ctr_flag_sandbox;
 extern uint16_t ctr_sandbox_steps;
 

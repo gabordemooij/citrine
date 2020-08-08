@@ -102,6 +102,7 @@ int main(int argc, char* argv[]) {
 	ctr_source_mapping = 0;
 	CtrStdFlow = NULL;
 	ctr_source_mapping = 1;
+	ctr_deserialize_mode = 0;
 	ctr_clex_keyword_me_icon = CTR_DICT_ME_ICON;
 	ctr_clex_keyword_my_icon = CTR_DICT_MY_ICON;
 	ctr_clex_keyword_var_icon = CTR_DICT_VAR_ICON;

@@ -511,7 +511,8 @@ ctr_tnode* ctr_cparse_expr(int mode) {
 	} else if (
 		t2 != CTR_TOKEN_DOT &&
 		t2 != CTR_TOKEN_PARCLOSE &&
-		t2 != CTR_TOKEN_CHAIN
+		t2 != CTR_TOKEN_CHAIN &&
+		t2 != CTR_TOKEN_FIN
 	) {
 		e = ctr_cparse_create_node( CTR_AST_NODE );
 		e->type = CTR_AST_NODE_EXPRMESSAGE;

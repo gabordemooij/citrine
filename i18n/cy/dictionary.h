@@ -208,3 +208,4 @@
 #define CTR_DICT_SUPER                           "`"
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "gweithdrefn"
+#define CTR_DICT_TOOBJECT        "gwrthrych"

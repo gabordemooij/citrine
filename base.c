@@ -1510,6 +1510,33 @@ ctr_object* ctr_build_empty_string() {
 	return ctr_build_string( "", 0 );
 }
 
+
+ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_tnode* parsedCode;
+	ctr_object* result;
+	char* prg;
+	prg = ctr_heap_allocate_cstring(myself);
+	ctr_program_length = strlen(prg);
+	ctr_clex_load(prg);
+	parsedCode = ctr_cparse_expr(0);
+	if (parsedCode == NULL) {
+		ctr_heap_free( prg );
+		return CtrStdNil;
+	}
+	ctr_heap_free( prg );
+	ctr_cwlk_subprogram++;
+	char r;
+	ctr_deserialize_mode = 1;
+	result = ctr_cwlk_expr(parsedCode,&r);
+	ctr_deserialize_mode = 0;
+	ctr_cwlk_subprogram--;
+	if (result == NULL) {
+		return CtrStdNil;
+	}
+	return result;
+}
+
+
 /**
  * @def
  * [ String ] bytes

@@ -1,0 +1,36 @@
+Nil
+Nil
+Booleanu
+Hè vera
+Booleanu
+False
+Numero
+1
+Numero
+-3
+Numero
+9,2
+Numero
+-9,2
+Elencu
+Elencu novu 
+Elencu
+Elencu ← 1 ; 2
+Elencu
+Elencu ← 1 ; (Elencu ← 2)
+Elencu
+Elencu ← 1 ; (Elencu ← 2) ; 3
+Elencu
+Elencu ← 1 ; ((Mappa novu) mette:‘a’ _à:‘b’) ; 3
+Elencu
+Elencu ← 1 ; ((Mappa novu) mette:(Elencu ← 9) _à:‘b’) ; 3
+Mappa
+(Mappa novu) mette:2 _à:‘1’
+Mappa
+(Mappa novu) mette:2 _à:‘x’
+Mappa
+(Mappa novu) mette:(Elencu ← 1 ; 2) _à:‘x’
+Mappa
+(Mappa novu) mette:(Elencu ← ((Mappa novu) mette:‘q’ _à:‘y’) ; 2) _à:‘x’
+Nil
+Nil

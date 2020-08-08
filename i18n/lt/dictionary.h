@@ -1,7 +1,7 @@
 #define CTR_DICT_CODEGEN_MAP_NEW                 "(Map naujas) "
 #define CTR_DICT_CODEGEN_MAP_PUT                 "įdėti:"
 #define CTR_DICT_CODEGEN_MAP_PUT_AT              " _į:"
-#define CTR_DICT_CODEGEN_ARRAY_NEW               "Naujas sąrašas "
+#define CTR_DICT_CODEGEN_ARRAY_NEW               "Sąrašas naujas"
 #define CTR_DICT_CODEGEN_ARRAY_NEW_PUSH          "Sąrašas ← "
 #define CTR_DICT_END_OF_LINE     "."
 #define CTR_DICT_NIL             "Nulis"
@@ -208,3 +208,4 @@
 #define CTR_DICT_SUPER                           "`"
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "procedūra"
+#define CTR_DICT_TOOBJECT        "objektas"

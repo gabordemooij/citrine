@@ -1,0 +1,36 @@
+Nil
+Nil
+Boolean
+Rast
+Boolean
+şaş
+Jimare
+1
+Jimare
+-3
+Jimare
+9,2
+Jimare
+-9,2
+Rêzok
+Rêzok nşh 
+Rêzok
+Rêzok ← 1 ; 2
+Rêzok
+Rêzok ← 1 ; (Rêzok ← 2)
+Rêzok
+Rêzok ← 1 ; (Rêzok ← 2) ; 3
+Rêzok
+Rêzok ← 1 ; ((Qert nşh) danîn:‘a’ li:‘b’) ; 3
+Rêzok
+Rêzok ← 1 ; ((Qert nşh) danîn:(Rêzok ← 9) li:‘b’) ; 3
+Qert
+(Qert nşh) danîn:2 li:‘1’
+Qert
+(Qert nşh) danîn:2 li:‘x’
+Qert
+(Qert nşh) danîn:(Rêzok ← 1 ; 2) li:‘x’
+Qert
+(Qert nşh) danîn:(Rêzok ← ((Qert nşh) danîn:‘q’ li:‘y’) ; 2) li:‘x’
+Nil
+Nil
