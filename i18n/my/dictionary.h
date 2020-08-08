@@ -208,3 +208,4 @@
 #define CTR_DICT_SUPER                           "`"
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "လုပ်ထုံးလုပ်နည်း"
+#define CTR_DICT_TOOBJECT        "အရာဝတ္ထုအဖြစ်"

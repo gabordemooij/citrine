@@ -1,6 +1,6 @@
-(Novo mapa) coloque:“a"b” no:“test”
+(Mapa novo) colocar:“a"b” em:“test”
 Invalid JSON.
-(Novo mapa) coloque:(Listar ← 1 ; 2 ; (Listar ← 3 ; 4) ; ((Novo mapa) coloque:(Listar ← 3 ; 4) no:“bar”, coloque:1 no:“foo”)) no:“nested”, coloque:Falso no:“legend”, coloque:27 no:“age”, coloque:“Jack” no:“name”
+(Mapa novo) colocar:(Listar ← 1 ; 2 ; (Listar ← 3 ; 4) ; ((Mapa novo) colocar:(Listar ← 3 ; 4) em:“bar”, colocar:1 em:“foo”)) em:“nested”, colocar:Falso em:“legend”, colocar:27 em:“age”, colocar:“Jack” em:“name”
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

@@ -208,3 +208,4 @@
 #define CTR_DICT_SUPER                           "`"
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "ವಿಧಾನ"
+#define CTR_DICT_TOOBJECT        "ವಸ್ತುವಾಗಿ ಪರಿವರ್ತಿಸಿ"

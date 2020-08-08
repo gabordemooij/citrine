@@ -208,3 +208,4 @@
 #define CTR_DICT_SUPER                           "`"
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "순서"
+#define CTR_DICT_TOOBJECT        "개체로"

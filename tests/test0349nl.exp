@@ -1,0 +1,36 @@
+Niets
+Niets
+Ja of Nee
+Ja
+Ja of Nee
+Nee
+Getal
+1
+Getal
+-3
+Getal
+9,2
+Getal
+-9,2
+Reeks
+Reeks nieuw 
+Reeks
+Reeks ← 1 ; 2
+Reeks
+Reeks ← 1 ; (Reeks ← 2)
+Reeks
+Reeks ← 1 ; (Reeks ← 2) ; 3
+Reeks
+Reeks ← 1 ; ((Lĳst nieuw) zet:“a” bĳ:“b”) ; 3
+Reeks
+Reeks ← 1 ; ((Lĳst nieuw) zet:(Reeks ← 9) bĳ:“b”) ; 3
+Lĳst
+(Lĳst nieuw) zet:2 bĳ:“1”
+Lĳst
+(Lĳst nieuw) zet:2 bĳ:“x”
+Lĳst
+(Lĳst nieuw) zet:(Reeks ← 1 ; 2) bĳ:“x”
+Lĳst
+(Lĳst nieuw) zet:(Reeks ← ((Lĳst nieuw) zet:“q” bĳ:“y”) ; 2) bĳ:“x”
+Niets
+Niets

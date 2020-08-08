@@ -1,0 +1,36 @@
+Nulis
+Nulis
+Loginis
+Tiesa
+Loginis
+Netiesa
+Skaičius
+1
+Skaičius
+-3
+Skaičius
+9,2
+Skaičius
+-9,2
+Sąrašas
+Sąrašas naujas
+Sąrašas
+Sąrašas ← 1 ; 2
+Sąrašas
+Sąrašas ← 1 ; (Sąrašas ← 2)
+Sąrašas
+Sąrašas ← 1 ; (Sąrašas ← 2) ; 3
+Sąrašas
+Sąrašas ← 1 ; ((Map naujas) įdėti:‘a’ _į:‘b’) ; 3
+Sąrašas
+Sąrašas ← 1 ; ((Map naujas) įdėti:(Sąrašas ← 9) _į:‘b’) ; 3
+Map
+(Map naujas) įdėti:2 _į:‘1’
+Map
+(Map naujas) įdėti:2 _į:‘x’
+Map
+(Map naujas) įdėti:(Sąrašas ← 1 ; 2) _į:‘x’
+Map
+(Map naujas) įdėti:(Sąrašas ← ((Map naujas) įdėti:‘q’ _į:‘y’) ; 2) _į:‘x’
+Nulis
+Nulis

@@ -38,6 +38,7 @@ char CtrHashKey[16];
 ctr_object* ctr_contexts[301];
 int ctr_context_id;
 
+char ctr_deserialize_mode;
 
 /**
  * ?internal
@@ -724,6 +725,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND ),&ctr_string_fill_in);
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_COPY ), &ctr_string_copy );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_CODE ), &ctr_string_to_code );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TOOBJECT ), &ctr_string_eval );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_STRING ), CtrStdString, 0 );
 	CtrStdString->link = CtrStdObject;
 	CtrStdString->info.sticky = 1;
@@ -982,7 +984,21 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	}
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTNATFUNC) {
 		funct = methodObject->value.fvalue;
-		result = funct(receiverObject, argumentList);
+		if (ctr_deserialize_mode
+				&& funct != ctr_array_push
+				&& funct != ctr_array_new_and_push
+				&& funct != ctr_map_new
+				&& funct != ctr_map_put
+				&& funct != ctr_array_new
+				&& funct != ctr_nil_to_string
+				&& funct != ctr_bool_to_string
+				&& funct != ctr_number_to_string
+				&& funct != ctr_string_to_string
+			) {
+			result = CtrStdNil;
+		} else {
+			result = funct(receiverObject, argumentList);
+		}
 	}
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTBLOCK && methodObject->info.selfbind == 1) {
 		result = ctr_block_run(methodObject, argumentList, receiverObject);

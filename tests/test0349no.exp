@@ -1,0 +1,36 @@
+Nil
+Nil
+Boolean
+Ekte
+Boolean
+Falsk
+Nummer
+1
+Nummer
+-3
+Nummer
+9,2
+Nummer
+-9,2
+Liste
+Liste ny 
+Liste
+Liste ← 1 ; 2
+Liste
+Liste ← 1 ; (Liste ← 2)
+Liste
+Liste ← 1 ; (Liste ← 2) ; 3
+Liste
+Liste ← 1 ; ((Kart ny) sagt:‘a’ at:‘b’) ; 3
+Liste
+Liste ← 1 ; ((Kart ny) sagt:(Liste ← 9) at:‘b’) ; 3
+Kart
+(Kart ny) sagt:2 at:‘1’
+Kart
+(Kart ny) sagt:2 at:‘x’
+Kart
+(Kart ny) sagt:(Liste ← 1 ; 2) at:‘x’
+Kart
+(Kart ny) sagt:(Liste ← ((Kart ny) sagt:‘q’ at:‘y’) ; 2) at:‘x’
+Nil
+Nil

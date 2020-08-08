@@ -469,7 +469,7 @@ char* ctr_clex_readstr() {
 		escape = 0;
 	}
 	/* absorb trailing quote, unless eof encountered - then string ends at eof */
-	if (ctr_code<ctr_eofcode-ctr_clex_keyword_qc_len) {
+	if (ctr_code<=ctr_eofcode-ctr_clex_keyword_qc_len) {
 		ctr_code += ctr_clex_keyword_qc_len;
 	}
 	return beginbuff;

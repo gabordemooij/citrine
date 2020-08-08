@@ -1,0 +1,36 @@
+Nulo
+Nulo
+Booleano
+Cierto
+Booleano
+Falso
+Número
+1
+Número
+-3
+Número
+9,2
+Número
+-9,2
+Lista
+Lista nuevo 
+Lista
+Lista ← 1 ; 2
+Lista
+Lista ← 1 ; (Lista ← 2)
+Lista
+Lista ← 1 ; (Lista ← 2) ; 3
+Lista
+Lista ← 1 ; ((Mapa nuevo) ponlo en:‘a’ __:‘b’) ; 3
+Lista
+Lista ← 1 ; ((Mapa nuevo) ponlo en:(Lista ← 9) __:‘b’) ; 3
+Mapa
+(Mapa nuevo) ponlo en:2 __:‘1’
+Mapa
+(Mapa nuevo) ponlo en:2 __:‘x’
+Mapa
+(Mapa nuevo) ponlo en:(Lista ← 1 ; 2) __:‘x’
+Mapa
+(Mapa nuevo) ponlo en:(Lista ← ((Mapa nuevo) ponlo en:‘q’ __:‘y’) ; 2) __:‘x’
+Nulo
+Nulo
