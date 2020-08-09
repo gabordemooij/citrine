@@ -1,0 +1,36 @@
+Nil
+Nil
+Boolean
+Totoo
+Boolean
+Mali
+Bilang
+1
+Bilang
+-3
+Bilang
+9,2
+Bilang
+-9,2
+Listahan
+Listahan bago 
+Listahan
+Listahan ← 1 ; 2
+Listahan
+Listahan ← 1 ; (Listahan ← 2)
+Listahan
+Listahan ← 1 ; (Listahan ← 2) ; 3
+Listahan
+Listahan ← 1 ; ((Map bago) ilagay:‘a’ sa:‘b’) ; 3
+Listahan
+Listahan ← 1 ; ((Map bago) ilagay:(Listahan ← 9) sa:‘b’) ; 3
+Map
+(Map bago) ilagay:2 sa:‘1’
+Map
+(Map bago) ilagay:2 sa:‘x’
+Map
+(Map bago) ilagay:(Listahan ← 1 ; 2) sa:‘x’
+Map
+(Map bago) ilagay:(Listahan ← ((Map bago) ilagay:‘q’ sa:‘y’) ; 2) sa:‘x’
+Nil
+Nil
