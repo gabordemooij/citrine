@@ -208,4 +208,4 @@
 #define CTR_DICT_SUPER                           "`"
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "విధానం"
-#define CTR_DICT_TOOBJECT        "ఒక వస్తువుగా"
+#define CTR_DICT_TOOBJECT        "ఒక వస్తువుగా"

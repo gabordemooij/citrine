@@ -208,4 +208,4 @@
 #define CTR_DICT_SUPER                           "`"
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "ପ୍ରଣାଳୀ"
-#define CTR_DICT_TOOBJECT        "ଏକ ବସ୍ତୁ ଭାବରେ |"
+#define CTR_DICT_TOOBJECT        "ଏକ ବସ୍ତୁ ଭାବରେ |"
