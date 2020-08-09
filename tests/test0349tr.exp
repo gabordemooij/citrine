@@ -1,0 +1,36 @@
+Sıfır
+Sıfır
+Boole
+Doğru
+Boole
+Yanlış
+Numara
+1
+Numara
+-3
+Numara
+9,2
+Numara
+-9,2
+Liste
+Liste yeni 
+Liste
+Liste ← 1 ; 2
+Liste
+Liste ← 1 ; (Liste ← 2)
+Liste
+Liste ← 1 ; (Liste ← 2) ; 3
+Liste
+Liste ← 1 ; ((Harita yeni) koyun:‘a’ at:‘b’) ; 3
+Liste
+Liste ← 1 ; ((Harita yeni) koyun:(Liste ← 9) at:‘b’) ; 3
+Harita
+(Harita yeni) koyun:2 at:‘1’
+Harita
+(Harita yeni) koyun:2 at:‘x’
+Harita
+(Harita yeni) koyun:(Liste ← 1 ; 2) at:‘x’
+Harita
+(Harita yeni) koyun:(Liste ← ((Harita yeni) koyun:‘q’ at:‘y’) ; 2) at:‘x’
+Sıfır
+Sıfır

@@ -1,0 +1,36 @@
+Ọba
+Ọba
+Boolean
+Otitọ
+Boolean
+Irọ
+Nọmba
+1
+Nọmba
+-3
+Nọmba
+9,2
+Nọmba
+-9,2
+Atokọ
+Atokọ tuntun 
+Atokọ
+Atokọ ← 1 ; 2
+Atokọ
+Atokọ ← 1 ; (Atokọ ← 2)
+Atokọ
+Atokọ ← 1 ; (Atokọ ← 2) ; 3
+Atokọ
+Atokọ ← 1 ; ((Maapu tuntun) fi:‘a’ ni:‘b’) ; 3
+Atokọ
+Atokọ ← 1 ; ((Maapu tuntun) fi:(Atokọ ← 9) ni:‘b’) ; 3
+Maapu
+(Maapu tuntun) fi:2 ni:‘1’
+Maapu
+(Maapu tuntun) fi:2 ni:‘x’
+Maapu
+(Maapu tuntun) fi:(Atokọ ← 1 ; 2) ni:‘x’
+Maapu
+(Maapu tuntun) fi:(Atokọ ← ((Maapu tuntun) fi:‘q’ ni:‘y’) ; 2) ni:‘x’
+Ọba
+Ọba
