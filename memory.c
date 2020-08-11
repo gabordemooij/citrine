@@ -79,6 +79,28 @@ void* ctr_heap_allocate( size_t size ) {
 	return slice_of_memory;
 }
 
+/**
+ * Returns the current memory block number so you can rewind
+ * the tracked memory allocator back to this point later on.
+ * Used for deserializing.
+ */
+size_t ctr_heap_tracker_memoryblocknumber() {
+	return numberOfMemBlocks;
+}
+
+/**
+ * Rewinds memory block number to a previously stored
+ * position, i.e. sequence number.
+ */
+size_t ctr_heap_tracker_rewind( size_t memoryBlockNumber ) {
+	size_t i;
+	i = 0;
+	while ( numberOfMemBlocks > memoryBlockNumber) {
+		ctr_heap_free(memBlocks[ --numberOfMemBlocks ].space);
+		i ++;
+	}
+	return i;
+}
 
 /**
  * Allocates memory on heap and tracks it for clean-up when
