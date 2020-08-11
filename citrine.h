@@ -732,3 +732,6 @@ extern void ctr_print_error(char* error, int code);
 
 extern void ctr_plugin_check_language( char* code );
 
+size_t ctr_heap_tracker_memoryblocknumber();
+size_t ctr_heap_tracker_rewind( size_t memoryBlockNumber );
+

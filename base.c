@@ -1510,14 +1510,28 @@ ctr_object* ctr_build_empty_string() {
 	return ctr_build_string( "", 0 );
 }
 
-
+/**
+ * @def
+ * [ String ] object
+ *
+ * @example
+ * ☞ x ≔ List ← 1 ; 2 ; 3.
+ * ☞ a ≔ x string.
+ * ☞ b ≔ a object.
+ * ✎ write: a type, stop.
+ * ✎ write: a, stop.
+ * ✎ write: b type, stop.
+ * ✎ write: b, stop.
+ */
 ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_tnode* parsedCode;
 	ctr_object* result;
 	char* prg;
 	prg = ctr_heap_allocate_cstring(myself);
 	ctr_program_length = strlen(prg);
+	size_t memblock = ctr_heap_tracker_memoryblocknumber();
 	ctr_clex_load(prg);
+	ctr_source_mapping = 0;
 	parsedCode = ctr_cparse_expr(0);
 	if (parsedCode == NULL) {
 		ctr_heap_free( prg );
@@ -1529,7 +1543,9 @@ ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_deserialize_mode = 1;
 	result = ctr_cwlk_expr(parsedCode,&r);
 	ctr_deserialize_mode = 0;
+	ctr_source_mapping = 1;
 	ctr_cwlk_subprogram--;
+	ctr_heap_tracker_rewind(memblock);
 	if (result == NULL) {
 		return CtrStdNil;
 	}
