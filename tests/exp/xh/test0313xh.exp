@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. Ubuxoki
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is Nil meters long.
+Luckily, this day, there are Nil wasps in the garden.
+The dog named Nil sleeps under the tree.
+a\"bb\"ccc\"
+(Imephu intsha) beka:((Imephu intsha) beka:Nil _e:‘dog’, beka:Nil _e:‘insects’, beka:((Imephu intsha) beka:15 _e:‘length’, beka:8 _e:‘width’) _e:‘size’, beka:(Uluhlu ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _e:‘flower’, beka:Ubuxoki _e:‘shed’, beka:Kuyinyani _e:‘pool’, beka:2 _e:‘chairs’) _e:‘garden’
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

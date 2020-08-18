@@ -1,0 +1,27 @@
+(Mapa nový) povedané:‘a"b’ na adrese:‘test’
+Invalid JSON.
+(Mapa nový) povedané:(Zoznam ← 1 ; 2 ; (Zoznam ← 3 ; 4) ; ((Mapa nový) povedané:(Zoznam ← 3 ; 4) na adrese:‘bar’, povedané:1 na adrese:‘foo’)) na adrese:‘nested’, povedané:Nepravdivý na adrese:‘legend’, povedané:27 na adrese:‘age’, povedané:‘Jack’ na adrese:‘name’
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

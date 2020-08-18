@@ -1,0 +1,27 @@
+(מאפע נייַ) שטעלן:‘a"b’ אין:‘test’
+Invalid JSON.
+(מאפע נייַ) שטעלן:(רשימה ← 1 ; 2 ; (רשימה ← 3 ; 4) ; ((מאפע נייַ) שטעלן:(רשימה ← 3 ; 4) אין:‘bar’, שטעלן:1 אין:‘foo’)) אין:‘nested’, שטעלן:פאַלש אין:‘legend’, שטעלן:27 אין:‘age’, שטעלן:‘Jack’ אין:‘name’
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

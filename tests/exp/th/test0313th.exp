@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. เท็จ
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is ศูนย์ meters long.
+Luckily, this day, there are ศูนย์ wasps in the garden.
+The dog named ศูนย์ sleeps under the tree.
+a\"bb\"ccc\"
+(แผนที่ ใหม่) ใส่:((แผนที่ ใหม่) ใส่:ศูนย์ ที่:‘dog’, ใส่:ศูนย์ ที่:‘insects’, ใส่:((แผนที่ ใหม่) ใส่:15 ที่:‘length’, ใส่:8 ที่:‘width’) ที่:‘size’, ใส่:(รายการ ← ‘tulips’ ; ‘roses’ ; ‘lillies’) ที่:‘flower’, ใส่:เท็จ ที่:‘shed’, ใส่:จริง ที่:‘pool’, ใส่:2 ที่:‘chairs’) ที่:‘garden’
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

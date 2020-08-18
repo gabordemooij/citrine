@@ -1,0 +1,12 @@
+Strunowy,Numer
+Strunowy,Boolean
+Numer,Strunowy
+Numer,Boolean
+Boolean,Numer
+Boolean,Numer
+Boolean,Strunowy
+Boolean,Strunowy
+=== String test ===
+123
+Fałszywy
+Prawdziwe

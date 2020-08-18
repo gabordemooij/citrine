@@ -1,0 +1,12 @@
+Povrázok,číslo
+Povrázok,Boolean
+číslo,Povrázok
+číslo,Boolean
+Boolean,číslo
+Boolean,číslo
+Boolean,Povrázok
+Boolean,Povrázok
+=== String test ===
+123
+Nepravdivý
+Pravdivý

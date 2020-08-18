@@ -1,0 +1,27 @@
+(Peta baru) meletakkan:‘a"b’ pada:‘test’
+Invalid JSON.
+(Peta baru) meletakkan:(Senarai ← 1 ; 2 ; (Senarai ← 3 ; 4) ; ((Peta baru) meletakkan:(Senarai ← 3 ; 4) pada:‘bar’, meletakkan:1 pada:‘foo’)) pada:‘nested’, meletakkan:Salah pada:‘legend’, meletakkan:27 pada:‘age’, meletakkan:‘Jack’ pada:‘name’
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

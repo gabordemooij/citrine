@@ -1,0 +1,11 @@
+9
+a Tárgy ‘Tárgy’  is NOT Nil.
+a Logikai ‘Igaz’  is NOT Nil.
+a Logikai ‘Hamis’  is NOT Nil.
+a Logikai ‘Hamis’  is NOT Nil.
+a Szám ‘1’  is NOT Nil.
+a Szám ‘0’  is NOT Nil.
+a Húr ‘Str’  is NOT Nil.
+a Húr ‘’  is NOT Nil.
+a Kód ‘Kód’  is NOT Nil.
+but.. Nil is.. certainly NIL!

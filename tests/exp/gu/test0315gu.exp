@@ -1,0 +1,27 @@
+(નકશો નવું) મૂકો:‘a"b’ પર:‘test’
+Invalid JSON.
+(નકશો નવું) મૂકો:(યાદી ← 1 ; 2 ; (યાદી ← 3 ; 4) ; ((નકશો નવું) મૂકો:(યાદી ← 3 ; 4) પર:‘bar’, મૂકો:1 પર:‘foo’)) પર:‘nested’, મૂકો:ખોટું પર:‘legend’, મૂકો:27 પર:‘age’, મૂકો:‘Jack’ પર:‘name’
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

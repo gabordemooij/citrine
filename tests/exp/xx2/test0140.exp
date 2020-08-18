@@ -1,0 +1,5 @@
+Trigger an erroraaaUncatched error has occurred.
+Hi!
+#3 error: (tests/test0140.ctr: 11)
+#2 run (tests/test0140.ctr: 12)
+#1 run (tests/test0140.ctr: 15)

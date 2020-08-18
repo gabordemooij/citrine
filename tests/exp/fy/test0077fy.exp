@@ -1,0 +1,12 @@
+Koarde,Nûmer
+Koarde,Boolean
+Nûmer,Koarde
+Nûmer,Boolean
+Boolean,Nûmer
+Boolean,Nûmer
+Boolean,Koarde
+Boolean,Koarde
+=== String test ===
+123
+Falsk
+Wier

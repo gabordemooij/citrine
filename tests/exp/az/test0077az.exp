@@ -1,0 +1,12 @@
+Sətir,Nömrə
+Sətir,Boolean
+Nömrə,Sətir
+Nömrə,Boolean
+Boolean,Nömrə
+Boolean,Nömrə
+Boolean,Sətir
+Boolean,Sətir
+=== String test ===
+123
+Yalan
+Doğru

@@ -1,0 +1,12 @@
+Xarig,Tirada
+Xarig,Boolean
+Tirada,Xarig
+Tirada,Boolean
+Boolean,Tirada
+Boolean,Tirada
+Boolean,Xarig
+Boolean,Xarig
+=== String test ===
+123
+Been
+Run

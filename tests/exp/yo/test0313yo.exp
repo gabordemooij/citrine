@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. Irọ
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is Ọba meters long.
+Luckily, this day, there are Ọba wasps in the garden.
+The dog named Ọba sleeps under the tree.
+a\"bb\"ccc\"
+(Maapu tuntun) fi:((Maapu tuntun) fi:Ọba ni:‘dog’, fi:Ọba ni:‘insects’, fi:((Maapu tuntun) fi:15 ni:‘length’, fi:8 ni:‘width’) ni:‘size’, fi:(Atokọ ← ‘tulips’ ; ‘roses’ ; ‘lillies’) ni:‘flower’, fi:Irọ ni:‘shed’, fi:Otitọ ni:‘pool’, fi:2 ni:‘chairs’) ni:‘garden’
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

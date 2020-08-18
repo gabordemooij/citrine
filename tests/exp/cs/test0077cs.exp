@@ -1,0 +1,12 @@
+Tětiva,Číslo
+Tětiva,Boolean
+Číslo,Tětiva
+Číslo,Boolean
+Boolean,Číslo
+Boolean,Číslo
+Boolean,Tětiva
+Boolean,Tětiva
+=== String test ===
+123
+Nepravdivé
+Skutečný

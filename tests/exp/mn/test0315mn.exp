@@ -1,0 +1,27 @@
+(Газрын зураг шинэ) тавих:‘a"b’ дээр__:‘test’
+Invalid JSON.
+(Газрын зураг шинэ) тавих:(Жагсаалт ← 1 ; 2 ; (Жагсаалт ← 3 ; 4) ; ((Газрын зураг шинэ) тавих:(Жагсаалт ← 3 ; 4) дээр__:‘bar’, тавих:1 дээр__:‘foo’)) дээр__:‘nested’, тавих:Худал дээр__:‘legend’, тавих:27 дээр__:‘age’, тавих:‘Jack’ дээр__:‘name’
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

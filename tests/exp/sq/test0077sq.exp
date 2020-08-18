@@ -1,0 +1,12 @@
+Varg,Numër
+Varg,Boolean
+Numër,Varg
+Numër,Boolean
+Boolean,Numër
+Boolean,Numër
+Boolean,Varg
+Boolean,Varg
+=== String test ===
+123
+I rremë
+I vërtetë

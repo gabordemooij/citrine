@@ -1,0 +1,11 @@
+9
+a Oggetto ‘Oggetto’  is NOT Nil.
+a Booleano ‘Vero’  is NOT Nil.
+a Booleano ‘Falso’  is NOT Nil.
+a Booleano ‘Falso’  is NOT Nil.
+a Numero ‘1’  is NOT Nil.
+a Numero ‘0’  is NOT Nil.
+a Corda ‘Str’  is NOT Nil.
+a Corda ‘’  is NOT Nil.
+a Codice ‘Codice’  is NOT Nil.
+but.. Nil is.. certainly NIL!

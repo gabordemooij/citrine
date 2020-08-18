@@ -1,0 +1,34 @@
+sum: 668
+min: 0
+max: 666
+3rd: True
+prd: 0
+0
+1
+2
+3
+4
+5
+sum: 668
+min: 0
+max: 666
+3rd: True
+prd: 0
+0
+1
+2
+3
+4
+5
+sum: 668
+min: 0
+max: 666
+3rd: True
+prd: 0
+0
+1
+2
+3
+4
+5
+No memory leaks here

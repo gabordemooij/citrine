@@ -1,0 +1,27 @@
+(Ikarita gishya) shyira:‘a"b’ kuri:‘test’
+Invalid JSON.
+(Ikarita gishya) shyira:(Urutonde ← 1 ; 2 ; (Urutonde ← 3 ; 4) ; ((Ikarita gishya) shyira:(Urutonde ← 3 ; 4) kuri:‘bar’, shyira:1 kuri:‘foo’)) kuri:‘nested’, shyira:Ikinyoma kuri:‘legend’, shyira:27 kuri:‘age’, shyira:‘Jack’ kuri:‘name’
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

@@ -1,0 +1,5 @@
+a b | Falso Falso Certo Certo -1
+b a | Certo Certo Falso Falso 1
+hallo hello | Falso Falso Certo Certo -4
+human human | Falso Certo Falso Certo 0
+x z | Falso Falso Certo Certo -2

@@ -1,0 +1,27 @@
+(خەرىتە new) put:‘a"b’ at:‘test’
+Invalid JSON.
+(خەرىتە new) put:(تىزىملىك ← 1 ; 2 ; (تىزىملىك ← 3 ; 4) ; ((خەرىتە new) put:(تىزىملىك ← 3 ; 4) at:‘bar’, put:1 at:‘foo’)) at:‘nested’, put:يالغان at:‘legend’, put:27 at:‘age’, put:‘Jack’ at:‘name’
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

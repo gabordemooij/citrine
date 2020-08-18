@@ -1,0 +1,27 @@
+(မြေပုံ အသစ်) ထား:‘a"b’ မှာ:‘test’
+Invalid JSON.
+(မြေပုံ အသစ်) ထား:(စာရင်း ← 1 ; 2 ; (စာရင်း ← 3 ; 4) ; ((မြေပုံ အသစ်) ထား:(စာရင်း ← 3 ; 4) မှာ:‘bar’, ထား:1 မှာ:‘foo’)) မှာ:‘nested’, ထား:မှား မှာ:‘legend’, ထား:27 မှာ:‘age’, ထား:‘Jack’ မှာ:‘name’
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

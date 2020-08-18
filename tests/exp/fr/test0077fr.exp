@@ -1,0 +1,12 @@
+Chaîne,Nombre
+Chaîne,Booléen
+Nombre,Chaîne
+Nombre,Booléen
+Booléen,Nombre
+Booléen,Nombre
+Booléen,Chaîne
+Booléen,Chaîne
+=== String test ===
+123
+Faux
+Vrai

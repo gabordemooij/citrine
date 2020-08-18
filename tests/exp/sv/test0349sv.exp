@@ -1,0 +1,36 @@
+Noll
+Noll
+Boolean
+Sann
+Boolean
+Falsk
+Siffra
+1
+Siffra
+-3
+Siffra
+9,2
+Siffra
+-9,2
+Lista
+Lista ny 
+Lista
+Lista ← 1 ; 2
+Lista
+Lista ← 1 ; (Lista ← 2)
+Lista
+Lista ← 1 ; (Lista ← 2) ; 3
+Lista
+Lista ← 1 ; ((Karta ny) sätta vid:‘a’ __:‘b’) ; 3
+Lista
+Lista ← 1 ; ((Karta ny) sätta vid:(Lista ← 9) __:‘b’) ; 3
+Karta
+(Karta ny) sätta vid:2 __:‘1’
+Karta
+(Karta ny) sätta vid:2 __:‘x’
+Karta
+(Karta ny) sätta vid:(Lista ← 1 ; 2) __:‘x’
+Karta
+(Karta ny) sätta vid:(Lista ← ((Karta ny) sätta vid:‘q’ __:‘y’) ; 2) __:‘x’
+Noll
+Noll

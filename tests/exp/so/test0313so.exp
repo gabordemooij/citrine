@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. Been
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is Eber meters long.
+Luckily, this day, there are Eber wasps in the garden.
+The dog named Eber sleeps under the tree.
+a\"bb\"ccc\"
+(Khariidad cusub) dhigaa:((Khariidad cusub) dhigaa:Eber at:‘dog’, dhigaa:Eber at:‘insects’, dhigaa:((Khariidad cusub) dhigaa:15 at:‘length’, dhigaa:8 at:‘width’) at:‘size’, dhigaa:(Liiska ← ‘tulips’ ; ‘roses’ ; ‘lillies’) at:‘flower’, dhigaa:Been at:‘shed’, dhigaa:Run at:‘pool’, dhigaa:2 at:‘chairs’) at:‘garden’
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

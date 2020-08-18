@@ -1,0 +1,5 @@
+This folder is meant for:
+
+- runners: Files to test running CTR code in a specific language during tests
+- terrors: Files for Translation Errors (logs)
+

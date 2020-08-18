@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. মিথ্যা
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is শূন্য meters long.
+Luckily, this day, there are শূন্য wasps in the garden.
+The dog named শূন্য sleeps under the tree.
+a\"bb\"ccc\"
+(মানচিত্র নতুন) করা:((মানচিত্র নতুন) করা:শূন্য হয়:‘dog’, করা:শূন্য হয়:‘insects’, করা:((মানচিত্র নতুন) করা:15 হয়:‘length’, করা:8 হয়:‘width’) হয়:‘size’, করা:(তালিকা ← ‘tulips’ ; ‘roses’ ; ‘lillies’) হয়:‘flower’, করা:মিথ্যা হয়:‘shed’, করা:সত্য হয়:‘pool’, করা:2 হয়:‘chairs’) হয়:‘garden’
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

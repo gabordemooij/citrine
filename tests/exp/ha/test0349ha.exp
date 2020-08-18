@@ -1,0 +1,36 @@
+Nil
+Nil
+Boolean
+Gaskiya ne
+Boolean
+Karya
+Lambar
+1
+Lambar
+-3
+Lambar
+9,2
+Lambar
+-9,2
+Lissafi
+Lissafi sabo 
+Lissafi
+Lissafi ← 1 ; 2
+Lissafi
+Lissafi ← 1 ; (Lissafi ← 2)
+Lissafi
+Lissafi ← 1 ; (Lissafi ← 2) ; 3
+Lissafi
+Lissafi ← 1 ; ((Taswira sabo) sanya:“a” _a:“b”) ; 3
+Lissafi
+Lissafi ← 1 ; ((Taswira sabo) sanya:(Lissafi ← 9) _a:“b”) ; 3
+Taswira
+(Taswira sabo) sanya:2 _a:“1”
+Taswira
+(Taswira sabo) sanya:2 _a:“x”
+Taswira
+(Taswira sabo) sanya:(Lissafi ← 1 ; 2) _a:“x”
+Taswira
+(Taswira sabo) sanya:(Lissafi ← ((Taswira sabo) sanya:“q” _a:“y”) ; 2) _a:“x”
+Nil
+Nil

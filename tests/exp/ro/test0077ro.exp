@@ -1,0 +1,12 @@
+String,Număr
+String,Boolean
+Număr,String
+Număr,Boolean
+Boolean,Număr
+Boolean,Număr
+Boolean,String
+Boolean,String
+=== String test ===
+123
+Fals
+Adevărat

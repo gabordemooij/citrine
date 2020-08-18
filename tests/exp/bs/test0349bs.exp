@@ -1,0 +1,36 @@
+Nil
+Nil
+Boolean
+Istinito
+Boolean
+Lažno
+Broj
+1
+Broj
+-3
+Broj
+9,2
+Broj
+-9,2
+Lista
+Lista novo 
+Lista
+Lista ← 1 ; 2
+Lista
+Lista ← 1 ; (Lista ← 2)
+Lista
+Lista ← 1 ; (Lista ← 2) ; 3
+Lista
+Lista ← 1 ; ((Mapa novo) put:‘a’ at:‘b’) ; 3
+Lista
+Lista ← 1 ; ((Mapa novo) put:(Lista ← 9) at:‘b’) ; 3
+Mapa
+(Mapa novo) put:2 at:‘1’
+Mapa
+(Mapa novo) put:2 at:‘x’
+Mapa
+(Mapa novo) put:(Lista ← 1 ; 2) at:‘x’
+Mapa
+(Mapa novo) put:(Lista ← ((Mapa novo) put:‘q’ at:‘y’) ; 2) at:‘x’
+Nil
+Nil

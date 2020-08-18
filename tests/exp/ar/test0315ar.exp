@@ -1,0 +1,27 @@
+(خريطة جديد) ضعه على:‘a"b’ __:‘test’
+Invalid JSON.
+(خريطة جديد) ضعه على:(قائمة ← 1 ; 2 ; (قائمة ← 3 ; 4) ; ((خريطة جديد) ضعه على:(قائمة ← 3 ; 4) __:‘bar’, ضعه على:1 __:‘foo’)) __:‘nested’, ضعه على:خاطئة __:‘legend’, ضعه على:27 __:‘age’, ضعه على:‘Jack’ __:‘name’
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

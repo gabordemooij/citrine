@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. جھوٹا
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is نیل meters long.
+Luckily, this day, there are نیل wasps in the garden.
+The dog named نیل sleeps under the tree.
+a\"bb\"ccc\"
+(نقشہ نئی) ڈال:((نقشہ نئی) ڈال:نیل پر:‘dog’, ڈال:نیل پر:‘insects’, ڈال:((نقشہ نئی) ڈال:15 پر:‘length’, ڈال:8 پر:‘width’) پر:‘size’, ڈال:(فہرست ← ‘tulips’ ; ‘roses’ ; ‘lillies’) پر:‘flower’, ڈال:جھوٹا پر:‘shed’, ڈال:سچ ہے پر:‘pool’, ڈال:2 پر:‘chairs’) پر:‘garden’
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}
