@@ -1,5 +1,0 @@
-a b | Falsch Falsch Wahr Wahr -1
-b a | Wahr Wahr Falsch Falsch 1
-hallo hello | Falsch Falsch Wahr Wahr -4
-human human | Falsch Wahr Falsch Wahr 0
-x z | Falsch Falsch Wahr Wahr -2

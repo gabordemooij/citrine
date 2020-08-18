@@ -68,28 +68,29 @@ for i in $(find tests -name 'test*.ctr'); do
 	touch /tmp/transl.ctr
 	fitem=$i
 	echo "[suite: $fitem]";
-	fexpect="${i%%.ctr}.exp"
-	fexpectnl="${i%%.ctr}nl.exp"
+	base=`basename ${fitem}`;
+	fexpect="tests/exp/xx2/${base%%.ctr}.exp"
+	fexpectnl="tests/exp/nl/${base%%.ctr}nl.exp"
 	#test for every GC mode (0/1/4/8/9/12) mode x every language (EN/NL)
-	rm tests/runner1.ctr ; echo "Program tidiness: 0." > tests/runner1.ctr ; cat ${fitem} >> tests/runner1.ctr
-	rm tests/runner2.ctr ; echo "Program tidiness: 1." > tests/runner2.ctr ; cat ${fitem} >> tests/runner2.ctr
-	rm tests/runner3.ctr ; echo "Program tidiness: 4." > tests/runner3.ctr ; cat ${fitem} >> tests/runner3.ctr
-	rm tests/runner4.ctr ; echo "Program tidiness: 8." > tests/runner4.ctr ; cat ${fitem} >> tests/runner4.ctr
-	rm tests/runner5.ctr ; echo "Program tidiness: 9." > tests/runner5.ctr ; cat ${fitem} >> tests/runner5.ctr
-	rm tests/runner6.ctr ; echo "Program tidiness: 12." > tests/runner6.ctr ; cat ${fitem} >> tests/runner6.ctr
+	rm tests/tmp/runner1.ctr ; echo "Program tidiness: 0." > tests/tmp/runner1.ctr ; cat ${fitem} >> tests/tmp/runner1.ctr
+	rm tests/tmp/runner2.ctr ; echo "Program tidiness: 1." > tests/tmp/runner2.ctr ; cat ${fitem} >> tests/tmp/runner2.ctr
+	rm tests/tmp/runner3.ctr ; echo "Program tidiness: 4." > tests/tmp/runner3.ctr ; cat ${fitem} >> tests/tmp/runner3.ctr
+	rm tests/tmp/runner4.ctr ; echo "Program tidiness: 8." > tests/tmp/runner4.ctr ; cat ${fitem} >> tests/tmp/runner4.ctr
+	rm tests/tmp/runner5.ctr ; echo "Program tidiness: 9." > tests/tmp/runner5.ctr ; cat ${fitem} >> tests/tmp/runner5.ctr
+	rm tests/tmp/runner6.ctr ; echo "Program tidiness: 12." > tests/tmp/runner6.ctr ; cat ${fitem} >> tests/tmp/runner6.ctr
 	directive=`head -n1 $fitem`
 	echo "[translating...]"
 	if [ "$directive" != "‘SINGLE_LANGUAGE’." ]; then
-		rm tests/runner7.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/runner1.ctr 1> tests/runner7.ctr 2> tests/terrors7.log
-		rm tests/runner8.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/runner2.ctr 1> tests/runner8.ctr 2> tests/terrors8.log
-		rm tests/runner9.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/runner3.ctr 1> tests/runner9.ctr 2> tests/terrors9.log
-		rm tests/runner10.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/runner4.ctr 1> tests/runner10.ctr 2> tests/terrors10.log
-		rm tests/runner11.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/runner5.ctr 1> tests/runner11.ctr 2> tests/terrors11.log
-		rm tests/runner12.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/runner6.ctr 1> tests/runner12.ctr 2> tests/terrors12.log
-		rm tests/runner13.ctr ; ./bin/${OS}/ctrnl -t dict/nlxx.dict tests/runner12.ctr 1> tests/runner13.ctr 2> tests/terrors13.log
+		rm tests/tmp/runner7.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/tmp/runner1.ctr 1> tests/tmp/runner7.ctr 2> tests/tmp/terrors7.log
+		rm tests/tmp/runner8.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/tmp/runner2.ctr 1> tests/tmp/runner8.ctr 2> tests/tmp/terrors8.log
+		rm tests/tmp/runner9.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/tmp/runner3.ctr 1> tests/tmp/runner9.ctr 2> tests/tmp/terrors9.log
+		rm tests/tmp/runner10.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/tmp/runner4.ctr 1> tests/tmp/runner10.ctr 2> tests/tmp/terrors10.log
+		rm tests/tmp/runner11.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/tmp/runner5.ctr 1> tests/tmp/runner11.ctr 2> tests/tmp/terrors11.log
+		rm tests/tmp/runner12.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/tmp/runner6.ctr 1> tests/tmp/runner12.ctr 2> tests/tmp/terrors12.log
+		rm tests/tmp/runner13.ctr ; ./bin/${OS}/ctrnl -t dict/nlxx.dict tests/tmp/runner12.ctr 1> tests/tmp/runner13.ctr 2> tests/tmp/terrors13.log
 		for ISO in $(ls i18nsel)
 		do
-			rm tests/runner${ISO}.ctr ; ./bin/${OS}/ctrxx -t dict/xx${ISO}.dict tests/runner1.ctr 1>tests/runner${ISO}.ctr 2>tests/terrors${ISO}.log
+			rm tests/tmp/runner${ISO}.ctr ; ./bin/${OS}/ctrxx -t dict/xx${ISO}.dict tests/tmp/runner1.ctr 1>tests/tmp/runner${ISO}.ctr 2>tests/tmp/terrors${ISO}.log
 		done
 	fi
 	echo "[running...]";
@@ -98,24 +99,24 @@ for i in $(find tests -name 'test*.ctr'); do
 	else
 		echo "test" | ./bin/${OS}/ctrxx ${fitem} 1>/tmp/a0 2>/tmp/b0
 		if [ "$directive" != "‘SINGLE_RUN’." ]; then
-			echo "test" | ./bin/${OS}/ctrxx tests/runner1.ctr 1>/tmp/a1 2>/tmp/b1
-			echo "test" | ./bin/${OS}/ctrxx tests/runner2.ctr 1>/tmp/a2 2>/tmp/b2
-			echo "test" | ./bin/${OS}/ctrxx tests/runner3.ctr 1>/tmp/a3 2>/tmp/b3
-			echo "test" | ./bin/${OS}/ctrxx tests/runner4.ctr 1>/tmp/a4 2>/tmp/b4
-			echo "test" | ./bin/${OS}/ctrxx tests/runner5.ctr 1>/tmp/a5 2>/tmp/b5
-			echo "test" | ./bin/${OS}/ctrxx tests/runner6.ctr 1>/tmp/a6 2>/tmp/b6
+			echo "test" | ./bin/${OS}/ctrxx tests/tmp/runner1.ctr 1>/tmp/a1 2>/tmp/b1
+			echo "test" | ./bin/${OS}/ctrxx tests/tmp/runner2.ctr 1>/tmp/a2 2>/tmp/b2
+			echo "test" | ./bin/${OS}/ctrxx tests/tmp/runner3.ctr 1>/tmp/a3 2>/tmp/b3
+			echo "test" | ./bin/${OS}/ctrxx tests/tmp/runner4.ctr 1>/tmp/a4 2>/tmp/b4
+			echo "test" | ./bin/${OS}/ctrxx tests/tmp/runner5.ctr 1>/tmp/a5 2>/tmp/b5
+			echo "test" | ./bin/${OS}/ctrxx tests/tmp/runner6.ctr 1>/tmp/a6 2>/tmp/b6
 			if [ "$directive" != "‘SINGLE_LANGUAGE’." ]; then
-				echo "test" | ./bin/${OS}/ctrnl tests/runner7.ctr 1>/tmp/a7 2>/tmp/b7
-				echo "test" | ./bin/${OS}/ctrnl tests/runner8.ctr 1>/tmp/a8 2>/tmp/b8
-				echo "test" | ./bin/${OS}/ctrnl tests/runner9.ctr 1>/tmp/a9 2>/tmp/b9
-				echo "test" | ./bin/${OS}/ctrnl tests/runner10.ctr 1>/tmp/a10 2>/tmp/b10
-				echo "test" | ./bin/${OS}/ctrnl tests/runner11.ctr 1>/tmp/a11 2>/tmp/b11
-				echo "test" | ./bin/${OS}/ctrnl tests/runner12.ctr 1>/tmp/a12 2>/tmp/b12
-				echo "test" | ./bin/${OS}/ctrxx tests/runner13.ctr 1>/tmp/a13 2>/tmp/b13
-				echo "test" | ./bin/${OS}/ctrro tests/runner14.ctr 1>/tmp/a14 2>/tmp/b14
+				echo "test" | ./bin/${OS}/ctrnl tests/tmp/runner7.ctr 1>/tmp/a7 2>/tmp/b7
+				echo "test" | ./bin/${OS}/ctrnl tests/tmp/runner8.ctr 1>/tmp/a8 2>/tmp/b8
+				echo "test" | ./bin/${OS}/ctrnl tests/tmp/runner9.ctr 1>/tmp/a9 2>/tmp/b9
+				echo "test" | ./bin/${OS}/ctrnl tests/tmp/runner10.ctr 1>/tmp/a10 2>/tmp/b10
+				echo "test" | ./bin/${OS}/ctrnl tests/tmp/runner11.ctr 1>/tmp/a11 2>/tmp/b11
+				echo "test" | ./bin/${OS}/ctrnl tests/tmp/runner12.ctr 1>/tmp/a12 2>/tmp/b12
+				echo "test" | ./bin/${OS}/ctrxx tests/tmp/runner13.ctr 1>/tmp/a13 2>/tmp/b13
+				echo "test" | ./bin/${OS}/ctrro tests/tmp/runner14.ctr 1>/tmp/a14 2>/tmp/b14
 				for ISO in $(ls i18nsel)
 				do
-					echo "test" | ./bin/${OS}/ctr${ISO} tests/runner${ISO}.ctr 1>/tmp/a${ISO} 2>/tmp/b${ISO}
+					echo "test" | ./bin/${OS}/ctr${ISO} tests/tmp/runner${ISO}.ctr 1>/tmp/a${ISO} 2>/tmp/b${ISO}
 				done
 			fi
 		fi
@@ -177,7 +178,7 @@ for i in $(find tests -name 'test*.ctr'); do
 		do
 			if [ $ISO != 'xx' ]; then
 				actual=`cat /tmp/a${ISO} /tmp/b${ISO}`
-				langexp="${i%%.ctr}${ISO}.exp"
+				langexp="tests/exp/${ISO}/${base%%.ctr}${ISO}.exp"
 				if [ -f $langexp ]; then
 					expecting=`cat $langexp`
 					if [ "$actual" = "$expecting" ]; then

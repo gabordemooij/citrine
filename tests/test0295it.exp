@@ -1,5 +1,0 @@
-a b | Falso Falso Vero Vero -1
-b a | Vero Vero Falso Falso 1
-hallo hello | Falso Falso Vero Vero -4
-human human | Falso Vero Falso Vero 0
-x z | Falso Falso Vero Vero -2

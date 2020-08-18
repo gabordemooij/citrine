@@ -1,5 +1,0 @@
-a b | Falsch Falsch Richteg Richteg -1
-b a | Richteg Richteg Falsch Falsch 1
-hallo hello | Falsch Falsch Richteg Richteg -4
-human human | Falsch Richteg Falsch Richteg 0
-x z | Falsch Falsch Richteg Richteg -2

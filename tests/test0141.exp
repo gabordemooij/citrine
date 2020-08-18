@@ -1,7 +1,0 @@
-Test Stack trace over multiple files.
-Trigger an erroraaaUncatched error has occurred.
-Hi!
-#4 error: (tests/test0140.ctr: 11)
-#3 run (tests/test0140.ctr: 12)
-#2 run (tests/test0140.ctr: 15)
-#1 use: (tests/test0141.ctr: 4)
