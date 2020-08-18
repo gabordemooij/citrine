@@ -1,0 +1,27 @@
+(карта жаңы) койду эле:‘a"b’ __:‘test’
+Invalid JSON.
+(карта жаңы) койду эле:(тизме ← 1 ; 2 ; (тизме ← 3 ; 4) ; ((карта жаңы) койду эле:(тизме ← 3 ; 4) __:‘bar’, койду эле:1 __:‘foo’)) __:‘nested’, койду эле:False __:‘legend’, койду эле:27 __:‘age’, койду эле:‘Jack’ __:‘name’
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

@@ -1,0 +1,12 @@
+Tekst,Getal
+Tekst,Ja of Nee
+Getal,Tekst
+Getal,Ja of Nee
+Ja of Nee,Getal
+Ja of Nee,Getal
+Ja of Nee,Tekst
+Ja of Nee,Tekst
+=== String test ===
+123
+Nee
+Ja

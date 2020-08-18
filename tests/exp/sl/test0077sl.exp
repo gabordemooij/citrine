@@ -1,0 +1,12 @@
+Vrvica,Številka
+Vrvica,Boolov
+Številka,Vrvica
+Številka,Boolov
+Boolov,Številka
+Boolov,Številka
+Boolov,Vrvica
+Boolov,Vrvica
+=== String test ===
+123
+Lažno
+Prav

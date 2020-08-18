@@ -1,0 +1,12 @@
+Σειρά,Αριθμός
+Σειρά,Boolean
+Αριθμός,Σειρά
+Αριθμός,Boolean
+Boolean,Αριθμός
+Boolean,Αριθμός
+Boolean,Σειρά
+Boolean,Σειρά
+=== String test ===
+123
+Ψευδής
+Αληθής

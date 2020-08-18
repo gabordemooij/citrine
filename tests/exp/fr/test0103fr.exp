@@ -1,0 +1,11 @@
+9
+a Objet ‘Objet’  is NOT Nil.
+a Booléen ‘Vrai’  is NOT Nil.
+a Booléen ‘Faux’  is NOT Nil.
+a Booléen ‘Faux’  is NOT Nil.
+a Nombre ‘1’  is NOT Nil.
+a Nombre ‘0’  is NOT Nil.
+a Chaîne ‘Str’  is NOT Nil.
+a Chaîne ‘’  is NOT Nil.
+a Code ‘Code’  is NOT Nil.
+but.. Nil is.. certainly NIL!

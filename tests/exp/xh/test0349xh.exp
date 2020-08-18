@@ -1,0 +1,36 @@
+Nil
+Nil
+Boolean
+Kuyinyani
+Boolean
+Ubuxoki
+Inani
+1
+Inani
+-3
+Inani
+9,2
+Inani
+-9,2
+Uluhlu
+Uluhlu intsha 
+Uluhlu
+Uluhlu ← 1 ; 2
+Uluhlu
+Uluhlu ← 1 ; (Uluhlu ← 2)
+Uluhlu
+Uluhlu ← 1 ; (Uluhlu ← 2) ; 3
+Uluhlu
+Uluhlu ← 1 ; ((Imephu intsha) beka:‘a’ _e:‘b’) ; 3
+Uluhlu
+Uluhlu ← 1 ; ((Imephu intsha) beka:(Uluhlu ← 9) _e:‘b’) ; 3
+Imephu
+(Imephu intsha) beka:2 _e:‘1’
+Imephu
+(Imephu intsha) beka:2 _e:‘x’
+Imephu
+(Imephu intsha) beka:(Uluhlu ← 1 ; 2) _e:‘x’
+Imephu
+(Imephu intsha) beka:(Uluhlu ← ((Imephu intsha) beka:‘q’ _e:‘y’) ; 2) _e:‘x’
+Nil
+Nil

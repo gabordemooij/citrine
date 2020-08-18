@@ -1,0 +1,5 @@
+a b | Väärä Väärä Totta Totta -1
+b a | Totta Totta Väärä Väärä 1
+hallo hello | Väärä Väärä Totta Totta -4
+human human | Väärä Totta Väärä Totta 0
+x z | Väärä Väärä Totta Totta -2

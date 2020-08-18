@@ -1,0 +1,12 @@
+Khoele,Palo
+Khoele,Boolean
+Palo,Khoele
+Palo,Boolean
+Boolean,Palo
+Boolean,Palo
+Boolean,Khoele
+Boolean,Khoele
+=== String test ===
+123
+Bohata
+Ke nnete

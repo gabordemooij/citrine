@@ -1,0 +1,12 @@
+Sträng,Siffra
+Sträng,Boolean
+Siffra,Sträng
+Siffra,Boolean
+Boolean,Siffra
+Boolean,Siffra
+Boolean,Sträng
+Boolean,Sträng
+=== String test ===
+123
+Falsk
+Sann

@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. Diso
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is Nil meters long.
+Luckily, this day, there are Nil wasps in the garden.
+The dog named Nil sleeps under the tree.
+a\"bb\"ccc\"
+(Map vaovao) hametraka:((Map vaovao) hametraka:Nil amin’ny:‘dog’, hametraka:Nil amin’ny:‘insects’, hametraka:((Map vaovao) hametraka:15 amin’ny:‘length’, hametraka:8 amin’ny:‘width’) amin’ny:‘size’, hametraka:(List ← ‘tulips’ ; ‘roses’ ; ‘lillies’) amin’ny:‘flower’, hametraka:Diso amin’ny:‘shed’, hametraka:Marina amin’ny:‘pool’, hametraka:2 amin’ny:‘chairs’) amin’ny:‘garden’
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

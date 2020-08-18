@@ -1,0 +1,11 @@
+9
+a 목적 ‘목적’  is NOT Nil.
+a 부울 ‘진실’  is NOT Nil.
+a 부울 ‘그릇된’  is NOT Nil.
+a 부울 ‘그릇된’  is NOT Nil.
+a 번호 ‘1’  is NOT Nil.
+a 번호 ‘0’  is NOT Nil.
+a _끈 ‘Str’  is NOT Nil.
+a _끈 ‘’  is NOT Nil.
+a 암호 ‘암호’  is NOT Nil.
+but.. Nil is.. certainly NIL!

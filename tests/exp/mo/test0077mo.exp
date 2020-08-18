@@ -1,0 +1,12 @@
+Striŋ,Number
+Striŋ,Būlean
+Number,Striŋ
+Number,Būlean
+Būlean,Number
+Būlean,Number
+Būlean,Striŋ
+Būlean,Striŋ
+=== String test ===
+123
+False
+True

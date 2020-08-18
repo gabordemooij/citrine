@@ -1,0 +1,11 @@
+9
+a Gjenstand ‘Gjenstand’  is NOT Nil.
+a Boolean ‘Ekte’  is NOT Nil.
+a Boolean ‘Falsk’  is NOT Nil.
+a Boolean ‘Falsk’  is NOT Nil.
+a Nummer ‘1’  is NOT Nil.
+a Nummer ‘0’  is NOT Nil.
+a String ‘Str’  is NOT Nil.
+a String ‘’  is NOT Nil.
+a Kode ‘Kode’  is NOT Nil.
+but.. Nil is.. certainly NIL!

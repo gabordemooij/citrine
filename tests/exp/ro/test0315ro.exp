@@ -1,0 +1,27 @@
+(Hartă crea) pune:‘a"b’ la:‘test’
+Invalid JSON.
+(Hartă crea) pune:(Listă ← 1 ; 2 ; (Listă ← 3 ; 4) ; ((Hartă crea) pune:(Listă ← 3 ; 4) la:‘bar’, pune:1 la:‘foo’)) la:‘nested’, pune:Fals la:‘legend’, pune:27 la:‘age’, pune:‘Jack’ la:‘name’
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

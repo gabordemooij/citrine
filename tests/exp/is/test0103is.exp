@@ -1,0 +1,11 @@
+9
+a Markmið ‘Markmið’  is NOT Nil.
+a Boolean ‘Satt’  is NOT Nil.
+a Boolean ‘Rangt’  is NOT Nil.
+a Boolean ‘Rangt’  is NOT Nil.
+a Fjöldi ‘1’  is NOT Nil.
+a Fjöldi ‘0’  is NOT Nil.
+a Strengur ‘Str’  is NOT Nil.
+a Strengur ‘’  is NOT Nil.
+a Kóði ‘Kóði’  is NOT Nil.
+but.. Nil is.. certainly NIL!

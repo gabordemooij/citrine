@@ -1,0 +1,11 @@
+9
+a Vật ‘Vật’  is NOT Nil.
+a Boolean ‘Thật’  is NOT Nil.
+a Boolean ‘Sai’  is NOT Nil.
+a Boolean ‘Sai’  is NOT Nil.
+a Con số ‘1’  is NOT Nil.
+a Con số ‘0’  is NOT Nil.
+a Chuỗi ‘Str’  is NOT Nil.
+a Chuỗi ‘’  is NOT Nil.
+a Mã ‘Mã’  is NOT Nil.
+but.. Nil is.. certainly NIL!

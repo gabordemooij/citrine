@@ -1,0 +1,11 @@
+9
+a Objekt ‘Objekt’  is NOT Nil.
+a Boolean ‘Sann’  is NOT Nil.
+a Boolean ‘Falsk’  is NOT Nil.
+a Boolean ‘Falsk’  is NOT Nil.
+a Siffra ‘1’  is NOT Nil.
+a Siffra ‘0’  is NOT Nil.
+a Sträng ‘Str’  is NOT Nil.
+a Sträng ‘’  is NOT Nil.
+a Koda ‘Koda’  is NOT Nil.
+but.. Nil is.. certainly NIL!

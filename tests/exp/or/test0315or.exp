@@ -1,0 +1,27 @@
+(ମାନଚିତ୍ର ନୂତନ) put:‘a"b’ at:‘test’
+Invalid JSON.
+(ମାନଚିତ୍ର ନୂତନ) put:(ତାଲିକା | ← 1 ; 2 ; (ତାଲିକା | ← 3 ; 4) ; ((ମାନଚିତ୍ର ନୂତନ) put:(ତାଲିକା | ← 3 ; 4) at:‘bar’, put:1 at:‘foo’)) at:‘nested’, put:ମିଥ୍ୟା at:‘legend’, put:27 at:‘age’, put:‘Jack’ at:‘name’
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

@@ -1,0 +1,11 @@
+9
+a ਆਬਜੈਕਟ ‘ਆਬਜੈਕਟ’  is NOT Nil.
+a ਬੂਲੀਅਨ ‘ਸਚੁ’  is NOT Nil.
+a ਬੂਲੀਅਨ ‘ਗਲਤ’  is NOT Nil.
+a ਬੂਲੀਅਨ ‘ਗਲਤ’  is NOT Nil.
+a ਗਿਣਤੀ ‘1’  is NOT Nil.
+a ਗਿਣਤੀ ‘0’  is NOT Nil.
+a ਸਤਰ ‘Str’  is NOT Nil.
+a ਸਤਰ ‘’  is NOT Nil.
+a ਕੋਡ ‘ਕੋਡ’  is NOT Nil.
+but.. Nil is.. certainly NIL!

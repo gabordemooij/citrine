@@ -1,0 +1,5 @@
+a b | Onwaar Onwaar True True -1
+b a | True True Onwaar Onwaar 1
+hallo hello | Onwaar Onwaar True True -4
+human human | Onwaar True Onwaar True 0
+x z | Onwaar Onwaar True True -2

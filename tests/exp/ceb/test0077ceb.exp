@@ -1,0 +1,12 @@
+Ang String,Numero
+Ang String,Boolean
+Numero,Ang String
+Numero,Boolean
+Boolean,Numero
+Boolean,Numero
+Boolean,Ang String
+Boolean,Ang String
+=== String test ===
+123
+Bakak
+Tinuod

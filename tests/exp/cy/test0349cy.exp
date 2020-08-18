@@ -1,0 +1,36 @@
+Dim
+Dim
+Boole
+Gwir
+Boole
+Anghywir
+Rhif
+1
+Rhif
+-3
+Rhif
+9,2
+Rhif
+-9,2
+Rhestr
+Rhestr newydd 
+Rhestr
+Rhestr ← 1 ; 2
+Rhestr
+Rhestr ← 1 ; (Rhestr ← 2)
+Rhestr
+Rhestr ← 1 ; (Rhestr ← 2) ; 3
+Rhestr
+Rhestr ← 1 ; ((Map newydd) rhoi:‘a’ yn:‘b’) ; 3
+Rhestr
+Rhestr ← 1 ; ((Map newydd) rhoi:(Rhestr ← 9) yn:‘b’) ; 3
+Map
+(Map newydd) rhoi:2 yn:‘1’
+Map
+(Map newydd) rhoi:2 yn:‘x’
+Map
+(Map newydd) rhoi:(Rhestr ← 1 ; 2) yn:‘x’
+Map
+(Map newydd) rhoi:(Rhestr ← ((Map newydd) rhoi:‘q’ yn:‘y’) ; 2) yn:‘x’
+Dim
+Dim

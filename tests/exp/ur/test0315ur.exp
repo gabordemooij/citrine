@@ -1,0 +1,27 @@
+(نقشہ نئی) ڈال:‘a"b’ پر:‘test’
+Invalid JSON.
+(نقشہ نئی) ڈال:(فہرست ← 1 ; 2 ; (فہرست ← 3 ; 4) ; ((نقشہ نئی) ڈال:(فہرست ← 3 ; 4) پر:‘bar’, ڈال:1 پر:‘foo’)) پر:‘nested’, ڈال:جھوٹا پر:‘legend’, ڈال:27 پر:‘age’, ڈال:‘Jack’ پر:‘name’
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Unescape
+hello\tworld
+"hello world"
+a"b
+hello	world
+hello
+world
+hello	wo
+rld
+hello		wo
+
+rld
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld

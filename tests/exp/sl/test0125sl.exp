@@ -1,0 +1,5 @@
+file contains: hello
+read 2 bytes: "he"
+read 3 more bytes: "llo"
+Bytes written: 8
+Finally, file contains: hello friend!

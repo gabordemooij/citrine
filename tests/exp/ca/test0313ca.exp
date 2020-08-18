@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. Fals
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is Nil meters long.
+Luckily, this day, there are Nil wasps in the garden.
+The dog named Nil sleeps under the tree.
+a\"bb\"ccc\"
+(Mapa nou) posar:((Mapa nou) posar:Nil _a:‘dog’, posar:Nil _a:‘insects’, posar:((Mapa nou) posar:15 _a:‘length’, posar:8 _a:‘width’) _a:‘size’, posar:(Llista ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _a:‘flower’, posar:Fals _a:‘shed’, posar:És cert _a:‘pool’, posar:2 _a:‘chairs’) _a:‘garden’
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

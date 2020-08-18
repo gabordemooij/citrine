@@ -1,0 +1,12 @@
+Tali,Jumlah
+Tali,Boolean
+Jumlah,Tali
+Jumlah,Boolean
+Boolean,Jumlah
+Boolean,Jumlah
+Boolean,Tali
+Boolean,Tali
+=== String test ===
+123
+Salah
+Benar

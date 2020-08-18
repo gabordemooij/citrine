@@ -1,0 +1,36 @@
+Nada
+Nada
+Boleano
+Verdade
+Boleano
+Falso
+Número
+1
+Número
+-3
+Número
+9,2
+Número
+-9,2
+Lista
+Lista novo 
+Lista
+Lista ← 1 ; 2
+Lista
+Lista ← 1 ; (Lista ← 2)
+Lista
+Lista ← 1 ; (Lista ← 2) ; 3
+Lista
+Lista ← 1 ; ((Mapa novo) coloque em:‘a’ __:‘b’) ; 3
+Lista
+Lista ← 1 ; ((Mapa novo) coloque em:(Lista ← 9) __:‘b’) ; 3
+Mapa
+(Mapa novo) coloque em:2 __:‘1’
+Mapa
+(Mapa novo) coloque em:2 __:‘x’
+Mapa
+(Mapa novo) coloque em:(Lista ← 1 ; 2) __:‘x’
+Mapa
+(Mapa novo) coloque em:(Lista ← ((Mapa novo) coloque em:‘q’ __:‘y’) ; 2) __:‘x’
+Nada
+Nada

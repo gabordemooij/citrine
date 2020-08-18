@@ -1,0 +1,12 @@
+Llinyn,Rhif
+Llinyn,Boole
+Rhif,Llinyn
+Rhif,Boole
+Boole,Rhif
+Boole,Rhif
+Boole,Llinyn
+Boole,Llinyn
+=== String test ===
+123
+Anghywir
+Gwir

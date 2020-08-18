@@ -1,0 +1,36 @@
+Eber
+Eber
+Boolean
+Run
+Boolean
+Been
+Tirada
+1
+Tirada
+-3
+Tirada
+9,2
+Tirada
+-9,2
+Liiska
+Liiska cusub 
+Liiska
+Liiska ← 1 ; 2
+Liiska
+Liiska ← 1 ; (Liiska ← 2)
+Liiska
+Liiska ← 1 ; (Liiska ← 2) ; 3
+Liiska
+Liiska ← 1 ; ((Khariidad cusub) dhigaa:‘a’ at:‘b’) ; 3
+Liiska
+Liiska ← 1 ; ((Khariidad cusub) dhigaa:(Liiska ← 9) at:‘b’) ; 3
+Khariidad
+(Khariidad cusub) dhigaa:2 at:‘1’
+Khariidad
+(Khariidad cusub) dhigaa:2 at:‘x’
+Khariidad
+(Khariidad cusub) dhigaa:(Liiska ← 1 ; 2) at:‘x’
+Khariidad
+(Khariidad cusub) dhigaa:(Liiska ← ((Khariidad cusub) dhigaa:‘q’ at:‘y’) ; 2) at:‘x’
+Eber
+Eber

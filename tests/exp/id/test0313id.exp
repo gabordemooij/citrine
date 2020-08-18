@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. Salah
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is Nol meters long.
+Luckily, this day, there are Nol wasps in the garden.
+The dog named Nol sleeps under the tree.
+a\"bb\"ccc\"
+(Peta baru) menempatkan:((Peta baru) menempatkan:Nol di:‘dog’, menempatkan:Nol di:‘insects’, menempatkan:((Peta baru) menempatkan:15 di:‘length’, menempatkan:8 di:‘width’) di:‘size’, menempatkan:(Daftar ← ‘tulips’ ; ‘roses’ ; ‘lillies’) di:‘flower’, menempatkan:Salah di:‘shed’, menempatkan:Benar di:‘pool’, menempatkan:2 di:‘chairs’) di:‘garden’
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

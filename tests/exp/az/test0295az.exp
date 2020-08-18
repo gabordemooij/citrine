@@ -1,0 +1,5 @@
+a b | Yalan Yalan Doğru Doğru -1
+b a | Doğru Doğru Yalan Yalan 1
+hallo hello | Yalan Yalan Doğru Doğru -4
+human human | Yalan Doğru Yalan Doğru 0
+x z | Yalan Yalan Doğru Doğru -2

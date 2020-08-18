@@ -1,0 +1,11 @@
+9
+a Objekt ‘Objekt’  is NOT Nil.
+a Boolean ‘Istinito’  is NOT Nil.
+a Boolean ‘Lažno’  is NOT Nil.
+a Boolean ‘Lažno’  is NOT Nil.
+a Broj ‘1’  is NOT Nil.
+a Broj ‘0’  is NOT Nil.
+a Gudački ‘Str’  is NOT Nil.
+a Gudački ‘’  is NOT Nil.
+a Šifra ‘Šifra’  is NOT Nil.
+but.. Nil is.. certainly NIL!
