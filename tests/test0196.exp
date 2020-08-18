@@ -1,7 +1,0 @@
-Uncatched error has occurred.
-Key not found: name
-#5 name (tests/test0196.ctr: 12)
-#4 `name (tests/test0196.ctr: 21)
-#3 + (tests/test0196.ctr: 21)
-#2 name (tests/test0196.ctr: 24)
-#1 write: (tests/test0196.ctr: 24)

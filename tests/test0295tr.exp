@@ -1,5 +1,0 @@
-a b | Yanlış Yanlış Doğru Doğru -1
-b a | Doğru Doğru Yanlış Yanlış 1
-hallo hello | Yanlış Yanlış Doğru Doğru -4
-human human | Yanlış Doğru Yanlış Doğru 0
-x z | Yanlış Yanlış Doğru Doğru -2
