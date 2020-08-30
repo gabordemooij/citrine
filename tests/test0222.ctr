@@ -1,4 +1,15 @@
-☞ newString ≔ (‘hello world’ pattern: ‘([eor])([l]+)’ process: { :match
-	↲ ‘*’.
-}).
-✎ write: newString,end.
+☞ a ≔ ‘hello world’.
+☞ b ≔ ‘’.
+a characters each: { :i :x
+	
+	x
+	case: ‘e’ do: { x ≔ ‘*’. },
+	case: ‘r’ do: { x ≔ ‘*’. },
+	case: ‘l’ do: { x ≔ ‘*’. }.
+	
+	b append: x.
+	
+}.
+✎ write: b, stop.
+
+

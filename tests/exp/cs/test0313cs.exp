@@ -1,10 +1,10 @@
 There are 2 chairs in the sunny garden.
 A rubber duck swims in the pool.
-Is there a shed in the garden? Well.. Nepravdivé
+Is there a shed in the garden? Well.. Nepravda
 In the garden you smell the fragrance of tulips and roses and lillies.
-The garden is Nula meters long.
-Luckily, this day, there are Nula wasps in the garden.
-The dog named Nula sleeps under the tree.
+The garden is Nic meters long.
+Luckily, this day, there are Nic wasps in the garden.
+The dog named Nic sleeps under the tree.
 a\"bb\"ccc\"
-(Mapa nový) dát:((Mapa nový) dát:Nula na:‘dog’, dát:Nula na:‘insects’, dát:((Mapa nový) dát:15 na:‘length’, dát:8 na:‘width’) na:‘size’, dát:(Seznam ← ‘tulips’ ; ‘roses’ ; ‘lillies’) na:‘flower’, dát:Nepravdivé na:‘shed’, dát:Skutečný na:‘pool’, dát:2 na:‘chairs’) na:‘garden’
+(Mapa nový) umístit:((Mapa nový) umístit:Nic na:‘dog’, umístit:Nic na:‘insects’, umístit:((Mapa nový) umístit:15 na:‘length’, umístit:8 na:‘width’) na:‘size’, umístit:(Seznam ← ‘tulips’ ; ‘roses’ ; ‘lillies’) na:‘flower’, umístit:Nepravda na:‘shed’, umístit:Pravda na:‘pool’, umístit:2 na:‘chairs’) na:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

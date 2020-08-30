@@ -19,35 +19,6 @@ String on: ‘escape:’ do: { :characters
 	↲ str.
 }.
 
-String on: ‘unescape:’ do: { :text
-	☞ str ≔ ⛏.
-	text characters each: { :number :character
-		
-		(character = ‘\t’) true: {
-			character ≔ ‘\\t’.
-		}.
-		
-		(character = ‘\n’) true: {
-			character ≔ ‘\\n’.
-		}.
-		
-		str ≔ str pattern: (‘\\\\+(X)’ X character) process: { :match
-			
-			☞ special ≔ match ? 2.
-			
-			((match ? 1) = ‘\\t’) true: {
-				special ≔ ‘⇿’.
-			}.
-			
-			((match ? 1) = ‘\\n’) true: {
-				special ≔ ‘↵’.
-			}.
-			
-			↲ special.
-		}.
-	}.
-	↲ str.
-}.
 
 
 ☞ json ≔ ‘{"test":"a\\"b"}’.
@@ -79,14 +50,6 @@ String on: ‘unescape:’ do: { :text
 ☞ json ≔ ‘{"test":"a\\b"}’.
 ✎ write: (Json jsonify: (Json to object: json)), stop.
 
-✎ write: ‘______________________Unescape\n’.
-✎ write: (‘hello\\tworld’ unescape: ‘’), stop.
-✎ write: (‘\"hello world\"’ unescape: ‘"’), stop.
-✎ write: (‘a\\"b’ unescape: ‘"’), stop.
-✎ write: (‘hello\\tworld’ unescape: ‘\t’), stop.
-✎ write: (‘hello\\nworld’ unescape: ‘\n’), stop.
-✎ write: (‘hello\\two\\nrld’ unescape: ‘\t\n’), stop.
-✎ write: (‘hello\\t\\two\\n\\nrld’ unescape: ‘\t\n’), stop.
 
 ✎ write: ‘______________________Escape\n’.
 ✎ write: (‘hello\tworld’ escape: ‘’), stop.

@@ -13,6 +13,7 @@ core
 /container
 /tests/runner*
 /tests/terrors*
+/tests/tmp/*
 /gitignore
 /examples/work
 /misc/tabelmaker*

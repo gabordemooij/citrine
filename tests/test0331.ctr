@@ -1,5 +1,5 @@
 ☞ str ≔ ‘abc’.
-☞ x ≔ str byte: 4.
+☞ x ≔ str character: 4.
 ( x Nil? ) true: {
 	✎ write: ‘Found string boundary’.
 }.

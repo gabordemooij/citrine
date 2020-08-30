@@ -12,7 +12,6 @@ Scope on: ‘test’ do: {
 	(List ← 1) each: {  ✎ write: ⚿ property. ⛏ confirm. }.
 	(List ← 1 ; 2) sort: {  ✎ write: ⚿ property. ⛏ confirm. ↲ 0. }.
 	(Map new one: ‘item’) each: { ✎ write: ⚿ property. ⛏ confirm. }.
-	‘abc’ pattern: ‘([a])’ process: { ✎ write: ⚿ property. ⛏ confirm. } options: ‘’.
 	{ 1 ÷ 0. } catch: { ✎ write: ⚿ property. ⛏ confirm. }, run.
 	✎ stop.
 }.
@@ -30,7 +29,6 @@ scope1 test.
 	(List ← 1) each: {  ✎ write: ⚿ property. ⛏ confirm. }.
 	(List ← 1 ; 2) sort: {  ✎ write: ⚿ property. ⛏ confirm. ↲ 0. }.
 	(Map new one: ‘item’) each: { ✎ write: ⚿ property. ⛏ confirm. }.
-	‘abc’ pattern: ‘([a])’ process: { ✎ write: ⚿ property. ⛏ confirm. } options: ‘’.
 	{ 1 ÷ 0. } catch: { ✎ write: ⚿ property. ⛏ confirm. }, run.
 	✎ stop.
 }.

@@ -1,9 +1,9 @@
-Nula
-Nula
+Nic
+Nic
 Boolean
-Skutečný
+Pravda
 Boolean
-Nepravdivé
+Nepravda
 Číslo
 1
 Číslo
@@ -21,16 +21,16 @@ Seznam ← 1 ; (Seznam ← 2)
 Seznam
 Seznam ← 1 ; (Seznam ← 2) ; 3
 Seznam
-Seznam ← 1 ; ((Mapa nový) dát:‘a’ na:‘b’) ; 3
+Seznam ← 1 ; ((Mapa nový) umístit:‘a’ na:‘b’) ; 3
 Seznam
-Seznam ← 1 ; ((Mapa nový) dát:(Seznam ← 9) na:‘b’) ; 3
+Seznam ← 1 ; ((Mapa nový) umístit:(Seznam ← 9) na:‘b’) ; 3
 Mapa
-(Mapa nový) dát:2 na:‘1’
+(Mapa nový) umístit:2 na:‘1’
 Mapa
-(Mapa nový) dát:2 na:‘x’
+(Mapa nový) umístit:2 na:‘x’
 Mapa
-(Mapa nový) dát:(Seznam ← 1 ; 2) na:‘x’
+(Mapa nový) umístit:(Seznam ← 1 ; 2) na:‘x’
 Mapa
-(Mapa nový) dát:(Seznam ← ((Mapa nový) dát:‘q’ na:‘y’) ; 2) na:‘x’
-Nula
-Nula
+(Mapa nový) umístit:(Seznam ← ((Mapa nový) umístit:‘q’ na:‘y’) ; 2) na:‘x’
+Nic
+Nic

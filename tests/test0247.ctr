@@ -2,11 +2,11 @@
 
 
 ☞ q ≔ ‘abc’.
-☞ x ≔ q list.
+☞ x ≔ q characters.
 ✎ write: x, stop.
 ✎ write: x count, stop.
 
 q ≔ ‘기나 긴 여행’.
-x ≔ q list.
+x ≔ q characters.
 ✎ write: x, stop.
 ✎ write: (x count), stop.
