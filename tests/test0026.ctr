@@ -1,6 +1,4 @@
-✎ write: ‘Hello’ bytes.
-✎ write: ‘Great’ bytes + 5.
-✎ write: ‘象形’ bytes - ‘象形’ length.
+✎ write: ‘象形’ length.
 ✎ write: (‘Hello!’ from: 2 length: 3).
 ✎ write: (‘Hello!’ from: 3 length: 3).
 ☞ a ≔ 2.

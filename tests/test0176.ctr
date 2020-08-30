@@ -9,9 +9,7 @@ Program tidiness: 0.
 
 ☞ txt ≔ ‘Word Salad’.
 ✎ write: ‘Text Length: ’ + txt length, stop.
-✎ write: ‘Text Length in bytes: ’ + txt bytes, stop.
 ✎ write: ‘Character at 2:’ + ( txt character: 3 ), stop.
-✎ write: ‘Byte at 2:’ + ( txt byte: 3 ), stop.
 ✎ write: (( txt find: ‘S’ ) - 1), stop.
 
 Program clean memory.
@@ -21,9 +19,7 @@ usedMemory1 ≔ (Program memory ? 1).
 
 txt ≔ ‘Word Salad’.
 ✎ write: ‘Text Length: ’ + txt length, stop.
-✎ write: ‘Text Length in bytes: ’ + txt bytes, stop.
 ✎ write: ‘Character at 2:’ + ( txt character: 3 ), stop.
-✎ write: ‘Byte at 2:’ + ( txt byte: 3 ), stop.
 ✎ write: (( txt find: ‘S’ ) - 1), stop.
 
 Program clean memory.
@@ -32,9 +28,7 @@ usedMemory2 ≔ (Program memory ? 1).
 
 txt ≔ ‘Word Salad’.
 ✎ write: ‘Text Length: ’ + txt length, stop.
-✎ write: ‘Text Length in bytes: ’ + txt bytes, stop.
 ✎ write: ‘Character at 2:’ + ( txt character: 3 ), stop.
-✎ write: ‘Byte at 2:’ + ( txt byte: 3 ), stop.
 ✎ write: (( txt find: ‘S’ ) - 1), stop.
 
 Program clean memory.

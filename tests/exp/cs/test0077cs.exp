@@ -1,12 +1,12 @@
-Tětiva,Číslo
-Tětiva,Boolean
-Číslo,Tětiva
+Řetězec,Číslo
+Řetězec,Boolean
+Číslo,Řetězec
 Číslo,Boolean
 Boolean,Číslo
 Boolean,Číslo
-Boolean,Tětiva
-Boolean,Tětiva
+Boolean,Řetězec
+Boolean,Řetězec
 === String test ===
 123
-Nepravdivé
-Skutečný
+Nepravda
+Pravda

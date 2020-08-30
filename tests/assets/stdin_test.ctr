@@ -1,1 +1,1 @@
-✎ write: ‘% characters.↵’ % (Program input bytes).
+✎ write: ‘% characters.↵’ % (Program input length).

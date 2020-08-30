@@ -6,18 +6,6 @@ a	b
 {"test":"a\nb"}
 {"test":"a\"b"}
 {"test":"a\b"}
-______________________Unescape
-hello\tworld
-"hello world"
-a"b
-hello	world
-hello
-world
-hello	wo
-rld
-hello		wo
-
-rld
 ______________________Escape
 hello	world
 a\"b
