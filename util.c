@@ -160,22 +160,6 @@ ctr_object* ctr_error( char* message, int error_code ) {
 /**
  * @internal
  *
- * Checks the language of the build with the language
- * of the plugin.
- */
-void ctr_plugin_check_language( char* code ) {
-	int l = strlen(code);
-	if ( l == strlen(CTR_MSG_LANG_CODE) ) {
-		if ( strncmp( code, CTR_MSG_LANG_CODE, l ) == 0 ) {
-			return;
-		}
-	}
-	ctr_print_error(CTR_TERR_LMISMAT, 1);
-}
-
-/**
- * @internal
- *
  * Prints a message to the error stream.
  */
 void ctr_print_error( char* error, int code ) {

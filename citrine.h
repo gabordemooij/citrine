@@ -730,8 +730,6 @@ extern int ctr_clex_forward_scan( char* codePointer, ctr_size* newCodePointer );
 extern int ctr_clex_backward_scan( char* codePointer, char* bytes, ctr_size* newCodePointer, ctr_size limit );
 extern void ctr_print_error(char* error, int code);
 
-extern void ctr_plugin_check_language( char* code );
-
 size_t ctr_heap_tracker_memoryblocknumber();
 size_t ctr_heap_tracker_rewind( size_t memoryBlockNumber );
 
