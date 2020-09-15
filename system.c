@@ -1165,21 +1165,21 @@ ctr_object* ctr_clock_week( ctr_object* myself, ctr_argument* argumentList ) {
 
 /**
  * @def
- * [ Moment ] format: [ String ]
- * 
+ * [ Moment ] string
+ *
  * @example
- * ☞ x := '%Y-%m-%d'.
- * ☞ t := Moment new.
- * ☞ q := t format: x.
- * ✎ write: q, stop.
+ * Moment on: 'format:' do: { ↲ 'beautiful moment'. }.
+ * Moment on: 'time' do: { ↲ '999'. }.
+ * ✎ write: Moment, end.
+ * ✎ write: Moment number, end.
  */
-ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList ) {
+ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	char*       zone;
 	char*       description;
 	ctr_object* answer;
 	time_t      timeStamp;
 	char*       format;
-	format = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->object ) );
+	format = CTR_STDDATEFRMT;
 	zone = ctr_heap_allocate_cstring(
 		ctr_internal_cast2string(
 			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY )
@@ -1194,28 +1194,7 @@ ctr_object* ctr_clock_format( ctr_object* myself, ctr_argument* argumentList ) {
 	setenv( "TZ", "UTC", 1 );
 	answer = ctr_build_string_from_cstring( description );
 	ctr_heap_free( description );
-	ctr_heap_free( format );
 	ctr_heap_free( zone );
-	return answer;
-}
-
-/**
- * @def
- * [ Moment ] string
- *
- * @example
- * Moment on: 'format:' do: { ↲ 'beautiful moment'. }.
- * Moment on: 'time' do: { ↲ '999'. }.
- * ✎ write: Moment, end.
- * ✎ write: Moment number, end.
- */
-ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_argument* newArgumentList;
-	ctr_object*   answer;
-	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
-	newArgumentList->object = ctr_build_string_from_cstring( CTR_STDDATEFRMT );
-	answer = ctr_send_message( myself, CTR_DICT_FORMAT, strlen(CTR_DICT_FORMAT), newArgumentList );
-	ctr_heap_free( newArgumentList );
 	return answer;
 }
 

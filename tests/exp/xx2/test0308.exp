@@ -1,21 +1,13 @@
-Sending toString to Program yields a PID string:
+Sending toString to Program yields a version string:
 Citrine Programming Language EN/US
 
-Sending toNumber to Program yields a PID number:
+Sending toNumber to Program yields a version number:
 93
-Sending toString to Dice yields a random number string:
-666
-Sending toNumber to Dice yields a random number:
-666
 Sending toString to Clock yields a date and time string:
-1666-01-13 06:06:06
+True
 Sending toNumber to Clock yields a time stamp number:
-999
+True
 Sending toString to File yields a path:
 [File (no path)]
 Sending toNumber to File yields a 1:
 1
-(Map new) put:(Citrine Programming Language EN/US
-) at:‘Program’, put:(666) at:‘dice’
-List ← (666) ; (Citrine Programming Language EN/US
-)
