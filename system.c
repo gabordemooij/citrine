@@ -1358,3 +1358,168 @@ ctr_object* ctr_console_brk(ctr_object* myself, ctr_argument* argumentList) {
 	fwrite("\n", sizeof(char), 1, stdout);
 	return myself;
 }
+
+
+
+/**
+ * @internal
+ *
+ * Shell Object uses a fluid API.
+ */
+ctr_object* ctr_slurp_respond_to(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_argument* newArgumentList;
+	ctr_object*   newCommandObj;
+	ctr_object*   commandObj;
+	ctr_object*   key;
+	newCommandObj = argumentList->object;
+	key = ctr_build_string_from_cstring( "command" );
+	commandObj = ctr_internal_object_find_property( myself, key, CTR_CATEGORY_PRIVATE_PROPERTY );
+	newArgumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+	if ( commandObj == NULL ) {
+		commandObj = ctr_build_empty_string();
+		ctr_internal_object_set_property( myself, key, commandObj, CTR_CATEGORY_PRIVATE_PROPERTY );
+	} else {
+		newArgumentList->object = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring( "glue" ), CTR_CATEGORY_PRIVATE_PROPERTY );
+		ctr_string_append( commandObj, newArgumentList );
+	}
+	newArgumentList->object = newCommandObj;
+	ctr_string_append( commandObj, newArgumentList );
+	ctr_heap_free( newArgumentList );
+	return myself;
+}
+
+ctr_object* ctr_slurp_glue_set(ctr_object* myself, char* glue) {
+	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( "glue" ), ctr_build_string_from_cstring(glue), CTR_CATEGORY_PRIVATE_PROPERTY );
+	return myself;
+}
+
+ctr_object* ctr_path_respond_to(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* pathObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	pathObject->link = CtrStdSlurp;
+	ctr_slurp_glue_set(pathObject, CTR_DIRSEP);
+	return ctr_slurp_respond_to(pathObject, argumentList);
+}
+
+ctr_object* ctr_path_respond_to_and(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* pathObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	pathObject->link = CtrStdSlurp;
+	ctr_slurp_glue_set(pathObject, CTR_DIRSEP);
+	return ctr_slurp_respond_to_and(pathObject, argumentList);
+}
+
+ctr_object* ctr_shellcommand_respond_to(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* shellCommandObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	shellCommandObject->link = CtrStdSlurp;
+	ctr_slurp_glue_set(shellCommandObject, " ");
+	return ctr_slurp_respond_to(shellCommandObject, argumentList);
+}
+
+ctr_object* ctr_shellcommand_respond_to_and(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* shellCommandObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	shellCommandObject->link = CtrStdSlurp;
+	ctr_slurp_glue_set(shellCommandObject, " ");
+	return ctr_slurp_respond_to_and(shellCommandObject, argumentList);
+}
+
+/**
+ * @internal
+ * 
+ * Slurp uses a fluid API
+ */
+ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* str;
+	ctr_argument* newArgumentList;
+	newArgumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+	str = ctr_internal_cast2string( argumentList->object );
+	if ( (str->value.svalue->vlen > 0) && *(str->value.svalue->value + (str->value.svalue->vlen - 1)) == ':' ) {
+		char* ncstr = ctr_heap_allocate( str->value.svalue->vlen - 1 );
+		memcpy( ncstr, str->value.svalue->value, str->value.svalue->vlen - 1 );
+		newArgumentList->object = ctr_build_string( ncstr, str->value.svalue->vlen - 1 );
+		ctr_slurp_respond_to( myself, newArgumentList );
+		ctr_heap_free( ncstr );
+	} else {
+		newArgumentList->object = argumentList->object;
+		ctr_slurp_respond_to( myself, newArgumentList );
+	}
+	newArgumentList->object = argumentList->next->object;
+	ctr_slurp_respond_to( myself, newArgumentList );
+	ctr_heap_free( newArgumentList );
+	return myself;
+}
+
+/**
+ * [Slurp]
+ *
+ * Slurp is an object that takes any message and converts it to a string.
+ * The message 'obtain' can be used to acquire the generated string.
+ * The Slurp object is a separate object with minimal messages to avoid
+ * 'message collision'.
+ */
+
+/**
+ * [Slurp] obtain.
+ * 
+ * Obtains the string generated using the Slurp object.
+ * A Slurp object collects all messages send to it and flushes its buffer while
+ * returning the resulting string after an 'obtain' message has been received.
+ * 
+ * Usage:
+ * 
+ * Slurp hello world.
+ * Pen write: (Slurp obtain).
+ * 
+ * This will output: 'hello world'.
+ * Use the Slurp object to integrate verbose shell commands, other programming languages
+ * (like SQL) etc into your main program without overusing strings.
+ *
+ * Note that we can't use the = and * unfortunately right now
+ * because = is also a method in the main object. While * can be used
+ * theoretically, it expects an identifier, and 'from' is not a real
+ * identifier, it's just another unary message, so instead of using a binary
+ * * we simply use a keyword message select: with argument '*' and then
+ * proceed our SQL query with a comma (,) to chain the rest.
+ * This is an artifact of the fact that the DSL has to be embedded within
+ * the language of Citrine. However even with these restrictions (some of which might be
+ * alleviated in future versions) it's quite comfortable and readable to interweave
+ * an external language in your Citrine script code.
+ *
+ * Usage:
+ *
+ * ☞ query := Slurp
+ *	select: '*',
+ *	from
+ *		users
+ *	where
+ *		user_id=: 1.
+ *
+ * #result: select * from users where user_id= 1
+ */
+ctr_object* ctr_slurp_obtain( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* commandObj;
+	ctr_object* key;
+	key = ctr_build_string_from_cstring( "command" );
+	commandObj = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring( "command" ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	if ( commandObj == NULL ) {
+		commandObj = ctr_build_empty_string();
+	}
+	ctr_internal_object_delete_property( myself, key, CTR_CATEGORY_PRIVATE_PROPERTY );
+	return commandObj;
+}
+
+/**
+ * [Slurp] toString.
+ *
+ * Sending the message 'toString' to a slurp object is the same as sending the
+ * obtain message. It will cause the Slurp object to answer with the collected
+ * string information from previous interactions. If for some reason the
+ * obtain message does not return a string, this message will answer with
+ * an empty string, otherwise the resulting string from 'obtain' will be
+ * returned.
+ */
+ctr_object* ctr_slurp_to_string( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* commandObj = ctr_slurp_obtain(myself, argumentList);
+	if (commandObj->info.type != CTR_OBJECT_TYPE_OTSTRING) {
+		return ctr_build_empty_string();
+	}
+	return commandObj;
+}
