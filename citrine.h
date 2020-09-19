@@ -11,6 +11,13 @@
 #define CTR_VERSION "0.9.3"
 #define CTR_VERSION_NUM 93
 
+
+#ifdef DIRSEPBACKSL
+#define CTR_DIRSEP "\\"
+#else
+#define CTR_DIRSEP "/"
+#endif
+
 /**
  * Define the Citrine tokens 
  */
@@ -247,6 +254,9 @@ extern ctr_object* CtrStdFlow;
 extern ctr_object* CtrStdBreak;
 extern ctr_object* CtrStdContinue;
 extern ctr_object* CtrStdExit;
+extern ctr_object* CtrStdSlurp;
+extern ctr_object* CtrStdPath;
+extern ctr_object* CtrStdShellCommand;
 extern ctr_object* ctr_first_object;
 
 /**
@@ -677,6 +687,19 @@ extern ctr_object* ctr_gc_collect(ctr_object* myself, ctr_argument* argumentList
 extern ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList);
 extern void ctr_gc_sweep( int all );
+
+/**
+ * Slurp Object Interface
+ */
+ctr_object* ctr_slurp_obtain(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_slurp_respond_to(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_slurp_to_string(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_shellcommand_respond_to(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_shellcommand_respond_to_and(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_path_respond_to(ctr_object* myself, ctr_argument* argumentList);
+ctr_object* ctr_path_respond_to_and(ctr_object* myself, ctr_argument* argumentList);
+
 
 /**
  * Global Garbage Collector variables

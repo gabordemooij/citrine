@@ -1,0 +1,4 @@
+✎ write: (Command ls -la), stop.
+✎ write: (Path /home gabor Desktop), stop.
+✎ write: (Path /root: ‘my\\ documents’, business presentations), stop.
+✎ write: ((Command ls: ‘my\\ documents’) > ‘list.txt’), stop.

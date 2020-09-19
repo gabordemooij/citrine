@@ -209,3 +209,6 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "تەرتىپ"
 #define CTR_DICT_TOOBJECT                        "ئوبيېكت_"
+
+#define CTR_DICT_PATH_OBJECT "Path"
+#define CTR_DICT_CMD_OBJECT  "Command"

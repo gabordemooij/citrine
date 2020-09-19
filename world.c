@@ -33,6 +33,10 @@ ctr_object* CtrStdExit;
 ctr_object* ctr_first_object;
 ctr_object* CtrStdBoolTrue;
 ctr_object* CtrStdBoolFalse;
+ctr_object* CtrStdSlurp;
+ctr_object* CtrStdPath;
+ctr_object* CtrStdShellCommand;
+
 char CtrHashKey[16];
 
 ctr_object* ctr_contexts[301];
@@ -886,6 +890,30 @@ void ctr_initialize_world() {
 	CtrStdFile->info.sticky = 1;
 	
 	/* Other objects */
+	CtrStdSlurp = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
+	ctr_internal_create_func(CtrStdSlurp, ctr_build_string_from_cstring( "obtain" ), &ctr_slurp_obtain );
+	ctr_internal_create_func(CtrStdSlurp, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_slurp_to_string );
+	ctr_internal_create_func(CtrStdSlurp, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ), &ctr_slurp_respond_to );
+	ctr_internal_create_func(CtrStdSlurp, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND ), &ctr_slurp_respond_to_and );
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Slurp" ), CtrStdSlurp, 0 );
+	CtrStdSlurp->link = CtrStdObject;
+	CtrStdSlurp->info.sticky = 1;
+	
+	
+	CtrStdShellCommand = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
+	ctr_internal_create_func(CtrStdShellCommand, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ), &ctr_shellcommand_respond_to );
+	ctr_internal_create_func(CtrStdShellCommand, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND ), &ctr_shellcommand_respond_to_and );
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_CMD_OBJECT ), CtrStdShellCommand, 0 );
+	CtrStdShellCommand->link = CtrStdObject;
+	CtrStdShellCommand->info.sticky = 1;
+	
+	CtrStdPath = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );
+	ctr_internal_create_func(CtrStdPath, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ), &ctr_path_respond_to );
+	ctr_internal_create_func(CtrStdPath, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND ), &ctr_path_respond_to_and );
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PATH_OBJECT ), CtrStdPath, 0 );
+	CtrStdPath->link = CtrStdObject;
+	CtrStdPath->info.sticky = 1;
+	
 	CtrStdBreak = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	CtrStdContinue = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	CtrStdExit = ctr_internal_create_object( CTR_OBJECT_TYPE_OTOBJECT );

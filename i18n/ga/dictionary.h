@@ -209,3 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "nós imeachta"
 #define CTR_DICT_TOOBJECT        "réad"
+#define CTR_DICT_PATH_OBJECT "Path"
+#define CTR_DICT_CMD_OBJECT  "Command"

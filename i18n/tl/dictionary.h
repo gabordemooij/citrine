@@ -209,3 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "pamamaraan"
 #define CTR_DICT_TOOBJECT        "bagay"
+#define CTR_DICT_PATH_OBJECT "Path"
+#define CTR_DICT_CMD_OBJECT  "Command"
