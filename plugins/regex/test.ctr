@@ -1,0 +1,6 @@
+✎ write: Regex, stop.
+☞ r ≔ Regex new: ‘([hl])’.
+r process: ‘hello world’ do: { :arr
+	✎ write: (arr join: ‘|’), end.
+} options: ‘’.
+✎ write: (r matches: ‘hello world’), stop. 
