@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "決定"
 #define CTR_DICT_TOOBJECT        "作為對象"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "檔案位置"
+#define CTR_DICT_CMD_OBJECT  "指令"

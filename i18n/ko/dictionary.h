@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "순서"
 #define CTR_DICT_TOOBJECT        "개체로"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "일어난다"
+#define CTR_DICT_CMD_OBJECT  "교수"

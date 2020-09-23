@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "תהליך"
 #define CTR_DICT_TOOBJECT        "כאובייקט"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "מקום"
+#define CTR_DICT_CMD_OBJECT  "הוראה"

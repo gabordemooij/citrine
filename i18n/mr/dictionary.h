@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "प्रक्रिया"
 #define CTR_DICT_TOOBJECT        "एक वस्तू म्हणून"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "जागा"
+#define CTR_DICT_CMD_OBJECT  "सूचना"

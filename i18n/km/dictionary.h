@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "នីតិវិធី"
 #define CTR_DICT_TOOBJECT        "ប្រែទៅជាវត្ថុ"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "ទីតាំងឯកសារ"
+#define CTR_DICT_CMD_OBJECT  "ការណែនាំ"

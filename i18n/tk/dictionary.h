@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "tertibi"
 #define CTR_DICT_TOOBJECT        "obýekt"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "Faýlyň ýerleşýän ýeri"
+#define CTR_DICT_CMD_OBJECT  "Görkezmeler"
