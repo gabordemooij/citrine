@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "手順"
 #define CTR_DICT_TOOBJECT        "オブジェクトとして"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "ファイルの場所"
+#define CTR_DICT_CMD_OBJECT  "命令"

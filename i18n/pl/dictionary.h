@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "procedura"
 #define CTR_DICT_TOOBJECT        "obiekt"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "Lokalizacja pliku"
+#define CTR_DICT_CMD_OBJECT  "Instrukcja"

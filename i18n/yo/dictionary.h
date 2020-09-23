@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "ilana"
 #define CTR_DICT_TOOBJECT        "nkan"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "Ipo faili"
+#define CTR_DICT_CMD_OBJECT  "Awọn ilana"

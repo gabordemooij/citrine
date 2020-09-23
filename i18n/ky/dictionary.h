@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "процедура"
 #define CTR_DICT_TOOBJECT        "Объект катары"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "жер"
+#define CTR_DICT_CMD_OBJECT  "Нускама"

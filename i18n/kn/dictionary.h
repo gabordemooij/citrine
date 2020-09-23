@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "ವಿಧಾನ"
 #define CTR_DICT_TOOBJECT        "ವಸ್ತುವಾಗಿ ಪರಿವರ್ತಿಸಿ"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "ಸ್ಥಳ"
+#define CTR_DICT_CMD_OBJECT  "ಸೂಚನಾ"

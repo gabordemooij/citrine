@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "тартиби"
 #define CTR_DICT_TOOBJECT        "Ҳамчун объекти"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "Ҷойгиршавии файл"
+#define CTR_DICT_CMD_OBJECT  "Дастурҳо"

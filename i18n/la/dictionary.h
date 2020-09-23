@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "procedure"
 #define CTR_DICT_TOOBJECT        "object"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "Locum notitia"
+#define CTR_DICT_CMD_OBJECT  "Ordo"

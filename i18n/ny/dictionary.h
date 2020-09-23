@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "machitidwe"
 #define CTR_DICT_TOOBJECT        "cholinga"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "Fayilo malo"
+#define CTR_DICT_CMD_OBJECT  "Malangizo"

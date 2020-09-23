@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "procedură"
 #define CTR_DICT_TOOBJECT        "obiect"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "Locația fișierului"
+#define CTR_DICT_CMD_OBJECT  "Instrucțiuni"

@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "nidaamka"
 #define CTR_DICT_TOOBJECT        "walax"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "Goob fayl"
+#define CTR_DICT_CMD_OBJECT  "Codso"

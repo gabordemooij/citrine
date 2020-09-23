@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "процедура"
 #define CTR_DICT_TOOBJECT        "как объект"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "Расположение файла"
+#define CTR_DICT_CMD_OBJECT  "Инструкция"

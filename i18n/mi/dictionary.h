@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "tikanga"
 #define CTR_DICT_TOOBJECT        "autu"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "Tauwāhi o te konae"
+#define CTR_DICT_CMD_OBJECT  "Tohutohu"

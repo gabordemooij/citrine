@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "روش"
 #define CTR_DICT_TOOBJECT        "به عنوان یک شی"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "محل"
+#define CTR_DICT_CMD_OBJECT  "سفارش"

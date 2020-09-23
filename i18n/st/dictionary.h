@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "ts'ebetso"
 #define CTR_DICT_TOOBJECT        "ntho"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "Sebaka sa faele"
+#define CTR_DICT_CMD_OBJECT  "Laela"

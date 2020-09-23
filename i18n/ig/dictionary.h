@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "usoro"
 #define CTR_DICT_TOOBJECT        "ebumnuche"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "Ọnọdụ faịlụ"
+#define CTR_DICT_CMD_OBJECT  "Ntụziaka"

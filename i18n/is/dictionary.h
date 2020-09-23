@@ -209,5 +209,5 @@
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "málsmeðferð"
 #define CTR_DICT_TOOBJECT        "markmið"
-#define CTR_DICT_PATH_OBJECT "Path"
-#define CTR_DICT_CMD_OBJECT  "Command"
+#define CTR_DICT_PATH_OBJECT "Staðsetning skráar"
+#define CTR_DICT_CMD_OBJECT  "Kennsla"
