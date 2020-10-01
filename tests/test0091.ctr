@@ -2,3 +2,5 @@
 ✎ write: (Path /home gabor Desktop), stop.
 ✎ write: (Path /root: ‘my\\ documents’, business presentations), stop.
 ✎ write: ((Command ls: ‘my\\ documents’) > ‘list.txt’), stop.
+✎ write: ((Command do: ‘this’, and: ‘that’)), stop.
+✎ write: ((Path go: ‘here’, and: ‘there’)), stop.
