@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "бүлегез:"
 #define CTR_DICT_LIKE             "кебек:"
 #define CTR_DICT_FORMAT           "формат:"
-#define CTR_DICT_LOCK             "йозак"
-#define CTR_DICT_UNLOCK           "ачу"
 #define CTR_DICT_LAST             "соңгы"
 #define CTR_DICT_FIRST            "башта"
 #define CTR_DICT_SECOND_LAST      "икенче соңгы"

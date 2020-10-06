@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "διαιρέστε με:"
 #define CTR_DICT_LIKE             "αρέσει:"
 #define CTR_DICT_FORMAT           "μορφή:"
-#define CTR_DICT_LOCK             "κλειδαριά"
-#define CTR_DICT_UNLOCK           "ξεκλείδωμα"
 #define CTR_DICT_LAST             "τελευταίος"
 #define CTR_DICT_FIRST            "πρώτα"
 #define CTR_DICT_SECOND_LAST      "προτελευταία"

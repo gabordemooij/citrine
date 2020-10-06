@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "dividir por:"
 #define CTR_DICT_LIKE             "como:"
 #define CTR_DICT_FORMAT           "formato:"
-#define CTR_DICT_LOCK             "botarlle o ferrollo"
-#define CTR_DICT_UNLOCK           "desbloquear"
 #define CTR_DICT_LAST             "último"
 #define CTR_DICT_FIRST            "primeira"
 #define CTR_DICT_SECOND_LAST      "segundo último"

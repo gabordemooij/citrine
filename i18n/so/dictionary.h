@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "u qaybi:"
 #define CTR_DICT_LIKE             "sida:"
 #define CTR_DICT_FORMAT           "qaab:"
-#define CTR_DICT_LOCK             "quful"
-#define CTR_DICT_UNLOCK           "fur"
 #define CTR_DICT_LAST             "ugu dambeeya"
 #define CTR_DICT_FIRST            "marka hore"
 #define CTR_DICT_SECOND_LAST      "labaad ee ugu dambeeya"

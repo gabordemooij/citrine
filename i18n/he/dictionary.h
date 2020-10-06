@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "מחולק ב:"
 #define CTR_DICT_LIKE             "כמו:"
 #define CTR_DICT_FORMAT           "פורמט:"
-#define CTR_DICT_LOCK             "לנעול"
-#define CTR_DICT_UNLOCK           "לבטל נעילה"
 #define CTR_DICT_LAST             "אחרון"
 #define CTR_DICT_FIRST            "ראשון"
 #define CTR_DICT_SECOND_LAST      "שני אחרון"

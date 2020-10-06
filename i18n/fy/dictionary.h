@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "diele troch:"
 #define CTR_DICT_LIKE             "lykas:"
 #define CTR_DICT_FORMAT           "formaat:"
-#define CTR_DICT_LOCK             "slûs"
-#define CTR_DICT_UNLOCK           "losmeitsje"
 #define CTR_DICT_LAST             "lêst"
 #define CTR_DICT_FIRST            "earste"
 #define CTR_DICT_SECOND_LAST      "twadde lêste"

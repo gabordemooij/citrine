@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET     "vydělit:"
 #define CTR_DICT_LIKE            "jako:"
 #define CTR_DICT_FORMAT          "formát:"
-#define CTR_DICT_LOCK            "zamknout"
-#define CTR_DICT_UNLOCK          "odemknout"
 #define CTR_DICT_LAST            "poslední"
 #define CTR_DICT_FIRST           "první"
 #define CTR_DICT_SECOND_LAST     "druhý od konce"

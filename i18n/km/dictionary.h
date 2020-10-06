@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "ចែកដោយ៖__:"
 #define CTR_DICT_LIKE             "ដូចជា៖__:"
 #define CTR_DICT_FORMAT           "ទ្រង់ទ្រាយ៖__:"
-#define CTR_DICT_LOCK             "ចាក់សោ"
-#define CTR_DICT_UNLOCK           "ដោះសោ"
 #define CTR_DICT_LAST             "ចុងក្រោយ"
 #define CTR_DICT_FIRST            "ដំបូង"
 #define CTR_DICT_SECOND_LAST      "ទីពីរចុងក្រោយ"

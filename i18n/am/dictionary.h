@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "አካፍል__:"
 #define CTR_DICT_LIKE             "እንደ:"
 #define CTR_DICT_FORMAT           "ቅርጸት:"
-#define CTR_DICT_LOCK             "ቆልፍ"
-#define CTR_DICT_UNLOCK           "ክፈት"
 #define CTR_DICT_LAST             "የመጨረሻ"
 #define CTR_DICT_FIRST            "አንደኛ"
 #define CTR_DICT_SECOND_LAST      "_ሁለተኛ"

@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "arola ka:"
 #define CTR_DICT_LIKE             "joalo ka:"
 #define CTR_DICT_FORMAT           "sebopeho:"
-#define CTR_DICT_LOCK             "senotlolo"
-#define CTR_DICT_UNLOCK           "bula"
 #define CTR_DICT_LAST             "qetela"
 #define CTR_DICT_FIRST            "pele"
 #define CTR_DICT_SECOND_LAST      "ea bobeli ea ho qetela"

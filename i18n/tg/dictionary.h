@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "таќсим кардан:"
 #define CTR_DICT_LIKE             "монанди:"
 #define CTR_DICT_FORMAT           "формат:"
-#define CTR_DICT_LOCK             "қулф"
-#define CTR_DICT_UNLOCK           "кушодан"
 #define CTR_DICT_LAST             "охирин"
 #define CTR_DICT_FIRST            "аввал"
 #define CTR_DICT_SECOND_LAST      "дуюм дуюм"

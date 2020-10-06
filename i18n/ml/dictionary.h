@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "ഇതിനാൽ വിഭജിക്കുക:"
 #define CTR_DICT_LIKE             "പോലുള്ളവ:"
 #define CTR_DICT_FORMAT           "ഫോർമാറ്റ്:"
-#define CTR_DICT_LOCK             "ലോക്ക് ചെയ്യുക"
-#define CTR_DICT_UNLOCK           "അൺലോക്കുചെയ്യുക"
 #define CTR_DICT_LAST             "അവസാനത്തെ"
 #define CTR_DICT_FIRST            "ആദ്യം"
 #define CTR_DICT_SECOND_LAST      "രണ്ടാമത്തേത് അവസാനമായി"

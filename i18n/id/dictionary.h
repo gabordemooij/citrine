@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "dibagi dengan:"
 #define CTR_DICT_LIKE             "suka:"
 #define CTR_DICT_FORMAT           "format:"
-#define CTR_DICT_LOCK             "mengunci"
-#define CTR_DICT_UNLOCK           "membuka kunci"
 #define CTR_DICT_LAST             "terakhir"
 #define CTR_DICT_FIRST            "pertama"
 #define CTR_DICT_SECOND_LAST      "kedua terakhir"

@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "দ্বারা বিভক্ত করা:"
 #define CTR_DICT_LIKE             "মত:"
 #define CTR_DICT_FORMAT           "বিন্যাস:"
-#define CTR_DICT_LOCK             "লক"
-#define CTR_DICT_UNLOCK           "আনলক"
 #define CTR_DICT_LAST             "গত"
 #define CTR_DICT_FIRST            "প্রথম"
 #define CTR_DICT_SECOND_LAST      "দ্বিতীয় গত"

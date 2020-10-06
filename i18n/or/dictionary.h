@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "ଦ୍ div ାରା ବିଭାଜନ କରନ୍ତୁ:"
 #define CTR_DICT_LIKE             "ଯେପରି:"
 #define CTR_DICT_FORMAT           "ଫର୍ମାଟ୍:"
-#define CTR_DICT_LOCK             "ତାଲା"
-#define CTR_DICT_UNLOCK           "ଅନଲକ୍ କରନ୍ତୁ |"
 #define CTR_DICT_LAST             "_ଶେଷ"
 #define CTR_DICT_FIRST            "ପ୍ରଥମେ"
 #define CTR_DICT_SECOND_LAST      "ଦ୍ୱିତୀୟ ଶେଷ"

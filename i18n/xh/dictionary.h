@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "yahlulahlula:"
 #define CTR_DICT_LIKE             "njengo:"
 #define CTR_DICT_FORMAT           "fomathi:"
-#define CTR_DICT_LOCK             "tshixa"
-#define CTR_DICT_UNLOCK           "vula"
 #define CTR_DICT_LAST             "gqibela"
 #define CTR_DICT_FIRST            "ekuqaleni"
 #define CTR_DICT_SECOND_LAST      "okwesibini okokugqibela"

@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "اقسم على:"
 #define CTR_DICT_LIKE             "مثل:"
 #define CTR_DICT_FORMAT           "شكل:"
-#define CTR_DICT_LOCK             "قفل"
-#define CTR_DICT_UNLOCK           "الغاء القفل"
 #define CTR_DICT_LAST             "الاخير"
 #define CTR_DICT_FIRST            "أول"
 #define CTR_DICT_SECOND_LAST      "آخر ثانية"

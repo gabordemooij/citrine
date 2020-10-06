@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "வகுக்க:"
 #define CTR_DICT_LIKE             "போன்றவை:"
 #define CTR_DICT_FORMAT           "வடிவம்:"
-#define CTR_DICT_LOCK             "பூட்டு"
-#define CTR_DICT_UNLOCK           "திறத்தல்"
 #define CTR_DICT_LAST             "கடந்த"
 #define CTR_DICT_FIRST            "முதல்"
 #define CTR_DICT_SECOND_LAST      "இரண்டாவது கடைசி"

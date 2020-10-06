@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "разделят от:"
 #define CTR_DICT_LIKE             "като:"
 #define CTR_DICT_FORMAT           "формат:"
-#define CTR_DICT_LOCK             "ключалка"
-#define CTR_DICT_UNLOCK           "отключване"
 #define CTR_DICT_LAST             "последно"
 #define CTR_DICT_FIRST            "първи"
 #define CTR_DICT_SECOND_LAST      "последна секунда"

@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "భాగించడం:"
 #define CTR_DICT_LIKE             "వంటి:"
 #define CTR_DICT_FORMAT           "ఫార్మాట్:"
-#define CTR_DICT_LOCK             "లాక్"
-#define CTR_DICT_UNLOCK           "అన్లాక్"
 #define CTR_DICT_LAST             "గత"
 #define CTR_DICT_FIRST            "ప్రధమ"
 #define CTR_DICT_SECOND_LAST      "రెండవ చివరి"

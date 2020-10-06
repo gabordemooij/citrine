@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "roinn le:"
 #define CTR_DICT_LIKE             "cosúil le:"
 #define CTR_DICT_FORMAT           "formáid:"
-#define CTR_DICT_LOCK             "glas"
-#define CTR_DICT_UNLOCK           "dhíghlasáil"
 #define CTR_DICT_LAST             "seo caite"
 #define CTR_DICT_FIRST            "ar dtús"
 #define CTR_DICT_SECOND_LAST      "an dara ceann deireanach"

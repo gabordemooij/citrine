@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "бөлу:"
 #define CTR_DICT_LIKE             "сияқты:"
 #define CTR_DICT_FORMAT           "пішімі:"
-#define CTR_DICT_LOCK             "құлыптау"
-#define CTR_DICT_UNLOCK           "ашу"
 #define CTR_DICT_LAST             "соңғы"
 #define CTR_DICT_FIRST            "бірінші"
 #define CTR_DICT_SECOND_LAST      "екінші соңғысы"

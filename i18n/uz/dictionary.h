@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "bo’lingan:"
 #define CTR_DICT_LIKE             "kabi:"
 #define CTR_DICT_FORMAT           "format:"
-#define CTR_DICT_LOCK             "qulflash"
-#define CTR_DICT_UNLOCK           "qulfini ochish"
 #define CTR_DICT_LAST             "oxirgi"
 #define CTR_DICT_FIRST            "birinchi"
 #define CTR_DICT_SECOND_LAST      "ikkinchi oxirgi"

@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "deelen duerch:"
 #define CTR_DICT_LIKE             "wéi:"
 #define CTR_DICT_FORMAT           "format:"
-#define CTR_DICT_LOCK             "gespaarten"
-#define CTR_DICT_UNLOCK           "spären"
 #define CTR_DICT_LAST             "lescht"
 #define CTR_DICT_FIRST            "éischten"
 #define CTR_DICT_SECOND_LAST      "zweet lescht"

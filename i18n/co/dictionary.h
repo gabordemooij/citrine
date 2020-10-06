@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "dividite per:"
 #define CTR_DICT_LIKE             "piace:"
 #define CTR_DICT_FORMAT           "furmatu:"
-#define CTR_DICT_LOCK             "serratura"
-#define CTR_DICT_UNLOCK           "sbloccare"
 #define CTR_DICT_LAST             "ultimu"
 #define CTR_DICT_FIRST            "primu"
 #define CTR_DICT_SECOND_LAST      "siconda ultimu"

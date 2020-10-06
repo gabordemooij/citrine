@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "gawani ndi:"
 #define CTR_DICT_LIKE             "ngati:"
 #define CTR_DICT_FORMAT           "__mtundu:"
-#define CTR_DICT_LOCK             "loko"
-#define CTR_DICT_UNLOCK           "tsegulani"
 #define CTR_DICT_LAST             "komaliza"
 #define CTR_DICT_FIRST            "choyamba"
 #define CTR_DICT_SECOND_LAST      "chachiwiri chomaliza"

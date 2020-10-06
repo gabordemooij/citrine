@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "იყოფა:"
 #define CTR_DICT_LIKE             "მოსწონს:"
 #define CTR_DICT_FORMAT           "ფორმატი:"
-#define CTR_DICT_LOCK             "ჩაკეტვა"
-#define CTR_DICT_UNLOCK           "ზარალი"
 #define CTR_DICT_LAST             "ბოლო"
 #define CTR_DICT_FIRST            "პირველი"
 #define CTR_DICT_SECOND_LAST      "მეორე ბოლო"

@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "hoʻokaʻawale e:"
 #define CTR_DICT_LIKE             "e like me:"
 #define CTR_DICT_FORMAT           "_ʻano:"
-#define CTR_DICT_LOCK             "laka"
-#define CTR_DICT_UNLOCK           "wehe"
 #define CTR_DICT_LAST             "hope loa"
 #define CTR_DICT_FIRST            "ka mua"
 #define CTR_DICT_SECOND_LAST      "lua a hope"

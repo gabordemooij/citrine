@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "oszd el:"
 #define CTR_DICT_LIKE             "mint:"
 #define CTR_DICT_FORMAT           "formátum:"
-#define CTR_DICT_LOCK             "zár"
-#define CTR_DICT_UNLOCK           "kinyit"
 #define CTR_DICT_LAST             "utolsó"
 #define CTR_DICT_FIRST            "első"
 #define CTR_DICT_SECOND_LAST      "utolsó előtti"

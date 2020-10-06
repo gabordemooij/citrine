@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET     "padalinti iš:"
 #define CTR_DICT_LIKE            "kaip:"
 #define CTR_DICT_FORMAT          "formatas:"
-#define CTR_DICT_LOCK            "užrakinti"
-#define CTR_DICT_UNLOCK          "atrakinti"
 #define CTR_DICT_LAST            "paskutinis"
 #define CTR_DICT_FIRST           "pirmas"
 #define CTR_DICT_SECOND_LAST     "priešpaskutinis"

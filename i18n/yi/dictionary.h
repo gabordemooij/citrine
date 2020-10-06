@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "צעטיילן לויט:"
 #define CTR_DICT_LIKE             "ווי:"
 #define CTR_DICT_FORMAT           "פֿאָרמאַט:"
-#define CTR_DICT_LOCK             "שלאָס"
-#define CTR_DICT_UNLOCK           "unlock"
 #define CTR_DICT_LAST             "לעצטע"
 #define CTR_DICT_FIRST            "ערשטער"
 #define CTR_DICT_SECOND_LAST      "רגע לעצט"

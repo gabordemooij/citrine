@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "ділити на:"
 #define CTR_DICT_LIKE             "подобається:"
 #define CTR_DICT_FORMAT           "формат:"
-#define CTR_DICT_LOCK             "замок"
-#define CTR_DICT_UNLOCK           "розблокувати"
 #define CTR_DICT_LAST             "останнім"
 #define CTR_DICT_FIRST            "спочатку"
 #define CTR_DICT_SECOND_LAST      "другий останній"

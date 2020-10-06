@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "ခွဲပါ__:"
 #define CTR_DICT_LIKE             "ကဲ့သို့:"
 #define CTR_DICT_FORMAT           "ပုံစံ:"
-#define CTR_DICT_LOCK             "သော့ခတ်"
-#define CTR_DICT_UNLOCK           "_သော့ခတ်"
 #define CTR_DICT_LAST             "နောက်ဆုံး"
 #define CTR_DICT_FIRST            "ပထမ"
 #define CTR_DICT_SECOND_LAST      "ဒုတိယနောက်ဆုံး"

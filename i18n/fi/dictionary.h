@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "jaettuna:"
 #define CTR_DICT_LIKE             "kuten:"
 #define CTR_DICT_FORMAT           "muoto:"
-#define CTR_DICT_LOCK             "lukko"
-#define CTR_DICT_UNLOCK           "avata"
 #define CTR_DICT_LAST             "kestää"
 #define CTR_DICT_FIRST            "ensimmäinen"
 #define CTR_DICT_SECOND_LAST      "toiseksi viimeinen"

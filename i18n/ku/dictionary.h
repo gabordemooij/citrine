@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "perçe by:"
 #define CTR_DICT_LIKE             "çawa:"
 #define CTR_DICT_FORMAT           "çap:"
-#define CTR_DICT_LOCK             "qesr"
-#define CTR_DICT_UNLOCK           "vekirin"
 #define CTR_DICT_LAST             "dawîn"
 #define CTR_DICT_FIRST            "yekem"
 #define CTR_DICT_SECOND_LAST      "ya paşîn paşîn"

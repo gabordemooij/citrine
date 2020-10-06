@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "kupatsanura na:"
 #define CTR_DICT_LIKE             "like:"
 #define CTR_DICT_FORMAT           "chimiro:"
-#define CTR_DICT_LOCK             "kukiya"
-#define CTR_DICT_UNLOCK           "vhura"
 #define CTR_DICT_LAST             "pekupedzisira"
 #define CTR_DICT_FIRST            "chekutanga"
 #define CTR_DICT_SECOND_LAST      "yechipiri yekupedzisira"

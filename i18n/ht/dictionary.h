@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "divize pa:"
 #define CTR_DICT_LIKE             "tankou:"
 #define CTR_DICT_FORMAT           "fòma:"
-#define CTR_DICT_LOCK             "_fèmen"
-#define CTR_DICT_UNLOCK           "déblotché"
 #define CTR_DICT_LAST             "dènye"
 #define CTR_DICT_FIRST            "premye"
 #define CTR_DICT_SECOND_LAST      "dezyèm dènye"

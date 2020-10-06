@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET     "împarte la:"
 #define CTR_DICT_LIKE            "asemenea:"
 #define CTR_DICT_FORMAT          "format:"
-#define CTR_DICT_LOCK            "încuie"
-#define CTR_DICT_UNLOCK          "descuie"
 #define CTR_DICT_LAST            "ultim"
 #define CTR_DICT_FIRST           "prim"
 #define CTR_DICT_SECOND_LAST     "penultim"
