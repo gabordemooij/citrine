@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "ແບ່ງໂດຍ:"
 #define CTR_DICT_LIKE             "ຄື:"
 #define CTR_DICT_FORMAT           "ຮູບແບບ:"
-#define CTR_DICT_LOCK             "ລັອກ"
-#define CTR_DICT_UNLOCK           "ປົດລັອກ"
 #define CTR_DICT_LAST             "ສຸດທ້າຍ"
 #define CTR_DICT_FIRST            "ກ່ອນ"
 #define CTR_DICT_SECOND_LAST      "ຄັ້ງທີສອງສຸດທ້າຍ"

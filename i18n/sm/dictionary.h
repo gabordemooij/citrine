@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "vaevaeina e:"
 #define CTR_DICT_LIKE             "pei:"
 #define CTR_DICT_FORMAT           "faatulagaga:"
-#define CTR_DICT_LOCK             "loka"
-#define CTR_DICT_UNLOCK           "tatala"
 #define CTR_DICT_LAST             "mulimuli"
 #define CTR_DICT_FIRST            "tulaga tasi"
 #define CTR_DICT_SECOND_LAST      "lona lua mulimuli"

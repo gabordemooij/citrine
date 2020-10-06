@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "除算：__:"
 #define CTR_DICT_LIKE             "お気に入り：__:"
 #define CTR_DICT_FORMAT           "フォーマット：__:"
-#define CTR_DICT_LOCK             "ロック"
-#define CTR_DICT_UNLOCK           "アンロック"
 #define CTR_DICT_LAST             "最終"
 #define CTR_DICT_FIRST            "最初"
 #define CTR_DICT_SECOND_LAST      "_2番目の最後"

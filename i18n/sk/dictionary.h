@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "delenie:"
 #define CTR_DICT_LIKE             "páči sa mi to:"
 #define CTR_DICT_FORMAT           "formát:"
-#define CTR_DICT_LOCK             "lock"
-#define CTR_DICT_UNLOCK           "odomknúť"
 #define CTR_DICT_LAST             "posledná"
 #define CTR_DICT_FIRST            "najprv"
 #define CTR_DICT_SECOND_LAST      "predposledný"

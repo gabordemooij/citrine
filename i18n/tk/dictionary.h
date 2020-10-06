@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "_bölmek:"
 #define CTR_DICT_LIKE             "ýaly:"
 #define CTR_DICT_FORMAT           "formaty:"
-#define CTR_DICT_LOCK             "gulplamak"
-#define CTR_DICT_UNLOCK           "açmak"
 #define CTR_DICT_LAST             "iň soňky"
 #define CTR_DICT_FIRST            "ilki bilen"
 #define CTR_DICT_SECOND_LAST      "ikinji soňky"

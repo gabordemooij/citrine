@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "verdeel deur:"
 #define CTR_DICT_LIKE             "soos:"
 #define CTR_DICT_FORMAT           "formaat:"
-#define CTR_DICT_LOCK             "slot"
-#define CTR_DICT_UNLOCK           "ontsluit"
 #define CTR_DICT_LAST             "laaste"
 #define CTR_DICT_FIRST            "eerste"
 #define CTR_DICT_SECOND_LAST      "voorlaaste"

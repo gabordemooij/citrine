@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "تقسیم بر:"
 #define CTR_DICT_LIKE             "پسندیدن:"
 #define CTR_DICT_FORMAT           "قالب:"
-#define CTR_DICT_LOCK             "قفل کردن"
-#define CTR_DICT_UNLOCK           "باز کردن"
 #define CTR_DICT_LAST             "آخر"
 #define CTR_DICT_FIRST            "اولین"
 #define CTR_DICT_SECOND_LAST      "دوم آخر"

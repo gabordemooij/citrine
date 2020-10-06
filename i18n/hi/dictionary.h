@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET     "विभाजित-करे:"
 #define CTR_DICT_LIKE            "जैसा:"
 #define CTR_DICT_FORMAT          "प्रारूप:"
-#define CTR_DICT_LOCK            "प्रतिबन्ध"
-#define CTR_DICT_UNLOCK          "अप्रतिबन्ध"
 #define CTR_DICT_LAST            "अंतिम"
 #define CTR_DICT_FIRST           "प्रथम"
 #define CTR_DICT_SECOND_LAST     "आखिर-से-दूसरा"

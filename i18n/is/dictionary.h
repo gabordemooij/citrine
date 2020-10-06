@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "deila með:"
 #define CTR_DICT_LIKE             "eins og:"
 #define CTR_DICT_FORMAT           "snið:"
-#define CTR_DICT_LOCK             "læsa"
-#define CTR_DICT_UNLOCK           "opna"
 #define CTR_DICT_LAST             "síðast"
 #define CTR_DICT_FIRST            "fyrst"
 #define CTR_DICT_SECOND_LAST      "næst síðast"

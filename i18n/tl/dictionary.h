@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "hatiin sa pamamagitan ng:"
 #define CTR_DICT_LIKE             "gaya ng:"
 #define CTR_DICT_FORMAT           "format:"
-#define CTR_DICT_LOCK             "kandado"
-#define CTR_DICT_UNLOCK           "i-unlock"
 #define CTR_DICT_LAST             "huling"
 #define CTR_DICT_FIRST            "una"
 #define CTR_DICT_SECOND_LAST      "pangalawa sa huli"

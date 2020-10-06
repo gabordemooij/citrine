@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "delt på:"
 #define CTR_DICT_LIKE             "som:"
 #define CTR_DICT_FORMAT           "format:"
-#define CTR_DICT_LOCK             "låse"
-#define CTR_DICT_UNLOCK           "låse opp"
 #define CTR_DICT_LAST             "siste"
 #define CTR_DICT_FIRST            "først"
 #define CTR_DICT_SECOND_LAST      "nest sist"

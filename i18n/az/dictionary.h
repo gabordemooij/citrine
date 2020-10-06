@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "_bölmək:"
 #define CTR_DICT_LIKE             "kimi:"
 #define CTR_DICT_FORMAT           "format:"
-#define CTR_DICT_LOCK             "bağlamaq"
-#define CTR_DICT_UNLOCK           "kilidini açmaq"
 #define CTR_DICT_LAST             "_son"
 #define CTR_DICT_FIRST            "əvvəlcə"
 #define CTR_DICT_SECOND_LAST      "ikinci son"

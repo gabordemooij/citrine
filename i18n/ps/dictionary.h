@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "وېشل د:"
 #define CTR_DICT_LIKE             "لکه:"
 #define CTR_DICT_FORMAT           "ب formatه:"
-#define CTR_DICT_LOCK             "بندول"
-#define CTR_DICT_UNLOCK           "خلاصول"
 #define CTR_DICT_LAST             "اخري"
 #define CTR_DICT_FIRST            "لومړی"
 #define CTR_DICT_SECOND_LAST      "دوهم وروستی"

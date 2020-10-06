@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "로 나누다:"
 #define CTR_DICT_LIKE             "처럼:"
 #define CTR_DICT_FORMAT           "체재:"
-#define CTR_DICT_LOCK             "자물쇠"
-#define CTR_DICT_UNLOCK           "터놓다"
 #define CTR_DICT_LAST             "마지막"
 #define CTR_DICT_FIRST            "먼저"
 #define CTR_DICT_SECOND_LAST      "마지막 마지막"

@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "rhannwch â:"
 #define CTR_DICT_LIKE             "fel:"
 #define CTR_DICT_FORMAT           "fformat:"
-#define CTR_DICT_LOCK             "clo"
-#define CTR_DICT_UNLOCK           "datgloi"
 #define CTR_DICT_LAST             "olaf"
 #define CTR_DICT_FIRST            "yn gyntaf"
 #define CTR_DICT_SECOND_LAST      "ail olaf"

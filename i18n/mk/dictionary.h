@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "подели по:"
 #define CTR_DICT_LIKE             "допаѓа:"
 #define CTR_DICT_FORMAT           "формат:"
-#define CTR_DICT_LOCK             "заклучи"
-#define CTR_DICT_UNLOCK           "отклучи"
 #define CTR_DICT_LAST             "последен"
 #define CTR_DICT_FIRST            "прво"
 #define CTR_DICT_SECOND_LAST      "втор последен"

@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "jagada:"
 #define CTR_DICT_LIKE             "nagu:"
 #define CTR_DICT_FORMAT           "vorming:"
-#define CTR_DICT_LOCK             "lukk"
-#define CTR_DICT_UNLOCK           "lahti"
 #define CTR_DICT_LAST             "viimane"
 #define CTR_DICT_FIRST            "esimene"
 #define CTR_DICT_SECOND_LAST      "teine ​​viimane"

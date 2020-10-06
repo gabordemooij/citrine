@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "dela med:"
 #define CTR_DICT_LIKE             "tycka om:"
 #define CTR_DICT_FORMAT           "formatera:"
-#define CTR_DICT_LOCK             "låsa"
-#define CTR_DICT_UNLOCK           "låsa upp"
 #define CTR_DICT_LAST             "sista"
 #define CTR_DICT_FIRST            "först"
 #define CTR_DICT_SECOND_LAST      "näst sist"

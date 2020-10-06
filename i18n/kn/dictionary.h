@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "ಇವರಿಂದ ಭಾಗಿಸಿ:"
 #define CTR_DICT_LIKE             "ಹಾಗೆ:"
 #define CTR_DICT_FORMAT           "ಸ್ವರೂಪ:"
-#define CTR_DICT_LOCK             "ಲಾಕ್"
-#define CTR_DICT_UNLOCK           "ಅನ್ಲಾಕ್ ಮಾಡಿ"
 #define CTR_DICT_LAST             "ಕೊನೆಯದು"
 #define CTR_DICT_FIRST            "ಪ್ರಥಮ"
 #define CTR_DICT_SECOND_LAST      "ಎರಡನೇ ಕೊನೆಯ"

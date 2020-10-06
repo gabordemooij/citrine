@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "dalīt ar:"
 #define CTR_DICT_LIKE             "piemēram:"
 #define CTR_DICT_FORMAT           "formāts:"
-#define CTR_DICT_LOCK             "atslēga"
-#define CTR_DICT_UNLOCK           "atbloķēt"
 #define CTR_DICT_LAST             "pēdējais"
 #define CTR_DICT_FIRST            "vispirms"
 #define CTR_DICT_SECOND_LAST      "otrais pēdējais"

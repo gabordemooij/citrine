@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "_بۆلۈش:"
 #define CTR_DICT_LIKE             "like:"
 #define CTR_DICT_FORMAT           "فورماتى:"
-#define CTR_DICT_LOCK             "قۇلۇپ"
-#define CTR_DICT_UNLOCK           "قۇلۇپ ئېچىش"
 #define CTR_DICT_LAST             "ئاخىرقى"
 #define CTR_DICT_FIRST            "بىرىنچى"
 #define CTR_DICT_SECOND_LAST      "ئىككىنچى ئاخىرقى"

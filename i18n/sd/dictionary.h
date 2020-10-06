@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET "ريعيورهايو:"
 #define CTR_DICT_LIKE "سندڪريو:"
 #define CTR_DICT_FORMAT "ارميٽ:"
-#define CTR_DICT_LOCK "اڪ"
-#define CTR_DICT_UNLOCK "وليو"
 #define CTR_DICT_LAST "خري"
 #define CTR_DICT_FIRST "هريون"
 #define CTR_DICT_SECOND_LAST "يڪنڊآخري"

@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "බෙදන්න:"
 #define CTR_DICT_LIKE             "මෙන්:"
 #define CTR_DICT_FORMAT           "ආකෘතිය:"
-#define CTR_DICT_LOCK             "අගුල"
-#define CTR_DICT_UNLOCK           "අගුළු ඇරීම"
 #define CTR_DICT_LAST             "අවසන්"
 #define CTR_DICT_FIRST            "පළමු"
 #define CTR_DICT_SECOND_LAST      "දෙවන අන්තිම"

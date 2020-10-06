@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "bölünür:"
 #define CTR_DICT_LIKE             "sevmek:"
 #define CTR_DICT_FORMAT           "biçim:"
-#define CTR_DICT_LOCK             "kilit"
-#define CTR_DICT_UNLOCK           "kilidini aç"
 #define CTR_DICT_LAST             "_son"
 #define CTR_DICT_FIRST            "ilk"
 #define CTR_DICT_SECOND_LAST      "sondan ikinci"

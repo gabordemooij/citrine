@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "被除以：__:"
 #define CTR_DICT_LIKE             "喜歡：__:"
 #define CTR_DICT_FORMAT           "格式：__:"
-#define CTR_DICT_LOCK             "_鎖"
-#define CTR_DICT_UNLOCK           "開鎖"
 #define CTR_DICT_LAST             "持續"
 #define CTR_DICT_FIRST            "第一"
 #define CTR_DICT_SECOND_LAST      "最後第二"

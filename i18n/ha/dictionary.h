@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "raba ta:"
 #define CTR_DICT_LIKE             "kamar:"
 #define CTR_DICT_FORMAT           "tsari:"
-#define CTR_DICT_LOCK             "kulle"
-#define CTR_DICT_UNLOCK           "buɗe"
 #define CTR_DICT_LAST             "karshe"
 #define CTR_DICT_FIRST            "na farko"
 #define CTR_DICT_SECOND_LAST      "na biyu na karshe"

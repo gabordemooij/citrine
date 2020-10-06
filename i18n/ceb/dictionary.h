@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "bahinon sa:"
 #define CTR_DICT_LIKE             "sama sa:"
 #define CTR_DICT_FORMAT           "format:"
-#define CTR_DICT_LOCK             "kandado"
-#define CTR_DICT_UNLOCK           "pag-abli"
 #define CTR_DICT_LAST             "ulahi"
 #define CTR_DICT_FIRST            "una"
 #define CTR_DICT_SECOND_LAST      "ikaduha nga naulahi"

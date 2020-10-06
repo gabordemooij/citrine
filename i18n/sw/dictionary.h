@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "gawanya na:"
 #define CTR_DICT_LIKE             "kama:"
 #define CTR_DICT_FORMAT           "muundo:"
-#define CTR_DICT_LOCK             "funga"
-#define CTR_DICT_UNLOCK           "fungua"
 #define CTR_DICT_LAST             "_mwisho"
 #define CTR_DICT_FIRST            "kwanza"
 #define CTR_DICT_SECOND_LAST      "pili la mwisho"

@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "roinneadh le:"
 #define CTR_DICT_LIKE             "mar:"
 #define CTR_DICT_FORMAT           "cruth:"
-#define CTR_DICT_LOCK             "glas"
-#define CTR_DICT_UNLOCK           "fhuasgladh"
 #define CTR_DICT_LAST             "mu dheireadh"
 #define CTR_DICT_FIRST            "a ’chiad"
 #define CTR_DICT_SECOND_LAST      "an dàrna fear mu dheireadh"

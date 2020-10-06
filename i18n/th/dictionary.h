@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "หารด้วย:"
 #define CTR_DICT_LIKE             "ชอบ:"
 #define CTR_DICT_FORMAT           "รูปแบบ:"
-#define CTR_DICT_LOCK             "ล็อค"
-#define CTR_DICT_UNLOCK           "ปลดล็อค"
 #define CTR_DICT_LAST             "ล่าสุด"
 #define CTR_DICT_FIRST            "เป็นครั้งแรก"
 #define CTR_DICT_SECOND_LAST      "วินาทีสุดท้าย"

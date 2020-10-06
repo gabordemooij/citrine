@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "hlukanisa ngo:"
 #define CTR_DICT_LIKE             "njengo:"
 #define CTR_DICT_FORMAT           "ifomethi:"
-#define CTR_DICT_LOCK             "ukhiye"
-#define CTR_DICT_UNLOCK           "vula"
 #define CTR_DICT_LAST             "okokugcina"
 #define CTR_DICT_FIRST            "kuqala"
 #define CTR_DICT_SECOND_LAST      "okwesibili okokugcina"

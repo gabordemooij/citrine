@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "zatitzen arabera:"
 #define CTR_DICT_LIKE             "bezalako:"
 #define CTR_DICT_FORMAT           "formatua:"
-#define CTR_DICT_LOCK             "blokeoa"
-#define CTR_DICT_UNLOCK           "unlock"
 #define CTR_DICT_LAST             "azken"
 #define CTR_DICT_FIRST            "lehenengo"
 #define CTR_DICT_SECOND_LAST      "bigarren azken"

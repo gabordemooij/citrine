@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "kugabana na:"
 #define CTR_DICT_LIKE             "nka:"
 #define CTR_DICT_FORMAT           "_imiterere:"
-#define CTR_DICT_LOCK             "gufunga"
-#define CTR_DICT_UNLOCK           "fungura"
 #define CTR_DICT_LAST             "iheruka"
 #define CTR_DICT_FIRST            "mbere"
 #define CTR_DICT_SECOND_LAST      "icya kabiri cyanyuma"

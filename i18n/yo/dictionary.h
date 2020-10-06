@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "pin nipasẹ:"
 #define CTR_DICT_LIKE             "fẹran:"
 #define CTR_DICT_FORMAT           "ọna kika:"
-#define CTR_DICT_LOCK             "tiipa"
-#define CTR_DICT_UNLOCK           "ṣii"
 #define CTR_DICT_LAST             "kẹhin"
 #define CTR_DICT_FIRST            "akoko"
 #define CTR_DICT_SECOND_LAST      "keji kẹhin"

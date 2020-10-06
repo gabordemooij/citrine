@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "faib los ntawm:"
 #define CTR_DICT_LIKE             "nyiam:"
 #define CTR_DICT_FORMAT           "hom ntawv:"
-#define CTR_DICT_LOCK             "ntsuas phoo"
-#define CTR_DICT_UNLOCK           "qhib"
 #define CTR_DICT_LAST             "_kawg"
 #define CTR_DICT_FIRST            "thawj zaug"
 #define CTR_DICT_SECOND_LAST      "zaum ob kawg"

@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "zarao by:"
 #define CTR_DICT_LIKE             "toy ny:"
 #define CTR_DICT_FORMAT           "endrika:"
-#define CTR_DICT_LOCK             "hidin-trano"
-#define CTR_DICT_UNLOCK           "hanalana ny hitsoka ao"
 #define CTR_DICT_LAST             "farany"
 #define CTR_DICT_FIRST            "voalohany"
 #define CTR_DICT_SECOND_LAST      "faharoa farany"

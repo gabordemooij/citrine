@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "aqsam minn:"
 #define CTR_DICT_LIKE             "bħal:"
 #define CTR_DICT_FORMAT           "format:"
-#define CTR_DICT_LOCK             "jissakkar"
-#define CTR_DICT_UNLOCK           "nisfruttaw"
 #define CTR_DICT_LAST             "l-aħħar"
 #define CTR_DICT_FIRST            "l-ewwel"
 #define CTR_DICT_SECOND_LAST      "it-tieni l-aħħar"

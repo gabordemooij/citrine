@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "kee site na:"
 #define CTR_DICT_LIKE             "dị ka:"
 #define CTR_DICT_FORMAT           "usoro:"
-#define CTR_DICT_LOCK             "igbachi"
-#define CTR_DICT_UNLOCK           "imehe"
 #define CTR_DICT_LAST             "nke ikpeazu"
 #define CTR_DICT_FIRST            "mbụ"
 #define CTR_DICT_SECOND_LAST      "nke abụọ ikpeazụ"

@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "ਇਸ ਦੁਆਰਾ ਵੰਡੋ:"
 #define CTR_DICT_LIKE             "ਪਸੰਦ:"
 #define CTR_DICT_FORMAT           "ਫਾਰਮੈਟ:"
-#define CTR_DICT_LOCK             "ਲਾਕ"
-#define CTR_DICT_UNLOCK           "ਅਨਲੌਕ ਕਰੋ"
 #define CTR_DICT_LAST             "ਆਖਰੀ"
 #define CTR_DICT_FIRST            "ਪਹਿਲਾਂ"
 #define CTR_DICT_SECOND_LAST      "ਦੂਜਾ ਆਖਰੀ"

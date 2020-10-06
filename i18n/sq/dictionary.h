@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "ndani me:"
 #define CTR_DICT_LIKE             "si:"
 #define CTR_DICT_FORMAT           "format:"
-#define CTR_DICT_LOCK             "lock"
-#define CTR_DICT_UNLOCK           "hap"
 #define CTR_DICT_LAST             "i fundit"
 #define CTR_DICT_FIRST            "i parë"
 #define CTR_DICT_SECOND_LAST      "kaluar dytë"

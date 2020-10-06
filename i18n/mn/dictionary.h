@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "хуваах:"
 #define CTR_DICT_LIKE             "шиг:"
 #define CTR_DICT_FORMAT           "формат:"
-#define CTR_DICT_LOCK             "түгжих"
-#define CTR_DICT_UNLOCK           "онгойлгох"
 #define CTR_DICT_LAST             "сүүлчийн"
 #define CTR_DICT_FIRST            "хамгийн түрүүнд"
 #define CTR_DICT_SECOND_LAST      "хоёр дахь нь сүүлд"

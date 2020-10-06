@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "wehea ma:"
 #define CTR_DICT_LIKE             "rite:"
 #define CTR_DICT_FORMAT           "whakahōputu:"
-#define CTR_DICT_LOCK             "maukati"
-#define CTR_DICT_UNLOCK           "wewete"
 #define CTR_DICT_LAST             "whakamutunga"
 #define CTR_DICT_FIRST            "tuatahi"
 #define CTR_DICT_SECOND_LAST      "_tuarua"

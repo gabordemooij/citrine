@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "բաժանեք ՝__:"
 #define CTR_DICT_LIKE             "ինչպես:"
 #define CTR_DICT_FORMAT           "ձևաչափ:"
-#define CTR_DICT_LOCK             "կողպեք"
-#define CTR_DICT_UNLOCK           "բացել"
 #define CTR_DICT_LAST             "վերջին"
 #define CTR_DICT_FIRST            "առաջին"
 #define CTR_DICT_SECOND_LAST      "երկրորդ վերջին"

@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "podijeli sa:"
 #define CTR_DICT_LIKE             "poput:"
 #define CTR_DICT_FORMAT           "format:"
-#define CTR_DICT_LOCK             "zaključati"
-#define CTR_DICT_UNLOCK           "otključati"
 #define CTR_DICT_LAST             "zadnji"
 #define CTR_DICT_FIRST            "prvo"
 #define CTR_DICT_SECOND_LAST      "drugi zadnji"

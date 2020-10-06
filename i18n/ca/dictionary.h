@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "dividir per:"
 #define CTR_DICT_LIKE             "m’agrada:"
 #define CTR_DICT_FORMAT           "format:"
-#define CTR_DICT_LOCK             "pany"
-#define CTR_DICT_UNLOCK           "descobrir"
 #define CTR_DICT_LAST             "últim"
 #define CTR_DICT_FIRST            "primer"
 #define CTR_DICT_SECOND_LAST      "segon últim"

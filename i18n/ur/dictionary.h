@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "تقسیم کریں بذریعہ:"
 #define CTR_DICT_LIKE             "جیسے:"
 #define CTR_DICT_FORMAT           "فارمیٹ:"
-#define CTR_DICT_LOCK             "لاک"
-#define CTR_DICT_UNLOCK           "غیر مقفل کریں"
 #define CTR_DICT_LAST             "آخری"
 #define CTR_DICT_FIRST            "پہلا"
 #define CTR_DICT_SECOND_LAST      "دوسرا آخری"

@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "per dividant:"
 #define CTR_DICT_LIKE             "tanquam;__:"
 #define CTR_DICT_FORMAT           "format:"
-#define CTR_DICT_LOCK             "cincinno"
-#define CTR_DICT_UNLOCK           "unlock"
 #define CTR_DICT_LAST             "tandem"
 #define CTR_DICT_FIRST            "primis"
 #define CTR_DICT_SECOND_LAST      "secundo novissimo"

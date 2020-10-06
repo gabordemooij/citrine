@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "chia cho:"
 #define CTR_DICT_LIKE             "giống:"
 #define CTR_DICT_FORMAT           "định dạng:"
-#define CTR_DICT_LOCK             "khóa"
-#define CTR_DICT_UNLOCK           "mở khóa"
 #define CTR_DICT_LAST             "cuối cùng"
 #define CTR_DICT_FIRST            "Đầu tiên"
 #define CTR_DICT_SECOND_LAST      "thứ hai cuối cùng"

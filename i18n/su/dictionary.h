@@ -158,8 +158,6 @@
 #define CTR_DICT_DIVIDER_SET      "ngabagi ku:"
 #define CTR_DICT_LIKE             "siga:"
 #define CTR_DICT_FORMAT           "format:"
-#define CTR_DICT_LOCK             "ngonci"
-#define CTR_DICT_UNLOCK           "muka konci"
 #define CTR_DICT_LAST             "tukang"
 #define CTR_DICT_FIRST            "mimitina"
 #define CTR_DICT_SECOND_LAST      "kadua panungtungan"
