@@ -1,6 +1,6 @@
-(Mapa nový) umístit:„a"b” na:„test”
+(Mapa nový) umístit:„a"b“ na:„test“
 Invalid JSON.
-(Mapa nový) umístit:(Seznam ← 1 ; 2 ; (Seznam ← 3 ; 4) ; ((Mapa nový) umístit:(Seznam ← 3 ; 4) na:„bar”, umístit:1 na:„foo”)) na:„nested”, umístit:Nepravda na:„legend”, umístit:27 na:„age”, umístit:„Jack” na:„name”
+(Mapa nový) umístit:(Seznam ← 1 ; 2 ; (Seznam ← 3 ; 4) ; ((Mapa nový) umístit:(Seznam ← 3 ; 4) na:„bar“, umístit:1 na:„foo“)) na:„nested“, umístit:Nepravda na:„legend“, umístit:27 na:„age“, umístit:„Jack“ na:„name“
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}
