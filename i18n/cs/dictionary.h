@@ -25,7 +25,7 @@
 #define CTR_DICT_PLUS            "+"
 #define CTR_DICT_MINUS   	     "-"
 #define CTR_DICT_MULTIPLIER   	 "⋅"
-#define CTR_DICT_DIVISION   	 "/"
+#define CTR_DICT_DIVISION   	 "∶"
 #define CTR_DICT_GREATER   	     ">"
 #define CTR_DICT_LESS   	     "<"
 #define CTR_DICT_AT_SYMBOL       "?" 
