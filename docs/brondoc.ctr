@@ -1,36 +1,43 @@
 Programma geheugen: 200.000.000.
 
-☞ tĳd         := Moment nieuw tĳd ruw.
-☞ datum       := Moment nieuw formaat: '%Y-%m-%d'.
-☞ ontwerp     := Bestand nieuw: 'template.html', lezen.
-☞ handleiding := Lĳst nieuw.
-☞ broncode    := ''.
+☞ tĳdstip     ≔ Moment nieuw.
+☞ tĳd         ≔ tĳdstip tĳd ruw.
+☞ datum       ≔ “jaartal-maandnummer-dagnummer uur:minuut” 
+					jaartal:     tĳdstip jaar ruw,
+					maandnummer: tĳdstip maand,
+					dagnummer:   tĳdstip dag,
+					uur:         tĳdstip uur,
+					minuut:      tĳdstip minuut.
 
-broncode toevoegen: (Bestand nieuw: '../base.c',        lezen).
-broncode toevoegen: (Bestand nieuw: '../collections.c', lezen).
-broncode toevoegen: (Bestand nieuw: '../file.c',        lezen).
-broncode toevoegen: (Bestand nieuw: '../system.c',      lezen).
+☞ ontwerp     ≔ Bestand nieuw: “template.html”, lezen.
+☞ handleiding ≔ Lĳst nieuw.
+☞ broncode    ≔ “”.
 
-☞ talen   := Reeks nieuw.
-☞ blokken := broncode opsplitsen: '@def'.
+broncode toevoegen: (Bestand nieuw: “../base.c”,        lezen).
+broncode toevoegen: (Bestand nieuw: “../collections.c”, lezen).
+broncode toevoegen: (Bestand nieuw: “../file.c”,        lezen).
+broncode toevoegen: (Bestand nieuw: “../system.c”,      lezen).
+
+☞ talen   ≔ Reeks nieuw.
+☞ blokken ≔ broncode opsplitsen: “@def”.
 blokken afschuiven.
-☞ totaal  := blokken aantal.
+☞ totaal  ≔ blokken aantal.
 
 
-Tekst bĳ: 'html' doen: {
+Tekst bĳ: “html” doen: {
 	
-	☞ html := ⛏ tekst kopieer.
-	html vervang: '&' door: '&amp;'.
-	html vervang: '"' door: '&quot;'.
-	html vervang: '<' door: '&lt;'.
-	html vervang: '>' door: '&gt;'.
-	html vervang: '↵' door: '<br>'.
+	☞ html ≔ ⛏ tekst kopieer.
+	html vervang: “&” door: “&amp;”.
+	html vervang: “"” door: “&quot;”.
+	html vervang: “<” door: “&lt;”.
+	html vervang: “>” door: “&gt;”.
+	html vervang: “↵” door: “<br>”.
 	↲ html.
 }.
 
-Bestand reeks: '../i18n', elk: { :nummer :taalinformatie
-	☞ taal := taalinformatie bestand.
-	taal = '..' of: taal = '.', doorgaan.
+Bestand reeks: “../i18n”, elk: { :nummer :taalinformatie
+	☞ taal ≔ taalinformatie bestand.
+	taal = “..” of: taal = “.”, doorgaan.
 	handleiding zet: (Reeks nieuw) bĳ: taal.
 	talen toevoegen: taal.
 }.
@@ -40,83 +47,85 @@ talen sorteren: { :a :b ↲ a > b. }.
 blokken elk: { :nummer :blok
 
 	✎ schrĳf: (
-		'Bezig met blok: 🠶bloknummer van: 🠶totaal.↵'
+		“Bezig met blok: 🠶bloknummer van: 🠶totaal.↵”
 		🠶bloknummer: nummer,
 		🠶totaal: totaal
 	).
 
-	☞ blokinhoud    := blok opsplitsen: '*/', eerste.
+	☞ blokinhoud    ≔ blok opsplitsen: “*/”, eerste.
 	
 	blokinhoud
-	vervang: '↵ *' door: '↵',
-	vervang: ' *↵' door: '↵'.
+	vervang: “↵ *” door: “↵”,
+	vervang: “ *↵” door: “↵”.
 	
-	☞ blokdelen     := blokinhoud opsplitsen: '@example'.
-	☞ definitie     := blokdelen eerste verwĳder omliggende spaties.
-	☞ voorbeeld     := blokdelen laatste verwĳder omliggende spaties.
-	☞ resultaat     := ''.
-	☞ resultaat?    := voorbeeld bevat: '@result'.
+	☞ blokdelen     ≔ blokinhoud opsplitsen: “@example”.
+	☞ definitie     ≔ blokdelen eerste verwĳder omliggende spaties.
+	☞ voorbeeld     ≔ blokdelen laatste verwĳder omliggende spaties.
+	☞ resultaat     ≔ “”.
+	☞ resultaat?    ≔ voorbeeld bevat: “@result”.
 
+	(blokdelen aantal < 2) doorgaan.
+	
 	resultaat? ja: {
-		voorbeeld := voorbeeld opsplitsen: '@result'.
-		resultaat := voorbeeld eraf.
+		voorbeeld ≔ voorbeeld opsplitsen: “@result”.
+		resultaat ≔ voorbeeld eraf.
 	}.
 
-	☞ definitiebestand := Bestand nieuw: '/tmp/def.ctr'.
-	☞ codebestand      := Bestand nieuw: '/tmp/code.ctr'.
+	☞ definitiebestand ≔ Bestand nieuw: “/tmp/def.ctr”.
+	☞ codebestand      ≔ Bestand nieuw: “/tmp/code.ctr”.
 
 	definitiebestand schrĳf: definitie.
 	codebestand schrĳf: voorbeeld.
 
 	talen elk: { :nummer :taalinformatie
 	
-		☞ taal := taalinformatie bestand.
+		☞ taal ≔ taalinformatie bestand.
 
-		☞ commando := 
-		'../bin/Linux/ctrus -t ../dict/en🠶taal.dict /tmp/def.ctr 2>/dev/null'.
+		☞ commando ≔ 
+		“../bin/Linux/ctrxx -t ../dict/xx🠶taal.dict /tmp/def.ctr 2>/dev/null”.
 		commando 🠶taal: taal.
-
-		☞ vertaalde definitie := Programma opdrachtregel: commando.
-		commando := 
-		'../bin/Linux/ctrus -t ../dict/en🠶taal.dict /tmp/code.ctr 1>/tmp/run.ctr 2>/dev/null'.
+		
+		☞ vertaalde definitie ≔ Programma opdrachtregel: commando.
+		commando ≔ 
+		“../bin/Linux/ctrxx -t ../dict/xx🠶taal.dict /tmp/code.ctr 1>/tmp/run.ctr 2>/dev/null”.
 		commando 🠶taal: taal.
 
 		Programma opdrachtregel: commando.
-		☞ vertaalde code := Bestand nieuw: '/tmp/run.ctr', lezen.
-
+		☞ vertaalde code ≔ Bestand nieuw: “/tmp/run.ctr”, lezen.
+		
 		resultaat? nee: {
-			commando := '../bin/Linux/ctr🠶taal /tmp/run.ctr 2>/tmp/err.log'.
+			commando ≔ “../bin/Linux/ctr🠶taal /tmp/run.ctr 2>/tmp/err.log”.
 			commando 🠶taal: taal.
-			resultaat := Programma opdrachtregel: commando.
+			resultaat ≔ Programma opdrachtregel: commando.
 		}.
 
-		commando := 'echo "🠶code" | sha1sum'.
+		commando ≔ “echo "🠶code" | sha1sum”.
 		commando 🠶code: ( taal + vertaalde definitie ).
-		☞ link := Programma opdrachtregel: commando, opsplitsen: ' ', eerste.
+		☞ link ≔ Programma opdrachtregel: commando, opsplitsen: “ ”, eerste.
 
-		☞ hoofdstuk := Reeks nieuw
+		☞ hoofdstuk ≔ Reeks nieuw
 		• vertaalde definitie
 		• vertaalde code
 		• resultaat
 		• link.
-		☞ x := handleiding bĳ: taal, toevoegen: hoofdstuk.
+		☞ x ≔ handleiding bĳ: taal, toevoegen: hoofdstuk.
 	}.
 }.
 
-☞ taalregister := ''.
+☞ taalregister ≔ “”.
 talen elk: { :nummer :taal
 
-	☞ eerste hoofdstuk := handleiding bĳ: taal, eerste.
-	☞ link := eerste hoofdstuk laatste.
-	☞ regel := '<li><a href="/docs/🠶taal/🠶link.ctr" >🠶taal</a></li>'.
+	☞ eerste hoofdstuk ≔ handleiding bĳ: taal, eerste.
+	☞ link ≔ eerste hoofdstuk laatste.
+	☞ regel ≔ “<li><a href="/docs/🠶taal/🠶link.ctr" >🠶taal</a></li>”.
 
 	regel
 	🠶taal: taal,
 	🠶link: link.
 
 	taalregister toevoegen: regel.
-	☞ commando := 
-	'mkdir server/docs/🠶taal'.
+	☞ commando ≔ 
+	“mkdir server/docs/🠶taal”.
 	commando 🠶taal: taal.
 
 	Programma opdrachtregel: commando.
@@ -124,12 +133,12 @@ talen elk: { :nummer :taal
 
 handleiding elk: { :taal :hoofdstukken
 
-	☞ inhoudsopgave := ''.
+	☞ inhoudsopgave ≔ “”.
 	hoofdstukken elk: { :nummer :onderdelen
 
-		☞ link := onderdelen laatste.
-		☞ titel := onderdelen eerste.
-		☞ regel := '<li><a href="/docs/🠶taal/🠶link.ctr" >🠶titel</a></li>'.
+		☞ link ≔ onderdelen laatste.
+		☞ titel ≔ onderdelen eerste.
+		☞ regel ≔ “<li><a href="/docs/🠶taal/🠶link.ctr" >🠶titel</a></li>”.
 		regel
 			🠶taal: taal,
 			🠶link: link,
@@ -139,7 +148,7 @@ handleiding elk: { :taal :hoofdstukken
 
 	hoofdstukken elk: { :nummer :onderdelen
 
-		☞ document := ontwerp kopieer.
+		☞ document ≔ ontwerp kopieer.
 		document
 			🠶datum: datum,
 			🠶tĳd: tĳd,
@@ -151,7 +160,7 @@ handleiding elk: { :taal :hoofdstukken
 			🠶resultaat: (onderdelen positie: 3) html,
 			🠶inhoudsopgave: inhoudsopgave.
 
-		☞ bestandslocatie := 'server/docs/🠶taal/🠶link.ctr'.
+		☞ bestandslocatie ≔ “server/docs/🠶taal/🠶link.ctr”.
 		bestandslocatie
 			🠶taal: taal,
 			🠶link: onderdelen laatste.

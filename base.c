@@ -85,13 +85,13 @@ char* ctr_national_number(char* old_number, char* new_number) {
  * Welcome
  * 
  * @example
- * ☞ x := Object new.
- * x on: 'greet:' do: { :somebody
- *   ☞ greeting := 'Hello you!'.
+ * ☞ x ≔ Object new.
+ * x on: ‘greet:’ do: { :somebody
+ *   ☞ greeting ≔ ‘Hello you’.
  *   greeting you: somebody.
  *   ✎ write: greeting, stop.
  * }.
- * x greet: 'World'.
+ * x greet: ‘World’.
  */
 
 
