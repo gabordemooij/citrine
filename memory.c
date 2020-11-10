@@ -202,6 +202,14 @@ void* ctr_heap_reallocate(void* oldptr, size_t size ) {
 	block_width = (size_t*) oldptr;
 	old_size = *(block_width);
 
+	/* if somehow the requested size is less than the old size */
+	/* (because of bucketing) just return same memory block    */
+	/* otherwise upon copying memory contents we will cross    */
+	/* boundaries.                                             */
+	if (size <= old_size) {
+		return (void*) ((char*) oldptr + q);
+	}
+
 	/* update the ledger */
 	ctr_gc_alloc = ( ctr_gc_alloc - old_size ) + size;
 

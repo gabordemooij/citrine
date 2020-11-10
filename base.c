@@ -1389,10 +1389,19 @@ ctr_object* ctr_internal_number_to_string(ctr_object* myself, ctr_argument* argu
 	char* p;
 	char* buf;
 	int bufSize;
+	ctr_object* qname;
+	ctr_object* qual;
 	ctr_object* stringObject;
 	s = ctr_heap_allocate( 100 * sizeof( char ) );
 	if (!flat) {
-		q = ctr_heap_allocate( 100 * sizeof( char ) );
+		qname = ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION );
+		qual = ctr_internal_object_find_property( myself, qname, CTR_CATEGORY_PRIVATE_PROPERTY );
+		if (qual) {
+			qual = ctr_internal_cast2string( qual );
+			q = ctr_heap_allocate( (100 + qual->value.svalue->vlen) * sizeof( char ) );
+		} else {
+			q = ctr_heap_allocate( 100 * sizeof( char ) );
+		}
 	}
 	bufSize = 100 * sizeof( char );
 	buf = ctr_heap_allocate( bufSize );
@@ -1405,6 +1414,10 @@ ctr_object* ctr_internal_number_to_string(ctr_object* myself, ctr_argument* argu
 	ctr_heap_free( buf );
 	if (!flat) {
 		q = ctr_international_number( s, q );
+		if (qual) {
+			strcat(q, " ");
+			strncat(q, qual->value.svalue->value, qual->value.svalue->vlen);
+		}
 		slen = strlen(q);
 		stringObject = ctr_build_string(q, slen);
 		ctr_heap_free( q );
