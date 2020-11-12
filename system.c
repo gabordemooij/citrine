@@ -716,6 +716,7 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
 			date->tm_sec = ctr_internal_cast2number(argumentList->object)->value.nvalue;
 			break;
 	}
+	date->tm_isdst = -1;
 	ctr_heap_free( zone );
 	ctr_internal_object_set_property( myself, key, ctr_build_number_from_float( (double_t) mktime( date ) ), 0 );
 	setenv( "TZ", "UTC", 1 );
