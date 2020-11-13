@@ -340,7 +340,12 @@ ctr_object* ctr_bool_copy( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 ctr_object* ctr_number_copy( ctr_object* myself, ctr_argument* argumentList ) {
-	return ctr_build_number_from_float(myself->value.nvalue);
+	ctr_object* qual = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	ctr_object* copy = ctr_build_number_from_float(myself->value.nvalue);
+	if ( qual != NULL ) {
+		ctr_internal_object_set_property( copy, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ),  ctr_internal_cast2string(qual), CTR_CATEGORY_PRIVATE_PROPERTY );
+	}
+	return copy;
 }
 
 ctr_object* ctr_string_copy( ctr_object* myself, ctr_argument* argumentList ) {
