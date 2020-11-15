@@ -205,7 +205,7 @@ ctr_object* ctr_gc_internal_pin( ctr_object* object ) {
  * [ Program ] clean memory
  *
  * @example
- * ☞ x := 123.
+ * ☞ x ≔ 123.
  * ✎ write: Program memory, stop.
  * Program clean memory.
  * ✎ write: Program memory, stop.
@@ -301,7 +301,7 @@ ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
  * [ Program ] shell: [ String ]
  * 
  * @example
- * ☞ x := Program shell: 'date'.
+ * ☞ x ≔ Program shell: Command date.
  * ✎ write: x.
  */
 ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList) {
@@ -338,7 +338,7 @@ ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList) {
  * [ Program ] argument: [ Number ]
  *
  * @example
- * ☞ x := Program argument: 1.
+ * ☞ x ≔ Program argument: 1.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList) {
@@ -353,7 +353,7 @@ ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList)
  * [ Program ] number.
  *
  * @example
- * ☞ x := Program number.
+ * ☞ x ≔ Program number.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_program_tonumber(ctr_object* myself, ctr_argument* argumentList) {
@@ -365,7 +365,7 @@ ctr_object* ctr_program_tonumber(ctr_object* myself, ctr_argument* argumentList)
  * [ Program ] string.
  *
  * @example
- * ☞ x := Program string.
+ * ☞ x ≔ Program string.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_program_tostring(ctr_object* myself, ctr_argument* argumentList) {
@@ -378,9 +378,9 @@ ctr_object* ctr_program_tostring(ctr_object* myself, ctr_argument* argumentList)
  * [ Program ] use: [ String ]
  *
  * @example
- * ☞ f := File new: '/tmp/x.ctr'.
- * f write: '☞ x := 123.'.
- * Program use: '/tmp/x.ctr'.
+ * ☞ f ≔ File new: (Path tmp: ‘x.ctr’).
+ * f write: ‘☞ x ≔ 123.’.
+ * Program use: (Path tmp: ‘x.ctr’).
  * ✎ write: x, stop.
  */
 ctr_object* ctr_program_include(ctr_object* myself, ctr_argument* argumentList) {
@@ -426,9 +426,9 @@ ctr_object* ctr_program_num_of_args(ctr_object* myself, ctr_argument* argumentLi
  * [ Program ] end
  *
  * @example
- * ✎ write: '1..2..3..', stop.
+ * ✎ write: ‘1..2..3..‘, stop.
  * Program end
- * ✎ write: '4..5..6..', stop.
+ * ✎ write: ‘4..5..6..‘, stop.
  */
 ctr_object* ctr_program_exit(ctr_object* myself, ctr_argument* argumentList) {
 	CtrStdFlow = CtrStdExit;
@@ -440,10 +440,10 @@ ctr_object* ctr_program_exit(ctr_object* myself, ctr_argument* argumentList) {
  * [ Program ] setting: [ String ]
  *
  * @example
- * ☞ x := Program setting: 'SHELL'.
+ * ☞ x ≔ Program setting: ‘SHELL’.
  * ✎ write: x, stop.
- * Program setting: 'TEST' value: '123'.
- * ☞ x := Program setting: 'TEST'.
+ * Program setting: ‘TEST’ value: ‘123’.
+ * ☞ x ≔ Program setting: ‘TEST’.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_program_get_env(ctr_object* myself, ctr_argument* argumentList) {
@@ -467,10 +467,10 @@ ctr_object* ctr_program_get_env(ctr_object* myself, ctr_argument* argumentList) 
  * [ Program ] setting: [ String ] value: [ String ]
  *
  * @example
- * ☞ x := Program setting: 'SHELL'.
+ * ☞ x ≔ Program setting: ‘SHELL’.
  * ✎ write: x, stop.
- * Program setting: 'TEST' value: '123'.
- * ☞ x := Program setting: 'TEST'.
+ * Program setting: ‘TEST’ value: ‘123’.
+ * ☞ x ≔ Program setting: ‘TEST’.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList) {
@@ -529,7 +529,7 @@ ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentL
  * [ Program ] input.
  *
  * @example
- * ☞ a := Program input.
+ * ☞ a ≔ Program input.
  * ✎ write: a, stop.
  * 
  * @result
@@ -566,7 +566,7 @@ ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList) {
  * [ Program ] flush.
  *
  * @example
- * ✎ write: 'Flush stdout buffer.', stop.
+ * ✎ write: ‘Flush stdout buffer.‘, stop.
  * Program flush.
  */
 ctr_object* ctr_program_flush(ctr_object* myself, ctr_argument* ctr_argumentList) {
@@ -579,7 +579,7 @@ ctr_object* ctr_program_flush(ctr_object* myself, ctr_argument* ctr_argumentList
  * [ Program ] error: [ String ]
  *
  * @example
- * Program error: '123'.
+ * Program error: ‘123‘.
  * 
  * @result
  * ~$ x.ctr 2>1
@@ -624,7 +624,7 @@ ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
  * Moment
  * 
  * @example
- * ☞ x := Moment new.
+ * ☞ x ≔ Moment new.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_clock_new_set( ctr_object* myself, ctr_argument* argumentList ) {
@@ -728,8 +728,8 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
  * [ Moment ] like: [ Moment ]
  *
  * @example
- * ☞ x := Moment new.
- * ☞ y := Moment new like: x.
+ * ☞ x ≔ Moment new.
+ * ☞ y ≔ Moment new like: x.
  * ✎ write: x, stop.
  * ✎ write: y, stop.
  */
@@ -760,11 +760,11 @@ ctr_object* ctr_clock_like( ctr_object* myself, ctr_argument* argumentList ) {
  * [ Moment ] zone: [ String ]
  *
  * @example
- * ☞ t := Moment new.
- * t zone: 'Europe/Amsterdam'.
+ * ☞ t ≔ Moment new.
+ * t zone: ‘Europe/Amsterdam’.
  * ✎ write: t, stop.
  * ✎ write: t zone, stop.
- * t zone: 'US/Hawaii'.
+ * t zone: ‘US/Hawaii’.
  * ✎ write: t, stop.
  * ✎ write: t zone, stop.
  */
@@ -778,11 +778,11 @@ ctr_object* ctr_clock_set_zone( ctr_object* myself, ctr_argument* argumentList )
  * [ Moment ] zone
  *
  * @example
- * ☞ t := Moment new.
- * t zone: 'Europe/Amsterdam'.
+ * ☞ t ≔ Moment new.
+ * t zone: ‘Europe/Amsterdam’.
  * ✎ write: t, stop.
  * ✎ write: t zone, stop.
- * t zone: 'US/Hawaii'.
+ * t zone: ‘US/Hawaii’.
  * ✎ write: t, stop.
  * ✎ write: t zone, stop.
  */
@@ -795,7 +795,7 @@ ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList )
  * [ Moment ] year: [ Number ]
  *
  * @example
- * ☞ x := Moment new.
+ * ☞ x ≔ Moment new.
  * x year: 2020.
  * x month: 8.
  * x day: 12.
@@ -818,7 +818,7 @@ ctr_object* ctr_clock_set_year( ctr_object* myself, ctr_argument* argumentList )
  * [ Moment ] month: [ Number ]
  *
  * @example
- * ☞ x := Moment new.
+ * ☞ x ≔ Moment new.
  * x year: 2020.
  * x month: 8.
  * x day: 12.
@@ -841,7 +841,7 @@ ctr_object* ctr_clock_set_month( ctr_object* myself, ctr_argument* argumentList 
  * [ Moment ] day: [ Number ]
  *
  * @example
- * ☞ x := Moment new.
+ * ☞ x ≔ Moment new.
  * x year: 2020.
  * x month: 8.
  * x day: 12.
@@ -864,7 +864,7 @@ ctr_object* ctr_clock_set_day( ctr_object* myself, ctr_argument* argumentList ) 
  * [ Moment ] hour: [ Number ]
  *
  * @example
- * ☞ x := Moment new.
+ * ☞ x ≔ Moment new.
  * x year: 2020.
  * x month: 8.
  * x day: 12.
@@ -887,7 +887,7 @@ ctr_object* ctr_clock_set_hour( ctr_object* myself, ctr_argument* argumentList )
  * [ Moment ] minute: [ Number ]
  *
  * @example
- * ☞ x := Moment new.
+ * ☞ x ≔ Moment new.
  * x year: 2020.
  * x month: 8.
  * x day: 12.
@@ -910,7 +910,7 @@ ctr_object* ctr_clock_set_minute( ctr_object* myself, ctr_argument* argumentList
  * [ Moment ] second: [ Number ]
  *
  * @example
- * ☞ x := Moment new.
+ * ☞ x ≔ Moment new.
  * x year: 2020.
  * x month: 8.
  * x day: 12.
@@ -933,7 +933,7 @@ ctr_object* ctr_clock_set_second( ctr_object* myself, ctr_argument* argumentList
  * [ Moment ] year
  *
  * @example
- * ☞ x := Moment new.
+ * ☞ x ≔ Moment new.
  * x year: 2020.
  * x month: 8.
  * x day: 12.
@@ -956,7 +956,7 @@ ctr_object* ctr_clock_year( ctr_object* myself, ctr_argument* argumentList ) {
  * [ Moment ] month
  *
  * @example
- * ☞ x := Moment new.
+ * ☞ x ≔ Moment new.
  * x year: 2020.
  * x month: 8.
  * x day: 12.
@@ -979,7 +979,7 @@ ctr_object* ctr_clock_month( ctr_object* myself, ctr_argument* argumentList ) {
  * [ Moment ] day
  *
  * @example
- * ☞ x := Moment new.
+ * ☞ x ≔ Moment new.
  * x year: 2020.
  * x month: 8.
  * x day: 12.
@@ -1002,7 +1002,7 @@ ctr_object* ctr_clock_day( ctr_object* myself, ctr_argument* argumentList ) {
  * [ Moment ] hour
  *
  * @example
- * ☞ x := Moment new.
+ * ☞ x ≔ Moment new.
  * x year: 2020.
  * x month: 8.
  * x day: 12.
@@ -1025,7 +1025,7 @@ ctr_object* ctr_clock_hour( ctr_object* myself, ctr_argument* argumentList ) {
  * [ Moment ] minute
  *
  * @example
- * ☞ x := Moment new.
+ * ☞ x ≔ Moment new.
  * x year: 2020.
  * x month: 8.
  * x day: 12.
@@ -1048,7 +1048,7 @@ ctr_object* ctr_clock_minute( ctr_object* myself, ctr_argument* argumentList ) {
  * [ Moment ] second
  *
  * @example
- * ☞ x := Moment new.
+ * ☞ x ≔ Moment new.
  * x year: 2020.
  * x month: 8.
  * x day: 12.
@@ -1071,7 +1071,7 @@ ctr_object* ctr_clock_second( ctr_object* myself, ctr_argument* argumentList ) {
  * [ Moment ] day of the year
  *
  * @example
- * ☞ t := Moment new.
+ * ☞ t ≔ Moment new.
  * ✎ write: t, stop.
  * ✎ write: t day of the year, stop.
  */
@@ -1090,7 +1090,7 @@ ctr_object* ctr_clock_yearday( ctr_object* myself, ctr_argument* argumentList ) 
  * [ Moment ] weekday
  *
  * @example
- * ☞ t := Moment new.
+ * ☞ t ≔ Moment new.
  * ✎ write: t, stop.
  * ✎ write: t weekday, stop.
  */
@@ -1109,7 +1109,7 @@ ctr_object* ctr_clock_weekday( ctr_object* myself, ctr_argument* argumentList ) 
  * [ Moment ] time.
  *
  * @example
- * ☞ t := Moment new time.
+ * ☞ t ≔ Moment new time.
  * ✎ write: t, stop.
  */
 ctr_object* ctr_clock_time( ctr_object* myself, ctr_argument* argumentList ) {
@@ -1125,9 +1125,9 @@ ctr_object* ctr_clock_time( ctr_object* myself, ctr_argument* argumentList ) {
  * [ Moment ] copy
  *
  * @example
- * ☞ t := Moment new.
+ * ☞ t ≔ Moment new.
  * ✎ write: t, stop.
- * ☞ t2 := t copy.
+ * ☞ t2 ≔ t copy.
  * ✎ write: t2, stop.
  */
 ctr_object* ctr_clock_copy( ctr_object* myself, ctr_argument* argumentList ) {
@@ -1146,7 +1146,7 @@ ctr_object* ctr_clock_copy( ctr_object* myself, ctr_argument* argumentList ) {
  * [ Moment ] week
  *
  * @example
- * ☞ t := Moment new.
+ * ☞ t ≔ Moment new.
  * ✎ write: t, stop.
  * ✎ write: t week, stop.
  */
@@ -1169,8 +1169,8 @@ ctr_object* ctr_clock_week( ctr_object* myself, ctr_argument* argumentList ) {
  * [ Moment ] string
  *
  * @example
- * Moment on: 'format:' do: { ↲ 'beautiful moment'. }.
- * Moment on: 'time' do: { ↲ '999'. }.
+ * Moment on: ‘format:’ do: { ↲ ‘beautiful moment’. }.
+ * Moment on: ‘time’ do: { ↲ ‘999’. }.
  * ✎ write: Moment, end.
  * ✎ write: Moment number, end.
  */
@@ -1204,7 +1204,7 @@ ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList 
  * [ Moment ] number
  *
  * @example
- * ☞ x := Moment new.
+ * ☞ x ≔ Moment new.
  * ✎ write: x, stop.
  * ✎ write: x number, stop.
  */
@@ -1280,7 +1280,7 @@ ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, ui
  * [ Moment ] add: [ Number ].
  * 
  * @example
- * ☞ x := Moment new.
+ * ☞ x ≔ Moment new.
  * ✎ write: x, stop.
  * x add: 6 second.
  * ✎ write: x, stop.
@@ -1302,13 +1302,8 @@ ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
 /**
  * [ Moment ] subtract: [Number].
  *
- * Same as '[ Moment ] add:' but subtracts the number instead of adding it to
- * the clock's time.
- * 
- * In other languages:
- * Dutch: [ Moment ] aftrekken: [Getal].
- * Verschuift het moment in de tijd op basis van het getal.
- * Het getal kan gekwalificeerd worden als minuten, uren of seconden.
+ * Same as [ Moment ] add: but subtracts the number instead of adding it to
+ * the clock‘s time.
  */
 ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_change( myself, argumentList, 0 );
@@ -1318,11 +1313,7 @@ ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList )
  * [ Moment ] new
  *
  * Creates a new clock, by default a clock will be set to
- * the UTC timezone having the current time.
- * 
- * In other languages:
- * Dutch: [ Moment ] nieuw.
- * Maakt een nieuw moment aan voor het huidige tijdstip.
+ * the local timezone and the current time.
  */
 ctr_object* ctr_clock_new( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* clock;
@@ -1337,7 +1328,7 @@ ctr_object* ctr_clock_new( ctr_object* myself, ctr_argument* argumentList ) {
  * ✎ write: [ String ]
  *
  * @example
- * ✎ write: 'Hello World'.
+ * ✎ write: ‘Hello World’.
  */
 ctr_object* ctr_console_write(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* argument1 = argumentList->object;
@@ -1452,9 +1443,9 @@ ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentL
  * [Slurp]
  *
  * Slurp is an object that takes any message and converts it to a string.
- * The message 'obtain' can be used to acquire the generated string.
+ * The message ‘obtain‘ can be used to acquire the generated string.
  * The Slurp object is a separate object with minimal messages to avoid
- * 'message collision'.
+ * ‘message collision‘.
  */
 
 /**
@@ -1462,32 +1453,32 @@ ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentL
  * 
  * Obtains the string generated using the Slurp object.
  * A Slurp object collects all messages send to it and flushes its buffer while
- * returning the resulting string after an 'obtain' message has been received.
+ * returning the resulting string after an ‘obtain‘ message has been received.
  * 
  * Usage:
  * 
  * Slurp hello world.
  * Pen write: (Slurp obtain).
  * 
- * This will output: 'hello world'.
+ * This will output: ‘hello world‘.
  * Use the Slurp object to integrate verbose shell commands, other programming languages
  * (like SQL) etc into your main program without overusing strings.
  *
- * Note that we can't use the = and * unfortunately right now
+ * Note that we can‘t use the = and * unfortunately right now
  * because = is also a method in the main object. While * can be used
- * theoretically, it expects an identifier, and 'from' is not a real
- * identifier, it's just another unary message, so instead of using a binary
- * * we simply use a keyword message select: with argument '*' and then
+ * theoretically, it expects an identifier, and ‘from‘ is not a real
+ * identifier, it‘s just another unary message, so instead of using a binary
+ * * we simply use a keyword message select: with argument ‘*‘ and then
  * proceed our SQL query with a comma (,) to chain the rest.
  * This is an artifact of the fact that the DSL has to be embedded within
  * the language of Citrine. However even with these restrictions (some of which might be
- * alleviated in future versions) it's quite comfortable and readable to interweave
+ * alleviated in future versions) it‘s quite comfortable and readable to interweave
  * an external language in your Citrine script code.
  *
  * Usage:
  *
- * ☞ query := Slurp
- *	select: '*',
+ * ☞ query ≔ Slurp
+ *	select: ‘*‘,
  *	from
  *		users
  *	where
@@ -1510,11 +1501,11 @@ ctr_object* ctr_slurp_obtain( ctr_object* myself, ctr_argument* argumentList ) {
 /**
  * [Slurp] toString.
  *
- * Sending the message 'toString' to a slurp object is the same as sending the
+ * Sending the message ‘toString‘ to a slurp object is the same as sending the
  * obtain message. It will cause the Slurp object to answer with the collected
  * string information from previous interactions. If for some reason the
  * obtain message does not return a string, this message will answer with
- * an empty string, otherwise the resulting string from 'obtain' will be
+ * an empty string, otherwise the resulting string from ‘obtain‘ will be
  * returned.
  */
 ctr_object* ctr_slurp_to_string( ctr_object* myself, ctr_argument* argumentList ) {
