@@ -18,10 +18,10 @@
  * File
  *
  * @example
- * ☞ f := File new: '/tmp/test.txt'.
- * f write: 'test'.
+ * ☞ f ≔ File new: (Path tmp: ‘test.txt’).
+ * f write: ‘test‘.
  * f close.
- * ☞ q := File new: '/tmp/test.txt'.
+ * ☞ q ≔ File new: (Path tmp: ‘test.txt’).
  * ✎ write: q read, stop.
  */
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
@@ -40,7 +40,7 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] path
  *
  * @example
- * ☞ f := File new: '/tmp/test.txt'.
+ * ☞ f ≔ File new: (Path tmp: ‘test.txt’).
  * ✎ write: f path, stop.
  */
 ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
@@ -54,9 +54,9 @@ ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] string
  * 
  * @example
- * ☞ x := File new.
+ * ☞ x ≔ File new.
  * ✎ write: x, stop.
- * ☞ y := File new: '/tmp/a.txt'.
+ * ☞ y ≔ File new: (Path tmp: ‘a.txt’).
  * ✎ write: y, stop.
  */
 ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList) {
@@ -72,10 +72,10 @@ ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] read
  *
  * @example
- * ☞ f := File new: '/tmp/test.txt'.
- * f write: 'test'.
+ * ☞ f ≔ File new: (Path tmp: ‘test.txt’).
+ * f write: ‘test‘.
  * f close.
- * ☞ q := File new: '/tmp/test.txt'.
+ * ☞ q ≔ File new: (Path tmp: ‘test.txt’).
  * ✎ write: q read, stop.
  */
 ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
@@ -118,10 +118,10 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] write: [ String ]
  *
  * @example
- * ☞ f := File new: '/tmp/test.txt'.
- * f write: 'test'.
+ * ☞ f ≔ File new: (Path tmp: ‘test.txt’).
+ * f write: ‘test‘.
  * f close.
- * ☞ q := File new: '/tmp/test.txt'.
+ * ☞ q ≔ File new: (Path tmp: ‘test.txt’).
  * ✎ write: q read, stop.
  */
 ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
@@ -153,10 +153,10 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] append: [ String ]
  *
  * @example
- * ☞ x := File new: '/tmp/a.txt'.
- * x write: '123'.
+ * ☞ x ≔ File new: (Path tmp: ‘a.txt’).
+ * x write: ‘123‘.
  * ✎ write: x read, stop.
- * x append: '345'.
+ * x append: ‘345‘.
  * ✎ write: x read, stop.
  */
 ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
@@ -188,11 +188,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] exists
  *
  * @example
- * ☞ f := '/tmp/a.txt'.
- * ☞ x := File new: f.
- * Program shell: 'rm ' + f.
- * ✎ write: f exists, stop.
- * Program shell: 'touch ' + f.
+ * ☞ x ≔ File new: (Path tmp unknown).
  * ✎ write: f exists, stop.
  */
 ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
@@ -220,8 +216,8 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] delete
  * 
  * @example
- * ☞ x := File new: '/tmp/a.txt'.
- * x write: 'abc'.
+ * ☞ x ≔ File new: (Path tmp: ‘a.txt’).
+ * x write: ‘abc’.
  * ✎ write: x exists, stop.
  * x delete.
  * ✎ write: x exists, stop.
@@ -250,10 +246,10 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] size
  * 
  * @example
- * ☞ x := File new: '/tmp/a.txt'.
- * x write: 'abc'.
+ * ☞ x ≔ File new: (Path tmp: ‘a.txt’).
+ * x write: ‘abc’.
  * ✎ write: x size, stop.
- * x append: 'def'.
+ * x append: ‘def’.
  * ✎ write: x size, stop.
  */
 ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
@@ -285,11 +281,13 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] list: [ String ].
  * 
  * @example
- * Program shell: 'mkdir /tmp/files'.
- * Program shell: 'touch /tmp/files/a.txt'.
- * Program shell: 'touch /tmp/files/b.txt'.
- * ☞ x := File list: '/tmp/files'.
+ * ☞ x ≔ File list: Path tmp.
  * ✎ write: x, stop.
+ * 
+ * @result
+ * file1.txt
+ * file2.txt
+ * ~$_
  */
 ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	DIR* d;

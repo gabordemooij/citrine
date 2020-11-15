@@ -179,7 +179,7 @@ ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentLis
  * Object
  *
  * @example
- * ☞ x ≔ Object.
+ * ☞ x ≔ Object new.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
@@ -196,6 +196,9 @@ ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
  * @example
  * ☞ x ≔ Object.
  * ✎ write: x type, stop.
+ * ✎ write: 777 type, stop.
+ * ✎ write: ‘ABC’ type, stop.
+ * ✎ write: True, stop.
  */
 ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 	switch(myself->info.type){
@@ -282,14 +285,7 @@ ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(0);
 }
 
-/**
- * @def
- * [ Object ] myself.
- *
- * @example
- * ☞ x ≔ Object.
- * ✎ write: ( x = x myself ), stop.
- */
+
 ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
@@ -2409,7 +2405,7 @@ ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * {
- *   this code block error: 'oops!'.
+ *   this code block error: ‘oops!’.
  * } catch: { :e
  *   ✎ write: e.
  * }, run.

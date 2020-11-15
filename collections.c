@@ -16,13 +16,13 @@
  * List
  * 
  * @example
- * ☞ meals :=
+ * ☞ meals ≔
  *	List new
- *	• 'hamburger'
- *	• 'pizza'
- *	• 'haggis'.
+ *	• ‘hamburger’
+ *	• ‘pizza’
+ *	• ‘haggis’.
  *
- * ☞ todo := List ← 'dishes' ; 'cleaning'.
+ * ☞ todo ≔ List ← ‘dishes’ ; ‘cleaning’.
  * ✎ write: meals, stop.
  * ✎ write: todo, stop.
  */
@@ -42,8 +42,8 @@ ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
  * [ List ] type
  *
  * @example
- * ☞ x := List new.
- * ☞ y := x type.
+ * ☞ x ≔ List new.
+ * ☞ y ≔ x type.
  * ✎ write: y, stop.
  */
 ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList) {
@@ -55,7 +55,7 @@ ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] append: [ String ]
  * 
  * @example
- * ☞ x := List new.
+ * ☞ x ≔ List new.
  * x append: 3.
  * x ; 3.
  * x • 3.
@@ -80,8 +80,8 @@ ctr_object* ctr_array_push(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] minimum
  *
  * @example
- * ☞ x := List ← 8 ; 4 ; 2 ; 16.
- * ☞ y := x minimum.
+ * ☞ x ≔ List ← 8 ; 4 ; 2 ; 16.
+ * ☞ y ≔ x minimum.
  * ✎ write: y, stop.
  */
 ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList) {
@@ -104,8 +104,8 @@ ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] maximum
  *
  * @example
- * ☞ x := List ← 8 ; 4 ; 2 ; 16.
- * ☞ y := x maximum.
+ * ☞ x ≔ List ← 8 ; 4 ; 2 ; 16.
+ * ☞ y ≔ x maximum.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
@@ -128,7 +128,7 @@ ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] each: [ Block ].
  *
  * @example
- * ☞ x := List ← 1 ; 2 ; 3.
+ * ☞ x ≔ List ← 1 ; 2 ; 3.
  * x each: { :x
  *   ✎ write: x, stop.
  * }.
@@ -171,7 +171,7 @@ ctr_object* ctr_array_map(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] ← [ Object ]
  *
  * @example
- * ☞ x := List ← 1 ; '2' ; False ; Nil.
+ * ☞ x ≔ List ← 1 ; ‘2’ ; False ; Nil.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_array_new_and_push(ctr_object* myclass, ctr_argument* argumentList) {
@@ -184,7 +184,7 @@ ctr_object* ctr_array_new_and_push(ctr_object* myclass, ctr_argument* argumentLi
  * [ List ] prepend: [ String ].
  * 
  * @example
- * ☞ x := List ← 1 ; 2 ; 3.
+ * ☞ x ≔ List ← 1 ; 2 ; 3.
  * x append: 0.
  * x prepend: 9.
  * ✎ write: x, stop.
@@ -210,8 +210,8 @@ ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] join: [ String ].
  *
  * @example
- * ☞ x := List ← 1 ; 2 ; 3.
- * ✎ write: (x join: ','), stop.
+ * ☞ x ≔ List ← 1 ; 2 ; 3.
+ * ✎ write: (x join: ‘,’), stop.
  */
 ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 	int i;
@@ -248,9 +248,9 @@ ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] position: [ Number ]
  *
  * @example
- * ☞ x  := List ← 'A' ; 'B' ; 'C'.
- * ☞ y  := x position: 1.
- * ☞ z  := x ? 2.
+ * ☞ x  ≔ List ← ‘A’ ; ‘B’ ; ‘C’.
+ * ☞ y  ≔ x position: 1.
+ * ☞ z  ≔ x ? 2.
  * ✎ write: y, stop.
  * ✎ write: z, stop.
  */
@@ -274,8 +274,8 @@ ctr_object* ctr_array_get(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] first
  *
  * @example
- * ☞ x := List ← 1 ; 2 ; 3 ; 4.
- * ☞ y := x first.
+ * ☞ x ≔ List ← 1 ; 2 ; 3 ; 4.
+ * ☞ y ≔ x first.
  * ✎ write: x, stop.
  * ✎ write: y, stop.
  */
@@ -293,8 +293,8 @@ ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] last
  *
  * @example
- * ☞ x := List ← 1 ; 2 ; 3 ; 4.
- * ☞ y := x last.
+ * ☞ x ≔ List ← 1 ; 2 ; 3 ; 4.
+ * ☞ y ≔ x last.
  * ✎ write: x, stop.
  * ✎ write: y, stop.
  */
@@ -312,8 +312,8 @@ ctr_object* ctr_array_last(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] second last
  *
  * @example
- * ☞ x := List ← 1 ; 2 ; 3 ; 4.
- * ☞ y := x second last.
+ * ☞ x ≔ List ← 1 ; 2 ; 3 ; 4.
+ * ☞ y ≔ x second last.
  * ✎ write: x, stop.
  * ✎ write: y, stop.
  */
@@ -332,8 +332,8 @@ ctr_object* ctr_array_second_last(ctr_object* myself, ctr_argument* argumentList
  * [ List ] put: [ Object ] at: [ Number ]
  *
  * @example
- * ☞ x := List new.
- * ☞ x put: 'a' at: 5.
+ * ☞ x ≔ List new.
+ * ☞ x put: ‘a’ at: 5.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
@@ -379,7 +379,7 @@ ctr_object* ctr_array_put(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] pop
  *
  * @example
- * ☞ x := List ← 1 ; 2 ; 3.
+ * ☞ x ≔ List ← 1 ; 2 ; 3.
  * ✎ write: x, stop.
  * x pop.
  * ✎ write: x, stop.
@@ -397,7 +397,7 @@ ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] - [ Number ]
  *
  * @example
- * ☞ x := List ← 1 ; 2 ; 3.
+ * ☞ x ≔ List ← 1 ; 2 ; 3.
  * ✎ write: x, stop.
  * ☞ x - 1.
  * ✎ write: x, stop.
@@ -423,8 +423,8 @@ ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] shift
  *
  * @example
- * ☞ x := List ← 1 ; 2 ; 3.
- * ☞ y := x shift.
+ * ☞ x ≔ List ← 1 ; 2 ; 3.
+ * ☞ y ≔ x shift.
  * ✎ write: y, stop.
  * ✎ write: x, stop.
  */
@@ -443,8 +443,8 @@ ctr_object* ctr_array_shift(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] count
  * 
  * @example
- * ☞ x := List ← 1 ; 2 ; 3.
- * ☞ y := x count.
+ * ☞ x ≔ List ← 1 ; 2 ; 3.
+ * ☞ y ≔ x count.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_array_count(ctr_object* myself, ctr_argument* argumentList) {
@@ -458,8 +458,8 @@ ctr_object* ctr_array_count(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] from: [ Number ] length: [ Number ]
  * 
  * @example
- * ☞ x := List ← 1 ; 2 ; 3 ; 4 ; 5.
- * ☞ y := x from: 2 length: 2.
+ * ☞ x ≔ List ← 1 ; 2 ; 3 ; 4 ; 5.
+ * ☞ y ≔ x from: 2 length: 2.
  * ✎ write: y, stop.
  */
 ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList) {
@@ -490,9 +490,9 @@ ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList
  * [ List ] replace: [ Number ] length: [ Number ] with: [ List ].
  * 
  * @example
- * ☞ x := List ← 1 ; 2 ; 3 ; 4 ; 5.
- * ☞ z := List ← 9.
- * ☞ y := x replace: 2 length: 1 with: z.
+ * ☞ x ≔ List ← 1 ; 2 ; 3 ; 4 ; 5.
+ * ☞ z ≔ List ← 9.
+ * ☞ y ≔ x replace: 2 length: 1 with: z.
  * ✎ write: y, stop.
  */
 ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
@@ -543,9 +543,9 @@ ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] + [ List ]
  *
  * @example
- * ☞ x := List ← 1 ; 2.
- * ☞ y := List ← 3 ; 4.
- * ☞ z := x + y.
+ * ☞ x ≔ List ← 1 ; 2.
+ * ☞ y ≔ List ← 3 ; 4.
+ * ☞ z ≔ x + y.
  * ✎ write: z, stop.
  */
 ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
@@ -582,9 +582,9 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] by: [ List ].
  *
  * @example
- * ☞ x := List ← 'A' ; 'B' ; 'C'.
- * ☞ y := List ← 1 ; 2 ; 3.
- * ☞ z := x by: y.
+ * ☞ x ≔ List ← ‘A’ ; ‘B’ ; ‘C’.
+ * ☞ y ≔ List ← 1 ; 2 ; 3.
+ * ☞ z ≔ x by: y.
  * ✎ write: z, stop.
  */
 ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
@@ -615,8 +615,8 @@ ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] copy
  *
  * @example
- * ☞ a := List ← 1 ; 2 ; 3.
- * ☞ b := a copy.
+ * ☞ a ≔ List ← 1 ; 2 ; 3.
+ * ☞ b ≔ a copy.
  * b put: 999 at: 1.
  * ✎ write: a, stop.
  * ✎ write: b, stop.
@@ -668,7 +668,7 @@ int ctr_sort_cmp(const void * a, const void * b) {
  * [ List ] sort: [ Block ]
  *
  * @example
- * ☞ x := List ← 2 ; 1 ; 3.
+ * ☞ x ≔ List ← 2 ; 1 ; 3.
  * x sort: { :a :b ↲ a < b.}.
  * ✎ write: x, stop.
  */
@@ -689,8 +689,8 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
  * [ List ] string
  * 
  * @example
- * ☞ x := List ← 'a' ; 'b' ; 'c'.
- * ☞ y := x string.
+ * ☞ x ≔ List ← ‘a’ ; ‘b’ ; ‘c’.
+ * ☞ y ≔ x string.
  * ✎ write: y, stop.
  */
 ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList ) {
@@ -733,8 +733,8 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
  * [ List ] fill: [ Number ] with: [ Object ]
  *
  * @example
- * ☞ x := List new
- * fill: 10 with: 'X'.
+ * ☞ x ≔ List new
+ * fill: 10 with: ‘X’.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
@@ -756,8 +756,8 @@ ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
  * [ List ] find: [ Object ].
  *
  * @example
- * ☞ x := List ← 1 ; 2 ; 3.
- * ☞ y := x find: 2.
+ * ☞ x ≔ List ← 1 ; 2 ; 3.
+ * ☞ y ≔ x find: 2.
  * ✎ write: y, stop.
  */
 ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList ) {
@@ -782,7 +782,7 @@ ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList )
  * Map
  * 
  * @example
- * ☞ menu := Map new.
+ * ☞ menu ≔ Map new.
  * menu 
  * pizza: 8,
  * hamburger: 12,
@@ -800,7 +800,7 @@ ctr_object* ctr_map_new(ctr_object* myclass, ctr_argument* argumentList) {
  * [ Map ] type
  *
  * @example
- * ☞ x := Map new.
+ * ☞ x ≔ Map new.
  * ✎ write: x type, stop.
  */
 ctr_object* ctr_map_type(ctr_object* myself, ctr_argument* argumentList) {
@@ -812,8 +812,8 @@ ctr_object* ctr_map_type(ctr_object* myself, ctr_argument* argumentList) {
  * [ Map ] put: [ Object ] at: [ Object ]
  *
  * @example
- * ☞ x := Map new.
- * x put: 'hello' at: 'world'.
+ * ☞ x ≔ Map new.
+ * x put: ‘hello‘ at: ‘world’.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
@@ -846,12 +846,12 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
  * [ Map ] [ String ]: [ Object ]
  *
  * @example
- * ☞ x :=
+ * ☞ x ≔
  * Map new
  * Margherita: 11.90,
  * Hawaii: 12.99,
  * QuattroFormaggi: 13.00.
- * ✎ write: ( x ? 'Hawaii' ), stop.
+ * ✎ write: ( x ? ‘Hawaii’ ), stop.
  * ✎ write: ( x Margherita ), stop.
  */
 ctr_object* ctr_map_key_value(ctr_object* myself, ctr_argument* argumentList) {
@@ -871,9 +871,9 @@ ctr_object* ctr_map_key_value(ctr_object* myself, ctr_argument* argumentList) {
  * [ Map ] - [ Object ]
  *
  * @example
- * ☞ x := Map new.
- * x red: 'green', yellow: 'blue'.
- * x - 'yellow'.
+ * ☞ x ≔ Map new.
+ * x red: ‘green’, yellow: ‘blue’.
+ * x - ‘yellow’.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList) {
@@ -886,8 +886,8 @@ ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList) {
  * [ Map ] keys
  * 
  * @example
- * ☞ x := Map new.
- * x red: 'green', yellow: 'blue'.
+ * ☞ x ≔ Map new.
+ * x red: ‘green’, yellow: ‘blue’.
  * ✎ write: x keys, stop.
  */
 ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList) {
@@ -911,8 +911,8 @@ ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList) {
  * [ Map ] values
  * 
  * @example
- * ☞ x := Map new.
- * x red: 'green', yellow: 'blue'.
+ * ☞ x ≔ Map new.
+ * x red: ‘green’, yellow: ‘blue’.
  * ✎ write: x values, stop.
  */
 ctr_object* ctr_map_values(ctr_object* myself, ctr_argument* argumentList) {
@@ -936,9 +936,9 @@ ctr_object* ctr_map_values(ctr_object* myself, ctr_argument* argumentList) {
  * [ Map ] at: [ Object ]
  * 
  * @example
- * ☞ x := Map new.
- * x put: 'a' at: 'b'.
- * x put: 'hello' at: 'world'.
+ * ☞ x ≔ Map new.
+ * x put: ‘a’ at: ‘b’.
+ * x put: ‘hello’ at: ‘world’.
  * ✎ write: (x at: b), stop.
  * ✎ write: (x world), stop.
  * ✎ write: (x ? b), stop.
@@ -975,10 +975,10 @@ ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
  * [ Map ] count
  *
  * @example
- * ☞ x := Map new.
+ * ☞ x ≔ Map new.
  * x
- * put: 'a' at: 'b',
- * put: 'c' at: 'd'.
+ * put: ‘a’ at: ‘b’,
+ * put: ‘c’ at: ‘d’.
  * ✎ write: x count, stop.
  */
 ctr_object* ctr_map_count(ctr_object* myself, ctr_argument* argumentList) {
@@ -1008,12 +1008,12 @@ ctr_object* ctr_map_copy(ctr_object* myself, ctr_argument* argumentList) {
  * [ Map ] each: [ Block ]
  *
  * @example
- * ☞ scores := Map new.
+ * ☞ scores ≔ Map new.
  * scores
  * team1: 100,
  * team2: 200.
  * scores each: { :team :score
- * 	☞ x := 'Team: team score points ↵'.
+ * 	☞ x ≔ ‘Team: team score points ↵’.
  *  x
  *  team: team,
  *  score: score.
@@ -1062,10 +1062,10 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
  * [ Map ] has: [ Object ]
  *
  * @example
- * ✎ x := Map new.
- * x red: 'green', yellow: 'blue'.
- * ✎ write: (x has: 'red'), stop.
- * ✎ write: (x has: 'purple'), stop.
+ * ✎ x ≔ Map new.
+ * x red: ‘green’, yellow: ‘blue’.
+ * ✎ write: (x has: ‘red’), stop.
+ * ✎ write: (x has: ‘purple’), stop.
  */
 ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList) {
 	int found = 0;
@@ -1092,9 +1092,9 @@ ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList) {
  * [ Map ] string
  * 
  * @example
- * ☞ x := Map new.
- * x put: 'Hello' at: 'World'.
- * ☞ y := x string.
+ * ☞ x ≔ Map new.
+ * x put: ‘Hello’ at: ‘World’.
+ * ☞ y ≔ x string.
  * ✎ write: y, stop.
  */
 ctr_object* ctr_map_to_string( ctr_object* myself, ctr_argument* argumentList) {
