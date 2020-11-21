@@ -1,6 +1,11 @@
-☞ x := Jimare di navbera: 1 _û: 10.
-☞ q := 0.
+✎ nivîsîn: ‘~ Number Game ~’, rawestan.
+✎ nivîsîn: ‘Guess the number’, rawestan.
+☞ x ≔ Jimare di navbera: 1 _û: 10.
+☞ q ≔ 0.
+q ≔ Bername pirsîn.
+{ 
+	✎ nivîsîn: ‘wrong!’, rawestan.
+	q ≔ Bername pirsîn.
 
-{ q := Bername pirsîn. } demek: { ↲ x jimare ≠ q jimare. }.
-
-✎ nivîsîn: ':-)↵'.
+} demek: { ↲ x jimare ≠ q jimare. }.
+✎ nivîsîn: ‘correct!’, rawestan.

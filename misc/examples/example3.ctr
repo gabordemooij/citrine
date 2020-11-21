@@ -1,0 +1,11 @@
+✎ write: ‘~ Number Game ~’, stop.
+✎ write: ‘Guess the number’, stop.
+☞ x ≔ Number between: 1 and: 10.
+☞ q ≔ 0.
+q ≔ Program ask.
+{ 
+	✎ write: ‘wrong!’, stop.
+	q ≔ Program ask.
+
+} while: { ↲ x number ≠ q number. }.
+✎ write: ‘correct!’, stop.

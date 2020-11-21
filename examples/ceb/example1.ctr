@@ -1,1 +1,25 @@
-✎ pagsulat: 'Hello World', hunong.
+✎ pagsulat: ‘~ Password Generator ~’, hunong.
+☞ ihap ≔ 0.
+{
+	✎ pagsulat: ‘How many characters (16-30)?’, hunong.
+	ihap ≔ Programa pangutana gidaghanon hingpit.
+
+	(ihap < 16) tinuod: {
+		✎ pagsulat: ‘That is not enough, please enter a number between 16 and 30.’, hunong.
+	}.
+	(ihap > 30) tinuod: {
+		✎ pagsulat: ‘That is too long, some systems may reject passwords that long.’, hunong.
+	}.
+} samtang: { ↲ ((ihap < 16) or: (ihap > 30)). }.
+☞ mga karakter ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		mga karakter kinaiya: ( 
+		Numero
+		sa taliwala: 1
+		ug: mga karakter gitas-on
+	).
+	password sumpay: char.
+} × ihap.
+✎ pagsulat: password, hunong.

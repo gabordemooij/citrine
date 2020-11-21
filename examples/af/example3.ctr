@@ -1,6 +1,11 @@
-☞ x := Aantal tussen: 1 en: 10.
-☞ q := 0.
+✎ skryf: ‘~ Number Game ~’, stop.
+✎ skryf: ‘Guess the number’, stop.
+☞ x ≔ Aantal tussen: 1 en: 10.
+☞ q ≔ 0.
+q ≔ Program vra.
+{ 
+	✎ skryf: ‘wrong!’, stop.
+	q ≔ Program vra.
 
-{ q := Program vra. } terwyl: { ↲ x aantal ≠ q aantal. }.
-
-✎ skryf: ':-)↵'.
+} terwyl: { ↲ x aantal ≠ q aantal. }.
+✎ skryf: ‘correct!’, stop.

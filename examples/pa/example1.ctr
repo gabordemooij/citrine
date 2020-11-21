@@ -1,1 +1,25 @@
-✎ ਲਿਖੋ: 'Hello World', ਰੂਕੋ.
+✎ ਲਿਖੋ: ‘~ Password Generator ~’, ਰੂਕੋ.
+☞ __ਗਿਣਤੀ ≔ 0.
+{
+	✎ ਲਿਖੋ: ‘How many characters (16-30)?’, ਰੂਕੋ.
+	__ਗਿਣਤੀ ≔ ਪ੍ਰੋਗਰਾਮ ਪੁੱਛੋ _ਗਿਣਤੀ ਅਸੀਮ.
+
+	(__ਗਿਣਤੀ < 16) ਸੱਚ: {
+		✎ ਲਿਖੋ: ‘That is not enough, please enter a number between 16 and 30.’, ਰੂਕੋ.
+	}.
+	(__ਗਿਣਤੀ > 30) ਸੱਚ: {
+		✎ ਲਿਖੋ: ‘That is too long, some systems may reject passwords that long.’, ਰੂਕੋ.
+	}.
+} ਜਦਕਿ: { ↲ ((__ਗਿਣਤੀ < 16) or: (__ਗਿਣਤੀ > 30)). }.
+☞ ਅੱਖਰ ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		ਅੱਖਰ ਅੱਖਰ: ( 
+		ਗਿਣਤੀ
+		ਵਿਚਕਾਰ: 1
+		ਅਤੇ: ਅੱਖਰ ਲੰਬਾਈ
+	).
+	password ਸ਼ਾਮਲ ਕਰੋ: char.
+} × __ਗਿਣਤੀ.
+✎ ਲਿਖੋ: password, ਰੂਕੋ.

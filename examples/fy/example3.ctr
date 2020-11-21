@@ -1,6 +1,11 @@
-☞ x := Nûmer tusken en: 1 __: 10.
-☞ q := 0.
+✎ skriuwe: ‘~ Number Game ~’, halte.
+✎ skriuwe: ‘Guess the number’, halte.
+☞ x ≔ Nûmer tusken en: 1 __: 10.
+☞ q ≔ 0.
+q ≔ Programma freegje.
+{ 
+	✎ skriuwe: ‘wrong!’, halte.
+	q ≔ Programma freegje.
 
-{ q := Programma freegje. } wylst: { ↲ x nûmer ≠ q nûmer. }.
-
-✎ skriuwe: ':-)↵'.
+} wylst: { ↲ x nûmer ≠ q nûmer. }.
+✎ skriuwe: ‘correct!’, halte.

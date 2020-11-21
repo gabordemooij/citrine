@@ -1,6 +1,11 @@
-☞ x := Inani phakathi: 1 kunye: 10.
-☞ q := 0.
+✎ bhala: ‘~ Number Game ~’, yeka.
+✎ bhala: ‘Guess the number’, yeka.
+☞ x ≔ Inani phakathi: 1 kunye: 10.
+☞ q ≔ 0.
+q ≔ Inkqubo buza.
+{ 
+	✎ bhala: ‘wrong!’, yeka.
+	q ≔ Inkqubo buza.
 
-{ q := Inkqubo buza. } ngelixa: { ↲ x inani ≠ q inani. }.
-
-✎ bhala: ':-)↵'.
+} ngelixa: { ↲ x inani ≠ q inani. }.
+✎ bhala: ‘correct!’, yeka.

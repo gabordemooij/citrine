@@ -1,0 +1,25 @@
+✎ کو: ‘~ Password Generator ~’, سٽاپ.
+☞ ڻپ ≔ 0.
+{
+	✎ کو: ‘How many characters (16-30)?’, سٽاپ.
+	ڻپ ≔ روگرام ڇو يرلگول طلق.
+
+	(ڻپ < 16) _چو: {
+		✎ کو: ‘That is not enough, please enter a number between 16 and 30.’, سٽاپ.
+	}.
+	(ڻپ > 30) _چو: {
+		✎ کو: ‘That is too long, some systems may reject passwords that long.’, سٽاپ.
+	}.
+} ڏهنته: { ↲ ((ڻپ < 16) or: (ڻپ > 30)). }.
+☞ کرن ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		کرن ردار: ( 
+		مبر
+		_چ: 1
+		_۽: کرن يگهه
+	).
+	password املڪريو: char.
+} × ڻپ.
+✎ کو: password, سٽاپ.

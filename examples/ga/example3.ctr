@@ -1,6 +1,11 @@
-☞ x := Uimhir idir: 1 agus: 10.
-☞ q := 0.
+✎ scríobh: ‘~ Number Game ~’, stad.
+✎ scríobh: ‘Guess the number’, stad.
+☞ x ≔ Uimhir idir: 1 agus: 10.
+☞ q ≔ 0.
+q ≔ Clár iarr.
+{ 
+	✎ scríobh: ‘wrong!’, stad.
+	q ≔ Clár iarr.
 
-{ q := Clár iarr. } _agus: { ↲ x uimhir ≠ q uimhir. }.
-
-✎ scríobh: ':-)↵'.
+} _agus: { ↲ x uimhir ≠ q uimhir. }.
+✎ scríobh: ‘correct!’, stad.

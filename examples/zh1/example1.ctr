@@ -1,1 +1,25 @@
-✎ 寫：__: 'Hello World', _停.
+✎ 寫：__: ‘~ Password Generator ~’, _停.
+☞ 計數 ≔ 0.
+{
+	✎ 寫：__: ‘How many characters (16-30)?’, _停.
+	計數 ≔ 程序 _問 __數 絕對.
+
+	(計數 < 16) 真正：__: {
+		✎ 寫：__: ‘That is not enough, please enter a number between 16 and 30.’, _停.
+	}.
+	(計數 > 30) 真正：__: {
+		✎ 寫：__: ‘That is too long, some systems may reject passwords that long.’, _停.
+	}.
+} 而：__: { ↲ ((計數 < 16) or: (計數 > 30)). }.
+☞ 人物 ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		人物 字符：__: ( 
+		_數
+		之間：__: 1
+		__: 人物 長度
+	).
+	password 附加：__: char.
+} × 計數.
+✎ 寫：__: password, _停.

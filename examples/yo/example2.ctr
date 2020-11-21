@@ -1,14 +1,63 @@
-☞ f := Atokọ ← 0 ; 1.
+✎ kọ: ‘~ Roman numerals ~’, duro.
+✎ kọ: ‘Give a number to convert:’, duro.
+☞ nọmba ≔ Eto béèrè nọmba idi.
+
+(nọmba = 0) ooto: {
+	✎ kọ: ‘Nulla’, duro.
+	Eto ipari.
+}.
 
 {
-	☞ a := f kẹhin.
-
-	☞ b := f keji kẹhin.
-
-	☞ sum := (a + b).
-
-	✎ kọ: sum, duro.
+	{
+		(nọmba ≥ 1000) ooto: {
+			✎ kọ: ‘Ⅿ’.
+			nọmba yọkuro: 1000.
+		}, fọ.
+	
+		(nọmba ≥ 500) ooto: {
+			✎ kọ: ‘Ⅾ’.
+			nọmba yọkuro: 500.
+		}, fọ.
+	
+		(nọmba ≥ 100) ooto: {
+			✎ kọ: ‘Ⅽ’.
+			nọmba yọkuro: 100.
+		}, fọ.
+	
+		(nọmba ≥ 50) ooto: {
+			✎ kọ: ‘Ⅼ’.
+			nọmba yọkuro: 50.
+		}, fọ.
+	
+		(nọmba ≥ 50) ooto: {
+			✎ kọ: ‘Ⅼ’.
+			nọmba yọkuro: 50.
+		}, fọ.
+	
+		(nọmba ≥ 10) ooto: {
+			✎ kọ: ‘Ⅹ’.
+			nọmba yọkuro: 10.
+		}, fọ.
 		
-	f append: sum.
-
-} * 12.
+		(nọmba ≥ 9) ooto: {
+			✎ kọ: ‘Ⅸ’.
+			nọmba yọkuro: 9.
+		}, fọ.
+		
+		(nọmba ≥ 5) ooto: {
+			✎ kọ: ‘Ⅴ’.
+			nọmba yọkuro: 5.
+		}, fọ.
+		
+		(nọmba ≥ 4) ooto: {
+			✎ kọ: ‘Ⅳ’.
+			nọmba yọkuro: 4.
+		}, fọ.
+		
+		(nọmba ≥ 1) ooto: {
+			✎ kọ: ‘Ⅰ’.
+			nọmba yọkuro: 1.
+		}, fọ.
+	} ilana.
+	
+} nigba ti: { ↲ nọmba > 0. }.

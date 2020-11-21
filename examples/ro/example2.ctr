@@ -1,14 +1,63 @@
-☞ f := Listă ← 0 ; 1.
+✎ scrie: ‘~ Roman numerals ~’, stop.
+✎ scrie: ‘Give a number to convert:’, stop.
+☞ număr ≔ Program întreabă număr absolut.
+
+(număr = 0) adevărat: {
+	✎ scrie: ‘Nulla’, stop.
+	Program final.
+}.
 
 {
-	☞ a := f ultim.
-
-	☞ b := f penultim.
-
-	☞ sum := (a + b).
-
-	✎ scrie: sum, stop.
+	{
+		(număr ≥ 1000) adevărat: {
+			✎ scrie: ‘Ⅿ’.
+			număr scade: 1000.
+		}, opreşte.
+	
+		(număr ≥ 500) adevărat: {
+			✎ scrie: ‘Ⅾ’.
+			număr scade: 500.
+		}, opreşte.
+	
+		(număr ≥ 100) adevărat: {
+			✎ scrie: ‘Ⅽ’.
+			număr scade: 100.
+		}, opreşte.
+	
+		(număr ≥ 50) adevărat: {
+			✎ scrie: ‘Ⅼ’.
+			număr scade: 50.
+		}, opreşte.
+	
+		(număr ≥ 50) adevărat: {
+			✎ scrie: ‘Ⅼ’.
+			număr scade: 50.
+		}, opreşte.
+	
+		(număr ≥ 10) adevărat: {
+			✎ scrie: ‘Ⅹ’.
+			număr scade: 10.
+		}, opreşte.
 		
-	f adaugă la sfârşit: sum.
-
-} * 12.
+		(număr ≥ 9) adevărat: {
+			✎ scrie: ‘Ⅸ’.
+			număr scade: 9.
+		}, opreşte.
+		
+		(număr ≥ 5) adevărat: {
+			✎ scrie: ‘Ⅴ’.
+			număr scade: 5.
+		}, opreşte.
+		
+		(număr ≥ 4) adevărat: {
+			✎ scrie: ‘Ⅳ’.
+			număr scade: 4.
+		}, opreşte.
+		
+		(număr ≥ 1) adevărat: {
+			✎ scrie: ‘Ⅰ’.
+			număr scade: 1.
+		}, opreşte.
+	} procedură.
+	
+} cât timp: { ↲ număr > 0. }.

@@ -1,6 +1,11 @@
-☞ x := Bilang sa pagitan ng: 1 at: 10.
-☞ q := 0.
+✎ sumulat: ‘~ Number Game ~’, huminto.
+✎ sumulat: ‘Guess the number’, huminto.
+☞ x ≔ Bilang sa pagitan ng: 1 at: 10.
+☞ q ≔ 0.
+q ≔ Program magtanong.
+{ 
+	✎ sumulat: ‘wrong!’, huminto.
+	q ≔ Program magtanong.
 
-{ q := Program magtanong. } habang: { ↲ x bilang ≠ q bilang. }.
-
-✎ sumulat: ':-)↵'.
+} habang: { ↲ x bilang ≠ q bilang. }.
+✎ sumulat: ‘correct!’, huminto.

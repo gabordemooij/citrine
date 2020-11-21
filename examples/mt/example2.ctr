@@ -1,14 +1,63 @@
-☞ f := Lista ← 0 ; 1.
+✎ ikteb: ‘~ Roman numerals ~’, waqfa.
+✎ ikteb: ‘Give a number to convert:’, waqfa.
+☞ numru ≔ Programm staqsi numru assoluta.
+
+(numru = 0) vera: {
+	✎ ikteb: ‘Nulla’, waqfa.
+	Programm itemm.
+}.
 
 {
-	☞ a := f l-aħħar.
-
-	☞ b := f it-tieni l-aħħar.
-
-	☞ sum := (a + b).
-
-	✎ ikteb: sum, waqfa.
+	{
+		(numru ≥ 1000) vera: {
+			✎ ikteb: ‘Ⅿ’.
+			numru naqqas: 1000.
+		}, ikissru.
+	
+		(numru ≥ 500) vera: {
+			✎ ikteb: ‘Ⅾ’.
+			numru naqqas: 500.
+		}, ikissru.
+	
+		(numru ≥ 100) vera: {
+			✎ ikteb: ‘Ⅽ’.
+			numru naqqas: 100.
+		}, ikissru.
+	
+		(numru ≥ 50) vera: {
+			✎ ikteb: ‘Ⅼ’.
+			numru naqqas: 50.
+		}, ikissru.
+	
+		(numru ≥ 50) vera: {
+			✎ ikteb: ‘Ⅼ’.
+			numru naqqas: 50.
+		}, ikissru.
+	
+		(numru ≥ 10) vera: {
+			✎ ikteb: ‘Ⅹ’.
+			numru naqqas: 10.
+		}, ikissru.
 		
-	f appendja: sum.
-
-} * 12.
+		(numru ≥ 9) vera: {
+			✎ ikteb: ‘Ⅸ’.
+			numru naqqas: 9.
+		}, ikissru.
+		
+		(numru ≥ 5) vera: {
+			✎ ikteb: ‘Ⅴ’.
+			numru naqqas: 5.
+		}, ikissru.
+		
+		(numru ≥ 4) vera: {
+			✎ ikteb: ‘Ⅳ’.
+			numru naqqas: 4.
+		}, ikissru.
+		
+		(numru ≥ 1) vera: {
+			✎ ikteb: ‘Ⅰ’.
+			numru naqqas: 1.
+		}, ikissru.
+	} proċedura.
+	
+} waqt: { ↲ numru > 0. }.

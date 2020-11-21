@@ -1,14 +1,63 @@
-☞ f := Popis ← 0 ; 1.
+✎ pisati: ‘~ Roman numerals ~’, stop.
+✎ pisati: ‘Give a number to convert:’, stop.
+☞ broj ≔ Program pitati broj apsolutan.
+
+(broj = 0) pravi: {
+	✎ pisati: ‘Nulla’, stop.
+	Program kraj.
+}.
 
 {
-	☞ a := f posljednji.
-
-	☞ b := f predzadnji.
-
-	☞ sum := (a + b).
-
-	✎ pisati: sum, stop.
+	{
+		(broj ≥ 1000) pravi: {
+			✎ pisati: ‘Ⅿ’.
+			broj oduzeti: 1000.
+		}, pauza.
+	
+		(broj ≥ 500) pravi: {
+			✎ pisati: ‘Ⅾ’.
+			broj oduzeti: 500.
+		}, pauza.
+	
+		(broj ≥ 100) pravi: {
+			✎ pisati: ‘Ⅽ’.
+			broj oduzeti: 100.
+		}, pauza.
+	
+		(broj ≥ 50) pravi: {
+			✎ pisati: ‘Ⅼ’.
+			broj oduzeti: 50.
+		}, pauza.
+	
+		(broj ≥ 50) pravi: {
+			✎ pisati: ‘Ⅼ’.
+			broj oduzeti: 50.
+		}, pauza.
+	
+		(broj ≥ 10) pravi: {
+			✎ pisati: ‘Ⅹ’.
+			broj oduzeti: 10.
+		}, pauza.
 		
-	f dodati: sum.
-
-} * 12.
+		(broj ≥ 9) pravi: {
+			✎ pisati: ‘Ⅸ’.
+			broj oduzeti: 9.
+		}, pauza.
+		
+		(broj ≥ 5) pravi: {
+			✎ pisati: ‘Ⅴ’.
+			broj oduzeti: 5.
+		}, pauza.
+		
+		(broj ≥ 4) pravi: {
+			✎ pisati: ‘Ⅳ’.
+			broj oduzeti: 4.
+		}, pauza.
+		
+		(broj ≥ 1) pravi: {
+			✎ pisati: ‘Ⅰ’.
+			broj oduzeti: 1.
+		}, pauza.
+	} postupak.
+	
+} dok: { ↲ broj > 0. }.

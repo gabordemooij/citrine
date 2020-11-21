@@ -1,6 +1,11 @@
-☞ x := San arasynda: 1 we: 10.
-☞ q := 0.
+✎ ýaz: ‘~ Number Game ~’, dur.
+✎ ýaz: ‘Guess the number’, dur.
+☞ x ≔ San arasynda: 1 we: 10.
+☞ q ≔ 0.
+q ≔ Programma sora.
+{ 
+	✎ ýaz: ‘wrong!’, dur.
+	q ≔ Programma sora.
 
-{ q := Programma sora. } wagty: { ↲ x sany ≠ q sany. }.
-
-✎ ýaz: ':-)↵'.
+} wagty: { ↲ x sany ≠ q sany. }.
+✎ ýaz: ‘correct!’, dur.

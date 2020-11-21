@@ -1,1 +1,25 @@
-✎ manoratra: 'Hello World', mijanòna.
+✎ manoratra: ‘~ Password Generator ~’, mijanòna.
+☞ manisa ≔ 0.
+{
+	✎ manoratra: ‘How many characters (16-30)?’, mijanòna.
+	manisa ≔ Program manontany isa tanteraka.
+
+	(manisa < 16) marina: {
+		✎ manoratra: ‘That is not enough, please enter a number between 16 and 30.’, mijanòna.
+	}.
+	(manisa > 30) marina: {
+		✎ manoratra: ‘That is too long, some systems may reject passwords that long.’, mijanòna.
+	}.
+} raha: { ↲ ((manisa < 16) or: (manisa > 30)). }.
+☞ tarehin-tsoratra ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		tarehin-tsoratra toetra: ( 
+		Number
+		eo: 1
+		ary: tarehin-tsoratra halavan’ny
+	).
+	password manampy: char.
+} × manisa.
+✎ manoratra: password, mijanòna.

@@ -1,1 +1,25 @@
-✎ rubuta: 'Hello World', tsayawa.
+✎ rubuta: “~ Password Generator ~”, tsayawa.
+☞ kirga ≔ 0.
+{
+	✎ rubuta: “How many characters (16-30)?”, tsayawa.
+	kirga ≔ Shirin tambaya lamba cikakken.
+
+	(kirga < 16) gaskiya: {
+		✎ rubuta: “That is not enough, please enter a number between 16 and 30.”, tsayawa.
+	}.
+	(kirga > 30) gaskiya: {
+		✎ rubuta: “That is too long, some systems may reject passwords that long.”, tsayawa.
+	}.
+} yayin: { ↲ ((kirga < 16) or: (kirga > 30)). }.
+☞ haruffa ≔ “acdefghjkmnprtwx2345789@#&”.
+☞ password ≔ “”.
+{
+	☞ char ≔ 
+		haruffa hali: ( 
+		Lambar
+		tsakanin: 1
+		da: haruffa tsawon
+	).
+	password append: char.
+} × kirga.
+✎ rubuta: password, tsayawa.

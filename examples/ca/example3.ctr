@@ -1,6 +1,11 @@
-☞ x := Número entre: 1 _i: 10.
-☞ q := 0.
+✎ escriu: ‘~ Number Game ~’, atura.
+✎ escriu: ‘Guess the number’, atura.
+☞ x ≔ Número entre: 1 _i: 10.
+☞ q ≔ 0.
+q ≔ Programa pregunta.
+{ 
+	✎ escriu: ‘wrong!’, atura.
+	q ≔ Programa pregunta.
 
-{ q := Programa pregunta. } mentre: { ↲ x núm ≠ q núm. }.
-
-✎ escriu: ':-)↵'.
+} mentre: { ↲ x núm ≠ q núm. }.
+✎ escriu: ‘correct!’, atura.

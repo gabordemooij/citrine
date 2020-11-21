@@ -1,1 +1,25 @@
-✎ жаз: 'Hello World', бирдиктүү.
+✎ жаз: ‘~ Password Generator ~’, бирдиктүү.
+☞ эсептөө ≔ 0.
+{
+	✎ жаз: ‘How many characters (16-30)?’, бирдиктүү.
+	эсептөө ≔ программа суроо _сан абсолюттук.
+
+	(эсептөө < 16) чыныгы: {
+		✎ жаз: ‘That is not enough, please enter a number between 16 and 30.’, бирдиктүү.
+	}.
+	(эсептөө > 30) чыныгы: {
+		✎ жаз: ‘That is too long, some systems may reject passwords that long.’, бирдиктүү.
+	}.
+} Ал эми: { ↲ ((эсептөө < 16) or: (эсептөө > 30)). }.
+☞ белги ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		белги тамга: ( 
+		сан
+		ортосунда: 1
+		жана: белги узундук
+	).
+	password кошуу: char.
+} × эсептөө.
+✎ жаз: password, бирдиктүү.

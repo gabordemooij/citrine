@@ -1,1 +1,25 @@
-✎ ፃፍ__: 'Hello World', ተወ.
+✎ ፃፍ__: ‘~ Password Generator ~’, ተወ.
+☞ ቆጠረ ≔ 0.
+{
+	✎ ፃፍ__: ‘How many characters (16-30)?’, ተወ.
+	ቆጠረ ≔ ፕሮግራም ጠይቅ _ቁጥር ፍፁም.
+
+	(ቆጠረ < 16) እውነት: {
+		✎ ፃፍ__: ‘That is not enough, please enter a number between 16 and 30.’, ተወ.
+	}.
+	(ቆጠረ > 30) እውነት: {
+		✎ ፃፍ__: ‘That is too long, some systems may reject passwords that long.’, ተወ.
+	}.
+} በሚከተለው ጊዜ__: { ↲ ((ቆጠረ < 16) or: (ቆጠረ > 30)). }.
+☞ ቁምፊዎች ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		ቁምፊዎች ቁምፊ: ( 
+		ቁጥር
+		መካከል እና__: 1
+		__: ቁምፊዎች ርዝመት
+	).
+	password ጨምር__: char.
+} × ቆጠረ.
+✎ ፃፍ__: password, ተወ.

@@ -1,14 +1,63 @@
-☞ f := Zoznam ← 0 ; 1.
+✎ píšu: ‘~ Roman numerals ~’, zastávka.
+✎ píšu: ‘Give a number to convert:’, zastávka.
+☞ _číslo ≔ Program opýtať sa _číslo absolútny.
+
+(_číslo = 0) true: {
+	✎ píšu: ‘Nulla’, zastávka.
+	Program koniec.
+}.
 
 {
-	☞ a := f posledná.
-
-	☞ b := f predposledný.
-
-	☞ sum := (a + b).
-
-	✎ píšu: sum, zastávka.
+	{
+		(_číslo ≥ 1000) true: {
+			✎ píšu: ‘Ⅿ’.
+			_číslo odčítanie: 1000.
+		}, prestávka.
+	
+		(_číslo ≥ 500) true: {
+			✎ píšu: ‘Ⅾ’.
+			_číslo odčítanie: 500.
+		}, prestávka.
+	
+		(_číslo ≥ 100) true: {
+			✎ píšu: ‘Ⅽ’.
+			_číslo odčítanie: 100.
+		}, prestávka.
+	
+		(_číslo ≥ 50) true: {
+			✎ píšu: ‘Ⅼ’.
+			_číslo odčítanie: 50.
+		}, prestávka.
+	
+		(_číslo ≥ 50) true: {
+			✎ píšu: ‘Ⅼ’.
+			_číslo odčítanie: 50.
+		}, prestávka.
+	
+		(_číslo ≥ 10) true: {
+			✎ píšu: ‘Ⅹ’.
+			_číslo odčítanie: 10.
+		}, prestávka.
 		
-	f _pripojiť: sum.
-
-} * 12.
+		(_číslo ≥ 9) true: {
+			✎ píšu: ‘Ⅸ’.
+			_číslo odčítanie: 9.
+		}, prestávka.
+		
+		(_číslo ≥ 5) true: {
+			✎ píšu: ‘Ⅴ’.
+			_číslo odčítanie: 5.
+		}, prestávka.
+		
+		(_číslo ≥ 4) true: {
+			✎ píšu: ‘Ⅳ’.
+			_číslo odčítanie: 4.
+		}, prestávka.
+		
+		(_číslo ≥ 1) true: {
+			✎ píšu: ‘Ⅰ’.
+			_číslo odčítanie: 1.
+		}, prestávka.
+	} procedúra.
+	
+} zatiaľ čo: { ↲ _číslo > 0. }.

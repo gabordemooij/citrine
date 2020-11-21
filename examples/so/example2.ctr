@@ -1,14 +1,63 @@
-☞ f := Liiska ← 0 ; 1.
+✎ qor: ‘~ Roman numerals ~’, jooji.
+✎ qor: ‘Give a number to convert:’, jooji.
+☞ tirada ≔ Barnaamij weydiiso tirada gebi ahaanba.
+
+(tirada = 0) run: {
+	✎ qor: ‘Nulla’, jooji.
+	Barnaamij dhamaadka.
+}.
 
 {
-	☞ a := f ugu dambeeya.
-
-	☞ b := f labaad ee ugu dambeeya.
-
-	☞ sum := (a + b).
-
-	✎ qor: sum, jooji.
+	{
+		(tirada ≥ 1000) run: {
+			✎ qor: ‘Ⅿ’.
+			tirada kala goynta__: 1000.
+		}, jab.
+	
+		(tirada ≥ 500) run: {
+			✎ qor: ‘Ⅾ’.
+			tirada kala goynta__: 500.
+		}, jab.
+	
+		(tirada ≥ 100) run: {
+			✎ qor: ‘Ⅽ’.
+			tirada kala goynta__: 100.
+		}, jab.
+	
+		(tirada ≥ 50) run: {
+			✎ qor: ‘Ⅼ’.
+			tirada kala goynta__: 50.
+		}, jab.
+	
+		(tirada ≥ 50) run: {
+			✎ qor: ‘Ⅼ’.
+			tirada kala goynta__: 50.
+		}, jab.
+	
+		(tirada ≥ 10) run: {
+			✎ qor: ‘Ⅹ’.
+			tirada kala goynta__: 10.
+		}, jab.
 		
-	f lifaaq: sum.
-
-} * 12.
+		(tirada ≥ 9) run: {
+			✎ qor: ‘Ⅸ’.
+			tirada kala goynta__: 9.
+		}, jab.
+		
+		(tirada ≥ 5) run: {
+			✎ qor: ‘Ⅴ’.
+			tirada kala goynta__: 5.
+		}, jab.
+		
+		(tirada ≥ 4) run: {
+			✎ qor: ‘Ⅳ’.
+			tirada kala goynta__: 4.
+		}, jab.
+		
+		(tirada ≥ 1) run: {
+			✎ qor: ‘Ⅰ’.
+			tirada kala goynta__: 1.
+		}, jab.
+	} nidaamka.
+	
+} halka: { ↲ tirada > 0. }.

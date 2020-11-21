@@ -1,6 +1,11 @@
-☞ x := Fjöldi milli: 1 og: 10.
-☞ q := 0.
+✎ skrifa: ‘~ Number Game ~’, hætta.
+✎ skrifa: ‘Guess the number’, hætta.
+☞ x ≔ Fjöldi milli: 1 og: 10.
+☞ q ≔ 0.
+q ≔ Forrit spyrja.
+{ 
+	✎ skrifa: ‘wrong!’, hætta.
+	q ≔ Forrit spyrja.
 
-{ q := Forrit spyrja. } meðan: { ↲ x númer ≠ q númer. }.
-
-✎ skrifa: ':-)↵'.
+} meðan: { ↲ x númer ≠ q númer. }.
+✎ skrifa: ‘correct!’, hætta.

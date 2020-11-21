@@ -1,1 +1,25 @@
-✎ nulis: 'Hello World', eureun.
+✎ nulis: ‘~ Password Generator ~’, eureun.
+☞ ngitung ≔ 0.
+{
+	✎ nulis: ‘How many characters (16-30)?’, eureun.
+	ngitung ≔ Program naros jumlah mutlak.
+
+	(ngitung < 16) leres: {
+		✎ nulis: ‘That is not enough, please enter a number between 16 and 30.’, eureun.
+	}.
+	(ngitung > 30) leres: {
+		✎ nulis: ‘That is too long, some systems may reject passwords that long.’, eureun.
+	}.
+} sedengkeun: { ↲ ((ngitung < 16) or: (ngitung > 30)). }.
+☞ aksara ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		aksara karakter: ( 
+		Nomer
+		antara: 1
+		jeung: aksara panjang
+	).
+	password lampiran: char.
+} × ngitung.
+✎ nulis: password, eureun.

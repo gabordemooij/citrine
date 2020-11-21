@@ -1,6 +1,11 @@
-☞ x := Nomer antarane: 1 lan: 10.
-☞ q := 0.
+✎ nulis: ‘~ Number Game ~’, mandheg.
+✎ nulis: ‘Guess the number’, mandheg.
+☞ x ≔ Nomer antarane: 1 lan: 10.
+☞ q ≔ 0.
+q ≔ Program takon.
+{ 
+	✎ nulis: ‘wrong!’, mandheg.
+	q ≔ Program takon.
 
-{ q := Program takon. } nalika: { ↲ x nomer ≠ q nomer. }.
-
-✎ nulis: ':-)↵'.
+} nalika: { ↲ x nomer ≠ q nomer. }.
+✎ nulis: ‘correct!’, mandheg.

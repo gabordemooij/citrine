@@ -1,6 +1,11 @@
-☞ x := Zuel tëscht: 1 an: 10.
-☞ q := 0.
+✎ schreiwen: ‘~ Number Game ~’, stoppen.
+✎ schreiwen: ‘Guess the number’, stoppen.
+☞ x ≔ Zuel tëscht: 1 an: 10.
+☞ q ≔ 0.
+q ≔ Programm froen.
+{ 
+	✎ schreiwen: ‘wrong!’, stoppen.
+	q ≔ Programm froen.
 
-{ q := Programm froen. } während: { ↲ x zuel ≠ q zuel. }.
-
-✎ schreiwen: ':-)↵'.
+} während: { ↲ x zuel ≠ q zuel. }.
+✎ schreiwen: ‘correct!’, stoppen.

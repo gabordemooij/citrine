@@ -1,14 +1,63 @@
-☞ f := Paglista ← 0 ; 1.
+✎ pagsulat: ‘~ Roman numerals ~’, hunong.
+✎ pagsulat: ‘Give a number to convert:’, hunong.
+☞ gidaghanon ≔ Programa pangutana gidaghanon hingpit.
+
+(gidaghanon = 0) tinuod: {
+	✎ pagsulat: ‘Nulla’, hunong.
+	Programa katapusan.
+}.
 
 {
-	☞ a := f ulahi.
-
-	☞ b := f ikaduha nga naulahi.
-
-	☞ sum := (a + b).
-
-	✎ pagsulat: sum, hunong.
+	{
+		(gidaghanon ≥ 1000) tinuod: {
+			✎ pagsulat: ‘Ⅿ’.
+			gidaghanon ibaliwala: 1000.
+		}, pagguba.
+	
+		(gidaghanon ≥ 500) tinuod: {
+			✎ pagsulat: ‘Ⅾ’.
+			gidaghanon ibaliwala: 500.
+		}, pagguba.
+	
+		(gidaghanon ≥ 100) tinuod: {
+			✎ pagsulat: ‘Ⅽ’.
+			gidaghanon ibaliwala: 100.
+		}, pagguba.
+	
+		(gidaghanon ≥ 50) tinuod: {
+			✎ pagsulat: ‘Ⅼ’.
+			gidaghanon ibaliwala: 50.
+		}, pagguba.
+	
+		(gidaghanon ≥ 50) tinuod: {
+			✎ pagsulat: ‘Ⅼ’.
+			gidaghanon ibaliwala: 50.
+		}, pagguba.
+	
+		(gidaghanon ≥ 10) tinuod: {
+			✎ pagsulat: ‘Ⅹ’.
+			gidaghanon ibaliwala: 10.
+		}, pagguba.
 		
-	f sumpay: sum.
-
-} * 12.
+		(gidaghanon ≥ 9) tinuod: {
+			✎ pagsulat: ‘Ⅸ’.
+			gidaghanon ibaliwala: 9.
+		}, pagguba.
+		
+		(gidaghanon ≥ 5) tinuod: {
+			✎ pagsulat: ‘Ⅴ’.
+			gidaghanon ibaliwala: 5.
+		}, pagguba.
+		
+		(gidaghanon ≥ 4) tinuod: {
+			✎ pagsulat: ‘Ⅳ’.
+			gidaghanon ibaliwala: 4.
+		}, pagguba.
+		
+		(gidaghanon ≥ 1) tinuod: {
+			✎ pagsulat: ‘Ⅰ’.
+			gidaghanon ibaliwala: 1.
+		}, pagguba.
+	} pamaagi.
+	
+} samtang: { ↲ gidaghanon > 0. }.

@@ -1,1 +1,25 @@
-✎ schreiben: 'Hello World', halt.
+✎ schreiben: ‘~ Password Generator ~’, halt.
+☞ anzahl ≔ 0.
+{
+	✎ schreiben: ‘How many characters (16-30)?’, halt.
+	anzahl ≔ Programm fragen nummer absolut.
+
+	(anzahl < 16) wahr: {
+		✎ schreiben: ‘That is not enough, please enter a number between 16 and 30.’, halt.
+	}.
+	(anzahl > 30) wahr: {
+		✎ schreiben: ‘That is too long, some systems may reject passwords that long.’, halt.
+	}.
+} während: { ↲ ((anzahl < 16) or: (anzahl > 30)). }.
+☞ zeichen ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		zeichen charakter: ( 
+		Nummer
+		zwischen und: 1
+		__: zeichen länge
+	).
+	password anhängen: char.
+} × anzahl.
+✎ schreiben: password, halt.

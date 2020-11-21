@@ -1,6 +1,11 @@
-☞ x := Nombor antara: 1 dan: 10.
-☞ q := 0.
+✎ tulis: ‘~ Number Game ~’, berhenti.
+✎ tulis: ‘Guess the number’, berhenti.
+☞ x ≔ Nombor antara: 1 dan: 10.
+☞ q ≔ 0.
+q ≔ Program tanya.
+{ 
+	✎ tulis: ‘wrong!’, berhenti.
+	q ≔ Program tanya.
 
-{ q := Program tanya. } sementara: { ↲ x nombor ≠ q nombor. }.
-
-✎ tulis: ':-)↵'.
+} sementara: { ↲ x nombor ≠ q nombor. }.
+✎ tulis: ‘correct!’, berhenti.

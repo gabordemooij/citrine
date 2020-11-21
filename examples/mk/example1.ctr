@@ -1,1 +1,25 @@
-✎ напиши: 'Hello World', запре.
+✎ напиши: ‘~ Password Generator ~’, запре.
+☞ брои ≔ 0.
+{
+	✎ напиши: ‘How many characters (16-30)?’, запре.
+	брои ≔ Програма прашај број апсолутно.
+
+	(брои < 16) точно: {
+		✎ напиши: ‘That is not enough, please enter a number between 16 and 30.’, запре.
+	}.
+	(брои > 30) точно: {
+		✎ напиши: ‘That is too long, some systems may reject passwords that long.’, запре.
+	}.
+} додека: { ↲ ((брои < 16) or: (брои > 30)). }.
+☞ карактери ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		карактери карактер: ( 
+		Број
+		помеѓу: 1
+		_и: карактери должина
+	).
+	password додаток: char.
+} × брои.
+✎ напиши: password, запре.

@@ -1,1 +1,25 @@
-✎ andika: 'Hello World', acha.
+✎ andika: ‘~ Password Generator ~’, acha.
+☞ hesabu ≔ 0.
+{
+	✎ andika: ‘How many characters (16-30)?’, acha.
+	hesabu ≔ Programu uliza nambari kabisa.
+
+	(hesabu < 16) kweli: {
+		✎ andika: ‘That is not enough, please enter a number between 16 and 30.’, acha.
+	}.
+	(hesabu > 30) kweli: {
+		✎ andika: ‘That is too long, some systems may reject passwords that long.’, acha.
+	}.
+} wakati: { ↲ ((hesabu < 16) or: (hesabu > 30)). }.
+☞ wahusika ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		wahusika tabia: ( 
+		Nambari
+		kati ya: 1
+		na: wahusika urefu
+	).
+	password ongeza: char.
+} × hesabu.
+✎ andika: password, acha.

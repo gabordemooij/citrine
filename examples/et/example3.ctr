@@ -1,6 +1,11 @@
-☞ x := Arv vahel: 1 ja: 10.
-☞ q := 0.
+✎ kirjuta: ‘~ Number Game ~’, peatus.
+✎ kirjuta: ‘Guess the number’, peatus.
+☞ x ≔ Arv vahel: 1 ja: 10.
+☞ q ≔ 0.
+q ≔ Programm küsige.
+{ 
+	✎ kirjuta: ‘wrong!’, peatus.
+	q ≔ Programm küsige.
 
-{ q := Programm küsige. } samas: { ↲ x number ≠ q number. }.
-
-✎ kirjuta: ':-)↵'.
+} samas: { ↲ x number ≠ q number. }.
+✎ kirjuta: ‘correct!’, peatus.

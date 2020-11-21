@@ -1,1 +1,25 @@
-✎ scribe: 'Hello World', prohibere.
+✎ scribe: ‘~ Password Generator ~’, prohibere.
+☞ numerare ≔ 0.
+{
+	✎ scribe: ‘How many characters (16-30)?’, prohibere.
+	numerare ≔ Program quaerere numerus absoluta.
+
+	(numerare < 16) verum: {
+		✎ scribe: ‘That is not enough, please enter a number between 16 and 30.’, prohibere.
+	}.
+	(numerare > 30) verum: {
+		✎ scribe: ‘That is too long, some systems may reject passwords that long.’, prohibere.
+	}.
+} dum;__: { ↲ ((numerare < 16) or: (numerare > 30)). }.
+☞ characteribus ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		characteribus mores__: ( 
+		Numerus
+		inter; et: 1
+		__: characteribus longitudinem
+	).
+	password append: char.
+} × numerare.
+✎ scribe: password, prohibere.

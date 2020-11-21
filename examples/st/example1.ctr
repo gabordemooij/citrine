@@ -1,1 +1,25 @@
-✎ ngola: 'Hello World', ema.
+✎ ngola: ‘~ Password Generator ~’, ema.
+☞ bala ≔ 0.
+{
+	✎ ngola: ‘How many characters (16-30)?’, ema.
+	bala ≔ Lenaneo botsa palo ka ho felletseng.
+
+	(bala < 16) ’nete: {
+		✎ ngola: ‘That is not enough, please enter a number between 16 and 30.’, ema.
+	}.
+	(bala > 30) ’nete: {
+		✎ ngola: ‘That is too long, some systems may reject passwords that long.’, ema.
+	}.
+} ha: { ↲ ((bala < 16) or: (bala > 30)). }.
+☞ libapali ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		libapali botho: ( 
+		Palo
+		pakeng tsa: 1
+		le: libapali bolelele
+	).
+	password eketsa: char.
+} × bala.
+✎ ngola: password, ema.

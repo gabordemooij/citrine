@@ -1,6 +1,11 @@
-☞ x := Rhif rhwng: 1 _a: 10.
-☞ q := 0.
+✎ ysgrifennu: ‘~ Number Game ~’, stopio.
+✎ ysgrifennu: ‘Guess the number’, stopio.
+☞ x ≔ Rhif rhwng: 1 _a: 10.
+☞ q ≔ 0.
+q ≔ Rhaglen gofynnwch.
+{ 
+	✎ ysgrifennu: ‘wrong!’, stopio.
+	q ≔ Rhaglen gofynnwch.
 
-{ q := Rhaglen gofynnwch. } tra: { ↲ x rhif ≠ q rhif. }.
-
-✎ ysgrifennu: ':-)↵'.
+} tra: { ↲ x rhif ≠ q rhif. }.
+✎ ysgrifennu: ‘correct!’, stopio.

@@ -1,14 +1,63 @@
-☞ f := Rhestr ← 0 ; 1.
+✎ ysgrifennu: ‘~ Roman numerals ~’, stopio.
+✎ ysgrifennu: ‘Give a number to convert:’, stopio.
+☞ rhif ≔ Rhaglen gofynnwch rhif absoliwt.
+
+(rhif = 0) gwir: {
+	✎ ysgrifennu: ‘Nulla’, stopio.
+	Rhaglen diwedd.
+}.
 
 {
-	☞ a := f olaf.
-
-	☞ b := f ail olaf.
-
-	☞ sum := (a + b).
-
-	✎ ysgrifennu: sum, stopio.
+	{
+		(rhif ≥ 1000) gwir: {
+			✎ ysgrifennu: ‘Ⅿ’.
+			rhif tynnu: 1000.
+		}, egwyl.
+	
+		(rhif ≥ 500) gwir: {
+			✎ ysgrifennu: ‘Ⅾ’.
+			rhif tynnu: 500.
+		}, egwyl.
+	
+		(rhif ≥ 100) gwir: {
+			✎ ysgrifennu: ‘Ⅽ’.
+			rhif tynnu: 100.
+		}, egwyl.
+	
+		(rhif ≥ 50) gwir: {
+			✎ ysgrifennu: ‘Ⅼ’.
+			rhif tynnu: 50.
+		}, egwyl.
+	
+		(rhif ≥ 50) gwir: {
+			✎ ysgrifennu: ‘Ⅼ’.
+			rhif tynnu: 50.
+		}, egwyl.
+	
+		(rhif ≥ 10) gwir: {
+			✎ ysgrifennu: ‘Ⅹ’.
+			rhif tynnu: 10.
+		}, egwyl.
 		
-	f atodiad: sum.
-
-} * 12.
+		(rhif ≥ 9) gwir: {
+			✎ ysgrifennu: ‘Ⅸ’.
+			rhif tynnu: 9.
+		}, egwyl.
+		
+		(rhif ≥ 5) gwir: {
+			✎ ysgrifennu: ‘Ⅴ’.
+			rhif tynnu: 5.
+		}, egwyl.
+		
+		(rhif ≥ 4) gwir: {
+			✎ ysgrifennu: ‘Ⅳ’.
+			rhif tynnu: 4.
+		}, egwyl.
+		
+		(rhif ≥ 1) gwir: {
+			✎ ysgrifennu: ‘Ⅰ’.
+			rhif tynnu: 1.
+		}, egwyl.
+	} gweithdrefn.
+	
+} tra: { ↲ rhif > 0. }.

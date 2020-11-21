@@ -1,14 +1,63 @@
-☞ f := Danh sách ← 0 ; 1.
+✎ viết: ‘~ Roman numerals ~’, dừng lại.
+✎ viết: ‘Give a number to convert:’, dừng lại.
+☞ con số ≔ Chương trình hỏi con số tuyệt đối.
+
+(con số = 0) thật: {
+	✎ viết: ‘Nulla’, dừng lại.
+	Chương trình kết thúc.
+}.
 
 {
-	☞ a := f cuối cùng.
-
-	☞ b := f thứ hai cuối cùng.
-
-	☞ sum := (a + b).
-
-	✎ viết: sum, dừng lại.
+	{
+		(con số ≥ 1000) thật: {
+			✎ viết: ‘Ⅿ’.
+			con số trừ: 1000.
+		}, phá vỡ.
+	
+		(con số ≥ 500) thật: {
+			✎ viết: ‘Ⅾ’.
+			con số trừ: 500.
+		}, phá vỡ.
+	
+		(con số ≥ 100) thật: {
+			✎ viết: ‘Ⅽ’.
+			con số trừ: 100.
+		}, phá vỡ.
+	
+		(con số ≥ 50) thật: {
+			✎ viết: ‘Ⅼ’.
+			con số trừ: 50.
+		}, phá vỡ.
+	
+		(con số ≥ 50) thật: {
+			✎ viết: ‘Ⅼ’.
+			con số trừ: 50.
+		}, phá vỡ.
+	
+		(con số ≥ 10) thật: {
+			✎ viết: ‘Ⅹ’.
+			con số trừ: 10.
+		}, phá vỡ.
 		
-	f nối thêm: sum.
-
-} * 12.
+		(con số ≥ 9) thật: {
+			✎ viết: ‘Ⅸ’.
+			con số trừ: 9.
+		}, phá vỡ.
+		
+		(con số ≥ 5) thật: {
+			✎ viết: ‘Ⅴ’.
+			con số trừ: 5.
+		}, phá vỡ.
+		
+		(con số ≥ 4) thật: {
+			✎ viết: ‘Ⅳ’.
+			con số trừ: 4.
+		}, phá vỡ.
+		
+		(con số ≥ 1) thật: {
+			✎ viết: ‘Ⅰ’.
+			con số trừ: 1.
+		}, phá vỡ.
+	} thủ tục.
+	
+} trong khi: { ↲ con số > 0. }.

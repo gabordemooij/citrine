@@ -1,1 +1,25 @@
-✎ pisati: 'Hello World', stop.
+✎ pisati: ‘~ Password Generator ~’, stop.
+☞ računati ≔ 0.
+{
+	✎ pisati: ‘How many characters (16-30)?’, stop.
+	računati ≔ Program pitati broj apsolutan.
+
+	(računati < 16) pravi: {
+		✎ pisati: ‘That is not enough, please enter a number between 16 and 30.’, stop.
+	}.
+	(računati > 30) pravi: {
+		✎ pisati: ‘That is too long, some systems may reject passwords that long.’, stop.
+	}.
+} dok: { ↲ ((računati < 16) or: (računati > 30)). }.
+☞ likovi ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		likovi lik: ( 
+		Broj
+		između i: 1
+		__: likovi dužina
+	).
+	password dodati: char.
+} × računati.
+✎ pisati: password, stop.

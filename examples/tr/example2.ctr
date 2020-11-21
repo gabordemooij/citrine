@@ -1,14 +1,63 @@
-☞ f := Liste ← 0 ; 1.
+✎ yazmak: ‘~ Roman numerals ~’, dur.
+✎ yazmak: ‘Give a number to convert:’, dur.
+☞ numara ≔ Program sor numara kesin.
+
+(numara = 0) doğru: {
+	✎ yazmak: ‘Nulla’, dur.
+	Program son.
+}.
 
 {
-	☞ a := f _son.
-
-	☞ b := f sondan ikinci.
-
-	☞ sum := (a + b).
-
-	✎ yazmak: sum, dur.
+	{
+		(numara ≥ 1000) doğru: {
+			✎ yazmak: ‘Ⅿ’.
+			numara subtract: 1000.
+		}, mola.
+	
+		(numara ≥ 500) doğru: {
+			✎ yazmak: ‘Ⅾ’.
+			numara subtract: 500.
+		}, mola.
+	
+		(numara ≥ 100) doğru: {
+			✎ yazmak: ‘Ⅽ’.
+			numara subtract: 100.
+		}, mola.
+	
+		(numara ≥ 50) doğru: {
+			✎ yazmak: ‘Ⅼ’.
+			numara subtract: 50.
+		}, mola.
+	
+		(numara ≥ 50) doğru: {
+			✎ yazmak: ‘Ⅼ’.
+			numara subtract: 50.
+		}, mola.
+	
+		(numara ≥ 10) doğru: {
+			✎ yazmak: ‘Ⅹ’.
+			numara subtract: 10.
+		}, mola.
 		
-	f ekleme: sum.
-
-} * 12.
+		(numara ≥ 9) doğru: {
+			✎ yazmak: ‘Ⅸ’.
+			numara subtract: 9.
+		}, mola.
+		
+		(numara ≥ 5) doğru: {
+			✎ yazmak: ‘Ⅴ’.
+			numara subtract: 5.
+		}, mola.
+		
+		(numara ≥ 4) doğru: {
+			✎ yazmak: ‘Ⅳ’.
+			numara subtract: 4.
+		}, mola.
+		
+		(numara ≥ 1) doğru: {
+			✎ yazmak: ‘Ⅰ’.
+			numara subtract: 1.
+		}, mola.
+	} prosedür.
+	
+} süre: { ↲ numara > 0. }.

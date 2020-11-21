@@ -1,6 +1,11 @@
-☞ x := Getal tussen: 1 en: 10.
-☞ q := 0.
+✎ schrĳf: “~ Number Game ~”, stop.
+✎ schrĳf: “Guess the number”, stop.
+☞ x ≔ Getal tussen: 1 en: 10.
+☞ q ≔ 0.
+q ≔ Programma vraag.
+{ 
+	✎ schrĳf: “wrong!”, stop.
+	q ≔ Programma vraag.
 
-{ q := Programma vraag. } zolang: { ↲ x getal ≠ q getal. }.
-
-✎ schrĳf: ':-)↵'.
+} zolang: { ↲ x getal ≠ q getal. }.
+✎ schrĳf: “correct!”, stop.

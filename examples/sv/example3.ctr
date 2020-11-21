@@ -1,6 +1,11 @@
-☞ x := Siffra mellan och: 1 __: 10.
-☞ q := 0.
+✎ skriva: ‘~ Number Game ~’, sluta.
+✎ skriva: ‘Guess the number’, sluta.
+☞ x ≔ Siffra mellan och: 1 __: 10.
+☞ q ≔ 0.
+q ≔ Program fråga.
+{ 
+	✎ skriva: ‘wrong!’, sluta.
+	q ≔ Program fråga.
 
-{ q := Program fråga. } medan: { ↲ x siffra ≠ q siffra. }.
-
-✎ skriva: ':-)↵'.
+} medan: { ↲ x siffra ≠ q siffra. }.
+✎ skriva: ‘correct!’, sluta.

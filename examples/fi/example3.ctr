@@ -1,6 +1,11 @@
-☞ x := Määrä välillä: 1 ja: 10.
-☞ q := 0.
+✎ kirjoittaa: ‘~ Number Game ~’, lopettaa.
+✎ kirjoittaa: ‘Guess the number’, lopettaa.
+☞ x ≔ Määrä välillä: 1 ja: 10.
+☞ q ≔ 0.
+q ≔ Ohjelmoida kysyä.
+{ 
+	✎ kirjoittaa: ‘wrong!’, lopettaa.
+	q ≔ Ohjelmoida kysyä.
 
-{ q := Ohjelmoida kysyä. } sillä aikaa: { ↲ x määrä ≠ q määrä. }.
-
-✎ kirjoittaa: ':-)↵'.
+} sillä aikaa: { ↲ x määrä ≠ q määrä. }.
+✎ kirjoittaa: ‘correct!’, lopettaa.

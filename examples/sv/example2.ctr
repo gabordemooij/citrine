@@ -1,14 +1,63 @@
-☞ f := Lista ← 0 ; 1.
+✎ skriva: ‘~ Roman numerals ~’, sluta.
+✎ skriva: ‘Give a number to convert:’, sluta.
+☞ siffra ≔ Program fråga siffra absolut.
+
+(siffra = 0) sann: {
+	✎ skriva: ‘Nulla’, sluta.
+	Program slutet.
+}.
 
 {
-	☞ a := f sista.
-
-	☞ b := f näst sist.
-
-	☞ sum := (a + b).
-
-	✎ skriva: sum, sluta.
+	{
+		(siffra ≥ 1000) sann: {
+			✎ skriva: ‘Ⅿ’.
+			siffra subtrahera: 1000.
+		}, ha sönder.
+	
+		(siffra ≥ 500) sann: {
+			✎ skriva: ‘Ⅾ’.
+			siffra subtrahera: 500.
+		}, ha sönder.
+	
+		(siffra ≥ 100) sann: {
+			✎ skriva: ‘Ⅽ’.
+			siffra subtrahera: 100.
+		}, ha sönder.
+	
+		(siffra ≥ 50) sann: {
+			✎ skriva: ‘Ⅼ’.
+			siffra subtrahera: 50.
+		}, ha sönder.
+	
+		(siffra ≥ 50) sann: {
+			✎ skriva: ‘Ⅼ’.
+			siffra subtrahera: 50.
+		}, ha sönder.
+	
+		(siffra ≥ 10) sann: {
+			✎ skriva: ‘Ⅹ’.
+			siffra subtrahera: 10.
+		}, ha sönder.
 		
-	f bifoga: sum.
-
-} * 12.
+		(siffra ≥ 9) sann: {
+			✎ skriva: ‘Ⅸ’.
+			siffra subtrahera: 9.
+		}, ha sönder.
+		
+		(siffra ≥ 5) sann: {
+			✎ skriva: ‘Ⅴ’.
+			siffra subtrahera: 5.
+		}, ha sönder.
+		
+		(siffra ≥ 4) sann: {
+			✎ skriva: ‘Ⅳ’.
+			siffra subtrahera: 4.
+		}, ha sönder.
+		
+		(siffra ≥ 1) sann: {
+			✎ skriva: ‘Ⅰ’.
+			siffra subtrahera: 1.
+		}, ha sönder.
+	} procedur.
+	
+} medan: { ↲ siffra > 0. }.

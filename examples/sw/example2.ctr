@@ -1,14 +1,63 @@
-☞ f := Orodha ← 0 ; 1.
+✎ andika: ‘~ Roman numerals ~’, acha.
+✎ andika: ‘Give a number to convert:’, acha.
+☞ nambari ≔ Programu uliza nambari kabisa.
+
+(nambari = 0) kweli: {
+	✎ andika: ‘Nulla’, acha.
+	Programu mwisho.
+}.
 
 {
-	☞ a := f _mwisho.
-
-	☞ b := f pili la mwisho.
-
-	☞ sum := (a + b).
-
-	✎ andika: sum, acha.
+	{
+		(nambari ≥ 1000) kweli: {
+			✎ andika: ‘Ⅿ’.
+			nambari ondoa: 1000.
+		}, kuvunja.
+	
+		(nambari ≥ 500) kweli: {
+			✎ andika: ‘Ⅾ’.
+			nambari ondoa: 500.
+		}, kuvunja.
+	
+		(nambari ≥ 100) kweli: {
+			✎ andika: ‘Ⅽ’.
+			nambari ondoa: 100.
+		}, kuvunja.
+	
+		(nambari ≥ 50) kweli: {
+			✎ andika: ‘Ⅼ’.
+			nambari ondoa: 50.
+		}, kuvunja.
+	
+		(nambari ≥ 50) kweli: {
+			✎ andika: ‘Ⅼ’.
+			nambari ondoa: 50.
+		}, kuvunja.
+	
+		(nambari ≥ 10) kweli: {
+			✎ andika: ‘Ⅹ’.
+			nambari ondoa: 10.
+		}, kuvunja.
 		
-	f ongeza: sum.
-
-} * 12.
+		(nambari ≥ 9) kweli: {
+			✎ andika: ‘Ⅸ’.
+			nambari ondoa: 9.
+		}, kuvunja.
+		
+		(nambari ≥ 5) kweli: {
+			✎ andika: ‘Ⅴ’.
+			nambari ondoa: 5.
+		}, kuvunja.
+		
+		(nambari ≥ 4) kweli: {
+			✎ andika: ‘Ⅳ’.
+			nambari ondoa: 4.
+		}, kuvunja.
+		
+		(nambari ≥ 1) kweli: {
+			✎ andika: ‘Ⅰ’.
+			nambari ondoa: 1.
+		}, kuvunja.
+	} utaratibu.
+	
+} wakati: { ↲ nambari > 0. }.

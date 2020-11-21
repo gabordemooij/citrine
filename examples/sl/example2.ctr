@@ -1,14 +1,63 @@
-☞ f := Seznam ← 0 ; 1.
+✎ napišite: ‘~ Roman numerals ~’, ustavi se.
+✎ napišite: ‘Give a number to convert:’, ustavi se.
+☞ številka ≔ Program vprašati številka absolutno.
+
+(številka = 0) prav: {
+	✎ napišite: ‘Nulla’, ustavi se.
+	Program konec.
+}.
 
 {
-	☞ a := f zadnji.
-
-	☞ b := f drugi zadnji.
-
-	☞ sum := (a + b).
-
-	✎ napišite: sum, ustavi se.
+	{
+		(številka ≥ 1000) prav: {
+			✎ napišite: ‘Ⅿ’.
+			številka odšteti: 1000.
+		}, zlom.
+	
+		(številka ≥ 500) prav: {
+			✎ napišite: ‘Ⅾ’.
+			številka odšteti: 500.
+		}, zlom.
+	
+		(številka ≥ 100) prav: {
+			✎ napišite: ‘Ⅽ’.
+			številka odšteti: 100.
+		}, zlom.
+	
+		(številka ≥ 50) prav: {
+			✎ napišite: ‘Ⅼ’.
+			številka odšteti: 50.
+		}, zlom.
+	
+		(številka ≥ 50) prav: {
+			✎ napišite: ‘Ⅼ’.
+			številka odšteti: 50.
+		}, zlom.
+	
+		(številka ≥ 10) prav: {
+			✎ napišite: ‘Ⅹ’.
+			številka odšteti: 10.
+		}, zlom.
 		
-	f dodaj: sum.
-
-} * 12.
+		(številka ≥ 9) prav: {
+			✎ napišite: ‘Ⅸ’.
+			številka odšteti: 9.
+		}, zlom.
+		
+		(številka ≥ 5) prav: {
+			✎ napišite: ‘Ⅴ’.
+			številka odšteti: 5.
+		}, zlom.
+		
+		(številka ≥ 4) prav: {
+			✎ napišite: ‘Ⅳ’.
+			številka odšteti: 4.
+		}, zlom.
+		
+		(številka ≥ 1) prav: {
+			✎ napišite: ‘Ⅰ’.
+			številka odšteti: 1.
+		}, zlom.
+	} postopek.
+	
+} medtem: { ↲ številka > 0. }.

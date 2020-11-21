@@ -1,6 +1,11 @@
-☞ x := Szám között és: 1 __: 10.
-☞ q := 0.
+✎ ír: ‘~ Number Game ~’, állj meg.
+✎ ír: ‘Guess the number’, állj meg.
+☞ x ≔ Szám között és: 1 __: 10.
+☞ q ≔ 0.
+q ≔ Program kérdez.
+{ 
+	✎ ír: ‘wrong!’, állj meg.
+	q ≔ Program kérdez.
 
-{ q := Program kérdez. } míg: { ↲ x szám ≠ q szám. }.
-
-✎ ír: ':-)↵'.
+} míg: { ↲ x szám ≠ q szám. }.
+✎ ír: ‘correct!’, állj meg.

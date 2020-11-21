@@ -1,1 +1,25 @@
-✎ 書く：__: 'Hello World', やめる.
+✎ 書く：__: ‘~ Password Generator ~’, やめる.
+☞ カウント ≔ 0.
+{
+	✎ 書く：__: ‘How many characters (16-30)?’, やめる.
+	カウント ≔ プログラム 尋ねる __数 絶対の.
+
+	(カウント < 16) 真：__: {
+		✎ 書く：__: ‘That is not enough, please enter a number between 16 and 30.’, やめる.
+	}.
+	(カウント > 30) 真：__: {
+		✎ 書く：__: ‘That is too long, some systems may reject passwords that long.’, やめる.
+	}.
+} その間：__: { ↲ ((カウント < 16) or: (カウント > 30)). }.
+☞ キャラクター ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		キャラクター キャラクター：__: ( 
+		_数
+		間：と：__: 1
+		__: キャラクター 長さ
+	).
+	password 追加：__: char.
+} × カウント.
+✎ 書く：__: password, やめる.

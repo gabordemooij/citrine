@@ -1,14 +1,63 @@
-☞ f := Daftar ← 0 ; 1.
+✎ menulis: ‘~ Roman numerals ~’, berhenti.
+✎ menulis: ‘Give a number to convert:’, berhenti.
+☞ jumlah ≔ Program meminta jumlah mutlak.
+
+(jumlah = 0) benar: {
+	✎ menulis: ‘Nulla’, berhenti.
+	Program akhir.
+}.
 
 {
-	☞ a := f terakhir.
-
-	☞ b := f kedua terakhir.
-
-	☞ sum := (a + b).
-
-	✎ menulis: sum, berhenti.
+	{
+		(jumlah ≥ 1000) benar: {
+			✎ menulis: ‘Ⅿ’.
+			jumlah mengurangi: 1000.
+		}, istirahat.
+	
+		(jumlah ≥ 500) benar: {
+			✎ menulis: ‘Ⅾ’.
+			jumlah mengurangi: 500.
+		}, istirahat.
+	
+		(jumlah ≥ 100) benar: {
+			✎ menulis: ‘Ⅽ’.
+			jumlah mengurangi: 100.
+		}, istirahat.
+	
+		(jumlah ≥ 50) benar: {
+			✎ menulis: ‘Ⅼ’.
+			jumlah mengurangi: 50.
+		}, istirahat.
+	
+		(jumlah ≥ 50) benar: {
+			✎ menulis: ‘Ⅼ’.
+			jumlah mengurangi: 50.
+		}, istirahat.
+	
+		(jumlah ≥ 10) benar: {
+			✎ menulis: ‘Ⅹ’.
+			jumlah mengurangi: 10.
+		}, istirahat.
 		
-	f menambahkan: sum.
-
-} * 12.
+		(jumlah ≥ 9) benar: {
+			✎ menulis: ‘Ⅸ’.
+			jumlah mengurangi: 9.
+		}, istirahat.
+		
+		(jumlah ≥ 5) benar: {
+			✎ menulis: ‘Ⅴ’.
+			jumlah mengurangi: 5.
+		}, istirahat.
+		
+		(jumlah ≥ 4) benar: {
+			✎ menulis: ‘Ⅳ’.
+			jumlah mengurangi: 4.
+		}, istirahat.
+		
+		(jumlah ≥ 1) benar: {
+			✎ menulis: ‘Ⅰ’.
+			jumlah mengurangi: 1.
+		}, istirahat.
+	} prosedur.
+	
+} sementara: { ↲ jumlah > 0. }.

@@ -1,1 +1,25 @@
-✎ idatzi: 'Hello World', geldialdia.
+✎ idatzi: ‘~ Password Generator ~’, geldialdia.
+☞ zenbatu ≔ 0.
+{
+	✎ idatzi: ‘How many characters (16-30)?’, geldialdia.
+	zenbatu ≔ Programa galdetu zenbakia absolutua.
+
+	(zenbatu < 16) egia: {
+		✎ idatzi: ‘That is not enough, please enter a number between 16 and 30.’, geldialdia.
+	}.
+	(zenbatu > 30) egia: {
+		✎ idatzi: ‘That is too long, some systems may reject passwords that long.’, geldialdia.
+	}.
+} bitartean: { ↲ ((zenbatu < 16) or: (zenbatu > 30)). }.
+☞ karaktere ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		karaktere pertsonaia: ( 
+		Zenbakia
+		artean: 1
+		eta: karaktere luzera
+	).
+	password erantsi: char.
+} × zenbatu.
+✎ idatzi: password, geldialdia.

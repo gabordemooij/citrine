@@ -1,1 +1,25 @@
-✎ написати: 'Hello World', Стоп.
+✎ написати: ‘~ Password Generator ~’, Стоп.
+☞ рахувати ≔ 0.
+{
+	✎ написати: ‘How many characters (16-30)?’, Стоп.
+	рахувати ≔ Програма запитати число абсолютний.
+
+	(рахувати < 16) правда: {
+		✎ написати: ‘That is not enough, please enter a number between 16 and 30.’, Стоп.
+	}.
+	(рахувати > 30) правда: {
+		✎ написати: ‘That is too long, some systems may reject passwords that long.’, Стоп.
+	}.
+} поки: { ↲ ((рахувати < 16) or: (рахувати > 30)). }.
+☞ символів ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		символів персонаж: ( 
+		Номер
+		між: 1
+		та: символів довжина
+	).
+	password додати: char.
+} × рахувати.
+✎ написати: password, Стоп.

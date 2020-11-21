@@ -1,14 +1,63 @@
-☞ f := Liosta ← 0 ; 1.
+✎ sgrìobh: ‘~ Roman numerals ~’, stad.
+✎ sgrìobh: ‘Give a number to convert:’, stad.
+☞ àireamh ≔ Prògram faighnich àireamh iomlan.
+
+(àireamh = 0) fìor: {
+	✎ sgrìobh: ‘Nulla’, stad.
+	Prògram deireadh.
+}.
 
 {
-	☞ a := f mu dheireadh.
-
-	☞ b := f an dàrna fear mu dheireadh.
-
-	☞ sum := (a + b).
-
-	✎ sgrìobh: sum, stad.
+	{
+		(àireamh ≥ 1000) fìor: {
+			✎ sgrìobh: ‘Ⅿ’.
+			àireamh thoir air falbh: 1000.
+		}, briseadh.
+	
+		(àireamh ≥ 500) fìor: {
+			✎ sgrìobh: ‘Ⅾ’.
+			àireamh thoir air falbh: 500.
+		}, briseadh.
+	
+		(àireamh ≥ 100) fìor: {
+			✎ sgrìobh: ‘Ⅽ’.
+			àireamh thoir air falbh: 100.
+		}, briseadh.
+	
+		(àireamh ≥ 50) fìor: {
+			✎ sgrìobh: ‘Ⅼ’.
+			àireamh thoir air falbh: 50.
+		}, briseadh.
+	
+		(àireamh ≥ 50) fìor: {
+			✎ sgrìobh: ‘Ⅼ’.
+			àireamh thoir air falbh: 50.
+		}, briseadh.
+	
+		(àireamh ≥ 10) fìor: {
+			✎ sgrìobh: ‘Ⅹ’.
+			àireamh thoir air falbh: 10.
+		}, briseadh.
 		
-	f eàrr-sgrìobhadh: sum.
-
-} * 12.
+		(àireamh ≥ 9) fìor: {
+			✎ sgrìobh: ‘Ⅸ’.
+			àireamh thoir air falbh: 9.
+		}, briseadh.
+		
+		(àireamh ≥ 5) fìor: {
+			✎ sgrìobh: ‘Ⅴ’.
+			àireamh thoir air falbh: 5.
+		}, briseadh.
+		
+		(àireamh ≥ 4) fìor: {
+			✎ sgrìobh: ‘Ⅳ’.
+			àireamh thoir air falbh: 4.
+		}, briseadh.
+		
+		(àireamh ≥ 1) fìor: {
+			✎ sgrìobh: ‘Ⅰ’.
+			àireamh thoir air falbh: 1.
+		}, briseadh.
+	} modh-obrach.
+	
+} fhad ’sa: { ↲ àireamh > 0. }.

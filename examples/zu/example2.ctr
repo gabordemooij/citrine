@@ -1,14 +1,63 @@
-☞ f := Uhlu ← 0 ; 1.
+✎ bhala: ‘~ Roman numerals ~’, ima.
+✎ bhala: ‘Give a number to convert:’, ima.
+☞ inombolo ≔ Uhlelo buza inombolo ngokuphelele.
+
+(inombolo = 0) iqiniso: {
+	✎ bhala: ‘Nulla’, ima.
+	Uhlelo ukuphela.
+}.
 
 {
-	☞ a := f okokugcina.
-
-	☞ b := f okwesibili okokugcina.
-
-	☞ sum := (a + b).
-
-	✎ bhala: sum, ima.
+	{
+		(inombolo ≥ 1000) iqiniso: {
+			✎ bhala: ‘Ⅿ’.
+			inombolo khipha: 1000.
+		}, hlukana.
+	
+		(inombolo ≥ 500) iqiniso: {
+			✎ bhala: ‘Ⅾ’.
+			inombolo khipha: 500.
+		}, hlukana.
+	
+		(inombolo ≥ 100) iqiniso: {
+			✎ bhala: ‘Ⅽ’.
+			inombolo khipha: 100.
+		}, hlukana.
+	
+		(inombolo ≥ 50) iqiniso: {
+			✎ bhala: ‘Ⅼ’.
+			inombolo khipha: 50.
+		}, hlukana.
+	
+		(inombolo ≥ 50) iqiniso: {
+			✎ bhala: ‘Ⅼ’.
+			inombolo khipha: 50.
+		}, hlukana.
+	
+		(inombolo ≥ 10) iqiniso: {
+			✎ bhala: ‘Ⅹ’.
+			inombolo khipha: 10.
+		}, hlukana.
 		
-	f faka: sum.
-
-} * 12.
+		(inombolo ≥ 9) iqiniso: {
+			✎ bhala: ‘Ⅸ’.
+			inombolo khipha: 9.
+		}, hlukana.
+		
+		(inombolo ≥ 5) iqiniso: {
+			✎ bhala: ‘Ⅴ’.
+			inombolo khipha: 5.
+		}, hlukana.
+		
+		(inombolo ≥ 4) iqiniso: {
+			✎ bhala: ‘Ⅳ’.
+			inombolo khipha: 4.
+		}, hlukana.
+		
+		(inombolo ≥ 1) iqiniso: {
+			✎ bhala: ‘Ⅰ’.
+			inombolo khipha: 1.
+		}, hlukana.
+	} inqubo.
+	
+} ngenkathi: { ↲ inombolo > 0. }.

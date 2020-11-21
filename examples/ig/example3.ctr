@@ -1,6 +1,11 @@
-☞ x := Nọmba n’etiti: 1 na: 10.
-☞ q := 0.
+✎ dee: ‘~ Number Game ~’, kwụsị.
+✎ dee: ‘Guess the number’, kwụsị.
+☞ x ≔ Nọmba n’etiti: 1 na: 10.
+☞ q ≔ 0.
+q ≔ Mmemme jụọ.
+{ 
+	✎ dee: ‘wrong!’, kwụsị.
+	q ≔ Mmemme jụọ.
 
-{ q := Mmemme jụọ. } mgbe: { ↲ x nọmba ≠ q nọmba. }.
-
-✎ dee: ':-)↵'.
+} mgbe: { ↲ x nọmba ≠ q nọmba. }.
+✎ dee: ‘correct!’, kwụsị.

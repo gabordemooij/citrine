@@ -1,14 +1,63 @@
-☞ f := Lista ← 0 ; 1.
+✎ escribir: ‘~ Roman numerals ~’, detener.
+✎ escribir: ‘Give a number to convert:’, detener.
+☞ número ≔ Programa pedir número absoluto.
+
+(número = 0) cierto: {
+	✎ escribir: ‘Nulla’, detener.
+	Programa final.
+}.
 
 {
-	☞ a := f último.
-
-	☞ b := f penúltimo.
-
-	☞ sum := (a + b).
-
-	✎ escribir: sum, detener.
+	{
+		(número ≥ 1000) cierto: {
+			✎ escribir: ‘Ⅿ’.
+			número sustraer: 1000.
+		}, descanso.
+	
+		(número ≥ 500) cierto: {
+			✎ escribir: ‘Ⅾ’.
+			número sustraer: 500.
+		}, descanso.
+	
+		(número ≥ 100) cierto: {
+			✎ escribir: ‘Ⅽ’.
+			número sustraer: 100.
+		}, descanso.
+	
+		(número ≥ 50) cierto: {
+			✎ escribir: ‘Ⅼ’.
+			número sustraer: 50.
+		}, descanso.
+	
+		(número ≥ 50) cierto: {
+			✎ escribir: ‘Ⅼ’.
+			número sustraer: 50.
+		}, descanso.
+	
+		(número ≥ 10) cierto: {
+			✎ escribir: ‘Ⅹ’.
+			número sustraer: 10.
+		}, descanso.
 		
-	f adjuntar: sum.
-
-} * 12.
+		(número ≥ 9) cierto: {
+			✎ escribir: ‘Ⅸ’.
+			número sustraer: 9.
+		}, descanso.
+		
+		(número ≥ 5) cierto: {
+			✎ escribir: ‘Ⅴ’.
+			número sustraer: 5.
+		}, descanso.
+		
+		(número ≥ 4) cierto: {
+			✎ escribir: ‘Ⅳ’.
+			número sustraer: 4.
+		}, descanso.
+		
+		(número ≥ 1) cierto: {
+			✎ escribir: ‘Ⅰ’.
+			número sustraer: 1.
+		}, descanso.
+	} procedimiento.
+	
+} mientras: { ↲ número > 0. }.

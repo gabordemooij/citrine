@@ -1,1 +1,25 @@
-✎ escriu: 'Hello World', atura.
+✎ escriu: ‘~ Password Generator ~’, atura.
+☞ comptar ≔ 0.
+{
+	✎ escriu: ‘How many characters (16-30)?’, atura.
+	comptar ≔ Programa pregunta núm absolut.
+
+	(comptar < 16) cert: {
+		✎ escriu: ‘That is not enough, please enter a number between 16 and 30.’, atura.
+	}.
+	(comptar > 30) cert: {
+		✎ escriu: ‘That is too long, some systems may reject passwords that long.’, atura.
+	}.
+} mentre: { ↲ ((comptar < 16) or: (comptar > 30)). }.
+☞ personatges ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		personatges personatge: ( 
+		Número
+		entre: 1
+		_i: personatges llargada
+	).
+	password annexar: char.
+} × comptar.
+✎ escriu: password, atura.

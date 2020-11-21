@@ -1,14 +1,63 @@
-☞ f := Siyahı ← 0 ; 1.
+✎ yaz: ‘~ Roman numerals ~’, dayan.
+✎ yaz: ‘Give a number to convert:’, dayan.
+☞ nömrə ≔ Proqram soruş nömrə mütləq.
+
+(nömrə = 0) doğru: {
+	✎ yaz: ‘Nulla’, dayan.
+	Proqram son.
+}.
 
 {
-	☞ a := f _son.
-
-	☞ b := f ikinci son.
-
-	☞ sum := (a + b).
-
-	✎ yaz: sum, dayan.
+	{
+		(nömrə ≥ 1000) doğru: {
+			✎ yaz: ‘Ⅿ’.
+			nömrə çıxart: 1000.
+		}, fasilə.
+	
+		(nömrə ≥ 500) doğru: {
+			✎ yaz: ‘Ⅾ’.
+			nömrə çıxart: 500.
+		}, fasilə.
+	
+		(nömrə ≥ 100) doğru: {
+			✎ yaz: ‘Ⅽ’.
+			nömrə çıxart: 100.
+		}, fasilə.
+	
+		(nömrə ≥ 50) doğru: {
+			✎ yaz: ‘Ⅼ’.
+			nömrə çıxart: 50.
+		}, fasilə.
+	
+		(nömrə ≥ 50) doğru: {
+			✎ yaz: ‘Ⅼ’.
+			nömrə çıxart: 50.
+		}, fasilə.
+	
+		(nömrə ≥ 10) doğru: {
+			✎ yaz: ‘Ⅹ’.
+			nömrə çıxart: 10.
+		}, fasilə.
 		
-	f əlavə etmək: sum.
-
-} * 12.
+		(nömrə ≥ 9) doğru: {
+			✎ yaz: ‘Ⅸ’.
+			nömrə çıxart: 9.
+		}, fasilə.
+		
+		(nömrə ≥ 5) doğru: {
+			✎ yaz: ‘Ⅴ’.
+			nömrə çıxart: 5.
+		}, fasilə.
+		
+		(nömrə ≥ 4) doğru: {
+			✎ yaz: ‘Ⅳ’.
+			nömrə çıxart: 4.
+		}, fasilə.
+		
+		(nömrə ≥ 1) doğru: {
+			✎ yaz: ‘Ⅰ’.
+			nömrə çıxart: 1.
+		}, fasilə.
+	} proseduru.
+	
+} isə: { ↲ nömrə > 0. }.

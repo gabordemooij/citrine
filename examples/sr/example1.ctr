@@ -1,1 +1,25 @@
-✎ написати: 'Hello World', зауставити.
+✎ написати: ‘~ Password Generator ~’, зауставити.
+☞ рачунати ≔ 0.
+{
+	✎ написати: ‘How many characters (16-30)?’, зауставити.
+	рачунати ≔ Програм питати број апсолутни.
+
+	(рачунати < 16) истина: {
+		✎ написати: ‘That is not enough, please enter a number between 16 and 30.’, зауставити.
+	}.
+	(рачунати > 30) истина: {
+		✎ написати: ‘That is too long, some systems may reject passwords that long.’, зауставити.
+	}.
+} док: { ↲ ((рачунати < 16) or: (рачунати > 30)). }.
+☞ карактера ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		карактера лик: ( 
+		Број
+		између и: 1
+		__: карактера дужина
+	).
+	password додати: char.
+} × рачунати.
+✎ написати: password, зауставити.

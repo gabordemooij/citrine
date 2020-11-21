@@ -1,14 +1,63 @@
-☞ f := Mndandanda ← 0 ; 1.
+✎ lembani: ‘~ Roman numerals ~’, imani.
+✎ lembani: ‘Give a number to convert:’, imani.
+☞ chiwerengero ≔ Pulogalamu funsani chiwerengero mtheradi.
+
+(chiwerengero = 0) zoona: {
+	✎ lembani: ‘Nulla’, imani.
+	Pulogalamu tsiriza.
+}.
 
 {
-	☞ a := f komaliza.
-
-	☞ b := f chachiwiri chomaliza.
-
-	☞ sum := (a + b).
-
-	✎ lembani: sum, imani.
+	{
+		(chiwerengero ≥ 1000) zoona: {
+			✎ lembani: ‘Ⅿ’.
+			chiwerengero _chotsa: 1000.
+		}, kuswa.
+	
+		(chiwerengero ≥ 500) zoona: {
+			✎ lembani: ‘Ⅾ’.
+			chiwerengero _chotsa: 500.
+		}, kuswa.
+	
+		(chiwerengero ≥ 100) zoona: {
+			✎ lembani: ‘Ⅽ’.
+			chiwerengero _chotsa: 100.
+		}, kuswa.
+	
+		(chiwerengero ≥ 50) zoona: {
+			✎ lembani: ‘Ⅼ’.
+			chiwerengero _chotsa: 50.
+		}, kuswa.
+	
+		(chiwerengero ≥ 50) zoona: {
+			✎ lembani: ‘Ⅼ’.
+			chiwerengero _chotsa: 50.
+		}, kuswa.
+	
+		(chiwerengero ≥ 10) zoona: {
+			✎ lembani: ‘Ⅹ’.
+			chiwerengero _chotsa: 10.
+		}, kuswa.
 		
-	f kuwonjezera: sum.
-
-} * 12.
+		(chiwerengero ≥ 9) zoona: {
+			✎ lembani: ‘Ⅸ’.
+			chiwerengero _chotsa: 9.
+		}, kuswa.
+		
+		(chiwerengero ≥ 5) zoona: {
+			✎ lembani: ‘Ⅴ’.
+			chiwerengero _chotsa: 5.
+		}, kuswa.
+		
+		(chiwerengero ≥ 4) zoona: {
+			✎ lembani: ‘Ⅳ’.
+			chiwerengero _chotsa: 4.
+		}, kuswa.
+		
+		(chiwerengero ≥ 1) zoona: {
+			✎ lembani: ‘Ⅰ’.
+			chiwerengero _chotsa: 1.
+		}, kuswa.
+	} machitidwe.
+	
+} pomwe: { ↲ chiwerengero > 0. }.

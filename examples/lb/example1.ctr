@@ -1,1 +1,25 @@
-✎ schreiwen: 'Hello World', stoppen.
+✎ schreiwen: ‘~ Password Generator ~’, stoppen.
+☞ zielen ≔ 0.
+{
+	✎ schreiwen: ‘How many characters (16-30)?’, stoppen.
+	zielen ≔ Programm froen zuel absolut.
+
+	(zielen < 16) wouer: {
+		✎ schreiwen: ‘That is not enough, please enter a number between 16 and 30.’, stoppen.
+	}.
+	(zielen > 30) wouer: {
+		✎ schreiwen: ‘That is too long, some systems may reject passwords that long.’, stoppen.
+	}.
+} während: { ↲ ((zielen < 16) or: (zielen > 30)). }.
+☞ zeechen ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		zeechen charakter: ( 
+		Zuel
+		tëscht: 1
+		an: zeechen längt
+	).
+	password dobäizemaachen: char.
+} × zielen.
+✎ schreiwen: password, stoppen.

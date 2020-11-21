@@ -1,1 +1,25 @@
-✎ nulis: 'Hello World', mandheg.
+✎ nulis: ‘~ Password Generator ~’, mandheg.
+☞ ngitung ≔ 0.
+{
+	✎ nulis: ‘How many characters (16-30)?’, mandheg.
+	ngitung ≔ Program takon nomer mutlak.
+
+	(ngitung < 16) bener: {
+		✎ nulis: ‘That is not enough, please enter a number between 16 and 30.’, mandheg.
+	}.
+	(ngitung > 30) bener: {
+		✎ nulis: ‘That is too long, some systems may reject passwords that long.’, mandheg.
+	}.
+} nalika: { ↲ ((ngitung < 16) or: (ngitung > 30)). }.
+☞ aksara ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		aksara karakter: ( 
+		Nomer
+		antarane: 1
+		lan: aksara dawa
+	).
+	password lampiran: char.
+} × ngitung.
+✎ nulis: password, mandheg.

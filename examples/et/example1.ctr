@@ -1,1 +1,25 @@
-✎ kirjuta: 'Hello World', peatus.
+✎ kirjuta: ‘~ Password Generator ~’, peatus.
+☞ loendama ≔ 0.
+{
+	✎ kirjuta: ‘How many characters (16-30)?’, peatus.
+	loendama ≔ Programm küsige number absoluutne.
+
+	(loendama < 16) tõsi: {
+		✎ kirjuta: ‘That is not enough, please enter a number between 16 and 30.’, peatus.
+	}.
+	(loendama > 30) tõsi: {
+		✎ kirjuta: ‘That is too long, some systems may reject passwords that long.’, peatus.
+	}.
+} samas: { ↲ ((loendama < 16) or: (loendama > 30)). }.
+☞ tegelased ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		tegelased tegelane: ( 
+		Arv
+		vahel: 1
+		ja: tegelased pikkus
+	).
+	password lisa: char.
+} × loendama.
+✎ kirjuta: password, peatus.

@@ -1,14 +1,63 @@
-☞ f := Elenco ← 0 ; 1.
+✎ scrivi: ‘~ Roman numerals ~’, fermare.
+✎ scrivi: ‘Give a number to convert:’, fermare.
+☞ numero ≔ Programma chiedi numero assoluto.
+
+(numero = 0) vero: {
+	✎ scrivi: ‘Nulla’, fermare.
+	Programma fine.
+}.
 
 {
-	☞ a := f scorso.
-
-	☞ b := f penultimo.
-
-	☞ sum := (a + b).
-
-	✎ scrivi: sum, fermare.
+	{
+		(numero ≥ 1000) vero: {
+			✎ scrivi: ‘Ⅿ’.
+			numero sottrarre: 1000.
+		}, rompere.
+	
+		(numero ≥ 500) vero: {
+			✎ scrivi: ‘Ⅾ’.
+			numero sottrarre: 500.
+		}, rompere.
+	
+		(numero ≥ 100) vero: {
+			✎ scrivi: ‘Ⅽ’.
+			numero sottrarre: 100.
+		}, rompere.
+	
+		(numero ≥ 50) vero: {
+			✎ scrivi: ‘Ⅼ’.
+			numero sottrarre: 50.
+		}, rompere.
+	
+		(numero ≥ 50) vero: {
+			✎ scrivi: ‘Ⅼ’.
+			numero sottrarre: 50.
+		}, rompere.
+	
+		(numero ≥ 10) vero: {
+			✎ scrivi: ‘Ⅹ’.
+			numero sottrarre: 10.
+		}, rompere.
 		
-	f aggiungere: sum.
-
-} * 12.
+		(numero ≥ 9) vero: {
+			✎ scrivi: ‘Ⅸ’.
+			numero sottrarre: 9.
+		}, rompere.
+		
+		(numero ≥ 5) vero: {
+			✎ scrivi: ‘Ⅴ’.
+			numero sottrarre: 5.
+		}, rompere.
+		
+		(numero ≥ 4) vero: {
+			✎ scrivi: ‘Ⅳ’.
+			numero sottrarre: 4.
+		}, rompere.
+		
+		(numero ≥ 1) vero: {
+			✎ scrivi: ‘Ⅰ’.
+			numero sottrarre: 1.
+		}, rompere.
+	} procedura.
+	
+} mentre: { ↲ numero > 0. }.

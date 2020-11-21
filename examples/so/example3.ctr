@@ -1,6 +1,11 @@
-☞ x := Tirada dhexeeya: 1 iyo: 10.
-☞ q := 0.
+✎ qor: ‘~ Number Game ~’, jooji.
+✎ qor: ‘Guess the number’, jooji.
+☞ x ≔ Tirada dhexeeya: 1 iyo: 10.
+☞ q ≔ 0.
+q ≔ Barnaamij weydiiso.
+{ 
+	✎ qor: ‘wrong!’, jooji.
+	q ≔ Barnaamij weydiiso.
 
-{ q := Barnaamij weydiiso. } halka: { ↲ x tirada ≠ q tirada. }.
-
-✎ qor: ':-)↵'.
+} halka: { ↲ x tirada ≠ q tirada. }.
+✎ qor: ‘correct!’, jooji.

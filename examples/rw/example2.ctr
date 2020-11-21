@@ -1,14 +1,63 @@
-☞ f := Urutonde ← 0 ; 1.
+✎ andika: ‘~ Roman numerals ~’, hagarara.
+✎ andika: ‘Give a number to convert:’, hagarara.
+☞ nimero ≔ Gahunda baza nimero byuzuye.
+
+(nimero = 0) ukuri: {
+	✎ andika: ‘Nulla’, hagarara.
+	Gahunda iherezo.
+}.
 
 {
-	☞ a := f iheruka.
-
-	☞ b := f icya kabiri cyanyuma.
-
-	☞ sum := (a + b).
-
-	✎ andika: sum, hagarara.
+	{
+		(nimero ≥ 1000) ukuri: {
+			✎ andika: ‘Ⅿ’.
+			nimero gukuramo: 1000.
+		}, kuruhuka.
+	
+		(nimero ≥ 500) ukuri: {
+			✎ andika: ‘Ⅾ’.
+			nimero gukuramo: 500.
+		}, kuruhuka.
+	
+		(nimero ≥ 100) ukuri: {
+			✎ andika: ‘Ⅽ’.
+			nimero gukuramo: 100.
+		}, kuruhuka.
+	
+		(nimero ≥ 50) ukuri: {
+			✎ andika: ‘Ⅼ’.
+			nimero gukuramo: 50.
+		}, kuruhuka.
+	
+		(nimero ≥ 50) ukuri: {
+			✎ andika: ‘Ⅼ’.
+			nimero gukuramo: 50.
+		}, kuruhuka.
+	
+		(nimero ≥ 10) ukuri: {
+			✎ andika: ‘Ⅹ’.
+			nimero gukuramo: 10.
+		}, kuruhuka.
 		
-	f umugereka: sum.
-
-} * 12.
+		(nimero ≥ 9) ukuri: {
+			✎ andika: ‘Ⅸ’.
+			nimero gukuramo: 9.
+		}, kuruhuka.
+		
+		(nimero ≥ 5) ukuri: {
+			✎ andika: ‘Ⅴ’.
+			nimero gukuramo: 5.
+		}, kuruhuka.
+		
+		(nimero ≥ 4) ukuri: {
+			✎ andika: ‘Ⅳ’.
+			nimero gukuramo: 4.
+		}, kuruhuka.
+		
+		(nimero ≥ 1) ukuri: {
+			✎ andika: ‘Ⅰ’.
+			nimero gukuramo: 1.
+		}, kuruhuka.
+	} icyemezo.
+	
+} mugihe: { ↲ nimero > 0. }.

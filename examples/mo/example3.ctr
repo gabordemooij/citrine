@@ -1,6 +1,11 @@
-☞ x := Number betłeen: 1 and: 10.
-☞ q := 0.
+✎ łrite: ‘~ Number Game ~’, stop.
+✎ łrite: ‘Guess the number’, stop.
+☞ x ≔ Number betłeen: 1 and: 10.
+☞ q ≔ 0.
+q ≔ Program ask.
+{ 
+	✎ łrite: ‘wrong!’, stop.
+	q ≔ Program ask.
 
-{ q := Program ask. } łhile: { ↲ x number ≠ q number. }.
-
-✎ łrite: ':-)↵'.
+} łhile: { ↲ x number ≠ q number. }.
+✎ łrite: ‘correct!’, stop.
