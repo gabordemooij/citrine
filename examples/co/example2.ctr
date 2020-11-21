@@ -1,14 +1,63 @@
-☞ f := Elencu ← 0 ; 1.
+✎ scrive: ‘~ Roman numerals ~’, _finisci.
+✎ scrive: ‘Give a number to convert:’, _finisci.
+☞ numeru ≔ Prugramma dumandà numeru assuluta.
+
+(numeru = 0) vera: {
+	✎ scrive: ‘Nulla’, _finisci.
+	Prugramma finisci.
+}.
 
 {
-	☞ a := f ultimu.
-
-	☞ b := f siconda ultimu.
-
-	☞ sum := (a + b).
-
-	✎ scrive: sum, _finisci.
+	{
+		(numeru ≥ 1000) vera: {
+			✎ scrive: ‘Ⅿ’.
+			numeru suttendu: 1000.
+		}, rompe.
+	
+		(numeru ≥ 500) vera: {
+			✎ scrive: ‘Ⅾ’.
+			numeru suttendu: 500.
+		}, rompe.
+	
+		(numeru ≥ 100) vera: {
+			✎ scrive: ‘Ⅽ’.
+			numeru suttendu: 100.
+		}, rompe.
+	
+		(numeru ≥ 50) vera: {
+			✎ scrive: ‘Ⅼ’.
+			numeru suttendu: 50.
+		}, rompe.
+	
+		(numeru ≥ 50) vera: {
+			✎ scrive: ‘Ⅼ’.
+			numeru suttendu: 50.
+		}, rompe.
+	
+		(numeru ≥ 10) vera: {
+			✎ scrive: ‘Ⅹ’.
+			numeru suttendu: 10.
+		}, rompe.
 		
-	f appendicà: sum.
-
-} * 12.
+		(numeru ≥ 9) vera: {
+			✎ scrive: ‘Ⅸ’.
+			numeru suttendu: 9.
+		}, rompe.
+		
+		(numeru ≥ 5) vera: {
+			✎ scrive: ‘Ⅴ’.
+			numeru suttendu: 5.
+		}, rompe.
+		
+		(numeru ≥ 4) vera: {
+			✎ scrive: ‘Ⅳ’.
+			numeru suttendu: 4.
+		}, rompe.
+		
+		(numeru ≥ 1) vera: {
+			✎ scrive: ‘Ⅰ’.
+			numeru suttendu: 1.
+		}, rompe.
+	} prucedura.
+	
+} mentre: { ↲ numeru > 0. }.

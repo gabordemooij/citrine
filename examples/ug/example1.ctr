@@ -1,1 +1,25 @@
-✎ يېزىڭ: 'Hello World', توختا.
+✎ يېزىڭ: ‘~ Password Generator ~’, توختا.
+☞ count ≔ 0.
+{
+	✎ يېزىڭ: ‘How many characters (16-30)?’, توختا.
+	count ≔ پروگرامما سوراڭ _سان مۇتلەق.
+
+	(count < 16) true: {
+		✎ يېزىڭ: ‘That is not enough, please enter a number between 16 and 30.’, توختا.
+	}.
+	(count > 30) true: {
+		✎ يېزىڭ: ‘That is too long, some systems may reject passwords that long.’, توختا.
+	}.
+} while: { ↲ ((count < 16) or: (count > 30)). }.
+☞ ھەرپلەر ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		ھەرپلەر خاراكتېرى: ( 
+		سان
+		between: 1
+		and: ھەرپلەر ئۇزۇنلۇقى
+	).
+	password قوشۇمچە: char.
+} × count.
+✎ يېزىڭ: password, توختا.

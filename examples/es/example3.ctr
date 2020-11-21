@@ -1,6 +1,11 @@
-☞ x := Número en medio y: 1 __: 10.
-☞ q := 0.
+✎ escribir: ‘~ Number Game ~’, detener.
+✎ escribir: ‘Guess the number’, detener.
+☞ x ≔ Número en medio y: 1 __: 10.
+☞ q ≔ 0.
+q ≔ Programa pedir.
+{ 
+	✎ escribir: ‘wrong!’, detener.
+	q ≔ Programa pedir.
 
-{ q := Programa pedir. } mientras: { ↲ x número ≠ q número. }.
-
-✎ escribir: ':-)↵'.
+} mientras: { ↲ x número ≠ q número. }.
+✎ escribir: ‘correct!’, detener.

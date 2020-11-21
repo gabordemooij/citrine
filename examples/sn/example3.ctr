@@ -1,6 +1,11 @@
-☞ x := Nhamba pakati: 1 uye: 10.
-☞ q := 0.
+✎ nyora: ‘~ Number Game ~’, mira.
+✎ nyora: ‘Guess the number’, mira.
+☞ x ≔ Nhamba pakati: 1 uye: 10.
+☞ q ≔ 0.
+q ≔ Chirongwa bvunza.
+{ 
+	✎ nyora: ‘wrong!’, mira.
+	q ≔ Chirongwa bvunza.
 
-{ q := Chirongwa bvunza. } ne: { ↲ x nhamba ≠ q nhamba. }.
-
-✎ nyora: ':-)↵'.
+} ne: { ↲ x nhamba ≠ q nhamba. }.
+✎ nyora: ‘correct!’, mira.

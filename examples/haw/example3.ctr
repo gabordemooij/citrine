@@ -1,6 +1,11 @@
-☞ x := Helu mawaena: 1 _a: 10.
-☞ q := 0.
+✎ kākau: ‘~ Number Game ~’, oki.
+✎ kākau: ‘Guess the number’, oki.
+☞ x ≔ Helu mawaena: 1 _a: 10.
+☞ q ≔ 0.
+q ≔ Hōʻike ui.
+{ 
+	✎ kākau: ‘wrong!’, oki.
+	q ≔ Hōʻike ui.
 
-{ q := Hōʻike ui. } ʻoiai: { ↲ x helu ≠ q helu. }.
-
-✎ kākau: ':-)↵'.
+} ʻoiai: { ↲ x helu ≠ q helu. }.
+✎ kākau: ‘correct!’, oki.

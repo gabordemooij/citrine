@@ -1,6 +1,11 @@
-☞ x := Nomer antara: 1 jeung: 10.
-☞ q := 0.
+✎ nulis: ‘~ Number Game ~’, eureun.
+✎ nulis: ‘Guess the number’, eureun.
+☞ x ≔ Nomer antara: 1 jeung: 10.
+☞ q ≔ 0.
+q ≔ Program naros.
+{ 
+	✎ nulis: ‘wrong!’, eureun.
+	q ≔ Program naros.
 
-{ q := Program naros. } sedengkeun: { ↲ x jumlah ≠ q jumlah. }.
-
-✎ nulis: ':-)↵'.
+} sedengkeun: { ↲ x jumlah ≠ q jumlah. }.
+✎ nulis: ‘correct!’, eureun.

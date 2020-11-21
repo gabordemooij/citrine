@@ -1,6 +1,11 @@
-☞ x := Numru bejn: 1 _u: 10.
-☞ q := 0.
+✎ ikteb: ‘~ Number Game ~’, waqfa.
+✎ ikteb: ‘Guess the number’, waqfa.
+☞ x ≔ Numru bejn: 1 _u: 10.
+☞ q ≔ 0.
+q ≔ Programm staqsi.
+{ 
+	✎ ikteb: ‘wrong!’, waqfa.
+	q ≔ Programm staqsi.
 
-{ q := Programm staqsi. } waqt: { ↲ x numru ≠ q numru. }.
-
-✎ ikteb: ':-)↵'.
+} waqt: { ↲ x numru ≠ q numru. }.
+✎ ikteb: ‘correct!’, waqfa.

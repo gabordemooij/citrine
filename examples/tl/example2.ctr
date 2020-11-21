@@ -1,14 +1,63 @@
-☞ f := Listahan ← 0 ; 1.
+✎ sumulat: ‘~ Roman numerals ~’, huminto.
+✎ sumulat: ‘Give a number to convert:’, huminto.
+☞ bilang ≔ Program magtanong bilang ganap.
+
+(bilang = 0) totoo: {
+	✎ sumulat: ‘Nulla’, huminto.
+	Program wakas.
+}.
 
 {
-	☞ a := f huling.
-
-	☞ b := f pangalawa sa huli.
-
-	☞ sum := (a + b).
-
-	✎ sumulat: sum, huminto.
+	{
+		(bilang ≥ 1000) totoo: {
+			✎ sumulat: ‘Ⅿ’.
+			bilang ibawas: 1000.
+		}, pahinga.
+	
+		(bilang ≥ 500) totoo: {
+			✎ sumulat: ‘Ⅾ’.
+			bilang ibawas: 500.
+		}, pahinga.
+	
+		(bilang ≥ 100) totoo: {
+			✎ sumulat: ‘Ⅽ’.
+			bilang ibawas: 100.
+		}, pahinga.
+	
+		(bilang ≥ 50) totoo: {
+			✎ sumulat: ‘Ⅼ’.
+			bilang ibawas: 50.
+		}, pahinga.
+	
+		(bilang ≥ 50) totoo: {
+			✎ sumulat: ‘Ⅼ’.
+			bilang ibawas: 50.
+		}, pahinga.
+	
+		(bilang ≥ 10) totoo: {
+			✎ sumulat: ‘Ⅹ’.
+			bilang ibawas: 10.
+		}, pahinga.
 		
-	f ikabit__: sum.
-
-} * 12.
+		(bilang ≥ 9) totoo: {
+			✎ sumulat: ‘Ⅸ’.
+			bilang ibawas: 9.
+		}, pahinga.
+		
+		(bilang ≥ 5) totoo: {
+			✎ sumulat: ‘Ⅴ’.
+			bilang ibawas: 5.
+		}, pahinga.
+		
+		(bilang ≥ 4) totoo: {
+			✎ sumulat: ‘Ⅳ’.
+			bilang ibawas: 4.
+		}, pahinga.
+		
+		(bilang ≥ 1) totoo: {
+			✎ sumulat: ‘Ⅰ’.
+			bilang ibawas: 1.
+		}, pahinga.
+	} pamamaraan.
+	
+} habang: { ↲ bilang > 0. }.

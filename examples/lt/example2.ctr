@@ -1,14 +1,63 @@
-☞ f := Sąrašas ← 0 ; 1.
+✎ atspausdinti: ‘~ Roman numerals ~’, sustoti.
+✎ atspausdinti: ‘Give a number to convert:’, sustoti.
+☞ skaičius ≔ Programa klausti skaičius modulis.
+
+(skaičius = 0) tiesa: {
+	✎ atspausdinti: ‘Nulla’, sustoti.
+	Programa baigti.
+}.
 
 {
-	☞ a := f paskutinis.
-
-	☞ b := f priešpaskutinis.
-
-	☞ sum := (a + b).
-
-	✎ atspausdinti: sum, sustoti.
+	{
+		(skaičius ≥ 1000) tiesa: {
+			✎ atspausdinti: ‘Ⅿ’.
+			skaičius atimti: 1000.
+		}, stabdyti.
+	
+		(skaičius ≥ 500) tiesa: {
+			✎ atspausdinti: ‘Ⅾ’.
+			skaičius atimti: 500.
+		}, stabdyti.
+	
+		(skaičius ≥ 100) tiesa: {
+			✎ atspausdinti: ‘Ⅽ’.
+			skaičius atimti: 100.
+		}, stabdyti.
+	
+		(skaičius ≥ 50) tiesa: {
+			✎ atspausdinti: ‘Ⅼ’.
+			skaičius atimti: 50.
+		}, stabdyti.
+	
+		(skaičius ≥ 50) tiesa: {
+			✎ atspausdinti: ‘Ⅼ’.
+			skaičius atimti: 50.
+		}, stabdyti.
+	
+		(skaičius ≥ 10) tiesa: {
+			✎ atspausdinti: ‘Ⅹ’.
+			skaičius atimti: 10.
+		}, stabdyti.
 		
-	f pridėti: sum.
-
-} * 12.
+		(skaičius ≥ 9) tiesa: {
+			✎ atspausdinti: ‘Ⅸ’.
+			skaičius atimti: 9.
+		}, stabdyti.
+		
+		(skaičius ≥ 5) tiesa: {
+			✎ atspausdinti: ‘Ⅴ’.
+			skaičius atimti: 5.
+		}, stabdyti.
+		
+		(skaičius ≥ 4) tiesa: {
+			✎ atspausdinti: ‘Ⅳ’.
+			skaičius atimti: 4.
+		}, stabdyti.
+		
+		(skaičius ≥ 1) tiesa: {
+			✎ atspausdinti: ‘Ⅰ’.
+			skaičius atimti: 1.
+		}, stabdyti.
+	} procedūra.
+	
+} kol: { ↲ skaičius > 0. }.

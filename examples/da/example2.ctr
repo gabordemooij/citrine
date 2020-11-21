@@ -1,14 +1,63 @@
-☞ f := Liste ← 0 ; 1.
+✎ skrive: ‘~ Roman numerals ~’, hold op.
+✎ skrive: ‘Give a number to convert:’, hold op.
+☞ nummer ≔ Program spørge nummer absolutte.
+
+(nummer = 0) rigtigt: {
+	✎ skrive: ‘Nulla’, hold op.
+	Program ende.
+}.
 
 {
-	☞ a := f sidst.
-
-	☞ b := f næstsidste.
-
-	☞ sum := (a + b).
-
-	✎ skrive: sum, hold op.
+	{
+		(nummer ≥ 1000) rigtigt: {
+			✎ skrive: ‘Ⅿ’.
+			nummer trække fra: 1000.
+		}, pause.
+	
+		(nummer ≥ 500) rigtigt: {
+			✎ skrive: ‘Ⅾ’.
+			nummer trække fra: 500.
+		}, pause.
+	
+		(nummer ≥ 100) rigtigt: {
+			✎ skrive: ‘Ⅽ’.
+			nummer trække fra: 100.
+		}, pause.
+	
+		(nummer ≥ 50) rigtigt: {
+			✎ skrive: ‘Ⅼ’.
+			nummer trække fra: 50.
+		}, pause.
+	
+		(nummer ≥ 50) rigtigt: {
+			✎ skrive: ‘Ⅼ’.
+			nummer trække fra: 50.
+		}, pause.
+	
+		(nummer ≥ 10) rigtigt: {
+			✎ skrive: ‘Ⅹ’.
+			nummer trække fra: 10.
+		}, pause.
 		
-	f tilføj: sum.
-
-} * 12.
+		(nummer ≥ 9) rigtigt: {
+			✎ skrive: ‘Ⅸ’.
+			nummer trække fra: 9.
+		}, pause.
+		
+		(nummer ≥ 5) rigtigt: {
+			✎ skrive: ‘Ⅴ’.
+			nummer trække fra: 5.
+		}, pause.
+		
+		(nummer ≥ 4) rigtigt: {
+			✎ skrive: ‘Ⅳ’.
+			nummer trække fra: 4.
+		}, pause.
+		
+		(nummer ≥ 1) rigtigt: {
+			✎ skrive: ‘Ⅰ’.
+			nummer trække fra: 1.
+		}, pause.
+	} procedure.
+	
+} mens: { ↲ nummer > 0. }.

@@ -1,6 +1,11 @@
-☞ x := Con số giữa và: 1 __: 10.
-☞ q := 0.
+✎ viết: ‘~ Number Game ~’, dừng lại.
+✎ viết: ‘Guess the number’, dừng lại.
+☞ x ≔ Con số giữa và: 1 __: 10.
+☞ q ≔ 0.
+q ≔ Chương trình hỏi.
+{ 
+	✎ viết: ‘wrong!’, dừng lại.
+	q ≔ Chương trình hỏi.
 
-{ q := Chương trình hỏi. } trong khi: { ↲ x con số ≠ q con số. }.
-
-✎ viết: ':-)↵'.
+} trong khi: { ↲ x con số ≠ q con số. }.
+✎ viết: ‘correct!’, dừng lại.

@@ -1,1 +1,25 @@
-✎ kọ: 'Hello World', duro.
+✎ kọ: ‘~ Password Generator ~’, duro.
+☞ ka ≔ 0.
+{
+	✎ kọ: ‘How many characters (16-30)?’, duro.
+	ka ≔ Eto béèrè nọmba idi.
+
+	(ka < 16) ooto: {
+		✎ kọ: ‘That is not enough, please enter a number between 16 and 30.’, duro.
+	}.
+	(ka > 30) ooto: {
+		✎ kọ: ‘That is too long, some systems may reject passwords that long.’, duro.
+	}.
+} nigba ti: { ↲ ((ka < 16) or: (ka > 30)). }.
+☞ ohun kikọ ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		ohun kikọ kikọ: ( 
+		Nọmba
+		laarin: 1
+		ati: ohun kikọ gigun
+	).
+	password append: char.
+} × ka.
+✎ kọ: password, duro.

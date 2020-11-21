@@ -1,1 +1,25 @@
-✎ សរសេរ៖__: 'Hello World', បញ្ឈប់.
+✎ សរសេរ៖__: ‘~ Password Generator ~’, បញ្ឈប់.
+☞ រាប់ ≔ 0.
+{
+	✎ សរសេរ៖__: ‘How many characters (16-30)?’, បញ្ឈប់.
+	រាប់ ≔ កម្មវិធី សួរ _ចំនួន ដាច់ខាត.
+
+	(រាប់ < 16) ពិត៖__: {
+		✎ សរសេរ៖__: ‘That is not enough, please enter a number between 16 and 30.’, បញ្ឈប់.
+	}.
+	(រាប់ > 30) ពិត៖__: {
+		✎ សរសេរ៖__: ‘That is too long, some systems may reject passwords that long.’, បញ្ឈប់.
+	}.
+} ខណៈពេលដែល: { ↲ ((រាប់ < 16) or: (រាប់ > 30)). }.
+☞ តួអក្សរ ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		តួអក្សរ តួអក្សរ៖__: ( 
+		ចំនួន
+		រវាង៖ និង៖__: 1
+		__: តួអក្សរ ប្រវែង
+	).
+	password បន្ថែម៖__: char.
+} × រាប់.
+✎ សរសេរ៖__: password, បញ្ឈប់.

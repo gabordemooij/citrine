@@ -1,1 +1,25 @@
-✎ כתוב: 'Hello World', תפסיק.
+✎ כתוב: ‘~ Password Generator ~’, תפסיק.
+☞ לספור ≔ 0.
+{
+	✎ כתוב: ‘How many characters (16-30)?’, תפסיק.
+	לספור ≔ תכנית תשאל _מספר מוחלט.
+
+	(לספור < 16) _נכון: {
+		✎ כתוב: ‘That is not enough, please enter a number between 16 and 30.’, תפסיק.
+	}.
+	(לספור > 30) _נכון: {
+		✎ כתוב: ‘That is too long, some systems may reject passwords that long.’, תפסיק.
+	}.
+} בזמן: { ↲ ((לספור < 16) or: (לספור > 30)). }.
+☞ תווים ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		תווים אופי: ( 
+		מספר
+		בין ו: 1
+		__: תווים אורך
+	).
+	password להוסיף: char.
+} × לספור.
+✎ כתוב: password, תפסיק.

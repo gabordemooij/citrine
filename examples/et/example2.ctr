@@ -1,14 +1,63 @@
-☞ f := Loend ← 0 ; 1.
+✎ kirjuta: ‘~ Roman numerals ~’, peatus.
+✎ kirjuta: ‘Give a number to convert:’, peatus.
+☞ number ≔ Programm küsige number absoluutne.
+
+(number = 0) tõsi: {
+	✎ kirjuta: ‘Nulla’, peatus.
+	Programm lõpp.
+}.
 
 {
-	☞ a := f viimane.
-
-	☞ b := f teine ​​viimane.
-
-	☞ sum := (a + b).
-
-	✎ kirjuta: sum, peatus.
+	{
+		(number ≥ 1000) tõsi: {
+			✎ kirjuta: ‘Ⅿ’.
+			number lahutama: 1000.
+		}, murda.
+	
+		(number ≥ 500) tõsi: {
+			✎ kirjuta: ‘Ⅾ’.
+			number lahutama: 500.
+		}, murda.
+	
+		(number ≥ 100) tõsi: {
+			✎ kirjuta: ‘Ⅽ’.
+			number lahutama: 100.
+		}, murda.
+	
+		(number ≥ 50) tõsi: {
+			✎ kirjuta: ‘Ⅼ’.
+			number lahutama: 50.
+		}, murda.
+	
+		(number ≥ 50) tõsi: {
+			✎ kirjuta: ‘Ⅼ’.
+			number lahutama: 50.
+		}, murda.
+	
+		(number ≥ 10) tõsi: {
+			✎ kirjuta: ‘Ⅹ’.
+			number lahutama: 10.
+		}, murda.
 		
-	f lisa: sum.
-
-} * 12.
+		(number ≥ 9) tõsi: {
+			✎ kirjuta: ‘Ⅸ’.
+			number lahutama: 9.
+		}, murda.
+		
+		(number ≥ 5) tõsi: {
+			✎ kirjuta: ‘Ⅴ’.
+			number lahutama: 5.
+		}, murda.
+		
+		(number ≥ 4) tõsi: {
+			✎ kirjuta: ‘Ⅳ’.
+			number lahutama: 4.
+		}, murda.
+		
+		(number ≥ 1) tõsi: {
+			✎ kirjuta: ‘Ⅰ’.
+			number lahutama: 1.
+		}, murda.
+	} protseduur.
+	
+} samas: { ↲ number > 0. }.

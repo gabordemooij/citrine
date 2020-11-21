@@ -1,14 +1,63 @@
-☞ f := Sanaw ← 0 ; 1.
+✎ ýaz: ‘~ Roman numerals ~’, dur.
+✎ ýaz: ‘Give a number to convert:’, dur.
+☞ sany ≔ Programma sora sany mutlak.
+
+(sany = 0) dogry: {
+	✎ ýaz: ‘Nulla’, dur.
+	Programma soňy.
+}.
 
 {
-	☞ a := f iň soňky.
-
-	☞ b := f ikinji soňky.
-
-	☞ sum := (a + b).
-
-	✎ ýaz: sum, dur.
+	{
+		(sany ≥ 1000) dogry: {
+			✎ ýaz: ‘Ⅿ’.
+			sany aýyrmak: 1000.
+		}, arakesme.
+	
+		(sany ≥ 500) dogry: {
+			✎ ýaz: ‘Ⅾ’.
+			sany aýyrmak: 500.
+		}, arakesme.
+	
+		(sany ≥ 100) dogry: {
+			✎ ýaz: ‘Ⅽ’.
+			sany aýyrmak: 100.
+		}, arakesme.
+	
+		(sany ≥ 50) dogry: {
+			✎ ýaz: ‘Ⅼ’.
+			sany aýyrmak: 50.
+		}, arakesme.
+	
+		(sany ≥ 50) dogry: {
+			✎ ýaz: ‘Ⅼ’.
+			sany aýyrmak: 50.
+		}, arakesme.
+	
+		(sany ≥ 10) dogry: {
+			✎ ýaz: ‘Ⅹ’.
+			sany aýyrmak: 10.
+		}, arakesme.
 		
-	f goşundy: sum.
-
-} * 12.
+		(sany ≥ 9) dogry: {
+			✎ ýaz: ‘Ⅸ’.
+			sany aýyrmak: 9.
+		}, arakesme.
+		
+		(sany ≥ 5) dogry: {
+			✎ ýaz: ‘Ⅴ’.
+			sany aýyrmak: 5.
+		}, arakesme.
+		
+		(sany ≥ 4) dogry: {
+			✎ ýaz: ‘Ⅳ’.
+			sany aýyrmak: 4.
+		}, arakesme.
+		
+		(sany ≥ 1) dogry: {
+			✎ ýaz: ‘Ⅰ’.
+			sany aýyrmak: 1.
+		}, arakesme.
+	} tertibi.
+	
+} wagty: { ↲ sany > 0. }.

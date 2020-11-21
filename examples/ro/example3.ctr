@@ -1,6 +1,11 @@
-☞ x := Număr între: 1 şi: 10.
-☞ q := 0.
+✎ scrie: ‘~ Number Game ~’, stop.
+✎ scrie: ‘Guess the number’, stop.
+☞ x ≔ Număr între: 1 şi: 10.
+☞ q ≔ 0.
+q ≔ Program întreabă.
+{ 
+	✎ scrie: ‘wrong!’, stop.
+	q ≔ Program întreabă.
 
-{ q := Program întreabă. } cât timp: { ↲ x număr ≠ q număr. }.
-
-✎ scrie: ':-)↵'.
+} cât timp: { ↲ x număr ≠ q număr. }.
+✎ scrie: ‘correct!’, stop.

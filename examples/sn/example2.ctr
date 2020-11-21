@@ -1,14 +1,63 @@
-☞ f := Rondedzero ← 0 ; 1.
+✎ nyora: ‘~ Roman numerals ~’, mira.
+✎ nyora: ‘Give a number to convert:’, mira.
+☞ nhamba ≔ Chirongwa bvunza nhamba mhedziso.
+
+(nhamba = 0) chokwadi: {
+	✎ nyora: ‘Nulla’, mira.
+	Chirongwa magumo.
+}.
 
 {
-	☞ a := f pekupedzisira.
-
-	☞ b := f yechipiri yekupedzisira.
-
-	☞ sum := (a + b).
-
-	✎ nyora: sum, mira.
+	{
+		(nhamba ≥ 1000) chokwadi: {
+			✎ nyora: ‘Ⅿ’.
+			nhamba _bvisa: 1000.
+		}, kutyora.
+	
+		(nhamba ≥ 500) chokwadi: {
+			✎ nyora: ‘Ⅾ’.
+			nhamba _bvisa: 500.
+		}, kutyora.
+	
+		(nhamba ≥ 100) chokwadi: {
+			✎ nyora: ‘Ⅽ’.
+			nhamba _bvisa: 100.
+		}, kutyora.
+	
+		(nhamba ≥ 50) chokwadi: {
+			✎ nyora: ‘Ⅼ’.
+			nhamba _bvisa: 50.
+		}, kutyora.
+	
+		(nhamba ≥ 50) chokwadi: {
+			✎ nyora: ‘Ⅼ’.
+			nhamba _bvisa: 50.
+		}, kutyora.
+	
+		(nhamba ≥ 10) chokwadi: {
+			✎ nyora: ‘Ⅹ’.
+			nhamba _bvisa: 10.
+		}, kutyora.
 		
-	f _shandisa: sum.
-
-} * 12.
+		(nhamba ≥ 9) chokwadi: {
+			✎ nyora: ‘Ⅸ’.
+			nhamba _bvisa: 9.
+		}, kutyora.
+		
+		(nhamba ≥ 5) chokwadi: {
+			✎ nyora: ‘Ⅴ’.
+			nhamba _bvisa: 5.
+		}, kutyora.
+		
+		(nhamba ≥ 4) chokwadi: {
+			✎ nyora: ‘Ⅳ’.
+			nhamba _bvisa: 4.
+		}, kutyora.
+		
+		(nhamba ≥ 1) chokwadi: {
+			✎ nyora: ‘Ⅰ’.
+			nhamba _bvisa: 1.
+		}, kutyora.
+	} maitiro.
+	
+} ne: { ↲ nhamba > 0. }.

@@ -1,1 +1,25 @@
-✎ كتابة: 'Hello World', قف.
+✎ كتابة: ‘~ Password Generator ~’, قف.
+☞ العد ≔ 0.
+{
+	✎ كتابة: ‘How many characters (16-30)?’, قف.
+	العد ≔ برنامج يطلب _رقم مطلق.
+
+	(العد < 16) صحيح_: {
+		✎ كتابة: ‘That is not enough, please enter a number between 16 and 30.’, قف.
+	}.
+	(العد > 30) صحيح_: {
+		✎ كتابة: ‘That is too long, some systems may reject passwords that long.’, قف.
+	}.
+} في حين: { ↲ ((العد < 16) or: (العد > 30)). }.
+☞ الشخصيات ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		الشخصيات حرف: ( 
+		رقم
+		بين و: 1
+		__: الشخصيات الطول
+	).
+	password ألحق: char.
+} × العد.
+✎ كتابة: password, قف.

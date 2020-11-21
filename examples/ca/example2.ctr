@@ -1,14 +1,63 @@
-☞ f := Llista ← 0 ; 1.
+✎ escriu: ‘~ Roman numerals ~’, atura.
+✎ escriu: ‘Give a number to convert:’, atura.
+☞ núm ≔ Programa pregunta núm absolut.
+
+(núm = 0) cert: {
+	✎ escriu: ‘Nulla’, atura.
+	Programa final.
+}.
 
 {
-	☞ a := f últim.
-
-	☞ b := f segon últim.
-
-	☞ sum := (a + b).
-
-	✎ escriu: sum, atura.
+	{
+		(núm ≥ 1000) cert: {
+			✎ escriu: ‘Ⅿ’.
+			núm sostreure: 1000.
+		}, trencar.
+	
+		(núm ≥ 500) cert: {
+			✎ escriu: ‘Ⅾ’.
+			núm sostreure: 500.
+		}, trencar.
+	
+		(núm ≥ 100) cert: {
+			✎ escriu: ‘Ⅽ’.
+			núm sostreure: 100.
+		}, trencar.
+	
+		(núm ≥ 50) cert: {
+			✎ escriu: ‘Ⅼ’.
+			núm sostreure: 50.
+		}, trencar.
+	
+		(núm ≥ 50) cert: {
+			✎ escriu: ‘Ⅼ’.
+			núm sostreure: 50.
+		}, trencar.
+	
+		(núm ≥ 10) cert: {
+			✎ escriu: ‘Ⅹ’.
+			núm sostreure: 10.
+		}, trencar.
 		
-	f annexar: sum.
-
-} * 12.
+		(núm ≥ 9) cert: {
+			✎ escriu: ‘Ⅸ’.
+			núm sostreure: 9.
+		}, trencar.
+		
+		(núm ≥ 5) cert: {
+			✎ escriu: ‘Ⅴ’.
+			núm sostreure: 5.
+		}, trencar.
+		
+		(núm ≥ 4) cert: {
+			✎ escriu: ‘Ⅳ’.
+			núm sostreure: 4.
+		}, trencar.
+		
+		(núm ≥ 1) cert: {
+			✎ escriu: ‘Ⅰ’.
+			núm sostreure: 1.
+		}, trencar.
+	} procediment.
+	
+} mentre: { ↲ núm > 0. }.

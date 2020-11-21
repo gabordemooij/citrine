@@ -1,1 +1,25 @@
-✎ 쓰다: 'Hello World', 중지.
+✎ 쓰다: ‘~ Password Generator ~’, 중지.
+☞ 카운트 ≔ 0.
+{
+	✎ 쓰다: ‘How many characters (16-30)?’, 중지.
+	카운트 ≔ 프로그램 물어보기 _번호 순수한.
+
+	(카운트 < 16) _진실: {
+		✎ 쓰다: ‘That is not enough, please enter a number between 16 and 30.’, 중지.
+	}.
+	(카운트 > 30) _진실: {
+		✎ 쓰다: ‘That is too long, some systems may reject passwords that long.’, 중지.
+	}.
+} 동안: { ↲ ((카운트 < 16) or: (카운트 > 30)). }.
+☞ 문자 ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		문자 캐릭터: ( 
+		번호
+		와 ~ 사이에있는: 1
+		__: 문자 길이
+	).
+	password 추가하십시오 : char.
+} × 카운트.
+✎ 쓰다: password, 중지.

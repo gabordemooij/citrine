@@ -1,14 +1,63 @@
-☞ f := Saraksts ← 0 ; 1.
+✎ rakstīt: ‘~ Roman numerals ~’, apstāties.
+✎ rakstīt: ‘Give a number to convert:’, apstāties.
+☞ numuru ≔ Programma pajautā numuru absolūts.
+
+(numuru = 0) taisnība: {
+	✎ rakstīt: ‘Nulla’, apstāties.
+	Programma beigas.
+}.
 
 {
-	☞ a := f pēdējais.
-
-	☞ b := f otrais pēdējais.
-
-	☞ sum := (a + b).
-
-	✎ rakstīt: sum, apstāties.
+	{
+		(numuru ≥ 1000) taisnība: {
+			✎ rakstīt: ‘Ⅿ’.
+			numuru atņemt: 1000.
+		}, pārtraukums.
+	
+		(numuru ≥ 500) taisnība: {
+			✎ rakstīt: ‘Ⅾ’.
+			numuru atņemt: 500.
+		}, pārtraukums.
+	
+		(numuru ≥ 100) taisnība: {
+			✎ rakstīt: ‘Ⅽ’.
+			numuru atņemt: 100.
+		}, pārtraukums.
+	
+		(numuru ≥ 50) taisnība: {
+			✎ rakstīt: ‘Ⅼ’.
+			numuru atņemt: 50.
+		}, pārtraukums.
+	
+		(numuru ≥ 50) taisnība: {
+			✎ rakstīt: ‘Ⅼ’.
+			numuru atņemt: 50.
+		}, pārtraukums.
+	
+		(numuru ≥ 10) taisnība: {
+			✎ rakstīt: ‘Ⅹ’.
+			numuru atņemt: 10.
+		}, pārtraukums.
 		
-	f pievienot: sum.
-
-} * 12.
+		(numuru ≥ 9) taisnība: {
+			✎ rakstīt: ‘Ⅸ’.
+			numuru atņemt: 9.
+		}, pārtraukums.
+		
+		(numuru ≥ 5) taisnība: {
+			✎ rakstīt: ‘Ⅴ’.
+			numuru atņemt: 5.
+		}, pārtraukums.
+		
+		(numuru ≥ 4) taisnība: {
+			✎ rakstīt: ‘Ⅳ’.
+			numuru atņemt: 4.
+		}, pārtraukums.
+		
+		(numuru ≥ 1) taisnība: {
+			✎ rakstīt: ‘Ⅰ’.
+			numuru atņemt: 1.
+		}, pārtraukums.
+	} procedūra.
+	
+} kamēr: { ↲ numuru > 0. }.

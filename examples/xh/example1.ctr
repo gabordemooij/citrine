@@ -1,1 +1,25 @@
-✎ bhala: 'Hello World', yeka.
+✎ bhala: ‘~ Password Generator ~’, yeka.
+☞ ukubala ≔ 0.
+{
+	✎ bhala: ‘How many characters (16-30)?’, yeka.
+	ukubala ≔ Inkqubo buza inani ngokuqinisekileyo.
+
+	(ukubala < 16) yinyani: {
+		✎ bhala: ‘That is not enough, please enter a number between 16 and 30.’, yeka.
+	}.
+	(ukubala > 30) yinyani: {
+		✎ bhala: ‘That is too long, some systems may reject passwords that long.’, yeka.
+	}.
+} ngelixa: { ↲ ((ukubala < 16) or: (ukubala > 30)). }.
+☞ abalinganiswa ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		abalinganiswa umlinganiswa: ( 
+		Inani
+		phakathi: 1
+		kunye: abalinganiswa ubude
+	).
+	password faka: char.
+} × ukubala.
+✎ bhala: password, yeka.

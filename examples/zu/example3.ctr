@@ -1,6 +1,11 @@
-☞ x := Inombolo phakathi: 1 no: 10.
-☞ q := 0.
+✎ bhala: ‘~ Number Game ~’, ima.
+✎ bhala: ‘Guess the number’, ima.
+☞ x ≔ Inombolo phakathi: 1 no: 10.
+☞ q ≔ 0.
+q ≔ Uhlelo buza.
+{ 
+	✎ bhala: ‘wrong!’, ima.
+	q ≔ Uhlelo buza.
 
-{ q := Uhlelo buza. } ngenkathi: { ↲ x inombolo ≠ q inombolo. }.
-
-✎ bhala: ':-)↵'.
+} ngenkathi: { ↲ x inombolo ≠ q inombolo. }.
+✎ bhala: ‘correct!’, ima.

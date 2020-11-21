@@ -1,1 +1,25 @@
-✎ skriva: 'Hello World', sluta.
+✎ skriva: ‘~ Password Generator ~’, sluta.
+☞ räkna ≔ 0.
+{
+	✎ skriva: ‘How many characters (16-30)?’, sluta.
+	räkna ≔ Program fråga siffra absolut.
+
+	(räkna < 16) sann: {
+		✎ skriva: ‘That is not enough, please enter a number between 16 and 30.’, sluta.
+	}.
+	(räkna > 30) sann: {
+		✎ skriva: ‘That is too long, some systems may reject passwords that long.’, sluta.
+	}.
+} medan: { ↲ ((räkna < 16) or: (räkna > 30)). }.
+☞ tecken ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		tecken karaktär: ( 
+		Siffra
+		mellan och: 1
+		__: tecken längd
+	).
+	password bifoga: char.
+} × räkna.
+✎ skriva: password, sluta.

@@ -1,14 +1,63 @@
-☞ f := Aufführen ← 0 ; 1.
+✎ schreiben: ‘~ Roman numerals ~’, halt.
+✎ schreiben: ‘Give a number to convert:’, halt.
+☞ nummer ≔ Programm fragen nummer absolut.
+
+(nummer = 0) wahr: {
+	✎ schreiben: ‘Nulla’, halt.
+	Programm ende.
+}.
 
 {
-	☞ a := f zuletzt.
-
-	☞ b := f vorletzte.
-
-	☞ sum := (a + b).
-
-	✎ schreiben: sum, halt.
+	{
+		(nummer ≥ 1000) wahr: {
+			✎ schreiben: ‘Ⅿ’.
+			nummer subtrahieren: 1000.
+		}, brechen.
+	
+		(nummer ≥ 500) wahr: {
+			✎ schreiben: ‘Ⅾ’.
+			nummer subtrahieren: 500.
+		}, brechen.
+	
+		(nummer ≥ 100) wahr: {
+			✎ schreiben: ‘Ⅽ’.
+			nummer subtrahieren: 100.
+		}, brechen.
+	
+		(nummer ≥ 50) wahr: {
+			✎ schreiben: ‘Ⅼ’.
+			nummer subtrahieren: 50.
+		}, brechen.
+	
+		(nummer ≥ 50) wahr: {
+			✎ schreiben: ‘Ⅼ’.
+			nummer subtrahieren: 50.
+		}, brechen.
+	
+		(nummer ≥ 10) wahr: {
+			✎ schreiben: ‘Ⅹ’.
+			nummer subtrahieren: 10.
+		}, brechen.
 		
-	f anhängen: sum.
-
-} * 12.
+		(nummer ≥ 9) wahr: {
+			✎ schreiben: ‘Ⅸ’.
+			nummer subtrahieren: 9.
+		}, brechen.
+		
+		(nummer ≥ 5) wahr: {
+			✎ schreiben: ‘Ⅴ’.
+			nummer subtrahieren: 5.
+		}, brechen.
+		
+		(nummer ≥ 4) wahr: {
+			✎ schreiben: ‘Ⅳ’.
+			nummer subtrahieren: 4.
+		}, brechen.
+		
+		(nummer ≥ 1) wahr: {
+			✎ schreiben: ‘Ⅰ’.
+			nummer subtrahieren: 1.
+		}, brechen.
+	} routine.
+	
+} während: { ↲ nummer > 0. }.

@@ -1,14 +1,63 @@
-☞ f := Listi ← 0 ; 1.
+✎ skrifa: ‘~ Roman numerals ~’, hætta.
+✎ skrifa: ‘Give a number to convert:’, hætta.
+☞ númer ≔ Forrit spyrja númer alger.
+
+(númer = 0) satt: {
+	✎ skrifa: ‘Nulla’, hætta.
+	Forrit enda.
+}.
 
 {
-	☞ a := f síðast.
-
-	☞ b := f næst síðast.
-
-	☞ sum := (a + b).
-
-	✎ skrifa: sum, hætta.
+	{
+		(númer ≥ 1000) satt: {
+			✎ skrifa: ‘Ⅿ’.
+			númer draga: 1000.
+		}, brot.
+	
+		(númer ≥ 500) satt: {
+			✎ skrifa: ‘Ⅾ’.
+			númer draga: 500.
+		}, brot.
+	
+		(númer ≥ 100) satt: {
+			✎ skrifa: ‘Ⅽ’.
+			númer draga: 100.
+		}, brot.
+	
+		(númer ≥ 50) satt: {
+			✎ skrifa: ‘Ⅼ’.
+			númer draga: 50.
+		}, brot.
+	
+		(númer ≥ 50) satt: {
+			✎ skrifa: ‘Ⅼ’.
+			númer draga: 50.
+		}, brot.
+	
+		(númer ≥ 10) satt: {
+			✎ skrifa: ‘Ⅹ’.
+			númer draga: 10.
+		}, brot.
 		
-	f bætið við: sum.
-
-} * 12.
+		(númer ≥ 9) satt: {
+			✎ skrifa: ‘Ⅸ’.
+			númer draga: 9.
+		}, brot.
+		
+		(númer ≥ 5) satt: {
+			✎ skrifa: ‘Ⅴ’.
+			númer draga: 5.
+		}, brot.
+		
+		(númer ≥ 4) satt: {
+			✎ skrifa: ‘Ⅳ’.
+			númer draga: 4.
+		}, brot.
+		
+		(númer ≥ 1) satt: {
+			✎ skrifa: ‘Ⅰ’.
+			númer draga: 1.
+		}, brot.
+	} málsmeðferð.
+	
+} meðan: { ↲ númer > 0. }.

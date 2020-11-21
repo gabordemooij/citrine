@@ -1,14 +1,63 @@
-☞ f := Rêzok ← 0 ; 1.
+✎ nivîsîn: ‘~ Roman numerals ~’, rawestan.
+✎ nivîsîn: ‘Give a number to convert:’, rawestan.
+☞ jimare ≔ Bername pirsîn jimare bêkêmasî.
+
+(jimare = 0) rast: {
+	✎ nivîsîn: ‘Nulla’, rawestan.
+	Bername dawî.
+}.
 
 {
-	☞ a := f dawîn.
-
-	☞ b := f ya paşîn paşîn.
-
-	☞ sum := (a + b).
-
-	✎ nivîsîn: sum, rawestan.
+	{
+		(jimare ≥ 1000) rast: {
+			✎ nivîsîn: ‘Ⅿ’.
+			jimare jêkêmkirin: 1000.
+		}, şikesta.
+	
+		(jimare ≥ 500) rast: {
+			✎ nivîsîn: ‘Ⅾ’.
+			jimare jêkêmkirin: 500.
+		}, şikesta.
+	
+		(jimare ≥ 100) rast: {
+			✎ nivîsîn: ‘Ⅽ’.
+			jimare jêkêmkirin: 100.
+		}, şikesta.
+	
+		(jimare ≥ 50) rast: {
+			✎ nivîsîn: ‘Ⅼ’.
+			jimare jêkêmkirin: 50.
+		}, şikesta.
+	
+		(jimare ≥ 50) rast: {
+			✎ nivîsîn: ‘Ⅼ’.
+			jimare jêkêmkirin: 50.
+		}, şikesta.
+	
+		(jimare ≥ 10) rast: {
+			✎ nivîsîn: ‘Ⅹ’.
+			jimare jêkêmkirin: 10.
+		}, şikesta.
 		
-	f append: sum.
-
-} * 12.
+		(jimare ≥ 9) rast: {
+			✎ nivîsîn: ‘Ⅸ’.
+			jimare jêkêmkirin: 9.
+		}, şikesta.
+		
+		(jimare ≥ 5) rast: {
+			✎ nivîsîn: ‘Ⅴ’.
+			jimare jêkêmkirin: 5.
+		}, şikesta.
+		
+		(jimare ≥ 4) rast: {
+			✎ nivîsîn: ‘Ⅳ’.
+			jimare jêkêmkirin: 4.
+		}, şikesta.
+		
+		(jimare ≥ 1) rast: {
+			✎ nivîsîn: ‘Ⅰ’.
+			jimare jêkêmkirin: 1.
+		}, şikesta.
+	} doz.
+	
+} demek: { ↲ jimare > 0. }.

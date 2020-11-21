@@ -1,6 +1,11 @@
-☞ x := Nimewo ant: 1 ak: 10.
-☞ q := 0.
+✎ ekri: ‘~ Number Game ~’, kanpe.
+✎ ekri: ‘Guess the number’, kanpe.
+☞ x ≔ Nimewo ant: 1 ak: 10.
+☞ q ≔ 0.
+q ≔ Pwogram mande.
+{ 
+	✎ ekri: ‘wrong!’, kanpe.
+	q ≔ Pwogram mande.
 
-{ q := Pwogram mande. } pandan ke: { ↲ x nimewo ≠ q nimewo. }.
-
-✎ ekri: ':-)↵'.
+} pandan ke: { ↲ x nimewo ≠ q nimewo. }.
+✎ ekri: ‘correct!’, kanpe.

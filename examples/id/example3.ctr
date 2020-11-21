@@ -1,6 +1,11 @@
-☞ x := Jumlah diantara dan: 1 __: 10.
-☞ q := 0.
+✎ menulis: ‘~ Number Game ~’, berhenti.
+✎ menulis: ‘Guess the number’, berhenti.
+☞ x ≔ Jumlah diantara dan: 1 __: 10.
+☞ q ≔ 0.
+q ≔ Program meminta.
+{ 
+	✎ menulis: ‘wrong!’, berhenti.
+	q ≔ Program meminta.
 
-{ q := Program meminta. } sementara: { ↲ x jumlah ≠ q jumlah. }.
-
-✎ menulis: ':-)↵'.
+} sementara: { ↲ x jumlah ≠ q jumlah. }.
+✎ menulis: ‘correct!’, berhenti.

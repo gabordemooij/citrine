@@ -1,6 +1,11 @@
-☞ x := Numero sa taliwala: 1 ug: 10.
-☞ q := 0.
+✎ pagsulat: ‘~ Number Game ~’, hunong.
+✎ pagsulat: ‘Guess the number’, hunong.
+☞ x ≔ Numero sa taliwala: 1 ug: 10.
+☞ q ≔ 0.
+q ≔ Programa pangutana.
+{ 
+	✎ pagsulat: ‘wrong!’, hunong.
+	q ≔ Programa pangutana.
 
-{ q := Programa pangutana. } samtang: { ↲ x gidaghanon ≠ q gidaghanon. }.
-
-✎ pagsulat: ':-)↵'.
+} samtang: { ↲ x gidaghanon ≠ q gidaghanon. }.
+✎ pagsulat: ‘correct!’, hunong.

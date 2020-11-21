@@ -1,1 +1,25 @@
-✎ навиштан: 'Hello World', Ист.
+✎ навиштан: ‘~ Password Generator ~’, Ист.
+☞ ҳисоб ≔ 0.
+{
+	✎ навиштан: ‘How many characters (16-30)?’, Ист.
+	ҳисоб ≔ Барнома пурсед шумора мутлаќ.
+
+	(ҳисоб < 16) ҳақиқӣ: {
+		✎ навиштан: ‘That is not enough, please enter a number between 16 and 30.’, Ист.
+	}.
+	(ҳисоб > 30) ҳақиқӣ: {
+		✎ навиштан: ‘That is too long, some systems may reject passwords that long.’, Ист.
+	}.
+} дар ҳоле ки: { ↲ ((ҳисоб < 16) or: (ҳисоб > 30)). }.
+☞ аломатҳои ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		аломатҳои хислат: ( 
+		Шумора
+		миёни: 1
+		ва: аломатҳои дарозӣ
+	).
+	password замима: char.
+} × ҳисоб.
+✎ навиштан: password, Ист.

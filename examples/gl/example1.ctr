@@ -1,1 +1,25 @@
-✎ escribir: 'Hello World', parar.
+✎ escribir: ‘~ Password Generator ~’, parar.
+☞ conta ≔ 0.
+{
+	✎ escribir: ‘How many characters (16-30)?’, parar.
+	conta ≔ Programa pregunta número absoluto.
+
+	(conta < 16) certo: {
+		✎ escribir: ‘That is not enough, please enter a number between 16 and 30.’, parar.
+	}.
+	(conta > 30) certo: {
+		✎ escribir: ‘That is too long, some systems may reject passwords that long.’, parar.
+	}.
+} mentres: { ↲ ((conta < 16) or: (conta > 30)). }.
+☞ personaxes ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		personaxes personaxe: ( 
+		Número
+		entre: 1
+		_e: personaxes de lonxitude
+	).
+	password anexo: char.
+} × conta.
+✎ escribir: password, parar.

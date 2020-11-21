@@ -1,1 +1,25 @@
-✎ жазу: 'Hello World', Тоқта.
+✎ жазу: ‘~ Password Generator ~’, Тоқта.
+☞ санау ≔ 0.
+{
+	✎ жазу: ‘How many characters (16-30)?’, Тоқта.
+	санау ≔ Бағдарлама сұрау саны абсолютті.
+
+	(санау < 16) шын: {
+		✎ жазу: ‘That is not enough, please enter a number between 16 and 30.’, Тоқта.
+	}.
+	(санау > 30) шын: {
+		✎ жазу: ‘That is too long, some systems may reject passwords that long.’, Тоқта.
+	}.
+} ал: { ↲ ((санау < 16) or: (санау > 30)). }.
+☞ таңбалар ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		таңбалар сипаты: ( 
+		Сан
+		арасында: 1
+		және: таңбалар ұзындығы
+	).
+	password қосу: char.
+} × санау.
+✎ жазу: password, Тоқта.

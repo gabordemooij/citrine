@@ -1,6 +1,11 @@
-☞ x := Broj između: 1 _i: 10.
-☞ q := 0.
+✎ pisati: ‘~ Number Game ~’, stani.
+✎ pisati: ‘Guess the number’, stani.
+☞ x ≔ Broj između: 1 _i: 10.
+☞ q ≔ 0.
+q ≔ Program pitaj.
+{ 
+	✎ pisati: ‘wrong!’, stani.
+	q ≔ Program pitaj.
 
-{ q := Program pitaj. } dok: { ↲ x broj ≠ q broj. }.
-
-✎ pisati: ':-)↵'.
+} dok: { ↲ x broj ≠ q broj. }.
+✎ pisati: ‘correct!’, stani.

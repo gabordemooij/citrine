@@ -1,1 +1,25 @@
-✎ ලියන්න: 'Hello World', නවත්වන්න.
+✎ ලියන්න: ‘~ Password Generator ~’, නවත්වන්න.
+☞ ගණන් කරන්න ≔ 0.
+{
+	✎ ලියන්න: ‘How many characters (16-30)?’, නවත්වන්න.
+	ගණන් කරන්න ≔ වැඩසටහන අහන්න _අංකය නිරපේක්ෂ.
+
+	(ගණන් කරන්න < 16) _සැබෑ: {
+		✎ ලියන්න: ‘That is not enough, please enter a number between 16 and 30.’, නවත්වන්න.
+	}.
+	(ගණන් කරන්න > 30) _සැබෑ: {
+		✎ ලියන්න: ‘That is too long, some systems may reject passwords that long.’, නවත්වන්න.
+	}.
+} අතර: { ↲ ((ගණන් කරන්න < 16) or: (ගණන් කරන්න > 30)). }.
+☞ අක්ෂර ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		අක්ෂර ස්වභාවය: ( 
+		අංකය
+		අතර: 1
+		සහ: අක්ෂර දිග
+	).
+	password එකතු කරන්න: char.
+} × ගණන් කරන්න.
+✎ ලියන්න: password, නවත්වන්න.

@@ -1,1 +1,25 @@
-✎ ຂຽນ: 'Hello World', ຢຸດ.
+✎ ຂຽນ: ‘~ Password Generator ~’, ຢຸດ.
+☞ ນັບ ≔ 0.
+{
+	✎ ຂຽນ: ‘How many characters (16-30)?’, ຢຸດ.
+	ນັບ ≔ ແຜນງານ ຖາມ ຈໍານວນ ຢ່າງແທ້ຈິງ.
+
+	(ນັບ < 16) ຄວາມຈິງ: {
+		✎ ຂຽນ: ‘That is not enough, please enter a number between 16 and 30.’, ຢຸດ.
+	}.
+	(ນັບ > 30) ຄວາມຈິງ: {
+		✎ ຂຽນ: ‘That is too long, some systems may reject passwords that long.’, ຢຸດ.
+	}.
+} ໃນຂະນະທີ່: { ↲ ((ນັບ < 16) or: (ນັບ > 30)). }.
+☞ ຕົວລະຄອນ ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		ຕົວລະຄອນ ລັກສະນະ: ( 
+		ເລກ
+		ລະຫວ່າງ: 1
+		ແລະ: ຕົວລະຄອນ ຄວາມຍາວ
+	).
+	password ເພີ່ມເຕີມ: char.
+} × ນັບ.
+✎ ຂຽນ: password, ຢຸດ.

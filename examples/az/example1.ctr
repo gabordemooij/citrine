@@ -1,1 +1,25 @@
-✎ yaz: 'Hello World', dayan.
+✎ yaz: ‘~ Password Generator ~’, dayan.
+☞ saymaq ≔ 0.
+{
+	✎ yaz: ‘How many characters (16-30)?’, dayan.
+	saymaq ≔ Proqram soruş nömrə mütləq.
+
+	(saymaq < 16) doğru: {
+		✎ yaz: ‘That is not enough, please enter a number between 16 and 30.’, dayan.
+	}.
+	(saymaq > 30) doğru: {
+		✎ yaz: ‘That is too long, some systems may reject passwords that long.’, dayan.
+	}.
+} isə: { ↲ ((saymaq < 16) or: (saymaq > 30)). }.
+☞ simvol ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		simvol xarakter: ( 
+		Nömrə
+		arasında: 1
+		və: simvol uzunluğu
+	).
+	password əlavə etmək: char.
+} × saymaq.
+✎ yaz: password, dayan.

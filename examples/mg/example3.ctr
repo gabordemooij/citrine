@@ -1,6 +1,11 @@
-☞ x := Number eo: 1 ary: 10.
-☞ q := 0.
+✎ manoratra: ‘~ Number Game ~’, mijanòna.
+✎ manoratra: ‘Guess the number’, mijanòna.
+☞ x ≔ Number eo: 1 ary: 10.
+☞ q ≔ 0.
+q ≔ Program manontany.
+{ 
+	✎ manoratra: ‘wrong!’, mijanòna.
+	q ≔ Program manontany.
 
-{ q := Program manontany. } raha: { ↲ x isa ≠ q isa. }.
-
-✎ manoratra: ':-)↵'.
+} raha: { ↲ x isa ≠ q isa. }.
+✎ manoratra: ‘correct!’, mijanòna.

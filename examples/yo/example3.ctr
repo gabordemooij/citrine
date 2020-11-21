@@ -1,6 +1,11 @@
-☞ x := Nọmba laarin: 1 ati: 10.
-☞ q := 0.
+✎ kọ: ‘~ Number Game ~’, duro.
+✎ kọ: ‘Guess the number’, duro.
+☞ x ≔ Nọmba laarin: 1 ati: 10.
+☞ q ≔ 0.
+q ≔ Eto béèrè.
+{ 
+	✎ kọ: ‘wrong!’, duro.
+	q ≔ Eto béèrè.
 
-{ q := Eto béèrè. } nigba ti: { ↲ x nọmba ≠ q nọmba. }.
-
-✎ kọ: ':-)↵'.
+} nigba ti: { ↲ x nọmba ≠ q nọmba. }.
+✎ kọ: ‘correct!’, duro.

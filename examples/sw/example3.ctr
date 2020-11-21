@@ -1,6 +1,11 @@
-☞ x := Nambari kati ya: 1 na: 10.
-☞ q := 0.
+✎ andika: ‘~ Number Game ~’, acha.
+✎ andika: ‘Guess the number’, acha.
+☞ x ≔ Nambari kati ya: 1 na: 10.
+☞ q ≔ 0.
+q ≔ Programu uliza.
+{ 
+	✎ andika: ‘wrong!’, acha.
+	q ≔ Programu uliza.
 
-{ q := Programu uliza. } wakati: { ↲ x nambari ≠ q nambari. }.
-
-✎ andika: ':-)↵'.
+} wakati: { ↲ x nambari ≠ q nambari. }.
+✎ andika: ‘correct!’, acha.

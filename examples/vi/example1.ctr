@@ -1,1 +1,25 @@
-✎ viết: 'Hello World', dừng lại.
+✎ viết: ‘~ Password Generator ~’, dừng lại.
+☞ đếm ≔ 0.
+{
+	✎ viết: ‘How many characters (16-30)?’, dừng lại.
+	đếm ≔ Chương trình hỏi con số tuyệt đối.
+
+	(đếm < 16) thật: {
+		✎ viết: ‘That is not enough, please enter a number between 16 and 30.’, dừng lại.
+	}.
+	(đếm > 30) thật: {
+		✎ viết: ‘That is too long, some systems may reject passwords that long.’, dừng lại.
+	}.
+} trong khi: { ↲ ((đếm < 16) or: (đếm > 30)). }.
+☞ nhân vật ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		nhân vật tính cách: ( 
+		Con số
+		giữa và: 1
+		__: nhân vật chiều dài
+	).
+	password nối thêm: char.
+} × đếm.
+✎ viết: password, dừng lại.

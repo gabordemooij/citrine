@@ -1,1 +1,25 @@
-✎ пішыце: 'Hello World', прыпынак.
+✎ пішыце: ‘~ Password Generator ~’, прыпынак.
+☞ лічыць ≔ 0.
+{
+	✎ пішыце: ‘How many characters (16-30)?’, прыпынак.
+	лічыць ≔ Праграма пытацца лік абсалютны.
+
+	(лічыць < 16) праўда: {
+		✎ пішыце: ‘That is not enough, please enter a number between 16 and 30.’, прыпынак.
+	}.
+	(лічыць > 30) праўда: {
+		✎ пішыце: ‘That is too long, some systems may reject passwords that long.’, прыпынак.
+	}.
+} час: { ↲ ((лічыць < 16) or: (лічыць > 30)). }.
+☞ персанажаў ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		персанажаў характар: ( 
+		Нумар
+		паміж: 1
+		_і: персанажаў даўжыня
+	).
+	password далучыць: char.
+} × лічыць.
+✎ пішыце: password, прыпынак.

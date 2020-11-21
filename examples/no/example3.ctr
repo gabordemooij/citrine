@@ -1,6 +1,11 @@
-☞ x := Nummer mellom og: 1 __: 10.
-☞ q := 0.
+✎ skrive: ‘~ Number Game ~’, stoppe.
+✎ skrive: ‘Guess the number’, stoppe.
+☞ x ≔ Nummer mellom og: 1 __: 10.
+☞ q ≔ 0.
+q ≔ Program spørre.
+{ 
+	✎ skrive: ‘wrong!’, stoppe.
+	q ≔ Program spørre.
 
-{ q := Program spørre. } samtidig som: { ↲ x nummer ≠ q nummer. }.
-
-✎ skrive: ':-)↵'.
+} samtidig som: { ↲ x nummer ≠ q nummer. }.
+✎ skrive: ‘correct!’, stoppe.

@@ -1,14 +1,63 @@
-☞ f := Album ← 0 ; 1.
+✎ scribe: ‘~ Roman numerals ~’, prohibere.
+✎ scribe: ‘Give a number to convert:’, prohibere.
+☞ numerus ≔ Program quaerere numerus absoluta.
+
+(numerus = 0) verum: {
+	✎ scribe: ‘Nulla’, prohibere.
+	Program finis.
+}.
 
 {
-	☞ a := f tandem.
-
-	☞ b := f secundo novissimo.
-
-	☞ sum := (a + b).
-
-	✎ scribe: sum, prohibere.
+	{
+		(numerus ≥ 1000) verum: {
+			✎ scribe: ‘Ⅿ’.
+			numerus auferetis: 1000.
+		}, intermissum.
+	
+		(numerus ≥ 500) verum: {
+			✎ scribe: ‘Ⅾ’.
+			numerus auferetis: 500.
+		}, intermissum.
+	
+		(numerus ≥ 100) verum: {
+			✎ scribe: ‘Ⅽ’.
+			numerus auferetis: 100.
+		}, intermissum.
+	
+		(numerus ≥ 50) verum: {
+			✎ scribe: ‘Ⅼ’.
+			numerus auferetis: 50.
+		}, intermissum.
+	
+		(numerus ≥ 50) verum: {
+			✎ scribe: ‘Ⅼ’.
+			numerus auferetis: 50.
+		}, intermissum.
+	
+		(numerus ≥ 10) verum: {
+			✎ scribe: ‘Ⅹ’.
+			numerus auferetis: 10.
+		}, intermissum.
 		
-	f append: sum.
-
-} * 12.
+		(numerus ≥ 9) verum: {
+			✎ scribe: ‘Ⅸ’.
+			numerus auferetis: 9.
+		}, intermissum.
+		
+		(numerus ≥ 5) verum: {
+			✎ scribe: ‘Ⅴ’.
+			numerus auferetis: 5.
+		}, intermissum.
+		
+		(numerus ≥ 4) verum: {
+			✎ scribe: ‘Ⅳ’.
+			numerus auferetis: 4.
+		}, intermissum.
+		
+		(numerus ≥ 1) verum: {
+			✎ scribe: ‘Ⅰ’.
+			numerus auferetis: 1.
+		}, intermissum.
+	} procedure.
+	
+} dum;__: { ↲ numerus > 0. }.

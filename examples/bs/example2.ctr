@@ -1,14 +1,63 @@
-☞ f := Lista ← 0 ; 1.
+✎ pisati: ‘~ Roman numerals ~’, stani.
+✎ pisati: ‘Give a number to convert:’, stani.
+☞ broj ≔ Program pitaj broj apsolutni.
+
+(broj = 0) istinito: {
+	✎ pisati: ‘Nulla’, stani.
+	Program kraj.
+}.
 
 {
-	☞ a := f zadnji.
-
-	☞ b := f drugi zadnji.
-
-	☞ sum := (a + b).
-
-	✎ pisati: sum, stani.
+	{
+		(broj ≥ 1000) istinito: {
+			✎ pisati: ‘Ⅿ’.
+			broj oduzeti: 1000.
+		}, odmor.
+	
+		(broj ≥ 500) istinito: {
+			✎ pisati: ‘Ⅾ’.
+			broj oduzeti: 500.
+		}, odmor.
+	
+		(broj ≥ 100) istinito: {
+			✎ pisati: ‘Ⅽ’.
+			broj oduzeti: 100.
+		}, odmor.
+	
+		(broj ≥ 50) istinito: {
+			✎ pisati: ‘Ⅼ’.
+			broj oduzeti: 50.
+		}, odmor.
+	
+		(broj ≥ 50) istinito: {
+			✎ pisati: ‘Ⅼ’.
+			broj oduzeti: 50.
+		}, odmor.
+	
+		(broj ≥ 10) istinito: {
+			✎ pisati: ‘Ⅹ’.
+			broj oduzeti: 10.
+		}, odmor.
 		
-	f dodaj: sum.
-
-} * 12.
+		(broj ≥ 9) istinito: {
+			✎ pisati: ‘Ⅸ’.
+			broj oduzeti: 9.
+		}, odmor.
+		
+		(broj ≥ 5) istinito: {
+			✎ pisati: ‘Ⅴ’.
+			broj oduzeti: 5.
+		}, odmor.
+		
+		(broj ≥ 4) istinito: {
+			✎ pisati: ‘Ⅳ’.
+			broj oduzeti: 4.
+		}, odmor.
+		
+		(broj ≥ 1) istinito: {
+			✎ pisati: ‘Ⅰ’.
+			broj oduzeti: 1.
+		}, odmor.
+	} postupak.
+	
+} dok: { ↲ broj > 0. }.

@@ -1,1 +1,25 @@
-✎ დაწერე: 'Hello World', შეჩერება.
+✎ დაწერე: ‘~ Password Generator ~’, შეჩერება.
+☞ ითვლიან ≔ 0.
+{
+	✎ დაწერე: ‘How many characters (16-30)?’, შეჩერება.
+	ითვლიან ≔ პროგრამა იკითხეთ ნომერი აბსოლუტური.
+
+	(ითვლიან < 16) _მართალია: {
+		✎ დაწერე: ‘That is not enough, please enter a number between 16 and 30.’, შეჩერება.
+	}.
+	(ითვლიან > 30) _მართალია: {
+		✎ დაწერე: ‘That is too long, some systems may reject passwords that long.’, შეჩერება.
+	}.
+} ხოლო: { ↲ ((ითვლიან < 16) or: (ითვლიან > 30)). }.
+☞ პერსონაჟები ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		პერსონაჟები ხასიათი: ( 
+		რიცხვი
+		შორის: 1
+		__: პერსონაჟები სიგრძე
+	).
+	password დანართი: char.
+} × ითვლიან.
+✎ დაწერე: password, შეჩერება.

@@ -1,1 +1,25 @@
-✎ వ్రాయడానికి: 'Hello World', స్టాప్.
+✎ వ్రాయడానికి: ‘~ Password Generator ~’, స్టాప్.
+☞ కౌంట్ ≔ 0.
+{
+	✎ వ్రాయడానికి: ‘How many characters (16-30)?’, స్టాప్.
+	కౌంట్ ≔ ప్రోగ్రామ్ అడగండి _సంఖ్య సంపూర్ణ.
+
+	(కౌంట్ < 16) నిజమైన: {
+		✎ వ్రాయడానికి: ‘That is not enough, please enter a number between 16 and 30.’, స్టాప్.
+	}.
+	(కౌంట్ > 30) నిజమైన: {
+		✎ వ్రాయడానికి: ‘That is too long, some systems may reject passwords that long.’, స్టాప్.
+	}.
+} అయితే: { ↲ ((కౌంట్ < 16) or: (కౌంట్ > 30)). }.
+☞ అక్షరాలు ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		అక్షరాలు పాత్ర: ( 
+		సంఖ్య
+		బిట్వీన్ మరియు: 1
+		__: అక్షరాలు పొడవు
+	).
+	password append: char.
+} × కౌంట్.
+✎ వ్రాయడానికి: password, స్టాప్.

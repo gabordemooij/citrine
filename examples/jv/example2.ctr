@@ -1,14 +1,63 @@
-☞ f := Dhaptar ← 0 ; 1.
+✎ nulis: ‘~ Roman numerals ~’, mandheg.
+✎ nulis: ‘Give a number to convert:’, mandheg.
+☞ nomer ≔ Program takon nomer mutlak.
+
+(nomer = 0) bener: {
+	✎ nulis: ‘Nulla’, mandheg.
+	Program mungkasi.
+}.
 
 {
-	☞ a := f terakhir.
-
-	☞ b := f kaloro pungkasan.
-
-	☞ sum := (a + b).
-
-	✎ nulis: sum, mandheg.
+	{
+		(nomer ≥ 1000) bener: {
+			✎ nulis: ‘Ⅿ’.
+			nomer nyuda: 1000.
+		}, tugel.
+	
+		(nomer ≥ 500) bener: {
+			✎ nulis: ‘Ⅾ’.
+			nomer nyuda: 500.
+		}, tugel.
+	
+		(nomer ≥ 100) bener: {
+			✎ nulis: ‘Ⅽ’.
+			nomer nyuda: 100.
+		}, tugel.
+	
+		(nomer ≥ 50) bener: {
+			✎ nulis: ‘Ⅼ’.
+			nomer nyuda: 50.
+		}, tugel.
+	
+		(nomer ≥ 50) bener: {
+			✎ nulis: ‘Ⅼ’.
+			nomer nyuda: 50.
+		}, tugel.
+	
+		(nomer ≥ 10) bener: {
+			✎ nulis: ‘Ⅹ’.
+			nomer nyuda: 10.
+		}, tugel.
 		
-	f lampiran: sum.
-
-} * 12.
+		(nomer ≥ 9) bener: {
+			✎ nulis: ‘Ⅸ’.
+			nomer nyuda: 9.
+		}, tugel.
+		
+		(nomer ≥ 5) bener: {
+			✎ nulis: ‘Ⅴ’.
+			nomer nyuda: 5.
+		}, tugel.
+		
+		(nomer ≥ 4) bener: {
+			✎ nulis: ‘Ⅳ’.
+			nomer nyuda: 4.
+		}, tugel.
+		
+		(nomer ≥ 1) bener: {
+			✎ nulis: ‘Ⅰ’.
+			nomer nyuda: 1.
+		}, tugel.
+	} prosedur.
+	
+} nalika: { ↲ nomer > 0. }.

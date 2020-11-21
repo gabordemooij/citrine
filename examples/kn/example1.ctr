@@ -1,1 +1,25 @@
-✎ ಬರೆಯಿರಿ: 'Hello World', ನಿಲ್ಲಿಸಿ.
+✎ ಬರೆಯಿರಿ: ‘~ Password Generator ~’, ನಿಲ್ಲಿಸಿ.
+☞ ಎಣಿಕೆ ≔ 0.
+{
+	✎ ಬರೆಯಿರಿ: ‘How many characters (16-30)?’, ನಿಲ್ಲಿಸಿ.
+	ಎಣಿಕೆ ≔ ಕಾರ್ಯಕ್ರಮ ಕೇಳಿ _ಸಂಖ್ಯೆ ಸಂಪೂರ್ಣ.
+
+	(ಎಣಿಕೆ < 16) _ನಿಜ: {
+		✎ ಬರೆಯಿರಿ: ‘That is not enough, please enter a number between 16 and 30.’, ನಿಲ್ಲಿಸಿ.
+	}.
+	(ಎಣಿಕೆ > 30) _ನಿಜ: {
+		✎ ಬರೆಯಿರಿ: ‘That is too long, some systems may reject passwords that long.’, ನಿಲ್ಲಿಸಿ.
+	}.
+} ಹಾಗೆಯೇ: { ↲ ((ಎಣಿಕೆ < 16) or: (ಎಣಿಕೆ > 30)). }.
+☞ ಅಕ್ಷರಗಳು ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		ಅಕ್ಷರಗಳು ಅಕ್ಷರ: ( 
+		ಸಂಖ್ಯೆ
+		ನಡುವೆ: 1
+		ಮತ್ತು: ಅಕ್ಷರಗಳು ಉದ್ದ
+	).
+	password ಸೇರಿಸಿ: char.
+} × ಎಣಿಕೆ.
+✎ ಬರೆಯಿರಿ: password, ನಿಲ್ಲಿಸಿ.

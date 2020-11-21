@@ -1,6 +1,11 @@
-☞ x := Numara arasında: 1 ve: 10.
-☞ q := 0.
+✎ yazmak: ‘~ Number Game ~’, dur.
+✎ yazmak: ‘Guess the number’, dur.
+☞ x ≔ Numara arasında: 1 ve: 10.
+☞ q ≔ 0.
+q ≔ Program sor.
+{ 
+	✎ yazmak: ‘wrong!’, dur.
+	q ≔ Program sor.
 
-{ q := Program sor. } süre: { ↲ x numara ≠ q numara. }.
-
-✎ yazmak: ':-)↵'.
+} süre: { ↲ x numara ≠ q numara. }.
+✎ yazmak: ‘correct!’, dur.

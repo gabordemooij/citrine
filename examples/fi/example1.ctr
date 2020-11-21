@@ -1,1 +1,25 @@
-✎ kirjoittaa: 'Hello World', lopettaa.
+✎ kirjoittaa: ‘~ Password Generator ~’, lopettaa.
+☞ kreivi ≔ 0.
+{
+	✎ kirjoittaa: ‘How many characters (16-30)?’, lopettaa.
+	kreivi ≔ Ohjelmoida kysyä määrä absoluuttinen.
+
+	(kreivi < 16) totta: {
+		✎ kirjoittaa: ‘That is not enough, please enter a number between 16 and 30.’, lopettaa.
+	}.
+	(kreivi > 30) totta: {
+		✎ kirjoittaa: ‘That is too long, some systems may reject passwords that long.’, lopettaa.
+	}.
+} sillä aikaa: { ↲ ((kreivi < 16) or: (kreivi > 30)). }.
+☞ merkkiä ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		merkkiä merkki: ( 
+		Määrä
+		välillä: 1
+		ja: merkkiä pituus
+	).
+	password append: char.
+} × kreivi.
+✎ kirjoittaa: password, lopettaa.

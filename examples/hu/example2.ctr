@@ -1,14 +1,63 @@
-☞ f := Lista ← 0 ; 1.
+✎ ír: ‘~ Roman numerals ~’, állj meg.
+✎ ír: ‘Give a number to convert:’, állj meg.
+☞ szám ≔ Program kérdez szám abszolút.
+
+(szám = 0) igaz: {
+	✎ ír: ‘Nulla’, állj meg.
+	Program vég.
+}.
 
 {
-	☞ a := f utolsó.
-
-	☞ b := f utolsó előtti.
-
-	☞ sum := (a + b).
-
-	✎ ír: sum, állj meg.
+	{
+		(szám ≥ 1000) igaz: {
+			✎ ír: ‘Ⅿ’.
+			szám kivonás: 1000.
+		}, szünet.
+	
+		(szám ≥ 500) igaz: {
+			✎ ír: ‘Ⅾ’.
+			szám kivonás: 500.
+		}, szünet.
+	
+		(szám ≥ 100) igaz: {
+			✎ ír: ‘Ⅽ’.
+			szám kivonás: 100.
+		}, szünet.
+	
+		(szám ≥ 50) igaz: {
+			✎ ír: ‘Ⅼ’.
+			szám kivonás: 50.
+		}, szünet.
+	
+		(szám ≥ 50) igaz: {
+			✎ ír: ‘Ⅼ’.
+			szám kivonás: 50.
+		}, szünet.
+	
+		(szám ≥ 10) igaz: {
+			✎ ír: ‘Ⅹ’.
+			szám kivonás: 10.
+		}, szünet.
 		
-	f append: sum.
-
-} * 12.
+		(szám ≥ 9) igaz: {
+			✎ ír: ‘Ⅸ’.
+			szám kivonás: 9.
+		}, szünet.
+		
+		(szám ≥ 5) igaz: {
+			✎ ír: ‘Ⅴ’.
+			szám kivonás: 5.
+		}, szünet.
+		
+		(szám ≥ 4) igaz: {
+			✎ ír: ‘Ⅳ’.
+			szám kivonás: 4.
+		}, szünet.
+		
+		(szám ≥ 1) igaz: {
+			✎ ír: ‘Ⅰ’.
+			szám kivonás: 1.
+		}, szünet.
+	} eljárás.
+	
+} míg: { ↲ szám > 0. }.

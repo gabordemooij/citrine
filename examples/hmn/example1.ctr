@@ -1,1 +1,25 @@
-✎ sau ntawv: 'Hello World', tsum.
+✎ sau ntawv: ‘~ Password Generator ~’, tsum.
+☞ suav ≔ 0.
+{
+	✎ sau ntawv: ‘How many characters (16-30)?’, tsum.
+	suav ≔ Kev Pabcuam nug tus naj npawb tsis.
+
+	(suav < 16) muaj tseeb: {
+		✎ sau ntawv: ‘That is not enough, please enter a number between 16 and 30.’, tsum.
+	}.
+	(suav > 30) muaj tseeb: {
+		✎ sau ntawv: ‘That is too long, some systems may reject passwords that long.’, tsum.
+	}.
+} thaum lub sij hawm: { ↲ ((suav < 16) or: (suav > 30)). }.
+☞ cim ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		cim cim: ( 
+		Tooj
+		ntawm: 1
+		thiab: cim ntev
+	).
+	password txuas ntxiv: char.
+} × suav.
+✎ sau ntawv: password, tsum.

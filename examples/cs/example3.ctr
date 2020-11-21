@@ -1,6 +1,11 @@
-☞ x := Číslo mezi a: 1 __: 10.
-☞ q := 0.
+✎ psát: „~ Number Game ~“, stop.
+✎ psát: „Guess the number“, stop.
+☞ x ≔ Číslo mezi: 1 a hodnotou: 10.
+☞ q ≔ 0.
+q ≔ Program zeptat se.
+{ 
+	✎ psát: „wrong!“, stop.
+	q ≔ Program zeptat se.
 
-{ q := Program dotázat se. } zatímco: { ↲ x číslo ≠ q číslo. }.
-
-✎ napsat: ':-)↵'.
+} zatímco: { ↲ x číslo ≠ q číslo. }.
+✎ psát: „correct!“, stop.

@@ -1,14 +1,63 @@
-☞ f := Lista ← 0 ; 1.
+✎ escribir: ‘~ Roman numerals ~’, parar.
+✎ escribir: ‘Give a number to convert:’, parar.
+☞ número ≔ Programa pregunta número absoluto.
+
+(número = 0) certo: {
+	✎ escribir: ‘Nulla’, parar.
+	Programa final.
+}.
 
 {
-	☞ a := f último.
-
-	☞ b := f segundo último.
-
-	☞ sum := (a + b).
-
-	✎ escribir: sum, parar.
+	{
+		(número ≥ 1000) certo: {
+			✎ escribir: ‘Ⅿ’.
+			número restar: 1000.
+		}, romper.
+	
+		(número ≥ 500) certo: {
+			✎ escribir: ‘Ⅾ’.
+			número restar: 500.
+		}, romper.
+	
+		(número ≥ 100) certo: {
+			✎ escribir: ‘Ⅽ’.
+			número restar: 100.
+		}, romper.
+	
+		(número ≥ 50) certo: {
+			✎ escribir: ‘Ⅼ’.
+			número restar: 50.
+		}, romper.
+	
+		(número ≥ 50) certo: {
+			✎ escribir: ‘Ⅼ’.
+			número restar: 50.
+		}, romper.
+	
+		(número ≥ 10) certo: {
+			✎ escribir: ‘Ⅹ’.
+			número restar: 10.
+		}, romper.
 		
-	f anexo: sum.
-
-} * 12.
+		(número ≥ 9) certo: {
+			✎ escribir: ‘Ⅸ’.
+			número restar: 9.
+		}, romper.
+		
+		(número ≥ 5) certo: {
+			✎ escribir: ‘Ⅴ’.
+			número restar: 5.
+		}, romper.
+		
+		(número ≥ 4) certo: {
+			✎ escribir: ‘Ⅳ’.
+			número restar: 4.
+		}, romper.
+		
+		(número ≥ 1) certo: {
+			✎ escribir: ‘Ⅰ’.
+			número restar: 1.
+		}, romper.
+	} procedemento.
+	
+} mentres: { ↲ número > 0. }.

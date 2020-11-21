@@ -1,1 +1,25 @@
-✎ píšu: 'Hello World', zastávka.
+✎ píšu: ‘~ Password Generator ~’, zastávka.
+☞ počítať ≔ 0.
+{
+	✎ píšu: ‘How many characters (16-30)?’, zastávka.
+	počítať ≔ Program opýtať sa _číslo absolútny.
+
+	(počítať < 16) true: {
+		✎ píšu: ‘That is not enough, please enter a number between 16 and 30.’, zastávka.
+	}.
+	(počítať > 30) true: {
+		✎ píšu: ‘That is too long, some systems may reject passwords that long.’, zastávka.
+	}.
+} zatiaľ čo: { ↲ ((počítať < 16) or: (počítať > 30)). }.
+☞ znaky ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		znaky znak: ( 
+		číslo
+		medzi a: 1
+		__: znaky dĺžka
+	).
+	password _pripojiť: char.
+} × počítať.
+✎ píšu: password, zastávka.

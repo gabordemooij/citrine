@@ -1,14 +1,63 @@
-☞ f := Liste ← 0 ; 1.
+✎ écrire: ‘~ Roman numerals ~’, arrêtez.
+✎ écrire: ‘Give a number to convert:’, arrêtez.
+☞ nombre ≔ Programme demander nombre absolu.
+
+(nombre = 0) vrai: {
+	✎ écrire: ‘Nulla’, arrêtez.
+	Programme fin.
+}.
 
 {
-	☞ a := f dernier.
-
-	☞ b := f avant-dernier.
-
-	☞ sum := (a + b).
-
-	✎ écrire: sum, arrêtez.
+	{
+		(nombre ≥ 1000) vrai: {
+			✎ écrire: ‘Ⅿ’.
+			nombre soustraire: 1000.
+		}, pause.
+	
+		(nombre ≥ 500) vrai: {
+			✎ écrire: ‘Ⅾ’.
+			nombre soustraire: 500.
+		}, pause.
+	
+		(nombre ≥ 100) vrai: {
+			✎ écrire: ‘Ⅽ’.
+			nombre soustraire: 100.
+		}, pause.
+	
+		(nombre ≥ 50) vrai: {
+			✎ écrire: ‘Ⅼ’.
+			nombre soustraire: 50.
+		}, pause.
+	
+		(nombre ≥ 50) vrai: {
+			✎ écrire: ‘Ⅼ’.
+			nombre soustraire: 50.
+		}, pause.
+	
+		(nombre ≥ 10) vrai: {
+			✎ écrire: ‘Ⅹ’.
+			nombre soustraire: 10.
+		}, pause.
 		
-	f ajouter: sum.
-
-} * 12.
+		(nombre ≥ 9) vrai: {
+			✎ écrire: ‘Ⅸ’.
+			nombre soustraire: 9.
+		}, pause.
+		
+		(nombre ≥ 5) vrai: {
+			✎ écrire: ‘Ⅴ’.
+			nombre soustraire: 5.
+		}, pause.
+		
+		(nombre ≥ 4) vrai: {
+			✎ écrire: ‘Ⅳ’.
+			nombre soustraire: 4.
+		}, pause.
+		
+		(nombre ≥ 1) vrai: {
+			✎ écrire: ‘Ⅰ’.
+			nombre soustraire: 1.
+		}, pause.
+	} procédure.
+	
+} tandis que: { ↲ nombre > 0. }.

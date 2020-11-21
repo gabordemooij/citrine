@@ -1,14 +1,63 @@
-☞ f := Zerrenda ← 0 ; 1.
+✎ idatzi: ‘~ Roman numerals ~’, geldialdia.
+✎ idatzi: ‘Give a number to convert:’, geldialdia.
+☞ zenbakia ≔ Programa galdetu zenbakia absolutua.
+
+(zenbakia = 0) egia: {
+	✎ idatzi: ‘Nulla’, geldialdia.
+	Programa end.
+}.
 
 {
-	☞ a := f azken.
-
-	☞ b := f bigarren azken.
-
-	☞ sum := (a + b).
-
-	✎ idatzi: sum, geldialdia.
+	{
+		(zenbakia ≥ 1000) egia: {
+			✎ idatzi: ‘Ⅿ’.
+			zenbakia kenketak: 1000.
+		}, break.
+	
+		(zenbakia ≥ 500) egia: {
+			✎ idatzi: ‘Ⅾ’.
+			zenbakia kenketak: 500.
+		}, break.
+	
+		(zenbakia ≥ 100) egia: {
+			✎ idatzi: ‘Ⅽ’.
+			zenbakia kenketak: 100.
+		}, break.
+	
+		(zenbakia ≥ 50) egia: {
+			✎ idatzi: ‘Ⅼ’.
+			zenbakia kenketak: 50.
+		}, break.
+	
+		(zenbakia ≥ 50) egia: {
+			✎ idatzi: ‘Ⅼ’.
+			zenbakia kenketak: 50.
+		}, break.
+	
+		(zenbakia ≥ 10) egia: {
+			✎ idatzi: ‘Ⅹ’.
+			zenbakia kenketak: 10.
+		}, break.
 		
-	f erantsi: sum.
-
-} * 12.
+		(zenbakia ≥ 9) egia: {
+			✎ idatzi: ‘Ⅸ’.
+			zenbakia kenketak: 9.
+		}, break.
+		
+		(zenbakia ≥ 5) egia: {
+			✎ idatzi: ‘Ⅴ’.
+			zenbakia kenketak: 5.
+		}, break.
+		
+		(zenbakia ≥ 4) egia: {
+			✎ idatzi: ‘Ⅳ’.
+			zenbakia kenketak: 4.
+		}, break.
+		
+		(zenbakia ≥ 1) egia: {
+			✎ idatzi: ‘Ⅰ’.
+			zenbakia kenketak: 1.
+		}, break.
+	} prozedura.
+	
+} bitartean: { ↲ zenbakia > 0. }.

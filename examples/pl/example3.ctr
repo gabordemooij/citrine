@@ -1,6 +1,11 @@
-☞ x := Numer pomiędzy i: 1 __: 10.
-☞ q := 0.
+✎ pisać: ‘~ Number Game ~’, zatrzymać.
+✎ pisać: ‘Guess the number’, zatrzymać.
+☞ x ≔ Numer pomiędzy i: 1 __: 10.
+☞ q ≔ 0.
+q ≔ Program zapytać.
+{ 
+	✎ pisać: ‘wrong!’, zatrzymać.
+	q ≔ Program zapytać.
 
-{ q := Program zapytać. } podczas: { ↲ x numer ≠ q numer. }.
-
-✎ pisać: ':-)↵'.
+} podczas: { ↲ x numer ≠ q numer. }.
+✎ pisać: ‘correct!’, zatrzymać.

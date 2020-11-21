@@ -1,14 +1,63 @@
-☞ f := List ← 0 ; 1.
+✎ skriuwe: ‘~ Roman numerals ~’, halte.
+✎ skriuwe: ‘Give a number to convert:’, halte.
+☞ nûmer ≔ Programma freegje nûmer absolút.
+
+(nûmer = 0) wier: {
+	✎ skriuwe: ‘Nulla’, halte.
+	Programma ein.
+}.
 
 {
-	☞ a := f lêst.
-
-	☞ b := f twadde lêste.
-
-	☞ sum := (a + b).
-
-	✎ skriuwe: sum, halte.
+	{
+		(nûmer ≥ 1000) wier: {
+			✎ skriuwe: ‘Ⅿ’.
+			nûmer subtrahearje: 1000.
+		}, brekke.
+	
+		(nûmer ≥ 500) wier: {
+			✎ skriuwe: ‘Ⅾ’.
+			nûmer subtrahearje: 500.
+		}, brekke.
+	
+		(nûmer ≥ 100) wier: {
+			✎ skriuwe: ‘Ⅽ’.
+			nûmer subtrahearje: 100.
+		}, brekke.
+	
+		(nûmer ≥ 50) wier: {
+			✎ skriuwe: ‘Ⅼ’.
+			nûmer subtrahearje: 50.
+		}, brekke.
+	
+		(nûmer ≥ 50) wier: {
+			✎ skriuwe: ‘Ⅼ’.
+			nûmer subtrahearje: 50.
+		}, brekke.
+	
+		(nûmer ≥ 10) wier: {
+			✎ skriuwe: ‘Ⅹ’.
+			nûmer subtrahearje: 10.
+		}, brekke.
 		
-	f tafoegje: sum.
-
-} * 12.
+		(nûmer ≥ 9) wier: {
+			✎ skriuwe: ‘Ⅸ’.
+			nûmer subtrahearje: 9.
+		}, brekke.
+		
+		(nûmer ≥ 5) wier: {
+			✎ skriuwe: ‘Ⅴ’.
+			nûmer subtrahearje: 5.
+		}, brekke.
+		
+		(nûmer ≥ 4) wier: {
+			✎ skriuwe: ‘Ⅳ’.
+			nûmer subtrahearje: 4.
+		}, brekke.
+		
+		(nûmer ≥ 1) wier: {
+			✎ skriuwe: ‘Ⅰ’.
+			nûmer subtrahearje: 1.
+		}, brekke.
+	} proseduere.
+	
+} wylst: { ↲ nûmer > 0. }.

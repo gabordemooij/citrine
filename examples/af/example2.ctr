@@ -1,14 +1,63 @@
-☞ f := Lys ← 0 ; 1.
+✎ skryf: ‘~ Roman numerals ~’, stop.
+✎ skryf: ‘Give a number to convert:’, stop.
+☞ aantal ≔ Program vra aantal absolute.
+
+(aantal = 0) waar: {
+	✎ skryf: ‘Nulla’, stop.
+	Program einde.
+}.
 
 {
-	☞ a := f laaste.
-
-	☞ b := f voorlaaste.
-
-	☞ sum := (a + b).
-
-	✎ skryf: sum, stop.
+	{
+		(aantal ≥ 1000) waar: {
+			✎ skryf: ‘Ⅿ’.
+			aantal aftrek: 1000.
+		}, breek.
+	
+		(aantal ≥ 500) waar: {
+			✎ skryf: ‘Ⅾ’.
+			aantal aftrek: 500.
+		}, breek.
+	
+		(aantal ≥ 100) waar: {
+			✎ skryf: ‘Ⅽ’.
+			aantal aftrek: 100.
+		}, breek.
+	
+		(aantal ≥ 50) waar: {
+			✎ skryf: ‘Ⅼ’.
+			aantal aftrek: 50.
+		}, breek.
+	
+		(aantal ≥ 50) waar: {
+			✎ skryf: ‘Ⅼ’.
+			aantal aftrek: 50.
+		}, breek.
+	
+		(aantal ≥ 10) waar: {
+			✎ skryf: ‘Ⅹ’.
+			aantal aftrek: 10.
+		}, breek.
 		
-	f aanhegnavraag: sum.
-
-} * 12.
+		(aantal ≥ 9) waar: {
+			✎ skryf: ‘Ⅸ’.
+			aantal aftrek: 9.
+		}, breek.
+		
+		(aantal ≥ 5) waar: {
+			✎ skryf: ‘Ⅴ’.
+			aantal aftrek: 5.
+		}, breek.
+		
+		(aantal ≥ 4) waar: {
+			✎ skryf: ‘Ⅳ’.
+			aantal aftrek: 4.
+		}, breek.
+		
+		(aantal ≥ 1) waar: {
+			✎ skryf: ‘Ⅰ’.
+			aantal aftrek: 1.
+		}, breek.
+	} prosedure.
+	
+} terwyl: { ↲ aantal > 0. }.

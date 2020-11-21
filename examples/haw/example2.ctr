@@ -1,14 +1,63 @@
-☞ f := Palapala ← 0 ; 1.
+✎ kākau: ‘~ Roman numerals ~’, oki.
+✎ kākau: ‘Give a number to convert:’, oki.
+☞ helu ≔ Hōʻike ui helu kūʻiʻo.
+
+(helu = 0) ʻoiaʻiʻo: {
+	✎ kākau: ‘Nulla’, oki.
+	Hōʻike hope.
+}.
 
 {
-	☞ a := f hope loa.
-
-	☞ b := f lua a hope.
-
-	☞ sum := (a + b).
-
-	✎ kākau: sum, oki.
+	{
+		(helu ≥ 1000) ʻoiaʻiʻo: {
+			✎ kākau: ‘Ⅿ’.
+			helu hoʻemi: 1000.
+		}, uha.
+	
+		(helu ≥ 500) ʻoiaʻiʻo: {
+			✎ kākau: ‘Ⅾ’.
+			helu hoʻemi: 500.
+		}, uha.
+	
+		(helu ≥ 100) ʻoiaʻiʻo: {
+			✎ kākau: ‘Ⅽ’.
+			helu hoʻemi: 100.
+		}, uha.
+	
+		(helu ≥ 50) ʻoiaʻiʻo: {
+			✎ kākau: ‘Ⅼ’.
+			helu hoʻemi: 50.
+		}, uha.
+	
+		(helu ≥ 50) ʻoiaʻiʻo: {
+			✎ kākau: ‘Ⅼ’.
+			helu hoʻemi: 50.
+		}, uha.
+	
+		(helu ≥ 10) ʻoiaʻiʻo: {
+			✎ kākau: ‘Ⅹ’.
+			helu hoʻemi: 10.
+		}, uha.
 		
-	f append: sum.
-
-} * 12.
+		(helu ≥ 9) ʻoiaʻiʻo: {
+			✎ kākau: ‘Ⅸ’.
+			helu hoʻemi: 9.
+		}, uha.
+		
+		(helu ≥ 5) ʻoiaʻiʻo: {
+			✎ kākau: ‘Ⅴ’.
+			helu hoʻemi: 5.
+		}, uha.
+		
+		(helu ≥ 4) ʻoiaʻiʻo: {
+			✎ kākau: ‘Ⅳ’.
+			helu hoʻemi: 4.
+		}, uha.
+		
+		(helu ≥ 1) ʻoiaʻiʻo: {
+			✎ kākau: ‘Ⅰ’.
+			helu hoʻemi: 1.
+		}, uha.
+	} kaʻina hana.
+	
+} ʻoiai: { ↲ helu > 0. }.

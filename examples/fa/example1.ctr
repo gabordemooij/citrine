@@ -1,1 +1,25 @@
-✎ نوشتن: 'Hello World', متوقف کردن.
+✎ نوشتن: ‘~ Password Generator ~’, متوقف کردن.
+☞ شمردن ≔ 0.
+{
+	✎ نوشتن: ‘How many characters (16-30)?’, متوقف کردن.
+	شمردن ≔ برنامه پرسیدن _عدد مطلق.
+
+	(شمردن < 16) _بله: {
+		✎ نوشتن: ‘That is not enough, please enter a number between 16 and 30.’, متوقف کردن.
+	}.
+	(شمردن > 30) _بله: {
+		✎ نوشتن: ‘That is too long, some systems may reject passwords that long.’, متوقف کردن.
+	}.
+} در حالی که: { ↲ ((شمردن < 16) or: (شمردن > 30)). }.
+☞ شخصیت ها ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		شخصیت ها شخصیت: ( 
+		عدد
+		بین و: 1
+		__: شخصیت ها طول
+	).
+	password ضمیمه: char.
+} × شمردن.
+✎ نوشتن: password, متوقف کردن.

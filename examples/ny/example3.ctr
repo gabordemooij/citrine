@@ -1,6 +1,11 @@
-☞ x := Chiwerengero pakati: 1 ndi: 10.
-☞ q := 0.
+✎ lembani: ‘~ Number Game ~’, imani.
+✎ lembani: ‘Guess the number’, imani.
+☞ x ≔ Chiwerengero pakati: 1 ndi: 10.
+☞ q ≔ 0.
+q ≔ Pulogalamu funsani.
+{ 
+	✎ lembani: ‘wrong!’, imani.
+	q ≔ Pulogalamu funsani.
 
-{ q := Pulogalamu funsani. } pomwe: { ↲ x chiwerengero ≠ q chiwerengero. }.
-
-✎ lembani: ':-)↵'.
+} pomwe: { ↲ x chiwerengero ≠ q chiwerengero. }.
+✎ lembani: ‘correct!’, imani.

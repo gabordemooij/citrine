@@ -1,1 +1,25 @@
-✎ записывать: 'Hello World', стоп.
+✎ записывать: ‘~ Password Generator ~’, стоп.
+☞ подсчитывать ≔ 0.
+{
+	✎ записывать: ‘How many characters (16-30)?’, стоп.
+	подсчитывать ≔ программа спросить число абсолютный.
+
+	(подсчитывать < 16) правда: {
+		✎ записывать: ‘That is not enough, please enter a number between 16 and 30.’, стоп.
+	}.
+	(подсчитывать > 30) правда: {
+		✎ записывать: ‘That is too long, some systems may reject passwords that long.’, стоп.
+	}.
+} пока: { ↲ ((подсчитывать < 16) or: (подсчитывать > 30)). }.
+☞ персонажи ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		персонажи персонаж: ( 
+		номер
+		между и: 1
+		__: персонажи длина
+	).
+	password append: char.
+} × подсчитывать.
+✎ записывать: password, стоп.

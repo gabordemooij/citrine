@@ -1,1 +1,25 @@
-✎ skryf: 'Hello World', stop.
+✎ skryf: ‘~ Password Generator ~’, stop.
+☞ tel ≔ 0.
+{
+	✎ skryf: ‘How many characters (16-30)?’, stop.
+	tel ≔ Program vra aantal absolute.
+
+	(tel < 16) waar: {
+		✎ skryf: ‘That is not enough, please enter a number between 16 and 30.’, stop.
+	}.
+	(tel > 30) waar: {
+		✎ skryf: ‘That is too long, some systems may reject passwords that long.’, stop.
+	}.
+} terwyl: { ↲ ((tel < 16) or: (tel > 30)). }.
+☞ karakters ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		karakters karakter: ( 
+		Aantal
+		tussen: 1
+		en: karakters lengte
+	).
+	password aanhegnavraag: char.
+} × tel.
+✎ skryf: password, stop.

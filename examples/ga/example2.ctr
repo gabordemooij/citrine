@@ -1,14 +1,63 @@
-☞ f := Liosta ← 0 ; 1.
+✎ scríobh: ‘~ Roman numerals ~’, stad.
+✎ scríobh: ‘Give a number to convert:’, stad.
+☞ uimhir ≔ Clár iarr uimhir iomlán.
+
+(uimhir = 0) fíor: {
+	✎ scríobh: ‘Nulla’, stad.
+	Clár deireadh.
+}.
 
 {
-	☞ a := f seo caite.
-
-	☞ b := f an dara ceann deireanach.
-
-	☞ sum := (a + b).
-
-	✎ scríobh: sum, stad.
+	{
+		(uimhir ≥ 1000) fíor: {
+			✎ scríobh: ‘Ⅿ’.
+			uimhir dealú: 1000.
+		}, briseadh.
+	
+		(uimhir ≥ 500) fíor: {
+			✎ scríobh: ‘Ⅾ’.
+			uimhir dealú: 500.
+		}, briseadh.
+	
+		(uimhir ≥ 100) fíor: {
+			✎ scríobh: ‘Ⅽ’.
+			uimhir dealú: 100.
+		}, briseadh.
+	
+		(uimhir ≥ 50) fíor: {
+			✎ scríobh: ‘Ⅼ’.
+			uimhir dealú: 50.
+		}, briseadh.
+	
+		(uimhir ≥ 50) fíor: {
+			✎ scríobh: ‘Ⅼ’.
+			uimhir dealú: 50.
+		}, briseadh.
+	
+		(uimhir ≥ 10) fíor: {
+			✎ scríobh: ‘Ⅹ’.
+			uimhir dealú: 10.
+		}, briseadh.
 		
-	f aguisín: sum.
-
-} * 12.
+		(uimhir ≥ 9) fíor: {
+			✎ scríobh: ‘Ⅸ’.
+			uimhir dealú: 9.
+		}, briseadh.
+		
+		(uimhir ≥ 5) fíor: {
+			✎ scríobh: ‘Ⅴ’.
+			uimhir dealú: 5.
+		}, briseadh.
+		
+		(uimhir ≥ 4) fíor: {
+			✎ scríobh: ‘Ⅳ’.
+			uimhir dealú: 4.
+		}, briseadh.
+		
+		(uimhir ≥ 1) fíor: {
+			✎ scríobh: ‘Ⅰ’.
+			uimhir dealú: 1.
+		}, briseadh.
+	} nós imeachta.
+	
+} _agus: { ↲ uimhir > 0. }.

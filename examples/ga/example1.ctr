@@ -1,1 +1,25 @@
-✎ scríobh: 'Hello World', stad.
+✎ scríobh: ‘~ Password Generator ~’, stad.
+☞ comhaireamh ≔ 0.
+{
+	✎ scríobh: ‘How many characters (16-30)?’, stad.
+	comhaireamh ≔ Clár iarr uimhir iomlán.
+
+	(comhaireamh < 16) fíor: {
+		✎ scríobh: ‘That is not enough, please enter a number between 16 and 30.’, stad.
+	}.
+	(comhaireamh > 30) fíor: {
+		✎ scríobh: ‘That is too long, some systems may reject passwords that long.’, stad.
+	}.
+} _agus: { ↲ ((comhaireamh < 16) or: (comhaireamh > 30)). }.
+☞ carachtair ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		carachtair carachtar: ( 
+		Uimhir
+		idir: 1
+		agus: carachtair fad
+	).
+	password aguisín: char.
+} × comhaireamh.
+✎ scríobh: password, stad.

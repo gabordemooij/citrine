@@ -1,1 +1,25 @@
-✎ เขียน: 'Hello World', หยุด.
+✎ เขียน: ‘~ Password Generator ~’, หยุด.
+☞ นับ ≔ 0.
+{
+	✎ เขียน: ‘How many characters (16-30)?’, หยุด.
+	นับ ≔ โปรแกรม ถาม _จำนวน แน่นอน.
+
+	(นับ < 16) _จริง: {
+		✎ เขียน: ‘That is not enough, please enter a number between 16 and 30.’, หยุด.
+	}.
+	(นับ > 30) _จริง: {
+		✎ เขียน: ‘That is too long, some systems may reject passwords that long.’, หยุด.
+	}.
+} ในขณะที่: { ↲ ((นับ < 16) or: (นับ > 30)). }.
+☞ ตัวละคร ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		ตัวละคร ตัวอักษร: ( 
+		จำนวน
+		ระหว่างและ: 1
+		__: ตัวละคร ความยาว
+	).
+	password ผนวก: char.
+} × นับ.
+✎ เขียน: password, หยุด.

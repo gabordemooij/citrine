@@ -1,6 +1,11 @@
-☞ x := Raqam orasida: 1 va: 10.
-☞ q := 0.
+✎ yozish: «~ Number Game ~», to’xta.
+✎ yozish: «Guess the number», to’xta.
+☞ x ≔ Raqam orasida: 1 va: 10.
+☞ q ≔ 0.
+q ≔ Dastur so’rash.
+{ 
+	✎ yozish: «wrong!», to’xta.
+	q ≔ Dastur so’rash.
 
-{ q := Dastur so’rash. } vaqt: { ↲ x raqam ≠ q raqam. }.
-
-✎ yozish: ':-)↵'.
+} vaqt: { ↲ x raqam ≠ q raqam. }.
+✎ yozish: «correct!», to’xta.

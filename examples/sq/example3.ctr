@@ -1,6 +1,11 @@
-☞ x := Numër midis dhe: 1 __: 10.
-☞ q := 0.
+✎ shkruaj: ‘~ Number Game ~’, ndaluar.
+✎ shkruaj: ‘Guess the number’, ndaluar.
+☞ x ≔ Numër midis dhe: 1 __: 10.
+☞ q ≔ 0.
+q ≔ Program kërkoj.
+{ 
+	✎ shkruaj: ‘wrong!’, ndaluar.
+	q ≔ Program kërkoj.
 
-{ q := Program kërkoj. } derisa: { ↲ x numër ≠ q numër. }.
-
-✎ shkruaj: ':-)↵'.
+} derisa: { ↲ x numër ≠ q numër. }.
+✎ shkruaj: ‘correct!’, ndaluar.

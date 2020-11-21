@@ -1,14 +1,63 @@
-☞ f := Reeks ← 0 ; 1.
+✎ schrĳf: “~ Roman numerals ~”, stop.
+✎ schrĳf: “Give a number to convert:”, stop.
+☞ getal ≔ Programma vraag getal absoluut.
+
+(getal = 0) ja: {
+	✎ schrĳf: “Nulla”, stop.
+	Programma einde.
+}.
 
 {
-	☞ a := f laatste.
-
-	☞ b := f een-na-laatste.
-
-	☞ sum := (a + b).
-
-	✎ schrĳf: sum, stop.
+	{
+		(getal ≥ 1000) ja: {
+			✎ schrĳf: “Ⅿ”.
+			getal aftrekken: 1000.
+		}, afbreken.
+	
+		(getal ≥ 500) ja: {
+			✎ schrĳf: “Ⅾ”.
+			getal aftrekken: 500.
+		}, afbreken.
+	
+		(getal ≥ 100) ja: {
+			✎ schrĳf: “Ⅽ”.
+			getal aftrekken: 100.
+		}, afbreken.
+	
+		(getal ≥ 50) ja: {
+			✎ schrĳf: “Ⅼ”.
+			getal aftrekken: 50.
+		}, afbreken.
+	
+		(getal ≥ 50) ja: {
+			✎ schrĳf: “Ⅼ”.
+			getal aftrekken: 50.
+		}, afbreken.
+	
+		(getal ≥ 10) ja: {
+			✎ schrĳf: “Ⅹ”.
+			getal aftrekken: 10.
+		}, afbreken.
 		
-	f toevoegen: sum.
-
-} * 12.
+		(getal ≥ 9) ja: {
+			✎ schrĳf: “Ⅸ”.
+			getal aftrekken: 9.
+		}, afbreken.
+		
+		(getal ≥ 5) ja: {
+			✎ schrĳf: “Ⅴ”.
+			getal aftrekken: 5.
+		}, afbreken.
+		
+		(getal ≥ 4) ja: {
+			✎ schrĳf: “Ⅳ”.
+			getal aftrekken: 4.
+		}, afbreken.
+		
+		(getal ≥ 1) ja: {
+			✎ schrĳf: “Ⅰ”.
+			getal aftrekken: 1.
+		}, afbreken.
+	} procedure.
+	
+} zolang: { ↲ getal > 0. }.

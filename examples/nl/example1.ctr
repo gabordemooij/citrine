@@ -1,1 +1,25 @@
-✎ schrĳf: 'Hello World', stop.
+✎ schrĳf: “~ Password Generator ~”, stop.
+☞ aantal ≔ 0.
+{
+	✎ schrĳf: “How many characters (16-30)?”, stop.
+	aantal ≔ Programma vraag getal absoluut.
+
+	(aantal < 16) ja: {
+		✎ schrĳf: “That is not enough, please enter a number between 16 and 30.”, stop.
+	}.
+	(aantal > 30) ja: {
+		✎ schrĳf: “That is too long, some systems may reject passwords that long.”, stop.
+	}.
+} zolang: { ↲ ((aantal < 16) or: (aantal > 30)). }.
+☞ letters ≔ “acdefghjkmnprtwx2345789@#&”.
+☞ password ≔ “”.
+{
+	☞ char ≔ 
+		letters letter: ( 
+		Getal
+		tussen: 1
+		en: letters lengte
+	).
+	password toevoegen: char.
+} × aantal.
+✎ schrĳf: password, stop.

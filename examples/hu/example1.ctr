@@ -1,1 +1,25 @@
-✎ ír: 'Hello World', állj meg.
+✎ ír: ‘~ Password Generator ~’, állj meg.
+☞ számol ≔ 0.
+{
+	✎ ír: ‘How many characters (16-30)?’, állj meg.
+	számol ≔ Program kérdez szám abszolút.
+
+	(számol < 16) igaz: {
+		✎ ír: ‘That is not enough, please enter a number between 16 and 30.’, állj meg.
+	}.
+	(számol > 30) igaz: {
+		✎ ír: ‘That is too long, some systems may reject passwords that long.’, állj meg.
+	}.
+} míg: { ↲ ((számol < 16) or: (számol > 30)). }.
+☞ karakterek ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		karakterek karakter: ( 
+		Szám
+		között és: 1
+		__: karakterek hossz
+	).
+	password append: char.
+} × számol.
+✎ ír: password, állj meg.

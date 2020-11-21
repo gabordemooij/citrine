@@ -1,1 +1,25 @@
-✎ գրել__: 'Hello World', դադարեցնել.
+✎ գրել__: ‘~ Password Generator ~’, դադարեցնել.
+☞ հաշվել ≔ 0.
+{
+	✎ գրել__: ‘How many characters (16-30)?’, դադարեցնել.
+	հաշվել ≔ Ծրագիր հարցնել թիվ բացարձակ.
+
+	(հաշվել < 16) ճիշտ: {
+		✎ գրել__: ‘That is not enough, please enter a number between 16 and 30.’, դադարեցնել.
+	}.
+	(հաշվել > 30) ճիշտ: {
+		✎ գրել__: ‘That is too long, some systems may reject passwords that long.’, դադարեցնել.
+	}.
+} մինչդեռ__: { ↲ ((հաշվել < 16) or: (հաշվել > 30)). }.
+☞ նիշ ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		նիշ բնավորությունը: ( 
+		Թիվ
+		միջեւ: 1
+		__: նիշ երկարությունը
+	).
+	password հավելված__: char.
+} × հաշվել.
+✎ գրել__: password, դադարեցնել.

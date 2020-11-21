@@ -1,6 +1,11 @@
-☞ x := Palo pakeng tsa: 1 le: 10.
-☞ q := 0.
+✎ ngola: ‘~ Number Game ~’, ema.
+✎ ngola: ‘Guess the number’, ema.
+☞ x ≔ Palo pakeng tsa: 1 le: 10.
+☞ q ≔ 0.
+q ≔ Lenaneo botsa.
+{ 
+	✎ ngola: ‘wrong!’, ema.
+	q ≔ Lenaneo botsa.
 
-{ q := Lenaneo botsa. } ha: { ↲ x palo ≠ q palo. }.
-
-✎ ngola: ':-)↵'.
+} ha: { ↲ x palo ≠ q palo. }.
+✎ ngola: ‘correct!’, ema.

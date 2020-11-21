@@ -1,1 +1,25 @@
-✎ łrite: 'Hello World', stop.
+✎ łrite: ‘~ Password Generator ~’, stop.
+☞ cūnt ≔ 0.
+{
+	✎ łrite: ‘How many characters (16-30)?’, stop.
+	cūnt ≔ Program ask number absolute.
+
+	(cūnt < 16) true: {
+		✎ łrite: ‘That is not enough, please enter a number between 16 and 30.’, stop.
+	}.
+	(cūnt > 30) true: {
+		✎ łrite: ‘That is too long, some systems may reject passwords that long.’, stop.
+	}.
+} łhile: { ↲ ((cūnt < 16) or: (cūnt > 30)). }.
+☞ čaracters ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ password ≔ ‘’.
+{
+	☞ char ≔ 
+		čaracters čaracter: ( 
+		Number
+		betłeen: 1
+		and: čaracters leŋż
+	).
+	password append: char.
+} × cūnt.
+✎ łrite: password, stop.

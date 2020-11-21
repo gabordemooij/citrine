@@ -1,14 +1,63 @@
-☞ f := Lissafi ← 0 ; 1.
+✎ rubuta: “~ Roman numerals ~”, tsayawa.
+✎ rubuta: “Give a number to convert:”, tsayawa.
+☞ lamba ≔ Shirin tambaya lamba cikakken.
+
+(lamba = 0) gaskiya: {
+	✎ rubuta: “Nulla”, tsayawa.
+	Shirin ƙare.
+}.
 
 {
-	☞ a := f karshe.
-
-	☞ b := f na biyu na karshe.
-
-	☞ sum := (a + b).
-
-	✎ rubuta: sum, tsayawa.
+	{
+		(lamba ≥ 1000) gaskiya: {
+			✎ rubuta: “Ⅿ”.
+			lamba cire: 1000.
+		}, fasa.
+	
+		(lamba ≥ 500) gaskiya: {
+			✎ rubuta: “Ⅾ”.
+			lamba cire: 500.
+		}, fasa.
+	
+		(lamba ≥ 100) gaskiya: {
+			✎ rubuta: “Ⅽ”.
+			lamba cire: 100.
+		}, fasa.
+	
+		(lamba ≥ 50) gaskiya: {
+			✎ rubuta: “Ⅼ”.
+			lamba cire: 50.
+		}, fasa.
+	
+		(lamba ≥ 50) gaskiya: {
+			✎ rubuta: “Ⅼ”.
+			lamba cire: 50.
+		}, fasa.
+	
+		(lamba ≥ 10) gaskiya: {
+			✎ rubuta: “Ⅹ”.
+			lamba cire: 10.
+		}, fasa.
 		
-	f append: sum.
-
-} * 12.
+		(lamba ≥ 9) gaskiya: {
+			✎ rubuta: “Ⅸ”.
+			lamba cire: 9.
+		}, fasa.
+		
+		(lamba ≥ 5) gaskiya: {
+			✎ rubuta: “Ⅴ”.
+			lamba cire: 5.
+		}, fasa.
+		
+		(lamba ≥ 4) gaskiya: {
+			✎ rubuta: “Ⅳ”.
+			lamba cire: 4.
+		}, fasa.
+		
+		(lamba ≥ 1) gaskiya: {
+			✎ rubuta: “Ⅰ”.
+			lamba cire: 1.
+		}, fasa.
+	} yanke shawara.
+	
+} yayin: { ↲ lamba > 0. }.

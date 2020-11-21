@@ -1,14 +1,63 @@
-☞ f := Senarai ← 0 ; 1.
+✎ tulis: ‘~ Roman numerals ~’, berhenti.
+✎ tulis: ‘Give a number to convert:’, berhenti.
+☞ nombor ≔ Program tanya nombor mutlak.
+
+(nombor = 0) benar: {
+	✎ tulis: ‘Nulla’, berhenti.
+	Program akhir.
+}.
 
 {
-	☞ a := f lepas.
-
-	☞ b := f kedua terakhir.
-
-	☞ sum := (a + b).
-
-	✎ tulis: sum, berhenti.
+	{
+		(nombor ≥ 1000) benar: {
+			✎ tulis: ‘Ⅿ’.
+			nombor tolak: 1000.
+		}, pecah.
+	
+		(nombor ≥ 500) benar: {
+			✎ tulis: ‘Ⅾ’.
+			nombor tolak: 500.
+		}, pecah.
+	
+		(nombor ≥ 100) benar: {
+			✎ tulis: ‘Ⅽ’.
+			nombor tolak: 100.
+		}, pecah.
+	
+		(nombor ≥ 50) benar: {
+			✎ tulis: ‘Ⅼ’.
+			nombor tolak: 50.
+		}, pecah.
+	
+		(nombor ≥ 50) benar: {
+			✎ tulis: ‘Ⅼ’.
+			nombor tolak: 50.
+		}, pecah.
+	
+		(nombor ≥ 10) benar: {
+			✎ tulis: ‘Ⅹ’.
+			nombor tolak: 10.
+		}, pecah.
 		
-	f tambah: sum.
-
-} * 12.
+		(nombor ≥ 9) benar: {
+			✎ tulis: ‘Ⅸ’.
+			nombor tolak: 9.
+		}, pecah.
+		
+		(nombor ≥ 5) benar: {
+			✎ tulis: ‘Ⅴ’.
+			nombor tolak: 5.
+		}, pecah.
+		
+		(nombor ≥ 4) benar: {
+			✎ tulis: ‘Ⅳ’.
+			nombor tolak: 4.
+		}, pecah.
+		
+		(nombor ≥ 1) benar: {
+			✎ tulis: ‘Ⅰ’.
+			nombor tolak: 1.
+		}, pecah.
+	} prosedur.
+	
+} sementara: { ↲ nombor > 0. }.
