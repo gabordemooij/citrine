@@ -10,7 +10,7 @@
 	(compter > 30) vrai: {
 		✎ écrire: ‘That is too long, some systems may reject passwords that long.’, arrêtez.
 	}.
-} tandis que: { ↲ ((compter < 16) or: (compter > 30)). }.
+} tandis que: { ↲ (compter < 16 or: compter > 30). }.
 ☞ personnages ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

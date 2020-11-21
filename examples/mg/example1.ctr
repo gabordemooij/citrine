@@ -10,7 +10,7 @@
 	(manisa > 30) marina: {
 		✎ manoratra: ‘That is too long, some systems may reject passwords that long.’, mijanòna.
 	}.
-} raha: { ↲ ((manisa < 16) or: (manisa > 30)). }.
+} raha: { ↲ (manisa < 16 or: manisa > 30). }.
 ☞ tarehin-tsoratra ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

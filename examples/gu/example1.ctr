@@ -10,7 +10,7 @@
 	(ગણતરી > 30) _સાચું: {
 		✎ લખો: ‘That is too long, some systems may reject passwords that long.’, _બંધ.
 	}.
-} જ્યારે: { ↲ ((ગણતરી < 16) or: (ગણતરી > 30)). }.
+} જ્યારે: { ↲ (ગણતરી < 16 or: ગણતરી > 30). }.
 ☞ અક્ષરો ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

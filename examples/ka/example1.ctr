@@ -10,7 +10,7 @@
 	(ითვლიან > 30) _მართალია: {
 		✎ დაწერე: ‘That is too long, some systems may reject passwords that long.’, შეჩერება.
 	}.
-} ხოლო: { ↲ ((ითვლიან < 16) or: (ითვლიან > 30)). }.
+} ხოლო: { ↲ (ითვლიან < 16 or: ითვლიან > 30). }.
 ☞ პერსონაჟები ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

@@ -10,7 +10,7 @@
 	(räkna > 30) sann: {
 		✎ skriva: ‘That is too long, some systems may reject passwords that long.’, sluta.
 	}.
-} medan: { ↲ ((räkna < 16) or: (räkna > 30)). }.
+} medan: { ↲ (räkna < 16 or: räkna > 30). }.
 ☞ tecken ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

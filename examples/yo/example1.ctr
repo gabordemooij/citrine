@@ -10,7 +10,7 @@
 	(ka > 30) ooto: {
 		✎ kọ: ‘That is too long, some systems may reject passwords that long.’, duro.
 	}.
-} nigba ti: { ↲ ((ka < 16) or: (ka > 30)). }.
+} nigba ti: { ↲ (ka < 16 or: ka > 30). }.
 ☞ ohun kikọ ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

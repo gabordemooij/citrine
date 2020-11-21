@@ -10,7 +10,7 @@
 	(tirin > 30) run: {
 		✎ qor: ‘That is too long, some systems may reject passwords that long.’, jooji.
 	}.
-} halka: { ↲ ((tirin < 16) or: (tirin > 30)). }.
+} halka: { ↲ (tirin < 16 or: tirin > 30). }.
 ☞ jilayaasha ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

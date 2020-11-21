@@ -10,7 +10,7 @@
 	(kreivi > 30) totta: {
 		✎ kirjoittaa: ‘That is too long, some systems may reject passwords that long.’, lopettaa.
 	}.
-} sillä aikaa: { ↲ ((kreivi < 16) or: (kreivi > 30)). }.
+} sillä aikaa: { ↲ (kreivi < 16 or: kreivi > 30). }.
 ☞ merkkiä ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

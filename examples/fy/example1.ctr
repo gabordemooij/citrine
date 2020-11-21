@@ -10,7 +10,7 @@
 	(telle > 30) wier: {
 		✎ skriuwe: ‘That is too long, some systems may reject passwords that long.’, halte.
 	}.
-} wylst: { ↲ ((telle < 16) or: (telle > 30)). }.
+} wylst: { ↲ (telle < 16 or: telle > 30). }.
 ☞ karakters ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

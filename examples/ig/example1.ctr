@@ -10,7 +10,7 @@
 	(gụọ > 30) eziokwu: {
 		✎ dee: ‘That is too long, some systems may reject passwords that long.’, kwụsị.
 	}.
-} mgbe: { ↲ ((gụọ < 16) or: (gụọ > 30)). }.
+} mgbe: { ↲ (gụọ < 16 or: gụọ > 30). }.
 ☞ odide ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

@@ -10,7 +10,7 @@
 	(akuzë > 30) e vërtetë: {
 		✎ shkruaj: ‘That is too long, some systems may reject passwords that long.’, ndaluar.
 	}.
-} derisa: { ↲ ((akuzë < 16) or: (akuzë > 30)). }.
+} derisa: { ↲ (akuzë < 16 or: akuzë > 30). }.
 ☞ karaktere ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

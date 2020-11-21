@@ -10,7 +10,7 @@
 	(conta > 30) certo: {
 		✎ escribir: ‘That is too long, some systems may reject passwords that long.’, parar.
 	}.
-} mentres: { ↲ ((conta < 16) or: (conta > 30)). }.
+} mentres: { ↲ (conta < 16 or: conta > 30). }.
 ☞ personaxes ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

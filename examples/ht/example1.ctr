@@ -10,7 +10,7 @@
 	(konte > 30) vre: {
 		✎ ekri: ‘That is too long, some systems may reject passwords that long.’, kanpe.
 	}.
-} pandan ke: { ↲ ((konte < 16) or: (konte > 30)). }.
+} pandan ke: { ↲ (konte < 16 or: konte > 30). }.
 ☞ karaktè ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

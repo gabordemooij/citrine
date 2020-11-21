@@ -10,7 +10,7 @@
 	(հաշվել > 30) ճիշտ: {
 		✎ գրել__: ‘That is too long, some systems may reject passwords that long.’, դադարեցնել.
 	}.
-} մինչդեռ__: { ↲ ((հաշվել < 16) or: (հաշվել > 30)). }.
+} մինչդեռ__: { ↲ (հաշվել < 16 or: հաշվել > 30). }.
 ☞ նիշ ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

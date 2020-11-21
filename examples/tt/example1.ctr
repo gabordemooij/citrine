@@ -10,7 +10,7 @@
 	(санагыз > 30) дөрес: {
 		✎ яз: ‘That is too long, some systems may reject passwords that long.’, Тукта.
 	}.
-} шул вакытта: { ↲ ((санагыз < 16) or: (санагыз > 30)). }.
+} шул вакытта: { ↲ (санагыз < 16 or: санагыз > 30). }.
 ☞ персонажлар ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

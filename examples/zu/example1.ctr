@@ -10,7 +10,7 @@
 	(ukubala > 30) iqiniso: {
 		✎ bhala: ‘That is too long, some systems may reject passwords that long.’, ima.
 	}.
-} ngenkathi: { ↲ ((ukubala < 16) or: (ukubala > 30)). }.
+} ngenkathi: { ↲ (ukubala < 16 or: ukubala > 30). }.
 ☞ izinhlamvu ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

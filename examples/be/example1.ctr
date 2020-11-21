@@ -10,7 +10,7 @@
 	(лічыць > 30) праўда: {
 		✎ пішыце: ‘That is too long, some systems may reject passwords that long.’, прыпынак.
 	}.
-} час: { ↲ ((лічыць < 16) or: (лічыць > 30)). }.
+} час: { ↲ (лічыць < 16 or: лічыць > 30). }.
 ☞ персанажаў ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

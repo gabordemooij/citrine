@@ -10,7 +10,7 @@
 	(kubara > 30) ukuri: {
 		✎ andika: ‘That is too long, some systems may reject passwords that long.’, hagarara.
 	}.
-} mugihe: { ↲ ((kubara < 16) or: (kubara > 30)). }.
+} mugihe: { ↲ (kubara < 16 or: kubara > 30). }.
 ☞ inyuguti ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

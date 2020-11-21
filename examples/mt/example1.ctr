@@ -10,7 +10,7 @@
 	(tgħodd > 30) vera: {
 		✎ ikteb: ‘That is too long, some systems may reject passwords that long.’, waqfa.
 	}.
-} waqt: { ↲ ((tgħodd < 16) or: (tgħodd > 30)). }.
+} waqt: { ↲ (tgħodd < 16 or: tgħodd > 30). }.
 ☞ karattri ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

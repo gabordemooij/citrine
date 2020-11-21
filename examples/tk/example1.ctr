@@ -10,7 +10,7 @@
 	(hasapla > 30) dogry: {
 		✎ ýaz: ‘That is too long, some systems may reject passwords that long.’, dur.
 	}.
-} wagty: { ↲ ((hasapla < 16) or: (hasapla > 30)). }.
+} wagty: { ↲ (hasapla < 16 or: hasapla > 30). }.
 ☞ nyşanlary ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

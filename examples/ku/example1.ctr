@@ -10,7 +10,7 @@
 	(jimartin > 30) rast: {
 		✎ nivîsîn: ‘That is too long, some systems may reject passwords that long.’, rawestan.
 	}.
-} demek: { ↲ ((jimartin < 16) or: (jimartin > 30)). }.
+} demek: { ↲ (jimartin < 16 or: jimartin > 30). }.
 ☞ tîp ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

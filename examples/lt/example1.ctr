@@ -10,7 +10,7 @@
 	(skaičiuoti > 30) tiesa: {
 		✎ atspausdinti: ‘That is too long, some systems may reject passwords that long.’, sustoti.
 	}.
-} kol: { ↲ ((skaičiuoti < 16) or: (skaičiuoti > 30)). }.
+} kol: { ↲ (skaičiuoti < 16 or: skaičiuoti > 30). }.
 ☞ simboliai ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

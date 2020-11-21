@@ -10,7 +10,7 @@
 	(ရေတွက် > 30) အမှန်: {
 		✎ ရေးပါ__: ‘That is too long, some systems may reject passwords that long.’, ရပ်.
 	}.
-} စဉ်တွင်: { ↲ ((ရေတွက် < 16) or: (ရေတွက် > 30)). }.
+} စဉ်တွင်: { ↲ (ရေတွက် < 16 or: ရေတွက် > 30). }.
 ☞ အက္ခရာများ ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

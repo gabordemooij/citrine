@@ -10,7 +10,7 @@
 	(zenbatu > 30) egia: {
 		✎ idatzi: ‘That is too long, some systems may reject passwords that long.’, geldialdia.
 	}.
-} bitartean: { ↲ ((zenbatu < 16) or: (zenbatu > 30)). }.
+} bitartean: { ↲ (zenbatu < 16 or: zenbatu > 30). }.
 ☞ karaktere ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

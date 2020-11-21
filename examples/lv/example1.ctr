@@ -10,7 +10,7 @@
 	(skaita > 30) taisnība: {
 		✎ rakstīt: ‘That is too long, some systems may reject passwords that long.’, apstāties.
 	}.
-} kamēr: { ↲ ((skaita < 16) or: (skaita > 30)). }.
+} kamēr: { ↲ (skaita < 16 or: skaita > 30). }.
 ☞ rakstzīmes ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

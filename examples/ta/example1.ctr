@@ -10,7 +10,7 @@
 	(எண்ணிக்கை > 30) _உண்மை: {
 		✎ எழுது: ‘That is too long, some systems may reject passwords that long.’, நிறுத்து.
 	}.
-} போது: { ↲ ((எண்ணிக்கை < 16) or: (எண்ணிக்கை > 30)). }.
+} போது: { ↲ (எண்ணிக்கை < 16 or: எண்ணிக்கை > 30). }.
 ☞ எழுத்துக்கள் ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

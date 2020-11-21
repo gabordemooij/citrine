@@ -10,7 +10,7 @@
 	(ngitung > 30) bener: {
 		✎ nulis: ‘That is too long, some systems may reject passwords that long.’, mandheg.
 	}.
-} nalika: { ↲ ((ngitung < 16) or: (ngitung > 30)). }.
+} nalika: { ↲ (ngitung < 16 or: ngitung > 30). }.
 ☞ aksara ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

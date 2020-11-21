@@ -18,10 +18,10 @@
  * File
  *
  * @example
- * ☞ f ≔ File new: (Path tmp: ‘test.txt’).
- * f write: ‘test‘.
+ * ☞ f ≔ File new: (Path /tmp: ‘test.txt’).
+ * f write: ‘test’.
  * f close.
- * ☞ q ≔ File new: (Path tmp: ‘test.txt’).
+ * ☞ q ≔ File new: (Path /tmp: ‘test.txt’).
  * ✎ write: q read, stop.
  */
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
@@ -56,7 +56,7 @@ ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
  * @example
  * ☞ x ≔ File new.
  * ✎ write: x, stop.
- * ☞ y ≔ File new: (Path tmp: ‘a.txt’).
+ * ☞ y ≔ File new: (Path /tmp: ‘a.txt’).
  * ✎ write: y, stop.
  */
 ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList) {
@@ -72,10 +72,10 @@ ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] read
  *
  * @example
- * ☞ f ≔ File new: (Path tmp: ‘test.txt’).
- * f write: ‘test‘.
+ * ☞ f ≔ File new: (Path /tmp: ‘test.txt’).
+ * f write: ‘test’.
  * f close.
- * ☞ q ≔ File new: (Path tmp: ‘test.txt’).
+ * ☞ q ≔ File new: (Path /tmp: ‘test.txt’).
  * ✎ write: q read, stop.
  */
 ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
@@ -118,10 +118,10 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] write: [ String ]
  *
  * @example
- * ☞ f ≔ File new: (Path tmp: ‘test.txt’).
- * f write: ‘test‘.
+ * ☞ f ≔ File new: (Path /tmp: ‘test.txt’).
+ * f write: ‘test’.
  * f close.
- * ☞ q ≔ File new: (Path tmp: ‘test.txt’).
+ * ☞ q ≔ File new: (Path /tmp: ‘test.txt’).
  * ✎ write: q read, stop.
  */
 ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
@@ -153,10 +153,10 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] append: [ String ]
  *
  * @example
- * ☞ x ≔ File new: (Path tmp: ‘a.txt’).
- * x write: ‘123‘.
+ * ☞ x ≔ File new: (Path /tmp: ‘a.txt’).
+ * x write: ‘123’.
  * ✎ write: x read, stop.
- * x append: ‘345‘.
+ * x append: ‘345’.
  * ✎ write: x read, stop.
  */
 ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
@@ -188,7 +188,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] exists
  *
  * @example
- * ☞ x ≔ File new: (Path tmp unknown).
+ * ☞ x ≔ File new: (Path /tmp unknown).
  * ✎ write: f exists, stop.
  */
 ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
@@ -216,7 +216,7 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] delete
  * 
  * @example
- * ☞ x ≔ File new: (Path tmp: ‘a.txt’).
+ * ☞ x ≔ File new: (Path /tmp: ‘a.txt’).
  * x write: ‘abc’.
  * ✎ write: x exists, stop.
  * x delete.
@@ -281,7 +281,7 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] list: [ String ].
  * 
  * @example
- * ☞ x ≔ File list: Path tmp.
+ * ☞ x ≔ File list: Path /tmp.
  * ✎ write: x, stop.
  * 
  * @result

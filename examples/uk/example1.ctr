@@ -10,7 +10,7 @@
 	(рахувати > 30) правда: {
 		✎ написати: ‘That is too long, some systems may reject passwords that long.’, Стоп.
 	}.
-} поки: { ↲ ((рахувати < 16) or: (рахувати > 30)). }.
+} поки: { ↲ (рахувати < 16 or: рахувати > 30). }.
 ☞ символів ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

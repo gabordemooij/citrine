@@ -10,7 +10,7 @@
 	(计数 > 30) 真正：__: {
 		✎ 写：__: ‘That is too long, some systems may reject passwords that long.’, _停.
 	}.
-} 而：__: { ↲ ((计数 < 16) or: (计数 > 30)). }.
+} 而：__: { ↲ (计数 < 16 or: 计数 > 30). }.
 ☞ 人物 ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

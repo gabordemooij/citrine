@@ -10,7 +10,7 @@
 	(นับ > 30) _จริง: {
 		✎ เขียน: ‘That is too long, some systems may reject passwords that long.’, หยุด.
 	}.
-} ในขณะที่: { ↲ ((นับ < 16) or: (นับ > 30)). }.
+} ในขณะที่: { ↲ (นับ < 16 or: นับ > 30). }.
 ☞ ตัวละคร ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

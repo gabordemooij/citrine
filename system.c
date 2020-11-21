@@ -378,9 +378,9 @@ ctr_object* ctr_program_tostring(ctr_object* myself, ctr_argument* argumentList)
  * [ Program ] use: [ String ]
  *
  * @example
- * ☞ f ≔ File new: (Path tmp: ‘x.ctr’).
+ * ☞ f ≔ File new: (Path /tmp: ‘x.ctr’).
  * f write: ‘☞ x ≔ 123.’.
- * Program use: (Path tmp: ‘x.ctr’).
+ * Program use: (Path /tmp: ‘x.ctr’).
  * ✎ write: x, stop.
  */
 ctr_object* ctr_program_include(ctr_object* myself, ctr_argument* argumentList) {
@@ -426,9 +426,9 @@ ctr_object* ctr_program_num_of_args(ctr_object* myself, ctr_argument* argumentLi
  * [ Program ] end
  *
  * @example
- * ✎ write: ‘1..2..3..‘, stop.
+ * ✎ write: ‘1..2..3..’, stop.
  * Program end
- * ✎ write: ‘4..5..6..‘, stop.
+ * ✎ write: ‘4..5..6..’, stop.
  */
 ctr_object* ctr_program_exit(ctr_object* myself, ctr_argument* argumentList) {
 	CtrStdFlow = CtrStdExit;
@@ -566,7 +566,7 @@ ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList) {
  * [ Program ] flush.
  *
  * @example
- * ✎ write: ‘Flush stdout buffer.‘, stop.
+ * ✎ write: ‘Flush stdout buffer.’, stop.
  * Program flush.
  */
 ctr_object* ctr_program_flush(ctr_object* myself, ctr_argument* ctr_argumentList) {
@@ -579,7 +579,7 @@ ctr_object* ctr_program_flush(ctr_object* myself, ctr_argument* ctr_argumentList
  * [ Program ] error: [ String ]
  *
  * @example
- * Program error: ‘123‘.
+ * Program error: ‘123’.
  * 
  * @result
  * ~$ x.ctr 2>1

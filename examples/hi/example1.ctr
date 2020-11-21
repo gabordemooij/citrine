@@ -10,7 +10,7 @@
 	(गिनना > 30) यदि-सच: {
 		✎ लिखना: ‘That is too long, some systems may reject passwords that long.’, रोकना।
 	}।
-} जब-तक: { ↲ ((गिनना < 16) or: (गिनना > 30))। }।
+} जब-तक: { ↲ (गिनना < 16 or: गिनना > 30)। }।
 ☞ अक्षर ≔ ‘acdefghjkmnprtwx2345789@#&’।
 ☞ password ≔ ‘’।
 {

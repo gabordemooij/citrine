@@ -10,7 +10,7 @@
 	(aantal > 30) ja: {
 		✎ schrĳf: “That is too long, some systems may reject passwords that long.”, stop.
 	}.
-} zolang: { ↲ ((aantal < 16) or: (aantal > 30)). }.
+} zolang: { ↲ (aantal < 16 or: aantal > 30). }.
 ☞ letters ≔ “acdefghjkmnprtwx2345789@#&”.
 ☞ password ≔ “”.
 {

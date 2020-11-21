@@ -10,7 +10,7 @@
 	(comhaireamh > 30) fíor: {
 		✎ scríobh: ‘That is too long, some systems may reject passwords that long.’, stad.
 	}.
-} _agus: { ↲ ((comhaireamh < 16) or: (comhaireamh > 30)). }.
+} _agus: { ↲ (comhaireamh < 16 or: comhaireamh > 30). }.
 ☞ carachtair ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

@@ -10,7 +10,7 @@
 	(cunnt > 30) fìor: {
 		✎ sgrìobh: ‘That is too long, some systems may reject passwords that long.’, stad.
 	}.
-} fhad ’sa: { ↲ ((cunnt < 16) or: (cunnt > 30)). }.
+} fhad ’sa: { ↲ (cunnt < 16 or: cunnt > 30). }.
 ☞ caractaran ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

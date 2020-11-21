@@ -10,7 +10,7 @@
 	(рачунати > 30) истина: {
 		✎ написати: ‘That is too long, some systems may reject passwords that long.’, зауставити.
 	}.
-} док: { ↲ ((рачунати < 16) or: (рачунати > 30)). }.
+} док: { ↲ (рачунати < 16 or: рачунати > 30). }.
 ☞ карактера ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

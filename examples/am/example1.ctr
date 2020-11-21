@@ -10,7 +10,7 @@
 	(ቆጠረ > 30) እውነት: {
 		✎ ፃፍ__: ‘That is too long, some systems may reject passwords that long.’, ተወ.
 	}.
-} በሚከተለው ጊዜ__: { ↲ ((ቆጠረ < 16) or: (ቆጠረ > 30)). }.
+} በሚከተለው ጊዜ__: { ↲ (ቆጠረ < 16 or: ቆጠረ > 30). }.
 ☞ ቁምፊዎች ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

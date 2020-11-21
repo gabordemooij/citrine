@@ -10,7 +10,7 @@
 	(मोजा > 30) _खरे: {
 		✎ लिहा: ‘That is too long, some systems may reject passwords that long.’, थांबा.
 	}.
-} करताना: { ↲ ((मोजा < 16) or: (मोजा > 30)). }.
+} करताना: { ↲ (मोजा < 16 or: मोजा > 30). }.
 ☞ वर्ण ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

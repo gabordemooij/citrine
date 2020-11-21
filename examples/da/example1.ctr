@@ -10,7 +10,7 @@
 	(tælle > 30) rigtigt: {
 		✎ skrive: ‘That is too long, some systems may reject passwords that long.’, hold op.
 	}.
-} mens: { ↲ ((tælle < 16) or: (tælle > 30)). }.
+} mens: { ↲ (tælle < 16 or: tælle > 30). }.
 ☞ tegn ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

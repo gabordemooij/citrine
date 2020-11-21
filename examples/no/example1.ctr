@@ -10,7 +10,7 @@
 	(telle > 30) ekte: {
 		✎ skrive: ‘That is too long, some systems may reject passwords that long.’, stoppe.
 	}.
-} samtidig som: { ↲ ((telle < 16) or: (telle > 30)). }.
+} samtidig som: { ↲ (telle < 16 or: telle > 30). }.
 ☞ tegn ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

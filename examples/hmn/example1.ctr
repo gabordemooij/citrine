@@ -10,7 +10,7 @@
 	(suav > 30) muaj tseeb: {
 		✎ sau ntawv: ‘That is too long, some systems may reject passwords that long.’, tsum.
 	}.
-} thaum lub sij hawm: { ↲ ((suav < 16) or: (suav > 30)). }.
+} thaum lub sij hawm: { ↲ (suav < 16 or: suav > 30). }.
 ☞ cim ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

@@ -10,7 +10,7 @@
 	(গণনা > 30) সত্য_: {
 		✎ লিখুন: ‘That is too long, some systems may reject passwords that long.’, স্টপ.
 	}.
-} যখন: { ↲ ((গণনা < 16) or: (গণনা > 30)). }.
+} যখন: { ↲ (গণনা < 16 or: গণনা > 30). }.
 ☞ চরিত্র ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

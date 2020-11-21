@@ -10,7 +10,7 @@
 	(kirga > 30) gaskiya: {
 		✎ rubuta: “That is too long, some systems may reject passwords that long.”, tsayawa.
 	}.
-} yayin: { ↲ ((kirga < 16) or: (kirga > 30)). }.
+} yayin: { ↲ (kirga < 16 or: kirga > 30). }.
 ☞ haruffa ≔ “acdefghjkmnprtwx2345789@#&”.
 ☞ password ≔ “”.
 {

@@ -10,7 +10,7 @@
 	(ngitung > 30) leres: {
 		✎ nulis: ‘That is too long, some systems may reject passwords that long.’, eureun.
 	}.
-} sedengkeun: { ↲ ((ngitung < 16) or: (ngitung > 30)). }.
+} sedengkeun: { ↲ (ngitung < 16 or: ngitung > 30). }.
 ☞ aksara ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

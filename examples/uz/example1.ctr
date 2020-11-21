@@ -10,7 +10,7 @@
 	(hisoblash > 30) haqiqiy: {
 		✎ yozish: «That is too long, some systems may reject passwords that long.», to’xta.
 	}.
-} vaqt: { ↲ ((hisoblash < 16) or: (hisoblash > 30)). }.
+} vaqt: { ↲ (hisoblash < 16 or: hisoblash > 30). }.
 ☞ belgilar ≔ «acdefghjkmnprtwx2345789@#&».
 ☞ password ≔ «».
 {

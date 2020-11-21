@@ -10,7 +10,7 @@
 	(kuverenga > 30) chokwadi: {
 		✎ nyora: ‘That is too long, some systems may reject passwords that long.’, mira.
 	}.
-} ne: { ↲ ((kuverenga < 16) or: (kuverenga > 30)). }.
+} ne: { ↲ (kuverenga < 16 or: kuverenga > 30). }.
 ☞ mavara ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

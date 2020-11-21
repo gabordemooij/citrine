@@ -10,7 +10,7 @@
 	(comptar > 30) cert: {
 		✎ escriu: ‘That is too long, some systems may reject passwords that long.’, atura.
 	}.
-} mentre: { ↲ ((comptar < 16) or: (comptar > 30)). }.
+} mentre: { ↲ (comptar < 16 or: comptar > 30). }.
 ☞ personatges ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

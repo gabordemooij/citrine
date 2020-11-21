@@ -10,7 +10,7 @@
 	(ihap > 30) tinuod: {
 		✎ pagsulat: ‘That is too long, some systems may reject passwords that long.’, hunong.
 	}.
-} samtang: { ↲ ((ihap < 16) or: (ihap > 30)). }.
+} samtang: { ↲ (ihap < 16 or: ihap > 30). }.
 ☞ mga karakter ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

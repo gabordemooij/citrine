@@ -583,7 +583,7 @@ ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Boolean ] != [ Boolean ]
+ * [ Boolean ] ≠ [ Boolean ]
  *
  * @example
  * (True ≠ False) true: { 
@@ -1245,7 +1245,7 @@ ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
  * [ Number ] power: [ Number ]
  * 
  * @example
- * ✎ write: 2 power: 3.
+ * ✎ write: (2 power: 3).
  */
 ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
@@ -1285,7 +1285,7 @@ ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList) 
  * [ Number ] floor
  *
  * @example
- * ☞ x ≔ 4.5
+ * ☞ x ≔ 4.5.
  * ✎ write: x floor, stop.
  */
 ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
@@ -1448,15 +1448,15 @@ ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList)
 
 /**
  * @def
- * [ Number ] international number
+ * [ Number ] raw
  *
  * @example
  * ☞ x ≔ 123.
- * ✎ write: x international number, stop.
+ * ✎ write: x raw, stop.
  * ☞ x ≔ 1.23.
- * ✎ write: x international number, stop.
+ * ✎ write: x raw, stop.
  * ☞ x ≔ 1,000,000.
- * ✎ write: x international number, stop.
+ * ✎ write: x raw, stop.
  */
 ctr_object* ctr_number_to_string_flat(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_number_to_string(myself, argumentList, 1);
@@ -1468,7 +1468,7 @@ ctr_object* ctr_number_to_string_flat(ctr_object* myself, ctr_argument* argument
  *
  * @example
  * { :i
- * 	✎ write: i boolean, stop.
+ * 	✎ write: (i - 1) boolean, stop.
  * } × 10.
  */
 ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList) {
@@ -1615,7 +1615,7 @@ ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
  * [ String ] + [ String ]
  *
  * @example
- * ☞ x ≔ ‘ABC’
+ * ☞ x ≔ ‘ABC’.
  * ☞ y ≔ ‘DEF’.
  * ☞ z ≔ x + y.
  * ✎ write: z, stop.
@@ -1731,7 +1731,7 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
  * [ String ] offset: [ Number ]
  *
  * @example
- * ☞ x =: ‘1234’ offset: 2.
+ * ☞ x ≔ ‘1234’ offset: 2.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
@@ -1894,7 +1894,7 @@ ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * ☞ x ≔ ‘1...2...3’.
- * x replace: ‘...’ width: ‘,’.
+ * x replace: ‘...’ with: ‘,’.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentList) {
@@ -2388,7 +2388,7 @@ ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
  * [ Block ] set: [ String ] value: [ Object ]
  *
  * @example
- * ! ≔ { ✎ write: (⚿ q + ‘!’), stop. }.
+ * ☞ ! ≔ { ✎ write: (⚿ q + ‘!’), stop. }.
  * ! set: ‘q’ value: ‘123’.
  * ! run.
  */
@@ -2439,7 +2439,7 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
  * [ Block ] string
  *
  * @example
- * ☞ x ≔ {}.
+ * ☞ x ≔ { 1 + 1. }.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_block_to_string(ctr_object* myself, ctr_argument* argumentList) {

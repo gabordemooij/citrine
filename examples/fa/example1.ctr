@@ -10,7 +10,7 @@
 	(شمردن > 30) _بله: {
 		✎ نوشتن: ‘That is too long, some systems may reject passwords that long.’, متوقف کردن.
 	}.
-} در حالی که: { ↲ ((شمردن < 16) or: (شمردن > 30)). }.
+} در حالی که: { ↲ (شمردن < 16 or: شمردن > 30). }.
 ☞ شخصیت ها ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

@@ -10,7 +10,7 @@
 	(kiraan > 30) benar: {
 		✎ tulis: ‘That is too long, some systems may reject passwords that long.’, berhenti.
 	}.
-} sementara: { ↲ ((kiraan < 16) or: (kiraan > 30)). }.
+} sementara: { ↲ (kiraan < 16 or: kiraan > 30). }.
 ☞ watak ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {
