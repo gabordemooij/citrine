@@ -10,7 +10,7 @@
 	(санау > 30) шын: {
 		✎ жазу: ‘That is too long, some systems may reject passwords that long.’, Тоқта.
 	}.
-} ал: { ↲ ((санау < 16) or: (санау > 30)). }.
+} ал: { ↲ (санау < 16 or: санау > 30). }.
 ☞ таңбалар ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

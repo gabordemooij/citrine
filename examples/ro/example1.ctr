@@ -10,7 +10,7 @@
 	(numără > 30) adevărat: {
 		✎ scrie: ‘That is too long, some systems may reject passwords that long.’, stop.
 	}.
-} cât timp: { ↲ ((numără < 16) or: (numără > 30)). }.
+} cât timp: { ↲ (numără < 16 or: numără > 30). }.
 ☞ caractere ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

@@ -10,7 +10,7 @@
 	(miktar > 30) doğru: {
 		✎ yazmak: ‘That is too long, some systems may reject passwords that long.’, dur.
 	}.
-} süre: { ↲ ((miktar < 16) or: (miktar > 30)). }.
+} süre: { ↲ (miktar < 16 or: miktar > 30). }.
 ☞ karakterler ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

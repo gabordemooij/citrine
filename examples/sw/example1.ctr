@@ -10,7 +10,7 @@
 	(hesabu > 30) kweli: {
 		✎ andika: ‘That is too long, some systems may reject passwords that long.’, acha.
 	}.
-} wakati: { ↲ ((hesabu < 16) or: (hesabu > 30)). }.
+} wakati: { ↲ (hesabu < 16 or: hesabu > 30). }.
 ☞ wahusika ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

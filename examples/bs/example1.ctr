@@ -10,7 +10,7 @@
 	(brojati > 30) istinito: {
 		✎ pisati: ‘That is too long, some systems may reject passwords that long.’, stani.
 	}.
-} dok: { ↲ ((brojati < 16) or: (brojati > 30)). }.
+} dok: { ↲ (brojati < 16 or: brojati > 30). }.
 ☞ karaktera ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

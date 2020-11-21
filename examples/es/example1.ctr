@@ -10,7 +10,7 @@
 	(contar > 30) cierto: {
 		✎ escribir: ‘That is too long, some systems may reject passwords that long.’, detener.
 	}.
-} mientras: { ↲ ((contar < 16) or: (contar > 30)). }.
+} mientras: { ↲ (contar < 16 or: contar > 30). }.
 ☞ caracteres ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

@@ -10,7 +10,7 @@
 	(गणना > 30) सत्य: {
 		✎ लेख्नुहोस्: ‘That is too long, some systems may reject passwords that long.’, रोक.
 	}.
-} जबकि: { ↲ ((गणना < 16) or: (गणना > 30)). }.
+} जबकि: { ↲ (गणना < 16 or: गणना > 30). }.
 ☞ पात्रहरू ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

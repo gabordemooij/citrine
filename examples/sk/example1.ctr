@@ -10,7 +10,7 @@
 	(počítať > 30) true: {
 		✎ píšu: ‘That is too long, some systems may reject passwords that long.’, zastávka.
 	}.
-} zatiaľ čo: { ↲ ((počítať < 16) or: (počítať > 30)). }.
+} zatiaľ čo: { ↲ (počítať < 16 or: počítať > 30). }.
 ☞ znaky ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

@@ -10,7 +10,7 @@
 	(cuntà > 30) vera: {
 		✎ scrive: ‘That is too long, some systems may reject passwords that long.’, _finisci.
 	}.
-} mentre: { ↲ ((cuntà < 16) or: (cuntà > 30)). }.
+} mentre: { ↲ (cuntà < 16 or: cuntà > 30). }.
 ☞ caratteri ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

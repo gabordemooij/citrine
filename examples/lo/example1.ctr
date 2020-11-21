@@ -10,7 +10,7 @@
 	(ນັບ > 30) ຄວາມຈິງ: {
 		✎ ຂຽນ: ‘That is too long, some systems may reject passwords that long.’, ຢຸດ.
 	}.
-} ໃນຂະນະທີ່: { ↲ ((ນັບ < 16) or: (ນັບ > 30)). }.
+} ໃນຂະນະທີ່: { ↲ (ນັບ < 16 or: ນັບ > 30). }.
 ☞ ຕົວລະຄອນ ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

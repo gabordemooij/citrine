@@ -10,7 +10,7 @@
 	(ଗଣନା > 30) _ସତ: {
 		✎ ଲେଖ: ‘That is too long, some systems may reject passwords that long.’, ବନ୍ଦ କର |.
 	}.
-} ଯେତେବେଳେ: { ↲ ((ଗଣନା < 16) or: (ଗଣନା > 30)). }.
+} ଯେତେବେଳେ: { ↲ (ଗଣନା < 16 or: ଗଣନା > 30). }.
 ☞ ବର୍ଣ୍ଣଗୁଡିକ ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

@@ -10,7 +10,7 @@
 	(contagem > 30) verdade: {
 		✎ escrever: ‘That is too long, some systems may reject passwords that long.’, punto.
 	}.
-} enquanto: { ↲ ((contagem < 16) or: (contagem > 30)). }.
+} enquanto: { ↲ (contagem < 16 or: contagem > 30). }.
 ☞ personagens ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

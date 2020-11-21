@@ -10,7 +10,7 @@
 	(тоолох > 30) үнэн: {
 		✎ бичих: ‘That is too long, some systems may reject passwords that long.’, Зогс.
 	}.
-} байхад: { ↲ ((тоолох < 16) or: (тоолох > 30)). }.
+} байхад: { ↲ (тоолох < 16 or: тоолох > 30). }.
 ☞ тэмдэгтүүд ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

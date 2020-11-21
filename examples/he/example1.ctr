@@ -10,7 +10,7 @@
 	(לספור > 30) _נכון: {
 		✎ כתוב: ‘That is too long, some systems may reject passwords that long.’, תפסיק.
 	}.
-} בזמן: { ↲ ((לספור < 16) or: (לספור > 30)). }.
+} בזמן: { ↲ (לספור < 16 or: לספור > 30). }.
 ☞ תווים ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

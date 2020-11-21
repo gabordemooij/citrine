@@ -10,7 +10,7 @@
 	(đếm > 30) thật: {
 		✎ viết: ‘That is too long, some systems may reject passwords that long.’, dừng lại.
 	}.
-} trong khi: { ↲ ((đếm < 16) or: (đếm > 30)). }.
+} trong khi: { ↲ (đếm < 16 or: đếm > 30). }.
 ☞ nhân vật ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

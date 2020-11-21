@@ -10,7 +10,7 @@
 	(брои > 30) точно: {
 		✎ напиши: ‘That is too long, some systems may reject passwords that long.’, запре.
 	}.
-} додека: { ↲ ((брои < 16) or: (брои > 30)). }.
+} додека: { ↲ (брои < 16 or: брои > 30). }.
 ☞ карактери ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

@@ -10,7 +10,7 @@
 	(រាប់ > 30) ពិត៖__: {
 		✎ សរសេរ៖__: ‘That is too long, some systems may reject passwords that long.’, បញ្ឈប់.
 	}.
-} ខណៈពេលដែល: { ↲ ((រាប់ < 16) or: (រាប់ > 30)). }.
+} ខណៈពេលដែល: { ↲ (រាប់ < 16 or: រាប់ > 30). }.
 ☞ តួអក្សរ ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

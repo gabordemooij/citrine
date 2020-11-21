@@ -10,7 +10,7 @@
 	(conta > 30) verdadeiro: {
 		✎ escrever: “That is too long, some systems may reject passwords that long.”, punto.
 	}.
-} enquanto: { ↲ ((conta < 16) or: (conta > 30)). }.
+} enquanto: { ↲ (conta < 16 or: conta > 30). }.
 ☞ caracteres ≔ “acdefghjkmnprtwx2345789@#&”.
 ☞ password ≔ “”.
 {

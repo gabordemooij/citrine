@@ -10,7 +10,7 @@
 	(카운트 > 30) _진실: {
 		✎ 쓰다: ‘That is too long, some systems may reject passwords that long.’, 중지.
 	}.
-} 동안: { ↲ ((카운트 < 16) or: (카운트 > 30)). }.
+} 동안: { ↲ (카운트 < 16 or: 카운트 > 30). }.
 ☞ 문자 ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

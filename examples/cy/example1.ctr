@@ -10,7 +10,7 @@
 	(cyfrif > 30) gwir: {
 		✎ ysgrifennu: ‘That is too long, some systems may reject passwords that long.’, stopio.
 	}.
-} tra: { ↲ ((cyfrif < 16) or: (cyfrif > 30)). }.
+} tra: { ↲ (cyfrif < 16 or: cyfrif > 30). }.
 ☞ cymeriadau ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

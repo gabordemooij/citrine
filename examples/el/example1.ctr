@@ -10,7 +10,7 @@
 	(μετρώ > 30) αληθής: {
 		✎ γράφω: ‘That is too long, some systems may reject passwords that long.’, να σταματήσει.
 	}.
-} ενώ: { ↲ ((μετρώ < 16) or: (μετρώ > 30)). }.
+} ενώ: { ↲ (μετρώ < 16 or: μετρώ > 30). }.
 ☞ χαρακτήρες ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

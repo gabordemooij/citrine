@@ -10,7 +10,7 @@
 	(tatau > 30) pono: {
 		✎ tuhi: ‘That is too long, some systems may reject passwords that long.’, _kati.
 	}.
-} ia: { ↲ ((tatau < 16) or: (tatau > 30)). }.
+} ia: { ↲ (tatau < 16 or: tatau > 30). }.
 ☞ pūāhua ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

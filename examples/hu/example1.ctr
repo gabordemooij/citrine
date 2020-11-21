@@ -10,7 +10,7 @@
 	(számol > 30) igaz: {
 		✎ ír: ‘That is too long, some systems may reject passwords that long.’, állj meg.
 	}.
-} míg: { ↲ ((számol < 16) or: (számol > 30)). }.
+} míg: { ↲ (számol < 16 or: számol > 30). }.
 ☞ karakterek ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

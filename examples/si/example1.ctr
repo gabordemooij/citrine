@@ -10,7 +10,7 @@
 	(ගණන් කරන්න > 30) _සැබෑ: {
 		✎ ලියන්න: ‘That is too long, some systems may reject passwords that long.’, නවත්වන්න.
 	}.
-} අතර: { ↲ ((ගණන් කරන්න < 16) or: (ගණන් කරන්න > 30)). }.
+} අතර: { ↲ (ගණන් කරන්න < 16 or: ගණන් කරන්න > 30). }.
 ☞ අක්ෂර ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

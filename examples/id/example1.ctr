@@ -10,7 +10,7 @@
 	(menghitung > 30) benar: {
 		✎ menulis: ‘That is too long, some systems may reject passwords that long.’, berhenti.
 	}.
-} sementara: { ↲ ((menghitung < 16) or: (menghitung > 30)). }.
+} sementara: { ↲ (menghitung < 16 or: menghitung > 30). }.
 ☞ karakter ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

@@ -10,7 +10,7 @@
 	(tel > 30) waar: {
 		✎ skryf: ‘That is too long, some systems may reject passwords that long.’, stop.
 	}.
-} terwyl: { ↲ ((tel < 16) or: (tel > 30)). }.
+} terwyl: { ↲ (tel < 16 or: tel > 30). }.
 ☞ karakters ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

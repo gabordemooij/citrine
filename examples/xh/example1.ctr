@@ -10,7 +10,7 @@
 	(ukubala > 30) yinyani: {
 		✎ bhala: ‘That is too long, some systems may reject passwords that long.’, yeka.
 	}.
-} ngelixa: { ↲ ((ukubala < 16) or: (ukubala > 30)). }.
+} ngelixa: { ↲ (ukubala < 16 or: ukubala > 30). }.
 ☞ abalinganiswa ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

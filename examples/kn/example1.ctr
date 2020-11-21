@@ -10,7 +10,7 @@
 	(ಎಣಿಕೆ > 30) _ನಿಜ: {
 		✎ ಬರೆಯಿರಿ: ‘That is too long, some systems may reject passwords that long.’, ನಿಲ್ಲಿಸಿ.
 	}.
-} ಹಾಗೆಯೇ: { ↲ ((ಎಣಿಕೆ < 16) or: (ಎಣಿಕೆ > 30)). }.
+} ಹಾಗೆಯೇ: { ↲ (ಎಣಿಕೆ < 16 or: ಎಣಿಕೆ > 30). }.
 ☞ ಅಕ್ಷರಗಳು ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

@@ -10,7 +10,7 @@
 	(ציילן > 30) _אמת: {
 		✎ שרייב: ‘That is too long, some systems may reject passwords that long.’, אָפּשטעל.
 	}.
-} בשעת: { ↲ ((ציילן < 16) or: (ציילן > 30)). }.
+} בשעת: { ↲ (ציילן < 16 or: ציילן > 30). }.
 ☞ אותיות ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

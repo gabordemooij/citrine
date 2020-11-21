@@ -10,7 +10,7 @@
 	(العد > 30) صحيح_: {
 		✎ كتابة: ‘That is too long, some systems may reject passwords that long.’, قف.
 	}.
-} في حين: { ↲ ((العد < 16) or: (العد > 30)). }.
+} في حين: { ↲ (العد < 16 or: العد > 30). }.
 ☞ الشخصيات ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

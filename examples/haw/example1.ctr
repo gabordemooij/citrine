@@ -10,7 +10,7 @@
 	(helu helu > 30) ʻoiaʻiʻo: {
 		✎ kākau: ‘That is too long, some systems may reject passwords that long.’, oki.
 	}.
-} ʻoiai: { ↲ ((helu helu < 16) or: (helu helu > 30)). }.
+} ʻoiai: { ↲ (helu helu < 16 or: helu helu > 30). }.
 ☞ kūlohelohe ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

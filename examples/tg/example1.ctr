@@ -10,7 +10,7 @@
 	(ҳисоб > 30) ҳақиқӣ: {
 		✎ навиштан: ‘That is too long, some systems may reject passwords that long.’, Ист.
 	}.
-} дар ҳоле ки: { ↲ ((ҳисоб < 16) or: (ҳисоб > 30)). }.
+} дар ҳоле ки: { ↲ (ҳисоб < 16 or: ҳисоб > 30). }.
 ☞ аломатҳои ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

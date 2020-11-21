@@ -10,7 +10,7 @@
 	(faitau > 30) moni: {
 		✎ tusi: ‘That is too long, some systems may reject passwords that long.’, taofi.
 	}.
-} ao: { ↲ ((faitau < 16) or: (faitau > 30)). }.
+} ao: { ↲ (faitau < 16 or: faitau > 30). }.
 ☞ mataitusi ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

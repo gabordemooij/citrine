@@ -10,7 +10,7 @@
 	(počet > 30) pravda: {
 		✎ psát: „That is too long, some systems may reject passwords that long.“, stop.
 	}.
-} zatímco: { ↲ ((počet < 16) or: (počet > 30)). }.
+} zatímco: { ↲ (počet < 16 or: počet > 30). }.
 ☞ znaky ≔ „acdefghjkmnprtwx2345789@#&“.
 ☞ password ≔ „“.
 {

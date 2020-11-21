@@ -10,7 +10,7 @@
 	(эсептөө > 30) чыныгы: {
 		✎ жаз: ‘That is too long, some systems may reject passwords that long.’, бирдиктүү.
 	}.
-} Ал эми: { ↲ ((эсептөө < 16) or: (эсептөө > 30)). }.
+} Ал эми: { ↲ (эсептөө < 16 or: эсептөө > 30). }.
 ☞ белги ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

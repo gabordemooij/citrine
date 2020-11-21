@@ -10,7 +10,7 @@
 	(kuwerengetsa > 30) zoona: {
 		✎ lembani: ‘That is too long, some systems may reject passwords that long.’, imani.
 	}.
-} pomwe: { ↲ ((kuwerengetsa < 16) or: (kuwerengetsa > 30)). }.
+} pomwe: { ↲ (kuwerengetsa < 16 or: kuwerengetsa > 30). }.
 ☞ otchulidwa ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

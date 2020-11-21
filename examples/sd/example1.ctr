@@ -10,7 +10,7 @@
 	(ڻپ > 30) _چو: {
 		✎ کو: ‘That is too long, some systems may reject passwords that long.’, سٽاپ.
 	}.
-} ڏهنته: { ↲ ((ڻپ < 16) or: (ڻپ > 30)). }.
+} ڏهنته: { ↲ (ڻپ < 16 or: ڻپ > 30). }.
 ☞ کرن ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

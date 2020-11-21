@@ -10,7 +10,7 @@
 	(liczyć > 30) prawdziwe: {
 		✎ pisać: ‘That is too long, some systems may reject passwords that long.’, zatrzymać.
 	}.
-} podczas: { ↲ ((liczyć < 16) or: (liczyć > 30)). }.
+} podczas: { ↲ (liczyć < 16 or: liczyć > 30). }.
 ☞ postacie ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

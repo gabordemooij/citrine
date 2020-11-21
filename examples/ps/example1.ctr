@@ -10,7 +10,7 @@
 	(شمېرنه > 30) ریښتینی: {
 		✎ ولیکئ: ‘That is too long, some systems may reject passwords that long.’, درېدل.
 	}.
-} په داسې حال کې: { ↲ ((شمېرنه < 16) or: (شمېرنه > 30)). }.
+} په داسې حال کې: { ↲ (شمېرنه < 16 or: شمېرنه > 30). }.
 ☞ لوښه ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

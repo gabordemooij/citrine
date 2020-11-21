@@ -10,7 +10,7 @@
 	(numerare > 30) verum: {
 		✎ scribe: ‘That is too long, some systems may reject passwords that long.’, prohibere.
 	}.
-} dum;__: { ↲ ((numerare < 16) or: (numerare > 30)). }.
+} dum;__: { ↲ (numerare < 16 or: numerare > 30). }.
 ☞ characteribus ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

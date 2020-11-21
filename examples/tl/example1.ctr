@@ -10,7 +10,7 @@
 	(mabilang > 30) totoo: {
 		✎ sumulat: ‘That is too long, some systems may reject passwords that long.’, huminto.
 	}.
-} habang: { ↲ ((mabilang < 16) or: (mabilang > 30)). }.
+} habang: { ↲ (mabilang < 16 or: mabilang > 30). }.
 ☞ mga character ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

@@ -813,7 +813,7 @@ ctr_object* ctr_map_type(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * ☞ x ≔ Map new.
- * x put: ‘hello‘ at: ‘world’.
+ * x put: ‘hello’ at: ‘world’.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
@@ -888,7 +888,7 @@ ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList) {
  * @example
  * ☞ x ≔ Map new.
  * x red: ‘green’, yellow: ‘blue’.
- * ✎ write: x keys, stop.
+ * ✎ write: x entries, stop.
  */
 ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* list;
@@ -939,9 +939,9 @@ ctr_object* ctr_map_values(ctr_object* myself, ctr_argument* argumentList) {
  * ☞ x ≔ Map new.
  * x put: ‘a’ at: ‘b’.
  * x put: ‘hello’ at: ‘world’.
- * ✎ write: (x at: b), stop.
+ * ✎ write: (x at: ‘b’), stop.
  * ✎ write: (x world), stop.
- * ✎ write: (x ? b), stop.
+ * ✎ write: (x ? ‘b’), stop.
  */
 ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {
 
@@ -1062,7 +1062,7 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
  * [ Map ] has: [ Object ]
  *
  * @example
- * ✎ x ≔ Map new.
+ * ☞ x ≔ Map new.
  * x red: ‘green’, yellow: ‘blue’.
  * ✎ write: (x has: ‘red’), stop.
  * ✎ write: (x has: ‘purple’), stop.

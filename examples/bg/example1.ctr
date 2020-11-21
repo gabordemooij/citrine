@@ -10,7 +10,7 @@
 	(броя > 30) вярно: {
 		✎ напишете: ‘That is too long, some systems may reject passwords that long.’, Спри се.
 	}.
-} докато: { ↲ ((броя < 16) or: (броя > 30)). }.
+} докато: { ↲ (броя < 16 or: броя > 30). }.
 ☞ знаци ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

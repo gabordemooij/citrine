@@ -10,7 +10,7 @@
 	(telja > 30) satt: {
 		✎ skrifa: ‘That is too long, some systems may reject passwords that long.’, hætta.
 	}.
-} meðan: { ↲ ((telja < 16) or: (telja > 30)). }.
+} meðan: { ↲ (telja < 16 or: telja > 30). }.
 ☞ persónur ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

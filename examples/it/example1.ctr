@@ -10,7 +10,7 @@
 	(contare > 30) vero: {
 		✎ scrivi: ‘That is too long, some systems may reject passwords that long.’, fermare.
 	}.
-} mentre: { ↲ ((contare < 16) or: (contare > 30)). }.
+} mentre: { ↲ (contare < 16 or: contare > 30). }.
 ☞ personaggi ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

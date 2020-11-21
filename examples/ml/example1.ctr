@@ -10,7 +10,7 @@
 	(എണ്ണം > 30) true: {
 		✎ എഴുതുക: ‘That is too long, some systems may reject passwords that long.’, നിർത്തുക.
 	}.
-} അതേസമയം: { ↲ ((എണ്ണം < 16) or: (എണ്ണം > 30)). }.
+} അതേസമയം: { ↲ (എണ്ണം < 16 or: എണ്ണം > 30). }.
 ☞ പ്രതീകങ്ങൾ ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

@@ -10,7 +10,7 @@
 	(count > 30) true: {
 		✎ يېزىڭ: ‘That is too long, some systems may reject passwords that long.’, توختا.
 	}.
-} while: { ↲ ((count < 16) or: (count > 30)). }.
+} while: { ↲ (count < 16 or: count > 30). }.
 ☞ ھەرپلەر ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

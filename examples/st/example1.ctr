@@ -10,7 +10,7 @@
 	(bala > 30) ’nete: {
 		✎ ngola: ‘That is too long, some systems may reject passwords that long.’, ema.
 	}.
-} ha: { ↲ ((bala < 16) or: (bala > 30)). }.
+} ha: { ↲ (bala < 16 or: bala > 30). }.
 ☞ libapali ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

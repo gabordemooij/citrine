@@ -10,7 +10,7 @@
 	(anzahl > 30) wahr: {
 		✎ schreiben: ‘That is too long, some systems may reject passwords that long.’, halt.
 	}.
-} während: { ↲ ((anzahl < 16) or: (anzahl > 30)). }.
+} während: { ↲ (anzahl < 16 or: anzahl > 30). }.
 ☞ zeichen ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

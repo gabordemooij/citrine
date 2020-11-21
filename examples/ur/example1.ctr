@@ -10,7 +10,7 @@
 	(شمار > 30) سچ: {
 		✎ لکھیں: ‘That is too long, some systems may reject passwords that long.’, رک جاؤ.
 	}.
-} جبکہ: { ↲ ((شمار < 16) or: (شمار > 30)). }.
+} جبکہ: { ↲ (شمار < 16 or: شمار > 30). }.
 ☞ حروف ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

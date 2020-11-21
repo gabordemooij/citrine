@@ -10,7 +10,7 @@
 	(loendama > 30) tõsi: {
 		✎ kirjuta: ‘That is too long, some systems may reject passwords that long.’, peatus.
 	}.
-} samas: { ↲ ((loendama < 16) or: (loendama > 30)). }.
+} samas: { ↲ (loendama < 16 or: loendama > 30). }.
 ☞ tegelased ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

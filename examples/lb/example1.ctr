@@ -10,7 +10,7 @@
 	(zielen > 30) wouer: {
 		✎ schreiwen: ‘That is too long, some systems may reject passwords that long.’, stoppen.
 	}.
-} während: { ↲ ((zielen < 16) or: (zielen > 30)). }.
+} während: { ↲ (zielen < 16 or: zielen > 30). }.
 ☞ zeechen ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {
