@@ -198,7 +198,7 @@ ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
  * ✎ write: x type, stop.
  * ✎ write: 777 type, stop.
  * ✎ write: ‘ABC’ type, stop.
- * ✎ write: True, stop.
+ * ✎ write: True type, stop.
  */
 ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 	switch(myself->info.type){
@@ -480,7 +480,7 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * ☞ ×2 ≔ Object new.
- * ×2 on: 'respond:' do: { :s 
+ * ×2 on: ‘respond:’  do: { :s 
  * 	↲ (s + s).
  * }.
  * ✎ write: ×2 ho!.
@@ -518,7 +518,7 @@ ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList) {
  * [ Object ] learn: [ String ] means: [ String ].
  *
  * @example
- * Number learn: '-' means: '+'.
+ * Number learn: ‘-’ means: ‘+’ .
  * ✎ write: 2 - 1, stop.
  */
 ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argumentList) {
@@ -587,7 +587,7 @@ ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * (True ≠ False) true: { 
- * 	✎ write: 'This is not True!'.
+ * 	✎ write: ‘Nope!’.
  * }.
  */
 ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
@@ -1850,7 +1850,7 @@ ctr_object* ctr_string_to_string(ctr_object* myself, ctr_argument* argumentList)
  * [ String ] last: [ String ]
  *
  * @example
- * ☞ x ≔ ‘abca’ last: 'a'.
+ * ☞ x ≔ ‘abca’ last: ‘a’.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentList) {
