@@ -8,8 +8,8 @@
 Program tidiness: 0.
 
 ☞ txt ≔ ‘Word Salad’.
-✎ write: ( txt from: 6 length: 5 ).
-✎ write: ( txt offset: 5, remove surrounding spaces ), stop.
+✎ write: ( txt copy from: 6 length: 5 ).
+✎ write: ( txt copy offset: 5, remove surrounding spaces ), stop.
 
 Program clean memory.
 
@@ -17,16 +17,16 @@ usedMemory1 ≔ (Program memory ? 1).
 
 
 txt ≔ ‘Word Salad’.
-✎ write: ( txt from: 6 length: 5 ).
-✎ write: ( txt offset: 5, remove surrounding spaces ), stop.
+✎ write: ( txt copy from: 6 length: 5 ).
+✎ write: ( txt copy offset: 5, remove surrounding spaces ), stop.
 
 Program clean memory.
 usedMemory2 ≔ (Program memory ? 1).
 
 
 txt ≔ ‘Word Salad’.
-✎ write: ( txt from: 6 length: 5 ).
-✎ write: ( txt offset: 5, remove surrounding spaces ), stop.
+✎ write: ( txt copy from: 6 length: 5 ).
+✎ write: ( txt copy offset: 5, remove surrounding spaces ), stop.
 
 Program clean memory.
 usedMemory3 ≔ (Program memory ? 1).

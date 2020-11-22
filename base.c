@@ -1707,8 +1707,15 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	long b = (length->value.nvalue);
 	long ua, ub;
 	char* dest;
-	ctr_object* newString;
-	if (b == 0) return ctr_build_empty_string();
+	//printf("> len=%d, from=%d, len=%d \n",len,a,b);
+	if (b == 0 || len == 0) {
+		if (len) {
+			ctr_heap_free( myself->value.svalue->value );
+		}
+		myself->value.svalue->value = "";
+		myself->value.svalue->vlen = 0;
+		return myself;
+	}
 	if (b < 0) {
 		a = a + b;
 		b = labs(b);
@@ -1719,11 +1726,20 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	if ((a + b)<0) b = b - a;
 	ua = getBytesUtf8(myself->value.svalue->value, 0, a);
 	ub = getBytesUtf8(myself->value.svalue->value, ua, b);
+	if (ub == 0) {
+		if (len) {
+			ctr_heap_free( myself->value.svalue->value );
+		}
+		myself->value.svalue->value = "";
+		myself->value.svalue->vlen = 0;
+		return myself;
+	}
 	dest = ctr_heap_allocate( ub * sizeof(char) );
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
-	newString = ctr_build_string(dest,ub);
-	ctr_heap_free( dest );
-	return newString;
+	ctr_heap_free( myself->value.svalue->value );
+	myself->value.svalue->value = dest;
+	myself->value.svalue->vlen  = strlen(dest);
+    return myself;
 }
 
 /**
@@ -1805,7 +1821,6 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
  * ✎ write: ‘abc’ uppercase, stop.
  */
 ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* newString = NULL;
 	char* str = myself->value.svalue->value;
 	size_t  len = myself->value.svalue->vlen;
 	char* tstr = ctr_heap_allocate( len * sizeof( char ) );
@@ -1813,9 +1828,10 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
 	for(i =0; i < len; i++) {
 		tstr[i] = toupper(str[i]);
 	}
-	newString = ctr_build_string(tstr, len);
-	ctr_heap_free( tstr );
-	return newString;
+	ctr_heap_free( myself->value.svalue->value );
+	myself->value.svalue->value = tstr;
+	myself->value.svalue->vlen  = len;
+	return myself;
 }
 
 
@@ -1828,7 +1844,6 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
  * ✎ write: x, stop.
  */
 ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* newString = NULL;
 	char* str = myself->value.svalue->value;
 	size_t len = myself->value.svalue->vlen;
 	char* tstr = ctr_heap_allocate( len * sizeof( char ) );
@@ -1836,9 +1851,10 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
 	for(i =0; i < len; i++) {
 		tstr[i] = tolower(str[i]);
 	}
-	newString = ctr_build_string(tstr, len);
-	ctr_heap_free( tstr );
-	return newString;
+	ctr_heap_free( myself->value.svalue->value );
+	myself->value.svalue->value = tstr;
+	myself->value.svalue->vlen  = len;
+	return myself;
 }
 
 ctr_object* ctr_string_to_string(ctr_object* myself, ctr_argument* argumentList) {
@@ -1973,7 +1989,6 @@ ctr_object* ctr_string_contains( ctr_object* myself, ctr_argument* argumentList 
  * ✎ write: x remove surrounding spaces, stop.
  */
 ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* newString = NULL;
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
 	long i, begin, end, tlen;
@@ -1988,9 +2003,10 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	tlen = (end - begin);
 	tstr = ctr_heap_allocate( tlen * sizeof( char ) );
 	memcpy(tstr, str+begin, tlen);
-	newString = ctr_build_string(tstr, tlen);
-	ctr_heap_free( tstr );
-	return newString;
+	ctr_heap_free( myself->value.svalue->value );
+	myself->value.svalue->value = tstr;
+	myself->value.svalue->vlen  = len;
+	return myself;
 }
 
 /**
