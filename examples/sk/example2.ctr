@@ -1,5 +1,5 @@
-✎ píšu: ‘~ Roman numerals ~’, zastávka.
-✎ píšu: ‘Give a number to convert:’, zastávka.
+✎ píšu: ‘Rímske číslice’, zastávka.
+✎ píšu: ‘Zadajte číslo, ktoré chcete previesť:’, zastávka.
 ☞ _číslo ≔ Program opýtať sa _číslo absolútny.
 
 (_číslo = 0) true: {

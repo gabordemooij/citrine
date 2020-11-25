@@ -1,5 +1,5 @@
-✎ ýaz: ‘~ Roman numerals ~’, dur.
-✎ ýaz: ‘Give a number to convert:’, dur.
+✎ ýaz: ‘Rim sanlary’, dur.
+✎ ýaz: ‘Öwürmek üçin san beriň:’, dur.
 ☞ sany ≔ Programma sora sany mutlak.
 
 (sany = 0) dogry: {

@@ -1,11 +1,11 @@
-✎ ýaz: ‘~ Number Game ~’, dur.
-✎ ýaz: ‘Guess the number’, dur.
+✎ ýaz: ‘San oýny’, dur.
+✎ ýaz: ‘Belgini çaklaň’, dur.
 ☞ x ≔ San arasynda: 1 we: 10.
 ☞ q ≔ 0.
 q ≔ Programma sora.
 { 
-	✎ ýaz: ‘wrong!’, dur.
+	✎ ýaz: ‘ýalňyş!’, dur.
 	q ≔ Programma sora.
 
 } wagty: { ↲ x sany ≠ q sany. }.
-✎ ýaz: ‘correct!’, dur.
+✎ ýaz: ‘dogry!’, dur.

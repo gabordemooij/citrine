@@ -1,11 +1,11 @@
-✎ escribir: ‘~ Number Game ~’, parar.
-✎ escribir: ‘Guess the number’, parar.
+✎ escribir: ‘Xogo de números’, parar.
+✎ escribir: ‘Adiviña o número’, parar.
 ☞ x ≔ Número entre: 1 _e: 10.
 ☞ q ≔ 0.
 q ≔ Programa pregunta.
 { 
-	✎ escribir: ‘wrong!’, parar.
+	✎ escribir: ‘mal!’, parar.
 	q ≔ Programa pregunta.
 
 } mentres: { ↲ x número ≠ q número. }.
-✎ escribir: ‘correct!’, parar.
+✎ escribir: ‘correcto!’, parar.

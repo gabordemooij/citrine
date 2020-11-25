@@ -1,5 +1,5 @@
-✎ yazmak: ‘~ Roman numerals ~’, dur.
-✎ yazmak: ‘Give a number to convert:’, dur.
+✎ yazmak: ‘Roma rakamları’, dur.
+✎ yazmak: ‘Dönüştürmek için bir sayı verin:’, dur.
 ☞ numara ≔ Program sor numara kesin.
 
 (numara = 0) doğru: {

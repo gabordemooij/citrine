@@ -1,11 +1,11 @@
-✎ napišite: ‘~ Number Game ~’, ustavi se.
-✎ napišite: ‘Guess the number’, ustavi se.
+✎ napišite: ‘Številčna igra’, ustavi se.
+✎ napišite: ‘Ugani številko’, ustavi se.
 ☞ x ≔ Številka med: 1 in: 10.
 ☞ q ≔ 0.
 q ≔ Program vprašati.
 { 
-	✎ napišite: ‘wrong!’, ustavi se.
+	✎ napišite: ‘narobe!’, ustavi se.
 	q ≔ Program vprašati.
 
 } medtem: { ↲ x številka ≠ q številka. }.
-✎ napišite: ‘correct!’, ustavi se.
+✎ napišite: ‘pravilno!’, ustavi se.

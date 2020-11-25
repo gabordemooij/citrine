@@ -1,5 +1,5 @@
-✎ ikteb: ‘~ Roman numerals ~’, waqfa.
-✎ ikteb: ‘Give a number to convert:’, waqfa.
+✎ ikteb: ‘Numri Rumani’, waqfa.
+✎ ikteb: ‘Agħti numru biex tikkonverti:’, waqfa.
 ☞ numru ≔ Programm staqsi numru assoluta.
 
 (numru = 0) vera: {

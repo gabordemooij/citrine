@@ -1,5 +1,5 @@
-✎ skriuwe: ‘~ Roman numerals ~’, halte.
-✎ skriuwe: ‘Give a number to convert:’, halte.
+✎ skriuwe: ‘Romeinske sifers’, halte.
+✎ skriuwe: ‘Jou in getal om te konvertearjen:’, halte.
 ☞ nûmer ≔ Programma freegje nûmer absolút.
 
 (nûmer = 0) wier: {

@@ -1,18 +1,18 @@
-✎ nulis: ‘~ Password Generator ~’, eureun.
+✎ nulis: ‘Generator sandi’, eureun.
 ☞ ngitung ≔ 0.
 {
-	✎ nulis: ‘How many characters (16-30)?’, eureun.
+	✎ nulis: ‘Sabaraha karakter (16-30)?’, eureun.
 	ngitung ≔ Program naros jumlah mutlak.
 
 	(ngitung < 16) leres: {
-		✎ nulis: ‘That is not enough, please enter a number between 16 and 30.’, eureun.
+		✎ nulis: ‘Éta henteu cekap, mangga lebetkeun nomer antara 16 sareng 30.’, eureun.
 	}.
 	(ngitung > 30) leres: {
-		✎ nulis: ‘That is too long, some systems may reject passwords that long.’, eureun.
+		✎ nulis: ‘Éta panjang teuing, sababaraha sistem tiasa nolak kecap konci anu panjang.’, eureun.
 	}.
-} sedengkeun: { ↲ (ngitung < 16 or: ngitung > 30). }.
+} sedengkeun: { ↲ (ngitung < 16 atanapi: ngitung > 30). }.
 ☞ aksara ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ kecap akses ≔ ‘’.
 {
 	☞ char ≔ 
 		aksara karakter: ( 
@@ -20,6 +20,6 @@
 		antara: 1
 		jeung: aksara panjang
 	).
-	password lampiran: char.
+	kecap akses lampiran: char.
 } × ngitung.
-✎ nulis: password, eureun.
+✎ nulis: kecap akses, eureun.

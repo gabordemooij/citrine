@@ -1,11 +1,11 @@
-✎ kọ: ‘~ Number Game ~’, duro.
-✎ kọ: ‘Guess the number’, duro.
+✎ kọ: ‘Nọmba Ere’, duro.
+✎ kọ: ‘Gboju le won nọmba’, duro.
 ☞ x ≔ Nọmba laarin: 1 ati: 10.
 ☞ q ≔ 0.
 q ≔ Eto béèrè.
 { 
-	✎ kọ: ‘wrong!’, duro.
+	✎ kọ: ‘ti ko tọ!’, duro.
 	q ≔ Eto béèrè.
 
 } nigba ti: { ↲ x nọmba ≠ q nọmba. }.
-✎ kọ: ‘correct!’, duro.
+✎ kọ: ‘atunse!’, duro.

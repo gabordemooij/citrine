@@ -1,18 +1,18 @@
-✎ pisati: ‘~ Password Generator ~’, stop.
+✎ pisati: ‘Generator lozinki’, stop.
 ☞ računati ≔ 0.
 {
-	✎ pisati: ‘How many characters (16-30)?’, stop.
+	✎ pisati: ‘Koliko znakova (16-30)?’, stop.
 	računati ≔ Program pitati broj apsolutan.
 
 	(računati < 16) pravi: {
-		✎ pisati: ‘That is not enough, please enter a number between 16 and 30.’, stop.
+		✎ pisati: ‘To nije dovoljno, unesite broj između 16 i 30.’, stop.
 	}.
 	(računati > 30) pravi: {
-		✎ pisati: ‘That is too long, some systems may reject passwords that long.’, stop.
+		✎ pisati: ‘To je predugo, neki sustavi mogu odbiti lozinke toliko dugo.’, stop.
 	}.
-} dok: { ↲ (računati < 16 or: računati > 30). }.
+} dok: { ↲ (računati < 16 ili: računati > 30). }.
 ☞ likovi ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ lozinka ≔ ‘’.
 {
 	☞ char ≔ 
 		likovi lik: ( 
@@ -20,6 +20,6 @@
 		između i: 1
 		__: likovi dužina
 	).
-	password dodati: char.
+	lozinka dodati: char.
 } × računati.
-✎ pisati: password, stop.
+✎ pisati: lozinka, stop.

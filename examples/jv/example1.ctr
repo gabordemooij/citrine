@@ -1,18 +1,18 @@
-✎ nulis: ‘~ Password Generator ~’, mandheg.
+✎ nulis: ‘Pangembang sandhi’, mandheg.
 ☞ ngitung ≔ 0.
 {
-	✎ nulis: ‘How many characters (16-30)?’, mandheg.
+	✎ nulis: ‘Pira tokoh (16-30)?’, mandheg.
 	ngitung ≔ Program takon nomer mutlak.
 
 	(ngitung < 16) bener: {
-		✎ nulis: ‘That is not enough, please enter a number between 16 and 30.’, mandheg.
+		✎ nulis: ‘Ora cukup, mangga lebokake nomer ing antarane 16 lan 30.’, mandheg.
 	}.
 	(ngitung > 30) bener: {
-		✎ nulis: ‘That is too long, some systems may reject passwords that long.’, mandheg.
+		✎ nulis: ‘Wis suwe banget, sawetara sistem bisa nolak tembung sandhi sing dawa banget.’, mandheg.
 	}.
-} nalika: { ↲ (ngitung < 16 or: ngitung > 30). }.
+} nalika: { ↲ (ngitung < 16 utawa: ngitung > 30). }.
 ☞ aksara ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ sandhi ≔ ‘’.
 {
 	☞ char ≔ 
 		aksara karakter: ( 
@@ -20,6 +20,6 @@
 		antarane: 1
 		lan: aksara dawa
 	).
-	password lampiran: char.
+	sandhi lampiran: char.
 } × ngitung.
-✎ nulis: password, mandheg.
+✎ nulis: sandhi, mandheg.

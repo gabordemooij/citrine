@@ -1,5 +1,5 @@
-✎ scríobh: ‘~ Roman numerals ~’, stad.
-✎ scríobh: ‘Give a number to convert:’, stad.
+✎ scríobh: ‘Uimhreacha Rómhánacha’, stad.
+✎ scríobh: ‘Tabhair uimhir le tiontú:’, stad.
 ☞ uimhir ≔ Clár iarr uimhir iomlán.
 
 (uimhir = 0) fíor: {

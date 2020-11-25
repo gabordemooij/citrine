@@ -1,5 +1,5 @@
-✎ viết: ‘~ Roman numerals ~’, dừng lại.
-✎ viết: ‘Give a number to convert:’, dừng lại.
+✎ viết: ‘Số la mã’, dừng lại.
+✎ viết: ‘Đưa ra một số để chuyển đổi:’, dừng lại.
 ☞ con số ≔ Chương trình hỏi con số tuyệt đối.
 
 (con số = 0) thật: {

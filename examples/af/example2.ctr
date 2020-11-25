@@ -1,5 +1,5 @@
-✎ skryf: ‘~ Roman numerals ~’, stop.
-✎ skryf: ‘Give a number to convert:’, stop.
+✎ skryf: ‘Romeinse syfers’, stop.
+✎ skryf: ‘Gee 'n getal om om te skakel:’, stop.
 ☞ aantal ≔ Program vra aantal absolute.
 
 (aantal = 0) waar: {

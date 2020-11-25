@@ -1,5 +1,5 @@
-✎ skriva: ‘~ Roman numerals ~’, sluta.
-✎ skriva: ‘Give a number to convert:’, sluta.
+✎ skriva: ‘romerska siffror’, sluta.
+✎ skriva: ‘Ge ett nummer att konvertera:’, sluta.
 ☞ siffra ≔ Program fråga siffra absolut.
 
 (siffra = 0) sann: {

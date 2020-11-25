@@ -1,18 +1,18 @@
-✎ lembani: ‘~ Password Generator ~’, imani.
+✎ lembani: ‘Wopanga Mawu Achinsinsi’, imani.
 ☞ kuwerengetsa ≔ 0.
 {
-	✎ lembani: ‘How many characters (16-30)?’, imani.
+	✎ lembani: ‘Ndi anthu angati (16-30)?’, imani.
 	kuwerengetsa ≔ Pulogalamu funsani chiwerengero mtheradi.
 
 	(kuwerengetsa < 16) zoona: {
-		✎ lembani: ‘That is not enough, please enter a number between 16 and 30.’, imani.
+		✎ lembani: ‘Sikokwanira, chonde lembani nambala pakati pa 16 ndi 30.’, imani.
 	}.
 	(kuwerengetsa > 30) zoona: {
-		✎ lembani: ‘That is too long, some systems may reject passwords that long.’, imani.
+		✎ lembani: ‘Imeneyi ndi yayitali kwambiri, machitidwe ena akhoza kukana mapasiwedi aatali kwambiri.’, imani.
 	}.
-} pomwe: { ↲ (kuwerengetsa < 16 or: kuwerengetsa > 30). }.
+} pomwe: { ↲ (kuwerengetsa < 16 kapena: kuwerengetsa > 30). }.
 ☞ otchulidwa ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ achinsinsi ≔ ‘’.
 {
 	☞ char ≔ 
 		otchulidwa khalidwe: ( 
@@ -20,6 +20,6 @@
 		pakati: 1
 		ndi: otchulidwa kutalika
 	).
-	password kuwonjezera: char.
+	achinsinsi kuwonjezera: char.
 } × kuwerengetsa.
-✎ lembani: password, imani.
+✎ lembani: achinsinsi, imani.

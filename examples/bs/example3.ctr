@@ -1,11 +1,11 @@
-✎ pisati: ‘~ Number Game ~’, stani.
-✎ pisati: ‘Guess the number’, stani.
+✎ pisati: ‘Igra s brojevima’, stani.
+✎ pisati: ‘Pogodite broj’, stani.
 ☞ x ≔ Broj između: 1 _i: 10.
 ☞ q ≔ 0.
 q ≔ Program pitaj.
 { 
-	✎ pisati: ‘wrong!’, stani.
+	✎ pisati: ‘pogrešno!’, stani.
 	q ≔ Program pitaj.
 
 } dok: { ↲ x broj ≠ q broj. }.
-✎ pisati: ‘correct!’, stani.
+✎ pisati: ‘tačno!’, stani.

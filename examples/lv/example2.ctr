@@ -1,5 +1,5 @@
-✎ rakstīt: ‘~ Roman numerals ~’, apstāties.
-✎ rakstīt: ‘Give a number to convert:’, apstāties.
+✎ rakstīt: ‘Romiešu cipari’, apstāties.
+✎ rakstīt: ‘Piešķiriet skaitli konvertēšanai:’, apstāties.
 ☞ numuru ≔ Programma pajautā numuru absolūts.
 
 (numuru = 0) taisnība: {

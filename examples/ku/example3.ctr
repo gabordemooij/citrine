@@ -1,11 +1,11 @@
-✎ nivîsîn: ‘~ Number Game ~’, rawestan.
-✎ nivîsîn: ‘Guess the number’, rawestan.
+✎ nivîsîn: ‘Lîstika Jimareyê’, rawestan.
+✎ nivîsîn: ‘Hejmarê texmîn bikin’, rawestan.
 ☞ x ≔ Jimare di navbera: 1 _û: 10.
 ☞ q ≔ 0.
 q ≔ Bername pirsîn.
 { 
-	✎ nivîsîn: ‘wrong!’, rawestan.
+	✎ nivîsîn: ‘qelp!’, rawestan.
 	q ≔ Bername pirsîn.
 
 } demek: { ↲ x jimare ≠ q jimare. }.
-✎ nivîsîn: ‘correct!’, rawestan.
+✎ nivîsîn: ‘serrast!’, rawestan.

@@ -1,5 +1,5 @@
-✎ sumulat: ‘~ Roman numerals ~’, huminto.
-✎ sumulat: ‘Give a number to convert:’, huminto.
+✎ sumulat: ‘Romanong numero’, huminto.
+✎ sumulat: ‘Bigyan ng isang numero upang i-convert:’, huminto.
 ☞ bilang ≔ Program magtanong bilang ganap.
 
 (bilang = 0) totoo: {

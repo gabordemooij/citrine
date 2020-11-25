@@ -1,18 +1,18 @@
-✎ nyora: ‘~ Password Generator ~’, mira.
+✎ nyora: ‘Password jenareta’, mira.
 ☞ kuverenga ≔ 0.
 {
-	✎ nyora: ‘How many characters (16-30)?’, mira.
+	✎ nyora: ‘Vangani mavara (16-30)?’, mira.
 	kuverenga ≔ Chirongwa bvunza nhamba mhedziso.
 
 	(kuverenga < 16) chokwadi: {
-		✎ nyora: ‘That is not enough, please enter a number between 16 and 30.’, mira.
+		✎ nyora: ‘Izvo hazvina kukwana, ndapota nyora nhamba pakati pe16 ne30.’, mira.
 	}.
 	(kuverenga > 30) chokwadi: {
-		✎ nyora: ‘That is too long, some systems may reject passwords that long.’, mira.
+		✎ nyora: ‘Yakarebesa, mamwe masystem anogona kuramba mapassword akareba.’, mira.
 	}.
-} ne: { ↲ (kuverenga < 16 or: kuverenga > 30). }.
+} ne: { ↲ (kuverenga < 16 kana: kuverenga > 30). }.
 ☞ mavara ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ pasiwedhi ≔ ‘’.
 {
 	☞ char ≔ 
 		mavara hunhu: ( 
@@ -20,6 +20,6 @@
 		pakati: 1
 		uye: mavara kureba
 	).
-	password _shandisa: char.
+	pasiwedhi _shandisa: char.
 } × kuverenga.
-✎ nyora: password, mira.
+✎ nyora: pasiwedhi, mira.

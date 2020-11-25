@@ -1,5 +1,5 @@
-✎ ysgrifennu: ‘~ Roman numerals ~’, stopio.
-✎ ysgrifennu: ‘Give a number to convert:’, stopio.
+✎ ysgrifennu: ‘Rhifolion Rhufeinig’, stopio.
+✎ ysgrifennu: ‘Rhowch rif i'w drosi:’, stopio.
 ☞ rhif ≔ Rhaglen gofynnwch rhif absoliwt.
 
 (rhif = 0) gwir: {

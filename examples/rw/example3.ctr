@@ -1,11 +1,11 @@
-✎ andika: ‘~ Number Game ~’, hagarara.
-✎ andika: ‘Guess the number’, hagarara.
+✎ andika: ‘Umukino Wumubare’, hagarara.
+✎ andika: ‘Tekereza umubare’, hagarara.
 ☞ x ≔ Umubare hagati: 1 na: 10.
 ☞ q ≔ 0.
 q ≔ Gahunda baza.
 { 
-	✎ andika: ‘wrong!’, hagarara.
+	✎ andika: ‘nabi!’, hagarara.
 	q ≔ Gahunda baza.
 
 } mugihe: { ↲ x nimero ≠ q nimero. }.
-✎ andika: ‘correct!’, hagarara.
+✎ andika: ‘bikosore!’, hagarara.

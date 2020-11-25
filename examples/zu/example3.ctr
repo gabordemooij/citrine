@@ -1,11 +1,11 @@
-✎ bhala: ‘~ Number Game ~’, ima.
-✎ bhala: ‘Guess the number’, ima.
+✎ bhala: ‘Inombolo Game’, ima.
+✎ bhala: ‘Ukuqagela inombolo’, ima.
 ☞ x ≔ Inombolo phakathi: 1 no: 10.
 ☞ q ≔ 0.
 q ≔ Uhlelo buza.
 { 
-	✎ bhala: ‘wrong!’, ima.
+	✎ bhala: ‘akulungile!’, ima.
 	q ≔ Uhlelo buza.
 
 } ngenkathi: { ↲ x inombolo ≠ q inombolo. }.
-✎ bhala: ‘correct!’, ima.
+✎ bhala: ‘kulungile!’, ima.

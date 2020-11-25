@@ -1,5 +1,5 @@
-✎ bhala: ‘~ Roman numerals ~’, ima.
-✎ bhala: ‘Give a number to convert:’, ima.
+✎ bhala: ‘Izinombolo zamaRoma’, ima.
+✎ bhala: ‘Nikeza inombolo ezoguqulwa:’, ima.
 ☞ inombolo ≔ Uhlelo buza inombolo ngokuphelele.
 
 (inombolo = 0) iqiniso: {

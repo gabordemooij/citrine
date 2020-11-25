@@ -1,5 +1,5 @@
-✎ schrĳf: “~ Roman numerals ~”, stop.
-✎ schrĳf: “Give a number to convert:”, stop.
+✎ schrĳf: “Romeinse cijfers”, stop.
+✎ schrĳf: “Geef een getal om te converteren:”, stop.
 ☞ getal ≔ Programma vraag getal absoluut.
 
 (getal = 0) ja: {

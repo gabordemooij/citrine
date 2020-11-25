@@ -1,18 +1,18 @@
-✎ napišite: ‘~ Password Generator ~’, ustavi se.
+✎ napišite: ‘Generator gesel’, ustavi se.
 ☞ šteti ≔ 0.
 {
-	✎ napišite: ‘How many characters (16-30)?’, ustavi se.
+	✎ napišite: ‘Koliko znakov (16–30)?’, ustavi se.
 	šteti ≔ Program vprašati številka absolutno.
 
 	(šteti < 16) prav: {
-		✎ napišite: ‘That is not enough, please enter a number between 16 and 30.’, ustavi se.
+		✎ napišite: ‘To ni dovolj, vnesite številko med 16 in 30.’, ustavi se.
 	}.
 	(šteti > 30) prav: {
-		✎ napišite: ‘That is too long, some systems may reject passwords that long.’, ustavi se.
+		✎ napišite: ‘To je predolgo, nekateri sistemi lahko tako dolgo zavrnejo gesla.’, ustavi se.
 	}.
-} medtem: { ↲ (šteti < 16 or: šteti > 30). }.
+} medtem: { ↲ (šteti < 16 ali: šteti > 30). }.
 ☞ znakov ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ geslo ≔ ‘’.
 {
 	☞ char ≔ 
 		znakov lik: ( 
@@ -20,6 +20,6 @@
 		med: 1
 		in: znakov dolžino
 	).
-	password dodaj: char.
+	geslo dodaj: char.
 } × šteti.
-✎ napišite: password, ustavi se.
+✎ napišite: geslo, ustavi se.

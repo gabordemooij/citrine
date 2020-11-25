@@ -1,5 +1,5 @@
-✎ nulis: ‘~ Roman numerals ~’, mandheg.
-✎ nulis: ‘Give a number to convert:’, mandheg.
+✎ nulis: ‘Angka Romawi’, mandheg.
+✎ nulis: ‘Menehi nomer kanggo dikonversi:’, mandheg.
 ☞ nomer ≔ Program takon nomer mutlak.
 
 (nomer = 0) bener: {

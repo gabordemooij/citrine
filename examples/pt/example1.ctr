@@ -1,18 +1,18 @@
-✎ escrever: ‘~ Password Generator ~’, punto.
+✎ escrever: ‘Gerador de senhas’, punto.
 ☞ contagem ≔ 0.
 {
-	✎ escrever: ‘How many characters (16-30)?’, punto.
+	✎ escrever: ‘Quantos caracteres (16-30)?’, punto.
 	contagem ≔ Programa perguntar número absoluto.
 
 	(contagem < 16) verdade: {
-		✎ escrever: ‘That is not enough, please enter a number between 16 and 30.’, punto.
+		✎ escrever: ‘Isso não é suficiente, insira um número entre 16 e 30.’, punto.
 	}.
 	(contagem > 30) verdade: {
-		✎ escrever: ‘That is too long, some systems may reject passwords that long.’, punto.
+		✎ escrever: ‘É muito longo, alguns sistemas podem rejeitar senhas tão longas.’, punto.
 	}.
-} enquanto: { ↲ (contagem < 16 or: contagem > 30). }.
+} enquanto: { ↲ (contagem < 16 ou: contagem > 30). }.
 ☞ personagens ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ senha ≔ ‘’.
 {
 	☞ char ≔ 
 		personagens personagem: ( 
@@ -20,6 +20,6 @@
 		entre e: 1
 		__: personagens comprimento
 	).
-	password acrescentar: char.
+	senha acrescentar: char.
 } × contagem.
-✎ escrever: password, punto.
+✎ escrever: senha, punto.

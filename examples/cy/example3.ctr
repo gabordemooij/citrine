@@ -1,11 +1,11 @@
-✎ ysgrifennu: ‘~ Number Game ~’, stopio.
-✎ ysgrifennu: ‘Guess the number’, stopio.
+✎ ysgrifennu: ‘Gêm Rhif’, stopio.
+✎ ysgrifennu: ‘Dyfalwch y rhif’, stopio.
 ☞ x ≔ Rhif rhwng: 1 _a: 10.
 ☞ q ≔ 0.
 q ≔ Rhaglen gofynnwch.
 { 
-	✎ ysgrifennu: ‘wrong!’, stopio.
+	✎ ysgrifennu: ‘anghywir!’, stopio.
 	q ≔ Rhaglen gofynnwch.
 
 } tra: { ↲ x rhif ≠ q rhif. }.
-✎ ysgrifennu: ‘correct!’, stopio.
+✎ ysgrifennu: ‘cywir!’, stopio.

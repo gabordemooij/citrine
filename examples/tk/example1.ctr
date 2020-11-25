@@ -1,18 +1,18 @@
-✎ ýaz: ‘~ Password Generator ~’, dur.
+✎ ýaz: ‘Parol generatory’, dur.
 ☞ hasapla ≔ 0.
 {
-	✎ ýaz: ‘How many characters (16-30)?’, dur.
+	✎ ýaz: ‘Näçe simwol (16-30)?’, dur.
 	hasapla ≔ Programma sora sany mutlak.
 
 	(hasapla < 16) dogry: {
-		✎ ýaz: ‘That is not enough, please enter a number between 16 and 30.’, dur.
+		✎ ýaz: ‘Bu ýeterlik däl, 16 bilen 30 aralygynda san giriziň.’, dur.
 	}.
 	(hasapla > 30) dogry: {
-		✎ ýaz: ‘That is too long, some systems may reject passwords that long.’, dur.
+		✎ ýaz: ‘Bu gaty uzyn, käbir ulgamlar uzyn parollary ret edip bilerler.’, dur.
 	}.
-} wagty: { ↲ (hasapla < 16 or: hasapla > 30). }.
+} wagty: { ↲ (hasapla < 16 ýa-da: hasapla > 30). }.
 ☞ nyşanlary ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ parol ≔ ‘’.
 {
 	☞ char ≔ 
 		nyşanlary häsiýet: ( 
@@ -20,6 +20,6 @@
 		arasynda: 1
 		we: nyşanlary uzynlygy
 	).
-	password goşundy: char.
+	parol goşundy: char.
 } × hasapla.
-✎ ýaz: password, dur.
+✎ ýaz: parol, dur.

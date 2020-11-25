@@ -1,18 +1,18 @@
-✎ skryf: ‘~ Password Generator ~’, stop.
+✎ skryf: ‘Wagwoordgenerator’, stop.
 ☞ tel ≔ 0.
 {
-	✎ skryf: ‘How many characters (16-30)?’, stop.
+	✎ skryf: ‘Hoeveel karakters (16-30)?’, stop.
 	tel ≔ Program vra aantal absolute.
 
 	(tel < 16) waar: {
-		✎ skryf: ‘That is not enough, please enter a number between 16 and 30.’, stop.
+		✎ skryf: ‘Dit is nie genoeg nie. Voer asseblief 'n nommer tussen 16 en 30 in.’, stop.
 	}.
 	(tel > 30) waar: {
-		✎ skryf: ‘That is too long, some systems may reject passwords that long.’, stop.
+		✎ skryf: ‘Dit is te lank, sommige stelsels kan wagwoorde so lank verwerp.’, stop.
 	}.
-} terwyl: { ↲ (tel < 16 or: tel > 30). }.
+} terwyl: { ↲ (tel < 16 of: tel > 30). }.
 ☞ karakters ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ wagwoord ≔ ‘’.
 {
 	☞ char ≔ 
 		karakters karakter: ( 
@@ -20,6 +20,6 @@
 		tussen: 1
 		en: karakters lengte
 	).
-	password aanhegnavraag: char.
+	wagwoord aanhegnavraag: char.
 } × tel.
-✎ skryf: password, stop.
+✎ skryf: wagwoord, stop.

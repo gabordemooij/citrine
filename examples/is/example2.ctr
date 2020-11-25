@@ -1,5 +1,5 @@
-✎ skrifa: ‘~ Roman numerals ~’, hætta.
-✎ skrifa: ‘Give a number to convert:’, hætta.
+✎ skrifa: ‘Rómverskar tölur’, hætta.
+✎ skrifa: ‘Gefðu tölu til að umreikna:’, hætta.
 ☞ númer ≔ Forrit spyrja númer alger.
 
 (númer = 0) satt: {

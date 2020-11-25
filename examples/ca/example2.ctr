@@ -1,5 +1,5 @@
-✎ escriu: ‘~ Roman numerals ~’, atura.
-✎ escriu: ‘Give a number to convert:’, atura.
+✎ escriu: ‘Números romans’, atura.
+✎ escriu: ‘Doneu un número per convertir:’, atura.
 ☞ núm ≔ Programa pregunta núm absolut.
 
 (núm = 0) cert: {

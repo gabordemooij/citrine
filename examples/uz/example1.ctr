@@ -1,18 +1,18 @@
-✎ yozish: «~ Password Generator ~», to’xta.
+✎ yozish: «Parol yaratuvchisi», to’xta.
 ☞ hisoblash ≔ 0.
 {
-	✎ yozish: «How many characters (16-30)?», to’xta.
+	✎ yozish: «Qancha belgi (16-30)?», to’xta.
 	hisoblash ≔ Dastur so’rash raqam mutlaq.
 
 	(hisoblash < 16) haqiqiy: {
-		✎ yozish: «That is not enough, please enter a number between 16 and 30.», to’xta.
+		✎ yozish: «Bu etarli emas, iltimos, 16 dan 30 gacha raqamni kiriting.», to’xta.
 	}.
 	(hisoblash > 30) haqiqiy: {
-		✎ yozish: «That is too long, some systems may reject passwords that long.», to’xta.
+		✎ yozish: «Bu juda uzoq, ba'zi tizimlar shuncha vaqtgacha parollarni rad qilishi mumkin.», to’xta.
 	}.
-} vaqt: { ↲ (hisoblash < 16 or: hisoblash > 30). }.
+} vaqt: { ↲ (hisoblash < 16 yoki: hisoblash > 30). }.
 ☞ belgilar ≔ «acdefghjkmnprtwx2345789@#&».
-☞ password ≔ «».
+☞ parol ≔ «».
 {
 	☞ char ≔ 
 		belgilar belgi: ( 
@@ -20,6 +20,6 @@
 		orasida: 1
 		va: belgilar uzunligi
 	).
-	password qo’shish: char.
+	parol qo’shish: char.
 } × hisoblash.
-✎ yozish: password, to’xta.
+✎ yozish: parol, to’xta.

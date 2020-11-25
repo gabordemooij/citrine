@@ -1,10 +1,10 @@
-✎ schrĳf: “~ Number Game ~”, stop.
-✎ schrĳf: “Guess the number”, stop.
+✎ schrĳf: “Nummer spel”, stop.
+✎ schrĳf: “Raad het aantal”, stop.
 ☞ x ≔ Getal tussen: 1 en: 10.
 ☞ q ≔ 0.
 q ≔ Programma vraag.
 { 
-	✎ schrĳf: “wrong!”, stop.
+	✎ schrĳf: “mis!”, stop.
 	q ≔ Programma vraag.
 
 } zolang: { ↲ x getal ≠ q getal. }.

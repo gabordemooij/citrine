@@ -1,5 +1,5 @@
-✎ yaz: ‘~ Roman numerals ~’, dayan.
-✎ yaz: ‘Give a number to convert:’, dayan.
+✎ yaz: ‘Roma rəqəmləri’, dayan.
+✎ yaz: ‘Çevirmək üçün bir sıra verin:’, dayan.
 ☞ nömrə ≔ Proqram soruş nömrə mütləq.
 
 (nömrə = 0) doğru: {

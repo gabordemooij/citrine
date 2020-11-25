@@ -1,11 +1,11 @@
-✎ lembani: ‘~ Number Game ~’, imani.
-✎ lembani: ‘Guess the number’, imani.
+✎ lembani: ‘Masewera Amasewera’, imani.
+✎ lembani: ‘Ganizirani chiwerengerocho’, imani.
 ☞ x ≔ Chiwerengero pakati: 1 ndi: 10.
 ☞ q ≔ 0.
 q ≔ Pulogalamu funsani.
 { 
-	✎ lembani: ‘wrong!’, imani.
+	✎ lembani: ‘cholakwika!’, imani.
 	q ≔ Pulogalamu funsani.
 
 } pomwe: { ↲ x chiwerengero ≠ q chiwerengero. }.
-✎ lembani: ‘correct!’, imani.
+✎ lembani: ‘zolondola!’, imani.

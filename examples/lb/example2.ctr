@@ -1,5 +1,5 @@
-✎ schreiwen: ‘~ Roman numerals ~’, stoppen.
-✎ schreiwen: ‘Give a number to convert:’, stoppen.
+✎ schreiwen: ‘Réimesch Zuelen’, stoppen.
+✎ schreiwen: ‘Gitt eng Zuel fir ze konvertéieren:’, stoppen.
 ☞ zuel ≔ Programm froen zuel absolut.
 
 (zuel = 0) wouer: {

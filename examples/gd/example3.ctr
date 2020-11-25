@@ -1,11 +1,11 @@
-✎ sgrìobh: ‘~ Number Game ~’, stad.
-✎ sgrìobh: ‘Guess the number’, stad.
+✎ sgrìobh: ‘Gèam Àireamh’, stad.
+✎ sgrìobh: ‘Dèan tomhas air an àireamh’, stad.
 ☞ x ≔ Àireamh eadar: 1 agus: 10.
 ☞ q ≔ 0.
 q ≔ Prògram faighnich.
 { 
-	✎ sgrìobh: ‘wrong!’, stad.
+	✎ sgrìobh: ‘ceàrr!’, stad.
 	q ≔ Prògram faighnich.
 
 } fhad ’sa: { ↲ x àireamh ≠ q àireamh. }.
-✎ sgrìobh: ‘correct!’, stad.
+✎ sgrìobh: ‘ceart!’, stad.

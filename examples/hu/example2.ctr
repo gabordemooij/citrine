@@ -1,5 +1,5 @@
-✎ ír: ‘~ Roman numerals ~’, állj meg.
-✎ ír: ‘Give a number to convert:’, állj meg.
+✎ ír: ‘római számok’, állj meg.
+✎ ír: ‘Adjon meg egy számot az átalakításhoz:’, állj meg.
 ☞ szám ≔ Program kérdez szám abszolút.
 
 (szám = 0) igaz: {

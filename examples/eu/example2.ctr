@@ -1,5 +1,5 @@
-✎ idatzi: ‘~ Roman numerals ~’, geldialdia.
-✎ idatzi: ‘Give a number to convert:’, geldialdia.
+✎ idatzi: ‘Zenbaki erromatarrak’, geldialdia.
+✎ idatzi: ‘Eman zenbaki bat bihurtzeko:’, geldialdia.
 ☞ zenbakia ≔ Programa galdetu zenbakia absolutua.
 
 (zenbakia = 0) egia: {

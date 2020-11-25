@@ -1,16 +1,16 @@
-✎ sumulat: ‘~ Password Generator ~’, huminto.
+✎ sumulat: ‘Tagabuo ng password’, huminto.
 ☞ mabilang ≔ 0.
 {
-	✎ sumulat: ‘How many characters (16-30)?’, huminto.
+	✎ sumulat: ‘Ilan ang mga character (16-30)?’, huminto.
 	mabilang ≔ Program magtanong bilang ganap.
 
 	(mabilang < 16) totoo: {
-		✎ sumulat: ‘That is not enough, please enter a number between 16 and 30.’, huminto.
+		✎ sumulat: ‘Hindi sapat iyon, mangyaring maglagay ng numero sa pagitan ng 16 at 30.’, huminto.
 	}.
 	(mabilang > 30) totoo: {
-		✎ sumulat: ‘That is too long, some systems may reject passwords that long.’, huminto.
+		✎ sumulat: ‘Masyadong mahaba iyon, maaaring tanggihan ng ilang mga system ang mga password na mahaba.’, huminto.
 	}.
-} habang: { ↲ (mabilang < 16 or: mabilang > 30). }.
+} habang: { ↲ (mabilang < 16 _o: mabilang > 30). }.
 ☞ mga character ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

@@ -1,18 +1,18 @@
-✎ psát: „~ Password Generator ~“, stop.
+✎ psát: „Generátor hesel“, stop.
 ☞ počet ≔ 0.
 {
-	✎ psát: „How many characters (16-30)?“, stop.
+	✎ psát: „Kolik znaků (16-30)?“, stop.
 	počet ≔ Program zeptat se číslo absolutní.
 
 	(počet < 16) pravda: {
-		✎ psát: „That is not enough, please enter a number between 16 and 30.“, stop.
+		✎ psát: „To nestačí, zadejte prosím číslo mezi 16 a 30.“, stop.
 	}.
 	(počet > 30) pravda: {
-		✎ psát: „That is too long, some systems may reject passwords that long.“, stop.
+		✎ psát: „To je příliš dlouho, některé systémy mohou hesla tak dlouho odmítat.“, stop.
 	}.
-} zatímco: { ↲ (počet < 16 or: počet > 30). }.
+} zatímco: { ↲ (počet < 16 nebo: počet > 30). }.
 ☞ znaky ≔ „acdefghjkmnprtwx2345789@#&“.
-☞ password ≔ „“.
+☞ Heslo ≔ „“.
 {
 	☞ char ≔ 
 		znaky znak: ( 
@@ -20,6 +20,6 @@
 		mezi: 1
 		a hodnotou: znaky délka
 	).
-	password připojit: char.
+	Heslo připojit: char.
 } ⋅ počet.
-✎ psát: password, stop.
+✎ psát: Heslo, stop.

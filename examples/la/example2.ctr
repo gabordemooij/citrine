@@ -1,5 +1,5 @@
-✎ scribe: ‘~ Roman numerals ~’, prohibere.
-✎ scribe: ‘Give a number to convert:’, prohibere.
+✎ scribe: ‘Numeris Romanis utor’, prohibere.
+✎ scribe: ‘Da numerus converto;’, prohibere.
 ☞ numerus ≔ Program quaerere numerus absoluta.
 
 (numerus = 0) verum: {

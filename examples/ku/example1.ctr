@@ -1,18 +1,18 @@
-✎ nivîsîn: ‘~ Password Generator ~’, rawestan.
+✎ nivîsîn: ‘Jeneratorê şîfreyê’, rawestan.
 ☞ jimartin ≔ 0.
 {
-	✎ nivîsîn: ‘How many characters (16-30)?’, rawestan.
+	✎ nivîsîn: ‘Çend tîp (16-30)?’, rawestan.
 	jimartin ≔ Bername pirsîn jimare bêkêmasî.
 
 	(jimartin < 16) rast: {
-		✎ nivîsîn: ‘That is not enough, please enter a number between 16 and 30.’, rawestan.
+		✎ nivîsîn: ‘Ew ne bes e, ji kerema xwe di navbera 16 û 30-an de hejmarek binivîse.’, rawestan.
 	}.
 	(jimartin > 30) rast: {
-		✎ nivîsîn: ‘That is too long, some systems may reject passwords that long.’, rawestan.
+		✎ nivîsîn: ‘Ew pir dirêj e, dibe ku hin pergal şîfreyên ew qas dirêj red dikin.’, rawestan.
 	}.
-} demek: { ↲ (jimartin < 16 or: jimartin > 30). }.
+} demek: { ↲ (jimartin < 16 an: jimartin > 30). }.
 ☞ tîp ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ Şîfre ≔ ‘’.
 {
 	☞ char ≔ 
 		tîp şexsîyet: ( 
@@ -20,6 +20,6 @@
 		di navbera: 1
 		_û: tîp dirêjî
 	).
-	password append: char.
+	Şîfre append: char.
 } × jimartin.
-✎ nivîsîn: password, rawestan.
+✎ nivîsîn: Şîfre, rawestan.

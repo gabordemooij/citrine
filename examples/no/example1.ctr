@@ -1,18 +1,18 @@
-✎ skrive: ‘~ Password Generator ~’, stoppe.
+✎ skrive: ‘Passordgenerator’, stoppe.
 ☞ telle ≔ 0.
 {
-	✎ skrive: ‘How many characters (16-30)?’, stoppe.
+	✎ skrive: ‘Hvor mange karakterer (16-30)?’, stoppe.
 	telle ≔ Program spørre nummer absolutte.
 
 	(telle < 16) ekte: {
-		✎ skrive: ‘That is not enough, please enter a number between 16 and 30.’, stoppe.
+		✎ skrive: ‘Det er ikke nok, vennligst skriv inn et tall mellom 16 og 30.’, stoppe.
 	}.
 	(telle > 30) ekte: {
-		✎ skrive: ‘That is too long, some systems may reject passwords that long.’, stoppe.
+		✎ skrive: ‘Det er for langt, noen systemer kan avvise passord så lenge.’, stoppe.
 	}.
-} samtidig som: { ↲ (telle < 16 or: telle > 30). }.
+} samtidig som: { ↲ (telle < 16 eller: telle > 30). }.
 ☞ tegn ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ passord ≔ ‘’.
 {
 	☞ char ≔ 
 		tegn karakter: ( 
@@ -20,6 +20,6 @@
 		mellom og: 1
 		__: tegn lengde
 	).
-	password tilføy: char.
+	passord tilføy: char.
 } × telle.
-✎ skrive: password, stoppe.
+✎ skrive: passord, stoppe.

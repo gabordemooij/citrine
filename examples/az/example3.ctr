@@ -1,11 +1,11 @@
-✎ yaz: ‘~ Number Game ~’, dayan.
-✎ yaz: ‘Guess the number’, dayan.
+✎ yaz: ‘Sayı oyunu’, dayan.
+✎ yaz: ‘Nömrəni tapın’, dayan.
 ☞ x ≔ Nömrə arasında: 1 və: 10.
 ☞ q ≔ 0.
 q ≔ Proqram soruş.
 { 
-	✎ yaz: ‘wrong!’, dayan.
+	✎ yaz: ‘səhv!’, dayan.
 	q ≔ Proqram soruş.
 
 } isə: { ↲ x nömrə ≠ q nömrə. }.
-✎ yaz: ‘correct!’, dayan.
+✎ yaz: ‘düz!’, dayan.

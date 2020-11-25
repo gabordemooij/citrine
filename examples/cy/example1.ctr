@@ -1,18 +1,18 @@
-✎ ysgrifennu: ‘~ Password Generator ~’, stopio.
+✎ ysgrifennu: ‘Generadur cyfrinair’, stopio.
 ☞ cyfrif ≔ 0.
 {
-	✎ ysgrifennu: ‘How many characters (16-30)?’, stopio.
+	✎ ysgrifennu: ‘Sawl cymeriad (16-30)?’, stopio.
 	cyfrif ≔ Rhaglen gofynnwch rhif absoliwt.
 
 	(cyfrif < 16) gwir: {
-		✎ ysgrifennu: ‘That is not enough, please enter a number between 16 and 30.’, stopio.
+		✎ ysgrifennu: ‘Nid yw hynny'n ddigonol, nodwch rif rhwng 16 a 30.’, stopio.
 	}.
 	(cyfrif > 30) gwir: {
-		✎ ysgrifennu: ‘That is too long, some systems may reject passwords that long.’, stopio.
+		✎ ysgrifennu: ‘Mae hynny'n rhy hir, gall rhai systemau wrthod cyfrineiriau cyhyd.’, stopio.
 	}.
-} tra: { ↲ (cyfrif < 16 or: cyfrif > 30). }.
+} tra: { ↲ (cyfrif < 16 neu: cyfrif > 30). }.
 ☞ cymeriadau ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ cyfrinair ≔ ‘’.
 {
 	☞ char ≔ 
 		cymeriadau cymeriad: ( 
@@ -20,6 +20,6 @@
 		rhwng: 1
 		_a: cymeriadau hyd
 	).
-	password atodiad: char.
+	cyfrinair atodiad: char.
 } × cyfrif.
-✎ ysgrifennu: password, stopio.
+✎ ysgrifennu: cyfrinair, stopio.

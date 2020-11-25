@@ -1,5 +1,5 @@
-✎ napišite: ‘~ Roman numerals ~’, ustavi se.
-✎ napišite: ‘Give a number to convert:’, ustavi se.
+✎ napišite: ‘Rimske številke’, ustavi se.
+✎ napišite: ‘Dajte številko za pretvorbo:’, ustavi se.
 ☞ številka ≔ Program vprašati številka absolutno.
 
 (številka = 0) prav: {

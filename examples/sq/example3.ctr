@@ -1,11 +1,11 @@
-✎ shkruaj: ‘~ Number Game ~’, ndaluar.
-✎ shkruaj: ‘Guess the number’, ndaluar.
+✎ shkruaj: ‘Nommer spel’, ndaluar.
+✎ shkruaj: ‘Raai die nommer’, ndaluar.
 ☞ x ≔ Numër midis dhe: 1 __: 10.
 ☞ q ≔ 0.
 q ≔ Program kërkoj.
 { 
-	✎ shkruaj: ‘wrong!’, ndaluar.
+	✎ shkruaj: ‘verkeerde!’, ndaluar.
 	q ≔ Program kërkoj.
 
 } derisa: { ↲ x numër ≠ q numër. }.
-✎ shkruaj: ‘correct!’, ndaluar.
+✎ shkruaj: ‘korrek!’, ndaluar.

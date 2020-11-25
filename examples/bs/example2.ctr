@@ -1,5 +1,5 @@
-✎ pisati: ‘~ Roman numerals ~’, stani.
-✎ pisati: ‘Give a number to convert:’, stani.
+✎ pisati: ‘Rimski brojevi’, stani.
+✎ pisati: ‘Dajte broj za konverziju:’, stani.
 ☞ broj ≔ Program pitaj broj apsolutni.
 
 (broj = 0) istinito: {

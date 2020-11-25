@@ -1,11 +1,11 @@
-✎ skrive: ‘~ Number Game ~’, hold op.
-✎ skrive: ‘Guess the number’, hold op.
+✎ skrive: ‘Nummer spil’, hold op.
+✎ skrive: ‘Gæt nummeret’, hold op.
 ☞ x ≔ Nummer mellem: 1 og: 10.
 ☞ q ≔ 0.
 q ≔ Program spørge.
 { 
-	✎ skrive: ‘wrong!’, hold op.
+	✎ skrive: ‘forkert!’, hold op.
 	q ≔ Program spørge.
 
 } mens: { ↲ x nummer ≠ q nummer. }.
-✎ skrive: ‘correct!’, hold op.
+✎ skrive: ‘korrekt!’, hold op.
