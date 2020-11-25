@@ -1,18 +1,18 @@
-✎ yazmak: ‘~ Password Generator ~’, dur.
+✎ yazmak: ‘Şifre oluşturucu’, dur.
 ☞ miktar ≔ 0.
 {
-	✎ yazmak: ‘How many characters (16-30)?’, dur.
+	✎ yazmak: ‘Kaç karakter (16-30)?’, dur.
 	miktar ≔ Program sor numara kesin.
 
 	(miktar < 16) doğru: {
-		✎ yazmak: ‘That is not enough, please enter a number between 16 and 30.’, dur.
+		✎ yazmak: ‘Bu yeterli değil, lütfen 16 ile 30 arasında bir sayı girin.’, dur.
 	}.
 	(miktar > 30) doğru: {
-		✎ yazmak: ‘That is too long, some systems may reject passwords that long.’, dur.
+		✎ yazmak: ‘Bu çok uzun, bazı sistemler şifreleri bu kadar uzun süre reddedebilir.’, dur.
 	}.
-} süre: { ↲ (miktar < 16 or: miktar > 30). }.
+} süre: { ↲ (miktar < 16 veya: miktar > 30). }.
 ☞ karakterler ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ parola ≔ ‘’.
 {
 	☞ char ≔ 
 		karakterler karakter: ( 
@@ -20,6 +20,6 @@
 		arasında: 1
 		ve: karakterler uzunluk
 	).
-	password ekleme: char.
+	parola ekleme: char.
 } × miktar.
-✎ yazmak: password, dur.
+✎ yazmak: parola, dur.

@@ -1,11 +1,11 @@
-✎ sumulat: ‘~ Number Game ~’, huminto.
-✎ sumulat: ‘Guess the number’, huminto.
+✎ sumulat: ‘Numero ng Laro’, huminto.
+✎ sumulat: ‘Hulaan ang bilang’, huminto.
 ☞ x ≔ Bilang sa pagitan ng: 1 at: 10.
 ☞ q ≔ 0.
 q ≔ Program magtanong.
 { 
-	✎ sumulat: ‘wrong!’, huminto.
+	✎ sumulat: ‘mali!’, huminto.
 	q ≔ Program magtanong.
 
 } habang: { ↲ x bilang ≠ q bilang. }.
-✎ sumulat: ‘correct!’, huminto.
+✎ sumulat: ‘tama!’, huminto.

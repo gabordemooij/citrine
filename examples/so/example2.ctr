@@ -1,5 +1,5 @@
-✎ qor: ‘~ Roman numerals ~’, jooji.
-✎ qor: ‘Give a number to convert:’, jooji.
+✎ qor: ‘Nambarada Roomaanka’, jooji.
+✎ qor: ‘Sii lambar aad u beddelayso:’, jooji.
 ☞ tirada ≔ Barnaamij weydiiso tirada gebi ahaanba.
 
 (tirada = 0) run: {

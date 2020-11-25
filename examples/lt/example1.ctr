@@ -1,18 +1,18 @@
-✎ atspausdinti: ‘~ Password Generator ~’, sustoti.
+✎ atspausdinti: ‘Slaptažodžių generatorius’, sustoti.
 ☞ skaičiuoti ≔ 0.
 {
-	✎ atspausdinti: ‘How many characters (16-30)?’, sustoti.
+	✎ atspausdinti: ‘Kiek simbolių (16–30)?’, sustoti.
 	skaičiuoti ≔ Programa klausti skaičius modulis.
 
 	(skaičiuoti < 16) tiesa: {
-		✎ atspausdinti: ‘That is not enough, please enter a number between 16 and 30.’, sustoti.
+		✎ atspausdinti: ‘To nepakanka, įveskite skaičių nuo 16 iki 30.’, sustoti.
 	}.
 	(skaičiuoti > 30) tiesa: {
-		✎ atspausdinti: ‘That is too long, some systems may reject passwords that long.’, sustoti.
+		✎ atspausdinti: ‘Tai yra per ilgai, kai kurios sistemos gali atmesti slaptažodžius.’, sustoti.
 	}.
-} kol: { ↲ (skaičiuoti < 16 or: skaičiuoti > 30). }.
+} kol: { ↲ (skaičiuoti < 16 arba: skaičiuoti > 30). }.
 ☞ simboliai ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ Slaptažodis ≔ ‘’.
 {
 	☞ char ≔ 
 		simboliai simbolis: ( 
@@ -20,6 +20,6 @@
 		tarp: 1
 		ir: simboliai ilgis
 	).
-	password pridėti: char.
+	Slaptažodis pridėti: char.
 } × skaičiuoti.
-✎ atspausdinti: password, sustoti.
+✎ atspausdinti: Slaptažodis, sustoti.

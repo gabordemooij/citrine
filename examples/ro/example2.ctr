@@ -1,5 +1,5 @@
-✎ scrie: ‘~ Roman numerals ~’, stop.
-✎ scrie: ‘Give a number to convert:’, stop.
+✎ scrie: ‘numere romane’, stop.
+✎ scrie: ‘Dați un număr pentru a converti:’, stop.
 ☞ număr ≔ Program întreabă număr absolut.
 
 (număr = 0) adevărat: {

@@ -1,11 +1,11 @@
-✎ kirjuta: ‘~ Number Game ~’, peatus.
-✎ kirjuta: ‘Guess the number’, peatus.
+✎ kirjuta: ‘Numbrimäng’, peatus.
+✎ kirjuta: ‘Arvake arv ära’, peatus.
 ☞ x ≔ Arv vahel: 1 ja: 10.
 ☞ q ≔ 0.
 q ≔ Programm küsige.
 { 
-	✎ kirjuta: ‘wrong!’, peatus.
+	✎ kirjuta: ‘vale!’, peatus.
 	q ≔ Programm küsige.
 
 } samas: { ↲ x number ≠ q number. }.
-✎ kirjuta: ‘correct!’, peatus.
+✎ kirjuta: ‘õige!’, peatus.

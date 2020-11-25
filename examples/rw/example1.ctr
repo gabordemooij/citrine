@@ -1,18 +1,18 @@
-✎ andika: ‘~ Password Generator ~’, hagarara.
+✎ andika: ‘Amashanyarazi’, hagarara.
 ☞ kubara ≔ 0.
 {
-	✎ andika: ‘How many characters (16-30)?’, hagarara.
+	✎ andika: ‘Inyuguti zingahe (16-30)?’, hagarara.
 	kubara ≔ Gahunda baza nimero byuzuye.
 
 	(kubara < 16) ukuri: {
-		✎ andika: ‘That is not enough, please enter a number between 16 and 30.’, hagarara.
+		✎ andika: ‘Ibyo ntibihagije, nyamuneka andika umubare uri hagati ya 16 na 30.’, hagarara.
 	}.
 	(kubara > 30) ukuri: {
-		✎ andika: ‘That is too long, some systems may reject passwords that long.’, hagarara.
+		✎ andika: ‘Ibyo ni birebire cyane, sisitemu zimwe zishobora kwanga ijambo ryibanga rirerire.’, hagarara.
 	}.
-} mugihe: { ↲ (kubara < 16 or: kubara > 30). }.
+} mugihe: { ↲ (kubara < 16 cyangwa: kubara > 30). }.
 ☞ inyuguti ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ ijambo ryibanga ≔ ‘’.
 {
 	☞ char ≔ 
 		inyuguti imiterere: ( 
@@ -20,6 +20,6 @@
 		hagati: 1
 		na: inyuguti uburebure
 	).
-	password umugereka: char.
+	ijambo ryibanga umugereka: char.
 } × kubara.
-✎ andika: password, hagarara.
+✎ andika: ijambo ryibanga, hagarara.

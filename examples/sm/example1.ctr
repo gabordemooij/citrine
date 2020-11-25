@@ -1,18 +1,18 @@
-✎ tusi: ‘~ Password Generator ~’, taofi.
+✎ tusi: ‘Upuupu upu afi’, taofi.
 ☞ faitau ≔ 0.
 {
-	✎ tusi: ‘How many characters (16-30)?’, taofi.
+	✎ tusi: ‘E fia mataʻitusi (16-30)?’, taofi.
 	faitau ≔ Polokalama fesili numera saʻo.
 
 	(faitau < 16) moni: {
-		✎ tusi: ‘That is not enough, please enter a number between 16 and 30.’, taofi.
+		✎ tusi: ‘E le lava lena, faʻamolemole tusi se numera i le va o le 16 ma le 30.’, taofi.
 	}.
 	(faitau > 30) moni: {
-		✎ tusi: ‘That is too long, some systems may reject passwords that long.’, taofi.
+		✎ tusi: ‘E umi tele lena, o nisi faiga e mafai ona teena faʻaupuga umi na.’, taofi.
 	}.
-} ao: { ↲ (faitau < 16 or: faitau > 30). }.
+} ao: { ↲ (faitau < 16 poʻo: faitau > 30). }.
 ☞ mataitusi ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ numera e le iloa e sesi ≔ ‘’.
 {
 	☞ char ≔ 
 		mataitusi amio: ( 
@@ -20,6 +20,6 @@
 		i le va o: 1
 		ma: mataitusi uumi
 	).
-	password faʻaopoopo: char.
+	numera e le iloa e sesi faʻaopoopo: char.
 } × faitau.
-✎ tusi: password, taofi.
+✎ tusi: numera e le iloa e sesi, taofi.

@@ -1,5 +1,5 @@
-✎ pagsulat: ‘~ Roman numerals ~’, hunong.
-✎ pagsulat: ‘Give a number to convert:’, hunong.
+✎ pagsulat: ‘Mga numerong Romano’, hunong.
+✎ pagsulat: ‘Paghatag numero aron mabag-o:’, hunong.
 ☞ gidaghanon ≔ Programa pangutana gidaghanon hingpit.
 
 (gidaghanon = 0) tinuod: {

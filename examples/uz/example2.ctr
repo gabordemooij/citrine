@@ -1,5 +1,5 @@
-✎ yozish: «~ Roman numerals ~», to’xta.
-✎ yozish: «Give a number to convert:», to’xta.
+✎ yozish: «Rim raqamlari», to’xta.
+✎ yozish: «Konvertatsiya qilish uchun raqam bering:», to’xta.
 ☞ raqam ≔ Dastur so’rash raqam mutlaq.
 
 (raqam = 0) haqiqiy: {

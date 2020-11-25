@@ -1,11 +1,11 @@
-✎ rubuta: “~ Number Game ~”, tsayawa.
-✎ rubuta: “Guess the number”, tsayawa.
+✎ rubuta: “Wasan Lambar”, tsayawa.
+✎ rubuta: “Gane lambar”, tsayawa.
 ☞ x ≔ Lambar tsakanin: 1 da: 10.
 ☞ q ≔ 0.
 q ≔ Shirin tambaya.
 { 
-	✎ rubuta: “wrong!”, tsayawa.
+	✎ rubuta: “ba daidai ba!”, tsayawa.
 	q ≔ Shirin tambaya.
 
 } yayin: { ↲ x lamba ≠ q lamba. }.
-✎ rubuta: “correct!”, tsayawa.
+✎ rubuta: “daidai!”, tsayawa.

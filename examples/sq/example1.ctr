@@ -1,18 +1,18 @@
-✎ shkruaj: ‘~ Password Generator ~’, ndaluar.
+✎ shkruaj: ‘Wagwoordgenerator’, ndaluar.
 ☞ akuzë ≔ 0.
 {
-	✎ shkruaj: ‘How many characters (16-30)?’, ndaluar.
+	✎ shkruaj: ‘Hoeveel karakters (16-30)?’, ndaluar.
 	akuzë ≔ Program kërkoj numër absolut.
 
 	(akuzë < 16) e vërtetë: {
-		✎ shkruaj: ‘That is not enough, please enter a number between 16 and 30.’, ndaluar.
+		✎ shkruaj: ‘Dit is nie genoeg nie. Voer asseblief 'n nommer tussen 16 en 30 in.’, ndaluar.
 	}.
 	(akuzë > 30) e vërtetë: {
-		✎ shkruaj: ‘That is too long, some systems may reject passwords that long.’, ndaluar.
+		✎ shkruaj: ‘Dit is te lank, sommige stelsels kan wagwoorde so lank verwerp.’, ndaluar.
 	}.
-} derisa: { ↲ (akuzë < 16 or: akuzë > 30). }.
+} derisa: { ↲ (akuzë < 16 ose: akuzë > 30). }.
 ☞ karaktere ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ wagwoord ≔ ‘’.
 {
 	☞ char ≔ 
 		karaktere karakteri: ( 
@@ -20,6 +20,6 @@
 		midis dhe: 1
 		__: karaktere gjatësi
 	).
-	password append: char.
+	wagwoord append: char.
 } × akuzë.
-✎ shkruaj: password, ndaluar.
+✎ shkruaj: wagwoord, ndaluar.

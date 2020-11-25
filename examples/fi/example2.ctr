@@ -1,5 +1,5 @@
-✎ kirjoittaa: ‘~ Roman numerals ~’, lopettaa.
-✎ kirjoittaa: ‘Give a number to convert:’, lopettaa.
+✎ kirjoittaa: ‘roomalaiset numerot’, lopettaa.
+✎ kirjoittaa: ‘Anna luku muunnettavaksi:’, lopettaa.
 ☞ määrä ≔ Ohjelmoida kysyä määrä absoluuttinen.
 
 (määrä = 0) totta: {

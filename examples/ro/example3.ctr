@@ -1,11 +1,11 @@
-✎ scrie: ‘~ Number Game ~’, stop.
-✎ scrie: ‘Guess the number’, stop.
+✎ scrie: ‘Joc de numere’, stop.
+✎ scrie: ‘Ghiciți numărul’, stop.
 ☞ x ≔ Număr între: 1 şi: 10.
 ☞ q ≔ 0.
 q ≔ Program întreabă.
 { 
-	✎ scrie: ‘wrong!’, stop.
+	✎ scrie: ‘gresit!’, stop.
 	q ≔ Program întreabă.
 
 } cât timp: { ↲ x număr ≠ q număr. }.
-✎ scrie: ‘correct!’, stop.
+✎ scrie: ‘corect!’, stop.

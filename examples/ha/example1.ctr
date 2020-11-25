@@ -1,18 +1,18 @@
-✎ rubuta: “~ Password Generator ~”, tsayawa.
+✎ rubuta: “Kalmar wucewa ta kalmar wucewa”, tsayawa.
 ☞ kirga ≔ 0.
 {
-	✎ rubuta: “How many characters (16-30)?”, tsayawa.
+	✎ rubuta: “Haruffa nawa (16-30)?”, tsayawa.
 	kirga ≔ Shirin tambaya lamba cikakken.
 
 	(kirga < 16) gaskiya: {
-		✎ rubuta: “That is not enough, please enter a number between 16 and 30.”, tsayawa.
+		✎ rubuta: “Wannan bai isa ba, don Allah shigar da lamba tsakanin 16 da 30.”, tsayawa.
 	}.
 	(kirga > 30) gaskiya: {
-		✎ rubuta: “That is too long, some systems may reject passwords that long.”, tsayawa.
+		✎ rubuta: “Wannan ya yi tsayi da yawa, wasu tsarin na iya ƙin kalmar sirri da ta daɗe.”, tsayawa.
 	}.
-} yayin: { ↲ (kirga < 16 or: kirga > 30). }.
+} yayin: { ↲ (kirga < 16 ko: kirga > 30). }.
 ☞ haruffa ≔ “acdefghjkmnprtwx2345789@#&”.
-☞ password ≔ “”.
+☞ kalmar wucewa ≔ “”.
 {
 	☞ char ≔ 
 		haruffa hali: ( 
@@ -20,6 +20,6 @@
 		tsakanin: 1
 		da: haruffa tsawon
 	).
-	password append: char.
+	kalmar wucewa append: char.
 } × kirga.
-✎ rubuta: password, tsayawa.
+✎ rubuta: kalmar wucewa, tsayawa.

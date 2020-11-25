@@ -1,5 +1,5 @@
-✎ 書く：__: ‘~ Roman numerals ~’, やめる.
-✎ 書く：__: ‘Give a number to convert:’, やめる.
+✎ 書く：__: ‘Angka Romawi’, やめる.
+✎ 書く：__: ‘Menehi nomer kanggo dikonversi:’, やめる.
 ☞ __数 ≔ プログラム 尋ねる __数 絶対の.
 
 (__数 = 0) 真：__: {

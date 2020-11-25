@@ -1,5 +1,5 @@
-✎ nyora: ‘~ Roman numerals ~’, mira.
-✎ nyora: ‘Give a number to convert:’, mira.
+✎ nyora: ‘Nhamba dzeRoma’, mira.
+✎ nyora: ‘Ipa nhamba yekushandura:’, mira.
 ☞ nhamba ≔ Chirongwa bvunza nhamba mhedziso.
 
 (nhamba = 0) chokwadi: {

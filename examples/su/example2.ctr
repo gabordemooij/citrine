@@ -1,5 +1,5 @@
-✎ nulis: ‘~ Roman numerals ~’, eureun.
-✎ nulis: ‘Give a number to convert:’, eureun.
+✎ nulis: ‘Angka Romawi’, eureun.
+✎ nulis: ‘Pasihan angka pikeun ngarobih:’, eureun.
 ☞ jumlah ≔ Program naros jumlah mutlak.
 
 (jumlah = 0) leres: {

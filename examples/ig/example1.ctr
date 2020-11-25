@@ -1,18 +1,18 @@
-✎ dee: ‘~ Password Generator ~’, kwụsị.
+✎ dee: ‘Ihe eji abanye okwu’, kwụsị.
 ☞ gụọ ≔ 0.
 {
-	✎ dee: ‘How many characters (16-30)?’, kwụsị.
+	✎ dee: ‘Charactersdị ole (16-30)?’, kwụsị.
 	gụọ ≔ Mmemme jụọ nọmba zuru oke.
 
 	(gụọ < 16) eziokwu: {
-		✎ dee: ‘That is not enough, please enter a number between 16 and 30.’, kwụsị.
+		✎ dee: ‘Nke ahụ ezughị, biko tinye nọmba n'etiti 16 na 30.’, kwụsị.
 	}.
 	(gụọ > 30) eziokwu: {
-		✎ dee: ‘That is too long, some systems may reject passwords that long.’, kwụsị.
+		✎ dee: ‘Nke ahụ toro oke ogologo, ụfọdụ sistemụ nwere ike jụ okwuntughe nke ogologo.’, kwụsị.
 	}.
-} mgbe: { ↲ (gụọ < 16 or: gụọ > 30). }.
+} mgbe: { ↲ (gụọ < 16 ma ọ bụ: gụọ > 30). }.
 ☞ odide ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ okwuntughe ≔ ‘’.
 {
 	☞ char ≔ 
 		odide agwa: ( 
@@ -20,6 +20,6 @@
 		n’etiti: 1
 		na: odide ogologo
 	).
-	password append: char.
+	okwuntughe append: char.
 } × gụọ.
-✎ dee: password, kwụsị.
+✎ dee: okwuntughe, kwụsị.

@@ -1,18 +1,18 @@
-✎ ngola: ‘~ Password Generator ~’, ema.
+✎ ngola: ‘Jenereithara ea phasewete’, ema.
 ☞ bala ≔ 0.
 {
-	✎ ngola: ‘How many characters (16-30)?’, ema.
+	✎ ngola: ‘Ke batho ba bakae (16-30)?’, ema.
 	bala ≔ Lenaneo botsa palo ka ho felletseng.
 
 	(bala < 16) ’nete: {
-		✎ ngola: ‘That is not enough, please enter a number between 16 and 30.’, ema.
+		✎ ngola: ‘Seo ha sea lekana, ka kopo kenya nomoro lipakeng tsa 16 le 30.’, ema.
 	}.
 	(bala > 30) ’nete: {
-		✎ ngola: ‘That is too long, some systems may reject passwords that long.’, ema.
+		✎ ngola: ‘E telele haholo, lits'ebetso tse ling li ka hana li-password tse telele joalo.’, ema.
 	}.
-} ha: { ↲ (bala < 16 or: bala > 30). }.
+} ha: { ↲ (bala < 16 kapa: bala > 30). }.
 ☞ libapali ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ phasewete ≔ ‘’.
 {
 	☞ char ≔ 
 		libapali botho: ( 
@@ -20,6 +20,6 @@
 		pakeng tsa: 1
 		le: libapali bolelele
 	).
-	password eketsa: char.
+	phasewete eketsa: char.
 } × bala.
-✎ ngola: password, ema.
+✎ ngola: phasewete, ema.

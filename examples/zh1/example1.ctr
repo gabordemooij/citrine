@@ -1,18 +1,18 @@
-✎ 寫：__: ‘~ Password Generator ~’, _停.
+✎ 寫：__: ‘密碼生成器’, _停.
 ☞ 計數 ≔ 0.
 {
-	✎ 寫：__: ‘How many characters (16-30)?’, _停.
+	✎ 寫：__: ‘多少個字符（16-30）？’, _停.
 	計數 ≔ 程序 _問 __數 絕對.
 
 	(計數 < 16) 真正：__: {
-		✎ 寫：__: ‘That is not enough, please enter a number between 16 and 30.’, _停.
+		✎ 寫：__: ‘這還不夠，請輸入16到30之間的數字。’, _停.
 	}.
 	(計數 > 30) 真正：__: {
-		✎ 寫：__: ‘That is too long, some systems may reject passwords that long.’, _停.
+		✎ 寫：__: ‘太長了，某些系統可能會拒絕那麼長的密碼。’, _停.
 	}.
-} 而：__: { ↲ (計數 < 16 or: 計數 > 30). }.
+} 而：__: { ↲ (計數 < 16 要么：__: 計數 > 30). }.
 ☞ 人物 ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ 密碼 ≔ ‘’.
 {
 	☞ char ≔ 
 		人物 字符：__: ( 
@@ -20,6 +20,6 @@
 		之間：__: 1
 		__: 人物 長度
 	).
-	password 附加：__: char.
+	密碼 附加：__: char.
 } × 計數.
-✎ 寫：__: password, _停.
+✎ 寫：__: 密碼, _停.

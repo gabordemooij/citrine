@@ -1,5 +1,5 @@
-✎ shkruaj: ‘~ Roman numerals ~’, ndaluar.
-✎ shkruaj: ‘Give a number to convert:’, ndaluar.
+✎ shkruaj: ‘Romeinse syfers’, ndaluar.
+✎ shkruaj: ‘Gee 'n getal om om te skakel:’, ndaluar.
 ☞ numër ≔ Program kërkoj numër absolut.
 
 (numër = 0) e vërtetë: {

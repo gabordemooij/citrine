@@ -1,5 +1,5 @@
-✎ psát: „~ Roman numerals ~“, stop.
-✎ psát: „Give a number to convert:“, stop.
+✎ psát: „římské číslice“, stop.
+✎ psát: „Zadejte číslo, které chcete převést:“, stop.
 ☞ číslo ≔ Program zeptat se číslo absolutní.
 
 (číslo = 0) pravda: {

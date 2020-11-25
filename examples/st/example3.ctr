@@ -1,11 +1,11 @@
-✎ ngola: ‘~ Number Game ~’, ema.
-✎ ngola: ‘Guess the number’, ema.
+✎ ngola: ‘Papali ea Lipalo’, ema.
+✎ ngola: ‘Nahana nomoro’, ema.
 ☞ x ≔ Palo pakeng tsa: 1 le: 10.
 ☞ q ≔ 0.
 q ≔ Lenaneo botsa.
 { 
-	✎ ngola: ‘wrong!’, ema.
+	✎ ngola: ‘fosahetse!’, ema.
 	q ≔ Lenaneo botsa.
 
 } ha: { ↲ x palo ≠ q palo. }.
-✎ ngola: ‘correct!’, ema.
+✎ ngola: ‘nepahetse!’, ema.

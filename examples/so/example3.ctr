@@ -1,11 +1,11 @@
-✎ qor: ‘~ Number Game ~’, jooji.
-✎ qor: ‘Guess the number’, jooji.
+✎ qor: ‘Ciyaarta Nambarka’, jooji.
+✎ qor: ‘Qiyaasta lambarka’, jooji.
 ☞ x ≔ Tirada dhexeeya: 1 iyo: 10.
 ☞ q ≔ 0.
 q ≔ Barnaamij weydiiso.
 { 
-	✎ qor: ‘wrong!’, jooji.
+	✎ qor: ‘qaldan’, jooji.
 	q ≔ Barnaamij weydiiso.
 
 } halka: { ↲ x tirada ≠ q tirada. }.
-✎ qor: ‘correct!’, jooji.
+✎ qor: ‘sax!’, jooji.

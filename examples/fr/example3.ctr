@@ -1,10 +1,10 @@
-✎ écrire: ‘~ Number Game ~’, arrêtez.
-✎ écrire: ‘Guess the number’, arrêtez.
+✎ écrire: ‘Jeu de nombres’, arrêtez.
+✎ écrire: ‘Devinez le nombre’, arrêtez.
 ☞ x ≔ Nombre entre et: 1 __: 10.
 ☞ q ≔ 0.
 q ≔ Programme demander.
 { 
-	✎ écrire: ‘wrong!’, arrêtez.
+	✎ écrire: ‘faux!’, arrêtez.
 	q ≔ Programme demander.
 
 } tandis que: { ↲ x nombre ≠ q nombre. }.

@@ -1,4 +1,4 @@
-✎ write: ‘~ Password Generator ~’, stop.
+✎ write: ‘Password Generator’, stop.
 ☞ count ≔ 0.
 {
 	✎ write: ‘How many characters (16-30)?’, stop.

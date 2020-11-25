@@ -1,18 +1,18 @@
-✎ skriuwe: ‘~ Password Generator ~’, halte.
+✎ skriuwe: ‘Wachtwurdgenerator’, halte.
 ☞ telle ≔ 0.
 {
-	✎ skriuwe: ‘How many characters (16-30)?’, halte.
+	✎ skriuwe: ‘Hoefolle karakters (16-30)?’, halte.
 	telle ≔ Programma freegje nûmer absolút.
 
 	(telle < 16) wier: {
-		✎ skriuwe: ‘That is not enough, please enter a number between 16 and 30.’, halte.
+		✎ skriuwe: ‘Dat is net genôch, typ asjebleaft in getal yn tusken 16 en 30.’, halte.
 	}.
 	(telle > 30) wier: {
-		✎ skriuwe: ‘That is too long, some systems may reject passwords that long.’, halte.
+		✎ skriuwe: ‘Dat is te lang, guon systemen kinne wachtwurden sa lang ôfwize.’, halte.
 	}.
-} wylst: { ↲ (telle < 16 or: telle > 30). }.
+} wylst: { ↲ (telle < 16 of: telle > 30). }.
 ☞ karakters ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ Wachtwurd ≔ ‘’.
 {
 	☞ char ≔ 
 		karakters personaazje: ( 
@@ -20,6 +20,6 @@
 		tusken en: 1
 		__: karakters lingte
 	).
-	password tafoegje: char.
+	Wachtwurd tafoegje: char.
 } × telle.
-✎ skriuwe: password, halte.
+✎ skriuwe: Wachtwurd, halte.

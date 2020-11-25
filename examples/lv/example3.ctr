@@ -1,11 +1,11 @@
-✎ rakstīt: ‘~ Number Game ~’, apstāties.
-✎ rakstīt: ‘Guess the number’, apstāties.
+✎ rakstīt: ‘Skaitļu spēle’, apstāties.
+✎ rakstīt: ‘Uzminiet skaitli’, apstāties.
 ☞ x ≔ Skaits starp: 1 un: 10.
 ☞ q ≔ 0.
 q ≔ Programma pajautā.
 { 
-	✎ rakstīt: ‘wrong!’, apstāties.
+	✎ rakstīt: ‘nepareizi!’, apstāties.
 	q ≔ Programma pajautā.
 
 } kamēr: { ↲ x numuru ≠ q numuru. }.
-✎ rakstīt: ‘correct!’, apstāties.
+✎ rakstīt: ‘pareizi!’, apstāties.

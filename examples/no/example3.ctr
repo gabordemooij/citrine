@@ -1,11 +1,11 @@
-✎ skrive: ‘~ Number Game ~’, stoppe.
-✎ skrive: ‘Guess the number’, stoppe.
+✎ skrive: ‘Nummerspill’, stoppe.
+✎ skrive: ‘Gjett nummeret’, stoppe.
 ☞ x ≔ Nummer mellom og: 1 __: 10.
 ☞ q ≔ 0.
 q ≔ Program spørre.
 { 
-	✎ skrive: ‘wrong!’, stoppe.
+	✎ skrive: ‘feil!’, stoppe.
 	q ≔ Program spørre.
 
 } samtidig som: { ↲ x nummer ≠ q nummer. }.
-✎ skrive: ‘correct!’, stoppe.
+✎ skrive: ‘riktig!’, stoppe.

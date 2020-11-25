@@ -1,5 +1,5 @@
-✎ tusi: ‘~ Roman numerals ~’, taofi.
-✎ tusi: ‘Give a number to convert:’, taofi.
+✎ tusi: ‘Numera Roma’, taofi.
+✎ tusi: ‘Tuʻu se numera e faʻaliliu ai:’, taofi.
 ☞ numera ≔ Polokalama fesili numera saʻo.
 
 (numera = 0) moni: {

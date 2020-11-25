@@ -1,5 +1,5 @@
-✎ skrive: ‘~ Roman numerals ~’, hold op.
-✎ skrive: ‘Give a number to convert:’, hold op.
+✎ skrive: ‘Romerske tal’, hold op.
+✎ skrive: ‘Giv et tal, der skal konverteres:’, hold op.
 ☞ nummer ≔ Program spørge nummer absolutte.
 
 (nummer = 0) rigtigt: {

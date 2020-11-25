@@ -1,18 +1,18 @@
-✎ rakstīt: ‘~ Password Generator ~’, apstāties.
+✎ rakstīt: ‘Paroļu ģenerators’, apstāties.
 ☞ skaita ≔ 0.
 {
-	✎ rakstīt: ‘How many characters (16-30)?’, apstāties.
+	✎ rakstīt: ‘Cik rakstzīmes (16-30)?’, apstāties.
 	skaita ≔ Programma pajautā numuru absolūts.
 
 	(skaita < 16) taisnība: {
-		✎ rakstīt: ‘That is not enough, please enter a number between 16 and 30.’, apstāties.
+		✎ rakstīt: ‘Tas nav pietiekami, lūdzu, ievadiet skaitli no 16 līdz 30.’, apstāties.
 	}.
 	(skaita > 30) taisnība: {
-		✎ rakstīt: ‘That is too long, some systems may reject passwords that long.’, apstāties.
+		✎ rakstīt: ‘Tas ir pārāk ilgi, dažas sistēmas var noraidīt paroles tik ilgi.’, apstāties.
 	}.
-} kamēr: { ↲ (skaita < 16 or: skaita > 30). }.
+} kamēr: { ↲ (skaita < 16 vai: skaita > 30). }.
 ☞ rakstzīmes ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ paroli ≔ ‘’.
 {
 	☞ char ≔ 
 		rakstzīmes raksturs: ( 
@@ -20,6 +20,6 @@
 		starp: 1
 		un: rakstzīmes garums
 	).
-	password pievienot: char.
+	paroli pievienot: char.
 } × skaita.
-✎ rakstīt: password, apstāties.
+✎ rakstīt: paroli, apstāties.

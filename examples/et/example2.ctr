@@ -1,5 +1,5 @@
-✎ kirjuta: ‘~ Roman numerals ~’, peatus.
-✎ kirjuta: ‘Give a number to convert:’, peatus.
+✎ kirjuta: ‘Rooma numbrid’, peatus.
+✎ kirjuta: ‘Andke teisendamiseks number:’, peatus.
 ☞ number ≔ Programm küsige number absoluutne.
 
 (number = 0) tõsi: {

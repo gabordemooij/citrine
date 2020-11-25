@@ -1,11 +1,11 @@
-✎ skriuwe: ‘~ Number Game ~’, halte.
-✎ skriuwe: ‘Guess the number’, halte.
+✎ skriuwe: ‘Nûmer spultsje’, halte.
+✎ skriuwe: ‘Ried it nûmer’, halte.
 ☞ x ≔ Nûmer tusken en: 1 __: 10.
 ☞ q ≔ 0.
 q ≔ Programma freegje.
 { 
-	✎ skriuwe: ‘wrong!’, halte.
+	✎ skriuwe: ‘ferkeard!’, halte.
 	q ≔ Programma freegje.
 
 } wylst: { ↲ x nûmer ≠ q nûmer. }.
-✎ skriuwe: ‘correct!’, halte.
+✎ skriuwe: ‘korrekt!’, halte.

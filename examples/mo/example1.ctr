@@ -1,4 +1,4 @@
-✎ łrite: ‘~ Password Generator ~’, stop.
+✎ łrite: ‘Password Generator’, stop.
 ☞ cūnt ≔ 0.
 {
 	✎ łrite: ‘How many characters (16-30)?’, stop.
@@ -10,7 +10,7 @@
 	(cūnt > 30) true: {
 		✎ łrite: ‘That is too long, some systems may reject passwords that long.’, stop.
 	}.
-} łhile: { ↲ (cūnt < 16 or: cūnt > 30). }.
+} łhile: { ↲ (cūnt < 16 ŧa: cūnt > 30). }.
 ☞ čaracters ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

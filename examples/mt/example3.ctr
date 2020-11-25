@@ -1,11 +1,11 @@
-✎ ikteb: ‘~ Number Game ~’, waqfa.
-✎ ikteb: ‘Guess the number’, waqfa.
+✎ ikteb: ‘Numru tal-Logħba’, waqfa.
+✎ ikteb: ‘Aqta 'n-numru’, waqfa.
 ☞ x ≔ Numru bejn: 1 _u: 10.
 ☞ q ≔ 0.
 q ≔ Programm staqsi.
 { 
-	✎ ikteb: ‘wrong!’, waqfa.
+	✎ ikteb: ‘ħażin!’, waqfa.
 	q ≔ Programm staqsi.
 
 } waqt: { ↲ x numru ≠ q numru. }.
-✎ ikteb: ‘correct!’, waqfa.
+✎ ikteb: ‘korretta!’, waqfa.

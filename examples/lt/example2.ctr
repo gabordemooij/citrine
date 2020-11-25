@@ -1,5 +1,5 @@
-✎ atspausdinti: ‘~ Roman numerals ~’, sustoti.
-✎ atspausdinti: ‘Give a number to convert:’, sustoti.
+✎ atspausdinti: ‘Romėniški skaitmenys’, sustoti.
+✎ atspausdinti: ‘Suteikite skaičių, kurį norite konvertuoti:’, sustoti.
 ☞ skaičius ≔ Programa klausti skaičius modulis.
 
 (skaičius = 0) tiesa: {

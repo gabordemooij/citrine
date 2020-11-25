@@ -1,11 +1,11 @@
-✎ dee: ‘~ Number Game ~’, kwụsị.
-✎ dee: ‘Guess the number’, kwụsị.
+✎ dee: ‘Egwuregwu Nọmba’, kwụsị.
+✎ dee: ‘Mara maa’, kwụsị.
 ☞ x ≔ Nọmba n’etiti: 1 na: 10.
 ☞ q ≔ 0.
 q ≔ Mmemme jụọ.
 { 
-	✎ dee: ‘wrong!’, kwụsị.
+	✎ dee: ‘ezighi ezi!’, kwụsị.
 	q ≔ Mmemme jụọ.
 
 } mgbe: { ↲ x nọmba ≠ q nọmba. }.
-✎ dee: ‘correct!’, kwụsị.
+✎ dee: ‘ziri ezi!’, kwụsị.

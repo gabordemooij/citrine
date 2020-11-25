@@ -1,16 +1,16 @@
-✎ ikteb: ‘~ Password Generator ~’, waqfa.
+✎ ikteb: ‘Ġeneratur tal-password’, waqfa.
 ☞ tgħodd ≔ 0.
 {
-	✎ ikteb: ‘How many characters (16-30)?’, waqfa.
+	✎ ikteb: ‘Kemm karattri (16-30)?’, waqfa.
 	tgħodd ≔ Programm staqsi numru assoluta.
 
 	(tgħodd < 16) vera: {
-		✎ ikteb: ‘That is not enough, please enter a number between 16 and 30.’, waqfa.
+		✎ ikteb: ‘Dan mhux biżżejjed, jekk jogħġbok daħħal numru bejn 16 u 30.’, waqfa.
 	}.
 	(tgħodd > 30) vera: {
-		✎ ikteb: ‘That is too long, some systems may reject passwords that long.’, waqfa.
+		✎ ikteb: ‘Dan huwa twil wisq, xi sistemi jistgħu jirrifjutaw il-passwords daqshekk twal.’, waqfa.
 	}.
-} waqt: { ↲ (tgħodd < 16 or: tgħodd > 30). }.
+} waqt: { ↲ (tgħodd < 16 jew: tgħodd > 30). }.
 ☞ karattri ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

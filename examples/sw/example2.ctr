@@ -1,5 +1,5 @@
-✎ andika: ‘~ Roman numerals ~’, acha.
-✎ andika: ‘Give a number to convert:’, acha.
+✎ andika: ‘Nambari za Kirumi’, acha.
+✎ andika: ‘Toa nambari ya kubadilisha:’, acha.
 ☞ nambari ≔ Programu uliza nambari kabisa.
 
 (nambari = 0) kweli: {

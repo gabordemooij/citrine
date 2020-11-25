@@ -1,18 +1,18 @@
-✎ scríobh: ‘~ Password Generator ~’, stad.
+✎ scríobh: ‘Gineadóir pasfhocal’, stad.
 ☞ comhaireamh ≔ 0.
 {
-	✎ scríobh: ‘How many characters (16-30)?’, stad.
+	✎ scríobh: ‘Cé mhéad carachtar (16-30)?’, stad.
 	comhaireamh ≔ Clár iarr uimhir iomlán.
 
 	(comhaireamh < 16) fíor: {
-		✎ scríobh: ‘That is not enough, please enter a number between 16 and 30.’, stad.
+		✎ scríobh: ‘Ní leor é sin, iontráil uimhir idir 16 agus 30 le do thoil.’, stad.
 	}.
 	(comhaireamh > 30) fíor: {
-		✎ scríobh: ‘That is too long, some systems may reject passwords that long.’, stad.
+		✎ scríobh: ‘Tá sé sin ró-fhada, d’fhéadfadh roinnt córais pasfhocail a dhiúltú chomh fada sin.’, stad.
 	}.
-} _agus: { ↲ (comhaireamh < 16 or: comhaireamh > 30). }.
+} _agus: { ↲ (comhaireamh < 16 nó: comhaireamh > 30). }.
 ☞ carachtair ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ pasfhocal ≔ ‘’.
 {
 	☞ char ≔ 
 		carachtair carachtar: ( 
@@ -20,6 +20,6 @@
 		idir: 1
 		agus: carachtair fad
 	).
-	password aguisín: char.
+	pasfhocal aguisín: char.
 } × comhaireamh.
-✎ scríobh: password, stad.
+✎ scríobh: pasfhocal, stad.

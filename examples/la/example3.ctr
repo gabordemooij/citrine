@@ -1,11 +1,11 @@
-✎ scribe: ‘~ Number Game ~’, prohibere.
-✎ scribe: ‘Guess the number’, prohibere.
+✎ scribe: ‘Ludus numerus’, prohibere.
+✎ scribe: ‘Coniecto numerus’, prohibere.
 ☞ x ≔ Numerus inter; et: 1 __: 10.
 ☞ q ≔ 0.
 q ≔ Program quaerere.
 { 
-	✎ scribe: ‘wrong!’, prohibere.
+	✎ scribe: ‘nefas!’, prohibere.
 	q ≔ Program quaerere.
 
 } dum;__: { ↲ x numerus ≠ q numerus. }.
-✎ scribe: ‘correct!’, prohibere.
+✎ scribe: ‘bene!’, prohibere.

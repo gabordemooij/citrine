@@ -1,11 +1,11 @@
-✎ nulis: ‘~ Number Game ~’, eureun.
-✎ nulis: ‘Guess the number’, eureun.
+✎ nulis: ‘Jumlah Kaulinan’, eureun.
+✎ nulis: ‘Kira nomerna’, eureun.
 ☞ x ≔ Nomer antara: 1 jeung: 10.
 ☞ q ≔ 0.
 q ≔ Program naros.
 { 
-	✎ nulis: ‘wrong!’, eureun.
+	✎ nulis: ‘salah!’, eureun.
 	q ≔ Program naros.
 
 } sedengkeun: { ↲ x jumlah ≠ q jumlah. }.
-✎ nulis: ‘correct!’, eureun.
+✎ nulis: ‘leres!’, eureun.

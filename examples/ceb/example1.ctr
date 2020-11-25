@@ -1,16 +1,16 @@
-✎ pagsulat: ‘~ Password Generator ~’, hunong.
+✎ pagsulat: ‘Taghimo sa Password’, hunong.
 ☞ ihap ≔ 0.
 {
-	✎ pagsulat: ‘How many characters (16-30)?’, hunong.
+	✎ pagsulat: ‘Pila nga mga karakter (16-30)?’, hunong.
 	ihap ≔ Programa pangutana gidaghanon hingpit.
 
 	(ihap < 16) tinuod: {
-		✎ pagsulat: ‘That is not enough, please enter a number between 16 and 30.’, hunong.
+		✎ pagsulat: ‘Dili kana igo, palihug pagsulud us aka numero sa taliwala sa 16 ug 30.’, hunong.
 	}.
 	(ihap > 30) tinuod: {
-		✎ pagsulat: ‘That is too long, some systems may reject passwords that long.’, hunong.
+		✎ pagsulat: ‘Taas kaayo kana, ang pipila nga mga sistema mahimong mosalikway sa mga password nga ingon kadugay.’, hunong.
 	}.
-} samtang: { ↲ (ihap < 16 or: ihap > 30). }.
+} samtang: { ↲ (ihap < 16 _o: ihap > 30). }.
 ☞ mga karakter ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

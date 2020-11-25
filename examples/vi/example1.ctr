@@ -1,18 +1,18 @@
-✎ viết: ‘~ Password Generator ~’, dừng lại.
+✎ viết: ‘Tạo mật khẩu’, dừng lại.
 ☞ đếm ≔ 0.
 {
-	✎ viết: ‘How many characters (16-30)?’, dừng lại.
+	✎ viết: ‘Có bao nhiêu ký tự (16-30)?’, dừng lại.
 	đếm ≔ Chương trình hỏi con số tuyệt đối.
 
 	(đếm < 16) thật: {
-		✎ viết: ‘That is not enough, please enter a number between 16 and 30.’, dừng lại.
+		✎ viết: ‘Như vậy là chưa đủ, vui lòng nhập một số từ 16 đến 30.’, dừng lại.
 	}.
 	(đếm > 30) thật: {
-		✎ viết: ‘That is too long, some systems may reject passwords that long.’, dừng lại.
+		✎ viết: ‘Quá dài, một số hệ thống có thể từ chối mật khẩu dài như vậy.’, dừng lại.
 	}.
-} trong khi: { ↲ (đếm < 16 or: đếm > 30). }.
+} trong khi: { ↲ (đếm < 16 hoặc là: đếm > 30). }.
 ☞ nhân vật ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ mật khẩu ≔ ‘’.
 {
 	☞ char ≔ 
 		nhân vật tính cách: ( 
@@ -20,6 +20,6 @@
 		giữa và: 1
 		__: nhân vật chiều dài
 	).
-	password nối thêm: char.
+	mật khẩu nối thêm: char.
 } × đếm.
-✎ viết: password, dừng lại.
+✎ viết: mật khẩu, dừng lại.

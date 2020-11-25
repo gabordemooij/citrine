@@ -1,11 +1,11 @@
-✎ atspausdinti: ‘~ Number Game ~’, sustoti.
-✎ atspausdinti: ‘Guess the number’, sustoti.
+✎ atspausdinti: ‘Skaičių žaidimas’, sustoti.
+✎ atspausdinti: ‘Atspėk skaičių’, sustoti.
 ☞ x ≔ Skaičius tarp: 1 ir: 10.
 ☞ q ≔ 0.
 q ≔ Programa klausti.
 { 
-	✎ atspausdinti: ‘wrong!’, sustoti.
+	✎ atspausdinti: ‘negerai!’, sustoti.
 	q ≔ Programa klausti.
 
 } kol: { ↲ x skaičius ≠ q skaičius. }.
-✎ atspausdinti: ‘correct!’, sustoti.
+✎ atspausdinti: ‘teisingai!’, sustoti.

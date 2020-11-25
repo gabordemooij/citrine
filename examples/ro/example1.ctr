@@ -1,18 +1,18 @@
-✎ scrie: ‘~ Password Generator ~’, stop.
+✎ scrie: ‘Generator de parolă’, stop.
 ☞ numără ≔ 0.
 {
-	✎ scrie: ‘How many characters (16-30)?’, stop.
+	✎ scrie: ‘Câte personaje (16-30)?’, stop.
 	numără ≔ Program întreabă număr absolut.
 
 	(numără < 16) adevărat: {
-		✎ scrie: ‘That is not enough, please enter a number between 16 and 30.’, stop.
+		✎ scrie: ‘Nu este suficient, vă rugăm să introduceți un număr între 16 și 30.’, stop.
 	}.
 	(numără > 30) adevărat: {
-		✎ scrie: ‘That is too long, some systems may reject passwords that long.’, stop.
+		✎ scrie: ‘Asta este prea lung, unele sisteme pot respinge parolele atât de mult.’, stop.
 	}.
-} cât timp: { ↲ (numără < 16 or: numără > 30). }.
+} cât timp: { ↲ (numără < 16 sau: numără > 30). }.
 ☞ caractere ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ parola ≔ ‘’.
 {
 	☞ char ≔ 
 		caractere caracter: ( 
@@ -20,6 +20,6 @@
 		între: 1
 		şi: caractere lungime
 	).
-	password adaugă la sfârşit: char.
+	parola adaugă la sfârşit: char.
 } × numără.
-✎ scrie: password, stop.
+✎ scrie: parola, stop.

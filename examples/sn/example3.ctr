@@ -1,11 +1,11 @@
-✎ nyora: ‘~ Number Game ~’, mira.
-✎ nyora: ‘Guess the number’, mira.
+✎ nyora: ‘Nhamba Mutambo’, mira.
+✎ nyora: ‘Fembera nhamba’, mira.
 ☞ x ≔ Nhamba pakati: 1 uye: 10.
 ☞ q ≔ 0.
 q ≔ Chirongwa bvunza.
 { 
-	✎ nyora: ‘wrong!’, mira.
+	✎ nyora: ‘zvisizvo!’, mira.
 	q ≔ Chirongwa bvunza.
 
 } ne: { ↲ x nhamba ≠ q nhamba. }.
-✎ nyora: ‘correct!’, mira.
+✎ nyora: ‘ndizvozvo!’, mira.

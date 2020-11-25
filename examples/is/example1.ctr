@@ -1,18 +1,18 @@
-✎ skrifa: ‘~ Password Generator ~’, hætta.
+✎ skrifa: ‘Lykilorð rafall’, hætta.
 ☞ telja ≔ 0.
 {
-	✎ skrifa: ‘How many characters (16-30)?’, hætta.
+	✎ skrifa: ‘Hversu margar persónur (16-30)?’, hætta.
 	telja ≔ Forrit spyrja númer alger.
 
 	(telja < 16) satt: {
-		✎ skrifa: ‘That is not enough, please enter a number between 16 and 30.’, hætta.
+		✎ skrifa: ‘Það er ekki nóg, vinsamlegast sláðu inn tölu á milli 16 og 30.’, hætta.
 	}.
 	(telja > 30) satt: {
-		✎ skrifa: ‘That is too long, some systems may reject passwords that long.’, hætta.
+		✎ skrifa: ‘Það er of langt, sum kerfi geta hafnað lykilorðum svo lengi.’, hætta.
 	}.
-} meðan: { ↲ (telja < 16 or: telja > 30). }.
+} meðan: { ↲ (telja < 16 eða: telja > 30). }.
 ☞ persónur ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ lykilorð ≔ ‘’.
 {
 	☞ char ≔ 
 		persónur karakter: ( 
@@ -20,6 +20,6 @@
 		milli: 1
 		og: persónur lengd
 	).
-	password bætið við: char.
+	lykilorð bætið við: char.
 } × telja.
-✎ skrifa: password, hætta.
+✎ skrifa: lykilorð, hætta.

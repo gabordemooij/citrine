@@ -1,5 +1,5 @@
-✎ scrivi: ‘~ Roman numerals ~’, fermare.
-✎ scrivi: ‘Give a number to convert:’, fermare.
+✎ scrivi: ‘numeri romani’, fermare.
+✎ scrivi: ‘Dai un numero da convertire:’, fermare.
 ☞ numero ≔ Programma chiedi numero assoluto.
 
 (numero = 0) vero: {

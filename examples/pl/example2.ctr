@@ -1,5 +1,5 @@
-✎ pisać: ‘~ Roman numerals ~’, zatrzymać.
-✎ pisać: ‘Give a number to convert:’, zatrzymać.
+✎ pisać: ‘Cyfry rzymskie’, zatrzymać.
+✎ pisać: ‘Podaj liczbę do konwersji:’, zatrzymać.
 ☞ numer ≔ Program zapytać numer absolutny.
 
 (numer = 0) prawdziwe: {

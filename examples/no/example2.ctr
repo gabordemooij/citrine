@@ -1,5 +1,5 @@
-✎ skrive: ‘~ Roman numerals ~’, stoppe.
-✎ skrive: ‘Give a number to convert:’, stoppe.
+✎ skrive: ‘romertall’, stoppe.
+✎ skrive: ‘Gi et tall å konvertere:’, stoppe.
 ☞ nummer ≔ Program spørre nummer absolutte.
 
 (nummer = 0) ekte: {

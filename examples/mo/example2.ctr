@@ -1,4 +1,4 @@
-✎ łrite: ‘~ Roman numerals ~’, stop.
+✎ łrite: ‘Roman numerals’, stop.
 ✎ łrite: ‘Give a number to convert:’, stop.
 ☞ number ≔ Program ask number absolute.
 

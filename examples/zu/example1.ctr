@@ -1,18 +1,18 @@
-✎ bhala: ‘~ Password Generator ~’, ima.
+✎ bhala: ‘I-password generator’, ima.
 ☞ ukubala ≔ 0.
 {
-	✎ bhala: ‘How many characters (16-30)?’, ima.
+	✎ bhala: ‘Bangaki abalingiswa (16-30)?’, ima.
 	ukubala ≔ Uhlelo buza inombolo ngokuphelele.
 
 	(ukubala < 16) iqiniso: {
-		✎ bhala: ‘That is not enough, please enter a number between 16 and 30.’, ima.
+		✎ bhala: ‘Lokho akwanele, sicela ufake inombolo phakathi kuka-16 no-30.’, ima.
 	}.
 	(ukubala > 30) iqiniso: {
-		✎ bhala: ‘That is too long, some systems may reject passwords that long.’, ima.
+		✎ bhala: ‘Lelo lide kakhulu, amanye amasistimu angawenqaba amaphasiwedi amade kangako.’, ima.
 	}.
-} ngenkathi: { ↲ (ukubala < 16 or: ukubala > 30). }.
+} ngenkathi: { ↲ (ukubala < 16 noma: ukubala > 30). }.
 ☞ izinhlamvu ≔ ‘acdefghjkmnprtwx2345789@#&’.
-☞ password ≔ ‘’.
+☞ iphasiwedi ≔ ‘’.
 {
 	☞ char ≔ 
 		izinhlamvu umlingiswa: ( 
@@ -20,6 +20,6 @@
 		phakathi: 1
 		no: izinhlamvu ubude
 	).
-	password faka: char.
+	iphasiwedi faka: char.
 } × ukubala.
-✎ bhala: password, ima.
+✎ bhala: iphasiwedi, ima.
