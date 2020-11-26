@@ -263,15 +263,15 @@ ctr_dict* ctr_translate_load_dictionary() {
 		ctr_print_error(CTR_TERR_DICT, 1);
 	}
 	char  translationType;
-	char* word = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
-	char* translation = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
+	char* word = calloc(5000, 1);
+	char* translation = calloc(5000, 1);
 	char* buffer;
 	char* format;
 	ctr_dict* entry;
 	ctr_dict* previousEntry = NULL;
 	ctr_dict* e;
 	int qq = 0;
-	while( fscanf( file, "%c \"%200[^\"]\" \"%200[^\"]\"\n", &translationType, word, translation) > 0 ) {
+	while( fscanf( file, "%c \"%4999[^\"]\" \"%4999[^\"]\"\n", &translationType, word, translation) > 0 ) {
 		if (translationType != 't' && translationType != 's' && translationType != 'd' && translationType != 'x') {
 			printf("Invalid translation line: %d \n",qq);
 			exit(1);
@@ -282,7 +282,7 @@ ctr_dict* ctr_translate_load_dictionary() {
 		
 		entry->wordLength = strlen(word);
 		entry->translationLength = strlen(translation);
-		if (entry->wordLength > CTR_TRANSLATE_MAX_WORD_LEN || entry->translationLength > CTR_TRANSLATE_MAX_WORD_LEN) {
+		if (entry->type != 's' && (entry->wordLength > CTR_TRANSLATE_MAX_WORD_LEN || entry->translationLength > CTR_TRANSLATE_MAX_WORD_LEN)) {
 			ctr_print_error(CTR_TERR_ELONG, 1);
 		} 
 		entry->word = calloc( entry->wordLength, 1 );
