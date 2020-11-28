@@ -725,38 +725,6 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
 
 /**
  * @def
- * [ Moment ] like: [ Moment ]
- *
- * @example
- * ☞ x ≔ Moment new.
- * ☞ y ≔ Moment new like: x.
- * ✎ write: x, stop.
- * ✎ write: y, stop.
- */
-ctr_object* ctr_clock_like( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_object* otherClock;
-	ctr_object* time;
-	ctr_object* zone;
-	otherClock = argumentList->object;
-	time = ctr_internal_object_find_property( otherClock, ctr_build_string_from_cstring( CTR_DICT_TIME ), CTR_CATEGORY_PRIVATE_PROPERTY );
-	if ( time == NULL ) {
-		time = ctr_build_number_from_float( 0 );
-	} else {
-		time = ctr_internal_cast2number( time );
-	}
-	zone = ctr_internal_object_find_property( otherClock, ctr_build_string_from_cstring( CTR_DICT_ZONE ), CTR_CATEGORY_PRIVATE_PROPERTY );
-	if ( zone == NULL ) {
-		zone = ctr_build_string_from_cstring( "UTC" );
-	} else {
-		zone = ctr_internal_cast2string( zone );
-	}
-	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( CTR_DICT_ZONE ), zone, CTR_CATEGORY_PRIVATE_PROPERTY );
-	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( CTR_DICT_TIME ), time, CTR_CATEGORY_PRIVATE_PROPERTY );
-	return myself;
-}
-
-/**
- * @def
  * [ Moment ] zone: [ String ]
  *
  * @example
@@ -1136,6 +1104,11 @@ ctr_object* ctr_clock_copy( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_internal_object_add_property( clock,
 		ctr_build_string_from_cstring( CTR_DICT_TIME ),
 		ctr_clock_time( myself, NULL ),
+		CTR_CATEGORY_PRIVATE_PROPERTY
+	);
+	ctr_internal_object_add_property( clock,
+		ctr_build_string_from_cstring( CTR_DICT_ZONE ),
+		ctr_clock_get_zone( myself, NULL ),
 		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	return clock;
