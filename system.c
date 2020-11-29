@@ -1116,6 +1116,59 @@ ctr_object* ctr_clock_copy( ctr_object* myself, ctr_argument* argumentList ) {
 
 /**
  * @def
+ * [ Moment ] = [ Moment ]
+ *
+ * @example
+ * ☞ m ≔ Moment new year: 2070, month: 11.
+ * ☞ n ≔ m copy.
+ * ✎ write: (m = n), stop.
+ * ✎ write: (m ≠ n), stop.
+ * ✎ write: (m equals: m), stop.
+ * ✎ write: (m equals: n), stop.
+ * n month: 12.
+ * ✎ write: (m ≠ n), stop.
+ * ✎ write: (m = n), stop.
+ */
+ctr_object* ctr_clock_equals( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* mytime = ctr_clock_time( myself, NULL );
+	ctr_object* myzone = ctr_clock_get_zone( myself, NULL );
+	ctr_object* othertime = ctr_clock_time( argumentList->object, NULL );
+	ctr_object* otherzone = ctr_internal_cast2string(ctr_clock_get_zone( argumentList->object, NULL ));
+	if (
+	mytime->value.nvalue == othertime->value.nvalue &&
+	myzone != NULL &&
+	otherzone != NULL &&
+	strncmp(myzone->value.svalue->value,otherzone->value.svalue->value,myzone->value.svalue->vlen)==0
+	) {
+		return ctr_build_bool(1);
+	}
+	return ctr_build_bool(0);
+}
+
+/**
+ * @def
+ * [ Moment ] ≠ [ Moment ]
+ *
+ * @example
+ * ☞ m ≔ Moment new year: 2070, month: 11.
+ * ☞ n ≔ m copy.
+ * ✎ write: (m = n), stop.
+ * ✎ write: (m ≠ n), stop.
+ * ✎ write: (m equals: m), stop.
+ * ✎ write: (m equals: n), stop.
+ * n month: 12.
+ * ✎ write: (m ≠ n), stop.
+ * ✎ write: (m = n), stop.
+ */
+ctr_object* ctr_clock_neq( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* bool = ctr_clock_equals(myself, argumentList);
+	bool->value.bvalue = !bool->value.bvalue;
+	return bool;
+}
+
+
+/**
+ * @def
  * [ Moment ] week
  *
  * @example

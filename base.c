@@ -278,10 +278,35 @@ ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argument
  * ☞ z ≔ x.
  * ✎ write: ( x equals: y ), stop.
  * ✎ write: ( x equals: z ), stop.
+ * ✎ write: ( x = y ), stop.
+ * ✎ write: ( x = z ), stop.
+ * ✎ write: ( x ≠ y ), stop.
+ * ✎ write: ( x ≠ z ), stop.
  */
 ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherObject = argumentList->object;
 	if (otherObject == myself) return ctr_build_bool(1);
+	return ctr_build_bool(0);
+}
+
+/**
+ * @def
+ * [ Object ] ≠ [ Object ]
+ *
+ * @example
+ * ☞ x ≔ Object new.
+ * ☞ y ≔ Object new.
+ * ☞ z ≔ x.
+ * ✎ write: ( x equals: y ), stop.
+ * ✎ write: ( x equals: z ), stop.
+ * ✎ write: ( x = y ), stop.
+ * ✎ write: ( x = z ), stop.
+ * ✎ write: ( x ≠ y ), stop.
+ * ✎ write: ( x ≠ z ), stop.
+ */
+ctr_object* ctr_object_unequals(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* otherObject = argumentList->object;
+	if (otherObject != myself) return ctr_build_bool(1);
 	return ctr_build_bool(0);
 }
 

@@ -1,0 +1,18 @@
+☞ x ≔ Object new.
+☞ y ≔ Object new.
+☞ z ≔ x.
+✎ write: (x = z), stop.
+✎ write: (x = y), stop.
+✎ write: (x ≠ y), stop.
+✎ write: (x ≠ z), stop.
+☞ m ≔ Moment new year: 2070, month: 11.
+☞ n ≔ m copy.
+✎ write: (m = n), stop.
+✎ write: (m ≠ n), stop.
+✎ write: (m equals: m), stop.
+✎ write: (m equals: n), stop.
+n month: 12.
+✎ write: (m ≠ n), stop.
+✎ write: (m = n), stop.
+
+
