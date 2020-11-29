@@ -1,0 +1,34 @@
+☞ x ≔ Moment new
+zone: ‘Europe/Amsterdam’,
+	year:2017,
+	month:07,
+	day:10,
+	hour: 10,
+	minute: 0,
+	second: 0.
+✎ write: x, stop.
+✎ write: x time, stop.
+x add: 1 second.
+x add: 2 minute.
+x add: 3 hour.
+x add: 4 day.
+x add: 5 month.
+x add: 6 year.
+✎ write: x, stop.
+x subtract: 1 second.
+x subtract: 2 minute.
+x subtract: 3 hour.
+x subtract: 4 day.
+x subtract: 5 month.
+x subtract: 6 year.
+✎ write: x, stop.
+☞ y ≔ x copy.
+☞ z ≔ x.
+✎ write: y, stop.
+✎ write: z, stop.
+✎ write: (x zone = y zone), stop.
+✎ write: (x time = y time), stop.
+✎ write: (x = z), stop.
+✎ write: x day of the year, stop.
+✎ write: x weekday, stop.
+✎ write: x week, stop.

@@ -399,6 +399,7 @@ extern ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* argument
  */
 extern ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_object_unequals(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList);
@@ -678,6 +679,8 @@ extern ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList
 extern ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList );
 extern ctr_object* ctr_clock_to_number( ctr_object* myself, ctr_argument* argumentList );
 extern ctr_object* ctr_clock_copy( ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_clock_equals( ctr_object* myself, ctr_argument* argumentList );
+extern ctr_object* ctr_clock_neq( ctr_object* myself, ctr_argument* argumentList );
 extern void ctr_clock_init( ctr_object* clock );
 
 /**
