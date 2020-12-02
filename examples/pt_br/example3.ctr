@@ -1,5 +1,5 @@
 ✎ escrever: “Jogo de números”, punto.
-✎ escrever: “Adivinha o número”, punto.
+✎ escrever: “Adivinhe o número”, punto.
 ☞ x ≔ Número entre: 1 e: 10.
 ☞ q ≔ 0.
 q ≔ Programa perguntar.
@@ -8,4 +8,4 @@ q ≔ Programa perguntar.
 	q ≔ Programa perguntar.
 
 } enquanto: { ↲ x número ≠ q número. }.
-✎ escrever: “corrigir!”, punto.
+✎ escrever: “correto!”, punto.

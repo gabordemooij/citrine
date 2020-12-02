@@ -1,4 +1,4 @@
-✎ psát: „Číselná hra“, stop.
+✎ psát: „Hra s čísly“, stop.
 ✎ psát: „Hádejte číslo“, stop.
 ☞ x ≔ Číslo mezi: 1 a hodnotou: 10.
 ☞ q ≔ 0.
@@ -8,4 +8,4 @@ q ≔ Program zeptat se.
 	q ≔ Program zeptat se.
 
 } zatímco: { ↲ x číslo ≠ q číslo. }.
-✎ psát: „opravit!“, stop.
+✎ psát: „správně!“, stop.
