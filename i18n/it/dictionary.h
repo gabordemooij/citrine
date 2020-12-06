@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "oggetto"
 #define CTR_DICT_PATH_OBJECT "Posizione del file"
 #define CTR_DICT_CMD_OBJECT  "Istruzioni"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "ricorsivo"

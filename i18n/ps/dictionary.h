@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "د یو اعتراض په توګه"
 #define CTR_DICT_PATH_OBJECT "ځای"
 #define CTR_DICT_CMD_OBJECT  "لارښوونه"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "تکرارول"

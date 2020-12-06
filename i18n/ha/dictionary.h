@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "nasihu"
 #define CTR_DICT_PATH_OBJECT "Wurin fayil"
 #define CTR_DICT_CMD_OBJECT  "Umarni"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "maimaitawa"

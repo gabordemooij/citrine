@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "как объект"
 #define CTR_DICT_PATH_OBJECT "Расположение файла"
 #define CTR_DICT_CMD_OBJECT  "Инструкция"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "рекурсивный"

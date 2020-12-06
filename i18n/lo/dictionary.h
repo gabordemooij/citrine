@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "ປ່ຽນເປັນວັດຖຸ"
 #define CTR_DICT_PATH_OBJECT "ສະຖານທີ່ໄຟລ໌"
 #define CTR_DICT_CMD_OBJECT  "ຄຳ ແນະ ນຳ"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "ຮຽກຮ້ອງ"

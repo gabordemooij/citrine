@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "markmið"
 #define CTR_DICT_PATH_OBJECT "Staðsetning skráar"
 #define CTR_DICT_CMD_OBJECT  "Kennsla"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "endurkvæma"

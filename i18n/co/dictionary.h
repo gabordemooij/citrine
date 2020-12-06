@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "ughjettu"
 #define CTR_DICT_PATH_OBJECT "Situazione di u fugliale"
 #define CTR_DICT_CMD_OBJECT  "Istruzzioni"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "ricursivu"

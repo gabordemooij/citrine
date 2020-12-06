@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "réad"
 #define CTR_DICT_PATH_OBJECT "Suíomh comhaid"
 #define CTR_DICT_CMD_OBJECT  "Treoir"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "athchúrsach"

@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "objè"
 #define CTR_DICT_PATH_OBJECT "Kote dosye"
 #define CTR_DICT_CMD_OBJECT  "Enstriksyon"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "repetitif"

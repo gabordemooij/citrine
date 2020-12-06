@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "objektas"
 #define CTR_DICT_PATH_OBJECT "Vieta"
 #define CTR_DICT_CMD_OBJECT  "Instrukcija"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "rekursinis"

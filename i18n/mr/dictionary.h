@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "एक वस्तू म्हणून"
 #define CTR_DICT_PATH_OBJECT "जागा"
 #define CTR_DICT_CMD_OBJECT  "सूचना"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "रिकर्सिव"

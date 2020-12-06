@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "ವಸ್ತುವಾಗಿ ಪರಿವರ್ತಿಸಿ"
 #define CTR_DICT_PATH_OBJECT "ಸ್ಥಳ"
 #define CTR_DICT_CMD_OBJECT  "ಸೂಚನಾ"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "ಪುನರಾವರ್ತಿತ"

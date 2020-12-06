@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "โครงสร้าง"
 #define CTR_DICT_PATH_OBJECT "พื้นที่"
 #define CTR_DICT_CMD_OBJECT  "คำแนะนำ"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "เรียกซ้ำ"

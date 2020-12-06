@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "gjenstand"
 #define CTR_DICT_PATH_OBJECT "Filplassering"
 #define CTR_DICT_CMD_OBJECT  "Instruksjon"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "tilbakevendende"

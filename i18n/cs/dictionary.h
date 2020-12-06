@@ -197,5 +197,4 @@
 #define CTR_DICT_TOOBJECT                        "objekt"
 #define CTR_DICT_PATH_OBJECT "Umístění souboru"
 #define CTR_DICT_CMD_OBJECT  "Instrukce"
-
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "rekurzivní"

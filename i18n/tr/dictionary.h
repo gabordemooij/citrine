@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "nesne"
 #define CTR_DICT_PATH_OBJECT "Dosya konumu"
 #define CTR_DICT_CMD_OBJECT  "Talimatlar"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "yinelemeli"

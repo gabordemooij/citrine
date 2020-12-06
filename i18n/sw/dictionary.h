@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "kitu"
 #define CTR_DICT_PATH_OBJECT "Mahali pa faili"
 #define CTR_DICT_CMD_OBJECT  "Maagizo"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "kujirudia"

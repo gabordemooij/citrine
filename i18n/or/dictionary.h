@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "ଏକ ବସ୍ତୁ ଭାବରେ |"
 #define CTR_DICT_PATH_OBJECT "ସ୍ଥାନ"
 #define CTR_DICT_CMD_OBJECT  "ନିର୍ଦ୍ଦେଶ"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "ପୁନରାବୃତ୍ତି|"
