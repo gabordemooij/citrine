@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "オブジェクトとして"
 #define CTR_DICT_PATH_OBJECT "ファイルの場所"
 #define CTR_DICT_CMD_OBJECT  "命令"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "再帰的"

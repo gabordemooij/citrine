@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "obyek"
 #define CTR_DICT_PATH_OBJECT "Lokasi file"
 #define CTR_DICT_CMD_OBJECT  "Pitunjuk"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "rekursif"

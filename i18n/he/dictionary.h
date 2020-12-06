@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "כאובייקט"
 #define CTR_DICT_PATH_OBJECT "מקום"
 #define CTR_DICT_CMD_OBJECT  "הוראה"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "רקורסיבי"

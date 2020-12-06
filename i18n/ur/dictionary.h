@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT                        "کسی چیز کے طور پر"
 #define CTR_DICT_PATH_OBJECT "جگہ"
 #define CTR_DICT_CMD_OBJECT  "ہدایات"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "تکرار"

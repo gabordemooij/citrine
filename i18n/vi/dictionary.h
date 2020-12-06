@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "vật"
 #define CTR_DICT_PATH_OBJECT "Địa điểm"
 #define CTR_DICT_CMD_OBJECT  "Hướng dẫn"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "đệ quy"

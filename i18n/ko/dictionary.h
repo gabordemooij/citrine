@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "개체로"
 #define CTR_DICT_PATH_OBJECT "일어난다"
 #define CTR_DICT_CMD_OBJECT  "교수"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "재귀"

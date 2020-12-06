@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "একটি বস্তু হিসাবে"
 #define CTR_DICT_PATH_OBJECT "ফাইল অবস্থান"
 #define CTR_DICT_CMD_OBJECT  "নির্দেশ"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "পুনরাবৃত্তি"

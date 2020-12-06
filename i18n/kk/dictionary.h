@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "объект ретінде"
 #define CTR_DICT_PATH_OBJECT "Файл орны"
 #define CTR_DICT_CMD_OBJECT  "Нұсқаулық"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "рекурсивті"

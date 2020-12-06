@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "cholinga"
 #define CTR_DICT_PATH_OBJECT "Fayilo malo"
 #define CTR_DICT_CMD_OBJECT  "Malangizo"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "mobwerezabwereza"

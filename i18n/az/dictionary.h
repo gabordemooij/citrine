@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "obyekt"
 #define CTR_DICT_PATH_OBJECT "fayl yeri"
 #define CTR_DICT_CMD_OBJECT  "təlimat"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "rekursiv"

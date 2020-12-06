@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT        "ఒక వస్తువుగా"
 #define CTR_DICT_PATH_OBJECT "స్థలం"
 #define CTR_DICT_CMD_OBJECT  "సూచనలు"
-#define CTR_DICT_RECURSIVE "recursive"
+#define CTR_DICT_RECURSIVE "పునరావృత"
