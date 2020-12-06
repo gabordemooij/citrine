@@ -315,6 +315,18 @@ ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Object ] recursion.
+ *
+ * @example
+ * ☞ Roundabout ≔ Object new.
+ * Roundabout on: ‘circle:’ do: { :x
+ * 	✎ write: x, stop.
+ *	(x < 3) true: { ⛏ recursive circle: x + 1. }.
+ * }.
+ * Roundabout circle: 1.
+ */
 ctr_object* ctr_object_recursion(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_internal_recursion = myself;
 	return myself;
