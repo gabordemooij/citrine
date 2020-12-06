@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "tişt"
 #define CTR_DICT_PATH_OBJECT "Cîhê pelê"
 #define CTR_DICT_CMD_OBJECT  "Ders"
+#define CTR_DICT_RECURSIVE "recursive"

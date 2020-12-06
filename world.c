@@ -36,6 +36,8 @@ ctr_object* CtrStdBoolFalse;
 ctr_object* CtrStdSlurp;
 ctr_object* CtrStdPath;
 ctr_object* CtrStdShellCommand;
+int ctr_message_stack_index = 0;
+ctr_object* ctr_message_stack[301];
 
 char CtrHashKey[16];
 
@@ -43,6 +45,7 @@ ctr_object* ctr_contexts[301];
 int ctr_context_id;
 
 char ctr_deserialize_mode;
+ctr_object* ctr_internal_recursion;
 
 /**
  * ?internal
@@ -562,18 +565,21 @@ void ctr_set(ctr_object* key, ctr_object* object) {
  *
  * Populate the World of Citrine.
  */
+ctr_object* currentMethod;
 void ctr_initialize_world() {
+	ctr_internal_recursion = 0;
 	int i;
 	srand((unsigned)time(NULL));
 	for(i=0; i<16; i++) {
 		CtrHashKey[i] = (int) (rand() % 256);
 	}
-
 	ctr_first_object = NULL;
 	CtrStdWorld = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	CtrStdWorld->info.sticky = 1;
 	ctr_contexts[0] = CtrStdWorld;
-	
+	ctr_message_stack_index = 0;
+	ctr_message_stack[ctr_message_stack_index] = CtrStdWorld;
+
 	/* Object */
 	CtrStdObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_object_make );
@@ -599,6 +605,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_CASE_DO ), &ctr_object_case_do );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_LEARN ), &ctr_object_learn_meaning );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_CODE ), &ctr_object_to_code );
+	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_RECURSIVE ), &ctr_object_recursion );
 	ctr_internal_object_add_property( CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_OBJECT ), CtrStdObject, 0 );
 	CtrStdObject->link = NULL;
 	CtrStdObject->info.sticky = 1;
@@ -935,8 +942,6 @@ void ctr_initialize_world() {
  * Sends a message to a receiver object.
  */
 ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vlen, ctr_argument* argumentList) {
-	char toParent = 0;
-	ctr_object* me = NULL;
 	ctr_object* methodObject;
 	ctr_object* searchObject;
 	ctr_object* returnValue;
@@ -946,26 +951,23 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	ctr_object* (*funct)(ctr_object* receiverObject, ctr_argument* argumentList);
 	ctr_object* msg = NULL;
 	int argCount;
+	int j;
 	if (CtrStdFlow != NULL) return CtrStdNil; /* Error mode, ignore subsequent messages until resolved. */
 	methodObject = NULL;
 	searchObject = receiverObject;
-	if (vlen > 1 && message[0] == '`') {
-		int j = ctr_context_id;
-		while( !me && j ) {
-			me = ctr_internal_object_find_property(ctr_contexts[j--], ctr_build_string_from_cstring( ctr_clex_keyword_my_icon ), 0);
-		}
-		if (me) {
-			searchObject = me;
-			toParent = 1;
-			message = message + 1;
-			vlen--;
-		}
-	}
+	//Is the message the same as the current message? Then, it is meant for the parent
+	//unless the recursive flag has been set.
 	msg = ctr_build_string(message, vlen);
 	msg->info.sticky = 1; /* prevent message from being swept, no need to free(), GC will do */
 	while(!methodObject) {
 		methodObject = ctr_internal_object_find_property(searchObject, msg, 1);
-		if (methodObject && toParent) { toParent = 0; methodObject = NULL; }
+		if (ctr_internal_recursion != receiverObject) {
+			for(j = ctr_message_stack_index; j >= 0; j--) {
+				if (ctr_message_stack[j]==methodObject) {
+					methodObject = NULL;
+				}
+			}
+		}
 		if (methodObject) break;
 		if (!searchObject->link) break;
 		searchObject = searchObject->link;
@@ -1013,7 +1015,9 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 		}
 	}
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTBLOCK && methodObject->info.selfbind == 1) {
+		ctr_message_stack[ctr_message_stack_index++] = methodObject;
 		result = ctr_block_run(methodObject, argumentList, receiverObject);
+		ctr_message_stack[--ctr_message_stack_index] = NULL;
 	}
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTBLOCK && methodObject->info.selfbind == 0) {
 		result = ctr_block_run(methodObject, argumentList, NULL);

@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "ntho"
 #define CTR_DICT_PATH_OBJECT "Sebaka sa faele"
 #define CTR_DICT_CMD_OBJECT  "Laela"
+#define CTR_DICT_RECURSIVE "recursive"

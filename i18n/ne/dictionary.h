@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "एक वस्तुको रूपमा"
 #define CTR_DICT_PATH_OBJECT "स्थान"
 #define CTR_DICT_CMD_OBJECT  "निर्देशनहरू"
+#define CTR_DICT_RECURSIVE "recursive"

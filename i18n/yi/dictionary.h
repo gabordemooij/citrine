@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "ווי אַ כייפעץ"
 #define CTR_DICT_PATH_OBJECT "אָרט"
 #define CTR_DICT_CMD_OBJECT  "ינסטרוקטיאָן"
+#define CTR_DICT_RECURSIVE "recursive"

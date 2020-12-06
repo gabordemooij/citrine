@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "ob’ekt"
 #define CTR_DICT_PATH_OBJECT "Fayl joylashuvi"
 #define CTR_DICT_CMD_OBJECT  "Yo'riqnoma"
+#define CTR_DICT_RECURSIVE "recursive"

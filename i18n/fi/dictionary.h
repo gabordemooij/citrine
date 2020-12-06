@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "esine"
 #define CTR_DICT_PATH_OBJECT "Sijainti"
 #define CTR_DICT_CMD_OBJECT  "Ohje"
+#define CTR_DICT_RECURSIVE "recursive"

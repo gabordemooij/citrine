@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "objekt"
 #define CTR_DICT_PATH_OBJECT "Filplacering"
 #define CTR_DICT_CMD_OBJECT  "Instruktion"
+#define CTR_DICT_RECURSIVE "recursive"

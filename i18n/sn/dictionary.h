@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "chinhu"
 #define CTR_DICT_PATH_OBJECT "File nzvimbo"
 #define CTR_DICT_CMD_OBJECT  "Mirayiridzo"
+#define CTR_DICT_RECURSIVE "recursive"

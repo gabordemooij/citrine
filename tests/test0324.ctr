@@ -4,7 +4,7 @@
 ☞ Factory ≔ Object new.
 
 Animal on: ‘new’ do: {
-	☞ animal ≔ ⛏ `new.
+	☞ animal ≔ ⛏ new.
 	animal sound: ‘?’.
 	↲ animal.
 }.

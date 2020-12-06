@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "objekt"
 #define CTR_DICT_PATH_OBJECT "Bestânlokaasje"
 #define CTR_DICT_CMD_OBJECT  "Ynstruksje"
+#define CTR_DICT_RECURSIVE "recursive"

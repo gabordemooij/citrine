@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "object"
 #define CTR_DICT_PATH_OBJECT "Locum notitia"
 #define CTR_DICT_CMD_OBJECT  "Ordo"
+#define CTR_DICT_RECURSIVE "recursive"

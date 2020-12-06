@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "oġġett"
 #define CTR_DICT_PATH_OBJECT "Post tal-fajl"
 #define CTR_DICT_CMD_OBJECT  "Istruzzjoni"
+#define CTR_DICT_RECURSIVE "recursive"

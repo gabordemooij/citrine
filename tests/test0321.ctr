@@ -4,7 +4,7 @@ Program clean memory.
 
 ☞ Fruit ≔ Object new.
 Fruit on: ‘new’ do: {
-	☞ f ≔ ⛏ `new.
+	☞ f ≔ ⛏ new.
 	f apples: 0.
 	↲ f.
 }.

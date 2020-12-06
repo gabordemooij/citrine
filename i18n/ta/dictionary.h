@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "ஒரு பொருளாக"
 #define CTR_DICT_PATH_OBJECT "கோப்பு இடம்"
 #define CTR_DICT_CMD_OBJECT  "வழிமுறைகள்"
+#define CTR_DICT_RECURSIVE "recursive"

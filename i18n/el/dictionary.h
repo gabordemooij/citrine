@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT                        "ως αντικείμενο"
 #define CTR_DICT_PATH_OBJECT "Θέση αρχείου"
 #define CTR_DICT_CMD_OBJECT  "Εντολή"
+#define CTR_DICT_RECURSIVE "recursive"

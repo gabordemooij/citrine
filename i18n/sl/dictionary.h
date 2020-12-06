@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "predmet"
 #define CTR_DICT_PATH_OBJECT "Lokacija datoteke"
 #define CTR_DICT_CMD_OBJECT  "Navodila"
+#define CTR_DICT_RECURSIVE "recursive"

@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "kао објект"
 #define CTR_DICT_PATH_OBJECT "Локација датотеке"
 #define CTR_DICT_CMD_OBJECT  "Упутство"
+#define CTR_DICT_RECURSIVE "recursive"

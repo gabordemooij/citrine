@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "zavatra"
 #define CTR_DICT_PATH_OBJECT "Toerana misy ny rakitra"
 #define CTR_DICT_CMD_OBJECT  "Instruction"
+#define CTR_DICT_RECURSIVE "recursive"

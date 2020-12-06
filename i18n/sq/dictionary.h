@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "objekt"
 #define CTR_DICT_PATH_OBJECT "Vendndodhja e skedarit"
 #define CTR_DICT_CMD_OBJECT  "Udhëzim"
+#define CTR_DICT_RECURSIVE "rekursiv"

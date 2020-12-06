@@ -198,3 +198,4 @@
 
 #define CTR_DICT_PATH_OBJECT "جڳھ"
 #define CTR_DICT_CMD_OBJECT  "هدايتون"
+#define CTR_DICT_RECURSIVE "recursive"

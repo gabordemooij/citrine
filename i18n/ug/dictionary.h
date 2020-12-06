@@ -198,3 +198,4 @@
 
 #define CTR_DICT_PATH_OBJECT "ئورنى"
 #define CTR_DICT_CMD_OBJECT  "كۆرسەتمە"
+#define CTR_DICT_RECURSIVE "recursive"

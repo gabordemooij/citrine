@@ -315,6 +315,11 @@ ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+ctr_object* ctr_object_recursion(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_internal_recursion = myself;
+	return myself;
+}
+
 /**
  * @def
  * [ Object ] do.

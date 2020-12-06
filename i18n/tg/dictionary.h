@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "Ҳамчун объекти"
 #define CTR_DICT_PATH_OBJECT "Ҷойгиршавии файл"
 #define CTR_DICT_CMD_OBJECT  "Дастурҳо"
+#define CTR_DICT_RECURSIVE "recursive"

@@ -18,7 +18,7 @@ animal on: ‘name’ do: {
  
  cat on: ‘name’ do: {
 ↲ ‘your royal highness ’
-+ (⛏ `name).
++ (⛏ name).
 }.
 
 ✎ write: cat name.

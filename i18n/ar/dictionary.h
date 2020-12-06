@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT       "ككائن"
 #define CTR_DICT_PATH_OBJECT "مكانالملف"
 #define CTR_DICT_CMD_OBJECT  "تعليمات"
+#define CTR_DICT_RECURSIVE "العودية"

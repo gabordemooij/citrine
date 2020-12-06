@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "වස්තුවක් ලෙස"
 #define CTR_DICT_PATH_OBJECT "ස්ථානය"
 #define CTR_DICT_CMD_OBJECT  "උපදෙස්"
+#define CTR_DICT_RECURSIVE "recursive"

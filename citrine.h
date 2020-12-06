@@ -384,6 +384,8 @@ extern ctr_object* ctr_contexts[301];
 extern int ctr_context_id;
 extern ctr_tnode* ctr_callstack[301];
 extern uint8_t ctr_callstack_index;
+extern int ctr_message_stack_index;
+extern ctr_object* ctr_message_stack[301];
 
 /**
  * Nil Interface
@@ -419,6 +421,8 @@ extern ctr_object* ctr_object_respond_and_and(ctr_object* myself, ctr_argument* 
 extern ctr_object* ctr_object_respond_and_and_and(ctr_object* myself, ctr_argument* ctr_argumentList);
 extern ctr_object* ctr_object_case_do(ctr_object* myself, ctr_argument* ctr_argumentList);
 extern ctr_object* ctr_object_to_code(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_object_recursion(ctr_object* myself, ctr_argument* argumentList);
+
 
 /**
  * Boolean Interface
@@ -703,6 +707,11 @@ ctr_object* ctr_shellcommand_respond_to_and(ctr_object* myself, ctr_argument* ar
 ctr_object* ctr_path_respond_to(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_path_respond_to_and(ctr_object* myself, ctr_argument* argumentList);
 
+
+/**
+ * Recursion flag
+ */
+extern ctr_object* ctr_internal_recursion;
 
 /**
  * Global Garbage Collector variables

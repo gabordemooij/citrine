@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "ebumnuche"
 #define CTR_DICT_PATH_OBJECT "Ọnọdụ faịlụ"
 #define CTR_DICT_CMD_OBJECT  "Ntụziaka"
+#define CTR_DICT_RECURSIVE "recursive"

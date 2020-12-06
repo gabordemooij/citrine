@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "jectબ્જેક્ટ"
 #define CTR_DICT_PATH_OBJECT "ફાઇલ સ્થાન"
 #define CTR_DICT_CMD_OBJECT  "સૂચના"
+#define CTR_DICT_RECURSIVE "recursive"

@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "kākau"
 #define CTR_DICT_PATH_OBJECT "Kahi henua faila"
 #define CTR_DICT_CMD_OBJECT  "Aʻo"
+#define CTR_DICT_RECURSIVE "recursive"

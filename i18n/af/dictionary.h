@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "voorwerp"
 #define CTR_DICT_PATH_OBJECT "Pad"
 #define CTR_DICT_CMD_OBJECT  "Instruksie"
+#define CTR_DICT_RECURSIVE "rekursief"

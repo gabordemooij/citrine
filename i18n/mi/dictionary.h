@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "autu"
 #define CTR_DICT_PATH_OBJECT "Tauwāhi o te konae"
 #define CTR_DICT_CMD_OBJECT  "Tohutohu"
+#define CTR_DICT_RECURSIVE "recursive"

@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "sini"
 #define CTR_DICT_PATH_OBJECT "Nofoaga faila"
 #define CTR_DICT_CMD_OBJECT  "Faatonuga"
+#define CTR_DICT_RECURSIVE "recursive"
