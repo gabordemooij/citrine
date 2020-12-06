@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "ഒരു വസ്തുവായി"
 #define CTR_DICT_PATH_OBJECT "ഫയൽ സ്ഥാനം"
 #define CTR_DICT_CMD_OBJECT  "നിർദ്ദേശം"
+#define CTR_DICT_RECURSIVE "recursive"

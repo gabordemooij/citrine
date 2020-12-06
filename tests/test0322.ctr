@@ -11,7 +11,7 @@ Matryoshka on: ‘new:’ do: { :secret
 	t true: {
 		answer ≔ secret.
 	}, else: {
-		answer ≔ Matryoshka new: (⛏ double: secret).
+		answer ≔ Matryoshka recursive new: (⛏ double: secret).
 	}.
 	↲ answer.
 }.

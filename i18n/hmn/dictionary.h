@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "lub hom phiaj"
 #define CTR_DICT_PATH_OBJECT "Qhov chaw nyob"
 #define CTR_DICT_CMD_OBJECT  "Kev Qhia"
+#define CTR_DICT_RECURSIVE "recursive"

@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "into"
 #define CTR_DICT_PATH_OBJECT "Indawo yefayela"
 #define CTR_DICT_CMD_OBJECT  "Imiyalo"
+#define CTR_DICT_RECURSIVE "recursive"

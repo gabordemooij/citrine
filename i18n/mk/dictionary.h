@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "претвори во предмет"
 #define CTR_DICT_PATH_OBJECT "локација на датотека"
 #define CTR_DICT_CMD_OBJECT  "Упатство"
+#define CTR_DICT_RECURSIVE "recursive"

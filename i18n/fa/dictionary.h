@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "به عنوان یک شی"
 #define CTR_DICT_PATH_OBJECT "محل"
 #define CTR_DICT_CMD_OBJECT  "سفارش"
+#define CTR_DICT_RECURSIVE "recursive"

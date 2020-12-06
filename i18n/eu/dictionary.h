@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "objektu"
 #define CTR_DICT_PATH_OBJECT "Fitxategiaren kokapena"
 #define CTR_DICT_CMD_OBJECT  "Instrukzioa"
+#define CTR_DICT_RECURSIVE "recursive"

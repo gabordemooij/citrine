@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "бүтэц"
 #define CTR_DICT_PATH_OBJECT "Файлын байршил"
 #define CTR_DICT_CMD_OBJECT  "Зааварчилгаа"
+#define CTR_DICT_RECURSIVE "recursive"

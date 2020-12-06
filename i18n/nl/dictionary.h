@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "object"
 #define CTR_DICT_PATH_OBJECT "Bestandslocatie"
 #define CTR_DICT_CMD_OBJECT  "Instructie"
+#define CTR_DICT_RECURSIVE "recursief"

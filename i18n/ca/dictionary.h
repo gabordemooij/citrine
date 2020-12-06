@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "objecte"
 #define CTR_DICT_PATH_OBJECT "Ubicació del fitxer"
 #define CTR_DICT_CMD_OBJECT  "Instrucció"
+#define CTR_DICT_RECURSIVE "recursive"

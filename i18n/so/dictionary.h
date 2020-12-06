@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "walax"
 #define CTR_DICT_PATH_OBJECT "Goob fayl"
 #define CTR_DICT_CMD_OBJECT  "Codso"
+#define CTR_DICT_RECURSIVE "recursive"

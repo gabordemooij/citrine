@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "tumong"
 #define CTR_DICT_PATH_OBJECT "Lokasyon sa file"
 #define CTR_DICT_CMD_OBJECT  "Panudlo"
+#define CTR_DICT_RECURSIVE "recursive"

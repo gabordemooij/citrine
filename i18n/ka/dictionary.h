@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "როგორც ობიექტი"
 #define CTR_DICT_PATH_OBJECT "ფაილის ადგილმდებარეობა"
 #define CTR_DICT_CMD_OBJECT  "ინსტრუქცია"
+#define CTR_DICT_RECURSIVE "recursive"

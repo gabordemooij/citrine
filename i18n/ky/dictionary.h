@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "Объект катары"
 #define CTR_DICT_PATH_OBJECT "жер"
 #define CTR_DICT_CMD_OBJECT  "Нускама"
+#define CTR_DICT_RECURSIVE "recursive"

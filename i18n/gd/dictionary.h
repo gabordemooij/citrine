@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "rud"
 #define CTR_DICT_PATH_OBJECT "Suidheachadh faidhle"
 #define CTR_DICT_CMD_OBJECT  "Stiùireadh"
+#define CTR_DICT_RECURSIVE "recursive"

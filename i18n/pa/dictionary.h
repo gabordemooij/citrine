@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "ਆਬਜੈਕਟ ਬਣਾਓ"
 #define CTR_DICT_PATH_OBJECT "ਜਗ੍ਹਾ"
 #define CTR_DICT_CMD_OBJECT  "ਹਦਾਇਤ"
+#define CTR_DICT_RECURSIVE "recursive"

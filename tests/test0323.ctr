@@ -5,7 +5,7 @@ Program clean memory.
 
 ☞ Veggy ≔ Object new.
 Veggy on: ‘new’ do: {
-	☞ v ≔ ⛏ `new.
+	☞ v ≔ ⛏ new.
 	v init.
 	↲ v.
 }.

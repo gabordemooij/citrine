@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "bagay"
 #define CTR_DICT_PATH_OBJECT "Lokasyon ng file"
 #define CTR_DICT_CMD_OBJECT  "Panuto"
+#define CTR_DICT_RECURSIVE "recursive"

@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "gwrthrych"
 #define CTR_DICT_PATH_OBJECT "Lle"
 #define CTR_DICT_CMD_OBJECT  "Cyfarwyddiadau"
+#define CTR_DICT_RECURSIVE "recursive"

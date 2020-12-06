@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "作为对象"
 #define CTR_DICT_PATH_OBJECT "档案位置"
 #define CTR_DICT_CMD_OBJECT  "指令"
+#define CTR_DICT_RECURSIVE "recursive"

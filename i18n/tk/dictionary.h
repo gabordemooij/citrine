@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "obýekt"
 #define CTR_DICT_PATH_OBJECT "Faýlyň ýerleşýän ýeri"
 #define CTR_DICT_CMD_OBJECT  "Görkezmeler"
+#define CTR_DICT_RECURSIVE "recursive"

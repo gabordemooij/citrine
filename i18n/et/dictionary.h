@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "objekt"
 #define CTR_DICT_PATH_OBJECT "Faili asukoht"
 #define CTR_DICT_CMD_OBJECT  "Juhised"
+#define CTR_DICT_RECURSIVE "recursive"

@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "intego"
 #define CTR_DICT_PATH_OBJECT "Ahantu dosiye"
 #define CTR_DICT_CMD_OBJECT  "Amabwiriza"
+#define CTR_DICT_RECURSIVE "recursive"

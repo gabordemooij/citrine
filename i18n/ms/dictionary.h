@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "objek"
 #define CTR_DICT_PATH_OBJECT "Lokasi fail"
 #define CTR_DICT_CMD_OBJECT  "Arahan"
+#define CTR_DICT_RECURSIVE "recursive"

@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT        "ប្រែទៅជាវត្ថុ"
 #define CTR_DICT_PATH_OBJECT "ទីតាំងឯកសារ"
 #define CTR_DICT_CMD_OBJECT  "ការណែនាំ"
+#define CTR_DICT_RECURSIVE "recursive"

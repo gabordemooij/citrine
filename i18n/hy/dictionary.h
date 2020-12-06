@@ -197,3 +197,4 @@
 #define CTR_DICT_TOOBJECT                        "որպես օբյեկտ"
 #define CTR_DICT_PATH_OBJECT "ֆայլի գտնվելու վայրը"
 #define CTR_DICT_CMD_OBJECT  "հրահանգ"
+#define CTR_DICT_RECURSIVE "ռեկուրսիվ"
