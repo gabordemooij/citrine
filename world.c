@@ -961,10 +961,16 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	msg->info.sticky = 1; /* prevent message from being swept, no need to free(), GC will do */
 	while(!methodObject) {
 		methodObject = ctr_internal_object_find_property(searchObject, msg, 1);
-		if (ctr_internal_recursion != receiverObject) {
+		if (methodObject) {
 			for(j = ctr_message_stack_index; j >= 0; j--) {
 				if (ctr_message_stack[j]==methodObject) {
-					methodObject = NULL;
+					if (ctr_internal_recursion != receiverObject) {
+						methodObject = NULL;
+						break;
+					} else {
+						ctr_internal_recursion = NULL;
+						break;
+					}
 				}
 			}
 		}
