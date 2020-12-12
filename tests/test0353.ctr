@@ -1,0 +1,11 @@
+Number on: ‘factorial’ do: {
+	☞ answer ≔ 1.
+	(⛏ > 0) true: {
+		☞ this ≔ ⛏.
+		☞ next ≔ this - 1.
+		answer ≔ (this × next recursive factorial).
+	}.
+	↲ answer.
+}.
+
+{ :x ✎ write: x factorial, stop. } × 10.

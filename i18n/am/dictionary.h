@@ -197,4 +197,4 @@
 #define CTR_DICT_TOOBJECT                        "እንደ ዕቃ"
 #define CTR_DICT_PATH_OBJECT "የፋይል መገኛ"
 #define CTR_DICT_CMD_OBJECT  "መመሪያ"
-#define CTR_DICT_RECURSIVE "እንደገና መመለስ"
+#define CTR_DICT_RECURSIVE "እንደገናመመለስ"
