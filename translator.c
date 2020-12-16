@@ -267,6 +267,8 @@ ctr_dict* ctr_translate_load_dictionary() {
 	char* translation = calloc(5000, 1);
 	char* buffer;
 	char* format;
+	ctr_trans_d = NULL;
+	ctr_trans_x = NULL;
 	ctr_dict* entry;
 	ctr_dict* previousEntry = NULL;
 	ctr_dict* e;
@@ -329,6 +331,14 @@ ctr_dict* ctr_translate_load_dictionary() {
 		}
 	}
 	fclose(file);
+	if (ctr_trans_d == NULL) {
+		printf("No decimal separator found in dictionary, please add entry for type d.\n");
+		exit(1);
+	}
+	if (ctr_trans_x == NULL) {
+		printf("No thousands separator found in dictionary, please add entry for type x.\n");
+		exit(1);
+	}
 	return entry;
 }
 
