@@ -1,6 +1,6 @@
 
 
-☞ x ≔ Moment new year:2017, day:10, month:7, hour: 10, minute: 0, second: 0.
+☞ x ≔ Moment new year:2017, month: 7, day:10, hour: 10, minute: 0, second: 0.
 ✎ write: x, stop.
 x subtract: 1 hour.
 ✎ write: x, stop.
