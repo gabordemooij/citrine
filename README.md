@@ -6,7 +6,7 @@ Citrine Programming Language.
 Welcome to the Citrine Programming Language Project.
 
 Citrine is an easy-to-learn general purpose programming language for 
-UNIX®-like operating systems. The Citrine Programming Language focuses on simplicity 
+Cross platform operating systems. The Citrine Programming Language focuses on simplicity 
 and emphasizes maintainability through readability.
 Simplicity is achieved by syntactical and conceptual minimalism.
 Citrine is fully open source and uses the BSD license. 
