@@ -154,7 +154,7 @@ handleiding elk: { :taal :hoofdstukken
 			🠶tĳd: tĳd,
 			🠶taalregister: taalregister,
 			🠶taal: taal,
-			🠶titeltaal: taal hoofdletters,
+			🠶titeltaal: taal kopieer hoofdletters,
 			🠶hoofdstuk: onderdelen eerste html,
 			🠶voorbeeld: (onderdelen positie: 2) html,
 			🠶resultaat: (onderdelen positie: 3) html,
@@ -165,7 +165,7 @@ handleiding elk: { :taal :hoofdstukken
 			🠶taal: taal,
 			🠶link: onderdelen laatste.
 
-		Bestand nieuw: bestandslocatie, schrĳf: document.
 		✎ schrĳf: bestandslocatie, stop.
+		Bestand nieuw: bestandslocatie, schrĳf: document.
 	}.
 }.
