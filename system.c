@@ -1134,7 +1134,7 @@ ctr_object* ctr_clock_copy( ctr_object* myself, ctr_argument* argumentList ) {
  * [ Moment ] = [ Moment ]
  *
  * @example
- * ☞ m ≔ Moment new year: 2070, month: 11.
+ * ☞ m ≔ Moment new year: 2070, month: 11, day: 1.
  * ☞ n ≔ m copy.
  * ✎ write: (m = n), stop.
  * ✎ write: (m ≠ n), stop.
@@ -1165,7 +1165,7 @@ ctr_object* ctr_clock_equals( ctr_object* myself, ctr_argument* argumentList ) {
  * [ Moment ] ≠ [ Moment ]
  *
  * @example
- * ☞ m ≔ Moment new year: 2070, month: 11.
+ * ☞ m ≔ Moment new year: 2070, month: 11, day: 1
  * ☞ n ≔ m copy.
  * ✎ write: (m = n), stop.
  * ✎ write: (m ≠ n), stop.
