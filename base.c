@@ -2047,7 +2047,7 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	memcpy(tstr, str+begin, tlen);
 	ctr_heap_free( myself->value.svalue->value );
 	myself->value.svalue->value = tstr;
-	myself->value.svalue->vlen  = len;
+	myself->value.svalue->vlen  = tlen;
 	return myself;
 }
 
