@@ -2038,6 +2038,7 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	if (len == 0) return ctr_build_empty_string();
 	i = 0;
 	while(i < len && isspace(*(str+i))) i++;
+	if (i == len) return ctr_build_empty_string();
 	begin = i;
 	i = len - 1;
 	while(i > begin && isspace(*(str+i))) i--;
