@@ -1,4 +1,6 @@
 ‘SINGLE_LANGUAGE’.
+☞ OS ≔ Program shell: (Command uname -s), remove surrounding spaces.
+
 ☞ Slurp ≔ Object new.
 Slurp on: ‘new’ do: {
 	⚿ str ≔ ‘’.
@@ -31,11 +33,12 @@ Slurp on: ‘obtain’ do: {
 	large text append: ‘hello’.
 } × 1000.
 
+
 ✎ write: (
 	Program shell: (
 		Slurp new
 			echo: large text,
-			| ‘./bin/Linux/ctrxx tests/assets/stdin_test.ctr’
+			| (‘./bin/OS/ctrxx tests/assets/stdin_test.ctr’ OS: OS)
 		) obtain
 ).
 
