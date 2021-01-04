@@ -1749,7 +1749,6 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	long b = (length->value.nvalue);
 	long ua, ub;
 	char* dest;
-	//printf("> len=%d, from=%d, len=%d \n",len,a,b);
 	if (b == 0 || len == 0) {
 		if (len) {
 			ctr_heap_free( myself->value.svalue->value );
@@ -1780,7 +1779,7 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
 	memcpy(dest, (myself->value.svalue->value) + ua, ub);
 	ctr_heap_free( myself->value.svalue->value );
 	myself->value.svalue->value = dest;
-	myself->value.svalue->vlen  = strlen(dest);
+	myself->value.svalue->vlen  = ub;
     return myself;
 }
 
