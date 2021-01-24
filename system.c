@@ -1155,9 +1155,9 @@ ctr_object* ctr_clock_equals( ctr_object* myself, ctr_argument* argumentList ) {
 	otherzone != NULL &&
 	strncmp(myzone->value.svalue->value,otherzone->value.svalue->value,myzone->value.svalue->vlen)==0
 	) {
-		return ctr_build_bool(1);
+		return CtrStdBoolTrue;
 	}
-	return ctr_build_bool(0);
+	return CtrStdBoolFalse;
 }
 
 /**
@@ -1177,8 +1177,8 @@ ctr_object* ctr_clock_equals( ctr_object* myself, ctr_argument* argumentList ) {
  */
 ctr_object* ctr_clock_neq( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* bool = ctr_clock_equals(myself, argumentList);
-	bool->value.bvalue = !bool->value.bvalue;
-	return bool;
+	if (bool == CtrStdBoolTrue) return CtrStdBoolFalse;
+	return CtrStdBoolTrue;
 }
 
 

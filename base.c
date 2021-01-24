@@ -83,26 +83,9 @@ char* ctr_national_number(char* old_number, char* new_number) {
 /**
  * @def
  * Welcome
- * 
+ *
  * @example
- * Number on: ‘fibonacci’ do: {
- *	☞ a ≔ 0.
- *	☞ b ≔ 1.
- *	☞ f ≔ Nil.
- *	{
- *		(⛏ = 1) true: {	f ≔ 0. }, break.
- *		(⛏ > 1) true: {	f ≔ 1. }.
- *		(⛏ > 2) true: {
- *			{
- *				f ≔ a + b.
- *				a ≔ b.
- *				b ≔ f.
- *			} ×	(⛏ - 2).
- *		}.
- *	} procedure.
- *	↲ f.
- * }.
- * ✎ write: 8 fibonacci, stop.
+ * ✎ write: ‘Hello World’, stop.
  */
 
 
@@ -598,17 +581,12 @@ ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argum
  * ✎ write: y, stop.
  */
 ctr_object* ctr_build_bool(int truth) {
-	ctr_object* boolObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
-	if (truth) boolObject->value.bvalue = 1; else boolObject->value.bvalue = 0;
-	boolObject->info.type = CTR_OBJECT_TYPE_OTBOOL;
-	boolObject->link = CtrStdBool;
-	return boolObject;
+	if (truth) return CtrStdBoolTrue;
+	return CtrStdBoolFalse;
 }
 
 ctr_object* ctr_bool_new(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* boolObject = ctr_build_bool(0);
-	boolObject->link = myself;
-	return boolObject;
+	return CtrStdBoolFalse;
 }
 
 /**
@@ -675,7 +653,7 @@ ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * { :i
- *      (i > 10 and: i < 15) continue.
+ *      (i > 10 &: i < 15) continue.
  * 		✎ write: i, stop.
  * } × 20.
  */
@@ -692,7 +670,7 @@ ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * ☞ x ≔ 10.
- * (x > 9 and: x < 11) true: {
+ * (x > 9 &: x < 11) true: {
  * 	✎ write: x, stop.
  * }.
  */
@@ -798,8 +776,8 @@ ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
  * [ Boolean ] and: [ Boolean ]
  * 
  * @example
- * ☞ x ≔ ( 2 > 1 ) and: ( 3 > 2 ).
- * ☞ y ≔ ( 2 > 1 ) and: ( 2 > 3 ).
+ * ☞ x ≔ ( 2 > 1 ) &: ( 3 > 2 ).
+ * ☞ y ≔ ( 2 > 1 ) &: ( 2 > 3 ).
  * ✎ write: x, stop.
  * ✎ write: y, stop.
  */
@@ -825,11 +803,11 @@ ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Boolean ] or: [ Boolean ]
+ * [ Boolean ] |: [ Boolean ]
  *
  * @example
  * ☞ x ≔ 10.
- * ✎ write: (x = 11 or: x = 10), stop.
+ * ✎ write: (x = 11 |: x = 10), stop.
  */
 ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);

@@ -645,13 +645,20 @@ void ctr_initialize_world() {
 	CtrStdBool->link = CtrStdObject;
 	CtrStdBool->info.sticky = 1;
 	
-	CtrStdBoolTrue = ctr_build_bool(1);
+	CtrStdBoolTrue = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
+	CtrStdBoolTrue->value.bvalue = 1;
+	CtrStdBoolTrue->info.type = CTR_OBJECT_TYPE_OTBOOL;
+	CtrStdBoolTrue->link = CtrStdBool;
 	CtrStdBoolTrue->info.sticky = 1;
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_TRUE ), CtrStdBoolTrue, 0 );
-	CtrStdBoolFalse = ctr_build_bool(0);
+
+	CtrStdBoolFalse = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBOOL);
+	CtrStdBoolFalse->value.bvalue = 0;
+	CtrStdBoolFalse->info.type = CTR_OBJECT_TYPE_OTBOOL;
+	CtrStdBoolFalse->link = CtrStdBool;
 	CtrStdBoolFalse->info.sticky = 1;
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_FALSE ), CtrStdBoolFalse, 0 );
-	
+
 
 	/* Number */
 	CtrStdNumber = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
