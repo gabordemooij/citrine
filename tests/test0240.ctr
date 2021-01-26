@@ -5,7 +5,7 @@ $ on: ‘respond:’ do: { :x
 	
 	☞ operation ≔ x character: 1.
 	☞ valuta    ≔ x character: 2.
-	☞ money     ≔ x offset: 3.
+	☞ money     ≔ x offset: 2.
 	
 	☞ amount    ≔ 0.
 

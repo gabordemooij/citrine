@@ -28,7 +28,7 @@ List on: ‘aantal’ do: {
 			uppercase 
 			lowecase 
 			uppercase 
-			offset: ( 
+			offset: -1 + ( 
 				11 - 12 + (
 					(
 						(
