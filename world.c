@@ -846,22 +846,22 @@ void ctr_initialize_world() {
 	/* Command */
 	CtrStdCommand = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ARGUMENT ), &ctr_program_argument );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ARGUMENT_COUNT ), &ctr_program_num_of_args );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ENVIRONMENT_VARIABLE ), &ctr_program_get_env );
 	if (!ctr_flag_sandbox) {
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_WAIT_FOR_INPUT ), &ctr_program_waitforinput );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SET_ENVIRONMENT_VARIABLE ), &ctr_program_set_env );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SWEEP ), &ctr_gc_collect );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MEMORY_LIMIT ), &ctr_gc_setmemlimit );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MODE ),  &ctr_gc_setmode );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SHELL ), &ctr_program_shell );
+		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ARGUMENT_COUNT ), &ctr_program_num_of_args );
+		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ENVIRONMENT_VARIABLE ), &ctr_program_get_env );
+		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_WAIT_FOR_INPUT ), &ctr_program_waitforinput );
+		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SET_ENVIRONMENT_VARIABLE ), &ctr_program_set_env );
+		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SWEEP ), &ctr_gc_collect );
+		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MEMORY_LIMIT ), &ctr_gc_setmemlimit );
+		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MODE ),  &ctr_gc_setmode );
+		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SHELL ), &ctr_program_shell );
+		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_INPUT ), &ctr_program_input );
+		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FLUSH ), &ctr_program_flush );
+		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ERROR ), &ctr_program_err );
+		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MEMORY ), &ctr_gc_memory );
+		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_USE_SET ), &ctr_program_include );
 	}
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_INPUT ), &ctr_program_input );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_program_exit );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FLUSH ), &ctr_program_flush );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ERROR ), &ctr_program_err );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MEMORY ), &ctr_gc_memory );
-	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_USE_SET ), &ctr_program_include );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_program_tonumber );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_program_tostring );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_COMP_ICON ), CtrStdCommand, 0 );
