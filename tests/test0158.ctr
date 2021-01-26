@@ -12,7 +12,7 @@
 ✎ write: x, stop.
 ✎ write: (x equals: y), stop.
 
-☞ y ≔ x offset: 2.
+☞ y ≔ x offset: 1.
 ✎ write: x, stop.
 ✎ write: (x equals: y), stop.
 

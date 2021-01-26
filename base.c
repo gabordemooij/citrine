@@ -1774,7 +1774,7 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* argument2;
 	ctr_object* result;
 	ctr_size textLength;
-	ctr_number a = argumentList->object->value.nvalue;
+	ctr_number a = argumentList->object->value.nvalue + 1;
 	if (myself->value.svalue->vlen < a) return ctr_build_empty_string();
 	argument1 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	argument2 = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
