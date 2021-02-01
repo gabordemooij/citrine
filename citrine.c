@@ -40,7 +40,7 @@ void ctr_cli_welcome() {
 	printf("\n");
 	printf("Usage:\n");
 	printf("      ctr[version] filename\n");
-	printf("      ctrus program.ctr");
+	printf("      ctrus program.ctr\n");
 }
 
 /**
