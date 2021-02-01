@@ -1,6 +1,6 @@
 #define CTR_MSG_LANG_CODE "nl"
 #define CTR_MSG_WELCOME   "Citrine Programmeertaal NL\n"
-#define CTR_MSG_COPYRIGHT "Geschreven door Gabor de Mooij © alle rechten voorbehouden 2019, Licensie BSD.\n"
+#define CTR_MSG_COPYRIGHT "Geschreven door Gabor de Mooij © alle rechten voorbehouden 2019, BSD Licentie.\n"
 #define CTR_MSG_USAGE_G   "Niet genoeg argumenten. Gebruik alsvolgt: ctr -g bestand1.h bestand2.h"
 #define CTR_MSG_USAGE_T   "Niet genoeg argumenten. Gebruik alsvolgt: ctr -t d.dict programma.ctr"
 #define CTR_ERR_LEX       "%s op regel: %d. \n"
