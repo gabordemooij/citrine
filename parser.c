@@ -9,6 +9,9 @@
 
 char* ctr_cparse_current_program;
 
+ctr_source_map* ctr_source_map_head;
+int ctr_source_mapping;
+
 /**
  * CTRParserEmitErrorUnexpected
  *
