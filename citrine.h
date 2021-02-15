@@ -227,8 +227,8 @@ struct ctr_source_map {
 };
 typedef struct ctr_source_map ctr_source_map;
 
-ctr_source_map* ctr_source_map_head;
-int ctr_source_mapping;
+extern ctr_source_map* ctr_source_map_head;
+extern int ctr_source_mapping;
 
 /**
  * Core Objects
