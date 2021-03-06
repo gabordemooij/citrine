@@ -86,11 +86,13 @@ uint8_t ctr_clex_is_delimiter( char* code ) {
 	if (strncmp(code, CTR_DICT_RETURN, ctr_clex_keyword_return_len) == 0 ) {
 		return 1;
 	}
+	if (strncmp(code, CTR_DICT_MESSAGE_CHAIN, ctr_clex_keyword_chain_len) == 0 ) {
+		return 1;
+	}
 	char symbol = *(code);
 	return (
 	   symbol == '('
 	|| symbol == ')'
-	|| symbol == ','
 	|| symbol == ':'
 	|| symbol == ' '
 	|| symbol == '\n'
@@ -256,7 +258,10 @@ int ctr_clex_tok() {
 		ctr_code+=ctr_clex_keyword_eol_len;
 		return CTR_TOKEN_DOT;
 	}
-	if (c == ',') { ctr_code++; return CTR_TOKEN_CHAIN; }
+	if (strncmp(ctr_code, CTR_DICT_MESSAGE_CHAIN, ctr_clex_keyword_chain_len) == 0 ) {
+		 ctr_code+=ctr_clex_keyword_chain_len;
+		 return CTR_TOKEN_CHAIN;
+	}
 	if (strncmp(ctr_code, ctr_clex_desc_tok_assignment, ctr_clex_keyword_assignment_len)==0) {
 		ctr_code += ctr_clex_keyword_assignment_len;
 		return CTR_TOKEN_ASSIGNMENT; 
@@ -486,23 +491,30 @@ void ctr_clex_move_code_pointer(int movement) {
 }
 
 int ctr_clex_forward_scan(char* e, ctr_size* newCodePointer) {
-	char* bytes;
-	char* eol = NULL;
-	if (strncmp(CTR_DICT_END_OF_LINE,".",1)==0) {
-		bytes = ":.,)";
-	} else {
-		bytes = ":,)";
-		eol = CTR_DICT_END_OF_LINE;
-	}
 	ctr_size i = *(newCodePointer);
-	int len = strlen(bytes);
 	int nesting = 0;
 	int blocks = 0;
 	int quote = 0;
-	int q;
 	int escape = 0;
 	int found = 0;
+	int number = 0;
 	while( (e+i) < ctr_eofcode ) {
+		//Are we still inside a part of a number?
+		if (number && !isdigit(*(e+i)) &&
+			!(
+			(e+i+ctr_clex_keyword_num_sep_dec_len+1)<ctr_eofcode &&
+			strncmp((e+i),CTR_DICT_NUM_DEC_SEP, ctr_clex_keyword_num_sep_dec_len)==0 &&
+			isdigit(*(e+i+ctr_clex_keyword_num_sep_dec_len+1))
+			)
+			&&
+			!(
+			(e+i+ctr_clex_keyword_num_sep_tho_len+1)<ctr_eofcode &&
+			strncmp((e+i),CTR_DICT_NUM_THO_SEP, ctr_clex_keyword_num_sep_tho_len)==0 &&
+			isdigit(*(e+i+ctr_clex_keyword_num_sep_tho_len+1))
+			)
+		) { 
+			number = 0;
+		}
 		if (escape) escape = 0;
 		if (!quote && *(e+i) == '(') nesting++;
 		else if (!quote && nesting && *(e+i) == ')') nesting--;
@@ -511,21 +523,32 @@ int ctr_clex_forward_scan(char* e, ctr_size* newCodePointer) {
 		else if (!escape && !quote && strncmp((e+i),CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len) == 0) quote++;
 		else if (!escape && quote && strncmp((e+i),CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len) == 0) quote--;
 		else if (quote && *(e+i) == '\\' && !escape) { escape = 1;  }
-		else if (!nesting && !quote && !blocks) {
-			for (q=0; q<len; q++) {
-				if (*(e+i)==bytes[q]) {
-					if (bytes[q]=='.' && isdigit(*(e+i-1)) && (e+i+1)<ctr_eofcode && isdigit(*(e+i+1))) continue;
-					*(newCodePointer) = i;
-					found = 1;
-					break;
-				}
-				if (eol!=NULL && strncmp((e+i),eol,ctr_clex_keyword_eol_len)==0) {
-					*(newCodePointer) = i;
-					found = 1;
-					break;
-				}
+		else if (!number && isdigit(*(e+i))) { number = 1; }
+		else if (!nesting && !quote && !blocks && !number) {
+			//found a chain
+			if (strncmp((e+i),CTR_DICT_MESSAGE_CHAIN,ctr_clex_keyword_chain_len)==0) {
+				*(newCodePointer) = i;
+				found = 1;
+				break;
 			}
-			if (found) break;
+			//found eol symbol
+			if (strncmp((e+i),CTR_DICT_END_OF_LINE,ctr_clex_keyword_eol_len)==0) {
+				*(newCodePointer) = i;
+				found = 1;
+				break;
+			}
+			//found )
+			if (strncmp((e+i),CTR_DICT_PAREN_CLOSE,strlen(CTR_DICT_PAREN_CLOSE))==0) {
+				*(newCodePointer) = i;
+				found = 1;
+				break;
+			}
+			//found parameter or argument prefix
+			if (strncmp((e+i),CTR_DICT_PARAMETER_PREFIX,strlen(CTR_DICT_PARAMETER_PREFIX))==0) {
+				*(newCodePointer) = i;
+				found = 1;
+				break;
+			}
 		}
 		i++;
 	}

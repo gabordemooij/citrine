@@ -499,7 +499,11 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 		memcpy(message, e-l,l+1);
 		ctr_size i = 1;
 		while(ctr_clex_forward_scan(e, &i)) {
-			if (strncmp(e+i,CTR_DICT_END_OF_LINE,ctr_clex_keyword_eol_len)==0 || *(e+i)==')' || *(e+i)==',') break;
+			if (
+			   (e+i+ctr_clex_keyword_eol_len<ctr_eofcode && strncmp(e+i,CTR_DICT_END_OF_LINE,ctr_clex_keyword_eol_len)==0)
+		    || (e+i+ctr_clex_keyword_chain_len<ctr_eofcode && strncmp(e+i,CTR_DICT_MESSAGE_CHAIN,ctr_clex_keyword_chain_len)==0)
+			|| *(e+i)==')'
+			) break;
 			if (*(e+i)==':') {
 				ctr_notebook_add( ctr_note_create(e+i), noteCount );
 				noteCount++;
@@ -557,6 +561,12 @@ char* ctr_translate_dot(char* codePointer, ctr_dict* dictionary) {
 	ctr_translate_translate(CTR_DICT_END_OF_LINE,ctr_clex_keyword_eol_len,dictionary,'t',(char*)NULL);
 	return ctr_clex_code_pointer();
 }
+
+char* ctr_translate_chain(char* codePointer, ctr_dict* dictionary) {
+	ctr_translate_translate(CTR_DICT_MESSAGE_CHAIN,ctr_clex_keyword_chain_len,dictionary,'t',(char*)NULL);
+	return ctr_clex_code_pointer();
+}
+
 
 /**
  * Translates a number from one language into another taking into
@@ -628,6 +638,9 @@ void ctr_translate_program(char* prg, char* programPath) {
 		}
 		else if ( t == CTR_TOKEN_DOT ) {
 			p = ctr_translate_dot(p,dictionary);
+		}
+		else if ( t == CTR_TOKEN_CHAIN ) {
+			p = ctr_translate_chain(p,dictionary);
 		}
 		else if ( t == CTR_TOKEN_NUMBER ) {
 			p = ctr_translate_number(p);
