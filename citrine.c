@@ -25,6 +25,7 @@ ctr_size ctr_clex_keyword_num_sep_dec_len;
 ctr_size ctr_clex_keyword_num_sep_tho_len;
 ctr_size ctr_clex_keyword_assignment_len;
 ctr_size ctr_clex_keyword_return_len;
+ctr_size ctr_clex_keyword_chain_len;
 uint16_t ctr_sandbox_steps = 0;
 
 /**
@@ -112,6 +113,7 @@ int main(int argc, char* argv[]) {
 	ctr_clex_keyword_my_icon_len = strlen( ctr_clex_keyword_my_icon );
 	ctr_clex_keyword_var_icon_len = strlen( ctr_clex_keyword_var_icon );
 	ctr_clex_keyword_eol_len = strlen( CTR_DICT_END_OF_LINE );
+	ctr_clex_keyword_chain_len = strlen( CTR_DICT_MESSAGE_CHAIN );
 	ctr_clex_keyword_num_sep_dec_len = strlen( CTR_DICT_NUM_DEC_SEP );
 	ctr_clex_keyword_num_sep_tho_len = strlen( CTR_DICT_NUM_THO_SEP );
 	ctr_clex_keyword_qo_len = strlen( CTR_DICT_QUOT_OPEN );

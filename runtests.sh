@@ -58,6 +58,8 @@ cp bin/${OS}/ctrxx bin/Generic/ctr
 #Add plugin translations
 ./bin/${OS}/ctrxx -g plugins/request/i18n/en/dictionary.h plugins/request/i18n/nl/dictionary.h >> dict/xxnl.dict
 
+#Extra for arabic comma
+cat i18n/ar/extra2.dict >> dict/arxx.dict
 
 j=1
 for i in $(find tests -name 'test*.ctr'); do
@@ -81,13 +83,8 @@ for i in $(find tests -name 'test*.ctr'); do
 	directive=`head -n1 $fitem`
 	echo "[translating...]"
 	if [ "$directive" != "‘SINGLE_LANGUAGE’." ]; then
-		rm tests/tmp/runner7.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/tmp/runner1.ctr 1> tests/tmp/runner7.ctr 2> tests/tmp/terrors7.log
-		rm tests/tmp/runner8.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/tmp/runner2.ctr 1> tests/tmp/runner8.ctr 2> tests/tmp/terrors8.log
-		rm tests/tmp/runner9.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/tmp/runner3.ctr 1> tests/tmp/runner9.ctr 2> tests/tmp/terrors9.log
-		rm tests/tmp/runner10.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/tmp/runner4.ctr 1> tests/tmp/runner10.ctr 2> tests/tmp/terrors10.log
-		rm tests/tmp/runner11.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/tmp/runner5.ctr 1> tests/tmp/runner11.ctr 2> tests/tmp/terrors11.log
-		rm tests/tmp/runner12.ctr ; ./bin/${OS}/ctrxx -t dict/xxnl.dict tests/tmp/runner6.ctr 1> tests/tmp/runner12.ctr 2> tests/tmp/terrors12.log
-		rm tests/tmp/runner13.ctr ; ./bin/${OS}/ctrnl -t dict/nlxx.dict tests/tmp/runner12.ctr 1> tests/tmp/runner13.ctr 2> tests/tmp/terrors13.log
+		rm tests/tmp/runner7a.ctr ; ./bin/${OS}/ctrxx -t dict/xxar.dict tests/tmp/runner1.ctr 1> tests/tmp/runner7a.ctr 2> tests/tmp/terrors7a.log
+		rm tests/tmp/runner7.ctr ; ./bin/${OS}/ctrar -t dict/arxx.dict tests/tmp/runner7a.ctr 1> tests/tmp/runner7.ctr 2> tests/tmp/terrors7.log
 		for ISO in $(ls i18nsel)
 		do
 			rm tests/tmp/runner${ISO}.ctr ; ./bin/${OS}/ctrxx -t dict/xx${ISO}.dict tests/tmp/runner1.ctr 1>tests/tmp/runner${ISO}.ctr 2>tests/tmp/terrors${ISO}.log
@@ -106,14 +103,7 @@ for i in $(find tests -name 'test*.ctr'); do
 			echo "test" | ./bin/${OS}/ctrxx tests/tmp/runner5.ctr 1>/tmp/a5 2>/tmp/b5
 			echo "test" | ./bin/${OS}/ctrxx tests/tmp/runner6.ctr 1>/tmp/a6 2>/tmp/b6
 			if [ "$directive" != "‘SINGLE_LANGUAGE’." ]; then
-				echo "test" | ./bin/${OS}/ctrnl tests/tmp/runner7.ctr 1>/tmp/a7 2>/tmp/b7
-				echo "test" | ./bin/${OS}/ctrnl tests/tmp/runner8.ctr 1>/tmp/a8 2>/tmp/b8
-				echo "test" | ./bin/${OS}/ctrnl tests/tmp/runner9.ctr 1>/tmp/a9 2>/tmp/b9
-				echo "test" | ./bin/${OS}/ctrnl tests/tmp/runner10.ctr 1>/tmp/a10 2>/tmp/b10
-				echo "test" | ./bin/${OS}/ctrnl tests/tmp/runner11.ctr 1>/tmp/a11 2>/tmp/b11
-				echo "test" | ./bin/${OS}/ctrnl tests/tmp/runner12.ctr 1>/tmp/a12 2>/tmp/b12
-				echo "test" | ./bin/${OS}/ctrxx tests/tmp/runner13.ctr 1>/tmp/a13 2>/tmp/b13
-				echo "test" | ./bin/${OS}/ctrro tests/tmp/runner14.ctr 1>/tmp/a14 2>/tmp/b14
+				echo "test" | ./bin/${OS}/ctrxx tests/tmp/runner7.ctr 1>/tmp/a7 2>/tmp/b7
 				for ISO in $(ls i18nsel)
 				do
 					echo "test" | ./bin/${OS}/ctr${ISO} tests/tmp/runner${ISO}.ctr 1>/tmp/a${ISO} 2>/tmp/b${ISO}
@@ -129,12 +119,6 @@ for i in $(find tests -name 'test*.ctr'); do
 	result[5]=`cat /tmp/a5 /tmp/b5`
 	result[6]=`cat /tmp/a6 /tmp/b6`
 	result[7]=`cat /tmp/a7 /tmp/b7`
-	result[8]=`cat /tmp/a8 /tmp/b8`
-	result[9]=`cat /tmp/a9 /tmp/b9`
-	result[10]=`cat /tmp/a10 /tmp/b10`
-	result[11]=`cat /tmp/a11 /tmp/b11`
-	result[12]=`cat /tmp/a12 /tmp/b12`
-	result[13]=`cat /tmp/a13 /tmp/b13`
 	expected=`cat $fexpect`
 	expectednl=$expected
 	if [ -f $fexpectnl ]; then
@@ -158,7 +142,7 @@ for i in $(find tests -name 'test*.ctr'); do
 	fi
 	if [ "$directive" != "‘SINGLE_RUN’." ]; then
     if [ "$directive" != "‘SINGLE_LANGUAGE’." ]; then
-		for q in {1..6}
+		for q in {1..7}
 		do
 			if [ "${result[$q]}" = "$expected" ]; then
 				echo -n "[✓$j]"
