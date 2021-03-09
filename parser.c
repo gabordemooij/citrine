@@ -8,7 +8,7 @@
 #include "citrine.h"
 
 char* ctr_cparse_current_program;
-
+char ctr_clex_param_prefix_char;
 ctr_source_map* ctr_source_map_head;
 int ctr_source_mapping;
 
@@ -115,7 +115,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 			ctr_clex_putback();
 			return m;
 		 }
-		*(msg + msgpartlen) = ':';
+		*(msg + msgpartlen) = ctr_clex_param_prefix_char;
 		msgpartlen += 1;
 		if ((msgpartlen) > 255) {
 			ctr_cparse_emit_error_unexpected( t, CTR_ERR_LONG );
@@ -150,7 +150,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 				}
 				memcpy( (msg+msgpartlen), ctr_clex_tok_value(), l);
 				msgpartlen = msgpartlen + l;
-				*(msg + msgpartlen) = ':';
+				*(msg + msgpartlen) = ctr_clex_param_prefix_char;
 				msgpartlen ++;
 				t = ctr_clex_tok();
 				if (t != CTR_TOKEN_COLON) {

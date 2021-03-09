@@ -19,6 +19,7 @@
 #include "siphash.h"
 
 ctr_size ctr_program_length;
+char ctr_clex_param_prefix_char;
 uint64_t    ctr_cwlk_subprogram;
 int ctr_in_message;
 
@@ -1914,7 +1915,7 @@ ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* message = ctr_internal_cast2string( argumentList->object );
 	ctr_object* slot;
 
-	if ( message->value.svalue->value[message->value.svalue->vlen - 1] == ':' ) {
+	if ( message->value.svalue->value[message->value.svalue->vlen - 1] == ctr_clex_param_prefix_char ) {
 		slot = ctr_build_string( message->value.svalue->value, message->value.svalue->vlen - 1);
 	} else {
 		slot = message;

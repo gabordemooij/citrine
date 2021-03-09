@@ -44,7 +44,7 @@ char* ctr_clex_desc_tok_assignment = "≔";
 char* ctr_clex_desc_tok_ret_unicode = "↲";
 char* ctr_clex_desc_tok_fin = "end of program";
 char* ctr_clex_desc_tok_unknown = "(unknown token)";
-
+char ctr_clex_param_prefix_char;
 
 char* ctr_clex_keyword_me_icon;
 char* ctr_clex_keyword_my_icon;
@@ -93,7 +93,7 @@ uint8_t ctr_clex_is_delimiter( char* code ) {
 	return (
 	   symbol == '('
 	|| symbol == ')'
-	|| symbol == ':'
+	|| symbol == ctr_clex_param_prefix_char
 	|| symbol == ' '
 	|| symbol == '\n'
 	|| symbol == '\t'
@@ -266,7 +266,7 @@ int ctr_clex_tok() {
 		ctr_code += ctr_clex_keyword_assignment_len;
 		return CTR_TOKEN_ASSIGNMENT; 
 	}
-	if (c == ':') { ctr_code++; return CTR_TOKEN_COLON; }
+	if (c == ctr_clex_param_prefix_char) { ctr_code++; return CTR_TOKEN_COLON; }
 	if ( ( ctr_code + 2) < ctr_eofcode
 		&&   (uint8_t)            c == 0xE2
 		&& ( (uint8_t) *(ctr_code+1)==0x86)

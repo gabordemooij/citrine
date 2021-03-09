@@ -6,6 +6,8 @@
 #include "citrine.h"
 
 const int CTR_TRANSLATE_MAX_WORD_LEN = 180;
+char ctr_clex_param_prefix_char;
+char ctr_clex_param_prefix_char_translation;
 
 /**
  * Dictionary Structure
@@ -194,7 +196,7 @@ void ctr_note_collect( char* remainder ) {
 	jj = 0;
 	for(k=0; k<strlen(remainder); k++) {
 		*(buff+(jj++))=*(remainder+k);
-		if (*(remainder + k) == ':') {
+		if (*(remainder + k) == ctr_clex_param_prefix_char_translation) {
 			ctr_note_attach( ctr_note_grab( qq++ ), buff );
 			memset(buff, 0, CTR_TRANSLATE_MAX_WORD_LEN);
 			jj=0;
@@ -300,7 +302,9 @@ ctr_dict* ctr_translate_load_dictionary() {
 			ctr_trans_x = entry;
 			continue;
 		}
-		
+		if (strncmp(entry->word, CTR_DICT_PARAMETER_PREFIX,1)==0) {
+			ctr_clex_param_prefix_char_translation = entry->translation[0];
+		}
 		if (previousEntry) {
 			entry->next = previousEntry;
 		} else {
@@ -396,17 +400,17 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 				}
 				p = 0; q = 0;
 				for (i = 0; i<entry->wordLength; i++) {
-					if (*(entry->word + i)==':') p++;
+					if (*(entry->word + i)==ctr_clex_param_prefix_char) p++;
 				}
 				for (i = 0; i<entry->translationLength; i++) {
-					if (*(entry->translation + i)==':') q++;
+					if (*(entry->translation + i)==ctr_clex_param_prefix_char_translation) q++;
 				}
 				if ( p != q ) {
 					ctr_print_error(CTR_TERR_COLONS, 1);
 				}
 				for (i = 0; i<entry->translationLength; i++) {
 					fwrite(entry->translation + i,1,1,stdout);
-					if (*(entry->translation + i)==':' && entry->translationLength > (i+1)) {
+					if (*(entry->translation + i)==ctr_clex_param_prefix_char_translation && entry->translationLength > (i+1)) {
 						if ((entry->translationLength-i)>CTR_TRANSLATE_MAX_WORD_LEN) {
 							ctr_print_error(CTR_TERR_BUFF, 1);
 						}
@@ -422,10 +426,10 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 		}
 		entry = entry->next;
 	}
-	if (context == 't' && !found && ctr_internal_memmem(v,l,":",1,0)>((char*)NULL)) {
+	if (context == 't' && !found && ctr_internal_memmem(v,l,CTR_DICT_PARAMETER_PREFIX,1,0)>((char*)NULL)) {
 		for (i = 0; i<l; i++) {
 				fwrite(v+i,1,1,stdout);
-				if (*(v + i)==':') {
+				if (*(v + i)==ctr_clex_param_prefix_char) {
 					memcpy(remainder,v+i+1,(l-i));
 					found = 1;
 					break;
@@ -488,7 +492,7 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 	fwrite(p, ((e - l ) - p),1, stdout);
 	noteCount = 0;
 	/* is this part of a keyword message (end with colon?) */
-	if (*(e)==':') {
+	if (*(e)==ctr_clex_param_prefix_char) {
 		ctr_notebook_clear_marks();
 		skipColon = 1;
 		ctr_size q;
@@ -496,7 +500,9 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 		if (l+1 > CTR_TRANSLATE_MAX_WORD_LEN) {
 			ctr_print_error(CTR_TERR_TOK, 1);
 		}
-		memcpy(message, e-l,l+1);
+		memcpy(message, e-l,l);
+		//add colon to message-part
+		memcpy(message+l, CTR_DICT_PARAMETER_PREFIX, strlen(CTR_DICT_PARAMETER_PREFIX));
 		ctr_size i = 1;
 		while(ctr_clex_forward_scan(e, &i)) {
 			if (
@@ -504,7 +510,7 @@ char* ctr_translate_ref(char* codePointer, ctr_dict* dictionary) {
 		    || (e+i+ctr_clex_keyword_chain_len<ctr_eofcode && strncmp(e+i,CTR_DICT_MESSAGE_CHAIN,ctr_clex_keyword_chain_len)==0)
 			|| *(e+i)==')'
 			) break;
-			if (*(e+i)==':') {
+			if (*(e+i)==ctr_clex_param_prefix_char) {
 				ctr_notebook_add( ctr_note_create(e+i), noteCount );
 				noteCount++;
 				q = 0;
@@ -567,6 +573,10 @@ char* ctr_translate_chain(char* codePointer, ctr_dict* dictionary) {
 	return ctr_clex_code_pointer();
 }
 
+char* ctr_translate_colon(char* codePointer, ctr_dict* dictionary) {
+	ctr_translate_translate(CTR_DICT_PARAMETER_PREFIX,strlen(CTR_DICT_PARAMETER_PREFIX),dictionary,'t',(char*)NULL);
+	return ctr_clex_code_pointer();
+}
 
 /**
  * Translates a number from one language into another taking into
@@ -642,9 +652,15 @@ void ctr_translate_program(char* prg, char* programPath) {
 		else if ( t == CTR_TOKEN_CHAIN ) {
 			p = ctr_translate_chain(p,dictionary);
 		}
+		else if ( t == CTR_TOKEN_COLON ) {
+			if (*(p - 1)!=ctr_clex_param_prefix_char) {
+				fwrite(" ", 1, 1, stdout);
+				p = ctr_translate_colon(p,dictionary);
+			}
+		}
 		else if ( t == CTR_TOKEN_NUMBER ) {
 			p = ctr_translate_number(p);
-		}	
+		}
 		else {
 			p = ctr_translate_rest(p);
 		}

@@ -27,6 +27,7 @@ int ctr_gc_object_counter;
 int ctr_gc_kept_counter;
 int ctr_gc_sticky_counter;
 int ctr_gc_mode;
+char ctr_clex_param_prefix_char;
 
 // call this function to start a nanosecond-resolution timer
 struct timespec timer_start(){
@@ -1464,7 +1465,7 @@ ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentL
 	ctr_argument* newArgumentList;
 	newArgumentList = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 	str = ctr_internal_cast2string( argumentList->object );
-	if ( (str->value.svalue->vlen > 0) && *(str->value.svalue->value + (str->value.svalue->vlen - 1)) == ':' ) {
+	if ( (str->value.svalue->vlen > 0) && *(str->value.svalue->value + (str->value.svalue->vlen - 1)) == ctr_clex_param_prefix_char ) {
 		char* ncstr = ctr_heap_allocate( str->value.svalue->vlen - 1 );
 		memcpy( ncstr, str->value.svalue->value, str->value.svalue->vlen - 1 );
 		newArgumentList->object = ctr_build_string( ncstr, str->value.svalue->vlen - 1 );
