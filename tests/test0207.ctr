@@ -11,7 +11,7 @@
 	☞ x ≔ Number between: min and: max.
 	
 	☞ between boundaries? ≔ (
-		(x round ≥ min round) & (x round ≤ max round)
+		(x round ≥ min round) &: (x round ≤ max round)
 	).
 	
 	between boundaries? false: {

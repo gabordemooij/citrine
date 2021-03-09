@@ -120,6 +120,7 @@ int main(int argc, char* argv[]) {
 	ctr_clex_keyword_qc_len = strlen( CTR_DICT_QUOT_CLOSE );
 	ctr_clex_keyword_assignment_len = strlen( CTR_DICT_ASSIGN );
 	ctr_clex_keyword_return_len = strlen( CTR_DICT_RETURN );
+	ctr_clex_param_prefix_char = CTR_DICT_PARAMETER_PREFIX[0];
 	int mode = ctr_cli_read_args(argc, argv);
 	if (mode == 1) {
 		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
