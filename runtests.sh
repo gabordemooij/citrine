@@ -46,10 +46,12 @@ gcc -c jsmn.c -Wall	-Werror -fpic -DJSMN_STRICT -DJSMN_PARENT_LINKS -o jsmn.o
 cd ..
 gcc -c jsmn.c -Wall	-I ../../i18n/en -I i18n/xx -Werror -fpic -DJSMN_STRICT -DJSMN_PARENT_LINKS -o jsmn.o ; gcc -shared -o libctrjsmn.so jsmn.o jsmn/jsmn.o
 gcc -c jsmn.c -Wall	-I ../../i18n/nl -I i18n/nl -Werror -fpic -DJSMN_STRICT -DJSMN_PARENT_LINKS -o jsmnnl.o ; gcc -shared -o libctrjsmnnl.so jsmnnl.o jsmn/jsmn.o
+gcc -D langHY -c jsmn.c -Wall	-I ../../i18n/hy -I i18n/hy -Werror -fpic -DJSMN_STRICT -DJSMN_PARENT_LINKS -o jsmnhy.o ; gcc -shared -o libctrjsmnhy.so jsmnhy.o jsmn/jsmn.o
 cd ..
 cd ..
 cp plugins/jsmn/libctrjsmn.so mods/json/libctrjson.so
 cp plugins/jsmn/libctrjsmnnl.so mods/jsonnl/libctrjsonnl.so
+cp plugins/jsmn/libctrjsmnhy.so mods/jsonhy/libctrjsonhy.so
 
 
 ./mk.sh

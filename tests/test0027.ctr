@@ -6,5 +6,5 @@ Boolean on: ‘xor:’ do: { :b
 ☞ x ≔ ‘ABCDE’.
 ✎ write: ‘Length is:’ + x length.
 ((‘ABC’ length + 1 = 4) &: (2 ≠ 3)) not not true: { ✎ write: ‘Yes’. }.
-(((3 > 4) |: (4 > 2)) &: (True |: False) &: (True xor: True) not ) true: { ✎ write: ‘Yes’. }.
+(((3 > 4) |: (4 > 2)) &: (True |: False), &: (True xor: True) not ) true: { ✎ write: ‘Yes’. }.
 { ✎ write: ‘Running’. } run.
