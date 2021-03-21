@@ -2,6 +2,8 @@
 OS=$(uname -s)
 if [ "$OS" = "OpenBSD" -o "$OS" = "FreeBSD" -o "$OS" = "Darwin" ]; then
 	MAKEFILE=makefile.bsd
+elif [ "$OS" = "Haiku" ]; then
+	MAKEFILE=makefile.haiku
 else
 	MAKEFILE=makefile
 fi
