@@ -34,14 +34,10 @@ uint16_t ctr_sandbox_steps = 0;
  * version information and usage.
  */
 void ctr_cli_welcome() {
-	printf("\n");
 	printf( CTR_MSG_WELCOME );
 	printf( CTR_MSG_COPYRIGHT );
 	printf( CTR_VERSION );
 	printf("\n");
-	printf("Usage:\n");
-	printf("      ctr[version] filename\n");
-	printf("      ctrus program.ctr");
 }
 
 /**
