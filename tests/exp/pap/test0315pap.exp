@@ -1,0 +1,15 @@
+(Lista notisia) perde:‘a"b’ na:‘test’
+Invalid JSON.
+(Lista notisia) perde:(Sèt ← 1 ; 2 ; (Sèt ← 3 ; 4) ; ((Lista notisia) perde:(Sèt ← 3 ; 4) na:‘bar’, perde:1 na:‘foo’)) na:‘nested’, perde:No na:‘legend’, perde:27 na:‘age’, perde:‘Jack’ na:‘name’
+a	b
+{"test":"a\t\tb"}
+{"test":"a\nb"}
+{"test":"a\"b"}
+{"test":"a\b"}
+______________________Escape
+hello	world
+a\"b
+\"hello world\"
+hello\two\nrld
+hello\two\nrld
+hello\t\two\n\nrld
