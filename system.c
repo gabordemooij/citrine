@@ -265,7 +265,21 @@ ctr_object* ctr_gc_memory(ctr_object* myself, ctr_argument* argumentList) {
  * Stelt geheugenlimiet in, in bytes.
  */
 ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_gc_memlimit = (uint64_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	ctr_object* unit = ctr_internal_object_find_property(
+		argumentList->object,
+		ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ),
+		CTR_CATEGORY_PRIVATE_PROPERTY
+	);
+	uint64_t memlimit = (uint64_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	if (unit && unit->value.svalue->vlen == 2) {
+		if (strncmp("KB", unit->value.svalue->value, 2)==0) {
+			memlimit *= 1000;
+		}
+		else if (strncmp("MB", unit->value.svalue->value, 2)==0) {
+			memlimit *= 1000000;
+		}
+	}
+	ctr_gc_memlimit = memlimit;
 	return myself;
 }
 

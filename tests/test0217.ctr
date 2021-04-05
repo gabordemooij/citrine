@@ -1,6 +1,6 @@
 ‘SINGLE_LANGUAGE’.
 Program tidiness: 0.
-Program memory: 180000000.
+Program memory: 180 MB.
 ☞ a ≔ List new.
 a append: a.
 ✎ write: a, stop.
