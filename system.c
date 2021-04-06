@@ -255,14 +255,12 @@ ctr_object* ctr_gc_memory(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * @def
  * [Program] memory: [Number]
  *
- * Sets the memory limit, if this limit gets exceeded the program will produce
- * an out-of-memory error.
- * 
- * In other languages:
- * Dutch: Programma geheugen: [getal].
- * Stelt geheugenlimiet in, in bytes.
+ * @example
+ * Program memory: 8 MB.
+ * Program memory: 500 KB.
  */
 ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* unit = ctr_internal_object_find_property(
