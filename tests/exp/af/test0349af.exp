@@ -21,16 +21,16 @@ Lys ← 1 ; (Lys ← 2)
 Lys
 Lys ← 1 ; (Lys ← 2) ; 3
 Lys
-Lys ← 1 ; ((Kaart nuwe) sit by:‘a’ __:‘b’) ; 3
+Lys ← 1 ; ((Kaart nuwe) sit:‘a’ by:‘b’) ; 3
 Lys
-Lys ← 1 ; ((Kaart nuwe) sit by:(Lys ← 9) __:‘b’) ; 3
+Lys ← 1 ; ((Kaart nuwe) sit:(Lys ← 9) by:‘b’) ; 3
 Kaart
-(Kaart nuwe) sit by:2 __:‘1’
+(Kaart nuwe) sit:2 by:‘1’
 Kaart
-(Kaart nuwe) sit by:2 __:‘x’
+(Kaart nuwe) sit:2 by:‘x’
 Kaart
-(Kaart nuwe) sit by:(Lys ← 1 ; 2) __:‘x’
+(Kaart nuwe) sit:(Lys ← 1 ; 2) by:‘x’
 Kaart
-(Kaart nuwe) sit by:(Lys ← ((Kaart nuwe) sit by:‘q’ __:‘y’) ; 2) __:‘x’
+(Kaart nuwe) sit:(Lys ← ((Kaart nuwe) sit:‘q’ by:‘y’) ; 2) by:‘x’
 Nil
 Nil

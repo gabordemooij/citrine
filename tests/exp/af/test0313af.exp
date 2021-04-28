@@ -6,5 +6,5 @@ The garden is Nil meters long.
 Luckily, this day, there are Nil wasps in the garden.
 The dog named Nil sleeps under the tree.
 a\"bb\"ccc\"
-(Kaart nuwe) sit by:((Kaart nuwe) sit by:Nil __:‘dog’, sit by:Nil __:‘insects’, sit by:((Kaart nuwe) sit by:15 __:‘length’, sit by:8 __:‘width’) __:‘size’, sit by:(Lys ← ‘tulips’ ; ‘roses’ ; ‘lillies’) __:‘flower’, sit by:Onwaar __:‘shed’, sit by:True __:‘pool’, sit by:2 __:‘chairs’) __:‘garden’
+(Kaart nuwe) sit:((Kaart nuwe) sit:Nil by:‘dog’, sit:Nil by:‘insects’, sit:((Kaart nuwe) sit:15 by:‘length’, sit:8 by:‘width’) by:‘size’, sit:(Lys ← ‘tulips’ ; ‘roses’ ; ‘lillies’) by:‘flower’, sit:Onwaar by:‘shed’, sit:True by:‘pool’, sit:2 by:‘chairs’) by:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

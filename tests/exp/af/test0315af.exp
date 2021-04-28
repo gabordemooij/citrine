@@ -1,6 +1,6 @@
-(Kaart nuwe) sit by:‘a"b’ __:‘test’
+(Kaart nuwe) sit:‘a"b’ by:‘test’
 Invalid JSON.
-(Kaart nuwe) sit by:(Lys ← 1 ; 2 ; (Lys ← 3 ; 4) ; ((Kaart nuwe) sit by:(Lys ← 3 ; 4) __:‘bar’, sit by:1 __:‘foo’)) __:‘nested’, sit by:Onwaar __:‘legend’, sit by:27 __:‘age’, sit by:‘Jack’ __:‘name’
+(Kaart nuwe) sit:(Lys ← 1 ; 2 ; (Lys ← 3 ; 4) ; ((Kaart nuwe) sit:(Lys ← 3 ; 4) by:‘bar’, sit:1 by:‘foo’)) by:‘nested’, sit:Onwaar by:‘legend’, sit:27 by:‘age’, sit:‘Jack’ by:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}
