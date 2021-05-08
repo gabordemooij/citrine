@@ -48,7 +48,7 @@
 #define CTR_DICT_DONE            "done"
 #define CTR_DICT_IFFALSE         "false:"
 #define CTR_DICT_IFTRUE          "true:"
-#define CTR_DICT_WHILE           "while:"
+#define CTR_DICT_WHILE           "whilst:"
 #define CTR_DICT_MESSAGEARGS     "message:arguments:"
 #define CTR_DICT_MESSAGE         "message:"
 #define CTR_DICT_LEARN           "learn:means:"
