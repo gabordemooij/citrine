@@ -1,0 +1,15 @@
+1.001
+1.024
+Palapala ← ‘1’ ; ‘2’ ; ‘3’
+Palapala ← ‘1’ ; ‘2’ ; ‘3’
+Palapala ← ‘1’ ; ‘’ ; ‘3’
+Palapala ← ‘1’ ; ‘’ ; ‘3’
+Palapala ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Palapala ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Palapala ← ‘’ ; ‘’
+Palapala ← ‘’ ; ‘’
+Palapala ← ‘x’
+Palapala ← ‘x’
+Palapala ← ‘’
+Palapala ← ‘’
+Palapala ← ‘1,2,3’

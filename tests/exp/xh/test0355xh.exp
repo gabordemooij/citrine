@@ -1,0 +1,15 @@
+1.001
+1.024
+Uluhlu ← ‘1’ ; ‘2’ ; ‘3’
+Uluhlu ← ‘1’ ; ‘2’ ; ‘3’
+Uluhlu ← ‘1’ ; ‘’ ; ‘3’
+Uluhlu ← ‘1’ ; ‘’ ; ‘3’
+Uluhlu ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Uluhlu ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Uluhlu ← ‘’ ; ‘’
+Uluhlu ← ‘’ ; ‘’
+Uluhlu ← ‘x’
+Uluhlu ← ‘x’
+Uluhlu ← ‘’
+Uluhlu ← ‘’
+Uluhlu ← ‘1,2,3’

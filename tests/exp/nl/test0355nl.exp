@@ -1,0 +1,15 @@
+1.001
+1.024
+Reeks ← “1” ; “2” ; “3”
+Reeks ← “1” ; “2” ; “3”
+Reeks ← “1” ; “” ; “3”
+Reeks ← “1” ; “” ; “3”
+Reeks ← “” ; “” ; “” ; “”
+Reeks ← “” ; “” ; “” ; “”
+Reeks ← “” ; “”
+Reeks ← “” ; “”
+Reeks ← “x”
+Reeks ← “x”
+Reeks ← “”
+Reeks ← “”
+Reeks ← “1,2,3”

@@ -1,0 +1,15 @@
+1.001
+1.024
+Elencu ← ‘1’ ; ‘2’ ; ‘3’
+Elencu ← ‘1’ ; ‘2’ ; ‘3’
+Elencu ← ‘1’ ; ‘’ ; ‘3’
+Elencu ← ‘1’ ; ‘’ ; ‘3’
+Elencu ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Elencu ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Elencu ← ‘’ ; ‘’
+Elencu ← ‘’ ; ‘’
+Elencu ← ‘x’
+Elencu ← ‘x’
+Elencu ← ‘’
+Elencu ← ‘’
+Elencu ← ‘1,2,3’

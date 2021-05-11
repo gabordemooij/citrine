@@ -462,10 +462,10 @@ char* ctr_translate_string(char* codePointer, ctr_dict* dictionary) {
 	l = ctr_clex_tok_value_length(s);
 	e = ctr_clex_code_pointer();
 	ctr_translate_translate(CTR_DICT_QUOT_OPEN,ctr_clex_keyword_qo_len,dictionary,'t',NULL);
-	if (!ctr_translate_translate(s,l,dictionary,'s',NULL)) {
+	/* Strings larger than 100 bytes cannot be translated */
+	if (l>100 || !ctr_translate_translate(s,l,dictionary,'s',NULL)) {
 		fwrite(s,l,1,stdout);
 	}
-	//ctr_clex_tok();
 	ctr_translate_translate(CTR_DICT_QUOT_CLOSE,ctr_clex_keyword_qc_len,dictionary,'t',NULL);
 	e = ctr_clex_code_pointer();
 	return e;

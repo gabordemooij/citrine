@@ -1,0 +1,15 @@
+1.001
+1.024
+Daptar ← ‘1’ ; ‘2’ ; ‘3’
+Daptar ← ‘1’ ; ‘2’ ; ‘3’
+Daptar ← ‘1’ ; ‘’ ; ‘3’
+Daptar ← ‘1’ ; ‘’ ; ‘3’
+Daptar ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Daptar ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Daptar ← ‘’ ; ‘’
+Daptar ← ‘’ ; ‘’
+Daptar ← ‘x’
+Daptar ← ‘x’
+Daptar ← ‘’
+Daptar ← ‘’
+Daptar ← ‘1,2,3’

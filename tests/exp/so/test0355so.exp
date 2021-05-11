@@ -1,0 +1,15 @@
+1.001
+1.024
+Liiska ← ‘1’ ; ‘2’ ; ‘3’
+Liiska ← ‘1’ ; ‘2’ ; ‘3’
+Liiska ← ‘1’ ; ‘’ ; ‘3’
+Liiska ← ‘1’ ; ‘’ ; ‘3’
+Liiska ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Liiska ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Liiska ← ‘’ ; ‘’
+Liiska ← ‘’ ; ‘’
+Liiska ← ‘x’
+Liiska ← ‘x’
+Liiska ← ‘’
+Liiska ← ‘’
+Liiska ← ‘1,2,3’
