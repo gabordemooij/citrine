@@ -1,0 +1,15 @@
+1.001
+1.024
+Listar ← “1” ; “2” ; “3”
+Listar ← “1” ; “2” ; “3”
+Listar ← “1” ; “” ; “3”
+Listar ← “1” ; “” ; “3”
+Listar ← “” ; “” ; “” ; “”
+Listar ← “” ; “” ; “” ; “”
+Listar ← “” ; “”
+Listar ← “” ; “”
+Listar ← “x”
+Listar ← “x”
+Listar ← “”
+Listar ← “”
+Listar ← “1,2,3”

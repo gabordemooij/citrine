@@ -1,0 +1,15 @@
+1.001
+1.024
+Album ← ‘1’ ; ‘2’ ; ‘3’
+Album ← ‘1’ ; ‘2’ ; ‘3’
+Album ← ‘1’ ; ‘’ ; ‘3’
+Album ← ‘1’ ; ‘’ ; ‘3’
+Album ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Album ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Album ← ‘’ ; ‘’
+Album ← ‘’ ; ‘’
+Album ← ‘x’
+Album ← ‘x’
+Album ← ‘’
+Album ← ‘’
+Album ← ‘1,2,3’

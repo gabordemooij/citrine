@@ -2080,34 +2080,34 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 	char* dstr = delimObject->value.svalue->value;
 	long dlen = delimObject->value.svalue->vlen;
 	ctr_argument* arg;
-	char* elem;
 	ctr_object* arr = ctr_array_new(CtrStdArray, NULL);
 	long i;
 	long j = 0;
+	long k = 0;
 	char* buffer = ctr_heap_allocate( sizeof(char)*len );
 	for(i=0; i<len; i++) {
 		buffer[j] = str[i];
-		j++;
-		if (ctr_internal_memmem(buffer, j, dstr, dlen, 0)!=NULL) {
-			elem = ctr_heap_allocate( sizeof( char ) * ( j - dlen ) );
-			memcpy(elem,buffer,j-dlen);
-			arg = ctr_heap_allocate( sizeof( ctr_argument ) );
-			arg->object = ctr_build_string(elem, j-dlen);
-			ctr_array_push(arr, arg);
-			ctr_heap_free( arg );
-			ctr_heap_free( elem );
-			j=0;
+		if (dlen>0 && buffer[j]==dstr[k]) {
+			k++;
+			if (k>=dlen) {
+				arg = ctr_heap_allocate( sizeof( ctr_argument ) );
+				arg->object = ctr_build_string(buffer, j+1-dlen);
+				ctr_array_push(arr, arg);
+				ctr_heap_free( arg );
+				j=0;
+				k=0;
+			} else {
+				j++;
+			}
+		} else {
+			k = 0;
+			j++;
 		}
 	}
-	if (j>0) {
-		elem = ctr_heap_allocate( sizeof( char ) * j );
-		memcpy(elem,buffer,j);
-		arg = ctr_heap_allocate( sizeof( ctr_argument ) );
-		arg->object = ctr_build_string(elem, j);
-		ctr_array_push(arr, arg);
-		ctr_heap_free( arg );
-		ctr_heap_free( elem );
-	}
+	arg = ctr_heap_allocate( sizeof( ctr_argument ) );
+	arg->object = ctr_build_string(buffer, j);
+	ctr_array_push(arr, arg);
+	ctr_heap_free( arg );
 	ctr_heap_free( buffer );
 	return arr;
 }

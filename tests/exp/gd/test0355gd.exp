@@ -1,0 +1,15 @@
+1.001
+1.024
+Liosta ← ‘1’ ; ‘2’ ; ‘3’
+Liosta ← ‘1’ ; ‘2’ ; ‘3’
+Liosta ← ‘1’ ; ‘’ ; ‘3’
+Liosta ← ‘1’ ; ‘’ ; ‘3’
+Liosta ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Liosta ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Liosta ← ‘’ ; ‘’
+Liosta ← ‘’ ; ‘’
+Liosta ← ‘x’
+Liosta ← ‘x’
+Liosta ← ‘’
+Liosta ← ‘’
+Liosta ← ‘1,2,3’

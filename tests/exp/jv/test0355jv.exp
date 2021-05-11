@@ -1,0 +1,15 @@
+1.001
+1.024
+Dhaptar ← ‘1’ ; ‘2’ ; ‘3’
+Dhaptar ← ‘1’ ; ‘2’ ; ‘3’
+Dhaptar ← ‘1’ ; ‘’ ; ‘3’
+Dhaptar ← ‘1’ ; ‘’ ; ‘3’
+Dhaptar ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Dhaptar ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Dhaptar ← ‘’ ; ‘’
+Dhaptar ← ‘’ ; ‘’
+Dhaptar ← ‘x’
+Dhaptar ← ‘x’
+Dhaptar ← ‘’
+Dhaptar ← ‘’
+Dhaptar ← ‘1,2,3’

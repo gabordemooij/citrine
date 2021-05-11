@@ -1,0 +1,15 @@
+1.001
+1.024
+Listi ← ‘1’ ; ‘2’ ; ‘3’
+Listi ← ‘1’ ; ‘2’ ; ‘3’
+Listi ← ‘1’ ; ‘’ ; ‘3’
+Listi ← ‘1’ ; ‘’ ; ‘3’
+Listi ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Listi ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Listi ← ‘’ ; ‘’
+Listi ← ‘’ ; ‘’
+Listi ← ‘x’
+Listi ← ‘x’
+Listi ← ‘’
+Listi ← ‘’
+Listi ← ‘1,2,3’

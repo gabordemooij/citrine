@@ -1,0 +1,15 @@
+1.001
+1.024
+Loend ← ‘1’ ; ‘2’ ; ‘3’
+Loend ← ‘1’ ; ‘2’ ; ‘3’
+Loend ← ‘1’ ; ‘’ ; ‘3’
+Loend ← ‘1’ ; ‘’ ; ‘3’
+Loend ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Loend ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Loend ← ‘’ ; ‘’
+Loend ← ‘’ ; ‘’
+Loend ← ‘x’
+Loend ← ‘x’
+Loend ← ‘’
+Loend ← ‘’
+Loend ← ‘1,2,3’

@@ -1,0 +1,15 @@
+1.001
+1.024
+Senarai ← ‘1’ ; ‘2’ ; ‘3’
+Senarai ← ‘1’ ; ‘2’ ; ‘3’
+Senarai ← ‘1’ ; ‘’ ; ‘3’
+Senarai ← ‘1’ ; ‘’ ; ‘3’
+Senarai ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Senarai ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Senarai ← ‘’ ; ‘’
+Senarai ← ‘’ ; ‘’
+Senarai ← ‘x’
+Senarai ← ‘x’
+Senarai ← ‘’
+Senarai ← ‘’
+Senarai ← ‘1,2,3’

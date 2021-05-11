@@ -1,0 +1,15 @@
+1.001
+1.024
+Siyahı ← ‘1’ ; ‘2’ ; ‘3’
+Siyahı ← ‘1’ ; ‘2’ ; ‘3’
+Siyahı ← ‘1’ ; ‘’ ; ‘3’
+Siyahı ← ‘1’ ; ‘’ ; ‘3’
+Siyahı ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Siyahı ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Siyahı ← ‘’ ; ‘’
+Siyahı ← ‘’ ; ‘’
+Siyahı ← ‘x’
+Siyahı ← ‘x’
+Siyahı ← ‘’
+Siyahı ← ‘’
+Siyahı ← ‘1,2,3’
