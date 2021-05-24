@@ -40,7 +40,7 @@
 #define CTR_DICT_OR               "oder:"
 #define CTR_DICT_MODULO           "modulo:"
 #define CTR_DICT_NOR              "noch:"
-#define CTR_DICT_ONDO             "on:do:"
+#define CTR_DICT_ONDO             "bei:tun:"
 #define CTR_DICT_TYPE             "art"
 #define CTR_DICT_ISNIL            "null?"
 #define CTR_DICT_MYSELF           "mich selber"
