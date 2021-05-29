@@ -1,6 +1,6 @@
-(Karte neu) put:‘a"b’ at:‘test’
+(Liste neu) setzen:‘a"b’ auf:‘test’
 Invalid JSON.
-(Karte neu) put:(Aufführen ← 1 ; 2 ; (Aufführen ← 3 ; 4) ; ((Karte neu) put:(Aufführen ← 3 ; 4) at:‘bar’, put:1 at:‘foo’)) at:‘nested’, put:Falsch at:‘legend’, put:27 at:‘age’, put:‘Jack’ at:‘name’
+(Liste neu) setzen:(Serie ← 1 ; 2 ; (Serie ← 3 ; 4) ; ((Liste neu) setzen:(Serie ← 3 ; 4) auf:‘bar’, setzen:1 auf:‘foo’)) auf:‘nested’, setzen:Nein auf:‘legend’, setzen:27 auf:‘age’, setzen:‘Jack’ auf:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

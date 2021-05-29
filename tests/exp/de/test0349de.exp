@@ -1,9 +1,9 @@
-Null
-Null
-Boolescher Wert
-Wahr
-Boolescher Wert
-Falsch
+Nichts
+Nichts
+Ja oder Nein
+Ja
+Ja oder Nein
+Nein
 Nummer
 1
 Nummer
@@ -12,25 +12,25 @@ Nummer
 9,2
 Nummer
 -9,2
-Aufführen
-Aufführen neu 
-Aufführen
-Aufführen ← 1 ; 2
-Aufführen
-Aufführen ← 1 ; (Aufführen ← 2)
-Aufführen
-Aufführen ← 1 ; (Aufführen ← 2) ; 3
-Aufführen
-Aufführen ← 1 ; ((Karte neu) put:‘a’ at:‘b’) ; 3
-Aufführen
-Aufführen ← 1 ; ((Karte neu) put:(Aufführen ← 9) at:‘b’) ; 3
-Karte
-(Karte neu) put:2 at:‘1’
-Karte
-(Karte neu) put:2 at:‘x’
-Karte
-(Karte neu) put:(Aufführen ← 1 ; 2) at:‘x’
-Karte
-(Karte neu) put:(Aufführen ← ((Karte neu) put:‘q’ at:‘y’) ; 2) at:‘x’
-Null
-Null
+Serie
+Serie neu 
+Serie
+Serie ← 1 ; 2
+Serie
+Serie ← 1 ; (Serie ← 2)
+Serie
+Serie ← 1 ; (Serie ← 2) ; 3
+Serie
+Serie ← 1 ; ((Liste neu) setzen:‘a’ auf:‘b’) ; 3
+Serie
+Serie ← 1 ; ((Liste neu) setzen:(Serie ← 9) auf:‘b’) ; 3
+Liste
+(Liste neu) setzen:2 auf:‘1’
+Liste
+(Liste neu) setzen:2 auf:‘x’
+Liste
+(Liste neu) setzen:(Serie ← 1 ; 2) auf:‘x’
+Liste
+(Liste neu) setzen:(Serie ← ((Liste neu) setzen:‘q’ auf:‘y’) ; 2) auf:‘x’
+Nichts
+Nichts
