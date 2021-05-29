@@ -177,7 +177,19 @@ for i in $(find tests -name 'test*.ctr'); do
 						echo ""
 						echo "BUT GOT:"
 						echo "$actual"
-						exit 1
+					
+						if [ "$1" = "--correct" ]; then
+							echo "Correct expectation file? y/n"
+							read accept
+							if [ "$accept" = "y" ]; then
+								rm $langexp
+								touch $langexp
+								echo "$actual" > $langexp
+								echo "OK, replaced expectation."
+							fi
+						else
+							exit 1
+						fi
 					fi
 				else
 					echo "> Missing: ${ISO}!"

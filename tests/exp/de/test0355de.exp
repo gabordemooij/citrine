@@ -1,15 +1,15 @@
 1.001
 1.024
-Aufführen ← ‘1’ ; ‘2’ ; ‘3’
-Aufführen ← ‘1’ ; ‘2’ ; ‘3’
-Aufführen ← ‘1’ ; ‘’ ; ‘3’
-Aufführen ← ‘1’ ; ‘’ ; ‘3’
-Aufführen ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Aufführen ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Aufführen ← ‘’ ; ‘’
-Aufführen ← ‘’ ; ‘’
-Aufführen ← ‘x’
-Aufführen ← ‘x’
-Aufführen ← ‘’
-Aufführen ← ‘’
-Aufführen ← ‘1,2,3’
+Serie ← ‘1’ ; ‘2’ ; ‘3’
+Serie ← ‘1’ ; ‘2’ ; ‘3’
+Serie ← ‘1’ ; ‘’ ; ‘3’
+Serie ← ‘1’ ; ‘’ ; ‘3’
+Serie ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Serie ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Serie ← ‘’ ; ‘’
+Serie ← ‘’ ; ‘’
+Serie ← ‘x’
+Serie ← ‘x’
+Serie ← ‘’
+Serie ← ‘’
+Serie ← ‘1,2,3’
