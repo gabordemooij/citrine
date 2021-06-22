@@ -651,6 +651,7 @@ extern ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentL
 extern ctr_object* ctr_program_include(ctr_object* myself, ctr_argument* argumentList );
 extern ctr_object* ctr_program_tonumber(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_program_tostring(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_program_test(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Clock Interface
