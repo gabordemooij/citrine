@@ -198,7 +198,7 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 	char* pathString;
 	FILE* f;
 	int exists;
-	if (path == NULL) return ctr_build_bool(0);
+	if (path == NULL) return CtrStdBoolFalse;
 	vlen = path->value.svalue->vlen;
 	pathString = ctr_heap_allocate(vlen + 1);
 	memcpy(pathString, path->value.svalue->value, vlen);

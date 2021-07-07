@@ -414,7 +414,7 @@ ctr_object* ctr_internal_cast2bool( ctr_object* o ) {
 	ctr_heap_free(a);
 	if ( boolObject->info.type != CTR_OBJECT_TYPE_OTBOOL ) {
 		CtrStdFlow = ctr_error( CTR_ERR_RBOOL, 0 );
-		return ctr_build_bool(0);
+		return CtrStdBoolFalse;
 	}
 	return boolObject;
 }

@@ -119,7 +119,7 @@ ctr_object* ctr_nil_new(ctr_object* myself, ctr_argument* argumentList) {
  * ✎ write: x Nil?, stop.
  */
 ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_bool(1);
+	return CtrStdBoolTrue;
 }
 
 /**
@@ -155,7 +155,7 @@ ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* ctr_argumentList
  * ✎ write: x boolean, stop.
  */
 ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList) {
-	return ctr_build_bool(0);
+	return CtrStdBoolFalse;
 }
 
 /**
@@ -249,7 +249,7 @@ ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentL
  * ✎ write: x boolean, stop.
  */
 ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList) {
-	return ctr_build_bool(1);
+	return CtrStdBoolTrue;
 }
 
 /**
@@ -269,8 +269,8 @@ ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argument
  */
 ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherObject = argumentList->object;
-	if (otherObject == myself) return ctr_build_bool(1);
-	return ctr_build_bool(0);
+	if (otherObject == myself) return CtrStdBoolTrue;
+	return CtrStdBoolFalse;
 }
 
 /**
@@ -290,8 +290,8 @@ ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_object_unequals(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherObject = argumentList->object;
-	if (otherObject != myself) return ctr_build_bool(1);
-	return ctr_build_bool(0);
+	if (otherObject != myself) return CtrStdBoolTrue;
+	return CtrStdBoolFalse;
 }
 
 
@@ -536,7 +536,7 @@ ctr_object* ctr_object_respond_and_and_and(ctr_object* myself, ctr_argument* arg
  * ✎ write: Object Nil?, stop.
  */
 ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_bool(0);
+	return CtrStdBoolFalse;
 }
 
 /**
@@ -751,7 +751,8 @@ ctr_object* ctr_object_if_true( ctr_object* myself, ctr_argument* argumentList )
  * ✎ write: False not not not, stop.
  */
 ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_bool(!myself->value.bvalue);
+	if (!myself->value.bvalue) return CtrStdBoolTrue;
+	return CtrStdBoolFalse;
 }
 
 /**
@@ -784,7 +785,8 @@ ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
-	return ctr_build_bool((myself->value.bvalue && other->value.bvalue));
+	if ((myself->value.bvalue && other->value.bvalue)) return CtrStdBoolTrue;
+	return CtrStdBoolFalse;
 }
 
 /**
@@ -1594,7 +1596,7 @@ ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2string( argumentList->object );
 	if (other->value.svalue->vlen != myself->value.svalue->vlen) {
-		return ctr_build_bool(0);
+		return CtrStdBoolFalse;
 	}
 	return ctr_build_bool((strncmp(other->value.svalue->value, myself->value.svalue->value, myself->value.svalue->vlen)==0));
 }
@@ -1612,7 +1614,7 @@ ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2string( argumentList->object );
 	if (other->value.svalue->vlen != myself->value.svalue->vlen) {
-		return ctr_build_bool(1);
+		return CtrStdBoolTrue;
 	}
 	return ctr_build_bool(!(strncmp(other->value.svalue->value, myself->value.svalue->value, myself->value.svalue->vlen)==0));
 }
@@ -2061,7 +2063,7 @@ ctr_object* ctr_string_in_to_number(ctr_object* myself, ctr_argument* argumentLi
  * ✎ write: ‘123’ boolean, stop.
  */
 ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList) {
-	if ( myself->value.svalue->vlen == 0 ) return ctr_build_bool(0);
+	if ( myself->value.svalue->vlen == 0 ) return CtrStdBoolFalse;
 	return ctr_build_bool( 1 );
 }
 
