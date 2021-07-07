@@ -86,10 +86,10 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 			r = ctr_build_nil();
 			break;
 		case CTR_AST_NODE_LTRBOOLTRUE:
-			r = ctr_build_bool(1);
+			r = CtrStdBoolTrue;
 			break;
 		case CTR_AST_NODE_LTRBOOLFALSE:
-			r = ctr_build_bool(0);
+			r = CtrStdBoolFalse;
 			break;*/
 		case CTR_AST_NODE_LTRSTRING:
 			r = ctr_build_string(receiverNode->value, receiverNode->vlen);
@@ -238,10 +238,10 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 			result = ctr_build_string(node->value, node->vlen);
 			break;
 		case CTR_AST_NODE_LTRBOOLTRUE:
-			result = ctr_build_bool(1);
+			result = CtrStdBoolTrue;
 			break;
 		case CTR_AST_NODE_LTRBOOLFALSE:
-			result = ctr_build_bool(0);
+			result = CtrStdBoolFalse;
 			break;
 		case CTR_AST_NODE_LTRNIL:
 			result = ctr_build_nil();
