@@ -117,7 +117,7 @@ talen elk: { :nummer :taal
 
 	☞ eerste hoofdstuk ≔ handleiding bĳ: taal, eerste.
 	☞ link ≔ eerste hoofdstuk laatste.
-	☞ regel ≔ “<li><a href="/docs/🠶taal/🠶link.ctr" >🠶taal</a></li>”.
+	☞ regel ≔ “<li><a href="/docs/🠶taal/🠶link.html" >🠶taal</a></li>”.
 
 	regel
 	🠶taal: taal,
@@ -138,7 +138,7 @@ handleiding elk: { :taal :hoofdstukken
 
 		☞ link ≔ onderdelen laatste.
 		☞ titel ≔ onderdelen eerste.
-		☞ regel ≔ “<li><a href="/docs/🠶taal/🠶link.ctr" >🠶titel</a></li>”.
+		☞ regel ≔ “<li><a href="/docs/🠶taal/🠶link.html" >🠶titel</a></li>”.
 		regel
 			🠶taal: taal,
 			🠶link: link,
@@ -160,7 +160,7 @@ handleiding elk: { :taal :hoofdstukken
 			🠶resultaat: (onderdelen positie: 3) html,
 			🠶inhoudsopgave: inhoudsopgave.
 
-		☞ bestandslocatie ≔ “server/docs/🠶taal/🠶link.ctr”.
+		☞ bestandslocatie ≔ “server/docs/🠶taal/🠶link.html”.
 		bestandslocatie
 			🠶taal: taal,
 			🠶link: onderdelen laatste.
