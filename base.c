@@ -505,21 +505,43 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
  * [ Object ] respond: [ String ]
  *
  * @example
- * ☞ ×2 ≔ Object new.
- * ×2 on: ‘respond:’  do: { :s 
- * 	↲ (s + s).
+ * ☞ x ≔ Object new.
+ * x on: ‘respond:’  do: { :a 
+ * 	↲ (a + ‘!’).
  * }.
- * ✎ write: ×2 ho!.
+ * ✎ write: x abc.
  */
 ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-
+/**
+ * @def
+ * [ Object ] respond: [ String ] and: [ String ]
+ *
+ * @example
+ * ☞ x ≔ Object new.
+ * x on: ‘respond:and:’  do: { :a :b 
+ * 	↲ (a + b).
+ * }.
+ * ✎ write: (x abc: ‘def’), stop.
+ * ✎ write: x a ‘bc’, stop.
+ */
 ctr_object* ctr_object_respond_and(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Object ] respond: [ String ] and: [ String ] and: [ String ]
+ *
+ * @example
+ * ☞ x ≔ Object new.
+ * x on: ‘respond:and:and:’  do: { :a :b :c
+ * 	↲ (a + b + c).
+ * }.
+ * ✎ write: (x abc: ‘def’ ghi: ‘jkl’), stop.
+ */
 ctr_object* ctr_object_respond_and_and(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
@@ -2319,7 +2341,6 @@ ctr_object* ctr_build_block(ctr_tnode* node) {
  * @example
  * { ✎ write: ‘123’, stop. } run.
  */
-int xx = 0;
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my) {
 	ctr_object* result;
 	ctr_tnode* node = myself->value.block;
