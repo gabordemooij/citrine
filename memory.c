@@ -295,6 +295,7 @@ int        lpod = 128;
  * for pool allocation.
  */
 void ctr_pool_init( ctr_size pool ) {
+	if (usePools) return; /* You cannot init twice */
 	usePools = 1;
 	ctr_size poolSize = pool / 3;
 	spods = (poolSize / spod) - 1;
