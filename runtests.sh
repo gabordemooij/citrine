@@ -2,6 +2,11 @@
 #set -x
 #set -v
 
+CITRINE_MEMORY_LIMIT_MB=8
+CITRINE_MEMORY_MODE=1
+export CITRINE_MEMORY_LIMIT_MB
+export CITRINE_MEMORY_MODE
+
 OS=`uname -s`
 LDFLAGS='-shared'
 if [ "$OS" = "Darwin" ]; then
