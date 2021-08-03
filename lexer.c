@@ -25,6 +25,7 @@ int ctr_clex_old_line_number = 0;
 int ctr_clex_older_line_number = 0;
 int ctr_clex_ignore_modes = 0;
 int ctr_clex_number_of_lines = 0;
+char ctr_clex_param_prefix_char;
 
 char* ctr_clex_desc_tok_ref = "reference";
 char* ctr_clex_desc_tok_quote = "'";
@@ -44,7 +45,6 @@ char* ctr_clex_desc_tok_assignment = "≔";
 char* ctr_clex_desc_tok_ret_unicode = "↲";
 char* ctr_clex_desc_tok_fin = "end of program";
 char* ctr_clex_desc_tok_unknown = "(unknown token)";
-char ctr_clex_param_prefix_char;
 
 char* ctr_clex_keyword_me_icon;
 char* ctr_clex_keyword_my_icon;

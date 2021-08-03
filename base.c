@@ -19,7 +19,6 @@
 #include "siphash.h"
 
 ctr_size ctr_program_length;
-char ctr_clex_param_prefix_char;
 uint64_t    ctr_cwlk_subprogram;
 int ctr_in_message;
 

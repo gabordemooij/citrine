@@ -6,7 +6,6 @@
 #include "citrine.h"
 
 const int CTR_TRANSLATE_MAX_WORD_LEN = 180;
-char ctr_clex_param_prefix_char;
 char ctr_clex_param_prefix_char_translation;
 
 /**
