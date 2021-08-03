@@ -8,7 +8,6 @@
 #include "citrine.h"
 
 char* ctr_cparse_current_program;
-char ctr_clex_param_prefix_char;
 ctr_source_map* ctr_source_map_head;
 int ctr_source_mapping;
 

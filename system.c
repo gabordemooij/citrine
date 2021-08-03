@@ -27,7 +27,6 @@ int ctr_gc_object_counter;
 int ctr_gc_kept_counter;
 int ctr_gc_sticky_counter;
 int ctr_gc_mode;
-char ctr_clex_param_prefix_char;
 
 // call this function to start a nanosecond-resolution timer
 struct timespec timer_start(){
