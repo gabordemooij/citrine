@@ -68,7 +68,7 @@ blokken elk: { :nummer :blok
 	
 	resultaat? ja: {
 		voorbeeld ≔ voorbeeld opsplitsen: “@result”.
-		resultaat ≔ voorbeeld eraf.
+		resultaat ≔ voorbeeld neem laatste.
 	}.
 
 	☞ definitiebestand ≔ Bestand nieuw: “/tmp/def.ctr”.

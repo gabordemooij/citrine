@@ -201,6 +201,16 @@ ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 	}
 }
 
+/**
+ * @def
+ * [ Object ] code.
+ * 
+ * @example
+ * ☞ x ≔ Map new.
+ * x abc: 123.
+ * ☞ y ≔ List ← x.
+ * ✎ write: y code, stop.
+ */
 ctr_object* ctr_object_to_code(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* newArgumentList;
 	ctr_object* string = ctr_build_empty_string();
@@ -1195,9 +1205,14 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
  * @example
  * ☞ x ≔ 1.
  * {
- * 	(x = 1) true: { ✎ write: ‘ok’. }, break.
- * 	✎ write: ‘nope’.
+ * 	(x = 1) true: { ✎ write: ‘x’. }, break.
+ * 	✎ write: ‘y’.
  * } procedure.
+ *
+ * {
+ * 	(x = 1) true: { ✎ write: ‘x’. }, break.
+ * 	✎ write: ‘y’.
+ * } × 1.
  */
 ctr_object* ctr_block_procedure(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = myself;
@@ -1609,9 +1624,9 @@ ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
  * [ String ] = [ String ]
  * 
  * @example
- * ☞ x ≔ ‘Hello’ = ‘Hello’.
+ * ☞ x ≔ ‘abc’ = ‘abc’.
  * ✎ write: x, stop.
- * ☞ x ≔ ‘Hello’ = ‘World’.
+ * ☞ x ≔ ‘abc’ = ‘xxx’.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
@@ -1627,9 +1642,9 @@ ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
  * [ String ] ≠ [ String ]
  * 
  * @example
- * ☞ x ≔ ‘Hello’ = ‘Hello’.
+ * ☞ x ≔ ‘abc’ = ‘abc’.
  * ✎ write: x, stop.
- * ☞ x ≔ ‘World’ ≠ ‘Hello’.
+ * ☞ x ≔ ‘abc’ ≠ ‘xxx’.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
@@ -1718,6 +1733,14 @@ ctr_object* ctr_string_new(ctr_object* myself, ctr_argument* argumentList) {
 	return stringObject;
 }
 
+/**
+ * @def
+ * [ String ] code.
+ *
+ * @example
+ * ☞ x ≔ ‘qwerty’.
+ * ✎ write: x code, stop.
+ */
 ctr_object* ctr_string_to_code(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* newArgumentList;
 	ctr_object* string = ctr_build_empty_string();
@@ -1740,7 +1763,7 @@ ctr_object* ctr_string_to_code(ctr_object* myself, ctr_argument* argumentList) {
  * [ String ] from: [ Number ] length: [ Number ].
  *
  * @example
- * ☞ x ≔ ‘hello’ from: 2 length: 3.
+ * ☞ x ≔ ‘qwerty’ from: 2 length: 3.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentList) {
@@ -1790,7 +1813,7 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
  * [ String ] offset: [ Number ]
  *
  * @example
- * ☞ x ≔ ‘1234’ offset: 2.
+ * ☞ x ≔ ‘qwerty’ offset: 2.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
@@ -1930,9 +1953,12 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentL
  * [ String ] [ String ]: [ String ]
  *
  * @example
- * ☞ x ≔ ‘$ money’.
- * x money: 10.
- * ✎ write: x, stop.
+ * ☞ a ≔ ‘xx %’.
+ * a xx: 123.
+ * ✎ write: a, stop.
+ * ☞ b ≔ ‘2 + x = 3’.
+ * b x 1.
+ * ✎ write: b, stop.
  */
 ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* message = ctr_internal_cast2string( argumentList->object );
@@ -2447,9 +2473,9 @@ ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
  * [ Block ] set: [ String ] value: [ Object ]
  *
  * @example
- * ☞ ! ≔ { ✎ write: (⚿ q + ‘!’), stop. }.
- * ! set: ‘q’ value: ‘123’.
- * ! run.
+ * ☞ x ≔ { ✎ write: (⚿ q + ‘!’), stop. }.
+ * x set: ‘q’ value: ‘123’.
+ * x run.
  */
 ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* key = ctr_internal_cast2string(argumentList->object);
@@ -2464,7 +2490,7 @@ ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * {
- *   this code block error: ‘oops!’.
+ *   this code block error: ‘xxx’.
  * } catch: { :e
  *   ✎ write: e.
  * }, run.
