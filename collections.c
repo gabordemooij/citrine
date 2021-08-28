@@ -444,8 +444,7 @@ ctr_object* ctr_array_shift(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * @example
  * ☞ x ≔ List ← 1 ; 2 ; 3.
- * ☞ y ≔ x count.
- * ✎ write: x, stop.
+ * ✎ write: x count, stop.
  */
 ctr_object* ctr_array_count(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number d = 0;
@@ -782,12 +781,12 @@ ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList )
  * Map
  * 
  * @example
- * ☞ menu ≔ Map new.
- * menu 
- * pizza: 8,
- * hamburger: 12,
- * pancake: 10.
- * ✎ write: menu pizza, stop.
+ * ☞ x ≔ Map new.
+ * x 
+ * aaa: ‘a’,
+ * bbb: 1.5,
+ * ccc: True.
+ * ✎ write: x bbb, stop.
  */
 ctr_object* ctr_map_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -813,7 +812,7 @@ ctr_object* ctr_map_type(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * ☞ x ≔ Map new.
- * x put: ‘hello’ at: ‘world’.
+ * x put: ‘aaa’ at: ‘bbb’.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
@@ -848,11 +847,11 @@ ctr_object* ctr_map_put(ctr_object* myself, ctr_argument* argumentList) {
  * @example
  * ☞ x ≔
  * Map new
- * Margherita: 11.90,
- * Hawaii: 12.99,
- * QuattroFormaggi: 13.00.
- * ✎ write: ( x ? ‘Hawaii’ ), stop.
- * ✎ write: ( x Margherita ), stop.
+ * aaa: 11.90,
+ * bbb: 12.99,
+ * ccc: 13.00.
+ * ✎ write: ( x ? ‘aaa’ ), stop.
+ * ✎ write: ( x ccc ), stop.
  */
 ctr_object* ctr_map_key_value(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* newKey;
@@ -872,8 +871,8 @@ ctr_object* ctr_map_key_value(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * ☞ x ≔ Map new.
- * x red: ‘green’, yellow: ‘blue’.
- * x - ‘yellow’.
+ * x aaa: ‘bbb’, ccc: ‘ddd’.
+ * x - ‘ccc’.
  * ✎ write: x, stop.
  */
 ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList) {
@@ -887,7 +886,7 @@ ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * @example
  * ☞ x ≔ Map new.
- * x red: ‘green’, yellow: ‘blue’.
+ * x aaa: ‘bbb’, ccc: ‘ddd’.
  * ✎ write: x entries, stop.
  */
 ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList) {
@@ -912,7 +911,7 @@ ctr_object* ctr_map_keys(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * @example
  * ☞ x ≔ Map new.
- * x red: ‘green’, yellow: ‘blue’.
+ * x aaa: ‘bbb’, ccc: ‘ddd’.
  * ✎ write: x values, stop.
  */
 ctr_object* ctr_map_values(ctr_object* myself, ctr_argument* argumentList) {
@@ -938,9 +937,9 @@ ctr_object* ctr_map_values(ctr_object* myself, ctr_argument* argumentList) {
  * @example
  * ☞ x ≔ Map new.
  * x put: ‘a’ at: ‘b’.
- * x put: ‘hello’ at: ‘world’.
+ * x put: ‘xxx’ at: ‘yyy’.
  * ✎ write: (x at: ‘b’), stop.
- * ✎ write: (x world), stop.
+ * ✎ write: (x yyy), stop.
  * ✎ write: (x ? ‘b’), stop.
  */
 ctr_object* ctr_map_get(ctr_object* myself, ctr_argument* argumentList) {

@@ -439,7 +439,7 @@ ctr_object* ctr_program_num_of_args(ctr_object* myself, ctr_argument* argumentLi
  *
  * @example
  * ✎ write: ‘1..2..3..’, stop.
- * Program end
+ * Program end.
  * ✎ write: ‘4..5..6..’, stop.
  */
 ctr_object* ctr_program_exit(ctr_object* myself, ctr_argument* argumentList) {

@@ -190,7 +190,7 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * ☞ x ≔ File new: (Path /tmp unknown).
- * ✎ write: f exists, stop.
+ * ✎ write: x exists, stop.
  */
 ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -247,7 +247,7 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] size
  * 
  * @example
- * ☞ x ≔ File new: (Path tmp: ‘a.txt’).
+ * ☞ x ≔ File new: (Path /tmp: ‘a.txt’).
  * x write: ‘abc’.
  * ✎ write: x size, stop.
  * x append: ‘def’.
@@ -282,13 +282,8 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
  * [ File ] list: [ String ].
  * 
  * @example
- * ☞ x ≔ File list: Path /tmp.
+ * ☞ x ≔ File list: Path /usr games.
  * ✎ write: x, stop.
- * 
- * @result
- * file1.txt
- * file2.txt
- * ~$_
  */
 ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	DIR* d;
