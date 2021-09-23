@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 #include <syslog.h>
 #include <signal.h>
+#include <termios.h>
 
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -533,6 +534,48 @@ ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentL
 	}
 	userInput = ctr_build_string(buff, bytes);
 	ctr_heap_free(buff);
+	return userInput;
+}
+
+/**
+ * @def
+ * [ Program ] ask password
+ *
+ * @example
+ * ✎ write: Program ask password, stop.
+ *
+ * @result
+ * ~$ ****_
+ * 1234
+ * ~$_
+ */
+ctr_object* ctr_program_waitforpassword(ctr_object* myself, ctr_argument* argumentList) {
+	static struct termios oldt, newt;
+	int c;
+	ctr_size bytes = 0;
+	char* buff;
+	ctr_size page = 10;
+	ctr_object* userInput;
+	tcgetattr( STDIN_FILENO, &oldt);
+	newt = oldt;
+	newt.c_lflag &= ~(ECHO);
+	tcsetattr( STDIN_FILENO, TCSANOW, &newt);
+	buff = ctr_heap_allocate(page * sizeof(char));
+	while ((c = getchar()) != '\n') {
+		buff[bytes] = c;
+		bytes++;
+		if (bytes >= page) {
+			page *= 2;
+			buff = (char*) ctr_heap_reallocate(buff, page * sizeof(char));
+			if (buff == NULL) {
+				CtrStdFlow = ctr_error( CTR_ERR_OOM, 0 );
+				return CtrStdNil;
+			}
+		}
+	}
+	userInput = ctr_build_string(buff, bytes);
+	ctr_heap_free(buff);
+	tcsetattr( STDIN_FILENO, TCSANOW, &oldt);
 	return userInput;
 }
 
@@ -1401,6 +1444,7 @@ ctr_object* ctr_console_write(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_console_brk(ctr_object* myself, ctr_argument* argumentList) {
 	fwrite("\n", sizeof(char), 1, stdout);
+	fflush(stdout);
 	return myself;
 }
 

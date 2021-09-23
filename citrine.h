@@ -636,6 +636,7 @@ extern ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList)
 extern ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_program_num_of_args(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_program_waitforpassword(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_program_get_env(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList);
