@@ -860,6 +860,7 @@ void ctr_initialize_world() {
 		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ERROR ), &ctr_program_err );
 		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MEMORY ), &ctr_gc_memory );
 		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_USE_SET ), &ctr_program_include );
+		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "ask password" ), &ctr_program_waitforpassword );
 		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "test" ), &ctr_program_test );
 	}
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_program_exit );
