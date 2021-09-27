@@ -114,6 +114,7 @@
 #define CTR_DICT_END             "end"
 #define CTR_DICT_ARGUMENT	     "anexo:" 
 #define CTR_DICT_ARGUMENT_COUNT	 "kantidat di anexos" 
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	 "puntra" 
 #define CTR_DICT_INPUT           "entrada" 
 #define CTR_DICT_FLUSH           "enjuagar"

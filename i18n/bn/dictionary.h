@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "শেষ"
 #define CTR_DICT_ARGUMENT	      "যুক্তি:"
 #define CTR_DICT_ARGUMENT_COUNT	  "যুক্তি"
+#define CTR_DICT_WAIT_FOR_PASSW	"পাসওয়ার্ড জিজ্ঞাসা করুন"
 #define CTR_DICT_WAIT_FOR_INPUT	  "জিজ্ঞাসা করা"
 #define CTR_DICT_INPUT            "ইনপুট"
 #define CTR_DICT_FLUSH            "ঘনিষ্ঠরূপে"

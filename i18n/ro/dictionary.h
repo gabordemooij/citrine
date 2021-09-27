@@ -114,6 +114,7 @@
 #define CTR_DICT_END             "final"
 #define CTR_DICT_ARGUMENT	     "argument:" 
 #define CTR_DICT_ARGUMENT_COUNT	 "argumente" 
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	 "întreabă" 
 #define CTR_DICT_INPUT           "intrare" 
 #define CTR_DICT_FLUSH           "curăţă"

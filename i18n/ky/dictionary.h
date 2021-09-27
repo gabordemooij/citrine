@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "Бир мезгилдин акырына карата"
 #define CTR_DICT_ARGUMENT	      "аргумент:"
 #define CTR_DICT_ARGUMENT_COUNT	  "аргументтер"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "суроо"
 #define CTR_DICT_INPUT            "кирүү"
 #define CTR_DICT_FLUSH            "агызма"

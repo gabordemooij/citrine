@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "መጨረሻ"
 #define CTR_DICT_ARGUMENT	      "ነጋሪ እሴት__:"
 #define CTR_DICT_ARGUMENT_COUNT	  "ነጋሪ እሴቶች"
+#define CTR_DICT_WAIT_FOR_PASSW	  "የይለፍ ቃል ይጠይቁ"
 #define CTR_DICT_WAIT_FOR_INPUT	  "ጠይቅ"
 #define CTR_DICT_INPUT            "ግብዓት"
 #define CTR_DICT_FLUSH            "መፍሰስ"

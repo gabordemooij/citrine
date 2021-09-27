@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "einde"
 #define CTR_DICT_ARGUMENT	      "argument:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argumente"
+#define CTR_DICT_WAIT_FOR_PASSW	  "vra wagwoord"
 #define CTR_DICT_WAIT_FOR_INPUT	  "vra"
 #define CTR_DICT_INPUT            "insette"
 #define CTR_DICT_FLUSH            "spoel"

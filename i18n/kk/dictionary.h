@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "Соңы"
 #define CTR_DICT_ARGUMENT	      "дәлел:"
 #define CTR_DICT_ARGUMENT_COUNT	  "дәлелдер"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "сұрау"
 #define CTR_DICT_INPUT            "енгізу"
 #define CTR_DICT_FLUSH            "шайқау"

@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "hope"
 #define CTR_DICT_ARGUMENT	      "hoʻopaʻapaʻa:"
 #define CTR_DICT_ARGUMENT_COUNT	  "mau hoʻopaʻapaʻa"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "ui"
 #define CTR_DICT_INPUT            "komo"
 #define CTR_DICT_FLUSH            "flūwi"

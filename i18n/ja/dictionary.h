@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "終わり"
 #define CTR_DICT_ARGUMENT	      "引数：__:"
 #define CTR_DICT_ARGUMENT_COUNT	  "引数"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "尋ねる"
 #define CTR_DICT_INPUT            "入力"
 #define CTR_DICT_FLUSH            "流す"

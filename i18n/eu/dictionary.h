@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "end"
 #define CTR_DICT_ARGUMENT	      "argumentu:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argumentu"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "galdetu"
 #define CTR_DICT_INPUT            "sarrera"
 #define CTR_DICT_FLUSH            "hustu"

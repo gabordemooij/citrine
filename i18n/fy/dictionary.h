@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "ein"
 #define CTR_DICT_ARGUMENT	      "rûzje:"
 #define CTR_DICT_ARGUMENT_COUNT	  "arguminten"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "freegje"
 #define CTR_DICT_INPUT            "ynfier"
 #define CTR_DICT_FLUSH            "spuie"

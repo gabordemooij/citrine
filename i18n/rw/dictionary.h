@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "iherezo"
 #define CTR_DICT_ARGUMENT	      "impaka:"
 #define CTR_DICT_ARGUMENT_COUNT	  "impaka"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "baza"
 #define CTR_DICT_INPUT            "iyinjiza"
 #define CTR_DICT_FLUSH            "flush"

@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "konec"
 #define CTR_DICT_ARGUMENT	      "prepir:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argumenti"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "vprašati"
 #define CTR_DICT_INPUT            "vhod"
 #define CTR_DICT_FLUSH            "zardevati"

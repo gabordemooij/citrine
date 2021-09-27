@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "پایان"
 #define CTR_DICT_ARGUMENT	      "بحث و جدل:"
 #define CTR_DICT_ARGUMENT_COUNT	  "استدلال"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "پرسیدن"
 #define CTR_DICT_INPUT            "ورودی"
 #define CTR_DICT_FLUSH            "خیط و پیت کردن"

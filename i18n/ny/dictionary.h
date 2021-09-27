@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "tsiriza"
 #define CTR_DICT_ARGUMENT	      "mkangano:"
 #define CTR_DICT_ARGUMENT_COUNT	  "mikangano"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "funsani"
 #define CTR_DICT_INPUT            "kulowetsa"
 #define CTR_DICT_FLUSH            "tuluka"
