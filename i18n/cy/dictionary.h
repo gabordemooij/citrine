@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "diwedd"
 #define CTR_DICT_ARGUMENT	      "dadl:"
 #define CTR_DICT_ARGUMENT_COUNT	  "dadleuon"
+#define CTR_DICT_WAIT_FOR_PASSW	  "gofynnwch gyfrinair"
 #define CTR_DICT_WAIT_FOR_INPUT	  "gofynnwch"
 #define CTR_DICT_INPUT            "mewnbwn"
 #define CTR_DICT_FLUSH            "fflysio"

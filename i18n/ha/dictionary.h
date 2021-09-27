@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "ƙare"
 #define CTR_DICT_ARGUMENT	      "shawara:"
 #define CTR_DICT_ARGUMENT_COUNT	  "muhawara"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "tambaya"
 #define CTR_DICT_INPUT            "labari"
 #define CTR_DICT_FLUSH            "ja ruwa"

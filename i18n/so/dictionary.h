@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "dhamaadka"
 #define CTR_DICT_ARGUMENT	      "dood:"
 #define CTR_DICT_ARGUMENT_COUNT	  "doodaha"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "weydiiso"
 #define CTR_DICT_INPUT            "fikrad"
 #define CTR_DICT_FLUSH            "daadasho"

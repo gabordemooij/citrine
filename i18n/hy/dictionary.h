@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "վերջ"
 #define CTR_DICT_ARGUMENT	      "փաստարկ__."
 #define CTR_DICT_ARGUMENT_COUNT	  "փաստարկներ"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "հարցնել"
 #define CTR_DICT_INPUT            "մուտքագրում"
 #define CTR_DICT_FLUSH            "փչել"

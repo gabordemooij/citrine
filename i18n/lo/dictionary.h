@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "ສິ້ນສຸດ"
 #define CTR_DICT_ARGUMENT	      "ການໂຕ້ຖຽງ:"
 #define CTR_DICT_ARGUMENT_COUNT	  "ການໂຕ້ຖຽງ"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "ຖາມ"
 #define CTR_DICT_INPUT            "ວັດສະດຸປ້ອນ"
 #define CTR_DICT_FLUSH            "ໄຫຼອອກ"

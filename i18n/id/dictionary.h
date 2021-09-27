@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "akhir"
 #define CTR_DICT_ARGUMENT	      "argumen:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argumen"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "meminta"
 #define CTR_DICT_INPUT            "memasukkan"
 #define CTR_DICT_FLUSH            "menyiram"

@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "mutu"
 #define CTR_DICT_ARGUMENT	      "tautohetohe:"
 #define CTR_DICT_ARGUMENT_COUNT	  "tautohetohe"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "pātai"
 #define CTR_DICT_INPUT            "urunga"
 #define CTR_DICT_FLUSH            "flush"

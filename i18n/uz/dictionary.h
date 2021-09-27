@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "oxiri"
 #define CTR_DICT_ARGUMENT	      "dalil:"
 #define CTR_DICT_ARGUMENT_COUNT	  "dalillar"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "so’rash"
 #define CTR_DICT_INPUT            "kiritish"
 #define CTR_DICT_FLUSH            "flush"

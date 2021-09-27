@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "son"
 #define CTR_DICT_ARGUMENT	      "dəlil:"
 #define CTR_DICT_ARGUMENT_COUNT	  "arqumentlər"
+#define CTR_DICT_WAIT_FOR_PASSW	  "Şifrə istəyin"
 #define CTR_DICT_WAIT_FOR_INPUT	  "soruş"
 #define CTR_DICT_INPUT            "giriş"
 #define CTR_DICT_FLUSH            "qızarmaq"

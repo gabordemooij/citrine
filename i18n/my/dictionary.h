@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "အဆုံး"
 #define CTR_DICT_ARGUMENT	      "အငြင်းအခုံ:"
 #define CTR_DICT_ARGUMENT_COUNT	  "အငြင်းပွားမှုများ"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "မေး"
 #define CTR_DICT_INPUT            "input ကို"
 #define CTR_DICT_FLUSH            "flush"

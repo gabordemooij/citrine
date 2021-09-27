@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "pää"
 #define CTR_DICT_ARGUMENT	      "perustelu:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argumentit"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "kysyä"
 #define CTR_DICT_INPUT            "panos"
 #define CTR_DICT_FLUSH            "väri"

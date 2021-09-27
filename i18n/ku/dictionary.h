@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "dawî"
 #define CTR_DICT_ARGUMENT	      "bersivk:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argumana"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "pirsîn"
 #define CTR_DICT_INPUT            "beyan"
 #define CTR_DICT_FLUSH            "flush"

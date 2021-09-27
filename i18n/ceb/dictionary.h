@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "katapusan"
 #define CTR_DICT_ARGUMENT	      "argumento:"
 #define CTR_DICT_ARGUMENT_COUNT	  "mga argumento"
+#define CTR_DICT_WAIT_FOR_PASSW	  "pangutana password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "pangutana"
 #define CTR_DICT_INPUT            "input"
 #define CTR_DICT_FLUSH            "bulag"

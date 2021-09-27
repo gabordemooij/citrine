@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "beigas"
 #define CTR_DICT_ARGUMENT	      "arguments:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argumenti"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "pajautā"
 #define CTR_DICT_INPUT            "ievadi"
 #define CTR_DICT_FLUSH            "flush"

@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "кінець"
 #define CTR_DICT_ARGUMENT	      "аргумент:"
 #define CTR_DICT_ARGUMENT_COUNT	  "аргументи"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "запитати"
 #define CTR_DICT_INPUT            "вхід"
 #define CTR_DICT_FLUSH            "рум’янець"

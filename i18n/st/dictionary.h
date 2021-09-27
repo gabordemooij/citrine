@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "qeta"
 #define CTR_DICT_ARGUMENT	      "khang:"
 #define CTR_DICT_ARGUMENT_COUNT	  "khang"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "botsa"
 #define CTR_DICT_INPUT            "tlatsetso"
 #define CTR_DICT_FLUSH            "sesa"

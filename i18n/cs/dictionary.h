@@ -114,6 +114,7 @@
 #define CTR_DICT_END             "na konec"
 #define CTR_DICT_ARGUMENT	     "parametr:" 
 #define CTR_DICT_ARGUMENT_COUNT	 "parametrů" 
+#define CTR_DICT_WAIT_FOR_PASSW	 "zeptat se na heslo"
 #define CTR_DICT_WAIT_FOR_INPUT	 "zeptat se" 
 #define CTR_DICT_INPUT           "vstup" 
 #define CTR_DICT_FLUSH           "vyprázdnit"

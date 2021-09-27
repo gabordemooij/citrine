@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "tungtung"
 #define CTR_DICT_ARGUMENT	      "argumen:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argumen"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "naros"
 #define CTR_DICT_INPUT            "asupan"
 #define CTR_DICT_FLUSH            "siram"

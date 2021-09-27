@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "itemm"
 #define CTR_DICT_ARGUMENT	      "argument:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argumenti"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "staqsi"
 #define CTR_DICT_INPUT            "input"
 #define CTR_DICT_FLUSH            "laħlaħ"

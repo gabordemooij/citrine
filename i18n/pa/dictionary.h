@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "ਅੰਤ"
 #define CTR_DICT_ARGUMENT	      "ਦਲੀਲ:"
 #define CTR_DICT_ARGUMENT_COUNT	  "ਬਹਿਸ"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "ਪੁੱਛੋ"
 #define CTR_DICT_INPUT            "ਇੰਪੁੱਟ"
 #define CTR_DICT_FLUSH            "ਫਲੱਸ਼"

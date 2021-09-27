@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "deireadh"
 #define CTR_DICT_ARGUMENT	      "argamaid:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argamaidean"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "faighnich"
 #define CTR_DICT_INPUT            "cuir a-steach"
 #define CTR_DICT_FLUSH            "sruthadh"

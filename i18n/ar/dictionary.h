@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "النهاية"
 #define CTR_DICT_ARGUMENT	      "جدال:"
 #define CTR_DICT_ARGUMENT_COUNT	  "الحجج"
+#define CTR_DICT_WAIT_FOR_PASSW	  "اطلبكلمةمرور"
 #define CTR_DICT_WAIT_FOR_INPUT	  "يطلب"
 #define CTR_DICT_INPUT            "إدخال"
 #define CTR_DICT_FLUSH            "دافق"

@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "njedebe"
 #define CTR_DICT_ARGUMENT	      "arụmụka:"
 #define CTR_DICT_ARGUMENT_COUNT	  "arụmụka"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "jụọ"
 #define CTR_DICT_INPUT            "ntinye"
 #define CTR_DICT_FLUSH            "fepu"

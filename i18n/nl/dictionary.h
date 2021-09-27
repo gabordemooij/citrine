@@ -114,6 +114,7 @@
 #define CTR_DICT_END             "einde"
 #define CTR_DICT_ARGUMENT	     "argument:" 
 #define CTR_DICT_ARGUMENT_COUNT	 "aantal argumenten" 
+#define CTR_DICT_WAIT_FOR_PASSW	 "vraag wachtwoord"
 #define CTR_DICT_WAIT_FOR_INPUT	 "vraag" 
 #define CTR_DICT_INPUT           "invoer" 
 #define CTR_DICT_FLUSH           "spoelen"

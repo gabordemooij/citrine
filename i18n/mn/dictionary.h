@@ -114,6 +114,7 @@
 #define CTR_DICT_END              "Төгсгөл"
 #define CTR_DICT_ARGUMENT	      "аргумент:"
 #define CTR_DICT_ARGUMENT_COUNT	  "аргументууд"
+#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "гэж асуу"
 #define CTR_DICT_INPUT            "оролт"
 #define CTR_DICT_FLUSH            "угаах"
