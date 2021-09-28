@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "kawg"
 #define CTR_DICT_ARGUMENT	      "kev sib cav:"
 #define CTR_DICT_ARGUMENT_COUNT	  "kev sib cav"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "nug tus password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "nug"
 #define CTR_DICT_INPUT            "cov lus qhia"
 #define CTR_DICT_FLUSH            "dej ntws"

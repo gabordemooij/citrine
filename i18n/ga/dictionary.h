@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "deireadh"
 #define CTR_DICT_ARGUMENT	      "argóint:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argóintí"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "iarr pasfhocal"
 #define CTR_DICT_WAIT_FOR_INPUT	  "iarr"
 #define CTR_DICT_INPUT            "ionchur"
 #define CTR_DICT_FLUSH            "flush"

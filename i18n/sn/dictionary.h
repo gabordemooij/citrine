@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "magumo"
 #define CTR_DICT_ARGUMENT	      "gakava:"
 #define CTR_DICT_ARGUMENT_COUNT	  "kupokana"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "bvunza password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "bvunza"
 #define CTR_DICT_INPUT            "kupinza"
 #define CTR_DICT_FLUSH            "svina"

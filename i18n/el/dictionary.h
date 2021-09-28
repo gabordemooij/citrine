@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "τέλος"
 #define CTR_DICT_ARGUMENT	      "διαφωνία:"
 #define CTR_DICT_ARGUMENT_COUNT	  "επιχειρήματα"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "ζητα κωδικο"
 #define CTR_DICT_WAIT_FOR_INPUT	  "παρακαλώ"
 #define CTR_DICT_INPUT            "εισαγωγή"
 #define CTR_DICT_FLUSH            "ξεπλύνετε"

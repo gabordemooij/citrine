@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "tapitra"
 #define CTR_DICT_ARGUMENT	      "tohan-kevitra:"
 #define CTR_DICT_ARGUMENT_COUNT	  "kevitra"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "manontany tenimiafina"
 #define CTR_DICT_WAIT_FOR_INPUT	  "manontany"
 #define CTR_DICT_INPUT            "fahan’ny"
 #define CTR_DICT_FLUSH            "maoderina"

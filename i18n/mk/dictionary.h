@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "крај"
 #define CTR_DICT_ARGUMENT	      "аргумент:"
 #define CTR_DICT_ARGUMENT_COUNT	  "аргументи"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "прашај лозинка"
 #define CTR_DICT_WAIT_FOR_INPUT	  "прашај"
 #define CTR_DICT_INPUT            "влез"
 #define CTR_DICT_FLUSH            "испушти"

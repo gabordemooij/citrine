@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "ipari"
 #define CTR_DICT_ARGUMENT	      "àríyànjiyàn:"
 #define CTR_DICT_ARGUMENT_COUNT	  "awọn ariyanjiyan"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "beere ọrọ igbaniwọle"
 #define CTR_DICT_WAIT_FOR_INPUT	  "béèrè"
 #define CTR_DICT_INPUT            "igbewọle"
 #define CTR_DICT_FLUSH            "fọ danu"

@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "අවසානය"
 #define CTR_DICT_ARGUMENT	      "තර්කය:"
 #define CTR_DICT_ARGUMENT_COUNT	  "තර්ක"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "මුරපදය අසන්න"
 #define CTR_DICT_WAIT_FOR_INPUT	  "අහන්න"
 #define CTR_DICT_INPUT            "ආදානය"
 #define CTR_DICT_FLUSH            "ෆ්ලෂ්"

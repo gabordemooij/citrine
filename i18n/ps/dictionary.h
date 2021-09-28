@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "پای"
 #define CTR_DICT_ARGUMENT	      "دلیل:"
 #define CTR_DICT_ARGUMENT_COUNT	  "دلیلونه"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "رمز"
 #define CTR_DICT_WAIT_FOR_INPUT	  "پوښتنه وکړه"
 #define CTR_DICT_INPUT            "ننوتۍ"
 #define CTR_DICT_FLUSH            "فلش"

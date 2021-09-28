@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "fen"
 #define CTR_DICT_ARGUMENT	      "agiman:"
 #define CTR_DICT_ARGUMENT_COUNT	  "agiman"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "mande modpas"
 #define CTR_DICT_WAIT_FOR_INPUT	  "mande"
 #define CTR_DICT_INPUT            "opinyon"
 #define CTR_DICT_FLUSH            "kole"

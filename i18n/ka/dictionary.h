@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "დასასრული"
 #define CTR_DICT_ARGUMENT	      "არგუმენტი:"
 #define CTR_DICT_ARGUMENT_COUNT	  "არგუმენტები"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "პაროლის კითხვა"
 #define CTR_DICT_WAIT_FOR_INPUT	  "იკითხეთ"
 #define CTR_DICT_INPUT            "შეყვანა"
 #define CTR_DICT_FLUSH            "ფლეში"

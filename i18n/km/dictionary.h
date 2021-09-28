@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "បញ្ចប់"
 #define CTR_DICT_ARGUMENT	      "អាគុយម៉ង់:"
 #define CTR_DICT_ARGUMENT_COUNT	  "អាគុយម៉ង់"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "សួរពាក្យសម្ងាត់"
 #define CTR_DICT_WAIT_FOR_INPUT	  "សួរ"
 #define CTR_DICT_INPUT            "បញ្ចូល"
 #define CTR_DICT_FLUSH            "ហូរ"

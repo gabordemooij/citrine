@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "ukuphela"
 #define CTR_DICT_ARGUMENT	      "impikiswano:"
 #define CTR_DICT_ARGUMENT_COUNT	  "ukuphikisana"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "buza iphasiwedi"
 #define CTR_DICT_WAIT_FOR_INPUT	  "buza"
 #define CTR_DICT_INPUT            "okokufaka"
 #define CTR_DICT_FLUSH            "thinta"

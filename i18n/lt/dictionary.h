@@ -114,7 +114,7 @@
 #define CTR_DICT_END             "baigti"
 #define CTR_DICT_ARGUMENT	     "reikšmė:"
 #define CTR_DICT_ARGUMENT_COUNT	 "reikšmės"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	 "paklausk slaptažodžio"
 #define CTR_DICT_WAIT_FOR_INPUT	 "klausti"
 #define CTR_DICT_INPUT           "įvestis"
 #define CTR_DICT_FLUSH           "nuleisti"

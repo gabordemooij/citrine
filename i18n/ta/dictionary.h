@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "முடிவு"
 #define CTR_DICT_ARGUMENT	      "வாதம்:"
 #define CTR_DICT_ARGUMENT_COUNT	  "வாதங்கள்"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW   "கடவுச்சொல்லை கேட்கவும்"
 #define CTR_DICT_WAIT_FOR_INPUT	  "கேளுங்கள்"
 #define CTR_DICT_INPUT            "உள்ளீடு"
 #define CTR_DICT_FLUSH            "பறிப்பு"

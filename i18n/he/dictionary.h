@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "סוף"
 #define CTR_DICT_ARGUMENT	      "טיעון:"
 #define CTR_DICT_ARGUMENT_COUNT	  "ויכוחים"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "שאלסיסמא"
 #define CTR_DICT_WAIT_FOR_INPUT	  "תשאל"
 #define CTR_DICT_INPUT            "קלט"
 #define CTR_DICT_FLUSH            "סומק"

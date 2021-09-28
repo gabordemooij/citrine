@@ -114,7 +114,7 @@
 #define CTR_DICT_END "تم"
 #define CTR_DICT_ARGUMENT "ليل:"
 #define CTR_DICT_ARGUMENT_COUNT "ليل"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	"پاسورڊ"
 #define CTR_DICT_WAIT_FOR_INPUT "ڇو"
 #define CTR_DICT_INPUT "نپٽ"
 #define CTR_DICT_FLUSH "lلش"

@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "wakas"
 #define CTR_DICT_ARGUMENT	      "pagtatalo:"
 #define CTR_DICT_ARGUMENT_COUNT	  "mga argumento"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "magtanong password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "magtanong"
 #define CTR_DICT_INPUT            "input"
 #define CTR_DICT_FLUSH            "sirain"
