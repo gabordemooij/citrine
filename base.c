@@ -386,7 +386,7 @@ ctr_object* ctr_string_copy( ctr_object* myself, ctr_argument* argumentList ) {
 /**
  * 
  * @def
- * [ Object ] case: [ Object ] do: [ Block ].
+ * [ Object ] case: [ Object ] do: [ Code ].
  *
  * @example
  * ☞ x ≔ ‘**’.
@@ -477,7 +477,7 @@ ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList )
 
 /**
  * @def
- * [ Object ] on: [ String ] do: [ Block ]
+ * [ Object ] on: [ String ] do: [ Code ]
  *
  * @example
  * ☞ color ≔ Object new.
@@ -698,7 +698,7 @@ ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Boolean ] true: [ Block ]
+ * [ Boolean ] true: [ Code ]
  *
  * @example
  * ☞ x ≔ 10.
@@ -728,7 +728,7 @@ ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Boolean ] false: [ Block ]
+ * [ Boolean ] false: [ Code ]
  *
  * @example
  * (‘a’ > ‘b’) false: {
@@ -1170,7 +1170,7 @@ ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) 
 
 /**
  * @def
- * [ Block ] × [ Number ]
+ * [ Code ] × [ Number ]
  *
  * @example
  * { :i ✎ write: i. } × 7.
@@ -1200,7 +1200,7 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Block ] procedure
+ * [ Code ] procedure
  *
  * @example
  * ☞ x ≔ 1.
@@ -2361,7 +2361,7 @@ ctr_object* ctr_build_block(ctr_tnode* node) {
 
 /**
  * @def
- * [ Block ] run.
+ * [ Code ] run.
  * 
  * @example
  * { ✎ write: ‘123’, stop. } run.
@@ -2432,7 +2432,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 
 /**
  * @def
- * [ Block ] while: [ Block ]
+ * [ Code ] while: [ Code ]
  *
  * @example
  * ☞ x ≔ 0.
@@ -2470,7 +2470,7 @@ ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Block ] set: [ String ] value: [ Object ]
+ * [ Code ] set: [ String ] value: [ Object ]
  *
  * @example
  * ☞ x ≔ { ✎ write: (⚿ q + ‘!’), stop. }.
@@ -2486,7 +2486,7 @@ ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Block ] error: [ Object ].
+ * [ Code ] error: [ Object ].
  *
  * @example
  * {
@@ -2503,7 +2503,7 @@ ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Block ] catch: [ Block ]
+ * [ Code ] catch: [ Code ]
  *
  * @example
  * {
@@ -2521,7 +2521,7 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Block ] string
+ * [ Code ] string
  *
  * @example
  * ☞ x ≔ { 1 + 1. }.
