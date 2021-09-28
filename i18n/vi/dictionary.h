@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "kết thúc"
 #define CTR_DICT_ARGUMENT	      "tranh luận:"
 #define CTR_DICT_ARGUMENT_COUNT	  "tranh luận"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "hỏi mật khẩu"
 #define CTR_DICT_WAIT_FOR_INPUT	  "hỏi"
 #define CTR_DICT_INPUT            "đầu vào"
 #define CTR_DICT_FLUSH            "tuôn ra"

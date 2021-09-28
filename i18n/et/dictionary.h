@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "lõpp"
 #define CTR_DICT_ARGUMENT	      "argument:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argumendid"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "küsi parooli"
 #define CTR_DICT_WAIT_FOR_INPUT	  "küsige"
 #define CTR_DICT_INPUT            "sisend"
 #define CTR_DICT_FLUSH            "loputada"

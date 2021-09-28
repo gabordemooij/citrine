@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "isiphelo"
 #define CTR_DICT_ARGUMENT	      "ingxabano:"
 #define CTR_DICT_ARGUMENT_COUNT	  "iimpikiswano"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "buza iphasiwedi"
 #define CTR_DICT_WAIT_FOR_INPUT	  "buza"
 #define CTR_DICT_INPUT            "igalelo"
 #define CTR_DICT_FLUSH            "flush"

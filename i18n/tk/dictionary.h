@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "soňy"
 #define CTR_DICT_ARGUMENT	      "argument:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argumentler"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "parol sora"
 #define CTR_DICT_WAIT_FOR_INPUT	  "sora"
 #define CTR_DICT_INPUT            "giriş"
 #define CTR_DICT_FLUSH            "ýuwmak"

@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "iuga"
 #define CTR_DICT_ARGUMENT	      "finauga:"
 #define CTR_DICT_ARGUMENT_COUNT	  "finauga"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "fesili password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "fesili"
 #define CTR_DICT_INPUT            "fesoʻotaʻiga"
 #define CTR_DICT_FLUSH            "fufulu"

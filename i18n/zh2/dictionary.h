@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "结束"
 #define CTR_DICT_ARGUMENT	      "参数：__:"
 #define CTR_DICT_ARGUMENT_COUNT	  "论点"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "問密碼"
 #define CTR_DICT_WAIT_FOR_INPUT	  "_问"
 #define CTR_DICT_INPUT            "输入"
 #define CTR_DICT_FLUSH            "齐平"

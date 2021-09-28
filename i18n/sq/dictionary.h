@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "fund"
 #define CTR_DICT_ARGUMENT	      "argumenti:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argumentet"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "pyesni fjalëkalimin"
 #define CTR_DICT_WAIT_FOR_INPUT	  "kërkoj"
 #define CTR_DICT_INPUT            "të dhëna"
 #define CTR_DICT_FLUSH            "turret"

@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "ปลาย"
 #define CTR_DICT_ARGUMENT	      "การโต้เถียง:"
 #define CTR_DICT_ARGUMENT_COUNT	  "ข้อโต้แย้ง"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "ขอรหัสผ่าน"
 #define CTR_DICT_WAIT_FOR_INPUT	  "ถาม"
 #define CTR_DICT_INPUT            "อินพุต"
 #define CTR_DICT_FLUSH            "เปี่ยม"

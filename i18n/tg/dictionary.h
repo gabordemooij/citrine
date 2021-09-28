@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "Поён"
 #define CTR_DICT_ARGUMENT	      "далел:"
 #define CTR_DICT_ARGUMENT_COUNT	  "далелҳо"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "парол пурсед"
 #define CTR_DICT_WAIT_FOR_INPUT	  "пурсед"
 #define CTR_DICT_INPUT            "вуруд"
 #define CTR_DICT_FLUSH            "шуст"

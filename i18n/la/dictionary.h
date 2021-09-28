@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "finis"
 #define CTR_DICT_ARGUMENT	      "argumentum:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argumentorum"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "quaeritur password"
 #define CTR_DICT_WAIT_FOR_INPUT	  "quaerere"
 #define CTR_DICT_INPUT            "initus"
 #define CTR_DICT_FLUSH            "suspendisse"

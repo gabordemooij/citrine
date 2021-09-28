@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "koniec"
 #define CTR_DICT_ARGUMENT	      "argument:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argumenty"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "opýtať sa heslo"
 #define CTR_DICT_WAIT_FOR_INPUT	  "opýtať sa"
 #define CTR_DICT_INPUT            "vstup"
 #define CTR_DICT_FLUSH            "spláchnuť"

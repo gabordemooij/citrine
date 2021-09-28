@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "അവസാനിക്കുന്നു"
 #define CTR_DICT_ARGUMENT	      "വാദം:"
 #define CTR_DICT_ARGUMENT_COUNT	  "ആർഗ്യുമെന്റുകൾ"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "രഹസ്യം"
 #define CTR_DICT_WAIT_FOR_INPUT	  "ചോദിക്കുക"
 #define CTR_DICT_INPUT            "ഇൻപുട്ട്"
 #define CTR_DICT_FLUSH            "ഫ്ലഷ്"

@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "kraj"
 #define CTR_DICT_ARGUMENT	      "argument:"
 #define CTR_DICT_ARGUMENT_COUNT	  "argumenti"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "pitati lozinku"
 #define CTR_DICT_WAIT_FOR_INPUT	  "pitati"
 #define CTR_DICT_INPUT            "ulazni"
 #define CTR_DICT_FLUSH            "rumenilo"

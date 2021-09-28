@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "enda"
 #define CTR_DICT_ARGUMENT	      "rifrildi:"
 #define CTR_DICT_ARGUMENT_COUNT	  "rök"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "spyrja lykilorð"
 #define CTR_DICT_WAIT_FOR_INPUT	  "spyrja"
 #define CTR_DICT_INPUT            "inntak"
 #define CTR_DICT_FLUSH            "skola"

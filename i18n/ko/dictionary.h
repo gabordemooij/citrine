@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "종료"
 #define CTR_DICT_ARGUMENT	      "논의:"
 #define CTR_DICT_ARGUMENT_COUNT	  "인수"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "비밀번호"
 #define CTR_DICT_WAIT_FOR_INPUT	  "물어보기"
 #define CTR_DICT_INPUT            "입력"
 #define CTR_DICT_FLUSH            "플러시"

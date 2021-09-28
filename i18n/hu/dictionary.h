@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "vég"
 #define CTR_DICT_ARGUMENT	      "érv:"
 #define CTR_DICT_ARGUMENT_COUNT	  "érvek"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "kérj jelszót"
 #define CTR_DICT_WAIT_FOR_INPUT	  "kérdez"
 #define CTR_DICT_INPUT            "bemenet"
 #define CTR_DICT_FLUSH            "flush"

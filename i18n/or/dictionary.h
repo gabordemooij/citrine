@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "ଶେଷ"
 #define CTR_DICT_ARGUMENT	      "ଯୁକ୍ତି:"
 #define CTR_DICT_ARGUMENT_COUNT	  "ତର୍କ"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "ପାସୱାର୍ଡ ମାଗନ୍ତୁ |"
 #define CTR_DICT_WAIT_FOR_INPUT	  "ପଚାର |"
 #define CTR_DICT_INPUT            "ଇନପୁଟ୍"
 #define CTR_DICT_FLUSH            "ଫ୍ଲାଶ୍"

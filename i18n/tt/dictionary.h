@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "ахыр"
 #define CTR_DICT_ARGUMENT	      "аргумент:"
 #define CTR_DICT_ARGUMENT_COUNT	  "аргументлар"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "серсүз сора"
 #define CTR_DICT_WAIT_FOR_INPUT	  "сора"
 #define CTR_DICT_INPUT            "кертү"
 #define CTR_DICT_FLUSH            "чистарту"

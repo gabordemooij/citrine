@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "ముగింపు"
 #define CTR_DICT_ARGUMENT	      "వాదన:"
 #define CTR_DICT_ARGUMENT_COUNT	  "వాదనలు"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "పాస్వర్డ్ అడగండి"
 #define CTR_DICT_WAIT_FOR_INPUT	  "అడగండి"
 #define CTR_DICT_INPUT            "ఇన్పుట్"
 #define CTR_DICT_FLUSH            "ఫ్లష్"

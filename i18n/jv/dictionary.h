@@ -114,7 +114,7 @@
 #define CTR_DICT_END              "mungkasi"
 #define CTR_DICT_ARGUMENT	      "dalil:"
 #define CTR_DICT_ARGUMENT_COUNT	  "bantahan"
-#define CTR_DICT_WAIT_FOR_PASSW	"ask password"
+#define CTR_DICT_WAIT_FOR_PASSW	  "takon sandhi"
 #define CTR_DICT_WAIT_FOR_INPUT	  "takon"
 #define CTR_DICT_INPUT            "input"
 #define CTR_DICT_FLUSH            "siram"
