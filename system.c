@@ -217,8 +217,15 @@ ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * @def
  * [Program] memory
  * 
+ * @example
+ * ☞ m ≔ Program memory
+ * ✎ write: m, stop. 
+ */ 
+ 
+ /**
  * Returns memory statistics.
  * Array with:
  * 0: allocated memory
@@ -226,16 +233,6 @@ ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
  * 2: number of sticky objects
  * 3: number of remaining objects
  * 4: number of removed objects
- *
- * In other languages:
- * Dutch: Programma geheugen.
- * Geeft informatie over geheugengebruik terug.
- * Geeft reeks met op positie
- * 0: gealloceerde ruimte,
- * 1: aantal objecten
- * 2: aantal vastgezette objecten
- * 3: aantal overgebleven objecten
- * 4: aantal opgeruimde objecten 
  */
 ctr_object* ctr_gc_memory(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* list = ctr_array_new( CtrStdArray, NULL );
