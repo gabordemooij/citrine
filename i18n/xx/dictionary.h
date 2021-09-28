@@ -10,7 +10,7 @@
 #define CTR_DICT_FALSE           "False"
 #define CTR_DICT_NUMBER          "Number"
 #define CTR_DICT_STRING          "String"
-#define CTR_DICT_CODE_BLOCK      "Block"
+#define CTR_DICT_CODE_BLOCK      "Code"
 #define CTR_DICT_OBJECT          "Object"
 #define CTR_DICT_LIST_OBJECT     "List"
 #define CTR_DICT_MAP_OBJECT      "Map"
