@@ -313,12 +313,12 @@ ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
  * [ Object ] recursion.
  *
  * @example
- * ☞ Roundabout ≔ Object new.
- * Roundabout on: ‘circle:’ do: { :x
+ * ☞ r ≔ Object new.
+ * r on: ‘∞’ do: { :x
  * 	✎ write: x, stop.
- *	(x < 3) true: { ⛏ recursive circle: x + 1. }.
+ *	(x < 3) true: { ⛏ recursive ∞ (x + 1). }.
  * }.
- * Roundabout circle: 1.
+ * r ∞ 1.
  */
 ctr_object* ctr_object_recursion(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_internal_recursion = myself;
@@ -2346,7 +2346,7 @@ ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argument
 
 /**
  * @def
- * Block
+ * Code
  *
  * @example
  * ☞ x ≔ { :a :b :c ↲ a + b + c. } apply: 1 and: 2 and: 3.
