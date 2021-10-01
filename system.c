@@ -218,7 +218,7 @@ ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [Program] memory
+ * [ Program ] memory
  * 
  * @example
  * ☞ m ≔ Program memory
@@ -253,7 +253,7 @@ ctr_object* ctr_gc_memory(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [Program] memory: [Number]
+ * [ Program ] memory: [Number]
  *
  * @example
  * Program memory: 8 MB.
