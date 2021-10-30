@@ -294,6 +294,7 @@ ctr_tnode* ctr_cparse_block() {
 		ctr_tlistitem* paramListItem = (ctr_tlistitem*) ctr_heap_allocate_tracked( sizeof(ctr_tlistitem) );
 		ctr_tnode* paramItem = ctr_cparse_create_node( CTR_AST_NODE );
 		long l = ctr_clex_tok_value_length();
+		paramItem->type = CTR_AST_NODE_PARAMETER;
 		paramItem->value = ctr_heap_allocate_tracked( sizeof( char ) * l );
 		memcpy(paramItem->value, ctr_clex_tok_value(), l);
 		paramItem->vlen = l;
@@ -408,7 +409,6 @@ ctr_tnode* ctr_cparse_string() {
  *
  * Generates a node to represent a number.
  */
-void ctr_internal_debug_tree(ctr_tnode* ti, int indent);
 ctr_tnode* ctr_cparse_number() {
 	char* n;
 	ctr_tnode* r;

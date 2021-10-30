@@ -68,6 +68,7 @@
 #define CTR_AST_NODE_RETURNFROMBLOCK 60
 #define CTR_AST_NODE_PARAMLIST 76
 #define CTR_AST_NODE_INSTRLIST 77
+#define CTR_AST_NODE_PARAMETER 78
 #define CTR_AST_NODE_ENDOFPROGRAM 79
 #define CTR_AST_NODE_NESTED 80
 #define CTR_AST_NODE_LTRBOOLTRUE 81
@@ -369,7 +370,7 @@ extern ctr_object* ctr_assign_value(ctr_object* key, ctr_object* val);
 extern ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* val);
 extern ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* val);
 extern char*       ctr_internal_readf(char* file_name, uint64_t* size_allocated);
-extern void        ctr_internal_debug_tree(ctr_tnode* ti, int indent);
+extern void        ctr_internal_export_tree(ctr_tnode* ti);
 extern ctr_object* ctr_send_message(ctr_object* receiver, char* message, long len, ctr_argument* argumentList);
 extern void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func)( ctr_object*, ctr_argument* ) );
 

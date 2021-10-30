@@ -50,6 +50,12 @@ int ctr_cli_read_args(int argc, char* argv[]) {
 		ctr_cli_welcome();
 		exit(0);
 	}
+	if (strncmp(argv[1],"-x", 2)==0) {
+		mode = 3;
+		ctr_mode_input_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
+		strncpy(ctr_mode_input_file, argv[2], 254);
+		return mode;
+	}
 	if (strncmp(argv[1],"-g", 2)==0) {
 		if (argc < 4) {
 			ctr_print_error( CTR_MSG_USAGE_G, 1 );
@@ -149,7 +155,10 @@ int main(int argc, char* argv[]) {
 		fwrite(CtrStdFlow->value.svalue->value, CtrStdFlow->value.svalue->vlen, 1, stderr);
 		exit(1);
 	}
-	/*ctr_internal_debug_tree(program,1); -- for debugging */
+	if (mode == 3) {
+		ctr_internal_export_tree(program);
+		exit(0);
+	}
 	ctr_initialize_world();
 	ctr_cwlk_run(program);
 	ctr_gc_sweep(1);
