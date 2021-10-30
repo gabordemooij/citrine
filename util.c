@@ -36,6 +36,7 @@ int fsize(char* filename) {
  * Export AST
  */
 void ctr_internal_export_tree(ctr_tnode* ti) {
+	int i;
 	ctr_tlistitem* li;
 	ctr_tnode* t;
 	li = ti->nodes;
@@ -44,7 +45,7 @@ void ctr_internal_export_tree(ctr_tnode* ti) {
 		printf( "%d;%d;", t->type, t->modifier );
 		if (t->value != NULL) {
 			printf("%lu;",t->vlen);
-			for(int i = 0; i < t->vlen; i++) {
+			for(i = 0; i < t->vlen; i++) {
 				putchar( t->value[i] );
 			}
 		} else {
