@@ -109,15 +109,15 @@ void* ctr_internal_plugin_find(ctr_object* key) {
 	handle =  dlopen(realPathModName, RTLD_NOW);
 	free(realPathModName);
 	if ( !handle ) {
-		printf(CTR_ERR_FOPEN);
-		printf(dlerror());
+		printf("%s\n",CTR_ERR_FOPEN);
+		printf("%s\n",dlerror());
 		exit(1);
 	}
 	/* the begin() function will add the missing object to the world */
 	*(void**)(&init_plugin) = dlsym( handle, "begin" );
 	if ( !init_plugin ) {
-		printf(CTR_ERR_FOPEN);
-		printf(dlerror());
+		printf("%s\n",CTR_ERR_FOPEN);
+		printf("%s\n",dlerror());
 		exit(1);
 	}
 	(void) init_plugin();
