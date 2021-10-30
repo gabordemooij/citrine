@@ -33,50 +33,33 @@ int fsize(char* filename) {
 }
 
 /**
- * DebugTree
- *
- * For debugging purposes, prints the internal AST.
+ * Export AST
  */
-void ctr_internal_debug_tree(ctr_tnode* ti, int indent) {
-	char* str;
-	char* vbuf;
+void ctr_internal_export_tree(ctr_tnode* ti) {
 	ctr_tlistitem* li;
 	ctr_tnode* t;
-	if (indent>20) exit(1); 
 	li = ti->nodes;
 	t = li->node;
 	while(1) {
-		int i;
-		for (i=0; i<indent; i++) printf(" ");
-		str = ctr_heap_allocate( 40 * sizeof( char ) );
-		switch (t->type) {
-			case CTR_AST_NODE_EXPRASSIGNMENT:  str = "ASSIGN"; break;
-			case CTR_AST_NODE_EXPRMESSAGE:     str = "MESSAG"; break;
-			case CTR_AST_NODE_UNAMESSAGE:      str = "UMSSAG"; break;
-			case CTR_AST_NODE_KWMESSAGE:       str = "KMSSAG"; break;
-			case CTR_AST_NODE_BINMESSAGE:      str = "BMSSAG"; break;
-			case CTR_AST_NODE_LTRSTRING:       str = "STRING"; break;
-			case CTR_AST_NODE_REFERENCE:       str = "REFRNC"; break;
-			case CTR_AST_NODE_LTRNUM:          str = "NUMBER"; break;
-			case CTR_AST_NODE_CODEBLOCK:       str = "CODEBL"; break;
-			case CTR_AST_NODE_RETURNFROMBLOCK: str = "RETURN"; break;
-			case CTR_AST_NODE_PARAMLIST:       str = "PARAMS"; break;
-			case CTR_AST_NODE_INSTRLIST:       str = "INSTRS"; break;
-			case CTR_AST_NODE_ENDOFPROGRAM:    str = "EOPROG"; break;
-			case CTR_AST_NODE_NESTED:          str = "NESTED"; break;
-			case CTR_AST_NODE_LTRBOOLFALSE:    str = "BFALSE"; break;
-			case CTR_AST_NODE_LTRBOOLTRUE:     str = "BLTRUE"; break;
-			case CTR_AST_NODE_LTRNIL:          str = "LTRNIL"; break;
-			default:                           str = "UNKNW?"; break;
+		printf( "%d;%d;", t->type, t->modifier );
+		if (t->value != NULL) {
+			printf("%lu;",t->vlen);
+			for(int i = 0; i < t->vlen; i++) {
+				putchar( t->value[i] );
+			}
+		} else {
+			printf("0;");
 		}
-		vbuf = ctr_heap_allocate( sizeof( char ) * ( t->vlen + 1 ) );
-		strncpy(vbuf, t->value, t->vlen);
-		printf("%s %s (%p)\n", str, vbuf, (void*) t);
-		if (t->nodes) ctr_internal_debug_tree(t, indent + 1);
+		putchar(';');
+		if (t->nodes) {
+			putchar('[');
+			ctr_internal_export_tree(t);
+			putchar(']');
+		}
+		putchar(';');
 		if (!li->next) break; 
 		li = li->next;
 		t = li->node;
-		
 	}
 }
 
