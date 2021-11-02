@@ -237,10 +237,14 @@ void* ctr_heap_reallocate(void* oldptr, size_t size ) {
  * the returned set of bytes with a \0 byte for use
  * in traditional C string functions.
  *
- * Warning: this function 'leaks' memory.
+ * Warning: this function 'leaks' memory, you have to ctr_heap_free() it.
  * It will allocate the necessary resources to store the string.
  * To free this memory you'll need to call ctr_heap_free
  * passing the pointer and the number of bytes ( value.svalue->vlen ).
+ *
+ * @note
+ * This function removes NULL-bytes from the resulting C-string
+ * to avoid NUL-byte-injections.
  *
  * @param ctr_object* stringObject CtrString object instance to cast
  *
@@ -250,14 +254,18 @@ char* ctr_heap_allocate_cstring( ctr_object* stringObject ) {
 	char*    cstring;
 	char*    stringBytes;
 	ctr_size length;
-
+	ctr_size i, j;
 	stringBytes = stringObject->value.svalue->value;
 	length      = stringObject->value.svalue->vlen;
 	cstring     = ctr_heap_allocate( ( length + 1 ) * sizeof( char ) );
-
-	strncpy( cstring, stringBytes, length );
-	cstring[length] = '\0';
-
+	j = 0;
+	for (i = 0; i < length; i++) {
+		if ( stringBytes[i] == '\0' ) {
+			continue;
+		}
+		cstring[j++] = stringBytes[i];
+	}
+	cstring[j] = '\0';
 	return cstring;
 }
 
