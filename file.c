@@ -82,16 +82,13 @@ ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_object* str;
-	ctr_size vlen, fileLen;
+	ctr_size fileLen;
 	char* pathString;
 	char *buffer;
 	FILE* f;
 	int error_code;
 	if (path == NULL) return CtrStdNil;
-	vlen = path->value.svalue->vlen;
-	pathString = ctr_heap_allocate( sizeof(char) * ( vlen + 1 ) );
-	memcpy(pathString, path->value.svalue->value, vlen);
-	memcpy(pathString+vlen,"\0",1);
+	pathString = ctr_heap_allocate_cstring( path );
 	f = fopen(pathString, "rb");
 	error_code = errno;
 	ctr_heap_free( pathString );
@@ -163,15 +160,11 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
-	ctr_size vlen;
 	int error_code;
 	char* pathString;
 	FILE* f;
 	if (path == NULL) return myself;
-	vlen = path->value.svalue->vlen;
-	pathString = ctr_heap_allocate(vlen + 1);
-	memcpy(pathString, path->value.svalue->value, vlen);
-	memcpy(pathString+vlen,"\0",1);
+	pathString = ctr_heap_allocate_cstring( path );
 	f = fopen(pathString, "ab+");
 	error_code = errno;
 	ctr_heap_free( pathString );
@@ -194,15 +187,11 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
-	ctr_size vlen;
 	char* pathString;
 	FILE* f;
 	int exists;
 	if (path == NULL) return CtrStdBoolFalse;
-	vlen = path->value.svalue->vlen;
-	pathString = ctr_heap_allocate(vlen + 1);
-	memcpy(pathString, path->value.svalue->value, vlen);
-	memcpy(pathString+vlen,"\0",1);
+	pathString = ctr_heap_allocate_cstring( path );
 	f = fopen(pathString, "r");
 	ctr_heap_free( pathString );
 	exists = (f != NULL );
@@ -225,14 +214,10 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
-	ctr_size vlen;
 	char* pathString;
 	int r;
 	if (path == NULL) return myself;
-	vlen = path->value.svalue->vlen;
-	pathString = ctr_heap_allocate( sizeof( char ) * ( vlen + 1 ) );
-	memcpy(pathString, path->value.svalue->value, vlen);
-	memcpy(pathString+vlen,"\0",1);
+	pathString = ctr_heap_allocate_cstring( path );
 	r = remove(pathString);
 	ctr_heap_free( pathString );
 	if (r!=0) {
@@ -255,15 +240,11 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
-	ctr_size vlen;
 	char* pathString;
 	FILE* f;
 	int prev, sz;
 	if (path == NULL) return ctr_build_number_from_float(0);
-	vlen = path->value.svalue->vlen;
-	pathString = ctr_heap_allocate( sizeof(char) * ( vlen + 1 ) );
-	memcpy(pathString, path->value.svalue->value, ( sizeof( char ) * vlen  ) );
-	memcpy(pathString+vlen,"\0",1);
+	pathString = ctr_heap_allocate_cstring( path );
 	f = fopen(pathString, "r");
 	ctr_heap_free( pathString );
 	if (f == NULL) return ctr_build_number_from_float(0);
