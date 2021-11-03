@@ -1263,7 +1263,7 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Number ] devide by: [ Number ]
+ * [ Number ] divide by: [ Number ]
  *
  * @example
  * ☞ x ≔ 10.
