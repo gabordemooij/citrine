@@ -424,6 +424,12 @@ char* ctr_clex_readstr() {
 					strbuff++;
 					ctr_code++;
 					break;
+				case '0':
+					*(strbuff) = '\0';
+					ctr_clex_tokvlen += 1;
+					strbuff++;
+					ctr_code++;
+					break;
 				default:
 					*(strbuff) = *(ctr_code);
 					strbuff++;
