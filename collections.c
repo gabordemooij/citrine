@@ -16,15 +16,15 @@
  * List
  * 
  * @example
- * ☞ meals ≔
+ * ☞ a ≔
  *	List new
- *	• ‘hamburger’
- *	• ‘pizza’
- *	• ‘haggis’.
+ *	• ‘aaa’
+ *	• ‘bbb’
+ *	• ‘ccc’.
  *
- * ☞ todo ≔ List ← ‘dishes’ ; ‘cleaning’.
- * ✎ write: meals, stop.
- * ✎ write: todo, stop.
+ * ☞ b ≔ List ← ‘x’ ; ‘y’.
+ * ✎ write: a, stop.
+ * ✎ write: b, stop.
  */
 ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTARRAY);
@@ -1007,16 +1007,8 @@ ctr_object* ctr_map_copy(ctr_object* myself, ctr_argument* argumentList) {
  * [ Map ] each: [ Block ]
  *
  * @example
- * ☞ scores ≔ Map new.
- * scores
- * team1: 100,
- * team2: 200.
- * scores each: { :team :score
- * 	☞ x ≔ ‘Team: team score points ↵’.
- *  x
- *  team: team,
- *  score: score.
- *  ✎ write: x, stop.
+ * (Map new I: 1, II: 2, III: 3) each: { :a :b
+ *   ✎ write: a + b, stop.
  * }.
  */
 ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
@@ -1062,9 +1054,9 @@ ctr_object* ctr_map_each(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * ☞ x ≔ Map new.
- * x red: ‘green’, yellow: ‘blue’.
- * ✎ write: (x has: ‘red’), stop.
- * ✎ write: (x has: ‘purple’), stop.
+ * x China: ‘CN’, Russia: ‘RU’.
+ * ✎ write: (x has: ‘CN’), stop.
+ * ✎ write: (x has: ‘NL’), stop.
  */
 ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList) {
 	int found = 0;
@@ -1092,7 +1084,7 @@ ctr_object* ctr_map_has(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * @example
  * ☞ x ≔ Map new.
- * x put: ‘Hello’ at: ‘World’.
+ * x put: ‘a’ at: ‘b’.
  * ☞ y ≔ x string.
  * ✎ write: y, stop.
  */
