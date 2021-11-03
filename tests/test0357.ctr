@@ -1,0 +1,9 @@
+
+☞ text with NULL-byte ≔ ‘a\0b’.
+
+✎ write:
+	‘NULL-byte should be filtered in error stream (is allowed in stdout though).’,
+	stop.
+
+Program error:
+	text with NULL-byte, stop.
