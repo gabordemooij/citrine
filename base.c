@@ -480,15 +480,15 @@ ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList )
  * [ Object ] on: [ String ] do: [ Code ]
  *
  * @example
- * ☞ color ≔ Object new.
- * color on: ‘code:’ do: { :x
- * 		⚿ rgb ≔ x.
+ * ☞ q ≔ Object new.
+ * q on: ‘abc:’ do: { :p
+ * 		⚿ abc ≔ p.
  * }.
- * color on: ‘code’ do: {
- *		↲ ⚿ rgb.
+ * q on: ‘abc’ do: {
+ *		↲ ⚿ abc.
  * }.
- * ☞ citrine ≔ color new code: ‘E4D00A’.
- * ✎ write: citrine code, stop.
+ * ☞ a ≔ q new abc: ‘123’.
+ * ✎ write: a abc, stop.
  */
 ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* nextArgument;
@@ -639,7 +639,7 @@ ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * (True ≠ False) true: { 
- * 	✎ write: ‘Nope!’.
+ * 	✎ write: ‘x’.
  * }.
  */
 ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
