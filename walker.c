@@ -273,6 +273,7 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 			break;
 		case CTR_AST_NODE_ENDOFPROGRAM:
 			if (CtrStdFlow && CtrStdFlow != CtrStdExit && ctr_cwlk_subprogram == 0) {
+				fflush(stdout); /* Flush stdout first otherwise error appears interwined with output */
 				fprintf(stderr, CTR_ERR_UNCAUGHT );
 				if (CtrStdFlow->info.type == CTR_OBJECT_TYPE_OTSTRING) {
 					fwrite(CtrStdFlow->value.svalue->value, sizeof(char), CtrStdFlow->value.svalue->vlen, stderr);
