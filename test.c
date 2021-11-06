@@ -29,16 +29,12 @@ void ctr_test( int t ) {
 }
 
 /**
- * Start internal unit tests.
+ * Perform token test
  */
-ctr_object* ctr_program_test( ctr_object* myself, ctr_argument* argumentList ) {
-	printf("Running Internal Tests\n");
+void ctr_coretest_tokens() {
 	char* buffer;
 	int token;
-
 	ctr_program_length = 40;
-
-	//Test tokens
 	buffer = calloc(40,1);
 	sprintf( buffer, "%s", CTR_DICT_PAREN_OPEN );
 	ctr_clex_load( buffer );
@@ -47,7 +43,6 @@ ctr_object* ctr_program_test( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_test(strlen(ctr_clex_tok_value())==0);
 	ctr_test(strcmp(ctr_clex_tok_describe(token),CTR_DICT_PAREN_OPEN)==0);
 	free(buffer);
-
 	buffer = calloc(40,1);
 	sprintf( buffer, "%s", CTR_DICT_PAREN_CLOSE );
 	ctr_clex_load( buffer );
@@ -56,7 +51,6 @@ ctr_object* ctr_program_test( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_test(strlen(ctr_clex_tok_value())==0);
 	ctr_test(strcmp(ctr_clex_tok_describe(token),CTR_DICT_PAREN_CLOSE)==0);
 	free(buffer);
-
 	buffer = calloc(40,1);
 	sprintf( buffer, "%s", CTR_DICT_BLOCK_START );
 	ctr_clex_load( buffer );
@@ -65,7 +59,6 @@ ctr_object* ctr_program_test( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_test(strlen(ctr_clex_tok_value())==0);
 	ctr_test(strcmp(ctr_clex_tok_describe(token),CTR_DICT_BLOCK_START)==0);
 	free(buffer);
-
 	buffer = calloc(40,1);
 	sprintf( buffer, "%s", CTR_DICT_BLOCK_END );
 	ctr_clex_load( buffer );
@@ -74,7 +67,6 @@ ctr_object* ctr_program_test( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_test(strlen(ctr_clex_tok_value())==0);
 	ctr_test(strcmp(ctr_clex_tok_describe(token),CTR_DICT_BLOCK_END)==0);
 	free(buffer);
-
 	buffer = calloc(40,1);
 	sprintf( buffer, "%s", CTR_DICT_END_OF_LINE );
 	ctr_clex_load( buffer );
@@ -83,7 +75,6 @@ ctr_object* ctr_program_test( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_test(strlen(ctr_clex_tok_value())==0);
 	ctr_test(strcmp(ctr_clex_tok_describe(token),CTR_DICT_END_OF_LINE)==0);
 	free(buffer);
-
 	buffer = calloc(40,1);
 	sprintf( buffer, "%s", CTR_DICT_MESSAGE_CHAIN );
 	ctr_clex_load( buffer );
@@ -92,7 +83,6 @@ ctr_object* ctr_program_test( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_test(strlen(ctr_clex_tok_value())==0);
 	ctr_test(strcmp(ctr_clex_tok_describe(token),CTR_DICT_MESSAGE_CHAIN)==0);
 	free(buffer);
-
 	buffer = calloc(40,1);
 	sprintf( buffer, "%s", CTR_DICT_PARAMETER_PREFIX );
 	ctr_clex_load( buffer );
@@ -101,7 +91,6 @@ ctr_object* ctr_program_test( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_test(strlen(ctr_clex_tok_value())==0);
 	ctr_test(strcmp(ctr_clex_tok_describe(token),CTR_DICT_PARAMETER_PREFIX)==0);
 	free(buffer);
-
 	buffer = calloc(40,1);
 	sprintf( buffer, "%s", CTR_DICT_RETURN );
 	ctr_clex_load( buffer );
@@ -110,7 +99,6 @@ ctr_object* ctr_program_test( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_test(strlen(ctr_clex_tok_value())==0);
 	ctr_test(strcmp(ctr_clex_tok_describe(token),CTR_DICT_RETURN)==0);
 	free(buffer);
-
 	buffer = calloc(40,1);
 	sprintf( buffer, "%s", CTR_DICT_ASSIGN );
 	ctr_clex_load( buffer );
@@ -119,7 +107,6 @@ ctr_object* ctr_program_test( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_test(strlen(ctr_clex_tok_value())==0);
 	ctr_test(strcmp(ctr_clex_tok_describe(token),CTR_DICT_ASSIGN)==0);
 	free(buffer);
-	
 	buffer = calloc(40,1);
 	ctr_program_length = 0;
 	ctr_clex_load( buffer );
@@ -128,6 +115,21 @@ ctr_object* ctr_program_test( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_test(strlen(ctr_clex_tok_value())==0);
 	ctr_test(strcmp(ctr_clex_tok_describe(token),"end of program")==0);
 	free(buffer);
-	
+}
+
+/**
+ * Run Core tests.
+ */
+void ctr_coretest() {
+	printf("Running Internal Tests\n");
+	ctr_coretest_tokens();
 	exit(0);
+}
+
+/**
+ * Start internal unit tests.
+ */
+ctr_object* ctr_program_test( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_coretest();
+	return CtrStdNil;
 }
