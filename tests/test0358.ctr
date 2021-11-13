@@ -1,0 +1,6 @@
+‘SINGLE_LANGUAGE’.
+☞ operating system ≔ Program shell: Command uname.
+☞ OS name ≔ operating system split: ‘↵’, first.
+☞ system call ≔ ‘./bin/⬧OS/ctrxx -x tests/test0358.ctr’.
+system call ⬧OS: OS name.
+✎ write: (Program shell: system call), stop.
