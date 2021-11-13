@@ -147,7 +147,4 @@ Forms of contribution include, but are not limited to:
 Citrine and its plugins are written in the __C__ programming language. The Citrine Project
 is apolitical.
 
-
-<a target="_blank" href="https://travis-ci.org/gabordemooij/citrine.svg?branch=master">
-<img alt="test status" src="https://travis-ci.org/gabordemooij/citrine.svg?branch=master" />
-</a>
+[![CitrineCI](https://github.com/gabordemooij/citrine/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/gabordemooij/citrine/actions/workflows/c-cpp.yml)
