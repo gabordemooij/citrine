@@ -22,3 +22,6 @@ ctr:	$(OBJS)
 clean:
 	rm -rf ${OBJS} ctr
 	
+plugin:
+	cd plugins/${PACKAGE} ; make clean ; make install-${NAME}
+

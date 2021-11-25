@@ -7,58 +7,32 @@ CITRINE_MEMORY_MODE=1
 export CITRINE_MEMORY_LIMIT_MB
 export CITRINE_MEMORY_MODE
 
-OS=`uname -s`
+#Determine which makefile to use
+OS=$(uname -s)
 LDFLAGS='-shared'
-if [ "$OS" = "Darwin" ]; then
-  LDFLAGS='-shared -undefined dynamic_lookup'
+if [ "$OS" = "OpenBSD" -o "$OS" = "FreeBSD" ]; then
+	MAKEFILE=makefile.bsd
+elif [ "$OS" = "Darwin" ]; then
+	MAKEFILE=makefile.bsd
+	LDFLAGS='-shared -undefined dynamic_lookup'
+elif [ "$OS" = "Haiku" ]; then
+	MAKEFILE=makefile.haiku
+else
+	MAKEFILE=makefile
 fi
+
 #Remove .so
 find . -name "*.so" -exec rm {} +
 
-#For plugin test, compile Percolator plugin
-rm plugins/mock/percolator/libctrpercolator.so
-rm mods/percolator/libctrpercolator.so
-rm plugins/mockpercolator/percolator.o
-cd plugins/mock/percolator;
-cc -I . -c percolator.c -Wall -Werror -fPIC -o percolator.o
-cc ${LDFLAGS} -o libctrpercolator.so percolator.o
-cd ..
-cd ..
-cd ..
-cp plugins/mock/percolator/libctrpercolator.so mods/percolator/libctrpercolator.so
+#Run makefiles of plugins
+make plugin PACKAGE="request" NAME="libctrrequest.so" LDFLAGS=${LDFLAGS}
+make plugin PACKAGE="request" NAME="libctrverzoek.so" LDFLAGS=${LDFLAGS}
+make plugin PACKAGE="mock/percolator" NAME="libctrpercolator.so" LDFLAGS=${LDFLAGS}
+make plugin PACKAGE="jsmn" NAME="libctrjson.so" LDFLAGS=${LDFLAGS}
+make plugin PACKAGE="jsmn" NAME="libctrjsonnl.so" LDFLAGS=${LDFLAGS}
+make plugin PACKAGE="jsmn" NAME="libctrjsonhy.so" LDFLAGS=${LDFLAGS}
 
-#request test
-cd plugins/request/ccgi-1.2;
-cc -c ccgi.c -Wall	-Werror -fPIC -o ccgi.o
-cc -c prefork.c -Wall -Werror -fPIC -o prefork.o
-cd ..
-
-cc -c request.c -Wall -Werror -I ../../i18nsel/xx -D langXX -fPIC -o request.o
-cc ${LDFLAGS} -o libctrrequest.so request.o ccgi-1.2/ccgi.o ccgi-1.2/prefork.o
-
-cc -c request.c -Wall -Werror -I ../../i18nsel/nl -D langNL -fPIC -o verzoek.o
-cc ${LDFLAGS} -o libctrverzoek.so verzoek.o ccgi-1.2/ccgi.o ccgi-1.2/prefork.o
-
-cd ..
-cd ..
-
-cp plugins/request/libctrrequest.so mods/request/libctrrequest.so
-cp plugins/request/libctrverzoek.so mods/verzoek/libctrverzoek.so
-
-#json test
-cd plugins/jsmn/jsmn;
-cc -c jsmn.c -Wall	-Werror -fpic -DJSMN_STRICT -DJSMN_PARENT_LINKS -o jsmn.o
-cd ..
-cc -c jsmn.c -Wall	-I ../../i18n/en -I i18n/xx -Werror -fpic -DJSMN_STRICT -DJSMN_PARENT_LINKS -o jsmn.o ; cc -shared -o libctrjsmn.so jsmn.o jsmn/jsmn.o
-cc -c jsmn.c -Wall	-I ../../i18n/nl -I i18n/nl -Werror -fpic -DJSMN_STRICT -DJSMN_PARENT_LINKS -o jsmnnl.o ; cc -shared -o libctrjsmnnl.so jsmnnl.o jsmn/jsmn.o
-cc -D langHY -c jsmn.c -Wall	-I ../../i18n/hy -I i18n/hy -Werror -fpic -DJSMN_STRICT -DJSMN_PARENT_LINKS -o jsmnhy.o ; cc -shared -o libctrjsmnhy.so jsmnhy.o jsmn/jsmn.o
-cd ..
-cd ..
-cp plugins/jsmn/libctrjsmn.so mods/json/libctrjson.so
-cp plugins/jsmn/libctrjsmnnl.so mods/jsonnl/libctrjsonnl.so
-cp plugins/jsmn/libctrjsmnhy.so mods/jsonhy/libctrjsonhy.so
-
-
+#Run regular makefiles through build script
 ./mk.sh
 cp bin/${OS}/ctrxx bin/Generic/ctr
 
@@ -148,7 +122,7 @@ for i in $(find tests -name 'test*.ctr'); do
 		exit 1
 	fi
 	if [ "$directive" != "‘SINGLE_RUN’." ]; then
-    if [ "$directive" != "‘SINGLE_LANGUAGE’." ]; then
+	if [ "$directive" != "‘SINGLE_LANGUAGE’." ]; then
 		for q in {1..7}
 		do
 			if [ "${result[$q]}" = "$expected" ]; then
@@ -164,7 +138,6 @@ for i in $(find tests -name 'test*.ctr'); do
 				exit 1
 			fi
 		done
-
 		for ISO in $(ls i18nsel)
 		do
 			if [ $ISO != 'xx' ]; then
@@ -182,7 +155,6 @@ for i in $(find tests -name 'test*.ctr'); do
 						echo ""
 						echo "BUT GOT:"
 						echo "$actual"
-					
 						if [ "$1" = "--correct" ]; then
 							echo "Correct expectation file? y/n"
 							read accept
@@ -214,7 +186,6 @@ for i in $(find tests -name 'test*.ctr'); do
 							echo "OK, file created."
 						fi
 					fi
-					
 					if [ "$1" = "--record2" ]; then
 						expectingnew=`cat /tmp/a0`
 						if [ "$actual" = "$expectingnew" ]; then
@@ -242,7 +213,6 @@ for i in $(find tests -name 'test*.ctr'); do
 				fi
 			fi
 		done
-
 		if [ "${result[13]}" = "$expected" ]; then
 			echo -n "[✓$j!]"
 			j=$((j+1))
@@ -251,6 +221,5 @@ for i in $(find tests -name 'test*.ctr'); do
 	fi
 	echo "[done]"
 done
-echo ""
 echo "All tests passed."
 exit 0
