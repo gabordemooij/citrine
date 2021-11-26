@@ -11,7 +11,8 @@
 #include "citrine.h"
 #include "siphash.h"
 
-
+#ifdef INCLUDETESTS
+ 
 int ctr_internal_testcounter = 1;
 
 /**
@@ -107,6 +108,18 @@ void ctr_coretest() {
 	ctr_coretest_tokens();
 	exit(0);
 }
+
+#else
+
+/**
+ * No Core tests.
+ */
+void ctr_coretest() {
+	printf("No Core Tests Included\n");
+	exit(0);
+}
+
+#endif
 
 /**
  * Start internal unit tests.
