@@ -6,14 +6,7 @@
 #include <math.h>
 #include <unistd.h>
 #include <stdint.h>
-#include <time.h>
-#include <regex.h>
 #include <errno.h>
-
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
 
 #include "citrine.h"
 #include "siphash.h"
