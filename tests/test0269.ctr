@@ -11,7 +11,13 @@
 }.
 
 ☞ l ≔ File list: ‘/tmp/testje’.
-l each: { :k :v
-	((v ? ‘file’ = ‘file1’) & (v ? ‘type’ = ‘file’)) true: { ✎ write: ‘OK’, stop. }.
-	((v ? ‘file’ = ‘folder1’) & (v ? ‘type’ = ‘folder’)) true: { ✎ write: ‘OK’, stop. }.
-}.
+
+☞ q ≔ List new.
+
+l each: { :k :v v each: { :x :y q append: y. }. }.
+
+☞ s ≔ q string.
+
+(s contains: ‘file1’) true:   { ✎ write: ‘OK’, stop. }.
+(s contains: ‘file2’) true:   { ✎ write: ‘XX’, stop. }.
+(s contains: ‘folder1’) true: { ✎ write: ‘OK’, stop. }.

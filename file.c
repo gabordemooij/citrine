@@ -78,6 +78,7 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size fileLen;
 	char* pathString;
 	char *buffer;
+	size_t bytesRead;
 	FILE* f;
 	int error_code;
 	if (path == NULL) return CtrStdNil;
@@ -97,8 +98,13 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 		fprintf(stderr, CTR_ERR_OOM );
 		fclose(f);exit(1);
 	}
-	fread(buffer, fileLen, 1, f);
+	bytesRead = fread(buffer, 1, fileLen, f);
 	fclose(f);
+	if (bytesRead != fileLen) {
+		ctr_error( CTR_ERR_OPEN, error_code );
+		ctr_heap_free( buffer );
+		return CtrStdNil;
+	}
 	str = ctr_build_string(buffer, fileLen);
 	ctr_heap_free( buffer );
 	return str;
@@ -271,7 +277,6 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	path = ctr_internal_cast2string( argumentList->object );
 	fileList = ctr_array_new(CtrStdArray, NULL);
 	pathValue = ctr_heap_allocate_cstring( path );
-	struct stat st;
 	d = opendir( pathValue );
 	if (d == 0) {
 		int error_code = errno;
@@ -288,22 +293,19 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 		putArgumentList->object = ctr_build_string_from_cstring(entry->d_name);
 		ctr_map_put(fileListItem, putArgumentList);
 		putArgumentList->next->object = ctr_build_string_from_cstring( CTR_MSG_DSC_TYPE );
-		char pathBuf[PATH_MAX + 1];
-		realpath(entry->d_name, pathBuf);
-		lstat(pathBuf, &st);
-		if (S_ISREG(st.st_mode))
+		if (entry->d_type == DT_REG)
 			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_FILE );
-		else if (S_ISDIR(st.st_mode))
+		else if (entry->d_type == DT_DIR)
 			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_FLDR );
-		else if (S_ISLNK(st.st_mode))
+		else if (entry->d_type == DT_LNK)
 			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_SLNK );
-		else if (S_ISCHR(st.st_mode))
+		else if (entry->d_type == DT_CHR)
 			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_CDEV );
-		else if (S_ISBLK(st.st_mode))
+		else if (entry->d_type == DT_BLK)
 			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_BDEV );
-		else if (S_ISSOCK(st.st_mode))
+		else if (entry->d_type == DT_SOCK)
 			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_SOCK );
-		else if (S_ISFIFO(st.st_mode))
+		else if (entry->d_type == DT_FIFO)
 			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_NPIP );
 		else
 			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_OTHR );
