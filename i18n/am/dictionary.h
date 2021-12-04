@@ -169,7 +169,7 @@
 #define CTR_DICT_STOP             "ተወ"
 #define CTR_DICT_ASCII_UPPER_CASE                 "አቢይ ሆሄ"
 #define CTR_DICT_ASCII_LOWER_CASE                 "አነስተኛ ቦርድ"
-#define CTR_DICT_CONTAINS                         "ይ :_ል"
+#define CTR_DICT_CONTAINS                         "ይዟል:"
 #define CTR_DICT_APPLY_TO_AND_AND                 "ተግብር:እና:እና:"
 #define CTR_DICT_ENVIRONMENT_VARIABLE             "ቅንጅት__:"
 #define CTR_DICT_SET_ENVIRONMENT_VARIABLE         "ቅንብር:እሴት__:"
