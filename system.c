@@ -692,7 +692,7 @@ ctr_object* ctr_clock_new_set( ctr_object* myself, ctr_argument* argumentList ) 
 ctr_object* ctr_clock_get_time( ctr_object* myself, ctr_argument* argumentList, char part ) {
 	struct tm* date;
 	time_t timeStamp;
-	ctr_object* answer;
+	ctr_object* answer = CtrStdNil;
 	char* zone;
 	timeStamp = (time_t) ctr_internal_cast2number(
 		ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_TIME), CTR_CATEGORY_PRIVATE_PROPERTY )

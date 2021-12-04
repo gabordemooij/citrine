@@ -206,7 +206,7 @@ ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
 	int i;
-	char* result;
+	char* result = NULL;
 	ctr_size len = 0;
 	ctr_size pos;
 	ctr_object* o;

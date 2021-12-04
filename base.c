@@ -1430,8 +1430,6 @@ ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_internal_number_to_string(ctr_object* myself, ctr_argument* argumentList, char flat) {
 	ctr_object* o = myself;
-	int slen;
-	char* s;
 	char* q;
 	char* p;
 	char* buf;
@@ -1439,7 +1437,6 @@ ctr_object* ctr_internal_number_to_string(ctr_object* myself, ctr_argument* argu
 	ctr_object* qname;
 	ctr_object* qual;
 	ctr_object* stringObject;
-	s = ctr_heap_allocate( 100 * sizeof( char ) );
 	if (!flat) {
 		qname = ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION );
 		qual = ctr_internal_object_find_property( myself, qname, CTR_CATEGORY_PRIVATE_PROPERTY );
@@ -1457,22 +1454,18 @@ ctr_object* ctr_internal_number_to_string(ctr_object* myself, ctr_argument* argu
 	while ( *p == '0' && *p-- != '.' );
 	*( p + 1 ) = '\0';
 	if ( *p == '.' ) *p = '\0';
-	strncpy( s, buf, strlen( buf ) );
-	ctr_heap_free( buf );
 	if (!flat) {
-		q = ctr_international_number( s, q );
+		q = ctr_international_number( buf, q );
 		if (qual) {
 			strcat(q, " ");
 			strncat(q, qual->value.svalue->value, qual->value.svalue->vlen);
 		}
-		slen = strlen(q);
-		stringObject = ctr_build_string(q, slen);
+		stringObject = ctr_build_string_from_cstring(q);
 		ctr_heap_free( q );
 	} else {
-		slen = strlen(s);
-		stringObject = ctr_build_string(s, slen);
+		stringObject = ctr_build_string_from_cstring(buf);
 	}
-	ctr_heap_free( s );
+	ctr_heap_free( buf );
 	return stringObject;
 }
 
