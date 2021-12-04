@@ -1,13 +1,7 @@
-#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include <stdarg.h>
-#include <math.h>
-#include <stdint.h>
-
 #include "citrine.h"
-
 
 int ctr_clex_bflmt = 255;
 ctr_size ctr_clex_tokvlen = 0; /* length of the string value of a token */
