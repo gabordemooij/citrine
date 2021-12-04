@@ -47,7 +47,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 	ctr_tlistitem* li = eitem;
 	char* message;
 	ctr_tlistitem* argumentList;
-	ctr_object* r;
+	ctr_object* r = NULL;
 	ctr_object* recipientName = NULL;
 	result = CtrStdNil;
 	if (ctr_flag_sandbox && ++ctr_sandbox_steps>CTR_MAX_STEPS_LIMIT) exit(1);

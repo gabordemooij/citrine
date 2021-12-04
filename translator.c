@@ -270,7 +270,7 @@ ctr_dict* ctr_translate_load_dictionary() {
 	char* format;
 	ctr_trans_d = NULL;
 	ctr_trans_x = NULL;
-	ctr_dict* entry;
+	ctr_dict* entry = NULL;
 	ctr_dict* previousEntry = NULL;
 	ctr_dict* e;
 	int qq = 0;

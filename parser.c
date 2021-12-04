@@ -176,11 +176,11 @@ ctr_tnode* ctr_cparse_message(int mode) {
  */
 ctr_tlistitem* ctr_cparse_messages(ctr_tnode* r, int mode) {
 	int t = ctr_clex_tok();
-	ctr_tlistitem* pli;
-	ctr_tlistitem* li;
-	ctr_tlistitem* fli;
+	ctr_tlistitem* pli = NULL;
+	ctr_tlistitem* li  = NULL;
+	ctr_tlistitem* fli = NULL;
 	int first = 1;
-	ctr_tnode* node;
+	ctr_tnode* node = NULL;
 	/* explicit chaining (,) only allowed for keyword message: Console write: 3 factorial, write: 3 factorial is not possible otherwise. */
 	while ((t == CTR_TOKEN_REF || (t == CTR_TOKEN_CHAIN && node && node->type == CTR_AST_NODE_KWMESSAGE))) {
 		if (t == CTR_TOKEN_CHAIN) {
