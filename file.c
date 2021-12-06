@@ -293,22 +293,7 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 		putArgumentList->object = ctr_build_string_from_cstring(entry->d_name);
 		ctr_map_put(fileListItem, putArgumentList);
 		putArgumentList->next->object = ctr_build_string_from_cstring( CTR_MSG_DSC_TYPE );
-		if (entry->d_type == DT_REG)
-			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_FILE );
-		else if (entry->d_type == DT_DIR)
-			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_FLDR );
-		else if (entry->d_type == DT_LNK)
-			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_SLNK );
-		else if (entry->d_type == DT_CHR)
-			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_CDEV );
-		else if (entry->d_type == DT_BLK)
-			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_BDEV );
-		else if (entry->d_type == DT_SOCK)
-			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_SOCK );
-		else if (entry->d_type == DT_FIFO)
-			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_NPIP );
-		else
-			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_OTHR );
+		putArgumentList->object = ctr_build_number_from_float( (ctr_number) entry->d_type );
 		ctr_map_put(fileListItem, putArgumentList);
 		addArgumentList->object = fileListItem;
 		ctr_array_push(fileList, addArgumentList);
