@@ -6,6 +6,15 @@
 #include <dirent.h>
 #include "citrine.h"
 
+/**
+ * Path Separator.
+ */
+const char* PATH_SEP =
+#if defined _WIN32 || defined __CYGWIN__
+	"\\";
+#else
+	"/";
+#endif
 
 /**
  * @def
@@ -269,6 +278,8 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	DIR* d;
 	struct dirent* entry;
 	char* pathValue;
+	char  pathBuf[PATH_MAX + 1];
+	char  fullPath[PATH_MAX + 1];
 	ctr_object* fileList;
 	ctr_object* fileListItem;
 	ctr_object* path;
@@ -277,6 +288,7 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	path = ctr_internal_cast2string( argumentList->object );
 	fileList = ctr_array_new(CtrStdArray, NULL);
 	pathValue = ctr_heap_allocate_cstring( path );
+	struct stat st;
 	d = opendir( pathValue );
 	if (d == 0) {
 		int error_code = errno;
@@ -293,7 +305,30 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 		putArgumentList->object = ctr_build_string_from_cstring(entry->d_name);
 		ctr_map_put(fileListItem, putArgumentList);
 		putArgumentList->next->object = ctr_build_string_from_cstring( CTR_MSG_DSC_TYPE );
-		putArgumentList->object = ctr_build_number_from_float( (ctr_number) entry->d_type );
+		if ((strlen(fullPath) + strlen(PATH_SEP) + strlen(entry->d_name)) > PATH_MAX) {
+			continue;
+		}
+		strcpy( fullPath, pathValue );
+		strcat( fullPath, PATH_SEP );
+		strcat( fullPath, entry->d_name);
+		realpath( fullPath, pathBuf );
+		lstat(pathBuf, &st);
+		if (S_ISREG(st.st_mode))
+			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_FILE );
+		else if (S_ISDIR(st.st_mode))
+			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_FLDR );
+		else if (S_ISLNK(st.st_mode))
+			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_SLNK );
+		else if (S_ISCHR(st.st_mode))
+			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_CDEV );
+		else if (S_ISBLK(st.st_mode))
+			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_BDEV );
+		else if (S_ISSOCK(st.st_mode))
+			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_SOCK );
+		else if (S_ISFIFO(st.st_mode))
+			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_NPIP );
+		else
+			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_OTHR );
 		ctr_map_put(fileListItem, putArgumentList);
 		addArgumentList->object = fileListItem;
 		ctr_array_push(fileList, addArgumentList);
