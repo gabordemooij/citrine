@@ -1,5 +1,5 @@
 OS="linux"
-V="0.9.5"
+V="0.9.4"
 for FILE in $(ls downloads/linux)
 do
 	echo "<li><a href=\"/downloads/iso/linux/${FILE}\">${FILE}</a></li>"
@@ -20,8 +20,8 @@ for FILE in $(ls downloads/windows64)
 do
 	echo "<li><a href=\"/downloads/iso/windows64/${FILE}\">${FILE}</a></li>"
 done
-for FILE in $(ls downloads/haiku)
+for FILE in $(ls downloads/Haiku)
 do
-	echo "<li><a href=\"/downloads/iso/haiku/${FILE}\">${FILE}</a></li>"
+	echo "<li><a href=\"/downloads/iso/Haiku/${FILE}\">${FILE}</a></li>"
 done
 

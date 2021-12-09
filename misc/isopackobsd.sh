@@ -1,5 +1,5 @@
 OS="OpenBSD"
-V="0.9.3"
+V="0.9.4"
 for ISO in $(ls ../i18n)
 do
 	#Remove previous working dir
@@ -15,16 +15,16 @@ do
 	#Copy license
 	cp ../LICENSE /tmp/dist/
 	#Copy binary
-	cp ../bin/${OS}/ctr${ISO} /tmp/dist/bin/ctr${ISO}	
+	cp ../bin/${OS}/ctr${ISO} /tmp/dist/bin/ctr${ISO}
 	#Copy examples
 	cp ../examples/${ISO}/* /tmp/dist/examples/
 	#Copy font
 	cp ../fonts/Citrine.ttf /tmp/dist/fonts/
 	#Copy mods
-	cp ../mods/${OS}/request/libctrrequest.so /tmp/dist/mods/request/
-	cp ../mods/${OS}/json/libctrjson.so       /tmp/dist/mods/json/
+	cp ../mods/request/libctrrequest.so /tmp/dist/mods/request/
+	cp ../mods/json/libctrjson.so       /tmp/dist/mods/json/
 	#Archive
 	tar cvzf citrine${V}-${OS}-${ISO}.tar.gz -C /tmp dist
 	#Sign
-	signify-openbsd -Sz -s keys/privatekey.sec -m citrine${V}-${OS}-${ISO}.tar.gz -x downloads/${OS}/citrine${V}-${OS}-${ISO}.tgz
+	signify -Sz -s keys/privatekey.sec -m citrine${V}-${OS}-${ISO}.tar.gz -x downloads/${OS}/citrine${V}-${OS}-${ISO}.tgz
 done
