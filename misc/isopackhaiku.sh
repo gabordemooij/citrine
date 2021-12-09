@@ -1,4 +1,4 @@
-OS="linux"
+OS="Haiku"
 V="0.9.4"
 for ISO in $(ls ../i18n)
 do
@@ -15,18 +15,15 @@ do
 	#Copy license
 	cp ../LICENSE /tmp/dist/
 	#Copy binary
-	cp ../bin/Linux/ctr${ISO} /tmp/dist/bin/ctr${ISO}
+	cp ../bin/${OS}/ctr${ISO} /tmp/dist/bin/ctr${ISO}
 	#Copy examples
 	cp ../examples/${ISO}/* /tmp/dist/examples/
 	#Copy font
 	cp ../fonts/Citrine.ttf /tmp/dist/fonts/
 	#Copy mods
-	cp ../mods/request/libctrrequest.so /tmp/dist/mods/request/
-	cp ../mods/json/libctrjson.so       /tmp/dist/mods/json/
+	cp ../bin/${OS}/libctrjson.so       /tmp/dist/mods/json/
 	#Archive
 	tar cvzf citrine${V}-${OS}-${ISO}.tar.gz -C /tmp dist
 	#Sign
 	signify-openbsd -Sz -s keys/privatekey.sec -m citrine${V}-${OS}-${ISO}.tar.gz -x downloads/${OS}/citrine${V}-${OS}-${ISO}.tgz
 done
-
-
