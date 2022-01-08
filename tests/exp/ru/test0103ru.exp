@@ -1,11 +1,11 @@
 9
-a объект ‘объект’  is NOT Nil.
-a логический ‘Правда’  is NOT Nil.
-a логический ‘Ложь’  is NOT Nil.
-a логический ‘Ложь’  is NOT Nil.
-a номер ‘1’  is NOT Nil.
-a номер ‘0’  is NOT Nil.
-a строка ‘Str’  is NOT Nil.
-a строка ‘’  is NOT Nil.
+a Объект ‘Объект’  is NOT Nil.
+a Логический ‘Истина’  is NOT Nil.
+a Логический ‘Ложь’  is NOT Nil.
+a Логический ‘Ложь’  is NOT Nil.
+a Число ‘1’  is NOT Nil.
+a Число ‘0’  is NOT Nil.
+a Строка ‘Str’  is NOT Nil.
+a Строка ‘’  is NOT Nil.
 a Код ‘Код’  is NOT Nil.
 but.. Nil is.. certainly NIL!
