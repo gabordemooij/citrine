@@ -32,6 +32,9 @@ make plugin PACKAGE="jsmn" NAME="libctrjson.so" LDFLAGS=${LDFLAGS}
 make plugin PACKAGE="jsmn" NAME="libctrjsonnl.so" LDFLAGS=${LDFLAGS}
 make plugin PACKAGE="jsmn" NAME="libctrjsonhy.so" LDFLAGS=${LDFLAGS}
 
+#Remove old dicts
+rm dict/*
+
 #Run regular makefiles through build script
 ./mk.sh
 cp bin/${OS}/ctrxx bin/Generic/ctr

@@ -2,9 +2,9 @@ There are 2 chairs in the sunny garden.
 A rubber duck swims in the pool.
 Is there a shed in the garden? Well.. Ложь
 In the garden you smell the fragrance of tulips and roses and lillies.
-The garden is ноль meters long.
-Luckily, this day, there are ноль wasps in the garden.
-The dog named ноль sleeps under the tree.
+The garden is Пустой meters long.
+Luckily, this day, there are Пустой wasps in the garden.
+The dog named Пустой sleeps under the tree.
 a\"bb\"ccc\"
-(карта новый) положить в:((карта новый) положить в:ноль __:‘dog’, положить в:ноль __:‘insects’, положить в:((карта новый) положить в:15 __:‘length’, положить в:8 __:‘width’) __:‘size’, положить в:(Список ← ‘tulips’ ; ‘roses’ ; ‘lillies’) __:‘flower’, положить в:Ложь __:‘shed’, положить в:Правда __:‘pool’, положить в:2 __:‘chairs’) __:‘garden’
+(Карта новый) разместить:((Карта новый) разместить:Пустой в:«dog», разместить:Пустой в:«insects», разместить:((Карта новый) разместить:15 в:«length», разместить:8 в:«width») в:«size», разместить:(Список ← «tulips» ; «roses» ; «lillies») в:«flower», разместить:Ложь в:«shed», разместить:Истина в:«pool», разместить:2 в:«chairs») в:«garden»
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}
