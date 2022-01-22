@@ -1,0 +1,14 @@
+
+☞ Nieuwe ≔ Object nieuw.
+
+Nieuwe bĳ: “reageer:” doen: { :object
+	↲ object object nieuw.
+}.
+
+☞ Nieuw ≔ Object nieuw.
+
+Nieuw bĳ: “reageer:” doen: { :object
+	↲ object object nieuw.
+}.
+
+Object leer: “nieuwe” betekent: “nieuw”.
