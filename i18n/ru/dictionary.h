@@ -40,7 +40,7 @@
 #define CTR_DICT_OR              "или:"
 #define CTR_DICT_MODULO          "модуль:"
 #define CTR_DICT_NOR             "ни:"
-#define CTR_DICT_ONDO            "на:сделать:"
+#define CTR_DICT_ONDO            "в:сделать:"
 #define CTR_DICT_TYPE            "тип"
 #define CTR_DICT_ISNIL           "пустой?"
 #define CTR_DICT_MYSELF          "себя"
