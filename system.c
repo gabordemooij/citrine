@@ -1393,10 +1393,24 @@ ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 /**
+ * @def
  * [ Moment ] subtract: [Number].
- *
- * Same as [ Moment ] add: but subtracts the number instead of adding it to
- * the clock‘s time.
+ * 
+ * @example
+ * ☞ x ≔ Moment new.
+ * ✎ write: x, stop.
+ * x subtract: 6 second.
+ * ✎ write: x, stop.
+ * x subtract: 5 minute.
+ * ✎ write: x, stop.
+ * x subtract: 4 hour.
+ * ✎ write: x, stop.
+ * x subtract: 3 day.
+ * ✎ write: x, stop.
+ * x subtract: 2 month.
+ * ✎ write: x, stop.
+ * x subtract: 1 year.
+ * ✎ write: x, stop.
  */
 ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_change( myself, argumentList, 0 );
