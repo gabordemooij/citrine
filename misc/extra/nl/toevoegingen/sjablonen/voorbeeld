@@ -1,0 +1,13 @@
+<html>
+	<body>
+		Recept
+		<ul>
+			<!-- knip:ingrediënt -->
+			<li>
+				⬧beschrĳving
+			</li>
+			<!-- /knip:ingrediënt -->
+			<!-- plak:ingrediënten -->
+		</ul>
+	</body>
+</html>
