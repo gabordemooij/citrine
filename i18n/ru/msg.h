@@ -1,6 +1,6 @@
 #define CTR_MSG_LANG_CODE "ru_ru"
 #define CTR_MSG_WELCOME   "Язык программирования Citrine RU/RU\n"
-#define CTR_MSG_COPYRIGHT "Автор: Gabor de Mooij © copyright 2019, Licensed BSD.\n"
+#define CTR_MSG_COPYRIGHT "Автор: Gabor de Mooij © copyright 2022, Licensed BSD.\n"
 #define CTR_MSG_USAGE_G   "Недостаточно аргументов. Используйте: ctr -g file1.h file2.h"
 #define CTR_MSG_USAGE_T   "Недостаточно аргументов. Используйте: ctr -t d.dict program.ctr"
 #define CTR_ERR_LEX       "%s в строке: %d. \n"
