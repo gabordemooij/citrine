@@ -873,7 +873,7 @@ ctr_object* ctr_map_delete(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Map ] keys
+ * [ Map ] entries
  * 
  * @example
  * ☞ x ≔ Map new.
