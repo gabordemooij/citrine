@@ -97,7 +97,7 @@ ctr_object* ctr_array_min(ctr_object* myself, ctr_argument* argumentList) {
  * @example
  * ☞ x ≔ List ← 8 ; 4 ; 2 ; 16.
  * ☞ y ≔ x maximum.
- * ✎ write: x, stop.
+ * ✎ write: y, stop.
  */
 ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
 	double max = 0;

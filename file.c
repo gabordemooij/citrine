@@ -23,7 +23,6 @@ const char* PATH_SEP =
  * @example
  * ☞ f ≔ File new: (Path /tmp: ‘test.txt’).
  * f write: ‘test’.
- * f close.
  * ☞ q ≔ File new: (Path /tmp: ‘test.txt’).
  * ✎ write: q read, stop.
  */
@@ -77,7 +76,6 @@ ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList) {
  * @example
  * ☞ f ≔ File new: (Path /tmp: ‘test.txt’).
  * f write: ‘test’.
- * f close.
  * ☞ q ≔ File new: (Path /tmp: ‘test.txt’).
  * ✎ write: q read, stop.
  */
@@ -126,7 +124,6 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
  * @example
  * ☞ f ≔ File new: (Path /tmp: ‘test.txt’).
  * f write: ‘test’.
- * f close.
  * ☞ q ≔ File new: (Path /tmp: ‘test.txt’).
  * ✎ write: q read, stop.
  */
