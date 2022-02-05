@@ -793,7 +793,7 @@ ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Boolean ] and: [ Boolean ]
+ * [ Boolean ] &: [ Boolean ]
  * 
  * @example
  * ☞ x ≔ ( 2 > 1 ) &: ( 3 > 2 ).
@@ -1124,7 +1124,7 @@ ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Number ] subtract: [ number ]
+ * [ Number ] subtract: [ Number ]
  *
  * @example
  * ☞ x ≔ 3.
@@ -1641,7 +1641,6 @@ ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * ☞ x ≔ ‘☘☘☘’.
- * ✎ write: x bytes, stop.
  * ✎ write: x length, stop.
  */
 ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {

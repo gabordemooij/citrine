@@ -74,5 +74,5 @@
 #define CTR_MERR_OOM      "Недостаточно памяти. Не удалось выделить %lu байт.\n"
 #define CTR_MERR_MALLOC   "Недостаточно памяти. Не удалось выделить %lu байт (malloc не удалось). \n"
 #define CTR_MERR_POOL     "Невозможно выделить пул памяти.\n"
-#define CTR_STDDATEFRMT   "%d.%m.%Y %H:%M:%S"
+#define CTR_STDDATEFRMT   "%H:%M:%S %d.%m.%Y"
 #define CTR_STDTIMEZONE   "Europe/Moscow"

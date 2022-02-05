@@ -1217,7 +1217,7 @@ ctr_object* ctr_clock_equals( ctr_object* myself, ctr_argument* argumentList ) {
  * [ Moment ] ≠ [ Moment ]
  *
  * @example
- * ☞ m ≔ Moment new year: 2070, month: 11, day: 1
+ * ☞ m ≔ Moment new year: 2070, month: 11, day: 1.
  * ☞ n ≔ m copy.
  * ✎ write: (m = n), stop.
  * ✎ write: (m ≠ n), stop.
@@ -1262,10 +1262,10 @@ ctr_object* ctr_clock_week( ctr_object* myself, ctr_argument* argumentList ) {
  * [ Moment ] string
  *
  * @example
- * Moment on: ‘format:’ do: { ↲ ‘beautiful moment’. }.
- * Moment on: ‘time’ do: { ↲ ‘999’. }.
- * ✎ write: Moment, end.
- * ✎ write: Moment number, end.
+ * ☞ x ≔ Moment new.
+ * ✎ write: x, stop.
+ * ✎ write: x string, stop.
+ * ✎ write: x number, stop.
  */
 ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	char*       zone;
@@ -1299,6 +1299,7 @@ ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList 
  * @example
  * ☞ x ≔ Moment new.
  * ✎ write: x, stop.
+ * ✎ write: x string, stop.
  * ✎ write: x number, stop.
  */
 ctr_object* ctr_clock_to_number( ctr_object* myself, ctr_argument* argumentList ) {
@@ -1394,7 +1395,7 @@ ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
 
 /**
  * @def
- * [ Moment ] subtract: [Number].
+ * [ Moment ] subtract: [ Number ].
  * 
  * @example
  * ☞ x ≔ Moment new.
