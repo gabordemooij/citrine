@@ -129,7 +129,7 @@
 #define CTR_DICT_MODE            "opruimingsniveau:" 
 #define CTR_DICT_HASH_WITH_KEY   "kluts:"
 #define CTR_DICT_CHARACTERS      "letters"
-#define CTR_DICT_QUALIFY         "kwalificeren:"
+#define CTR_DICT_QUALIFY         "kwalificatie:"
 #define CTR_DICT_QUALIFICATION   "kwalificatie"
 #define CTR_DICT_NEW_SET         "nieuw:"
 #define CTR_DICT_HOUR            "uur"
