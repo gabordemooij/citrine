@@ -802,6 +802,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_MINUS ), &ctr_map_delete );
 	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_ENTRIES ), &ctr_map_keys );
 	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_VALUES ), &ctr_map_values );
+	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_CONTAINS ), &ctr_map_has );
 	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_HAS ), &ctr_map_has );
 	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND ), &ctr_map_key_value );
 	ctr_internal_create_func(CtrStdMap, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ), &ctr_map_get );
