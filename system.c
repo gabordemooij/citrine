@@ -422,6 +422,64 @@ ctr_object* ctr_program_include(ctr_object* myself, ctr_argument* argumentList) 
 
 /**
  * @def
+ * [ Program ] [ String ]
+ * 
+ * @example
+ * ✎ write: Program Object, stop.
+ * ✎ write: Program Dream, stop.
+ */
+ 
+/**
+ * @def
+ * [ Program ] search: [ String ]
+ * 
+ * @example
+ * ✎ write: (Program search: ‘✎’), stop.
+ * ✎ write: (Program search: ‘Q’), stop. 
+ */
+ctr_object* ctr_program_object_exists( ctr_object* myself, ctr_argument* argumentList ) {
+	if ( ctr_internal_object_find_property(CtrStdWorld, argumentList->object, CTR_CATEGORY_PUBLIC_PROPERTY) ) {
+		return CtrStdBoolTrue;
+	}
+	return CtrStdBoolFalse;
+}
+
+/**
+ * @def
+ * [ Program ] [ String ]: [ String ]
+ * 
+ * @example
+ * ✎ write: (Program ✎: ‘AAA’), stop.
+ * ✎ write: (Program program: ‘test’), stop. 
+ */
+ctr_object* ctr_program_object_message_exists( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* foundObject;
+	ctr_object* objectName;
+	ctr_object* textArgumentObject;
+	
+	
+	textArgumentObject = ctr_internal_cast2string( argumentList->object );
+	
+	if (textArgumentObject->value.svalue->vlen < 1) {
+		return CtrStdBoolFalse;
+	}	
+	if (textArgumentObject->value.svalue->value[textArgumentObject->value.svalue->vlen - 1] == ctr_clex_param_prefix_char ) {
+		objectName = ctr_build_string(textArgumentObject->value.svalue->value, textArgumentObject->value.svalue->vlen - 1);
+	} else {
+		objectName = argumentList->object;
+	}
+	foundObject = ctr_internal_object_find_property(CtrStdWorld, objectName, CTR_CATEGORY_PUBLIC_PROPERTY);
+	if (foundObject != NULL) {
+		if ( ctr_internal_object_find_property(foundObject, argumentList->next->object, CTR_CATEGORY_PUBLIC_METHOD) ) {
+			return CtrStdBoolTrue;
+		}
+	}
+	return CtrStdBoolFalse;
+}
+
+
+/**
+ * @def
  * [ Program ] arguments
  *
  * @example
