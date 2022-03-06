@@ -857,6 +857,9 @@ void ctr_initialize_world() {
 		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_WAIT_FOR_PASSW ), &ctr_program_waitforpassword );
 		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "test" ), &ctr_program_test );
 	}
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND ), &ctr_program_object_message_exists );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ), &ctr_program_object_exists );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_INDEX_OF ), &ctr_program_object_exists );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_program_exit );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_program_tonumber );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_program_tostring );
