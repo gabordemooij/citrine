@@ -2,3 +2,7 @@
 ✎ write: (‘Lorem Ipsum’ - ‘Ipsum’), stop.
 ✎ write: (‘a.................b.......................c...........’ - ‘.’), stop.
 ✎ write: (‘a--b--c---d’ - ‘--’), stop.
+✎ write: (‘-’ - ‘--’), stop.
+✎ write: (‘’ - ‘--’), stop.
+✎ write: (‘--’ - ‘’), stop.
+✎ write: (‘’ - ‘’), stop.
