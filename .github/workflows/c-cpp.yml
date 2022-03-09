@@ -2,9 +2,9 @@ name: CitrineCI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, sorghvliet ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, sorghvliet ]
 
 jobs:
   build:
