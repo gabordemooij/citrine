@@ -535,6 +535,7 @@ extern ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* ar
 extern ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_string_copy(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_string_to_code(ctr_object* myself, ctr_argument* ctr_argumentList);
+extern ctr_object* ctr_string_minus(ctr_object* myself, ctr_argument* ctr_argumentList);
 
 /**
  * Block Interface

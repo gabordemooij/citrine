@@ -2009,6 +2009,56 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 	return myself;
 }
 
+/**
+ * @def
+ * [ String ] - [ String ]
+ *
+ * @example
+ * ☞ x ≔ ‘1...2...3’ - ‘...’.
+ * ✎ write: x, stop.
+ */
+ctr_object* ctr_string_minus(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
+	char* dest;
+	char* odest;
+	char* src = myself->value.svalue->value;
+	char* ndl = needle->value.svalue->value;
+	long hlen = myself->value.svalue->vlen;
+	long nlen = needle->value.svalue->vlen;
+	long dlen = hlen;
+	char* p;
+	long i = 0;
+	long offset = 0;
+	long d;
+	if (nlen == 0 || hlen == 0) {
+		return ctr_build_string(src, hlen);
+	}
+	dest = (char*) ctr_heap_allocate( dlen * sizeof( char ) );
+	odest = dest;
+	while(1) {
+		p = ctr_internal_memmem(src, hlen, ndl, nlen, 0);
+		if (p == NULL) break;
+		d = (dest - odest);
+		if ((dlen - nlen)>dlen) {
+			dlen = (dlen - nlen);
+			odest = (char*) ctr_heap_reallocate(odest, dlen * sizeof(char) );
+			dest = (odest + d);
+		} else {
+			dlen = (dlen - nlen);
+		}
+		offset = (p - src);
+		memcpy(dest, src, offset);
+		dest = dest + offset;
+		hlen = hlen - (offset + nlen);
+		src  = src + (offset + nlen);
+		i++;
+	}
+	memcpy(dest, src, hlen);
+	ctr_heap_free( myself->value.svalue->value );
+	myself->value.svalue->value = odest;
+	myself->value.svalue->vlen  = dlen;
+	return myself;
+}
 
 /**
  * @def
