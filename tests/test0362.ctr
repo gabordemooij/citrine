@@ -1,0 +1,4 @@
+✎ write: (‘a:b:’ - ‘:’), stop.
+✎ write: (‘Lorem Ipsum’ - ‘Ipsum’), stop.
+✎ write: (‘a.................b.......................c...........’ - ‘.’), stop.
+✎ write: (‘a--b--c---d’ - ‘--’), stop.
