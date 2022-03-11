@@ -6,3 +6,10 @@
 ✎ write: (‘’ - ‘--’), stop.
 ✎ write: (‘--’ - ‘’), stop.
 ✎ write: (‘’ - ‘’), stop.
+☞ x ≔ ‘xx’.
+☞ y ≔ x - ‘x’.
+✎ write: x, stop.
+✎ write: y, stop.
+☞ x ≔ ‘a,bb,c’.
+☞ y ≔ x replace: ‘’ with: ‘xx’.
+✎ write: ((x equals: y) either: ‘OK’ or: ‘BUG! Did return a copy by accident!’), stop.
