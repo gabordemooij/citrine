@@ -272,6 +272,16 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
  * ✎ write: x, stop.
  */
 ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
+	/**
+	 * Returns a list with strings, not file objects, because
+	 * there can be all sorts of objects in a folder and only
+	 * files are represented by objects. If we would have returned
+	 * objects, we would need objects for File, Folder, Link,
+	 * Device etc. (depending on OS). Since Citrine only offers
+	 * a limited IO-interface (because of minimalism and it might just
+	 * as well be embedded into FAAS/SAAS, not needing any of this)
+	 * this would quickly go beyond the scope of the project.
+	 */
 	DIR* d;
 	struct dirent* entry;
 	char* pathValue;
@@ -309,6 +319,7 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 		strcat( fullPath, PATH_SEP );
 		strcat( fullPath, entry->d_name);
 		realpath( fullPath, pathBuf );
+		/* lstat is slow, but we have no choice, there is no other way to keep this portable */
 		lstat(pathBuf, &st);
 		if (S_ISREG(st.st_mode))
 			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_FILE );
