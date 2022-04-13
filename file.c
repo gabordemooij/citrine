@@ -318,7 +318,7 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 		strcpy( fullPath, pathValue );
 		strcat( fullPath, PATH_SEP );
 		strcat( fullPath, entry->d_name);
-		realpath( fullPath, pathBuf );
+		if (realpath( fullPath, pathBuf )) {
 		/* lstat is slow, but we have no choice, there is no other way to keep this portable */
 		lstat(pathBuf, &st);
 		if (S_ISREG(st.st_mode))
@@ -340,6 +340,7 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_map_put(fileListItem, putArgumentList);
 		addArgumentList->object = fileListItem;
 		ctr_array_push(fileList, addArgumentList);
+		}
 	}
 	closedir(d);
 	ctr_heap_free(putArgumentList->next);
