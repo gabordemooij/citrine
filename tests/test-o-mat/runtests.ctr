@@ -1,0 +1,238 @@
+Program use: Path Tools Testomat.
+Program shell: ‘cp ../../bin/Linux/ctrxx ../../bin/Generic/ctr’.
+☞ memory management modes ≔ List ← 0 ; 1 ; 4 ; 8 ; 9 ; 12.
+☞ languages ≔ List ← 
+	‘en’ ; ‘en_us’ ;
+	‘af’ ; ‘am’ ; ‘ar’ ; ‘az’ ;
+	‘be’ ; ‘bg’ ; ‘bn’ ; ‘bs’ ;
+	‘ca’ ; ‘ceb’ ; ‘co’ ; ‘cs’ ; ‘cy’ ;
+	‘da’ ; ‘de’ ;
+	‘el’ ; ‘es’ ; ‘et’ ; ‘eu’ ;
+	‘fa’ ; ‘fi’ ; ‘fr’ ; ‘fy’ ;
+	‘ga’ ; ‘gd’ ; ‘gl’ ; ‘gu’ ;
+	‘ha’ ; ‘haw’ ; ‘he’ ; ‘hi’ ; ‘hmn’ ; ‘hr’ ; ‘ht’ ; ‘hy’ ; ‘hy’ ;
+	‘id’ ; ‘ig’ ; ‘is’ ; ‘it’ ;
+	‘ja’ ; ‘jv’ ;
+	‘ka’ ; ‘kk’ ; ‘km’ ; ‘kn’ ; ‘ko’ ; ‘ku’ ; ‘ky’ ;
+	‘la’ ; ‘lb’ ; ‘lo’ ; ‘lt’ ; ‘lv’ ;
+	‘mg’ ; ‘mi’ ; ‘mk’ ; ‘ml’ ; ‘mn’ ; ‘mo’ ; ‘mr’ ; ‘ms’ ; ‘mt’ ; ‘my’ ;
+	‘ne’ ; ‘nl’ ; ‘no’ ; ‘ny’ ;
+	‘or’ ;
+	‘pa’ ; ‘pap’ ; ‘pl’ ; ‘ps’ ; ‘pt’ ; ‘pt_br’ ;
+	‘ro’ ; ‘ru’ ; ‘rw’ ;
+	‘sd’ ; ‘si’ ; ‘sk’ ; ‘sl’ ; ‘sm’ ; ‘sn’ ; ‘so’ ; ‘sq’ ; ‘sr’ ; ‘st’ ; ‘su’ ; ‘sv’ ; ‘sw’ ;
+	‘ta’ ; ‘te’ ; ‘tg’ ; ‘th’ ; ‘tk’ ; ‘tl’ ; ‘tr’ ; ‘tt’ ;
+	‘ug’ ; ‘uk’ ; ‘ur’ ; ‘uz’ ;
+	‘vi’ ;
+	‘xh’ ;
+	‘yi’ ; ‘yo’ ;
+	‘zh1’ ; ‘zh2’ ; ‘zu’
+	.
+
+☞ variations ≔ 	memory management modes + languages.
+☞ number of tests ≔ 362.
+☞ counter ≔ 1.
+☞ file counter ≔ 1.
+☞ variation counter ≔ 1.
+☞ counter ≔ 0.
+☞ doing a single run ≔ False.
+☞ doing a single language ≔ False.
+
+Tests on: ‘next’ do: {
+	doing a single run true: {
+		doing a single run ≔ False.
+		counter add: variations count - 1.
+	}.
+	(doing a single language and: ((counter modulo: variations count) = 6)) true: {
+		doing a single language ≔ False.
+		counter add: variations count - 6.
+	}.
+	☞ file no ≔ 1 + (counter ÷ variations count) floor.
+	☞ test ≔ Nil.
+	(file no ≤ number of tests) true: {
+		☞ file name ≔ ‘testX.ctr’ X (file no digits: 4).
+		☞ path ≔ ‘../’ + file name.
+		☞ variation ≔ variations position: ((counter modulo: variations count) + 1).
+		test ≔ Test new.
+		test
+			number: counter copy,
+			name: file name,
+			file: (File new: path).
+			
+		☞ tag ≔ variation.
+		☞ directive ≔ (test file read split: ‘↵’) first.
+		(directive contains: ‘SINGLE_RUN’) true: {
+			doing a single run ≔ True.
+		}.
+		(directive contains: ‘SINGLE_LANGUAGE’) true: {
+			doing a single language ≔ True.
+		}.
+		(directive contains: ‘NL-ONLY’) true: {
+			doing a single language ≔ True.
+			tag ≔ ‘nl-only’.
+		}.
+		test tag: tag.
+		counter add: 1.
+	}.
+	↲ test.
+}.
+
+☞ test suite ≔ Tests new.
+test suite on: ‘process:’ do: { :test
+	☞ actions ≔ Actions new.
+	actions on: ‘edit:’ do: { :text
+		text replace: ‘tmp/runner1:’ with: ‘tmp/runner0:’.
+		text replace: ‘tmp/runner2:’ with: ‘tmp/runner0:’.
+		text replace: ‘tmp/runner4:’ with: ‘tmp/runner0:’.
+		text replace: ‘tmp/runner8:’ with: ‘tmp/runner0:’.
+		text replace: ‘tmp/runner9:’ with: ‘tmp/runner0:’.
+		text replace: ‘tmp/runner12:’ with: ‘tmp/runner0:’.
+		text replace: ‘Failed to allocate 24 bytes.’ with: ‘Failed to allocate XX bytes.’.
+		text replace: ‘Failed to allocate 56 bytes.’ with: ‘Failed to allocate XX bytes.’.
+		text replace: ‘Failed to allocate 48 bytes.’ with: ‘Failed to allocate XX bytes.’.
+		text replace: ‘Failed to allocate 64 bytes.’ with: ‘Failed to allocate XX bytes.’.
+		↲ text remove surrounding spaces.
+	}.
+	☞ action ≔ Nil.
+	☞ tag ≔ test tags first.
+	☞ test input ≔
+			Action new
+			name: Path echo,
+			options: ‘"test"’.
+	((List ← ‘0’ ; ‘1’ ; ‘4’ ; ‘8’ ; ‘9’ ; ‘12’) find: tag) true: {
+		action ≔
+			Action new
+			base folder: ‘../../’,
+			command: Path echo,
+			options: ‘"Program tidiness: TAG."’,
+			output: Path tests tmp runnerTAG,
+			TAG:    tag.
+		actions append: action.
+		action ≔
+			Action new
+			base folder: ‘../../’,
+			command: Path cat,
+			options: test file path,
+			append: Path tests tmp runnerTAG,
+			TAG:    tag.
+		actions append: action.
+		action ≔
+			Action new
+			base folder: ‘../../’,
+			input:  test input,
+			name:   Path bin OS ctrISO,
+			target: Path tests tmp runnerTAG,
+			output: Path tests tmp outTAG,
+			log:    Path tests tmp logTAG,
+			OS:    ‘Linux’,
+			TAG:   tag,
+			ISO:   ‘xx’.
+		actions append: action.
+		actions
+			base folder: ‘../../’,
+			expect: Path tests exp ISO NAME,
+			ISO: ‘xx2’,
+			NAME: (test name),
+			ctr: ‘exp’.
+			
+		☞ result ≔ actions run.
+		(result) true: { ✎ write: (‘[✓NUM]’ NUM: test number). }, else: {
+			actions record.
+		}.
+	}.
+	(tag string = ‘nl-only’) true: {
+		action ≔
+			Action new
+			base folder: ‘../../’,
+			command: Path cat,
+			options: test file path,
+			output: Path tests tmp runnerTAG,
+			TAG:   ‘nl’.
+		actions append: action.
+		action ≔
+			Action new
+			base folder: ‘../../’,
+			input:  test input,
+			name:   Path bin OS ctrTAG,
+			target: Path tests tmp runnerTAG,
+			output: Path tests tmp outTAG,
+			log:    Path tests tmp logTAG,
+			OS:    ‘Linux’,
+			TAG:   ‘nl’.
+		actions append: action.
+		actions
+			base folder: ‘../../’,
+			expect: Path tests exp ISO NAME,
+			ISO: ‘nl’,
+			NAME: (test name from: 0 length: 8) + ‘nl.exp’.
+		☞ result ≔ actions run.
+		(result) true: { ✎ write: (‘[✓NUM]’ NUM: test number). }, else: {
+			actions record.
+		}.
+	}.
+	(languages find: tag) true: {
+		☞ translate ≔
+			Action new
+			base folder: ‘../../’,
+			name: Path bin OS ctrxx,
+			option: ‘-t’ file: ‘dict/xxISO.dict’,
+			target: Path tests tmp runner0,
+			output: Path tests tmp runnerISO,
+			log:    Path tests tmp terrorlogISO,
+			OS:    ‘Linux’,
+			ISO:   tag.
+		actions append: translate.
+		action ≔
+			Action new
+			base folder: ‘../../’,
+			input:  test input,
+			name:   Path bin OS ctrTAG,
+			target: Path tests tmp runnerTAG,
+			output: Path tests tmp outTAG,
+			log:    Path tests tmp logTAG,
+			OS:    ‘Linux’,
+			TAG:   tag.
+		actions append: action.
+		actions
+			base folder: ‘../../’,
+			expect: Path tests exp ISO NAME,
+			ISO: tag,
+			NAME: (test name from: 0 length: 8) + tag + ‘.exp’.
+		☞ result ≔ actions run.
+		(result) true: { ✎ write: (‘[✓NUMTAG]’ NUM: test number, TAG: tag). }, else: {
+			actions record.
+		}.
+		((List ← ‘hy’ ; ‘en’ ; ‘en_us’) find: tag) false: {
+			☞ translate ≔
+				Action new
+				base folder: ‘../../’,
+				name: Path bin OS ctrISO,
+				option: ‘-t’ file: ‘dict/ISOxx.dict’,
+				target: Path tests tmp runnerISO,
+				output: Path tests tmp runnerXX,
+				log:    Path tests tmp terrorlogXX,
+				OS:    ‘Linux’,
+				ISO:   tag.
+			actions append: translate.
+			action ≔
+				Action new
+				base folder: ‘../../’,
+				input:  test input,
+				name:   Path bin OS ctrxx,
+				target: Path tests tmp runnerXX,
+				output: Path tests tmp outXX,
+				log:    Path tests tmp logXX,
+				OS:    ‘Linux’.
+			actions append: action.
+			actions
+				base folder: ‘../../’,
+				expect: Path tests exp xx NAME,
+				NAME: (test name from: 0 length: 8) + ‘xx.exp’.
+			☞ result ≔ actions run.
+			(result) true: { ✎ write: (‘[✓NUM]’ NUM: test number). }, else: {
+				actions record.
+			}.
+		}.
+	}.
+}.
+test suite run.

@@ -49,10 +49,12 @@ ctr_object* ctr_string_escape(ctr_object* myself, ctr_argument* argumentList)  {
 		for(i =0; i < len; i++) {
 			char c = str[i];
 			if (c == character) {
-				tag_len += 2;
+				tag_len += 1;
 			}
 		}
 	}
+	//printf("tlen = %ld, tag_len = %ld \n",tlen, tag_len);
+	
 	tlen = len + tag_len;
 	tstr = ctr_heap_allocate( tlen * sizeof( char ) );
 	for(i = 0; i < len; i++) {
@@ -92,6 +94,7 @@ ctr_object* ctr_string_escape(ctr_object* myself, ctr_argument* argumentList)  {
 			tstr[k++] = str[i];
 		}
 	}
+	//printf("tlen = %ld \n",tlen);
 	newString = ctr_build_string(tstr, tlen);
 	ctr_heap_free( tstr );
 	return newString;
@@ -200,6 +203,9 @@ ctr_object* ctr_string_unescape(ctr_object* myself, ctr_argument* argumentList) 
 			tstr[k++] = str[i];
 		}
 	}
+	
+	
+	
 	newString = ctr_build_string(tstr, tlen);
 	ctr_heap_free( tstr );
 	return newString;

@@ -1,5 +1,5 @@
 Uncatched error has occurred.
 Oops
-#3 error: (tests/test0145.ctr: 4)
-#2 × (tests/test0145.ctr: 5)
-#1 × (tests/test0145.ctr: 6)
+#3 error: (../../tests/tmp/runner0: 5)
+#2 × (../../tests/tmp/runner0: 6)
+#1 × (../../tests/tmp/runner0: 7)

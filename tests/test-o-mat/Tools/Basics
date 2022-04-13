@@ -1,0 +1,11 @@
+
+
+Number on: ‘digits:’ do: { :number
+	☞ string ≔ ⛏ string.
+	☞ digits ≔ List new.
+	☞ diff ≔ (number - string length).
+	digits fill: diff with: ‘0’.
+	☞ fixed ≔ digits join: ‘’.
+	fixed append: string.
+	↲ fixed.
+}.

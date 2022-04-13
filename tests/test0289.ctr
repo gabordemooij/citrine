@@ -38,7 +38,7 @@ Slurp on: ‘obtain’ do: {
 	Program shell: (
 		Slurp new
 			echo: large text,
-			| (‘./bin/OS/ctrxx tests/assets/stdin_test.ctr’ OS: OS)
+			| (‘../../bin/OS/ctrxx ../../tests/assets/stdin_test.ctr’ OS: OS)
 		) obtain
 ).
 

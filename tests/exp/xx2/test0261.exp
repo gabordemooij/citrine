@@ -1,5 +1,5 @@
 Uncatched error has occurred.
 Division by zero.
-#3 ÷ (tests/test0261.ctr: 7)
-#2 true: (tests/test0261.ctr: 7)
-#1 × (tests/test0261.ctr: 8)
+#3 ÷ (../../tests/tmp/runner0: 8)
+#2 true: (../../tests/tmp/runner0: 8)
+#1 × (../../tests/tmp/runner0: 9)
