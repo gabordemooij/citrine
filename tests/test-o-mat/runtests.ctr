@@ -37,6 +37,7 @@ Program shell: ‘cp ../../bin/Linux/ctrxx ../../bin/Generic/ctr’.
 ☞ counter ≔ 0.
 ☞ doing a single run ≔ False.
 ☞ doing a single language ≔ False.
+☞ last file ≔ Nil.
 
 Tests on: ‘next’ do: {
 	doing a single run true: {
@@ -79,6 +80,10 @@ Tests on: ‘next’ do: {
 
 ☞ test suite ≔ Tests new.
 test suite on: ‘process:’ do: { :test
+	(last file = test file path string) false: {
+		last file ≔ test file path string.
+		✎ write: (‘↵Running: NO.↵’ NO: last file).
+	}.
 	☞ actions ≔ Actions new.
 	actions on: ‘edit:’ do: { :text
 		text replace: ‘tmp/runner1:’ with: ‘tmp/runner0:’.
