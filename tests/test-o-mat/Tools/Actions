@@ -1,0 +1,78 @@
+☞ Actions ≔ List new.
+
+Actions on: ‘new’ do: {
+	☞ actions ≔ ⛏ new.
+	actions init.
+	↲ actions.
+}.
+
+Actions on: ‘init’ do: {
+	⚿ base       ≔ ‘’.
+	⚿ expect     ≔ ‘’.
+	⚿ parameters ≔ Map new.
+	⚿ last recorded observation ≔ Nil.
+}.
+
+Actions on: ‘base folder:’ do: { :base ⚿ base ≔ base. }.
+
+Actions on: ‘all’ do: {
+	↲ ⛏ join: ‘ ; ’.
+}.
+
+Actions on: ‘expect:’ do: { :expect
+	⚿ expect ≔ ⚿ base + expect.
+}.
+
+Actions on: ‘expect’ do: {
+	☞ file ≔ ⚿ expect.
+	⚿ parameters each: { :name :value
+		file replace: name with: value.
+	}.
+	☞ expectation ≔ Nil.
+	☞ expectation file ≔ File new: file.
+	(expectation file exists) true: {
+		expectation ≔ expectation file read.
+	}.
+	↲ expectation.
+}.
+
+Actions on: ‘record’ do: {
+	✎ write: ‘recording...’, stop.
+	☞ file ≔ ⚿ expect.
+	⚿ parameters each: { :name :value
+		file replace: name with: value.
+	}.
+	✎ write: file, stop.
+	☞ expectation file ≔ File new: file.
+	☞ last ≔ ⛏ last.
+	✎ write: ‘Observed:’, stop.
+	✎ write: last observation remove surrounding spaces, stop.
+	✎ write: ‘Is this expected? (y/n/a)’, stop.
+	☞ answer ≔ Nil.
+	{ answer ≔ Program ask. } while: { ↲ ((List ← ‘y’ ; ‘n’) find: answer) Nil?. }.
+	answer 
+	case: ‘y’ do: {
+		expectation file write: last observation remove surrounding spaces.
+	},
+	case: ‘n’ do: {
+		Program end.
+	}.
+}.
+
+Actions on: ‘edit:’ do: { :text
+	↲ text.
+}.
+
+Actions on: ‘run’ do: {
+	☞ code ≔ ⛏ all.
+	Program shell: code.
+	☞ last ≔ ⛏ last.
+	☞ observation ≔ ⛏ edit: last observation.
+	☞ expectation ≔ ⛏ edit: ⛏ expect.
+	↲ (observation = expectation).
+}.
+
+Actions on: ‘respond:and:’ do: { :parameter :value
+	⚿ parameters put: value at: (parameter - ‘:’). 
+}.
+

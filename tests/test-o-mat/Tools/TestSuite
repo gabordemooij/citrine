@@ -1,0 +1,23 @@
+☞ Tests ≔ Object new.
+
+Tests on: ‘path:’ do: { :path
+	⚿ path ≔ path.
+}.
+
+Tests on: ‘init’ do: {
+	⚿ path ≔ ‘’.
+}.
+
+Tests on: ‘new’ do: {
+	☞ tests ≔ ⛏ new.
+	tests init.
+	↲ tests.
+}.
+
+Tests on: ‘run’ do: {
+	☞ test ≔ Nil.
+	{ ⛏ process: test. }
+	while:
+	{ test ≔ ⛏ next. ↲ test. }.
+	Program end.
+}.

@@ -39,7 +39,7 @@
 #define CTR_DICT_AND             "ir:"
 #define CTR_DICT_OR              "arba:"
 #define CTR_DICT_MODULO          "dalyba mod:"
-#define CTR_DICT_NOR             "disjunkcijos neigimas:"
+#define CTR_DICT_NOR             "disjunkcijos neigimas:"
 #define CTR_DICT_ONDO            "ant:daryti:"
 #define CTR_DICT_TYPE            "tipas"
 #define CTR_DICT_ISNIL           "Nulis?"

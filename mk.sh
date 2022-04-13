@@ -29,6 +29,7 @@ do
 	./ctr -g i18n/xx/dictionary.h i18n/${ISO}/dictionary.h > dict/xx${ISO}.dict
 	./ctr -g i18n/${ISO}/dictionary.h i18n/xx/dictionary.h > dict/${ISO}xx.dict
 	cat i18n/${ISO}/extra.dict >> dict/xx${ISO}.dict
+	cat i18n/${ISO}/extra_reverse.dict >> dict/${ISO}xx.dict
 done
 
 #Clear object files and binary

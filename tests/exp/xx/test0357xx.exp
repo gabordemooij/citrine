@@ -1,0 +1,2 @@
+NULL-byte should be filtered in error stream (is allowed in stdout though).
+ab
