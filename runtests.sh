@@ -9,6 +9,8 @@ export CITRINE_MEMORY_MODE
 
 #Determine which makefile to use
 OS=$(uname -s)
+export OS
+
 LDFLAGS='-shared'
 if [ "$OS" = "OpenBSD" -o "$OS" = "FreeBSD" ]; then
 	MAKEFILE=makefile.bsd

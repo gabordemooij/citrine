@@ -11,6 +11,7 @@
 #include <syslog.h>
 #include <signal.h>
 #include <termios.h>
+#include <libgen.h>
 
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -22,6 +23,10 @@
 
 #include "citrine.h"
 #include "siphash.h"
+
+
+ #include <sys/stat.h>
+
 
 int ctr_gc_dust_counter;
 int ctr_gc_object_counter;
@@ -396,6 +401,7 @@ ctr_object* ctr_program_tostring(ctr_object* myself, ctr_argument* argumentList)
 ctr_object* ctr_program_include(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size vlen;
 	char* pathString;
+	char* pathStringCopy;
 	ctr_object* path;
 	ctr_tnode* parsedCode;
 	char* prg;
@@ -403,19 +409,29 @@ ctr_object* ctr_program_include(ctr_object* myself, ctr_argument* argumentList) 
 	path = ctr_internal_cast2string(argumentList->object);
 	vlen = path->value.svalue->vlen;
 	pathString = ctr_heap_allocate_tracked(sizeof(char)*(vlen+1)); //needed until end, pathString appears in stracktrace
+	pathStringCopy = ctr_heap_allocate(sizeof(char)*(vlen+1)); //Because dirname() might modify param
 	if (path == NULL) return myself;
 	program_size = 0;
 	memcpy(pathString, path->value.svalue->value, vlen);
 	memcpy(pathString+vlen,"\0",1);
+	memcpy(pathStringCopy, path->value.svalue->value, vlen);
+	memcpy(pathStringCopy+vlen,"\0",1);
+	char* current_working_dir = ctr_heap_allocate(1000);
+	getcwd(current_working_dir, 1000);
 	prg = ctr_internal_readf(pathString, &program_size);
 	parsedCode = ctr_cparse_parse(prg, pathString);
-	if (parsedCode == NULL) {
+	if (parsedCode == NULL || (chdir(dirname(pathStringCopy)) != 0)) {
 		ctr_heap_free( prg );
+		ctr_heap_free(current_working_dir);
+		ctr_heap_free(pathStringCopy);
 		return CtrStdNil;
 	}
 	ctr_heap_free( prg );
 	ctr_cwlk_subprogram++;
 	ctr_cwlk_run(parsedCode);
+	chdir(current_working_dir);
+	ctr_heap_free(current_working_dir);
+	ctr_heap_free(pathStringCopy);
 	ctr_cwlk_subprogram--;
 	return myself;
 }
