@@ -126,7 +126,7 @@
 #define CTR_DICT_SWEEP           "vegen" 
 #define CTR_DICT_MEMORY_LIMIT	 "geheugen:"
 #define CTR_DICT_MEMORY      	 "geheugen" 
-#define CTR_DICT_MODE            "opruimingsniveau:" 
+#define CTR_DICT_MODE            "geheugenbeheer:"
 #define CTR_DICT_HASH_WITH_KEY   "kluts:"
 #define CTR_DICT_CHARACTERS      "letters"
 #define CTR_DICT_QUALIFY         "kwalificatie:"
