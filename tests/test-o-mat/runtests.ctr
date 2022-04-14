@@ -1,43 +1,14 @@
-Program use: Path Tools Testomat.
-Program shell: ‘cp ../../bin/Linux/ctrxx ../../bin/Generic/ctr’.
-☞ memory management modes ≔ List ← 0 ; 1 ; 4 ; 8 ; 9 ; 12.
-☞ languages ≔ List ← 
-	‘en’ ; ‘en_us’ ;
-	‘af’ ; ‘am’ ; ‘ar’ ; ‘az’ ;
-	‘be’ ; ‘bg’ ; ‘bn’ ; ‘bs’ ;
-	‘ca’ ; ‘ceb’ ; ‘co’ ; ‘cs’ ; ‘cy’ ;
-	‘da’ ; ‘de’ ;
-	‘el’ ; ‘es’ ; ‘et’ ; ‘eu’ ;
-	‘fa’ ; ‘fi’ ; ‘fr’ ; ‘fy’ ;
-	‘ga’ ; ‘gd’ ; ‘gl’ ; ‘gu’ ;
-	‘ha’ ; ‘haw’ ; ‘he’ ; ‘hi’ ; ‘hmn’ ; ‘hr’ ; ‘ht’ ; ‘hy’ ; ‘hy’ ;
-	‘id’ ; ‘ig’ ; ‘is’ ; ‘it’ ;
-	‘ja’ ; ‘jv’ ;
-	‘ka’ ; ‘kk’ ; ‘km’ ; ‘kn’ ; ‘ko’ ; ‘ku’ ; ‘ky’ ;
-	‘la’ ; ‘lb’ ; ‘lo’ ; ‘lt’ ; ‘lv’ ;
-	‘mg’ ; ‘mi’ ; ‘mk’ ; ‘ml’ ; ‘mn’ ; ‘mo’ ; ‘mr’ ; ‘ms’ ; ‘mt’ ; ‘my’ ;
-	‘ne’ ; ‘nl’ ; ‘no’ ; ‘ny’ ;
-	‘or’ ;
-	‘pa’ ; ‘pap’ ; ‘pl’ ; ‘ps’ ; ‘pt’ ; ‘pt_br’ ;
-	‘ro’ ; ‘ru’ ; ‘rw’ ;
-	‘sd’ ; ‘si’ ; ‘sk’ ; ‘sl’ ; ‘sm’ ; ‘sn’ ; ‘so’ ; ‘sq’ ; ‘sr’ ; ‘st’ ; ‘su’ ; ‘sv’ ; ‘sw’ ;
-	‘ta’ ; ‘te’ ; ‘tg’ ; ‘th’ ; ‘tk’ ; ‘tl’ ; ‘tr’ ; ‘tt’ ;
-	‘ug’ ; ‘uk’ ; ‘ur’ ; ‘uz’ ;
-	‘vi’ ;
-	‘xh’ ;
-	‘yi’ ; ‘yo’ ;
-	‘zh1’ ; ‘zh2’ ; ‘zu’
-	.
 
-☞ variations ≔ 	memory management modes + languages.
-☞ number of tests ≔ 362.
-☞ counter ≔ 1.
+Program use: Path Test-o-Mat Package.
+Program use: Path Configuration.
+
+☞ counter ≔ 0.
 ☞ file counter ≔ 1.
 ☞ variation counter ≔ 1.
-☞ counter ≔ 0.
 ☞ doing a single run ≔ False.
 ☞ doing a single language ≔ False.
 ☞ last file ≔ Nil.
+☞ OS ≔ Program setting: ‘OS’.
 
 Tests on: ‘next’ do: {
 	doing a single run true: {
@@ -69,7 +40,7 @@ Tests on: ‘next’ do: {
 			doing a single language ≔ True.
 		}.
 		(directive contains: ‘NL-ONLY’) true: {
-			doing a single language ≔ True.
+			doing a single run ≔ True.
 			tag ≔ ‘nl-only’.
 		}.
 		test tag: tag.
@@ -86,25 +57,26 @@ test suite on: ‘process:’ do: { :test
 	}.
 	☞ actions ≔ Actions new.
 	actions on: ‘edit:’ do: { :text
-		text replace: ‘tmp/runner1:’ with: ‘tmp/runner0:’.
-		text replace: ‘tmp/runner2:’ with: ‘tmp/runner0:’.
-		text replace: ‘tmp/runner4:’ with: ‘tmp/runner0:’.
-		text replace: ‘tmp/runner8:’ with: ‘tmp/runner0:’.
-		text replace: ‘tmp/runner9:’ with: ‘tmp/runner0:’.
-		text replace: ‘tmp/runner12:’ with: ‘tmp/runner0:’.
-		text replace: ‘Failed to allocate 24 bytes.’ with: ‘Failed to allocate XX bytes.’.
-		text replace: ‘Failed to allocate 56 bytes.’ with: ‘Failed to allocate XX bytes.’.
-		text replace: ‘Failed to allocate 48 bytes.’ with: ‘Failed to allocate XX bytes.’.
-		text replace: ‘Failed to allocate 64 bytes.’ with: ‘Failed to allocate XX bytes.’.
+		(List ← 1 ; 2 ; 4 ; 8 ; 9 ; 12) each: { :index :code
+			text replace: (‘tmp/runnerCODE:’ CODE: code) with: ‘tmp/runner0:’.
+		}.
+		(List ← 24 ; 48 ; 56 ; 64) each: { :index :bytes
+			text replace: (‘Failed to allocate XX bytes.’ XX: bytes) with: ‘Failed to allocate XX bytes.’.
+		}.
 		↲ text remove surrounding spaces.
 	}.
 	☞ action ≔ Nil.
 	☞ tag ≔ test tags first.
+	☞ skip translation ≔ False.
+	(tag string contains: ‘-only’) true: {
+		tag ≔ tag - ‘-only’.
+		skip translation ≔ True.
+	}.
 	☞ test input ≔
 			Action new
 			name: Path echo,
 			options: ‘"test"’.
-	((List ← ‘0’ ; ‘1’ ; ‘4’ ; ‘8’ ; ‘9’ ; ‘12’) find: tag) true: {
+	(memory management modes find: tag) true: {
 		action ≔
 			Action new
 			base folder: ‘../../’,
@@ -129,7 +101,7 @@ test suite on: ‘process:’ do: { :test
 			target: Path tests tmp runnerTAG,
 			output: Path tests tmp outTAG,
 			log:    Path tests tmp logTAG,
-			OS:    ‘Linux’,
+			OS:    OS,
 			TAG:   tag,
 			ISO:   ‘xx’.
 		actions append: action.
@@ -145,47 +117,28 @@ test suite on: ‘process:’ do: { :test
 			actions record.
 		}.
 	}.
-	(tag string = ‘nl-only’) true: {
-		action ≔
-			Action new
-			base folder: ‘../../’,
-			command: Path cat,
-			options: test file path,
-			output: Path tests tmp runnerTAG,
-			TAG:   ‘nl’.
-		actions append: action.
-		action ≔
-			Action new
-			base folder: ‘../../’,
-			input:  test input,
-			name:   Path bin OS ctrTAG,
-			target: Path tests tmp runnerTAG,
-			output: Path tests tmp outTAG,
-			log:    Path tests tmp logTAG,
-			OS:    ‘Linux’,
-			TAG:   ‘nl’.
-		actions append: action.
-		actions
-			base folder: ‘../../’,
-			expect: Path tests exp ISO NAME,
-			ISO: ‘nl’,
-			NAME: (test name from: 0 length: 8) + ‘nl.exp’.
-		☞ result ≔ actions run.
-		(result) true: { ✎ write: (‘[✓NUM]’ NUM: test number). }, else: {
-			actions record.
-		}.
-	}.
 	(languages find: tag) true: {
-		☞ translate ≔
-			Action new
-			base folder: ‘../../’,
-			name: Path bin OS ctrxx,
-			option: ‘-t’ file: ‘dict/xxISO.dict’,
-			target: Path tests tmp runner0,
-			output: Path tests tmp runnerISO,
-			log:    Path tests tmp terrorlogISO,
-			OS:    ‘Linux’,
-			ISO:   tag.
+		☞ translate ≔ Nil.
+		(skip translation) true: {
+			translate ≔
+				Action new
+				base folder: ‘../../’,
+				command: Path cat,
+				options: test file path,
+				output: Path tests tmp runnerTAG,
+				TAG:   tag.
+		}, else: {
+			translate ≔
+				Action new
+				base folder: ‘../../’,
+				name: Path bin OS ctrxx,
+				option: ‘-t’ file: ‘dict/xxISO.dict’,
+				target: Path tests tmp runner0,
+				output: Path tests tmp runnerISO,
+				log:    Path tests tmp terrorlogISO,
+				OS:    OS,
+				ISO:   tag.
+		}.
 		actions append: translate.
 		action ≔
 			Action new
@@ -195,7 +148,7 @@ test suite on: ‘process:’ do: { :test
 			target: Path tests tmp runnerTAG,
 			output: Path tests tmp outTAG,
 			log:    Path tests tmp logTAG,
-			OS:    ‘Linux’,
+			OS:    OS,
 			TAG:   tag.
 		actions append: action.
 		actions
@@ -207,7 +160,7 @@ test suite on: ‘process:’ do: { :test
 		(result) true: { ✎ write: (‘[✓NUMTAG]’ NUM: test number, TAG: tag). }, else: {
 			actions record.
 		}.
-		((List ← ‘hy’ ; ‘en’ ; ‘en_us’) find: tag) false: {
+		(((List ← ‘hy’ ; ‘en’ ; ‘en_us’) find: tag) boolean or: skip translation) false: {
 			☞ translate ≔
 				Action new
 				base folder: ‘../../’,
@@ -216,7 +169,7 @@ test suite on: ‘process:’ do: { :test
 				target: Path tests tmp runnerISO,
 				output: Path tests tmp runnerXX,
 				log:    Path tests tmp terrorlogXX,
-				OS:    ‘Linux’,
+				OS:    OS,
 				ISO:   tag.
 			actions append: translate.
 			action ≔
@@ -227,7 +180,7 @@ test suite on: ‘process:’ do: { :test
 				target: Path tests tmp runnerXX,
 				output: Path tests tmp outXX,
 				log:    Path tests tmp logXX,
-				OS:    ‘Linux’.
+				OS:    OS.
 			actions append: action.
 			actions
 				base folder: ‘../../’,
