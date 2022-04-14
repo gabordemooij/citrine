@@ -74,7 +74,7 @@
 #define CTR_MERR_OOM      "Geen geheugen meer, kon geen %lu bytes aanvragen.\n"
 #define CTR_MERR_MALLOC   "Geen geheugen meer, kon geen %lu bytes aanvragen (malloc faalde). \n"
 #define CTR_MERR_POOL     "Kon geen geheugenbank aanleggen.\n"
-#define CTR_STDDATEFRMT   "%d-%m-%Y %H:%M:%S"
+#define CTR_STDDATEFRMT   "%d-%m-%Y %H.%M:%S"
 #define CTR_STDTIMEZONE   "Europe/Amsterdam"
 
 
