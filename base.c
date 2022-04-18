@@ -2019,31 +2019,17 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
  */
 ctr_object* ctr_string_minus(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
-	ctr_object* result;
-	char* dest;
-	char* src = myself->value.svalue->value;
-	char* ndl = needle->value.svalue->value;
-	long hlen = myself->value.svalue->vlen;
 	long nlen = needle->value.svalue->vlen;
-	long dlen = hlen;
-	long i = 0;
-	if (nlen == 0 || hlen == 0 || nlen < hlen) {
-		for (i = 0; i<nlen; i++) {
-			if (*(src + hlen - i) != *(ndl + nlen - i)) {
-				break;
-			}
-		}
-		if (i == nlen) {
-			dlen = hlen - nlen;
-			dest = (char*) ctr_heap_allocate( dlen * sizeof( char ) );
-			memcpy(dest, src, dlen);
-			result = ctr_build_string_from_cstring(dest);
-			ctr_heap_free(dest);
-			return result;
-		}
+	long hlen = myself->value.svalue->vlen;
+	if (nlen > hlen) {
+		return myself;
 	}
-	return ctr_build_string(src, hlen);
+	if (memcmp(myself->value.svalue->value + (hlen - nlen), needle->value.svalue->value,nlen)==0) {
+		return ctr_build_string(myself->value.svalue->value, hlen - nlen);
+	}
+	return myself;
 }
+
 
 /**
  * @def
