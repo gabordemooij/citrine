@@ -279,6 +279,7 @@ ctr_object* ctr_request_server_option(ctr_object* myself, ctr_argument* argument
  * simply override the '<' or 'Pen' object to buffer instead of outputting
  * directly.
  */
+ #ifdef SERVER
 ctr_object* ctr_request_serve(ctr_object* myself, ctr_argument* argumentList) {
 	char* host;
 	char* pid;
@@ -310,6 +311,7 @@ ctr_object* ctr_request_serve(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_heap_free( pid );
 	return myself;
 }
+#endif
 
 /**
  * @internal
@@ -327,7 +329,9 @@ void begin(){
 	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_HTTP_REQUEST_UPLOAD_SET ), &ctr_request_file );
 	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_HTTP_REQUEST_POST_LIST_SET ), &ctr_request_post_array );
 	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_SET_ENVIRONMENT_VARIABLE ), &ctr_request_server_option );
+#ifdef SERVER
 	ctr_internal_create_func(requestObject, ctr_build_string_from_cstring( CTR_DICT_PLUGIN_REQUEST_SERVE ), &ctr_request_serve );
+#endif
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PLUGIN_REQUEST ), requestObject, 0);
 	varlistGet = CGI_get_query(NULL);
 	varlistPost = CGI_get_post(NULL,"/tmp/_upXXXXXX");
