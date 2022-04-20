@@ -6,10 +6,10 @@ install-libctrverzoek.so: libctrverzoek.so
 install-libctrrequest.so: libctrrequest.so
 	install libctrrequest.so ../../mods/request
 
-libctrverzoek.so: verzoek.o ccgi-1.2/ccgi.o
+libctrverzoek.so: verzoek.o ccgi-1.2/ccgi.o ccgi-1.2/prefork.o
 	cc ${LDFLAGS} -o libctrverzoek.so verzoek.o ccgi-1.2/ccgi.o
 
-libctrrequest.so: request.o ccgi-1.2/ccgi.o
+libctrrequest.so: request.o ccgi-1.2/ccgi.o ccgi-1.2/prefork.o
 	cc ${LDFLAGS} -o libctrrequest.so request.o ccgi-1.2/ccgi.o
 
 verzoek.o:
@@ -25,4 +25,3 @@ clean:
 	rm -rf *.so
 	rm -rf *.o
 	rm -rf ccgi-1.2/*.o
-
