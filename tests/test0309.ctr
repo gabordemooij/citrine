@@ -1,3 +1,12 @@
+‘SINGLE_RUN’.
+☞ OS ≔ Program setting: ‘OS’.
+
+(OS = ‘Haiku’) true: {
+	✎ write: ‘Unable to open: Permission denied.’, stop.
+	✎ write: ‘Unable to open: Permission denied.’, stop.
+	Program end.
+}.
+
 ☞ Slurp ≔ Object new.
 Slurp on: ‘new’ do: {
 	⚿ str ≔ ‘’.
@@ -29,12 +38,12 @@ Slurp on: ‘obtain’ do: {
 
 Program shell:
 	(Slurp new
-		touch: ‘/tmp/blah.txt;’,
-		chmod uog-w: ‘/tmp/blah.txt’,
+		touch: ‘tmp/blah.txt;’,
+		chmod uog-w: ‘tmp/blah.txt’,
 	obtain).
 
 {
-	☞ file ≔ File new: ‘/tmp/blah.txt’.
+	☞ file ≔ File new: ‘tmp/blah.txt’.
 	file write: ‘hello’.
 } catch: { :error 
 	✎ write: error, stop.
@@ -42,11 +51,11 @@ Program shell:
 
 	
 Program shell: (
-	Slurp new chmod uog-r: ‘/tmp/blah.txt’, obtain
+	Slurp new chmod uog-r: ‘tmp/blah.txt’, obtain
 ).
 
 {
-	☞ file ≔ File new: ‘/tmp/blah.txt’.
+	☞ file ≔ File new: ‘tmp/blah.txt’.
 	file read.
 } catch: { :error 
 	✎ write: error, stop.
