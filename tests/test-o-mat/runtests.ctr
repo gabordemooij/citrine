@@ -11,50 +11,63 @@ Program use: Path Configuration.
 ☞ OS ≔ Program setting: ‘OS’.
 
 Tests on: ‘next’ do: {
+
 	doing a single run true: {
 		doing a single run ≔ False.
 		counter add: variations count - 1.
 	}.
+
 	(doing a single language and: ((counter modulo: variations count) = 6)) true: {
 		doing a single language ≔ False.
 		counter add: variations count - 6.
 	}.
+
 	☞ file no ≔ 1 + (counter ÷ variations count) floor.
 	☞ test ≔ Nil.
+
 	(file no ≤ number of tests) true: {
+
 		☞ file name ≔ ‘testX.ctr’ X (file no digits: 4).
 		☞ path ≔ ‘../’ + file name.
 		☞ variation ≔ variations position: ((counter modulo: variations count) + 1).
+
 		test ≔ Test new.
 		test
 			number: counter copy,
 			name: file name,
 			file: (File new: path).
-			
+
 		☞ tag ≔ variation.
 		☞ directive ≔ (test file read split: ‘↵’) first.
+
 		(directive contains: ‘SINGLE_RUN’) true: {
 			doing a single run ≔ True.
 		}.
+
 		(directive contains: ‘SINGLE_LANGUAGE’) true: {
 			doing a single language ≔ True.
 		}.
+
 		(directive contains: ‘NL-ONLY’) true: {
 			doing a single run ≔ True.
 			tag ≔ ‘nl-only’.
 		}.
+
 		test tag: tag.
 		counter add: 1.
+
 	}.
 	↲ test.
 }.
 
 ☞ test suite ≔ Tests new.
 test suite on: ‘process:’ do: { :test
+
 	(last file = test file path string) false: {
 		last file ≔ test file path string.
 		✎ write: (‘↵Running: NO.↵’ NO: last file).
 	}.
+
 	☞ actions ≔ Actions new.
 	actions on: ‘edit:’ do: { :text
 		(List ← 1 ; 2 ; 4 ; 8 ; 9 ; 12) each: { :index :code
@@ -65,6 +78,7 @@ test suite on: ‘process:’ do: { :test
 		}.
 		↲ text remove surrounding spaces.
 	}.
+
 	☞ action ≔ Nil.
 	☞ tag ≔ test tags first.
 	☞ skip translation ≔ False.
@@ -76,6 +90,7 @@ test suite on: ‘process:’ do: { :test
 			Action new
 			name: Path echo,
 			options: ‘"test"’.
+
 	(memory management modes find: tag) true: {
 		action ≔
 			Action new
@@ -117,7 +132,9 @@ test suite on: ‘process:’ do: { :test
 			actions record.
 		}.
 	}.
+
 	(languages find: tag) true: {
+
 		☞ translate ≔ Nil.
 		(skip translation) true: {
 			translate ≔
@@ -139,6 +156,7 @@ test suite on: ‘process:’ do: { :test
 				OS:    OS,
 				ISO:   tag.
 		}.
+
 		actions append: translate.
 		action ≔
 			Action new
@@ -156,11 +174,13 @@ test suite on: ‘process:’ do: { :test
 			expect: Path tests exp ISO NAME,
 			ISO: tag,
 			NAME: (test name from: 0 length: 8) + tag + ‘.exp’.
+
 		☞ result ≔ actions run.
 		(result) true: { ✎ write: (‘[✓NUMTAG]’ NUM: test number, TAG: tag). }, else: {
 			actions record.
 		}.
-		(((List ← ‘hy’ ; ‘en’ ; ‘en_us’) find: tag) boolean or: skip translation) false: {
+		
+		((one way languages find: tag) boolean or: skip translation) false: {
 			☞ translate ≔
 				Action new
 				base folder: ‘../../’,
