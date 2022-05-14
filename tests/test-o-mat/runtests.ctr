@@ -32,7 +32,7 @@ Tests on: ‘next’ do: {
 		☞ path ≔ ‘../’ + file name.
 		☞ variation ≔ variations position: ((counter modulo: variations count) + 1).
 
-		test ≔ Test new.
+		test ≔ Test new
 			number: counter copy,
 			name: file name,
 			file: (File new: path).
@@ -128,6 +128,7 @@ test suite on: ‘process:’ do: { :test
 				options: test file path,
 				output: Path tests tmp runnerTAG,
 				TAG:   tag.
+			actions append: translate.
 		}, else: {
 			translate ≔
 				Tests action
@@ -138,10 +139,10 @@ test suite on: ‘process:’ do: { :test
 				log:    Path tests tmp terrorlogISO,
 				OS:    OS,
 				ISO:   tag.
+			actions append: translate.
 		}.
 
-		actions append: translate,
-		append: ( Tests action
+		actions append: ( Tests action
 			input:  test input,
 			name:   Path bin OS ctrTAG,
 			target: Path tests tmp runnerTAG,
