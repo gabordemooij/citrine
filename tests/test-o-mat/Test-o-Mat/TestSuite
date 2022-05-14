@@ -21,3 +21,9 @@ Tests on: ‘run’ do: {
 	{ test ≔ ⛏ next. ↲ test. }.
 	Program end.
 }.
+
+Tests on: ‘action’ do: {
+	☞ action ≔ Action new.
+	action base folder: ⚿ path.
+	↲ action.
+}.

@@ -32,3 +32,5 @@
 
 ☞ variations ≔ 	memory management modes + languages.
 ☞ number of tests ≔ 362.
+
+☞ base path for tests ≔ ‘../../’.
