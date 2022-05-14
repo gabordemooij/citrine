@@ -70,7 +70,7 @@ test suite on: ‘process:’ do: { :test
 		✎ write: (‘↵Running: NO.↵’ NO: last file).
 	}.
 
-	☞ actions ≔ Actions new.
+	☞ actions ≔ Tests actions.
 	actions on: ‘edit:’ do: { :text
 		(List ← 1 ; 2 ; 4 ; 8 ; 9 ; 12) each: { :index :code
 			text replace: (‘tmp/runnerCODE:’ CODE: code) with: ‘tmp/runner0:’.
@@ -117,12 +117,11 @@ test suite on: ‘process:’ do: { :test
 			ISO:   ‘xx’.
 		actions append: action.
 		actions
-			base folder: ‘../../’,
 			expect: Path tests exp ISO NAME,
 			ISO: ‘xx2’,
 			NAME: (test name),
 			ctr: ‘exp’.
-			
+
 		☞ result ≔ actions run.
 		(result) true: { ✎ write: (‘[✓NUM]’ NUM: test number). }, else: {
 			actions record.
@@ -162,7 +161,6 @@ test suite on: ‘process:’ do: { :test
 			TAG:   tag.
 		actions append: action.
 		actions
-			base folder: ‘../../’,
 			expect: Path tests exp ISO NAME,
 			ISO: tag,
 			NAME: (test name from: 0 length: 8) + tag + ‘.exp’.
@@ -191,7 +189,6 @@ test suite on: ‘process:’ do: { :test
 				OS:    OS.
 			actions append: action.
 			actions
-				base folder: ‘../../’,
 				expect: Path tests exp xx NAME,
 				NAME: (test name from: 0 length: 8) + ‘xx.exp’.
 			☞ result ≔ actions run.
