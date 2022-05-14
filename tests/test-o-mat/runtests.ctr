@@ -42,13 +42,8 @@ Tests on: ‘next’ do: {
 		☞ tag ≔ variation.
 		☞ directive ≔ (test file read split: ‘↵’) first.
 
-		(directive contains: ‘SINGLE_RUN’) true: {
-			doing a single run ≔ True.
-		}.
-
-		(directive contains: ‘SINGLE_LANGUAGE’) true: {
-			doing a single language ≔ True.
-		}.
+		doing a single run      ≔ (directive contains: ‘SINGLE_RUN’).
+		doing a single language ≔ (directive contains: ‘SINGLE_LANGUAGE’).
 
 		(directive contains: ‘NL-ONLY’) true: {
 			doing a single run ≔ True.
@@ -94,19 +89,18 @@ test suite on: ‘process:’ do: { :test
 			options: ‘"test"’.
 
 	(memory management modes find: tag) true: {
-		action ≔ Tests action
+		actions
+		append: ( Tests action
 			command: Path echo,
 			options: ‘"Program tidiness: TAG."’,
 			output: Path tests tmp runnerTAG,
-			TAG:    tag.
-		actions append: action.
-		action ≔ Tests action
+			TAG:    tag ),
+		append: ( Tests action
 			command: Path cat,
 			options: test file path,
 			append: Path tests tmp runnerTAG,
-			TAG:    tag.
-		actions append: action.
-		action ≔ Tests action
+			TAG:    tag ),
+		append: ( Tests action
 			input:  test input,
 			name:   Path bin OS ctrISO,
 			target: Path tests tmp runnerTAG,
@@ -114,13 +108,11 @@ test suite on: ‘process:’ do: { :test
 			log:    Path tests tmp logTAG,
 			OS:    OS,
 			TAG:   tag,
-			ISO:   ‘xx’.
-		actions append: action.
-		actions
-			expect: Path tests exp ISO NAME,
-			ISO: ‘xx2’,
-			NAME: (test name),
-			ctr: ‘exp’.
+			ISO:   ‘xx’ ),
+		expect: Path tests exp ISO NAME,
+		ISO: ‘xx2’,
+		NAME: (test name),
+		ctr: ‘exp’.
 
 		☞ result ≔ actions run.
 		(result) true: { ✎ write: (‘[✓NUM]’ NUM: test number). }, else: {
@@ -150,17 +142,15 @@ test suite on: ‘process:’ do: { :test
 				ISO:   tag.
 		}.
 
-		actions append: translate.
-		action ≔ Tests action
+		actions append: translate,
+		append: ( Tests action
 			input:  test input,
 			name:   Path bin OS ctrTAG,
 			target: Path tests tmp runnerTAG,
 			output: Path tests tmp outTAG,
 			log:    Path tests tmp logTAG,
 			OS:    OS,
-			TAG:   tag.
-		actions append: action.
-		actions
+			TAG:   tag ),
 			expect: Path tests exp ISO NAME,
 			ISO: tag,
 			NAME: (test name from: 0 length: 8) + tag + ‘.exp’.
@@ -171,24 +161,21 @@ test suite on: ‘process:’ do: { :test
 		}.
 		
 		((one way languages find: tag) boolean or: skip translation) false: {
-			☞ translate ≔ Tests action
+			actions append: ( Tests action
 				name: Path bin OS ctrISO,
 				option: ‘-t’ file: ‘dict/ISOxx.dict’,
 				target: Path tests tmp runnerISO,
 				output: Path tests tmp runnerXX,
 				log:    Path tests tmp terrorlogXX,
 				OS:    OS,
-				ISO:   tag.
-			actions append: translate.
-			action ≔ Tests action
+				ISO:   tag ),
+			append:( Tests action
 				input:  test input,
 				name:   Path bin OS ctrxx,
 				target: Path tests tmp runnerXX,
 				output: Path tests tmp outXX,
 				log:    Path tests tmp logXX,
-				OS:    OS.
-			actions append: action.
-			actions
+				OS:    OS ),
 				expect: Path tests exp xx NAME,
 				NAME: (test name from: 0 length: 8) + ‘xx.exp’.
 			☞ result ≔ actions run.
