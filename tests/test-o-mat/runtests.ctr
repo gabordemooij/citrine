@@ -1,4 +1,3 @@
-
 Program use: Path Test-o-Mat Package.
 Program use: Path Configuration.
 
@@ -34,7 +33,6 @@ Tests on: ‘next’ do: {
 		☞ variation ≔ variations position: ((counter modulo: variations count) + 1).
 
 		test ≔ Test new.
-		test
 			number: counter copy,
 			name: file name,
 			file: (File new: path).
