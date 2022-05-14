@@ -10,6 +10,8 @@ Program use: Path Configuration.
 ☞ last file ≔ Nil.
 ☞ OS ≔ Program setting: ‘OS’.
 
+Tests path: base path for tests.
+
 Tests on: ‘next’ do: {
 
 	doing a single run true: {
@@ -92,25 +94,19 @@ test suite on: ‘process:’ do: { :test
 			options: ‘"test"’.
 
 	(memory management modes find: tag) true: {
-		action ≔
-			Action new
-			base folder: ‘../../’,
+		action ≔ Tests action
 			command: Path echo,
 			options: ‘"Program tidiness: TAG."’,
 			output: Path tests tmp runnerTAG,
 			TAG:    tag.
 		actions append: action.
-		action ≔
-			Action new
-			base folder: ‘../../’,
+		action ≔ Tests action
 			command: Path cat,
 			options: test file path,
 			append: Path tests tmp runnerTAG,
 			TAG:    tag.
 		actions append: action.
-		action ≔
-			Action new
-			base folder: ‘../../’,
+		action ≔ Tests action
 			input:  test input,
 			name:   Path bin OS ctrISO,
 			target: Path tests tmp runnerTAG,
@@ -138,16 +134,14 @@ test suite on: ‘process:’ do: { :test
 		☞ translate ≔ Nil.
 		(skip translation) true: {
 			translate ≔
-				Action new
-				base folder: ‘../../’,
+				Tests action
 				command: Path cat,
 				options: test file path,
 				output: Path tests tmp runnerTAG,
 				TAG:   tag.
 		}, else: {
 			translate ≔
-				Action new
-				base folder: ‘../../’,
+				Tests action
 				name: Path bin OS ctrxx,
 				option: ‘-t’ file: ‘dict/xxISO.dict’,
 				target: Path tests tmp runner0,
@@ -158,9 +152,7 @@ test suite on: ‘process:’ do: { :test
 		}.
 
 		actions append: translate.
-		action ≔
-			Action new
-			base folder: ‘../../’,
+		action ≔ Tests action
 			input:  test input,
 			name:   Path bin OS ctrTAG,
 			target: Path tests tmp runnerTAG,
@@ -181,9 +173,7 @@ test suite on: ‘process:’ do: { :test
 		}.
 		
 		((one way languages find: tag) boolean or: skip translation) false: {
-			☞ translate ≔
-				Action new
-				base folder: ‘../../’,
+			☞ translate ≔ Tests action
 				name: Path bin OS ctrISO,
 				option: ‘-t’ file: ‘dict/ISOxx.dict’,
 				target: Path tests tmp runnerISO,
@@ -192,9 +182,7 @@ test suite on: ‘process:’ do: { :test
 				OS:    OS,
 				ISO:   tag.
 			actions append: translate.
-			action ≔
-				Action new
-				base folder: ‘../../’,
+			action ≔ Tests action
 				input:  test input,
 				name:   Path bin OS ctrxx,
 				target: Path tests tmp runnerXX,
