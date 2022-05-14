@@ -27,3 +27,9 @@ Tests on: ‘action’ do: {
 	action base folder: ⚿ path.
 	↲ action.
 }.
+
+Tests on: ‘actions’ do: {
+	☞ actions ≔ Actions new.
+	actions base folder: ⚿ path.
+	↲ actions.
+}.
