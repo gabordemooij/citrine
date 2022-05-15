@@ -8,7 +8,7 @@ Program use: Path Configuration.
 ☞ doing a single language ≔ False.
 ☞ last file ≔ Nil.
 ☞ OS ≔ Program setting: ‘OS’.
-Tests path: base path for tests.
+Tests path: base path for tests, record: (Program argument: 3) = ‘rec’.
 
 Tests on: ‘next’ do: {
 
@@ -86,8 +86,7 @@ test suite on: ‘process:’ do: { :test
 			options: ‘"test"’.
 
 	(memory management modes find: tag) true: {
-		actions
-		append: ( Tests action
+		actions append: ( Tests action
 			command: Path echo,
 			options: ‘"Program tidiness: TAG."’,
 			output: Path tests tmp runnerTAG,
@@ -109,12 +108,8 @@ test suite on: ‘process:’ do: { :test
 		expect: Path tests exp ISO NAME,
 		ISO: ‘xx2’,
 		NAME: (test name),
-		ctr: ‘exp’.
-
-		☞ result ≔ actions run.
-		(result) true: { ✎ write: (‘[✓NUM]’ NUM: test number). }, else: {
-			actions record.
-		}.
+		ctr: ‘exp’,
+		run or fail: (‘[✓NUMTAG]’ NUM: test number, TAG: tag).
 	}.
 
 	(languages find: tag) true: {
@@ -146,12 +141,8 @@ test suite on: ‘process:’ do: { :test
 			TAG:   tag ),
 			expect: Path tests exp ISO NAME,
 			ISO: tag,
-			NAME: (test name from: 0 length: 8) + tag + ‘.exp’.
-
-		☞ result ≔ actions run.
-		(result) true: { ✎ write: (‘[✓NUMTAG]’ NUM: test number, TAG: tag). }, else: {
-			actions record.
-		}.
+			NAME: (test name from: 0 length: 8) + tag + ‘.exp’,
+			run or fail: (‘[✓NUMTAG]’ NUM: test number, TAG: tag).
 
 		((one way languages find: tag) boolean or: skip translation) false: {
 			actions append: ( Tests action
@@ -170,11 +161,8 @@ test suite on: ‘process:’ do: { :test
 				log:    Path tests tmp logXX,
 				OS:    OS ),
 				expect: Path tests exp xx NAME,
-				NAME: (test name from: 0 length: 8) + ‘xx.exp’.
-			☞ result ≔ actions run.
-			(result) true: { ✎ write: (‘[✓NUM]’ NUM: test number). }, else: {
-				actions record.
-			}.
+				NAME: (test name from: 0 length: 8) + ‘xx.exp’,
+				run or fail: (‘[✓NUMTAG]’ NUM: test number, TAG: tag).
 		}.
 	}.
 }.
