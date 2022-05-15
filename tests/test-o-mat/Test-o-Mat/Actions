@@ -47,15 +47,20 @@ Actions on: ‘record’ do: {
 	☞ last ≔ ⛏ last.
 	✎ write: ‘Observed:’, stop.
 	✎ write: last observation remove surrounding spaces, stop.
-	✎ write: ‘Is this expected? (y/n/a)’, stop.
-	☞ answer ≔ Nil.
-	{ answer ≔ Program ask. } while: { ↲ ((List ← ‘y’ ; ‘n’) find: answer) Nil?. }.
-	answer 
-	case: ‘y’ do: {
-		expectation file write: last observation remove surrounding spaces.
-	},
-	case: ‘n’ do: {
-		Program end.
+
+	Tests record true: {
+		✎ write: ‘Is this expected? (y/n)’, stop.
+		☞ answer ≔ Nil.
+		{ answer ≔ Program ask. } while: { ↲ ((List ← ‘y’ ; ‘n’) find: answer) Nil?. }.
+		answer
+		case: ‘y’ do: {
+			expectation file write: last observation remove surrounding spaces.
+		},
+		case: ‘n’ do: {
+			Program end.
+		}.
+	}, else: {
+		this code block error: ‘Fail.’.
 	}.
 }.
 
@@ -70,6 +75,14 @@ Actions on: ‘run’ do: {
 	☞ observation ≔ ⛏ edit: last observation.
 	☞ expectation ≔ ⛏ edit: ⛏ expect.
 	↲ (observation = expectation).
+}.
+
+Actions on: ‘run or fail:’ do: { :message
+	(⛏ run) true: {
+		✎ write: message.
+	}, else: {
+		⛏ record.
+	}.
 }.
 
 Actions on: ‘respond:and:’ do: { :parameter :value

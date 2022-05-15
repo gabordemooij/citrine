@@ -33,3 +33,11 @@ Tests on: ‘actions’ do: {
 	actions base folder: ⚿ path.
 	↲ actions.
 }.
+
+Tests on: ‘record:’ do: { :record
+	⚿ record ≔ record boolean.
+}.
+
+Tests on: ‘record’ do: {
+	↲ ⚿ record boolean.
+}.
