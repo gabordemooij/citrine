@@ -37,12 +37,11 @@ Tests on: ‘next’ do: {
 			file: (File new: path).
 
 		☞ tag ≔ variation.
-		☞ directive ≔ (test file read split: ‘↵’) first.
 
-		doing a single run      ≔ (directive contains: ‘SINGLE_RUN’).
-		doing a single language ≔ (directive contains: ‘SINGLE_LANGUAGE’).
+		doing a single run      ≔ (test directive contains: ‘SINGLE_RUN’).
+		doing a single language ≔ (test directive contains: ‘SINGLE_LANGUAGE’).
 
-		(directive contains: ‘NL-ONLY’) true: {
+		(test directive contains: ‘NL-ONLY’) true: {
 			doing a single run ≔ True.
 			tag ≔ ‘nl-only’.
 		}.

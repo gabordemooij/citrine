@@ -21,6 +21,7 @@ Test on: ‘file:’ do: { :file ⚿ file ≔ file. }.
 Test on: ‘tag:’ do: { :tag ⚿ tags append: tag. }.
 Test on: ‘tags’ do: { ↲ ⚿ tags. }.
 Test on: ‘file’ do: { ↲ ⚿ file. }.
+Test on: ‘directive’ do: { ↲ ⛏ file read split: ‘↵’, first. }.
 Test on: ‘string’ do: {
 	↲ (⚿ number + ‘ ’ + ⚿ name + ‘ ’ + ⚿ file + ‘ ’ + ( ⚿ tags ) ).
 }.
