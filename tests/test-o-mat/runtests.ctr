@@ -61,8 +61,7 @@ test suite on: ‘process:’ do: { :test
 		✎ write: (‘↵Running: NO.↵’ NO: last file).
 	}.
 
-	☞ actions ≔ Tests actions.
-	actions on: ‘edit:’ do: { :text
+	☞ actions ≔ Tests actions on: ‘edit:’ do: { :text
 		(List ← 1 ; 2 ; 4 ; 8 ; 9 ; 12) each: { :index :code
 			text replace: (‘tmp/runnerCODE:’ CODE: code) with: ‘tmp/runner0:’.
 		}.
