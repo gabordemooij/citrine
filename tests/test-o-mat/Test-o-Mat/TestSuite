@@ -6,6 +6,7 @@ Tests on: ‘path:’ do: { :path
 
 Tests on: ‘init’ do: {
 	⚿ path ≔ ‘’.
+	⚿ flags ≔ Map new.
 }.
 
 Tests on: ‘new’ do: {
@@ -40,4 +41,8 @@ Tests on: ‘record:’ do: { :record
 
 Tests on: ‘record’ do: {
 	↲ ⚿ record boolean.
+}.
+
+Tests on: ‘flags’ do: {
+	↲ ⚿ flags.
 }.

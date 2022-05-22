@@ -290,7 +290,16 @@ ctr_object* ctr_object_unequals(ctr_object* myself, ctr_argument* argumentList) 
 	return CtrStdBoolFalse;
 }
 
-
+/**
+ * @def
+ * [ Object ] myself
+ *
+ * @example
+ * ✎ write: Object myself, stop.
+ * ✎ write: True boolean, stop.
+ * ✎ write: 123 number, stop.
+ * ✎ write: ‘x’ string, stop.
+ */
 ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
@@ -1899,10 +1908,6 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_heap_free( myself->value.svalue->value );
 	myself->value.svalue->value = tstr;
 	myself->value.svalue->vlen  = len;
-	return myself;
-}
-
-ctr_object* ctr_string_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 

@@ -4,21 +4,19 @@ Program use: Path Configuration.
 ☞ counter ≔ 0.
 ☞ file counter ≔ 1.
 ☞ variation counter ≔ 1.
-☞ doing a single run ≔ False.
-☞ doing a single language ≔ False.
 ☞ last file ≔ Nil.
 ☞ OS ≔ Program setting: ‘OS’.
 Tests path: base path for tests, record: (Program argument: 3) = ‘rec’.
 
 Tests on: ‘next’ do: {
 
-	doing a single run true: {
-		doing a single run ≔ False.
+	⛏ flags doing a single run boolean true: {
+		⛏ flags doing a single run: False.
 		counter add: variations count - 1.
 	}.
 
-	(doing a single language and: ((counter modulo: variations count) = 6)) true: {
-		doing a single language ≔ False.
+	(⛏ flags doing a single language boolean and: ((counter modulo: variations count) = 6)) true: {
+		⛏ flags doing a single language: False.
 		counter add: variations count - 6.
 	}.
 
@@ -38,11 +36,11 @@ Tests on: ‘next’ do: {
 
 		☞ tag ≔ variation.
 
-		doing a single run      ≔ (test directive contains: ‘SINGLE_RUN’).
-		doing a single language ≔ (test directive contains: ‘SINGLE_LANGUAGE’).
+		⛏ flags doing a single run: (test directive contains: ‘SINGLE_RUN’).
+		⛏ flags doing a single language: (test directive contains: ‘SINGLE_LANGUAGE’).
 
 		(test directive contains: ‘NL-ONLY’) true: {
-			doing a single run ≔ True.
+			⛏ flags doing a single run: True.
 			tag ≔ ‘nl-only’.
 		}.
 
