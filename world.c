@@ -630,6 +630,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_UNEQUALS_SYMBOL ), &ctr_bool_neq );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_bool_to_number );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_bool_to_string );
+	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_TOBOOL ), &ctr_object_myself );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_EITHEROR ), &ctr_bool_either_or );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_COPY ), &ctr_bool_copy );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_CODE ), &ctr_bool_to_string );
@@ -718,7 +719,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_ITONUMBER ), &ctr_string_in_to_number );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TOBOOL ), &ctr_string_to_boolean );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_HASH_WITH_KEY ), &ctr_string_hash_with_key );
-	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TOSTRING), &ctr_string_to_string );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TOSTRING), &ctr_object_myself );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_CHARACTERS ),&ctr_string_characters );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_CONTAINS ),&ctr_string_contains );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_COMPARE_SET ),&ctr_string_compare );
@@ -1020,7 +1021,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 				&& funct != ctr_nil_to_string
 				&& funct != ctr_bool_to_string
 				&& funct != ctr_number_to_string
-				&& funct != ctr_string_to_string
+				&& funct != ctr_object_myself
 			) {
 			result = CtrStdNil;
 		} else {
