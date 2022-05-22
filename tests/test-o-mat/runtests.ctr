@@ -1,7 +1,6 @@
 Program use: Path Test-o-Mat Package.
 Program use: Path Configuration.
 
-☞ counter ≔ 0.
 ☞ file counter ≔ 1.
 ☞ variation counter ≔ 1.
 ☞ last file ≔ Nil.
@@ -12,25 +11,25 @@ Tests on: ‘next’ do: {
 
 	⛏ flags doing a single run boolean true: {
 		⛏ flags doing a single run: False.
-		counter add: variations count - 1.
+		⛏ counter add: variations count - 1.
 	}.
 
-	(⛏ flags doing a single language boolean and: ((counter modulo: variations count) = 6)) true: {
+	(⛏ flags doing a single language boolean and: ((⛏ counter modulo: variations count) = 6)) true: {
 		⛏ flags doing a single language: False.
-		counter add: variations count - 6.
+		⛏ counter add: variations count - 6.
 	}.
 
-	☞ file no ≔ 1 + (counter ÷ variations count) floor.
+	☞ file no ≔ 1 + (⛏ counter ÷ variations count) floor.
 	☞ test ≔ Nil.
 
 	(file no ≤ number of tests) true: {
 
 		☞ file name ≔ ‘testX.ctr’ X (file no digits: 4).
 		☞ path ≔ ‘../’ + file name.
-		☞ variation ≔ variations position: ((counter modulo: variations count) + 1).
+		☞ variation ≔ variations position: ((⛏ counter modulo: variations count) + 1).
 
 		test ≔ Test new
-			number: counter copy,
+			number: ⛏ counter copy,
 			name: file name,
 			file: (File new: path).
 
@@ -45,7 +44,7 @@ Tests on: ‘next’ do: {
 		}.
 
 		test tag: tag.
-		counter add: 1.
+		⛏ counter add: 1.
 
 	}.
 	↲ test.
