@@ -267,7 +267,7 @@ ctr_object* ctr_gc_memory(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* unit = ctr_internal_object_find_property(
 		argumentList->object,
-		ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ),
+		ctr_build_string_from_cstring( CTR_DICT_QUALIFIER ),
 		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	uint64_t memlimit = (uint64_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
@@ -1403,7 +1403,7 @@ ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, ui
 	struct tm* date;
 	numberObject = ctr_internal_cast2number( argumentList->object );
 	number = numberObject->value.nvalue * (forward ? 1 : -1);
-	qual = ctr_internal_object_find_property( argumentList->object, ctr_build_string_from_cstring(CTR_DICT_QUALIFICATION), CTR_CATEGORY_PRIVATE_PROPERTY );
+	qual = ctr_internal_object_find_property( argumentList->object, ctr_build_string_from_cstring(CTR_DICT_QUALIFIER), CTR_CATEGORY_PRIVATE_PROPERTY );
 	if (qual == NULL) {
 		return myself;
 	}

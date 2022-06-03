@@ -38,7 +38,7 @@ ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
  * ✎ write: y, stop.
  */
 ctr_object* ctr_array_type(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_string_from_cstring( CTR_DICT_LIST_OBJECT );
+	return ctr_build_string_from_cstring( CTR_DICT_ARRAY_OBJECT );
 }
 
 /**

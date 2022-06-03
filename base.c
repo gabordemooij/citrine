@@ -182,7 +182,7 @@ ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 			return ctr_build_string_from_cstring( CTR_DICT_STRING );
 		case CTR_OBJECT_TYPE_OTBLOCK:
 		case CTR_OBJECT_TYPE_OTNATFUNC:
-			return ctr_build_string_from_cstring( CTR_DICT_CODE_BLOCK );
+			return ctr_build_string_from_cstring( CTR_DICT_TASK );
 		default:
 			return ctr_build_string_from_cstring( CTR_DICT_OBJECT );
 	}
@@ -367,10 +367,10 @@ ctr_object* ctr_bool_copy( ctr_object* myself, ctr_argument* argumentList ) {
 }
 
 ctr_object* ctr_number_copy( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_object* qual = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	ctr_object* qual = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring( CTR_DICT_QUALIFIER ), CTR_CATEGORY_PRIVATE_PROPERTY );
 	ctr_object* copy = ctr_build_number_from_float(myself->value.nvalue);
 	if ( qual != NULL ) {
-		ctr_internal_object_set_property( copy, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ),  ctr_internal_cast2string(qual), CTR_CATEGORY_PRIVATE_PROPERTY );
+		ctr_internal_object_set_property( copy, ctr_build_string_from_cstring( CTR_DICT_QUALIFIER ),  ctr_internal_cast2string(qual), CTR_CATEGORY_PRIVATE_PROPERTY );
 	}
 	return copy;
 }
@@ -1357,7 +1357,7 @@ ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
  * 
  */
 ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), ctr_internal_cast2string( argumentList->object ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( CTR_DICT_QUALIFIER ), ctr_internal_cast2string( argumentList->object ), CTR_CATEGORY_PRIVATE_PROPERTY );
 	return myself;
 }
 
@@ -1370,7 +1370,7 @@ ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argumentList) {
  * ✎ write: x qualification.
  */
 ctr_object* ctr_number_qualification(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* answer = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	ctr_object* answer = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring( CTR_DICT_QUALIFIER ), CTR_CATEGORY_PRIVATE_PROPERTY );
 	if ( answer == NULL ) return CtrStdNil;
 	return answer;
 }
@@ -1447,7 +1447,7 @@ ctr_object* ctr_internal_number_to_string(ctr_object* myself, ctr_argument* argu
 	ctr_object* qual;
 	ctr_object* stringObject;
 	if (!flat) {
-		qname = ctr_build_string_from_cstring( CTR_DICT_QUALIFICATION );
+		qname = ctr_build_string_from_cstring( CTR_DICT_QUALIFIER );
 		qual = ctr_internal_object_find_property( myself, qname, CTR_CATEGORY_PRIVATE_PROPERTY );
 		if (qual) {
 			qual = ctr_internal_cast2string( qual );
@@ -2402,7 +2402,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 		ctr_assign_value_to_local(ctr_build_string_from_cstring( ctr_clex_keyword_me_icon ), my );
 		ctr_assign_value_to_local(ctr_build_string_from_cstring( ctr_clex_keyword_my_icon ), my );
 	}
-	ctr_assign_value_to_local(ctr_build_string_from_cstring( CTR_DICT_THIS_BLOCK ), myself ); /* otherwise running block may get gc'ed. */
+	ctr_assign_value_to_local(ctr_build_string_from_cstring( CTR_DICT_CURRENT_TASK ), myself ); /* otherwise running block may get gc'ed. */
 	ctr_cwlk_subprogram++;
 	result = ctr_cwlk_run(codeBlockPart2);
 	ctr_cwlk_subprogram--;
@@ -2533,5 +2533,5 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
  * ✎ write: x, stop.
  */
 ctr_object* ctr_block_to_string(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_build_string_from_cstring( CTR_DICT_CODE_BLOCK );
+	return ctr_build_string_from_cstring( CTR_DICT_TASK );
 }
