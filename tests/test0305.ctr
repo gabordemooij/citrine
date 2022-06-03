@@ -2,7 +2,7 @@
 Number learn: ‘plus:’ means: ‘+’.
 Number on: ‘+’ do: { :x
 	☞ rate ≔ 1.
-	☞ currency ≔ x qualification.
+	☞ currency ≔ x qualifier.
 	(currency = ‘euros’) true: {
 		rate ≔ 2.
 	}.
