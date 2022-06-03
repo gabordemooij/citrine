@@ -130,7 +130,7 @@
 #define CTR_DICT_HASH_WITH_KEY   "hash:"
 #define CTR_DICT_CHARACTERS      "characters"
 #define CTR_DICT_QUALIFY         "qualify:"
-#define CTR_DICT_QUALIFICATION   "qualification"
+#define CTR_DICT_QUALIFICATION   "qualifier"
 #define CTR_DICT_NEW_SET         "new:"
 #define CTR_DICT_HOUR            "hour"
 #define CTR_DICT_SET_HOUR        "hour:"
