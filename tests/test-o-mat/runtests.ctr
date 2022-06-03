@@ -1,10 +1,11 @@
 Program use: Path Test-o-Mat Package.
 Program use: Path Configuration.
 
-☞ file counter ≔ 1.
-☞ variation counter ≔ 1.
-☞ last file ≔ Nil.
-☞ OS ≔ Program setting: ‘OS’.
+☞ file counter		≔ 1.
+☞ variation counter	≔ 1.
+☞ last file			≔ Nil.
+☞ OS				≔ Program setting: ‘OS’.
+
 Tests path: base path for tests, record: (Program argument: 3) = ‘rec’.
 
 Tests on: ‘next’ do: {
@@ -45,7 +46,6 @@ Tests on: ‘next’ do: {
 
 		test tag: tag.
 		⛏ counter add: 1.
-
 	}.
 	↲ test.
 }.
@@ -75,10 +75,8 @@ test suite on: ‘process:’ do: { :test
 		tag ≔ tag - ‘-only’.
 		skip translation ≔ True.
 	}.
-	☞ test input ≔
-			Action new
-			name: Path echo,
-			options: ‘"test"’.
+
+	☞ test input ≔ Action new name: Path echo, options: ‘"test"’.
 
 	(memory management modes find: tag) true: {
 		actions append: ( Tests action
@@ -108,7 +106,6 @@ test suite on: ‘process:’ do: { :test
 	}.
 
 	(languages find: tag) true: {
-
 		(skip translation) true: {
 			actions append: ( Tests action
 				command: Path cat,
@@ -155,9 +152,9 @@ test suite on: ‘process:’ do: { :test
 				output: Path tests tmp outXX,
 				log:    Path tests tmp logXX,
 				OS:    OS ),
-				expect: Path tests exp xx NAME,
-				NAME: (test name from: 0 length: 8) + ‘xx.exp’,
-				run or fail: (‘[✓NUMTAG]’ NUM: test number, TAG: tag).
+			expect: Path tests exp xx NAME,
+			NAME: (test name from: 0 length: 8) + ‘xx.exp’,
+			run or fail: (‘[✓NUMTAG]’ NUM: test number, TAG: tag).
 		}.
 	}.
 }.
