@@ -48,7 +48,6 @@ Tests on: ‘flags’ do: {
 	↲ ⚿ flags.
 }.
 
-
 Tests on: ‘counter’ do: {
 	↲ ⚿ counter.
 }.
