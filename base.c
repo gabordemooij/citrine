@@ -1363,11 +1363,11 @@ ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Number ] qualification.
+ * [ Number ] qualifier.
  *
  * @example
  * ☞ x ≔ 3 dollars.
- * ✎ write: x qualification.
+ * ✎ write: x qualifier.
  */
 ctr_object* ctr_number_qualification(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* answer = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring( CTR_DICT_QUALIFIER ), CTR_CATEGORY_PRIVATE_PROPERTY );
