@@ -41,4 +41,4 @@ rm dict/*
 ./mk.sh
 cp bin/${OS}/ctrxx bin/Generic/ctr
 cd tests/test-o-mat
-../../bin/${OS}/ctren_us runtests.ctr
+../../bin/${OS}/ctren_us runtests.ctr $1
