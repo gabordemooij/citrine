@@ -91,6 +91,7 @@ uint8_t ctr_clex_is_delimiter( char* code ) {
 	|| symbol == ' '
 	|| symbol == '\n'
 	|| symbol == '\t'
+	|| symbol == '\r'
 	);
 }
 
