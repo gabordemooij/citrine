@@ -1,0 +1,38 @@
+‘SINGLE_RUN’.
+Program use: Path Test-o-Mat Package.
+
+☞ number of tests ≔ 1.
+
+Tests path: ‘’.
+☞ test suite ≔ Tests new.
+
+test suite on: ‘next’ do: {
+	☞ test ≔ Nil.
+	(⛏ counter < number of tests) true: {
+		test ≔ Test new
+			number: ⛏ counter copy,
+			name: ‘test0365.ctr’,
+			file: ‘test0365.ctr’.
+	
+	}.
+	⛏ counter add: 1.
+	↲ test.
+}.
+
+
+test suite on: ‘process:’ do: { :test
+	☞ actions ≔ Tests actions.
+	☞ action ≔ 
+			Tests action
+			command: Path cat,
+			target: ‘../test0365.ctr’,
+			output: Path tmp result,
+			log: Path tmp log.
+	actions 
+		append: action,
+		expect: ‘../test0365.ctr’,
+		run or fail: ‘OK↵’.
+}.
+
+
+test suite run.
