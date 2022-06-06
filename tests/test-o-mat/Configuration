@@ -25,7 +25,7 @@
 	‘ug’ ; ‘uk’ ; ‘ur’ ; ‘uz’ ;
 	‘vi’ ;
 	‘xh’ ;
-	‘yi’ ; ‘yo’ ;
+	‘yak’ ; ‘yi’ ; ‘yo’ ;
 	‘zh1’ ; ‘zh2’ ; ‘zu’
 	.
 ☞ one way languages ≔ List ← ‘hy’ ; ‘en’ ; ‘en_us’.
