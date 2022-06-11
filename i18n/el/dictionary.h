@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "νοικοκυροσύνη:"
 #define CTR_DICT_HASH_WITH_KEY    "χασίσι:"
 #define CTR_DICT_CHARACTERS       "χαρακτήρες"
-#define CTR_DICT_QUALIFY          "γίνομαι αρμόδιος:"
+#define CTR_DICT_QUALIFIER_SET          "γίνομαι αρμόδιος:"
 #define CTR_DICT_QUALIFIER    "προσόν"
 #define CTR_DICT_NEW_SET          "_νέος:"
 #define CTR_DICT_HOUR             "ώρα"

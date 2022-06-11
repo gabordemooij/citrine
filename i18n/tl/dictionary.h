@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "kaligayahan:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "mga character"
-#define CTR_DICT_QUALIFY          "kwalipikado:"
+#define CTR_DICT_QUALIFIER_SET          "kwalipikado:"
 #define CTR_DICT_QUALIFIER    "kwalipikasyon"
 #define CTR_DICT_NEW_SET          "_bago:"
 #define CTR_DICT_HOUR             "_oras"

@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "tidiness:"
 #define CTR_DICT_HASH_WITH_KEY    "haš:"
 #define CTR_DICT_CHARACTERS       "čaracters"
-#define CTR_DICT_QUALIFY          "qualifj:"
+#define CTR_DICT_QUALIFIER_SET          "qualifj:"
 #define CTR_DICT_QUALIFIER    "qualification"
 #define CTR_DICT_NEW_SET          "_neł:"
 #define CTR_DICT_HOUR             "hūr"

@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "gerechtegkeet:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "zeechen"
-#define CTR_DICT_QUALIFY          "qualifizéieren:"
+#define CTR_DICT_QUALIFIER_SET          "qualifizéieren:"
 #define CTR_DICT_QUALIFIER    "qualifikatioun"
 #define CTR_DICT_NEW_SET          "_nei:"
 #define CTR_DICT_HOUR             "stonn"

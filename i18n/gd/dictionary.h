@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "sgioblachadh:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "caractaran"
-#define CTR_DICT_QUALIFY          "airidh:"
+#define CTR_DICT_QUALIFIER_SET          "airidh:"
 #define CTR_DICT_QUALIFIER    "teisteanas"
 #define CTR_DICT_NEW_SET          "_ùr:"
 #define CTR_DICT_HOUR             "uair"

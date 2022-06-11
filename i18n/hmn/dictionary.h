@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "zoo huv si:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "cim"
-#define CTR_DICT_QUALIFY          "tsim nyog:"
+#define CTR_DICT_QUALIFIER_SET          "tsim nyog:"
 #define CTR_DICT_QUALIFIER    "kev tsim nyog"
 #define CTR_DICT_NEW_SET          "_tshiab:"
 #define CTR_DICT_HOUR             "teev"

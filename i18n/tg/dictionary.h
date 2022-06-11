@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "тозагӣ__:"
 #define CTR_DICT_HASH_WITH_KEY    "ҳаш:"
 #define CTR_DICT_CHARACTERS       "аломатҳои"
-#define CTR_DICT_QUALIFY          "тахассус:"
+#define CTR_DICT_QUALIFIER_SET          "тахассус:"
 #define CTR_DICT_QUALIFIER    "ихтисос"
 #define CTR_DICT_NEW_SET          "_нав:"
 #define CTR_DICT_HOUR             "соат"

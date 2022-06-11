@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "kugira isuku:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "inyuguti"
-#define CTR_DICT_QUALIFY          "bujuje ibisabwa:"
+#define CTR_DICT_QUALIFIER_SET          "bujuje ibisabwa:"
 #define CTR_DICT_QUALIFIER    "impamyabumenyi"
 #define CTR_DICT_NEW_SET          "_gishya:"
 #define CTR_DICT_HOUR             "isaha"

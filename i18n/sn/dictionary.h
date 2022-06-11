@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "nhau:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "mavara"
-#define CTR_DICT_QUALIFY          "kukodzera:"
+#define CTR_DICT_QUALIFIER_SET          "kukodzera:"
 #define CTR_DICT_QUALIFIER    "kukodzera"
 #define CTR_DICT_NEW_SET          "_nyowani:"
 #define CTR_DICT_HOUR             "awa"

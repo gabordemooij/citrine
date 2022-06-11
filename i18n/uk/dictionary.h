@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "охайність:"
 #define CTR_DICT_HASH_WITH_KEY    "хеш:"
 #define CTR_DICT_CHARACTERS       "символів"
-#define CTR_DICT_QUALIFY          "кваліфікація:"
+#define CTR_DICT_QUALIFIER_SET          "кваліфікація:"
 #define CTR_DICT_QUALIFIER    "кваліфікація"
 #define CTR_DICT_NEW_SET          "нове:"
 #define CTR_DICT_HOUR             "година"

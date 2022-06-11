@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "tidiness:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "tecken"
-#define CTR_DICT_QUALIFY          "kvalificera:"
+#define CTR_DICT_QUALIFIER_SET          "kvalificera:"
 #define CTR_DICT_QUALIFIER    "kompetens"
 #define CTR_DICT_NEW_SET          "_ny:"
 #define CTR_DICT_HOUR             "timme"

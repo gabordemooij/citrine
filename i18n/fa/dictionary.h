@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "_مرتب سازی:"
 #define CTR_DICT_HASH_WITH_KEY    "هش:"
 #define CTR_DICT_CHARACTERS       "شخصیت ها"
-#define CTR_DICT_QUALIFY          "واجد شرایط شدن:"
+#define CTR_DICT_QUALIFIER_SET          "واجد شرایط شدن:"
 #define CTR_DICT_QUALIFIER    "صلاحیت"
 #define CTR_DICT_NEW_SET          "_جدید:"
 #define CTR_DICT_HOUR             "ساعت"

@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "düzenlilik:"
 #define CTR_DICT_HASH_WITH_KEY    "karma:"
 #define CTR_DICT_CHARACTERS       "karakterler"
-#define CTR_DICT_QUALIFY          "nitelemek:"
+#define CTR_DICT_QUALIFIER_SET          "nitelemek:"
 #define CTR_DICT_QUALIFIER    "vasıf"
 #define CTR_DICT_NEW_SET          "_yeni:"
 #define CTR_DICT_HOUR             "saat"

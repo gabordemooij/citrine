@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "tidty:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "karaktè"
-#define CTR_DICT_QUALIFY          "kalifye:"
+#define CTR_DICT_QUALIFIER_SET          "kalifye:"
 #define CTR_DICT_QUALIFIER    "kalifikasyon"
 #define CTR_DICT_NEW_SET          "_nouvo:"
 #define CTR_DICT_HOUR             "èdtan"

@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "sakoptība:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "rakstzīmes"
-#define CTR_DICT_QUALIFY          "kvalificēties:"
+#define CTR_DICT_QUALIFIER_SET          "kvalificēties:"
 #define CTR_DICT_QUALIFIER    "kvalifikācija"
 #define CTR_DICT_NEW_SET          "_jauns:"
 #define CTR_DICT_HOUR             "stunda"

@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE            "tvarka:"
 #define CTR_DICT_HASH_WITH_KEY   "maišyti:"
 #define CTR_DICT_CHARACTERS      "simboliai"
-#define CTR_DICT_QUALIFY         "tinka:"
+#define CTR_DICT_QUALIFIER_SET         "tinka:"
 #define CTR_DICT_QUALIFIER   "kvalifikacija"
 #define CTR_DICT_NEW_SET         "naujas:"
 #define CTR_DICT_HOUR            "valanda"

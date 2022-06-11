@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "स्वच्छता:"
 #define CTR_DICT_HASH_WITH_KEY    "हॅश:"
 #define CTR_DICT_CHARACTERS       "वर्ण"
-#define CTR_DICT_QUALIFY          "पात्र:"
+#define CTR_DICT_QUALIFIER_SET          "पात्र:"
 #define CTR_DICT_QUALIFIER    "पात्रता"
 #define CTR_DICT_NEW_SET          "_नवीन:"
 #define CTR_DICT_HOUR             "तास"

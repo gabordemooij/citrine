@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "slacht:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "carachtair"
-#define CTR_DICT_QUALIFY          "cáiliú:"
+#define CTR_DICT_QUALIFIER_SET          "cáiliú:"
 #define CTR_DICT_QUALIFIER    "cáilíocht"
 #define CTR_DICT_NEW_SET          "_nua:"
 #define CTR_DICT_HOUR             "uair an chloig"

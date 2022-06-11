@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "puhtus:"
 #define CTR_DICT_HASH_WITH_KEY    "räsi:"
 #define CTR_DICT_CHARACTERS       "tegelased"
-#define CTR_DICT_QUALIFY          "kvalifitseeruma:"
+#define CTR_DICT_QUALIFIER_SET          "kvalifitseeruma:"
 #define CTR_DICT_QUALIFIER    "kvalifikatsioon"
 #define CTR_DICT_NEW_SET          "_uus:"
 #define CTR_DICT_HOUR             "tund"

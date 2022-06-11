@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "pulita__:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "karattri"
-#define CTR_DICT_QUALIFY          "jikkwalifika:"
+#define CTR_DICT_QUALIFIER_SET          "jikkwalifika:"
 #define CTR_DICT_QUALIFIER    "kwalifikazzjoni"
 #define CTR_DICT_NEW_SET          "_ġdid:"
 #define CTR_DICT_HOUR             "siegħa"

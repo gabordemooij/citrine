@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "litaba:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "libapali"
-#define CTR_DICT_QUALIFY          "tšoaneleha:"
+#define CTR_DICT_QUALIFIER_SET          "tšoaneleha:"
 #define CTR_DICT_QUALIFIER    "tšoaneleho"
 #define CTR_DICT_NEW_SET          "_ncha:"
 #define CTR_DICT_HOUR             "hora"

@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "صاف گوئی:"
 #define CTR_DICT_HASH_WITH_KEY    "ہیش:"
 #define CTR_DICT_CHARACTERS       "حروف"
-#define CTR_DICT_QUALIFY          "اہل:"
+#define CTR_DICT_QUALIFIER_SET          "اہل:"
 #define CTR_DICT_QUALIFIER    "قابلیت"
 #define CTR_DICT_NEW_SET          "_نئی:"
 #define CTR_DICT_HOUR             "گھنٹے"

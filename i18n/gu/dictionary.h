@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "સુવ્યવસ્થિતતા:"
 #define CTR_DICT_HASH_WITH_KEY    "હેશ:"
 #define CTR_DICT_CHARACTERS       "અક્ષરો"
-#define CTR_DICT_QUALIFY          "લાયક:"
+#define CTR_DICT_QUALIFIER_SET          "લાયક:"
 #define CTR_DICT_QUALIFIER    "લાયકાત"
 #define CTR_DICT_NEW_SET          "_નવું:"
 #define CTR_DICT_HOUR             "કલાક"

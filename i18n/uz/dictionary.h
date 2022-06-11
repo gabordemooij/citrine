@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "tozalik:"
 #define CTR_DICT_HASH_WITH_KEY    "xesh:"
 #define CTR_DICT_CHARACTERS       "belgilar"
-#define CTR_DICT_QUALIFY          "malakasi:"
+#define CTR_DICT_QUALIFIER_SET          "malakasi:"
 #define CTR_DICT_QUALIFIER    "malaka"
 #define CTR_DICT_NEW_SET          "_yangi:"
 #define CTR_DICT_HOUR             "soat"

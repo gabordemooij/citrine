@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "శుభ్రముచేసి క్రమముగా ఉంచు:"
 #define CTR_DICT_HASH_WITH_KEY    "హాష్:"
 #define CTR_DICT_CHARACTERS       "అక్షరాలు"
-#define CTR_DICT_QUALIFY          "అర్హత:"
+#define CTR_DICT_QUALIFIER_SET          "అర్హత:"
 #define CTR_DICT_QUALIFIER    "క్వాలిఫికేషన్"
 #define CTR_DICT_NEW_SET          "_కొత్త:"
 #define CTR_DICT_HOUR             "గంట"

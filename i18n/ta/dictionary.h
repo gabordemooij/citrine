@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "நேர்த்தி:"
 #define CTR_DICT_HASH_WITH_KEY    "ஹாஷ்:"
 #define CTR_DICT_CHARACTERS       "எழுத்துக்கள்"
-#define CTR_DICT_QUALIFY          "தகுதி:"
+#define CTR_DICT_QUALIFIER_SET          "தகுதி:"
 #define CTR_DICT_QUALIFIER    "தகுதி"
 #define CTR_DICT_NEW_SET          "_புதியது:"
 #define CTR_DICT_HOUR             "மணி"

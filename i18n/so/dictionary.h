@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "wanaagsan:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "jilayaasha"
-#define CTR_DICT_QUALIFY          "uqalma:"
+#define CTR_DICT_QUALIFIER_SET          "uqalma:"
 #define CTR_DICT_QUALIFIER    "shahaadada"
 #define CTR_DICT_NEW_SET          "_cusub:"
 #define CTR_DICT_HOUR             "saac"

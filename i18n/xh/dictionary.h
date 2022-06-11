@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "_umyalezo:"
 #define CTR_DICT_HASH_WITH_KEY    "ukukhangela:"
 #define CTR_DICT_CHARACTERS       "abalinganiswa"
-#define CTR_DICT_QUALIFY          "lungela:"
+#define CTR_DICT_QUALIFIER_SET          "lungela:"
 #define CTR_DICT_QUALIFIER    "isiqinisekiso"
 #define CTR_DICT_NEW_SET          "entsha:"
 #define CTR_DICT_HOUR             "yure"

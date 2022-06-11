@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE         "подход:"
 #define CTR_DICT_HASH_WITH_KEY   "хэш:"
 #define CTR_DICT_CHARACTERS      "им бэлиэлэр"
-#define CTR_DICT_QUALIFY         "ойуулаан ойуулааһын:"
+#define CTR_DICT_QUALIFIER_SET         "ойуулаан ойуулааһын:"
 #define CTR_DICT_QUALIFIER       "ойуулаан ойуулааһын"
 #define CTR_DICT_NEW_SET         "саҥа набор:"
 #define CTR_DICT_HOUR            "час"

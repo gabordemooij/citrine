@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "tidiness:"
 #define CTR_DICT_HASH_WITH_KEY    "hasah:"
 #define CTR_DICT_CHARACTERS       "aksara"
-#define CTR_DICT_QUALIFY          "cocog:"
+#define CTR_DICT_QUALIFIER_SET          "cocog:"
 #define CTR_DICT_QUALIFIER    "kualifikasi"
 #define CTR_DICT_NEW_SET          "_anyar:"
 #define CTR_DICT_HOUR             "jam"

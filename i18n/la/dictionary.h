@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "tidiness:"
 #define CTR_DICT_HASH_WITH_KEY    "nullam:"
 #define CTR_DICT_CHARACTERS       "characteribus"
-#define CTR_DICT_QUALIFY          "species:"
+#define CTR_DICT_QUALIFIER_SET          "species:"
 #define CTR_DICT_QUALIFIER    "absolute"
 #define CTR_DICT_NEW_SET          "_novus:"
 #define CTR_DICT_HOUR             "hora"

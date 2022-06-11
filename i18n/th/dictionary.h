@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "ความเป็นระเบียบเรียบร้อย:"
 #define CTR_DICT_HASH_WITH_KEY    "กัญชา:"
 #define CTR_DICT_CHARACTERS       "ตัวละคร"
-#define CTR_DICT_QUALIFY          "มีสิทธิ์ได้รับ:"
+#define CTR_DICT_QUALIFIER_SET          "มีสิทธิ์ได้รับ:"
 #define CTR_DICT_QUALIFIER    "คุณสมบัติ"
 #define CTR_DICT_NEW_SET          "_ใหม่:"
 #define CTR_DICT_HOUR             "ชั่วโมง"

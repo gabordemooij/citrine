@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "irohin:"
 #define CTR_DICT_HASH_WITH_KEY    "elile__:"
 #define CTR_DICT_CHARACTERS       "ohun kikọ"
-#define CTR_DICT_QUALIFY          "_yẹ:"
+#define CTR_DICT_QUALIFIER_SET          "_yẹ:"
 #define CTR_DICT_QUALIFIER    "afijẹẹri"
 #define CTR_DICT_NEW_SET          "_tuntun:"
 #define CTR_DICT_HOUR             "wakati"

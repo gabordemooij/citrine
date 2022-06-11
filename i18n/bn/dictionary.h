@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "পারিপাট্য:"
 #define CTR_DICT_HASH_WITH_KEY    "হ্যাশ:"
 #define CTR_DICT_CHARACTERS       "চরিত্র"
-#define CTR_DICT_QUALIFY          "যোগ্যতা:"
+#define CTR_DICT_QUALIFIER_SET          "যোগ্যতা:"
 #define CTR_DICT_QUALIFIER    "যোগ্যতা"
 #define CTR_DICT_NEW_SET          "_নতুন:"
 #define CTR_DICT_HOUR             "ঘন্টা"

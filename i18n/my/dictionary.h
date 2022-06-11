@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "သပ်ရပ်မှု__:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "အက္ခရာများ"
-#define CTR_DICT_QUALIFY          "အရည်အချင်းပြည့်မှီ:"
+#define CTR_DICT_QUALIFIER_SET          "အရည်အချင်းပြည့်မှီ:"
 #define CTR_DICT_QUALIFIER    "အရည်အချင်း"
 #define CTR_DICT_NEW_SET          "_အသစ်:"
 #define CTR_DICT_HOUR             "နာရီ"

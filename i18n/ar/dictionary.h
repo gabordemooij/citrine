@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "طهارة:"
 #define CTR_DICT_HASH_WITH_KEY    "التجزئة:"
 #define CTR_DICT_CHARACTERS       "الشخصيات"
-#define CTR_DICT_QUALIFY          "تأهل:"
+#define CTR_DICT_QUALIFIER_SET          "تأهل:"
 #define CTR_DICT_QUALIFIER    "المؤهل"
 #define CTR_DICT_NEW_SET          "_جديد:"
 #define CTR_DICT_HOUR             "ساعة"

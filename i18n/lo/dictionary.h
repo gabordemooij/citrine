@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "ກະທັດຮັດ:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "ຕົວລະຄອນ"
-#define CTR_DICT_QUALIFY          "ມີເງື່ອນໄຂ:"
+#define CTR_DICT_QUALIFIER_SET          "ມີເງື່ອນໄຂ:"
 #define CTR_DICT_QUALIFIER    "ຄຸນວຸດທິ"
 #define CTR_DICT_NEW_SET          "_ໃຫມ່:"
 #define CTR_DICT_HOUR             "ຊົ່ວໂມງ"

@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "ንፅህና__:"
 #define CTR_DICT_HASH_WITH_KEY    "ሃሽ:"
 #define CTR_DICT_CHARACTERS       "ቁምፊዎች"
-#define CTR_DICT_QUALIFY          "ብቁ__:"
+#define CTR_DICT_QUALIFIER_SET          "ብቁ__:"
 #define CTR_DICT_QUALIFIER    "ብቃት"
 #define CTR_DICT_NEW_SET          "አዲስ__:"
 #define CTR_DICT_HOUR             "ሰአት"

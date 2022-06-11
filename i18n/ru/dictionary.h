@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE            "выбрать управление памятью:"
 #define CTR_DICT_HASH_WITH_KEY   "хэш:"
 #define CTR_DICT_CHARACTERS      "символы"
-#define CTR_DICT_QUALIFY         "квалификация:"
+#define CTR_DICT_QUALIFIER_SET         "квалификация:"
 #define CTR_DICT_QUALIFIER   "квалифицировать"
 #define CTR_DICT_NEW_SET         "новый набор:"
 #define CTR_DICT_HOUR            "час"

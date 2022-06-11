@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "labarai:"
 #define CTR_DICT_HASH_WITH_KEY    "zanta:"
 #define CTR_DICT_CHARACTERS       "haruffa"
-#define CTR_DICT_QUALIFY          "cancanta:"
+#define CTR_DICT_QUALIFIER_SET          "cancanta:"
 #define CTR_DICT_QUALIFIER    "cancanta"
 #define CTR_DICT_NEW_SET          "_sabo:"
 #define CTR_DICT_HOUR             "awa"

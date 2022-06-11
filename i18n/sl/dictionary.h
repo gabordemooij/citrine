@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "urejenost:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "znakov"
-#define CTR_DICT_QUALIFY          "kvalificirati:"
+#define CTR_DICT_QUALIFIER_SET          "kvalificirati:"
 #define CTR_DICT_QUALIFIER    "kvalifikacija"
 #define CTR_DICT_NEW_SET          "_novo:"
 #define CTR_DICT_HOUR             "uro"

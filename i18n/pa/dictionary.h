@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "ਸਾਵਧਾਨ:"
 #define CTR_DICT_HASH_WITH_KEY    "ਹੈਸ਼:"
 #define CTR_DICT_CHARACTERS       "ਅੱਖਰ"
-#define CTR_DICT_QUALIFY          "ਯੋਗ:"
+#define CTR_DICT_QUALIFIER_SET          "ਯੋਗ:"
 #define CTR_DICT_QUALIFIER    "ਯੋਗਤਾ"
 #define CTR_DICT_NEW_SET          "_ਨਵਾਂ:"
 #define CTR_DICT_HOUR             "ਘੰਟਾ"

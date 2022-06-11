@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "ergonomia:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "karaktere"
-#define CTR_DICT_QUALIFY          "kualifikohen:"
+#define CTR_DICT_QUALIFIER_SET          "kualifikohen:"
 #define CTR_DICT_QUALIFIER    "kualifikim"
 #define CTR_DICT_NEW_SET          "_i ri:"
 #define CTR_DICT_HOUR             "orë"

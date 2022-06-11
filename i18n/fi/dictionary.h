@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "siisteys:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "merkkiä"
-#define CTR_DICT_QUALIFY          "pätevöityä:"
+#define CTR_DICT_QUALIFIER_SET          "pätevöityä:"
 #define CTR_DICT_QUALIFIER    "pätevyys"
 #define CTR_DICT_NEW_SET          "_uusi:"
 #define CTR_DICT_HOUR             "tunnin"
