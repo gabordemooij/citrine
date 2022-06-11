@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "ukulungela:"
 #define CTR_DICT_HASH_WITH_KEY    "hashi:"
 #define CTR_DICT_CHARACTERS       "izinhlamvu"
-#define CTR_DICT_QUALIFY          "_bamba:"
+#define CTR_DICT_QUALIFIER_SET          "_bamba:"
 #define CTR_DICT_QUALIFIER    "isiqu"
 #define CTR_DICT_NEW_SET          "_okusha:"
 #define CTR_DICT_HOUR             "ihora"

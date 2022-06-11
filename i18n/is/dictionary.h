@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "snyrtimenni:"
 #define CTR_DICT_HASH_WITH_KEY    "kjötkássa:"
 #define CTR_DICT_CHARACTERS       "persónur"
-#define CTR_DICT_QUALIFY          "hæfi:"
+#define CTR_DICT_QUALIFIER_SET          "hæfi:"
 #define CTR_DICT_QUALIFIER    "hæfi"
 #define CTR_DICT_NEW_SET          "_nýtt:"
 #define CTR_DICT_HOUR             "klukkutíma"

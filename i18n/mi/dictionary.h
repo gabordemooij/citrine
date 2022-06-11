@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "mania:"
 #define CTR_DICT_HASH_WITH_KEY    "raka:"
 #define CTR_DICT_CHARACTERS       "pūāhua"
-#define CTR_DICT_QUALIFY          "tohu:"
+#define CTR_DICT_QUALIFIER_SET          "tohu:"
 #define CTR_DICT_QUALIFIER    "tohu"
 #define CTR_DICT_NEW_SET          "_hou:"
 #define CTR_DICT_HOUR             "haora"

@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "taclusrwydd:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "cymeriadau"
-#define CTR_DICT_QUALIFY          "yn gymwys:"
+#define CTR_DICT_QUALIFIER_SET          "yn gymwys:"
 #define CTR_DICT_QUALIFIER    "cymhwyster"
 #define CTR_DICT_NEW_SET          "_newydd:"
 #define CTR_DICT_HOUR             "awr"

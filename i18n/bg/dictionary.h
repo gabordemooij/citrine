@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "спретнатост:"
 #define CTR_DICT_HASH_WITH_KEY    "хеш:"
 #define CTR_DICT_CHARACTERS       "знаци"
-#define CTR_DICT_QUALIFY          "отговарят на изискванията:"
+#define CTR_DICT_QUALIFIER_SET          "отговарят на изискванията:"
 #define CTR_DICT_QUALIFIER    "квалификация"
 #define CTR_DICT_NEW_SET          "ново:"
 #define CTR_DICT_HOUR             "час"

@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "පිළිවෙලට:"
 #define CTR_DICT_HASH_WITH_KEY    "හෑෂ්:"
 #define CTR_DICT_CHARACTERS       "අක්ෂර"
-#define CTR_DICT_QUALIFY          "සුදුසුකම්:"
+#define CTR_DICT_QUALIFIER_SET          "සුදුසුකම්:"
 #define CTR_DICT_QUALIFIER    "සුදුසුකම්"
 #define CTR_DICT_NEW_SET          "_නව:"
 #define CTR_DICT_HOUR             "පැය"

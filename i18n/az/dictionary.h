@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "səliqə:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "simvol"
-#define CTR_DICT_QUALIFY          "uyğun olmaq:"
+#define CTR_DICT_QUALIFIER_SET          "uyğun olmaq:"
 #define CTR_DICT_QUALIFIER    "ixtisas"
 #define CTR_DICT_NEW_SET          "_yeni:"
 #define CTR_DICT_HOUR             "saat"

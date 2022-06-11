@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "整洁度：__:"
 #define CTR_DICT_HASH_WITH_KEY    "杂凑：__:"
 #define CTR_DICT_CHARACTERS       "人物"
-#define CTR_DICT_QUALIFY          "合格：__:"
+#define CTR_DICT_QUALIFIER_SET          "合格：__:"
 #define CTR_DICT_QUALIFIER    "资质"
 #define CTR_DICT_NEW_SET          "新：__:"
 #define CTR_DICT_HOUR             "小时"

@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "цэвэр байдал:"
 #define CTR_DICT_HASH_WITH_KEY    "хэш:"
 #define CTR_DICT_CHARACTERS       "тэмдэгтүүд"
-#define CTR_DICT_QUALIFY          "шалгарах:"
+#define CTR_DICT_QUALIFIER_SET          "шалгарах:"
 #define CTR_DICT_QUALIFIER    "мэргэшлийн"
 #define CTR_DICT_NEW_SET          "_шинэ:"
 #define CTR_DICT_HOUR             "цаг"

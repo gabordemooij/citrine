@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "тазалық:"
 #define CTR_DICT_HASH_WITH_KEY    "хэш:"
 #define CTR_DICT_CHARACTERS       "таңбалар"
-#define CTR_DICT_QUALIFY          "біліктілігі:"
+#define CTR_DICT_QUALIFIER_SET          "біліктілігі:"
 #define CTR_DICT_QUALIFIER    "біліктілігі"
 #define CTR_DICT_NEW_SET          "_жаңа:"
 #define CTR_DICT_HOUR             "сағат"

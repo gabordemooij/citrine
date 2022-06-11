@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "단정함 :"
 #define CTR_DICT_HASH_WITH_KEY    "해시시:"
 #define CTR_DICT_CHARACTERS       "문자"
-#define CTR_DICT_QUALIFY          "자격 :"
+#define CTR_DICT_QUALIFIER_SET          "자격 :"
 #define CTR_DICT_QUALIFIER    "자격"
 #define CTR_DICT_NEW_SET          "_새로운:"
 #define CTR_DICT_HOUR             "_시"

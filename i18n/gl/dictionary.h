@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "ordenamento:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "personaxes"
-#define CTR_DICT_QUALIFY          "cualificar:"
+#define CTR_DICT_QUALIFIER_SET          "cualificar:"
 #define CTR_DICT_QUALIFIER    "cualificación"
 #define CTR_DICT_NEW_SET          "_novo:"
 #define CTR_DICT_HOUR             "hora"

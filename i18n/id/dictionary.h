@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "kerapian:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "karakter"
-#define CTR_DICT_QUALIFY          "memenuhi syarat:"
+#define CTR_DICT_QUALIFIER_SET          "memenuhi syarat:"
 #define CTR_DICT_QUALIFIER    "kualifikasi"
 #define CTR_DICT_NEW_SET          "_baru:"
 #define CTR_DICT_HOUR             "jam"

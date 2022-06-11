@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "gọn gàng:"
 #define CTR_DICT_HASH_WITH_KEY    "băm:"
 #define CTR_DICT_CHARACTERS       "nhân vật"
-#define CTR_DICT_QUALIFY          "đủ điều kiện:"
+#define CTR_DICT_QUALIFIER_SET          "đủ điều kiện:"
 #define CTR_DICT_QUALIFIER    "trình độ chuyên môn"
 #define CTR_DICT_NEW_SET          "_mới:"
 #define CTR_DICT_HOUR             "giờ"

@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "ភាពតានតឹង៖__:"
 #define CTR_DICT_HASH_WITH_KEY    "ហាស៖__:"
 #define CTR_DICT_CHARACTERS       "តួអក្សរ"
-#define CTR_DICT_QUALIFY          "លក្ខណៈសម្បត្តិ:"
+#define CTR_DICT_QUALIFIER_SET          "លក្ខណៈសម្បត្តិ:"
 #define CTR_DICT_QUALIFIER    "គុណវុឌ្ឍិ"
 #define CTR_DICT_NEW_SET          "ថ្មី៖__:"
 #define CTR_DICT_HOUR             "ម៉ោង"

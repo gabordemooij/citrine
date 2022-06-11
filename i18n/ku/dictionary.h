@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "tidiness:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "tîp"
-#define CTR_DICT_QUALIFY          "têgihanîn:"
+#define CTR_DICT_QUALIFIER_SET          "têgihanîn:"
 #define CTR_DICT_QUALIFIER    "zanyarî"
 #define CTR_DICT_NEW_SET          "_nşh:"
 #define CTR_DICT_HOUR             "seet"

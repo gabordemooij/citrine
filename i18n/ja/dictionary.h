@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "整頓：__:"
 #define CTR_DICT_HASH_WITH_KEY    "ハッシュ：__:"
 #define CTR_DICT_CHARACTERS       "キャラクター"
-#define CTR_DICT_QUALIFY          "資格：__:"
+#define CTR_DICT_QUALIFIER_SET          "資格：__:"
 #define CTR_DICT_QUALIFIER    "資格"
 #define CTR_DICT_NEW_SET          "新着：__:"
 #define CTR_DICT_HOUR             "_時間"

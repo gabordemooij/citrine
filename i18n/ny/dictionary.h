@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "nkhani:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "otchulidwa"
-#define CTR_DICT_QUALIFY          "khalani ndi:"
+#define CTR_DICT_QUALIFIER_SET          "khalani ndi:"
 #define CTR_DICT_QUALIFIER    "kuyenerera"
 #define CTR_DICT_NEW_SET          "_zatsopano:"
 #define CTR_DICT_HOUR             "ola"

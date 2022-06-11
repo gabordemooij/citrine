@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "ಅಚ್ಚುಕಟ್ಟಾದ:"
 #define CTR_DICT_HASH_WITH_KEY    "ಹ್ಯಾಶ್:"
 #define CTR_DICT_CHARACTERS       "ಅಕ್ಷರಗಳು"
-#define CTR_DICT_QUALIFY          "ಅರ್ಹತೆ:"
+#define CTR_DICT_QUALIFIER_SET          "ಅರ್ಹತೆ:"
 #define CTR_DICT_QUALIFIER    "ಅರ್ಹತೆ"
 #define CTR_DICT_NEW_SET          "_ಹೊಸದು:"
 #define CTR_DICT_HOUR             "ಗಂಟೆ"

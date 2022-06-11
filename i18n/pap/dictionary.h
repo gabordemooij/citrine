@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE            "pidi:" 
 #define CTR_DICT_HASH_WITH_KEY   "inkalkulabel:"
 #define CTR_DICT_CHARACTERS      "kantidat di literatura"
-#define CTR_DICT_QUALIFY         "cualifica:"
+#define CTR_DICT_QUALIFIER_SET         "cualifica:"
 #define CTR_DICT_QUALIFIER   "cualifica"
 #define CTR_DICT_NEW_SET         "notisia:"
 #define CTR_DICT_HOUR            "cuant'or"

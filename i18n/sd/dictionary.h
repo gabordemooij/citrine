@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE "وشخبري:"
 #define CTR_DICT_HASH_WITH_KEY "اش:"
 #define CTR_DICT_CHARACTERS "کرن"
-#define CTR_DICT_QUALIFY "ابليت:"
+#define CTR_DICT_QUALIFIER_SET "ابليت:"
 #define CTR_DICT_QUALIFIER "ابليت"
 #define CTR_DICT_NEW_SET "ئون:"
 #define CTR_DICT_HOUR "لاڪ"

@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "סידור:"
 #define CTR_DICT_HASH_WITH_KEY    "חשיש:"
 #define CTR_DICT_CHARACTERS       "תווים"
-#define CTR_DICT_QUALIFY          "להעפיל:"
+#define CTR_DICT_QUALIFIER_SET          "להעפיל:"
 #define CTR_DICT_QUALIFIER    "הכשרה"
 #define CTR_DICT_NEW_SET          "_חדש:"
 #define CTR_DICT_HOUR             "שעה"

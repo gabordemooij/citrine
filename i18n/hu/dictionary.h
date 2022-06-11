@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "tisztaság:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "karakterek"
-#define CTR_DICT_QUALIFY          "jogosultak:"
+#define CTR_DICT_QUALIFIER_SET          "jogosultak:"
 #define CTR_DICT_QUALIFIER    "képesítés"
 #define CTR_DICT_NEW_SET          "_új:"
 #define CTR_DICT_HOUR             "óra"

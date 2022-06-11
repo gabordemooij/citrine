@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "ځیرکتیا:"
 #define CTR_DICT_HASH_WITH_KEY    "هیش:"
 #define CTR_DICT_CHARACTERS       "لوښه"
-#define CTR_DICT_QUALIFY          "وړتیا:"
+#define CTR_DICT_QUALIFIER_SET          "وړتیا:"
 #define CTR_DICT_QUALIFIER    "وړتیا"
 #define CTR_DICT_NEW_SET          "_نوی:"
 #define CTR_DICT_HOUR             "ساعت"

@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE            "pořádnost:" 
 #define CTR_DICT_HASH_WITH_KEY   "heš:"
 #define CTR_DICT_CHARACTERS      "znaky"
-#define CTR_DICT_QUALIFY         "jednotka:"
+#define CTR_DICT_QUALIFIER_SET         "jednotka:"
 #define CTR_DICT_QUALIFIER   "jednotka"
 #define CTR_DICT_NEW_SET         "nový:"
 #define CTR_DICT_HOUR            "hodina"

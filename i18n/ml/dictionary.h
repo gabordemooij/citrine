@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "വൃത്തി:"
 #define CTR_DICT_HASH_WITH_KEY    "ഹാഷ്:"
 #define CTR_DICT_CHARACTERS       "പ്രതീകങ്ങൾ"
-#define CTR_DICT_QUALIFY          "യോഗ്യത:"
+#define CTR_DICT_QUALIFIER_SET          "യോഗ്യത:"
 #define CTR_DICT_QUALIFIER    "യോഗ്യത"
 #define CTR_DICT_NEW_SET          "_പുതിയത്:"
 #define CTR_DICT_HOUR             "മണിക്കൂർ"

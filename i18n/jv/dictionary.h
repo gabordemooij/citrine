@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "kesenengen:"
 #define CTR_DICT_HASH_WITH_KEY    "ngrembug:"
 #define CTR_DICT_CHARACTERS       "aksara"
-#define CTR_DICT_QUALIFY          "nduweni:"
+#define CTR_DICT_QUALIFIER_SET          "nduweni:"
 #define CTR_DICT_QUALIFIER    "kualifikasi"
 #define CTR_DICT_NEW_SET          "_anyar:"
 #define CTR_DICT_HOUR             "jam"

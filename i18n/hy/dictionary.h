@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "կոկիկություն__."
 #define CTR_DICT_HASH_WITH_KEY    "հեշ."
 #define CTR_DICT_CHARACTERS       "նիշ"
-#define CTR_DICT_QUALIFY          "որակավորում__."
+#define CTR_DICT_QUALIFIER_SET          "որակավորում__."
 #define CTR_DICT_QUALIFIER    "որակավորում"
 #define CTR_DICT_NEW_SET          "_նոր."
 #define CTR_DICT_HOUR             "ժամ"

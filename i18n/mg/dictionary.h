@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "tidiness:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "tarehin-tsoratra"
-#define CTR_DICT_QUALIFY          "mahafeno fepetra:"
+#define CTR_DICT_QUALIFIER_SET          "mahafeno fepetra:"
 #define CTR_DICT_QUALIFIER    "fahaizana"
 #define CTR_DICT_NEW_SET          "_vaovao:"
 #define CTR_DICT_HOUR             "ora"

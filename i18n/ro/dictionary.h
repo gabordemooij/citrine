@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE            "ordine:" 
 #define CTR_DICT_HASH_WITH_KEY   "hash:"
 #define CTR_DICT_CHARACTERS      "caractere"
-#define CTR_DICT_QUALIFY         "califică:"
+#define CTR_DICT_QUALIFIER_SET         "califică:"
 #define CTR_DICT_QUALIFIER   "calificare"
 #define CTR_DICT_NEW_SET         "crea:"
 #define CTR_DICT_HOUR            "oră"

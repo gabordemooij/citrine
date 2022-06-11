@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "ihe oma:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "odide"
-#define CTR_DICT_QUALIFY          "tozuru oke:"
+#define CTR_DICT_QUALIFIER_SET          "tozuru oke:"
 #define CTR_DICT_QUALIFIER    "ntozu"
 #define CTR_DICT_NEW_SET          "_ohuru:"
 #define CTR_DICT_HOUR             "elekere"

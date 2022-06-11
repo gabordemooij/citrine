@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "رەتلىك:"
 #define CTR_DICT_HASH_WITH_KEY    "hash:"
 #define CTR_DICT_CHARACTERS       "ھەرپلەر"
-#define CTR_DICT_QUALIFY          "لاياقەتلىك:"
+#define CTR_DICT_QUALIFIER_SET          "لاياقەتلىك:"
 #define CTR_DICT_QUALIFIER    "سالاھىيەت"
 #define CTR_DICT_NEW_SET          "_new:"
 #define CTR_DICT_HOUR             "سائەت"

@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE             "уредност:"
 #define CTR_DICT_HASH_WITH_KEY    "хасх:"
 #define CTR_DICT_CHARACTERS       "карактера"
-#define CTR_DICT_QUALIFY          "квалификовати:"
+#define CTR_DICT_QUALIFIER_SET          "квалификовати:"
 #define CTR_DICT_QUALIFIER    "квалификација"
 #define CTR_DICT_NEW_SET          "_Нова:"
 #define CTR_DICT_HOUR             "сат"

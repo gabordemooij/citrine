@@ -129,7 +129,7 @@
 #define CTR_DICT_GC_MODE            "geheugenbeheer:"
 #define CTR_DICT_HASH_WITH_KEY   "kluts:"
 #define CTR_DICT_CHARACTERS      "letters"
-#define CTR_DICT_QUALIFY         "kwalificatie:"
+#define CTR_DICT_QUALIFIER_SET         "kwalificatie:"
 #define CTR_DICT_QUALIFIER   "kwalificatie"
 #define CTR_DICT_NEW_SET         "nieuw:"
 #define CTR_DICT_HOUR            "uur"
