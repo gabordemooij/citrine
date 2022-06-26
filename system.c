@@ -417,7 +417,11 @@ ctr_object* ctr_program_include(ctr_object* myself, ctr_argument* argumentList) 
 	memcpy(pathStringCopy, path->value.svalue->value, vlen);
 	memcpy(pathStringCopy+vlen,"\0",1);
 	char* current_working_dir = ctr_heap_allocate(1000);
-	getcwd(current_working_dir, 1000);
+	if (getcwd(current_working_dir, 1000) == NULL) {
+		ctr_heap_free(current_working_dir);
+		ctr_heap_free(pathStringCopy);
+		return CtrStdNil;
+	}
 	prg = ctr_internal_readf(pathString, &program_size);
 	parsedCode = ctr_cparse_parse(prg, pathString);
 	if (parsedCode == NULL || (chdir(dirname(pathStringCopy)) != 0)) {
@@ -429,10 +433,14 @@ ctr_object* ctr_program_include(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_heap_free( prg );
 	ctr_cwlk_subprogram++;
 	ctr_cwlk_run(parsedCode);
-	chdir(current_working_dir);
+	ctr_cwlk_subprogram--;
+	if (chdir(current_working_dir)==-1) {
+		ctr_heap_free(current_working_dir);
+		ctr_heap_free(pathStringCopy);
+		return CtrStdNil;
+	}
 	ctr_heap_free(current_working_dir);
 	ctr_heap_free(pathStringCopy);
-	ctr_cwlk_subprogram--;
 	return myself;
 }
 
