@@ -8,8 +8,8 @@
 /**
  * Version information
  */
-#define CTR_VERSION "0.9.4"
-#define CTR_VERSION_NUM 94
+#define CTR_VERSION "0.9.5"
+#define CTR_VERSION_NUM 95
 
 
 #ifdef DIRSEPBACKSL
