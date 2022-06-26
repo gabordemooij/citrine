@@ -185,7 +185,7 @@ ctr_note* ctr_note_grab( int mark ) {
 void ctr_note_collect( char* remainder ) {
 	int qq;
 	int jj;
-	int k;
+	ctr_size k;
 	char* buff;
 	if (strlen(remainder)>CTR_TRANSLATE_MAX_WORD_LEN) {
 		ctr_print_error(CTR_TERR_LONG,1);
@@ -377,7 +377,7 @@ void ctr_translate_unload_dictionary(ctr_dict* dictionary) {
  */
 int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char context, char* remainder) {
 	int found = 0;
-	int i, p, q;
+	ctr_size i, p, q;
 	ctr_dict* entry;
 	char* buffer;
 	char* warning;
@@ -588,14 +588,14 @@ char* ctr_translate_number(char* codePointer) {
 	p = codePointer;
 	e = ctr_clex_code_pointer();
 	while( p < e ) {
-		if ( ctr_trans_d->wordLength <= ( e - p ) ) {
+		if ( ctr_trans_d->wordLength <= (ctr_size) ( e - p ) ) {
 			if ( strncmp( ctr_trans_d->word, p, ctr_trans_d->wordLength ) == 0 ) {
 				fwrite(ctr_trans_d->translation, ctr_trans_d->translationLength,1,stdout);
 				p += ctr_trans_d->wordLength;
 				continue;
 			}
 		}
-		if ( ctr_trans_x->wordLength <= ( e - p ) ) {
+		if ( ctr_trans_x->wordLength <= (ctr_size) ( e - p ) ) {
 			if ( strncmp( ctr_trans_x->word, p, ctr_trans_x->wordLength ) == 0 ) {
 				fwrite(ctr_trans_x->translation, ctr_trans_x->translationLength,1,stdout);
 				p += ctr_trans_x->wordLength;

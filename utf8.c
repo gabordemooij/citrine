@@ -35,7 +35,7 @@ ctr_size getBytesUtf8(char* strval, long startByte, ctr_size lenUChar) {
 	long i = 0;
 	long bytes = 0;
 	int s = 0;
-	int x = 0;
+	ctr_size x = 0;
 	long index = 0;
 	char c;
 	while(x < lenUChar) {

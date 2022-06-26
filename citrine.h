@@ -127,7 +127,7 @@ typedef struct ctr_string ctr_string;
  */
 struct ctr_map {
 	struct ctr_mapitem* head;
-	int size;
+	ctr_size size;
 };
 typedef struct ctr_map ctr_map;
 
@@ -280,6 +280,8 @@ extern char* ctr_mode_input_file;
 extern char* ctr_mode_dict_file;
 extern char* ctr_mode_hfile1;
 extern char* ctr_mode_hfile2;
+
+extern void ctr_cli_welcome();
 
 /**
  * Lexer functions

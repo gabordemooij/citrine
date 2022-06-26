@@ -292,9 +292,9 @@ ctr_size  lpods = 0 ;
 ctr_size  spodCount = 0;
 ctr_size  mpodCount = 0;
 ctr_size  lpodCount = 0;
-int        spod = 32;
-int        mpod = 64;
-int        lpod = 128;
+ctr_size  spod = 32;
+ctr_size  mpod = 64;
+ctr_size  lpod = 128;
 
 
 /**

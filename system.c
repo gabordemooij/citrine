@@ -63,7 +63,7 @@ void ctr_gc_mark(ctr_object* object) {
 	ctr_mapitem* item;
 	ctr_object* o;
 	ctr_object* k;
-	long i;
+	ctr_size i;
 	if (object->info.type == CTR_OBJECT_TYPE_OTARRAY) {
 		for (i = 0; i < object->value.avalue->head; i++) {
 			el = *(object->value.avalue->elements+i);

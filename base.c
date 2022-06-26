@@ -437,7 +437,7 @@ ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList )
 		return CtrStdNil;
 	}
 	ctr_size length = (int) ctr_array_count( arr,  NULL )->value.nvalue;
-	int i = 0;
+	ctr_size i = 0;
 	ctr_argument* args = ctr_heap_allocate( sizeof( ctr_argument ) );
 	ctr_argument* cur  = args;
 	for ( i = 0; i < length; i ++ ) {
@@ -1832,7 +1832,7 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
-	int32_t a = (int32_t) (fromPos->value.nvalue) - 1;
+	ctr_size a = (ctr_size) (fromPos->value.nvalue) - 1;
 	ctr_size textLength = ctr_getutf8len(myself->value.svalue->value, (ctr_size) myself->value.svalue->vlen);
 	if (a < 0) return CtrStdNil;
 	if (a >= textLength) return CtrStdNil;
@@ -1878,7 +1878,7 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
 	char* str = myself->value.svalue->value;
 	size_t  len = myself->value.svalue->vlen;
 	char* tstr = ctr_heap_allocate( len * sizeof( char ) );
-	int i=0;
+	ctr_size i=0;
 	for(i =0; i < len; i++) {
 		tstr[i] = toupper(str[i]);
 	}
@@ -1901,7 +1901,7 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
 	char* str = myself->value.svalue->value;
 	size_t len = myself->value.svalue->vlen;
 	char* tstr = ctr_heap_allocate( len * sizeof( char ) );
-	int i=0;
+	ctr_size i=0;
 	for(i =0; i < len; i++) {
 		tstr[i] = tolower(str[i]);
 	}
