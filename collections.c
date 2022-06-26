@@ -205,7 +205,7 @@ ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
  * ✎ write: (x join: ‘,’), stop.
  */
 ctr_object* ctr_array_join(ctr_object* myself, ctr_argument* argumentList) {
-	int i;
+	ctr_size i;
 	char* result = NULL;
 	ctr_size len = 0;
 	ctr_size pos;
@@ -541,7 +541,7 @@ ctr_object* ctr_array_splice(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherArray = argumentList->object;
 	ctr_object* newArray = ctr_array_new(CtrStdArray, NULL);
-	int i;
+	ctr_size i;
 	for(i = myself->value.avalue->tail; i<myself->value.avalue->head; i++) {
 		ctr_argument* pushArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		ctr_argument* elnumArg = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
@@ -684,7 +684,7 @@ ctr_object* ctr_array_sort(ctr_object* myself, ctr_argument* argumentList) {
  * ✎ write: y, stop.
  */
 ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList ) {
-	int i;
+	ctr_size i;
 	ctr_object* arrayElement;
 	ctr_argument* newArgumentList;
 	static uint8_t call_depth = 0;
@@ -729,7 +729,7 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
  */
 ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
 	size_t n;
-	int i;
+	ctr_size i;
 	ctr_argument* newArgumentList;
 	n = ctr_internal_cast2number( argumentList->object )->value.nvalue;
 	newArgumentList = ctr_heap_allocate( sizeof(ctr_argument) );
@@ -751,7 +751,8 @@ ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
  * ✎ write: y, stop.
  */
 ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList ) {
-	int found = -1, i = 0;
+	int found = -1;
+	ctr_size i = 0;
 	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
 	ctr_object* element;
 	for(i = myself->value.avalue->tail; i < myself->value.avalue->head; i++) {

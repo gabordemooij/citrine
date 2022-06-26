@@ -31,7 +31,7 @@ int fsize(char* filename) {
  * Export AST
  */
 void ctr_internal_export_tree(ctr_tnode* ti) {
-	int i;
+	ctr_size i;
 	ctr_tlistitem* li;
 	ctr_tnode* t;
 	li = ti->nodes;
