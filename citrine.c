@@ -169,6 +169,9 @@ int main(int argc, char* argv[]) {
 		fprintf( stderr, "[WARNING] Citrine has detected an internal memory leak of: %" PRIu64 " bytes.\n", ctr_gc_alloc );
 		exit(1);
 	}
+	if (CtrStdFlow && CtrStdFlow != CtrStdExit) {
+		exit(1);
+	}
 	exit(0);
 	return 0;
 }
