@@ -153,6 +153,9 @@ void ctr_heap_free_rest() {
 		ctr_heap_free( memBlocks[i].space );
 	}
 	ctr_heap_free( memBlocks );
+	memBlocks = NULL;
+	numberOfMemBlocks = 0;
+	maxNumberOfMemBlocks = 0;
 }
 
 
