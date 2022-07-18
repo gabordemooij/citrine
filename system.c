@@ -1679,13 +1679,10 @@ ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentL
  */
 ctr_object* ctr_slurp_obtain( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* commandObj;
-	//ctr_object* key;
-	//key = ctr_build_string_from_cstring( "command" );
 	commandObj = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring( "command" ), CTR_CATEGORY_PRIVATE_PROPERTY );
 	if ( commandObj == NULL ) {
 		commandObj = ctr_build_empty_string();
 	}
-	//ctr_internal_object_delete_property( myself, key, CTR_CATEGORY_PRIVATE_PROPERTY );
 	return commandObj;
 }
 
