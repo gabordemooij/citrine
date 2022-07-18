@@ -116,7 +116,7 @@ ctr_object* ctr_array_max(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ List ] each: [ Block ].
+ * [ List ] each: [ Block ]
  *
  * @example
  * ☞ x ≔ List ← 1 ; 2 ; 3.
@@ -172,7 +172,7 @@ ctr_object* ctr_array_new_and_push(ctr_object* myclass, ctr_argument* argumentLi
 
 /**
  * @def
- * [ List ] prepend: [ String ].
+ * [ List ] prepend: [ String ]
  * 
  * @example
  * ☞ x ≔ List ← 1 ; 2 ; 3.
@@ -198,7 +198,7 @@ ctr_object* ctr_array_unshift(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ List ] join: [ String ].
+ * [ List ] join: [ String ]
  *
  * @example
  * ☞ x ≔ List ← 1 ; 2 ; 3.
@@ -477,7 +477,7 @@ ctr_object* ctr_array_from_length(ctr_object* myself, ctr_argument* argumentList
 
 /**
  * @def
- * [ List ] replace: [ Number ] length: [ Number ] with: [ List ].
+ * [ List ] replace: [ Number ] length: [ Number ] with: [ List ]
  * 
  * @example
  * ☞ x ≔ List ← 1 ; 2 ; 3 ; 4 ; 5.
@@ -569,7 +569,7 @@ ctr_object* ctr_array_add(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ List ] by: [ List ].
+ * [ List ] by: [ List ]
  *
  * @example
  * ☞ x ≔ List ← ‘A’ ; ‘B’ ; ‘C’.
@@ -743,7 +743,7 @@ ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
 
 /**
  * @def
- * [ List ] find: [ Object ].
+ * [ List ] find: [ Object ]
  *
  * @example
  * ☞ x ≔ List ← 1 ; 2 ; 3.

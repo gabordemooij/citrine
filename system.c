@@ -377,7 +377,7 @@ ctr_object* ctr_program_tonumber(ctr_object* myself, ctr_argument* argumentList)
 
 /**
  * @def
- * [ Program ] string.
+ * [ Program ] string
  *
  * @example
  * ☞ x ≔ Program string.
@@ -660,7 +660,7 @@ ctr_object* ctr_program_waitforpassword(ctr_object* myself, ctr_argument* argume
 
 /**
  * @def
- * [ Program ] input.
+ * [ Program ] input
  *
  * @example
  * ☞ a ≔ Program input.
@@ -697,7 +697,7 @@ ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Program ] flush.
+ * [ Program ] flush
  *
  * @example
  * ✎ write: ‘Flush stdout buffer.’, stop.
@@ -1223,7 +1223,7 @@ ctr_object* ctr_clock_weekday( ctr_object* myself, ctr_argument* argumentList ) 
 
 /**
  * @def
- * [ Moment ] time.
+ * [ Moment ] time
  *
  * @example
  * ☞ t ≔ Moment new time.
@@ -1453,7 +1453,7 @@ ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, ui
 
 /**
  * @def
- * [ Moment ] add: [ Number ].
+ * [ Moment ] add: [ Number ]
  * 
  * @example
  * ☞ x ≔ Moment new.
@@ -1477,7 +1477,7 @@ ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
 
 /**
  * @def
- * [ Moment ] subtract: [ Number ].
+ * [ Moment ] subtract: [ Number ]
  * 
  * @example
  * ☞ x ≔ Moment new.
@@ -1640,7 +1640,7 @@ ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentL
  */
 
 /**
- * [Slurp] obtain.
+ * [Slurp] obtain
  * 
  * Obtains the string generated using the Slurp object.
  * A Slurp object collects all messages send to it and flushes its buffer while
