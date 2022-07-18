@@ -306,7 +306,7 @@ ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Object ] recursive.
+ * [ Object ] recursive
  *
  * @example
  * ☞ r ≔ Object new.
@@ -323,7 +323,7 @@ ctr_object* ctr_object_recursion(ctr_object* myself, ctr_argument* argumentList)
 
 /**
  * @def
- * [ Object ] do.
+ * [ Object ] do
  *
  * @example
  * ☞ x ≔ List ← 1 ; 2 ; 3.
@@ -337,7 +337,7 @@ ctr_object* ctr_object_do( ctr_object* myself, ctr_argument* argumentList ) {
 
 /**
  * @def
- * [ Object ] done.
+ * [ Object ] done
  *
  * @example
  * ☞ x ≔ List ← 1 ; 2 ; 3.
@@ -351,7 +351,7 @@ ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
 
 /**
  * @def
- * [ Object ] copy.
+ * [ Object ] copy
  *
  * @example
  * ☞ x ≔ 1.
@@ -382,7 +382,7 @@ ctr_object* ctr_string_copy( ctr_object* myself, ctr_argument* argumentList ) {
 /**
  * 
  * @def
- * [ Object ] case: [ Object ] do: [ Code ].
+ * [ Object ] case: [ Object ] do: [ Code ]
  *
  * @example
  * ☞ x ≔ ‘**’.
@@ -568,7 +568,7 @@ ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Object ] learn: [ String ] means: [ String ].
+ * [ Object ] learn: [ String ] means: [ String ]
  *
  * @example
  * Number learn: ‘-’ means: ‘+’ .
@@ -1686,7 +1686,7 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ String ] append: [ String ].
+ * [ String ] append: [ String ]
  *
  * @example
  * ☞ x ≔ ‘123’.
@@ -1723,7 +1723,7 @@ ctr_object* ctr_string_new(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ String ] code.
+ * [ String ] code
  *
  * @example
  * ☞ x ≔ ‘qwerty’.
@@ -1748,7 +1748,7 @@ ctr_object* ctr_string_to_code(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ String ] from: [ Number ] length: [ Number ].
+ * [ String ] from: [ Number ] length: [ Number ]
  *
  * @example
  * ☞ x ≔ ‘qwerty’ from: 2 length: 3.
@@ -1848,7 +1848,7 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ String ] find: [ String ].
+ * [ String ] find: [ String ]
  *
  * @example
  * ☞ x ≔ ‘abc’ find: ‘b’.
@@ -1869,7 +1869,7 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
 
 /**
  * @def
- * [ String ] uppercase.
+ * [ String ] uppercase
  *
  * @example
  * ✎ write: ‘abc’ uppercase, stop.
@@ -2168,7 +2168,7 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ String ] characters.
+ * [ String ] characters
  *
  * @example
  * ☞ x ≔ ‘123’ characters.
@@ -2366,7 +2366,7 @@ ctr_object* ctr_build_block(ctr_tnode* node) {
 
 /**
  * @def
- * [ Code ] run.
+ * [ Code ] run
  * 
  * @example
  * { ✎ write: ‘123’, stop. } run.
@@ -2491,7 +2491,7 @@ ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Code ] error: [ Object ].
+ * [ Code ] error: [ Object ]
  *
  * @example
  * {

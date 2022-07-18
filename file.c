@@ -265,7 +265,7 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ File ] list: [ String ].
+ * [ File ] list: [ String ]
  * 
  * @example
  * ☞ x ≔ File list: Path /usr games.
