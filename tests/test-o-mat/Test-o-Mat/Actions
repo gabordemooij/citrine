@@ -37,18 +37,24 @@ Actions on: ‘expect’ do: {
 }.
 
 Actions on: ‘record’ do: {
-	✎ write: ‘recording...’, stop.
 	☞ file ≔ ⚿ expect.
 	⚿ parameters each: { :name :value
 		file replace: name with: value.
 	}.
 	✎ write: file, stop.
 	☞ expectation file ≔ File new: file.
+
+	(expectation file exists?) true: {
+		✎ write: ‘Expected:’, stop.
+		✎ write: expectation file read, stop.
+	}.
+
 	☞ last ≔ ⛏ last.
 	✎ write: ‘Observed:’, stop.
 	✎ write: last observation remove surrounding spaces, stop.
 
 	Tests record true: {
+		✎ write: ‘recording...’, stop.
 		✎ write: ‘Is this expected? (y/n)’, stop.
 		☞ answer ≔ Nil.
 		{ answer ≔ Program ask. } while: { ↲ ((List ← ‘y’ ; ‘n’) find: answer) Nil?. }.
