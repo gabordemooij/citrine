@@ -1,12 +1,12 @@
-Koarde,Nûmer
-Koarde,Boolean
-Nûmer,Koarde
-Nûmer,Boolean
-Boolean,Nûmer
-Boolean,Nûmer
-Boolean,Koarde
-Boolean,Koarde
+Tekst,Nûmer
+Tekst,Beslissing
+Nûmer,Tekst
+Nûmer,Beslissing
+Beslissing,Nûmer
+Beslissing,Nûmer
+Beslissing,Tekst
+Beslissing,Tekst
 === String test ===
 123
-Falsk
-Wier
+Nee
+Ja

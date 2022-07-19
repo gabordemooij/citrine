@@ -1,11 +1,11 @@
 9
 a Objekt ‘Objekt’  is NOT Nil.
-a Boolean ‘Wier’  is NOT Nil.
-a Boolean ‘Falsk’  is NOT Nil.
-a Boolean ‘Falsk’  is NOT Nil.
+a Beslissing ‘Ja’  is NOT Nil.
+a Beslissing ‘Nee’  is NOT Nil.
+a Beslissing ‘Nee’  is NOT Nil.
 a Nûmer ‘1’  is NOT Nil.
 a Nûmer ‘0’  is NOT Nil.
-a Koarde ‘Str’  is NOT Nil.
-a Koarde ‘’  is NOT Nil.
-a Koade ‘Koade’  is NOT Nil.
+a Tekst ‘Str’  is NOT Nil.
+a Tekst ‘’  is NOT Nil.
+a Taak ‘Taak’  is NOT Nil.
 but.. Nil is.. certainly NIL!

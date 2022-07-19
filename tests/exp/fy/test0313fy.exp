@@ -1,10 +1,10 @@
 There are 2 chairs in the sunny garden.
 A rubber duck swims in the pool.
-Is there a shed in the garden? Well.. Falsk
+Is there a shed in the garden? Well.. Nee
 In the garden you smell the fragrance of tulips and roses and lillies.
-The garden is Nul meters long.
-Luckily, this day, there are Nul wasps in the garden.
-The dog named Nul sleeps under the tree.
+The garden is Neat meters long.
+Luckily, this day, there are Neat wasps in the garden.
+The dog named Neat sleeps under the tree.
 a\"bb\"ccc\"
-(Kaart nij) put:((Kaart nij) put:Nul at:‘dog’, put:Nul at:‘insects’, put:((Kaart nij) put:15 at:‘length’, put:8 at:‘width’) at:‘size’, put:(List ← ‘tulips’ ; ‘roses’ ; ‘lillies’) at:‘flower’, put:Falsk at:‘shed’, put:Wier at:‘pool’, put:2 at:‘chairs’) at:‘garden’
+(List nĳ) set: ((List nĳ) set: Neat by:‘dog’, set: Neat by:‘insects’, set: ((List nĳ) set: 15 by:‘length’, set: 8 by:‘width’) by:‘size’, set: (Searje ← ‘tulips’ ; ‘roses’ ; ‘lillies’) by:‘flower’, set: Nee by:‘shed’, set: Ja by:‘pool’, set: 2 by:‘chairs’) by:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}
