@@ -225,6 +225,8 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 		fscanf( f1, "#define %180s \"%180[^\"]\"\n", key1, word ) > 0 &&
 		fscanf( f2, "#define %180s \"%180[^\"]\"\n", key2, translation) > 0
 	) {
+		/* Skip strings that are marked for usage in code generation only - not for translation */
+		if (strstr(key1, "_CODEGEN_")!=NULL || strstr(key2, "_CODEGEN_")!=NULL) continue;
 		if (strlen(key1)!=strlen(key2) || strncmp(key1, key2, strlen(key1))!=0) {
 			format = CTR_TERR_KMISMAT;
 			buffer = ctr_heap_allocate(600);
