@@ -44,7 +44,7 @@ Actions on: ‘record’ do: {
 	✎ write: file, stop.
 	☞ expectation file ≔ File new: file.
 
-	(expectation file exists?) true: {
+	(expectation file exists) true: {
 		✎ write: ‘Expected:’, stop.
 		✎ write: expectation file read, stop.
 	}.
