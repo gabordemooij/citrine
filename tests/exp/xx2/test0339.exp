@@ -8,6 +8,6 @@ List ← ((Map new) put:‘A‘’’ at:‘Object’)
 List ← ‘A\‘\’’ ; ‘B’
 (Map new) put:‘A\‘\’’ at:‘A\‘\’’
 List ← (List ← ‘A\‘\’’)
-(Map new) put:((Map new) put:‘A\‘\’’ at:‘A\‘\’’) at:‘(Map new) put:\‘A’
-(Map new) put:(List ← ‘A\‘\’’) at:‘List ← \‘A’
+(Map new) put:((Map new) put:‘A\‘\’’ at:‘A\‘\’’) at:‘(Map new) put:\‘A\\‘\\’\’ at:\‘A\\‘\\’\’’
+(Map new) put:(List ← ‘A\‘\’’) at:‘List ← \‘A\\‘\\’\’’
 List ← ((Map new) put:‘A\‘\’’ at:‘A\‘\’’)
