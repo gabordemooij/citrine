@@ -31,6 +31,6 @@
 ☞ one way languages ≔ List ← ‘hy’ ; ‘en’ ; ‘en_us’.
 
 ☞ variations ≔ 	memory management modes + languages.
-☞ number of tests ≔ 365.
+☞ number of tests ≔ 366.
 
 ☞ base path for tests ≔ ‘../../’.

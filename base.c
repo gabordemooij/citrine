@@ -1730,21 +1730,39 @@ ctr_object* ctr_string_new(ctr_object* myself, ctr_argument* argumentList) {
  * ✎ write: x code, stop.
  */
 ctr_object* ctr_string_to_code(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_argument* newArgumentList;
-	ctr_object* string = ctr_build_empty_string();
-	newArgumentList = ctr_heap_allocate( sizeof( ctr_argument ) );
-	newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_OPEN );
-	string = ctr_string_append( string, newArgumentList );
-	newArgumentList->object = myself;
-	newArgumentList->object = ctr_string_quotes_escape( newArgumentList->object, newArgumentList );
-	string = ctr_string_append( string, newArgumentList );
-	newArgumentList->object = ctr_build_string_from_cstring( CTR_DICT_QUOT_CLOSE );
-	string = ctr_string_append( string, newArgumentList );
-	ctr_heap_free(newArgumentList);
-	return string;
+	ctr_object* answer;
+	ctr_size i;
+	ctr_size j;
+	ctr_size q;
+	char* str;
+	char* quotes = (char*) ctr_heap_allocate( myself->value.svalue->vlen );
+	ctr_size len = myself->value.svalue->vlen;
+	j = 0;
+	for(i = 0; i < myself->value.svalue->vlen; i++ ) {
+		if (
+			strncmp((myself->value.svalue->value + i),  CTR_DICT_QUOT_OPEN,  ctr_clex_keyword_qo_len)==0 ||
+			strncmp((myself->value.svalue->value + i),  CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len)==0
+		) {
+			len++;
+			quotes[j++] = i;
+		}
+	}
+	str = (char*) ctr_heap_allocate( len + ctr_clex_keyword_qo_len + ctr_clex_keyword_qc_len + 1 );
+	q = j; j = 0;
+	strcpy(str, CTR_DICT_QUOT_OPEN);
+	for(i = 0; i < myself->value.svalue->vlen; i++ ) {
+		if (j < q && i == quotes[j]) {
+			str[ctr_clex_keyword_qo_len + i + j] = '\\';
+			j++;
+		}
+		str[ctr_clex_keyword_qo_len + i + j] = myself->value.svalue->value[i];
+	}
+	strcpy((str + ctr_clex_keyword_qo_len + i + j), CTR_DICT_QUOT_CLOSE);
+	answer = ctr_build_string_from_cstring( str );
+	ctr_heap_free(quotes);
+	ctr_heap_free(str);
+	return answer;
 }
-
-
 
 /**
  * @def
@@ -2280,47 +2298,6 @@ ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentL
 	}
 	return ctr_build_bool( 0 );
 }
-
- /**
- * @internal
- *
- * Escapes all single quotes in a string. Sending this message to a
- * string will cause all single quotes (') to be replaced with (\').
- */
-ctr_object* ctr_string_quotes_escape(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* answer;
-	char* str;
-	ctr_size len;
-	ctr_size i;
-	ctr_size j;
-	len = myself->value.svalue->vlen;
-	for( i = 0; i < myself->value.svalue->vlen; i++ ) {
-		if (*(myself->value.svalue->value + i)=='\\') continue;
-		if (
-		strncmp( myself->value.svalue->value + i, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len) == 0 ||
-		strncmp( myself->value.svalue->value + i, CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len) == 0
-		) {
-		len++;
-		}
-	}
-	str = ctr_heap_allocate( len + 1 );
-	j = 0;
-	for( i = 0; i < myself->value.svalue->vlen; i++ ) {
-		if (*(myself->value.svalue->value + i)=='\\') continue;
-			if (
-			strncmp( myself->value.svalue->value + i, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len) == 0 ||
-			strncmp( myself->value.svalue->value + i, CTR_DICT_QUOT_CLOSE, ctr_clex_keyword_qc_len) == 0
-			) {
-						str[j+i] = '\\';
-						j++;
-			}
-			str[j+i] = *(myself->value.svalue->value + i);
-	}
-	answer = ctr_build_string_from_cstring( str );
-	ctr_heap_free( str );
-	return answer;
-}
-
 
 /**
  * @def

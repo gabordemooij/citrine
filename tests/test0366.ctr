@@ -1,0 +1,10 @@
+‘SINGLE_LANGUAGE’.
+✎ write: ‘ABC’ code, stop.
+✎ write: ‘123‘ABC’123’ code, stop.
+✎ write: ‘123\‘ABC\’123’ code, stop.
+✎ write: ‘123\\‘ABC\\’123’ code, stop.
+✎ write: ‘123\ABC\123’ code, stop.
+✎ write: ‘123\\ABC\\123’ code, stop.
+✎ write: ‘123\\\‘ABC\\\’123’ code, stop.
+✎ write: ‘123\\\‘ABC\\\‘123’ code, stop.
+✎ write: ‘123\\\\\‘ABC\\\\\’123’ code, stop.
