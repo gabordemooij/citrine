@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <math.h>
 #include "citrine.h"
-#include "siphash.h"
 
 ctr_size ctr_program_length;
 uint64_t    ctr_cwlk_subprogram;

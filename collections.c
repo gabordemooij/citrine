@@ -1,6 +1,4 @@
-#include <string.h>
 #include "citrine.h"
-
 
 /**
  * @def

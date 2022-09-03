@@ -1,20 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <errno.h>
-#include <sys/file.h>
-#include <sys/stat.h>
-#include <dirent.h>
 #include "citrine.h"
-
-/**
- * Path Separator.
- */
-const char* PATH_SEP =
-#if defined _WIN32 || defined __CYGWIN__
-	"\\";
-#else
-	"/";
-#endif
 
 /**
  * @def
@@ -312,14 +296,17 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 		putArgumentList->object = ctr_build_string_from_cstring(entry->d_name);
 		ctr_map_put(fileListItem, putArgumentList);
 		putArgumentList->next->object = ctr_build_string_from_cstring( CTR_MSG_DSC_TYPE );
-		if ((strlen(fullPath) + strlen(PATH_SEP) + strlen(entry->d_name)) > PATH_MAX) {
+		if ((strlen(CTR_DIRSEP) + strlen(CTR_DIRSEP) + strlen(entry->d_name)) > PATH_MAX) {
 			continue;
 		}
 		strcpy( fullPath, pathValue );
-		strcat( fullPath, PATH_SEP );
+		strcat( fullPath, CTR_DIRSEP );
 		strcat( fullPath, entry->d_name);
 		if (realpath( fullPath, pathBuf )) {
 		/* lstat is slow, but we have no choice, there is no other way to keep this portable */
+		#ifdef WIN
+			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_FILE );
+		#else
 		lstat(pathBuf, &st);
 		if (S_ISREG(st.st_mode))
 			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_FILE );
@@ -337,6 +324,7 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_NPIP );
 		else
 			putArgumentList->object = ctr_build_string_from_cstring( CTR_MSG_DSC_OTHR );
+		#endif
 		ctr_map_put(fileListItem, putArgumentList);
 		addArgumentList->object = fileListItem;
 		ctr_array_push(fileList, addArgumentList);

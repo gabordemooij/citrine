@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <stdint.h>
-#include <locale.h>
 #include "citrine.h"
 
 const int CTR_TRANSLATE_MAX_WORD_LEN = 180;

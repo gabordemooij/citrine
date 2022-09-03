@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <unistd.h>
-#include <dlfcn.h>
 #include "citrine.h"
 
 char* np;
@@ -39,7 +34,7 @@ void ctr_internal_export_tree(ctr_tnode* ti) {
 	while(1) {
 		printf( "%d;%d;", t->type, t->modifier );
 		if (t->value != NULL) {
-			printf("%lu;",t->vlen);
+			printf("%lu;", (unsigned long) t->vlen);
 			for(i = 0; i < t->vlen; i++) {
 				putchar( t->value[i] );
 			}
@@ -86,6 +81,8 @@ void ctr_internal_export_tree(ctr_tnode* ti) {
  * On loading, the plugin will get a chance to add its objects to the world
  * through a constructor function.
  */
+#ifdef REPLACE_PLUGIN_SYSTEM
+#else
 typedef void* (*plugin_init_func)();
 void* ctr_internal_plugin_find(ctr_object* key) {
 	ctr_object* modNameObject = ctr_internal_cast2string(key);
@@ -119,6 +116,7 @@ void* ctr_internal_plugin_find(ctr_object* key) {
 	(void) init_plugin();
 	return handle;
 }
+#endif
 
 /**
  * @internal
