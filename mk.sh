@@ -1,5 +1,7 @@
 #!/bin/sh
 OS=$(uname -s)
+
+if [ -z "$MAKEFILE" ]; then
 if [ "$OS" = "OpenBSD" -o "$OS" = "FreeBSD" -o "$OS" = "Darwin" ]; then
 	MAKEFILE=makefile.bsd
 elif [ "$OS" = "Haiku" ]; then
@@ -7,6 +9,9 @@ elif [ "$OS" = "Haiku" ]; then
 else
 	MAKEFILE=makefile
 fi
+fi
+
+
 echo "USING: ${MAKEFILE}"
 
 #Get list of ISO codes to build.

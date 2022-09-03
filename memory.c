@@ -1,10 +1,3 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <stdarg.h>
-#include <math.h>
-#include <stdint.h>
 #include "citrine.h"
 
 uint64_t ctr_gc_alloc;
@@ -62,13 +55,13 @@ void* ctr_heap_allocate( size_t size ) {
 	/* Check whether we can afford to allocate this much */
 	ctr_gc_alloc += size;
 	if (ctr_gc_memlimit < ctr_gc_alloc) {
-		printf( CTR_MERR_OOM, size );
+		printf( CTR_MERR_OOM, (unsigned long) size );
 		exit(1);
 	}
 	/* Perform allocation and check result */
 	slice_of_memory = ctr_pool_alloc( size );
 	if ( slice_of_memory == NULL ) {
-		printf( CTR_MERR_MALLOC, size );
+		printf( CTR_MERR_MALLOC, (unsigned long) size );
 		exit(1);
 	}
 	/* Store the width of the memory block in the slice itself so we can always find it */

@@ -1,32 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <stdarg.h>
-#include <math.h>
-#include <unistd.h>
-#include <stdint.h>
-#include <time.h>
-#include <sys/wait.h>
-#include <syslog.h>
-#include <signal.h>
-#include <termios.h>
-#include <libgen.h>
-
-#include <netinet/in.h>
-#include <arpa/inet.h>
-
-#ifdef forLinux
-#include <bsd/stdlib.h>
-#include <bsd/string.h>
-#endif
-
 #include "citrine.h"
-#include "siphash.h"
-
-
-#include <sys/stat.h>
-
 
 int ctr_gc_dust_counter;
 int ctr_gc_object_counter;
@@ -34,25 +6,6 @@ int ctr_gc_kept_counter;
 int ctr_gc_sticky_counter;
 int ctr_gc_mode;
 
-// call this function to start a nanosecond-resolution timer
-struct timespec timer_start(){
-    struct timespec start_time;
-    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start_time);
-    return start_time;
-}
-
-// call this function to end a timer, returning nanoseconds elapsed as a long
-long timer_end(struct timespec start_time){
-    struct timespec end_time;
-    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end_time);
-    long diffInNanos = (end_time.tv_sec - start_time.tv_sec) * (long)1e9 + (end_time.tv_nsec - start_time.tv_nsec);
-    return diffInNanos;
-}
-
-int CtrTimerStartEnd = 0;
-
-struct timespec vartime;
-long time_elapsed_nanos;
 
 /**
  * @internal
@@ -628,6 +581,8 @@ ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentL
  * 1234
  * ~$_
  */
+#ifdef REPLACE_PROGRAM_PASSWORD
+#else
 ctr_object* ctr_program_waitforpassword(ctr_object* myself, ctr_argument* argumentList) {
 	static struct termios oldt, newt;
 	int c;
@@ -657,6 +612,7 @@ ctr_object* ctr_program_waitforpassword(ctr_object* myself, ctr_argument* argume
 	tcsetattr( STDIN_FILENO, TCSANOW, &oldt);
 	return userInput;
 }
+#endif
 
 /**
  * @def
@@ -746,12 +702,15 @@ ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList) {
  * .... waits sec ....
  * ~$_
  */
+#ifdef REPLACE_CLOCK_WAIT
+#else
 ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* arg = ctr_internal_cast2number(argumentList->object);
 	int n = (int) arg->value.nvalue;
 	sleep(n);
 	return myself;
 }
+#endif
 
 /**
  * @def

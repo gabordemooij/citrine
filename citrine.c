@@ -1,16 +1,4 @@
-#include <inttypes.h>
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <inttypes.h>
-#include <ctype.h>
-#include <stdarg.h>
-#include <math.h>
-#include <stdint.h>
-#include <unistd.h>
 #include "citrine.h"
-#include "siphash.h"
 
 int ctr_argc;
 char** ctr_argv;

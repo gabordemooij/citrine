@@ -1,0 +1,33 @@
+#Usage: CC=x86_64-w64-mingw32-gcc-8.3-win32 make -f makefile.win64
+CFLAGS = -O2 -g -mtune=native -Wall -D CTRLANG=${ISO} -D INCLUDETESTS -D WIN \
+       -D REPLACE_PROGRAM_PASSWORD -D WINDOWS_PROGRAM_PASSWORD\
+       -D REPLACE_PLUGIN_SYSTEM    -D WINDOWS_PLUGIN_SYSTEM\
+       -D REPLACE_CLOCK_WAIT       -D WINDOWS_CLOCK_WAIT
+OBJS = test.o siphash.o utf8.o memory.o util.o base.o collections.o file.o system.o \
+       world.o lexer.o parser.o walker.o translator.o citrine.o portability.o
+prefix ?= /usr
+
+.SUFFIXES:	.o .c
+
+all:ctr
+
+install:
+	install -d $(DESTDIR)$(prefix)/bin $(DESTDIR)$(prefix)/share/fonts/citrine
+	install ./bin/$(shell uname -s)/ctr* $(DESTDIR)$(prefix)/bin
+	install ./fonts/Citrine.ttf          $(DESTDIR)$(prefix)/share/fonts/citrine
+
+ctr:	$(OBJS)
+	$(CC) -shared $(OBJS) -g -lm -o bin/Win64/ctr${ISO}.exe
+	gendef bin/Win64/ctr${ISO}.exe
+	x86_64-w64-mingw32-dlltool -d ctr${ISO}.def -l ctr${ISO}import.lib -e ctr${ISO}exports.o
+	$(CC) ctr${ISO}exports.o $(OBJS) -g -lm  -o bin/Win64/ctr${ISO}.exe 
+
+.c.o:
+	$(CC) $(CFLAGS) -I i18n/${ISO} -c $<
+
+clean:
+	rm -rf ${OBJS} ctr
+	
+plugin:
+	cd plugins/${PACKAGE} ; make clean ; make install-${NAME}
+

@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "citrine.h"
 
 ctr_tnode* ctr_callstack[301];

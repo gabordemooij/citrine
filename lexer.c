@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
 #include "citrine.h"
 
 int ctr_clex_bflmt = 255;

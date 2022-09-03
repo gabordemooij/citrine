@@ -1,22 +1,48 @@
-
 #include "dictionary.h"
 #include "msg.h"
-
 #include <inttypes.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <unistd.h>
+#include <stdarg.h>
+#include <math.h>
+#include <stdint.h>
+#include <time.h>
+#include <libgen.h>
+#include <errno.h>
+#include <sys/file.h>
+#include <dirent.h>
+#include <locale.h>
+
+#ifdef forLinux
+#include <bsd/stdlib.h>
+#include <bsd/string.h>
+#endif
+
+#include "siphash.h"
+#include <sys/stat.h>
+
+#ifdef WIN
+	#include <windows.h>
+	#include <conio.h>
+	#define PRId64 "I64d"
+	#define realpath(N,R) _fullpath((R),(N),PATH_MAX)
+	#define setenv(name,value,o) _putenv_s(name, value);
+	#define CTR_DIRSEP "\\"
+#else
+	#include <termios.h>
+	#include <sys/wait.h>
+	#include <dlfcn.h>
+	#define CTR_DIRSEP "/"
+#endif
 
 /**
  * Version information
  */
 #define CTR_VERSION "0.9.5"
 #define CTR_VERSION_NUM 95
-
-
-#ifdef DIRSEPBACKSL
-#define CTR_DIRSEP "\\"
-#else
-#define CTR_DIRSEP "/"
-#endif
 
 /**
  * Define the Citrine tokens 
