@@ -69,3 +69,16 @@ ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 #endif
+
+#ifdef WIN32
+int putenv_old(const char* name, const char* value) {
+	char* buffer = malloc( strlen(name) + strlen(value) + 1 + 1 );
+	strcat(buffer, name);
+	strcat(buffer, "=");
+	strcat(buffer, value);
+	strcat(buffer, "\0");
+	putenv(buffer);
+	free(buffer);
+	return 0;
+}
+#endif

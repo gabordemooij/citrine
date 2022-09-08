@@ -1,5 +1,5 @@
 OS="windows"
-V="0.9.2"
+V="0.9.5"
 for ISO in $(ls ../i18n)
 do
 	#Remove previous working dir
@@ -12,14 +12,15 @@ do
 	#Copy license
 	cp ../LICENSE /tmp/dist/
 	#Copy binary
-	cp ./${OS}/ctr${ISO}.exe /tmp/dist/bin/ctr${ISO}.exe
-	cp ./${OS}/*.dll /tmp/dist/bin/
+	cp ../bin/Win64/ctr${ISO}.exe /tmp/dist/bin/ctr${ISO}.exe
 	#Copy examples
 	cp ../examples/${ISO}/* /tmp/dist/examples/
 	#Copy font
 	cp ../fonts/Citrine.ttf /tmp/dist/fonts/
 	#Archive
-	tar cvzf citrine${V}-${OS}-${ISO}.tar.gz -C /tmp dist
-	#Sign
-	signify-openbsd -Sz -s keys/privatekey.sec -m citrine${V}-${OS}-${ISO}.tar.gz -x downloads/${OS}/citrine${V}-${OS}-${ISO}.tgz
+	cd /tmp
+	rm citrine${V}-${OS}-${ISO}.zip
+	zip -r citrine${V}-${OS}-${ISO}.zip dist/*
+	cd -
+	cp /tmp/citrine${V}-${OS}-${ISO}.zip downloads/${OS}/citrine${V}-${OS}-${ISO}.zip
 done
