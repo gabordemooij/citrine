@@ -29,7 +29,11 @@
 	#include <conio.h>
 	#define PRId64 "I64d"
 	#define realpath(N,R) _fullpath((R),(N),PATH_MAX)
+#ifdef WIN32
+	#define setenv(name,value,o) putenv_old(name, value);
+#else
 	#define setenv(name,value,o) _putenv_s(name, value);
+#endif
 	#define CTR_DIRSEP "\\"
 #else
 	#include <termios.h>
@@ -37,6 +41,8 @@
 	#include <dlfcn.h>
 	#define CTR_DIRSEP "/"
 #endif
+
+
 
 /**
  * Version information
@@ -804,3 +810,4 @@ extern void ctr_print_error(char* error, int code);
 size_t ctr_heap_tracker_memoryblocknumber();
 size_t ctr_heap_tracker_rewind( size_t memoryBlockNumber );
 
+extern int putenv_old(const char* name, const char* value);
