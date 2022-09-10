@@ -11,16 +11,20 @@ for FILE in $(ls downloads/OpenBSD)
 do
 	echo "<li><a href=\"/downloads/iso/OpenBSD/${FILE}\">${FILE}</a></li>"
 done
-for FILE in $(ls downloads/windows)
+for FILE in $(ls downloads/windows32)
 do
 	echo "<li><a href=\"/downloads/iso${V}/windows32/${FILE}\">${FILE}</a></li>"
 done
-for FILE in $(ls downloads/windows64)
+for FILE in $(ls downloads/windows)
 do
 	echo "<li><a href=\"/downloads/iso${V}/windows/${FILE}\">${FILE}</a></li>"
 done
 for FILE in $(ls downloads/Haiku)
 do
-	echo "<li><a href=\"/downloads/iso/Haiku/${FILE}\">${FILE}</a></li>"
+	echo "<li><a href=\"/downloads/iso${V}/Haiku/${FILE}\">${FILE}</a></li>"
+done
+for FILE in $(ls downloads/Darwin)
+do
+	echo "<li><a href=\"/downloads/iso${V}/Darwin/${FILE}\">${FILE}</a></li>"
 done
 

@@ -1,0 +1,24 @@
+CFLAGS = -O2 -std=c99 -mtune=native -Wall -D CTRLANG=${ISO} -D PATH_MAX=1024 -D MACOS
+OBJS = test.o siphash.o utf8.o memory.o util.o base.o collections.o file.o system.o \
+       world.o lexer.o parser.o walker.o translator.o citrine.o
+
+.SUFFIXES:	.o .c
+
+all:ctr
+
+install: ctr
+	cp ./ctr /usr/bin/ctr
+
+ctr:	$(OBJS)
+	$(CC) $(OBJS) -rdynamic -undefined dynamic_lookup -lm -o ctr
+	cp ctr bin/${OS}/ctr
+	cp ctr bin/${OS}/ctr${ISO}
+
+.c.o:
+	$(CC) $(CFLAGS) -I i18n/${ISO} -c $<
+
+clean:
+	rm -rf ${OBJS} ctr
+	
+plugin:
+	cd plugins/${PACKAGE} ; make clean ; make install-${NAME}
