@@ -60,6 +60,12 @@ void* ctr_internal_plugin_find(ctr_object* key) {
 }
 #endif
 
+#ifdef MACOS_PLUGIN_SYSTEM
+typedef void* (*plugin_init_func)();
+void* ctr_internal_plugin_find(ctr_object* key) {
+	return ctr_internal_plugin_find_path(key, "mods/%s/libctr%s.dylib");
+}
+#endif
 
 #ifdef WINDOWS_CLOCK_WAIT
 ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
