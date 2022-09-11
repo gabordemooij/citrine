@@ -85,15 +85,6 @@ void ctr_internal_export_tree(ctr_tnode* ti) {
 #else
 typedef void* (*plugin_init_func)();
 void* ctr_internal_plugin_find(ctr_object* key) {
-	return ctr_internal_plugin_find_path(key, "mods/%s/libctr%s.so");
-}
-#endif
-
-/**
- * @internal
- * Internal plugin loader.
- */
-void* ctr_internal_plugin_find_path(ctr_object* key, char* defaultPluginPathPattern) {
 	ctr_object* modNameObject = ctr_internal_cast2string(key);
 	void* handle;
 	char  pathNameMod[1024];
@@ -104,7 +95,7 @@ void* ctr_internal_plugin_find_path(ctr_object* key, char* defaultPluginPathPatt
 	modName = ctr_heap_allocate_cstring( modNameObject );
 	modNameLow = modName;
 	for ( ; *modNameLow; ++modNameLow) *modNameLow = tolower(*modNameLow);
-	snprintf(pathNameMod, 1024,defaultPluginPathPattern, modName, modName);
+	snprintf(pathNameMod, 1024, "mods/%s/libctr%s.so", modName, modName);
 	ctr_heap_free( modName );
 	realPathModName = realpath(pathNameMod, NULL);
 	if (access(realPathModName, F_OK) == -1) return NULL;
@@ -125,6 +116,7 @@ void* ctr_internal_plugin_find_path(ctr_object* key, char* defaultPluginPathPatt
 	(void) init_plugin();
 	return handle;
 }
+#endif
 
 /**
  * @internal
