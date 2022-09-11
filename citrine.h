@@ -15,12 +15,6 @@
 #include <sys/file.h>
 #include <dirent.h>
 #include <locale.h>
-
-#ifdef forLinux
-#include <bsd/stdlib.h>
-#include <bsd/string.h>
-#endif
-
 #include "siphash.h"
 #include <sys/stat.h>
 
@@ -29,11 +23,6 @@
 	#include <conio.h>
 	#define PRId64 "I64d"
 	#define realpath(N,R) _fullpath((R),(N),PATH_MAX)
-#ifdef WIN32
-	#define setenv(name,value,o) putenv_old(name, value);
-#else
-	#define setenv(name,value,o) _putenv_s(name, value);
-#endif
 	#define CTR_DIRSEP "\\"
 #else
 	#include <termios.h>
@@ -42,6 +31,14 @@
 	#define CTR_DIRSEP "/"
 #endif
 
+
+#ifdef WINDOWS32_SETENV
+	#define setenv(name,value,o) putenv_old(name, value);
+#endif
+
+#ifdef WINDOWS64_SETENV
+	#define setenv(name,value,o) _putenv_s(name, value);
+#endif
 
 
 /**
@@ -397,7 +394,6 @@ extern ctr_object* ctr_internal_cast2bool( ctr_object* o );
 extern ctr_object* ctr_internal_cast2number(ctr_object* o);
 extern ctr_object* ctr_internal_create_object(int type);
 extern ctr_object* ctr_internal_cast2string( ctr_object* o );
-extern void* ctr_internal_plugin_find_path(ctr_object* key, char* defaultPluginPathPattern);
 extern void*       ctr_internal_plugin_find( ctr_object* key );
 extern ctr_object* ctr_find(ctr_object* key);
 extern ctr_object* ctr_find_in_my(ctr_object* key);

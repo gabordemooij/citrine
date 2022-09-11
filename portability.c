@@ -63,7 +63,36 @@ void* ctr_internal_plugin_find(ctr_object* key) {
 #ifdef MACOS_PLUGIN_SYSTEM
 typedef void* (*plugin_init_func)();
 void* ctr_internal_plugin_find(ctr_object* key) {
-	return ctr_internal_plugin_find_path(key, "mods/%s/libctr%s.dylib");
+	ctr_object* modNameObject = ctr_internal_cast2string(key);
+	void* handle;
+	char  pathNameMod[1024];
+	char* modName;
+	char* modNameLow;
+	plugin_init_func init_plugin;
+	char* realPathModName = NULL;
+	modName = ctr_heap_allocate_cstring( modNameObject );
+	modNameLow = modName;
+	for ( ; *modNameLow; ++modNameLow) *modNameLow = tolower(*modNameLow);
+	snprintf(pathNameMod, 1024, "mods/%s/libctr%s.dylib", modName, modName);
+	ctr_heap_free( modName );
+	realPathModName = realpath(pathNameMod, NULL);
+	if (access(realPathModName, F_OK) == -1) return NULL;
+	handle =  dlopen(realPathModName, RTLD_NOW);
+	free(realPathModName);
+	if ( !handle ) {
+		printf("%s\n",CTR_ERR_FOPEN);
+		printf("%s\n",dlerror());
+		exit(1);
+	}
+	/* the begin() function will add the missing object to the world */
+	*(void**)(&init_plugin) = dlsym( handle, "begin" );
+	if ( !init_plugin ) {
+		printf("%s\n",CTR_ERR_FOPEN);
+		printf("%s\n",dlerror());
+		exit(1);
+	}
+	(void) init_plugin();
+	return handle;
 }
 #endif
 
