@@ -77,17 +77,9 @@ int ctr_cli_read_args(int argc, char* argv[]) {
 }
 
 /**
- * Citrine Application Main Start
- * Bootstraps the Citrine Application.
- *
+ * Inits the Citrine environment.
  */
-int main(int argc, char* argv[]) {
-	char* prg;
-	char ctr_pool_share;
-	ctr_tnode* program;
-	uint64_t program_text_size = 0;
-	ctr_argc = argc;
-	ctr_argv = argv;
+int ctr_init() {
 	ctr_in_message = 0;
 	ctr_callstack_index = 0;
 	ctr_sandbox_steps = 0;
@@ -110,12 +102,25 @@ int main(int argc, char* argv[]) {
 	ctr_clex_keyword_assignment_len = strlen( CTR_DICT_ASSIGN );
 	ctr_clex_keyword_return_len = strlen( CTR_DICT_RETURN );
 	ctr_clex_param_prefix_char = CTR_DICT_PARAMETER_PREFIX[0];
-
-	//Defaults
 	ctr_gc_memlimit = 10 * 1000000; /* Default memory limit: 10MB */
 	ctr_gc_mode = 1;                /* Default GC mode: regular GC, no pool. */
-	ctr_pool_share = 2;             /* Default: pool ratio = 50% */
+	return 0;
+}
 
+/**
+ * Citrine Application Main Start
+ * Bootstraps the Citrine Application.
+ *
+ */
+int main(int argc, char* argv[]) {
+	char* prg;
+	char ctr_pool_share;
+	ctr_tnode* program;
+	uint64_t program_text_size = 0;
+	ctr_argc = argc;
+	ctr_argv = argv;
+	ctr_init();
+	ctr_pool_share = 2;             /* Default: pool ratio = 50% */
 	//Command line options
 	int mode = ctr_cli_read_args(argc, argv);
 	if (mode == 1) {
