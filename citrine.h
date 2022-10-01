@@ -34,10 +34,12 @@
 
 #ifdef WINDOWS32_SETENV
 	#define setenv(name,value,o) putenv_old(name, value);
+	#define unsetenv(name) putenv_old(name, "");
 #endif
 
 #ifdef WINDOWS64_SETENV
 	#define setenv(name,value,o) _putenv_s(name, value);
+	#define unsetenv(name) _putenv_s(name, "");
 #endif
 
 

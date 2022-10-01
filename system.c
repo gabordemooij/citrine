@@ -524,11 +524,16 @@ ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList) 
 	char*       envVarNameStr;
 	char*       envValStr;
 	envVarNameObj = ctr_internal_cast2string(argumentList->object);
-	envValObj = ctr_internal_cast2string(argumentList->next->object);
+	envValObj = argumentList->next->object;
 	envVarNameStr = ctr_heap_allocate_cstring( envVarNameObj );
-	envValStr = ctr_heap_allocate_cstring( envValObj );
-	setenv(envVarNameStr, envValStr, 1);
-	ctr_heap_free( envValStr );
+	if (envValObj == CtrStdNil) {
+		unsetenv(envVarNameStr);
+	} else {
+		envValObj = ctr_internal_cast2string(envValObj);
+		envValStr = ctr_heap_allocate_cstring( envValObj );
+		setenv(envVarNameStr, envValStr, 1);
+		ctr_heap_free( envValStr );
+	}
 	ctr_heap_free( envVarNameStr );
 	return myself;
 }
