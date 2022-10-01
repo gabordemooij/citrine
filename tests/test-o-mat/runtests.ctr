@@ -6,18 +6,29 @@ Program use: Path Configuration.
 ☞ last file			≔ Nil.
 ☞ OS				≔ Program setting: ‘OS’.
 
-Tests path: base path for tests, record: (Program argument: 3) = ‘rec’.
+Tests path: base path for tests.
+
+☞ start-up option ≔ Program argument: 3.
+
+☞ record test result ≔ (start-up option = ‘rec’).
+
+record test result true: {
+	Tests record: True.
+	✎ write: ‘Recording output of tests with new or diff. output.’, stop.
+}.
 
 Tests on: ‘next’ do: {
 
 	⛏ flags doing a single run boolean true: {
 		⛏ flags doing a single run: False.
-		⛏ counter add: variations count - 1.
+		☞ skip ≔ variations count - 1.
+		⛏ counter add: skip.
 	}.
 
 	(⛏ flags doing a single language boolean and: ((⛏ counter modulo: variations count) = 6)) true: {
 		⛏ flags doing a single language: False.
-		⛏ counter add: variations count - 6.
+		☞ skip ≔ variations count - memory management modes count.
+		⛏ counter add: skip.
 	}.
 
 	☞ file no ≔ 1 + (⛏ counter ÷ variations count) floor.
@@ -58,13 +69,22 @@ test suite on: ‘process:’ do: { :test
 		✎ write: (‘↵Running: NO.↵’ NO: last file).
 	}.
 
-	☞ actions ≔ Tests actions on: ‘edit:’ do: { :text
-		(List ← 1 ; 2 ; 4 ; 8 ; 9 ; 12) each: { :index :code
+	☞ actions ≔ Tests actions.
+
+	actions on: ‘edit:’ do: { :text
+
+		☞ ignore temporary file suffix ≔ List ← 1 ; 2 ; 4 ; 8 ; 9 ; 12.
+
+		ignore temporary file suffix each: { :index :code
 			text replace: (‘tmp/runnerCODE:’ CODE: code) with: ‘tmp/runner0:’.
 		}.
-		(List ← 24 ; 48 ; 56 ; 64) each: { :index :bytes
+
+		☞ ignore byte differences ≔ List ← 24 ; 48 ; 56 ; 64.
+
+		ignore byte differences each: { :index :bytes
 			text replace: (‘Failed to allocate XX bytes.’ XX: bytes) with: ‘Failed to allocate XX bytes.’.
 		}.
+
 		↲ text remove surrounding spaces.
 	}.
 
