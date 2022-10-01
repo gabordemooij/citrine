@@ -1,0 +1,6 @@
+Program setting: ‘a’ value: 1.
+✎ write: (Program setting: ‘a’).
+Program setting: ‘a’ value: Nil.
+✎ write: (Program setting: ‘a’).
+✎ write: (Program setting: ‘a’, Nil?).
+✎ write: (Program setting: ‘b’, Nil?).
