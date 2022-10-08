@@ -211,6 +211,10 @@ void* ctr_heap_reallocate(void* oldptr, size_t size ) {
 
 	/* re-allocate memory */
 	nptr = ctr_pool_alloc( size );
+	if ( nptr == NULL ) {
+		printf( CTR_MERR_MALLOC, (unsigned long) size );
+		exit(1);
+	}
 	memcpy( nptr, oldptr, old_size );
 	ctr_pool_dealloc(oldptr);
 
@@ -392,3 +396,4 @@ void ctr_pool_dealloc( void* ptr ) {
 		free(ptr);
 	}
 }
+
