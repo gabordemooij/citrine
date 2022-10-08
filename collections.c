@@ -727,9 +727,12 @@ ctr_object* ctr_array_to_string( ctr_object* myself, ctr_argument* argumentList 
  */
 ctr_object* ctr_array_fill( ctr_object* myself, ctr_argument* argumentList ) {
 	size_t n;
+	ctr_number fill_times;
 	ctr_size i;
 	ctr_argument* newArgumentList;
-	n = ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	fill_times = ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	if (fill_times < 1) return myself;
+	n = (size_t) fill_times;
 	newArgumentList = ctr_heap_allocate( sizeof(ctr_argument) );
 	newArgumentList->object = argumentList->next->object;
 	for(i = 0; i < n; i ++ ) {
