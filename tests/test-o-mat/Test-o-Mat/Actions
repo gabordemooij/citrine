@@ -86,6 +86,7 @@ Actions on: ‘run’ do: {
 Actions on: ‘run or fail:’ do: { :message
 	(⛏ run) true: {
 		✎ write: message.
+		Program flush.
 	}, else: {
 		⛏ record.
 	}.

@@ -2,7 +2,7 @@ Program use: Path Test-o-Mat Package.
 Program use: Path Configuration.
 
 ☞ file counter		≔ 1.
-☞ variation counter	≔ 1.
+☞ sequence number	≔ 1.
 ☞ last file			≔ Nil.
 ☞ OS				≔ Program setting: ‘OS’.
 
@@ -10,12 +10,7 @@ Tests path: base path for tests.
 
 ☞ start-up option ≔ Program argument: 3.
 
-☞ record test result ≔ (start-up option = ‘rec’).
-
-record test result true: {
-	Tests record: True.
-	✎ write: ‘Recording output of tests with new or diff. output.’, stop.
-}.
+Tests record: (start-up option = ‘rec’).
 
 Tests on: ‘next’ do: {
 
@@ -41,10 +36,11 @@ Tests on: ‘next’ do: {
 		☞ variation ≔ variations position: ((⛏ counter modulo: variations count) + 1).
 
 		test ≔ Test new
-			number: ⛏ counter copy,
+			number: sequence number copy,
 			name: file name,
 			file: (File new: path).
 
+		sequence number add: 1.
 		☞ tag ≔ variation.
 
 		⛏ flags doing a single run: (test directive contains: ‘SINGLE_RUN’).
@@ -88,7 +84,6 @@ test suite on: ‘process:’ do: { :test
 		↲ text remove surrounding spaces.
 	}.
 
-	☞ action ≔ Nil.
 	☞ tag ≔ test tags first.
 	☞ skip translation ≔ False.
 	(tag string contains: ‘-only’) true: {
