@@ -305,6 +305,11 @@ ctr_size  lpod = 128;
 void ctr_pool_init( ctr_size pool ) {
 	if (usePools) return; /* You cannot init twice */
 	usePools = 1;
+	/* If pool is too small exit with error code */
+	if (pool < 300) {
+		printf( CTR_MERR_POOL );
+		exit(1);
+	}
 	ctr_size poolSize = pool / 3;
 	spods = (poolSize / spod) - 1;
 	mpods = (poolSize / mpod) - 1;
