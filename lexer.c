@@ -108,11 +108,9 @@ void ctr_clex_emit_error( char* message ) {
  * Loads program into memory.
  */
 void ctr_clex_load(char* prg) {
-	
 	ctr_clex_true_len = strlen(CTR_DICT_TRUE);
 	ctr_clex_false_len = strlen(CTR_DICT_FALSE);
 	ctr_clex_nil_len = strlen(CTR_DICT_NIL);
-
 	ctr_code = prg;
 	ctr_code_start = prg;
 	ctr_clex_buffer = ctr_heap_allocate_tracked(ctr_clex_bflmt);
@@ -138,9 +136,12 @@ char* ctr_clex_tok_value() {
 	return ctr_clex_buffer;
 }
 
-
-char* ctr_clex_tok_describe(int token)
-{
+/**
+ * CTRLexerTokenDescribe
+ *
+ * Returns a pointer to a string describing the token.
+ */
+char* ctr_clex_tok_describe(int token) {
 	char* description;
 	switch(token) {
 		case CTR_TOKEN_RET:
