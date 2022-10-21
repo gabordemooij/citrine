@@ -433,10 +433,7 @@ ctr_object* ctr_program_object_message_exists( ctr_object* myself, ctr_argument*
 	ctr_object* foundObject;
 	ctr_object* objectName;
 	ctr_object* textArgumentObject;
-	
-	
 	textArgumentObject = ctr_internal_cast2string( argumentList->object );
-	
 	if (textArgumentObject->value.svalue->vlen < 1) {
 		return CtrStdBoolFalse;
 	}	
@@ -1643,7 +1640,10 @@ ctr_object* ctr_slurp_respond_to_and(ctr_object* myself, ctr_argument* argumentL
  */
 ctr_object* ctr_slurp_obtain( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* commandObj;
-	commandObj = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring( "command" ), CTR_CATEGORY_PRIVATE_PROPERTY );
+	commandObj = ctr_internal_object_find_property(myself,
+		ctr_build_string_from_cstring( "command" ),
+		CTR_CATEGORY_PRIVATE_PROPERTY
+	);
 	if ( commandObj == NULL ) {
 		commandObj = ctr_build_empty_string();
 	}
