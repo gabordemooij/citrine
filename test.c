@@ -92,11 +92,31 @@ void ctr_coretest_tokens() {
 }
 
 /**
+ * Perform parser test
+ */
+void ctr_coretest_parser() {
+	char* buffer;
+	ctr_program_length = 40;
+	buffer = calloc(40,1);
+	sprintf(buffer, "☞ x ≔ 1.");
+	ctr_clex_load(buffer);
+	ctr_tnode* tree_node = ctr_cparse_expr(0);
+	ctr_test(tree_node->type == CTR_AST_NODE_EXPRASSIGNMENT);
+	ctr_test(tree_node->nodes->node->type == CTR_AST_NODE_REFERENCE);
+	ctr_test(tree_node->nodes->node->vlen == 1);
+	ctr_test(strcmp(tree_node->nodes->node->value,"x")==0);
+	ctr_test(tree_node->nodes->next->node->type == CTR_AST_NODE_LTRNUM);
+	free(buffer);
+}
+
+
+/**
  * Run Core tests.
  */
 void ctr_coretest() {
 	printf("Running Internal Tests\n");
 	ctr_coretest_tokens();
+	ctr_coretest_parser();
 	exit(0);
 }
 
