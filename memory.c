@@ -163,11 +163,13 @@ void ctr_heap_free_rest() {
  * @return void
  */
 void ctr_heap_free( void* ptr ) {
+	if (ptr == NULL) return;
 	size_t* block_width;
 	int q = sizeof( size_t );
 	size_t size;
 	/* find the correct size of this memory block and move pointer back */
 	ptr = (void*) ((char*) ptr - q);
+	if (ptr == NULL) return;
 	block_width = (size_t*) ptr;
 	size = *(block_width);
 	ctr_pool_dealloc( ptr );
@@ -382,6 +384,7 @@ char* ctr_pool_alloc( ctr_size podSize ) {
  * Deallocates memory using the pool or the OS.
  */
 void ctr_pool_dealloc( void* ptr ) {
+	if (ptr == NULL) return;
 	if (!usePools) {
 		free(ptr);
 		return;
