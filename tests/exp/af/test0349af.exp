@@ -1,9 +1,9 @@
-Nil
-Nil
-Boole
-True
-Boole
-Onwaar
+Leeg
+Leeg
+Ja of Nee
+Ja
+Ja of Nee
+Nee
 Aantal
 1
 Aantal
@@ -12,25 +12,25 @@ Aantal
 9,2
 Aantal
 -9,2
+Reeks
+Reeks nuwe 
+Reeks
+Reeks ← 1 ; 2
+Reeks
+Reeks ← 1 ; (Reeks ← 2)
+Reeks
+Reeks ← 1 ; (Reeks ← 2) ; 3
+Reeks
+Reeks ← 1 ; ((Lys nuwe) sit:‘a’ by:‘b’) ; 3
+Reeks
+Reeks ← 1 ; ((Lys nuwe) sit:(Reeks ← 9) by:‘b’) ; 3
 Lys
-Lys nuwe 
+(Lys nuwe) sit:2 by:‘1’
 Lys
-Lys ← 1 ; 2
+(Lys nuwe) sit:2 by:‘x’
 Lys
-Lys ← 1 ; (Lys ← 2)
+(Lys nuwe) sit:(Reeks ← 1 ; 2) by:‘x’
 Lys
-Lys ← 1 ; (Lys ← 2) ; 3
-Lys
-Lys ← 1 ; ((Kaart nuwe) sit:‘a’ by:‘b’) ; 3
-Lys
-Lys ← 1 ; ((Kaart nuwe) sit:(Lys ← 9) by:‘b’) ; 3
-Kaart
-(Kaart nuwe) sit:2 by:‘1’
-Kaart
-(Kaart nuwe) sit:2 by:‘x’
-Kaart
-(Kaart nuwe) sit:(Lys ← 1 ; 2) by:‘x’
-Kaart
-(Kaart nuwe) sit:(Lys ← ((Kaart nuwe) sit:‘q’ by:‘y’) ; 2) by:‘x’
-Nil
-Nil
+(Lys nuwe) sit:(Reeks ← ((Lys nuwe) sit:‘q’ by:‘y’) ; 2) by:‘x’
+Leeg
+Leeg
