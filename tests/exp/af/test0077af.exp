@@ -1,12 +1,12 @@
-String,Aantal
-String,Boole
-Aantal,String
-Aantal,Boole
-Boole,Aantal
-Boole,Aantal
-Boole,String
-Boole,String
+Teks,Aantal
+Teks,Ja of Nee
+Aantal,Teks
+Aantal,Ja of Nee
+Ja of Nee,Aantal
+Ja of Nee,Aantal
+Ja of Nee,Teks
+Ja of Nee,Teks
 === String test ===
 123
-Onwaar
-True
+Nee
+Ja

@@ -1,10 +1,10 @@
 There are 2 chairs in the sunny garden.
 A rubber duck swims in the pool.
-Is there a shed in the garden? Well.. Onwaar
+Is there a shed in the garden? Well.. Nee
 In the garden you smell the fragrance of tulips and roses and lillies.
-The garden is Nil meters long.
-Luckily, this day, there are Nil wasps in the garden.
-The dog named Nil sleeps under the tree.
+The garden is Leeg meters long.
+Luckily, this day, there are Leeg wasps in the garden.
+The dog named Leeg sleeps under the tree.
 a\"bb\"ccc\"
-(Kaart nuwe) sit:((Kaart nuwe) sit:Nil by:‘dog’, sit:Nil by:‘insects’, sit:((Kaart nuwe) sit:15 by:‘length’, sit:8 by:‘width’) by:‘size’, sit:(Lys ← ‘tulips’ ; ‘roses’ ; ‘lillies’) by:‘flower’, sit:Onwaar by:‘shed’, sit:True by:‘pool’, sit:2 by:‘chairs’) by:‘garden’
+(Lys nuwe) sit:((Lys nuwe) sit:Leeg by:‘dog’, sit:Leeg by:‘insects’, sit:((Lys nuwe) sit:15 by:‘length’, sit:8 by:‘width’) by:‘size’, sit:(Reeks ← ‘tulips’ ; ‘roses’ ; ‘lillies’) by:‘flower’, sit:Nee by:‘shed’, sit:Ja by:‘pool’, sit:2 by:‘chairs’) by:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}
