@@ -1,10 +1,10 @@
 There are 2 chairs in the sunny garden.
 A rubber duck swims in the pool.
-Is there a shed in the garden? Well.. Faux
+Is there a shed in the garden? Well.. Non
 In the garden you smell the fragrance of tulips and roses and lillies.
-The garden is Néant meters long.
-Luckily, this day, there are Néant wasps in the garden.
-The dog named Néant sleeps under the tree.
+The garden is Rien meters long.
+Luckily, this day, there are Rien wasps in the garden.
+The dog named Rien sleeps under the tree.
 a\"bb\"ccc\"
-(Carte nouveau) mettre:((Carte nouveau) mettre:Néant _à:‘dog’, mettre:Néant _à:‘insects’, mettre:((Carte nouveau) mettre:15 _à:‘length’, mettre:8 _à:‘width’) _à:‘size’, mettre:(Liste ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _à:‘flower’, mettre:Faux _à:‘shed’, mettre:Vrai _à:‘pool’, mettre:2 _à:‘chairs’) _à:‘garden’
+(Liste nouveau) mettre:((Liste nouveau) mettre:Rien à:‘dog’, mettre:Rien à:‘insects’, mettre:((Liste nouveau) mettre:15 à:‘length’, mettre:8 à:‘width’) à:‘size’, mettre:(Série ← ‘tulips’ ; ‘roses’ ; ‘lillies’) à:‘flower’, mettre:Non à:‘shed’, mettre:Oui à:‘pool’, mettre:2 à:‘chairs’) à:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

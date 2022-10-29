@@ -1,12 +1,12 @@
-Chaîne,Nombre
-Chaîne,Booléen
-Nombre,Chaîne
-Nombre,Booléen
-Booléen,Nombre
-Booléen,Nombre
-Booléen,Chaîne
-Booléen,Chaîne
+Texte,Nombre
+Texte,Oui ou Non
+Nombre,Texte
+Nombre,Oui ou Non
+Oui ou Non,Nombre
+Oui ou Non,Nombre
+Oui ou Non,Texte
+Oui ou Non,Texte
 === String test ===
 123
-Faux
-Vrai
+Non
+Oui
