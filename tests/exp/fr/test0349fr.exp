@@ -1,9 +1,9 @@
-Néant
-Néant
-Booléen
-Vrai
-Booléen
-Faux
+Rien
+Rien
+Oui ou Non
+Oui
+Oui ou Non
+Non
 Nombre
 1
 Nombre
@@ -12,25 +12,25 @@ Nombre
 9,2
 Nombre
 -9,2
+Série
+Série nouveau 
+Série
+Série ← 1 ; 2
+Série
+Série ← 1 ; (Série ← 2)
+Série
+Série ← 1 ; (Série ← 2) ; 3
+Série
+Série ← 1 ; ((Liste nouveau) mettre:‘a’ à:‘b’) ; 3
+Série
+Série ← 1 ; ((Liste nouveau) mettre:(Série ← 9) à:‘b’) ; 3
 Liste
-Liste nouveau 
+(Liste nouveau) mettre:2 à:‘1’
 Liste
-Liste ← 1 ; 2
+(Liste nouveau) mettre:2 à:‘x’
 Liste
-Liste ← 1 ; (Liste ← 2)
+(Liste nouveau) mettre:(Série ← 1 ; 2) à:‘x’
 Liste
-Liste ← 1 ; (Liste ← 2) ; 3
-Liste
-Liste ← 1 ; ((Carte nouveau) mettre:‘a’ _à:‘b’) ; 3
-Liste
-Liste ← 1 ; ((Carte nouveau) mettre:(Liste ← 9) _à:‘b’) ; 3
-Carte
-(Carte nouveau) mettre:2 _à:‘1’
-Carte
-(Carte nouveau) mettre:2 _à:‘x’
-Carte
-(Carte nouveau) mettre:(Liste ← 1 ; 2) _à:‘x’
-Carte
-(Carte nouveau) mettre:(Liste ← ((Carte nouveau) mettre:‘q’ _à:‘y’) ; 2) _à:‘x’
-Néant
-Néant
+(Liste nouveau) mettre:(Série ← ((Liste nouveau) mettre:‘q’ à:‘y’) ; 2) à:‘x’
+Rien
+Rien
