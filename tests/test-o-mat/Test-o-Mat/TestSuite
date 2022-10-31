@@ -43,11 +43,3 @@ Tests on: ‘record:’ do: { :record
 Tests on: ‘record’ do: {
 	↲ ⚿ record boolean.
 }.
-
-Tests on: ‘flags’ do: {
-	↲ ⚿ flags.
-}.
-
-Tests on: ‘counter’ do: {
-	↲ ⚿ counter.
-}.
