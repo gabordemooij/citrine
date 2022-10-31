@@ -10,26 +10,26 @@ Tests init path: base path for tests,
 record: ((Program argument: 3) = ‘rec’),
 on: ‘next’ do: {
 
-	⛏ flags doing a single run boolean true: {
-		⛏ flags doing a single run: False.
+	⚿ flags doing a single run boolean true: {
+		⚿ flags doing a single run: False.
 		☞ skip ≔ variations count - 1.
-		⛏ counter add: skip.
+		⚿ counter add: skip.
 	}.
 
-	(⛏ flags doing a single language boolean and: ((⛏ counter modulo: variations count) = 6)) true: {
-		⛏ flags doing a single language: False.
+	(⚿ flags doing a single language boolean and: ((⚿ counter modulo: variations count) = 6)) true: {
+		⚿ flags doing a single language: False.
 		☞ skip ≔ variations count - memory management modes count.
-		⛏ counter add: skip.
+		⚿ counter add: skip.
 	}.
 
-	☞ file no ≔ 1 + (⛏ counter ÷ variations count) floor.
+	☞ file no ≔ 1 + (⚿ counter ÷ variations count) floor.
 	☞ test ≔ Nil.
 
 	file no ≤ number of tests true: {
 
 		☞ file name ≔ ‘testX.ctr’ X (file no digits: 4).
 		☞ path ≔ ‘../’ + file name.
-		☞ variation ≔ variations position: ((⛏ counter modulo: variations count) + 1).
+		☞ variation ≔ variations position: ((⚿ counter modulo: variations count) + 1).
 
 		test ≔ Test new
 			number: sequence number copy,
@@ -39,16 +39,16 @@ on: ‘next’ do: {
 		sequence number add: 1.
 		☞ tag ≔ variation.
 
-		⛏ flags doing a single run: (test directive contains: ‘SINGLE_RUN’).
-		⛏ flags doing a single language: (test directive contains: ‘SINGLE_LANGUAGE’).
+		⚿ flags doing a single run: (test directive contains: ‘SINGLE_RUN’).
+		⚿ flags doing a single language: (test directive contains: ‘SINGLE_LANGUAGE’).
 
 		(test directive contains: ‘NL-ONLY’) true: {
-			⛏ flags doing a single run: True.
+			⚿ flags doing a single run: True.
 			tag ≔ ‘nl-only’.
 		}.
 
 		test tag: tag.
-		⛏ counter add: 1.
+		⚿ counter add: 1.
 	}.
 	↲ test.
 }, on: ‘process:’ do: { :test

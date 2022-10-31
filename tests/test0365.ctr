@@ -8,14 +8,14 @@ Tests path: ‘’.
 
 test suite on: ‘next’ do: {
 	☞ test ≔ Nil.
-	(⛏ counter < number of tests) true: {
+	(⚿ counter < number of tests) true: {
 		test ≔ Test new
-			number: ⛏ counter copy,
+			number: ⚿ counter copy,
 			name: ‘test0365.ctr’,
 			file: ‘test0365.ctr’.
 	
 	}.
-	⛏ counter add: 1.
+	⚿ counter add: 1.
 	↲ test.
 }.
 
