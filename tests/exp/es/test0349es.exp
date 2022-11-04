@@ -12,25 +12,25 @@ Número
 9,2
 Número
 -9,2
+Serie
+Serie nuevo 
+Serie
+Serie ← 1 ; 2
+Serie
+Serie ← 1 ; (Serie ← 2)
+Serie
+Serie ← 1 ; (Serie ← 2) ; 3
+Serie
+Serie ← 1 ; ((Lista nuevo) ponlo:‘a’ en:‘b’) ; 3
+Serie
+Serie ← 1 ; ((Lista nuevo) ponlo:(Serie ← 9) en:‘b’) ; 3
 Lista
-Lista nuevo 
+(Lista nuevo) ponlo:2 en:‘1’
 Lista
-Lista ← 1 ; 2
+(Lista nuevo) ponlo:2 en:‘x’
 Lista
-Lista ← 1 ; (Lista ← 2)
+(Lista nuevo) ponlo:(Serie ← 1 ; 2) en:‘x’
 Lista
-Lista ← 1 ; (Lista ← 2) ; 3
-Lista
-Lista ← 1 ; ((Mapa nuevo) ponlo en:‘a’ __:‘b’) ; 3
-Lista
-Lista ← 1 ; ((Mapa nuevo) ponlo en:(Lista ← 9) __:‘b’) ; 3
-Mapa
-(Mapa nuevo) ponlo en:2 __:‘1’
-Mapa
-(Mapa nuevo) ponlo en:2 __:‘x’
-Mapa
-(Mapa nuevo) ponlo en:(Lista ← 1 ; 2) __:‘x’
-Mapa
-(Mapa nuevo) ponlo en:(Lista ← ((Mapa nuevo) ponlo en:‘q’ __:‘y’) ; 2) __:‘x’
+(Lista nuevo) ponlo:(Serie ← ((Lista nuevo) ponlo:‘q’ en:‘y’) ; 2) en:‘x’
 Nulo
 Nulo
