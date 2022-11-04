@@ -5,7 +5,7 @@ a Booleano ‘Falso’  is NOT Nil.
 a Booleano ‘Falso’  is NOT Nil.
 a Numero ‘1’  is NOT Nil.
 a Numero ‘0’  is NOT Nil.
-a Corda ‘Str’  is NOT Nil.
-a Corda ‘’  is NOT Nil.
-a Codice ‘Codice’  is NOT Nil.
+a Testo ‘Str’  is NOT Nil.
+a Testo ‘’  is NOT Nil.
+a Compito ‘Compito’  is NOT Nil.
 but.. Nil is.. certainly NIL!
