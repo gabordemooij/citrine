@@ -1,6 +1,6 @@
-(Mapa nowy) położyć na coś:‘a"b’ __:‘test’
+(Lista nowy) że:‘a"b’ jest:‘test’
 Invalid JSON.
-(Mapa nowy) położyć na coś:(Lista ← 1 ; 2 ; (Lista ← 3 ; 4) ; ((Mapa nowy) położyć na coś:(Lista ← 3 ; 4) __:‘bar’, położyć na coś:1 __:‘foo’)) __:‘nested’, położyć na coś:Fałszywy __:‘legend’, położyć na coś:27 __:‘age’, położyć na coś:‘Jack’ __:‘name’
+(Lista nowy) że:(Serio ← 1 ; 2 ; (Serio ← 3 ; 4) ; ((Lista nowy) że:(Serio ← 3 ; 4) jest:‘bar’, że:1 jest:‘foo’)) jest:‘nested’, że:Fałszywy jest:‘legend’, że:27 jest:‘age’, że:‘Jack’ jest:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

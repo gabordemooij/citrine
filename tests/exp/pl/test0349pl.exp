@@ -12,25 +12,25 @@ Numer
 9,2
 Numer
 -9,2
+Serio
+Serio nowy 
+Serio
+Serio ← 1 ; 2
+Serio
+Serio ← 1 ; (Serio ← 2)
+Serio
+Serio ← 1 ; (Serio ← 2) ; 3
+Serio
+Serio ← 1 ; ((Lista nowy) że:‘a’ jest:‘b’) ; 3
+Serio
+Serio ← 1 ; ((Lista nowy) że:(Serio ← 9) jest:‘b’) ; 3
 Lista
-Lista nowy 
+(Lista nowy) że:2 jest:‘1’
 Lista
-Lista ← 1 ; 2
+(Lista nowy) że:2 jest:‘x’
 Lista
-Lista ← 1 ; (Lista ← 2)
+(Lista nowy) że:(Serio ← 1 ; 2) jest:‘x’
 Lista
-Lista ← 1 ; (Lista ← 2) ; 3
-Lista
-Lista ← 1 ; ((Mapa nowy) położyć na coś:‘a’ __:‘b’) ; 3
-Lista
-Lista ← 1 ; ((Mapa nowy) położyć na coś:(Lista ← 9) __:‘b’) ; 3
-Mapa
-(Mapa nowy) położyć na coś:2 __:‘1’
-Mapa
-(Mapa nowy) położyć na coś:2 __:‘x’
-Mapa
-(Mapa nowy) położyć na coś:(Lista ← 1 ; 2) __:‘x’
-Mapa
-(Mapa nowy) położyć na coś:(Lista ← ((Mapa nowy) położyć na coś:‘q’ __:‘y’) ; 2) __:‘x’
+(Lista nowy) że:(Serio ← ((Lista nowy) że:‘q’ jest:‘y’) ; 2) jest:‘x’
 Zero
 Zero
