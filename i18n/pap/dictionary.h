@@ -122,7 +122,7 @@
 #define CTR_DICT_TIME	         "tempu" 
 #define CTR_DICT_RESPOND_TO      "kontestá:" 
 #define CTR_DICT_RESPOND_TO_AND  "kontestá:i:" 
-#define CTR_DICT_SHELL           "tumando:"
+#define CTR_DICT_SHELL           "Komando di System:"
 #define CTR_DICT_SWEEP           "limpi" 
 #define CTR_DICT_MEMORY_LIMIT	 "memory:"
 #define CTR_DICT_MEMORY          "memory"

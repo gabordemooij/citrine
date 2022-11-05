@@ -1,5 +1,5 @@
-a b | Falso Falso Verdade Verdade -1
-b a | Verdade Verdade Falso Falso 1
-hallo hello | Falso Falso Verdade Verdade -4
-human human | Falso Verdade Falso Verdade 0
-x z | Falso Falso Verdade Verdade -2
+a b | Falso Falso Verdadeiro Verdadeiro -1
+b a | Verdadeiro Verdadeiro Falso Falso 1
+hallo hello | Falso Falso Verdadeiro Verdadeiro -4
+human human | Falso Verdadeiro Falso Verdadeiro 0
+x z | Falso Falso Verdadeiro Verdadeiro -2

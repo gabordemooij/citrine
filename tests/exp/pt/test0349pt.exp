@@ -1,7 +1,7 @@
-Nada
-Nada
+Nulo
+Nulo
 Boleano
-Verdade
+Verdadeiro
 Boleano
 Falso
 Número
@@ -12,25 +12,25 @@ Número
 9,2
 Número
 -9,2
-Lista
-Lista novo 
-Lista
-Lista ← 1 ; 2
-Lista
-Lista ← 1 ; (Lista ← 2)
-Lista
-Lista ← 1 ; (Lista ← 2) ; 3
-Lista
-Lista ← 1 ; ((Mapa novo) coloque em:‘a’ __:‘b’) ; 3
-Lista
-Lista ← 1 ; ((Mapa novo) coloque em:(Lista ← 9) __:‘b’) ; 3
+Listar
+Listar novo 
+Listar
+Listar ← 1 ; 2
+Listar
+Listar ← 1 ; (Listar ← 2)
+Listar
+Listar ← 1 ; (Listar ← 2) ; 3
+Listar
+Listar ← 1 ; ((Mapa novo) colocar:“a” em:“b”) ; 3
+Listar
+Listar ← 1 ; ((Mapa novo) colocar:(Listar ← 9) em:“b”) ; 3
 Mapa
-(Mapa novo) coloque em:2 __:‘1’
+(Mapa novo) colocar:2 em:“1”
 Mapa
-(Mapa novo) coloque em:2 __:‘x’
+(Mapa novo) colocar:2 em:“x”
 Mapa
-(Mapa novo) coloque em:(Lista ← 1 ; 2) __:‘x’
+(Mapa novo) colocar:(Listar ← 1 ; 2) em:“x”
 Mapa
-(Mapa novo) coloque em:(Lista ← ((Mapa novo) coloque em:‘q’ __:‘y’) ; 2) __:‘x’
-Nada
-Nada
+(Mapa novo) colocar:(Listar ← ((Mapa novo) colocar:“q” em:“y”) ; 2) em:“x”
+Nulo
+Nulo
