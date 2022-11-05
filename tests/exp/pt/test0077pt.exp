@@ -1,12 +1,12 @@
-Corda,Número
-Corda,Boleano
-Número,Corda
+String,Número
+String,Boleano
+Número,String
 Número,Boleano
 Boleano,Número
 Boleano,Número
-Boleano,Corda
-Boleano,Corda
+Boleano,String
+Boleano,String
 === String test ===
 123
 Falso
-Verdade
+Verdadeiro
