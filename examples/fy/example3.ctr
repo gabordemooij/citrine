@@ -1,11 +1,11 @@
-✎ skriuwe: ‘Nûmer spultsje’, halte.
-✎ skriuwe: ‘Ried it nûmer’, halte.
-☞ x ≔ Nûmer tusken en: 1 __: 10.
+✎ skriuwe: ‘Nûmer spultsje’, stopje.
+✎ skriuwe: ‘Ried it nûmer’, stopje.
+☞ x ≔ Nûmer tusken: 1 en: 10.
 ☞ q ≔ 0.
 q ≔ Programma freegje.
 { 
-	✎ skriuwe: ‘ferkeard!’, halte.
+	✎ skriuwe: ‘ferkeard!’, stopje.
 	q ≔ Programma freegje.
 
 } wylst: { ↲ x nûmer ≠ q nûmer. }.
-✎ skriuwe: ‘korrekt!’, halte.
+✎ skriuwe: ‘korrekt!’, stopje.

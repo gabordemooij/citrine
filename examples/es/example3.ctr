@@ -1,11 +1,11 @@
-✎ escribir: ‘Juego de números’, detener.
-✎ escribir: ‘Adivina el numero’, detener.
-☞ x ≔ Número en medio y: 1 __: 10.
+✎ escribir: ‘Juego de números’, stop.
+✎ escribir: ‘Adivina el numero’, stop.
+☞ x ≔ Número en medio: 1 y: 10.
 ☞ q ≔ 0.
 q ≔ Programa pedir.
 { 
-	✎ escribir: ‘¡incorrecto!’, detener.
+	✎ escribir: ‘¡incorrecto!’, stop.
 	q ≔ Programa pedir.
 
 } mientras: { ↲ x número ≠ q número. }.
-✎ escribir: ‘¡correcto!’, detener.
+✎ escribir: ‘¡correcto!’, stop.

@@ -4,10 +4,10 @@
 	✎ schreiben: ‘Wie viele Zeichen (16-30)?’, halt.
 	anzahl ≔ Programm fragen nummer absolut.
 
-	(anzahl < 16) wahr: {
+	(anzahl < 16) nein: {
 		✎ schreiben: ‘Das reicht nicht, bitte geben Sie eine Zahl zwischen 16 und 30 ein.’, halt.
 	}.
-	(anzahl > 30) wahr: {
+	(anzahl > 30) nein: {
 		✎ schreiben: ‘Das ist zu lang. Einige Systeme lehnen Kennwörter möglicherweise so lange ab.’, halt.
 	}.
 } während: { ↲ (anzahl < 16 oder: anzahl > 30). }.
@@ -15,10 +15,10 @@
 ☞ Passwort ≔ ‘’.
 {
 	☞ char ≔ 
-		zeichen charakter: ( 
+		zeichen Buchstabe: ( 
 		Nummer
-		zwischen und: 1
-		__: zeichen länge
+		zwischen: 1
+		und: zeichen länge
 	).
 	Passwort anhängen: char.
 } × anzahl.

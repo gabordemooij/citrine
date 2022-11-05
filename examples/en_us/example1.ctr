@@ -10,7 +10,7 @@
 	(count > 30) true: {
 		✎ write: ‘That is too long, some systems may reject passwords that long.’, stop.
 	}.
-} whilst: { ↲ (count < 16 or: count > 30). }.
+} while: { ↲ (count < 16 or: count > 30). }.
 ☞ characters ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

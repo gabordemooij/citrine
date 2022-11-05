@@ -1,63 +1,63 @@
-✎ écrire: ‘chiffres romains’, arrêtez.
-✎ écrire: ‘Donnez un nombre à convertir:’, arrêtez.
+✎ écrire: ‘chiffres romains’, stop.
+✎ écrire: ‘Donnez un nombre à convertir:’, stop.
 ☞ nombre ≔ Programme demander nombre absolu.
 
-(nombre = 0) vrai: {
-	✎ écrire: ‘Nulla’, arrêtez.
+(nombre = 0) oui: {
+	✎ écrire: ‘Nulla’, stop.
 	Programme fin.
 }.
 
 {
 	{
-		(nombre ≥ 1000) vrai: {
+		(nombre ≥ 1000) oui: {
 			✎ écrire: ‘Ⅿ’.
 			nombre soustraire: 1000.
-		}, pause.
+		}, arrêtez.
 	
-		(nombre ≥ 500) vrai: {
+		(nombre ≥ 500) oui: {
 			✎ écrire: ‘Ⅾ’.
 			nombre soustraire: 500.
-		}, pause.
+		}, arrêtez.
 	
-		(nombre ≥ 100) vrai: {
+		(nombre ≥ 100) oui: {
 			✎ écrire: ‘Ⅽ’.
 			nombre soustraire: 100.
-		}, pause.
+		}, arrêtez.
 	
-		(nombre ≥ 50) vrai: {
+		(nombre ≥ 50) oui: {
 			✎ écrire: ‘Ⅼ’.
 			nombre soustraire: 50.
-		}, pause.
+		}, arrêtez.
 	
-		(nombre ≥ 50) vrai: {
+		(nombre ≥ 50) oui: {
 			✎ écrire: ‘Ⅼ’.
 			nombre soustraire: 50.
-		}, pause.
+		}, arrêtez.
 	
-		(nombre ≥ 10) vrai: {
+		(nombre ≥ 10) oui: {
 			✎ écrire: ‘Ⅹ’.
 			nombre soustraire: 10.
-		}, pause.
+		}, arrêtez.
 		
-		(nombre ≥ 9) vrai: {
+		(nombre ≥ 9) oui: {
 			✎ écrire: ‘Ⅸ’.
 			nombre soustraire: 9.
-		}, pause.
+		}, arrêtez.
 		
-		(nombre ≥ 5) vrai: {
+		(nombre ≥ 5) oui: {
 			✎ écrire: ‘Ⅴ’.
 			nombre soustraire: 5.
-		}, pause.
+		}, arrêtez.
 		
-		(nombre ≥ 4) vrai: {
+		(nombre ≥ 4) oui: {
 			✎ écrire: ‘Ⅳ’.
 			nombre soustraire: 4.
-		}, pause.
+		}, arrêtez.
 		
-		(nombre ≥ 1) vrai: {
+		(nombre ≥ 1) oui: {
 			✎ écrire: ‘Ⅰ’.
 			nombre soustraire: 1.
-		}, pause.
+		}, arrêtez.
 	} procédure.
 	
-} tandis que: { ↲ nombre > 0. }.
+} tant: { ↲ nombre > 0. }.

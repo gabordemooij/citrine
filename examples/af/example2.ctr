@@ -2,59 +2,59 @@
 ✎ skryf: ‘Gee 'n getal om om te skakel:’, stop.
 ☞ aantal ≔ Program vra aantal absolute.
 
-(aantal = 0) waar: {
+(aantal = 0) ja: {
 	✎ skryf: ‘Nulla’, stop.
 	Program einde.
 }.
 
 {
 	{
-		(aantal ≥ 1000) waar: {
+		(aantal ≥ 1000) ja: {
 			✎ skryf: ‘Ⅿ’.
 			aantal aftrek: 1000.
 		}, breek.
 	
-		(aantal ≥ 500) waar: {
+		(aantal ≥ 500) ja: {
 			✎ skryf: ‘Ⅾ’.
 			aantal aftrek: 500.
 		}, breek.
 	
-		(aantal ≥ 100) waar: {
+		(aantal ≥ 100) ja: {
 			✎ skryf: ‘Ⅽ’.
 			aantal aftrek: 100.
 		}, breek.
 	
-		(aantal ≥ 50) waar: {
+		(aantal ≥ 50) ja: {
 			✎ skryf: ‘Ⅼ’.
 			aantal aftrek: 50.
 		}, breek.
 	
-		(aantal ≥ 50) waar: {
+		(aantal ≥ 50) ja: {
 			✎ skryf: ‘Ⅼ’.
 			aantal aftrek: 50.
 		}, breek.
 	
-		(aantal ≥ 10) waar: {
+		(aantal ≥ 10) ja: {
 			✎ skryf: ‘Ⅹ’.
 			aantal aftrek: 10.
 		}, breek.
 		
-		(aantal ≥ 9) waar: {
+		(aantal ≥ 9) ja: {
 			✎ skryf: ‘Ⅸ’.
 			aantal aftrek: 9.
 		}, breek.
 		
-		(aantal ≥ 5) waar: {
+		(aantal ≥ 5) ja: {
 			✎ skryf: ‘Ⅴ’.
 			aantal aftrek: 5.
 		}, breek.
 		
-		(aantal ≥ 4) waar: {
+		(aantal ≥ 4) ja: {
 			✎ skryf: ‘Ⅳ’.
 			aantal aftrek: 4.
 		}, breek.
 		
-		(aantal ≥ 1) waar: {
+		(aantal ≥ 1) ja: {
 			✎ skryf: ‘Ⅰ’.
 			aantal aftrek: 1.
 		}, breek.

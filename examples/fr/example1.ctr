@@ -1,25 +1,25 @@
-✎ écrire: ‘Générateur de mot de passe’, arrêtez.
+✎ écrire: ‘Générateur de mot de passe’, stop.
 ☞ compter ≔ 0.
 {
-	✎ écrire: ‘Combien de caractères (16-30)?’, arrêtez.
+	✎ écrire: ‘Combien de caractères (16-30)?’, stop.
 	compter ≔ Programme demander nombre absolu.
 
-	(compter < 16) vrai: {
-		✎ écrire: ‘Cela ne suffit pas, veuillez saisir un nombre entre 16 et 30.’, arrêtez.
+	(compter < 16) oui: {
+		✎ écrire: ‘Cela ne suffit pas, veuillez saisir un nombre entre 16 et 30.’, stop.
 	}.
-	(compter > 30) vrai: {
-		✎ écrire: ‘C'est trop long, certains systèmes peuvent rejeter les mots de passe aussi longtemps.’, arrêtez.
+	(compter > 30) oui: {
+		✎ écrire: ‘C'est trop long, certains systèmes peuvent rejeter les mots de passe aussi longtemps.’, stop.
 	}.
-} tandis que: { ↲ (compter < 16 ou: compter > 30). }.
-☞ personnages ≔ ‘acdefghjkmnprtwx2345789@#&’.
+} tant: { ↲ (compter < 16 ou: compter > 30). }.
+☞ lettres ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ mot de passe ≔ ‘’.
 {
 	☞ char ≔ 
-		personnages personnage: ( 
+		lettres lettre: ( 
 		Nombre
-		entre et: 1
-		__: personnages longueur
+		entre: 1
+		et: lettres longueur
 	).
 	mot de passe ajouter: char.
 } × compter.
-✎ écrire: mot de passe, arrêtez.
+✎ écrire: mot de passe, stop.
