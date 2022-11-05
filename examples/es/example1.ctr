@@ -1,25 +1,25 @@
-✎ escribir: ‘Generador de contraseñas’, detener.
+✎ escribir: ‘Generador de contraseñas’, stop.
 ☞ contar ≔ 0.
 {
-	✎ escribir: ‘¿Cuántos caracteres (16-30)?’, detener.
+	✎ escribir: ‘¿Cuántos caracteres (16-30)?’, stop.
 	contar ≔ Programa pedir número absoluto.
 
 	(contar < 16) cierto: {
-		✎ escribir: ‘Eso no es suficiente, ingrese un número entre 16 y 30.’, detener.
+		✎ escribir: ‘Eso no es suficiente, ingrese un número entre 16 y 30.’, stop.
 	}.
 	(contar > 30) cierto: {
-		✎ escribir: ‘Eso es demasiado, algunos sistemas pueden rechazar las contraseñas por tanto tiempo.’, detener.
+		✎ escribir: ‘Eso es demasiado, algunos sistemas pueden rechazar las contraseñas por tanto tiempo.’, stop.
 	}.
-} mientras: { ↲ (contar < 16 _o: contar > 30). }.
+} mientras: { ↲ (contar < 16 o: contar > 30). }.
 ☞ caracteres ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ contraseña ≔ ‘’.
 {
 	☞ char ≔ 
 		caracteres personaje: ( 
 		Número
-		en medio y: 1
-		__: caracteres longitud
+		en medio: 1
+		y: caracteres longitud
 	).
 	contraseña adjuntar: char.
 } × contar.
-✎ escribir: contraseña, detener.
+✎ escribir: contraseña, stop.

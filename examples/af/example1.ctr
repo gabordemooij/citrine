@@ -4,22 +4,22 @@
 	✎ skryf: ‘Hoeveel karakters (16-30)?’, stop.
 	tel ≔ Program vra aantal absolute.
 
-	(tel < 16) waar: {
+	(tel < 16) ja: {
 		✎ skryf: ‘Dit is nie genoeg nie. Voer asseblief 'n nommer tussen 16 en 30 in.’, stop.
 	}.
-	(tel > 30) waar: {
+	(tel > 30) ja: {
 		✎ skryf: ‘Dit is te lank, sommige stelsels kan wagwoorde so lank verwerp.’, stop.
 	}.
 } terwyl: { ↲ (tel < 16 of: tel > 30). }.
-☞ karakters ≔ ‘acdefghjkmnprtwx2345789@#&’.
+☞ letters ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ wagwoord ≔ ‘’.
 {
 	☞ char ≔ 
-		karakters karakter: ( 
+		letters letter: ( 
 		Aantal
 		tussen: 1
-		en: karakters lengte
+		en: letters lengte
 	).
-	wagwoord aanhegnavraag: char.
+	wagwoord voeg toe: char.
 } × tel.
 ✎ skryf: wagwoord, stop.

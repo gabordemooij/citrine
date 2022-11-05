@@ -1,9 +1,9 @@
-✎ scrivi: ‘numeri romani’, fermare.
-✎ scrivi: ‘Dai un numero da convertire:’, fermare.
+✎ scrivi: ‘numeri romani’, stop.
+✎ scrivi: ‘Dai un numero da convertire:’, stop.
 ☞ numero ≔ Programma chiedi numero assoluto.
 
 (numero = 0) vero: {
-	✎ scrivi: ‘Nulla’, fermare.
+	✎ scrivi: ‘Nulla’, stop.
 	Programma fine.
 }.
 
@@ -12,52 +12,52 @@
 		(numero ≥ 1000) vero: {
 			✎ scrivi: ‘Ⅿ’.
 			numero sottrarre: 1000.
-		}, rompere.
+		}, interrompere.
 	
 		(numero ≥ 500) vero: {
 			✎ scrivi: ‘Ⅾ’.
 			numero sottrarre: 500.
-		}, rompere.
+		}, interrompere.
 	
 		(numero ≥ 100) vero: {
 			✎ scrivi: ‘Ⅽ’.
 			numero sottrarre: 100.
-		}, rompere.
+		}, interrompere.
 	
 		(numero ≥ 50) vero: {
 			✎ scrivi: ‘Ⅼ’.
 			numero sottrarre: 50.
-		}, rompere.
+		}, interrompere.
 	
 		(numero ≥ 50) vero: {
 			✎ scrivi: ‘Ⅼ’.
 			numero sottrarre: 50.
-		}, rompere.
+		}, interrompere.
 	
 		(numero ≥ 10) vero: {
 			✎ scrivi: ‘Ⅹ’.
 			numero sottrarre: 10.
-		}, rompere.
+		}, interrompere.
 		
 		(numero ≥ 9) vero: {
 			✎ scrivi: ‘Ⅸ’.
 			numero sottrarre: 9.
-		}, rompere.
+		}, interrompere.
 		
 		(numero ≥ 5) vero: {
 			✎ scrivi: ‘Ⅴ’.
 			numero sottrarre: 5.
-		}, rompere.
+		}, interrompere.
 		
 		(numero ≥ 4) vero: {
 			✎ scrivi: ‘Ⅳ’.
 			numero sottrarre: 4.
-		}, rompere.
+		}, interrompere.
 		
 		(numero ≥ 1) vero: {
 			✎ scrivi: ‘Ⅰ’.
 			numero sottrarre: 1.
-		}, rompere.
+		}, interrompere.
 	} procedura.
 	
 } mentre: { ↲ numero > 0. }.

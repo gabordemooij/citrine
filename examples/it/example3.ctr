@@ -1,11 +1,11 @@
-✎ scrivi: ‘Numero di gioco’, fermare.
-✎ scrivi: ‘Indovina il numero’, fermare.
-☞ x ≔ Numero tra e: 1 __: 10.
+✎ scrivi: ‘Numero di gioco’, stop.
+✎ scrivi: ‘Indovina il numero’, stop.
+☞ x ≔ Numero tra: 1  e: 10.
 ☞ q ≔ 0.
 q ≔ Programma chiedi.
 { 
-	✎ scrivi: ‘sbagliato!’, fermare.
+	✎ scrivi: ‘sbagliato!’, stop.
 	q ≔ Programma chiedi.
 
 } mentre: { ↲ x numero ≠ q numero. }.
-✎ scrivi: ‘corretta!’, fermare.
+✎ scrivi: ‘corretta!’, stop.

@@ -7,5 +7,5 @@ q ≔ Program ask.
 	✎ write: ‘wrong!’, stop.
 	q ≔ Program ask.
 
-} whilst: { ↲ x number ≠ q number. }.
+} while: { ↲ x number ≠ q number. }.
 ✎ write: ‘correct!’, stop.

@@ -1,0 +1,11 @@
+✎ skirbi: ‘Number Game’, bula un liña.
+✎ skirbi: ‘Montadó e kantidat’, bula un liña.
+☞ x ≔ Number entre: 1 i: 10.
+☞ q ≔ 0.
+q ≔ Programa puntra.
+{ 
+	✎ skirbi: ‘¡el tipo equivocado!’, bula un liña.
+	q ≔ Programa puntra.
+
+} durante: { ↲ x number ≠ q number. }.
+✎ skirbi: ‘korekto!’, bula un liña.

@@ -1,61 +1,61 @@
-✎ escrever: ‘números romanos’, punto.
-✎ escrever: ‘Dê um número para converter:’, punto.
+✎ escrever: “números romanos”, punto.
+✎ escrever: “Dê um número para converter:”, punto.
 ☞ número ≔ Programa perguntar número absoluto.
 
-(número = 0) verdade: {
-	✎ escrever: ‘Nulla’, punto.
+(número = 0) verdadeiro: {
+	✎ escrever: “Nulla”, punto.
 	Programa fim.
 }.
 
 {
 	{
-		(número ≥ 1000) verdade: {
-			✎ escrever: ‘Ⅿ’.
+		(número ≥ 1000) verdadeiro: {
+			✎ escrever: “Ⅿ”.
 			número subtrair: 1000.
 		}, parar.
 	
-		(número ≥ 500) verdade: {
-			✎ escrever: ‘Ⅾ’.
+		(número ≥ 500) verdadeiro: {
+			✎ escrever: “Ⅾ”.
 			número subtrair: 500.
 		}, parar.
 	
-		(número ≥ 100) verdade: {
-			✎ escrever: ‘Ⅽ’.
+		(número ≥ 100) verdadeiro: {
+			✎ escrever: “Ⅽ”.
 			número subtrair: 100.
 		}, parar.
 	
-		(número ≥ 50) verdade: {
-			✎ escrever: ‘Ⅼ’.
+		(número ≥ 50) verdadeiro: {
+			✎ escrever: “Ⅼ”.
 			número subtrair: 50.
 		}, parar.
 	
-		(número ≥ 50) verdade: {
-			✎ escrever: ‘Ⅼ’.
+		(número ≥ 50) verdadeiro: {
+			✎ escrever: “Ⅼ”.
 			número subtrair: 50.
 		}, parar.
 	
-		(número ≥ 10) verdade: {
-			✎ escrever: ‘Ⅹ’.
+		(número ≥ 10) verdadeiro: {
+			✎ escrever: “Ⅹ”.
 			número subtrair: 10.
 		}, parar.
 		
-		(número ≥ 9) verdade: {
-			✎ escrever: ‘Ⅸ’.
+		(número ≥ 9) verdadeiro: {
+			✎ escrever: “Ⅸ”.
 			número subtrair: 9.
 		}, parar.
 		
-		(número ≥ 5) verdade: {
-			✎ escrever: ‘Ⅴ’.
+		(número ≥ 5) verdadeiro: {
+			✎ escrever: “Ⅴ”.
 			número subtrair: 5.
 		}, parar.
 		
-		(número ≥ 4) verdade: {
-			✎ escrever: ‘Ⅳ’.
+		(número ≥ 4) verdadeiro: {
+			✎ escrever: “Ⅳ”.
 			número subtrair: 4.
 		}, parar.
 		
-		(número ≥ 1) verdade: {
-			✎ escrever: ‘Ⅰ’.
+		(número ≥ 1) verdadeiro: {
+			✎ escrever: “Ⅰ”.
 			número subtrair: 1.
 		}, parar.
 	} procedimento.

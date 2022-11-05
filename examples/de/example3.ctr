@@ -1,6 +1,6 @@
 ✎ schreiben: ‘Zahlenspiel’, halt.
 ✎ schreiben: ‘Errate die Nummer’, halt.
-☞ x ≔ Nummer zwischen und: 1 __: 10.
+☞ x ≔ Nummer zwischen: 1 und: 10.
 ☞ q ≔ 0.
 q ≔ Programm fragen.
 { 

@@ -1,11 +1,11 @@
-✎ écrire: ‘Jeu de nombres’, arrêtez.
-✎ écrire: ‘Devinez le nombre’, arrêtez.
-☞ x ≔ Nombre entre et: 1 __: 10.
+✎ écrire: ‘Jeu de nombres’, stop.
+✎ écrire: ‘Devinez le nombre’, stop.
+☞ x ≔ Nombre entre: 1 et: 10.
 ☞ q ≔ 0.
 q ≔ Programme demander.
 { 
-	✎ écrire: ‘faux!’, arrêtez.
+	✎ écrire: ‘faux!’, stop.
 	q ≔ Programme demander.
 
-} tandis que: { ↲ x nombre ≠ q nombre. }.
-✎ écrire: ‘correct!’, arrêtez.
+} tant: { ↲ x nombre ≠ q nombre. }.
+✎ écrire: ‘correct!’, stop.
