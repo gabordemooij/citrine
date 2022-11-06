@@ -1,11 +1,11 @@
-String,Nummer
-String,Boolean
-Nummer,String
+Tekst,Nummer
+Tekst,Boolean
+Nummer,Tekst
 Nummer,Boolean
 Boolean,Nummer
 Boolean,Nummer
-Boolean,String
-Boolean,String
+Boolean,Tekst
+Boolean,Tekst
 === String test ===
 123
 Falsk

@@ -1,5 +1,5 @@
-Nil
-Nil
+Tom
+Tom
 Boolean
 Ekte
 Boolean
@@ -12,25 +12,25 @@ Nummer
 9,2
 Nummer
 -9,2
+Rekke
+Rekke ny 
+Rekke
+Rekke ← 1 ; 2
+Rekke
+Rekke ← 1 ; (Rekke ← 2)
+Rekke
+Rekke ← 1 ; (Rekke ← 2) ; 3
+Rekke
+Rekke ← 1 ; ((Liste ny) sagt:‘a’ at:‘b’) ; 3
+Rekke
+Rekke ← 1 ; ((Liste ny) sagt:(Rekke ← 9) at:‘b’) ; 3
 Liste
-Liste ny 
+(Liste ny) sagt:2 at:‘1’
 Liste
-Liste ← 1 ; 2
+(Liste ny) sagt:2 at:‘x’
 Liste
-Liste ← 1 ; (Liste ← 2)
+(Liste ny) sagt:(Rekke ← 1 ; 2) at:‘x’
 Liste
-Liste ← 1 ; (Liste ← 2) ; 3
-Liste
-Liste ← 1 ; ((Kart ny) sagt:‘a’ at:‘b’) ; 3
-Liste
-Liste ← 1 ; ((Kart ny) sagt:(Liste ← 9) at:‘b’) ; 3
-Kart
-(Kart ny) sagt:2 at:‘1’
-Kart
-(Kart ny) sagt:2 at:‘x’
-Kart
-(Kart ny) sagt:(Liste ← 1 ; 2) at:‘x’
-Kart
-(Kart ny) sagt:(Liste ← ((Kart ny) sagt:‘q’ at:‘y’) ; 2) at:‘x’
-Nil
-Nil
+(Liste ny) sagt:(Rekke ← ((Liste ny) sagt:‘q’ at:‘y’) ; 2) at:‘x’
+Tom
+Tom
