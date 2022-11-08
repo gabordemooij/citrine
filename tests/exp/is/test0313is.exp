@@ -2,9 +2,9 @@ There are 2 chairs in the sunny garden.
 A rubber duck swims in the pool.
 Is there a shed in the garden? Well.. Rangt
 In the garden you smell the fragrance of tulips and roses and lillies.
-The garden is Núll meters long.
-Luckily, this day, there are Núll wasps in the garden.
-The dog named Núll sleeps under the tree.
+The garden is Tómt meters long.
+Luckily, this day, there are Tómt wasps in the garden.
+The dog named Tómt sleeps under the tree.
 a\"bb\"ccc\"
-(Kort nýtt) setja:((Kort nýtt) setja:Núll _á:‘dog’, setja:Núll _á:‘insects’, setja:((Kort nýtt) setja:15 _á:‘length’, setja:8 _á:‘width’) _á:‘size’, setja:(Listi ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _á:‘flower’, setja:Rangt _á:‘shed’, setja:Satt _á:‘pool’, setja:2 _á:‘chairs’) _á:‘garden’
+(Listi nýtt) settu:((Listi nýtt) settu:Tómt í:‘dog’, settu:Tómt í:‘insects’, settu:((Listi nýtt) settu:15 í:‘length’, settu:8 í:‘width’) í:‘size’, settu:(Röð ← ‘tulips’ ; ‘roses’ ; ‘lillies’) í:‘flower’, settu:Rangt í:‘shed’, settu:Satt í:‘pool’, settu:2 í:‘chairs’) í:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

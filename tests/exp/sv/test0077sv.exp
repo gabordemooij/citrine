@@ -1,11 +1,11 @@
-Sträng,Siffra
-Sträng,Boolean
-Siffra,Sträng
+Text,Siffra
+Text,Boolean
+Siffra,Text
 Siffra,Boolean
 Boolean,Siffra
 Boolean,Siffra
-Boolean,Sträng
-Boolean,Sträng
+Boolean,Text
+Boolean,Text
 === String test ===
 123
 Falsk

@@ -1,5 +1,5 @@
-Noll
-Noll
+Tömma
+Tömma
 Boolean
 Sann
 Boolean
@@ -12,25 +12,15 @@ Siffra
 9,2
 Siffra
 -9,2
-Lista
-Lista ny 
-Lista
-Lista ← 1 ; 2
-Lista
-Lista ← 1 ; (Lista ← 2)
-Lista
-Lista ← 1 ; (Lista ← 2) ; 3
-Lista
-Lista ← 1 ; ((Karta ny) sätta vid:‘a’ __:‘b’) ; 3
-Lista
-Lista ← 1 ; ((Karta ny) sätta vid:(Lista ← 9) __:‘b’) ; 3
-Karta
-(Karta ny) sätta vid:2 __:‘1’
-Karta
-(Karta ny) sätta vid:2 __:‘x’
-Karta
-(Karta ny) sätta vid:(Lista ← 1 ; 2) __:‘x’
-Karta
-(Karta ny) sätta vid:(Lista ← ((Karta ny) sätta vid:‘q’ __:‘y’) ; 2) __:‘x’
-Noll
-Noll
+Serie
+Serie ny 
+Serie
+Serie ← 1 ; 2
+Serie
+Serie ← 1 ; (Serie ← 2)
+Serie
+Serie ← 1 ; (Serie ← 2) ; 3
+Fel som inte hämtats har inträffatAnalysfel oväntat '  ( ../../tests/tmp/runnersv : 1 )Förväntad [)].
+
+#2 objekt (../../tests/tmp/runnersv: 47)
+#1 skriva: (../../tests/tmp/runnersv: 47)

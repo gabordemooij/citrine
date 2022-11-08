@@ -1,11 +1,11 @@
-Strengur,Fjöldi
-Strengur,Boolean
-Fjöldi,Strengur
+Texti,Fjöldi
+Texti,Boolean
+Fjöldi,Texti
 Fjöldi,Boolean
 Boolean,Fjöldi
 Boolean,Fjöldi
-Boolean,Strengur
-Boolean,Strengur
+Boolean,Texti
+Boolean,Texti
 === String test ===
 123
 Rangt

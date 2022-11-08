@@ -42,7 +42,7 @@
 #define CTR_DICT_NOR              "heller ikke:"
 #define CTR_DICT_ONDO             "på:gjøre:"
 #define CTR_DICT_TYPE             "type"
-#define CTR_DICT_ISNIL            "nil?"
+#define CTR_DICT_ISNIL            "tom?"
 #define CTR_DICT_MYSELF           "meg selv"
 #define CTR_DICT_DO               "gjøre"
 #define CTR_DICT_DONE             "ferdig"
