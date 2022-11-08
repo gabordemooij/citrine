@@ -1,11 +1,11 @@
-Snor,Nummer
-Snor,Boolean
-Nummer,Snor
+Tekst,Nummer
+Tekst,Boolean
+Nummer,Tekst
 Nummer,Boolean
 Boolean,Nummer
 Boolean,Nummer
-Boolean,Snor
-Boolean,Snor
+Boolean,Tekst
+Boolean,Tekst
 === String test ===
 123
 Falsk

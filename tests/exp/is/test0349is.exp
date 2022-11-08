@@ -1,5 +1,5 @@
-Núll
-Núll
+Tómt
+Tómt
 Boolean
 Satt
 Boolean
@@ -12,25 +12,25 @@ Fjöldi
 9,2
 Fjöldi
 -9,2
+Röð
+Röð nýtt 
+Röð
+Röð ← 1 ; 2
+Röð
+Röð ← 1 ; (Röð ← 2)
+Röð
+Röð ← 1 ; (Röð ← 2) ; 3
+Röð
+Röð ← 1 ; ((Listi nýtt) settu:‘a’ í:‘b’) ; 3
+Röð
+Röð ← 1 ; ((Listi nýtt) settu:(Röð ← 9) í:‘b’) ; 3
 Listi
-Listi nýtt 
+(Listi nýtt) settu:2 í:‘1’
 Listi
-Listi ← 1 ; 2
+(Listi nýtt) settu:2 í:‘x’
 Listi
-Listi ← 1 ; (Listi ← 2)
+(Listi nýtt) settu:(Röð ← 1 ; 2) í:‘x’
 Listi
-Listi ← 1 ; (Listi ← 2) ; 3
-Listi
-Listi ← 1 ; ((Kort nýtt) setja:‘a’ _á:‘b’) ; 3
-Listi
-Listi ← 1 ; ((Kort nýtt) setja:(Listi ← 9) _á:‘b’) ; 3
-Kort
-(Kort nýtt) setja:2 _á:‘1’
-Kort
-(Kort nýtt) setja:2 _á:‘x’
-Kort
-(Kort nýtt) setja:(Listi ← 1 ; 2) _á:‘x’
-Kort
-(Kort nýtt) setja:(Listi ← ((Kort nýtt) setja:‘q’ _á:‘y’) ; 2) _á:‘x’
-Núll
-Núll
+(Listi nýtt) settu:(Röð ← ((Listi nýtt) settu:‘q’ í:‘y’) ; 2) í:‘x’
+Tómt
+Tómt

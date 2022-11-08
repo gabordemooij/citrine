@@ -5,7 +5,7 @@ a Boolean ‘Falsk’  is NOT Nil.
 a Boolean ‘Falsk’  is NOT Nil.
 a Nummer ‘1’  is NOT Nil.
 a Nummer ‘0’  is NOT Nil.
-a Snor ‘Str’  is NOT Nil.
-a Snor ‘’  is NOT Nil.
-a Kode ‘Kode’  is NOT Nil.
+a Tekst ‘Str’  is NOT Nil.
+a Tekst ‘’  is NOT Nil.
+a Opgave ‘Opgave’  is NOT Nil.
 but.. Nil is.. certainly NIL!
