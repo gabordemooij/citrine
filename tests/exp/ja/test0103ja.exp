@@ -5,7 +5,7 @@ a ブール ‘誤り’  is NOT Nil.
 a ブール ‘誤り’  is NOT Nil.
 a _数 ‘1’  is NOT Nil.
 a _数 ‘0’  is NOT Nil.
-a ストリング ‘Str’  is NOT Nil.
-a ストリング ‘’  is NOT Nil.
-a コード ‘コード’  is NOT Nil.
+a テキスト ‘Str’  is NOT Nil.
+a テキスト ‘’  is NOT Nil.
+a タスク ‘タスク’  is NOT Nil.
 but.. Nil is.. certainly NIL!

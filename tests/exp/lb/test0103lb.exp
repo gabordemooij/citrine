@@ -5,7 +5,7 @@ a Boolschen ‘Falsch’  is NOT Nil.
 a Boolschen ‘Falsch’  is NOT Nil.
 a Zuel ‘1’  is NOT Nil.
 a Zuel ‘0’  is NOT Nil.
-a String ‘Str’  is NOT Nil.
-a String ‘’  is NOT Nil.
-a Code gitt ‘Code gitt’  is NOT Nil.
+a Text ‘Str’  is NOT Nil.
+a Text ‘’  is NOT Nil.
+a Aufgab ‘Aufgab’  is NOT Nil.
 but.. Nil is.. certainly NIL!

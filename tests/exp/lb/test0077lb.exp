@@ -1,11 +1,11 @@
-String,Zuel
-String,Boolschen
-Zuel,String
+Text,Zuel
+Text,Boolschen
+Zuel,Text
 Zuel,Boolschen
 Boolschen,Zuel
 Boolschen,Zuel
-Boolschen,String
-Boolschen,String
+Boolschen,Text
+Boolschen,Text
 === String test ===
 123
 Falsch
