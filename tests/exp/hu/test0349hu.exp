@@ -1,5 +1,5 @@
-Nulla
-Nulla
+Üres
+Üres
 Logikai
 Igaz
 Logikai
@@ -12,25 +12,25 @@ Szám
 9,2
 Szám
 -9,2
+Sorozat
+Sorozat új 
+Sorozat
+Sorozat ← 1 ; 2
+Sorozat
+Sorozat ← 1 ; (Sorozat ← 2)
+Sorozat
+Sorozat ← 1 ; (Sorozat ← 2) ; 3
+Sorozat
+Sorozat ← 1 ; ((Lista új) magyarán:‘a’ itt:‘b’) ; 3
+Sorozat
+Sorozat ← 1 ; ((Lista új) magyarán:(Sorozat ← 9) itt:‘b’) ; 3
 Lista
-Lista új 
+(Lista új) magyarán:2 itt:‘1’
 Lista
-Lista ← 1 ; 2
+(Lista új) magyarán:2 itt:‘x’
 Lista
-Lista ← 1 ; (Lista ← 2)
+(Lista új) magyarán:(Sorozat ← 1 ; 2) itt:‘x’
 Lista
-Lista ← 1 ; (Lista ← 2) ; 3
-Lista
-Lista ← 1 ; ((Térkép új) magyarán:‘a’ itt:‘b’) ; 3
-Lista
-Lista ← 1 ; ((Térkép új) magyarán:(Lista ← 9) itt:‘b’) ; 3
-Térkép
-(Térkép új) magyarán:2 itt:‘1’
-Térkép
-(Térkép új) magyarán:2 itt:‘x’
-Térkép
-(Térkép új) magyarán:(Lista ← 1 ; 2) itt:‘x’
-Térkép
-(Térkép új) magyarán:(Lista ← ((Térkép új) magyarán:‘q’ itt:‘y’) ; 2) itt:‘x’
-Nulla
-Nulla
+(Lista új) magyarán:(Sorozat ← ((Lista új) magyarán:‘q’ itt:‘y’) ; 2) itt:‘x’
+Üres
+Üres

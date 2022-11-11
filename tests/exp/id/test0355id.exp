@@ -1,15 +1,15 @@
 1.001
 1.024
-Daftar ← ‘1’ ; ‘2’ ; ‘3’
-Daftar ← ‘1’ ; ‘2’ ; ‘3’
-Daftar ← ‘1’ ; ‘’ ; ‘3’
-Daftar ← ‘1’ ; ‘’ ; ‘3’
-Daftar ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Daftar ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Daftar ← ‘’ ; ‘’
-Daftar ← ‘’ ; ‘’
-Daftar ← ‘x’
-Daftar ← ‘x’
-Daftar ← ‘’
-Daftar ← ‘’
-Daftar ← ‘1,2,3’
+Seri ← ‘1’ ; ‘2’ ; ‘3’
+Seri ← ‘1’ ; ‘2’ ; ‘3’
+Seri ← ‘1’ ; ‘’ ; ‘3’
+Seri ← ‘1’ ; ‘’ ; ‘3’
+Seri ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Seri ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Seri ← ‘’ ; ‘’
+Seri ← ‘’ ; ‘’
+Seri ← ‘x’
+Seri ← ‘x’
+Seri ← ‘’
+Seri ← ‘’
+Seri ← ‘1,2,3’

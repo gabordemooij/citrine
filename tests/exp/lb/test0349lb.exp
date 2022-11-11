@@ -1,5 +1,5 @@
-Null
-Null
+Eidel
+Eidel
 Boolschen
 Richteg
 Boolschen
@@ -12,25 +12,25 @@ Zuel
 9,2
 Zuel
 -9,2
+Serie
+Serie nei 
+Serie
+Serie ← 1 ; 2
+Serie
+Serie ← 1 ; (Serie ← 2)
+Serie
+Serie ← 1 ; (Serie ← 2) ; 3
+Serie
+Serie ← 1 ; ((Lëscht nei) setzen:‘a’ bei:‘b’) ; 3
+Serie
+Serie ← 1 ; ((Lëscht nei) setzen:(Serie ← 9) bei:‘b’) ; 3
 Lëscht
-Lëscht nei 
+(Lëscht nei) setzen:2 bei:‘1’
 Lëscht
-Lëscht ← 1 ; 2
+(Lëscht nei) setzen:2 bei:‘x’
 Lëscht
-Lëscht ← 1 ; (Lëscht ← 2)
+(Lëscht nei) setzen:(Serie ← 1 ; 2) bei:‘x’
 Lëscht
-Lëscht ← 1 ; (Lëscht ← 2) ; 3
-Lëscht
-Lëscht ← 1 ; ((Kaart nei) setzen:‘a’ bei:‘b’) ; 3
-Lëscht
-Lëscht ← 1 ; ((Kaart nei) setzen:(Lëscht ← 9) bei:‘b’) ; 3
-Kaart
-(Kaart nei) setzen:2 bei:‘1’
-Kaart
-(Kaart nei) setzen:2 bei:‘x’
-Kaart
-(Kaart nei) setzen:(Lëscht ← 1 ; 2) bei:‘x’
-Kaart
-(Kaart nei) setzen:(Lëscht ← ((Kaart nei) setzen:‘q’ bei:‘y’) ; 2) bei:‘x’
-Null
-Null
+(Lëscht nei) setzen:(Serie ← ((Lëscht nei) setzen:‘q’ bei:‘y’) ; 2) bei:‘x’
+Eidel
+Eidel

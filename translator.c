@@ -379,21 +379,11 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 	char* buffer;
 	char* warning;
 	entry = dictionary;
-	ctr_size utf8TransLength;
-	ctr_size utf8WordLength = ctr_getutf8len(v,l);
 	while( entry ) {
 		ctr_size ml;
 		ml = entry->wordLength;
 		if ( l == entry->wordLength && context == entry->type && strncmp( entry->word, v, ml ) == 0 ) {
 			if (context == 't') {
-				utf8TransLength = ctr_getutf8len(entry->translation,entry->translationLength);
-				if ((utf8TransLength == 1 && utf8WordLength > 1) || (utf8WordLength == 1 && utf8TransLength > 1)) {
-					buffer = ctr_heap_allocate( 600 );
-					warning = CTR_TERR_TMISMAT;
-					memcpy(buffer, warning, strlen(warning));
-					memcpy(buffer + (strlen(warning)), v, l);
-					ctr_print_error( buffer, 1 );
-				}
 				p = 0; q = 0;
 				for (i = 0; i<entry->wordLength; i++) {
 					if (*(entry->word + i)==ctr_clex_param_prefix_char) p++;

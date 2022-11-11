@@ -1,10 +1,10 @@
 There are 2 chairs in the sunny garden.
 A rubber duck swims in the pool.
-Is there a shed in the garden? Well.. _假
+Is there a shed in the garden? Well.. 假
 In the garden you smell the fragrance of tulips and roses and lillies.
-The garden is _零 meters long.
-Luckily, this day, there are _零 wasps in the garden.
-The dog named _零 sleeps under the tree.
+The garden is 空虛 meters long.
+Luckily, this day, there are 空虛 wasps in the garden.
+The dog named 空虛 sleeps under the tree.
 a\"bb\"ccc\"
-(地圖 _新) 放在：在：__:((地圖 _新) 放在：在：__:_零 __:‘dog’, 放在：在：__:_零 __:‘insects’, 放在：在：__:((地圖 _新) 放在：在：__:15 __:‘length’, 放在：在：__:8 __:‘width’) __:‘size’, 放在：在：__:(清單 ← ‘tulips’ ; ‘roses’ ; ‘lillies’) __:‘flower’, 放在：在：__:_假 __:‘shed’, 放在：在：__:真正 __:‘pool’, 放在：在：__:2 __:‘chairs’) __:‘garden’
+(列表 新的) 将:((列表 新的) 将:空虛 设置为:‘dog’, 将:空虛 设置为:‘insects’, 将:((列表 新的) 将:15 设置为:‘length’, 将:8 设置为:‘width’) 设置为:‘size’, 将:(系列 ← ‘tulips’ ; ‘roses’ ; ‘lillies’) 设置为:‘flower’, 将:假 设置为:‘shed’, 将:真正 设置为:‘pool’, 将:2 设置为:‘chairs’) 设置为:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

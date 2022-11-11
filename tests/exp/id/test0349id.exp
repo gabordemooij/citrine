@@ -1,5 +1,5 @@
-Nol
-Nol
+Void
+Void
 Boolean
 Benar
 Boolean
@@ -12,25 +12,25 @@ Jumlah
 9,2
 Jumlah
 -9,2
+Seri
+Seri baru 
+Seri
+Seri ← 1 ; 2
+Seri
+Seri ← 1 ; (Seri ← 2)
+Seri
+Seri ← 1 ; (Seri ← 2) ; 3
+Seri
+Seri ← 1 ; ((Daftar baru) menempatkan:‘a’ di:‘b’) ; 3
+Seri
+Seri ← 1 ; ((Daftar baru) menempatkan:(Seri ← 9) di:‘b’) ; 3
 Daftar
-Daftar baru 
+(Daftar baru) menempatkan:2 di:‘1’
 Daftar
-Daftar ← 1 ; 2
+(Daftar baru) menempatkan:2 di:‘x’
 Daftar
-Daftar ← 1 ; (Daftar ← 2)
+(Daftar baru) menempatkan:(Seri ← 1 ; 2) di:‘x’
 Daftar
-Daftar ← 1 ; (Daftar ← 2) ; 3
-Daftar
-Daftar ← 1 ; ((Peta baru) menempatkan:‘a’ di:‘b’) ; 3
-Daftar
-Daftar ← 1 ; ((Peta baru) menempatkan:(Daftar ← 9) di:‘b’) ; 3
-Peta
-(Peta baru) menempatkan:2 di:‘1’
-Peta
-(Peta baru) menempatkan:2 di:‘x’
-Peta
-(Peta baru) menempatkan:(Daftar ← 1 ; 2) di:‘x’
-Peta
-(Peta baru) menempatkan:(Daftar ← ((Peta baru) menempatkan:‘q’ di:‘y’) ; 2) di:‘x’
-Nol
-Nol
+(Daftar baru) menempatkan:(Seri ← ((Daftar baru) menempatkan:‘q’ di:‘y’) ; 2) di:‘x’
+Void
+Void
