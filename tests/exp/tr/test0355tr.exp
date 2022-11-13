@@ -1,15 +1,15 @@
 1.001
 1.024
-Liste ← ‘1’ ; ‘2’ ; ‘3’
-Liste ← ‘1’ ; ‘2’ ; ‘3’
-Liste ← ‘1’ ; ‘’ ; ‘3’
-Liste ← ‘1’ ; ‘’ ; ‘3’
-Liste ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Liste ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Liste ← ‘’ ; ‘’
-Liste ← ‘’ ; ‘’
-Liste ← ‘x’
-Liste ← ‘x’
-Liste ← ‘’
-Liste ← ‘’
-Liste ← ‘1,2,3’
+Dizi ← ‘1’ ; ‘2’ ; ‘3’
+Dizi ← ‘1’ ; ‘2’ ; ‘3’
+Dizi ← ‘1’ ; ‘’ ; ‘3’
+Dizi ← ‘1’ ; ‘’ ; ‘3’
+Dizi ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Dizi ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Dizi ← ‘’ ; ‘’
+Dizi ← ‘’ ; ‘’
+Dizi ← ‘x’
+Dizi ← ‘x’
+Dizi ← ‘’
+Dizi ← ‘’
+Dizi ← ‘1,2,3’
