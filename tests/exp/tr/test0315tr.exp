@@ -1,6 +1,6 @@
-(Harita yeni) koyun:‘a"b’ at:‘test’
+(Liste yeni) koyun:‘a"b’ at:‘test’
 Invalid JSON.
-(Harita yeni) koyun:(Liste ← 1 ; 2 ; (Liste ← 3 ; 4) ; ((Harita yeni) koyun:(Liste ← 3 ; 4) at:‘bar’, koyun:1 at:‘foo’)) at:‘nested’, koyun:Yanlış at:‘legend’, koyun:27 at:‘age’, koyun:‘Jack’ at:‘name’
+(Liste yeni) koyun:(Dizi ← 1 ; 2 ; (Dizi ← 3 ; 4) ; ((Liste yeni) koyun:(Dizi ← 3 ; 4) at:‘bar’, koyun:1 at:‘foo’)) at:‘nested’, koyun:Yanlış at:‘legend’, koyun:27 at:‘age’, koyun:‘Jack’ at:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

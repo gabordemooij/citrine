@@ -1,11 +1,11 @@
-Sicim,Numara
-Sicim,Boole
-Numara,Sicim
+Metin,Numara
+Metin,Boole
+Numara,Metin
 Numara,Boole
 Boole,Numara
 Boole,Numara
-Boole,Sicim
-Boole,Sicim
+Boole,Metin
+Boole,Metin
 === String test ===
 123
 Yanlış

@@ -5,7 +5,7 @@ a Boole ‘Yanlış’  is NOT Nil.
 a Boole ‘Yanlış’  is NOT Nil.
 a Numara ‘1’  is NOT Nil.
 a Numara ‘0’  is NOT Nil.
-a Sicim ‘Str’  is NOT Nil.
-a Sicim ‘’  is NOT Nil.
+a Metin ‘Str’  is NOT Nil.
+a Metin ‘’  is NOT Nil.
 a Kod ‘Kod’  is NOT Nil.
 but.. Nil is.. certainly NIL!

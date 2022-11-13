@@ -11,7 +11,7 @@
 #define CTR_DICT_NUMBER           "數"
 #define CTR_DICT_STRING           "文本"
 #define CTR_DICT_TASK             "碼"
-#define CTR_DICT_OBJECT           "賓語"
+#define CTR_DICT_OBJECT           "物體"
 #define CTR_DICT_ARRAY_OBJECT     "系列"
 #define CTR_DICT_MAP_OBJECT       "列表"
 #define CTR_DICT_PROGRAM          "程序"
