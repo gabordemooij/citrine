@@ -1,6 +1,6 @@
-(Mappa novu) mette:‘a"b’ _à:‘test’
+(Lista novu) mette:‘a"b’ à:‘test’
 Invalid JSON.
-(Mappa novu) mette:(Elencu ← 1 ; 2 ; (Elencu ← 3 ; 4) ; ((Mappa novu) mette:(Elencu ← 3 ; 4) _à:‘bar’, mette:1 _à:‘foo’)) _à:‘nested’, mette:False _à:‘legend’, mette:27 _à:‘age’, mette:‘Jack’ _à:‘name’
+(Lista novu) mette:(Serie ← 1 ; 2 ; (Serie ← 3 ; 4) ; ((Lista novu) mette:(Serie ← 3 ; 4) à:‘bar’, mette:1 à:‘foo’)) à:‘nested’, mette:False à:‘legend’, mette:27 à:‘age’, mette:‘Jack’ à:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

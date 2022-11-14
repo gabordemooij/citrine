@@ -12,25 +12,25 @@ Numero
 9,2
 Numero
 -9,2
-Elencu
-Elencu novu 
-Elencu
-Elencu ← 1 ; 2
-Elencu
-Elencu ← 1 ; (Elencu ← 2)
-Elencu
-Elencu ← 1 ; (Elencu ← 2) ; 3
-Elencu
-Elencu ← 1 ; ((Mappa novu) mette:‘a’ _à:‘b’) ; 3
-Elencu
-Elencu ← 1 ; ((Mappa novu) mette:(Elencu ← 9) _à:‘b’) ; 3
-Mappa
-(Mappa novu) mette:2 _à:‘1’
-Mappa
-(Mappa novu) mette:2 _à:‘x’
-Mappa
-(Mappa novu) mette:(Elencu ← 1 ; 2) _à:‘x’
-Mappa
-(Mappa novu) mette:(Elencu ← ((Mappa novu) mette:‘q’ _à:‘y’) ; 2) _à:‘x’
+Serie
+Serie novu 
+Serie
+Serie ← 1 ; 2
+Serie
+Serie ← 1 ; (Serie ← 2)
+Serie
+Serie ← 1 ; (Serie ← 2) ; 3
+Serie
+Serie ← 1 ; ((Lista novu) mette:‘a’ à:‘b’) ; 3
+Serie
+Serie ← 1 ; ((Lista novu) mette:(Serie ← 9) à:‘b’) ; 3
+Lista
+(Lista novu) mette:2 à:‘1’
+Lista
+(Lista novu) mette:2 à:‘x’
+Lista
+(Lista novu) mette:(Serie ← 1 ; 2) à:‘x’
+Lista
+(Lista novu) mette:(Serie ← ((Lista novu) mette:‘q’ à:‘y’) ; 2) à:‘x’
 Nil
 Nil

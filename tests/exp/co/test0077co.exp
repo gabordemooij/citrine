@@ -1,11 +1,11 @@
-Stringa,Numero
-Stringa,Booleanu
-Numero,Stringa
+Testua,Numero
+Testua,Booleanu
+Numero,Testua
 Numero,Booleanu
 Booleanu,Numero
 Booleanu,Numero
-Booleanu,Stringa
-Booleanu,Stringa
+Booleanu,Testua
+Booleanu,Testua
 === String test ===
 123
 False

@@ -1,11 +1,11 @@
-Σειρά,Αριθμός
-Σειρά,Boolean
-Αριθμός,Σειρά
+Kείμενο,Αριθμός
+Kείμενο,Boolean
+Αριθμός,Kείμενο
 Αριθμός,Boolean
 Boolean,Αριθμός
 Boolean,Αριθμός
-Boolean,Σειρά
-Boolean,Σειρά
+Boolean,Kείμενο
+Boolean,Kείμενο
 === String test ===
 123
 Ψευδής

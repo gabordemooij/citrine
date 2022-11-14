@@ -122,7 +122,7 @@
 #define CTR_DICT_TIME	         "время"
 #define CTR_DICT_RESPOND_TO      "ответить:"
 #define CTR_DICT_RESPOND_TO_AND  "ответить:и:"
-#define CTR_DICT_SHELL           "оболочка:"
+#define CTR_DICT_SHELL           "Сістэмная каманда:"
 #define CTR_DICT_SWEEP           "очистить память"
 #define CTR_DICT_MEMORY_LIMIT	 "лимит памяти:"
 #define CTR_DICT_MEMORY          "память"
