@@ -5,7 +5,7 @@ a Booleanu ‘False’  is NOT Nil.
 a Booleanu ‘False’  is NOT Nil.
 a Numero ‘1’  is NOT Nil.
 a Numero ‘0’  is NOT Nil.
-a Stringa ‘Str’  is NOT Nil.
-a Stringa ‘’  is NOT Nil.
+a Testua ‘Str’  is NOT Nil.
+a Testua ‘’  is NOT Nil.
 a Codice ‘Codice’  is NOT Nil.
 but.. Nil is.. certainly NIL!
