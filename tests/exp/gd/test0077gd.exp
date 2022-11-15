@@ -1,11 +1,11 @@
-String,Àireamh
-String,Boole
-Àireamh,String
+Teacs,Àireamh
+Teacs,Boole
+Àireamh,Teacs
 Àireamh,Boole
 Boole,Àireamh
 Boole,Àireamh
-Boole,String
-Boole,String
+Boole,Teacs
+Boole,Teacs
 === String test ===
 123
 Meallta
