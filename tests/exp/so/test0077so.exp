@@ -1,11 +1,11 @@
-Xarig,Tirada
-Xarig,Boolean
-Tirada,Xarig
+Znakov,Tirada
+Znakov,Boolean
+Tirada,Znakov
 Tirada,Boolean
 Boolean,Tirada
 Boolean,Tirada
-Boolean,Xarig
-Boolean,Xarig
+Boolean,Znakov
+Boolean,Znakov
 === String test ===
 123
 Been

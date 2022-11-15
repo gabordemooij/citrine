@@ -5,7 +5,7 @@ a Boole ‘Meallta’  is NOT Nil.
 a Boole ‘Meallta’  is NOT Nil.
 a Àireamh ‘1’  is NOT Nil.
 a Àireamh ‘0’  is NOT Nil.
-a String ‘Str’  is NOT Nil.
-a String ‘’  is NOT Nil.
+a Teacs ‘Str’  is NOT Nil.
+a Teacs ‘’  is NOT Nil.
 a Còd ‘Còd’  is NOT Nil.
 but.. Nil is.. certainly NIL!

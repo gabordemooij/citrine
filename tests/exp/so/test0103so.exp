@@ -5,7 +5,7 @@ a Boolean ‘Been’  is NOT Nil.
 a Boolean ‘Been’  is NOT Nil.
 a Tirada ‘1’  is NOT Nil.
 a Tirada ‘0’  is NOT Nil.
-a Xarig ‘Str’  is NOT Nil.
-a Xarig ‘’  is NOT Nil.
+a Znakov ‘Str’  is NOT Nil.
+a Znakov ‘’  is NOT Nil.
 a Koodh ‘Koodh’  is NOT Nil.
 but.. Nil is.. certainly NIL!

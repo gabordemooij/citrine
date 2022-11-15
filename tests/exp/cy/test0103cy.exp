@@ -5,7 +5,7 @@ a Boole ‘Anghywir’  is NOT Nil.
 a Boole ‘Anghywir’  is NOT Nil.
 a Rhif ‘1’  is NOT Nil.
 a Rhif ‘0’  is NOT Nil.
-a Llinyn ‘Str’  is NOT Nil.
-a Llinyn ‘’  is NOT Nil.
+a Testun ‘Str’  is NOT Nil.
+a Testun ‘’  is NOT Nil.
 a Côd ‘Côd’  is NOT Nil.
 but.. Nil is.. certainly NIL!

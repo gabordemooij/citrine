@@ -1,6 +1,6 @@
-(Mapa ùr) put:‘a"b’ aig:‘test’
+(Mapa ùr) cuir:‘a"b’ le:‘test’
 Invalid JSON.
-(Mapa ùr) put:(Liosta ← 1 ; 2 ; (Liosta ← 3 ; 4) ; ((Mapa ùr) put:(Liosta ← 3 ; 4) aig:‘bar’, put:1 aig:‘foo’)) aig:‘nested’, put:Meallta aig:‘legend’, put:27 aig:‘age’, put:‘Jack’ aig:‘name’
+(Mapa ùr) cuir:(Liosta ← 1 ; 2 ; (Liosta ← 3 ; 4) ; ((Mapa ùr) cuir:(Liosta ← 3 ; 4) le:‘bar’, cuir:1 le:‘foo’)) le:‘nested’, cuir:Meallta le:‘legend’, cuir:27 le:‘age’, cuir:‘Jack’ le:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

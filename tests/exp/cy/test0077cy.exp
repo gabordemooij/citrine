@@ -1,11 +1,11 @@
-Llinyn,Rhif
-Llinyn,Boole
-Rhif,Llinyn
+Testun,Rhif
+Testun,Boole
+Rhif,Testun
 Rhif,Boole
 Boole,Rhif
 Boole,Rhif
-Boole,Llinyn
-Boole,Llinyn
+Boole,Testun
+Boole,Testun
 === String test ===
 123
 Anghywir
