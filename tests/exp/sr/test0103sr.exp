@@ -5,7 +5,7 @@ a Боолеан ‘Лажно’  is NOT Nil.
 a Боолеан ‘Лажно’  is NOT Nil.
 a Број ‘1’  is NOT Nil.
 a Број ‘0’  is NOT Nil.
-a Низ ‘Str’  is NOT Nil.
-a Низ ‘’  is NOT Nil.
+a Tекст ‘Str’  is NOT Nil.
+a Tекст ‘’  is NOT Nil.
 a Код ‘Код’  is NOT Nil.
 but.. Nil is.. certainly NIL!

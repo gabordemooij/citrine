@@ -1,11 +1,11 @@
-Varg,Numër
-Varg,Boolean
-Numër,Varg
+Teksti,Numër
+Teksti,Boolean
+Numër,Teksti
 Numër,Boolean
 Boolean,Numër
 Boolean,Numër
-Boolean,Varg
-Boolean,Varg
+Boolean,Teksti
+Boolean,Teksti
 === String test ===
 123
 I rremë
