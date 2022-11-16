@@ -1,6 +1,6 @@
-(Mapa novo) put:‘a"b’ at:‘test’
+(Mapa novo) stavi:‘a"b’ sa:‘test’
 Invalid JSON.
-(Mapa novo) put:(Lista ← 1 ; 2 ; (Lista ← 3 ; 4) ; ((Mapa novo) put:(Lista ← 3 ; 4) at:‘bar’, put:1 at:‘foo’)) at:‘nested’, put:Lažno at:‘legend’, put:27 at:‘age’, put:‘Jack’ at:‘name’
+(Mapa novo) stavi:(Lista ← 1 ; 2 ; (Lista ← 3 ; 4) ; ((Mapa novo) stavi:(Lista ← 3 ; 4) sa:‘bar’, stavi:1 sa:‘foo’)) sa:‘nested’, stavi:Lažno sa:‘legend’, stavi:27 sa:‘age’, stavi:‘Jack’ sa:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}
