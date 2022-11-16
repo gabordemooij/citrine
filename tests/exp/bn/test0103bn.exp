@@ -5,7 +5,7 @@ a বুলিয়ান ‘মিথ্যা’  is NOT Nil.
 a বুলিয়ান ‘মিথ্যা’  is NOT Nil.
 a সংখ্যা ‘1’  is NOT Nil.
 a সংখ্যা ‘0’  is NOT Nil.
-a দড়ি ‘Str’  is NOT Nil.
-a দড়ি ‘’  is NOT Nil.
+a পাঠ্য ‘Str’  is NOT Nil.
+a পাঠ্য ‘’  is NOT Nil.
 a কোড ‘কোড’  is NOT Nil.
 but.. Nil is.. certainly NIL!
