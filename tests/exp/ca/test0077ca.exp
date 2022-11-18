@@ -1,11 +1,11 @@
-Cadena,Número
-Cadena,Booleà
-Número,Cadena
+Text,Número
+Text,Booleà
+Número,Text
 Número,Booleà
 Booleà,Número
 Booleà,Número
-Booleà,Cadena
-Booleà,Cadena
+Booleà,Text
+Booleà,Text
 === String test ===
 123
 Fals
