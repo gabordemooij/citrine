@@ -1,6 +1,6 @@
-(Mapa nou) posar:‘a"b’ _a:‘test’
+(Mapa nou) posar:‘a"b’ a:‘test’
 Invalid JSON.
-(Mapa nou) posar:(Llista ← 1 ; 2 ; (Llista ← 3 ; 4) ; ((Mapa nou) posar:(Llista ← 3 ; 4) _a:‘bar’, posar:1 _a:‘foo’)) _a:‘nested’, posar:Fals _a:‘legend’, posar:27 _a:‘age’, posar:‘Jack’ _a:‘name’
+(Mapa nou) posar:(Llista ← 1 ; 2 ; (Llista ← 3 ; 4) ; ((Mapa nou) posar:(Llista ← 3 ; 4) a:‘bar’, posar:1 a:‘foo’)) a:‘nested’, posar:Fals a:‘legend’, posar:27 a:‘age’, posar:‘Jack’ a:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}
