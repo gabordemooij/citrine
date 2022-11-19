@@ -9,7 +9,7 @@
 #define CTR_DICT_TRUE             "درست است، واقعی"
 #define CTR_DICT_FALSE            "غلط"
 #define CTR_DICT_NUMBER           "عدد"
-#define CTR_DICT_STRING           "رشته"
+#define CTR_DICT_STRING           "متن"
 #define CTR_DICT_TASK       "کد"
 #define CTR_DICT_OBJECT           "هدف - شی"
 #define CTR_DICT_ARRAY_OBJECT      "لیست"
@@ -47,7 +47,7 @@
 #define CTR_DICT_DO               "انجام دادن"
 #define CTR_DICT_DONE             "انجام شده"
 #define CTR_DICT_IFFALSE          "نادرست:"
-#define CTR_DICT_IFTRUE           "_بله:"
+#define CTR_DICT_IFTRUE           "بله:"
 #define CTR_DICT_WHILE            "در حالی که:"
 #define CTR_DICT_MESSAGEARGS      "پیام:استدلالات:"
 #define CTR_DICT_MESSAGE          "پیام:"
@@ -56,15 +56,15 @@
 #define CTR_DICT_CONTINUE         "ادامه هید"
 #define CTR_DICT_ELSE             "دیگری:"
 #define CTR_DICT_NOT              "نه"
-#define CTR_DICT_TONUMBER         "_عدد"
+#define CTR_DICT_TONUMBER         "تبدیل به شماره"
 #define CTR_DICT_ITONUMBER        "شماره بین المللی"
-#define CTR_DICT_TOSTRING         "_رشته"
+#define CTR_DICT_TOSTRING         "تبدیل به متن"
 #define CTR_DICT_CHAR_AT_SET      "شخصیت:"
-#define CTR_DICT_EITHEROR         "یا:__:"
+#define CTR_DICT_EITHEROR         "یا:یا:"
 #define CTR_DICT_BY_SET       	  "توسط:"
-#define CTR_DICT_FLOOR            "کف"
-#define CTR_DICT_CEIL             "سقف"
-#define CTR_DICT_ROUND            "دور"
+#define CTR_DICT_FLOOR            "کم"
+#define CTR_DICT_CEIL             "بالا"
+#define CTR_DICT_ROUND            "شماره گرد"
 #define CTR_DICT_ABS              "مطلق"
 #define CTR_DICT_SQRT             "ریشه دوم"
 #define CTR_DICT_POWER            "قدرت:"
@@ -75,7 +75,7 @@
 #define CTR_DICT_POS   	          "مثبت؟"
 #define CTR_DICT_NEG   	          "منفی؟"
 #define CTR_DICT_TOBOOL           "بول"
-#define CTR_DICT_RANDOM_NUM_BETWEEN          "بین و:__:"
+#define CTR_DICT_RANDOM_NUM_BETWEEN          "عدد تصادفی بین:تا:"
 #define CTR_DICT_LENGTH	          "طول"
 #define CTR_DICT_FROM_LENGTH	  "از:طول:"
 #define CTR_DICT_TRIM	          "فضاهای اطراف را حذف کنید"
@@ -83,12 +83,12 @@
 #define CTR_DICT_POSITION_SET     "موقعیت:"
 #define CTR_DICT_INDEX_OF         "پیدا کردن:"
 #define CTR_DICT_LAST_INDEX_OF	  "آخر:"
-#define CTR_DICT_REPLACE_WITH	  "تعویض با:__:"
+#define CTR_DICT_REPLACE_WITH	  "تعویض:با:"
 #define CTR_DICT_SPLIT	          "شکاف:"
 #define CTR_DICT_SKIP             "انحراف:"
 #define CTR_DICT_RUN              "اجرا کن"
 #define CTR_DICT_APPLY_TO         "درخواست دادن:"
-#define CTR_DICT_APPLY_TO_AND     "اعمال:_و:"
+#define CTR_DICT_APPLY_TO_AND     "اعمال:و:"
 #define CTR_DICT_VALUE_SET        "مجموعه:مقدار:"
 #define CTR_DICT_ERROR	          "خطا:"
 #define CTR_DICT_CATCH            "گرفتن:"
@@ -99,7 +99,7 @@
 #define CTR_DICT_POP              "ترکیدن"
 #define CTR_DICT_SORT             "مرتب سازی:"
 #define CTR_DICT_PUT_AT           "قرار دهید:در:"
-#define CTR_DICT_MAP              "_نقشه:"
+#define CTR_DICT_MAP              "نقشه:"
 #define CTR_DICT_EACH             "هر یک:"
 #define CTR_DICT_WRITE            "نوشتن:"
 #define CTR_DICT_PATH             "مسیر"
@@ -110,7 +110,7 @@
 #define CTR_DICT_SIZE             "اندازه"
 #define CTR_DICT_DELETE           "حذف"
 #define CTR_DICT_USE_SET          "استفاده کنید:"
-#define CTR_DICT_ARRAY             "_لیست:"
+#define CTR_DICT_ARRAY             "لیست:"
 #define CTR_DICT_END              "پایان"
 #define CTR_DICT_ARGUMENT	      "بحث و جدل:"
 #define CTR_DICT_ARGUMENT_COUNT	  "استدلال"
@@ -121,36 +121,36 @@
 #define CTR_DICT_WAIT             "صبر کن:"
 #define CTR_DICT_TIME	          "زمان"
 #define CTR_DICT_RESPOND_TO       "پاسخ دادن:"
-#define CTR_DICT_RESPOND_TO_AND   "پاسخ:_و:"
-#define CTR_DICT_SHELL            "پوسته:"
+#define CTR_DICT_RESPOND_TO_AND   "پاسخ:و:"
+#define CTR_DICT_SHELL            "فرمان سیستم:"
 #define CTR_DICT_SWEEP            "حافظه تمیز"
 #define CTR_DICT_MEMORY_LIMIT	  "حافظه:"
 #define CTR_DICT_MEMORY           "حافظه"
-#define CTR_DICT_GC_MODE             "_مرتب سازی:"
+#define CTR_DICT_GC_MODE             "حافظه کامپیوتر:"
 #define CTR_DICT_HASH_WITH_KEY    "هش:"
 #define CTR_DICT_CHARACTERS       "شخصیت ها"
 #define CTR_DICT_QUALIFIER_SET          "واجد شرایط شدن:"
 #define CTR_DICT_QUALIFIER    "صلاحیت"
-#define CTR_DICT_NEW_SET          "_جدید:"
+#define CTR_DICT_NEW_SET          "جدید:"
 #define CTR_DICT_HOUR             "ساعت"
-#define CTR_DICT_HOUR_SET         "_ساعت:"
+#define CTR_DICT_HOUR_SET         "ساعت:"
 #define CTR_DICT_MINUTE_SET       "دقیقه:"
 #define CTR_DICT_MINUTE           "دقیقه"
 #define CTR_DICT_SECOND_SET       "دومین:"
 #define CTR_DICT_SECOND           "دومین"
 #define CTR_DICT_DAY              "روز"
-#define CTR_DICT_DAY_SET          "_روز:"
+#define CTR_DICT_DAY_SET          "روز:"
 #define CTR_DICT_WEEK             "هفته"
-#define CTR_DICT_WEEK_SET         "_هفته:"
+#define CTR_DICT_WEEK_SET         "هفته:"
 #define CTR_DICT_MONTH            "ماه"
-#define CTR_DICT_MONTH_SET        "_ماه:"
+#define CTR_DICT_MONTH_SET        "ماه:"
 #define CTR_DICT_YEAR             "سال"
 #define CTR_DICT_RAW              "خام"
-#define CTR_DICT_YEAR_SET         "_سال:"
+#define CTR_DICT_YEAR_SET         "سال:"
 #define CTR_DICT_WEEK_DAY         "روز هفته"
 #define CTR_DICT_YEAR_DAY         "روز سال"
 #define CTR_DICT_ZONE             "منطقه"
-#define CTR_DICT_ZONE_SET         "_منطقه:"
+#define CTR_DICT_ZONE_SET         "منطقه:"
 #define CTR_DICT_ADD_SET          "اضافه کردن:"
 #define CTR_DICT_SUBTRACT_SET     "کم کردن:"
 #define CTR_DICT_MULTIPLIER_SET   "ضربدر:"
@@ -158,23 +158,23 @@
 #define CTR_DICT_LAST             "آخر"
 #define CTR_DICT_FIRST            "اولین"
 #define CTR_DICT_SECOND_LAST      "دوم آخر"
-#define CTR_DICT_FILL_WITH        "پر کن با:__:"
+#define CTR_DICT_FILL_WITH        "شماره:پر کردن:"
 #define CTR_DICT_SPLICE           "جایگزین:طول:با:"
 #define CTR_DICT_VALUES           "ارزش های"
 #define CTR_DICT_ENTRIES          "ورودی های"
 #define CTR_DICT_COMPARE_SET      "مقایسه کنید:"
 #define CTR_DICT_HAS              "دارای:"
-#define CTR_DICT_COPY             "کپی 🀄"
+#define CTR_DICT_COPY             "رونوشت"
 #define CTR_DICT_CASE_DO          "مورد:انجام دهید:"
 #define CTR_DICT_STOP             "متوقف کردن"
 #define CTR_DICT_ASCII_UPPER_CASE                 "بزرگ"
 #define CTR_DICT_ASCII_LOWER_CASE                 "حروف کوچک"
 #define CTR_DICT_CONTAINS                         "شامل:"
-#define CTR_DICT_APPLY_TO_AND_AND                 "اعمال:_و:_و:"
+#define CTR_DICT_APPLY_TO_AND_AND                 "اعمال:و:و:"
 #define CTR_DICT_ENVIRONMENT_VARIABLE             "تنظیمات:"
 #define CTR_DICT_SET_ENVIRONMENT_VARIABLE         "تنظیم:مقدار:"
-#define CTR_DICT_RESPOND_TO_AND_AND               "پاسخ:_و:_و:"
-#define CTR_DICT_RESPOND_TO_AND_AND_AND           "پاسخ:_و:_و:_و:"
+#define CTR_DICT_RESPOND_TO_AND_AND               "پاسخ:و:و:"
+#define CTR_DICT_RESPOND_TO_AND_AND_AND           "پاسخ:و:و:و:"
 #define CTR_DICT_CURRENT_TASK                       "این بلوک کد"
 #define CTR_DICT_NUM_DEC_SEP                     ","
 #define CTR_DICT_NUM_THO_SEP                     "."
@@ -188,7 +188,7 @@
 #define CTR_DICT_BLOCK_END                       "}"
 #define CTR_DICT_PARAMETER_PREFIX                ":"
 #define CTR_DICT_RETURN                          "↲"
-#define CTR_DICT_CODE                            "code"
+#define CTR_DICT_CODE                            "نوشته شده است"
 #define CTR_DICT_PROCEDURE                       "روش"
 #define CTR_DICT_TOOBJECT        "به عنوان یک شی"
 #define CTR_DICT_PATH_OBJECT "محل"
