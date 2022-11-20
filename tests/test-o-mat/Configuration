@@ -1,10 +1,7 @@
 
 ☞ memory management modes ≔ List ← 0 ; 1 ; 4 ; 8 ; 9 ; 12.
 
-☞ languages ≔ List ← ‘en’ ; ‘ar’ ; ‘nl’ ; ‘te’.
-
-
-☞ languages2 ≔ List ← 
+☞ languages ≔ List ← 
 	‘en’ ; ‘en_us’ ;
 	‘af’ ; ‘am’ ; ‘ar’ ; ‘az’ ;
 	‘be’ ; ‘bg’ ; ‘bn’ ; ‘bs’ ;
