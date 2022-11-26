@@ -6,5 +6,5 @@ The garden is Không meters long.
 Luckily, this day, there are Không wasps in the garden.
 The dog named Không sleeps under the tree.
 a\"bb\"ccc\"
-(Bản đồ mới) đặt:((Bản đồ mới) đặt:Không tại:‘dog’, đặt:Không tại:‘insects’, đặt:((Bản đồ mới) đặt:15 tại:‘length’, đặt:8 tại:‘width’) tại:‘size’, đặt:(Danh sách ← ‘tulips’ ; ‘roses’ ; ‘lillies’) tại:‘flower’, đặt:Sai tại:‘shed’, đặt:Thật tại:‘pool’, đặt:2 tại:‘chairs’) tại:‘garden’
+(Sách mới) đặt:((Sách mới) đặt:Không tại:‘dog’, đặt:Không tại:‘insects’, đặt:((Sách mới) đặt:15 tại:‘length’, đặt:8 tại:‘width’) tại:‘size’, đặt:(Loạt ← ‘tulips’ ; ‘roses’ ; ‘lillies’) tại:‘flower’, đặt:Sai tại:‘shed’, đặt:Thật tại:‘pool’, đặt:2 tại:‘chairs’) tại:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

@@ -1,11 +1,11 @@
 9
 a பொருள் ‘பொருள்’  is NOT Nil.
-a பூலியன் ‘உண்மை’  is NOT Nil.
-a பூலியன் ‘பொய்’  is NOT Nil.
-a பூலியன் ‘பொய்’  is NOT Nil.
+a ஆம் அல்லது இல்லை ‘உண்மை’  is NOT Nil.
+a ஆம் அல்லது இல்லை ‘பொய்’  is NOT Nil.
+a ஆம் அல்லது இல்லை ‘பொய்’  is NOT Nil.
 a எண் ‘1’  is NOT Nil.
 a எண் ‘0’  is NOT Nil.
-a லேசான கயிறு ‘Str’  is NOT Nil.
-a லேசான கயிறு ‘’  is NOT Nil.
+a உரை ‘Str’  is NOT Nil.
+a உரை ‘’  is NOT Nil.
 a குறியீடு ‘குறியீடு’  is NOT Nil.
 but.. Nil is.. certainly NIL!

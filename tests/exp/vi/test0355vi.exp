@@ -1,15 +1,15 @@
 1.001
 1.024
-Danh sách ← ‘1’ ; ‘2’ ; ‘3’
-Danh sách ← ‘1’ ; ‘2’ ; ‘3’
-Danh sách ← ‘1’ ; ‘’ ; ‘3’
-Danh sách ← ‘1’ ; ‘’ ; ‘3’
-Danh sách ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Danh sách ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Danh sách ← ‘’ ; ‘’
-Danh sách ← ‘’ ; ‘’
-Danh sách ← ‘x’
-Danh sách ← ‘x’
-Danh sách ← ‘’
-Danh sách ← ‘’
-Danh sách ← ‘1,2,3’
+Loạt ← ‘1’ ; ‘2’ ; ‘3’
+Loạt ← ‘1’ ; ‘2’ ; ‘3’
+Loạt ← ‘1’ ; ‘’ ; ‘3’
+Loạt ← ‘1’ ; ‘’ ; ‘3’
+Loạt ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Loạt ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Loạt ← ‘’ ; ‘’
+Loạt ← ‘’ ; ‘’
+Loạt ← ‘x’
+Loạt ← ‘x’
+Loạt ← ‘’
+Loạt ← ‘’
+Loạt ← ‘1,2,3’
