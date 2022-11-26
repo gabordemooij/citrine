@@ -1,11 +1,11 @@
-Chuỗi,Con số
-Chuỗi,Boolean
-Con số,Chuỗi
+Văn bản,Con số
+Văn bản,Boolean
+Con số,Văn bản
 Con số,Boolean
 Boolean,Con số
 Boolean,Con số
-Boolean,Chuỗi
-Boolean,Chuỗi
+Boolean,Văn bản
+Boolean,Văn bản
 === String test ===
 123
 Sai

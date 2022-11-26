@@ -1,12 +1,12 @@
-String,Bilang
-String,Boolean
-Bilang,String
-Bilang,Boolean
-Boolean,Bilang
-Boolean,Bilang
-Boolean,String
-Boolean,String
+Teksto,Bilang
+Teksto,Oo o hindi
+Bilang,Teksto
+Bilang,Oo o hindi
+Oo o hindi,Bilang
+Oo o hindi,Bilang
+Oo o hindi,Teksto
+Oo o hindi,Teksto
 === String test ===
 123
-Mali
-Totoo
+Hindi
+Oo

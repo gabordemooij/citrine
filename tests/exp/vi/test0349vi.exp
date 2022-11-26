@@ -12,25 +12,25 @@ Con số
 9,2
 Con số
 -9,2
-Danh sách
-Danh sách mới 
-Danh sách
-Danh sách ← 1 ; 2
-Danh sách
-Danh sách ← 1 ; (Danh sách ← 2)
-Danh sách
-Danh sách ← 1 ; (Danh sách ← 2) ; 3
-Danh sách
-Danh sách ← 1 ; ((Bản đồ mới) đặt:‘a’ tại:‘b’) ; 3
-Danh sách
-Danh sách ← 1 ; ((Bản đồ mới) đặt:(Danh sách ← 9) tại:‘b’) ; 3
-Bản đồ
-(Bản đồ mới) đặt:2 tại:‘1’
-Bản đồ
-(Bản đồ mới) đặt:2 tại:‘x’
-Bản đồ
-(Bản đồ mới) đặt:(Danh sách ← 1 ; 2) tại:‘x’
-Bản đồ
-(Bản đồ mới) đặt:(Danh sách ← ((Bản đồ mới) đặt:‘q’ tại:‘y’) ; 2) tại:‘x’
+Loạt
+Loạt mới 
+Loạt
+Loạt ← 1 ; 2
+Loạt
+Loạt ← 1 ; (Loạt ← 2)
+Loạt
+Loạt ← 1 ; (Loạt ← 2) ; 3
+Loạt
+Loạt ← 1 ; ((Sách mới) đặt:‘a’ tại:‘b’) ; 3
+Loạt
+Loạt ← 1 ; ((Sách mới) đặt:(Loạt ← 9) tại:‘b’) ; 3
+Sách
+(Sách mới) đặt:2 tại:‘1’
+Sách
+(Sách mới) đặt:2 tại:‘x’
+Sách
+(Sách mới) đặt:(Loạt ← 1 ; 2) tại:‘x’
+Sách
+(Sách mới) đặt:(Loạt ← ((Sách mới) đặt:‘q’ tại:‘y’) ; 2) tại:‘x’
 Không
 Không

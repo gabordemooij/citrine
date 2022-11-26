@@ -1,9 +1,9 @@
-Nil
-Nil
-Boolean
-Totoo
-Boolean
-Mali
+Wala
+Wala
+Oo o hindi
+Oo
+Oo o hindi
+Hindi
 Bilang
 1
 Bilang
@@ -32,5 +32,5 @@ Map
 (Map bago) ilagay:(Listahan ← 1 ; 2) sa:‘x’
 Map
 (Map bago) ilagay:(Listahan ← ((Map bago) ilagay:‘q’ sa:‘y’) ; 2) sa:‘x’
-Nil
-Nil
+Wala
+Wala
