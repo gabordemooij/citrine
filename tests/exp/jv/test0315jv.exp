@@ -1,6 +1,6 @@
 (Peta anyar) sijine:‘a"b’ ing:‘test’
 Invalid JSON.
-(Peta anyar) sijine:(Dhaptar ← 1 ; 2 ; (Dhaptar ← 3 ; 4) ; ((Peta anyar) sijine:(Dhaptar ← 3 ; 4) ing:‘bar’, sijine:1 ing:‘foo’)) ing:‘nested’, sijine:Salah ing:‘legend’, sijine:27 ing:‘age’, sijine:‘Jack’ ing:‘name’
+(Peta anyar) sijine:(Dhaptar ← 1 ; 2 ; (Dhaptar ← 3 ; 4) ; ((Peta anyar) sijine:(Dhaptar ← 3 ; 4) ing:‘bar’, sijine:1 ing:‘foo’)) ing:‘nested’, sijine:Ora ing:‘legend’, sijine:27 ing:‘age’, sijine:‘Jack’ ing:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

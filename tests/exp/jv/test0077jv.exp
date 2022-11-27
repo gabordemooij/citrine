@@ -1,12 +1,12 @@
-Senar,Nomer
-Senar,Boolean
-Nomer,Senar
-Nomer,Boolean
-Boolean,Nomer
-Boolean,Nomer
-Boolean,Senar
-Boolean,Senar
+Tèks,Nomer
+Tèks,Ya ora
+Nomer,Tèks
+Nomer,Ya ora
+Ya ora,Nomer
+Ya ora,Nomer
+Ya ora,Tèks
+Ya ora,Tèks
 === String test ===
 123
-Salah
-Bener
+Ora
+Ya
