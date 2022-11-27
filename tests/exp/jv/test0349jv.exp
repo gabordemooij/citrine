@@ -1,9 +1,9 @@
-Nil
-Nil
-Boolean
-Bener
-Boolean
-Salah
+Boten
+Boten
+Ya ora
+Ya
+Ya ora
+Ora
 Nomer
 1
 Nomer
@@ -32,5 +32,5 @@ Peta
 (Peta anyar) sijine:(Dhaptar ← 1 ; 2) ing:‘x’
 Peta
 (Peta anyar) sijine:(Dhaptar ← ((Peta anyar) sijine:‘q’ ing:‘y’) ; 2) ing:‘x’
-Nil
-Nil
+Boten
+Boten
