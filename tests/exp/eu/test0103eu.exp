@@ -1,11 +1,11 @@
 9
 a Objektu ‘Objektu’  is NOT Nil.
-a Boolearrak ‘True’  is NOT Nil.
-a Boolearrak ‘Gezurra’  is NOT Nil.
-a Boolearrak ‘Gezurra’  is NOT Nil.
+a Erabakia ‘Egia’  is NOT Nil.
+a Erabakia ‘Faltsua’  is NOT Nil.
+a Erabakia ‘Faltsua’  is NOT Nil.
 a Zenbakia ‘1’  is NOT Nil.
 a Zenbakia ‘0’  is NOT Nil.
-a String ‘Str’  is NOT Nil.
-a String ‘’  is NOT Nil.
+a Testua ‘Str’  is NOT Nil.
+a Testua ‘’  is NOT Nil.
 a Kodea ‘Kodea’  is NOT Nil.
 but.. Nil is.. certainly NIL!

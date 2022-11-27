@@ -1,9 +1,9 @@
-Nil
-Nil
-Boolearrak
-True
-Boolearrak
-Gezurra
+Ez
+Ez
+Erabakia
+Egia
+Erabakia
+Faltsua
 Zenbakia
 1
 Zenbakia
@@ -32,5 +32,5 @@ Mapa
 (Mapa berriaren) jarri:(Zerrenda ← 1 ; 2) en:‘x’
 Mapa
 (Mapa berriaren) jarri:(Zerrenda ← ((Mapa berriaren) jarri:‘q’ en:‘y’) ; 2) en:‘x’
-Nil
-Nil
+Ez
+Ez
