@@ -1,5 +1,5 @@
-a b | Gezurra Gezurra True True -1
-b a | True True Gezurra Gezurra 1
-hallo hello | Gezurra Gezurra True True -4
-human human | Gezurra True Gezurra True 0
-x z | Gezurra Gezurra True True -2
+a b | Faltsua Faltsua Egia Egia -1
+b a | Egia Egia Faltsua Faltsua 1
+hallo hello | Faltsua Faltsua Egia Egia -4
+human human | Faltsua Egia Faltsua Egia 0
+x z | Faltsua Faltsua Egia Egia -2

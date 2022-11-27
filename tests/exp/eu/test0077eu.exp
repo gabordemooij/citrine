@@ -1,12 +1,12 @@
-String,Zenbakia
-String,Boolearrak
-Zenbakia,String
-Zenbakia,Boolearrak
-Boolearrak,Zenbakia
-Boolearrak,Zenbakia
-Boolearrak,String
-Boolearrak,String
+Testua,Zenbakia
+Testua,Erabakia
+Zenbakia,Testua
+Zenbakia,Erabakia
+Erabakia,Zenbakia
+Erabakia,Zenbakia
+Erabakia,Testua
+Erabakia,Testua
 === String test ===
 123
-Gezurra
-True
+Faltsua
+Egia
