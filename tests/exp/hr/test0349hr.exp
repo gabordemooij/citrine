@@ -1,9 +1,9 @@
-Nula
-Nula
-Booleova
-Pravi
-Booleova
-Lažan
+Ništa
+Ništa
+Da ili Ne
+Da
+Da ili Ne
+Ne
 Broj
 1
 Broj
@@ -12,25 +12,25 @@ Broj
 9,2
 Broj
 -9,2
+Serija
+Serija novi 
+Serija
+Serija ← 1 ; 2
+Serija
+Serija ← 1 ; (Serija ← 2)
+Serija
+Serija ← 1 ; (Serija ← 2) ; 3
+Serija
+Serija ← 1 ; ((Popis novi) staviti:‘a’ na:‘b’) ; 3
+Serija
+Serija ← 1 ; ((Popis novi) staviti:(Serija ← 9) na:‘b’) ; 3
 Popis
-Popis novi 
+(Popis novi) staviti:2 na:‘1’
 Popis
-Popis ← 1 ; 2
+(Popis novi) staviti:2 na:‘x’
 Popis
-Popis ← 1 ; (Popis ← 2)
+(Popis novi) staviti:(Serija ← 1 ; 2) na:‘x’
 Popis
-Popis ← 1 ; (Popis ← 2) ; 3
-Popis
-Popis ← 1 ; ((Karta novi) staviti:‘a’ na:‘b’) ; 3
-Popis
-Popis ← 1 ; ((Karta novi) staviti:(Popis ← 9) na:‘b’) ; 3
-Karta
-(Karta novi) staviti:2 na:‘1’
-Karta
-(Karta novi) staviti:2 na:‘x’
-Karta
-(Karta novi) staviti:(Popis ← 1 ; 2) na:‘x’
-Karta
-(Karta novi) staviti:(Popis ← ((Karta novi) staviti:‘q’ na:‘y’) ; 2) na:‘x’
-Nula
-Nula
+(Popis novi) staviti:(Serija ← ((Popis novi) staviti:‘q’ na:‘y’) ; 2) na:‘x’
+Ništa
+Ništa

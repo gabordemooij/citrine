@@ -1,11 +1,11 @@
 9
 a Objekt ‘Objekt’  is NOT Nil.
-a Booleova ‘Pravi’  is NOT Nil.
-a Booleova ‘Lažan’  is NOT Nil.
-a Booleova ‘Lažan’  is NOT Nil.
+a Da ili Ne ‘Da’  is NOT Nil.
+a Da ili Ne ‘Ne’  is NOT Nil.
+a Da ili Ne ‘Ne’  is NOT Nil.
 a Broj ‘1’  is NOT Nil.
 a Broj ‘0’  is NOT Nil.
-a Niz ‘Str’  is NOT Nil.
-a Niz ‘’  is NOT Nil.
+a Tekst ‘Str’  is NOT Nil.
+a Tekst ‘’  is NOT Nil.
 a Kodirati ‘Kodirati’  is NOT Nil.
 but.. Nil is.. certainly NIL!

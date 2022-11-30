@@ -1,12 +1,12 @@
-Niz,Broj
-Niz,Booleova
-Broj,Niz
-Broj,Booleova
-Booleova,Broj
-Booleova,Broj
-Booleova,Niz
-Booleova,Niz
+Tekst,Broj
+Tekst,Da ili Ne
+Broj,Tekst
+Broj,Da ili Ne
+Da ili Ne,Broj
+Da ili Ne,Broj
+Da ili Ne,Tekst
+Da ili Ne,Tekst
 === String test ===
 123
-Lažan
-Pravi
+Ne
+Da
