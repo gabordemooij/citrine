@@ -1,11 +1,11 @@
 9
 a Առարկա ‘Առարկա’  is NOT Nil.
-a Բուլյան ‘Ճիշտ’  is NOT Nil.
-a Բուլյան ‘Կեղծ’  is NOT Nil.
-a Բուլյան ‘Կեղծ’  is NOT Nil.
+a լուծում ‘լավ’  is NOT Nil.
+a լուծում ‘սխալ’  is NOT Nil.
+a լուծում ‘սխալ’  is NOT Nil.
 a Թիվ ‘1’  is NOT Nil.
 a Թիվ ‘0’  is NOT Nil.
-a Լարային ‘Str’  is NOT Nil.
-a Լարային ‘’  is NOT Nil.
-a Կոդ ‘Կոդ’  is NOT Nil.
+a տեքստ ‘Str’  is NOT Nil.
+a տեքստ ‘’  is NOT Nil.
+a աշխատանք ‘աշխատանք’  is NOT Nil.
 but.. Nil is.. certainly NIL!
