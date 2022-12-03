@@ -1,11 +1,11 @@
-Keel,Arv
-Keel,Boolean
-Arv,Keel
-Arv,Boolean
-Boolean,Arv
-Boolean,Arv
-Boolean,Keel
-Boolean,Keel
+Tekst,Arv
+Tekst,Otsus
+Arv,Tekst
+Arv,Otsus
+Otsus,Arv
+Otsus,Arv
+Otsus,Tekst
+Otsus,Tekst
 === String test ===
 123
 Vale
