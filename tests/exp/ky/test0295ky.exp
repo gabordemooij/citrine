@@ -1,5 +1,5 @@
-a b | False False True True -1
-b a | True True False False 1
-hallo hello | False False True True -4
-human human | False True False True 0
-x z | False False True True -2
+a b | Жок Жок Oоба Oоба -1
+b a | Oоба Oоба Жок Жок 1
+hallo hello | Жок Жок Oоба Oоба -4
+human human | Жок Oоба Жок Oоба 0
+x z | Жок Жок Oоба Oоба -2
