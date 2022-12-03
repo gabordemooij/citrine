@@ -1,10 +1,10 @@
 There are 2 chairs in the sunny garden.
 A rubber duck swims in the pool.
-Is there a shed in the garden? Well.. ყალბი
+Is there a shed in the garden? Well.. შეცდომა
 In the garden you smell the fragrance of tulips and roses and lillies.
-The garden is ნილ meters long.
-Luckily, this day, there are ნილ wasps in the garden.
-The dog named ნილ sleeps under the tree.
+The garden is არაფერი meters long.
+Luckily, this day, there are არაფერი wasps in the garden.
+The dog named არაფერი sleeps under the tree.
 a\"bb\"ccc\"
-(რუქა ახალი) დააყენა:((რუქა ახალი) დააყენა:ნილ at:‘dog’, დააყენა:ნილ at:‘insects’, დააყენა:((რუქა ახალი) დააყენა:15 at:‘length’, დააყენა:8 at:‘width’) at:‘size’, დააყენა:(ჩამოთვლა ← ‘tulips’ ; ‘roses’ ; ‘lillies’) at:‘flower’, დააყენა:ყალბი at:‘shed’, დააყენა:მართალია at:‘pool’, დააყენა:2 at:‘chairs’) at:‘garden’
+(სია ახალი) ადგილი:((სია ახალი) ადგილი:არაფერი ობიექტი:‘dog’, ადგილი:არაფერი ობიექტი:‘insects’, ადგილი:((სია ახალი) ადგილი:15 ობიექტი:‘length’, ადგილი:8 ობიექტი:‘width’) ობიექტი:‘size’, ადგილი:(სერია ← ‘tulips’ ; ‘roses’ ; ‘lillies’) ობიექტი:‘flower’, ადგილი:შეცდომა ობიექტი:‘shed’, ადგილი:კარგი ობიექტი:‘pool’, ადგილი:2 ობიექტი:‘chairs’) ობიექტი:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

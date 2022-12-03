@@ -1,6 +1,6 @@
-(Xarita yangi) qo’yish:«a"b» da__:«test»
+(Ro'yxat yangi) qo’yish:«a"b» da:«test»
 Invalid JSON.
-(Xarita yangi) qo’yish:(Ro‘yxat ← 1 ; 2 ; (Ro‘yxat ← 3 ; 4) ; ((Xarita yangi) qo’yish:(Ro‘yxat ← 3 ; 4) da__:«bar», qo’yish:1 da__:«foo»)) da__:«nested», qo’yish:Yolg’on da__:«legend», qo’yish:27 da__:«age», qo’yish:«Jack» da__:«name»
+(Ro'yxat yangi) qo’yish:(Qator ← 1 ; 2 ; (Qator ← 3 ; 4) ; ((Ro'yxat yangi) qo’yish:(Qator ← 3 ; 4) da:«bar», qo’yish:1 da:«foo»)) da:«nested», qo’yish:Yolg’on da:«legend», qo’yish:27 da:«age», qo’yish:«Jack» da:«name»
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

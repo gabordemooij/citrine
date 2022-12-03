@@ -1,5 +1,5 @@
-Nil
-Nil
+Bo'sh
+Bo'sh
 Boolean
 Rost
 Boolean
@@ -12,25 +12,25 @@ Raqam
 9,2
 Raqam
 -9,2
-Ro‘yxat
-Ro‘yxat yangi 
-Ro‘yxat
-Ro‘yxat ← 1 ; 2
-Ro‘yxat
-Ro‘yxat ← 1 ; (Ro‘yxat ← 2)
-Ro‘yxat
-Ro‘yxat ← 1 ; (Ro‘yxat ← 2) ; 3
-Ro‘yxat
-Ro‘yxat ← 1 ; ((Xarita yangi) qo’yish:«a» da__:«b») ; 3
-Ro‘yxat
-Ro‘yxat ← 1 ; ((Xarita yangi) qo’yish:(Ro‘yxat ← 9) da__:«b») ; 3
-Xarita
-(Xarita yangi) qo’yish:2 da__:«1»
-Xarita
-(Xarita yangi) qo’yish:2 da__:«x»
-Xarita
-(Xarita yangi) qo’yish:(Ro‘yxat ← 1 ; 2) da__:«x»
-Xarita
-(Xarita yangi) qo’yish:(Ro‘yxat ← ((Xarita yangi) qo’yish:«q» da__:«y») ; 2) da__:«x»
-Nil
-Nil
+Qator
+Qator yangi 
+Qator
+Qator ← 1 ; 2
+Qator
+Qator ← 1 ; (Qator ← 2)
+Qator
+Qator ← 1 ; (Qator ← 2) ; 3
+Qator
+Qator ← 1 ; ((Ro'yxat yangi) qo’yish:«a» da:«b») ; 3
+Qator
+Qator ← 1 ; ((Ro'yxat yangi) qo’yish:(Qator ← 9) da:«b») ; 3
+Ro'yxat
+(Ro'yxat yangi) qo’yish:2 da:«1»
+Ro'yxat
+(Ro'yxat yangi) qo’yish:2 da:«x»
+Ro'yxat
+(Ro'yxat yangi) qo’yish:(Qator ← 1 ; 2) da:«x»
+Ro'yxat
+(Ro'yxat yangi) qo’yish:(Qator ← ((Ro'yxat yangi) qo’yish:«q» da:«y») ; 2) da:«x»
+Bo'sh
+Bo'sh

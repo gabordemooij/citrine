@@ -1,11 +1,11 @@
-Qator,Raqam
-Qator,Boolean
-Raqam,Qator
+Matn,Raqam
+Matn,Boolean
+Raqam,Matn
 Raqam,Boolean
 Boolean,Raqam
 Boolean,Raqam
-Boolean,Qator
-Boolean,Qator
+Boolean,Matn
+Boolean,Matn
 === String test ===
 123
 Yolg’on
