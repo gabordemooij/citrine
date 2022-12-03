@@ -1,6 +1,6 @@
-(Kaart uus) panna:‘a"b’ juures:‘test’
+(Nimekiri uus) panna:‘a"b’ juures:‘test’
 Invalid JSON.
-(Kaart uus) panna:(Loend ← 1 ; 2 ; (Loend ← 3 ; 4) ; ((Kaart uus) panna:(Loend ← 3 ; 4) juures:‘bar’, panna:1 juures:‘foo’)) juures:‘nested’, panna:Vale juures:‘legend’, panna:27 juures:‘age’, panna:‘Jack’ juures:‘name’
+(Nimekiri uus) panna:(Seeria ← 1 ; 2 ; (Seeria ← 3 ; 4) ; ((Nimekiri uus) panna:(Seeria ← 3 ; 4) juures:‘bar’, panna:1 juures:‘foo’)) juures:‘nested’, panna:Vale juures:‘legend’, panna:27 juures:‘age’, panna:‘Jack’ juures:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

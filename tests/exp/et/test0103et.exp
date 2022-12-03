@@ -1,11 +1,11 @@
 9
 a Objekt ‘Objekt’  is NOT Nil.
-a Boolean ‘Tõsi’  is NOT Nil.
-a Boolean ‘Vale’  is NOT Nil.
-a Boolean ‘Vale’  is NOT Nil.
+a Otsus ‘Tõsi’  is NOT Nil.
+a Otsus ‘Vale’  is NOT Nil.
+a Otsus ‘Vale’  is NOT Nil.
 a Arv ‘1’  is NOT Nil.
 a Arv ‘0’  is NOT Nil.
-a Keel ‘Str’  is NOT Nil.
-a Keel ‘’  is NOT Nil.
-a Kood ‘Kood’  is NOT Nil.
+a Tekst ‘Str’  is NOT Nil.
+a Tekst ‘’  is NOT Nil.
+a Ülesanne ‘Ülesanne’  is NOT Nil.
 but.. Nil is.. certainly NIL!

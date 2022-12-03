@@ -1,8 +1,8 @@
-Null
-Null
-Boolean
+Tühi
+Tühi
+Otsus
 Tõsi
-Boolean
+Otsus
 Vale
 Arv
 1
@@ -12,25 +12,25 @@ Arv
 9,2
 Arv
 -9,2
-Loend
-Loend uus 
-Loend
-Loend ← 1 ; 2
-Loend
-Loend ← 1 ; (Loend ← 2)
-Loend
-Loend ← 1 ; (Loend ← 2) ; 3
-Loend
-Loend ← 1 ; ((Kaart uus) panna:‘a’ juures:‘b’) ; 3
-Loend
-Loend ← 1 ; ((Kaart uus) panna:(Loend ← 9) juures:‘b’) ; 3
-Kaart
-(Kaart uus) panna:2 juures:‘1’
-Kaart
-(Kaart uus) panna:2 juures:‘x’
-Kaart
-(Kaart uus) panna:(Loend ← 1 ; 2) juures:‘x’
-Kaart
-(Kaart uus) panna:(Loend ← ((Kaart uus) panna:‘q’ juures:‘y’) ; 2) juures:‘x’
-Null
-Null
+Seeria
+Seeria uus 
+Seeria
+Seeria ← 1 ; 2
+Seeria
+Seeria ← 1 ; (Seeria ← 2)
+Seeria
+Seeria ← 1 ; (Seeria ← 2) ; 3
+Seeria
+Seeria ← 1 ; ((Nimekiri uus) panna:‘a’ juures:‘b’) ; 3
+Seeria
+Seeria ← 1 ; ((Nimekiri uus) panna:(Seeria ← 9) juures:‘b’) ; 3
+Nimekiri
+(Nimekiri uus) panna:2 juures:‘1’
+Nimekiri
+(Nimekiri uus) panna:2 juures:‘x’
+Nimekiri
+(Nimekiri uus) panna:(Seeria ← 1 ; 2) juures:‘x’
+Nimekiri
+(Nimekiri uus) panna:(Seeria ← ((Nimekiri uus) panna:‘q’ juures:‘y’) ; 2) juures:‘x’
+Tühi
+Tühi
