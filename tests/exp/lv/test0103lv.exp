@@ -5,7 +5,7 @@ a Būla ‘Viltus’  is NOT Nil.
 a Būla ‘Viltus’  is NOT Nil.
 a Skaits ‘1’  is NOT Nil.
 a Skaits ‘0’  is NOT Nil.
-a Stīgu ‘Str’  is NOT Nil.
-a Stīgu ‘’  is NOT Nil.
-a Kods ‘Kods’  is NOT Nil.
+a Teksts ‘Str’  is NOT Nil.
+a Teksts ‘’  is NOT Nil.
+a Uzdevums ‘Uzdevums’  is NOT Nil.
 but.. Nil is.. certainly NIL!

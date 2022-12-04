@@ -1,11 +1,11 @@
-Stīgu,Skaits
-Stīgu,Būla
-Skaits,Stīgu
+Teksts,Skaits
+Teksts,Būla
+Skaits,Teksts
 Skaits,Būla
 Būla,Skaits
 Būla,Skaits
-Būla,Stīgu
-Būla,Stīgu
+Būla,Teksts
+Būla,Teksts
 === String test ===
 123
 Viltus
