@@ -1,15 +1,15 @@
 1.001
 1.024
-List ← ‘1’ ; ‘2’ ; ‘3’
-List ← ‘1’ ; ‘2’ ; ‘3’
-List ← ‘1’ ; ‘’ ; ‘3’
-List ← ‘1’ ; ‘’ ; ‘3’
-List ← ‘’ ; ‘’ ; ‘’ ; ‘’
-List ← ‘’ ; ‘’ ; ‘’ ; ‘’
-List ← ‘’ ; ‘’
-List ← ‘’ ; ‘’
-List ← ‘x’
-List ← ‘x’
-List ← ‘’
-List ← ‘’
-List ← ‘1,2,3’
+Serie ← ‘1’ ; ‘2’ ; ‘3’
+Serie ← ‘1’ ; ‘2’ ; ‘3’
+Serie ← ‘1’ ; ‘’ ; ‘3’
+Serie ← ‘1’ ; ‘’ ; ‘3’
+Serie ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Serie ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Serie ← ‘’ ; ‘’
+Serie ← ‘’ ; ‘’
+Serie ← ‘x’
+Serie ← ‘x’
+Serie ← ‘’
+Serie ← ‘’
+Serie ← ‘1,2,3’
