@@ -1,11 +1,11 @@
-Kiɗa,Lambar
-Kiɗa,Boolean
-Lambar,Kiɗa
+Rubutu,Lambar
+Rubutu,Boolean
+Lambar,Rubutu
 Lambar,Boolean
 Boolean,Lambar
 Boolean,Lambar
-Boolean,Kiɗa
-Boolean,Kiɗa
+Boolean,Rubutu
+Boolean,Rubutu
 === String test ===
 123
 Karya

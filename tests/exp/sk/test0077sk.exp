@@ -1,11 +1,11 @@
-Povrázok,číslo
-Povrázok,Boolean
-číslo,Povrázok
-číslo,Boolean
-Boolean,číslo
-Boolean,číslo
-Boolean,Povrázok
-Boolean,Povrázok
+Text,Číslo
+Text,Boolean
+Číslo,Text
+Číslo,Boolean
+Boolean,Číslo
+Boolean,Číslo
+Boolean,Text
+Boolean,Text
 === String test ===
 123
 Nepravdivý
