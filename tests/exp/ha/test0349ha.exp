@@ -12,25 +12,25 @@ Lambar
 9,2
 Lambar
 -9,2
-Lissafi
-Lissafi sabo 
-Lissafi
-Lissafi ← 1 ; 2
-Lissafi
-Lissafi ← 1 ; (Lissafi ← 2)
-Lissafi
-Lissafi ← 1 ; (Lissafi ← 2) ; 3
-Lissafi
-Lissafi ← 1 ; ((Taswira sabo) sanya:“a” _a:“b”) ; 3
-Lissafi
-Lissafi ← 1 ; ((Taswira sabo) sanya:(Lissafi ← 9) _a:“b”) ; 3
+Jerin
+Jerin sabo 
+Jerin
+Jerin ← 1 ; 2
+Jerin
+Jerin ← 1 ; (Jerin ← 2)
+Jerin
+Jerin ← 1 ; (Jerin ← 2) ; 3
+Jerin
+Jerin ← 1 ; ((Taswira sabo) sanya:“a” a:“b”) ; 3
+Jerin
+Jerin ← 1 ; ((Taswira sabo) sanya:(Jerin ← 9) a:“b”) ; 3
 Taswira
-(Taswira sabo) sanya:2 _a:“1”
+(Taswira sabo) sanya:2 a:“1”
 Taswira
-(Taswira sabo) sanya:2 _a:“x”
+(Taswira sabo) sanya:2 a:“x”
 Taswira
-(Taswira sabo) sanya:(Lissafi ← 1 ; 2) _a:“x”
+(Taswira sabo) sanya:(Jerin ← 1 ; 2) a:“x”
 Taswira
-(Taswira sabo) sanya:(Lissafi ← ((Taswira sabo) sanya:“q” _a:“y”) ; 2) _a:“x”
+(Taswira sabo) sanya:(Jerin ← ((Taswira sabo) sanya:“q” a:“y”) ; 2) a:“x”
 Nil
 Nil
