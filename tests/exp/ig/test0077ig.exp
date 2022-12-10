@@ -1,11 +1,11 @@
-Eriri,Nọmba
-Eriri,Boolean
-Nọmba,Eriri
+Ederede,Nọmba
+Ederede,Boolean
+Nọmba,Ederede
 Nọmba,Boolean
 Boolean,Nọmba
 Boolean,Nọmba
-Boolean,Eriri
-Boolean,Eriri
+Boolean,Ederede
+Boolean,Ederede
 === String test ===
 123
 Gha
