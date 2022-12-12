@@ -1,8 +1,8 @@
-Nil
-Nil
-Boolean
+Engenanto
+Engenanto
+Isigqibo
 Kuyinyani
-Boolean
+Isigqibo
 Ubuxoki
 Inani
 1
@@ -12,25 +12,25 @@ Inani
 9,2
 Inani
 -9,2
+Uthotho
+Uthotho intsha 
+Uthotho
+Uthotho ← 1 ; 2
+Uthotho
+Uthotho ← 1 ; (Uthotho ← 2)
+Uthotho
+Uthotho ← 1 ; (Uthotho ← 2) ; 3
+Uthotho
+Uthotho ← 1 ; ((Uluhlu intsha) beka:‘a’ e:‘b’) ; 3
+Uthotho
+Uthotho ← 1 ; ((Uluhlu intsha) beka:(Uthotho ← 9) e:‘b’) ; 3
 Uluhlu
-Uluhlu intsha 
+(Uluhlu intsha) beka:2 e:‘1’
 Uluhlu
-Uluhlu ← 1 ; 2
+(Uluhlu intsha) beka:2 e:‘x’
 Uluhlu
-Uluhlu ← 1 ; (Uluhlu ← 2)
+(Uluhlu intsha) beka:(Uthotho ← 1 ; 2) e:‘x’
 Uluhlu
-Uluhlu ← 1 ; (Uluhlu ← 2) ; 3
-Uluhlu
-Uluhlu ← 1 ; ((Imephu intsha) beka:‘a’ _e:‘b’) ; 3
-Uluhlu
-Uluhlu ← 1 ; ((Imephu intsha) beka:(Uluhlu ← 9) _e:‘b’) ; 3
-Imephu
-(Imephu intsha) beka:2 _e:‘1’
-Imephu
-(Imephu intsha) beka:2 _e:‘x’
-Imephu
-(Imephu intsha) beka:(Uluhlu ← 1 ; 2) _e:‘x’
-Imephu
-(Imephu intsha) beka:(Uluhlu ← ((Imephu intsha) beka:‘q’ _e:‘y’) ; 2) _e:‘x’
-Nil
-Nil
+(Uluhlu intsha) beka:(Uthotho ← ((Uluhlu intsha) beka:‘q’ e:‘y’) ; 2) e:‘x’
+Engenanto
+Engenanto

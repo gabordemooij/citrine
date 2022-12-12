@@ -1,6 +1,6 @@
-(Maapu tuntun) fi:‘a"b’ ni:‘test’
+(Akojọ tuntun) fi:‘a"b’ nipa:‘test’
 Invalid JSON.
-(Maapu tuntun) fi:(Atokọ ← 1 ; 2 ; (Atokọ ← 3 ; 4) ; ((Maapu tuntun) fi:(Atokọ ← 3 ; 4) ni:‘bar’, fi:1 ni:‘foo’)) ni:‘nested’, fi:Irọ ni:‘legend’, fi:27 ni:‘age’, fi:‘Jack’ ni:‘name’
+(Akojọ tuntun) fi:(Jara ← 1 ; 2 ; (Jara ← 3 ; 4) ; ((Akojọ tuntun) fi:(Jara ← 3 ; 4) nipa:‘bar’, fi:1 nipa:‘foo’)) nipa:‘nested’, fi:Bẹẹkọ nipa:‘legend’, fi:27 nipa:‘age’, fi:‘Jack’ nipa:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

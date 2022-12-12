@@ -1,12 +1,12 @@
-Intambo,Inombolo
-Intambo,Boolean
-Inombolo,Intambo
-Inombolo,Boolean
-Boolean,Inombolo
-Boolean,Inombolo
-Boolean,Intambo
-Boolean,Intambo
+Umbhalo,Inombolo
+Umbhalo,Yebo noma cha
+Inombolo,Umbhalo
+Inombolo,Yebo noma cha
+Yebo noma cha,Inombolo
+Yebo noma cha,Inombolo
+Yebo noma cha,Umbhalo
+Yebo noma cha,Umbhalo
 === String test ===
 123
-Amanga
-Kuliqiniso
+Cha
+Yebo
