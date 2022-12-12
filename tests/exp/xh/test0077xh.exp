@@ -1,11 +1,11 @@
-Umtya,Inani
-Umtya,Boolean
-Inani,Umtya
-Inani,Boolean
-Boolean,Inani
-Boolean,Inani
-Boolean,Umtya
-Boolean,Umtya
+Umbhalo,Inani
+Umbhalo,Isigqibo
+Inani,Umbhalo
+Inani,Isigqibo
+Isigqibo,Inani
+Isigqibo,Inani
+Isigqibo,Umbhalo
+Isigqibo,Umbhalo
 === String test ===
 123
 Ubuxoki

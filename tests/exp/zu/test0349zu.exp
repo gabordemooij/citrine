@@ -1,9 +1,9 @@
-Nil
-Nil
-Boolean
-Kuliqiniso
-Boolean
-Amanga
+Lutho
+Lutho
+Yebo noma cha
+Yebo
+Yebo noma cha
+Cha
 Inombolo
 1
 Inombolo
@@ -21,16 +21,16 @@ Uhlu ← 1 ; (Uhlu ← 2)
 Uhlu
 Uhlu ← 1 ; (Uhlu ← 2) ; 3
 Uhlu
-Uhlu ← 1 ; ((Imephu okusha) beka:‘a’ at:‘b’) ; 3
+Uhlu ← 1 ; ((Imephu okusha) beka:‘a’ ngo:‘b’) ; 3
 Uhlu
-Uhlu ← 1 ; ((Imephu okusha) beka:(Uhlu ← 9) at:‘b’) ; 3
+Uhlu ← 1 ; ((Imephu okusha) beka:(Uhlu ← 9) ngo:‘b’) ; 3
 Imephu
-(Imephu okusha) beka:2 at:‘1’
+(Imephu okusha) beka:2 ngo:‘1’
 Imephu
-(Imephu okusha) beka:2 at:‘x’
+(Imephu okusha) beka:2 ngo:‘x’
 Imephu
-(Imephu okusha) beka:(Uhlu ← 1 ; 2) at:‘x’
+(Imephu okusha) beka:(Uhlu ← 1 ; 2) ngo:‘x’
 Imephu
-(Imephu okusha) beka:(Uhlu ← ((Imephu okusha) beka:‘q’ at:‘y’) ; 2) at:‘x’
-Nil
-Nil
+(Imephu okusha) beka:(Uhlu ← ((Imephu okusha) beka:‘q’ ngo:‘y’) ; 2) ngo:‘x’
+Lutho
+Lutho

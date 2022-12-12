@@ -1,6 +1,6 @@
-(Imephu intsha) beka:‘a"b’ _e:‘test’
+(Uluhlu intsha) beka:‘a"b’ e:‘test’
 Invalid JSON.
-(Imephu intsha) beka:(Uluhlu ← 1 ; 2 ; (Uluhlu ← 3 ; 4) ; ((Imephu intsha) beka:(Uluhlu ← 3 ; 4) _e:‘bar’, beka:1 _e:‘foo’)) _e:‘nested’, beka:Ubuxoki _e:‘legend’, beka:27 _e:‘age’, beka:‘Jack’ _e:‘name’
+(Uluhlu intsha) beka:(Uthotho ← 1 ; 2 ; (Uthotho ← 3 ; 4) ; ((Uluhlu intsha) beka:(Uthotho ← 3 ; 4) e:‘bar’, beka:1 e:‘foo’)) e:‘nested’, beka:Ubuxoki e:‘legend’, beka:27 e:‘age’, beka:‘Jack’ e:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}
