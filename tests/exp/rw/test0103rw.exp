@@ -1,11 +1,11 @@
 9
 a Intego ‘Intego’  is NOT Nil.
-a Boolean ‘Nukuri’  is NOT Nil.
-a Boolean ‘Ikinyoma’  is NOT Nil.
-a Boolean ‘Ikinyoma’  is NOT Nil.
+a Yego Oya ‘Yego’  is NOT Nil.
+a Yego Oya ‘Oya’  is NOT Nil.
+a Yego Oya ‘Oya’  is NOT Nil.
 a Umubare ‘1’  is NOT Nil.
 a Umubare ‘0’  is NOT Nil.
-a Ikirongo ‘Str’  is NOT Nil.
-a Ikirongo ‘’  is NOT Nil.
-a Kode ‘Kode’  is NOT Nil.
+a Inyandiko ‘Str’  is NOT Nil.
+a Inyandiko ‘’  is NOT Nil.
+a Akazi ‘Akazi’  is NOT Nil.
 but.. Nil is.. certainly NIL!

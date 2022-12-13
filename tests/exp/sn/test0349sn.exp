@@ -1,9 +1,9 @@
-Nil
-Nil
-Boolean
-Chokwadi
-Boolean
-Nhema
+Hapana
+Hapana
+Chisarudzo
+Ehe
+Chisarudzo
+Aihwa
 Nhamba
 1
 Nhamba
@@ -32,5 +32,5 @@ Mepu
 (Mepu nyowani) isa:(Rondedzero ← 1 ; 2) pa:‘x’
 Mepu
 (Mepu nyowani) isa:(Rondedzero ← ((Mepu nyowani) isa:‘q’ pa:‘y’) ; 2) pa:‘x’
-Nil
-Nil
+Hapana
+Hapana

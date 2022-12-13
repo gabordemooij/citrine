@@ -1,6 +1,6 @@
 (Ikarita gishya) shyira:‘a"b’ kuri:‘test’
 Invalid JSON.
-(Ikarita gishya) shyira:(Urutonde ← 1 ; 2 ; (Urutonde ← 3 ; 4) ; ((Ikarita gishya) shyira:(Urutonde ← 3 ; 4) kuri:‘bar’, shyira:1 kuri:‘foo’)) kuri:‘nested’, shyira:Ikinyoma kuri:‘legend’, shyira:27 kuri:‘age’, shyira:‘Jack’ kuri:‘name’
+(Ikarita gishya) shyira:(Urutonde ← 1 ; 2 ; (Urutonde ← 3 ; 4) ; ((Ikarita gishya) shyira:(Urutonde ← 3 ; 4) kuri:‘bar’, shyira:1 kuri:‘foo’)) kuri:‘nested’, shyira:Oya kuri:‘legend’, shyira:27 kuri:‘age’, shyira:‘Jack’ kuri:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

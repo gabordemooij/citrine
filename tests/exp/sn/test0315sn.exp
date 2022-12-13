@@ -1,6 +1,6 @@
 (Mepu nyowani) isa:‘a"b’ pa:‘test’
 Invalid JSON.
-(Mepu nyowani) isa:(Rondedzero ← 1 ; 2 ; (Rondedzero ← 3 ; 4) ; ((Mepu nyowani) isa:(Rondedzero ← 3 ; 4) pa:‘bar’, isa:1 pa:‘foo’)) pa:‘nested’, isa:Nhema pa:‘legend’, isa:27 pa:‘age’, isa:‘Jack’ pa:‘name’
+(Mepu nyowani) isa:(Rondedzero ← 1 ; 2 ; (Rondedzero ← 3 ; 4) ; ((Mepu nyowani) isa:(Rondedzero ← 3 ; 4) pa:‘bar’, isa:1 pa:‘foo’)) pa:‘nested’, isa:Aihwa pa:‘legend’, isa:27 pa:‘age’, isa:‘Jack’ pa:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}
