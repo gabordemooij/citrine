@@ -1,15 +1,15 @@
 1.001
 1.024
-Orodha ← ‘1’ ; ‘2’ ; ‘3’
-Orodha ← ‘1’ ; ‘2’ ; ‘3’
-Orodha ← ‘1’ ; ‘’ ; ‘3’
-Orodha ← ‘1’ ; ‘’ ; ‘3’
-Orodha ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Orodha ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Orodha ← ‘’ ; ‘’
-Orodha ← ‘’ ; ‘’
-Orodha ← ‘x’
-Orodha ← ‘x’
-Orodha ← ‘’
-Orodha ← ‘’
-Orodha ← ‘1,2,3’
+Msururu ← ‘1’ ; ‘2’ ; ‘3’
+Msururu ← ‘1’ ; ‘2’ ; ‘3’
+Msururu ← ‘1’ ; ‘’ ; ‘3’
+Msururu ← ‘1’ ; ‘’ ; ‘3’
+Msururu ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Msururu ← ‘’ ; ‘’ ; ‘’ ; ‘’
+Msururu ← ‘’ ; ‘’
+Msururu ← ‘’ ; ‘’
+Msururu ← ‘x’
+Msururu ← ‘x’
+Msururu ← ‘’
+Msururu ← ‘’
+Msururu ← ‘1,2,3’

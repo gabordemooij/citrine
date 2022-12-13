@@ -1,9 +1,9 @@
-Nil
-Nil
-Boolean
-Kweli
-Boolean
-Uongo
+Hakuna kitu
+Hakuna kitu
+Ndiyo au hapana
+Ndiyo
+Ndiyo au hapana
+Hapana
 Nambari
 1
 Nambari
@@ -12,25 +12,25 @@ Nambari
 9,2
 Nambari
 -9,2
+Msururu
+Msururu mpya 
+Msururu
+Msururu ← 1 ; 2
+Msururu
+Msururu ← 1 ; (Msururu ← 2)
+Msururu
+Msururu ← 1 ; (Msururu ← 2) ; 3
+Msururu
+Msururu ← 1 ; ((Orodha mpya) weka:‘a’ saa:‘b’) ; 3
+Msururu
+Msururu ← 1 ; ((Orodha mpya) weka:(Msururu ← 9) saa:‘b’) ; 3
 Orodha
-Orodha mpya 
+(Orodha mpya) weka:2 saa:‘1’
 Orodha
-Orodha ← 1 ; 2
+(Orodha mpya) weka:2 saa:‘x’
 Orodha
-Orodha ← 1 ; (Orodha ← 2)
+(Orodha mpya) weka:(Msururu ← 1 ; 2) saa:‘x’
 Orodha
-Orodha ← 1 ; (Orodha ← 2) ; 3
-Orodha
-Orodha ← 1 ; ((Ramani mpya) weka:‘a’ saa:‘b’) ; 3
-Orodha
-Orodha ← 1 ; ((Ramani mpya) weka:(Orodha ← 9) saa:‘b’) ; 3
-Ramani
-(Ramani mpya) weka:2 saa:‘1’
-Ramani
-(Ramani mpya) weka:2 saa:‘x’
-Ramani
-(Ramani mpya) weka:(Orodha ← 1 ; 2) saa:‘x’
-Ramani
-(Ramani mpya) weka:(Orodha ← ((Ramani mpya) weka:‘q’ saa:‘y’) ; 2) saa:‘x’
-Nil
-Nil
+(Orodha mpya) weka:(Msururu ← ((Orodha mpya) weka:‘q’ saa:‘y’) ; 2) saa:‘x’
+Hakuna kitu
+Hakuna kitu
