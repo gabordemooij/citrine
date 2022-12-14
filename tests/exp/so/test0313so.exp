@@ -1,10 +1,10 @@
 There are 2 chairs in the sunny garden.
 A rubber duck swims in the pool.
-Is there a shed in the garden? Well.. Been
+Is there a shed in the garden? Well.. Maya
 In the garden you smell the fragrance of tulips and roses and lillies.
-The garden is Eber meters long.
-Luckily, this day, there are Eber wasps in the garden.
-The dog named Eber sleeps under the tree.
+The garden is Waxba meters long.
+Luckily, this day, there are Waxba wasps in the garden.
+The dog named Waxba sleeps under the tree.
 a\"bb\"ccc\"
-(Seznam cusub) dhigaa:((Seznam cusub) dhigaa:Eber at:‘dog’, dhigaa:Eber at:‘insects’, dhigaa:((Seznam cusub) dhigaa:15 at:‘length’, dhigaa:8 at:‘width’) at:‘size’, dhigaa:(Serije ← ‘tulips’ ; ‘roses’ ; ‘lillies’) at:‘flower’, dhigaa:Been at:‘shed’, dhigaa:Run at:‘pool’, dhigaa:2 at:‘chairs’) at:‘garden’
+(Liiska cusub) walax:((Liiska cusub) walax:Waxba meeshaas:‘dog’, walax:Waxba meeshaas:‘insects’, walax:((Liiska cusub) walax:15 meeshaas:‘length’, walax:8 meeshaas:‘width’) meeshaas:‘size’, walax:(Taxane ← ‘tulips’ ; ‘roses’ ; ‘lillies’) meeshaas:‘flower’, walax:Maya meeshaas:‘shed’, walax:Haa meeshaas:‘pool’, walax:2 meeshaas:‘chairs’) meeshaas:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

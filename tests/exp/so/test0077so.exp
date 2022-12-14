@@ -1,12 +1,12 @@
-Znakov,Tirada
-Znakov,Boolean
-Tirada,Znakov
-Tirada,Boolean
-Boolean,Tirada
-Boolean,Tirada
-Boolean,Znakov
-Boolean,Znakov
+Qoraal,Tirada
+Qoraal,Haa maya
+Tirada,Qoraal
+Tirada,Haa maya
+Haa maya,Tirada
+Haa maya,Tirada
+Haa maya,Qoraal
+Haa maya,Qoraal
 === String test ===
 123
-Been
-Run
+Maya
+Haa

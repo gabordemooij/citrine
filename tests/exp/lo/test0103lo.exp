@@ -1,11 +1,11 @@
 9
 a ຈຸດປະສົງ ‘ຈຸດປະສົງ’  is NOT Nil.
-a ບົວບານ ‘ຖືກຕ້ອງ’  is NOT Nil.
-a ບົວບານ ‘ບໍ່ຖືກຕ້ອງ’  is NOT Nil.
-a ບົວບານ ‘ບໍ່ຖືກຕ້ອງ’  is NOT Nil.
+a ແມ່ນຫຼືບໍ່ ‘ໂອເຄ’  is NOT Nil.
+a ແມ່ນຫຼືບໍ່ ‘ບໍ່’  is NOT Nil.
+a ແມ່ນຫຼືບໍ່ ‘ບໍ່’  is NOT Nil.
 a ເລກ ‘1’  is NOT Nil.
 a ເລກ ‘0’  is NOT Nil.
-a ຊ່ອຍແນ່ ‘Str’  is NOT Nil.
-a ຊ່ອຍແນ່ ‘’  is NOT Nil.
-a ລະຫັດ ‘ລະຫັດ’  is NOT Nil.
+a ຂໍ້ຄວາມ ‘Str’  is NOT Nil.
+a ຂໍ້ຄວາມ ‘’  is NOT Nil.
+a ເຮັດວຽກ ‘ເຮັດວຽກ’  is NOT Nil.
 but.. Nil is.. certainly NIL!

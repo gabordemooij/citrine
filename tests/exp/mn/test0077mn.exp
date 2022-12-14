@@ -1,12 +1,12 @@
-Мөр,Тоо
-Мөр,Boolean
-Тоо,Мөр
+Текст,Тоо
+Текст,Boolean
+Тоо,Текст
 Тоо,Boolean
 Boolean,Тоо
 Boolean,Тоо
-Boolean,Мөр
-Boolean,Мөр
+Boolean,Текст
+Boolean,Текст
 === String test ===
 123
-Худал
-Үнэн шүү
+Үгүй
+Тиймээ
