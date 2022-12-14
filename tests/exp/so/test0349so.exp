@@ -1,9 +1,9 @@
-Eber
-Eber
-Boolean
-Run
-Boolean
-Been
+Waxba
+Waxba
+Haa maya
+Haa
+Haa maya
+Maya
 Tirada
 1
 Tirada
@@ -12,25 +12,25 @@ Tirada
 9,2
 Tirada
 -9,2
-Serije
-Serije cusub 
-Serije
-Serije ← 1 ; 2
-Serije
-Serije ← 1 ; (Serije ← 2)
-Serije
-Serije ← 1 ; (Serije ← 2) ; 3
-Serije
-Serije ← 1 ; ((Seznam cusub) dhigaa:‘a’ at:‘b’) ; 3
-Serije
-Serije ← 1 ; ((Seznam cusub) dhigaa:(Serije ← 9) at:‘b’) ; 3
-Seznam
-(Seznam cusub) dhigaa:2 at:‘1’
-Seznam
-(Seznam cusub) dhigaa:2 at:‘x’
-Seznam
-(Seznam cusub) dhigaa:(Serije ← 1 ; 2) at:‘x’
-Seznam
-(Seznam cusub) dhigaa:(Serije ← ((Seznam cusub) dhigaa:‘q’ at:‘y’) ; 2) at:‘x’
-Eber
-Eber
+Taxane
+Taxane cusub 
+Taxane
+Taxane ← 1 ; 2
+Taxane
+Taxane ← 1 ; (Taxane ← 2)
+Taxane
+Taxane ← 1 ; (Taxane ← 2) ; 3
+Taxane
+Taxane ← 1 ; ((Liiska cusub) walax:‘a’ meeshaas:‘b’) ; 3
+Taxane
+Taxane ← 1 ; ((Liiska cusub) walax:(Taxane ← 9) meeshaas:‘b’) ; 3
+Liiska
+(Liiska cusub) walax:2 meeshaas:‘1’
+Liiska
+(Liiska cusub) walax:2 meeshaas:‘x’
+Liiska
+(Liiska cusub) walax:(Taxane ← 1 ; 2) meeshaas:‘x’
+Liiska
+(Liiska cusub) walax:(Taxane ← ((Liiska cusub) walax:‘q’ meeshaas:‘y’) ; 2) meeshaas:‘x’
+Waxba
+Waxba

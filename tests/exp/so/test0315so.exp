@@ -1,6 +1,6 @@
-(Seznam cusub) dhigaa:‘a"b’ at:‘test’
+(Liiska cusub) walax:‘a"b’ meeshaas:‘test’
 Invalid JSON.
-(Seznam cusub) dhigaa:(Serije ← 1 ; 2 ; (Serije ← 3 ; 4) ; ((Seznam cusub) dhigaa:(Serije ← 3 ; 4) at:‘bar’, dhigaa:1 at:‘foo’)) at:‘nested’, dhigaa:Been at:‘legend’, dhigaa:27 at:‘age’, dhigaa:‘Jack’ at:‘name’
+(Liiska cusub) walax:(Taxane ← 1 ; 2 ; (Taxane ← 3 ; 4) ; ((Liiska cusub) walax:(Taxane ← 3 ; 4) meeshaas:‘bar’, walax:1 meeshaas:‘foo’)) meeshaas:‘nested’, walax:Maya meeshaas:‘legend’, walax:27 meeshaas:‘age’, walax:‘Jack’ meeshaas:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}
