@@ -1,6 +1,6 @@
-(Xəritə yeni) qoymaq:‘a"b’ __:‘test’
+(Siyahı yeni) obyekt:‘a"b’ yer:‘test’
 Invalid JSON.
-(Xəritə yeni) qoymaq:(Siyahı ← 1 ; 2 ; (Siyahı ← 3 ; 4) ; ((Xəritə yeni) qoymaq:(Siyahı ← 3 ; 4) __:‘bar’, qoymaq:1 __:‘foo’)) __:‘nested’, qoymaq:Yalan __:‘legend’, qoymaq:27 __:‘age’, qoymaq:‘Jack’ __:‘name’
+(Siyahı yeni) obyekt:(Seriya ← 1 ; 2 ; (Seriya ← 3 ; 4) ; ((Siyahı yeni) obyekt:(Seriya ← 3 ; 4) yer:‘bar’, obyekt:1 yer:‘foo’)) yer:‘nested’, obyekt:Yalan yer:‘legend’, obyekt:27 yer:‘age’, obyekt:‘Jack’ yer:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

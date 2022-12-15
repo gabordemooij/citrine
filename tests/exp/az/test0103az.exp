@@ -1,11 +1,11 @@
 9
 a Obyekt ‘Obyekt’  is NOT Nil.
-a Boolean ‘Doğru’  is NOT Nil.
-a Boolean ‘Yalan’  is NOT Nil.
-a Boolean ‘Yalan’  is NOT Nil.
+a Məntiq ‘Doğru’  is NOT Nil.
+a Məntiq ‘Yalan’  is NOT Nil.
+a Məntiq ‘Yalan’  is NOT Nil.
 a Nömrə ‘1’  is NOT Nil.
 a Nömrə ‘0’  is NOT Nil.
-a Sətir ‘Str’  is NOT Nil.
-a Sətir ‘’  is NOT Nil.
-a Kod ‘Kod’  is NOT Nil.
+a Mətn ‘Str’  is NOT Nil.
+a Mətn ‘’  is NOT Nil.
+a Tapşırıq ‘Tapşırıq’  is NOT Nil.
 but.. Nil is.. certainly NIL!

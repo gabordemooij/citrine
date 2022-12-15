@@ -1,11 +1,11 @@
-Cadea,Número
-Cadea,Booleano
-Número,Cadea
+Texto,Número
+Texto,Booleano
+Número,Texto
 Número,Booleano
 Booleano,Número
 Booleano,Número
-Booleano,Cadea
-Booleano,Cadea
+Booleano,Texto
+Booleano,Texto
 === String test ===
 123
 Falso
