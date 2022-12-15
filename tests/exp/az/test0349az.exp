@@ -1,8 +1,8 @@
-Nil
-Nil
-Boolean
+Boş
+Boş
+Məntiq
 Doğru
-Boolean
+Məntiq
 Yalan
 Nömrə
 1
@@ -12,25 +12,25 @@ Nömrə
 9,2
 Nömrə
 -9,2
+Seriya
+Seriya yeni 
+Seriya
+Seriya ← 1 ; 2
+Seriya
+Seriya ← 1 ; (Seriya ← 2)
+Seriya
+Seriya ← 1 ; (Seriya ← 2) ; 3
+Seriya
+Seriya ← 1 ; ((Siyahı yeni) obyekt:‘a’ yer:‘b’) ; 3
+Seriya
+Seriya ← 1 ; ((Siyahı yeni) obyekt:(Seriya ← 9) yer:‘b’) ; 3
 Siyahı
-Siyahı yeni 
+(Siyahı yeni) obyekt:2 yer:‘1’
 Siyahı
-Siyahı ← 1 ; 2
+(Siyahı yeni) obyekt:2 yer:‘x’
 Siyahı
-Siyahı ← 1 ; (Siyahı ← 2)
+(Siyahı yeni) obyekt:(Seriya ← 1 ; 2) yer:‘x’
 Siyahı
-Siyahı ← 1 ; (Siyahı ← 2) ; 3
-Siyahı
-Siyahı ← 1 ; ((Xəritə yeni) qoymaq:‘a’ __:‘b’) ; 3
-Siyahı
-Siyahı ← 1 ; ((Xəritə yeni) qoymaq:(Siyahı ← 9) __:‘b’) ; 3
-Xəritə
-(Xəritə yeni) qoymaq:2 __:‘1’
-Xəritə
-(Xəritə yeni) qoymaq:2 __:‘x’
-Xəritə
-(Xəritə yeni) qoymaq:(Siyahı ← 1 ; 2) __:‘x’
-Xəritə
-(Xəritə yeni) qoymaq:(Siyahı ← ((Xəritə yeni) qoymaq:‘q’ __:‘y’) ; 2) __:‘x’
-Nil
-Nil
+(Siyahı yeni) obyekt:(Seriya ← ((Siyahı yeni) obyekt:‘q’ yer:‘y’) ; 2) yer:‘x’
+Boş
+Boş

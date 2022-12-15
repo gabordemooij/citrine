@@ -1,11 +1,11 @@
-Sətir,Nömrə
-Sətir,Boolean
-Nömrə,Sətir
-Nömrə,Boolean
-Boolean,Nömrə
-Boolean,Nömrə
-Boolean,Sətir
-Boolean,Sətir
+Mətn,Nömrə
+Mətn,Məntiq
+Nömrə,Mətn
+Nömrə,Məntiq
+Məntiq,Nömrə
+Məntiq,Nömrə
+Məntiq,Mətn
+Məntiq,Mətn
 === String test ===
 123
 Yalan
