@@ -12,25 +12,25 @@ Helu
 9,2
 Helu
 -9,2
-Palapala
-Palapala hou 
-Palapala
-Palapala ← 1 ; 2
-Palapala
-Palapala ← 1 ; (Palapala ← 2)
-Palapala
-Palapala ← 1 ; (Palapala ← 2) ; 3
-Palapala
-Palapala ← 1 ; ((Mua hou) waiho:‘a’ ma:‘b’) ; 3
-Palapala
-Palapala ← 1 ; ((Mua hou) waiho:(Palapala ← 9) ma:‘b’) ; 3
-Mua
-(Mua hou) waiho:2 ma:‘1’
-Mua
-(Mua hou) waiho:2 ma:‘x’
-Mua
-(Mua hou) waiho:(Palapala ← 1 ; 2) ma:‘x’
-Mua
-(Mua hou) waiho:(Palapala ← ((Mua hou) waiho:‘q’ ma:‘y’) ; 2) ma:‘x’
+Moʻo
+Moʻo hou 
+Moʻo
+Moʻo ← 1 ; 2
+Moʻo
+Moʻo ← 1 ; (Moʻo ← 2)
+Moʻo
+Moʻo ← 1 ; (Moʻo ← 2) ; 3
+Moʻo
+Moʻo ← 1 ; ((Papa inoa hou) waiho:‘a’ ma:‘b’) ; 3
+Moʻo
+Moʻo ← 1 ; ((Papa inoa hou) waiho:(Moʻo ← 9) ma:‘b’) ; 3
+Papa inoa
+(Papa inoa hou) waiho:2 ma:‘1’
+Papa inoa
+(Papa inoa hou) waiho:2 ma:‘x’
+Papa inoa
+(Papa inoa hou) waiho:(Moʻo ← 1 ; 2) ma:‘x’
+Papa inoa
+(Papa inoa hou) waiho:(Moʻo ← ((Papa inoa hou) waiho:‘q’ ma:‘y’) ; 2) ma:‘x’
 Nau
 Nau
