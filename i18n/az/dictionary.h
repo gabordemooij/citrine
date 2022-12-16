@@ -71,7 +71,7 @@
 #define CTR_DICT_MIN              "minimum"
 #define CTR_DICT_MAX              "maksimum"
 #define CTR_DICT_ODD   	          "tək?"
-#define CTR_DICT_EVEN   	      "hətta?"
+#define CTR_DICT_EVEN   	      "cüt?"
 #define CTR_DICT_POS   	          "müsbət?"
 #define CTR_DICT_NEG   	          "mənfi?"
 #define CTR_DICT_TOBOOL           "boolean"

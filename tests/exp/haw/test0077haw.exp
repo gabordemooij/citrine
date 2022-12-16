@@ -1,11 +1,11 @@
-Peke,Helu
-Peke,Boolean
-Helu,Peke
+Kikokikona,Helu
+Kikokikona,Boolean
+Helu,Kikokikona
 Helu,Boolean
 Boolean,Helu
 Boolean,Helu
-Boolean,Peke
-Boolean,Peke
+Boolean,Kikokikona
+Boolean,Kikokikona
 === String test ===
 123
 Hoʻolaha
