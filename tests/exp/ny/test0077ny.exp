@@ -1,11 +1,11 @@
-Chingwe,Chiwerengero
-Chingwe,Boolean
-Chiwerengero,Chingwe
+Mawu,Chiwerengero
+Mawu,Boolean
+Chiwerengero,Mawu
 Chiwerengero,Boolean
 Boolean,Chiwerengero
 Boolean,Chiwerengero
-Boolean,Chingwe
-Boolean,Chingwe
+Boolean,Mawu
+Boolean,Mawu
 === String test ===
 123
 Zabodza
