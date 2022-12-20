@@ -3,7 +3,7 @@ s "respond:and:and:" "ප්‍රතිචාර දක්වන්න:සහ
 s "respond:and:" "ප්‍රතිචාර දක්වන්න:සහ:"
 s "respond:" "ප්‍රතිචාර දක්වන්න:"
 t "color" "colorsi"
-s "add:" "_එකතු කරන්න:"
+s "add:" "එකතු කරන්න:"
 s "subtract:" "අඩු කරන්න:"
 s "size" "ප්‍රමාණය"
 s "new" "නව"
