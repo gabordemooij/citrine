@@ -1,10 +1,10 @@
 There are 2 chairs in the sunny garden.
 A rubber duck swims in the pool.
-Is there a shed in the garden? Well.. မှား
+Is there a shed in the garden? Well.. မဟုတ်ဘူး
 In the garden you smell the fragrance of tulips and roses and lillies.
-The garden is Nil meters long.
-Luckily, this day, there are Nil wasps in the garden.
-The dog named Nil sleeps under the tree.
+The garden is ဗလာ meters long.
+Luckily, this day, there are ဗလာ wasps in the garden.
+The dog named ဗလာ sleeps under the tree.
 a\"bb\"ccc\"
-(မြေပုံ အသစ်) ထား:((မြေပုံ အသစ်) ထား:Nil မှာ:‘dog’, ထား:Nil မှာ:‘insects’, ထား:((မြေပုံ အသစ်) ထား:15 မှာ:‘length’, ထား:8 မှာ:‘width’) မှာ:‘size’, ထား:(စာရင်း ← ‘tulips’ ; ‘roses’ ; ‘lillies’) မှာ:‘flower’, ထား:မှား မှာ:‘shed’, ထား:မှန်ပါတယ် မှာ:‘pool’, ထား:2 မှာ:‘chairs’) မှာ:‘garden’
+(စာရင်း အသစ်) ရွှေ့:((စာရင်း အသစ်) ရွှေ့:ဗလာ သို့:‘dog’, ရွှေ့:ဗလာ သို့:‘insects’, ရွှေ့:((စာရင်း အသစ်) ရွှေ့:15 သို့:‘length’, ရွှေ့:8 သို့:‘width’) သို့:‘size’, ရွှေ့:(စီးရီး ← ‘tulips’ ; ‘roses’ ; ‘lillies’) သို့:‘flower’, ရွှေ့:မဟုတ်ဘူး သို့:‘shed’, ရွှေ့:ဟုတ်ကဲ့ သို့:‘pool’, ရွှေ့:2 သို့:‘chairs’) သို့:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}
