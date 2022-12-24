@@ -67,7 +67,7 @@
 #define CTR_DICT_ROUND            "rotundatus"
 #define CTR_DICT_ABS              "absoluta"
 #define CTR_DICT_SQRT             "radix quadrata"
-#define CTR_DICT_POWER            "virtus;__:"
+#define CTR_DICT_POWER            "ad potentiam:"
 #define CTR_DICT_MIN              "minimum"
 #define CTR_DICT_MAX              "maximum"
 #define CTR_DICT_ODD   	          "impar?"
