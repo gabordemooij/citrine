@@ -1,11 +1,11 @@
-Filum,Numerus
-Filum,Boolean
-Numerus,Filum
-Numerus,Boolean
-Boolean,Numerus
-Boolean,Numerus
-Boolean,Filum
-Boolean,Filum
+Verbum,Numerus
+Verbum,Veritas
+Numerus,Verbum
+Numerus,Veritas
+Veritas,Numerus
+Veritas,Numerus
+Veritas,Verbum
+Veritas,Verbum
 === String test ===
 123
 Falsus

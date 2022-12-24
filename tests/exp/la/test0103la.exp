@@ -1,11 +1,11 @@
 9
 a Object ‘Object’  is NOT Nil.
-a Boolean ‘Verum’  is NOT Nil.
-a Boolean ‘Falsus’  is NOT Nil.
-a Boolean ‘Falsus’  is NOT Nil.
+a Veritas ‘Verum’  is NOT Nil.
+a Veritas ‘Falsus’  is NOT Nil.
+a Veritas ‘Falsus’  is NOT Nil.
 a Numerus ‘1’  is NOT Nil.
 a Numerus ‘0’  is NOT Nil.
-a Filum ‘Str’  is NOT Nil.
-a Filum ‘’  is NOT Nil.
-a Code ‘Code’  is NOT Nil.
+a Verbum ‘Str’  is NOT Nil.
+a Verbum ‘’  is NOT Nil.
+a Actio ‘Actio’  is NOT Nil.
 but.. Nil is.. certainly NIL!
