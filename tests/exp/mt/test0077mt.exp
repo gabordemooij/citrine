@@ -1,11 +1,11 @@
-String,Numru
-String,Boolean
-Numru,String
+Test,Numru
+Test,Boolean
+Numru,Test
 Numru,Boolean
 Boolean,Numru
 Boolean,Numru
-Boolean,String
-Boolean,String
+Boolean,Test
+Boolean,Test
 === String test ===
 123
 Falz

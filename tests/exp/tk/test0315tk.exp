@@ -1,6 +1,6 @@
-(Karta täze) goý:‘a"b’ at:‘test’
+(Sanaw täze) obýekt:‘a"b’ ýeri:‘test’
 Invalid JSON.
-(Karta täze) goý:(Sanaw ← 1 ; 2 ; (Sanaw ← 3 ; 4) ; ((Karta täze) goý:(Sanaw ← 3 ; 4) at:‘bar’, goý:1 at:‘foo’)) at:‘nested’, goý:Sealňyş at:‘legend’, goý:27 at:‘age’, goý:‘Jack’ at:‘name’
+(Sanaw täze) obýekt:(Seriýa ← 1 ; 2 ; (Seriýa ← 3 ; 4) ; ((Sanaw täze) obýekt:(Seriýa ← 3 ; 4) ýeri:‘bar’, obýekt:1 ýeri:‘foo’)) ýeri:‘nested’, obýekt:Sealňyş ýeri:‘legend’, obýekt:27 ýeri:‘age’, obýekt:‘Jack’ ýeri:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

@@ -1348,7 +1348,7 @@ ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * ☞ x ≔ 3 dollars.
- * ✎ write: x qualification.
+ * ✎ write: x qualifier.
  * 
  */
 ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argumentList) {

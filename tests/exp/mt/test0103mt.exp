@@ -5,7 +5,7 @@ a Boolean ‘Falz’  is NOT Nil.
 a Boolean ‘Falz’  is NOT Nil.
 a Numru ‘1’  is NOT Nil.
 a Numru ‘0’  is NOT Nil.
-a String ‘Str’  is NOT Nil.
-a String ‘’  is NOT Nil.
-a Kodiċi ‘Kodiċi’  is NOT Nil.
+a Test ‘Str’  is NOT Nil.
+a Test ‘’  is NOT Nil.
+a Kompitu ‘Kompitu’  is NOT Nil.
 but.. Nil is.. certainly NIL!
