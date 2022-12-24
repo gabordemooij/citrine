@@ -1,6 +1,6 @@
-(Mahere hou) tuu:‘a"b’ _i:‘test’
+(Rarangi hou) ahanoa:‘a"b’ wahi:‘test’
 Invalid JSON.
-(Mahere hou) tuu:(Raarangi ← 1 ; 2 ; (Raarangi ← 3 ; 4) ; ((Mahere hou) tuu:(Raarangi ← 3 ; 4) _i:‘bar’, tuu:1 _i:‘foo’)) _i:‘nested’, tuu:Horihori _i:‘legend’, tuu:27 _i:‘age’, tuu:‘Jack’ _i:‘name’
+(Rarangi hou) ahanoa:(Raupapa ← 1 ; 2 ; (Raupapa ← 3 ; 4) ; ((Rarangi hou) ahanoa:(Raupapa ← 3 ; 4) wahi:‘bar’, ahanoa:1 wahi:‘foo’)) wahi:‘nested’, ahanoa:Kahore wahi:‘legend’, ahanoa:27 wahi:‘age’, ahanoa:‘Jack’ wahi:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

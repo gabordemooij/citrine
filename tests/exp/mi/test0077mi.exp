@@ -1,12 +1,12 @@
-Manatu,Tau
-Manatu,Poei
-Tau,Manatu
-Tau,Poei
-Poei,Tau
-Poei,Tau
-Poei,Manatu
-Poei,Manatu
+Kuputuhi,Tau
+Kuputuhi,Ae/Kahore
+Tau,Kuputuhi
+Tau,Ae/Kahore
+Ae/Kahore,Tau
+Ae/Kahore,Tau
+Ae/Kahore,Kuputuhi
+Ae/Kahore,Kuputuhi
 === String test ===
 123
-Horihori
-Pono
+Kahore
+Ae

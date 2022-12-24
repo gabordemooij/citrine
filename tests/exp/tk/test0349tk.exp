@@ -12,25 +12,25 @@ San
 9,2
 San
 -9,2
+Seriýa
+Seriýa täze 
+Seriýa
+Seriýa ← 1 ; 2
+Seriýa
+Seriýa ← 1 ; (Seriýa ← 2)
+Seriýa
+Seriýa ← 1 ; (Seriýa ← 2) ; 3
+Seriýa
+Seriýa ← 1 ; ((Sanaw täze) obýekt:‘a’ ýeri:‘b’) ; 3
+Seriýa
+Seriýa ← 1 ; ((Sanaw täze) obýekt:(Seriýa ← 9) ýeri:‘b’) ; 3
 Sanaw
-Sanaw täze 
+(Sanaw täze) obýekt:2 ýeri:‘1’
 Sanaw
-Sanaw ← 1 ; 2
+(Sanaw täze) obýekt:2 ýeri:‘x’
 Sanaw
-Sanaw ← 1 ; (Sanaw ← 2)
+(Sanaw täze) obýekt:(Seriýa ← 1 ; 2) ýeri:‘x’
 Sanaw
-Sanaw ← 1 ; (Sanaw ← 2) ; 3
-Sanaw
-Sanaw ← 1 ; ((Karta täze) goý:‘a’ at:‘b’) ; 3
-Sanaw
-Sanaw ← 1 ; ((Karta täze) goý:(Sanaw ← 9) at:‘b’) ; 3
-Karta
-(Karta täze) goý:2 at:‘1’
-Karta
-(Karta täze) goý:2 at:‘x’
-Karta
-(Karta täze) goý:(Sanaw ← 1 ; 2) at:‘x’
-Karta
-(Karta täze) goý:(Sanaw ← ((Karta täze) goý:‘q’ at:‘y’) ; 2) at:‘x’
+(Sanaw täze) obýekt:(Seriýa ← ((Sanaw täze) obýekt:‘q’ ýeri:‘y’) ; 2) ýeri:‘x’
 Nil
 Nil

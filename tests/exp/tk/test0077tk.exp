@@ -1,11 +1,11 @@
-Setir,San
-Setir,Boolean
-San,Setir
+Tekst,San
+Tekst,Boolean
+San,Tekst
 San,Boolean
 Boolean,San
 Boolean,San
-Boolean,Setir
-Boolean,Setir
+Boolean,Tekst
+Boolean,Tekst
 === String test ===
 123
 Sealňyş

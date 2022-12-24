@@ -1,10 +1,10 @@
 There are 2 chairs in the sunny garden.
 A rubber duck swims in the pool.
-Is there a shed in the garden? Well.. Horihori
+Is there a shed in the garden? Well.. Kahore
 In the garden you smell the fragrance of tulips and roses and lillies.
-The garden is Nil meters long.
-Luckily, this day, there are Nil wasps in the garden.
-The dog named Nil sleeps under the tree.
+The garden is Kau meters long.
+Luckily, this day, there are Kau wasps in the garden.
+The dog named Kau sleeps under the tree.
 a\"bb\"ccc\"
-(Mahere hou) tuu:((Mahere hou) tuu:Nil _i:‘dog’, tuu:Nil _i:‘insects’, tuu:((Mahere hou) tuu:15 _i:‘length’, tuu:8 _i:‘width’) _i:‘size’, tuu:(Raarangi ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _i:‘flower’, tuu:Horihori _i:‘shed’, tuu:Pono _i:‘pool’, tuu:2 _i:‘chairs’) _i:‘garden’
+(Rarangi hou) ahanoa:((Rarangi hou) ahanoa:Kau wahi:‘dog’, ahanoa:Kau wahi:‘insects’, ahanoa:((Rarangi hou) ahanoa:15 wahi:‘length’, ahanoa:8 wahi:‘width’) wahi:‘size’, ahanoa:(Raupapa ← ‘tulips’ ; ‘roses’ ; ‘lillies’) wahi:‘flower’, ahanoa:Kahore wahi:‘shed’, ahanoa:Ae wahi:‘pool’, ahanoa:2 wahi:‘chairs’) wahi:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}
