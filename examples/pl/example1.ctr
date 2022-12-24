@@ -17,8 +17,8 @@
 	☞ char ≔ 
 		postacie postać: ( 
 		Numer
-		pomiędzy i: 1
-		__: postacie długość
+		pomiędzy: 1
+		i: postacie długość
 	).
 	hasło dodać: char.
 } × liczyć.

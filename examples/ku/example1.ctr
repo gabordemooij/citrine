@@ -4,10 +4,10 @@
 	✎ nivîsîn: ‘Çend tîp (16-30)?’, rawestan.
 	jimartin ≔ Bername pirsîn jimare bêkêmasî.
 
-	(jimartin < 16) rast: {
+	(jimartin < 16) erê: {
 		✎ nivîsîn: ‘Ew ne bes e, ji kerema xwe di navbera 16 û 30-an de hejmarek binivîse.’, rawestan.
 	}.
-	(jimartin > 30) rast: {
+	(jimartin > 30) erê: {
 		✎ nivîsîn: ‘Ew pir dirêj e, dibe ku hin pergal şîfreyên ew qas dirêj red dikin.’, rawestan.
 	}.
 } demek: { ↲ (jimartin < 16 an: jimartin > 30). }.
@@ -18,8 +18,8 @@
 		tîp şexsîyet: ( 
 		Jimare
 		di navbera: 1
-		_û: tîp dirêjî
+		û: tîp dirêjî
 	).
-	Şîfre append: char.
+	Şîfre paşgir: char.
 } × jimartin.
 ✎ nivîsîn: Şîfre, rawestan.

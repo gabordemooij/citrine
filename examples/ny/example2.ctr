@@ -11,52 +11,52 @@
 	{
 		(chiwerengero ≥ 1000) zoona: {
 			✎ lembani: ‘Ⅿ’.
-			chiwerengero _chotsa: 1000.
+			chiwerengero chotsa: 1000.
 		}, kuswa.
 	
 		(chiwerengero ≥ 500) zoona: {
 			✎ lembani: ‘Ⅾ’.
-			chiwerengero _chotsa: 500.
+			chiwerengero chotsa: 500.
 		}, kuswa.
 	
 		(chiwerengero ≥ 100) zoona: {
 			✎ lembani: ‘Ⅽ’.
-			chiwerengero _chotsa: 100.
+			chiwerengero chotsa: 100.
 		}, kuswa.
 	
 		(chiwerengero ≥ 50) zoona: {
 			✎ lembani: ‘Ⅼ’.
-			chiwerengero _chotsa: 50.
+			chiwerengero chotsa: 50.
 		}, kuswa.
 	
 		(chiwerengero ≥ 50) zoona: {
 			✎ lembani: ‘Ⅼ’.
-			chiwerengero _chotsa: 50.
+			chiwerengero chotsa: 50.
 		}, kuswa.
 	
 		(chiwerengero ≥ 10) zoona: {
 			✎ lembani: ‘Ⅹ’.
-			chiwerengero _chotsa: 10.
+			chiwerengero chotsa: 10.
 		}, kuswa.
 		
 		(chiwerengero ≥ 9) zoona: {
 			✎ lembani: ‘Ⅸ’.
-			chiwerengero _chotsa: 9.
+			chiwerengero chotsa: 9.
 		}, kuswa.
 		
 		(chiwerengero ≥ 5) zoona: {
 			✎ lembani: ‘Ⅴ’.
-			chiwerengero _chotsa: 5.
+			chiwerengero chotsa: 5.
 		}, kuswa.
 		
 		(chiwerengero ≥ 4) zoona: {
 			✎ lembani: ‘Ⅳ’.
-			chiwerengero _chotsa: 4.
+			chiwerengero chotsa: 4.
 		}, kuswa.
 		
 		(chiwerengero ≥ 1) zoona: {
 			✎ lembani: ‘Ⅰ’.
-			chiwerengero _chotsa: 1.
+			chiwerengero chotsa: 1.
 		}, kuswa.
 	} machitidwe.
 	

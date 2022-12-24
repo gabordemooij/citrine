@@ -4,10 +4,10 @@
 	✎ bhala: ‘Bangaki abalingiswa (16-30)?’, ima.
 	ukubala ≔ Uhlelo buza inombolo ngokuphelele.
 
-	(ukubala < 16) iqiniso: {
+	(ukubala < 16) yebo: {
 		✎ bhala: ‘Lokho akwanele, sicela ufake inombolo phakathi kuka-16 no-30.’, ima.
 	}.
-	(ukubala > 30) iqiniso: {
+	(ukubala > 30) yebo: {
 		✎ bhala: ‘Lelo lide kakhulu, amanye amasistimu angawenqaba amaphasiwedi amade kangako.’, ima.
 	}.
 } ngenkathi: { ↲ (ukubala < 16 noma: ukubala > 30). }.
@@ -20,6 +20,6 @@
 		phakathi: 1
 		no: izinhlamvu ubude
 	).
-	iphasiwedi faka: char.
+	iphasiwedi isiphetho: char.
 } × ukubala.
 ✎ bhala: iphasiwedi, ima.

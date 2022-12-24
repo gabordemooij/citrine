@@ -1,11 +1,11 @@
-✎ skriva: ‘Nummer spel’, sluta.
-✎ skriva: ‘Gissa numret’, sluta.
-☞ x ≔ Siffra mellan och: 1 __: 10.
+✎ skriva: ‘Nummer spel’, stop.
+✎ skriva: ‘Gissa numret’, stop.
+☞ x ≔ Siffra mellan: 1 och: 10.
 ☞ q ≔ 0.
 q ≔ Program fråga.
 { 
-	✎ skriva: ‘fel!’, sluta.
+	✎ skriva: ‘fel!’, stop.
 	q ≔ Program fråga.
 
 } medan: { ↲ x siffra ≠ q siffra. }.
-✎ skriva: ‘korrekt!’, sluta.
+✎ skriva: ‘korrekt!’, stop.

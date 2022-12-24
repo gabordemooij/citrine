@@ -4,13 +4,13 @@
 	✎ sumulat: ‘Ilan ang mga character (16-30)?’, huminto.
 	mabilang ≔ Program magtanong bilang ganap.
 
-	(mabilang < 16) totoo: {
+	(mabilang < 16) oo: {
 		✎ sumulat: ‘Hindi sapat iyon, mangyaring maglagay ng numero sa pagitan ng 16 at 30.’, huminto.
 	}.
-	(mabilang > 30) totoo: {
+	(mabilang > 30) oo: {
 		✎ sumulat: ‘Masyadong mahaba iyon, maaaring tanggihan ng ilang mga system ang mga password na mahaba.’, huminto.
 	}.
-} habang: { ↲ (mabilang < 16 _o: mabilang > 30). }.
+} habang: { ↲ (mabilang < 16 o: mabilang > 30). }.
 ☞ mga character ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {
@@ -20,6 +20,6 @@
 		sa pagitan ng: 1
 		at: mga character haba
 	).
-	password ikabit__: char.
+	password ikabit: char.
 } × mabilang.
 ✎ sumulat: password, huminto.

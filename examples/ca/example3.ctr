@@ -1,6 +1,6 @@
 ✎ escriu: ‘Joc de números’, atura.
 ✎ escriu: ‘Endevina el número’, atura.
-☞ x ≔ Número entre: 1 _i: 10.
+☞ x ≔ Número entre: 1 i: 10.
 ☞ q ≔ 0.
 q ≔ Programa pregunta.
 { 

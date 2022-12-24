@@ -4,10 +4,10 @@
 	✎ pisati: ‘Koliko znakova (16-30)?’, stop.
 	računati ≔ Program pitati broj apsolutan.
 
-	(računati < 16) pravi: {
+	(računati < 16) da: {
 		✎ pisati: ‘To nije dovoljno, unesite broj između 16 i 30.’, stop.
 	}.
-	(računati > 30) pravi: {
+	(računati > 30) da: {
 		✎ pisati: ‘To je predugo, neki sustavi mogu odbiti lozinke toliko dugo.’, stop.
 	}.
 } dok: { ↲ (računati < 16 ili: računati > 30). }.
@@ -20,6 +20,6 @@
 		između i: 1
 		__: likovi dužina
 	).
-	lozinka dodati: char.
+	lozinka sufiks: char.
 } × računati.
 ✎ pisati: lozinka, stop.

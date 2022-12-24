@@ -20,6 +20,6 @@
 		starp: 1
 		un: rakstzīmes garums
 	).
-	paroli pievienot: char.
+	paroli sufikss: char.
 } × skaita.
 ✎ rakstīt: paroli, apstāties.

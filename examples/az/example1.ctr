@@ -20,6 +20,6 @@
 		arasında: 1
 		və: simvol uzunluğu
 	).
-	parol əlavə etmək: char.
+	parol şəkilçi: char.
 } × saymaq.
 ✎ yaz: parol, dayan.

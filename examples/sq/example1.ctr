@@ -17,9 +17,9 @@
 	☞ char ≔ 
 		karaktere karakteri: ( 
 		Numër
-		midis dhe: 1
-		__: karaktere gjatësi
+		midis: 1
+		dhe: karaktere gjatësi
 	).
-	wagwoord append: char.
+	wagwoord prapashtesë: char.
 } × akuzë.
 ✎ shkruaj: wagwoord, ndaluar.

@@ -1,11 +1,11 @@
-✎ idatzi: ‘Zenbaki-jokoa’, geldialdia.
-✎ idatzi: ‘Asmatu zenbakia’, geldialdia.
+✎ idatzi: ‘Zenbaki-jokoa’, stop.
+✎ idatzi: ‘Asmatu zenbakia’, stop.
 ☞ x ≔ Zenbakia artean: 1 eta: 10.
 ☞ q ≔ 0.
 q ≔ Programa galdetu.
 { 
-	✎ idatzi: ‘oker!’, geldialdia.
+	✎ idatzi: ‘oker!’, stop.
 	q ≔ Programa galdetu.
 
 } bitartean: { ↲ x zenbakia ≠ q zenbakia. }.
-✎ idatzi: ‘zuzena!’, geldialdia.
+✎ idatzi: ‘zuzena!’, stop.

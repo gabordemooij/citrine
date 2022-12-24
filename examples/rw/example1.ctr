@@ -4,10 +4,10 @@
 	✎ andika: ‘Inyuguti zingahe (16-30)?’, hagarara.
 	kubara ≔ Gahunda baza nimero byuzuye.
 
-	(kubara < 16) ukuri: {
+	(kubara < 16) yego: {
 		✎ andika: ‘Ibyo ntibihagije, nyamuneka andika umubare uri hagati ya 16 na 30.’, hagarara.
 	}.
-	(kubara > 30) ukuri: {
+	(kubara > 30) yego: {
 		✎ andika: ‘Ibyo ni birebire cyane, sisitemu zimwe zishobora kwanga ijambo ryibanga rirerire.’, hagarara.
 	}.
 } mugihe: { ↲ (kubara < 16 cyangwa: kubara > 30). }.

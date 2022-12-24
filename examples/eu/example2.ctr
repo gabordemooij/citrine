@@ -1,9 +1,9 @@
-✎ idatzi: ‘Zenbaki erromatarrak’, geldialdia.
-✎ idatzi: ‘Eman zenbaki bat bihurtzeko:’, geldialdia.
+✎ idatzi: ‘Zenbaki erromatarrak’, stop.
+✎ idatzi: ‘Eman zenbaki bat bihurtzeko:’, stop.
 ☞ zenbakia ≔ Programa galdetu zenbakia absolutua.
 
 (zenbakia = 0) egia: {
-	✎ idatzi: ‘Nulla’, geldialdia.
+	✎ idatzi: ‘Nulla’, stop.
 	Programa end.
 }.
 
@@ -12,52 +12,52 @@
 		(zenbakia ≥ 1000) egia: {
 			✎ idatzi: ‘Ⅿ’.
 			zenbakia kenketak: 1000.
-		}, break.
+		}, gelditu.
 	
 		(zenbakia ≥ 500) egia: {
 			✎ idatzi: ‘Ⅾ’.
 			zenbakia kenketak: 500.
-		}, break.
+		}, gelditu.
 	
 		(zenbakia ≥ 100) egia: {
 			✎ idatzi: ‘Ⅽ’.
 			zenbakia kenketak: 100.
-		}, break.
+		}, gelditu.
 	
 		(zenbakia ≥ 50) egia: {
 			✎ idatzi: ‘Ⅼ’.
 			zenbakia kenketak: 50.
-		}, break.
+		}, gelditu.
 	
 		(zenbakia ≥ 50) egia: {
 			✎ idatzi: ‘Ⅼ’.
 			zenbakia kenketak: 50.
-		}, break.
+		}, gelditu.
 	
 		(zenbakia ≥ 10) egia: {
 			✎ idatzi: ‘Ⅹ’.
 			zenbakia kenketak: 10.
-		}, break.
+		}, gelditu.
 		
 		(zenbakia ≥ 9) egia: {
 			✎ idatzi: ‘Ⅸ’.
 			zenbakia kenketak: 9.
-		}, break.
+		}, gelditu.
 		
 		(zenbakia ≥ 5) egia: {
 			✎ idatzi: ‘Ⅴ’.
 			zenbakia kenketak: 5.
-		}, break.
+		}, gelditu.
 		
 		(zenbakia ≥ 4) egia: {
 			✎ idatzi: ‘Ⅳ’.
 			zenbakia kenketak: 4.
-		}, break.
+		}, gelditu.
 		
 		(zenbakia ≥ 1) egia: {
 			✎ idatzi: ‘Ⅰ’.
 			zenbakia kenketak: 1.
-		}, break.
+		}, gelditu.
 	} prozedura.
 	
 } bitartean: { ↲ zenbakia > 0. }.

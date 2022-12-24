@@ -1,14 +1,14 @@
-✎ idatzi: ‘Pasahitz sortzailea’, geldialdia.
+✎ idatzi: ‘Pasahitz sortzailea’, stop.
 ☞ zenbatu ≔ 0.
 {
-	✎ idatzi: ‘Zenbat pertsonaia (16-30)?’, geldialdia.
+	✎ idatzi: ‘Zenbat pertsonaia (16-30)?’, stop.
 	zenbatu ≔ Programa galdetu zenbakia absolutua.
 
 	(zenbatu < 16) egia: {
-		✎ idatzi: ‘Hori ez da nahikoa, idatzi 16 eta 30 arteko zenbakia.’, geldialdia.
+		✎ idatzi: ‘Hori ez da nahikoa, idatzi 16 eta 30 arteko zenbakia.’, stop.
 	}.
 	(zenbatu > 30) egia: {
-		✎ idatzi: ‘Hori luzeegia da, sistema batzuek pasahitzak luze baztertu ditzakete.’, geldialdia.
+		✎ idatzi: ‘Hori luzeegia da, sistema batzuek pasahitzak luze baztertu ditzakete.’, stop.
 	}.
 } bitartean: { ↲ (zenbatu < 16 edo: zenbatu > 30). }.
 ☞ karaktere ≔ ‘acdefghjkmnprtwx2345789@#&’.
@@ -22,4 +22,4 @@
 	).
 	pasahitza erantsi: char.
 } × zenbatu.
-✎ idatzi: pasahitza, geldialdia.
+✎ idatzi: pasahitza, stop.

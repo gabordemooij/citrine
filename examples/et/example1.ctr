@@ -1,14 +1,14 @@
-✎ kirjuta: ‘Parooligeneraator’, peatus.
+✎ kirjuta: ‘Parooligeneraator’, lause.
 ☞ loendama ≔ 0.
 {
-	✎ kirjuta: ‘Mitu tähemärki (16–30)?’, peatus.
+	✎ kirjuta: ‘Mitu tähemärki (16–30)?’, lause.
 	loendama ≔ Programm küsige number absoluutne.
 
 	(loendama < 16) tõsi: {
-		✎ kirjuta: ‘Sellest ei piisa, sisestage number vahemikus 16–30.’, peatus.
+		✎ kirjuta: ‘Sellest ei piisa, sisestage number vahemikus 16–30.’, lause.
 	}.
 	(loendama > 30) tõsi: {
-		✎ kirjuta: ‘See on liiga pikk, mõned süsteemid võivad paroolid nii kaua tagasi lükata.’, peatus.
+		✎ kirjuta: ‘See on liiga pikk, mõned süsteemid võivad paroolid nii kaua tagasi lükata.’, lause.
 	}.
 } samas: { ↲ (loendama < 16 või: loendama > 30). }.
 ☞ tegelased ≔ ‘acdefghjkmnprtwx2345789@#&’.
@@ -22,4 +22,4 @@
 	).
 	parool lisa: char.
 } × loendama.
-✎ kirjuta: parool, peatus.
+✎ kirjuta: parool, lause.

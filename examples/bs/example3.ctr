@@ -1,6 +1,6 @@
 ✎ pisati: ‘Igra s brojevima’, stani.
 ✎ pisati: ‘Pogodite broj’, stani.
-☞ x ≔ Broj između: 1 _i: 10.
+☞ x ≔ Broj između: 1 i: 10.
 ☞ q ≔ 0.
 q ≔ Program pitaj.
 { 

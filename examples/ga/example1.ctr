@@ -10,7 +10,7 @@
 	(comhaireamh > 30) fíor: {
 		✎ scríobh: ‘Tá sé sin ró-fhada, d’fhéadfadh roinnt córais pasfhocail a dhiúltú chomh fada sin.’, stad.
 	}.
-} _agus: { ↲ (comhaireamh < 16 nó: comhaireamh > 30). }.
+} chomh fada: { ↲ (comhaireamh < 16 nó: comhaireamh > 30). }.
 ☞ carachtair ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ pasfhocal ≔ ‘’.
 {

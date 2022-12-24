@@ -20,6 +20,6 @@
 		med: 1
 		in: znakov dolžino
 	).
-	geslo dodaj: char.
+	geslo pripona: char.
 } × šteti.
 ✎ napišite: geslo, ustavi se.

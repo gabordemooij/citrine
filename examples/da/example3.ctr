@@ -1,11 +1,11 @@
-✎ skrive: ‘Nummer spil’, hold op.
-✎ skrive: ‘Gæt nummeret’, hold op.
+✎ skrive: ‘Nummer spil’, stop.
+✎ skrive: ‘Gæt nummeret’, stop.
 ☞ x ≔ Nummer mellem: 1 og: 10.
 ☞ q ≔ 0.
 q ≔ Program spørge.
 { 
-	✎ skrive: ‘forkert!’, hold op.
+	✎ skrive: ‘forkert!’, stop.
 	q ≔ Program spørge.
 
 } mens: { ↲ x nummer ≠ q nummer. }.
-✎ skrive: ‘korrekt!’, hold op.
+✎ skrive: ‘korrekt!’, stop.

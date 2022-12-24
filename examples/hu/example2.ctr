@@ -1,9 +1,9 @@
-✎ ír: ‘római számok’, állj meg.
-✎ ír: ‘Adjon meg egy számot az átalakításhoz:’, állj meg.
+✎ ír: ‘római számok’, stop.
+✎ ír: ‘Adjon meg egy számot az átalakításhoz:’, stop.
 ☞ szám ≔ Program kérdez szám abszolút.
 
 (szám = 0) igaz: {
-	✎ ír: ‘Nulla’, állj meg.
+	✎ ír: ‘Nulla’, stop.
 	Program vég.
 }.
 
@@ -12,52 +12,52 @@
 		(szám ≥ 1000) igaz: {
 			✎ ír: ‘Ⅿ’.
 			szám kivonás: 1000.
-		}, szünet.
+		}, állj meg.
 	
 		(szám ≥ 500) igaz: {
 			✎ ír: ‘Ⅾ’.
 			szám kivonás: 500.
-		}, szünet.
+		}, állj meg.
 	
 		(szám ≥ 100) igaz: {
 			✎ ír: ‘Ⅽ’.
 			szám kivonás: 100.
-		}, szünet.
+		}, állj meg.
 	
 		(szám ≥ 50) igaz: {
 			✎ ír: ‘Ⅼ’.
 			szám kivonás: 50.
-		}, szünet.
+		}, állj meg.
 	
 		(szám ≥ 50) igaz: {
 			✎ ír: ‘Ⅼ’.
 			szám kivonás: 50.
-		}, szünet.
+		}, állj meg.
 	
 		(szám ≥ 10) igaz: {
 			✎ ír: ‘Ⅹ’.
 			szám kivonás: 10.
-		}, szünet.
+		}, állj meg.
 		
 		(szám ≥ 9) igaz: {
 			✎ ír: ‘Ⅸ’.
 			szám kivonás: 9.
-		}, szünet.
+		}, állj meg.
 		
 		(szám ≥ 5) igaz: {
 			✎ ír: ‘Ⅴ’.
 			szám kivonás: 5.
-		}, szünet.
+		}, állj meg.
 		
 		(szám ≥ 4) igaz: {
 			✎ ír: ‘Ⅳ’.
 			szám kivonás: 4.
-		}, szünet.
+		}, állj meg.
 		
 		(szám ≥ 1) igaz: {
 			✎ ír: ‘Ⅰ’.
 			szám kivonás: 1.
-		}, szünet.
+		}, állj meg.
 	} eljárás.
 	
 } míg: { ↲ szám > 0. }.
