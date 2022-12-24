@@ -1,11 +1,11 @@
-String,Nomer
-String,Boolean
-Nomer,String
+Téks,Nomer
+Téks,Boolean
+Nomer,Téks
 Nomer,Boolean
 Boolean,Nomer
 Boolean,Nomer
-Boolean,String
-Boolean,String
+Boolean,Téks
+Boolean,Téks
 === String test ===
 123
 Palsu
