@@ -1,6 +1,6 @@
-(’Mapa ncha) beha:‘a"b’ ka:‘test’
+(Lethathamo ncha) beha:‘a"b’ ka:‘test’
 Invalid JSON.
-(’Mapa ncha) beha:(Lenane ← 1 ; 2 ; (Lenane ← 3 ; 4) ; ((’Mapa ncha) beha:(Lenane ← 3 ; 4) ka:‘bar’, beha:1 ka:‘foo’)) ka:‘nested’, beha:Bohata ka:‘legend’, beha:27 ka:‘age’, beha:‘Jack’ ka:‘name’
+(Lethathamo ncha) beha:(Letoto ← 1 ; 2 ; (Letoto ← 3 ; 4) ; ((Lethathamo ncha) beha:(Letoto ← 3 ; 4) ka:‘bar’, beha:1 ka:‘foo’)) ka:‘nested’, beha:Che ka:‘legend’, beha:27 ka:‘age’, beha:‘Jack’ ka:‘name’
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

@@ -5,7 +5,7 @@ a Булеан ‘Лажни’  is NOT Nil.
 a Булеан ‘Лажни’  is NOT Nil.
 a Број ‘1’  is NOT Nil.
 a Број ‘0’  is NOT Nil.
-a Низа ‘Str’  is NOT Nil.
-a Низа ‘’  is NOT Nil.
+a Текст ‘Str’  is NOT Nil.
+a Текст ‘’  is NOT Nil.
 a Код ‘Код’  is NOT Nil.
 but.. Nil is.. certainly NIL!

@@ -1,12 +1,12 @@
-Khoele,Palo
-Khoele,Boolean
-Palo,Khoele
-Palo,Boolean
-Boolean,Palo
-Boolean,Palo
-Boolean,Khoele
-Boolean,Khoele
+Mongolo,Palo
+Mongolo,Ee/Che
+Palo,Mongolo
+Palo,Ee/Che
+Ee/Che,Palo
+Ee/Che,Palo
+Ee/Che,Mongolo
+Ee/Che,Mongolo
 === String test ===
 123
-Bohata
-Ke nnete
+Che
+Ee

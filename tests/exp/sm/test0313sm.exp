@@ -6,5 +6,5 @@ The garden is Nil meters long.
 Luckily, this day, there are Nil wasps in the garden.
 The dog named Nil sleeps under the tree.
 a\"bb\"ccc\"
-(Faʻafanua fou) tuʻu:((Faʻafanua fou) tuʻu:Nil _i:‘dog’, tuʻu:Nil _i:‘insects’, tuʻu:((Faʻafanua fou) tuʻu:15 _i:‘length’, tuʻu:8 _i:‘width’) _i:‘size’, tuʻu:(Lisi ← ‘tulips’ ; ‘roses’ ; ‘lillies’) _i:‘flower’, tuʻu:Sese _i:‘shed’, tuʻu:Faamaoni _i:‘pool’, tuʻu:2 _i:‘chairs’) _i:‘garden’
+(Faʻafanua fou) tuʻu:((Faʻafanua fou) tuʻu:Nil i:‘dog’, tuʻu:Nil i:‘insects’, tuʻu:((Faʻafanua fou) tuʻu:15 i:‘length’, tuʻu:8 i:‘width’) i:‘size’, tuʻu:(Lisi ← ‘tulips’ ; ‘roses’ ; ‘lillies’) i:‘flower’, tuʻu:Sese i:‘shed’, tuʻu:Faamaoni i:‘pool’, tuʻu:2 i:‘chairs’) i:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}
