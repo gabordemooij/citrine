@@ -122,7 +122,7 @@
 #define CTR_DICT_TIME	          "צייַט"
 #define CTR_DICT_RESPOND_TO       "ענטפער:"
 #define CTR_DICT_RESPOND_TO_AND   "ענטפער:און:"
-#define CTR_DICT_SHELL            "שאָל:"
+#define CTR_DICT_SHELL            "קאמפיוטער:"
 #define CTR_DICT_SWEEP            "ריין זכּרון"
 #define CTR_DICT_MEMORY_LIMIT	  "זכּרון:"
 #define CTR_DICT_MEMORY           "זכּרון"

@@ -1,11 +1,11 @@
-Tali,Nombor
-Tali,Boolean
-Nombor,Tali
+Teks,Nombor
+Teks,Boolean
+Nombor,Teks
 Nombor,Boolean
 Boolean,Nombor
 Boolean,Nombor
-Boolean,Tali
-Boolean,Tali
+Boolean,Teks
+Boolean,Teks
 === String test ===
 123
 Salah

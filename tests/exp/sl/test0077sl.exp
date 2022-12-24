@@ -1,11 +1,11 @@
-Vrvica,Številka
-Vrvica,Boolov
-Številka,Vrvica
+Besedilo,Številka
+Besedilo,Boolov
+Številka,Besedilo
 Številka,Boolov
 Boolov,Številka
 Boolov,Številka
-Boolov,Vrvica
-Boolov,Vrvica
+Boolov,Besedilo
+Boolov,Besedilo
 === String test ===
 123
 Lažno
