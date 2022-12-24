@@ -1,25 +1,25 @@
-✎ 書く：__: ‘Pangembang sandhi’, やめる.
+✎ 書く: ‘Pangembang sandhi’, 文末.
 ☞ カウント ≔ 0.
 {
-	✎ 書く：__: ‘Pira tokoh (16-30)?’, やめる.
-	カウント ≔ プログラム 尋ねる __数 絶対の.
+	✎ 書く: ‘Pira tokoh (16-30)?’, 文末.
+	カウント ≔ プログラム 尋ねる 番号を作成する 絶対の.
 
-	(カウント < 16) 真：__: {
-		✎ 書く：__: ‘Ora cukup, mangga lebokake nomer ing antarane 16 lan 30.’, やめる.
+	(カウント < 16) 真: {
+		✎ 書く: ‘Ora cukup, mangga lebokake nomer ing antarane 16 lan 30.’, 文末.
 	}.
-	(カウント > 30) 真：__: {
-		✎ 書く：__: ‘Wis suwe banget, sawetara sistem bisa nolak tembung sandhi sing dawa banget.’, やめる.
+	(カウント > 30) 真: {
+		✎ 書く: ‘Wis suwe banget, sawetara sistem bisa nolak tembung sandhi sing dawa banget.’, 文末.
 	}.
-} その間：__: { ↲ (カウント < 16 または：__: カウント > 30). }.
+} その間: { ↲ (カウント < 16 または: カウント > 30). }.
 ☞ キャラクター ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ sandhi ≔ ‘’.
 {
 	☞ char ≔ 
-		キャラクター キャラクター：__: ( 
+		キャラクター キャラクター: ( 
 		_数
-		間：と：__: 1
-		__: キャラクター 長さ
+		間: 1
+		と: キャラクター 長さ
 	).
-	sandhi 追加：__: char.
+	sandhi 最後に追加: char.
 } × カウント.
-✎ 書く：__: sandhi, やめる.
+✎ 書く: sandhi, 文末.

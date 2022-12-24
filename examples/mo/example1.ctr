@@ -4,13 +4,13 @@
 	✎ łrite: ‘How many characters (16-30)?’, stop.
 	cūnt ≔ Program ask number absolute.
 
-	(cūnt < 16) true: {
+	(cūnt < 16) da: {
 		✎ łrite: ‘That is not enough, please enter a number between 16 and 30.’, stop.
 	}.
-	(cūnt > 30) true: {
+	(cūnt > 30) da: {
 		✎ łrite: ‘That is too long, some systems may reject passwords that long.’, stop.
 	}.
-} łhile: { ↲ (cūnt < 16 ŧa: cūnt > 30). }.
+} în timpul: { ↲ (cūnt < 16 ŧa: cūnt > 30). }.
 ☞ čaracters ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ password ≔ ‘’.
 {

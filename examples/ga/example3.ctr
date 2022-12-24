@@ -7,5 +7,5 @@ q ≔ Clár iarr.
 	✎ scríobh: ‘mícheart!’, stad.
 	q ≔ Clár iarr.
 
-} _agus: { ↲ x uimhir ≠ q uimhir. }.
+} chomh fada: { ↲ x uimhir ≠ q uimhir. }.
 ✎ scríobh: ‘ceart!’, stad.

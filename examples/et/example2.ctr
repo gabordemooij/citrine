@@ -1,9 +1,9 @@
-✎ kirjuta: ‘Rooma numbrid’, peatus.
-✎ kirjuta: ‘Andke teisendamiseks number:’, peatus.
+✎ kirjuta: ‘Rooma numbrid’, lause.
+✎ kirjuta: ‘Andke teisendamiseks number:’, lause.
 ☞ number ≔ Programm küsige number absoluutne.
 
 (number = 0) tõsi: {
-	✎ kirjuta: ‘Nulla’, peatus.
+	✎ kirjuta: ‘Nulla’, lause.
 	Programm lõpp.
 }.
 
@@ -12,52 +12,52 @@
 		(number ≥ 1000) tõsi: {
 			✎ kirjuta: ‘Ⅿ’.
 			number lahutama: 1000.
-		}, murda.
+		}, peatus.
 	
 		(number ≥ 500) tõsi: {
 			✎ kirjuta: ‘Ⅾ’.
 			number lahutama: 500.
-		}, murda.
+		}, peatus.
 	
 		(number ≥ 100) tõsi: {
 			✎ kirjuta: ‘Ⅽ’.
 			number lahutama: 100.
-		}, murda.
+		}, peatus.
 	
 		(number ≥ 50) tõsi: {
 			✎ kirjuta: ‘Ⅼ’.
 			number lahutama: 50.
-		}, murda.
+		}, peatus.
 	
 		(number ≥ 50) tõsi: {
 			✎ kirjuta: ‘Ⅼ’.
 			number lahutama: 50.
-		}, murda.
+		}, peatus.
 	
 		(number ≥ 10) tõsi: {
 			✎ kirjuta: ‘Ⅹ’.
 			number lahutama: 10.
-		}, murda.
+		}, peatus.
 		
 		(number ≥ 9) tõsi: {
 			✎ kirjuta: ‘Ⅸ’.
 			number lahutama: 9.
-		}, murda.
+		}, peatus.
 		
 		(number ≥ 5) tõsi: {
 			✎ kirjuta: ‘Ⅴ’.
 			number lahutama: 5.
-		}, murda.
+		}, peatus.
 		
 		(number ≥ 4) tõsi: {
 			✎ kirjuta: ‘Ⅳ’.
 			number lahutama: 4.
-		}, murda.
+		}, peatus.
 		
 		(number ≥ 1) tõsi: {
 			✎ kirjuta: ‘Ⅰ’.
 			number lahutama: 1.
-		}, murda.
+		}, peatus.
 	} protseduur.
 	
 } samas: { ↲ number > 0. }.

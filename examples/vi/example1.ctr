@@ -17,8 +17,8 @@
 	☞ char ≔ 
 		nhân vật tính cách: ( 
 		Con số
-		giữa và: 1
-		__: nhân vật chiều dài
+		giữa: 1
+		và: nhân vật chiều dài
 	).
 	mật khẩu nối thêm: char.
 } × đếm.

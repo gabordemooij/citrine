@@ -2,59 +2,59 @@
 ✎ andika: ‘Toa nambari ya kubadilisha:’, acha.
 ☞ nambari ≔ Programu uliza nambari kabisa.
 
-(nambari = 0) kweli: {
+(nambari = 0) ndiyo: {
 	✎ andika: ‘Nulla’, acha.
 	Programu mwisho.
 }.
 
 {
 	{
-		(nambari ≥ 1000) kweli: {
+		(nambari ≥ 1000) ndiyo: {
 			✎ andika: ‘Ⅿ’.
 			nambari ondoa: 1000.
 		}, kuvunja.
 	
-		(nambari ≥ 500) kweli: {
+		(nambari ≥ 500) ndiyo: {
 			✎ andika: ‘Ⅾ’.
 			nambari ondoa: 500.
 		}, kuvunja.
 	
-		(nambari ≥ 100) kweli: {
+		(nambari ≥ 100) ndiyo: {
 			✎ andika: ‘Ⅽ’.
 			nambari ondoa: 100.
 		}, kuvunja.
 	
-		(nambari ≥ 50) kweli: {
+		(nambari ≥ 50) ndiyo: {
 			✎ andika: ‘Ⅼ’.
 			nambari ondoa: 50.
 		}, kuvunja.
 	
-		(nambari ≥ 50) kweli: {
+		(nambari ≥ 50) ndiyo: {
 			✎ andika: ‘Ⅼ’.
 			nambari ondoa: 50.
 		}, kuvunja.
 	
-		(nambari ≥ 10) kweli: {
+		(nambari ≥ 10) ndiyo: {
 			✎ andika: ‘Ⅹ’.
 			nambari ondoa: 10.
 		}, kuvunja.
 		
-		(nambari ≥ 9) kweli: {
+		(nambari ≥ 9) ndiyo: {
 			✎ andika: ‘Ⅸ’.
 			nambari ondoa: 9.
 		}, kuvunja.
 		
-		(nambari ≥ 5) kweli: {
+		(nambari ≥ 5) ndiyo: {
 			✎ andika: ‘Ⅴ’.
 			nambari ondoa: 5.
 		}, kuvunja.
 		
-		(nambari ≥ 4) kweli: {
+		(nambari ≥ 4) ndiyo: {
 			✎ andika: ‘Ⅳ’.
 			nambari ondoa: 4.
 		}, kuvunja.
 		
-		(nambari ≥ 1) kweli: {
+		(nambari ≥ 1) ndiyo: {
 			✎ andika: ‘Ⅰ’.
 			nambari ondoa: 1.
 		}, kuvunja.

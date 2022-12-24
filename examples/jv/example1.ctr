@@ -4,10 +4,10 @@
 	✎ nulis: ‘Pira tokoh (16-30)?’, mandheg.
 	ngitung ≔ Program takon nomer mutlak.
 
-	(ngitung < 16) bener: {
+	(ngitung < 16) ya: {
 		✎ nulis: ‘Ora cukup, mangga lebokake nomer ing antarane 16 lan 30.’, mandheg.
 	}.
-	(ngitung > 30) bener: {
+	(ngitung > 30) ya: {
 		✎ nulis: ‘Wis suwe banget, sawetara sistem bisa nolak tembung sandhi sing dawa banget.’, mandheg.
 	}.
 } nalika: { ↲ (ngitung < 16 utawa: ngitung > 30). }.

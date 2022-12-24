@@ -1,11 +1,11 @@
 ✎ píšu: ‘Číselná hra’, zastávka.
 ✎ píšu: ‘Uhádnite číslo’, zastávka.
-☞ x ≔ číslo medzi a: 1 __: 10.
+☞ x ≔ Číslo medzi: 1 a: 10.
 ☞ q ≔ 0.
 q ≔ Program opýtať sa.
 { 
 	✎ píšu: ‘zle!’, zastávka.
 	q ≔ Program opýtať sa.
 
-} zatiaľ čo: { ↲ x _číslo ≠ q _číslo. }.
+} zatiaľ čo: { ↲ x číslo ≠ q číslo. }.
 ✎ píšu: ‘správne!’, zastávka.

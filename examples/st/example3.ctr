@@ -2,10 +2,10 @@
 ✎ ngola: ‘Nahana nomoro’, ema.
 ☞ x ≔ Palo pakeng tsa: 1 le: 10.
 ☞ q ≔ 0.
-q ≔ Lenaneo botsa.
+q ≔ Letotoo botsa.
 { 
 	✎ ngola: ‘fosahetse!’, ema.
-	q ≔ Lenaneo botsa.
+	q ≔ Letotoo botsa.
 
 } ha: { ↲ x palo ≠ q palo. }.
 ✎ ngola: ‘nepahetse!’, ema.

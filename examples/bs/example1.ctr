@@ -18,7 +18,7 @@
 		karaktera lik: ( 
 		Broj
 		između: 1
-		_i: karaktera dužina
+		i: karaktera dužina
 	).
 	lozinku dodaj: char.
 } × brojati.

@@ -2,59 +2,59 @@
 ✎ andika: ‘Tanga umubare kugirango uhindure:’, hagarara.
 ☞ nimero ≔ Gahunda baza nimero byuzuye.
 
-(nimero = 0) ukuri: {
+(nimero = 0) yego: {
 	✎ andika: ‘Nulla’, hagarara.
 	Gahunda iherezo.
 }.
 
 {
 	{
-		(nimero ≥ 1000) ukuri: {
+		(nimero ≥ 1000) yego: {
 			✎ andika: ‘Ⅿ’.
 			nimero gukuramo: 1000.
 		}, kuruhuka.
 	
-		(nimero ≥ 500) ukuri: {
+		(nimero ≥ 500) yego: {
 			✎ andika: ‘Ⅾ’.
 			nimero gukuramo: 500.
 		}, kuruhuka.
 	
-		(nimero ≥ 100) ukuri: {
+		(nimero ≥ 100) yego: {
 			✎ andika: ‘Ⅽ’.
 			nimero gukuramo: 100.
 		}, kuruhuka.
 	
-		(nimero ≥ 50) ukuri: {
+		(nimero ≥ 50) yego: {
 			✎ andika: ‘Ⅼ’.
 			nimero gukuramo: 50.
 		}, kuruhuka.
 	
-		(nimero ≥ 50) ukuri: {
+		(nimero ≥ 50) yego: {
 			✎ andika: ‘Ⅼ’.
 			nimero gukuramo: 50.
 		}, kuruhuka.
 	
-		(nimero ≥ 10) ukuri: {
+		(nimero ≥ 10) yego: {
 			✎ andika: ‘Ⅹ’.
 			nimero gukuramo: 10.
 		}, kuruhuka.
 		
-		(nimero ≥ 9) ukuri: {
+		(nimero ≥ 9) yego: {
 			✎ andika: ‘Ⅸ’.
 			nimero gukuramo: 9.
 		}, kuruhuka.
 		
-		(nimero ≥ 5) ukuri: {
+		(nimero ≥ 5) yego: {
 			✎ andika: ‘Ⅴ’.
 			nimero gukuramo: 5.
 		}, kuruhuka.
 		
-		(nimero ≥ 4) ukuri: {
+		(nimero ≥ 4) yego: {
 			✎ andika: ‘Ⅳ’.
 			nimero gukuramo: 4.
 		}, kuruhuka.
 		
-		(nimero ≥ 1) ukuri: {
+		(nimero ≥ 1) yego: {
 			✎ andika: ‘Ⅰ’.
 			nimero gukuramo: 1.
 		}, kuruhuka.

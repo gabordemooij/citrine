@@ -4,10 +4,10 @@
 	✎ nyora: ‘Vangani mavara (16-30)?’, mira.
 	kuverenga ≔ Chirongwa bvunza nhamba mhedziso.
 
-	(kuverenga < 16) chokwadi: {
+	(kuverenga < 16) ehe: {
 		✎ nyora: ‘Izvo hazvina kukwana, ndapota nyora nhamba pakati pe16 ne30.’, mira.
 	}.
-	(kuverenga > 30) chokwadi: {
+	(kuverenga > 30) ehe: {
 		✎ nyora: ‘Yakarebesa, mamwe masystem anogona kuramba mapassword akareba.’, mira.
 	}.
 } ne: { ↲ (kuverenga < 16 kana: kuverenga > 30). }.
@@ -20,6 +20,6 @@
 		pakati: 1
 		uye: mavara kureba
 	).
-	pasiwedhi _shandisa: char.
+	pasiwedhi kumashure: char.
 } × kuverenga.
 ✎ nyora: pasiwedhi, mira.

@@ -20,6 +20,6 @@
 		tsakanin: 1
 		da: haruffa tsawon
 	).
-	kalmar wucewa append: char.
+	kalmar wucewa suffix: char.
 } × kirga.
 ✎ rubuta: kalmar wucewa, tsayawa.

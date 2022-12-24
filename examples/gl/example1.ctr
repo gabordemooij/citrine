@@ -18,8 +18,8 @@
 		personaxes personaxe: ( 
 		Número
 		entre: 1
-		_e: personaxes de lonxitude
+		e: personaxes de lonxitude
 	).
-	contrasinal anexo: char.
+	contrasinal sufixo: char.
 } × conta.
 ✎ escribir: contrasinal, parar.

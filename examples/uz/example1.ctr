@@ -20,6 +20,6 @@
 		orasida: 1
 		va: belgilar uzunligi
 	).
-	parol qo’shish: char.
+	parol qo'shimcha: char.
 } × hisoblash.
 ✎ yozish: parol, to’xta.

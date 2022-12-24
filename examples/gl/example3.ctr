@@ -1,6 +1,6 @@
 ✎ escribir: ‘Xogo de números’, parar.
 ✎ escribir: ‘Adiviña o número’, parar.
-☞ x ≔ Número entre: 1 _e: 10.
+☞ x ≔ Número entre: 1 e: 10.
 ☞ q ≔ 0.
 q ≔ Programa pregunta.
 { 

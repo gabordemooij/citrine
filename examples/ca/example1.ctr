@@ -10,7 +10,7 @@
 	(comptar > 30) cert: {
 		✎ escriu: ‘Això és massa llarg, és possible que alguns sistemes rebutgin tant les contrasenyes.’, atura.
 	}.
-} mentre: { ↲ (comptar < 16 _o: comptar > 30). }.
+} mentre: { ↲ (comptar < 16 o: comptar > 30). }.
 ☞ personatges ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ contrasenya ≔ ‘’.
 {
@@ -18,7 +18,7 @@
 		personatges personatge: ( 
 		Número
 		entre: 1
-		_i: personatges llargada
+		i: personatges llargada
 	).
 	contrasenya annexar: char.
 } × comptar.

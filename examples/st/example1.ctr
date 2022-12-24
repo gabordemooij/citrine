@@ -1,16 +1,16 @@
 ✎ ngola: ‘Jenereithara ea phasewete’, ema.
-☞ bala ≔ 0.
+☞ akaretsa ≔ 0.
 {
 	✎ ngola: ‘Ke batho ba bakae (16-30)?’, ema.
-	bala ≔ Lenaneo botsa palo ka ho felletseng.
+	akaretsa ≔ Letotoo botsa palo ka ho felletseng.
 
-	(bala < 16) ’nete: {
+	(akaretsa < 16) ee: {
 		✎ ngola: ‘Seo ha sea lekana, ka kopo kenya nomoro lipakeng tsa 16 le 30.’, ema.
 	}.
-	(bala > 30) ’nete: {
+	(akaretsa > 30) ee: {
 		✎ ngola: ‘E telele haholo, lits'ebetso tse ling li ka hana li-password tse telele joalo.’, ema.
 	}.
-} ha: { ↲ (bala < 16 kapa: bala > 30). }.
+} ha: { ↲ (akaretsa < 16 kapa: akaretsa > 30). }.
 ☞ libapali ≔ ‘acdefghjkmnprtwx2345789@#&’.
 ☞ phasewete ≔ ‘’.
 {
@@ -20,6 +20,6 @@
 		pakeng tsa: 1
 		le: libapali bolelele
 	).
-	phasewete eketsa: char.
-} × bala.
+	phasewete sehlomathisi: char.
+} × akaretsa.
 ✎ ngola: phasewete, ema.

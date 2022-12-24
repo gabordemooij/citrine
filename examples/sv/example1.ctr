@@ -1,14 +1,14 @@
-✎ skriva: ‘Lösenordsgenerator’, sluta.
+✎ skriva: ‘Lösenordsgenerator’, stop.
 ☞ räkna ≔ 0.
 {
-	✎ skriva: ‘Hur många karaktärer (16-30)?’, sluta.
+	✎ skriva: ‘Hur många karaktärer (16-30)?’, stop.
 	räkna ≔ Program fråga siffra absolut.
 
 	(räkna < 16) sann: {
-		✎ skriva: ‘Det räcker inte. Ange ett nummer mellan 16 och 30.’, sluta.
+		✎ skriva: ‘Det räcker inte. Ange ett nummer mellan 16 och 30.’, stop.
 	}.
 	(räkna > 30) sann: {
-		✎ skriva: ‘Det är för långt, vissa system kan avvisa lösenord så länge.’, sluta.
+		✎ skriva: ‘Det är för långt, vissa system kan avvisa lösenord så länge.’, stop.
 	}.
 } medan: { ↲ (räkna < 16 eller: räkna > 30). }.
 ☞ tecken ≔ ‘acdefghjkmnprtwx2345789@#&’.
@@ -17,9 +17,9 @@
 	☞ char ≔ 
 		tecken karaktär: ( 
 		Siffra
-		mellan och: 1
-		__: tecken längd
+		mellan: 1
+		och: tecken längd
 	).
 	Lösenord bifoga: char.
 } × räkna.
-✎ skriva: Lösenord, sluta.
+✎ skriva: Lösenord, stop.

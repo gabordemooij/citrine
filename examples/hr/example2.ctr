@@ -2,59 +2,59 @@
 ✎ pisati: ‘Dajte broj za pretvorbu:’, stop.
 ☞ broj ≔ Program pitati broj apsolutan.
 
-(broj = 0) pravi: {
+(broj = 0) da: {
 	✎ pisati: ‘Nulla’, stop.
 	Program kraj.
 }.
 
 {
 	{
-		(broj ≥ 1000) pravi: {
+		(broj ≥ 1000) da: {
 			✎ pisati: ‘Ⅿ’.
 			broj oduzeti: 1000.
 		}, pauza.
 	
-		(broj ≥ 500) pravi: {
+		(broj ≥ 500) da: {
 			✎ pisati: ‘Ⅾ’.
 			broj oduzeti: 500.
 		}, pauza.
 	
-		(broj ≥ 100) pravi: {
+		(broj ≥ 100) da: {
 			✎ pisati: ‘Ⅽ’.
 			broj oduzeti: 100.
 		}, pauza.
 	
-		(broj ≥ 50) pravi: {
+		(broj ≥ 50) da: {
 			✎ pisati: ‘Ⅼ’.
 			broj oduzeti: 50.
 		}, pauza.
 	
-		(broj ≥ 50) pravi: {
+		(broj ≥ 50) da: {
 			✎ pisati: ‘Ⅼ’.
 			broj oduzeti: 50.
 		}, pauza.
 	
-		(broj ≥ 10) pravi: {
+		(broj ≥ 10) da: {
 			✎ pisati: ‘Ⅹ’.
 			broj oduzeti: 10.
 		}, pauza.
 		
-		(broj ≥ 9) pravi: {
+		(broj ≥ 9) da: {
 			✎ pisati: ‘Ⅸ’.
 			broj oduzeti: 9.
 		}, pauza.
 		
-		(broj ≥ 5) pravi: {
+		(broj ≥ 5) da: {
 			✎ pisati: ‘Ⅴ’.
 			broj oduzeti: 5.
 		}, pauza.
 		
-		(broj ≥ 4) pravi: {
+		(broj ≥ 4) da: {
 			✎ pisati: ‘Ⅳ’.
 			broj oduzeti: 4.
 		}, pauza.
 		
-		(broj ≥ 1) pravi: {
+		(broj ≥ 1) da: {
 			✎ pisati: ‘Ⅰ’.
 			broj oduzeti: 1.
 		}, pauza.

@@ -2,59 +2,59 @@
 ✎ bhala: ‘Nikeza inombolo ezoguqulwa:’, ima.
 ☞ inombolo ≔ Uhlelo buza inombolo ngokuphelele.
 
-(inombolo = 0) iqiniso: {
+(inombolo = 0) yebo: {
 	✎ bhala: ‘Nulla’, ima.
 	Uhlelo ukuphela.
 }.
 
 {
 	{
-		(inombolo ≥ 1000) iqiniso: {
+		(inombolo ≥ 1000) yebo: {
 			✎ bhala: ‘Ⅿ’.
 			inombolo khipha: 1000.
 		}, hlukana.
 	
-		(inombolo ≥ 500) iqiniso: {
+		(inombolo ≥ 500) yebo: {
 			✎ bhala: ‘Ⅾ’.
 			inombolo khipha: 500.
 		}, hlukana.
 	
-		(inombolo ≥ 100) iqiniso: {
+		(inombolo ≥ 100) yebo: {
 			✎ bhala: ‘Ⅽ’.
 			inombolo khipha: 100.
 		}, hlukana.
 	
-		(inombolo ≥ 50) iqiniso: {
+		(inombolo ≥ 50) yebo: {
 			✎ bhala: ‘Ⅼ’.
 			inombolo khipha: 50.
 		}, hlukana.
 	
-		(inombolo ≥ 50) iqiniso: {
+		(inombolo ≥ 50) yebo: {
 			✎ bhala: ‘Ⅼ’.
 			inombolo khipha: 50.
 		}, hlukana.
 	
-		(inombolo ≥ 10) iqiniso: {
+		(inombolo ≥ 10) yebo: {
 			✎ bhala: ‘Ⅹ’.
 			inombolo khipha: 10.
 		}, hlukana.
 		
-		(inombolo ≥ 9) iqiniso: {
+		(inombolo ≥ 9) yebo: {
 			✎ bhala: ‘Ⅸ’.
 			inombolo khipha: 9.
 		}, hlukana.
 		
-		(inombolo ≥ 5) iqiniso: {
+		(inombolo ≥ 5) yebo: {
 			✎ bhala: ‘Ⅴ’.
 			inombolo khipha: 5.
 		}, hlukana.
 		
-		(inombolo ≥ 4) iqiniso: {
+		(inombolo ≥ 4) yebo: {
 			✎ bhala: ‘Ⅳ’.
 			inombolo khipha: 4.
 		}, hlukana.
 		
-		(inombolo ≥ 1) iqiniso: {
+		(inombolo ≥ 1) yebo: {
 			✎ bhala: ‘Ⅰ’.
 			inombolo khipha: 1.
 		}, hlukana.

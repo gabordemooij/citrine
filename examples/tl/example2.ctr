@@ -2,59 +2,59 @@
 ✎ sumulat: ‘Bigyan ng isang numero upang i-convert:’, huminto.
 ☞ bilang ≔ Program magtanong bilang ganap.
 
-(bilang = 0) totoo: {
+(bilang = 0) oo: {
 	✎ sumulat: ‘Nulla’, huminto.
 	Program wakas.
 }.
 
 {
 	{
-		(bilang ≥ 1000) totoo: {
+		(bilang ≥ 1000) oo: {
 			✎ sumulat: ‘Ⅿ’.
 			bilang ibawas: 1000.
 		}, pahinga.
 	
-		(bilang ≥ 500) totoo: {
+		(bilang ≥ 500) oo: {
 			✎ sumulat: ‘Ⅾ’.
 			bilang ibawas: 500.
 		}, pahinga.
 	
-		(bilang ≥ 100) totoo: {
+		(bilang ≥ 100) oo: {
 			✎ sumulat: ‘Ⅽ’.
 			bilang ibawas: 100.
 		}, pahinga.
 	
-		(bilang ≥ 50) totoo: {
+		(bilang ≥ 50) oo: {
 			✎ sumulat: ‘Ⅼ’.
 			bilang ibawas: 50.
 		}, pahinga.
 	
-		(bilang ≥ 50) totoo: {
+		(bilang ≥ 50) oo: {
 			✎ sumulat: ‘Ⅼ’.
 			bilang ibawas: 50.
 		}, pahinga.
 	
-		(bilang ≥ 10) totoo: {
+		(bilang ≥ 10) oo: {
 			✎ sumulat: ‘Ⅹ’.
 			bilang ibawas: 10.
 		}, pahinga.
 		
-		(bilang ≥ 9) totoo: {
+		(bilang ≥ 9) oo: {
 			✎ sumulat: ‘Ⅸ’.
 			bilang ibawas: 9.
 		}, pahinga.
 		
-		(bilang ≥ 5) totoo: {
+		(bilang ≥ 5) oo: {
 			✎ sumulat: ‘Ⅴ’.
 			bilang ibawas: 5.
 		}, pahinga.
 		
-		(bilang ≥ 4) totoo: {
+		(bilang ≥ 4) oo: {
 			✎ sumulat: ‘Ⅳ’.
 			bilang ibawas: 4.
 		}, pahinga.
 		
-		(bilang ≥ 1) totoo: {
+		(bilang ≥ 1) oo: {
 			✎ sumulat: ‘Ⅰ’.
 			bilang ibawas: 1.
 		}, pahinga.

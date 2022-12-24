@@ -11,52 +11,52 @@
 	{
 		(jumlah ≥ 1000) leres: {
 			✎ nulis: ‘Ⅿ’.
-			jumlah dikurangan__: 1000.
+			jumlah dikurangan: 1000.
 		}, istirahat.
 	
 		(jumlah ≥ 500) leres: {
 			✎ nulis: ‘Ⅾ’.
-			jumlah dikurangan__: 500.
+			jumlah dikurangan: 500.
 		}, istirahat.
 	
 		(jumlah ≥ 100) leres: {
 			✎ nulis: ‘Ⅽ’.
-			jumlah dikurangan__: 100.
+			jumlah dikurangan: 100.
 		}, istirahat.
 	
 		(jumlah ≥ 50) leres: {
 			✎ nulis: ‘Ⅼ’.
-			jumlah dikurangan__: 50.
+			jumlah dikurangan: 50.
 		}, istirahat.
 	
 		(jumlah ≥ 50) leres: {
 			✎ nulis: ‘Ⅼ’.
-			jumlah dikurangan__: 50.
+			jumlah dikurangan: 50.
 		}, istirahat.
 	
 		(jumlah ≥ 10) leres: {
 			✎ nulis: ‘Ⅹ’.
-			jumlah dikurangan__: 10.
+			jumlah dikurangan: 10.
 		}, istirahat.
 		
 		(jumlah ≥ 9) leres: {
 			✎ nulis: ‘Ⅸ’.
-			jumlah dikurangan__: 9.
+			jumlah dikurangan: 9.
 		}, istirahat.
 		
 		(jumlah ≥ 5) leres: {
 			✎ nulis: ‘Ⅴ’.
-			jumlah dikurangan__: 5.
+			jumlah dikurangan: 5.
 		}, istirahat.
 		
 		(jumlah ≥ 4) leres: {
 			✎ nulis: ‘Ⅳ’.
-			jumlah dikurangan__: 4.
+			jumlah dikurangan: 4.
 		}, istirahat.
 		
 		(jumlah ≥ 1) leres: {
 			✎ nulis: ‘Ⅰ’.
-			jumlah dikurangan__: 1.
+			jumlah dikurangan: 1.
 		}, istirahat.
 	} prosedur.
 	

@@ -2,59 +2,59 @@
 ✎ nivîsîn: ‘Hejmarek bidin ku veguherînin:’, rawestan.
 ☞ jimare ≔ Bername pirsîn jimare bêkêmasî.
 
-(jimare = 0) rast: {
+(jimare = 0) erê: {
 	✎ nivîsîn: ‘Nulla’, rawestan.
 	Bername dawî.
 }.
 
 {
 	{
-		(jimare ≥ 1000) rast: {
+		(jimare ≥ 1000) erê: {
 			✎ nivîsîn: ‘Ⅿ’.
 			jimare jêkêmkirin: 1000.
 		}, şikesta.
 	
-		(jimare ≥ 500) rast: {
+		(jimare ≥ 500) erê: {
 			✎ nivîsîn: ‘Ⅾ’.
 			jimare jêkêmkirin: 500.
 		}, şikesta.
 	
-		(jimare ≥ 100) rast: {
+		(jimare ≥ 100) erê: {
 			✎ nivîsîn: ‘Ⅽ’.
 			jimare jêkêmkirin: 100.
 		}, şikesta.
 	
-		(jimare ≥ 50) rast: {
+		(jimare ≥ 50) erê: {
 			✎ nivîsîn: ‘Ⅼ’.
 			jimare jêkêmkirin: 50.
 		}, şikesta.
 	
-		(jimare ≥ 50) rast: {
+		(jimare ≥ 50) erê: {
 			✎ nivîsîn: ‘Ⅼ’.
 			jimare jêkêmkirin: 50.
 		}, şikesta.
 	
-		(jimare ≥ 10) rast: {
+		(jimare ≥ 10) erê: {
 			✎ nivîsîn: ‘Ⅹ’.
 			jimare jêkêmkirin: 10.
 		}, şikesta.
 		
-		(jimare ≥ 9) rast: {
+		(jimare ≥ 9) erê: {
 			✎ nivîsîn: ‘Ⅸ’.
 			jimare jêkêmkirin: 9.
 		}, şikesta.
 		
-		(jimare ≥ 5) rast: {
+		(jimare ≥ 5) erê: {
 			✎ nivîsîn: ‘Ⅴ’.
 			jimare jêkêmkirin: 5.
 		}, şikesta.
 		
-		(jimare ≥ 4) rast: {
+		(jimare ≥ 4) erê: {
 			✎ nivîsîn: ‘Ⅳ’.
 			jimare jêkêmkirin: 4.
 		}, şikesta.
 		
-		(jimare ≥ 1) rast: {
+		(jimare ≥ 1) erê: {
 			✎ nivîsîn: ‘Ⅰ’.
 			jimare jêkêmkirin: 1.
 		}, şikesta.

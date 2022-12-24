@@ -2,61 +2,61 @@
 ✎ nyora: ‘Ipa nhamba yekushandura:’, mira.
 ☞ nhamba ≔ Chirongwa bvunza nhamba mhedziso.
 
-(nhamba = 0) chokwadi: {
+(nhamba = 0) ehe: {
 	✎ nyora: ‘Nulla’, mira.
 	Chirongwa magumo.
 }.
 
 {
 	{
-		(nhamba ≥ 1000) chokwadi: {
+		(nhamba ≥ 1000) ehe: {
 			✎ nyora: ‘Ⅿ’.
-			nhamba _bvisa: 1000.
+			nhamba bvisa: 1000.
 		}, kutyora.
 	
-		(nhamba ≥ 500) chokwadi: {
+		(nhamba ≥ 500) ehe: {
 			✎ nyora: ‘Ⅾ’.
-			nhamba _bvisa: 500.
+			nhamba bvisa: 500.
 		}, kutyora.
 	
-		(nhamba ≥ 100) chokwadi: {
+		(nhamba ≥ 100) ehe: {
 			✎ nyora: ‘Ⅽ’.
-			nhamba _bvisa: 100.
+			nhamba bvisa: 100.
 		}, kutyora.
 	
-		(nhamba ≥ 50) chokwadi: {
+		(nhamba ≥ 50) ehe: {
 			✎ nyora: ‘Ⅼ’.
-			nhamba _bvisa: 50.
+			nhamba bvisa: 50.
 		}, kutyora.
 	
-		(nhamba ≥ 50) chokwadi: {
+		(nhamba ≥ 50) ehe: {
 			✎ nyora: ‘Ⅼ’.
-			nhamba _bvisa: 50.
+			nhamba bvisa: 50.
 		}, kutyora.
 	
-		(nhamba ≥ 10) chokwadi: {
+		(nhamba ≥ 10) ehe: {
 			✎ nyora: ‘Ⅹ’.
-			nhamba _bvisa: 10.
+			nhamba bvisa: 10.
 		}, kutyora.
 		
-		(nhamba ≥ 9) chokwadi: {
+		(nhamba ≥ 9) ehe: {
 			✎ nyora: ‘Ⅸ’.
-			nhamba _bvisa: 9.
+			nhamba bvisa: 9.
 		}, kutyora.
 		
-		(nhamba ≥ 5) chokwadi: {
+		(nhamba ≥ 5) ehe: {
 			✎ nyora: ‘Ⅴ’.
-			nhamba _bvisa: 5.
+			nhamba bvisa: 5.
 		}, kutyora.
 		
-		(nhamba ≥ 4) chokwadi: {
+		(nhamba ≥ 4) ehe: {
 			✎ nyora: ‘Ⅳ’.
-			nhamba _bvisa: 4.
+			nhamba bvisa: 4.
 		}, kutyora.
 		
-		(nhamba ≥ 1) chokwadi: {
+		(nhamba ≥ 1) ehe: {
 			✎ nyora: ‘Ⅰ’.
-			nhamba _bvisa: 1.
+			nhamba bvisa: 1.
 		}, kutyora.
 	} maitiro.
 	

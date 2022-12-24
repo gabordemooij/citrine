@@ -60,4 +60,4 @@
 		}, intermissum.
 	} procedure.
 	
-} dum;__: { ↲ numerus > 0. }.
+} dum: { ↲ numerus > 0. }.

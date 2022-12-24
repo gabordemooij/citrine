@@ -1,6 +1,6 @@
 ✎ pisać: ‘Gra liczbowa’, zatrzymać.
 ✎ pisać: ‘Zgadnij numer’, zatrzymać.
-☞ x ≔ Numer pomiędzy i: 1 __: 10.
+☞ x ≔ Numer pomiędzy: 1 i: 10.
 ☞ q ≔ 0.
 q ≔ Program zapytać.
 { 

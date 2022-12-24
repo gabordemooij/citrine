@@ -1,9 +1,9 @@
-✎ skriva: ‘romerska siffror’, sluta.
-✎ skriva: ‘Ge ett nummer att konvertera:’, sluta.
+✎ skriva: ‘romerska siffror’, stop.
+✎ skriva: ‘Ge ett nummer att konvertera:’, stop.
 ☞ siffra ≔ Program fråga siffra absolut.
 
 (siffra = 0) sann: {
-	✎ skriva: ‘Nulla’, sluta.
+	✎ skriva: ‘Nulla’, stop.
 	Program slutet.
 }.
 
@@ -12,52 +12,52 @@
 		(siffra ≥ 1000) sann: {
 			✎ skriva: ‘Ⅿ’.
 			siffra subtrahera: 1000.
-		}, ha sönder.
+		}, stoppa.
 	
 		(siffra ≥ 500) sann: {
 			✎ skriva: ‘Ⅾ’.
 			siffra subtrahera: 500.
-		}, ha sönder.
+		}, stoppa.
 	
 		(siffra ≥ 100) sann: {
 			✎ skriva: ‘Ⅽ’.
 			siffra subtrahera: 100.
-		}, ha sönder.
+		}, stoppa.
 	
 		(siffra ≥ 50) sann: {
 			✎ skriva: ‘Ⅼ’.
 			siffra subtrahera: 50.
-		}, ha sönder.
+		}, stoppa.
 	
 		(siffra ≥ 50) sann: {
 			✎ skriva: ‘Ⅼ’.
 			siffra subtrahera: 50.
-		}, ha sönder.
+		}, stoppa.
 	
 		(siffra ≥ 10) sann: {
 			✎ skriva: ‘Ⅹ’.
 			siffra subtrahera: 10.
-		}, ha sönder.
+		}, stoppa.
 		
 		(siffra ≥ 9) sann: {
 			✎ skriva: ‘Ⅸ’.
 			siffra subtrahera: 9.
-		}, ha sönder.
+		}, stoppa.
 		
 		(siffra ≥ 5) sann: {
 			✎ skriva: ‘Ⅴ’.
 			siffra subtrahera: 5.
-		}, ha sönder.
+		}, stoppa.
 		
 		(siffra ≥ 4) sann: {
 			✎ skriva: ‘Ⅳ’.
 			siffra subtrahera: 4.
-		}, ha sönder.
+		}, stoppa.
 		
 		(siffra ≥ 1) sann: {
 			✎ skriva: ‘Ⅰ’.
 			siffra subtrahera: 1.
-		}, ha sönder.
+		}, stoppa.
 	} procedur.
 	
 } medan: { ↲ siffra > 0. }.

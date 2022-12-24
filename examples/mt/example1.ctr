@@ -18,8 +18,8 @@
 		karattri karattru: ( 
 		Numru
 		bejn: 1
-		_u: karattri it-tul
+		u: karattri it-tul
 	).
-	password appendja: char.
+	password suffiss: char.
 } × tgħodd.
 ✎ ikteb: password, waqfa.

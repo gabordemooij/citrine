@@ -1,9 +1,9 @@
-✎ skrive: ‘Romerske tal’, hold op.
-✎ skrive: ‘Giv et tal, der skal konverteres:’, hold op.
+✎ skrive: ‘Romerske tal’, stop.
+✎ skrive: ‘Giv et tal, der skal konverteres:’, stop.
 ☞ nummer ≔ Program spørge nummer absolutte.
 
 (nummer = 0) rigtigt: {
-	✎ skrive: ‘Nulla’, hold op.
+	✎ skrive: ‘Nulla’, stop.
 	Program ende.
 }.
 
@@ -12,52 +12,52 @@
 		(nummer ≥ 1000) rigtigt: {
 			✎ skrive: ‘Ⅿ’.
 			nummer trække fra: 1000.
-		}, pause.
+		}, holde op.
 	
 		(nummer ≥ 500) rigtigt: {
 			✎ skrive: ‘Ⅾ’.
 			nummer trække fra: 500.
-		}, pause.
+		}, holde op.
 	
 		(nummer ≥ 100) rigtigt: {
 			✎ skrive: ‘Ⅽ’.
 			nummer trække fra: 100.
-		}, pause.
+		}, holde op.
 	
 		(nummer ≥ 50) rigtigt: {
 			✎ skrive: ‘Ⅼ’.
 			nummer trække fra: 50.
-		}, pause.
+		}, holde op.
 	
 		(nummer ≥ 50) rigtigt: {
 			✎ skrive: ‘Ⅼ’.
 			nummer trække fra: 50.
-		}, pause.
+		}, holde op.
 	
 		(nummer ≥ 10) rigtigt: {
 			✎ skrive: ‘Ⅹ’.
 			nummer trække fra: 10.
-		}, pause.
+		}, holde op.
 		
 		(nummer ≥ 9) rigtigt: {
 			✎ skrive: ‘Ⅸ’.
 			nummer trække fra: 9.
-		}, pause.
+		}, holde op.
 		
 		(nummer ≥ 5) rigtigt: {
 			✎ skrive: ‘Ⅴ’.
 			nummer trække fra: 5.
-		}, pause.
+		}, holde op.
 		
 		(nummer ≥ 4) rigtigt: {
 			✎ skrive: ‘Ⅳ’.
 			nummer trække fra: 4.
-		}, pause.
+		}, holde op.
 		
 		(nummer ≥ 1) rigtigt: {
 			✎ skrive: ‘Ⅰ’.
 			nummer trække fra: 1.
-		}, pause.
+		}, holde op.
 	} procedure.
 	
 } mens: { ↲ nummer > 0. }.

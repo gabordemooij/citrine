@@ -1,11 +1,11 @@
-✎ kirjuta: ‘Numbrimäng’, peatus.
-✎ kirjuta: ‘Arvake arv ära’, peatus.
+✎ kirjuta: ‘Numbrimäng’, lause.
+✎ kirjuta: ‘Arvake arv ära’, lause.
 ☞ x ≔ Arv vahel: 1 ja: 10.
 ☞ q ≔ 0.
 q ≔ Programm küsige.
 { 
-	✎ kirjuta: ‘vale!’, peatus.
+	✎ kirjuta: ‘vale!’, lause.
 	q ≔ Programm küsige.
 
 } samas: { ↲ x number ≠ q number. }.
-✎ kirjuta: ‘õige!’, peatus.
+✎ kirjuta: ‘õige!’, lause.

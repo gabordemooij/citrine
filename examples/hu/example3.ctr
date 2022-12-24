@@ -1,11 +1,11 @@
-✎ ír: ‘Számjáték’, állj meg.
-✎ ír: ‘Találd ki a számot’, állj meg.
-☞ x ≔ Szám között és: 1 __: 10.
+✎ ír: ‘Számjáték’, stop.
+✎ ír: ‘Találd ki a számot’, stop.
+☞ x ≔ Szám között: 1 és: 10.
 ☞ q ≔ 0.
 q ≔ Program kérdez.
 { 
-	✎ ír: ‘rossz!’, állj meg.
+	✎ ír: ‘rossz!’, stop.
 	q ≔ Program kérdez.
 
 } míg: { ↲ x szám ≠ q szám. }.
-✎ ír: ‘helyes!’, állj meg.
+✎ ír: ‘helyes!’, stop.
