@@ -2,9 +2,9 @@ There are 2 chairs in the sunny garden.
 A rubber duck swims in the pool.
 Is there a shed in the garden? Well.. Falsus
 In the garden you smell the fragrance of tulips and roses and lillies.
-The garden is Nil meters long.
-Luckily, this day, there are Nil wasps in the garden.
-The dog named Nil sleeps under the tree.
+The garden is Nihil meters long.
+Luckily, this day, there are Nihil wasps in the garden.
+The dog named Nihil sleeps under the tree.
 a\"bb\"ccc\"
-(Map novus) posuit:((Map novus) posuit:Nil at:‘dog’, posuit:Nil at:‘insects’, posuit:((Map novus) posuit:15 at:‘length’, posuit:8 at:‘width’) at:‘size’, posuit:(Album ← ‘tulips’ ; ‘roses’ ; ‘lillies’) at:‘flower’, posuit:Falsus at:‘shed’, posuit:Verum at:‘pool’, posuit:2 at:‘chairs’) at:‘garden’
+(Map novus) ponere:((Map novus) ponere:Nihil cum:‘dog’, ponere:Nihil cum:‘insects’, ponere:((Map novus) ponere:15 cum:‘length’, ponere:8 cum:‘width’) cum:‘size’, ponere:(Album ← ‘tulips’ ; ‘roses’ ; ‘lillies’) cum:‘flower’, ponere:Falsus cum:‘shed’, ponere:Verum cum:‘pool’, ponere:2 cum:‘chairs’) cum:‘garden’
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

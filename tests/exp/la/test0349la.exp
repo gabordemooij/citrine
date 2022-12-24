@@ -1,8 +1,8 @@
-Nil
-Nil
-Boolean
+Nihil
+Nihil
+Veritas
 Verum
-Boolean
+Veritas
 Falsus
 Numerus
 1
@@ -21,16 +21,16 @@ Album ← 1 ; (Album ← 2)
 Album
 Album ← 1 ; (Album ← 2) ; 3
 Album
-Album ← 1 ; ((Map novus) posuit:‘a’ at:‘b’) ; 3
+Album ← 1 ; ((Map novus) ponere:‘a’ cum:‘b’) ; 3
 Album
-Album ← 1 ; ((Map novus) posuit:(Album ← 9) at:‘b’) ; 3
+Album ← 1 ; ((Map novus) ponere:(Album ← 9) cum:‘b’) ; 3
 Map
-(Map novus) posuit:2 at:‘1’
+(Map novus) ponere:2 cum:‘1’
 Map
-(Map novus) posuit:2 at:‘x’
+(Map novus) ponere:2 cum:‘x’
 Map
-(Map novus) posuit:(Album ← 1 ; 2) at:‘x’
+(Map novus) ponere:(Album ← 1 ; 2) cum:‘x’
 Map
-(Map novus) posuit:(Album ← ((Map novus) posuit:‘q’ at:‘y’) ; 2) at:‘x’
-Nil
-Nil
+(Map novus) ponere:(Album ← ((Map novus) ponere:‘q’ cum:‘y’) ; 2) cum:‘x’
+Nihil
+Nihil
