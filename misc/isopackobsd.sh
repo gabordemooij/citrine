@@ -26,5 +26,5 @@ do
 	#Archive
 	tar cvzf citrine${V}-${OS}-${ISO}.tar.gz -C /tmp dist
 	#Sign
-	signify -Sz -s keys/privatekey.sec -m citrine${V}-${OS}-${ISO}.tar.gz -x downloads/${OS}/citrine${V}-${OS}-${ISO}.tgz
+	signify -Sz -s keys/privatekey.sec -m citrine${V}-${OS}-${ISO}.tar.gz -x downloads/OpenBSD/citrine${V}-${OS}-${ISO}.tgz
 done
