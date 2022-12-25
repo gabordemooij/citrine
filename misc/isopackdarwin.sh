@@ -1,4 +1,3 @@
-OS="Darwin"
 V="0.9.5"
 for ISO in $(ls ../i18n)
 do
@@ -12,13 +11,13 @@ do
 	#Copy license
 	cp ../LICENSE /tmp/dist/
 	#Copy binary
-	cp ../bin/${OS}/ctr${ISO} /tmp/dist/bin/ctr${ISO}
+	cp ../bin/darwin/ctr${ISO} /tmp/dist/bin/ctr${ISO}
 	#Copy examples
 	cp ../examples/${ISO}/* /tmp/dist/examples/
 	#Copy font
 	cp ../fonts/Citrine.ttf /tmp/dist/fonts/
 	#Archive
-	tar cvzf citrine${V}-${OS}-${ISO}.tar.gz -C /tmp dist
+	tar cvzf /tmp/citrine${V}-darwin-${ISO}.tar.gz -C /tmp dist
 	#Sign
-	signify-openbsd -Sz -s keys/privatekey.sec -m citrine${V}-${OS}-${ISO}.tar.gz -x downloads/Darwin/citrine${V}-${OS}-${ISO}.tgz
+	signify-openbsd -Sz -s keys/privatekey.sec -m /tmp/citrine${V}-darwin-${ISO}.tar.gz -x downloads/Darwin/citrine${V}-darwin-${ISO}.tgz
 done

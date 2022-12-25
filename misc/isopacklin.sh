@@ -1,5 +1,4 @@
-OS="linux"
-V="0.9.4"
+V="0.9.5"
 for ISO in $(ls ../i18n)
 do
 	#Remove previous working dir
@@ -24,9 +23,9 @@ do
 	cp ../mods/request/libctrrequest.so /tmp/dist/mods/request/
 	cp ../mods/json/libctrjson.so       /tmp/dist/mods/json/
 	#Archive
-	tar cvzf citrine${V}-${OS}-${ISO}.tar.gz -C /tmp dist
+	tar cvzf /tmp/citrine${V}-linux-${ISO}.tar.gz -C /tmp dist
 	#Sign
-	signify-openbsd -Sz -s keys/privatekey.sec -m citrine${V}-${OS}-${ISO}.tar.gz -x downloads/Linux/citrine${V}-${OS}-${ISO}.tgz
+	signify-openbsd -Sz -s keys/privatekey.sec -m /tmp/citrine${V}-linux-${ISO}.tar.gz -x downloads/Linux/citrine${V}-linux-${ISO}.tgz
 done
 
 
