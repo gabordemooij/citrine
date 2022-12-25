@@ -1,5 +1,4 @@
-OS="Haiku"
-V="0.9.4"
+V="0.9.5"
 for ISO in $(ls ../i18n)
 do
 	#Remove previous working dir
@@ -15,15 +14,15 @@ do
 	#Copy license
 	cp ../LICENSE /tmp/dist/
 	#Copy binary
-	cp ../bin/${OS}/ctr${ISO} /tmp/dist/bin/ctr${ISO}
+	cp ../bin/haiku/ctr${ISO} /tmp/dist/bin/ctr${ISO}
 	#Copy examples
 	cp ../examples/${ISO}/* /tmp/dist/examples/
 	#Copy font
 	cp ../fonts/Citrine.ttf /tmp/dist/fonts/
 	#Copy mods
-	cp ../bin/${OS}/libctrjson.so       /tmp/dist/mods/json/
+	cp ../bin/haiku/libctrjson.so       /tmp/dist/mods/json/
 	#Archive
-	tar cvzf citrine${V}-${OS}-${ISO}.tar.gz -C /tmp dist
+	tar cvzf /tmp/citrine${V}-haiku-${ISO}.tar.gz -C /tmp dist
 	#Sign
-	signify-openbsd -Sz -s keys/privatekey.sec -m citrine${V}-${OS}-${ISO}.tar.gz -x downloads/Haiku/citrine${V}-${OS}-${ISO}.tgz
+	signify-openbsd -Sz -s keys/privatekey.sec -m /tmp/citrine${V}-haiku-${ISO}.tar.gz -x downloads/Haiku/citrine${V}-haiku-${ISO}.tgz
 done

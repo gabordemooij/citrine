@@ -1,4 +1,3 @@
-OS="windows32"
 V="0.9.5"
 for ISO in $(ls ../i18n)
 do
@@ -19,8 +18,8 @@ do
 	cp ../fonts/Citrine.ttf /tmp/dist/fonts/
 	#Archive
 	cd /tmp
-	rm citrine${V}-${OS}-${ISO}.zip
-	zip -r citrine${V}-${OS}-${ISO}.zip dist/*
+	rm citrine${V}-win32-${ISO}.zip
+	zip -r citrine${V}-win32-${ISO}.zip dist/*
 	cd -
-	cp /tmp/citrine${V}-${OS}-${ISO}.zip downloads/Windows32/citrine${V}-${OS}-${ISO}.zip
+	cp /tmp/citrine${V}-win32-${ISO}.zip downloads/Windows32/citrine${V}-win32-${ISO}.zip
 done
