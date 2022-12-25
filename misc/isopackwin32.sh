@@ -22,5 +22,5 @@ do
 	rm citrine${V}-${OS}-${ISO}.zip
 	zip -r citrine${V}-${OS}-${ISO}.zip dist/*
 	cd -
-	cp /tmp/citrine${V}-${OS}-${ISO}.zip downloads/${OS}/citrine${V}-${OS}-${ISO}.zip
+	cp /tmp/citrine${V}-${OS}-${ISO}.zip downloads/Windows32/citrine${V}-${OS}-${ISO}.zip
 done
