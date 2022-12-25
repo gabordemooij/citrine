@@ -11,7 +11,7 @@ do
 	#Copy license
 	cp ../LICENSE /tmp/dist/
 	#Copy binary
-	cp ../bin/darwin/ctr${ISO} /tmp/dist/bin/ctr${ISO}
+	cp ../bin/Darwin/ctr${ISO} /tmp/dist/bin/ctr${ISO}
 	#Copy examples
 	cp ../examples/${ISO}/* /tmp/dist/examples/
 	#Copy font

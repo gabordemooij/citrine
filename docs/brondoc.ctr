@@ -126,7 +126,7 @@ talen elk: { :nummer :taal
 
 	taalregister toevoegen: regel.
 	☞ commando ≔ 
-	“mkdir server/docs/🠶taal”.
+	“mkdir -p server/docs/🠶taal”.
 	commando 🠶taal: taal.
 
 	Programma opdrachtregel: commando.

@@ -14,7 +14,7 @@ do
 	#Copy license
 	cp ../LICENSE /tmp/dist/
 	#Copy binary
-	cp ../bin/openbsd/ctr${ISO} /tmp/dist/bin/ctr${ISO}
+	cp ../bin/OpenBSD/ctr${ISO} /tmp/dist/bin/ctr${ISO}
 	#Copy examples
 	cp ../examples/${ISO}/* /tmp/dist/examples/
 	#Copy font
@@ -25,5 +25,5 @@ do
 	#Archive
 	tar cvzf /tmp/citrine${V}-openbsd-${ISO}.tar.gz -C /tmp dist
 	#Sign
-	signify -Sz -s keys/privatekey.sec -m /tmp/citrine${V}-openbsd-${ISO}.tar.gz -x downloads/OpenBSD/citrine${V}-openbsd-${ISO}.tgz
+	signify-openbsd -Sz -s keys/privatekey.sec -m /tmp/citrine${V}-openbsd-${ISO}.tar.gz -x downloads/OpenBSD/citrine${V}-openbsd-${ISO}.tgz
 done
