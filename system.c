@@ -411,8 +411,8 @@ ctr_object* ctr_program_include(ctr_object* myself, ctr_argument* argumentList) 
  * [ Program ] search: [ String ]
  * 
  * @example
- * ✎ write: (Program search: ‘✎’), stop.
- * ✎ write: (Program search: ‘Q’), stop. 
+ * ✎ write: (Program find: ‘✎’), stop.
+ * ✎ write: (Program find: ‘Q’), stop.
  */
 ctr_object* ctr_program_object_exists( ctr_object* myself, ctr_argument* argumentList ) {
 	if ( ctr_internal_object_find_property(CtrStdWorld, argumentList->object, CTR_CATEGORY_PUBLIC_PROPERTY) ) {
@@ -427,7 +427,7 @@ ctr_object* ctr_program_object_exists( ctr_object* myself, ctr_argument* argumen
  * 
  * @example
  * ✎ write: (Program ✎: ‘AAA’), stop.
- * ✎ write: (Program program: ‘test’), stop. 
+ * ✎ write: (Program Program: ‘test’), stop.
  */
 ctr_object* ctr_program_object_message_exists( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* foundObject;
