@@ -408,7 +408,7 @@ ctr_object* ctr_program_include(ctr_object* myself, ctr_argument* argumentList) 
  
 /**
  * @def
- * [ Program ] search: [ String ]
+ * [ Program ] find: [ String ]
  * 
  * @example
  * ✎ write: (Program find: ‘✎’), stop.
