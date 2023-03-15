@@ -216,6 +216,7 @@ typedef struct ctr_object ctr_object;
 struct ctr_resource {
 	unsigned int type;
 	void* ptr;
+	void (*destructor)();
 };
 typedef struct ctr_resource ctr_resource;
 

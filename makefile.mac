@@ -1,7 +1,7 @@
 CFLAGS = -O2 -std=c99 -mtune=native -Wall -D CTRLANG=${ISO} -D PATH_MAX=1024 \
           -D REPLACE_PLUGIN_SYSTEM    -D MACOS_PLUGIN_SYSTEM
 OBJS = test.o siphash.o utf8.o memory.o util.o base.o collections.o file.o system.o \
-       world.o lexer.o parser.o walker.o translator.o citrine.o
+       world.o lexer.o parser.o walker.o translator.o citrine.o portability.o
 
 .SUFFIXES:	.o .c
 
@@ -22,4 +22,4 @@ clean:
 	rm -rf ${OBJS} ctr
 	
 plugin:
-	cd plugins/${PACKAGE} ; make clean ; make install-${NAME}
+	cd plugins/${PACKAGE} ; make -f makefile.mac clean ; make -f makefile.mac install-${NAME}

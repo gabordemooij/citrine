@@ -45,13 +45,11 @@ void* ctr_internal_plugin_find(ctr_object* key) {
 	handle = LoadLibrary(realPathModName); 
 	free(realPathModName);
 	if ( !handle ) {
-		printf("%s\n",CTR_ERR_FOPEN);
 		exit(1);
 	}
 	/* the begin() function will add the missing object to the world */
 	init_plugin = (MYPROC) GetProcAddress(handle, "begin"); 
 	if ( !init_plugin ) {
-		printf("%s\n",CTR_ERR_FOPEN);
 		FreeLibrary(handle);
 		exit(1);
 	}
