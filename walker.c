@@ -37,7 +37,8 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 	int sticky = 0;
 	char wasReturn = 0;
 	int literal = 1;
-	ctr_object* keys[40];
+	int MAX_KEYS = 40;
+	ctr_object* keys[MAX_KEYS];
 	int key_index = 0;
 	ctr_object* result;
 	ctr_tlistitem* eitem = paramNode->nodes;
@@ -116,6 +117,10 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		r->info.sticky = 1;
 		if (literal) {
 			keys[key_index++] = ctr_gc_internal_pin(r);
+			if (key_index >= MAX_KEYS) {
+				printf( CTR_ERR_KEYINX );
+				exit(1);
+			}
 		}
 		if (argumentList) {
 			ctr_tnode* node;
@@ -126,7 +131,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 				ctr_in_message--;
 				aItem->object = o;
 				keys[key_index++] = ctr_gc_internal_pin(o);
-				if (key_index > 39) {
+				if (key_index >= MAX_KEYS) {
 					printf( CTR_ERR_KEYINX );
 					exit(1);
 				}
@@ -159,6 +164,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 			ctr_internal_object_delete_property( ctr_contexts[ctr_context_id], keys[--key_index], CTR_CATEGORY_PRIVATE_PROPERTY );
 		}
 		r = result;
+		literal = 1; //treat as literal because not yet protected against gc
 	}
 	ctr_in_message -= (ctr_is_chain - 1);
 	if (ctr_in_message != ctr_assume_message_level) {

@@ -2356,7 +2356,7 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
 	ctr_open_context();
 	if (parameterList && parameterList->node) {
 		parameter = parameterList->node;
-		while(1) {
+		while(argList != NULL) {
 			if (parameter && argList->object) {
 				a = argList->object;
 				ctr_assign_value_to_local(ctr_build_string(parameter->value, parameter->vlen), a);

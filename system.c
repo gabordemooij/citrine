@@ -114,7 +114,10 @@ void ctr_gc_sweep( int all ) {
 					ctr_heap_free( currentObject->value.avalue );
 				break;
 				case CTR_OBJECT_TYPE_OTEX:
-					if (currentObject->value.rvalue != NULL) ctr_heap_free( currentObject->value.rvalue );
+					if (currentObject->value.rvalue != NULL) {
+						currentObject->value.rvalue->destructor( currentObject->value.rvalue );
+						ctr_heap_free( currentObject->value.rvalue );
+					}
 				break;
 			}
 			ctr_heap_free( currentObject );
