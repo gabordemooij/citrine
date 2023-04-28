@@ -945,6 +945,7 @@ void ctr_initialize_world() {
  *
  * Sends a message to a receiver object.
  */
+ctr_object* ctr_internal_tmp_msg;
 ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vlen, ctr_argument* argumentList) {
 	ctr_object* methodObject;
 	ctr_object* searchObject;
@@ -953,7 +954,10 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	ctr_argument* mesgArgument;
 	ctr_object* result = CtrStdNil;
 	ctr_object* (*funct)(ctr_object* receiverObject, ctr_argument* argumentList);
-	ctr_object* msg = NULL;
+	if (!ctr_internal_tmp_msg) {
+		ctr_internal_tmp_msg = ctr_build_empty_string();
+		ctr_internal_tmp_msg->info.sticky = 1;
+	}
 	int argCount;
 	int j;
 	if (CtrStdFlow != NULL) return CtrStdNil; /* Error mode, ignore subsequent messages until resolved. */
@@ -961,10 +965,14 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	searchObject = receiverObject;
 	//Is the message the same as the current message? Then, it is meant for the parent
 	//unless the recursive flag has been set.
-	msg = ctr_build_string(message, vlen);
-	msg->info.sticky = 1; /* prevent message from being swept, no need to free(), GC will do */
+	if (ctr_internal_tmp_msg->value.svalue->vlen) {
+		ctr_heap_free(ctr_internal_tmp_msg->value.svalue->value);
+	}
+	ctr_internal_tmp_msg->value.svalue->value = ctr_heap_allocate(vlen);
+	memcpy(ctr_internal_tmp_msg->value.svalue->value, message, vlen);
+	ctr_internal_tmp_msg->value.svalue->vlen = vlen;
 	while(!methodObject) {
-		methodObject = ctr_internal_object_find_property(searchObject, msg, 1);
+		methodObject = ctr_internal_object_find_property(searchObject, ctr_internal_tmp_msg, 1);
 		if (methodObject) {
 			for(j = ctr_message_stack_index; j >= 0; j--) {
 				if (ctr_message_stack[j]==methodObject) {
@@ -1002,7 +1010,6 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 			returnValue = ctr_send_message(receiverObject, CTR_DICT_RESPOND_TO_AND_AND_AND, strlen(CTR_DICT_RESPOND_TO_AND_AND_AND),  mesgArgument);
 		}
 		ctr_heap_free( mesgArgument );
-		msg->info.sticky = 0;
 		if (receiverObject->info.chainMode == 1) return receiverObject;
 		return returnValue;
 	}
@@ -1032,7 +1039,6 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTBLOCK && methodObject->info.selfbind == 0) {
 		result = ctr_block_run(methodObject, argumentList, NULL);
 	}
-	if (msg) msg->info.sticky = 0;
 	if (receiverObject->info.chainMode == 1) return receiverObject;
 	return result;
 }
