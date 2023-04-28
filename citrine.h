@@ -737,6 +737,7 @@ extern ctr_object* ctr_gc_collect(ctr_object* myself, ctr_argument* argumentList
 extern ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList);
 extern void ctr_gc_sweep( int all );
+extern void ctr_gc_cycle();
 
 /**
  * Slurp Object Interface
