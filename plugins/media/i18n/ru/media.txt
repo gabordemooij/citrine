@@ -1,0 +1,65 @@
+#define CTR_DICT_MEDIA_MEDIA_OBJECT               "Медиа"            /* Имя основного объекта медиа-плагина */
+#define CTR_DICT_MEDIA_MEDIA_SCREEN               "экран:"           /* Открыть экран */
+#define CTR_DICT_MEDIA_MEDIA_CLIPBOARD            "буфер обмена"     /* Возвращает текст из буфера обмена */
+#define CTR_DICT_MEDIA_MEDIA_CLIPBOARD_SET        "буфер обмена:"    /* Помещает текст в буфер обмена */
+#define CTR_DICT_MEDIA_MEDIA_ON_START             "старт"            /* Запустить событие для экрана */
+#define CTR_DICT_MEDIA_MEDIA_ON_STEP              "шаг"              /* Шаговое событие для экрана */
+#define CTR_DICT_MEDIA_MEDIA_KEY                  "тест:"            /* Событие клавиатуры (или событие джойстика, если оно подключено) */
+#define CTR_DICT_MEDIA_MEDIA_ON_TIMER_SET         "после:сделать:"        /* Таймер события для экрана */
+#define CTR_DICT_MEDIA_MEDIA_SELECTED             "выбор"                 /* Возвращает текущий выделенный текст */
+#define CTR_DICT_MEDIA_MEDIA_VIDEO                "видео:"                /* Воспроизведение видео в фоновом режиме */
+#define CTR_DICT_MEDIA_MEDIA_NET_FETCH_FROM       "получить:от:"          /* Возвращает объект с удаленного компьютера */
+#define CTR_DICT_MEDIA_MEDIA_NET_SEND_TO          "отправить:к:"          /* Отправить объект на удаленный компьютер */
+#define CTR_DICT_MEDIA_MEDIA_BROWSER_OPEN         "просмотр:"             /* Открывает экран браузера и переходит на веб-сайт */
+#define CTR_DICT_MEDIA_MEDIA_SPEAK                "читать вслух:"         /* Читает текст вслух */
+#define CTR_DICT_MEDIA_MEDIA_DIGRAPH_LIGATURE     "диграф:лигатура:"      /* Регистрирует символы, которые вместе образуют один символ */
+#define CTR_DICT_MEDIA_COLOR_OBJECT               "Цвет"                  /* Представляет цвет */
+#define CTR_DICT_MEDIA_RED_GREEN_BLUE_SET         "красный:зеленый:синий:" /* Устанавливает красный, зеленый и синий значения цвета */
+#define CTR_DICT_MEDIA_ALPHA_SET                  "прозрачность:"         /* Установить прозрачность */
+#define CTR_DICT_MEDIA_RED                        "красный"               /* Возвращает красное значение цвета */
+#define CTR_DICT_MEDIA_GREEN                      "зеленый"               /* Возвращает значение зеленого цвета цвета */
+#define CTR_DICT_MEDIA_BLUE                       "синий"                 /* Возвращает значение синего цвета цвета */
+#define CTR_DICT_MEDIA_ALPHA                      "прозрачность"          /* Возвращает значение прозрачности цвета */
+#define CTR_DICT_MEDIA_IMAGE_OBJECT               "Изображение"           /* Объект изображения */
+#define CTR_DICT_MEDIA_IMAGE_SET                  "изображение:"          /* Устанавливить файл изображения для отображения */
+#define CTR_DICT_MEDIA_IMAGE_CONTROLLABLE         "управение:"            /* Заставить изображение реагировать на джойстик и клавиатуру */
+#define CTR_DICT_MEDIA_IMAGE_XY_SET               "x:y:"                  /* Поместить изображение в позицию x, y */
+#define CTR_DICT_MEDIA_IMAGE_Z_SET                "z:"                    /* Поместить изображение в положение z (в 3D) или в порядке (2D) */
+#define CTR_DICT_MEDIA_IMAGE_SOLID_SET            "блокада:"              /* Сделайть изображение сплошным, чтобы игрок не мог пройти сквозь него. */
+#define CTR_DICT_MEDIA_IMAGE_ACTIVE_SET           "активация:"            /* Включить события на изображении */
+#define CTR_DICT_MEDIA_IMAGE_GRAVITY_SET          "гравитация:"           /* Установить гравитацию для изображения */
+#define CTR_DICT_MEDIA_IMAGE_SPEED_SET            "скорость:"             /* Установите скорость движения для изображения */
+#define CTR_DICT_MEDIA_IMAGE_FRICTION_SET         "сопротивление:"        /* Установить трение для изображения */
+#define CTR_DICT_MEDIA_IMAGE_COLLISION_SET        "боты:"                 /* Событие столкновения для изображения */
+#define CTR_DICT_MEDIA_IMAGE_ON_CLICK_SET         "нажатие:"              /* Нажмите событие на изображении */
+#define CTR_DICT_MEDIA_IMAGE_ON_HOVER_SET         "наведение:"            /* Событие наведения на изображении*/
+#define CTR_DICT_MEDIA_IMAGE_ANIMATIONS_SET       "анимация:"             /* Режим анимации для изображения: 1=как пинг-понг (1 изображение), 2=как космический корабль (2 изображения), 4=как платформер (4 изображения) */
+#define CTR_DICT_MEDIA_IMAGE_MOVE_TO_SET          "перейти к х:у:"        /* Переместить изображение на x,y */
+#define CTR_DICT_MEDIA_IMAGE_TEXT_SET             "текст:"                /* Написать текст на изображении */
+#define CTR_DICT_MEDIA_IMAGE_TEXT                 "текст"                 /* Получить текст с изображения */
+#define CTR_DICT_MEDIA_IMAGE_REMOVE_SELECTION     "удалить выделение"     /* Удалить выделенный текст на изображении */
+#define CTR_DICT_MEDIA_IMAGE_INSERT_TEXT          "вставить:"             /* Вставить текст в изображение */
+#define CTR_DICT_MEDIA_IMAGE_EDITABLE_SET         "доступен для записи:"  /* Сделать текст на изображении редактируемым */
+#define CTR_DICT_MEDIA_IMAGE_FONT_TYPE_SIZE_SET   "размер:шрифт:"         /* Установить шрифт и размер текста на изображении */
+#define CTR_DICT_MEDIA_IMAGE_TEXT_COLOR           "цвет:"                 /* Установить цвет текста на изображении */
+#define CTR_DICT_MEDIA_IMAGE_BACKGROUND_COLOR     "цвет фона:"            /* Установить цвет фона текста на изображении */
+#define CTR_DICT_MEDIA_IMAGE_TEXT_ALIGN           "текст x:y:"            /* Выровнять текст на изображении */
+#define CTR_DICT_MEDIA_IMAGE_DRAW                 "нарисовать:"           /* Нарисовать линии на изображении */
+#define CTR_DICT_MEDIA_SOUND_OBJECT               "Звук"            /* звуковой объект */
+#define CTR_DICT_MEDIA_SOUND_SOUND_SET            "звук:"           /* Загрузить звуковой или музыкальный файл */
+#define CTR_DICT_MEDIA_SOUND_SOUND_PLAY           "воспроизвести"   /* Воспроизвести звук или музыку */
+#define CTR_DICT_MEDIA_SOUND_SOUND_STOP           "остановить"      /* Остановить звук или музыку */
+#define CTR_DICT_MEDIA_SOUND_SOUND_CHANNEL_SET    "канал:"          /* Выбрать аудиоканал */
+#define CTR_DICT_MEDIA_IMAGE_ACCEL_SET            "versnel:"          /* Set acceleration of image */
+#define CTR_DICT_MEDIA_IMAGE_JUMPHEIGHT_SET       "springhoogte:"     /* Set jump height */
+#define CTR_DICT_MEDIA_IMAGE_BOUNCE               "stuiter:"          /* Bounce the image, reverse direction */
+#define CTR_DICT_MEDIA_IMAGE_DESTINATION_SET      "stoppunt:"         /* This event happens when an image reaches the destination x,y */
+#define CTR_DICT_MEDIA_IMAGE_X                    "x?"                /* Return current x-position */
+#define CTR_DICT_MEDIA_IMAGE_Y                    "y?"                /* Return current y-position */
+#define CTR_DICT_MEDIA_IMAGE_Z                    "z?"                /* Return current z-position */
+#define CTR_DICT_MEDIA_IMAGE_SOLID                "blokkade"          /* Return whether the image is solid or not */
+#define CTR_DICT_MEDIA_IMAGE_ACTIVE               "actief"            /* Return whether the image is actiev or not */
+#define CTR_DICT_MEDIA_IMAGE_GRAVITY              "zwaartekracht"     /* Return the gravity of the image */
+#define CTR_DICT_MEDIA_IMAGE_SPEED                "snelheid"          /* Return the speed of the image */
+#define CTR_DICT_MEDIA_IMAGE_FRICTION             "weerstand"         /* Return the friction of the image */
+#define CTR_DICT_MEDIA_IMAGE_ANIMATIONS           "animaties"         /* Return the number of frames in the image */
