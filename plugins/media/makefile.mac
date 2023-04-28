@@ -1,0 +1,16 @@
+LDFLAGS= -shared -undefined dynamic_lookup
+
+all:libctrmedia.dylib
+
+install-libctrmedia.dylib: libctrmedia.dylib
+	install libctrmedia.dylib ../../mods/media/
+
+libctrmedia.dylib: media.o
+	$(CC) ${LDFLAGS} -lSDL2 -lSDL2_image -o libctrmedia.dylib media.o
+	
+
+media.o:
+	$(CC) -I . -c media.c -I ../../i18n/${ISO} -Wall -Werror -Wunused-variable -fPIC -o media.o 
+
+clean:
+	rm media.o
