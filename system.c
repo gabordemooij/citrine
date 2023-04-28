@@ -156,6 +156,12 @@ void  ctr_gc_internal_collect() {
 	ctr_context_id = oldcid;
 }
 
+void ctr_gc_cycle() {
+	if ( ( ( ctr_gc_mode & 1 ) && ctr_gc_alloc > ( ctr_gc_memlimit * 0.8 ) ) || ctr_gc_mode & 4 ) {
+		ctr_gc_internal_collect();
+	}
+}
+
 ctr_object* ctr_gc_internal_pin( ctr_object* object ) {
 	ctr_object* key = ctr_build_empty_string();
 	ctr_internal_object_add_property( ctr_contexts[ctr_context_id], key, object, CTR_CATEGORY_PRIVATE_PROPERTY );
