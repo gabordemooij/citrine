@@ -42,15 +42,26 @@ void* ctr_internal_plugin_find(ctr_object* key) {
 	snprintf(pathNameMod, 1024,"mods\\%s\\libctr%s.dll", modName, modName);
 	ctr_heap_free( modName );
 	realPathModName = realpath(pathNameMod, NULL);
-	handle = LoadLibrary(realPathModName); 
-	free(realPathModName);
-	if ( !handle ) {
+	FILE* exists = fopen(realPathModName,"r");
+	if (!exists) {
+		printf("File not found: %s \n", realPathModName);
+		free(realPathModName);
 		exit(1);
 	}
+	fclose(exists);
+	handle = LoadLibrary(realPathModName);
+	if ( !handle ) {
+		DWORD dw = GetLastError();
+		printf("Not found: %s %ld \n", realPathModName, dw);
+		free(realPathModName);
+		exit(1);
+	}
+	free(realPathModName);
 	/* the begin() function will add the missing object to the world */
 	init_plugin = (MYPROC) GetProcAddress(handle, "begin"); 
 	if ( !init_plugin ) {
 		FreeLibrary(handle);
+		printf("Begin of plugin not found\n");
 		exit(1);
 	}
 	(void) init_plugin();
