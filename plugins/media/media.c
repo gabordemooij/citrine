@@ -661,7 +661,7 @@ void ctr_internal_media_detect_collisions(MediaIMG* m, SDL_Rect r) {
 				if (m->gravity && m->x+w >= m2->x && m->x <= m2->x+w2 && m->y+h <= m2->y+(m->h/2)) {
 						m->y = m2->y - h + 1;
 						m->gspeed = 0;
-						CtrMediaContactSurface = m2;
+						if (m == player) CtrMediaContactSurface = m2;
 				} else {
 						ctr_internal_media_img_resolvecollision(m, m2);
 						m->mov = 0;
@@ -729,6 +729,8 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 		if (m->gravity >= 1) {
 			m->gspeed += m->gravity * 0.1;
 			m->y += m->gspeed;
+			//@todo improve, reset contact surface to avoid player moving "on..." :-)
+			if (m->gspeed > 0.2) CtrMediaContactSurface = NULL;
 		} else if (m->gravity >= 0.1){
 			m->y += m->gravity;
 		}
