@@ -439,19 +439,6 @@ void ctr_internal_media_img_resolvecollision(MediaIMG* m, MediaIMG* m2) {
 	int cy2 = m2->y + r2.h;
 	r.x = m->ox;
 	r.y = m->oy;
-	if (SDL_HasIntersection(&r,&r2)) {
-		//If there is a collision, then something is crushing
-		//Lock the position until the collision is over.
-		int attempts = 0;
-		while(SDL_HasIntersection(&r,&r2) && attempts < 100) {
-			m->x += m2->mov * cos(m2->dir * M_PI / 180);
-			m->y -= m2->mov * sin(m2->dir * M_PI / 180);
-			r.x = m->x;
-			r.y = m->y;
-			attempts++;
-		}
-		return;
-	}
 	r.x = m->x;
 	if (cx1 < cx2) {
 		if (SDL_HasIntersection(&r,&r2)) {
@@ -476,6 +463,18 @@ void ctr_internal_media_img_resolvecollision(MediaIMG* m, MediaIMG* m2) {
 	r.y = m->y;
 	m->x = r.x;
 	m->y = r.y;
+	if (SDL_HasIntersection(&r,&r2)) {
+		//Avoid crushing
+		int attempts = 0;
+		while(SDL_HasIntersection(&r,&r2) && attempts < 100) {
+			m->x += m2->mov * cos(m2->dir * M_PI / 180);
+			m->y -= m2->mov * sin(m2->dir * M_PI / 180);
+			r.x = m->x;
+			r.y = m->y;
+			attempts++;
+		}
+		return;
+	}
 }
 
 int ctr_internal_media_mouse_down(SDL_Event event) {
@@ -730,7 +729,7 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 			m->gspeed += m->gravity * 0.1;
 			m->y += m->gspeed;
 			//@todo improve, reset contact surface to avoid player moving "on..." :-)
-			if (m->gspeed > 0.2) CtrMediaContactSurface = NULL;
+			if (m->gspeed > 0.1) CtrMediaContactSurface = NULL;
 		} else if (m->gravity >= 0.1){
 			m->y += m->gravity;
 		}
