@@ -63,3 +63,10 @@
 #define CTR_DICT_MEDIA_IMAGE_SPEED                "snelheid"          
 #define CTR_DICT_MEDIA_IMAGE_FRICTION             "weerstand"         
 #define CTR_DICT_MEDIA_IMAGE_ANIMATIONS           "animaties"         
+#define CTR_DICT_MEDIA_IMAGE_ACCEL_SET            "ускорение:"
+#define CTR_DICT_MEDIA_IMAGE_JUMPHEIGHT_SET       "высота прыжка:"
+#define CTR_DICT_MEDIA_IMAGE_BOUNCE_SET           "отскок"
+#define CTR_DICT_MEDIA_IMAGE_DESTINATION_SET      "остановить:"
+#define CTR_DICT_MEDIA_IMAGE_BOUNCE_SET I         "отскок"
+  
+ 
