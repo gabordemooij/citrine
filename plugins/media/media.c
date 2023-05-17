@@ -1,5 +1,7 @@
 #include "../../citrine.h"
 #include "media.h"
+#include <libavcodec/avcodec.h>
+#include <libavformat/avformat.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
@@ -22,8 +24,19 @@ int CtrMediaLastFrameOffsetX = 0;
 int CtrMediaJumpHeightFactor = 100;
 int CtrMediaControlMode = 0;
 int CtrMediaRotation = 0;
-
+int CtrMediaStdDelayTime = 16;
+char CtrMediaBreakLoopFlag = 0;
+time_t CtrMediaFrameTimer = 0;
 uint16_t CtrMediaSteps;
+AVFormatContext* CtrMediaVideoFormatCtx;
+AVCodec* CtrMediaBGVideoCodec;
+AVCodecContext* CtrMediaBGVideoCdcCtx;
+int CtrMediaVideoId = -1;
+double CtrMediaVideoFPSRendering;
+AVCodecParameters* CtrMediaVideoParams;
+AVFrame* CtrMediaVideoFrame;
+AVPacket* CtrMediaVideoPacket;
+SDL_Texture* CtrMediaBGVideoTexture;
 
 struct CtrMediaAutoReplaceRule {
 	char* word;		char* replacement;
@@ -76,6 +89,50 @@ MediaIMG* ctr_internal_media_getfocusimage()						{ return (MediaIMG*) focusObje
 MediaIMG* ctr_internal_media_getplayer()							{ return (controllableObject == NULL) ? NULL : (MediaIMG*) controllableObject->value.rvalue->ptr; }
 MediaIMG* ctr_internal_get_image_from_object(ctr_object* object)	{ return (MediaIMG*) object->value.rvalue->ptr; }
 char ctr_internal_media_has_selection()								{ return (CtrMediaSelectBegin != CtrMediaSelectEnd); }
+
+void ctr_internal_media_reset() {
+	controllableObject = NULL;
+	focusObject = NULL;
+	IMGCount = 0;
+	CtrMediaJumpHeight = 0;
+	CtrMediaJump = 0;
+	CtrMediaMaxLines = 30;
+	CtrMediaCursorLine = 0;
+	CtrMediaCursorOffsetY = 0;
+	CtrMediaPrevClickX = 0;
+	CtrMediaPrevClickY = 0;
+	CtrMediaPrevClickTime = 0;
+	CtrMediaDoubleClick = 0;
+	CtrMediaAutoReplaceRuleLen = 0;
+	CtrMediaLastFrameOffsetX = 0;
+	CtrMediaJumpHeightFactor = 100;
+	CtrMediaControlMode = 0;
+	CtrMediaRotation = 0;
+	CtrMediaStdDelayTime = 16;
+	CtrMediaBreakLoopFlag = 0;
+	CtrMediaInputIndex = 0;
+	CtrMediaSelectStart = 0;
+	CtrMediaSelectBegin = 0;
+	CtrMediaSelectEnd = 0;
+	CtrMediaSteps = 0;
+	if (CtrMediaVideoId != -1) {
+		av_packet_free(&CtrMediaVideoPacket);
+		av_frame_free(&CtrMediaVideoFrame);
+		avcodec_free_context(&CtrMediaBGVideoCdcCtx);
+		avformat_close_input(&CtrMediaVideoFormatCtx);
+		avformat_free_context(CtrMediaVideoFormatCtx);
+		CtrMediaVideoFormatCtx = NULL;
+		CtrMediaVideoId = -1;
+		CtrMediaVideoFPSRendering = 0;
+		CtrMediaFrameTimer = 0;
+		CtrMediaVideoParams = NULL;
+		CtrMediaVideoFrame = NULL;
+		CtrMediaVideoPacket = NULL;
+		CtrMediaBGVideoTexture = NULL;
+		CtrMediaBGVideoCodec = NULL;
+		CtrMediaBGVideoCdcCtx = NULL;
+	}
+}
 
 ctr_object* ctr_internal_media_color_getsetrgb(ctr_object* color, char* component, ctr_object* value) {
 	ctr_object* result_color;
@@ -760,6 +817,81 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 	}
 }
 
+void ctr_internal_media_loadvideobg(char* path, SDL_Rect* dimensions) {
+	CtrMediaVideoId = -1;
+	CtrMediaVideoFPSRendering = 0.0;
+	CtrMediaVideoFormatCtx = avformat_alloc_context();
+	if (avformat_open_input(&CtrMediaVideoFormatCtx, path, NULL, NULL) < 0) ctr_internal_media_fatalerror("Unable to open video", "FFMPEG");
+	if (avformat_find_stream_info(CtrMediaVideoFormatCtx, NULL) < 0) ctr_internal_media_fatalerror("Unable to find stream in video", "FFMPEG");
+	char foundVideo = 0;
+	for (int i = 0; i < CtrMediaVideoFormatCtx->nb_streams; i++) {
+		AVCodecParameters* localparam = CtrMediaVideoFormatCtx->streams[i]->codecpar;
+		AVCodec* localcodec = avcodec_find_decoder(localparam->codec_id);
+		if (localparam->codec_type == AVMEDIA_TYPE_VIDEO && !foundVideo) {
+			CtrMediaBGVideoCodec = localcodec;
+			CtrMediaVideoParams = localparam;
+			CtrMediaVideoId = i;
+			AVRational rational = CtrMediaVideoFormatCtx->streams[i]->avg_frame_rate;
+			CtrMediaVideoFPSRendering = 1.0 / ((double)rational.num / (double)(rational.den));
+			foundVideo = 1;
+		}
+	}
+    CtrMediaBGVideoCdcCtx = avcodec_alloc_context3(CtrMediaBGVideoCodec);
+    if (avcodec_parameters_to_context(CtrMediaBGVideoCdcCtx, CtrMediaVideoParams) < 0) ctr_internal_media_fatalerror("CtrMediaBGVideoCdcCtx","FFMPEG");
+    if (avcodec_open2(CtrMediaBGVideoCdcCtx, CtrMediaBGVideoCodec, NULL) < 0) ctr_internal_media_fatalerror("CtrMediaBGVideoCdcCtx2", "FFMPEG");
+    CtrMediaVideoFrame = av_frame_alloc();
+    CtrMediaVideoPacket = av_packet_alloc();
+    CtrMediaBGVideoTexture = SDL_CreateTexture(CtrMediaRenderer, SDL_PIXELFORMAT_IYUV,
+        SDL_TEXTUREACCESS_STREAMING | SDL_TEXTUREACCESS_TARGET,
+        CtrMediaVideoParams->width, CtrMediaVideoParams->height);
+    if (!CtrMediaBGVideoTexture) ctr_internal_media_fatalerror("texture", "FFMPEG");
+    SDL_SetWindowSize(CtrMediaWindow, CtrMediaVideoParams->width, CtrMediaVideoParams->height);
+	SDL_Delay(100);
+	dimensions->x = 0;
+	dimensions->y = 0;
+	dimensions->h = CtrMediaVideoParams->height;
+	dimensions->w = CtrMediaVideoParams->width;
+}
+
+
+void ctr_internal_media_rendervideoframe(SDL_Rect* rect) {
+	if (av_read_frame(CtrMediaVideoFormatCtx, CtrMediaVideoPacket) < 0) {
+		av_seek_frame(CtrMediaVideoFormatCtx, CtrMediaVideoId, 0, 0);
+		if (av_read_frame(CtrMediaVideoFormatCtx, CtrMediaVideoPacket) < 0) return;
+	}
+	if (CtrMediaVideoPacket->stream_index != CtrMediaVideoId) return;
+	if (avcodec_send_packet(CtrMediaBGVideoCdcCtx, CtrMediaVideoPacket) < 0) ctr_internal_media_fatalerror("sp", "FFMPEG");
+	if (avcodec_receive_frame(CtrMediaBGVideoCdcCtx, CtrMediaVideoFrame) < 0) return;
+	SDL_UpdateYUVTexture(CtrMediaBGVideoTexture, rect,
+		CtrMediaVideoFrame->data[0], CtrMediaVideoFrame->linesize[0],
+		CtrMediaVideoFrame->data[1], CtrMediaVideoFrame->linesize[1],
+		CtrMediaVideoFrame->data[2], CtrMediaVideoFrame->linesize[2]);
+	SDL_RenderCopy(CtrMediaRenderer, CtrMediaBGVideoTexture, NULL, rect);
+	time_t end = time(NULL);
+	double diffms = difftime(end, CtrMediaFrameTimer) / 1000.0;
+	if (diffms < CtrMediaVideoFPSRendering - (CtrMediaStdDelayTime/1000)) {
+		uint32_t diff = (uint32_t)((CtrMediaVideoFPSRendering - diffms) * 1000);
+		SDL_Delay(diff - CtrMediaStdDelayTime);
+	}
+	av_packet_unref(CtrMediaVideoPacket);
+	CtrMediaFrameTimer = time(NULL);
+}
+
+char ctr_internal_media_determine_filetype(char* path) {
+	char magic[20];
+	FILE* fh = fopen(path, "rb");
+	fread(magic, 20, 1, fh);
+	if (strcmp(magic+4, "ftypmp42")==0) return 10;
+	if (strcmp(magic, "\xFF\xD8")==0) return 20;
+	return 0;
+	fclose(fh);
+}
+
+ctr_object* ctr_media_end(ctr_object* myself, ctr_argument* argumentList) {
+	CtrMediaBreakLoopFlag = 1;
+	return myself;
+}
+
 ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* player;
 	MediaIMG* focusImage;
@@ -775,15 +907,23 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	SDL_Rect dimensions;
 	SDL_Texture* texture;
 	char* imageFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
-	texture = IMG_LoadTexture(CtrMediaRenderer, imageFileStr);
-	SDL_QueryTexture(texture, NULL, NULL, &dimensions.w, &dimensions.h);
-	dimensions.x = x;
-	dimensions.y = y;
+	char ftype = ctr_internal_media_determine_filetype(imageFileStr);
+	char background_is_video;
+	if (ftype == 10) {
+		ctr_internal_media_loadvideobg(imageFileStr, &dimensions);
+		background_is_video = 1;
+	} else {
+		texture = IMG_LoadTexture(CtrMediaRenderer, imageFileStr);
+		SDL_QueryTexture(texture, NULL, NULL, &dimensions.w, &dimensions.h);
+		dimensions.x = x;
+		dimensions.y = y;
+		SDL_SetWindowSize(CtrMediaWindow, dimensions.w, dimensions.h);
+		SDL_Delay(100);
+		SDL_RenderCopy(CtrMediaRenderer, texture, NULL, &dimensions);
+		background_is_video = 0;
+	}
 	windowWidth = dimensions.w;
 	windowHeight = dimensions.h;
-	SDL_SetWindowSize(CtrMediaWindow, dimensions.w, dimensions.h);
-	SDL_Delay(100);
-	SDL_RenderCopy(CtrMediaRenderer, texture, NULL, &dimensions);
 	ctr_send_message(myself, CTR_DICT_MEDIA_MEDIA_ON_START, strlen(CTR_DICT_MEDIA_MEDIA_ON_START), NULL );
 	SDL_Event event;
 	dir = -1;
@@ -791,11 +931,19 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	while (1) {
 		ctr_gc_cycle(); 
 		SDL_RenderClear(CtrMediaRenderer);
-		SDL_RenderCopy(CtrMediaRenderer, texture, NULL, &dimensions);
+		if (background_is_video) {
+			ctr_internal_media_rendervideoframe(&dimensions);
+		} else {
+			SDL_RenderCopy(CtrMediaRenderer, texture, NULL, &dimensions);
+		}
 		myself->info.sticky = 1;
 		ctr_send_message(myself, CTR_DICT_MEDIA_MEDIA_ON_STEP, strlen(CTR_DICT_MEDIA_MEDIA_ON_STEP), NULL );
 		myself->info.sticky = 0;
 		while (SDL_PollEvent(&event)) {
+			if (CtrMediaBreakLoopFlag) {
+				ctr_internal_media_reset();
+				return myself;
+			}
 			player = NULL;
 			focusImage = NULL;
 			if (controllableObject) {
@@ -810,6 +958,8 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 					ctr_argument* args = ctr_heap_allocate(sizeof(ctr_argument));
 					ctr_send_message(mediaObject,CTR_DICT_END, strlen(CTR_DICT_END), args);
 					ctr_heap_free(args);
+					ctr_internal_media_reset();
+					CtrStdFlow = CtrStdExit;
 					return myself;
 					}
 					break;
@@ -1031,7 +1181,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 			ctr_internal_img_render_cursor(focusObject);
 		}
 		SDL_RenderPresent(CtrMediaRenderer);
-		SDL_Delay(16);
+		SDL_Delay(CtrMediaStdDelayTime);
 		CtrMediaSteps++;
 	}
 	return myself;
@@ -1507,7 +1657,7 @@ ctr_object* ctr_media_autoreplace(ctr_object* myself, ctr_argument* argumentList
 void ctr_internal_media_init() {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) ctr_internal_media_fatalerror("SDL failed to init", SDL_GetError());
 	IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
-	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 100, 100, SDL_WINDOW_SHOWN);
+	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 100, 100, SDL_WINDOW_OPENGL);
 	if (CtrMediaWindow == NULL) ctr_internal_media_fatalerror("Unable to create window", SDL_GetError());
 	CtrMediaRenderer = SDL_CreateRenderer(CtrMediaWindow, -1, SDL_RENDERER_ACCELERATED);
 	if (!CtrMediaRenderer) ctr_internal_media_fatalerror("Unable to create renderer", SDL_GetError());
@@ -1517,6 +1667,7 @@ void ctr_internal_media_init() {
 }
 
 void begin(){
+	ctr_internal_media_reset();
 	ctr_internal_media_init();
 	colorObject = ctr_media_new(CtrStdObject, NULL);
 	colorObject->link = CtrStdObject;
@@ -1537,6 +1688,7 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_ON_STEP ), &ctr_media_override );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SELECTED ), &ctr_media_select );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_DIGRAPH_LIGATURE ), &ctr_media_autoreplace );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_media_end );
 	imageObject = ctr_img_new(CtrStdObject, NULL);
 	imageObject->link = CtrStdObject;
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_img_new );
