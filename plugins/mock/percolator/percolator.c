@@ -87,13 +87,9 @@ ctr_object* ctr_percolator_brew(ctr_object* myself, ctr_argument* argumentList) 
 		CTR_CATEGORY_PRIVATE_PROPERTY
 	);
 	
-	ctr_internal_object_set_property(
-		myself, 
-		ctr_build_string_from_cstring( "water" ),
-		water,
-		CTR_CATEGORY_PRIVATE_PROPERTY
-	);
-	
+	//or... perhaps more convenient...
+	ctr_internal_object_property(myself, "water", water);
+
 	return ctr_build_string_from_cstring( "Coffee!" );
 }
 

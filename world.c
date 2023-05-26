@@ -267,6 +267,81 @@ void ctr_internal_object_set_property(ctr_object* owner, ctr_object* key, ctr_ob
 	ctr_internal_object_add_property(owner, key, value, is_method);
 }
 
+
+/**
+ * ?internal
+ *
+ * InternalObjectProperty
+ *
+ * Convenience function to get or set a property of an object.
+ * If value == NULL, this function returns the value of the property of the object.
+ * Otherwise the value is set. If the property does not exist, CtrStdNil is returned.
+ * If the object is CtrStdNil, CtrStdNil is returned.
+ * This method never returns NULL and can be chained.
+ */
+ctr_object* ctr_internal_object_property(ctr_object* owner, char* keystr, ctr_object* value) {
+	ctr_object* result_object;
+	result_object = owner;
+	if (owner == CtrStdNil) {
+		return CtrStdNil;
+	}
+	if (value == NULL) {
+		result_object = ctr_internal_object_find_property(
+			owner,
+			ctr_build_string_from_cstring( keystr ),
+			CTR_CATEGORY_PRIVATE_PROPERTY
+		);
+		if (result_object == NULL) result_object = CtrStdNil;
+	} else {
+		ctr_internal_object_set_property(
+			owner,
+			ctr_build_string_from_cstring( keystr ),
+			value,
+			CTR_CATEGORY_PRIVATE_PROPERTY
+		);
+	}
+	return result_object;
+}
+
+/**
+ * ?internal
+ *
+ * toNum()
+ * Convenience function.
+ * Casts an object to a number object and extracts the numeric
+ * value from the object as a double.
+ */
+double ctr_tonum(ctr_object* o) {
+	return ctr_internal_cast2number(o)->value.nvalue;
+}
+
+/**
+ * ?internal
+ *
+ * toBool()
+ * Convenience function.
+ * Casts an object to a boolean object and extracts the boolean
+ * value from the object as a char (i.e. 1 or 0).
+ */
+char ctr_tobool(ctr_object* o) {
+	return (ctr_internal_cast2bool(o)->value.bvalue) ? 1 : 0;
+}
+
+/**
+ * ?internal
+ *
+ * toStr()
+ * Convenience function.
+ * Casts an object to a string object and extracts the string
+ * value from the object as a pointer to a char array.
+ * Note that the pointer points to the memory of the object and
+ * should not be freed.
+ */
+char* ctr_tostr(ctr_object* o) {
+	return ctr_internal_cast2string(o)->value.svalue->value;
+}
+
+
 /**
  * ?internal
  *
