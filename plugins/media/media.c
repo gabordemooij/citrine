@@ -136,68 +136,6 @@ void ctr_internal_media_reset() {
 	}
 }
 
-ctr_object* ctr_internal_media_color_getsetrgb(ctr_object* color, char* component, ctr_object* value) {
-	ctr_object* result_color;
-	result_color = color;
-	if (value == NULL) {
-		result_color = ctr_internal_object_find_property(
-			color,
-			ctr_build_string_from_cstring( component ),
-			CTR_CATEGORY_PRIVATE_PROPERTY
-		);
-	} else {
-		ctr_internal_object_set_property(
-			color, 
-			ctr_build_string_from_cstring( component ),
-			ctr_internal_cast2number(value),
-			CTR_CATEGORY_PRIVATE_PROPERTY
-		);
-	}
-	return result_color;
-}
-
-ctr_object* ctr_internal_media_getsetnumprop(ctr_object* object, char* property, ctr_object* value) {
-	ctr_object* result_object;
-	result_object = object;
-	if (value == NULL) {
-		result_object = ctr_internal_object_find_property(
-			object,
-			ctr_build_string_from_cstring( property ),
-			CTR_CATEGORY_PRIVATE_PROPERTY
-		);
-	} else {
-		ctr_internal_object_set_property(
-			object, 
-			ctr_build_string_from_cstring( property ),
-			ctr_internal_cast2number(value),
-			CTR_CATEGORY_PRIVATE_PROPERTY
-		);
-	}
-	return result_object;
-}
-
-
-ctr_object* ctr_internal_media_getsetobjprop(ctr_object* object, char* property, ctr_object* value) {
-	ctr_object* result_object;
-	result_object = object;
-	if (value == NULL) {
-		result_object = ctr_internal_object_find_property(
-			object,
-			ctr_build_string_from_cstring( property ),
-			CTR_CATEGORY_PRIVATE_PROPERTY
-		);
-	} else {
-		ctr_internal_object_set_property(
-			object, 
-			ctr_build_string_from_cstring( property ),
-			value,
-			CTR_CATEGORY_PRIVATE_PROPERTY
-		);
-	}
-	return result_object;
-}
-
-
 SDL_Rect ctr_internal_media_image_maprect(MediaIMG* m) {
 	SDL_Rect r;
 	r.x = (int)(m->x);
@@ -1235,82 +1173,82 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_point_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	instance->link = myself;
-	ctr_internal_media_getsetnumprop(instance, "x", ctr_build_number_from_float(0));
-	ctr_internal_media_getsetnumprop(instance, "y", ctr_build_number_from_float(0));
+	ctr_internal_object_property(instance, "x", ctr_build_number_from_float(0));
+	ctr_internal_object_property(instance, "y", ctr_build_number_from_float(0));
 	return instance;
 }
 
 ctr_object* ctr_point_x(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_media_getsetnumprop(myself, "x", NULL);
+	return ctr_internal_object_property(myself, "x", NULL);
 }
 
 ctr_object* ctr_point_y(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_media_getsetnumprop(myself, "y", NULL);
+	return ctr_internal_object_property(myself, "y", NULL);
 }
 
 ctr_object* ctr_point_xyset(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_internal_media_getsetnumprop(myself, "x", argumentList->object);
-	ctr_internal_media_getsetnumprop(myself, "y", argumentList->next->object);
+	ctr_internal_object_property(myself, "x", argumentList->object);
+	ctr_internal_object_property(myself, "y", argumentList->next->object);
 	return myself;
 }
 
 ctr_object* ctr_line_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	instance->link = myself;
-	ctr_internal_media_getsetobjprop(instance, CTR_DICT_MEDIA_LINE_POINT_START, CtrStdNil);
-	ctr_internal_media_getsetobjprop(instance, CTR_DICT_MEDIA_LINE_POINT_END, CtrStdNil);
+	ctr_internal_object_property(instance, CTR_DICT_MEDIA_LINE_POINT_START, CtrStdNil);
+	ctr_internal_object_property(instance, CTR_DICT_MEDIA_LINE_POINT_END, CtrStdNil);
 	return instance;
 }
 
 ctr_object* ctr_line_from_to(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_internal_media_getsetobjprop(myself, CTR_DICT_MEDIA_LINE_POINT_START, argumentList->object);
-	ctr_internal_media_getsetobjprop(myself, CTR_DICT_MEDIA_LINE_POINT_END, argumentList->next->object);
+	ctr_internal_object_property(myself, CTR_DICT_MEDIA_LINE_POINT_START, argumentList->object);
+	ctr_internal_object_property(myself, CTR_DICT_MEDIA_LINE_POINT_END, argumentList->next->object);
 	return myself;
 }
 
 ctr_object* ctr_line_start(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_media_getsetobjprop(myself, CTR_DICT_MEDIA_LINE_POINT_START, NULL);
+	return ctr_internal_object_property(myself, CTR_DICT_MEDIA_LINE_POINT_START, NULL);
 }
 
 ctr_object* ctr_line_end(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_media_getsetobjprop(myself, CTR_DICT_MEDIA_LINE_POINT_END, NULL);
+	return ctr_internal_object_property(myself, CTR_DICT_MEDIA_LINE_POINT_END, NULL);
 }
 
 ctr_object* ctr_color_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	instance->link = myself;
-	ctr_internal_media_color_getsetrgb(instance, "r", ctr_build_number_from_float(0));
-	ctr_internal_media_color_getsetrgb(instance, "g", ctr_build_number_from_float(0));
-	ctr_internal_media_color_getsetrgb(instance, "b", ctr_build_number_from_float(0));
-	ctr_internal_media_color_getsetrgb(instance, "a", ctr_build_number_from_float(0));
+	ctr_internal_object_property(instance, "r", ctr_build_number_from_float(0));
+	ctr_internal_object_property(instance, "g", ctr_build_number_from_float(0));
+	ctr_internal_object_property(instance, "b", ctr_build_number_from_float(0));
+	ctr_internal_object_property(instance, "a", ctr_build_number_from_float(0));
 	return instance;
 }
 
 ctr_object* ctr_color_rgb_set(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_internal_media_color_getsetrgb(myself, "r", argumentList->object);
-	ctr_internal_media_color_getsetrgb(myself, "g", argumentList->next->object);
-	ctr_internal_media_color_getsetrgb(myself, "b", argumentList->next->next->object);
+	ctr_internal_object_property(myself, "r", ctr_internal_cast2number(argumentList->object));
+	ctr_internal_object_property(myself, "g", ctr_internal_cast2number(argumentList->next->object));
+	ctr_internal_object_property(myself, "b", ctr_internal_cast2number(argumentList->next->next->object));
 	return myself;
 }
 
 ctr_object* ctr_color_a_set(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_media_color_getsetrgb(myself, "a", argumentList->object);
+	return ctr_internal_object_property(myself, "a", ctr_internal_cast2number(argumentList->object));
 }
 
 ctr_object* ctr_color_r(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_media_color_getsetrgb(myself, "r", NULL);
+	return ctr_internal_object_property(myself, "r", NULL);
 }
 
 ctr_object* ctr_color_g(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_media_color_getsetrgb(myself, "g", NULL);
+	return ctr_internal_object_property(myself, "g", NULL);
 }
 
 ctr_object* ctr_color_b(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_media_color_getsetrgb(myself, "b", NULL);
+	return ctr_internal_object_property(myself, "b", NULL);
 }
 
 ctr_object* ctr_color_a(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_media_color_getsetrgb(myself, "a", NULL);
+	return ctr_internal_object_property(myself, "a", NULL);
 }
 
 ctr_object* ctr_media_new(ctr_object* myself, ctr_argument* argumentList) {
@@ -1696,9 +1634,9 @@ ctr_object* ctr_img_draw(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	arg = ctr_heap_allocate(sizeof(ctr_argument));
 	SDL_SetRenderDrawColor(CtrMediaRenderer,
-		(char) ctr_internal_media_getsetnumprop(color, "r", NULL)->value.nvalue,
-		(char) ctr_internal_media_getsetnumprop(color, "g", NULL)->value.nvalue,
-		(char) ctr_internal_media_getsetnumprop(color, "b", NULL)->value.nvalue, 255);
+		(char) ctr_tonum(ctr_internal_object_property(color, "r", NULL)),
+		(char) ctr_tonum(ctr_internal_object_property(color, "g", NULL)),
+		(char) ctr_tonum(ctr_internal_object_property(color, "b", NULL)), 255);
 	int i = 1;
 	while(1) {
 		arg->object = ctr_build_number_from_float(i);
@@ -1706,17 +1644,17 @@ ctr_object* ctr_img_draw(ctr_object* myself, ctr_argument* argumentList) {
 		if (shape == CtrStdNil) break;
 		if (shape->link == pointObject) {
 			SDL_RenderDrawPoint(CtrMediaRenderer, 
-			(int) ctr_internal_media_getsetnumprop(shape, "x", NULL)->value.nvalue, 
-			(int) ctr_internal_media_getsetnumprop(shape, "y", NULL)->value.nvalue);
+			(int) ctr_tonum(ctr_internal_object_property(shape, "x", NULL)), 
+			(int) ctr_tonum(ctr_internal_object_property(shape, "y", NULL)));
 		}
 		if (shape->link == lineObject) {
-			subshape1 = ctr_internal_media_getsetnumprop(shape, CTR_DICT_MEDIA_LINE_POINT_START, NULL);
-			subshape2 = ctr_internal_media_getsetnumprop(shape, CTR_DICT_MEDIA_LINE_POINT_END, NULL);
+			subshape1 = ctr_internal_object_property(shape, CTR_DICT_MEDIA_LINE_POINT_START, NULL);
+			subshape2 = ctr_internal_object_property(shape, CTR_DICT_MEDIA_LINE_POINT_END, NULL);
 			SDL_RenderDrawLine(CtrMediaRenderer,
-				(int) ctr_internal_media_getsetnumprop(subshape1, "x", NULL)->value.nvalue,
-				(int) ctr_internal_media_getsetnumprop(subshape1, "y", NULL)->value.nvalue,
-				(int) ctr_internal_media_getsetnumprop(subshape2, "x", NULL)->value.nvalue,
-				(int) ctr_internal_media_getsetnumprop(subshape2, "y", NULL)->value.nvalue
+				(int) ctr_tonum(ctr_internal_object_property(subshape1, "x", NULL)),
+				(int) ctr_tonum(ctr_internal_object_property(subshape1, "y", NULL)),
+				(int) ctr_tonum(ctr_internal_object_property(subshape2, "x", NULL)),
+				(int) ctr_tonum(ctr_internal_object_property(subshape2, "y", NULL))
 			);
 		}
 		i++;

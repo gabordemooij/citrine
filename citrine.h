@@ -391,6 +391,10 @@ extern void        ctr_internal_object_add_property(ctr_object* owner, ctr_objec
 extern void        ctr_internal_object_set_property(ctr_object* owner, ctr_object* key, ctr_object* value, int is_method);
 extern void        ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int is_method);
 extern ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key, int is_method);
+extern ctr_object* ctr_internal_object_property(ctr_object* owner, char* keystr, ctr_object* value);
+extern double ctr_tonum(ctr_object* o);
+extern char ctr_tobool(ctr_object* o);
+extern char* ctr_tostr(ctr_object* o);
 extern uint64_t    ctr_internal_index_hash(ctr_object* key);
 extern void        ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_object* value, int m);
 extern ctr_object* ctr_internal_cast2bool( ctr_object* o );
