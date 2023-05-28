@@ -4,6 +4,7 @@
 #include <libavformat/avformat.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_ttf.h>
 #include <stdio.h>
 #include <math.h>
@@ -37,6 +38,14 @@ AVCodecParameters* CtrMediaVideoParams;
 AVFrame* CtrMediaVideoFrame;
 AVPacket* CtrMediaVideoPacket;
 SDL_Texture* CtrMediaBGVideoTexture;
+
+int CtrMediaAudioRate;
+uint16_t CtrMediaAudioFormat;
+int CtrMediaAudioChannels;
+int CtrMediaAudioBuffers;
+int CtrMediaAudioVolume;
+Mix_Music* CtrMediaMusic;
+Mix_Chunk* CtrMediaSound;
 
 struct CtrMediaAutoReplaceRule {
 	char* word;		char* replacement;
@@ -117,6 +126,8 @@ void ctr_internal_media_reset() {
 	CtrMediaSelectBegin = 0;
 	CtrMediaSelectEnd = 0;
 	CtrMediaSteps = 0;
+	CtrMediaSound = NULL;
+	CtrMediaMusic = NULL;
 	if (CtrMediaVideoId != -1) {
 		av_packet_free(&CtrMediaVideoPacket);
 		av_frame_free(&CtrMediaVideoFrame);
@@ -871,6 +882,73 @@ char ctr_internal_media_determine_filetype(char* path) {
 
 ctr_object* ctr_media_end(ctr_object* myself, ctr_argument* argumentList) {
 	CtrMediaBreakLoopFlag = 1;
+	return myself;
+}
+
+/**
+ * @note
+ * This function is very slow and needs to be optimized to use
+ * some sort of caching.
+ */
+
+/**
+ * @def
+ * [ Media ] music: [ String ]
+ *
+ * @example
+ * Media music: ‘splash.wav’.
+ *
+ * @result
+ * 𝄠... (plays music)
+ *
+ */
+ctr_object* ctr_media_music(ctr_object* myself, ctr_argument* argumentList) {
+	if (argumentList->object == CtrStdNil) {
+		 Mix_HaltMusic();
+		 Mix_FreeMusic(CtrMediaMusic);
+	} else {
+		char* filename = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+		CtrMediaMusic = Mix_LoadMUS(filename);
+		if (CtrMediaMusic == NULL) {
+			CtrStdFlow = ctr_build_string_from_cstring((char*)SDL_GetError());
+		} else {
+			Mix_FadeInMusic(CtrMediaMusic,-1,0);
+			Mix_PlayingMusic();
+		}
+		ctr_heap_free(filename);
+	}
+	return myself;
+}
+
+/**
+ * @note
+ * This function is very slow and needs to be optimized to use
+ * some sort of caching.
+ */
+
+/**
+ * @def
+ * [ Media ] sound: [ String ]
+ *
+ * @example
+ * Media sound: ‘splash.wav’.
+ *
+ * @result
+ * 𝄠... (plays sound)
+ *
+ */
+ctr_object* ctr_media_sound(ctr_object* myself, ctr_argument* argumentList) {
+	if (CtrMediaSound != NULL) {
+		Mix_FreeChunk(CtrMediaSound);
+	}
+	char* filename = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+	CtrMediaSound = Mix_LoadWAV(filename);
+	if (CtrMediaSound == NULL) {
+		CtrStdFlow = ctr_build_string_from_cstring((char*)SDL_GetError());
+	} else {
+		Mix_PlayChannel(0, CtrMediaSound, 0);
+	}
+	ctr_heap_free(filename);
 	return myself;
 }
 
@@ -1725,6 +1803,11 @@ ctr_object* ctr_media_autoreplace(ctr_object* myself, ctr_argument* argumentList
 }
 
 void ctr_internal_media_init() {
+	CtrMediaAudioRate = MIX_DEFAULT_FREQUENCY;
+	CtrMediaAudioFormat = MIX_DEFAULT_FORMAT;
+	CtrMediaAudioChannels = MIX_DEFAULT_CHANNELS;
+	CtrMediaAudioBuffers = 4096;
+	CtrMediaAudioVolume = MIX_MAX_VOLUME;
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) ctr_internal_media_fatalerror("SDL failed to init", SDL_GetError());
 	IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 100, 100, SDL_WINDOW_OPENGL);
@@ -1734,6 +1817,8 @@ void ctr_internal_media_init() {
 	SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
 	gameController = SDL_GameControllerOpen(0);
 	if (TTF_Init() < 0) ctr_internal_media_fatalerror("Unable to init TTF", SDL_GetError());
+	if (SDL_Init(SDL_INIT_AUDIO) < 0) ctr_internal_media_fatalerror("Couldn't initialize SDL: %s\n",SDL_GetError());
+	if (Mix_OpenAudio(CtrMediaAudioRate, CtrMediaAudioFormat, CtrMediaAudioChannels, CtrMediaAudioBuffers) < 0) ctr_internal_media_fatalerror("Couldn't open audio: %s\n", SDL_GetError());
 }
 
 void begin(){
@@ -1771,6 +1856,8 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SELECTED ), &ctr_media_select );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_DIGRAPH_LIGATURE ), &ctr_media_autoreplace );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_media_end );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_MUSIC ), &ctr_media_music );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SOUND ), &ctr_media_sound );
 	imageObject = ctr_img_new(CtrStdObject, NULL);
 	imageObject->link = CtrStdObject;
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_img_new );
