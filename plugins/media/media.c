@@ -44,8 +44,6 @@ uint16_t CtrMediaAudioFormat;
 int CtrMediaAudioChannels;
 int CtrMediaAudioBuffers;
 int CtrMediaAudioVolume;
-Mix_Music* CtrMediaMusic;
-Mix_Chunk* CtrMediaSound;
 
 struct CtrMediaAutoReplaceRule {
 	char* word;		char* replacement;
@@ -75,9 +73,20 @@ struct MediaIMG {
 };
 typedef struct MediaIMG MediaIMG;
 
+struct MediaAUD {
+	ctr_object* ref;
+	void* blob;
+};
+typedef struct MediaAUD MediaAUD;
+
 MediaIMG mediaIMGs[100];
 int MaxIMG = 100;
 int IMGCount = 0;
+
+MediaAUD mediaAUDs[50];
+int maxAUD = 50;
+int AUDCount = 0;
+
 int windowWidth = 0;
 int windowHeight = 0;
 int CtrMediaJumpHeight = 0;
@@ -90,6 +99,9 @@ ctr_object* lineObject;
 ctr_object* pointObject;
 ctr_object* controllableObject;
 ctr_object* focusObject;
+ctr_object* soundObject;
+ctr_object* musicObject;
+ctr_object* audioObject;
 SDL_GameController* gameController;
 
 void ctr_internal_img_render_text(ctr_object* myself);
@@ -99,12 +111,14 @@ void ctr_internal_media_fatalerror(char* msg, const char* info)	{ fprintf(stderr
 MediaIMG* ctr_internal_media_getfocusimage()						{ return (MediaIMG*) focusObject->value.rvalue->ptr; }
 MediaIMG* ctr_internal_media_getplayer()							{ return (controllableObject == NULL) ? NULL : (MediaIMG*) controllableObject->value.rvalue->ptr; }
 MediaIMG* ctr_internal_get_image_from_object(ctr_object* object)	{ return (MediaIMG*) object->value.rvalue->ptr; }
+MediaAUD* ctr_internal_get_audio_from_object(ctr_object* object)   { return (MediaAUD*) object->value.rvalue->ptr; }
 char ctr_internal_media_has_selection()								{ return (CtrMediaSelectBegin != CtrMediaSelectEnd); }
 
 void ctr_internal_media_reset() {
 	controllableObject = NULL;
 	focusObject = NULL;
 	IMGCount = 0;
+	AUDCount = 0;
 	CtrMediaJumpHeight = 0;
 	CtrMediaJump = 0;
 	CtrMediaMaxLines = 30;
@@ -126,8 +140,6 @@ void ctr_internal_media_reset() {
 	CtrMediaSelectBegin = 0;
 	CtrMediaSelectEnd = 0;
 	CtrMediaSteps = 0;
-	CtrMediaSound = NULL;
-	CtrMediaMusic = NULL;
 	if (CtrMediaVideoId != -1) {
 		av_packet_free(&CtrMediaVideoPacket);
 		av_frame_free(&CtrMediaVideoFrame);
@@ -885,72 +897,6 @@ ctr_object* ctr_media_end(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-/**
- * @note
- * This function is very slow and needs to be optimized to use
- * some sort of caching.
- */
-
-/**
- * @def
- * [ Media ] music: [ String ]
- *
- * @example
- * Media music: ‘splash.wav’.
- *
- * @result
- * 𝄠... (plays music)
- *
- */
-ctr_object* ctr_media_music(ctr_object* myself, ctr_argument* argumentList) {
-	if (argumentList->object == CtrStdNil) {
-		 Mix_HaltMusic();
-		 Mix_FreeMusic(CtrMediaMusic);
-	} else {
-		char* filename = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
-		CtrMediaMusic = Mix_LoadMUS(filename);
-		if (CtrMediaMusic == NULL) {
-			CtrStdFlow = ctr_build_string_from_cstring((char*)SDL_GetError());
-		} else {
-			Mix_FadeInMusic(CtrMediaMusic,-1,0);
-			Mix_PlayingMusic();
-		}
-		ctr_heap_free(filename);
-	}
-	return myself;
-}
-
-/**
- * @note
- * This function is very slow and needs to be optimized to use
- * some sort of caching.
- */
-
-/**
- * @def
- * [ Media ] sound: [ String ]
- *
- * @example
- * Media sound: ‘splash.wav’.
- *
- * @result
- * 𝄠... (plays sound)
- *
- */
-ctr_object* ctr_media_sound(ctr_object* myself, ctr_argument* argumentList) {
-	if (CtrMediaSound != NULL) {
-		Mix_FreeChunk(CtrMediaSound);
-	}
-	char* filename = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
-	CtrMediaSound = Mix_LoadWAV(filename);
-	if (CtrMediaSound == NULL) {
-		CtrStdFlow = ctr_build_string_from_cstring((char*)SDL_GetError());
-	} else {
-		Mix_PlayChannel(0, CtrMediaSound, 0);
-	}
-	ctr_heap_free(filename);
-	return myself;
-}
 
 ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* player;
@@ -1333,6 +1279,72 @@ ctr_object* ctr_media_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	instance->link = myself;
 	return instance;
+}
+
+ctr_object* ctr_audio_new(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
+	instance->link = myself;
+	return instance;
+}
+
+void ctr_audio_destructor(ctr_resource* rs) {
+	MediaAUD* mediaAUD = (MediaAUD*) rs->ptr;
+	mediaAUD->ref = NULL;
+}
+
+ctr_object* ctr_sound_new_set(ctr_object* myself, ctr_argument* argumentList) {
+	char* audioFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+	ctr_object* audioInst = ctr_audio_new(myself, argumentList);
+	MediaAUD* mediaAUD = &mediaAUDs[AUDCount];
+	ctr_resource* rs = ctr_heap_allocate( sizeof(ctr_resource) );
+	audioInst->value.rvalue = rs;
+	rs->ptr = mediaAUD;
+	if (mediaAUD->blob != NULL) {
+		Mix_FreeChunk((Mix_Chunk*)mediaAUD->blob);
+	}
+	mediaAUD->blob = (void*) Mix_LoadWAV(audioFileStr);
+	if (mediaAUD->blob == NULL) {
+		CtrStdFlow = ctr_build_string_from_cstring((char*)SDL_GetError());
+	}
+	rs->destructor = &ctr_audio_destructor;
+	AUDCount++;
+	return audioInst;
+}
+
+ctr_object* ctr_sound_play(ctr_object* myself, ctr_argument* argumentList) {
+	MediaAUD* mediaAUD = ctr_internal_get_audio_from_object(myself);
+	if (mediaAUD->blob != NULL) {
+		Mix_PlayChannel(0, (Mix_Chunk*) mediaAUD->blob, 0);
+	}
+	return myself;
+}
+
+ctr_object* ctr_music_new_set(ctr_object* myself, ctr_argument* argumentList) {
+	char* audioFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+	ctr_object* audioInst = ctr_audio_new(myself, argumentList);
+	MediaAUD* mediaAUD = &mediaAUDs[AUDCount];
+	ctr_resource* rs = ctr_heap_allocate( sizeof(ctr_resource) );
+	audioInst->value.rvalue = rs;
+	rs->ptr = mediaAUD;
+	if (mediaAUD->blob != NULL) {
+		Mix_FreeMusic((Mix_Music*)mediaAUD->blob);
+	}
+	mediaAUD->blob = (void*)Mix_LoadMUS(audioFileStr);
+	if (mediaAUD->blob == NULL) {
+		CtrStdFlow = ctr_build_string_from_cstring((char*)SDL_GetError());
+	}
+	rs->destructor = &ctr_audio_destructor;
+	AUDCount++;
+	return audioInst;
+}
+
+
+ctr_object* ctr_music_play(ctr_object* myself, ctr_argument* argumentList) {
+	MediaAUD* mediaAUD = ctr_internal_get_audio_from_object(myself);
+	if (mediaAUD->blob != NULL) {
+			Mix_FadeInMusic((Mix_Music*)mediaAUD->blob,-1,0);
+	}
+	return myself;
 }
 
 ctr_object* ctr_img_new(ctr_object* myself, ctr_argument* argumentList) {
@@ -1856,8 +1868,6 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SELECTED ), &ctr_media_select );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_DIGRAPH_LIGATURE ), &ctr_media_autoreplace );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_media_end );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_MUSIC ), &ctr_media_music );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SOUND ), &ctr_media_sound );
 	imageObject = ctr_img_new(CtrStdObject, NULL);
 	imageObject->link = CtrStdObject;
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_img_new );
@@ -1888,11 +1898,25 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_BACKGROUND_COLOR ), &ctr_img_background_color );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_TEXT_ALIGN ), &ctr_img_text_align );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_DRAW ), &ctr_img_draw );
+	audioObject = ctr_audio_new(CtrStdObject, NULL);
+	audioObject->link = CtrStdObject;
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_audio_new );
+	soundObject = ctr_audio_new(audioObject, NULL);
+	soundObject->link = audioObject;
+	ctr_internal_create_func(soundObject, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_sound_new_set );
+	ctr_internal_create_func(soundObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_PLAY ), &ctr_sound_play );
+	musicObject = ctr_audio_new(audioObject, NULL);
+	musicObject->link = audioObject;
+	ctr_internal_create_func(musicObject, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_music_new_set );
+	ctr_internal_create_func(musicObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_PLAY ), &ctr_music_play );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_OBJECT ), mediaObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_OBJECT ), imageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_COLOR_OBJECT ), colorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_POINT_OBJECT ), pointObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_LINE_OBJECT ), lineObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_OBJECT ), audioObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_SOUND_OBJECT ), soundObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MUSIC_OBJECT ), musicObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	/* Untranslated reference for systems that do not support UTF-8 characters in file names (like Windows) */
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Media" ), mediaObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 }
