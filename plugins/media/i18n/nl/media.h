@@ -70,3 +70,4 @@
 #define CTR_DICT_MEDIA_MUSIC_OBJECT               "Muziek"
 #define CTR_DICT_MEDIA_AUDIO_PLAY                 "laten horen"
 #define CTR_DICT_MEDIA_AUDIO_SILENCE              "stil"
+#define CTR_DICT_MEDIA_AUDIO_REWIND               "terugspoelen"
