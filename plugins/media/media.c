@@ -1347,6 +1347,23 @@ ctr_object* ctr_music_play(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+ctr_object* ctr_music_silence(ctr_object* myself, ctr_argument* argumentList) {
+	MediaAUD* mediaAUD = ctr_internal_get_audio_from_object(myself);
+	if (mediaAUD->blob != NULL) {
+			Mix_PauseMusic();
+	}
+	return myself;
+}
+
+ctr_object* ctr_music_rewind(ctr_object* myself, ctr_argument* argumentList) {
+	MediaAUD* mediaAUD = ctr_internal_get_audio_from_object(myself);
+	if (mediaAUD->blob != NULL) {
+			Mix_RewindMusic();
+	}
+	return myself;
+}
+
+
 ctr_object* ctr_img_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
 	instance->link = myself;
@@ -1900,7 +1917,7 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_DRAW ), &ctr_img_draw );
 	audioObject = ctr_audio_new(CtrStdObject, NULL);
 	audioObject->link = CtrStdObject;
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_audio_new );
+	ctr_internal_create_func(audioObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_audio_new );
 	soundObject = ctr_audio_new(audioObject, NULL);
 	soundObject->link = audioObject;
 	ctr_internal_create_func(soundObject, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_sound_new_set );
@@ -1909,6 +1926,8 @@ void begin(){
 	musicObject->link = audioObject;
 	ctr_internal_create_func(musicObject, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_music_new_set );
 	ctr_internal_create_func(musicObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_PLAY ), &ctr_music_play );
+	ctr_internal_create_func(audioObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_SILENCE ), &ctr_music_silence );
+	ctr_internal_create_func(audioObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_REWIND ), &ctr_music_rewind );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_OBJECT ), mediaObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_OBJECT ), imageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_COLOR_OBJECT ), colorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
