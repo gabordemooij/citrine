@@ -1,9 +1,9 @@
-✎ yozish: «Rim raqamlari», to’xta.
-✎ yozish: «Konvertatsiya qilish uchun raqam bering:», to’xta.
-☞ raqam ≔ Dastur so’rash raqam mutlaq.
+✎ yozish: «Rim raqamlari», to'xta.
+✎ yozish: «Konvertatsiya qilish uchun raqam bering:», to'xta.
+☞ raqam ≔ Dastur so'rash raqam mutlaq.
 
 (raqam = 0) haqiqiy: {
-	✎ yozish: «Nulla», to’xta.
+	✎ yozish: «Nulla», to'xta.
 	Dastur oxiri.
 }.
 
