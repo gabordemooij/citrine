@@ -1,11 +1,11 @@
-✎ yozish: «Raqamli o'yin», to’xta.
-✎ yozish: «Raqamni taxmin qiling», to’xta.
+✎ yozish: «Raqamli o'yin», to'xta.
+✎ yozish: «Raqamni taxmin qiling», to'xta.
 ☞ x ≔ Raqam orasida: 1 va: 10.
 ☞ q ≔ 0.
-q ≔ Dastur so’rash.
+q ≔ Dastur so'rash.
 { 
-	✎ yozish: «noto'g'ri!», to’xta.
-	q ≔ Dastur so’rash.
+	✎ yozish: «noto'g'ri!», to'xta.
+	q ≔ Dastur so'rash.
 
 } vaqt: { ↲ x raqam ≠ q raqam. }.
-✎ yozish: «to'g'ri!», to’xta.
+✎ yozish: «to'g'ri!», to'xta.
