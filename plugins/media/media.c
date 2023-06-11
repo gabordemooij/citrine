@@ -9,6 +9,12 @@
 #include <stdio.h>
 #include <math.h>
 
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+
+
 SDL_Window* CtrMediaWindow = NULL;
 SDL_Renderer* CtrMediaRenderer = NULL;
 
@@ -102,6 +108,7 @@ ctr_object* focusObject;
 ctr_object* soundObject;
 ctr_object* musicObject;
 ctr_object* audioObject;
+ctr_object* networkObject;
 SDL_GameController* gameController;
 
 void ctr_internal_img_render_text(ctr_object* myself);
@@ -1363,6 +1370,74 @@ ctr_object* ctr_music_rewind(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+int receiver_socket_descriptor;
+int socket_descriptor;
+
+ctr_object* ctr_network_new(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
+	instance->link = myself;
+	receiver_socket_descriptor = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
+	socket_descriptor = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
+	struct sockaddr_in host;
+	host.sin_family = AF_INET;
+	host.sin_port = htons(9000);
+	inet_pton(AF_INET, "127.0.0.1", &host.sin_addr);
+	int code = bind(receiver_socket_descriptor, (struct sockaddr *) &host, sizeof(host));
+	if (code == -1) {
+		char* warning = "Warning unable to bind to socket.\n";
+		fwrite( warning, sizeof(char), strlen(warning), stderr );
+	}
+	return instance;
+}
+
+
+int ctr_internal_send_network_message(void* message, int messagelen, char* ip_str) {
+	struct sockaddr_in remote_host;
+	if (inet_pton(AF_INET, ip_str, &remote_host.sin_addr)==0) {
+		CtrStdFlow = ctr_error("Invalid IP", 0);
+		return 0;
+	}
+	remote_host.sin_family = AF_INET;
+	remote_host.sin_port = htons(9000);
+	int bytes_sent = sendto(socket_descriptor, message, messagelen, 0, (struct sockaddr*) &remote_host, sizeof(remote_host));
+	return bytes_sent;
+}
+
+
+int ctr_internal_receive_network_message(void* buffer, int messagelen, char* ip_str) {
+	struct sockaddr_in source_host;
+	int bytes_received = 0;
+	socklen_t source_host_len = sizeof(struct sockaddr_in);
+	bytes_received = recvfrom(receiver_socket_descriptor, buffer, messagelen, 0, (struct sockaddr*) &source_host, &source_host_len);
+	if (bytes_received > 0) {
+		inet_ntop(AF_INET, (struct sockaddr*) &source_host.sin_addr, ip_str, source_host_len);
+	}
+	return bytes_received;
+}
+
+
+ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList) {
+	char* m = calloc(1, 500);
+	*(m + 0) = 1;
+	*(m + 1) = (uint16_t) argumentList->object->value.svalue->vlen;
+	memcpy(m + 3, argumentList->object->value.svalue->value, argumentList->object->value.svalue->vlen);
+	char* ip_str = ctr_heap_allocate_cstring(argumentList->next->object);
+	ctr_internal_send_network_message((void*)m, 500, ip_str);
+	return myself;
+}
+
+
+ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* argumentList) {
+	char buffer[500];
+	char ip_str[40];
+	int bytes_received = 0;
+	ctr_object* received_text_message = CtrStdNil;
+	bytes_received = ctr_internal_receive_network_message(buffer, 500, ip_str);
+	if (bytes_received > 0 && buffer[0] == 1) {
+		received_text_message = ctr_build_string((char*) buffer + 3, (ctr_size) (uint16_t) *(buffer + 1));
+	}
+	return received_text_message;
+}
 
 ctr_object* ctr_img_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
@@ -1928,6 +2003,11 @@ void begin(){
 	ctr_internal_create_func(musicObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_PLAY ), &ctr_music_play );
 	ctr_internal_create_func(audioObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_SILENCE ), &ctr_music_silence );
 	ctr_internal_create_func(audioObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_REWIND ), &ctr_music_rewind );
+	networkObject = ctr_network_new(CtrStdObject, NULL);
+	networkObject->link = CtrStdObject;
+	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_network_new );
+	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring(CTR_DICT_MEDIA_MEDIA_NET_SEND_TO), &ctr_network_basic_text_send );
+	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring(CTR_DICT_MEDIA_MEDIA_NET_FETCH_FROM), &ctr_network_basic_text_receive );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_OBJECT ), mediaObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_OBJECT ), imageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_COLOR_OBJECT ), colorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
@@ -1936,6 +2016,7 @@ void begin(){
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_OBJECT ), audioObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_SOUND_OBJECT ), soundObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MUSIC_OBJECT ), musicObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Netwerk" ), networkObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	/* Untranslated reference for systems that do not support UTF-8 characters in file names (like Windows) */
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Media" ), mediaObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 }

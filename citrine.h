@@ -777,7 +777,7 @@ extern uint64_t ctr_gc_memlimit;
  * Literal Constructors (internal only)
  */
 extern ctr_object* ctr_build_empty_string();
-extern ctr_object* ctr_build_string(char* object, long vlen);
+extern ctr_object* ctr_build_string(char* object, ctr_size vlen);
 extern ctr_object* ctr_build_block(ctr_tnode* node);
 extern ctr_object* ctr_build_number(char* object);
 extern ctr_object* ctr_build_number_from_string(char* fixedStr, ctr_size strLength, char international);

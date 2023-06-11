@@ -1526,7 +1526,7 @@ ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList
  * ☞ x ≔ ‘abcdef’.
  * ✎ write: x, stop.
  */
-ctr_object* ctr_build_string(char* stringValue, long size) {
+ctr_object* ctr_build_string(char* stringValue, ctr_size size) {
 	ctr_object* stringObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 	if (size != 0) {
 		stringObject->value.svalue->value = ctr_heap_allocate( size*sizeof(char) );
