@@ -1,10 +1,10 @@
 There are 2 chairs in the sunny garden.
 A rubber duck swims in the pool.
-Is there a shed in the garden? Well.. Yol'on
+Is there a shed in the garden? Well.. Yolg'on
 In the garden you smell the fragrance of tulips and roses and lillies.
-The garden is B'sh meters long.
-Luckily, this day, there are B'sh wasps in the garden.
-The dog named B'sh sleeps under the tree.
+The garden is Bo'sh meters long.
+Luckily, this day, there are Bo'sh wasps in the garden.
+The dog named Bo'sh sleeps under the tree.
 a\"bb\"ccc\"
-(R'yxat yangi) q'yish:((R'yxat yangi) q'yish:B'sh da:«dog», q'yish:B'sh da:«insects», q'yish:((R'yxat yangi) q'yish:15 da:«length», q'yish:8 da:«width») da:«size», q'yish:(Qator ← «tulips» ; «roses» ; «lillies») da:«flower», q'yish:Yol'on da:«shed», q'yish:Rost da:«pool», q'yish:2 da:«chairs») da:«garden»
+(Ro'yxat yangi) qo'yish:((Ro'yxat yangi) qo'yish:Bo'sh da:«dog», qo'yish:Bo'sh da:«insects», qo'yish:((Ro'yxat yangi) qo'yish:15 da:«length», qo'yish:8 da:«width») da:«size», qo'yish:(Qator ← «tulips» ; «roses» ; «lillies») da:«flower», qo'yish:Yolg'on da:«shed», qo'yish:Rost da:«pool», qo'yish:2 da:«chairs») da:«garden»
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}
