@@ -9,6 +9,7 @@
 #define CTR_DICT_MEDIA_MEDIA_SELECTED             "selectie"
 #define CTR_DICT_MEDIA_MEDIA_NET_FETCH_FROM       "tekstberichten"
 #define CTR_DICT_MEDIA_MEDIA_NET_SEND_TO          "tekst:naar:"
+#define CTR_DICT_MEDIA_MEDIA_NET_SETTING_PORT     "netwerkpoort"
 #define CTR_DICT_MEDIA_MEDIA_BROWSER_OPEN         "browse:"
 #define CTR_DICT_MEDIA_MEDIA_DIGRAPH_LIGATURE     "digraaf:ligatuur:"
 #define CTR_DICT_MEDIA_COLOR_OBJECT               "Kleur"
