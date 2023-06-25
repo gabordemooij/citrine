@@ -15,6 +15,8 @@
 #include <netinet/in.h>
 #include <unistd.h>
 
+#include <espeak/speak_lib.h>
+
 
 SDL_Window* CtrMediaWindow = NULL;
 SDL_Renderer* CtrMediaRenderer = NULL;
@@ -2175,6 +2177,41 @@ void ctr_internal_media_init() {
 	if (Mix_OpenAudio(CtrMediaAudioRate, CtrMediaAudioFormat, CtrMediaAudioChannels, CtrMediaAudioBuffers) < 0) ctr_internal_media_fatalerror("Couldn't open audio: %s\n", SDL_GetError());
 }
 
+
+
+
+char CtrMediaAudioVoiceInit = 0;
+
+ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
+	char* text = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+	ctr_object* spoken = CtrStdBoolFalse;
+	espeak_AUDIO_OUTPUT output;
+	output = AUDIO_OUTPUT_PLAYBACK;
+	if (!CtrMediaAudioVoiceInit) {
+		int result = espeak_Initialize(output, 500, NULL, 0);
+		if (result == -1) {
+			ctr_error("Unable to init speech synth.", errno);
+		} else {
+			CtrMediaAudioVoiceInit = 1;
+		}
+	}
+	if (CtrMediaAudioVoiceInit) {
+		espeak_VOICE voice;
+		voice.languages = (const char*) CTR_DICT_MEDIA_AUDIO_VOICE_LANG_CODE;
+		voice.name = "media";
+		voice.variant = 2;
+		voice.gender = 1;
+		espeak_SetVoiceByProperties(&voice);
+		unsigned int* uid = 0;
+		void* callback = NULL;
+		espeak_Synth( text, argumentList->object->value.svalue->vlen+1, 0, 0, 0, espeakCHARS_UTF8, uid, callback );
+		espeak_Synchronize();
+		spoken = CtrStdBoolTrue;
+	}
+	return spoken;
+}
+
+
 void begin(){
 	ctr_internal_media_reset();
 	ctr_internal_media_init();
@@ -2209,6 +2246,7 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_ON_STEP ), &ctr_media_override );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SELECTED ), &ctr_media_select );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_DIGRAPH_LIGATURE ), &ctr_media_autoreplace );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SAY ), &ctr_media_speak );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_media_end );
 	imageObject = ctr_img_new(CtrStdObject, NULL);
 	imageObject->link = CtrStdObject;
