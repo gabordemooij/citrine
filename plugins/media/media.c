@@ -36,6 +36,7 @@ int CtrMediaControlMode = 0;
 int CtrMediaRotation = 0;
 int CtrMediaStdDelayTime = 16;
 char CtrMediaBreakLoopFlag = 0;
+uint16_t CtrMediaNetworkChunkSize = 350;
 time_t CtrMediaFrameTimer = 0;
 uint16_t CtrMediaSteps;
 AVFormatContext* CtrMediaVideoFormatCtx;
@@ -1461,7 +1462,7 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 	char ip_str[40];
 	double timeout = 10;
 	double interval = 0.0001;
-	uint16_t chunk_size = 20;
+	uint16_t chunk_size = CtrMediaNetworkChunkSize;
 	uint16_t port = 9000;
 	uint64_t chunks = ceil((double)total_size / chunk_size);
 	char* ip_str_and_port = ctr_heap_allocate_cstring(argumentList->next->object);
@@ -1469,7 +1470,7 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 	if (colon_pos == NULL) {
 		strcpy(ip_str, ip_str_and_port);
 	} else {
-		memcpy(ip_str, ip_str_and_port, colon_pos-ip_str_and_port);//, ip_str_and_port + argumentList->next->object->value.svalue->vlen - colon_pos);
+		memcpy(ip_str, ip_str_and_port, colon_pos-ip_str_and_port);
 		ip_str[colon_pos-ip_str_and_port]='\0';
 		port = atoi(colon_pos+1);
 		if (port < 1024) {
@@ -1491,11 +1492,11 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 		chunk_id = CtrMediaNetworkCunkId++;
 		*(buffer + 0) = 1;
 		memcpy(buffer + 1, &total_size, 8);
-		memcpy(buffer + 9, (char*)&remote_id, 8); //8
+		memcpy(buffer + 9, (char*)&remote_id, 8);
 		uint64_t offset = i * chunk_size;
 		memcpy(buffer + 17, (char*)&offset, 8);
-		*(buffer + 25) = chunk_size; //2
-		memcpy(buffer + 27, data + offset, chunk_size);
+		memcpy(buffer + 25, &chunk_size, 2);
+		memcpy(buffer + 27, data + offset, (int) fmin(chunk_size, total_size - offset));
 		memcpy(buffer + 27 + chunk_size, &chunk_id, 2);
 		bytes_sent = ctr_internal_send_network_message((void*)buffer, 500, ip_str, port);
 		if (!bytes_sent) {
@@ -1536,7 +1537,7 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 	memcpy(buffer + 9, (char*)&remote_id, 8);
 	uint64_t offset = i * chunk_size;
 	memcpy(buffer + 17, (char*)&offset, 8);
-	*(buffer + 25) = 0;
+	memset(buffer + 25, 0, 2);
 	chunk_id = CtrMediaNetworkCunkId++;
 	memcpy(buffer + 27 + 0, &chunk_id, 2);
 	retry = 3;
@@ -1643,7 +1644,7 @@ ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* arg
 				document_locks[j]->since = time(NULL);
 				document_locks[j]->ip_str = malloc(40);
 				memcpy(document_locks[j]->ip_str, ip_str, 40);
-				chunk_size = *(buffer + 25);
+				memcpy(&chunk_size, buffer + 25, 2);
 				offset = *(buffer + 17);
 				memcpy(documents[j] + offset, buffer + 27, (int) fmin(chunk_size, total_size - offset));
 			} else {
@@ -1658,7 +1659,7 @@ ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* arg
 				}
 				total_size = (ctr_size) *((ctr_size*)(buffer + 1));
 				offset = (uint64_t) *((uint64_t*)(buffer + 17));
-				chunk_size = *(buffer + 25);
+				memcpy(&chunk_size, buffer + 25, 2);
 				if (chunk_size == 0 && j != max_documents) {
 					received_text_message = ctr_build_string((char*) documents[j], (ctr_size) total_size);
 					received_text_message->info.sticky = 1;
