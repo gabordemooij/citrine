@@ -5,6 +5,7 @@
 #define CTR_DICT_MEDIA_MEDIA_ON_START             "start"
 #define CTR_DICT_MEDIA_MEDIA_ON_STEP              "stap"
 #define CTR_DICT_MEDIA_MEDIA_KEY                  "toets:"
+#define CTR_DICT_MEDIA_MEDIA_SAY                  "zeg:"
 #define CTR_DICT_MEDIA_MEDIA_ON_TIMER_SET         "na:doe:"
 #define CTR_DICT_MEDIA_MEDIA_SELECTED             "selectie"
 #define CTR_DICT_MEDIA_MEDIA_NET_FETCH_FROM       "tekstberichten"
@@ -72,3 +73,4 @@
 #define CTR_DICT_MEDIA_AUDIO_PLAY                 "laten horen"
 #define CTR_DICT_MEDIA_AUDIO_SILENCE              "stil"
 #define CTR_DICT_MEDIA_AUDIO_REWIND               "terugspoelen"
+#define CTR_DICT_MEDIA_AUDIO_VOICE_LANG_CODE      "nl"
