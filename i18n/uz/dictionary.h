@@ -1,4 +1,4 @@
-#define CTR_DICT_CODEGEN_MAP_NEW                 "(Yangi ro'yxat) "
+#define CTR_DICT_CODEGEN_MAP_NEW                 "(Ro'yxat yangi) "
 #define CTR_DICT_CODEGEN_MAP_PUT                 "qo'yish:"
 #define CTR_DICT_CODEGEN_MAP_PUT_AT              " da:"
 #define CTR_DICT_CODEGEN_ARRAY_NEW               "Qator yangi "

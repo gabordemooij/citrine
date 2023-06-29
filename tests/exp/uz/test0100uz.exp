@@ -1,8 +1,7 @@
-
 <html>
 <body>
 <p>Hello this is a test!</p>
-<p>The string ‘Verbatim Syntax' has: 15 code points...</p>
+<p>The string ‘Verbatim Syntax’ has: 15 code points...</p>
 <ul>
 <li>#1:V</li>
 <li>#2:e</li>
