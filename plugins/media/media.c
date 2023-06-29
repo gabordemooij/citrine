@@ -17,7 +17,6 @@
 
 #include <espeak/speak_lib.h>
 
-
 SDL_Window* CtrMediaWindow = NULL;
 SDL_Renderer* CtrMediaRenderer = NULL;
 
@@ -54,6 +53,7 @@ uint16_t CtrMediaAudioFormat;
 int CtrMediaAudioChannels;
 int CtrMediaAudioBuffers;
 int CtrMediaAudioVolume;
+ctr_object* CtrMediaAssetPackage;
 
 struct CtrMediaAutoReplaceRule {
 	char* word;		char* replacement;
@@ -113,6 +113,7 @@ ctr_object* soundObject;
 ctr_object* musicObject;
 ctr_object* audioObject;
 ctr_object* networkObject;
+ctr_object* packageObject;
 SDL_GameController* gameController;
 
 void ctr_internal_img_render_text(ctr_object* myself);
@@ -835,10 +836,32 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 	}
 }
 
+SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type);
+
+int64_t ctr_internal_media_video_adapter_s(void* data_source, int64_t offset, int whence) {
+	SDL_RWops* video_reader = (SDL_RWops*) data_source;
+	return video_reader->seek(video_reader, offset, whence);
+}
+
+int ctr_internal_media_video_adapter_r(void* data_source, uint8_t* buf, int size) {
+	SDL_RWops* video_reader = (SDL_RWops*) data_source;
+	int bytes_read = video_reader->read(video_reader, buf, 1, size);
+	if (!bytes_read) {
+		return AVERROR_EOF;
+	}
+	return bytes_read;
+}
+
 void ctr_internal_media_loadvideobg(char* path, SDL_Rect* dimensions) {
 	CtrMediaVideoId = -1;
 	CtrMediaVideoFPSRendering = 0.0;
 	CtrMediaVideoFormatCtx = avformat_alloc_context();
+	if (CtrMediaAssetPackage) {
+		SDL_RWops* video_reader = ctr_internal_media_load_asset(path, 1);
+		unsigned char* iobuffer=(unsigned char *)av_malloc(32768);
+		AVIOContext* avio = avio_alloc_context(iobuffer, 32768,0, (void*)video_reader, &ctr_internal_media_video_adapter_r, NULL,&ctr_internal_media_video_adapter_s);
+		CtrMediaVideoFormatCtx->pb = avio;
+	}
 	if (avformat_open_input(&CtrMediaVideoFormatCtx, path, NULL, NULL) < 0) ctr_internal_media_fatalerror("Unable to open video", "FFMPEG");
 	if (avformat_find_stream_info(CtrMediaVideoFormatCtx, NULL) < 0) ctr_internal_media_fatalerror("Unable to find stream in video", "FFMPEG");
 	char foundVideo = 0;
@@ -897,12 +920,17 @@ void ctr_internal_media_rendervideoframe(SDL_Rect* rect) {
 
 char ctr_internal_media_determine_filetype(char* path) {
 	char magic[20];
-	FILE* fh = fopen(path, "rb");
-	fread(magic, 20, 1, fh);
+	if (CtrMediaAssetPackage) {
+		SDL_RWops* asset_reader = ctr_internal_media_load_asset(path, 1);
+		asset_reader->read(asset_reader, magic, 20, 1);
+	} else {
+		FILE* fh = fopen(path, "rb");
+		fread(magic, 20, 1, fh);
+		fclose(fh);
+	}
 	if (strcmp(magic+4, "ftypmp42")==0) return 10;
 	if (strcmp(magic, "\xFF\xD8")==0) return 20;
 	return 0;
-	fclose(fh);
 }
 
 ctr_object* ctr_media_end(ctr_object* myself, ctr_argument* argumentList) {
@@ -1332,6 +1360,42 @@ ctr_object* ctr_sound_play(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+
+SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
+	if (CtrMediaAssetPackage == NULL) {
+		return NULL;
+	}
+	SDL_RWops* res = NULL;
+	char* path = ctr_heap_allocate_cstring(ctr_internal_object_property(CtrMediaAssetPackage, "path", NULL));
+	FILE* asset_file = fopen(path, "rb");
+	if (!asset_file) return NULL;
+	fseek(asset_file, 0, SEEK_SET);
+	char* buffer = malloc(500);
+	while(1) {
+		uint64_t read_start = ftell(asset_file);
+		int bytes_read = fread(buffer, 1, 500, asset_file);
+		if (strncmp(asset_name, buffer, bytes_read) == 0) {
+			fseek(asset_file, read_start + strlen(asset_name) + 1, SEEK_SET);
+			uint64_t next_entry = 0;
+			fread(&next_entry, 8, 1, asset_file);
+			uint64_t curpos = ftell(asset_file);
+			uint64_t read_size = next_entry - curpos;
+			char* read_buffer = malloc(read_size);
+			fread(read_buffer, 1, read_size, asset_file);
+			res = SDL_RWFromMem(read_buffer, read_size);
+			break;
+		} else {
+			char* boundary = strchr(buffer, 0);
+			uint64_t jmp_address = *((uint64_t*) (boundary+1));
+			if (jmp_address == 0) {
+				break;
+			}
+			fseek(asset_file, jmp_address, SEEK_SET);
+		}
+	}
+	fclose(asset_file);
+	return res;
+}
 ctr_object* ctr_music_new_set(ctr_object* myself, ctr_argument* argumentList) {
 	char* audioFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	ctr_object* audioInst = ctr_audio_new(myself, argumentList);
@@ -1342,7 +1406,12 @@ ctr_object* ctr_music_new_set(ctr_object* myself, ctr_argument* argumentList) {
 	if (mediaAUD->blob != NULL) {
 		Mix_FreeMusic((Mix_Music*)mediaAUD->blob);
 	}
-	mediaAUD->blob = (void*)Mix_LoadMUS(audioFileStr);
+	SDL_RWops* res = ctr_internal_media_load_asset(audioFileStr, 1);
+	if (res) {
+		mediaAUD->blob = (void*)Mix_LoadMUS_RW(res, 1);
+	} else {
+		mediaAUD->blob = (void*)Mix_LoadMUS(audioFileStr);
+	}
 	if (mediaAUD->blob == NULL) {
 		CtrStdFlow = ctr_build_string_from_cstring((char*)SDL_GetError());
 	}
@@ -1414,7 +1483,7 @@ int ctr_internal_network_activate() {
 		host2.sin_addr.s_addr = htonl(INADDR_ANY);
 		host2.sin_port = htons(network_port_num + 1);
 		if (bind(socket_descriptor, (struct sockaddr *) &host2, sizeof(host2))==-1) {
-			ctr_error("Unable to bind writer socket to port %s.", errno);
+			ctr_error("Unable to bind writer socket to port %s.\n", errno);
 			CtrNetworkConnectedFlag = -1;
 		}
 	}
@@ -1425,7 +1494,7 @@ int ctr_internal_send_network_message(void* message, int messagelen, char* ip_st
 	if (ctr_internal_network_activate() != 1) return 0;
 	struct sockaddr_in remote_host;
 	if (inet_pton(AF_INET, ip_str, &remote_host.sin_addr)==0) {
-		CtrStdFlow = ctr_error("Invalid IP", 0);
+		ctr_error("Invalid IP\n", 0);
 		return 0;
 	}
 	remote_host.sin_family = AF_INET;
@@ -1474,7 +1543,7 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 		ip_str[colon_pos-ip_str_and_port]='\0';
 		port = atoi(colon_pos+1);
 		if (port < 1024) {
-			ctr_error("Invalid port",0);
+			ctr_error("Invalid port\n",0);
 			return CtrStdBoolFalse;
 		}
 	}
@@ -1554,7 +1623,7 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 				if (remote_chunk_id == chunk_id) {
 					break;
 				} else {
-					ctr_error("received invalid reply", 0);
+					ctr_error("received invalid reply\n", 0);
 					return CtrStdBoolFalse;
 				}
 			}
@@ -1635,7 +1704,7 @@ ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* arg
 					}
 				}
 				if (j == max_documents) {
-					ctr_error("Message buffers full", 0);
+					ctr_error("Message buffers full\n", 0);
 					return CtrStdNil;
 				}
 				total_size = (ctr_size) *((ctr_size*)(buffer + 1));
@@ -1654,7 +1723,7 @@ ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* arg
 					}
 				}
 				if (j == max_documents && chunk_size>0) {
-					ctr_error("Message buffer not found", 0);
+					ctr_error("Message buffer not found\n", 0);
 					return CtrStdNil;
 				}
 				total_size = (ctr_size) *((ctr_size*)(buffer + 1));
@@ -1683,7 +1752,7 @@ ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* arg
 			memcpy(buffer2 + 9,  (char*) &chunk_id, 2);
 			int bytes_sent = ctr_internal_send_network_message((void*)buffer2, 500, ip_str, src_port-1);
 			if (!bytes_sent) {
-				ctr_error("Unable to sent message receipt", 0);
+				ctr_error("Unable to sent message receipt\n", 0);
 				return CtrStdNil;
 			}
 		}
@@ -1703,6 +1772,9 @@ void ctr_img_destructor(ctr_resource* rs) {
 	image->ref = NULL;
 }
 
+
+
+
 ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 	SDL_Rect dimensions;
 	dimensions.x = 0;
@@ -1714,9 +1786,17 @@ ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 	rs->ptr = mediaImage;
 	rs->destructor = &ctr_img_destructor;
 	imageInst->value.rvalue = rs;
-	mediaImage->texture = (void*) IMG_LoadTexture(CtrMediaRenderer, imageFileStr);
+	SDL_RWops* res;
+	res = ctr_internal_media_load_asset(imageFileStr, 1);
+	if (res) {
+		mediaImage->texture = (void*) IMG_LoadTexture_RW(CtrMediaRenderer, res,0);
+		res = ctr_internal_media_load_asset(imageFileStr, 1);
+		mediaImage->surface = (void*) IMG_Load_RW(res, 0);
+	} else {
+		mediaImage->texture = (void*) IMG_LoadTexture(CtrMediaRenderer, imageFileStr);
+		mediaImage->surface = (void*) IMG_Load(imageFileStr);
+	}
 	if (mediaImage->texture == NULL) ctr_internal_media_fatalerror("Unable to load texture", imageFileStr);
-	mediaImage->surface = (void*) IMG_Load(imageFileStr);
 	if (mediaImage->surface == NULL) ctr_internal_media_fatalerror("Unable to load surface", imageFileStr);
 	ctr_heap_free(imageFileStr);
 	SDL_QueryTexture(mediaImage->texture, NULL, NULL, &dimensions.w, &dimensions.h);
@@ -2160,6 +2240,7 @@ ctr_object* ctr_media_autoreplace(ctr_object* myself, ctr_argument* argumentList
 }
 
 void ctr_internal_media_init() {
+	CtrMediaAssetPackage = NULL;
 	CtrMediaAudioRate = MIX_DEFAULT_FREQUENCY;
 	CtrMediaAudioFormat = MIX_DEFAULT_FORMAT;
 	CtrMediaAudioChannels = MIX_DEFAULT_CHANNELS;
@@ -2179,8 +2260,6 @@ void ctr_internal_media_init() {
 }
 
 
-
-
 char CtrMediaAudioVoiceInit = 0;
 
 ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
@@ -2191,7 +2270,7 @@ ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
 	if (!CtrMediaAudioVoiceInit) {
 		int result = espeak_Initialize(output, 500, NULL, 0);
 		if (result == -1) {
-			ctr_error("Unable to init speech synth.", errno);
+			ctr_error("Unable to init speech synth: %s.\n", errno);
 		} else {
 			CtrMediaAudioVoiceInit = 1;
 		}
@@ -2212,6 +2291,70 @@ ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
 	return spoken;
 }
 
+
+ctr_object* ctr_package_new(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	instance->link = myself;
+	return instance;
+}
+
+ctr_object* ctr_package_new_set(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* instance = ctr_package_new(myself, argumentList);
+	ctr_internal_object_property(instance, "path", ctr_internal_copy2string(argumentList->object));
+	return instance;
+}
+
+ctr_object* ctr_media_link_package(ctr_object* myself, ctr_argument* argumentList) {
+	if (argumentList->object->link != packageObject) {
+		ctr_error("Not an asset package.\n", 0);
+	}
+	CtrMediaAssetPackage = argumentList->object;
+	return myself;
+}
+
+ctr_object* ctr_package_add(ctr_object* myself, ctr_argument* argumentList) {
+	char* path = ctr_heap_allocate_cstring(ctr_internal_object_property(myself, "path", NULL));
+	FILE* outfile;
+	if (access(path, F_OK) == 0) {
+		outfile = fopen(path, "rb+");
+	} else {
+		outfile = fopen(path, "wb+");
+	}
+	fseek(outfile, 0, SEEK_END);
+	int CHUNK_SIZE = 10000;
+	uint64_t next_entry_at;
+	int bytes_read;
+	char* buffer;
+	ctr_object* fileObject = argumentList->object;
+	if (fileObject->link == CtrStdFile) {
+		char* path = ctr_heap_allocate_cstring(
+			ctr_internal_cast2string(
+				ctr_internal_object_property(fileObject, "path", NULL)
+			)
+		);
+		fwrite(path, 1, strlen(path), outfile);
+		fwrite("\0", 1 , 1, outfile);
+		next_entry_at = ftell(outfile);
+		fwrite("\0\0\0\0\0\0\0\0", 8, 1, outfile);
+		FILE* f = fopen(path, "rb");
+		buffer = calloc(1,CHUNK_SIZE);
+		clearerr(f);
+		while(!feof(f)) {
+			bytes_read = fread(buffer,1,CHUNK_SIZE,f);
+			fwrite(buffer, 1, bytes_read, outfile);
+		}
+		free(buffer);
+		uint64_t next_entry = (uint64_t) ftell(outfile);
+		fseek(outfile, next_entry_at, SEEK_SET);
+		fwrite(&next_entry, sizeof(uint64_t), 1, outfile);
+		fclose(outfile);
+		fclose(f);
+	} else {
+		ctr_error("Invalid argument\n", 0);
+	}
+	ctr_heap_free(path);
+	return myself;
+}
 
 void begin(){
 	ctr_internal_media_reset();
@@ -2248,6 +2391,7 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SELECTED ), &ctr_media_select );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_DIGRAPH_LIGATURE ), &ctr_media_autoreplace );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SAY ), &ctr_media_speak );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "koppel:" ), &ctr_media_link_package );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_media_end );
 	imageObject = ctr_img_new(CtrStdObject, NULL);
 	imageObject->link = CtrStdObject;
@@ -2305,8 +2449,13 @@ void begin(){
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_OBJECT ), audioObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_SOUND_OBJECT ), soundObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MUSIC_OBJECT ), musicObject, CTR_CATEGORY_PUBLIC_PROPERTY);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring(CTR_DICT_MEDIA_MEDIA_NET_SETTING_PORT), ctr_build_string_from_cstring("MediaNetPort1"), CTR_CATEGORY_PUBLIC_PROPERTY);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Netwerk" ), networkObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_NET_SETTING_PORT ), ctr_build_string_from_cstring("MediaNetPort1"), CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_NET), networkObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	packageObject = ctr_package_new(CtrStdObject, NULL);
+	packageObject->link = CtrStdObject;
+	ctr_internal_create_func(packageObject, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_package_new_set );
+	ctr_internal_create_func(packageObject, ctr_build_string_from_cstring(CTR_DICT_APPEND), &ctr_package_add );
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_PACKAGE ), packageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	/* Untranslated reference for systems that do not support UTF-8 characters in file names (like Windows) */
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Media" ), mediaObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 }
