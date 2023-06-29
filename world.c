@@ -452,6 +452,17 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
  */
 ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 	if ( o->info.type == CTR_OBJECT_TYPE_OTSTRING ) return o;
+	return ctr_internal_copy2string(o);
+}
+
+/**
+ * ?internal
+ *
+ * CopyToString
+ *
+ * Same as cast but always returns a copy.
+ */
+ctr_object* ctr_internal_copy2string( ctr_object* o ) {
 	ctr_argument* a = ctr_heap_allocate( sizeof( ctr_argument ) );
 	a->object = CtrStdNil;
 	ctr_object* stringObject = ctr_send_message( o, CTR_DICT_TOSTRING, strlen(CTR_DICT_TOSTRING), a );

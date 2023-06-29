@@ -401,6 +401,7 @@ extern ctr_object* ctr_internal_cast2bool( ctr_object* o );
 extern ctr_object* ctr_internal_cast2number(ctr_object* o);
 extern ctr_object* ctr_internal_create_object(int type);
 extern ctr_object* ctr_internal_cast2string( ctr_object* o );
+extern ctr_object* ctr_internal_copy2string( ctr_object* o );
 extern void*       ctr_internal_plugin_find( ctr_object* key );
 extern ctr_object* ctr_find(ctr_object* key);
 extern ctr_object* ctr_find_in_my(ctr_object* key);
