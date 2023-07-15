@@ -428,10 +428,9 @@ void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func
  *
  * InternalNumberCast
  *
- * Casts an object to a number object.
+ * Same as cast but always returns a copy.
  */
-ctr_object* ctr_internal_cast2number(ctr_object* o) {
-	if ( o->info.type == CTR_OBJECT_TYPE_OTNUMBER ) return o;
+ctr_object* ctr_internal_copy2number(ctr_object* o) {
 	ctr_argument* a = ctr_heap_allocate( sizeof( ctr_argument ) );
 	a->object = CtrStdNil;
 	ctr_object* numObject = ctr_send_message( o, CTR_DICT_TONUMBER, strlen(CTR_DICT_TONUMBER), a );
@@ -441,6 +440,18 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
 		return ctr_build_number_from_float((ctr_number)0);
 	}
 	return numObject;
+}
+
+/**
+ * ?internal
+ *
+ * InternalNumberCast
+ *
+ * Casts an object to a number object.
+ */
+ctr_object* ctr_internal_cast2number(ctr_object* o) {
+	if ( o->info.type == CTR_OBJECT_TYPE_OTNUMBER ) return o;
+	return ctr_internal_copy2number(o);
 }
 
 /**
