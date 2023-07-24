@@ -116,10 +116,19 @@ ctr_object* networkObject;
 ctr_object* packageObject;
 SDL_GameController* gameController;
 
+uint8_t CtrMediaEventListenFlagKeyUp;
+uint8_t CtrMediaEventListenFlagKeyDown;
+uint8_t CtrMediaEventListenFlagMouseClick;
+uint8_t CtrMediaEventListenFlagGamePadBtnUp;
+uint8_t CtrMediaEventListenFlagGamePadBtnDown;
+uint8_t CtrMediaEventListenFlagTimer;
+uint8_t CtrMediaEventListenFlagStep;
+
 void ctr_internal_img_render_text(ctr_object* myself);
 void ctr_internal_img_render_cursor(ctr_object* myself);
 
-
+int CtrMediaTimers[100];
+int CtrMaxMediaTimers = 100;
 
 void ctr_internal_media_fatalerror(char* msg, const char* info)	{ fprintf(stderr,"Media Plugin FATAL ERROR: %s (%s) \n", msg, info); SDL_Quit(); exit(1); }
 MediaIMG* ctr_internal_media_getfocusimage()						{ return (MediaIMG*) focusObject->value.rvalue->ptr; }
@@ -154,6 +163,16 @@ void ctr_internal_media_reset() {
 	CtrMediaSelectBegin = 0;
 	CtrMediaSelectEnd = 0;
 	CtrMediaSteps = 0;
+	CtrMediaEventListenFlagKeyUp = 0;
+	CtrMediaEventListenFlagKeyDown = 0;
+	CtrMediaEventListenFlagMouseClick = 0;
+	CtrMediaEventListenFlagGamePadBtnUp = 0;
+	CtrMediaEventListenFlagGamePadBtnDown = 0;
+	CtrMediaEventListenFlagTimer = 0;
+	CtrMediaEventListenFlagStep = 0;
+	for(int i = 1; i<=CtrMaxMediaTimers; i++) {
+		CtrMediaTimers[i] = -1;
+	}
 	if (CtrMediaVideoId != -1) {
 		av_packet_free(&CtrMediaVideoPacket);
 		av_frame_free(&CtrMediaVideoFrame);
@@ -938,6 +957,48 @@ ctr_object* ctr_media_end(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+void ctr_media_event(ctr_object* myself, char* event, const char* detail) {
+	ctr_argument* args = ctr_heap_allocate(sizeof(ctr_argument));
+	args->object = ctr_build_string_from_cstring((char*)detail);
+	myself->info.sticky = 1;
+	ctr_send_message(myself, event, strlen(event), args );
+	myself->info.sticky = 0;
+	ctr_heap_free(args);
+}
+
+void ctr_media_event_timer(ctr_object* myself, char* event, int timer_no) {
+	ctr_argument* args = ctr_heap_allocate(sizeof(ctr_argument));
+	args->object = ctr_build_number_from_float((double)timer_no);
+	myself->info.sticky = 1;
+	ctr_send_message(myself, event, strlen(event), args );
+	myself->info.sticky = 0;
+	ctr_heap_free(args);
+}
+
+
+void ctr_media_event_coords(ctr_object* myself, char* event, int x, int y) {
+	ctr_argument* args = ctr_heap_allocate(sizeof(ctr_argument));
+	args->object = ctr_build_number_from_float((double)x);
+	ctr_argument* next = ctr_heap_allocate(sizeof(ctr_argument));
+	args->next = next;
+	next->object = ctr_build_number_from_float((double)y);
+	myself->info.sticky = 1;
+	ctr_send_message(myself, event, strlen(event), args );
+	myself->info.sticky = 0;
+	ctr_heap_free(args->next);
+	ctr_heap_free(args);
+}
+
+ctr_object* ctr_media_timer(ctr_object* myself, ctr_argument* argumentList) {
+	int timer_no = (int) ctr_tonum(ctr_internal_cast2number(argumentList->object));
+	int ms = (int) ctr_tonum(ctr_internal_cast2number(argumentList->next->object));
+	if (timer_no < 1 || timer_no > CtrMaxMediaTimers) {
+		ctr_error("Invalid timer", 0);
+	} else {
+		CtrMediaTimers[timer_no] = ms;
+	}
+	return myself;
+}
 
 ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* player;
@@ -985,7 +1046,18 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 			SDL_RenderCopy(CtrMediaRenderer, texture, NULL, &dimensions);
 		}
 		myself->info.sticky = 1;
-		ctr_send_message(myself, CTR_DICT_MEDIA_MEDIA_ON_STEP, strlen(CTR_DICT_MEDIA_MEDIA_ON_STEP), NULL );
+		if (CtrMediaEventListenFlagTimer) {
+			for(int i = 1; i <= CtrMaxMediaTimers; i++) {
+				if (CtrMediaTimers[i] < 0) continue;
+				if (CtrMediaTimers[i] == 0) {
+					ctr_media_event_timer(myself, CTR_DICT_MEDIA_MEDIA_TIMER, i);
+				}
+				CtrMediaTimers[i]--;
+			}
+		}
+		if (CtrMediaEventListenFlagStep) {
+			ctr_send_message(myself, CTR_DICT_MEDIA_MEDIA_ON_STEP, strlen(CTR_DICT_MEDIA_MEDIA_ON_STEP), NULL );
+		}
 		myself->info.sticky = 0;
 		while (SDL_PollEvent(&event)) {
 			if (CtrMediaBreakLoopFlag) {
@@ -1027,11 +1099,21 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 							CtrMediaSelectStart = 0;
 							ctr_internal_img_render_text(focusImage->ref);
 					}
+					if (
+					event.button.button == SDL_BUTTON_LEFT &&
+					event.button.clicks == 1 &&
+					CtrMediaEventListenFlagMouseClick
+					) {
+						ctr_media_event_coords(myself, CTR_DICT_MEDIA_MEDIA_MOUSE_CLICK, event.button.x, event.button.y);
+					}
 					break;
 				case SDL_MOUSEBUTTONDOWN:
 					if (ctr_internal_media_mouse_down(event)) return CtrStdFlow;
 					break;
 				case SDL_CONTROLLERBUTTONDOWN:
+					if (CtrMediaEventListenFlagGamePadBtnDown) {
+						ctr_media_event(myself, CTR_DICT_MEDIA_MEDIA_GAMEPAD_DOWN, SDL_GameControllerGetStringForButton(event.cbutton.button));
+					}
 					switch(event.cbutton.button) {
 						case SDL_CONTROLLER_BUTTON_DPAD_UP:
 							ctr_internal_media_keydown_up(&dir, &c4speed);
@@ -1050,6 +1132,9 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 					}
 					break;
 				case SDL_CONTROLLERBUTTONUP:
+					if (CtrMediaEventListenFlagGamePadBtnUp) {
+						ctr_media_event(myself, CTR_DICT_MEDIA_MEDIA_GAMEPAD_UP, SDL_GameControllerGetStringForButton(event.cbutton.button));
+					}
 					switch(event.cbutton.button) {
 						case SDL_CONTROLLER_BUTTON_DPAD_UP:
 						case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
@@ -1064,6 +1149,9 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 					}
 					break;
 				case SDL_KEYUP:
+					if (CtrMediaEventListenFlagKeyUp) {
+						ctr_media_event(myself, CTR_DICT_MEDIA_MEDIA_KEY, SDL_GetKeyName(event.key.keysym.sym));
+					}
 					switch(event.key.keysym.scancode) {
 						case SDL_SCANCODE_LEFT:
 						case SDL_SCANCODE_RIGHT:
@@ -1082,6 +1170,9 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 					}
 					break;
 				case SDL_KEYDOWN:
+					if (CtrMediaEventListenFlagKeyDown) {
+						ctr_media_event(myself, CTR_DICT_MEDIA_MEDIA_KEY_DOWN, SDL_GetKeyName(event.key.keysym.sym));
+					}
 					switch(event.key.keysym.scancode) {
 						case SDL_SCANCODE_LSHIFT:
 						case SDL_SCANCODE_RSHIFT:
@@ -2356,6 +2447,47 @@ ctr_object* ctr_package_add(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+
+ctr_object* ctr_media_on_do(ctr_object* myself, ctr_argument* argumentList) {
+	char* event_name = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+	ctr_object* listener = argumentList->next->object;
+	if (strcmp(CTR_DICT_MEDIA_MEDIA_KEY, event_name)==0) CtrMediaEventListenFlagKeyUp = (listener != CtrStdNil);
+	else if (strcmp(CTR_DICT_MEDIA_MEDIA_KEY_DOWN, event_name)==0) CtrMediaEventListenFlagKeyDown = (listener != CtrStdNil);
+	else if (strcmp(CTR_DICT_MEDIA_MEDIA_MOUSE_CLICK, event_name)==0) CtrMediaEventListenFlagMouseClick = (listener != CtrStdNil);
+	else if (strcmp(CTR_DICT_MEDIA_MEDIA_GAMEPAD_DOWN, event_name)==0) CtrMediaEventListenFlagGamePadBtnDown = (listener != CtrStdNil);
+	else if (strcmp(CTR_DICT_MEDIA_MEDIA_GAMEPAD_UP, event_name)==0) CtrMediaEventListenFlagGamePadBtnUp = (listener != CtrStdNil);
+	else if (strcmp(CTR_DICT_MEDIA_MEDIA_TIMER, event_name)==0) CtrMediaEventListenFlagTimer = (listener != CtrStdNil);
+	else if (strcmp(CTR_DICT_MEDIA_MEDIA_ON_STEP, event_name)==0) CtrMediaEventListenFlagStep = (listener != CtrStdNil);
+	ctr_heap_free(event_name);
+	return ctr_object_on_do(myself, argumentList);
+}
+
+ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
+	char* url = ctr_heap_allocate_cstring(argumentList->object);
+	char  command[200];
+	char* browsers[10];
+	browsers[0] = "firefox";
+	browsers[1] = "chromium";
+	browsers[2] = "chrome";
+	browsers[3] = "edge";
+	browsers[4] = "safari";
+	//check url for safety
+	for (int j = 0; j<strlen(url); j++) {
+		if (url[j]=='\'') return myself;
+	}
+	if (strlen(url)<150) {
+		for (int i = 0; i < 5; i++) {
+			bzero(command, 100);
+			sprintf(command, "%s '%s'", browsers[i], url);
+			if (system(command)==0) {
+				break;
+			}
+		}
+	}
+	ctr_heap_free(url);
+	return myself;
+}
+
 void begin(){
 	ctr_internal_media_reset();
 	ctr_internal_media_init();
@@ -2391,7 +2523,10 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SELECTED ), &ctr_media_select );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_DIGRAPH_LIGATURE ), &ctr_media_autoreplace );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SAY ), &ctr_media_speak );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "koppel:" ), &ctr_media_link_package );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_LINK_SET ), &ctr_media_link_package );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_TIMER_SET ), &ctr_media_timer );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_WEBSITE ), &ctr_media_website );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_ONDO ), &ctr_media_on_do );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_media_end );
 	imageObject = ctr_img_new(CtrStdObject, NULL);
 	imageObject->link = CtrStdObject;
