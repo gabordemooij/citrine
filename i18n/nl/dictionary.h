@@ -38,7 +38,7 @@
 #define CTR_DICT_EQUALS          "gelĳk:"
 #define CTR_DICT_AND             "en:"
 #define CTR_DICT_OR              "of:"
-#define CTR_DICT_MODULO          "modulus:"
+#define CTR_DICT_MODULO          "modulo:"
 #define CTR_DICT_NOR             "noch:"
 #define CTR_DICT_ONDO            "bĳ:doen:" 
 #define CTR_DICT_TYPE            "type" 
