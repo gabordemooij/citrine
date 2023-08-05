@@ -588,6 +588,7 @@ ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
 			index->object = ctr_build_number_from_float((ctr_number) i + 1);
 			key->object = ctr_array_get( myself, index );
 			value->object = ctr_array_get( argumentList->object, index );
+			if (value->object == CtrStdNil) continue;
 			key->next = value;
 			ctr_map_put( map, key );
 	}
