@@ -132,16 +132,19 @@ void* ctr_internal_plugin_find(ctr_object* key) {
  * by a catch clause or the program ends in which case an error will
  * produced to stderr.
  */
+#ifndef REPLACE_ERROR_SYSTEM
 ctr_object* ctr_error( char* message, int error_code ) {
 	char* errstr;
-	errstr = ctr_heap_allocate( sizeof(char) * 200 );
-	snprintf( errstr, 200, message, strerror( error_code ) );
+	errstr = ctr_heap_allocate( sizeof(char) * 500 );
+	snprintf( errstr, 500, message, strerror( error_code ) );
 	CtrStdFlow = ctr_build_string_from_cstring( errstr );
 	ctr_heap_free( errstr );
 	CtrStdFlow->info.sticky = 1;
 	errstack = 0;
 	return CtrStdFlow;
 }
+#endif
+
 
 /**
  * @internal
