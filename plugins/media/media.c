@@ -1,7 +1,16 @@
+#ifdef WINDOWS_MEDIA_SOCK
+#define WIN32_LEAN_AND_MEAN
+#define _WIN32_WINNT 0x0501 //Windows XP
+#include <winsock2.h>
+#endif
+
+
 #include "../../citrine.h"
 #include "media.h"
-#include <libavcodec/avcodec.h>
-#include <libavformat/avformat.h>
+
+#define PL_MPEG_IMPLEMENTATION
+#include "pl_mpeg.h"
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
@@ -10,12 +19,75 @@
 #include <math.h>
 
 #include <sys/types.h>
+
+#ifndef REPLACE_MEDIA_SOCK
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#endif
+
+#ifdef WINDOWS_MEDIA_SOCK
+#include <ws2tcpip.h>
+#endif
+
+
 #include <unistd.h>
 
 #include <espeak/speak_lib.h>
+
+
+
+/* Old Windows versions lack these functions
+ * 
+ * credit: Petar Korponaić
+ * https://stackoverflow.com/questions/13731243/what-is-the-windows-xp-equivalent-of-inet-pton-or-inetpton
+ */
+#ifdef WINDOWS_MEDIA_SOCK
+int inet_pton(int af, const char *src, void *dst)
+{
+  struct sockaddr_storage ss;
+  int size = sizeof(ss);
+  char src_copy[INET6_ADDRSTRLEN+1];
+
+  ZeroMemory(&ss, sizeof(ss));
+  strncpy (src_copy, src, INET6_ADDRSTRLEN+1);
+  src_copy[INET6_ADDRSTRLEN] = 0;
+  if (WSAStringToAddress(src_copy, af, NULL, (struct sockaddr *)&ss, &size) == 0) {
+    switch(af) {
+      case AF_INET:
+    *(struct in_addr *)dst = ((struct sockaddr_in *)&ss)->sin_addr;
+    return 1;
+      case AF_INET6:
+    *(struct in6_addr *)dst = ((struct sockaddr_in6 *)&ss)->sin6_addr;
+    return 1;
+    }
+  }
+  return 0;
+}
+
+const char *inet_ntop(int af, const void *src, char *dst, socklen_t size)
+{
+  struct sockaddr_storage ss;
+  unsigned long s = size;
+
+  ZeroMemory(&ss, sizeof(ss));
+  ss.ss_family = af;
+
+  switch(af) {
+    case AF_INET:
+      ((struct sockaddr_in *)&ss)->sin_addr = *(struct in_addr *)src;
+      break;
+    case AF_INET6:
+      ((struct sockaddr_in6 *)&ss)->sin6_addr = *(struct in6_addr *)src;
+      break;
+    default:
+      return NULL;
+  }
+  /* cannot direclty use &size because of strict aliasing rules */
+  return (WSAAddressToString((struct sockaddr *)&ss, sizeof(ss), NULL, dst, &s) == 0)?
+          dst : NULL;
+}
+#endif
 
 SDL_Window* CtrMediaWindow = NULL;
 SDL_Renderer* CtrMediaRenderer = NULL;
@@ -38,14 +110,18 @@ char CtrMediaBreakLoopFlag = 0;
 uint16_t CtrMediaNetworkChunkSize = 350;
 time_t CtrMediaFrameTimer = 0;
 uint16_t CtrMediaSteps;
+/*
 AVFormatContext* CtrMediaVideoFormatCtx;
-AVCodec* CtrMediaBGVideoCodec;
+const AVCodec* CtrMediaBGVideoCodec;
 AVCodecContext* CtrMediaBGVideoCdcCtx;
+*/
 int CtrMediaVideoId = -1;
 double CtrMediaVideoFPSRendering;
+/*
 AVCodecParameters* CtrMediaVideoParams;
 AVFrame* CtrMediaVideoFrame;
 AVPacket* CtrMediaVideoPacket;
+*/
 SDL_Texture* CtrMediaBGVideoTexture;
 
 int CtrMediaAudioRate;
@@ -172,23 +248,6 @@ void ctr_internal_media_reset() {
 	CtrMediaEventListenFlagStep = 0;
 	for(int i = 1; i<=CtrMaxMediaTimers; i++) {
 		CtrMediaTimers[i] = -1;
-	}
-	if (CtrMediaVideoId != -1) {
-		av_packet_free(&CtrMediaVideoPacket);
-		av_frame_free(&CtrMediaVideoFrame);
-		avcodec_free_context(&CtrMediaBGVideoCdcCtx);
-		avformat_close_input(&CtrMediaVideoFormatCtx);
-		avformat_free_context(CtrMediaVideoFormatCtx);
-		CtrMediaVideoFormatCtx = NULL;
-		CtrMediaVideoId = -1;
-		CtrMediaVideoFPSRendering = 0;
-		CtrMediaFrameTimer = 0;
-		CtrMediaVideoParams = NULL;
-		CtrMediaVideoFrame = NULL;
-		CtrMediaVideoPacket = NULL;
-		CtrMediaBGVideoTexture = NULL;
-		CtrMediaBGVideoCodec = NULL;
-		CtrMediaBGVideoCdcCtx = NULL;
 	}
 }
 
@@ -857,84 +916,52 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 
 SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type);
 
-int64_t ctr_internal_media_video_adapter_s(void* data_source, int64_t offset, int whence) {
-	SDL_RWops* video_reader = (SDL_RWops*) data_source;
-	return video_reader->seek(video_reader, offset, whence);
-}
-
-int ctr_internal_media_video_adapter_r(void* data_source, uint8_t* buf, int size) {
-	SDL_RWops* video_reader = (SDL_RWops*) data_source;
-	int bytes_read = video_reader->read(video_reader, buf, 1, size);
-	if (!bytes_read) {
-		return AVERROR_EOF;
-	}
-	return bytes_read;
-}
-
-void ctr_internal_media_loadvideobg(char* path, SDL_Rect* dimensions) {
-	CtrMediaVideoId = -1;
-	CtrMediaVideoFPSRendering = 0.0;
-	CtrMediaVideoFormatCtx = avformat_alloc_context();
-	if (CtrMediaAssetPackage) {
-		SDL_RWops* video_reader = ctr_internal_media_load_asset(path, 1);
-		unsigned char* iobuffer=(unsigned char *)av_malloc(32768);
-		AVIOContext* avio = avio_alloc_context(iobuffer, 32768,0, (void*)video_reader, &ctr_internal_media_video_adapter_r, NULL,&ctr_internal_media_video_adapter_s);
-		CtrMediaVideoFormatCtx->pb = avio;
-	}
-	if (avformat_open_input(&CtrMediaVideoFormatCtx, path, NULL, NULL) < 0) ctr_internal_media_fatalerror("Unable to open video", "FFMPEG");
-	if (avformat_find_stream_info(CtrMediaVideoFormatCtx, NULL) < 0) ctr_internal_media_fatalerror("Unable to find stream in video", "FFMPEG");
-	char foundVideo = 0;
-	for (int i = 0; i < CtrMediaVideoFormatCtx->nb_streams; i++) {
-		AVCodecParameters* localparam = CtrMediaVideoFormatCtx->streams[i]->codecpar;
-		AVCodec* localcodec = avcodec_find_decoder(localparam->codec_id);
-		if (localparam->codec_type == AVMEDIA_TYPE_VIDEO && !foundVideo) {
-			CtrMediaBGVideoCodec = localcodec;
-			CtrMediaVideoParams = localparam;
-			CtrMediaVideoId = i;
-			AVRational rational = CtrMediaVideoFormatCtx->streams[i]->avg_frame_rate;
-			CtrMediaVideoFPSRendering = 1.0 / ((double)rational.num / (double)(rational.den));
-			foundVideo = 1;
-		}
-	}
-    CtrMediaBGVideoCdcCtx = avcodec_alloc_context3(CtrMediaBGVideoCodec);
-    if (avcodec_parameters_to_context(CtrMediaBGVideoCdcCtx, CtrMediaVideoParams) < 0) ctr_internal_media_fatalerror("CtrMediaBGVideoCdcCtx","FFMPEG");
-    if (avcodec_open2(CtrMediaBGVideoCdcCtx, CtrMediaBGVideoCodec, NULL) < 0) ctr_internal_media_fatalerror("CtrMediaBGVideoCdcCtx2", "FFMPEG");
-    CtrMediaVideoFrame = av_frame_alloc();
-    CtrMediaVideoPacket = av_packet_alloc();
-    CtrMediaBGVideoTexture = SDL_CreateTexture(CtrMediaRenderer, SDL_PIXELFORMAT_IYUV,
-        SDL_TEXTUREACCESS_STREAMING | SDL_TEXTUREACCESS_TARGET,
-        CtrMediaVideoParams->width, CtrMediaVideoParams->height);
-    if (!CtrMediaBGVideoTexture) ctr_internal_media_fatalerror("texture", "FFMPEG");
-    SDL_SetWindowSize(CtrMediaWindow, CtrMediaVideoParams->width, CtrMediaVideoParams->height);
-	SDL_Delay(100);
-	dimensions->x = 0;
-	dimensions->y = 0;
-	dimensions->h = CtrMediaVideoParams->height;
-	dimensions->w = CtrMediaVideoParams->width;
-}
-
+plm_t* plm;
+uint8_t* rgb_buffer;
+int wrgb;
+FILE* vf;
 
 void ctr_internal_media_rendervideoframe(SDL_Rect* rect) {
-	if (av_read_frame(CtrMediaVideoFormatCtx, CtrMediaVideoPacket) < 0) {
-		av_seek_frame(CtrMediaVideoFormatCtx, CtrMediaVideoId, 0, 0);
-		if (av_read_frame(CtrMediaVideoFormatCtx, CtrMediaVideoPacket) < 0) return;
+	plm_frame_t *frame = NULL;
+	frame = plm_decode_video(plm);
+	if (plm_has_ended(plm)) {
+		plm_rewind(plm);
+		plm->has_ended = FALSE;
+		frame = plm_decode_video(plm);
 	}
-	if (CtrMediaVideoPacket->stream_index != CtrMediaVideoId) return;
-	if (avcodec_send_packet(CtrMediaBGVideoCdcCtx, CtrMediaVideoPacket) < 0) ctr_internal_media_fatalerror("sp", "FFMPEG");
-	if (avcodec_receive_frame(CtrMediaBGVideoCdcCtx, CtrMediaVideoFrame) < 0) return;
-	SDL_UpdateYUVTexture(CtrMediaBGVideoTexture, rect,
-		CtrMediaVideoFrame->data[0], CtrMediaVideoFrame->linesize[0],
-		CtrMediaVideoFrame->data[1], CtrMediaVideoFrame->linesize[1],
-		CtrMediaVideoFrame->data[2], CtrMediaVideoFrame->linesize[2]);
+	plm_frame_to_rgb(frame, rgb_buffer, wrgb);
+	SDL_UpdateTexture(CtrMediaBGVideoTexture, NULL, rgb_buffer, rect->w * 3);
 	SDL_RenderCopy(CtrMediaRenderer, CtrMediaBGVideoTexture, NULL, rect);
-	time_t end = time(NULL);
-	double diffms = difftime(end, CtrMediaFrameTimer) / 1000.0;
-	if (diffms < CtrMediaVideoFPSRendering - (CtrMediaStdDelayTime/1000)) {
-		uint32_t diff = (uint32_t)((CtrMediaVideoFPSRendering - diffms) * 1000);
-		SDL_Delay(diff - CtrMediaStdDelayTime);
+}
+
+
+void ctr_internal_media_loadvideobg(char* path, SDL_Rect* dimensions) {
+	vf = fopen(path, "rb");
+	plm = plm_create_with_file(vf, FALSE);
+	if (!plm) {
+		printf("Couldn't open file %s\n", path);
+		exit(1);
 	}
-	av_packet_unref(CtrMediaVideoPacket);
-	CtrMediaFrameTimer = time(NULL);
+	plm_set_audio_enabled(plm, FALSE);
+	plm_set_loop(plm, FALSE);
+	plm_seek(plm, 39, FALSE);
+	
+	int w = plm_get_width(plm);
+	int h = plm_get_height(plm);
+	rgb_buffer = (uint8_t *)malloc(w * h * 3);
+	wrgb = w * 3;
+	CtrMediaBGVideoTexture = SDL_CreateTexture(CtrMediaRenderer, SDL_PIXELFORMAT_RGB24,
+        SDL_TEXTUREACCESS_STREAMING | SDL_TEXTUREACCESS_TARGET,
+       w, h);
+     if (!CtrMediaBGVideoTexture) ctr_internal_media_fatalerror("texture", "FFMPEG");  
+     SDL_SetWindowSize(CtrMediaWindow,w, h);
+     SDL_Delay(100);
+    
+	dimensions->x = 0;
+	dimensions->y = 0;
+	dimensions->h = h;
+	dimensions->w = w;
+	return;
 }
 
 char ctr_internal_media_determine_filetype(char* path) {
@@ -947,7 +974,7 @@ char ctr_internal_media_determine_filetype(char* path) {
 		fread(magic, 20, 1, fh);
 		fclose(fh);
 	}
-	if (strcmp(magic+4, "ftypmp42")==0) return 10;
+	if (strcmp(magic, "\x00\x00\x01\xBA")==0) return 10;
 	if (strcmp(magic, "\xFF\xD8")==0) return 20;
 	return 0;
 }
@@ -1539,26 +1566,60 @@ ctr_object* ctr_music_rewind(ctr_object* myself, ctr_argument* argumentList) {
 int receiver_socket_descriptor;
 int socket_descriptor;
 int CtrNetworkConnectedFlag = 0;
-
-
 struct sockaddr_in host;
 struct sockaddr_in host2;
+
+#ifndef REPLACE_MEDIA_SOCK
+void ctr_internal_media_sock() {
+	receiver_socket_descriptor = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
+	socket_descriptor = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
+}
+#endif
+
+#ifdef WINDOWS_MEDIA_SOCK
+void ctr_internal_media_sock() {
+	u_long socket_mode = 1;
+	u_long socket_mode2 = 1;
+	receiver_socket_descriptor = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+	if (receiver_socket_descriptor == INVALID_SOCKET) {
+		ctr_error("Unable to open receiver socket: %s.", CTR_ERR);
+	}
+	socket_descriptor = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+	if (socket_descriptor == INVALID_SOCKET) {
+		ctr_error("Unable to open data socket: %s.", CTR_ERR);
+	}
+	if (ioctlsocket(receiver_socket_descriptor, FIONBIO, &socket_mode)) {
+		ctr_error("Unable to configure receiver socket: %s.", CTR_ERR);
+	}
+	if (ioctlsocket(socket_descriptor, FIONBIO, &socket_mode2)) {
+		ctr_error("Unable to configure data socket: %s.", CTR_ERR);
+	}
+}
+#endif
 
 ctr_object* ctr_network_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
 	instance->link = myself;
-	receiver_socket_descriptor = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
-	socket_descriptor = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
 	return instance;
 }
 
 int ctr_internal_network_activate() {
+	char* network_port_str;
+	int network_port_num;
 	if (CtrNetworkConnectedFlag == 0) {
-		CtrNetworkConnectedFlag = 1;
+		#ifdef WINDOWS_MEDIA_SOCK
+		WSADATA version_info;
+		int success_winsock = WSAStartup(MAKEWORD(2,2), &version_info);
+		if (success_winsock != 0) {
+			ctr_error("WSAStartup failed: %s.", CTR_ERR);
+			CtrNetworkConnectedFlag = -1;
+		}
+		#endif
+		ctr_internal_media_sock();
+	}
+	if (CtrNetworkConnectedFlag == 0) {
 		host.sin_family = AF_INET;
 		host2.sin_family = AF_INET;
-		char* network_port_str;
-		int network_port_num;
 		network_port_str = getenv("MediaNetPort1");
 		if (network_port_str == NULL) {
 			network_port_num = 9000;
@@ -1568,15 +1629,18 @@ int ctr_internal_network_activate() {
 		host.sin_port = htons(network_port_num);
 		host.sin_addr.s_addr = htonl(INADDR_ANY);
 		if (bind(receiver_socket_descriptor, (struct sockaddr *) &host, sizeof(host))==-1) {
-			ctr_error("Unable to bind reader socket to port %s.", errno);
+			ctr_error("Unable to bind reader socket to port %s.", CTR_ERR);
 			CtrNetworkConnectedFlag = -1;
 		}
+	}
+	if (CtrNetworkConnectedFlag == 0) {
 		host2.sin_addr.s_addr = htonl(INADDR_ANY);
 		host2.sin_port = htons(network_port_num + 1);
 		if (bind(socket_descriptor, (struct sockaddr *) &host2, sizeof(host2))==-1) {
-			ctr_error("Unable to bind writer socket to port %s.\n", errno);
+			ctr_error("Unable to bind writer socket to port %s.", CTR_ERR);
 			CtrNetworkConnectedFlag = -1;
 		}
+		CtrNetworkConnectedFlag = 1;
 	}
 	return CtrNetworkConnectedFlag;
 }
@@ -1647,7 +1711,6 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 	int retry = 3;
 	uint16_t chunk_id;
 	uint16_t remote_chunk_id;
-	struct timespec t;
 	for(i = 0; i < chunks; i++) {
 		chunk_id = CtrMediaNetworkCunkId++;
 		*(buffer + 0) = 1;
@@ -1662,11 +1725,9 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 		if (!bytes_sent) {
 			return CtrStdBoolFalse;
 		}
-		t.tv_sec = 0;
-		t.tv_nsec = 5000;
 		while(1) {
 			bytes_received = ctr_internal_receive_network_message(buffer2, 500, ip_str_recipient, &recipient_port);
-			nanosleep(&t, NULL);
+			SDL_Delay(1);
 			timeout -= interval;
 			if (timeout < 1) break;
 			if (bytes_received > 0) {
@@ -1706,7 +1767,7 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 		bytes_sent = ctr_internal_send_network_message((void*)buffer, 500, ip_str, port);
 		while(1) {
 			bytes_received = ctr_internal_receive_network_message(buffer2, 500, ip_str_recipient, &recipient_port);
-			nanosleep(&t, NULL);
+			SDL_Delay(1);
 			timeout -= interval;
 			if (timeout < 1) break;
 			if (bytes_received > 0 && buffer2[0] == 2) {
@@ -1764,9 +1825,6 @@ ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* arg
 	ctr_object* received_text_message = CtrStdNil;
 	double timeout = 10;
 	double interval = 0.01;
-	struct timespec t;
-	t.tv_sec = 0;
-	t.tv_nsec = 1000;
 	int expire_time = 10;
 	time_t current_time = time(NULL);
 	for(int i = 0; i<max_documents; i++) {
@@ -1781,7 +1839,7 @@ ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* arg
 	while(timeout>0) {
 		bytes_received = ctr_internal_receive_network_message(buffer, 500, ip_str, &src_port);
 		if (bytes_received < 1 || buffer[0]!=1) {
-			nanosleep(&t, NULL);
+			SDL_Delay(1);
 			timeout-=interval;
 			continue;
 		}
@@ -2383,6 +2441,8 @@ ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 
+
+
 ctr_object* ctr_package_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	instance->link = myself;
@@ -2477,7 +2537,7 @@ ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	if (strlen(url)<150) {
 		for (int i = 0; i < 5; i++) {
-			bzero(command, 100);
+			memset(command, '\0', 100);
 			sprintf(command, "%s '%s'", browsers[i], url);
 			if (system(command)==0) {
 				break;
