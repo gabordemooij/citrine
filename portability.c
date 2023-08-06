@@ -26,6 +26,37 @@ ctr_object* ctr_program_waitforpassword(ctr_object* myself, ctr_argument* argume
 #endif
 
 
+#ifdef WINDOWS_ERROR_SYSTEM
+ctr_object* ctr_error( char* message, uint16_t error_code ) {
+	int MAX_LEN_ERROR_STR = 800;
+	int MAX_LEN_SYSTEM_STR = 400;
+	int ok_msg;
+	char* errstr;
+	char* error_message;
+	errstr = ctr_heap_allocate( sizeof(char) * MAX_LEN_ERROR_STR );
+	error_message = ctr_heap_allocate( sizeof(char) * MAX_LEN_SYSTEM_STR );
+	ok_msg = FormatMessage(
+		FORMAT_MESSAGE_FROM_SYSTEM|FORMAT_MESSAGE_IGNORE_INSERTS,
+		NULL,
+		error_code,
+		0,
+		error_message,
+		MAX_LEN_SYSTEM_STR,
+		NULL
+	);
+	if (!ok_msg) {
+		snprintf(error_message, MAX_LEN_SYSTEM_STR, "(#%d) (#%d)", error_code, (uint16_t) GetLastError());
+	}
+	snprintf( errstr, MAX_LEN_ERROR_STR, message, error_message );
+	CtrStdFlow = ctr_build_string_from_cstring( errstr );
+	ctr_heap_free( errstr );
+	ctr_heap_free( error_message );
+	CtrStdFlow->info.sticky = 1;
+	errstack = 0;
+	return CtrStdFlow;
+}
+#endif
+
 #ifdef WINDOWS_PLUGIN_SYSTEM
 typedef int (__cdecl *MYPROC)(); 
 void* ctr_internal_plugin_find(ctr_object* key) {
