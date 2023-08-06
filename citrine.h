@@ -24,11 +24,15 @@
 	#define PRId64 "I64d"
 	#define realpath(N,R) _fullpath((R),(N),PATH_MAX)
 	#define CTR_DIRSEP "\\"
+	#define CTR_ERR GetLastError()
+	#define CTR_NEWLINE "\r\n"
 #else
 	#include <termios.h>
 	#include <sys/wait.h>
 	#include <dlfcn.h>
 	#define CTR_DIRSEP "/"
+	#define CTR_ERR errno
+	#define CTR_NEWLINE "\n"
 #endif
 
 
@@ -799,7 +803,15 @@ extern void* ctr_heap_reallocate(void* oldptr, size_t size );
 extern size_t ctr_heap_get_latest_tracking_id();
 extern void* ctr_heap_reallocate_tracked(size_t tracking_id, size_t size );
 extern char* ctr_heap_allocate_cstring( ctr_object* o );
+
+#ifndef REPLACE_ERROR_SYSTEM
 extern ctr_object* ctr_error( char* error_string, int error_code );
+#endif
+
+#ifdef WINDOWS_ERROR_SYSTEM
+extern ctr_object* ctr_error( char* error_string, uint16_t error_code );
+#endif
+
 extern ctr_object* ctr_error_text( char* error_string );
 extern void ctr_pool_init( ctr_size pool );
 
