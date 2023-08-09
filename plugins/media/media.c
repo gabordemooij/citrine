@@ -33,8 +33,9 @@
 
 #include <unistd.h>
 
+#ifndef NO_MEDIA_ESPEAK
 #include <espeak/speak_lib.h>
-
+#endif
 
 
 /* Old Windows versions lack these functions
@@ -1678,7 +1679,7 @@ uint16_t CtrMediaNetworkCunkId = 1;
 
 ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList) {
 	char* data = argumentList->object->value.svalue->value;
-	ctr_size total_size = argumentList->object->value.svalue->vlen;
+	uint64_t total_size = argumentList->object->value.svalue->vlen;
 	int bytes_sent;
 	int bytes_received = -1;
 	uint16_t recipient_port = 0;
@@ -1821,7 +1822,7 @@ ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* arg
 	uint64_t offset = 0;
 	uint64_t document_id = 0;
 	int j;
-	ctr_size total_size = 0;
+	uint64_t total_size = 0;
 	ctr_object* received_text_message = CtrStdNil;
 	double timeout = 10;
 	double interval = 0.01;
@@ -1867,9 +1868,15 @@ ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* arg
 				memcpy(documents[j] + offset, buffer + 27, (int) fmin(chunk_size, total_size - offset));
 			} else {
 				for(j=0; j<max_documents; j++) {
+					#ifdef WIN32
+					if ((uint32_t) documents[j] == (uint32_t) *((uint64_t*)(buffer + 9))) {
+						break;
+					}
+					#else
 					if ((uint64_t) documents[j] == (uint64_t) *((uint64_t*)(buffer + 9))) {
 						break;
 					}
+					#endif
 				}
 				if (j == max_documents && chunk_size>0) {
 					ctr_error("Message buffer not found\n", 0);
@@ -2400,6 +2407,10 @@ void ctr_internal_media_init() {
 	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 100, 100, SDL_WINDOW_OPENGL);
 	if (CtrMediaWindow == NULL) ctr_internal_media_fatalerror("Unable to create window", SDL_GetError());
 	CtrMediaRenderer = SDL_CreateRenderer(CtrMediaWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
+	if (!CtrMediaRenderer) {
+		printf("Failed to create renderer, trying software renderer instead...\n");
+		CtrMediaRenderer = SDL_CreateRenderer(CtrMediaWindow, -1, SDL_RENDERER_SOFTWARE);
+	}
 	if (!CtrMediaRenderer) ctr_internal_media_fatalerror("Unable to create renderer", SDL_GetError());
 	SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
 	gameController = SDL_GameControllerOpen(0);
@@ -2411,6 +2422,8 @@ void ctr_internal_media_init() {
 
 char CtrMediaAudioVoiceInit = 0;
 
+
+#ifndef NO_MEDIA_ESPEAK
 ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
 	char* text = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	ctr_object* spoken = CtrStdBoolFalse;
@@ -2439,7 +2452,11 @@ ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	return spoken;
 }
-
+#else
+ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
+	return myself;
+}
+#endif
 
 
 
