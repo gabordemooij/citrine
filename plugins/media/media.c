@@ -26,6 +26,12 @@
 #include <netinet/in.h>
 #endif
 
+#ifdef MAC_MEDIA_SOCK
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#endif
+
 #ifdef WINDOWS_MEDIA_SOCK
 #include <ws2tcpip.h>
 #endif
@@ -36,6 +42,7 @@
 #ifndef NO_MEDIA_ESPEAK
 #include <espeak/speak_lib.h>
 #endif
+
 
 
 /* Old Windows versions lack these functions
@@ -303,7 +310,7 @@ void ctr_internal_media_move_cursor_right(MediaIMG* haystack, ctr_size steps, ch
 			(haystack->text[CtrMediaInputIndex] & 0x80)!=0x00 &&
 			(haystack->text[CtrMediaInputIndex] & 0xC0)!=0xC0
 		) CtrMediaInputIndex++;
-		if ((haystack->text[CtrMediaInputIndex]=='\n')) {
+		if (haystack->text[CtrMediaInputIndex]=='\n') {
 			if (jump) {
 				CtrMediaInputIndex += 1;
 			} else {
@@ -325,7 +332,7 @@ void ctr_internal_media_move_cursor_left(MediaIMG* haystack, ctr_size steps, cha
 			(haystack->text[CtrMediaInputIndex] & 0x80)!=0x00 &&
 			(haystack->text[CtrMediaInputIndex] & 0xC0)!=0xC0
 		) CtrMediaInputIndex--;
-		if ((haystack->text[CtrMediaInputIndex]=='\n')) {
+		if (haystack->text[CtrMediaInputIndex]=='\n') {
 			if (jump) {
 				CtrMediaInputIndex -= 1;
 			} else {
@@ -1342,6 +1349,10 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 			m->oy = m->y;
 			r.x = (int)(m->x);
 			r.y = (int)(m->y);
+			s.x = 0;
+			s.y = 0;
+			s.h = (int) m->h;
+			s.w = (int) m->w/(m->anims ? m->anims : 1);
 			ctr_internal_media_render_image(m,r,s);
 		}
 		if (focusObject) {
@@ -1573,7 +1584,14 @@ struct sockaddr_in host2;
 #ifndef REPLACE_MEDIA_SOCK
 void ctr_internal_media_sock() {
 	receiver_socket_descriptor = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
+	printf("receiver_socket_descriptor = %d %s \n", receiver_socket_descriptor,strerror(errno));
+	if (receiver_socket_descriptor == -1) {
+		ctr_error("Unable to open receiver socket: %s.\n", CTR_ERR);
+	}
 	socket_descriptor = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
+	if (socket_descriptor == -1) {
+		ctr_error("Unable to open receiver socket: %s.", CTR_ERR);
+	}
 }
 #endif
 
@@ -1593,6 +1611,26 @@ void ctr_internal_media_sock() {
 		ctr_error("Unable to configure receiver socket: %s.", CTR_ERR);
 	}
 	if (ioctlsocket(socket_descriptor, FIONBIO, &socket_mode2)) {
+		ctr_error("Unable to configure data socket: %s.", CTR_ERR);
+	}
+}
+#endif
+
+
+#ifdef MAC_MEDIA_SOCK
+void ctr_internal_media_sock() {
+	receiver_socket_descriptor = socket(AF_INET, SOCK_DGRAM, 0);
+	if (receiver_socket_descriptor == -1) {
+		ctr_error("Unable to open receiver socket: %s.", CTR_ERR);
+	}
+	socket_descriptor = socket(AF_INET, SOCK_DGRAM, 0);
+	if (socket_descriptor == -1) {
+		ctr_error("Unable to open data socket: %s.", CTR_ERR);
+	}
+	if (fcntl(receiver_socket_descriptor, F_SETFL, O_NONBLOCK)) {
+		ctr_error("Unable to configure receiver socket: %s.", CTR_ERR);
+	}
+	if (fcntl(socket_descriptor, F_SETFL, O_NONBLOCK)) {
 		ctr_error("Unable to configure data socket: %s.", CTR_ERR);
 	}
 }
@@ -2416,7 +2454,9 @@ void ctr_internal_media_init() {
 	gameController = SDL_GameControllerOpen(0);
 	if (TTF_Init() < 0) ctr_internal_media_fatalerror("Unable to init TTF", SDL_GetError());
 	if (SDL_Init(SDL_INIT_AUDIO) < 0) ctr_internal_media_fatalerror("Couldn't initialize SDL: %s\n",SDL_GetError());
-	if (Mix_OpenAudio(CtrMediaAudioRate, CtrMediaAudioFormat, CtrMediaAudioChannels, CtrMediaAudioBuffers) < 0) ctr_internal_media_fatalerror("Couldn't open audio: %s\n", SDL_GetError());
+	if (Mix_OpenAudio(CtrMediaAudioRate, CtrMediaAudioFormat, CtrMediaAudioChannels, CtrMediaAudioBuffers) < 0) {
+		fprintf(stderr, "Couldn't open audio device.");
+	}
 }
 
 
