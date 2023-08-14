@@ -1576,6 +1576,7 @@ ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_tnode* parsedCode;
 	ctr_object* result;
 	char* prg;
+	int ctr_callstack_index_old = ctr_callstack_index;
 	prg = ctr_heap_allocate_cstring(myself);
 	ctr_program_length = strlen(prg);
 	size_t memblock = ctr_heap_tracker_memoryblocknumber();
@@ -1593,6 +1594,7 @@ ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 	result = ctr_cwlk_expr(parsedCode,&r);
 	ctr_deserialize_mode = 0;
 	ctr_source_mapping = 1;
+	ctr_callstack_index = ctr_callstack_index_old;
 	ctr_cwlk_subprogram--;
 	ctr_heap_tracker_rewind(memblock);
 	if (result == NULL) {
