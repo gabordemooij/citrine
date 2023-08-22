@@ -1906,7 +1906,7 @@ ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* arg
 				memcpy(documents[j] + offset, buffer + 27, (int) fmin(chunk_size, total_size - offset));
 			} else {
 				for(j=0; j<max_documents; j++) {
-					#ifdef WIN32
+					#ifdef WIN32_BIT
 					if ((uint32_t) documents[j] == (uint32_t) *((uint64_t*)(buffer + 9))) {
 						break;
 					}
