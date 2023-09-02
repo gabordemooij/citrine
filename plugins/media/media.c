@@ -411,10 +411,10 @@ int ctr_internal_media_get_current_char_line(MediaIMG* haystack) {
 void ctr_internal_media_select_word(MediaIMG* haystack) {
 	ctr_internal_media_reset_selection();
 	int i = CtrMediaInputIndex;
-	while(i > 0 && 
-		haystack->text[i]!='\n' &&
-		haystack->text[i]!='\r' &&
-		haystack->text[i]!=' '
+	while(i-1 > 0 && 
+		haystack->text[i-1]!='\n' &&
+		haystack->text[i-1]!='\r' &&
+		haystack->text[i-1]!=' '
 	) i--;
 	CtrMediaSelectBegin = i;
 	i = CtrMediaInputIndex;
@@ -1067,7 +1067,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	windowWidth = dimensions.w;
 	windowHeight = dimensions.h;
-	ctr_send_message(myself, CTR_DICT_MEDIA_MEDIA_ON_START, strlen(CTR_DICT_MEDIA_MEDIA_ON_START), NULL );
+	ctr_send_message(myself, CTR_DICT_RUN, strlen(CTR_DICT_RUN), NULL );
 	if (CtrStdFlow) return myself;
 	SDL_Event event;
 	dir = -1;
@@ -2606,6 +2606,9 @@ ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 void begin(){
+#ifdef WIN
+	FreeConsole();
+#endif
 	ctr_internal_media_reset();
 	ctr_internal_media_init();
 	colorObject = ctr_media_new(CtrStdObject, NULL);
@@ -2620,7 +2623,7 @@ void begin(){
 	pointObject = ctr_media_new(CtrStdObject, NULL);
 	pointObject->link = CtrStdObject;
 	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_point_new );
-	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_POINT_XY), &ctr_point_xyset );
+	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_XY_SET), &ctr_point_xyset );
 	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_POINT_X ), &ctr_point_x );
 	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_POINT_Y ), &ctr_point_y );
 	lineObject = ctr_media_new(CtrStdObject, NULL);
@@ -2635,7 +2638,7 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SCREEN ), &ctr_media_screen );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_CLIPBOARD ), &ctr_media_clipboard );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_CLIPBOARD_SET ), &ctr_media_clipboard_set );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_ON_START ), &ctr_media_override );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_RUN ), &ctr_media_override );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_ON_STEP ), &ctr_media_override );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SELECTED ), &ctr_media_select );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_DIGRAPH_LIGATURE ), &ctr_media_autoreplace );
@@ -2665,8 +2668,8 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_JUMPHEIGHT_SET ), &ctr_img_jump_height );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_COLLISION_SET ), &ctr_media_override );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_ANIMATIONS_SET ), &ctr_img_anims );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_TEXT_SET ), &ctr_img_text );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_TEXT ), &ctr_img_text_get );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_WRITE ), &ctr_img_text );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_img_text_get );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_REMOVE_SELECTION ), &ctr_img_text_del );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_INSERT_TEXT ), &ctr_img_text_ins );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_EDITABLE_SET ), &ctr_img_editable );
