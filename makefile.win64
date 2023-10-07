@@ -24,7 +24,7 @@ ctr:	$(OBJS)
 	$(CC) -shared $(OBJS) -g -lm -o bin/Win64/ctr${ISO}.exe
 	gendef bin/Win64/ctr${ISO}.exe
 	$(DLLTOOL) -d ctr${ISO}.def -l ctr${ISO}import.lib -e ctr${ISO}exports.o
-	$(CC) ctr${ISO}exports.o $(OBJS) -g -lm  -o bin/Win64/ctr${ISO}.exe
+	$(CC) ctr${ISO}exports.o $(OBJS) -g -lm $(LFLAGS) $(EXTRA) -o bin/Win64/ctr${ISO}.exe
 
 .c.o:
 	$(CC) $(CFLAGS) -I i18n/${ISO} -c $<
