@@ -1,4 +1,3 @@
-#define CTR_DICT_MEDIA_MEDIA_OBJECT               "Медиа"            /* Имя основного объекта медиа-плагина */
 #define CTR_DICT_MEDIA_MEDIA_SCREEN               "экран:"           /* Открыть экран */
 #define CTR_DICT_MEDIA_MEDIA_CLIPBOARD            "буфер обмена"     /* Возвращает текст из буфера обмена */
 #define CTR_DICT_MEDIA_MEDIA_CLIPBOARD_SET        "буфер обмена:"    /* Помещает текст в буфер обмена */

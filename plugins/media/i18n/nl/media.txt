@@ -1,4 +1,3 @@
-#define CTR_DICT_MEDIA_MEDIA_OBJECT               "Media"             /* Name of the main object of the Media Plugin */
 #define CTR_DICT_MEDIA_MEDIA_SCREEN               "scherm:"           /* Open a screen */
 #define CTR_DICT_MEDIA_MEDIA_CLIPBOARD            "klembord"          /* Returns text from clipboard */
 #define CTR_DICT_MEDIA_MEDIA_CLIPBOARD_SET        "klembord:"         /* Puts text on clipboard */
