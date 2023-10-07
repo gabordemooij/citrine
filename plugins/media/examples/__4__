@@ -1,0 +1,22 @@
+☞ media ≔ Media nieuw.
+☞ canvas ≔ Plaatje nieuw: “canvas.png”.
+
+media bĳ: “start” doen: {
+    canvas x: 0 y: 0.
+    {
+        ☞ r ≔ (Getal tussen: 0 en: 2000) ÷ 100 - 10.
+        ☞ x ≔ (Getal tussen: 0 en: 400) - 200.
+        ☞ y ≔ (Getal tussen: 0 en: 400) - 200.
+        { :i
+            ☞ a ≔ Punt nieuw x: x y: y + (i × r).
+            ☞ b ≔ Punt nieuw x: (x × -1) + (i × r) y: y.
+            canvas tekenen: (
+                Reeks ← (
+                    Lĳn nieuw vanuit: a naar: b
+                )
+            ) kleur: (Kleur nieuw rood: i groen: i blauw:  i).
+        } × 255.
+    } × 10.
+}.
+
+media scherm: “canvas.png”.

@@ -1,0 +1,10 @@
+☞ media ≔ Media nieuw.
+
+
+✎ schrĳf: (Media sys: “/home/gabor/thuis/bedrijf/projecten/citrine/bin/Linux/ctrnl plugins/media/examples/client &”).
+{
+    ☞ ontvangen ≔ Netwerk tekstberichten.
+    ✎ schrĳf: ontvangen, stop.
+} × 2.
+
+
