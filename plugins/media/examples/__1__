@@ -1,0 +1,19 @@
+☞ media ≔ Media nieuw.
+☞ persoon ≔ Plaatje nieuw: “persoon.png”.
+☞ obstakel ≔ Plaatje nieuw: “obstakel.png”.
+
+media bĳ: “start” doen: {
+
+    persoon x: 300 y: 300,
+    bestuurbaar: Ja, actief: Ja.
+
+    obstakel x: 400 y: 300,
+    blokkade: Ja.
+
+    persoon bĳ: “bots:” doen: {
+        Geluid nieuw: “geluidje.ogg”, laten horen.
+    }.
+
+}.
+
+media scherm: “grasveld.png”.
