@@ -44,33 +44,28 @@ ctr_object* ctr_internal_recursion;
  * Reads in an entire file.
  */
 char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
-   char* prg;
-   int ch;
-   int prev;
-   uint64_t size;
-   uint64_t real_size;
-   FILE* fp;
-   fp = fopen(file_name,"r");
-   if( fp == NULL ) {
-      fprintf(stderr, CTR_ERR_FOPEN );
-      exit(1);
-   }
-   prev = ftell(fp);
-   fseek(fp,0L,SEEK_END);
-   size = ftell(fp);
-   fseek(fp,prev,SEEK_SET);
-   real_size = (size+4)*sizeof(char);
-   prg = ctr_heap_allocate(real_size); /* add 4 bytes, 3 for optional closing sequence verbatim mode and one lucky byte! */
-   ctr_program_length=0;
-   while( ( ch = fgetc(fp) ) != EOF ) prg[ctr_program_length++]=ch;
-   //if ( ctr_program_length != size ) {
-	//printf("Program length = %I64d but file size = %I64d \n", ctr_program_length, size);
-	//fprintf(stderr, CTR_ERR_SEEK );
-	//exit(1);
-   //}
-   fclose(fp);
-   *total_size = (uint64_t) real_size;
-   return prg;
+	char* prg;
+	int ch;
+	int prev;
+	uint64_t size;
+	uint64_t real_size;
+	FILE* fp;
+	fp = fopen(file_name,"r");
+	if( fp == NULL ) {
+	  fprintf(stderr, CTR_ERR_FOPEN );
+	  exit(1);
+	}
+	prev = ftell(fp);
+	fseek(fp,0L,SEEK_END);
+	size = ftell(fp);
+	fseek(fp,prev,SEEK_SET);
+	real_size = (size+4)*sizeof(char);
+	prg = ctr_heap_allocate(real_size); /* add 4 bytes, 3 for optional closing sequence verbatim mode and one lucky byte! */
+	ctr_program_length=0;
+	while( ( ch = fgetc(fp) ) != EOF ) prg[ctr_program_length++]=ch;
+	fclose(fp);
+	*total_size = (uint64_t) real_size;
+	return prg;
 }
 
 /**

@@ -10,7 +10,6 @@
 
 #define PL_MPEG_IMPLEMENTATION
 #include "pl_mpeg.h"
-
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
@@ -113,18 +112,8 @@ char CtrMediaBreakLoopFlag = 0;
 uint16_t CtrMediaNetworkChunkSize = 350;
 time_t CtrMediaFrameTimer = 0;
 uint16_t CtrMediaSteps;
-/*
-AVFormatContext* CtrMediaVideoFormatCtx;
-const AVCodec* CtrMediaBGVideoCodec;
-AVCodecContext* CtrMediaBGVideoCdcCtx;
-*/
 int CtrMediaVideoId = -1;
 double CtrMediaVideoFPSRendering;
-/*
-AVCodecParameters* CtrMediaVideoParams;
-AVFrame* CtrMediaVideoFrame;
-AVPacket* CtrMediaVideoPacket;
-*/
 SDL_Texture* CtrMediaBGVideoTexture;
 
 int CtrMediaAudioRate;
@@ -961,18 +950,16 @@ void ctr_internal_media_loadvideobg(char* path, SDL_Rect* dimensions) {
 	plm_set_audio_enabled(plm, FALSE);
 	plm_set_loop(plm, FALSE);
 	plm_seek(plm, 39, FALSE);
-	
 	int w = plm_get_width(plm);
 	int h = plm_get_height(plm);
 	rgb_buffer = (uint8_t *)malloc(w * h * 3);
 	wrgb = w * 3;
 	CtrMediaBGVideoTexture = SDL_CreateTexture(CtrMediaRenderer, SDL_PIXELFORMAT_RGB24,
-        SDL_TEXTUREACCESS_STREAMING | SDL_TEXTUREACCESS_TARGET,
-       w, h);
-     if (!CtrMediaBGVideoTexture) ctr_internal_media_fatalerror("texture", "FFMPEG");  
-     SDL_SetWindowSize(CtrMediaWindow,w, h);
-     SDL_Delay(100);
-    
+	SDL_TEXTUREACCESS_STREAMING | SDL_TEXTUREACCESS_TARGET,
+	w, h);
+	if (!CtrMediaBGVideoTexture) ctr_internal_media_fatalerror("texture", "FFMPEG");  
+	SDL_SetWindowSize(CtrMediaWindow,w, h);
+	SDL_Delay(100);
 	dimensions->x = 0;
 	dimensions->y = 0;
 	dimensions->h = h;
@@ -1734,8 +1721,6 @@ int ctr_internal_receive_network_message(void* buffer, int messagelen, char* ip_
 	return bytes_received;
 }
 
-
-
 uint16_t CtrMediaNetworkCunkId = 1;
 
 ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList) {
@@ -1988,9 +1973,6 @@ void ctr_img_destructor(ctr_resource* rs) {
 	MediaIMG* image = (MediaIMG*) rs->ptr;
 	image->ref = NULL;
 }
-
-
-
 
 ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 	SDL_Rect dimensions;
@@ -2407,7 +2389,6 @@ ctr_object* ctr_img_draw(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-
 ctr_object* ctr_media_override(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
@@ -2493,8 +2474,6 @@ void ctr_internal_media_init() {
 		fprintf(stderr, "Couldn't open audio device.");
 	}
 }
-
-
 
 ctr_object* ctr_package_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -2595,7 +2574,6 @@ ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
 	);
 }
 
-
 ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_media_external_command(
 		getenv("SPEAK"),
@@ -2622,39 +2600,21 @@ ctr_object* ctr_media_console_write(ctr_object* myself, ctr_argument* argumentLi
 		}
 		ctr_media_stdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	}
-	//printf("Alloced console.\n");
 	CtrConsoleAttached = 1;
-	
-	//return ctr_console_write(myself, argumentList);
-	
 	ctr_object* argument1 = argumentList->object;
 	ctr_object* strObject = ctr_internal_cast2string(argument1);
-	//printf("%s", );
-	
 	DWORD dwBytesWritten;
 	WriteFile(ctr_media_stdout, strObject->value.svalue->value, strObject->value.svalue->vlen, &dwBytesWritten, 0);
-	
-	
-	//SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Citrine", "aaa", CtrMediaWindow);
-
 	return myself;
 }
 
 ctr_object* ctr_media_console_brk(ctr_object* myself, ctr_argument* argumentList) {
-	
 	DWORD dwBytesWritten;
 	WriteFile(ctr_media_stdout, "\n", 1, &dwBytesWritten, 0);
 	FlushFileBuffers(ctr_media_stdout);
-
-	
-	//fwrite("\n", sizeof(char), 1, ctr_media_stdout);
-	
-	//fflush(ctr_media_stdout);
 	return myself;
 }
-
 #endif
-
 
 void begin(){
 	#ifdef WIN
@@ -2700,12 +2660,10 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_ONDO ), &ctr_media_on_do );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_media_end );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "sys:" ), &ctr_media_system );
-	
 	#ifdef WIN
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring(CTR_DICT_WRITE), &ctr_media_console_write );
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_STOP ), &ctr_media_console_brk );
 	#endif
-	
 	imageObject = ctr_img_new(CtrStdObject, NULL);
 	imageObject->link = CtrStdObject;
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_img_new );
@@ -2769,10 +2727,7 @@ void begin(){
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NETWORK_PORT ), ctr_build_string_from_cstring("MediaNetPort1"), CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NETWORK_OBJECT), networkObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PACKAGE_OBJECT ), packageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
-	
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_QUOTES ), ctr_build_string_from_cstring(CTR_DICT_QUOT_OPEN CTR_DICT_QUOT_CLOSE), CTR_CATEGORY_PUBLIC_PROPERTY);
 	/* Untranslated reference for systems that do not support UTF-8 characters in file names (like Windows) */
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Media" ), mediaObject, CTR_CATEGORY_PUBLIC_PROPERTY);
-	
-	
 }
