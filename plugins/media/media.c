@@ -39,11 +39,6 @@
 
 #include <unistd.h>
 
-#ifndef NO_MEDIA_ESPEAK
-#include <espeak/speak_lib.h>
-#endif
-
-
 
 /* Old Windows versions lack these functions
  * 
@@ -296,6 +291,14 @@ ctr_size ctr_internal_media_bytepos2utf8pos( MediaIMG* image, int bytepos ) {
 	return chars;
 }
 
+void ctr_internal_unnatural_y( int* y ) {
+	*y = windowHeight - *y;
+}
+
+void ctr_internal_natural_y( int* y ) {
+	*y = windowHeight - *y;
+}
+
 void ctr_internal_media_reset_selection() {
 	CtrMediaSelectBegin = CtrMediaSelectEnd;
 }
@@ -411,7 +414,7 @@ int ctr_internal_media_get_current_char_line(MediaIMG* haystack) {
 void ctr_internal_media_select_word(MediaIMG* haystack) {
 	ctr_internal_media_reset_selection();
 	int i = CtrMediaInputIndex;
-	while(i-1 > 0 && 
+	while(i-1 >= 0 && 
 		haystack->text[i-1]!='\n' &&
 		haystack->text[i-1]!='\r' &&
 		haystack->text[i-1]!=' '
@@ -534,6 +537,11 @@ void ctr_internal_cursormove(int x, int y) {
 }
 
 void ctr_internal_media_infercursorpos(MediaIMG* image, int x, int y) {
+	// no text? then index = 0
+	if (!image->textlength) {
+		CtrMediaInputIndex = 0;
+		return;
+	}
 	int relx = x - image->x;
 	int rely = y - image->y;
 	int lineHeight;
@@ -668,7 +676,7 @@ int ctr_internal_media_mouse_down(SDL_Event event) {
 				ctr_internal_img_render_text(focusObject);
 			}
 			ctr_argument* args = ctr_heap_allocate(sizeof(ctr_argument));
-			ctr_send_message(mediaIMGs[i].ref, CTR_DICT_MEDIA_IMAGE_ON_CLICK_SET, strlen(CTR_DICT_MEDIA_IMAGE_ON_CLICK_SET), args);
+			ctr_send_message(mediaIMGs[i].ref, CTR_DICT_ON_CLICK, strlen(CTR_DICT_ON_CLICK), args);
 			ctr_heap_free(args);
 			if (CtrStdFlow) {
 				return 1;
@@ -838,11 +846,11 @@ void ctr_internal_media_detect_collisions(MediaIMG* m, SDL_Rect r) {
 			}
 			if (m->collidable) {
 				collider->object = m2->ref;
-				ctr_send_message(m->ref, CTR_DICT_MEDIA_IMAGE_COLLISION_SET, strlen(CTR_DICT_MEDIA_IMAGE_COLLISION_SET), collider );
+				ctr_send_message(m->ref, CTR_DICT_COLLISION_SET, strlen(CTR_DICT_COLLISION_SET), collider );
 			}
 			if (m2->collidable) {
 				collider->object = m->ref;
-				ctr_send_message(m2->ref, CTR_DICT_MEDIA_IMAGE_COLLISION_SET, strlen(CTR_DICT_MEDIA_IMAGE_COLLISION_SET), collider );
+				ctr_send_message(m2->ref, CTR_DICT_COLLISION_SET, strlen(CTR_DICT_COLLISION_SET), collider );
 			}
 		}
 	}
@@ -909,7 +917,7 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 			m->dir = -1;
 			a = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 			a->object = m->ref;
-			ctr_send_message(m->ref, CTR_DICT_MEDIA_IMAGE_DESTINATION_SET, strlen(CTR_DICT_MEDIA_IMAGE_DESTINATION_SET), a );
+			ctr_send_message(m->ref, CTR_DICT_STOP_AT_SET, strlen(CTR_DICT_STOP_AT_SET), a );
 			ctr_heap_free(a);
 		}
 	}
@@ -1085,13 +1093,13 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 			for(int i = 1; i <= CtrMaxMediaTimers; i++) {
 				if (CtrMediaTimers[i] < 0) continue;
 				if (CtrMediaTimers[i] == 0) {
-					ctr_media_event_timer(myself, CTR_DICT_MEDIA_MEDIA_TIMER, i);
+					ctr_media_event_timer(myself, CTR_DICT_ON_TIMER, i);
 				}
 				CtrMediaTimers[i]--;
 			}
 		}
 		if (CtrMediaEventListenFlagStep) {
-			ctr_send_message(myself, CTR_DICT_MEDIA_MEDIA_ON_STEP, strlen(CTR_DICT_MEDIA_MEDIA_ON_STEP), NULL );
+			ctr_send_message(myself, CTR_DICT_ON_STEP, strlen(CTR_DICT_ON_STEP), NULL );
 		}
 		myself->info.sticky = 0;
 		while (SDL_PollEvent(&event)) {
@@ -1139,7 +1147,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 					event.button.clicks == 1 &&
 					CtrMediaEventListenFlagMouseClick
 					) {
-						ctr_media_event_coords(myself, CTR_DICT_MEDIA_MEDIA_MOUSE_CLICK, event.button.x, event.button.y);
+						ctr_media_event_coords(myself, CTR_DICT_ON_CLICK_XY, event.button.x, event.button.y);
 					}
 					break;
 				case SDL_MOUSEBUTTONDOWN:
@@ -1147,7 +1155,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 					break;
 				case SDL_CONTROLLERBUTTONDOWN:
 					if (CtrMediaEventListenFlagGamePadBtnDown) {
-						ctr_media_event(myself, CTR_DICT_MEDIA_MEDIA_GAMEPAD_DOWN, SDL_GameControllerGetStringForButton(event.cbutton.button));
+						ctr_media_event(myself, CTR_DICT_ON_GAMEPAD_DOWN, SDL_GameControllerGetStringForButton(event.cbutton.button));
 					}
 					switch(event.cbutton.button) {
 						case SDL_CONTROLLER_BUTTON_DPAD_UP:
@@ -1168,7 +1176,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 					break;
 				case SDL_CONTROLLERBUTTONUP:
 					if (CtrMediaEventListenFlagGamePadBtnUp) {
-						ctr_media_event(myself, CTR_DICT_MEDIA_MEDIA_GAMEPAD_UP, SDL_GameControllerGetStringForButton(event.cbutton.button));
+						ctr_media_event(myself, CTR_DICT_ON_GAMEPAD_UP, SDL_GameControllerGetStringForButton(event.cbutton.button));
 					}
 					switch(event.cbutton.button) {
 						case SDL_CONTROLLER_BUTTON_DPAD_UP:
@@ -1185,7 +1193,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 					break;
 				case SDL_KEYUP:
 					if (CtrMediaEventListenFlagKeyUp) {
-						ctr_media_event(myself, CTR_DICT_MEDIA_MEDIA_KEY, SDL_GetKeyName(event.key.keysym.sym));
+						ctr_media_event(myself, CTR_DICT_ON_KEY_UP, SDL_GetKeyName(event.key.keysym.sym));
 					}
 					switch(event.key.keysym.scancode) {
 						case SDL_SCANCODE_LEFT:
@@ -1206,7 +1214,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 					break;
 				case SDL_KEYDOWN:
 					if (CtrMediaEventListenFlagKeyDown) {
-						ctr_media_event(myself, CTR_DICT_MEDIA_MEDIA_KEY_DOWN, SDL_GetKeyName(event.key.keysym.sym));
+						ctr_media_event(myself, CTR_DICT_ON_KEY_DOWN, SDL_GetKeyName(event.key.keysym.sym));
 					}
 					switch(event.key.keysym.scancode) {
 						case SDL_SCANCODE_LSHIFT:
@@ -1374,39 +1382,45 @@ ctr_object* ctr_point_new(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 ctr_object* ctr_point_x(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_object_property(myself, "x", NULL);
+	int x = (int) ctr_tonum(ctr_internal_object_property(myself, "x", NULL));
+	return ctr_build_number_from_float(x);
 }
 
 ctr_object* ctr_point_y(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_object_property(myself, "y", NULL);
+	int y = (int) ctr_tonum(ctr_internal_object_property(myself, "y", NULL));
+	ctr_internal_natural_y(&y);
+	return ctr_build_number_from_float(y);
 }
 
 ctr_object* ctr_point_xyset(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_internal_object_property(myself, "x", argumentList->object);
-	ctr_internal_object_property(myself, "y", argumentList->next->object);
+	int x = (int) ctr_tonum(ctr_internal_cast2number(argumentList->object));
+	int y = (int) ctr_tonum(ctr_internal_cast2number(argumentList->next->object));
+	ctr_internal_natural_y(&y);
+	ctr_internal_object_property(myself, "x", ctr_build_number_from_float(x));
+	ctr_internal_object_property(myself, "y", ctr_build_number_from_float(y));
 	return myself;
 }
 
 ctr_object* ctr_line_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	instance->link = myself;
-	ctr_internal_object_property(instance, CTR_DICT_MEDIA_LINE_POINT_START, CtrStdNil);
-	ctr_internal_object_property(instance, CTR_DICT_MEDIA_LINE_POINT_END, CtrStdNil);
+	ctr_internal_object_property(instance, CTR_DICT_FROM, CtrStdNil);
+	ctr_internal_object_property(instance, CTR_DICT_TO, CtrStdNil);
 	return instance;
 }
 
 ctr_object* ctr_line_from_to(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_internal_object_property(myself, CTR_DICT_MEDIA_LINE_POINT_START, argumentList->object);
-	ctr_internal_object_property(myself, CTR_DICT_MEDIA_LINE_POINT_END, argumentList->next->object);
+	ctr_internal_object_property(myself, CTR_DICT_FROM, argumentList->object);
+	ctr_internal_object_property(myself, CTR_DICT_TO, argumentList->next->object);
 	return myself;
 }
 
 ctr_object* ctr_line_start(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_object_property(myself, CTR_DICT_MEDIA_LINE_POINT_START, NULL);
+	return ctr_internal_object_property(myself, CTR_DICT_FROM, NULL);
 }
 
 ctr_object* ctr_line_end(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_object_property(myself, CTR_DICT_MEDIA_LINE_POINT_END, NULL);
+	return ctr_internal_object_property(myself, CTR_DICT_TO, NULL);
 }
 
 ctr_object* ctr_color_new(ctr_object* myself, ctr_argument* argumentList) {
@@ -1490,6 +1504,9 @@ ctr_object* ctr_sound_play(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+#ifdef WIN
+#define WIN_UTF8ToStringW(S) (WCHAR *)SDL_iconv_string("UTF-16LE", "UTF-8", (char *)(S), SDL_strlen(S)+1)
+#endif
 
 SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
 	if (CtrMediaAssetPackage == NULL) {
@@ -1497,7 +1514,13 @@ SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
 	}
 	SDL_RWops* res = NULL;
 	char* path = ctr_heap_allocate_cstring(ctr_internal_object_property(CtrMediaAssetPackage, "path", NULL));
+#ifdef WIN
+	path = (char*)WIN_UTF8ToStringW(path);
+	FILE* asset_file = fopen((char*)WIN_UTF8ToStringW(path), "rb");
+#endif
+#ifndef WIN
 	FILE* asset_file = fopen(path, "rb");
+#endif
 	if (!asset_file) return NULL;
 	fseek(asset_file, 0, SEEK_SET);
 	char* buffer = malloc(500);
@@ -1724,7 +1747,7 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 	char ip_str_recipient[40];
 	char ip_str[40];
 	double timeout = 10;
-	double interval = 0.0001;
+	double interval = 0.01;
 	uint16_t chunk_size = CtrMediaNetworkChunkSize;
 	uint16_t port = 9000;
 	uint64_t chunks = ceil((double)total_size / chunk_size);
@@ -2040,13 +2063,14 @@ ctr_object* ctr_img_controllable(ctr_object* myself, ctr_argument* argumentList)
 }
 
 ctr_object* ctr_img_xy(ctr_object* myself, ctr_argument* argumentList) {
-	int x = (int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
-	int y = (int) ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
+	int x = (int) ctr_tonum(ctr_internal_cast2number(argumentList->object));
+	int y = (int) ctr_tonum(ctr_internal_cast2number(argumentList->next->object));
+	ctr_internal_natural_y(&y);
 	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
 	image->ox = x;
 	image->oy = y;
 	image->x = x;
-	image->y = y;
+	image->y = y - image->h;
 	return myself;
 }
 
@@ -2057,13 +2081,18 @@ ctr_object* ctr_img_x(ctr_object* myself, ctr_argument* argumentList) {
 
 ctr_object* ctr_img_y(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
-	return ctr_build_number_from_float(image->y);
+	int y = (int) ctr_tonum(ctr_build_number_from_float(image->y));
+	y += image->h;
+	ctr_internal_natural_y(&y);
+	return ctr_build_number_from_float(y);
 }
 
 ctr_object* ctr_img_mov_set(ctr_object* myself, ctr_argument* argumentList) {
 	double x = (int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
-	double y = (int) ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
+	int y_ = (int) ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
+	ctr_internal_natural_y(&y_);
 	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	double y = (double) (y_ - image->h);
 	double delta_x = x - image->x;
 	double delta_y = y - image->y;
 	double rad = atan2(-1 * delta_y, delta_x);
@@ -2162,7 +2191,13 @@ ctr_object* ctr_img_background_color(ctr_object* myself, ctr_argument* argumentL
 ctr_object* ctr_img_text_align(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
 	image->paddingx = (int)ctr_internal_cast2number(argumentList->object)->value.nvalue;
-	image->paddingy = (int)ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
+	int y = (int)ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
+	
+	int lineHeight;
+	TTF_SizeUTF8(image->font, "X", NULL, &lineHeight);
+	y = image->h - y;
+	y -= lineHeight;
+	image->paddingy = y;
 	return myself;
 }
 
@@ -2212,8 +2247,8 @@ void ctr_internal_img_render_cursor(ctr_object* focusObject) {
 	 }
 	y1 -= (CtrMediaCursorOffsetY);
 	if ((CtrMediaSteps / 50) % 2) {
-		SDL_SetRenderDrawColor(CtrMediaRenderer, 255, 255, 255, 255);
-		SDL_RenderDrawLine(CtrMediaRenderer, image->x + (offsetx), image->y + (y1*height), image->x + (offsetx), image->y + ((y1*height)+height));
+		SDL_SetRenderDrawColor(CtrMediaRenderer, image->color.r, image->color.g, image->color.b, 255);
+		SDL_RenderDrawLine(CtrMediaRenderer, image->x + (offsetx) + (image->paddingx), image->y + (y1*height) + (image->paddingy), image->x + (offsetx) + (image->paddingx), image->y + ((y1*height)+height) + (image->paddingy));
 	}
 	CtrMediaCursorLine = y1;
 }
@@ -2357,8 +2392,8 @@ ctr_object* ctr_img_draw(ctr_object* myself, ctr_argument* argumentList) {
 			(int) ctr_tonum(ctr_internal_object_property(shape, "y", NULL)));
 		}
 		if (shape->link == lineObject) {
-			subshape1 = ctr_internal_object_property(shape, CTR_DICT_MEDIA_LINE_POINT_START, NULL);
-			subshape2 = ctr_internal_object_property(shape, CTR_DICT_MEDIA_LINE_POINT_END, NULL);
+			subshape1 = ctr_internal_object_property(shape, CTR_DICT_FROM, NULL);
+			subshape2 = ctr_internal_object_property(shape, CTR_DICT_TO, NULL);
 			SDL_RenderDrawLine(CtrMediaRenderer,
 				(int) ctr_tonum(ctr_internal_object_property(subshape1, "x", NULL)),
 				(int) ctr_tonum(ctr_internal_object_property(subshape1, "y", NULL)),
@@ -2460,45 +2495,6 @@ void ctr_internal_media_init() {
 }
 
 
-char CtrMediaAudioVoiceInit = 0;
-
-
-#ifndef NO_MEDIA_ESPEAK
-ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
-	char* text = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
-	ctr_object* spoken = CtrStdBoolFalse;
-	espeak_AUDIO_OUTPUT output;
-	output = AUDIO_OUTPUT_PLAYBACK;
-	if (!CtrMediaAudioVoiceInit) {
-		int result = espeak_Initialize(output, 500, NULL, 0);
-		if (result == -1) {
-			ctr_error("Unable to init speech synth: %s.\n", errno);
-		} else {
-			CtrMediaAudioVoiceInit = 1;
-		}
-	}
-	if (CtrMediaAudioVoiceInit) {
-		espeak_VOICE voice;
-		voice.languages = (const char*) CTR_DICT_MEDIA_AUDIO_VOICE_LANG_CODE;
-		voice.name = "media";
-		voice.variant = 2;
-		voice.gender = 1;
-		espeak_SetVoiceByProperties(&voice);
-		unsigned int* uid = 0;
-		void* callback = NULL;
-		espeak_Synth( text, argumentList->object->value.svalue->vlen+1, 0, 0, 0, espeakCHARS_UTF8, uid, callback );
-		espeak_Synchronize();
-		spoken = CtrStdBoolTrue;
-	}
-	return spoken;
-}
-#else
-ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
-	return myself;
-}
-#endif
-
-
 
 ctr_object* ctr_package_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -2568,149 +2564,215 @@ ctr_object* ctr_package_add(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_media_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	char* event_name = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	ctr_object* listener = argumentList->next->object;
-	if (strcmp(CTR_DICT_MEDIA_MEDIA_KEY, event_name)==0) CtrMediaEventListenFlagKeyUp = (listener != CtrStdNil);
-	else if (strcmp(CTR_DICT_MEDIA_MEDIA_KEY_DOWN, event_name)==0) CtrMediaEventListenFlagKeyDown = (listener != CtrStdNil);
-	else if (strcmp(CTR_DICT_MEDIA_MEDIA_MOUSE_CLICK, event_name)==0) CtrMediaEventListenFlagMouseClick = (listener != CtrStdNil);
-	else if (strcmp(CTR_DICT_MEDIA_MEDIA_GAMEPAD_DOWN, event_name)==0) CtrMediaEventListenFlagGamePadBtnDown = (listener != CtrStdNil);
-	else if (strcmp(CTR_DICT_MEDIA_MEDIA_GAMEPAD_UP, event_name)==0) CtrMediaEventListenFlagGamePadBtnUp = (listener != CtrStdNil);
-	else if (strcmp(CTR_DICT_MEDIA_MEDIA_TIMER, event_name)==0) CtrMediaEventListenFlagTimer = (listener != CtrStdNil);
-	else if (strcmp(CTR_DICT_MEDIA_MEDIA_ON_STEP, event_name)==0) CtrMediaEventListenFlagStep = (listener != CtrStdNil);
+	if (strcmp(CTR_DICT_ON_KEY_UP, event_name)==0) CtrMediaEventListenFlagKeyUp = (listener != CtrStdNil);
+	else if (strcmp(CTR_DICT_ON_KEY_DOWN, event_name)==0) CtrMediaEventListenFlagKeyDown = (listener != CtrStdNil);
+	else if (strcmp(CTR_DICT_ON_CLICK_XY, event_name)==0) CtrMediaEventListenFlagMouseClick = (listener != CtrStdNil);
+	else if (strcmp(CTR_DICT_ON_GAMEPAD_DOWN, event_name)==0) CtrMediaEventListenFlagGamePadBtnDown = (listener != CtrStdNil);
+	else if (strcmp(CTR_DICT_ON_GAMEPAD_UP, event_name)==0) CtrMediaEventListenFlagGamePadBtnUp = (listener != CtrStdNil);
+	else if (strcmp(CTR_DICT_ON_TIMER, event_name)==0) CtrMediaEventListenFlagTimer = (listener != CtrStdNil);
+	else if (strcmp(CTR_DICT_ON_STEP, event_name)==0) CtrMediaEventListenFlagStep = (listener != CtrStdNil);
 	ctr_heap_free(event_name);
 	return ctr_object_on_do(myself, argumentList);
 }
 
+
+ctr_object* ctr_internal_media_external_command(char* command_str, char* fallback, char* parameter_str) {
+	if (command_str == NULL) command_str = fallback;
+	int maxlen = 200;
+	char  command[maxlen = 10];
+	memset(command, '\0', maxlen + 10);
+	if (strlen(command_str) + strlen(parameter_str) > maxlen) return CtrStdBoolFalse;
+	sprintf(command, "%s '%s'", command_str, parameter_str);
+	if  (system(command)==0) return CtrStdBoolTrue;
+	return CtrStdBoolFalse;
+}
+
 ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
-	char* url = ctr_heap_allocate_cstring(argumentList->object);
-	char  command[200];
-	char* browsers[10];
-	browsers[0] = "firefox";
-	browsers[1] = "chromium";
-	browsers[2] = "chrome";
-	browsers[3] = "edge";
-	browsers[4] = "safari";
-	//check url for safety
-	for (int j = 0; j<strlen(url); j++) {
-		if (url[j]=='\'') return myself;
-	}
-	if (strlen(url)<150) {
-		for (int i = 0; i < 5; i++) {
-			memset(command, '\0', 100);
-			sprintf(command, "%s '%s'", browsers[i], url);
-			if (system(command)==0) {
-				break;
-			}
+	return ctr_internal_media_external_command(
+		getenv("BROWSER"),
+		"chrome",
+		ctr_tostr(argumentList->object)
+	);
+}
+
+
+ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_internal_media_external_command(
+		getenv("SPEAK"),
+		"say",
+		ctr_tostr(argumentList->object)
+	);
+}
+
+ctr_object* ctr_media_system(ctr_object* myself, ctr_argument* argumentList) {
+	char* command = ctr_tostr(ctr_internal_copy2string(argumentList->object));
+	int rs = system(command);
+	return ctr_build_number_from_float((double) rs);
+}
+
+#ifdef WIN
+int CtrConsoleAttached = 0;
+HANDLE ctr_media_stdout;
+
+ctr_object* ctr_media_console_write(ctr_object* myself, ctr_argument* argumentList) {
+	if (!CtrConsoleAttached) {
+		if (!AllocConsole()) {
+			printf("Failed to alloc console!\n");
+			exit(0);
 		}
+		ctr_media_stdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	}
-	ctr_heap_free(url);
+	//printf("Alloced console.\n");
+	CtrConsoleAttached = 1;
+	
+	//return ctr_console_write(myself, argumentList);
+	
+	ctr_object* argument1 = argumentList->object;
+	ctr_object* strObject = ctr_internal_cast2string(argument1);
+	//printf("%s", );
+	
+	DWORD dwBytesWritten;
+	WriteFile(ctr_media_stdout, strObject->value.svalue->value, strObject->value.svalue->vlen, &dwBytesWritten, 0);
+	
+	
+	//SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Citrine", "aaa", CtrMediaWindow);
+
 	return myself;
 }
 
-void begin(){
-#ifdef WIN
-	FreeConsole();
+ctr_object* ctr_media_console_brk(ctr_object* myself, ctr_argument* argumentList) {
+	
+	DWORD dwBytesWritten;
+	WriteFile(ctr_media_stdout, "\n", 1, &dwBytesWritten, 0);
+	FlushFileBuffers(ctr_media_stdout);
+
+	
+	//fwrite("\n", sizeof(char), 1, ctr_media_stdout);
+	
+	//fflush(ctr_media_stdout);
+	return myself;
+}
+
 #endif
+
+
+void begin(){
+	#ifdef WIN
+	FreeConsole();
+	#endif
 	ctr_internal_media_reset();
 	ctr_internal_media_init();
 	colorObject = ctr_media_new(CtrStdObject, NULL);
 	colorObject->link = CtrStdObject;
 	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_color_new );
-	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_RED_GREEN_BLUE_SET ), &ctr_color_rgb_set );
-	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_ALPHA_SET ), &ctr_color_a_set );
-	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_RED ), &ctr_color_r );
-	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_GREEN ), &ctr_color_g );
-	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_BLUE ), &ctr_color_b );
-	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_ALPHA ), &ctr_color_a );
+	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_RED_GREEN_BLUE_SET ), &ctr_color_rgb_set );
+	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_TRANSPARENCY_SET ), &ctr_color_a_set );
+	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_RED ), &ctr_color_r );
+	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_GREEN ), &ctr_color_g );
+	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_BLUE ), &ctr_color_b );
+	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_TRANSPARENCY ), &ctr_color_a );
 	pointObject = ctr_media_new(CtrStdObject, NULL);
 	pointObject->link = CtrStdObject;
 	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_point_new );
-	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_XY_SET), &ctr_point_xyset );
-	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_POINT_X ), &ctr_point_x );
-	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_POINT_Y ), &ctr_point_y );
+	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_XY_SET), &ctr_point_xyset );
+	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_X ), &ctr_point_x );
+	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_Y ), &ctr_point_y );
 	lineObject = ctr_media_new(CtrStdObject, NULL);
 	lineObject->link = CtrStdObject;
 	ctr_internal_create_func(lineObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_line_new );
-	ctr_internal_create_func(lineObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_LINE_FROM_TO ), &ctr_line_from_to );
-	ctr_internal_create_func(lineObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_LINE_POINT_START ), &ctr_line_start );
-	ctr_internal_create_func(lineObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_LINE_POINT_END ), &ctr_line_end );
+	ctr_internal_create_func(lineObject, ctr_build_string_from_cstring( CTR_DICT_FROM_TO_SET ), &ctr_line_from_to );
+	ctr_internal_create_func(lineObject, ctr_build_string_from_cstring( CTR_DICT_FROM ), &ctr_line_start );
+	ctr_internal_create_func(lineObject, ctr_build_string_from_cstring( CTR_DICT_TO ), &ctr_line_end );
 	mediaObject = ctr_media_new(CtrStdObject, NULL);
 	mediaObject->link = CtrStdObject;
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_media_new );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SCREEN ), &ctr_media_screen );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_CLIPBOARD ), &ctr_media_clipboard );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_CLIPBOARD_SET ), &ctr_media_clipboard_set );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_SCREEN ), &ctr_media_screen );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_CLIPBOARD ), &ctr_media_clipboard );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_CLIPBOARD_SET ), &ctr_media_clipboard_set );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_RUN ), &ctr_media_override );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_ON_STEP ), &ctr_media_override );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SELECTED ), &ctr_media_select );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_DIGRAPH_LIGATURE ), &ctr_media_autoreplace );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_SAY ), &ctr_media_speak );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_LINK_SET ), &ctr_media_link_package );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_TIMER_SET ), &ctr_media_timer );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_WEBSITE ), &ctr_media_website );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_ON_STEP ), &ctr_media_override );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_SELECTION ), &ctr_media_select );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_DIGRAPH_LIGATURE_SET ), &ctr_media_autoreplace );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_SAY_SET ), &ctr_media_speak );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_LINK_SET ), &ctr_media_link_package );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_TIMER_SET ), &ctr_media_timer );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_WEBSITE_SET ), &ctr_media_website );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_ONDO ), &ctr_media_on_do );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_media_end );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "sys:" ), &ctr_media_system );
+	
+	#ifdef WIN
+	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring(CTR_DICT_WRITE), &ctr_media_console_write );
+	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_STOP ), &ctr_media_console_brk );
+	#endif
+	
 	imageObject = ctr_img_new(CtrStdObject, NULL);
 	imageObject->link = CtrStdObject;
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_img_new );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_img_new_set );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_SET ), &ctr_img_img );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_CONTROLLABLE ), &ctr_img_controllable );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_XY_SET ), &ctr_img_xy );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_X ), &ctr_img_x );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_Y ), &ctr_img_y );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_MOVE_TO_SET ), &ctr_img_mov_set );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_BOUNCE ), &ctr_img_bounce );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_SOLID_SET ), &ctr_img_solid );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_ACTIVE_SET ), &ctr_img_active );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_GRAVITY_SET ), &ctr_img_gravity );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_SPEED_SET ), &ctr_img_speed );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_FRICTION_SET ), &ctr_img_friction );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_ACCEL_SET ), &ctr_img_accel );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_JUMPHEIGHT_SET ), &ctr_img_jump_height );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_COLLISION_SET ), &ctr_media_override );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_ANIMATIONS_SET ), &ctr_img_anims );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_IMAGE_SET ), &ctr_img_img );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_CONTROLLABLE ), &ctr_img_controllable );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_XY_SET ), &ctr_img_xy );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_X ), &ctr_img_x );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_Y ), &ctr_img_y );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MOVE_TO_XY_SET ), &ctr_img_mov_set );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_BOUNCE_SET ), &ctr_img_bounce );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_SOLID_SET ), &ctr_img_solid );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_ACTIVE_SET ), &ctr_img_active );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_GRAVITY_SET ), &ctr_img_gravity );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_SPEED_SET ), &ctr_img_speed );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_FRICTION_SET ), &ctr_img_friction );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_ACCELERATE_SET ), &ctr_img_accel );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_JUMPHEIGHT_SET ), &ctr_img_jump_height );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_COLLISION_SET ), &ctr_media_override );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_ANIMATIONS_SET ), &ctr_img_anims );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_WRITE ), &ctr_img_text );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_img_text_get );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_REMOVE_SELECTION ), &ctr_img_text_del );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_INSERT_TEXT ), &ctr_img_text_ins );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_EDITABLE_SET ), &ctr_img_editable );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_FONT_TYPE_SIZE_SET ), &ctr_img_font );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_TEXT_COLOR ), &ctr_img_color );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_BACKGROUND_COLOR ), &ctr_img_background_color );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_TEXT_ALIGN ), &ctr_img_text_align );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_DRAW ), &ctr_img_draw );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_DESELECT ), &ctr_img_text_del );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_APPEND ), &ctr_img_text_ins );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_EDITABLE_SET ), &ctr_img_editable );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_FONT_TYPE_SIZE_SET ), &ctr_img_font );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_COLOR_SET ), &ctr_img_color );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_BACKGROUND_COLOR_SET ), &ctr_img_background_color );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_ALIGN_XY_SET ), &ctr_img_text_align );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_DRAW_COLOR_SET ), &ctr_img_draw );
 	audioObject = ctr_audio_new(CtrStdObject, NULL);
 	audioObject->link = CtrStdObject;
 	ctr_internal_create_func(audioObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_audio_new );
 	soundObject = ctr_audio_new(audioObject, NULL);
 	soundObject->link = audioObject;
 	ctr_internal_create_func(soundObject, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_sound_new_set );
-	ctr_internal_create_func(soundObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_PLAY ), &ctr_sound_play );
+	ctr_internal_create_func(soundObject, ctr_build_string_from_cstring( CTR_DICT_AUDIO_PLAY ), &ctr_sound_play );
 	musicObject = ctr_audio_new(audioObject, NULL);
 	musicObject->link = audioObject;
 	ctr_internal_create_func(musicObject, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_music_new_set );
-	ctr_internal_create_func(musicObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_PLAY ), &ctr_music_play );
-	ctr_internal_create_func(audioObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_SILENCE ), &ctr_music_silence );
-	ctr_internal_create_func(audioObject, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_REWIND ), &ctr_music_rewind );
+	ctr_internal_create_func(musicObject, ctr_build_string_from_cstring( CTR_DICT_AUDIO_PLAY ), &ctr_music_play );
+	ctr_internal_create_func(audioObject, ctr_build_string_from_cstring( CTR_DICT_AUDIO_SILENCE ), &ctr_music_silence );
+	ctr_internal_create_func(audioObject, ctr_build_string_from_cstring( CTR_DICT_AUDIO_REWIND ), &ctr_music_rewind );
 	networkObject = ctr_network_new(CtrStdObject, NULL);
 	networkObject->link = CtrStdObject;
 	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_network_new );
-	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring(CTR_DICT_MEDIA_MEDIA_NET_SEND_TO), &ctr_network_basic_text_send );
-	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring(CTR_DICT_MEDIA_MEDIA_NET_FETCH_FROM), &ctr_network_basic_text_receive );
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_OBJECT ), mediaObject, CTR_CATEGORY_PUBLIC_PROPERTY);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_IMAGE_OBJECT ), imageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_COLOR_OBJECT ), colorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_POINT_OBJECT ), pointObject, CTR_CATEGORY_PUBLIC_PROPERTY);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_LINE_OBJECT ), lineObject, CTR_CATEGORY_PUBLIC_PROPERTY);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_AUDIO_OBJECT ), audioObject, CTR_CATEGORY_PUBLIC_PROPERTY);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_SOUND_OBJECT ), soundObject, CTR_CATEGORY_PUBLIC_PROPERTY);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MUSIC_OBJECT ), musicObject, CTR_CATEGORY_PUBLIC_PROPERTY);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_NET_SETTING_PORT ), ctr_build_string_from_cstring("MediaNetPort1"), CTR_CATEGORY_PUBLIC_PROPERTY);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_MEDIA_NET), networkObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring(CTR_DICT_SEND_TEXT_MESSAGE), &ctr_network_basic_text_send );
+	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring(CTR_DICT_FETCH_TEXT_MESSAGES), &ctr_network_basic_text_receive );
 	packageObject = ctr_package_new(CtrStdObject, NULL);
 	packageObject->link = CtrStdObject;
 	ctr_internal_create_func(packageObject, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_package_new_set );
 	ctr_internal_create_func(packageObject, ctr_build_string_from_cstring(CTR_DICT_APPEND), &ctr_package_add );
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_PACKAGE ), packageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MEDIA_PLUGIN_ID ), mediaObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_IMAGE_OBJECT ), imageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_COLOR_OBJECT ), colorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_POINT_OBJECT ), pointObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_LINE_OBJECT ), lineObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_AUDIO_OBJECT ), audioObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_SOUND_OBJECT ), soundObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MUSIC_OBJECT ), musicObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NETWORK_PORT ), ctr_build_string_from_cstring("MediaNetPort1"), CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NETWORK_OBJECT), networkObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PACKAGE_OBJECT ), packageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_QUOTES ), ctr_build_string_from_cstring(CTR_DICT_QUOT_OPEN CTR_DICT_QUOT_CLOSE), CTR_CATEGORY_PUBLIC_PROPERTY);
 	/* Untranslated reference for systems that do not support UTF-8 characters in file names (like Windows) */
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Media" ), mediaObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	
+	
 }
