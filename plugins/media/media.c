@@ -1056,6 +1056,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 		dimensions.x = x;
 		dimensions.y = y;
 		SDL_SetWindowSize(CtrMediaWindow, dimensions.w, dimensions.h);
+		SDL_SetWindowPosition(CtrMediaWindow,SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED);
 		SDL_Delay(100);
 		SDL_RenderCopy(CtrMediaRenderer, texture, NULL, &dimensions);
 		background_is_video = 0;
@@ -2458,7 +2459,7 @@ void ctr_internal_media_init() {
 	CtrMediaAudioVolume = MIX_MAX_VOLUME;
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) ctr_internal_media_fatalerror("SDL failed to init", SDL_GetError());
 	IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
-	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 100, 100, SDL_WINDOW_OPENGL);
+	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 100, 100, SDL_WINDOW_OPENGL);
 	if (CtrMediaWindow == NULL) ctr_internal_media_fatalerror("Unable to create window", SDL_GetError());
 	CtrMediaRenderer = SDL_CreateRenderer(CtrMediaWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
 	if (!CtrMediaRenderer) {
