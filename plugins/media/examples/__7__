@@ -142,7 +142,6 @@ papieren bĳ: “klik” doen: {
         kopieer
         van: selectie eerste 
         lengte: (selectie laatste - selectie eerste).
-    ✎ schrĳf: geselecteerd, stop.
     Media klembord: geselecteerd.
 }.
 
@@ -154,7 +153,7 @@ boek bĳ: “klik” doen: {
 media bĳ: “start” doen: {
 
     tekstveld
-        x: 320 y: 45,
+        x: 320 y: 65,
         letter: “lettertype.ttf” grootte: 16,
         kleur: (Kleur nieuw rood: 255 groen: 255 blauw: 255),
         schrĳf: “ ”,
