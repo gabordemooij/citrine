@@ -1,29 +1,19 @@
 ☞ media ≔ Media nieuw.
-☞ konĳn ≔ Plaatje nieuw: “konĳn.png”.
-☞ eiland ≔ Plaatje nieuw: “eiland.png”, blokkade: Ja.
-
-eiland bĳ: “eindpunt:” doen: {
-    (⛏ y? = 300) ja: {
-        ⛏ beweeg naar x: 500 y: 10.
-    }, anders: {
-        ⛏ beweeg naar x: 500 y: 300.
-    }.
-}.
+☞ persoon ≔ Plaatje nieuw: “persoon.png”.
+☞ obstakel ≔ Plaatje nieuw: “obstakel.png”.
 
 media bĳ: “start” doen: {
-    konĳn x: 100 y: 0,
-        animaties: 2,
-        springhoogte: 200,
-        zwaartekracht: 1,
-        snelheid: 2,
-        versnel: 0,02,
-        weerstand: 0,01,
-        bestuurbaar: Ja.
 
-    eiland
-        x: 500 y: 300,
-        beweeg naar x: 500 y: 10,
-        snelheid: 1.
+    persoon x: 300 y: 300,
+    bestuurbaar: Ja, actief: Ja.
+
+    obstakel x: 400 y: 300,
+    blokkade: Ja.
+
+    persoon bĳ: “bots:” doen: {
+        Geluid nieuw: “geluidje.ogg”, laten horen.
+    }.
+
 }.
 
-media scherm: “achtergrond.png”.
+media scherm: “grasveld.png”.
