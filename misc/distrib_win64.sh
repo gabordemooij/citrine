@@ -19,7 +19,7 @@ mkdir dist/Linux/ISO
 mkdir dist/Linux/OUT
 
 
-declare -a langs=("nl" "ru")
+declare -a langs=("nl" "ru" "en")
 for lang in "${langs[@]}"
 do
 
@@ -87,6 +87,7 @@ cp ~/.wine/drive_c/InnoSetupSourceDir/Output/Citrine096.exe dist/Win64/OUT/$lang
 
 # Use the Win64 output as template
 cp -R dist/Win64/ISO/$lang dist/Linux/ISO/$lang
+./bin/Linux/ctrnl -t /tmp/dict_all.dict plugins/media/examples/__5__ > dist/Linux/ISO/$lang/__5__ 2>/tmp/err5.log
 mkdir -p dist/Linux/OUT/$lang
 
 # Compile for Linux
