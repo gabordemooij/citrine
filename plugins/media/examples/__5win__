@@ -1,8 +1,5 @@
 ☞ media ≔ Media nieuw.
-
 ✎ schrĳf: (Media sys: “START /B ctrnl.exe client”).
-✎ schrĳf: “====”, stop.
-
 {
     ☞ ontvangen ≔ Netwerk tekstberichten.
     ✎ schrĳf: ontvangen, stop.
