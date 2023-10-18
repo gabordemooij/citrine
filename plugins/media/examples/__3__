@@ -2,7 +2,7 @@
 ☞ konĳn ≔ Plaatje nieuw: “konĳn.png”.
 ☞ eiland ≔ Plaatje nieuw: “eiland.png”, blokkade: Ja.
 
-eiland bĳ: “eindpunt:” doen: {
+eiland bĳ: “bestemming:” doen: {
     (⛏ y? = 300) ja: {
         ⛏ beweeg naar x: 500 y: 10.
     }, anders: {

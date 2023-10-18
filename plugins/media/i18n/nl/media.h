@@ -50,7 +50,7 @@
 #define CTR_DICT_ACCELERATE_SET             "versnel:"
 #define CTR_DICT_JUMPHEIGHT_SET             "springhoogte:"
 #define CTR_DICT_BOUNCE_SET                 "stuiter:"
-#define CTR_DICT_STOP_AT_SET                "eindpunt:"
+#define CTR_DICT_STOP_AT_SET                "bestemming:"
 #define CTR_DICT_AUDIO_PLAY                 "laten horen"
 #define CTR_DICT_AUDIO_SILENCE              "stil"
 #define CTR_DICT_AUDIO_REWIND               "terugspoelen"
