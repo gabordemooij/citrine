@@ -1,11 +1,11 @@
 9
 a Object ‘Object’  is NOT Nil.
-a Boolean ‘True’  is NOT Nil.
-a Boolean ‘False’  is NOT Nil.
-a Boolean ‘False’  is NOT Nil.
+a Decision ‘Yes’  is NOT Nil.
+a Decision ‘No’  is NOT Nil.
+a Decision ‘No’  is NOT Nil.
 a Number ‘1’  is NOT Nil.
 a Number ‘0’  is NOT Nil.
-a String ‘Str’  is NOT Nil.
-a String ‘’  is NOT Nil.
-a Code ‘Code’  is NOT Nil.
+a Text ‘Str’  is NOT Nil.
+a Text ‘’  is NOT Nil.
+a Task ‘Task’  is NOT Nil.
 but.. Nil is.. certainly NIL!

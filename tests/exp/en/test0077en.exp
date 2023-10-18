@@ -1,12 +1,12 @@
-String,Number
-String,Boolean
-Number,String
-Number,Boolean
-Boolean,Number
-Boolean,Number
-Boolean,String
-Boolean,String
+Text,Number
+Text,Decision
+Number,Text
+Number,Decision
+Decision,Number
+Decision,Number
+Decision,Text
+Decision,Text
 === String test ===
 123
-False
-True
+No
+Yes
