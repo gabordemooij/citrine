@@ -19,7 +19,7 @@ mkdir dist/Linux/ISO
 mkdir dist/Linux/OUT
 
 
-declare -a langs=("nl" "ru" "en")
+declare -a langs=("nl" "ru" "en" "hi" "fr")
 for lang in "${langs[@]}"
 do
 
@@ -101,6 +101,8 @@ cp bin/Linux/ctr$lang dist/Linux/ISO/$lang/
 # Add dynamic libraries
 cp plugins/media/libctrmedia.so dist/Linux/ISO/$lang/mods/media/
 rm dist/Linux/ISO/$lang/*.dll
+sed -e "s/ctrnl/ctr$lang/g" plugins/media/assets/citrine.sh > dist/Linux/ISO/$lang/citrine.sh
+chmod uog+x dist/Linux/ISO/$lang/citrine.sh
 
 tar cvzf "dist/Linux/OUT/$lang/citrine${lang}096.tar.gz" -C dist/Linux/ISO/$lang/ .
 
