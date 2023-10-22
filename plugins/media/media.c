@@ -2602,7 +2602,8 @@ HANDLE ctr_media_stdout;
 
 ctr_object* ctr_media_console_write(ctr_object* myself, ctr_argument* argumentList) {
 	if (!CtrConsoleAttached) {
-		if (!AllocConsole()) {
+		/* Allocate console on-the-fly and set console in/out to UTF-8 (=65001) */
+		if (!AllocConsole() || !SetConsoleOutputCP(65001) || !SetConsoleCP(65001)) {
 			printf("Failed to alloc console!\n");
 			exit(0);
 		}
