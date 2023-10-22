@@ -2148,6 +2148,13 @@ ctr_object* ctr_img_font(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
 	image->font = TTF_OpenFont(ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object)), (int)ctr_internal_cast2number(argumentList->next->object)->value.nvalue);
 	if (image->font == NULL) ctr_internal_media_fatalerror("Unable to load font", "TTF Font");
+	/* Allow to set compile-time FONTSCRIPT for Harfbuzz shaper */
+	#ifdef FONTSCRIPT
+	int script_ok = TTF_SetFontScriptName(image->font, FONTSCRIPT);
+	if (script_ok == -1) {
+		ctr_print_error("Error setting font script.", -1);
+	}
+	#endif
 	return myself;
 }
 
