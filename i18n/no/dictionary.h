@@ -86,7 +86,7 @@
 #define CTR_DICT_REPLACE_WITH	  "erstatt:med:"
 #define CTR_DICT_SPLIT	          "dele:"
 #define CTR_DICT_SKIP             "offset:"
-#define CTR_DICT_RUN              "løpe"
+#define CTR_DICT_RUN              "start"
 #define CTR_DICT_APPLY_TO         "søke om:"
 #define CTR_DICT_APPLY_TO_AND     "gjelder:og:"
 #define CTR_DICT_VALUE_SET        "satt:verdi:"
