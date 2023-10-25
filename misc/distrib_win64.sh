@@ -19,7 +19,7 @@ mkdir dist/Linux/ISO
 mkdir dist/Linux/OUT
 
 
-declare -a langs=("nl" "ru" "en" "hi" "fr")
+declare -a langs=("nl" "ru" "en" "hi" "fr" "no" "pt_br")
 for lang in "${langs[@]}"
 do
 
