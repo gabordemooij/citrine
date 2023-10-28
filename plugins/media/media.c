@@ -875,7 +875,7 @@ void ctr_internal_media_render_image(MediaIMG* m, SDL_Rect r, SDL_Rect s) {
 void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 	MediaIMG* player;
 	ctr_argument* a;
-	if (m->mov < m->speed && controllableObject && m != controllableObject->value.rvalue->ptr) {
+	if (m->mov < m->speed && ((controllableObject && m != controllableObject->value.rvalue->ptr)  || (controllableObject == NULL))) {
 			m->mov += m->speed * m->accel;
 	}
 	if (m->fric > 0) {
@@ -2341,6 +2341,7 @@ ctr_object* ctr_img_text(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* textObject = ctr_internal_cast2string(argumentList->object);
 	if (image->text != NULL) {
 		ctr_heap_free(image->text);
+		image->text = NULL;
 	} 
 	image->text = ctr_internal_media_normalize_line_endings(ctr_heap_allocate_cstring(textObject));
 	image->textlength = strlen(image->text);
