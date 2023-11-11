@@ -68,7 +68,7 @@ cp plugins/media/assets/picto.ico dist/Win64/ISO/$lang/pictogram.ico
 # Copy assets to setup creator work dir
 cp plugins/media/assets/* ~/.wine/drive_c/InnoSetupSourceDir/
 rm -rf ~/.wine/drive_c/InnoSetupSourceDir/license.txt
-cp LICENSE ~/.wine/drive_c/InnoSetupSourceDir/license.txt
+cp plugins/media/assets/license.txt ~/.wine/drive_c/InnoSetupSourceDir/license.txt
 rm -rf ~/.wine/drive_c/InnoSetupSourceDir/dist
 cp -R dist/Win64/ISO/$lang ~/.wine/drive_c/InnoSetupSourceDir/dist
 
