@@ -86,7 +86,7 @@
 #define CTR_DICT_REPLACE_WITH	  "ubah:dengan:"
 #define CTR_DICT_SPLIT	          "membagi:"
 #define CTR_DICT_SKIP             "mengimbangi:"
-#define CTR_DICT_RUN              "lari"
+#define CTR_DICT_RUN              "memulai"
 #define CTR_DICT_APPLY_TO         "menerapkan:"
 #define CTR_DICT_APPLY_TO_AND     "terapkan:dan:"
 #define CTR_DICT_VALUE_SET        "set:nilai:"

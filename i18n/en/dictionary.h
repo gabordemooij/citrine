@@ -58,7 +58,7 @@
 #define CTR_DICT_NOT             "not"
 #define CTR_DICT_TONUMBER        "number"
 #define CTR_DICT_ITONUMBER       "international number"
-#define CTR_DICT_TOSTRING        "string"
+#define CTR_DICT_TOSTRING        "text"
 #define CTR_DICT_CHAR_AT_SET     "character:"
 #define CTR_DICT_EITHEROR        "either:or:"
 #define CTR_DICT_BY_SET       	 "by:"
