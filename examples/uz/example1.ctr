@@ -1,14 +1,14 @@
-✎ yozish: «Parol yaratuvchisi», to’xta.
+✎ yozish: «Parol yaratuvchisi», to'xta.
 ☞ hisoblash ≔ 0.
 {
-	✎ yozish: «Qancha belgi (16-30)?», to’xta.
-	hisoblash ≔ Dastur so’rash raqam mutlaq.
+	✎ yozish: «Qancha belgi (16-30)?», to'xta.
+	hisoblash ≔ Dastur so'rash raqam mutlaq.
 
 	(hisoblash < 16) haqiqiy: {
-		✎ yozish: «Bu etarli emas, iltimos, 16 dan 30 gacha raqamni kiriting.», to’xta.
+		✎ yozish: «Bu etarli emas, iltimos, 16 dan 30 gacha raqamni kiriting.», to'xta.
 	}.
 	(hisoblash > 30) haqiqiy: {
-		✎ yozish: «Bu juda uzoq, ba'zi tizimlar shuncha vaqtgacha parollarni rad qilishi mumkin.», to’xta.
+		✎ yozish: «Bu juda uzoq, ba'zi tizimlar shuncha vaqtgacha parollarni rad qilishi mumkin.», to'xta.
 	}.
 } vaqt: { ↲ (hisoblash < 16 yoki: hisoblash > 30). }.
 ☞ belgilar ≔ «acdefghjkmnprtwx2345789@#&».
@@ -22,4 +22,4 @@
 	).
 	parol qo'shimcha: char.
 } × hisoblash.
-✎ yozish: parol, to’xta.
+✎ yozish: parol, to'xta.
