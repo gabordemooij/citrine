@@ -114,7 +114,10 @@ void ctr_gc_sweep( int all ) {
 					ctr_heap_free( currentObject->value.avalue );
 				break;
 				case CTR_OBJECT_TYPE_OTEX:
-					if (currentObject->value.rvalue != NULL) ctr_heap_free( currentObject->value.rvalue );
+					if (currentObject->value.rvalue != NULL) {
+						currentObject->value.rvalue->destructor( currentObject->value.rvalue );
+						ctr_heap_free( currentObject->value.rvalue );
+					}
 				break;
 			}
 			ctr_heap_free( currentObject );
@@ -151,6 +154,12 @@ void  ctr_gc_internal_collect() {
 	}
 	ctr_gc_sweep( 0 );
 	ctr_context_id = oldcid;
+}
+
+void ctr_gc_cycle() {
+	if ( ( ( ctr_gc_mode & 1 ) && ctr_gc_alloc > ( ctr_gc_memlimit * 0.8 ) ) || ctr_gc_mode & 4 ) {
+		ctr_gc_internal_collect();
+	}
 }
 
 ctr_object* ctr_gc_internal_pin( ctr_object* object ) {

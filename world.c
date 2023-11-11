@@ -44,32 +44,28 @@ ctr_object* ctr_internal_recursion;
  * Reads in an entire file.
  */
 char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
-   char* prg;
-   int ch;
-   int prev;
-   uint64_t size;
-   uint64_t real_size;
-   FILE* fp;
-   fp = fopen(file_name,"r");
-   if( fp == NULL ) {
-      fprintf(stderr, CTR_ERR_FOPEN );
-      exit(1);
-   }
-   prev = ftell(fp);
-   fseek(fp,0L,SEEK_END);
-   size = ftell(fp);
-   fseek(fp,prev,SEEK_SET);
-   real_size = (size+4)*sizeof(char);
-   prg = ctr_heap_allocate(real_size); /* add 4 bytes, 3 for optional closing sequence verbatim mode and one lucky byte! */
-   ctr_program_length=0;
-   while( ( ch = fgetc(fp) ) != EOF ) prg[ctr_program_length++]=ch;
-   if ( ctr_program_length != size ) {
-	fprintf(stderr, CTR_ERR_SEEK );
-	exit(1);
-   }
-   fclose(fp);
-   *total_size = (uint64_t) real_size;
-   return prg;
+	char* prg;
+	int ch;
+	int prev;
+	uint64_t size;
+	uint64_t real_size;
+	FILE* fp;
+	fp = fopen(file_name,"r");
+	if( fp == NULL ) {
+	  fprintf(stderr, CTR_ERR_FOPEN );
+	  exit(1);
+	}
+	prev = ftell(fp);
+	fseek(fp,0L,SEEK_END);
+	size = ftell(fp);
+	fseek(fp,prev,SEEK_SET);
+	real_size = (size+4)*sizeof(char);
+	prg = ctr_heap_allocate(real_size); /* add 4 bytes, 3 for optional closing sequence verbatim mode and one lucky byte! */
+	ctr_program_length=0;
+	while( ( ch = fgetc(fp) ) != EOF ) prg[ctr_program_length++]=ch;
+	fclose(fp);
+	*total_size = (uint64_t) real_size;
+	return prg;
 }
 
 /**
@@ -267,6 +263,81 @@ void ctr_internal_object_set_property(ctr_object* owner, ctr_object* key, ctr_ob
 	ctr_internal_object_add_property(owner, key, value, is_method);
 }
 
+
+/**
+ * ?internal
+ *
+ * InternalObjectProperty
+ *
+ * Convenience function to get or set a property of an object.
+ * If value == NULL, this function returns the value of the property of the object.
+ * Otherwise the value is set. If the property does not exist, CtrStdNil is returned.
+ * If the object is CtrStdNil, CtrStdNil is returned.
+ * This method never returns NULL and can be chained.
+ */
+ctr_object* ctr_internal_object_property(ctr_object* owner, char* keystr, ctr_object* value) {
+	ctr_object* result_object;
+	result_object = owner;
+	if (owner == CtrStdNil) {
+		return CtrStdNil;
+	}
+	if (value == NULL) {
+		result_object = ctr_internal_object_find_property(
+			owner,
+			ctr_build_string_from_cstring( keystr ),
+			CTR_CATEGORY_PRIVATE_PROPERTY
+		);
+		if (result_object == NULL) result_object = CtrStdNil;
+	} else {
+		ctr_internal_object_set_property(
+			owner,
+			ctr_build_string_from_cstring( keystr ),
+			value,
+			CTR_CATEGORY_PRIVATE_PROPERTY
+		);
+	}
+	return result_object;
+}
+
+/**
+ * ?internal
+ *
+ * toNum()
+ * Convenience function.
+ * Casts an object to a number object and extracts the numeric
+ * value from the object as a double.
+ */
+double ctr_tonum(ctr_object* o) {
+	return ctr_internal_cast2number(o)->value.nvalue;
+}
+
+/**
+ * ?internal
+ *
+ * toBool()
+ * Convenience function.
+ * Casts an object to a boolean object and extracts the boolean
+ * value from the object as a char (i.e. 1 or 0).
+ */
+char ctr_tobool(ctr_object* o) {
+	return (ctr_internal_cast2bool(o)->value.bvalue) ? 1 : 0;
+}
+
+/**
+ * ?internal
+ *
+ * toStr()
+ * Convenience function.
+ * Casts an object to a string object and extracts the string
+ * value from the object as a pointer to a char array.
+ * Note that the pointer points to the memory of the object and
+ * should not be freed.
+ */
+char* ctr_tostr(ctr_object* o) {
+	return ctr_internal_cast2string(o)->value.svalue->value;
+}
+
+
 /**
  * ?internal
  *
@@ -353,10 +424,9 @@ void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func
  *
  * InternalNumberCast
  *
- * Casts an object to a number object.
+ * Same as cast but always returns a copy.
  */
-ctr_object* ctr_internal_cast2number(ctr_object* o) {
-	if ( o->info.type == CTR_OBJECT_TYPE_OTNUMBER ) return o;
+ctr_object* ctr_internal_copy2number(ctr_object* o) {
 	ctr_argument* a = ctr_heap_allocate( sizeof( ctr_argument ) );
 	a->object = CtrStdNil;
 	ctr_object* numObject = ctr_send_message( o, CTR_DICT_TONUMBER, strlen(CTR_DICT_TONUMBER), a );
@@ -371,12 +441,35 @@ ctr_object* ctr_internal_cast2number(ctr_object* o) {
 /**
  * ?internal
  *
+ * InternalNumberCast
+ *
+ * Casts an object to a number object.
+ */
+ctr_object* ctr_internal_cast2number(ctr_object* o) {
+	if ( o->info.type == CTR_OBJECT_TYPE_OTNUMBER ) return o;
+	return ctr_internal_copy2number(o);
+}
+
+/**
+ * ?internal
+ *
  * InternalStringCast
  *
  * Casts an object to a string object.
  */
 ctr_object* ctr_internal_cast2string( ctr_object* o ) {
 	if ( o->info.type == CTR_OBJECT_TYPE_OTSTRING ) return o;
+	return ctr_internal_copy2string(o);
+}
+
+/**
+ * ?internal
+ *
+ * CopyToString
+ *
+ * Same as cast but always returns a copy.
+ */
+ctr_object* ctr_internal_copy2string( ctr_object* o ) {
 	ctr_argument* a = ctr_heap_allocate( sizeof( ctr_argument ) );
 	a->object = CtrStdNil;
 	ctr_object* stringObject = ctr_send_message( o, CTR_DICT_TOSTRING, strlen(CTR_DICT_TOSTRING), a );
@@ -945,6 +1038,7 @@ void ctr_initialize_world() {
  *
  * Sends a message to a receiver object.
  */
+ctr_object* ctr_internal_tmp_msg;
 ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vlen, ctr_argument* argumentList) {
 	ctr_object* methodObject;
 	ctr_object* searchObject;
@@ -953,7 +1047,10 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	ctr_argument* mesgArgument;
 	ctr_object* result = CtrStdNil;
 	ctr_object* (*funct)(ctr_object* receiverObject, ctr_argument* argumentList);
-	ctr_object* msg = NULL;
+	if (!ctr_internal_tmp_msg) {
+		ctr_internal_tmp_msg = ctr_build_empty_string();
+		ctr_internal_tmp_msg->info.sticky = 1;
+	}
 	int argCount;
 	int j;
 	if (CtrStdFlow != NULL) return CtrStdNil; /* Error mode, ignore subsequent messages until resolved. */
@@ -961,10 +1058,14 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	searchObject = receiverObject;
 	//Is the message the same as the current message? Then, it is meant for the parent
 	//unless the recursive flag has been set.
-	msg = ctr_build_string(message, vlen);
-	msg->info.sticky = 1; /* prevent message from being swept, no need to free(), GC will do */
+	if (ctr_internal_tmp_msg->value.svalue->vlen) {
+		ctr_heap_free(ctr_internal_tmp_msg->value.svalue->value);
+	}
+	ctr_internal_tmp_msg->value.svalue->value = ctr_heap_allocate(vlen);
+	memcpy(ctr_internal_tmp_msg->value.svalue->value, message, vlen);
+	ctr_internal_tmp_msg->value.svalue->vlen = vlen;
 	while(!methodObject) {
-		methodObject = ctr_internal_object_find_property(searchObject, msg, 1);
+		methodObject = ctr_internal_object_find_property(searchObject, ctr_internal_tmp_msg, 1);
 		if (methodObject) {
 			for(j = ctr_message_stack_index; j >= 0; j--) {
 				if (ctr_message_stack[j]==methodObject) {
@@ -1002,7 +1103,6 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 			returnValue = ctr_send_message(receiverObject, CTR_DICT_RESPOND_TO_AND_AND_AND, strlen(CTR_DICT_RESPOND_TO_AND_AND_AND),  mesgArgument);
 		}
 		ctr_heap_free( mesgArgument );
-		msg->info.sticky = 0;
 		if (receiverObject->info.chainMode == 1) return receiverObject;
 		return returnValue;
 	}
@@ -1032,7 +1132,6 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	if (methodObject->info.type == CTR_OBJECT_TYPE_OTBLOCK && methodObject->info.selfbind == 0) {
 		result = ctr_block_run(methodObject, argumentList, NULL);
 	}
-	if (msg) msg->info.sticky = 0;
 	if (receiverObject->info.chainMode == 1) return receiverObject;
 	return result;
 }

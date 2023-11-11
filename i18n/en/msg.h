@@ -76,4 +76,4 @@
 #define CTR_MERR_POOL     "Unable to allocate memory pool.\n"
 #define CTR_STDDATEFRMT   "%d/%m/%Y %H:%M:%S"
 
-#define CTR_STDTIMEZONE   "UTC"
+#define CTR_STDTIMEZONE   "Europe/London"

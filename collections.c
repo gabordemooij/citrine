@@ -588,8 +588,8 @@ ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList) {
 			index->object = ctr_build_number_from_float((ctr_number) i + 1);
 			key->object = ctr_array_get( myself, index );
 			value->object = ctr_array_get( argumentList->object, index );
+			if (value->object == CtrStdNil) continue;
 			key->next = value;
-			ctr_send_message( map, CTR_DICT_PUT_AT, strlen(CTR_DICT_PUT_AT), key);
 			ctr_map_put( map, key );
 	}
 	ctr_heap_free(key);

@@ -1,7 +1,7 @@
 1,2
 1,2,3
-1,2,3,Nil,Nil,Nil,Nil,Nil,Nil,Nil,4
-Nil,Nil,Nil,Nil,Nil,Nil,Nil,4
-9,Nil,Nil,Nil,Nil,Nil,Nil,Nil,Nil,Nil,4
+1,2,3,None,None,None,None,None,None,None,4
+None,None,None,None,None,None,None,4
+9,None,None,None,None,None,None,None,None,None,4
 Uncatched error has occurred.
 Index out of bounds.

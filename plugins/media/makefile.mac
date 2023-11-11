@@ -1,0 +1,19 @@
+# Usage example:
+# ISO="nl" PACKAGE="media" NAME="libctrmedia.dylib" make plugin
+
+LDFLAGS= -shared -undefined dynamic_lookup
+CFLAGS= -D REPLACE_MEDIA_ESPEAK -D NO_MEDIA_ESPEAK\
+		-D REPLACE_MEDIA_SOCK -D MAC_MEDIA_SOCK
+
+install-libctrmedia.dylib: libctrmedia.dylib
+	install libctrmedia.dylib ../../mods/media/
+
+libctrmedia.dylib: media.o
+	cc ${LDFLAGS} -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -o libctrmedia.dylib media.o
+
+media.o:
+	cc ${CFLAGS} -I . -c media.c -I /usr/include/SDL -I ../../i18n/${ISO} -I i18n/${ISO} -Wall -Werror -fPIC -o media.o
+
+clean:
+	rm -rf *.dylib
+	rm -rf *.o

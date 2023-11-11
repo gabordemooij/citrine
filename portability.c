@@ -26,6 +26,37 @@ ctr_object* ctr_program_waitforpassword(ctr_object* myself, ctr_argument* argume
 #endif
 
 
+#ifdef WINDOWS_ERROR_SYSTEM
+ctr_object* ctr_error( char* message, uint16_t error_code ) {
+	int MAX_LEN_ERROR_STR = 800;
+	int MAX_LEN_SYSTEM_STR = 400;
+	int ok_msg;
+	char* errstr;
+	char* error_message;
+	errstr = ctr_heap_allocate( sizeof(char) * MAX_LEN_ERROR_STR );
+	error_message = ctr_heap_allocate( sizeof(char) * MAX_LEN_SYSTEM_STR );
+	ok_msg = FormatMessage(
+		FORMAT_MESSAGE_FROM_SYSTEM|FORMAT_MESSAGE_IGNORE_INSERTS,
+		NULL,
+		error_code,
+		0,
+		error_message,
+		MAX_LEN_SYSTEM_STR,
+		NULL
+	);
+	if (!ok_msg) {
+		snprintf(error_message, MAX_LEN_SYSTEM_STR, "(#%d) (#%d)", error_code, (uint16_t) GetLastError());
+	}
+	snprintf( errstr, MAX_LEN_ERROR_STR, message, error_message );
+	CtrStdFlow = ctr_build_string_from_cstring( errstr );
+	ctr_heap_free( errstr );
+	ctr_heap_free( error_message );
+	CtrStdFlow->info.sticky = 1;
+	errstack = 0;
+	return CtrStdFlow;
+}
+#endif
+
 #ifdef WINDOWS_PLUGIN_SYSTEM
 typedef int (__cdecl *MYPROC)(); 
 void* ctr_internal_plugin_find(ctr_object* key) {
@@ -42,17 +73,26 @@ void* ctr_internal_plugin_find(ctr_object* key) {
 	snprintf(pathNameMod, 1024,"mods\\%s\\libctr%s.dll", modName, modName);
 	ctr_heap_free( modName );
 	realPathModName = realpath(pathNameMod, NULL);
-	handle = LoadLibrary(realPathModName); 
-	free(realPathModName);
-	if ( !handle ) {
-		printf("%s\n",CTR_ERR_FOPEN);
+	FILE* exists = fopen(realPathModName,"r");
+	if (!exists) {
+		printf("File not found: %s \n", realPathModName);
+		free(realPathModName);
 		exit(1);
 	}
+	fclose(exists);
+	handle = LoadLibrary(realPathModName);
+	if ( !handle ) {
+		DWORD dw = GetLastError();
+		printf("Not found: %s %ld \n", realPathModName, dw);
+		free(realPathModName);
+		exit(1);
+	}
+	free(realPathModName);
 	/* the begin() function will add the missing object to the world */
 	init_plugin = (MYPROC) GetProcAddress(handle, "begin"); 
 	if ( !init_plugin ) {
-		printf("%s\n",CTR_ERR_FOPEN);
 		FreeLibrary(handle);
+		printf("Begin of plugin not found\n");
 		exit(1);
 	}
 	(void) init_plugin();

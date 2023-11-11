@@ -1,16 +1,28 @@
 #!/bin/sh
+
+if [[ -z "$OS" ]]; then
 OS=$(uname -s)
+fi
+
+if [ "$OS" = "Darwin" ]; then
+OS="Mac"
+fi
 
 if [ -z "$MAKEFILE" ]; then
-if [ "$OS" = "OpenBSD" -o "$OS" = "FreeBSD" -o "$OS" = "Darwin" ]; then
+if [ "$OS" = "OpenBSD" -o "$OS" = "FreeBSD" ]; then
 	MAKEFILE=makefile.bsd
 elif [ "$OS" = "Haiku" ]; then
 	MAKEFILE=makefile.haiku
+elif [ "$OS" = "Mac" ]; then
+	MAKEFILE=makefile.mac
+elif [ "$OS" = "Win32" ]; then
+	MAKEFILE=makefile.win32
+elif [ "$OS" = "Win64" ]; then
+	MAKEFILE=makefile.win64
 else
 	MAKEFILE=makefile
 fi
 fi
-
 
 echo "USING: ${MAKEFILE}"
 
@@ -26,6 +38,8 @@ do
 	echo ; echo $ISO
 	export ISO
 	export OS
+	export CC
+	export DLLTOOL
 	make -f $MAKEFILE clean
 	make -f $MAKEFILE all
 	if [ -f "dict/xx${ISO}.dict" ]; then

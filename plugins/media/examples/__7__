@@ -1,0 +1,191 @@
+☞ media ≔ Media nieuw.
+☞ Toets ≔ Plaatje nieuw.
+☞ huidige programma ≔ “__1__”.
+☞ vorige programma  ≔ Niets.
+
+Toets bĳ: “digraaf:ligatuur:” doen: { :digraaf :ligatuur
+    ⚿ toetscombinatie ≔ digraaf.
+    ⚿ symbool ≔ ligatuur.
+    ⚿ legenda ≔ Plaatje nieuw: “legenda.png”.
+    
+    ⚿ legenda 
+        letter: “lettertype.ttf” grootte: 12,
+        kleur: (Kleur nieuw rood: 61 groen: 33 blauw: 13),
+        schrĳf: ⚿ toetscombinatie.
+    ⛏
+        letter: “lettertype.ttf” grootte: 16,
+        kleur: (Kleur nieuw rood: 255 groen: 255 blauw: 255),
+        uitlĳnen x: 15 y: 10,
+        schrĳf: ⚿ symbool.
+        Media digraaf: digraaf ligatuur: ligatuur.
+}.
+
+Toets bĳ: “klik” doen: {
+    tekstveld toevoegen: ⚿ symbool.
+}.
+
+Toets bĳ: “x:y:” doen: { :x :y
+    ⚿ legenda x: x + 15 y: y - 18.
+    ⛏ x: x y: y.
+}.
+
+☞ tekstveld ≔ Plaatje nieuw: “code.png”.
+☞ toetsenbord ≔ Reeks nieuw
+
+    • (Toets nieuw: “toets.png”, digraaf: “var” ligatuur: “☞ ”)
+    • (Toets nieuw: “toets.png”, digraaf: “:=” ligatuur: “≔”)
+    • (Toets nieuw: “toets.png”, digraaf: “>>” ligatuur: “✎”)
+    • (Toets nieuw: “toets.png”, digraaf: “__” ligatuur: “ ”)
+    • (Toets nieuw: “toets.png”, digraaf: “<-” ligatuur: “↲”)
+    
+    • (Toets nieuw: “toets.png”, digraaf: “[]” ligatuur: “←”)
+    • (Toets nieuw: “toets.png”, digraaf: “=>” ligatuur: “⚿”)
+    • (Toets nieuw: “toets.png”, digraaf: “::” ligatuur: “⛏”)
+    • (Toets nieuw: “toets.png”, digraaf: “""” ligatuur: Aanhalingstekens)
+    • (Toets nieuw: “toets.png”, digraaf: “->” ligatuur: “•”).
+
+Media 
+    digraaf: “ij”  ligatuur: “ĳ”,
+    digraaf: “IJ”  ligatuur: “Ĳ”,
+    digraaf: “ /”  ligatuur: “ ÷”,
+    digraaf: “ *”  ligatuur: “ ×”,
+    digraaf: “ >=” ligatuur: “ ≥”,
+    digraaf: “ <=” ligatuur: “ ≤”,
+    digraaf: “ !=” ligatuur: “ ≠”,
+    digraaf: “__”  ligatuur: “ ”.
+
+☞ schaar ≔ Plaatje nieuw: “schaar.png”.
+☞ papieren ≔ Plaatje nieuw: “papieren.png”.
+☞ klembord ≔ Plaatje nieuw: “klembord.png”.
+☞ bezem ≔ Plaatje nieuw: “bezem.png”.
+☞ boek ≔ Plaatje nieuw: “boek.png”.
+☞ tandwielen ≔ Plaatje nieuw: “tandwielen.png”.
+☞ kist ≔ Plaatje nieuw: “kist.png”.
+
+☞ __1__ ≔ Plaatje nieuw: “__1__.png”.
+☞ __2__ ≔ Plaatje nieuw: “__2__.png”.
+☞ __3__ ≔ Plaatje nieuw: “__3__.png”.
+☞ __4__ ≔ Plaatje nieuw: “__4__.png”.
+☞ __5__ ≔ Plaatje nieuw: “__5__.png”.
+☞ __6__ ≔ Plaatje nieuw: “__6__.png”.
+
+☞ inladen programma ≔ {
+    vorige programma Niets? nee: {
+        Bestand nieuw: vorige programma, schrĳf: tekstveld tekst.
+    }.
+    tekstveld schrĳf: (Bestand nieuw: huidige programma, lezen).
+}.
+
+__1__ bĳ: “klik” doen: {
+    vorige programma ≔ huidige programma.
+    huidige programma ≔ “__1__”.
+    inladen programma start.
+}.
+
+__2__ bĳ: “klik” doen: {
+    vorige programma ≔ huidige programma.
+    huidige programma ≔ “__2__”.
+    inladen programma start.
+}.
+
+__3__ bĳ: “klik” doen: {
+    vorige programma ≔ huidige programma.
+    huidige programma ≔ “__3__”.
+    inladen programma start.
+}.
+
+__4__ bĳ: “klik” doen: {
+    vorige programma ≔ huidige programma.
+    huidige programma ≔ “__4__”.
+    inladen programma start.
+}.
+
+__5__ bĳ: “klik” doen: {
+    vorige programma ≔ huidige programma.
+    huidige programma ≔ “__5__”.
+    inladen programma start.
+}.
+
+__6__ bĳ: “klik” doen: {
+    vorige programma ≔ huidige programma.
+    huidige programma ≔ “__6__”.
+    inladen programma start.
+}.
+
+tandwielen bĳ: “klik” doen: {
+    Bestand nieuw: huidige programma, schrĳf: tekstveld tekst.
+    Programma opdrachtregel: (
+        (((Programma argument: 1) opsplitsen: “\\”) laatste)
+        + “ ”
+        + huidige programma
+    ).
+}.
+
+schaar bĳ: “klik” doen: {
+        papieren klik.
+        tekstveld verwĳder selectie.
+}.
+
+klembord bĳ: “klik” doen: {
+    tekstveld toevoegen: Media klembord.
+}.
+
+bezem bĳ: “klik” doen: {
+    tekstveld verwĳder selectie.
+}.
+
+papieren bĳ: “klik” doen: {
+    ☞ tekst ≔ tekstveld tekst.
+    ☞ selectie ≔ Media selectie.
+    ☞ geselecteerd ≔ 
+        tekst 
+        kopieer
+        van: selectie eerste 
+        lengte: (selectie laatste - selectie eerste).
+    Media klembord: geselecteerd.
+}.
+
+boek bĳ: “klik” doen: {
+    Media website: “https://citrine-lang.org”.
+}.
+
+
+media bĳ: “start” doen: {
+
+    tekstveld
+        x: 320 y: 65,
+        letter: “lettertype.ttf” grootte: 16,
+        kleur: (Kleur nieuw rood: 255 groen: 255 blauw: 255),
+        schrĳf: “ ”,
+        beschrĳfbaar: Ja.
+        
+    schaar   x: 50  y: 540.
+    papieren x: 120 y: 530.
+    klembord x: 210 y: 540.
+    bezem    x: 50  y: 460.
+    boek     x: 120 y: 460.
+    tandwielen x: 210 y: 460.
+    kist     x: 50  y: 380.
+    
+    __1__ x: 85  y: 141.
+    __2__ x: 138 y: 141.
+    __3__ x: 192 y: 141.
+    __4__ x: 82  y: 70.
+    __5__ x: 138 y: 70.
+    __6__ x: 192 y: 70.
+
+    toetsenbord elk: { :i :toets
+        ☞ n ≔ i - 1.
+        toets 
+            x: 40 + (50 × (n modulo: 5)) 
+            y: 250 + (((n ÷ 5) afgerond naar beneden) × 60).
+    }.
+
+    tekstveld schrĳf: (Bestand nieuw: huidige programma, lezen).
+}.
+
+Media bĳ: “einde” doen: {
+    Bestand nieuw: huidige programma, schrĳf: tekstveld tekst.
+}.
+
+media scherm: “schrĳfmachine.png”.

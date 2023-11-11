@@ -86,7 +86,7 @@
 #define CTR_DICT_REPLACE_WITH	  "remplacer:par:"
 #define CTR_DICT_SPLIT	          "diviser:"
 #define CTR_DICT_SKIP             "sauter:"
-#define CTR_DICT_RUN              "commancer"
+#define CTR_DICT_RUN              "commencer"
 #define CTR_DICT_APPLY_TO         "appliquer:"
 #define CTR_DICT_APPLY_TO_AND     "appliquer:et:"
 #define CTR_DICT_VALUE_SET        "donner:valeur:"

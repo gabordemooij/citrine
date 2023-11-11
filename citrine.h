@@ -24,11 +24,15 @@
 	#define PRId64 "I64d"
 	#define realpath(N,R) _fullpath((R),(N),PATH_MAX)
 	#define CTR_DIRSEP "\\"
+	#define CTR_ERR GetLastError()
+	#define CTR_NEWLINE "\r\n"
 #else
 	#include <termios.h>
 	#include <sys/wait.h>
 	#include <dlfcn.h>
 	#define CTR_DIRSEP "/"
+	#define CTR_ERR errno
+	#define CTR_NEWLINE "\n"
 #endif
 
 
@@ -216,6 +220,7 @@ typedef struct ctr_object ctr_object;
 struct ctr_resource {
 	unsigned int type;
 	void* ptr;
+	void (*destructor)();
 };
 typedef struct ctr_resource ctr_resource;
 
@@ -390,12 +395,17 @@ extern void        ctr_internal_object_add_property(ctr_object* owner, ctr_objec
 extern void        ctr_internal_object_set_property(ctr_object* owner, ctr_object* key, ctr_object* value, int is_method);
 extern void        ctr_internal_object_delete_property(ctr_object* owner, ctr_object* key, int is_method);
 extern ctr_object* ctr_internal_object_find_property(ctr_object* owner, ctr_object* key, int is_method);
+extern ctr_object* ctr_internal_object_property(ctr_object* owner, char* keystr, ctr_object* value);
+extern double ctr_tonum(ctr_object* o);
+extern char ctr_tobool(ctr_object* o);
+extern char* ctr_tostr(ctr_object* o);
 extern uint64_t    ctr_internal_index_hash(ctr_object* key);
 extern void        ctr_internal_object_add_property(ctr_object* owner, ctr_object* key, ctr_object* value, int m);
 extern ctr_object* ctr_internal_cast2bool( ctr_object* o );
 extern ctr_object* ctr_internal_cast2number(ctr_object* o);
 extern ctr_object* ctr_internal_create_object(int type);
 extern ctr_object* ctr_internal_cast2string( ctr_object* o );
+extern ctr_object* ctr_internal_copy2string( ctr_object* o );
 extern void*       ctr_internal_plugin_find( ctr_object* key );
 extern ctr_object* ctr_find(ctr_object* key);
 extern ctr_object* ctr_find_in_my(ctr_object* key);
@@ -736,6 +746,7 @@ extern ctr_object* ctr_gc_collect(ctr_object* myself, ctr_argument* argumentList
 extern ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList);
 extern void ctr_gc_sweep( int all );
+extern void ctr_gc_cycle();
 
 /**
  * Slurp Object Interface
@@ -771,7 +782,7 @@ extern uint64_t ctr_gc_memlimit;
  * Literal Constructors (internal only)
  */
 extern ctr_object* ctr_build_empty_string();
-extern ctr_object* ctr_build_string(char* object, long vlen);
+extern ctr_object* ctr_build_string(char* object, ctr_size vlen);
 extern ctr_object* ctr_build_block(ctr_tnode* node);
 extern ctr_object* ctr_build_number(char* object);
 extern ctr_object* ctr_build_number_from_string(char* fixedStr, ctr_size strLength, char international);
@@ -792,7 +803,15 @@ extern void* ctr_heap_reallocate(void* oldptr, size_t size );
 extern size_t ctr_heap_get_latest_tracking_id();
 extern void* ctr_heap_reallocate_tracked(size_t tracking_id, size_t size );
 extern char* ctr_heap_allocate_cstring( ctr_object* o );
+
+#ifndef REPLACE_ERROR_SYSTEM
 extern ctr_object* ctr_error( char* error_string, int error_code );
+#endif
+
+#ifdef WINDOWS_ERROR_SYSTEM
+extern ctr_object* ctr_error( char* error_string, uint16_t error_code );
+#endif
+
 extern ctr_object* ctr_error_text( char* error_string );
 extern void ctr_pool_init( ctr_size pool );
 
