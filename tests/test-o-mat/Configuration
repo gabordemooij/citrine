@@ -2,7 +2,7 @@
 ☞ memory management modes ≔ List ← 0 ; 1 ; 4 ; 8 ; 9 ; 12.
 
 ☞ languages ≔ List ← 
-	‘en’ ; ‘en_us’ ;
+	‘en’ ; ‘en_us’ ; ‘en_us2’ ;
 	‘af’ ; ‘am’ ; ‘ar’ ; ‘az’ ;
 	‘be’ ; ‘bg’ ; ‘bn’ ; ‘bs’ ;
 	‘ca’ ; ‘ceb’ ; ‘co’ ; ‘cs’ ; ‘cy’ ;
