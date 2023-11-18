@@ -1,5 +1,6 @@
-LICENSE FOR CITRINE SOURCE CODE AND BINARY
+End-user license agreement
 
+Citrine Programming Language
 Copyright (c) 2024, Gabor de Mooij
 All rights reserved.
 
@@ -23,9 +24,6 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-IMPORTANT!
-
 This License only covers the source code and binaries of Citrine.
 All accompanying digital artworks, the installer, documents, music, fonts
-and audio files are delivered under their own respective licenses. For a
-detailed overview of all used licenses please consult the main website.
+and audio files are delivered under the terms of their respective licenses.
