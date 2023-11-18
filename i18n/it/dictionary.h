@@ -75,7 +75,7 @@
 #define CTR_DICT_POS   	          "positivo?"
 #define CTR_DICT_NEG   	          "negativo?"
 #define CTR_DICT_TOBOOL           "booleano"
-#define CTR_DICT_RANDOM_NUM_BETWEEN          "tra: e:"
+#define CTR_DICT_RANDOM_NUM_BETWEEN          "tra:e:"
 #define CTR_DICT_LENGTH	          "lunghezza"
 #define CTR_DICT_FROM_LENGTH	  "da:lunghezza:"
 #define CTR_DICT_TRIM	          "rimuovere gli spazi circostanti"
