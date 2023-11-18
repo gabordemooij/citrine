@@ -28,7 +28,7 @@
 	‘yak’ ; ‘yi’ ; ‘yo’ ;
 	‘zh1’ ; ‘zh2’ ; ‘zu’
 	.
-☞ one way languages ≔ List ← ‘hy’ ; ‘en’ ; ‘en_us’.
+☞ one way languages ≔ List ← ‘hy’ ; ‘en’ ; ‘en_us’ ; ‘en_us2’.
 
 ☞ variations ≔ 	memory management modes + languages.
 ☞ number of tests ≔ 368.
