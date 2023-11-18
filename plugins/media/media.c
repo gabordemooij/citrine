@@ -2567,7 +2567,7 @@ ctr_object* ctr_media_on_do(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_internal_media_external_command(char* command_str, char* fallback, char* parameter_str) {
 	if (command_str == NULL) command_str = fallback;
 	int maxlen = 200;
-	char  command[maxlen = 10];
+	char  command[maxlen];
 	memset(command, '\0', maxlen + 10);
 	if (strlen(command_str) + strlen(parameter_str) > maxlen) return CtrStdBoolFalse;
 	sprintf(command, "%s '%s'", command_str, parameter_str);
