@@ -22,7 +22,7 @@ media bĳ: “start” doen: {
         letter: “lettertype.ttf” grootte: 16,
         uitlĳnen x: 40 y: 20,
         kleur: (Kleur nieuw rood: 110 groen: 110 blauw: 110),
-        schrĳf: “hallo”,
+        schrĳf: “...”,
         beschrĳfbaar: Ja.
 
     knop
