@@ -149,6 +149,9 @@ boek bĳ: “klik” doen: {
     Media website: “https://citrine-lang.org”.
 }.
 
+kist bĳ: “klik” doen: {
+    Media website: “https://citrine-lang.org/shop.ctr”.
+}.
 
 media bĳ: “start” doen: {
 
