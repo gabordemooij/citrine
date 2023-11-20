@@ -1,6 +1,7 @@
 ☞ media ≔ Media nieuw.
 ☞ persoon ≔ Plaatje nieuw: “persoon.png”.
 ☞ obstakel ≔ Plaatje nieuw: “obstakel.png”.
+☞ fx ≔ Geluid nieuw: “geluidje.ogg”.
 
 media bĳ: “start” doen: {
 
@@ -11,7 +12,7 @@ media bĳ: “start” doen: {
     blokkade: Ja.
 
     persoon bĳ: “bots:” doen: {
-        Geluid nieuw: “geluidje.ogg”, laten horen.
+        fx laten horen.
     }.
 
 }.
