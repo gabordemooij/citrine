@@ -208,6 +208,21 @@ char ctr_internal_media_has_selection()								{ return (CtrMediaSelectBegin != 
 void ctr_internal_media_reset() {
 	controllableObject = NULL;
 	focusObject = NULL;
+	CtrMediaAutoReplaceRule* rule;
+	int i;
+	for(i = 0; i < IMGCount; i++) {
+		MediaIMG* mediaImage = &mediaIMGs[i];
+		if (mediaImage->text) {
+			ctr_heap_free(mediaImage->text);
+			mediaImage->text = NULL;
+		}
+	}
+	for(i = 0; i < CtrMediaAutoReplaceRuleLen; i++) {
+		rule = &CtrMediaAutoReplaceRules[i];
+		ctr_heap_free(rule->word);
+		ctr_heap_free(rule->replacement);
+	}
+	CtrMediaAutoReplaceRuleLen = 0;
 	IMGCount = 0;
 	AUDCount = 0;
 	CtrMediaJumpHeight = 0;
@@ -1061,6 +1076,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 		SDL_RenderCopy(CtrMediaRenderer, texture, NULL, &dimensions);
 		background_is_video = 0;
 	}
+	ctr_heap_free(imageFileStr);
 	windowWidth = dimensions.w;
 	windowHeight = dimensions.h;
 	ctr_send_message(myself, CTR_DICT_RUN, strlen(CTR_DICT_RUN), NULL );
@@ -1466,6 +1482,7 @@ void ctr_audio_destructor(ctr_resource* rs) {
 }
 
 ctr_object* ctr_sound_new_set(ctr_object* myself, ctr_argument* argumentList) {
+	if (AUDCount >= maxAUD) return CtrStdNil;
 	char* audioFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	ctr_object* audioInst = ctr_audio_new(myself, argumentList);
 	MediaAUD* mediaAUD = &mediaAUDs[AUDCount];
@@ -1481,6 +1498,7 @@ ctr_object* ctr_sound_new_set(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	rs->destructor = &ctr_audio_destructor;
 	AUDCount++;
+	ctr_heap_free(audioFileStr);
 	return audioInst;
 }
 
@@ -1509,6 +1527,7 @@ SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
 #ifndef WIN
 	FILE* asset_file = fopen(path, "rb");
 #endif
+	ctr_heap_free(path);
 	if (!asset_file) return NULL;
 	fseek(asset_file, 0, SEEK_SET);
 	char* buffer = malloc(500);
@@ -1558,6 +1577,7 @@ ctr_object* ctr_music_new_set(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	rs->destructor = &ctr_audio_destructor;
 	AUDCount++;
+	ctr_heap_free(audioFileStr);
 	return audioInst;
 }
 
@@ -1741,9 +1761,11 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 	char* colon_pos = strstr(ip_str_and_port,":");
 	if (colon_pos == NULL) {
 		strcpy(ip_str, ip_str_and_port);
+		ctr_heap_free(ip_str_and_port);
 	} else {
 		memcpy(ip_str, ip_str_and_port, colon_pos-ip_str_and_port);
 		ip_str[colon_pos-ip_str_and_port]='\0';
+		ctr_heap_free(ip_str_and_port);
 		port = atoi(colon_pos+1);
 		if (port < 1024) {
 			ctr_error("Invalid port\n",0);
@@ -2146,7 +2168,9 @@ ctr_object* ctr_img_anims(ctr_object* myself, ctr_argument* argumentList) {
 
 ctr_object* ctr_img_font(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
-	image->font = TTF_OpenFont(ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object)), (int)ctr_internal_cast2number(argumentList->next->object)->value.nvalue);
+	char* path = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+	image->font = TTF_OpenFont(path, (int)ctr_internal_cast2number(argumentList->next->object)->value.nvalue);
+	ctr_heap_free(path);
 	if (image->font == NULL) ctr_internal_media_fatalerror("Unable to load font", "TTF Font");
 	/* Allow to set compile-time FONTSCRIPT for Harfbuzz shaper */
 	#ifdef FONTSCRIPT
@@ -2394,6 +2418,7 @@ ctr_object* ctr_img_draw(ctr_object* myself, ctr_argument* argumentList) {
 		}
 		i++;
 	}
+	ctr_heap_free(arg);
 	SDL_SetRenderTarget(CtrMediaRenderer, NULL);
 	return myself;
 }
