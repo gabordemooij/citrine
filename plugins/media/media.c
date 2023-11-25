@@ -201,9 +201,13 @@ int CtrMaxMediaTimers = 100;
 void ctr_internal_media_fatalerror(char* msg, const char* info)	{ fprintf(stderr,"Media Plugin FATAL ERROR: %s (%s) \n", msg, info); SDL_Quit(); exit(1); }
 MediaIMG* ctr_internal_media_getfocusimage()						{ return (MediaIMG*) focusObject->value.rvalue->ptr; }
 MediaIMG* ctr_internal_media_getplayer()							{ return (controllableObject == NULL) ? NULL : (MediaIMG*) controllableObject->value.rvalue->ptr; }
-MediaIMG* ctr_internal_get_image_from_object(ctr_object* object)	{ return (MediaIMG*) object->value.rvalue->ptr; }
 MediaAUD* ctr_internal_get_audio_from_object(ctr_object* object)   { return (MediaAUD*) object->value.rvalue->ptr; }
 char ctr_internal_media_has_selection()								{ return (CtrMediaSelectBegin != CtrMediaSelectEnd); }
+
+MediaIMG* ctr_internal_get_image_from_object(ctr_object* object)	{
+	if (object->value.rvalue == NULL) return NULL;
+	return (MediaIMG*) object->value.rvalue->ptr;
+}
 
 void ctr_internal_media_reset() {
 	controllableObject = NULL;
@@ -2062,6 +2066,7 @@ ctr_object* ctr_img_new_set(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 ctr_object* ctr_img_controllable(ctr_object* myself, ctr_argument* argumentList) {
+	if (!ctr_internal_get_image_from_object(myself)) return myself;
 	controllableObject = myself;
 	CtrMediaControlMode = (int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	return myself;
@@ -2071,7 +2076,8 @@ ctr_object* ctr_img_xy(ctr_object* myself, ctr_argument* argumentList) {
 	int x = (int) ctr_tonum(ctr_internal_cast2number(argumentList->object));
 	int y = (int) ctr_tonum(ctr_internal_cast2number(argumentList->next->object));
 	ctr_internal_natural_y(&y);
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	image->ox = x;
 	image->oy = y;
 	image->x = x;
@@ -2080,12 +2086,14 @@ ctr_object* ctr_img_xy(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 ctr_object* ctr_img_x(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	return ctr_build_number_from_float(image->x);
 }
 
 ctr_object* ctr_img_y(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	int y = (int) ctr_tonum(ctr_build_number_from_float(image->y));
 	y += image->h;
 	ctr_internal_natural_y(&y);
@@ -2096,7 +2104,8 @@ ctr_object* ctr_img_mov_set(ctr_object* myself, ctr_argument* argumentList) {
 	double x = (int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	int y_ = (int) ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
 	ctr_internal_natural_y(&y_);
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	double y = (double) (y_ - image->h);
 	double delta_x = x - image->x;
 	double delta_y = y - image->y;
@@ -2109,42 +2118,49 @@ ctr_object* ctr_img_mov_set(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 ctr_object* ctr_img_bounce(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	image->bounce = (int) ctr_internal_cast2bool(argumentList->object)->value.bvalue;
 	return myself;
 }
 
 ctr_object* ctr_img_solid(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	image->solid = (int) ctr_internal_cast2bool(argumentList->object)->value.bvalue;
 	return myself;
 }
 
 ctr_object* ctr_img_active(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	image->collidable = (int) ctr_internal_cast2bool(argumentList->object)->value.bvalue;
 	return myself;
 }
 
 ctr_object* ctr_img_gravity(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	image->gravity = ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	return myself;
 }
 
 ctr_object* ctr_img_speed(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	image->speed = ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	return myself;
 }
 ctr_object* ctr_img_friction(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	image->fric = ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	return myself;
 }
 
 ctr_object* ctr_img_accel(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	image->accel = ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	return myself;
 }
@@ -2155,19 +2171,22 @@ ctr_object* ctr_img_jump_height(ctr_object* myself, ctr_argument* argumentList) 
 }
 
 ctr_object* ctr_img_editable(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	image->editable = ctr_internal_cast2bool(argumentList->object)->value.bvalue;
 	return myself;
 }
 
 ctr_object* ctr_img_anims(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	image->anims = (int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	return myself;
 }
 
 ctr_object* ctr_img_font(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	char* path = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	image->font = TTF_OpenFont(path, (int)ctr_internal_cast2number(argumentList->next->object)->value.nvalue);
 	ctr_heap_free(path);
@@ -2183,7 +2202,8 @@ ctr_object* ctr_img_font(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 ctr_object* ctr_img_color(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	uint8_t r = (uint8_t)ctr_color_r(argumentList->object, NULL)->value.nvalue;
 	uint8_t g = (uint8_t)ctr_color_g(argumentList->object, NULL)->value.nvalue;
 	uint8_t b = (uint8_t)ctr_color_b(argumentList->object, NULL)->value.nvalue;
@@ -2193,7 +2213,8 @@ ctr_object* ctr_img_color(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 ctr_object* ctr_img_background_color(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	uint8_t r = (uint8_t)ctr_color_r(argumentList->object, NULL)->value.nvalue;
 	uint8_t g = (uint8_t)ctr_color_g(argumentList->object, NULL)->value.nvalue;
 	uint8_t b = (uint8_t)ctr_color_b(argumentList->object, NULL)->value.nvalue;
@@ -2203,10 +2224,10 @@ ctr_object* ctr_img_background_color(ctr_object* myself, ctr_argument* argumentL
 }
 
 ctr_object* ctr_img_text_align(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	image->paddingx = (int)ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	int y = (int)ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
-	
 	int lineHeight;
 	TTF_SizeUTF8(image->font, "X", NULL, &lineHeight);
 	y = image->h - y;
@@ -2217,7 +2238,8 @@ ctr_object* ctr_img_text_align(ctr_object* myself, ctr_argument* argumentList) {
 
 void ctr_internal_img_render_cursor(ctr_object* focusObject) {
 	if (!focusObject) return;
-	MediaIMG* image = (MediaIMG*) focusObject->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(focusObject);
+	if (image == NULL) return;
 	if (image->text == NULL) return;
 	if (CtrMediaInputIndex > image->textlength) CtrMediaInputIndex = 0;
 	if (CtrMediaSelectBegin > image->textlength) CtrMediaSelectBegin = 0;
@@ -2268,7 +2290,8 @@ void ctr_internal_img_render_cursor(ctr_object* focusObject) {
 }
 
 void ctr_internal_img_render_text(ctr_object* myself) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return;
 	int begin, end, len;
 	ctr_internal_media_get_selection(&begin, &end);
 	len = end - begin;
@@ -2361,7 +2384,8 @@ char* ctr_internal_media_normalize_line_endings(char* original_text) {
 }
 
 ctr_object* ctr_img_text(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	ctr_object* textObject = ctr_internal_cast2string(argumentList->object);
 	if (image->text != NULL) {
 		ctr_heap_free(image->text);
@@ -2376,7 +2400,8 @@ ctr_object* ctr_img_text(ctr_object* myself, ctr_argument* argumentList) {
 
 ctr_object* ctr_img_draw(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* arg;
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
 	ctr_object* drawList = argumentList->object;
 	ctr_object* color = argumentList->next->object;
 	ctr_object* shape;
@@ -2428,8 +2453,8 @@ ctr_object* ctr_media_override(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 ctr_object* ctr_img_text_get(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = (MediaIMG*) myself->value.rvalue->ptr;
-	if (image->text == NULL) {
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL || image->text == NULL) {
 		return ctr_build_empty_string();
 	}
 	return ctr_build_string_from_cstring(image->text);
