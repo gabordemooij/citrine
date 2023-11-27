@@ -145,7 +145,7 @@
 #define CTR_DICT_MONTH           "month"
 #define CTR_DICT_MONTH_SET       "month:"
 #define CTR_DICT_YEAR            "year"
-#define CTR_DICT_RAW             "raw"
+#define CTR_DICT_RAW             "plain"
 #define CTR_DICT_YEAR_SET        "year:"
 #define CTR_DICT_WEEK_DAY        "weekday"
 #define CTR_DICT_YEAR_DAY        "day of the year"
