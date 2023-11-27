@@ -12,7 +12,7 @@ media bĳ: “start” doen: {
     blokkade: Ja.
 
     persoon bĳ: “bots:” doen: {
-        fx laten horen.
+        fx afspelen.
     }.
 
 }.
