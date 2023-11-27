@@ -201,8 +201,12 @@ int CtrMaxMediaTimers = 100;
 void ctr_internal_media_fatalerror(char* msg, const char* info)	{ fprintf(stderr,"Media Plugin FATAL ERROR: %s (%s) \n", msg, info); SDL_Quit(); exit(1); }
 MediaIMG* ctr_internal_media_getfocusimage()						{ return (MediaIMG*) focusObject->value.rvalue->ptr; }
 MediaIMG* ctr_internal_media_getplayer()							{ return (controllableObject == NULL) ? NULL : (MediaIMG*) controllableObject->value.rvalue->ptr; }
-MediaAUD* ctr_internal_get_audio_from_object(ctr_object* object)   { return (MediaAUD*) object->value.rvalue->ptr; }
 char ctr_internal_media_has_selection()								{ return (CtrMediaSelectBegin != CtrMediaSelectEnd); }
+
+MediaAUD* ctr_internal_get_audio_from_object(ctr_object* object)	{
+	if (object->value.rvalue == NULL) return NULL;
+	return (MediaAUD*) object->value.rvalue->ptr;
+}
 
 MediaIMG* ctr_internal_get_image_from_object(ctr_object* object)	{
 	if (object->value.rvalue == NULL) return NULL;
@@ -1508,6 +1512,7 @@ ctr_object* ctr_sound_new_set(ctr_object* myself, ctr_argument* argumentList) {
 
 ctr_object* ctr_sound_play(ctr_object* myself, ctr_argument* argumentList) {
 	MediaAUD* mediaAUD = ctr_internal_get_audio_from_object(myself);
+	if (mediaAUD == NULL) return myself;
 	if (mediaAUD->blob != NULL) {
 		Mix_PlayChannel(0, (Mix_Chunk*) mediaAUD->blob, 0);
 	}
@@ -1588,6 +1593,7 @@ ctr_object* ctr_music_new_set(ctr_object* myself, ctr_argument* argumentList) {
 
 ctr_object* ctr_music_play(ctr_object* myself, ctr_argument* argumentList) {
 	MediaAUD* mediaAUD = ctr_internal_get_audio_from_object(myself);
+	if (mediaAUD == NULL) return myself;
 	if (mediaAUD->blob != NULL) {
 			Mix_FadeInMusic((Mix_Music*)mediaAUD->blob,-1,0);
 	}
@@ -1596,6 +1602,7 @@ ctr_object* ctr_music_play(ctr_object* myself, ctr_argument* argumentList) {
 
 ctr_object* ctr_music_silence(ctr_object* myself, ctr_argument* argumentList) {
 	MediaAUD* mediaAUD = ctr_internal_get_audio_from_object(myself);
+	if (mediaAUD == NULL) return myself;
 	if (mediaAUD->blob != NULL) {
 			Mix_PauseMusic();
 	}
@@ -1604,6 +1611,7 @@ ctr_object* ctr_music_silence(ctr_object* myself, ctr_argument* argumentList) {
 
 ctr_object* ctr_music_rewind(ctr_object* myself, ctr_argument* argumentList) {
 	MediaAUD* mediaAUD = ctr_internal_get_audio_from_object(myself);
+	if (mediaAUD == NULL) return myself;
 	if (mediaAUD->blob != NULL) {
 			Mix_RewindMusic();
 	}
