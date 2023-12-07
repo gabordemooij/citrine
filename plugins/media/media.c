@@ -2485,6 +2485,7 @@ ctr_object* ctr_media_clipboard_set(ctr_object* myself, ctr_argument* argumentLi
 	char* buffer;
 	buffer = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	SDL_SetClipboardText(buffer);
+	ctr_heap_free(buffer); /* SetClipboardText strdups the string */
 	return myself;
 }
 
