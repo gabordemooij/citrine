@@ -468,7 +468,7 @@ void ctr_internal_media_textinsert(MediaIMG* mediaImage, char* text) {
 	}
 	mediaImage->textlength = mediaImage->textlength + insertTextLength;
 	if (mediaImage->textlength+1 > mediaImage->textbuffer) {
-		mediaImage->textbuffer = (mediaImage->textbuffer) ? mediaImage->textbuffer * 2 : 1;
+		mediaImage->textbuffer = mediaImage->textlength + 500;
 		mediaImage->text = ctr_heap_reallocate(mediaImage->text, mediaImage->textbuffer + 1);
 	}
 	memcpy(mediaImage->text+CtrMediaInputIndex+insertTextLength, mediaImage->text+CtrMediaInputIndex,mediaImage->textlength-CtrMediaInputIndex-insertTextLength);

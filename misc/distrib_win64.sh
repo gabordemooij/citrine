@@ -19,7 +19,7 @@ mkdir dist/Linux/ISO
 mkdir dist/Linux/OUT
 
 
-declare -a langs=("nl" "ru" "en" "hi" "fr" "no" "pt_br" "uz" "pl" "cs" "id")
+declare -a langs=("nl" "en")
 for lang in "${langs[@]}"
 do
 
@@ -102,8 +102,16 @@ cp bin/Linux/ctr$lang dist/Linux/ISO/$lang/
 cp plugins/media/libctrmedia.so dist/Linux/ISO/$lang/mods/media/
 rm dist/Linux/ISO/$lang/*.dll
 sed -e "s/ctrnl/ctr$lang/g" plugins/media/assets/citrine.sh > dist/Linux/ISO/$lang/citrine.sh
+sed -e "s/ctrnl/ctrapp_$lang/g" plugins/media/assets/citrine.sh > dist/Linux/ISO/$lang/citrine_app.sh
 chmod uog+x dist/Linux/ISO/$lang/citrine.sh
+chmod uog+x dist/Linux/ISO/$lang/citrine_app.sh
+
+# Create Linux AppImage distribution
+rm -rf /tmp/Citrine.AppDir
+cp -r misc/Citrine.AppDir /tmp/
+cp  dist/Linux/ISO/${lang}/ctr${lang} /tmp/Citrine.AppDir/
+./appimagetool-x86_64.AppImage /tmp/Citrine.AppDir citrine_app ; cp citrine_app dist/Linux/ISO/nl/ctrapp_${lang}
+chmod uog+x dist/Linux/ISO/nl/ctrapp_${lang}
 
 tar cvzf "dist/Linux/OUT/$lang/citrine${lang}096.tar.gz" -C dist/Linux/ISO/$lang/ .
-
 done
