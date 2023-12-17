@@ -2014,13 +2014,42 @@ ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 	SDL_Rect dimensions;
 	dimensions.x = 0;
 	dimensions.y = 0;
+	MediaIMG* mediaImage = ctr_internal_get_image_from_object(myself);
+	if (mediaImage == NULL) {
+		mediaImage = &mediaIMGs[IMGCount++];
+		mediaImage->x = 0;
+		mediaImage->y = 0;
+		mediaImage->ox = 0;
+		mediaImage->oy = 0;
+		mediaImage->tx = -1;
+		mediaImage->ty = -1;
+		mediaImage->bounce = 0;
+		mediaImage->solid = 0;
+		mediaImage->collidable = 0;
+		mediaImage->gravity = 0;
+		mediaImage->speed = 1;
+		mediaImage->fric = 0;
+		mediaImage->accel = 1;
+		mediaImage->gspeed = 0;
+		mediaImage->dir = -1;
+		mediaImage->mov = 0;
+		mediaImage->anims = 1;
+		mediaImage->editable = 0;
+		mediaImage->text = NULL;
+		mediaImage->paddingx = 0;
+		mediaImage->paddingy = 0;
+		mediaImage->textlength = 0;
+		mediaImage->textbuffer = 0;
+		mediaImage->font = NULL;
+		mediaImage->color = (SDL_Color) {0,0,0,0};
+		mediaImage->backgroundColor = (SDL_Color) {0,0,0,0};
+		mediaImage->ref = myself;
+		ctr_resource* rs = ctr_heap_allocate( sizeof(ctr_resource) );
+		rs->ptr = mediaImage;
+		rs->destructor = &ctr_img_destructor;
+		myself->value.rvalue = rs;
+	}
 	char* imageFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
-	ctr_object* imageInst = myself;
-	MediaIMG* mediaImage = &mediaIMGs[IMGCount]; 
-	ctr_resource* rs = ctr_heap_allocate( sizeof(ctr_resource) );
-	rs->ptr = mediaImage;
-	rs->destructor = &ctr_img_destructor;
-	imageInst->value.rvalue = rs;
 	SDL_RWops* res;
 	res = ctr_internal_media_load_asset(imageFileStr, 1);
 	if (res) {
@@ -2037,37 +2066,7 @@ ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 	SDL_QueryTexture(mediaImage->texture, NULL, NULL, &dimensions.w, &dimensions.h);
 	mediaImage->h = dimensions.h;
 	mediaImage->w = dimensions.w;
-	mediaImage->x = 0;
-	mediaImage->y = 0;
-	mediaImage->ox = 0;
-	mediaImage->oy = 0;
-	mediaImage->tx = -1;
-	mediaImage->ty = -1;
-	mediaImage->bounce = 0;
-	mediaImage->solid = 0;
-	mediaImage->collidable = 0;
-	mediaImage->gravity = 0;
-	mediaImage->speed = 1;
-	mediaImage->fric = 0;
-	mediaImage->accel = 1;
-	mediaImage->gspeed = 0;
-	mediaImage->dir = -1;
-	mediaImage->mov = 0;
-	mediaImage->anims = 1;
-	mediaImage->editable = 0;
-	mediaImage->text = NULL;
-	mediaImage->paddingx = 0;
-	mediaImage->paddingy = 0;
-	mediaImage->textlength = 0;
-	mediaImage->textbuffer = 0;
-	mediaImage->font = NULL;
-	mediaImage->color = (SDL_Color) {0,0,0,0};
-	mediaImage->backgroundColor = (SDL_Color) {0,0,0,0};
-	mediaImage->ref = imageInst;
-	SDL_RenderCopy(CtrMediaRenderer, mediaImage->texture, NULL, &dimensions);
-	SDL_RenderPresent(CtrMediaRenderer);
-	IMGCount ++;
-	return imageInst;
+	return myself;
 }
 
 ctr_object* ctr_img_new_set(ctr_object* myself, ctr_argument* argumentList) {
