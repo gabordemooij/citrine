@@ -138,7 +138,7 @@ struct MediaIMG {
 	double			tx;			double			ty;
 	double			gravity;	double			gspeed;
 	double			fric;		double			accel;
-	double			speed;		int				dir;
+	double			speed;		double				dir;
 	double			mov;		int				anims;
 	int				solid;		int				collidable;
 	char*			text;		TTF_Font*		font;
@@ -853,7 +853,7 @@ void ctr_internal_media_detect_collisions(MediaIMG* m, SDL_Rect r) {
 					CtrMediaJump = 0;
 				}
 				if (m->bounce) {
-					m->dir = (m->dir + 270) % 360;
+					m->dir = (double) (((int)m->dir + 270) % 360);
 				}
 			}
 			if (m->collidable) {
@@ -1565,6 +1565,7 @@ SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
 	fclose(asset_file);
 	return res;
 }
+
 ctr_object* ctr_music_new_set(ctr_object* myself, ctr_argument* argumentList) {
 	char* audioFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	ctr_object* audioInst = ctr_audio_new(myself, argumentList);
@@ -2118,7 +2119,7 @@ ctr_object* ctr_img_mov_set(ctr_object* myself, ctr_argument* argumentList) {
 	double delta_x = x - image->x;
 	double delta_y = y - image->y;
 	double rad = atan2(-1 * delta_y, delta_x);
-	int deg = rad * (180 / M_PI);
+	double deg = rad * (180 / M_PI);
 	image->dir = (deg < 0) ? 360 + deg : deg;
 	image->tx = x;
 	image->ty = y;
