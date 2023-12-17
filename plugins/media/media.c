@@ -1435,6 +1435,17 @@ ctr_object* ctr_line_end(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_object_property(myself, CTR_DICT_TO, NULL);
 }
 
+/**
+ * @def
+ * [ Color ] new
+ *
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ x ≔ Color new.
+ * ✎ write: x red, stop.
+ * ✎ write: x green, stop.
+ * ✎ write: x blue, stop.
+ */
 ctr_object* ctr_color_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	instance->link = myself;
@@ -1445,6 +1456,17 @@ ctr_object* ctr_color_new(ctr_object* myself, ctr_argument* argumentList) {
 	return instance;
 }
 
+/**
+ * @def
+ * [ Color ] red: [Number] green: [Number] blue [Number]
+ *
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ x ≔ Color new red: 100 green: 150 blue: 200.
+ * ✎ write: x red, stop.
+ * ✎ write: x green, stop.
+ * ✎ write: x blue, stop.
+ */
 ctr_object* ctr_color_rgb_set(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_internal_object_property(myself, "r", ctr_internal_cast2number(argumentList->object));
 	ctr_internal_object_property(myself, "g", ctr_internal_cast2number(argumentList->next->object));
@@ -1489,6 +1511,17 @@ void ctr_audio_destructor(ctr_resource* rs) {
 	mediaAUD->ref = NULL;
 }
 
+/**
+ * @def
+ * [ Sound ] play
+ *
+ * @example
+ * ☞ fx ≔ Sound new: ‘boom.mp3’.
+ * fx play.
+ *
+ * @result
+ * (plays sound)
+ */
 ctr_object* ctr_sound_new_set(ctr_object* myself, ctr_argument* argumentList) {
 	if (AUDCount >= maxAUD) return CtrStdNil;
 	char* audioFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
@@ -1566,6 +1599,21 @@ SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
 	return res;
 }
 
+/**
+ * @def
+ * [ Music ] play
+ *
+ * @example
+ * ☞ j ≔ Music new: ‘jazz.mp3’.
+ * j play.
+ * Moment wait: 1.
+ * j silence.
+ * j rewind.
+ *
+ * @result
+ * 𝄞 (plays music)
+ *
+ */
 ctr_object* ctr_music_new_set(ctr_object* myself, ctr_argument* argumentList) {
 	char* audioFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	ctr_object* audioInst = ctr_audio_new(myself, argumentList);
