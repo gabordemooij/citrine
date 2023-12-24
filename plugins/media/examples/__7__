@@ -114,7 +114,7 @@ __6__ bĳ: “klik” doen: {
 
 tandwielen bĳ: “klik” doen: {
     Bestand nieuw: huidige programma, schrĳf: tekstveld tekst.
-    Programma opdrachtregel: (
+    Media sys: (
         (((Programma argument: 1) opsplitsen: “\\”) laatste)
         + “ ”
         + huidige programma
