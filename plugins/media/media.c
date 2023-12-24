@@ -2671,13 +2671,15 @@ ctr_object* ctr_media_on_do(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 
-ctr_object* ctr_internal_media_external_command(char* command_str, char* fallback, char* parameter_str) {
+ctr_object* ctr_internal_media_external_command(char* command_str, char* fallback, char* parameter_str, char* template_str) {
+	char* default_template_str = "%s '%s'";
+	int maxlen = 500;
+	char command[maxlen];
 	if (command_str == NULL) command_str = fallback;
-	int maxlen = 200;
-	char  command[maxlen];
-	memset(command, '\0', maxlen + 10);
-	if (strlen(command_str) + strlen(parameter_str) > maxlen) return CtrStdBoolFalse;
-	sprintf(command, "%s '%s'", command_str, parameter_str);
+	if (template_str == NULL) template_str = default_template_str;
+	memset(command, '\0', maxlen);
+	if (strlen(template_str) + strlen(command_str) + strlen(parameter_str) >= maxlen) return CtrStdBoolFalse;
+	sprintf(command, template_str, command_str, parameter_str);
 	if  (system(command)==0) return CtrStdBoolTrue;
 	return CtrStdBoolFalse;
 }
@@ -2686,7 +2688,8 @@ ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_media_external_command(
 		getenv("BROWSER"),
 		"chrome",
-		ctr_tostr(argumentList->object)
+		ctr_tostr(argumentList->object),
+		NULL
 	);
 }
 
@@ -2694,14 +2697,61 @@ ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_media_external_command(
 		getenv("SPEAK"),
 		"say",
-		ctr_tostr(argumentList->object)
+		ctr_tostr(argumentList->object),
+		NULL
 	);
 }
 
+/**
+ * @internal
+ *
+ * Media sys: [Text].
+ *
+ * Starts a subprocess and opens a terminal if possible to allow you to see
+ * results of write-operations.
+ */
 ctr_object* ctr_media_system(ctr_object* myself, ctr_argument* argumentList) {
-	char* command = ctr_tostr(ctr_internal_copy2string(argumentList->object));
-	int rs = system(command);
-	return ctr_build_number_from_float((double) rs);
+	ctr_object* result;
+	#ifndef WIN
+	//In Linux/BSD we cannot attach a terminal to a process afterwards so
+	//we always open a terminal. If users don't want a terminal they have to start
+	//the application themselves. Also on Linux we don't know which terminal to
+	//use, by default we use /usr/bin/x-terminal-emulator and the -e option,
+	//this is a standard shared link installed on most systems, the -e option
+	//is xterm-compatible, however GNOME terminal uses -x and other terminals
+	//may also be incompatible, you can override the TERMINAL to use with env.
+	result = ctr_internal_media_external_command(
+		getenv("TERMINAL"),
+		"/usr/bin/x-terminal-emulator -e",
+		ctr_tostr(ctr_internal_copy2string(argumentList->object)),
+		NULL
+	);
+	//If it fails, start without terminal
+	if (result == CtrStdBoolFalse) {
+		result = ctr_internal_media_external_command(
+		NULL,
+		"",
+		ctr_tostr(ctr_internal_copy2string(argumentList->object)),
+		"%s %s"
+		);
+	}
+	#else
+	// Use CreateProcess for Windows to avoid useless terminal screen
+	// We will 'attach' a real terminal screen that can actually be used by
+	// write: afterwards upon the first write-operation (hook).
+	STARTUPINFO si;
+    PROCESS_INFORMATION pi;
+    ZeroMemory( &si, sizeof(si) );
+    si.cb = sizeof(si);
+    ZeroMemory( &pi, sizeof(pi) );
+    // Start the child process. 
+    if( !CreateProcess(NULL,ctr_tostr(ctr_internal_copy2string(argumentList->object)),NULL,NULL,FALSE,0,NULL,NULL,&si,&pi)) return CtrStdBoolFalse;
+	WaitForSingleObject( pi.hProcess, INFINITE );
+	CloseHandle( pi.hProcess );
+	CloseHandle( pi.hThread );
+	result = CtrStdBoolTrue;
+	#endif
+	return result;
 }
 
 #ifdef WIN
