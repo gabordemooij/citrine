@@ -2685,11 +2685,20 @@ ctr_object* ctr_internal_media_external_command(char* command_str, char* fallbac
 }
 
 ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
+	char* default_url_opener;
+	char* tpl;
+	#ifdef WIN
+	default_url_opener = "explorer"; //Win
+	tpl = "%s %s";
+	#else
+	default_url_opener = "xdg-open"; //Linuxy
+	tpl = NULL;
+	#endif
 	return ctr_internal_media_external_command(
 		getenv("BROWSER"),
-		"chrome",
+		default_url_opener,
 		ctr_tostr(argumentList->object),
-		NULL
+		tpl
 	);
 }
 
