@@ -146,7 +146,7 @@ papieren bĳ: “klik” doen: {
 }.
 
 boek bĳ: “klik” doen: {
-    Media website: “https://citrine-lang.org”.
+    Media website: “https://citrine-lang.org/manual.ctr”.
 }.
 
 kist bĳ: “klik” doen: {
