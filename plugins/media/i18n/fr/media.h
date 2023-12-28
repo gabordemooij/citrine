@@ -39,7 +39,7 @@
 #define CTR_DICT_ON_CLICK                   "cliquez"
 #define CTR_DICT_ON_HOVER                   "flotter:"
 #define CTR_DICT_ANIMATIONS_SET             "animations:"
-#define CTR_DICT_DESELECT                   "désélectionner"
+#define CTR_DICT_CUT                   "désélectionner"
 #define CTR_DICT_EDITABLE_SET               "inscriptible:"
 #define CTR_DICT_FONT_TYPE_SIZE_SET         "lettre:taille:"
 #define CTR_DICT_COLOR_SET                  "couleur:"

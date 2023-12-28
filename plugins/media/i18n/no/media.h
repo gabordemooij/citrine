@@ -39,7 +39,7 @@
 #define CTR_DICT_ON_CLICK                   "klikke"
 #define CTR_DICT_ON_HOVER                   "sveve:"
 #define CTR_DICT_ANIMATIONS_SET             "animasjon:"
-#define CTR_DICT_DESELECT                   "oppheve"
+#define CTR_DICT_CUT                   "oppheve"
 #define CTR_DICT_EDITABLE_SET               "skrivbar:"
 #define CTR_DICT_FONT_TYPE_SIZE_SET         "skrift:størrelse:"
 #define CTR_DICT_COLOR_SET                  "farge:"

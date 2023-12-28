@@ -215,6 +215,8 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 	char* key2  = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	char* format;
 	char* buffer;
+	char* keys_for_strings = getenv("STRINGKEYS");
+	char* string_key = NULL;
 	int lineCounter = 0;
 	while( 
 		fscanf( f1, "#define %180s \"%180[^\"]\"\n", key1, word ) > 0 &&
@@ -235,6 +237,15 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 			printf("x \"%s\" \"%s\"\n", word, translation);
 		} else {
 			printf("t \"%s\" \"%s\"\n", word, translation);
+			/* If language string starts with DICT_ON... then it's an event, also generate string */
+			if (keys_for_strings != NULL) string_key = strtok(keys_for_strings, ",");
+			while(string_key != NULL) {
+				if (strstr(key1, string_key)!=NULL) {
+					printf("s \"%s\" \"%s\"\n", word, translation);
+					break;
+				}
+				string_key = strtok(NULL, ",");
+			}
 		}
 		lineCounter++;
 	}

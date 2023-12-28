@@ -39,7 +39,7 @@
 #define CTR_DICT_ON_CLICK                   "нажатие"
 #define CTR_DICT_ON_HOVER                   "наведение:"
 #define CTR_DICT_ANIMATIONS_SET             "анимация:"
-#define CTR_DICT_DESELECT                   "удалить выделение"
+#define CTR_DICT_CUT                   "удалить выделение"
 #define CTR_DICT_EDITABLE_SET               "доступен для записи:"
 #define CTR_DICT_FONT_TYPE_SIZE_SET         "размер:шрифт:"
 #define CTR_DICT_COLOR_SET                  "цвет:"

@@ -39,7 +39,7 @@
 #define CTR_DICT_ON_CLICK                   "klikněte"
 #define CTR_DICT_ON_HOVER                   "vznášet se:"
 #define CTR_DICT_ANIMATIONS_SET             "animace:"
-#define CTR_DICT_DESELECT                   "zrušit"
+#define CTR_DICT_CUT                   "zrušit"
 #define CTR_DICT_EDITABLE_SET               "zapisovatelné:"
 #define CTR_DICT_FONT_TYPE_SIZE_SET         "písmo:velikost:"
 #define CTR_DICT_COLOR_SET                  "barva:"

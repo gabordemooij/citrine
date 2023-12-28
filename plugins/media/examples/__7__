@@ -123,7 +123,7 @@ tandwielen bĳ: “klik” doen: {
 
 schaar bĳ: “klik” doen: {
         papieren klik.
-        tekstveld verwĳder selectie.
+        tekstveld knip.
 }.
 
 klembord bĳ: “klik” doen: {
@@ -131,7 +131,7 @@ klembord bĳ: “klik” doen: {
 }.
 
 bezem bĳ: “klik” doen: {
-    tekstveld verwĳder selectie.
+    tekstveld knip.
 }.
 
 papieren bĳ: “klik” doen: {

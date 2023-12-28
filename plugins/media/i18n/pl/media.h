@@ -39,7 +39,7 @@
 #define CTR_DICT_ON_CLICK                   "kliknięcie"
 #define CTR_DICT_ON_HOVER                   "najedź myszką:"
 #define CTR_DICT_ANIMATIONS_SET             "animacja:"
-#define CTR_DICT_DESELECT                   "odznacz"
+#define CTR_DICT_CUT                   "odznacz"
 #define CTR_DICT_EDITABLE_SET               "zapisywalny:"
 #define CTR_DICT_FONT_TYPE_SIZE_SET         "czcionka:rozmiar:"
 #define CTR_DICT_COLOR_SET                  "kleur:"

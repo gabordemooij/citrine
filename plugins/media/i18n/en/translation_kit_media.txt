@@ -46,7 +46,7 @@ CTR_DICT_COLLISION_SET              "collision:"           ~ Event handler for c
 CTR_DICT_ON_CLICK                   "click"                ~ Event handler for clicks on an image
 CTR_DICT_ON_HOVER                   "hover:"               ~ Event handler for hovering over an image
 CTR_DICT_ANIMATIONS_SET             "animations:"          ~ Sets the number of sub images in a single image to perform animation
-CTR_DICT_DESELECT                   "deselect"             ~ Deselects text in an editable image that functions as a text field
+CTR_DICT_CUT                   "deselect"             ~ Deselects text in an editable image that functions as a text field
 CTR_DICT_EDITABLE_SET               "editable:"            ~ Toggles editability of an image, if Yes then you can write text in the image
 CTR_DICT_FONT_TYPE_SIZE_SET         "font:size:"           ~ Sets the font and size for an image
 CTR_DICT_COLOR_SET                  "color:"               ~ Sets the color of the text in an image

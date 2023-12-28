@@ -39,7 +39,7 @@
 #define CTR_DICT_ON_CLICK                   "klik"
 #define CTR_DICT_ON_HOVER                   "beweeg over:"
 #define CTR_DICT_ANIMATIONS_SET             "animaties:"
-#define CTR_DICT_DESELECT                   "verwĳder selectie"
+#define CTR_DICT_CUT                        "knip"
 #define CTR_DICT_EDITABLE_SET               "beschrĳfbaar:"
 #define CTR_DICT_FONT_TYPE_SIZE_SET         "letter:grootte:"
 #define CTR_DICT_COLOR_SET                  "kleur:"

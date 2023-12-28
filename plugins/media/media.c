@@ -477,6 +477,16 @@ void ctr_internal_media_textinsert(MediaIMG* mediaImage, char* text) {
 	CtrMediaInputIndex += insertTextLength;
 }
 
+/**
+ * @def
+ * [ Image ] cut
+ * 
+ * @example
+ * image cut
+ * 
+ * @result
+ * en: Cuts the selected text in the image (if editable).
+ */
 ctr_object* ctr_img_text_del(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* mediaImage;
 	int begin, end, len;
@@ -494,6 +504,16 @@ ctr_object* ctr_img_text_del(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Image ] insert: [ String ]
+ * 
+ * @example
+ * image insert: ‘abc’.
+ * 
+ * @result
+ * en: Inserts text in image at cursor position (if editable).
+ */
 ctr_object* ctr_img_text_ins(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* mediaImage;
 	char* buffer;
@@ -1042,6 +1062,27 @@ void ctr_media_event_coords(ctr_object* myself, char* event, int x, int y) {
 	ctr_heap_free(args);
 }
 
+/**
+ * @def
+ * [ Media ] timer: [ Number ] after: [ Number ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ i ≔ 0.
+ * media on: ‘start’ do: {
+ * ✎ write: ‘start’, stop.
+ * media timer: 1 after: 12.
+ * }.
+ * media on: ‘step’ do: {
+ * ✎ write: i, stop.
+ * i add: 1.
+ * }.
+ * media on: ‘timer:’ do: { :t
+ * ✎ write: ‘timer:’ + t, stop.
+ * media end.
+ * }.
+ * media screen: ‘canvas.png’.
+ */
 ctr_object* ctr_media_timer(ctr_object* myself, ctr_argument* argumentList) {
 	int timer_no = (int) ctr_tonum(ctr_internal_cast2number(argumentList->object));
 	int ms = (int) ctr_tonum(ctr_internal_cast2number(argumentList->next->object));
@@ -1053,6 +1094,27 @@ ctr_object* ctr_media_timer(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Media ] screen: [ String ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * 
+ * media on: ‘start’ do: { ... }.
+ * media on: ‘step’ do: { ... }.
+ * media on: ‘key:’ do: { ... }.
+ * media on: ‘key down:’ do: { ... }.
+ * media on: ‘gamepad:’ do: { ... }.
+ * media on: ‘gamepad down:’ do: { ... }.
+ * media on: ‘click x:y:’ do: { ... }.
+ * 
+ * media screen: ‘canvas.png’.
+ * 
+ * @result
+ * en: Opens a screen with a background image or video. Afterwards your media object will start receiving events (see above).
+ *
+ */
 ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* player;
 	MediaIMG* focusImage;
@@ -1114,11 +1176,12 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 			ctr_send_message(myself, CTR_DICT_ON_STEP, strlen(CTR_DICT_ON_STEP), NULL );
 		}
 		myself->info.sticky = 0;
+		if (CtrMediaBreakLoopFlag) {
+			ctr_internal_media_reset();
+			return myself;
+		}
 		while (SDL_PollEvent(&event)) {
-			if (CtrMediaBreakLoopFlag) {
-				ctr_internal_media_reset();
-				return myself;
-			}
+			
 			player = NULL;
 			focusImage = NULL;
 			if (controllableObject) {
@@ -1385,6 +1448,16 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * Point
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ p ≔ Point new x: 10 y: 20.
+ * ✎ write: p x?, stop.
+ * ✎ write: p y?, stop.
+ */
 ctr_object* ctr_point_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	instance->link = myself;
@@ -1393,17 +1466,47 @@ ctr_object* ctr_point_new(ctr_object* myself, ctr_argument* argumentList) {
 	return instance;
 }
 
+/**
+ * @def
+ * [ Point ] x?
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ p ≔ Point new x: 10 y: 20.
+ * ✎ write: p x?, stop.
+ * ✎ write: p y?, stop.
+ */
 ctr_object* ctr_point_x(ctr_object* myself, ctr_argument* argumentList) {
 	int x = (int) ctr_tonum(ctr_internal_object_property(myself, "x", NULL));
 	return ctr_build_number_from_float(x);
 }
 
+/**
+ * @def
+ * [ Point ] y?
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ p ≔ Point new x: 10 y: 20.
+ * ✎ write: p x?, stop.
+ * ✎ write: p y?, stop.
+ */
 ctr_object* ctr_point_y(ctr_object* myself, ctr_argument* argumentList) {
 	int y = (int) ctr_tonum(ctr_internal_object_property(myself, "y", NULL));
 	ctr_internal_natural_y(&y);
 	return ctr_build_number_from_float(y);
 }
 
+/**
+ * @def
+ * [ Point ] x: [ Number ] y: [ Number ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ p ≔ Point new x: 10 y: 20.
+ * ✎ write: p x?, stop.
+ * ✎ write: p y?, stop.
+ */
 ctr_object* ctr_point_xyset(ctr_object* myself, ctr_argument* argumentList) {
 	int x = (int) ctr_tonum(ctr_internal_cast2number(argumentList->object));
 	int y = (int) ctr_tonum(ctr_internal_cast2number(argumentList->next->object));
@@ -1413,6 +1516,18 @@ ctr_object* ctr_point_xyset(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * Line
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Point new x: 10 y: 10.
+ * ☞ b ≔ Point new x: 20 y: 20.
+ * ☞ c ≔ Line from: a to: b.
+ * ✎ write: c from, stop.
+ * ✎ write: c to, stop.
+ */
 ctr_object* ctr_line_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	instance->link = myself;
@@ -1421,27 +1536,63 @@ ctr_object* ctr_line_new(ctr_object* myself, ctr_argument* argumentList) {
 	return instance;
 }
 
+/**
+ * @def
+ * [ Line ] from: [ Point ] to: [ Point ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Point new x: 10 y: 10.
+ * ☞ b ≔ Point new x: 20 y: 20.
+ * ☞ c ≔ Line from: a to: b.
+ * ✎ write: c from, stop.
+ * ✎ write: c to, stop.
+ */
 ctr_object* ctr_line_from_to(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_internal_object_property(myself, CTR_DICT_FROM, argumentList->object);
 	ctr_internal_object_property(myself, CTR_DICT_TO, argumentList->next->object);
 	return myself;
 }
 
+/**
+ * @def
+ * [ Line ] from
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Point new x: 10 y: 10.
+ * ☞ b ≔ Point new x: 20 y: 20.
+ * ☞ c ≔ Line from: a to: b.
+ * ✎ write: c from, stop.
+ * ✎ write: c to, stop.
+ */
 ctr_object* ctr_line_start(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_object_property(myself, CTR_DICT_FROM, NULL);
 }
 
+/**
+ * @def
+ * [ Line ] to
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Point new x: 10 y: 10.
+ * ☞ b ≔ Point new x: 20 y: 20.
+ * ☞ c ≔ Line from: a to: b.
+ * ✎ write: c from, stop.
+ * ✎ write: c to, stop.
+ */
 ctr_object* ctr_line_end(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_object_property(myself, CTR_DICT_TO, NULL);
 }
 
 /**
  * @def
- * [ Color ] new
+ * [ Colour ] new
  *
  * @example
  * ☞ media ≔ Media new.
- * ☞ x ≔ Color new.
+ * ☞ x ≔ Colour new.
  * ✎ write: x red, stop.
  * ✎ write: x green, stop.
  * ✎ write: x blue, stop.
@@ -1458,11 +1609,11 @@ ctr_object* ctr_color_new(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Color ] red: [Number] green: [Number] blue [Number]
+ * [ Colour ] red: [Number] green: [Number] blue [Number]
  *
  * @example
  * ☞ media ≔ Media new.
- * ☞ x ≔ Color new red: 100 green: 150 blue: 200.
+ * ☞ x ≔ Colour new red: 100 green: 150 blue: 200.
  * ✎ write: x red, stop.
  * ✎ write: x green, stop.
  * ✎ write: x blue, stop.
@@ -1513,7 +1664,7 @@ void ctr_audio_destructor(ctr_resource* rs) {
 
 /**
  * @def
- * [ Sound ] play
+ * Sound
  *
  * @example
  * ☞ fx ≔ Sound new: ‘boom.mp3’.
@@ -1543,6 +1694,17 @@ ctr_object* ctr_sound_new_set(ctr_object* myself, ctr_argument* argumentList) {
 	return audioInst;
 }
 
+/**
+ * @def
+ * [ Sound ] play
+ *
+ * @example
+ * ☞ fx ≔ Sound new: ‘boom.mp3’.
+ * fx play.
+ *
+ * @result
+ * (plays sound)
+ */
 ctr_object* ctr_sound_play(ctr_object* myself, ctr_argument* argumentList) {
 	MediaAUD* mediaAUD = ctr_internal_get_audio_from_object(myself);
 	if (mediaAUD == NULL) return myself;
@@ -1601,7 +1763,7 @@ SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
 
 /**
  * @def
- * [ Music ] play
+ * Music
  *
  * @example
  * ☞ j ≔ Music new: ‘jazz.mp3’.
@@ -1639,7 +1801,21 @@ ctr_object* ctr_music_new_set(ctr_object* myself, ctr_argument* argumentList) {
 	return audioInst;
 }
 
-
+/**
+ * @def
+ * [ Music ] play
+ *
+ * @example
+ * ☞ j ≔ Music new: ‘jazz.mp3’.
+ * j play.
+ * Moment wait: 1.
+ * j silence.
+ * j rewind.
+ *
+ * @result
+ * 𝄞 (plays music)
+ *
+ */
 ctr_object* ctr_music_play(ctr_object* myself, ctr_argument* argumentList) {
 	MediaAUD* mediaAUD = ctr_internal_get_audio_from_object(myself);
 	if (mediaAUD == NULL) return myself;
@@ -1649,6 +1825,21 @@ ctr_object* ctr_music_play(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Music ] silence
+ *
+ * @example
+ * ☞ j ≔ Music new: ‘jazz.mp3’.
+ * j play.
+ * Moment wait: 1.
+ * j silence.
+ * j rewind.
+ *
+ * @result
+ * 𝄞 (plays music)
+ *
+ */
 ctr_object* ctr_music_silence(ctr_object* myself, ctr_argument* argumentList) {
 	MediaAUD* mediaAUD = ctr_internal_get_audio_from_object(myself);
 	if (mediaAUD == NULL) return myself;
@@ -1658,6 +1849,21 @@ ctr_object* ctr_music_silence(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Music ] rewind
+ *
+ * @example
+ * ☞ j ≔ Music new: ‘jazz.mp3’.
+ * j play.
+ * Moment wait: 1.
+ * j silence.
+ * j rewind.
+ *
+ * @result
+ * 𝄞 (plays music)
+ *
+ */
 ctr_object* ctr_music_rewind(ctr_object* myself, ctr_argument* argumentList) {
 	MediaAUD* mediaAUD = ctr_internal_get_audio_from_object(myself);
 	if (mediaAUD == NULL) return myself;
@@ -1728,6 +1934,16 @@ void ctr_internal_media_sock() {
 }
 #endif
 
+
+/**
+ * @def
+ * Network
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ network ≔ Network new.
+ * ✎ write: network, stop.
+ */
 ctr_object* ctr_network_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
 	instance->link = myself;
@@ -1805,6 +2021,18 @@ int ctr_internal_receive_network_message(void* buffer, int messagelen, char* ip_
 
 uint16_t CtrMediaNetworkCunkId = 1;
 
+
+/**
+ * @def
+ * [ Network ] text: [ String ] to: [ String ]
+ * 
+ * @example
+ * Program setting: network port value: ‘9002’.
+ * Network text: ‘hello’ to: ‘127.0.0.1:9000’.
+ * 
+ * @result
+ * en: Sends a text message to the specified computer.
+*/
 ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList) {
 	char* data = argumentList->object->value.svalue->value;
 	uint64_t total_size = argumentList->object->value.svalue->vlen;
@@ -1943,6 +2171,16 @@ document_lock* document_locks[100];
 
 uint16_t chunk_size;
 
+/**
+ * @def
+ * [ Network ] text messages
+ * 
+ * @example
+ * ☞ receive ≔ Network text messages.
+ * 
+ * @result
+ * en: Receives text messages send to this computer.
+*/
 ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* argumentList) {
 	char buffer[500];
 	char buffer2[500];
@@ -2047,6 +2285,19 @@ ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* arg
 	return received_text_message;
 }
 
+/**
+ * @def
+ * Image
+ * 
+ * @example
+ * ☞ image ≔ Image new: ‘myimage.png’.
+ * image on ‘click’ do: { ... }.
+ * image on ‘hover’ do: { ... }.
+ * image on ‘collision:’ do: { :other ... }.
+ * 
+ * @result
+ * en: Loads an image. Afterwards your image will start receiving events (see above).
+ */
 ctr_object* ctr_img_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
 	instance->link = myself;
@@ -2058,6 +2309,17 @@ void ctr_img_destructor(ctr_resource* rs) {
 	image->ref = NULL;
 }
 
+/**
+ * @def
+ * [ Image ] image: [ String ]
+ * 
+ * @example
+ * ☞ image ≔ Image new: ‘image1.png’.
+ * image image: ‘image2.png’.
+ * 
+ * @result
+ * en: Updates the graphical contents of an image.
+ */
 ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 	SDL_Rect dimensions;
 	dimensions.x = 0;
@@ -2121,6 +2383,28 @@ ctr_object* ctr_img_new_set(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_img_img(ctr_img_new(myself, argumentList), argumentList);
 }
 
+
+
+/**
+ * @def
+ * [ Image ] controllable: [ Number ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘plane1.png’.
+ *
+ * media on: ‘start’ do: {
+ * 
+ * a 
+ * controllable: 4.
+ * 
+ * }.
+ * 
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * [[img_controllable]]
+ */
 ctr_object* ctr_img_controllable(ctr_object* myself, ctr_argument* argumentList) {
 	if (!ctr_internal_get_image_from_object(myself)) return myself;
 	controllableObject = myself;
@@ -2128,6 +2412,19 @@ ctr_object* ctr_img_controllable(ctr_object* myself, ctr_argument* argumentList)
 	return myself;
 }
 
+/**
+ * @def
+ * [ Image ] x: [ Number ] y: [ Number ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘bunny.png’.
+ * a x: 10 y: 5.
+ * 
+ * @result
+ * [[img_xy]]
+ * 
+ */
 ctr_object* ctr_img_xy(ctr_object* myself, ctr_argument* argumentList) {
 	int x = (int) ctr_tonum(ctr_internal_cast2number(argumentList->object));
 	int y = (int) ctr_tonum(ctr_internal_cast2number(argumentList->next->object));
@@ -2141,12 +2438,32 @@ ctr_object* ctr_img_xy(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Image ] x?
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘bunny.png’.
+ * a x: 10 y: 5.
+ * ✎ write: a x?, stop.
+ */
 ctr_object* ctr_img_x(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
 	return ctr_build_number_from_float(image->x);
 }
 
+/**
+ * @def
+ * [ Image ] y?
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘bunny.png’.
+ * a x: 10 y: 5.
+ * ✎ write: a y?, stop.
+ */
 ctr_object* ctr_img_y(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
@@ -2156,6 +2473,26 @@ ctr_object* ctr_img_y(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(y);
 }
 
+
+/**
+ * @def
+ * [ Image ] move to x: [ Number ] y: [ Number ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘a.png’.
+ * media on: ‘start’ do: {
+ * a 
+ * x: 10 y: 10, 
+ * speed: 1,
+ * move to x: 20 y: 20.
+ * }.
+ *
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * [[img_movset]]
+ */
 ctr_object* ctr_img_mov_set(ctr_object* myself, ctr_argument* argumentList) {
 	double x = (int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	int y_ = (int) ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
@@ -2173,6 +2510,26 @@ ctr_object* ctr_img_mov_set(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Image ] bounce: [ Boolean ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘a.png’.
+ * media on: ‘start’ do: {
+ * a 
+ * x: 20 y: 500, 
+ * speed: 10,
+ * move to x: 800 y: 0,
+ * bounce: Yes.
+ * }.
+ *
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * en: Toggles whether the image will bounce upon collision.
+ */
 ctr_object* ctr_img_bounce(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
@@ -2180,6 +2537,27 @@ ctr_object* ctr_img_bounce(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Image ] solid: [ Boolean ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘a.png’.
+ * ☞ b ≔ Image new: ‘b.png’.
+ *
+ * media on: ‘start’ do: {
+ * 
+ * a controllable: Yes.
+ * b x: 100, y: 100. 
+ * 
+ * }.
+ * 
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * [[img_solid]]
+ */
 ctr_object* ctr_img_solid(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
@@ -2187,6 +2565,19 @@ ctr_object* ctr_img_solid(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+
+/**
+ * @def
+ * [ Image ] active: [ Boolean ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘a.png’.
+ * a active: Yes.
+ * 
+ * @result
+ * en: Allows the image to receive messages upon events.
+ */
 ctr_object* ctr_img_active(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
@@ -2194,6 +2585,28 @@ ctr_object* ctr_img_active(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+
+/**
+ * @def
+ * [ Image ] gravity: [ Number ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘a.png’.
+ *
+ * media on: ‘start’ do: {
+ * 
+ * a 
+ * x: 1 y: 100,
+ * gravity: 2.
+ *
+ * }.
+ * 
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * [[img_accel]]
+ */
 ctr_object* ctr_img_gravity(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
@@ -2201,12 +2614,61 @@ ctr_object* ctr_img_gravity(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Image ] speed: [ Number ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘plane1.png’.
+ *
+ * media on: ‘start’ do: {
+ * 
+ * a 
+ * x: 1 y: 1,
+ * accelerate: 0.01,
+ * speed: 5,
+ * friction: 1
+ * move to x: 200 y: 1.
+ *
+ * }.
+ * 
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * [[img_accel]]
+ */
 ctr_object* ctr_img_speed(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
 	image->speed = ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	return myself;
 }
+
+/**
+ * @def
+ * [ Image ] friction: [ Number ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘plane1.png’.
+ *
+ * media on: ‘start’ do: {
+ * 
+ * a 
+ * x: 1 y: 1,
+ * accelerate: 0.01,
+ * speed: 5,
+ * friction: 1
+ * move to x: 200 y: 1.
+ *
+ * }.
+ * 
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * [[img_accel]]
+ */
 ctr_object* ctr_img_friction(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
@@ -2214,6 +2676,30 @@ ctr_object* ctr_img_friction(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Image ] accelerate: [ Number ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘plane1.png’.
+ *
+ * media on: ‘start’ do: {
+ * 
+ * a 
+ * x: 1 y: 1,
+ * accelerate: 0.01,
+ * speed: 5,
+ * friction: 1
+ * move to x: 200 y: 1.
+ *
+ * }.
+ * 
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * [[img_accel]]
+ */
 ctr_object* ctr_img_accel(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
@@ -2221,11 +2707,60 @@ ctr_object* ctr_img_accel(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+
+/**
+ * @def
+ * [ Image ] jump height: [ Number ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘plane1.png’.
+ *
+ * media on: ‘start’ do: {
+ * 
+ * a 
+ * controllable: Yes,
+ * gravity: 1,
+ * jump height: 6.
+ * 
+ * }.
+ * 
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * [[img_jump_height]]
+ */
 ctr_object* ctr_img_jump_height(ctr_object* myself, ctr_argument* argumentList) {
 	CtrMediaJumpHeightFactor = ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	return myself;
 }
 
+
+/**
+ * @def
+ * [ Image ] editable: [ Boolean ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘a.png’.
+ *
+ * media on: ‘start’ do: {
+ * 
+ * a
+ * x: 0 y: 200,
+ * font: ‘font.ttf’ size: 16,
+ * align x: 40 y: 20,
+ * colour: (Colour new red: 110 green: 110 blue: 110),
+ * write: ‘...’,
+ * editable: Yes.
+ *
+ * }.
+ * 
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * en: Makes an image editable, you can now enter text inside it.
+ */
 ctr_object* ctr_img_editable(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
@@ -2233,6 +2768,28 @@ ctr_object* ctr_img_editable(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+
+/**
+ * @def
+ * [ Image ] animations: [ Number ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘a.png’.
+ *
+ * media on: ‘start’ do: {
+ * 
+ * a 
+ * controllable: Yes,
+ * animations: 2.
+ * 
+ * }.
+ * 
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * [[img_anims]]
+ */
 ctr_object* ctr_img_anims(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
@@ -2240,6 +2797,31 @@ ctr_object* ctr_img_anims(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+
+/**
+ * @def
+ * [ Image ] font: [ String ] size: [ Number ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘a.png’.
+ *
+ * media on: ‘start’ do: {
+ * 
+ * a
+ * x: 0 y: 200,
+ * font: ‘font.ttf’ size: 16,
+ * align x: 40 y: 20,
+ * colour: (Colour new red: 110 green: 110 blue: 110),
+ * write: ‘ABC’.
+ *
+ * }.
+ * 
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * en: Sets the font and size of the text in an image.
+ */
 ctr_object* ctr_img_font(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
@@ -2257,6 +2839,30 @@ ctr_object* ctr_img_font(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+
+/**
+ * @def
+ * [ Image ] colour: [ Colour ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘a.png’.
+ *
+ * media on: ‘start’ do: {
+ * 
+ * a
+ * x: 0 y: 200,
+ * font: ‘font.ttf’ size: 16,
+ * align x: 40 y: 20,
+ * colour: (Colour new red: 110 green: 110 blue: 110),
+ * write: ‘ABC’.
+ * }.
+ * 
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * en: Sets the colour for text in an image.
+ */
 ctr_object* ctr_img_color(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
@@ -2268,6 +2874,29 @@ ctr_object* ctr_img_color(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Image ] background colour: [ Colour ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘a.png’.
+ *
+ * media on: ‘start’ do: {
+ * 
+ * a
+ * x: 0 y: 200,
+ * font: ‘font.ttf’ size: 16,
+ * align x: 40 y: 20,
+ * background colour: (Colour new red: 110 green: 110 blue: 110),
+ * write: ‘ABC’.
+ * }.
+ * 
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * en: Sets the background colour for text in an image.
+ */
 ctr_object* ctr_img_background_color(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
@@ -2279,6 +2908,30 @@ ctr_object* ctr_img_background_color(ctr_object* myself, ctr_argument* argumentL
 	return myself;
 }
 
+/**
+ * @def
+ * [ Image ] align x: [ Number ] y: [ Number ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘a.png’.
+ *
+ * media on: ‘start’ do: {
+ * 
+ * a
+ * x: 0 y: 200,
+ * font: ‘font.ttf’ size: 16,
+ * align x: 40 y: 20,
+ * background colour: (Colour new red: 110 green: 110 blue: 110),
+ * write: ‘ABC’.
+ *
+ * }.
+ * 
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * en: Sets the position of the text within the image.
+ */
 ctr_object* ctr_img_text_align(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
@@ -2439,6 +3092,28 @@ char* ctr_internal_media_normalize_line_endings(char* original_text) {
 	return normalized_text;
 }
 
+/**
+ * @def
+ * [ Image ] write: [ String ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘a.png’.
+ *
+ * media on: ‘start’ do: {
+ * 
+ * a
+ * x: 0 y: 200,
+ * font: ‘font.ttf’ size: 16,
+ * write: ‘ABC’.
+ *
+ * }.
+ * 
+ * media screen: ‘bg.png’.
+ * 
+ * @result
+ * en: Writes text on an image.
+ */
 ctr_object* ctr_img_text(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
@@ -2454,6 +3129,30 @@ ctr_object* ctr_img_text(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Image ] draw: [ Sequence ] colour: [ Colour ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ canvas ≔ Image new: ‘canvas.png’.
+ * media on: ‘start’ do: {
+ *
+ * ☞ a ≔ Point new x: 10 y: 10.
+ * ☞ b ≔ Point new x: 20 y: 20.
+ * ☞ c ≔ Line new from: a to: b.
+ * ☞ d ≔ Point new x: 15 y: 5.
+ * ☞ all ≔ Sequence ← c ; d. 
+ * ☞ x ≔ Colour new red: 255 green: 0 blue:  0.
+ * canvas 
+ * x: 0 y: 0,
+ * draw: all colour: x.
+ * }.
+ * media screen: ‘canvas.png’.
+ * 
+ * @result
+ * [[img_draw]]
+ */
 ctr_object* ctr_img_draw(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* arg;
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
@@ -2508,6 +3207,17 @@ ctr_object* ctr_media_override(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Image ] text
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Image new: ‘a.png’.
+ * a font: ‘font.ttf’ size: 10.
+ * a write: ‘abc’.
+ * ✎ write: a text, stop.
+ */
 ctr_object* ctr_img_text_get(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL || image->text == NULL) {
@@ -2516,6 +3226,15 @@ ctr_object* ctr_img_text_get(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring(image->text);
 }
 
+/**
+ * @def
+ * [ Media ] clipboard
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * Media clipboard: ‘abc’.
+ * ✎ write: Media clipboard.
+ */
 ctr_object* ctr_media_clipboard(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* text;
 	char* buffer;
@@ -2529,6 +3248,15 @@ ctr_object* ctr_media_clipboard(ctr_object* myself, ctr_argument* argumentList) 
 	return text;
 }
 
+/**
+ * @def
+ * [ Media ] clipboard: [ String ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * Media clipboard: ‘abc’.
+ * ✎ write: Media clipboard.
+ */
 ctr_object* ctr_media_clipboard_set(ctr_object* myself, ctr_argument* argumentList) {
 	char* buffer;
 	buffer = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
@@ -2537,6 +3265,17 @@ ctr_object* ctr_media_clipboard_set(ctr_object* myself, ctr_argument* argumentLi
 	return myself;
 }
 
+
+/**
+ * @def
+ * [ Media ] select.
+ * 
+ * @example
+ * Media select.
+ * 
+ * @result
+ * en: Returns selected text in an editable image.
+ */
 ctr_object* ctr_media_select(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* list = ctr_array_new(CtrStdArray, NULL);
 	int begin, end;
@@ -2555,6 +3294,16 @@ ctr_object* ctr_media_select(ctr_object* myself, ctr_argument* argumentList) {
 	return list;
 }
 
+/**
+ * @def
+ * [ Media ] digraph: [String] ligature: [String].
+ * 
+ * @example
+ * Media digraph: ‘:=’ ligature: ‘≔’.
+ * 
+ * @result
+ * en: Converts digraphs to ligatures real-time / while typing.
+ */
 ctr_object* ctr_media_autoreplace(ctr_object* myself, ctr_argument* argumentList) {
 	CtrMediaAutoReplaceRule* rule;
 	if (CtrMediaAutoReplaceRuleLen<100) {
@@ -2597,12 +3346,34 @@ ctr_object* ctr_package_new(ctr_object* myself, ctr_argument* argumentList) {
 	return instance;
 }
 
+/**
+ * @def
+ * Package
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Package new: ‘assets.dat’.
+ * ✎ write: a, stop.
+ */
 ctr_object* ctr_package_new_set(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_package_new(myself, argumentList);
 	ctr_internal_object_property(instance, "path", ctr_internal_copy2string(argumentList->object));
 	return instance;
 }
 
+/**
+ * @def
+ * [ Media ] link: [ Package ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Package new: ‘assets.dat’.
+ * media link: a.
+ * ☞ b ≔ Image new: ‘a.png’.
+ * 
+ * @result
+ * en: After linking an asset package, all resources will be retrieved from the package instead of disk.
+ */
 ctr_object* ctr_media_link_package(ctr_object* myself, ctr_argument* argumentList) {
 	if (argumentList->object->link != packageObject) {
 		ctr_error("Not an asset package.\n", 0);
@@ -2611,6 +3382,19 @@ ctr_object* ctr_media_link_package(ctr_object* myself, ctr_argument* argumentLis
 	return myself;
 }
 
+/**
+ * @def
+ * [ Package ] add: [ Object ]
+ * 
+ * @example
+ * ☞ media ≔ Media new.
+ * ☞ a ≔ Package new: ‘assets.dat’.
+ * ☞ b ≔ Image new: ‘a.png’.
+ * a add: b.
+ * 
+ * @result
+ * en: Adds a resource to a package.
+ */
 ctr_object* ctr_package_add(ctr_object* myself, ctr_argument* argumentList) {
 	char* path = ctr_heap_allocate_cstring(ctr_internal_object_property(myself, "path", NULL));
 	FILE* outfile;
@@ -2684,6 +3468,16 @@ ctr_object* ctr_internal_media_external_command(char* command_str, char* fallbac
 	return CtrStdBoolFalse;
 }
 
+/**
+ * @def
+ * [ Media ] website: [ String ]
+ * 
+ * @example
+ * Media website: ‘https://citrine-lang.org’.
+ * 
+ * @result
+ * en: Opens website in browser specified in BROWSER environment variable.
+ */
 ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
 	char* default_url_opener;
 	char* tpl;
@@ -2702,6 +3496,16 @@ ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
 	);
 }
 
+/**
+ * @def
+ * [ Media ] say: [ String ]
+ * 
+ * @example
+ * Media say: ‘Hello’.
+ * 
+ * @result
+ * en: Speaks text using speech synthesizer system specified in SPEAK environment variable.
+ */
 ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_media_external_command(
 		getenv("SPEAK"),
@@ -2862,7 +3666,7 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_ANIMATIONS_SET ), &ctr_img_anims );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_WRITE ), &ctr_img_text );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_img_text_get );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_DESELECT ), &ctr_img_text_del );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_CUT ), &ctr_img_text_del );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_APPEND ), &ctr_img_text_ins );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_EDITABLE_SET ), &ctr_img_editable );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_FONT_TYPE_SIZE_SET ), &ctr_img_font );

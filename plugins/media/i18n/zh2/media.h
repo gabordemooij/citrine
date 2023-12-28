@@ -39,7 +39,7 @@
 #define CTR_DICT_ON_CLICK                   "点击"
 #define CTR_DICT_ON_HOVER                   "悬停在:"
 #define CTR_DICT_ANIMATIONS_SET             "动画:"
-#define CTR_DICT_DESELECT                   "取消选择"
+#define CTR_DICT_CUT                   "取消选择"
 #define CTR_DICT_EDITABLE_SET               "可编辑:"
 #define CTR_DICT_FONT_TYPE_SIZE_SET         "字体:大小:"
 #define CTR_DICT_COLOR_SET                  "颜色:"

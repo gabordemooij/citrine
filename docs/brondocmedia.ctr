@@ -1,4 +1,4 @@
-Programma geheugen: 200.000.000.
+Programma geheugen: 500.000.000.
 
 ☞ tĳdstip     ≔ Moment nieuw.
 ☞ tĳd         ≔ tĳdstip tĳd ruw.
@@ -10,6 +10,7 @@ Programma geheugen: 200.000.000.
 					minuut:      tĳdstip minuut.
 
 ☞ ontwerp     ≔ Bestand nieuw: “template.html”, lezen.
+☞ woordenboek ≔ Bestand nieuw: “dict.txt”, lezen opsplitsen: “↵”.
 ☞ handleiding ≔ Lĳst nieuw.
 ☞ broncode    ≔ “”.
 
@@ -71,35 +72,41 @@ blokken elk: { :nummer :blok
 		voorbeeld ≔ voorbeeld eerste.
 	}.
 
-	☞ definitiebestand ≔ Bestand nieuw: “/tmp/def.ctr”.
-	☞ codebestand      ≔ Bestand nieuw: “/tmp/code.ctr”.
-
-	definitiebestand schrĳf: definitie.
-	codebestand schrĳf: voorbeeld.
-
 	talen elk: { :nummer :taalinformatie
 	
 		☞ taal ≔ taalinformatie bestand.
+		
+		☞ definitiebestand ≔ Bestand nieuw: (“/tmp/mdoc🠶taal/def.ctr” 🠶taal: taal).
+		☞ codebestand      ≔ Bestand nieuw: (“/tmp/mdoc🠶taal/code.ctr” 🠶taal: taal).
+
+		definitiebestand schrĳf: definitie.
+		codebestand schrĳf: voorbeeld.
 
 		☞ commando ≔ 
-		“../bin/Linux/ctren -t ../plugins/media/dict/en🠶taal.dict /tmp/def.ctr 2>/dev/null”.
+		“mkdir /tmp/mdoc🠶taal”.
 		commando 🠶taal: taal.
+		Programma opdrachtregel: commando.
+
+		☞ commando ≔ 
+		“../bin/Linux/ctren -t ../plugins/media/dict/en🠶taal.dict /tmp/mdoc🠶taal/def.ctr 2>/dev/null”.
+		commando 🠶taal: taal.
+		✎ schrĳf: commando, stop.
 		
 		☞ vertaalde definitie ≔ Programma opdrachtregel: commando.
 		commando ≔ 
-		“../bin/Linux/ctren -t ../plugins/media/dict/en🠶taal.dict /tmp/code.ctr 1>/tmp/run.ctr 2>/dev/null”.
+		“../bin/Linux/ctren -t ../plugins/media/dict/en🠶taal.dict /tmp/mdoc🠶taal/code.ctr 1>/tmp/mdoc🠶taal/run.ctr 2>/dev/null”.
 		commando 🠶taal: taal.
 		Programma opdrachtregel: commando.
 				
-		commando ≔ “cp -R ../dist/Linux/ISO/🠶taal/mods /tmp/mods”.
+		commando ≔ “cp -R ../dist/Linux/ISO/🠶taal/mods /tmp/mdoc🠶taal/mods”.
 		commando 🠶taal: taal.
 		Programma opdrachtregel: commando.
 
 		
-		☞ vertaalde code ≔ Bestand nieuw: “/tmp/run.ctr”, lezen.
+		☞ vertaalde code ≔ Bestand nieuw: (“/tmp/mdoc🠶taal/run.ctr” 🠶taal: taal), lezen.
 		
 		resultaat? nee: {
-			commando ≔ “cp ../bin/Linux/ctr🠶taal /tmp/ctr ; cd /tmp ; ./ctr /tmp/run.ctr 2>/tmp/err.log”.
+			commando ≔ “cp ../bin/Linux/ctr🠶taal /tmp/mdoc🠶taal/ctr ; cd /tmp/mdoc🠶taal/ ; ./ctr /tmp/mdoc🠶taal/run.ctr 2>>/tmp/mdoc🠶taal/err.log”.
 			commando 🠶taal: taal.
 			resultaat ≔ Programma opdrachtregel: commando.
 		}.
@@ -152,6 +159,41 @@ handleiding elk: { :taal :hoofdstukken
 	}.
 
 	hoofdstukken elk: { :nummer :onderdelen
+	
+		☞ resultaat ≔ onderdelen positie: 3, verwĳder omliggende spaties.
+		☞ vertaalbaar ≔ resultaat zoek: “en:”.
+	
+		
+		vertaalbaar ja: {
+			✎ schrĳf: vertaalbaar, stop.
+			✎ schrĳf: woordenboek, stop.
+			✎ schrĳf: resultaat, stop.
+			☞ vertaal ≔ resultaat opsplitsen: “↵”, eerste.
+			☞ taalgrens ≔ 0.
+			✎ schrĳf: vertaal, stop.
+			☞ regelnummer ≔ 0.
+			woordenboek elk: { :i :zin
+				✎ schrĳf: zin, stop.
+				vertaal = zin ja: {
+					✎ schrĳf: i, stop.
+					regelnummer ≔ i.
+				}.
+				((taalgrens = 0) en: (zin zoek: (“🠶taal:” 🠶taal: taal))) ja: {
+					taalgrens ≔ i.
+					✎ schrĳf: (“Taalgrens = xx” xx: i), stop.
+				}.
+				((taalgrens > 0) en: ((i - taalgrens) = regelnummer)) ja: {
+					✎ schrĳf: “--gevonden--”, stop.
+					✎ schrĳf: zin, stop.
+				
+					resultaat ≔ (zin vervang: (“🠶taal:” 🠶taal: taal) door: “”).
+				}.
+			}.
+			
+			
+			
+		}.
+	
 
 		☞ document ≔ ontwerp kopieer.
 		document
@@ -162,7 +204,7 @@ handleiding elk: { :taal :hoofdstukken
 			🠶titeltaal: taal kopieer hoofdletters,
 			🠶hoofdstuk: onderdelen eerste html,
 			🠶voorbeeld: (onderdelen positie: 2) html,
-			🠶resultaat: (onderdelen positie: 3) html,
+			🠶resultaat: (resultaat html vervang: “[[” door: “<img src="/img/media/”, vervang: “]]” door: “.png" alt="">”),
 			🠶inhoudsopgave: inhoudsopgave.
 
 		☞ bestandslocatie ≔ “server/mdocs/🠶taal/🠶link.html”.
