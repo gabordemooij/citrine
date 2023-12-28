@@ -76,16 +76,18 @@ blokken elk: { :nummer :blok
 	
 		☞ taal ≔ taalinformatie bestand.
 		
-		☞ definitiebestand ≔ Bestand nieuw: (“/tmp/mdoc🠶taal/def.ctr” 🠶taal: taal).
-		☞ codebestand      ≔ Bestand nieuw: (“/tmp/mdoc🠶taal/code.ctr” 🠶taal: taal).
-
-		definitiebestand schrĳf: definitie.
-		codebestand schrĳf: voorbeeld.
-
 		☞ commando ≔ 
 		“mkdir /tmp/mdoc🠶taal”.
 		commando 🠶taal: taal.
 		Programma opdrachtregel: commando.
+		
+		☞ definitiebestand ≔ Bestand nieuw: (“/tmp/mdoc🠶taal/def.ctr” 🠶taal: taal).
+		☞ codebestand      ≔ Bestand nieuw: (“/tmp/mdoc🠶taal/code.ctr” 🠶taal: taal).
+		
+		definitiebestand schrĳf: definitie.
+		codebestand schrĳf: voorbeeld.
+
+		
 
 		☞ commando ≔ 
 		“../bin/Linux/ctren -t ../plugins/media/dict/en🠶taal.dict /tmp/mdoc🠶taal/def.ctr 2>/dev/null”.
@@ -165,33 +167,20 @@ handleiding elk: { :taal :hoofdstukken
 	
 		
 		vertaalbaar ja: {
-			✎ schrĳf: vertaalbaar, stop.
-			✎ schrĳf: woordenboek, stop.
-			✎ schrĳf: resultaat, stop.
 			☞ vertaal ≔ resultaat opsplitsen: “↵”, eerste.
 			☞ taalgrens ≔ 0.
-			✎ schrĳf: vertaal, stop.
 			☞ regelnummer ≔ 0.
 			woordenboek elk: { :i :zin
-				✎ schrĳf: zin, stop.
 				vertaal = zin ja: {
-					✎ schrĳf: i, stop.
 					regelnummer ≔ i.
 				}.
 				((taalgrens = 0) en: (zin zoek: (“🠶taal:” 🠶taal: taal))) ja: {
 					taalgrens ≔ i.
-					✎ schrĳf: (“Taalgrens = xx” xx: i), stop.
 				}.
 				((taalgrens > 0) en: ((i - taalgrens) = regelnummer)) ja: {
-					✎ schrĳf: “--gevonden--”, stop.
-					✎ schrĳf: zin, stop.
-				
 					resultaat ≔ (zin vervang: (“🠶taal:” 🠶taal: taal) door: “”).
 				}.
 			}.
-			
-			
-			
 		}.
 	
 
