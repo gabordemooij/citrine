@@ -50,8 +50,8 @@
 /**
  * Version information
  */
-#define CTR_VERSION "0.9.5"
-#define CTR_VERSION_NUM 95
+#define CTR_VERSION "0.9.6"
+#define CTR_VERSION_NUM 96
 
 /**
  * Define the Citrine tokens 
