@@ -194,6 +194,7 @@ uint8_t CtrMediaEventListenFlagStep;
 
 void ctr_internal_img_render_text(ctr_object* myself);
 void ctr_internal_img_render_cursor(ctr_object* myself);
+char* ctr_internal_media_normalize_line_endings(char* text);
 
 int CtrMediaTimers[100];
 int CtrMaxMediaTimers = 100;
@@ -441,6 +442,7 @@ void ctr_internal_media_select_word(MediaIMG* haystack) {
 	CtrMediaSelectEnd = i;
 	return;
 }
+
 
 void ctr_internal_media_textinsert(MediaIMG* mediaImage, char* text) {
 	ctr_size insertTextLength = strlen(text);
@@ -3065,6 +3067,10 @@ void ctr_internal_img_render_text(ctr_object* myself) {
 	image->texture = (void*) SDL_CreateTextureFromSurface(CtrMediaRenderer, dst);
 }
 
+/**
+ * This function will change the pointer to original text buffer
+ * and return the new buffer. If you control memory, then make a copy first.
+ */
 char* ctr_internal_media_normalize_line_endings(char* original_text) {
 	ctr_size i, len, d;
 	char* normalized_text;
@@ -3240,8 +3246,17 @@ ctr_object* ctr_media_clipboard(ctr_object* myself, ctr_argument* argumentList) 
 	char* buffer;
 	buffer = SDL_GetClipboardText();
 	if (buffer != NULL) {
-		text = ctr_build_string_from_cstring(buffer);
+		int len = strlen(buffer);
+		char* copy = ctr_heap_allocate(len);
+		char* normalized;
+		//We copy the SDL buffer first because we don't want to interfere with SDL memory.
+		memcpy(copy, buffer, len);
 		SDL_free(buffer);
+		/* Normalize line endings */
+		normalized = ctr_internal_media_normalize_line_endings(copy); // This will destroy the copy buffer, no free needed!
+		text = ctr_build_string_from_cstring(normalized);
+		/* Prevent leak, normalized buffer no longer needed. */
+		ctr_heap_free(normalized);
 	} else {
 		text = ctr_build_empty_string();
 	}
