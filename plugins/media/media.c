@@ -1183,7 +1183,6 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 			return myself;
 		}
 		while (SDL_PollEvent(&event)) {
-			
 			player = NULL;
 			focusImage = NULL;
 			if (controllableObject) {
@@ -1228,6 +1227,11 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 					}
 					break;
 				case SDL_MOUSEBUTTONDOWN:
+					//If we have lost the focus, regain upon click
+					if (!SDL_GetKeyboardFocus()) {
+						SDL_RaiseWindow(CtrMediaWindow);
+						SDL_SetWindowInputFocus(CtrMediaWindow); //might return an error, but what can we do?
+					}
 					if (ctr_internal_media_mouse_down(event)) return CtrStdFlow;
 					break;
 				case SDL_CONTROLLERBUTTONDOWN:
