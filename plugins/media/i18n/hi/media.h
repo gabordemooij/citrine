@@ -39,7 +39,7 @@
 #define CTR_DICT_ON_CLICK                   "सिंगल क्लिक"
 #define CTR_DICT_ON_HOVER                   "होवर:"
 #define CTR_DICT_ANIMATIONS_SET             "एनिमेशन:"
-#define CTR_DICT_CUT                   "अचयनित करें"
+#define CTR_DICT_CUT                        "काटना"
 #define CTR_DICT_EDITABLE_SET               "लिखने योग्य:"
 #define CTR_DICT_FONT_TYPE_SIZE_SET         "फ़ॉन्ट प्रकार:आकार:"
 #define CTR_DICT_COLOR_SET                  "रंग:"

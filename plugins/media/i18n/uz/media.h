@@ -39,7 +39,7 @@
 #define CTR_DICT_ON_CLICK                   "bosing"
 #define CTR_DICT_ON_HOVER                   "hover:"
 #define CTR_DICT_ANIMATIONS_SET             "animatsiyalar:"
-#define CTR_DICT_CUT                   "olib tashlash"
+#define CTR_DICT_CUT                        "kesmoq"
 #define CTR_DICT_EDITABLE_SET               "yoziladigan:"
 #define CTR_DICT_FONT_TYPE_SIZE_SET         "shrift:o'lcham:"
 #define CTR_DICT_COLOR_SET                  "rang:"

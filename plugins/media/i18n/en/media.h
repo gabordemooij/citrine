@@ -39,7 +39,7 @@
 #define CTR_DICT_ON_CLICK                   "click"
 #define CTR_DICT_ON_HOVER                   "hover:"
 #define CTR_DICT_ANIMATIONS_SET             "animations:"
-#define CTR_DICT_CUT                   "deselect"
+#define CTR_DICT_CUT                        "cut"
 #define CTR_DICT_EDITABLE_SET               "editable:"
 #define CTR_DICT_FONT_TYPE_SIZE_SET         "font:size:"
 #define CTR_DICT_COLOR_SET                  "colour:"

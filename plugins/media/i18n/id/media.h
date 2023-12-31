@@ -39,7 +39,7 @@
 #define CTR_DICT_ON_CLICK                   "klik"
 #define CTR_DICT_ON_HOVER                   "arahkan kursor:"
 #define CTR_DICT_ANIMATIONS_SET             "animasi:"
-#define CTR_DICT_CUT                   "unseleksi"
+#define CTR_DICT_CUT                        "potong"
 #define CTR_DICT_EDITABLE_SET               "catatan:"
 #define CTR_DICT_FONT_TYPE_SIZE_SET         "font:ukuran:"
 #define CTR_DICT_COLOR_SET                  "warna:"
