@@ -508,7 +508,7 @@ ctr_object* ctr_img_text_del(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Image ] insert: [ String ]
+ * [ Image ] insert: [ Text ]
  * 
  * @example
  * image insert: ‘abc’.
@@ -1098,7 +1098,7 @@ ctr_object* ctr_media_timer(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Media ] screen: [ String ]
+ * [ Media ] screen: [ Text ]
  * 
  * @example
  * ☞ media ≔ Media new.
@@ -2026,7 +2026,7 @@ uint16_t CtrMediaNetworkCunkId = 1;
 
 /**
  * @def
- * [ Network ] text: [ String ] to: [ String ]
+ * [ Network ] text: [ Text ] to: [ Text ]
  * 
  * @example
  * Program setting: network port value: ‘9002’.
@@ -2292,7 +2292,7 @@ ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* arg
  * Image
  * 
  * @example
- * ☞ image ≔ Image new: ‘myimage.png’.
+ * ☞ image ≔ Image new: ‘a.png’.
  * image on ‘click’ do: { ... }.
  * image on ‘hover’ do: { ... }.
  * image on ‘collision:’ do: { :other ... }.
@@ -2313,11 +2313,11 @@ void ctr_img_destructor(ctr_resource* rs) {
 
 /**
  * @def
- * [ Image ] image: [ String ]
+ * [ Image ] image: [ Text ]
  * 
  * @example
- * ☞ image ≔ Image new: ‘image1.png’.
- * image image: ‘image2.png’.
+ * ☞ image ≔ Image new: ‘a.png’.
+ * image image: ‘b.png’.
  * 
  * @result
  * en: Updates the graphical contents of an image.
@@ -2393,7 +2393,7 @@ ctr_object* ctr_img_new_set(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * @example
  * ☞ media ≔ Media new.
- * ☞ a ≔ Image new: ‘plane1.png’.
+ * ☞ a ≔ Image new: ‘a.png’.
  *
  * media on: ‘start’ do: {
  * 
@@ -2402,7 +2402,7 @@ ctr_object* ctr_img_new_set(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * }.
  * 
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * [[img_controllable]]
@@ -2420,7 +2420,7 @@ ctr_object* ctr_img_controllable(ctr_object* myself, ctr_argument* argumentList)
  * 
  * @example
  * ☞ media ≔ Media new.
- * ☞ a ≔ Image new: ‘bunny.png’.
+ * ☞ a ≔ Image new: ‘a.png’.
  * a x: 10 y: 5.
  * 
  * @result
@@ -2446,7 +2446,7 @@ ctr_object* ctr_img_xy(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * @example
  * ☞ media ≔ Media new.
- * ☞ a ≔ Image new: ‘bunny.png’.
+ * ☞ a ≔ Image new: ‘a.png’.
  * a x: 10 y: 5.
  * ✎ write: a x?, stop.
  */
@@ -2462,7 +2462,7 @@ ctr_object* ctr_img_x(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * @example
  * ☞ media ≔ Media new.
- * ☞ a ≔ Image new: ‘bunny.png’.
+ * ☞ a ≔ Image new: ‘a.png’.
  * a x: 10 y: 5.
  * ✎ write: a y?, stop.
  */
@@ -2490,7 +2490,7 @@ ctr_object* ctr_img_y(ctr_object* myself, ctr_argument* argumentList) {
  * move to x: 20 y: 20.
  * }.
  *
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * [[img_movset]]
@@ -2514,7 +2514,7 @@ ctr_object* ctr_img_mov_set(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Image ] bounce: [ Boolean ]
+ * [ Image ] bounce: [ Decision ]
  * 
  * @example
  * ☞ media ≔ Media new.
@@ -2527,7 +2527,7 @@ ctr_object* ctr_img_mov_set(ctr_object* myself, ctr_argument* argumentList) {
  * bounce: Yes.
  * }.
  *
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * en: Toggles whether the image will bounce upon collision.
@@ -2541,7 +2541,7 @@ ctr_object* ctr_img_bounce(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Image ] solid: [ Boolean ]
+ * [ Image ] solid: [ Decision ]
  * 
  * @example
  * ☞ media ≔ Media new.
@@ -2555,7 +2555,7 @@ ctr_object* ctr_img_bounce(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * }.
  * 
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * [[img_solid]]
@@ -2570,7 +2570,7 @@ ctr_object* ctr_img_solid(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Image ] active: [ Boolean ]
+ * [ Image ] active: [ Decision ]
  * 
  * @example
  * ☞ media ≔ Media new.
@@ -2604,7 +2604,7 @@ ctr_object* ctr_img_active(ctr_object* myself, ctr_argument* argumentList) {
  *
  * }.
  * 
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * [[img_accel]]
@@ -2622,7 +2622,7 @@ ctr_object* ctr_img_gravity(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * @example
  * ☞ media ≔ Media new.
- * ☞ a ≔ Image new: ‘plane1.png’.
+ * ☞ a ≔ Image new: ‘a.png’.
  *
  * media on: ‘start’ do: {
  * 
@@ -2635,7 +2635,7 @@ ctr_object* ctr_img_gravity(ctr_object* myself, ctr_argument* argumentList) {
  *
  * }.
  * 
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * [[img_accel]]
@@ -2653,7 +2653,7 @@ ctr_object* ctr_img_speed(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * @example
  * ☞ media ≔ Media new.
- * ☞ a ≔ Image new: ‘plane1.png’.
+ * ☞ a ≔ Image new: ‘a.png’.
  *
  * media on: ‘start’ do: {
  * 
@@ -2666,7 +2666,7 @@ ctr_object* ctr_img_speed(ctr_object* myself, ctr_argument* argumentList) {
  *
  * }.
  * 
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * [[img_accel]]
@@ -2684,7 +2684,7 @@ ctr_object* ctr_img_friction(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * @example
  * ☞ media ≔ Media new.
- * ☞ a ≔ Image new: ‘plane1.png’.
+ * ☞ a ≔ Image new: ‘a.png’.
  *
  * media on: ‘start’ do: {
  * 
@@ -2697,7 +2697,7 @@ ctr_object* ctr_img_friction(ctr_object* myself, ctr_argument* argumentList) {
  *
  * }.
  * 
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * [[img_accel]]
@@ -2716,7 +2716,7 @@ ctr_object* ctr_img_accel(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * @example
  * ☞ media ≔ Media new.
- * ☞ a ≔ Image new: ‘plane1.png’.
+ * ☞ a ≔ Image new: ‘a.png’.
  *
  * media on: ‘start’ do: {
  * 
@@ -2727,7 +2727,7 @@ ctr_object* ctr_img_accel(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * }.
  * 
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * [[img_jump_height]]
@@ -2740,7 +2740,7 @@ ctr_object* ctr_img_jump_height(ctr_object* myself, ctr_argument* argumentList) 
 
 /**
  * @def
- * [ Image ] editable: [ Boolean ]
+ * [ Image ] editable: [ Decision ]
  * 
  * @example
  * ☞ media ≔ Media new.
@@ -2758,7 +2758,7 @@ ctr_object* ctr_img_jump_height(ctr_object* myself, ctr_argument* argumentList) 
  *
  * }.
  * 
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * en: Makes an image editable, you can now enter text inside it.
@@ -2787,7 +2787,7 @@ ctr_object* ctr_img_editable(ctr_object* myself, ctr_argument* argumentList) {
  * 
  * }.
  * 
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * [[img_anims]]
@@ -2802,7 +2802,7 @@ ctr_object* ctr_img_anims(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Image ] font: [ String ] size: [ Number ]
+ * [ Image ] font: [ Text ] size: [ Number ]
  * 
  * @example
  * ☞ media ≔ Media new.
@@ -2819,7 +2819,7 @@ ctr_object* ctr_img_anims(ctr_object* myself, ctr_argument* argumentList) {
  *
  * }.
  * 
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * en: Sets the font and size of the text in an image.
@@ -2860,7 +2860,7 @@ ctr_object* ctr_img_font(ctr_object* myself, ctr_argument* argumentList) {
  * write: ‘ABC’.
  * }.
  * 
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * en: Sets the colour for text in an image.
@@ -2894,7 +2894,7 @@ ctr_object* ctr_img_color(ctr_object* myself, ctr_argument* argumentList) {
  * write: ‘ABC’.
  * }.
  * 
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * en: Sets the background colour for text in an image.
@@ -2929,7 +2929,7 @@ ctr_object* ctr_img_background_color(ctr_object* myself, ctr_argument* argumentL
  *
  * }.
  * 
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * en: Sets the position of the text within the image.
@@ -3100,7 +3100,7 @@ char* ctr_internal_media_normalize_line_endings(char* original_text) {
 
 /**
  * @def
- * [ Image ] write: [ String ]
+ * [ Image ] write: [ Text ]
  * 
  * @example
  * ☞ media ≔ Media new.
@@ -3115,7 +3115,7 @@ char* ctr_internal_media_normalize_line_endings(char* original_text) {
  *
  * }.
  * 
- * media screen: ‘bg.png’.
+ * media screen: ‘canvas.png’.
  * 
  * @result
  * en: Writes text on an image.
@@ -3265,7 +3265,7 @@ ctr_object* ctr_media_clipboard(ctr_object* myself, ctr_argument* argumentList) 
 
 /**
  * @def
- * [ Media ] clipboard: [ String ]
+ * [ Media ] clipboard: [ Text ]
  * 
  * @example
  * ☞ media ≔ Media new.
@@ -3485,7 +3485,7 @@ ctr_object* ctr_internal_media_external_command(char* command_str, char* fallbac
 
 /**
  * @def
- * [ Media ] website: [ String ]
+ * [ Media ] website: [ Text ]
  * 
  * @example
  * Media website: ‘https://citrine-lang.org’.
@@ -3513,7 +3513,7 @@ ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Media ] say: [ String ]
+ * [ Media ] say: [ Text ]
  * 
  * @example
  * Media say: ‘Hello’.
