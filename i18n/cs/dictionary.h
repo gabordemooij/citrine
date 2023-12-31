@@ -75,7 +75,7 @@
 #define CTR_DICT_POS   	         "kladný?" 
 #define CTR_DICT_NEG   	         "záporný?" 
 #define CTR_DICT_TOBOOL          "boolean" 
-#define CTR_DICT_RANDOM_NUM_BETWEEN         "mezi:a hodnotou:" 
+#define CTR_DICT_RANDOM_NUM_BETWEEN         "mezi:a:" 
 #define CTR_DICT_LENGTH	         "délka" 
 #define CTR_DICT_FROM_LENGTH	 "od:délka:" 
 #define CTR_DICT_TRIM	         "odstranit okolní mezery" 

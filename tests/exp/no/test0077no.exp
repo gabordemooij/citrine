@@ -1,9 +1,9 @@
-Tekst,Nummer
+Tekst,Tall
 Tekst,Boolean
-Nummer,Tekst
-Nummer,Boolean
-Boolean,Nummer
-Boolean,Nummer
+Tall,Tekst
+Tall,Boolean
+Boolean,Tall
+Boolean,Tall
 Boolean,Tekst
 Boolean,Tekst
 === String test ===
