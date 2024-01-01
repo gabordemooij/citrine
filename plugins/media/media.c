@@ -3086,6 +3086,9 @@ char* ctr_internal_media_normalize_line_endings(char* original_text) {
 	for (i = 0; i < len; i++) {
 		previous_char = current_char;
 		current_char = original_text[i];
+		if (current_char == '\t') {
+			current_char = ' ';
+		}
 		if (current_char == '\n' && previous_char != '\r') {
 			normalized_text[d + i] = '\r';
 			d++;
