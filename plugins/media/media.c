@@ -123,6 +123,14 @@ int CtrMediaAudioBuffers;
 int CtrMediaAudioVolume;
 ctr_object* CtrMediaAssetPackage;
 
+struct CtrMediaTextRenderCacheItem {
+	char* text;
+	SDL_Surface* surface;
+	int state;
+};
+typedef struct CtrMediaTextRenderCacheItem CtrMediaTextRenderCacheItem;
+CtrMediaTextRenderCacheItem CtrMediaEdCache[100];
+
 struct CtrMediaAutoReplaceRule {
 	char* word;		char* replacement;
 };
@@ -230,6 +238,11 @@ void ctr_internal_media_reset() {
 		rule = &CtrMediaAutoReplaceRules[i];
 		ctr_heap_free(rule->word);
 		ctr_heap_free(rule->replacement);
+	}
+	for(i = 0; i < 100; i++) {
+		CtrMediaEdCache[i].surface = NULL;
+		CtrMediaEdCache[i].text = NULL;
+		CtrMediaEdCache[i].state = 0;
 	}
 	CtrMediaAutoReplaceRuleLen = 0;
 	IMGCount = 0;
@@ -3042,10 +3055,21 @@ void ctr_internal_img_render_text(ctr_object* myself) {
 		text_width = 0;
 		text_height = 0;
 		if (text_in_view) {
-			if (i-line_segment_start > buffsize) {
-				buffsize = i-line_segment_start;
-				buff = realloc(buff, buffsize + 1);
-			}
+
+			int viewline = textLine - CtrMediaCursorOffsetY;
+			int cacheoffset = CtrMediaCursorOffsetY % 100;
+			int q = cacheoffset + viewline;
+			if (
+			CtrMediaEdCache[q].surface && CtrMediaEdCache[q].state == state
+			&& strlen(CtrMediaEdCache[q].text)==i-line_segment_start
+			&& strncmp(image->text+line_segment_start, CtrMediaEdCache[q].text, i-line_segment_start)==0
+			) {
+				text = CtrMediaEdCache[q].surface;
+				buff = CtrMediaEdCache[q].text;
+			} else {
+
+			buffsize = i-line_segment_start;
+			buff = malloc(buffsize + 1);
 			memcpy(buff, image->text+line_segment_start, i-line_segment_start);
 			memcpy(buff+(i-line_segment_start), "\0", 1);
 			if (state) {
@@ -3053,6 +3077,16 @@ void ctr_internal_img_render_text(ctr_object* myself) {
 			} else {
 				text = TTF_RenderUTF8_Blended(font, buff, image->color);
 			}
+
+			if (CtrMediaEdCache[q].surface) {
+				SDL_FreeSurface(CtrMediaEdCache[q].surface);
+				free(CtrMediaEdCache[q].text);
+			}
+			CtrMediaEdCache[q].surface = text;
+			CtrMediaEdCache[q].text = buff;
+			CtrMediaEdCache[q].state = state;
+			}
+
 			SDL_BlitSurface(text,NULL,dst,&t);
 			TTF_SizeUTF8(font, buff, &text_width, &text_height);
 		}
@@ -3069,6 +3103,7 @@ void ctr_internal_img_render_text(ctr_object* myself) {
 		i++;
 	}
 	image->texture = (void*) SDL_CreateTextureFromSurface(CtrMediaRenderer, dst);
+	SDL_FreeSurface(dst);
 }
 
 /**
