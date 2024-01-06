@@ -46,6 +46,8 @@ talen sorteren: { :a :b ↲ a > b. }.
 
 blokken elk: { :nummer :blok
 
+	☞ bloknummer ≔ nummer.
+
 	✎ schrĳf: (
 		“Bezig met blok: 🠶bloknummer van: 🠶totaal.↵”
 		🠶bloknummer: nummer,
@@ -108,6 +110,19 @@ blokken elk: { :nummer :blok
 		☞ vertaalde code ≔ Bestand nieuw: (“/tmp/mdoc🠶taal/run.ctr” 🠶taal: taal), lezen.
 		
 		resultaat? nee: {
+			
+			commando ≔ “cp ../plugins/media/examples/canvas.png /tmp/mdoc🠶taal/”.
+			commando 🠶taal: taal.
+			resultaat ≔ Programma opdrachtregel: commando.
+			
+			commando ≔ “cp ../plugins/media/examples/knop.png /tmp/mdoc🠶taal/a.png”.
+			commando 🠶taal: taal.
+			resultaat ≔ Programma opdrachtregel: commando.
+			
+			commando ≔ “cp ../plugins/media/examples/knop.png /tmp/mdoc🠶taal/b.png”.
+			commando 🠶taal: taal.
+			resultaat ≔ Programma opdrachtregel: commando.
+			
 			commando ≔ “cp ../bin/Linux/ctr🠶taal /tmp/mdoc🠶taal/ctr ; cd /tmp/mdoc🠶taal/ ; ./ctr /tmp/mdoc🠶taal/run.ctr 2>>/tmp/mdoc🠶taal/err.log”.
 			commando 🠶taal: taal.
 			resultaat ≔ Programma opdrachtregel: commando.
@@ -124,7 +139,10 @@ blokken elk: { :nummer :blok
 		• link.
 		☞ x ≔ handleiding bĳ: taal, toevoegen: hoofdstuk.
 	}.
+	
+	(bloknummer > 1000) afbreken.
 }.
+
 
 ☞ taalregister ≔ “”.
 talen elk: { :nummer :taal
@@ -139,17 +157,17 @@ talen elk: { :nummer :taal
 
 	taalregister toevoegen: regel.
 	☞ commando ≔ 
-	“mkdir -p server/docs/🠶taal”.
+	“mkdir -p server/docs/🠶taal 2>/dev/null”.
 	commando 🠶taal: taal.
 
 	Programma opdrachtregel: commando.
+	
+	
 }.
 
 handleiding elk: { :taal :hoofdstukken
-
 	☞ inhoudsopgave ≔ “”.
 	hoofdstukken elk: { :nummer :onderdelen
-
 		☞ link ≔ onderdelen laatste.
 		☞ titel ≔ onderdelen eerste.
 		☞ regel ≔ “<li><a href="/mdocs/🠶taal/🠶link.html" >🠶titel</a></li>”.
@@ -164,22 +182,27 @@ handleiding elk: { :taal :hoofdstukken
 	
 		☞ resultaat ≔ onderdelen positie: 3, verwĳder omliggende spaties.
 		☞ vertaalbaar ≔ resultaat zoek: “en:”.
-	
-		
 		vertaalbaar ja: {
-			☞ vertaal ≔ resultaat opsplitsen: “↵”, eerste.
-			☞ taalgrens ≔ 0.
-			☞ regelnummer ≔ 0.
-			woordenboek elk: { :i :zin
-				vertaal = zin ja: {
-					regelnummer ≔ i.
+		
+			taal ≠ “en” ja: {
+				☞ vertaal ≔ resultaat opsplitsen: “↵”, eerste.
+				☞ taalgrens ≔ 0.
+				☞ regelnummer ≔ 0.
+				woordenboek elk: { :i :zin
+					vertaal = zin ja: {
+						regelnummer ≔ i.
+					}.
+					((taalgrens = 0) en: (zin zoek: (“🠶taal:” 🠶taal: taal))) ja: {
+						taalgrens ≔ i.
+					}, anders: {
+						((taalgrens > 0) en: ((i - taalgrens + 1) = regelnummer)) ja: {
+							resultaat ≔ (zin vervang: (“🠶taal:” 🠶taal: taal) door: “”).
+						}.
+					}.
 				}.
-				((taalgrens = 0) en: (zin zoek: (“🠶taal:” 🠶taal: taal))) ja: {
-					taalgrens ≔ i.
-				}.
-				((taalgrens > 0) en: ((i - taalgrens) = regelnummer)) ja: {
-					resultaat ≔ (zin vervang: (“🠶taal:” 🠶taal: taal) door: “”).
-				}.
+				
+			}, anders: {
+				resultaat ≔ resultaat kopieer vervang: “en:” door: “”.
 			}.
 		}.
 	
