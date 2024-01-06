@@ -28,6 +28,7 @@ EXTRA="/tmp/citrine.res" LFLAGS="-mwindows" ISO="$lang" CC=x86_64-w64-mingw32-gc
 # WIN64 plugin
 ISO="$lang" PACKAGE="media" NAME="libctrmedia.dll" CC=x86_64-w64-mingw32-gcc-8.3-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64 plugin
 
+
 # Create dictionary
 ./bin/Linux/ctrnl -g i18n/nl/dictionary.h i18n/$lang/dictionary.h > /tmp/dict_general.dict
 ./bin/Linux/ctrnl -g plugins/media/i18n/nl/media.h plugins/media/i18n/$lang/media.h > /tmp/dict_media.dict
@@ -62,6 +63,7 @@ cp plugins/media/assets/picto.ico dist/Win64/ISO/$lang/pictogram.ico
 ./bin/Linux/ctrnl -t /tmp/dict_all.dict plugins/media/examples/__5win__ > dist/Win64/ISO/$lang/__5__ 2>/tmp/err5win.log
 ./bin/Linux/ctrnl -t /tmp/dict_all.dict plugins/media/examples/__6__ > dist/Win64/ISO/$lang/__6__ 2>/tmp/err6.log
 ./bin/Linux/ctrnl -t /tmp/dict_all.dict plugins/media/examples/__7__ > dist/Win64/ISO/$lang/__7__ 2>/tmp/err7.log
+./bin/Linux/ctrnl -t /tmp/dict_all.dict plugins/media/examples/__7ai__ > dist/Win64/ISO/$lang/__7ai__ 2>/tmp/err7.log
 ./bin/Linux/ctrnl -t /tmp/dict_all.dict plugins/media/examples/client > dist/Win64/ISO/$lang/client 2>/tmp/errclient.log
 
 # Copy assets to setup creator work dir
@@ -110,12 +112,39 @@ tar cvzf "dist/Linux/OUT/$lang/citrine${lang}096.tar.gz" -C dist/Linux/ISO/ ${la
 rm -rf /tmp/${lang}/Citrine.AppDir
 mkdir /tmp/${lang}
 cp -r misc/Citrine.AppDir /tmp/${lang}/
-cp  dist/Linux/ISO/${lang}/ctr${lang} /tmp/${lang}/Citrine.AppDir/
+cp  dist/Linux/ISO/${lang}/ctr${lang} /tmp/${lang}/Citrine.AppDir/usr/bin/
+cp  -R dist/Linux/ISO/${lang}/mods /tmp/${lang}/Citrine.AppDir/
+
+sed -e "s/ctrnl/ctr$lang/g" misc/Citrine.AppDir/AppRun > /tmp/${lang}/Citrine.AppDir/AppRun
+
 ./appimagetool-x86_64.AppImage /tmp/${lang}/Citrine.AppDir citrine_app ; cp citrine_app dist/Linux/ISO/${lang}/ctrapp_${lang}
 chmod uog+x dist/Linux/ISO/${lang}/ctrapp_${lang}
 sed -e "s/ctrnl/ctrapp_$lang/g" plugins/media/assets/citrine.sh > dist/Linux/ISO/$lang/citrine_app.sh
+sed -e "s/ctrapp_nl/ctrapp_$lang/g" dist/Linux/ISO/$lang/__7ai__ > dist/Linux/ISO/$lang/__7__ 
+
+
 chmod uog+x dist/Linux/ISO/${lang}/citrine_app.sh
 tar cvzf "dist/Linux/OUT/$lang/citrine${lang}096ai.tar.gz" -C dist/Linux/ISO/ ${lang}
+
+# Compile for Windows 32bit
+ISO="$lang" CC=i686-w64-mingw32-gcc-8.3-win32 DLLTOOL=i686-w64-mingw32-dlltool make -f makefile.win32 clean
+EXTRA="/tmp/citrine.res" LFLAGS="-mwindows" ISO="$lang" CC=i686-w64-mingw32-gcc-8.3-win32 DLLTOOL=i686-w64-mingw32-dlltool make -f makefile.win32
+# win32 plugin
+ISO="$lang" PACKAGE="media" NAME="libctrmedia.dll" CC=i686-w64-mingw32-gcc-8.3-win32 DLLTOOL=i686-w64-mingw32-dlltool make -f makefile.win32 plugin
+
+# (Re-)Create folder for lang specific distribution
+rm -rf dist/Win32/ISO/$lang
+mkdir -p dist/Win32/ISO/$lang
+mkdir -p dist/Win32/ISO/$lang/mods
+mkdir -p dist/Win32/ISO/$lang/mods/media
+
+# Re-use Win64 as template
+cp -R dist/Win64/ISO/$lang/* dist/Win32/ISO/$lang/
+# Add executable
+cp bin/Win32/ctr$lang.exe dist/Win32/ISO/$lang/
+# Add dynamic libraries
+cp mods/media/dll32/*.dll dist/Win32/ISO/$lang/
+cp plugins/media/libctrmedia.dll dist/Win32/ISO/$lang/mods/media/
 
 
 done
