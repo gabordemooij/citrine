@@ -21,3 +21,6 @@ ctr:	$(OBJS)
 
 clean:
 	rm -rf ${OBJS} ctr
+	
+plugin:
+	cd plugins/${PACKAGE} ; make -f makefile.haiku clean ; make -f makefile.haiku install-${NAME}
