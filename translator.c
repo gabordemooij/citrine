@@ -396,10 +396,10 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 		if ( l == entry->wordLength && context == entry->type && strncmp( entry->word, v, ml ) == 0 ) {
 			if (context == 't') {
 				p = 0; q = 0;
-				for (i = 0; i<entry->wordLength; i++) {
+				for (i = 1; i<entry->wordLength; i++) {
 					if (*(entry->word + i)==ctr_clex_param_prefix_char) p++;
 				}
-				for (i = 0; i<entry->translationLength; i++) {
+				for (i = 1; i<entry->translationLength; i++) {
 					if (*(entry->translation + i)==ctr_clex_param_prefix_char_translation) q++;
 				}
 				if ( p != q ) {
@@ -407,7 +407,7 @@ int ctr_translate_translate(char* v, ctr_size l, ctr_dict* dictionary, char cont
 				}
 				for (i = 0; i<entry->translationLength; i++) {
 					fwrite(entry->translation + i,1,1,stdout);
-					if (*(entry->translation + i)==ctr_clex_param_prefix_char_translation && entry->translationLength > (i+1)) {
+					if (i>0 && *(entry->translation + i)==ctr_clex_param_prefix_char_translation && entry->translationLength > (i+1)) {
 						if ((entry->translationLength-i)>CTR_TRANSLATE_MAX_WORD_LEN) {
 							ctr_print_error(CTR_TERR_BUFF, 1);
 						}
@@ -565,6 +565,11 @@ char* ctr_translate_dot(char* codePointer, ctr_dict* dictionary) {
 	return ctr_clex_code_pointer();
 }
 
+char* ctr_translate_assign(char* codePointer, ctr_dict* dictionary) {
+	ctr_translate_translate(CTR_DICT_ASSIGN,ctr_clex_keyword_assignment_len,dictionary,'t',(char*)NULL);
+	return ctr_clex_code_pointer();
+}
+
 char* ctr_translate_chain(char* codePointer, ctr_dict* dictionary) {
 	ctr_translate_translate(CTR_DICT_MESSAGE_CHAIN,ctr_clex_keyword_chain_len,dictionary,'t',(char*)NULL);
 	return ctr_clex_code_pointer();
@@ -645,6 +650,10 @@ void ctr_translate_program(char* prg, char* programPath) {
 		}
 		else if ( t == CTR_TOKEN_DOT ) {
 			p = ctr_translate_dot(p,dictionary);
+		}
+		else if ( t == CTR_TOKEN_ASSIGNMENT ) {
+			fwrite(" ", 1, 1, stdout);
+			p = ctr_translate_assign(p,dictionary);
 		}
 		else if ( t == CTR_TOKEN_CHAIN ) {
 			p = ctr_translate_chain(p,dictionary);

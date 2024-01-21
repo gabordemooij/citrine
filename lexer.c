@@ -262,7 +262,7 @@ int ctr_clex_tok() {
 		 ctr_code+=ctr_clex_keyword_chain_len;
 		 return CTR_TOKEN_CHAIN;
 	}
-	if (strncmp(ctr_code, ctr_clex_desc_tok_assignment, ctr_clex_keyword_assignment_len)==0) {
+	if (strncmp(ctr_code, CTR_DICT_ASSIGN, ctr_clex_keyword_assignment_len)==0) {
 		ctr_code += ctr_clex_keyword_assignment_len;
 		return CTR_TOKEN_ASSIGNMENT; 
 	}
