@@ -169,6 +169,8 @@ MediaIMG mediaIMGs[100];
 int MaxIMG = 100;
 int IMGCount = 0;
 
+MediaIMG* CtrMediaContactSurface;
+
 MediaAUD mediaAUDs[50];
 int maxAUD = 50;
 int AUDCount = 0;
@@ -275,6 +277,7 @@ void ctr_internal_media_reset() {
 	CtrMediaEventListenFlagGamePadBtnDown = 0;
 	CtrMediaEventListenFlagTimer = 0;
 	CtrMediaEventListenFlagStep = 0;
+	CtrMediaContactSurface = NULL;
 	for(int i = 1; i<=CtrMaxMediaTimers; i++) {
 		CtrMediaTimers[i] = -1;
 	}
@@ -855,7 +858,6 @@ void ctr_internal_media_keydown_del() {
 	}
 }
 
-MediaIMG* CtrMediaContactSurface = NULL;
 void ctr_internal_media_detect_collisions(MediaIMG* m, SDL_Rect r) {
 	MediaIMG* player;
 	SDL_Rect r2;
@@ -3372,6 +3374,7 @@ ctr_object* ctr_media_autoreplace(ctr_object* myself, ctr_argument* argumentList
 }
 
 void ctr_internal_media_init() {
+	CtrMediaContactSurface = NULL;
 	CtrMediaAssetPackage = NULL;
 	CtrMediaAudioRate = MIX_DEFAULT_FREQUENCY;
 	CtrMediaAudioFormat = MIX_DEFAULT_FORMAT;
