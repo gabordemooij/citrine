@@ -3,7 +3,7 @@ Program tidiness: 4.
 ☞ oops ≔ 0.
 {
 	{ 3 ÷ 0. } catch: {
-		oops +=: 1.
+		oops add: 1.
 	}, run.
 } × 1000.
 
