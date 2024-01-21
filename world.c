@@ -63,6 +63,9 @@ char* ctr_internal_readf(char* file_name, uint64_t* total_size) {
 	prg = ctr_heap_allocate(real_size); /* add 4 bytes, 3 for optional closing sequence verbatim mode and one lucky byte! */
 	ctr_program_length=0;
 	while( ( ch = fgetc(fp) ) != EOF ) prg[ctr_program_length++]=ch;
+	/* because we just want to use strncmp() for simple tokens in lexer and not check the length/eof on every step */
+	/* should be 0 already because calloc() and lucky byte but just for clarity */
+	prg[ctr_program_length] = '\0';
 	fclose(fp);
 	*total_size = (uint64_t) real_size;
 	return prg;
