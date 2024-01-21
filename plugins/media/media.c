@@ -478,7 +478,7 @@ void ctr_internal_media_textinsert(MediaIMG* mediaImage, char* text) {
 		if (CtrMediaInputIndex==mediaImage->textlength) return;
 		int oldPos = CtrMediaInputIndex;
 		ctr_internal_media_move_cursor_right(mediaImage, 1,1);
-		memcpy(mediaImage->text+oldPos, mediaImage->text+CtrMediaInputIndex,mediaImage->textlength);
+		memcpy(mediaImage->text+oldPos, mediaImage->text+CtrMediaInputIndex,mediaImage->textlength-CtrMediaInputIndex);
 		mediaImage->text[mediaImage->textlength]='\0';
 		mediaImage->textlength -= (CtrMediaInputIndex - oldPos);
 		CtrMediaInputIndex = oldPos;
