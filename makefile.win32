@@ -1,6 +1,6 @@
 #Usage: ISO=... CC=i686-w64-mingw32-gcc-8.3-win32 DLLTOOL=i686-w64-mingw32-dlltool make -f makefile.win32
 #Usage with mk: CC=i686-w64-mingw32-gcc-8.3-win32  DLLTOOL=i686-w64-mingw32-dlltool MAKEFILE=makefile.win32 ./mk.sh 
-CFLAGS = -O2 -g -mtune=native -Wall -D CTRLANG=${ISO} -D INCLUDETESTS -D WIN -D WIN32_BIT \
+CFLAGS = -O2 -g -mtune=native -Wall -D CTRLANG=${ISO} -D INCLUDETESTS -D WIN -D ASCIICOMPAT -D WIN32_BIT \
        -D REPLACE_PROGRAM_PASSWORD -D WINDOWS_PROGRAM_PASSWORD\
        -D REPLACE_PLUGIN_SYSTEM    -D WINDOWS_PLUGIN_SYSTEM\
        -D REPLACE_CLOCK_WAIT       -D WINDOWS_CLOCK_WAIT\
