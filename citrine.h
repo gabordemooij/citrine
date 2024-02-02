@@ -21,7 +21,6 @@
 #ifdef WIN
 	#include <windows.h>
 	#include <conio.h>
-	#define PRId64 "I64d"
 	#define realpath(N,R) _fullpath((R),(N),PATH_MAX)
 	#define CTR_DIRSEP "\\"
 	#define CTR_ERR GetLastError()
