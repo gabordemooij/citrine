@@ -23,10 +23,10 @@ for lang in "${langs[@]}"
 do
 
 # Compile for Windows
-ISO="$lang" CC=x86_64-w64-mingw32-gcc-8.3-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64 clean
-EXTRA="/tmp/citrine.res" LFLAGS="-mwindows" ISO="$lang" CC=x86_64-w64-mingw32-gcc-8.3-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64
+ISO="$lang" CC=x86_64-w64-mingw32-gcc-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64 clean
+EXTRA="/tmp/citrine.res" LFLAGS="-mwindows" ISO="$lang" CC=x86_64-w64-mingw32-gcc-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64
 # WIN64 plugin
-ISO="$lang" PACKAGE="media" NAME="libctrmedia.dll" CC=x86_64-w64-mingw32-gcc-8.3-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64 plugin
+ISO="$lang" PACKAGE="media" NAME="libctrmedia.dll" CC=x86_64-w64-mingw32-gcc-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64 plugin
 
 
 # Create dictionary
@@ -127,10 +127,10 @@ chmod uog+x dist/Linux/ISO/${lang}/citrine_app.sh
 tar cvzf "dist/Linux/OUT/$lang/citrine${lang}096ai.tar.gz" -C dist/Linux/ISO/ ${lang}
 
 # Compile for Windows 32bit
-ISO="$lang" CC=i686-w64-mingw32-gcc-8.3-win32 DLLTOOL=i686-w64-mingw32-dlltool make -f makefile.win32 clean
-EXTRA="/tmp/citrine.res" LFLAGS="-mwindows" ISO="$lang" CC=i686-w64-mingw32-gcc-8.3-win32 DLLTOOL=i686-w64-mingw32-dlltool make -f makefile.win32
+ISO="$lang" CC=i686-w64-mingw32-gcc-win32 DLLTOOL=i686-w64-mingw32-dlltool make -f makefile.win32 clean
+EXTRA="/tmp/citrine.res" LFLAGS="-mwindows" ISO="$lang" CC=i686-w64-mingw32-gcc-win32 DLLTOOL=i686-w64-mingw32-dlltool make -f makefile.win32
 # win32 plugin
-ISO="$lang" PACKAGE="media" NAME="libctrmedia.dll" CC=i686-w64-mingw32-gcc-8.3-win32 DLLTOOL=i686-w64-mingw32-dlltool make -f makefile.win32 plugin
+ISO="$lang" PACKAGE="media" NAME="libctrmedia.dll" CC=i686-w64-mingw32-gcc-win32 DLLTOOL=i686-w64-mingw32-dlltool make -f makefile.win32 plugin
 
 # (Re-)Create folder for lang specific distribution
 rm -rf dist/Win32/ISO/$lang
