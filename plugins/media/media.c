@@ -2312,10 +2312,11 @@ ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* arg
  * 
  * @example
  * ☞ image ≔ Image new: ‘a.png’.
- * image on ‘click’ do: { ... }.
- * image on ‘hover’ do: { ... }.
- * image on ‘collision:’ do: { :other ... }.
- * 
+ * image on: ‘click’ do: { ... }.
+ * image on: ‘hover’ do: { ... }.
+ * image on: ‘collision:’ do: { :other ... }.
+ * image on: ‘destination:’ do: { :other ... }.
+ *
  * @result
  * en: Loads an image. Afterwards your image will start receiving events (see above).
  */
