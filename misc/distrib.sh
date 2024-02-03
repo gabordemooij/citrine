@@ -85,6 +85,12 @@ wine "C:\\Program Files (x86)\\Inno Setup 6\\ISCC.exe" "C:\\InnoSetupSourceDir\\
 mkdir -p dist/Win64/OUT/$lang/
 cp ~/.wine/drive_c/InnoSetupSourceDir/Output/Citrine096.exe dist/Win64/OUT/$lang/
 
+# Zip it
+cd dist/Win64/OUT/$lang/
+zip Citrine096.zip Citrine096.exe
+rm Citrine096.exe
+cd ../../../../
+
 
 # Use the Win64 output as template
 cp -R dist/Win64/ISO/$lang dist/Linux/ISO/$lang
