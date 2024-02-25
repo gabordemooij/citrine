@@ -239,7 +239,7 @@ typedef struct ctr_collection ctr_collection;
  * AST Node
  */
 struct ctr_tnode {
-	char type;
+	int type;
 	char modifier;
 	char* value;
 	ctr_size vlen;
@@ -828,3 +828,9 @@ size_t ctr_heap_tracker_memoryblocknumber();
 size_t ctr_heap_tracker_rewind( size_t memoryBlockNumber );
 
 extern int putenv_old(const char* name, const char* value);
+
+/* for inclusion of citrine as lib (i.e. export) */
+int ctr_init();
+
+/* for exports */
+void init_embedded_media_plugin();

@@ -35,7 +35,6 @@
 #include <ws2tcpip.h>
 #endif
 
-
 #include <unistd.h>
 
 
@@ -984,7 +983,6 @@ SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type);
 plm_t* plm;
 uint8_t* rgb_buffer;
 int wrgb;
-FILE* vf;
 
 void ctr_internal_media_rendervideoframe(SDL_Rect* rect) {
 	plm_frame_t *frame = NULL;
@@ -999,10 +997,28 @@ void ctr_internal_media_rendervideoframe(SDL_Rect* rect) {
 	SDL_RenderCopy(CtrMediaRenderer, CtrMediaBGVideoTexture, NULL, rect);
 }
 
-
+uint8_t* ctr_media_video_buffer;
+size_t ctr_media_video_memory_id;
 void ctr_internal_media_loadvideobg(char* path, SDL_Rect* dimensions) {
-	vf = fopen(path, "rb");
-	plm = plm_create_with_file(vf, FALSE);
+	SDL_RWops* asset_reader = ctr_internal_media_load_asset(path, 1);
+	if (!asset_reader) {
+		ctr_error("Unable to open video asset.", 0);
+		return;
+	}
+	int chunk = 512;
+	size_t bytes_read;
+	size_t offset = 0;
+	ctr_media_video_buffer = ctr_heap_allocate_tracked(chunk);
+	ctr_media_video_memory_id = ctr_heap_get_latest_tracking_id();
+	bytes_read = SDL_RWread(asset_reader, ctr_media_video_buffer, 1, chunk);
+	offset += bytes_read;
+	while (bytes_read > 0) {
+		ctr_media_video_buffer = ctr_heap_reallocate_tracked(ctr_media_video_memory_id, offset + chunk);
+		bytes_read = SDL_RWread(asset_reader, ctr_media_video_buffer + offset, 1, chunk);
+        offset += bytes_read;
+    }
+    SDL_RWclose(asset_reader);
+	plm = plm_create_with_memory(ctr_media_video_buffer, offset, FALSE);
 	if (!plm) {
 		printf("Couldn't open file %s\n", path);
 		exit(1);
@@ -1024,19 +1040,13 @@ void ctr_internal_media_loadvideobg(char* path, SDL_Rect* dimensions) {
 	dimensions->y = 0;
 	dimensions->h = h;
 	dimensions->w = w;
-	return;
 }
 
 char ctr_internal_media_determine_filetype(char* path) {
 	char magic[20];
-	if (CtrMediaAssetPackage) {
-		SDL_RWops* asset_reader = ctr_internal_media_load_asset(path, 1);
-		asset_reader->read(asset_reader, magic, 20, 1);
-	} else {
-		FILE* fh = fopen(path, "rb");
-		fread(magic, 20, 1, fh);
-		fclose(fh);
-	}
+	memset(magic, 0, 20);
+	SDL_RWops* asset_reader = ctr_internal_media_load_asset(path, 1);
+	SDL_RWread(asset_reader, magic, 1, 20);
 	if (strcmp(magic, "\x00\x00\x01\xBA")==0) return 10;
 	if (strcmp(magic, "\xFF\xD8")==0) return 20;
 	return 0;
@@ -1153,7 +1163,9 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_internal_media_loadvideobg(imageFileStr, &dimensions);
 		background_is_video = 1;
 	} else {
-		texture = IMG_LoadTexture(CtrMediaRenderer, imageFileStr);
+		SDL_RWops* res = NULL;
+		res = ctr_internal_media_load_asset(imageFileStr, 1);
+		texture = IMG_LoadTexture_RW(CtrMediaRenderer, res, 0);
 		SDL_QueryTexture(texture, NULL, NULL, &dimensions.w, &dimensions.h);
 		dimensions.x = x;
 		dimensions.y = y;
@@ -1705,7 +1717,10 @@ ctr_object* ctr_sound_new_set(ctr_object* myself, ctr_argument* argumentList) {
 	if (mediaAUD->blob != NULL) {
 		Mix_FreeChunk((Mix_Chunk*)mediaAUD->blob);
 	}
-	mediaAUD->blob = (void*) Mix_LoadWAV(audioFileStr);
+	SDL_RWops* res = ctr_internal_media_load_asset(audioFileStr, 1);
+	if (res) {
+		mediaAUD->blob = (void*)Mix_LoadWAV_RW(res, 1);
+	}
 	if (mediaAUD->blob == NULL) {
 		CtrStdFlow = ctr_build_string_from_cstring((char*)SDL_GetError());
 	}
@@ -1735,38 +1750,32 @@ ctr_object* ctr_sound_play(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-#ifdef WIN
-#define WIN_UTF8ToStringW(S) (WCHAR *)SDL_iconv_string("UTF-16LE", "UTF-8", (char *)(S), SDL_strlen(S)+1)
-#endif
-
 SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
+	SDL_RWops* res = NULL;
+	// If we have no asset package, load from file instead
 	if (CtrMediaAssetPackage == NULL) {
+		res = SDL_RWFromFile(asset_name, "rb");
+		return res;
+	}
+	char* path = ctr_heap_allocate_cstring(ctr_internal_object_property(CtrMediaAssetPackage, "path", NULL));
+	SDL_RWops* asset_file = SDL_RWFromFile(path, "rb");
+	ctr_heap_free(path);
+	if (!asset_file) {
 		return NULL;
 	}
-	SDL_RWops* res = NULL;
-	char* path = ctr_heap_allocate_cstring(ctr_internal_object_property(CtrMediaAssetPackage, "path", NULL));
-#ifdef WIN
-	path = (char*)WIN_UTF8ToStringW(path);
-	FILE* asset_file = fopen((char*)WIN_UTF8ToStringW(path), "rb");
-#endif
-#ifndef WIN
-	FILE* asset_file = fopen(path, "rb");
-#endif
-	ctr_heap_free(path);
-	if (!asset_file) return NULL;
-	fseek(asset_file, 0, SEEK_SET);
+	SDL_RWseek(asset_file, 0, RW_SEEK_SET);
 	char* buffer = malloc(500);
 	while(1) {
-		uint64_t read_start = ftell(asset_file);
-		int bytes_read = fread(buffer, 1, 500, asset_file);
+		uint64_t read_start = SDL_RWtell(asset_file);
+		int bytes_read = SDL_RWread(asset_file, buffer, 1, 500);
 		if (strncmp(asset_name, buffer, bytes_read) == 0) {
-			fseek(asset_file, read_start + strlen(asset_name) + 1, SEEK_SET);
+			SDL_RWseek(asset_file, read_start + strlen(asset_name) + 1, RW_SEEK_SET);
 			uint64_t next_entry = 0;
-			fread(&next_entry, 8, 1, asset_file);
-			uint64_t curpos = ftell(asset_file);
+			SDL_RWread(asset_file, &next_entry, 8, 1);
+			uint64_t curpos = SDL_RWtell(asset_file);
 			uint64_t read_size = next_entry - curpos;
 			char* read_buffer = malloc(read_size);
-			fread(read_buffer, 1, read_size, asset_file);
+			SDL_RWread(asset_file, read_buffer, 1, read_size);
 			res = SDL_RWFromMem(read_buffer, read_size);
 			break;
 		} else {
@@ -1775,10 +1784,10 @@ SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
 			if (jmp_address == 0) {
 				break;
 			}
-			fseek(asset_file, jmp_address, SEEK_SET);
+			SDL_RWseek(asset_file, jmp_address, SEEK_SET);
 		}
 	}
-	fclose(asset_file);
+	SDL_RWclose(asset_file);
 	return res;
 }
 
@@ -1810,8 +1819,6 @@ ctr_object* ctr_music_new_set(ctr_object* myself, ctr_argument* argumentList) {
 	SDL_RWops* res = ctr_internal_media_load_asset(audioFileStr, 1);
 	if (res) {
 		mediaAUD->blob = (void*)Mix_LoadMUS_RW(res, 1);
-	} else {
-		mediaAUD->blob = (void*)Mix_LoadMUS(audioFileStr);
 	}
 	if (mediaAUD->blob == NULL) {
 		CtrStdFlow = ctr_build_string_from_cstring((char*)SDL_GetError());
@@ -2385,12 +2392,9 @@ ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 	SDL_RWops* res;
 	res = ctr_internal_media_load_asset(imageFileStr, 1);
 	if (res) {
-		mediaImage->texture = (void*) IMG_LoadTexture_RW(CtrMediaRenderer, res,0);
-		res = ctr_internal_media_load_asset(imageFileStr, 1);
+		mediaImage->texture = (void*) IMG_LoadTexture_RW(CtrMediaRenderer, res, 0);
+		SDL_RWseek(res, 0, RW_SEEK_SET);
 		mediaImage->surface = (void*) IMG_Load_RW(res, 0);
-	} else {
-		mediaImage->texture = (void*) IMG_LoadTexture(CtrMediaRenderer, imageFileStr);
-		mediaImage->surface = (void*) IMG_Load(imageFileStr);
 	}
 	if (mediaImage->texture == NULL) ctr_internal_media_fatalerror("Unable to load texture", imageFileStr);
 	if (mediaImage->surface == NULL) ctr_internal_media_fatalerror("Unable to load surface", imageFileStr);
@@ -3771,4 +3775,8 @@ void begin(){
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_QUOTES ), ctr_build_string_from_cstring(CTR_DICT_QUOT_OPEN CTR_DICT_QUOT_CLOSE), CTR_CATEGORY_PUBLIC_PROPERTY);
 	/* Untranslated reference for systems that do not support UTF-8 characters in file names (like Windows) */
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Media" ), mediaObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+}
+
+void init_embedded_media_plugin() {
+	begin();
 }
