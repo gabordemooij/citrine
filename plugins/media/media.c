@@ -38,6 +38,7 @@
 #include <unistd.h>
 
 
+
 /* Old Windows versions lack these functions
  * 
  * credit: Petar Korponaić
@@ -1153,7 +1154,6 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	controllableObject = NULL;
 	focusObject = NULL;
 	CtrMediaSteps = 0;
-	SDL_StartTextInput();
 	SDL_Rect dimensions;
 	SDL_Texture* texture;
 	char* imageFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
@@ -1260,6 +1260,24 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 						SDL_SetWindowInputFocus(CtrMediaWindow); //might return an error, but what can we do?
 					}
 					if (ctr_internal_media_mouse_down(event)) return CtrStdFlow;
+					break;
+				case SDL_FINGERDOWN:
+					if (event.tfinger.x * windowWidth > player->x) {
+						ctr_internal_media_keydown_right(&dir);
+					}
+					else if (event.tfinger.x * windowWidth < player->x - (player->w/player->anims)) {
+						ctr_internal_media_keydown_left(&dir);
+					}
+					if (event.tfinger.y * windowHeight > player->y - player->h) {
+						ctr_internal_media_keydown_down(&dir, &c4speed);
+					}
+					else if (event.tfinger.y * windowHeight < player->y - player->h) {
+						ctr_internal_media_keydown_up(&dir, &c4speed);
+					}
+					break;
+				case SDL_FINGERUP:
+						ctr_internal_media_keyup_right(&dir, &c4speed);
+						ctr_internal_media_keyup_down(&dir, &c4speed);
 					break;
 				case SDL_CONTROLLERBUTTONDOWN:
 					if (CtrMediaEventListenFlagGamePadBtnDown) {
@@ -3388,7 +3406,11 @@ void ctr_internal_media_init() {
 	CtrMediaAudioVolume = MIX_MAX_VOLUME;
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) ctr_internal_media_fatalerror("SDL failed to init", SDL_GetError());
 	IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
+	#ifdef FULLSCREEN
+	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 100, 100, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
+	#else
 	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 100, 100, SDL_WINDOW_OPENGL);
+	#endif
 	if (CtrMediaWindow == NULL) ctr_internal_media_fatalerror("Unable to create window", SDL_GetError());
 	CtrMediaRenderer = SDL_CreateRenderer(CtrMediaWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
 	if (!CtrMediaRenderer) {
