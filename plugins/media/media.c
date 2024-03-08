@@ -123,6 +123,12 @@ int CtrMediaAudioBuffers;
 int CtrMediaAudioVolume;
 ctr_object* CtrMediaAssetPackage;
 
+SDL_Rect CtrMediaCamera;
+SDL_Rect CtrMediaViewport;
+int CtrMediaZoom;
+int CtrMediaDrawSizeX;
+int CtrMediaDrawSizeY;
+
 struct CtrMediaTextRenderCacheItem {
 	char* text;
 	SDL_Surface* surface;
@@ -278,6 +284,15 @@ void ctr_internal_media_reset() {
 	CtrMediaEventListenFlagTimer = 0;
 	CtrMediaEventListenFlagStep = 0;
 	CtrMediaContactSurface = NULL;
+	CtrMediaCamera.w = 0;
+	CtrMediaCamera.h = 0;
+	CtrMediaCamera.x = 0;
+	CtrMediaCamera.y = 0;
+	CtrMediaViewport.x = 0;
+	CtrMediaViewport.y = 0;
+	CtrMediaViewport.w = 0;
+	CtrMediaViewport.h = 0;
+	CtrMediaZoom = 0;
 	for(int i = 1; i<=CtrMaxMediaTimers; i++) {
 		CtrMediaTimers[i] = -1;
 	}
@@ -546,6 +561,32 @@ ctr_object* ctr_img_text_ins(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_internal_media_textinsert(mediaImage, buffer);
 	ctr_heap_free(buffer);
 	ctr_internal_img_render_text(myself);
+	return myself;
+}
+
+/**
+ * @def
+ * [ Media ] width: [ Number ] height: [ Number ]
+ *
+ * @example
+ * Media with: 320 height: 200.
+ *
+ * @result
+ * en: Sets camera size
+ */
+ctr_object* ctr_media_width_height( ctr_object* myself, ctr_argument* argumentList ) {
+	CtrMediaCamera.w = (int) ctr_tonum(argumentList->object);
+	CtrMediaCamera.h = (int) ctr_tonum(argumentList->next->object);
+	if (CtrMediaViewport.x == 0 && CtrMediaViewport.y == 0) {
+		CtrMediaZoom = 1;
+	}
+	return myself;
+}
+
+ctr_object* ctr_media_left_top( ctr_object* myself, ctr_argument* argumentList ) {
+	CtrMediaViewport.x = (int) ctr_tonum(argumentList->object);
+	CtrMediaViewport.y = (int) ctr_tonum(argumentList->next->object);
+	CtrMediaZoom = 0;
 	return myself;
 }
 
@@ -906,8 +947,78 @@ void ctr_internal_media_detect_collisions(MediaIMG* m, SDL_Rect r) {
 	ctr_heap_free(collider);
 }
 
-void ctr_internal_media_render_image(MediaIMG* m, SDL_Rect r, SDL_Rect s) {
+void ctr_internal_media_camera(MediaIMG* m, SDL_Rect* s, SDL_Rect* r, MediaIMG* player) {
+	static SDL_Rect camera;
+	static int init_camera = 0;
+	int border = 100;
+	camera.w = CtrMediaCamera.w;
+	camera.h = CtrMediaCamera.h;
+	int left = camera.x + border;
+	int right = camera.x + camera.w - border;
+	int top = camera.y + border;
+	int bottom = camera.y + camera.h - border;
+	int cpx = player->x + ((player->w / player->anims)/2);
+	int cpy = player->y + (player->h/2);
+	if (cpx > right && camera.x < windowWidth - camera.w) {
+		camera.x ++;
+	}
+	if (cpx < left && camera.x > 0) {
+		camera.x --;
+	}
+	if (cpy > bottom && camera.y < windowHeight - camera.h) {
+		camera.y ++;
+	}
+	if (cpy < top && camera.y > 0) {
+		camera.y --;
+	}
+	if (!init_camera) {
+		camera.x = 0;
+		camera.y = 0;
+		if (CtrMediaZoom) {
+			SDL_RenderSetLogicalSize(CtrMediaRenderer, camera.w, camera.h);
+		}
+		init_camera = 1;
+	}
+	if (m == NULL) {
+		s->x = camera.x;
+		s->y = camera.y;
+		s->w = camera.w;
+		s->h = camera.h;
+		r->x = 0;
+		r->y = 0;
+		r->w = camera.w;
+		r->h = camera.h;
+	} else {
+		r->x = r->x - camera.x;
+		r->y = r->y - camera.y;
+		if ((r->w + r->x) > camera.w) {
+			r->w = r->w - ((r->w + r->x) - camera.w);
+			s->w = r->w;
+		}
+		if (r->x < 0) {
+			s->x = s->x - r->x;
+			r->w = r->w + r->x;
+			r->x = 0;
+		}
+		if (r->y < 0) {
+			s->y = s->y - r->y;
+			r->h = r->h + r->y;
+			r->y = 0;
+		}
+		if ((r->h + r->y) > camera.h) {
+			r->h = r->h - ((r->h + r->y) - camera.h);
+			s->h = r->h;
+		}
+	}
+	r->x += CtrMediaViewport.x;
+	r->y += CtrMediaViewport.y;
+}
+
+void ctr_internal_media_render_image(MediaIMG* m, SDL_Rect r, SDL_Rect s, MediaIMG* player) {
 	ctr_internal_media_anim_frames(m, &r, &s);
+	if (CtrMediaCamera.w > 0 && CtrMediaCamera.h > 0) {
+		ctr_internal_media_camera(m, &s, &r, player);
+	}
 	if (m->dir > -1 && !m->solid && CtrMediaControlMode == 1) {
 		if (m->gravity) {
 			int xdir = m->dir;
@@ -1178,6 +1289,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_heap_free(imageFileStr);
 	windowWidth = dimensions.w;
 	windowHeight = dimensions.h;
+	SDL_GL_GetDrawableSize(CtrMediaWindow, &CtrMediaDrawSizeX, &CtrMediaDrawSizeY);
 	ctr_send_message(myself, CTR_DICT_RUN, strlen(CTR_DICT_RUN), NULL );
 	if (CtrStdFlow) return myself;
 	SDL_Event event;
@@ -1186,10 +1298,18 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	while (1) {
 		ctr_gc_cycle(); 
 		SDL_RenderClear(CtrMediaRenderer);
+		player = NULL;
+		if (controllableObject) {
+			player = (MediaIMG*) controllableObject->value.rvalue->ptr;
+		}
 		if (background_is_video) {
 			ctr_internal_media_rendervideoframe(&dimensions);
 		} else {
-			SDL_RenderCopy(CtrMediaRenderer, texture, NULL, &dimensions);
+		    SDL_Rect s = dimensions;
+		    if (CtrMediaCamera.w > 0 && CtrMediaCamera.h > 0) {
+				ctr_internal_media_camera(NULL, &s, &dimensions, player);
+			}
+			SDL_RenderCopy(CtrMediaRenderer, texture, &s, &dimensions);
 		}
 		myself->info.sticky = 1;
 		if (CtrMediaEventListenFlagTimer) {
@@ -1487,7 +1607,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 			s.y = 0;
 			s.h = (int) m->h;
 			s.w = (int) m->w/(m->anims ? m->anims : 1);
-			ctr_internal_media_render_image(m,r,s);
+			ctr_internal_media_render_image(m,r,s, player);
 		}
 		if (focusObject) {
 			ctr_internal_img_render_cursor(focusObject);
@@ -3714,6 +3834,8 @@ void begin(){
 	mediaObject->link = CtrStdObject;
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_media_new );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_SCREEN ), &ctr_media_screen );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "width:height:" ), &ctr_media_width_height );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "left:top:" ), &ctr_media_left_top );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_CLIPBOARD ), &ctr_media_clipboard );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_CLIPBOARD_SET ), &ctr_media_clipboard_set );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_RUN ), &ctr_media_override );
