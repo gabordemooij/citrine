@@ -3811,6 +3811,38 @@ ctr_object* ctr_media_console_brk(ctr_object* myself, ctr_argument* argumentList
 }
 #endif
 
+ctr_object* ctr_media_include(ctr_object* myself, ctr_argument* argumentList) {
+	char* pathString = ctr_tostr(argumentList->object);
+	SDL_RWops* asset_reader = ctr_internal_media_load_asset(pathString, 1);
+	if (!asset_reader) {
+		ctr_error("Unable to open code asset.", 0);
+		return CtrStdNil;
+	}
+	char* prg;
+	int prg_id;
+	int chunk = 512;
+	size_t bytes_read;
+	size_t offset = 0;
+	ctr_tnode* parsedCode;
+	prg = ctr_heap_allocate_tracked(chunk);
+	prg_id = ctr_heap_get_latest_tracking_id();
+	bytes_read = SDL_RWread(asset_reader, prg, 1, chunk);
+	offset += bytes_read;
+	while (bytes_read > 0) {
+		prg = ctr_heap_reallocate_tracked(prg_id, offset + chunk + 1);
+		bytes_read = SDL_RWread(asset_reader, prg + offset, 1, chunk);
+        offset += bytes_read;
+    }
+    SDL_RWclose(asset_reader);
+    prg[offset + 1] = '\0';
+    ctr_program_length = offset;
+	parsedCode = ctr_cparse_parse(prg, pathString);
+	ctr_cwlk_subprogram++;
+	ctr_cwlk_run(parsedCode);
+	ctr_cwlk_subprogram--;
+	return myself;
+}
+
 void begin(){
 	#ifdef WIN
 	FreeConsole();
@@ -3857,6 +3889,7 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_ONDO ), &ctr_media_on_do );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_media_end );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "sys:" ), &ctr_media_system );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "use:" ), &ctr_media_include );
 	#ifdef WIN
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring(CTR_DICT_WRITE), &ctr_media_console_write );
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_STOP ), &ctr_media_console_brk );
