@@ -998,12 +998,14 @@ void ctr_internal_media_camera(MediaIMG* m, SDL_Rect* s, SDL_Rect* r, MediaIMG* 
 		if (r->x < 0) {
 			s->x = s->x - r->x;
 			r->w = r->w + r->x;
+			s->w = r->w;
 			r->x = 0;
 		}
 		if (r->y < 0) {
 			s->y = s->y - r->y;
 			r->h = r->h + r->y;
 			r->y = 0;
+			s->h = r->h;
 		}
 		if ((r->h + r->y) > camera.h) {
 			r->h = r->h - ((r->h + r->y) - camera.h);
