@@ -25,3 +25,5 @@ clean:
 plugin:
 	cd plugins/${PACKAGE} ; make clean ; make install-${NAME}
 
+testplugin:
+	cd plugins/${PACKAGE} ; make -f makefile.test clean ; make -f makefile.test install-${NAME}
