@@ -3611,12 +3611,13 @@ ctr_object* ctr_media_link_package(ctr_object* myself, ctr_argument* argumentLis
  * en: Adds a resource to a package.
  */
 ctr_object* ctr_package_add(ctr_object* myself, ctr_argument* argumentList) {
-	char* path = ctr_heap_allocate_cstring(ctr_internal_object_property(myself, "path", NULL));
+	char* path;
+	char* pkgpath = ctr_heap_allocate_cstring(ctr_internal_object_property(myself, "path", NULL));
 	FILE* outfile;
-	if (access(path, F_OK) == 0) {
-		outfile = fopen(path, "rb+");
+	if (access(pkgpath, F_OK) == 0) {
+		outfile = fopen(pkgpath, "rb+");
 	} else {
-		outfile = fopen(path, "wb+");
+		outfile = fopen(pkgpath, "wb+");
 	}
 	fseek(outfile, 0, SEEK_END);
 	int CHUNK_SIZE = 10000;
@@ -3625,7 +3626,7 @@ ctr_object* ctr_package_add(ctr_object* myself, ctr_argument* argumentList) {
 	char* buffer;
 	ctr_object* fileObject = argumentList->object;
 	if (fileObject->link == CtrStdFile) {
-		char* path = ctr_heap_allocate_cstring(
+		path = ctr_heap_allocate_cstring(
 			ctr_internal_cast2string(
 				ctr_internal_object_property(fileObject, "path", NULL)
 			)
@@ -3651,6 +3652,7 @@ ctr_object* ctr_package_add(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_error("Invalid argument\n", 0);
 	}
 	ctr_heap_free(path);
+	ctr_heap_free(pkgpath);
 	return myself;
 }
 
