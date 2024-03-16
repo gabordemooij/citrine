@@ -16,11 +16,7 @@ extern JNIEXPORT jstring JNICALL Java_com_citrine_citrineandroid_MainActivity_st
 
 
 static char* embedded_program = "\
-☞ media ≔ Media nieuw.\
-\
-☞ data ≔ Pakketje nieuw: “data”.\
-media koppel: data.\
-media use: “__1__”.\
+Media _datastart.\
 ";
 
 int main(int argc, char *argv[]) {

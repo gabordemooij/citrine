@@ -3845,6 +3845,34 @@ ctr_object* ctr_media_include(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @internal
+ *
+ * 'DataStart'
+ * Exports can use this message to bootstrap from a data package.
+ * The package is often part of the executable or the distribution.
+ * This will connect to a data package called 'data' and include
+ * program '__1__' for execution.
+ */
+ctr_object* ctr_media_datastart(ctr_object* myself, ctr_argument* none) {
+	ctr_argument* argumentList;
+	ctr_object* data_package;
+	argumentList = (ctr_argument*) ctr_heap_allocate(sizeof(ctr_argument));
+	argumentList->object = ctr_build_string_from_cstring("data");
+	argumentList->next = NULL;
+	// Create an asset package for 'data'
+	data_package = ctr_send_message( packageObject, CTR_DICT_NEW_SET, strlen(CTR_DICT_NEW_SET), argumentList );
+	argumentList->object = data_package;
+	// Connect the assets to the program
+	ctr_send_message( mediaObject, CTR_DICT_LINK_SET, strlen(CTR_DICT_LINK_SET), argumentList );
+	argumentList->object = ctr_build_string_from_cstring("__1__");
+	// Load the __1__ program from the data package
+	ctr_send_message( mediaObject, "use:", strlen("use:"), argumentList );
+	ctr_heap_free(argumentList);
+	return myself;
+}
+
+
 void begin(){
 	#ifdef WIN
 	FreeConsole();
@@ -3892,6 +3920,7 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_media_end );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "sys:" ), &ctr_media_system );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "use:" ), &ctr_media_include );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "_datastart" ), &ctr_media_datastart );
 	#ifdef WIN
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring(CTR_DICT_WRITE), &ctr_media_console_write );
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_STOP ), &ctr_media_console_brk );
