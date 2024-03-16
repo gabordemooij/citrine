@@ -16,7 +16,7 @@ Howto?
 10.Please do not start your translation with a digit
 11.Please do not use quotes in your translation
 12.Please do not include an end-of-line symbol as part of your translation (most of the time this is a dot)
-13.Please do not other UTF-8 character you like, not just ASCII (so you can use Chinese characters etc)
+13.You may use any UTF-8 character you like, not just ASCII (so you can use Chinese characters etc)
 
 * I will check this for you after submitting the file
   If you want, you can check this yourself as well, look at i18n/
