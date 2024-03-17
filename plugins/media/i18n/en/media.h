@@ -19,7 +19,7 @@
 #define CTR_DICT_TIMER_SET                  "timer:after:"
 #define CTR_DICT_LINK_SET                   "link:"
 #define CTR_DICT_SAY_SET                    "say:"
-#define CTR_DICT_SELECTION                  "select"
+#define CTR_DICT_SELECTION                  "selected"
 #define CTR_DICT_FETCH_TEXT_MESSAGES        "text messages"
 #define CTR_DICT_SEND_TEXT_MESSAGE          "text:to:"
 #define CTR_DICT_NETWORK_PORT               "network port"
