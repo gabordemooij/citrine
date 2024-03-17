@@ -1050,6 +1050,9 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 	ctr_argument* mesgArgument;
 	ctr_object* result = CtrStdNil;
 	ctr_object* (*funct)(ctr_object* receiverObject, ctr_argument* argumentList);
+	if (receiverObject == NULL) {
+		ctr_print_error("[Error] ctr_send_message: Receiver cannot be NULL.", 1);
+	}
 	if (!ctr_internal_tmp_msg) {
 		ctr_internal_tmp_msg = ctr_build_empty_string();
 		ctr_internal_tmp_msg->info.sticky = 1;
