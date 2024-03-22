@@ -500,8 +500,8 @@ void ctr_internal_media_textinsert(MediaIMG* mediaImage, char* text) {
 		int oldPos = CtrMediaInputIndex;
 		ctr_internal_media_move_cursor_right(mediaImage, 1,1);
 		memcpy(mediaImage->text+oldPos, mediaImage->text+CtrMediaInputIndex,mediaImage->textlength-CtrMediaInputIndex);
-		mediaImage->text[mediaImage->textlength]='\0';
 		mediaImage->textlength -= (CtrMediaInputIndex - oldPos);
+		mediaImage->text[mediaImage->textlength]='\0';
 		CtrMediaInputIndex = oldPos;
 		return;
 	}
@@ -1166,9 +1166,14 @@ char ctr_internal_media_determine_filetype(char* path) {
 	char magic[20];
 	memset(magic, 0, 20);
 	SDL_RWops* asset_reader = ctr_internal_media_load_asset(path, 1);
+	if (asset_reader == NULL) {
+		ctr_error(CTR_ERR_FOPEN, 0);
+		return 0;
+	}
 	SDL_RWread(asset_reader, magic, 1, 20);
-	if (strcmp(magic, "\x00\x00\x01\xBA")==0) return 10;
-	if (strcmp(magic, "\xFF\xD8")==0) return 20;
+	if (strcmp(magic, "\x00\x00\x01\xBA")==0) return 10; //MPEG
+	if (strcmp(magic, "\xFF\xD8")==0) return 20; //JPG
+	if (strcmp(magic, "\x89\x50\x4E\x47\x0D\x0A\x1A\x0A")==0) return 30; //PNG
 	return 0;
 }
 
@@ -1277,6 +1282,11 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	SDL_Texture* texture;
 	char* imageFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	char ftype = ctr_internal_media_determine_filetype(imageFileStr);
+	if (ftype == 0) {
+		ctr_heap_free(imageFileStr);
+		ctr_error(CTR_ERR_FOPEN, 0);
+		return myself;
+	}
 	char background_is_video;
 	if (ftype == 10) {
 		ctr_internal_media_loadvideobg(imageFileStr, &dimensions);
@@ -2537,11 +2547,14 @@ ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 	char* imageFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	SDL_RWops* res;
 	res = ctr_internal_media_load_asset(imageFileStr, 1);
-	if (res) {
-		mediaImage->texture = (void*) IMG_LoadTexture_RW(CtrMediaRenderer, res, 0);
-		SDL_RWseek(res, 0, RW_SEEK_SET);
-		mediaImage->surface = (void*) IMG_Load_RW(res, 0);
+	if (res == NULL) {
+		ctr_heap_free(imageFileStr);
+		ctr_error(CTR_ERR_FOPEN, 0);
+		return myself;
 	}
+	mediaImage->texture = (void*) IMG_LoadTexture_RW(CtrMediaRenderer, res, 0);
+	SDL_RWseek(res, 0, RW_SEEK_SET);
+	mediaImage->surface = (void*) IMG_Load_RW(res, 0);
 	if (mediaImage->texture == NULL) ctr_internal_media_fatalerror("Unable to load texture", imageFileStr);
 	if (mediaImage->surface == NULL) ctr_internal_media_fatalerror("Unable to load surface", imageFileStr);
 	ctr_heap_free(imageFileStr);
