@@ -131,6 +131,18 @@ void* ctr_internal_plugin_find(ctr_object* key) {
  * instructions will be ignored until either the error is dealt with
  * by a catch clause or the program ends in which case an error will
  * produced to stderr.
+ *
+ * Note on snprintf: (excess arguments are ignored)
+ * Online C Draft Standard (n1256), section 7.19.6.1, paragraph 2:
+ * The fprintf function writes output to the stream pointed to by stream,
+ * under control of the string pointed to by format that specifies how
+ * subsequent arguments are converted for output. If there are insufficient arguments
+ * for the format, the behavior is undefined. If the format is exhausted while
+ * arguments remain, the excess arguments are evaluated (as always)
+ * but are otherwise ignored. The fprintf function returns when
+ * the end of the format string is encountered.
+ * Behavior for all the other printf() functions is the same
+ * wrt excess arguments except for vprintf() (obviously).
  */
 #ifndef REPLACE_ERROR_SYSTEM
 ctr_object* ctr_error( char* message, int error_code ) {
