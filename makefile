@@ -17,7 +17,7 @@ ctr:	$(OBJS)
 	cp ctr bin/${OS}/ctr${ISO}
 
 .c.o:
-	$(CC) $(CFLAGS) -I i18n/${ISO} -c $<
+	$(CC) $(CFLAGS) $(EXTRACFLAGS) -I i18n/${ISO} -c $<
 
 clean:
 	rm -rf ${OBJS} ctr

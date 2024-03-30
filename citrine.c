@@ -1,5 +1,9 @@
 #include "citrine.h"
 
+#ifdef EMBED
+	#include "misc/opt/embed.h"
+#endif
+
 int ctr_argc;
 char** ctr_argv;
 
@@ -26,6 +30,16 @@ void ctr_cli_welcome() {
 	printf( CTR_MSG_COPYRIGHT );
 	printf( CTR_VERSION );
 	printf("\n");
+}
+
+void* ctr_data_blob(unsigned int* len) {
+	#ifdef EMBED
+	*len = CtrBlob_len;
+	return CtrBlob;
+	#else
+	*len = 0;
+	return NULL;
+	#endif
 }
 
 /**
@@ -112,6 +126,7 @@ int ctr_init() {
  * Bootstraps the Citrine Application.
  *
  */
+#ifndef EMBED
 int main(int argc, char* argv[]) {
 	char* prg;
 	char ctr_pool_share;
@@ -168,3 +183,4 @@ int main(int argc, char* argv[]) {
 	exit(0);
 	return 0;
 }
+#endif

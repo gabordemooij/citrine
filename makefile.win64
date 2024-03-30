@@ -27,7 +27,7 @@ ctr:	$(OBJS)
 	$(CC) ctr${ISO}exports.o $(OBJS) -g -lm $(LFLAGS) $(EXTRA) -o bin/Win64/ctr${ISO}.exe
 
 .c.o:
-	$(CC) $(CFLAGS) -I i18n/${ISO} -c $<
+	$(CC) $(CFLAGS) $(EXTRACFLAGS) -I i18n/${ISO} -c $<
 
 clean:
 	rm -rf ${OBJS} ctr

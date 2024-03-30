@@ -834,3 +834,4 @@ int ctr_init();
 
 /* for exports */
 void init_embedded_media_plugin();
+void* ctr_data_blob(unsigned int* blob_len);

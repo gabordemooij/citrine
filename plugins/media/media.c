@@ -1917,7 +1917,14 @@ SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
 	SDL_RWops* asset_file = SDL_RWFromFile(path, "rb");
 	ctr_heap_free(path);
 	if (!asset_file) {
-		return NULL;
+		unsigned int blob_len;
+		void* blob;
+		//No asset file? then maybe embedded data blob?
+		blob = ctr_data_blob(&blob_len);
+		if (blob == NULL) {
+			return NULL;
+		}
+		asset_file = SDL_RWFromMem(blob, blob_len);
 	}
 	SDL_RWseek(asset_file, 0, RW_SEEK_SET);
 	char* buffer = malloc(500);
