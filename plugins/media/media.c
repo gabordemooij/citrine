@@ -44,7 +44,6 @@
 #include <unistd.h>
 
 
-
 /* Old Windows versions lack these functions
  * 
  * credit: Petar Korponaić
@@ -3725,12 +3724,15 @@ ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
 	default_url_opener = "xdg-open"; //Linuxy
 	tpl = NULL;
 	#endif
-	return ctr_internal_media_external_command(
+	char* str = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+	ctr_object* result = ctr_internal_media_external_command(
 		getenv("BROWSER"),
 		default_url_opener,
-		ctr_tostr(argumentList->object),
+		str,
 		tpl
 	);
+	ctr_heap_free(str);
+	return result;
 }
 
 /**
@@ -3744,12 +3746,15 @@ ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
  * en: Speaks text using speech synthesizer system specified in SPEAK environment variable.
  */
 ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
-	return ctr_internal_media_external_command(
+	char* str = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+	ctr_object* result = ctr_internal_media_external_command(
 		getenv("SPEAK"),
 		"say",
-		ctr_tostr(argumentList->object),
+		str,
 		NULL
 	);
+	ctr_heap_free(str);
+	return result;
 }
 
 /**
@@ -3762,6 +3767,7 @@ ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
  */
 ctr_object* ctr_media_system(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* result;
+	char* command_str = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	#ifndef WIN
 	//In Linux/BSD we cannot attach a terminal to a process afterwards so
 	//we always open a terminal. If users don't want a terminal they have to start
@@ -3773,7 +3779,7 @@ ctr_object* ctr_media_system(ctr_object* myself, ctr_argument* argumentList) {
 	result = ctr_internal_media_external_command(
 		getenv("TERMINAL"),
 		"/usr/bin/x-terminal-emulator -e",
-		ctr_tostr(ctr_internal_copy2string(argumentList->object)),
+		command_str,
 		NULL
 	);
 	//If it fails, start without terminal
@@ -3781,7 +3787,7 @@ ctr_object* ctr_media_system(ctr_object* myself, ctr_argument* argumentList) {
 		result = ctr_internal_media_external_command(
 		NULL,
 		"",
-		ctr_tostr(ctr_internal_copy2string(argumentList->object)),
+		command_str,
 		"%s %s"
 		);
 	}
@@ -3795,12 +3801,13 @@ ctr_object* ctr_media_system(ctr_object* myself, ctr_argument* argumentList) {
     si.cb = sizeof(si);
     ZeroMemory( &pi, sizeof(pi) );
     // Start the child process. 
-    if( !CreateProcess(NULL,ctr_tostr(ctr_internal_copy2string(argumentList->object)),NULL,NULL,FALSE,0,NULL,NULL,&si,&pi)) return CtrStdBoolFalse;
+    if( !CreateProcess(NULL,command_str,NULL,NULL,FALSE,0,NULL,NULL,&si,&pi)) return CtrStdBoolFalse;
 	WaitForSingleObject( pi.hProcess, INFINITE );
 	CloseHandle( pi.hProcess );
 	CloseHandle( pi.hThread );
 	result = CtrStdBoolTrue;
 	#endif
+	ctr_heap_free(command_str);
 	return result;
 }
 
@@ -3834,7 +3841,10 @@ ctr_object* ctr_media_console_brk(ctr_object* myself, ctr_argument* argumentList
 #endif
 
 ctr_object* ctr_media_include(ctr_object* myself, ctr_argument* argumentList) {
-	char* pathString = ctr_tostr(argumentList->object);
+	ctr_object* pathStrObj = ctr_internal_cast2string(argumentList->object);
+	char* pathString = ctr_heap_allocate_tracked(pathStrObj->value.svalue->vlen + 1);
+	strncpy(pathString, pathStrObj->value.svalue->value, pathStrObj->value.svalue->vlen);
+	pathString[pathStrObj->value.svalue->vlen] = '\0';
 	SDL_RWops* asset_reader = ctr_internal_media_load_asset(pathString, 1);
 	if (!asset_reader) {
 		ctr_error("Unable to open code asset.", 0);

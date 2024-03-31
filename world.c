@@ -329,21 +329,6 @@ char ctr_tobool(ctr_object* o) {
 /**
  * ?internal
  *
- * toStr()
- * Convenience function.
- * Casts an object to a string object and extracts the string
- * value from the object as a pointer to a char array.
- * Note that the pointer points to the memory of the object and
- * should not be freed.
- */
-char* ctr_tostr(ctr_object* o) {
-	return ctr_internal_cast2string(o)->value.svalue->value;
-}
-
-
-/**
- * ?internal
- *
  * InternalMemMem
  *
  * memmem implementation because this not available on every system.
