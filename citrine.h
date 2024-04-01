@@ -294,6 +294,8 @@ extern ctr_object* CtrStdSlurp;
 extern ctr_object* CtrStdPath;
 extern ctr_object* CtrStdShellCommand;
 extern ctr_object* ctr_first_object;
+extern ctr_object* ctr_gc_watch_object; // for debug purposes
+extern int ctr_gc_clean_free; // for debug purposes
 
 /**
  * Hashkey

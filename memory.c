@@ -162,6 +162,7 @@ void ctr_heap_free_rest() {
  *
  * @return void
  */
+int ctr_gc_clean_free = 0;
 void ctr_heap_free( void* ptr ) {
 	if (ptr == NULL) return;
 	size_t* block_width;
@@ -172,6 +173,9 @@ void ctr_heap_free( void* ptr ) {
 	if (ptr == NULL) return;
 	block_width = (size_t*) ptr;
 	size = *(block_width);
+	if (ctr_gc_clean_free) {
+		memset(ptr,0,size);
+	}
 	ctr_pool_dealloc( ptr );
 	if (size > ctr_gc_alloc) {
 		ctr_print_error("[WARNING] Freeing more memory than allocated.", -1);

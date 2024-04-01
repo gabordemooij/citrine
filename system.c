@@ -54,6 +54,7 @@ void ctr_gc_mark(ctr_object* object) {
  * @internal
  * GarbageCollector Sweeper
  */
+ctr_object* ctr_gc_watch_object = NULL;
 void ctr_gc_sweep( int all ) {
 	ctr_object* previousObject = NULL;
 	ctr_object* currentObject = ctr_first_object;
@@ -63,6 +64,11 @@ void ctr_gc_sweep( int all ) {
 	while(currentObject) {
 		ctr_gc_object_counter ++;
 		if ( ( currentObject->info.mark==0 && currentObject->info.sticky==0 ) || all){
+			// use this to debug GC (i.e. your object gets sweeped)
+			if (currentObject == ctr_gc_watch_object) {
+				printf("[DEBUG] Found watch object. \n");
+				exit(0);
+			}
 			ctr_gc_dust_counter ++;
 			/* remove from linked list */
 			if (previousObject) {
