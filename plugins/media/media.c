@@ -24,77 +24,10 @@
 #include <math.h>
 
 #include <sys/types.h>
-
-#ifndef REPLACE_MEDIA_SOCK
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <netinet/in.h>
-#endif
-
-#ifdef MAC_MEDIA_SOCK
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <netinet/in.h>
-#endif
-
-#ifdef WINDOWS_MEDIA_SOCK
-#include <ws2tcpip.h>
-#endif
-
 #include <unistd.h>
 
+#include <curl/curl.h>
 
-/* Old Windows versions lack these functions
- * 
- * credit: Petar Korponaić
- * https://stackoverflow.com/questions/13731243/what-is-the-windows-xp-equivalent-of-inet-pton-or-inetpton
- */
-#ifdef WINDOWS_MEDIA_SOCK
-int inet_pton(int af, const char *src, void *dst)
-{
-  struct sockaddr_storage ss;
-  int size = sizeof(ss);
-  char src_copy[INET6_ADDRSTRLEN+1];
-
-  ZeroMemory(&ss, sizeof(ss));
-  strncpy (src_copy, src, INET6_ADDRSTRLEN+1);
-  src_copy[INET6_ADDRSTRLEN] = 0;
-  if (WSAStringToAddress(src_copy, af, NULL, (struct sockaddr *)&ss, &size) == 0) {
-    switch(af) {
-      case AF_INET:
-    *(struct in_addr *)dst = ((struct sockaddr_in *)&ss)->sin_addr;
-    return 1;
-      case AF_INET6:
-    *(struct in6_addr *)dst = ((struct sockaddr_in6 *)&ss)->sin6_addr;
-    return 1;
-    }
-  }
-  return 0;
-}
-
-const char *inet_ntop(int af, const void *src, char *dst, socklen_t size)
-{
-  struct sockaddr_storage ss;
-  unsigned long s = size;
-
-  ZeroMemory(&ss, sizeof(ss));
-  ss.ss_family = af;
-
-  switch(af) {
-    case AF_INET:
-      ((struct sockaddr_in *)&ss)->sin_addr = *(struct in_addr *)src;
-      break;
-    case AF_INET6:
-      ((struct sockaddr_in6 *)&ss)->sin6_addr = *(struct in6_addr *)src;
-      break;
-    default:
-      return NULL;
-  }
-  /* cannot direclty use &size because of strict aliasing rules */
-  return (WSAAddressToString((struct sockaddr *)&ss, sizeof(ss), NULL, dst, &s) == 0)?
-          dst : NULL;
-}
-#endif
 
 SDL_Window* CtrMediaWindow = NULL;
 SDL_Renderer* CtrMediaRenderer = NULL;
@@ -1199,7 +1132,6 @@ void ctr_media_event_timer(ctr_object* myself, char* event, int timer_no) {
 	ctr_heap_free(args);
 }
 
-
 void ctr_media_event_coords(ctr_object* myself, char* event, int x, int y) {
 	ctr_argument* args = ctr_heap_allocate(sizeof(ctr_argument));
 	args->object = ctr_build_number_from_float((double)x);
@@ -2063,68 +1995,8 @@ ctr_object* ctr_music_rewind(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-int receiver_socket_descriptor;
-int socket_descriptor;
+
 int CtrNetworkConnectedFlag = 0;
-struct sockaddr_in host;
-struct sockaddr_in host2;
-
-#ifndef REPLACE_MEDIA_SOCK
-void ctr_internal_media_sock() {
-	receiver_socket_descriptor = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
-	printf("receiver_socket_descriptor = %d %s \n", receiver_socket_descriptor,strerror(errno));
-	if (receiver_socket_descriptor == -1) {
-		ctr_error("Unable to open receiver socket: %s.\n", CTR_ERR);
-	}
-	socket_descriptor = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
-	if (socket_descriptor == -1) {
-		ctr_error("Unable to open receiver socket: %s.", CTR_ERR);
-	}
-}
-#endif
-
-#ifdef WINDOWS_MEDIA_SOCK
-void ctr_internal_media_sock() {
-	u_long socket_mode = 1;
-	u_long socket_mode2 = 1;
-	receiver_socket_descriptor = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-	if (receiver_socket_descriptor == INVALID_SOCKET) {
-		ctr_error("Unable to open receiver socket: %s.", CTR_ERR);
-	}
-	socket_descriptor = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-	if (socket_descriptor == INVALID_SOCKET) {
-		ctr_error("Unable to open data socket: %s.", CTR_ERR);
-	}
-	if (ioctlsocket(receiver_socket_descriptor, FIONBIO, &socket_mode)) {
-		ctr_error("Unable to configure receiver socket: %s.", CTR_ERR);
-	}
-	if (ioctlsocket(socket_descriptor, FIONBIO, &socket_mode2)) {
-		ctr_error("Unable to configure data socket: %s.", CTR_ERR);
-	}
-}
-#endif
-
-
-#ifdef MAC_MEDIA_SOCK
-void ctr_internal_media_sock() {
-	receiver_socket_descriptor = socket(AF_INET, SOCK_DGRAM, 0);
-	if (receiver_socket_descriptor == -1) {
-		ctr_error("Unable to open receiver socket: %s.", CTR_ERR);
-	}
-	socket_descriptor = socket(AF_INET, SOCK_DGRAM, 0);
-	if (socket_descriptor == -1) {
-		ctr_error("Unable to open data socket: %s.", CTR_ERR);
-	}
-	if (fcntl(receiver_socket_descriptor, F_SETFL, O_NONBLOCK)) {
-		ctr_error("Unable to configure receiver socket: %s.", CTR_ERR);
-	}
-	if (fcntl(socket_descriptor, F_SETFL, O_NONBLOCK)) {
-		ctr_error("Unable to configure data socket: %s.", CTR_ERR);
-	}
-}
-#endif
-
-
 /**
  * @def
  * Network
@@ -2140,340 +2012,72 @@ ctr_object* ctr_network_new(ctr_object* myself, ctr_argument* argumentList) {
 	return instance;
 }
 
-int ctr_internal_network_activate() {
-	char* network_port_str;
-	int network_port_num;
-	if (CtrNetworkConnectedFlag == 0) {
-		#ifdef WINDOWS_MEDIA_SOCK
-		WSADATA version_info;
-		int success_winsock = WSAStartup(MAKEWORD(2,2), &version_info);
-		if (success_winsock != 0) {
-			ctr_error("WSAStartup failed: %s.", CTR_ERR);
-			CtrNetworkConnectedFlag = -1;
-		}
-		#endif
-		ctr_internal_media_sock();
+char* CtrMediaCurlBuffer;
+size_t CtrMediaCurlBufferSize;
+size_t CtrMediaCurlBytesRead;
+size_t ctr_curl_write_callback(char* ptr, size_t size, size_t nmemb, void *userdata) {
+	size_t len = (size * nmemb);
+	size_t required_size = len + CtrMediaCurlBytesRead;
+	if (required_size > CtrMediaCurlBufferSize) {
+		CtrMediaCurlBuffer = ctr_heap_reallocate(CtrMediaCurlBuffer, required_size);
+		CtrMediaCurlBufferSize = required_size;
 	}
-	if (CtrNetworkConnectedFlag == 0) {
-		host.sin_family = AF_INET;
-		host2.sin_family = AF_INET;
-		network_port_str = getenv("MediaNetPort1");
-		if (network_port_str == NULL) {
-			network_port_num = 9000;
-		} else {
-			network_port_num = atoi(network_port_str);
-		}
-		host.sin_port = htons(network_port_num);
-		host.sin_addr.s_addr = htonl(INADDR_ANY);
-		if (bind(receiver_socket_descriptor, (struct sockaddr *) &host, sizeof(host))==-1) {
-			ctr_error("Unable to bind reader socket to port %s.", CTR_ERR);
-			CtrNetworkConnectedFlag = -1;
-		}
-	}
-	if (CtrNetworkConnectedFlag == 0) {
-		host2.sin_addr.s_addr = htonl(INADDR_ANY);
-		host2.sin_port = htons(network_port_num + 1);
-		if (bind(socket_descriptor, (struct sockaddr *) &host2, sizeof(host2))==-1) {
-			ctr_error("Unable to bind writer socket to port %s.", CTR_ERR);
-			CtrNetworkConnectedFlag = -1;
-		}
-		CtrNetworkConnectedFlag = 1;
-	}
-	return CtrNetworkConnectedFlag;
+	memcpy(CtrMediaCurlBuffer+CtrMediaCurlBytesRead, ptr, len);
+	CtrMediaCurlBytesRead += len;
+	return len;
 }
-
-int ctr_internal_send_network_message(void* message, int messagelen, char* ip_str, uint16_t port) {
-	if (ctr_internal_network_activate() != 1) return 0;
-	struct sockaddr_in remote_host;
-	if (inet_pton(AF_INET, ip_str, &remote_host.sin_addr)==0) {
-		ctr_error("Invalid IP\n", 0);
-		return 0;
-	}
-	remote_host.sin_family = AF_INET;
-	remote_host.sin_port = htons(port);
-	int bytes_sent = sendto(socket_descriptor, message, messagelen, 0, (struct sockaddr*) &remote_host, sizeof(remote_host));
-	return bytes_sent;
-}
-
-
-int ctr_internal_receive_network_message(void* buffer, int messagelen, char* ip_str, uint16_t* port) {
-	if (ctr_internal_network_activate() != 1) return 0;
-	struct sockaddr_in source_host;
-	int bytes_received = 0;
-	socklen_t source_host_len = sizeof(struct sockaddr_in);
-	bytes_received = recvfrom(receiver_socket_descriptor, buffer, messagelen, 0, (struct sockaddr*) &source_host, &source_host_len);
-	if (bytes_received > 0) {
-		inet_ntop(AF_INET, (struct sockaddr*) &source_host.sin_addr, ip_str, source_host_len);
-		*port = ntohs(source_host.sin_port);
-	}
-	return bytes_received;
-}
-
-uint16_t CtrMediaNetworkCunkId = 1;
-
 
 /**
  * @def
- * [ Network ] text: [ Text ] to: [ Text ]
+ * [ Network ] send: [ Text ] to: [ Text ]
  * 
  * @example
- * Program setting: network port value: ‘9002’.
- * Network text: ‘hello’ to: ‘127.0.0.1:9000’.
+ * Network send: ‘hello’ to: ‘https://citrine-lang.org/test.ctr’.
  * 
  * @result
  * en: Sends a text message to the specified computer.
 */
 ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList) {
-	char* data = argumentList->object->value.svalue->value;
-	uint64_t total_size = argumentList->object->value.svalue->vlen;
-	int bytes_sent;
-	int bytes_received = -1;
-	uint16_t recipient_port = 0;
-	char ip_str_recipient[40];
-	char ip_str[40];
-	double timeout = 10;
-	double interval = 0.01;
-	uint16_t chunk_size = CtrMediaNetworkChunkSize;
-	uint16_t port = 9000;
-	uint64_t chunks = ceil((double)total_size / chunk_size);
-	char* ip_str_and_port = ctr_heap_allocate_cstring(argumentList->next->object);
-	char* colon_pos = strstr(ip_str_and_port,":");
-	if (colon_pos == NULL) {
-		strcpy(ip_str, ip_str_and_port);
-		ctr_heap_free(ip_str_and_port);
+	ctr_object* result;
+	char* message_str = NULL;
+	char* destination = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->next->object));
+	CURL* curl;
+	CURLcode res;
+	CtrMediaCurlBuffer = ctr_heap_allocate(10);
+	CtrMediaCurlBufferSize = 10;
+	CtrMediaCurlBytesRead = 0;
+	if (!CtrNetworkConnectedFlag) {
+		curl_global_init(CURL_GLOBAL_DEFAULT);
+	}
+	curl = curl_easy_init();
+	curl_easy_setopt(curl, CURLOPT_URL, destination);
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+	curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+	if (argumentList->object != CtrStdNil) {
+		message_str = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, message_str);
+	}
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &ctr_curl_write_callback);
+	res = curl_easy_perform(curl);
+	if(res != CURLE_OK) {
+		result = ctr_error((char*)curl_easy_strerror(res), 0);
 	} else {
-		memcpy(ip_str, ip_str_and_port, colon_pos-ip_str_and_port);
-		ip_str[colon_pos-ip_str_and_port]='\0';
-		ctr_heap_free(ip_str_and_port);
-		port = atoi(colon_pos+1);
-		if (port < 1024) {
-			ctr_error("Invalid port\n",0);
-			return CtrStdBoolFalse;
-		}
+		curl_easy_cleanup(curl);
+		result = ctr_build_string_from_cstring(CtrMediaCurlBuffer);
 	}
-	ctr_size i;
-	uint64_t remote_id = 0;
-	char buffer[500];
-	char buffer2[500];
-	memset(buffer, 0, 500);
-	memset(buffer2, 0, 500);
-	int retry = 3;
-	uint16_t chunk_id;
-	uint16_t remote_chunk_id;
-	for(i = 0; i < chunks; i++) {
-		chunk_id = CtrMediaNetworkCunkId++;
-		*(buffer + 0) = 1;
-		memcpy(buffer + 1, &total_size, 8);
-		memcpy(buffer + 9, (char*)&remote_id, 8);
-		uint64_t offset = i * chunk_size;
-		memcpy(buffer + 17, (char*)&offset, 8);
-		memcpy(buffer + 25, &chunk_size, 2);
-		memcpy(buffer + 27, data + offset, (int) fmin(chunk_size, total_size - offset));
-		memcpy(buffer + 27 + chunk_size, &chunk_id, 2);
-		bytes_sent = ctr_internal_send_network_message((void*)buffer, 500, ip_str, port);
-		if (!bytes_sent) {
-			return CtrStdBoolFalse;
-		}
-		while(1) {
-			bytes_received = ctr_internal_receive_network_message(buffer2, 500, ip_str_recipient, &recipient_port);
-			SDL_Delay(1);
-			timeout -= interval;
-			if (timeout < 1) break;
-			if (bytes_received > 0) {
-				memcpy(&remote_chunk_id, buffer2 + 9, 2);
-				if (remote_chunk_id == chunk_id) {
-					break;
-				}
-			}
-		}
-		if (timeout < 1 && retry>0) {
-			retry--;
-			timeout = 10;
-			i--;
-			CtrMediaNetworkCunkId--;
-			continue;
-		}
-		if (timeout < 1 && retry < 1) {
-			ctr_error("failed to send message\n", 0);
-			return CtrStdBoolFalse;
-		}
-		retry = 0;
-		if (buffer2[0] == 2) {
-			remote_id = (uint64_t) *((uint64_t*)(buffer2 + 1));
-		}
+	CtrMediaCurlBytesRead = 0;
+	if (CtrMediaCurlBufferSize) {
+		ctr_heap_free(CtrMediaCurlBuffer);
+		CtrMediaCurlBuffer = NULL;
+		CtrMediaCurlBufferSize = 0;
 	}
-	*(buffer + 0) = 1;
-	*(buffer + 1) = total_size;
-	memcpy(buffer + 9, (char*)&remote_id, 8);
-	uint64_t offset = i * chunk_size;
-	memcpy(buffer + 17, (char*)&offset, 8);
-	memset(buffer + 25, 0, 2);
-	chunk_id = CtrMediaNetworkCunkId++;
-	memcpy(buffer + 27 + 0, &chunk_id, 2);
-	retry = 3;
-	timeout = 10;
-	while(retry>0) {
-		bytes_sent = ctr_internal_send_network_message((void*)buffer, 500, ip_str, port);
-		while(1) {
-			bytes_received = ctr_internal_receive_network_message(buffer2, 500, ip_str_recipient, &recipient_port);
-			SDL_Delay(1);
-			timeout -= interval;
-			if (timeout < 1) break;
-			if (bytes_received > 0 && buffer2[0] == 2) {
-				memcpy(&remote_chunk_id, buffer2 + 9, 2);
-				if (remote_chunk_id == chunk_id) {
-					break;
-				} else {
-					ctr_error("received invalid reply\n", 0);
-					return CtrStdBoolFalse;
-				}
-			}
-		}
-		if (remote_chunk_id != chunk_id) {
-			if (timeout < 1 && retry>0) {
-				retry--;
-				timeout = 10;
-				continue;
-			}
-			if (timeout < 1 && retry < 1) {
-				ctr_error("failed to send final message\n", 0);
-				return CtrStdBoolFalse;
-			}
-		} else {
-			break;
-		}
+	ctr_heap_free(destination);
+	if (message_str) {
+		ctr_heap_free(message_str);
 	}
-	retry = 0;
-	return CtrStdBoolTrue;
+    return result;
 }
 
-
-char* documents[100];
-int max_documents = 100;
-
-struct document_lock {
-	time_t since;
-	char* ip_str;
-};
-typedef struct document_lock document_lock;
-
-document_lock* document_locks[100];
-
-uint16_t chunk_size;
-
-/**
- * @def
- * [ Network ] text messages
- * 
- * @example
- * ☞ receive ≔ Network text messages.
- * 
- * @result
- * en: Receives text messages send to this computer.
-*/
-ctr_object* ctr_network_basic_text_receive(ctr_object* myself, ctr_argument* argumentList) {
-	char buffer[500];
-	char buffer2[500];
-	char ip_str[40];
-	uint16_t src_port = 0;
-	int bytes_received = 0;
-	uint64_t offset = 0;
-	uint64_t document_id = 0;
-	int j;
-	uint64_t total_size = 0;
-	ctr_object* received_text_message = CtrStdNil;
-	double timeout = 10;
-	double interval = 0.01;
-	int expire_time = 10;
-	time_t current_time = time(NULL);
-	for(int i = 0; i<max_documents; i++) {
-		if (document_locks[i] != NULL && document_locks[i]->since < current_time - expire_time) {
-			free(documents[i]);
-			free(document_locks[i]->ip_str);
-			free((void*)document_locks[i]);
-			documents[i] = NULL;
-			document_locks[i] = NULL;
-		}
-	}
-	while(timeout>0) {
-		bytes_received = ctr_internal_receive_network_message(buffer, 500, ip_str, &src_port);
-		if (bytes_received < 1 || buffer[0]!=1) {
-			SDL_Delay(1);
-			timeout-=interval;
-			continue;
-		}
-		if (bytes_received > 0 && buffer[0] == 1) {
-			uint16_t chunk_id;
-			document_id = (uint64_t) *((uint64_t*)(buffer + 9));
-			if (document_id == 0) {
-				for(j=0; j<max_documents; j++) {
-					if (documents[j] == NULL) {
-						break;
-					}
-				}
-				if (j == max_documents) {
-					ctr_error("Message buffers full\n", 0);
-					return CtrStdNil;
-				}
-				total_size = (ctr_size) *((ctr_size*)(buffer + 1));
-				documents[j] = malloc(total_size);
-				document_locks[j] = (document_lock*) malloc(sizeof(document_lock));
-				document_locks[j]->since = time(NULL);
-				document_locks[j]->ip_str = malloc(40);
-				memcpy(document_locks[j]->ip_str, ip_str, 40);
-				memcpy(&chunk_size, buffer + 25, 2);
-				offset = *(buffer + 17);
-				memcpy(documents[j] + offset, buffer + 27, (int) fmin(chunk_size, total_size - offset));
-			} else {
-				for(j=0; j<max_documents; j++) {
-					#ifdef WIN32_BIT
-					if ((uint32_t) documents[j] == (uint32_t) *((uint64_t*)(buffer + 9))) {
-						break;
-					}
-					#else
-					if ((uint64_t) documents[j] == (uint64_t) *((uint64_t*)(buffer + 9))) {
-						break;
-					}
-					#endif
-				}
-				if (j == max_documents && chunk_size>0) {
-					ctr_error("Message buffer not found\n", 0);
-					return CtrStdNil;
-				}
-				total_size = (ctr_size) *((ctr_size*)(buffer + 1));
-				offset = (uint64_t) *((uint64_t*)(buffer + 17));
-				memcpy(&chunk_size, buffer + 25, 2);
-				if (chunk_size == 0 && j != max_documents) {
-					received_text_message = ctr_build_string((char*) documents[j], (ctr_size) total_size);
-					received_text_message->info.sticky = 1;
-					free(documents[j]);
-					free(document_locks[j]->ip_str);
-					free((void*)document_locks[j]);
-					documents[j] = NULL;
-					document_locks[j] = NULL;
-				} else {
-					memcpy(documents[j] + offset, buffer + 27, (int) fmin(chunk_size, total_size - offset));
-				}
-			}
-			memcpy(&chunk_id, buffer + 27 + chunk_size, 2);
-			memset(buffer2, 0, 500);
-			*(buffer2 + 0) = 2;
-			if (j == max_documents) {
-				memset(buffer2 + 1,  0, 8);
-			} else {
-				memcpy(buffer2 + 1,  (uint64_t*) &documents[j], 8);
-			}
-			memcpy(buffer2 + 9,  (char*) &chunk_id, 2);
-			int bytes_sent = ctr_internal_send_network_message((void*)buffer2, 500, ip_str, src_port-1);
-			if (!bytes_sent) {
-				ctr_error("Unable to sent message receipt\n", 0);
-				return CtrStdNil;
-			}
-		}
-		if (received_text_message != CtrStdNil) break;
-	}
-	return received_text_message;
-}
 
 /**
  * @def
@@ -3904,6 +3508,7 @@ ctr_object* ctr_media_datastart(ctr_object* myself, ctr_argument* none) {
 
 
 void begin(){
+	ctr_gc_clean_free = 1; // only for debugging
 	#ifdef WIN
 	FreeConsole();
 	#endif
@@ -4002,7 +3607,6 @@ void begin(){
 	networkObject->link = CtrStdObject;
 	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_network_new );
 	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring(CTR_DICT_SEND_TEXT_MESSAGE), &ctr_network_basic_text_send );
-	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring(CTR_DICT_FETCH_TEXT_MESSAGES), &ctr_network_basic_text_receive );
 	packageObject = ctr_package_new(CtrStdObject, NULL);
 	packageObject->link = CtrStdObject;
 	ctr_internal_create_func(packageObject, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_package_new_set );
