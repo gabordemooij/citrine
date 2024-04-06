@@ -14,6 +14,25 @@ extern JNIEXPORT jstring JNICALL Java_com_citrine_citrineandroid_MainActivity_st
 }
 */
 
+ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* rs;
+	char* data = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+	char* url = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->next->object));
+	JNIEnv* env = (JNIEnv*) SDL_AndroidGetJNIEnv();
+	jclass mha = (*env)->FindClass(env, "org/libsdl/app/MediaHelperAndroid");
+	jmethodID mid = (*env)->GetStaticMethodID(env, mha, "httpRequest", "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;");
+	jstring jurl=(*env)->NewStringUTF(env, url);
+	jstring jdata=(*env)->NewStringUTF(env, data);
+	jstring result = (jstring) (*env)->CallStaticObjectMethod(env,mha, mid, jurl, jdata);
+	const char* nativeString = (const char*) (*env)->GetStringUTFChars(env, result, 0);
+	rs = ctr_build_string_from_cstring( (char*) nativeString);
+    (*env)->ReleaseStringUTFChars(env, result, nativeString);
+    (*env)->DeleteLocalRef(env, jurl);
+    (*env)->DeleteLocalRef(env, jdata);
+    ctr_heap_free(url);
+    ctr_heap_free(data);
+    return rs;
+}
 
 static char* embedded_program = "\
 Media _datastart.\
