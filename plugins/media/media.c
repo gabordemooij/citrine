@@ -26,8 +26,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#ifndef EXPORT_ANDROID
 #include <curl/curl.h>
-
+#endif
 
 SDL_Window* CtrMediaWindow = NULL;
 SDL_Renderer* CtrMediaRenderer = NULL;
@@ -2012,6 +2013,7 @@ ctr_object* ctr_network_new(ctr_object* myself, ctr_argument* argumentList) {
 	return instance;
 }
 
+#ifndef EXPORT_ANDROID
 char* CtrMediaCurlBuffer;
 size_t CtrMediaCurlBufferSize;
 size_t CtrMediaCurlBytesRead;
@@ -2077,7 +2079,9 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 	}
     return result;
 }
-
+#else
+extern ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList);
+#endif
 
 /**
  * @def
@@ -3506,6 +3510,14 @@ ctr_object* ctr_media_datastart(ctr_object* myself, ctr_argument* none) {
 	return myself;
 }
 
+ctr_object* ctr_media_dialog(ctr_object* myself, ctr_argument* argumentList) {
+	char* message = ctr_heap_allocate_cstring(
+		ctr_internal_cast2string(argumentList->object)
+	);
+	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Message", message, CtrMediaWindow);
+	ctr_heap_free(message);
+	return CtrStdNil;
+}
 
 void begin(){
 	ctr_gc_clean_free = 1; // only for debugging
@@ -3556,6 +3568,7 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "sys:" ), &ctr_media_system );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "use:" ), &ctr_media_include );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "_datastart" ), &ctr_media_datastart );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "dialog:" ), &ctr_media_dialog );
 	#ifdef WIN
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring(CTR_DICT_WRITE), &ctr_media_console_write );
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_STOP ), &ctr_media_console_brk );
