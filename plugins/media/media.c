@@ -2084,6 +2084,12 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 }
 #endif
 
+#ifdef ANDROID_EXPORT
+// For Android we use JNI
+extern ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList);
+#endif
+
+
 /**
  * @def
  * Image
