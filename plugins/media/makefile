@@ -10,7 +10,7 @@ libctrmedia.so: media.o
 	ld ${LDFLAGS} -lcurl -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -o libctrmedia.so media.o
 
 media.o:
-	cc -I . -c media.c -I /usr/include/SDL -I ../../i18n/${ISO} -I i18n/${ISO} -Wall -Werror -fPIC -o media.o
+	cc -D LIBCURL -D FFI -I . -c media.c -I /usr/include/SDL -I ../../i18n/${ISO} -I i18n/${ISO} -Wall -Werror -fPIC -o media.o
 
 clean:
 	rm -rf libctrmedia.so
