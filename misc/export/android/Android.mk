@@ -20,7 +20,7 @@ orig/system.c orig/translator.c orig/walker.c \
 orig/collections.c  orig/portability.c orig/test.c \
 orig/utf8.c orig/world.c orig/plugins/media/media.c
 
-LOCAL_CFLAGS += -D EXPORT_ANDROID -D FULLSCREEN
+LOCAL_CFLAGS += -D SDL -D EXPORT_ANDROID -D FULLSCREEN
 
 $(orig/*.c)
 

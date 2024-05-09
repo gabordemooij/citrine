@@ -10,11 +10,13 @@
 
 #define PL_MPEG_IMPLEMENTATION
 
+#ifdef SDL
 #include "pl_mpeg.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_ttf.h>
+#endif
 
 #include <stdio.h>
 #include <math.h>
@@ -29,6 +31,10 @@
 
 #ifdef FFI
 #include <ffi.h>
+#endif
+
+#ifdef MOCK
+#include "mock.h"
 #endif
 
 SDL_Window* CtrMediaWindow = NULL;
