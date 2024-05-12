@@ -11,9 +11,7 @@ install: ctr
 	cp ./ctr /usr/bin/ctr
 
 ctr:	$(OBJS)
-	$(CC) $(OBJS) -rdynamic -undefined dynamic_lookup -lm -o ctr
-	cp ctr bin/${OS}/ctr
-	cp ctr bin/${OS}/ctr${ISO}
+	$(CC) $(OBJS) -rdynamic -undefined dynamic_lookup -lm -o bin/Mac/ctr${ISO}
 
 .c.o:
 	$(CC) $(CFLAGS) $(EXTRACFLAGS) -I i18n/${ISO} -c $<
