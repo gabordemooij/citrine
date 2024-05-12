@@ -3904,10 +3904,10 @@ ctr_object* ctr_package_add(ctr_object* myself, ctr_argument* argumentList) {
 		fwrite(&next_entry, sizeof(uint64_t), 1, outfile);
 		fclose(outfile);
 		fclose(f);
+		ctr_heap_free(path);
 	} else {
 		ctr_error("Invalid argument\n", 0);
 	}
-	ctr_heap_free(path);
 	ctr_heap_free(pkgpath);
 	return myself;
 }
