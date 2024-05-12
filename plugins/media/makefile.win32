@@ -13,7 +13,7 @@ libctrmedia.dll: media.o
 	$(CC) ${LDFLAGS} media.o -lws2_32 -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf ../../ctr${ISO}import.lib -o libctrmedia.dll
 
 media.o:
-	$(CC) ${CFLAGS} -I /usr/i686-w64-mingw32/include -I /usr/include/SDL2 -I ../../i18n/${ISO} -I i18n/${ISO} -c media.c -Wall -Werror -fPIC -o media.o
+	$(CC) ${CFLAGS} -D SDL -I /usr/i686-w64-mingw32/include -I /usr/include/SDL2 -I ../../i18n/${ISO} -I i18n/${ISO} -c media.c -Wall -Werror -fPIC -o media.o
 
 clean:
 	rm media.o
