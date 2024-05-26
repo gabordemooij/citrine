@@ -100,6 +100,7 @@ struct MediaIMG {
 	double			fric;		double			accel;
 	double			speed;		double				dir;
 	double			mov;		int				anims;
+	int				animspeed;
 	int				solid;		int				collidable;
 	char*			text;		TTF_Font*		font;
 	char			editable;	ctr_object*		ref;
@@ -629,7 +630,7 @@ void ctr_internal_media_infercursorpos(MediaIMG* image, int x, int y) {
 
 void ctr_internal_media_anim_frames(MediaIMG* m, SDL_Rect* r, SDL_Rect* s) {
 	int frame_width = m->w / (m->anims ? m->anims : 1);
-	int step_offset = (m->mov) ? (int)floor(m->x / 5) % m->anims : 0;
+	int step_offset = (m->mov) ? (int)floor(m->x / m->animspeed) % m->anims : 0;
 	r->w = (m->anims > 0 && m->w > m->anims) ? m->w / m->anims : m->w;
 	r->h = m->h;
 	s->x = (frame_width * step_offset); 
@@ -898,7 +899,7 @@ void ctr_internal_media_detect_collisions(MediaIMG* m, SDL_Rect r) {
 void ctr_internal_media_camera(MediaIMG* m, SDL_Rect* s, SDL_Rect* r, MediaIMG* player) {
 	static SDL_Rect camera;
 	static int init_camera = 0;
-	int border = 100;
+	int border = CtrMediaCamera.w * 0.3;
 	camera.w = CtrMediaCamera.w;
 	camera.h = CtrMediaCamera.h;
 	int left = camera.x + border;
@@ -980,7 +981,7 @@ void ctr_internal_media_render_image(MediaIMG* m, SDL_Rect r, SDL_Rect s, MediaI
 					xdir = CtrMediaLastFrameOffsetX;
 				}
 			}
-			SDL_RenderCopyEx(CtrMediaRenderer, m->texture, &s, &r, 0, NULL, (xdir == 180) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+			SDL_RenderCopyEx(CtrMediaRenderer, m->texture, &s, &r, 0, NULL, ( xdir >= 180 && xdir <= 270  ) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 		} else {
 			SDL_RenderCopyEx(CtrMediaRenderer, m->texture, &s, &r, (m->dir == -1 ? 0 : m->dir), NULL, (m->dir == 90 || m->dir == 270) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 		}
@@ -2156,6 +2157,7 @@ ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 		mediaImage->dir = -1;
 		mediaImage->mov = 0;
 		mediaImage->anims = 1;
+		mediaImage->animspeed = 5;
 		mediaImage->editable = 0;
 		mediaImage->text = NULL;
 		mediaImage->paddingx = 0;
@@ -2609,6 +2611,12 @@ ctr_object* ctr_img_anims(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+ctr_object* ctr_media_anim_speed(ctr_object* myself, ctr_argument* argumentList) {
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
+	image->animspeed = (int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
+	return myself;
+}
 
 /**
  * @def
@@ -4246,6 +4254,7 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_BACKGROUND_COLOR_SET ), &ctr_img_background_color );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_ALIGN_XY_SET ), &ctr_img_text_align );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_DRAW_COLOR_SET ), &ctr_img_draw );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "aspeed:" ), &ctr_media_anim_speed );
 	audioObject = ctr_audio_new(CtrStdObject, NULL);
 	audioObject->link = CtrStdObject;
 	ctr_internal_create_func(audioObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_audio_new );
