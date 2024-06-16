@@ -1188,6 +1188,25 @@ ctr_object* ctr_media_timer(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+
+void ctr_internal_media_recalcy_img(MediaIMG* mediaImage, int old_height, int oldWindowHeight) {
+	//get the natural y back (has to be calc dynamic, because changes)
+	int image_y = mediaImage->y; // this is the top, we need the bottom
+	image_y += old_height; // so, add the height
+	image_y = oldWindowHeight - image_y; // get the natural y
+	// now calculate the new unnatural y
+	image_y = windowHeight - image_y;
+	image_y -= mediaImage->h;
+	mediaImage->y = image_y;
+	mediaImage->oy = image_y;
+}
+
+void ctr_internal_media_recalcy(int oldWindowHeight) {
+	for (int j = 0; j < IMGCount; j++) {
+		ctr_internal_media_recalcy_img(&mediaIMGs[j], mediaIMGs[j].h, oldWindowHeight);
+	}
+}
+
 /**
  * @def
  * [ Media ] screen: [ Text ]
@@ -1248,7 +1267,11 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	ctr_heap_free(imageFileStr);
 	windowWidth = dimensions.w;
+	int oldWindowHeight = windowHeight;
 	windowHeight = dimensions.h;
+	
+	ctr_internal_media_recalcy(oldWindowHeight);
+	
 	SDL_GL_GetDrawableSize(CtrMediaWindow, &CtrMediaDrawSizeX, &CtrMediaDrawSizeY);
 	ctr_send_message(myself, CTR_DICT_RUN, strlen(CTR_DICT_RUN), NULL );
 	if (CtrStdFlow) return myself;
@@ -2096,6 +2119,10 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 extern ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList);
 #endif
 
+void ctr_img_destructor(ctr_resource* rs) {
+	MediaIMG* image = (MediaIMG*) rs->ptr;
+	image->ref = NULL;
+}
 
 /**
  * @def
@@ -2114,13 +2141,45 @@ extern ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument*
 ctr_object* ctr_img_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
 	instance->link = myself;
+	MediaIMG* mediaImage = &mediaIMGs[IMGCount++];
+	mediaImage->x = 0;
+	mediaImage->y = 0;
+	mediaImage->ox = 0;
+	mediaImage->oy = 0;
+	mediaImage->tx = -1;
+	mediaImage->ty = -1;
+	mediaImage->bounce = 0;
+	mediaImage->fixed = 0;
+	mediaImage->ghost = 0;
+	mediaImage->solid = 0;
+	mediaImage->collidable = 0;
+	mediaImage->gravity = 0;
+	mediaImage->speed = 1;
+	mediaImage->fric = 0;
+	mediaImage->accel = 1;
+	mediaImage->gspeed = 0;
+	mediaImage->dir = -1;
+	mediaImage->mov = 0;
+	mediaImage->anims = 1;
+	mediaImage->animspeed = 5;
+	mediaImage->editable = 0;
+	mediaImage->text = NULL;
+	mediaImage->paddingx = 0;
+	mediaImage->paddingy = 0;
+	mediaImage->textlength = 0;
+	mediaImage->textbuffer = 0;
+	mediaImage->font = NULL;
+	mediaImage->color = (SDL_Color) {0,0,0,0};
+	mediaImage->backgroundColor = (SDL_Color) {0,0,0,0};
+	mediaImage->ref = instance;
+	ctr_resource* rs = ctr_heap_allocate( sizeof(ctr_resource) );
+	rs->ptr = mediaImage;
+	rs->destructor = &ctr_img_destructor;
+	instance->value.rvalue = rs;
 	return instance;
 }
 
-void ctr_img_destructor(ctr_resource* rs) {
-	MediaIMG* image = (MediaIMG*) rs->ptr;
-	image->ref = NULL;
-}
+
 
 /**
  * @def
@@ -2138,43 +2197,6 @@ ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 	dimensions.x = 0;
 	dimensions.y = 0;
 	MediaIMG* mediaImage = ctr_internal_get_image_from_object(myself);
-	if (mediaImage == NULL) {
-		mediaImage = &mediaIMGs[IMGCount++];
-		mediaImage->x = 0;
-		mediaImage->y = 0;
-		mediaImage->ox = 0;
-		mediaImage->oy = 0;
-		mediaImage->tx = -1;
-		mediaImage->ty = -1;
-		mediaImage->bounce = 0;
-		mediaImage->fixed = 0;
-		mediaImage->ghost = 0;
-		mediaImage->solid = 0;
-		mediaImage->collidable = 0;
-		mediaImage->gravity = 0;
-		mediaImage->speed = 1;
-		mediaImage->fric = 0;
-		mediaImage->accel = 1;
-		mediaImage->gspeed = 0;
-		mediaImage->dir = -1;
-		mediaImage->mov = 0;
-		mediaImage->anims = 1;
-		mediaImage->animspeed = 5;
-		mediaImage->editable = 0;
-		mediaImage->text = NULL;
-		mediaImage->paddingx = 0;
-		mediaImage->paddingy = 0;
-		mediaImage->textlength = 0;
-		mediaImage->textbuffer = 0;
-		mediaImage->font = NULL;
-		mediaImage->color = (SDL_Color) {0,0,0,0};
-		mediaImage->backgroundColor = (SDL_Color) {0,0,0,0};
-		mediaImage->ref = myself;
-		ctr_resource* rs = ctr_heap_allocate( sizeof(ctr_resource) );
-		rs->ptr = mediaImage;
-		rs->destructor = &ctr_img_destructor;
-		myself->value.rvalue = rs;
-	}
 	char* imageFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	SDL_RWops* res;
 	res = ctr_internal_media_load_asset(imageFileStr, 1);
@@ -2190,8 +2212,10 @@ ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 	if (mediaImage->surface == NULL) ctr_internal_media_fatalerror("Unable to load surface", imageFileStr);
 	ctr_heap_free(imageFileStr);
 	SDL_QueryTexture(mediaImage->texture, NULL, NULL, &dimensions.w, &dimensions.h);
+	int oldh = mediaImage->h;
 	mediaImage->h = dimensions.h;
 	mediaImage->w = dimensions.w;
+	ctr_internal_media_recalcy_img(mediaImage, oldh, windowHeight);
 	return myself;
 }
 
@@ -2254,11 +2278,11 @@ ctr_object* ctr_img_controllable(ctr_object* myself, ctr_argument* argumentList)
 ctr_object* ctr_img_xy(ctr_object* myself, ctr_argument* argumentList) {
 	int x = (int) ctr_tonum(ctr_internal_cast2number(argumentList->object));
 	int y = (int) ctr_tonum(ctr_internal_cast2number(argumentList->next->object));
-	ctr_internal_natural_y(&y);
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
+	ctr_internal_natural_y(&y);
+	image->oy = y - image->h;
 	image->ox = x;
-	image->oy = y;
 	image->x = x;
 	image->y = y - image->h;
 	return myself;
