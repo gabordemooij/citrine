@@ -1885,6 +1885,9 @@ ctr_object* ctr_sound_play(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+//@todo better asset management, opening the same file again and again
+//may cause problems with open handles (workaround can be use multiple files for diff. images)
+//I may need to implement some sort of asset manager that keeps track of files/handles.
 SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
 	SDL_RWops* res = NULL;
 	// If we have no asset package, load from file instead
