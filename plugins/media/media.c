@@ -111,6 +111,7 @@ struct MediaIMG {
 	char 			bounce;
 	char            fixed;
 	char            ghost;
+	SDL_RWops*      res;
 };
 typedef struct MediaIMG MediaIMG;
 
@@ -860,14 +861,14 @@ void ctr_internal_media_detect_collisions(MediaIMG* m, SDL_Rect r) {
 	collider->next = NULL;
 	for (int j = 0; j < IMGCount; j++) {
 		MediaIMG* m2 = &mediaIMGs[j];
-		if (m2 == m || m->fixed || m2->fixed || m->ghost || m2->ghost) continue;
+		if (m2 == m || m->fixed || m2->fixed) continue;
 		int h,w,w2;
 		h = (int) m->h;
 		w = (int) m->w / (m->anims ? m->anims : 1);
 		w2 = (int) m2->w / (m2->anims ? m2->anims : 1);
 		r2 = ctr_internal_media_image_maprect(m2);
 		if (SDL_HasIntersection(&r,&r2)) {
-			if (m2->solid) {
+			if (m2->solid && !m->ghost) {
 				if (m->gravity && m->x+w >= m2->x && m->x <= m2->x+w2 && m->y+h <= m2->y+(m->h/2)) {
 						m->y = m2->y - h + 1;
 						m->gspeed = 0;
@@ -1278,7 +1279,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	SDL_Event event;
 	dir = -1;
 	c4speed = 0;
-	while (1) {
+	while (!CtrStdFlow) {
 		ctr_gc_cycle(); 
 		SDL_RenderClear(CtrMediaRenderer);
 		player = NULL;
@@ -2208,12 +2209,17 @@ ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* mediaImage = ctr_internal_get_image_from_object(myself);
 	char* imageFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	SDL_RWops* res;
+	if (mediaImage->res) {
+		SDL_RWclose(mediaImage->res);
+		mediaImage->res = NULL;
+	}
 	res = ctr_internal_media_load_asset(imageFileStr, 1);
 	if (res == NULL) {
 		ctr_heap_free(imageFileStr);
 		ctr_error(CTR_ERR_FOPEN, 0);
 		return myself;
 	}
+	mediaImage->res = res;
 	mediaImage->texture = (void*) IMG_LoadTexture_RW(CtrMediaRenderer, res, 0);
 	SDL_RWseek(res, 0, RW_SEEK_SET);
 	mediaImage->surface = (void*) IMG_Load_RW(res, 0);
