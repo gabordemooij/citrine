@@ -1208,6 +1208,16 @@ void ctr_internal_media_recalcy(int oldWindowHeight) {
 	}
 }
 
+void ctr_internal_media_update_timers(ctr_object* media) {
+	for(int i = 1; i <= CtrMaxMediaTimers; i++) {
+		if (CtrMediaTimers[i] < 0) continue;
+		if (CtrMediaTimers[i] == 0) {
+			ctr_media_event_timer(media, CTR_DICT_ON_TIMER, i);
+		}
+		CtrMediaTimers[i]--;
+	}
+}
+
 /**
  * @def
  * [ Media ] screen: [ Text ]
@@ -1296,15 +1306,6 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 			SDL_RenderCopy(CtrMediaRenderer, texture, &s, &dimensions);
 		}
 		myself->info.sticky = 1;
-		if (CtrMediaEventListenFlagTimer) {
-			for(int i = 1; i <= CtrMaxMediaTimers; i++) {
-				if (CtrMediaTimers[i] < 0) continue;
-				if (CtrMediaTimers[i] == 0) {
-					ctr_media_event_timer(myself, CTR_DICT_ON_TIMER, i);
-				}
-				CtrMediaTimers[i]--;
-			}
-		}
 		if (CtrMediaEventListenFlagStep) {
 			ctr_send_message(myself, CTR_DICT_ON_STEP, strlen(CTR_DICT_ON_STEP), NULL );
 		}
@@ -1313,7 +1314,10 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 			ctr_internal_media_reset();
 			return myself;
 		}
+		//Update timers, both outside and inside event loop (otherwise you could stall it)
+		if (CtrMediaEventListenFlagTimer) ctr_internal_media_update_timers(myself);
 		while (SDL_PollEvent(&event)) {
+			if (CtrMediaEventListenFlagTimer) ctr_internal_media_update_timers(myself);
 			player = NULL;
 			focusImage = NULL;
 			if (controllableObject) {
