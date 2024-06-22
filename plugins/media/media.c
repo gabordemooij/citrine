@@ -1332,6 +1332,15 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 					return myself;
 					}
 					break;
+				case SDL_MOUSEWHEEL:
+					if (focusObject) { //only for text areas
+						if (event.wheel.y>0) {
+							ctr_internal_media_keydown_up(NULL, NULL);
+						} else {
+							ctr_internal_media_keydown_down(NULL, NULL);
+						}
+					}
+					break;
 				case SDL_MOUSEMOTION:
 					if (CtrMediaSelectStart && focusImage) {
 							focusImage = ctr_internal_media_getfocusimage();
