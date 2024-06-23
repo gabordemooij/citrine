@@ -1209,7 +1209,7 @@ void ctr_internal_media_recalcy(int oldWindowHeight) {
 }
 
 void ctr_internal_media_update_timers(ctr_object* media) {
-	for(int i = 1; i <= CtrMaxMediaTimers; i++) {
+	for(int i = 1; i < CtrMaxMediaTimers; i++) {
 		if (CtrMediaTimers[i] < 0) continue;
 		if (CtrMediaTimers[i] == 0) {
 			ctr_media_event_timer(media, CTR_DICT_ON_TIMER, i);
