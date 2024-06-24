@@ -2705,11 +2705,13 @@ ctr_object* ctr_media_anim_speed(ctr_object* myself, ctr_argument* argumentList)
 ctr_object* ctr_img_font(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
-	//@todo use asset manager
 	char* path = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
-	image->font = TTF_OpenFont(path, (int)ctr_internal_cast2number(argumentList->next->object)->value.nvalue);
+	SDL_RWops* res = ctr_internal_media_load_asset(path, 1);
 	ctr_heap_free(path);
-	if (image->font == NULL) ctr_internal_media_fatalerror("Unable to load font", "TTF Font");
+	if (res == NULL) {
+		ctr_internal_media_fatalerror("Unable to load font", "TTF Font");
+	}
+	image->font = TTF_OpenFontRW(res, 1, (int)ctr_internal_cast2number(argumentList->next->object)->value.nvalue);
 	/* Allow to set compile-time FONTSCRIPT for Harfbuzz shaper */
 	#ifdef FONTSCRIPT
 	int script_ok = TTF_SetFontScriptName(image->font, FONTSCRIPT);
