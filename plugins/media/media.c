@@ -37,6 +37,8 @@
 #include "mock.h"
 #endif
 
+//@todo: Fix jump inactive
+
 SDL_Window* CtrMediaWindow = NULL;
 SDL_Renderer* CtrMediaRenderer = NULL;
 
@@ -824,7 +826,7 @@ void ctr_internal_media_keydown_up(int* dir, int* c4speed) {
 	} else {
 		if (controllableObject) {
 			player = (MediaIMG*) controllableObject->value.rvalue->ptr;
-			if (player->gravity >= 1) {
+			if (player->gravity >= 1 && CtrMediaControlMode == 1) {
 				if (CtrMediaJump == 0) {
 					CtrMediaJump = 1;
 				}
@@ -2703,6 +2705,7 @@ ctr_object* ctr_media_anim_speed(ctr_object* myself, ctr_argument* argumentList)
 ctr_object* ctr_img_font(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
+	//@todo use asset manager
 	char* path = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	image->font = TTF_OpenFont(path, (int)ctr_internal_cast2number(argumentList->next->object)->value.nvalue);
 	ctr_heap_free(path);
