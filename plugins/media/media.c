@@ -113,7 +113,6 @@ struct MediaIMG {
 	char 			bounce;
 	char            fixed;
 	char            ghost;
-	SDL_RWops*      res;
 };
 typedef struct MediaIMG MediaIMG;
 
@@ -1827,8 +1826,15 @@ ctr_object* ctr_audio_new(ctr_object* myself, ctr_argument* argumentList) {
 	return instance;
 }
 
-void ctr_audio_destructor(ctr_resource* rs) {
+void ctr_music_destructor(ctr_resource* rs) {
 	MediaAUD* mediaAUD = (MediaAUD*) rs->ptr;
+	Mix_FreeMusic(mediaAUD->blob);
+	mediaAUD->ref = NULL;
+}
+
+void ctr_sound_destructor(ctr_resource* rs) {
+	MediaAUD* mediaAUD = (MediaAUD*) rs->ptr;
+	Mix_FreeChunk(mediaAUD->blob);
 	mediaAUD->ref = NULL;
 }
 
@@ -1861,7 +1867,7 @@ ctr_object* ctr_sound_new_set(ctr_object* myself, ctr_argument* argumentList) {
 	if (mediaAUD->blob == NULL) {
 		CtrStdFlow = ctr_build_string_from_cstring((char*)SDL_GetError());
 	}
-	rs->destructor = &ctr_audio_destructor;
+	rs->destructor = &ctr_sound_destructor;
 	AUDCount++;
 	ctr_heap_free(audioFileStr);
 	return audioInst;
@@ -1887,9 +1893,7 @@ ctr_object* ctr_sound_play(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
-//@todo better asset management, opening the same file again and again
-//may cause problems with open handles (workaround can be use multiple files for diff. images)
-//I may need to implement some sort of asset manager that keeps track of files/handles.
+
 SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
 	SDL_RWops* res = NULL;
 	// If we have no asset package, load from file instead
@@ -1938,6 +1942,7 @@ SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
 	return res;
 }
 
+
 /**
  * @def
  * Music
@@ -1970,7 +1975,7 @@ ctr_object* ctr_music_new_set(ctr_object* myself, ctr_argument* argumentList) {
 	if (mediaAUD->blob == NULL) {
 		CtrStdFlow = ctr_build_string_from_cstring((char*)SDL_GetError());
 	}
-	rs->destructor = &ctr_audio_destructor;
+	rs->destructor = &ctr_music_destructor;
 	AUDCount++;
 	ctr_heap_free(audioFileStr);
 	return audioInst;
@@ -2138,8 +2143,18 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 extern ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList);
 #endif
 
+
 void ctr_img_destructor(ctr_resource* rs) {
 	MediaIMG* image = (MediaIMG*) rs->ptr;
+	if (image->texture) {
+		SDL_DestroyTexture(image->texture);
+	}
+	if (image->surface) {
+		SDL_FreeSurface(image->surface);
+	}
+	if (image->font) {
+		TTF_CloseFont(image->font);
+	}
 	image->ref = NULL;
 }
 
@@ -2188,6 +2203,8 @@ ctr_object* ctr_img_new(ctr_object* myself, ctr_argument* argumentList) {
 	mediaImage->textlength = 0;
 	mediaImage->textbuffer = 0;
 	mediaImage->font = NULL;
+	mediaImage->texture = NULL;
+	mediaImage->surface = NULL;
 	mediaImage->color = (SDL_Color) {0,0,0,0};
 	mediaImage->backgroundColor = (SDL_Color) {0,0,0,0};
 	mediaImage->ref = instance;
@@ -2218,22 +2235,20 @@ ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* mediaImage = ctr_internal_get_image_from_object(myself);
 	char* imageFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	SDL_RWops* res;
-	if (mediaImage->res) {
-		SDL_RWclose(mediaImage->res);
-		mediaImage->res = NULL;
-	}
 	res = ctr_internal_media_load_asset(imageFileStr, 1);
 	if (res == NULL) {
 		ctr_heap_free(imageFileStr);
 		ctr_error(CTR_ERR_FOPEN, 0);
 		return myself;
 	}
-	mediaImage->res = res;
-	mediaImage->texture = (void*) IMG_LoadTexture_RW(CtrMediaRenderer, res, 0);
-	SDL_RWseek(res, 0, RW_SEEK_SET);
-	mediaImage->surface = (void*) IMG_Load_RW(res, 0);
-	if (mediaImage->texture == NULL) ctr_internal_media_fatalerror("Unable to load texture", imageFileStr);
-	if (mediaImage->surface == NULL) ctr_internal_media_fatalerror("Unable to load surface", imageFileStr);
+	mediaImage->surface = (void*) IMG_Load_RW(res, 1);
+	if (mediaImage->surface == NULL) {
+		ctr_internal_media_fatalerror("Unable to load surface", imageFileStr);
+	}
+	mediaImage->texture = SDL_CreateTextureFromSurface(CtrMediaRenderer, mediaImage->surface);
+	if (mediaImage->texture == NULL) {
+		ctr_internal_media_fatalerror("Unable to load texture", imageFileStr);
+	}
 	ctr_heap_free(imageFileStr);
 	SDL_QueryTexture(mediaImage->texture, NULL, NULL, &dimensions.w, &dimensions.h);
 	int oldh = mediaImage->h;
