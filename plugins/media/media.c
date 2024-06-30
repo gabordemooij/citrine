@@ -37,7 +37,11 @@
 #include "mock.h"
 #endif
 
-//@todo: Fix jump inactive
+uint64_t CtrMediaTicks1 = 0;
+uint64_t CtrMediaTicks2 = 0;
+uint64_t CtrMediaPerfCountStart = 0;
+uint64_t CtrMediaPerfCountEnd = 0;
+char CtrMediaFlagSoftwareVSync = 0;
 
 SDL_Window* CtrMediaWindow = NULL;
 SDL_Renderer* CtrMediaRenderer = NULL;
@@ -55,7 +59,7 @@ int CtrMediaLastFrameOffsetX = 0;
 int CtrMediaJumpHeightFactor = 100;
 int CtrMediaControlMode = 0;
 int CtrMediaRotation = 0;
-int CtrMediaStdDelayTime = 16;
+int CtrMediaStdDelayTime = 0;
 char CtrMediaBreakLoopFlag = 0;
 uint16_t CtrMediaNetworkChunkSize = 350;
 time_t CtrMediaFrameTimer = 0;
@@ -222,7 +226,7 @@ void ctr_internal_media_reset() {
 	CtrMediaJumpHeightFactor = 100;
 	CtrMediaControlMode = 0;
 	CtrMediaRotation = 0;
-	CtrMediaStdDelayTime = 16;
+	CtrMediaStdDelayTime = 0; // Only for testing
 	CtrMediaBreakLoopFlag = 0;
 	CtrMediaInputIndex = 0;
 	CtrMediaSelectStart = 0;
@@ -709,14 +713,14 @@ int ctr_internal_media_mouse_down(SDL_Event event) {
 				CtrMediaSelectBegin = CtrMediaInputIndex;
 				CtrMediaSelectEnd = CtrMediaInputIndex;
 				CtrMediaDoubleClick = 0;
-				if(!SDL_TICKS_PASSED(SDL_GetTicks(), CtrMediaPrevClickTime + 1000) && CtrMediaPrevClickX == event.button.x && CtrMediaPrevClickY == event.button.y ) {
+				if(!SDL_TICKS_PASSED(SDL_GetTicks64(), CtrMediaPrevClickTime + 1000) && CtrMediaPrevClickX == event.button.x && CtrMediaPrevClickY == event.button.y ) {
 					CtrMediaDoubleClick = 1;
 					ctr_internal_media_select_word(focusImage);
 					CtrMediaSelectStart = 0;
 				}
 				CtrMediaPrevClickX = event.button.x;
 				CtrMediaPrevClickY = event.button.y;
-				CtrMediaPrevClickTime = SDL_GetTicks();
+				CtrMediaPrevClickTime = SDL_GetTicks64();
 				ctr_internal_img_render_text(focusObject);
 			}
 			ctr_argument* args = ctr_heap_allocate(sizeof(ctr_argument));
@@ -999,6 +1003,12 @@ void ctr_internal_media_render_image(MediaIMG* m, SDL_Rect r, SDL_Rect s, MediaI
 void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 	MediaIMG* player;
 	ctr_argument* a;
+	// keep a constant physics speed by calculating the timediff
+	double delta_in_seconds = ((CtrMediaTicks2 - CtrMediaTicks1) / 1000.0f );
+	double dt  = 60 * delta_in_seconds;
+	// If you want to test, insert a random delay and observe that
+	// game speed is still the same
+	// CtrMediaStdDelayTime = rand() % 100;
 	if (m->mov < m->speed && ((controllableObject && m != controllableObject->value.rvalue->ptr)  || (controllableObject == NULL))) {
 			m->mov += m->speed * m->accel;
 	}
@@ -1010,11 +1020,11 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 	if (!m->ghost && m->gravity > 0 && m->y < windowHeight - m->h) {
 		if (m->gravity >= 1) {
 			m->gspeed += m->gravity * 0.1;
-			m->y += m->gspeed;
+			m->y += dt * m->gspeed;
 			//@todo improve, reset contact surface to avoid player moving "on..." :-)
 			if (m->gspeed > 0.1) CtrMediaContactSurface = NULL;
 		} else if (m->gravity >= 0.1){
-			m->y += m->gravity;
+			m->y += dt * m->gravity;
 		}
 	} else {
 		if (controllableObject != NULL) {
@@ -1024,9 +1034,20 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 		m->gspeed = 0;
 	}
 	if (m->mov > 0 && m->dir > -1) {
-		m->x += m->mov * cos(m->dir * M_PI / 180);
-		m->y -= m->mov * sin(m->dir * M_PI / 180);
-		if (round(m->x) == round(m->tx) && round(m->y) == round(m->ty)) {
+		m->x += dt * m->mov * cos(m->dir * M_PI / 180);
+		m->y -= dt * m->mov * sin(m->dir * M_PI / 180);
+		// an image reaches its destination if the destination falls between
+		// this step and the previous one (i.e. tx is between ox and x and ty
+		// between oy and ty).
+		if (
+			// is X reached?
+			((round(m->tx) >= round(m->ox) && round(m->tx) <= round(m->x))
+			|| (round(m->tx) <= round(m->ox) && round(m->tx) >= round(m->x)))
+			&&
+			// is Y reached?
+			((round(m->ty) >= round(m->oy) && round(m->ty) <= round(m->y))
+			|| (round(m->ty) <= round(m->oy) && round(m->ty) >= round(m->y)))
+		) {
 			m->dir = -1;
 			a = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 			a->object = m->ref;
@@ -1037,8 +1058,8 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 	if (controllableObject) {
 		player = (MediaIMG*) controllableObject->value.rvalue->ptr;
 		if (CtrMediaControlMode == 1 && m == player && CtrMediaContactSurface && CtrMediaContactSurface->mov && CtrMediaContactSurface->dir > -1 && !m->mov) {
-			m->x += CtrMediaContactSurface->mov * cos(CtrMediaContactSurface->dir * M_PI / 180);
-			m->y -= CtrMediaContactSurface->mov * sin(CtrMediaContactSurface->dir * M_PI / 180);
+			m->x += dt * CtrMediaContactSurface->mov * cos(CtrMediaContactSurface->dir * M_PI / 180);
+			m->y -= dt * CtrMediaContactSurface->mov * sin(CtrMediaContactSurface->dir * M_PI / 180);
 		}
 	}
 }
@@ -1291,6 +1312,9 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	dir = -1;
 	c4speed = 0;
 	while (!CtrStdFlow) {
+		if (CtrMediaFlagSoftwareVSync) {
+			CtrMediaPerfCountStart = SDL_GetPerformanceCounter();
+		}
 		ctr_gc_cycle(); 
 		SDL_RenderClear(CtrMediaRenderer);
 		player = NULL;
@@ -1591,6 +1615,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 				}
 			}
 		}
+		CtrMediaTicks2 = SDL_GetTicks64();
 		for(int i = 0; i < IMGCount; i ++) {
 			MediaIMG* m = &mediaIMGs[i];
 			ctr_internal_media_image_calculate_motion(m);
@@ -1607,11 +1632,21 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 			s.w = (int) m->w/(m->anims ? m->anims : 1);
 			ctr_internal_media_render_image(m,r,s, player);
 		}
+		CtrMediaTicks1 = CtrMediaTicks2;
 		if (focusObject) {
 			ctr_internal_img_render_cursor(focusObject);
 		}
 		SDL_RenderPresent(CtrMediaRenderer);
-		SDL_Delay(CtrMediaStdDelayTime);
+		if (CtrMediaFlagSoftwareVSync) {
+			CtrMediaPerfCountEnd = SDL_GetPerformanceCounter();
+			double elapsedMS = (CtrMediaPerfCountEnd - CtrMediaPerfCountStart) / (double)SDL_GetPerformanceFrequency() * 1000.0f;
+			double delay = floor(16.666f - elapsedMS);
+			if (delay > 0) SDL_Delay(delay); //Cap to 60 FPS
+		}
+		// The standard delay is almost never used, unless we are testing stuff...
+		if (CtrMediaStdDelayTime > 0) {
+			SDL_Delay(CtrMediaStdDelayTime);
+		}
 		CtrMediaSteps++;
 	}
 	return myself;
@@ -3266,8 +3301,11 @@ void ctr_internal_media_init() {
 	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 100, 100, SDL_WINDOW_OPENGL);
 	#endif
 	if (CtrMediaWindow == NULL) ctr_internal_media_fatalerror("Unable to create window", SDL_GetError());
+	CtrMediaFlagSoftwareVSync = 0;
 	CtrMediaRenderer = SDL_CreateRenderer(CtrMediaWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
 	if (!CtrMediaRenderer) {
+		// If we are going to use software rendering we need to cap fps ourselves (vsync)
+		CtrMediaFlagSoftwareVSync = 1;
 		printf("Failed to create renderer, trying software renderer instead...\n");
 		CtrMediaRenderer = SDL_CreateRenderer(CtrMediaWindow, -1, SDL_RENDERER_SOFTWARE);
 	}
