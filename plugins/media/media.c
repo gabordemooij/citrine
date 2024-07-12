@@ -117,6 +117,7 @@ struct MediaIMG {
 	char 			bounce;
 	char            fixed;
 	char            ghost;
+	char            nodirani;
 };
 typedef struct MediaIMG MediaIMG;
 
@@ -866,7 +867,8 @@ void ctr_internal_media_detect_collisions(MediaIMG* m, SDL_Rect r) {
 	collider->next = NULL;
 	for (int j = 0; j < IMGCount; j++) {
 		MediaIMG* m2 = &mediaIMGs[j];
-		if (m2 == m || m->fixed || m2->fixed) continue;
+		//skip if image is same, fixed or gc'ed (ref)
+		if (m2 == m || m->fixed || m2->fixed || m->ref == NULL || m2->ref == NULL) continue;
 		int h,w,w2;
 		h = (int) m->h;
 		w = (int) m->w / (m->anims ? m->anims : 1);
@@ -968,7 +970,7 @@ void ctr_internal_media_render_image(MediaIMG* m, SDL_Rect r, SDL_Rect s, MediaI
 	if (!r.w || !r.h) {
 		return;
 	}
-	if (m->dir > -1 && !m->solid && CtrMediaControlMode == 1) {
+	if (m->dir > -1 && !m->solid && !m->nodirani && CtrMediaControlMode == 1) {
 		if (m->gravity) {
 			int xdir = m->dir;
 			if (m->gravity < 1) {
@@ -990,7 +992,7 @@ void ctr_internal_media_render_image(MediaIMG* m, SDL_Rect r, SDL_Rect s, MediaI
 			SDL_RenderCopyEx(CtrMediaRenderer, m->texture, &s, &r, (m->dir == -1 ? 0 : m->dir), NULL, (m->dir == 90 || m->dir == 270) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 		}
 	}
-	else if (CtrMediaControlMode == 4) {
+	else if (CtrMediaControlMode == 4 && !m->solid && !m->nodirani) {
 		/* radius style (2D top-down racing), in this case adjust direction to exact degrees */
 		SDL_RenderCopyEx(CtrMediaRenderer, m->texture, &s, &r, 360-(m->dir == -1 ? 0 : m->dir), NULL, SDL_FLIP_NONE);
 	} 
@@ -2231,6 +2233,7 @@ ctr_object* ctr_img_new(ctr_object* myself, ctr_argument* argumentList) {
 	mediaImage->mov = 0;
 	mediaImage->anims = 1;
 	mediaImage->animspeed = 5;
+	mediaImage->nodirani = 0;
 	mediaImage->editable = 0;
 	mediaImage->text = NULL;
 	mediaImage->paddingx = 0;
@@ -2306,6 +2309,12 @@ ctr_object* ctr_img_fixed_set(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_img_ghost_set(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* mediaImage = ctr_internal_get_image_from_object(myself);
 	mediaImage->ghost = ctr_internal_cast2bool( argumentList->object )->value.bvalue;
+	return myself;
+}
+
+ctr_object* ctr_media_nodirani(ctr_object* myself, ctr_argument* argumentList) {
+	MediaIMG* mediaImage = ctr_internal_get_image_from_object(myself);
+	mediaImage->nodirani = ctr_internal_cast2bool( argumentList->object )->value.bvalue;
 	return myself;
 }
 
@@ -4373,6 +4382,7 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "static:" ), &ctr_img_fixed_set );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "ghost:" ), &ctr_img_ghost_set );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "aspeed:" ), &ctr_media_anim_speed );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "nodirani:" ), &ctr_media_nodirani );
 	audioObject = ctr_audio_new(CtrStdObject, NULL);
 	audioObject->link = CtrStdObject;
 	ctr_internal_create_func(audioObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_audio_new );
