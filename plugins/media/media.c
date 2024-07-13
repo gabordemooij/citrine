@@ -1604,7 +1604,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 		}
 		if (controllableObject != NULL) {
 			player = (MediaIMG*) controllableObject->value.rvalue->ptr;
-			if (CtrMediaJump == 1) {
+			if (CtrMediaJump == 1 && CtrMediaJumpHeightFactor) {
 				CtrMediaJumpHeight = player->h * CtrMediaJumpHeightFactor;
 				CtrMediaJump = 2;
 			}
@@ -2183,6 +2183,10 @@ extern ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument*
 
 void ctr_img_destructor(ctr_resource* rs) {
 	MediaIMG* image = (MediaIMG*) rs->ptr;
+	if (image->text != NULL) {
+		ctr_heap_free(image->text);
+		image->text = NULL;
+	}
 	if (image->texture) {
 		SDL_DestroyTexture(image->texture);
 	}
