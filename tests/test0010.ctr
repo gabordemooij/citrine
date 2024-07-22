@@ -4,7 +4,7 @@ Animal on: ‘make’ do: {
 	animal on: ‘makeSound’ do: {
 		✎ write: ⚿ sound.
 	}.
-	↲animal.
+	↲ animal.
 }.
 ☞ Cat ≔ Object new.
 Cat on: ‘make’ do: {
@@ -13,7 +13,7 @@ Cat on: ‘make’ do: {
 		⚿ sound ≔ ‘meow!’.
 	}.
 	cat init.
-	↲cat.
+	↲ cat.
 }.
 ☞ tom ≔ Cat make.
 tom makeSound.

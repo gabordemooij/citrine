@@ -12,7 +12,7 @@ Greeter on: ‘make’ do: {
 	greeter on: ‘greet’ do: {
 		⛏ performGreeting.
 	}.
-	↲greeter.
+	↲ greeter.
 }.
 ☞ greeter ≔ Greeter make.
 greeter name: ‘sunshine!’.

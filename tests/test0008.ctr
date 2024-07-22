@@ -9,7 +9,7 @@ Greeter on: ‘make’ do: {
 		✎ write: ‘Hello’.
 		✎ write: ⚿ myName.
 	}.
-	↲greeter.
+	↲ greeter.
 }.
 ☞ greeter ≔ Greeter make.
 greeter name: ‘sunshine!’.

@@ -1,0 +1,79 @@
+t "media" "media"
+t "persoon" "persoon"
+t "obstakel" "obstakel"
+s "persoon.png" "persoon.png"
+s "obstakel.png" "obstakel.png"
+s "start" "start"
+s "grasveld.png" "grasveld.png"
+t "konĳn" "konĳn"
+s "konĳn.png" "konĳn.png"
+s "eiland.png" "eiland.png"
+s "achtergrond.png" "achtergrond.png"
+s "eindpunt" "eindpunt"
+s "auto.png" "auto.png"
+t "auto" "auto"
+s "canvas.png" "canvas.png"
+t "canvas" "canvas"
+s "hallo" "hallo"
+t "ontvangen" "ontvangen"
+t "tekstveld" "tekstveld"
+t "label" "label"
+t "knop" "knop"
+s "klik" "klik"
+t "uitvoer" "uitvoer"
+s "tekstveld.png" "tekstveld.png"
+s "kader.png" "label.png"
+s "knop.png" "knop.png"
+s "lettertype.ttf" "lettertype.ttf"
+t "schaar" "schaar"
+t "papieren" "papieren"
+t "klembord" "klembord"
+t "bezem" "bezem"
+t "boek" "boek"
+t "tandwielen" "tandwielen"
+t "kist" "kist"
+s "schaar.png" "schaar.png"
+s "papieren.png" "papieren.png"
+s "klembord.png" "klembord.png"
+s "bezem.png" "bezem.png"
+s "boek.png" "boek.png"
+s "tandwielen.png" "tandwielen.png"
+s "kist.png" "kist.png"
+s "huidige programma" "huidige programma"
+s "vorige programma" "vorige programma"
+s "einde" "einde"
+s "schrĳfmachine.png" "schrĳfmachine.png"
+s "digraaf:ligatuur:" "digraaf:ligatuur:"
+s "legenda.png" "legenda.png"
+t "legenda" "legenda"
+t "Toets" "Toets"
+t "toets" "toets"
+t "nummer" "nummer"
+t "toetsenbord" "toetsenbord"
+t "toetscombinatie" "toetscombinatie"
+t "symbool" "symbool"
+t "digraaf" "digraaf"
+t "ligatuur" "ligatuur"
+t "geselecteerd" "geselecteerd"
+t "tekst" "tekst"
+t "inladen programma" "inladen programma"
+s "code.png" "code.png"
+s "var" "var" ligatuur: “☞ ”
+s ":=" ":=" ligatuur: “≔”)
+s ">>" ">>" ligatuur: “✎”)
+s "__" "__" ligatuur: “ ”)
+s "<-" "<-" ligatuur: “↲”)
+s "[]" "[]" ligatuur: “←”)
+s "=>" "=>" ligatuur: “⚿”)
+s "::" "::" ligatuur: “⛏”)
+s "->" "->" ligatuur: “•”).
+s " /" " /" ligatuur: “ ÷”,
+s " *" " *"  ligatuur: “ ×”,
+s " >=" " >=" ligatuur: “ ≥”,
+s " <=" " <=" ligatuur: “ ≤”,
+s " !=" " !=" ligatuur: “ ≠”,
+s "__" "__"  ligatuur: “ ”.
+s "ij" "ij"
+s "ĳ" "ĳ"
+s "IJ" "IJ"
+s "Ĳ" "Ĳ"

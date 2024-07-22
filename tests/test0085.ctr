@@ -1,5 +1,5 @@
 
-☞ q ≔ { ↲9. } run. 
+☞ q ≔ { ↲ 9. } run. 
 ✎ write: q, stop.
 q ≔ { :a ↲ a × a. } apply: 6. 
 ✎ write: q, stop.

@@ -1,2 +1,5 @@
-Parse error, unexpected ↲ ( ../../tests/tmp/runner0: 4 )
-Expected a message recipient.
+aaa
+Uncatched error has occurred.
+Key not found: ↲↲
+#2 ↲↲ (../../tests/tmp/runner0: 4)
+#1 run (../../tests/tmp/runner0: 4)

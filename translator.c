@@ -580,6 +580,11 @@ char* ctr_translate_colon(char* codePointer, ctr_dict* dictionary) {
 	return ctr_clex_code_pointer();
 }
 
+char* ctr_translate_ret(char* codePointer, ctr_dict* dictionary) {
+	ctr_translate_translate(CTR_DICT_RETURN,strlen(CTR_DICT_RETURN),dictionary,'t',(char*)NULL);
+	return ctr_clex_code_pointer();
+}
+
 /**
  * Translates a number from one language into another taking into
  * account numeric writing systems like decimal separators and thousand
@@ -641,6 +646,10 @@ void ctr_translate_program(char* prg, char* programPath) {
 		if ( t == CTR_TOKEN_FIN ) {
 			ctr_translate_fin(p);
 			break;
+		}
+		else if ( t == CTR_TOKEN_RET ) {
+			fwrite(" ", 1, 1, stdout);
+			p = ctr_translate_ret(p, dictionary);
 		}
 		else if ( t == CTR_TOKEN_QUOTE ) {
 			p = ctr_translate_string(p, dictionary);

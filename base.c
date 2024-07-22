@@ -399,7 +399,7 @@ ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList )
 	compareArguments->next = NULL;
 	if (
 		ctr_internal_cast2bool(
-			ctr_send_message( myself, "=", 1, compareArguments )
+			ctr_send_message( myself, CTR_DICT_SYMBOL_EQUALS, strlen(CTR_DICT_SYMBOL_EQUALS), compareArguments )
 		)->value.bvalue == 1) {
 		block->info.sticky = 1;
 		int sticky = myself->info.sticky;

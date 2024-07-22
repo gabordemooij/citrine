@@ -75,13 +75,10 @@ uint8_t ctr_clex_is_delimiter( char* code ) {
 	if (strncmp(code, CTR_DICT_END_OF_LINE, ctr_clex_keyword_eol_len) == 0) {
 		return 1;
 	}
-	if (strncmp(code, CTR_DICT_ASSIGN, ctr_clex_keyword_assignment_len) == 0) {
-		return 1;
-	}
 	if (strncmp(code, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len) == 0 ) {
 		return 1;
 	}
-	if (strncmp(code, CTR_DICT_RETURN, ctr_clex_keyword_return_len) == 0 ) {
+	if (strncmp(code, CTR_DICT_ASSIGN, ctr_clex_keyword_assignment_len) == 0) {
 		return 1;
 	}
 	if (strncmp(code, CTR_DICT_MESSAGE_CHAIN, ctr_clex_keyword_chain_len) == 0 ) {
@@ -267,21 +264,17 @@ int ctr_clex_tok() {
 		return CTR_TOKEN_ASSIGNMENT; 
 	}
 	if (c == ctr_clex_param_prefix_char) { ctr_code++; return CTR_TOKEN_COLON; }
-	if ( ( ctr_code + 2) < ctr_eofcode
-		&&   (uint8_t)            c == 0xE2
-		&& ( (uint8_t) *(ctr_code+1)==0x86)
-		&& ( (uint8_t) *(ctr_code+2)==0xB2)  ) {
-		ctr_code += 3;
+	if (strncmp(ctr_code, CTR_DICT_RETURN, ctr_clex_keyword_return_len)==0
+	&& *(ctr_code+ctr_clex_keyword_return_len)==' '
+	) {
+		ctr_code += ctr_clex_keyword_return_len;
 		return CTR_TOKEN_RET;
 	}
-
 	if (strncmp(ctr_code, CTR_DICT_QUOT_OPEN, ctr_clex_keyword_qo_len)==0) {
 		ctr_code+=ctr_clex_keyword_qo_len;
 		return CTR_TOKEN_QUOTE;
 	}
-	
 	eol = ( strncmp(ctr_code,CTR_DICT_END_OF_LINE,ctr_clex_keyword_eol_len)==0 );
-	
 	if ((c == '-' && (ctr_code+1)<ctr_eofcode && isdigit(*(ctr_code+1))) || isdigit(c)) {
 		if (c == '-') {
 			ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;

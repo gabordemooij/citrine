@@ -17,6 +17,11 @@ wine on: ‘=’ do: { :other wine
 	↲ ( ⛏ toString = other wine ).
 }.
 
+wine on: ‘==’ do: { :other wine
+	↲ ( ⛏ toString = other wine ).
+}.
+
+
 
 wine
 	case: ‘cabernet’ do: { ✎ write: ‘it's a Cabernet!’. },

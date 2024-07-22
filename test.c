@@ -70,7 +70,7 @@ void ctr_coretest_tokens() {
 	ctr_test(token == CTR_TOKEN_COLON);
 	ctr_test(strlen(ctr_clex_tok_value())==0);
 	ctr_test(strcmp(ctr_clex_tok_describe(token),CTR_DICT_PARAMETER_PREFIX)==0);
-	sprintf( buffer, "%s", CTR_DICT_RETURN );
+	sprintf( buffer, "%s ", CTR_DICT_RETURN );
 	ctr_clex_load( buffer );
 	token = ctr_clex_tok();
 	ctr_test(token == CTR_TOKEN_RET);
