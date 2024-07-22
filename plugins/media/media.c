@@ -3015,7 +3015,8 @@ void ctr_internal_img_render_text(ctr_object* myself) {
 			}
 
 			SDL_BlitSurface(text,NULL,dst,&t);
-			TTF_SizeUTF8(font, buff, &text_width, &text_height);
+			TTF_SizeUTF8(font, buff, &text_width, NULL);
+			TTF_SizeUTF8(font, "X", NULL, &text_height); // deze kunnen we cachen
 		}
 		t.x += text_width;
 		if (image->text[i]=='\r') {
@@ -4338,7 +4339,6 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_RUN ), &ctr_media_override );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_ON_STEP ), &ctr_media_override );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_SELECTION ), &ctr_media_select );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_DIGRAPH_LIGATURE_SET ), &ctr_media_autoreplace );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_SAY_SET ), &ctr_media_speak );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_LINK_SET ), &ctr_media_link_package );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_TIMER_SET ), &ctr_media_timer );
@@ -4427,10 +4427,8 @@ void begin(){
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_AUDIO_OBJECT ), audioObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_SOUND_OBJECT ), soundObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_MUSIC_OBJECT ), musicObject, CTR_CATEGORY_PUBLIC_PROPERTY);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NETWORK_PORT ), ctr_build_string_from_cstring("MediaNetPort1"), CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NETWORK_OBJECT), networkObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PACKAGE_OBJECT ), packageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_QUOTES ), ctr_build_string_from_cstring(CTR_DICT_QUOT_OPEN CTR_DICT_QUOT_CLOSE), CTR_CATEGORY_PUBLIC_PROPERTY);
 	/* Untranslated reference for systems that do not support UTF-8 characters in file names (like Windows) */
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Media" ), mediaObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 }
