@@ -121,12 +121,6 @@ void ctr_clex_load(char* prg) {
 	ctr_clex_buffer[0] = '\0';
 	ctr_eofcode = (ctr_code + ctr_program_length);
 	ctr_clex_line_number = 0;
-	/* skip the first line if it starts with a #. */
-	if (*ctr_code_start=='#') {
-		while(ctr_code<ctr_eofcode && *ctr_code!='\n') {
-			ctr_code++;
-		}
-	}
 	ctr_code_start = ctr_code;
 }
 
@@ -241,10 +235,20 @@ int ctr_clex_tok() {
 	ctr_clex_old_line_number = ctr_clex_line_number;
 	i = 0;
 	c = *ctr_code;
-	while(ctr_code != ctr_eofcode && (_isspace(c))) {
-		if (c == '\n') ctr_clex_line_number++;
-		ctr_code ++;
-		c = *ctr_code;
+	for(;;) {
+		while(ctr_code != ctr_eofcode && (_isspace(c))) {
+			if (c == '\n') ctr_clex_line_number++;
+			ctr_code ++;
+			c = *ctr_code;
+		}
+		if (c == '#') {
+			while(ctr_code != ctr_eofcode && c!='\n') {
+				ctr_code ++;
+				c = *ctr_code;
+			}
+		} else {
+			break;
+		}
 	}
 	if (ctr_code == ctr_eofcode) return CTR_TOKEN_FIN;
 	if (c == '(') { ctr_code++; return CTR_TOKEN_PAROPEN; }

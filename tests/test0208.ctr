@@ -22,12 +22,12 @@
 ☞ unknown ≔ Request post list: Request new.
 ✎ write: unknown type.
 
-☞ response ≔ Json to object: ‘{"#status":"OK"}’.
-✎ write: (response #status).
-☞ response ≔ Json new to object: ‘{"#status":"OK"}’.
-✎ write: (response #status).
-☞ response ≔ Json new new to object: ‘{"#status":"OK"}’.
-✎ write: (response #status).
-☞ response ≔ Json new new can you convert to object: ‘{"#status":"OK"}’.
-✎ write: (response #status).
+☞ response ≔ Json to object: ‘{"_status":"OK"}’.
+✎ write: (response _status).
+☞ response ≔ Json new to object: ‘{"_status":"OK"}’.
+✎ write: (response _status).
+☞ response ≔ Json new new to object: ‘{"_status":"OK"}’.
+✎ write: (response _status).
+☞ response ≔ Json new new can you convert to object: ‘{"_status":"OK"}’.
+✎ write: (response _status).
 
