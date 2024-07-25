@@ -96,7 +96,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 	int is_single_uchar = (ulen == 1 && lookAhead != CTR_TOKEN_COLON);
 	int is_single_uchar_in_ascii_form = 0;
 	#ifdef ASCIICOMPAT
-	is_single_uchar_in_ascii_form = (ulen == 2 && lookAhead != CTR_TOKEN_COLON && (msg[1] == '=' || msg[1] == '<'));
+	is_single_uchar_in_ascii_form = (ulen == 2 && lookAhead != CTR_TOKEN_COLON && (msg[1] == '=' || msg[1] == '<' || msg[1] == '>'));
 	#endif
 	isBin = (is_single_uchar || is_single_uchar_in_ascii_form);
 	if (mode == 2 && isBin) {
