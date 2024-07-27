@@ -1,11 +1,11 @@
 Text,Number
-Text,Decision
+Text,Boolean
 Number,Text
-Number,Decision
-Decision,Number
-Decision,Number
-Decision,Text
-Decision,Text
+Number,Boolean
+Boolean,Number
+Boolean,Number
+Boolean,Text
+Boolean,Text
 === String test ===
 123
 No

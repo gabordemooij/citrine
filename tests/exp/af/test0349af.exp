@@ -21,16 +21,16 @@ Reeks ← 1 ; (Reeks ← 2)
 Reeks
 Reeks ← 1 ; (Reeks ← 2) ; 3
 Reeks
-Reeks ← 1 ; ((Lys nuwe) sit:‘a’ by:‘b’) ; 3
+Reeks ← 1 ; ((Lys nuwe) sit:['a'] by:['b']) ; 3
 Reeks
-Reeks ← 1 ; ((Lys nuwe) sit:(Reeks ← 9) by:‘b’) ; 3
+Reeks ← 1 ; ((Lys nuwe) sit:(Reeks ← 9) by:['b']) ; 3
 Lys
-(Lys nuwe) sit:2 by:‘1’
+(Lys nuwe) sit:2 by:['1']
 Lys
-(Lys nuwe) sit:2 by:‘x’
+(Lys nuwe) sit:2 by:['x']
 Lys
-(Lys nuwe) sit:(Reeks ← 1 ; 2) by:‘x’
+(Lys nuwe) sit:(Reeks ← 1 ; 2) by:['x']
 Lys
-(Lys nuwe) sit:(Reeks ← ((Lys nuwe) sit:‘q’ by:‘y’) ; 2) by:‘x’
+(Lys nuwe) sit:(Reeks ← ((Lys nuwe) sit:['q'] by:['y']) ; 2) by:['x']
 Leeg
 Leeg

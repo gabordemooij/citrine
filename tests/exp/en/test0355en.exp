@@ -1,15 +1,15 @@
 1,001
 1,024
-Sequence ← ‘1’ ; ‘2’ ; ‘3’
-Sequence ← ‘1’ ; ‘2’ ; ‘3’
-Sequence ← ‘1’ ; ‘’ ; ‘3’
-Sequence ← ‘1’ ; ‘’ ; ‘3’
-Sequence ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Sequence ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Sequence ← ‘’ ; ‘’
-Sequence ← ‘’ ; ‘’
-Sequence ← ‘x’
-Sequence ← ‘x’
-Sequence ← ‘’
-Sequence ← ‘’
-Sequence ← ‘1,2,3’
+Sequence ← ['1'] ; ['2'] ; ['3']
+Sequence ← ['1'] ; ['2'] ; ['3']
+Sequence ← ['1'] ; [''] ; ['3']
+Sequence ← ['1'] ; [''] ; ['3']
+Sequence ← [''] ; [''] ; [''] ; ['']
+Sequence ← [''] ; [''] ; [''] ; ['']
+Sequence ← [''] ; ['']
+Sequence ← [''] ; ['']
+Sequence ← ['x']
+Sequence ← ['x']
+Sequence ← ['']
+Sequence ← ['']
+Sequence ← ['1,2,3']

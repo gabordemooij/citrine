@@ -1,1 +1,1 @@
-(List new) put:‘’ at:‘box’
+(List new) put:[''] at:['box']
