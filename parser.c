@@ -93,12 +93,7 @@ ctr_tnode* ctr_cparse_message(int mode) {
 	memcpy(msg, s, msgpartlen);
 	ulen = ctr_getutf8len(msg, msgpartlen);
 	lookAhead = ctr_clex_tok(); ctr_clex_putback();
-	int is_single_uchar = (ulen == 1 && lookAhead != CTR_TOKEN_COLON);
-	int is_single_uchar_in_ascii_form = 0;
-	#ifdef ASCIICOMPAT
-	is_single_uchar_in_ascii_form = (ulen == 2 && lookAhead != CTR_TOKEN_COLON && (msg[1] == '=' || msg[1] == '<' || msg[1] == '>'));
-	#endif
-	isBin = (is_single_uchar || is_single_uchar_in_ascii_form);
+	isBin = (ulen == 1 && lookAhead != CTR_TOKEN_COLON);
 	if (mode == 2 && isBin) {
 		ctr_clex_putback();
 		return m;
@@ -373,7 +368,10 @@ ctr_tnode* ctr_cparse_ref() {
 		r->modifier = 1;
 		r->vlen = ctr_clex_tok_value_length();
 	}
-	if (strncmp(ctr_clex_keyword_var_icon, tmp, ctr_clex_keyword_var_icon_len)==0 && r->vlen == ctr_clex_keyword_var_icon_len) {
+	if (
+	(strncmp(">>", tmp, 2)==0 && r->vlen == 2) ||
+	(strncmp(ctr_clex_keyword_var_icon, tmp, ctr_clex_keyword_var_icon_len)==0 && r->vlen == ctr_clex_keyword_var_icon_len)
+	) {
 		int t = ctr_clex_tok();
 		if (t != CTR_TOKEN_REF) {
 			ctr_cparse_emit_error_unexpected( t, CTR_ERR_EXP_VAR );

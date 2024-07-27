@@ -1,6 +1,6 @@
 (Lijst nieuw) zet:['a"b'] bij:['test']
 Invalid JSON.
-(Lijst nieuw) zet:(Reeks << 1 ; 2 ; (Reeks << 3 ; 4) ; ((Lijst nieuw) zet:(Reeks << 3 ; 4) bij:['bar'], zet:1 bij:['foo'])) bij:['nested'], zet:Nee bij:['legend'], zet:27 bij:['age'], zet:['Jack'] bij:['name']
+(Lijst nieuw) zet:(Reeks ← 1 ; 2 ; (Reeks ← 3 ; 4) ; ((Lijst nieuw) zet:(Reeks ← 3 ; 4) bij:['bar'], zet:1 bij:['foo'])) bij:['nested'], zet:Nee bij:['legend'], zet:27 bij:['age'], zet:['Jack'] bij:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

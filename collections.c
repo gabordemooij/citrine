@@ -383,32 +383,6 @@ ctr_object* ctr_array_pop(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ List ] - [ Number ]
- *
- * @example
- * ☞ x ≔ List ← 1 ; 2 ; 3.
- * ✎ write: x, stop.
- * ☞ x - 1.
- * ✎ write: x, stop.
- */
-ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_size index = ctr_internal_cast2number(argumentList->object)->value.nvalue;
-	ctr_size length = (ctr_size) myself->value.avalue->head - myself->value.avalue->tail;
-	ctr_size i;
-	ctr_size found = 0;
-	index--;
-	for( i = index; i < length; i ++ ) {
-		*(myself->value.avalue->elements + i) = *(myself->value.avalue->elements + (i+1));
-		found = 1;
-	}
-	if (found) {
-		myself->value.avalue->head--;
-	}
-	return myself;
-}
-
-/**
- * @def
  * [ List ] shift
  *
  * @example

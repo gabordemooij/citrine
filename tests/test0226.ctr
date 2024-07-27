@@ -1,13 +1,26 @@
-☞ collection ≔ List ← 1 ; 2 ; 3.
-collection - 1.
-collection - 1.
-collection - 1.
-collection - -1.
-collection - 0.
-collection - 1.
-collection - -1.
-✎ write: collection count, stop.
-☞ collection ≔ List new.
-collection - 1.
-collection - -1.
-✎ write: collection count, stop.
+# Test ASCII variants
+
+# Numbers
+
+✎ write: (2 !=: 3), stop.
+✎ write: (2 <=: 2), stop.
+✎ write: (2 >=: 2), stop.
+
+# Strings
+
+✎ write: (‘b’ >=: ‘a’), stop.
+✎ write: (‘b’ !=: ‘a’), stop.
+✎ write: (‘b’ <=: ‘c’), stop.
+
+# Bools
+
+✎ write: (True !=: False), stop.
+
+# Objects
+
+✎ write: (Object new !=: Object new), stop.
+
+# ASCII list symbol <-:
+
+✎ write: (List <<: 1, ; 2 ; 3) count = 3, stop.
+

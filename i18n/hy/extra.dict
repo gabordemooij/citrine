@@ -107,4 +107,8 @@ t "talisker:" "talisker."
 t "springbank:" "springbank."
 t "glenfarclas:" "glenfarclas."
 t "hello:" "hello."
+t "!=:" "!=."
+t ">=:" ">=."
+t "<=:" "<=."
+t "<<:" "<<."
 

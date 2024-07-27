@@ -656,6 +656,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_EQUALS ), &ctr_object_equals );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_SYMBOL_EQUALS ), &ctr_object_equals );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_UNEQUALS_SYMBOL ), &ctr_object_unequals );
+	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( "!=" CTR_DICT_PARAMETER_PREFIX ), &ctr_object_unequals );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_ONDO ), &ctr_object_on_do );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ), &ctr_object_respond );
 	ctr_internal_create_func( CtrStdObject, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND ), &ctr_object_respond_and );
@@ -705,6 +706,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_OR ), &ctr_bool_or );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_SYMBOL_EQUALS ),&ctr_bool_eq );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_UNEQUALS_SYMBOL ), &ctr_bool_neq );
+	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( "!=" CTR_DICT_PARAMETER_PREFIX ), &ctr_bool_neq );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_bool_to_number );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_bool_to_string );
 	ctr_internal_create_func( CtrStdBool, ctr_build_string_from_cstring( CTR_DICT_TOBOOL ), &ctr_object_myself );
@@ -744,10 +746,13 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_DIVIDER_SET ), &ctr_number_div );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_GREATER ), &ctr_number_higherThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_GREATER_OR_EQUAL_SYMBOL ), &ctr_number_higherEqThan );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( ">=" CTR_DICT_PARAMETER_PREFIX ), &ctr_number_higherEqThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_LESS ), &ctr_number_lowerThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_LESS_OR_EQUAL_SYMBOL ), &ctr_number_lowerEqThan );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "<=" CTR_DICT_PARAMETER_PREFIX ), &ctr_number_lowerEqThan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_SYMBOL_EQUALS ), &ctr_number_eq );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_UNEQUALS_SYMBOL ), &ctr_number_neq );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "!=" CTR_DICT_PARAMETER_PREFIX ), &ctr_number_neq );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_MODULO ), &ctr_number_modulo );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_FLOOR ), &ctr_number_floor );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_CEIL ), &ctr_number_ceil );
@@ -781,6 +786,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_PLUS ), &ctr_string_concat );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_SYMBOL_EQUALS ), &ctr_string_eq );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_UNEQUALS_SYMBOL ), &ctr_string_neq );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "!=" CTR_DICT_PARAMETER_PREFIX ), &ctr_string_neq );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_TRIM ), &ctr_string_trim );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_CHAR_AT_SET ), &ctr_string_at );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_INDEX_OF ), &ctr_string_index_of );
@@ -802,8 +808,10 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_COMPARE_SET ),&ctr_string_compare );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_LESS ),&ctr_string_before );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_LESS_OR_EQUAL_SYMBOL ),&ctr_string_before_or_same );
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( "<=" CTR_DICT_PARAMETER_PREFIX ),&ctr_string_before_or_same );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_GREATER ),&ctr_string_after );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_GREATER_OR_EQUAL_SYMBOL ),&ctr_string_after_or_same);
+	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( ">=" CTR_DICT_PARAMETER_PREFIX ),&ctr_string_after_or_same);
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND ),&ctr_string_fill_in);
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_COPY ), &ctr_string_copy );
 	ctr_internal_create_func(CtrStdString, ctr_build_string_from_cstring( CTR_DICT_CODE ), &ctr_string_to_code );
@@ -834,8 +842,10 @@ void ctr_initialize_world() {
 	CtrStdArray = ctr_array_new(CtrStdObject, NULL);
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_array_new );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_NEW_ARRAY_AND_PUSH_SYMBOL ), &ctr_array_new_and_push );
+	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( "<<" CTR_DICT_PARAMETER_PREFIX ), &ctr_array_new_and_push );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_TYPE ), &ctr_array_type );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_APPEND ), &ctr_array_push );
+	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_MINUS ), &ctr_array_push );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_BULLET ), &ctr_array_push );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_PUSH_SYMBOL ), &ctr_array_push );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_PREPEND ), &ctr_array_unshift );
@@ -859,7 +869,6 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_SECOND_LAST ), &ctr_array_second_last );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_FIRST ), &ctr_array_first );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_FILL_WITH ), &ctr_array_fill );
-	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_MINUS ), &ctr_array_delete );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_BY_SET ), &ctr_array_combine );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_INDEX_OF ), &ctr_array_index_of );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_COPY ), &ctr_array_copy );

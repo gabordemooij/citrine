@@ -81,6 +81,9 @@ uint8_t ctr_clex_is_delimiter( char* code ) {
 	if (strncmp(code, CTR_DICT_ASSIGN, ctr_clex_keyword_assignment_len) == 0) {
 		return 1;
 	}
+	if (strncmp(code, ":=", ctr_clex_keyword_assignment_len) == 0) {
+		return 1;
+	}
 	if (strncmp(code, CTR_DICT_MESSAGE_CHAIN, ctr_clex_keyword_chain_len) == 0 ) {
 		return 1;
 	}
@@ -266,6 +269,10 @@ int ctr_clex_tok() {
 	if (strncmp(ctr_code, CTR_DICT_ASSIGN, ctr_clex_keyword_assignment_len)==0) {
 		ctr_code += ctr_clex_keyword_assignment_len;
 		return CTR_TOKEN_ASSIGNMENT; 
+	}
+	if (strncmp(ctr_code, ":=", 2)==0) {
+		ctr_code += 2;
+		return CTR_TOKEN_ASSIGNMENT;
 	}
 	if (c == ctr_clex_param_prefix_char) { ctr_code++; return CTR_TOKEN_COLON; }
 	if (strncmp(ctr_code, CTR_DICT_RETURN, ctr_clex_keyword_return_len)==0

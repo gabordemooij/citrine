@@ -15,22 +15,22 @@ Getal
 Reeks
 Reeks nieuw 
 Reeks
-Reeks << 1 ; 2
+Reeks ← 1 ; 2
 Reeks
-Reeks << 1 ; (Reeks << 2)
+Reeks ← 1 ; (Reeks ← 2)
 Reeks
-Reeks << 1 ; (Reeks << 2) ; 3
+Reeks ← 1 ; (Reeks ← 2) ; 3
 Reeks
-Reeks << 1 ; ((Lijst nieuw) zet:['a'] bij:['b']) ; 3
+Reeks ← 1 ; ((Lijst nieuw) zet:['a'] bij:['b']) ; 3
 Reeks
-Reeks << 1 ; ((Lijst nieuw) zet:(Reeks << 9) bij:['b']) ; 3
+Reeks ← 1 ; ((Lijst nieuw) zet:(Reeks ← 9) bij:['b']) ; 3
 Lijst
 (Lijst nieuw) zet:2 bij:['1']
 Lijst
 (Lijst nieuw) zet:2 bij:['x']
 Lijst
-(Lijst nieuw) zet:(Reeks << 1 ; 2) bij:['x']
+(Lijst nieuw) zet:(Reeks ← 1 ; 2) bij:['x']
 Lijst
-(Lijst nieuw) zet:(Reeks << ((Lijst nieuw) zet:['q'] bij:['y']) ; 2) bij:['x']
+(Lijst nieuw) zet:(Reeks ← ((Lijst nieuw) zet:['q'] bij:['y']) ; 2) bij:['x']
 Niets
 Niets
