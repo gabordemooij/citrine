@@ -2,7 +2,7 @@
 ☞ memory management modes ≔ List ← 0 ; 1 ; 4 ; 8 ; 9 ; 12.
 
 ☞ languages ≔ List ← 
-	‘en’ ; ‘en_us’ ; ‘en_us2’ ;
+	‘en’ ;
 	‘af’ ; ‘am’ ; ‘ar’ ; ‘az’ ;
 	‘be’ ; ‘bg’ ; ‘bn’ ; ‘bs’ ;
 	‘ca’ ; ‘ceb’ ; ‘co’ ; ‘cs’ ; ‘cy’ ;
@@ -28,7 +28,7 @@
 	‘yak’ ; ‘yi’ ; ‘yo’ ;
 	‘zh1’ ; ‘zh2’ ; ‘zu’
 	.
-☞ one way languages ≔ List ← ‘hy’ ; ‘en’ ; ‘en_us’ ; ‘en_us2’.
+☞ one way languages ≔ List ← ‘hy’ ; ‘en’.
 
 ☞ variations ≔ 	memory management modes + languages.
 ☞ number of tests ≔ 368.
