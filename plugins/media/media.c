@@ -2888,6 +2888,7 @@ ctr_object* ctr_img_text_align(ctr_object* myself, ctr_argument* argumentList) {
 	y = image->h - y;
 	y -= lineHeight;
 	image->paddingy = y;
+	ctr_internal_img_render_text(myself);
 	return myself;
 }
 
@@ -3013,7 +3014,6 @@ void ctr_internal_img_render_text(ctr_object* myself) {
 			CtrMediaEdCache[q].text = buff;
 			CtrMediaEdCache[q].state = state;
 			}
-
 			SDL_BlitSurface(text,NULL,dst,&t);
 			TTF_SizeUTF8(font, buff, &text_width, NULL);
 			TTF_SizeUTF8(font, "X", NULL, &text_height); // deze kunnen we cachen
@@ -4296,8 +4296,8 @@ void begin(){
 	#ifdef FFI
 	CtrMediaDataBlob = ctr_media_new(CtrStdObject, NULL);
 	CtrMediaDataBlob->link = CtrStdObject;
-	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( "nieuw:" ), &ctr_blob_new_set);
-	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( "tekst" ), &ctr_blob_tostring);
+	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_blob_new_set);
+	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_blob_tostring);
 	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( "vul:" ), &ctr_blob_fill);
 	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( "utf8:" ), &ctr_blob_utf8_set);
 	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( "nieuw:type:" ), &ctr_blob_new_set_type);
