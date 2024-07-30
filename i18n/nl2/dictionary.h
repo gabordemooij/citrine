@@ -187,7 +187,7 @@
 #define CTR_DICT_BLOCK_START                     "{"
 #define CTR_DICT_BLOCK_END                       "}"
 #define CTR_DICT_PARAMETER_PREFIX                ":"
-#define CTR_DICT_RETURN                          "antw"
+#define CTR_DICT_RETURN                          "<-"
 #define CTR_DICT_CODE                            "code"
 #define CTR_DICT_PROCEDURE                       "procedure"
 #define CTR_DICT_TOOBJECT        "object"
