@@ -1,6 +1,6 @@
-(Elenco nuovo) mettere:‘a"b’ a:‘test’
+(Elenco nuovo) mettere:['a"b'] a:['test']
 Invalid JSON.
-(Elenco nuovo) mettere:(Elenco ← 1 ; 2 ; (Elenco ← 3 ; 4) ; ((Elenco nuovo) mettere:(Elenco ← 3 ; 4) a:‘bar’, mettere:1 a:‘foo’)) a:‘nested’, mettere:Falso a:‘legend’, mettere:27 a:‘age’, mettere:‘Jack’ a:‘name’
+(Elenco nuovo) mettere:(Elenco ← 1 ; 2 ; (Elenco ← 3 ; 4) ; ((Elenco nuovo) mettere:(Elenco ← 3 ; 4) a:['bar'], mettere:1 a:['foo'])) a:['nested'], mettere:Falso a:['legend'], mettere:27 a:['age'], mettere:['Jack'] a:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

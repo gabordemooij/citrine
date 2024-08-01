@@ -1,15 +1,15 @@
 1.001
 1.024
-Zerrenda ← ‘1’ ; ‘2’ ; ‘3’
-Zerrenda ← ‘1’ ; ‘2’ ; ‘3’
-Zerrenda ← ‘1’ ; ‘’ ; ‘3’
-Zerrenda ← ‘1’ ; ‘’ ; ‘3’
-Zerrenda ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Zerrenda ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Zerrenda ← ‘’ ; ‘’
-Zerrenda ← ‘’ ; ‘’
-Zerrenda ← ‘x’
-Zerrenda ← ‘x’
-Zerrenda ← ‘’
-Zerrenda ← ‘’
-Zerrenda ← ‘1,2,3’
+Zerrenda ← ['1'] ; ['2'] ; ['3']
+Zerrenda ← ['1'] ; ['2'] ; ['3']
+Zerrenda ← ['1'] ; [''] ; ['3']
+Zerrenda ← ['1'] ; [''] ; ['3']
+Zerrenda ← [''] ; [''] ; [''] ; ['']
+Zerrenda ← [''] ; [''] ; [''] ; ['']
+Zerrenda ← [''] ; ['']
+Zerrenda ← [''] ; ['']
+Zerrenda ← ['x']
+Zerrenda ← ['x']
+Zerrenda ← ['']
+Zerrenda ← ['']
+Zerrenda ← ['1,2,3']

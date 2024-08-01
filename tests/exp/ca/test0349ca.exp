@@ -1,7 +1,7 @@
 Nil
 Nil
 Booleà
-És cert
+És-cert
 Booleà
 Fals
 Número
@@ -21,16 +21,16 @@ Llista ← 1 ; (Llista ← 2)
 Llista
 Llista ← 1 ; (Llista ← 2) ; 3
 Llista
-Llista ← 1 ; ((Mapa nou) posar:‘a’ a:‘b’) ; 3
+Llista ← 1 ; ((Mapa nou) posar:['a'] a:['b']) ; 3
 Llista
-Llista ← 1 ; ((Mapa nou) posar:(Llista ← 9) a:‘b’) ; 3
+Llista ← 1 ; ((Mapa nou) posar:(Llista ← 9) a:['b']) ; 3
 Mapa
-(Mapa nou) posar:2 a:‘1’
+(Mapa nou) posar:2 a:['1']
 Mapa
-(Mapa nou) posar:2 a:‘x’
+(Mapa nou) posar:2 a:['x']
 Mapa
-(Mapa nou) posar:(Llista ← 1 ; 2) a:‘x’
+(Mapa nou) posar:(Llista ← 1 ; 2) a:['x']
 Mapa
-(Mapa nou) posar:(Llista ← ((Mapa nou) posar:‘q’ a:‘y’) ; 2) a:‘x’
+(Mapa nou) posar:(Llista ← ((Mapa nou) posar:['q'] a:['y']) ; 2) a:['x']
 Nil
 Nil

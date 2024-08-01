@@ -1,6 +1,6 @@
-(Liiska cusub) walax:‘a"b’ meeshaas:‘test’
+(Liiska cusub) walax:['a"b'] meeshaas:['test']
 Invalid JSON.
-(Liiska cusub) walax:(Taxane ← 1 ; 2 ; (Taxane ← 3 ; 4) ; ((Liiska cusub) walax:(Taxane ← 3 ; 4) meeshaas:‘bar’, walax:1 meeshaas:‘foo’)) meeshaas:‘nested’, walax:Maya meeshaas:‘legend’, walax:27 meeshaas:‘age’, walax:‘Jack’ meeshaas:‘name’
+(Liiska cusub) walax:(Taxane ← 1 ; 2 ; (Taxane ← 3 ; 4) ; ((Liiska cusub) walax:(Taxane ← 3 ; 4) meeshaas:['bar'], walax:1 meeshaas:['foo'])) meeshaas:['nested'], walax:Maya meeshaas:['legend'], walax:27 meeshaas:['age'], walax:['Jack'] meeshaas:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

@@ -1,6 +1,6 @@
 (List new) put:['a"b'] at:['test']
 Invalid JSON.
-(List new) put:(Sequence ← 1 ; 2 ; (Sequence ← 3 ; 4) ; ((List new) put:(Sequence ← 3 ; 4) at:['bar'], put:1 at:['foo'])) at:['nested'], put:No at:['legend'], put:27 at:['age'], put:['Jack'] at:['name']
+(List new) put:(Sequence ← 1 ; 2 ; (Sequence ← 3 ; 4) ; ((List new) put:(Sequence ← 3 ; 4) at:['bar'], put:1 at:['foo'])) at:['nested'], put:False at:['legend'], put:27 at:['age'], put:['Jack'] at:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

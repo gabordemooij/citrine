@@ -1,6 +1,6 @@
-(Peta anyar) nempatkeun:‘a"b’ di:‘test’
+(Peta anyar) nempatkeun:['a"b'] di:['test']
 Invalid JSON.
-(Peta anyar) nempatkeun:(Daptar ← 1 ; 2 ; (Daptar ← 3 ; 4) ; ((Peta anyar) nempatkeun:(Daptar ← 3 ; 4) di:‘bar’, nempatkeun:1 di:‘foo’)) di:‘nested’, nempatkeun:Palsu di:‘legend’, nempatkeun:27 di:‘age’, nempatkeun:‘Jack’ di:‘name’
+(Peta anyar) nempatkeun:(Daptar ← 1 ; 2 ; (Daptar ← 3 ; 4) ; ((Peta anyar) nempatkeun:(Daptar ← 3 ; 4) di:['bar'], nempatkeun:1 di:['foo'])) di:['nested'], nempatkeun:Palsu di:['legend'], nempatkeun:27 di:['age'], nempatkeun:['Jack'] di:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

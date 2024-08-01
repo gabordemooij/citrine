@@ -25,12 +25,12 @@ Zero
 Zero
 Zero
 Elenco
-(Elenco nuovo) mettere:2 a:‘1’
+(Elenco nuovo) mettere:2 a:['1']
 Elenco
-(Elenco nuovo) mettere:2 a:‘x’
+(Elenco nuovo) mettere:2 a:['x']
 Elenco
-(Elenco nuovo) mettere:Zero a:‘x’
+(Elenco nuovo) mettere:Zero a:['x']
 Elenco
-(Elenco nuovo) mettere:Zero a:‘x’
+(Elenco nuovo) mettere:Zero a:['x']
 Zero
 Zero

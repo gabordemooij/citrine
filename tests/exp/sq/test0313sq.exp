@@ -1,10 +1,10 @@
 There are 2 chairs in the sunny garden.
 A rubber duck swims in the pool.
-Is there a shed in the garden? Well.. I rremë
+Is there a shed in the garden? Well.. I-rremë
 In the garden you smell the fragrance of tulips and roses and lillies.
 The garden is Zero meters long.
 Luckily, this day, there are Zero wasps in the garden.
 The dog named Zero sleeps under the tree.
 a\"bb\"ccc\"
-(Hartë i ri) vënë:((Hartë i ri) vënë:Zero në:‘dog’, vënë:Zero në:‘insects’, vënë:((Hartë i ri) vënë:15 në:‘length’, vënë:8 në:‘width’) në:‘size’, vënë:(Listë ← ‘tulips’ ; ‘roses’ ; ‘lillies’) në:‘flower’, vënë:I rremë në:‘shed’, vënë:I vërtetë në:‘pool’, vënë:2 në:‘chairs’) në:‘garden’
+(Hartë i-ri) vënë:((Hartë i-ri) vënë:Zero në:['dog'], vënë:Zero në:['insects'], vënë:((Hartë i-ri) vënë:15 në:['length'], vënë:8 në:['width']) në:['size'], vënë:(Listë ← ['tulips'] ; ['roses'] ; ['lillies']) në:['flower'], vënë:I-rremë në:['shed'], vënë:I-vërtetë në:['pool'], vënë:2 në:['chairs']) në:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

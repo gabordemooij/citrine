@@ -1,5 +1,5 @@
-a b | No No Yes Yes -1
-b a | Yes Yes No No 1
-hallo hello | No No Yes Yes -4
-human human | No Yes No Yes 0
-x z | No No Yes Yes -2
+a b | False False True True -1
+b a | True True False False 1
+hallo hello | False False True True -4
+human human | False True False True 0
+x z | False False True True -2

@@ -6,5 +6,5 @@ The garden is Ništa meters long.
 Luckily, this day, there are Ništa wasps in the garden.
 The dog named Ništa sleeps under the tree.
 a\"bb\"ccc\"
-(Popis novi) staviti:((Popis novi) staviti:Ništa na:‘dog’, staviti:Ništa na:‘insects’, staviti:((Popis novi) staviti:15 na:‘length’, staviti:8 na:‘width’) na:‘size’, staviti:(Serija ← ‘tulips’ ; ‘roses’ ; ‘lillies’) na:‘flower’, staviti:Ne na:‘shed’, staviti:Da na:‘pool’, staviti:2 na:‘chairs’) na:‘garden’
+(Popis novi) staviti:((Popis novi) staviti:Ništa na:['dog'], staviti:Ništa na:['insects'], staviti:((Popis novi) staviti:15 na:['length'], staviti:8 na:['width']) na:['size'], staviti:(Serija ← ['tulips'] ; ['roses'] ; ['lillies']) na:['flower'], staviti:Ne na:['shed'], staviti:Da na:['pool'], staviti:2 na:['chairs']) na:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

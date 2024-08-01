@@ -21,16 +21,16 @@ Mndandanda ← 1 ; (Mndandanda ← 2)
 Mndandanda
 Mndandanda ← 1 ; (Mndandanda ← 2) ; 3
 Mndandanda
-Mndandanda ← 1 ; ((Map zatsopano) ikani:‘a’ pa:‘b’) ; 3
+Mndandanda ← 1 ; ((Map zatsopano) ikani:['a'] pa:['b']) ; 3
 Mndandanda
-Mndandanda ← 1 ; ((Map zatsopano) ikani:(Mndandanda ← 9) pa:‘b’) ; 3
+Mndandanda ← 1 ; ((Map zatsopano) ikani:(Mndandanda ← 9) pa:['b']) ; 3
 Map
-(Map zatsopano) ikani:2 pa:‘1’
+(Map zatsopano) ikani:2 pa:['1']
 Map
-(Map zatsopano) ikani:2 pa:‘x’
+(Map zatsopano) ikani:2 pa:['x']
 Map
-(Map zatsopano) ikani:(Mndandanda ← 1 ; 2) pa:‘x’
+(Map zatsopano) ikani:(Mndandanda ← 1 ; 2) pa:['x']
 Map
-(Map zatsopano) ikani:(Mndandanda ← ((Map zatsopano) ikani:‘q’ pa:‘y’) ; 2) pa:‘x’
+(Map zatsopano) ikani:(Mndandanda ← ((Map zatsopano) ikani:['q'] pa:['y']) ; 2) pa:['x']
 Nil
 Nil

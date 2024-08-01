@@ -1,6 +1,6 @@
-(Maapụ ohuru) tinye:‘a"b’ na:‘test’
+(Maapụ ohuru) tinye:['a"b'] na:['test']
 Invalid JSON.
-(Maapụ ohuru) tinye:(Ndepụta ← 1 ; 2 ; (Ndepụta ← 3 ; 4) ; ((Maapụ ohuru) tinye:(Ndepụta ← 3 ; 4) na:‘bar’, tinye:1 na:‘foo’)) na:‘nested’, tinye:Gha na:‘legend’, tinye:27 na:‘age’, tinye:‘Jack’ na:‘name’
+(Maapụ ohuru) tinye:(Ndepụta ← 1 ; 2 ; (Ndepụta ← 3 ; 4) ; ((Maapụ ohuru) tinye:(Ndepụta ← 3 ; 4) na:['bar'], tinye:1 na:['foo'])) na:['nested'], tinye:Gha na:['legend'], tinye:27 na:['age'], tinye:['Jack'] na:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

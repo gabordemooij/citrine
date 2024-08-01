@@ -6,5 +6,5 @@ The garden is Eidel meters long.
 Luckily, this day, there are Eidel wasps in the garden.
 The dog named Eidel sleeps under the tree.
 a\"bb\"ccc\"
-(Lëscht nei) setzen:((Lëscht nei) setzen:Eidel bei:‘dog’, setzen:Eidel bei:‘insects’, setzen:((Lëscht nei) setzen:15 bei:‘length’, setzen:8 bei:‘width’) bei:‘size’, setzen:(Serie ← ‘tulips’ ; ‘roses’ ; ‘lillies’) bei:‘flower’, setzen:Falsch bei:‘shed’, setzen:Richteg bei:‘pool’, setzen:2 bei:‘chairs’) bei:‘garden’
+(Lëscht nei) setzen:((Lëscht nei) setzen:Eidel bei:['dog'], setzen:Eidel bei:['insects'], setzen:((Lëscht nei) setzen:15 bei:['length'], setzen:8 bei:['width']) bei:['size'], setzen:(Serie ← ['tulips'] ; ['roses'] ; ['lillies']) bei:['flower'], setzen:Falsch bei:['shed'], setzen:Richteg bei:['pool'], setzen:2 bei:['chairs']) bei:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

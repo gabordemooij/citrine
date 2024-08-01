@@ -1,7 +1,7 @@
 s "respond:and:and:and:" "cevap:ve:ve:ve:"
 s "respond:and:and:" "cevap:ve:ve:"
 s "respond:and:" "cevap:ve:"
-s "respond:" "cevap vermek:"
+s "respond:" "cevap-vermek:"
 t "color" "colortr"
 s "add:" "ekle:"
 s "subtract:" "subtract:"

@@ -21,16 +21,16 @@ Letoto ← 1 ; (Letoto ← 2)
 Letoto
 Letoto ← 1 ; (Letoto ← 2) ; 3
 Letoto
-Letoto ← 1 ; ((Lethathamo ncha) beha:‘a’ ka:‘b’) ; 3
+Letoto ← 1 ; ((Lethathamo ncha) beha:['a'] ka:['b']) ; 3
 Letoto
-Letoto ← 1 ; ((Lethathamo ncha) beha:(Letoto ← 9) ka:‘b’) ; 3
+Letoto ← 1 ; ((Lethathamo ncha) beha:(Letoto ← 9) ka:['b']) ; 3
 Lethathamo
-(Lethathamo ncha) beha:2 ka:‘1’
+(Lethathamo ncha) beha:2 ka:['1']
 Lethathamo
-(Lethathamo ncha) beha:2 ka:‘x’
+(Lethathamo ncha) beha:2 ka:['x']
 Lethathamo
-(Lethathamo ncha) beha:(Letoto ← 1 ; 2) ka:‘x’
+(Lethathamo ncha) beha:(Letoto ← 1 ; 2) ka:['x']
 Lethathamo
-(Lethathamo ncha) beha:(Letoto ← ((Lethathamo ncha) beha:‘q’ ka:‘y’) ; 2) ka:‘x’
+(Lethathamo ncha) beha:(Letoto ← ((Lethathamo ncha) beha:['q'] ka:['y']) ; 2) ka:['x']
 Letho
 Letho

@@ -1,8 +1,8 @@
 Nada
 Nada
-Sí òf nò
+Sí-òf-nò
 Bal
-Sí òf nò
+Sí-òf-nò
 No
 Number
 1
@@ -21,16 +21,16 @@ Sèt ← 1 ; (Sèt ← 2)
 Sèt
 Sèt ← 1 ; (Sèt ← 2) ; 3
 Sèt
-Sèt ← 1 ; ((Lista notisia) perde:‘a’ na:‘b’) ; 3
+Sèt ← 1 ; ((Lista notisia) perde:['a'] na:['b']) ; 3
 Sèt
-Sèt ← 1 ; ((Lista notisia) perde:(Sèt ← 9) na:‘b’) ; 3
+Sèt ← 1 ; ((Lista notisia) perde:(Sèt ← 9) na:['b']) ; 3
 Lista
-(Lista notisia) perde:2 na:‘1’
+(Lista notisia) perde:2 na:['1']
 Lista
-(Lista notisia) perde:2 na:‘x’
+(Lista notisia) perde:2 na:['x']
 Lista
-(Lista notisia) perde:(Sèt ← 1 ; 2) na:‘x’
+(Lista notisia) perde:(Sèt ← 1 ; 2) na:['x']
 Lista
-(Lista notisia) perde:(Sèt ← ((Lista notisia) perde:‘q’ na:‘y’) ; 2) na:‘x’
+(Lista notisia) perde:(Sèt ← ((Lista notisia) perde:['q'] na:['y']) ; 2) na:['x']
 Nada
 Nada

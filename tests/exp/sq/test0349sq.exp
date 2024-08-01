@@ -1,9 +1,9 @@
 Zero
 Zero
 Boolean
-I vërtetë
+I-vërtetë
 Boolean
-I rremë
+I-rremë
 Numër
 1
 Numër
@@ -13,7 +13,7 @@ Numër
 Numër
 -9,2
 Listë
-Listë i ri 
+Listë i-ri 
 Listë
 Listë ← 1 ; 2
 Listë
@@ -21,16 +21,16 @@ Listë ← 1 ; (Listë ← 2)
 Listë
 Listë ← 1 ; (Listë ← 2) ; 3
 Listë
-Listë ← 1 ; ((Hartë i ri) vënë:‘a’ në:‘b’) ; 3
+Listë ← 1 ; ((Hartë i-ri) vënë:['a'] në:['b']) ; 3
 Listë
-Listë ← 1 ; ((Hartë i ri) vënë:(Listë ← 9) në:‘b’) ; 3
+Listë ← 1 ; ((Hartë i-ri) vënë:(Listë ← 9) në:['b']) ; 3
 Hartë
-(Hartë i ri) vënë:2 në:‘1’
+(Hartë i-ri) vënë:2 në:['1']
 Hartë
-(Hartë i ri) vënë:2 në:‘x’
+(Hartë i-ri) vënë:2 në:['x']
 Hartë
-(Hartë i ri) vënë:(Listë ← 1 ; 2) në:‘x’
+(Hartë i-ri) vënë:(Listë ← 1 ; 2) në:['x']
 Hartë
-(Hartë i ri) vënë:(Listë ← ((Hartë i ri) vënë:‘q’ në:‘y’) ; 2) në:‘x’
+(Hartë i-ri) vënë:(Listë ← ((Hartë i-ri) vënë:['q'] në:['y']) ; 2) në:['x']
 Zero
 Zero

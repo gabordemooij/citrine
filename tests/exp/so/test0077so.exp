@@ -1,11 +1,11 @@
 Qoraal,Tirada
-Qoraal,Haa maya
+Qoraal,Haa-maya
 Tirada,Qoraal
-Tirada,Haa maya
-Haa maya,Tirada
-Haa maya,Tirada
-Haa maya,Qoraal
-Haa maya,Qoraal
+Tirada,Haa-maya
+Haa-maya,Tirada
+Haa-maya,Tirada
+Haa-maya,Qoraal
+Haa-maya,Qoraal
 === String test ===
 123
 Maya

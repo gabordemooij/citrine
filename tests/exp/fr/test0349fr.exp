@@ -1,8 +1,8 @@
 Rien
 Rien
-Oui ou Non
+Oui-ou-Non
 Oui
-Oui ou Non
+Oui-ou-Non
 Non
 Nombre
 1
@@ -21,16 +21,16 @@ Série ← 1 ; (Série ← 2)
 Série
 Série ← 1 ; (Série ← 2) ; 3
 Série
-Série ← 1 ; ((Liste nouveau) mettre:‘a’ à:‘b’) ; 3
+Série ← 1 ; ((Liste nouveau) mettre:['a'] à:['b']) ; 3
 Série
-Série ← 1 ; ((Liste nouveau) mettre:(Série ← 9) à:‘b’) ; 3
+Série ← 1 ; ((Liste nouveau) mettre:(Série ← 9) à:['b']) ; 3
 Liste
-(Liste nouveau) mettre:2 à:‘1’
+(Liste nouveau) mettre:2 à:['1']
 Liste
-(Liste nouveau) mettre:2 à:‘x’
+(Liste nouveau) mettre:2 à:['x']
 Liste
-(Liste nouveau) mettre:(Série ← 1 ; 2) à:‘x’
+(Liste nouveau) mettre:(Série ← 1 ; 2) à:['x']
 Liste
-(Liste nouveau) mettre:(Série ← ((Liste nouveau) mettre:‘q’ à:‘y’) ; 2) à:‘x’
+(Liste nouveau) mettre:(Série ← ((Liste nouveau) mettre:['q'] à:['y']) ; 2) à:['x']
 Rien
 Rien

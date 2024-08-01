@@ -1,6 +1,6 @@
-(Lista ny) sätta‘a"b’ vid:‘test’
+(Lista ny) sätta['a"b'] vid:['test']
 Invalid JSON.
-(Lista ny) sätta(Serie ← 1 ; 2 ; (Serie ← 3 ; 4) ; ((Lista ny) sätta(Serie ← 3 ; 4) vid:‘bar’, sätta1 vid:‘foo’)) vid:‘nested’, sättaFalsk vid:‘legend’, sätta27 vid:‘age’, sätta‘Jack’ vid:‘name’
+(Lista ny) sätta(Serie ← 1 ; 2 ; (Serie ← 3 ; 4) ; ((Lista ny) sätta(Serie ← 3 ; 4) vid:['bar'], sätta1 vid:['foo'])) vid:['nested'], sättaFalsk vid:['legend'], sätta27 vid:['age'], sätta['Jack'] vid:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

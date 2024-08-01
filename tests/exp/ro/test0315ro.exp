@@ -1,6 +1,6 @@
-(Hartă crea) pune:‘a"b’ la:‘test’
+(Hartă crea) pune:['a"b'] la:['test']
 Invalid JSON.
-(Hartă crea) pune:(Listă ← 1 ; 2 ; (Listă ← 3 ; 4) ; ((Hartă crea) pune:(Listă ← 3 ; 4) la:‘bar’, pune:1 la:‘foo’)) la:‘nested’, pune:Fals la:‘legend’, pune:27 la:‘age’, pune:‘Jack’ la:‘name’
+(Hartă crea) pune:(Listă ← 1 ; 2 ; (Listă ← 3 ; 4) ; ((Hartă crea) pune:(Listă ← 3 ; 4) la:['bar'], pune:1 la:['foo'])) la:['nested'], pune:Fals la:['legend'], pune:27 la:['age'], pune:['Jack'] la:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

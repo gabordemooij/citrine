@@ -21,16 +21,16 @@ Serie ← 1 ; (Serie ← 2)
 Serie
 Serie ← 1 ; (Serie ← 2) ; 3
 Serie
-Serie ← 1 ; ((Serieă neł) pune:‘a’ la:‘b’) ; 3
+Serie ← 1 ; ((Serieă neł) pune:['a'] la:['b']) ; 3
 Serie
-Serie ← 1 ; ((Serieă neł) pune:(Serie ← 9) la:‘b’) ; 3
+Serie ← 1 ; ((Serieă neł) pune:(Serie ← 9) la:['b']) ; 3
 Serieă
-(Serieă neł) pune:2 la:‘1’
+(Serieă neł) pune:2 la:['1']
 Serieă
-(Serieă neł) pune:2 la:‘x’
+(Serieă neł) pune:2 la:['x']
 Serieă
-(Serieă neł) pune:(Serie ← 1 ; 2) la:‘x’
+(Serieă neł) pune:(Serie ← 1 ; 2) la:['x']
 Serieă
-(Serieă neł) pune:(Serie ← ((Serieă neł) pune:‘q’ la:‘y’) ; 2) la:‘x’
+(Serieă neł) pune:(Serie ← ((Serieă neł) pune:['q'] la:['y']) ; 2) la:['x']
 Nil
 Nil

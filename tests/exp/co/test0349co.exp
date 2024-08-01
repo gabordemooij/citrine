@@ -1,7 +1,7 @@
 Nil
 Nil
 Booleanu
-Hè vera
+Hè-vera
 Booleanu
 False
 Numero
@@ -21,16 +21,16 @@ Serie ← 1 ; (Serie ← 2)
 Serie
 Serie ← 1 ; (Serie ← 2) ; 3
 Serie
-Serie ← 1 ; ((Lista novu) mette:‘a’ à:‘b’) ; 3
+Serie ← 1 ; ((Lista novu) mette:['a'] à:['b']) ; 3
 Serie
-Serie ← 1 ; ((Lista novu) mette:(Serie ← 9) à:‘b’) ; 3
+Serie ← 1 ; ((Lista novu) mette:(Serie ← 9) à:['b']) ; 3
 Lista
-(Lista novu) mette:2 à:‘1’
+(Lista novu) mette:2 à:['1']
 Lista
-(Lista novu) mette:2 à:‘x’
+(Lista novu) mette:2 à:['x']
 Lista
-(Lista novu) mette:(Serie ← 1 ; 2) à:‘x’
+(Lista novu) mette:(Serie ← 1 ; 2) à:['x']
 Lista
-(Lista novu) mette:(Serie ← ((Lista novu) mette:‘q’ à:‘y’) ; 2) à:‘x’
+(Lista novu) mette:(Serie ← ((Lista novu) mette:['q'] à:['y']) ; 2) à:['x']
 Nil
 Nil

@@ -1,12 +1,12 @@
-Ntawv nyeem,Tooj
-Ntawv nyeem,Tub Npis
-Tooj,Ntawv nyeem
-Tooj,Tub Npis
-Tub Npis,Tooj
-Tub Npis,Tooj
-Tub Npis,Ntawv nyeem
-Tub Npis,Ntawv nyeem
+Ntawv-nyeem,Tooj
+Ntawv-nyeem,Tub-Npis
+Tooj,Ntawv-nyeem
+Tooj,Tub-Npis
+Tub-Npis,Tooj
+Tub-Npis,Tooj
+Tub-Npis,Ntawv-nyeem
+Tub-Npis,Ntawv-nyeem
 === String test ===
 123
-Tsis tseeb
-Muaj tseeb
+Tsis-tseeb
+Muaj-tseeb

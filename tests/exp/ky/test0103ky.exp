@@ -1,8 +1,8 @@
 9
 a зат ‘зат’  is NOT Nil.
-a Oоба же жок ‘Oоба’  is NOT Nil.
-a Oоба же жок ‘Жок’  is NOT Nil.
-a Oоба же жок ‘Жок’  is NOT Nil.
+a Oоба-же-жок ‘Oоба’  is NOT Nil.
+a Oоба-же-жок ‘Жок’  is NOT Nil.
+a Oоба-же-жок ‘Жок’  is NOT Nil.
 a Cан ‘1’  is NOT Nil.
 a Cан ‘0’  is NOT Nil.
 a Сөз ‘Str’  is NOT Nil.

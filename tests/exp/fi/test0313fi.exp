@@ -6,5 +6,5 @@ The garden is Nolla meters long.
 Luckily, this day, there are Nolla wasps in the garden.
 The dog named Nolla sleeps under the tree.
 a\"bb\"ccc\"
-(Kartta uusi) laita:((Kartta uusi) laita:Nolla osoitteessa:‘dog’, laita:Nolla osoitteessa:‘insects’, laita:((Kartta uusi) laita:15 osoitteessa:‘length’, laita:8 osoitteessa:‘width’) osoitteessa:‘size’, laita:(Lista ← ‘tulips’ ; ‘roses’ ; ‘lillies’) osoitteessa:‘flower’, laita:Väärä osoitteessa:‘shed’, laita:Totta osoitteessa:‘pool’, laita:2 osoitteessa:‘chairs’) osoitteessa:‘garden’
+(Kartta uusi) laita:((Kartta uusi) laita:Nolla osoitteessa:['dog'], laita:Nolla osoitteessa:['insects'], laita:((Kartta uusi) laita:15 osoitteessa:['length'], laita:8 osoitteessa:['width']) osoitteessa:['size'], laita:(Lista ← ['tulips'] ; ['roses'] ; ['lillies']) osoitteessa:['flower'], laita:Väärä osoitteessa:['shed'], laita:Totta osoitteessa:['pool'], laita:2 osoitteessa:['chairs']) osoitteessa:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

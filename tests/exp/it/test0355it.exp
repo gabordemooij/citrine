@@ -1,15 +1,15 @@
 1.001
 1.024
-Elenco ← ‘1’ ; ‘2’ ; ‘3’
-Elenco ← ‘1’ ; ‘2’ ; ‘3’
-Elenco ← ‘1’ ; ‘’ ; ‘3’
-Elenco ← ‘1’ ; ‘’ ; ‘3’
-Elenco ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Elenco ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Elenco ← ‘’ ; ‘’
-Elenco ← ‘’ ; ‘’
-Elenco ← ‘x’
-Elenco ← ‘x’
-Elenco ← ‘’
-Elenco ← ‘’
-Elenco ← ‘1,2,3’
+Elenco ← ['1'] ; ['2'] ; ['3']
+Elenco ← ['1'] ; ['2'] ; ['3']
+Elenco ← ['1'] ; [''] ; ['3']
+Elenco ← ['1'] ; [''] ; ['3']
+Elenco ← [''] ; [''] ; [''] ; ['']
+Elenco ← [''] ; [''] ; [''] ; ['']
+Elenco ← [''] ; ['']
+Elenco ← [''] ; ['']
+Elenco ← ['x']
+Elenco ← ['x']
+Elenco ← ['']
+Elenco ← ['']
+Elenco ← ['1,2,3']

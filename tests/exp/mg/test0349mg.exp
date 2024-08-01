@@ -21,16 +21,16 @@ List ← 1 ; (List ← 2)
 List
 List ← 1 ; (List ← 2) ; 3
 List
-List ← 1 ; ((Map vaovao) hametraka:‘a’ amin’ny:‘b’) ; 3
+List ← 1 ; ((Map vaovao) hametraka:['a'] amin']ny:['b']) ; 3
 List
-List ← 1 ; ((Map vaovao) hametraka:(List ← 9) amin’ny:‘b’) ; 3
+List ← 1 ; ((Map vaovao) hametraka:(List ← 9) amin']ny:['b']) ; 3
 Map
-(Map vaovao) hametraka:2 amin’ny:‘1’
+(Map vaovao) hametraka:2 amin']ny:['1']
 Map
-(Map vaovao) hametraka:2 amin’ny:‘x’
+(Map vaovao) hametraka:2 amin']ny:['x']
 Map
-(Map vaovao) hametraka:(List ← 1 ; 2) amin’ny:‘x’
+(Map vaovao) hametraka:(List ← 1 ; 2) amin']ny:['x']
 Map
-(Map vaovao) hametraka:(List ← ((Map vaovao) hametraka:‘q’ amin’ny:‘y’) ; 2) amin’ny:‘x’
+(Map vaovao) hametraka:(List ← ((Map vaovao) hametraka:['q'] amin']ny:['y']) ; 2) amin']ny:['x']
 Nil
 Nil

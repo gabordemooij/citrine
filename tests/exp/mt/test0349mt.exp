@@ -21,16 +21,16 @@ Serje ← 1 ; (Serje ← 2)
 Serje
 Serje ← 1 ; (Serje ← 2) ; 3
 Serje
-Serje ← 1 ; ((Lista ġdid) tpoġġi:‘a’ fi:‘b’) ; 3
+Serje ← 1 ; ((Lista ġdid) tpoġġi:['a'] fi:['b']) ; 3
 Serje
-Serje ← 1 ; ((Lista ġdid) tpoġġi:(Serje ← 9) fi:‘b’) ; 3
+Serje ← 1 ; ((Lista ġdid) tpoġġi:(Serje ← 9) fi:['b']) ; 3
 Lista
-(Lista ġdid) tpoġġi:2 fi:‘1’
+(Lista ġdid) tpoġġi:2 fi:['1']
 Lista
-(Lista ġdid) tpoġġi:2 fi:‘x’
+(Lista ġdid) tpoġġi:2 fi:['x']
 Lista
-(Lista ġdid) tpoġġi:(Serje ← 1 ; 2) fi:‘x’
+(Lista ġdid) tpoġġi:(Serje ← 1 ; 2) fi:['x']
 Lista
-(Lista ġdid) tpoġġi:(Serje ← ((Lista ġdid) tpoġġi:‘q’ fi:‘y’) ; 2) fi:‘x’
+(Lista ġdid) tpoġġi:(Serje ← ((Lista ġdid) tpoġġi:['q'] fi:['y']) ; 2) fi:['x']
 Nil
 Nil

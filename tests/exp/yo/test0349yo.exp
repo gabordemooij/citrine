@@ -1,8 +1,8 @@
 Ofo
 Ofo
-Bẹẹni tabi bẹẹkọ
+Bẹẹni-tabi-bẹẹkọ
 Bẹẹni
-Bẹẹni tabi bẹẹkọ
+Bẹẹni-tabi-bẹẹkọ
 Bẹẹkọ
 Nọmba
 1
@@ -21,16 +21,16 @@ Jara ← 1 ; (Jara ← 2)
 Jara
 Jara ← 1 ; (Jara ← 2) ; 3
 Jara
-Jara ← 1 ; ((Akojọ tuntun) fi:‘a’ nipa:‘b’) ; 3
+Jara ← 1 ; ((Akojọ tuntun) fi:['a'] nipa:['b']) ; 3
 Jara
-Jara ← 1 ; ((Akojọ tuntun) fi:(Jara ← 9) nipa:‘b’) ; 3
+Jara ← 1 ; ((Akojọ tuntun) fi:(Jara ← 9) nipa:['b']) ; 3
 Akojọ
-(Akojọ tuntun) fi:2 nipa:‘1’
+(Akojọ tuntun) fi:2 nipa:['1']
 Akojọ
-(Akojọ tuntun) fi:2 nipa:‘x’
+(Akojọ tuntun) fi:2 nipa:['x']
 Akojọ
-(Akojọ tuntun) fi:(Jara ← 1 ; 2) nipa:‘x’
+(Akojọ tuntun) fi:(Jara ← 1 ; 2) nipa:['x']
 Akojọ
-(Akojọ tuntun) fi:(Jara ← ((Akojọ tuntun) fi:‘q’ nipa:‘y’) ; 2) nipa:‘x’
+(Akojọ tuntun) fi:(Jara ← ((Akojọ tuntun) fi:['q'] nipa:['y']) ; 2) nipa:['x']
 Ofo
 Ofo

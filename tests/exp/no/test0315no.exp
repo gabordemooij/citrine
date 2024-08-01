@@ -1,6 +1,6 @@
-(Liste ny) sagt:‘a"b’ at:‘test’
+(Liste ny) sagt:['a"b'] at:['test']
 Invalid JSON.
-(Liste ny) sagt:(Rad ← 1 ; 2 ; (Rad ← 3 ; 4) ; ((Liste ny) sagt:(Rad ← 3 ; 4) at:‘bar’, sagt:1 at:‘foo’)) at:‘nested’, sagt:Falsk at:‘legend’, sagt:27 at:‘age’, sagt:‘Jack’ at:‘name’
+(Liste ny) sagt:(Rad ← 1 ; 2 ; (Rad ← 3 ; 4) ; ((Liste ny) sagt:(Rad ← 3 ; 4) at:['bar'], sagt:1 at:['foo'])) at:['nested'], sagt:Falsk at:['legend'], sagt:27 at:['age'], sagt:['Jack'] at:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

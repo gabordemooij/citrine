@@ -21,16 +21,16 @@ Sorozat ← 1 ; (Sorozat ← 2)
 Sorozat
 Sorozat ← 1 ; (Sorozat ← 2) ; 3
 Sorozat
-Sorozat ← 1 ; ((Lista új) magyarán:‘a’ itt:‘b’) ; 3
+Sorozat ← 1 ; ((Lista új) magyarán:['a'] itt:['b']) ; 3
 Sorozat
-Sorozat ← 1 ; ((Lista új) magyarán:(Sorozat ← 9) itt:‘b’) ; 3
+Sorozat ← 1 ; ((Lista új) magyarán:(Sorozat ← 9) itt:['b']) ; 3
 Lista
-(Lista új) magyarán:2 itt:‘1’
+(Lista új) magyarán:2 itt:['1']
 Lista
-(Lista új) magyarán:2 itt:‘x’
+(Lista új) magyarán:2 itt:['x']
 Lista
-(Lista új) magyarán:(Sorozat ← 1 ; 2) itt:‘x’
+(Lista új) magyarán:(Sorozat ← 1 ; 2) itt:['x']
 Lista
-(Lista új) magyarán:(Sorozat ← ((Lista új) magyarán:‘q’ itt:‘y’) ; 2) itt:‘x’
+(Lista új) magyarán:(Sorozat ← ((Lista új) magyarán:['q'] itt:['y']) ; 2) itt:['x']
 Üres
 Üres

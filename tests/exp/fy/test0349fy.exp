@@ -21,16 +21,16 @@ Searje ← 1 ; (Searje ← 2)
 Searje
 Searje ← 1 ; (Searje ← 2) ; 3
 Searje
-Searje ← 1 ; ((List nĳ) set: ‘a’ by:‘b’) ; 3
+Searje ← 1 ; ((List nĳ) set: ['a'] by:['b']) ; 3
 Searje
-Searje ← 1 ; ((List nĳ) set: (Searje ← 9) by:‘b’) ; 3
+Searje ← 1 ; ((List nĳ) set: (Searje ← 9) by:['b']) ; 3
 List
-(List nĳ) set: 2 by:‘1’
+(List nĳ) set: 2 by:['1']
 List
-(List nĳ) set: 2 by:‘x’
+(List nĳ) set: 2 by:['x']
 List
-(List nĳ) set: (Searje ← 1 ; 2) by:‘x’
+(List nĳ) set: (Searje ← 1 ; 2) by:['x']
 List
-(List nĳ) set: (Searje ← ((List nĳ) set: ‘q’ by:‘y’) ; 2) by:‘x’
+(List nĳ) set: (Searje ← ((List nĳ) set: ['q'] by:['y']) ; 2) by:['x']
 Neat
 Neat

@@ -21,16 +21,16 @@ Serie ← 1 ; (Serie ← 2)
 Serie
 Serie ← 1 ; (Serie ← 2) ; 3
 Serie
-Serie ← 1 ; ((Lista nuevo) ponlo:‘a’ en:‘b’) ; 3
+Serie ← 1 ; ((Lista nuevo) ponlo:['a'] en:['b']) ; 3
 Serie
-Serie ← 1 ; ((Lista nuevo) ponlo:(Serie ← 9) en:‘b’) ; 3
+Serie ← 1 ; ((Lista nuevo) ponlo:(Serie ← 9) en:['b']) ; 3
 Lista
-(Lista nuevo) ponlo:2 en:‘1’
+(Lista nuevo) ponlo:2 en:['1']
 Lista
-(Lista nuevo) ponlo:2 en:‘x’
+(Lista nuevo) ponlo:2 en:['x']
 Lista
-(Lista nuevo) ponlo:(Serie ← 1 ; 2) en:‘x’
+(Lista nuevo) ponlo:(Serie ← 1 ; 2) en:['x']
 Lista
-(Lista nuevo) ponlo:(Serie ← ((Lista nuevo) ponlo:‘q’ en:‘y’) ; 2) en:‘x’
+(Lista nuevo) ponlo:(Serie ← ((Lista nuevo) ponlo:['q'] en:['y']) ; 2) en:['x']
 Nulo
 Nulo

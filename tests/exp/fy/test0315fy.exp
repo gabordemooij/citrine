@@ -1,6 +1,6 @@
-(List nĳ) set: ‘a"b’ by:‘test’
+(List nĳ) set: ['a"b'] by:['test']
 Invalid JSON.
-(List nĳ) set: (Searje ← 1 ; 2 ; (Searje ← 3 ; 4) ; ((List nĳ) set: (Searje ← 3 ; 4) by:‘bar’, set: 1 by:‘foo’)) by:‘nested’, set: Nee by:‘legend’, set: 27 by:‘age’, set: ‘Jack’ by:‘name’
+(List nĳ) set: (Searje ← 1 ; 2 ; (Searje ← 3 ; 4) ; ((List nĳ) set: (Searje ← 3 ; 4) by:['bar'], set: 1 by:['foo'])) by:['nested'], set: Nee by:['legend'], set: 27 by:['age'], set: ['Jack'] by:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

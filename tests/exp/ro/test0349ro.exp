@@ -21,16 +21,16 @@ Listă ← 1 ; (Listă ← 2)
 Listă
 Listă ← 1 ; (Listă ← 2) ; 3
 Listă
-Listă ← 1 ; ((Hartă crea) pune:‘a’ la:‘b’) ; 3
+Listă ← 1 ; ((Hartă crea) pune:['a'] la:['b']) ; 3
 Listă
-Listă ← 1 ; ((Hartă crea) pune:(Listă ← 9) la:‘b’) ; 3
+Listă ← 1 ; ((Hartă crea) pune:(Listă ← 9) la:['b']) ; 3
 Hartă
-(Hartă crea) pune:2 la:‘1’
+(Hartă crea) pune:2 la:['1']
 Hartă
-(Hartă crea) pune:2 la:‘x’
+(Hartă crea) pune:2 la:['x']
 Hartă
-(Hartă crea) pune:(Listă ← 1 ; 2) la:‘x’
+(Hartă crea) pune:(Listă ← 1 ; 2) la:['x']
 Hartă
-(Hartă crea) pune:(Listă ← ((Hartă crea) pune:‘q’ la:‘y’) ; 2) la:‘x’
+(Hartă crea) pune:(Listă ← ((Hartă crea) pune:['q'] la:['y']) ; 2) la:['x']
 Nul
 Nul

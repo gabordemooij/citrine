@@ -21,16 +21,16 @@ Daptar ← 1 ; (Daptar ← 2)
 Daptar
 Daptar ← 1 ; (Daptar ← 2) ; 3
 Daptar
-Daptar ← 1 ; ((Peta anyar) nempatkeun:‘a’ di:‘b’) ; 3
+Daptar ← 1 ; ((Peta anyar) nempatkeun:['a'] di:['b']) ; 3
 Daptar
-Daptar ← 1 ; ((Peta anyar) nempatkeun:(Daptar ← 9) di:‘b’) ; 3
+Daptar ← 1 ; ((Peta anyar) nempatkeun:(Daptar ← 9) di:['b']) ; 3
 Peta
-(Peta anyar) nempatkeun:2 di:‘1’
+(Peta anyar) nempatkeun:2 di:['1']
 Peta
-(Peta anyar) nempatkeun:2 di:‘x’
+(Peta anyar) nempatkeun:2 di:['x']
 Peta
-(Peta anyar) nempatkeun:(Daptar ← 1 ; 2) di:‘x’
+(Peta anyar) nempatkeun:(Daptar ← 1 ; 2) di:['x']
 Peta
-(Peta anyar) nempatkeun:(Daptar ← ((Peta anyar) nempatkeun:‘q’ di:‘y’) ; 2) di:‘x’
+(Peta anyar) nempatkeun:(Daptar ← ((Peta anyar) nempatkeun:['q'] di:['y']) ; 2) di:['x']
 Nil
 Nil

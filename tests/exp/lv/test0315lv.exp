@@ -1,6 +1,6 @@
-(Karte jauns) ievietot:‘a"b’ pie:‘test’
+(Karte jauns) ievietot:['a"b'] pie:['test']
 Invalid JSON.
-(Karte jauns) ievietot:(Saraksts ← 1 ; 2 ; (Saraksts ← 3 ; 4) ; ((Karte jauns) ievietot:(Saraksts ← 3 ; 4) pie:‘bar’, ievietot:1 pie:‘foo’)) pie:‘nested’, ievietot:Viltus pie:‘legend’, ievietot:27 pie:‘age’, ievietot:‘Jack’ pie:‘name’
+(Karte jauns) ievietot:(Saraksts ← 1 ; 2 ; (Saraksts ← 3 ; 4) ; ((Karte jauns) ievietot:(Saraksts ← 3 ; 4) pie:['bar'], ievietot:1 pie:['foo'])) pie:['nested'], ievietot:Viltus pie:['legend'], ievietot:27 pie:['age'], ievietot:['Jack'] pie:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

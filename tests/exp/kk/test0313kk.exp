@@ -6,5 +6,5 @@ The garden is Eштеңе meters long.
 Luckily, this day, there are Eштеңе wasps in the garden.
 The dog named Eштеңе sleeps under the tree.
 a\"bb\"ccc\"
-(Карта жаңа) hысан:((Карта жаңа) hысан:Eштеңе oрын:‘dog’, hысан:Eштеңе oрын:‘insects’, hысан:((Карта жаңа) hысан:15 oрын:‘length’, hысан:8 oрын:‘width’) oрын:‘size’, hысан:(Тізім ← ‘tulips’ ; ‘roses’ ; ‘lillies’) oрын:‘flower’, hысан:Жалған oрын:‘shed’, hысан:Рас oрын:‘pool’, hысан:2 oрын:‘chairs’) oрын:‘garden’
+(Карта жаңа) hысан:((Карта жаңа) hысан:Eштеңе oрын:['dog'], hысан:Eштеңе oрын:['insects'], hысан:((Карта жаңа) hысан:15 oрын:['length'], hысан:8 oрын:['width']) oрын:['size'], hысан:(Тізім ← ['tulips'] ; ['roses'] ; ['lillies']) oрын:['flower'], hысан:Жалған oрын:['shed'], hысан:Рас oрын:['pool'], hысан:2 oрын:['chairs']) oрын:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

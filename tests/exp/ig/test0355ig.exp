@@ -1,15 +1,15 @@
 1.001
 1.024
-Ndepụta ← ‘1’ ; ‘2’ ; ‘3’
-Ndepụta ← ‘1’ ; ‘2’ ; ‘3’
-Ndepụta ← ‘1’ ; ‘’ ; ‘3’
-Ndepụta ← ‘1’ ; ‘’ ; ‘3’
-Ndepụta ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Ndepụta ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Ndepụta ← ‘’ ; ‘’
-Ndepụta ← ‘’ ; ‘’
-Ndepụta ← ‘x’
-Ndepụta ← ‘x’
-Ndepụta ← ‘’
-Ndepụta ← ‘’
-Ndepụta ← ‘1,2,3’
+Ndepụta ← ['1'] ; ['2'] ; ['3']
+Ndepụta ← ['1'] ; ['2'] ; ['3']
+Ndepụta ← ['1'] ; [''] ; ['3']
+Ndepụta ← ['1'] ; [''] ; ['3']
+Ndepụta ← [''] ; [''] ; [''] ; ['']
+Ndepụta ← [''] ; [''] ; [''] ; ['']
+Ndepụta ← [''] ; ['']
+Ndepụta ← [''] ; ['']
+Ndepụta ← ['x']
+Ndepụta ← ['x']
+Ndepụta ← ['']
+Ndepụta ← ['']
+Ndepụta ← ['1,2,3']

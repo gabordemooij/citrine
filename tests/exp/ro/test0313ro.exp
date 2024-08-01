@@ -6,5 +6,5 @@ The garden is Nul meters long.
 Luckily, this day, there are Nul wasps in the garden.
 The dog named Nul sleeps under the tree.
 a\"bb\"ccc\"
-(Hartă crea) pune:((Hartă crea) pune:Nul la:‘dog’, pune:Nul la:‘insects’, pune:((Hartă crea) pune:15 la:‘length’, pune:8 la:‘width’) la:‘size’, pune:(Listă ← ‘tulips’ ; ‘roses’ ; ‘lillies’) la:‘flower’, pune:Fals la:‘shed’, pune:Adevărat la:‘pool’, pune:2 la:‘chairs’) la:‘garden’
+(Hartă crea) pune:((Hartă crea) pune:Nul la:['dog'], pune:Nul la:['insects'], pune:((Hartă crea) pune:15 la:['length'], pune:8 la:['width']) la:['size'], pune:(Listă ← ['tulips'] ; ['roses'] ; ['lillies']) la:['flower'], pune:Fals la:['shed'], pune:Adevărat la:['pool'], pune:2 la:['chairs']) la:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

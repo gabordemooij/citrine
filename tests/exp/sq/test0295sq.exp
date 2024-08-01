@@ -1,5 +1,5 @@
-a b | I rremë I rremë I vërtetë I vërtetë -1
-b a | I vërtetë I vërtetë I rremë I rremë 1
-hallo hello | I rremë I rremë I vërtetë I vërtetë -4
-human human | I rremë I vërtetë I rremë I vërtetë 0
-x z | I rremë I rremë I vërtetë I vërtetë -2
+a b | I-rremë I-rremë I-vërtetë I-vërtetë -1
+b a | I-vërtetë I-vërtetë I-rremë I-rremë 1
+hallo hello | I-rremë I-rremë I-vërtetë I-vërtetë -4
+human human | I-rremë I-vërtetë I-rremë I-vërtetë 0
+x z | I-rremë I-rremë I-vërtetë I-vërtetë -2

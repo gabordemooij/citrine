@@ -6,5 +6,5 @@ The garden is कुछ-नहीं meters long.
 Luckily, this day, there are कुछ-नहीं wasps in the garden.
 The dog named कुछ-नहीं sleeps under the tree.
 a\"bb\"ccc\"
-(नक्शा नया) रखना:((नक्शा नया) रखना:कुछ-नहीं पर:‘dog’, रखना:कुछ-नहीं पर:‘insects’, रखना:((नक्शा नया) रखना:15 पर:‘length’, रखना:8 पर:‘width’) पर:‘size’, रखना:(सूची ← ‘tulips’ ; ‘roses’ ; ‘lillies’) पर:‘flower’, रखना:असत्य पर:‘shed’, रखना:सच पर:‘pool’, रखना:2 पर:‘chairs’) पर:‘garden’
+(नक्शा नया) रखना:((नक्शा नया) रखना:कुछ-नहीं पर:['dog'], रखना:कुछ-नहीं पर:['insects'], रखना:((नक्शा नया) रखना:15 पर:['length'], रखना:8 पर:['width']) पर:['size'], रखना:(सूची ← ['tulips'] ; ['roses'] ; ['lillies']) पर:['flower'], रखना:असत्य पर:['shed'], रखना:सच पर:['pool'], रखना:2 पर:['chairs']) पर:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

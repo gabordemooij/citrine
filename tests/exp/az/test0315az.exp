@@ -1,6 +1,6 @@
-(Siyahı yeni) obyekt:‘a"b’ yer:‘test’
+(Siyahı yeni) obyekt:['a"b'] yer:['test']
 Invalid JSON.
-(Siyahı yeni) obyekt:(Seriya ← 1 ; 2 ; (Seriya ← 3 ; 4) ; ((Siyahı yeni) obyekt:(Seriya ← 3 ; 4) yer:‘bar’, obyekt:1 yer:‘foo’)) yer:‘nested’, obyekt:Yalan yer:‘legend’, obyekt:27 yer:‘age’, obyekt:‘Jack’ yer:‘name’
+(Siyahı yeni) obyekt:(Seriya ← 1 ; 2 ; (Seriya ← 3 ; 4) ; ((Siyahı yeni) obyekt:(Seriya ← 3 ; 4) yer:['bar'], obyekt:1 yer:['foo'])) yer:['nested'], obyekt:Yalan yer:['legend'], obyekt:27 yer:['age'], obyekt:['Jack'] yer:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

@@ -21,16 +21,16 @@ Zoznam ← 1 ; (Zoznam ← 2)
 Zoznam
 Zoznam ← 1 ; (Zoznam ← 2) ; 3
 Zoznam
-Zoznam ← 1 ; ((Mapa nový) povedané:‘a’ na adrese:‘b’) ; 3
+Zoznam ← 1 ; ((Mapa nový) povedané:['a'] na-adrese:['b']) ; 3
 Zoznam
-Zoznam ← 1 ; ((Mapa nový) povedané:(Zoznam ← 9) na adrese:‘b’) ; 3
+Zoznam ← 1 ; ((Mapa nový) povedané:(Zoznam ← 9) na-adrese:['b']) ; 3
 Mapa
-(Mapa nový) povedané:2 na adrese:‘1’
+(Mapa nový) povedané:2 na-adrese:['1']
 Mapa
-(Mapa nový) povedané:2 na adrese:‘x’
+(Mapa nový) povedané:2 na-adrese:['x']
 Mapa
-(Mapa nový) povedané:(Zoznam ← 1 ; 2) na adrese:‘x’
+(Mapa nový) povedané:(Zoznam ← 1 ; 2) na-adrese:['x']
 Mapa
-(Mapa nový) povedané:(Zoznam ← ((Mapa nový) povedané:‘q’ na adrese:‘y’) ; 2) na adrese:‘x’
+(Mapa nový) povedané:(Zoznam ← ((Mapa nový) povedané:['q'] na-adrese:['y']) ; 2) na-adrese:['x']
 Nula
 Nula

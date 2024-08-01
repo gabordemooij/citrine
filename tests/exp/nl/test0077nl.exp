@@ -1,11 +1,11 @@
 Tekst,Getal
-Tekst,Ja of Nee
+Tekst,Boolean
 Getal,Tekst
-Getal,Ja of Nee
-Ja of Nee,Getal
-Ja of Nee,Getal
-Ja of Nee,Tekst
-Ja of Nee,Tekst
+Getal,Boolean
+Boolean,Getal
+Boolean,Getal
+Boolean,Tekst
+Boolean,Tekst
 === String test ===
 123
 Nee

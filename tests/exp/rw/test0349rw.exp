@@ -1,8 +1,8 @@
 Ntacyo
 Ntacyo
-Yego Oya
+Yego-Oya
 Yego
-Yego Oya
+Yego-Oya
 Oya
 Umubare
 1
@@ -21,16 +21,16 @@ Urutonde ← 1 ; (Urutonde ← 2)
 Urutonde
 Urutonde ← 1 ; (Urutonde ← 2) ; 3
 Urutonde
-Urutonde ← 1 ; ((Ikarita gishya) shyira:‘a’ kuri:‘b’) ; 3
+Urutonde ← 1 ; ((Ikarita gishya) shyira:['a'] kuri:['b']) ; 3
 Urutonde
-Urutonde ← 1 ; ((Ikarita gishya) shyira:(Urutonde ← 9) kuri:‘b’) ; 3
+Urutonde ← 1 ; ((Ikarita gishya) shyira:(Urutonde ← 9) kuri:['b']) ; 3
 Ikarita
-(Ikarita gishya) shyira:2 kuri:‘1’
+(Ikarita gishya) shyira:2 kuri:['1']
 Ikarita
-(Ikarita gishya) shyira:2 kuri:‘x’
+(Ikarita gishya) shyira:2 kuri:['x']
 Ikarita
-(Ikarita gishya) shyira:(Urutonde ← 1 ; 2) kuri:‘x’
+(Ikarita gishya) shyira:(Urutonde ← 1 ; 2) kuri:['x']
 Ikarita
-(Ikarita gishya) shyira:(Urutonde ← ((Ikarita gishya) shyira:‘q’ kuri:‘y’) ; 2) kuri:‘x’
+(Ikarita gishya) shyira:(Urutonde ← ((Ikarita gishya) shyira:['q'] kuri:['y']) ; 2) kuri:['x']
 Ntacyo
 Ntacyo

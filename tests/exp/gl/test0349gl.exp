@@ -21,16 +21,16 @@ Lista ← 1 ; (Lista ← 2)
 Lista
 Lista ← 1 ; (Lista ← 2) ; 3
 Lista
-Lista ← 1 ; ((Mapa novo) poñer:‘a’ en:‘b’) ; 3
+Lista ← 1 ; ((Mapa novo) poñer:['a'] en:['b']) ; 3
 Lista
-Lista ← 1 ; ((Mapa novo) poñer:(Lista ← 9) en:‘b’) ; 3
+Lista ← 1 ; ((Mapa novo) poñer:(Lista ← 9) en:['b']) ; 3
 Mapa
-(Mapa novo) poñer:2 en:‘1’
+(Mapa novo) poñer:2 en:['1']
 Mapa
-(Mapa novo) poñer:2 en:‘x’
+(Mapa novo) poñer:2 en:['x']
 Mapa
-(Mapa novo) poñer:(Lista ← 1 ; 2) en:‘x’
+(Mapa novo) poñer:(Lista ← 1 ; 2) en:['x']
 Mapa
-(Mapa novo) poñer:(Lista ← ((Mapa novo) poñer:‘q’ en:‘y’) ; 2) en:‘x’
+(Mapa novo) poñer:(Lista ← ((Mapa novo) poñer:['q'] en:['y']) ; 2) en:['x']
 Nil
 Nil

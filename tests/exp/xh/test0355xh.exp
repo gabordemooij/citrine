@@ -1,15 +1,15 @@
 1.001
 1.024
-Uthotho ← ‘1’ ; ‘2’ ; ‘3’
-Uthotho ← ‘1’ ; ‘2’ ; ‘3’
-Uthotho ← ‘1’ ; ‘’ ; ‘3’
-Uthotho ← ‘1’ ; ‘’ ; ‘3’
-Uthotho ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Uthotho ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Uthotho ← ‘’ ; ‘’
-Uthotho ← ‘’ ; ‘’
-Uthotho ← ‘x’
-Uthotho ← ‘x’
-Uthotho ← ‘’
-Uthotho ← ‘’
-Uthotho ← ‘1,2,3’
+Uthotho ← ['1'] ; ['2'] ; ['3']
+Uthotho ← ['1'] ; ['2'] ; ['3']
+Uthotho ← ['1'] ; [''] ; ['3']
+Uthotho ← ['1'] ; [''] ; ['3']
+Uthotho ← [''] ; [''] ; [''] ; ['']
+Uthotho ← [''] ; [''] ; [''] ; ['']
+Uthotho ← [''] ; ['']
+Uthotho ← [''] ; ['']
+Uthotho ← ['x']
+Uthotho ← ['x']
+Uthotho ← ['']
+Uthotho ← ['']
+Uthotho ← ['1,2,3']

@@ -21,16 +21,16 @@ Serio ← 1 ; (Serio ← 2)
 Serio
 Serio ← 1 ; (Serio ← 2) ; 3
 Serio
-Serio ← 1 ; ((Lista nowy) że:‘a’ jest:‘b’) ; 3
+Serio ← 1 ; ((Lista nowy) że:['a'] jest:['b']) ; 3
 Serio
-Serio ← 1 ; ((Lista nowy) że:(Serio ← 9) jest:‘b’) ; 3
+Serio ← 1 ; ((Lista nowy) że:(Serio ← 9) jest:['b']) ; 3
 Lista
-(Lista nowy) że:2 jest:‘1’
+(Lista nowy) że:2 jest:['1']
 Lista
-(Lista nowy) że:2 jest:‘x’
+(Lista nowy) że:2 jest:['x']
 Lista
-(Lista nowy) że:(Serio ← 1 ; 2) jest:‘x’
+(Lista nowy) że:(Serio ← 1 ; 2) jest:['x']
 Lista
-(Lista nowy) że:(Serio ← ((Lista nowy) że:‘q’ jest:‘y’) ; 2) jest:‘x’
+(Lista nowy) że:(Serio ← ((Lista nowy) że:['q'] jest:['y']) ; 2) jest:['x']
 Zero
 Zero

@@ -1,6 +1,6 @@
-(Popis novi) staviti:‘a"b’ na:‘test’
+(Popis novi) staviti:['a"b'] na:['test']
 Invalid JSON.
-(Popis novi) staviti:(Serija ← 1 ; 2 ; (Serija ← 3 ; 4) ; ((Popis novi) staviti:(Serija ← 3 ; 4) na:‘bar’, staviti:1 na:‘foo’)) na:‘nested’, staviti:Ne na:‘legend’, staviti:27 na:‘age’, staviti:‘Jack’ na:‘name’
+(Popis novi) staviti:(Serija ← 1 ; 2 ; (Serija ← 3 ; 4) ; ((Popis novi) staviti:(Serija ← 3 ; 4) na:['bar'], staviti:1 na:['foo'])) na:['nested'], staviti:Ne na:['legend'], staviti:27 na:['age'], staviti:['Jack'] na:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

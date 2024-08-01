@@ -6,5 +6,5 @@ The garden is Бушлык meters long.
 Luckily, this day, there are Бушлык wasps in the garden.
 The dog named Бушлык sleeps under the tree.
 a\"bb\"ccc\"
-(Исемлек яңа) объект:((Исемлек яңа) объект:Бушлык урын:‘dog’, объект:Бушлык урын:‘insects’, объект:((Исемлек яңа) объект:15 урын:‘length’, объект:8 урын:‘width’) урын:‘size’, объект:(Серияләре ← ‘tulips’ ; ‘roses’ ; ‘lillies’) урын:‘flower’, объект:Ялган урын:‘shed’, объект:Дөрес урын:‘pool’, объект:2 урын:‘chairs’) урын:‘garden’
+(Исемлек яңа) объект:((Исемлек яңа) объект:Бушлык урын:['dog'], объект:Бушлык урын:['insects'], объект:((Исемлек яңа) объект:15 урын:['length'], объект:8 урын:['width']) урын:['size'], объект:(Серияләре ← ['tulips'] ; ['roses'] ; ['lillies']) урын:['flower'], объект:Ялган урын:['shed'], объект:Дөрес урын:['pool'], объект:2 урын:['chairs']) урын:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

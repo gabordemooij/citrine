@@ -21,16 +21,16 @@ Ndepụta ← 1 ; (Ndepụta ← 2)
 Ndepụta
 Ndepụta ← 1 ; (Ndepụta ← 2) ; 3
 Ndepụta
-Ndepụta ← 1 ; ((Maapụ ohuru) tinye:‘a’ na:‘b’) ; 3
+Ndepụta ← 1 ; ((Maapụ ohuru) tinye:['a'] na:['b']) ; 3
 Ndepụta
-Ndepụta ← 1 ; ((Maapụ ohuru) tinye:(Ndepụta ← 9) na:‘b’) ; 3
+Ndepụta ← 1 ; ((Maapụ ohuru) tinye:(Ndepụta ← 9) na:['b']) ; 3
 Maapụ
-(Maapụ ohuru) tinye:2 na:‘1’
+(Maapụ ohuru) tinye:2 na:['1']
 Maapụ
-(Maapụ ohuru) tinye:2 na:‘x’
+(Maapụ ohuru) tinye:2 na:['x']
 Maapụ
-(Maapụ ohuru) tinye:(Ndepụta ← 1 ; 2) na:‘x’
+(Maapụ ohuru) tinye:(Ndepụta ← 1 ; 2) na:['x']
 Maapụ
-(Maapụ ohuru) tinye:(Ndepụta ← ((Maapụ ohuru) tinye:‘q’ na:‘y’) ; 2) na:‘x’
+(Maapụ ohuru) tinye:(Ndepụta ← ((Maapụ ohuru) tinye:['q'] na:['y']) ; 2) na:['x']
 Nil
 Nil

@@ -1,11 +1,11 @@
 Texte,Nombre
-Texte,Oui ou Non
+Texte,Oui-ou-Non
 Nombre,Texte
-Nombre,Oui ou Non
-Oui ou Non,Nombre
-Oui ou Non,Nombre
-Oui ou Non,Texte
-Oui ou Non,Texte
+Nombre,Oui-ou-Non
+Oui-ou-Non,Nombre
+Oui-ou-Non,Nombre
+Oui-ou-Non,Texte
+Oui-ou-Non,Texte
 === String test ===
 123
 Non

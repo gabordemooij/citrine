@@ -6,5 +6,5 @@ The garden is Waxba meters long.
 Luckily, this day, there are Waxba wasps in the garden.
 The dog named Waxba sleeps under the tree.
 a\"bb\"ccc\"
-(Liiska cusub) walax:((Liiska cusub) walax:Waxba meeshaas:‘dog’, walax:Waxba meeshaas:‘insects’, walax:((Liiska cusub) walax:15 meeshaas:‘length’, walax:8 meeshaas:‘width’) meeshaas:‘size’, walax:(Taxane ← ‘tulips’ ; ‘roses’ ; ‘lillies’) meeshaas:‘flower’, walax:Maya meeshaas:‘shed’, walax:Haa meeshaas:‘pool’, walax:2 meeshaas:‘chairs’) meeshaas:‘garden’
+(Liiska cusub) walax:((Liiska cusub) walax:Waxba meeshaas:['dog'], walax:Waxba meeshaas:['insects'], walax:((Liiska cusub) walax:15 meeshaas:['length'], walax:8 meeshaas:['width']) meeshaas:['size'], walax:(Taxane ← ['tulips'] ; ['roses'] ; ['lillies']) meeshaas:['flower'], walax:Maya meeshaas:['shed'], walax:Haa meeshaas:['pool'], walax:2 meeshaas:['chairs']) meeshaas:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

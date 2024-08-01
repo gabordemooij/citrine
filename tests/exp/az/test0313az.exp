@@ -6,5 +6,5 @@ The garden is Boş meters long.
 Luckily, this day, there are Boş wasps in the garden.
 The dog named Boş sleeps under the tree.
 a\"bb\"ccc\"
-(Siyahı yeni) obyekt:((Siyahı yeni) obyekt:Boş yer:‘dog’, obyekt:Boş yer:‘insects’, obyekt:((Siyahı yeni) obyekt:15 yer:‘length’, obyekt:8 yer:‘width’) yer:‘size’, obyekt:(Seriya ← ‘tulips’ ; ‘roses’ ; ‘lillies’) yer:‘flower’, obyekt:Yalan yer:‘shed’, obyekt:Doğru yer:‘pool’, obyekt:2 yer:‘chairs’) yer:‘garden’
+(Siyahı yeni) obyekt:((Siyahı yeni) obyekt:Boş yer:['dog'], obyekt:Boş yer:['insects'], obyekt:((Siyahı yeni) obyekt:15 yer:['length'], obyekt:8 yer:['width']) yer:['size'], obyekt:(Seriya ← ['tulips'] ; ['roses'] ; ['lillies']) yer:['flower'], obyekt:Yalan yer:['shed'], obyekt:Doğru yer:['pool'], obyekt:2 yer:['chairs']) yer:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

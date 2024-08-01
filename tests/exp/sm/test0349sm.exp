@@ -21,16 +21,16 @@ Lisi ← 1 ; (Lisi ← 2)
 Lisi
 Lisi ← 1 ; (Lisi ← 2) ; 3
 Lisi
-Lisi ← 1 ; ((Faʻafanua fou) tuʻu:‘a’ i:‘b’) ; 3
+Lisi ← 1 ; ((Faʻafanua fou) tuʻu:['a'] i:['b']) ; 3
 Lisi
-Lisi ← 1 ; ((Faʻafanua fou) tuʻu:(Lisi ← 9) i:‘b’) ; 3
+Lisi ← 1 ; ((Faʻafanua fou) tuʻu:(Lisi ← 9) i:['b']) ; 3
 Faʻafanua
-(Faʻafanua fou) tuʻu:2 i:‘1’
+(Faʻafanua fou) tuʻu:2 i:['1']
 Faʻafanua
-(Faʻafanua fou) tuʻu:2 i:‘x’
+(Faʻafanua fou) tuʻu:2 i:['x']
 Faʻafanua
-(Faʻafanua fou) tuʻu:(Lisi ← 1 ; 2) i:‘x’
+(Faʻafanua fou) tuʻu:(Lisi ← 1 ; 2) i:['x']
 Faʻafanua
-(Faʻafanua fou) tuʻu:(Lisi ← ((Faʻafanua fou) tuʻu:‘q’ i:‘y’) ; 2) i:‘x’
+(Faʻafanua fou) tuʻu:(Lisi ← ((Faʻafanua fou) tuʻu:['q'] i:['y']) ; 2) i:['x']
 Nil
 Nil

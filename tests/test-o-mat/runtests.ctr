@@ -44,7 +44,7 @@ on: ‘next’ do: {
 
 		(test directive contains: ‘NL-ONLY’) true: {
 			⚿ flags doing a single run: True.
-			tag ≔ ‘nl-only’.
+			tag ≔ ‘x4-only’.
 		}.
 
 		test tag: tag.

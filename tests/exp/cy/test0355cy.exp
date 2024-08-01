@@ -1,15 +1,15 @@
 1.001
 1.024
-Rhestr ← ‘1’ ; ‘2’ ; ‘3’
-Rhestr ← ‘1’ ; ‘2’ ; ‘3’
-Rhestr ← ‘1’ ; ‘’ ; ‘3’
-Rhestr ← ‘1’ ; ‘’ ; ‘3’
-Rhestr ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Rhestr ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Rhestr ← ‘’ ; ‘’
-Rhestr ← ‘’ ; ‘’
-Rhestr ← ‘x’
-Rhestr ← ‘x’
-Rhestr ← ‘’
-Rhestr ← ‘’
-Rhestr ← ‘1,2,3’
+Rhestr ← ['1'] ; ['2'] ; ['3']
+Rhestr ← ['1'] ; ['2'] ; ['3']
+Rhestr ← ['1'] ; [''] ; ['3']
+Rhestr ← ['1'] ; [''] ; ['3']
+Rhestr ← [''] ; [''] ; [''] ; ['']
+Rhestr ← [''] ; [''] ; [''] ; ['']
+Rhestr ← [''] ; ['']
+Rhestr ← [''] ; ['']
+Rhestr ← ['x']
+Rhestr ← ['x']
+Rhestr ← ['']
+Rhestr ← ['']
+Rhestr ← ['1,2,3']

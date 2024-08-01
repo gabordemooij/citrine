@@ -21,16 +21,16 @@ Zerrenda ← 1 ; (Zerrenda ← 2)
 Zerrenda
 Zerrenda ← 1 ; (Zerrenda ← 2) ; 3
 Zerrenda
-Zerrenda ← 1 ; ((Mapa berriaren) jarri:‘a’ en:‘b’) ; 3
+Zerrenda ← 1 ; ((Mapa berriaren) jarri:['a'] en:['b']) ; 3
 Zerrenda
-Zerrenda ← 1 ; ((Mapa berriaren) jarri:(Zerrenda ← 9) en:‘b’) ; 3
+Zerrenda ← 1 ; ((Mapa berriaren) jarri:(Zerrenda ← 9) en:['b']) ; 3
 Mapa
-(Mapa berriaren) jarri:2 en:‘1’
+(Mapa berriaren) jarri:2 en:['1']
 Mapa
-(Mapa berriaren) jarri:2 en:‘x’
+(Mapa berriaren) jarri:2 en:['x']
 Mapa
-(Mapa berriaren) jarri:(Zerrenda ← 1 ; 2) en:‘x’
+(Mapa berriaren) jarri:(Zerrenda ← 1 ; 2) en:['x']
 Mapa
-(Mapa berriaren) jarri:(Zerrenda ← ((Mapa berriaren) jarri:‘q’ en:‘y’) ; 2) en:‘x’
+(Mapa berriaren) jarri:(Zerrenda ← ((Mapa berriaren) jarri:['q'] en:['y']) ; 2) en:['x']
 Ez
 Ez

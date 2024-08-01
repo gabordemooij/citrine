@@ -21,16 +21,16 @@ Seeria ← 1 ; (Seeria ← 2)
 Seeria
 Seeria ← 1 ; (Seeria ← 2) ; 3
 Seeria
-Seeria ← 1 ; ((Nimekiri uus) panna:‘a’ juures:‘b’) ; 3
+Seeria ← 1 ; ((Nimekiri uus) panna:['a'] juures:['b']) ; 3
 Seeria
-Seeria ← 1 ; ((Nimekiri uus) panna:(Seeria ← 9) juures:‘b’) ; 3
+Seeria ← 1 ; ((Nimekiri uus) panna:(Seeria ← 9) juures:['b']) ; 3
 Nimekiri
-(Nimekiri uus) panna:2 juures:‘1’
+(Nimekiri uus) panna:2 juures:['1']
 Nimekiri
-(Nimekiri uus) panna:2 juures:‘x’
+(Nimekiri uus) panna:2 juures:['x']
 Nimekiri
-(Nimekiri uus) panna:(Seeria ← 1 ; 2) juures:‘x’
+(Nimekiri uus) panna:(Seeria ← 1 ; 2) juures:['x']
 Nimekiri
-(Nimekiri uus) panna:(Seeria ← ((Nimekiri uus) panna:‘q’ juures:‘y’) ; 2) juures:‘x’
+(Nimekiri uus) panna:(Seeria ← ((Nimekiri uus) panna:['q'] juures:['y']) ; 2) juures:['x']
 Tühi
 Tühi

@@ -1,8 +1,8 @@
 Waxba
 Waxba
-Haa maya
+Haa-maya
 Haa
-Haa maya
+Haa-maya
 Maya
 Tirada
 1
@@ -21,16 +21,16 @@ Taxane ← 1 ; (Taxane ← 2)
 Taxane
 Taxane ← 1 ; (Taxane ← 2) ; 3
 Taxane
-Taxane ← 1 ; ((Liiska cusub) walax:‘a’ meeshaas:‘b’) ; 3
+Taxane ← 1 ; ((Liiska cusub) walax:['a'] meeshaas:['b']) ; 3
 Taxane
-Taxane ← 1 ; ((Liiska cusub) walax:(Taxane ← 9) meeshaas:‘b’) ; 3
+Taxane ← 1 ; ((Liiska cusub) walax:(Taxane ← 9) meeshaas:['b']) ; 3
 Liiska
-(Liiska cusub) walax:2 meeshaas:‘1’
+(Liiska cusub) walax:2 meeshaas:['1']
 Liiska
-(Liiska cusub) walax:2 meeshaas:‘x’
+(Liiska cusub) walax:2 meeshaas:['x']
 Liiska
-(Liiska cusub) walax:(Taxane ← 1 ; 2) meeshaas:‘x’
+(Liiska cusub) walax:(Taxane ← 1 ; 2) meeshaas:['x']
 Liiska
-(Liiska cusub) walax:(Taxane ← ((Liiska cusub) walax:‘q’ meeshaas:‘y’) ; 2) meeshaas:‘x’
+(Liiska cusub) walax:(Taxane ← ((Liiska cusub) walax:['q'] meeshaas:['y']) ; 2) meeshaas:['x']
 Waxba
 Waxba

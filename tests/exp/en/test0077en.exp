@@ -8,5 +8,5 @@ Boolean,Text
 Boolean,Text
 === String test ===
 123
-No
-Yes
+False
+True

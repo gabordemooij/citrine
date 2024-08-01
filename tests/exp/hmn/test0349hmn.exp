@@ -1,9 +1,9 @@
 Nil
 Nil
-Tub Npis
-Muaj tseeb
-Tub Npis
-Tsis tseeb
+Tub-Npis
+Muaj-tseeb
+Tub-Npis
+Tsis-tseeb
 Tooj
 1
 Tooj
@@ -21,16 +21,16 @@ Sau ← 1 ; (Sau ← 2)
 Sau
 Sau ← 1 ; (Sau ← 2) ; 3
 Sau
-Sau ← 1 ; ((Daim ntawv qhia tshiab) muab:‘a’ rau:‘b’) ; 3
+Sau ← 1 ; ((Daim-ntawv-qhia tshiab) muab:['a'] rau:['b']) ; 3
 Sau
-Sau ← 1 ; ((Daim ntawv qhia tshiab) muab:(Sau ← 9) rau:‘b’) ; 3
-Daim ntawv qhia
-(Daim ntawv qhia tshiab) muab:2 rau:‘1’
-Daim ntawv qhia
-(Daim ntawv qhia tshiab) muab:2 rau:‘x’
-Daim ntawv qhia
-(Daim ntawv qhia tshiab) muab:(Sau ← 1 ; 2) rau:‘x’
-Daim ntawv qhia
-(Daim ntawv qhia tshiab) muab:(Sau ← ((Daim ntawv qhia tshiab) muab:‘q’ rau:‘y’) ; 2) rau:‘x’
+Sau ← 1 ; ((Daim-ntawv-qhia tshiab) muab:(Sau ← 9) rau:['b']) ; 3
+Daim-ntawv-qhia
+(Daim-ntawv-qhia tshiab) muab:2 rau:['1']
+Daim-ntawv-qhia
+(Daim-ntawv-qhia tshiab) muab:2 rau:['x']
+Daim-ntawv-qhia
+(Daim-ntawv-qhia tshiab) muab:(Sau ← 1 ; 2) rau:['x']
+Daim-ntawv-qhia
+(Daim-ntawv-qhia tshiab) muab:(Sau ← ((Daim-ntawv-qhia tshiab) muab:['q'] rau:['y']) ; 2) rau:['x']
 Nil
 Nil

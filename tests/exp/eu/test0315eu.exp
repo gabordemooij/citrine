@@ -1,6 +1,6 @@
-(Mapa berriaren) jarri:‘a"b’ en:‘test’
+(Mapa berriaren) jarri:['a"b'] en:['test']
 Invalid JSON.
-(Mapa berriaren) jarri:(Zerrenda ← 1 ; 2 ; (Zerrenda ← 3 ; 4) ; ((Mapa berriaren) jarri:(Zerrenda ← 3 ; 4) en:‘bar’, jarri:1 en:‘foo’)) en:‘nested’, jarri:Faltsua en:‘legend’, jarri:27 en:‘age’, jarri:‘Jack’ en:‘name’
+(Mapa berriaren) jarri:(Zerrenda ← 1 ; 2 ; (Zerrenda ← 3 ; 4) ; ((Mapa berriaren) jarri:(Zerrenda ← 3 ; 4) en:['bar'], jarri:1 en:['foo'])) en:['nested'], jarri:Faltsua en:['legend'], jarri:27 en:['age'], jarri:['Jack'] en:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

@@ -1,15 +1,15 @@
 1.001
 1.024
-Mndandanda ← ‘1’ ; ‘2’ ; ‘3’
-Mndandanda ← ‘1’ ; ‘2’ ; ‘3’
-Mndandanda ← ‘1’ ; ‘’ ; ‘3’
-Mndandanda ← ‘1’ ; ‘’ ; ‘3’
-Mndandanda ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Mndandanda ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Mndandanda ← ‘’ ; ‘’
-Mndandanda ← ‘’ ; ‘’
-Mndandanda ← ‘x’
-Mndandanda ← ‘x’
-Mndandanda ← ‘’
-Mndandanda ← ‘’
-Mndandanda ← ‘1,2,3’
+Mndandanda ← ['1'] ; ['2'] ; ['3']
+Mndandanda ← ['1'] ; ['2'] ; ['3']
+Mndandanda ← ['1'] ; [''] ; ['3']
+Mndandanda ← ['1'] ; [''] ; ['3']
+Mndandanda ← [''] ; [''] ; [''] ; ['']
+Mndandanda ← [''] ; [''] ; [''] ; ['']
+Mndandanda ← [''] ; ['']
+Mndandanda ← [''] ; ['']
+Mndandanda ← ['x']
+Mndandanda ← ['x']
+Mndandanda ← ['']
+Mndandanda ← ['']
+Mndandanda ← ['1,2,3']

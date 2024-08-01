@@ -6,5 +6,5 @@ The garden is Niets meters long.
 Luckily, this day, there are Niets wasps in the garden.
 The dog named Niets sleeps under the tree.
 a\"bb\"ccc\"
-(Lĳst nieuw) zet:((Lĳst nieuw) zet:Niets bĳ:“dog”, zet:Niets bĳ:“insects”, zet:((Lĳst nieuw) zet:15 bĳ:“length”, zet:8 bĳ:“width”) bĳ:“size”, zet:(Reeks ← “tulips” ; “roses” ; “lillies”) bĳ:“flower”, zet:Nee bĳ:“shed”, zet:Ja bĳ:“pool”, zet:2 bĳ:“chairs”) bĳ:“garden”
+(Lijst nieuw) zet:((Lijst nieuw) zet:Niets bij:['dog'], zet:Niets bij:['insects'], zet:((Lijst nieuw) zet:15 bij:['length'], zet:8 bij:['width']) bij:['size'], zet:(Reeks ← ['tulips'] ; ['roses'] ; ['lillies']) bij:['flower'], zet:Nee bij:['shed'], zet:Ja bij:['pool'], zet:2 bij:['chairs']) bij:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

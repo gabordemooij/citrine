@@ -1,6 +1,6 @@
-(Listi nýtt) settu:‘a"b’ í:‘test’
+(Listi nýtt) settu:['a"b'] í:['test']
 Invalid JSON.
-(Listi nýtt) settu:(Röð ← 1 ; 2 ; (Röð ← 3 ; 4) ; ((Listi nýtt) settu:(Röð ← 3 ; 4) í:‘bar’, settu:1 í:‘foo’)) í:‘nested’, settu:Rangt í:‘legend’, settu:27 í:‘age’, settu:‘Jack’ í:‘name’
+(Listi nýtt) settu:(Röð ← 1 ; 2 ; (Röð ← 3 ; 4) ; ((Listi nýtt) settu:(Röð ← 3 ; 4) í:['bar'], settu:1 í:['foo'])) í:['nested'], settu:Rangt í:['legend'], settu:27 í:['age'], settu:['Jack'] í:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

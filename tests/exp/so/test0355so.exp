@@ -1,15 +1,15 @@
 1.001
 1.024
-Taxane ← ‘1’ ; ‘2’ ; ‘3’
-Taxane ← ‘1’ ; ‘2’ ; ‘3’
-Taxane ← ‘1’ ; ‘’ ; ‘3’
-Taxane ← ‘1’ ; ‘’ ; ‘3’
-Taxane ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Taxane ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Taxane ← ‘’ ; ‘’
-Taxane ← ‘’ ; ‘’
-Taxane ← ‘x’
-Taxane ← ‘x’
-Taxane ← ‘’
-Taxane ← ‘’
-Taxane ← ‘1,2,3’
+Taxane ← ['1'] ; ['2'] ; ['3']
+Taxane ← ['1'] ; ['2'] ; ['3']
+Taxane ← ['1'] ; [''] ; ['3']
+Taxane ← ['1'] ; [''] ; ['3']
+Taxane ← [''] ; [''] ; [''] ; ['']
+Taxane ← [''] ; [''] ; [''] ; ['']
+Taxane ← [''] ; ['']
+Taxane ← [''] ; ['']
+Taxane ← ['x']
+Taxane ← ['x']
+Taxane ← ['']
+Taxane ← ['']
+Taxane ← ['1,2,3']

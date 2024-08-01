@@ -21,16 +21,16 @@ Lista ← 1 ; (Lista ← 2)
 Lista
 Lista ← 1 ; (Lista ← 2) ; 3
 Lista
-Lista ← 1 ; ((Mapa novo) stavi:‘a’ sa:‘b’) ; 3
+Lista ← 1 ; ((Mapa novo) stavi:['a'] sa:['b']) ; 3
 Lista
-Lista ← 1 ; ((Mapa novo) stavi:(Lista ← 9) sa:‘b’) ; 3
+Lista ← 1 ; ((Mapa novo) stavi:(Lista ← 9) sa:['b']) ; 3
 Mapa
-(Mapa novo) stavi:2 sa:‘1’
+(Mapa novo) stavi:2 sa:['1']
 Mapa
-(Mapa novo) stavi:2 sa:‘x’
+(Mapa novo) stavi:2 sa:['x']
 Mapa
-(Mapa novo) stavi:(Lista ← 1 ; 2) sa:‘x’
+(Mapa novo) stavi:(Lista ← 1 ; 2) sa:['x']
 Mapa
-(Mapa novo) stavi:(Lista ← ((Mapa novo) stavi:‘q’ sa:‘y’) ; 2) sa:‘x’
+(Mapa novo) stavi:(Lista ← ((Mapa novo) stavi:['q'] sa:['y']) ; 2) sa:['x']
 Nil
 Nil

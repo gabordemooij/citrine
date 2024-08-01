@@ -21,16 +21,16 @@ Seriya ← 1 ; (Seriya ← 2)
 Seriya
 Seriya ← 1 ; (Seriya ← 2) ; 3
 Seriya
-Seriya ← 1 ; ((Siyahı yeni) obyekt:‘a’ yer:‘b’) ; 3
+Seriya ← 1 ; ((Siyahı yeni) obyekt:['a'] yer:['b']) ; 3
 Seriya
-Seriya ← 1 ; ((Siyahı yeni) obyekt:(Seriya ← 9) yer:‘b’) ; 3
+Seriya ← 1 ; ((Siyahı yeni) obyekt:(Seriya ← 9) yer:['b']) ; 3
 Siyahı
-(Siyahı yeni) obyekt:2 yer:‘1’
+(Siyahı yeni) obyekt:2 yer:['1']
 Siyahı
-(Siyahı yeni) obyekt:2 yer:‘x’
+(Siyahı yeni) obyekt:2 yer:['x']
 Siyahı
-(Siyahı yeni) obyekt:(Seriya ← 1 ; 2) yer:‘x’
+(Siyahı yeni) obyekt:(Seriya ← 1 ; 2) yer:['x']
 Siyahı
-(Siyahı yeni) obyekt:(Seriya ← ((Siyahı yeni) obyekt:‘q’ yer:‘y’) ; 2) yer:‘x’
+(Siyahı yeni) obyekt:(Seriya ← ((Siyahı yeni) obyekt:['q'] yer:['y']) ; 2) yer:['x']
 Boş
 Boş

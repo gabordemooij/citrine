@@ -21,16 +21,16 @@ Liosta ← 1 ; (Liosta ← 2)
 Liosta
 Liosta ← 1 ; (Liosta ← 2) ; 3
 Liosta
-Liosta ← 1 ; ((Mapa ùr) cuir:‘a’ le:‘b’) ; 3
+Liosta ← 1 ; ((Mapa ùr) cuir:['a'] le:['b']) ; 3
 Liosta
-Liosta ← 1 ; ((Mapa ùr) cuir:(Liosta ← 9) le:‘b’) ; 3
+Liosta ← 1 ; ((Mapa ùr) cuir:(Liosta ← 9) le:['b']) ; 3
 Mapa
-(Mapa ùr) cuir:2 le:‘1’
+(Mapa ùr) cuir:2 le:['1']
 Mapa
-(Mapa ùr) cuir:2 le:‘x’
+(Mapa ùr) cuir:2 le:['x']
 Mapa
-(Mapa ùr) cuir:(Liosta ← 1 ; 2) le:‘x’
+(Mapa ùr) cuir:(Liosta ← 1 ; 2) le:['x']
 Mapa
-(Mapa ùr) cuir:(Liosta ← ((Mapa ùr) cuir:‘q’ le:‘y’) ; 2) le:‘x’
+(Mapa ùr) cuir:(Liosta ← ((Mapa ùr) cuir:['q'] le:['y']) ; 2) le:['x']
 Neoni
 Neoni

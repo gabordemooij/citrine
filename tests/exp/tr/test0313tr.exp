@@ -6,5 +6,5 @@ The garden is Sıfır meters long.
 Luckily, this day, there are Sıfır wasps in the garden.
 The dog named Sıfır sleeps under the tree.
 a\"bb\"ccc\"
-(Liste yeni) koyun:((Liste yeni) koyun:Sıfır at:‘dog’, koyun:Sıfır at:‘insects’, koyun:((Liste yeni) koyun:15 at:‘length’, koyun:8 at:‘width’) at:‘size’, koyun:(Dizi ← ‘tulips’ ; ‘roses’ ; ‘lillies’) at:‘flower’, koyun:Yanlış at:‘shed’, koyun:Doğru at:‘pool’, koyun:2 at:‘chairs’) at:‘garden’
+(Liste yeni) koyun:((Liste yeni) koyun:Sıfır at:['dog'], koyun:Sıfır at:['insects'], koyun:((Liste yeni) koyun:15 at:['length'], koyun:8 at:['width']) at:['size'], koyun:(Dizi ← ['tulips'] ; ['roses'] ; ['lillies']) at:['flower'], koyun:Yanlış at:['shed'], koyun:Doğru at:['pool'], koyun:2 at:['chairs']) at:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

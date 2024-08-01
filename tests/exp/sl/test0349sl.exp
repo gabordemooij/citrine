@@ -21,16 +21,16 @@ Seznam ← 1 ; (Seznam ← 2)
 Seznam
 Seznam ← 1 ; (Seznam ← 2) ; 3
 Seznam
-Seznam ← 1 ; ((Zemljevid novo) dal:‘a’ na:‘b’) ; 3
+Seznam ← 1 ; ((Zemljevid novo) dal:['a'] na:['b']) ; 3
 Seznam
-Seznam ← 1 ; ((Zemljevid novo) dal:(Seznam ← 9) na:‘b’) ; 3
+Seznam ← 1 ; ((Zemljevid novo) dal:(Seznam ← 9) na:['b']) ; 3
 Zemljevid
-(Zemljevid novo) dal:2 na:‘1’
+(Zemljevid novo) dal:2 na:['1']
 Zemljevid
-(Zemljevid novo) dal:2 na:‘x’
+(Zemljevid novo) dal:2 na:['x']
 Zemljevid
-(Zemljevid novo) dal:(Seznam ← 1 ; 2) na:‘x’
+(Zemljevid novo) dal:(Seznam ← 1 ; 2) na:['x']
 Zemljevid
-(Zemljevid novo) dal:(Seznam ← ((Zemljevid novo) dal:‘q’ na:‘y’) ; 2) na:‘x’
+(Zemljevid novo) dal:(Seznam ← ((Zemljevid novo) dal:['q'] na:['y']) ; 2) na:['x']
 Nil
 Nil

@@ -1,15 +1,15 @@
 1.001
 1.024
-Listahan ← ‘1’ ; ‘2’ ; ‘3’
-Listahan ← ‘1’ ; ‘2’ ; ‘3’
-Listahan ← ‘1’ ; ‘’ ; ‘3’
-Listahan ← ‘1’ ; ‘’ ; ‘3’
-Listahan ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Listahan ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Listahan ← ‘’ ; ‘’
-Listahan ← ‘’ ; ‘’
-Listahan ← ‘x’
-Listahan ← ‘x’
-Listahan ← ‘’
-Listahan ← ‘’
-Listahan ← ‘1,2,3’
+Listahan ← ['1'] ; ['2'] ; ['3']
+Listahan ← ['1'] ; ['2'] ; ['3']
+Listahan ← ['1'] ; [''] ; ['3']
+Listahan ← ['1'] ; [''] ; ['3']
+Listahan ← [''] ; [''] ; [''] ; ['']
+Listahan ← [''] ; [''] ; [''] ; ['']
+Listahan ← [''] ; ['']
+Listahan ← [''] ; ['']
+Listahan ← ['x']
+Listahan ← ['x']
+Listahan ← ['']
+Listahan ← ['']
+Listahan ← ['1,2,3']

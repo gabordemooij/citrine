@@ -21,16 +21,16 @@ Uthotho ← 1 ; (Uthotho ← 2)
 Uthotho
 Uthotho ← 1 ; (Uthotho ← 2) ; 3
 Uthotho
-Uthotho ← 1 ; ((Uluhlu intsha) beka:‘a’ e:‘b’) ; 3
+Uthotho ← 1 ; ((Uluhlu intsha) beka:['a'] e:['b']) ; 3
 Uthotho
-Uthotho ← 1 ; ((Uluhlu intsha) beka:(Uthotho ← 9) e:‘b’) ; 3
+Uthotho ← 1 ; ((Uluhlu intsha) beka:(Uthotho ← 9) e:['b']) ; 3
 Uluhlu
-(Uluhlu intsha) beka:2 e:‘1’
+(Uluhlu intsha) beka:2 e:['1']
 Uluhlu
-(Uluhlu intsha) beka:2 e:‘x’
+(Uluhlu intsha) beka:2 e:['x']
 Uluhlu
-(Uluhlu intsha) beka:(Uthotho ← 1 ; 2) e:‘x’
+(Uluhlu intsha) beka:(Uthotho ← 1 ; 2) e:['x']
 Uluhlu
-(Uluhlu intsha) beka:(Uthotho ← ((Uluhlu intsha) beka:‘q’ e:‘y’) ; 2) e:‘x’
+(Uluhlu intsha) beka:(Uthotho ← ((Uluhlu intsha) beka:['q'] e:['y']) ; 2) e:['x']
 Engenanto
 Engenanto

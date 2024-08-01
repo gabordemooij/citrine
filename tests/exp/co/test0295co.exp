@@ -1,5 +1,5 @@
-a b | False False Hè vera Hè vera -1
-b a | Hè vera Hè vera False False 1
-hallo hello | False False Hè vera Hè vera -4
-human human | False Hè vera False Hè vera 0
-x z | False False Hè vera Hè vera -2
+a b | False False Hè-vera Hè-vera -1
+b a | Hè-vera Hè-vera False False 1
+hallo hello | False False Hè-vera Hè-vera -4
+human human | False Hè-vera False Hè-vera 0
+x z | False False Hè-vera Hè-vera -2

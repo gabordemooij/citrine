@@ -21,16 +21,16 @@ Lista ← 1 ; (Lista ← 2)
 Lista
 Lista ← 1 ; (Lista ← 2) ; 3
 Lista
-Lista ← 1 ; ((Kartta uusi) laita:‘a’ osoitteessa:‘b’) ; 3
+Lista ← 1 ; ((Kartta uusi) laita:['a'] osoitteessa:['b']) ; 3
 Lista
-Lista ← 1 ; ((Kartta uusi) laita:(Lista ← 9) osoitteessa:‘b’) ; 3
+Lista ← 1 ; ((Kartta uusi) laita:(Lista ← 9) osoitteessa:['b']) ; 3
 Kartta
-(Kartta uusi) laita:2 osoitteessa:‘1’
+(Kartta uusi) laita:2 osoitteessa:['1']
 Kartta
-(Kartta uusi) laita:2 osoitteessa:‘x’
+(Kartta uusi) laita:2 osoitteessa:['x']
 Kartta
-(Kartta uusi) laita:(Lista ← 1 ; 2) osoitteessa:‘x’
+(Kartta uusi) laita:(Lista ← 1 ; 2) osoitteessa:['x']
 Kartta
-(Kartta uusi) laita:(Lista ← ((Kartta uusi) laita:‘q’ osoitteessa:‘y’) ; 2) osoitteessa:‘x’
+(Kartta uusi) laita:(Lista ← ((Kartta uusi) laita:['q'] osoitteessa:['y']) ; 2) osoitteessa:['x']
 Nolla
 Nolla

@@ -6,5 +6,5 @@ The garden is Zero meters long.
 Luckily, this day, there are Zero wasps in the garden.
 The dog named Zero sleeps under the tree.
 a\"bb\"ccc\"
-(Lista nowy) że:((Lista nowy) że:Zero jest:‘dog’, że:Zero jest:‘insects’, że:((Lista nowy) że:15 jest:‘length’, że:8 jest:‘width’) jest:‘size’, że:(Serio ← ‘tulips’ ; ‘roses’ ; ‘lillies’) jest:‘flower’, że:Fałszywy jest:‘shed’, że:Prawdziwe jest:‘pool’, że:2 jest:‘chairs’) jest:‘garden’
+(Lista nowy) że:((Lista nowy) że:Zero jest:['dog'], że:Zero jest:['insects'], że:((Lista nowy) że:15 jest:['length'], że:8 jest:['width']) jest:['size'], że:(Serio ← ['tulips'] ; ['roses'] ; ['lillies']) jest:['flower'], że:Fałszywy jest:['shed'], że:Prawdziwe jest:['pool'], że:2 jest:['chairs']) jest:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

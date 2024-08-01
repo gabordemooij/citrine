@@ -6,5 +6,5 @@ The garden is ไม่มีอะไร meters long.
 Luckily, this day, there are ไม่มีอะไร wasps in the garden.
 The dog named ไม่มีอะไร sleeps under the tree.
 a\"bb\"ccc\"
-(หนังสือี่ ใหม่) วาง:((หนังสือี่ ใหม่) วาง:ไม่มีอะไร ที่:‘dog’, วาง:ไม่มีอะไร ที่:‘insects’, วาง:((หนังสือี่ ใหม่) วาง:15 ที่:‘length’, วาง:8 ที่:‘width’) ที่:‘size’, วาง:(ชุด ← ‘tulips’ ; ‘roses’ ; ‘lillies’) ที่:‘flower’, วาง:ไม่ ที่:‘shed’, วาง:ใช่ ที่:‘pool’, วาง:2 ที่:‘chairs’) ที่:‘garden’
+(หนังสือี่ ใหม่) วาง:((หนังสือี่ ใหม่) วาง:ไม่มีอะไร ที่:['dog'], วาง:ไม่มีอะไร ที่:['insects'], วาง:((หนังสือี่ ใหม่) วาง:15 ที่:['length'], วาง:8 ที่:['width']) ที่:['size'], วาง:(ชุด ← ['tulips'] ; ['roses'] ; ['lillies']) ที่:['flower'], วาง:ไม่ ที่:['shed'], วาง:ใช่ ที่:['pool'], วาง:2 ที่:['chairs']) ที่:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

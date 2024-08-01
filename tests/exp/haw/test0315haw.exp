@@ -1,6 +1,6 @@
-(Papa inoa hou) waiho:‘a"b’ ma:‘test’
+(Papa-inoa hou) waiho:['a"b'] ma:['test']
 Invalid JSON.
-(Papa inoa hou) waiho:(Moʻo ← 1 ; 2 ; (Moʻo ← 3 ; 4) ; ((Papa inoa hou) waiho:(Moʻo ← 3 ; 4) ma:‘bar’, waiho:1 ma:‘foo’)) ma:‘nested’, waiho:Hoʻolaha ma:‘legend’, waiho:27 ma:‘age’, waiho:‘Jack’ ma:‘name’
+(Papa-inoa hou) waiho:(Moʻo ← 1 ; 2 ; (Moʻo ← 3 ; 4) ; ((Papa-inoa hou) waiho:(Moʻo ← 3 ; 4) ma:['bar'], waiho:1 ma:['foo'])) ma:['nested'], waiho:Hoʻolaha ma:['legend'], waiho:27 ma:['age'], waiho:['Jack'] ma:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

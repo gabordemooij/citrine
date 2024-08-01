@@ -1,6 +1,6 @@
-(Mapa novo) poñer:‘a"b’ en:‘test’
+(Mapa novo) poñer:['a"b'] en:['test']
 Invalid JSON.
-(Mapa novo) poñer:(Lista ← 1 ; 2 ; (Lista ← 3 ; 4) ; ((Mapa novo) poñer:(Lista ← 3 ; 4) en:‘bar’, poñer:1 en:‘foo’)) en:‘nested’, poñer:Falso en:‘legend’, poñer:27 en:‘age’, poñer:‘Jack’ en:‘name’
+(Mapa novo) poñer:(Lista ← 1 ; 2 ; (Lista ← 3 ; 4) ; ((Mapa novo) poñer:(Lista ← 3 ; 4) en:['bar'], poñer:1 en:['foo'])) en:['nested'], poñer:Falso en:['legend'], poñer:27 en:['age'], poñer:['Jack'] en:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

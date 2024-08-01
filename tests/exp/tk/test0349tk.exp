@@ -21,16 +21,16 @@ Seriýa ← 1 ; (Seriýa ← 2)
 Seriýa
 Seriýa ← 1 ; (Seriýa ← 2) ; 3
 Seriýa
-Seriýa ← 1 ; ((Sanaw täze) obýekt:‘a’ ýeri:‘b’) ; 3
+Seriýa ← 1 ; ((Sanaw täze) obýekt:['a'] ýeri:['b']) ; 3
 Seriýa
-Seriýa ← 1 ; ((Sanaw täze) obýekt:(Seriýa ← 9) ýeri:‘b’) ; 3
+Seriýa ← 1 ; ((Sanaw täze) obýekt:(Seriýa ← 9) ýeri:['b']) ; 3
 Sanaw
-(Sanaw täze) obýekt:2 ýeri:‘1’
+(Sanaw täze) obýekt:2 ýeri:['1']
 Sanaw
-(Sanaw täze) obýekt:2 ýeri:‘x’
+(Sanaw täze) obýekt:2 ýeri:['x']
 Sanaw
-(Sanaw täze) obýekt:(Seriýa ← 1 ; 2) ýeri:‘x’
+(Sanaw täze) obýekt:(Seriýa ← 1 ; 2) ýeri:['x']
 Sanaw
-(Sanaw täze) obýekt:(Seriýa ← ((Sanaw täze) obýekt:‘q’ ýeri:‘y’) ; 2) ýeri:‘x’
+(Sanaw täze) obýekt:(Seriýa ← ((Sanaw täze) obýekt:['q'] ýeri:['y']) ; 2) ýeri:['x']
 Nil
 Nil

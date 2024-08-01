@@ -4,13 +4,13 @@ Boolean
 Thật
 Boolean
 Sai
-Con số
+Con-số
 1
-Con số
+Con-số
 -3
-Con số
+Con-số
 9,2
-Con số
+Con-số
 -9,2
 Loạt
 Loạt mới 
@@ -21,16 +21,16 @@ Loạt ← 1 ; (Loạt ← 2)
 Loạt
 Loạt ← 1 ; (Loạt ← 2) ; 3
 Loạt
-Loạt ← 1 ; ((Sách mới) đặt:‘a’ tại:‘b’) ; 3
+Loạt ← 1 ; ((Sách mới) đặt:['a'] tại:['b']) ; 3
 Loạt
-Loạt ← 1 ; ((Sách mới) đặt:(Loạt ← 9) tại:‘b’) ; 3
+Loạt ← 1 ; ((Sách mới) đặt:(Loạt ← 9) tại:['b']) ; 3
 Sách
-(Sách mới) đặt:2 tại:‘1’
+(Sách mới) đặt:2 tại:['1']
 Sách
-(Sách mới) đặt:2 tại:‘x’
+(Sách mới) đặt:2 tại:['x']
 Sách
-(Sách mới) đặt:(Loạt ← 1 ; 2) tại:‘x’
+(Sách mới) đặt:(Loạt ← 1 ; 2) tại:['x']
 Sách
-(Sách mới) đặt:(Loạt ← ((Sách mới) đặt:‘q’ tại:‘y’) ; 2) tại:‘x’
+(Sách mới) đặt:(Loạt ← ((Sách mới) đặt:['q'] tại:['y']) ; 2) tại:['x']
 Không
 Không

@@ -6,5 +6,5 @@ The garden is Kau meters long.
 Luckily, this day, there are Kau wasps in the garden.
 The dog named Kau sleeps under the tree.
 a\"bb\"ccc\"
-(Rarangi hou) ahanoa:((Rarangi hou) ahanoa:Kau wahi:‘dog’, ahanoa:Kau wahi:‘insects’, ahanoa:((Rarangi hou) ahanoa:15 wahi:‘length’, ahanoa:8 wahi:‘width’) wahi:‘size’, ahanoa:(Raupapa ← ‘tulips’ ; ‘roses’ ; ‘lillies’) wahi:‘flower’, ahanoa:Kahore wahi:‘shed’, ahanoa:Ae wahi:‘pool’, ahanoa:2 wahi:‘chairs’) wahi:‘garden’
+(Rarangi hou) ahanoa:((Rarangi hou) ahanoa:Kau wahi:['dog'], ahanoa:Kau wahi:['insects'], ahanoa:((Rarangi hou) ahanoa:15 wahi:['length'], ahanoa:8 wahi:['width']) wahi:['size'], ahanoa:(Raupapa ← ['tulips'] ; ['roses'] ; ['lillies']) wahi:['flower'], ahanoa:Kahore wahi:['shed'], ahanoa:Ae wahi:['pool'], ahanoa:2 wahi:['chairs']) wahi:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

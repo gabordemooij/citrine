@@ -1,6 +1,6 @@
-(Liste nouveau) mettre:‘a"b’ à:‘test’
+(Liste nouveau) mettre:['a"b'] à:['test']
 Invalid JSON.
-(Liste nouveau) mettre:(Série ← 1 ; 2 ; (Série ← 3 ; 4) ; ((Liste nouveau) mettre:(Série ← 3 ; 4) à:‘bar’, mettre:1 à:‘foo’)) à:‘nested’, mettre:Non à:‘legend’, mettre:27 à:‘age’, mettre:‘Jack’ à:‘name’
+(Liste nouveau) mettre:(Série ← 1 ; 2 ; (Série ← 3 ; 4) ; ((Liste nouveau) mettre:(Série ← 3 ; 4) à:['bar'], mettre:1 à:['foo'])) à:['nested'], mettre:Non à:['legend'], mettre:27 à:['age'], mettre:['Jack'] à:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

@@ -1,8 +1,8 @@
-Hakuna kitu
-Hakuna kitu
-Ndiyo au hapana
+Hakuna-kitu
+Hakuna-kitu
+Ndiyo-au-hapana
 Ndiyo
-Ndiyo au hapana
+Ndiyo-au-hapana
 Hapana
 Nambari
 1
@@ -21,16 +21,16 @@ Msururu ← 1 ; (Msururu ← 2)
 Msururu
 Msururu ← 1 ; (Msururu ← 2) ; 3
 Msururu
-Msururu ← 1 ; ((Orodha mpya) weka:‘a’ saa:‘b’) ; 3
+Msururu ← 1 ; ((Orodha mpya) weka:['a'] saa:['b']) ; 3
 Msururu
-Msururu ← 1 ; ((Orodha mpya) weka:(Msururu ← 9) saa:‘b’) ; 3
+Msururu ← 1 ; ((Orodha mpya) weka:(Msururu ← 9) saa:['b']) ; 3
 Orodha
-(Orodha mpya) weka:2 saa:‘1’
+(Orodha mpya) weka:2 saa:['1']
 Orodha
-(Orodha mpya) weka:2 saa:‘x’
+(Orodha mpya) weka:2 saa:['x']
 Orodha
-(Orodha mpya) weka:(Msururu ← 1 ; 2) saa:‘x’
+(Orodha mpya) weka:(Msururu ← 1 ; 2) saa:['x']
 Orodha
-(Orodha mpya) weka:(Msururu ← ((Orodha mpya) weka:‘q’ saa:‘y’) ; 2) saa:‘x’
-Hakuna kitu
-Hakuna kitu
+(Orodha mpya) weka:(Msururu ← ((Orodha mpya) weka:['q'] saa:['y']) ; 2) saa:['x']
+Hakuna-kitu
+Hakuna-kitu

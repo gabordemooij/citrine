@@ -21,16 +21,16 @@ Lis ← 1 ; (Lis ← 2)
 Lis
 Lis ← 1 ; (Lis ← 2) ; 3
 Lis
-Lis ← 1 ; ((Kat nouvo) mete:‘a’ nan:‘b’) ; 3
+Lis ← 1 ; ((Kat nouvo) mete:['a'] nan:['b']) ; 3
 Lis
-Lis ← 1 ; ((Kat nouvo) mete:(Lis ← 9) nan:‘b’) ; 3
+Lis ← 1 ; ((Kat nouvo) mete:(Lis ← 9) nan:['b']) ; 3
 Kat
-(Kat nouvo) mete:2 nan:‘1’
+(Kat nouvo) mete:2 nan:['1']
 Kat
-(Kat nouvo) mete:2 nan:‘x’
+(Kat nouvo) mete:2 nan:['x']
 Kat
-(Kat nouvo) mete:(Lis ← 1 ; 2) nan:‘x’
+(Kat nouvo) mete:(Lis ← 1 ; 2) nan:['x']
 Kat
-(Kat nouvo) mete:(Lis ← ((Kat nouvo) mete:‘q’ nan:‘y’) ; 2) nan:‘x’
+(Kat nouvo) mete:(Lis ← ((Kat nouvo) mete:['q'] nan:['y']) ; 2) nan:['x']
 Nil
 Nil

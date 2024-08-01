@@ -1,11 +1,11 @@
-Văn bản,Con số
-Văn bản,Boolean
-Con số,Văn bản
-Con số,Boolean
-Boolean,Con số
-Boolean,Con số
-Boolean,Văn bản
-Boolean,Văn bản
+Văn-bản,Con-số
+Văn-bản,Boolean
+Con-số,Văn-bản
+Con-số,Boolean
+Boolean,Con-số
+Boolean,Con-số
+Boolean,Văn-bản
+Boolean,Văn-bản
 === String test ===
 123
 Sai

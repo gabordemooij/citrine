@@ -1,1 +1,1 @@
-(خەرىتە new) put:‘’ at:‘box’
+(خەرىتە new) put:[''] at:['box']

@@ -1,11 +1,11 @@
 Teksto,Number
-Teksto,Sí òf nò
+Teksto,Sí-òf-nò
 Number,Teksto
-Number,Sí òf nò
-Sí òf nò,Number
-Sí òf nò,Number
-Sí òf nò,Teksto
-Sí òf nò,Teksto
+Number,Sí-òf-nò
+Sí-òf-nò,Number
+Sí-òf-nò,Number
+Sí-òf-nò,Teksto
+Sí-òf-nò,Teksto
 === String test ===
 123
 No

@@ -6,5 +6,5 @@ The garden is ખાલી meters long.
 Luckily, this day, there are ખાલી wasps in the garden.
 The dog named ખાલી sleeps under the tree.
 a\"bb\"ccc\"
-(યાદી નવું) મૂકો:((યાદી નવું) મૂકો:ખાલી પર:‘dog’, મૂકો:ખાલી પર:‘insects’, મૂકો:((યાદી નવું) મૂકો:15 પર:‘length’, મૂકો:8 પર:‘width’) પર:‘size’, મૂકો:(કતાર ← ‘tulips’ ; ‘roses’ ; ‘lillies’) પર:‘flower’, મૂકો:ના પર:‘shed’, મૂકો:હા પર:‘pool’, મૂકો:2 પર:‘chairs’) પર:‘garden’
+(યાદી નવું) મૂકો:((યાદી નવું) મૂકો:ખાલી પર:['dog'], મૂકો:ખાલી પર:['insects'], મૂકો:((યાદી નવું) મૂકો:15 પર:['length'], મૂકો:8 પર:['width']) પર:['size'], મૂકો:(કતાર ← ['tulips'] ; ['roses'] ; ['lillies']) પર:['flower'], મૂકો:ના પર:['shed'], મૂકો:હા પર:['pool'], મૂકો:2 પર:['chairs']) પર:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

@@ -6,5 +6,5 @@ The garden is शून्य meters long.
 Luckily, this day, there are शून्य wasps in the garden.
 The dog named शून्य sleeps under the tree.
 a\"bb\"ccc\"
-(सूची नयाँ) राख्नुहोस्:((सूची नयाँ) राख्नुहोस्:शून्य मा:‘dog’, राख्नुहोस्:शून्य मा:‘insects’, राख्नुहोस्:((सूची नयाँ) राख्नुहोस्:15 मा:‘length’, राख्नुहोस्:8 मा:‘width’) मा:‘size’, राख्नुहोस्:(शृङ्खला ← ‘tulips’ ; ‘roses’ ; ‘lillies’) मा:‘flower’, राख्नुहोस्:छैन मा:‘shed’, राख्नुहोस्:हो मा:‘pool’, राख्नुहोस्:2 मा:‘chairs’) मा:‘garden’
+(सूची नयाँ) राख्नुहोस्:((सूची नयाँ) राख्नुहोस्:शून्य मा:['dog'], राख्नुहोस्:शून्य मा:['insects'], राख्नुहोस्:((सूची नयाँ) राख्नुहोस्:15 मा:['length'], राख्नुहोस्:8 मा:['width']) मा:['size'], राख्नुहोस्:(शृङ्खला ← ['tulips'] ; ['roses'] ; ['lillies']) मा:['flower'], राख्नुहोस्:छैन मा:['shed'], राख्नुहोस्:हो मा:['pool'], राख्नुहोस्:2 मा:['chairs']) मा:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

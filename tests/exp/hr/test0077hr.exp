@@ -1,11 +1,11 @@
 Tekst,Broj
-Tekst,Da ili Ne
+Tekst,Da-ili-Ne
 Broj,Tekst
-Broj,Da ili Ne
-Da ili Ne,Broj
-Da ili Ne,Broj
-Da ili Ne,Tekst
-Da ili Ne,Tekst
+Broj,Da-ili-Ne
+Da-ili-Ne,Broj
+Da-ili-Ne,Broj
+Da-ili-Ne,Tekst
+Da-ili-Ne,Tekst
 === String test ===
 123
 Ne

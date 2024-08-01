@@ -6,5 +6,5 @@ The garden is Rien meters long.
 Luckily, this day, there are Rien wasps in the garden.
 The dog named Rien sleeps under the tree.
 a\"bb\"ccc\"
-(Liste nouveau) mettre:((Liste nouveau) mettre:Rien à:‘dog’, mettre:Rien à:‘insects’, mettre:((Liste nouveau) mettre:15 à:‘length’, mettre:8 à:‘width’) à:‘size’, mettre:(Série ← ‘tulips’ ; ‘roses’ ; ‘lillies’) à:‘flower’, mettre:Non à:‘shed’, mettre:Oui à:‘pool’, mettre:2 à:‘chairs’) à:‘garden’
+(Liste nouveau) mettre:((Liste nouveau) mettre:Rien à:['dog'], mettre:Rien à:['insects'], mettre:((Liste nouveau) mettre:15 à:['length'], mettre:8 à:['width']) à:['size'], mettre:(Série ← ['tulips'] ; ['roses'] ; ['lillies']) à:['flower'], mettre:Non à:['shed'], mettre:Oui à:['pool'], mettre:2 à:['chairs']) à:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

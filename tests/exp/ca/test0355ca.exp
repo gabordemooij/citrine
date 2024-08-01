@@ -1,15 +1,15 @@
 1.001
 1.024
-Llista ← ‘1’ ; ‘2’ ; ‘3’
-Llista ← ‘1’ ; ‘2’ ; ‘3’
-Llista ← ‘1’ ; ‘’ ; ‘3’
-Llista ← ‘1’ ; ‘’ ; ‘3’
-Llista ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Llista ← ‘’ ; ‘’ ; ‘’ ; ‘’
-Llista ← ‘’ ; ‘’
-Llista ← ‘’ ; ‘’
-Llista ← ‘x’
-Llista ← ‘x’
-Llista ← ‘’
-Llista ← ‘’
-Llista ← ‘1,2,3’
+Llista ← ['1'] ; ['2'] ; ['3']
+Llista ← ['1'] ; ['2'] ; ['3']
+Llista ← ['1'] ; [''] ; ['3']
+Llista ← ['1'] ; [''] ; ['3']
+Llista ← [''] ; [''] ; [''] ; ['']
+Llista ← [''] ; [''] ; [''] ; ['']
+Llista ← [''] ; ['']
+Llista ← [''] ; ['']
+Llista ← ['x']
+Llista ← ['x']
+Llista ← ['']
+Llista ← ['']
+Llista ← ['1,2,3']

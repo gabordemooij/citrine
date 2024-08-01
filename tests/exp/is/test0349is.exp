@@ -21,16 +21,16 @@ Röð ← 1 ; (Röð ← 2)
 Röð
 Röð ← 1 ; (Röð ← 2) ; 3
 Röð
-Röð ← 1 ; ((Listi nýtt) settu:‘a’ í:‘b’) ; 3
+Röð ← 1 ; ((Listi nýtt) settu:['a'] í:['b']) ; 3
 Röð
-Röð ← 1 ; ((Listi nýtt) settu:(Röð ← 9) í:‘b’) ; 3
+Röð ← 1 ; ((Listi nýtt) settu:(Röð ← 9) í:['b']) ; 3
 Listi
-(Listi nýtt) settu:2 í:‘1’
+(Listi nýtt) settu:2 í:['1']
 Listi
-(Listi nýtt) settu:2 í:‘x’
+(Listi nýtt) settu:2 í:['x']
 Listi
-(Listi nýtt) settu:(Röð ← 1 ; 2) í:‘x’
+(Listi nýtt) settu:(Röð ← 1 ; 2) í:['x']
 Listi
-(Listi nýtt) settu:(Röð ← ((Listi nýtt) settu:‘q’ í:‘y’) ; 2) í:‘x’
+(Listi nýtt) settu:(Röð ← ((Listi nýtt) settu:['q'] í:['y']) ; 2) í:['x']
 Tómt
 Tómt

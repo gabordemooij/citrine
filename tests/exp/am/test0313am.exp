@@ -6,5 +6,5 @@ The garden is ባዶ meters long.
 Luckily, this day, there are ባዶ wasps in the garden.
 The dog named ባዶ sleeps under the tree.
 a\"bb\"ccc\"
-(ዝርዝር አዲስ) ነገር:((ዝርዝር አዲስ) ነገር:ባዶ ቦታ:‘dog’, ነገር:ባዶ ቦታ:‘insects’, ነገር:((ዝርዝር አዲስ) ነገር:15 ቦታ:‘length’, ነገር:8 ቦታ:‘width’) ቦታ:‘size’, ነገር:(ተከታታይ ← ‘tulips’ ; ‘roses’ ; ‘lillies’) ቦታ:‘flower’, ነገር:አይ ቦታ:‘shed’, ነገር:አዎ ቦታ:‘pool’, ነገር:2 ቦታ:‘chairs’) ቦታ:‘garden’
+(ዝርዝር አዲስ) ነገር:((ዝርዝር አዲስ) ነገር:ባዶ ቦታ:['dog'], ነገር:ባዶ ቦታ:['insects'], ነገር:((ዝርዝር አዲስ) ነገር:15 ቦታ:['length'], ነገር:8 ቦታ:['width']) ቦታ:['size'], ነገር:(ተከታታይ ← ['tulips'] ; ['roses'] ; ['lillies']) ቦታ:['flower'], ነገር:አይ ቦታ:['shed'], ነገር:አዎ ቦታ:['pool'], ነገር:2 ቦታ:['chairs']) ቦታ:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}
