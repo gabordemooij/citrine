@@ -1338,7 +1338,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 		}
 		myself->info.sticky = 0;
 		if (CtrMediaBreakLoopFlag) {
-			ctr_internal_media_reset();
+			CtrMediaBreakLoopFlag = 0;
 			return myself;
 		}
 		//Update timers, both outside and inside event loop (otherwise you could stall it)
