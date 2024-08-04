@@ -1716,6 +1716,12 @@ ctr_object* ctr_point_x(ctr_object* myself, ctr_argument* argumentList) {
  * ✎ write: p x?, stop.
  * ✎ write: p y?, stop.
  */
+ctr_object* ctr_point_h(ctr_object* myself, ctr_argument* argumentList) {
+	int y = (int) ctr_tonum(ctr_internal_object_property(myself, "y", NULL));
+	ctr_internal_natural_y(&y);
+	return ctr_build_number_from_float(y);
+}
+
 ctr_object* ctr_point_y(ctr_object* myself, ctr_argument* argumentList) {
 	int y = (int) ctr_tonum(ctr_internal_object_property(myself, "y", NULL));
 	ctr_internal_natural_y(&y);
@@ -1735,7 +1741,6 @@ ctr_object* ctr_point_y(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_point_xyset(ctr_object* myself, ctr_argument* argumentList) {
 	int x = (int) ctr_tonum(ctr_internal_cast2number(argumentList->object));
 	int y = (int) ctr_tonum(ctr_internal_cast2number(argumentList->next->object));
-	ctr_internal_natural_y(&y);
 	ctr_internal_object_property(myself, "x", ctr_build_number_from_float(x));
 	ctr_internal_object_property(myself, "y", ctr_build_number_from_float(y));
 	return myself;
@@ -2473,6 +2478,19 @@ ctr_object* ctr_img_xy(ctr_object* myself, ctr_argument* argumentList) {
 	image->ox = x;
 	image->x = x;
 	image->y = y - image->h;
+	return myself;
+}
+
+ctr_object* ctr_img_pos(ctr_object* myself, ctr_argument* argumentList) {
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
+	ctr_argument none;
+	double x = ctr_tonum(ctr_send_message(argumentList->object, "x?", 2, &none));
+	double y = ctr_tonum(ctr_send_message(argumentList->object, "y?", 2, &none));
+	image->oy = y;
+	image->ox = x;
+	image->x = x;
+	image->y = y;
 	return myself;
 }
 
@@ -4397,9 +4415,9 @@ void begin(){
 	pointObject = ctr_media_new(CtrStdObject, NULL);
 	pointObject->link = CtrStdObject;
 	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_point_new );
-	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_XY_SET), &ctr_point_xyset );
-	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_X ), &ctr_point_x );
-	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_Y ), &ctr_point_y );
+	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( "x:y:"), &ctr_point_xyset );
+	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( "x?" ), &ctr_point_x );
+	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( "y?" ), &ctr_point_y );
 	lineObject = ctr_media_new(CtrStdObject, NULL);
 	lineObject->link = CtrStdObject;
 	ctr_internal_create_func(lineObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_line_new );
@@ -4466,6 +4484,7 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "nodirani:" ), &ctr_media_nodirani );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "lettertype:" ), &ctr_img_font );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "regelhoogte:" ), &ctr_img_lineheight );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "plek:" ), &ctr_img_pos );
 	fontObject = ctr_font_new(CtrStdObject, NULL);
 	fontObject->link = CtrStdObject;
 	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( "nieuw" ), &ctr_font_new );
