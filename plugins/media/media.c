@@ -108,7 +108,7 @@ struct MediaIMG {
 	double			mov;		int				anims;
 	int				animspeed;
 	int				solid;		int				collidable;
-	char*			text;		TTF_Font*		font;
+	char*			text;		TTF_Font*       font;
 	char			editable;	ctr_object*		ref;
 	ctr_size		paddingx;	ctr_size		paddingy;
 	SDL_Color		color;		SDL_Color		backgroundColor;
@@ -118,6 +118,7 @@ struct MediaIMG {
 	char            fixed;
 	char            ghost;
 	char            nodirani;
+	int             lineheight;
 };
 typedef struct MediaIMG MediaIMG;
 
@@ -137,6 +138,18 @@ MediaAUD mediaAUDs[50];
 int maxAUD = 50;
 int AUDCount = 0;
 
+struct MediaFNT {
+	ctr_object* ref;
+	TTF_Font* font;
+	char* fscript;
+	int textdir;
+};
+typedef struct MediaFNT MediaFNT;
+
+MediaFNT mediaFNT[10];
+int maxFNT = 10;
+int FNTCount = 0;
+
 int windowWidth = 0;
 int windowHeight = 0;
 int CtrMediaJumpHeight = 0;
@@ -145,6 +158,7 @@ char CtrMediaJump = 0;
 ctr_object* colorObject;
 ctr_object* mediaObject;
 ctr_object* imageObject;
+ctr_object* fontObject;
 ctr_object* lineObject;
 ctr_object* pointObject;
 ctr_object* controllableObject;
@@ -186,6 +200,11 @@ MediaAUD* ctr_internal_get_audio_from_object(ctr_object* object)	{
 MediaIMG* ctr_internal_get_image_from_object(ctr_object* object)	{
 	if (object->value.rvalue == NULL) return NULL;
 	return (MediaIMG*) object->value.rvalue->ptr;
+}
+
+MediaFNT* ctr_internal_get_font_from_object(ctr_object* object)	{
+	if (object->value.rvalue == NULL) return NULL;
+	return (MediaFNT*) object->value.rvalue->ptr;
 }
 
 void ctr_internal_media_reset() {
@@ -594,7 +613,7 @@ void ctr_internal_media_infercursorpos(MediaIMG* image, int x, int y) {
 	int relx = x - image->x;
 	int rely = y - image->y;
 	int lineHeight;
-	TTF_SizeUTF8(image->font, "X", NULL, &lineHeight);
+	lineHeight = image->lineheight;
 	CtrMediaMaxLines = floor(image->h/lineHeight);
 	int line = CtrMediaCursorOffsetY + (rely / lineHeight);
 	CtrMediaInputIndex = 0;
@@ -1792,6 +1811,88 @@ ctr_object* ctr_line_end(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_object_property(myself, CTR_DICT_TO, NULL);
 }
 
+void ctr_font_destructor(ctr_resource* rs) {
+	MediaFNT* fnt = (MediaFNT*) rs->ptr;
+	if (fnt->font) {
+		TTF_CloseFont(fnt->font);
+	}
+	if (fnt->fscript) {
+		ctr_heap_free(fnt->fscript);
+	}
+	fnt->ref = NULL;
+}
+
+ctr_object* ctr_font_new(ctr_object* myself, ctr_argument* argumentList) {
+	if (FNTCount >= maxFNT) return CtrStdNil;
+	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
+	instance->link = myself;
+	MediaFNT* fnt = &mediaFNT[FNTCount++];
+	fnt->font = NULL;
+	fnt->fscript = NULL;
+	fnt->textdir = 0;
+	fnt->ref = instance;
+	ctr_resource* rs = ctr_heap_allocate( sizeof(ctr_resource) );
+	rs->ptr = fnt;
+	rs->destructor = &ctr_font_destructor;
+	instance->value.rvalue = rs;
+	return instance;
+}
+
+
+
+int ctr_internal_media_setfontdir(TTF_Font* fnt, int dircode) {
+	if (dircode == 0) {
+		return TTF_SetFontDirection(fnt, TTF_DIRECTION_LTR);
+	} else if (dircode == 1)  {
+		return TTF_SetFontDirection(fnt,TTF_DIRECTION_RTL);
+	} else if (dircode == 2)  {
+		return TTF_SetFontDirection(fnt,TTF_DIRECTION_TTB);
+	} else if (dircode == 3)  {
+		return TTF_SetFontDirection(fnt,TTF_DIRECTION_BTT);
+	}
+	return -1;
+}
+
+
+ctr_object* ctr_font_font(ctr_object* myself, ctr_argument* argumentList) {
+	MediaFNT* fnt = ctr_internal_get_font_from_object(myself);
+	if (fnt == NULL) return myself;
+	char* path = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+	SDL_RWops* res = ctr_internal_media_load_asset(path, 1);
+	ctr_heap_free(path);
+	if (res == NULL) {
+		ctr_internal_media_fatalerror("Unable to load font", "TTF Font");
+	}
+	fnt->font = TTF_OpenFontRW(res, 1, (int)ctr_internal_cast2number(argumentList->next->object)->value.nvalue);
+	/* Allow to set compile-time FONTSCRIPT for Harfbuzz shaper */
+	#ifdef FONTSCRIPT
+	int script_ok = TTF_SetFontScriptName(fnt->font, FONTSCRIPT);
+	if (script_ok == -1) {
+		ctr_print_error("Error setting font script.", -1);
+	}
+	#endif
+	#ifdef FONTDIRECTION
+	ctr_internal_media_setfontdir(fnt->font, FONTDIRECTION);
+	#endif
+	return myself;
+}
+
+ctr_object* ctr_font_script_dir(ctr_object* myself, ctr_argument* argumentList) {
+	MediaFNT* fnt = ctr_internal_get_font_from_object(myself);
+	if (fnt == NULL) return myself;
+	fnt->fscript = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+	if (TTF_SetFontScriptName(fnt->font, fnt->fscript) == -1) {
+		ctr_error("Error setting font script.", 0);
+		return myself;
+	}
+	fnt->textdir = ctr_tonum(argumentList->next->object);
+	if (ctr_internal_media_setfontdir(fnt->font, fnt->textdir) == -1) {
+		ctr_error("Error setting text direction.", 0);
+		return myself;
+	}
+	return myself;
+}
+
 /**
  * @def
  * [ Colour ] new
@@ -2193,11 +2294,10 @@ void ctr_img_destructor(ctr_resource* rs) {
 	if (image->surface) {
 		SDL_FreeSurface(image->surface);
 	}
-	if (image->font) {
-		TTF_CloseFont(image->font);
-	}
 	image->ref = NULL;
 }
+
+
 
 /**
  * @def
@@ -2247,6 +2347,7 @@ ctr_object* ctr_img_new(ctr_object* myself, ctr_argument* argumentList) {
 	mediaImage->font = NULL;
 	mediaImage->texture = NULL;
 	mediaImage->surface = NULL;
+	mediaImage->lineheight = 10;
 	mediaImage->color = (SDL_Color) {0,0,0,0};
 	mediaImage->backgroundColor = (SDL_Color) {0,0,0,0};
 	mediaImage->ref = instance;
@@ -2613,6 +2714,14 @@ ctr_object* ctr_img_friction(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+ctr_object* ctr_img_font(ctr_object* myself, ctr_argument* argumentList) {
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
+	MediaFNT* font = ctr_internal_get_font_from_object(argumentList->object);
+	image->font = font->font;
+	return myself;
+}
+
 /**
  * @def
  * [ Image ] accelerate: [ Number ]
@@ -2741,49 +2850,6 @@ ctr_object* ctr_media_anim_speed(ctr_object* myself, ctr_argument* argumentList)
 	return myself;
 }
 
-/**
- * @def
- * [ Image ] font: [ Text ] size: [ Number ]
- * 
- * @example
- * ☞ media ≔ Media new.
- * ☞ a ≔ Image new: ‘a.png’.
- *
- * media on: ‘start’ do: {
- * 
- * a
- * x: 0 y: 200,
- * font: ‘font.ttf’ size: 16,
- * align x: 40 y: 20,
- * colour: (Colour new red: 110 green: 110 blue: 110),
- * write: ‘ABC’.
- *
- * }.
- * 
- * media screen: ‘canvas.png’.
- * 
- * @result
- * en: Sets the font and size of the text in an image.
- */
-ctr_object* ctr_img_font(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = ctr_internal_get_image_from_object(myself);
-	if (image == NULL) return myself;
-	char* path = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
-	SDL_RWops* res = ctr_internal_media_load_asset(path, 1);
-	ctr_heap_free(path);
-	if (res == NULL) {
-		ctr_internal_media_fatalerror("Unable to load font", "TTF Font");
-	}
-	image->font = TTF_OpenFontRW(res, 1, (int)ctr_internal_cast2number(argumentList->next->object)->value.nvalue);
-	/* Allow to set compile-time FONTSCRIPT for Harfbuzz shaper */
-	#ifdef FONTSCRIPT
-	int script_ok = TTF_SetFontScriptName(image->font, FONTSCRIPT);
-	if (script_ok == -1) {
-		ctr_print_error("Error setting font script.", -1);
-	}
-	#endif
-	return myself;
-}
 
 
 /**
@@ -2883,11 +2949,23 @@ ctr_object* ctr_img_text_align(ctr_object* myself, ctr_argument* argumentList) {
 	if (image == NULL) return myself;
 	image->paddingx = (int)ctr_internal_cast2number(argumentList->object)->value.nvalue;
 	int y = (int)ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
-	int lineHeight;
-	TTF_SizeUTF8(image->font, "X", NULL, &lineHeight);
+	int lineHeight = image->lineheight;
 	y = image->h - y;
 	y -= lineHeight;
 	image->paddingy = y;
+	ctr_internal_img_render_text(myself);
+	return myself;
+}
+
+ctr_object* ctr_img_lineheight(ctr_object* myself, ctr_argument* argumentList) {
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
+	image->lineheight = ctr_tonum(argumentList->object);
+	if (image->lineheight < 1) {
+		image->lineheight = 1;
+	} else if (image->lineheight > 100) {
+		image->lineheight = 100;
+	}
 	ctr_internal_img_render_text(myself);
 	return myself;
 }
@@ -2928,7 +3006,7 @@ void ctr_internal_img_render_cursor(ctr_object* focusObject) {
 		if (TTF_SizeUTF8(image->font, measurementBuffer, &offsetx, NULL)) ctr_internal_media_fatalerror("Unable to measure font", "TTF_SizeUTF8");
 		free(measurementBuffer);
 	}
-	if (TTF_SizeUTF8(image->font, "X", NULL, &height)) ctr_internal_media_fatalerror("Unable to measure font", "TTF_SizeUTF8");
+	height = image->lineheight;
 	if (y1 >= (CtrMediaCursorOffsetY+CtrMediaMaxLines)) {
 		CtrMediaCursorOffsetY++;
 		ctr_internal_img_render_text(focusObject);
@@ -3016,7 +3094,7 @@ void ctr_internal_img_render_text(ctr_object* myself) {
 			}
 			SDL_BlitSurface(text,NULL,dst,&t);
 			TTF_SizeUTF8(font, buff, &text_width, NULL);
-			TTF_SizeUTF8(font, "X", NULL, &text_height); // deze kunnen we cachen
+			text_height = image->lineheight;
 		}
 		t.x += text_width;
 		if (image->text[i]=='\r') {
@@ -4378,7 +4456,6 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_CUT ), &ctr_img_text_del );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_APPEND ), &ctr_img_text_ins );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_EDITABLE_SET ), &ctr_img_editable );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_FONT_TYPE_SIZE_SET ), &ctr_img_font );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_COLOR_SET ), &ctr_img_color );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_BACKGROUND_COLOR_SET ), &ctr_img_background_color );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_ALIGN_XY_SET ), &ctr_img_text_align );
@@ -4387,6 +4464,13 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "ghost:" ), &ctr_img_ghost_set );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "aspeed:" ), &ctr_media_anim_speed );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "nodirani:" ), &ctr_media_nodirani );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "lettertype:" ), &ctr_img_font );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "regelhoogte:" ), &ctr_img_lineheight );
+	fontObject = ctr_font_new(CtrStdObject, NULL);
+	fontObject->link = CtrStdObject;
+	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( "nieuw" ), &ctr_font_new );
+	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( "bron:grootte:" ), &ctr_font_font );
+	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( "schrijfwijze:richting:" ), &ctr_font_script_dir );
 	audioObject = ctr_audio_new(CtrStdObject, NULL);
 	audioObject->link = CtrStdObject;
 	ctr_internal_create_func(audioObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_audio_new );
@@ -4421,6 +4505,7 @@ void begin(){
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring("Blob"), CtrMediaDataBlob, CTR_CATEGORY_PUBLIC_PROPERTY);
 	#endif
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_IMAGE_OBJECT ), imageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Lettertype" ), fontObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_COLOR_OBJECT ), colorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_POINT_OBJECT ), pointObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_LINE_OBJECT ), lineObject, CTR_CATEGORY_PUBLIC_PROPERTY);
