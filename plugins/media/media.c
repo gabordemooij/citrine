@@ -1233,24 +1233,6 @@ ctr_object* ctr_media_timer(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 
-void ctr_internal_media_recalcy_img(MediaIMG* mediaImage, int old_height, int oldWindowHeight) {
-	//get the natural y back (has to be calc dynamic, because changes)
-	int image_y = mediaImage->y; // this is the top, we need the bottom
-	image_y += old_height; // so, add the height
-	image_y = oldWindowHeight - image_y; // get the natural y
-	// now calculate the new unnatural y
-	image_y = windowHeight - image_y;
-	image_y -= mediaImage->h;
-	mediaImage->y = image_y;
-	mediaImage->oy = image_y;
-}
-
-void ctr_internal_media_recalcy(int oldWindowHeight) {
-	for (int j = 0; j < IMGCount; j++) {
-		ctr_internal_media_recalcy_img(&mediaIMGs[j], mediaIMGs[j].h, oldWindowHeight);
-	}
-}
-
 void ctr_internal_media_update_timers(ctr_object* media) {
 	for(int i = 1; i < CtrMaxMediaTimers; i++) {
 		if (CtrMediaTimers[i] < 0) continue;
@@ -1321,11 +1303,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	ctr_heap_free(imageFileStr);
 	windowWidth = dimensions.w;
-	int oldWindowHeight = windowHeight;
 	windowHeight = dimensions.h;
-	
-	ctr_internal_media_recalcy(oldWindowHeight);
-	
 	SDL_GL_GetDrawableSize(CtrMediaWindow, &CtrMediaDrawSizeX, &CtrMediaDrawSizeY);
 	ctr_send_message(myself, CTR_DICT_RUN, strlen(CTR_DICT_RUN), NULL );
 	if (CtrStdFlow) return myself;
@@ -1724,7 +1702,6 @@ ctr_object* ctr_point_h(ctr_object* myself, ctr_argument* argumentList) {
 
 ctr_object* ctr_point_y(ctr_object* myself, ctr_argument* argumentList) {
 	int y = (int) ctr_tonum(ctr_internal_object_property(myself, "y", NULL));
-	ctr_internal_natural_y(&y);
 	return ctr_build_number_from_float(y);
 }
 
@@ -2399,10 +2376,8 @@ ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	ctr_heap_free(imageFileStr);
 	SDL_QueryTexture(mediaImage->texture, NULL, NULL, &dimensions.w, &dimensions.h);
-	int oldh = mediaImage->h;
 	mediaImage->h = dimensions.h;
 	mediaImage->w = dimensions.w;
-	ctr_internal_media_recalcy_img(mediaImage, oldh, windowHeight);
 	return myself;
 }
 
@@ -2473,20 +2448,6 @@ ctr_object* ctr_img_xy(ctr_object* myself, ctr_argument* argumentList) {
 	int y = (int) ctr_tonum(ctr_internal_cast2number(argumentList->next->object));
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
-	ctr_internal_natural_y(&y);
-	image->oy = y - image->h;
-	image->ox = x;
-	image->x = x;
-	image->y = y - image->h;
-	return myself;
-}
-
-ctr_object* ctr_img_pos(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = ctr_internal_get_image_from_object(myself);
-	if (image == NULL) return myself;
-	ctr_argument none;
-	double x = ctr_tonum(ctr_send_message(argumentList->object, "x?", 2, &none));
-	double y = ctr_tonum(ctr_send_message(argumentList->object, "y?", 2, &none));
 	image->oy = y;
 	image->ox = x;
 	image->x = x;
@@ -2524,8 +2485,6 @@ ctr_object* ctr_img_y(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
 	int y = (int) ctr_tonum(ctr_build_number_from_float(image->y));
-	y += image->h;
-	ctr_internal_natural_y(&y);
 	return ctr_build_number_from_float(y);
 }
 
@@ -2550,12 +2509,10 @@ ctr_object* ctr_img_y(ctr_object* myself, ctr_argument* argumentList) {
  * [[img_movset]]
  */
 ctr_object* ctr_img_mov_set(ctr_object* myself, ctr_argument* argumentList) {
-	double x = (int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
-	int y_ = (int) ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
-	ctr_internal_natural_y(&y_);
+	double x = (double) ctr_internal_cast2number(argumentList->object)->value.nvalue;
+	double y = (double) ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
-	double y = (double) (y_ - image->h);
 	double delta_x = x - image->x;
 	double delta_y = y - image->y;
 	double rad = atan2(-1 * delta_y, delta_x);
@@ -2965,12 +2922,8 @@ ctr_object* ctr_img_background_color(ctr_object* myself, ctr_argument* argumentL
 ctr_object* ctr_img_text_align(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
-	image->paddingx = (int)ctr_internal_cast2number(argumentList->object)->value.nvalue;
-	int y = (int)ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
-	int lineHeight = image->lineheight;
-	y = image->h - y;
-	y -= lineHeight;
-	image->paddingy = y;
+	image->paddingx = (int)ctr_tonum(argumentList->object);
+	image->paddingy = (int)ctr_tonum(argumentList->next->object);
 	ctr_internal_img_render_text(myself);
 	return myself;
 }
@@ -4484,7 +4437,8 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "nodirani:" ), &ctr_media_nodirani );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "lettertype:" ), &ctr_img_font );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "regelhoogte:" ), &ctr_img_lineheight );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "plek:" ), &ctr_img_pos );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "x:y:" ), &ctr_img_xy );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "naar-x:y:" ), &ctr_img_mov_set );
 	fontObject = ctr_font_new(CtrStdObject, NULL);
 	fontObject->link = CtrStdObject;
 	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( "nieuw" ), &ctr_font_new );
