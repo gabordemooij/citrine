@@ -779,6 +779,9 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "tan" ), &ctr_number_tan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "atan" ), &ctr_number_atan );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "log" ), &ctr_number_log );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "bit-and:" ), &ctr_number_bit_and );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "bit-or:" ), &ctr_number_bit_or );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "bit-xor:" ), &ctr_number_bit_xor );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NUMBER ), CtrStdNumber, 0);
 	CtrStdNumber->link = CtrStdObject;
 	CtrStdNumber->info.sticky = 1;

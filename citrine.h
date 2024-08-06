@@ -538,8 +538,9 @@ extern ctr_object* ctr_number_cos(ctr_object* myself, ctr_argument* argumentList
 extern ctr_object* ctr_number_tan(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_number_atan(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_number_log(ctr_object* myself, ctr_argument* argumentList);
-
-
+extern ctr_object* ctr_number_bit_and(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_bit_or(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_bit_xor(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * String Interface

@@ -1482,6 +1482,39 @@ ctr_object* ctr_number_log(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * @def
+ * [ Number ] bit-and: [ Number ]
+ *
+ * @example
+ * ✎ write: (8 bit-and: 10), stop.
+ */
+ctr_object* ctr_number_bit_and(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float((int)myself->value.nvalue & (int)ctr_tonum(argumentList->object));
+}
+
+/**
+ * @def
+ * [ Number ] bit-or: [ Number ]
+ *
+ * @example
+ * ✎ write: (8 bit-or: 10), stop.
+ */
+ctr_object* ctr_number_bit_or(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float((int)myself->value.nvalue | (int)ctr_tonum(argumentList->object));
+}
+
+/**
+ * @def
+ * [ Number ] bit-xor: [ Number ]
+ *
+ * @example
+ * ✎ write: (8 bit-xor: 10), stop.
+ */
+ctr_object* ctr_number_bit_xor(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float((int)myself->value.nvalue ^ (int)ctr_tonum(argumentList->object));
+}
+
+/**
  * @internal
  * Generic method, used by:
  * - ctr_number_to_string
