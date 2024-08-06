@@ -774,6 +774,11 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ),&ctr_number_qualify );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_COPY ), &ctr_number_copy );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_CODE ), &ctr_number_to_string );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "sin" ), &ctr_number_sin );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "cos" ), &ctr_number_cos );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "tan" ), &ctr_number_tan );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "atan" ), &ctr_number_atan );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "log" ), &ctr_number_log );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NUMBER ), CtrStdNumber, 0);
 	CtrStdNumber->link = CtrStdObject;
 	CtrStdNumber->info.sticky = 1;

@@ -1427,6 +1427,61 @@ ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * @def
+ * [ Number ] sin
+ *
+ * @example
+ * ✎ write: 123 sin, stop.
+ */
+ctr_object* ctr_number_sin(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float(sin(myself->value.nvalue));
+}
+
+/**
+ * @def
+ * [ Number ] cos
+ *
+ * @example
+ * ✎ write: 123 cos, stop.
+ */
+ctr_object* ctr_number_cos(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float(cos(myself->value.nvalue));
+}
+
+/**
+ * @def
+ * [ Number ] tan
+ *
+ * @example
+ * ✎ write: 123 tan, stop.
+ */
+ctr_object* ctr_number_tan(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float(tan(myself->value.nvalue));
+}
+
+/**
+ * @def
+ * [ Number ] atan
+ *
+ * @example
+ * ✎ write: 123 atan, stop.
+ */
+ctr_object* ctr_number_atan(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float(atan(myself->value.nvalue));
+}
+
+/**
+ * @def
+ * [ Number ] log
+ *
+ * @example
+ * ✎ write: 123 log, stop.
+ */
+ctr_object* ctr_number_log(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float(log(myself->value.nvalue));
+}
+
+/**
  * @internal
  * Generic method, used by:
  * - ctr_number_to_string

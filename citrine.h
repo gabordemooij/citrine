@@ -533,6 +533,13 @@ extern ctr_object* ctr_number_qualification(ctr_object* myself, ctr_argument* ar
 extern ctr_object* ctr_number_respond_to(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_number_random(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_number_copy(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_sin(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_cos(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_tan(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_atan(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_number_log(ctr_object* myself, ctr_argument* argumentList);
+
+
 
 /**
  * String Interface
