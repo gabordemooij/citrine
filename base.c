@@ -1656,6 +1656,18 @@ ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
+ * [ String ] bytes
+ *
+ * @example
+ * ☞ x ≔ ‘☘☘☘’.
+ * ✎ write: x bytes, stop.
+ */
+ctr_object* ctr_string_bytes(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float(myself->value.svalue->vlen);
+}
+
+/**
+ * @def
  * [ String ] + [ String ]
  *
  * @example
