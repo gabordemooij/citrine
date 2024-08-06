@@ -4074,11 +4074,18 @@ ctr_object* ctr_package_add(ctr_object* myself, ctr_argument* argumentList) {
 				ctr_internal_object_property(fileObject, "path", NULL)
 			)
 		);
+		FILE* f = fopen(path, "rb");
+		if (f == NULL) {
+			ctr_error( CTR_ERR_OPEN, errno );
+			ctr_heap_free(path);
+			ctr_heap_free(pkgpath);
+			fclose(outfile);
+			return CtrStdNil;
+		}
 		fwrite(path, 1, strlen(path), outfile);
 		fwrite("\0", 1 , 1, outfile);
 		next_entry_at = ftell(outfile);
 		fwrite("\0\0\0\0\0\0\0\0", 8, 1, outfile);
-		FILE* f = fopen(path, "rb");
 		buffer = calloc(1,CHUNK_SIZE);
 		clearerr(f);
 		while(!feof(f)) {
