@@ -1,6 +1,6 @@
 ‘SINGLE_LANGUAGE’.
-✎ write: (8 bit-and: 10), stop.
-✎ write: (8 bit-or: 10), stop.
-✎ write: (8 bit-xor: 10), stop.
+✎ write: (8 & 10), stop.
+✎ write: (8 | 10), stop.
+✎ write: (8 ^ 10), stop.
 
 

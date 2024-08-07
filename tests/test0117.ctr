@@ -7,8 +7,8 @@
 (t = False) true: { ✎ write: ‘F’. }.
 ✎ write: ‘|’.
 ☞ f ≔ True.
-(t = True &: f = False) true: { ✎ write: ‘T’. }.
-(t = False &: f = True) true: { ✎ write: ‘F’. }.
+(t = True &&: f = False) true: { ✎ write: ‘T’. }.
+(t = False &&: f = True) true: { ✎ write: ‘F’. }.
 ✎ write: ‘|’.
 ☞ n ≔ Nil.
 (n Nil?) true: { ✎ write: ‘T’. }.

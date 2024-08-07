@@ -6,11 +6,11 @@
 	(x < 3) false: { ✎ write: ‘FAIL’. }.
 	(x>-1) false: { ✎ write: ‘FAIL’. }.
 	x ≔ ((Boolean flip) number).
-	(x = 0 |: x = 1) false: { ✎ write: ‘FAIL’. }.
+	(x = 0 ||: x = 1) false: { ✎ write: ‘FAIL’. }.
 	x ≔ ((True flip) number).
-	(x = 0 |: x = 1) false: { ✎ write: ‘FAIL’. }.
+	(x = 0 ||: x = 1) false: { ✎ write: ‘FAIL’. }.
 	x ≔ (Boolean flip either: ‘HEAD’ or: ‘TAIL’).
-	((x = ‘HEAD’) |: (x = ‘TAIL’)) false: { ✎ write: ‘FAIL’. }.
+	((x = ‘HEAD’) ||: (x = ‘TAIL’)) false: { ✎ write: ‘FAIL’. }.
 }.
 ✎ write: ‘DONE’.
 

@@ -80,7 +80,7 @@ a each: { :i :e ✎ write: ( i - 1 ), stop. }.
 Program clean memory.
 usedMemory3 ≔ (Program memory ? 1).
 
-( usedMemory1 = usedMemory2 &: usedMemory1 = usedMemory3, &: usedMemory2 = usedMemory3 ) true: {
+( usedMemory1 = usedMemory2 &&: usedMemory1 = usedMemory3, &&: usedMemory2 = usedMemory3 ) true: {
 	✎ write: ‘No memory leaks here’.
 }, false: {
 	✎ write: ‘Leaking memory...’.
