@@ -194,3 +194,8 @@
 #define CTR_DICT_PATH_OBJECT "ファイルの場所"
 #define CTR_DICT_CMD_OBJECT  "命令"
 #define CTR_DICT_RECURSIVE "再帰的"
+#define CTR_DICT_MATH_SIN                        "sin"
+#define CTR_DICT_MATH_COS                        "cos"
+#define CTR_DICT_MATH_TAN                        "tan"
+#define CTR_DICT_MATH_ATAN                       "atan"
+#define CTR_DICT_MATH_LOG                        "log"

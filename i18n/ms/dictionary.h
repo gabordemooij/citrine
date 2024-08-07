@@ -194,3 +194,8 @@
 #define CTR_DICT_PATH_OBJECT "Lokasi-fail"
 #define CTR_DICT_CMD_OBJECT  "Arahan"
 #define CTR_DICT_RECURSIVE "rekursif"
+#define CTR_DICT_MATH_SIN                        "sin"
+#define CTR_DICT_MATH_COS                        "cos"
+#define CTR_DICT_MATH_TAN                        "tan"
+#define CTR_DICT_MATH_ATAN                       "atan"
+#define CTR_DICT_MATH_LOG                        "log"

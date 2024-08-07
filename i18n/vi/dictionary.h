@@ -194,3 +194,8 @@
 #define CTR_DICT_PATH_OBJECT "Địa-điểm"
 #define CTR_DICT_CMD_OBJECT  "Hướng-dẫn"
 #define CTR_DICT_RECURSIVE "đệ-quy"
+#define CTR_DICT_MATH_SIN                        "sin"
+#define CTR_DICT_MATH_COS                        "cos"
+#define CTR_DICT_MATH_TAN                        "tan"
+#define CTR_DICT_MATH_ATAN                       "atan"
+#define CTR_DICT_MATH_LOG                        "log"

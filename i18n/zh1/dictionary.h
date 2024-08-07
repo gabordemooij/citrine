@@ -194,3 +194,8 @@
 #define CTR_DICT_PATH_OBJECT "檔案位置"
 #define CTR_DICT_CMD_OBJECT  "指令"
 #define CTR_DICT_RECURSIVE "遞歸的"
+#define CTR_DICT_MATH_SIN                        "sin"
+#define CTR_DICT_MATH_COS                        "cos"
+#define CTR_DICT_MATH_TAN                        "tan"
+#define CTR_DICT_MATH_ATAN                       "atan"
+#define CTR_DICT_MATH_LOG                        "log"

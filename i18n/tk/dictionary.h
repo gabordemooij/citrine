@@ -194,3 +194,8 @@
 #define CTR_DICT_PATH_OBJECT "Faýlyň-ýerleşýän-ýeri"
 #define CTR_DICT_CMD_OBJECT  "Görkezmeler"
 #define CTR_DICT_RECURSIVE "gaýtalanýan"
+#define CTR_DICT_MATH_SIN                        "sin"
+#define CTR_DICT_MATH_COS                        "cos"
+#define CTR_DICT_MATH_TAN                        "tan"
+#define CTR_DICT_MATH_ATAN                       "atan"
+#define CTR_DICT_MATH_LOG                        "log"

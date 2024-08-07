@@ -195,3 +195,9 @@
 #define CTR_DICT_PATH_OBJECT "ئورنى"
 #define CTR_DICT_CMD_OBJECT  "كۆرسەتمە"
 #define CTR_DICT_RECURSIVE "قايتا-قايتا"
+
+#define CTR_DICT_MATH_SIN                        "sin"
+#define CTR_DICT_MATH_COS                        "cos"
+#define CTR_DICT_MATH_TAN                        "tan"
+#define CTR_DICT_MATH_ATAN                       "atan"
+#define CTR_DICT_MATH_LOG                        "log"

@@ -194,3 +194,8 @@
 #define CTR_DICT_PATH_OBJECT "Cîhê-pelê"
 #define CTR_DICT_CMD_OBJECT  "Ders"
 #define CTR_DICT_RECURSIVE "xwe"
+#define CTR_DICT_MATH_SIN                        "sin"
+#define CTR_DICT_MATH_COS                        "cos"
+#define CTR_DICT_MATH_TAN                        "tan"
+#define CTR_DICT_MATH_ATAN                       "atan"
+#define CTR_DICT_MATH_LOG                        "log"

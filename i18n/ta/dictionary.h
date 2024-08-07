@@ -194,3 +194,8 @@
 #define CTR_DICT_PATH_OBJECT "கோப்பு-இடம்"
 #define CTR_DICT_CMD_OBJECT  "வழிமுறைகள்"
 #define CTR_DICT_RECURSIVE "சுழல்நிலை"
+#define CTR_DICT_MATH_SIN                        "sin"
+#define CTR_DICT_MATH_COS                        "cos"
+#define CTR_DICT_MATH_TAN                        "tan"
+#define CTR_DICT_MATH_ATAN                       "atan"
+#define CTR_DICT_MATH_LOG                        "log"

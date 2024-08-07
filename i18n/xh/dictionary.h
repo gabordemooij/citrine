@@ -194,3 +194,8 @@
 #define CTR_DICT_PATH_OBJECT "Indawo-ekuyo-ifayile"
 #define CTR_DICT_CMD_OBJECT  "Imiyalelo"
 #define CTR_DICT_RECURSIVE "ephindayo"
+#define CTR_DICT_MATH_SIN                        "sin"
+#define CTR_DICT_MATH_COS                        "cos"
+#define CTR_DICT_MATH_TAN                        "tan"
+#define CTR_DICT_MATH_ATAN                       "atan"
+#define CTR_DICT_MATH_LOG                        "log"

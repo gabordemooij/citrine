@@ -194,3 +194,8 @@
 #define CTR_DICT_PATH_OBJECT "Lokalizacja-pliku"
 #define CTR_DICT_CMD_OBJECT  "Instrukcja"
 #define CTR_DICT_RECURSIVE "rekurencyjny"
+#define CTR_DICT_MATH_SIN                        "sin"
+#define CTR_DICT_MATH_COS                        "cos"
+#define CTR_DICT_MATH_TAN                        "tan"
+#define CTR_DICT_MATH_ATAN                       "atan"
+#define CTR_DICT_MATH_LOG                        "log"
