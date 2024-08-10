@@ -2815,16 +2815,9 @@ ctr_object* ctr_img_anims(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
 	image->anims = (int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
+	image->animspeed = (int) ctr_internal_cast2number(argumentList->next->object)->value.nvalue;
 	return myself;
 }
-
-ctr_object* ctr_media_anim_speed(ctr_object* myself, ctr_argument* argumentList) {
-	MediaIMG* image = ctr_internal_get_image_from_object(myself);
-	if (image == NULL) return myself;
-	image->animspeed = (int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
-	return myself;
-}
-
 
 
 /**
@@ -3874,6 +3867,7 @@ void ctr_internal_media_ffi(ctr_object* ffispec) {
 		return;
 	}
 	ff->cif = ctr_heap_allocate(sizeof(ffi_cif));
+	ff->handle = NULL;
 	// Load dynamic library
 	if (arg1 == CtrStdNil) {
 		if (CtrMediaPreviousFFIEntry) {
@@ -3884,6 +3878,7 @@ void ctr_internal_media_ffi(ctr_object* ffispec) {
 		}
 	} else {
 		library_path = ctr_heap_allocate_cstring(ctr_internal_cast2string(arg1));
+		if (strcmp("@structtest", library_path)!=0) {
 		#ifdef WIN
 		ff->handle = LoadLibrary(library_path);
 		#else
@@ -3897,6 +3892,9 @@ void ctr_internal_media_ffi(ctr_object* ffispec) {
 			ctr_error(dlerror(),0);
 			#endif
 			return;
+		}
+		} else {
+			ctr_heap_free(library_path);
 		}
 	}
 	// Obtain symbol reference
@@ -4354,13 +4352,13 @@ void begin(){
 	CtrMediaDataBlob->link = CtrStdObject;
 	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_blob_new_set);
 	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_blob_tostring);
-	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( "vul:" ), &ctr_blob_fill);
-	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( "utf8:" ), &ctr_blob_utf8_set);
-	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( "nieuw:type:" ), &ctr_blob_new_set_type);
-	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( "deref" ), &ctr_blob_deref);
-	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( "free" ), &ctr_blob_free);
-	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( "struct:" ), &ctr_blob_new_struct);
-	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( "freestruct" ), &ctr_blob_free_struct);
+	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( CTR_DICT_BYTES_SET ), &ctr_blob_fill);
+	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( CTR_DICT_UTF8_SET ), &ctr_blob_utf8_set);
+	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( CTR_DICT_NEW_TYPE_SET ), &ctr_blob_new_set_type);
+	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( CTR_DICT_DEREF ), &ctr_blob_deref);
+	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( CTR_DICT_FREE ), &ctr_blob_free);
+	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( CTR_DICT_STRUCT_SET ), &ctr_blob_new_struct);
+	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( CTR_DICT_FREE_STRUCT ), &ctr_blob_free_struct);
 	ctr_internal_create_func(CtrMediaDataBlob, ctr_build_string_from_cstring( CTR_DICT_FROM_LENGTH ), &ctr_blob_read);
 	#endif
 	colorObject = ctr_media_new(CtrStdObject, NULL);
@@ -4375,9 +4373,9 @@ void begin(){
 	pointObject = ctr_media_new(CtrStdObject, NULL);
 	pointObject->link = CtrStdObject;
 	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_point_new );
-	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( "x:y:"), &ctr_point_xyset );
-	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( "x?" ), &ctr_point_x );
-	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( "y?" ), &ctr_point_y );
+	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_XY_SET ), &ctr_point_xyset );
+	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_X ), &ctr_point_x );
+	ctr_internal_create_func(pointObject, ctr_build_string_from_cstring( CTR_DICT_Y ), &ctr_point_y );
 	lineObject = ctr_media_new(CtrStdObject, NULL);
 	lineObject->link = CtrStdObject;
 	ctr_internal_create_func(lineObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_line_new );
@@ -4388,8 +4386,8 @@ void begin(){
 	mediaObject->link = CtrStdObject;
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_media_new );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_SCREEN ), &ctr_media_screen );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "width:height:" ), &ctr_media_width_height );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "left:top:" ), &ctr_media_left_top );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_WIDTH_HEIGHT_SET ), &ctr_media_width_height );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_XY_SET ), &ctr_media_left_top );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_CLIPBOARD ), &ctr_media_clipboard );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_CLIPBOARD_SET ), &ctr_media_clipboard_set );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_RUN ), &ctr_media_override );
@@ -4404,7 +4402,7 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "sys:" ), &ctr_media_system );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "use:" ), &ctr_media_include );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "_datastart" ), &ctr_media_datastart );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "dialog:" ), &ctr_media_dialog );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_DIALOG_SET ), &ctr_media_dialog );
 	#ifdef WIN
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring(CTR_DICT_WRITE), &ctr_media_console_write );
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_STOP ), &ctr_media_console_brk );
@@ -4438,19 +4436,18 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_BACKGROUND_COLOR_SET ), &ctr_img_background_color );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_ALIGN_XY_SET ), &ctr_img_text_align );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_DRAW_COLOR_SET ), &ctr_img_draw );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "static:" ), &ctr_img_fixed_set );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "ghost:" ), &ctr_img_ghost_set );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "aspeed:" ), &ctr_media_anim_speed );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "nodirani:" ), &ctr_media_nodirani );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "lettertype:" ), &ctr_img_font );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "regelhoogte:" ), &ctr_img_lineheight );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "x:y:" ), &ctr_img_xy );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( "naar-x:y:" ), &ctr_img_mov_set );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_STATIC ), &ctr_img_fixed_set );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_GHOST_SET ), &ctr_img_ghost_set );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NODIRANI_SET ), &ctr_media_nodirani );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_FONT_SET ), &ctr_img_font );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_LINEHEIGHT_SET ), &ctr_img_lineheight );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_XY_SET ), &ctr_img_xy );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MOVE_TO_XY_SET ), &ctr_img_mov_set );
 	fontObject = ctr_font_new(CtrStdObject, NULL);
 	fontObject->link = CtrStdObject;
-	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( "nieuw" ), &ctr_font_new );
-	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( "bron:grootte:" ), &ctr_font_font );
-	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( "schrijfwijze:richting:" ), &ctr_font_script_dir );
+	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_font_new );
+	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( CTR_DICT_SOURCE_SIZE_SET ), &ctr_font_font );
+	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( CTR_DICT_FONTSCRIPT_TXTDIR_SET ), &ctr_font_script_dir );
 	audioObject = ctr_audio_new(CtrStdObject, NULL);
 	audioObject->link = CtrStdObject;
 	ctr_internal_create_func(audioObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_audio_new );
@@ -4482,10 +4479,10 @@ void begin(){
 	ctr_internal_create_func(CtrMediaFFIObjectBase, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND ), &ctr_media_ffi_respond_to_and );
 	ctr_internal_create_func(CtrMediaFFIObjectBase, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND_AND ), &ctr_media_ffi_respond_to_and_and );
 	ctr_internal_create_func(CtrMediaFFIObjectBase, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND_AND_AND ), &ctr_media_ffi_respond_to_and_and_and );
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring("Blob"), CtrMediaDataBlob, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring(CTR_DICT_BLOB_OBJECT), CtrMediaDataBlob, CTR_CATEGORY_PUBLIC_PROPERTY);
 	#endif
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_IMAGE_OBJECT ), imageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
-	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Lettertype" ), fontObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_FONT_OBJECT ), fontObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_COLOR_OBJECT ), colorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_POINT_OBJECT ), pointObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_LINE_OBJECT ), lineObject, CTR_CATEGORY_PUBLIC_PROPERTY);
