@@ -797,11 +797,11 @@ ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Boolean ] &: [ Boolean ]
+ * [ Boolean ] &&: [ Boolean ]
  * 
  * @example
- * ☞ x ≔ ( 2 > 1 ) &: ( 3 > 2 ).
- * ☞ y ≔ ( 2 > 1 ) &: ( 2 > 3 ).
+ * ☞ x ≔ ( 2 > 1 ) &&: ( 3 > 2 ).
+ * ☞ y ≔ ( 2 > 1 ) &&: ( 2 > 3 ).
  * ✎ write: x, stop.
  * ✎ write: y, stop.
  */
@@ -828,11 +828,11 @@ ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Boolean ] |: [ Boolean ]
+ * [ Boolean ] ||: [ Boolean ]
  *
  * @example
  * ☞ x ≔ 10.
- * ✎ write: (x = 11 |: x = 10), stop.
+ * ✎ write: (x = 11 ||: x = 10), stop.
  */
 ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
