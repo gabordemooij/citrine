@@ -5,7 +5,7 @@
 @info-en-media-width-height Sets the width and height of the camera. The camera automatically follows the image controlled by the player.
 @info-nl-media-width-height Zet de breedte en hoogte van de camera. De camera volgt automatisch het plaatje dat bestuurt wordt door de speler.
 @info-en-media-screen Opens a screen with the specified image or mpeg video as its background. After the screen is opened, it can receive events (clicks, key presses), these will be translated into messages.
-@info-en-media-screen Opent een scherm met het gespecificeerde afbeeldingsbestand of videobestand als achtergrond. Na opening, kan het venster gebeurtenissen ontvangen zoals kliks en toetsaanslagen. Deze worden vertaald naar berichten.
+@info-nl-media-screen Opent een scherm met het gespecificeerde afbeeldingsbestand of videobestand als achtergrond. Na opening, kan het venster gebeurtenissen ontvangen zoals kliks en toetsaanslagen. Deze worden vertaald naar berichten.
 @info-en-font-source-size Opens the specified font and sets the size.
 @info-nl-font-source-size Opent het lettertypebestand voor gebruik en stelt de lettergrootte in.
 @info-en-font-style-direction Sets the font script and the text direction.
