@@ -4133,58 +4133,6 @@ ctr_object* ctr_internal_media_external_command(char* command_str, char* fallbac
 	return CtrStdBoolFalse;
 }
 
-/**
- * @def
- * [ Media ] website: [ Text ]
- * 
- * @example
- * Media website: ‘https://citrine-lang.org’.
- * 
- * @result
- * en: Opens website in browser specified in BROWSER environment variable.
- */
-ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
-	char* default_url_opener;
-	char* tpl;
-	#ifdef WIN
-	default_url_opener = "explorer"; //Win
-	tpl = "%s %s";
-	#else
-	default_url_opener = "xdg-open"; //Linuxy
-	tpl = NULL;
-	#endif
-	char* str = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
-	ctr_object* result = ctr_internal_media_external_command(
-		getenv("BROWSER"),
-		default_url_opener,
-		str,
-		tpl
-	);
-	ctr_heap_free(str);
-	return result;
-}
-
-/**
- * @def
- * [ Media ] say: [ Text ]
- * 
- * @example
- * Media say: ‘Hello’.
- * 
- * @result
- * en: Speaks text using speech synthesizer system specified in SPEAK environment variable.
- */
-ctr_object* ctr_media_speak(ctr_object* myself, ctr_argument* argumentList) {
-	char* str = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
-	ctr_object* result = ctr_internal_media_external_command(
-		getenv("SPEAK"),
-		"say",
-		str,
-		NULL
-	);
-	ctr_heap_free(str);
-	return result;
-}
 
 /**
  * @internal
@@ -4393,10 +4341,8 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_RUN ), &ctr_media_override );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_ON_STEP ), &ctr_media_override );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_SELECTION ), &ctr_media_select );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_SAY_SET ), &ctr_media_speak );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_LINK_SET ), &ctr_media_link_package );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_TIMER_SET ), &ctr_media_timer );
-	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_WEBSITE_SET ), &ctr_media_website );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_ONDO ), &ctr_media_on_do );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_media_end );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "sys:" ), &ctr_media_system );
@@ -4411,7 +4357,7 @@ void begin(){
 	imageObject->link = CtrStdObject;
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_img_new );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_img_new_set );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_IMAGE_SET ), &ctr_img_img );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_SOURCE_SET ), &ctr_img_img );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_CONTROLLABLE ), &ctr_img_controllable );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_XY_SET ), &ctr_img_xy );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_X ), &ctr_img_x );
