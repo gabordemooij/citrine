@@ -16,6 +16,7 @@ Programma geheugen: 500.000.000.
 
 Programma opdrachtregel: “rm server/mdocs/*/*.html”.
 
+
 broncode toevoegen: (Bestand nieuw: “../plugins/media/media.c”,        lezen).
 
 ☞ talen   ≔ Reeks nieuw.
@@ -35,7 +36,7 @@ Tekst bĳ: “html” doen: {
 	↲ html.
 }.
 
-Bestand reeks: “../plugins/media/i18nsel”, elk: { :nummer :taalinformatie
+Bestand reeks: “../plugins/media/i18n”, elk: { :nummer :taalinformatie
 	☞ taal ≔ taalinformatie bestand.
 	taal = “..” of: taal = “.”, doorgaan.
 	handleiding zet: (Reeks nieuw) bĳ: taal.
@@ -89,18 +90,35 @@ blokken elk: { :nummer :blok
 		definitiebestand schrĳf: definitie.
 		codebestand schrĳf: voorbeeld.
 
-		
+		Programma opdrachtregel:
+		(“../bin/Linux/ctren -g ../i18n/en/dictionary.h ../i18n/🠶taal/dictionary.h > /tmp/en🠶taal1.dict” 🠶taal: taal).
+
+		Programma opdrachtregel:
+		(“../bin/Linux/ctren -g ../plugins/media/i18n/en/media.h ../plugins/media/i18n/🠶taal/media.h > /tmp/en🠶taal2.dict” 🠶taal: taal).
+
+		Programma opdrachtregel:
+		(“cat /tmp/en🠶taal1.dict /tmp/en🠶taal2.dict ../plugins/media/i18n/🠶taal/extra.dict > ../plugins/media/dict/en🠶taal.dict ” 🠶taal: taal).
 
 		☞ commando ≔ 
 		“../bin/Linux/ctren -t ../plugins/media/dict/en🠶taal.dict /tmp/mdoc🠶taal/def.ctr 2>/dev/null”.
 		commando 🠶taal: taal.
-		✎ schrĳf: commando, stop.
+		
 		
 		☞ vertaalde definitie ≔ Programma opdrachtregel: commando.
+		
+		(taal = “nl”) ja: {
+			✎ schrĳf: commando, stop.
+			✎ schrĳf: vertaalde definitie, stop.
+			Programma einde.
+		}.
+		
 		commando ≔ 
 		“../bin/Linux/ctren -t ../plugins/media/dict/en🠶taal.dict /tmp/mdoc🠶taal/code.ctr 1>/tmp/mdoc🠶taal/run.ctr 2>/dev/null”.
 		commando 🠶taal: taal.
+		
 		Programma opdrachtregel: commando.
+		
+		
 				
 		commando ≔ “cp -R ../dist/Linux/ISO/🠶taal/mods /tmp/mdoc🠶taal/mods”.
 		commando 🠶taal: taal.
@@ -108,6 +126,8 @@ blokken elk: { :nummer :blok
 
 		
 		☞ vertaalde code ≔ Bestand nieuw: (“/tmp/mdoc🠶taal/run.ctr” 🠶taal: taal), lezen.
+		
+		✎ schrĳf: vertaalde code, stop.
 		
 		resultaat? nee: {
 			
@@ -181,28 +201,18 @@ handleiding elk: { :taal :hoofdstukken
 	hoofdstukken elk: { :nummer :onderdelen
 	
 		☞ resultaat ≔ onderdelen positie: 3, verwĳder omliggende spaties.
-		☞ vertaalbaar ≔ resultaat zoek: “en:”.
-		vertaalbaar ja: {
+		☞ vertaalbaar ≔ resultaat zoek: “@info-”.
 		
-			taal ≠ “en” ja: {
-				☞ vertaal ≔ resultaat opsplitsen: “↵”, eerste.
-				☞ taalgrens ≔ 0.
-				☞ regelnummer ≔ 0.
-				woordenboek elk: { :i :zin
-					vertaal = zin ja: {
-						regelnummer ≔ i.
-					}.
-					((taalgrens = 0) en: (zin zoek: (“🠶taal:” 🠶taal: taal))) ja: {
-						taalgrens ≔ i.
-					}, anders: {
-						((taalgrens > 0) en: ((i - taalgrens + 1) = regelnummer)) ja: {
-							resultaat ≔ (zin vervang: (“🠶taal:” 🠶taal: taal) door: “”).
-						}.
-					}.
+		
+		vertaalbaar ja: {
+			☞ taalsleutel ≔ “@info-” + taal + “-” + (resultaat opsplitsen: “@info-”, laatste).
+			woordenboek elk: { :i :zin
+				zin zoek: taalsleutel, ja: {
+					resultaat ≔ zin kopieer vervang: taalsleutel door: “”.
+					✎ schrĳf: resultaat, stop.
+					#Programma einde.
+
 				}.
-				
-			}, anders: {
-				resultaat ≔ resultaat kopieer vervang: “en:” door: “”.
 			}.
 		}.
 	

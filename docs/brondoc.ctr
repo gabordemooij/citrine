@@ -98,6 +98,7 @@ blokken elk: { :nummer :blok
 			commando ≔ “../bin/Linux/ctr🠶taal /tmp/run.ctr 2>/tmp/err.log”.
 			commando 🠶taal: taal.
 			resultaat ≔ Programma opdrachtregel: commando.
+			
 		}.
 
 		commando ≔ “echo "🠶code" | sha1sum”.
