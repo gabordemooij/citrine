@@ -1,0 +1,85 @@
+@info-en-image-cut Deletes selected text from an editable image.
+@info-nl-image-cut Verwijdert geselecteerde tekst in een beschrijfbaar plaatje.
+@info-en-image-insert Inserts the specified text at the cursor position in an editable image.
+@info-nl-image-insert Voegt de gespecificeerde tekst in op de plaats van de cursor in een beschrijfbaar plaatje.
+@info-en-media-width-height Sets the width and height of the camera. The camera automatically follows the image controlled by the player.
+@info-nl-media-width-height Zet de breedte en hoogte van de camera. De camera volgt automatisch het plaatje dat bestuurt wordt door de speler.
+@info-en-media-screen Opens a screen with the specified image or mpeg video as its background. After the screen is opened, it can receive events (clicks, key presses), these will be translated into messages.
+@info-en-media-screen Opent een scherm met het gespecificeerde afbeeldingsbestand of videobestand als achtergrond. Na opening, kan het venster gebeurtenissen ontvangen zoals kliks en toetsaanslagen. Deze worden vertaald naar berichten.
+@info-en-font-source-size Opens the specified font and sets the size.
+@info-nl-font-source-size Opent het lettertypebestand voor gebruik en stelt de lettergrootte in.
+@info-en-font-style-direction Sets the font script and the text direction.
+@info-nl-font-style-direction Stelt het font script in en de schrijfrichting.
+@info-en-audio Play sounds and music.
+@info-nl-audio Speel muziek af en laat geluidseffecten horen.
+@info-en-image Creates a new image using the specified file.
+@info-nl-image Maakt een nieuw plaatje met als bron het aangegeven bestand.
+@info-en-image-source Changes the source file of the image.
+@info-nl-image-source Verandert het bronbestand van het plaatje.
+@info-en-image-fixate Disables automatic animation of the image.
+@info-nl-image-fixate Schakelt automatisch animatie van het plaatje uit.
+@info-en-image-ghost Enables the image to move through walls.
+@info-nl-image-ghost Laat het plaatje door muren heen bewegen.
+@info-en-image-static Position the image independent of the camera.
+@info-nl-image-static Positioneert het plaatje onafhankelijk van de camera.
+@info-en-image-move Moves the image to the specified position.
+@info-nl-image-move Beweegt het plaatje naar de gespecificeerde positie.
+@info-en-image-bounce Toggles whether the image bounces upon colliding with a wall.
+@info-nl-image-bounce Schakelt de stuiterfunctie in of uit.
+@info-en-image-wall Toggles whether an image acts as a wall or not. Other images can no longer pass through.
+@info-nl-image-wall Maakt van het plaatje een muur, zodat andere plaatjes er niet doorheen kunnen bewegen.
+@info-en-image-active Toggles events. If active, the image will receive events upon collisions, clicks or reaching its destination.
+@info-nl-image-active Schakelt het ontvangen van gebeurtenissen in. Indien actief zal het plaatje berichten ontvangen als er op wordt geklikt, als het botst met een ander plaatje of als het aankomt op bestemming.
+@info-en-image-gravity Sets the gravity of an image.
+@info-nl-image-gravity Stelt de zwaartekracht van een plaatje in.
+@info-en-image-speed Sets the moving speed of an image.
+@info-nl-image-speed Stelt de beweegsnelheid van een plaatje in.
+@info-en-image-friction Sets the friction of an image.
+@info-nl-image-friction Stelt de weerstand bij bewegen van een plaatje in.
+@info-en-image-font Sets the font to use for text on an image.
+@info-nl-image-font Stelt het lettertype in voor tekst op een plaatje.
+@info-en-image-accelerate Sets the acceleration of an image.
+@info-nl-image-accelerate Stelt de versnelling in van een plaatje.
+@info-en-image-jump Sets the jump height of a controllable image.
+@info-nl-image-jump Stelt de springhoogte in van een bestuurbaar plaatje.
+@info-en-image-editable Turns the image into a text input field.
+@info-nl-image-editable Maakt van een image een tekstinvoerveld.
+@info-en-image-animations Sets the number of frames in the image and how fast they should cycle during movement.
+@info-nl-image-animations Stelt het aantal deelplaatjes in per plaatje en hoe snel deze animeren bij beweging.
+@info-en-image-color Sets the text color for an image.
+@info-nl-image-color Stelt de tekstkleur in voor een plaatje.
+@info-en-image-background-color Sets the text background color for an image (for selected text).
+@info-nl-image-background-color Stelt de achtergrondskleur in voor geselecteerde tekst in een plaatje.
+@info-en-image-align Sets the alignment of the text inside the image.
+@info-nl-image-align Stelt de positie van de tekst binnen een plaatje in.
+@info-en-image-line-height Sets the line height for text in an image.
+@info-nl-image-line-height Stelt de regelhoogte in voor tekst in een plaatje.
+@info-en-image-text Writes text on an image.
+@info-nl-image-text Schrijft tekst op een plaatje.
+@info-en-image-get-text Returns text written on an image.
+@info-nl-image-get-text Geeft de tekst terug die op een plaatje is geschreven.
+@info-en-media-selected Returns the currently selected text.
+@info-nl-media-selected Geeft de tekst terug die op dit moment is geselecteerd.
+@info-en-package-add Adds an object to a data package.
+@info-nl-package-add Voegt een object toe aan een gegevenspakket.
+@info-en-media-package-link Links a data package to the program. All assets, including images, audio and fonts will now be retrieved from the package instead of disk.
+@info-nl-media-package-link Koppelt een gegevenspakket aan het programma. Alle plaatjes, geluiden en lettertypes zullen vanaf nu worden opgehaald uit het pakket in plaats van disk.
+@info-en-media-notification Displays a dialog box with the text.
+@info-nl-media-notification Toont een dialoogvenster met de tekst.
+@info-en-blob-new Allocates a block of memory of the given size.
+@info-nl-blob-new Reserveert een blok geheugen met de opgegeven omvang.
+@info-en-blob-utf8 Copies the text to memory.
+@info-nl-blob-utf8 Kopieert de tekst naar het geheugenblok.
+@info-en-blob-read Copies bytes from memory to a sequence.
+@info-nl-blob-read Kopieert bytes uit het geheugen naar een reeks.
+@info-en-blob-struct Copies a struct definition into the memory block.
+@info-nl-blob-struct Kopieert een struct-definitie naar het geheugenblok.
+@info-en-blob-freestruct Frees the struct in the memory block.
+@info-nl-blob-freestruct Geeft een struct in een geheugenblok vrij.
+@info-en-blob-free Frees the memory block.
+@info-nl-blob-free Geeft het geheugenblok weer vrij.
+@info-en-blob-fill Fills the memory block with the bytes from the sequence.
+@info-nl-blob-fill Vult het geheugenblok met de bytes uit de reeks.
+@info-en-blob-deref Dereferences a pointer to a memory block.
+@info-nl-blob-deref Derefereert een pointer naar een geheugenblok.
+
