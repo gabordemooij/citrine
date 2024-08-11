@@ -8,11 +8,11 @@ and maintainable code, while remaining simple and easy to learn by focusing on s
 and conceptual minimalism:
 
 ```
-☞ greeting ≔ ‘Hello country!’.
+>> greeting := ['Hello country!'].
 
-greeting country: ‘Great Britain’.
+greeting country: ['Great Britain'].
 
-✎ write: greeting.
+Out write: greeting.
 ```
 
 > Hello Great Britain!
@@ -122,13 +122,7 @@ make -f makefile clean
 ```
 Once you’ve compiled all the languages you want, you will find the binaries in `bin`. You
 can start using them right away, but you might want to install them under your system’s
-standard binary path first. You also probably want to install the included font that gives
-Citrine’s symbols a nicer look in your text editor:
-
-```bash
-mv bin/Haiku/ctr* ~/.local/bin
-mv fonts/Citrine.ttf ~/.local/fonts
-```
+standard binary path first. 
 
 And with this, you should be done!
 
