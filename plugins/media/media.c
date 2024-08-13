@@ -119,6 +119,7 @@ struct MediaIMG {
 	char            ghost;
 	char            nodirani;
 	int             lineheight;
+	char            visible;
 };
 typedef struct MediaIMG MediaIMG;
 
@@ -1272,7 +1273,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	CtrMediaSelectStart =0;
 	CtrMediaSelectBegin = 0;
 	CtrMediaSelectEnd=0;
-	controllableObject = NULL;
+	//controllableObject = NULL;
 	focusObject = NULL;
 	CtrMediaSteps = 0;
 	SDL_Rect dimensions;
@@ -1617,6 +1618,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 		CtrMediaTicks2 = SDL_GetTicks64();
 		for(int i = 0; i < IMGCount; i ++) {
 			MediaIMG* m = &mediaIMGs[i];
+			if (!m->visible) continue;
 			ctr_internal_media_image_calculate_motion(m);
 			SDL_Rect r,s;
 			r = ctr_internal_media_image_maprect(m);
@@ -2224,6 +2226,7 @@ ctr_object* ctr_img_new(ctr_object* myself, ctr_argument* argumentList) {
 	mediaImage->gspeed = 0;
 	mediaImage->dir = -1;
 	mediaImage->mov = 0;
+	mediaImage->visible = 1;
 	mediaImage->anims = 1;
 	mediaImage->animspeed = 5;
 	mediaImage->nodirani = 0;
@@ -2319,6 +2322,22 @@ ctr_object* ctr_img_fixed_set(ctr_object* myself, ctr_argument* argumentList) {
 ctr_object* ctr_img_ghost_set(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* mediaImage = ctr_internal_get_image_from_object(myself);
 	mediaImage->ghost = ctr_internal_cast2bool( argumentList->object )->value.bvalue;
+	return myself;
+}
+
+/**
+ * @def
+ * [ Image ] visible: [ Boolean ]
+ * 
+ * @example
+ * image visible: True.
+ * 
+ * @result
+ * @info-image-visible
+ */
+ctr_object* ctr_img_visible_set(ctr_object* myself, ctr_argument* argumentList) {
+	MediaIMG* mediaImage = ctr_internal_get_image_from_object(myself);
+	mediaImage->visible = ctr_internal_cast2bool( argumentList->object )->value.bvalue;
 	return myself;
 }
 
@@ -2626,11 +2645,11 @@ ctr_object* ctr_img_anims(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Image ] color: [ Color ]
+ * [ Image ] ink: [ Color ]
  * 
  * @example
  * >> red := Color new red: 255 green: 0 blue: 0.
- * image color: red.
+ * image ink: red.
  * 
  * @result
  * @info-image-color
@@ -2648,11 +2667,11 @@ ctr_object* ctr_img_color(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Image ] background-color: [ Color ]
+ * [ Image ] highlight: [ Color ]
  * 
  * @example
  * >> green := Color new red: 0 green: 255 blue: 0.
- * image background-color: green.
+ * image highlight: green.
  * 
  * @result
  * @info-image-background-color
@@ -4096,10 +4115,10 @@ ctr_object* ctr_media_datastart(ctr_object* myself, ctr_argument* none) {
 
 /**
  * @def
- * [ Media ] notification: [ Text ]
+ * [ Media ] show: [ Text ]
  * 
  * @example
- * Media notification: ['TEST 123'].
+ * Media show: ['TEST 123'].
  * 
  * @result
  * @info-media-notification
@@ -4214,6 +4233,7 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_LINEHEIGHT_SET ), &ctr_img_lineheight );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_XY_SET ), &ctr_img_xy );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MOVE_TO_XY_SET ), &ctr_img_mov_set );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_VISIBLE_SET ), &ctr_img_visible_set );
 	fontObject = ctr_font_new(CtrStdObject, NULL);
 	fontObject->link = CtrStdObject;
 	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_font_new );

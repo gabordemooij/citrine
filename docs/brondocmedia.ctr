@@ -106,11 +106,6 @@ blokken elk: { :nummer :blok
 		
 		☞ vertaalde definitie ≔ Programma opdrachtregel: commando.
 		
-		(taal = “nl”) ja: {
-			✎ schrĳf: commando, stop.
-			✎ schrĳf: vertaalde definitie, stop.
-			Programma einde.
-		}.
 		
 		commando ≔ 
 		“../bin/Linux/ctren -t ../plugins/media/dict/en🠶taal.dict /tmp/mdoc🠶taal/code.ctr 1>/tmp/mdoc🠶taal/run.ctr 2>/dev/null”.
