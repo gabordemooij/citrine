@@ -1057,7 +1057,9 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 		m->gspeed = 0;
 	}
 	if (m->mov > 0 && m->dir > -1) {
+		if (m->x != m->tx)
 		m->x += dt * m->mov * cos(m->dir * M_PI / 180);
+		if (m->y != m->ty)
 		m->y -= dt * m->mov * sin(m->dir * M_PI / 180);
 		// an image reaches its destination if the destination falls between
 		// this step and the previous one (i.e. tx is between ox and x and ty
@@ -1404,18 +1406,22 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 					if (ctr_internal_media_mouse_down(event)) return CtrStdFlow;
 					break;
 				case SDL_FINGERDOWN:
-					if (event.tfinger.x * windowWidth > player->x) {
-						ctr_internal_media_keydown_right(&dir);
+					if (event.tfinger.y > 0.75) {
+						if (event.tfinger.x < 0.1) {
+							ctr_internal_media_keydown_left(&dir);
+						}
+						if (event.tfinger.x > 0.1 && event.tfinger.x < 0.2) {
+							ctr_internal_media_keydown_right(&dir);
+						}
 					}
-					else if (event.tfinger.x * windowWidth < player->x - (player->w/player->anims)) {
-						ctr_internal_media_keydown_left(&dir);
-					}
-					if (event.tfinger.y * windowHeight > player->y - player->h) {
-						ctr_internal_media_keydown_down(&dir, &c4speed);
-					}
-					else if (event.tfinger.y * windowHeight < player->y - player->h) {
-						ctr_internal_media_keydown_up(&dir, &c4speed);
-					}
+					if (event.tfinger.x > 0.9) {
+							if (event.tfinger.y > 0.8) {
+								ctr_internal_media_keydown_down(&dir, &c4speed);
+							}
+							if (event.tfinger.y < 0.8 && event.tfinger.y > 0.5) {
+								ctr_internal_media_keydown_up(&dir, &c4speed);
+							}
+						}
 					break;
 				case SDL_FINGERUP:
 						ctr_internal_media_keyup_right(&dir, &c4speed);
@@ -3101,7 +3107,7 @@ void ctr_internal_media_init() {
 	#ifdef FULLSCREEN
 	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 100, 100, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
 	#else
-	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 100, 100, SDL_WINDOW_OPENGL);
+	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 100, 100, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP);
 	#endif
 	if (CtrMediaWindow == NULL) ctr_internal_media_fatalerror("Unable to create window", SDL_GetError());
 	CtrMediaFlagSoftwareVSync = 0;
