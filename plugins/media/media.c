@@ -1105,7 +1105,6 @@ void ctr_internal_media_rendervideoframe(SDL_Rect* rect) {
 	}
 	plm_frame_to_rgb(frame, rgb_buffer, wrgb);
 	SDL_UpdateTexture(CtrMediaBGVideoTexture, NULL, rgb_buffer, rect->w * 3);
-	SDL_RenderCopy(CtrMediaRenderer, CtrMediaBGVideoTexture, NULL, rect);
 }
 
 uint8_t* ctr_media_video_buffer;
@@ -1313,6 +1312,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	SDL_Event event;
 	dir = -1;
 	c4speed = 0;
+	SDL_Rect orig_video_dim = dimensions;
 	while (!CtrStdFlow) {
 		if (CtrMediaFlagSoftwareVSync) {
 			CtrMediaPerfCountStart = SDL_GetPerformanceCounter();
@@ -1323,10 +1323,14 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 		if (controllableObject) {
 			player = (MediaIMG*) controllableObject->value.rvalue->ptr;
 		}
+		SDL_Rect s = dimensions;
 		if (background_is_video) {
-			ctr_internal_media_rendervideoframe(&dimensions);
+			if (CtrMediaCamera.w > 0 && CtrMediaCamera.h > 0) {
+				ctr_internal_media_camera(NULL, &s, &dimensions, player);
+			}
+			ctr_internal_media_rendervideoframe(&orig_video_dim);
+			SDL_RenderCopy(CtrMediaRenderer, CtrMediaBGVideoTexture, &s, &dimensions);
 		} else {
-		    SDL_Rect s = dimensions;
 		    if (CtrMediaCamera.w > 0 && CtrMediaCamera.h > 0) {
 				ctr_internal_media_camera(NULL, &s, &dimensions, player);
 			}
