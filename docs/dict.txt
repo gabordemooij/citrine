@@ -82,4 +82,9 @@
 @info-nl-blob-fill Vult het geheugenblok met de bytes uit de reeks.
 @info-en-blob-deref Dereferences a pointer to a memory block.
 @info-nl-blob-deref Derefereert een pointer naar een geheugenblok.
+@info-en-image-visible Toggles visibility of an image.
+@info-nl-image-visible Maakt een plaatje (on)zichtbaar.
+@info-en-image-autoplay Toggles autoplay of an image.
+@info-nl-image-autoplay Plaatje automatisch afspelen als film.
+
 

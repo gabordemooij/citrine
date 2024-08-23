@@ -8,10 +8,7 @@
 #include "../../citrine.h"
 #include "media.h"
 
-#define PL_MPEG_IMPLEMENTATION
-
 #ifdef SDL
-#include "pl_mpeg.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
@@ -60,13 +57,12 @@ int CtrMediaJumpHeightFactor = 100;
 int CtrMediaControlMode = 0;
 int CtrMediaRotation = 0;
 int CtrMediaStdDelayTime = 0;
+int CtrMediaTime = 0;
 char CtrMediaBreakLoopFlag = 0;
 uint16_t CtrMediaNetworkChunkSize = 350;
 time_t CtrMediaFrameTimer = 0;
 uint16_t CtrMediaSteps;
-int CtrMediaVideoId = -1;
 double CtrMediaVideoFPSRendering;
-SDL_Texture* CtrMediaBGVideoTexture;
 
 int CtrMediaAudioRate;
 uint16_t CtrMediaAudioFormat;
@@ -104,7 +100,7 @@ struct MediaIMG {
 	double			tx;			double			ty;
 	double			gravity;	double			gspeed;
 	double			fric;		double			accel;
-	double			speed;		double				dir;
+	double			speed;		double			dir;
 	double			mov;		int				anims;
 	int				animspeed;
 	int				solid;		int				collidable;
@@ -660,7 +656,17 @@ void ctr_internal_media_infercursorpos(MediaIMG* image, int x, int y) {
 
 void ctr_internal_media_anim_frames(MediaIMG* m, SDL_Rect* r, SDL_Rect* s) {
 	int frame_width = m->w / (m->anims ? m->anims : 1);
-	int step_offset = (m->mov) ? (int)floor(m->x / m->animspeed) % m->anims : 0;
+	int step_offset;
+	int animspeed;
+	if (m->nodirani == 2) {
+		animspeed = m->animspeed;
+		if (animspeed >= 100) animspeed = 99;
+		if (animspeed < 0) animspeed = 0;
+		CtrMediaTime = CtrMediaTicks2;
+		step_offset = (int)floor(CtrMediaTime / (1000 - animspeed * 10)) % m->anims;
+	} else {
+		step_offset = (m->mov) ? (int)floor(m->x / m->animspeed) % m->anims : 0;
+	}
 	r->w = (m->anims > 0 && m->w > m->anims) ? m->w / m->anims : m->w;
 	r->h = m->h;
 	s->x = (frame_width * step_offset); 
@@ -1091,66 +1097,6 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 
 SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type);
 
-plm_t* plm;
-uint8_t* rgb_buffer;
-int wrgb;
-
-void ctr_internal_media_rendervideoframe(SDL_Rect* rect) {
-	plm_frame_t *frame = NULL;
-	frame = plm_decode_video(plm);
-	if (plm_has_ended(plm)) {
-		plm_rewind(plm);
-		plm->has_ended = FALSE;
-		frame = plm_decode_video(plm);
-	}
-	plm_frame_to_rgb(frame, rgb_buffer, wrgb);
-	SDL_UpdateTexture(CtrMediaBGVideoTexture, NULL, rgb_buffer, rect->w * 3);
-}
-
-uint8_t* ctr_media_video_buffer;
-size_t ctr_media_video_memory_id;
-void ctr_internal_media_loadvideobg(char* path, SDL_Rect* dimensions) {
-	SDL_RWops* asset_reader = ctr_internal_media_load_asset(path, 1);
-	if (!asset_reader) {
-		ctr_error("Unable to open video asset.", 0);
-		return;
-	}
-	int chunk = 512;
-	size_t bytes_read;
-	size_t offset = 0;
-	ctr_media_video_buffer = ctr_heap_allocate_tracked(chunk);
-	ctr_media_video_memory_id = ctr_heap_get_latest_tracking_id();
-	bytes_read = SDL_RWread(asset_reader, ctr_media_video_buffer, 1, chunk);
-	offset += bytes_read;
-	while (bytes_read > 0) {
-		ctr_media_video_buffer = ctr_heap_reallocate_tracked(ctr_media_video_memory_id, offset + chunk);
-		bytes_read = SDL_RWread(asset_reader, ctr_media_video_buffer + offset, 1, chunk);
-        offset += bytes_read;
-    }
-    SDL_RWclose(asset_reader);
-	plm = plm_create_with_memory(ctr_media_video_buffer, offset, FALSE);
-	if (!plm) {
-		printf("Couldn't open file %s\n", path);
-		exit(1);
-	}
-	plm_set_audio_enabled(plm, FALSE);
-	plm_set_loop(plm, FALSE);
-	plm_seek(plm, 39, FALSE);
-	int w = plm_get_width(plm);
-	int h = plm_get_height(plm);
-	rgb_buffer = (uint8_t *)malloc(w * h * 3);
-	wrgb = w * 3;
-	CtrMediaBGVideoTexture = SDL_CreateTexture(CtrMediaRenderer, SDL_PIXELFORMAT_RGB24,
-	SDL_TEXTUREACCESS_STREAMING | SDL_TEXTUREACCESS_TARGET,
-	w, h);
-	if (!CtrMediaBGVideoTexture) ctr_internal_media_fatalerror("texture", "FFMPEG");  
-	SDL_SetWindowSize(CtrMediaWindow,w, h);
-	SDL_Delay(100);
-	dimensions->x = 0;
-	dimensions->y = 0;
-	dimensions->h = h;
-	dimensions->w = w;
-}
 
 char ctr_internal_media_determine_filetype(char* path) {
 	char magic[20];
@@ -1161,7 +1107,6 @@ char ctr_internal_media_determine_filetype(char* path) {
 		return 0;
 	}
 	SDL_RWread(asset_reader, magic, 1, 20);
-	if (strcmp(magic, "\x00\x00\x01\xBA")==0) return 10; //MPEG
 	if (strcmp(magic, "\xFF\xD8")==0) return 20; //JPG
 	if (strcmp(magic, "\x89\x50\x4E\x47\x0D\x0A\x1A\x0A")==0) return 30; //PNG
 	return 0;
@@ -1286,23 +1231,17 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_error(CTR_ERR_FOPEN, 0);
 		return myself;
 	}
-	char background_is_video;
-	if (ftype == 10) {
-		ctr_internal_media_loadvideobg(imageFileStr, &dimensions);
-		background_is_video = 1;
-	} else {
-		SDL_RWops* res = NULL;
-		res = ctr_internal_media_load_asset(imageFileStr, 1);
-		texture = IMG_LoadTexture_RW(CtrMediaRenderer, res, 0);
-		SDL_QueryTexture(texture, NULL, NULL, &dimensions.w, &dimensions.h);
-		dimensions.x = x;
-		dimensions.y = y;
-		SDL_SetWindowSize(CtrMediaWindow, dimensions.w, dimensions.h);
-		SDL_SetWindowPosition(CtrMediaWindow,SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED);
-		SDL_Delay(100);
-		SDL_RenderCopy(CtrMediaRenderer, texture, NULL, &dimensions);
-		background_is_video = 0;
-	}
+	
+	SDL_RWops* res = NULL;
+	res = ctr_internal_media_load_asset(imageFileStr, 1);
+	texture = IMG_LoadTexture_RW(CtrMediaRenderer, res, 0);
+	SDL_QueryTexture(texture, NULL, NULL, &dimensions.w, &dimensions.h);
+	dimensions.x = x;
+	dimensions.y = y;
+	SDL_SetWindowSize(CtrMediaWindow, dimensions.w, dimensions.h);
+	SDL_SetWindowPosition(CtrMediaWindow,SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED);
+	SDL_Delay(100);
+	SDL_RenderCopy(CtrMediaRenderer, texture, NULL, &dimensions);
 	ctr_heap_free(imageFileStr);
 	windowWidth = dimensions.w;
 	windowHeight = dimensions.h;
@@ -1312,30 +1251,22 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	SDL_Event event;
 	dir = -1;
 	c4speed = 0;
-	SDL_Rect orig_video_dim = dimensions;
 	while (!CtrStdFlow) {
 		if (CtrMediaFlagSoftwareVSync) {
 			CtrMediaPerfCountStart = SDL_GetPerformanceCounter();
 		}
-		ctr_gc_cycle(); 
+		ctr_gc_cycle();
+		CtrMediaTime = clock();
 		SDL_RenderClear(CtrMediaRenderer);
 		player = NULL;
 		if (controllableObject) {
 			player = (MediaIMG*) controllableObject->value.rvalue->ptr;
 		}
 		SDL_Rect s = dimensions;
-		if (background_is_video) {
-			if (CtrMediaCamera.w > 0 && CtrMediaCamera.h > 0) {
-				ctr_internal_media_camera(NULL, &s, &dimensions, player);
-			}
-			ctr_internal_media_rendervideoframe(&orig_video_dim);
-			SDL_RenderCopy(CtrMediaRenderer, CtrMediaBGVideoTexture, &s, &dimensions);
-		} else {
-		    if (CtrMediaCamera.w > 0 && CtrMediaCamera.h > 0) {
-				ctr_internal_media_camera(NULL, &s, &dimensions, player);
-			}
-			SDL_RenderCopy(CtrMediaRenderer, texture, &s, &dimensions);
+		if (CtrMediaCamera.w > 0 && CtrMediaCamera.h > 0) {
+			ctr_internal_media_camera(NULL, &s, &dimensions, player);
 		}
+		SDL_RenderCopy(CtrMediaRenderer, texture, &s, &dimensions);
 		myself->info.sticky = 1;
 		if (CtrMediaEventListenFlagStep) {
 			ctr_send_message(myself, CTR_DICT_ON_STEP, strlen(CTR_DICT_ON_STEP), NULL );
@@ -2637,15 +2568,32 @@ ctr_object* ctr_img_editable(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Image ] animations: [ Number ] rate: [Number].
+ * [ Image ] autoplay: [ Number ].
  * 
+ * @example
+ * image autoplay: True.
+ *
+ * @result
+ * @info-image-autoplay
+ */
+ctr_object* ctr_img_autoplay(ctr_object* myself, ctr_argument* argumentList) {
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (image == NULL) return myself;
+	image->nodirani = (int) ctr_internal_cast2bool(argumentList->object)->value.bvalue * 2;
+	return myself;
+}
+
+ /*
+ *  @def
+ * [ Image ] reel: [ Number ] rate: [Number].
+ *
  * @example
  * image animations: 2 rate: 20.
  *
  * @result
  * @info-image-animations
  */
-ctr_object* ctr_img_anims(ctr_object* myself, ctr_argument* argumentList) {
+ctr_object* ctr_img_reel(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return myself;
 	image->anims = (int) ctr_internal_cast2number(argumentList->object)->value.nvalue;
@@ -4226,7 +4174,8 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_ACCELERATE_SET ), &ctr_img_accel );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_JUMPHEIGHT_SET ), &ctr_img_jump_height );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_COLLISION_SET ), &ctr_media_override );
-	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_ANIMATIONS_SET ), &ctr_img_anims );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_REEL_SET ), &ctr_img_reel );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_REEL_AUTOPLAY_SET ), &ctr_img_autoplay );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_WRITE ), &ctr_img_text );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_img_text_get );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_CUT ), &ctr_img_text_del );
