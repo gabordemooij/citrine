@@ -1175,19 +1175,18 @@ ctr_object* ctr_media_timer(ctr_object* myself, ctr_argument* argumentList) {
 	if (timer_no < 1 || timer_no > CtrMaxMediaTimers) {
 		ctr_error("Invalid timer", 0);
 	} else {
-		CtrMediaTimers[timer_no] = ms;
+		CtrMediaTimers[timer_no] = CtrMediaTicks2 + ms;
 	}
 	return myself;
 }
 
-
 void ctr_internal_media_update_timers(ctr_object* media) {
 	for(int i = 1; i < CtrMaxMediaTimers; i++) {
 		if (CtrMediaTimers[i] < 0) continue;
-		if (CtrMediaTimers[i] == 0) {
+		if (CtrMediaTimers[i] < CtrMediaTicks2) {
+			CtrMediaTimers[i] = -1;
 			ctr_media_event_timer(media, CTR_DICT_ON_TIMER, i);
 		}
-		CtrMediaTimers[i]--;
 	}
 }
 
