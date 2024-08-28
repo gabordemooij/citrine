@@ -1255,7 +1255,6 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 			CtrMediaPerfCountStart = SDL_GetPerformanceCounter();
 		}
 		ctr_gc_cycle();
-		CtrMediaTime = clock();
 		SDL_RenderClear(CtrMediaRenderer);
 		player = NULL;
 		if (controllableObject) {
