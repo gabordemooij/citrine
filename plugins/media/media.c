@@ -943,8 +943,12 @@ void ctr_internal_media_camera(MediaIMG* m, SDL_Rect* s, SDL_Rect* r, MediaIMG* 
 	int right = camera.x + camera.w - border;
 	int top = camera.y + border;
 	int bottom = camera.y + camera.h - border;
-	int cpx = player->x + ((player->w / player->anims)/2);
-	int cpy = player->y + (player->h/2);
+	int cpx = 0;
+	int cpy = 0;
+	if (player) {
+		cpx = player->x + ((player->w / player->anims)/2);
+		cpy = player->y + (player->h/2);
+	}
 	if (cpx > right && camera.x < windowWidth - camera.w) {
 		camera.x ++;
 	}
