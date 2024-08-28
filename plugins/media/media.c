@@ -1234,7 +1234,10 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_error(CTR_ERR_FOPEN, 0);
 		return myself;
 	}
-	
+	for(int i = 0; i < IMGCount; i++) {
+		mediaIMGs[i].mov = 0;
+		mediaIMGs[i].gspeed = 0;
+	}
 	SDL_RWops* res = NULL;
 	res = ctr_internal_media_load_asset(imageFileStr, 1);
 	texture = IMG_LoadTexture_RW(CtrMediaRenderer, res, 0);
