@@ -3061,10 +3061,17 @@ void ctr_internal_media_init() {
 	CtrMediaAudioVolume = MIX_MAX_VOLUME;
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) ctr_internal_media_fatalerror("SDL failed to init", SDL_GetError());
 	IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
+	
+	
 	#ifdef FULLSCREEN
 	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 100, 100, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
 	#else
-	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 100, 100, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP);
+	char* screen_mode = getenv("screenmode");
+	if (screen_mode && strcmp(screen_mode,"full")==0) {
+	   CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 100, 100, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP);
+	} else {
+	   CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 100, 100, SDL_WINDOW_OPENGL);
+	}
 	#endif
 	if (CtrMediaWindow == NULL) ctr_internal_media_fatalerror("Unable to create window", SDL_GetError());
 	CtrMediaFlagSoftwareVSync = 0;
