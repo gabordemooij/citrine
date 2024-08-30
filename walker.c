@@ -145,6 +145,7 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 				node = argumentList->node;
 			}
 		}
+		aItem->next = NULL; // just be sure set final next to NULL
 		result = ctr_send_message(r, message, l, a);
 		r->info.sticky = sticky;
 		aItem = a;
