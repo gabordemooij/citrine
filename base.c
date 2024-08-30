@@ -425,6 +425,7 @@ ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList )
  * ✎ write: y, stop.
  */
 ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList ) {
+	//@important! we use a List because message+arguments would exceed argument limit!
 	ctr_object* message = ctr_internal_cast2string( argumentList->object );
 	ctr_object* arr     = argumentList->next->object;
 	if ( arr->info.type != CTR_OBJECT_TYPE_OTARRAY ) {

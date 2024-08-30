@@ -1105,6 +1105,7 @@ ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vle
 		mesgArgument = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
 		mesgArgument->object = ctr_build_string(message, vlen);
 		mesgArgument->next = argumentList;
+		//@important! static argument signatures because this is direct 1-to-1 map on actual methods! Don't be tempted to change to list!
 		if (argCount == 0 || argCount > 3) {
 			returnValue = ctr_send_message(receiverObject, CTR_DICT_RESPOND_TO, strlen(CTR_DICT_RESPOND_TO),  mesgArgument);
 		} else if (argCount == 1) {
