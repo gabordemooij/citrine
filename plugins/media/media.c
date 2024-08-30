@@ -2748,6 +2748,7 @@ void ctr_internal_img_render_cursor(ctr_object* focusObject) {
 void ctr_internal_img_render_text(ctr_object* myself) {
 	MediaIMG* image = ctr_internal_get_image_from_object(myself);
 	if (image == NULL) return;
+	if (image->surface == NULL) return;
 	int begin, end, len;
 	ctr_internal_media_get_selection(&begin, &end);
 	len = end - begin;
