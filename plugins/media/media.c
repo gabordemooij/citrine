@@ -513,10 +513,10 @@ ctr_object* ctr_img_text_del(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Image ] insert: [ Text ]
+ * [ Image ] append: [ Text ]
  * 
  * @example
- * image insert: ['abc'].
+ * image append: ['abc'].
  * 
  * @result
  * @info-image-insert
@@ -1784,7 +1784,7 @@ ctr_object* ctr_font_font(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Font ] new
+ * [ Font ] style: [ Text ] direction: [ Number ]
  *
  * @example
  * font style: ['Arab'] direction: 1.
@@ -2043,7 +2043,7 @@ int CtrNetworkConnectedFlag = 0;
  * >> network := Network new.
  * Out write: (
  * 	network 
- * 	send: Nil to: ['https://citrine-lang.org']
+ * 	send: None to: ['https://citrine-lang.org']
  * ), stop.
  * 
  * @result
