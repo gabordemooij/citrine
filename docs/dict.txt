@@ -385,7 +385,50 @@
 @info-pl-media-package-link Łączy pakiet danych z programem. Wszystkie zasoby, w tym obrazy, dźwięki i czcionki, będą teraz pobierane z pakietu zamiast z dysku.
 @info-pl-media-notification Wyświetla okno dialogowe z tekstem.
 @info-pl-blob-new Alokuje blok pamięci o
-
+@info-de-image-cut Löscht den ausgewählten Text aus einem bearbeitbaren Bild.
+@info-de-image-insert Fügt den angegebenen Text an der Cursorposition in ein bearbeitbares Bild ein.
+@info-de-media-width-height Legt die Breite und Höhe der Kamera fest. Die Kamera folgt automatisch dem vom Spieler gesteuerten Bild.
+@info-de-media-screen Öffnet einen Bildschirm mit dem angegebenen Bild als Hintergrund. Nach dem Öffnen des Bildschirms kann er Ereignisse (Klicks, Tastendrücke) empfangen, die in Nachrichten übersetzt werden.
+@info-de-font-source-size Öffnet die angegebene Schriftart und legt die Größe fest.
+@info-de-font-style-direction Legt das Schriftskript und die Textrichtung fest.
+@info-de-audio Spielt Geräusche und Musik ab.
+@info-de-image Erstellt ein neues Bild mit der angegebenen Datei.
+@info-de-image-source Ändert die Quelldatei des Bildes.
+@info-de-image-fixate Deaktiviert die automatische Animation des Bildes.
+@info-de-image-ghost Ermöglicht es dem Bild, durch Wände zu gehen.
+@info-de-image-static Positioniert das Bild unabhängig von der Kamera.
+@info-de-image-move Bewegt das Bild an die angegebene Position.
+@info-de-image-bounce Schaltet um, ob das Bild beim Aufprall auf eine Wand abprallt.
+@info-de-image-wall Schaltet um, ob ein Bild als Wand fungiert oder nicht. Andere Bilder können nicht mehr hindurchgehen.
+@info-de-image-active Schaltet Ereignisse ein oder aus. Wenn aktiv, empfängt das Bild Ereignisse bei Kollisionen, Klicks oder beim Erreichen seines Ziels.
+@info-de-image-gravity Legt die Schwerkraft eines Bildes fest.
+@info-de-image-friction Legt die Reibung eines Bildes fest.
+@info-de-image-font Legt die zu verwendende Schriftart für Text auf einem Bild fest.
+@info-de-image-speed Legt die Bewegungsgeschwindigkeit eines Bildes fest.
+@info-de-image-accelerate Legt die Beschleunigung eines Bildes fest.
+@info-de-image-jump Legt die Sprunghöhe eines steuerbaren Bildes fest.
+@info-de-image-editable Macht das Bild zu einem Texteingabefeld.
+@info-de-image-animations Legt die Anzahl der Bilder im Bild fest und wie schnell sie sich während der Bewegung abwechseln sollen.
+@info-de-image-color Legt die Textfarbe für ein Bild fest.
+@info-de-image-background-color Legt die Hintergrundfarbe des Textes für ein Bild fest (für ausgewählten Text).
+@info-de-image-align Legt die Ausrichtung des Textes im Bild fest.
+@info-de-image-line-height Legt die Zeilenhöhe für Text in einem Bild fest.
+@info-de-image-text Schreibt Text auf ein Bild.
+@info-de-image-get-text Gibt den auf einem Bild geschriebenen Text zurück.
+@info-de-media-selected Gibt den aktuell ausgewählten Text zurück.
+@info-de-package-add Fügt ein Objekt zu einem Datenpaket hinzu.
+@info-de-media-package-link Verknüpft ein Datenpaket mit dem Programm. Alle Ressourcen, einschließlich Bilder, Audio und Schriften, werden jetzt aus dem Paket statt von der Festplatte abgerufen.
+@info-de-media-notification Zeigt ein Dialogfeld mit dem Text an.
+@info-de-blob-new Reserviert einen Speicherblock der angegebenen Größe.
+@info-de-blob-utf8 Kopiert den Text in den Speicher.
+@info-de-blob-read Kopiert Bytes aus dem Speicher in eine Sequenz.
+@info-de-blob-struct Kopiert eine Strukturdefinition in den Speicherblock.
+@info-de-blob-freestruct Gibt die Struktur im Speicherblock frei.
+@info-de-blob-free Gibt den Speicherblock frei.
+@info-de-blob-fill Füllt den Speicherblock mit den Bytes aus der Sequenz.
+@info-de-blob-deref Dereferenziert einen Zeiger auf einen Speicherblock.
+@info-de-image-visible Schaltet die Sichtbarkeit eines Bildes um.
+@info-de-image-autoplay Schaltet die automatische Wiedergabe eines Bildes um.
 @info-id-image-cut Menghapus teks yang dipilih dari gambar yang dapat diedit.
 @info-id-image-insert Menyisipkan teks yang ditentukan pada posisi kursor di gambar yang dapat diedit.
 @info-id-media-width-height Mengatur lebar dan tinggi kamera. Kamera secara otomatis mengikuti gambar yang dikendalikan oleh pemain.
@@ -518,4 +561,48 @@
 @info-zh-blob-deref 取消引用指向内存块的指针。
 @info-zh-image-visible 切换图像的可见性。
 @info-zh-image-autoplay 切换图像的自动播放。
+@info-it-image-cut Elimina il testo selezionato da un'immagine modificabile.
+@info-it-image-insert Inserisce il testo specificato nella posizione del cursore in un'immagine modificabile.
+@info-it-media-width-height Imposta la larghezza e l'altezza della fotocamera. La fotocamera segue automaticamente l'immagine controllata dal giocatore.
+@info-it-media-screen Apre uno schermo con l'immagine specificata come sfondo. Dopo che lo schermo è stato aperto, può ricevere eventi (clic, pressioni di tasti), che verranno tradotti in messaggi.
+@info-it-font-source-size Apre il font specificato e imposta la dimensione.
+@info-it-font-style-direction Imposta lo script del font e la direzione del testo.
+@info-it-audio Riproduce suoni e musica.
+@info-it-image Crea una nuova immagine utilizzando il file specificato.
+@info-it-image-source Cambia il file sorgente dell'immagine.
+@info-it-image-fixate Disabilita l'animazione automatica dell'immagine.
+@info-it-image-ghost Consente all'immagine di attraversare i muri.
+@info-it-image-static Posiziona l'immagine indipendentemente dalla fotocamera.
+@info-it-image-move Sposta l'immagine nella posizione specificata.
+@info-it-image-bounce Attiva o disattiva il rimbalzo dell'immagine quando colpisce un muro.
+@info-it-image-wall Attiva o disattiva se un'immagine funge da muro o meno. Altre immagini non possono più attraversarla.
+@info-it-image-active Attiva o disattiva gli eventi. Se attivo, l'immagine riceverà eventi in caso di collisioni, clic o quando raggiunge la sua destinazione.
+@info-it-image-gravity Imposta la gravità di un'immagine.
+@info-it-image-friction Imposta l'attrito di un'immagine.
+@info-it-image-font Imposta il font da utilizzare per il testo su un'immagine.
+@info-it-image-speed Imposta la velocità di movimento di un'immagine.
+@info-it-image-accelerate Imposta l'accelerazione di un'immagine.
+@info-it-image-jump Imposta l'altezza del salto di un'immagine controllabile.
+@info-it-image-editable Trasforma l'immagine in un campo di input testuale.
+@info-it-image-animations Imposta il numero di fotogrammi nell'immagine e la velocità con cui devono essere ciclati durante il movimento.
+@info-it-image-color Imposta il colore del testo per un'immagine.
+@info-it-image-background-color Imposta il colore di sfondo del testo per un'immagine (per il testo selezionato).
+@info-it-image-align Imposta l'allineamento del testo all'interno dell'immagine.
+@info-it-image-line-height Imposta l'altezza della linea per il testo in un'immagine.
+@info-it-image-text Scrive testo su un'immagine.
+@info-it-image-get-text Restituisce il testo scritto su un'immagine.
+@info-it-media-selected Restituisce il testo attualmente selezionato.
+@info-it-package-add Aggiunge un oggetto a un pacchetto di dati.
+@info-it-media-package-link Collega un pacchetto di dati al programma. Tutte le risorse, comprese immagini, audio e font, verranno ora recuperate dal pacchetto anziché dal disco.
+@info-it-media-notification Visualizza una finestra di dialogo con il testo.
+@info-it-blob-new Allocca un blocco di memoria della dimensione indicata.
+@info-it-blob-utf8 Copia il testo nella memoria.
+@info-it-blob-read Copia byte dalla memoria a una sequenza.
+@info-it-blob-struct Copia una definizione di struttura nel blocco di memoria.
+@info-it-blob-freestruct Libera la struttura nel blocco di memoria.
+@info-it-blob-free Libera il blocco di memoria.
+@info-it-blob-fill Riempie il blocco di memoria con i byte della sequenza.
+@info-it-blob-deref Dereferenzia un puntatore a un blocco di memoria.
+@info-it-image-visible Attiva o disattiva la visibilità di un'immagine.
+@info-it-image-autoplay Attiva o disattiva la riproduzione automatica di un'immagine.
 
