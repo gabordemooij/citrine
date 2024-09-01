@@ -1,6 +1,6 @@
 #/bin/bash
 
-# usage (from rootdir):
+# usage (from rootdir & first compile regular!):
 # Linux:
 # MEDIALIB="libctrmedia.so" MAKEFILE="makefile" ISO="nl" bash misc/export/pc/export.sh
 # Win64:
