@@ -1204,10 +1204,10 @@ void ctr_internal_media_update_timers(ctr_object* media) {
  * media on: ['start'] do: { ... }.
  * media on: ['step'] do: { ... }.
  * media on: ['key:'] do: { ... }.
- * media on: ['key down:'] do: { ... }.
+ * media on: ['key-down:'] do: { ... }.
  * media on: ['gamepad:'] do: { ... }.
- * media on: ['gamepad down:'] do: { ... }.
- * media on: ['click x:y:'] do: { ... }.
+ * media on: ['gamepad-down:'] do: { ... }.
+ * media on: ['click-x:y:'] do: { ... }.
  * 
  * media screen: ['canvas.png'].
  * 
@@ -2435,7 +2435,7 @@ ctr_object* ctr_img_solid(ctr_object* myself, ctr_argument* argumentList) {
  * @example
  * >> media := Media new.
  * >> a := Image new: ['a.png'].
- * a active: Yes.
+ * a active: True.
  * 
  * a on: ['destination:'] do: { ... }.
  * a on: ['collision:'] do: { ... }.
