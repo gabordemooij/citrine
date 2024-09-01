@@ -6,5 +6,5 @@ The garden is Bo'sh meters long.
 Luckily, this day, there are Bo'sh wasps in the garden.
 The dog named Bo'sh sleeps under the tree.
 a\"bb\"ccc\"
-(Ro'yxat yangi) qo'yish:((Ro'yxat yangi) qo'yish:Bo'sh da:«dog», qo'yish:Bo'sh da:«insects», qo'yish:((Ro'yxat yangi) qo'yish:15 da:«length», qo'yish:8 da:«width») da:«size», qo'yish:(Qator ← «tulips» ; «roses» ; «lillies») da:«flower», qo'yish:Yolg'on da:«shed», qo'yish:Rost da:«pool», qo'yish:2 da:«chairs») da:«garden»
+(Ro'yxat yangi) qo'yish:((Ro'yxat yangi) qo'yish:Bo'sh da:['dog'], qo'yish:Bo'sh da:['insects'], qo'yish:((Ro'yxat yangi) qo'yish:15 da:['length'], qo'yish:8 da:['width']) da:['size'], qo'yish:(Qator ← ['tulips'] ; ['roses'] ; ['lillies']) da:['flower'], qo'yish:Yolg'on da:['shed'], qo'yish:Rost da:['pool'], qo'yish:2 da:['chairs']) da:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

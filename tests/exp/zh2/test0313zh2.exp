@@ -6,5 +6,5 @@ The garden is 空虚 meters long.
 Luckily, this day, there are 空虚 wasps in the garden.
 The dog named 空虚 sleeps under the tree.
 a\"bb\"ccc\"
-(列表 新的) 把:((列表 新的) 把:空虚 和:“dog”, 把:空虚 和:“insects”, 把:((列表 新的) 把:15 和:“length”, 把:8 和:“width”) 和:“size”, 把:(系列 ← “tulips” ; “roses” ; “lillies”) 和:“flower”, 把:假 和:“shed”, 把:真正 和:“pool”, 把:2 和:“chairs”) 和:“garden”
+(列表 新的) 把:((列表 新的) 把:空虚 和:['dog'], 把:空虚 和:['insects'], 把:((列表 新的) 把:15 和:['length'], 把:8 和:['width']) 和:['size'], 把:(系列 ← ['tulips'] ; ['roses'] ; ['lillies']) 和:['flower'], 把:假 和:['shed'], 把:真正 和:['pool'], 把:2 和:['chairs']) 和:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

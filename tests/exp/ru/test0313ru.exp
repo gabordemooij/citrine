@@ -6,5 +6,5 @@ The garden is Пустой meters long.
 Luckily, this day, there are Пустой wasps in the garden.
 The dog named Пустой sleeps under the tree.
 a\"bb\"ccc\"
-(Карта новый) разместить:((Карта новый) разместить:Пустой в:«dog», разместить:Пустой в:«insects», разместить:((Карта новый) разместить:15 в:«length», разместить:8 в:«width») в:«size», разместить:(Список ← «tulips» ; «roses» ; «lillies») в:«flower», разместить:Ложь в:«shed», разместить:Истина в:«pool», разместить:2 в:«chairs») в:«garden»
+(Карта новый) разместить:((Карта новый) разместить:Пустой в:['dog'], разместить:Пустой в:['insects'], разместить:((Карта новый) разместить:15 в:['length'], разместить:8 в:['width']) в:['size'], разместить:(Список ← ['tulips'] ; ['roses'] ; ['lillies']) в:['flower'], разместить:Ложь в:['shed'], разместить:Истина в:['pool'], разместить:2 в:['chairs']) в:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

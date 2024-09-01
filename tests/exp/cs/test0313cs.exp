@@ -6,5 +6,5 @@ The garden is Nic meters long.
 Luckily, this day, there are Nic wasps in the garden.
 The dog named Nic sleeps under the tree.
 a\"bb\"ccc\"
-(Mapa nový) umístit:((Mapa nový) umístit:Nic na:„dog“, umístit:Nic na:„insects“, umístit:((Mapa nový) umístit:15 na:„length“, umístit:8 na:„width“) na:„size“, umístit:(Seznam ← „tulips“ ; „roses“ ; „lillies“) na:„flower“, umístit:Nepravda na:„shed“, umístit:Pravda na:„pool“, umístit:2 na:„chairs“) na:„garden“
+(Mapa nový) umístit:((Mapa nový) umístit:Nic na:['dog'], umístit:Nic na:['insects'], umístit:((Mapa nový) umístit:15 na:['length'], umístit:8 na:['width']) na:['size'], umístit:(Seznam ← ['tulips'] ; ['roses'] ; ['lillies']) na:['flower'], umístit:Nepravda na:['shed'], umístit:Pravda na:['pool'], umístit:2 na:['chairs']) na:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}
