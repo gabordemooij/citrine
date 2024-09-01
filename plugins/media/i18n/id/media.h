@@ -15,10 +15,10 @@
 #define CTR_DICT_ON_STEP                    "langkah"
 #define CTR_DICT_ON_KEY_UP                  "tombol:"
 #define CTR_DICT_ON_KEY_DOWN                "tombol-bawah:"
-#define CTR_DICT_ON_TIMER                   "pengatur-waktu:"
+#define CTR_DICT_ON_TIMER                   "alarm:"
 #define CTR_DICT_ON_GAMEPAD_DOWN            "pengendali-bawah:"
 #define CTR_DICT_ON_GAMEPAD_UP              "pengendali:"
-#define CTR_DICT_TIMER_SET                  "pengatur-waktu:setelah:"
+#define CTR_DICT_TIMER_SET                  "alarm:setelah:"
 #define CTR_DICT_LINK_SET                   "tautan:"
 #define CTR_DICT_SELECTION                  "terpilih"
 #define CTR_DICT_SEND_TEXT_MESSAGE          "kirim:ke:"
@@ -78,3 +78,5 @@
 #define CTR_DICT_DEREF                      "dereferensi"
 #define CTR_DICT_UTF8_SET                   "utf8:"
 #define CTR_DICT_NEW_TYPE_SET               "baru:tipe:"
+#define CTR_DICT_FX                         "efek:"
+

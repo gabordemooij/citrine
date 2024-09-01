@@ -1,6 +1,6 @@
 s "start" "start"
 s "step" "krok"
-s "timer:" "budík:"
+s "timer:" "alarm:"
 s "key:" "klávesu:"
 s "key-down:" "klávesu-stiskněte:"
 s "gamepad:" "gamepad:"

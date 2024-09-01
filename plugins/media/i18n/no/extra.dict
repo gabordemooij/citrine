@@ -1,6 +1,6 @@
 s "start" "start"
 s "step" "skritt"
-s "timer:" "klokke:"
+s "timer:" "tidtaker:"
 s "key:" "tast:"
 s "key-down:" "tast-ned:"
 s "gamepad:" "gamepad:"

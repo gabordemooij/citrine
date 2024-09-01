@@ -15,7 +15,7 @@
 #define CTR_DICT_ON_STEP                    "krok"
 #define CTR_DICT_ON_KEY_UP                  "klawisz:"
 #define CTR_DICT_ON_KEY_DOWN                "klawisz-dół:"
-#define CTR_DICT_ON_TIMER                   "zegar:"
+#define CTR_DICT_ON_TIMER                   "alarm:"
 #define CTR_DICT_ON_GAMEPAD_DOWN            "pad-dół:"
 #define CTR_DICT_ON_GAMEPAD_UP              "pad:"
 #define CTR_DICT_TIMER_SET                  "zegar:po:"
@@ -78,3 +78,5 @@
 #define CTR_DICT_DEREF                      "dereferencja"
 #define CTR_DICT_UTF8_SET                   "utf8:"
 #define CTR_DICT_NEW_TYPE_SET               "nowy:typ:"
+#define CTR_DICT_FX                         "efekt:"
+

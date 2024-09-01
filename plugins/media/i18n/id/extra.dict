@@ -1,5 +1,5 @@
 s "start" "memulai"
-s "step" "melangkah"
+s "step" "langkah"
 s "timer:" "alarm:"
 s "key:" "tombol:"
 s "key-down:" "tombol-ditekan:"

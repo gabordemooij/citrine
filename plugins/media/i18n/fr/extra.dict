@@ -1,6 +1,6 @@
 s "start" "commencer"
 s "step" "pas"
-s "timer:" "réveil:"
+s "timer:" "alarme:"
 s "key:" "clavier:"
 s "key-down:" "clavier-in:"
 s "gamepad:" "gamepad:"

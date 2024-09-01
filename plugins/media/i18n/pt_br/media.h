@@ -78,3 +78,5 @@
 #define CTR_DICT_DEREF                      "desreferenciar"
 #define CTR_DICT_UTF8_SET                   "utf8:"
 #define CTR_DICT_NEW_TYPE_SET               "novo:tipo:"
+#define CTR_DICT_FX                         "efeito:"
+

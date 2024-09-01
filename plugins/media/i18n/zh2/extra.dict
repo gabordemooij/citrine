@@ -1,6 +1,6 @@
 s "start" "开始"
 s "step" "步!"
-s "timer:" "计时器:"
+s "timer:" "定时器:"
 s "key:" "键:"
 s "key-down:" "键-按下:"
 s "gamepad:" "手柄:"
