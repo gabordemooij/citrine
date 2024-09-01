@@ -21,16 +21,16 @@ Serie ← 1 ; (Serie ← 2)
 Serie
 Serie ← 1 ; (Serie ← 2) ; 3
 Serie
-Serie ← 1 ; ((Liste neu) setzen:»a« auf:»b«) ; 3
+Serie ← 1 ; ((Liste neu) setzen:['a'] auf:['b']) ; 3
 Serie
-Serie ← 1 ; ((Liste neu) setzen:(Serie ← 9) auf:»b«) ; 3
+Serie ← 1 ; ((Liste neu) setzen:(Serie ← 9) auf:['b']) ; 3
 Liste
-(Liste neu) setzen:2 auf:»1«
+(Liste neu) setzen:2 auf:['1']
 Liste
-(Liste neu) setzen:2 auf:»x«
+(Liste neu) setzen:2 auf:['x']
 Liste
-(Liste neu) setzen:(Serie ← 1 ; 2) auf:»x«
+(Liste neu) setzen:(Serie ← 1 ; 2) auf:['x']
 Liste
-(Liste neu) setzen:(Serie ← ((Liste neu) setzen:»q« auf:»y«) ; 2) auf:»x«
+(Liste neu) setzen:(Serie ← ((Liste neu) setzen:['q'] auf:['y']) ; 2) auf:['x']
 Nichts
 Nichts
