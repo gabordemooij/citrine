@@ -729,7 +729,7 @@ int ctr_internal_media_mouse_down(SDL_Event event) {
 		if (
 		mediaIMGs[i].x < event.button.x && 
 		mediaIMGs[i].y < event.button.y &&
-		mediaIMGs[i].x + mediaIMGs[i].w > event.button.x &&
+		mediaIMGs[i].x + (mediaIMGs[i].w / (mediaIMGs[i].anims ? mediaIMGs[i].anims : 1)) > event.button.x &&
 		mediaIMGs[i].y + mediaIMGs[i].h > event.button.y &&
 		mediaIMGs[i].ref != NULL
 		) {
