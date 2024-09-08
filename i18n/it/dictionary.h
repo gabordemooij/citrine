@@ -107,7 +107,7 @@
 #define CTR_DICT_APPEND           "aggiungere:"
 #define CTR_DICT_PREPEND          "anteporre:"
 #define CTR_DICT_EXISTS           "esiste"
-#define CTR_DICT_SIZE             "taglia"
+#define CTR_DICT_SIZE             "dimensione"
 #define CTR_DICT_DELETE           "elimina"
 #define CTR_DICT_USE_SET          "uso:"
 #define CTR_DICT_ARRAY             "serie:"
