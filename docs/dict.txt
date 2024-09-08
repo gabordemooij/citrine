@@ -605,4 +605,92 @@
 @info-it-blob-deref Dereferenzia un puntatore a un blocco di memoria.
 @info-it-image-visible Attiva o disattiva la visibilità di un'immagine.
 @info-it-image-autoplay Attiva o disattiva la riproduzione automatica di un'immagine.
+@info-fa-image-cut حذف متن انتخاب‌شده از یک تصویر قابل‌ویرایش.
+@info-fa-image-insert درج متن مشخص‌شده در موقعیت نشانگر در یک تصویر قابل‌ویرایش.
+@info-fa-media-width-height تنظیم عرض و ارتفاع دوربین. دوربین به طور خودکار تصویر کنترل‌شده توسط بازیکن را دنبال می‌کند.
+@info-fa-media-screen باز کردن صفحه‌ای با تصویر مشخص‌شده به عنوان پس‌زمینه. پس از باز شدن صفحه، می‌تواند رویدادها (کلیک‌ها، فشار کلید) را دریافت کند، اینها به پیام‌ها ترجمه خواهند شد.
+@info-fa-font-source-size باز کردن فونت مشخص‌شده و تنظیم اندازه.
+@info-fa-font-style-direction تنظیم اسکریپت فونت و جهت متن.
+@info-fa-audio پخش صداها و موسیقی.
+@info-fa-image ایجاد یک تصویر جدید با استفاده از فایل مشخص‌شده.
+@info-fa-image-source تغییر فایل منبع تصویر.
+@info-fa-image-fixate غیرفعال‌کردن انیمیشن خودکار تصویر.
+@info-fa-image-ghost فعال‌کردن حرکت تصویر از طریق دیوارها.
+@info-fa-image-static موقعیت‌یابی تصویر به‌طور مستقل از دوربین.
+@info-fa-image-move انتقال تصویر به موقعیت مشخص‌شده.
+@info-fa-image-bounce جابه‌جایی بین فعال و غیرفعال کردن بازگشت تصویر هنگام برخورد با دیوار.
+@info-fa-image-wall جابه‌جایی بین این که یک تصویر به عنوان دیوار عمل کند یا نه. تصاویر دیگر نمی‌توانند عبور کنند.
+@info-fa-image-active جابه‌جایی رویدادها. اگر فعال باشد، تصویر در هنگام برخورد، کلیک یا رسیدن به مقصد رویدادها را دریافت خواهد کرد.
+@info-fa-image-gravity تنظیم گرانش تصویر.
+@info-fa-image-friction تنظیم اصطکاک تصویر.
+@info-fa-image-font تنظیم فونت مورد استفاده برای متن روی تصویر.
+@info-fa-image-speed تنظیم سرعت حرکت تصویر.
+@info-fa-image-accelerate تنظیم شتاب تصویر.
+@info-fa-image-jump تنظیم ارتفاع پرش یک تصویر قابل‌کنترل.
+@info-fa-image-editable تبدیل تصویر به یک فیلد ورودی متن.
+@info-fa-image-animations تنظیم تعداد فریم‌ها در تصویر و سرعت جابجایی آنها در هنگام حرکت.
+@info-fa-image-color تنظیم رنگ متن برای یک تصویر.
+@info-fa-image-background-color تنظیم رنگ پس‌زمینه متن برای یک تصویر (برای متن انتخاب‌شده).
+@info-fa-image-align تنظیم تراز متن داخل تصویر.
+@info-fa-image-line-height تنظیم ارتفاع خط برای متن در یک تصویر.
+@info-fa-image-text نوشتن متن روی یک تصویر.
+@info-fa-image-get-text برگرداندن متنی که روی یک تصویر نوشته شده است.
+@info-fa-media-selected بازگرداندن متن انتخاب‌شده کنونی.
+@info-fa-package-add افزودن یک شیء به یک بسته داده.
+@info-fa-media-package-link لینک کردن یک بسته داده به برنامه. همه دارایی‌ها، از جمله تصاویر، صداها و فونت‌ها اکنون از بسته به جای دیسک بازیابی خواهند شد.
+@info-fa-media-notification نمایش یک جعبه گفت‌وگو با متن.
+@info-fa-blob-new تخصیص یک بلوک حافظه با اندازه مشخص‌شده.
+@info-fa-blob-utf8 کپی کردن متن به حافظه.
+@info-fa-blob-read کپی کردن بایت‌ها از حافظه به یک توالی.
+@info-fa-blob-struct کپی کردن تعریف یک ساختار به بلوک حافظه.
+@info-fa-blob-freestruct آزادسازی ساختار در بلوک حافظه.
+@info-fa-blob-free آزادسازی بلوک حافظه.
+@info-fa-blob-fill پر کردن بلوک حافظه با بایت‌های موجود در توالی.
+@info-fa-blob-deref بازنشانی اشاره‌گر به یک بلوک حافظه.
+@info-fa-image-visible جابه‌جایی دیداری بودن یک تصویر.
+@info-fa-image-autoplay جابه‌جایی پخش خودکار یک تصویر.
+@info-fy-image-cut Ferwidert de selektearre tekst út in bewurkbere ôfbylding.
+@info-fy-image-insert Foegt de spesifisearre tekst ta op de posysje fan de kursor yn in bewurkbere ôfbylding.
+@info-fy-media-width-height Set de breedte en hichte fan de kamera. De kamera folget automatysk de ôfbylding dy't troch de spiler kontrolearre wurdt.
+@info-fy-media-screen Iepenet in skerm mei de spesifisearre ôfbylding as eftergrûn. Nei it iepenjen kin it skerm eveneminten ûntfange (klikjes, toetsdrukken), dizze wurde oerset yn berjochten.
+@info-fy-font-source-size Iepenet it spesifisearre lettertype en stelt de grutte yn.
+@info-fy-font-style-direction Set it lettertype skript en de tekst-rjochting.
+@info-fy-audio Spilet lûden en muzyk.
+@info-fy-image Makket in nije ôfbylding mei it spesifisearre bestân.
+@info-fy-image-source Ferandert it boarnebestân fan de ôfbylding.
+@info-fy-image-fixate Skeakelt de automatyske animaasje fan de ôfbylding út.
+@info-fy-image-ghost Skeakelt yn dat de ôfbylding troch muorren hinne bewege kin.
+@info-fy-image-static Posiasjeart de ôfbylding los fan de kamera.
+@info-fy-image-move Ferpleatst de ôfbylding nei de spesifisearre posysje.
+@info-fy-image-bounce Skeakelt yn of de ôfbylding stuitert as it tsjin in muorre oan botst.
+@info-fy-image-wall Skeakelt yn oft in ôfbylding as in muorre fungearret. Oare ôfbyldings kinne der net mear trochhinne gean.
+@info-fy-image-active Skeakelt eveneminten yn. As aktyf, sil de ôfbylding eveneminten ûntfange by botsingen, klikjes, of as it syn bestimming berikt.
+@info-fy-image-gravity Stelt de swiertekrêft fan in ôfbylding yn.
+@info-fy-image-friction Stelt de friksje fan in ôfbylding yn.
+@info-fy-image-font Stelt it lettertype yn foar tekst op in ôfbylding.
+@info-fy-image-speed Stelt de bewegingssnelheid fan in ôfbylding yn.
+@info-fy-image-accelerate Stelt de fersnelling fan in ôfbylding yn.
+@info-fy-image-jump Stelt de spronghichte fan in kontrolearre ôfbylding yn.
+@info-fy-image-editable Skeakelt de ôfbylding om yn in tekstynfierveld.
+@info-fy-image-animations Stelt it oantal frames yn fan de ôfbylding en hoe rap se moatte wikselje by beweging.
+@info-fy-image-color Stelt de tekstkleur yn foar in ôfbylding.
+@info-fy-image-background-color Stelt de tekstachtergrûnkleur yn foar in ôfbylding (foar selektearre tekst).
+@info-fy-image-align Stelt de útlinings fan de tekst binnen de ôfbylding yn.
+@info-fy-image-line-height Stelt de line-hichte yn foar tekst yn in ôfbylding.
+@info-fy-image-text Skriuwt tekst op in ôfbylding.
+@info-fy-image-get-text Jouwe de tekst werom dy't op in ôfbylding skreaun is.
+@info-fy-media-selected Jouwe de op it stuit selektearre tekst werom.
+@info-fy-package-add Foegt in objekt ta oan in datapakket.
+@info-fy-media-package-link Keppelet in datapakket oan it programma. Alle triemmen, ynklusyf ôfbyldings, audio en lettertypen, wurde no út it pakket helle yn stee fan fan de skiif.
+@info-fy-media-notification Toant in dialoochfak mei de tekst.
+@info-fy-blob-new Reservearret in blok mei ûnthâld fan de opjûne grutte.
+@info-fy-blob-utf8 Kopiearret de tekst nei it ûnthâld.
+@info-fy-blob-read Kopiearret bytes fan it ûnthâld nei in sekwinsje.
+@info-fy-blob-struct Kopiearret in struktuerdefinysje yn it ûnthâldblok.
+@info-fy-blob-freestruct Ferwidert de struktuer út it ûnthâldblok.
+@info-fy-blob-free Ferwidert it ûnthâldblok.
+@info-fy-blob-fill Fult it ûnthâldblok mei de bytes út de sekwinsje.
+@info-fy-blob-deref Dereferinsjearret in pointer nei in ûnthâldblok.
+@info-fy-image-visible Skeakelt de sichtberens fan in ôfbylding yn of út.
+@info-fy-image-autoplay Skeakelt de autoplay fan in ôfbylding yn of út.
 
