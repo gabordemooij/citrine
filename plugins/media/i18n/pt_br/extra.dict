@@ -1,5 +1,5 @@
-s "start" "começa"
-s "step" "etapa"
+s "start" "começar"
+s "step" "passo"
 s "timer:" "alarme:"
 s "key:" "tecla:"
 s "key-down:" "tecla-baixo:"
