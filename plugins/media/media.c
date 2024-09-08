@@ -63,6 +63,7 @@ uint16_t CtrMediaNetworkChunkSize = 350;
 time_t CtrMediaFrameTimer = 0;
 uint16_t CtrMediaSteps;
 double CtrMediaVideoFPSRendering;
+int CtrMediaCameraInit = 0;
 
 int CtrMediaAudioRate;
 uint16_t CtrMediaAudioFormat;
@@ -935,7 +936,6 @@ void ctr_internal_media_detect_collisions(MediaIMG* m, SDL_Rect r) {
 
 void ctr_internal_media_camera(MediaIMG* m, SDL_Rect* s, SDL_Rect* r, MediaIMG* player) {
 	static SDL_Rect camera;
-	static int init_camera = 0;
 	int border = CtrMediaCamera.w * 0.3;
 	camera.w = CtrMediaCamera.w;
 	camera.h = CtrMediaCamera.h;
@@ -961,13 +961,13 @@ void ctr_internal_media_camera(MediaIMG* m, SDL_Rect* s, SDL_Rect* r, MediaIMG* 
 	if (cpy < top && camera.y > 0) {
 		camera.y --;
 	}
-	if (!init_camera) {
+	if (!CtrMediaCameraInit) {
 		camera.x = 0;
 		camera.y = 0;
 		if (CtrMediaZoom) {
 			SDL_RenderSetLogicalSize(CtrMediaRenderer, camera.w, camera.h);
 		}
-		init_camera = 1;
+		CtrMediaCameraInit = 1;
 	}
 	if (m == NULL) {
 		s->x = camera.x;
@@ -1222,6 +1222,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	CtrMediaSelectStart =0;
 	CtrMediaSelectBegin = 0;
 	CtrMediaSelectEnd=0;
+	CtrMediaCameraInit = 0;
 	//controllableObject = NULL;
 	focusObject = NULL;
 	CtrMediaSteps = 0;
