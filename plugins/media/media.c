@@ -1096,6 +1096,19 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 			m->x += dt * CtrMediaContactSurface->mov * cos(CtrMediaContactSurface->dir * M_PI / 180);
 			m->y -= dt * CtrMediaContactSurface->mov * sin(CtrMediaContactSurface->dir * M_PI / 180);
 		}
+		if (m == player && CtrMediaControlMode < 5) {
+			int xmin = 0;
+			int ymin = 0;
+			int xmax = windowWidth - (m->w/m->anims);
+			int ymax = windowHeight - (m->h);
+			if (m->x > xmax) m->x = xmax;
+			if (m->y > ymax) m->y = ymax;
+			if (m->x < xmin) m->x = xmin;
+			if (CtrMediaControlMode != 1 || !CtrMediaJump) {
+				// in platform games, players are allowed to jump 'out of vision' at the top
+				if (m->y < ymin) m->y = ymin;
+			}
+		}
 	}
 }
 
