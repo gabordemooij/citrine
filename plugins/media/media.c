@@ -1191,8 +1191,10 @@ ctr_object* ctr_media_timer(ctr_object* myself, ctr_argument* argumentList) {
 	int ms = (int) ctr_tonum(ctr_internal_cast2number(argumentList->next->object));
 	if (timer_no < 1 || timer_no > CtrMaxMediaTimers) {
 		ctr_error("Invalid timer", 0);
-	} else {
+	} else if ( ms > -1 ) {
 		CtrMediaTimers[timer_no] = CtrMediaTicks2 + ms;
+	} else {
+		CtrMediaTimers[timer_no] = -1;
 	}
 	return myself;
 }
