@@ -52,7 +52,6 @@ int CtrMediaPrevClickY = 0;
 int CtrMediaPrevClickTime = 0;
 char CtrMediaDoubleClick = 0;
 ctr_size CtrMediaAutoReplaceRuleLen = 0;
-int CtrMediaLastFrameOffsetX = 0;
 int CtrMediaJumpHeightFactor = 100;
 int CtrMediaControlMode = 0;
 int CtrMediaRotation = 0;
@@ -102,6 +101,7 @@ struct MediaIMG {
 	double			gravity;	double			gspeed;
 	double			fric;		double			accel;
 	double			speed;		double			dir;
+	double          lastdir;
 	double			mov;		int				anims;
 	int				animspeed;
 	int				solid;		int				collidable;
@@ -240,7 +240,6 @@ void ctr_internal_media_reset() {
 	CtrMediaPrevClickTime = 0;
 	CtrMediaDoubleClick = 0;
 	CtrMediaAutoReplaceRuleLen = 0;
-	CtrMediaLastFrameOffsetX = 0;
 	CtrMediaJumpHeightFactor = 100;
 	CtrMediaControlMode = 0;
 	CtrMediaRotation = 0;
@@ -1007,12 +1006,17 @@ void ctr_internal_media_render_image(MediaIMG* m, SDL_Rect r, SDL_Rect s, MediaI
 			if (m->gravity < 1) {
 				/* drifting/hovering (space ship, fish) - in this case going up/down you don't want to change direction */
 				if (m->dir == 180 || m->dir == 0) {
-					CtrMediaLastFrameOffsetX = m->dir;
+					m->lastdir = m->dir;
 				}
-				if (CtrMediaLastFrameOffsetX && m->dir != 180 && m->dir != 0) {
-					xdir = CtrMediaLastFrameOffsetX;
+				if (m->lastdir != -1 && m->dir != 180 && m->dir != 0) {
+					xdir = m->lastdir;
 				}
-				SDL_RenderCopyEx(CtrMediaRenderer, m->texture, &s, &r, 0, NULL, ( xdir == 180 ) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+				if (m == player) {
+					SDL_RenderCopyEx(CtrMediaRenderer, m->texture, &s, &r, 0, NULL, ( xdir == 180 ) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+				} else {
+					// for other objects no clear left/right (because user fills in custom x/y)
+					SDL_RenderCopyEx(CtrMediaRenderer, m->texture, &s, &r, 0, NULL, ( xdir >= 90 && xdir <= 270  ) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+				}
 			} else {
 				/* platform game style (Mario/Sonic/Giana-style) - in this case adjust direction of image based on 360 degrees (for ease of use) */
 				SDL_RenderCopyEx(CtrMediaRenderer, m->texture, &s, &r, 0, NULL, ( xdir >= 180 && xdir <= 270  ) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
@@ -1035,7 +1039,6 @@ void ctr_internal_media_render_image(MediaIMG* m, SDL_Rect r, SDL_Rect s, MediaI
 
 void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 	MediaIMG* player;
-	ctr_argument* a;
 	// keep a constant physics speed by calculating the timediff
 	double delta_in_seconds = ((CtrMediaTicks2 - CtrMediaTicks1) / 1000.0f );
 	double dt  = 60 * delta_in_seconds;
@@ -1073,7 +1076,8 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 		m->y -= dt * m->mov * sin(m->dir * M_PI / 180);
 		// an image reaches its destination if the destination falls between
 		// this step and the previous one (i.e. tx is between ox and x and ty
-		// between oy and ty).
+		// between oy and ty). Note that gravity etc. might interfere with this,
+		// because it adjust ox/oy. @todo maybe tweak this? (but keep backward compat.)
 		if (
 			// is X reached?
 			((round(m->tx) >= round(m->ox) && round(m->tx) <= round(m->x))
@@ -1084,8 +1088,8 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 			|| (round(m->ty) <= round(m->oy) && round(m->ty) >= round(m->y)))
 		) {
 			m->dir = -1;
+			ctr_argument* a;
 			a = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
-			a->object = m->ref;
 			ctr_send_message(m->ref, CTR_DICT_STOP_AT_SET, strlen(CTR_DICT_STOP_AT_SET), a );
 			ctr_heap_free(a);
 		}
@@ -2187,6 +2191,7 @@ ctr_object* ctr_img_new(ctr_object* myself, ctr_argument* argumentList) {
 	mediaImage->accel = 1;
 	mediaImage->gspeed = 0;
 	mediaImage->dir = -1;
+	mediaImage->lastdir = mediaImage->dir;
 	mediaImage->mov = 0;
 	mediaImage->visible = 1;
 	mediaImage->anims = 1;
@@ -4119,6 +4124,25 @@ ctr_object* ctr_media_dialog(ctr_object* myself, ctr_argument* argumentList) {
 	return CtrStdNil;
 }
 
+/**
+ * @def
+ * [ Media ] website: [ Text ]
+ *
+ * @example
+ * Media website: ['https://www.citrine-lang.org'].
+ *
+ * @result
+ * www.citrine-lang.org
+ */
+ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
+	char* url = ctr_heap_allocate_cstring(
+		ctr_internal_cast2string(argumentList->object)
+	);
+	SDL_OpenURL(url);
+	ctr_heap_free(url);
+	return myself;
+}
+
 void begin(){
 	ctr_gc_clean_free = 1; // only for debugging
 	#ifdef WIN
@@ -4180,6 +4204,7 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "use:" ), &ctr_media_include );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "_datastart" ), &ctr_media_datastart );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_DIALOG_SET ), &ctr_media_dialog );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "website:" ), &ctr_media_website );
 	#ifdef WIN
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring(CTR_DICT_WRITE), &ctr_media_console_write );
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_STOP ), &ctr_media_console_brk );

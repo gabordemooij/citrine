@@ -52,7 +52,7 @@
 #define CTR_DICT_GHOST_SET                  "घोस्ट:"
 #define CTR_DICT_STATIC                     "स्थिर:"
 #define CTR_DICT_NODIRANI_SET               "जमाना:"
-#define CTR_DICT_STOP_AT_SET                "गंतव्य:"
+#define CTR_DICT_STOP_AT_SET                "गंतव्य"
 #define CTR_DICT_AUDIO_PLAY                 "प्लेबैक"
 #define CTR_DICT_AUDIO_SILENCE              "मौन"
 #define CTR_DICT_AUDIO_REWIND               "रिवाइंड"

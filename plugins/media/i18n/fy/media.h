@@ -52,7 +52,7 @@
 #define CTR_DICT_GHOST_SET                  "spoek:"
 #define CTR_DICT_STATIC                     "statysk:"
 #define CTR_DICT_NODIRANI_SET               "fêstlizze:"
-#define CTR_DICT_STOP_AT_SET                "bestimming:"
+#define CTR_DICT_STOP_AT_SET                "bestimming"
 #define CTR_DICT_AUDIO_PLAY                 "spielje"
 #define CTR_DICT_AUDIO_SILENCE              "stilte"
 #define CTR_DICT_AUDIO_REWIND               "weromspoelje"

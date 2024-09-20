@@ -52,7 +52,7 @@
 #define CTR_DICT_GHOST_SET                  "hantu:"
 #define CTR_DICT_STATIC                     "statis:"
 #define CTR_DICT_NODIRANI_SET               "tetapkan:"
-#define CTR_DICT_STOP_AT_SET                "tujuan:"
+#define CTR_DICT_STOP_AT_SET                "tujuan"
 #define CTR_DICT_AUDIO_PLAY                 "mainkan"
 #define CTR_DICT_AUDIO_SILENCE              "diam"
 #define CTR_DICT_AUDIO_REWIND               "putar-balik"

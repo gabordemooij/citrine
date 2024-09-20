@@ -52,7 +52,7 @@
 #define CTR_DICT_GHOST_SET                  "maxluq:"
 #define CTR_DICT_STATIC                     "statik:"
 #define CTR_DICT_NODIRANI_SET               "mustahkamla:"
-#define CTR_DICT_STOP_AT_SET                "manzil:"
+#define CTR_DICT_STOP_AT_SET                "manzil"
 #define CTR_DICT_AUDIO_PLAY                 "ijro"
 #define CTR_DICT_AUDIO_SILENCE              "sukunat"
 #define CTR_DICT_AUDIO_REWIND               "orqaga-o‘rash"

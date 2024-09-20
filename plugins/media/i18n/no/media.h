@@ -52,7 +52,7 @@
 #define CTR_DICT_GHOST_SET                  "spøkelse:"
 #define CTR_DICT_STATIC                     "statisk:"
 #define CTR_DICT_NODIRANI_SET               "fikser:"
-#define CTR_DICT_STOP_AT_SET                "destinasjon:"
+#define CTR_DICT_STOP_AT_SET                "destinasjon"
 #define CTR_DICT_AUDIO_PLAY                 "spill"
 #define CTR_DICT_AUDIO_SILENCE              "stillhet"
 #define CTR_DICT_AUDIO_REWIND               "spol-tilbake"

@@ -52,7 +52,7 @@
 #define CTR_DICT_GHOST_SET                  "幽灵:"
 #define CTR_DICT_STATIC                     "静态:"
 #define CTR_DICT_NODIRANI_SET               "固定:"
-#define CTR_DICT_STOP_AT_SET                "目的地:"
+#define CTR_DICT_STOP_AT_SET                "目的地"
 #define CTR_DICT_AUDIO_PLAY                 "播放"
 #define CTR_DICT_AUDIO_SILENCE              "静音"
 #define CTR_DICT_AUDIO_REWIND               "倒带"

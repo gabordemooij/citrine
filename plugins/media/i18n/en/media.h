@@ -52,7 +52,7 @@
 #define CTR_DICT_GHOST_SET                  "ghost:"
 #define CTR_DICT_STATIC                     "static:"
 #define CTR_DICT_NODIRANI_SET               "fixate:"
-#define CTR_DICT_STOP_AT_SET                "destination:"
+#define CTR_DICT_STOP_AT_SET                "destination"
 #define CTR_DICT_AUDIO_PLAY                 "play"
 #define CTR_DICT_AUDIO_SILENCE              "silence"
 #define CTR_DICT_AUDIO_REWIND               "rewind"

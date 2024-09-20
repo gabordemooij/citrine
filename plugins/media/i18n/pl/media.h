@@ -52,7 +52,7 @@
 #define CTR_DICT_GHOST_SET                  "duch:"
 #define CTR_DICT_STATIC                     "statyczny:"
 #define CTR_DICT_NODIRANI_SET               "ustabilizuj:"
-#define CTR_DICT_STOP_AT_SET                "cel:"
+#define CTR_DICT_STOP_AT_SET                "cel"
 #define CTR_DICT_AUDIO_PLAY                 "graj"
 #define CTR_DICT_AUDIO_SILENCE              "cisza"
 #define CTR_DICT_AUDIO_REWIND               "przewiń"

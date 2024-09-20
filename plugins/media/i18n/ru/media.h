@@ -52,7 +52,7 @@
 #define CTR_DICT_GHOST_SET                  "призрак:"
 #define CTR_DICT_STATIC                     "статичный:"
 #define CTR_DICT_NODIRANI_SET               "закрепить:"
-#define CTR_DICT_STOP_AT_SET                "пункт-назначения:"
+#define CTR_DICT_STOP_AT_SET                "пункт-назначения"
 #define CTR_DICT_AUDIO_PLAY                 "воспроизвести"
 #define CTR_DICT_AUDIO_SILENCE              "тишина"
 #define CTR_DICT_AUDIO_REWIND               "перемотать"

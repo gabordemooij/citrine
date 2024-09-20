@@ -52,7 +52,7 @@
 #define CTR_DICT_GHOST_SET                  "duch:"
 #define CTR_DICT_STATIC                     "statický:"
 #define CTR_DICT_NODIRANI_SET               "imobilní:"
-#define CTR_DICT_STOP_AT_SET                "destinace:"
+#define CTR_DICT_STOP_AT_SET                "destinace"
 #define CTR_DICT_AUDIO_PLAY                 "přehrávání"
 #define CTR_DICT_AUDIO_SILENCE              "ticho"
 #define CTR_DICT_AUDIO_REWIND               "přetočit"

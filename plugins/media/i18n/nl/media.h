@@ -52,7 +52,7 @@
 #define CTR_DICT_GHOST_SET                  "spook:"
 #define CTR_DICT_STATIC                     "statisch:"
 #define CTR_DICT_NODIRANI_SET               "fixeer:"
-#define CTR_DICT_STOP_AT_SET                "bestemming:"
+#define CTR_DICT_STOP_AT_SET                "bestemming"
 #define CTR_DICT_AUDIO_PLAY                 "afspelen"
 #define CTR_DICT_AUDIO_SILENCE              "stil"
 #define CTR_DICT_AUDIO_REWIND               "terugspoelen"

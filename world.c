@@ -866,6 +866,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_JOIN ), &ctr_array_join );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_POP ), &ctr_array_pop );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_POSITION_SET ), &ctr_array_get );
+	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_AT ), &ctr_array_get );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_AT_SYMBOL ), &ctr_array_get );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_SORT ), &ctr_array_sort );
 	ctr_internal_create_func(CtrStdArray, ctr_build_string_from_cstring( CTR_DICT_PUT_AT ), &ctr_array_put );
