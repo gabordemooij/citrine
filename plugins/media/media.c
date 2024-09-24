@@ -4121,7 +4121,7 @@ ctr_object* ctr_media_dialog(ctr_object* myself, ctr_argument* argumentList) {
 	);
 	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Message", message, CtrMediaWindow);
 	ctr_heap_free(message);
-	return CtrStdNil;
+	return myself;
 }
 
 /**
