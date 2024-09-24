@@ -49,7 +49,7 @@
 /**
  * Version information
  */
-#define CTR_VERSION "1.0.0 beta-2"
+#define CTR_VERSION "1.0.0 beta-3"
 #define CTR_VERSION_NUM 10000
 
 /**
