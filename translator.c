@@ -213,6 +213,7 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 	char* translation = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	char* key1  = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	char* key2  = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
+	char* modifier = calloc(CTR_TRANSLATE_MAX_WORD_LEN, 1);
 	char* format;
 	char* buffer;
 	char* keys_for_strings = getenv("STRINGKEYS");
@@ -220,7 +221,10 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 	int lineCounter = 0;
 	while( 
 		fscanf( f1, "#define %180s \"%180[^\"]\"\n", key1, word ) > 0 &&
-		fscanf( f2, "#define %180s \"%180[^\"]\"\n", key2, translation) > 0
+		(
+			fscanf( f2, "#define %180s \"%180[^\"]\" //%180s\n", key2, translation, modifier) > 0 ||
+			fscanf( f2, "#define %180s \"%180[^\"]\"\n", key2, translation) > 0
+		)
 	) {
 		/* Skip strings that are marked for usage in code generation only - not for translation */
 		if (strstr(key1, "_CODEGEN_")!=NULL || strstr(key2, "_CODEGEN_")!=NULL) continue;
@@ -236,7 +240,11 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 		else if (strncmp(key1, "CTR_DICT_NUM_THO_SEP", strlen("CTR_DICT_NUM_THO_SEP"))==0) {
 			printf("x \"%s\" \"%s\"\n", word, translation);
 		} else {
-			printf("t \"%s\" \"%s\"\n", word, translation);
+			if (modifier[0] != '\0') {
+				printf("t \"%s\" \"%s%s\"\n", word, modifier, translation);
+			} else {
+				printf("t \"%s\" \"%s\"\n", word, translation);
+			}
 			/* If language string starts with DICT_ON... then it's an event, also generate string */
 			if (keys_for_strings != NULL) string_key = strtok(keys_for_strings, ",");
 			while(string_key != NULL) {
@@ -248,7 +256,13 @@ void ctr_translate_generate_dicts(char* hfile1, char* hfile2) {
 			}
 		}
 		lineCounter++;
+		modifier[0] = '\0';
 	}
+	free(key1);
+	free(key2);
+	free(word);
+	free(translation);
+	free(modifier);
 	fclose(f1);
 	fclose(f2);
 }

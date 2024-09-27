@@ -26,7 +26,7 @@
 #define CTR_DICT_GREEN                      "verde"
 #define CTR_DICT_BLUE                       "azul"
 #define CTR_DICT_TRANSPARENCY               "transparencia"
-#define CTR_DICT_SOURCE_SET                 "fuente:"
+#define CTR_DICT_SOURCE_SET                 "fuente:" //source#
 #define CTR_DICT_CONTROLLABLE               "controlable:"
 #define CTR_DICT_SOLID_SET                  "muro:"
 #define CTR_DICT_ACTIVE_SET                 "activa:"
@@ -39,7 +39,7 @@
 #define CTR_DICT_REEL_AUTOPLAY_SET		    "reproducir-automáticamente:"
 #define CTR_DICT_CUT                        "cortar"
 #define CTR_DICT_EDITABLE_SET               "editable:"
-#define CTR_DICT_FONT_SET                   "fuente:"
+#define CTR_DICT_FONT_SET                   "fuente:" //font#
 #define CTR_DICT_LINEHEIGHT_SET             "linea-altura:"
 #define CTR_DICT_COLOR_SET                  "tinta:"
 #define CTR_DICT_BACKGROUND_COLOR_SET       "destacar:"
