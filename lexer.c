@@ -335,7 +335,12 @@ int ctr_clex_tok() {
 		return CTR_TOKEN_NUMBER;
 	}
 	while( !ctr_clex_is_delimiter( ctr_code ) && ctr_code!=ctr_eofcode ) {
-		ctr_clex_buffer[i] = c; ctr_clex_tokvlen++;
+		ctr_clex_buffer[i] = c;
+		if (c == '#' && i > 0) {
+			i = 0;
+			ctr_clex_tokvlen = 0;
+		}
+		ctr_clex_tokvlen++;
 		i++;
 		if (i > ctr_clex_bflmt) {
 			ctr_clex_emit_error( CTR_ERR_TOKBUFF );
