@@ -6,5 +6,5 @@ The garden is Nulo meters long.
 Luckily, this day, there are Nulo wasps in the garden.
 The dog named Nulo sleeps under the tree.
 a\"bb\"ccc\"
-(Lista nuevo) ponlo:((Lista nuevo) ponlo:Nulo en:['dog'], ponlo:Nulo en:['insects'], ponlo:((Lista nuevo) ponlo:15 en:['length'], ponlo:8 en:['width']) en:['size'], ponlo:(Serie ← ['tulips'] ; ['roses'] ; ['lillies']) en:['flower'], ponlo:Falso en:['shed'], ponlo:Cierto en:['pool'], ponlo:2 en:['chairs']) en:['garden']
+(Lista nuevo) poner:((Lista nuevo) poner:Nulo en:['dog'], poner:Nulo en:['insects'], poner:((Lista nuevo) poner:15 en:['length'], poner:8 en:['width']) en:['size'], poner:(Serie ← ['tulips'] ; ['roses'] ; ['lillies']) en:['flower'], poner:Falso en:['shed'], poner:Verdadero en:['pool'], poner:2 en:['chairs']) en:['garden']
 {"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}

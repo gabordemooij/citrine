@@ -1,6 +1,6 @@
-(Lista nuevo) ponlo:['a"b'] en:['test']
+(Lista nuevo) poner:['a"b'] en:['test']
 Invalid JSON.
-(Lista nuevo) ponlo:(Serie ← 1 ; 2 ; (Serie ← 3 ; 4) ; ((Lista nuevo) ponlo:(Serie ← 3 ; 4) en:['bar'], ponlo:1 en:['foo'])) en:['nested'], ponlo:Falso en:['legend'], ponlo:27 en:['age'], ponlo:['Jack'] en:['name']
+(Lista nuevo) poner:(Serie ← 1 ; 2 ; (Serie ← 3 ; 4) ; ((Lista nuevo) poner:(Serie ← 3 ; 4) en:['bar'], poner:1 en:['foo'])) en:['nested'], poner:Falso en:['legend'], poner:27 en:['age'], poner:['Jack'] en:['name']
 a	b
 {"test":"a\t\tb"}
 {"test":"a\nb"}

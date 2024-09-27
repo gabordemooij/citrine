@@ -1,7 +1,7 @@
 Nulo
 Nulo
 Booleano
-Cierto
+Verdadero
 Booleano
 Falso
 Número
@@ -13,7 +13,7 @@ Número
 Número
 -9,2
 Serie
-Serie nuevo 
+Serie nuevo
 Serie
 Serie ← 1 ; 2
 Serie
@@ -21,16 +21,16 @@ Serie ← 1 ; (Serie ← 2)
 Serie
 Serie ← 1 ; (Serie ← 2) ; 3
 Serie
-Serie ← 1 ; ((Lista nuevo) ponlo:['a'] en:['b']) ; 3
+Serie ← 1 ; ((Lista nuevo) poner:['a'] en:['b']) ; 3
 Serie
-Serie ← 1 ; ((Lista nuevo) ponlo:(Serie ← 9) en:['b']) ; 3
+Serie ← 1 ; ((Lista nuevo) poner:(Serie ← 9) en:['b']) ; 3
 Lista
-(Lista nuevo) ponlo:2 en:['1']
+(Lista nuevo) poner:2 en:['1']
 Lista
-(Lista nuevo) ponlo:2 en:['x']
+(Lista nuevo) poner:2 en:['x']
 Lista
-(Lista nuevo) ponlo:(Serie ← 1 ; 2) en:['x']
+(Lista nuevo) poner:(Serie ← 1 ; 2) en:['x']
 Lista
-(Lista nuevo) ponlo:(Serie ← ((Lista nuevo) ponlo:['q'] en:['y']) ; 2) en:['x']
+(Lista nuevo) poner:(Serie ← ((Lista nuevo) poner:['q'] en:['y']) ; 2) en:['x']
 Nulo
 Nulo
