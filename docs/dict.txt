@@ -693,4 +693,47 @@
 @info-fy-blob-deref Dereferinsjearret in pointer nei in ûnthâldblok.
 @info-fy-image-visible Skeakelt de sichtberens fan in ôfbylding yn of út.
 @info-fy-image-autoplay Skeakelt de autoplay fan in ôfbylding yn of út.
-
+@info-es-image-cut Elimina el texto seleccionado de una imagen editable.
+@info-es-image-insert Inserta el texto especificado en la posición del cursor en una imagen editable.
+@info-es-media-width-height Establece el ancho y la altura de la cámara. La cámara sigue automáticamente la imagen controlada por el jugador.
+@info-es-media-screen Abre una pantalla con la imagen especificada como fondo. Una vez abierta, puede recibir eventos (clics, pulsaciones de teclas) que se traducirán en mensajes.
+@info-es-font-source-size Abre la fuente especificada y establece el tamaño.
+@info-es-font-style-direction Establece el guion de la fuente y la dirección del texto.
+@info-es-audio Reproduce sonidos y música.
+@info-es-image Crea una nueva imagen utilizando el archivo especificado.
+@info-es-image-source Cambia el archivo fuente de la imagen.
+@info-es-image-fixate Desactiva la animación automática de la imagen.
+@info-es-image-ghost Permite que la imagen atraviese paredes.
+@info-es-image-static Posiciona la imagen independientemente de la cámara.
+@info-es-image-move Mueve la imagen a la posición especificada.
+@info-es-image-bounce Alterna si la imagen rebota al chocar con una pared.
+@info-es-image-wall Alterna si una imagen actúa como una pared o no. Otras imágenes ya no pueden atravesarla.
+@info-es-image-active Alterna eventos. Si está activa, la imagen recibirá eventos al colisionar, al hacer clic sobre ella o al llegar a su destino.
+@info-es-image-gravity Establece la gravedad de una imagen.
+@info-es-image-friction Establece la fricción de una imagen.
+@info-es-image-font Establece la fuente a utilizar para el texto en una imagen.
+@info-es-image-speed Establece la velocidad de movimiento de una imagen.
+@info-es-image-accelerate Establece la aceleración de una imagen.
+@info-es-image-jump Establece la altura del salto de una imagen controlable.
+@info-es-image-editable Convierte la imagen en un campo de entrada de texto.
+@info-es-image-animations Establece el número de fotogramas en la imagen y la velocidad de ciclo durante el movimiento.
+@info-es-image-color Establece el color del texto de una imagen.
+@info-es-image-background-color Establece el color de fondo del texto en una imagen (para texto seleccionado).
+@info-es-image-align Establece la alineación del texto dentro de la imagen.
+@info-es-image-line-height Establece la altura de línea para el texto en una imagen.
+@info-es-image-text Escribe texto en una imagen.
+@info-es-image-get-text Devuelve el texto escrito en una imagen.
+@info-es-media-selected Devuelve el texto actualmente seleccionado.
+@info-es-package-add Agrega un objeto a un paquete de datos.
+@info-es-media-package-link Vincula un paquete de datos al programa. Todos los recursos, incluidas imágenes, audio y fuentes, se obtendrán del paquete en lugar del disco.
+@info-es-media-notification Muestra un cuadro de diálogo con el texto.
+@info-es-blob-new Asigna un bloque de memoria del tamaño dado.
+@info-es-blob-utf8 Copia el texto a la memoria.
+@info-es-blob-read Copia bytes de la memoria a una secuencia.
+@info-es-blob-struct Copia una definición de estructura en el bloque de memoria.
+@info-es-blob-freestruct Libera la estructura en el bloque de memoria.
+@info-es-blob-free Libera el bloque de memoria.
+@info-es-blob-fill Llena el bloque de memoria con los bytes de la secuencia.
+@info-es-blob-deref Desreferencia un puntero a un bloque de memoria.
+@info-es-image-visible Alterna la visibilidad de una imagen.
+@info-es-image-autoplay Alterna la reproducción automática de una imagen.
