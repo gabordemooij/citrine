@@ -79,4 +79,5 @@
 #define CTR_DICT_UTF8_SET                   "utf8:"
 #define CTR_DICT_NEW_TYPE_SET               "новый:тип:"
 #define CTR_DICT_FX                         "эффект:"
+#define CTR_DICT_FREEZE_SET                 "заморозить:"
 

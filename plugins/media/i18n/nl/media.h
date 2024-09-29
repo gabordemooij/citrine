@@ -79,5 +79,6 @@
 #define CTR_DICT_UTF8_SET                   "utf8:"
 #define CTR_DICT_NEW_TYPE_SET               "nieuw:type:"
 #define CTR_DICT_FX                         "effect:"
+#define CTR_DICT_FREEZE_SET                 "bevriezen:"
 
 

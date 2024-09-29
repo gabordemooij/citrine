@@ -79,3 +79,4 @@
 #define CTR_DICT_UTF8_SET                   "utf8:"
 #define CTR_DICT_NEW_TYPE_SET               "nuovo:tipo:"
 #define CTR_DICT_FX                         "effetto:"
+#define CTR_DICT_FREEZE_SET                 "congelare:"

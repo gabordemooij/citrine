@@ -63,6 +63,7 @@ time_t CtrMediaFrameTimer = 0;
 uint16_t CtrMediaSteps;
 double CtrMediaVideoFPSRendering;
 int CtrMediaCameraInit = 0;
+ctr_object* CtrMediaInputFreeze = NULL;
 
 int CtrMediaAudioRate;
 uint16_t CtrMediaAudioFormat;
@@ -771,7 +772,7 @@ void ctr_internal_media_keydown_left(int* dir) {
 			ctr_internal_img_render_text(focusObject);
 		}
 	} else {
-		if (controllableObject) {
+		if (controllableObject && CtrMediaInputFreeze == CtrStdBoolFalse) {
 			if (CtrMediaControlMode == 1 || CtrMediaControlMode == 3) {
 				*dir = 180;
 			} else if (CtrMediaControlMode == 4) {
@@ -794,7 +795,7 @@ void ctr_internal_media_keydown_right(int* dir) {
 			ctr_internal_img_render_text(focusObject);
 		}
 	} else {
-		if (controllableObject) {
+		if (controllableObject && CtrMediaInputFreeze == CtrStdBoolFalse) {
 			if (CtrMediaControlMode == 1 || CtrMediaControlMode == 3) {
 				*dir = 0;
 			} else if (CtrMediaControlMode == 4) {
@@ -814,7 +815,7 @@ void ctr_internal_media_keydown_down(int* dir, int* c4speed) {
 			ctr_internal_img_render_text(focusObject);
 		}
 	} else {
-		if (controllableObject) {
+		if (controllableObject && CtrMediaInputFreeze == CtrStdBoolFalse) {
 			player = (MediaIMG*) controllableObject->value.rvalue->ptr;
 			if ( player->gravity < 1 && (CtrMediaControlMode == 1 || CtrMediaControlMode == 2)) {
 				*dir = 270;
@@ -855,7 +856,7 @@ void ctr_internal_media_keydown_up(int* dir, int* c4speed) {
 			ctr_internal_img_render_text(focusObject);
 		}
 	} else {
-		if (controllableObject) {
+		if (controllableObject && CtrMediaInputFreeze == CtrStdBoolFalse) {
 			player = (MediaIMG*) controllableObject->value.rvalue->ptr;
 			if (player->gravity >= 1 && CtrMediaControlMode == 1) {
 				if (CtrMediaJump == 0) {
@@ -2353,6 +2354,22 @@ ctr_object* ctr_img_controllable(ctr_object* myself, ctr_argument* argumentList)
 
 /**
  * @def
+ * [ Image ] freeze: [ Boolean ]
+ *
+ * @example
+ * image freeze: True.
+ *
+ * @result
+ * @info-image-freeze
+ */
+ctr_object* ctr_img_freeze(ctr_object* myself, ctr_argument* argumentList) {
+	if (!ctr_internal_get_image_from_object(myself)) return myself;
+	CtrMediaInputFreeze = ctr_internal_cast2bool(argumentList->object);
+	return myself;
+}
+
+/**
+ * @def
  * [ Image ] x: [ Number ] y: [ Number ]
  * 
  * @example
@@ -3074,6 +3091,7 @@ ctr_object* ctr_media_select(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 void ctr_internal_media_init() {
+	CtrMediaInputFreeze = CtrStdBoolFalse;
 	CtrMediaContactSurface = NULL;
 	CtrMediaAssetPackage = NULL;
 	CtrMediaAudioRate = MIX_DEFAULT_FREQUENCY;
@@ -4247,6 +4265,7 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_XY_SET ), &ctr_img_xy );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MOVE_TO_XY_SET ), &ctr_img_mov_set );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_VISIBLE_SET ), &ctr_img_visible_set );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_FREEZE_SET ), &ctr_img_freeze );
 	fontObject = ctr_font_new(CtrStdObject, NULL);
 	fontObject->link = CtrStdObject;
 	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_font_new );

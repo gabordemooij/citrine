@@ -79,4 +79,5 @@
 #define CTR_DICT_UTF8_SET                   "utf8:"
 #define CTR_DICT_NEW_TYPE_SET               "yangi:tur:"
 #define CTR_DICT_FX                         "ta'sir:"
+#define CTR_DICT_FREEZE_SET                 "muzlatish:"
 
