@@ -172,7 +172,7 @@
 #define CTR_DICT_CONTAINS                         "contiene:"
 #define CTR_DICT_APPLY_TO_AND_AND                 "aplicar:y:y:"
 #define CTR_DICT_ENVIRONMENT_VARIABLE             "configurar:"
-#define CTR_DICT_SET_ENVIRONMENT_VARIABLE         "establacer:valor:"
+#define CTR_DICT_SET_ENVIRONMENT_VARIABLE         "establecer:valor:"
 #define CTR_DICT_RESPOND_TO_AND_AND               "responder:y:y:"
 #define CTR_DICT_RESPOND_TO_AND_AND_AND           "responder:y:y:y:"
 #define CTR_DICT_CURRENT_TASK                     "la-tarea-actual"
