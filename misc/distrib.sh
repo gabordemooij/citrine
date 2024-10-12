@@ -18,15 +18,15 @@ mkdir dist/Linux
 mkdir dist/Linux/ISO
 mkdir dist/Linux/OUT
 
-VERSION="1_0_0beta2"
+VERSION="1_0_0beta4"
 
-declare -a langs=("nl" "en" "de" "fr" "no" "ru" "cs" "it" "hi" "pt_br" "uz" "pl" "id" "zh2")
+declare -a langs=("nl" "fy" "en" "de" "fr" "no" "ru" "cs" "it" "hi" "pt_br" "uz" "pl" "id" "zh2" "fa" "es")
 for lang in "${langs[@]}"
 do
 
 # Compile for Windows
 ISO="$lang" CC=x86_64-w64-mingw32-gcc-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64 clean
-EXTRA="/tmp/citrine.res" LFLAGS="-mwindows" ISO="$lang" CC=x86_64-w64-mingw32-gcc-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64
+EXTRA="/tmp/citrine.res" LFLAGS="-mconsole -mwindows" ISO="$lang" CC=x86_64-w64-mingw32-gcc-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64
 # WIN64 plugin
 ISO="$lang" PACKAGE="media" NAME="libctrmedia.dll" CC=x86_64-w64-mingw32-gcc-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64 plugin
 
