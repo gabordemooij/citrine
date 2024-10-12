@@ -3365,18 +3365,47 @@ void ctr_media_ffi_destructor(ctr_resource* resource_value) {
 ffi_type* ctr_internal_media_ffi_map_type(char* description) {
 	if (strcmp(description, "void")==0) {
 		return &ffi_type_void;
+	} else if (strcmp(description, "uint")==0) {
+		return &ffi_type_uint;
 	} else if (strcmp(description, "int")==0) {
 		return &ffi_type_sint;
+	} else if (strcmp(description,"uint8_t")==0) {
+		return &ffi_type_uint8;
+	} else if (strcmp(description,"int8_t")==0) {
+		return &ffi_type_sint8;
+	} else if (strcmp(description,"uint16_t")==0) {
+		return &ffi_type_uint16;
+	} else if (strcmp(description,"int16_t")==0) {
+		return &ffi_type_sint16;
 	} else if (strcmp(description,"uint32_t")==0) {
 		return &ffi_type_uint32;
+	} else if (strcmp(description,"int32_t")==0) {
+		return &ffi_type_sint32;
+	} else if (strcmp(description,"uint64_t")==0) {
+		return &ffi_type_uint64;
+	} else if (strcmp(description,"int64_t")==0) {
+		return &ffi_type_sint64;
+	} else if (strcmp(description,"float")==0) {
+		return &ffi_type_float;
+	} else if (strcmp(description,"double")==0) {
+		return &ffi_type_double;
+	} else if (strcmp(description,"ushort")==0) {
+		return &ffi_type_ushort;
+	} else if (strcmp(description,"short")==0) {
+		return &ffi_type_sshort;
+	} else if (strcmp(description,"uchar")==0) {
+		return &ffi_type_uchar;
+	} else if (strcmp(description,"char")==0) {
+		return &ffi_type_schar;
 	} else if (strcmp(description,"pointer")==0) {
 		return &ffi_type_pointer;
 	} else if (strcmp(description,"ulong")==0) {
 		return &ffi_type_ulong;
+	} else if (strcmp(description,"long")==0) {
+		return &ffi_type_slong;
 	}
 	return NULL;
 }
-
 
 ffi_type* ctr_internal_media_ffi_map_type_obj(ctr_object* obj) {
 	ffi_type* result;
