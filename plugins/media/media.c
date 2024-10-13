@@ -34,6 +34,10 @@
 #include "mock.h"
 #endif
 
+#define CTR_MEDIA_FX_FLAG_MEDIA_TEST 0
+#define CTR_MEDIA_FX_FLAG_MEDIA_REMAP_ALL 1
+
+
 uint64_t CtrMediaTicks1 = 0;
 uint64_t CtrMediaTicks2 = 0;
 uint64_t CtrMediaPerfCountStart = 0;
@@ -179,6 +183,9 @@ uint8_t CtrMediaEventListenFlagGamePadBtnDown;
 uint8_t CtrMediaEventListenFlagTimer;
 uint8_t CtrMediaEventListenFlagStep;
 
+int CtrMediaFXFlagMapABXY2Up;
+
+
 void ctr_internal_img_render_text(ctr_object* myself);
 void ctr_internal_img_render_cursor(ctr_object* myself);
 char* ctr_internal_media_normalize_line_endings(char* text);
@@ -268,6 +275,7 @@ void ctr_internal_media_reset() {
 	CtrMediaViewport.w = 0;
 	CtrMediaViewport.h = 0;
 	CtrMediaZoom = 0;
+	CtrMediaFXFlagMapABXY2Up = 0;
 	for(int i = 1; i<=CtrMaxMediaTimers; i++) {
 		CtrMediaTimers[i] = -1;
 	}
@@ -1404,6 +1412,14 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 							break;
 						case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
 							ctr_internal_media_keydown_right(&dir);
+							break;
+						case SDL_CONTROLLER_BUTTON_A:
+						case SDL_CONTROLLER_BUTTON_B:
+						case SDL_CONTROLLER_BUTTON_X:
+						case SDL_CONTROLLER_BUTTON_Y:
+							if (CtrMediaFXFlagMapABXY2Up == CTR_MEDIA_FX_FLAG_MEDIA_REMAP_ALL) {
+								ctr_internal_media_keydown_up(&dir, &c4speed);
+							}
 							break;
 						default:
 							break;
@@ -4190,6 +4206,45 @@ ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Media ] effect: [ Number ] options: [ Object ]
+ *
+ * @example
+ * Media effect: 0 options: 0.
+ */
+ctr_object* ctr_media_fx(ctr_object* myself, ctr_argument* argumentList) {
+
+	/**
+	 * We use Special Effects (FX) to tweak the engine and add
+	 * misc. options or features. Instead of adding new messages for
+	 * non-essential features consider adding an FX-flag.
+	 *
+	 * Flag ranges:
+	 * Media...................0000 - 1000
+	 * Image...................1000 - 2000
+	 * Audio...................2000 - 3000
+	 * Other...................3000 - 4000
+	 * Export..................4000 - 5000
+	 * Mixed...................>5000
+	 */
+	int fx_code = (int) ctr_tonum(argumentList->object);
+	ctr_object* data = argumentList->next->object;
+
+	// Effect #0: test effect
+	if (fx_code == 0) {
+		// This is just a test message
+		printf("Special FX 0: Test Message to Stdout\n");
+	}
+	// Effect #1: remap gamepad buttons to up
+	else if (fx_code == CTR_MEDIA_FX_FLAG_MEDIA_REMAP_ALL) {
+		// for now we only set TRUE (0 or else...)
+		// other options might be added later...
+		CtrMediaFXFlagMapABXY2Up = ctr_tonum(data);
+	}
+	return myself;
+}
+
 void begin(){
 	ctr_gc_clean_free = 1; // only for debugging
 	#ifdef WIN
@@ -4252,6 +4307,7 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "_datastart" ), &ctr_media_datastart );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_DIALOG_SET ), &ctr_media_dialog );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "website:" ), &ctr_media_website );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_FX ), &ctr_media_fx );
 	#ifdef WIN
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring(CTR_DICT_WRITE), &ctr_media_console_write );
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_STOP ), &ctr_media_console_brk );
