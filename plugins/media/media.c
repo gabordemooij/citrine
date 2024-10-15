@@ -1245,6 +1245,7 @@ void ctr_internal_media_update_timers(ctr_object* media) {
 ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* player;
 	MediaIMG* focusImage;
+	int cbutton;
 	int x = 0, y = 0, dir, c4speed;
 	CtrMediaInputIndex = 0;
 	CtrMediaSelectStart =0;
@@ -1397,10 +1398,23 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 						ctr_internal_media_keyup_down(&dir, &c4speed);
 					break;
 				case SDL_CONTROLLERBUTTONDOWN:
+					cbutton = event.cbutton.button;
 					if (CtrMediaEventListenFlagGamePadBtnDown) {
-						ctr_media_event(myself, CTR_DICT_ON_GAMEPAD_DOWN, SDL_GameControllerGetStringForButton(event.cbutton.button));
+						ctr_media_event(myself, CTR_DICT_ON_GAMEPAD_DOWN, SDL_GameControllerGetStringForButton(cbutton));
 					}
-					switch(event.cbutton.button) {
+					/* FX: remap ABXY -> up */
+					if (CtrMediaFXFlagMapABXY2Up == CTR_MEDIA_FX_FLAG_MEDIA_REMAP_ALL && (
+							cbutton == SDL_CONTROLLER_BUTTON_A ||
+							cbutton == SDL_CONTROLLER_BUTTON_B ||
+							cbutton == SDL_CONTROLLER_BUTTON_X ||
+							cbutton == SDL_CONTROLLER_BUTTON_Y
+						)
+					) {
+						cbutton = SDL_CONTROLLER_BUTTON_DPAD_UP;
+						// resend as remapped
+						ctr_media_event(myself, CTR_DICT_ON_GAMEPAD_DOWN, SDL_GameControllerGetStringForButton(cbutton));
+					}
+					switch(cbutton) {
 						case SDL_CONTROLLER_BUTTON_DPAD_UP:
 							ctr_internal_media_keydown_up(&dir, &c4speed);
 							break;
@@ -1413,23 +1427,28 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 						case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
 							ctr_internal_media_keydown_right(&dir);
 							break;
-						case SDL_CONTROLLER_BUTTON_A:
-						case SDL_CONTROLLER_BUTTON_B:
-						case SDL_CONTROLLER_BUTTON_X:
-						case SDL_CONTROLLER_BUTTON_Y:
-							if (CtrMediaFXFlagMapABXY2Up == CTR_MEDIA_FX_FLAG_MEDIA_REMAP_ALL) {
-								ctr_internal_media_keydown_up(&dir, &c4speed);
-							}
-							break;
 						default:
 							break;
 					}
 					break;
 				case SDL_CONTROLLERBUTTONUP:
+					cbutton = event.cbutton.button;
 					if (CtrMediaEventListenFlagGamePadBtnUp) {
-						ctr_media_event(myself, CTR_DICT_ON_GAMEPAD_UP, SDL_GameControllerGetStringForButton(event.cbutton.button));
+						ctr_media_event(myself, CTR_DICT_ON_GAMEPAD_UP, SDL_GameControllerGetStringForButton(cbutton));
 					}
-					switch(event.cbutton.button) {
+					/* FX: remap ABXY -> up */
+					if (CtrMediaFXFlagMapABXY2Up == CTR_MEDIA_FX_FLAG_MEDIA_REMAP_ALL && (
+							cbutton == SDL_CONTROLLER_BUTTON_A ||
+							cbutton == SDL_CONTROLLER_BUTTON_B ||
+							cbutton == SDL_CONTROLLER_BUTTON_X ||
+							cbutton == SDL_CONTROLLER_BUTTON_Y
+						)
+					) {
+						cbutton = SDL_CONTROLLER_BUTTON_DPAD_UP;
+						//resend as remapped
+						ctr_media_event(myself, CTR_DICT_ON_GAMEPAD_UP, SDL_GameControllerGetStringForButton(cbutton));
+					}
+					switch(cbutton) {
 						case SDL_CONTROLLER_BUTTON_DPAD_UP:
 						case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
 							ctr_internal_media_keyup_down(&dir, &c4speed);
