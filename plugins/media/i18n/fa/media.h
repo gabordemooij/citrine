@@ -78,5 +78,5 @@
 #define CTR_DICT_DEREF                      "بازنشانی"
 #define CTR_DICT_UTF8_SET                   "utf8:"
 #define CTR_DICT_NEW_TYPE_SET               "جدید:نوع:"
-#define CTR_DICT_FX                         "اثر:"
+#define CTR_DICT_FX                         "اثر:گزینه‌ها:"
 #define CTR_DICT_FREEZE_SET                 "یخ زدن:"

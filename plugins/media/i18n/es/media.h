@@ -78,5 +78,5 @@
 #define CTR_DICT_DEREF                      "dereferencia"
 #define CTR_DICT_UTF8_SET                   "utf8:"
 #define CTR_DICT_NEW_TYPE_SET               "nuevo:tipo:"
-#define CTR_DICT_FX                         "efecto:"
+#define CTR_DICT_FX                         "efecto:opciones:"
 #define CTR_DICT_FREEZE_SET                 "congelar:"

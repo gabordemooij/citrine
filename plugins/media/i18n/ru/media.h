@@ -78,6 +78,6 @@
 #define CTR_DICT_DEREF                      "разыменование"
 #define CTR_DICT_UTF8_SET                   "utf8:"
 #define CTR_DICT_NEW_TYPE_SET               "новый:тип:"
-#define CTR_DICT_FX                         "эффект:"
+#define CTR_DICT_FX                         "эффект:настройки:"
 #define CTR_DICT_FREEZE_SET                 "заморозить:"
 

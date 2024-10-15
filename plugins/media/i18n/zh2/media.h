@@ -78,6 +78,6 @@
 #define CTR_DICT_DEREF                      "解引用"
 #define CTR_DICT_UTF8_SET                   "utf8:"
 #define CTR_DICT_NEW_TYPE_SET               "新:类型:"
-#define CTR_DICT_FX                         "效果:"
+#define CTR_DICT_FX                         "效果:设置:"
 #define CTR_DICT_FREEZE_SET                 "冻结:"
 
