@@ -81,6 +81,7 @@ SDL_Rect CtrMediaViewport;
 int CtrMediaZoom;
 int CtrMediaDrawSizeX;
 int CtrMediaDrawSizeY;
+int CtrMediaScreenActive;
 
 struct CtrMediaTextRenderCacheItem {
 	char* text;
@@ -1245,6 +1246,8 @@ void ctr_internal_media_update_timers(ctr_object* media) {
 ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	MediaIMG* player;
 	MediaIMG* focusImage;
+	// prevent running multiple loops.
+	if (CtrMediaScreenActive) return myself;
 	int cbutton;
 	int x = 0, y = 0, dir, c4speed;
 	CtrMediaInputIndex = 0;
@@ -1287,6 +1290,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	SDL_Event event;
 	dir = -1;
 	c4speed = 0;
+	CtrMediaScreenActive = 1;
 	while (!CtrStdFlow) {
 		if (CtrMediaFlagSoftwareVSync) {
 			CtrMediaPerfCountStart = SDL_GetPerformanceCounter();
@@ -1309,6 +1313,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 		myself->info.sticky = 0;
 		if (CtrMediaBreakLoopFlag) {
 			CtrMediaBreakLoopFlag = 0;
+			CtrMediaScreenActive = 0;
 			return myself;
 		}
 		//Update timers, both outside and inside event loop (otherwise you could stall it)
@@ -3126,6 +3131,7 @@ ctr_object* ctr_media_select(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 void ctr_internal_media_init() {
+	CtrMediaScreenActive = 0;
 	CtrMediaInputFreeze = CtrStdBoolFalse;
 	CtrMediaContactSurface = NULL;
 	CtrMediaAssetPackage = NULL;
