@@ -460,6 +460,7 @@ void ctr_internal_media_select_word(MediaIMG* haystack) {
 
 
 void ctr_internal_media_textinsert(MediaIMG* mediaImage, char* text) {
+	if (mediaImage->text == NULL) return;
 	ctr_size insertTextLength = strlen(text);
 	int len;
 	ctr_internal_media_reset_selection();
@@ -594,6 +595,8 @@ void ctr_internal_media_autoreplace(MediaIMG* image) {
 void ctr_internal_cursormove(int x, int y) {
 	int offset = 0;
 	MediaIMG* text = ctr_internal_media_getfocusimage();
+	if (text == NULL) return;
+	if (text->text == NULL) return;
 	if (y == -1) {
 		offset = ctr_internal_media_get_current_char_line(text);
 		ctr_internal_media_move_cursor_to_first_char_of_prev_line(text);
