@@ -296,6 +296,7 @@ ctr_dict* ctr_translate_load_dictionary() {
 	ctr_dict* previousEntry = NULL;
 	ctr_dict* e;
 	int qq = 0;
+	char* modifier;
 	while( fscanf( file, "%c \"%4999[^\"]\" \"%4999[^\"]\"\n", &translationType, word, translation) > 0 ) {
 		if (translationType != 't' && translationType != 's' && translationType != 'd' && translationType != 'x') {
 			printf("Invalid translation line: %d \n",qq);
@@ -304,8 +305,23 @@ ctr_dict* ctr_translate_load_dictionary() {
 		entry = (ctr_dict*) calloc( sizeof(ctr_dict), 1 );
 		entry->type = translationType;
 		qq++;
-		
 		entry->wordLength = strlen(word);
+		// if a word contains a modifier (i.e. same word is used twice, don't continue)
+		// translation stops, because it's a one-way dictionary.
+		modifier = strchr(word, '#');
+		if (modifier) {
+			// modifiers are used to use the same translation
+			// for different words, however this makes the translation
+			// one-way, because translating back you cannot know what the
+			// word means anymore - this is a feature, translation is not
+			// a requirement, some code just runs locally only
+			format = CTR_TERR_AMWORD;
+			buffer = ctr_heap_allocate(600 * sizeof(char));
+			snprintf( buffer, 600 * sizeof(char), format, modifier+1);
+			ctr_print_error( buffer, 1 );
+		}
+		modifier = strchr(translation, '#');
+		if (modifier) translation = modifier + 1;
 		entry->translationLength = strlen(translation);
 		if (entry->type != 's' && (entry->wordLength > CTR_TRANSLATE_MAX_WORD_LEN || entry->translationLength > CTR_TRANSLATE_MAX_WORD_LEN)) {
 			ctr_print_error(CTR_TERR_ELONG, 1);
@@ -314,7 +330,6 @@ ctr_dict* ctr_translate_load_dictionary() {
 		entry->translation = calloc( entry->translationLength, 1 );
 		memcpy(entry->word, word, entry->wordLength);
 		memcpy(entry->translation, translation, entry->translationLength);
-		
 		if (translationType == 'd') {
 			ctr_trans_d = entry;
 			continue;
@@ -345,7 +360,7 @@ ctr_dict* ctr_translate_load_dictionary() {
 					}
 				}
 				if ( e->translationLength == entry->translationLength ) {
-					if ( strncmp( e->translation, entry->translation, entry->translationLength ) == 0 ) {
+					if ( strncmp( e->translation, entry->translation, entry->translationLength ) == 0 && !modifier ) {
 						format = CTR_TERR_AMTRANS;
 						buffer = ctr_heap_allocate(600 * sizeof(char));
 						snprintf( buffer, 600 * sizeof(char), format, translation);
