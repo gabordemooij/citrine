@@ -1,5 +1,5 @@
-a b | Fałszywy Fałszywy Prawdziwe Prawdziwe -1
-b a | Prawdziwe Prawdziwe Fałszywy Fałszywy 1
-hallo hello | Fałszywy Fałszywy Prawdziwe Prawdziwe -4
-human human | Fałszywy Prawdziwe Fałszywy Prawdziwe 0
-x z | Fałszywy Fałszywy Prawdziwe Prawdziwe -2
+a b | Nie Nie Tak Tak -1
+b a | Tak Tak Nie Nie 1
+hallo hello | Nie Nie Tak Tak -4
+human human | Nie Tak Nie Tak 0
+x z | Nie Nie Tak Tak -2

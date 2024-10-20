@@ -1,11 +1,11 @@
 9
 a Obiekt ‘Obiekt’  is NOT Nil.
-a Boolean ‘Prawdziwe’  is NOT Nil.
-a Boolean ‘Fałszywy’  is NOT Nil.
-a Boolean ‘Fałszywy’  is NOT Nil.
+a Boolean ‘Tak’  is NOT Nil.
+a Boolean ‘Nie’  is NOT Nil.
+a Boolean ‘Nie’  is NOT Nil.
 a Numer ‘1’  is NOT Nil.
 a Numer ‘0’  is NOT Nil.
-a Strunowy ‘Str’  is NOT Nil.
-a Strunowy ‘’  is NOT Nil.
+a Tekst ‘Str’  is NOT Nil.
+a Tekst ‘’  is NOT Nil.
 a Kod ‘Kod’  is NOT Nil.
 but.. Nil is.. certainly NIL!
