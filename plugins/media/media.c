@@ -621,8 +621,8 @@ void ctr_internal_media_infercursorpos(MediaIMG* image, int x, int y) {
 		CtrMediaInputIndex = 0;
 		return;
 	}
-	int relx = x - image->x;
-	int rely = y - image->y;
+	int relx = x - image->x - image->paddingx;
+	int rely = y - image->y - image->paddingy;
 	int lineHeight;
 	lineHeight = image->lineheight;
 	CtrMediaMaxLines = floor(image->h/lineHeight);
