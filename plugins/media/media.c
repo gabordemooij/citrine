@@ -3149,6 +3149,8 @@ void ctr_internal_media_init() {
 	
 	#ifdef FULLSCREEN
 	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 100, 100, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
+	#elif DESKTOP_FULLSCREEN
+	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 100, 100, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP);
 	#else
 	char* screen_mode = getenv("screenmode");
 	if (screen_mode && strcmp(screen_mode,"full")==0) {
