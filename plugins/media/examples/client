@@ -1,8 +1,0 @@
-☞ media ≔ Media nieuw.
-Moment wacht: 1.
-
-Programma instelling: netwerkpoort is: “9002”.
-
-Netwerk
-		tekst: “hallo”
-		naar: “127.0.0.1:9000”.
