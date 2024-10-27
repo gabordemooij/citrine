@@ -115,7 +115,7 @@ blokken elk: { :nummer :blok
 		
 		
 				
-		commando ≔ “cp -R ../dist/Linux/ISO/🠶taal/mods /tmp/mdoc🠶taal/mods”.
+		commando ≔ “cp -R ../dist/Linux/ISO/🠶taal/mods /tmp/mdoc🠶taal/”.
 		commando 🠶taal: taal.
 		Programma opdrachtregel: commando.
 
