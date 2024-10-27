@@ -1,0 +1,33 @@
+>> m := Media new.
+m link: ( Package new: ['demodata'] ).
+>> ball := Image new: ['ball.png'].
+>> bat := Image new: ['bat.png'].
+
+>> a := Image new: ['wall1.png'].
+>> b := Image new: ['wall1.png'].
+>> c := Image new: ['wall2.png'].
+>> d := Image new: ['wall2.png'].
+
+a x: 0 y: -50, wall: True.
+b x: 0 y: 380, wall: True.
+c x: 0 y: -20, wall: True.
+d x: 780 y: -20, wall: True.
+
+ball 
+	x: 400 y: 100,
+	to-x: (Number between: 200 and: 800) y: 500,
+	gravity: 1,
+	bounce: True,
+	active: True.
+
+bat
+	x: 100 y: 300,
+	speed: 5,
+	friction: 0.01,
+	accelerate: 0.4,
+	controllable: 3,
+	wall: True.
+
+ball on: ['collision:'] do: { self speed: 7. }.
+
+m screen: ['demo.png'].

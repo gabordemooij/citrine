@@ -1,0 +1,29 @@
+>> m := Media new.
+m link: ( Package new: ['demodata'] ).
+>> o := Color new red: 0 green: 0 blue: 0.
+>> a := Image new: ['demo.png'].
+>> r := 80.
+>> c := 200.
+
+m on: ['start'] do: {
+	{ :j
+		>> p := Sequence new.
+		{ :i 
+			p append: (
+				Point new 
+				x: r * i cos + ( r * j cos + c )
+				y: r * i sin + ( r * j sin + c )
+			).
+		} * 360.
+		
+		a draw: p color: (
+			Color new 
+				red: 0
+				green: 255 - (j / 36) * 255
+				blue: (j / 36) * 255
+		).
+		
+	} * 36.
+}.
+
+m screen: ['demo.png'].

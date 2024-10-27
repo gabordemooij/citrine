@@ -1,0 +1,35 @@
+☞ x ≔ ‘Hello’ length.
+☞ x ≔ 3 + 7.
+☞ x ≔ Number between: 0 and: 10.
+
+
+(x ≥ y) true: { ✎ write: ‘buy!’. }.
+{ :i ✎ write: i. } × 3.
+{ x add: 1. } while: { ↲ x < 9. }.
+
+
+☞ y ≔ Number new.
+y on: ‘double’ do: { ↲ ⛏ × 2. }.
+
+
+cat on: ‘name:’ do: { :me
+	⚿ name ≔ me.
+}.
+
+☞ f ≔ { q ≔ 2. }.
+{☞ q ≔ 1. f run. ✎ write: q.} run.
+
+RoyalCat ≔ Cat new.
+RoyalCat on: 'name' do: { :n
+	↲ ‘your royal highness ’ +
+	( ⛏ name ).
+}.
+✎ write: 
+((RoyalCat new name: ‘Diva’) name).
+
+
+echo ≔ Object new.
+echo
+ on: ‘respond:’
+ do: { :s ↲ s + s }.
+echo ho!.

@@ -18,9 +18,9 @@ mkdir dist/Linux
 mkdir dist/Linux/ISO
 mkdir dist/Linux/OUT
 
-VERSION="1_0_0beta4"
+VERSION="1_0_0beta5"
 
-declare -a langs=("nl" "fy" "en" "de" "fr" "no" "ru" "cs" "it" "hi" "pt_br" "uz" "pl" "id" "zh2" "fa" "es")
+declare -a langs=("en" "nl" "fy" "de" "fr" "no" "ru" "cs" "it" "hi" "pt_br" "uz" "pl" "id" "zh2" "fa" "es")
 for lang in "${langs[@]}"
 do
 
@@ -32,9 +32,9 @@ ISO="$lang" PACKAGE="media" NAME="libctrmedia.dll" CC=x86_64-w64-mingw32-gcc-win
 
 
 # Create dictionary
-./bin/Linux/ctrnl -g i18n/nl/dictionary.h i18n/$lang/dictionary.h > /tmp/dict_general.dict
-./bin/Linux/ctrnl -g plugins/media/i18n/nl/media.h plugins/media/i18n/$lang/media.h > /tmp/dict_media.dict
-cat /tmp/dict_general.dict /tmp/dict_media.dict > /tmp/dict_all.dict
+./bin/Linux/ctren -g i18n/en/dictionary.h i18n/$lang/dictionary.h > /tmp/dict_general.dict
+./bin/Linux/ctren -g plugins/media/i18n/en/media.h plugins/media/i18n/$lang/media.h > /tmp/dict_media.dict
+cat /tmp/dict_general.dict /tmp/dict_media.dict plugins/media/i18n/$lang/extra.dict > /tmp/dict_all.dict
 
 # (Re-)Create folder for lang specific distribution
 rm -rf dist/Win64/ISO/$lang
@@ -47,11 +47,26 @@ cp bin/Win64/ctr$lang.exe dist/Win64/ISO/$lang/
 cp mods/media/dll64/*.dll dist/Win64/ISO/$lang/
 cp plugins/media/libctrmedia.dll dist/Win64/ISO/$lang/mods/media/
 
+# Add assets
+cp demodata dist/Win64/ISO/$lang/
+
 # Add shortcut icon
 cp plugins/media/assets/picto.ico dist/Win64/ISO/$lang/pictogram.ico 
 
 # Translate examples
-./bin/Linux/ctrnl -t /tmp/dict_all.dict plugins/media/tests/test1.ctr > dist/Win64/ISO/$lang/test1.ctr 2>/tmp/err1.log
+
+./bin/Linux/ctren -t /tmp/dict_all.dict demo1.ctr > dist/Win64/ISO/$lang/demo1.ctr 2>/tmp/err1.log
+./bin/Linux/ctren -t /tmp/dict_all.dict demo2.ctr > dist/Win64/ISO/$lang/demo2.ctr 2>/tmp/err2.log
+./bin/Linux/ctren -t /tmp/dict_all.dict demo3.ctr > dist/Win64/ISO/$lang/demo3.ctr 2>/tmp/err3.log
+./bin/Linux/ctren -t /tmp/dict_all.dict demo4.ctr > dist/Win64/ISO/$lang/demo4.ctr 2>/tmp/err4.log
+./bin/Linux/ctren -t /tmp/dict_all.dict demo5.ctr > dist/Win64/ISO/$lang/demo5.ctr 2>/tmp/err5.log
+./bin/Linux/ctren -t /tmp/dict_all.dict demo6.ctr > dist/Win64/ISO/$lang/demo6.ctr 2>/tmp/err6.log
+./bin/Linux/ctren -t /tmp/dict_all.dict demo7.ctr > dist/Win64/ISO/$lang/demo7.ctr 2>/tmp/err7.log
+./bin/Linux/ctren -t /tmp/dict_all.dict demo8.ctr > dist/Win64/ISO/$lang/demo8.ctr 2>/tmp/err8.log
+./bin/Linux/ctren -t /tmp/dict_all.dict demo9.ctr > dist/Win64/ISO/$lang/demo9.ctr 2>/tmp/err9.log
+./bin/Linux/ctren -t /tmp/dict_all.dict demo10.ctr > dist/Win64/ISO/$lang/demo10.ctr 2>/tmp/err10.log
+./bin/Linux/ctren -t /tmp/dict_all.dict demo11.ctr > dist/Win64/ISO/$lang/demo11.ctr 2>/tmp/err11.log
+
 
 # Copy assets to setup creator work dir
 cp plugins/media/assets/* ~/.wine/drive_c/InnoSetupSourceDir/
