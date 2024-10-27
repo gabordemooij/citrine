@@ -52,7 +52,7 @@
 #define CTR_DICT_GHOST_SET                  "fantasma:"
 #define CTR_DICT_STATIC                     "estático:"
 #define CTR_DICT_NODIRANI_SET               "fijar:"
-#define CTR_DICT_STOP_AT_SET                "destino:"
+#define CTR_DICT_STOP_AT_SET                "destino"
 #define CTR_DICT_AUDIO_PLAY                 "reproducir"
 #define CTR_DICT_AUDIO_SILENCE              "silenciar"
 #define CTR_DICT_AUDIO_REWIND               "rebobinar"
