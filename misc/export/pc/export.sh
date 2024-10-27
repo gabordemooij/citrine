@@ -16,7 +16,7 @@ PACKAGE="media" \
 NAME=$MEDIALIB \
 make -f $MAKEFILE clean
 
-PACKAGE="media" NAME=$MEDIALIB \
+PACKAGE="media" NAME=$MEDIALIB EXTRACFLAGS=" -D DESKTOP_FULLSCREEN " \
 make -f $MAKEFILE plugin
 
 # compile Citrine with embed options
