@@ -80,3 +80,4 @@
 #define CTR_DICT_NEW_TYPE_SET               "new:type:"
 #define CTR_DICT_FX                         "प्रभाव:"
 #define CTR_DICT_FREEZE_SET                 "जमना:"
+#define CTR_DICT_MASK_SET                   "छुपाना:"

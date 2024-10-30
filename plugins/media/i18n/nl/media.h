@@ -80,5 +80,5 @@
 #define CTR_DICT_NEW_TYPE_SET               "nieuw:type:"
 #define CTR_DICT_FX                         "effect:opties:"
 #define CTR_DICT_FREEZE_SET                 "bevriezen:"
-
+#define CTR_DICT_MASK_SET                   "maskeren:"
 

@@ -80,4 +80,4 @@
 #define CTR_DICT_NEW_TYPE_SET               "baru:tipe:"
 #define CTR_DICT_FX                         "efek:opsi:"
 #define CTR_DICT_FREEZE_SET                 "membekukan:"
-
+#define CTR_DICT_MASK_SET                   "masker:"

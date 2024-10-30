@@ -80,3 +80,4 @@
 #define CTR_DICT_NEW_TYPE_SET               "nij:type:"
 #define CTR_DICT_FX                         "effekt:opsjes:"
 #define CTR_DICT_FREEZE_SET                 "befrieze:"
+#define CTR_DICT_MASK_SET                   "maskearje:"

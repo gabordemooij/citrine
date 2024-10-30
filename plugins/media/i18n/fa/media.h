@@ -80,3 +80,4 @@
 #define CTR_DICT_NEW_TYPE_SET               "جدید:نوع:"
 #define CTR_DICT_FX                         "اثر:گزینه‌ها:"
 #define CTR_DICT_FREEZE_SET                 "یخ زدن:"
+#define CTR_DICT_MASK_SET                   "پوشاندن:"

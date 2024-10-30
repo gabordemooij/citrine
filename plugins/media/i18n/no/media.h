@@ -80,3 +80,4 @@
 #define CTR_DICT_NEW_TYPE_SET               "ny:type:"
 #define CTR_DICT_FX                         "effekt:innstillinger:"
 #define CTR_DICT_FREEZE_SET                 "fryse:"
+#define CTR_DICT_MASK_SET                   "maskere:"

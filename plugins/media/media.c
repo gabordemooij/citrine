@@ -6,6 +6,7 @@
 
 
 #include "../../citrine.h"
+#include "passw.c"
 #include "media.h"
 
 #ifdef SDL
@@ -2202,6 +2203,7 @@ void ctr_img_destructor(ctr_resource* rs) {
 		SDL_FreeSurface(image->surface);
 	}
 	image->ref = NULL;
+	image->font = NULL;
 }
 
 /**
@@ -2408,6 +2410,30 @@ ctr_object* ctr_img_controllable(ctr_object* myself, ctr_argument* argumentList)
 ctr_object* ctr_img_freeze(ctr_object* myself, ctr_argument* argumentList) {
 	if (!ctr_internal_get_image_from_object(myself)) return myself;
 	CtrMediaInputFreeze = ctr_internal_cast2bool(argumentList->object);
+	return myself;
+}
+
+
+/**
+ * @def
+ * [ Image ] mask: [ Number ]
+ *
+ * @example
+ * image mask: 10.
+ *
+ * @result
+ * @info-image-mask
+ */
+ctr_object* ctr_img_mask_set(ctr_object* myself, ctr_argument* argumentList) {
+	MediaIMG* image = ctr_internal_get_image_from_object(myself);
+	if (!image) return myself;
+	image->font = TTF_OpenFontRW(
+		SDL_RWFromConstMem(
+			CTR_MEDIA_PASSW_FONT,
+			CTR_MEDIA_PASSW_FONT_LEN),
+		0,
+		ctr_tonum(argumentList->object)
+	);
 	return myself;
 }
 
@@ -4381,6 +4407,7 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MOVE_TO_XY_SET ), &ctr_img_mov_set );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_VISIBLE_SET ), &ctr_img_visible_set );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_FREEZE_SET ), &ctr_img_freeze );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MASK_SET ), &ctr_img_mask_set );
 	fontObject = ctr_font_new(CtrStdObject, NULL);
 	fontObject->link = CtrStdObject;
 	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_font_new );

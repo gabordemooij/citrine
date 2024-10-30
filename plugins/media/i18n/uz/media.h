@@ -80,4 +80,5 @@
 #define CTR_DICT_NEW_TYPE_SET               "yangi:tur:"
 #define CTR_DICT_FX                         "ta'sir:sozlamalar:"
 #define CTR_DICT_FREEZE_SET                 "muzlatish:"
+#define CTR_DICT_MASK_SET                   "maskalash:"
 

@@ -80,3 +80,4 @@
 #define CTR_DICT_NEW_TYPE_SET               "nuovo:tipo:"
 #define CTR_DICT_FX                         "effetto:opzioni:"
 #define CTR_DICT_FREEZE_SET                 "congelare:"
+#define CTR_DICT_MASK_SET                   "mascherare:"

@@ -80,4 +80,4 @@
 #define CTR_DICT_NEW_TYPE_SET               "новый:тип:"
 #define CTR_DICT_FX                         "эффект:настройки:"
 #define CTR_DICT_FREEZE_SET                 "заморозить:"
-
+#define CTR_DICT_MASK_SET                   "маскировать:"
