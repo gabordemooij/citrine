@@ -1772,7 +1772,19 @@ ctr_object* ctr_line_end(ctr_object* myself, ctr_argument* argumentList) {
 
 void ctr_font_destructor(ctr_resource* rs) {
 	MediaFNT* fnt = (MediaFNT*) rs->ptr;
+	// Check if resource still used by image
+	// If so, emit a warning, but set the font to NULL anyway
+	// to avoid segfault. Also, we cannot leave it open as we
+	// will leak memory then.
 	if (fnt->font) {
+		for(int i=0; i<MaxIMG; i++) {
+			if (mediaIMGs[i].font == fnt->font) {
+				printf("Warning: GC'ed font is still in use by image resource #%d!\n", i);
+				// This will probably make the program error out, but that's okay.
+				// Same happens with images that dissapear because GC.
+				mediaIMGs[i].font = NULL;
+			}
+		}
 		TTF_CloseFont(fnt->font);
 	}
 	if (fnt->fscript) {
