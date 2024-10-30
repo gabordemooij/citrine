@@ -215,6 +215,17 @@ MediaFNT* ctr_internal_get_font_from_object(ctr_object* object)	{
 	return (MediaFNT*) object->value.rvalue->ptr;
 }
 
+void ctr_internal_media_clear_edcache() {
+	for(int i = 0; i < 400; i++) {
+		CtrMediaEdCache[i].surface = NULL;
+		if (CtrMediaEdCache[i].text) {
+			ctr_heap_free(CtrMediaEdCache[i].text);
+		}
+		CtrMediaEdCache[i].text = NULL;
+		CtrMediaEdCache[i].state = 0;
+	}
+}
+
 void ctr_internal_media_reset() {
 	controllableObject = NULL;
 	focusObject = NULL;
@@ -232,11 +243,7 @@ void ctr_internal_media_reset() {
 		ctr_heap_free(rule->word);
 		ctr_heap_free(rule->replacement);
 	}
-	for(i = 0; i < 400; i++) {
-		CtrMediaEdCache[i].surface = NULL;
-		CtrMediaEdCache[i].text = NULL;
-		CtrMediaEdCache[i].state = 0;
-	}
+	ctr_internal_media_clear_edcache();
 	CtrMediaAutoReplaceRuleLen = 0;
 	IMGCount = 0;
 	AUDCount = 0;
@@ -639,13 +646,14 @@ void ctr_internal_media_infercursorpos(MediaIMG* image, int x, int y) {
 		return;
 	}
 	int line_length = end_of_line - line_start;
-	char* measurementBuffer = malloc(line_length + 1);
+	char* measurementBuffer = ctr_heap_allocate(line_length + 1);
 	memcpy(measurementBuffer, image->text+line_start, line_length);
 	measurementBuffer[line_length] = '\0';
 	int total_line_width = 0;
 	TTF_SizeUTF8(image->font, measurementBuffer, &total_line_width, NULL);
 	//Line is shorter than mouse pos, go to end of line
 	if (total_line_width < relx) {
+		ctr_heap_free(measurementBuffer);
 		ctr_internal_media_move_cursor_to_end_of_cur_line(image);
 		return;
 	}
@@ -665,6 +673,7 @@ void ctr_internal_media_infercursorpos(MediaIMG* image, int x, int y) {
 		ctr_internal_media_move_cursor_left(image, 1, 0);
 		measurementBuffer[CtrMediaInputIndex-line_start] = '\0';
 	}
+	ctr_heap_free(measurementBuffer);
 	return;
 }
 
@@ -749,6 +758,7 @@ int ctr_internal_media_mouse_down(SDL_Event event) {
 		) {
 			if (mediaIMGs[i].editable) {
 				focusObject = mediaIMGs[i].ref;
+				ctr_internal_media_clear_edcache();
 				focusImage = (MediaIMG*) focusObject->value.rvalue->ptr;
 				ctr_internal_media_infercursorpos(focusImage, event.button.x, event.button.y);
 				CtrMediaSelectStart = 1;
@@ -2015,7 +2025,7 @@ SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
 		asset_file = SDL_RWFromMem(blob, blob_len);
 	}
 	SDL_RWseek(asset_file, 0, RW_SEEK_SET);
-	char* buffer = malloc(500);
+	char* buffer = ctr_heap_allocate(500);
 	while(1) {
 		uint64_t read_start = SDL_RWtell(asset_file);
 		int bytes_read = SDL_RWread(asset_file, buffer, 1, 500);
@@ -2025,7 +2035,7 @@ SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
 			SDL_RWread(asset_file, &next_entry, 8, 1);
 			uint64_t curpos = SDL_RWtell(asset_file);
 			uint64_t read_size = next_entry - curpos;
-			char* read_buffer = malloc(read_size);
+			char* read_buffer = ctr_heap_allocate_tracked(read_size);
 			SDL_RWread(asset_file, read_buffer, 1, read_size);
 			res = SDL_RWFromMem(read_buffer, read_size);
 			break;
@@ -2039,6 +2049,7 @@ SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
 		}
 	}
 	SDL_RWclose(asset_file);
+	ctr_heap_free(buffer);
 	return res;
 }
 
@@ -2841,11 +2852,11 @@ void ctr_internal_img_render_cursor(ctr_object* focusObject) {
 	if (measurementBufferLength) {
 		int measurementBufferSize = measurementBufferLength + 1;
 		char* measurementBufferStart = image->text+beginline;
-		char* measurementBuffer = malloc(measurementBufferSize);
+		char* measurementBuffer = ctr_heap_allocate(measurementBufferSize);
 		memcpy(measurementBuffer, measurementBufferStart, measurementBufferLength);
 		measurementBuffer[measurementBufferLength] = '\0';
 		if (TTF_SizeUTF8(image->font, measurementBuffer, &offsetx, NULL)) ctr_internal_media_fatalerror("Unable to measure font", "TTF_SizeUTF8");
-		free(measurementBuffer);
+		ctr_heap_free(measurementBuffer);
 	}
 	height = image->lineheight;
 	if (y1 >= (CtrMediaCursorOffsetY+CtrMediaMaxLines)) {
@@ -2890,7 +2901,7 @@ void ctr_internal_img_render_text(ctr_object* myself) {
 	int line_segment_start = 0;
 	int textLine = 0;
 	ctr_size buffsize = 10;
-	char* buff = malloc(buffsize + 1);
+	char* buff;
 	int state = 0; //0 = normal, 1 = selected
 	while(i < image->textlength) {
 		line_segment_start = i;
@@ -2916,8 +2927,7 @@ void ctr_internal_img_render_text(ctr_object* myself) {
 			} else {
 
 			buffsize = i-line_segment_start;
-			//memleak + optimization possible
-			buff = malloc(buffsize + 1);
+			buff = ctr_heap_allocate(buffsize + 1);
 			memcpy(buff, image->text+line_segment_start, i-line_segment_start);
 			memcpy(buff+(i-line_segment_start), "\0", 1);
 			if (state) {
@@ -2928,7 +2938,7 @@ void ctr_internal_img_render_text(ctr_object* myself) {
 
 			if (CtrMediaEdCache[q].surface) {
 				SDL_FreeSurface(CtrMediaEdCache[q].surface);
-				free(CtrMediaEdCache[q].text);
+				ctr_heap_free(CtrMediaEdCache[q].text);
 			}
 			CtrMediaEdCache[q].surface = text;
 			CtrMediaEdCache[q].text = buff;
