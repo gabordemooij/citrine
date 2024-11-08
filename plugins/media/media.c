@@ -260,7 +260,7 @@ void ctr_internal_media_reset() {
 	CtrMediaJumpHeightFactor = 100;
 	CtrMediaControlMode = 0;
 	CtrMediaRotation = 0;
-	CtrMediaStdDelayTime = 0; // Only for testing
+	CtrMediaStdDelayTime =  0; // Only for @testing
 	CtrMediaBreakLoopFlag = 0;
 	CtrMediaInputIndex = 0;
 	CtrMediaSelectStart = 0;
@@ -290,13 +290,52 @@ void ctr_internal_media_reset() {
 	}
 }
 
+
 SDL_Rect ctr_internal_media_image_maprect(MediaIMG* m) {
 	SDL_Rect r;
 	r.x = (int)(m->x);
 	r.y = (int)(m->y);
 	r.h = (int) m->h;
 	r.w = (int) m->w/(m->anims ? m->anims : 1);
-	return r;
+	MediaIMG* player = ctr_internal_media_getplayer();
+	// For platformers and simple control modes this is all we need...
+	if (CtrMediaControlMode == 1 && (player && player->gravity) ) return r;
+	if (CtrMediaControlMode != 4 && CtrMediaControlMode != 1) return r;
+	// For top-down, radius (and 3D) we need to calculate the bounding box of the
+	// rotated rectangle...
+	int cx = r.x + (r.w / 2);
+	int cy = r.y + (r.h / 2);
+	double rad = (m->dir) * (M_PI / 180.0);
+	int ltx = cx+(r.x-cx)*cos(rad)+(r.y-cy)*sin(rad);
+	int lty = cy-(r.x-cx)*sin(rad)+(r.y-cy)*cos(rad);
+	int rtx = cx+((r.x+r.w)-cx)*cos(rad)+(r.y-cy)*sin(rad);
+	int rty = cy-((r.x+r.w)-cx)*sin(rad)+(r.y-cy)*cos(rad);
+	int lbx = cx+(r.x-cx)*cos(rad)+((r.y+r.h)-cy)*sin(rad);
+	int lby = cy-(r.x-cx)*sin(rad)+((r.y+r.h)-cy)*cos(rad);
+	int rbx = cx+((r.x+r.w)-cx)*cos(rad)+((r.y+r.h)-cy)*sin(rad);
+	int rby = cy-((r.x+r.w)-cx)*sin(rad)+((r.y+r.h)-cy)*cos(rad);
+	SDL_Rect r2;
+	r2.x = ltx;
+	if (rtx < r2.x) r2.x = rtx;
+	if (lbx < r2.x) r2.x = lbx;
+	if (rbx < r2.x) r2.x = rbx;
+	r2.y = lty;
+	if (rty < r2.y) r2.y = rty;
+	if (lby < r2.y) r2.y = lby;
+	if (rby < r2.y) r2.y = rby;
+	int x2;
+	int y2;
+	x2 = ltx;
+	if (rtx > x2) x2 = rtx;
+	if (lbx > x2) x2 = lbx;
+	if (rbx > x2) x2 = rbx;
+	y2 = lty;
+	if (rty > y2) y2 = rty;
+	if (lby > y2) y2 = lby;
+	if (rby > y2) y2 = rby;
+	r2.h = y2 - r2.y;
+	r2.w = x2 - r2.x;
+	return r2;
 }
 
 char ctr_internal_media_image_intersect(MediaIMG* m1, MediaIMG* m2) {
@@ -698,52 +737,109 @@ void ctr_internal_media_anim_frames(MediaIMG* m, SDL_Rect* r, SDL_Rect* s) {
 	s->y = 0;
 }
 
+void ctr_internal_media_image_resolvecollision1(
+	MediaIMG* m, MediaIMG* m2,
+	SDL_Rect r, SDL_Rect r2,
+	int right, int down, double nx, double ny) {
+	SDL_Rect r3;
+	int xdepth;
+	int ydepth;
+	if (SDL_IntersectRect(&r, &r2, &r3)) {
+		if (right) {
+			xdepth = ((r.x > r2.x) ? (r.x - r2.x) : 0) + r3.w;
+		} else {
+			xdepth = (((r.x+r.w) < (r2.x+r2.w)) ? ((r2.x+r2.w)-(r.x+r.w)) : 0) + r3.w;
+		}
+		if (down) {
+			ydepth = ((r.y > r2.y) ? (r.y - r2.y) : 0) + r3.h;
+		} else {
+			ydepth = (((r.y+r.h) < (r2.y+r2.h)) ? ((r2.y+r2.h)-(r.y+r.h))  : 0) + r3.h;
+		}
+		if (xdepth <= ydepth) {
+			if (right) {
+				m->x = floor(m->x - xdepth);
+			} else {
+				m->x = ceil(m->x + xdepth);
+			}
+		} else {
+			if (down) {
+				m->gspeed = 0; //reset speed from gravity to avoid creeping towards the middle
+				m->y = floor(m->y - ydepth);
+			} else {
+				m->y = ceil(m->y + ydepth);
+			}
+		}
+	}
+}
+
 void ctr_internal_media_img_resolvecollision(MediaIMG* m, MediaIMG* m2) {
-	SDL_Rect r, r2;
-	r = ctr_internal_media_image_maprect(m);
-	r2 = ctr_internal_media_image_maprect(m2);
-	int cx1 = m->x + (r.w/2);
-	int cx2 = m2->x + (r2.w/2);
-	int cy1 = m->y + r.h;
-	int cy2 = m2->y + r2.h;
-	r.x = m->ox;
-	r.y = m->oy;
-	r.x = m->x;
-	if (cx1 < cx2) {
-		if (SDL_HasIntersection(&r,&r2)) {
+	SDL_Rect r, rold, r2;
+	r = ctr_internal_media_image_maprect(m); // obtain shape target position
+	double nx, ny; int newy;
+	nx=m->x; ny=m->y; // store the target position
+	m->x = m->ox; m->y = m->oy; // reset old pos for per-axis check
+	rold = ctr_internal_media_image_maprect(m); // obtain prev shape
+	m->x = nx; m->y = ny; // restore target position, we now have rold
+	r2 = ctr_internal_media_image_maprect(m2); // shape of other
+	newy = r.y; r.y = rold.y; // set y back
+	MediaIMG* player = ctr_internal_media_getplayer();
+	// calc center for impact vector
+	int cx1 = rold.x + (rold.w/2);
+	int cx2 = r2.x + (r2.w/2);
+	int cy1 = rold.y + (rold.h/2);
+	int cy2 = r2.y + (r2.h/2);
+	int right;
+	int down;
+	// Normally with the default collision resolver,
+	// a moving down platform can crush the player into the ground,
+	// in platform-style games (where player has gravity >=1 and
+	// controlmode == 1) it's nicer to shift the player out of the way
+	// than to run him into the floor... this is also more efficient
+	// because we can simply bail out with a simple movement in this case.
+	// note that the player might be wanting to jump on the platform or
+	// against it, in that case normal resolving takes place.
+	if (m == player &&
+		CtrMediaControlMode == 1
+			&& m->gravity >= 1
+			&& m2->mov
+			&& !m2->gravity
+			&& m2->dir > 180
+			&& m2->y < m->y
+			&& CtrMediaJump == 0
+	) {
+		if (m->x < cx2) {
 			m->x = m2->x - r.w;
-		}
-	} else {
-		if (SDL_HasIntersection(&r,&r2)) {
+		} else {
 			m->x = m2->x + r2.w;
-		}
-	}
-	r.x = m->x;
-	r.y = m->y;
-	if (cy1 < cy2) {
-		if (SDL_HasIntersection(&r,&r2)) {
-			m->y = m2->y - r.h;
-		}
-	} else {
-		if (SDL_HasIntersection(&r,&r2)) {
-			m->y = m2->y + r2.h;
-		}
-	}
-	r.y = m->y;
-	m->x = r.x;
-	m->y = r.y;
-	if (SDL_HasIntersection(&r,&r2)) {
-		//Avoid crushing
-		int attempts = 0;
-		while(SDL_HasIntersection(&r,&r2) && attempts < 100) {
-			m->x += m2->mov * cos(m2->dir * M_PI / 180);
-			m->y -= m2->mov * sin(m2->dir * M_PI / 180);
-			r.x = m->x;
-			r.y = m->y;
-			attempts++;
 		}
 		return;
 	}
+	// same but for top-crush
+	if (m == player &&
+		CtrMediaControlMode == 1
+			&& m->gravity >= 1
+			&& m2->mov
+			&& !m2->gravity
+			&& m2->dir < 180
+			&& m2->y < m->y
+			&& CtrMediaJump == 0
+	) {
+		if (m->x < cx2) {
+			m->x = m2->x - r.w;
+		} else {
+			m->x = m2->x + r2.w;
+		}
+		return;
+	}
+	// for radius control we infer direction from centers,
+	// because upon rotating ox/oy might be invalid
+	// old/newpos does not always work (jump through platform from bottom)
+	right = cx1 < cx2;
+	down = cy1 < cy2;
+	// first resolve collision on x-axis
+	ctr_internal_media_image_resolvecollision1(m,m2,r,r2,right,down,nx,ny);
+	r.y = newy; // then on y-axis
+	ctr_internal_media_image_resolvecollision1(m,m2,r,r2,right,down,nx,ny);
 }
 
 int ctr_internal_media_mouse_down(SDL_Event event) {
@@ -926,7 +1022,7 @@ void ctr_internal_media_detect_collisions(MediaIMG* m, SDL_Rect r) {
 		w2 = (int) m2->w / (m2->anims ? m2->anims : 1);
 		r2 = ctr_internal_media_image_maprect(m2);
 		if (SDL_HasIntersection(&r,&r2)) {
-			if (m2->solid && !m->ghost) {
+			if (m2->solid && !m->solid && !m->ghost) {
 				if (m->gravity && m->x+w >= m2->x && m->x <= m2->x+w2 && m->y+h <= m2->y+(m->h/2)) {
 						m->y = m2->y - h + 1;
 						m->gspeed = 0;
@@ -941,7 +1037,7 @@ void ctr_internal_media_detect_collisions(MediaIMG* m, SDL_Rect r) {
 					CtrMediaJump = 0;
 				}
 				if (m->bounce) {
-					m->dir = (double) (((int)m->dir + 270) % 360);
+					m->dir = (double) (((int)m->dir + 145) % 360);
 				}
 			}
 			if (m->collidable) {
@@ -1066,6 +1162,17 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 	// keep a constant physics speed by calculating the timediff
 	double delta_in_seconds = ((CtrMediaTicks2 - CtrMediaTicks1) / 1000.0f );
 	double dt  = 60 * delta_in_seconds;
+	if (controllableObject != NULL) {
+		player = (MediaIMG*) controllableObject->value.rvalue->ptr;
+		if (CtrMediaJump == 2 && player == m) {
+			player->y = player->y - (log(CtrMediaJumpHeight) * dt);
+			CtrMediaJumpHeight /= pow(1.2, dt);
+			if (CtrMediaJumpHeight < 1) {
+				CtrMediaJump = 3;
+				CtrMediaJumpHeight = 0;
+			}
+		}
+	}
 	// If you want to test, insert a random delay and observe that
 	// game speed is still the same
 	// CtrMediaStdDelayTime = rand() % 100;
@@ -1079,10 +1186,17 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 	}
 	if (!m->ghost && m->gravity > 0 && m->y < windowHeight - m->h) {
 		if (m->gravity >= 1) {
-			m->gspeed += m->gravity * 0.1;
+			m->gspeed += (m->gravity * 0.1) * dt;
 			m->y += dt * m->gspeed;
-			//@todo improve, reset contact surface to avoid player moving "on..." :-)
-			if (m->gspeed > 0.1) CtrMediaContactSurface = NULL;
+			if (CtrMediaContactSurface && m == player) {
+				if (!(
+				m->gravity &&
+				m->x+(m->w/m->anims) >= CtrMediaContactSurface->x &&
+				m->x <= CtrMediaContactSurface->x+CtrMediaContactSurface->w/CtrMediaContactSurface->anims &&
+				m->y+m->h <= CtrMediaContactSurface->y+(m->h/2))) {
+					CtrMediaContactSurface = NULL;
+				}
+			}
 		} else if (m->gravity >= 0.1){
 			m->y += dt * m->gravity;
 		}
@@ -1120,7 +1234,7 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 	}
 	if (controllableObject) {
 		player = (MediaIMG*) controllableObject->value.rvalue->ptr;
-		if (CtrMediaControlMode == 1 && m == player && CtrMediaContactSurface && CtrMediaContactSurface->mov && CtrMediaContactSurface->dir > -1 && !m->mov) {
+		if (CtrMediaControlMode == 1 && m == player && CtrMediaContactSurface && CtrMediaContactSurface->mov && CtrMediaContactSurface->dir > -1){
 			m->x += dt * CtrMediaContactSurface->mov * cos(CtrMediaContactSurface->dir * M_PI / 180);
 			m->y -= dt * CtrMediaContactSurface->mov * sin(CtrMediaContactSurface->dir * M_PI / 180);
 		}
@@ -1627,14 +1741,6 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 				CtrMediaJumpHeight = player->h * CtrMediaJumpHeightFactor;
 				CtrMediaJump = 2;
 			}
-			if (CtrMediaJump == 2) {
-				player->y -= log(CtrMediaJumpHeight);
-				CtrMediaJumpHeight /= 1.2;
-				if (CtrMediaJumpHeight < 1) {
-					CtrMediaJump = 3;
-					CtrMediaJumpHeight = 0;
-				}
-			}
 		}
 		CtrMediaTicks2 = SDL_GetTicks64();
 		for(int i = 0; i < IMGCount; i ++) {
@@ -2035,7 +2141,7 @@ SDL_RWops* ctr_internal_media_load_asset(char* asset_name, char asset_type) {
 			SDL_RWread(asset_file, &next_entry, 8, 1);
 			uint64_t curpos = SDL_RWtell(asset_file);
 			uint64_t read_size = next_entry - curpos;
-			char* read_buffer = ctr_heap_allocate_tracked(read_size);
+			char* read_buffer = malloc(read_size);
 			SDL_RWread(asset_file, read_buffer, 1, read_size);
 			res = SDL_RWFromMem(read_buffer, read_size);
 			break;
