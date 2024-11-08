@@ -2050,9 +2050,20 @@ ctr_object* ctr_color_a(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_object_property(myself, "a", NULL);
 }
 
+void ctr_media_destructor(ctr_resource* rs) {
+	ctr_internal_media_clear_edcache();
+}
+
 ctr_object* ctr_media_new(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
+	// although media does not have a real resource we want to register
+	// a destructor to clean-up stuff (like edcache)
+	ctr_resource* rs = ctr_heap_allocate( sizeof(ctr_resource) );
+	rs->ptr = NULL;
+	rs->destructor = &ctr_media_destructor;
 	instance->link = myself;
+	instance->value.rvalue = rs;
+	instance->info.sticky = 1; // just in case, dont let gc clean it up
 	return instance;
 }
 
