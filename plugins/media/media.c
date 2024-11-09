@@ -772,7 +772,7 @@ void ctr_internal_media_image_resolvecollision1(
 	}
 }
 
-void ctr_internal_media_img_resolvecollision(MediaIMG* m, MediaIMG* m2) {
+void ctr_internal_media_image_resolvecollision(MediaIMG* m, MediaIMG* m2) {
 	SDL_Rect r, rold, r2;
 	r = ctr_internal_media_image_maprect(m); // obtain shape target position
 	double nx, ny; int newy;
@@ -1028,7 +1028,7 @@ void ctr_internal_media_detect_collisions(MediaIMG* m, SDL_Rect r) {
 						m->gspeed = 0;
 						if (m == player) CtrMediaContactSurface = m2;
 				} else {
-						ctr_internal_media_img_resolvecollision(m, m2);
+						ctr_internal_media_image_resolvecollision(m, m2);
 						m->mov = 0;
 				}
 				if (player && m == player && CtrMediaJump == 2) {
@@ -2872,6 +2872,7 @@ ctr_object* ctr_img_color(ctr_object* myself, ctr_argument* argumentList) {
 	uint8_t b = (uint8_t)ctr_color_b(argumentList->object, NULL)->value.nvalue;
 	uint8_t a = (uint8_t)ctr_color_a(argumentList->object, NULL)->value.nvalue;
 	image->color = (SDL_Color) { r, g, b, a };
+	ctr_internal_media_clear_edcache();
 	return myself;
 }
 
