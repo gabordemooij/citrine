@@ -37,6 +37,7 @@
 
 #define CTR_MEDIA_FX_FLAG_MEDIA_TEST 0
 #define CTR_MEDIA_FX_FLAG_MEDIA_REMAP_ALL 1
+#define CTR_MEDIA_FX_FLAG_AUDIO_JUMP 2000
 
 
 uint64_t CtrMediaTicks1 = 0;
@@ -185,7 +186,12 @@ uint8_t CtrMediaEventListenFlagGamePadBtnDown;
 uint8_t CtrMediaEventListenFlagTimer;
 uint8_t CtrMediaEventListenFlagStep;
 
+// FX flags
 int CtrMediaFXFlagMapABXY2Up;
+int CtrMediaFXFlagJumpSFX;
+
+// FX data
+ctr_object* CtrMediaFXFlagJumpSound;
 
 
 void ctr_internal_img_render_text(ctr_object* myself);
@@ -980,6 +986,12 @@ void ctr_internal_media_keydown_up(int* dir, int* c4speed) {
 			if (player->gravity >= 1 && CtrMediaControlMode == 1) {
 				if (CtrMediaJump == 0) {
 					CtrMediaJump = 1;
+					if (CtrMediaFXFlagJumpSFX && CtrMediaFXFlagJumpSound) {
+						MediaAUD* jumpsound = ctr_internal_get_audio_from_object(CtrMediaFXFlagJumpSound);
+						if (jumpsound) {
+							Mix_PlayChannel(1, (Mix_Chunk*) jumpsound->blob, 0);
+						}
+					}
 				}
 			}
 			else if ((CtrMediaControlMode == 1 || CtrMediaControlMode == 2)) {
@@ -4437,6 +4449,13 @@ ctr_object* ctr_media_fx(ctr_object* myself, ctr_argument* argumentList) {
 		// for now we only set TRUE (0 or else...)
 		// other options might be added later...
 		CtrMediaFXFlagMapABXY2Up = ctr_tonum(data);
+	}
+	else if (fx_code == CTR_MEDIA_FX_FLAG_AUDIO_JUMP) {
+		// associate a sound object with jumping in platform mode
+		// regardless of device (key, gamepad, touch) on a separate
+		// audio channel.
+		CtrMediaFXFlagJumpSFX = ctr_tonum(data);
+		CtrMediaFXFlagJumpSound = argumentList->next->object;
 	}
 	return myself;
 }
