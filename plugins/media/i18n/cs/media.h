@@ -79,4 +79,5 @@
 #define CTR_DICT_UTF8_SET                   "utf8:"
 #define CTR_DICT_NEW_TYPE_SET               "new:type:"
 #define CTR_DICT_FX                         "efekt:možnosti:"
-#define CTR_DICT_MASK_SET                   "zmrazit:"
+#define CTR_DICT_FREEZE_SET                 "zmrazit:"
+#define CTR_DICT_MASK_SET                   "maska:"
