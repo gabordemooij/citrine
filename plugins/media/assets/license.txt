@@ -1,7 +1,7 @@
 End-user license agreement
 
 Citrine Programming Language
-Copyright (c) 2024, Gabor de Mooij
+Copyright (c) 2025, Gabor de Mooij
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
