@@ -57,7 +57,6 @@ int CtrMediaPrevClickX = 0;
 int CtrMediaPrevClickY = 0;
 int CtrMediaPrevClickTime = 0;
 char CtrMediaDoubleClick = 0;
-ctr_size CtrMediaAutoReplaceRuleLen = 0;
 int CtrMediaJumpHeightFactor = 100;
 int CtrMediaControlMode = 0;
 int CtrMediaRotation = 0;
@@ -92,14 +91,6 @@ struct CtrMediaTextRenderCacheItem {
 };
 typedef struct CtrMediaTextRenderCacheItem CtrMediaTextRenderCacheItem;
 CtrMediaTextRenderCacheItem CtrMediaEdCache[400];
-
-struct CtrMediaAutoReplaceRule {
-	char* word;		char* replacement;
-};
-
-typedef struct CtrMediaAutoReplaceRule CtrMediaAutoReplaceRule; 
-
-CtrMediaAutoReplaceRule CtrMediaAutoReplaceRules[100];
 
 struct MediaIMG {
 	double			x;			int				h;
@@ -235,7 +226,6 @@ void ctr_internal_media_clear_edcache() {
 void ctr_internal_media_reset() {
 	controllableObject = NULL;
 	focusObject = NULL;
-	CtrMediaAutoReplaceRule* rule;
 	int i;
 	for(i = 0; i < IMGCount; i++) {
 		MediaIMG* mediaImage = &mediaIMGs[i];
@@ -244,13 +234,7 @@ void ctr_internal_media_reset() {
 			mediaImage->text = NULL;
 		}
 	}
-	for(i = 0; i < CtrMediaAutoReplaceRuleLen; i++) {
-		rule = &CtrMediaAutoReplaceRules[i];
-		ctr_heap_free(rule->word);
-		ctr_heap_free(rule->replacement);
-	}
 	ctr_internal_media_clear_edcache();
-	CtrMediaAutoReplaceRuleLen = 0;
 	IMGCount = 0;
 	AUDCount = 0;
 	CtrMediaJumpHeight = 0;
@@ -262,7 +246,6 @@ void ctr_internal_media_reset() {
 	CtrMediaPrevClickY = 0;
 	CtrMediaPrevClickTime = 0;
 	CtrMediaDoubleClick = 0;
-	CtrMediaAutoReplaceRuleLen = 0;
 	CtrMediaJumpHeightFactor = 100;
 	CtrMediaControlMode = 0;
 	CtrMediaRotation = 0;
@@ -627,22 +610,6 @@ ctr_object* ctr_media_left_top( ctr_object* myself, ctr_argument* argumentList )
 	CtrMediaViewport.y = (int) ctr_tonum(argumentList->next->object);
 	CtrMediaZoom = 0;
 	return myself;
-}
-
-void ctr_internal_media_autoreplace(MediaIMG* image) {
-	int i, j;
-	char len;
-	CtrMediaAutoReplaceRule* rule;
-	for(i = 0; i < CtrMediaAutoReplaceRuleLen; i++) {
-		rule = &CtrMediaAutoReplaceRules[i];
-		len = strlen(rule->word);
-		if (strncmp(image->text+CtrMediaInputIndex-len, rule->word, len)==0) {
-			for (j = 0; j < len; j++) {
-				ctr_internal_media_textinsert(image, "\b");
-			}
-			ctr_internal_media_textinsert(image, rule->replacement);
-		}
-	}
 }
 
 void ctr_internal_cursormove(int x, int y) {
@@ -1726,7 +1693,6 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 						MediaIMG* focusImage = (MediaIMG*) focusObject->value.rvalue->ptr;
 						if (focusImage->editable) {
 							ctr_internal_media_textinsert(focusImage,event.text.text);
-							ctr_internal_media_autoreplace(focusImage);
 							ctr_internal_img_render_text(focusObject);
 						}
 					}
