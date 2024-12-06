@@ -1,0 +1,5 @@
+>> m := Media new.
+>> html := Network send: None to: ['https://citrine-lang.org/'].
+>> meta := html split: ['<meta name="description" content="'].
+meta := meta at: 2, split: ['"'], at: 1.
+m show: ['Fetched:'] + meta.

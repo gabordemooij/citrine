@@ -1,0 +1,47 @@
+>> m := Media new.
+m link: ( Package new: ['demodata'] ).
+
+m width: 350 height: 175.
+
+>> rock  := Image new: ['rock.png'].
+>> rock2 := Image new: ['rock.png'].
+>> hiker := Image new: ['hiker.png'].
+
+hiker
+	x: 100 y: 100,
+	speed: 2,
+	reel: 2 speed: 10,
+	gravity: 1,
+	friction: 0.5,
+	controllable: True.
+
+rock
+	x: 150 y: 300,
+	wall: True.
+	
+rock2
+	x: 250 y:180,
+	wall: True.
+	
+m on: ['start'] do: {
+	rock to-x: 150 y: 200.
+	rock2 to-x: 380 y: 180.
+}.
+
+rock on: ['destination'] do: {
+	self y? <=: 200, true: { 
+		self to-x: 150 y: 300.
+	}, else: {
+		self to-x: 150 y: 200.
+	}.
+}.
+
+rock2 on: ['destination'] do: {
+	self x? >=: 380, true: { 
+		self to-x: 250 y: 180.
+	}, else: {
+		self to-x: 380 y: 180.
+	}.
+}.
+
+m screen: ['demo.png'].

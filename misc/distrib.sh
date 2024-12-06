@@ -18,7 +18,8 @@ mkdir dist/Linux
 mkdir dist/Linux/ISO
 mkdir dist/Linux/OUT
 
-VERSION="1_0_0beta5"
+VERSION="1_0_0beta7" #for files
+VERSION_NAME="1.0b7" #for display
 
 declare -a langs=("en" "nl" "fy" "de" "fr" "no" "ru" "cs" "it" "hi" "pt_br" "uz" "pl" "id" "zh2" "fa" "es")
 for lang in "${langs[@]}"
@@ -55,17 +56,20 @@ cp plugins/media/assets/picto.ico dist/Win64/ISO/$lang/pictogram.ico
 
 # Translate examples
 
-./bin/Linux/ctren -t /tmp/dict_all.dict demo1.ctr > dist/Win64/ISO/$lang/demo1.ctr 2>/tmp/err1.log
-./bin/Linux/ctren -t /tmp/dict_all.dict demo2.ctr > dist/Win64/ISO/$lang/demo2.ctr 2>/tmp/err2.log
-./bin/Linux/ctren -t /tmp/dict_all.dict demo3.ctr > dist/Win64/ISO/$lang/demo3.ctr 2>/tmp/err3.log
-./bin/Linux/ctren -t /tmp/dict_all.dict demo4.ctr > dist/Win64/ISO/$lang/demo4.ctr 2>/tmp/err4.log
-./bin/Linux/ctren -t /tmp/dict_all.dict demo5.ctr > dist/Win64/ISO/$lang/demo5.ctr 2>/tmp/err5.log
-./bin/Linux/ctren -t /tmp/dict_all.dict demo6.ctr > dist/Win64/ISO/$lang/demo6.ctr 2>/tmp/err6.log
-./bin/Linux/ctren -t /tmp/dict_all.dict demo7.ctr > dist/Win64/ISO/$lang/demo7.ctr 2>/tmp/err7.log
-./bin/Linux/ctren -t /tmp/dict_all.dict demo8.ctr > dist/Win64/ISO/$lang/demo8.ctr 2>/tmp/err8.log
-./bin/Linux/ctren -t /tmp/dict_all.dict demo9.ctr > dist/Win64/ISO/$lang/demo9.ctr 2>/tmp/err9.log
-./bin/Linux/ctren -t /tmp/dict_all.dict demo10.ctr > dist/Win64/ISO/$lang/demo10.ctr 2>/tmp/err10.log
-./bin/Linux/ctren -t /tmp/dict_all.dict demo11.ctr > dist/Win64/ISO/$lang/demo11.ctr 2>/tmp/err11.log
+./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo1.ctr > dist/Win64/ISO/$lang/demo1.ctr 2>/tmp/err1.log
+./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo2.ctr > dist/Win64/ISO/$lang/demo2.ctr 2>/tmp/err2.log
+./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo3.ctr > dist/Win64/ISO/$lang/demo3.ctr 2>/tmp/err3.log
+./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo4.ctr > dist/Win64/ISO/$lang/demo4.ctr 2>/tmp/err4.log
+./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo5.ctr > dist/Win64/ISO/$lang/demo5.ctr 2>/tmp/err5.log
+./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo6.ctr > dist/Win64/ISO/$lang/demo6.ctr 2>/tmp/err6.log
+./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo7.ctr > dist/Win64/ISO/$lang/demo7.ctr 2>/tmp/err7.log
+./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo8.ctr > dist/Win64/ISO/$lang/demo8.ctr 2>/tmp/err8.log
+./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo9.ctr > dist/Win64/ISO/$lang/demo9.ctr 2>/tmp/err9.log
+./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo10.ctr > dist/Win64/ISO/$lang/demo10.ctr 2>/tmp/err10.log
+./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo11.ctr > dist/Win64/ISO/$lang/demo11.ctr 2>/tmp/err11.log
+./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/pak-o-mat.ctr > dist/Win64/ISO/$lang/pak-o-mat.ctr 2>/tmp/pak-o-mat.log
+sed -e "s/ctrnl/ctr$lang/g" misc/distrib/assets/export.bat > dist/Win64/ISO/$lang/export.bat
+
 
 
 # Copy assets to setup creator work dir
@@ -78,13 +82,18 @@ cp -R dist/Win64/ISO/$lang ~/.wine/drive_c/InnoSetupSourceDir/dist
 
 # Copy setup-creator script to work dir
 suffix="$(echo "$lang" | tr 'a-z' 'A-Z')"
-sed -e "s/096/$VERSION/g" -e "s/ctrnl/ctr$lang/g" -e "s/CitrineNL/Citrine$suffix/" plugins/media/citrine.iss > ~/.wine/drive_c/InnoSetupSourceDir/citrine.iss
+sed -e "s/{VERSION}/$VERSION/g" \
+	-e "s/{VERSION_NAME}/$VERSION_NAME/g" \
+	-e "s/ctrnl/ctr$lang/g" \
+	-e "s/CitrineNL/Citrine$suffix/" \
+	plugins/media/citrine.iss > ~/.wine/drive_c/InnoSetupSourceDir/citrine.iss
 
 # Start setup-creator
 wine "C:\\Program Files (x86)\\Inno Setup 6\\ISCC.exe" "C:\\InnoSetupSourceDir\\citrine.iss"
 
 # Copy to output dir
 mkdir -p dist/Win64/OUT/$lang/
+rm dist/Win64/OUT/$lang/* # clean up
 cp ~/.wine/drive_c/InnoSetupSourceDir/Output/Citrine${VERSION}.exe dist/Win64/OUT/$lang/
 
 # Zip it
@@ -111,8 +120,10 @@ cp bin/Linux/ctr$lang dist/Linux/ISO/$lang/
 cp plugins/media/libctrmedia.so dist/Linux/ISO/$lang/mods/media/
 rm dist/Linux/ISO/$lang/*.dll
 rm dist/Linux/ISO/$lang/*.exe
-sed -e "s/ctrnl/ctr$lang/g" plugins/media/assets/citrine.sh > dist/Linux/ISO/$lang/citrine.sh
-chmod uog+x dist/Linux/ISO/$lang/citrine.sh
+sed -e "s/ctrapp_nl/ctrapp_$lang/g" misc/distrib/assets/export.sh > dist/Linux/ISO/$lang/export.sh
+cp misc/distrib/assets/export.desktop dist/Linux/ISO/$lang/export.desktop
+
+
 tar cvzf "dist/Linux/OUT/$lang/citrine${lang}${VERSION}.tar.gz" -C dist/Linux/ISO/ ${lang}
 
 
@@ -124,6 +135,7 @@ cp  dist/Linux/ISO/${lang}/ctr${lang} /tmp/${lang}/Citrine.AppDir/usr/bin/
 cp  -R dist/Linux/ISO/${lang}/mods /tmp/${lang}/Citrine.AppDir/
 
 sed -e "s/ctrnl/ctr$lang/g" misc/Citrine.AppDir/AppRun > /tmp/${lang}/Citrine.AppDir/AppRun
+
 
 ./appimagetool-x86_64.AppImage /tmp/${lang}/Citrine.AppDir citrine_app ; cp citrine_app dist/Linux/ISO/${lang}/ctrapp_${lang}
 chmod uog+x dist/Linux/ISO/${lang}/ctrapp_${lang}

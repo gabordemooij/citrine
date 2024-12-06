@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=export
+Comment=
+Exec=bash export.sh %F
+Icon=
+Path=
+Terminal=true
+StartupNotify=false
