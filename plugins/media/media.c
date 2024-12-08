@@ -1137,7 +1137,7 @@ void ctr_internal_media_render_image(MediaIMG* m, SDL_Rect r, SDL_Rect s, MediaI
 }
 
 void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
-	MediaIMG* player;
+	MediaIMG* player = NULL;
 	// keep a constant physics speed by calculating the timediff
 	double delta_in_seconds = ((CtrMediaTicks2 - CtrMediaTicks1) / 1000.0f );
 	double dt  = 60 * delta_in_seconds;
