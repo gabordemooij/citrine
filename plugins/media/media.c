@@ -1847,8 +1847,8 @@ ctr_object* ctr_line_new(ctr_object* myself, ctr_argument* argumentList) {
  * >> a := Point new x: 10 y: 10.
  * >> b := Point new x: 20 y: 20.
  * >> c := Line from: a to: b.
- * Out write: c from, stop.
- * Out write: c to, stop.
+ * Out write: c from x?, stop.
+ * Out write: c to y?, stop.
  */
 ctr_object* ctr_line_from_to(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_internal_object_property(myself, CTR_DICT_FROM, argumentList->object);
@@ -1996,7 +1996,7 @@ ctr_object* ctr_color_new(ctr_object* myself, ctr_argument* argumentList) {
  *
  * @example
  * >> media := Media new.
- * >> x := Colour new red: 100 green: 150 blue: 200.
+ * >> x := Color new red: 100 green: 150 blue: 200.
  * Out write: x red, stop.
  * Out write: x green, stop.
  * Out write: x blue, stop.
@@ -2815,10 +2815,10 @@ ctr_object* ctr_img_autoplay(ctr_object* myself, ctr_argument* argumentList) {
 
  /*
  *  @def
- * [ Image ] reel: [ Number ] rate: [Number].
+ * [ Image ] reel: [ Number ] speed: [Number].
  *
  * @example
- * image animations: 2 rate: 20.
+ * image reel: 2 speed: 20.
  *
  * @result
  * @info-image-animations
@@ -2878,7 +2878,7 @@ ctr_object* ctr_img_background_color(ctr_object* myself, ctr_argument* argumentL
 
 /**
  * @def
- * [ Image ] align x: [ Number ] y: [ Number ]
+ * [ Image ] align-x: [ Number ] y: [ Number ]
  * 
  * @example
  * image align-x: 10 y: 10.
@@ -3121,10 +3121,10 @@ ctr_object* ctr_img_text(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Image ] draw: [ Sequence ] color: [ Colour ]
+ * [ Image ] draw: [ Sequence ] color: [ Color ]
  * 
  * @example
- * image draw: Sequence new ; line ; point color: blue.
+ * image draw: ( Sequence new ; line ; point ) color: blue.
  * 
  * @result
  * [[img_draw]]
@@ -4103,13 +4103,13 @@ ctr_object* ctr_media_link_package(ctr_object* myself, ctr_argument* argumentLis
 
 /**
  * @def
- * [ Package ] add: [ Object ]
+ * [ Package ] append: [ Object ]
  * 
  * @example
  * >> media := Media new.
  * >> a := Package new: ['assets.dat'].
  * >> b := Image new: ['a.png'].
- * a add: b.
+ * a append: b.
  * 
  * @result
  * @info-package-add
