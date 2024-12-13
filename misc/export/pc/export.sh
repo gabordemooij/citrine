@@ -2,7 +2,7 @@
 
 # usage (from rootdir & first compile regular!):
 # Linux:
-# MEDIALIB="libctrmedia.so" MAKEFILE="makefile" ISO="nl" bash misc/export/pc/export.sh
+# OS="Linux" MEDIALIB="libctrmedia.so" MAKEFILE="makefile" ISO="nl" bash misc/export/pc/export.sh
 # Win64:
 # MEDIALIB="libctrmedia.dll" MAKEFILE="makefile.win64" ISO="nl" CC=x86_64-w64-mingw32-gcc-win32 DLLTOOL=x86_64-w64-mingw32-dlltool bash misc/export/pc/export.sh
 # don't forget to copy libs!
