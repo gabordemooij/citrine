@@ -116,7 +116,7 @@ int ctr_init() {
 	ctr_clex_keyword_assignment_len = strlen( CTR_DICT_ASSIGN );
 	ctr_clex_keyword_return_len = strlen( CTR_DICT_RETURN );
 	ctr_clex_param_prefix_char = CTR_DICT_PARAMETER_PREFIX[0];
-	ctr_gc_memlimit = 10 * 1000000; /* Default memory limit: 10MB */
+	ctr_gc_memlimit = 64 * 1000000; /* Default memory limit: 64MB */
 	ctr_gc_mode = 1;                /* Default GC mode: regular GC, no pool. */
 	return 0;
 }
