@@ -1,4 +1,8 @@
 # Create Citrine distributions for every language and every system
+
+echo "DISTRUBUTION SCRIPT STARTED"
+echo "RELEASING NEW VERSION OF CITRINE PROGRAMMING LANGUAGE"
+
 # Windows 64-bit version
 
 # Go back to Citrine root dir
@@ -19,11 +23,18 @@ mkdir dist/Linux/ISO
 mkdir dist/Linux/OUT
 
 VERSION="1_0_0beta7" #for files
-VERSION_NAME="1.0b7" #for display
+VERSION_NAME="1.0.0b7" #for display
+VERSION_DEB="-1"     #for debian
+
+echo "VERSION = $VERSION"
 
 declare -a langs=("en" "nl" "fy" "de" "fr" "no" "ru" "cs" "it" "hi" "pt_br" "uz" "pl" "id" "zh2" "fa" "es")
 for lang in "${langs[@]}"
 do
+
+echo "=== LANGUAGE $lang ==="
+echo ""
+echo "=== PLATFORM: WINDOWS 64 SETUP ==="
 
 # Compile for Windows
 ISO="$lang" CC=x86_64-w64-mingw32-gcc-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64 clean
@@ -107,6 +118,9 @@ cd ../../../../
 cp -R dist/Win64/ISO/$lang dist/Linux/ISO/$lang
 mkdir -p dist/Linux/OUT/$lang
 
+echo "=== PLATFORM: LINUX 64 TAR ==="
+
+
 # Compile for Linux
 OS="Linux" ISO="$lang" make -f makefile clean
 OS="Linux" ISO="$lang" make -f makefile
@@ -123,9 +137,34 @@ rm dist/Linux/ISO/$lang/*.exe
 sed -e "s/ctrapp_nl/ctrapp_$lang/g" misc/distrib/assets/export.sh > dist/Linux/ISO/$lang/export.sh
 cp misc/distrib/assets/export.desktop dist/Linux/ISO/$lang/export.desktop
 
-
+# Create tar distribution
 tar cvzf "dist/Linux/OUT/$lang/citrine${lang}${VERSION}.tar.gz" -C dist/Linux/ISO/ ${lang}
 
+echo "=== PLATFORM: LINUX 64 DEB ==="
+
+
+# Create .deb
+rm -rf /tmp/${lang}deb
+mkdir /tmp/${lang}deb
+DEBPACKAGE=/tmp/${lang}deb/citrine_${VERSION}${VERSION_DEB}
+mkdir $DEBPACKAGE
+mkdir $DEBPACKAGE/DEBIAN
+mkdir $DEBPACKAGE/usr
+mkdir $DEBPACKAGE/usr/bin
+cp misc/distrib/assets/citrine_init.sh $DEBPACKAGE/usr/bin/citrine_init.sh
+
+mkdir $DEBPACKAGE/usr/share
+cp -R dist/Linux/ISO/$lang $DEBPACKAGE/usr/share/citrine
+sed -e "s/ctrapp_nl/ctr$lang/g" misc/distrib/assets/export.sh > $DEBPACKAGE/usr/share/citrine/export.sh
+sed -e "s/{VERSION}/${VERSION_NAME}/g" misc/distrib/assets/control > $DEBPACKAGE/DEBIAN/control
+cp misc/distrib/assets/postinst $DEBPACKAGE/DEBIAN/postinst
+chmod uog+x $DEBPACKAGE/DEBIAN/postinst
+chmod uog-w $DEBPACKAGE/DEBIAN/postinst
+dpkg-deb --build $DEBPACKAGE
+mv /tmp/${lang}deb/citrine_${VERSION}${VERSION_DEB}.deb dist/Linux/OUT/${lang}/
+
+
+echo "=== PLATFORM: LINUX 64 APPIMAGE ==="
 
 # Create Linux AppImage distribution
 rm -rf /tmp/${lang}/Citrine.AppDir
@@ -144,6 +183,9 @@ chmod uog+x dist/Linux/ISO/${lang}/ctrapp_${lang}
 
 #chmod uog+x dist/Linux/ISO/${lang}/citrine_app.sh
 tar cvzf "dist/Linux/OUT/$lang/citrine${lang}${VERSION}ai.tar.gz" -C dist/Linux/ISO/ ${lang}
+
+echo "=== PLATFORM: WINDOWS 32 ZIP ==="
+
 
 # Compile for Windows 32bit
 ISO="$lang" CC=i686-w64-mingw32-gcc-win32 DLLTOOL=i686-w64-mingw32-dlltool make -f makefile.win32 clean
