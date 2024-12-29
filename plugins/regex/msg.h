@@ -1,1 +1,0 @@
-#define CTR_REGEX_PLUGIN "Regex"
