@@ -843,6 +843,11 @@ int ctr_internal_media_mouse_down(SDL_Event event) {
 				CtrMediaPrevClickY = event.button.y;
 				CtrMediaPrevClickTime = SDL_GetTicks64();
 				ctr_internal_img_render_text(focusObject);
+				SDL_StartTextInput();
+			}
+			else {
+				focusObject = NULL;
+				SDL_StopTextInput();
 			}
 			ctr_argument* args = ctr_heap_allocate(sizeof(ctr_argument));
 			ctr_send_message(mediaIMGs[i].ref, CTR_DICT_ON_CLICK, strlen(CTR_DICT_ON_CLICK), args);
