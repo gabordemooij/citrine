@@ -11,8 +11,8 @@ install-libctrmedia.dylib: libctrmedia.dylib
 
 libctrmedia.dylib: media.o
 	cc ${LDFLAGS} \
-		-F/Library/Frameworks -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework SDL2_mixer\
-		-rpath /Library/Frameworks \
+		-F/Users/gabordemooij/Library/Frameworks -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework SDL2_mixer\
+		-rpath @executable_path \
 		-lcurl -o libctrmedia.dylib media.o
 
 media.o:
