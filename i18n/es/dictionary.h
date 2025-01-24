@@ -122,7 +122,7 @@
 #define CTR_DICT_TIME	          "tiempo"
 #define CTR_DICT_RESPOND_TO       "responder:"
 #define CTR_DICT_RESPOND_TO_AND   "responder:y:"
-#define CTR_DICT_SHELL            "Comando-de-Sistema:"
+#define CTR_DICT_SHELL            "sistema:"
 #define CTR_DICT_SWEEP            "limpiar-memoria"
 #define CTR_DICT_MEMORY_LIMIT	  "memoria:"
 #define CTR_DICT_MEMORY           "memoria"
