@@ -1,9 +1,9 @@
 # Usage example:
-# ISO="nl" PACKAGE="media" NAME="libctrmedia.dylib" make plugin
+# FRAMEWORKS="/path/to/frameworks" ISO="nl" PACKAGE="media" NAME="libctrmedia.dylib" make plugin
 
 LDFLAGS= -shared -undefined dynamic_lookup
-CFLAGS= -D REPLACE_MEDIA_ESPEAK -D NO_MEDIA_ESPEAK\
-		-D REPLACE_MEDIA_SOCK -D MAC_MEDIA_SOCK
+CFLAGS=
+
 		
 
 install-libctrmedia.dylib: libctrmedia.dylib
@@ -11,12 +11,12 @@ install-libctrmedia.dylib: libctrmedia.dylib
 
 libctrmedia.dylib: media.o
 	cc ${LDFLAGS} \
-		-F/Library/Frameworks -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework SDL2_mixer\
-		-rpath /Library/Frameworks \
+		-F${FRAMEWORKS} -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework SDL2_mixer\
+		-lffi -rpath @executable_path \
 		-lcurl -o libctrmedia.dylib media.o
 
 media.o:
-	cc ${CFLAGS} -D SDL -D LIBCURL -I .  -c media.c  -I ../../i18n/${ISO} -I i18n/${ISO} -Wall -Wunused-but-set-variable -fPIC -o media.o
+	cc ${CFLAGS} -D SDL -D LIBCURL -D FFI -I .  -c media.c  -I ../../i18n/${ISO} -I i18n/${ISO} -Wall -Wunused-but-set-variable -fPIC -o media.o
 
 clean:
 	rm -rf *.dylib
