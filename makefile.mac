@@ -1,6 +1,6 @@
 CFLAGS = -O2 -std=c99 -mtune=native -Wall -D CTRLANG=${ISO} -D PATH_MAX=1024 \
           -D REPLACE_PLUGIN_SYSTEM    -D MACOS_PLUGIN_SYSTEM
-OBJS = media.o test.o siphash.o utf8.o memory.o util.o base.o collections.o file.o system.o \
+OBJS = ${EMBED} test.o siphash.o utf8.o memory.o util.o base.o collections.o file.o system.o \
        world.o lexer.o parser.o walker.o translator.o citrine.o portability.o 
 
 

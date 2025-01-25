@@ -56,7 +56,7 @@ cp demodata dist/osx/ISO/$lang/
 rm -rf /tmp/dist$lang
 cp -R dist/osx/ISO/$lang /tmp/dist$lang
 cp -R ~/frameworks/* /tmp/dist$lang # put SDL2 frameworks for macos here to craft dist
-
+#cp -R ~/libs/* /tmp/dist$lang # other libs
 
 hdiutil create -volname ctr${lang}${VERSION} -srcfolder /tmp/dist$lang -ov -format UDZO dist/osx/OUT/$lang/ctr${lang}${VERSION}.dmg
 
