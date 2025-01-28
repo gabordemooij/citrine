@@ -13,9 +13,6 @@ uint16_t CtrGUIWidth = 800;
 uint16_t CtrGUIHeight = 400;
 ctr_object* guiObject;
 
-
-
-
 void ctr_gui_internal_event_handler(lv_event_t* e) {
 	ctr_argument* arguments;
 	char* message;
@@ -23,10 +20,8 @@ void ctr_gui_internal_event_handler(lv_event_t* e) {
 	int event_code = lv_event_get_code(e);
 	char* event_name = lv_event_code_get_name(lv_event_get_code(e));
 	lv_obj_t* target = lv_event_get_target(e);
-	printf("---- event: %s \n", event_name);
 	uint32_t id = (uint32_t) lv_obj_get_id(target);
 	if (id != NULL) {
-		printf("id %p \n", id);
 		arguments = ctr_heap_allocate(sizeof(ctr_argument));
 		arguments->object = ctr_build_number_from_float( (double) id );
 		arguments->next = NULL;
@@ -36,7 +31,6 @@ void ctr_gui_internal_event_handler(lv_event_t* e) {
 		}
 		ctr_send_message(guiObject, message, strlen(message), arguments);
 		ctr_heap_free(arguments);
-		//ctr_heap_free(message);
 	}
 }
 
@@ -45,12 +39,9 @@ void ctr_gui_destructor(ctr_resource* rs) {
 }
 
 ctr_object* ctr_gui_new(ctr_object* myself, ctr_argument* argumentList) {
-	printf("Nieuwe GUI!\n");
 	if (guiObject != NULL) {
-		printf("singleton!\n");
 		return guiObject;
 	}
-	printf("guiObject @ %p \n",  &guiObject);
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
 	ctr_resource* rs = ctr_heap_allocate( sizeof(ctr_resource) );
 	rs->ptr = NULL;
@@ -87,7 +78,6 @@ ctr_object* ctr_gui_xml_at_set(ctr_object* myself, ctr_argument* argumentList) {
 		lv_obj_t* old = lv_obj_get_child(child, i);
 		lv_obj_delete(old);
 	}
-	printf("XML change: %d at: %p name: %s\n", (int) strlen(xml), child, name);
 	lv_xml_component_register_from_data(name, xml);
 	lv_xml_create(child, name, NULL);
 	ctr_heap_free(xml);
@@ -97,11 +87,8 @@ ctr_object* ctr_gui_xml_at_set(ctr_object* myself, ctr_argument* argumentList) {
 
 
 ctr_object* ctr_gui_screen(ctr_object* myself, ctr_argument* argumentList) {
-	printf("Start GUI!\n");
 	lv_init();
-    printf("sdl\n");
     lv_sdl_window_create(CtrGUIWidth, CtrGUIHeight);
-    printf("created window\n");
     lv_group_t * g = lv_group_create();
     lv_group_set_default(g);
     lv_indev_t* mouse = lv_sdl_mouse_create();
@@ -121,12 +108,10 @@ ctr_object* ctr_gui_screen(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_gui_xml_at_set(myself, &xml);
 	//ctr_heap_free(rootname.object);
     uint32_t idle_time;
-	printf("startbericht zenden\n");
 	ctr_argument* arguments = ctr_heap_allocate(sizeof(ctr_argument));
 	arguments->object = CtrStdNil;
 	ctr_send_message(guiObject, CTR_DICT_RUN, strlen(CTR_DICT_RUN), arguments);
 	ctr_heap_free(arguments);
-	printf("startbericht verzonden\n");
     /*Handle LVGL tasks*/
     while(1) {
 		idle_time = lv_timer_handler(); /*Returns the time to the next timer execution*/
