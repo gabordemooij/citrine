@@ -1,0 +1,89 @@
+# Título.....: Árbol-XML
+# Autor......: Gabor de Mooij (c) copyright 2025
+# Fecha......: 2025-01-28
+# Licencia...: BSD-3/MIT
+# Versión....: 1.0
+#
+# Descripción:
+# Este es un árbol XML para crear interfaces de usuario LVGL.
+#
+# Dependencias:
+# - supplementoes
+
+>> Árbol-XML := Objeto nuevo.
+
+Árbol-XML en: ['nuevo'] hacer: { <- yo nuevo inicializar. }.
+
+Árbol-XML en: ['inicializar'] hacer: {
+	mi textmode := Falso.
+	mi str := [''].
+	mi tags := Serie nuevo.
+	mi attrs := Lista nuevo.
+	mi valores := Lista nuevo.
+	mi names := Lista nuevo.
+	mi elementmode := Falso.
+}.
+
+Árbol-XML en: ['nombres:atributos:valores:'] hacer: { :names :attrs :valores
+	mi attrs := attrs.
+	mi valores := valores.
+	mi names := names.
+}.
+
+
+Árbol-XML en: ['responder:'] hacer: { :message
+	
+	>> tag := (mi names ? message alternancia: message).
+
+	mi tags adjuntar: tag.
+	mi str adjuntar: (
+		['<tag '] tag: tag 
+	).
+	mi elementmode := Falso.
+}.
+
+Árbol-XML en: ['responder:y:'] hacer: { :message :arg
+	message := message - [':'].
+	mi textmode verdadero: {
+		mi textmode := Falso.
+		mi str adjuntar: arg.
+	}, otro: {
+		mi str adjuntar: (
+			['%attribute%="%value%" ']
+				%attribute%: (mi attrs ? message alternancia: message),
+				%value%: (mi valores ? arg alternancia: arg)
+		).
+	}.
+}.
+
+
+Árbol-XML en: ['elementos'] hacer: { :message :arg
+	mi str adjuntar: ['>\
+'].
+	mi elementmode := Verdadero.
+}.
+
+Árbol-XML en: ['textual'] hacer: { :message :arg
+	mi textmode := Verdadero.
+}.
+
+
+Árbol-XML en: ['cerrar'] hacer: { :message :arg
+	>> finalizar := mi tags toma-el-último.
+	mi elementmode verdadero: {
+		mi str adjuntar: (['\n</tag>'] tag: finalizar).
+	}, otro: {
+		mi str adjuntar: (['></tag>'] tag: finalizar).
+		mi elementmode := Verdadero.
+	}.
+}.
+
+Árbol-XML en: ['claro'] hacer: {
+	mi textmode := Falso.
+	mi str := [''].
+	mi tags := Serie nuevo.
+	mi elementmode := Falso.
+}.
+
+Árbol-XML en: ['texto'] hacer: { <- mi str. }.
+

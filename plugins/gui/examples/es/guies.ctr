@@ -1,0 +1,87 @@
+# Título.....: GUIES
+# Autor......: Gabor de Mooij (c) copyright 2025
+# Fecha......: 2025-01-28
+# Licencia...: BSD-3/MIT
+# Versión....: 1.0
+#
+# Descripción:
+# Este es un programa de demostración que muestra cómo usar el
+# complemento GUI para crear una interfaz gráfica de usuario.
+#
+# Dependencias:
+# - supplementoes
+# - abrolxml
+# - lvgles
+
+>> gui := Gui nuevo.
+>> i := 0.
+
+Programa utilizar: (Ubicación-del-archivo supplementoes).
+Programa utilizar: (Ubicación-del-archivo arbolxml).
+Programa utilizar: (Ubicación-del-archivo lvgles).
+
+gui en: ['click'] hacer: { :info
+	i añadir: 1.
+	(info = 123) verdadero: {
+		gui xml: (b copiar ~contar~: i) nombre: ['btn'] en: 100.
+	}.
+}.
+
+
+
+>> b :=
+LVGLES nuevo
+componente
+elementos
+	vista
+	extiende: ['objeto'],
+	burbuja-evento: ['verdadero'],
+	altura: ['100%'],
+	ancho: ['100%'],
+	elementos
+		boton
+		burbuja-evento: ['verdadero'],
+		id: 123,
+		elementos
+			etiqueta
+			texto: ['~contar~'],
+			cerrar
+		cerrar
+	cerrar
+cerrar
+texto.
+		
+>> a := 
+LVGLES nuevo
+componente
+elementos
+	vista
+	extiende: ['objeto'],
+	id: 100,
+	burbuja-evento: ['verdadero'],
+	altura: ['400px'],
+	ancho: ['800px'],
+	elementos
+		objeto
+		burbuja-evento: ['verdadero'],
+		ancho: ['100%'],
+		altura: ['100%'],
+		elementos
+			boton
+			burbuja-evento: ['verdadero'],
+			id: 123,
+			elementos
+				etiqueta
+				texto: ['HAZ CLIC'],
+				cerrar
+			cerrar
+		cerrar
+	cerrar
+cerrar
+texto.
+
+Salida escribir: a, detener.
+gui pantalla: a.
+
+
+

@@ -1,0 +1,43 @@
+# Title.......: LVGLEN
+# Author......: Gabor de Mooij (c) copyright 2025
+# Date........: 28 januari 2025
+# License.....: BSD-3/MIT
+# Version.....: 1.0
+#
+# Description:
+# LVGLEN is an English XML tree to build
+# graphical user interfaces with LVGL.
+#
+# Dependencies:
+# - supplementen
+# - xmltree
+
+>> LVGLEN := Object new.
+
+LVGLEN on: ['new'] do: {
+
+	>> xml := XML-tree new.
+	
+	xml
+	names: (
+		List new
+			object: ['lv_obj'],
+			button: ['lv_button'],
+			label: ['lv_label']
+	)
+	attributes: ( 
+		List new
+			events: ['event_bubble']
+		
+	)
+	values: (
+		List new
+			True: ['true'],
+			False: ['false'],
+			object: ['lv_obj'],
+			button: ['lv_boton'],
+			label: ['lv_label']
+	).
+	
+	<- xml.
+}.

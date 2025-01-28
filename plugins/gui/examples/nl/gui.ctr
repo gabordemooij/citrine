@@ -1,0 +1,47 @@
+
+>> gui := Gui nieuw.
+>> i := 0.
+
+Programma gebruik: ( Bestand nieuw: ['../../../../misc/supplements/nl'] ).
+Programma gebruik: ( Bestand nieuw: ['../../extra/nl/lvglnl'] ).
+
+
+gui bij: ['klik'] doen: { :info
+	i optellen: 1.
+	Uit schrijf: ['klik!'], stop.
+	Uit schrijf: info getal, stop.
+	(info = 123) ja: {
+		gui xml: (knop kopieer ~teller~: i) name: ['knop'] at: 100.
+	}.
+}.
+
+>> knop := ['
+<component>
+    <view extends="lv_obj" event_bubble="true" width="100%" height="100%">
+		<lv_button id="123" event_bubble="true" >
+			<lv_label text="~teller~"></lv_label>
+		</lv_button>
+	</view>
+ </component>
+'].
+
+>> xml := XML-boom nieuw.
+
+
+>> xml := ['
+<component>
+    <view extends="lv_obj" id="100" name="knoppie" event_bubble="true" height="400px" width="800px" >
+        <lv_obj event_bubble="true" width="100%" height="100%">
+			<lv_button id="123" event_bubble="true" >
+				<lv_label text="CLICK ME!"></lv_label>
+			</lv_button>
+		</lv_obj>
+    </view>
+</component>
+'].
+
+gui scherm: xml.
+
+
+
+

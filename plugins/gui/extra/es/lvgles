@@ -1,0 +1,45 @@
+# Título.....: LVGLES
+# Autor......: Gabor de Mooij (c) copyright 2025
+# Fecha......: 2025-01-28
+# Licencia...: BSD-3/MIT
+# Versión....: 1.0
+#
+# Descripción:
+# Este es un árbol XML para crear interfaces de usuario LVGL.
+#
+# Dependencias:
+# - supplementoes
+# - abrolxml
+# - lvgles
+
+>> LVGLES := Objeto nuevo.
+
+LVGLES en: ['nuevo'] hacer: {
+	>> xml := Árbol-XML nuevo.
+	xml
+	nombres: (
+		Lista nuevo
+			componente: ['component'],
+			vista: ['view'],
+			poner: ['lv_obj'] en: ['objeto'],
+			boton: ['lv_button'],
+			etiqueta: ['lv_label']
+	)
+	atributos: ( 
+		Lista nuevo
+			extiende: ['extends'],
+			burbuja-evento: ['event_bubble'],
+			ancho: ['width'],
+			altura: ['height'],
+			texto: ['text']
+		
+	) valores: (
+		Lista nuevo
+			poner: ['true'] en: ['verdadero'],
+			poner: ['false'] en: ['falso'],
+			poner: ['lv_obj'] en: ['objeto'],
+			boton: ['lv_boton'],
+			etiqueta: ['lv_label']
+	).
+	<- xml.
+}.
