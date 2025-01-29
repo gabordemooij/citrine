@@ -1,0 +1,6 @@
+‘SINGLE_LANGUAGE’.
+✎ write: (Nil else: 1), stop.
+✎ write: (Nil else: Nil, else: 2), stop.
+✎ write: (Nil else: Nil, else: Nil, else: 3), stop.
+
+

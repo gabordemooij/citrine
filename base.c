@@ -117,6 +117,18 @@ ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
+ * [ Nil ] else: [ Object ]
+ *
+ * @example
+ * ☞ x ≔ Nil.
+ * ✎ write: (x else: 123), stop.
+ */
+ctr_object* ctr_nil_else_set(ctr_object* myself, ctr_argument* argumentList) {
+	return argumentList->object;
+}
+
+/**
+ * @def
  * [ Nil ] number
  *
  * @example

@@ -441,6 +441,7 @@ extern ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList
 extern ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_nil_else_set(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Object Interface
