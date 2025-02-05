@@ -22,8 +22,8 @@ mkdir dist/Linux
 mkdir dist/Linux/ISO
 mkdir dist/Linux/OUT
 
-VERSION="1_0_0beta7" #for files
-VERSION_NAME="1.0.0b7" #for display
+VERSION="1_0_1" #for files
+VERSION_NAME="1.0.1" #for display
 VERSION_DEB="-1"     #for debian
 
 echo "VERSION = $VERSION"

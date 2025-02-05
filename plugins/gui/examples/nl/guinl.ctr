@@ -1,0 +1,87 @@
+# Titel.......: GUINL
+# Auteur......: Gabor de Mooij (c) copyright 2025
+# Datum.......: 28 januari 2025
+# Licentie....: BSD-3/MIT
+# Versie......: 1.0
+#
+# Beschrijving:
+# GUINL is een voorbeeldprogramma van een GUI in Citrine/NL.
+#
+# Benodigdheden:
+# - xmlboom
+# - lvglnl
+# - supplementnl
+
+Programma gebruik: ( Bestand nieuw: Bestandslocatie supplementnl ).
+Programma gebruik: ( Bestand nieuw: Bestandslocatie xmlboom ).
+Programma gebruik: ( Bestand nieuw: Bestandslocatie lvglnl ).
+
+>> gui := Gui nieuw.
+>> i := 0.
+
+gui bij: ['klik'] doen: { :info
+	i optellen: 1.
+	(info = 123) ja: {
+		gui xml: (
+				knopstructuur
+				tekst
+				kopieer
+				~teller~: i
+			)
+			naam: ['knop']
+			bij: 100.
+	}.
+}.
+
+>> knopstructuur := LVGLNL nieuw.
+
+knopstructuur
+	component
+	elementen
+		weergave
+		baseer-op: ['object'],
+		interactief: Ja,
+		breedte: ['100%'],
+		hoogte: ['100%'],
+		elementen
+			knop
+			id: 123,
+			interactief: Ja,
+			elementen
+				label
+				tekst: ['~teller~'],
+				sluit
+			sluit
+		sluit
+	sluit.
+
+>> boomstructuur := LVGLNL nieuw.
+
+boomstructuur
+	component
+	elementen
+		weergave
+		baseer-op: ['object'],
+		id: 100,
+		interactief: Ja,
+		hoogte: ['400px'],
+		breedte: ['800px'],
+		elementen
+			object
+			interactief: Ja,
+			breedte: ['100%'],
+			hoogte: ['100%'],
+			elementen
+				knop
+				interactief: Ja,
+				id: 123,
+				elementen
+					label
+					tekst: ['klik mij!'],
+					sluit
+				sluit
+			sluit
+		sluit
+	sluit.
+
+gui scherm: boomstructuur tekst.

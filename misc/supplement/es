@@ -1,0 +1,10 @@
+# Título.....: GUIES
+# Autor......: Gabor de Mooij (c) copyright 2025
+# Fecha......: 2025-01-28
+# Licencia...: BSD-3/MIT
+# Versión....: 1.0
+#
+# Descripción:
+# Este suplemento contiene extensiones para el idioma español.
+
+Nulo en: ['alternancia:'] hacer: { :a <- a. }.

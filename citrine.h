@@ -49,8 +49,9 @@
 /**
  * Version information
  */
-#define CTR_VERSION "1.0.0"
-#define CTR_VERSION_NUM 10000
+#define CTR_VERSION "1.0.2"
+#define CTR_VERSION_NUM 10002
+
 
 /**
  * Define the Citrine tokens 
@@ -441,6 +442,7 @@ extern ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList
 extern ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_nil_else_set(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Object Interface

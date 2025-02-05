@@ -843,6 +843,11 @@ int ctr_internal_media_mouse_down(SDL_Event event) {
 				CtrMediaPrevClickY = event.button.y;
 				CtrMediaPrevClickTime = SDL_GetTicks64();
 				ctr_internal_img_render_text(focusObject);
+				SDL_StartTextInput();
+			}
+			else {
+				focusObject = NULL;
+				SDL_StopTextInput();
 			}
 			ctr_argument* args = ctr_heap_allocate(sizeof(ctr_argument));
 			ctr_send_message(mediaIMGs[i].ref, CTR_DICT_ON_CLICK, strlen(CTR_DICT_ON_CLICK), args);
@@ -4485,6 +4490,9 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_media_end );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "sys:" ), &ctr_media_system );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "use:" ), &ctr_media_include );
+	if (strcmp(CTR_DICT_USE_SET,"use:")!=0) {
+		ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_USE_SET ), &ctr_media_include );
+	}
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "_datastart" ), &ctr_media_datastart );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_DIALOG_SET ), &ctr_media_dialog );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "website:" ), &ctr_media_website );

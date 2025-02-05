@@ -1,9 +1,9 @@
 # Usage example:
-# ISO="nl" PACKAGE="media" NAME="libctrmedia.dylib" make plugin
+# FRAMEWORKS="/path/to/frameworks" ISO="nl" PACKAGE="media" NAME="libctrmedia.dylib" make plugin
 
 LDFLAGS= -shared -undefined dynamic_lookup
-CFLAGS= -D REPLACE_MEDIA_ESPEAK -D NO_MEDIA_ESPEAK\
-		-D REPLACE_MEDIA_SOCK -D MAC_MEDIA_SOCK
+CFLAGS=
+
 		
 
 install-libctrmedia.dylib: libctrmedia.dylib

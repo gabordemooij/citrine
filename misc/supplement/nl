@@ -1,0 +1,17 @@
+# Titel.......: Supplement Nederlandse Taal
+# Auteur......: Gabor de Mooij (c) copyright 2025
+# Datum.......: 28 januari 2025
+# Licentie....: BSD-3/MIT
+# Versie......: 1.0
+#
+# Beschrijving:
+# Dit supplementpakket bevat uitbreidingen voor Citrine
+# in de Nederlandse taal.
+
+
+Niets bij: ['of-anders:'] doen: { :alternatief <- alternatief. }.
+
+Object leer: ['nieuwe'] betekent: ['nieuw'].
+Lijst leer: ['nieuwe'] betekent: ['nieuw'].
+Reeks leer: ['nieuwe'] betekent: ['nieuw'].
+

@@ -689,6 +689,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func( CtrStdNil, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_nil_to_number );
 	ctr_internal_create_func( CtrStdNil, ctr_build_string_from_cstring( CTR_DICT_TOBOOL ), &ctr_nil_to_boolean );
 	ctr_internal_create_func( CtrStdNil, ctr_build_string_from_cstring( CTR_DICT_CODE ), &ctr_nil_to_string );
+	ctr_internal_create_func( CtrStdNil, ctr_build_string_from_cstring( CTR_DICT_ELSE ), &ctr_nil_else_set );
 	CtrStdNil->link = CtrStdObject;
 	CtrStdNil->info.sticky = 1;
 
