@@ -12,9 +12,12 @@
 # - lvglnl
 # - supplementnl
 
-Programma gebruik: ( Bestand nieuw: Bestandslocatie supplementnl ).
-Programma gebruik: ( Bestand nieuw: Bestandslocatie xmlboom ).
-Programma gebruik: ( Bestand nieuw: Bestandslocatie lvglnl ).
+Gui gebruik: ( Bestand nieuw: Bestandslocatie supplementnl ).
+Gui gebruik: ( Bestand nieuw: Bestandslocatie xmlboom ).
+Gui gebruik: ( Bestand nieuw: Bestandslocatie lvglnl ).
+
+>> l := Lettertype nieuw bron: ['Shortcake.ttf'] grootte: 20.
+
 
 >> gui := Gui nieuw.
 >> i := 0.
@@ -41,8 +44,8 @@ knopstructuur
 		weergave
 		baseer-op: ['object'],
 		interactief: Ja,
-		breedte: ['100%'],
-		hoogte: ['100%'],
+		breedte: ['50%'],
+		hoogte: ['10%'],
 		elementen
 			knop
 			id: 123,
@@ -64,8 +67,8 @@ boomstructuur
 		baseer-op: ['object'],
 		id: 100,
 		interactief: Ja,
-		hoogte: ['400px'],
-		breedte: ['800px'],
+		hoogte: ['100%'],
+		breedte: ['100%'],
 		elementen
 			object
 			interactief: Ja,
@@ -73,11 +76,15 @@ boomstructuur
 			hoogte: ['100%'],
 			elementen
 				knop
+				breedte: ['50%'],
+				hoogte: ['10%'],
 				interactief: Ja,
 				id: 123,
 				elementen
 					label
-					tekst: ['klik mij!'],
+					#style_text_font: ['font1'],
+					lettertype: l,
+					tekst: ['xxxx'],
 					sluit
 				sluit
 			sluit

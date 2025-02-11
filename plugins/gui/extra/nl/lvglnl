@@ -13,11 +13,11 @@
 # - supplementnl
 
 
->> LVGLNL := Object nieuw.
+>> LVGLNL := XML-boom nieuw.
 
 LVGLNL bij: ['nieuw'] doen: {
 	
-	>> xml-boom := XML-boom nieuw.
+	>> xml-boom := zelf nieuw.
 	xml-boom
 	elementen: (
 		Lijst nieuw
@@ -44,4 +44,9 @@ LVGLNL bij: ['nieuw'] doen: {
 			label: ['lv_label']
 	).
 	<- xml-boom.
+}.
+
+
+LVGLNL bij: ['lettertype:'] doen: { :lettertype
+	zelf style_text_font: lettertype naam.
 }.

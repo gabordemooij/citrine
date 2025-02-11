@@ -3,10 +3,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 #include <SDL2/SDL.h>
-
-
 #include "lvgl/lvgl.h"
 #include "../../citrine.h"
 #include <media.h>
@@ -17,6 +14,138 @@ uint16_t CtrGUIHeight = 400;
 ctr_object* guiObject;
 ctr_object* packageObject;
 ctr_object* CtrGUIAssetPackage;
+ctr_object* colorObject;
+ctr_object* fontObject;
+lv_font_manager_t* g_font_manager;
+lv_event_dsc_t* CtrEventHandler = NULL;
+
+struct GUIFNT {
+	ctr_object* ref;
+	char* name;
+	char* path;
+	lv_font_t* font;
+};
+typedef struct GUIFNT GUIFNT;
+GUIFNT GuiFNT[10];
+int maxFNT = 10;
+int FNTCount = 0;
+
+ctr_object* ctr_color_new(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
+	instance->link = myself;
+	ctr_internal_object_property(instance, "r", ctr_build_number_from_float(0));
+	ctr_internal_object_property(instance, "g", ctr_build_number_from_float(0));
+	ctr_internal_object_property(instance, "b", ctr_build_number_from_float(0));
+	ctr_internal_object_property(instance, "a", ctr_build_number_from_float(0));
+	return instance;
+}
+
+/**
+ * @def
+ * [ Color ] red: [Number] green: [Number] blue: [Number]
+ *
+ * @example
+ * >> gui := Gui new.
+ * >> x := Color new red: 100 green: 150 blue: 200.
+ * Out write: x red, stop.
+ * Out write: x green, stop.
+ * Out write: x blue, stop.
+ */
+ctr_object* ctr_color_rgb_set(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_internal_object_property(myself, "r", ctr_internal_cast2number(argumentList->object));
+	ctr_internal_object_property(myself, "g", ctr_internal_cast2number(argumentList->next->object));
+	ctr_internal_object_property(myself, "b", ctr_internal_cast2number(argumentList->next->next->object));
+	return myself;
+}
+
+ctr_object* ctr_color_a_set(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_internal_object_property(myself, "a", ctr_internal_cast2number(argumentList->object));
+}
+
+ctr_object* ctr_color_r(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_internal_object_property(myself, "r", NULL);
+}
+
+ctr_object* ctr_color_g(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_internal_object_property(myself, "g", NULL);
+}
+
+ctr_object* ctr_color_b(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_internal_object_property(myself, "b", NULL);
+}
+
+ctr_object* ctr_color_a(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_internal_object_property(myself, "a", NULL);
+}
+
+void ctr_font_destructor(ctr_resource* rs) {
+	/* todo */
+}
+
+ctr_object* ctr_font_new(ctr_object* myself, ctr_argument* argumentList) {
+	if (FNTCount >= maxFNT) return CtrStdNil;
+	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
+	instance->link = myself;
+	GUIFNT* fnt = &GuiFNT[FNTCount++];
+	fnt->font = NULL;
+	fnt->ref = instance;
+	fnt->name = ctr_heap_allocate(10);
+	fnt->path = NULL;
+	sprintf(fnt->name, "font%d", FNTCount-1);
+	ctr_resource* rs = ctr_heap_allocate( sizeof(ctr_resource) );
+	rs->ptr = fnt;
+	rs->destructor = &ctr_font_destructor;
+	instance->value.rvalue = rs;
+	return instance;
+}
+
+GUIFNT* ctr_internal_get_font_from_object(ctr_object* object)	{
+	if (object->value.rvalue == NULL) return NULL;
+	return (GUIFNT*) object->value.rvalue->ptr;
+}
+
+/**
+ * @def
+ * [ Font ] new
+ *
+ * @example
+ * gui font: (Font new source: ['font.ttf'] size: 20).
+ *
+ * @result
+ * @info-font-source-size
+ */
+ctr_object* ctr_font_font(ctr_object* myself, ctr_argument* argumentList) {
+	GUIFNT* fnt = ctr_internal_get_font_from_object(myself);
+	if (fnt == NULL) return myself;
+	char* path = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+	char already_loaded = 0;
+	for (int i = 0; i < FNTCount; i++) {
+		if (fnt->path && strcmp(fnt->path, path) == 0) {
+			already_loaded = 1;
+		}
+	}
+	if (!already_loaded) {
+		lv_font_manager_add_path(g_font_manager, fnt->name, path);
+	}
+	fnt->path = ctr_heap_allocate(strlen(path)+1);
+	strcpy(fnt->path, path);
+	int size = ctr_tonum(argumentList->next->object);
+	fnt->font = lv_font_manager_create_font(
+		g_font_manager,
+        fnt->name,
+        LV_FREETYPE_FONT_RENDER_MODE_BITMAP,
+        size,
+        LV_FREETYPE_FONT_STYLE_NORMAL);
+	lv_xml_register_font(fnt->name, fnt->font);
+	return myself;
+}
+
+
+ctr_object* ctr_font_name(ctr_object* myself, ctr_argument* argumentList) {
+	GUIFNT* fnt = ctr_internal_get_font_from_object(myself);
+	if (fnt == NULL) return myself;
+	return ctr_build_string( fnt->name, strlen(fnt->name) );
+}
 
 
 SDL_RWops* ctr_internal_gui_load_asset(char* asset_name, char asset_type) {
@@ -115,9 +244,6 @@ ctr_object* ctr_gui_width_height_set(ctr_object* myself, ctr_argument* argumentL
 }
 
 
-lv_event_dsc_t* CtrEventHandler = NULL;
-
-
 ctr_object* ctr_gui_xml_at_set(ctr_object* myself, ctr_argument* argumentList) {
 	lv_obj_t* root = lv_screen_active();
 	char* xml = ctr_heap_allocate_cstring(argumentList->object);
@@ -140,18 +266,21 @@ ctr_object* ctr_gui_xml_at_set(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+void ctr_internal_gui_init(void) {
+	lv_init();
+	lv_sdl_window_create(CtrGUIWidth, CtrGUIHeight);
+	lv_group_t * g = lv_group_create();
+	lv_group_set_default(g);
+	lv_indev_t* mouse = lv_sdl_mouse_create();
+	lv_indev_set_group(mouse, lv_group_get_default());
+	lv_indev_t * mousewheel = lv_sdl_mousewheel_create();
+	lv_indev_set_group(mousewheel, lv_group_get_default());
+	lv_indev_t * keyboard = lv_sdl_keyboard_create();
+	lv_indev_set_group(keyboard, lv_group_get_default());
+	g_font_manager = lv_font_manager_create(8);
+}
 
 ctr_object* ctr_gui_screen(ctr_object* myself, ctr_argument* argumentList) {
-	lv_init();
-    lv_sdl_window_create(CtrGUIWidth, CtrGUIHeight);
-    lv_group_t * g = lv_group_create();
-    lv_group_set_default(g);
-    lv_indev_t* mouse = lv_sdl_mouse_create();
-    lv_indev_set_group(mouse, lv_group_get_default());
-	lv_indev_t * mousewheel = lv_sdl_mousewheel_create();
-    lv_indev_set_group(mousewheel, lv_group_get_default());
-    lv_indev_t * keyboard = lv_sdl_keyboard_create();
-    lv_indev_set_group(keyboard, lv_group_get_default()); 
     ctr_argument xml;
     ctr_argument rootname;
     ctr_argument rootnode;
@@ -161,7 +290,6 @@ ctr_object* ctr_gui_screen(ctr_object* myself, ctr_argument* argumentList) {
 	xml.next = &rootname;
 	rootname.next = &rootnode;
 	ctr_gui_xml_at_set(myself, &xml);
-	//ctr_heap_free(rootname.object);
     uint32_t idle_time;
 	ctr_argument* arguments = ctr_heap_allocate(sizeof(ctr_argument));
 	arguments->object = CtrStdNil;
@@ -260,6 +388,21 @@ ctr_object* ctr_gui_link_package(ctr_object* myself, ctr_argument* argumentList)
 }
 
 void begin() {
+	ctr_internal_gui_init();
+	colorObject = ctr_color_new(CtrStdObject, NULL);
+	colorObject->link = CtrStdObject;
+	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_color_new );
+	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_RED_GREEN_BLUE_SET ), &ctr_color_rgb_set );
+	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_TRANSPARENCY_SET ), &ctr_color_a_set );
+	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_RED ), &ctr_color_r );
+	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_GREEN ), &ctr_color_g );
+	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_BLUE ), &ctr_color_b );
+	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_TRANSPARENCY ), &ctr_color_a );
+	fontObject = ctr_font_new(CtrStdObject, NULL);
+	fontObject->link = CtrStdObject;
+	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_font_new );
+	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( CTR_DICT_SOURCE_SIZE_SET ), &ctr_font_font );
+	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( CTR_DICT_NAME ), &ctr_font_name );
 	CtrGUIAssetPackage = NULL;
 	packageObject = ctr_package_new(CtrStdObject, NULL);
 	packageObject->link = CtrStdObject;
@@ -279,6 +422,8 @@ void begin() {
 	}
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( "_datastart" ), &ctr_gui_datastart );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_GUI_PLUGIN_ID ), guiObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_FONT_OBJECT ), fontObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_COLOR_OBJECT ), colorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Gui" ), guiObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 }
 

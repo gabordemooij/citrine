@@ -793,7 +793,7 @@
 #define LV_USE_BARCODE 1
 
 /*FreeType library*/
-#define LV_USE_FREETYPE 0
+#define LV_USE_FREETYPE 1
 #if LV_USE_FREETYPE
     /*Let FreeType to use LVGL memory and file porting*/
     #define LV_FREETYPE_USE_LVGL_PORT 0
@@ -802,6 +802,9 @@
      *The higher the value, the more memory will be used.*/
     #define LV_FREETYPE_CACHE_FT_GLYPH_CNT 256
 #endif
+
+#define LV_USE_FONT_MANAGER 1
+#define LV_FONT_MANAGER_NAME_MAX_LEN 255
 
 /* Built-in TTF decoder */
 #define LV_USE_TINY_TTF 1
