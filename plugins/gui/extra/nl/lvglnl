@@ -50,3 +50,11 @@ LVGLNL bij: ['nieuw'] doen: {
 LVGLNL bij: ['lettertype:'] doen: { :lettertype
 	zelf style_text_font: lettertype naam.
 }.
+
+LVGLNL bij: ['kleur:'] doen: { :kleur
+	zelf style_text_color: kleur rgbhex.
+}.
+
+LVGLNL bij: ['achtergrondskleur:'] doen: { :kleur
+	zelf style_bg_color: kleur rgbhex.
+}.

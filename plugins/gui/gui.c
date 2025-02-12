@@ -42,6 +42,24 @@ ctr_object* ctr_color_new(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
+ * [ Color ] rgbhex
+ *
+ * @example
+ * >> gui := Gui new.
+ * >> x := Color new red: 255 green: 255 blue: 255.
+ * Out write: x rgbhex, stop.
+ */
+ctr_object* ctr_color_rgbhex(ctr_object* myself, ctr_argument* argumentList) {
+	double r = ctr_tonum(ctr_internal_object_property(myself, "r", NULL));
+	double g = ctr_tonum(ctr_internal_object_property(myself, "g", NULL));
+	double b = ctr_tonum(ctr_internal_object_property(myself, "b", NULL));
+	char* rgbhex = ctr_heap_allocate(9);
+	sprintf(rgbhex, "0x%02x%02x%02x", (int)r, (int)g, (int)b);
+	return ctr_build_string(rgbhex, strlen(rgbhex));
+}
+
+/**
+ * @def
  * [ Color ] red: [Number] green: [Number] blue: [Number]
  *
  * @example
@@ -398,6 +416,7 @@ void begin() {
 	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_GREEN ), &ctr_color_g );
 	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_BLUE ), &ctr_color_b );
 	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( CTR_DICT_TRANSPARENCY ), &ctr_color_a );
+	ctr_internal_create_func(colorObject, ctr_build_string_from_cstring( "rgbhex" ), &ctr_color_rgbhex );
 	fontObject = ctr_font_new(CtrStdObject, NULL);
 	fontObject->link = CtrStdObject;
 	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_font_new );

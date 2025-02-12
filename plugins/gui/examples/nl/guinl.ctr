@@ -79,12 +79,14 @@ boomstructuur
 				breedte: ['50%'],
 				hoogte: ['10%'],
 				interactief: Ja,
+				achtergrondskleur: (Kleur nieuw rood: 0 groen: 0 blauw: 0),
 				id: 123,
 				elementen
 					label
 					#style_text_font: ['font1'],
 					lettertype: l,
-					tekst: ['xxxx'],
+					kleur: (Kleur nieuw rood: 255 groen: 180 blauw: 0),
+					tekst: ['Font &amp; Color'],
 					sluit
 				sluit
 			sluit
