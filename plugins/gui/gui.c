@@ -45,6 +45,13 @@ GUIFNT GuiFNT[CTR_GUI_MAX_FONTS];
 int maxFNT = CTR_GUI_MAX_FONTS;
 int FNTCount = 0;
 
+/**
+ * Use this error handler if init or critical operation fails.
+ */
+void ctr_internal_gui_fatalerror(char* msg, const char* info)	{
+	fprintf(stderr,"GUI FATAL ERROR: %s (%s) \n", msg, info);
+	exit(1);
+}
 
 SDL_RWops* ctr_internal_gui_load_asset(char* asset_name, char asset_type) {
 	SDL_RWops* res = NULL;
@@ -355,9 +362,8 @@ void ctr_internal_gui_init(void) {
 	lv_indev_set_group(mousewheel, lv_group_get_default());
 	lv_indev_t * keyboard = lv_sdl_keyboard_create();
 	lv_indev_set_group(keyboard, lv_group_get_default());
-	//g_font_manager = lv_font_manager_create(8);
 	if (TTF_Init() < 0) {
-		printf("TTF INIT FAIL\n");
+		ctr_internal_gui_fatalerror("TTF_Init", SDL_GetError());
 	}
 	for(int i = 0; i < CTR_GUI_GLYPHCACHE_MAX * CTR_GUI_MAX_FONTS; i++) {
 		CtrGUIGlyphCacheEntry* cache = &ctr_gui_glyph_cache[i];
