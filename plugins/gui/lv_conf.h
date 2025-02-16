@@ -270,7 +270,7 @@
     *LV_LOG_LEVEL_ERROR       Only critical issue, when the system may fail
     *LV_LOG_LEVEL_USER        Only logs added by the user
     *LV_LOG_LEVEL_NONE        Do not log anything*/
-    #define LV_LOG_LEVEL LV_LOG_LEVEL_WARN
+    #define LV_LOG_LEVEL LV_LOG_LEVEL_INFO
 
     /*1: Print the log with 'printf';
     *0: User need to register a callback with `lv_log_register_print_cb()`*/
@@ -793,7 +793,7 @@
 #define LV_USE_BARCODE 1
 
 /*FreeType library*/
-#define LV_USE_FREETYPE 1
+#define LV_USE_FREETYPE 0
 #if LV_USE_FREETYPE
     /*Let FreeType to use LVGL memory and file porting*/
     #define LV_FREETYPE_USE_LVGL_PORT 0
@@ -803,7 +803,7 @@
     #define LV_FREETYPE_CACHE_FT_GLYPH_CNT 256
 #endif
 
-#define LV_USE_FONT_MANAGER 1
+#define LV_USE_FONT_MANAGER 0
 #define LV_FONT_MANAGER_NAME_MAX_LEN 255
 
 /* Built-in TTF decoder */
