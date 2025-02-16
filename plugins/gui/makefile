@@ -16,7 +16,7 @@ CFLAGS += $(shell pkg-config --cflags freetype2)
 
 
 CXXFLAGS        ?= -fPIC
-LDFLAGS 		=  -lSDL2 -lm -shared
+LDFLAGS 		=  -lSDL2 -lSDL2_ttf -lm -shared
 LDFLAGS += $(shell pkg-config --libs freetype2)
 
 BIN 			= ../../../../mods/gui/libctrgui.so
