@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
 #include "lvgl/lvgl.h"
@@ -18,6 +19,23 @@ ctr_object* packageObject;
 ctr_object* CtrGUIAssetPackage;
 ctr_object* colorObject;
 ctr_object* fontObject;
+ctr_object* imageObject;
+
+struct GUIIMG {
+	ctr_object* ref;
+	lv_image_dsc_t* image_descriptor;
+	SDL_Surface* surface;
+	char* path;
+	char* name;
+	int num;
+};
+
+typedef struct GUIIMG GUIIMG;
+
+GUIIMG guiIMGs[100];
+int MaxIMG = 100;
+int IMGCount = 0;
+
 lv_event_dsc_t* CtrEventHandler = NULL;
 
 struct CtrGUIGlyphCacheEntry {
@@ -195,6 +213,10 @@ GUIFNT* ctr_internal_get_font_from_object(ctr_object* object)	{
 	return (GUIFNT*) object->value.rvalue->ptr;
 }
 
+GUIIMG* ctr_internal_get_image_from_object(ctr_object* object)	{
+	if (object->value.rvalue == NULL) return NULL;
+	return (GUIIMG*) object->value.rvalue->ptr;
+}
 
 bool ctr_internal_gui_describe_glyph(const lv_font_t * f, lv_font_glyph_dsc_t * glyph_dsc, uint32_t unicode, uint32_t unicode_letter_next) {
     CtrGUIGlyphCacheEntry* cache;
@@ -422,8 +444,6 @@ ctr_object* ctr_gui_datastart(ctr_object* myself, ctr_argument* none) {
 	return myself;
 }
 
-
-
 ctr_object* ctr_gui_include(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* pathStrObj = ctr_internal_cast2string(argumentList->object);
 	char* pathString = ctr_heap_allocate_tracked(pathStrObj->value.svalue->vlen + 1);
@@ -479,6 +499,67 @@ ctr_object* ctr_gui_link_package(ctr_object* myself, ctr_argument* argumentList)
 	return myself;
 }
 
+void ctr_img_destructor(ctr_resource* rs) {
+}
+
+ctr_object* ctr_img_new(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
+	instance->link = myself;
+	GUIIMG* guiImage = &guiIMGs[IMGCount++];
+	guiImage->ref = instance;
+	ctr_resource* rs = ctr_heap_allocate( sizeof(ctr_resource) );
+	guiImage->path = NULL;
+	guiImage->surface = NULL;
+	guiImage->name = ctr_heap_allocate(10);
+	guiImage->num = IMGCount - 1;
+	sprintf(guiImage->name, "img%d", IMGCount-1);
+	rs->ptr = guiImage;
+	rs->destructor = &ctr_img_destructor;
+	instance->value.rvalue = rs;
+	return instance;
+}
+
+
+ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
+	GUIIMG* img = ctr_internal_get_image_from_object(myself);
+	if (img == NULL) return myself;
+	char* path = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+	SDL_RWops* res = ctr_internal_gui_load_asset(path, 1);
+	ctr_heap_free(path);
+	if (res == NULL) {
+		ctr_error("Unable to load image.", 0);
+		return myself;
+	}
+	img->image_descriptor = ctr_heap_allocate(sizeof(lv_image_dsc_t));
+	img->surface = (SDL_Surface*) IMG_Load_RW(res, 1);
+	SDL_Surface *converted_surface = SDL_ConvertSurfaceFormat(img->surface, SDL_PIXELFORMAT_ARGB8888, 0);
+    if (converted_surface == NULL) {
+        ctr_error("Surface conversion failed.", 0);
+		return myself;
+    }
+	img->surface = converted_surface;
+	img->image_descriptor->data_size = img->surface->w * img->surface->h * 4;
+	img->image_descriptor->data = img->surface->pixels;
+	img->image_descriptor->header.magic = LV_IMAGE_HEADER_MAGIC;
+	img->image_descriptor->header.cf = LV_COLOR_FORMAT_ARGB8888;
+	img->image_descriptor->header.flags = NULL;
+	img->image_descriptor->header.w = img->surface->w;
+	img->image_descriptor->header.h = img->surface->h;
+	img->image_descriptor->header.stride = img->surface->pitch;
+	lv_xml_register_image(img->name, img->image_descriptor);
+	return myself;
+}
+
+ctr_object* ctr_img_new_set(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_img_img(ctr_img_new(myself, argumentList), argumentList);
+}
+
+ctr_object* ctr_img_name(ctr_object* myself, ctr_argument* argumentList) {
+	GUIIMG* img = ctr_internal_get_image_from_object(myself);
+	if (img == NULL) return myself;
+	return ctr_build_string( img->name, strlen(img->name) );
+}
+
 void begin() {
 	ctr_internal_gui_init();
 	colorObject = ctr_color_new(CtrStdObject, NULL);
@@ -501,6 +582,12 @@ void begin() {
 	packageObject->link = CtrStdObject;
 	ctr_internal_create_func(packageObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_package_new );
 	ctr_internal_create_func(packageObject, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_package_new_set );
+	imageObject = ctr_img_new(CtrStdObject, NULL);
+	imageObject->link = CtrStdObject;
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_img_new );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_img_new_set );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_SOURCE_SET ), &ctr_img_img );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NAME ), &ctr_img_name );
 	guiObject = NULL;
 	guiObject = ctr_gui_new(CtrStdObject, NULL);
 	guiObject->link = CtrStdObject;
@@ -517,6 +604,7 @@ void begin() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_GUI_PLUGIN_ID ), guiObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_FONT_OBJECT ), fontObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_COLOR_OBJECT ), colorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_IMAGE_OBJECT ), imageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Gui" ), guiObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 }
 
