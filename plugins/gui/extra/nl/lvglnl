@@ -23,9 +23,10 @@ LVGLNL bij: ['nieuw'] doen: {
 		Lijst nieuw
 			component: ['component'],
 			weergave: ['view'],
-			zet: ['object'] bij: ['lv_obj'],
+			zet: ['lv_obj'] bij: ['lv_obj'],
 			knop: ['lv_button'],
-			label: ['lv_label']
+			label: ['lv_label'],
+			plaatje: ['lv_image']
 	)
 	attributen: (
 		Lijst nieuw
@@ -37,9 +38,9 @@ LVGLNL bij: ['nieuw'] doen: {
 	)
 	waarden: (
 		Lijst nieuw
-			zet: ['true'] bij: Ja,
-			zet: ['false'] bij: Nee,
-			zet: ['lv_obj'] bij: ['object'],
+			Ja: ['true'],
+			Nee: ['false'],
+			object: ['lv_obj'],
 			knop: ['lv_boton'],
 			label: ['lv_label']
 	).
@@ -49,6 +50,10 @@ LVGLNL bij: ['nieuw'] doen: {
 
 LVGLNL bij: ['lettertype:'] doen: { :lettertype
 	zelf style_text_font: lettertype naam.
+}.
+
+LVGLNL bij: ['plaatje:'] doen: { :bronbestand
+	zelf src: bronbestand naam.
 }.
 
 LVGLNL bij: ['kleur:'] doen: { :kleur
