@@ -355,12 +355,16 @@ ctr_object* ctr_gui_xml_at_set(ctr_object* myself, ctr_argument* argumentList) {
 	lv_obj_t* root = lv_screen_active();
 	char* xml = ctr_heap_allocate_cstring(argumentList->object);
 	char* name = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->next->object));
-	uint32_t id = ctr_tonum(argumentList->next->next->object);
-	lv_obj_t* child = lv_obj_get_child_by_id(root, &id);
+	uint32_t id;
+	lv_obj_t* child = root;
 	if (CtrEventHandler == NULL) {
 		CtrEventHandler = lv_obj_add_event_cb(root, &ctr_gui_internal_event_handler, LV_EVENT_ALL, NULL);
 	}
-	if (!child) child = root;
+	if (argumentList->next->next->object != CtrStdNil) {
+		id = ctr_tonum(argumentList->next->next->object);
+		child = lv_obj_get_child_by_id(root, &id);
+		if (!child) child = root;
+	}
 	uint32_t n = lv_obj_get_child_count(child);
 	for(int i = 0; i < n; i++) {
 		lv_obj_t* old = lv_obj_get_child(child, i);
