@@ -226,8 +226,9 @@ bool ctr_internal_gui_describe_glyph(const lv_font_t * f, lv_font_glyph_dsc_t * 
 		*(glyph_dsc) = cache->dsc;
 		return true;
 	}
-    SDL_Color white = {255, 255, 255, 255};
-    SDL_Surface* glyph_surface = TTF_RenderGlyph_Blended(((GUIFNT*)f->dsc)->font, (uint16_t)unicode, white);
+	SDL_Color white = {255, 255, 255, 255};
+	SDL_Surface* glyph_surface = TTF_RenderGlyph32_Blended(((GUIFNT*)f->dsc)->font, unicode, white);
+	if (!glyph_surface) return false;
 	int w = glyph_surface->w;
     int h = glyph_surface->h;
     glyph_dsc->box_w = glyph_surface->w;
