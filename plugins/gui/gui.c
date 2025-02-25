@@ -379,6 +379,12 @@ ctr_object* ctr_gui_xml_at_set(ctr_object* myself, ctr_argument* argumentList) {
 
 void ctr_internal_gui_init(void) {
 	lv_init();
+	if (TTF_Init() < 0) {
+		ctr_internal_gui_fatalerror("TTF_Init", SDL_GetError());
+	}
+}
+
+ctr_object* ctr_gui_screen(ctr_object* myself, ctr_argument* argumentList) {
 	lv_sdl_window_create(CtrGUIWidth, CtrGUIHeight);
 	lv_group_t * g = lv_group_create();
 	lv_group_set_default(g);
@@ -388,17 +394,13 @@ void ctr_internal_gui_init(void) {
 	lv_indev_set_group(mousewheel, lv_group_get_default());
 	lv_indev_t * keyboard = lv_sdl_keyboard_create();
 	lv_indev_set_group(keyboard, lv_group_get_default());
-	if (TTF_Init() < 0) {
-		ctr_internal_gui_fatalerror("TTF_Init", SDL_GetError());
-	}
+	
 	for(int i = 0; i < CTR_GUI_GLYPHCACHE_MAX * CTR_GUI_MAX_FONTS; i++) {
 		CtrGUIGlyphCacheEntry* cache = &ctr_gui_glyph_cache[i];
 		cache->data = NULL;
 		cache->index = 0;
 	}
-}
-
-ctr_object* ctr_gui_screen(ctr_object* myself, ctr_argument* argumentList) {
+	
     ctr_argument xml;
     ctr_argument rootname;
     ctr_argument rootnode;
