@@ -12,12 +12,9 @@ WARNINGS ?= -Wall -Wshadow -Wundef -Wno-discarded-qualifiers -Wextra -Wno-unused
 					-Wshift-negative-value -Wstack-usage=2048 -Wno-unused-value -std=gnu99
 CFLAGS 			?= -shared -O3 -g0 -I ./i18n/${ISO}/ -I ../../i18n/${ISO} -I ../media/i18n/${ISO} -I$(LVGL_DIR)/ $(WARNINGS) -fPIC
 
-CFLAGS += $(shell pkg-config --cflags freetype2)
-
 
 CXXFLAGS        ?= -fPIC
 LDFLAGS 		=  -lSDL2 -lSDL2_ttf -lSDL2_image -lm -shared
-LDFLAGS += $(shell pkg-config --libs freetype2)
 
 BIN 			= ../../../../mods/gui/libctrgui.so
 BUILD_DIR 		= ./build
