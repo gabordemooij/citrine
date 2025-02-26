@@ -23,7 +23,7 @@
 /**********************
  *  STATIC PROTOTYPES
  **********************/
-static void apply_styles(lv_obj_t * obj, const char * name, const char * value);
+static void apply_styles(lv_xml_parser_state_t * state, lv_obj_t * obj, const char * name, const char * value);
 
 /**********************
  *  STATIC VARIABLES
@@ -110,7 +110,7 @@ void lv_xml_obj_apply(lv_xml_parser_state_t * state, const char ** attrs)
         else if(lv_streq("styles", name)) lv_xml_style_add_to_obj(state, item, value);
 
         else if(lv_strlen(name) > 6 && lv_memcmp("style_", name, 6) == 0) {
-            apply_styles(item, name, value);
+            apply_styles(state, item, name, value);
         }
     }
 }
@@ -119,7 +119,7 @@ void lv_xml_obj_apply(lv_xml_parser_state_t * state, const char ** attrs)
  *   STATIC FUNCTIONS
  **********************/
 
-static void apply_styles(lv_obj_t * obj, const char * name, const char * value)
+static void apply_styles(lv_xml_parser_state_t * state, lv_obj_t * obj, const char * name, const char * value)
 {
     char name_local[512];
     lv_strlcpy(name_local, name, sizeof(name_local));
@@ -161,6 +161,7 @@ static void apply_styles(lv_obj_t * obj, const char * name, const char * value)
     else SET_STYLE_IF(bg_grad_color, lv_xml_to_color(value));
     else SET_STYLE_IF(bg_main_stop, lv_xml_atoi(value));
     else SET_STYLE_IF(bg_grad_stop, lv_xml_atoi(value));
+    else SET_STYLE_IF(bg_grad, lv_xml_component_get_grad(&state->ctx, value));
 
     else SET_STYLE_IF(bg_image_src, lv_xml_get_image(value));
     else SET_STYLE_IF(bg_image_tiled, lv_xml_to_bool(value));

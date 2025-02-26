@@ -72,7 +72,7 @@ have a choice of several different types of units you can use.
                      | 80 | 130 | 66 pixels to make 1/2 inch |
                      +----+-----+----------------------------+
 
-                     See DPI under :ref:`display_features`.
+                     See DPI under :ref:`display_attributes`.
 
 
 
@@ -360,7 +360,7 @@ Using styles
 Under the hood the position, size and alignment properties are style
 properties. The above described "simple functions" hide the style
 related code for the sake of simplicity and set the position, size, and
-alignment properties in the local styles of the Widget.
+alignment properties in the :ref:`local styles <style_local>` of the Widget.
 
 However, using styles to set the coordinates has some great advantages:
 

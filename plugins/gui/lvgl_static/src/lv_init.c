@@ -41,6 +41,10 @@
 #include "others/sysmon/lv_sysmon_private.h"
 #include "others/xml/lv_xml.h"
 
+#if LV_USE_SVG
+    #include "libs/svg/lv_svg_decoder.h"
+#endif
+
 #if LV_USE_NEMA_GFX
     #include "draw/nema_gfx/lv_draw_nema_gfx.h"
 #endif
@@ -72,6 +76,9 @@
 #endif
 #if LV_USE_UEFI
     #include "drivers/uefi/lv_uefi_context.h"
+#endif
+#if LV_USE_EVDEV
+    #include "drivers/evdev/lv_evdev_private.h"
 #endif
 
 /*********************
@@ -363,6 +370,10 @@ void lv_init(void)
     lv_bmp_init();
 #endif
 
+#if LV_USE_SVG
+    lv_svg_decoder_init();
+#endif
+
     /*Make FFMPEG last because the last converter will be checked first and
      *it's superior to any other */
 #if LV_USE_FFMPEG
@@ -397,6 +408,10 @@ void lv_deinit(void)
     lv_display_set_default(NULL);
 
     lv_cleanup_devices(LV_GLOBAL_DEFAULT());
+
+#if LV_USE_EVDEV
+    lv_evdev_deinit();
+#endif
 
 #if LV_USE_SPAN != 0
     lv_span_stack_deinit();

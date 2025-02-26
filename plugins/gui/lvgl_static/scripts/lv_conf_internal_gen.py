@@ -16,6 +16,22 @@ if sys.version_info < (3,6,0):
   print("Python >=3.6 is required", file=sys.stderr)
   exit(1)
 
+def check_for_tabs(file_path):
+    errors = []
+    with open(file_path, 'r') as file:
+        for line_number, line in enumerate(file, 1):
+            if '\t' in line:
+                errors.append(f" {file_path}:{line_number}")
+
+    if errors:
+        print(f"Tabs found in the following files:", file=sys.stderr)
+        for error in errors:
+            print(error, file=sys.stderr)
+        print("Please replace tabs with spaces.", file=sys.stderr)
+        exit(1)
+
+check_for_tabs(LV_CONF_TEMPLATE)
+
 fin = open(LV_CONF_TEMPLATE)
 fout = open(LV_CONF_INTERNAL, "w", newline='')
 
@@ -86,11 +102,6 @@ fout.write(
         /* https://gcc.gnu.org/bugzilla/show_bug.cgi?id=80753 */
         #pragma message("Possible failure to include lv_conf.h, please read the comment in this file if you get errors")
     #endif
-#endif
-
-/* Renamed config backwards-compatibility */
-#if !defined(LV_FS_DEFAULT_DRIVER_LETTER) && defined(LV_FS_DEFAULT_DRIVE_LETTER)
-    #define LV_FS_DEFAULT_DRIVER_LETTER LV_FS_DEFAULT_DRIVE_LETTER
 #endif
 
 #ifdef CONFIG_LV_COLOR_DEPTH

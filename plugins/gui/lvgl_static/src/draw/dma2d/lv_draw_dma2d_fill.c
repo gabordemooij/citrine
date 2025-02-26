@@ -34,9 +34,9 @@
  *   GLOBAL FUNCTIONS
  **********************/
 
-void lv_draw_dma2d_opaque_fill(lv_draw_dma2d_unit_t * u, void * first_pixel, int32_t w, int32_t h, int32_t stride)
+void lv_draw_dma2d_opaque_fill(lv_draw_task_t * t, void * first_pixel, int32_t w, int32_t h, int32_t stride)
 {
-    lv_draw_fill_dsc_t * dsc = u->task_act->draw_dsc;
+    lv_draw_fill_dsc_t * dsc = t->draw_dsc;
     lv_color_format_t cf = dsc->base.layer->color_format;
 
     lv_draw_dma2d_output_cf_t output_cf = lv_draw_dma2d_cf_to_dma2d_output_cf(cf);
@@ -50,6 +50,7 @@ void lv_draw_dma2d_opaque_fill(lv_draw_dma2d_unit_t * u, void * first_pixel, int
         .height = h,
         .stride = stride
     };
+    lv_draw_dma2d_unit_t * u = (lv_draw_dma2d_unit_t *) t->draw_unit;
     lv_memcpy(&u->writing_area, &cache_area, sizeof(lv_draw_dma2d_cache_area_t));
 #endif
 
@@ -67,9 +68,9 @@ void lv_draw_dma2d_opaque_fill(lv_draw_dma2d_unit_t * u, void * first_pixel, int
     lv_draw_dma2d_configure_and_start_transfer(&conf);
 }
 
-void lv_draw_dma2d_fill(lv_draw_dma2d_unit_t * u, void * first_pixel, int32_t w, int32_t h, int32_t stride)
+void lv_draw_dma2d_fill(lv_draw_task_t * t, void * first_pixel, int32_t w, int32_t h, int32_t stride)
 {
-    lv_draw_fill_dsc_t * dsc = u->task_act->draw_dsc;
+    lv_draw_fill_dsc_t * dsc = t->draw_dsc;
     lv_color_t color = dsc->color;
     lv_color_format_t cf = dsc->base.layer->color_format;
     lv_opa_t opa = dsc->opa;
@@ -84,6 +85,7 @@ void lv_draw_dma2d_fill(lv_draw_dma2d_unit_t * u, void * first_pixel, int32_t w,
         .height = h,
         .stride = stride
     };
+    lv_draw_dma2d_unit_t * u = (lv_draw_dma2d_unit_t *) t->draw_unit;
     lv_memcpy(&u->writing_area, &cache_area, sizeof(lv_draw_dma2d_cache_area_t));
 
     /* make sure the background area DMA2D is blending is up-to-date in main memory */
