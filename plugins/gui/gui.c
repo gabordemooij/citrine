@@ -14,6 +14,7 @@
 
 uint16_t CtrGUIWidth = 800;
 uint16_t CtrGUIHeight = 400;
+lv_display_t* CtrGUIDisplay;
 ctr_object* guiObject;
 ctr_object* packageObject;
 ctr_object* CtrGUIAssetPackage;
@@ -386,7 +387,8 @@ void ctr_internal_gui_init(void) {
 }
 
 ctr_object* ctr_gui_screen(ctr_object* myself, ctr_argument* argumentList) {
-	lv_sdl_window_create(CtrGUIWidth, CtrGUIHeight);
+	CtrGUIDisplay = lv_sdl_window_create(CtrGUIWidth, CtrGUIHeight);
+	lv_display_set_resolution(CtrGUIDisplay, CtrGUIWidth, CtrGUIHeight);
 	lv_group_t * g = lv_group_create();
 	lv_group_set_default(g);
 	lv_indev_t* mouse = lv_sdl_mouse_create();
