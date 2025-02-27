@@ -309,7 +309,6 @@ ctr_object* ctr_font_name(ctr_object* myself, ctr_argument* argumentList) {
 void ctr_gui_internal_event_handler(lv_event_t* e) {
 	ctr_argument* arguments;
 	char* message;
-	
 	int event_code = lv_event_get_code(e);
 	char* event_name = lv_event_code_get_name(lv_event_get_code(e));
 	lv_obj_t* target = lv_event_get_target(e);
@@ -320,7 +319,7 @@ void ctr_gui_internal_event_handler(lv_event_t* e) {
 		arguments->next = NULL;
 		message = "???";
 		if (event_code == LV_EVENT_CLICKED) {
-			message = CTR_DICT_ON_CLICK;
+			message = CTR_DICT_ON_CLICK ":";
 		}
 		ctr_send_message(guiObject, message, strlen(message), arguments);
 		ctr_heap_free(arguments);
@@ -364,7 +363,7 @@ ctr_object* ctr_gui_xml_at_set(ctr_object* myself, ctr_argument* argumentList) {
 	}
 	if (argumentList->next->next->object != CtrStdNil) {
 		id = ctr_tonum(argumentList->next->next->object);
-		child = lv_obj_get_child_by_id(root, &id);
+		child = lv_obj_get_child_by_id(root, id);
 		if (!child) child = root;
 	}
 	uint32_t n = lv_obj_get_child_count(child);
