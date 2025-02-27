@@ -22,6 +22,7 @@
 #include "parsers/lv_xml_obj_parser.h"
 #include "parsers/lv_xml_button_parser.h"
 #include "parsers/lv_xml_label_parser.h"
+#include "parsers/lv_xml_textarea_parser.h"
 #include "parsers/lv_xml_image_parser.h"
 #include "parsers/lv_xml_bar_parser.h"
 #include "parsers/lv_xml_slider_parser.h"
@@ -100,7 +101,7 @@ void lv_xml_init(void)
     lv_xml_widget_register("lv_spangroup", lv_xml_spangroup_create, lv_xml_spangroup_apply);
     lv_xml_widget_register("lv_spangroup-span", lv_xml_spangroup_span_create, lv_xml_spangroup_span_apply);
     lv_xml_widget_register("lv_buttonmatrix", lv_xml_buttonmatrix_create, lv_xml_buttonmatrix_apply);
-
+    lv_xml_widget_register("lv_textarea", lv_xml_textarea_create, lv_xml_textarea_apply);
     lv_xml_widget_register("lv_event-call_function", lv_xml_event_call_function_create, lv_xml_event_call_function_apply);
 }
 
