@@ -1,5 +1,5 @@
 /**
- * @file lv_xml_label_parser.h
+ * @file lv_xml_textarea_parser.h
  *
  */
 
@@ -38,4 +38,4 @@ void lv_xml_textarea_apply(lv_xml_parser_state_t * state, const char ** attrs);
 } /*extern "C"*/
 #endif
 
-#endif /*LV_LABEL_XML_PARSE_H*/
+#endif /*LV_TEXTAREA_XML_PARSE_H*/
