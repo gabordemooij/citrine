@@ -388,6 +388,10 @@ void ctr_internal_gui_init(void) {
 ctr_object* ctr_gui_screen(ctr_object* myself, ctr_argument* argumentList) {
 	CtrGUIDisplay = lv_sdl_window_create(CtrGUIWidth, CtrGUIHeight);
 	lv_display_set_resolution(CtrGUIDisplay, CtrGUIWidth, CtrGUIHeight);
+	// for some reason events will take place (on android) in the wrong place if we dont do this...
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
+	SDL_RenderSetLogicalSize(lv_sdl_window_get_renderer(CtrGUIDisplay), CtrGUIWidth, CtrGUIHeight);
+	//end
 	lv_group_t * g = lv_group_create();
 	lv_group_set_default(g);
 	lv_indev_t* mouse = lv_sdl_mouse_create();
