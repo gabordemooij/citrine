@@ -367,10 +367,8 @@ ctr_object* ctr_gui_xml_at_set(ctr_object* myself, ctr_argument* argumentList) {
 		if (!child) child = root;
 	}
 	uint32_t n = lv_obj_get_child_count(child);
-	for(int i = 0; i < n; i++) {
-		lv_obj_t* old = lv_obj_get_child(child, i);
-		lv_obj_delete(old);
-	}
+	lv_obj_t* old;
+	while (old = lv_obj_get_child(child, -1)) lv_obj_delete(old);
 	lv_xml_component_register_from_data(name, xml);
 	lv_xml_create(child, name, NULL);
 	ctr_heap_free(xml);
