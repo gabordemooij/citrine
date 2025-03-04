@@ -646,6 +646,16 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 extern ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList);
 #endif
 
+
+ctr_object* ctr_gui_dialog(ctr_object* myself, ctr_argument* argumentList) {
+	char* message = ctr_heap_allocate_cstring(
+		ctr_internal_cast2string(argumentList->object)
+	);
+	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Message", message, NULL);
+	ctr_heap_free(message);
+	return myself;
+}
+
 void begin() {
 	ctr_internal_gui_init();
 	colorObject = ctr_color_new(CtrStdObject, NULL);
@@ -686,6 +696,7 @@ void begin() {
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_WIDTH_HEIGHT_SET ), &ctr_gui_width_height_set );
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_LINK_SET ), &ctr_gui_link_package );
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_SCREEN ), &ctr_gui_screen );
+	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_DIALOG_SET ), &ctr_gui_dialog );
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( "use:" ), &ctr_gui_include );
 	if (strcmp(CTR_DICT_USE_SET,"use:")!=0) {
 		ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_USE_SET ), &ctr_gui_include );
