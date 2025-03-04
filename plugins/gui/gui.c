@@ -12,6 +12,10 @@
 #include <media.h>
 #include <gui.h>
 
+#ifdef LIBCURL
+#include <curl/curl.h>
+#endif
+
 uint16_t CtrGUIWidth = 800;
 uint16_t CtrGUIHeight = 400;
 lv_display_t* CtrGUIDisplay;
@@ -21,6 +25,9 @@ ctr_object* CtrGUIAssetPackage;
 ctr_object* colorObject;
 ctr_object* fontObject;
 ctr_object* imageObject;
+ctr_object* CtrGUINetworkObject;
+int CtrNetworkConnectedFlag = 0;
+
 
 struct GUIIMG {
 	ctr_object* ref;
@@ -570,6 +577,75 @@ ctr_object* ctr_img_name(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string( img->name, strlen(img->name) );
 }
 
+ctr_object* ctr_network_new(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
+	instance->link = myself;
+	return instance;
+}
+
+#ifdef LIBCURL
+char* CtrMediaCurlBuffer;
+size_t CtrMediaCurlBufferSize;
+size_t CtrMediaCurlBytesRead;
+size_t ctr_curl_write_callback(char* ptr, size_t size, size_t nmemb, void *userdata) {
+	size_t len = (size * nmemb);
+	size_t required_size = len + CtrMediaCurlBytesRead;
+	if (required_size > CtrMediaCurlBufferSize) {
+		CtrMediaCurlBuffer = ctr_heap_reallocate(CtrMediaCurlBuffer, required_size);
+		CtrMediaCurlBufferSize = required_size;
+	}
+	memcpy(CtrMediaCurlBuffer+CtrMediaCurlBytesRead, ptr, len);
+	CtrMediaCurlBytesRead += len;
+	return len;
+}
+
+ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_object* result;
+	char* message_str = NULL;
+	char* destination = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->next->object));
+	CURL* curl;
+	CURLcode res;
+	CtrMediaCurlBuffer = ctr_heap_allocate(10);
+	CtrMediaCurlBufferSize = 10;
+	CtrMediaCurlBytesRead = 0;
+	if (!CtrNetworkConnectedFlag) {
+		curl_global_init(CURL_GLOBAL_DEFAULT);
+	}
+	curl = curl_easy_init();
+	curl_easy_setopt(curl, CURLOPT_URL, destination);
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+	curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+	if (argumentList->object != CtrStdNil) {
+		message_str = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
+		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, message_str);
+	}
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &ctr_curl_write_callback);
+	res = curl_easy_perform(curl);
+	if(res != CURLE_OK) {
+		result = ctr_error((char*)curl_easy_strerror(res), 0);
+	} else {
+		curl_easy_cleanup(curl);
+		result = ctr_build_string_from_cstring(CtrMediaCurlBuffer);
+	}
+	CtrMediaCurlBytesRead = 0;
+	if (CtrMediaCurlBufferSize) {
+		ctr_heap_free(CtrMediaCurlBuffer);
+		CtrMediaCurlBuffer = NULL;
+		CtrMediaCurlBufferSize = 0;
+	}
+	ctr_heap_free(destination);
+	if (message_str) {
+		ctr_heap_free(message_str);
+	}
+    return result;
+}
+#endif
+
+#ifdef ANDROID_EXPORT
+// For Android we use JNI
+extern ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList);
+#endif
+
 void begin() {
 	ctr_internal_gui_init();
 	colorObject = ctr_color_new(CtrStdObject, NULL);
@@ -587,6 +663,10 @@ void begin() {
 	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_font_new );
 	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( CTR_DICT_SOURCE_SIZE_SET ), &ctr_font_font );
 	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( CTR_DICT_NAME ), &ctr_font_name );
+	CtrGUINetworkObject = ctr_network_new(CtrStdObject, NULL);
+	CtrGUINetworkObject->link = CtrStdObject;
+	ctr_internal_create_func(CtrGUINetworkObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_network_new );
+	ctr_internal_create_func(CtrGUINetworkObject, ctr_build_string_from_cstring(CTR_DICT_SEND_TEXT_MESSAGE), &ctr_network_basic_text_send );
 	CtrGUIAssetPackage = NULL;
 	packageObject = ctr_package_new(CtrStdObject, NULL);
 	packageObject->link = CtrStdObject;
@@ -615,6 +695,7 @@ void begin() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_FONT_OBJECT ), fontObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_COLOR_OBJECT ), colorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_IMAGE_OBJECT ), imageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NETWORK_OBJECT ), CtrGUINetworkObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Gui" ), guiObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 }
 

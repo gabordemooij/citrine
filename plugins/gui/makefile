@@ -10,11 +10,11 @@ WARNINGS ?= -Wall -Wshadow -Wundef -Wno-discarded-qualifiers -Wextra -Wno-unused
 					-Wsizeof-pointer-memaccess -Wno-format-nonliteral -Wno-cast-qual -Wunreachable-code -Wno-switch-default -Wreturn-type -Wmultichar -Wformat-security \
 					-Wno-ignored-qualifiers -Wno-error=pedantic -Wno-sign-compare -Wno-error=missing-prototypes -Wdouble-promotion -Wclobbered -Wdeprecated -Wempty-body \
 					-Wshift-negative-value -Wstack-usage=2048 -Wno-unused-value -std=gnu99
-CFLAGS 			?= -shared -O3 -g0 -I ./i18n/${ISO}/ -I ../../i18n/${ISO} -I ../media/i18n/${ISO} -I$(LVGL_DIR)/ $(WARNINGS) -fPIC
+CFLAGS 			?= -D LIBCURL -shared -O3 -g0 -I ./i18n/${ISO}/ -I ../../i18n/${ISO} -I ../media/i18n/${ISO} -I$(LVGL_DIR)/ $(WARNINGS) -fPIC
 
 
 CXXFLAGS        ?= -fPIC
-LDFLAGS 		=  -lSDL2 -lSDL2_ttf -lSDL2_image -lm -shared
+LDFLAGS 		=  -lcurl -lSDL2 -lSDL2_ttf -lSDL2_image -lm -shared
 
 BIN 			= ../../../../mods/gui/libctrgui.so
 BUILD_DIR 		= ./build
