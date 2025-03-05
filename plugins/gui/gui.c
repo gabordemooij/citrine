@@ -656,6 +656,25 @@ ctr_object* ctr_gui_dialog(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+/**
+ * @def
+ * [ Gui ] website: [ Text ]
+ *
+ * @example
+ * Gui website: ['https://www.citrine-lang.org'].
+ *
+ * @result
+ * www.citrine-lang.org
+ */
+ctr_object* ctr_gui_website(ctr_object* myself, ctr_argument* argumentList) {
+	char* url = ctr_heap_allocate_cstring(
+		ctr_internal_cast2string(argumentList->object)
+	);
+	SDL_OpenURL(url);
+	ctr_heap_free(url);
+	return myself;
+}
+
 void begin() {
 	ctr_internal_gui_init();
 	colorObject = ctr_color_new(CtrStdObject, NULL);
@@ -698,6 +717,7 @@ void begin() {
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_SCREEN ), &ctr_gui_screen );
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_DIALOG_SET ), &ctr_gui_dialog );
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( "use:" ), &ctr_gui_include );
+	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( "website:" ), &ctr_gui_website );
 	if (strcmp(CTR_DICT_USE_SET,"use:")!=0) {
 		ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_USE_SET ), &ctr_gui_include );
 	}
