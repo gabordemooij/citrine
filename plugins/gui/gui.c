@@ -27,6 +27,8 @@ ctr_object* fontObject;
 ctr_object* imageObject;
 ctr_object* CtrGUINetworkObject;
 int CtrNetworkConnectedFlag = 0;
+lv_timer_t* CtrGUITimers[100];
+int CtrMaxGUITimers = 100;
 
 
 struct GUIIMG {
@@ -675,6 +677,44 @@ ctr_object* ctr_gui_website(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+void ctr_internal_gui_timer_event(lv_timer_t* timer) {
+	int i;
+	for(i = 0; i<CtrMaxGUITimers; i++) {
+		if (CtrGUITimers[i] == timer) break;
+	}
+	if (i>=CtrMaxGUITimers) return;
+	ctr_argument* args = ctr_heap_allocate(sizeof(ctr_argument));
+	args->object = ctr_build_number_from_float((double)i);
+	ctr_send_message(guiObject, CTR_DICT_ON_TIMER, strlen(CTR_DICT_ON_TIMER), args );
+	lv_timer_delete(timer);
+	CtrGUITimers[i] = NULL;
+	ctr_heap_free(args);
+}
+
+
+ctr_object* ctr_gui_timer(ctr_object* myself, ctr_argument* argumentList) {
+	int timer_no = (int) ctr_tonum(ctr_internal_cast2number(argumentList->object));
+	int ms = (int) ctr_tonum(ctr_internal_cast2number(argumentList->next->object));
+	lv_timer_t* timer;
+	if (timer_no < 1 || timer_no > CtrMaxGUITimers) {
+		ctr_error("Invalid timer", 0);
+	} else if ( ms > -1 ) {
+		timer = CtrGUITimers[timer_no];
+		if (timer) {
+			lv_timer_delete(timer);
+		}
+		timer = lv_timer_create(ctr_internal_gui_timer_event, ms,  NULL);
+		CtrGUITimers[timer_no] = timer;
+	} else {
+		timer = CtrGUITimers[timer_no];
+		if (timer) {
+			lv_timer_delete(timer);
+		}
+		CtrGUITimers[timer_no] = NULL;
+	}
+	return myself;
+}
+
 void begin() {
 	ctr_internal_gui_init();
 	colorObject = ctr_color_new(CtrStdObject, NULL);
@@ -716,6 +756,7 @@ void begin() {
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_LINK_SET ), &ctr_gui_link_package );
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_SCREEN ), &ctr_gui_screen );
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_DIALOG_SET ), &ctr_gui_dialog );
+	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_TIMER_SET ), &ctr_gui_timer );
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( "use:" ), &ctr_gui_include );
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( "website:" ), &ctr_gui_website );
 	if (strcmp(CTR_DICT_USE_SET,"use:")!=0) {
