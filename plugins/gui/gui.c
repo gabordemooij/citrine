@@ -31,6 +31,16 @@ lv_timer_t* CtrGUITimers[100];
 int CtrMaxGUITimers = 100;
 
 
+lv_obj_t* CtrGUIContextMenu;
+lv_obj_t* CtrGUIContextMenuMainPage;
+lv_obj_t* CtrGUIContextMenuItemCopy;
+lv_obj_t* CtrGUIContextMenuLabelCopy;
+lv_obj_t* CtrGUIContextMenuItemPaste;
+lv_obj_t* CtrGUIContextMenuLabelPaste;
+lv_obj_t* CtrGUIContextMenuItemCut;
+lv_obj_t* CtrGUIContextMenuLabelCut;
+lv_obj_t* CtrGUIContextFocus;
+
 struct GUIIMG {
 	ctr_object* ref;
 	lv_image_dsc_t* image_descriptor;
@@ -315,14 +325,114 @@ ctr_object* ctr_font_name(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string( fnt->name, strlen(fnt->name) );
 }
 
+char* ctr_internal_gui_copytext(char* src, uint32_t pos, uint32_t len) {
+	ctr_size startbyte = getBytesUtf8(src, 0, pos);
+	ctr_size endbyte = startbyte + getBytesUtf8(src, startbyte, len);
+	ctr_size bytelen = endbyte - startbyte;
+	char* buffer = ctr_heap_allocate(bytelen + 1);
+	memcpy(buffer, src+startbyte, bytelen);
+	return buffer;
+}
+
+void ctr_internal_gui_context_menu_close() {
+	 if (CtrGUIContextMenu) {
+		lv_obj_del(CtrGUIContextMenu);
+		CtrGUIContextMenu = NULL;
+    }
+}
+
+void ctr_internal_gui_context_actions(lv_event_t * e) {
+	int issel = lv_textarea_text_is_selected(CtrGUIContextFocus);
+    lv_obj_t * obj = lv_event_get_target_obj(e);
+	lv_obj_t* txt = lv_textarea_get_label(CtrGUIContextFocus);
+	uint32_t selstart = lv_label_get_text_selection_start(txt);
+	uint32_t selend = lv_label_get_text_selection_end(txt);
+	char* oldbuf = lv_textarea_get_text(CtrGUIContextFocus);
+	uint32_t sellen = selend - selstart;
+	char* selbuf;
+	uint32_t pos = lv_textarea_get_cursor_pos(CtrGUIContextFocus);
+    if (issel && (obj == CtrGUIContextMenuItemCopy || obj == CtrGUIContextMenuLabelCopy)) {
+		selbuf = ctr_internal_gui_copytext(oldbuf, selstart, sellen);
+		SDL_SetClipboardText(selbuf);
+		ctr_heap_free(selbuf);
+	} else if (issel && (obj == CtrGUIContextMenuItemCut || obj == CtrGUIContextMenuLabelCut)) {
+		selbuf = ctr_internal_gui_copytext(oldbuf, selstart, sellen);
+		lv_label_cut_text(txt, selstart, sellen);
+		SDL_SetClipboardText(selbuf);
+		lv_textarea_set_cursor_pos(CtrGUIContextFocus, selstart);
+		ctr_heap_free(selbuf);
+	}
+	else if (obj == CtrGUIContextMenuItemPaste || obj == CtrGUIContextMenuLabelPaste) {
+		if (SDL_HasClipboardText()) {
+			if (issel) lv_label_cut_text(txt, selstart, sellen);
+			selbuf = SDL_GetClipboardText();
+			lv_label_ins_text(txt, pos, selbuf);
+			if (issel) {
+				lv_textarea_set_cursor_pos(CtrGUIContextFocus, pos+sellen);
+				lv_textarea_clear_selection(CtrGUIContextFocus);
+			}
+			SDL_free(selbuf);
+		}
+	}
+	ctr_internal_gui_context_menu_close();
+}
+
+void ctr_internal_gui_context_menu_add(lv_obj_t** ret_item, lv_obj_t** ret_label, char* text) {
+	lv_obj_t* item;
+	lv_obj_t* label;
+	item = lv_menu_cont_create(CtrGUIContextMenuMainPage);
+	lv_obj_add_flag(item, LV_OBJ_FLAG_EVENT_BUBBLE);
+	label = lv_label_create(item);
+	lv_label_set_text(label, text);
+	lv_obj_add_flag(label, LV_OBJ_FLAG_CLICKABLE);
+	lv_obj_add_flag(label, LV_OBJ_FLAG_EVENT_BUBBLE);
+	*ret_label = label;
+	*ret_item = item;
+}
+
+void ctr_internal_gui_context_menu_open(lv_point_t point) {
+	ctr_internal_gui_context_menu_close();
+	CtrGUIContextMenu = lv_menu_create(lv_scr_act());
+	lv_obj_add_event_cb(CtrGUIContextMenu, ctr_internal_gui_context_actions, LV_EVENT_CLICKED, CtrGUIContextMenu);
+	lv_obj_set_size(CtrGUIContextMenu, 200, 120);
+	lv_obj_align(CtrGUIContextMenu, LV_ALIGN_TOP_LEFT, point.x, point.y );
+	CtrGUIContextMenuMainPage = lv_menu_page_create(CtrGUIContextMenu, NULL);
+	ctr_internal_gui_context_menu_add(&CtrGUIContextMenuItemCopy, &CtrGUIContextMenuLabelCopy, LV_SYMBOL_COPY " copy");
+	ctr_internal_gui_context_menu_add(&CtrGUIContextMenuItemPaste, &CtrGUIContextMenuLabelPaste, LV_SYMBOL_PASTE " paste");
+	ctr_internal_gui_context_menu_add(&CtrGUIContextMenuItemCut, &CtrGUIContextMenuLabelCut, LV_SYMBOL_CUT " cut");
+	lv_menu_set_page(CtrGUIContextMenu, CtrGUIContextMenuMainPage);
+}
+
+void ctr_gui_internal_context_menu_reset_focus(lv_event_t* e) {
+	lv_obj_t* target = lv_event_get_target(e);
+	if (target == CtrGUIContextFocus) {
+		CtrGUIContextFocus = NULL;
+	}
+}
+
 void ctr_gui_internal_event_handler(lv_event_t* e) {
 	ctr_argument* arguments;
 	char* message;
-	int event_code = lv_event_get_code(e);
-	char* event_name = lv_event_code_get_name(lv_event_get_code(e));
+	int event_code;
+	char* event_name;
+	uint32_t id;
+	event_code = lv_event_get_code(e);
+	event_name = lv_event_code_get_name(lv_event_get_code(e));
 	lv_obj_t* target = lv_event_get_target(e);
-	uint32_t id = (uint32_t) lv_obj_get_id(target);
-	if (id != NULL) {
+	id = (uint32_t) lv_obj_get_id(target);
+	if (event_code == LV_EVENT_LONG_PRESSED) {
+		CtrGUIContextFocus = lv_indev_get_active_obj();
+		if (CtrGUIContextFocus) {
+			lv_obj_add_event_cb(CtrGUIContextFocus, &ctr_gui_internal_context_menu_reset_focus, LV_EVENT_DELETE, NULL);
+			lv_point_t point;
+			lv_indev_get_point(lv_indev_get_act(), &point);
+			ctr_internal_gui_context_menu_open(point);
+		}
+	}
+	if (event_code == LV_EVENT_PRESSED) {
+		ctr_internal_gui_context_menu_close();
+	}
+	if (id != 0) {
 		arguments = ctr_heap_allocate(sizeof(ctr_argument));
 		arguments->object = ctr_build_number_from_float( (double) id );
 		arguments->next = NULL;
