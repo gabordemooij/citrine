@@ -8,6 +8,9 @@
 #include <SDL2/SDL_ttf.h>
 
 #include "lvgl/lvgl.h"
+#include "lvgl/src/widgets/checkbox/lv_checkbox.h"
+#include "lvgl/src/widgets/switch/lv_switch.h"
+#include "lvgl/src/widgets/textarea/lv_textarea.h"
 #include "../../citrine.h"
 #include <media.h>
 #include <gui.h>
@@ -546,6 +549,48 @@ ctr_object* ctr_gui_screen(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+char* ctr_internal_gui_form_field_value_textarea(lv_textarea_t* field) {
+	return lv_textarea_get_text(field);
+}
+
+int ctr_internal_gui_form_field_value_dropdown(lv_dropdown_t* field) {
+	return lv_dropdown_get_selected(field);
+}
+
+int ctr_internal_gui_form_field_value_checkable(lv_obj_t* field) {
+	return lv_obj_has_state(field, LV_STATE_CHECKED);
+}
+
+ctr_object* ctr_gui_form_field_value(ctr_object* myself, ctr_argument* argumentList) {
+	int id;
+	lv_obj_t* root;
+	lv_obj_t* child;
+	id = (int) ctr_tonum(argumentList->object);
+	if (id == 0) return CtrStdNil;
+	root = lv_screen_active();
+	child = lv_obj_get_child_by_id(root, id);
+	if (!child) return CtrStdNil;
+	if (!lv_obj_is_valid(child)) return CtrStdNil;
+	if (lv_obj_has_class(child, &lv_textarea_class)) {
+		return ctr_build_string_from_cstring(
+			ctr_internal_gui_form_field_value_textarea(child)
+		);
+	}
+	else if (lv_obj_has_class(child, &lv_dropdown_class)) {
+		return ctr_build_number_from_float(
+			(double) ctr_internal_gui_form_field_value_dropdown(child)
+		);
+	}
+	else if (
+		lv_obj_has_class(child, &lv_checkbox_class)
+		|| lv_obj_has_class(child, &lv_switch_class)
+	) {
+		return ctr_build_bool(
+			(int) ctr_internal_gui_form_field_value_checkable( child )
+		);
+	}
+}
+
 /**
  * @internal
  *
@@ -862,6 +907,7 @@ void begin() {
 	guiObject->link = CtrStdObject;
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_gui_new );
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_XML_NAME_AT_SET ), &ctr_gui_xml_at_set );
+	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_FORM_FIELD_VALUE ), &ctr_gui_form_field_value );
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_WIDTH_HEIGHT_SET ), &ctr_gui_width_height_set );
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_LINK_SET ), &ctr_gui_link_package );
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_SCREEN ), &ctr_gui_screen );
