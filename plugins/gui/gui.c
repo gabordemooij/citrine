@@ -345,6 +345,10 @@ void ctr_internal_gui_context_menu_close() {
 }
 
 void ctr_internal_gui_context_actions(lv_event_t * e) {
+	if (!lv_obj_has_class(CtrGUIContextFocus, (&lv_textarea_class))) {
+		ctr_internal_gui_context_menu_close();
+		return;
+	}
 	int issel = lv_textarea_text_is_selected(CtrGUIContextFocus);
     lv_obj_t * obj = lv_event_get_target_obj(e);
 	lv_obj_t* txt = lv_textarea_get_label(CtrGUIContextFocus);
