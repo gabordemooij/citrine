@@ -12,34 +12,107 @@
 # - abrolxml
 # - lvgles
 
->> LVGLES := Objeto nuevo.
+>> LVGLES := Árbol-XML nuevo.
 
 LVGLES en: ['nuevo'] hacer: {
-	>> xml := Árbol-XML nuevo.
+	>> xml := yo nuevo.
 	xml
 	nombres: (
 		Lista nuevo
 			componente: ['component'],
 			vista: ['view'],
-			poner: ['lv_obj'] en: ['objeto'],
+			objeto: ['lv_obj'],
 			boton: ['lv_button'],
-			etiqueta: ['lv_label']
+			etiqueta: ['lv_label'],
+			imagen: ['lv_image'],
+			caja-texto: ['lv_textarea'],
+			matriz_de_botones: ['lv_buttonmatrix'],
+			barra: ['lv_bar'],
+			gráfico: ['lv_chart'],
+			rueda_de_selección: ['lv_roller'],
+			lista_desplegable: ['lv_dropdown'],
+			escala: ['lv_scale'],
+			barra_deslizante: ['lv_slider'],
+			tabla: ['lv_table'],
+			columna-de-tabla: ['lv_table-column'],
+			celda-de-tabla: ['lv_table-cell'],
+			vista-de-pestañas: ['lv_tabview'],
+			barra-de-pestañas: ['lv_tabview-tab_bar'],
+			pestaña-de-vista: ['lv_tabview-tab']
 	)
 	atributos: ( 
 		Lista nuevo
 			extiende: ['extends'],
 			burbuja-evento: ['event_bubble'],
 			ancho: ['width'],
-			altura: ['height'],
-			texto: ['text']
+			alto: ['height'],
+			texto: ['text'],
+			activa: ['active'],
+			desplazable: ['scrollable'],
+			selectable: ['selectable'],
+			enmascarado: ['password'],
+			una-linea: ['one_line'],
+			posicion-barra-de-pestañas: ['tab_bar_position'],
+			relleno-izquierda: ['style_pad_left'],
+			relleno-derecha: ['style_pad_right'],
+			relleno-inferior: ['style_pad_bottom'],
+			relleno-superior: ['style_pad_top'],
+			margen-izquierda: ['style_margin_left'],
+			margen-derecha: ['style_margin_right'],
+			margen-superior: ['style_margin_top'],
+			margen-inferior: ['style_margin_bottom'],
+			diseno: ['style_layout'],
+			flujo-flex: ['style_flex_flow'],
+			alineacion_flex: ['style_flex_align'],
+			borde: ['style_border_width'],
+			color-borde: ['style_border_color'],
+			sombreado: ['style_shadow_width'],
+			contorno: ['style_outline_width'],
+			color-texto: ['style_text_color'],
+			radio: ['style_radius'],
+			opacidad-fondo: ['style_bg_opa']
 		
 	) valores: (
 		Lista nuevo
-			poner: ['true'] en: ['verdadero'],
-			poner: ['false'] en: ['falso'],
-			poner: ['lv_obj'] en: ['objeto'],
-			boton: ['lv_boton'],
-			etiqueta: ['lv_label']
+		poner: ['true'] en: Verdadero,
+                       poner: ['false'] en: Falso,
+                       poner: ['lv_obj'] en: ['objeto'],
+
+			#verdadero: ['true'],
+			#falso: ['false'],
+			#objeto: ['lv_obj'],
+			boton: ['lv_button'],
+			etiqueta: ['lv_label'],
+			izquierda: ['left'],
+			derecha: ['right'],
+			inferior: ['bottom'],
+			superior: ['top'],
+			fila: ['row'],
+			columna: ['column']
 	).
 	<- xml.
+}.
+
+LVGLES en: ['fuente:'] hacer: { :fuente
+	yo style_text_font: fuente nombre.
+}.
+
+LVGLES en: ['imagen:'] hacer: { :archivo-fuente
+	yo src: archivo-fuente nombre.
+}.
+
+LVGLES en: ['fondo:'] hacer: { :archivo-fuente
+	yo style_bg_image_src: archivo-fuente nombre.
+}.
+
+LVGLES en: ['color:'] hacer: { :color
+	yo style_text_color: color rgbhex.
+}.
+
+LVGLES en: ['color-borde:'] hacer: { :color
+	yo style_border_color: color rgbhex.
+}.
+
+LVGLES en: ['color-fondo:'] hacer: { :color
+	yo style_bg_color: color rgbhex.
 }.

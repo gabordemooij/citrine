@@ -23,10 +23,24 @@ LVGLNL bij: ['nieuw'] doen: {
 		Lijst nieuw
 			component: ['component'],
 			weergave: ['view'],
-			zet: ['lv_obj'] bij: ['lv_obj'],
+			object: ['lv_obj'],
 			knop: ['lv_button'],
 			label: ['lv_label'],
-			plaatje: ['lv_image']
+			plaatje: ['lv_image'],
+			tekstveld: ['lv_textarea'],
+			knoppenrooster: ['lv_buttonmatrix'],
+			balk: ['lv_bar'],
+			grafiek: ['lv_chart'],
+			keuzewiel: ['lv_roller'],
+			keuzelijst: ['lv_dropdown'],
+			schaal: ['lv_scale'],
+			schuifbalk: ['lv_slider'],
+			tabel: ['lv_table'],
+			tabelkolom: ['lv_table-column'],
+			tabelcel: ['lv_table-cell'],
+			tabweergave: ['lv_tabview'],
+			tabbladen:['lv_tabview-tab_bar'],
+			tabblad: ['lv_tabview-tab']
 	)
 	attributen: (
 		Lijst nieuw
@@ -34,15 +48,45 @@ LVGLNL bij: ['nieuw'] doen: {
 			interactief: ['event_bubble'],
 			breedte: ['width'],
 			hoogte: ['height'],
-			tekst: ['text']
+			tekst: ['text'],
+			actief: ['active'],
+			schuifbaar: ['scrollable'],
+			selecteerbaar: ['selectable'],
+			gemaskeerd: ['password'],
+			enkelregelig: ['one_line'],
+			tabbalkpositie:['tab_bar_position'],
+			linkervulling: ['style_pad_left'],
+			rechtervulling: ['style_pad_right'],
+			ondervulling: ['style_pad_bottom'],
+			bovenvulling: ['style_pad_top'],
+			linkermarge: ['style_margin_left'],
+			rechtermarge: ['style_margin_right'],
+			bovenmarge: ['style_margin_top'],
+			ondermarge: ['style_margin_bottom'],
+			indeling: ['style_layout'],
+			flexstroom: ['style_flex_flow'],
+			flexuitlijning: ['style_flex_align'],
+			rand: ['style_border_width'],
+			randkleur: ['style_border_color'],
+			schaduw: ['style_shadow_width'],
+			omlijning: ['style_outline_width'],
+			tekstkleur: ['style_text_color'],
+			hoekronding: ['style_radius'],
+			achtergrondsdekking: ['style_bg_opa']
 	)
 	waarden: (
 		Lijst nieuw
 			Ja: ['true'],
 			Nee: ['false'],
 			object: ['lv_obj'],
-			knop: ['lv_boton'],
-			label: ['lv_label']
+			knop: ['lv_button'],
+			label: ['lv_label'],
+			links: ['left'],
+			rechts: ['rechts'],
+			onder: ['bottom'],
+			boven: ['top'],
+			rij: ['row'],
+			kolom: ['column']
 	).
 	<- xml-boom.
 }.
@@ -56,8 +100,16 @@ LVGLNL bij: ['plaatje:'] doen: { :bronbestand
 	zelf src: bronbestand naam.
 }.
 
+LVGLNL bij: ['achtergrond:'] doen: { :bronbestand
+	zelf style_bg_image_src: bronbestand naam.
+}.
+
 LVGLNL bij: ['kleur:'] doen: { :kleur
 	zelf style_text_color: kleur rgbhex.
+}.
+
+LVGLNL bij: ['randkleur:'] doen: { :kleur
+	zelf style_border_color: kleur rgbhex.
 }.
 
 LVGLNL bij: ['achtergrondskleur:'] doen: { :kleur
