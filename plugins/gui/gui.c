@@ -14,6 +14,7 @@
 #include "../../citrine.h"
 #include <media.h>
 #include <gui.h>
+#include <guimsg.h>
 
 #ifdef LIBCURL
 #include <curl/curl.h>
@@ -404,9 +405,9 @@ void ctr_internal_gui_context_menu_open(lv_point_t point) {
 	lv_obj_set_size(CtrGUIContextMenu, 200, 120);
 	lv_obj_align(CtrGUIContextMenu, LV_ALIGN_TOP_LEFT, point.x, point.y );
 	CtrGUIContextMenuMainPage = lv_menu_page_create(CtrGUIContextMenu, NULL);
-	ctr_internal_gui_context_menu_add(&CtrGUIContextMenuItemCopy, &CtrGUIContextMenuLabelCopy, LV_SYMBOL_COPY " copy");
-	ctr_internal_gui_context_menu_add(&CtrGUIContextMenuItemPaste, &CtrGUIContextMenuLabelPaste, LV_SYMBOL_PASTE " paste");
-	ctr_internal_gui_context_menu_add(&CtrGUIContextMenuItemCut, &CtrGUIContextMenuLabelCut, LV_SYMBOL_CUT " cut");
+	ctr_internal_gui_context_menu_add(&CtrGUIContextMenuItemCopy, &CtrGUIContextMenuLabelCopy, LV_SYMBOL_COPY " " CTR_MSG_GUI_CONTEXTMENU_COPY);
+	ctr_internal_gui_context_menu_add(&CtrGUIContextMenuItemPaste, &CtrGUIContextMenuLabelPaste, LV_SYMBOL_PASTE " " CTR_MSG_GUI_CONTEXTMENU_PASTE);
+	ctr_internal_gui_context_menu_add(&CtrGUIContextMenuItemCut, &CtrGUIContextMenuLabelCut, LV_SYMBOL_CUT " " CTR_MSG_GUI_CONTEXTMENU_CUT);
 	lv_menu_set_page(CtrGUIContextMenu, CtrGUIContextMenuMainPage);
 }
 
