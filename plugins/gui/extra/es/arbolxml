@@ -57,6 +57,10 @@
 }.
 
 
+Árbol-XML en: ['xml:'] hacer: { :code
+	mi str adjuntar: code.
+}.
+
 Árbol-XML en: ['elementos'] hacer: { :message :arg
 	mi str adjuntar: ['>\
 '].
@@ -87,3 +91,11 @@
 
 Árbol-XML en: ['texto'] hacer: { <- mi str. }.
 
+Árbol-XML en: ['sin-xml:'] hacer: { :str
+	<- str texto
+	reemplazar: ['&'] con: ['&amp;'],
+	reemplazar: ['<'] con: ['&lt;'],
+	reemplazar: ['>'] con: ['&gt;'],
+	reemplazar: ['"'] con: ['&quot;'],
+	reemplazar: ['''] con: ['&apos;'].
+}.
