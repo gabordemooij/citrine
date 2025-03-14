@@ -83,6 +83,13 @@ XML-tree on: ['close'] do: { :message :arg
 	}.
 }.
 
-
 XML-tree on: ['text'] do: { <- own str. }.
 
+XML-tree on: ['no-xml:'] do: { :str
+	<- str text
+	replace: ['&'] with: ['&amp;'],
+	replace: ['<'] with: ['&lt;'],
+	replace: ['>'] with: ['&gt;'],
+	replace: ['"'] with: ['&quot;'],
+	replace: ['''] with: ['&apos;'].
+}.

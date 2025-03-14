@@ -95,8 +95,15 @@ XML-boom bij: ['sluit'] doen: {
 }.
 
 
-
-
-
 XML-boom bij: ['tekst'] doen: { <- eigen uitkomst. }.
+
+
+XML-boom bij: ['geen-xml:'] doen: { :inhoud
+	<- inhoud tekst
+	vervang: ['&'] door: ['&amp;'],
+	vervang: ['<'] door: ['&lt;'],
+	vervang: ['>'] door: ['&gt;'],
+	vervang: ['"'] door: ['&quot;'],
+	vervang: ['''] door: ['&apos;'].
+}.
 

@@ -82,7 +82,7 @@ LVGLNL bij: ['nieuw'] doen: {
 			knop: ['lv_button'],
 			label: ['lv_label'],
 			links: ['left'],
-			rechts: ['rechts'],
+			rechts: ['right'],
 			onder: ['bottom'],
 			boven: ['top'],
 			rij: ['row'],

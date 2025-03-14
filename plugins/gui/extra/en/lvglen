@@ -12,32 +12,100 @@
 # - supplementen
 # - xmltree
 
->> LVGLEN := Object new.
+>> LVGLEN := XML-tree new.
 
 LVGLEN on: ['new'] do: {
 
-	>> xml := XML-tree new.
+	>> xml := self new.
 	
 	xml
 	names: (
 		List new
 			object: ['lv_obj'],
 			button: ['lv_button'],
-			label: ['lv_label']
+			label: ['lv_label'],
+			image: ['lv_image'],
+			textarea: ['lv_textarea'],
+			buttonmatrix: ['lv_buttonmatrix'],
+			bar: ['lv_bar'],
+			chart: ['lv_chart'],
+			roller: ['lv_roller'],
+			dropdown: ['lv_dropdown'],
+			scale: ['lv_scale'],
+			slider: ['lv_slider'],
+			table: ['lv_table'],
+			table-column: ['lv_table-column'],
+			table-cell: ['lv_table-cell'],
+			tabview: ['lv_tabview'],
+			tabview-tab_bar:['lv_tabview-tab_bar'],
+			tabview-tab: ['lv_tabview-tab']
 	)
 	attributes: ( 
 		List new
-			events: ['event_bubble']
-		
+			events: ['event_bubble'],
+			one-line: ['one_line'],
+			tab-bar-position:['tab_bar_position'],
+			pad-left: ['style_pad_left'],
+			pad-right: ['style_pad_right'],
+			pad-bottom: ['style_pad_bottom'],
+			pad-top: ['style_pad_top'],
+			margin-left: ['style_margin_left'],
+			margin-right: ['style_margin_right'],
+			margin-top: ['style_margin_top'],
+			margin-bottom: ['style_margin_bottom'],
+			layout: ['style_layout'],
+			flex-flow: ['style_flex_flow'],
+			flex-align: ['style_flex_align'],
+			border: ['style_border_width'],
+			border-color: ['style_border_color'],
+			shadow: ['style_shadow_width'],
+			outline: ['style_outline_width'],
+			radius: ['style_radius'],
+			bg-opa: ['style_bg_opa']
 	)
 	values: (
 		List new
 			True: ['true'],
 			False: ['false'],
 			object: ['lv_obj'],
-			button: ['lv_boton'],
-			label: ['lv_label']
+			button: ['lv_button'],
+			label: ['lv_label'],
+			left: ['left'],
+			rechts: ['rechts'],
+			onder: ['bottom'],
+			boven: ['top'],
+			rij: ['row'],
+			kolom: ['column']
 	).
 	
 	<- xml.
+}.
+
+
+LVGLEN on: ['font:'] do: { :font
+	self style_text_font: font name.
+}.
+
+LVGLEN on: ['image:'] do: { :image
+	self src: image name.
+}.
+
+LVGLEN on: ['background:'] do: { :image
+	self style_bg_image_src: image name.
+}.
+
+LVGLEN on: ['color:'] do: { :color
+	self style_text_color: color rgbhex.
+}.
+
+LVGLEN on: ['ink:'] do: { :color
+	self style_text_color: color rgbhex.
+}.
+
+LVGLEN on: ['randkleur:'] do: { :kleur
+	zelf style_border_color: kleur rgbhex.
+}.
+
+LVGLEN on: ['achtergrondskleur:'] do: { :kleur
+	zelf style_bg_color: kleur rgbhex.
 }.
