@@ -1,5 +1,23 @@
 // Annotated Dictionary Template File
 
+// Instructions:
+// 1.  Translate the phrase between the quotes ("")
+// 2.  Check that the number of : in the phrase is the same
+// 3.  Every phrase must be unique, no duplicates are allowed (also not in a different file)
+// 4.  You may not use spaces in the translation, use a dash if necessary. No snake_case or camelCase please!
+// 5.  The order of the : must remain the same "add:to:" cannot be translated with "to:add:"
+// 7.  You may not put two : after each other ("blahblah::" is not allowed)
+// 8.  If a phrase consists of just one character, its translation must also be just one character
+// 9.  Please do not use the following symbols in your translation: { } ( ) , := <- except for the dedicated symbols
+// 10. Please do not start your translation with a digit
+// 11. Please do not use quotes in your translation
+// 12. Please do not include an end-of-line symbol as part of your translation (most of the time this is a dot)
+// 13. You may use any UTF-8 character you like, not just ASCII (so you can use native characters if needed)
+// 14. Clean up: remove all the comments from the file as well as empty lines.
+// 15. Do not change the order of the translations!
+// 16. Do not omit any translation and do not add additional translations!
+// 17. The result should not contain any English words between quotes. Translate every item except the symbols.
+
 
 // These text fragments are used by Citrine to generate lists and maps,
 // for instance after sending a string/text message to such an object, they
@@ -222,8 +240,8 @@
 #define CTR_DICT_RECURSIVE        "recursive"            // Allows a recursive operation in object, otherwise protection kicks in
 
 // Math
-#define CTR_DICT_MATH_SIN                        "sin"
-#define CTR_DICT_MATH_COS                        "cos"
-#define CTR_DICT_MATH_TAN                        "tan"
-#define CTR_DICT_MATH_ATAN                       "atan"
-#define CTR_DICT_MATH_LOG                        "log"
+#define CTR_DICT_MATH_SIN                        "sin"   // sinus function (math)
+#define CTR_DICT_MATH_COS                        "cos"   // cosinus function (math)
+#define CTR_DICT_MATH_TAN                        "tan"   // tangus function (math)
+#define CTR_DICT_MATH_ATAN                       "atan"  // atangus function (math)
+#define CTR_DICT_MATH_LOG                        "log"   // logarithm function (math)
