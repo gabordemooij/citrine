@@ -1,0 +1,10 @@
+There are 2 chairs in the sunny garden.
+A rubber duck swims in the pool.
+Is there a shed in the garden? Well.. Llulla
+In the garden you smell the fragrance of tulips and roses and lillies.
+The garden is Mana meters long.
+Luckily, this day, there are Mana wasps in the garden.
+The dog named Mana sleeps under the tree.
+a\"bb\"ccc\"
+(Musuq lista) churay:((Musuq lista) churay:Mana maypi:['dog'], churay:Mana maypi:['insects'], churay:((Musuq lista) churay:15 maypi:['length'], churay:8 maypi:['width']) maypi:['size'], churay:(Katiray ← ['tulips'] ; ['roses'] ; ['lillies']) maypi:['flower'], churay:Llulla maypi:['shed'], churay:Chiqap maypi:['pool'], churay:2 maypi:['chairs']) maypi:['garden']
+{"garden":{"dog":null, "insects":null, "size":{"length":15, "width":8}, "flower":["tulips","roses","lillies"], "shed":false, "pool":true, "chairs":2}}
