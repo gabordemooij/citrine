@@ -1,0 +1,36 @@
+Dara
+Dara
+Dëppante
+Dëgg
+Dëppante
+Dëkkul
+Lim
+1
+Lim
+-3
+Lim
+9.2
+Lim
+-9.2
+Jokkalante
+Jokkalante xees 
+Jokkalante
+Jokkalante ← 1 ; 2
+Jokkalante
+Jokkalante ← 1 ; (Jokkalante ← 2)
+Jokkalante
+Jokkalante ← 1 ; (Jokkalante ← 2) ; 3
+Jokkalante
+Jokkalante ← 1 ; ((Listin xees) teg:['a'] ci:['b']) ; 3
+Jokkalante
+Jokkalante ← 1 ; ((Listin xees) teg:(Jokkalante ← 9) ci:['b']) ; 3
+Listin
+(Listin xees) teg:2 ci:['1']
+Listin
+(Listin xees) teg:2 ci:['x']
+Listin
+(Listin xees) teg:(Jokkalante ← 1 ; 2) ci:['x']
+Listin
+(Listin xees) teg:(Jokkalante ← ((Listin xees) teg:['q'] ci:['y']) ; 2) ci:['x']
+Dara
+Dara

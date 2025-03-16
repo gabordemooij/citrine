@@ -1,0 +1,15 @@
+1,001
+1,024
+Jokkalante ← ['1'] ; ['2'] ; ['3']
+Jokkalante ← ['1'] ; ['2'] ; ['3']
+Jokkalante ← ['1'] ; [''] ; ['3']
+Jokkalante ← ['1'] ; [''] ; ['3']
+Jokkalante ← [''] ; [''] ; [''] ; ['']
+Jokkalante ← [''] ; [''] ; [''] ; ['']
+Jokkalante ← [''] ; ['']
+Jokkalante ← [''] ; ['']
+Jokkalante ← ['x']
+Jokkalante ← ['x']
+Jokkalante ← ['']
+Jokkalante ← ['']
+Jokkalante ← ['1,2,3']
