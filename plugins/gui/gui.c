@@ -516,7 +516,6 @@ ctr_object* ctr_gui_screen(ctr_object* myself, ctr_argument* argumentList) {
 	// for some reason events will take place (on android) in the wrong place if we dont do this...
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 	SDL_RenderSetLogicalSize(lv_sdl_window_get_renderer(CtrGUIDisplay), CtrGUIWidth, CtrGUIHeight);
-	//end
 	lv_group_t * g = lv_group_create();
 	lv_group_set_default(g);
 	lv_indev_t* mouse = lv_sdl_mouse_create();
@@ -546,7 +545,6 @@ ctr_object* ctr_gui_screen(ctr_object* myself, ctr_argument* argumentList) {
 	arguments->object = CtrStdNil;
 	ctr_send_message(guiObject, CTR_DICT_RUN, strlen(CTR_DICT_RUN), arguments);
 	ctr_heap_free(arguments);
-    /*Handle LVGL tasks*/
     while(1) {
 		idle_time = lv_timer_handler(); /*Returns the time to the next timer execution*/
         usleep(idle_time * 1000);
