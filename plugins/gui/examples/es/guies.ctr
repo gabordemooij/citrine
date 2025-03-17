@@ -72,34 +72,34 @@ gui en: ['click:'] hacer: { :id
 	elementos
 		vista
 		extiende: ['objeto'],
-		burbuja-evento: Verdadero,
+		eventos: Verdadero,
 		alto: ['100%'],
 		ancho: ['100%'],
 		fondo: papel-pintado,
 		elementos
 			objeto
 			opacidad-fondo: 0,
-			burbuja-evento: Verdadero,
+			eventos: Verdadero,
 			borde: 0,
 			ancho: ['100%'],
 			alto: ['100%'],
-			diseno: ['flex'],
-			flujo-flex: ['columna'],
+			diseño: ['flexible'],
+			flujo-flexible: ['columna'],
 			elementos
 				etiqueta
 				fuente: cómico,
 				color: blanco,
 				texto: ['El arbol XML'],
 				cerrar
-				caja-texto
+				area-de-texto
 				ancho: ['100%'],
 				id: ['1'],
-				burbuja-evento: Verdadero,
-				selectable: Verdadero,
+				eventos: Verdadero,
+				seleccionable: Verdadero,
 				texto: ejemplo,
 				cerrar
-				boton
-				burbuja-evento: Verdadero,
+				botón
+				eventos: Verdadero,
 				id: ['2'],
 				elementos
 					etiqueta
