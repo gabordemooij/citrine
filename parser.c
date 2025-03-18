@@ -309,6 +309,10 @@ ctr_tnode* ctr_cparse_block() {
 		}
 		t = ctr_clex_tok();
 	}
+	if (t == CTR_TOKEN_BLOCKCLOSE) {
+		ctr_cparse_emit_error_unexpected( t, NULL );
+		return NULL;
+	}
 	first = 1;
 	while((first || t == CTR_TOKEN_DOT)) {
 		ctr_tlistitem* codeListItem;
