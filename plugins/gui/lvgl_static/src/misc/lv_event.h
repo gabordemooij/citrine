@@ -36,6 +36,7 @@ typedef enum {
 
     /** Input device events*/
     LV_EVENT_PRESSED,             /**< Widget has been pressed */
+    LV_EVENT_RIGHT,
     LV_EVENT_PRESSING,            /**< Widget is being pressed (sent continuously while pressing)*/
     LV_EVENT_PRESS_LOST,          /**< Widget is still being pressed but slid cursor/finger off Widget */
     LV_EVENT_SHORT_CLICKED,       /**< Widget was pressed for a short period of time, then released. Not sent if scrolled. */

@@ -70,7 +70,7 @@ static void indev_pointer_proc(lv_indev_t * i, lv_indev_data_t * data);
 static void indev_keypad_proc(lv_indev_t * i, lv_indev_data_t * data);
 static void indev_encoder_proc(lv_indev_t * i, lv_indev_data_t * data);
 static void indev_button_proc(lv_indev_t * i, lv_indev_data_t * data);
-static void indev_proc_press(lv_indev_t * indev);
+static void indev_proc_press(lv_indev_t * indev, lv_indev_data_t * data);
 static void indev_proc_release(lv_indev_t * indev);
 static lv_result_t indev_proc_short_click(lv_indev_t * indev);
 static void indev_proc_pointer_diff(lv_indev_t * indev);
@@ -734,9 +734,8 @@ static void indev_pointer_proc(lv_indev_t * i, lv_indev_data_t * data)
 
     /*Process the diff first as scrolling will be processed in indev_proc_release*/
     indev_proc_pointer_diff(i);
-
     if(i->state == LV_INDEV_STATE_PRESSED) {
-        indev_proc_press(i);
+        indev_proc_press(i, data);
     }
     else {
         indev_proc_release(i);
@@ -1160,7 +1159,7 @@ static void indev_button_proc(lv_indev_t * i, lv_indev_data_t * data)
     i->pointer.act_point.y = y;
 
     if(data->state == LV_INDEV_STATE_PRESSED) {
-        indev_proc_press(i);
+        indev_proc_press(i, NULL);
     }
     else {
         indev_proc_release(i);
@@ -1178,7 +1177,7 @@ static void indev_button_proc(lv_indev_t * i, lv_indev_data_t * data)
  * Process the pressed state of LV_INDEV_TYPE_POINTER input devices
  * @param indev pointer to an input device 'proc'
  */
-static void indev_proc_press(lv_indev_t * indev)
+static void indev_proc_press(lv_indev_t * indev, lv_indev_data_t* data)
 {
     LV_LOG_INFO("pressed at x:%d y:%d", (int)indev->pointer.act_point.x,
                 (int)indev->pointer.act_point.y);
@@ -1310,7 +1309,11 @@ static void indev_proc_press(lv_indev_t * indev)
         }
 
         if(is_enabled) {
-            if(send_event(LV_EVENT_PRESSING, indev_act) == LV_RESULT_INVALID) return;
+            if (data && data->btn_id == 2) {
+                if(send_event(LV_EVENT_RIGHT, indev_act) == LV_RESULT_INVALID) return;
+            } else {
+                if(send_event(LV_EVENT_PRESSING, indev_act) == LV_RESULT_INVALID) return;
+            }
         }
 
 
@@ -1795,7 +1798,8 @@ static lv_result_t send_event(lv_event_code_t code, void * param)
        code == LV_EVENT_RELEASED ||
        code == LV_EVENT_LONG_PRESSED ||
        code == LV_EVENT_LONG_PRESSED_REPEAT ||
-       code == LV_EVENT_ROTARY) {
+       code == LV_EVENT_ROTARY ||
+       code == LV_EVENT_RIGHT) {
         lv_indev_send_event(indev, code, indev_obj_act);
         if(indev_reset_check(indev)) return LV_RESULT_INVALID;
 

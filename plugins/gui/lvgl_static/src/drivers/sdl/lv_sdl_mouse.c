@@ -35,6 +35,7 @@ typedef struct {
     int16_t last_x;
     int16_t last_y;
     bool left_button_down;
+    bool right_button_down;
 #if LV_SDL_MOUSEWHEEL_MODE == LV_SDL_MOUSEWHEEL_MODE_CROWN
     int32_t diff;
 #endif
@@ -78,7 +79,13 @@ static void sdl_mouse_read(lv_indev_t * indev, lv_indev_data_t * data)
     /*Store the collected data*/
     data->point.x = dsc->last_x;
     data->point.y = dsc->last_y;
-    data->state = dsc->left_button_down ? LV_INDEV_STATE_PRESSED : LV_INDEV_STATE_RELEASED;
+    if (dsc->left_button_down) {
+        data->state = dsc->left_button_down ? LV_INDEV_STATE_PRESSED : LV_INDEV_STATE_RELEASED;
+        data->btn_id = 1;
+    } else if (dsc->right_button_down)  {
+        data->state = dsc->right_button_down ? LV_INDEV_STATE_PRESSED : LV_INDEV_STATE_RELEASED;
+        data->btn_id = 2;
+    }
 #if LV_SDL_MOUSEWHEEL_MODE == LV_SDL_MOUSEWHEEL_MODE_CROWN
     data->enc_diff = dsc->diff;
     dsc->diff = 0;
@@ -156,6 +163,8 @@ void lv_sdl_mouse_handler(SDL_Event * event)
         case SDL_MOUSEBUTTONUP:
             if(event->button.button == SDL_BUTTON_LEFT)
                 indev_dev->left_button_down = false;
+            if(event->button.button == SDL_BUTTON_RIGHT)
+                indev_dev->right_button_down = false;
             break;
         case SDL_WINDOWEVENT_LEAVE:
             indev_dev->left_button_down = false;
@@ -163,6 +172,11 @@ void lv_sdl_mouse_handler(SDL_Event * event)
         case SDL_MOUSEBUTTONDOWN:
             if(event->button.button == SDL_BUTTON_LEFT) {
                 indev_dev->left_button_down = true;
+                indev_dev->last_x = (int16_t)((float)(event->motion.x) / zoom);
+                indev_dev->last_y = (int16_t)((float)(event->motion.y) / zoom);
+            }
+            if(event->button.button == SDL_BUTTON_RIGHT) {
+                indev_dev->right_button_down = true;
                 indev_dev->last_x = (int16_t)((float)(event->motion.x) / zoom);
                 indev_dev->last_y = (int16_t)((float)(event->motion.y) / zoom);
             }
