@@ -97,6 +97,7 @@ static void release_indev_cb(lv_event_t * e)
         LV_LOG_INFO("done");
     }
 }
+int lv_sdl_keyboard_ctrl_pressed = 0;
 
 void lv_sdl_keyboard_handler(SDL_Event * event)
 {
@@ -129,7 +130,15 @@ void lv_sdl_keyboard_handler(SDL_Event * event)
 
     /* We only care about SDL_KEYDOWN and SDL_TEXTINPUT events */
     switch(event->type) {
+        case SDL_KEYUP: {
+           if ( event->key.keysym.sym == SDLK_LCTRL ) {
+               lv_sdl_keyboard_ctrl_pressed = 0;
+           }
+        }
         case SDL_KEYDOWN: {                     /*Button press*/
+                if ( event->key.keysym.sym == SDLK_LCTRL ) {
+                    lv_sdl_keyboard_ctrl_pressed = 1;
+                }
                 const uint32_t ctrl_key = keycode_to_ctrl_key(event->key.keysym.sym);
                 if(ctrl_key == '\0')
                     return;
@@ -168,6 +177,12 @@ void lv_sdl_keyboard_handler(SDL_Event * event)
  */
 static uint32_t keycode_to_ctrl_key(SDL_Keycode sdl_key)
 {
+    if (lv_sdl_keyboard_ctrl_pressed) {
+        switch(sdl_key) {
+            case SDLK_a:
+                return LV_KEY_SELECT_ALL;
+        }
+    }
     /*Remap some key to LV_KEY_... to manage groups*/
     switch(sdl_key) {
         case SDLK_RIGHT:

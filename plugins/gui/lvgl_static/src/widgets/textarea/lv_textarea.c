@@ -843,6 +843,17 @@ void lv_textarea_clear_selection(lv_obj_t * obj)
 #endif
 }
 
+void lv_textarea_selection_all(lv_obj_t * obj) {
+    LV_ASSERT_OBJ(obj, MY_CLASS);
+#if LV_LABEL_TEXT_SELECTION
+    lv_textarea_t * ta = (lv_textarea_t *)obj;
+    lv_label_set_text_selection_start(ta->label, 0);
+    lv_label_set_text_selection_end(ta->label, strlen(lv_textarea_get_text(ta)));
+#else
+    LV_UNUSED(obj); /*Unused*/
+#endif
+}
+
 void lv_textarea_cursor_right(lv_obj_t * obj)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
@@ -995,7 +1006,9 @@ static void lv_textarea_event(const lv_obj_class_t * class_p, lv_event_t * e)
     }
     else if(code == LV_EVENT_KEY) {
         uint32_t c = *((uint32_t *)lv_event_get_param(e)); /*uint32_t because can be UTF-8*/
-        if(c == LV_KEY_RIGHT)
+        if (c == LV_KEY_SELECT_ALL)
+            lv_textarea_selection_all(obj);
+        else if(c == LV_KEY_RIGHT)
             lv_textarea_cursor_right(obj);
         else if(c == LV_KEY_LEFT)
             lv_textarea_cursor_left(obj);
