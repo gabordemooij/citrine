@@ -428,7 +428,11 @@ void ctr_gui_internal_event_handler(lv_event_t* e) {
 	event_name = lv_event_code_get_name(lv_event_get_code(e));
 	lv_obj_t* target = lv_event_get_target(e);
 	id = (uint32_t) lv_obj_get_id(target);
+#ifdef ANDROID_EXPORT
 	if (event_code == LV_EVENT_LONG_PRESSED) {
+#else
+	if (event_code == LV_EVENT_RIGHT) {
+#endif
 		CtrGUIContextFocus = lv_indev_get_active_obj();
 		if (CtrGUIContextFocus) {
 			lv_obj_add_event_cb(CtrGUIContextFocus, &ctr_gui_internal_context_menu_reset_focus, LV_EVENT_DELETE, NULL);
