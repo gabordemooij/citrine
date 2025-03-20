@@ -1193,6 +1193,10 @@ static void indev_proc_press(lv_indev_t * indev, lv_indev_data_t* data)
         indev_obj_act = pointer_search_obj(disp, &indev->pointer.act_point);
         new_obj_searched = true;
     }
+    if (data && data->btn_id == 2) {
+        send_event(LV_EVENT_RIGHT, indev_act);
+        return;
+    }
     /*If there is an active object it's not scrolled and not press locked also search*/
     else if(indev->pointer.scroll_obj == NULL &&
             lv_obj_has_flag(indev_obj_act, LV_OBJ_FLAG_PRESS_LOCK) == false) {
@@ -1309,11 +1313,7 @@ static void indev_proc_press(lv_indev_t * indev, lv_indev_data_t* data)
         }
 
         if(is_enabled) {
-            if (data && data->btn_id == 2) {
-                if(send_event(LV_EVENT_RIGHT, indev_act) == LV_RESULT_INVALID) return;
-            } else {
-                if(send_event(LV_EVENT_PRESSING, indev_act) == LV_RESULT_INVALID) return;
-            }
+            if(send_event(LV_EVENT_PRESSING, indev_act) == LV_RESULT_INVALID) return;
         }
 
 

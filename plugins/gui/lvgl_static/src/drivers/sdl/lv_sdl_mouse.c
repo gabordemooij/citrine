@@ -164,7 +164,7 @@ void lv_sdl_mouse_handler(SDL_Event * event)
             if(event->button.button == SDL_BUTTON_LEFT)
                 indev_dev->left_button_down = false;
             if(event->button.button == SDL_BUTTON_RIGHT)
-                indev_dev->right_button_down = false;
+				indev_dev->right_button_down = false;
             break;
         case SDL_WINDOWEVENT_LEAVE:
             indev_dev->left_button_down = false;
