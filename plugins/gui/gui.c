@@ -43,6 +43,8 @@ lv_obj_t* CtrGUIContextMenuItemPaste;
 lv_obj_t* CtrGUIContextMenuLabelPaste;
 lv_obj_t* CtrGUIContextMenuItemCut;
 lv_obj_t* CtrGUIContextMenuLabelCut;
+lv_obj_t* CtrGUIContextMenuItemSelAll;
+lv_obj_t* CtrGUIContextMenuLabelSelAll;
 lv_obj_t* CtrGUIContextFocus;
 
 struct GUIIMG {
@@ -358,8 +360,12 @@ void ctr_internal_gui_context_actions(lv_event_t * e) {
 	char* oldbuf = lv_textarea_get_text(CtrGUIContextFocus);
 	uint32_t sellen = selend - selstart;
 	char* selbuf;
+	int close = 1;
 	uint32_t pos = lv_textarea_get_cursor_pos(CtrGUIContextFocus);
-    if (issel && (obj == CtrGUIContextMenuItemCopy || obj == CtrGUIContextMenuLabelCopy)) {
+	if ((obj == CtrGUIContextMenuItemSelAll || obj == CtrGUIContextMenuLabelSelAll)) {
+		lv_textarea_selection_all(CtrGUIContextFocus);
+		close = 0;
+	} else if (issel && (obj == CtrGUIContextMenuItemCopy || obj == CtrGUIContextMenuLabelCopy)) {
 		selbuf = ctr_internal_gui_copytext(oldbuf, selstart, sellen);
 		SDL_SetClipboardText(selbuf);
 		ctr_heap_free(selbuf);
@@ -382,7 +388,7 @@ void ctr_internal_gui_context_actions(lv_event_t * e) {
 			SDL_free(selbuf);
 		}
 	}
-	ctr_internal_gui_context_menu_close();
+	if (close) ctr_internal_gui_context_menu_close();
 }
 
 void ctr_internal_gui_context_menu_add(lv_obj_t** ret_item, lv_obj_t** ret_label, char* text) {
@@ -402,12 +408,13 @@ void ctr_internal_gui_context_menu_open(lv_point_t point) {
 	ctr_internal_gui_context_menu_close();
 	CtrGUIContextMenu = lv_menu_create(lv_scr_act());
 	lv_obj_add_event_cb(CtrGUIContextMenu, ctr_internal_gui_context_actions, LV_EVENT_CLICKED, CtrGUIContextMenu);
-	lv_obj_set_size(CtrGUIContextMenu, 200, 120);
+	lv_obj_set_size(CtrGUIContextMenu, 230, 150);
 	lv_obj_align(CtrGUIContextMenu, LV_ALIGN_TOP_LEFT, point.x, point.y );
 	CtrGUIContextMenuMainPage = lv_menu_page_create(CtrGUIContextMenu, NULL);
 	ctr_internal_gui_context_menu_add(&CtrGUIContextMenuItemCopy, &CtrGUIContextMenuLabelCopy, LV_SYMBOL_COPY " " CTR_MSG_GUI_CONTEXTMENU_COPY);
 	ctr_internal_gui_context_menu_add(&CtrGUIContextMenuItemPaste, &CtrGUIContextMenuLabelPaste, LV_SYMBOL_PASTE " " CTR_MSG_GUI_CONTEXTMENU_PASTE);
 	ctr_internal_gui_context_menu_add(&CtrGUIContextMenuItemCut, &CtrGUIContextMenuLabelCut, LV_SYMBOL_CUT " " CTR_MSG_GUI_CONTEXTMENU_CUT);
+	ctr_internal_gui_context_menu_add(&CtrGUIContextMenuItemSelAll, &CtrGUIContextMenuLabelSelAll, CTR_MSG_GUI_CONTEXTMENU_SELALL);
 	lv_menu_set_page(CtrGUIContextMenu, CtrGUIContextMenuMainPage);
 }
 
