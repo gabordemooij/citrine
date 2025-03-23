@@ -854,6 +854,44 @@ void lv_textarea_selection_all(lv_obj_t * obj) {
 #endif
 }
 
+void lv_textarea_selection_start(lv_obj_t * obj) {
+    LV_ASSERT_OBJ(obj, MY_CLASS);
+#if LV_LABEL_TEXT_SELECTION
+    lv_textarea_t * ta = (lv_textarea_t *)obj;
+    if (!ta->text_sel_in_prog) {
+		lv_textarea_clear_selection(ta);
+		lv_label_set_text_selection_start(ta->label, lv_textarea_get_cursor_pos(obj));
+		ta->text_sel_in_prog = 1;
+	}
+#else
+    LV_UNUSED(obj); /*Unused*/
+#endif
+}
+
+void lv_textarea_selection_stop(lv_obj_t * obj) {
+    LV_ASSERT_OBJ(obj, MY_CLASS);
+#if LV_LABEL_TEXT_SELECTION
+	lv_textarea_t * ta = (lv_textarea_t *)obj;
+    if (ta->text_sel_in_prog) {
+	  ta->text_sel_in_prog = 0;
+	}
+#else
+    LV_UNUSED(obj); /*Unused*/
+#endif
+}
+
+void lv_textarea_selection_continue(lv_obj_t * obj) {
+    LV_ASSERT_OBJ(obj, MY_CLASS);
+#if LV_LABEL_TEXT_SELECTION
+    lv_textarea_t * ta = (lv_textarea_t *)obj;
+    if (ta->text_sel_in_prog) {
+		lv_label_set_text_selection_end(ta->label, lv_textarea_get_cursor_pos(obj));
+	}
+#else
+    LV_UNUSED(obj); /*Unused*/
+#endif
+}
+
 void lv_textarea_cursor_right(lv_obj_t * obj)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
@@ -1001,6 +1039,18 @@ static void lv_textarea_event(const lv_obj_class_t * class_p, lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t * obj = lv_event_get_current_target(e);
 
+	if(code == LV_EVENT_KEY) {
+		uint32_t c = *((uint32_t *)lv_event_get_param(e)); /*uint32_t because can be UTF-8*/
+		if (
+		c != LV_KEY_SELECT_RIGHT &&
+		c != LV_KEY_SELECT_LEFT &&
+		c != LV_KEY_SELECT_UP &&
+		c != LV_KEY_SELECT_DOWN
+		) {
+			lv_textarea_selection_stop(obj);
+		}
+	}
+
     if(code == LV_EVENT_FOCUSED) {
         start_cursor_blink(obj);
     }
@@ -1008,6 +1058,26 @@ static void lv_textarea_event(const lv_obj_class_t * class_p, lv_event_t * e)
         uint32_t c = *((uint32_t *)lv_event_get_param(e)); /*uint32_t because can be UTF-8*/
         if (c == LV_KEY_SELECT_ALL)
             lv_textarea_selection_all(obj);
+        else if (c == LV_KEY_SELECT_RIGHT) {
+            lv_textarea_selection_start(obj);
+            lv_textarea_cursor_right(obj);
+            lv_textarea_selection_continue(obj);
+		}
+		else if (c == LV_KEY_SELECT_LEFT) {
+            lv_textarea_selection_start(obj);
+            lv_textarea_cursor_left(obj);
+            lv_textarea_selection_continue(obj);
+		}
+		else if (c == LV_KEY_SELECT_UP) {
+            lv_textarea_selection_start(obj);
+            lv_textarea_cursor_up(obj);
+            lv_textarea_selection_continue(obj);
+		}
+		else if (c == LV_KEY_SELECT_DOWN) {
+            lv_textarea_selection_start(obj);
+            lv_textarea_cursor_down(obj);
+            lv_textarea_selection_continue(obj);
+		}
         else if(c == LV_KEY_RIGHT)
             lv_textarea_cursor_right(obj);
         else if(c == LV_KEY_LEFT)

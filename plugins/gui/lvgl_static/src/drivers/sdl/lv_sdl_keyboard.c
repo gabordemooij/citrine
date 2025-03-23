@@ -98,12 +98,16 @@ static void release_indev_cb(lv_event_t * e)
     }
 }
 int lv_sdl_keyboard_ctrl_pressed = 0;
+int lv_sdl_keyboard_shift_pressed = 0;
 
 void lv_sdl_keyboard_handler(SDL_Event * event)
 {
     uint32_t win_id = UINT32_MAX;
     switch(event->type) {
         case SDL_KEYDOWN:
+            win_id = event->key.windowID;
+            break;
+        case SDL_KEYUP:
             win_id = event->key.windowID;
             break;
         case SDL_TEXTINPUT:
@@ -131,11 +135,21 @@ void lv_sdl_keyboard_handler(SDL_Event * event)
     /* We only care about SDL_KEYDOWN and SDL_TEXTINPUT events */
     switch(event->type) {
         case SDL_KEYUP: {
-           if ( event->key.keysym.sym == SDLK_LCTRL ) {
+		   if ( event->key.keysym.sym == SDLK_LCTRL ) {
                lv_sdl_keyboard_ctrl_pressed = 0;
            }
+           else if ( event->key.keysym.sym == SDLK_LSHIFT ) {
+               lv_sdl_keyboard_shift_pressed = 0;
+               return;
+           }
+           else {
+			return;
+		   }
         }
         case SDL_KEYDOWN: {                     /*Button press*/
+				if ( event->key.keysym.sym == SDLK_LSHIFT ) {
+                    lv_sdl_keyboard_shift_pressed = 1;
+                }
                 if ( event->key.keysym.sym == SDLK_LCTRL ) {
                     lv_sdl_keyboard_ctrl_pressed = 1;
                 }
@@ -183,6 +197,20 @@ static uint32_t keycode_to_ctrl_key(SDL_Keycode sdl_key)
                 return LV_KEY_SELECT_ALL;
         }
     }
+
+    if (lv_sdl_keyboard_shift_pressed) {
+        switch(sdl_key) {
+            case SDLK_RIGHT:
+                return LV_KEY_SELECT_RIGHT;
+            case SDLK_LEFT:
+                return LV_KEY_SELECT_LEFT;
+            case SDLK_UP:
+                return LV_KEY_SELECT_UP;
+            case SDLK_DOWN:
+                return LV_KEY_SELECT_DOWN;
+        }
+    }
+
     /*Remap some key to LV_KEY_... to manage groups*/
     switch(sdl_key) {
         case SDLK_RIGHT:
