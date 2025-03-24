@@ -347,7 +347,8 @@ void ctr_internal_gui_copy(lv_obj_t* obj) {
 	uint32_t selstart = lv_label_get_text_selection_start(txt);
 	uint32_t selend = lv_label_get_text_selection_end(txt);
 	char* oldbuf = lv_textarea_get_text(obj);
-	uint32_t sellen = selend - selstart;
+	uint32_t sellen = abs(selend - selstart);
+	selstart = (selstart < selend) ? selstart : selend;
 	char* selbuf;
 	selbuf = ctr_internal_gui_copytext(oldbuf, selstart, sellen);
 	SDL_SetClipboardText(selbuf);
@@ -359,7 +360,8 @@ void ctr_internal_gui_paste(lv_obj_t* obj) {
 	uint32_t selstart = lv_label_get_text_selection_start(txt);
 	uint32_t selend = lv_label_get_text_selection_end(txt);
 	char* oldbuf = lv_textarea_get_text(obj);
-	uint32_t sellen = selend - selstart;
+	uint32_t sellen = abs(selend - selstart);
+	selstart = (selstart < selend) ? selstart : selend;
 	char* selbuf;
 	int issel = lv_textarea_text_is_selected(obj);
 	uint32_t pos = lv_textarea_get_cursor_pos(obj);
@@ -383,6 +385,7 @@ void ctr_internal_gui_cut(lv_obj_t* obj) {
 	uint32_t selend = lv_label_get_text_selection_end(txt);
 	char* oldbuf = lv_textarea_get_text(obj);
 	uint32_t sellen = abs(selend - selstart);
+	selstart = (selstart < selend) ? selstart : selend;
 	char* selbuf;
 	selbuf = ctr_internal_gui_copytext(oldbuf, selstart, sellen);
 	lv_label_cut_text(txt, selstart, sellen);
