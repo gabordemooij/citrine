@@ -843,6 +843,51 @@ void lv_textarea_clear_selection(lv_obj_t * obj)
 #endif
 }
 
+LV_TEXTAREA_HANDLER lv_textarea_copy_handler = NULL;
+LV_TEXTAREA_HANDLER lv_textarea_paste_handler = NULL;
+LV_TEXTAREA_HANDLER lv_textarea_cut_handler = NULL;
+
+void lv_textarea_set_copy_handler(LV_TEXTAREA_HANDLER handler) {
+	lv_textarea_copy_handler = handler;
+}
+
+void lv_textarea_set_paste_handler(LV_TEXTAREA_HANDLER handler) {
+	lv_textarea_paste_handler = handler;
+}
+
+void lv_textarea_set_cut_handler(LV_TEXTAREA_HANDLER handler) {
+	lv_textarea_cut_handler = handler;
+}
+
+void lv_textarea_copy(lv_obj_t * obj) {
+    LV_ASSERT_OBJ(obj, MY_CLASS);
+#if LV_LABEL_TEXT_SELECTION
+	if (lv_textarea_copy_handler) lv_textarea_copy_handler(obj);
+#else
+    LV_UNUSED(obj); /*Unused*/
+#endif
+}
+
+void lv_textarea_paste(lv_obj_t * obj) {
+    LV_ASSERT_OBJ(obj, MY_CLASS);
+#if LV_LABEL_TEXT_SELECTION
+    if (lv_textarea_paste_handler) lv_textarea_paste_handler(obj);
+#else
+    LV_UNUSED(obj); /*Unused*/
+#endif
+}
+
+void lv_textarea_cut(lv_obj_t * obj) {
+    LV_ASSERT_OBJ(obj, MY_CLASS);
+#if LV_LABEL_TEXT_SELECTION
+	if (lv_textarea_cut_handler) {
+		lv_textarea_cut_handler(obj);
+	}
+#else
+    LV_UNUSED(obj); /*Unused*/
+#endif
+}
+
 void lv_textarea_selection_all(lv_obj_t * obj) {
     LV_ASSERT_OBJ(obj, MY_CLASS);
 #if LV_LABEL_TEXT_SELECTION
@@ -1058,6 +1103,12 @@ static void lv_textarea_event(const lv_obj_class_t * class_p, lv_event_t * e)
         uint32_t c = *((uint32_t *)lv_event_get_param(e)); /*uint32_t because can be UTF-8*/
         if (c == LV_KEY_SELECT_ALL)
             lv_textarea_selection_all(obj);
+        else if (c == LV_KEY_COPY)
+			lv_textarea_copy(obj);
+        else if (c == LV_KEY_PASTE)
+			lv_textarea_paste(obj);
+        else if (c == LV_KEY_CUT)
+			lv_textarea_cut(obj);
         else if (c == LV_KEY_SELECT_RIGHT) {
             lv_textarea_selection_start(obj);
             lv_textarea_cursor_right(obj);

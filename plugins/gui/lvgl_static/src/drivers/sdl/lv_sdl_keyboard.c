@@ -195,6 +195,12 @@ static uint32_t keycode_to_ctrl_key(SDL_Keycode sdl_key)
         switch(sdl_key) {
             case SDLK_a:
                 return LV_KEY_SELECT_ALL;
+            case SDLK_c:
+				return LV_KEY_COPY;
+			case SDLK_v:
+				return LV_KEY_PASTE;
+			case SDLK_x:
+				return LV_KEY_CUT;
         }
     }
 

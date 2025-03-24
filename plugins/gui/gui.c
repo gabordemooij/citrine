@@ -340,6 +340,58 @@ char* ctr_internal_gui_copytext(char* src, uint32_t pos, uint32_t len) {
 	return buffer;
 }
 
+void ctr_internal_gui_copy(lv_obj_t* obj) {
+	int issel = lv_textarea_text_is_selected(obj);
+	if (!issel) return;
+	lv_obj_t* txt = lv_textarea_get_label(obj);
+	uint32_t selstart = lv_label_get_text_selection_start(txt);
+	uint32_t selend = lv_label_get_text_selection_end(txt);
+	char* oldbuf = lv_textarea_get_text(obj);
+	uint32_t sellen = selend - selstart;
+	char* selbuf;
+	selbuf = ctr_internal_gui_copytext(oldbuf, selstart, sellen);
+	SDL_SetClipboardText(selbuf);
+	ctr_heap_free(selbuf);
+}
+
+void ctr_internal_gui_paste(lv_obj_t* obj) {
+	lv_obj_t* txt = lv_textarea_get_label(obj);
+	uint32_t selstart = lv_label_get_text_selection_start(txt);
+	uint32_t selend = lv_label_get_text_selection_end(txt);
+	char* oldbuf = lv_textarea_get_text(obj);
+	uint32_t sellen = selend - selstart;
+	char* selbuf;
+	int issel = lv_textarea_text_is_selected(obj);
+	uint32_t pos = lv_textarea_get_cursor_pos(obj);
+	if (SDL_HasClipboardText()) {
+		if (issel) lv_label_cut_text(txt, selstart, sellen);
+		selbuf = SDL_GetClipboardText();
+		lv_label_ins_text(txt, pos, selbuf);
+		if (issel) {
+			lv_textarea_set_cursor_pos(obj, pos+sellen);
+			lv_textarea_clear_selection(obj);
+		}
+		SDL_free(selbuf);
+	}
+}
+
+void ctr_internal_gui_cut(lv_obj_t* obj) {
+	int issel = lv_textarea_text_is_selected(obj);
+	if (!issel) return;
+	lv_obj_t* txt = lv_textarea_get_label(obj);
+	uint32_t selstart = lv_label_get_text_selection_start(txt);
+	uint32_t selend = lv_label_get_text_selection_end(txt);
+	char* oldbuf = lv_textarea_get_text(obj);
+	uint32_t sellen = abs(selend - selstart);
+	char* selbuf;
+	selbuf = ctr_internal_gui_copytext(oldbuf, selstart, sellen);
+	lv_label_cut_text(txt, selstart, sellen);
+	SDL_SetClipboardText(selbuf);
+	lv_textarea_set_cursor_pos(obj, selstart);
+	ctr_heap_free(selbuf);
+	lv_textarea_clear_selection(obj);
+}
+
 void ctr_internal_gui_context_menu_close() {
 	 if (CtrGUIContextMenu) {
 		lv_obj_del(CtrGUIContextMenu);
@@ -352,41 +404,18 @@ void ctr_internal_gui_context_actions(lv_event_t * e) {
 		ctr_internal_gui_context_menu_close();
 		return;
 	}
-	int issel = lv_textarea_text_is_selected(CtrGUIContextFocus);
     lv_obj_t * obj = lv_event_get_target_obj(e);
-	lv_obj_t* txt = lv_textarea_get_label(CtrGUIContextFocus);
-	uint32_t selstart = lv_label_get_text_selection_start(txt);
-	uint32_t selend = lv_label_get_text_selection_end(txt);
-	char* oldbuf = lv_textarea_get_text(CtrGUIContextFocus);
-	uint32_t sellen = selend - selstart;
-	char* selbuf;
 	int close = 1;
-	uint32_t pos = lv_textarea_get_cursor_pos(CtrGUIContextFocus);
 	if ((obj == CtrGUIContextMenuItemSelAll || obj == CtrGUIContextMenuLabelSelAll)) {
 		lv_textarea_selection_all(CtrGUIContextFocus);
 		close = 0;
-	} else if (issel && (obj == CtrGUIContextMenuItemCopy || obj == CtrGUIContextMenuLabelCopy)) {
-		selbuf = ctr_internal_gui_copytext(oldbuf, selstart, sellen);
-		SDL_SetClipboardText(selbuf);
-		ctr_heap_free(selbuf);
-	} else if (issel && (obj == CtrGUIContextMenuItemCut || obj == CtrGUIContextMenuLabelCut)) {
-		selbuf = ctr_internal_gui_copytext(oldbuf, selstart, sellen);
-		lv_label_cut_text(txt, selstart, sellen);
-		SDL_SetClipboardText(selbuf);
-		lv_textarea_set_cursor_pos(CtrGUIContextFocus, selstart);
-		ctr_heap_free(selbuf);
+	} else if ((obj == CtrGUIContextMenuItemCopy || obj == CtrGUIContextMenuLabelCopy)) {
+		ctr_internal_gui_copy(CtrGUIContextFocus);
+	} else if ((obj == CtrGUIContextMenuItemCut || obj == CtrGUIContextMenuLabelCut)) {
+		ctr_internal_gui_cut(CtrGUIContextFocus);
 	}
 	else if (obj == CtrGUIContextMenuItemPaste || obj == CtrGUIContextMenuLabelPaste) {
-		if (SDL_HasClipboardText()) {
-			if (issel) lv_label_cut_text(txt, selstart, sellen);
-			selbuf = SDL_GetClipboardText();
-			lv_label_ins_text(txt, pos, selbuf);
-			if (issel) {
-				lv_textarea_set_cursor_pos(CtrGUIContextFocus, pos+sellen);
-				lv_textarea_clear_selection(CtrGUIContextFocus);
-			}
-			SDL_free(selbuf);
-		}
+		ctr_internal_gui_paste(CtrGUIContextFocus);
 	}
 	if (close) ctr_internal_gui_context_menu_close();
 }
@@ -498,6 +527,9 @@ ctr_object* ctr_gui_xml_at_set(ctr_object* myself, ctr_argument* argumentList) {
 	lv_obj_t* child = root;
 	if (CtrEventHandler == NULL) {
 		CtrEventHandler = lv_obj_add_event_cb(root, &ctr_gui_internal_event_handler, LV_EVENT_ALL, NULL);
+		lv_textarea_set_copy_handler((LV_TEXTAREA_HANDLER) ctr_internal_gui_copy);
+		lv_textarea_set_paste_handler((LV_TEXTAREA_HANDLER) ctr_internal_gui_paste);
+		lv_textarea_set_cut_handler((LV_TEXTAREA_HANDLER) ctr_internal_gui_cut);
 	}
 	if (argumentList->next->next->object != CtrStdNil) {
 		id = ctr_tonum(argumentList->next->next->object);

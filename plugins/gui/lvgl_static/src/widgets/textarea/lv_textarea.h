@@ -29,6 +29,7 @@ extern "C" {
 
 LV_EXPORT_CONST_INT(LV_TEXTAREA_CURSOR_LAST);
 
+
 /**********************
  *      TYPEDEFS
  **********************/
@@ -59,6 +60,8 @@ LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_textarea_class;
 enum {
     LV_PART_TEXTAREA_PLACEHOLDER = LV_PART_CUSTOM_FIRST,
 };
+
+typedef void (*LV_TEXTAREA_HANDLER)(lv_obj_t* t);
 
 /**********************
  * GLOBAL PROTOTYPES
@@ -203,6 +206,10 @@ void lv_textarea_set_password_show_time(lv_obj_t * obj, uint32_t time);
  * @param align     the align mode from ::lv_text_align_t
  */
 void lv_textarea_set_align(lv_obj_t * obj, lv_text_align_t align);
+
+void lv_textarea_set_copy_handler(LV_TEXTAREA_HANDLER handler);
+void lv_textarea_set_paste_handler(LV_TEXTAREA_HANDLER handler);
+void lv_textarea_set_cut_handler(LV_TEXTAREA_HANDLER handler);
 
 /*=====================
  * Getter functions
