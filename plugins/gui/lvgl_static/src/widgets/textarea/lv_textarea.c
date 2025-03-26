@@ -898,6 +898,7 @@ void lv_textarea_remove(lv_obj_t * obj) {
 	uint32_t sellen = abs(selend - selstart);
 	selstart = (selstart < selend) ? selstart : selend;
 	lv_label_cut_text(txt, selstart, sellen);
+	lv_textarea_set_cursor_pos(obj, selstart);
 	lv_textarea_clear_selection(obj);
 #else
 	LV_UNUSED(obj); /*Unused*/
