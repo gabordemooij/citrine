@@ -1113,7 +1113,7 @@ static void lv_textarea_event(const lv_obj_class_t * class_p, lv_event_t * e)
 		}
 	}
 
-    if(code == LV_EVENT_FOCUSED) {
+	if(code == LV_EVENT_FOCUSED) {
         start_cursor_blink(obj);
     }
     else if(code == LV_EVENT_KEY) {
@@ -1182,6 +1182,9 @@ static void lv_textarea_event(const lv_obj_class_t * class_p, lv_event_t * e)
             code == LV_EVENT_RELEASED) {
         update_cursor_position_on_click(e);
     }
+    else if (code == LV_EVENT_DOUBLE_CLICKED) {
+		update_selection_word(e);
+	}
     else if(code == LV_EVENT_DRAW_MAIN) {
         draw_placeholder(e);
     }
@@ -1408,6 +1411,44 @@ static void refr_cursor_area(lv_obj_t * obj)
     area_tmp.x2 += ta->label->coords.x1;
     area_tmp.y2 += ta->label->coords.y1;
     lv_obj_invalidate_area(obj, &area_tmp);
+}
+
+void update_selection_word(lv_event_t* e) {
+	lv_indev_t * click_source = lv_indev_active();
+    if(click_source == NULL) return;
+	lv_obj_t * obj = lv_event_get_current_target(e);
+    lv_textarea_t * ta = (lv_textarea_t *)obj;
+    uint32_t c = lv_textarea_get_current_char(obj);
+    uint32_t startpos = lv_textarea_get_cursor_pos(obj);
+    uint32_t oldpos = startpos;
+    uint32_t newpos = startpos;
+    uint32_t left = 0;
+    uint32_t right = 0;
+    while( 1 ) { //left boundary
+		lv_textarea_cursor_left(obj);
+		newpos = lv_textarea_get_cursor_pos(obj);
+		if (newpos == oldpos) break;
+		oldpos = newpos;
+		c = lv_textarea_get_current_char(obj);
+		if ((isspace(c) || ispunct(c)) && c != '_') {
+			break;
+		}
+	}
+	left = newpos;
+	lv_textarea_selection_start(obj);
+	while( 1 ) { //right boundary
+		lv_textarea_selection_continue(obj);
+		lv_textarea_cursor_right(obj);
+		newpos = lv_textarea_get_cursor_pos(obj);
+		if (newpos == oldpos) break;
+		oldpos = newpos;
+		c = lv_textarea_get_current_char(obj);
+		if ((isspace(c) || ispunct(c)) && c != '_') {
+			lv_textarea_cursor_left(obj); break;
+		}
+	}
+	right = newpos;
+	lv_textarea_selection_stop(obj);
 }
 
 static void update_cursor_position_on_click(lv_event_t * e)
