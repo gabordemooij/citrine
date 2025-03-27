@@ -1414,6 +1414,7 @@ static void refr_cursor_area(lv_obj_t * obj)
 }
 
 void update_selection_word(lv_event_t* e) {
+#if LV_LABEL_TEXT_SELECTION
 	lv_indev_t * click_source = lv_indev_active();
     if(click_source == NULL) return;
 	lv_obj_t * obj = lv_event_get_current_target(e);
@@ -1449,6 +1450,8 @@ void update_selection_word(lv_event_t* e) {
 	}
 	right = newpos;
 	lv_textarea_selection_stop(obj);
+#else
+#endif
 }
 
 static void update_cursor_position_on_click(lv_event_t * e)
