@@ -214,6 +214,10 @@ static uint32_t keycode_to_ctrl_key(SDL_Keycode sdl_key)
                 return LV_KEY_SELECT_UP;
             case SDLK_DOWN:
                 return LV_KEY_SELECT_DOWN;
+            case SDLK_HOME:
+				return LV_KEY_SELECT_FROM_SOL;
+			case SDLK_END:
+				return LV_KEY_SELECT_TILL_EOL;
         }
     }
 

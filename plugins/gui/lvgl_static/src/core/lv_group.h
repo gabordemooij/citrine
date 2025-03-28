@@ -44,7 +44,8 @@ typedef enum {
     LV_KEY_COPY         = 25,  /*0x19, EOM*/
     LV_KEY_PASTE        = 26,  /*0x1A, SUB*/
     LV_KEY_CUT          = 28,  /*0x1C, FS*/ 
-    
+    LV_KEY_SELECT_FROM_SOL = 29, /*0x1D, GS*/
+    LV_KEY_SELECT_TILL_EOL = 30, /*0x1E, RS*/
 } lv_key_t;
 
 /**********************

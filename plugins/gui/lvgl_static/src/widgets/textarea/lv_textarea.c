@@ -1107,7 +1107,9 @@ static void lv_textarea_event(const lv_obj_class_t * class_p, lv_event_t * e)
 		c != LV_KEY_SELECT_RIGHT &&
 		c != LV_KEY_SELECT_LEFT &&
 		c != LV_KEY_SELECT_UP &&
-		c != LV_KEY_SELECT_DOWN
+		c != LV_KEY_SELECT_DOWN &&
+		c != LV_KEY_SELECT_TILL_EOL &&
+		c != LV_KEY_SELECT_FROM_SOL
 		) {
 			lv_textarea_selection_stop(obj);
 		}
@@ -1145,6 +1147,12 @@ static void lv_textarea_event(const lv_obj_class_t * class_p, lv_event_t * e)
             lv_textarea_selection_start(obj);
             lv_textarea_cursor_down(obj);
             lv_textarea_selection_continue(obj);
+		}
+		else if (c == LV_KEY_SELECT_FROM_SOL) {
+            update_selection_expand(obj, 0);
+		}
+		else if (c == LV_KEY_SELECT_TILL_EOL) {
+            update_selection_expand(obj, 1);
 		}
         else if(c == LV_KEY_RIGHT)
             lv_textarea_cursor_right(obj);
@@ -1453,6 +1461,36 @@ void update_selection_word(lv_event_t* e) {
 #else
 #endif
 }
+
+void update_selection_expand(lv_obj_t* obj, int direction) {
+	LV_ASSERT_OBJ(obj, MY_CLASS);
+#if LV_LABEL_TEXT_SELECTION
+	lv_textarea_t* ta = (lv_textarea_t *)obj;
+	uint32_t c;
+	uint32_t pos;
+	uint32_t oldpos;
+	pos = lv_textarea_get_cursor_pos(ta);
+	oldpos = -1;
+	lv_textarea_selection_start(ta);
+	while (oldpos != pos) {
+		if (direction == 0) {
+			lv_textarea_cursor_left(ta);
+		} else {
+			lv_textarea_cursor_right(ta);
+		}
+		oldpos = pos;
+		pos = lv_textarea_get_cursor_pos(ta);
+		lv_textarea_selection_continue(ta);
+		c = lv_textarea_get_current_char(ta);
+		if (c == '\n' || c == '\r') {
+				break;
+		}
+	}
+	lv_textarea_selection_stop(ta);
+#else
+#endif
+}
+
 
 static void update_cursor_position_on_click(lv_event_t * e)
 {
