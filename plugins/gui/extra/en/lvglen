@@ -71,11 +71,11 @@ LVGLEN on: ['new'] do: {
 			button: ['lv_button'],
 			label: ['lv_label'],
 			left: ['left'],
-			rechts: ['rechts'],
-			onder: ['bottom'],
-			boven: ['top'],
-			rij: ['row'],
-			kolom: ['column']
+			right: ['right'],
+			bottom: ['bottom'],
+			top: ['top'],
+			row: ['row'],
+			column: ['column']
 	).
 	
 	<- xml.
@@ -102,10 +102,10 @@ LVGLEN on: ['ink:'] do: { :color
 	self style_text_color: color rgbhex.
 }.
 
-LVGLEN on: ['randkleur:'] do: { :kleur
-	zelf style_border_color: kleur rgbhex.
+LVGLEN on: ['border-color:'] do: { :color
+	zelf style_border_color: color rgbhex.
 }.
 
-LVGLEN on: ['achtergrondskleur:'] do: { :kleur
-	zelf style_bg_color: kleur rgbhex.
+LVGLEN on: ['background-color:'] do: { :color
+	zelf style_bg_color: color rgbhex.
 }.
