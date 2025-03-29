@@ -37,7 +37,7 @@ LVGLEN on: ['new'] do: {
 			table-column: ['lv_table-column'],
 			table-cell: ['lv_table-cell'],
 			tabview: ['lv_tabview'],
-			tabview-tab_bar:['lv_tabview-tab_bar'],
+			tabview-tab-bar:['lv_tabview-tab_bar'],
 			tabview-tab: ['lv_tabview-tab']
 	)
 	attributes: ( 
