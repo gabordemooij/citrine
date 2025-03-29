@@ -1,0 +1,145 @@
+
+**Español**
+
+Cada vez que crees un nuevo objeto de vista, debe comenzar así:
+
+
+>> árbol := LVGLES nuevo.
+árbol
+	componente
+	elementos
+		vista
+		extiende: ['objeto'],
+		eventos: Verdadero,
+
+		
+A continuación, se muestra un resumen y una breve explicación
+de los diferentes elementos y atributos:
+
+
+**Elementos**
+
++----------------------+------------------------------------------------+
+| componente           | Inicia la definición de un nuevo widget        |
++----------------------+------------------------------------------------+
+| elementos            | Inicia la enumeración de subelementos          |
++----------------------+------------------------------------------------+
+| vista                | Inicia la definición de una nueva vista        |
+|                      | (solo necesario en un componente).             |
++----------------------+------------------------------------------------+
+| objeto               | Un objeto visual sin una vista específica,     |
+|                      | similar a un div en HTML.                      |
++----------------------+------------------------------------------------+
+| botón                | Un botón en el que se puede hacer clic.        |
+|                      | No tiene texto, usa una etiqueta.              |
++----------------------+------------------------------------------------+
+| etiqueta             | Un elemento donde se puede colocar texto       |
+|                      | (usando el atributo texto:). Se necesita una   |
+|                      | etiqueta dentro de un botón para un rótulo.    |
++----------------------+------------------------------------------------+
+| imagen               | Un elemento de imagen.                         |
++----------------------+------------------------------------------------+
+| area-de-texto        | Un campo de entrada para texto.                |
++----------------------+------------------------------------------------+
+| lista-desplegable    | Un menú desplegable.                           |
++----------------------+------------------------------------------------+
+| rueda-de-selección   | Un menú de selección en forma de rueda.        |
++----------------------+------------------------------------------------+
+| vista-de-pestaña     | Una vista con pestañas, común en               |
+|                      | teléfonos móviles.                             |
++----------------------+------------------------------------------------+
+| barra-de-pestañas    | Espacio para las pestañas en una vista con     |
+|                      | pestañas.                                      |
++----------------------+------------------------------------------------+
+| pestaña              | Una pestaña dentro del contenedor de pestañas. |
+|                      | Al hacer clic, cambia la pestaña activa.       |
++----------------------+------------------------------------------------+
+
+
+**Atributos**
++----------------------+------------------------------------------------+
+| extiende:          | Indica en qué otro componente se basa este       |
+| [texto]            | (generalmente objeto).                           |
++----------------------+------------------------------------------------+
+| eventos:             | Indica si este elemento es interactivo o no.   |
+| [Verdadero/Falso]    | ¡Atención! Si un elemento es interactivo       |
+|                      | (como un botón), sus elementos superiores      |
+|                      | también deben ser interactivos.                |
++----------------------+------------------------------------------------+
+| ancho: [número]      | Define el ancho de un elemento.                |
++----------------------+------------------------------------------------+
+| alto: [número]       | Define la altura de un elemento.               |
++----------------------+------------------------------------------------+
+| texto: [texto]       | Escribe texto dentro del elemento              |
+|                      | (etiqueta/campo-de-texto).                     |
++----------------------+------------------------------------------------+
+| activo:              | Activa una pestaña en la vista de pestañas.    |
+| [Verdadero/Falso]    |                                                |
++----------------------+------------------------------------------------+
+| desplazable:         | Permite el desplazamiento dentro del elemento. |
+| [Verdadero/Falso]    |                                                |
++----------------------+------------------------------------------------+
+| seleccionable:       | Indica si el texto dentro del elemento puede   |
+| [Verdadero/Falso]    | ser seleccionado por el usuario.               |
++----------------------+------------------------------------------------+
+| enmascarado:         | Indica si el texto en el campo debe ser        |
+| [Verdadero/Falso]    | ocultado con puntos, como en un campo de       |
+|                      | contraseña.                                    |
++----------------------+------------------------------------------------+
+| linea:               | Indica si un campo de texto permite solo una   |
+| [Verdadero/Falso]    | línea de texto.                                |
++----------------------+------------------------------------------------+
+| posición-barra       | Indica dónde debe aparecer la barra            |
+| -de-pestañas:        | depestañas. Opciones:                          |
+| [texto]              | ['izquierda'] ['derecha'] ['superior']         |
+|                      | ['inferior']                                   |
++----------------------+------------------------------------------------+
+| borde: [número]      | Define el grosor del borde del elemento.       |
++----------------------+------------------------------------------------+
+| color-borde: [Color] | Color del borde del elemento.                  |
++----------------------+------------------------------------------------+
+| color-texto: [Color] | Color del texto dentro del elemento.           |
++----------------------+------------------------------------------------+
+| color-fondo: [Color] | Color de fondo del elemento.                   |
++----------------------+------------------------------------------------+
+| fondo: [Imagen]      | Imagen de fondo del elemento.                  |
++----------------------+------------------------------------------------+
+| imagen: [Imagen]     | Establece la imagen dentro del elemento        |
+|                      | imagen.                                        |
++----------------------+------------------------------------------------+
+| fuente: [Fuente]     | Establece la fuente del texto en el elemento.  |
++----------------------+------------------------------------------------+
+| sombra: [número]     | Define el grosor de la sombra del elemento.    |
++----------------------+------------------------------------------------+
+| contorno: [número]   | Define el grosor del contorno (no el borde).   |
++----------------------+------------------------------------------------+
+| radio: [número]      | Define el radio de redondeo de las esquinas.   |
++----------------------+------------------------------------------------+
+| opacidad-fondo:      | Define la opacidad del fondo del elemento.     |
+| [número]             |                                                |
++----------------------+------------------------------------------------+
+| diseño: [texto]      | Define el diseño de los subelementos.          |
+|                      | Opciones: ['grid'] o ['flex'].                 |
++----------------------+------------------------------------------------+
+| flujo-flexible:      | Define la dirección del diseño flexible        |
+| [texto]              | (flex flow). Opciones: ['fila'] ['columna'].   |
++----------------------+------------------------------------------------+
+| alineación-flexible  | Define la alineación del diseño flexible.      |
+| [texto]              |                                                |
++----------------------+------------------------------------------------+
+| margen-izquierdo:    | margen                                         |
+| margen-derecho:      |                                                |
+| margen-superior:     |                                                |
+| margen-inferior:     |                                                |
+| [número]             |                                                |
++----------------------+------------------------------------------------+
+| relleno-izquierdo:   | relleno                                        |
+| relleno-derecho:     |                                                |
+| relleno-inferior:    |                                                |
+| relleno-superior:    |                                                |
+| rechtervulling:      |                                                |
+| ondervulling:        |                                                |
+| bovenvulling:        |                                                |
+| [getal]              |                                                |
++----------------------+------------------------------------------------+
+

@@ -1,0 +1,159 @@
+
+English
+
+Whenever you create a new view object, it should start like this:  
+
+```citrine
+>> tree := LVGLEN new.
+tree
+	component
+	elements
+		view
+		extends ['object'],
+		...rest...
+```
+
+Below is an overview and short explanation of the various elements and attributes:  
+
+Elements  
++----------------------+-----------------------------------------------+  
+| component            | Starts the definition of a new widget         |  
++----------------------+-----------------------------------------------+  
+| elements             | Starts the enumeration of sub-elements        |  
++----------------------+-----------------------------------------------+  
+| view                 | Starts the definition of a new view            |  
+|                      | (only needed inside a component).             |  
++----------------------+-----------------------------------------------+  
+| object               | A visual object without a specific view,      |  
+|                      | similar to a div in HTML.                     |  
++----------------------+-----------------------------------------------+  
+| button               | A clickable button. A button does not         |  
+|                      | contain text; use a label instead.            |  
++----------------------+-----------------------------------------------+  
+| label                | An element for displaying text (with the      |  
+|                      | attribute `text:`). A label is required       |  
+|                      | inside a button to create a caption.          |  
++----------------------+-----------------------------------------------+  
+| image                | An image element.                             |  
++----------------------+-----------------------------------------------+  
+| textarea             | A text input field.                           |  
++----------------------+-----------------------------------------------+  
+| dropdown             | A collapsible dropdown menu.                  |  
++----------------------+-----------------------------------------------+  
+| roller               | A selection menu in the form of a wheel.      |  
++----------------------+-----------------------------------------------+  
+| tabview              | A view with tabs, as commonly seen on         |  
+|                      | mobile phones.                                |  
++----------------------+-----------------------------------------------+  
+| tabview-bar          | Container for tabs inside a tabView.          |  
++----------------------+-----------------------------------------------+  
+| tabview-tab          | A tab inside the tabContainer. Clicking it    |  
+|                      | changes the active tab.                       |  
++----------------------+-----------------------------------------------+  
+
+
+events: ['event_bubble'],
+			one-line: ['one_line'],
+			tab-bar-position:['tab_bar_position'],
+			pad-left: ['style_pad_left'],
+			pad-right: ['style_pad_right'],
+			pad-bottom: ['style_pad_bottom'],
+			pad-top: ['style_pad_top'],
+			margin-left: ['style_margin_left'],
+			margin-right: ['style_margin_right'],
+			margin-top: ['style_margin_top'],
+			margin-bottom: ['style_margin_bottom'],
+			layout: ['style_layout'],
+			flex-flow: ['style_flex_flow'],
+			flex-align: ['style_flex_align'],
+			border: ['style_border_width'],
+			border-color: ['style_border_color'],
+			shadow: ['style_shadow_width'],
+			outline: ['style_outline_width'],
+			radius: ['style_radius'],
+			bg-opa: ['style_bg_opa']
+			
+			
+Attributes
++----------------------+-----------------------------------------------+  
+| extends:             | Specifies which other component this is       |  
+| [text]               | based on (usually `object`).                  |  
++----------------------+-----------------------------------------------+  
+| events:              | Specifies whether this element is interactive |  
+| [Yes/No]             | or not. Note! If you have an interactive      |  
+|                      | element like a button, all parent elements    |  
+|                      | must also be interactive!                     |  
++----------------------+-----------------------------------------------+  
+| width: [number]      | Specifies the width of an element.            |  
++----------------------+-----------------------------------------------+  
+| height: [number]     | Specifies the height of an element.           |  
++----------------------+-----------------------------------------------+  
+| text: [text]         | Sets text inside the element                  |  
+|                      | (label/textField).                            |  
++----------------------+-----------------------------------------------+  
+| active:              | Sets a tab as active (tabView).               |  
+| [Yes/No]             |                                               |  
++----------------------+-----------------------------------------------+  
+| scrollable:          | Allows scrolling within an element.           |  
+| [Yes/No]             |                                               |  
++----------------------+-----------------------------------------------+  
+| selectable:          | Specifies whether text within this element    |  
+| [Yes/No]             | can be selected by the user.                  |  
++----------------------+-----------------------------------------------+  
+| password:            | Specifies whether text in a field should be   |  
+| [Yes/No]             | hidden behind dots, as in password fields.    |  
++----------------------+-----------------------------------------------+  
+| one-line:            | Specifies whether a text field allows only    |  
+| [Yes/No]             | a single line of text.                        |  
++----------------------+-----------------------------------------------+  
+| tab-bar-position:    | Specifies the position of the tab bar in a    |  
+| [text]               | tabView. Options:                             |  
+|                      | ['left'] ['right'] ['top'] ['bottom']         |  
++----------------------+-----------------------------------------------+  
+| border: [number]     | Border thickness of the element.              |  
++----------------------+-----------------------------------------------+  
+| border-color:        | Border color of the element.                  |  
+| [Color]              |                                               |  
++----------------------+-----------------------------------------------+  
+| ink: [Color]         | Text color of the element.                    |  
++----------------------+-----------------------------------------------+  
+| background-color:    | Background color of the element.              |  
+| [Color]              |                                               |  
++----------------------+-----------------------------------------------+  
+| background:          | Sets a background image for the element.      |  
+| [Image]              |                                               |  
++----------------------+-----------------------------------------------+  
+| image: [Image]       | Sets an image for an image element.           |  
++----------------------+-----------------------------------------------+  
+| font: [Font]         | Sets the font for text inside the element.    |  
++----------------------+-----------------------------------------------+  
+| shadow: [number]     | Sets the shadow thickness of the element.     |  
++----------------------+-----------------------------------------------+  
+| outline: [number]    | Sets the outline thickness (not border).      |  
++----------------------+-----------------------------------------------+  
+| radius:              | Sets the corner rounding level.               |  
+| [number]             |                                               |  
++----------------------+-----------------------------------------------+  
+| bg-opa:              | Sets the opacity level of the element’s       |  
+| [number]             | background.                                   |  
++----------------------+-----------------------------------------------+  
+| layout: [text]       | Sets the layout of the sub-elements.          |  
+|                      | Options: ['grid'] or ['flex'].                |  
++----------------------+-----------------------------------------------+  
+| flex-flow: [text]    | Sets the direction of the flexible layout.    |  
+|                      | Options: ['row'] ['column'].                  |  
++----------------------+-----------------------------------------------+  
+| flex-align: [text]   | Sets the alignment of the flexible layout.    |  
++----------------------+-----------------------------------------------+  
+| margin-left:         | Sets margins.                                 |  
+| margin-right:        |                                               |  
+| margin-bottom:       |                                               |  
+| margin-top:          |                                               |  
+| [number]             |                                               |  
++----------------------+-----------------------------------------------+  
+| pad-left:            | Sets padding.                                 |  
+| pad-right:           |                                               |  
+| pad-bottom:          |                                               | 
+| pad-top:             |                                               |  
+| [number]             |                                               |  
++----------------------+-----------------------------------------------+  

@@ -1,0 +1,140 @@
+
+Nederlands
+
+Telkens als je een nieuw weergave-object maakt, moet deze zo beginnen:
+
+>> boomstructuur := LVGLNL nieuw.
+boomstructuur
+	component
+	elementen
+		weergave
+		baseer-op: ['object'],
+		...rest...
+		
+Hier volgt een overzicht en korte uitleg
+van de verschillende elementen en attributen:
+
+
+Elementen
+
++----------------------+-----------------------------------------------+
+| component            | Begint de definitie van een nieuw widget      |
++----------------------+-----------------------------------------------+
+| elementen            | Begint de opsomming van sub-elementen         |
++----------------------+-----------------------------------------------+
+| weergave             | Begint de definitie van een nieuwe weergave   |
+|                      | (alleen nodig bij een component).             |
++----------------------+-----------------------------------------------+
+| object               | Een visueel object zonder specifieke weergave |
+|                      | vergelijkbaar met een div in html.            |
++----------------------+-----------------------------------------------+
+| knop                 | Een knop waar je op kunt klikken. Een knop    |      
+|                      | heeft geen tekst, gebruik een label.          |
++----------------------+-----------------------------------------------+
+| label                | Een element waar je een tekst in kunt zetten  |
+|                      | (met het attribuut tekst:). Je hebt een label |
+|                      | nodig als element in een knop om een opschrift|
+|                      | te maken.                                     |
++----------------------+-----------------------------------------------+
+| plaatje              | Een afbeeldingselement.                       |
++----------------------+-----------------------------------------------+
+| tekstveld            | Een invoerveld voor tekst.                    |
++----------------------+-----------------------------------------------+
+| keuzelijst           | Een uitklapbaar keuzemenu.                    |
++----------------------+-----------------------------------------------+
+| keuzewiel            | Een keuzemenu in de vorm van een wiel.        |
++----------------------+-----------------------------------------------+
+| tabweergave          | Een weergave met tabjes zoals populair op     |
+|                      | mobiele telefoons.                            |
++----------------------+-----------------------------------------------+
+| tabbladen            | Plek voor de tabbladen in een tabweergave.    | 
++----------------------+-----------------------------------------------+
+| tabblad              | Tabje in de tabbladen. Door te klikken pas je |
+|                      | het actieve tabblad aan.                      |
++----------------------+-----------------------------------------------+
+
+Attributen
++----------------------+-----------------------------------------------+
+| baseer-op:           | Geeft aan op welk ander component dit         |
+| [tekst]              | is gebaseerd (meestal object).                |
++----------------------+-----------------------------------------------+
+| interactief:         | Geeft aan of dit element interactief          |
+| [Ja/Nee]             | is of niet. Let op! Als je een interactief    |
+|                      | element hebt zoals een knop, moeten alle      |
+|                      | bovenliggende elementen ook interactief zijn! |
++----------------------+-----------------------------------------------+
+| breedte: [getal]     | Geeft de breedte aan van een element.         |
++----------------------+-----------------------------------------------+
+| hoogte: [getal]      | Geeft de hoogte aan van een element.          |
++----------------------+-----------------------------------------------+
+| tekst: [tekst]       | Schrijft tekst in het element                 |
+|                      | (label/tekstveld).                            |
++----------------------+-----------------------------------------------+
+| actief:              | Maakt een tabblad actief (tabweergave).       |
+| [Ja/Nee]             |                                               |
++----------------------+-----------------------------------------------+
+| schuifbaar:          | Zorgt dat je kunt schuiven binnen een element.|
+| [Ja/Nee]             |                                               |
++----------------------+-----------------------------------------------+
+| selecteerbaar:       | Geeft aan of de tekst binnen dit element      |
+| [Ja/Nee]             | geslecteerd kan worden door de gebruiker.     |
++----------------------+-----------------------------------------------+
+| gemaskeerd:          | Geeft aan of tekst in veld verborgen moet     |
+| [Ja/Nee]             | worden achter bolletjes zoals bij             |
+|                      | wachtwoordvelden gebruikelijk is.             |
++----------------------+-----------------------------------------------+
+| enkelregelig:        | Geeft aan of een tekstveld slechts een enkele |
+| [Ja/Nee]             | regel kan bevatten.                           |
++----------------------+-----------------------------------------------+
+| tabbalkpositie:      | Geeft aan waar de tabbalk van een tabweergave |
+| [tekst]              | moet staan. Keuze uit:                        |
+|                      | ['links'] ['rechts'] ['boven'] ['onder']      |
++----------------------+-----------------------------------------------+
+| rand: [getal]        | Randdikte van het element.                    |
++----------------------+-----------------------------------------------+
+| randkleur: [Kleur]   | Randkleur van het element.                    |
++----------------------+-----------------------------------------------+
+| kleur: [Kleur]       | Tekstkleur van het element.                   |
++----------------------+-----------------------------------------------+
+| achtergrondskleur:   | Achtergondskleur van het element.             |
+| [Kleur]              |                                               |
++----------------------+-----------------------------------------------+
+| achtergrond:         | Stelt achtergrondsafbeelding in van element.  |
+| [Plaatje]            |                                               |
++----------------------+-----------------------------------------------+
+| plaatje: [Plaatje]   | Stelt afbeelding in van element plaatje.      |
++----------------------+-----------------------------------------------+
+| lettertype:          | Stelt lettertype in van tekst in element.     |
+| [Lettertype]         |                                               |
++----------------------+-----------------------------------------------+
+| schaduw: [getal]     | Stelt schaduwdikte in van element.            |
++----------------------+-----------------------------------------------+
+| omlijning: [getal]   | Stelt omlijningsdikte (niet rand) in.         |
++----------------------+-----------------------------------------------+
+| hoekronding: [getal] | Stelt de afrondingsgraad van de hoeken in.    |
++----------------------+-----------------------------------------------+
+| achtergrondsdekking: | Stelt de mate van ondoorzichtigheid van de    |
+| [getal]              | achtergrond van het element in.               |
++----------------------+-----------------------------------------------+
+| indeling:            | Stelt de indeling van de subelementen in.     |
+| [tekst]              | Keuze uit: ['grid'] of ['flex'].              |
++----------------------+-----------------------------------------------+
+| flexstroom:          | Stelt de richting van de flexibele indeling   |
+| [tekst]              | in (flex flow). Keuze uit: ['rij'] ['kolom']. |
++----------------------+-----------------------------------------------+
+| flexuitlijning:      | Stelt uitlijning van flexibele indeling in.   |
+| [tekst]              |                                               |
++----------------------+-----------------------------------------------+
+| linkermarge:         | Stelt marge in.                               |
+| rechtermarge:        |                                               |
+| ondermarge:          |                                               |
+| bovenmarge:          |                                               |
+| [getal]              |                                               |
++----------------------+-----------------------------------------------+
+| linkervulling:       | Stelt opvulling in (padding).                 |
+| rechtervulling:      |                                               |
+| ondervulling:        |                                               |
+| bovenvulling:        |                                               |
+| [getal]              |                                               |
++----------------------+-----------------------------------------------+
+
