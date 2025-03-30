@@ -21,16 +21,16 @@ Listar ← 1 ; (Listar ← 2)
 Listar
 Listar ← 1 ; (Listar ← 2) ; 3
 Listar
-Listar ← 1 ; ((Mapa novo) colocar:“a” em:“b”) ; 3
+Listar ← 1 ; ((Mapa novo) colocar:['a'] em:['b']) ; 3
 Listar
-Listar ← 1 ; ((Mapa novo) colocar:(Listar ← 9) em:“b”) ; 3
+Listar ← 1 ; ((Mapa novo) colocar:(Listar ← 9) em:['b']) ; 3
 Mapa
-(Mapa novo) colocar:2 em:“1”
+(Mapa novo) colocar:2 em:['1']
 Mapa
-(Mapa novo) colocar:2 em:“x”
+(Mapa novo) colocar:2 em:['x']
 Mapa
-(Mapa novo) colocar:(Listar ← 1 ; 2) em:“x”
+(Mapa novo) colocar:(Listar ← 1 ; 2) em:['x']
 Mapa
-(Mapa novo) colocar:(Listar ← ((Mapa novo) colocar:“q” em:“y”) ; 2) em:“x”
+(Mapa novo) colocar:(Listar ← ((Mapa novo) colocar:['q'] em:['y']) ; 2) em:['x']
 Nulo
 Nulo
