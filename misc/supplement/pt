@@ -1,0 +1,11 @@
+# Título.......: Suplemento de Língua Portuguesa
+# Autor........: Gabor de Mooij (c) copyright 2025
+# Data.........: 28 de janeiro de 2025
+# Licença......: BSD-3/MIT
+# Versão.......: 1.0
+#
+# Descrição:
+# Este pacote de suplementos contém expansões para Citrino
+# na língua portuguesa.
+
+Nulo em: ['ou-então:'] fazer: { :a <- a. }.
