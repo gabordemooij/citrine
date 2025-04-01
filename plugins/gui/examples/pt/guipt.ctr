@@ -1,0 +1,117 @@
+# Titel.......: GUINL
+# Auteur......: Gabor de Mooij (c) copyright 2025
+# Datum.......: 2025-03-14
+# Licentie....: BSD-3/MIT
+# Versie......: 1.1
+#
+# Beschrijving:
+# GUINL is een voorbeeldprogramma van een GUI in Citrine/NL.
+#
+# Benodigdheden:
+# - xmlboom
+# - lvglnl
+# - supplementnl
+
+>> gui := Gui novo.
+
+gui
+	usar: 
+		Localização-de-arquivo supplementopt,
+	usar:
+		Localização-de-arquivo arvorexml,
+	usar: 
+		Localização-de-arquivo lvglpt.
+
+>> papel-de-parede := 
+	Imagem novo: ['guidemo.png'].
+
+>> tipografia := 
+	Tipografia novo
+	fonte: ['Shortcake.ttf'] tamanho: 40.
+
+>> branco := Cor 
+	novo
+	vermelho: 255
+	verde: 255
+	azul: 255.
+
+>> xmldemo := 
+	Árvore-xml
+	sem-xml: ['<lv_label text="arvore XML"></lv_label>'].
+
+gui em: ['clique:'] fazer: { :id
+	(id = 2) verdadeiro: {
+		>> xml := 
+		
+		['
+		<component>
+		<view extends="lv_obj" height="100%" width="100%" style_bg_opa="0">
+		<lv_obj height="100%" width="100%">
+		'] + (gui valor-introduzido: 1) + ['
+		</lv_obj>
+		</view>
+		</component>
+		'].
+		
+		eu xml: xml nome: ['x'] por: ['3'].
+	}.
+
+}.
+
+>> arvore := LVGLPT novo.
+arvore
+	componente
+	elementos
+		visualizar
+		baseado-em: ['objeto'],
+		id: 100,
+		interativo: Verdadeiro,
+		altura: ['100%'],
+		largura: ['100%'],
+		fundo: papel-de-parede,
+		elementos
+			objeto
+			cobertura-fundo: 0,
+			interativo: Verdadeiro,
+			borda: 0,
+			largura: ['100%'],
+			altura: ['100%'],
+			disposição: ['flex'],
+			fluxo-flexível: ['coluna'],
+			elementos
+				rótulo
+				tipografia: tipografia,
+				cor: branco,
+				texto: ['Uma arvore XML'],
+				fechar
+				campo-de-texto
+				largura: ['100%'],
+				id: ['1'],
+				interativo: Verdadeiro,
+				selecionável: Verdadeiro,
+				texto: xmldemo,
+				fechar
+				botão
+				interativo: Verdadeiro,
+				id: ['2'],
+				elementos
+					rótulo
+					texto: ['desenhar'],
+					fechar
+				fechar
+				objeto
+				id: ['3'],
+				cobertura-fundo: 0,
+				borda: 0,
+				largura: ['100%'],
+				altura: ['50%'],
+				fechar
+			fechar
+		fechar
+	fechar.
+
+Saída escrever: arvore string.
+
+gui 
+largura: 400 altura: 800,
+tela: arvore string.

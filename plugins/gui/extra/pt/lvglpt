@@ -17,7 +17,7 @@
 
 LVGLPT em: ['novo'] fazer: {
 	
-	>> árvore-xml := self novo.
+	>> árvore-xml := eu novo.
 	árvore-xml
 	elementos: (
 		Mapa novo
@@ -25,7 +25,7 @@ LVGLPT em: ['novo'] fazer: {
 			visualizar: ['view'],
 			objeto: ['lv_obj'],
 			botão: ['lv_button'],
-			label: ['lv_label'],
+			rótulo: ['lv_label'],
 			imagem: ['lv_image'],
 			campo-de-texto: ['lv_textarea'],
 			grelha-de-botões: ['lv_buttonmatrix'],
@@ -44,7 +44,7 @@ LVGLPT em: ['novo'] fazer: {
 	)
 	atributos: (
 		Mapa novo
-			base-on: ['extends'],
+			baseado-em: ['extends'],
 			interativo: ['event_bubble'],
 			largura: ['width'],
 			altura: ['height'],
@@ -108,7 +108,7 @@ LVGLPT em: ['cor:'] fazer: { :cor
 	eu style_text_color: cor rgbhex.
 }.
 
-LVGLNL em: ['cor-da-borda:'] fazer: { :cor
+LVGLPT em: ['cor-da-borda:'] fazer: { :cor
 	eu style_border_color: cor rgbhex.
 }.
 

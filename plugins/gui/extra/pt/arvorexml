@@ -1,4 +1,4 @@
-# Título.......: Xmlboom
+# Título.......: Árvore xml
 # Autor........: Gabor de Mooij (c) copyright 2025
 # Data.........: 28 de janeiro de 2025
 # Licença......: BSD-3/MIT
@@ -16,13 +16,13 @@
 Árvore-xml em: ['novo'] fazer: { <- eu novo preparar. }.
 
 Árvore-xml em: ['preparar'] fazer: {
-	eu opschonen.
+	eu limpar.
 	próprio nomes-de-atributos := Mapa novo.
 	próprio valores-de-atributos := Mapa novo.
 	próprio nomes-dos-elementos := Mapa novo.
 }.
 
-Árvore-xml em: ['opschonen'] fazer: {
+Árvore-xml em: ['limpar'] fazer: {
 	próprio modo-de-texto := Falso.
 	próprio resultado := [''].
 	próprio elementos := Listar novo.
@@ -46,10 +46,10 @@
 	próprio resultado acrescentar: (
 		['<elemento '] elemento: nome-do-elemento 
 	).
-	próprio elementmodus := Falso.
+	próprio modo-de-elemento := Falso.
 }.
 
-Árvore-xml em: ['bericht:argument:'] fazer: { :mensagem :argumento
+Árvore-xml em: ['responder:e:'] fazer: { :mensagem :argumento
 	mensagem := mensagem - [':'].
 	próprio modo-de-texto verdadeiro: {
 		próprio modo-de-texto := Falso.
@@ -73,8 +73,7 @@
 
 
 Árvore-xml em: ['elementos'] fazer: {
-	próprio resultado acrescentar: ['>\
-'].
+	próprio resultado acrescentar: ['>\n'].
 	próprio elementmodus := Verdadeiro.
 }.
 
@@ -86,16 +85,15 @@
 Árvore-xml em: ['fechar'] fazer: {
 	>> fechar := próprio elementos pop.
 	próprio modo-de-elemento verdadeiro: {
-		próprio resultado acrescentar: (['\
-</elemento>'] elemento: slot).
-	}, senão: {
-		próprio resultado acrescentar: (['></elemento>'] elemento: slot).
-		próprio elementmodus := Verdadeiro.
+		próprio resultado acrescentar: (['\n</elemento>'] elemento: fechar).
+	}, falso: {
+		próprio resultado acrescentar: (['></elemento>'] elemento: fechar).
+		próprio modo-de-elemento := Verdadeiro.
 	}.
 }.
 
 
-Árvore-xml em: ['tekst'] fazer: { <- próprio resultado. }.
+Árvore-xml em: ['string'] fazer: { <- próprio resultado. }.
 
 
 Árvore-xml em: ['sem-xml:'] fazer: { :conteúdo <- conteúdo string
