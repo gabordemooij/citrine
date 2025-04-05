@@ -28,7 +28,7 @@ bindir ?= $(prefix)/bin
 MAINSRC = ./gui.c
 
 include $(LVGL_DIR)/lvgl/lvgl.mk
-CSRCS +=$(LVGL_DIR)/mouse_cursor_icon.c 
+CSRCS +=$(LVGL_DIR)/mouse_cursor_icon.c json.c jsmn/jsmn.c
 OBJEXT ?= .o
 
 AOBJS = $(ASRCS:.S=$(OBJEXT))
@@ -71,6 +71,10 @@ clean:
 install:
 	install -d $(DESTDIR)$(bindir)
 	install $(BUILD_BIN_DIR)/$(BIN) $(DESTDIR)$(bindir)
+
+libctrgui.so: all
+
+install-libctrgui.so: libctrgui.so
 
 uninstall:
 	$(RM) -r $(addprefix $(DESTDIR)$(bindir)/,$(BIN))

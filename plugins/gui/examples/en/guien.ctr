@@ -13,6 +13,7 @@
 # - xmltree
 # - lvglen
 
+
 Program
 	use:
 		Path supplementen,
@@ -22,6 +23,9 @@ Program
 		Path lvglen.
 
 >> gui := Gui new.
+
+Out write: (JSON jsonify: (List new put: 1 at: 2)), stop.
+
 
 >> wallpaper := 
 	Image new: ['guidemo.png'].

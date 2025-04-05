@@ -1,1 +1,1 @@
-(List new) put:[''] at:['box']
+(Dict new) put:[''] at:['box']

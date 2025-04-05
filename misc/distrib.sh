@@ -13,9 +13,6 @@ cd ..
 x86_64-w64-mingw32-windres plugins/media/citrine.rc -O coff -o /tmp/citrine.res
 #cd ../../..
 
-# Copy the additional Chinese installation translation [manual]
-# [MANUAL] cp plugins/media/i18n/zh2/Chinese.isl [Inno Setup dir]/Languages/Chinese.isl
-
 # Create Linux folders for Linux distribution
 rm -rf dist/Linux
 mkdir dist/Linux
@@ -59,7 +56,6 @@ cp mods/gui/libctrgui.dll dist/Win64/ISO/$lang/mods/gui/
 # Add shortcut icon
 cp plugins/media/assets/picto.ico dist/Win64/ISO/$lang/pictogram.ico 
 
-
 # copy demo materials
 cp misc/supplement/en dist/Win64/ISO/$lang/supplementen
 cp plugins/gui/extra/en/xmltree dist/Win64/ISO/$lang/xmltree
@@ -69,17 +65,12 @@ cp topbar.png dist/Win64/ISO/$lang/
 cp vault.ctr dist/Win64/ISO/$lang/
 sed -e "s/ctrnl/ctr$lang/g" misc/distrib/assets/export.bat > dist/Win64/ISO/$lang/export.bat
 
-
-
 # Copy assets to setup creator work dir
 cp plugins/media/assets/* ~/.wine/drive_c/InnoSetupSourceDir/
 rm -rf ~/.wine/drive_c/InnoSetupSourceDir/license.txt
 cp plugins/media/assets/license.txt ~/.wine/drive_c/InnoSetupSourceDir/license.txt
 rm -rf ~/.wine/drive_c/InnoSetupSourceDir/dist
 cp -R dist/Win64/ISO/$lang ~/.wine/drive_c/InnoSetupSourceDir/dist
-
-
-
 
 # Copy setup-creator script to work dir
 suffix="$(echo "$lang" | tr 'a-z' 'A-Z')"
@@ -114,14 +105,14 @@ echo "=== PLATFORM: LINUX 64 TAR ==="
 # Compile for Linux
 OS="Linux" ISO="$lang" make -f makefile clean
 OS="Linux" ISO="$lang" make -f makefile
-OS="Linux" ISO="$lang" PACKAGE="media" NAME="libctrmedia.so" make -f makefile clean
-OS="Linux" ISO="$lang" PACKAGE="media" NAME="libctrmedia.so" make -f makefile plugin
+OS="Linux" ISO="$lang" PACKAGE="gui" NAME="libctrgui.so" make -f makefile clean
+OS="Linux" ISO="$lang" PACKAGE="gui" NAME="libctrgui.so" make -f makefile plugin
 
 
 # Add executable
 cp bin/Linux/ctr$lang dist/Linux/ISO/$lang/
 # Add dynamic libraries
-cp plugins/media/libctrmedia.so dist/Linux/ISO/$lang/mods/media/
+cp mods/gui/libctrgui.so dist/Linux/ISO/$lang/mods/gui/
 rm dist/Linux/ISO/$lang/*.dll
 rm dist/Linux/ISO/$lang/*.exe
 sed -e "s/ctrapp_nl/ctrapp_$lang/g" misc/distrib/assets/export.sh > dist/Linux/ISO/$lang/export.sh
@@ -152,50 +143,5 @@ chmod uog+x $DEBPACKAGE/DEBIAN/postinst
 chmod uog-w $DEBPACKAGE/DEBIAN/postinst
 dpkg-deb --build $DEBPACKAGE
 mv /tmp/${lang}deb/citrine_${VERSION}${VERSION_DEB}.deb dist/Linux/OUT/${lang}/
-
-
-echo "=== PLATFORM: LINUX 64 APPIMAGE ==="
-
-# Create Linux AppImage distribution
-rm -rf /tmp/${lang}/Citrine.AppDir
-mkdir /tmp/${lang}
-cp -r misc/Citrine.AppDir /tmp/${lang}/
-cp  dist/Linux/ISO/${lang}/ctr${lang} /tmp/${lang}/Citrine.AppDir/usr/bin/
-cp  -R dist/Linux/ISO/${lang}/mods /tmp/${lang}/Citrine.AppDir/
-
-sed -e "s/ctrnl/ctr$lang/g" misc/Citrine.AppDir/AppRun > /tmp/${lang}/Citrine.AppDir/AppRun
-
-
-./appimagetool-x86_64.AppImage /tmp/${lang}/Citrine.AppDir citrine_app ; cp citrine_app dist/Linux/ISO/${lang}/ctrapp_${lang}
-chmod uog+x dist/Linux/ISO/${lang}/ctrapp_${lang}
-#sed -e "s/ctrnl/ctrapp_$lang/g" plugins/media/assets/citrine.sh > dist/Linux/ISO/$lang/citrine_app.sh
-
-
-#chmod uog+x dist/Linux/ISO/${lang}/citrine_app.sh
-tar cvzf "dist/Linux/OUT/$lang/citrine${lang}${VERSION}ai.tar.gz" -C dist/Linux/ISO/ ${lang}
-
-echo "=== PLATFORM: WINDOWS 32 ZIP ==="
-
-
-# Compile for Windows 32bit
-ISO="$lang" CC=i686-w64-mingw32-gcc-win32 DLLTOOL=i686-w64-mingw32-dlltool make -f makefile.win32 clean
-EXTRA="/tmp/citrine.res" LFLAGS="-mwindows" ISO="$lang" CC=i686-w64-mingw32-gcc-win32 DLLTOOL=i686-w64-mingw32-dlltool make -f makefile.win32
-# win32 plugin
-ISO="$lang" PACKAGE="media" NAME="libctrmedia.dll" CC=i686-w64-mingw32-gcc-win32 DLLTOOL=i686-w64-mingw32-dlltool make -f makefile.win32 plugin
-
-# (Re-)Create folder for lang specific distribution
-rm -rf dist/Win32/ISO/$lang
-mkdir -p dist/Win32/ISO/$lang
-mkdir -p dist/Win32/ISO/$lang/mods
-mkdir -p dist/Win32/ISO/$lang/mods/media
-
-# Re-use Win64 as template
-cp -R dist/Win64/ISO/$lang/* dist/Win32/ISO/$lang/
-# Add executable
-cp bin/Win32/ctr$lang.exe dist/Win32/ISO/$lang/
-# Add dynamic libraries
-cp mods/media/dll32/*.dll dist/Win32/ISO/$lang/
-cp plugins/media/libctrmedia.dll dist/Win32/ISO/$lang/mods/media/
-
 
 done

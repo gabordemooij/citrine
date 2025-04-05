@@ -20,7 +20,7 @@ LVGLEN on: ['new'] do: {
 	
 	xml
 	names: (
-		List new
+		Dict new
 			object: ['lv_obj'],
 			button: ['lv_button'],
 			label: ['lv_label'],
@@ -41,7 +41,7 @@ LVGLEN on: ['new'] do: {
 			tabview-tab: ['lv_tabview-tab']
 	)
 	attributes: ( 
-		List new
+		Dict new
 			events: ['event_bubble'],
 			one-line: ['one_line'],
 			tab-bar-position:['tab_bar_position'],
@@ -64,7 +64,7 @@ LVGLEN on: ['new'] do: {
 			bg-opa: ['style_bg_opa']
 	)
 	values: (
-		List new
+		Dict new
 			True: ['true'],
 			False: ['false'],
 			object: ['lv_obj'],
@@ -103,9 +103,9 @@ LVGLEN on: ['ink:'] do: { :color
 }.
 
 LVGLEN on: ['border-color:'] do: { :color
-	zelf style_border_color: color rgbhex.
+	self style_border_color: color rgbhex.
 }.
 
 LVGLEN on: ['background-color:'] do: { :color
-	zelf style_bg_color: color rgbhex.
+	self style_bg_color: color rgbhex.
 }.

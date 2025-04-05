@@ -20,16 +20,16 @@ XML-tree on: ['new'] do: {
 }.
 
 XML-tree on: ['init'] do: {
-	own attrs       := List new.
-	own values      := List new.
-	own names       := List new.
+	own attrs       := Dict new.
+	own values      := Dict new.
+	own names       := Dict new.
 	self clear.	
 }.
 
 XML-tree on: ['clear'] do: {
 	own textmode    := False.
 	own str         := [''].
-	own tags        := Sequence new.
+	own tags        := List new.
 	own elementmode := False.
 }.
 
