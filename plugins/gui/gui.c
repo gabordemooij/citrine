@@ -12,6 +12,7 @@
 #include "lvgl/src/widgets/switch/lv_switch.h"
 #include "lvgl/src/widgets/textarea/lv_textarea.h"
 #include "../../citrine.h"
+
 #include <media.h>
 #include <gui.h>
 #include <guimsg.h>
@@ -19,6 +20,9 @@
 #ifdef LIBCURL
 #include <curl/curl.h>
 #endif
+
+#include "json.h"
+
 
 uint16_t CtrGUIWidth = 800;
 uint16_t CtrGUIHeight = 400;
@@ -974,6 +978,7 @@ void begin() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_IMAGE_OBJECT ), imageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NETWORK_OBJECT ), CtrGUINetworkObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Gui" ), guiObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	begin_json();
 }
 
 void init_embedded_gui_plugin() {

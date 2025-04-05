@@ -2,3 +2,5 @@
 #define CTR_DICT_XML_NAME_AT_SET            "xml:name:at:"
 #define CTR_DICT_NAME                       "name"
 #define CTR_DICT_FORM_FIELD_VALUE           "field-value:"
+#define CTR_DICT_JSON                       "JSON"
+#define CTR_DICT_JSONIFY                    "jsonify:"
