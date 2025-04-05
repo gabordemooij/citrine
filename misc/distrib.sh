@@ -22,13 +22,13 @@ mkdir dist/Linux
 mkdir dist/Linux/ISO
 mkdir dist/Linux/OUT
 
-VERSION="1_0_1" #for files
-VERSION_NAME="1.0.1" #for display
+VERSION="1_0_4" #for files
+VERSION_NAME="1.0.4" #for display
 VERSION_DEB="-1"     #for debian
 
 echo "VERSION = $VERSION"
 
-declare -a langs=("en" "nl" "fy" "de" "fr" "no" "ru" "cs" "it" "hi" "pt_br" "uz" "pl" "id" "zh2" "fa" "es")
+declare -a langs=("en")
 for lang in "${langs[@]}"
 do
 
@@ -40,45 +40,33 @@ echo "=== PLATFORM: WINDOWS 64 SETUP ==="
 ISO="$lang" CC=x86_64-w64-mingw32-gcc-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64 clean
 EXTRA="/tmp/citrine.res" LFLAGS="-mconsole -mwindows" ISO="$lang" CC=x86_64-w64-mingw32-gcc-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64
 # WIN64 plugin
-ISO="$lang" PACKAGE="media" NAME="libctrmedia.dll" CC=x86_64-w64-mingw32-gcc-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64 plugin
+#ISO="$lang" PACKAGE="media" NAME="libctrmedia.dll" CC=x86_64-w64-mingw32-gcc-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64 plugin
+ISO="$lang" PACKAGE="gui" NAME="libctrgui.dll" CC=x86_64-w64-mingw32-gcc-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64 plugin
 
 
-# Create dictionary
-./bin/Linux/ctren -g i18n/en/dictionary.h i18n/$lang/dictionary.h > /tmp/dict_general.dict
-./bin/Linux/ctren -g plugins/media/i18n/en/media.h plugins/media/i18n/$lang/media.h > /tmp/dict_media.dict
-cat /tmp/dict_general.dict /tmp/dict_media.dict plugins/media/i18n/$lang/extra.dict > /tmp/dict_all.dict
 
 # (Re-)Create folder for lang specific distribution
 rm -rf dist/Win64/ISO/$lang
 mkdir dist/Win64/ISO/$lang
 mkdir dist/Win64/ISO/$lang/mods
-mkdir dist/Win64/ISO/$lang/mods/media
+mkdir dist/Win64/ISO/$lang/mods/gui
 # Add executable
 cp bin/Win64/ctr$lang.exe dist/Win64/ISO/$lang/
 # Add dynamic libraries
 cp mods/media/dll64/*.dll dist/Win64/ISO/$lang/
-cp plugins/media/libctrmedia.dll dist/Win64/ISO/$lang/mods/media/
-
-# Add assets
-cp demodata dist/Win64/ISO/$lang/
+cp mods/gui/libctrgui.dll dist/Win64/ISO/$lang/mods/gui/
 
 # Add shortcut icon
 cp plugins/media/assets/picto.ico dist/Win64/ISO/$lang/pictogram.ico 
 
-# Translate examples
 
-./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo1.ctr > dist/Win64/ISO/$lang/demo1.ctr 2>/tmp/err1.log
-./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo2.ctr > dist/Win64/ISO/$lang/demo2.ctr 2>/tmp/err2.log
-./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo3.ctr > dist/Win64/ISO/$lang/demo3.ctr 2>/tmp/err3.log
-./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo4.ctr > dist/Win64/ISO/$lang/demo4.ctr 2>/tmp/err4.log
-./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo5.ctr > dist/Win64/ISO/$lang/demo5.ctr 2>/tmp/err5.log
-./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo6.ctr > dist/Win64/ISO/$lang/demo6.ctr 2>/tmp/err6.log
-./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo7.ctr > dist/Win64/ISO/$lang/demo7.ctr 2>/tmp/err7.log
-./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo8.ctr > dist/Win64/ISO/$lang/demo8.ctr 2>/tmp/err8.log
-./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo9.ctr > dist/Win64/ISO/$lang/demo9.ctr 2>/tmp/err9.log
-./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo10.ctr > dist/Win64/ISO/$lang/demo10.ctr 2>/tmp/err10.log
-./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/demo11.ctr > dist/Win64/ISO/$lang/demo11.ctr 2>/tmp/err11.log
-./bin/Linux/ctren -t /tmp/dict_all.dict misc/distrib/assets/pak-o-mat.ctr > dist/Win64/ISO/$lang/pak-o-mat.ctr 2>/tmp/pak-o-mat.log
+# copy demo materials
+cp misc/supplement/en dist/Win64/ISO/$lang/supplementen
+cp plugins/gui/extra/en/xmltree dist/Win64/ISO/$lang/xmltree
+cp plugins/gui/extra/en/lvglen dist/Win64/ISO/$lang/lvglen
+cp remixicon.ttf dist/Win64/ISO/$lang/
+cp topbar.png dist/Win64/ISO/$lang/
+cp vault.ctr dist/Win64/ISO/$lang/
 sed -e "s/ctrnl/ctr$lang/g" misc/distrib/assets/export.bat > dist/Win64/ISO/$lang/export.bat
 
 
@@ -89,6 +77,8 @@ rm -rf ~/.wine/drive_c/InnoSetupSourceDir/license.txt
 cp plugins/media/assets/license.txt ~/.wine/drive_c/InnoSetupSourceDir/license.txt
 rm -rf ~/.wine/drive_c/InnoSetupSourceDir/dist
 cp -R dist/Win64/ISO/$lang ~/.wine/drive_c/InnoSetupSourceDir/dist
+
+
 
 
 # Copy setup-creator script to work dir
