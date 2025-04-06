@@ -1,8 +1,0 @@
-# pyproject.toml
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
-[project]
-name = "Citrine"
-version = "0.9.5"
