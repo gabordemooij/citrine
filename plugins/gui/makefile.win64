@@ -73,6 +73,10 @@ clean:
 install:
 	install -d $(DESTDIR)$(bindir)
 	install $(BUILD_BIN_DIR)/$(BIN) $(DESTDIR)$(bindir)
+	
+libctrgui.dll: all
+
+install-libctrgui.dll: libctrgui.dll
 
 uninstall:
 	$(RM) -r $(addprefix $(DESTDIR)$(bindir)/,$(BIN))
