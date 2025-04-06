@@ -25,9 +25,8 @@ VERSION_DEB="-1"     #for debian
 
 echo "VERSION = $VERSION"
 
-declare -a langs=("en")
-for lang in "${langs[@]}"
-do
+lang="en"
+export lang
 
 echo "=== LANGUAGE $lang ==="
 echo ""
@@ -144,4 +143,3 @@ chmod uog-w $DEBPACKAGE/DEBIAN/postinst
 dpkg-deb --build $DEBPACKAGE
 mv /tmp/${lang}deb/citrine_${VERSION}${VERSION_DEB}.deb dist/Linux/OUT/${lang}/
 
-done
