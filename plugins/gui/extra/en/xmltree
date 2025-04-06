@@ -83,7 +83,7 @@ XML-tree on: ['close'] do: { :message :arg
 	}.
 }.
 
-XML-tree on: ['text'] do: { <- own str. }.
+XML-tree on: ['string'] do: { <- own str. }.
 
 XML-tree on: ['no-xml:'] do: { :str
 	<- str text
