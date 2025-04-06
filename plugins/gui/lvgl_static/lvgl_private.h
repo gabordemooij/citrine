@@ -98,9 +98,7 @@ extern "C" {
 #include "src/widgets/tabview/lv_tabview_private.h"
 #include "src/tick/lv_tick_private.h"
 #include "src/stdlib/builtin/lv_tlsf_private.h"
-#include "src/libs/rlottie/lv_rlottie_private.h"
 #include "src/libs/ffmpeg/lv_ffmpeg_private.h"
-#include "src/widgets/lottie/lv_lottie_private.h"
 #include "src/osal/lv_os_private.h"
 
 /*********************
