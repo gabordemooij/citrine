@@ -13,7 +13,6 @@
 #include "lvgl/src/widgets/textarea/lv_textarea.h"
 #include "../../citrine.h"
 
-#include <media.h>
 #include <gui.h>
 #include <guimsg.h>
 
