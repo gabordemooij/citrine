@@ -5,7 +5,7 @@ a Bool ‘False’  is NOT Nil.
 a Bool ‘False’  is NOT Nil.
 a Number ‘1’  is NOT Nil.
 a Number ‘0’  is NOT Nil.
-a Str ‘Str’  is NOT Nil.
-a Str ‘’  is NOT Nil.
-a Fn ‘Fn’  is NOT Nil.
+a String ‘Str’  is NOT Nil.
+a String ‘’  is NOT Nil.
+a Function ‘Function’  is NOT Nil.
 but.. Nil is.. certainly NIL!

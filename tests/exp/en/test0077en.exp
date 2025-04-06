@@ -1,11 +1,11 @@
-Str,Number
-Str,Bool
-Number,Str
+String,Number
+String,Bool
+Number,String
 Number,Bool
 Bool,Number
 Bool,Number
-Bool,Str
-Bool,Str
+Bool,String
+Bool,String
 === String test ===
 123
 False
