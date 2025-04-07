@@ -297,18 +297,6 @@ int ctr_clex_tok() {
 			ctr_clex_buffer[i++] = c;
 			ctr_clex_tokvlen++;
 			ctr_code++;
-			//thousands sep. found
-			if (strncmp(ctr_code,CTR_DICT_NUM_THO_SEP,ctr_clex_keyword_num_sep_tho_len)==0) {
-				//make sure the number continues afterwards, otherwise it might be another symbol like eol.
-				//but before we check that, make sure we don't reach the end of the code, otherwise we cause a segfault
-				if ((ctr_code+ctr_clex_keyword_num_sep_tho_len+1) <= ctr_eofcode) {
-					//not the end, so does the number continue then?
-					if (isdigit(*(ctr_code+ctr_clex_keyword_num_sep_tho_len))) {
-						//ok fine, then, filter out number separator, and done.
-						ctr_code += ctr_clex_keyword_num_sep_tho_len;
-					}
-				}
-			}
 			c = *ctr_code;
 		}
 		eol = ( strncmp(ctr_code,CTR_DICT_END_OF_LINE,ctr_clex_keyword_eol_len)==0 );

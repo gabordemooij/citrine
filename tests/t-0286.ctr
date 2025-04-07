@@ -1,12 +1,12 @@
 ['Thousands and decimals'].
 
->> x := 1,000,000.5.
->> y := 1,000,000.5.
+>> x := 100000000.5.
+>> y := 100000000.5.
 
 Out write: (x + y), stop.
 
->> x := 1,040.07.
->> y := 1,305.60.
+>> x := 10040.07.
+>> y := 10305.60.
 
 Out write: (x + y), stop.
 
@@ -20,9 +20,9 @@ Out write: (x + y + z), stop.
 
 ['Weird but valid'].
 
->> x := 0,1.001.
->> y := 0,1.100.
->> z := 0,1.010.
+>> x := 01.001.
+>> y := 01.100.
+>> z := 01.010.
 
 Out write: (x + y + z), stop.
 
@@ -30,6 +30,6 @@ Out write: (x + y + z), stop.
 
 Out write: (q), stop.
 
->> q := 0,1,2.
+>> q := 012.
 
 Out write: (q), stop.

@@ -8,26 +8,15 @@ int ctr_in_message;
  * Format a number to the target language.
  */
 char* ctr_international_number(char* old_number, char* new_number) {
-	char i, j, s, k, old_length;
-	char* x;
+	char i, j, k, old_length;
 	j = 0;
 	k = 0;
 	old_length = strlen( old_number );
-	x = strchr( old_number, '.' );
-	if ( x == NULL ) {
-		s = old_length;
-	} else {
-		s = (char) (x - old_number);
-	}
 	for( i = 0; i < old_length; i ++ ) {
 		if ( *(old_number + i) == '.' ) {
 			strncpy( new_number + j , CTR_DICT_NUM_DEC_SEP, ctr_clex_keyword_num_sep_dec_len);
 			j += ctr_clex_keyword_num_sep_dec_len;
 			continue;
-		}
-		if ( (i < s) && ( k > 0 ) && ( ( s - i ) % 3 ) == 0 ) {
-			strncpy( new_number + j, CTR_DICT_NUM_THO_SEP, ctr_clex_keyword_num_sep_tho_len );
-			j += ctr_clex_keyword_num_sep_tho_len;
 		}
 		if (isdigit(*(old_number + i))) {
 			k++;
