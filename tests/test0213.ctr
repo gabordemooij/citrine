@@ -1,5 +1,0 @@
-☞ a≔ List new.
-☞ b≔ List new.
-a append: b.
-b append: a.
-✎ write: ‘No infinite recursion in GC.’.

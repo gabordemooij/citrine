@@ -1,0 +1,10 @@
+>> Animal := Object new.
+Animal on: ['makeSound'] do: {
+	Out write: ['?'].
+}.
+>> Cat := Animal new.
+Cat on: ['makeSound'] do: {
+	Out write: ['meow!'].
+}.
+>> Tom := Cat new.
+Tom makeSound.

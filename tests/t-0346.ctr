@@ -1,0 +1,8 @@
+>> x := Moment new.
+
+x
+year: 2020,
+month: 7,
+day: 28.
+
+Out write: x weekday, stop.

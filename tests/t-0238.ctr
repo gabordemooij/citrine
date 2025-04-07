@@ -1,0 +1,34 @@
+['SINGLE_LANGUAGE'].
+String on: ['evaluate'] do: {
+	>> code := File new: ['/tmp/eval.ctr'].
+	code write: (self string + ['.']).
+	Program use: ['/tmp/eval.ctr'].
+}.
+
+>> a := List ← 1 ; 2 ; 3.
+>> b := (a string).
+
+Out write: b, stop. 
+(['b := '] + b) evaluate.
+
+Out write: b ? 3, stop. 
+
+Out write: (( List ← 1 ; 2 ; 3 )), stop. 
+
+Out write: ((Dict new) put: 1 at: 2), stop. 
+
+>> x := ( (List ← 1 ; ( List ← 9 ) ; True ) ) string.
+Out write: x, stop. 
+(['x := '] + x) evaluate.
+
+Out write: x ? 2 ? 1, stop. 
+
+>> y := (Dict new) put: (List ← 1) at: (List ← 2).
+Out write: y, stop. 
+
+(['y := '] + y) string evaluate.
+
+Out write: (y at: (List ← 2) string ), stop.
+
+Out write: (List new), stop. 
+Out write: (Dict new), stop. 

@@ -1,7 +1,0 @@
-‘SINGLE_LANGUAGE’.
-{
-	xx yy.
-	uu mm: q.
-} catch: { :e 
-	✎ write: aa. 
-}, run.

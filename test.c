@@ -73,15 +73,17 @@ void ctr_coretest_tokens() {
 	sprintf( buffer, "%s ", CTR_DICT_RETURN );
 	ctr_clex_load( buffer );
 	token = ctr_clex_tok();
+	
 	ctr_test(token == CTR_TOKEN_RET);
 	ctr_test(strlen(ctr_clex_tok_value())==0);
-	ctr_test(strcmp(ctr_clex_tok_describe(token),CTR_DICT_RETURN)==0);
+	ctr_test(strcmp(ctr_clex_tok_describe(token),"↲")==0);
 	sprintf( buffer, "%s", CTR_DICT_ASSIGN );
 	ctr_clex_load( buffer );
+	
 	token = ctr_clex_tok();
 	ctr_test(token == CTR_TOKEN_ASSIGNMENT);
 	ctr_test(strlen(ctr_clex_tok_value())==0);
-	ctr_test(strcmp(ctr_clex_tok_describe(token),CTR_DICT_ASSIGN)==0);
+	ctr_test(strcmp(ctr_clex_tok_describe(token),"≔")==0);
 	ctr_program_length = 0;
 	ctr_clex_load( buffer );
 	token = ctr_clex_tok();
@@ -98,7 +100,7 @@ void ctr_coretest_parser() {
 	char* buffer;
 	ctr_program_length = 40;
 	buffer = calloc(40,1);
-	sprintf(buffer, "☞ x ≔ 1.");
+	sprintf(buffer, ">> x := 1.");
 	ctr_clex_load(buffer);
 	ctr_tnode* tree_node = ctr_cparse_expr(0);
 	ctr_test(tree_node->type == CTR_AST_NODE_EXPRASSIGNMENT);

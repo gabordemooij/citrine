@@ -1,0 +1,12 @@
+Out write: ['hi!'].
+>> a := 2.
+>> x := 2.
+{ >> c := 3. Out write: ['x']. >> t := 1.  Program clean-up. } start.
+Program clean-up.
+>> q := 2.
+a := 22.
+>> t := { >> d := 3. >> z := ['hello']. Out write: z.}.
+t start.
+Program clean-up.
+Out write: [' a = '] + a + [' and q = '] + q + [' and x = '] + x.
+t start.

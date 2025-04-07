@@ -1,5 +1,0 @@
-
-☞ multiplier ≔ { :m  ↲ { :x ↲ (⚿ f × x). } set: ‘f’ value: m. }.
-☞ double ≔ multiplier apply: 2.
-☞ q ≔ double apply: 9.
-✎ write: q. 

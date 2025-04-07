@@ -1,0 +1,5 @@
+String
+List ← ((Dict new) put:(List ← ((Dict new) put:['2017-01-01'] at:['created'], put:['<html></html>'] at:['body'], put:['home'] at:['title']) ; ((Dict new) put:['<credits>Author Inc.</credits>'] at:['body'], put:['aboutus(c)'] at:['title'])) at:['pages'], put:['domain'] at:['mywebsite.com'])
+<credits>Author Inc.</credits>
+String
+(Dict new) put:['2017-01-01'] at:['created'], put:['<html></html>'] at:['body'], put:['home'] at:['title']

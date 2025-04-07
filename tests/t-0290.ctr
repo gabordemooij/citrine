@@ -1,0 +1,28 @@
+['SINGLE_LANGUAGE'].
+
+
+>> cakes := List ←
+	['apple'] ;
+	['berry'] ;
+	['choco'] ;
+	['cheese'].
+
+
+>> buy := cakes replace: 2 length: 2 with: ( List ← ['cinnamon'] ; ['pineapple'] ).
+Out write: (buy combine: [',']), stop.
+
+
+>> buy := cakes replace: 2 length: 12 with: ( List ← ['cinnamon'] ; ['pineapple'] ).
+Out write: (buy combine: [',']), stop.
+
+
+>> buy := cakes replace: 3 length: 10 with: ( List new ).
+Out write: (buy combine: [',']), stop.
+
+
+>> buy := cakes replace: 1 length: 1 with: ( List new ).
+Out write: (buy combine: [',']), stop.
+
+
+>> buy := cakes replace: ['1'] length: ['1'] with: ['x'].
+Out write: (buy combine: [',']), stop.

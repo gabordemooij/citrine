@@ -1,0 +1,33 @@
+['SINGLE_LANGUAGE'].
+>> unknown := Request get: ['item'].
+Out write: unknown.
+>> unknown := Request new get: ['item'].
+Out write: unknown.
+>> unknown := Request new new get: ['item'].
+Out write: unknown.
+>> unknown := Request new new can you get: ['item'].
+Out write: unknown.
+
+>> unknown := Request get: 123.
+Out write: unknown.
+>> unknown := Request get: Object.
+Out write: unknown.
+>> unknown := Request get: Request new.
+Out write: unknown.
+>> unknown := Request post: Request new.
+Out write: unknown.
+
+>> unknown := Request get list: Request new.
+Out write: unknown type.
+>> unknown := Request post list: Request new.
+Out write: unknown type.
+
+>> response := JSON object: ['{"_status":"OK"}'].
+Out write: (response _status).
+>> response := JSON new object: ['{"_status":"OK"}'].
+Out write: (response _status).
+>> response := JSON new new object: ['{"_status":"OK"}'].
+Out write: (response _status).
+>> response := JSON new new can you convert object: ['{"_status":"OK"}'].
+Out write: (response _status).
+

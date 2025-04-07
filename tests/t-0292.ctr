@@ -1,0 +1,16 @@
+>> winery := { <- (	Dict new
+		put: 2 at: ['merlot'],
+		put: 3 at: ['malbec'],
+		put: 4 at: ['syrah']
+	).
+}.
+
+Out write: (((winery start) - ['nothing']) count), stop.
+Out write: (((winery start) - ['merlot']) count), stop.
+Out write: (((winery start) - ['malbec']) count), stop.
+Out write: (((winery start) - ['syrah']) count), stop.
+Out write: (((winery start) - ['merlot'] - ['malbec']) count), stop.
+Out write: (((winery start) - ['merlot'] - ['syrah']) count), stop.
+Out write: (((winery start) - ['malbec'] -['syrah']) count), stop.
+Out write: (((winery start) - ['malbec'] - ['syrah'] - ['merlot']) count), stop.
+

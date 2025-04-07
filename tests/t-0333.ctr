@@ -1,0 +1,9 @@
+{ >> x := JSON object: ['{}']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON object: ['""']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON object: ['']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON object: ['"']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON object: ['\’']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON object: ['\‘\’']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON object: ['0']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON object: ['"x"']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON object: ['[]']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.

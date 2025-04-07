@@ -1,0 +1,12 @@
+
+
+Program memory-management: 4.
+{
+	Out write: ['hi there!'].
+	this-task error: ['oops'].
+	Out write: ['hi there!'].
+	{ Out write: ['dont print this']. } start.
+} except: { :e 
+	Out write: ['got ya!']. 
+	Out write: e.
+}, start.

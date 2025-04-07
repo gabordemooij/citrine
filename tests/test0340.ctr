@@ -1,5 +1,0 @@
-‘SINGLE_RUN’.
-Program tidiness: 12.
-☞ a ≔ Object new.
-a on: ‘string’ do: { 1.	↲ ‘q’. }.
-✎ write: List ← a, stop.

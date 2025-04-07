@@ -1,0 +1,6 @@
+['SINGLE_LANGUAGE'].
+
+>> o := Object new.
+o on: ['test'] do: {
+	own := 123.
+}.

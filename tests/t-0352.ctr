@@ -1,0 +1,68 @@
+Number on: ['roman'] do: {
+	>> number := self copy.
+	>> roman := [''].
+	{
+		{
+			(number ≥ 1000) true: {
+				roman append: ['Ⅿ'].
+				number subtract: 1000.
+			}, break.
+		
+			(number ≥ 500) true: {
+				roman append: ['Ⅾ'].
+				number subtract: 500.
+			}, break.
+		
+			(number ≥ 100) true: {
+				roman append: ['Ⅽ'].
+				number subtract: 100.
+			}, break.
+		
+			(number ≥ 50) true: {
+				roman append: ['Ⅼ'].
+				number subtract: 50.
+			}, break.
+		
+			(number ≥ 50) true: {
+				roman append: ['Ⅼ'].
+				number subtract: 50.
+			}, break.
+		
+			(number ≥ 10) true: {
+				roman append: ['Ⅹ'].
+				number subtract: 10.
+			}, break.
+			
+			(number ≥ 9) true: {
+				roman append: ['Ⅸ'].
+				number subtract: 9.
+			}, break.
+			
+			(number ≥ 5) true: {
+				roman append: ['Ⅴ'].
+				number subtract: 5.
+			}, break.
+			
+			(number ≥ 4) true: {
+				roman append: ['Ⅳ'].
+				number subtract: 4.
+			}, break.
+			
+			(number ≥ 1) true: {
+				roman append: ['Ⅰ'].
+				number subtract: 1.
+			}, break.
+		} procedure.
+	} while: { <- number > 0. }. <- roman.
+}.
+
+Out write: 1 roman, stop.
+Out write: 2 roman, stop.
+Out write: 4 roman, stop.
+Out write: 8 roman, stop.
+Out write: 16 roman, stop.
+Out write: 32 roman, stop.
+Out write: 64 roman, stop.
+Out write: 128 roman, stop.
+Out write: 256 roman, stop.
+Out write: 1024 roman, stop.

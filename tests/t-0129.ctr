@@ -1,0 +1,13 @@
+
+List on: ['product'] do: {
+	>> total := 1.
+	self each: { :index :element
+		total multiply-by: element.
+	}. <- total.
+}.
+
+>> a := List ← 1 ; 2 ; 3.
+Out write: a product, stop.
+Out write: (List ← 2 ; 4 ; 8) product, stop. 
+Out write: (List ← -2 ; 10) product, stop. 
+Out write: (List ← 0.5 ; -2) product, stop. 

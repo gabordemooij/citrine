@@ -1,0 +1,6 @@
+Program setting: ['a'] value: 1.
+Out write: (Program setting: ['a']).
+Program setting: ['a'] value: None.
+Out write: (Program setting: ['a']).
+Out write: (Program setting: ['a'], None?).
+Out write: (Program setting: ['b'], None?).

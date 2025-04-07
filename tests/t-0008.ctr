@@ -1,0 +1,15 @@
+>> Greeter := Object new.
+Greeter on: ['make'] do: {
+	>> greeter := Object new.
+	greeter on: ['name:'] do: { :name
+		Out write: ['setting a name'].
+		own myName := name.
+	}.
+	greeter on: ['greet'] do: {
+		Out write: ['Hello'].
+		Out write: own myName.
+	}. <- greeter.
+}.
+>> greeter := Greeter make.
+greeter name: ['sunshine!'].
+greeter greet.

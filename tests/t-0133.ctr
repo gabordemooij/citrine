@@ -1,0 +1,17 @@
+
+
+
+>> Deck := List new.
+Deck on: ['print'] do: {
+        >> len := self count - 1.
+        { :i
+                >> len2 := self count - 1.
+                Out write: ['len: '].
+                Out write: len, stop.
+                Out write: ['len2: '].
+                Out write: len2, stop.
+        } × len.
+}.
+
+>> d := Deck ← 1 ; 4 ; 9 ; 16 ; 25 ; 36 ; 49 ; 64 ; 81.
+d print.

@@ -1,0 +1,23 @@
+['SINGLE_LANGUAGE'].
+
+>> garden := ['
+	"garden": {
+		chairs,
+		"pool": true,
+		"shed": false,
+		"flower": [
+			"tulips",
+			"roses",
+			"lillies"
+		],
+		"size": {
+			"width":8,
+			"length":15
+		},
+		"insects":null,
+		"dog":
+	}
+}'].
+
+>> g := JSON object: garden.
+Out write: g, stop.

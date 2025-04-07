@@ -1,0 +1,9 @@
+>> q := List ← 1 ; 2 ; 3.
+{ q ? ['1']. } except: { Out write: ['caught!'], stop. }, start.
+{ q ? True. } except: { Out write: ['caught!'], stop. }, start.
+{ q ? False. } except: { Out write: ['caught!'], stop. }, start.
+{ q ? None. } except: { Out write: ['caught!'], stop. }, start.
+{ q ? (List new). } except: { Out write: ['caught!'], stop. }, start.
+{ q ? (Object new). } except: { Out write: ['caught!'], stop. }, start.
+{ q ? ({ ['Empty']. }). } except: { Out write: ['caught!'], stop. }, start.
+Out write: ['caught them all'], stop.

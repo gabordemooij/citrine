@@ -1,0 +1,4 @@
+
+>> x := ['Append this'].
+>> y := ['to a String'].
+Out write: ([''] append: x, append: [' '], append: y).

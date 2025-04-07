@@ -1,0 +1,18 @@
+Out write: 1.23, stop.
+Out write: (['1.23'] string), stop.
+Out write: (['1,23'] number string number), stop.
+Out write: (['1,23'] number string number string), stop.
+Out write: ['1.23'] number, stop.
+Out write: ['1.23'] raw number, stop.
+Out write: ['1.23'] raw number string, stop.
+Out write: ['1.23'] raw number string number, stop.
+>> x := (3.5 × 1,000,000 + 1.5).
+Out write: x, stop.
+>> x := (3.5 × 1,000,00 + 0.0001 ).
+Out write: x, stop.
+>> x := (3.5 + 1000).
+Out write: x, stop.
+x := x string.
+Out write: x, stop.
+>> y := x number.
+Out write: y, stop.

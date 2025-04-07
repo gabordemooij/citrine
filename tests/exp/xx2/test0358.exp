@@ -1,2 +1,0 @@
-56;0;15;SINGLE_LANGUAGE;;51;0;0;;[57;2;18;operating system;;52;0;0;;[57;0;7;Program;;55;0;6;shell:;[52;0;0;;[57;0;7;Command;;53;0;5;uname;;];];];];51;0;0;;[57;2;9;OS name;;52;0;0;;[57;0;18;operating system;;55;0;6;split:;[56;0;1;
-;;];53;0;5;first;;];];51;0;0;;[57;2;13;system call;;56;0;49;../../bin/⬧OS/ctrxx -x ../../tests/test0358.ctr;;];52;0;0;;[57;0;13;system call;;55;0;6;⬧OS:;[57;0;9;OS name;;];];52;0;0;;[57;0;3;✎;;55;0;6;write:;[80;0;0;;[52;0;0;;[57;0;7;Program;;55;0;6;shell:;[57;0;13;system call;;];];];];53;0;4;stop;;];79;0;0;;;

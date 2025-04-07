@@ -1,8 +1,0 @@
-‘SINGLE_LANGUAGE’.
-☞ books ≔ List new.
-books on: ‘append:’ do: { :book
-	True true: { ⛏ append: book. }.
-}.
-books append: ‘Moby Dick’.
-books `append: ‘Moby Dick’.
-✎ write: books count.

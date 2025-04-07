@@ -1,0 +1,8 @@
+>> notes := Dict new.
+
+notes
+	talisker: ['strong'],
+	springbank: ['peaty'],
+	glenfarclas: ['elegant'].
+
+Out write: ( ( notes entries sort: { :a :b <- (a > b). } ) combine: [','] ), stop.

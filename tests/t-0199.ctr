@@ -1,0 +1,20 @@
+
+Program memory-management: 4.
+
+>> Animal := Object new.
+Animal on: ['make'] do: {
+	>> animal := Object new.
+	animal on: ['makeSound'] do: {
+		Out write: own sound.
+	}. <- animal.
+}.
+>> Cat := Object new.
+Cat on: ['make'] do: {
+	>> cat := Animal make.
+	cat on: ['init'] do: {
+		own sound := ['meow!'].
+	}.
+	cat init. <- cat.
+}.
+>> tom := Cat make.
+tom makeSound.

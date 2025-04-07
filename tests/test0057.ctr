@@ -1,6 +1,0 @@
-☞ cafe ≔ List new.
-cafe append: ‘coffee’.
-cafe append: ‘beer’.
-✎ write: (cafe position: 1), write: (cafe position: 2).
-☞ pub ≔ cafe.
-✎ write: (pub position: 1), write: (pub position: 2).

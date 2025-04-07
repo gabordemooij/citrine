@@ -1,0 +1,100 @@
+Bool on: ['xor:'] do: { :b <- ((self and: b not) or: (self not and: b)).
+}.
+
+>> usedMemory1 := 0.
+>> usedMemory2 := 0.
+>> usedMemory3 := 0.
+>> usedMemory4 := 0.
+
+Program memory-management: 0.
+
+>> money := False.
+>> desire := True.
+>> canDo := (money and: desire).
+>> depression := (money xor: desire).
+>> isHuman := (money or: desire).
+>> isRobot := (money ! desire).
+>> PoemAboutLife := 
+	['I am a '] + 
+	(isHuman either: ['human being'] or: ['not a human being']) +
+	[', '] +
+	(isRobot either: ['robot'] or: ['not a robot']) +
+	[', so I have '] +
+	( desire either: ['desires'] or: ['no desires']) +
+	[' but '] +
+	(money either: ['money'] or: ['no money']) +
+	[', so I am'] +
+	(depression either: ['depressive'] or: ['happy']) +
+	[' because I '] +
+	(canDo either: ['can do what I want'] or: ['cannot do what I want']) +
+	[' to do to make this world a better place.'].
+Bool flip. 
+Out write: PoemAboutLife, stop.
+
+Program clean-up.
+
+usedMemory1 := (Program memory ? 1).
+
+
+money := False.
+desire := True.
+canDo := (money and: desire).
+depression := (money xor: desire).
+isHuman := (money or: desire).
+isRobot := (money ! desire).
+PoemAboutLife := 
+	['I am a '] + 
+	(isHuman either: ['human being'] or: ['not a human being']) +
+	[', '] +
+	(isRobot either: ['robot'] or: ['not a robot']) +
+	[', so I have '] +
+	( desire either: ['desires'] or: ['no desires']) +
+	[' but '] +
+	(money either: ['money'] or: ['no money']) +
+	[', so I am'] +
+	(depression either: ['depressive'] or: ['happy']) +
+	[' because I '] +
+	(canDo either: ['can do what I want'] or: ['cannot do what I want']) +
+	[' to do to make this world a better place.'].
+Bool flip. 
+Out write: PoemAboutLife, stop.
+
+
+
+Program clean-up.
+usedMemory2 := (Program memory ? 1).
+
+
+money := False.
+desire := True.
+canDo := (money and: desire).
+depression := (money xor: desire).
+isHuman := (money or: desire).
+isRobot := (money ! desire).
+PoemAboutLife := 
+	['I am a '] + 
+	(isHuman either: ['human being'] or: ['not a human being']) +
+	[', '] +
+	(isRobot either: ['robot'] or: ['not a robot']) +
+	[', so I have '] +
+	( desire either: ['desires'] or: ['no desires']) +
+	[' but '] +
+	(money either: ['money'] or: ['no money']) +
+	[', so I am'] +
+	(depression either: ['depressive'] or: ['happy']) +
+	[' because I '] +
+	(canDo either: ['can do what I want'] or: ['cannot do what I want']) +
+	[' to do to make this world a better place.'].
+Bool flip. 
+Out write: PoemAboutLife, stop.
+
+Program clean-up.
+usedMemory3 := (Program memory ? 1).
+
+
+
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
+	Out write: ['No memory leaks here'].
+}, false: {
+	Out write: ['Leaking memory...'].
+}.

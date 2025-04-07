@@ -1,0 +1,11 @@
+['SINGLE_LANGUAGE'].
+
+Out write: ((List ← ['red'] ; ['green']) + (List ← ['blue'])), stop.
+Out write: ((List ← ['red'] ; ['green'] ; ['blue']) - 1), stop.
+Out write: ((List ← ['red'] ; ['green'] ; ['blue']) - 2), stop.
+Out write: ((List ← ['red'] ; ['green'] ; ['blue']) - 3), stop.
+Out write: ((List ← ['red'] ; ['green'] ; ['blue']) - -2), stop.
+Out write: ((List ← ['red'] ; ['green'] ; ['blue']) - 4), stop.
+Out write: ((List ← ['red'] ; ['green'] ; ['blue']) - 13), stop.
+
+

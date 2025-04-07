@@ -1,4 +1,0 @@
-List ← ‘Quotes \‘ are evil?’ ; 1
-Quotes ‘ are evil?
-(Map new) put:‘\‘’ at:‘\‘quote\’’
-‘

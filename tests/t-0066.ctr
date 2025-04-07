@@ -1,0 +1,13 @@
+Out write: (['Santa Clause'] from: 7 length: 1). 
+Out write: (['hello'] character: 3). 
+Out write: (['🎄🎄🎄'] length). 
+Out write: ([''] bytes) + ([''] length). 
+Out write: (['papyrus'] character: ( (['🎃halloween'] find: ['hallo']) + (['no'] find: ['y']) - 1 ) ). 
+>> a := (['--a..nom..t..nom..r..nom..'] replace: ['..nom..'] with: ['=x=XX=x=']).
+a := a replace: ['.'] with: ['++']. 
+a := a replace: [''] with: ['++']. 
+Out write: ([''] replace: ['x'] with: ['y']). 
+a := ((a replace: ['=x=XX=x='] with: ['']) replace: ['--'] with: ['']).
+Out write: a.
+a := ['  a	 '] trim + [''] trim + [' '] trim.
+Out write: a.

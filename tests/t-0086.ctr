@@ -1,0 +1,10 @@
+
+{ >> q := 1. { Out write: q. } start. } start. 
+Out stop.
+{ >> q := 1. { q := 2. Out write: q. } start. } start. 
+Out stop.
+>> f := { q := 2. }. { >> q := 1. f start. Out write: q. } start. 
+Out stop.
+{ >> q := 1. { x := 2. Out write: x. } start. } 
+except: { Out write: ['Error, cannot assign, key not found: x, forgot to use ☞ ?']. }, start.
+Out stop.

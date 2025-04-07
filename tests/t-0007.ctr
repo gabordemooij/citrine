@@ -1,0 +1,9 @@
+>> Cat := Object new.
+Cat on: ['make'] do: {
+	>> cat := Object new.
+	cat on: ['meow'] do: {
+		Out write: ['meow!'].
+	}. <- cat.
+}.
+>> cat := Cat make.
+cat meow.

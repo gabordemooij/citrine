@@ -1,0 +1,26 @@
+# Test ASCII variants
+
+# Numbers
+
+Out write: (2 !=: 3), stop.
+Out write: (2 <=: 2), stop.
+Out write: (2 >=: 2), stop.
+
+# Strings
+
+Out write: (['b'] >=: ['a']), stop.
+Out write: (['b'] !=: ['a']), stop.
+Out write: (['b'] <=: ['c']), stop.
+
+# Bools
+
+Out write: (True !=: False), stop.
+
+# Objects
+
+Out write: (Object new !=: Object new), stop.
+
+# ASCII list symbol <-:
+
+Out write: (List <<: 1, ; 2 ; 3) count = 3, stop.
+

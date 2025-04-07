@@ -1,0 +1,43 @@
+
+
+>> usedMemory1 := 0.
+>> usedMemory2 := 0.
+>> usedMemory3 := 0.
+>> usedMemory4 := 0.
+
+Program memory-management: 0.
+
+>> txt := [' Word Salad '].
+txt := txt replace: ['Word'] with: ['Ceasar'].
+txt := txt trim.
+Out write: txt, stop.
+
+Program clean-up.
+
+usedMemory1 := (Program memory ? 1).
+
+
+txt := [' Word Salad '].
+txt := txt replace: ['Word'] with: ['Ceasar'].
+txt := txt trim.
+Out write: txt, stop.
+
+Program clean-up.
+usedMemory2 := (Program memory ? 1).
+
+
+txt := [' Word Salad '].
+txt := txt replace: ['Word'] with: ['Ceasar'].
+txt := txt trim.
+Out write: txt, stop.
+
+Program clean-up.
+usedMemory3 := (Program memory ? 1).
+
+
+
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
+	Out write: ['No memory leaks here'].
+}, false: {
+	Out write: ['Leaking memory...'].
+}.

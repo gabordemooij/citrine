@@ -1,0 +1,15 @@
+
+List on: ['sum'] do: {
+	>> total := 0.
+	self each: { :index :element
+		total add: element.
+	}. <- total.
+}.
+
+>> a := List ← 9 ; 8 ; 7.
+Out write: (a sum), stop. 
+>> a := List ← 1 ; 9.
+Out write: (a sum), stop. 
+>> a := List ← ['o'] ; 2.
+Out write: (a sum), stop. 
+Out write: (List new sum), stop. 

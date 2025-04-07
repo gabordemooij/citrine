@@ -1,0 +1,42 @@
+
+>> OS := Program setting: ['OS'].
+
+>> clock := Moment new.
+	
+(OS = ['Haiku']) true: {
+	clock zone: ['CET'],
+	year: 2017, month: 7, day: 13,
+	hour: 18, minute: 0, second: 0.
+}, else: {
+	clock zone: ['Europe/Amsterdam'],
+	year: 2017, month: 7, day: 13,
+	hour: 18, minute: 0, second: 0.
+}.
+
+clock on: ['tell'] do: {
+	Out write: self, stop.
+}.
+
+
+clock add: 2    hour, tell.
+clock add: 1    hour, tell.
+clock add: 19 minute, tell.
+clock add: 1  minute, tell.
+clock add: 1  minute, tell.
+clock add: 19 second, tell.
+clock add: 1  second, tell.
+clock add: 1  second, tell.
+clock add: 2    year, tell.
+clock add: 1    year, tell.
+
+(OS = ['Haiku']) true: {
+clock add: 5   month.
+clock zone: ['CEST'], tell.
+}, else: {
+	clock add: 5   month, tell.
+}.
+
+clock add: 1   month, tell.
+clock add: 19    day, tell.
+clock add: 1    hour, tell.
+clock add: 120  yard, tell.

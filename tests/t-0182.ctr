@@ -1,0 +1,52 @@
+
+
+>> usedMemory1 := 0.
+>> usedMemory2 := 0.
+>> usedMemory3 := 0.
+>> usedMemory4 := 0.
+
+Program memory-management: 0.
+
+>> txt := ['1.6'].
+>> n := txt inter-number.
+>> t := txt bool.
+Out write: n, stop.
+Out write: t, stop.
+Out write: n type, stop.
+Out write: t type, stop.
+
+Program clean-up.
+
+usedMemory1 := (Program memory ? 1).
+
+
+txt := ['1.6'].
+n := txt inter-number.
+t := txt bool.
+Out write: n, stop.
+Out write: t, stop.
+Out write: n type, stop.
+Out write: t type, stop.
+
+Program clean-up.
+usedMemory2 := (Program memory ? 1).
+
+
+txt := ['1.6'].
+n := txt inter-number.
+t := txt bool.
+Out write: n, stop.
+Out write: t, stop.
+Out write: n type, stop.
+Out write: t type, stop.
+
+Program clean-up.
+usedMemory3 := (Program memory ? 1).
+
+
+
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
+	Out write: ['No memory leaks here'].
+}, false: {
+	Out write: ['Leaking memory...'].
+}.

@@ -1,0 +1,8 @@
+
+
+>> x := Moment new year:2017, month: 7, day:10, hour: 10, minute: 0, second: 0.
+Out write: x, stop.
+x subtract: 1 hour.
+Out write: x, stop.
+x subtract: -1 hour.
+Out write: x, stop.

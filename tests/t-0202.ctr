@@ -1,0 +1,4 @@
+['SINGLE_LANGUAGE'].
+
+None := True.
+Out write: ['Not a problem, not a literal'].

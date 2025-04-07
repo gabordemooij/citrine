@@ -1,0 +1,16 @@
+['SINGLE_LANGUAGE'].
+>> x := List ← 2 ; 3 ; 4.
+
+x each: { :i :v
+	x put: ['x'] at: i.
+}.
+
+Out write: x, stop.
+
+>> x := (Dict new one: 1, two: 2, three: 3).
+
+x each: { :v :i
+	x put: ['x'] at: i.
+}.
+
+Out write: x, stop.

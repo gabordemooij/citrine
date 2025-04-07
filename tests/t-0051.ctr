@@ -1,0 +1,10 @@
+>> x := Object new.
+x on: ['getA'] do: {
+	own a := 2.
+	a := 1.
+	Out write: a.
+	Out write: own a.
+}.
+>> a := 3.
+x getA.
+Out write: a.

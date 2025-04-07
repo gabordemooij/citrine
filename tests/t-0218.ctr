@@ -1,0 +1,8 @@
+['SINGLE_LANGUAGE'].
+>> books := List new.
+books on: ['append:'] do: { :book
+	True true: { self append: book. }.
+}.
+books append: ['Moby Dick'].
+books `append: ['Moby Dick'].
+Out write: books count.

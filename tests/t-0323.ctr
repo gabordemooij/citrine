@@ -1,0 +1,33 @@
+['SINGLE_LANGUAGE'].
+
+Program clean-up.
+
+
+>> Veggy := Object new.
+Veggy on: ['new'] do: {
+	>> v := self new.
+	v init. <- v.
+}.
+
+Veggy on: ['init'] do: { own veggies := 0. }.
+
+Veggy on: ['carrots:'] do: { :a own veggies := a. <- None. }.
+Veggy on: ['carrots'] do: { <- own veggies. }.
+Veggy on: ['+'] do: { :f
+	>> n := Veggy new.
+	n carrots: (f carrots + own veggies). <- n.
+}.
+
+Veggy on: ['string'] do: { <- own veggies string.
+}.
+
+Number on: ['carrots'] do: {
+	>> x := Veggy new.
+	x carrots: self. <- x.
+}.
+
+Number on: ['add:and:'] do: { :a :b <- (a + b).
+}.
+
+>> q := 0 add: (3 carrots + 2 carrots) and: 4 carrots.
+Out write: q, stop.

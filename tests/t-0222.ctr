@@ -1,0 +1,15 @@
+>> a := ['hello world'].
+>> b := [''].
+a characters each: { :i :x
+	
+	x
+	case: ['e'] do: { x := ['*']. },
+	case: ['r'] do: { x := ['*']. },
+	case: ['l'] do: { x := ['*']. }.
+	
+	b append: x.
+	
+}.
+Out write: b, stop.
+
+

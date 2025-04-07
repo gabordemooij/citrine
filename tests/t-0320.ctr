@@ -1,0 +1,34 @@
+
+
+
+>> CoffeeMachine := Object new.
+CoffeeMachine on: ['order:'] do: { :id
+	>> coffee := ['Americano'].
+	( id = 1 ) true: {
+		coffee := ['Cappuccino'].
+	}.
+	( id = 2 ) true: {
+		coffee := ['Espresso'].
+	}.
+	( id = 3 ) true: {
+		coffee := ['Latte'].
+	}. <- coffee.
+}.
+>> SimpleCoffeeMachine := Object new.
+SimpleCoffeeMachine on: ['order'] do: { <- ['Black']. }.
+>> redCup := CoffeeMachine order: 1.
+Out write: redCup, stop.
+redCup := ['Tea']. 
+>> greenCup := CoffeeMachine order: 0.
+Out write: greenCup, stop.
+>> yellowCup := CoffeeMachine order: 1.
+Out write: yellowCup, stop.
+>> blueCup := CoffeeMachine order: 0.
+Out write: blueCup, stop.
+>> plasticCup := SimpleCoffeeMachine order.
+plasticCup := ['Lemonade']. 
+>> blackCup := SimpleCoffeeMachine order.
+Out write: blackCup, stop.
+blackCup append: [' nooo.... beer. '].
+>> orangeCup := SimpleCoffeeMachine order.
+Out write: orangeCup, stop.

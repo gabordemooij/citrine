@@ -1,8 +1,0 @@
-{ :i
-	((Program argument: i) ≠ ‘-r’) true: {
-		(((Program argument: i) find: ‘runner’) > -1) true: {
-			✎ write: ‘Found argument file.’.
-		}.
-	}.
-} × (Program arguments).
-✎ write: (Program argument: 999).

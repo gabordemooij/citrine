@@ -1,0 +1,15 @@
+
+>> Product := Object new.
+Product on: ['a'] do: { :price
+	Out write: ['cost ']+ price.
+}.
+>> Apples := Product new.
+Out write: ['Apples cost: '].
+Apples a 60.
+Out write: [' cent a piece.'].
+
+
+Number on: ['X'] do: { :b
+	b × self. 
+}.
+7 X { :i Out write: (i - 1). }.

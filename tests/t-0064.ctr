@@ -1,0 +1,3 @@
+(['b'] = ['b']) true: { Out write: ['equal'].}.
+(['a'] ≠ ['b']) true: { Out write: ['unequal'].}.
+(['a'] ≠ ['b']) true: { Out write: ['unequal'].}.

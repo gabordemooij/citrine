@@ -1,0 +1,68 @@
+Program memory-management: 12.
+
+String on: ['escape:'] do: { :characters
+	>> str := self.
+	characters characters each: { :number :character
+		
+		>> replacement := ['\\'] + character.
+		
+		(character = ['\	']) true: {
+			replacement := ['\\t'].
+		}.
+		
+		(character = ['\
+']) true: {
+			replacement := ['\\n'].
+		}.
+		
+		str := str replace: character with: replacement.
+	}. <- str.
+}.
+
+
+
+>> json := ['{"test":"a\\"b"}'].
+Out write: (JSON object: json), stop.
+
+>> json := ['{ "name" : "Jack", "age" : 27, "legend" : false, "nested": [1, 2, [3, 4], {"foo": 1, [3, 4]}] }'].
+
+{
+	JSON object: json.
+} except: { :e
+	Out write: e, stop.
+}, start.
+
+>> json := ['{ "name" : "Jack", "age" : 27, "legend" : false, "nested": [1, 2, [3, 4], {"foo": 1, "bar":[3, 4]}] }'].
+Out write: (JSON object: json), stop.
+
+>> json := ['{"test":"a\\tb"}'].
+Out write: (JSON object: json) test, stop.
+
+>> json := ['{"test":"a\\t\\tb"}'].
+Out write: (JSON jsonify: (JSON object: json)), stop.
+
+>> json := ['{"test":"a\\nb"}'].
+Out write: (JSON jsonify: (JSON object: json)), stop.
+
+>> json := ['{"test":"a\\"b"}'].
+Out write: (JSON jsonify: (JSON object: json)), stop.
+
+>> json := ['{"test":"a\\b"}'].
+Out write: (JSON jsonify: (JSON object: json)), stop.
+
+
+Out write: ['______________________Escape\
+'].
+Out write: (['hello\	world'] escape: ['']), stop.
+Out write: (['a"b'] escape: ['"']), stop.
+Out write: (['\"hello world\"'] escape: ['"']), stop.
+Out write: (['hello\	wo\
+rld'] escape: ['\	'], escape: ['\
+']), stop.
+Out write: (['hello\	wo\
+rld'] escape: ['\	\
+']), stop.
+Out write: (['hello\	\	wo\
+\
+rld'] escape: ['\	\
+']), stop.

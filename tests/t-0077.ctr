@@ -1,0 +1,12 @@
+Out write: ['12'] type + [','] + (['12'] number) type, stop.
+Out write: ['False'] type + [','] + (['False'] bool) type, stop.
+Out write: 12 type + [','] + (12 string) type, stop.
+Out write: 12 type + [','] + (12 bool) type, stop.
+Out write: True type + [','] + (True number) type, stop.
+Out write: False type + [','] + (False number) type, stop.
+Out write: True type + [','] + (True string) type, stop.
+Out write: False type + [','] + (False string) type, stop.
+Out write: ['=== String test ==='], stop.
+Out write: 123 string, stop.
+Out write: False string, stop.
+Out write: True string, stop.

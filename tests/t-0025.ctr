@@ -1,0 +1,1 @@
+(Number between: 3 + 17 and: 30 ) > 15 true: { Out write: ['Yes.']. }.

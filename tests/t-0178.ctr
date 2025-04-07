@@ -1,0 +1,61 @@
+
+
+>> usedMemory1 := 0.
+>> usedMemory2 := 0.
+>> usedMemory3 := 0.
+>> usedMemory4 := 0.
+
+Program memory-management: 0.
+
+>> txt := ['Word Salad'].
+Out write: ['last index of ord = '] + (( txt last: ['ord'] ) - 1), stop.
+Out write: ['index of ord = '] + (( txt find: ['ord'] ) - 1), stop.
+Out write: ['index of ad = '] + (( txt find: ['ad'] ) - 1), stop.
+Out write: ['last index of W = '] + (( txt last: ['W'] ) - 1), stop.
+Out write: ['last index of d = '] + (( txt last: ['d'] ) - 1), stop.
+Out write: ['txt equals Word Salad = '] + ( txt = ['Word Salad'] ), stop.
+Out write: ['txt equals Ceasar Salad = '] + ( txt = ['Ceasar Salad'] ), stop.
+Out write: ['txt does not equal Word Salad = '] + ( txt ≠ ['Word Salad'] ), stop.
+Out write: ['txt does not equal Ceasar Salad = '] + ( txt ≠ ['Ceasar Salad'] ), stop.
+
+Program clean-up.
+
+usedMemory1 := (Program memory ? 1).
+
+
+txt := ['Word Salad'].
+Out write: ['last index of ord = '] + (( txt last: ['ord'] ) - 1), stop.
+Out write: ['index of ord = '] + (( txt find: ['ord'] ) - 1), stop.
+Out write: ['index of ad = '] + (( txt find: ['ad'] ) - 1), stop.
+Out write: ['last index of W = '] + (( txt last: ['W'] ) - 1), stop.
+Out write: ['last index of d = '] + (( txt last: ['d'] ) - 1), stop.
+Out write: ['txt equals Word Salad = '] + ( txt = ['Word Salad'] ), stop.
+Out write: ['txt equals Ceasar Salad = '] + ( txt = ['Ceasar Salad'] ), stop.
+Out write: ['txt does not equal Word Salad = '] + ( txt ≠ ['Word Salad'] ), stop.
+Out write: ['txt does not equal Ceasar Salad = '] + ( txt ≠ ['Ceasar Salad'] ), stop.
+
+Program clean-up.
+usedMemory2 := (Program memory ? 1).
+
+
+txt := ['Word Salad'].
+Out write: ['last index of ord = '] + (( txt last: ['ord'] ) - 1), stop.
+Out write: ['index of ord = '] + (( txt find: ['ord'] ) - 1), stop.
+Out write: ['index of ad = '] + (( txt find: ['ad'] ) - 1), stop.
+Out write: ['last index of W = '] + (( txt last: ['W'] ) - 1), stop.
+Out write: ['last index of d = '] + (( txt last: ['d'] ) - 1), stop.
+Out write: ['txt equals Word Salad = '] + ( txt = ['Word Salad'] ), stop.
+Out write: ['txt equals Ceasar Salad = '] + ( txt = ['Ceasar Salad'] ), stop.
+Out write: ['txt does not equal Word Salad = '] + ( txt ≠ ['Word Salad'] ), stop.
+Out write: ['txt does not equal Ceasar Salad = '] + ( txt ≠ ['Ceasar Salad'] ), stop.
+
+Program clean-up.
+usedMemory3 := (Program memory ? 1).
+
+
+
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
+	Out write: ['No memory leaks here'].
+}, false: {
+	Out write: ['Leaking memory...'].
+}.

@@ -1,0 +1,3 @@
+>> x := 5.
+{ x add: 1. } × x.
+Out write: x.

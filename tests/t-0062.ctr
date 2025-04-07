@@ -1,0 +1,15 @@
+Bool on: ['xor:'] do: { :a :b <- ((a and: b not) or: (a not and: b)).
+}.
+
+>> o := Object new.
+o on: ['hello'] do: { ['Empty']. }.
+{ o on: 2 do: 3.} except: { :e Out write: e, stop. }, start.
+{ o on: ['test'] do: 3.} except: { :e Out write: e, stop. }, start.
+{ o on: ['hello'] do: { ['Empty']. }.} except: { :e Out write: e, stop. }, start. 
+{ >> z := 4 ÷ 0. } except: { :e Out write: e, stop. }, start. 
+{ (True and: None) true: { Out write: ['X'].}. } except: { :e Out write: e, stop. }, start. 
+{ ([''] xor: 0) true: { Out write: ['X'].}. } except: { :e Out write: e, stop. }, start. 
+{ (1 < ['2']) true: { Out write: ['OK']. }. } except: { :e Out write: e, stop. }, start. 
+{ (1 < ['2.0']) true: { Out write: ['OK']. }. } except: { :e Out write: e, stop. }, start. 
+{ (1 < ['x2.0']) true: { Out write: ['NO!']. }. } except: { :e Out write: e, stop. }, start. 
+{ Out write: (['hello OK there'] from: ['7'] length: ['2']). } start. 

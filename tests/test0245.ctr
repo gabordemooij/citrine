@@ -1,9 +1,0 @@
-‘SINGLE_LANGUAGE’.
-String on: ‘evaluate’ do: {
-	☞ code ≔ File new: ‘/tmp/eval.ctr’.
-	code write: (⛏ string + ‘.’).
-	Program use: ‘/tmp/eval.ctr’.
-	↲ x.
-}.
-☞ calc ≔ ‘☞ x ≔ ((3 power: 2) + 2 - 1 × 7 ÷ (25 square root))’.
-✎ write: calc evaluate, stop.

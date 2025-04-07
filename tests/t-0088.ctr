@@ -1,0 +1,14 @@
+
+>> santaLaugh := ['ho'].
+>> laugh := [''].
+{ laugh := laugh + santaLaugh. } × 3.
+Out write: laugh, stop.
+
+>> locked := False.
+>> security := True.
+security true: { locked := True. }.
+Out write: locked, stop.
+
+>> n := 7.
+(True) true: { n := 9. }.
+Out write: n.

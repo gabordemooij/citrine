@@ -1,7 +1,0 @@
-{
-	✎ write: ‘Block 1.↵’.
-	True break.
-	✎ write: ‘No’.
-} catch: {
-	✎ write: ‘You should not see me↵’.
-}, run.

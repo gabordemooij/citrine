@@ -1,0 +1,15 @@
+>> makeAdder := { :x
+	>> f := { :y <- (own x + y). } set: ['x'] value: x. <- f.
+}.
+>> mapper := { :array :func
+	>> mapping := { :i own q put: (own f apply: (own q ? i)) at: i. } 
+	set: ['q'] value: array,
+	set: ['f'] value: func.
+	{ :i mapping apply: i. } × (array count).
+}.
+
+>> a := List ← 1; 2; 3.
+mapper apply: a and: (makeAdder apply: 100).
+Out write: (a position: 1), stop.
+Out write: (a ? 2), stop.
+Out write: (a ? 3), stop.

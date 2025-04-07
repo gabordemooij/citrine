@@ -1,0 +1,85 @@
+['SINGLE_LANGUAGE'].
+
+List on: ['sum'] do: {
+	>> total := 0.
+	self each: { :index :element
+		total add: element.
+	}. <- total.
+}.
+
+List on: ['product'] do: {
+	>> total := 1.
+	self each: { :index :element
+		total multiply-by: element.
+	}. <- total.
+}.
+
+>> usedMemory1 := 0.
+>> usedMemory2 := 0.
+>> usedMemory3 := 0.
+>> usedMemory4 := 0.
+
+Program memory-management: 0.
+
+{
+
+>> a := List ← ['hello'] ; ['world'] ; True ; None ; 666.
+a := a + ( List ← 1 ).
+Out write: ( ['sum: '] + ( a sum ) ), stop.
+Out write: ( ['min: '] + ( a minimum ) ), stop.
+Out write: ( ['max: '] + ( a maximum ) ), stop.
+Out write: ( ['3rd: '] + ( a ? 3 ) ), stop.
+Out write: ( ['prd: '] + ( a product ) ), stop.
+a sort: { :a :b <- (b - a). }.
+a each: { :i :e Out write: ( i - 1 ), stop. }.
+
+} start.
+
+Program clean-up.
+usedMemory1 := (Program memory ? 1).
+
+
+{
+
+>> a := List ← ['hello'] ; ['world'] ; True ; None ; 666.
+a := a + ( List ← 1 ).
+Out write: ( ['sum: '] + ( a sum ) ), stop.
+Out write: ( ['min: '] + ( a minimum ) ), stop.
+Out write: ( ['max: '] + ( a maximum ) ), stop.
+Out write: ( ['3rd: '] + ( a ? 3 ) ), stop.
+Out write: ( ['prd: '] + ( a product ) ), stop.
+a sort: { :a :b <- (b - a). }.
+a each: { :i :e Out write: ( i - 1 ), stop. }.
+
+} start.
+
+
+
+Program clean-up.
+usedMemory2 := (Program memory ? 1).
+
+
+{
+
+>> a := List ← ['hello'] ; ['world'] ; True ; None ; 666.
+a := a + ( List ← 1 ).
+Out write: ( ['sum: '] + ( a sum ) ), stop.
+Out write: ( ['min: '] + ( a minimum ) ), stop.
+Out write: ( ['max: '] + ( a maximum ) ), stop.
+Out write: ( ['3rd: '] + ( a ? 3 ) ), stop.
+Out write: ( ['prd: '] + ( a product ) ), stop.
+a sort: { :a :b <- (b - a). }.
+a each: { :i :e Out write: ( i - 1 ), stop. }.
+
+} start.
+
+
+
+Program clean-up.
+usedMemory3 := (Program memory ? 1).
+
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
+	Out write: ['No memory leaks here'].
+}, false: {
+	Out write: ['Leaking memory...'].
+}.

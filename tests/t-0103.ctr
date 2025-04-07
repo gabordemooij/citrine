@@ -1,0 +1,13 @@
+>> a := List ← Object ; True ; False ; Bool ; 1 ; Number ; ['Str'] ; String ; { ['Empty']. }.
+Out write: (a count), stop.
+{ :i
+	Out write: 
+	['a '] + 
+	((a ? i) type) +
+	([' \‘this\’ '] this: (a ? i))  +
+	[' is '] +
+	(((a ? i) None?) either: [''] or: ['NOT']) + 
+	[' Nil.'],
+	stop.
+} × (a count).
+Out write: ['but.. Nil is.. '] + ((None None?) either: ['certainly NIL!'] or: ['not NIL??']), stop.

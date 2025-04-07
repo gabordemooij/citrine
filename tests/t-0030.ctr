@@ -1,0 +1,7 @@
+>> a := ['Hello'].
+>> c := a.
+Out write: a.
+c := ['World'].
+Out write: a.
+>> a := ['!'].
+Out write: c.

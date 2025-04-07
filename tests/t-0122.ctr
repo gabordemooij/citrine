@@ -1,0 +1,8 @@
+
+>> x := 10.
+x divide-by: 2.
+Out write: ['10 / 2 = '].
+Out write: x, stop.
+x multiply-by: 2.
+Out write: [' * 2 makes... '].
+Out write: x, stop.

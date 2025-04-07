@@ -1,5 +1,0 @@
-☞ a ≔ ‘CR Test’.
-(a
-= a) true: {
-	✎ write: ‘OK’.
-}.

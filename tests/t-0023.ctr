@@ -1,0 +1,8 @@
+Number on: ['factorial'] do: {
+	>> total := 1.
+	{ :index total multiply-by: (self - ( index - 1 ) ). } × self. <- total.
+}.
+Out write: 2 + 3 factorial.
+Out write: 60 × 30 + 3 ÷ 2.
+Out write: 20 + 5 × 4 - 10.
+Out write: 20 + ( 5 × 4 ) - 10.

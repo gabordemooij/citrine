@@ -1,0 +1,19 @@
+Yep
+100
+Devil
+False
+List ← ['hello'] ; ['world'] ; True ; None ; 666 ; 1
+(Dict new) put:None at:['None']
+677
+Error noted: Must return a string.
+Error noted: Must return a number.
+Error noted: Must return a boolean.
+Error noted: Must return a string.
+Error noted: Must return a number.
+Error noted: Must return a boolean.
+Error noted: Must return a string.
+Error noted: Must return a number.
+Error noted: Must return a boolean.
+Error noted: Must return a string.
+Error noted: Must return a number.
+Error noted: Must return a boolean.

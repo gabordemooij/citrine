@@ -1,0 +1,3 @@
+{ Out write: ['ho']. } × 5.
+>> a := Object new.
+Out write: a.

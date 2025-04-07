@@ -1,0 +1,35 @@
+String on: ['html'] do: { <- (
+		self
+		replace: ['&'] with: ['&amp;'],
+		replace: ['<'] with: ['&lt;'],
+		replace: ['>'] with: ['&gt;'],
+		replace: ['"'] with: ['&quot;']
+	).
+}.
+
+>> list := List new.
+
+['Verbatim Syntax'] characters each: { :number :letter
+	list ; ((['<li>#Number:Letter</li>']) Number: (number), Letter: letter).
+}.
+
+Out list.
+
+
+
+
+
+>> template := ['
+<html>
+<body>
+<p>Hello this is a test!</p>
+<p>The string \‘Verbatim Syntax\’ has: 15 code points...</p>
+<ul>
+[list]
+</ul>
+</body> 
+</html>
+'] [list]: (list combine: ['↵']).
+
+Out write: template.
+

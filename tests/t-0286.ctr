@@ -1,0 +1,35 @@
+['Thousands and decimals'].
+
+>> x := 1,000,000.5.
+>> y := 1,000,000.5.
+
+Out write: (x + y), stop.
+
+>> x := 1,040.07.
+>> y := 1,305.60.
+
+Out write: (x + y), stop.
+
+['Decimal'].
+
+>> x := 1.001.
+>> y := 1.100.
+>> z := 1.010.
+
+Out write: (x + y + z), stop.
+
+['Weird but valid'].
+
+>> x := 0,1.001.
+>> y := 0,1.100.
+>> z := 0,1.010.
+
+Out write: (x + y + z), stop.
+
+>> q := 0.1.2.
+
+Out write: (q), stop.
+
+>> q := 0,1,2.
+
+Out write: (q), stop.

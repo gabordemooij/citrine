@@ -1,0 +1,45 @@
+
+
+
+Out write: ['Number:'].
+>> a := Number + Number + 1.
+a := Number - 2.
+a := Number × 2.
+a := Number ÷ 2.
+Out write: a.
+Out stop.
+
+Out write: ['String:'].
+Out write: String length.
+Out stop.
+
+Out write: ['File:'].
+Out write: File read.
+Out write: (File write: ['test']).
+Out write: (File append: ['test']).
+Out write: File delete.
+Out write: File exists.
+Out write: File include.
+Out write: File start.
+Out stop.
+
+
+Out write: ['Array:'].
+Out write: List pop.
+Out write: List count.
+Out write: (((List append: 999) string) replace: ['Lĳst'] with: ['List']).
+Out write: List count.
+Out write: List shift.
+Out write: (List combine: [',']).
+>> f := List new.
+Out write: f count. 
+Out stop.
+
+Out write: ['Map:'].
+Out write: Dict count.
+Out write: (Dict put: ['a'] at: ['b'])  count. 
+Out stop.
+
+
+
+

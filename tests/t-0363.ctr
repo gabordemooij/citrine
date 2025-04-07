@@ -1,0 +1,20 @@
+Out write: True bool, stop.
+Out write: False bool, stop.
+Out write: True bool bool, stop.
+Out write: False bool bool, stop.
+Out write: True bool bool bool, stop.
+Out write: False bool bool bool, stop.
+
+Out write: True myself, stop.
+Out write: False myself, stop.
+Out write: True myself myself, stop.
+Out write: False myself myself, stop.
+Out write: True myself myself myself, stop.
+Out write: False myself myself myself, stop.
+
+Out write: True bool, stop.
+Out write: False myself bool, stop.
+Out write: True myself myself bool, stop.
+Out write: False bool myself myself, stop.
+Out write: True myself bool myself, stop.
+Out write: False myself bool myself bool myself, stop.

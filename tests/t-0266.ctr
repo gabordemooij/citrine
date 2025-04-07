@@ -1,0 +1,2 @@
+Out write: (['Hello World'] contains: ['World']), stop.
+Out write: (['Hello World'] contains: ['Bye']), stop.

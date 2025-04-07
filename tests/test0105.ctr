@@ -1,4 +1,0 @@
-
-☞ mapUp ≔ { :i :v :m m put: ((m ? i) uppercase) at: i. }.
-☞ a ≔ ‘lololol’ split: ‘o’, map: mapUp, join: ‘x’.
-✎ write: a.

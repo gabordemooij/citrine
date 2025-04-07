@@ -1,0 +1,20 @@
+['SINGLE_LANGUAGE'].
+String on: ['evaluate'] do: {
+	>> code := File new: ['/tmp/eval.ctr'].
+	code write: (self string + ['.']).
+	Program use: ['/tmp/eval.ctr'].
+}.
+
+>> map :=
+	(Dict new)
+	put: ['Hi There'] at: ['two'],
+	put: (List ← ['hello'] ; ['world'] ; (List ← 1 ; 2; 9) ; False) at: ['one'],
+	put: ( (Dict new) put: ['wrrld'] at: ['misspelled'] ) at: ['three'],
+	put: (List ← ((Dict new) put: ['treasure'] at: ['hidden']) ; 2) at: ['four']. 
+>> str := map string.
+>> map2 := None.
+(['map2 := '] + str ) evaluate.
+Out write: map2 ? ['one'] ? 1.
+Out write: map2 ? ['one'] ? 2.
+Out write: map2 ? ['four'] ? 1 ? ['hidden'].
+Out write: map2 ? ['one'] ? 3 ? 3.

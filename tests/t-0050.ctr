@@ -1,0 +1,1 @@
+Out write: (Program os: ['echo hello']).

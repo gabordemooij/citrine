@@ -1,0 +1,11 @@
+
+
+>> meals :=
+	List new
+	~ ['hamburger']
+	~ ['pizza']
+	~ ['haggis'].
+
+Out write: (meals combine: ['|']), stop.
+
+

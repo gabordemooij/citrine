@@ -1,7 +1,0 @@
-☞ a ≔ ‘Hello’.
-☞ c ≔ a.
-✎ write: a.
-c ≔ ‘World’.
-✎ write: a.
-☞ a ≔ ‘!’.
-✎ write: c.

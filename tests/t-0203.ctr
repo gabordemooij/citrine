@@ -1,0 +1,16 @@
+['SINGLE_LANGUAGE'].
+
+
+
+Program memory-management: 4.
+>> j := 1.
+
+>> func := {
+
+	Out write: ['Nested call #'] + j, stop.
+	j add: 1.
+
+	func start.
+}.
+
+func start.

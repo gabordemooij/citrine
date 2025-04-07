@@ -1,0 +1,7 @@
+['SINGLE_LANGUAGE'].
+
+
+
+>> x := Object new.
+x doesNotUnderstand this.
+y doYouExist: (3 × 6).

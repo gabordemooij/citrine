@@ -1,0 +1,6 @@
+['SINGLE_LANGUAGE'].
+{
+	{
+		this-task error: ['Oops'].
+	} × 3.
+} × 3.

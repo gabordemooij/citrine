@@ -1,0 +1,91 @@
+
+
+Program memory-management: 1.
+
+>> x := 0.
+>> y := ['Hello'].
+>> q := { ['']. }.
+>> p := True.
+>> a := List ← 1 ; 2 ; 3 ; 4.
+>> c := Object new.
+c on: ['greet:'] do: { Out write: ['greet!']. }.
+
+>> usedMemory1 := 0.
+>> usedMemory2 := 0.
+>> usedMemory3 := 0.
+>> usedMemory4 := 0.
+>> usedMemory5 := 0.
+
+Program clean-up.
+>> usedMemory1 := (Program memory ? 1).
+
+
+
+
+x := 1.
+y := ['Hello'].
+q := { ['']. }.
+p := True.
+a := List ← 1 ; 2 ; 3 ; 5.
+c := Object new.
+c on: ['greet:'] do: { Out write: ['greet!']. }.
+
+
+Program clean-up.
+>> usedMemory2 := (Program memory ? 1).
+
+
+
+
+x := 2.
+y := ['Hello'].
+q := { ['']. }.
+p := True.
+a := List ← 1 ; 2 ; 3 ; 4.
+c := Object new.
+c on: ['greet:'] do: { Out write: ['greet!']. }.
+
+Program clean-up.
+>> usedMemory3 := (Program memory ? 1).
+
+
+
+
+x := 3.
+y := ['Hello'].
+q := { ['']. }.
+p := True.
+a := List ← 1 ; 2 ; 3 ; 5.
+c := Object new.
+c on: ['greet:'] do: { Out write: ['greet!']. }.
+c := Object new.
+c on: ['greet:'] do: { Out write: ['a different greet!'], stop. }.
+
+
+Program clean-up.
+>> usedMemory4 := (Program memory ? 1).
+
+
+
+
+
+x := 4.
+y := ['Hello'].
+q := { ['']. }.
+p := True.
+a := List ← 1 ; 2 ; 3 ; 4.
+c := Object new.
+c on: ['greet:'] do: { Out write: ['greet!']. }.
+
+
+Program clean-up.
+>> usedMemory5 := (Program memory ? 1).
+
+
+
+
+(usedMemory1 = usedMemory2 = usedMemory3 = usedMemory4 = usedMemory5) true: { 
+	Out write: ['Memory usage remains stable.'], stop.
+}, else: {
+	Out write: ['Used memory not stable.'], stop.
+}.

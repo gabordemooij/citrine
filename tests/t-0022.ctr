@@ -1,0 +1,8 @@
+(3 ≥ 3) true: { Out write: ['Yep']. }.
+(3 ≤ 3) true: { Out write: ['Yep']. }.
+(3 ≥  4) true: { Out write: ['Nope']. }.
+(4 ≤   8) true: { Out write: ['Yep']. }.
+(3 ≥ 5 ) true: { Out write: ['No']. }.
+(  0 ≤ 3 ) true: { Out write: ['Yep']. }.
+( 2 = 2 ) true: { Out write: ['Yep']. }.
+( 2.9 = 2.9 ) true: { Out write: ['Yep']. }.

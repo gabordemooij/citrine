@@ -1,0 +1,59 @@
+String on: ['escape:'] do: { :characters
+	>> str := self.
+	characters characters each: { :number :character
+		
+		>> replacement := ['\\'] + character factorial.
+		
+		(character = ['\	']) true: {
+			replacement := ['⇿'].
+		}.
+		
+		(character = ['\
+']) true: {
+			replacement := ['↵'].
+		}.
+		
+		str := str replace: character with: replacement.
+	}. <- str.
+}.
+
+>> garden := ['{
+	"garden": {
+		"chairs": 2,
+		"pool": true,
+		"shed": false,
+		"flower": [
+			"tulips",
+			"roses",
+			"lillies"
+		],
+		"size": {
+			"width":8,
+			"length":15
+		},
+		"insects":null,
+		"dog":null
+	}
+}'].
+
+>> g := JSON object: garden.
+
+Out write: ['There are x chairs in the sunny garden.'] x (g ? ['garden'] ? ['chairs']), stop.
+Out write: ['A rubber duck swims in the x.'] x ((g garden pool) either: ['pool'] or: ['']), stop.
+Out write: ['Is there a shed in the garden? Well.. x'] x (g ? ['garden'] ? ['shed']), stop.
+Out write: ['In the garden you smell the fragrance of x.'] x ((g garden flower combine: [' and '])), stop.
+Out write: ['The garden is x meters long.'] x (g garden size length), stop.
+Out write: ['Luckily, this day, there are x wasps in the garden.'] x (g garden insects), stop.
+Out write: ['The dog named x sleeps under the tree.'] x (g garden dog), stop.
+
+Out write: (['a\"bb\"ccc\"'] escape: ['"']), stop.
+Out write: g, stop.
+
+
+
+Out write: (JSON jsonify: g), stop.
+
+
+
+
+

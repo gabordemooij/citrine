@@ -1,0 +1,9 @@
+
+
+Program memory-management: 4.
+
+>> i := 0.
+Out write: ['Can we count to 10 using a whileTrue loop ?'], stop.
+{ Out write: i, stop. } while: { i add: 1. <- (i ≤ 10). }.
+Out write: ['Can we count back from 10 to 0 using a whileFalse loop ?'], stop.
+{ Out write: i, stop. } while: { i subtract: 1. <- (i ≥ 0). }.

@@ -1,0 +1,8 @@
+['SINGLE_LANGUAGE'].
+
+>> A-Z := ['ABCDEFGHIJKLMNOPQRSTUVWXYZ'].
+>> a-z := ['abcdefghijklmnopqrstuvwxyz'].
+>> 𝛑 := 3.1415926536.
+
+>> x := List ← A-Z ; a-z ; 𝛑.
+Out write: x, stop.

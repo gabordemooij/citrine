@@ -1,0 +1,6 @@
+Out write: (Command ls -la), stop.
+Out write: (Path /home gabor Desktop), stop.
+Out write: (Path /root: ['my\\ documents'], business presentations), stop.
+Out write: ((Command ls: ['my\\ documents']) > ['list.txt']), stop.
+Out write: ((Command do: ['this'], and: ['that'])), stop.
+Out write: ((Path go: ['here'], and: ['there'])), stop.

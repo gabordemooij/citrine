@@ -1,0 +1,27 @@
+
+>> dictionary := (
+	Dict new
+		put: ['b'] at: ['a'],
+		put: ['a'] at: ['b'],
+		put: ['z'] at: ['x'],
+		put: ['hello'] at: ['hallo'],
+		put: ['human'] at: ['human']
+).
+
+>> comparisons := List new.
+dictionary each: { :a :b
+	comparisons ; (
+		['a= b= | a>b a≥b a<b a≤b ab']
+		a=: a,
+		b=: b,
+		a>b: ( a > b ),
+		a≥b: ( a ≥ b ),
+		a<b: ( a < b ),
+		a≤b: ( a ≤ b ),
+		ab:  ( a compare: b)
+	).
+}.
+
+comparisons sort: { :a :b <- ( a compare: b ). }.
+Out write: ( comparisons combine: ['↵'] ), stop.
+comparisons combine: ['↵'].

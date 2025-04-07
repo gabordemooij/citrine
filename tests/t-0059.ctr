@@ -1,0 +1,8 @@
+>> z := List new.
+{
+	>> x := ['hello'].
+	z append: x.
+} start.
+Out write: (z position: 1).
+Program sweep.
+Out write: (z position: 1).

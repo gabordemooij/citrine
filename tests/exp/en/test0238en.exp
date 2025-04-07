@@ -1,0 +1,10 @@
+List ← 1 ; 2 ; 3
+3
+List ← 1 ; 2 ; 3
+(Dict new) put:1 at:['2']
+List ← 1 ; (List ← 9) ; True
+9
+(Dict new) put:(List ← 1) at:['List ← 2']
+List ← 1
+List new 
+(Dict new) 

@@ -1,0 +1,8 @@
+>> i := Object new.
+i on: ['greet:'] do: { :name
+	Out write: ['Hello %'] % name, stop.
+}.
+>> a := List ← ['greet:'] ; ['Visitor'].
+>> b := a shift.
+Out write: a ? 1, stop.
+i message: b arguments: a.

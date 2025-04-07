@@ -1,0 +1,25 @@
+>> a := 3.
+>> b := a copy.
+a subtract: 1.
+Out write: [' a = '] + a.
+Out write: [' b = '] + b.
+a := 3.
+b := a + 4.
+Out write: [' a = '] + a.
+Out write: [' b = '] + b.
+>> x := 3.
+>> y := x copy.
+x add: 10.
+y subtract: 1.
+Out write: [' x = '] + x.
+Out write: [' y = '] + y.
+>> q := Object new.
+q on: ['setProperty:'] do: { :x
+	own prop := x.
+}.
+q on: ['getProperty'] do: { <- own prop.
+}.
+q setProperty: 9.
+>> p := q.
+q setProperty: 6.
+Out write: [' p = '] + (p getProperty).

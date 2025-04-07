@@ -1,0 +1,5 @@
+>> a := ['CR Test'].
+(a
+= a) true: {
+	Out write: ['OK'].
+}.

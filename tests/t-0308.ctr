@@ -1,0 +1,13 @@
+['SINGLE_LANGUAGE'].
+Out write: ['Sending toString to Program yields a version string:'], stop.
+Out write: Program, stop.
+Out write: ['Sending toNumber to Program yields a version number:'], stop.
+Out write: Program number, stop.
+Out write: ['Sending toString to Clock yields a date and time string:'], stop.
+Out write: Moment string length > 0, stop.
+Out write: ['Sending toNumber to Clock yields a time stamp number:'], stop.
+Out write: Moment number > 0, stop.
+Out write: ['Sending toString to File yields a path:'], stop.
+Out write: File, stop.
+Out write: ['Sending toNumber to File yields a 1:'], stop.
+Out write: File number, stop.

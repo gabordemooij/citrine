@@ -1,0 +1,56 @@
+Out write: ['Continue for-loop, No - before 6 and up.'], stop.
+{ :i
+	i subtract: 1.
+	Out write: (i + 1), stop.
+	((i + 1) > 4) continue.
+	Out write: ['-'].
+} × 10.
+
+>> x := 0.
+>> xIsLessThan10 := { <- ( x < 10 ). }.
+Out stop.
+Out write: ['Continue while-true, No --> before 5 and up.'], stop.
+{
+	Out write: ['iteration #'] + x, stop.
+	x add: 1.
+	((x < 5) not) continue.
+	Out write: ['-->'].
+} while: xIsLessThan10.
+Out stop.
+Out write: ['Continue while-false, No - before 3 only.'], stop.
+{
+	Out write: ['iteration #'] + x, stop.
+	x subtract: 1.
+	(x = 3) continue.
+	Out write: ['-'].
+} while: { <- ( x > 0). }.
+
+Out stop.
+Out write: ['Continue times-loop, No ||| before 3.'], stop.
+{ :i
+	i subtract: 1.
+	Out write: ['iteration #'] + i, stop.
+	(i = 2) continue.
+	Out write: ['|||'].
+} × 5.
+
+Out stop.
+
+{ True continue. Out write: ['dont write this!'], stop. } start.
+
+{ True continue. Out write: ['dont write this!'], stop. } except: { Out write: ['Dont catch this!']. }, start.
+
+Out write: ['Test Array each-loop: 0, ... ,2'], stop.
+(List ← 1 ; 2 ; 3) map: { :i
+	((i - 1) = 1) continue.
+	Out write: ['iteration #'] + (i - 1), stop.
+}.
+
+Out write: ['Test Map each-loop: c only'], stop.
+>> m := Dict new.
+m put: ['first'] at: ['a'], put: ['second'] at: ['b'], put: ['third'] at: ['c'].
+m each: { :k :v
+	(k ≠ ['c']) continue.
+	Out write: ['iteration'] + k + v, stop.
+}.
+

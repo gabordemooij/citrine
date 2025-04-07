@@ -1,0 +1,11 @@
+
+>> shop := (Dict new
+	put: ['magazine'] at: ['books'],
+	put: ['computer'] at: ['electronics'],
+	put: ['lipstick'] at: ['cosmetics']
+).
+Out write: (shop has: ['computer']), stop. 
+Out write: (shop has: ['sausage']), stop. 
+Out write: (shop has: ['computers']), stop. 
+Out write: (shop has: ['compute']), stop. 
+Out write: (shop has: ['2computer']), stop. 

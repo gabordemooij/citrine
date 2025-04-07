@@ -1,0 +1,6 @@
+>> ?> := Out new.
+?> on: ['respond:'] do: { :content
+	Out write: content.
+}.
+
+?>.

@@ -1,0 +1,6 @@
+>> a := List ← 3 ; 2 ; 1.
+Out write: ( a combine: [','] ), stop.
+a sort: { :i :j <- ( i - j ). }.
+Out write: ( a combine: [','] ), stop.
+a sort: { :i :j <- ( j - i ). }.
+Out write: ( a combine: [','] ), stop.

@@ -1,0 +1,14 @@
+
+>> Greeter := Object new.
+Greeter on: ['new'] do: {
+	own name := ['?'].
+}.
+Greeter on: ['name:'] do: { :name
+	own name := name.
+}.
+Greeter on: ['greet'] do: {
+	Out write: (['hello[you]'] [you]: own name).
+}.
+>> friend := Greeter new.
+friend name: ['1'].
+friend greet.

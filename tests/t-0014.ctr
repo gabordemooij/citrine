@@ -1,0 +1,23 @@
+>> Greeter := Object new.
+Greeter on: ['make'] do: {
+	>> gr := Object new.
+	gr on: ['setName:'] do: { :aname
+		own name := aname.
+	}.
+	gr on: ['greet'] do: {
+		Out write: own name.
+	}. <- gr.
+}.
+>> a := Greeter make.
+>> b := Greeter make.
+a setName: ['ONE'].
+b setName: ['TWO'].
+a greet.
+b greet.
+>> c := a new.
+c setName: ['THREE'].
+c greet.
+>> d := a new.
+d setName: ['FOUR'].
+d greet.
+c greet.

@@ -1,1 +1,0 @@
-{ 1 ÷ 0. } catch: ({ 1 ÷ 0. } catch: { :e ✎ write: e, stop. }), run.

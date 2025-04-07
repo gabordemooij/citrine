@@ -1,5 +1,0 @@
-coffeeUncatched error has occurred.
-Key not found: tealeaves
-#3 tealeaves (../../tests/tmp/runner0: 17)
-#2 makeTea (../../tests/tmp/runner0: 28)
-#1 write: (../../tests/tmp/runner0: 26)

@@ -1,0 +1,70 @@
+['SINGLE_LANGUAGE'].
+
+
+>> usedMemory1 := 0.
+>> usedMemory2 := 0.
+>> usedMemory3 := 0.
+>> usedMemory4 := 0.
+
+Program memory-management: 0.
+>> palette := None.
+>> colors := None.
+
+{
+palette := Dict new.
+palette 
+	put: ['#F00'] at: ['red'],
+	put: ['#0F0'] at: ['green'],
+	put: ['#00F'] at: ['blue'].
+Out write: ['number of RGB codes in palette: '] + ( palette count ), stop.
+Out write: ['RGB code of green is: '] + ( palette ? ['green'] ), stop.
+colors := [''].
+( palette each: { :name :code
+		colors := colors + ( name + [':'] + code ).
+} ).
+Out write: ['All colors in palette: '] + colors, stop.
+} start.
+Program clean-up.
+usedMemory1 := (Program memory ? 1).
+
+{
+palette := Dict new.
+palette 
+	put: ['#F00'] at: ['red'],
+	put: ['#0F0'] at: ['green'],
+	put: ['#00F'] at: ['blue'].
+Out write: ['number of RGB codes in palette: '] + ( palette count ), stop.
+Out write: ['RGB code of green is: '] + ( palette ? ['green'] ), stop.
+colors := [''].
+( palette each: { :name :code
+		colors := colors + ( name + [':'] + code ).
+} ).
+Out write: ['All colors in palette: '] + colors, stop.
+} start.
+Program clean-up.
+usedMemory2 := (Program memory ? 1).
+
+{
+palette := Dict new.
+palette 
+	put: ['#F00'] at: ['red'],
+	put: ['#0F0'] at: ['green'],
+	put: ['#00F'] at: ['blue'].
+Out write: ['number of RGB codes in palette: '] + ( palette count ), stop.
+Out write: ['RGB code of green is: '] + ( palette ? ['green'] ), stop.
+colors := [''].
+( palette each: { :name :code
+		colors := colors + ( name + [':'] + code ).
+} ).
+Out write: ['All colors in palette: '] + colors, stop.
+} start.
+Program clean-up.
+usedMemory3 := (Program memory ? 1).
+
+
+
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
+	Out write: ['No memory leaks here'].
+}, false: {
+	Out write: ['Leaking memory...'].
+}.

@@ -1,0 +1,7 @@
+{
+	Out write: ['Block 1.↵'].
+	True break.
+	Out write: ['No'].
+} except: {
+	Out write: ['You should not see me↵'].
+}, start.

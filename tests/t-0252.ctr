@@ -1,0 +1,20 @@
+>> clock := Moment new.
+clock year: 1981, month: 1, day: 5,
+      hour: 13, minute: 15, second: 13.
+
+Out write: clock, stop.
+clock zone: ['Europe/London'].
+
+Out write: (
+	(clock year plain) + ['-'] + (clock month) + ['-'] + (clock day) + [' '] +
+	(clock hour) + [':'] + (clock minute) + [':'] + (clock second) + [' '] +
+	['W'] + (clock week) + [' t'] + (clock time plain) + [' '] + (clock zone)
+), stop.
+
+
+clock zone: ['Europe/Amsterdam'].
+Out write: (
+	(clock year plain) + ['-'] + (clock month) + ['-'] + (clock day) + [' '] +
+	(clock hour) + [':'] + (clock minute) + [':'] + (clock second) + [' '] +
+	['W'] + (clock week) + [' t'] + (clock time plain) + [' '] + (clock zone)
+), stop.

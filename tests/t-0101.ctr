@@ -1,0 +1,2 @@
+Program setting: ['TSTVAR'] value: ['Hello World!'].
+Out write: ['value = '] + (Program setting: ['TSTVAR']).

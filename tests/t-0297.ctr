@@ -1,0 +1,13 @@
+['SINGLE_LANGUAGE'].
+
+>> colors := List ← ['red'] ; ['green'] ; ['blue'] ; 3 ; (List new) ; False ; None.
+
+Out write: (colors find: ['green']), stop. 
+Out write: (colors find: ['blue']), stop. 
+Out write: (colors find: ['red']), stop. 
+Out write: (colors find: 3), stop. 
+Out write: (colors find: (List new)), stop. 
+Out write: (colors find: ['False']), stop. 
+Out write: (colors find: None), stop. 
+Out write: (colors find: ['purple']), stop. 
+

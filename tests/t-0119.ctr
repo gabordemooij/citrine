@@ -1,0 +1,11 @@
+['SINGLE_LANGUAGE'].
+Program memory-management: 0.
+Program setting: ['QUERY_STRING'] value: ['search=table&restaurant=pizzaria&menu=spaghetti&menu=macaroni&course[main]=canneloni&course[dessert]=tiramisu'].
+Out write: (Program setting: ['QUERY_STRING']), stop.
+>> s := Request get: ['search'].
+Out write: ['I was looking for a free '] + s.
+Out write: [' in a '] + (Request get: ['restaurant']) + [', '], stop.
+Out write: ['but the waiter told me all tables have been corrupted by '], stop.
+>> m := Request get list: ['menu'].
+Out write: (m combine: [', ']) + [' and ']+(Request get: ['course[main]']) + [' code.'], stop.
+

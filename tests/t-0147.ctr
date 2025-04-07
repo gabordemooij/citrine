@@ -1,0 +1,4 @@
+['SINGLE_LANGUAGE'].
+Out write: ['aaa'], stop.
+{ ↲↲. } start.
+Out write: ['aaa'], stop.

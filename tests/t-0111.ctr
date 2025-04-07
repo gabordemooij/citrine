@@ -1,0 +1,10 @@
+
+>> a := 0.
+{
+	Out write: ['Block 1.↵'].
+	this-task error: ['Err'].
+	a := 1.
+} except: {
+	Out write: ['Catch Block.↵'].
+	Out write: ['a = '] + a, stop.
+}, start.

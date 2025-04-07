@@ -1,0 +1,11 @@
+>> a := Object new.
+a on: ['init'] do: {
+	>> v := ['test'].
+	own value := v.
+	own value2 := own value.
+	>> x := own value2.
+	Out write: x.
+	Out write: own value.
+	Out write: own value2.
+}.
+a init.

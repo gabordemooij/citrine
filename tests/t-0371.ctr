@@ -1,0 +1,6 @@
+['SINGLE_LANGUAGE'].
+Out write: (8 & 10), stop.
+Out write: (8 | 10), stop.
+Out write: (8 ^ 10), stop.
+
+

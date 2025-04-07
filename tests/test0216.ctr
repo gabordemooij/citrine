@@ -1,3 +1,0 @@
-☞ a ≔ Map new.
-a property: a.
-{ a string. } catch: { ✎ write: ‘OK’, stop. }, run.

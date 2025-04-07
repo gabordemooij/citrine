@@ -1,6 +1,0 @@
-‘SINGLE_RUN’.
-Program tidiness: 0.
-Program memory: 180 MB.
-☞ a ≔ List new.
-a append: a.
-✎ write: a, stop.

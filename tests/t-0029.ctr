@@ -1,0 +1,7 @@
+Number on: ['factorial'] do: {
+	>> total := 1.
+	{ :index total multiply-by: (self - ( index - 1 ) ). } × self. <- total.
+}.
+Out write: ['first'], write: ['second'].
+Out write: 3 factorial, write: 3 factorial.
+Out write: 3 + 2, write: 7 ÷ 2.

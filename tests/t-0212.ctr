@@ -1,0 +1,5 @@
+>> a := Dict new.
+>> b := Dict new.
+a link: b.
+b link: a.
+Out write: ['No infinite recursion in GC.'].

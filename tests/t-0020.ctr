@@ -1,0 +1,8 @@
+(None = None) true: { Out write: ['Nil is Nil!'].}.
+(2 > 1) true: { Out write: ['YES']. }.
+(2 > 3) true: { Out write: ['NO']. }.
+(2 > 3) false: { Out write: ['Nonono..'].}.
+True true: { Out write: ['TRUE is TRUE!']. }.
+(True) true: { Out write: ['TRUE is TRUE!']. }.
+False false: { Out write: ['FALSE is FALSE!']. }.
+(False) false: { Out write: ['FALSE is FALSE!']. }.
