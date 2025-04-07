@@ -1,10 +1,10 @@
 
 { :i
-	Out write: ['This is step #'] + ( ( i - 1 ) + 1 ), stop.
+	Out write: ['This is step #'] + ( ( i ) + 1 ), stop.
 } × 6.
 
 { :i
-	Out write: ['This is step #'] + ( 3 - ( i - 1 ) ), stop.
+	Out write: ['This is step #'] + ( 3 - ( i ) ), stop.
 } × 6.
 
 { :i
@@ -14,5 +14,5 @@
 
 
 { :i
-	Out write: ['This is step #'] + ( -3 + ( ( i - 1 ) ÷ 2 ) ), stop.
+	Out write: ['This is step #'] + ( -3 + ( ( i ) ÷ 2 ) ), stop.
 } × 11.

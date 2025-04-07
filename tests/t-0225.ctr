@@ -1,6 +1,6 @@
 
 { :j
-	>> i := j + 0.
+	>> i := j + 1.
 	>> type := [''].
 	( i modulo: 2 ) true: { type := ['odd']. }.
 	( i modulo: 2 ) false: { type := ['even']. }.

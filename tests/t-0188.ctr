@@ -7,9 +7,9 @@
 
 Program memory-management: 0.
 
-{ :i i subtract: 1. Out write: i. } × 4.
+{ :i Out write: i. } × 4.
 Out stop.
-{ :i i subtract: 1. Out write: (4 - i). } × 4.
+{ :i Out write: (4 - i). } × 4.
 Out stop.
 ( 1 > 2 ) false: { Out write: ['BLOCK 1'], stop. }.
 ( 2 > 1 ) true:  { Out write: ['BLOCK 2'], stop. }.
@@ -25,12 +25,12 @@ Out stop.
 
 Program clean-up.
 
-usedMemory1 := (Program memory ? 1).
+usedMemory1 := (Program memory ? 0).
 
 
-{ :i i subtract: 1. Out write: i. } × 4.
+{ :i  Out write: i. } × 4.
 Out stop.
-{ :i i subtract: 1. Out write: (4 - i). } × 4.
+{ :i  Out write: (4 - i). } × 4.
 Out stop.
 ( 1 > 2 ) false: { Out write: ['BLOCK 1'], stop. }.
 ( 2 > 1 ) true:  { Out write: ['BLOCK 2'], stop. }.
@@ -46,12 +46,12 @@ Out stop.
 
 
 Program clean-up.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 := (Program memory ? 0).
 
 
-{ :i i subtract: 1. Out write: i. } × 4.
+{ :i Out write: i. } × 4.
 Out stop.
-{ :i i subtract: 1. Out write: (4 - i). } × 4.
+{ :i Out write: (4 - i). } × 4.
 Out stop.
 ( 1 > 2 ) false: { Out write: ['BLOCK 1'], stop. }.
 ( 2 > 1 ) true:  { Out write: ['BLOCK 2'], stop. }.
@@ -65,7 +65,7 @@ i := 3.
 Out stop.
 
 Program clean-up.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 := (Program memory ? 0).
 
 
 

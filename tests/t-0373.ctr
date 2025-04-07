@@ -1,0 +1,59 @@
+# compliance test
+
+# use international numbers
+
+Out write: ['1000 -> '].
+Out write: 1000, stop. #1000
+
+Out write: ['1.5 -> '].
+Out write: 1.5, stop.  #1.5
+
+Out write: ['1001.5 -> '].
+Out write: 1.5 + 1000, stop. #1001.5
+
+# use 0-indexed arrays
+>> x := List new ; 1 ; 2 ; 3.
+>> y := List new ; ['a'] ; ['b'] ; ['c'].
+
+Out write: ['1 -> '].
+Out write: x ? 0, stop. #1
+
+Out write: ['1 -> '].
+Out write: (x at: 0), stop. #1
+
+Out write: ['1 -> '].
+Out write: x first, stop. #1
+
+Out write: ['3 -> '].
+Out write: x last, stop. #3
+
+Out write: ['(Dict new) put:3 at:['c'], put:2 at:['b'], put:1 at:['a'] -> '].
+Out write: (x by: y), stop.
+
+Out write: ['1 -> '].
+Out write: (x from: 0 length: 1) first, stop. #1
+
+Out write: ['0 -> '].
+Out write: (x find: 1), stop. #0
+
+x put: 9 at: 0.
+
+Out write: ['9 -> '].
+Out write: (x at: 0), stop. #9
+
+x prepend: 8.
+Out write: ['8 -> '].
+Out write: (x at: 0), stop. #9
+
+
+x append: 10.
+Out write: ['10 -> '].
+Out write: (x at: 4), stop. #10
+
+
+
+
+
+
+
+

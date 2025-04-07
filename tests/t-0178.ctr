@@ -8,11 +8,11 @@
 Program memory-management: 0.
 
 >> txt := ['Word Salad'].
-Out write: ['last index of ord = '] + (( txt last: ['ord'] ) - 1), stop.
-Out write: ['index of ord = '] + (( txt find: ['ord'] ) - 1), stop.
-Out write: ['index of ad = '] + (( txt find: ['ad'] ) - 1), stop.
-Out write: ['last index of W = '] + (( txt last: ['W'] ) - 1), stop.
-Out write: ['last index of d = '] + (( txt last: ['d'] ) - 1), stop.
+Out write: ['last index of ord = '] + (( txt last: ['ord'] ) - 0), stop.
+Out write: ['index of ord = '] + (( txt find: ['ord'] ) - 0), stop.
+Out write: ['index of ad = '] + (( txt find: ['ad'] ) - 0), stop.
+Out write: ['last index of W = '] + (( txt last: ['W'] ) - 0), stop.
+Out write: ['last index of d = '] + (( txt last: ['d'] ) - 0), stop.
 Out write: ['txt equals Word Salad = '] + ( txt = ['Word Salad'] ), stop.
 Out write: ['txt equals Ceasar Salad = '] + ( txt = ['Ceasar Salad'] ), stop.
 Out write: ['txt does not equal Word Salad = '] + ( txt ≠ ['Word Salad'] ), stop.
@@ -20,37 +20,37 @@ Out write: ['txt does not equal Ceasar Salad = '] + ( txt ≠ ['Ceasar Salad'] )
 
 Program clean-up.
 
-usedMemory1 := (Program memory ? 1).
+usedMemory1 := (Program memory ? 0).
 
 
 txt := ['Word Salad'].
-Out write: ['last index of ord = '] + (( txt last: ['ord'] ) - 1), stop.
-Out write: ['index of ord = '] + (( txt find: ['ord'] ) - 1), stop.
-Out write: ['index of ad = '] + (( txt find: ['ad'] ) - 1), stop.
-Out write: ['last index of W = '] + (( txt last: ['W'] ) - 1), stop.
-Out write: ['last index of d = '] + (( txt last: ['d'] ) - 1), stop.
+Out write: ['last index of ord = '] + (( txt last: ['ord'] ) - 0), stop.
+Out write: ['index of ord = '] + (( txt find: ['ord'] ) - 0), stop.
+Out write: ['index of ad = '] + (( txt find: ['ad'] ) - 0), stop.
+Out write: ['last index of W = '] + (( txt last: ['W'] ) - 0), stop.
+Out write: ['last index of d = '] + (( txt last: ['d'] ) - 0), stop.
 Out write: ['txt equals Word Salad = '] + ( txt = ['Word Salad'] ), stop.
 Out write: ['txt equals Ceasar Salad = '] + ( txt = ['Ceasar Salad'] ), stop.
 Out write: ['txt does not equal Word Salad = '] + ( txt ≠ ['Word Salad'] ), stop.
 Out write: ['txt does not equal Ceasar Salad = '] + ( txt ≠ ['Ceasar Salad'] ), stop.
 
 Program clean-up.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 := (Program memory ? 0).
 
 
 txt := ['Word Salad'].
-Out write: ['last index of ord = '] + (( txt last: ['ord'] ) - 1), stop.
-Out write: ['index of ord = '] + (( txt find: ['ord'] ) - 1), stop.
-Out write: ['index of ad = '] + (( txt find: ['ad'] ) - 1), stop.
-Out write: ['last index of W = '] + (( txt last: ['W'] ) - 1), stop.
-Out write: ['last index of d = '] + (( txt last: ['d'] ) - 1), stop.
+Out write: ['last index of ord = '] + (( txt last: ['ord'] ) - 0), stop.
+Out write: ['index of ord = '] + (( txt find: ['ord'] ) - 0), stop.
+Out write: ['index of ad = '] + (( txt find: ['ad'] ) - 0), stop.
+Out write: ['last index of W = '] + (( txt last: ['W'] ) - 0), stop.
+Out write: ['last index of d = '] + (( txt last: ['d'] ) - 0), stop.
 Out write: ['txt equals Word Salad = '] + ( txt = ['Word Salad'] ), stop.
 Out write: ['txt equals Ceasar Salad = '] + ( txt = ['Ceasar Salad'] ), stop.
 Out write: ['txt does not equal Word Salad = '] + ( txt ≠ ['Word Salad'] ), stop.
 Out write: ['txt does not equal Ceasar Salad = '] + ( txt ≠ ['Ceasar Salad'] ), stop.
 
 Program clean-up.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 := (Program memory ? 0).
 
 
 

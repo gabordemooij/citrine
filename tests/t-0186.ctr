@@ -22,7 +22,7 @@ Out write: 1 bool, stop.
 
 Program clean-up.
 
-usedMemory1 := (Program memory ? 1).
+usedMemory1 := (Program memory ? 0).
 
 
 Out write: (6 < 5), stop.
@@ -39,7 +39,7 @@ Out write: (3 ≠ 3), stop.
 Out write: 1 bool, stop.
 
 Program clean-up.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 := (Program memory ? 0).
 
 
 Out write: (6 < 5), stop.
@@ -56,7 +56,7 @@ Out write: (3 ≠ 3), stop.
 Out write: 1 bool, stop.
 
 Program clean-up.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 := (Program memory ? 0).
 
 
 

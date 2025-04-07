@@ -4,5 +4,5 @@ i on: ['greet:'] do: { :name
 }.
 >> a := List ← ['greet:'] ; ['Visitor'].
 >> b := a shift.
-Out write: a ? 1, stop.
+Out write: a ? 0, stop.
 i message: b arguments: a.

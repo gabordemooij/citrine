@@ -21,7 +21,7 @@ start.
 
 Program clean-up.
 
-usedMemory1 := (Program memory ? 1).
+usedMemory1 := (Program memory ? 0).
 
 {
 2 exponent factorial.
@@ -33,7 +33,7 @@ Out write: (7.9 floor), stop.
 start.
 
 Program clean-up.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 := (Program memory ? 0).
 
 
 {
@@ -45,7 +45,7 @@ Out write: (7.9 floor), stop.
 } start.
 
 Program clean-up.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 := (Program memory ? 0).
 
 
 

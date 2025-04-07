@@ -3,6 +3,6 @@
 	>> x := ['hello'].
 	z append: x.
 } start.
-Out write: (z position: 1).
+Out write: (z position: 0).
 Program sweep.
-Out write: (z position: 1).
+Out write: (z position: 0).

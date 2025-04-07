@@ -28,8 +28,8 @@ Out write: Dog new sound, stop.
 Out write: Cat new sound, stop.
 
 Factory on: ['mix:and:'] do: { :beast1 :beast2 <- Animal new sound: (
-		( beast1 sound from: 1 length: 2 ) +
-		( beast2 sound from: 3 length: 5 )
+		( beast1 sound from: 0 length: 2 ) +
+		( beast2 sound from: 2 length: 5 )
 	).
 }.
 

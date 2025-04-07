@@ -1,6 +1,6 @@
 >> cafe := List new.
 cafe append: ['coffee'].
 cafe append: ['beer'].
-Out write: (cafe position: 1), write: (cafe position: 2).
+Out write: (cafe position: 0), write: (cafe position: 1).
 >> pub := cafe.
-Out write: (pub position: 1), write: (pub position: 2).
+Out write: (pub position: 0), write: (pub position: 1).

@@ -8,38 +8,40 @@
 Program memory-management: 0.
 
 >> a := -2 abs.
-a := a arctangent.
-a := a cosine.
-a := a logarithm.
-a := a sine.
-a := a tangent.
+a := a atan.
+a := a cos.
+a := a log.
+a := a sin.
+a := a tan.
+
 
 Program clean-up.
 
-usedMemory1 := (Program memory ? 1).
+usedMemory1 := (Program memory ? 0).
 
 
 a := -2 abs.
-a := a arctangent.
-a := a cosine.
-a := a logarithm.
-a := a sine.
-a := a tangent.
+a := a atan.
+a := a cos.
+a := a log.
+a := a sin.
+a := a tan.
 
 
 Program clean-up.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 := (Program memory ? 0).
 
 
 a := -2 abs.
-a := a arctangent.
-a := a cosine.
-a := a logarithm.
-a := a sine.
-a := a tangent.
+a := a atan.
+a := a cos.
+a := a log.
+a := a sin.
+a := a tan.
+
 
 Program clean-up.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 := (Program memory ? 0).
 
 
 

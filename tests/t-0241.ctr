@@ -13,7 +13,7 @@ String on: ['evaluate'] do: {
 Out write: x, stop.
 >> y := None.
 (['y := '] + x ) evaluate.
-Out write: y ? 1, stop.
+Out write: y ? 0, stop.
 
 q := Dict put: ['\[''] at: ['\['quote\']'].
 x := q string.

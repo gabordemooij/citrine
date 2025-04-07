@@ -12,7 +12,7 @@ f exists: { f delete. }.
 f write: ['hello world'].
 
 Program clean-up.
-usedMemory1 := (Program memory ? 1).
+usedMemory1 := (Program memory ? 0).
 
 
 f := File new: ['/tmp/citrine_test_file.txt'].
@@ -20,7 +20,7 @@ f exists: { f delete. }.
 f write: ['hello world'].
 
 Program clean-up.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 := (Program memory ? 0).
 
 
 f := File new: ['/tmp/citrine_test_file.txt'].
@@ -28,7 +28,7 @@ f exists: { f delete. }.
 f write: ['hello world'].
 
 Program clean-up.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 := (Program memory ? 0).
 
 
 

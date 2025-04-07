@@ -15,7 +15,7 @@ Program memory-management: 0.
 >> usedMemory4 := 0.
 
 Program clean-up.
-usedMemory1 := (Program memory ? 1).
+usedMemory1 := (Program memory ? 0).
 
 
 
@@ -27,7 +27,7 @@ p := True.
 a := List ← 1 ; 2 ; 3 ; 5.
 
 Program clean-up.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 := (Program memory ? 0).
 
 
 
@@ -39,7 +39,7 @@ p := True.
 a := List ← 1 ; 2 ; 3 ; 4.
 
 Program clean-up.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 := (Program memory ? 0).
 
 
 
@@ -52,7 +52,7 @@ a := List ← 1 ; 2 ; 3 ; 5.
 
 
 Program clean-up.
-usedMemory4 := (Program memory ? 1).
+usedMemory4 := (Program memory ? 0).
 
 
 
@@ -65,7 +65,7 @@ p := True.
 a := List ← 1 ; 2 ; 3 ; 4.
 
 Program clean-up.
->> usedMemory5 := (Program memory ? 1).
+>> usedMemory5 := (Program memory ? 0).
 
 
 

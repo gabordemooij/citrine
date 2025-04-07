@@ -12,4 +12,4 @@ o on: ['hello'] do: { ['Empty']. }.
 { (1 < ['2']) true: { Out write: ['OK']. }. } except: { :e Out write: e, stop. }, start. 
 { (1 < ['2.0']) true: { Out write: ['OK']. }. } except: { :e Out write: e, stop. }, start. 
 { (1 < ['x2.0']) true: { Out write: ['NO!']. }. } except: { :e Out write: e, stop. }, start. 
-{ Out write: (['hello OK there'] from: ['7'] length: ['2']). } start. 
+{ Out write: (['hello OK there'] from: ['6'] length: ['2']). } start. 

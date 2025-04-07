@@ -1,11 +1,11 @@
 
 >> a := List ← (List ← 100 ; 200 ; 300) ; (List ← 9 ; 8 ; 7).
 Out write: ['at 0,1 :'].
-Out write: a ? 1 ? 2, stop. 
+Out write: a ? 0 ? 1, stop. 
 Out write: ['at 1,2 :'].
-Out write: a ? 2 ? 3, stop. 
+Out write: a ? 1 ? 2, stop. 
 >> menu := Dict new.
 menu put: (List ← ['pizza'] ; ['spaghetti']) at: ['Italian Cuisine'].
 menu put: (List ← ['bifteki'] ; ['suflaki']) at: ['Greek Cuisine'].
-Out write: ['I love '] + (menu ? ['Greek Cuisine'] ? 1) + [' and '] + (menu ? ['Italian Cuisine'] ? 2), stop. 
+Out write: ['I love '] + (menu ? ['Greek Cuisine'] ? 0) + [' and '] + (menu ? ['Italian Cuisine'] ? 1), stop. 
 Out write: ['but not on the same plate.'], stop.

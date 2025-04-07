@@ -11,7 +11,7 @@ String on: ['evaluate'] do: {
 Out write: b, stop. 
 (['b := '] + b) evaluate.
 
-Out write: b ? 3, stop. 
+Out write: b ? 2, stop. 
 
 Out write: (( List ← 1 ; 2 ; 3 )), stop. 
 
@@ -21,7 +21,7 @@ Out write: ((Dict new) put: 1 at: 2), stop.
 Out write: x, stop. 
 (['x := '] + x) evaluate.
 
-Out write: x ? 2 ? 1, stop. 
+Out write: x ? 1 ? 0, stop. 
 
 >> y := (Dict new) put: (List ← 1) at: (List ← 2).
 Out write: y, stop. 

@@ -8,29 +8,29 @@
 Program memory-management: 0.
 
 >> a := List ← ['hello'] ; ['world'] ; True ; None ; 666.
->> b := a from: 3 length: 2.
+>> b := a from: 2 length: 2.
 Out write: ( b combine: ['|'] ), write: b count.
 
 Program clean-up.
-usedMemory1 := (Program memory ? 1).
+usedMemory1 := (Program memory ? 0).
 
 
 a := List ← ['hello'] ; ['world'] ; True ; None ; 666.
-b := a from: 3 length: 2.
+b := a from: 2 length: 2.
 Out write: ( b combine: ['|'] ), write: b count.
 
 
 Program clean-up.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 := (Program memory ? 0).
 
 
 a := List ← ['hello'] ; ['world'] ; True ; None ; 666.
-b := a from: 3 length: 2.
+b := a from: 2 length: 2.
 Out write: ( b combine: ['|'] ), write: b count.
 
 
 Program clean-up.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 := (Program memory ? 0).
 
 
 

@@ -1,3 +1,3 @@
 Program memory-management: 4.
 Out write: ['Can we convert the broom object to a string?'], stop.
-Out write: (Program memory ? 5), stop.
+Out write: (Program memory ? 4), stop.

@@ -28,15 +28,15 @@ a := a + ( List ← 1 ).
 Out write: ( ['sum: '] + ( a sum ) ), stop.
 Out write: ( ['min: '] + ( a minimum ) ), stop.
 Out write: ( ['max: '] + ( a maximum ) ), stop.
-Out write: ( ['3rd: '] + ( a ? 3 ) ), stop.
+Out write: ( ['3rd: '] + ( a ? 2 ) ), stop.
 Out write: ( ['prd: '] + ( a product ) ), stop.
 a sort: { :a :b <- (b - a). }.
-a each: { :i :e Out write: ( i - 1 ), stop. }.
+a each: { :i :e Out write: ( i - 0 ), stop. }.
 
 } start.
 
 Program clean-up.
-usedMemory1 := (Program memory ? 1).
+usedMemory1 := (Program memory ? 0).
 
 
 {
@@ -46,17 +46,17 @@ a := a + ( List ← 1 ).
 Out write: ( ['sum: '] + ( a sum ) ), stop.
 Out write: ( ['min: '] + ( a minimum ) ), stop.
 Out write: ( ['max: '] + ( a maximum ) ), stop.
-Out write: ( ['3rd: '] + ( a ? 3 ) ), stop.
+Out write: ( ['3rd: '] + ( a ? 2 ) ), stop.
 Out write: ( ['prd: '] + ( a product ) ), stop.
 a sort: { :a :b <- (b - a). }.
-a each: { :i :e Out write: ( i - 1 ), stop. }.
+a each: { :i :e Out write: ( i - 0 ), stop. }.
 
 } start.
 
 
 
 Program clean-up.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 := (Program memory ? 0).
 
 
 {
@@ -66,17 +66,17 @@ a := a + ( List ← 1 ).
 Out write: ( ['sum: '] + ( a sum ) ), stop.
 Out write: ( ['min: '] + ( a minimum ) ), stop.
 Out write: ( ['max: '] + ( a maximum ) ), stop.
-Out write: ( ['3rd: '] + ( a ? 3 ) ), stop.
+Out write: ( ['3rd: '] + ( a ? 2 ) ), stop.
 Out write: ( ['prd: '] + ( a product ) ), stop.
 a sort: { :a :b <- (b - a). }.
-a each: { :i :e Out write: ( i - 1 ), stop. }.
+a each: { :i :e Out write: ( i - 0 ), stop. }.
 
 } start.
 
 
 
 Program clean-up.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 := (Program memory ? 0).
 
 ( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
 	Out write: ['No memory leaks here'].

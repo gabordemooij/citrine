@@ -4,8 +4,7 @@ List on: ['column:'] do: { :column
 	>> result := List new.
 	self each: { :index :row
 		row each: { :index :cell
-			
-			((index - 1) = column) true: { result append: cell. }.
+			(index = column) true: { result append: cell. }.
 		}.
 	}. <- result.
 }.

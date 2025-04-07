@@ -1,7 +1,6 @@
 ['SINGLE_LANGUAGE'].
 Out write: ['Break for-loop, 0-4.'], stop.
 { :i
-	i subtract: 1.
 	Out write: ['iteration #'] + i, stop.
 	(i = 4) break.
 } × 10.
@@ -25,7 +24,6 @@ Out write: ['Break while-false loop, 5,4.'], stop.
 
 Out write: ['Break times loop, 1-4.'], stop.
 { :i
-	i subtract: 1.
 	Out write: ['iteration #'] + i, stop.
 	(i = 4) break.
 } × 5.
@@ -38,7 +36,6 @@ Out write: ['Break block, dont fire catch...'], stop.
 
 Out write: ['Test Array each-loop: 0,1'], stop.
 (List ← 1 ; 2 ; 3) map: { :i
-	i subtract: 1.
 	Out write: ['iteration #'] + i, stop.
 	(i = 1) break.
 }.

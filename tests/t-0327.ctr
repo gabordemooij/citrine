@@ -18,7 +18,7 @@ List on: ['aantal'] do: { <- own fixture.
 	replace:
 		(['hel'] + 
 			(['l<x>'] <x>:
-				(['==o'] character: 3)
+				(['==o'] character: 2)
 			)
 		)
 	with: (
@@ -33,7 +33,7 @@ List on: ['aantal'] do: { <- own fixture.
 							(
 								List ← 0 ; 1 ; 4; 9 ; (List ← 0 ; 3; 1) ; 4
 							) penultimate
-						) ? 2
+						) ? 1
 					) + 
 					((List ← ['X'] ; ['Y'] ; ['Z']) fixture: 2) 
 					count

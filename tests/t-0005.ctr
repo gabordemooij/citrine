@@ -1,1 +1,1 @@
-{ :i Out write: (i - 1). } × 5.
+{ :i Out write: i. } × 5.

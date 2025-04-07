@@ -33,7 +33,7 @@ Out write: PoemAboutLife, stop.
 
 Program clean-up.
 
-usedMemory1 := (Program memory ? 1).
+usedMemory1 := (Program memory ? 0).
 
 
 money := False.
@@ -62,7 +62,7 @@ Out write: PoemAboutLife, stop.
 
 
 Program clean-up.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 := (Program memory ? 0).
 
 
 money := False.
@@ -89,7 +89,7 @@ Bool flip.
 Out write: PoemAboutLife, stop.
 
 Program clean-up.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 := (Program memory ? 0).
 
 
 

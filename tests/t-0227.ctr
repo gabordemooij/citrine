@@ -6,5 +6,5 @@
 q shift.
 q each: { :i :x
 
-	Out write: ['#'] + i + [' = '] + x, stop.
+	Out write: ['#'] + (i + 1) + [' = '] + x, stop.
 }.

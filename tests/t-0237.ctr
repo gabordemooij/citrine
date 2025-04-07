@@ -14,7 +14,7 @@ String on: ['evaluate'] do: {
 >> str := map string.
 >> map2 := None.
 (['map2 := '] + str ) evaluate.
+Out write: map2 ? ['one'] ? 0.
 Out write: map2 ? ['one'] ? 1.
-Out write: map2 ? ['one'] ? 2.
-Out write: map2 ? ['four'] ? 1 ? ['hidden'].
-Out write: map2 ? ['one'] ? 3 ? 3.
+Out write: map2 ? ['four'] ? 0 ? ['hidden'].
+Out write: map2 ? ['one'] ? 2 ? 2.

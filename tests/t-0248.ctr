@@ -28,12 +28,12 @@ Out write: a, stop.
 
 >> b := None.
 (['b := '] + a) evaluate.
-Out write: b ? 1 ? ['pages'] ? 2 ? ['body'], stop.
+Out write: b ? 0 ? ['pages'] ? 1 ? ['body'], stop.
 
->> c := b ? 1.
+>> c := b ? 0.
 >> d := c string.
 Out write: d type, stop.
 
 >> e := None.
 (['e := '] + d) evaluate.
-Out write: e ? ['pages'] ? 1, stop.
+Out write: e ? ['pages'] ? 0, stop.

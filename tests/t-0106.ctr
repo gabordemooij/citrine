@@ -1,5 +1,5 @@
 Number on: ['factorial'] do: {
 	>> total := 1.
-	{ :index total multiply-by: (self - ( index - 1 ) ). } × self. <- total.
+	{ :index total multiply-by: (self - ( index - 0 ) ). } × self. <- total.
 }.
 Out write: (3 factorial + 4 factorial = 30).

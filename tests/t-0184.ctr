@@ -43,7 +43,7 @@ Out write: a.
 
 Program clean-up.
 
-usedMemory1 := (Program memory ? 1).
+usedMemory1 := (Program memory ? 0).
 
 
 a := 1.
@@ -64,7 +64,7 @@ a addNum: ((List ← 2 ; 3) minimum).
 Out write: a.
 
 Program clean-up.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 := (Program memory ? 0).
 
 
 a := 1.
@@ -85,7 +85,7 @@ a addNum: ((List ← 2 ; 3) minimum).
 Out write: a.
 
 Program clean-up.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 := (Program memory ? 0).
 
 
 

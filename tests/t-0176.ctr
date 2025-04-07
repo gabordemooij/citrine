@@ -9,30 +9,30 @@ Program memory-management: 0.
 
 >> txt := ['Word Salad'].
 Out write: ['Text Length: '] + txt length, stop.
-Out write: ['Character at 2:'] + ( txt character: 3 ), stop.
-Out write: (( txt find: ['S'] ) - 1), stop.
+Out write: ['Character at 2:'] + ( txt character: 2 ), stop.
+Out write: (( txt find: ['S'] ) - 0), stop.
 
 Program clean-up.
 
-usedMemory1 := (Program memory ? 1).
+usedMemory1 := (Program memory ? 0).
 
 
 txt := ['Word Salad'].
 Out write: ['Text Length: '] + txt length, stop.
-Out write: ['Character at 2:'] + ( txt character: 3 ), stop.
-Out write: (( txt find: ['S'] ) - 1), stop.
+Out write: ['Character at 2:'] + ( txt character: 2 ), stop.
+Out write: (( txt find: ['S'] ) - 0), stop.
 
 Program clean-up.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 := (Program memory ? 0).
 
 
 txt := ['Word Salad'].
 Out write: ['Text Length: '] + txt length, stop.
-Out write: ['Character at 2:'] + ( txt character: 3 ), stop.
-Out write: (( txt find: ['S'] ) - 1), stop.
+Out write: ['Character at 2:'] + ( txt character: 2 ), stop.
+Out write: (( txt find: ['S'] ) - 0), stop.
 
 Program clean-up.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 := (Program memory ? 0).
 
 
 

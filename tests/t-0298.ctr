@@ -2,5 +2,5 @@
 
 >> a := List ← 1 ; 2 ; 3.
 >> b := a copy.
-b put: 999 at: 2.
+b put: 999 at: 1.
 Out write: (['a b'] a a b b), stop.

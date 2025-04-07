@@ -9,4 +9,4 @@ Out write: [' cent a piece.'].
 Number on: ['X'] do: { :b
 	b × self.
 }.
-7 X { :i Out write: i - 1. }.
+7 X { :i Out write: i. }.

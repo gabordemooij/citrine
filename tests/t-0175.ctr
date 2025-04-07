@@ -19,7 +19,7 @@ Out write: txt.
 
 Program clean-up.
 
-usedMemory1 := (Program memory ? 1).
+usedMemory1 := (Program memory ? 0).
 
 
 {
@@ -31,7 +31,7 @@ Out write: txt.
 } start.
 
 Program clean-up.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 := (Program memory ? 0).
 
 
 {
@@ -43,7 +43,7 @@ Out write: txt.
 } start.
 
 Program clean-up.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 := (Program memory ? 0).
 
 
 

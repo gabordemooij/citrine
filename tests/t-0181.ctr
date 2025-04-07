@@ -9,30 +9,30 @@ Program memory-management: 0.
 
 >> txt := ['World Salad'].
 Out write: ['this text contains: '] + ( ( txt split: [' '] ) count ) + [' words.'], stop.
-txt := txt from: 7 length: 4.
+txt := txt from: 6 length: 4.
 Out write: txt, stop.
 
 Program clean-up.
 
-usedMemory1 := (Program memory ? 1).
+usedMemory1 := (Program memory ? 0).
 
 
 txt := ['World Salad'].
 Out write: ['this text contains: '] + ( ( txt split: [' '] ) count ) + [' words.'], stop.
-txt := txt from: 7 length: 4.
+txt := txt from: 6 length: 4.
 Out write: txt, stop.
 
 Program clean-up.
-usedMemory2 := (Program memory ? 1).
+usedMemory2 := (Program memory ? 0).
 
 
 txt := ['World Salad'].
 Out write: ['this text contains: '] + ( ( txt split: [' '] ) count ) + [' words.'], stop.
-txt := txt from: 7 length: 4.
+txt := txt from: 6 length: 4.
 Out write: txt, stop.
 
 Program clean-up.
-usedMemory3 := (Program memory ? 1).
+usedMemory3 := (Program memory ? 0).
 
 
 
