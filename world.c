@@ -950,6 +950,7 @@ void ctr_initialize_world() {
 		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SWEEP ), &ctr_gc_collect );
 		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MEMORY_LIMIT ), &ctr_gc_setmemlimit );
 		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_GC_MODE ),  &ctr_gc_setmode );
+		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "gcmode" ),  &ctr_gc_getmode );
 		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SHELL ), &ctr_program_shell );
 		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_INPUT ), &ctr_program_input );
 		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FLUSH ), &ctr_program_flush );

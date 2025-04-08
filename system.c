@@ -279,6 +279,10 @@ ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
 
+ctr_object* ctr_gc_getmode(ctr_object* myself, ctr_argument* argumentList) {
+	return ctr_build_number_from_float((double) ctr_gc_mode);
+}
+
 /**
  * @def
  * [ Program ] shell: [ String ]
