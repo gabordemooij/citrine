@@ -771,6 +771,7 @@ ctr_object* ctr_shellcommand_respond_to_and(ctr_object* myself, ctr_argument* ar
 ctr_object* ctr_path_respond_to(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_path_respond_to_and(ctr_object* myself, ctr_argument* argumentList);
 
+ctr_object* ctr_gc_getmode(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Recursion flag

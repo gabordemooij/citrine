@@ -1,4 +1,4 @@
-
+Program memory-management: 0.
 List on: ['sum'] do: {
 	>> total := 0.
 	self each: { :index :element
@@ -11,7 +11,7 @@ List on: ['sum'] do: {
 >> usedMemory3 := 0.
 >> usedMemory4 := 0.
 
-Program memory-management: 0.
+
 
 >> f := File new: ['/tmp/test.txt'].
 f write: ['Lorem Ipsum'].
