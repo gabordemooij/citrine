@@ -1,2 +1,2 @@
 ['SINGLE_LANGUAGE'].
-Out write: (Program os: ['cat ./tests/assets/nullbyte.txt | ./bin/Linux/ctren ./tests/assets/stdin_test.ctr']).
+Out write: (Program os: ['cat ../../tests/assets/nullbyte.txt | ./ctren ../../tests/assets/stdin_test.ctr']).

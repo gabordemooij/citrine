@@ -16,7 +16,7 @@ CFLAGS 			?= -D LIBCURL -shared -O3 -g0 -I ./i18n/${ISO}/ -I ../../i18n/${ISO} -
 CXXFLAGS        ?= -fPIC
 LDFLAGS 		=  -lcurl -lSDL2 -lSDL2_ttf -lSDL2_image -lm -shared
 
-BIN 			= ../../../../mods/gui/libctrgui.so
+BIN 			= ../../../../bin/Linux/mods/gui/libctrgui.so
 BUILD_DIR 		= ./build
 BUILD_OBJ_DIR 	= $(BUILD_DIR)/obj
 BUILD_BIN_DIR 	= $(BUILD_DIR)/bin

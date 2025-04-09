@@ -1,7 +1,7 @@
 LDFLAGS= -shared -undefined dynamic_lookup
 
 install-libctrpercolator.dylib: libctrpercolator.dylib
-	install libctrpercolator.dylib ../../../mods/percolator/
+	install libctrpercolator.dylib ../../../bin/Mac/mods/percolator/
 
 libctrpercolator.dylib: percolator.o
 	cc ${LDFLAGS} -o libctrpercolator.dylib percolator.o

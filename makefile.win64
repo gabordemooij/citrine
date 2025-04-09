@@ -18,7 +18,6 @@ all:ctr
 install:
 	install -d $(DESTDIR)$(prefix)/bin $(DESTDIR)$(prefix)/share/fonts/citrine
 	install ./bin/$(shell uname -s)/ctr* $(DESTDIR)$(prefix)/bin
-	install ./fonts/Citrine.ttf          $(DESTDIR)$(prefix)/share/fonts/citrine
 
 ctr:	$(OBJS)
 	$(CC) -shared $(OBJS) -g -lm -o bin/Win64/ctr${ISO}.exe

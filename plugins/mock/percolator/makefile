@@ -1,7 +1,7 @@
 LDFLAGS= -shared
 
 install-libctrpercolator.so: libctrpercolator.so
-	install libctrpercolator.so ../../../mods/percolator/
+	install libctrpercolator.so ../../../bin/Linux/mods/percolator/
 
 libctrpercolator.so: percolator.o
 	cc ${LDFLAGS} -o libctrpercolator.so percolator.o

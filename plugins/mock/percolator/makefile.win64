@@ -4,7 +4,7 @@ CFLAGS= -D WIN
 all:libctrpercolator.dll
 
 install-libctrpercolator.dll: libctrpercolator.dll
-	install libctrpercolator.dll ../../../mods/percolator/
+	install libctrpercolator.dll ../../../bin/Win64/mods/percolator/
 
 libctrpercolator.dll: percolator.o
 	$(CC) ${LDFLAGS}  percolator.o ../../../ctr${ISO}import.lib -o libctrpercolator.dll

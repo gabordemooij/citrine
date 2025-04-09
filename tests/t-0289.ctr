@@ -37,7 +37,7 @@ Out write: (
 	Program os: (
 		Slurp new
 			echo: large text,
-			| (['./bin/OS/ctren ./tests/assets/stdin_test.ctr'] OS: OS)
+			| (['./ctren ../../tests/assets/stdin_test.ctr'] OS: OS)
 		) obtain
 ).
 
