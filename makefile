@@ -1,29 +1,28 @@
-CFLAGS = -O2 -g -mtune=native -Wpedantic -Wall -D CTRLANG=${ISO} -D INCLUDETESTS
-OBJS = test.o siphash.o utf8.o memory.o util.o base.o collections.o file.o system.o \
-       world.o lexer.o parser.o walker.o translator.o citrine.o
-prefix ?= /usr
+BUILD_DIR         = ./build
+BUILD_OBJ_DIR     = $(BUILD_DIR)/Linux/obj
+BUILD_BIN_DIR     = $(BUILD_DIR)/Linux/bin
+BIN               = ctren
+CFLAGS            = -O2 -g -mtune=native -Wpedantic -Wall -I src/i18n/en -D CTRLANG=en -D INCLUDETESTS
+LDFLAGS           = -g -rdynamic -lm -ldl
+CSRCS             = $(shell find ./src -maxdepth 1 -type f -name '*.c')
+COBJS             = $(patsubst ./src/%.c, $(BUILD_OBJ_DIR)/%.o, $(CSRCS))
+TARGET            = $(COBJS)
 
-.SUFFIXES:	.o .c
+all: ctr
 
-all:ctr
+ctr: $(TARGET)
+	@mkdir -p $(BUILD_BIN_DIR)
+	$(CC) $(TARGET) $(LDFLAGS) -o $(BUILD_BIN_DIR)/$(BIN)
 
-install:
-	install -d $(DESTDIR)$(prefix)/bin $(DESTDIR)$(prefix)/share/fonts/citrine
-	install ./bin/$(shell uname -s)/ctr* $(DESTDIR)$(prefix)/bin
-	install ./fonts/Citrine.ttf          $(DESTDIR)$(prefix)/share/fonts/citrine
-
-ctr:	$(OBJS)
-	$(CC) $(OBJS) -g -rdynamic -lm -ldl -o ctr
-	cp ctr bin/${OS}/ctr${ISO}
-
-.c.o:
-	$(CC) $(CFLAGS) $(EXTRACFLAGS) -I i18n/${ISO} -c $<
+$(BUILD_OBJ_DIR)/%.o: ./src/%.c
+	@mkdir -p $(BUILD_OBJ_DIR)
+	$(CC) $(CFLAGS) $(EXTRACFLAGS) -c $< -o $@
 
 clean:
-	rm -rf ${OBJS} ctr
-	
+	rm -rf $(BUILD_OBJ_DIR) $(BUILD_BIN_DIR)/$(BIN)
+
 plugin:
-	cd plugins/${PACKAGE} ; make clean ; make install-${NAME}
+	cd src/plugins/${PACKAGE} ; make clean ; make install-${NAME}
 
 testplugin:
 	cd plugins/${PACKAGE} ; make -f makefile.test clean ; make -f makefile.test install-${NAME}
