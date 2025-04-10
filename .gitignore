@@ -1,7 +1,5 @@
 /container
-/tests/runner*
-/tests/terrors*
 /tests/tmp/*
 /gitignore
-/bin
+/build
 

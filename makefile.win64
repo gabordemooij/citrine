@@ -1,36 +1,42 @@
-#Usage: ISO=... CC=x86_64-w64-mingw32-gcc-8.3-win32 DLLTOOL=x86_64-w64-mingw32-dlltool make -f makefile.win64
-#Usage with mk: CC=x86_64-w64-mingw32-gcc-8.3-win32 DLLTOOL=x86_64-w64-mingw32-dlltool MAKEFILE=makefile.win64 ./mk.sh 
-CFLAGS = -O2 -g -mtune=native -Wall -D CTRLANG=${ISO} -D INCLUDETESTS -D WIN \
+CC = x86_64-w64-mingw32-gcc
+DLLTOOL ?= x86_64-w64-mingw32-dlltool
+
+BUILD_DIR         = ./build/Win64
+BUILD_OBJ_DIR     = $(BUILD_DIR)/obj
+BUILD_BIN_DIR     = $(BUILD_DIR)/bin
+BIN               = ctren.exe
+CFLAGS            = -O2 -g -mtune=native -Wpedantic -Wall -I src/i18n/en -D CTRLANG=en -D INCLUDETESTS \
+	   -D WIN\
        -D REPLACE_ERROR_SYSTEM     -D WINDOWS_ERROR_SYSTEM\
        -D REPLACE_PROGRAM_PASSWORD -D WINDOWS_PROGRAM_PASSWORD\
        -D REPLACE_PLUGIN_SYSTEM    -D WINDOWS_PLUGIN_SYSTEM\
        -D REPLACE_CLOCK_WAIT       -D WINDOWS_CLOCK_WAIT\
        -D WINDOWS64_SETENV
 
-OBJS = test.o siphash.o utf8.o memory.o util.o base.o collections.o file.o system.o \
-       world.o lexer.o parser.o walker.o translator.o citrine.o portability.o
-prefix ?= /usr
+LDFLAGS           = -g -lm
+CSRCS             = $(shell find ./src -maxdepth 1 -type f -name '*.c')
+COBJS             = $(patsubst ./src/%.c, $(BUILD_OBJ_DIR)/%.o, $(CSRCS))
+TARGET            = $(COBJS)
 
-.SUFFIXES:	.o .c
+all: ctr
 
-all:ctr
+ctr: $(TARGET)
+	@mkdir -p $(BUILD_BIN_DIR)
+	$(CC) $(TARGET) $(LDFLAGS) -shared -o $(BUILD_BIN_DIR)/$(BIN)
+	gendef - $(BUILD_BIN_DIR)/$(BIN) > $(BUILD_DIR)/ctren.def
+	$(DLLTOOL) -d $(BUILD_DIR)/ctren.def -l $(BUILD_DIR)/ctrenimport.lib -e $(BUILD_OBJ_DIR)/ctrenexports.o
+	$(CC) $(BUILD_OBJ_DIR)/ctrenexports.o $(TARGET) $(LDFLAGS) -o $(BUILD_BIN_DIR)/$(BIN)
 
-install:
-	install -d $(DESTDIR)$(prefix)/bin $(DESTDIR)$(prefix)/share/fonts/citrine
-	install ./bin/$(shell uname -s)/ctr* $(DESTDIR)$(prefix)/bin
 
-ctr:	$(OBJS)
-	$(CC) -shared $(OBJS) -g -lm -o bin/Win64/ctr${ISO}.exe
-	gendef bin/Win64/ctr${ISO}.exe
-	$(DLLTOOL) -d ctr${ISO}.def -l ctr${ISO}import.lib -e ctr${ISO}exports.o
-	$(CC) ctr${ISO}exports.o $(OBJS) -g -lm $(LFLAGS) $(EXTRA) -o bin/Win64/ctr${ISO}.exe
-
-.c.o:
-	$(CC) $(CFLAGS) $(EXTRACFLAGS) -I i18n/${ISO} -c $<
+$(BUILD_OBJ_DIR)/%.o: ./src/%.c
+	@mkdir -p $(BUILD_OBJ_DIR)
+	$(CC) $(CFLAGS) $(EXTRACFLAGS) -c $< -o $@
 
 clean:
-	rm -rf ${OBJS} ctr
-	
+	rm -rf $(BUILD_OBJ_DIR) $(BUILD_BIN_DIR)/$(BIN)
+
 plugin:
-	cd plugins/${PACKAGE} ; make -f makefile.win64 clean ; make -f makefile.win64 install-${NAME}
+	#cd src/plugins/${PACKAGE} ; make clean ; make install-${NAME}
+	cd src/plugins/${PACKAGE} ; make -f makefile.win64 install-${NAME}
+
 
