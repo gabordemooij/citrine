@@ -1,4 +1,4 @@
-['SINGLE_LANGUAGE'].
+#LINUX
 >> Slurp := Object new.
 
 Slurp on: ['new'] do: {

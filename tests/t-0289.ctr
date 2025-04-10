@@ -1,4 +1,4 @@
-['SINGLE_LANGUAGE'].
+#LINUX
 >> OS := Program os: (Command uname -s), trim.
 
 >> Slurp := Object new.

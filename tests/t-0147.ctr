@@ -1,4 +1,4 @@
-['SINGLE_LANGUAGE'].
+#LINUX
 Out write: ['aaa'], stop.
 { ↲↲. } start.
 Out write: ['aaa'], stop.

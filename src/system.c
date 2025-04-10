@@ -764,9 +764,25 @@ ctr_object* ctr_clock_get_time( ctr_object* myself, ctr_argument* argumentList, 
 			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY )
 		)
 	);
+	
+	#ifdef WIN
+	char tz[100];
+	sprintf(tz, "TZ=%s", zone);
+	putenv(tz);
+	tzset();
+	#else
 	setenv( "TZ", zone, 1 );
+	#endif
+	
 	date = localtime( &timeStamp );
+	
+	#ifdef WIN
+	putenv("TZ=UTC"); 
+	tzset();
+	#else
 	setenv( "TZ", "UTC", 1 );
+	#endif
+	
 	switch( part ) {
 		case 'Y':
 			answer = ctr_build_number_from_float( (ctr_number) date->tm_year + 1900 );

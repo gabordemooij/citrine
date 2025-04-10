@@ -1,3 +1,4 @@
+#LINUX
 Out write: (Command ls -la), stop.
 Out write: (Path /home gabor Desktop), stop.
 Out write: (Path /root: ['my\\ documents'], business presentations), stop.
