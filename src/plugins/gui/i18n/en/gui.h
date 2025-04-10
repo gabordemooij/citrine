@@ -74,6 +74,7 @@
 #define CTR_DICT_DIALOG_SET                 "show:"
 #define CTR_DICT_CLIPBOARD_SET              "clipboard:"
 #define CTR_DICT_FROM_TO_SET                "from:to:"
+#define CTR_DICT_FROM_SET                   "from:"
 #define CTR_DICT_RED_GREEN_BLUE_SET         "red:green:blue:"
 #define CTR_DICT_TRANSPARENCY_SET           "transparency:"
 #define CTR_DICT_BYTES_SET                  "bytes:"
