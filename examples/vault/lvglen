@@ -1,0 +1,111 @@
+# Title.......: LVGLEN
+# Author......: Gabor de Mooij (c) copyright 2025
+# Date........: 28 januari 2025
+# License.....: BSD-3/MIT
+# Version.....: 1.0
+#
+# Description:
+# LVGLEN is an English XML tree to build
+# graphical user interfaces with LVGL.
+#
+# Dependencies:
+# - supplementen
+# - xmltree
+
+>> LVGLEN := XML-tree new.
+
+LVGLEN on: ['new'] do: {
+
+	>> xml := self new.
+	
+	xml
+	names: (
+		Dict new
+			object: ['lv_obj'],
+			button: ['lv_button'],
+			label: ['lv_label'],
+			image: ['lv_image'],
+			textarea: ['lv_textarea'],
+			buttonmatrix: ['lv_buttonmatrix'],
+			bar: ['lv_bar'],
+			chart: ['lv_chart'],
+			roller: ['lv_roller'],
+			dropdown: ['lv_dropdown'],
+			scale: ['lv_scale'],
+			slider: ['lv_slider'],
+			table: ['lv_table'],
+			table-column: ['lv_table-column'],
+			table-cell: ['lv_table-cell'],
+			tabview: ['lv_tabview'],
+			tabview-tab-bar:['lv_tabview-tab_bar'],
+			tabview-tab: ['lv_tabview-tab']
+	)
+	attributes: ( 
+		Dict new
+			events: ['event_bubble'],
+			one-line: ['one_line'],
+			tab-bar-position:['tab_bar_position'],
+			pad-left: ['style_pad_left'],
+			pad-right: ['style_pad_right'],
+			pad-bottom: ['style_pad_bottom'],
+			pad-top: ['style_pad_top'],
+			margin-left: ['style_margin_left'],
+			margin-right: ['style_margin_right'],
+			margin-top: ['style_margin_top'],
+			margin-bottom: ['style_margin_bottom'],
+			layout: ['style_layout'],
+			flex-flow: ['style_flex_flow'],
+			flex-align: ['style_flex_align'],
+			border: ['style_border_width'],
+			border-color: ['style_border_color'],
+			shadow: ['style_shadow_width'],
+			outline: ['style_outline_width'],
+			radius: ['style_radius'],
+			bg-opa: ['style_bg_opa']
+	)
+	values: (
+		Dict new
+			True: ['true'],
+			False: ['false'],
+			object: ['lv_obj'],
+			button: ['lv_button'],
+			label: ['lv_label'],
+			left: ['left'],
+			right: ['right'],
+			bottom: ['bottom'],
+			top: ['top'],
+			row: ['row'],
+			column: ['column']
+	).
+	
+	<- xml.
+}.
+
+
+LVGLEN on: ['font:'] do: { :font
+	self style_text_font: font name.
+}.
+
+LVGLEN on: ['image:'] do: { :image
+	self src: image name.
+}.
+
+LVGLEN on: ['background:'] do: { :image
+	self style_bg_image_src: image name.
+}.
+
+LVGLEN on: ['color:'] do: { :color
+	self style_text_color: color rgbhex.
+}.
+
+LVGLEN on: ['ink:'] do: { :color
+	self style_text_color: color rgbhex.
+}.
+
+LVGLEN on: ['border-color:'] do: { :color
+	self style_border_color: color rgbhex.
+}.
+
+LVGLEN on: ['background-color:'] do: { :color
+	self style_bg_color: color rgbhex.
+}.
