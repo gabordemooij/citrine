@@ -3,6 +3,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
@@ -11,8 +12,8 @@
 #include "lvgl/src/widgets/checkbox/lv_checkbox.h"
 #include "lvgl/src/widgets/switch/lv_switch.h"
 #include "lvgl/src/widgets/textarea/lv_textarea.h"
-#include "../../citrine.h"
 
+#include "../../citrine.h"
 #include <gui.h>
 #include <guimsg.h>
 
@@ -21,7 +22,6 @@
 #endif
 
 #include "json.h"
-
 
 uint16_t CtrGUIWidth = 800;
 uint16_t CtrGUIHeight = 400;
@@ -226,7 +226,7 @@ ctr_object* ctr_font_new(ctr_object* myself, ctr_argument* argumentList) {
 	GUIFNT* fnt = &GuiFNT[FNTCount++];
 	fnt->font = NULL;
 	fnt->ref = instance;
-	fnt->name = ctr_heap_allocate(10);
+	fnt->name = ctr_heap_allocate_tracked(10);
 	fnt->path = NULL;
 	fnt->num = FNTCount - 1;
 	sprintf(fnt->name, "font%d", FNTCount-1);
@@ -736,7 +736,7 @@ ctr_object* ctr_img_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_resource* rs = ctr_heap_allocate( sizeof(ctr_resource) );
 	guiImage->path = NULL;
 	guiImage->surface = NULL;
-	guiImage->name = ctr_heap_allocate(10);
+	guiImage->name = ctr_heap_allocate_tracked(10);
 	guiImage->num = IMGCount - 1;
 	sprintf(guiImage->name, "img%d", IMGCount-1);
 	rs->ptr = guiImage;
@@ -860,7 +860,11 @@ ctr_object* ctr_gui_dialog(ctr_object* myself, ctr_argument* argumentList) {
 	char* message = ctr_heap_allocate_cstring(
 		ctr_internal_cast2string(argumentList->object)
 	);
-	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Message", message, NULL);
+#ifdef TEST
+	printf("[Dialog] %s \n", message);
+#else
+	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Message", message, NULL);	
+#endif
 	ctr_heap_free(message);
 	return myself;
 }
@@ -942,7 +946,9 @@ void begin() {
 	CtrGUINetworkObject = ctr_network_new(CtrStdObject, NULL);
 	CtrGUINetworkObject->link = CtrStdObject;
 	ctr_internal_create_func(CtrGUINetworkObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_network_new );
+	#ifdef LIBCURL
 	ctr_internal_create_func(CtrGUINetworkObject, ctr_build_string_from_cstring(CTR_DICT_SEND_TEXT_MESSAGE), &ctr_network_basic_text_send );
+	#endif
 	CtrGUIAssetPackage = NULL;
 	packageObject = ctr_package_new(CtrStdObject, NULL);
 	packageObject->link = CtrStdObject;
@@ -955,8 +961,10 @@ void begin() {
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_SOURCE_SET ), &ctr_img_img );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NAME ), &ctr_img_name );
 	guiObject = NULL;
+	
 	guiObject = ctr_gui_new(CtrStdObject, NULL);
 	guiObject->link = CtrStdObject;
+	
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_gui_new );
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_XML_NAME_AT_SET ), &ctr_gui_xml_at_set );
 	ctr_internal_create_func(guiObject, ctr_build_string_from_cstring( CTR_DICT_FORM_FIELD_VALUE ), &ctr_gui_form_field_value );
