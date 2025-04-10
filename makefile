@@ -22,7 +22,7 @@ clean:
 	rm -rf $(BUILD_OBJ_DIR) $(BUILD_BIN_DIR)/$(BIN)
 
 plugin:
-	cd src/plugins/${PACKAGE} ; make clean ; make install-${NAME}
+	#cd src/plugins/${PACKAGE} ; make clean ; make install-${NAME}
+	cd src/plugins/${PACKAGE} ; make install-${NAME}
 
-testplugin:
-	cd plugins/${PACKAGE} ; make -f makefile.test clean ; make -f makefile.test install-${NAME}
+
