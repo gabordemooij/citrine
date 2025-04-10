@@ -19,9 +19,9 @@ CXXFLAGS        ?= -fPIC
 LDFLAGS 		=  -lcurl -lSDL2 -lSDL2_ttf -lSDL2_image -lm -shared
 
 BIN 			= libctrgui.so
-BUILD_DIR 		= ./build
-BUILD_OBJ_DIR 	= $(BUILD_DIR)/obj
-BUILD_BIN_DIR 	= ../../../build/Linux/bin/mods/gui/
+BUILD_DIR 		= ../../../build/Linux
+BUILD_OBJ_DIR 	= $(BUILD_DIR)/obj/mods/gui
+BUILD_BIN_DIR 	= $(BUILD_DIR)/bin/mods/gui
 
 prefix ?= /usr
 bindir ?= $(prefix)/bin
@@ -43,8 +43,6 @@ SRCS = $(ASRCS) $(CSRCS) $(MAINSRC) $(CXXSRCS)
 OBJS = $(AOBJS) $(COBJS) $(CXXOBJS) $(MAINOBJ)
 TARGET = $(addprefix $(BUILD_OBJ_DIR)/, $(patsubst ./%, %, $(OBJS)))
 
-
-## MAINOBJ -> OBJFILES
 all: default
 
 $(BUILD_OBJ_DIR)/%.o: %.cpp
@@ -62,21 +60,10 @@ $(BUILD_OBJ_DIR)/%.o: %.S
 	@$(CC)  $(CFLAGS) -c $< -o $@
 	@echo "CC $<"
 	
-
 default: $(TARGET)
 	@mkdir -p $(dir $(BUILD_BIN_DIR)/)
 	$(CXX) -o $(BUILD_BIN_DIR)/$(BIN) $(TARGET) $(LDFLAGS)
 
 clean: 
-	rm -rf $(BUILD_DIR)
-
-install:
-	install -d $(DESTDIR)$(bindir)
-	install $(BUILD_BIN_DIR)/$(BIN) $(DESTDIR)$(bindir)
-
-libctrgui.so: all
-
-install-libctrgui.so: libctrgui.so
-
-uninstall:
-	$(RM) -r $(addprefix $(DESTDIR)$(bindir)/,$(BIN))
+	rm -rf $(BUILD_OBJ_DIR)/*
+	rm -rf $(BUILD_BIN_DIR)/*
