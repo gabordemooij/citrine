@@ -5,21 +5,23 @@ CC ?= gcc
 LVGL_DIR_NAME ?= lvgl
 LVGL_DIR ?= .
 
+
+
 WARNINGS ?= -Wall -Wshadow -Wundef -Wno-discarded-qualifiers -Wextra -Wno-unused-function -Wno-error=strict-prototypes -Wpointer-arith \
 					-fno-strict-aliasing -Wno-error=cpp -Wuninitialized -Wmaybe-uninitialized -Wno-unused-parameter -Wno-missing-field-initializers -Wtype-limits \
 					-Wsizeof-pointer-memaccess -Wno-format-nonliteral -Wno-cast-qual -Wunreachable-code -Wno-switch-default -Wreturn-type -Wmultichar -Wformat-security \
 					-Wno-ignored-qualifiers -Wno-error=pedantic -Wno-sign-compare -Wno-error=missing-prototypes -Wdouble-promotion -Wclobbered -Wdeprecated -Wempty-body \
 					-Wshift-negative-value -Wstack-usage=2048 -Wno-unused-value -std=gnu99
-CFLAGS 			?= -D LIBCURL -shared -O3 -g0 -I ./i18n/${ISO}/ -I ../../i18n/${ISO} -I ../media/i18n/${ISO} -I$(LVGL_DIR)/ $(WARNINGS) -fPIC
+CFLAGS 			?= ${EXTRACFLAGS} -D LIBCURL -shared -O3 -g0 -I ./i18n/${ISO}/ -I ../../i18n/${ISO} -I ../media/i18n/${ISO} -I$(LVGL_DIR)/ $(WARNINGS) -fPIC
 
 
 CXXFLAGS        ?= -fPIC
 LDFLAGS 		=  -lcurl -lSDL2 -lSDL2_ttf -lSDL2_image -lm -shared
 
-BIN 			= ../../../../bin/Linux/mods/gui/libctrgui.so
+BIN 			= libctrgui.so
 BUILD_DIR 		= ./build
 BUILD_OBJ_DIR 	= $(BUILD_DIR)/obj
-BUILD_BIN_DIR 	= $(BUILD_DIR)/bin
+BUILD_BIN_DIR 	= ../../../build/Linux/bin/mods/gui/
 
 prefix ?= /usr
 bindir ?= $(prefix)/bin
