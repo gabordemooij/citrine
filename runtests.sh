@@ -98,6 +98,8 @@ pushd build/Win64/bin
 for i in $(seq -f "%04g" 1 374);
 do
     unittest $i 1 win
+    unittest $i 4 win
+    unittest $i 0 win
 done
 popd
 

@@ -106,7 +106,7 @@ void ctr_coretest_parser() {
 	ctr_test(tree_node->type == CTR_AST_NODE_EXPRASSIGNMENT);
 	ctr_test(tree_node->nodes->node->type == CTR_AST_NODE_REFERENCE);
 	ctr_test(tree_node->nodes->node->vlen == 1);
-	ctr_test(strcmp(tree_node->nodes->node->value,"x")==0);
+	ctr_test(strncmp(tree_node->nodes->node->value,"x",1)==0);
 	ctr_test(tree_node->nodes->next->node->type == CTR_AST_NODE_LTRNUM);
 	free(buffer);
 }

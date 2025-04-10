@@ -2324,16 +2324,22 @@ ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentLis
 ctr_object* ctr_string_compare( ctr_object* myself, ctr_argument* argumentList ) {
 	argumentList->object = ctr_internal_cast2string(argumentList->object);
 	ctr_size maxlen;
+	int s, c;
 	if (myself->value.svalue->vlen < argumentList->object->value.svalue->vlen) {
 		maxlen = myself->value.svalue->vlen;
 	} else {
 		maxlen = argumentList->object->value.svalue->vlen;
 	}
-	return ctr_build_number_from_float( (ctr_number) strncmp(
+	s = (ctr_number) strncmp(
 		myself->value.svalue->value,
 		ctr_internal_cast2string(argumentList->object)->value.svalue->value,
 		maxlen
-	) );
+	);
+	//implementations can differ, only the sign matters -1 0 +1.
+	c = 0;
+	if (s < 0) c = -1;
+	if (s > 0) c = 1;
+	return ctr_build_number_from_float( c );
 }
 
 /**
