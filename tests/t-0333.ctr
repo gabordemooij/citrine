@@ -1,3 +1,4 @@
+Gui init.
 { >> x := JSON object: ['{}']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
 { >> x := JSON object: ['""']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
 { >> x := JSON object: ['']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.

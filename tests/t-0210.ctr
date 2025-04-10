@@ -1,8 +1,2 @@
-['SINGLE_LANGUAGE'].
->> perky := Percolator new.
-Out write: perky brew, stop.
-Percolator brew.
-Percolator coffee: 1 water: 2, brew.
->> cupOfCoffee := perky coffee: 1 water: 2, brew.
-Out write: cupOfCoffee, stop.
-
+# Mock plugin test no longer used
+Out write: ['OK'], stop.

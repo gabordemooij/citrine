@@ -1,5 +1,7 @@
 Program memory-management: 12.
 
+Gui init.
+
 String on: ['escape:'] do: { :characters
 	>> str := self.
 	characters characters each: { :number :character

@@ -489,7 +489,7 @@ ctr_object* ctr_json_jsonify(ctr_object* myself, ctr_argument* argumentList) {
  */
 void begin_json(){
 	ctr_object* jsonObject = ctr_json_new(CtrStdObject, NULL);
-	ctr_internal_create_func(jsonObject, ctr_build_string_from_cstring( CTR_DICT_TOOBJECT ), &ctr_json_parse );
+	ctr_internal_create_func(jsonObject, ctr_build_string_from_cstring( "object:" ), &ctr_json_parse );
 	ctr_internal_create_func(jsonObject, ctr_build_string_from_cstring( CTR_DICT_JSONIFY ), &ctr_json_jsonify );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_JSON), jsonObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 }
