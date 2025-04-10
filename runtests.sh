@@ -3,42 +3,60 @@
 #set -v
 
 CITRINE_MEMORY_LIMIT_MB=10
-CITRINE_MEMORY_MODE=1
 export CITRINE_MEMORY_LIMIT_MB
-export CITRINE_MEMORY_MODE
-
-#Determine which makefile to use
-OS=$(uname -s)
-export OS
 
 LDFLAGS='-shared'
-if [ "$OS" = "OpenBSD" -o "$OS" = "FreeBSD" ]; then
-	MAKEFILE=makefile.bsd
-elif [ "$OS" = "Darwin" ]; then
-	MAKEFILE=makefile.bsd
-	LDFLAGS='-shared -undefined dynamic_lookup'
-elif [ "$OS" = "Haiku" ]; then
-	MAKEFILE=makefile.haiku
-else
-	MAKEFILE=makefile
-fi
+ISO="en" 
+export ISO
 
-#Remove .so
-find . -name "*.so" -exec rm {} +
+make clean ; make
+EXTRACFLAGS="-D TEST" ISO="en" PACKAGE="gui" NAME="libctrgui.so" make plugin
+ 
+cd build/Linux/bin
 
-#Run makefiles of plugins
-make plugin PACKAGE="request" NAME="libctrrequest.so" LDFLAGS=${LDFLAGS}
-make plugin PACKAGE="request" NAME="libctrverzoek.so" LDFLAGS=${LDFLAGS}
-make plugin PACKAGE="mock/percolator" NAME="libctrpercolator.so" LDFLAGS=${LDFLAGS}
-make plugin PACKAGE="jsmn" NAME="libctrjson.so" LDFLAGS=${LDFLAGS}
-make plugin PACKAGE="jsmn" NAME="libctrjsonnl.so" LDFLAGS=${LDFLAGS}
-make plugin PACKAGE="jsmn" NAME="libctrjsonhy.so" LDFLAGS=${LDFLAGS}
+unittest() {
+	i=$1
+	mmode=$2
+	CITRINE_MEMORY_MODE=$mmode
+	export CITRINE_MEMORY_MODE
+	echo "test"  | ./ctren ../../../tests/t-$i.ctr 1>/tmp/out 2>/tmp/err
+	if ! test -f ../../../tests/exp/en/test${i}en.exp; then
+		if ! touch ../../../tests/exp/en/test${i}en.exp; then
+			exit 1
+		fi
+	fi
+	code="$(< ../../../tests/t-$i.ctr)"
+	observed="$(< /tmp/out)$(< /tmp/err)"
+	expected="$(< ../../../tests/exp/en/test${i}en.exp)"
+	diff="$(diff -bBZ /tmp/out ../../../tests/exp/en/test${i}en.exp)"
+    if [[  $diff != "" ]]; then
+		echo "𐄂 test $i"
+		echo "expected:"
+		echo "|$expected|"
+		echo "observed:"
+		echo "|$observed|"
+		echo "diff:"
+		diff -bBZ ../../../tests/exp/en/test${i}en.exp /tmp/out
+		echo "code:"
+		echo $code
+		read -p "save new test result? (y/n)" answer
+		if [[ $answer == "y" ]]; then
+			cat /tmp/out > ../../../tests/exp/en/test${i}en.exp
+			echo "recorded."
+		else
+			exit 1
+		fi
+	else
+		echo "✓ test $i | $mmode"
+	fi
 
-#Remove old dicts
-rm dict/*
+}
 
-#Run regular makefiles through build script
-./mk.sh
-cp bin/${OS}/ctrxx bin/Generic/ctr
-cd tests/test-o-mat
-../../bin/${OS}/ctrx3 runtests.ctr $1
+# run tests for linux
+for i in $(seq -f "%04g" 1 374);
+do
+    unittest $i 1
+    unittest $i 4
+    unittest $i 0
+done
+
