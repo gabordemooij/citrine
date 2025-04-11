@@ -9,9 +9,9 @@ WARNINGS ?= -Wall -Wshadow -Wundef -Wmissing-prototypes -Wno-discarded-qualifier
 					-Wsizeof-pointer-memaccess -Wno-format-nonliteral -Wno-cast-qual -Wunreachable-code -Wno-switch-default -Wreturn-type -Wmultichar -Wformat-security \
 					-Wno-ignored-qualifiers -Wno-error=pedantic -Wno-sign-compare -Wno-error=missing-prototypes -Wdouble-promotion -Wclobbered -Wdeprecated -Wempty-body \
 					-Wshift-negative-value -Wstack-usage=2048 -Wno-unused-value -std=gnu99
-CFLAGS 			?= ${EXTRACFLAGS} -D LIBCURL -D WIN -shared -O3 -g0 -I ./i18n/en/ -I ../../i18n/en -I$(LVGL_DIR)/ $(WARNINGS) -fPIC
+CFLAGS 			?= ${EXTRACFLAGS} -D WINPASS -D LIBCURL -D WIN -shared -O3 -g0 -I ./i18n/en/ -I ../../i18n/en -I$(LVGL_DIR)/ $(WARNINGS) -fPIC
 CXXFLAGS        ?= -fPIC
-LDFLAGS 		=  -lcurl -lSDL2 -lSDL2_image -lSDL2_ttf -lm -shared
+LDFLAGS 		=  -lcurl -lSDL2 -lSDL2_image -lSDL2_ttf -ladvapi32 -lcrypt32 -lm -shared
 BIN 			= libctrgui.dll
 BUILD_DIR 		= ../../../build/Win64
 BUILD_OBJ_DIR 	= $(BUILD_DIR)/obj/mods/gui
@@ -24,7 +24,7 @@ bindir ?= $(prefix)/bin
 MAINSRC = ./gui.c
 
 include $(LVGL_DIR)/lvgl/lvgl.mk
-CSRCS +=$(LVGL_DIR)/mouse_cursor_icon.c json.c jsmn/jsmn.c
+CSRCS +=$(LVGL_DIR)/mouse_cursor_icon.c json.c vault.c jsmn/jsmn.c
 
 
 

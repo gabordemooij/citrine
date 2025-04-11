@@ -22,6 +22,8 @@
 #endif
 
 #include "json.h"
+#include "vault.h"
+
 
 uint16_t CtrGUIWidth = 800;
 uint16_t CtrGUIHeight = 400;
@@ -986,6 +988,7 @@ void begin() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NETWORK_OBJECT ), CtrGUINetworkObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Gui" ), guiObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	begin_json();
+	begin_vault();
 }
 
 void init_embedded_gui_plugin() {
