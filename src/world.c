@@ -923,7 +923,6 @@ void ctr_initialize_world() {
 	/* File */
 	CtrStdFile = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	CtrStdFile->value.rvalue = NULL;
-	if (!ctr_flag_sandbox) {
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_file_new );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_PATH ), &ctr_file_path );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_READ ), &ctr_file_read );
@@ -935,31 +934,28 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_ARRAY ), &ctr_file_list );
 	ctr_internal_create_func(CtrStdFile, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_file_to_string );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_FILE ), CtrStdFile, 0);
-	}
 	CtrStdFile->link = CtrStdObject;
 	CtrStdFile->info.sticky = 1;
 
 	/* Command */
 	CtrStdCommand = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ARGUMENT ), &ctr_program_argument );
-	if (!ctr_flag_sandbox) {
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ARGUMENT_COUNT ), &ctr_program_num_of_args );
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ENVIRONMENT_VARIABLE ), &ctr_program_get_env );
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_WAIT_FOR_INPUT ), &ctr_program_waitforinput );
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SET_ENVIRONMENT_VARIABLE ), &ctr_program_set_env );
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SWEEP ), &ctr_gc_collect );
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MEMORY_LIMIT ), &ctr_gc_setmemlimit );
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_GC_MODE ),  &ctr_gc_setmode );
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "gcmode" ),  &ctr_gc_getmode );
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SHELL ), &ctr_program_shell );
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_INPUT ), &ctr_program_input );
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FLUSH ), &ctr_program_flush );
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ERROR ), &ctr_program_err );
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MEMORY ), &ctr_gc_memory );
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_USE_SET ), &ctr_program_include );
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_WAIT_FOR_PASSW ), &ctr_program_waitforpassword );
-		ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "test" ), &ctr_program_test );
-	}
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ARGUMENT_COUNT ), &ctr_program_num_of_args );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ENVIRONMENT_VARIABLE ), &ctr_program_get_env );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_WAIT_FOR_INPUT ), &ctr_program_waitforinput );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SET_ENVIRONMENT_VARIABLE ), &ctr_program_set_env );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SWEEP ), &ctr_gc_collect );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MEMORY_LIMIT ), &ctr_gc_setmemlimit );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_GC_MODE ),  &ctr_gc_setmode );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "gcmode" ),  &ctr_gc_getmode );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_SHELL ), &ctr_program_shell );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_INPUT ), &ctr_program_input );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_FLUSH ), &ctr_program_flush );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_ERROR ), &ctr_program_err );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_MEMORY ), &ctr_gc_memory );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_USE_SET ), &ctr_program_include );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_WAIT_FOR_PASSW ), &ctr_program_waitforpassword );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( "test" ), &ctr_program_test );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO_AND ), &ctr_program_object_message_exists );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_RESPOND_TO ), &ctr_program_object_exists );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_INDEX_OF ), &ctr_program_object_exists );
@@ -972,9 +968,7 @@ void ctr_initialize_world() {
 
 	/* Clock */
 	CtrStdClock = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
-	if (!ctr_flag_sandbox) {
-		ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( CTR_DICT_WAIT ), &ctr_clock_wait );
-	}
+	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( CTR_DICT_WAIT ), &ctr_clock_wait );
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( CTR_DICT_TIME ), &ctr_clock_time );
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_clock_new_set );
 	ctr_internal_create_func(CtrStdClock, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_clock_new );

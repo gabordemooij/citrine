@@ -11,14 +11,12 @@ char* ctr_mode_input_file;
 char* ctr_mode_dict_file;
 char* ctr_mode_hfile1;
 char* ctr_mode_hfile2;
-char ctr_flag_sandbox;
 ctr_size ctr_clex_keyword_eol_len;
 ctr_size ctr_clex_keyword_num_sep_dec_len;
 ctr_size ctr_clex_keyword_num_sep_tho_len;
 ctr_size ctr_clex_keyword_assignment_len;
 ctr_size ctr_clex_keyword_return_len;
 ctr_size ctr_clex_keyword_chain_len;
-uint16_t ctr_sandbox_steps = 0;
 
 /**
  * CommandLine Display Welcome Message
@@ -62,7 +60,6 @@ void ctr_cli_read_args(int argc, char* argv[]) {
 int ctr_init() {
 	ctr_in_message = 0;
 	ctr_callstack_index = 0;
-	ctr_sandbox_steps = 0;
 	ctr_source_map_head = NULL;
 	ctr_source_mapping = 0;
 	CtrStdFlow = NULL;
