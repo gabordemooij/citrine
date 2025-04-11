@@ -372,12 +372,6 @@ extern ctr_tnode* ctr_cparse_expr(int mode);
 extern ctr_tnode* ctr_cparse_ret();
 
 /**
- * Translator functions
- */
-extern void ctr_translate_program(char* prg, char* programPath);
-extern void ctr_translate_generate_dicts(char* hfile1, char* hfile2);
-
-/**
  * Abstract Tree Walker functions
  */
 extern uint64_t    ctr_cwlk_subprogram;
@@ -413,7 +407,6 @@ extern ctr_object* ctr_assign_value(ctr_object* key, ctr_object* val);
 extern ctr_object* ctr_assign_value_to_my(ctr_object* key, ctr_object* val);
 extern ctr_object* ctr_assign_value_to_local(ctr_object* key, ctr_object* val);
 extern char*       ctr_internal_readf(char* file_name, uint64_t* size_allocated);
-extern void        ctr_internal_export_tree(ctr_tnode* ti);
 extern ctr_object* ctr_send_message(ctr_object* receiver, char* message, long len, ctr_argument* argumentList);
 extern void ctr_internal_create_func(ctr_object* o, ctr_object* key, ctr_object* (*func)( ctr_object*, ctr_argument* ) );
 

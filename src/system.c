@@ -260,22 +260,9 @@ ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
  * 0 - No Garbage Collection
  * 1 - Activate Garbage Collector (default)
  * 4 - Activate Garbage Collector for every single step (testing only)
- * 8 - Activate experimental Pool Memory Allocation Manager (experimental!)
- * 
- * In other languages:
- * Dutch: Programma opruimingsniveau: [getal].
- *
- * Mogelijke instellingen:
- * 0 - Geen opruiming
- * 1 - Standaard opruiming
- * 4 - Geheugen opruimen bij elke stap in het programma
- * 8 - Gebruik maken van gedeelde geheugen blokken (experimenteel)
  */
 ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_gc_mode = (int) ctr_internal_cast2number( argumentList->object )->value.nvalue;
-	if (ctr_gc_mode & 8) {
-		ctr_pool_init(ctr_gc_memlimit/2);
-	}
 	return myself;
 }
 

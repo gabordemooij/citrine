@@ -23,38 +23,6 @@ int fsize(char* filename) {
 }
 
 /**
- * Export AST
- */
-void ctr_internal_export_tree(ctr_tnode* ti) {
-	ctr_size i;
-	ctr_tlistitem* li;
-	ctr_tnode* t;
-	li = ti->nodes;
-	t = li->node;
-	while(1) {
-		printf( "%d;%d;", t->type, t->modifier );
-		if (t->value != NULL) {
-			printf("%lu;", (unsigned long) t->vlen);
-			for(i = 0; i < t->vlen; i++) {
-				putchar( t->value[i] );
-			}
-		} else {
-			printf("0;");
-		}
-		putchar(';');
-		if (t->nodes) {
-			putchar('[');
-			ctr_internal_export_tree(t);
-			putchar(']');
-		}
-		putchar(';');
-		if (!li->next) break; 
-		li = li->next;
-		t = li->node;
-	}
-}
-
-/**
  * @internal
  * Internal plugin loader.
  * Tries to locate a plugin by its name.

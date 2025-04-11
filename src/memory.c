@@ -18,10 +18,6 @@ memBlock*  memBlocks = NULL;
 size_t     numberOfMemBlocks = 0;
 size_t     maxNumberOfMemBlocks = 0;
 
-char* ctr_pool_alloc( ctr_size podSize );
-void ctr_pool_dealloc( void* ptr );
-void ctr_pool_init();
-int ctr_pool_bucket( ctr_size size );
 
 /**
  * Heap allocate raw memory
@@ -51,7 +47,6 @@ void* ctr_heap_allocate( size_t size ) {
 	size_t* block_width;
 	int q = sizeof( size_t );
 	size += q;
-	size = ctr_pool_bucket( size );
 	/* Check whether we can afford to allocate this much */
 	ctr_gc_alloc += size;
 	if (ctr_gc_memlimit < ctr_gc_alloc) {
@@ -59,7 +54,7 @@ void* ctr_heap_allocate( size_t size ) {
 		exit(1);
 	}
 	/* Perform allocation and check result */
-	slice_of_memory = ctr_pool_alloc( size );
+	slice_of_memory = calloc( 1, size );
 	if ( slice_of_memory == NULL ) {
 		printf( CTR_MERR_MALLOC, (unsigned long) size );
 		exit(1);
@@ -176,7 +171,7 @@ void ctr_heap_free( void* ptr ) {
 	if (ctr_gc_clean_free) {
 		memset(ptr,0,size);
 	}
-	ctr_pool_dealloc( ptr );
+	if (ptr != NULL) free(ptr);
 	if (size > ctr_gc_alloc) {
 		ctr_print_error("[WARNING] Freeing more memory than allocated.", -1);
 		ctr_gc_alloc = 0;
@@ -202,7 +197,6 @@ void* ctr_heap_reallocate(void* oldptr, size_t size ) {
 	/* correct the required size new block to include block width */
 	int q = sizeof( size_t );
 	size += q;
-	size = ctr_pool_bucket( size );
 	/* move the pointer back to begin of block */
 	oldptr = (void*) ((char*) oldptr - q);
 	/* read memory size at beginning of old block */
@@ -210,7 +204,6 @@ void* ctr_heap_reallocate(void* oldptr, size_t size ) {
 	old_size = *(block_width);
 
 	/* if somehow the requested size is less than the old size */
-	/* (because of bucketing) just return same memory block    */
 	/* otherwise upon copying memory contents we will cross    */
 	/* boundaries.                                             */
 	if (size <= old_size) {
@@ -221,14 +214,14 @@ void* ctr_heap_reallocate(void* oldptr, size_t size ) {
 	ctr_gc_alloc = ( ctr_gc_alloc - old_size ) + size;
 
 	/* re-allocate memory */
-	nptr = ctr_pool_alloc( size );
+	nptr = calloc( 1, size );
 	if ( nptr == NULL ) {
 		printf( CTR_MERR_MALLOC, (unsigned long) size );
 		exit(1);
 	}
 	memcpy( nptr, oldptr, old_size );
-	ctr_pool_dealloc(oldptr);
-
+	if (oldptr != NULL) free(oldptr);
+	
 	/* store the size of the new block at the beginning */
 	block_width = (size_t*) nptr;
 	*(block_width) = size;
@@ -279,138 +272,3 @@ char* ctr_heap_allocate_cstring( ctr_object* stringObject ) {
 	cstring[j] = '\0';
 	return cstring;
 }
-
-/**
- * Pool Allocator
- *
- * The Pool Allocator improves the performance of memory allocation in Citrine.
- * To activate the pool allocator, set the 4th bit (i.e. 8) of the Broom Garbage Collector
- * using 'Broom mode:'.
- */
-int       usePools = 0;
-char*     spodmem;
-char*     mpodmem;
-char*     lpodmem;
-char**    freeslist;
-char**    freemlist;
-char**    freellist;
-ctr_size  freespods = 0;
-ctr_size  freempods = 0;
-ctr_size  freelpods = 0;
-ctr_size  spods = 0;
-ctr_size  mpods = 0 ;
-ctr_size  lpods = 0 ;
-ctr_size  spodCount = 0;
-ctr_size  mpodCount = 0;
-ctr_size  lpodCount = 0;
-ctr_size  spod = 32;
-ctr_size  mpod = 64;
-ctr_size  lpod = 128;
-
-
-/**
- * Initializes the Pool Allocator with the specified memory limit.
- * By default the Pool Allocator will use 50% of the specified memory
- * for pool allocation.
- */
-void ctr_pool_init( ctr_size pool ) {
-	if (usePools) return; /* You cannot init twice */
-	usePools = 1;
-	/* If pool is too small exit with error code */
-	if (pool < 300) {
-		printf( CTR_MERR_POOL );
-		exit(1);
-	}
-	ctr_size poolSize = pool / 3;
-	spods = (poolSize / spod) - 1;
-	mpods = (poolSize / mpod) - 1;
-	lpods = (poolSize / lpod) - 1;
-	spodmem =  malloc( poolSize );
-	mpodmem =  malloc( poolSize );
-	lpodmem =  malloc( poolSize );
-	if (spodmem == NULL || mpodmem == NULL || lpodmem == NULL) {
-		printf( CTR_MERR_POOL );
-		exit(1);
-	}
-	freeslist = (char**) malloc(sizeof(char**) * spods);
-	freemlist = (char**) malloc(sizeof(char**) * mpods);
-	freellist = (char**) malloc(sizeof(char**) * lpods);
-}
-
-/**
- * Given the size of the requested memory this function will return the
- * resulting POD size to be used. There are 3 pod sizes available.
- *
- * <= 32 bytes:                  Small sized POD (spod)
- * >  32 bytes and <= 64  bytes  Medium sized POD (mpod)
- * >  64 bytes and <= 128 bytes  Large sized POD (lpod)
- *
- * If the size fits in one of these pods (<= lpod) but no pods are available
- * anymore in the pool, the size will be adjusted to size + 1, so
- * 32 will become 33. That way, the pool will be able to separate
- * these custom allocations from pods. Otherwise you will get double frees.
- */
-int ctr_pool_bucket( ctr_size size ) {
-	if ( size > 0 && size <= spod && spodCount<spods) {
-		size = spod;
-	} else if ( size > spod && size <= mpod && mpodCount<mpods) {
-		size = mpod;
-	} else if ( size > mpod && size <= lpod && lpodCount<lpods) {
-		size = lpod;
-	} else if (size == spod || size == mpod || size == lpod) {
-		size = size + 1; /* identify as custom size (avoid ambiguity 32 -> 33) otherwise double free(). */
-	}
-	return size;
-}
-
-/**
- * Returns a pointer to a block of memory allocated using either
- * the pool or the OS.
- */
-char* ctr_pool_alloc( ctr_size podSize ) {
-	if (!usePools) return (char*) calloc(podSize, 1);
-	char* memblock = NULL;
-	
-	if (podSize == spod && freespods>0) {
-		memblock = (char*) (freeslist[--freespods]);
-	} else if (podSize == spod && spodCount<spods) {
-		memblock = (spodmem + ((spodCount++)*spod));
-	} else if (podSize == mpod && freempods>0) {
-		memblock = (char*) (freemlist[--freempods]);
-	} else if (podSize == mpod && mpodCount<mpods) {
-		memblock = (mpodmem + ((mpodCount++)*mpod));
-	} else if (podSize == lpod && freelpods>0) {
-		memblock = (char*) (freellist[--freelpods]);
-	} else if (podSize == lpod && lpodCount<lpods) {
-		memblock = (lpodmem + ((lpodCount++)*lpod));
-	} else {
-		memblock = (char*) calloc(podSize, 1);
-	}
-	return (char*) memblock;
-}
-
-/**
- * Deallocates memory using the pool or the OS.
- */
-void ctr_pool_dealloc( void* ptr ) {
-	if (ptr == NULL) return;
-	if (!usePools) {
-		free(ptr);
-		return;
-	}
-	ctr_size podSize;
-	podSize = *((ctr_size*) ptr);
-	if (podSize == spod && freespods<spods) {
-		freeslist[freespods++] = (char*) ptr;
-		memset(ptr,0,spod);
-	} else if (podSize == mpod && freempods<mpods) {
-		freemlist[freempods++] = (char*) ptr;
-		memset(ptr,0,mpod);
-	} else if (podSize == lpod && freelpods<lpods) {
-		freellist[freelpods++] = (char*) ptr;
-		memset(ptr,0,lpod);
-	} else {
-		free(ptr);
-	}
-}
-

@@ -46,48 +46,14 @@ void* ctr_data_blob(unsigned int* len) {
  * CommandLine Read Arguments
  * Parses command line arguments and sets global settings accordingly.
  */
-int ctr_cli_read_args(int argc, char* argv[]) {
-	int mode = 0;
-	if (argc == 1) {
+void ctr_cli_read_args(int argc, char* argv[]) {
+	if (argc < 2) {
 		ctr_cli_welcome();
 		exit(0);
-	}
-	if (strncmp(argv[1],"-x", 2)==0) {
-		mode = 3;
-		ctr_mode_input_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
-		strncpy(ctr_mode_input_file, argv[2], 254);
-		return mode;
-	}
-	if (strncmp(argv[1],"-g", 2)==0) {
-		if (argc < 4) {
-			ctr_print_error( CTR_MSG_USAGE_G, 1 );
-		}
-		ctr_mode_hfile1 = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
-		strncpy(ctr_mode_hfile1, argv[2], 254);
-		ctr_mode_hfile2 = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
-		strncpy(ctr_mode_hfile2, argv[3], 254);
-		mode = 2;
-	}
-	if (strncmp(argv[1],"-t", 2)==0) {
-		if (argc < 4) {
-			ctr_print_error( CTR_MSG_USAGE_T, 1 );
-		}
-		ctr_mode_dict_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
-		strncpy(ctr_mode_dict_file, argv[2], 254);
-		ctr_mode_input_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
-		strncpy(ctr_mode_input_file, argv[3], 254);
-		mode = 1;
 	} else {
-		if (strncmp(argv[1],"-s", 2)==0) {
-			ctr_flag_sandbox = 1;
-			ctr_mode_input_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
-			strncpy(ctr_mode_input_file, argv[2], 254);
-		} else {
-			ctr_mode_input_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
-			strncpy(ctr_mode_input_file, argv[1], 254);
-		}
+		ctr_mode_input_file = (char*) ctr_heap_allocate_tracked( sizeof( char ) * 255 );
+		strncpy(ctr_mode_input_file, argv[1], 254);
 	}
-	return mode;
 }
 
 /**
@@ -117,7 +83,7 @@ int ctr_init() {
 	ctr_clex_keyword_return_len = strlen( CTR_DICT_RETURN );
 	ctr_clex_param_prefix_char = CTR_DICT_PARAMETER_PREFIX[0];
 	ctr_gc_memlimit = 64 * 1000000; /* Default memory limit: 64MB */
-	ctr_gc_mode = 1;                /* Default GC mode: regular GC, no pool. */
+	ctr_gc_mode = 1;                /* Default GC mode: regular GC. */
 	return 0;
 }
 
@@ -129,43 +95,23 @@ int ctr_init() {
 #ifndef EMBED
 int main(int argc, char* argv[]) {
 	char* prg;
-	char ctr_pool_share;
 	ctr_tnode* program;
 	uint64_t program_text_size = 0;
 	ctr_argc = argc;
 	ctr_argv = argv;
 	ctr_init();
-	ctr_pool_share = 2;             /* Default: pool ratio = 50% */
 	//Command line options
-	int mode = ctr_cli_read_args(argc, argv);
-	if (mode == 1) {
-		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
-		ctr_translate_program(prg, ctr_mode_input_file);
-		exit(0);
-	}
-	if (mode == 2) {
-		ctr_translate_generate_dicts(ctr_mode_hfile1, ctr_mode_hfile2);
-		exit(0);
-	}
+	ctr_cli_read_args(argc, argv);
 	prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
-
 	//Advanced parameters - environment
 	char* env_param_citrine_memory_limit_mb   = getenv("CITRINE_MEMORY_LIMIT_MB");   // - memory limit in MB
 	char* env_param_citrine_memory_mode       = getenv("CITRINE_MEMORY_MODE");       // - GC mode
-	char* env_param_citrine_memory_pool_share = getenv("CITRINE_MEMORY_POOL_SHARE"); // - how much % for the pool
 	if (env_param_citrine_memory_limit_mb)   ctr_gc_memlimit = atoi(env_param_citrine_memory_limit_mb) * 1000000;
 	if (env_param_citrine_memory_mode)       ctr_gc_mode = atoi(env_param_citrine_memory_mode);
-	if (env_param_citrine_memory_pool_share) ctr_pool_share = atoi(env_param_citrine_memory_pool_share);
-	if (ctr_gc_mode & 8) ctr_pool_init(ctr_gc_memlimit/ctr_pool_share);
-
 	program = ctr_cparse_parse(prg, ctr_mode_input_file);
 	if (program == NULL) {
 		fwrite(CtrStdFlow->value.svalue->value, CtrStdFlow->value.svalue->vlen, 1, stderr);
 		exit(1);
-	}
-	if (mode == 3) {
-		ctr_internal_export_tree(program);
-		exit(0);
 	}
 	ctr_initialize_world();
 	ctr_cwlk_run(program);

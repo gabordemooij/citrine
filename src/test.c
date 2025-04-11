@@ -130,18 +130,6 @@ void ctr_coretest_memory() {
 	size = (size_t) *((size_t*) ((char*)chunk - sizeof(size_t)));
 	expected_size = (ctr_gc_mode & 8) ? 64 : (32 + sizeof(size_t));
 	ctr_test(size == expected_size);
-	chunk = ctr_heap_allocate((32 - sizeof(size_t)));
-	size = (size_t) *((size_t*) ((char*)chunk - sizeof(size_t)));
-	expected_size = (ctr_gc_mode & 8) ? 32 : 33;
-	ctr_test(size == expected_size);
-	/* heap allocator will not fail for size 0, will just return an empty block */
-	/* btw, also not fail for -1 = just a huge block (unsigned!) */
-	chunk = ctr_heap_allocate(0);
-	size = (size_t) *((size_t*) ((char*)chunk - sizeof(size_t)));
-	expected_size = (ctr_gc_mode & 8) ? 32 : sizeof(size_t);
-	ctr_test(size == expected_size);
-	/* heap free will not crash on NULL */
-	ctr_heap_free(NULL);
 }
 
 /**
