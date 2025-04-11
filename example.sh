@@ -1,6 +1,6 @@
 ulimit -S -c unlimited
 
-EXAMPLE="${1:-vault}"
+EXAMPLE="${1:-passwordapp}"
 OS="${2:-Linux}"
 CLEAN="${3:-no}"
 
