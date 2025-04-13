@@ -1,16 +1,96 @@
-# Title.......: LVGLEN
-# Author......: Gabor de Mooij (c) copyright 2025
-# Date........: 28 januari 2025
-# License.....: BSD-3/MIT
-# Version.....: 1.0
-#
-# Description:
-# LVGLEN is an English XML tree to build
-# graphical user interfaces with LVGL.
-#
-# Dependencies:
-# - supplementen
-# - xmltree
+
+# GUI helper library
+# provides helper objects for easy development
+
+# version 1.0
+# written by Gabor de Mooij
+
+None on: ['otherwise:'] do: { :fallback <- fallback. }.
+
+# XML-tree
+
+>> XML-tree := Object new.
+
+XML-tree on: ['new'] do: { 
+	<- self new init.
+}.
+
+XML-tree on: ['init'] do: {
+	own attrs       := Dict new.
+	own values      := Dict new.
+	own names       := Dict new.
+	self clear.	
+}.
+
+XML-tree on: ['clear'] do: {
+	own textmode    := False.
+	own str         := [''].
+	own tags        := List new.
+	own elementmode := False.
+}.
+
+XML-tree on: ['names:attributes:values:'] do: { :names :attrs :values
+	own attrs := attrs.
+	own values := values.
+	own names := names.
+}.
+
+
+XML-tree on: ['respond:'] do: { :message
+	>> tag := (own names ? message otherwise: message).
+	own tags append: tag.
+	own str append: (
+		['<tag '] tag: tag 
+	).
+	own elementmode := False.
+}.
+
+XML-tree on: ['respond:and:'] do: { :message :arg
+	message := message - [':'].
+	own textmode true: {
+		own textmode := False.
+		own str append: arg.
+	}, else: {
+		own str append: (
+			['%attribute%="%value%" ']
+				%attribute%: (own attrs ? message otherwise: message),
+				%value%: (own values ? arg otherwise: arg)
+		).
+	}.
+}.
+
+
+XML-tree on: ['elements'] do: { :message :arg
+	own str append: ['>\n'].
+	own elementmode := True.
+}.
+
+XML-tree on: ['textual'] do: { :message :arg
+	own textmode := True.
+}.
+
+XML-tree on: ['close'] do: { :message :arg
+	>> end := own tags pop.
+	own elementmode true: {
+		own str append: (['\n</tag>'] tag: end).
+	}, else: {
+		own str append: (['></tag>'] tag: end).
+		own elementmode := True.
+	}.
+}.
+
+XML-tree on: ['string'] do: { <- own str. }.
+
+XML-tree on: ['no-xml:'] do: { :str
+	<- str text
+	replace: ['&'] with: ['&amp;'],
+	replace: ['<'] with: ['&lt;'],
+	replace: ['>'] with: ['&gt;'],
+	replace: ['"'] with: ['&quot;'],
+	replace: ['''] with: ['&apos;'].
+}.
+
+# English LVGL-XML wrapper
 
 >> LVGLEN := XML-tree new.
 
@@ -109,3 +189,7 @@ LVGLEN on: ['border-color:'] do: { :color
 LVGLEN on: ['background-color:'] do: { :color
 	self style_bg_color: color rgbhex.
 }.
+
+# Alias for friendly use
+
+>> View := LVGLEN.
