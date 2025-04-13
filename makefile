@@ -19,7 +19,7 @@ $(BUILD_OBJ_DIR)/%.o: ./src/%.c
 	$(CC) $(CFLAGS) $(EXTRACFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(BUILD_OBJ_DIR) $(BUILD_BIN_DIR)/$(BIN)
+	rm  $(BUILD_OBJ_DIR)/* $(BUILD_BIN_DIR)/$(BIN)
 
 plugin:
 	cd src/plugins/${PACKAGE} ; make all
