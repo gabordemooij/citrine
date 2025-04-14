@@ -13,6 +13,7 @@
 #include <string.h>
 #include <gui.h>
 #include "../../citrine.h"
+#include "vault.h"
 
 /* Linux libsecret implementation */
 #ifdef LIBSECRET
@@ -145,6 +146,20 @@ void ctr_gui_vault_platform_destroy(char** password) {
 }
 
 #endif
+
+#ifdef ANDROID_EXPORT
+
+/* Android vault is in citrine_gui.c and goes through JNI */
+void ctr_gui_internal_vault_init() {
+	/* not needed for android */
+}
+
+void ctr_gui_vault_platform_destroy(char** password) {
+	return;
+}
+
+#endif
+
 
 char* ctr_internal_gui_vault_name(ctr_object* myself) {
 	return ctr_heap_allocate_cstring(
