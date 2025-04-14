@@ -347,6 +347,10 @@ void lv_textarea_cursor_down(lv_obj_t * obj);
  */
 void lv_textarea_cursor_up(lv_obj_t * obj);
 
+void update_selection_expand(lv_obj_t* obj, int direction);
+void update_selection_word(lv_event_t* e);
+
+
 /**********************
  *      MACROS
  **********************/
