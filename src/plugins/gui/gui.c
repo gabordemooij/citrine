@@ -719,6 +719,127 @@ ctr_object* ctr_package_new_set(ctr_object* myself, ctr_argument* argumentList) 
 	return instance;
 }
 
+/**
+ * @def
+ * [ Package ] append: [ Object ]
+ * 
+ * @example
+ * >> data := Package new: ['data'].
+ * >> b := Image new: ['a.png'].
+ * a append: b.
+ */
+ctr_object* ctr_package_add(ctr_object* myself, ctr_argument* argumentList) {
+	char* path;
+	char* pkgpath = ctr_heap_allocate_cstring(ctr_internal_object_property(myself, "path", NULL));
+	FILE* outfile;
+	if (access(pkgpath, F_OK) == 0) {
+		outfile = fopen(pkgpath, "rb+");
+	} else {
+		outfile = fopen(pkgpath, "wb+");
+	}
+	fseek(outfile, 0, SEEK_END);
+	int CHUNK_SIZE = 10000;
+	uint64_t next_entry_at;
+	int bytes_read;
+	char* buffer;
+	ctr_object* fileObject = argumentList->object;
+	if (fileObject->link == CtrStdFile) {
+		path = ctr_heap_allocate_cstring(
+			ctr_internal_cast2string(
+				ctr_internal_object_property(fileObject, "path", NULL)
+			)
+		);
+		FILE* f = fopen(path, "rb");
+		if (f == NULL) {
+			ctr_error( CTR_ERR_OPEN, errno );
+			ctr_heap_free(path);
+			ctr_heap_free(pkgpath);
+			fclose(outfile);
+			return CtrStdNil;
+		}
+		fwrite(path, 1, strlen(path), outfile);
+		fwrite("\0", 1 , 1, outfile);
+		next_entry_at = ftell(outfile);
+		fwrite("\0\0\0\0\0\0\0\0", 8, 1, outfile);
+		buffer = calloc(1,CHUNK_SIZE);
+		clearerr(f);
+		while(!feof(f)) {
+			bytes_read = fread(buffer,1,CHUNK_SIZE,f);
+			fwrite(buffer, 1, bytes_read, outfile);
+		}
+		free(buffer);
+		uint64_t next_entry = (uint64_t) ftell(outfile);
+		fseek(outfile, next_entry_at, SEEK_SET);
+		fwrite(&next_entry, sizeof(uint64_t), 1, outfile);
+		fclose(outfile);
+		fclose(f);
+		ctr_heap_free(path);
+	} else {
+		ctr_error("Invalid argument\n", 0);
+	}
+	ctr_heap_free(pkgpath);
+	return myself;
+}
+
+ctr_object* ctr_package_add_as(ctr_object* myself, ctr_argument* argumentList) {
+	char* path;
+	char* alias;
+	char* pkgpath = ctr_heap_allocate_cstring(ctr_internal_object_property(myself, "path", NULL));
+	FILE* outfile;
+	if (access(pkgpath, F_OK) == 0) {
+		outfile = fopen(pkgpath, "rb+");
+	} else {
+		outfile = fopen(pkgpath, "wb+");
+	}
+	fseek(outfile, 0, SEEK_END);
+	int CHUNK_SIZE = 10000;
+	uint64_t next_entry_at;
+	int bytes_read;
+	char* buffer;
+	ctr_object* fileObject = argumentList->object;
+	if (fileObject->link == CtrStdFile) {
+		path = ctr_heap_allocate_cstring(
+			ctr_internal_cast2string(
+				ctr_internal_object_property(fileObject, "path", NULL)
+			)
+		);
+		alias = ctr_heap_allocate_cstring(
+			ctr_internal_cast2string(
+				argumentList->next->object
+			)
+		);
+		FILE* f = fopen(path, "rb");
+		if (f == NULL) {
+			ctr_error( CTR_ERR_OPEN, errno );
+			ctr_heap_free(path);
+			ctr_heap_free(pkgpath);
+			fclose(outfile);
+			return CtrStdNil;
+		}
+		fwrite(alias, 1, strlen(alias), outfile);
+		fwrite("\0", 1 , 1, outfile);
+		next_entry_at = ftell(outfile);
+		fwrite("\0\0\0\0\0\0\0\0", 8, 1, outfile);
+		buffer = calloc(1,CHUNK_SIZE);
+		clearerr(f);
+		while(!feof(f)) {
+			bytes_read = fread(buffer,1,CHUNK_SIZE,f);
+			fwrite(buffer, 1, bytes_read, outfile);
+		}
+		free(buffer);
+		uint64_t next_entry = (uint64_t) ftell(outfile);
+		fseek(outfile, next_entry_at, SEEK_SET);
+		fwrite(&next_entry, sizeof(uint64_t), 1, outfile);
+		fclose(outfile);
+		fclose(f);
+		ctr_heap_free(path);
+	} else {
+		ctr_error("Invalid argument\n", 0);
+	}
+	ctr_heap_free(pkgpath);
+	return myself;
+}
+
 ctr_object* ctr_gui_link_package(ctr_object* myself, ctr_argument* argumentList) {
 	if (argumentList->object->link != packageObject) {
 		ctr_error("Not an asset package.\n", 0);
@@ -956,6 +1077,8 @@ void begin() {
 	packageObject->link = CtrStdObject;
 	ctr_internal_create_func(packageObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_package_new );
 	ctr_internal_create_func(packageObject, ctr_build_string_from_cstring( CTR_DICT_NEW_SET ), &ctr_package_new_set );
+	ctr_internal_create_func(packageObject, ctr_build_string_from_cstring( CTR_DICT_APPEND ), &ctr_package_add );
+	ctr_internal_create_func(packageObject, ctr_build_string_from_cstring( "append:as:" ), &ctr_package_add_as );
 	imageObject = ctr_img_new(CtrStdObject, NULL);
 	imageObject->link = CtrStdObject;
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_img_new );
@@ -986,6 +1109,7 @@ void begin() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_COLOR_OBJECT ), colorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_IMAGE_OBJECT ), imageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_NETWORK_OBJECT ), CtrGUINetworkObject, CTR_CATEGORY_PUBLIC_PROPERTY);
+	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PACKAGE_OBJECT ), packageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Gui" ), guiObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	begin_json();
 	begin_vault();
