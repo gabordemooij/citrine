@@ -12,7 +12,7 @@ WARNINGS ?= -Wall -Wshadow -Wundef -Wno-discarded-qualifiers -Wextra -Wno-unused
 					-Wsizeof-pointer-memaccess -Wno-format-nonliteral -Wno-cast-qual -Wunreachable-code -Wno-switch-default -Wreturn-type -Wmultichar -Wformat-security \
 					-Wno-ignored-qualifiers -Wno-error=pedantic -Wno-sign-compare -Wno-error=missing-prototypes -Wdouble-promotion -Wclobbered -Wdeprecated -Wempty-body \
 					-Wshift-negative-value -Wstack-usage=2048 -Wno-unused-value -std=gnu99
-CFLAGS 			?= ${EXTRACFLAGS} -D LIBSECRET -D LIBCURL -shared -O3 -g0 -I ./i18n/${ISO}/ -I ../../i18n/${ISO} -I ../media/i18n/${ISO} -I$(LVGL_DIR)/ $(WARNINGS) -fPIC
+CFLAGS 			?= ${EXTRACFLAGS} -D LIBSECRET -D FFI -D LIBCURL -shared -O3 -g0 -I ./i18n/${ISO}/ -I ../../i18n/${ISO} -I ../media/i18n/${ISO} -I$(LVGL_DIR)/ $(WARNINGS) -fPIC
 
 
 CFLAGS += `pkg-config --cflags libsecret-1`
@@ -34,7 +34,7 @@ bindir ?= $(prefix)/bin
 MAINSRC = ./gui.c
 
 include $(LVGL_DIR)/lvgl/lvgl.mk
-CSRCS +=$(LVGL_DIR)/mouse_cursor_icon.c json.c vault.c jsmn/jsmn.c
+CSRCS +=$(LVGL_DIR)/mouse_cursor_icon.c json.c vault.c fficonnect.c jsmn/jsmn.c
 OBJEXT ?= .o
 
 AOBJS = $(ASRCS:.S=$(OBJEXT))

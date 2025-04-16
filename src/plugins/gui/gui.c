@@ -24,6 +24,10 @@
 #include "json.h"
 #include "vault.h"
 
+#ifdef FFI
+#include "fficonnect.h"
+#endif
+
 
 uint16_t CtrGUIWidth = 800;
 uint16_t CtrGUIHeight = 400;
@@ -841,7 +845,13 @@ ctr_object* ctr_package_add_as(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 ctr_object* ctr_gui_link_package(ctr_object* myself, ctr_argument* argumentList) {
-	if (argumentList->object->link != packageObject) {
+	if (argumentList->object->link == CtrStdArray) {
+		#ifdef FFI
+		ctr_internal_gui_ffi(argumentList->object);
+		#else
+		ctr_error("FFI not available.", 0);
+		#endif
+	} else if (argumentList->object->link != packageObject) {
 		ctr_error("Not an asset package.\n", 0);
 	}
 	CtrGUIAssetPackage = argumentList->object;
@@ -1113,6 +1123,9 @@ void begin() {
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( "Gui" ), guiObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	begin_json();
 	begin_vault();
+	#ifdef FFI
+	begin_ffi();
+	#endif
 }
 
 void init_embedded_gui_plugin() {
