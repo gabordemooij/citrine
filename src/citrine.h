@@ -702,7 +702,7 @@ extern ctr_object* ctr_program_tostring(ctr_object* myself, ctr_argument* argume
 extern ctr_object* ctr_program_test(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_program_object_exists(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_program_object_message_exists(ctr_object* myself, ctr_argument* argumentList);
-
+extern ctr_object* ctr_program_platform(ctr_object* myself, ctr_argument* argumentList);
 
 /**
  * Clock Interface

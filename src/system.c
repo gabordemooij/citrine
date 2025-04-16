@@ -469,6 +469,24 @@ ctr_object* ctr_program_num_of_args(ctr_object* myself, ctr_argument* argumentLi
 	return ctr_build_number_from_float( (ctr_number) ctr_argc );
 }
 
+ctr_object* ctr_program_platform(ctr_object* myself, ctr_argument* argumentList) {
+	char* platform_name;
+	platform_name = "lin64";
+	#ifdef WIN
+	platform_name = "win64";
+	#endif
+	#ifdef MAC
+	platform_name = "mac64";
+	#endif
+	#ifdef ANDROID_EXPORT
+	platform_name = "eandr";
+	#endif
+	#ifdef IOS_EXPORT
+	platform_name = "eios";
+	#endif
+	return ctr_build_string_from_cstring(platform_name);
+}
+
 /**
  * @def
  * [ Program ] end
