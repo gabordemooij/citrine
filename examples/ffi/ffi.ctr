@@ -1,0 +1,52 @@
+
+>> g := Gui new.
+
+# basic test ffi
+
+>> libname := ['/usr/lib/x86_64-linux-gnu/libc.so.6'].
+
+(Program platform = ['win64']) true: {
+	libname := ['msvcrt.dll'].
+}.
+ 
+
+g link: (
+ List new ;
+ libname ;
+ ['printf'] ;
+ ( List new ; ['pointer'] ; ['int'] ) ;
+ ['void'] ;
+ ['Printf'] ;
+ ['template:number:']
+).
+
+>> s := Blob utf8: ['FFI has %d letters.\n'].
+Printf template: s number: 3.
+s free.
+
+
+# test with struct
+
+>> a := Blob new: 8.
+a bytes: (
+	List <<: 
+	2, ; 0 ; 0 ; 0 ;
+    1  ; 0 ; 0 ; 0
+).
+
+>> struct := Blob struct: (List <<: ['int'], ; ['int']).
+
+g link: (
+	List <<: ['@structtest'], ;
+	['@structtest'] ;
+	(List <<: struct) ; 
+	['int'] ;	
+	['ffitest'] ;
+	['ffisum:']
+).
+	
+Out write: ['Sum test:'] + (ffitest ffisum: a), stop.
+
+struct structfree.
+struct free.
+a free.
