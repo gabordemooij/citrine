@@ -1,0 +1,37 @@
+Gui init.
+
+>> num-args := Program arguments.
+
+(num-args < 4) true: {
+	Out write: ['Usage: ctren datapak.ctr <PATH> <MAIN FILE> <FILE 2> <FILE N...>'], stop.
+	Program end.
+}.
+
+>> path := Program argument: 2.
+>> files := List new.
+
+{ :i files append: (Program argument: i + 3). } * (num-args - 3).
+
+>> datpak  := File new: Path data.
+
+{ 
+	datpak delete. 
+	Out write: ['Removing old datpak. Creating new one.'], stop.
+} 
+except: { 
+
+	Out write: ['No old datpak. Creating new one.'], stop.
+
+}, start.
+
+>> package := Package new: datpak.
+
+files each: { :i :filename
+	>> file := File new: ( path + ['/'] + filename ).
+	>> name := i bool either: filename or: ['__1__'].
+	Out write: (
+		['adding: <name>']
+		<name>: name
+	), stop.
+	package append: file as: name.
+}.
