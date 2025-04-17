@@ -129,6 +129,10 @@ LVGLEN on: ['new'] do: {
 			pad-right: ['style_pad_right'],
 			pad-bottom: ['style_pad_bottom'],
 			pad-top: ['style_pad_top'],
+			padding-left: ['style_pad_left'],
+			padding-right: ['style_pad_right'],
+			padding-bottom: ['style_pad_bottom'],
+			padding-top: ['style_pad_top'],
 			margin-left: ['style_margin_left'],
 			margin-right: ['style_margin_right'],
 			margin-top: ['style_margin_top'],
@@ -188,6 +192,39 @@ LVGLEN on: ['border-color:'] do: { :color
 
 LVGLEN on: ['background-color:'] do: { :color
 	self style_bg_color: color rgbhex.
+}.
+
+LVGLEN on: ['padding:'] do: { :padding
+	self
+	padding-left: padding,
+	padding-right: padding,
+	padding-top: padding,
+	padding-bottom: padding.
+}.
+
+LVGLEN on: ['margin:'] do: { :margin
+	self
+	margin-left: margin,
+	margin-right: margin,
+	margin-top: margin,
+	margin-bottom: margin.
+}.
+
+LVGLEN on: ['maxwh'] do: {
+	self 
+	width: ['100%'],
+	height: ['100%'].
+}.
+
+
+LVGLEN on: ['maxcontainer'] do: {
+	self 
+	object
+	width: ['100%'],
+	height: ['100%'],
+	margin: 0,
+	padding: 0,
+	border: 0.
 }.
 
 # Alias for friendly use
