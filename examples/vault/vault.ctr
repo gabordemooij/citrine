@@ -1,0 +1,10 @@
+
+Gui use: Path guihelpers.
+
+>> vault := Vault new: ['passwordapp'].
+vault set: ['token'] password: ['abc23'].
+
+{
+	Gui show: (vault get: ['token']).
+} except: { :e Gui show: e. }, start.
+
