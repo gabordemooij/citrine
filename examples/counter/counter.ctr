@@ -1,0 +1,73 @@
+Gui use: Path guihelpers.
+
+>> gui := Gui new.
+>> view := View new.
+>> clicks := 0.
+
+gui on: ['click:'] do: { :id
+	
+	(id = 101) true: {
+		clicks add: 1.
+	}.
+
+	>> fragment := View new.
+	fragment
+		component
+		elements
+			view
+			extends: ['object'],
+			border:0,
+			padding:0,
+			elements
+				label
+				text: clicks + [' clicks'],
+				close
+			close
+		close.
+	gui xml: fragment string name: ['counter'] at: ['102'].		
+}.
+
+
+view
+	component
+	events: True,
+	elements
+		view
+		maxwh
+		extends: ['object'],
+		events: True,
+		scrollable: False,
+		border: 0,
+		elements
+			maxcontainer
+			scrollable: False,
+			events: True,
+			layout: ['flex'],
+			flex-flow: ['column'],
+			elements
+				button
+				id: ['101'],
+				events: True,
+				elements
+					label
+					events: True,
+					text: ['click me'],
+					close
+				close
+				maxcontainer
+				id: ['102'],
+				elements
+					maxcontainer
+					elements
+						label
+						text: clicks + [' clicks'],
+						close
+					close
+				close
+			close
+		close
+	close.
+
+Gui 
+width: 400 height: 400,
+screen: view string.

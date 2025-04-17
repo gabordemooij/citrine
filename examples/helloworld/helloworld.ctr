@@ -1,0 +1,5 @@
+# Hello world on stdout
+Out write: ['Hello world'], stop.
+
+# Hello world in dialog
+Gui show: ['Hello world'].
