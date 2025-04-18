@@ -1,8 +1,8 @@
 Sending toString to Program yields a version string:
-Citrine Programming Language EN (English)
+citrine-lang extra object edition 0.5
 
 Sending toNumber to Program yields a version number:
-10002
+10005
 Sending toString to Clock yields a date and time string:
 True
 Sending toNumber to Clock yields a time stamp number:
