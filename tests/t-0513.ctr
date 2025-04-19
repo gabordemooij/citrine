@@ -1,0 +1,6 @@
+
+ >> x := Sequence ← 1 ; 2 ; 3.
+ >> y := x shift.
+ Out write: y, stop.
+ Out write: x, stop.
+ 

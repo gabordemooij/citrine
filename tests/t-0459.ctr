@@ -1,0 +1,4 @@
+
+ >> x := ['abcdef'].
+ Out write: x, stop.
+ 

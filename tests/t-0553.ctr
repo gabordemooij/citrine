@@ -1,0 +1,4 @@
+
+ >> x := Program number.
+ Out write: x, stop.
+ 

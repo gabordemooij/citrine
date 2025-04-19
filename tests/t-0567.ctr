@@ -1,0 +1,8 @@
+
+ Program error: ['123'].
+ 
+ @result
+ ~$ x.ctr 2>1
+ 123
+ ~$_
+ 

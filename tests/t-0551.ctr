@@ -1,0 +1,4 @@
+
+ >> x := Program os: Command date.
+ Out write: x.
+ 

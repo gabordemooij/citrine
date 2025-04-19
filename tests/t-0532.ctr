@@ -1,0 +1,7 @@
+
+ >> x := Dict new.
+ x
+ put: ['a'] at: ['b'],
+ put: ['c'] at: ['d'].
+ Out write: x count, stop.
+ 

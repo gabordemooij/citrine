@@ -1,0 +1,9 @@
+
+ >> x := Sequence ← 1 ; 2 ; 3.
+ >> a := x string.
+ >> b := a object.
+ Out write: a type, stop.
+ Out write: a, stop.
+ Out write: b type, stop.
+ Out write: b, stop.
+ 

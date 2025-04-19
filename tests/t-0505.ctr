@@ -1,0 +1,6 @@
+
+ >> x := Sequence ← 1 ; 2 ; 3.
+ x append: 0.
+ x prepend: 9.
+ Out write: x, stop.
+ 

@@ -1,0 +1,6 @@
+
+ >> x := Sequence ← 1 ; 2.
+ >> y := Sequence ← 3 ; 4.
+ >> z := x + y.
+ Out write: z, stop.
+ 

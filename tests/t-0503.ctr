@@ -1,0 +1,6 @@
+
+ >> x := Sequence ← 1 ; 2 ; 3.
+ x each: { :x
+   Out write: x, stop.
+ }.
+ 

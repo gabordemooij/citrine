@@ -1,0 +1,4 @@
+
+ >> x := -7.
+ Out write: x absolute, stop.
+ 

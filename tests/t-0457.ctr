@@ -1,0 +1,8 @@
+
+ >> x := 123.
+ Out write: x plain, stop.
+ >> x := 1.23.
+ Out write: x plain, stop.
+ >> x := 1,000,000.
+ Out write: x plain, stop.
+ 

@@ -1,0 +1,5 @@
+
+ >> x := Sequence ← ['a'] ; ['b'] ; ['c'].
+ >> y := x string.
+ Out write: y, stop.
+ 

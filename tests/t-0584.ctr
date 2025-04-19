@@ -1,0 +1,5 @@
+
+ >> t := Moment new.
+ Out write: t, stop.
+ Out write: t day-of-the-year, stop.
+ 

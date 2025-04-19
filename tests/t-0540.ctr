@@ -1,0 +1,6 @@
+
+ >> f := File new: (Path /tmp: ['test.txt']).
+ f write: ['test'].
+ >> q := File new: (Path /tmp: ['test.txt']).
+ Out write: q read, stop.
+ 

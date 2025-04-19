@@ -1,0 +1,5 @@
+
+ { :i
+ 	Out write: (i - 1) bool, stop.
+ } × 10.
+ 

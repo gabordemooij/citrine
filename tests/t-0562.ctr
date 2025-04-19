@@ -1,0 +1,7 @@
+
+ >> x := Program setting: ['SHELL'].
+ Out write: x, stop.
+ Program setting: ['TEST'] value: ['123'].
+ >> x := Program setting: ['TEST'].
+ Out write: x, stop.
+ 

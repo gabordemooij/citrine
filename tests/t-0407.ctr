@@ -1,0 +1,6 @@
+
+ { :i
+ 		Out write: i, stop.
+     (i > 10) break.
+ } × 20.
+ 

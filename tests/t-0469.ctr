@@ -1,0 +1,4 @@
+
+ >> x := ['qwerty'] offset: 2.
+ Out write: x, stop.
+ 

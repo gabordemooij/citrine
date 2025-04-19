@@ -1,0 +1,11 @@
+
+ >> a :=
+	Sequence new
+	~ ['aaa']
+	~ ['bbb']
+	~ ['ccc'].
+
+ >> b := Sequence ← ['x'] ; ['y'].
+ Out write: a, stop.
+ Out write: b, stop.
+ 

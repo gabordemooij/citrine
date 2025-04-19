@@ -1,0 +1,4 @@
+
+ >> x := ['ABC'] lower.
+ Out write: x, stop.
+ 

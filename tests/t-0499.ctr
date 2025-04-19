@@ -1,0 +1,5 @@
+
+ >> x := Sequence new.
+ >> y := x type.
+ Out write: y, stop.
+ 

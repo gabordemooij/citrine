@@ -1,0 +1,6 @@
+
+ Out write: [''] bool, stop.
+ Out write: ['   '] bool, stop.
+ Out write: ['abc'] bool, stop.
+ Out write: ['123'] bool, stop.
+ 

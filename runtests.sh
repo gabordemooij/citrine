@@ -49,6 +49,7 @@ unittest() {
 		fi
 	fi
 
+	
 	skipcode=$(head -n1 ../../../tests/t-$1.ctr)
 	if [[ "$skipcode" == \#LINUX* && "$os" != "lin" ]]; then
 		echo "SKIP"
@@ -85,7 +86,7 @@ unittest() {
 
 # run tests for linux
 pushd build/Linux/bin
-for i in $(seq -f "%04g" 1 374);
+for i in $(seq -f "%04g" 1 596);
 do
     unittest $i 1 lin
     unittest $i 4 lin

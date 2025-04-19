@@ -4,12 +4,13 @@
  * @def
  * File
  *
- * @example
- * ☞ f ≔ File new: (Path /tmp: ‘test.txt’).
- * f write: ‘test’.
- * ☞ q ≔ File new: (Path /tmp: ‘test.txt’).
- * ✎ write: q read, stop.
+ *
+ * @test536
  */
+
+ * @test537
+ */
+
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* s = ctr_object_make(myself, argumentList);
 	ctr_object* pathObject;
@@ -25,10 +26,10 @@ ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ File ] path
  *
- * @example
- * ☞ f ≔ File new: (Path tmp: ‘test.txt’).
- * ✎ write: f path, stop.
+ *
+ * @test538
  */
+
 ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	if (path == NULL) return CtrStdNil;
@@ -39,12 +40,10 @@ ctr_object* ctr_file_path(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ File ] string
  * 
- * @example
- * ☞ x ≔ File new.
- * ✎ write: x, stop.
- * ☞ y ≔ File new: (Path /tmp: ‘a.txt’).
- * ✎ write: y, stop.
+ *
+ * @test539
  */
+
 ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_file_path(myself,argumentList);
 	if ( path == CtrStdNil) {
@@ -57,12 +56,10 @@ ctr_object* ctr_file_to_string(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ File ] read
  *
- * @example
- * ☞ f ≔ File new: (Path /tmp: ‘test.txt’).
- * f write: ‘test’.
- * ☞ q ≔ File new: (Path /tmp: ‘test.txt’).
- * ✎ write: q read, stop.
+ *
+ * @test540
  */
+
 ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	ctr_object* str;
@@ -105,12 +102,10 @@ ctr_object* ctr_file_read(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ File ] write: [ String ]
  *
- * @example
- * ☞ f ≔ File new: (Path /tmp: ‘test.txt’).
- * f write: ‘test’.
- * ☞ q ≔ File new: (Path /tmp: ‘test.txt’).
- * ✎ write: q read, stop.
+ *
+ * @test541
  */
+
 ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0 );
@@ -139,13 +134,10 @@ ctr_object* ctr_file_write(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ File ] append: [ String ]
  *
- * @example
- * ☞ x ≔ File new: (Path /tmp: ‘a.txt’).
- * x write: ‘123’.
- * ✎ write: x read, stop.
- * x append: ‘345’.
- * ✎ write: x read, stop.
+ *
+ * @test542
  */
+
 ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* str = ctr_internal_cast2string(argumentList->object);
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
@@ -170,10 +162,10 @@ ctr_object* ctr_file_append(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ File ] exists
  *
- * @example
- * ☞ x ≔ File new: (Path /tmp unknown).
- * ✎ write: x exists, stop.
+ *
+ * @test543
  */
+
 ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	char* pathString;
@@ -194,13 +186,10 @@ ctr_object* ctr_file_exists(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ File ] delete
  * 
- * @example
- * ☞ x ≔ File new: (Path /tmp: ‘a.txt’).
- * x write: ‘abc’.
- * ✎ write: x exists, stop.
- * x delete.
- * ✎ write: x exists, stop.
+ *
+ * @test544
  */
+
 ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	char* pathString;
@@ -220,13 +209,10 @@ ctr_object* ctr_file_delete(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ File ] size
  * 
- * @example
- * ☞ x ≔ File new: (Path /tmp: ‘a.txt’).
- * x write: ‘abc’.
- * ✎ write: x size, stop.
- * x append: ‘def’.
- * ✎ write: x size, stop.
+ *
+ * @test545
  */
+
 ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* path = ctr_internal_object_find_property(myself, ctr_build_string_from_cstring( "path" ), 0);
 	char* pathString;
@@ -251,10 +237,10 @@ ctr_object* ctr_file_size(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ File ] list: [ String ]
  * 
- * @example
- * ☞ x ≔ File list: Path /usr games.
- * ✎ write: x, stop.
+ *
+ * @test546
  */
+
 ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	/**
 	 * Returns a list with strings, not file objects, because

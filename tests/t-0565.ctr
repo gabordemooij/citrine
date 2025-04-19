@@ -1,0 +1,9 @@
+
+ >> a := Program input.
+ Out write: a, stop.
+ 
+ @result
+ ~$ echo 123 | x.ctr
+ 123
+ ~$_
+ 

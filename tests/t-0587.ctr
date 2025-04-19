@@ -1,0 +1,6 @@
+
+ >> t := Moment new.
+ Out write: t, stop.
+ >> t2 := t copy.
+ Out write: t2, stop.
+ 

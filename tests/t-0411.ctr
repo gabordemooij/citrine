@@ -1,0 +1,6 @@
+
+ Out write: True not, stop.
+ Out write: False not, stop.
+ Out write: True not not, stop.
+ Out write: False not not not, stop.
+ 

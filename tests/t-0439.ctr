@@ -1,0 +1,5 @@
+
+ { :i 
+ Out write: ( i - 5 ) positive?, stop.
+ } × 10.
+ 

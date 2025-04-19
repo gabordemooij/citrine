@@ -1,0 +1,6 @@
+
+ >> x := ['abc'] = ['abc'].
+ Out write: x, stop.
+ >> x := ['abc'] ≠ ['xxx'].
+ Out write: x, stop.
+ 

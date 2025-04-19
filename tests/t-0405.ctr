@@ -1,0 +1,5 @@
+
+ (True ≠ False) true: { 
+ 	Out write: ['x'].
+ }.
+ 

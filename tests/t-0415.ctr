@@ -1,0 +1,4 @@
+
+ >> x := 10.
+ Out write: (x = 11 or: x = 10), stop.
+ 

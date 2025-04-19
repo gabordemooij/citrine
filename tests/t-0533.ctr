@@ -1,0 +1,5 @@
+
+ (Dict new I: 1, II: 2, III: 3) each: { :a :b
+   Out write: a + b, stop.
+ }.
+ 

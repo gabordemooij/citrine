@@ -1,0 +1,4 @@
+
+ >> t := Moment new time.
+ Out write: t, stop.
+ 

@@ -1,0 +1,5 @@
+
+ >> x := 5.
+ x multiply-by: 2.
+ Out write: x, stop.
+ 

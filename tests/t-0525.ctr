@@ -1,0 +1,4 @@
+
+ >> x := Dict new.
+ Out write: x type, stop.
+ 

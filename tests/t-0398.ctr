@@ -1,0 +1,7 @@
+
+ >> x := Object new.
+ x on: ['respond:']  do: { :a 
+ 	<- (a + ['!']).
+ }.
+ Out write: x abc.
+ 

@@ -1,0 +1,7 @@
+
+ {
+   this-task error: ['xxx'].
+ } except: { :e
+   Out write: e.
+ }, start.
+ 

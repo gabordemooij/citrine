@@ -1,0 +1,5 @@
+
+ >> x := Sequence ← 1 ; 2 ; 3.
+ >> y := x find: 2.
+ Out write: y, stop.
+ 

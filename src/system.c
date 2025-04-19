@@ -178,12 +178,18 @@ ctr_object* ctr_gc_internal_pin( ctr_object* object ) {
  * @def
  * [ Program ] clean memory
  *
- * @example
- * ☞ x ≔ 123.
- * ✎ write: Program memory, stop.
- * Program clean memory.
- * ✎ write: Program memory, stop.
+ *
+ * @test547
  */
+
+/**
+ * @def
+ * [ Program ] clean memory
+ *
+ *
+ * @test548
+ */
+
 ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 	ctr_gc_internal_collect(); /* calls internal because automatic GC has to use this function as well and requires low overhead. */
 	return myself;
@@ -193,10 +199,10 @@ ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Program ] memory
  * 
- * @example
- * ☞ m ≔ Program memory
- * ✎ write: m, stop. 
- */ 
+ *
+ * @test549
+ */
+ 
  
  /**
  * Returns memory statistics.
@@ -228,10 +234,10 @@ ctr_object* ctr_gc_memory(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Program ] memory: [Number]
  *
- * @example
- * Program memory: 8 MB.
- * Program memory: 500 KB.
+ *
+ * @test550
  */
+
 ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* unit = ctr_internal_object_find_property(
 		argumentList->object,
@@ -272,12 +278,12 @@ ctr_object* ctr_gc_getmode(ctr_object* myself, ctr_argument* argumentList) {
 
 /**
  * @def
- * [ Program ] shell: [ String ]
+ * [ Program ] os: [ String ]
  * 
- * @example
- * ☞ x ≔ Program shell: Command date.
- * ✎ write: x.
+ *
+ * @test551
  */
+
 ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList) {
 	FILE* stream;
 	char* outputBuffer;
@@ -311,10 +317,10 @@ ctr_object* ctr_program_shell(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Program ] argument: [ Number ]
  *
- * @example
- * ☞ x ≔ Program argument: 1.
- * ✎ write: x, stop.
+ *
+ * @test552
  */
+
 ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* numberObject = ctr_internal_cast2number(argumentList->object);
 	int n = (int) numberObject->value.nvalue;
@@ -326,10 +332,10 @@ ctr_object* ctr_program_argument(ctr_object* myself, ctr_argument* argumentList)
  * @def
  * [ Program ] number.
  *
- * @example
- * ☞ x ≔ Program number.
- * ✎ write: x, stop.
+ *
+ * @test553
  */
+
 ctr_object* ctr_program_tonumber(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(CTR_VERSION_NUM);
 }
@@ -338,10 +344,10 @@ ctr_object* ctr_program_tonumber(ctr_object* myself, ctr_argument* argumentList)
  * @def
  * [ Program ] string
  *
- * @example
- * ☞ x ≔ Program string.
- * ✎ write: x, stop.
+ *
+ * @test554
  */
+
 ctr_object* ctr_program_tostring(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring(CTR_MSG_WELCOME);
 }
@@ -351,12 +357,10 @@ ctr_object* ctr_program_tostring(ctr_object* myself, ctr_argument* argumentList)
  * @def
  * [ Program ] use: [ String ]
  *
- * @example
- * ☞ f ≔ File new: (Path /tmp: ‘x.ctr’).
- * f write: ‘☞ x ≔ 123.’.
- * Program use: (Path /tmp: ‘x.ctr’).
- * ✎ write: x, stop.
+ *
+ * @test555
  */
+
 ctr_object* ctr_program_include(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size vlen;
 	char* pathString;
@@ -407,19 +411,19 @@ ctr_object* ctr_program_include(ctr_object* myself, ctr_argument* argumentList) 
  * @def
  * [ Program ] [ String ]
  * 
- * @example
- * ✎ write: Program Object, stop.
- * ✎ write: Program Dream, stop.
+ *
+ * @test556
  */
+
  
 /**
  * @def
  * [ Program ] find: [ String ]
  * 
- * @example
- * ✎ write: (Program find: ‘✎’), stop.
- * ✎ write: (Program find: ‘Q’), stop.
+ *
+ * @test557
  */
+
 ctr_object* ctr_program_object_exists( ctr_object* myself, ctr_argument* argumentList ) {
 	if ( ctr_internal_object_find_property(CtrStdWorld, argumentList->object, CTR_CATEGORY_PUBLIC_PROPERTY) ) {
 		return CtrStdBoolTrue;
@@ -431,10 +435,10 @@ ctr_object* ctr_program_object_exists( ctr_object* myself, ctr_argument* argumen
  * @def
  * [ Program ] [ String ]: [ String ]
  * 
- * @example
- * ✎ write: (Program ✎: ‘AAA’), stop.
- * ✎ write: (Program Program: ‘test’), stop.
+ *
+ * @test558
  */
+
 ctr_object* ctr_program_object_message_exists( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* foundObject;
 	ctr_object* objectName;
@@ -462,9 +466,10 @@ ctr_object* ctr_program_object_message_exists( ctr_object* myself, ctr_argument*
  * @def
  * [ Program ] arguments
  *
- * @example
- * ✎ write: Program arguments, stop.
+ *
+ * @test559
  */
+
 ctr_object* ctr_program_num_of_args(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (ctr_number) ctr_argc );
 }
@@ -491,11 +496,10 @@ ctr_object* ctr_program_platform(ctr_object* myself, ctr_argument* argumentList)
  * @def
  * [ Program ] end
  *
- * @example
- * ✎ write: ‘1..2..3..’, stop.
- * Program end.
- * ✎ write: ‘4..5..6..’, stop.
+ *
+ * @test560
  */
+
 ctr_object* ctr_program_exit(ctr_object* myself, ctr_argument* argumentList) {
 	CtrStdFlow = CtrStdExit;
 	return CtrStdNil;
@@ -505,13 +509,10 @@ ctr_object* ctr_program_exit(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Program ] setting: [ String ]
  *
- * @example
- * ☞ x ≔ Program setting: ‘SHELL’.
- * ✎ write: x, stop.
- * Program setting: ‘TEST’ value: ‘123’.
- * ☞ x ≔ Program setting: ‘TEST’.
- * ✎ write: x, stop.
+ *
+ * @test561
  */
+
 ctr_object* ctr_program_get_env(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* envVarNameObj;
 	char*       envVarNameStr;
@@ -532,13 +533,10 @@ ctr_object* ctr_program_get_env(ctr_object* myself, ctr_argument* argumentList) 
  * @def
  * [ Program ] setting: [ String ] value: [ String ]
  *
- * @example
- * ☞ x ≔ Program setting: ‘SHELL’.
- * ✎ write: x, stop.
- * Program setting: ‘TEST’ value: ‘123’.
- * ☞ x ≔ Program setting: ‘TEST’.
- * ✎ write: x, stop.
+ *
+ * @test562
  */
+
 ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* envVarNameObj;
 	ctr_object* envValObj;
@@ -563,14 +561,10 @@ ctr_object* ctr_program_set_env(ctr_object* myself, ctr_argument* argumentList) 
  * @def
  * [ Program ] ask
  *
- * @example
- * ✎ write: Program ask, stop.
  *
- * @result
- * ~$ hello_
- * hello
- * ~$_
+ * @test563
  */
+
 ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentList) {
 	int c;
 	ctr_size bytes = 0;
@@ -599,14 +593,10 @@ ctr_object* ctr_program_waitforinput(ctr_object* myself, ctr_argument* argumentL
  * @def
  * [ Program ] ask password
  *
- * @example
- * ✎ write: Program ask password, stop.
  *
- * @result
- * ~$ ****_
- * 1234
- * ~$_
+ * @test564
  */
+
 #ifdef REPLACE_PROGRAM_PASSWORD
 #else
 ctr_object* ctr_program_waitforpassword(ctr_object* myself, ctr_argument* argumentList) {
@@ -644,15 +634,10 @@ ctr_object* ctr_program_waitforpassword(ctr_object* myself, ctr_argument* argume
  * @def
  * [ Program ] input
  *
- * @example
- * ☞ a ≔ Program input.
- * ✎ write: a, stop.
- * 
- * @result
- * ~$ echo 123 | x.ctr
- * 123
- * ~$_
+ *
+ * @test565
  */
+
 ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size bytes = 0;
 	ctr_size page = 64;
@@ -681,10 +666,10 @@ ctr_object* ctr_program_input(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Program ] flush
  *
- * @example
- * ✎ write: ‘Flush stdout buffer.’, stop.
- * Program flush.
+ *
+ * @test566
  */
+
 ctr_object* ctr_program_flush(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	 fflush(stdout);
 	 return myself;
@@ -694,14 +679,10 @@ ctr_object* ctr_program_flush(ctr_object* myself, ctr_argument* ctr_argumentList
  * @def
  * [ Program ] error: [ String ]
  *
- * @example
- * Program error: ‘123’.
- * 
- * @result
- * ~$ x.ctr 2>1
- * 123
- * ~$_
+ *
+ * @test567
  */
+
 ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList) {
 	char* message;
 	message = ctr_heap_allocate_cstring(
@@ -719,15 +700,10 @@ ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Moment ] wait: [ Number ]
  *
- * @example
- * Program wait: 2.
- * 
- * @result
- * ~$ x.ctr
- * .... waits sec ....
- * .... waits sec ....
- * ~$_
+ *
+ * @test568
  */
+
 #ifdef REPLACE_CLOCK_WAIT
 #else
 ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
@@ -742,10 +718,10 @@ ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * Moment
  * 
- * @example
- * ☞ x ≔ Moment new.
- * ✎ write: x, stop.
+ *
+ * @test569
  */
+
 ctr_object* ctr_clock_new_set( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* clock;
 	clock = ctr_clock_new( myself, argumentList );
@@ -877,15 +853,10 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
  * @def
  * [ Moment ] zone: [ String ]
  *
- * @example
- * ☞ t ≔ Moment new.
- * t zone: ‘Europe/Amsterdam’.
- * ✎ write: t, stop.
- * ✎ write: t zone, stop.
- * t zone: ‘US/Hawaii’.
- * ✎ write: t, stop.
- * ✎ write: t zone, stop.
+ *
+ * @test570
  */
+
 ctr_object* ctr_clock_set_zone( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), ctr_internal_cast2string( argumentList->object ), CTR_CATEGORY_PRIVATE_PROPERTY );
 	return myself;
@@ -895,15 +866,10 @@ ctr_object* ctr_clock_set_zone( ctr_object* myself, ctr_argument* argumentList )
  * @def
  * [ Moment ] zone
  *
- * @example
- * ☞ t ≔ Moment new.
- * t zone: ‘Europe/Amsterdam’.
- * ✎ write: t, stop.
- * ✎ write: t zone, stop.
- * t zone: ‘US/Hawaii’.
- * ✎ write: t, stop.
- * ✎ write: t zone, stop.
+ *
+ * @test571
  */
+
 ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY );
 }
@@ -912,21 +878,10 @@ ctr_object* ctr_clock_get_zone( ctr_object* myself, ctr_argument* argumentList )
  * @def
  * [ Moment ] year: [ Number ]
  *
- * @example
- * ☞ x ≔ Moment new.
- * x year: 2020.
- * x month: 8.
- * x day: 12.
- * x hour: 10.
- * x minute: 2.
- * x second: 1.
- * ✎ write: x year.
- * ✎ write: x month.
- * ✎ write: x day.
- * ✎ write: x hour.
- * ✎ write: x minute.
- * ✎ write: x second.
+ *
+ * @test572
  */
+
 ctr_object* ctr_clock_set_year( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_set_time( myself, argumentList, 'Y' );
 }
@@ -935,21 +890,10 @@ ctr_object* ctr_clock_set_year( ctr_object* myself, ctr_argument* argumentList )
  * @def
  * [ Moment ] month: [ Number ]
  *
- * @example
- * ☞ x ≔ Moment new.
- * x year: 2020.
- * x month: 8.
- * x day: 12.
- * x hour: 10.
- * x minute: 2.
- * x second: 1.
- * ✎ write: x year.
- * ✎ write: x month.
- * ✎ write: x day.
- * ✎ write: x hour.
- * ✎ write: x minute.
- * ✎ write: x second.
+ *
+ * @test573
  */
+
 ctr_object* ctr_clock_set_month( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_set_time( myself, argumentList, 'm' );
 }
@@ -958,21 +902,10 @@ ctr_object* ctr_clock_set_month( ctr_object* myself, ctr_argument* argumentList 
  * @def
  * [ Moment ] day: [ Number ]
  *
- * @example
- * ☞ x ≔ Moment new.
- * x year: 2020.
- * x month: 8.
- * x day: 12.
- * x hour: 10.
- * x minute: 2.
- * x second: 1.
- * ✎ write: x year.
- * ✎ write: x month.
- * ✎ write: x day.
- * ✎ write: x hour.
- * ✎ write: x minute.
- * ✎ write: x second.
+ *
+ * @test574
  */
+
 ctr_object* ctr_clock_set_day( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_set_time( myself, argumentList, 'd' );
 }
@@ -981,21 +914,10 @@ ctr_object* ctr_clock_set_day( ctr_object* myself, ctr_argument* argumentList ) 
  * @def
  * [ Moment ] hour: [ Number ]
  *
- * @example
- * ☞ x ≔ Moment new.
- * x year: 2020.
- * x month: 8.
- * x day: 12.
- * x hour: 10.
- * x minute: 2.
- * x second: 1.
- * ✎ write: x year.
- * ✎ write: x month.
- * ✎ write: x day.
- * ✎ write: x hour.
- * ✎ write: x minute.
- * ✎ write: x second.
+ *
+ * @test575
  */
+
 ctr_object* ctr_clock_set_hour( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_set_time( myself, argumentList, 'H' );
 }
@@ -1004,21 +926,10 @@ ctr_object* ctr_clock_set_hour( ctr_object* myself, ctr_argument* argumentList )
  * @def
  * [ Moment ] minute: [ Number ]
  *
- * @example
- * ☞ x ≔ Moment new.
- * x year: 2020.
- * x month: 8.
- * x day: 12.
- * x hour: 10.
- * x minute: 2.
- * x second: 1.
- * ✎ write: x year.
- * ✎ write: x month.
- * ✎ write: x day.
- * ✎ write: x hour.
- * ✎ write: x minute.
- * ✎ write: x second.
+ *
+ * @test576
  */
+
 ctr_object* ctr_clock_set_minute( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_set_time( myself, argumentList, 'i' );
 }
@@ -1027,21 +938,10 @@ ctr_object* ctr_clock_set_minute( ctr_object* myself, ctr_argument* argumentList
  * @def
  * [ Moment ] second: [ Number ]
  *
- * @example
- * ☞ x ≔ Moment new.
- * x year: 2020.
- * x month: 8.
- * x day: 12.
- * x hour: 10.
- * x minute: 2.
- * x second: 1.
- * ✎ write: x year.
- * ✎ write: x month.
- * ✎ write: x day.
- * ✎ write: x hour.
- * ✎ write: x minute.
- * ✎ write: x second.
+ *
+ * @test577
  */
+
 ctr_object* ctr_clock_set_second( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_set_time( myself, argumentList, 's' );
 }
@@ -1050,21 +950,10 @@ ctr_object* ctr_clock_set_second( ctr_object* myself, ctr_argument* argumentList
  * @def
  * [ Moment ] year
  *
- * @example
- * ☞ x ≔ Moment new.
- * x year: 2020.
- * x month: 8.
- * x day: 12.
- * x hour: 10.
- * x minute: 2.
- * x second: 1.
- * ✎ write: x year.
- * ✎ write: x month.
- * ✎ write: x day.
- * ✎ write: x hour.
- * ✎ write: x minute.
- * ✎ write: x second.
+ *
+ * @test578
  */
+
 ctr_object* ctr_clock_year( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_get_time( myself, argumentList, 'Y' );
 }
@@ -1073,21 +962,10 @@ ctr_object* ctr_clock_year( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ Moment ] month
  *
- * @example
- * ☞ x ≔ Moment new.
- * x year: 2020.
- * x month: 8.
- * x day: 12.
- * x hour: 10.
- * x minute: 2.
- * x second: 1.
- * ✎ write: x year.
- * ✎ write: x month.
- * ✎ write: x day.
- * ✎ write: x hour.
- * ✎ write: x minute.
- * ✎ write: x second.
+ *
+ * @test579
  */
+
 ctr_object* ctr_clock_month( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_get_time( myself, argumentList, 'm' );
 }
@@ -1096,21 +974,10 @@ ctr_object* ctr_clock_month( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ Moment ] day
  *
- * @example
- * ☞ x ≔ Moment new.
- * x year: 2020.
- * x month: 8.
- * x day: 12.
- * x hour: 10.
- * x minute: 2.
- * x second: 1.
- * ✎ write: x year.
- * ✎ write: x month.
- * ✎ write: x day.
- * ✎ write: x hour.
- * ✎ write: x minute.
- * ✎ write: x second.
+ *
+ * @test580
  */
+
 ctr_object* ctr_clock_day( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_get_time( myself, argumentList, 'd' );
 }
@@ -1119,21 +986,10 @@ ctr_object* ctr_clock_day( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ Moment ] hour
  *
- * @example
- * ☞ x ≔ Moment new.
- * x year: 2020.
- * x month: 8.
- * x day: 12.
- * x hour: 10.
- * x minute: 2.
- * x second: 1.
- * ✎ write: x year.
- * ✎ write: x month.
- * ✎ write: x day.
- * ✎ write: x hour.
- * ✎ write: x minute.
- * ✎ write: x second.
+ *
+ * @test581
  */
+
 ctr_object* ctr_clock_hour( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_get_time( myself, argumentList, 'H' );
 }
@@ -1142,21 +998,10 @@ ctr_object* ctr_clock_hour( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ Moment ] minute
  *
- * @example
- * ☞ x ≔ Moment new.
- * x year: 2020.
- * x month: 8.
- * x day: 12.
- * x hour: 10.
- * x minute: 2.
- * x second: 1.
- * ✎ write: x year.
- * ✎ write: x month.
- * ✎ write: x day.
- * ✎ write: x hour.
- * ✎ write: x minute.
- * ✎ write: x second.
+ *
+ * @test582
  */
+
 ctr_object* ctr_clock_minute( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_get_time( myself, argumentList, 'i' );
 }
@@ -1165,21 +1010,10 @@ ctr_object* ctr_clock_minute( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ Moment ] second
  *
- * @example
- * ☞ x ≔ Moment new.
- * x year: 2020.
- * x month: 8.
- * x day: 12.
- * x hour: 10.
- * x minute: 2.
- * x second: 1.
- * ✎ write: x year.
- * ✎ write: x month.
- * ✎ write: x day.
- * ✎ write: x hour.
- * ✎ write: x minute.
- * ✎ write: x second.
+ *
+ * @test583
  */
+
 ctr_object* ctr_clock_second( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_get_time( myself, argumentList, 's' );
 }
@@ -1188,11 +1022,10 @@ ctr_object* ctr_clock_second( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ Moment ] day of the year
  *
- * @example
- * ☞ t ≔ Moment new.
- * ✎ write: t, stop.
- * ✎ write: t day of the year, stop.
+ *
+ * @test584
  */
+
 ctr_object* ctr_clock_yearday( ctr_object* myself, ctr_argument* argumentList ) {
 	struct tm* date;
 	time_t timeStamp;
@@ -1207,11 +1040,10 @@ ctr_object* ctr_clock_yearday( ctr_object* myself, ctr_argument* argumentList ) 
  * @def
  * [ Moment ] weekday
  *
- * @example
- * ☞ t ≔ Moment new.
- * ✎ write: t, stop.
- * ✎ write: t weekday, stop.
+ *
+ * @test585
  */
+
 ctr_object* ctr_clock_weekday( ctr_object* myself, ctr_argument* argumentList ) {
 	struct tm* date;
 	time_t timeStamp;
@@ -1226,10 +1058,10 @@ ctr_object* ctr_clock_weekday( ctr_object* myself, ctr_argument* argumentList ) 
  * @def
  * [ Moment ] time
  *
- * @example
- * ☞ t ≔ Moment new time.
- * ✎ write: t, stop.
+ *
+ * @test586
  */
+
 ctr_object* ctr_clock_time( ctr_object* myself, ctr_argument* argumentList ) {
 	time_t timeStamp;
 	timeStamp = (time_t) ctr_internal_cast2number(
@@ -1242,12 +1074,10 @@ ctr_object* ctr_clock_time( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ Moment ] copy
  *
- * @example
- * ☞ t ≔ Moment new.
- * ✎ write: t, stop.
- * ☞ t2 ≔ t copy.
- * ✎ write: t2, stop.
+ *
+ * @test587
  */
+
 ctr_object* ctr_clock_copy( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* clock;
 	clock = ctr_clock_new( myself, argumentList );
@@ -1268,17 +1098,10 @@ ctr_object* ctr_clock_copy( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ Moment ] = [ Moment ]
  *
- * @example
- * ☞ m ≔ Moment new year: 2070, month: 11, day: 1.
- * ☞ n ≔ m copy.
- * ✎ write: (m = n), stop.
- * ✎ write: (m ≠ n), stop.
- * ✎ write: (m equals: m), stop.
- * ✎ write: (m equals: n), stop.
- * n month: 12.
- * ✎ write: (m ≠ n), stop.
- * ✎ write: (m = n), stop.
+ *
+ * @test588
  */
+
 ctr_object* ctr_clock_equals( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* mytime = ctr_clock_time( myself, NULL );
 	ctr_object* myzone = ctr_clock_get_zone( myself, NULL );
@@ -1299,17 +1122,10 @@ ctr_object* ctr_clock_equals( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ Moment ] ≠ [ Moment ]
  *
- * @example
- * ☞ m ≔ Moment new year: 2070, month: 11, day: 1.
- * ☞ n ≔ m copy.
- * ✎ write: (m = n), stop.
- * ✎ write: (m ≠ n), stop.
- * ✎ write: (m equals: m), stop.
- * ✎ write: (m equals: n), stop.
- * n month: 12.
- * ✎ write: (m ≠ n), stop.
- * ✎ write: (m = n), stop.
+ *
+ * @test589
  */
+
 ctr_object* ctr_clock_neq( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* boolean = ctr_clock_equals(myself, argumentList);
 	if (boolean == CtrStdBoolTrue) return CtrStdBoolFalse;
@@ -1321,11 +1137,10 @@ ctr_object* ctr_clock_neq( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ Moment ] week
  *
- * @example
- * ☞ t ≔ Moment new.
- * ✎ write: t, stop.
- * ✎ write: t week, stop.
+ *
+ * @test590
  */
+
 ctr_object* ctr_clock_week( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* weekNumber;
 	char*  str;
@@ -1344,12 +1159,10 @@ ctr_object* ctr_clock_week( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ Moment ] string
  *
- * @example
- * ☞ x ≔ Moment new.
- * ✎ write: x, stop.
- * ✎ write: x string, stop.
- * ✎ write: x number, stop.
+ *
+ * @test591
  */
+
 ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	char*       zone;
 	char*       description;
@@ -1379,12 +1192,10 @@ ctr_object* ctr_clock_to_string( ctr_object* myself, ctr_argument* argumentList 
  * @def
  * [ Moment ] number
  *
- * @example
- * ☞ x ≔ Moment new.
- * ✎ write: x, stop.
- * ✎ write: x string, stop.
- * ✎ write: x number, stop.
+ *
+ * @test592
  */
+
 ctr_object* ctr_clock_to_number( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_send_message( myself, "time", strlen("time"), argumentList );
 }
@@ -1456,22 +1267,10 @@ ctr_object* ctr_clock_change( ctr_object* myself, ctr_argument* argumentList, ui
  * @def
  * [ Moment ] add: [ Number ]
  * 
- * @example
- * ☞ x ≔ Moment new.
- * ✎ write: x, stop.
- * x add: 6 second.
- * ✎ write: x, stop.
- * x add: 5 minute.
- * ✎ write: x, stop.
- * x add: 4 hour.
- * ✎ write: x, stop.
- * x add: 3 day.
- * ✎ write: x, stop.
- * x add: 2 month.
- * ✎ write: x, stop.
- * x add: 1 year.
- * ✎ write: x, stop.
+ *
+ * @test593
  */
+
 ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_change( myself, argumentList, 1 );
 }
@@ -1480,22 +1279,10 @@ ctr_object* ctr_clock_add( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ Moment ] subtract: [ Number ]
  * 
- * @example
- * ☞ x ≔ Moment new.
- * ✎ write: x, stop.
- * x subtract: 6 second.
- * ✎ write: x, stop.
- * x subtract: 5 minute.
- * ✎ write: x, stop.
- * x subtract: 4 hour.
- * ✎ write: x, stop.
- * x subtract: 3 day.
- * ✎ write: x, stop.
- * x subtract: 2 month.
- * ✎ write: x, stop.
- * x subtract: 1 year.
- * ✎ write: x, stop.
+ *
+ * @test594
  */
+
 ctr_object* ctr_clock_subtract( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_clock_change( myself, argumentList, 0 );
 }
@@ -1518,9 +1305,10 @@ ctr_object* ctr_clock_new( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * ✎ write: [ String ]
  *
- * @example
- * ✎ write: ‘Hello World’.
+ *
+ * @test595
  */
+
 ctr_object* ctr_console_write(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* argument1 = argumentList->object;
 	ctr_object* strObject = ctr_internal_cast2string(argument1);
@@ -1532,11 +1320,10 @@ ctr_object* ctr_console_write(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * ✎ stop
  *
- * @example
- * ✎ stop.
- * ✎ stop.
- * ✎ stop.
+ *
+ * @test596
  */
+
 ctr_object* ctr_console_brk(ctr_object* myself, ctr_argument* argumentList) {
 	fwrite("\n", sizeof(char), 1, stdout);
 	fflush(stdout);

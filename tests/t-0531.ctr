@@ -1,0 +1,8 @@
+
+ >> x := Dict new.
+ x put: ['a'] at: ['b'].
+ x put: ['xxx'] at: ['yyy'].
+ Out write: (x at: ['b']), stop.
+ Out write: (x yyy), stop.
+ Out write: (x ? ['b']), stop.
+ 

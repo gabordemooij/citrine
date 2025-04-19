@@ -1,0 +1,8 @@
+
+ >> r := Object new.
+ r on: ['∞'] do: { :x
+ 	Out write: x, stop.
+	(x < 3) true: { self recursive ∞ (x + 1). }.
+ }.
+ r ∞ 1.
+ 

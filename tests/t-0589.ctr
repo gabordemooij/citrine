@@ -1,0 +1,11 @@
+
+ >> m := Moment new year: 2070, month: 11, day: 1.
+ >> n := m copy.
+ Out write: (m = n), stop.
+ Out write: (m ≠ n), stop.
+ Out write: (m equals: m), stop.
+ Out write: (m equals: n), stop.
+ n month: 12.
+ Out write: (m ≠ n), stop.
+ Out write: (m = n), stop.
+ 

@@ -1,0 +1,4 @@
+
+ >> x := ['abca'] last: ['a'].
+ Out write: x, stop.
+ 

@@ -4,9 +4,17 @@ ctr_size ctr_program_length;
 uint64_t    ctr_cwlk_subprogram;
 int ctr_in_message;
 
+
+
+
 /**
- * Format a number to the target language.
+ * @def
+ * Nil
+ *
+ *
+ * @test375
  */
+
 char* ctr_international_number(char* old_number, char* new_number) {
 	char i, j, k, old_length;
 	j = 0;
@@ -51,23 +59,16 @@ char* ctr_national_number(char* old_number, char* new_number) {
 	return new_number;
 }
 
-/**
- * @def
- * Welcome
- *
- * @example
- * ✎ write: ‘Hello World’, stop.
- */
 
 
 /**
  * @def
  * Nil
  *
- * @example
- * ☞ x ≔ Nil.
- * ✎ write: x Nil?, stop.
+ *
+ * @test376
  */
+
 ctr_object* ctr_build_nil() {
 	return CtrStdNil;
 }
@@ -84,10 +85,10 @@ ctr_object* ctr_nil_new(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Nil ] Nil?
  *
- * @example
- * ☞ x ≔ Nil.
- * ✎ write: x Nil?, stop.
+ *
+ * @test377
  */
+
 ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 	return CtrStdBoolTrue;
 }
@@ -96,10 +97,10 @@ ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Nil ] string
  *
- * @example
- * ☞ x ≔ Nil.
- * ✎ write: x string, stop.
+ *
+ * @test378
  */
+
 ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( CTR_DICT_NIL );
 }
@@ -108,10 +109,10 @@ ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Nil ] else: [ Object ]
  *
- * @example
- * ☞ x ≔ Nil.
- * ✎ write: (x else: 123), stop.
+ *
+ * @test379
  */
+
 ctr_object* ctr_nil_else_set(ctr_object* myself, ctr_argument* argumentList) {
 	return argumentList->object;
 }
@@ -120,10 +121,10 @@ ctr_object* ctr_nil_else_set(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Nil ] number
  *
- * @example
- * ☞ x ≔ Nil.
- * ✎ write: x number, stop.
+ *
+ * @test380
  */
+
 ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_number_from_float(0);
 }
@@ -132,10 +133,10 @@ ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* ctr_argumentList
  * @def
  * [ Nil ] boolean
  *
- * @example
- * ☞ x ≔ Nil.
- * ✎ write: x boolean, stop.
+ *
+ * @test381
  */
+
 ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return CtrStdBoolFalse;
 }
@@ -144,10 +145,10 @@ ctr_object* ctr_nil_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentLis
  * @def
  * Object
  *
- * @example
- * ☞ x ≔ Object new.
- * ✎ write: x, stop.
+ *
+ * @test382
  */
+
 ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* objectInstance = NULL;
 	objectInstance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTOBJECT);
@@ -159,13 +160,10 @@ ctr_object* ctr_object_make(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Object ] type
  *
- * @example
- * ☞ x ≔ Object.
- * ✎ write: x type, stop.
- * ✎ write: 777 type, stop.
- * ✎ write: ‘ABC’ type, stop.
- * ✎ write: True type, stop.
+ *
+ * @test383
  */
+
 ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
 	switch(myself->info.type){
 		case CTR_OBJECT_TYPE_OTNIL:
@@ -188,12 +186,10 @@ ctr_object* ctr_object_type(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Object ] code.
  * 
- * @example
- * ☞ x ≔ Map new.
- * x abc: 123.
- * ☞ y ≔ List ← x.
- * ✎ write: y code, stop.
+ *
+ * @test384
  */
+
 ctr_object* ctr_object_to_code(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* newArgumentList;
 	ctr_object* string = ctr_build_empty_string();
@@ -212,10 +208,10 @@ ctr_object* ctr_object_to_code(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Object ] string
  *
- * @example
- * ☞ x ≔ Object.
- * ✎ write: x string, stop.
+ *
+ * @test385
  */
+
 ctr_object* ctr_object_to_string( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_build_string_from_cstring( CTR_DICT_OBJECT );
 }
@@ -224,10 +220,10 @@ ctr_object* ctr_object_to_string( ctr_object* myself, ctr_argument* argumentList
  * @def
  * [ Object ] number
  *
- * @example
- * ☞ x ≔ Object.
- * ✎ write: x number, stop.
+ *
+ * @test386
  */
+
 ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return ctr_build_number_from_float(1);
 }
@@ -236,10 +232,10 @@ ctr_object* ctr_object_to_number(ctr_object* myself, ctr_argument* ctr_argumentL
  * @def
  * [ Object ] boolean
  *
- * @example
- * ☞ x ≔ Object.
- * ✎ write: x boolean, stop.
+ *
+ * @test387
  */
+
 ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argumentList) {
 	return CtrStdBoolTrue;
 }
@@ -248,17 +244,10 @@ ctr_object* ctr_object_to_boolean(ctr_object* myself, ctr_argument* ctr_argument
  * @def
  * [ Object ] equals: [ Object ]
  *
- * @example
- * ☞ x ≔ Object new.
- * ☞ y ≔ Object new.
- * ☞ z ≔ x.
- * ✎ write: ( x equals: y ), stop.
- * ✎ write: ( x equals: z ), stop.
- * ✎ write: ( x = y ), stop.
- * ✎ write: ( x = z ), stop.
- * ✎ write: ( x ≠ y ), stop.
- * ✎ write: ( x ≠ z ), stop.
+ *
+ * @test388
  */
+
 ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherObject = argumentList->object;
 	if (otherObject == myself) return CtrStdBoolTrue;
@@ -269,17 +258,10 @@ ctr_object* ctr_object_equals(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Object ] ≠ [ Object ]
  *
- * @example
- * ☞ x ≔ Object new.
- * ☞ y ≔ Object new.
- * ☞ z ≔ x.
- * ✎ write: ( x equals: y ), stop.
- * ✎ write: ( x equals: z ), stop.
- * ✎ write: ( x = y ), stop.
- * ✎ write: ( x = z ), stop.
- * ✎ write: ( x ≠ y ), stop.
- * ✎ write: ( x ≠ z ), stop.
+ *
+ * @test389
  */
+
 ctr_object* ctr_object_unequals(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherObject = argumentList->object;
 	if (otherObject != myself) return CtrStdBoolTrue;
@@ -290,12 +272,10 @@ ctr_object* ctr_object_unequals(ctr_object* myself, ctr_argument* argumentList) 
  * @def
  * [ Object ] myself
  *
- * @example
- * ✎ write: Object myself, stop.
- * ✎ write: True boolean, stop.
- * ✎ write: 123 number, stop.
- * ✎ write: ‘x’ string, stop.
+ *
+ * @test390
  */
+
 ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
@@ -304,14 +284,10 @@ ctr_object* ctr_object_myself(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Object ] recursive
  *
- * @example
- * ☞ r ≔ Object new.
- * r on: ‘∞’ do: { :x
- * 	✎ write: x, stop.
- *	(x < 3) true: { ⛏ recursive ∞ (x + 1). }.
- * }.
- * r ∞ 1.
+ *
+ * @test391
  */
+
 ctr_object* ctr_object_recursion(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_internal_recursion = myself;
 	return myself;
@@ -321,11 +297,10 @@ ctr_object* ctr_object_recursion(ctr_object* myself, ctr_argument* argumentList)
  * @def
  * [ Object ] do
  *
- * @example
- * ☞ x ≔ List ← 1 ; 2 ; 3.
- * x do pop shift done.
- * ✎ write: x, stop.
+ *
+ * @test392
  */
+
 ctr_object* ctr_object_do( ctr_object* myself, ctr_argument* argumentList ) {
 	myself->info.chainMode = 1;
 	return myself;
@@ -335,11 +310,10 @@ ctr_object* ctr_object_do( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ Object ] done
  *
- * @example
- * ☞ x ≔ List ← 1 ; 2 ; 3.
- * x do pop shift done.
- * ✎ write: x, stop.
+ *
+ * @test393
  */
+
 ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
 	myself->info.chainMode = 0;
 	return myself;
@@ -349,15 +323,10 @@ ctr_object* ctr_object_done( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ Object ] copy
  *
- * @example
- * ☞ x ≔ 1.
- * ☞ y ≔ x.
- * ☞ z ≔ x copy.
- * x add: 1.
- * ✎ write: x, stop.
- * ✎ write: y, stop.
- * ✎ write: z, stop.
+ *
+ * @test394
  */
+
 ctr_object* ctr_bool_copy( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_build_bool(myself->value.bvalue);
 }
@@ -380,14 +349,10 @@ ctr_object* ctr_string_copy( ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ Object ] case: [ Object ] do: [ Code ]
  *
- * @example
- * ☞ x ≔ ‘**’.
- *  x
- *  case: ‘*’ do: { ✎ write: 1. },
- *  case: ‘**’ do: { ✎ write: 2. },
- *  case: ‘***’ do: { ✎ write: 3. }.
- * ✎ stop.
+ *
+ * @test395
  */
+
 ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* block = argumentList->next->object;
 	ctr_argument* compareArguments;
@@ -420,11 +385,10 @@ ctr_object* ctr_object_case_do( ctr_object* myself, ctr_argument* argumentList )
  * @def
  * [ Object ] message: [ String ] arguments: [ List ]
  *
- * @example
- * ☞ x ≔ 5.
- * ☞ y ≔ x message: ‘×’ arguments: (List ← 2).
- * ✎ write: y, stop.
+ *
+ * @test396
  */
+
 ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList ) {
 	//@important! we use a List because message+arguments would exceed argument limit!
 	ctr_object* message = ctr_internal_cast2string( argumentList->object );
@@ -472,17 +436,10 @@ ctr_object* ctr_object_message( ctr_object* myself, ctr_argument* argumentList )
  * @def
  * [ Object ] on: [ String ] do: [ Code ]
  *
- * @example
- * ☞ q ≔ Object new.
- * q on: ‘abc:’ do: { :p
- * 		⚿ abc ≔ p.
- * }.
- * q on: ‘abc’ do: {
- *		↲ ⚿ abc.
- * }.
- * ☞ a ≔ q new abc: ‘123’.
- * ✎ write: a abc, stop.
+ *
+ * @test397
  */
+
 ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* nextArgument;
 	ctr_object* methodBlock;
@@ -506,13 +463,10 @@ ctr_object* ctr_object_on_do(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Object ] respond: [ String ]
  *
- * @example
- * ☞ x ≔ Object new.
- * x on: ‘respond:’  do: { :a 
- * 	↲ (a + ‘!’).
- * }.
- * ✎ write: x abc.
+ *
+ * @test398
  */
+
 ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
@@ -521,14 +475,10 @@ ctr_object* ctr_object_respond(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Object ] respond: [ String ] and: [ String ]
  *
- * @example
- * ☞ x ≔ Object new.
- * x on: ‘respond:and:’  do: { :a :b 
- * 	↲ (a + b).
- * }.
- * ✎ write: (x abc: ‘def’), stop.
- * ✎ write: x a ‘bc’, stop.
+ *
+ * @test399
  */
+
 ctr_object* ctr_object_respond_and(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
@@ -537,13 +487,10 @@ ctr_object* ctr_object_respond_and(ctr_object* myself, ctr_argument* argumentLis
  * @def
  * [ Object ] respond: [ String ] and: [ String ] and: [ String ]
  *
- * @example
- * ☞ x ≔ Object new.
- * x on: ‘respond:and:and:’  do: { :a :b :c
- * 	↲ (a + b + c).
- * }.
- * ✎ write: (x abc: ‘def’ ghi: ‘jkl’), stop.
+ *
+ * @test400
  */
+
 ctr_object* ctr_object_respond_and_and(ctr_object* myself, ctr_argument* argumentList) {
 	return myself;
 }
@@ -556,9 +503,10 @@ ctr_object* ctr_object_respond_and_and_and(ctr_object* myself, ctr_argument* arg
  * @def
  * [ Object ] Nil?
  *
- * @example
- * ✎ write: Object Nil?, stop.
+ *
+ * @test401
  */
+
 ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 	return CtrStdBoolFalse;
 }
@@ -567,10 +515,10 @@ ctr_object* ctr_object_is_nil(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Object ] learn: [ String ] means: [ String ]
  *
- * @example
- * Number learn: ‘-’ means: ‘+’ .
- * ✎ write: 2 - 1, stop.
+ *
+ * @test402
  */
+
 ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argumentList) {
        char*  current_method_name_str;
        ctr_size     current_method_name_len;
@@ -599,12 +547,10 @@ ctr_object* ctr_object_learn_meaning(ctr_object* myself, ctr_argument* ctr_argum
  * @def
  * Boolean
  *
- * @example
- * ☞ x ≔ (1 = 0).
- * ☞ y ≔ (1 = 1).
- * ✎ write: x, stop.
- * ✎ write: y, stop.
+ *
+ * @test403
  */
+
 ctr_object* ctr_build_bool(int truth) {
 	if (truth) return CtrStdBoolTrue;
 	return CtrStdBoolFalse;
@@ -618,9 +564,10 @@ ctr_object* ctr_bool_new(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Boolean ] = [ Boolean ]
  *
- * @example
- * ✎ write: (True = False), stop.
+ *
+ * @test404
  */
+
 ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(ctr_internal_cast2bool(argumentList->object)->value.bvalue == myself->value.bvalue);
 }
@@ -630,11 +577,10 @@ ctr_object* ctr_bool_eq(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Boolean ] ≠ [ Boolean ]
  *
- * @example
- * (True ≠ False) true: { 
- * 	✎ write: ‘x’.
- * }.
+ *
+ * @test405
  */
+
 ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(ctr_internal_cast2bool(argumentList->object)->value.bvalue != myself->value.bvalue);
 }
@@ -643,10 +589,10 @@ ctr_object* ctr_bool_neq(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Boolean ] string
  *
- * @example
- * ✎ write: True string, stop.
- * ✎ write: False string, stop.
+ *
+ * @test406
  */
+
 ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue == 1) {
 		return ctr_build_string_from_cstring( CTR_DICT_TRUE );
@@ -659,12 +605,10 @@ ctr_object* ctr_bool_to_string(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Boolean ] break
  *
- * @example
- * { :i
- * 		✎ write: i, stop.
- *     (i > 10) break.
- * } × 20.
+ *
+ * @test407
  */
+
 ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
 		CtrStdFlow = CtrStdBreak; /* If error = Break it's a break, there is no real error. */
@@ -676,12 +620,10 @@ ctr_object* ctr_bool_break(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Boolean ] continue
  *
- * @example
- * { :i
- *      (i > 10 &: i < 15) continue.
- * 		✎ write: i, stop.
- * } × 20.
+ *
+ * @test408
  */
+
 ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
 		CtrStdFlow = CtrStdContinue; /* If error = Continue, then it breaks only one iteration (return). */
@@ -693,12 +635,10 @@ ctr_object* ctr_bool_continue(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Boolean ] true: [ Code ]
  *
- * @example
- * ☞ x ≔ 10.
- * (x > 9 &: x < 11) true: {
- * 	✎ write: x, stop.
- * }.
+ *
+ * @test409
  */
+
 ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
@@ -723,13 +663,10 @@ ctr_object* ctr_bool_if_true(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Boolean ] false: [ Code ]
  *
- * @example
- * (‘a’ > ‘b’) false: {
- *   ✎ write: ‘a’, stop.
- * }, else: {
- *   ✎ write: ‘b’, stop.
- * }.
+ *
+ * @test410
  */
+
 ctr_object* ctr_bool_if_false(ctr_object* myself, ctr_argument* argumentList) {
 	if (!myself->value.bvalue) {
 		ctr_object* codeBlock = argumentList->object;
@@ -768,12 +705,10 @@ ctr_object* ctr_object_if_true( ctr_object* myself, ctr_argument* argumentList )
  * @def
  * [ Boolean ] not
  *
- * @example
- * ✎ write: True not, stop.
- * ✎ write: False not, stop.
- * ✎ write: True not not, stop.
- * ✎ write: False not not not, stop.
+ *
+ * @test411
  */
+
 ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList) {
 	if (!myself->value.bvalue) return CtrStdBoolTrue;
 	return CtrStdBoolFalse;
@@ -783,12 +718,10 @@ ctr_object* ctr_bool_not(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Boolean ] either: [ Object ] or: [ Object ]
  *
- * @example
- * ☞ x ≔ ( 1 > 2 ) either: ‘Y’ or: ‘N’.
- * ☞ y ≔ ( 2 > 1 ) either: ‘Y’ or: ‘N’.
- * ✎ write: x, stop.
- * ✎ write: y, stop. 
+ *
+ * @test412
  */
+
 ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
 	if (myself->value.bvalue) {
 		return argumentList->object;
@@ -801,12 +734,10 @@ ctr_object* ctr_bool_either_or(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Boolean ] &&: [ Boolean ]
  * 
- * @example
- * ☞ x ≔ ( 2 > 1 ) &&: ( 3 > 2 ).
- * ☞ y ≔ ( 2 > 1 ) &&: ( 2 > 3 ).
- * ✎ write: x, stop.
- * ✎ write: y, stop.
+ *
+ * @test413
  */
+
 ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
 	if ((myself->value.bvalue && other->value.bvalue)) return CtrStdBoolTrue;
@@ -817,12 +748,10 @@ ctr_object* ctr_bool_and(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Boolean ] nor: [ Boolean ]
  *
- * @example
- * ☞ x ≔ ( 1 > 2 ) nor: ( 2 > 3 ).
- * ☞ y ≔ ( 2 > 1 ) nor: ( 3 > 2 ).
- * ✎ write: x, stop.
- * ✎ write: y, stop.
+ *
+ * @test414
  */
+
 ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
 	return ctr_build_bool((!myself->value.bvalue && !other->value.bvalue));
@@ -832,10 +761,10 @@ ctr_object* ctr_bool_nor(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Boolean ] ||: [ Boolean ]
  *
- * @example
- * ☞ x ≔ 10.
- * ✎ write: (x = 11 ||: x = 10), stop.
+ *
+ * @test415
  */
+
 ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2bool(argumentList->object);
 	return ctr_build_bool((myself->value.bvalue || other->value.bvalue));
@@ -845,10 +774,10 @@ ctr_object* ctr_bool_or(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Boolean ] number
  *
- * @example
- * ✎ write: True number, stop.
- * ✎ write: False number, stop.
+ *
+ * @test416
  */
+
 ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float( (ctr_number) myself->value.bvalue );
 }
@@ -857,10 +786,10 @@ ctr_object* ctr_bool_to_number(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * Number
  *
- * @example
- * ☞ x ≔ 123.
- * ✎ write: x type, stop.
+ *
+ * @test417
  */
+
 ctr_object* ctr_build_number(char* n) {
 	ctr_object* numberObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTNUMBER);
 	numberObject->value.nvalue = atof(n);
@@ -919,10 +848,10 @@ ctr_object* ctr_build_number_from_float(ctr_number f) {
  * @def
  * [ Number ] > [ Number ]
  *
- * @example
- * ✎ write: 8 > 7, stop.
- * ✎ write: 7 > 8, stop.
+ *
+ * @test418
  */
+
 ctr_object* ctr_number_higherThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue > otherNum->value.nvalue));
@@ -932,10 +861,10 @@ ctr_object* ctr_number_higherThan(ctr_object* myself, ctr_argument* argumentList
  * @def
  * [ Number ] ≥ [ Number ]
  *
- * @example
- * ☞ x ≔ 8 ≥ 7.
- * ✎ write: x, stop.
+ *
+ * @test419
  */
+
 ctr_object* ctr_number_higherEqThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue >= otherNum->value.nvalue));
@@ -945,12 +874,10 @@ ctr_object* ctr_number_higherEqThan(ctr_object* myself, ctr_argument* argumentLi
  * @def
  * [ Number ] < [ Number ]
  * 
- * @example
- * ☞ x ≔ 8 < 7.
- * ☞ y ≔ 7 < 8.
- * ✎ write: x, stop.
- * ✎ write: y, stop. 
+ *
+ * @test420
  */
+
 ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue < otherNum->value.nvalue));
@@ -960,12 +887,10 @@ ctr_object* ctr_number_lowerThan(ctr_object* myself, ctr_argument* argumentList)
  * @def
  * [ Number ] ≤ [ Number ]
  * 
- * @example
- * ☞ x ≔ 8 ≤ 7.
- * ☞ y ≔ 7 ≤ 8.
- * ✎ write: x, stop.
- * ✎ write: y, stop. 
+ *
+ * @test421
  */
+
 ctr_object* ctr_number_lowerEqThan(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool((myself->value.nvalue <= otherNum->value.nvalue));
@@ -975,12 +900,10 @@ ctr_object* ctr_number_lowerEqThan(ctr_object* myself, ctr_argument* argumentLis
  * @def
  * [ Number ] = [ Number ]
  *
- * @example
- * ☞ x ≔ 8 = 8.
- * ☞ y ≔ 8 = 9.
- * ✎ write: x, stop.
- * ✎ write: y, stop.
+ *
+ * @test422
  */
+
 ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool(myself->value.nvalue == otherNum->value.nvalue);
@@ -990,12 +913,10 @@ ctr_object* ctr_number_eq(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] ≠ [ Number ]
  *
- * @example
- * ☞ x ≔ 8 ≠ 8.
- * ☞ y ≔ 8 ≠ 9.
- * ✎ write: x, stop.
- * ✎ write: y, stop.
+ *
+ * @test423
  */
+
 ctr_object* ctr_number_neq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	return ctr_build_bool(myself->value.nvalue != otherNum->value.nvalue);
@@ -1005,10 +926,10 @@ ctr_object* ctr_number_neq(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] between: [ Number ] and: [ Number ]
  * 
- * @example
- * ☞ x ≔ Number between: 0 and: 10.
- * ✎ write: x, stop.
+ *
+ * @test424
  */
+
 ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_number upper_bound;
 	ctr_number lower_bound;
@@ -1045,10 +966,10 @@ ctr_object* ctr_number_between(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] odd?
  *
- * @example
- * ✎ write: 2 odd?, stop.
- * ✎ write: 3 odd?, stop.
+ *
+ * @test425
  */
+
 ctr_object* ctr_number_odd(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool((int)myself->value.nvalue % 2);
 }
@@ -1057,10 +978,10 @@ ctr_object* ctr_number_odd(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] even?
  *
- * @example
- * ✎ write: 2 even?, stop.
- * ✎ write: 3 even?, stop.
+ *
+ * @test426
  */
+
 ctr_object* ctr_number_even(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool(!((int)myself->value.nvalue % 2));
 }
@@ -1069,12 +990,10 @@ ctr_object* ctr_number_even(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] + [ Number ]
  *
- * @example
- * ☞ x ≔ 2 + 2.
- * ☞ y ≔ x + 0.5.
- * ✎ write: x, stop.
- * ✎ write: y, stop.
+ *
+ * @test427
  */
+
 ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* newArg;
 	ctr_object* otherNum = argumentList->object;
@@ -1101,11 +1020,10 @@ ctr_object* ctr_number_add(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] add: [ Number ]
  *
- * @example
- * ☞ x ≔ 1.
- * x add: 2.
- * ✎ write: x, stop.
+ *
+ * @test428
  */
+
 ctr_object* ctr_number_inc(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	myself->value.nvalue += otherNum->value.nvalue;
@@ -1116,11 +1034,10 @@ ctr_object* ctr_number_inc(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] - [ Number ]
  *
- * @example
- * ☞ x ≔ 9.
- * ☞ y ≔ x - 4.
- * ✎ write: y, stop.
+ *
+ * @test429
  */
+
 ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	ctr_number a = myself->value.nvalue;
@@ -1132,11 +1049,10 @@ ctr_object* ctr_number_minus(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] subtract: [ Number ]
  *
- * @example
- * ☞ x ≔ 3.
- * x subtract: 1.
- * ✎ write: x, stop.
+ *
+ * @test430
  */
+
 ctr_object* ctr_number_dec(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	myself->value.nvalue -= otherNum->value.nvalue;
@@ -1147,10 +1063,10 @@ ctr_object* ctr_number_dec(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] × [ Number ]
  * 
- * @example
- * ☞ x ≔ 3 × 3.
- * ✎ write: x, stop.
+ *
+ * @test431
  */
+
 ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum;
 	ctr_number a;
@@ -1165,9 +1081,10 @@ ctr_object* ctr_number_multiply(ctr_object* myself, ctr_argument* argumentList) 
  * @def
  * [ Code ] × [ Number ]
  *
- * @example
- * { :i ✎ write: i. } × 7.
+ *
+ * @test432
  */
+
 ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* indexNumber;
 	ctr_object* block = myself;
@@ -1195,18 +1112,10 @@ ctr_object* ctr_block_times(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Code ] procedure
  *
- * @example
- * ☞ x ≔ 1.
- * {
- * 	(x = 1) true: { ✎ write: ‘x’. }, break.
- * 	✎ write: ‘y’.
- * } procedure.
  *
- * {
- * 	(x = 1) true: { ✎ write: ‘x’. }, break.
- * 	✎ write: ‘y’.
- * } × 1.
+ * @test433
  */
+
 ctr_object* ctr_block_procedure(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = myself;
 	ctr_argument* arguments;
@@ -1225,11 +1134,10 @@ ctr_object* ctr_block_procedure(ctr_object* myself, ctr_argument* argumentList) 
  * @def
  * [ Number ] multiply by: [ Number ]
  * 
- * @example
- * ☞ x ≔ 5.
- * x multiply by: 2.
- * ✎ write: x, stop.
+ *
+ * @test434
  */
+
 ctr_object* ctr_number_mul(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	myself->value.nvalue *= otherNum->value.nvalue;
@@ -1240,9 +1148,10 @@ ctr_object* ctr_number_mul(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] ÷ [ Number ]
  *
- * @example
- * ✎ write: 10 ÷ 2, stop.
+ *
+ * @test435
  */
+
 ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	ctr_number a = myself->value.nvalue;
@@ -1258,11 +1167,10 @@ ctr_object* ctr_number_divide(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] divide by: [ Number ]
  *
- * @example
- * ☞ x ≔ 10.
- * x divide by: 2.
- * ✎ write: x, stop.
+ *
+ * @test436
  */
+
 ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	if (otherNum->value.nvalue == 0) {
@@ -1277,10 +1185,10 @@ ctr_object* ctr_number_div(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] modulo: [ modulo ]
  *
- * @example
- * ☞ x ≔ 11 modulo: 3.
- * ✎ write: x, stop.
+ *
+ * @test437
  */
+
 ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	ctr_number a = myself->value.nvalue;
@@ -1296,9 +1204,10 @@ ctr_object* ctr_number_modulo(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] power: [ Number ]
  * 
- * @example
- * ✎ write: (2 power: 3).
+ *
+ * @test438
  */
+
 ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* otherNum = ctr_internal_cast2number(argumentList->object);
 	ctr_number a = myself->value.nvalue;
@@ -1310,11 +1219,10 @@ ctr_object* ctr_number_pow(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] positive?
  *
- * @example
- * { :i 
- * ✎ write: ( i - 5 ) positive?, stop.
- * } × 10.
+ *
+ * @test439
  */
+
 ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool( ( myself->value.nvalue > 0) );
 }
@@ -1323,11 +1231,10 @@ ctr_object* ctr_number_positive(ctr_object* myself, ctr_argument* argumentList) 
  * @def
  * [ Number ] negative?
  * 
- * @example
- * { :i 
- * ✎ write: ( i - 5 ) negative?, stop.
- * } × 10.
+ *
+ * @test440
  */
+
 ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool( ( myself->value.nvalue < 0) );
 }
@@ -1336,10 +1243,10 @@ ctr_object* ctr_number_negative(ctr_object* myself, ctr_argument* argumentList) 
  * @def
  * [ Number ] floor
  *
- * @example
- * ☞ x ≔ 4.5.
- * ✎ write: x floor, stop.
+ *
+ * @test441
  */
+
 ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(floor(myself->value.nvalue));
 }
@@ -1348,11 +1255,10 @@ ctr_object* ctr_number_floor(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] [ String ]
  *
- * @example
- * ☞ x ≔ 3 dollars.
- * ✎ write: x qualifier.
- * 
+ *
+ * @test442
  */
+
 ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_internal_object_set_property( myself, ctr_build_string_from_cstring( CTR_DICT_QUALIFIER ), ctr_internal_cast2string( argumentList->object ), CTR_CATEGORY_PRIVATE_PROPERTY );
 	return myself;
@@ -1362,10 +1268,10 @@ ctr_object* ctr_number_qualify(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] qualifier.
  *
- * @example
- * ☞ x ≔ 3 dollars.
- * ✎ write: x qualifier.
+ *
+ * @test443
  */
+
 ctr_object* ctr_number_qualification(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* answer = ctr_internal_object_find_property( myself, ctr_build_string_from_cstring( CTR_DICT_QUALIFIER ), CTR_CATEGORY_PRIVATE_PROPERTY );
 	if ( answer == NULL ) return CtrStdNil;
@@ -1383,10 +1289,10 @@ ctr_object* ctr_number_respond_to(ctr_object* myself, ctr_argument* argumentList
  * @def
  * [ Number ] ceil
  * 
- * @example
- * ☞ x ≔ 4.5.
- * ✎ write: x ceil, stop.
+ *
+ * @test444
  */
+
 ctr_object* ctr_number_ceil(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(ceil(myself->value.nvalue));
 }
@@ -1395,10 +1301,10 @@ ctr_object* ctr_number_ceil(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] round
  * 
- * @example
- * ☞ x ≔ 5.5.
- * ✎ write: x round, stop.
+ *
+ * @test445
  */
+
 ctr_object* ctr_number_round(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(round(myself->value.nvalue));
 }
@@ -1407,10 +1313,10 @@ ctr_object* ctr_number_round(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] absolute
  *
- * @example
- * ☞ x ≔ -7.
- * ✎ write: x absolute, stop.
+ *
+ * @test446
  */
+
 ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(fabs(myself->value.nvalue));
 }
@@ -1419,11 +1325,10 @@ ctr_object* ctr_number_abs(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] square root
  *
- * @example
- * ☞ x ≔ 49.
- * ☞ y ≔ x square root.
- * ✎ write: y, stop.
+ *
+ * @test447
  */
+
 ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(sqrt(myself->value.nvalue));
 }
@@ -1432,9 +1337,10 @@ ctr_object* ctr_number_sqrt(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] sin
  *
- * @example
- * ✎ write: 123 sin, stop.
+ *
+ * @test448
  */
+
 ctr_object* ctr_number_sin(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(sin(myself->value.nvalue));
 }
@@ -1443,9 +1349,10 @@ ctr_object* ctr_number_sin(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] cos
  *
- * @example
- * ✎ write: 123 cos, stop.
+ *
+ * @test449
  */
+
 ctr_object* ctr_number_cos(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(cos(myself->value.nvalue));
 }
@@ -1454,9 +1361,10 @@ ctr_object* ctr_number_cos(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] tan
  *
- * @example
- * ✎ write: 123 tan, stop.
+ *
+ * @test450
  */
+
 ctr_object* ctr_number_tan(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(tan(myself->value.nvalue));
 }
@@ -1465,9 +1373,10 @@ ctr_object* ctr_number_tan(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] atan
  *
- * @example
- * ✎ write: 123 atan, stop.
+ *
+ * @test451
  */
+
 ctr_object* ctr_number_atan(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(atan(myself->value.nvalue));
 }
@@ -1476,9 +1385,10 @@ ctr_object* ctr_number_atan(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] log
  *
- * @example
- * ✎ write: 123 log, stop.
+ *
+ * @test452
  */
+
 ctr_object* ctr_number_log(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(log(myself->value.nvalue));
 }
@@ -1487,9 +1397,10 @@ ctr_object* ctr_number_log(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] & [ Number ]
  *
- * @example
- * ✎ write: (8 & 10), stop.
+ *
+ * @test453
  */
+
 ctr_object* ctr_number_bit_and(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float((int)myself->value.nvalue & (int)ctr_tonum(argumentList->object));
 }
@@ -1498,9 +1409,10 @@ ctr_object* ctr_number_bit_and(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] | [ Number ]
  *
- * @example
- * ✎ write: (8 | 10), stop.
+ *
+ * @test454
  */
+
 ctr_object* ctr_number_bit_or(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float((int)myself->value.nvalue | (int)ctr_tonum(argumentList->object));
 }
@@ -1509,9 +1421,10 @@ ctr_object* ctr_number_bit_or(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Number ] ^ [ Number ]
  *
- * @example
- * ✎ write: (8 ^ 10), stop.
+ *
+ * @test455
  */
+
 ctr_object* ctr_number_bit_xor(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float((int)myself->value.nvalue ^ (int)ctr_tonum(argumentList->object));
 }
@@ -1567,14 +1480,10 @@ ctr_object* ctr_internal_number_to_string(ctr_object* myself, ctr_argument* argu
  * @def
  * [ Number ] string
  *
- * @example
- * ☞ x ≔ 123.
- * ✎ write: x, stop.
- * ☞ x ≔ 1.23.
- * ✎ write: x, stop.
- * ☞ x ≔ 1,000,000.
- * ✎ write: x, stop.
+ *
+ * @test456
  */
+
 ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_number_to_string(myself, argumentList, 0);
 }
@@ -1583,14 +1492,10 @@ ctr_object* ctr_number_to_string(ctr_object* myself, ctr_argument* argumentList)
  * @def
  * [ Number ] raw
  *
- * @example
- * ☞ x ≔ 123.
- * ✎ write: x raw, stop.
- * ☞ x ≔ 1.23.
- * ✎ write: x raw, stop.
- * ☞ x ≔ 1,000,000.
- * ✎ write: x raw, stop.
+ *
+ * @test457
  */
+
 ctr_object* ctr_number_to_string_flat(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_internal_number_to_string(myself, argumentList, 1);
 }
@@ -1599,11 +1504,10 @@ ctr_object* ctr_number_to_string_flat(ctr_object* myself, ctr_argument* argument
  * @def
  * [ Number ] boolean
  *
- * @example
- * { :i
- * 	✎ write: (i - 1) boolean, stop.
- * } × 10.
+ *
+ * @test458
  */
+
 ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_bool( myself->value.nvalue );
 }
@@ -1612,10 +1516,10 @@ ctr_object* ctr_number_to_boolean(ctr_object* myself, ctr_argument* argumentList
  * @def
  * String
  *
- * @example
- * ☞ x ≔ ‘abcdef’.
- * ✎ write: x, stop.
+ *
+ * @test459
  */
+
 ctr_object* ctr_build_string(char* stringValue, ctr_size size) {
 	ctr_object* stringObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 	if (size != 0) {
@@ -1653,15 +1557,10 @@ ctr_object* ctr_build_empty_string() {
  * @def
  * [ String ] object
  *
- * @example
- * ☞ x ≔ List ← 1 ; 2 ; 3.
- * ☞ a ≔ x string.
- * ☞ b ≔ a object.
- * ✎ write: a type, stop.
- * ✎ write: a, stop.
- * ✎ write: b type, stop.
- * ✎ write: b, stop.
+ *
+ * @test460
  */
+
 ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_tnode* parsedCode;
 	ctr_object* result;
@@ -1699,12 +1598,10 @@ ctr_object* ctr_string_eval(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ String ] = [ String ]
  * 
- * @example
- * ☞ x ≔ ‘abc’ = ‘abc’.
- * ✎ write: x, stop.
- * ☞ x ≔ ‘abc’ = ‘xxx’.
- * ✎ write: x, stop.
+ *
+ * @test461
  */
+
 ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2string( argumentList->object );
 	if (other->value.svalue->vlen != myself->value.svalue->vlen) {
@@ -1717,12 +1614,10 @@ ctr_object* ctr_string_eq(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ String ] ≠ [ String ]
  * 
- * @example
- * ☞ x ≔ ‘abc’ = ‘abc’.
- * ✎ write: x, stop.
- * ☞ x ≔ ‘abc’ ≠ ‘xxx’.
- * ✎ write: x, stop.
+ *
+ * @test462
  */
+
 ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* other = ctr_internal_cast2string( argumentList->object );
 	if (other->value.svalue->vlen != myself->value.svalue->vlen) {
@@ -1735,10 +1630,10 @@ ctr_object* ctr_string_neq(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ String ] length
  *
- * @example
- * ☞ x ≔ ‘☘☘☘’.
- * ✎ write: x length, stop.
+ *
+ * @test463
  */
+
 ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_size n = ctr_getutf8len(myself->value.svalue->value, (ctr_size) myself->value.svalue->vlen);
 	return ctr_build_number_from_float((ctr_number) n);
@@ -1748,10 +1643,10 @@ ctr_object* ctr_string_length(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ String ] bytes
  *
- * @example
- * ☞ x ≔ ‘☘☘☘’.
- * ✎ write: x bytes, stop.
+ *
+ * @test464
  */
+
 ctr_object* ctr_string_bytes(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_float(myself->value.svalue->vlen);
 }
@@ -1760,12 +1655,10 @@ ctr_object* ctr_string_bytes(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ String ] + [ String ]
  *
- * @example
- * ☞ x ≔ ‘ABC’.
- * ☞ y ≔ ‘DEF’.
- * ☞ z ≔ x + y.
- * ✎ write: z, stop.
+ *
+ * @test465
  */
+
 ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* strObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTSTRING);
 	ctr_size n1;
@@ -1787,11 +1680,10 @@ ctr_object* ctr_string_concat(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ String ] append: [ String ]
  *
- * @example
- * ☞ x ≔ ‘123’.
- * x append: ‘456’.
- * ✎ write: x, stop.
+ *
+ * @test466
  */
+
 ctr_object* ctr_string_append(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* strObject;
 	ctr_size n1;
@@ -1824,10 +1716,10 @@ ctr_object* ctr_string_new(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ String ] code
  *
- * @example
- * ☞ x ≔ ‘qwerty’.
- * ✎ write: x code, stop.
+ *
+ * @test467
  */
+
 ctr_object* ctr_string_to_code(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* answer;
 	ctr_size i;
@@ -1867,10 +1759,10 @@ ctr_object* ctr_string_to_code(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ String ] from: [ Number ] length: [ Number ]
  *
- * @example
- * ☞ x ≔ ‘qwerty’ from: 2 length: 3.
- * ✎ write: x, stop.
+ *
+ * @test468
  */
+
 ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
 	ctr_object* length = ctr_internal_cast2number(argumentList->next->object);
@@ -1917,10 +1809,10 @@ ctr_object* ctr_string_from_length(ctr_object* myself, ctr_argument* argumentLis
  * @def
  * [ String ] offset: [ Number ]
  *
- * @example
- * ☞ x ≔ ‘qwerty’ offset: 2.
- * ✎ write: x, stop.
+ *
+ * @test469
  */
+
 ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_argument* argument1;
 	ctr_argument* argument2;
@@ -1944,9 +1836,10 @@ ctr_object* ctr_string_skip(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ String ] character: [ Number ]
  *
- * @example
- * ✎ write: (‘.☘.’ character: 1), stop.
+ *
+ * @test470
  */
+
 ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* fromPos = ctr_internal_cast2number(argumentList->object);
 	ctr_size a = (ctr_size) (fromPos->value.nvalue);
@@ -1967,10 +1860,10 @@ ctr_object* ctr_string_at(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ String ] find: [ String ]
  *
- * @example
- * ☞ x ≔ ‘abc’ find: ‘b’.
- * ✎ write: x, stop.
+ *
+ * @test471
  */
+
 ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sub = ctr_internal_cast2string(argumentList->object);
 	long hlen = myself->value.svalue->vlen;
@@ -1988,9 +1881,10 @@ ctr_object* ctr_string_index_of(ctr_object* myself, ctr_argument* argumentList) 
  * @def
  * [ String ] uppercase
  *
- * @example
- * ✎ write: ‘abc’ uppercase, stop.
+ *
+ * @test472
  */
+
 ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
 	size_t  len = myself->value.svalue->vlen;
@@ -2010,10 +1904,10 @@ ctr_object* ctr_string_to_upper(ctr_object* myself, ctr_argument* argumentList) 
  * @def
  * [ String ] lowercase
  *
- * @example
- * ☞ x ≔ ‘ABC’ lowercase.
- * ✎ write: x, stop.
+ *
+ * @test473
  */
+
 ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
 	size_t len = myself->value.svalue->vlen;
@@ -2032,10 +1926,10 @@ ctr_object* ctr_string_to_lower(ctr_object* myself, ctr_argument* argumentList) 
  * @def
  * [ String ] last: [ String ]
  *
- * @example
- * ☞ x ≔ ‘abca’ last: ‘a’.
- * ✎ write: x, stop.
+ *
+ * @test474
  */
+
 ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* sub = ctr_internal_cast2string(argumentList->object);
 	ctr_size hlen = myself->value.svalue->vlen;
@@ -2053,14 +1947,10 @@ ctr_object* ctr_string_last_index_of(ctr_object* myself, ctr_argument* argumentL
  * @def
  * [ String ] [ String ]: [ String ]
  *
- * @example
- * ☞ a ≔ ‘xx %’.
- * a xx: 123.
- * ✎ write: a, stop.
- * ☞ b ≔ ‘2 + x = 3’.
- * b x 1.
- * ✎ write: b, stop.
+ *
+ * @test475
  */
+
 ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* message = ctr_internal_cast2string( argumentList->object );
 	ctr_object* slot;
@@ -2078,11 +1968,10 @@ ctr_object* ctr_string_fill_in(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ String ] replace: [ String ] with: [ String ]
  *
- * @example
- * ☞ x ≔ ‘1...2...3’.
- * x replace: ‘...’ with: ‘,’.
- * ✎ write: x, stop.
+ *
+ * @test476
  */
+
 ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
 	ctr_object* replacement = ctr_internal_cast2string(argumentList->next->object);
@@ -2135,10 +2024,10 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
  * @def
  * [ String ] - [ String ]
  *
- * @example
- * ☞ x ≔ ‘1...2...3...’ - ‘...’.
- * ✎ write: x, stop.
+ *
+ * @test477
  */
+
 ctr_object* ctr_string_minus(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* needle = ctr_internal_cast2string(argumentList->object);
 	long nlen = needle->value.svalue->vlen;
@@ -2157,28 +2046,24 @@ ctr_object* ctr_string_minus(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ String ] contains: [ String ]
  *
- * @example
- * ☞ x ≔ ‘abc’ contains: ‘a’.
- * ☞ y ≔ ‘abc’ contains: ‘z’.
- * ✎ write: x, stop.
- * ✎ write: y, stop.
+ *
+ * @test478
  */
+
 ctr_object* ctr_string_contains( ctr_object* myself, ctr_argument* argumentList ) {
 	return ctr_build_bool(
-		ctr_internal_cast2number(
-			ctr_string_index_of( myself, argumentList )
-		)->value.nvalue > 0
+		ctr_string_index_of( myself, argumentList ) != CtrStdNil
 	);
 }
 
 /**
  * @def
- * [ String ] remove surrounding spaces
+ * [ String ] trim
  *
- * @example
- * ☞ x ≔ ‘  x  ’.
- * ✎ write: x remove surrounding spaces, stop.
+ *
+ * @test479
  */
+
 ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
 	long  len = myself->value.svalue->vlen;
@@ -2205,14 +2090,10 @@ ctr_object* ctr_string_trim(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ String ] number
  *
- * @example
- * ☞ x ≔ ‘12345678’.
- * ☞ y ≔ x number.
- * ✎ write: x, stop.
- * ✎ write: y, stop.
- * ✎ write: x type, stop.
- * ✎ write: y type, stop.
+ *
+ * @test480
  */
+
 ctr_object* ctr_string_to_number(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_number_from_string(myself->value.svalue->value, myself->value.svalue->vlen, 1);
 }
@@ -2225,12 +2106,10 @@ ctr_object* ctr_string_in_to_number(ctr_object* myself, ctr_argument* argumentLi
  * @def
  * [ String ] boolean
  *
- * @example
- * ✎ write: ‘’ boolean, stop.
- * ✎ write: ‘   ’ boolean, stop.
- * ✎ write: ‘abc’ boolean, stop.
- * ✎ write: ‘123’ boolean, stop.
+ *
+ * @test481
  */
+
 ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList) {
 	if ( myself->value.svalue->vlen == 0 ) return CtrStdBoolFalse;
 	return ctr_build_bool( 1 );
@@ -2240,10 +2119,10 @@ ctr_object* ctr_string_to_boolean(ctr_object* myself, ctr_argument* argumentList
  * @def
  * [ String ] split: [ String ]
  *
- * @example
- * ☞ x ≔ ‘1,2,3’ split: ‘,’.
- * ✎ write: x, stop.
+ *
+ * @test482
  */
+
 ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
 	char* str = myself->value.svalue->value;
 	long len = myself->value.svalue->vlen;
@@ -2287,10 +2166,10 @@ ctr_object* ctr_string_split(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ String ] characters
  *
- * @example
- * ☞ x ≔ ‘123’ characters.
- * ✎ write: x, stop.
+ *
+ * @test483
  */
+
 ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_size i;
 	int charSize;
@@ -2313,14 +2192,10 @@ ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentLis
  * @def
  * [ String ] compare: [ String ]
  *
- * @example
- * ☞ x ≔ ‘abc’.
- * ☞ y ≔ ‘def’.
- * ☞ z ≔ x compare: y.
- * ☞ q ≔ y compare: x.
- * ✎ write: z, stop.
- * ✎ write: q, stop.
+ *
+ * @test484
  */
+
 ctr_object* ctr_string_compare( ctr_object* myself, ctr_argument* argumentList ) {
 	argumentList->object = ctr_internal_cast2string(argumentList->object);
 	ctr_size maxlen;
@@ -2346,10 +2221,10 @@ ctr_object* ctr_string_compare( ctr_object* myself, ctr_argument* argumentList )
  * @def
  * [ String ] < [ String ]
  * 
- * @example
- * ✎ write: (‘abc’ < ‘def’), stop.
- * ✎ write: (‘def’ < ‘abc’), stop.
+ *
+ * @test485
  */
+
 ctr_object* ctr_string_before(ctr_object* myself, ctr_argument* argumentList ) {
 	if ( ctr_string_compare( myself, argumentList )->value.nvalue < 0 ) {
 		return ctr_build_bool( 1 );
@@ -2362,10 +2237,10 @@ ctr_object* ctr_string_before(ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ String ] ≤ [ String ]
  * 
- * @example
- * ✎ write: (‘abc’ ≤ ‘def’), stop.
- * ✎ write: (‘def’ ≤ ‘abc’), stop.
+ *
+ * @test486
  */
+
 ctr_object* ctr_string_before_or_same(ctr_object* myself, ctr_argument* argumentList ) {
 	if ( ctr_string_compare( myself, argumentList )->value.nvalue <= 0 ) {
 		return ctr_build_bool( 1 );
@@ -2377,10 +2252,10 @@ ctr_object* ctr_string_before_or_same(ctr_object* myself, ctr_argument* argument
  * @def
  * [ String ] > [ String ]
  * 
- * @example
- * ✎ write: (‘abc’ > ‘def’), stop.
- * ✎ write: (‘def’ > ‘abc’), stop.
+ *
+ * @test487
  */
+
 ctr_object* ctr_string_after(ctr_object* myself, ctr_argument* argumentList ) {
 	if ( ctr_string_compare( myself, argumentList )->value.nvalue > 0 ) {
 		return ctr_build_bool( 1 );
@@ -2393,10 +2268,10 @@ ctr_object* ctr_string_after(ctr_object* myself, ctr_argument* argumentList ) {
  * @def
  * [ String ] ≥ [ String ]
  * 
- * @example
- * ✎ write: (‘abc’ ≥ ‘def’), stop.
- * ✎ write: (‘def’ ≥ ‘abc’), stop.
+ *
+ * @test488
  */
+
 ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentList ) {
 	if ( ctr_string_compare( myself, argumentList )->value.nvalue >= 0 ) {
 		return ctr_build_bool( 1 );
@@ -2408,12 +2283,10 @@ ctr_object* ctr_string_after_or_same(ctr_object* myself, ctr_argument* argumentL
  * @def
  * [ String ] hash: [ String ]
  *
- * @example
- * ☞ x ≔ ‘123’.
- * ☞ y ≔ x hash: ‘1234567890123456’.
- * ✎ write: x, stop.
- * ✎ write: y, stop.
+ *
+ * @test489
  */
+
 ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argumentList ) {
 	char* keyString = ctr_heap_allocate_cstring( ctr_internal_cast2string( argumentList->object ) );
 	if ( strlen( keyString ) < 16 ) {
@@ -2434,10 +2307,10 @@ ctr_object* ctr_string_hash_with_key( ctr_object* myself, ctr_argument* argument
  * @def
  * Code
  *
- * @example
- * ☞ x ≔ { :a :b :c ↲ a + b + c. } apply: 1 and: 2 and: 3.
- * ✎ write: x, stop.
+ *
+ * @test490
  */
+
 ctr_object* ctr_build_block(ctr_tnode* node) {
 	ctr_object* codeBlockObject = ctr_internal_create_object(CTR_OBJECT_TYPE_OTBLOCK);
 	codeBlockObject->value.block = node;
@@ -2449,9 +2322,10 @@ ctr_object* ctr_build_block(ctr_tnode* node) {
  * @def
  * [ Code ] run
  * 
- * @example
- * { ✎ write: ‘123’, stop. } run.
+ *
+ * @test491
  */
+
 ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object* my) {
 	ctr_object* result;
 	ctr_tnode* node = myself->value.block;
@@ -2520,11 +2394,10 @@ ctr_object* ctr_block_run(ctr_object* myself, ctr_argument* argList, ctr_object*
  * @def
  * [ Code ] while: [ Code ]
  *
- * @example
- * ☞ x ≔ 0.
- * { x add: 1. } while: { ↲ (x < 6). }.
- * ✎ write: x, stop.
+ *
+ * @test492
  */
+
 ctr_object* ctr_block_while_true(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* block = argumentList->object;
 	if (block->info.type != CTR_OBJECT_TYPE_OTBLOCK) {
@@ -2558,11 +2431,10 @@ ctr_object* ctr_block_runIt(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Code ] set: [ String ] value: [ Object ]
  *
- * @example
- * ☞ x ≔ { ✎ write: (⚿ q + ‘!’), stop. }.
- * x set: ‘q’ value: ‘123’.
- * x run.
+ *
+ * @test493
  */
+
 ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* key = ctr_internal_cast2string(argumentList->object);
 	ctr_object* value = argumentList->next->object;
@@ -2574,13 +2446,10 @@ ctr_object* ctr_block_set(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Code ] error: [ Object ]
  *
- * @example
- * {
- *   this code block error: ‘xxx’.
- * } catch: { :e
- *   ✎ write: e.
- * }, run.
+ *
+ * @test494
  */
+
 ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
 	CtrStdFlow = argumentList->object;
 	CtrStdFlow->info.sticky = 1;
@@ -2591,13 +2460,10 @@ ctr_object* ctr_block_error(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Code ] catch: [ Code ]
  *
- * @example
- * {
- *    ☞ z ≔ 4 ÷ 0.
- * } catch: { :e
- *    ✎ write: e, end.
- * }, run.
+ *
+ * @test495
  */
+
 ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* catchBlock = argumentList->object;
 	ctr_internal_object_delete_property(myself, ctr_build_string_from_cstring( "catch" ), 0 );
@@ -2609,10 +2475,10 @@ ctr_object* ctr_block_catch(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Code ] string
  *
- * @example
- * ☞ x ≔ { 1 + 1. }.
- * ✎ write: x, stop.
+ *
+ * @test496
  */
+
 ctr_object* ctr_block_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( CTR_DICT_TASK );
 }

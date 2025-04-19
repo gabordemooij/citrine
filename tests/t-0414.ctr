@@ -1,0 +1,6 @@
+
+ >> x := ( 1 > 2 ) nor: ( 2 > 3 ).
+ >> y := ( 2 > 1 ) nor: ( 3 > 2 ).
+ Out write: x, stop.
+ Out write: y, stop.
+ 

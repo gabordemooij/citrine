@@ -1,0 +1,7 @@
+
+ >> x := File new: (Path /tmp: ['a.txt']).
+ x write: ['abc'].
+ Out write: x size, stop.
+ x append: ['def'].
+ Out write: x size, stop.
+ 

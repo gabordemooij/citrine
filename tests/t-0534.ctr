@@ -1,0 +1,6 @@
+
+ >> x := Dict new.
+ x China: ['CN'], Russia: ['RU'].
+ Out write: (x has: ['CN']), stop.
+ Out write: (x has: ['NL']), stop.
+ 

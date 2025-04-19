@@ -1,0 +1,4 @@
+
+ >> x := ['qwerty'].
+ Out write: x code, stop.
+ 

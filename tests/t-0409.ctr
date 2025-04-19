@@ -1,0 +1,6 @@
+
+ >> x := 10.
+ (x > 9 and: x < 11) true: {
+ 	Out write: x, stop.
+ }.
+ 

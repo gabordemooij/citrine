@@ -1,0 +1,6 @@
+
+ >> x := Dict new.
+ x abc: 123.
+ >> y := Sequence ← x.
+ Out write: y code, stop.
+ 

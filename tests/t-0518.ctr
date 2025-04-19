@@ -1,0 +1,6 @@
+
+ >> x := Sequence ← ['A'] ; ['B'] ; ['C'].
+ >> y := Sequence ← 1 ; 2 ; 3.
+ >> z := x by: y.
+ Out write: z, stop.
+ 

@@ -1,0 +1,4 @@
+
+ Out write: (['abc'] ≤ ['def']), stop.
+ Out write: (['def'] ≤ ['abc']), stop.
+ 

@@ -1,0 +1,16 @@
+
+ >> x := Moment new.
+ Out write: x, stop.
+ x subtract: 6 second.
+ Out write: x, stop.
+ x subtract: 5 minute.
+ Out write: x, stop.
+ x subtract: 4 hour.
+ Out write: x, stop.
+ x subtract: 3 day.
+ Out write: x, stop.
+ x subtract: 2 month.
+ Out write: x, stop.
+ x subtract: 1 year.
+ Out write: x, stop.
+ 

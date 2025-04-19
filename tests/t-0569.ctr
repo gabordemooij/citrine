@@ -1,0 +1,4 @@
+
+ >> x := Moment new.
+ Out write: x, stop.
+ 

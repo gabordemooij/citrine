@@ -1,0 +1,4 @@
+
+ >> x := Object.
+ Out write: x bool, stop.
+ 

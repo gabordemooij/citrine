@@ -1,0 +1,5 @@
+
+ >> x := 9.
+ >> y := x - 4.
+ Out write: y, stop.
+ 

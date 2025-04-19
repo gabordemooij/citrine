@@ -1,0 +1,5 @@
+
+ >> x := ['123'].
+ x append: ['456'].
+ Out write: x, stop.
+ 

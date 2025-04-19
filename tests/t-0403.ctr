@@ -1,0 +1,6 @@
+
+ >> x := (1 = 0).
+ >> y := (1 = 1).
+ Out write: x, stop.
+ Out write: y, stop.
+ 

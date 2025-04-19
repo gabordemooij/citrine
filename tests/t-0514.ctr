@@ -1,0 +1,4 @@
+
+ >> x := Sequence ← 1 ; 2 ; 3.
+ Out write: x count, stop.
+ 
