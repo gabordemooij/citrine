@@ -1,1 +1,5 @@
 aaa
+Uncatched error has occurred.
+Key not found: ↲↲
+#2 ↲↲ (../../../tests/t-0147.ctr: 3)
+#1 start (../../../tests/t-0147.ctr: 3)

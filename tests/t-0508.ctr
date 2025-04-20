@@ -1,5 +1,5 @@
 
- >> x := Sequence ← 1 ; 2 ; 3 ; 4.
+ >> x := List ← 1 ; 2 ; 3 ; 4.
  >> y := x first.
  Out write: x, stop.
  Out write: y, stop.

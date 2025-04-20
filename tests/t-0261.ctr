@@ -1,7 +1,7 @@
 ['SINGLE_LANGUAGE'].
 { :i
 	{
-		>> a := Function new: ['☞ x ≔ List ← 1 ; 2. x each: { ☞ q ≔ { 1 ÷ 0. } run. }.']. 
+		>> a := Function new: ['>> x := List <<: 1 ; 2. x each: { >> q := { 1 ÷ 0. } run. }.']. 
 		a start.
 	} except: { ['Empty']. }, start.
 	(i = 5) true: {  1 ÷ 0. }.

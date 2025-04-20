@@ -1,2 +1,6 @@
 Trigger an error
-aaa
+aaaUncatched error has occurred.
+Hi!
+#3 error: (../../../tests/t-0140.ctr: 11)
+#2 start (../../../tests/t-0140.ctr: 12)
+#1 start (../../../tests/t-0140.ctr: 15)

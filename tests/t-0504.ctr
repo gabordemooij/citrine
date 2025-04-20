@@ -1,4 +1,4 @@
 
- >> x := Sequence ← 1 ; ['2'] ; False ; None.
+ >> x := List ← 1 ; ['2'] ; False ; None.
  Out write: x, stop.
  

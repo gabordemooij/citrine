@@ -1,5 +1,5 @@
 
  >> x := 5.
- >> y := x message: ['×'] arguments: (Sequence ← 2).
+ >> y := x message: ['×'] arguments: (List ← 2).
  Out write: y, stop.
  

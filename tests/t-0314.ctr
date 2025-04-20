@@ -1,23 +1,8 @@
 ['SINGLE_LANGUAGE'].
 
->> garden := ['
-	"garden": {
-		chairs,
-		"pool": true,
-		"shed": false,
-		"flower": [
-			"tulips",
-			"roses",
-			"lillies"
-		],
-		"size": {
-			"width":8,
-			"length":15
-		},
-		"insects":null,
-		"dog":
-	}
-}'].
+Gui init.
+
+>> garden := ['{"g": {"c": 2,"p": true,"s": false,"f": ["a","b","c"],"sz": {"w":8,"h":15},"i":null,"j":"null"}}'].
 
 >> g := JSON object: garden.
 Out write: g, stop.

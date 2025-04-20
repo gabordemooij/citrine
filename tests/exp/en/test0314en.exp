@@ -1,0 +1,1 @@
+(Dict new) put:((Dict new) put:['null'] at:['j'], put:None at:['i'], put:((Dict new) put:15 at:['h'], put:8 at:['w']) at:['sz'], put:(List ← ['a'] ; ['b'] ; ['c']) at:['f'], put:False at:['s'], put:True at:['p'], put:2 at:['c']) at:['g']

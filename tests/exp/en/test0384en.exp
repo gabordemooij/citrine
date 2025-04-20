@@ -1,0 +1,1 @@
+(List ← ((Dict new) put:123 at:['abc']))

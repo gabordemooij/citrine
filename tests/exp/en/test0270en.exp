@@ -1,0 +1,4 @@
+Uncatched error has occurred.
+Unable to open: No such file or directory.
+#2 list: (../../../tests/t-0270.ctr: 2)
+#1 q (../../../tests/t-0270.ctr: 2)

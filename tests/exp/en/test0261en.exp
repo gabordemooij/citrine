@@ -1,0 +1,5 @@
+Uncatched error has occurred.
+Division by zero.
+#3 ÷ (../../../tests/t-0261.ctr: 7)
+#2 true: (../../../tests/t-0261.ctr: 7)
+#1 × (../../../tests/t-0261.ctr: 8)

@@ -1,5 +1,5 @@
 
- >> x := Sequence new.
+ >> x := List new.
  >> x put: ['a'] at: 5.
  Out write: x, stop.
  

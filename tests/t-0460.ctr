@@ -1,5 +1,5 @@
 
- >> x := Sequence ← 1 ; 2 ; 3.
+ >> x := List ← 1 ; 2 ; 3.
  >> a := x string.
  >> b := a object.
  Out write: a type, stop.

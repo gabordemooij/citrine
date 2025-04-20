@@ -36,11 +36,13 @@ unittest() {
 	export CITRINE_MEMORY_MODE
 
 	if [[ $os = "lin" ]]; then
-		echo "test"  | ./ctren ../../../tests/t-$i.ctr 1>/tmp/out 2>/tmp/err
+		echo "test"  | ./ctren ../../../tests/t-$i.ctr 1>/tmp/rs 2>/tmp/err
+		cat /tmp/rs /tmp/err > /tmp/out
 	fi
 
 	if [[ $os = "win" ]]; then
-		echo "test"  | wine ./ctren.exe ../../../tests/t-$i.ctr 1>/tmp/out 2>/tmp/err
+		echo "test"  | wine ./ctren.exe ../../../tests/t-$i.ctr 1>/tmp/rs 2>/tmp/err
+		cat /tmp/rs /tmp/err > /tmp/out
 	fi
 
 	if ! test -f ../../../tests/exp/en/test${i}en.exp; then
@@ -62,7 +64,7 @@ unittest() {
 	fi
 
 	code="$(< ../../../tests/t-$i.ctr)"
-	observed="$(< /tmp/out)$(< /tmp/err)"
+	observed="$(< /tmp/out)"
 	expected="$(< ../../../tests/exp/en/test${i}en.exp)"
 	diff="$(diff -bBZ /tmp/out ../../../tests/exp/en/test${i}en.exp)"
     if [[  $diff != "" ]]; then
@@ -92,7 +94,7 @@ unittest() {
 
 # run tests for linux
 pushd build/Linux/bin
-for i in $(seq -f "%04g" 1 596);
+for i in $(seq -f "%04g" 1 597);
 do
     unittest $i 1 lin
     unittest $i 4 lin
@@ -102,7 +104,7 @@ popd
 
 # run tests for win
 pushd build/Win64/bin
-for i in $(seq -f "%04g" 1 596);
+for i in $(seq -f "%04g" 1 597);
 do
     unittest $i 1 win
     unittest $i 4 win

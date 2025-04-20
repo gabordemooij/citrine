@@ -1,7 +1,7 @@
 
 Out write: ['If hope is 0.1...↵'].
 >> hope := 0.2.
-( hope positive? ) true: { Out write: ['Still a little hope for humanity↵']. }.
+( hope positive? ) true: { Out write: ['positive']. }.
 Out write: ['If hope is -1...↵'].
 hope := -1.
-(hope negative? ) true: { Out write: ['No hope left↵']. }.
+(hope negative? ) true: { Out write: ['negative']. }.

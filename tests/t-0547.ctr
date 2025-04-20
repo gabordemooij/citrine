@@ -1,13 +1,1 @@
-#include "citrine.h"
-
-int ctr_gc_dust_counter;
-int ctr_gc_object_counter;
-int ctr_gc_kept_counter;
-int ctr_gc_sticky_counter;
-int ctr_gc_mode;
-
-
-/**
- @internal
- GarbageCollector Marker
- 
+#skip

@@ -1,0 +1,2 @@
+Parse error, unexpected ≔ ( ../../../tests/t-0151.ctr: 5 )
+Key should always be followed by a property name!

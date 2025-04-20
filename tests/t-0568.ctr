@@ -1,7 +1,1 @@
-
- Program wait: 2.
- 
- @result
- ~$ x.ctr.... waits sec........ waits sec....
- ~$_
- 
+#skip

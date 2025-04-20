@@ -2,3 +2,7 @@ apple,cinnamon,pineapple,cheese
 apple,cinnamon,pineapple
 apple,berry
 berry,choco,cheese
+Uncatched error has occurred.
+Expected list.
+#2 replace:length:with: (../../../tests/t-0290.ctr: 27)
+#1 buy (../../../tests/t-0290.ctr: 27)

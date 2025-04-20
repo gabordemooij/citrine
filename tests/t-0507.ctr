@@ -1,5 +1,5 @@
 
- >> x  := Sequence ← ['A'] ; ['B'] ; ['C'].
+ >> x  := List ← ['A'] ; ['B'] ; ['C'].
  >> y  := x position: 1.
  >> z  := x ? 2.
  Out write: y, stop.
