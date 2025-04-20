@@ -1,1 +1,6 @@
-19/04/2025 23:04:54
+ls -la
+/home\gabor\Desktop
+/root\my\ documents\business\presentations
+ls my\ documents > list.txt
+do this and that
+go\here\and\there

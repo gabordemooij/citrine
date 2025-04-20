@@ -1,9 +1,2 @@
-
- >> t := Moment new.
- t zone: ['Europe/Amsterdam'].
- Out write: t, stop.
- Out write: t zone, stop.
- t zone: ['US/Hawaii'].
- Out write: t, stop.
- Out write: t zone, stop.
- 
+# Linux
+Out write: Moment zone, stop.

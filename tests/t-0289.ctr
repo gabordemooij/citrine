@@ -1,4 +1,4 @@
-#LINUX
+#Linux
 >> OS := Program os: (Command uname -s), trim.
 
 >> Slurp := Object new.

@@ -51,8 +51,13 @@ unittest() {
 
 	
 	skipcode=$(head -n1 ../../../tests/t-$1.ctr)
-	if [[ "$skipcode" == \#LINUX* && "$os" != "lin" ]]; then
-		echo "SKIP"
+	if [[ "$skipcode" == "#Linux" && "$os" != "lin" ]]; then
+		echo "SKIP Linux-only test"
+		return
+	fi
+	
+	if [[ "$skipcode" == "#Windows" && "$os" != "win" ]]; then
+		echo "SKIP Windows-only test"
 		return
 	fi
 
@@ -62,6 +67,7 @@ unittest() {
 	diff="$(diff -bBZ /tmp/out ../../../tests/exp/en/test${i}en.exp)"
     if [[  $diff != "" ]]; then
 		echo "𐄂 test $i"
+		echo $skipcode
 		echo "expected:"
 		echo "|$expected|"
 		echo "observed:"
@@ -96,7 +102,7 @@ popd
 
 # run tests for win
 pushd build/Win64/bin
-for i in $(seq -f "%04g" 1 374);
+for i in $(seq -f "%04g" 1 596);
 do
     unittest $i 1 win
     unittest $i 4 win

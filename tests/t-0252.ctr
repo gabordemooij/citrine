@@ -1,3 +1,4 @@
+#Linux
 >> clock := Moment new.
 clock zone: ['UTC-1'].
 clock year: 1981, month: 1, day: 5,

@@ -1,4 +1,4 @@
-
- >> x := Program os: Command date.
- Out write: x.
+#Linux
+>> x := Program os: Command uname.
+Out write: x.
  

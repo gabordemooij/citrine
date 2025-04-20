@@ -174,36 +174,12 @@ ctr_object* ctr_gc_internal_pin( ctr_object* object ) {
 	return key;
 }
  
-/**
- * @def
- * [ Program ] clean memory
- *
- *
- * @test547
- */
-
-/**
- * @def
- * [ Program ] clean memory
- *
- *
- * @test548
- */
 
 ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 	ctr_gc_internal_collect(); /* calls internal because automatic GC has to use this function as well and requires low overhead. */
 	return myself;
 }
 
-/**
- * @def
- * [ Program ] memory
- * 
- *
- * @test549
- */
- 
- 
  /**
  * Returns memory statistics.
  * Array with:
@@ -714,14 +690,6 @@ ctr_object* ctr_clock_wait(ctr_object* myself, ctr_argument* argumentList) {
 }
 #endif
 
-/**
- * @def
- * Moment
- * 
- *
- * @test569
- */
-
 ctr_object* ctr_clock_new_set( ctr_object* myself, ctr_argument* argumentList ) {
 	ctr_object* clock;
 	clock = ctr_clock_new( myself, argumentList );
@@ -753,6 +721,7 @@ ctr_object* ctr_clock_get_time( ctr_object* myself, ctr_argument* argumentList, 
 	tzset();
 	#else
 	setenv( "TZ", zone, 1 );
+	tzset();
 	#endif
 	
 	date = localtime( &timeStamp );
@@ -762,6 +731,7 @@ ctr_object* ctr_clock_get_time( ctr_object* myself, ctr_argument* argumentList, 
 	tzset();
 	#else
 	setenv( "TZ", "UTC", 1 );
+	tzset();
 	#endif
 	
 	switch( part ) {
@@ -805,8 +775,22 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
 			ctr_internal_object_find_property( myself, ctr_build_string_from_cstring(CTR_DICT_ZONE), CTR_CATEGORY_PRIVATE_PROPERTY )
 		)
 	);
+	
+	
+	#ifdef WIN
+	char tz[100];
+	sprintf(tz, "TZ=%s", zone);
+	putenv(tz);
+	tzset();
+	#else
 	setenv( "TZ", zone, 1 );
+	tzset();
+	#endif
+	
 	date = localtime( &timeStamp );
+	
+	
+	
 	switch( part ) {
 		case 'Y':
 			date->tm_year = ctr_internal_cast2number(argumentList->object)->value.nvalue - 1900;
@@ -845,7 +829,15 @@ ctr_object* ctr_clock_set_time( ctr_object* myself, ctr_argument* argumentList, 
 	date->tm_isdst = -1;
 	ctr_heap_free( zone );
 	ctr_internal_object_set_property( myself, key, ctr_build_number_from_float( (double_t) mktime( date ) ), 0 );
+	
+	#ifdef WIN
+	putenv("TZ=UTC"); 
+	tzset();
+	#else
 	setenv( "TZ", "UTC", 1 );
+	tzset();
+	#endif
+	
 	return myself;
 }
 
@@ -1020,7 +1012,7 @@ ctr_object* ctr_clock_second( ctr_object* myself, ctr_argument* argumentList ) {
 
 /**
  * @def
- * [ Moment ] day of the year
+ * [ Moment ] yearday
  *
  *
  * @test584

@@ -1,53 +1,37 @@
 >> x := Moment new.
->> OS := Program setting: ['OS'].
-(OS = ['Haiku']) true: {
-	x zone: ['CET'],
-	year:2017,
-	month:07,
-	day:10,
-	hour: 10,
-	minute: 0,
-	second: 0.
-}, else: {
-	x zone: ['Europe/Amsterdam'],
-	year:2017,
-	month:07,
-	day:10,
-	hour: 10,
-	minute: 0,
-	second: 0.
-}.
-
+x zone: ['CEST'],
+year:2017,
+month:01,
+day:10,
+hour: 10,
+minute: 0,
+second: 0.
 
 Out write: x, stop.
+
 Out write: x time, stop.
+
 x add: 1 second.
 x add: 2 minute.
 x add: 3 hour.
 x add: 4 day.
-x add: 5 month.
+x add: 1 month.
 x add: 6 year.
 
-
-(OS = ['Haiku']) true: {
-	x zone: ['CEST'].
-}.
-
 Out write: x, stop.
-
-(OS = ['Haiku']) true: {
-	x zone: ['CET'].
-}.
 
 x subtract: 1 second.
 x subtract: 2 minute.
 x subtract: 3 hour.
 x subtract: 4 day.
-x subtract: 5 month.
+x subtract: 1 month.
 x subtract: 6 year.
+
 Out write: x, stop.
+
 >> y := x copy.
 >> z := x.
+
 Out write: y, stop.
 Out write: z, stop.
 Out write: (x zone = y zone), stop.

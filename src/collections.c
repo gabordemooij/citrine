@@ -7,10 +7,6 @@
  *
  * @test497
  */
-
- * @test498
- */
-
 ctr_object* ctr_array_new(ctr_object* myclass, ctr_argument* argumentList) {
 	ctr_object* s = ctr_internal_create_object(CTR_OBJECT_TYPE_OTARRAY);
 	s->link = myclass;

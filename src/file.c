@@ -8,8 +8,6 @@
  * @test536
  */
 
- * @test537
- */
 
 ctr_object* ctr_file_new(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* s = ctr_object_make(myself, argumentList);

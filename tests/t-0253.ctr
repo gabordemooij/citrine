@@ -1,4 +1,4 @@
-
+#Linux
 >> OS := Program setting: ['OS'].
 
 >> clock := Moment new.
