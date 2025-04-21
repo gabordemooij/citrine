@@ -4,7 +4,7 @@ DLLTOOL ?= x86_64-w64-mingw32-dlltool
 BUILD_DIR         = ./build/Win64
 BUILD_OBJ_DIR     = $(BUILD_DIR)/obj
 BUILD_BIN_DIR     = $(BUILD_DIR)/bin
-BIN               = ctren.exe
+BIN               = xo.exe
 CFLAGS            = -O2 -g -mtune=native -Wpedantic -Wall -I src/i18n/en -D CTRLANG=en -D INCLUDETESTS \
 	   -D WIN\
        -D REPLACE_ERROR_SYSTEM     -D WINDOWS_ERROR_SYSTEM\
@@ -18,9 +18,9 @@ CSRCS             = $(shell find ./src -maxdepth 1 -type f -name '*.c')
 COBJS             = $(patsubst ./src/%.c, $(BUILD_OBJ_DIR)/%.o, $(CSRCS))
 TARGET            = $(COBJS)
 
-all: ctr
+all: xo
 
-ctr: $(TARGET)
+xo: $(TARGET)
 	@mkdir -p $(BUILD_BIN_DIR)
 	$(CC) $(TARGET) $(LDFLAGS) -shared -o $(BUILD_BIN_DIR)/$(BIN)
 	gendef - $(BUILD_BIN_DIR)/$(BIN) > $(BUILD_DIR)/ctren.def

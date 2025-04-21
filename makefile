@@ -1,16 +1,16 @@
 BUILD_DIR         = ./build
 BUILD_OBJ_DIR     = $(BUILD_DIR)/Linux/obj
 BUILD_BIN_DIR     = $(BUILD_DIR)/Linux/bin
-BIN               = ctren
+BIN               = xo
 CFLAGS            = -O2 -g -mtune=native -Wpedantic -Wall -I src/i18n/en -D CTRLANG=en -D INCLUDETESTS
 LDFLAGS           = -g -rdynamic -lm -ldl
 CSRCS             = $(shell find ./src -maxdepth 1 -type f -name '*.c')
 COBJS             = $(patsubst ./src/%.c, $(BUILD_OBJ_DIR)/%.o, $(CSRCS))
 TARGET            = $(COBJS)
 
-all: ctr
+all: xo
 
-ctr: $(TARGET)
+xo: $(TARGET)
 	@mkdir -p $(BUILD_BIN_DIR)
 	$(CC) $(TARGET) $(LDFLAGS) -o $(BUILD_BIN_DIR)/$(BIN)
 
