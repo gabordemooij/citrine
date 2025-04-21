@@ -1,2 +1,4 @@
-['SINGLE_LANGUAGE'].
+{
 >> q := (File list: ['nonexistant']).
+
+} except: { Out write: ['OK'], stop. }, start.
