@@ -81,4 +81,6 @@
 #define CTR_DICT_FX                         "effect:opties:"
 #define CTR_DICT_FREEZE_SET                 "bevriezen:"
 #define CTR_DICT_MASK_SET                   "maskeren:"
+#define CTR_DICT_JSONIFY_SET                "json-maken:"
+#define CTR_DICT_UNJSONIFY_SET              "van-json:"
 
