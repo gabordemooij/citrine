@@ -1,4 +1,4 @@
-
+#Full
 Media init.
 >> f := Font new.
 Out write: f, stop.

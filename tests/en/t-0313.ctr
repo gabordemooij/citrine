@@ -1,3 +1,4 @@
+#Full
 Media init.
 String on: ['escape:'] do: { :characters
 	>> str := self.

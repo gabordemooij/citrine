@@ -1,3 +1,4 @@
+#Full
 Media init.
 { >> x := JSON from-json: ['{}']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
 { >> x := JSON from-json: ['""']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.

@@ -1,3 +1,4 @@
+#Full
 Media new.
 >> response := JSON from-json: ['{"_status":"OK"}'].
 Out write: (response _status).
