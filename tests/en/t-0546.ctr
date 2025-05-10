@@ -1,4 +1,4 @@
 #Linux
  >> x := File list: Path /usr games.
- Out write: x, stop.
+ Out write: (x count > 0), stop.
  
