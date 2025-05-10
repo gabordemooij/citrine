@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [[ -z "$OS" ]]; then
+if [ -z "$OS" ]; then
 OS=$(uname -s)
 fi
 
@@ -27,7 +27,7 @@ fi
 echo "USING: ${MAKEFILE}"
 
 #Get list of ISO codes to build.
-ISOs=$(ls i18nsel)
+ISOs="en nl xx x3 x4"
 if [ $# -gt 0 ]; then
 	ISOs=$@
 fi

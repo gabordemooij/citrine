@@ -2,33 +2,7 @@
 ☞ memory management modes ≔ List ← 0 ; 1 ; 4 ; 8 ; 9 ; 12.
 
 ☞ languages ≔ List ← 
-	‘en’ ;
-	‘af’ ; ‘am’ ; ‘ar’ ; ‘az’ ;
-	‘be’ ; ‘bg’ ; ‘bn’ ; ‘bs’ ;
-	‘ca’ ; ‘ceb’ ; ‘co’ ; ‘cs’ ; ‘cy’ ;
-	‘da’ ; ‘de’ ;
-	‘el’ ; ‘es’ ; ‘et’ ; ‘eu’ ;
-	‘fa’ ; ‘fi’ ; ‘fr’ ; ‘fy’ ;
-	‘ga’ ; ‘gd’ ; ‘gl’ ; ‘gu’ ;
-	‘ha’ ; ‘haw’ ; ‘hi’ ; ‘hmn’ ; ‘hr’ ; ‘ht’ ; ‘hu’ ; ‘hy’ ;
-	‘id’ ; ‘ig’ ; ‘is’ ; ‘it’ ;
-	‘ja’ ; ‘jv’ ;
-	‘ka’ ; ‘kk’ ; ‘km’ ; ‘kn’ ; ‘ko’ ; ‘ku’ ; ‘ky’ ;
-	‘lb’ ; ‘lo’ ; ‘lt’ ; ‘lv’ ;
-	‘mg’ ; ‘mi’ ; ‘mk’ ; ‘ml’ ; ‘mn’ ; ‘mo’ ; ‘mr’ ; ‘ms’ ; ‘mt’ ; ‘my’ ;
-	‘ne’ ; ‘nl’ ; ‘no’ ; ‘ny’ ;
-	‘om’ ; ‘or’ ;
-	‘pa’ ; ‘pap’ ; ‘pl’ ; ‘ps’ ; ‘pt’ ; ‘pt_br’ ;
-	‘qu’ ;
-	‘ro’ ; ‘ru’ ; ‘rw’ ;
-	‘sd’ ; ‘si’ ; ‘sk’ ; ‘sl’ ; ‘sm’ ; ‘sn’ ; ‘so’ ; ‘sq’ ; ‘sr’ ; ‘st’ ; ‘su’ ; ‘sv’ ; ‘sw’ ;
-	‘ta’ ; ‘te’ ; ‘tg’ ; ‘th’ ; ‘tk’ ; ‘tl’ ; ‘tr’ ; ‘tt’ ;
-	‘ug’ ; ‘uk’ ; ‘ur’ ; ‘uz’ ;
-	‘vi’ ;
-	‘wo’ ;
-	‘xh’ ;
-	‘yak’ ; ‘yi’ ; ‘yo’ ;
-	‘zh1’ ; ‘zh2’ ; ‘zu’
+	‘en’ ; ‘nl’
 	.
 ☞ one way languages ≔ List ← ‘hy’ ; ‘en’.
 
