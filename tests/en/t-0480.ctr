@@ -1,0 +1,8 @@
+
+ >> x := ['12345678'].
+ >> y := x number.
+ Out write: x, stop.
+ Out write: y, stop.
+ Out write: x type, stop.
+ Out write: y type, stop.
+ 

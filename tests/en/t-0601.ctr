@@ -1,0 +1,13 @@
+{ :line
+
+>> kJ := line * 100.
+
+>> kcal := kJ * 0.239.
+
+Out write: (
+	['number1 kJ ➞ number2 kcal']
+	number1: kJ,
+	number2: kcal
+), stop.
+
+} * 10.

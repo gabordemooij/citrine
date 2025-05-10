@@ -1,0 +1,1 @@
+{ :i Out write: i. } × 5.

@@ -1,0 +1,4 @@
+
+ >> x := { :a :b :c <- a + b + c. } apply: 1 and: 2 and: 3.
+ Out write: x, stop.
+ 

@@ -1,0 +1,13 @@
+
+
+Number on: ['describe'] do: {
+	>> text := None.
+	( self = 0 ) true: {
+		text := ['zero'].
+	}.
+	( self = 1 ) true: {
+		text := ['one'].
+	}. <- text.
+}.
+
+Out write: 0 describe + 1 describe, stop.

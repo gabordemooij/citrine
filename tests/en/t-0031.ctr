@@ -1,0 +1,9 @@
+>> a := Object new.
+a on: ['setVal:'] do: { :v own value := v. }.
+a on: ['getVal'] do: { <- own value. }.
+a setVal: ['hi'].
+Out write: a getVal.
+>> b := a.
+b setVal: ['boo!'].
+Out write: a getVal.
+Out write: b getVal.

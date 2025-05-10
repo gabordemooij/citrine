@@ -1,0 +1,4 @@
+
+ >> x := Object new.
+ Out write: x, stop.
+ 

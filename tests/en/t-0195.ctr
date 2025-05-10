@@ -1,0 +1,4 @@
+['SINGLE_LANGUAGE'].
+[' line 2
+line 3 '].
+>> a := 1 ÷ 0.

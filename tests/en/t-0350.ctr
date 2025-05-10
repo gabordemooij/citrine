@@ -1,0 +1,4 @@
+['SINGLE_LANGUAGE'].
+>> x := ['['a']'].
+Out write: x code object type, stop.
+Out write: x code object string, stop.

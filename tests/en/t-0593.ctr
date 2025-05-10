@@ -1,0 +1,22 @@
+ >> x := Moment new
+year: 2020,
+month: 1,
+day: 2,
+hour: 10,
+minute: 0,
+second: 1.
+
+ Out write: x, stop.
+ x add: 6 second.
+ Out write: x, stop.
+ x add: 5 minute.
+ Out write: x, stop.
+ x add: 4 hour.
+ Out write: x, stop.
+ x add: 3 day.
+ Out write: x, stop.
+ x add: 2 month.
+ Out write: x, stop.
+ x add: 1 year.
+ Out write: x, stop.
+ 

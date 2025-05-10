@@ -1,0 +1,8 @@
+
+>> t := Moment new
+year: 2020,
+month: 1,
+day: 2.
+
+Out write: t time, stop.
+ 

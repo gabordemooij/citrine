@@ -1,0 +1,5 @@
+
+ >> x := List ← 1 ; 2 ; 3 ; 4 ; 5.
+ >> y := x from: 2 length: 2.
+ Out write: y, stop.
+ 

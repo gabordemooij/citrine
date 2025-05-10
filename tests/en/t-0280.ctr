@@ -1,0 +1,3 @@
+Out write: ['4th char = '] + (['xxx'] character: 4), stop.
+Out write: ['4th char = '] + (['xxx'] character: -1), stop.
+

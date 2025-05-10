@@ -1,0 +1,16 @@
+60 × {
+	>> x := (Number random % 6) + 1.
+	(x ≤ 6) false: { Out write: ['FAIL']. }.
+	(x ≥0) false: { Out write: ['FAIL']. }.
+	x := (Number random % 3) + 1.
+	(x < 3) false: { Out write: ['FAIL']. }.
+	(x>-1) false: { Out write: ['FAIL']. }.
+	x := ((Bool flip) number).
+	(x = 0 or: x = 1) false: { Out write: ['FAIL']. }.
+	x := ((True flip) number).
+	(x = 0 or: x = 1) false: { Out write: ['FAIL']. }.
+	x := (Bool flip either: ['HEAD'] or: ['TAIL']).
+	((x = ['HEAD']) or: (x = ['TAIL'])) false: { Out write: ['FAIL']. }.
+}.
+Out write: ['DONE'].
+

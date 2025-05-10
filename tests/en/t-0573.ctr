@@ -1,0 +1,15 @@
+
+ >> x := Moment new.
+ x year: 2020.
+ x month: 8.
+ x day: 12.
+ x hour: 10.
+ x minute: 2.
+ x second: 1.
+ Out write: x year.
+ Out write: x month.
+ Out write: x day.
+ Out write: x hour.
+ Out write: x minute.
+ Out write: x second.
+ 

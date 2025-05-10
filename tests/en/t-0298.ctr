@@ -1,0 +1,6 @@
+['SINGLE_LANGUAGE'].
+
+>> a := List ← 1 ; 2 ; 3.
+>> b := a copy.
+b put: 999 at: 2.
+Out write: (['a b'] a a b b), stop.

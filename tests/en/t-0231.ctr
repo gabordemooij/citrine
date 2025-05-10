@@ -1,0 +1,36 @@
+>> Slurp := Object new.
+
+Slurp on: ['new'] do: {
+	own str := [''].
+}.
+
+
+Slurp on: ['respond:'] do: { :blah
+		(own str = ['']) true: {
+			own str append: blah.
+		}, else: {
+			own str append: [' '].
+			own str append: blah.
+		}.
+}.
+
+Slurp on: ['respond:and:'] do: { :blah :blahah
+		own str append: (blah from: 0 length: (blah length - 1)).
+		own str append: [' '].
+		own str append: blahah.
+}.
+
+Slurp on: ['obtain'] do: {
+	>> buffer := own str.
+	own str := ['']. <- buffer.
+}.
+
+
+Slurp new hello world.
+Out write: (Slurp obtain), stop. 
+Out write: (Slurp obtain), stop. 
+Slurp hello world.
+>> x := Slurp new.
+Out write: (x obtain), stop. 
+x hi there.
+Out write: (x obtain), stop. 

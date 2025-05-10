@@ -1,0 +1,8 @@
+cinnamon,pineapple,choco,cheese
+cinnamon,pineapple
+apple
+apple,berry,choco,cheese
+Uncatched error has occurred.
+Expected list.
+#2 replace:length:with: (tests/en/t-0290.ctr: 27)
+#1 buy (tests/en/t-0290.ctr: 27)

@@ -1,0 +1,11 @@
+
+Number learn: ['plus:'] means: ['+'].
+Number on: ['+'] do: { :x
+	>> rate := 1.
+	>> currency := x qualifier.
+	(currency = ['euros']) true: {
+		rate := 2.
+	}. <- (self plus: (x × rate)).
+}.
+>> money := 3 dollars + 2 euros. 
+Out write: money, stop.

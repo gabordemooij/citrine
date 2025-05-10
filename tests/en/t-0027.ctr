@@ -1,0 +1,10 @@
+Bool on: ['xor:'] do: { :b <- ((self and: b not) or: (self not and: b)).
+}.
+
+Out write: ['Length is:'] + ['ABCD'] length.
+>> x := ['ABCDE'].
+
+Out write: ['Length is:'] + x length.
+((['ABC'] length + 1 = 4) and: (2 ≠ 3)) not not true: { Out write: ['Yes']. }.
+(((3 > 4) or: (4 > 2)) and: (True or: False), and: (True xor: True) not ) true: { Out write: ['Yes']. }.
+{ Out write: ['Running']. } start.

@@ -1,0 +1,6 @@
+>> cat := Object new.
+cat on: ['work'] do: {
+	this-task error: ['Cats have personel for that!'].
+	Out write: ['dont print this!'].
+}.
+{ cat work. } except: { :e Out write: e. }, start.

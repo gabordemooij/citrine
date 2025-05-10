@@ -1,0 +1,15 @@
+
+>> Animal := Object new.
+Animal on: ['eat'] do: {
+	Out write: ['munch! munch!'].
+}.
+
+>> Cat := Animal new.
+Cat on: ['eat'] do: {
+	Out write: ['meow'], stop.
+	self eat.
+}.
+
+
+>> blackCat := Cat new.
+blackCat eat.

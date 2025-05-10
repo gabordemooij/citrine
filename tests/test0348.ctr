@@ -1,4 +1,0 @@
-(True &&: True) true: { ✎ write: 1, stop. }.
-(True ||: False) true: { ✎ write: 2, stop. }.
-(False &&: True) true: { ✎ write: 1, stop. }.
-(False ||: False) true: { ✎ write: 2, stop. }.

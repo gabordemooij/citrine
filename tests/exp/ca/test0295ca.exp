@@ -1,5 +1,0 @@
-a b | Fals Fals És-cert És-cert -1
-b a | És-cert És-cert Fals Fals 1
-hallo hello | Fals Fals És-cert És-cert -4
-human human | Fals És-cert Fals És-cert 0
-x z | Fals Fals És-cert És-cert -2

@@ -1,0 +1,13 @@
+>> list := List new.
+list ~ ['hello'].
+Out write: list count.
+list append: ['world'].
+Out write: list count.
+Out write: list pop, write: list count.
+list append: ['there'].
+Out write: list count.
+Out write: (list position: 1), write: (list position: 2).
+list put: ['xmas'] at: 2.
+list put: ['merry'] at: 1.
+Out write: list count.
+Out write: (list position: 1), write: (list position: 2).

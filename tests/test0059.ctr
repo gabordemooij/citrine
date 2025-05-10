@@ -1,8 +1,0 @@
-☞ z ≔ List new.
-{
-	☞ x ≔ ‘hello’.
-	z append: x.
-} run.
-✎ write: (z position: 1).
-Program sweep.
-✎ write: (z position: 1).

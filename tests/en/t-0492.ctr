@@ -1,0 +1,5 @@
+
+ >> x := 0.
+ { x add: 1. } while: { <- (x < 6). }.
+ Out write: x, stop.
+ 

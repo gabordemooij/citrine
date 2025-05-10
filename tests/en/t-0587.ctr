@@ -1,0 +1,12 @@
+
+>> t := Moment new
+year: 2020,
+month: 1,
+day: 2,
+hour: 10,
+minute: 0,
+second: 1.
+
+Out write: t, stop.
+>> t2 := t copy.
+Out write: t2, stop.

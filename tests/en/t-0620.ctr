@@ -1,0 +1,6 @@
+>> csv := List new ; 1 ; 2 ; 3.
+csv on: ['string'] do: {
+	<- self combine: [','].
+}.
+
+Out write: csv, stop.

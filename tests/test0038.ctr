@@ -1,5 +1,0 @@
-☞ x ≔ Map new.
-x put: ‘hello’ at: ‘world’.
-☞ d ≔ x at: ‘world’.
-✎ write: d.
-

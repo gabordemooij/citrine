@@ -1,0 +1,12 @@
+['SINGLE_LANGUAGE'].
+String on: ['evaluate'] do: {
+	>> code := File new: ['/tmp/eval.ctr'].
+	code write: self string.
+	Program use: ['/tmp/eval.ctr'].
+}.
+List on: ['←'] do: {
+	Out write: ['Blaaaa'], stop.
+}.
+>> x := None.
+>> q := ['x := List ← 1.'].
+q evaluate.

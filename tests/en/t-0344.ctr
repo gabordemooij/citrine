@@ -1,0 +1,33 @@
+['SINGLE_LANGUAGE'].
+>> HTML := String new.
+HTML on: ['encode:'] do: { :tekst
+	self append: (tekst
+	replace: ['&'] with: ['&amp;'], 
+	replace: ['<'] with: ['&lt;'],
+	replace: ['>'] with: ['&gt;'],
+	replace: ['"'] with: ['&quot;']).
+}.
+>> blog := HTML new.
+blog append: ['<h1>'],
+     encode: ['Koffie & Thee'],
+     append: ['</h1>'].
+Out write: blog, stop.
+
+
+>> Roman := Number new.
+Roman on: ['stringy'] do: {
+	>> a := [''].
+	{ a append: ['I']. } × self. <- a.
+}.
+
+>> x := Roman new.
+x add: 3.
+Out write: x stringy, stop.
+
+>> Quantum := Bool new.
+Quantum on: ['true?'] do: { <- ['maybe True']. }.
+Out write: (Quantum new true?), stop.
+
+>> Nihil := None new.
+Nihil on: ['string'] do: { <- ['Nihil']. }.
+Out write: (Nihil new), stop.

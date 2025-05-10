@@ -1,0 +1,6 @@
+
+# test quote replacement in string with utf-8 chars
+>> x := ['☞ x ≔ ‘a’. ✎ ‘b’ ☞ c ≔ ‘d’'].
+x replace: ['‘'] with: ['\[''].
+x replace: ['’'] with: ['\']'].
+Out write: x, stop.

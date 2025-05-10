@@ -1,0 +1,10 @@
+
+{ :line
+
+>> kJ := line * 100.
+
+Out write: kJ, stop.
+
+Out write: kJ * 0.239, stop.
+
+} * 10.

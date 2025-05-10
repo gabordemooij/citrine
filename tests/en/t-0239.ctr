@@ -1,0 +1,161 @@
+['SINGLE_LANGUAGE'].
+
+List on: ['sum'] do: {
+	>> total := 0.
+	self each: { :index :element
+		total add: element.
+	}. <- total.
+}.
+
+>> a := True.
+
+
+
+a on: ['string'] do: {
+	>> answer := None.
+	( self = True ) true: {
+		answer := ['Yep'].
+	}, else: {
+		answer := ['Nope'].
+	}. <- answer.
+}.
+
+a on: ['number'] do: {
+	>> answer := None.
+	( self = True ) true: {
+		answer := 10.
+	}, else: {
+		answer := 20.
+	}. <- answer.
+}.
+
+>> b := 666.
+
+b on: ['string'] do: { <- ['Devil'].
+}.
+
+b on: ['bool'] do: { <- False.
+}.
+
+
+Out write: a, stop.  
+Out write: (90 + a), stop. 
+Out write: b, stop. 
+Out write: (True and: b), stop.
+
+a := List ← ['hello'] ; ['world'] ; True ; None ; 666. 
+a := a + ( List ← 1 ).
+Out write: a, stop.
+Out write: ((Dict new) put: None at: None), stop.
+Out write: a sum, stop. 
+
+
+{
+	a on: ['string'] do: { <- None. }.
+	a := [''] + a.
+} except: { :error
+	Out write: ['Error noted: '] + error, stop.
+}, start.
+
+
+
+{
+	a on: ['number'] do: { <- None. }.
+	a := 3 × a.
+} except: { :error
+	Out write: ['Error noted: '] + error, stop.
+}, start.
+
+
+{
+	a on: ['bool'] do: { <- None. }.
+	a := True and: a. 
+} except: { :error
+	Out write: ['Error noted: '] + error, stop.
+}, start.
+
+
+
+
+
+{
+	a on: ['string'] do: { <- False. }.
+	a := [''] + a.
+} except: { :error
+	Out write: ['Error noted: '] + error, stop.
+}, start.
+
+
+
+{
+	a on: ['number'] do: { <- True. }.
+	a := 3 × a.
+} except: { :error
+	Out write: ['Error noted: '] + error, stop.
+}, start.
+
+
+{
+	a on: ['boolean'] do: { <- 1. }.
+	a := True and: a.
+} except: { :error
+	Out write: ['Error noted: '] + error, stop.
+}, start.
+
+
+
+
+
+{
+	a on: ['string'] do: { <- 1. }.
+	a := [''] + a.
+} except: { :error
+	Out write: ['Error noted: '] + error, stop.
+}, start.
+
+
+
+{
+	a on: ['number'] do: { <- ['']. }.
+	a := 3 × a.
+} except: { :error
+	Out write: ['Error noted: '] + error, stop.
+}, start.
+
+
+{
+	a on: ['boolean'] do: { <- ['']. }.
+	a := True and: a.
+} except: { :error
+	Out write: ['Error noted: '] + error, stop.
+}, start.
+
+
+
+
+
+
+{
+	a on: ['string'] do: { <- (Dict new). }.
+	a := [''] + a. 
+} except: { :error
+	Out write: ['Error noted: '] + error, stop.
+}, start.
+
+
+
+{
+	a on: ['number'] do: { <- (Object new). }.
+	a := 3 × a. 
+} except: { :error
+	Out write: ['Error noted: '] + error, stop.
+}, start.
+
+
+{
+	a on: ['boolean'] do: { <- (Object new). }.
+	a := True and: a.
+} except: { :error
+	Out write: ['Error noted: '] + error, stop.
+}, start.
+

@@ -1,0 +1,5 @@
+
+ >> x := List new
+ fill: 10 with: ['X'].
+ Out write: x, stop.
+ 

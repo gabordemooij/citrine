@@ -1,0 +1,10 @@
+(2 < 9) true: { Out write: ['Yes, nine is less than ten.']. }.
+(9 < 2) true: { Out write: ['My logic fails']. }.
+Out write: (-2 + 6).
+Out write: (-3 - -3).
+>> TrueIsNice := 3.
+Out write: TrueIsNice.
+>> FalseIsBad := ['Not true!'].
+Out write: FalseIsBad.
+>> NilIsEmpty := ['Yep'].
+Out write: NilIsEmpty.

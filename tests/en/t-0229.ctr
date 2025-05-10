@@ -1,0 +1,4 @@
+['SINGLE_LANGUAGE'].
+Out write: (['hello'] hash: ['1234567890123456']), stop.
+Out write: (['hello'] hash: ['1234567890123456']), stop.
+Out write: (['hello'] hash: ['123']), stop.

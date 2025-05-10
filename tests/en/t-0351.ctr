@@ -1,0 +1,34 @@
+['SINGLE_LANGUAGE'].
+>> usedMemory1 := 0.
+>> usedMemory2 := 0.
+>> usedMemory3 := 0.
+>> usedMemory4 := 0.
+
+>> code := {
+	>> o := (
+		Dict new
+		a: (List ← 1 ; 2),
+		b: (List ← 3 ; 4)
+	).
+	>> s := o string.
+	>> o2 := s object.
+	(s  type = String type) true: { Out write: ['OK1'], stop. }.
+	(o2 type = Dict type) true: { Out write: ['OK2'], stop. }.
+}.
+
+Program memory-management: 0.
+['Memory 1 will be different because tracked blocks are added in bulk.'].
+Program clean-up.
+usedMemory1 := (Program memory ? 1).
+code start.
+Program clean-up.
+usedMemory2 := (Program memory ? 1).
+code start.
+Program clean-up.
+usedMemory3 := (Program memory ? 1).
+code start.
+Program clean-up.
+usedMemory4 := (Program memory ? 1).
+
+(usedMemory2 = usedMemory3 = usedMemory4) true: { Out write: ['OK3'], stop. }.
+ 

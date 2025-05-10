@@ -1,0 +1,12 @@
+>> x := 3 ♡♡.
+Out write: x, stop.
+x add: 3.
+Out write: x, stop.
+>> y := x + 3.
+Out write: y, stop.
+>> y := x copy.
+Out write: y, stop.
+y subtract: 1.
+x qualify: ['xx'].
+Out write: x, stop.
+Out write: y, stop.

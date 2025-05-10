@@ -1,0 +1,15 @@
+['SINGLE_LANGUAGE'].
+
+
+>> a := List ← 6 ; 5 ; 4 ; 3 ; 2 ; 1.
+Out write: a, stop.
+
+a shift.
+Out write: a, stop.
+
+a sort: { :a :b <- (a > b).
+}.
+
+Out write: a, stop.
+
+

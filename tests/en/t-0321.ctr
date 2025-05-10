@@ -1,0 +1,36 @@
+['SINGLE_LANGUAGE'].
+
+Program clean-up.
+
+>> Fruit := Object new.
+Fruit on: ['new'] do: {
+	>> f := self new.
+	f apples: 0. <- f.
+}.
+Fruit on: ['apples:'] do: { :a own apples := a. }.
+Fruit on: ['apples'] do: { <- own apples. }.
+Fruit on: ['+'] do: { :f
+	>> n := Fruit new.
+	n apples: (f apples + own apples). <- n.
+}.
+Number on: ['apples'] do: { <- ((Fruit new) apples: self).
+}.
+
+Fruit on: ['string'] do: { <- own apples + [' apples '].
+}.
+
+>> q := 3 apples + 4 apples.
+Out write: q, stop.
+
+
+
+
+q := 3 apples + 4 apples.
+Out write: q, stop.
+
+
+
+q := 3 apples + 4 apples.
+Out write: q, stop.
+
+

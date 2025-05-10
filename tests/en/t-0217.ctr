@@ -1,0 +1,6 @@
+['SINGLE_RUN'].
+Program memory-management: 0.
+Program memory: 180 MB.
+>> a := List new.
+a append: a.
+Out write: a, stop.

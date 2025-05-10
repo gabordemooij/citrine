@@ -1,0 +1,34 @@
+['SINGLE_RUN'].
+>> a := Object new.
+
+a on: ['code'] do: {
+	>> answer := ['‘A‘']’’. <- answer.
+}.
+
+>> b := ['B'].
+
+Out write: List ← a ; b, stop.
+Out write: (Dict new put: a at: a), stop.
+Out write: List ← ( List ← a ), stop.
+Out write: (Dict new put: (Dict new put: a at: a) at: (Dict new put: a at: a)), stop.
+Out write: (Dict new put: (List ← a) at: (List ← a)), stop.
+Out write: List ← (Dict new put: a at: a), stop.
+
+['paste output from above here, test if it is parseable:'].
+
+Out write: ['-- parse test --'], stop.
+
+>> x1 := List ← ['A‘']'] ; ['B'].
+>> x2 := (Dict new) put:['A‘']'] at:['A‘']'].
+>> x3 := List ← (List ← ['A‘']']).
+>> x4 := (Dict new) put:((Dict new) put:['A‘']'] at:['A‘']']) at:((Dict new) put:['A‘']'] at:['A‘']']).
+>> x5 := (Dict new) put:(List ← ['A‘']']) at:(List ← ['A‘']']).
+>> x6 := List ← ((Dict new) put:['A‘']'] at:['A‘']']).
+
+Out write: x1, stop.
+Out write: x2, stop.
+Out write: x3, stop.
+Out write: x4, stop.
+Out write: x5, stop.
+Out write: x6, stop.
+

@@ -1,0 +1,6 @@
+
+ >> x := List ← 1 ; 2 ; 3 ; 4.
+ >> y := x last.
+ Out write: x, stop.
+ Out write: y, stop.
+ 

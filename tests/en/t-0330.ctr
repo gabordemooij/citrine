@@ -1,0 +1,6 @@
+>> str := ['abc'].
+>> x := str character: 4.
+( x None? ) true: {
+	Out write: ['Found string boundary'].
+}.
+Out write: x, stop.

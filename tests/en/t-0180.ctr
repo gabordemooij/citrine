@@ -1,0 +1,57 @@
+String on: ['html'] do: { <- (
+		self
+		replace: ['&'] with: ['&amp;'],
+		replace: ['<'] with: ['&lt;'],
+		replace: ['>'] with: ['&gt;'],
+		replace: ['''] with: ['&apos;'],
+		replace: ['"'] with: ['&quot;']
+	).
+}.
+
+>> usedMemory1 := 0.
+>> usedMemory2 := 0.
+>> usedMemory3 := 0.
+>> usedMemory4 := 0.
+
+Program memory-management: 0.
+
+{
+>> txt := ['<h1>"Hell'o & Goodbye"</h1>'].
+Out write: txt copy html, stop.
+Out write: txt copy lower, stop.
+Out write: txt copy upper, stop.
+} start.
+
+Program clean-up.
+
+usedMemory1 := (Program memory ? 0).
+
+
+{
+>> txt := ['<h1>"Hell'o & Goodbye"</h1>'].
+Out write: txt copy html, stop.
+Out write: txt copy lower, stop.
+Out write: txt copy upper, stop.
+} start.
+
+Program clean-up.
+usedMemory2 := (Program memory ? 0).
+
+
+{
+>> txt := ['<h1>"Hell'o & Goodbye"</h1>'].
+Out write: txt copy html, stop.
+Out write: txt copy lower, stop.
+Out write: txt copy upper, stop.
+} start.
+
+Program clean-up.
+usedMemory3 := (Program memory ? 0).
+
+
+
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
+	Out write: ['No memory leaks here'].
+}, false: {
+	Out write: ['Leaking memory...'].
+}.

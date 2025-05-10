@@ -1,0 +1,23 @@
+>> To-Do := Object new.
+
+To-Do on: ['new'] do: {
+	own list := List new.
+}.
+
+To-Do on: ['nieuw'] do: {
+	own list := List new.
+}.
+
+To-Do on: ['+'] do: { :task
+	own list append: task.
+}.
+
+To-Do on: ['number of tasks?'] do: { <-  own list count.
+}.
+
+>> todos := 
+	To-Do new 
+	+ ['cook dinner'] 
+	+ ['clean room'].
+	
+Out write: ['You have $ tasks to do'] $ todos number of tasks?.

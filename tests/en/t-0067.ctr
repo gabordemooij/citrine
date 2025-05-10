@@ -1,0 +1,12 @@
+Out write: (0 + ([' a a a   '] last: ['a'])). 
+Out write: (0 + ([' trees '] find: ['ee'])). 
+>> h := ['can you find the needle in the haystack?'].
+Out write: (0 + (h find: ['can'])). 
+Out write: (0 + (h find: [''])). 
+Out write: (0 + ([''] find: ['a'])). 
+Out write: (0 + (['a'] find: ['a'])). 
+Out write: (0 + (['the needle is at the end'] find: ['end'])). 
+Out write: (0 + (['the needle is at the end'] last: ['end'])). 
+Out write: (0 + (['friend, it is at the end'] last: ['end'])). 
+Out write: (0 + (['friend, it is at the end'] find: ['end'])). 
+Out write: (0 + (['a'] last: ['a'])). 

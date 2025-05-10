@@ -1,0 +1,26 @@
+#Linux
+
+ >> t := Moment new.
+ 
+t zone: ['Europe/Amsterdam'].
+t year: 2020, month: 8, day: 2, hour: 21, minute: 2, second: 1.
+
+>> a := t hour.
+>> ams := t zone.
+
+t zone: ['US/Hawaii'].
+>> b := t hour.
+>> hw := t zone.
+
+Out
+write: (
+	['It's diff in zone2 than in zone1']
+	zone1: ams,
+	zone2: hw,
+	diff: (
+		(b > a)
+		either: ['later'] or: ['earlier']
+	)
+),
+stop.
+ 

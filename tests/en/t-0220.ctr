@@ -1,0 +1,9 @@
+
+Out write: ( ['hello'] = None ), stop.
+Out write: ( ['hello'] ≠ None ), stop.
+Out write: ( 2 > None ), stop.
+Out write: ( 2 < None ), stop.
+Out write: ( 2 ≥ None ), stop.
+Out write: ( 2 ≤ None ), stop.
+Out write: ( True = None ), stop.
+Out write: ( False ≠ None ), stop.

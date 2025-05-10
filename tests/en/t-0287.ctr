@@ -1,0 +1,6 @@
+['SINGLE_LANGUAGE'].
+>> a := Dict new.
+>> b := Dict new.
+a message: ['omvang:'] arguments: (List ← ['groot']).
+b omvang: ['groot'].
+(a omvang = b omvang) true: { Out write: ['OK'], stop. }.

@@ -1,0 +1,13 @@
+List ← ‘A‘ ; ['B']
+(Dict new) put:‘A‘ at:['Object']
+List ← (List ← ‘A‘)
+(Dict new) put:((Dict new) put:‘A‘ at:['Object']) at:['(Dict new) put:‘A‘ at:\['Object\']']
+(Dict new) put:(List ← ‘A‘) at:['List ← ‘A‘']
+List ← ((Dict new) put:‘A‘ at:['Object'])
+-- parse test --
+List ← ['A‘'] ; ['B']
+(Dict new) put:['A‘'] at:['A‘']
+List ← (List ← ['A‘'])
+(Dict new) put:((Dict new) put:['A‘'] at:['A‘']) at:['(Dict new) put:\['A‘\'] at:\['A‘\']']
+(Dict new) put:(List ← ['A‘']) at:['List ← \['A‘\']']
+List ← ((Dict new) put:['A‘'] at:['A‘'])

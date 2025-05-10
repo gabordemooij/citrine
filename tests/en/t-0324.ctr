@@ -1,0 +1,36 @@
+['SINGLE_LANGUAGE'].
+
+>> Animal := Object new.
+>> Factory := Object new.
+
+Animal on: ['new'] do: {
+	>> animal := self new.
+	animal sound: ['?']. <- animal.
+}.
+
+Animal on: ['sound:'] do: { :s
+	own sound := s.
+}.
+
+Animal on: ['sound'] do: { <- own sound.
+}.
+
+>> Dog := Object new.
+>> Cat := Object new.
+
+Dog on: ['new'] do: { <- Animal new sound: ['woof!'].
+}.
+
+Cat on: ['new'] do: { <- Animal new sound: ['meow!'].
+}.
+
+Out write: Dog new sound, stop.
+Out write: Cat new sound, stop.
+
+Factory on: ['mix:and:'] do: { :beast1 :beast2 <- Animal new sound: (
+		( beast1 sound from: 1 length: 2 ) +
+		( beast2 sound from: 3 length: 5 )
+	).
+}.
+
+Out write: (Factory mix: Dog new and: Cat new) sound, stop.

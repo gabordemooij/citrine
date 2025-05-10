@@ -1,0 +1,4 @@
+#Linux
+>> x := Program os: Command uname.
+Out write: x.
+ 

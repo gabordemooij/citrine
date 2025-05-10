@@ -81,3 +81,5 @@
 #define CTR_DICT_FX                         "effect:options:"
 #define CTR_DICT_FREEZE_SET                 "freeze:"
 #define CTR_DICT_MASK_SET                   "mask:"
+#define CTR_DICT_JSONIFY_SET                "jsonify:"
+#define CTR_DICT_UNJSONIFY_SET              "from-json:"

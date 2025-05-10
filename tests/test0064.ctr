@@ -1,3 +1,0 @@
-(‘b’ = ‘b’) true: { ✎ write: ‘equal’.}.
-(‘a’ ≠ ‘b’) true: { ✎ write: ‘unequal’.}.
-(‘a’ ≠ ‘b’) true: { ✎ write: ‘unequal’.}.

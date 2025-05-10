@@ -1,0 +1,7 @@
+List ← ['red'] ; ['green'] ; ['blue']
+List ← ['red'] ; ['green'] ; ['blue'] ; 1
+List ← ['red'] ; ['green'] ; ['blue'] ; 2
+List ← ['red'] ; ['green'] ; ['blue'] ; 3
+List ← ['red'] ; ['green'] ; ['blue'] ; -2
+List ← ['red'] ; ['green'] ; ['blue'] ; 4
+List ← ['red'] ; ['green'] ; ['blue'] ; 13

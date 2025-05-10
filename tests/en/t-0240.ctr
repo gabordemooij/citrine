@@ -1,0 +1,73 @@
+# test qualifiers
+
+>> $ := Object new.
+
+$ on: ['respond:'] do: { :x
+	
+	>> operation := x character: 1.
+	>> valuta := x character: 2.
+	>> money := x offset: 2.
+	
+	>> amount := 0.
+
+	( operation = ['+'] ) true: {
+		( valuta = ['£'] ) true: { amount := 1.28 × money. }.
+	}. <- amount.
+}.
+
+
+
+>> x := $ +£20.
+
+Out write: x, stop.
+
+
+>> Fruit := Object new.
+
+Fruit on: ['new'] do: {
+	>> f := self new.
+	f apples: 0.
+	f oranges: 0. <- f.
+}.
+
+Fruit on: ['apples:'] do: { :a own apples := a. }.
+Fruit on: ['oranges:'] do: { :p own oranges := p. }.
+Fruit on: ['apples'] do: { <- own apples. }.
+Fruit on: ['oranges'] do: { <- own oranges. }.
+
+Fruit on: ['+'] do: { :f
+	
+	>> n := Fruit new.
+	f add: 1.
+	
+	n apples: (f apples + own apples).
+	n oranges:  (f oranges  + own oranges). <- n.
+}.
+
+Fruit on: ['string'] do: { <- ( own apples string + [' apples and '] + own oranges + [' oranges'] ).
+}.
+
+Number on: ['apples'] do: { <- ((Fruit new) apples: self).
+}.
+
+Number on: ['apple'] do: { <- ((Fruit new) apples: self).
+}.
+
+Number on: ['oranges'] do: { <- ((Fruit new) oranges: self).
+}.
+
+
+
+
+Out write: (1 apple + 3 oranges + 4 apples), stop.
+
+
+String on: ['twice'] do: { <- ((self string) + (self string)).
+}.
+
+
+
+Out write: ['❤❤❤'] twice.
+
+
+

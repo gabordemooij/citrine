@@ -1,0 +1,14 @@
+>> HTML := Object new.
+HTML on: ['respond:'] do: { :tag 
+	Out write: (['<tag>'] tag: tag), stop.
+}.
+HTML on: ['respond:and:'] do: { :tag :html 
+	Out write: (
+		['<tag>innerHTML</tag>']
+		tag: tag - [':'],
+		innerHTML: html
+	), stop.
+}.
+>> html := HTML new.
+html body h1: ['header'].
+

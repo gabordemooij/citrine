@@ -1,0 +1,4 @@
+
+ >> x := ['qwerty'] from: 2 length: 3.
+ Out write: x, stop.
+ 

@@ -1,0 +1,11 @@
+
+ >> a :=
+	List new
+	~ ['aaa']
+	~ ['bbb']
+	~ ['ccc'].
+
+ >> b := List ← ['x'] ; ['y'].
+ Out write: a, stop.
+ Out write: b, stop.
+ 

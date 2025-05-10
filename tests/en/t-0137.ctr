@@ -1,0 +1,82 @@
+
+
+
+Program memory-management: 0.
+
+>> x := 0.
+>> y := ['Hello'].
+>> q := { ['Empty']. }.
+>> p := True.
+>> a := List ← 1 ; 2 ; 3 ; 4.
+
+>> usedMemory1 := 0.
+>> usedMemory2 := 0.
+>> usedMemory3 := 0.
+>> usedMemory4 := 0.
+
+Program clean-up.
+usedMemory1 := (Program memory ? 1).
+
+
+
+
+x := 1.
+y := ['Hello'].
+q := { ['Empty']. }.
+p := True.
+a := List ← 1 ; 2 ; 3 ; 5.
+
+Program clean-up.
+usedMemory2 := (Program memory ? 1).
+
+
+
+
+x := 2.
+y := ['Hello'].
+q := { ['Empty']. }.
+p := True.
+a := List ← 1 ; 2 ; 3 ; 4.
+
+Program clean-up.
+usedMemory3 := (Program memory ? 1).
+
+
+
+
+x := 3.
+y := ['Hello'].
+q := { ['Empty']. }.
+p := True.
+a := List ← 1 ; 2 ; 3 ; 5.
+
+
+Program clean-up.
+usedMemory4 := (Program memory ? 1).
+
+
+
+
+
+x := 4.
+y := ['Hello'].
+q := { ['Empty']. }.
+p := True.
+a := List ← 1 ; 2 ; 3 ; 4.
+
+Program clean-up.
+>> usedMemory5 := (Program memory ? 1).
+
+
+
+
+(usedMemory1 = usedMemory2 = usedMemory3 = usedMemory4 = usedMemory5) true: {
+	Out write: ['Memory usage remains stable.'], stop.
+}, else: {
+	Out write: ['Used memory not stable.'], stop.
+	Out write: usedMemory1, stop.
+	Out write: usedMemory2, stop.
+	Out write: usedMemory3, stop.
+	Out write: usedMemory4, stop.
+	Out write: usedMemory5, stop.
+}.

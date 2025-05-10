@@ -1,0 +1,11 @@
+>> items := Dict new.
+items put: ['green'] at: ['color-1'].
+items put: ['orange'] at: ['color-2'].
+items put: ['red'] at: ['color-3'].
+>> i := 0.
+>> s := [''].
+items each: { :key :color
+	Out write: ['color #'] + i + [' is: '] + color + [' '].
+	i add: 1.
+}.
+Out write: i + [' colors!'].

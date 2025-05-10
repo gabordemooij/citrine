@@ -1,0 +1,15 @@
+>> a := ['hello'].
+>> b := ['hello'].
+>> z := a.
+>> c := None.
+>> q := Object new.
+>> p := q.
+(a equals: a) true: { Out write: ['Y1']. }.
+(a equals: b) true: { Out write: ['Y2']. }.
+(a equals: c) true: { Out write: ['Y3']. }.
+(a equals: z) true: { Out write: ['Y4']. }.
+(z equals: a) true: { Out write: ['Y5']. }.
+(q equals: q) true: { Out write: ['Y6']. }.
+(p equals: q) true: { Out write: ['Y7']. }.
+(p equals: a) true: { Out write: ['Y8']. }.
+(p equals: None) true: { Out write: ['Y9']. }.

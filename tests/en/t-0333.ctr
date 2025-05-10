@@ -1,0 +1,10 @@
+Media init.
+{ >> x := JSON from-json: ['{}']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON from-json: ['""']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON from-json: ['']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON from-json: ['"']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON from-json: ['\’']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON from-json: ['\‘\’']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON from-json: ['0']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON from-json: ['"x"']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.
+{ >> x := JSON from-json: ['[]']. 	Out write: x, stop. } except: { :e	Out write: e, stop. }, start.

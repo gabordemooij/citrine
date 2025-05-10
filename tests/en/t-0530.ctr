@@ -1,0 +1,5 @@
+
+ >> x := Dict new.
+ x aaa: ['bbb'], ccc: ['ddd'].
+ Out write: x values, stop.
+ 

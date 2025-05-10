@@ -1,0 +1,4 @@
+
+>> mapUp := { :i :v :m m put: ((m ? i) upper) at: i. }.
+>> a := ['lololol'] split: ['o'], map: mapUp, combine: ['x'].
+Out write: a.

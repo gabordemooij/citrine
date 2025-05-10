@@ -1,0 +1,56 @@
+Number on: ['factorial'] do: {
+	>> total := 1.
+	{ :index total multiply-by: (self - index). } × self. <- total.
+}.
+
+>> usedMemory1 := 0.
+>> usedMemory2 := 0.
+>> usedMemory3 := 0.
+>> usedMemory4 := 0.
+
+Program memory-management: 0.
+
+{
+2 exponent factorial.
+Out write: (11 modulo: 3), stop.
+Out write: (3.4 round), stop.
+Out write: (7.1 ceil), stop.
+Out write: (7.9 floor), stop.
+}
+start.
+
+Program clean-up.
+
+usedMemory1 := (Program memory ? 0).
+
+{
+2 exponent factorial.
+Out write: (11 modulo: 3), stop.
+Out write: (3.4 round), stop.
+Out write: (7.1 ceil), stop.
+Out write: (7.9 floor), stop.
+}
+start.
+
+Program clean-up.
+usedMemory2 := (Program memory ? 0).
+
+
+{
+2 exponent factorial.
+Out write: (11 modulo: 3), stop.
+Out write: (3.4 round), stop.
+Out write: (7.1 ceil), stop.
+Out write: (7.9 floor), stop.
+} start.
+
+Program clean-up.
+usedMemory3 := (Program memory ? 0).
+
+
+
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
+	Out write: ['No memory leaks here'].
+}, false: {
+	Out write: ['Leaking memory...'].
+}.

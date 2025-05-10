@@ -1,0 +1,3 @@
+Media init.
+>> x := JSON from-json: ['{"box":""}'].
+Out write: x, stop.

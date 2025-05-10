@@ -1,0 +1,4 @@
+(True and: True) true: { Out write: 1, stop. }.
+(True or: False) true: { Out write: 2, stop. }.
+(False and: True) true: { Out write: 1, stop. }.
+(False or: False) true: { Out write: 2, stop. }.

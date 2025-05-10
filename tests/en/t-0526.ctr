@@ -1,0 +1,5 @@
+
+ >> x := Dict new.
+ x put: ['aaa'] at: ['bbb'].
+ Out write: x, stop.
+ 

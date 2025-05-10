@@ -1,0 +1,4 @@
+
+ >> x := ['123'] characters.
+ Out write: x, stop.
+ 

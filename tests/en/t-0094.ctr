@@ -1,0 +1,10 @@
+
+>> f := { :x
+	>> result := 0.
+	(x = 1) true: {
+		result := 1.
+	}, else: {
+		result := x × (f apply: (x - 1)).
+	}. <- result.
+}.
+Out write: (f apply: 4). 

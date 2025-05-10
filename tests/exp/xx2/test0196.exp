@@ -1,7 +1,0 @@
-Uncatched error has occurred.
-Key not found: name
-#5 name (../../tests/tmp/runner0: 13)
-#4 name (../../tests/tmp/runner0: 22)
-#3 + (../../tests/tmp/runner0: 22)
-#2 name (../../tests/tmp/runner0: 25)
-#1 write: (../../tests/tmp/runner0: 25)

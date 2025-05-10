@@ -1,0 +1,21 @@
+{
+	>> a := List new.
+	a append: 1.
+	a append: 2.
+	Out write: (a combine: [',']), stop.
+	a put: 3 at: 3.
+	Out write: (a combine: [',']), stop.
+	a put: 4 at: 11.
+	Out write: (a combine: [',']), stop.
+	a shift.
+	a shift.
+	a shift.
+	Out write: (a combine: [',']), stop.
+	a put: 9 at: 1.
+	Out write: (a combine: [',']), stop.
+	a put: 6 at: -1.
+} except: { :e
+	Out write: ['Uncatched error has occurred.↵'] + e, stop.
+}, start.
+
+

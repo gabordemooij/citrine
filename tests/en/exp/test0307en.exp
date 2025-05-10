@@ -1,0 +1,2 @@
+List ← ['x'] ; ['x'] ; ['x']
+(Dict new) put:['x'] at:['3'], put:['x'] at:['2'], put:['x'] at:['1'], put:3 at:['three'], put:2 at:['two'], put:1 at:['one']

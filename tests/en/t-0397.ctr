@@ -1,0 +1,11 @@
+
+ >> q := Object new.
+ q on: ['abc:'] do: { :p
+ 		own abc := p.
+ }.
+ q on: ['abc'] do: {
+		<- own abc.
+ }.
+ >> a := q new abc: ['123'].
+ Out write: a abc, stop.
+ 

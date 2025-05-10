@@ -1,0 +1,17 @@
+Start include test
+String,Number
+String,Bool
+Number,String
+Number,Bool
+Bool,Number
+Bool,Number
+Bool,String
+Bool,String
+=== String test ===
+123
+False
+True
+
+End include test
+Are my variables still intact?
+123

@@ -1,0 +1,12 @@
+
+>> ⚄ := Object new.
+
+⚄ on: ['type'] do: { <- ['Object'].
+}.
+
+Out write: ['⇿?↵'] ? ⚄ type.
+Out write: ['⇿?↵'] ? Moment type.
+Out write: ['⇿?↵'] ? Program type.
+Out write: ['⇿?↵'] ? (1 ≠ 2).
+Out write: ['⇿?↵'] ? (2 ≥ 1).
+Out write: ['⇿?↵'] ? (1 ≤ 2).

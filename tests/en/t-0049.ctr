@@ -1,0 +1,12 @@
+>> f1 := File new: ['notafile'].
+>> f2 := File new: ['/tmp/test.txt'].
+(f2 exists) true: { f2 delete.}.
+Out write: f2 path.
+f2 write: ['Hello!'].
+f2 append: ['World!'].
+Out write: f2 read.
+(f2 exists) true: { Out write: ['!']. }.
+(f1 exists) true: { Out write: ['!']. }.
+Out write: f2 size, write: f1 size.
+f2 delete. Out write: f2 size.
+

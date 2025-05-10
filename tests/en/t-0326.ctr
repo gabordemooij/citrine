@@ -1,0 +1,7 @@
+>> Roundabout := Object new.
+Roundabout on: ['circle:'] do: { :x
+	Out write: x, stop.
+	(x < 3) true: { self circle: x + 1. }.
+}.
+
+Roundabout circle: 1.

@@ -1,0 +1,7 @@
+
+ >> x := File new: (Path /tmp: ['a.txt']).
+ x write: ['123'].
+ Out write: x read, stop.
+ x append: ['345'].
+ Out write: x read, stop.
+ 

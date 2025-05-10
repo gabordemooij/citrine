@@ -1,0 +1,6 @@
+>> a := 1.
+>> b := a + 3.
+a add: 2.
+
+Out write: a, stop.
+Out write: b, stop.

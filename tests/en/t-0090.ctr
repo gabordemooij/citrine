@@ -1,0 +1,36 @@
+Out write: ['1,2,3,4,5,6,7,8,9,A,'], stop.
+>> Scope := Object new.
+Scope on: ['initialize:'] do: { :x own property := x. }.
+Scope on: ['confirm'] do: { Out write: [',']. }.
+Scope on: ['test'] do: {
+	Out write: own property.
+	self confirm.
+	( 1 = 1 ) true: { Out write: own property. self confirm. }.
+	( 1 = 0 ) false: { Out write: own property. self confirm. }.
+	>> y := 2. { Out write: own property. self confirm. } while: { y subtract: 1. <- (y > 0). }.
+	{ Out write: own property. self confirm. } × 1.
+	(List ← 1) each: {  Out write: own property. self confirm. }.
+	(List ← 1 ; 2) sort: {  Out write: own property. self confirm. <- 0. }.
+	(Dict new one: ['item']) each: { Out write: own property. self confirm. }.
+	{ 1 ÷ 0. } except: { Out write: own property. self confirm. }, start.
+	Out stop.
+}.
+>> scope1 := Scope new.
+scope1 initialize: ['X'].
+scope1 test.
+>> function := { 
+	own property := ['Y'].
+	Out write: own property.
+	self confirm.
+	( 1 = 1 ) true: { Out write: own property. self confirm. }.
+	( 1 = 0 ) false: { Out write: own property. self confirm. }.
+	>> y := 2. { Out write: own property. self confirm. } while: { y subtract: 1. <- (y > 0). }.
+	{ Out write: own property. self confirm. } × 1.
+	(List ← 1) each: {  Out write: own property. self confirm. }.
+	(List ← 1 ; 2) sort: {  Out write: own property. self confirm. <- 0. }.
+	(Dict new one: ['item']) each: { Out write: own property. self confirm. }.
+	{ 1 ÷ 0. } except: { Out write: own property. self confirm. }, start.
+	Out stop.
+}.
+function on: ['confirm'] do: { Out write: [',']. }.
+function apply: 1 and: 2.

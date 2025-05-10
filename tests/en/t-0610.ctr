@@ -1,0 +1,28 @@
+
+>> Rectangle := Object new.
+
+Rectangle on: ['area'] do: {
+	<- own length * own width.
+}.
+
+Rectangle on: ['length:'] do: { :length
+	own length := length.
+}.
+
+Rectangle on: ['width:'] do: { :width
+	own width := width.
+}.
+
+Rectangle on: ['new'] do: {
+	# this will not result into an infinite loop
+	>> rectangle := self new.
+	rectangle length: 0, width: 0.
+	<- rectangle.
+}.
+
+>> a := Rectangle new.
+Out write: a area, stop. #0
+
+>> b := Rectangle new length: 2, width: 3.
+Out write: b area, stop. #6
+

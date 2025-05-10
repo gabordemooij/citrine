@@ -1,0 +1,1 @@
+{ 1 ÷ 0. } except: ({ 1 ÷ 0. } except: { :e Out write: e, stop. }), start.

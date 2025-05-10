@@ -1,0 +1,10 @@
+Out write: ['象形'] length.
+Out write: (['Hello!'] from: 1 length: 3).
+Out write: (['Hello!'] from: 2 length: 3).
+>> a := 2.
+>> b := 5.
+Out write: (['Hello!'] from: ( a ) length: b - a).
+Out write: (['形声字形聲字'] from: 2 length: 3).
+Out write: ['形声字形聲字'] length.
+Out write: ['形声a'] length.
+Out write: ['Organ'] + ['Works'].

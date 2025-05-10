@@ -1,0 +1,15 @@
+
+>> q := 2.
+>> c := 0.
+>> f := {
+	c add: 1.
+	>> x := 1.
+	(c < 3) true: {
+		>> q := 0.
+		f start.
+	}.
+	x add: 2.
+	Out write: x.
+}.
+f start.
+Out write: q.

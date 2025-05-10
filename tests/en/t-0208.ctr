@@ -1,0 +1,10 @@
+Media new.
+>> response := JSON from-json: ['{"_status":"OK"}'].
+Out write: (response _status).
+>> response := JSON new from-json: ['{"_status":"OK"}'].
+Out write: (response _status).
+>> response := JSON new new from-json: ['{"_status":"OK"}'].
+Out write: (response _status).
+>> response := JSON new new can you convert from-json: ['{"_status":"OK"}'].
+Out write: (response _status).
+

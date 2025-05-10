@@ -1,0 +1,4 @@
+
+ >> x := 4.5.
+ Out write: x floor, stop.
+ 

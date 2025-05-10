@@ -1,0 +1,55 @@
+
+>> XX := Object new.
+>> X := Object new.
+
+XX on: ['QQ'] do: { <- 1. }.
+XX on: ['Q'] do: { <- 1. }.
+XX on: ['QQ:'] do: { <- 1. }.
+XX on: ['QQ:QQ:'] do: { <- 1. }.
+
+X on: ['QQ'] do: { <- 1. }.
+X on: ['Q'] do: { <- 1. }.
+X on: ['QQ:'] do: { <- 1. }.
+X on: ['QQ:QQ:'] do: { <- 1. }.
+
+Out write: (Program XX), stop.
+Out write: (Program find: ['XX']), stop.
+Out write: (Program find: ['X']), stop.
+
+Out write: (Program XX: ['QQ']), stop.
+Out write: (Program XX: ['Q']), stop.
+Out write: (Program XX: ['QQ:']), stop.
+Out write: (Program XX: ['QQ:QQ:']), stop.
+
+Out write: (Program X: ['QQ']), stop.
+Out write: (Program X: ['Q']), stop.
+Out write: (Program X: ['QQ:']), stop.
+Out write: (Program X: ['QQ:QQ:']), stop.
+
+Out write: (Program X ['QQ']), stop.
+Out write: (Program X ['Q']), stop.
+Out write: (Program X ['QQ:']), stop.
+Out write: (Program X ['QQ:QQ:']), stop.
+
+Out write: (Program YY), stop.
+Out write: (Program find: ['YY']), stop.
+Out write: (Program find: ['Y']), stop.
+
+Out write: (Program YY: ['QQ']), stop.
+Out write: (Program YY: ['Q']), stop.
+Out write: (Program YY: ['QQ:']), stop.
+Out write: (Program YY: ['QQ:QQ:']), stop.
+
+Out write: (Program Y: ['QQ']), stop.
+Out write: (Program Y: ['Q']), stop.
+Out write: (Program Y: ['QQ:']), stop.
+Out write: (Program Y: ['QQ:QQ:']), stop.
+
+Out write: (Program Y ['QQ']), stop.
+Out write: (Program Y ['Q']), stop.
+Out write: (Program Y ['QQ:']), stop.
+Out write: (Program Y ['QQ:QQ:']), stop.
+
+Out write: (Program X: -1), stop.
+Out write: (Program X None), stop.
+

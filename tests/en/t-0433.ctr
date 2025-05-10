@@ -1,0 +1,12 @@
+
+ >> x := 1.
+ {
+ 	(x = 1) true: { Out write: ['x']. }, break.
+ 	Out write: ['y'].
+ } procedure.
+
+ {
+ 	(x = 1) true: { Out write: ['x']. }, break.
+ 	Out write: ['y'].
+ } × 1.
+ 

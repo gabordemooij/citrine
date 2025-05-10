@@ -1,0 +1,4 @@
+
+ >> x := ['☘☘☘'].
+ Out write: x length, stop.
+ 

@@ -1,0 +1,12 @@
+['SINGLE_LANGUAGE'].
+
+
+>> q := ['abc'].
+>> x := q characters.
+Out write: x, stop.
+Out write: x count, stop.
+
+q := ['기나 긴 여행'].
+x := q characters.
+Out write: x, stop.
+Out write: (x count), stop.

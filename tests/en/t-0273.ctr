@@ -1,0 +1,4 @@
+['SINGLE_LANGUAGE'].
+
+>> a := List new fill: 42 with: ['x'].
+Out write: a, stop.

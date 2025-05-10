@@ -1,0 +1,2 @@
+>> a := Program input.
+Out write: a, stop.

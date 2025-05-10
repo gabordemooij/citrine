@@ -1,0 +1,4 @@
+Uncatched error has occurred.
+Key not found: aa
+#2 aa (tests/en/t-0336.ctr: 7)
+#1 write: (tests/en/t-0336.ctr: 7)

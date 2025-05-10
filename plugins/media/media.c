@@ -4896,7 +4896,9 @@ void begin(){
 	FreeConsole();
 	#endif
 	ctr_internal_media_reset();
+	#ifndef TEST
 	ctr_internal_media_init();
+	#endif
 	#ifdef FFI
 	CtrMediaDataBlob = ctr_media_new(CtrStdObject, NULL);
 	CtrMediaDataBlob->link = CtrStdObject;
@@ -4956,9 +4958,11 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_DIALOG_SET ), &ctr_media_dialog );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "website:" ), &ctr_media_website );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_FX ), &ctr_media_fx );
+	#ifndef TEST
 	#ifdef WIN
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring(CTR_DICT_WRITE), &ctr_media_console_write );
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring( CTR_DICT_STOP ), &ctr_media_console_brk );
+	#endif
 	#endif
 	imageObject = ctr_img_new(CtrStdObject, NULL);
 	imageObject->link = CtrStdObject;

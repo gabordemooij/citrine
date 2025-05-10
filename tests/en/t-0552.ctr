@@ -1,0 +1,4 @@
+#Linux
+ >> x := Program argument: 1.
+ Out write: x, stop.
+ 

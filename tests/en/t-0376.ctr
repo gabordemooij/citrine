@@ -1,0 +1,4 @@
+
+ >> x := None.
+ Out write: x None?, stop.
+ 

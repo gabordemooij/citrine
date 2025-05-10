@@ -1,0 +1,4 @@
+>> t := Object new.
+t on: ['hi'] do: { Out write: ['Hi!']. }.
+t hi.
+t hi.

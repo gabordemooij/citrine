@@ -1,0 +1,5 @@
+
+ >> x := List ← 2 ; 1 ; 3.
+ x sort: { :a :b <- a < b.}.
+ Out write: x, stop.
+ 

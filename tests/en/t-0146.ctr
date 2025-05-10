@@ -1,0 +1,5 @@
+['SINGLE_LANGUAGE'].
+
+{
+	undef := 1.
+} start.

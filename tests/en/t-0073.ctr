@@ -1,0 +1,10 @@
+
+>> blue := ['blue'].
+>> colors := List ← ['yellow']; ['green']; blue ; ['red']; ['orange']; ['purple']; ['pink'].
+>> palette := colors from: 3 length: 3.
+Out write: (palette combine: [',']), stop. 
+blue := ['cyan'].
+Out write: blue, stop. 
+colors put: ['black'] at: 3. 
+Out write: (colors combine: [',']), stop. 
+Out write: (palette combine: [',']), stop. 

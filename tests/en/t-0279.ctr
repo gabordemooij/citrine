@@ -1,0 +1,6 @@
+>> str := ['xxx←'].
+Out write: ['length before skip = '] + str length, stop.
+>> str2 := str offset: 3.
+Out write: ['length after skip = '] + str2 length, stop.
+
+

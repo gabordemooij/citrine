@@ -1,0 +1,76 @@
+
+
+>> usedMemory1 := 0.
+>> usedMemory2 := 0.
+>> usedMemory3 := 0.
+>> usedMemory4 := 0.
+
+Program memory-management: 0.
+
+{ :i Out write: i. } × 4.
+Out stop.
+{ :i Out write: (4 - i). } × 4.
+Out stop.
+( 1 > 2 ) false: { Out write: ['BLOCK 1'], stop. }.
+( 2 > 1 ) true:  { Out write: ['BLOCK 2'], stop. }.
+
+>> i := 0.
+{ Out write: i. i add: 1. } while: { <- ( i < 3). }.
+Out stop.
+
+i := 3.
+{ Out write: i. i := i - 1. } while: { <- ( i > 0). }.
+Out stop.
+
+
+Program clean-up.
+
+usedMemory1 := (Program memory ? 1).
+
+
+{ :i  Out write: i. } × 4.
+Out stop.
+{ :i  Out write: (4 - i). } × 4.
+Out stop.
+( 1 > 2 ) false: { Out write: ['BLOCK 1'], stop. }.
+( 2 > 1 ) true:  { Out write: ['BLOCK 2'], stop. }.
+
+>> i := 0.
+{ Out write: i. i add: 1. } while: { <- ( i < 3). }.
+Out stop.
+
+i := 3.
+{ Out write: i. i := i - 1. } while: { <- ( i > 0). }.
+Out stop.
+
+
+
+Program clean-up.
+usedMemory2 := (Program memory ? 1).
+
+
+{ :i Out write: i. } × 4.
+Out stop.
+{ :i Out write: (4 - i). } × 4.
+Out stop.
+( 1 > 2 ) false: { Out write: ['BLOCK 1'], stop. }.
+( 2 > 1 ) true:  { Out write: ['BLOCK 2'], stop. }.
+
+>> i := 0.
+{ Out write: i. i add: 1. } while: { <- ( i < 3). }.
+Out stop.
+
+i := 3.
+{ Out write: i. i := i - 1. } while: { <- ( i > 0). }.
+Out stop.
+
+Program clean-up.
+usedMemory3 := (Program memory ? 1).
+
+
+
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
+	Out write: ['No memory leaks here'].
+}, false: {
+	Out write: ['Leaking memory...'].
+}.

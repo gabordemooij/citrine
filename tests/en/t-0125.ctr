@@ -1,0 +1,9 @@
+File close. 
+File open. 
+>> f := File new: ['/tmp/from.txt'].
+f write: ['hello'].
+Out write: ['file contains: '] + (f read) + ['\
+'].
+
+
+

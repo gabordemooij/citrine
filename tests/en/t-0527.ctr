@@ -1,0 +1,9 @@
+
+ >> x :=
+ Dict new
+ aaa: 11.90,
+ bbb: 12.99,
+ ccc: 13.00.
+ Out write: ( x ? ['aaa'] ), stop.
+ Out write: ( x ccc ), stop.
+ 

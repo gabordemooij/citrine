@@ -1,0 +1,21 @@
+>> t := True.
+(t = True) true: { Out write: ['T']. }.
+(t = False) true: { Out write: ['F']. }.
+Out write: ['|'].
+>> t := False.
+(t = True) true: { Out write: ['T']. }.
+(t = False) true: { Out write: ['F']. }.
+Out write: ['|'].
+>> f := True.
+(t = True and: f = False) true: { Out write: ['T']. }.
+(t = False and: f = True) true: { Out write: ['F']. }.
+Out write: ['|'].
+>> n := None.
+(n None?) true: { Out write: ['T']. }.
+(n None?) false: { Out write: ['F']. }.
+Out write: ['|'].
+(f Boolean?) true: { Out write: ['T']. }.
+(f Boolean?) false: { Out write: ['F']. }.
+
+
+

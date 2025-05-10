@@ -1,0 +1,6 @@
+
+ >> x := List ← 1 ; 2 ; 3.
+ Out write: x, stop.
+ x pop.
+ Out write: x, stop.
+ 

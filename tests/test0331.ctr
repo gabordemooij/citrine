@@ -1,6 +1,0 @@
-☞ str ≔ ‘abc’.
-☞ x ≔ str character: 4.
-( x Nil? ) true: {
-	✎ write: ‘Found string boundary’.
-}.
-✎ write: x, stop.

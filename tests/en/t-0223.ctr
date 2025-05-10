@@ -1,0 +1,42 @@
+>> x := Moment new.
+x zone: ['CEST'],
+year:2017,
+month:01,
+day:10,
+hour: 10,
+minute: 0,
+second: 0.
+
+Out write: x, stop.
+
+Out write: x time plain, stop.
+
+x add: 1 second.
+x add: 2 minute.
+x add: 3 hour.
+x add: 4 day.
+x add: 1 month.
+x add: 6 year.
+
+Out write: x, stop.
+
+x subtract: 1 second.
+x subtract: 2 minute.
+x subtract: 3 hour.
+x subtract: 4 day.
+x subtract: 1 month.
+x subtract: 6 year.
+
+Out write: x, stop.
+
+>> y := x copy.
+>> z := x.
+
+Out write: y, stop.
+Out write: z, stop.
+Out write: (x zone = y zone), stop.
+Out write: (x time = y time), stop.
+Out write: (x = z), stop.
+Out write: x yearday, stop.
+Out write: x weekday, stop.
+Out write: x week, stop.

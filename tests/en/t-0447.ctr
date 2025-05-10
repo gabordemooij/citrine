@@ -1,0 +1,5 @@
+
+ >> x := 49.
+ >> y := x sqrt.
+ Out write: y, stop.
+ 

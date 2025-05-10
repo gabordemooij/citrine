@@ -1,0 +1,2 @@
+#Linux
+Out write: (Program os: ['cat tests/assets/nullbyte.txt | ./bin/Linux/ctren tests/assets/stdin_test.ctr']).

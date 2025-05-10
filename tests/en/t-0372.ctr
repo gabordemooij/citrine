@@ -1,0 +1,6 @@
+['SINGLE_LANGUAGE'].
+Out write: (None else: 1), stop.
+Out write: (None else: None, else: 2), stop.
+Out write: (None else: None, else: None, else: 3), stop.
+
+

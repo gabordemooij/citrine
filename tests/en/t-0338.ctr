@@ -1,0 +1,7 @@
+['SINGLE_LANGUAGE'].
+{ 
+	>> x := List ← 1 ; 2.
+	this-task error: ['error!'].
+} except: { :error 
+	Out write: error, stop. 
+}, start.

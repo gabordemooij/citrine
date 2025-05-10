@@ -1,0 +1,4 @@
+
+ >> x := Number between: 0 and: 10.
+ Out write: ((x >=: 0) and: (x <=: 10)), stop.
+ 

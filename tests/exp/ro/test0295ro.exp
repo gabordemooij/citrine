@@ -1,5 +1,0 @@
-a b | Fals Fals Adevărat Adevărat -1
-b a | Adevărat Adevărat Fals Fals 1
-hallo hello | Fals Fals Adevărat Adevărat -4
-human human | Fals Adevărat Fals Adevărat 0
-x z | Fals Fals Adevărat Adevărat -2

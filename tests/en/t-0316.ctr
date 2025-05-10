@@ -1,0 +1,28 @@
+>> Grandfather := Object new.
+Grandfather on: ['greet'] do: {
+	Out write: ['Ave!'], stop.
+}.
+>> Father := Grandfather new.
+Father on: ['greet'] do: {
+	Out write: ['Hello'], stop.
+	self greet.
+}.
+>> Son := Father new.
+Son on: ['greet'] do: {
+	Out write: ['Hi'], stop.
+	self greet.
+}.
+
+Son greet.
+
+>> Roundabout := Object new.
+Roundabout on: ['circle:'] do: { :x
+	Out write: x, stop.
+	(x < 3) true: { self recursive circle: x + 1. }.
+}.
+
+Roundabout circle: 1.
+
+>> x := 1.
+>> increment := { (x ≤ 3) true: { Out write: x, stop. x add: 1.  increment start. }. }.
+increment start.

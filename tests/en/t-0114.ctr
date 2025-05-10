@@ -1,0 +1,4 @@
+>> welcome := List ← ['Hello'] ; ['World'] ; ['Welcome'] ; ['To'] ; ['Citrine'].
+welcome each: { :key :value
+	Out write: (key - 0) + [':']+ value, stop.
+}.

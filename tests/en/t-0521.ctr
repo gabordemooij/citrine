@@ -1,0 +1,5 @@
+
+ >> x := List ← ['a'] ; ['b'] ; ['c'].
+ >> y := x string.
+ Out write: y, stop.
+ 

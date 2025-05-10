@@ -1,0 +1,5 @@
+
+Out write: ( {
+	Out write: ['START'], stop. <- ['END'].
+	Out write: ['DONT'], stop.
+} start ), stop.

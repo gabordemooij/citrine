@@ -1,0 +1,4 @@
+#Linux
+>> f := File new: (Path tmp: ['test.txt']).
+Out write: f path, stop.
+ 

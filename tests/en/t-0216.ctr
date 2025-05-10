@@ -1,0 +1,3 @@
+>> a := Dict new.
+a property: a.
+{ a string. } except: { Out write: ['OK'], stop. }, start.

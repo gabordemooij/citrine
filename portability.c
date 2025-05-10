@@ -75,9 +75,8 @@ void* ctr_internal_plugin_find(ctr_object* key) {
 	realPathModName = realpath(pathNameMod, NULL);
 	FILE* exists = fopen(realPathModName,"r");
 	if (!exists) {
-		printf("File not found: %s \n", realPathModName);
 		free(realPathModName);
-		exit(1);
+		return;
 	}
 	fclose(exists);
 	handle = LoadLibrary(realPathModName);

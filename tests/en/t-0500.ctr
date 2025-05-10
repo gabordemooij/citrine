@@ -1,0 +1,7 @@
+
+ >> x := List new.
+ x append: 3.
+ x ; 3.
+ x ~ 3.
+ Out write: x, stop.
+ 

@@ -1,5 +1,0 @@
-a b | Nein Nein Ja Ja -1
-b a | Ja Ja Nein Nein 1
-hallo hello | Nein Nein Ja Ja -4
-human human | Nein Ja Nein Ja 0
-x z | Nein Nein Ja Ja -2

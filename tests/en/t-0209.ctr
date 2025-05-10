@@ -1,0 +1,15 @@
+['SINGLE_LANGUAGE'].
+(Function new: ['List by: 0.']) start.
+>> x := Function new: ['Out write: \['hello there\'], stop.'].
+x start.
+Out write: ['+ 3 to Number gives: ? '] ? (Number + 3), stop.
+Out write: ['Adding 3 to Number gives: ? '] ? (Number add: 3), stop.
+Out write: (['Appending something to String gives: [this]'] [this]: (String append: ['something'])), stop.
+Out write: Bool string, stop.
+Out write: Function string, stop.
+Out write: ['Can I execute a code block without assigning code?'], stop.
+Out write: (Function × 10), stop.
+Out write: (Function true: { ['Empty']. }), stop.
+Out write: (Object done), stop.
+Out write: (['This <path> has no file'] <path>: File path), stop.
+Out write: List count, stop.

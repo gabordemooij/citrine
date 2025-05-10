@@ -1,0 +1,5 @@
+['SINGLE_LANGUAGE'].
+>> t1 := Moment new.
+>> t2 := Moment copy.
+t2 add: 2 day.
+Out write: (t1 day ≠ t2 day).

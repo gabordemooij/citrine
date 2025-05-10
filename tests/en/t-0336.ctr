@@ -1,0 +1,8 @@
+#Linux
+['SINGLE_LANGUAGE'].
+{
+	xx yy.
+	uu mm: q.
+} except: { :e 
+	Out write: aa. 
+}, start.

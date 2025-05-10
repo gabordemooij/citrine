@@ -1,0 +1,74 @@
+>> x := None.
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := True.
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := False.
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := 1.
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := -3.
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := 9.2.
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := -9.2.
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := List new.
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := List ← 1 ; 2.
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := List ← 1 ; (List ← 2).
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := List ← 1 ; (List ← 2) ; 3.
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := List ← 1 ; ((Dict new) put:['a'] at:['b']) ; 3.
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := List ← 1 ; ((Dict new) put:(List ← 9) at:['b']) ; 3.
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := (Dict new) put:2 at:['1'].
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := (Dict new) put:2 at:['x'].
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := (Dict new) put:(List ← 1 ; 2) at:['x'].
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+>> x := (Dict new) put:(List ← ((Dict new) put:['q'] at:['y']) ; 2) at:['x'].
+Out write: x code object type, stop.
+Out write: x code object string, stop.
+
+Out write: ['2 + 3'] object, stop.
+Out write: ['2 + 3'] object type, stop.
+
+
+
+

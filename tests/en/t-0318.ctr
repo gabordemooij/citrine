@@ -1,0 +1,10 @@
+['SINGLE_LANGUAGE'].
+
+>> file := File new: File messagedoesnotexist.
+>> file := File new: None.
+>> file := File new: 123.
+>> file := File new: True.
+>> file := File new: False.
+>> file := File new: Object.
+
+Out write: ['I did not crash!'], stop.

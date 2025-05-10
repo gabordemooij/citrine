@@ -1,0 +1,18 @@
+
+{ :i
+	Out write: ['This is step #'] + ( ( i ) + 1 ), stop.
+} × 6.
+
+{ :i
+	Out write: ['This is step #'] + ( 3 - ( i ) ), stop.
+} × 6.
+
+{ :i
+	Out write: ['NEVER!'], stop.
+} × 0.
+
+
+
+{ :i
+	Out write: ['This is step #'] + ( -3 + ( ( i ) ÷ 2 ) ), stop.
+} × 11.

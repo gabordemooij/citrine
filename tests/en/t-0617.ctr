@@ -1,0 +1,7 @@
+>> a := 1.
+>> b := a copy.
+>> c := a.
+Out write: a = b, stop.
+Out write: a = c, stop. 
+Out write: ( a equals: b ), stop.
+Out write: ( a equals: c ), stop.

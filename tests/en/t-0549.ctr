@@ -1,0 +1,5 @@
+#Windows
+>> x := File new.
+Out write: x, stop.
+>> y := File new: (Path /tmp: ['a.txt']).
+Out write: y, stop.

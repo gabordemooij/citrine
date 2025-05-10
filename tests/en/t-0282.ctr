@@ -1,0 +1,15 @@
+>> Italian places := List ← ['Venice'] ; ['Rome'] ; ['Pompeii'] ; ['Naples'].
+
+Out write: (Italian places first), stop.
+Out write: (Italian places last), stop.
+Out write: (Italian places penultimate), stop.
+
+>> Moon places := List new.
+
+Out write: (Moon places first), stop.
+Out write: (Moon places last), stop.
+Out write: (Moon places penultimate), stop.
+
+Italian places do pop pop pop done.
+
+Out write: (Italian places penultimate), stop.

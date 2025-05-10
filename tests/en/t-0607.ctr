@@ -1,0 +1,15 @@
+>> Combination := List new.
+
+Combination on: ['append:'] do: { :el
+	self 
+	find: el, None? true: { self append: el. }.
+}.
+
+>> colours := Combination new.
+colours
+	append: ['red'],
+	append: ['green'],
+	append: ['blue'],
+	append: ['red'].
+
+Out write: colours, stop.

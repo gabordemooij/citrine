@@ -1,0 +1,18 @@
+>> invoice := Object new.
+invoice on: ['start'] do: {
+        own number := 0.
+}.
+
+invoice on: ['number'] do: {
+        own number add: 1.
+        <- own number copy.
+}.
+
+>> year-invoice := invoice new.
+year-invoice on: ['start:'] do: { :year
+	own number := year.
+}.
+
+year-invoice start: 202000.
+Out write: year-invoice number, stop.
+Out write: year-invoice number, stop.

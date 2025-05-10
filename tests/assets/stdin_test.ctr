@@ -1,1 +1,1 @@
-✎ write: ‘% characters.↵’ % (Program input length).
+Out write: ['% characters.\n'] % (Program input length).

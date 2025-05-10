@@ -1,0 +1,4 @@
+>> a := List new ; 1 ; 2 ; 3.
+>> b := a copy ; 4.
+Out write: a, stop
+write: b, stop.

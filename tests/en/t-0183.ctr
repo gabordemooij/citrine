@@ -1,0 +1,55 @@
+
+
+>> usedMemory1 := 0.
+>> usedMemory2 := 0.
+>> usedMemory3 := 0.
+>> usedMemory4 := 0.
+
+Program memory-management: 0.
+
+>> o := Object new.
+>> o2 := Object new.
+Out write: o None?, stop.
+Out write: o type, stop.
+Out write: ( o equals: o ), stop.
+Out write: ( o equals: o2 ), stop.
+Out write: o myself, stop.
+Out write: ( o do done ), stop.
+
+Program clean-up.
+
+usedMemory1 := (Program memory ? 0).
+
+
+o := Object new.
+o2 := Object new.
+Out write: o None?, stop.
+Out write: o type, stop.
+Out write: ( o equals: o ), stop.
+Out write: ( o equals: o2 ), stop.
+Out write: o myself, stop.
+Out write: ( o do done ), stop.
+
+Program clean-up.
+usedMemory2 := (Program memory ? 0).
+
+
+o := Object new.
+o2 := Object new.
+Out write: o None?, stop.
+Out write: o type, stop.
+Out write: ( o equals: o ), stop.
+Out write: ( o equals: o2 ), stop.
+Out write: o myself, stop.
+Out write: ( o do done ), stop.
+
+Program clean-up.
+usedMemory3 := (Program memory ? 0).
+
+
+
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
+	Out write: ['No memory leaks here'].
+}, false: {
+	Out write: ['Leaking memory...'].
+}.

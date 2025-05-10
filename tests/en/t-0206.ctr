@@ -1,0 +1,2 @@
+>> str := ['write:'].
+Out message: ['write:'] arguments: (List new ; ['hello']).

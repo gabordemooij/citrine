@@ -1,0 +1,20 @@
+
+
+>> Cat := Object new.
+
+Cat on: ['new'] do: {
+	own sound := ['meow!'].
+}.
+
+Cat on: ['nieuw'] do: {
+	own sound := ['meow!'].
+}.
+
+Cat on: ['makeSound'] do: { <- own sound.
+}.
+
+Cat on: ['greet'] do: { <- self makeSound.
+}.
+
+>> cat := Cat new.
+Out write: cat greet.

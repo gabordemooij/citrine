@@ -1,3 +1,0 @@
-☞ Greeter ≔ Object new.
-Greeter on: ‘greet’ do: { ✎ write: ‘Hello World!’.}.
-Greeter greet.

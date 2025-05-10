@@ -1,0 +1,4 @@
+
+ >> x := File new: (Path /tmp unknown).
+ Out write: x exists, stop.
+ 

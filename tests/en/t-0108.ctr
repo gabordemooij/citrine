@@ -1,0 +1,5 @@
+
+(7 odd?) true: { Out write: ['7 is an ODD NUMBER'], stop. }, else: { Out write: ['WRONG!']. }.
+(4 even?) true: { Out write: ['4 is an EVEN NUMBER'], stop. }, else: { Out write: ['WRONG!']. }.
+(5 even?) true: { Out write: ['WRONG!']. }, else: { Out write: ['5 is NOT AN EVEN NUMBER'], stop. }.
+(6 odd?) true: { Out write: ['WRONG!']. }, else: { Out write: ['6 is NOT AN ODD NUMBER'], stop. }.

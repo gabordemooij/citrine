@@ -1,0 +1,32 @@
+>> w := ['A_bottle_of_Whisky and a rare steak.'].
+Out write: ['=== Basic test, grab the bottle! ==='], stop.
+Out write: ['>']+(w copy from:3 length: 6), stop.
+Out write: ['>']+(w copy from:9 length: -6), stop.
+Out write: ['>']+(w copy from:3 length: 6), stop.
+Out write: ['>']+(w copy from:9 length: -6), stop.
+Out write: ['=== Take a single char ==='], stop.
+Out write: ['>']+(w copy from:8 length: 1), stop.
+Out write: ['>']+(w copy from:8 length: 1), stop.
+Out write: ['=== The 0 case, empty string ==='], stop.
+Out write: ['>']+(w copy from:8 length: 0), stop.
+Out write: ['>']+(w copy from:8 length: 0), stop.
+Out write: ['=== Edge case, first character only ==='], stop.
+Out write: ['>']+(w copy from:1 length: 1), stop.
+Out write: ['>']+(w copy from:1 length: 1), stop.
+Out write: ['>']+(w copy from:2 length: -1), stop.
+Out write: ['>']+(w copy from:2 length: -1), stop.
+Out write: ['=== Edge case, last character only ==='], stop.
+Out write: ['>']+(w copy from:36 length: 1), stop.
+Out write: ['>']+(w copy from:36 length: 1), stop.
+Out write: ['>']+(w copy from:37 length: -1), stop.
+Out write: ['>']+(w copy from:37 length: -1), stop.
+Out write: ['=== Out of bounds, empty string ==='], stop.
+Out write: ['>']+(w copy from:37 length: 37), stop.
+Out write: ['>']+(w copy from:37 length: 47), stop.
+Out write: ['>']+(w copy from:-1 length: -2), stop.
+Out write: ['>']+(w copy from:-2 length: -1), stop.
+Out write: ['=== Part out of bounds, full string ==='], stop.
+Out write: ['>']+(w copy from:-20 length: 90), stop.
+Out write: ['>']+(w copy from:91 length: -20), stop.
+Out write: ['>']+(w copy from:-20 length: 90), stop.
+Out write: ['>']+(w copy from:91 length: -120), stop.

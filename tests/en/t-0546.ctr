@@ -1,0 +1,4 @@
+#Linux
+ >> x := File list: Path /usr games.
+ Out write: x, stop.
+ 

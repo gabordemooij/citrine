@@ -1,0 +1,2 @@
+>> y := { x := 2. }.
+{ >> x := 1. y start. Out write: x. } start.

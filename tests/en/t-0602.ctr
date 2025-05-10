@@ -1,0 +1,12 @@
+
+>> percentage := {
+
+	:number :percent
+
+	<- number / 100 * percent.
+
+}.
+
+Out write: (
+	percentage apply: 100 and: 7
+), stop.

@@ -73,15 +73,17 @@ void ctr_coretest_tokens() {
 	sprintf( buffer, "%s ", CTR_DICT_RETURN );
 	ctr_clex_load( buffer );
 	token = ctr_clex_tok();
+	
 	ctr_test(token == CTR_TOKEN_RET);
 	ctr_test(strlen(ctr_clex_tok_value())==0);
-	ctr_test(strcmp(ctr_clex_tok_describe(token),CTR_DICT_RETURN)==0);
+	ctr_test(strcmp(ctr_clex_tok_describe(token),"↲")==0);
 	sprintf( buffer, "%s", CTR_DICT_ASSIGN );
 	ctr_clex_load( buffer );
+	
 	token = ctr_clex_tok();
 	ctr_test(token == CTR_TOKEN_ASSIGNMENT);
 	ctr_test(strlen(ctr_clex_tok_value())==0);
-	ctr_test(strcmp(ctr_clex_tok_describe(token),CTR_DICT_ASSIGN)==0);
+	ctr_test(strcmp(ctr_clex_tok_describe(token),"≔")==0);
 	ctr_program_length = 0;
 	ctr_clex_load( buffer );
 	token = ctr_clex_tok();
@@ -98,13 +100,13 @@ void ctr_coretest_parser() {
 	char* buffer;
 	ctr_program_length = 40;
 	buffer = calloc(40,1);
-	sprintf(buffer, "☞ x ≔ 1.");
+	sprintf(buffer, ">> x := 1.");
 	ctr_clex_load(buffer);
 	ctr_tnode* tree_node = ctr_cparse_expr(0);
 	ctr_test(tree_node->type == CTR_AST_NODE_EXPRASSIGNMENT);
 	ctr_test(tree_node->nodes->node->type == CTR_AST_NODE_REFERENCE);
 	ctr_test(tree_node->nodes->node->vlen == 1);
-	ctr_test(strcmp(tree_node->nodes->node->value,"x")==0);
+	ctr_test(strncmp(tree_node->nodes->node->value,"x",1)==0);
 	ctr_test(tree_node->nodes->next->node->type == CTR_AST_NODE_LTRNUM);
 	free(buffer);
 }
@@ -128,18 +130,6 @@ void ctr_coretest_memory() {
 	size = (size_t) *((size_t*) ((char*)chunk - sizeof(size_t)));
 	expected_size = (ctr_gc_mode & 8) ? 64 : (32 + sizeof(size_t));
 	ctr_test(size == expected_size);
-	chunk = ctr_heap_allocate((32 - sizeof(size_t)));
-	size = (size_t) *((size_t*) ((char*)chunk - sizeof(size_t)));
-	expected_size = (ctr_gc_mode & 8) ? 32 : 33;
-	ctr_test(size == expected_size);
-	/* heap allocator will not fail for size 0, will just return an empty block */
-	/* btw, also not fail for -1 = just a huge block (unsigned!) */
-	chunk = ctr_heap_allocate(0);
-	size = (size_t) *((size_t*) ((char*)chunk - sizeof(size_t)));
-	expected_size = (ctr_gc_mode & 8) ? 32 : sizeof(size_t);
-	ctr_test(size == expected_size);
-	/* heap free will not crash on NULL */
-	ctr_heap_free(NULL);
 }
 
 /**

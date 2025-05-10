@@ -1,0 +1,6 @@
+
+ >> x := ['abc'] contains: ['a'].
+ >> y := ['abc'] contains: ['z'].
+ Out write: x, stop.
+ Out write: y, stop.
+ 

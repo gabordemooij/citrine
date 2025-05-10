@@ -1,0 +1,4 @@
+>> sheep := ['Dolly'].
+>> clone := sheep copy.
+clone replace: ['l'] with: ['n'].
+Out write: sheep, stop.

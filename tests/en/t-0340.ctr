@@ -1,0 +1,5 @@
+['SINGLE_RUN'].
+Program memory-management: 12.
+>> a := Object new.
+a on: ['string'] do: { 1. <- ['q']. }.
+Out write: List ← a, stop.

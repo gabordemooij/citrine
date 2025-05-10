@@ -1,0 +1,117 @@
+Out write: ['Test Number Representations'], stop.
+
+Out write: 0.00001, stop.
+Out write: 0.10000, stop.
+Out write: 1.00000, stop.
+Out write: 1.00001, stop.
+Out write: 1.00000, stop.
+Out write: 0.00000, stop.
+
+Out write: 1000.00001, stop.
+Out write: 1000.10000, stop.
+Out write: 1001.00000, stop.
+Out write: 1001.00001, stop.
+Out write: 1001.00000, stop.
+Out write: 1000.00000, stop.
+
+Out write: -0.00001, stop.
+Out write: -0.10000, stop.
+Out write: -1.00000, stop.
+Out write: -1.00001, stop.
+Out write: -1.00000, stop.
+Out write: -0.00000, stop.
+
+Out write: -1000.00001, stop.
+Out write: -1000.10000, stop.
+Out write: -1001.00000, stop.
+Out write: -1001.00001, stop.
+Out write: -1001.00000, stop.
+Out write: -1000.00000, stop.
+
+Out write: 0.00001 ab, stop.
+Out write: 0.10000 ab, stop.
+Out write: 1.00000 ab, stop.
+Out write: 1.00001 ab, stop.
+Out write: 1.00000 ab, stop.
+Out write: 0.00000 ab, stop.
+
+Out write: 1000.00001 ab, stop.
+Out write: 1000.10000 ab, stop.
+Out write: 1001.00000 ab, stop.
+Out write: 1001.00001 ab, stop.
+Out write: 1001.00000 ab, stop.
+Out write: 1000.00000 ab, stop.
+
+Out write: -0.00001 ab, stop.
+Out write: -0.10000 ab, stop.
+Out write: -1.00000 ab, stop.
+Out write: -1.00001 ab, stop.
+Out write: -1.00000 ab, stop.
+Out write: -0.00000 ab, stop.
+
+Out write: -1000.00001 ab, stop.
+Out write: -1000.10000 ab, stop.
+Out write: -1001.00000 ab, stop.
+Out write: -1001.00001 ab, stop.
+Out write: -1001.00000 ab, stop.
+Out write: -1000.00000 ab, stop.
+
+
+
+
+Out write: 0.00001 plain, stop.
+Out write: 0.10000 plain, stop.
+Out write: 1.00000 plain, stop.
+Out write: 1.00001 plain, stop.
+Out write: 1.00000 plain, stop.
+Out write: 0.00000 plain, stop.
+
+Out write: 1000.00001 plain, stop.
+Out write: 1000.10000 plain, stop.
+Out write: 1001.00000 plain, stop.
+Out write: 1001.00001 plain, stop.
+Out write: 1001.00000 plain, stop.
+Out write: 1000.00000 plain, stop.
+
+Out write: -0.00001 plain, stop.
+Out write: -0.10000 plain, stop.
+Out write: -1.00000 plain, stop.
+Out write: -1.00001 plain, stop.
+Out write: -1.00000 plain, stop.
+Out write: -0.00000 plain, stop.
+
+Out write: -1000.00001 plain, stop.
+Out write: -1000.10000 plain, stop.
+Out write: -1001.00000 plain, stop.
+Out write: -1001.00001 plain, stop.
+Out write: -1001.00000 plain, stop.
+Out write: -1000.00000 plain, stop.
+
+Out write: 0.00001 ab plain, stop.
+Out write: 0.10000 ab plain, stop.
+Out write: 1.00000 ab plain, stop.
+Out write: 1.00001 ab plain, stop.
+Out write: 1.00000 ab plain, stop.
+Out write: 0.00000 ab plain, stop.
+
+Out write: 1000.00001 ab plain, stop.
+Out write: 1000.10000 ab plain, stop.
+Out write: 1001.00000 ab plain, stop.
+Out write: 1001.00001 ab plain, stop.
+Out write: 1001.00000 ab plain, stop.
+Out write: 1000.00000 ab plain, stop.
+
+Out write: -0.00001 ab plain, stop.
+Out write: -0.10000 ab plain, stop.
+Out write: -1.00000 ab plain, stop.
+Out write: -1.00001 ab plain, stop.
+Out write: -1.00000 ab plain, stop.
+Out write: -0.00000 ab plain, stop.
+
+Out write: -1000.00001 ab plain, stop.
+Out write: -1000.10000 ab plain, stop.
+Out write: -1001.00000 ab plain, stop.
+Out write: -1001.00001 ab plain, stop.
+Out write: -1001.00000 ab plain, stop.
+Out write: -1000.00000 ab plain, stop.
+

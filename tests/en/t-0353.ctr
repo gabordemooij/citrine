@@ -1,0 +1,10 @@
+Number on: ['factorial'] do: {
+	>> answer := 1.
+	(self > 0) true: {
+		>> this := self.
+		>> next := this - 1.
+		answer := (this × next recursive factorial).
+	}. <- answer.
+}.
+
+{ :x Out write: x factorial, stop. } × 10.

@@ -1,0 +1,53 @@
+Program memory-management: 0.
+List on: ['sum'] do: {
+	>> total := 0.
+	self each: { :index :element
+		total add: element.
+	}. <- total.
+}.
+
+>> usedMemory1 := 0.
+>> usedMemory2 := 0.
+>> usedMemory3 := 0.
+>> usedMemory4 := 0.
+
+
+
+>> f := File new: ['/tmp/test.txt'].
+f write: ['Lorem Ipsum'].
+f close.
+  
+
+f := File new: ['/tmp/test.txt'].
+>> text := f read.
+f close.
+
+
+
+Program clean-up.
+usedMemory1 := (Program memory ? 1).
+
+
+
+f := File new: ['/tmp/test.txt'].
+text := f read.
+f close.
+
+Program clean-up.
+usedMemory2 := (Program memory ? 1).
+
+
+f := File new: ['/tmp/test.txt'].
+text := f read.
+f close.
+
+Program clean-up.
+usedMemory3 := (Program memory ? 1).
+
+
+
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
+	Out write: ['No memory leaks here'].
+}, false: {
+	Out write: ['Leaking memory...'].
+}.

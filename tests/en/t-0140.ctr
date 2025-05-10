@@ -1,0 +1,18 @@
+['SINGLE_LANGUAGE'].
+
+Out write: ['Trigger an error'], stop.
+
+
+
+
+{ Out write: ['aaa']. 
+	{
+
+		this-task error: ['Hi!'].
+		} start.
+
+
+} start.
+
+
+

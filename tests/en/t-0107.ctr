@@ -1,0 +1,50 @@
+['SINGLE_LANGUAGE'].
+Out write: ['Break for-loop, 0-4.'], stop.
+{ :i
+	Out write: ['iteration #'] + i, stop.
+	(i = 4) break.
+} × 10.
+
+>> x := 0.
+>> xIsLessThan10 := { <- ( x < 10 ). }.
+
+Out write: ['Break while-true loop, 0-4.'], stop.
+{
+	Out write: ['iteration #'] + x, stop.
+	x add: 1.
+	((x < 5) not) break.
+} while: xIsLessThan10.
+
+Out write: ['Break while-false loop, 5,4.'], stop.
+{
+	Out write: ['iteration #'] + x, stop.
+	x subtract: 1.
+	(x = 3) break.
+} while: { <- (x > 0). }.
+
+Out write: ['Break times loop, 1-4.'], stop.
+{ :i
+	Out write: ['iteration #'] + i, stop.
+	(i = 4) break.
+} × 5.
+
+Out write: ['Break block, dont print line.'], stop.
+{ True break. Out write: ['dont write this!'], stop. } start.
+
+Out write: ['Break block, dont fire catch...'], stop.
+{ True break. Out write: ['dont write this!'], stop. } except: { Out write: ['Dont catch this!']. }, start.
+
+Out write: ['Test Array each-loop: 0,1'], stop.
+(List ← 1 ; 2 ; 3) map: { :i
+	Out write: ['iteration #'] + i, stop.
+	(i = 1) break.
+}.
+
+Out write: ['Test Map each-loop: c only'], stop.
+>> m := Dict new.
+m put: ['first'] at: ['a'], put: ['second'] at: ['b'], put: ['third'] at: ['c'].
+m each: { :k :v
+	Out write: ['iteration'] + v + k, stop.
+	True break.
+}.
+

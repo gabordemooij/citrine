@@ -1,0 +1,8 @@
+
+>> a := { :b
+	Out write: b, stop.
+	>> b := 3.
+	Out write: b, stop.
+}.
+
+a apply: 6.

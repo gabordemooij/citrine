@@ -1,0 +1,6 @@
+
+ >> x := ['ABC'].
+ >> y := ['DEF'].
+ >> z := x + y.
+ Out write: z, stop.
+ 

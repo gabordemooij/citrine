@@ -1,0 +1,7 @@
+Number on: ['percent-of:'] do: { :number
+	<- number / 100 * self.
+}.
+
+Out write: (
+	7 percent-of: 100
+), stop.

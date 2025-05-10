@@ -1,0 +1,4 @@
+List ← ['Quotes \[' \'] are evil?'] ; 1
+Quotes [' '] are evil?
+(Dict new) put:['\[''] at:['\['quote\']']
+['

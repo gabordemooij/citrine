@@ -1,0 +1,41 @@
+{
+	this-task error: ['Dont fail.'].
+	unknown doSomething.
+} except: {
+	Out write: ['Caught!'].
+}, start.
+
+{
+	this-task error: ['Dont fail.'].
+	own unknown doSomething.
+} except: {
+	Out write: ['Caught!'].
+}, start.
+
+{
+	this-task error: ['Dont fail.'].
+	unknown := 122.
+} except: {
+	Out write: ['Caught!'].
+}, start.
+
+
+{
+	this-task error: ['Dont fail.'].
+	True break.
+	Out write: ['FAIL'].
+} except: {
+	Out write: ['Caught!'].
+}, start.
+
+{
+	{
+		this-task error: ['Dont fail.'].
+		True break.
+		Out write: ['FAIL'].
+	} except: { :x
+		(x = ['Dont fail.']) true: { this-task error: ['Nested Caught!']. }.
+	}, start.
+} except: { :e
+	Out write: e.
+}, start.

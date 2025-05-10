@@ -1,0 +1,7 @@
+((['abcdef'] from: 3 length: 4 - 1) = ['cde']) true: { Out write: ['yes'].}.
+Out write: ['a'] + 1.
+Out write: ['x'] + 3.5.
+Out write: ['y'] + True.
+Out write: ['z'] + False + None + 2.
+
+

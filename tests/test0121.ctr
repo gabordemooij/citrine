@@ -1,4 +1,0 @@
-
-☞ x ≔ ‘Append this’.
-☞ y ≔ ‘to a String’.
-✎ write: (‘’ append: x, append: ‘ ’, append: y).

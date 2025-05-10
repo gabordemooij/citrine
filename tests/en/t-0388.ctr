@@ -1,0 +1,11 @@
+
+ >> x := Object new.
+ >> y := Object new.
+ >> z := x.
+ Out write: ( x equals: y ), stop.
+ Out write: ( x equals: z ), stop.
+ Out write: ( x = y ), stop.
+ Out write: ( x = z ), stop.
+ Out write: ( x ≠ y ), stop.
+ Out write: ( x ≠ z ), stop.
+ 

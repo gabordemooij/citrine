@@ -1,5 +1,0 @@
-a b | False False True True -1
-b a | True True False False 1
-hallo hello | False False True True -4
-human human | False True False True 0
-x z | False False True True -2

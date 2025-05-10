@@ -1,0 +1,6 @@
+
+ >> x := List ← 1 ; 2 ; 3 ; 4 ; 5.
+ >> z := List ← 9.
+ >> y := x replace: 2 length: 1 with: z.
+ Out write: y, stop.
+ 

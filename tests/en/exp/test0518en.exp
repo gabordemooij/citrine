@@ -1,0 +1,1 @@
+(Dict new) put:['C'] at:['3'], put:['B'] at:['2'], put:['A'] at:['1']

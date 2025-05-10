@@ -1,0 +1,25 @@
+Program memory-management: 4.
+
+>> Doubler := Object new.
+>> Multiplier := Object new.
+Doubler on: ['double:and:'] do: { :x :y
+	>> q := x + 1. <- ((x × 2) + (y × 2)).
+}.
+
+Multiplier on: ['multiply:and:'] do: { :x :y <- (x × y).
+}.
+
+Out write: (
+	Doubler double:
+		(Doubler double: 
+			(Multiplier multiply: 2 and: 3)
+		and:
+			(Multiplier multiply: 3 and: 4)
+		)
+	and:
+		(Doubler double: 
+			(Multiplier multiply: 2 and: 3)
+		and:
+			(Multiplier multiply: 3 and: 4)
+		)
+), stop.

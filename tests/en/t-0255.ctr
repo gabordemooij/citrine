@@ -1,0 +1,9 @@
+>> counter := 10.
+
+{
+{ <- (counter > 0). } while: ['dont segfault!'].
+} except: { :err Out write: err, stop. }, start.
+
+{
+{ <- (counter ≥ 10). } while: ['dont segfault!'].
+} except: { :err Out write: err, stop. }, start.

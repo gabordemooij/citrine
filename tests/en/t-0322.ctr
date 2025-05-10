@@ -1,0 +1,18 @@
+['SINGLE_LANGUAGE'].
+
+>> Matryoshka := Object new.
+Matryoshka on: ['double:'] do: { :secret
+	own secret := secret × 2.
+}.
+Matryoshka on: ['new:'] do: { :secret
+	>> answer := None.
+	>> t := (secret > 255).
+	Out write: (secret + [' | '] + t), stop.
+	t true: {
+		answer := secret.
+	}, else: {
+		answer := Matryoshka recursive new: (self double: secret).
+	}. <- answer.
+}.
+
+>> x := Matryoshka new: 2.

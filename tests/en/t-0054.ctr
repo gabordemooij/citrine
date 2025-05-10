@@ -1,0 +1,8 @@
+{ :i
+	((Program argument: i) ≠ ['-r']) true: {
+		(((Program argument: i) find: ['t-']) > -1) true: {
+			Out write: ['Found argument file.'].
+		}.
+	}.
+} × (Program arguments).
+Out write: (Program argument: 999).

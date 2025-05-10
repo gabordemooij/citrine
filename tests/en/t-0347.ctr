@@ -1,0 +1,8 @@
+Out on: ['test'] do: {
+	>> x := 3.
+	{
+		(x = 3) true: { self write: ['OK↵']. }, break.
+		self write: ['NOT OK↵'].
+	} procedure.
+}.
+Out test.

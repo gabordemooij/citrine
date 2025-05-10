@@ -1,0 +1,7 @@
+
+ >> x := Object.
+ Out write: x type, stop.
+ Out write: 777 type, stop.
+ Out write: ['ABC'] type, stop.
+ Out write: True type, stop.
+ 

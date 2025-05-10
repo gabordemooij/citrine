@@ -1,5 +1,0 @@
-
-☞ str ≔ ‘Hello’.
-str add: ‘ ’.
-str add: ‘World’.
-✎ write: str, stop.

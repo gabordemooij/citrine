@@ -1,0 +1,25 @@
+#Linux
+
+(File new: ['/tmp/testje']) exists false: {
+	Program os: ['mkdir /tmp/testje'].	
+}.
+
+(File new: ['/tmp/testje/file1']) exists false: {
+	Program os: ['touch /tmp/testje/file1'].	
+}.
+
+(File new: ['/tmp/testje/folder1']) exists false: {
+	Program os: ['mkdir /tmp/testje/folder1'].	
+}.
+
+>> l := File list: ['/tmp/testje'].
+
+>> q := List new.
+
+l each: { :k :v v each: { :x :y q append: y. }. }.
+
+>> s := q string.
+
+(s contains: ['file1']) true:   { Out write: ['OK'], stop. }.
+(s contains: ['file2']) true:   { Out write: ['XX'], stop. }.
+(s contains: ['folder1']) true: { Out write: ['OK'], stop. }.

@@ -1,0 +1,16 @@
+List on: ['copy'] do: {
+	>> copy := List new.
+	self each: { :number :section
+		copy append: section recursive copy.
+	}.
+	<- copy.
+}.
+
+>> sheep := List new ; ['Dolly'] ; ['Shaun']. 
+>> clones := sheep copy.
+clones each: { :number :sheep
+	sheep append: ['2'].
+}.
+
+Out write: sheep, stop.
+Out write: clones, stop.

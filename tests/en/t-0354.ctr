@@ -1,0 +1,23 @@
+Out write: (Moment new year: 2021), stop.
+Out write: (Moment new year: 2020, month: 1, day: 1, hour: 1), stop.
+Out write: (Moment new year: 2020, month: 1, day: 1, hour: 0, minute: 10), stop.
+Out write: (Moment new year: 2020, month: 1, day: 1, hour: 1, minute: 10, second: 15), stop.
+Out stop.
+Out write: (Moment new year: 2020, month: 12, day: 1, hour: 1, minute: 10, second: 15), stop.
+Out write: (Moment new year: 2020, month: 12, day: 31, hour: 1, minute: 10, second: 15), stop.
+Out write: (Moment new year: 2020, month: 12, day: 31, hour: 23, minute: 59, second: 0), stop.
+Out write: (Moment new year: 2020, month: 12, day: 31, hour: 23, minute: 59, second: 59), stop.
+Out write: (Moment new year: 2020, month: 12, day: 31, hour: 23, minute: 59, second: 60), stop.
+Out stop.
+Out write: (Moment new year: 2020, month: 12, day: 31, hour: 23, minute: 60), stop.
+Out write: (Moment new year: 2020, month: 12, day: 31, hour: 24), stop.
+Out write: (Moment new year: 2020, month: 12, day: 32), stop.
+Out write: (Moment new year: 2020, month: 12), stop.
+Out write: (Moment new year: 2020, month: 13), stop.
+Out stop.
+Out write: (Moment new year: 2020, month: 0), stop.
+Out write: (Moment new year: 2020, month: 1, day: 0), stop.
+Out write: (Moment new year: 2020, month: 1, day: 1), stop.
+Out write: (Moment new year: 2020, month: 1, day: 1, hour: 0), stop.
+Out write: (Moment new year: 2020, month: 1, day: 1, hour: 1), stop.
+

@@ -1,0 +1,28 @@
+Number on: ['factorial'] do: {
+	>> total := 1.
+	{ :index total multiply-by: (self - (index - 1)). } × self. <- total.
+}.
+>> Printer := Object new.
+Printer on: ['print:and:'] do: { :x :y
+	Out write: ['a='] + x + [', b='] + y, stop.
+}.
+>> a := 4.5. >> b := a floor.
+Printer print: a and: b.
+a := 4. b := a factorial.
+Printer print: a and: b.
+a := 4.5. b := a ceil.
+Printer print: a and: b.
+a := 4.5. b := a floor.
+Printer print: a and: b.
+a := 4.5. b := a round.
+Printer print: a and: b.
+a := 4.2. b := a round.
+Printer print: a and: b.
+
+Out write: (9 modulo: 5), stop.
+Out write: -666 abs, stop.
+Out write: 49 sqrt, stop.
+Out write: (2 power: 3), stop.
+>> l := (List ← 9 ; 6).
+Out write: l minimum.
+

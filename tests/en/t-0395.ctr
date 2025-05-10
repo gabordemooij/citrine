@@ -1,0 +1,8 @@
+
+ >> x := ['**'].
+  x
+  case: ['*'] do: { Out write: 1. },
+  case: ['**'] do: { Out write: 2. },
+  case: ['***'] do: { Out write: 3. }.
+ Out stop.
+ 

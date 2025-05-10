@@ -1,0 +1,13 @@
+
+>> g := ['global'].
+{ >> g := ['local']. Out write: g, stop. } start. 
+Out write: g, stop. 
+>> message := ['Bye'].
+>> Secret := Object new.
+Secret on: ['test'] do: {
+	>> message := ['Hello'].
+	own message := ['World'].
+	Out write: message + [' '] + own message, stop.
+}.
+Secret test.
+Out write: message.

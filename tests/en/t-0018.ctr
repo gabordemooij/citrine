@@ -1,0 +1,8 @@
+>> Animal := Object new.
+Animal on: ['sound:'] do: { :s own sound := s. }.
+Animal on: ['makeSound'] do: { Out write: own sound. }.
+>> Cat := Animal new.
+Cat on: ['init'] do: { own sound := ['MEOW!'].}.
+Cat on: ['meow'] do: { self makeSound. }.
+Cat init.
+Cat meow.

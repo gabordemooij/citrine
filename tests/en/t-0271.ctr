@@ -1,0 +1,15 @@
+['SINGLE_RUN'].
+Program memory-management: 1.
+Program memory: 16000000.
+>> tokens := ['{}↲.:,x() '].
+{ :i
+	>> code := [''].
+	>> x := Number between: 1 and: 10.
+	{
+		>> y := Number between: 1 and: (tokens length).
+		code append: (tokens character: y).
+	} × x.
+	{ Function new: code. } except: { ['Empty']. }, start.
+
+} × 10000.
+Out write: ['OK'], stop.

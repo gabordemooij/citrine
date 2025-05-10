@@ -1,0 +1,7 @@
+
+ (['a'] > ['b']) false: {
+   Out write: ['a'], stop.
+ }, else: {
+   Out write: ['b'], stop.
+ }.
+ 

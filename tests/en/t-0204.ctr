@@ -1,0 +1,11 @@
+['SINGLE_LANGUAGE'].
+
+>> a := List ← 1 ; 2 ; 3.
+Out write: a count, stop.
+Out write: a ? 2, stop.
+a shift.
+Out write: a count, stop.
+Out write: a ? 2, stop.
+a shift.
+Out write: a count, stop.
+Out write: a ? 2, stop.

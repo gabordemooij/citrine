@@ -1,0 +1,46 @@
+['SINGLE_LANGUAGE'].
+
+List on: ['fixture:'] do: { :f
+	own fixture := f.
+}.
+
+List on: ['count'] do: { <- own fixture.
+}.
+
+List on: ['aantal'] do: { <- own fixture.
+}.
+
+
+>> x := None.
+{
+
+	x := ['hello'] 
+	replace:
+		(['hel'] + 
+			(['l<x>'] <x>:
+				(['==o'] character: 3)
+			)
+		)
+	with: (
+		(['...hal'] + ['lo']) 
+			upper 
+			lowecase 
+			upper 
+			offset: -1 + ( 
+				11 - 12 + (
+					(
+						(
+							(
+								List ← 0 ; 1 ; 4; 9 ; (List ← 0 ; 3; 1) ; 4
+							) penultimate
+						) ? 2
+					) + 
+					((List ← ['X'] ; ['Y'] ; ['Z']) fixture: 2) 
+					count
+				)
+			)
+	).
+
+} × 10.
+Out write: x, stop.
+

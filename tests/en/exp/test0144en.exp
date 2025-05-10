@@ -1,0 +1,5 @@
+coffeeUncatched error has occurred.
+Key not found: tealeaves
+#3 tealeaves (tests/en/t-0144.ctr: 15)
+#2 makeTea (tests/en/t-0144.ctr: 26)
+#1 write: (tests/en/t-0144.ctr: 24)

@@ -1,0 +1,13 @@
+['SINGLE_RUN'].
+>> a := True.
+
+
+
+a on: ['string'] do: {
+	>> answer := None.
+	( self = True ) true: {
+		answer := ['Yep‘']'].
+	}. <- answer.
+}.
+
+Out write: List ← a, stop.

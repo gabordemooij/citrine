@@ -1,7 +1,0 @@
-☞ h ≔ ‘Hello’.
-☞ w ≔ ‘World’.
-
-✎ write: (
-	‘greeting whom’ greeting: h, whom: w
-).
-

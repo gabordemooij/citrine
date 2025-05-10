@@ -1,0 +1,5 @@
+
+ >> x := { Out write: (own q + ['!']), stop. }.
+ x set: ['q'] value: ['123'].
+ x start.
+ 

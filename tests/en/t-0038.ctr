@@ -1,0 +1,5 @@
+>> x := Dict new.
+x put: ['hello'] at: ['world'].
+>> d := x at: ['world'].
+Out write: d.
+

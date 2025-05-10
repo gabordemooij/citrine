@@ -1,0 +1,15 @@
+>> z := Object new.
+z on: ['value:'] do: { :v
+	own value := v. <- self.
+}.
+z on: ['value'] do: { <- own value. }.
+(z setValue: 1) value: 2.
+Out write: z value.
+>> x := z.
+Out write: x value.
+z := None.
+Out write: z value.
+Out write: x value.
+Out write: ['hello'].
+Out write: 3 + 2.
+Out write: (3 > 2).

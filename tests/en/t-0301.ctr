@@ -1,0 +1,28 @@
+
+
+
+>> wine := Object new.
+
+
+wine on: ['toString'] do: { <- ['merlot'].
+}.
+
+wine on: ['naarTekst'] do: { <- ['merlot'].
+}.
+
+
+wine on: ['='] do: { :other wine <- ( self toString = other wine ).
+}.
+
+wine on: ['=='] do: { :other wine <- ( self toString = other wine ).
+}.
+
+
+
+wine
+	case: ['cabernet'] do: { Out write: ['it's a Cabernet!']. },
+	case: ['syrah']    do: { Out write: ['it's a Syrah!'].    },
+	case: ['merlot']   do: { Out write: ['it's a Merlot!'].   },
+	case: ['malbec']   do: { Out write: ['it's a Malbec!'].   }.
+
+Out stop.

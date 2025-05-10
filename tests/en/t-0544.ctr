@@ -1,0 +1,7 @@
+
+ >> x := File new: (Path /tmp: ['a.txt']).
+ x write: ['abc'].
+ Out write: x exists, stop.
+ x delete.
+ Out write: x exists, stop.
+ 

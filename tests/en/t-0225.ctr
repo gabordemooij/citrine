@@ -1,0 +1,8 @@
+
+{ :j
+	>> i := j + 0.
+	>> type := [''].
+	( i modulo: 2 ) true: { type := ['odd']. }.
+	( i modulo: 2 ) false: { type := ['even']. }.
+	Out write: (['Q is an type number.'] type: type, Q i), stop.
+} × 10.

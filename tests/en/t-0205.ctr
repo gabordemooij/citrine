@@ -1,0 +1,25 @@
+['SINGLE_LANGUAGE'].
+
+>> str := ['write:'].
+Out message: ['write:'] arguments: (List ← ['Hello World']), stop. 
+
+Number on: ['isbetween:and:'] do: { :a :b <- ((self ≥ a) and: (self ≤ b)).
+}.
+
+str := ['isbetween:and:'].
+Out write: (3 message: str arguments: (List ← 2 ; 8)), stop.
+Out write: (3 message: str arguments: (List ← 1 ; 2)), stop.
+
+
+>> CoffeeMachine := Object new.
+CoffeeMachine on: ['makeCoffeeWithSugar:milk:'] do: { :sugar :milk <- ( ['Here ya go... coffee with '] + 
+			sugar +
+			[' spoons of sugar and '] +
+			milk +
+			[' drops of milk.']
+	).
+}.
+
+>> order := ['makeCoffeeWithSugar:milk:'].
+>> coffeeConfiguration := List ← 4 ; 2.
+Out write: ( CoffeeMachine message: order arguments: coffeeConfiguration ), stop.

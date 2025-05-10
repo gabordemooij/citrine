@@ -1,8 +1,0 @@
-‘SINGLE_LANGUAGE’.
-☞ x ≔ Moment new.
-x 
-year: 2020,
-month: 7,
-day: 28.
-
-✎ write: x weekday, stop.

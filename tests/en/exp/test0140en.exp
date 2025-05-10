@@ -1,0 +1,6 @@
+Trigger an error
+aaaUncatched error has occurred.
+Hi!
+#3 error: (tests/en/t-0140.ctr: 11)
+#2 start (tests/en/t-0140.ctr: 12)
+#1 start (tests/en/t-0140.ctr: 15)

@@ -1,8 +1,0 @@
-File close. 
-File open. 
-☞ f ≔ File new: ‘/tmp/from.txt’.
-f write: ‘hello’.
-✎ write: ‘file contains: ’ + (f read) + ‘\n’.
-
-
-

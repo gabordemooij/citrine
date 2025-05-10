@@ -1,0 +1,17 @@
+>> Point := Object new.
+Point on: ['x-coordinate:'] do: { :x own x := x. }.
+Point on: ['y-coordinate:'] do: { :y own y := y. }.
+Point on: ['x-coordinate']  do: { <- own x copy. }.
+Point on: ['y-coordinate']  do: { <- own y copy. }.
+
+Point on: ['='] do: { :other
+	<- ( own x = other x-coordinate
+		 and: own y = other y-coordinate ).
+}.
+
+>> pier := Point new x-coordinate: 5, y-coordinate: 6.
+>> town-hall := Point new x-coordinate: 7, y-coordinate: 1.
+>> restaurant := Point new x-coordinate: 5, y-coordinate: 6.
+
+Out write: pier = town-hall, stop.
+Out write: pier = restaurant, stop.

@@ -1,0 +1,6 @@
+
+ >> x := ( 1 > 2 ) either: ['Y'] or: ['N'].
+ >> y := ( 2 > 1 ) either: ['Y'] or: ['N'].
+ Out write: x, stop.
+ Out write: y, stop. 
+ 

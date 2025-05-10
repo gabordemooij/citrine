@@ -1,0 +1,4 @@
+
+ >> x := ['  x  '].
+ Out write: x trim, stop.
+ 

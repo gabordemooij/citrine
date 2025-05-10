@@ -1,0 +1,5 @@
+
+ >> x := List ← 8 ; 4 ; 2 ; 16.
+ >> y := x maximum.
+ Out write: y, stop.
+ 

@@ -1,0 +1,67 @@
+
+
+>> usedMemory1 := 0.
+>> usedMemory2 := 0.
+>> usedMemory3 := 0.
+>> usedMemory4 := 0.
+
+Program memory-management: 0.
+
+Out write: (6 < 5), stop.
+Out write: (2 > 1), stop.
+Out write: (2 ≤ 1), stop.
+Out write: (9 ≥ 1), stop.
+Out write: (2 odd?), stop.
+Out write: (4 even?), stop.
+Out write: (-1 positive?), stop.
+Out write: (-2 negative?), stop.
+Out write: ((3 ≥ 4) & (3 ≤ 5)), stop.
+Out write: (3 = 3), stop.
+Out write: (3 ≠ 3), stop.
+Out write: 1 bool, stop.
+
+Program clean-up.
+
+usedMemory1 := (Program memory ? 0).
+
+
+Out write: (6 < 5), stop.
+Out write: (2 > 1), stop.
+Out write: (2 ≤ 1), stop.
+Out write: (9 ≥ 1), stop.
+Out write: (2 odd?), stop.
+Out write: (4 even?), stop.
+Out write: (-1 positive?), stop.
+Out write: (-2 negative?), stop.
+Out write: ((3 ≥ 4) & (3 ≤ 5)), stop.
+Out write: (3 = 3), stop.
+Out write: (3 ≠ 3), stop.
+Out write: 1 bool, stop.
+
+Program clean-up.
+usedMemory2 := (Program memory ? 0).
+
+
+Out write: (6 < 5), stop.
+Out write: (2 > 1), stop.
+Out write: (2 ≤ 1), stop.
+Out write: (9 ≥ 1), stop.
+Out write: (2 odd?), stop.
+Out write: (4 even?), stop.
+Out write: (-1 positive?), stop.
+Out write: (-2 negative?), stop.
+Out write: ((3 ≥ 4) & (3 ≤ 5)), stop.
+Out write: (3 = 3), stop.
+Out write: (3 ≠ 3), stop.
+Out write: 1 bool, stop.
+
+Program clean-up.
+usedMemory3 := (Program memory ? 0).
+
+
+
+( usedMemory1 = usedMemory2 and: usedMemory1 = usedMemory3, and: usedMemory2 = usedMemory3 ) true: {
+	Out write: ['No memory leaks here'].
+}, false: {
+	Out write: ['Leaking memory...'].
+}.

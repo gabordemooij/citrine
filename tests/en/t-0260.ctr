@@ -1,0 +1,5 @@
+>> result should not be block := (1 = 1) true: {
+	>> x := 1.
+}.
+
+Out write: (result should not be block type), stop.

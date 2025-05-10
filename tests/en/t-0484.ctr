@@ -1,0 +1,8 @@
+#Linux
+ >> x := ['abc'].
+ >> y := ['def'].
+ >> z := x compare: y.
+ >> q := y compare: x.
+ Out write: z, stop.
+ Out write: q, stop.
+ 

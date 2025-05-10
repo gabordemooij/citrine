@@ -1,0 +1,6 @@
+
+ >> f := File new: (Path /tmp: ['x.ctr']).
+ f write: ['>> x := 123.'].
+ Program use: (Path /tmp: ['x.ctr']).
+ Out write: x, stop.
+ 

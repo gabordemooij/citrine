@@ -1,0 +1,4 @@
+
+ >> x := Program string.
+ Out write: x, stop.
+ 

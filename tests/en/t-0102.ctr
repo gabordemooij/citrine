@@ -1,0 +1,10 @@
+
+>> motive := False.
+>> opportunity := False.
+Out write: (motive nor: opportunity).
+Out write: (motive not & opportunity not).
+
+Out write: (True = True).
+Out write: (True ≠ True).
+Out write: (True ≠ False).
+Out write: (True = False).

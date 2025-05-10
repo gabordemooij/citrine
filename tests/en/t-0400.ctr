@@ -1,0 +1,3 @@
+
+ >> x := Object new.
+ x on:Invalid

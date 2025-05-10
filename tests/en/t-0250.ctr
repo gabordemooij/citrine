@@ -1,0 +1,4 @@
+['SINGLE_LANGUAGE'].
+
+>> a := List ← 1 ; 2 ; 3. 
+Out write: a, stop.
