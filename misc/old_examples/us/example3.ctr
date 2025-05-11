@@ -1,6 +1,0 @@
-☞ x := Number between: 1 and: 10.
-☞ q := 0.
-
-{ q := Program ask. } while: { ↲ x number ≠ q number. }.
-
-✎ write: ':-)↵'.
