@@ -27,7 +27,7 @@ fi
 echo "USING: ${MAKEFILE}"
 
 #Get list of ISO codes to build.
-ISOs="en nl xx x3 x4"
+ISOs=$(ls i18nsel)
 if [ $# -gt 0 ]; then
 	ISOs=$@
 fi
