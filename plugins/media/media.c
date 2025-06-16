@@ -4,8 +4,12 @@
 #include <winsock2.h>
 #endif
 
-
 #include "../../citrine.h"
+
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
 #include "passw.c"
 #include "media.h"
 #include "jsmn.h"
@@ -2223,6 +2227,9 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 			SDL_Delay(CtrMediaStdDelayTime);
 		}
 		CtrMediaSteps++;
+		#ifdef __EMSCRIPTEN__
+		emscripten_sleep(1);
+		#endif
 	}
 	return myself;
 }

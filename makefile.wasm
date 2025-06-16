@@ -1,0 +1,49 @@
+CFLAGS = -g -mtune=native -Wpedantic -Wall -D PATH_MAX=1024 -D CTRLANG=${ISO} -D INCLUDETESTS -D SDL -fPIC
+OBJS = test.o siphash.o utf8.o memory.o util.o base.o collections.o file.o system.o \
+       world.o lexer.o parser.o walker.o translator.o citrine.o plugins/media/media.o
+prefix ?= /usr
+
+.SUFFIXES:	.o .c
+
+all:ctr
+
+ctr:	$(OBJS)
+	emcc $(OBJS) -g -rdynamic -lm -ldl \
+	-sEXPORTED_RUNTIME_METHODS=['callMain'] \
+    -sNO_EXIT_RUNTIME=1 \
+    -sEXPORT_ALL=1 \
+    -sMAIN_MODULE=1 \
+    -sUSE_SDL=2 \
+    -sUSE_SDL_IMAGE=2 \
+    -sUSE_SDL_TTF=2 \
+    -sUSE_SDL_MIXER=2 \
+    -sSDL2_IMAGE_FORMATS='["png","jpg"]' \
+    -sSDL2_MIXER_FORMATS='["ogg","mp3"]' \
+    -sASYNCIFY \
+	-sASYNCIFY_IMPORTS=['emscripten_sleep'] \
+	-sASYNCIFY_STACK_SIZE=65536 \
+    --preload-file=plaatje.png@/plaatje.png \
+    --preload-file=a.png@/a.png \
+    -o ctr.html 
+	cp ctr bin/wasm/ctr${ISO}
+
+.c.o:
+	emcc $(CFLAGS) $(EXTRACFLAGS) -I i18n/${ISO} \
+	-I plugins/media/i18n/${ISO} \
+	-sUSE_SDL=2 \
+	-sUSE_SDL_IMAGE=2 \
+	-sUSE_SDL_TTF=2 \
+	-sUSE_SDL_MIXER=2 \
+	-sSDL2_IMAGE_FORMATS='["png","jpg"]' \
+	-sSDL2_MIXER_FORMATS='["ogg","mp3"]' \
+    -c $<
+
+clean:
+	rm -rf ${OBJS} ctr
+	
+plugin:
+	cd plugins/${PACKAGE} ; make -f makefile.wasm clean ; make -f makefile.wasm install-${NAME}
+
+testplugin:
+	cd plugins/${PACKAGE} ; make -f makefile.test clean ; make -f makefile.test install-${NAME}
+

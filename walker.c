@@ -1,5 +1,9 @@
 #include "citrine.h"
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
 ctr_tnode* ctr_callstack[301];
 uint8_t ctr_callstack_index;
 
@@ -332,6 +336,9 @@ ctr_object* ctr_cwlk_run(ctr_tnode* program) {
 		ctr_gc_cycle();
 		if (!li->next) break;
 		li = li->next;
+		#ifdef __EMSCRIPTEN__
+		emscripten_sleep(1);
+		#endif
 	}
 	if (wasReturn == 0) result = NULL;
 	return result;
