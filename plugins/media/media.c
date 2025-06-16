@@ -72,6 +72,7 @@ uint16_t CtrMediaSteps;
 double CtrMediaVideoFPSRendering;
 int CtrMediaCameraInit = 0;
 ctr_object* CtrMediaInputFreeze = NULL;
+int CtrStopBubbling = 0;
 
 int CtrMediaAudioRate;
 uint16_t CtrMediaAudioFormat;
@@ -119,6 +120,7 @@ struct MediaIMG {
 	char            nodirani;
 	int             lineheight;
 	char            visible;
+	char            clickable;
 };
 typedef struct MediaIMG MediaIMG;
 
@@ -1276,13 +1278,16 @@ void ctr_internal_media_image_resolvecollision(MediaIMG* m, MediaIMG* m2) {
 
 int ctr_internal_media_mouse_down(SDL_Event event) {
 	MediaIMG* focusImage;
+	CtrStopBubbling = 0;
 	for(int i = 0; i < IMGCount; i++) {
 		if (
 		mediaIMGs[i].x < event.button.x && 
 		mediaIMGs[i].y < event.button.y &&
 		mediaIMGs[i].x + (mediaIMGs[i].w / (mediaIMGs[i].anims ? mediaIMGs[i].anims : 1)) > event.button.x &&
 		mediaIMGs[i].y + mediaIMGs[i].h > event.button.y &&
-		mediaIMGs[i].ref != NULL
+		mediaIMGs[i].ref != NULL &&
+		mediaIMGs[i].clickable &&
+		!CtrStopBubbling
 		) {
 			if (mediaIMGs[i].editable) {
 				focusObject = mediaIMGs[i].ref;
@@ -2837,6 +2842,7 @@ ctr_object* ctr_img_new(ctr_object* myself, ctr_argument* argumentList) {
 	mediaImage->lineheight = 10;
 	mediaImage->color = (SDL_Color) {0,0,0,0};
 	mediaImage->backgroundColor = (SDL_Color) {0,0,0,0};
+	mediaImage->clickable = 1;
 	mediaImage->ref = instance;
 	ctr_resource* rs = ctr_heap_allocate( sizeof(ctr_resource) );
 	rs->ptr = mediaImage;
@@ -2903,6 +2909,13 @@ ctr_object* ctr_img_fixed_set(ctr_object* myself, ctr_argument* argumentList) {
 	mediaImage->fixed = ctr_internal_cast2bool( argumentList->object )->value.bvalue;
 	return myself;
 }
+
+ctr_object* ctr_img_clickable_set(ctr_object* myself, ctr_argument* argumentList) {
+	MediaIMG* mediaImage = ctr_internal_get_image_from_object(myself);
+	mediaImage->clickable = ctr_internal_cast2bool( argumentList->object )->value.bvalue;
+	return myself;
+}
+
 
 /**
  * @def
@@ -4773,9 +4786,11 @@ ctr_object* ctr_media_include(ctr_object* myself, ctr_argument* argumentList) {
     prg[offset + 1] = '\0';
     ctr_program_length = offset;
 	parsedCode = ctr_cparse_parse(prg, pathString);
-	ctr_cwlk_subprogram++;
-	ctr_cwlk_run(parsedCode);
-	ctr_cwlk_subprogram--;
+	if (parsedCode) {
+		ctr_cwlk_subprogram++;
+		ctr_cwlk_run(parsedCode);
+		ctr_cwlk_subprogram--;
+	}
 	return myself;
 }
 
@@ -4841,6 +4856,11 @@ ctr_object* ctr_media_website(ctr_object* myself, ctr_argument* argumentList) {
 	);
 	SDL_OpenURL(url);
 	ctr_heap_free(url);
+	return myself;
+}
+
+ctr_object* ctr_media_stop_bubbling(ctr_object* myself, ctr_argument* argumentList) {
+	CtrStopBubbling = ctr_tobool(argumentList->object);
 	return myself;
 }
 
@@ -4958,6 +4978,8 @@ void begin(){
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_DIALOG_SET ), &ctr_media_dialog );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "website:" ), &ctr_media_website );
 	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( CTR_DICT_FX ), &ctr_media_fx );
+	ctr_internal_create_func(mediaObject, ctr_build_string_from_cstring( "stopbubbling:" ), &ctr_media_stop_bubbling );
+
 	#ifndef TEST
 	#ifdef WIN
 	ctr_internal_create_func(CtrStdConsole, ctr_build_string_from_cstring(CTR_DICT_WRITE), &ctr_media_console_write );
@@ -5004,6 +5026,8 @@ void begin(){
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_VISIBLE_SET ), &ctr_img_visible_set );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_FREEZE_SET ), &ctr_img_freeze );
 	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_MASK_SET ), &ctr_img_mask_set );
+	ctr_internal_create_func(imageObject, ctr_build_string_from_cstring( CTR_DICT_CLICKABLE_SET ), &ctr_img_clickable_set );
+	
 	fontObject = ctr_font_new(CtrStdObject, NULL);
 	fontObject->link = CtrStdObject;
 	ctr_internal_create_func(fontObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_font_new );
