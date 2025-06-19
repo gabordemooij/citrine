@@ -1718,8 +1718,8 @@ char ctr_internal_media_determine_filetype(char* path) {
 		return 0;
 	}
 	SDL_RWread(asset_reader, magic, 1, 20);
-	if (strcmp(magic, "\xFF\xD8")==0) return 20; //JPG
-	if (strcmp(magic, "\x89\x50\x4E\x47\x0D\x0A\x1A\x0A")==0) return 30; //PNG
+	if (strncmp(magic, "\xFF\xD8", 2)==0) return 20; //JPG
+	if (strncmp(magic, "\x89\x50\x4E\x47\x0D\x0A\x1A\x0A",8)==0) return 30; //PNG
 	return 0;
 }
 
