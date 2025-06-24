@@ -1,0 +1,43 @@
+# This test checks if string_fill_in does not lose its slot (gc'ed) in mode 4
+
+>> Log := Object new.
+
+Log on: ['say:'] do: { :str
+	Out write: str, stop.
+}.
+
+>> Item := Object new.
+
+Item on: ['new:'] do: { :id
+	<- self new id: id.
+}.
+
+Item on: ['id:'] do: { :id
+	own id := id.
+}.
+
+Item on: ['id'] do: { <- own id. }.
+
+
+Item on: ['string'] do: {
+	>> str := ['Item#~no'].
+	str ~no: own id.
+	<- str.
+}.
+
+
+>> Print := Object new.
+
+Print on: ['items'] do: { 
+	
+	own item := Item new: 1.
+	
+	# either segfault or wrong str here
+	Log say: (
+		['~item printed.'] ~item: own item
+	).
+	
+	
+}.
+
+Print items.
