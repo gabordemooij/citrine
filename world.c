@@ -1043,7 +1043,7 @@ void ctr_initialize_world() {
  *
  * Sends a message to a receiver object.
  */
-ctr_object* ctr_internal_tmp_msg;
+ctr_object* ctr_internal_tmp_msg = NULL;
 ctr_object* ctr_send_message(ctr_object* receiverObject, char* message, long vlen, ctr_argument* argumentList) {
 	ctr_object* methodObject;
 	ctr_object* searchObject;
