@@ -169,7 +169,8 @@ int main(int argc, char* argv[]) {
 	}
 	ctr_initialize_world();
 	#ifdef __EMSCRIPTEN__
-	emscripten_set_main_loop(emloop, 0, 1);
+	chdir("/persist");
+	emscripten_set_main_loop(emloop, 0, 0);
 	#else
 	ctr_cwlk_run(program);
 	ctr_gc_sweep(1);

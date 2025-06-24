@@ -10,20 +10,20 @@ all:ctr
 ctr:	$(OBJS)
 	emcc $(OBJS) -g -rdynamic -lm -ldl \
 	-sEXPORTED_RUNTIME_METHODS=['callMain'] \
-    -sNO_EXIT_RUNTIME=1 \
+    -sEXIT_RUNTIME=1 \
+    -lidbfs.js \
     -sEXPORT_ALL=1 \
     -sMAIN_MODULE=1 \
     -sUSE_SDL=2 \
     -sUSE_SDL_IMAGE=2 \
     -sUSE_SDL_TTF=2 \
     -sUSE_SDL_MIXER=2 \
+    -sALLOW_MEMORY_GROWTH \
     -sSDL2_IMAGE_FORMATS='["png","jpg"]' \
     -sSDL2_MIXER_FORMATS='["ogg","mp3"]' \
     -sASYNCIFY \
 	-sASYNCIFY_IMPORTS=['emscripten_sleep'] \
 	-sASYNCIFY_STACK_SIZE=65536 \
-    --preload-file=plaatje.png@/plaatje.png \
-    --preload-file=a.png@/a.png \
     -o ctr.html 
 	cp ctr bin/wasm/ctr${ISO}
 
