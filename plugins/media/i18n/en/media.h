@@ -83,3 +83,5 @@
 #define CTR_DICT_MASK_SET                   "mask:"
 #define CTR_DICT_JSONIFY_SET                "jsonify:"
 #define CTR_DICT_UNJSONIFY_SET              "from-json:"
+#define CTR_DICT_CLICKABLE_SET              "clickable:"
+
