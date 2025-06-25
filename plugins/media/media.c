@@ -1871,6 +1871,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	dir = -1;
 	c4speed = 0;
 	CtrMediaScreenActive = 1;
+	CtrMediaTicks1 = SDL_GetTicks64(); //reset ticks, otherwise a dialog at the begin will cause motions to be far 'further'
 	while (!CtrStdFlow) {
 		if (CtrMediaFlagSoftwareVSync) {
 			CtrMediaPerfCountStart = SDL_GetPerformanceCounter();
