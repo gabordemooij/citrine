@@ -3627,7 +3627,11 @@ ctr_object* ctr_img_draw(ctr_object* myself, ctr_argument* argumentList) {
 	int errorCode;
 	errorCode = SDL_SetRenderTarget(CtrMediaRenderer, image->texture);
 	if (errorCode) {
+		#ifdef __EMSCRIPTEN__
+		texTarget = SDL_CreateTexture(CtrMediaRenderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_TARGET, image->w, image->h);
+		#else
 		texTarget = SDL_CreateTexture(CtrMediaRenderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, image->w, image->h);
+		#endif
 		errorCode = SDL_SetRenderTarget(CtrMediaRenderer, texTarget);
 		SDL_RenderCopy(CtrMediaRenderer, image->texture, NULL, NULL);
 		image->texture = texTarget;
