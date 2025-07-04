@@ -134,14 +134,18 @@ struct MediaAUD {
 };
 typedef struct MediaAUD MediaAUD;
 
-MediaIMG mediaIMGs[100];
-int MaxIMG = 100;
+#define MAX_AUDIO_SLOTS 51
+#define MAX_IMAGE_SLOTS 101
+#define MAX_FONT_SLOTS  11
+
+MediaIMG mediaIMGs[MAX_IMAGE_SLOTS];
+int MaxIMG = MAX_IMAGE_SLOTS;
 int IMGCount = 0;
 
 MediaIMG* CtrMediaContactSurface;
 
-MediaAUD mediaAUDs[50];
-int maxAUD = 50;
+MediaAUD mediaAUDs[MAX_AUDIO_SLOTS];
+int maxAUD = MAX_AUDIO_SLOTS;
 int AUDCount = 0;
 
 struct MediaFNT {
@@ -152,8 +156,8 @@ struct MediaFNT {
 };
 typedef struct MediaFNT MediaFNT;
 
-MediaFNT mediaFNT[10];
-int maxFNT = 10;
+MediaFNT mediaFNT[MAX_FONT_SLOTS];
+int maxFNT = MAX_FONT_SLOTS;
 int FNTCount = 0;
 
 int windowWidth = 0;
@@ -2365,7 +2369,18 @@ void ctr_font_destructor(ctr_resource* rs) {
 }
 
 ctr_object* ctr_font_new(ctr_object* myself, ctr_argument* argumentList) {
-	if (FNTCount >= maxFNT) return CtrStdNil;
+	
+	// If there are no more fonts slots available, generate an exception
+	if (FNTCount >= maxFNT - 1) {
+		char error_message[500]; // keep error message < 500 chars
+		if (!sprintf(error_message, CTR_ERR_MEDIA_FNT_DEPLETED, maxFNT - 1)) {
+			// if we fail to generate a proper error message, generate a generic error
+			ctr_error("Unable to generate error code for font depletion.", 0);
+		}
+		CtrStdFlow = ctr_error( error_message, 0 );
+		return CtrStdNil;
+	}
+	
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
 	instance->link = myself;
 	MediaFNT* fnt = &mediaFNT[FNTCount++];
@@ -2523,6 +2538,18 @@ ctr_object* ctr_media_new(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 ctr_object* ctr_audio_new(ctr_object* myself, ctr_argument* argumentList) {
+	
+	// If there are no more fonts slots available, generate an exception
+	if (AUDCount >= maxAUD - 1) {
+		char error_message[500]; // keep error message < 500 chars
+		if (!sprintf(error_message, CTR_ERR_MEDIA_SFX_DEPLETED, maxAUD - 1)) {
+			// if we fail to generate a proper error message, generate a generic error
+			ctr_error("Unable to generate error code for sfx/music depletion.", 0);
+		}
+		CtrStdFlow = ctr_error( error_message, 0 );
+		return CtrStdNil;
+	}
+	
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
 	instance->link = myself;
 	return instance;
@@ -2812,6 +2839,19 @@ void ctr_img_destructor(ctr_resource* rs) {
  * @info-image
  */
 ctr_object* ctr_img_new(ctr_object* myself, ctr_argument* argumentList) {
+	
+	// If there are no more image slots available, generate an exception
+	// To keep up speed and avoid gc cycles we use fixed image slots
+	if (IMGCount >= MaxIMG - 1) {
+		char error_message[500]; // keep error message < 500 chars
+		if (!sprintf(error_message, CTR_ERR_MEDIA_IMG_DEPLETED, MaxIMG - 1)) {
+			// if we fail to generate a proper error message, generate a generic error
+			ctr_error("Unable to generate error code for image depletion.", 0);
+		}
+		CtrStdFlow = ctr_error( error_message, 0 );
+		return CtrStdNil;
+	}
+
 	ctr_object* instance = ctr_internal_create_object(CTR_OBJECT_TYPE_OTEX);
 	instance->link = myself;
 	MediaIMG* mediaImage = &mediaIMGs[IMGCount++];

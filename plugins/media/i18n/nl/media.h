@@ -84,4 +84,8 @@
 #define CTR_DICT_JSONIFY_SET                "json-maken:"
 #define CTR_DICT_UNJSONIFY_SET              "van-json:"
 #define CTR_DICT_CLICKABLE_SET              "klikbaar:"
+#define CTR_ERR_MEDIA_IMG_DEPLETED          "Plaatjes zijn op! Deze Media-plugin geeft je maximaal %d plaatjes."
+#define CTR_ERR_MEDIA_SFX_DEPLETED          "Geluidjes zijn op! Deze Media-plugin geeft je maximaal %d geluidjes of muziekjes."
+#define CTR_ERR_MEDIA_FNT_DEPLETED          "Lettertypes zijn op! Deze Media-plugin geeft je maximaal %d lettertypes."
+
 
