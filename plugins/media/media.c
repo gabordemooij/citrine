@@ -4965,7 +4965,9 @@ ctr_object* ctr_media_fx(ctr_object* myself, ctr_argument* argumentList) {
 void begin(){
 	ctr_gc_clean_free = 1; // only for debugging
 	#ifdef WIN
+	#ifndef NOFREECONSOLE
 	FreeConsole();
+	#endif
 	#endif
 	ctr_internal_media_reset();
 	#ifndef TEST
