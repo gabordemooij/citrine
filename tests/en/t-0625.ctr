@@ -1,0 +1,17 @@
+
+>> m := Media new.
+>> c := Color new.
+
+Out write: c red, stop.
+Out write: c green, stop.
+Out write: c blue, stop.
+Out write: c transparency, stop.
+
+c red: 255 green: 1 blue: 2.
+c transparency: 0.5.
+
+Out write: c red, stop.
+Out write: c green, stop.
+Out write: c blue, stop.
+Out write: c transparency, stop.
+
