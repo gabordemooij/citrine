@@ -1,0 +1,19 @@
+LDFLAGS= -shared
+CFLAGS= -D WIN \
+		-D NOFREECONSOLE \
+        -D REPLACE_MEDIA_SOCK -D WINDOWS_MEDIA_SOCK
+
+all:libctrmedia.dll
+
+install-libctrmedia.dll: libctrmedia.dll
+	install libctrmedia.dll ../../mods/media/
+
+libctrmedia.dll: media.o
+	$(CC) ${LDFLAGS} media.o ../../ctr${ISO}import.lib -o libctrmedia.dll
+
+media.o:
+	$(CC) ${CFLAGS} -D MOCK $(EXTRACFLAGS) -I /usr/x86_64-w64-mingw32/include -I ../../i18n/${ISO} -I i18n/${ISO} -c media.c -Wall -Werror -fPIC -o media.o
+
+clean:
+	rm -rf libctrmedia.dll
+	rm -rf *.o
