@@ -7,7 +7,7 @@ libctrmedia.so: media.o
 	ld ${LDFLAGS} -o libctrmedia.so media.o
 
 media.o:
-	cc -D MOCK -I . -c media.c -I ../../i18n/${ISO} -I i18n/${ISO} -Wall -Werror -fPIC -o media.o
+	cc -D MOCK $(EXTRACFLAGS) -I . -c media.c -I ../../i18n/${ISO} -I i18n/${ISO} -Wall -Werror -fPIC -o media.o
 
 clean:
 	rm -rf libctrmedia.so

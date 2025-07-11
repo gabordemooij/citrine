@@ -26,7 +26,7 @@ buildlin(){
 if [[ $BUILD == "build" ]]; then
 make clean
 make
-NAME="libctrmedia.so" make plugin
+NAME="libctrmedia.so" make testplugin
 cp ctr bin/Linux/ctren
 fi
 }
@@ -39,7 +39,7 @@ export CC
 export DLLTOOL
 make -f makefile.win64 clean
 make -f makefile.win64
-NAME="libctrmedia.dll" make -f makefile.win64 plugin
+NAME="libctrmedia.dll" make -f makefile.win64 testplugin
 cp ctr bin/Win64/ctren
 fi
 }
@@ -114,7 +114,7 @@ unittest() {
 
 # select range
 FROM=1
-TIL=623
+TIL=624
 
 # run tests for linux
 buildlin
