@@ -824,14 +824,6 @@ ctr_size ctr_internal_media_bytepos2utf8pos( MediaIMG* image, int bytepos ) {
 	return chars;
 }
 
-void ctr_internal_unnatural_y( int* y ) {
-	*y = windowHeight - *y;
-}
-
-void ctr_internal_natural_y( int* y ) {
-	*y = windowHeight - *y;
-}
-
 void ctr_internal_media_reset_selection() {
 	CtrMediaSelectBegin = CtrMediaSelectEnd;
 }
@@ -2282,12 +2274,6 @@ ctr_object* ctr_point_x(ctr_object* myself, ctr_argument* argumentList) {
  * Out write: p x?, stop.
  * Out write: p y?, stop.
  */
-ctr_object* ctr_point_h(ctr_object* myself, ctr_argument* argumentList) {
-	int y = (int) ctr_tonum(ctr_internal_object_property(myself, "y", NULL));
-	ctr_internal_natural_y(&y);
-	return ctr_build_number_from_float(y);
-}
-
 ctr_object* ctr_point_y(ctr_object* myself, ctr_argument* argumentList) {
 	int y = (int) ctr_tonum(ctr_internal_object_property(myself, "y", NULL));
 	return ctr_build_number_from_float(y);
