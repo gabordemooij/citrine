@@ -634,6 +634,7 @@ extern ctr_object* ctr_array_first(ctr_object* myself, ctr_argument* argumentLis
 extern ctr_object* ctr_array_delete(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_array_combine(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_array_index_of(ctr_object* myself, ctr_argument* argumentList);
+extern ctr_object* ctr_array_has(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_array_copy(ctr_object* myself, ctr_argument* argumentList);
 
 /**

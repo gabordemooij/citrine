@@ -743,6 +743,11 @@ ctr_object* ctr_array_index_of( ctr_object* myself, ctr_argument* argumentList )
 	return ctr_build_number_from_float(found + 1);
 }
 
+ctr_object* ctr_array_has( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* index = ctr_array_index_of(myself, argumentList);
+	return ctr_build_bool( index != CtrStdNil );
+}
+
 /**
  * @def
  * Map
