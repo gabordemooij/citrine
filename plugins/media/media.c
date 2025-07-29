@@ -92,6 +92,8 @@ int CtrMediaDrawSizeX;
 int CtrMediaDrawSizeY;
 int CtrMediaScreenActive;
 
+double CtrMediaVersionTime = 0;
+
 struct CtrMediaTextRenderCacheItem {
 	char* text;
 	SDL_Surface* surface;
@@ -1632,6 +1634,10 @@ void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 			m->mov = (m->fric > m->mov) ? 0 : m->mov - m->fric;
 		}
 	}
+	// Bugfix: can't set speed to lower value
+	if (CtrMediaVersionTime >= CTR_VERSON_TIME_ID_1_0_3) {
+		if (m->mov > m->speed) m->mov = m->speed;
+	}
 	if (!m->ghost && m->gravity > 0 && m->y < windowHeight - m->h) {
 		if (m->gravity >= 1) {
 			m->gspeed += (m->gravity * 0.1) * dt;
@@ -1836,6 +1842,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	CtrMediaSteps = 0;
 	SDL_Rect dimensions;
 	SDL_Texture* texture;
+	CtrMediaVersionTime = ctr_internal_versiontime(); //can change per screen
 	char* imageFileStr = ctr_heap_allocate_cstring(ctr_internal_cast2string(argumentList->object));
 	char ftype = ctr_internal_media_determine_filetype(imageFileStr);
 	if (ftype == 0) {
