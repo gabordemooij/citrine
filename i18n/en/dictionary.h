@@ -199,3 +199,5 @@
 #define CTR_DICT_MATH_TAN                        "tan"
 #define CTR_DICT_MATH_ATAN                       "atan"
 #define CTR_DICT_MATH_LOG                        "log"
+#define CTR_DICT_TIMEMACHINE_SET                 "timemachine:"
+

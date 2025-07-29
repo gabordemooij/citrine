@@ -962,6 +962,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_END ), &ctr_program_exit );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_TONUMBER ), &ctr_program_tonumber );
 	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_TOSTRING ), &ctr_program_tostring );
+	ctr_internal_create_func(CtrStdCommand, ctr_build_string_from_cstring( CTR_DICT_TIMEMACHINE_SET ), &ctr_program_timemachine );
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_PROGRAM ), CtrStdCommand, 0 );
 	CtrStdCommand->link = CtrStdObject;
 	CtrStdCommand->info.sticky = 1;

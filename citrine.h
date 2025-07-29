@@ -49,8 +49,8 @@
 /**
  * Version information
  */
-#define CTR_VERSION "1.0.2"
-#define CTR_VERSION_NUM 10002
+#define CTR_VERSION "1.0.3"
+#define CTR_VERSION_NUM 10003
 
 /**
  * Define the Citrine tokens 
@@ -712,7 +712,8 @@ extern ctr_object* ctr_program_tostring(ctr_object* myself, ctr_argument* argume
 extern ctr_object* ctr_program_test(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_program_object_exists(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_program_object_message_exists(ctr_object* myself, ctr_argument* argumentList);
-
+extern ctr_object* ctr_program_timemachine(ctr_object* myself, ctr_argument* argumentList);
+extern double ctr_internal_versiontime(void);
 
 /**
  * Clock Interface
