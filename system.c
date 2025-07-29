@@ -6,6 +6,7 @@ int ctr_gc_kept_counter;
 int ctr_gc_sticky_counter;
 int ctr_gc_mode;
 
+double CtrVersionTime;
 
 /**
  * @internal
@@ -670,6 +671,16 @@ ctr_object* ctr_program_err(ctr_object* myself, ctr_argument* argumentList) {
 	fwrite( "\n", sizeof(char), 1, stderr);
 	ctr_heap_free( message );
 	return myself;
+}
+
+ctr_object* ctr_program_timemachine(ctr_object* myself, ctr_argument* argumentList) {
+	time_t stamp = ctr_tonum( ctr_clock_time( argumentList->object, NULL ) );
+	CtrVersionTime = stamp;
+	return myself;
+}
+
+double ctr_internal_versiontime() {
+	return CtrVersionTime;
 }
 
 /**
