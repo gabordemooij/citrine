@@ -6,7 +6,7 @@ int ctr_gc_kept_counter;
 int ctr_gc_sticky_counter;
 int ctr_gc_mode;
 
-double CtrVersionTime;
+double CtrVersionTime = 1753777732; // 29 july 2025
 
 /**
  * @internal
