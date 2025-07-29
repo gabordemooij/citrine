@@ -1,5 +1,6 @@
 #/bin/bash
 
+# EXTRACFLAGS=" -D DESKTOP_FULLSCREEN "
 # usage (from rootdir & first compile regular!):
 # Linux:
 # OS="Linux" MEDIALIB="libctrmedia.so" MAKEFILE="makefile" ISO="nl" bash misc/export/pc/export.sh
@@ -16,7 +17,7 @@ PACKAGE="media" \
 NAME=$MEDIALIB \
 make -f $MAKEFILE clean
 
-PACKAGE="media" NAME=$MEDIALIB EXTRACFLAGS=" -D DESKTOP_FULLSCREEN " \
+PACKAGE="media" NAME=$MEDIALIB EXTRACFLAGS=$EXTRACFLAGS \
 make -f $MAKEFILE plugin
 
 # compile Citrine with embed options
