@@ -44,6 +44,7 @@
 
 #define CTR_MEDIA_FX_FLAG_MEDIA_TEST 0
 #define CTR_MEDIA_FX_FLAG_MEDIA_REMAP_ALL 1
+#define CTR_MEDIA_FX_FLAG_SMOOTH_GAME_CONTROL 2
 #define CTR_MEDIA_FX_FLAG_AUDIO_JUMP 2000
 
 
@@ -69,6 +70,7 @@ int CtrMediaControlMode = 0;
 int CtrMediaRotation = 0;
 int CtrMediaStdDelayTime = 0;
 int CtrMediaTime = 0;
+int CtrMediaLastScanCode = 0;
 char CtrMediaBreakLoopFlag = 0;
 uint16_t CtrMediaNetworkChunkSize = 350;
 time_t CtrMediaFrameTimer = 0;
@@ -195,6 +197,7 @@ uint8_t CtrMediaEventListenFlagStep;
 // FX flags
 int CtrMediaFXFlagMapABXY2Up;
 int CtrMediaFXFlagJumpSFX;
+int CtrMediaFXFlagSmoothGameControl;
 
 // FX data
 ctr_object* CtrMediaFXFlagJumpSound;
@@ -2054,6 +2057,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 					if (CtrMediaEventListenFlagKeyUp) {
 						ctr_media_event(myself, CTR_DICT_ON_KEY_UP, SDL_GetKeyName(event.key.keysym.sym));
 					}
+					if (CtrMediaFXFlagSmoothGameControl && CtrMediaLastScanCode != event.key.keysym.scancode) break;
 					switch(event.key.keysym.scancode) {
 						case SDL_SCANCODE_LEFT:
 						case SDL_SCANCODE_RIGHT:
@@ -2075,6 +2079,7 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 					if (CtrMediaEventListenFlagKeyDown) {
 						ctr_media_event(myself, CTR_DICT_ON_KEY_DOWN, SDL_GetKeyName(event.key.keysym.sym));
 					}
+					CtrMediaLastScanCode = event.key.keysym.scancode;
 					switch(event.key.keysym.scancode) {
 						case SDL_SCANCODE_LSHIFT:
 						case SDL_SCANCODE_RSHIFT:
@@ -4951,6 +4956,15 @@ ctr_object* ctr_media_fx(ctr_object* myself, ctr_argument* argumentList) {
 		// audio channel.
 		CtrMediaFXFlagJumpSFX = ctr_tonum(data);
 		CtrMediaFXFlagJumpSound = argumentList->next->object;
+	}
+	else if (fx_code == CTR_MEDIA_FX_FLAG_SMOOTH_GAME_CONTROL) {
+		// enable smoother control for games
+		// in this case, keyup will not fire if another key has been pressed
+		// this is different from normal control where up is always processed
+		// however for games this might cause hiccups
+		// there will probably be more versions in the future, the argument
+		// indicates the version for smooth game control to use ie 1 = version 1.0
+		CtrMediaFXFlagSmoothGameControl = ctr_tonum(data);
 	}
 	return myself;
 }
