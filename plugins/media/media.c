@@ -184,7 +184,7 @@ ctr_object* networkObject;
 ctr_object* packageObject;
 ctr_object* CtrMediaFFIObjectBase;
 ctr_object* CtrMediaDataBlob;
-SDL_GameController* gameController;
+SDL_Gamepad* gameController;
 
 uint8_t CtrMediaEventListenFlagKeyUp;
 uint8_t CtrMediaEventListenFlagKeyDown;
@@ -209,6 +209,13 @@ char* ctr_internal_media_normalize_line_endings(char* text);
 
 int CtrMediaTimers[100];
 int CtrMaxMediaTimers = 100;
+
+void ctr_internal_media_measure_text(TTF_Font* font, char* text_buffer, int* w, int* h) {
+	TTF_Text ttf_text;
+	TTF_SetTextFont(&ttf_text, font);
+	TTF_SetTextString(&ttf_text, text_buffer, strlen(text_buffer));
+	TTF_GetTextSize(&ttf_text, w, h);
+}
 
 
 /**
@@ -1128,7 +1135,7 @@ void ctr_internal_media_infercursorpos(MediaIMG* image, int x, int y) {
 	memcpy(measurementBuffer, image->text+line_start, line_length);
 	measurementBuffer[line_length] = '\0';
 	int total_line_width = 0;
-	TTF_SizeUTF8(image->font, measurementBuffer, &total_line_width, NULL);
+	ctr_internal_media_measure_text(image->font, measurementBuffer, &total_line_width, NULL);
 	//Line is shorter than mouse pos, go to end of line
 	if (total_line_width < relx) {
 		ctr_heap_free(measurementBuffer);
@@ -1139,7 +1146,7 @@ void ctr_internal_media_infercursorpos(MediaIMG* image, int x, int y) {
 	int last_line_segment_width = line_segment_width;
 	while(CtrMediaInputIndex>line_start) {
 		last_line_segment_width = line_segment_width;
-		TTF_SizeUTF8(image->font, measurementBuffer, &line_segment_width, NULL);
+		ctr_internal_media_measure_text(image->font, measurementBuffer, &line_segment_width, NULL);
 		if (line_segment_width < relx) {
 			int d1 = relx - line_segment_width;
 			int d2 = last_line_segment_width - relx;
