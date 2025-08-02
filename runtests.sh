@@ -90,7 +90,7 @@ unittest() {
 	diff="$(diff -bBZ /tmp/out tests/en/exp/test${i}en.exp)"
     if [[  $diff != "" ]]; then
 		echo "𐄂 test $i"
-		echo $skipcode
+		echo "$skipcode"
 		echo "expected:"
 		echo "|$expected|"
 		echo "observed:"
@@ -98,7 +98,7 @@ unittest() {
 		echo "diff:"
 		diff -bBZ tests/en/exp/test${i}en.exp /tmp/out
 		echo "code:"
-		echo $code
+		echo "$code"
 		read -p "save new test result? (y/n)" answer
 		if [[ $answer == "y" ]]; then
 			cat /tmp/out > tests/en/exp/test${i}en.exp
@@ -114,7 +114,7 @@ unittest() {
 
 # select range
 FROM=1
-TIL=626
+TIL=628
 
 # run tests for linux
 buildlin

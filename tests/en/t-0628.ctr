@@ -1,0 +1,17 @@
+>> o := Object new.
+o on: ['iter'] do: {
+	task error: ['ok'].
+}.
+o on: ['proc'] do: {
+	>> x := ['xx'].
+	{
+		>> task := this-task. # pass the task that handles the error!
+		{ o iter. } procedure.
+		Out write: x, stop.
+	}
+	except: { :e
+		Out write: e, stop.
+	}, start.
+}.
+o proc.
+
