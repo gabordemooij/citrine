@@ -1227,6 +1227,7 @@ ctr_object* ctr_block_procedure(ctr_object* myself, ctr_argument* argumentList) 
 	ctr_block_run(block, arguments, NULL);
 	ctr_heap_free( arguments );
 	if (CtrStdFlow == CtrStdBreak) CtrStdFlow = NULL; /* consume break */
+	if (CtrStdFlow == CtrStdContinue) CtrStdFlow = NULL; /* should not be used, but is accepted anyway */
 	block->info.mark = 0;
 	block->info.sticky = 0;
 	return myself;
