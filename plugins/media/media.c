@@ -3821,9 +3821,15 @@ void ctr_internal_media_init() {
 	CtrMediaAudioChannels = MIX_DEFAULT_CHANNELS;
 	CtrMediaAudioBuffers = 4096;
 	CtrMediaAudioVolume = MIX_MAX_VOLUME;
+
+	#ifdef TEST
+		CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 100, 100, SDL_WINDOW_OPENGL );
+		CtrMediaRenderer = SDL_CreateRenderer(CtrMediaWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
+		return;
+	#endif
+
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) ctr_internal_media_fatalerror("SDL failed to init", SDL_GetError());
 	IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
-	
 	
 	#ifdef FULLSCREEN
 	CtrMediaWindow = SDL_CreateWindow("Citrine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 100, 100, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
@@ -4984,9 +4990,7 @@ void begin(){
 	#endif
 	#endif
 	ctr_internal_media_reset();
-	#ifndef TEST
 	ctr_internal_media_init();
-	#endif
 	#ifdef FFI
 	CtrMediaDataBlob = ctr_media_new(CtrStdObject, NULL);
 	CtrMediaDataBlob->link = CtrStdObject;

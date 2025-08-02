@@ -255,7 +255,7 @@ void SDL_ShowSimpleMessageBox(int type, char* title, char* message, void* window
 }
 
 SDL_Renderer* SDL_CreateRenderer(void* window, int param2, int mode) {
-	printf("SDL_CreateRenderer(%p,%d,%d)\n", window, param2, mode);
+	printf("SDL_CreateRenderer(window,%d,%d)\n", param2, mode);
 	return &MockRenderer;
 }
 
@@ -304,7 +304,7 @@ int SDL_SetRenderTarget(SDL_Renderer *renderer, SDL_Texture *texture) {
 }
 
 SDL_Texture* SDL_CreateTextureFromSurface(SDL_Renderer* renderer, SDL_Surface* surface) {
-	printf("SDL_CreateTextureFromSurface(%p,%p)\n",renderer,surface);
+	printf("SDL_CreateTextureFromSurface()\n");
 	return NULL;
 }
 
