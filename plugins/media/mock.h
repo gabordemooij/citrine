@@ -64,7 +64,7 @@
 #define SDL_TICKS_PASSED(A, B)  ((uint32_t)((B) - (A)) <= 0)
 
 
-typedef void* SDL_GameController;
+typedef void* SDL_Gamepad;
 typedef void* SDL_Renderer;
 typedef void* SDL_Texture;
 typedef void* TTF_Font;
@@ -74,6 +74,7 @@ typedef void* SDL_Keycode;
 typedef void* SDL_Point;
 typedef void* SDL_RendererFlip;
 typedef void* SDL_Button;
+typedef void* TTF_Text;
 
 typedef void* plm_frame_t;
 
@@ -525,7 +526,7 @@ int SDL_Quit() {
 	return 0;
 }
 
-int TTF_SizeUTF8(TTF_Font *font, const char *text, int *w, int *h) {
+int TTF_GetTextSize(TTF_Font *font, const char *text, int *w, int *h) {
 	printf("TTF_SizeUTF8(%p, %s)\n", font, text);
 	*w = 10;
 	*h = 10;
