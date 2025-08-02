@@ -1,0 +1,14 @@
+>> o := Object new.
+o on: ['iter'] do: {
+	(x = ['o']) true: {
+		x append: ['k'].
+	}, continue.
+	>> y := 1 / 0. # should not come here...
+}.
+o on: ['proc'] do: {
+	>> x := ['o'].
+	{ self iter. } procedure.
+	Out write: x, stop.
+}.
+
+o proc.
