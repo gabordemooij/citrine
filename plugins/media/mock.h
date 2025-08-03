@@ -216,6 +216,7 @@ SDL_Color MockColor;
 SDL_Window MockWindow;
 SDL_Renderer MockRenderer;
 SDL_RWops MockRWops;
+SDL_Texture MockTexture;
 
 int MockTicks64 = 0;
 int MockPerformanceCounter = 0;
@@ -304,7 +305,7 @@ int SDL_SetRenderTarget(SDL_Renderer *renderer, SDL_Texture *texture) {
 
 SDL_Texture* SDL_CreateTextureFromSurface(SDL_Renderer* renderer, SDL_Surface* surface) {
 	printf("SDL_CreateTextureFromSurface()\n");
-	return NULL;
+	return &MockTexture;
 }
 
 SDL_Surface* TTF_RenderUTF8_Shaded(TTF_Font* font, const char *text, SDL_Color fg, SDL_Color bg) {
@@ -323,7 +324,7 @@ int SDL_BlitSurface(SDL_Surface* src, const SDL_Rect* srcrect, SDL_Surface* dst,
 }
 
 void SDL_FreeSurface(SDL_Surface* surface) {
-	printf("SDL_FreeSurface(%p)\n",surface);
+	printf("SDL_FreeSurface(surface)\n");
 }
 
 SDL_Surface* SDL_CreateRGBSurface(uint32_t flags, int width, int height, int depth, uint32_t Rmask, uint32_t Gmask, uint32_t Bmask, uint32_t Amask) {
@@ -347,7 +348,7 @@ TTF_Font* TTF_OpenFont(const char* file, int ptsize) {
 }
 
 SDL_Surface* IMG_Load_RW(SDL_RWops* src, int freesrc) {
-	printf("IMG_Load_RW(%p,%d)\n", src, freesrc);
+	printf("IMG_Load_RW(rwops,%d)\n", freesrc);
 	return &MockSurface;
 }
 
@@ -465,7 +466,7 @@ void SDL_SetWindowPosition(SDL_Window* window, int x, int y) {
 }
 
 int SDL_QueryTexture(SDL_Texture* texture, uint32_t* format, int* access, int* w, int* h) {
-	printf("SDL_QueryTexture(%p...)\n", texture);
+	printf("SDL_QueryTexture(texture...)\n");
 	*w = 640;
 	*h = 480;
 	return 0;

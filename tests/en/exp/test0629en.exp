@@ -1,0 +1,7 @@
+SDL_RWFromFile(test.png,rb)
+IMG_Load_RW(rwops,1)
+SDL_CreateTextureFromSurface()
+SDL_QueryTexture(texture...)
+image created
+SDL_DestroyTexture()
+SDL_FreeSurface(surface)
