@@ -1,0 +1,4 @@
+>> m := Media new.
+>> image := Image new: ['test.png'].
+Out write: ['image created'], stop.
+
