@@ -256,12 +256,10 @@ void SDL_ShowSimpleMessageBox(int type, char* title, char* message, void* window
 }
 
 SDL_Renderer* SDL_CreateRenderer(void* window, int param2, int mode) {
-	printf("SDL_CreateRenderer(window,%d,%d)\n", param2, mode);
 	return &MockRenderer;
 }
 
 SDL_Window* SDL_CreateWindow(const char *title, int x, int y, int w, int h, uint32_t flags) {
-	printf("SDL_CreateWindow(%s,%d,%d,%d,%d,%d)\n",title,x,y,w,h,flags);
 	return &MockWindow;
 }
 
