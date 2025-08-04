@@ -1,9 +1,3 @@
-#ifdef WINDOWS_MEDIA_SOCK
-#define WIN32_LEAN_AND_MEAN
-#define _WIN32_WINNT 0x0501 //Windows XP
-#include <winsock2.h>
-#endif
-
 #include "../../citrine.h"
 
 #ifdef __EMSCRIPTEN__
@@ -251,7 +245,6 @@ ctr_object* ctr_string_escape(ctr_object* myself, ctr_argument* argumentList)  {
 			}
 		}
 	}
-	//printf("tlen = %ld, tag_len = %ld \n",tlen, tag_len);
 	
 	tlen = len + tag_len;
 	tstr = ctr_heap_allocate( tlen * sizeof( char ) );
