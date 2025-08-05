@@ -285,7 +285,6 @@ ctr_object* ctr_string_escape(ctr_object* myself, ctr_argument* argumentList)  {
 			tstr[k++] = str[i];
 		}
 	}
-	//printf("tlen = %ld \n",tlen);
 	newString = ctr_build_string(tstr, tlen);
 	ctr_heap_free( tstr );
 	return newString;
@@ -394,9 +393,6 @@ ctr_object* ctr_string_unescape(ctr_object* myself, ctr_argument* argumentList) 
 			tstr[k++] = str[i];
 		}
 	}
-	
-	
-	
 	newString = ctr_build_string(tstr, tlen);
 	ctr_heap_free( tstr );
 	return newString;
@@ -1833,7 +1829,6 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	CtrMediaSelectBegin = 0;
 	CtrMediaSelectEnd=0;
 	CtrMediaCameraInit = 0;
-	//controllableObject = NULL;
 	focusObject = NULL;
 	CtrMediaSteps = 0;
 	SDL_Rect dimensions;
