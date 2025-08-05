@@ -5125,7 +5125,6 @@ void begin(){
 	ctr_internal_create_func(jsonObject, ctr_build_string_from_cstring( CTR_DICT_UNJSONIFY_SET ), &ctr_json_parse );
 	ctr_internal_create_func(jsonObject, ctr_build_string_from_cstring( CTR_DICT_JSONIFY_SET ), &ctr_json_jsonify );
 	
-	
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_IMAGE_OBJECT ), imageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_FONT_OBJECT ), fontObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_COLOR_OBJECT ), colorObject, CTR_CATEGORY_PUBLIC_PROPERTY);
