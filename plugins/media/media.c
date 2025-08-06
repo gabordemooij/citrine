@@ -9,7 +9,6 @@
 #include "jsmn.h"
 #include "jsmn.c"
 
-
 #ifdef SDL
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -1602,8 +1601,12 @@ void ctr_internal_media_render_image(MediaIMG* m, SDL_Rect r, SDL_Rect s, MediaI
 void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 	MediaIMG* player = NULL;
 	// keep a constant physics speed by calculating the timediff
+	#ifdef TEST
+	double dt = 1;
+	#else
 	double delta_in_seconds = ((CtrMediaTicks2 - CtrMediaTicks1) / 1000.0f );
 	double dt  = 60 * delta_in_seconds;
+	#endif
 	if (controllableObject != NULL) {
 		player = (MediaIMG*) controllableObject->value.rvalue->ptr;
 		if (CtrMediaJump == 2 && player == m) {
