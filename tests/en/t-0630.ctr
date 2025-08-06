@@ -1,0 +1,17 @@
+>> m := Media new.
+>> a := Image new: ['test.png'].
+a x: 10 y: 0.
+a to-x: 100 y: 0.
+a speed: 1.
+Out write: ['speed=1'], stop.
+>> step := 0.
+m on: ['step'] do: {
+	step add: 1.
+	Out write: ['step='] + step, stop.
+	Out write: ['x='] + a x?, stop.
+	(step > 2) true: { 
+		Out write: ['speed=0.'], stop.
+		a speed: 0.
+	}.
+}.
+m screen: ['screen.png'].
