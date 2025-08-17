@@ -31,6 +31,8 @@
 #include <ffi.h>
 #endif
 
+#include <ios.c>
+
 #ifdef MOCK
 #include "mock.h"
 #endif
@@ -4594,5 +4596,6 @@ void begin(){
 }
 
 void init_embedded_media_plugin() {
+	SDL_SetEventFilter(iosevents, NULL);
 	begin();
 }
