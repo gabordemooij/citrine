@@ -8,10 +8,10 @@ install-libctrmedia.dll: libctrmedia.dll
 	install libctrmedia.dll ../../mods/media/
 
 libctrmedia.dll: media.o
-	$(CC) ${LDFLAGS} media.o -lffi -lcurl -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf ../../ctr${ISO}import.lib -o libctrmedia.dll
+	$(CC) ${LDFLAGS} jsmn.o media.o -lffi -lcurl -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf ../../ctr${ISO}import.lib -o libctrmedia.dll
 
 media.o:
-	$(CC) ${CFLAGS} -D SDL -D LIBCURL -D FFI $(EXTRACFLAGS) -I /usr/x86_64-w64-mingw32/include -I /usr/include/SDL2 -I ../../i18n/${ISO} -I i18n/${ISO} -c media.c -Wall -Werror -fPIC -o media.o
+	$(CC) ${CFLAGS} -D SDL -D LIBCURL -D FFI $(EXTRACFLAGS) -I /usr/x86_64-w64-mingw32/include -I /usr/include/SDL2 -I ../../i18n/${ISO} -I i18n/${ISO} -c media.c jsmn.c -Wall -Werror -fPIC
 
 clean:
 	rm media.o

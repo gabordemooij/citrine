@@ -7,7 +7,6 @@
 #include "passw.c"
 #include "media.h"
 #include "jsmn.h"
-#include "jsmn.c"
 
 #ifdef SDL
 #include <SDL2/SDL.h>
