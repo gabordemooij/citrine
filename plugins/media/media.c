@@ -15,6 +15,16 @@
 #include <SDL2/SDL_ttf.h>
 #endif
 
+
+#ifdef MACSDL
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_mixer.h>
+#include <SDL_ttf.h>
+#endif
+
+
+
 #include <stdio.h>
 #include <math.h>
 
@@ -4705,7 +4715,7 @@ ctr_object* ctr_media_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_object_on_do(myself, argumentList);
 }
 
-
+#ifndef REPLACE_MEDIA_SYSTEM_COMMAND
 ctr_object* ctr_internal_media_external_command(char* command_str, char* fallback, char* parameter_str, char* template_str) {
 	char* default_template_str = "%s '%s'";
 	int maxlen = 500;
@@ -4718,7 +4728,13 @@ ctr_object* ctr_internal_media_external_command(char* command_str, char* fallbac
 	if  (system(command)==0) return CtrStdBoolTrue;
 	return CtrStdBoolFalse;
 }
+#endif
 
+#ifdef MEDIA_SYSTEM_COMMAND_STUB
+ctr_object* ctr_internal_media_external_command(char* command_str, char* fallback, char* parameter_str, char* template_str) {
+	return CtrStdBoolFalse;
+}
+#endif
 
 /**
  * @internal
