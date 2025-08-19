@@ -3450,17 +3450,15 @@ void ctr_internal_img_render_cursor(ctr_object* focusObject) {
 	if (CtrMediaSelectBegin > image->textlength) CtrMediaSelectBegin = 0;
 	if (CtrMediaSelectEnd > image->textlength) CtrMediaSelectEnd = 0;
 	int i = 0;
-	int x1 = 0;
 	int y1 = 0;
 	int beginline = 0;
 	while(i<CtrMediaInputIndex) {
 		if (image->text[i]=='\r') {
 			y1 += 1;
-			x1 = 0;
 		} else if (image->text[i]=='\n') {
 			beginline = i;
 		} else if ((image->text[i] & 0x80) == 0x00 || (image->text[i] & 0xC0) == 0xC0) {
-			x1++;
+		    //x ++?
 		}
 		i++;
 	}
