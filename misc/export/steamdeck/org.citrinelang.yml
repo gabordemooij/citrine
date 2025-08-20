@@ -6,6 +6,7 @@ command: ctrnl
 finish-args:
   - --share=network
   - --socket=x11
+  - --socket=wayland
   - --socket=pulseaudio
   - --device=all
   - --filesystem=home
