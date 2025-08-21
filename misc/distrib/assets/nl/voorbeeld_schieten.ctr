@@ -1,0 +1,25 @@
+>> m := Media nieuw.
+>> doelwit := Plaatje nieuw: ['doel.png'].
+>> sfx := Geluid nieuw: ['geluidje.wav'].
+
+doelwit bij: ['klik'] doen: {
+	sfx afspelen.
+	m toon: (
+		['x,y'] x zelf x? y zelf y?
+	).
+}.
+
+m bij: ['wekker:'] doen: {
+	doelwit
+		x: (Getal tussen: 50 en: 750)
+		y: (Getal tussen: 50 en: 350).
+	m wekker: 1 over: 2000.
+}.
+
+m bij: ['start'] doen: {
+	m wekker: 1 over: 1.
+}.
+
+m 
+breedte: 800 hoogte: 400,
+scherm: ['blauw.png'].

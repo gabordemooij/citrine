@@ -1,0 +1,30 @@
+>> m := Media nieuw.
+>> heteluchtballon := Plaatje nieuw: ['ballon.png'].
+>> vogel := Plaatje nieuw: ['vogel.png'], filmrol: 2 snelheid: 10.
+
+vogel bij: ['vliegen'] doen: {
+	>> right := Getal tussen: 0 en: 500.
+	>> height := Getal tussen: 0 en: 100.
+	zelf naar-x: right y: height.
+}.
+
+vogel bij: ['bestemming'] doen: { zelf vliegen. }.
+heteluchtballon bij: ['bots:'] doen: { :ander
+	(ander = vogel) ja: { Programma einde. }.
+}.
+m bij: ['start'] doen: {
+	heteluchtballon
+		fixeer: Ja,
+		actief: Ja,
+		besturing: 1, 
+		zwaartekracht: 0,2.
+	vogel
+		x: 300 y: 10,
+		zwaartekracht: 0,01,
+		snelheid: 1,
+		vliegen.
+}.
+
+m 
+breedte: 800 hoogte: 400,
+scherm: ['blauw.png'].

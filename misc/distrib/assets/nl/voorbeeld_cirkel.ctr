@@ -1,0 +1,31 @@
+>> m := Media nieuw.
+
+>> o := Kleur nieuw rood: 0 groen: 0 blauw: 0.
+>> a := Plaatje nieuw: ['blauw.png'].
+>> r := 80.
+>> c := 200.
+
+m bij: ['start'] doen: {
+	{ :j
+		>> p := Reeks nieuw.
+		{ :i 
+			p toevoegen: (
+				Punt nieuw 
+				x: r * i cos + ( r * j cos + c )
+				y: r * i sin + ( r * j sin + c )
+			).
+		} * 360.
+		
+		a tekenen: p kleur: (
+			Kleur nieuw 
+				rood: 0
+				groen: 255 - (j / 36) * 255
+				blauw: (j / 36) * 255
+		).
+		
+	} * 36.
+}.
+
+m 
+breedte: 800 hoogte: 400,
+scherm: ['blauw.png'].

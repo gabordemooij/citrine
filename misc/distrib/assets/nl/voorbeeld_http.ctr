@@ -1,0 +1,5 @@
+>> m := Media nieuw.
+>> html := Netwerk stuur: Niets naar: ['https://citrine-lang.org/'].
+>> meta := html opsplitsen: ['<meta name="description" content="'].
+meta := meta bij: 2, opsplitsen: ['"'], bij: 1.
+m toon: ['Fetched:'] + meta.

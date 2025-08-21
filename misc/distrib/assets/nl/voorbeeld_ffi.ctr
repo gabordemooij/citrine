@@ -1,0 +1,23 @@
+>> m := Media nieuw.
+>> a := Blob nieuw: 8.
+a bytes: (
+	Reeks <<: 
+	2, ; 0 ; 0 ; 0 ;
+    1  ; 0 ; 0 ; 0
+).
+
+>> struct := Blob struct: (Reeks <<: ['int'], ; ['int']).
+
+m koppel: ( Reeks <<: ['@structtest'], ;
+	['@structtest'] ;
+	(Reeks <<: struct) ; 
+	['int'] ;	
+	['ffitest'] ;
+	['ffisum:']
+).
+	
+m toon: ['FFI:'] + (ffitest ffisum: a).
+
+struct structvrij.
+struct vrij.
+a vrij.
