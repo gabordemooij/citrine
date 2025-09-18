@@ -1,0 +1,24 @@
+>> ruimteschip := Plaatje nieuw: ['ruimteschip.png'].
+>> astronaut1  := Plaatje nieuw: ['astronaut.png'].
+>> monster1    := Plaatje nieuw: ['monster.png'].
+
+ruimteschip 
+besturing: Ja,
+actief: Ja,
+zwaartekracht: 0,1.
+
+astronaut1 x: 200 y: 200.
+monster1 x: 500 y: 300.
+
+ruimteschip bij: ['bots:'] doen: { :ander 
+    (ander = astronaut1) ja: {
+		ander x: 0 y: -100.
+    }.
+    (ander = monster1) ja: {
+		Programma einde.
+    }.
+}.
+
+Media
+breedte: 400 hoogte: 300, 
+scherm: ['ruimte.jpg'].

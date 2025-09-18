@@ -1,0 +1,13 @@
+>> m := Media nieuw.
+
+
+>> muis := Plaatje nieuw: ['muis.png'].
+
+muis
+	x: 0 y: 100,
+	snelheid: 5,
+	besturing: Ja.
+
+m 
+breedte: 800 hoogte: 400,
+scherm: ['blauw.png'].

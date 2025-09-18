@@ -1,0 +1,44 @@
+>> ruimteschip := Plaatje nieuw: ['ruimteschip.png'].
+>> astronaut1  := Plaatje nieuw: ['astronaut.png'].
+>> astronaut2  := Plaatje nieuw: ['astronaut.png'].
+>> monster1    := Plaatje nieuw: ['monster.png'].
+>> monster2    := Plaatje nieuw: ['monster.png'].
+>> geluidje    := Geluid nieuw: ['explosie.ogg'].
+ruimteschip 
+besturing: Ja,
+actief: Ja,
+zwaartekracht: 0,1.
+
+astronaut1 x: 200 y: 200.
+astronaut2 x: 300 y: 500.
+monster1 x: 500 y: 300.
+monster2 x: 300 y: 50.
+
+Media bij: ['stap'] doen: {
+    monster1 
+    fixeer: Ja,
+    naar-x: ruimteschip x? y: ruimteschip y?.
+    monster1 snelheid: (Getal tussen: 0,1 en: 0,5).
+    
+     monster2
+    fixeer: Ja,
+    naar-x: ruimteschip x? y: ruimteschip y?.
+    monster2 snelheid: (Getal tussen: 0,1 en: 0,5).
+}.
+
+
+ruimteschip bij: ['bots:'] doen: { :ander 
+    (ander = astronaut1 of: ander = astronaut2) ja: {
+		ander x: 0 y: -100.
+    }.
+    (ander = monster1 of: ander = monster2) ja: {
+
+		ruimteschip bron: ['explosie.png'],
+		snelheid: 0, actief: Nee.
+		geluidje afspelen.
+    }.
+}.
+
+Media 
+breedte: 800 hoogte: 400, 
+scherm: ['ruimte.jpg'].
