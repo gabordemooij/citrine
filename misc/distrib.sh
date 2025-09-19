@@ -1,7 +1,7 @@
 # Go back to Citrine root dir
 cd ..
-VERSION="1_0_3" #for files
-VERSION_NAME="1.0.3" #for display
+VERSION="1_0_4" #for files
+VERSION_NAME="1.0.4" #for display
 VERSION_DEB="-1"     #for debian
 lang="nl"
 echo "VERSION = $VERSION | $lang"
