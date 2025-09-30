@@ -1488,6 +1488,7 @@ void ctr_internal_media_detect_collisions(MediaIMG* m, SDL_Rect r) {
 				}
 				if (m->bounce) {
 					m->dir = (double) (((int)m->dir + 145) % 360);
+					m->gspeed = 0;
 				}
 			}
 			if (m->collidable) {
