@@ -1,0 +1,24 @@
+app-id: org.citrinelang.export
+runtime: org.freedesktop.Platform
+runtime-version: "24.08"
+sdk: org.freedesktop.Sdk
+command: ctrnl
+finish-args:
+  - --share=network
+  - --socket=x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --device=all
+  - --filesystem=home
+
+modules:
+  - name: steamtrine
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 ctrnl /app/bin/ctrnl
+      - cp -r mods /app/bin/
+      - install -Dm644 assets/icon.png /app/share/icons/hicolor/128x128/apps/org.citrinelang.export.png
+      - install -Dm644 steamtrine.desktop /app/share/applications/org.citrinelang.export.desktop
+    sources:
+      - type: dir
+        path: .

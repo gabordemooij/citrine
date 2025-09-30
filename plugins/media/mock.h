@@ -45,7 +45,7 @@
 #define SDL_BUTTON_LEFT 46
 #define SDL_MOUSEBUTTONUP 47
 #define SDL_MOUSEMOTION 48
-#define SDL_QUIT 49
+#define SDL_QUIT 0x100
 #define SDL_TEXTUREACCESS_STREAMING 50
 #define SDL_PIXELFORMAT_RGB24 51
 #define SDL_FLIP_HORIZONTAL NULL
@@ -223,8 +223,8 @@ int MockTicks64 = 0;
 int MockPerformanceCounter = 0;
 int MockPerformanceFrequency = 0;
 
-
 char* MockValTestJPG = "test.jpg";
+char* MockValScreenPNG = "screen.png";
 
 char* SDL_GetError() {
 	printf("SDL_GetError()\n");
@@ -390,10 +390,12 @@ SDL_RWops* SDL_RWFromMem(void* mem, int size) {
 
 SDL_RWops* SDL_RWFromFile(const char* file, const char* mode) {
 	printf("SDL_RWFromFile(%s,%s)\n", file, mode);
-	
 	MockRWops.mock_file = 0;
 	if (strcmp(file,MockValTestJPG)==0) {
 		MockRWops.mock_file = MockValTestJPG;
+	}
+	if (strcmp(file,MockValScreenPNG)==0) {
+		MockRWops.mock_file = MockValScreenPNG;
 	}
 	return &MockRWops;
 }
@@ -413,7 +415,7 @@ void Mix_FreeChunk(Mix_Chunk *chunk) {
 }
 
 void SDL_RenderPresent(SDL_Renderer * renderer) {
-	printf("SDL_RenderPresent(%p)\n", renderer);
+	printf("SDL_RenderPresent(renderer)\n");
 }
 
 int SDL_strlen(char* str) {
@@ -444,24 +446,32 @@ const char* SDL_GameControllerGetStringForButton(SDL_GameControllerButton button
 	return "";
 }
 
+int MockEventCount = 0;
+
 int SDL_PollEvent(SDL_Event* event) {
-	printf("SDL_PollEvent(%p)\n", event);
-	return 0;
+	int has_event = 0;
+	if (MockEventCount >= 3) {
+		printf("SDL_PollEvent(SDL_QUIT)\n");
+		event->type = SDL_QUIT;
+		has_event = 1;
+	}
+	MockEventCount++;
+	return has_event;
 }
 
 int SDL_RenderClear(SDL_Renderer* renderer) {
-	printf("SDL_RenderClear(%p)\n", renderer);
+	printf("SDL_RenderClear(renderer)\n");
 	return 0;
 }
 
 void SDL_GL_GetDrawableSize(SDL_Window* window, int* w, int* h) {
-	printf("SDL_GL_GetDrawableSize(%p,...)\n", window);
+	printf("SDL_GL_GetDrawableSize(window,640,480)\n");
 	*w = 640;
 	*h = 480;
 }
 
 void SDL_SetWindowPosition(SDL_Window* window, int x, int y) {
-	printf("SDL_SetWindowPosition(%p,%d,%d)\n", window,x,y);
+	printf("SDL_SetWindowPosition(window, %d, %d)\n",x,y);
 }
 
 int SDL_QueryTexture(SDL_Texture* texture, uint32_t* format, int* access, int* w, int* h) {
@@ -472,7 +482,7 @@ int SDL_QueryTexture(SDL_Texture* texture, uint32_t* format, int* access, int* w
 }
 
 SDL_Texture* IMG_LoadTexture_RW(SDL_Renderer* renderer, SDL_RWops *src, int freesrc) {
-	printf("IMG_LoadTexture_RW(%p, %p, %d)\n", renderer, src, freesrc);
+	printf("IMG_LoadTexture_RW(renderer,src,%d)\n", freesrc);
 	return NULL;
 }
 
@@ -481,7 +491,7 @@ void SDL_Delay(uint32_t ms) {
 }
 
 void SDL_SetWindowSize(SDL_Window* window, int w, int h) {
-	printf("SDL_SetWindowSize(%p, %d, %d)\n", window, w, h);
+	printf("SDL_SetWindowSize(window, %d, %d)\n", w, h);
 }
 
 int SDL_RWclose(SDL_RWops* context) {
@@ -491,6 +501,11 @@ int SDL_RWclose(SDL_RWops* context) {
 
 size_t SDL_RWread(SDL_RWops* context, void* ptr, size_t size, size_t maxnum) {
 	printf("SDL_RWread()\n");
+	if (context->mock_file == MockValScreenPNG) {
+		printf("Mock: reading file screen.png\n");
+		memcpy(ptr, "\x89\x50\x4E\x47\x0D\x0A\x1A\x0A", 8); //png magic bytes
+		return 8;
+	}
 	return 0;
 }
 
@@ -501,12 +516,12 @@ int SDL_UpdateTexture(SDL_Texture * texture, const SDL_Rect* rect, const void *p
 }
 
 int SDL_RenderCopy(SDL_Renderer* renderer, SDL_Texture* texture, const SDL_Rect* srcrect, const SDL_Rect* dstrect) {
-	printf("SDL_RenderCopy(%p, %p, %p, %p)\n", renderer, texture,srcrect,dstrect);
+	printf("SDL_RenderCopy(renderer,texture,src,dst)\n");
 	return 0;
 }
 
 int SDL_RenderCopyEx(SDL_Renderer * renderer, SDL_Texture * texture, const SDL_Rect * srcrect, const SDL_Rect * dstrect, const double angle, const SDL_Point* center, const SDL_RendererFlip flip) {
-	printf("SDL_RenderCopyEx(%p, %p, %p, %p, %f, %p, %p)\n", renderer, texture,srcrect,dstrect,angle,center,flip);
+	printf("SDL_RenderCopyEx(renderer,texture,srcrect,dstrect,angle,center,flip)\n");
 	return 0;
 }
 
@@ -533,12 +548,12 @@ int TTF_GetTextSize(TTF_Font *font, const char *text, int *w, int *h) {
 }
 
 int SDL_HasIntersection(const SDL_Rect * A, const SDL_Rect * B) {
-	printf("SDL_HasIntersection(%p,%p)\n", A, B);
+	printf("SDL_HasIntersection(A,B)\n");
 	return 0;
 }
 
 int SDL_IntersectRect(const SDL_Rect * A, const SDL_Rect * B, SDL_Rect * C) {
-	printf("SDL_IntersectRect(%p,%p,%p)\n", A, B, C);
+	printf("SDL_IntersectRect(A,B,C)\n");
 	return 0;
 }
 

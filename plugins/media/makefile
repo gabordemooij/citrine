@@ -7,7 +7,7 @@ install-libctrmedia.so: libctrmedia.so
 	install libctrmedia.so ../../mods/media/
 
 libctrmedia.so: media.o
-	ld ${LDFLAGS} -lcurl -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -o libctrmedia.so media.o
+	ld ${LDFLAGS} -lcurl -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -o libctrmedia.so jsmn.o media.o
 
 media.o:
 	cc -D SDL -D LIBCURL -D FFI $(EXTRACFLAGS) -I . -c media.c -I /usr/include/SDL3 -I ../../i18n/${ISO} -I i18n/${ISO} -Wall -Werror -fPIC -o media.o

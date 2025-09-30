@@ -4,10 +4,10 @@ install-libctrmedia.so: libctrmedia.so
 	install libctrmedia.so ../../mods/media/
 
 libctrmedia.so: media.o
-	ld ${LDFLAGS} -o libctrmedia.so media.o
+	ld ${LDFLAGS} -o libctrmedia.so jsmn.o media.o
 
 media.o:
-	cc -D MOCK $(EXTRACFLAGS) -I . -c media.c -I ../../i18n/${ISO} -I i18n/${ISO} -Wall -Werror -fPIC -o media.o
+	cc -D MOCK $(EXTRACFLAGS) -I . -c jsmn.c media.c -I ../../i18n/${ISO} -I i18n/${ISO} -Wall -Werror -fPIC
 
 clean:
 	rm -rf libctrmedia.so

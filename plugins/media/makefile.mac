@@ -13,10 +13,10 @@ libctrmedia.dylib: media.o
 	cc ${LDFLAGS} \
 		-F${FRAMEWORKS} -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework SDL2_mixer\
 		-lffi -rpath @executable_path \
-		-lcurl -o libctrmedia.dylib media.o
+		-lcurl -o libctrmedia.dylib jsmn.o media.o
 
 media.o:
-	cc ${CFLAGS} -D SDL -D LIBCURL -D FFI -I .  -c media.c  -I ../../i18n/${ISO} -I i18n/${ISO} -Wall -Wunused-but-set-variable -fPIC -o media.o
+	cc ${CFLAGS} -D SDL -D LIBCURL -D FFI -I .  -c jsmn.c media.c  -I ../../i18n/${ISO} -I i18n/${ISO} -Wall -Wunused-but-set-variable -fPIC
 
 clean:
 	rm -rf *.dylib

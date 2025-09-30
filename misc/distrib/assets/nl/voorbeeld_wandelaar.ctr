@@ -1,0 +1,48 @@
+>> m := Media nieuw.
+
+m breedte: 350 hoogte: 175.
+
+m effect: 2 opties: 1.
+
+>> steen := Plaatje nieuw: ['rots.png'].
+>> rots := Plaatje nieuw: ['rots.png'].
+>> wandelaar := Plaatje nieuw: ['wandelaar.png'].
+
+wandelaar
+	x: 100 y: 100,
+	snelheid: 2,
+	filmrol: 2 snelheid: 10,
+	zwaartekracht: 1,
+	weerstand: 0,5,
+	besturing: Ja.
+
+steen
+	x: 150 y: 300,
+	muur: Ja.
+	
+rots
+	x: 250 y:180,
+	muur: Ja.
+	
+m bij: ['start'] doen: {
+	steen naar-x: 150 y: 200.
+	rots naar-x: 380 y: 180.
+}.
+
+steen bij: ['bestemming'] doen: {
+	zelf y? <=: 200, ja: { 
+		zelf naar-x: 150 y: 300.
+	}, anders: {
+		zelf naar-x: 150 y: 200.
+	}.
+}.
+
+rots bij: ['bestemming'] doen: {
+	zelf x? >=: 380, ja: { 
+		zelf naar-x: 250 y: 180.
+	}, anders: {
+		zelf naar-x: 380 y: 180.
+	}.
+}.
+
+m scherm: ['achtergrond.png'].

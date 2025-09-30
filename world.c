@@ -757,6 +757,7 @@ void ctr_initialize_world() {
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_UNEQUALS_SYMBOL ), &ctr_number_neq );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "!=" CTR_DICT_PARAMETER_PREFIX ), &ctr_number_neq );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_MODULO ), &ctr_number_modulo );
+	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( "%" ), &ctr_number_modulo );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_FLOOR ), &ctr_number_floor );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_CEIL ), &ctr_number_ceil );
 	ctr_internal_create_func(CtrStdNumber, ctr_build_string_from_cstring( CTR_DICT_ROUND ), &ctr_number_round );

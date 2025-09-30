@@ -1,9 +1,3 @@
-#ifdef WINDOWS_MEDIA_SOCK
-#define WIN32_LEAN_AND_MEAN
-#define _WIN32_WINNT 0x0501 //Windows XP
-#include <winsock2.h>
-#endif
-
 #include "../../citrine.h"
 
 #ifdef __EMSCRIPTEN__
@@ -13,8 +7,6 @@
 #include "passw.c"
 #include "media.h"
 #include "jsmn.h"
-#include "jsmn.c"
-
 
 #ifdef SDL
 #include <SDL3/SDL.h>
@@ -22,6 +14,16 @@
 #include <SDL3/SDL_mixer.h>
 #include <SDL3/SDL_ttf.h>
 #endif
+
+
+#ifdef MACSDL
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_mixer.h>
+#include <SDL_ttf.h>
+#endif
+
+
 
 #include <stdio.h>
 #include <math.h>
@@ -258,7 +260,6 @@ ctr_object* ctr_string_escape(ctr_object* myself, ctr_argument* argumentList)  {
 			}
 		}
 	}
-	//printf("tlen = %ld, tag_len = %ld \n",tlen, tag_len);
 	
 	tlen = len + tag_len;
 	tstr = ctr_heap_allocate( tlen * sizeof( char ) );
@@ -299,7 +300,6 @@ ctr_object* ctr_string_escape(ctr_object* myself, ctr_argument* argumentList)  {
 			tstr[k++] = str[i];
 		}
 	}
-	//printf("tlen = %ld \n",tlen);
 	newString = ctr_build_string(tstr, tlen);
 	ctr_heap_free( tstr );
 	return newString;
@@ -408,9 +408,6 @@ ctr_object* ctr_string_unescape(ctr_object* myself, ctr_argument* argumentList) 
 			tstr[k++] = str[i];
 		}
 	}
-	
-	
-	
 	newString = ctr_build_string(tstr, tlen);
 	ctr_heap_free( tstr );
 	return newString;
@@ -1498,6 +1495,7 @@ void ctr_internal_media_detect_collisions(MediaIMG* m, SDL_Rect r) {
 				}
 				if (m->bounce) {
 					m->dir = (double) (((int)m->dir + 145) % 360);
+					m->gspeed = 0;
 				}
 			}
 			if (m->collidable) {
@@ -1620,8 +1618,12 @@ void ctr_internal_media_render_image(MediaIMG* m, SDL_Rect r, SDL_Rect s, MediaI
 void ctr_internal_media_image_calculate_motion(MediaIMG* m) {
 	MediaIMG* player = NULL;
 	// keep a constant physics speed by calculating the timediff
+	#ifdef TEST
+	double dt = 1;
+	#else
 	double delta_in_seconds = ((CtrMediaTicks2 - CtrMediaTicks1) / 1000.0f );
 	double dt  = 60 * delta_in_seconds;
+	#endif
 	if (controllableObject != NULL) {
 		player = (MediaIMG*) controllableObject->value.rvalue->ptr;
 		if (CtrMediaJump == 2 && player == m) {
@@ -1847,7 +1849,6 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 	CtrMediaSelectBegin = 0;
 	CtrMediaSelectEnd=0;
 	CtrMediaCameraInit = 0;
-	//controllableObject = NULL;
 	focusObject = NULL;
 	CtrMediaSteps = 0;
 	SDL_Rect dimensions;
@@ -3457,17 +3458,15 @@ void ctr_internal_img_render_cursor(ctr_object* focusObject) {
 	if (CtrMediaSelectBegin > image->textlength) CtrMediaSelectBegin = 0;
 	if (CtrMediaSelectEnd > image->textlength) CtrMediaSelectEnd = 0;
 	int i = 0;
-	int x1 = 0;
 	int y1 = 0;
 	int beginline = 0;
 	while(i<CtrMediaInputIndex) {
 		if (image->text[i]=='\r') {
 			y1 += 1;
-			x1 = 0;
 		} else if (image->text[i]=='\n') {
 			beginline = i;
 		} else if ((image->text[i] & 0x80) == 0x00 || (image->text[i] & 0xC0) == 0xC0) {
-			x1++;
+		    //x ++?
 		}
 		i++;
 	}
@@ -4722,7 +4721,7 @@ ctr_object* ctr_media_on_do(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_object_on_do(myself, argumentList);
 }
 
-
+#ifndef REPLACE_MEDIA_SYSTEM_COMMAND
 ctr_object* ctr_internal_media_external_command(char* command_str, char* fallback, char* parameter_str, char* template_str) {
 	char* default_template_str = "%s '%s'";
 	int maxlen = 500;
@@ -4735,7 +4734,13 @@ ctr_object* ctr_internal_media_external_command(char* command_str, char* fallbac
 	if  (system(command)==0) return CtrStdBoolTrue;
 	return CtrStdBoolFalse;
 }
+#endif
 
+#ifdef MEDIA_SYSTEM_COMMAND_STUB
+ctr_object* ctr_internal_media_external_command(char* command_str, char* fallback, char* parameter_str, char* template_str) {
+	return CtrStdBoolFalse;
+}
+#endif
 
 /**
  * @internal
@@ -5139,11 +5144,10 @@ void begin(){
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring(CTR_DICT_BLOB_OBJECT), CtrMediaDataBlob, CTR_CATEGORY_PUBLIC_PROPERTY);
 	#endif
 	
-	
+
 	ctr_object* jsonObject = ctr_json_new(CtrStdObject, NULL);
 	ctr_internal_create_func(jsonObject, ctr_build_string_from_cstring( CTR_DICT_UNJSONIFY_SET ), &ctr_json_parse );
 	ctr_internal_create_func(jsonObject, ctr_build_string_from_cstring( CTR_DICT_JSONIFY_SET ), &ctr_json_jsonify );
-	
 	
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_IMAGE_OBJECT ), imageObject, CTR_CATEGORY_PUBLIC_PROPERTY);
 	ctr_internal_object_add_property(CtrStdWorld, ctr_build_string_from_cstring( CTR_DICT_FONT_OBJECT ), fontObject, CTR_CATEGORY_PUBLIC_PROPERTY);
