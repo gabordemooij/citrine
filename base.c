@@ -63,21 +63,15 @@ char* ctr_national_number(char* old_number, char* new_number) {
 }
 
 /**
- * @def
- * Welcome
+ * Represents nothingness, emptiness.
+ * You can use the None value to declare variables
+ * and mark them as having no value.
+ * In fact, the None object is actually a predefined
+ * object in the world of Citrine. You can even
+ * send messages to it. Note that there is only
+ * one None object in the world of Citrine. 
  *
- * @example
- * ✎ write: ‘Hello World’, stop.
- */
-
-
-/**
- * @def
- * Nil
- *
- * @example
- * ☞ x ≔ Nil.
- * ✎ write: x Nil?, stop.
+ * @test 0376
  */
 ctr_object* ctr_build_nil() {
 	return CtrStdNil;
