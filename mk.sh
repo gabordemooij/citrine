@@ -42,13 +42,13 @@ do
 	export DLLTOOL
 	make -f $MAKEFILE clean
 	make -f $MAKEFILE all
-	if [ -f "dict/xx${ISO}.dict" ]; then
-		rm   dict/xx${ISO}.dict
+	if [ -f "dict/en${ISO}.dict" ]; then
+		rm   dict/en${ISO}.dict
 	fi
-	./ctr -g i18n/xx/dictionary.h i18n/${ISO}/dictionary.h > dict/xx${ISO}.dict
-	./ctr -g i18n/${ISO}/dictionary.h i18n/xx/dictionary.h > dict/${ISO}xx.dict
-	cat i18n/${ISO}/extra.dict >> dict/xx${ISO}.dict
-	cat i18n/${ISO}/extra_reverse.dict >> dict/${ISO}xx.dict
+	./ctr -g i18n/en/dictionary.h i18n/${ISO}/dictionary.h > dict/en${ISO}.dict
+	./ctr -g i18n/${ISO}/dictionary.h i18n/en/dictionary.h > dict/${ISO}en.dict
+	cat i18n/${ISO}/extra.dict >> dict/en${ISO}.dict
+	cat i18n/${ISO}/extra_reverse.dict >> dict/${ISO}en.dict
 done
 
 #Clear object files and binary
