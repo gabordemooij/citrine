@@ -2810,6 +2810,42 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 extern ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList);
 #endif
 
+char* ctr_internal_media_network_urlencode(const char *src) {
+    static const char hex[] = "0123456789ABCDEF";
+    size_t len = strlen(src);
+    char* dst = ctr_heap_allocate(len * 3 + 1);
+    if (!dst) return NULL;
+    size_t pos = 0;
+    for (size_t i = 0; i < len; i++) {
+        unsigned char c = (unsigned char)src[i];
+        if (isalnum(c) || c == '-' || c == '_' || c == '.' || c == '~') {
+            dst[pos++] = c;
+        } else if (c == ' ') {
+			dst[pos++] = '+';
+		} else {
+            dst[pos++] = '%';
+            dst[pos++] = hex[c >> 4];
+            dst[pos++] = hex[c & 15];
+        }
+    }
+    dst[pos] = '\0';
+    return dst;
+}
+
+ctr_object* ctr_network_urlencode( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* rs;
+	char* str;
+	char* encoded;
+	rs = CtrStdNil;
+	str = ctr_heap_allocate_cstring( ctr_internal_copy2string( argumentList->object ) );
+	encoded = ctr_internal_media_network_urlencode( str );
+	ctr_heap_free( str );
+	if (encoded) {
+		rs = ctr_build_string_from_cstring( encoded );
+		ctr_heap_free( encoded );
+	}
+	return rs;
+}
 
 void ctr_img_destructor(ctr_resource* rs) {
 	MediaIMG* image = (MediaIMG*) rs->ptr;
@@ -5119,6 +5155,7 @@ void begin(){
 	networkObject = ctr_network_new(CtrStdObject, NULL);
 	networkObject->link = CtrStdObject;
 	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_network_new );
+	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring( CTR_DICT_URLENCODE_SET ), &ctr_network_urlencode);
 	#ifdef LIBCURL
 	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring(CTR_DICT_SEND_TEXT_MESSAGE), &ctr_network_basic_text_send );
 	#endif
