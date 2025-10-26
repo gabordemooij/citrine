@@ -1793,7 +1793,7 @@ ctr_object* ctr_media_timer(ctr_object* myself, ctr_argument* argumentList) {
 	if (timer_no < 1 || timer_no > CtrMaxMediaTimers) {
 		ctr_error("Invalid timer", 0);
 	} else if ( ms > -1 ) {
-		CtrMediaTimers[timer_no] = CtrMediaTicks2 + ms;
+		CtrMediaTimers[timer_no] = SDL_GetTicks64() + ms;
 	} else {
 		CtrMediaTimers[timer_no] = -1;
 	}
