@@ -1,0 +1,9 @@
+{ 
+	{ { { this-task error: ['nope']. } aa bb cc dd start. } aa bb cc start. } aa bb cc start.
+	{ 1 + 2. } aa start.  
+} except: { None. }, aa start.
+{
+	{ 
+		this-task error: ['error']. 
+	} aa start.
+} bb start.

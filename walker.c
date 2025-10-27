@@ -54,29 +54,31 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 	ctr_object* r = NULL;
 	ctr_object* recipientName = NULL;
 	result = CtrStdNil;
+	if (CtrStdFlow != NULL && CtrStdFlow != CtrStdContinue && CtrStdFlow != CtrStdBreak) return result;
 	if (ctr_flag_sandbox && ++ctr_sandbox_steps>CTR_MAX_STEPS_LIMIT) exit(1);
 	switch (receiverNode->type) {
 		case CTR_AST_NODE_REFERENCE:
 			literal = 0;
-			recipientName = ctr_build_string(receiverNode->value, receiverNode->vlen);
-			recipientName->info.sticky = 1;
 			if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
+				recipientName = ctr_build_string(receiverNode->value, receiverNode->vlen);
+				recipientName->info.sticky = 1;
 				ctr_callstack[ctr_callstack_index++] = receiverNode;
-			}
-			if (receiverNode->modifier == 1) {
-				r = ctr_find_in_my(recipientName);
-			} else {
-				r = ctr_find(recipientName);
-			}
-			if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
-				ctr_callstack_index--;
-			} else {
-				errstack++;
-				recipientName->info.sticky = 0;
-				return CtrStdNil;
-			}
-			if (!r) {
-				exit(1);
+				if (receiverNode->modifier == 1) {
+					r = ctr_find_in_my(recipientName);
+				} else {
+					r = ctr_find(recipientName);
+				}
+				if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
+					ctr_callstack_index--;
+				} else {
+					errstack++;
+					recipientName->info.sticky = 0;
+					return CtrStdNil;
+				}
+				if (!r) {
+					fprintf(stderr, "Invalid state"); //@todo improve error message
+					exit(1);
+				}
 			}
 			break;
 		case CTR_AST_NODE_LTRSTRING:
@@ -112,64 +114,64 @@ ctr_object* ctr_cwlk_message(ctr_tnode* paramNode) {
 		l = msgnode->vlen;
 		if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
 			ctr_callstack[ctr_callstack_index++] = msgnode;
-		}
-		argumentList = msgnode->nodes;
-		a = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
-		aItem = a;
-		aItem->object = CtrStdNil;
-		sticky = r->info.sticky;
-		r->info.sticky = 1;
-		if (literal) {
-			keys[key_index++] = ctr_gc_internal_pin(r);
-			if (key_index >= MAX_KEYS) {
-				printf( CTR_ERR_KEYINX );
-				exit(1);
-			}
-		}
-		if (argumentList) {
-			ctr_tnode* node;
-			node = argumentList->node;
-			while(1) {
-				ctr_in_message++;
-				ctr_object* o = ctr_cwlk_expr(node, &wasReturn);
-				ctr_in_message--;
-				aItem->object = o;
-				keys[key_index++] = ctr_gc_internal_pin(o);
+			argumentList = msgnode->nodes;
+			a = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+			aItem = a;
+			aItem->object = CtrStdNil;
+			sticky = r->info.sticky;
+			r->info.sticky = 1;
+			if (literal) {
+				keys[key_index++] = ctr_gc_internal_pin(r);
 				if (key_index >= MAX_KEYS) {
 					printf( CTR_ERR_KEYINX );
 					exit(1);
 				}
-				/* we always send at least one argument, note that if you want to modify the argumentList, be sure to take this into account */
-				/* there is always an extra empty argument at the end */
-				aItem->next = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
-				aItem = aItem->next;
-				aItem->object = CtrStdNil;
-				if (!argumentList->next) break;
-				argumentList = argumentList->next;
-				node = argumentList->node;
 			}
+			if (argumentList) {
+				ctr_tnode* node;
+				node = argumentList->node;
+				while(1) {
+					ctr_in_message++;
+					ctr_object* o = ctr_cwlk_expr(node, &wasReturn);
+					ctr_in_message--;
+					aItem->object = o;
+					keys[key_index++] = ctr_gc_internal_pin(o);
+					if (key_index >= MAX_KEYS) {
+						printf( CTR_ERR_KEYINX );
+						exit(1);
+					}
+					/* we always send at least one argument, note that if you want to modify the argumentList, be sure to take this into account */
+					/* there is always an extra empty argument at the end */
+					aItem->next = (ctr_argument*) ctr_heap_allocate( sizeof( ctr_argument ) );
+					aItem = aItem->next;
+					aItem->object = CtrStdNil;
+					if (!argumentList->next) break;
+					argumentList = argumentList->next;
+					node = argumentList->node;
+				}
+			}
+			aItem->next = NULL; // just be sure set final next to NULL
+			result = ctr_send_message(r, message, l, a);
+			r->info.sticky = sticky;
+			aItem = a;
+			if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
+				ctr_callstack_index --;
+			} else {
+				errstack++;
+			}
+			while(aItem->next) {
+				a = aItem;
+				aItem = aItem->next;
+				ctr_internal_object_delete_property(ctr_contexts[ctr_context_id], keys[--key_index], CTR_CATEGORY_PRIVATE_PROPERTY);
+				ctr_heap_free( a );
+			}
+			ctr_heap_free( aItem );
+			if (literal) {
+				ctr_internal_object_delete_property( ctr_contexts[ctr_context_id], keys[--key_index], CTR_CATEGORY_PRIVATE_PROPERTY );
+			}
+			r = result;
+			literal = 1; //treat as literal because not yet protected against gc
 		}
-		aItem->next = NULL; // just be sure set final next to NULL
-		result = ctr_send_message(r, message, l, a);
-		r->info.sticky = sticky;
-		aItem = a;
-		if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
-			ctr_callstack_index --;
-		} else {
-			errstack++;
-		}
-		while(aItem->next) {
-			a = aItem;
-			aItem = aItem->next;
-			ctr_internal_object_delete_property(ctr_contexts[ctr_context_id], keys[--key_index], CTR_CATEGORY_PRIVATE_PROPERTY);
-			ctr_heap_free( a );
-		}
-		ctr_heap_free( aItem );
-		if (literal) {
-			ctr_internal_object_delete_property( ctr_contexts[ctr_context_id], keys[--key_index], CTR_CATEGORY_PRIVATE_PROPERTY );
-		}
-		r = result;
-		literal = 1; //treat as literal because not yet protected against gc
 	}
 	ctr_in_message -= (ctr_is_chain - 1);
 	if (ctr_in_message != ctr_assume_message_level) {
@@ -192,23 +194,23 @@ ctr_object* ctr_cwlk_assignment(ctr_tnode* node) {
 	ctr_tlistitem* valueListItem = assignmentItems->next;
 	ctr_tnode* value = valueListItem->node;
 	ctr_object* x;
-	ctr_object* result;
+	ctr_object* result = CtrStdNil;
 	if (ctr_flag_sandbox && ++ctr_sandbox_steps>CTR_MAX_STEPS_LIMIT) exit(1);
 	if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
 		ctr_callstack[ctr_callstack_index++] = assignee;
-	}
-	x = ctr_cwlk_expr(value, &wasReturn);
-	if (assignee->modifier == 1) {
-		result = ctr_assign_value_to_my(ctr_build_string(assignee->value, assignee->vlen), x);
-	} else if (assignee->modifier == 2) {
-		result = ctr_assign_value_to_local(ctr_build_string(assignee->value, assignee->vlen), x);
-	} else {
-		result = ctr_assign_value(ctr_build_string(assignee->value, assignee->vlen), x);
-	}
-	if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
-		ctr_callstack_index--;
-	} else {
-		errstack ++;
+		x = ctr_cwlk_expr(value, &wasReturn);
+		if (assignee->modifier == 1) {
+			result = ctr_assign_value_to_my(ctr_build_string(assignee->value, assignee->vlen), x);
+		} else if (assignee->modifier == 2) {
+			result = ctr_assign_value_to_local(ctr_build_string(assignee->value, assignee->vlen), x);
+		} else {
+			result = ctr_assign_value(ctr_build_string(assignee->value, assignee->vlen), x);
+		}
+		if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
+			ctr_callstack_index--;
+		} else {
+			errstack ++;
+		}
 	}
 	return result;
 }	
@@ -249,16 +251,16 @@ ctr_object* ctr_cwlk_expr(ctr_tnode* node, char* wasReturn) {
 		case CTR_AST_NODE_REFERENCE:
 			if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
 				ctr_callstack[ctr_callstack_index++] = node;
-			}
-			if (node->modifier == 1) {
-				result = ctr_find_in_my(ctr_build_string(node->value, node->vlen));
-			} else {
-				result = ctr_find(ctr_build_string(node->value, node->vlen));
-			}
-			if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
-				ctr_callstack_index--;
-			} else {
-				errstack++;
+				if (node->modifier == 1) {
+					result = ctr_find_in_my(ctr_build_string(node->value, node->vlen));
+				} else {
+					result = ctr_find(ctr_build_string(node->value, node->vlen));
+				}
+				if (CtrStdFlow == NULL || CtrStdFlow == CtrStdContinue || CtrStdFlow == CtrStdBreak) {
+					ctr_callstack_index--;
+				} else {
+					errstack++; //only count errorstack on your way out, to reset callstack in catch
+				}
 			}
 			break;
 		case CTR_AST_NODE_EXPRMESSAGE:
