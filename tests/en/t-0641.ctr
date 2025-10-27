@@ -1,0 +1,2 @@
+{ Out write: x. >> a := 1. >> b := 2. >> b := 3. } except: { None. }, start.
+{ this-task error: ['error']. } start.
