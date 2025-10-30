@@ -212,6 +212,12 @@ char* ctr_internal_media_normalize_line_endings(char* text);
 int CtrMediaTimers[100];
 int CtrMaxMediaTimers = 100;
 
+// avoid choppy animations or mis-animations because time delta is off
+// by blocking event
+void ctr_internal_media_sync() {
+	CtrMediaTicks1 = SDL_GetTicks64();
+	CtrMediaTicks2 = SDL_GetTicks64();
+}
 
 /**
  * [String] escape: '\n'.
@@ -2801,6 +2807,7 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 	if (message_str) {
 		ctr_heap_free(message_str);
 	}
+	ctr_internal_media_sync();
     return result;
 }
 #endif
@@ -4934,6 +4941,7 @@ ctr_object* ctr_media_dialog(ctr_object* myself, ctr_argument* argumentList) {
 	);
 	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Message", message, CtrMediaWindow);
 	ctr_heap_free(message);
+	ctr_internal_media_sync();
 	return myself;
 }
 
