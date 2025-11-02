@@ -1,1 +1,3 @@
 SDL_ShowSimpleMessageBox(3,Message,test gui plugin)
+SDL_GetTicks64()
+SDL_GetTicks64()
