@@ -3,16 +3,8 @@
 #include <SDL.h>
 #include <stdio.h>
 
-
-/* JNI callback template
-extern JNIEXPORT jstring JNICALL Java_com_citrine_citrineandroid_MainActivity_stringFromJNI(
-        JNIEnv* env,
-        jobject this) {
-
-    }
-    return (*env)->NewStringUTF(env, "Callback");
-}
-*/
+extern SDL_Window* CtrMediaWindow;
+extern void ctr_internal_media_sync(void);
 
 ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList) {
 	ctr_object* rs;
@@ -31,6 +23,7 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
     (*env)->DeleteLocalRef(env, jdata);
     ctr_heap_free(url);
     ctr_heap_free(data);
+    ctr_internal_media_sync();
     return rs;
 }
 
