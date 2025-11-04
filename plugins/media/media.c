@@ -2965,6 +2965,9 @@ ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_error(CTR_ERR_FOPEN, 0);
 		return myself;
 	}
+	if (mediaImage->surface) {
+		SDL_FreeSurface(mediaImage->surface);
+	}
 	mediaImage->surface = (void*) IMG_Load_RW(res, 1);
 	if (mediaImage->surface == NULL) {
 		ctr_internal_media_fatalerror("Unable to load surface", imageFileStr);
