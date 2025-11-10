@@ -831,8 +831,6 @@ extern ctr_object* ctr_error_text( char* error_string );
 extern void ctr_pool_init( ctr_size pool );
 
 extern char ctr_deserialize_mode;
-extern char ctr_flag_sandbox;
-extern uint16_t ctr_sandbox_steps;
 
 extern char ctr_program_log_type;
 extern void ctr_clex_move_code_pointer(int movement);
