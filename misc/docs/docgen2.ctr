@@ -3,17 +3,13 @@
 # Author:  G.J.G.T. de Mooij
 # License: BSD
 
-# configuration
-
 >> CTREN := ['../../bin/Linux/ctren'].
 >> CTR   := ['../../bin/Linux/ctr'].
 >> DICT  := ['../../dict/en'].
 >> DIR   := ['/tmp/ctrdocs'].
 >> TEST  := ['../../tests/en/t-'].
 >> RUN   := ['/tmp/ctrdocs/runner'].
-
 >> t           := Moment new.
->> time        := t time plain.
 >> date        := ['year-month-day hour:minute'] 
 				   year:   t year plain,
 				   month:  t month,
@@ -24,12 +20,9 @@
 >> template    := File new: ['example.tpl.html'], read.
 >> manual      := Dict new.
 >> outdir      := ['server'].
-
 >> languages   := List new.
-
 >> source      :=  ( File new: ['../../base.c'], read ) +
 				   ( File new: ['../../collections.c'], read ).
-
 
 >> comments    := source split: ['/**'].
 comments shift.
@@ -44,7 +37,6 @@ String on: ['html'] do: {
 	html replace: ['↵'] with: ['<br>'].
 	<- html.
 }.
-
 
 File list: ['../../i18nsel'], each: { :i :dict
 	>> lang := dict file.
@@ -76,40 +68,23 @@ comments each: { :i :comment
 	>> def     := parts first replace: ['\n *'] with: [''], trim.
 	>> testno  := parts last trim.
 	
-
 	Out write: (
 		['Processing comment: <index>/<total>']
 		<index>: i,
 		<total>: total
 	), stop.
 	
-	Out write: def, stop.
-	Out write: testno, stop.
-	
 	>> path   := ['../../tests/en/t-'] + testno + ['.ctr'].
 	>> example  := File new: path, read.
-	
-	
-	
 	File new: ( ['<DIR>/defsrc.ctr'] <DIR>: DIR ), write: def.
-
-
-
 	languages each: { :j :iso
-	
-		Out write: iso, stop.
-		
-		
 		>> translate-def := ['<CTREN> -t <DICT><ISO>.dict <DIR>/defsrc.ctr > <DIR>/def<ISO>.ctr 2><DIR>/deferr<ISO>.log'].
 		translate-def
 			<CTREN>: CTREN,
 			<DICT>: DICT,
 			<DIR>: DIR,
 			<ISO>: iso.
-		
-		
 		Program os: translate-def.
-		
 		>> translate-example := ['<CTREN> -t <DICT><ISO>.dict <TEST><NR>.ctr > <RUN><ISO>.ctr 2><DIR>/runerr<ISO>.log'].
 		translate-example
 			<CTREN>: CTREN,
@@ -119,25 +94,17 @@ comments each: { :i :comment
 			<RUN>: RUN,
 			<NR>: testno,
 			<ISO>: iso.
-		
-		
 		Program os: translate-example.
-		
 		>> run-example := ['<CTR><ISO> <RUN><ISO>.ctr > <DIR>/res<ISO>.txt 2><DIR>/reserr<ISO>.log'].
-		
 		run-example
 			<CTR>: CTR,
 			<DIR>: DIR,
 			<RUN>: RUN,
 			<ISO>: iso.
-		
-		
 		Program os: run-example.
-	
 		>> path-localized-definition := ['<DIR>/def<ISO>.ctr'] <DIR>: DIR, <ISO>: iso.
 		>> path-localized-example    := ['<RUN><ISO>.ctr'] <RUN>: RUN, <ISO>: iso.
 		>> path-localized-result     := ['<DIR>/res<ISO>.txt'] <DIR>: DIR, <ISO>: iso.
-		
 		>> localized-definition := File new: path-localized-definition, read.
 		>> localized-example    := File new: path-localized-example, read.
 		>> localized-result     := File new: path-localized-result, read.
@@ -145,64 +112,41 @@ comments each: { :i :comment
 			Program os: ( ['echo "<ISO><DEF>" | sha1sum'] <ISO>: iso, <DEF>: localized-definition )
 		) split: [' '], first.
 		>> fname := shasum + ['.html'].
-
-
 		>> chapter := Dict new
 			name: shasum,
 			definition: localized-definition,
 			example: localized-example,
 			result: localized-result.
-		
 		book at: iso, append: chapter.
-	
-		Out write: book, stop.
-		Out write: languages, stop.
-		Out write: i, stop.
-		
 		(first) true: {
 			language-index append:
 			['<a href="'] + fname + ['">'] + iso + ['</a>'].
 		}.
-		
-		Out write: language-index, stop.
-		
-		
-	
-		
-		#Program end.
 		True break.
 	}.
-	
 	first := False.
-	
 }.
 
-
-
 book each: { :iso :chapters
-
 	>> indexhtml := [''].
-	
 	chapters each: { :_ :chapter
 		indexhtml append: ['<a href="'] + chapter name + ['.html">'] + chapter definition + ['</a>'].
 	}.
-	
+	Program os: ['mkdir server/docs/'] + iso.
 	chapters each: { :k :chapter
-	
 		>> page := template copy.
-		
 		page 
-		replace: ['{{title}}'] with: chapter definition,
-		replace: ['{{language}}'] with: iso,
-		replace: ['{{example}}'] with: chapter example,
-		replace: ['{{result}}'] with: chapter result,
-		replace: ['{{languages}}'] with: language-index,
-		replace: ['{{index}}'] with: indexhtml.
-		
-		
-		Out write: page, stop.
-	}.
-	
+		~title~: chapter definition,
+		~language~: iso,
+		~example~: chapter example,
+		~result~: chapter result,
+		~languages~: language-index,
+		~index~: indexhtml,
+		~date~: date.
+		File new: (
+			['server/docs/~iso~/~name~.html']
+			~iso~: iso,
+			~name~: chapter name
+		), write: page.
+	}.	
 }.
-
-Out write: book, stop.
