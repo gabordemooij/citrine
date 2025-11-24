@@ -71,6 +71,9 @@ char* ctr_national_number(char* old_number, char* new_number) {
  * send messages to it. Note that there is only
  * one None object in the world of Citrine. 
  *
+ * @def
+ * [None]
+ *
  * @test 0376
  */
 ctr_object* ctr_build_nil() {
