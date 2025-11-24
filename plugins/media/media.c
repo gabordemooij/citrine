@@ -219,6 +219,12 @@ void ctr_internal_media_measure_text(TTF_Font* font, char* text_buffer, int* w, 
 	TTF_GetTextSize(&ttf_text, w, h);
 }
 
+// avoid choppy animations or mis-animations because time delta is off
+// by blocking event
+void ctr_internal_media_sync() {
+	CtrMediaTicks1 = SDL_GetTicks64();
+	CtrMediaTicks2 = SDL_GetTicks64();
+}
 
 /**
  * [String] escape: '\n'.
@@ -1800,7 +1806,7 @@ ctr_object* ctr_media_timer(ctr_object* myself, ctr_argument* argumentList) {
 	if (timer_no < 1 || timer_no > CtrMaxMediaTimers) {
 		ctr_error("Invalid timer", 0);
 	} else if ( ms > -1 ) {
-		CtrMediaTimers[timer_no] = CtrMediaTicks2 + ms;
+		CtrMediaTimers[timer_no] = SDL_GetTicks64() + ms;
 	} else {
 		CtrMediaTimers[timer_no] = -1;
 	}
@@ -2808,6 +2814,7 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 	if (message_str) {
 		ctr_heap_free(message_str);
 	}
+	ctr_internal_media_sync();
     return result;
 }
 #endif
@@ -2817,6 +2824,42 @@ ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argume
 extern ctr_object* ctr_network_basic_text_send(ctr_object* myself, ctr_argument* argumentList);
 #endif
 
+char* ctr_internal_media_network_urlencode(const char *src) {
+    static const char hex[] = "0123456789ABCDEF";
+    size_t len = strlen(src);
+    char* dst = ctr_heap_allocate(len * 3 + 1);
+    if (!dst) return NULL;
+    size_t pos = 0;
+    for (size_t i = 0; i < len; i++) {
+        unsigned char c = (unsigned char)src[i];
+        if (isalnum(c) || c == '-' || c == '_' || c == '.' || c == '~') {
+            dst[pos++] = c;
+        } else if (c == ' ') {
+			dst[pos++] = '+';
+		} else {
+            dst[pos++] = '%';
+            dst[pos++] = hex[c >> 4];
+            dst[pos++] = hex[c & 15];
+        }
+    }
+    dst[pos] = '\0';
+    return dst;
+}
+
+ctr_object* ctr_network_urlencode( ctr_object* myself, ctr_argument* argumentList ) {
+	ctr_object* rs;
+	char* str;
+	char* encoded;
+	rs = CtrStdNil;
+	str = ctr_heap_allocate_cstring( ctr_internal_copy2string( argumentList->object ) );
+	encoded = ctr_internal_media_network_urlencode( str );
+	ctr_heap_free( str );
+	if (encoded) {
+		rs = ctr_build_string_from_cstring( encoded );
+		ctr_heap_free( encoded );
+	}
+	return rs;
+}
 
 void ctr_img_destructor(ctr_resource* rs) {
 	MediaIMG* image = (MediaIMG*) rs->ptr;
@@ -2928,6 +2971,9 @@ ctr_object* ctr_img_img(ctr_object* myself, ctr_argument* argumentList) {
 		ctr_heap_free(imageFileStr);
 		ctr_error(CTR_ERR_FOPEN, 0);
 		return myself;
+	}
+	if (mediaImage->surface) {
+		SDL_FreeSurface(mediaImage->surface);
 	}
 	mediaImage->surface = (void*) IMG_Load_RW(res, 1);
 	if (mediaImage->surface == NULL) {
@@ -4905,6 +4951,7 @@ ctr_object* ctr_media_dialog(ctr_object* myself, ctr_argument* argumentList) {
 	);
 	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Message", message, CtrMediaWindow);
 	ctr_heap_free(message);
+	ctr_internal_media_sync();
 	return myself;
 }
 
@@ -5126,6 +5173,7 @@ void begin(){
 	networkObject = ctr_network_new(CtrStdObject, NULL);
 	networkObject->link = CtrStdObject;
 	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring( CTR_DICT_NEW ), &ctr_network_new );
+	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring( CTR_DICT_URLENCODE_SET ), &ctr_network_urlencode);
 	#ifdef LIBCURL
 	ctr_internal_create_func(networkObject, ctr_build_string_from_cstring(CTR_DICT_SEND_TEXT_MESSAGE), &ctr_network_basic_text_send );
 	#endif

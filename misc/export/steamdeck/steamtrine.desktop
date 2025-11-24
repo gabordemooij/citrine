@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=steamtrine
-Exec=ctrnl
+Exec=wrapper.sh
 Icon=org.citrinelang.export
 Type=Application
 Categories=Game;

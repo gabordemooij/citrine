@@ -1,4 +1,3 @@
-
- >> x := None.
- Out write: x None?, stop.
+>> x := None.
+Out write: x None?, stop.
  

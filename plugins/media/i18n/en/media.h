@@ -84,6 +84,7 @@
 #define CTR_DICT_JSONIFY_SET                "jsonify:"
 #define CTR_DICT_UNJSONIFY_SET              "from-json:"
 #define CTR_DICT_CLICKABLE_SET              "clickable:"
+#define CTR_DICT_URLENCODE_SET              "URL-encoding:"
 #define CTR_ERR_MEDIA_IMG_DEPLETED          "Images depleted. Max. %d available in this Media Plugin."
 #define CTR_ERR_MEDIA_SFX_DEPLETED          "Audio depleted. Max. %d available in this Media Plugin."
 #define CTR_ERR_MEDIA_FNT_DEPLETED          "Fonts depleted. Max. %d available in this Media Plugin."

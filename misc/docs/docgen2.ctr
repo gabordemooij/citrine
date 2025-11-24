@@ -1,0 +1,152 @@
+# Documentation Generation System
+# for all supported human languages
+# Author:  G.J.G.T. de Mooij
+# License: BSD
+
+>> CTREN := ['../../bin/Linux/ctren'].
+>> CTR   := ['../../bin/Linux/ctr'].
+>> DICT  := ['../../dict/en'].
+>> DIR   := ['/tmp/ctrdocs'].
+>> TEST  := ['../../tests/en/t-'].
+>> RUN   := ['/tmp/ctrdocs/runner'].
+>> t           := Moment new.
+>> date        := ['year-month-day hour:minute'] 
+				   year:   t year plain,
+				   month:  t month,
+				   day:    t day,
+				   hour:   t hour,
+				   minute: t minute.
+
+>> template    := File new: ['example.tpl.html'], read.
+>> manual      := Dict new.
+>> outdir      := ['server'].
+>> languages   := List new.
+>> source      :=  ( File new: ['../../base.c'], read ) +
+				   ( File new: ['../../collections.c'], read ).
+
+>> comments    := source split: ['/**'].
+comments shift.
+>> total       := comments count.
+
+String on: ['html'] do: {
+	>> html := self string copy.
+	html replace: ['&'] with: ['&amp;'].
+	html replace: ['"'] with: ['&quot;'].
+	html replace: ['<'] with: ['&lt;'].
+	html replace: ['>'] with: ['&gt;'].
+	html replace: ['↵'] with: ['<br>'].
+	<- html.
+}.
+
+File list: ['../../i18nsel'], each: { :i :dict
+	>> lang := dict file.
+	lang = ['..'] or: lang = ['.'], continue.
+	manual put: (List new) at: lang.
+	languages append: lang.
+}.
+
+languages sort: { :a :b <- a > b. }.
+
+Program os: ['mkdir -p /tmp/ctrdocs'].
+
+>> book := Dict new.
+
+languages each: { :i :iso
+	book put: (List new) at: iso.
+}.
+
+>> language-index := [''].
+>> first := True.
+
+comments each: { :i :comment
+
+	>> comment := comment split: ['*/'], first.
+	>> parts   := comment split: ['@def'].
+	(parts count < 2) continue.
+	parts      := parts last split: ['@test'].
+	(parts count < 2) continue.
+	>> def     := parts first replace: ['\n *'] with: [''], trim.
+	>> testno  := parts last trim.
+	
+	Out write: (
+		['Processing comment: <index>/<total>']
+		<index>: i,
+		<total>: total
+	), stop.
+	
+	>> path   := ['../../tests/en/t-'] + testno + ['.ctr'].
+	>> example  := File new: path, read.
+	File new: ( ['<DIR>/defsrc.ctr'] <DIR>: DIR ), write: def.
+	languages each: { :j :iso
+		>> translate-def := ['<CTREN> -t <DICT><ISO>.dict <DIR>/defsrc.ctr > <DIR>/def<ISO>.ctr 2><DIR>/deferr<ISO>.log'].
+		translate-def
+			<CTREN>: CTREN,
+			<DICT>: DICT,
+			<DIR>: DIR,
+			<ISO>: iso.
+		Program os: translate-def.
+		>> translate-example := ['<CTREN> -t <DICT><ISO>.dict <TEST><NR>.ctr > <RUN><ISO>.ctr 2><DIR>/runerr<ISO>.log'].
+		translate-example
+			<CTREN>: CTREN,
+			<DICT>: DICT,
+			<DIR>: DIR,
+			<TEST>: TEST,
+			<RUN>: RUN,
+			<NR>: testno,
+			<ISO>: iso.
+		Program os: translate-example.
+		>> run-example := ['<CTR><ISO> <RUN><ISO>.ctr > <DIR>/res<ISO>.txt 2><DIR>/reserr<ISO>.log'].
+		run-example
+			<CTR>: CTR,
+			<DIR>: DIR,
+			<RUN>: RUN,
+			<ISO>: iso.
+		Program os: run-example.
+		>> path-localized-definition := ['<DIR>/def<ISO>.ctr'] <DIR>: DIR, <ISO>: iso.
+		>> path-localized-example    := ['<RUN><ISO>.ctr'] <RUN>: RUN, <ISO>: iso.
+		>> path-localized-result     := ['<DIR>/res<ISO>.txt'] <DIR>: DIR, <ISO>: iso.
+		>> localized-definition := File new: path-localized-definition, read.
+		>> localized-example    := File new: path-localized-example, read.
+		>> localized-result     := File new: path-localized-result, read.
+		>> shasum := (
+			Program os: ( ['echo "<ISO><DEF>" | sha1sum'] <ISO>: iso, <DEF>: localized-definition )
+		) split: [' '], first.
+		>> fname := shasum + ['.html'].
+		>> chapter := Dict new
+			name: shasum,
+			definition: localized-definition,
+			example: localized-example,
+			result: localized-result.
+		book at: iso, append: chapter.
+		(first) true: {
+			language-index append:
+			['<a href="'] + fname + ['">'] + iso + ['</a>'].
+		}.
+		True break.
+	}.
+	first := False.
+}.
+
+book each: { :iso :chapters
+	>> indexhtml := [''].
+	chapters each: { :_ :chapter
+		indexhtml append: ['<a href="'] + chapter name + ['.html">'] + chapter definition + ['</a>'].
+	}.
+	Program os: ['mkdir server/docs/'] + iso.
+	chapters each: { :k :chapter
+		>> page := template copy.
+		page 
+		~title~: chapter definition,
+		~language~: iso,
+		~example~: chapter example,
+		~result~: chapter result,
+		~languages~: language-index,
+		~index~: indexhtml,
+		~date~: date.
+		File new: (
+			['server/docs/~iso~/~name~.html']
+			~iso~: iso,
+			~name~: chapter name
+		), write: page.
+	}.	
+}.

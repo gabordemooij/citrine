@@ -1,0 +1,4 @@
+Uncatched error has occurred.
+Key not found: q
+#2 q (tests/en/t-0643.ctr: 2)
+#1 start (tests/en/t-0643.ctr: 2)

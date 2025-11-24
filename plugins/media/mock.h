@@ -217,6 +217,8 @@ SDL_Color MockColor;
 SDL_Window MockWindow;
 SDL_Renderer MockRenderer;
 SDL_RWops MockRWops;
+Mix_Chunk MockChunk;
+Mix_Music MusicMock;
 SDL_Texture MockTexture;
 
 int MockTicks64 = 0;
@@ -360,17 +362,17 @@ void Mix_PauseMusic(void) {
 }
 
 int Mix_FadeInMusic(Mix_Music* music, int loops , int ms) {
-	printf("Mix_FadeInMusic(%p,%d,%d)\n", music, loops, ms);
+	printf("Mix_FadeInMusic(music,%d,%d)\n", loops, ms);
 	return 0;
 }
 
 void Mix_FreeMusic(Mix_Music* music) {
-	printf("Mix_FreeMusic(%p)\n", music);
+	printf("Mix_FreeMusic(music)\n");
 }
 
 Mix_Music* Mix_LoadMUS_RW(SDL_RWops* src, int freesrc) {
-	printf("Mix_LoadMUS_RW(%p,%d)\n", src, freesrc);
-	return NULL;
+	printf("Mix_LoadMUS_RW(src,%d)\n", freesrc);
+	return &MusicMock;
 }
 
 int64_t SDL_RWtell(SDL_RWops* context) {
@@ -401,17 +403,17 @@ SDL_RWops* SDL_RWFromFile(const char* file, const char* mode) {
 }
 
 Mix_Chunk* Mix_LoadWAV_RW(SDL_RWops* src, int freesrc) {
-	printf("Mix_LoadWAV_RW(%p,%d)\n", src, freesrc);
-	return NULL;
+	printf("Mix_LoadWAV_RW(src,%d)\n", freesrc);
+	return &MockChunk;
 }
 
 int Mix_PlayChannel(int channel, Mix_Chunk* chunk, int loops) {
-	printf("Mix_PlayChannel(%d,%p,%d)\n", channel, chunk, loops);
+	printf("Mix_PlayChannel(%d,chunk,%d)\n", channel, loops);
 	return 0;
 }
 
 void Mix_FreeChunk(Mix_Chunk *chunk) {
-	printf("Mix_FreeChunk(%p)\n", chunk);
+	printf("Mix_FreeChunk(chunk)\n");
 }
 
 void SDL_RenderPresent(SDL_Renderer * renderer) {

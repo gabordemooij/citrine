@@ -1,0 +1,12 @@
+>> attempt := 1.
+{
+	{
+		this-task error: ['nope'].
+		>> a := 1.
+	} except: { :err
+		attempt add: 1.
+	}, start.
+} * 3.
+{
+	this-task error: ['error'].
+} start.

@@ -20,6 +20,8 @@
 *.def
 *.ogg
 *.exe
+*.wasm2
+*.wasm3
 /container
 /tests/runner*
 /tests/terrors*

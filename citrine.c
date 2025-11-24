@@ -15,7 +15,6 @@ char* ctr_mode_input_file;
 char* ctr_mode_dict_file;
 char* ctr_mode_hfile1;
 char* ctr_mode_hfile2;
-char ctr_flag_sandbox;
 ctr_size ctr_clex_keyword_eol_len;
 ctr_size ctr_clex_keyword_num_sep_dec_len;
 ctr_size ctr_clex_keyword_num_sep_tho_len;

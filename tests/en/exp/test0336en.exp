@@ -1,4 +1,5 @@
 Uncatched error has occurred.
 Key not found: aa
-#2 aa (tests/en/t-0336.ctr: 7)
-#1 write: (tests/en/t-0336.ctr: 7)
+#3 aa (tests/en/t-0336.ctr: 7)
+#2 write: (tests/en/t-0336.ctr: 7)
+#1 start (tests/en/t-0336.ctr: 8)

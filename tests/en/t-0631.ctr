@@ -1,0 +1,5 @@
+>> m := Media new.
+>> sfx := Sound new: ['sound.wav'].
+sfx play.
+>> music := Music new: ['music.mp3'].
+music play stop rewind play.
