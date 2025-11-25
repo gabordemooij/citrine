@@ -80,14 +80,6 @@ ctr_object* ctr_build_nil() {
 	return CtrStdNil;
 }
 
-
-ctr_object* ctr_nil_new(ctr_object* myself, ctr_argument* argumentList) {
-	ctr_object* nilObject = ctr_build_nil();
-	nilObject->link = myself;
-	return nilObject;
-}
-
-
 /**
  * @def
  * [ Nil ] Nil?

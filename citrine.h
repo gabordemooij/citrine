@@ -438,7 +438,6 @@ extern ctr_object* ctr_message_stack[301];
 /**
  * Nil Interface
  */
-extern ctr_object* ctr_nil_new(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList);
 extern ctr_object* ctr_nil_to_number(ctr_object* myself, ctr_argument* argumentList);
