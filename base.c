@@ -84,9 +84,7 @@ ctr_object* ctr_build_nil() {
  * @def
  * [ Nil ] Nil?
  *
- * @example
- * ☞ x ≔ Nil.
- * ✎ write: x Nil?, stop.
+ * @test 0377
  */
 ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
 	return CtrStdBoolTrue;
