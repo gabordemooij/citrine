@@ -94,9 +94,7 @@ ctr_object* ctr_nil_is_nil(ctr_object* myself, ctr_argument* argumentList) {
  * @def
  * [ Nil ] string
  *
- * @example
- * ☞ x ≔ Nil.
- * ✎ write: x string, stop.
+ * @test 0378
  */
 ctr_object* ctr_nil_to_string(ctr_object* myself, ctr_argument* argumentList) {
 	return ctr_build_string_from_cstring( CTR_DICT_NIL );
