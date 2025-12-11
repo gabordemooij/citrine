@@ -2231,6 +2231,9 @@ ctr_object* ctr_media_screen(ctr_object* myself, ctr_argument* argumentList) {
 		if (focusObject) {
 			ctr_internal_img_render_cursor(focusObject);
 		}
+#ifdef IOS
+        SDL_SetRenderDrawColor(CtrMediaRenderer, 0, 0, 0, 255);
+#endif
 		SDL_RenderPresent(CtrMediaRenderer);
 		if (CtrMediaFlagSoftwareVSync) {
 			CtrMediaPerfCountEnd = SDL_GetPerformanceCounter();
