@@ -120,16 +120,23 @@ int ctr_init() {
  */
 #ifndef EMBED
 ctr_tnode* program;
-#ifdef __EMSCRIPTEN__
-void emloop() {
-	init_embedded_media_plugin(); //contains emloop calls so must be here
-	ctr_cwlk_run(program);
+static void ctr_cli_cleanup(char* prg) {
+	if (prg != NULL) {
+		ctr_heap_free( prg );
+	}
 	ctr_gc_sweep(1);
 	ctr_heap_free_rest();
 	if ( ctr_gc_alloc != 0 ) {
 		fprintf( stderr, "[WARNING] Citrine has detected an internal memory leak of: %" PRIu64 " bytes.\n", ctr_gc_alloc );
 		exit(1);
 	}
+}
+
+#ifdef __EMSCRIPTEN__
+void emloop() {
+	init_embedded_media_plugin(); //contains emloop calls so must be here
+	ctr_cwlk_run(program);
+	ctr_cli_cleanup(NULL);
 	if (CtrStdFlow && CtrStdFlow != CtrStdExit) {
 		exit(1);
 	}
@@ -148,10 +155,12 @@ int main(int argc, char* argv[]) {
 	if (mode == 1) {
 		prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
 		ctr_translate_program(prg, ctr_mode_input_file);
+		ctr_cli_cleanup(prg);
 		exit(0);
 	}
 	if (mode == 2) {
 		ctr_translate_generate_dicts(ctr_mode_hfile1, ctr_mode_hfile2);
+		ctr_cli_cleanup(NULL);
 		exit(0);
 	}
 	prg = ctr_internal_readf(ctr_mode_input_file, &program_text_size);
@@ -164,6 +173,7 @@ int main(int argc, char* argv[]) {
 	program = ctr_cparse_parse(prg, ctr_mode_input_file);
 	if (program == NULL) {
 		fwrite(CtrStdFlow->value.svalue->value, CtrStdFlow->value.svalue->vlen, 1, stderr);
+		ctr_cli_cleanup(prg);
 		exit(1);
 	}
 	ctr_initialize_world();
@@ -172,14 +182,7 @@ int main(int argc, char* argv[]) {
 	emscripten_set_main_loop(emloop, 0, 0);
 	#else
 	ctr_cwlk_run(program);
-	ctr_gc_sweep(1);
-	ctr_heap_free( prg );
-	ctr_heap_free_rest();
-	//For memory profiling
-	if ( ctr_gc_alloc != 0 ) {
-		fprintf( stderr, "[WARNING] Citrine has detected an internal memory leak of: %" PRIu64 " bytes.\n", ctr_gc_alloc );
-		exit(1);
-	}
+	ctr_cli_cleanup(prg);
 	if (CtrStdFlow && CtrStdFlow != CtrStdExit) {
 		exit(1);
 	}

@@ -2096,7 +2096,6 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 	long rlen = replacement->value.svalue->vlen;
 	long dlen = hlen;
 	char* p;
-	long i = 0;
 	long offset = 0;
 	long d;
 	if (nlen == 0 || hlen == 0) {
@@ -2122,7 +2121,6 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 		dest = dest + rlen;
 		hlen = hlen - (offset + nlen);
 		src  = src + (offset + nlen);
-		i++;
 	}
 	memcpy(dest, src, hlen);
 	ctr_heap_free( myself->value.svalue->value );

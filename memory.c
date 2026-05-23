@@ -20,8 +20,10 @@ size_t     maxNumberOfMemBlocks = 0;
 
 char* ctr_pool_alloc( ctr_size podSize );
 void ctr_pool_dealloc( void* ptr );
-void ctr_pool_init();
+void ctr_pool_init( ctr_size pool );
 int ctr_pool_bucket( ctr_size size );
+static void ctr_heap_free_raw( void* ptr );
+static void ctr_heap_untrack( void* ptr );
 
 /**
  * Heap allocate raw memory
@@ -89,7 +91,7 @@ size_t ctr_heap_tracker_rewind( size_t memoryBlockNumber ) {
 	size_t i;
 	i = 0;
 	while ( numberOfMemBlocks > memoryBlockNumber) {
-		ctr_heap_free(memBlocks[ --numberOfMemBlocks ].space);
+		ctr_heap_free_raw(memBlocks[ --numberOfMemBlocks ].space);
 		i ++;
 	}
 	return i;
@@ -141,13 +143,11 @@ size_t ctr_heap_get_latest_tracking_id() {
  * Frees all tracked memory blocks.
  */
 void ctr_heap_free_rest() {
-	size_t i;
-	for ( i = 0; i < numberOfMemBlocks; i ++) {
-		ctr_heap_free( memBlocks[i].space );
+	while ( numberOfMemBlocks > 0 ) {
+		ctr_heap_free_raw( memBlocks[ --numberOfMemBlocks ].space );
 	}
 	ctr_heap_free( memBlocks );
 	memBlocks = NULL;
-	numberOfMemBlocks = 0;
 	maxNumberOfMemBlocks = 0;
 }
 
@@ -164,6 +164,11 @@ void ctr_heap_free_rest() {
  */
 int ctr_gc_clean_free = 0;
 void ctr_heap_free( void* ptr ) {
+	ctr_heap_untrack( ptr );
+	ctr_heap_free_raw( ptr );
+}
+
+static void ctr_heap_free_raw( void* ptr ) {
 	if (ptr == NULL) return;
 	size_t* block_width;
 	int q = sizeof( size_t );
@@ -182,6 +187,20 @@ void ctr_heap_free( void* ptr ) {
 		ctr_gc_alloc = 0;
 	} else {
 		ctr_gc_alloc -= size;
+	}
+}
+
+static void ctr_heap_untrack( void* ptr ) {
+	size_t i;
+	if ( ptr == NULL || memBlocks == NULL ) return;
+	for ( i = 0; i < numberOfMemBlocks; i++ ) {
+		if ( memBlocks[i].space == ptr ) {
+			if ( i < numberOfMemBlocks - 1 ) {
+				memmove( memBlocks + i, memBlocks + i + 1, ( numberOfMemBlocks - i - 1 ) * sizeof( memBlock ) );
+			}
+			numberOfMemBlocks--;
+			return;
+		}
 	}
 }
 
@@ -300,4 +319,3 @@ void ctr_pool_dealloc( void* ptr ) {
 	free(ptr);
 	return;
 }
-

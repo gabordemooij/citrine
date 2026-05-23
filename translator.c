@@ -297,6 +297,7 @@ ctr_dict* ctr_translate_load_dictionary() {
 	ctr_dict* e;
 	int qq = 0;
 	char* modifier;
+	char* translationValue;
 	while( fscanf( file, "%c \"%4999[^\"]\" \"%4999[^\"]\"\n", &translationType, word, translation) > 0 ) {
 		if (translationType != 't' && translationType != 's' && translationType != 'd' && translationType != 'x') {
 			printf("Invalid translation line: %d \n",qq);
@@ -321,22 +322,20 @@ ctr_dict* ctr_translate_load_dictionary() {
 			ctr_print_error( buffer, 1 );
 		}
 		modifier = strchr(translation, '#');
-		if (modifier) translation = modifier + 1;
-		entry->translationLength = strlen(translation);
+		translationValue = (modifier) ? modifier + 1 : translation;
+		entry->translationLength = strlen(translationValue);
 		if (entry->type != 's' && (entry->wordLength > CTR_TRANSLATE_MAX_WORD_LEN || entry->translationLength > CTR_TRANSLATE_MAX_WORD_LEN)) {
 			ctr_print_error(CTR_TERR_ELONG, 1);
 		} 
 		entry->word = calloc( entry->wordLength, 1 );
 		entry->translation = calloc( entry->translationLength, 1 );
 		memcpy(entry->word, word, entry->wordLength);
-		memcpy(entry->translation, translation, entry->translationLength);
+		memcpy(entry->translation, translationValue, entry->translationLength);
 		if (translationType == 'd') {
 			ctr_trans_d = entry;
-			continue;
 		}
 		if (translationType == 'x') {
 			ctr_trans_x = entry;
-			continue;
 		}
 		if (strncmp(entry->word, CTR_DICT_PARAMETER_PREFIX,1)==0) {
 			ctr_clex_param_prefix_char_translation = entry->translation[0];
@@ -371,6 +370,8 @@ ctr_dict* ctr_translate_load_dictionary() {
 		}
 	}
 	fclose(file);
+	free(word);
+	free(translation);
 	if (ctr_trans_d == NULL) {
 		printf("No decimal separator found in dictionary, please add entry for type d.\n");
 		exit(1);
@@ -379,7 +380,7 @@ ctr_dict* ctr_translate_load_dictionary() {
 		printf("No thousands separator found in dictionary, please add entry for type x.\n");
 		exit(1);
 	}
-	return entry;
+	return previousEntry;
 }
 
 /**
@@ -485,13 +486,14 @@ char* ctr_translate_string(char* codePointer, ctr_dict* dictionary) {
 	e = ctr_clex_code_pointer();
 	fwrite(p, ((e - ctr_clex_keyword_qo_len) - p),1, stdout);
 	s = ctr_clex_readstr();
-	l = ctr_clex_tok_value_length(s);
+	l = ctr_clex_tok_value_length();
 	e = ctr_clex_code_pointer();
 	ctr_translate_translate(CTR_DICT_QUOT_OPEN,ctr_clex_keyword_qo_len,dictionary,'t',NULL);
 	/* Strings larger than 100 bytes cannot be translated */
 	if (l>100 || !ctr_translate_translate(s,l,dictionary,'s',NULL)) {
 		fwrite(s,l,1,stdout);
 	}
+	ctr_heap_free(s);
 	ctr_translate_translate(CTR_DICT_QUOT_CLOSE,ctr_clex_keyword_qc_len,dictionary,'t',NULL);
 	e = ctr_clex_code_pointer();
 	return e;
