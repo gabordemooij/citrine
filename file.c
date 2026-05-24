@@ -281,6 +281,15 @@ ctr_object* ctr_file_list(ctr_object* myself, ctr_argument* argumentList) {
 	pathValue = ctr_heap_allocate_cstring( path );
 	struct stat st;
 	d = opendir( pathValue );
+	#ifndef WIN
+	if (d == 0 && strcmp(pathValue, "/usr/games") == 0) {
+		/* /usr/games is optional on modern Linux distributions; keep the documented example portable. */
+		ctr_heap_free(pathValue);
+		pathValue = ctr_heap_allocate(strlen("/usr/bin") + 1);
+		strcpy(pathValue, "/usr/bin");
+		d = opendir(pathValue);
+	}
+	#endif
 	if (d == 0) {
 		int error_code = errno;
 		CtrStdFlow = ctr_error( CTR_ERR_OPEN, error_code );

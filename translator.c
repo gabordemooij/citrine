@@ -485,7 +485,7 @@ char* ctr_translate_string(char* codePointer, ctr_dict* dictionary) {
 	e = ctr_clex_code_pointer();
 	fwrite(p, ((e - ctr_clex_keyword_qo_len) - p),1, stdout);
 	s = ctr_clex_readstr();
-	l = ctr_clex_tok_value_length(s);
+	l = ctr_clex_tok_value_length();
 	e = ctr_clex_code_pointer();
 	ctr_translate_translate(CTR_DICT_QUOT_OPEN,ctr_clex_keyword_qo_len,dictionary,'t',NULL);
 	/* Strings larger than 100 bytes cannot be translated */

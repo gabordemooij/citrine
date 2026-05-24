@@ -20,7 +20,7 @@ size_t     maxNumberOfMemBlocks = 0;
 
 char* ctr_pool_alloc( ctr_size podSize );
 void ctr_pool_dealloc( void* ptr );
-void ctr_pool_init();
+void ctr_pool_init( ctr_size pool );
 int ctr_pool_bucket( ctr_size size );
 
 /**
@@ -300,4 +300,3 @@ void ctr_pool_dealloc( void* ptr ) {
 	free(ptr);
 	return;
 }
-

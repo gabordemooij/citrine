@@ -2096,7 +2096,6 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 	long rlen = replacement->value.svalue->vlen;
 	long dlen = hlen;
 	char* p;
-	long i = 0;
 	long offset = 0;
 	long d;
 	if (nlen == 0 || hlen == 0) {
@@ -2122,7 +2121,6 @@ ctr_object* ctr_string_replace_with(ctr_object* myself, ctr_argument* argumentLi
 		dest = dest + rlen;
 		hlen = hlen - (offset + nlen);
 		src  = src + (offset + nlen);
-		i++;
 	}
 	memcpy(dest, src, hlen);
 	ctr_heap_free( myself->value.svalue->value );
@@ -2322,18 +2320,25 @@ ctr_object* ctr_string_characters( ctr_object* myself, ctr_argument* argumentLis
  * ✎ write: q, stop.
  */
 ctr_object* ctr_string_compare( ctr_object* myself, ctr_argument* argumentList ) {
-	argumentList->object = ctr_internal_cast2string(argumentList->object);
-	ctr_size maxlen;
-	if (myself->value.svalue->vlen < argumentList->object->value.svalue->vlen) {
-		maxlen = myself->value.svalue->vlen;
-	} else {
-		maxlen = argumentList->object->value.svalue->vlen;
+	ctr_object* other = ctr_internal_cast2string(argumentList->object);
+	unsigned char* left = (unsigned char*) myself->value.svalue->value;
+	unsigned char* right = (unsigned char*) other->value.svalue->value;
+	ctr_size leftlen = myself->value.svalue->vlen;
+	ctr_size rightlen = other->value.svalue->vlen;
+	ctr_size maxlen = (leftlen < rightlen) ? leftlen : rightlen;
+	ctr_size i;
+	for (i = 0; i < maxlen; i++) {
+		if (left[i] != right[i]) {
+			return ctr_build_number_from_float((ctr_number) left[i] - (ctr_number) right[i]);
+		}
 	}
-	return ctr_build_number_from_float( (ctr_number) strncmp(
-		myself->value.svalue->value,
-		ctr_internal_cast2string(argumentList->object)->value.svalue->value,
-		maxlen
-	) );
+	if (leftlen == rightlen) {
+		return ctr_build_number_from_float(0);
+	}
+	if (leftlen < rightlen) {
+		return ctr_build_number_from_float(0 - (ctr_number) right[leftlen]);
+	}
+	return ctr_build_number_from_float((ctr_number) left[rightlen]);
 }
 
 /**

@@ -584,7 +584,8 @@ int SDL_GetPerformanceFrequency() {
 
 }
 
-int TTF_CloseFont() {
+int TTF_CloseFont(void** font) {
+	(void) font;
 	printf("TTF_CloseFont()\n");
 	return 0;
 }
@@ -598,16 +599,21 @@ void** TTF_OpenFontRW(SDL_RWops* fontname, int i, int j) {
 	return NULL;
 }
 
-int SDL_DestroyTexture() {
+int SDL_DestroyTexture(void* texture) {
+	(void) texture;
 	printf("SDL_DestroyTexture()\n");
 	return 0;
 }
-int TTF_SetFontScriptName() {
+int TTF_SetFontScriptName(void** font, char* script) {
+	(void) font;
+	(void) script;
 	printf("TTF_SetFontScriptName()\n");
 	return 0;
 }
 
-SDL_RWops* SDL_RWFromConstMem() {
+SDL_RWops* SDL_RWFromConstMem(const void* mem, int size) {
+	(void) mem;
+	(void) size;
 	printf("SDL_RWFromConstMem()\n");
 	return &MockRWops;
 }
